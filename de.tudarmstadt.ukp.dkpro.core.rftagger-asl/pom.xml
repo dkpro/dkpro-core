@@ -121,7 +121,7 @@
 		      <enabled>false</enabled>
 		    </snapshots>
 		    <id>ukp-oss-staging</id>
-		    <url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-staging-local</url>
+		    <url>http://134.91.18.140:8081/artifactory/models</url>
 		  </repository>
     </repositories>
 </project>

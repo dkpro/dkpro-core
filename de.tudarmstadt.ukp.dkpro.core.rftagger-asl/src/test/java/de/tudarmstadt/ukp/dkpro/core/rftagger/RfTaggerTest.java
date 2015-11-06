@@ -90,8 +90,11 @@ public class RfTaggerTest {
 		AnalysisEngine tokenizer = createEngine(BreakIteratorSegmenter.class);
 
 		AnalysisEngine tagger = createEngine(RfTagger.class, RfTagger.PARAM_LANGUAGE,language, RfTagger.PARAM_VARIANT,
-				"tiger2treebank"
-				);
+				"tiger2treebank",
+				RfTagger.PARAM_POS_MAPPING_LOCATION,
+				               "classpath:de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/de-tiger2treebank-pos.map",
+				               RfTagger.PARAM_MORPH_MAPPING_LOCATION,
+				               "classpath:de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/de-tiger2treebank-morph.map");
 
 		JCas aJCas = tagger.newJCas();
 		aJCas.setDocumentLanguage(language);
