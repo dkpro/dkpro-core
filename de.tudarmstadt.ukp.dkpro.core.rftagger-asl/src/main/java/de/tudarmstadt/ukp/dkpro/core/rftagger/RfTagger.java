@@ -50,224 +50,265 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.RuntimeProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
-public class RfTagger extends JCasAnnotator_ImplBase {
+public class RfTagger
+    extends JCasAnnotator_ImplBase
+{
 
-	/**
-	 * Use this language instead of the document language to resolve the model.
-	 */
-	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-	protected String language;
+    /**
+     * Use this language instead of the document language to resolve the model.
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    protected String language;
 
-	/**
-	 * Override the default variant used to locate the model.
-	 */
-	public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
-	protected String variant;
+    /**
+     * Override the default variant used to locate the model.
+     */
+    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+    protected String variant;
 
-	/**
-	 * Load the model from this location instead of locating the model
-	 * automatically.
-	 */
-	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
-	protected String modelLocation;
+    /**
+     * Load the model from this location instead of locating the model automatically.
+     */
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    protected String modelLocation;
 
-	/**
-	 * The character encoding used by the model.
-	 */
-	public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
-	@ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = false)
-	protected String modelEncoding;
+    /**
+     * The character encoding used by the model.
+     */
+    public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
+    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = false)
+    protected String modelEncoding;
 
-	/**
-	 * Load the part-of-speech tag to UIMA type mapping from this location
-	 * instead of locating the mapping automatically.
-	 */
-	public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
-	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
-	protected String posMappingLocation;
+    /**
+     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
+     * mapping automatically.
+     */
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+    protected String posMappingLocation;
 
-	public static final String PARAM_MORPH_MAPPING_LOCATION = ComponentParameters.PARAM_MORPH_MAPPING_LOCATION;
-	@ConfigurationParameter(name = PARAM_MORPH_MAPPING_LOCATION, mandatory = false)
-	private String morphMappingLocation;
+    public static final String PARAM_MORPH_MAPPING_LOCATION = ComponentParameters.PARAM_MORPH_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_MORPH_MAPPING_LOCATION, mandatory = false)
+    private String morphMappingLocation;
 
-	private MappingProvider mappingProvider;
-	private RuntimeProvider rfTaggerExecutables;
-	private ModelProviderBase<File> modelProvider;
-	private File executableFile;
-	private Process process;
-	private BufferedWriter writer;
-	private BufferedReader reader;
-	private MorphologicalFeaturesParser featuresParser;
+    private static final String PARAMETER_FILE = "param.par";
 
-	@Override
-	public void initialize(UimaContext aContext) throws ResourceInitializationException {
-		super.initialize(aContext);
-		loadExecutable();
-		loadModel();
-		loadMappingProvider();
-		loadMorphParser();
-		startExecutable();
-	}
+    private MappingProvider mappingProvider;
+    private RuntimeProvider rfTaggerExecutables;
+    private ModelProviderBase<File> modelProvider;
+    private File executableFile;
+    private Process process;
+    private BufferedWriter writer;
+    private BufferedReader reader;
+    private MorphologicalFeaturesParser featuresParser;
 
-	private void loadMorphParser() {
-		featuresParser = new MorphologicalFeaturesParser();
-		featuresParser.setDefault(MorphologicalFeaturesParser.LOCATION,
-				"classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/${language}-${morph.tagset}-morph.map");
-		featuresParser.setOverride(MorphologicalFeaturesParser.LOCATION, morphMappingLocation);
-		featuresParser.setOverride(MorphologicalFeaturesParser.LANGUAGE, language);
-		featuresParser.addImport("morph.tagset", modelProvider);
-	}
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
+        loadExecutable();
+        loadModel();
+        loadMappingProvider();
+        loadMorphParser();
+        startExecutable();
+    }
 
-	private void startExecutable() {
-		List<String> cmd = new ArrayList<>();
-		cmd.add(executableFile.getAbsolutePath());
-		cmd.add(modelProvider.getResource().getAbsolutePath() + "/param.par");
-		try {
-			ProcessBuilder pb = new ProcessBuilder();
-			// pb.redirectError(Redirect.INHERIT);
-			pb.command(cmd);
-			process = pb.start();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		writer = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
-		reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-	}
+    private void loadMorphParser()
+    {
+        featuresParser = new MorphologicalFeaturesParser();
+        featuresParser
+                .setDefault(
+                        MorphologicalFeaturesParser.LOCATION,
+                        "classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/${language}-${morph.tagset}-morph.map");
+        featuresParser.setOverride(MorphologicalFeaturesParser.LOCATION, morphMappingLocation);
+        featuresParser.setOverride(MorphologicalFeaturesParser.LANGUAGE, language);
+        featuresParser.addImport("morph.tagset", modelProvider);
+    }
 
-	private void loadMappingProvider() {
-		mappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation, language, modelProvider);
-	}
+    private void startExecutable()
+    {
+        List<String> cmd = new ArrayList<>();
+        cmd.add(executableFile.getAbsolutePath());
+        cmd.add(modelProvider.getResource().getAbsolutePath() + "/" + PARAMETER_FILE);
+        try {
+            ProcessBuilder pb = new ProcessBuilder();
+            // pb.redirectError(Redirect.INHERIT);
+            pb.command(cmd);
+            process = pb.start();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        writer = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
+        reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+    }
 
-	private void loadModel() throws ResourceInitializationException {
-		modelProvider = new ModelProviderBase<File>() {
-			{
-				setContextObject(RfTagger.this);
+    private void loadMappingProvider()
+    {
+        mappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
+                language, modelProvider);
+    }
 
-				setDefault(ARTIFACT_ID, "${groupId}.rftagger-model-${language}-${variant}");
-				setDefault(LOCATION, "classpath:/${package}/lib/tagger-${language}-${variant}.properties");
+    private void loadModel()
+        throws ResourceInitializationException
+    {
+        modelProvider = new ModelProviderBase<File>()
+        {
+            {
+                setContextObject(RfTagger.this);
 
-				setOverride(LOCATION, modelLocation);
-				setOverride(LANGUAGE, language);
-				setOverride(VARIANT, variant);
-			}
+                setDefault(ARTIFACT_ID, "${groupId}.rftagger-model-${language}-${variant}");
+                setDefault(LOCATION,
+                        "classpath:/${package}/lib/tagger-${language}-${variant}.properties");
 
-			@Override
-			protected File produceResource(URL aUrl) throws IOException {
-				File folder = ResourceUtils.getClasspathAsFolder(aUrl.toString(), true);
-				return folder;
-			}
-		};
-		try {
-			modelProvider.configure();
-		} catch (IOException e) {
-			throw new ResourceInitializationException(e);
-		}
-	}
+                setOverride(LOCATION, modelLocation);
+                setOverride(LANGUAGE, language);
+                setOverride(VARIANT, variant);
+            }
 
-	private void loadExecutable() {
-		PlatformDetector pd = new PlatformDetector();
-		String platform = pd.getPlatformId();
-		LogFactory.getLog(getClass()).info("Load binary for platform: [" + platform + "]");
+            @Override
+            protected File produceResource(URL aUrl)
+                throws IOException
+            {
+                File folder = ResourceUtils.getClasspathAsFolder(aUrl.toString(), true);
+                return folder;
+            }
+        };
+        try {
+            modelProvider.configure();
+        }
+        catch (IOException e) {
+            throw new ResourceInitializationException(e);
+        }
+    }
 
-		rfTaggerExecutables = new RuntimeProvider("classpath:/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/");
+    private void loadExecutable()
+    {
+        PlatformDetector pd = new PlatformDetector();
+        String platform = pd.getPlatformId();
+        LogFactory.getLog(getClass()).info("Load binary for platform: [" + platform + "]");
 
-		try {
-			executableFile = rfTaggerExecutables.getFile("rft-annotate");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+        rfTaggerExecutables = new RuntimeProvider(
+                "classpath:/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/");
 
-	@Override
-	public void process(JCas aJCas) throws AnalysisEngineProcessException {
-		mappingProvider.configure(aJCas.getCas());
-		featuresParser.configure(aJCas.getCas());
-		try {
-			for (Sentence sentence : JCasUtil.select(aJCas, Sentence.class)) {
-				StringBuilder sb = new StringBuilder();
-				List<Token> tokens = JCasUtil.selectCovered(aJCas, Token.class, sentence.getBegin(), sentence.getEnd());
-				for (Token token : tokens) {
-					sb.append(token.getCoveredText() + "\n");
-				}
+        try {
+            executableFile = rfTaggerExecutables.getFile("rft-annotate");
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-				writeInput(sb);
-				annotateOutput(readOutput(), aJCas, tokens);
+    @Override
+    public void process(JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
+        String modelEncoding = (String) modelProvider.getResourceMetaData().get("model.encoding");
+        if (modelEncoding == null) {
+            throw new AnalysisEngineProcessException(
+                    new Throwable("Model should contain encoding metadata"));
+        }
+        
+        mappingProvider.configure(aJCas.getCas());
+        featuresParser.configure(aJCas.getCas());
+        try {
+            for (Sentence sentence : JCasUtil.select(aJCas, Sentence.class)) {
+                StringBuilder sb = new StringBuilder();
+                List<Token> tokens = JCasUtil.selectCovered(aJCas, Token.class,
+                        sentence.getBegin(), sentence.getEnd());
+                for (Token token : tokens) {
+                    sb.append(token.getCoveredText() + "\n");
+                }
 
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+                writeInput(sb);
+                annotateOutput(readOutput(), aJCas, tokens);
 
-	private void annotateOutput(List<String> readOutput, JCas aJCas, List<Token> tokens) {
-		for (int i = 0; i < readOutput.size(); i++) {
-			String line = readOutput.get(i);
-			if (line.isEmpty()) {
-				// end of sequence
-				continue;
-			}
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-			String[] split = line.split("\t");
+    private void annotateOutput(List<String> readOutput, JCas aJCas, List<Token> tokens)
+    {
+        for (int i = 0; i < readOutput.size(); i++) {
+            String line = readOutput.get(i);
+            if (line.isEmpty()) {
+                // end of sequence
+                continue;
+            }
 
-			int begin = tokens.get(i).getBegin();
-			int end = tokens.get(i).getEnd();
+            String[] split = line.split("\t");
 
-			String tag = extractTag(split[1]);
+            int begin = tokens.get(i).getBegin();
+            int end = tokens.get(i).getEnd();
 
-			Type posTag = mappingProvider.getTagType(tag);
-			POS posAnno = (POS) aJCas.getCas().createAnnotation(posTag, begin, end);
-			posAnno.setPosValue(tag);
-			posAnno.addToIndexes();
-			tokens.get(i).setPos(posAnno);
+            String tag = extractTag(split[1]);
 
-			MorphologicalFeatures analysis = featuresParser.parse(aJCas, tokens.get(i), split[1]);
-			tokens.get(i).setMorph(analysis);
-		}
-	}
+            Type posTag = mappingProvider.getTagType(tag);
+            POS posAnno = (POS) aJCas.getCas().createAnnotation(posTag, begin, end);
+            posAnno.setPosValue(tag);
+            posAnno.addToIndexes();
+            tokens.get(i).setPos(posAnno);
 
-	private String extractTag(String string) {
-		int idx = string.indexOf(".");
-		if(idx<0){
-			return string;
-		}
-		return string.substring(0,idx);
-	}
+            MorphologicalFeatures analysis = featuresParser.parse(aJCas, tokens.get(i), split[1]);
+            tokens.get(i).setMorph(analysis);
+        }
+    }
 
-	private List<String> readOutput() throws IOException {
-		List<String> readLines = new ArrayList<>();
+    private String extractTag(String string)
+    {
+        int idx = string.indexOf(".");
+        if (idx < 0) {
+            return string;
+        }
+        return string.substring(0, idx);
+    }
 
-		String line = null;
-		while ((line = reader.readLine()) != null) {
-			readLines.add(line);
-			if (!reader.ready()) {
-				break;
-			}
-		}
+    private List<String> readOutput()
+        throws IOException
+    {
+        List<String> readLines = new ArrayList<>();
 
-		return readLines;
-	}
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            readLines.add(line);
+            if (!reader.ready()) {
+                break;
+            }
+        }
 
-	private void writeInput(StringBuilder sb) throws IOException {
-		// the tagger waits of an empty line to mark end of sequence before it
-		// starts tagging
-		sb.append("\n");
-		sb.append("\n");
+        return readLines;
+    }
 
-		writer.write(sb.toString());
-		writer.flush();
-	}
+    private void writeInput(StringBuilder sb)
+        throws IOException
+    {
+        // the tagger waits of an empty line to mark end of sequence before it
+        // starts tagging
+        sb.append("\n");
+        sb.append("\n");
 
-	@Override
-	public void collectionProcessComplete() throws AnalysisEngineProcessException {
-		try {
-			writer.close();
-			reader.close();
-			process.destroy();
-		} catch (IOException e) {
-			throw new AnalysisEngineProcessException(e);
-		}
-	}
+        writer.write(sb.toString());
+        writer.flush();
+    }
+
+    @Override
+    public void collectionProcessComplete()
+        throws AnalysisEngineProcessException
+    {
+        try {
+            writer.close();
+            reader.close();
+            process.destroy();
+        }
+        catch (IOException e) {
+            throw new AnalysisEngineProcessException(e);
+        }
+    }
 }
