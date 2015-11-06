@@ -110,31 +110,6 @@
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-tagger-de-tiger2treebank</artifactId>
 				<version>20150928.1</version>
 			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-tagger-cz-czechacademiccorpus1</artifactId>
-				<version>20150928.1</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-tagger-ru-wacky</artifactId>
-				<version>20150928.1</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-tagger-sk-slovaknationalcorpus</artifactId>
-				<version>20150928.1</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-tagger-si-jos</artifactId>
-				<version>20150928.1</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-tagger-hu-szegedtreebank2</artifactId>
-				<version>20150928.1</version>
-			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<repositories>
