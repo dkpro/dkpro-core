@@ -203,15 +203,9 @@ public class RfTagger extends JCasAnnotator_ImplBase {
 
 	@Override
 	public void process(JCas aJCas) throws AnalysisEngineProcessException {
-		String modelEncoding = (String) modelProvider.getResourceMetaData()
-				.get("model.encoding");
-		if (modelEncoding == null) {
-			throw new AnalysisEngineProcessException(new Throwable(
-					"Model should contain encoding metadata"));
-		}
-
-		mappingProvider.configure(aJCas.getCas());
-		featuresParser.configure(aJCas.getCas());
+		
+		configure(aJCas);
+		
 		try {
 			for (Sentence sentence : JCasUtil.select(aJCas, Sentence.class)) {
 				StringBuilder sb = new StringBuilder();
@@ -228,6 +222,18 @@ public class RfTagger extends JCasAnnotator_ImplBase {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void configure(JCas aJCas) throws AnalysisEngineProcessException{
+		String modelEncoding = (String) modelProvider.getResourceMetaData()
+				.get("model.encoding");
+		if (modelEncoding == null) {
+			throw new AnalysisEngineProcessException(new Throwable(
+					"Model should contain encoding metadata"));
+		}
+
+		mappingProvider.configure(aJCas.getCas());
+		featuresParser.configure(aJCas.getCas());		
 	}
 
 	private void annotateOutput(List<String> readOutput, JCas aJCas,
