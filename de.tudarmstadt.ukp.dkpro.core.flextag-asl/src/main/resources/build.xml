@@ -31,13 +31,13 @@
 	</target>
 
 	<target name="separate-jars" depends="en"/>
-	
+
 	<target name="en">
-		<antcall target="#TARGETNAME#"/>	
+		<antcall target="#TARGETNAME#"/>
 	</target>
-	
+
 	<target name="#TARGETNAME#">
-			<install-stub-and-upstream-folder 
+		<install-stub-and-upstream-folder 
 	    		folder="#MODELLOCATION#" 
 	    		groupId="#GROUPID#" 
 	    		artifactIdBase="#ARTIFACTID#"
@@ -46,8 +46,12 @@
 	    		tool="#TOOL#"
 	    		language="#LANGUAGE#"
 				variant="#VARIANT#">
-			</install-stub-and-upstream-folder>
-		</target>
-	
-	 
+			<metadata>
+				<entry key="model.encoding" value="#ENCODING#" />
+				<entry key="pos.tagset" value="#POSTAGSET#" />
+			</metadata>
+		</install-stub-and-upstream-folder>
+	</target>
+
+
 </project>

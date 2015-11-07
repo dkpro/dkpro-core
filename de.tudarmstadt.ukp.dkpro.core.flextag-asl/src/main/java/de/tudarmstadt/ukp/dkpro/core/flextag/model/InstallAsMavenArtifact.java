@@ -41,12 +41,15 @@ public class InstallAsMavenArtifact {
 		String version = "VersionId"; //i.e. a data YYYYMMDD
 		String language = "en";
 		String variant = "YourModelNameHere";
+		
+		String modelencoding = "encoding"; // i.e. utf-8
+		String postagset = "tagset"; //en=ptb, de=stts, etc
 
 		String targetName = language + "-" + variant;
 		String workingDirectory = Files.createTempDirectory("installModel",
 				new FileAttribute<?>[] {}).toAbsolutePath().toString();
 		
-		String preparedScript = prepareBuildScript(modelLocation, groupId, artifactId, version, tool, language, variant, targetName, workingDirectory);
+		String preparedScript = prepareBuildScript(modelLocation, groupId, artifactId, version, tool, language, variant, targetName, workingDirectory, modelencoding, postagset);
 		
 		File script = new File(workingDirectory+"/build.xml");
 		FileUtils.writeStringToFile(script, preparedScript);
@@ -58,7 +61,7 @@ public class InstallAsMavenArtifact {
 	private static String prepareBuildScript(String modelLocation,
 			String groupId, String artifactId, String version, String tool,
 			String language, String variant, String targetName,
-			String workingDirectory) throws IOException {
+			String workingDirectory, String modelencoding, String postagset) throws IOException {
 		
 		String buildFile = FileUtils.readFileToString(new File("src/main/resources/build.xml"));
 		buildFile = buildFile.replaceAll("#TARGETNAME#", targetName);
@@ -70,6 +73,8 @@ public class InstallAsMavenArtifact {
 		buildFile = buildFile.replaceAll("#TOOL#", tool);
 		buildFile = buildFile.replaceAll("#LANGUAGE#", language);
 		buildFile = buildFile.replaceAll("#VARIANT#", variant);
+		buildFile = buildFile.replaceAll("#ENCODING#", modelencoding);
+		buildFile = buildFile.replaceAll("#POSTAGSET#", postagset);
 		return buildFile;
 	}
 
