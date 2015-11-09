@@ -158,11 +158,6 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.examples-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.frequency-asl</artifactId>
 				<version>1.8.0-SNAPSHOT</version>
 			</dependency>
@@ -500,8 +495,6 @@
 		<module>../de.tudarmstadt.ukp.dkpro.core.tokit-asl</module>
 		<module>../de.tudarmstadt.ukp.dkpro.core.treetagger-asl</module>
 		<module>../de.tudarmstadt.ukp.dkpro.core.textnormalizer-asl</module>
-	    <!-- Examples modules -->
-		<module>../de.tudarmstadt.ukp.dkpro.core.examples-asl</module>
 	    <!-- Distribution modules -->
 		<module>../de.tudarmstadt.ukp.dkpro.core.distribution-asl</module>
 	</modules>
