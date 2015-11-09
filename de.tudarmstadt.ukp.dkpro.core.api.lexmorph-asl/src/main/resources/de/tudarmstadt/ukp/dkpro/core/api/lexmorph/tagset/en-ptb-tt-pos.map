@@ -9,6 +9,8 @@
 .=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 ;=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 ?=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+(=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+)=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 # 1.	CC	Coordinating conjunction
 CC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
 # 2.	CD	Cardinal number
