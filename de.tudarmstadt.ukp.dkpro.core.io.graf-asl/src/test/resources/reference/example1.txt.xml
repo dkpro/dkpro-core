@@ -12,8 +12,7 @@
             <labelUsage label="DocumentMetaData" occurs="1"/>
             <labelUsage label="Sentence" occurs="2"/>
             <labelUsage label="TagsetDescription" occurs="1"/>
-            <labelUsage label="PUNC" occurs="4"/>
-            <labelUsage label="O" occurs="2"/>
+            <labelUsage label="PUNC" occurs="6"/>
         </labelsDecl>
         <annotationSpaces>
             <annotationSpace as.id="pos"/>
@@ -146,7 +145,7 @@
     <node xml:id="node23">
         <link targets="region12"/>
     </node>
-    <a xml:id="a-23" label="O" ref="node23" as="pos">
+    <a xml:id="a-23" label="PUNC" ref="node23" as="pos">
         <fs>
             <f name="PosValue" value="``"/>
         </fs>
@@ -278,7 +277,7 @@
     <node xml:id="node43">
         <link targets="region22"/>
     </node>
-    <a xml:id="a-43" label="O" ref="node43" as="pos">
+    <a xml:id="a-43" label="PUNC" ref="node43" as="pos">
         <fs>
             <f name="PosValue" value="''"/>
         </fs>
