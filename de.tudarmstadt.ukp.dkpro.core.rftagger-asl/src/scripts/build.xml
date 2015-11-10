@@ -59,6 +59,7 @@
 			</patternset>
 			<mapper type="flatten" />
 		</untar>
+		<delete dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/windows-x86_64"/>
 		<propertyfile
 				    file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/windows-x86_64/manifest.properties">
 			<entry  key="rft-annotate" value="executable"/>
@@ -88,6 +89,7 @@
 			</patternset>
 			<mapper type="flatten" />
 		</untar>
+		 <delete dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/linux-x86_32"/>
 		<propertyfile
 				    file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/linux-x86_32/manifest.properties">
 			<entry  key="rft-annotate" value="executable"/>
@@ -117,6 +119,7 @@
 			</patternset>
 			<mapper type="flatten" />
 		</untar>
+		<delete dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/linux-x86_64"/>
 		<propertyfile
 				    file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/linux-x86_64/manifest.properties">
 			<entry  key="rft-annotate" value="executable"/>
@@ -146,6 +149,7 @@
 			</patternset>
 			<mapper type="flatten" />
 		</untar>
+		<delete dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/osx-x86_64"/>
 		<propertyfile
 		    file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/osx-x86_64/manifest.properties">
 			<entry  key="rft-annotate" value="executable"/>
