@@ -74,7 +74,7 @@ public class OpenNlpParserTest
                 "INTJ", "LST", "NAC", "NEG", "NP", "NX", "O", "PP", "PRN", "PRT", "QP", "S",
                 "SBAR", "SQ", "TYPO", "UCP", "UH", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
 
-        String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", "``" };
+        String[] unmappedPos = new String[] { "$", "-LRB-", "-RRB-"};
 
         String[] unmappedConst = new String[] { "ADV", "AUX", "NEG", "O", "TYPO", "UH" };
         

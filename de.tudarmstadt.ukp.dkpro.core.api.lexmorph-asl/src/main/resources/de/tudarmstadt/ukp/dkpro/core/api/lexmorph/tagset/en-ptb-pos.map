@@ -11,6 +11,8 @@
 ;=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 ?=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 \!=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+``=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+''=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 # punctuation mark, colon
 \:=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 # contextual separator, left paren

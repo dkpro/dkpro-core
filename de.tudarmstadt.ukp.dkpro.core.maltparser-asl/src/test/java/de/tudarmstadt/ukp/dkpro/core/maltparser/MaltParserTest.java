@@ -30,6 +30,7 @@ import org.junit.Assume;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.hunpos.HunPosTagger;
@@ -43,65 +44,69 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
  */
 public class MaltParserTest
 {
-//    /**
-//     * This test really only checks the tagsets and if any dependencies are created. Since we
-//     * currently to not have a POS tagger for Bengali, the dependencies are just bogus.
-//     */
-//    @Test
-//    public void testBengali()
-//        throws Exception
-//    {
-//        JCas jcas = runTest(
-//                "dummy-bn",
-//                "linear",
-//                "আমরা যতটা সম্ভব উপাদানসমূহের ও নির্ভরতা রয়েছে যা একটি খুব জটিল উদাহরণ বাক্য, প্রয়োজন .");
-//
-//        String[] dependencies = new String[] {
-//                "[  0,  4]Dependency(pof) D[0,4](আমরা) G[5,9](যতটা)",
-//                "[ 10, 15]Dependency(r6) D[10,15](সম্ভব) G[5,9](যতটা)",
-//                "[ 16, 28]Dependency(r6) D[16,28](উপাদানসমূহের) G[10,15](সম্ভব)",
-//                "[ 29, 30]Dependency(r6) D[29,30](ও) G[16,28](উপাদানসমূহের)",
-//                "[ 31, 39]Dependency(r6) D[31,39](নির্ভরতা) G[29,30](ও)",
-//                "[ 40, 46]Dependency(r6) D[40,46](রয়েছে) G[31,39](নির্ভরতা)",
-//                "[ 47, 49]Dependency(r6) D[47,49](যা) G[40,46](রয়েছে)",
-//                "[ 50, 54]Dependency(r6) D[50,54](একটি) G[47,49](যা)",
-//                "[ 55, 58]Dependency(r6) D[55,58](খুব) G[50,54](একটি)",
-//                "[ 59, 63]Dependency(r6) D[59,63](জটিল) G[55,58](খুব)",
-//                "[ 64, 70]Dependency(r6) D[64,70](উদাহরণ) G[59,63](জটিল)",
-//                "[ 71, 77]Dependency(r6) D[71,77](বাক্য,) G[64,70](উদাহরণ)",
-//                "[ 78, 86]Dependency(r6) D[78,86](প্রয়োজন) G[71,77](বাক্য,)",
-//                "[ 87, 88]Dependency(pof) D[87,88](.) G[78,86](প্রয়োজন)" };
-//
-//        String[] posTags = new String[] { "CC", "DEM", "ECH", "INJ", "INTF", "JJ", "JJ:?", "NEG",
-//                "NN", "NNP", "NRP", "NST", "NULL", "NULL__VGF", "PRP", "PSP", "QC", "QF", "QO",
-//                "RB", "RDP", "RP", "SYM", "SYM:?", "UT", "VAUX", "VM", "WQ", "XC" };
-//
-//        String[] depTags = new String[] { "CCP", "CCP2", "CCP3", "CCP4", "CCP6", "NP", "NP2",
-//                "NP3", "NP4", "NP5", "NULL__CCP", "NULL__CCP2", "NULL__VGF", "NULL__VGF2", "RBP",
-//                "ROOT", "VGF", "VGF2", "VGF3", "VGF4", "VGINF", "VGNF", "VGNN", "VM", "cccof",
-//                "ccof", "ccop", "fragof", "jjmod", "jjmod__relc", "jk1", "jmod", "k*u", "k1",
-//                "k1S", "k1s", "k2", "k2-ras", "k2g", "k2p", "k2s", "k3", "k4", "k5", "k7", "k7p",
-//                "k7t", "nmod", "nmod-relc", "nmod__relc", "nmod_relc", "nmod­_relc", "pk1", "pof",
-//                "r6", "rad", "ras", "ras-k2", "rbmod__relc", "rd", "rh", "rs", "rt", "sent_adv",
-//                "vmod" };
-//
-//        String[] unmappedPos = new String[] { "ECH", "JJ:?", "NRP", "NST", "NULL", "NULL__VGF",
-//                "QO", "SYM:?", "UT", "XC" };
-//        
-//        AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
-//        AssertAnnotations.assertTagset(POS.class, "utpal", posTags, jcas);
-//        AssertAnnotations.assertTagsetMapping(POS.class, "utpal", unmappedPos, jcas);
-//        AssertAnnotations.assertTagset(Dependency.class, "utpal", depTags, jcas);
-//        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "ftb", new String[] {}, jcas);
-//    }    
-    
+    // /**
+    // * This test really only checks the tagsets and if any dependencies are created. Since we
+    // * currently to not have a POS tagger for Bengali, the dependencies are just bogus.
+    // */
+    // @Test
+    // public void testBengali()
+    // throws Exception
+    // {
+    // JCas jcas = runTest(
+    // "dummy-bn",
+    // "linear",
+    // "আমরা যতটা সম্ভব উপাদানসমূহের ও নির্ভরতা রয়েছে যা একটি খুব জটিল উদাহরণ বাক্য, প্রয়োজন .");
+    //
+    // String[] dependencies = new String[] {
+    // "[  0,  4]Dependency(pof) D[0,4](আমরা) G[5,9](যতটা)",
+    // "[ 10, 15]Dependency(r6) D[10,15](সম্ভব) G[5,9](যতটা)",
+    // "[ 16, 28]Dependency(r6) D[16,28](উপাদানসমূহের) G[10,15](সম্ভব)",
+    // "[ 29, 30]Dependency(r6) D[29,30](ও) G[16,28](উপাদানসমূহের)",
+    // "[ 31, 39]Dependency(r6) D[31,39](নির্ভরতা) G[29,30](ও)",
+    // "[ 40, 46]Dependency(r6) D[40,46](রয়েছে) G[31,39](নির্ভরতা)",
+    // "[ 47, 49]Dependency(r6) D[47,49](যা) G[40,46](রয়েছে)",
+    // "[ 50, 54]Dependency(r6) D[50,54](একটি) G[47,49](যা)",
+    // "[ 55, 58]Dependency(r6) D[55,58](খুব) G[50,54](একটি)",
+    // "[ 59, 63]Dependency(r6) D[59,63](জটিল) G[55,58](খুব)",
+    // "[ 64, 70]Dependency(r6) D[64,70](উদাহরণ) G[59,63](জটিল)",
+    // "[ 71, 77]Dependency(r6) D[71,77](বাক্য,) G[64,70](উদাহরণ)",
+    // "[ 78, 86]Dependency(r6) D[78,86](প্রয়োজন) G[71,77](বাক্য,)",
+    // "[ 87, 88]Dependency(pof) D[87,88](.) G[78,86](প্রয়োজন)" };
+    //
+    // String[] posTags = new String[] { "CC", "DEM", "ECH", "INJ", "INTF", "JJ", "JJ:?", "NEG",
+    // "NN", "NNP", "NRP", "NST", "NULL", "NULL__VGF", "PRP", "PSP", "QC", "QF", "QO",
+    // "RB", "RDP", "RP", "SYM", "SYM:?", "UT", "VAUX", "VM", "WQ", "XC" };
+    //
+    // String[] depTags = new String[] { "CCP", "CCP2", "CCP3", "CCP4", "CCP6", "NP", "NP2",
+    // "NP3", "NP4", "NP5", "NULL__CCP", "NULL__CCP2", "NULL__VGF", "NULL__VGF2", "RBP",
+    // "ROOT", "VGF", "VGF2", "VGF3", "VGF4", "VGINF", "VGNF", "VGNN", "VM", "cccof",
+    // "ccof", "ccop", "fragof", "jjmod", "jjmod__relc", "jk1", "jmod", "k*u", "k1",
+    // "k1S", "k1s", "k2", "k2-ras", "k2g", "k2p", "k2s", "k3", "k4", "k5", "k7", "k7p",
+    // "k7t", "nmod", "nmod-relc", "nmod__relc", "nmod_relc", "nmod­_relc", "pk1", "pof",
+    // "r6", "rad", "ras", "ras-k2", "rbmod__relc", "rd", "rh", "rs", "rt", "sent_adv",
+    // "vmod" };
+    //
+    // String[] unmappedPos = new String[] { "ECH", "JJ:?", "NRP", "NST", "NULL", "NULL__VGF",
+    // "QO", "SYM:?", "UT", "XC" };
+    //
+    // AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
+    // AssertAnnotations.assertTagset(POS.class, "utpal", posTags, jcas);
+    // AssertAnnotations.assertTagsetMapping(POS.class, "utpal", unmappedPos, jcas);
+    // AssertAnnotations.assertTagset(Dependency.class, "utpal", depTags, jcas);
+    // // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "ftb", new String[] {},
+    // jcas);
+    // }
+
     @Ignore("The parser model 'catmalt.mco' is created by MaltParser 1.4.1.")
     @Test
     public void testCatalan()
         throws Exception
     {
-        JCas jcas = runTest("dummy-ca", "linear", "Necessitem una oració d'exemple molt complicat "
-                + ", que conté la major quantitat de components i dependències com sigui possible .");
+        JCas jcas = runTest(
+                "dummy-ca",
+                "linear",
+                "Necessitem una oració d'exemple molt complicat "
+                        + ", que conté la major quantitat de components i dependències com sigui possible .");
 
         String[] dependencies = new String[] {
                 "[  7, 13]Dependency(adjunct) D[7,13](bardzo) G[28,36](przykład)",
@@ -134,11 +139,13 @@ public class MaltParserTest
 
         AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "nkjp", posTags, jcas);
-        // FIXME AssertAnnotations.assertTagsetMapping(POS.class, "freeling", new String[] {}, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(POS.class, "freeling", new String[] {},
+        // jcas);
         AssertAnnotations.assertTagset(Dependency.class, "pdp", depTags, jcas);
-        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "iula", new String[] {}, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "iula", new String[] {},
+        // jcas);
     }
-    
+
     @Test
     public void testEnglishDefault()
         throws Exception
@@ -177,13 +184,14 @@ public class MaltParserTest
                 "pcomp", "pobj", "poss", "possessive", "preconj", "pred", "predet", "prep", "prt",
                 "punct", "purpcl", "quantmod", "rcmod", "rel", "tmod", "xcomp" };
 
-        String[] unmappedPos = new String[] { "#", "$", "''", "PRT", "``" };
+        String[] unmappedPos = new String[] { "$", "PRT" };
 
         AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
         AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
         AssertAnnotations.assertTagset(Dependency.class, "stanford", depTags, jcas);
-        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford", new String[] {}, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford", new String[]
+        // {}, jcas);
     }
 
     @Test
@@ -224,13 +232,14 @@ public class MaltParserTest
                 "pcomp", "pobj", "poss", "possessive", "preconj", "pred", "predet", "prep", "prt",
                 "punct", "purpcl", "quantmod", "rcmod", "rel", "tmod", "xcomp" };
 
-        String[] unmappedPos = new String[] { "#", "$", "''", "PRT", "``" };
+        String[] unmappedPos = new String[] { "$", "PRT" };
 
         AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
         AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
         AssertAnnotations.assertTagset(Dependency.class, "stanford", depTags, jcas);
-        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford", new String[] {}, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford", new String[]
+        // {}, jcas);
     }
 
     @Test
@@ -271,15 +280,16 @@ public class MaltParserTest
                 "pcomp", "pobj", "poss", "possessive", "preconj", "pred", "predet", "prep", "prt",
                 "punct", "purpcl", "quantmod", "rcmod", "rel", "tmod", "xcomp" };
 
-        String[] unmappedPos = new String[] { "#", "$", "''", "PRT", "``" };
+        String[] unmappedPos = new String[] { "$", "PRT" };
 
         AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
         AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
         AssertAnnotations.assertTagset(Dependency.class, "stanford", depTags, jcas);
-        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford", new String[] {}, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford", new String[]
+        // {}, jcas);
     }
-    
+
     /**
      * Actually, we have no POS tagger for Polish...
      * 
@@ -290,8 +300,9 @@ public class MaltParserTest
     public void testPolish()
         throws Exception
     {
-        JCas jcas = runTest("dummy-pl", "linear", "Musimy bardzo skomplikowany przykład zdanie , które "
-                + "zawiera tak wiele składników i zależności , jak to możliwe .");
+        JCas jcas = runTest("dummy-pl", "linear",
+                "Musimy bardzo skomplikowany przykład zdanie , które "
+                        + "zawiera tak wiele składników i zależności , jak to możliwe .");
 
         String[] dependencies = new String[] {
                 "[  7, 13]Dependency(adjunct) D[7,13](bardzo) G[28,36](przykład)",
@@ -324,9 +335,11 @@ public class MaltParserTest
 
         AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "nkjp", posTags, jcas);
-        // FIXME AssertAnnotations.assertTagsetMapping(POS.class, "freeling", new String[] {}, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(POS.class, "freeling", new String[] {},
+        // jcas);
         AssertAnnotations.assertTagset(Dependency.class, "pdp", depTags, jcas);
-        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "iula", new String[] {}, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "iula", new String[] {},
+        // jcas);
     }
 
     @Ignore("Model not integrated")
@@ -334,8 +347,9 @@ public class MaltParserTest
     public void testPortuguese()
         throws Exception
     {
-        JCas jcas = runTest("pt", "linear", "Precisamos de uma frase exemplo muito complicado , que "
-                + "contém o maior número de eleitores e dependências possível .");
+        JCas jcas = runTest("pt", "linear",
+                "Precisamos de uma frase exemplo muito complicado , que "
+                        + "contém o maior número de eleitores e dependências possível .");
 
         String[] dependencies = new String[] {
                 "[ 11, 13]Dependency(N<) D[11,13](de) G[0,10](Precisamos)",
@@ -370,11 +384,13 @@ public class MaltParserTest
 
         AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "bosque", posTags, jcas);
-        // FIXME AssertAnnotations.assertTagsetMapping(POS.class, "freeling", new String[] {}, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(POS.class, "freeling", new String[] {},
+        // jcas);
         AssertAnnotations.assertTagset(Dependency.class, "unknown", depTags, jcas);
-        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "iula", new String[] {}, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "iula", new String[] {},
+        // jcas);
     }
-    
+
     /**
      * This test really only checks the tagsets and if any dependencies are created. Since the POS
      * tags expected by the Spanish model do <b>not</b> correspond to those that the pos tagger
@@ -450,11 +466,13 @@ public class MaltParserTest
 
         AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "freeling", posTags, jcas);
-        // FIXME AssertAnnotations.assertTagsetMapping(POS.class, "freeling", new String[] {}, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(POS.class, "freeling", new String[] {},
+        // jcas);
         AssertAnnotations.assertTagset(Dependency.class, "iula", depTags, jcas);
-        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "iula", new String[] {}, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "iula", new String[] {},
+        // jcas);
     }
-    
+
     @Test
     public void testGerman()
         throws Exception
@@ -496,7 +514,8 @@ public class MaltParserTest
         // FIXME AssertAnnotations.assertTagset(POS.class, "stts", posTags, jcas);
         // FIXME AssertAnnotations.assertTagsetMapping(POS.class, "stts", new String[] {}, jcas);
         // FIXME AssertAnnotations.assertTagset(Dependency.class, "cdg", depTags, jcas);
-        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "cdg", new String[] {}, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "cdg", new String[] {},
+        // jcas);
     }
 
     @Test
@@ -522,7 +541,7 @@ public class MaltParserTest
                 "[ 90, 93]Dependency(HD) D[90,93](och) G[76,89](beståndsdelar)",
                 "[ 94,103]Dependency(+F) D[94,103](beroenden) G[90,93](och)",
                 "[104,107]Dependency(HD) D[104,107](som) G[94,103](beroenden)",
-                "[108,116]Dependency(HD) D[108,116](möjligt.) G[0,2](Vi)"};
+                "[108,116]Dependency(HD) D[108,116](möjligt.) G[0,2](Vi)" };
 
         String[] posTags = new String[] { "AB", "DT", "HA", "HD", "HP", "HS", "IE", "IN", "JJ",
                 "KN", "MAD", "MID", "NN", "PAD", "PC", "PL", "PM", "PN", "PP", "PS", "RG", "RO",
@@ -538,9 +557,10 @@ public class MaltParserTest
         AssertAnnotations.assertTagset(POS.class, "suc", posTags, jcas);
         // FIXME AssertAnnotations.assertTagsetMapping(POS.class, "stb", new String[] {}, jcas);
         AssertAnnotations.assertTagset(Dependency.class, "stb", depTags, jcas);
-        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "stb", new String[] {}, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "stb", new String[] {},
+        // jcas);
     }
-    
+
     @Test
     public void testFarsi()
         throws Exception
@@ -596,14 +616,15 @@ public class MaltParserTest
                 "rcmod\\poss", "rel", "root", "root/cop", "root/pc", "root\\amod", "root\\conj",
                 "root\\pobj", "root\\poss", "tmod", "xcomp" };
 
-        String[] unmappedPos = new String[] { };
-        
+        String[] unmappedPos = new String[] {};
+
         AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "upc", posTags, jcas);
         AssertAnnotations.assertTagsetMapping(POS.class, "upc", unmappedPos, jcas);
         AssertAnnotations.assertTagset(Dependency.class, "updt", depTags, jcas);
-        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "ftb", new String[] {}, jcas);
-    }    
+        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "ftb", new String[] {},
+        // jcas);
+    }
 
     /**
      * This test really only checks the tagsets and if any dependencies are created. Since we
@@ -648,12 +669,13 @@ public class MaltParserTest
 
         String[] unmappedPos = new String[] { "/CC", "/P", "/PONCT", "4/DET", "_9/NC", "_OPE/NC",
                 "_S/ET", "_S/NPP", "_an/NC", "_h/NC" };
-        
+
         AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "melt", posTags, jcas);
         AssertAnnotations.assertTagsetMapping(POS.class, "melt", unmappedPos, jcas);
         AssertAnnotations.assertTagset(Dependency.class, "ftb", depTags, jcas);
-        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "ftb", new String[] {}, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "ftb", new String[] {},
+        // jcas);
     }
 
     private JCas runTest(String aLanguage, String aVariant, String aText)
@@ -664,7 +686,7 @@ public class MaltParserTest
         if (aLanguage.startsWith("dummy-")) {
             aLanguage = aLanguage.substring("dummy-".length());
         }
-        
+
         return TestRunner.runTest(engine, aLanguage, aText);
     }
 
@@ -688,10 +710,8 @@ public class MaltParserTest
 
         engines.add(createEngineDescription(TagsetDescriptionStripper.class));
 
-        engines.add(createEngineDescription(MaltParser.class, 
-                MaltParser.PARAM_VARIANT, aVariant,
-                MaltParser.PARAM_PRINT_TAGSET, true,
-                MaltParser.PARAM_IGNORE_MISSING_FEATURES, true));
+        engines.add(createEngineDescription(MaltParser.class, MaltParser.PARAM_VARIANT, aVariant,
+                MaltParser.PARAM_PRINT_TAGSET, true, MaltParser.PARAM_IGNORE_MISSING_FEATURES, true));
 
         return createEngineDescription(engines
                 .toArray(new AnalysisEngineDescription[engines.size()]));
