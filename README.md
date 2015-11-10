@@ -4,3 +4,5 @@ DKPro Core is a collection of software components for natural language processin
 Apache UIMA framework.
 
 For more information, visit the [DKPro Core website](https://dkpro.github.io/dkpro-core).
+
+For usage examples, see the [DKPro Core Examples project](https://github.com/dkpro/dkpro-core-examples)
