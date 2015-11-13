@@ -497,6 +497,7 @@
 		<module>../de.tudarmstadt.ukp.dkpro.core.textnormalizer-asl</module>
 	    <!-- Distribution modules -->
 		<module>../de.tudarmstadt.ukp.dkpro.core.distribution-asl</module>
+		<module>../de.tudarmstadt.ukp.dkpro.core.io.reuters-asl</module>
 	</modules>
 	<profiles>
 		<profile>
