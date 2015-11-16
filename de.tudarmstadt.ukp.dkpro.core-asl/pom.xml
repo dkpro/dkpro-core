@@ -15,8 +15,9 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				 xmlns="http://maven.apache.org/POM/4.0.0"
+				 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -453,7 +454,8 @@
 		<module>../de.tudarmstadt.ukp.dkpro.core.io.negra-asl</module>
 		<module>../de.tudarmstadt.ukp.dkpro.core.io.pdf-asl</module>
 		<module>../de.tudarmstadt.ukp.dkpro.core.io.penntree-asl</module>
-		<module>../de.tudarmstadt.ukp.dkpro.core.io.rtf-asl</module>		
+		<module>../de.tudarmstadt.ukp.dkpro.core.io.reuters-asl</module>
+		<module>../de.tudarmstadt.ukp.dkpro.core.io.rtf-asl</module>
 		<module>../de.tudarmstadt.ukp.dkpro.core.io.solr-asl</module>		
 		<module>../de.tudarmstadt.ukp.dkpro.core.io.tcf-asl</module>
 		<module>../de.tudarmstadt.ukp.dkpro.core.io.tei-asl</module>
@@ -497,7 +499,6 @@
 		<module>../de.tudarmstadt.ukp.dkpro.core.textnormalizer-asl</module>
 	    <!-- Distribution modules -->
 		<module>../de.tudarmstadt.ukp.dkpro.core.distribution-asl</module>
-		<module>../de.tudarmstadt.ukp.dkpro.core.io.reuters-asl</module>
 	</modules>
 	<profiles>
 		<profile>
