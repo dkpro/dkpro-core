@@ -26,7 +26,9 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>io.reuters-asl</artifactId>
+  <artifactId>de.tudarmstadt.ukp.dkpro.core.io.reuters-asl</artifactId>
+  <packaging>jar</packaging>
+  <name>DKPro Core ASL - IO - Reuters-21578 Format</name>
 
   <dependencies>
     <dependency>
