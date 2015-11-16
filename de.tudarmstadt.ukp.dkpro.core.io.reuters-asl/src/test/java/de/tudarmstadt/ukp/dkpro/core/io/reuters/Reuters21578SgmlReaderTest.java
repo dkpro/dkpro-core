@@ -60,6 +60,7 @@ public class Reuters21578SgmlReaderTest
                     .anyMatch(mdsf -> mdsf.getKey().equals("DATE")));
             DocumentMetaData metaData = DocumentMetaData.get(jcas);
             assertEquals(expectedCollectionId, metaData.getCollectionId());
+            assertTrue(jcas.getDocumentText() != null);
         }
         assertEquals(expectedCount, count);
         assertTrue(outputFile.exists());

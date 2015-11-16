@@ -52,6 +52,8 @@ public class ReutersDocument
 
     public ReutersDocument()
     {
+        body = "";
+        newid = -1;
         topics = new HashSet<>();
         places = new HashSet<>();
         people = new HashSet<>();
@@ -204,14 +206,14 @@ public class ReutersDocument
         return lewissplit;
     }
 
-    public void setLewissplit(LEWISSPLIT lewissplit)
-    {
-        this.lewissplit = lewissplit;
-    }
-
     public void setLewissplit(String lewissplit)
     {
         setLewissplit(LEWISSPLIT.valueOf(lewissplit.toUpperCase().replaceAll("-", "_")));
+    }
+
+    public void setLewissplit(LEWISSPLIT lewissplit)
+    {
+        this.lewissplit = lewissplit;
     }
 
     public CGISPLIT getCgisplit()
@@ -219,14 +221,14 @@ public class ReutersDocument
         return cgisplit;
     }
 
-    public void setCgisplit(String cgisplit)
-    {
-        setCgisplit(CGISPLIT.valueOf(cgisplit.toUpperCase().replaceAll("-", "_")));
-    }
-
     public void setCgisplit(CGISPLIT cgisplit)
     {
         this.cgisplit = cgisplit;
+    }
+
+    public void setCgisplit(String cgisplit)
+    {
+        setCgisplit(CGISPLIT.valueOf(cgisplit.toUpperCase().replaceAll("-", "_")));
     }
 
     public int getNewid()
@@ -244,15 +246,15 @@ public class ReutersDocument
         return date;
     }
 
-    public void setDate(Date date)
-    {
-        this.date = date;
-    }
-
     public void setDate(String date)
             throws ParseException
     {
         setDate(dateFormat.parse(date));
+    }
+
+    public void setDate(Date date)
+    {
+        this.date = date;
     }
 
     public Set<String> getTopics()
