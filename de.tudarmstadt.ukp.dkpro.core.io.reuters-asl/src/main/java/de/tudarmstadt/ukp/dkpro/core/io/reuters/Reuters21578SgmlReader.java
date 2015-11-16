@@ -57,7 +57,7 @@ public class Reuters21578SgmlReader
     public void initialize(UimaContext context)
             throws ResourceInitializationException
     {
-        //        super.initialize();
+        super.initialize(context);
         try {
             getLogger().info("Extracting Reuters-21578 documents from " + sourceLocation);
             List<ReutersDocument> docs = ExtractReuters.extract(sourceLocation.toPath());
