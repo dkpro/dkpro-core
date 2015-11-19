@@ -526,6 +526,14 @@ See also:
 
 === XMI
 
+One of the official formats supported by UIMA is the XMI format. It is an XML-based format that does
+not support a few very specific characters which are invalid in XML. But it is able to capture all
+the information contained in the CAS. The XMI format is the de-facto standard for exchanging data
+in the UIMA world. Most UIMA-related tools support it.
+
+The XMI format does not include type system information. It is therefore recommended to always
+configure the XmiWriter component to also write out the type system to a file.
+
 .Components
 [options="header"]
 |====
@@ -534,6 +542,17 @@ See also:
 |XmiWriter (FW)|
 |====
 
+If you with to view anntated documents using the UIMA CAS Editor in Eclipse, you can e.g. set up
+your XmiWriter in the following way to write out XMIs and a type system file:
+
+[source,java]
+----
+AnalysisEngineDescription xmiWriter = 
+  AnalysisEngineFactory.createEngineDescription(
+      XmiWriter.class, 
+      XmiWriter.PARAM_TARGET_LOCATION, ".",
+      XmiWriter.PARAM_TYPE_SYSTEM_FILE, "typesystem.xml");  
+----
 
 === XML
 
