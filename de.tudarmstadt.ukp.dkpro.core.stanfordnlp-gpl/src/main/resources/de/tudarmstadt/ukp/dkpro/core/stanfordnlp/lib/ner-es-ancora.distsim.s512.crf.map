@@ -3,3 +3,4 @@ LUG=de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location
 ORG=de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization
 #OTROS
 PERS=de.tudarmstadt.ukp.dkpro.core.api.ner.type.Person
+*=de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity
