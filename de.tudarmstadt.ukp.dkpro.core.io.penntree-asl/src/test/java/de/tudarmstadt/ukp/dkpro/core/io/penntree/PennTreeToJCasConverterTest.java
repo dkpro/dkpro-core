@@ -33,40 +33,44 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 
-public class PennTreeToJCasConverterTest {
+public class PennTreeToJCasConverterTest
+{
 
-	@Test
-	public void whenConvertingFromStringThenTheParentOfConstituensAreSet() throws UIMAException{
-		MappingProvider posMappingProvider = MappingProviderFactory.createPosMappingProvider(null, null, (String)null);
-		MappingProvider constituentMappingProvider = MappingProviderFactory.createConstituentMappingProvider(null, null, (String)null);
+    @Test
+    public void whenConvertingFromStringThenTheParentOfConstituensAreSet()
+        throws UIMAException
+    {
+        MappingProvider posMappingProvider = MappingProviderFactory.createPosMappingProvider(null,
+                null, (String) null);
+        MappingProvider constituentMappingProvider = MappingProviderFactory
+                .createConstituentMappingProvider(null, null, (String) null);
 
-		PennTreeToJCasConverter converter = new PennTreeToJCasConverter(
-				posMappingProvider, 
-				constituentMappingProvider);
-		
-		String parseTree = "(ROOT (S (NP (PRP It)) (VP (VBZ is) (NP (DT a) (NN test))) (. .)))";
-		
-		JCas aJCas = JCasFactory.createJCas();
-		posMappingProvider.configure(aJCas.getCas());
-		constituentMappingProvider.configure(aJCas.getCas());
-		PennTreeNode parsePennTree = PennTreeUtils.parsePennTree(parseTree);
-		String sent = PennTreeUtils.toText(parsePennTree);
-		
-		aJCas.setDocumentText(sent);
-		aJCas.setDocumentLanguage("en");
-		Sentence aSentence = new Sentence(aJCas, 0, sent.length());
-		aSentence.addToIndexes();
-		int pos = 0;
-		for (String tokenStr: sent.split(" ")){
-			new Token(aJCas, pos, pos + tokenStr.length()).addToIndexes();
-			pos += tokenStr.length() + 1;
-		}
-		converter.convertPennTree(aSentence, parsePennTree);
-		
-		Collection<Constituent> constituents = JCasUtil.select(aJCas, Constituent.class);
+        PennTreeToJCasConverter converter = new PennTreeToJCasConverter(posMappingProvider,
+                constituentMappingProvider);
 
-		for (Constituent constituent: constituents)
-			if (!constituent.getConstituentType().equals("ROOT"))
-				Assert.assertNotNull(constituent.getParent());
-	}
+        String parseTree = "(ROOT (S (NP (PRP It)) (VP (VBZ is) (NP (DT a) (NN test))) (. .)))";
+
+        JCas aJCas = JCasFactory.createJCas();
+        posMappingProvider.configure(aJCas.getCas());
+        constituentMappingProvider.configure(aJCas.getCas());
+        PennTreeNode parsePennTree = PennTreeUtils.parsePennTree(parseTree);
+        String sent = PennTreeUtils.toText(parsePennTree);
+
+        aJCas.setDocumentText(sent);
+        aJCas.setDocumentLanguage("en");
+        Sentence aSentence = new Sentence(aJCas, 0, sent.length());
+        aSentence.addToIndexes();
+        int pos = 0;
+        for (String tokenStr : sent.split(" ")) {
+            new Token(aJCas, pos, pos + tokenStr.length()).addToIndexes();
+            pos += tokenStr.length() + 1;
+        }
+        converter.convertPennTree(aSentence, parsePennTree);
+
+        Collection<Constituent> constituents = JCasUtil.select(aJCas, Constituent.class);
+
+        for (Constituent constituent : constituents)
+            if (!constituent.getConstituentType().equals("ROOT"))
+                Assert.assertNotNull(constituent.getParent());
+    }
 }
