@@ -34,104 +34,112 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 
-public class PennTreeToJCasConverterTest {
-	private PennTreeToJCasConverter converter;
-	private MappingProvider posMappingProvider;
-	private MappingProvider constituentMappingProvider;
-	private JCas aJCas;
-	private PennTreeNode rootNode;
-	private Sentence aSentence;
-	
-	@Before
-	public void setup() throws UIMAException{
-		posMappingProvider = MappingProviderFactory.createPosMappingProvider(null, null, (String)null);
-		constituentMappingProvider = MappingProviderFactory.createConstituentMappingProvider(null, null, (String)null);
+public class PennTreeToJCasConverterTest
+{
+    private PennTreeToJCasConverter converter;
+    private MappingProvider posMappingProvider;
+    private MappingProvider constituentMappingProvider;
+    private JCas aJCas;
+    private PennTreeNode rootNode;
+    private Sentence aSentence;
 
-		converter = new PennTreeToJCasConverter(
-				posMappingProvider, 
-				constituentMappingProvider);
-		String parseTree = "(ROOT (S (NP (PRP It)) (VP (VBZ is) (NP (DT a) (NN test))) (. .)))";
-		
-		aJCas = JCasFactory.createJCas();
-		posMappingProvider.configure(aJCas.getCas());
-		constituentMappingProvider.configure(aJCas.getCas());
-		rootNode = PennTreeUtils.parsePennTree(parseTree);
-		String sent = PennTreeUtils.toText(rootNode);
-		
-		aJCas.setDocumentText(sent);
-		aJCas.setDocumentLanguage("en");
-		aSentence = new Sentence(aJCas, 0, sent.length());
-	}
+    @Before
+    public void setup()
+        throws UIMAException
+    {
+        posMappingProvider = MappingProviderFactory.createPosMappingProvider(null, null,
+                (String) null);
+        constituentMappingProvider = MappingProviderFactory.createConstituentMappingProvider(null,
+                null, (String) null);
 
-	private void addTokens(String sent) {
-		int pos = 0;
-		for (String tokenStr: sent.split(" ")){
-			new Token(aJCas, pos, pos + tokenStr.length()).addToIndexes();
-			pos += tokenStr.length() + 1;
-		}
-	}
+        converter = new PennTreeToJCasConverter(posMappingProvider, constituentMappingProvider);
+        String parseTree = "(ROOT (S (NP (PRP It)) (VP (VBZ is) (NP (DT a) (NN test))) (. .)))";
 
-	@Test
-	public void whenConvertingFromStringWithSentenceThenTheParentOfConstituensAreSet() throws UIMAException{
-		addTokens(aJCas.getDocumentText());
-		converter.convertPennTree(aSentence, rootNode);
-		
-		Collection<Constituent> constituents = JCasUtil.select(aJCas, Constituent.class);
+        aJCas = JCasFactory.createJCas();
+        posMappingProvider.configure(aJCas.getCas());
+        constituentMappingProvider.configure(aJCas.getCas());
+        rootNode = PennTreeUtils.parsePennTree(parseTree);
+        String sent = PennTreeUtils.toText(rootNode);
 
-		for (Constituent constituent: constituents)
-			if (!constituent.getConstituentType().equals("ROOT"))
-				Assert.assertNotNull(constituent.getParent());
-		
-		for (Token token: JCasUtil.select(aJCas, Token.class)){
-			Assert.assertNotNull(token.getParent());
-		}
-	}
+        aJCas.setDocumentText(sent);
+        aJCas.setDocumentLanguage("en");
+        aSentence = new Sentence(aJCas, 0, sent.length());
+    }
 
+    private void addTokens(String sent)
+    {
+        int pos = 0;
+        for (String tokenStr : sent.split(" ")) {
+            new Token(aJCas, pos, pos + tokenStr.length()).addToIndexes();
+            pos += tokenStr.length() + 1;
+        }
+    }
 
-	
-	@Test
-	public void givenPosTagsSetWhenConvertingFromStringWithSentenceThenThePosOfTokensAreSet() throws UIMAException{
-		addTokens(aJCas.getDocumentText());
-		converter.setCreatePosTags(true);
-		converter.convertPennTree(aSentence, rootNode);
-		
-		Collection<Token> constituents = JCasUtil.select(aJCas, Token.class);
+    @Test
+    public void whenConvertingFromStringWithSentenceThenTheParentOfConstituensAreSet()
+        throws UIMAException
+    {
+        addTokens(aJCas.getDocumentText());
+        converter.convertPennTree(aSentence, rootNode);
 
-		for (Token constituent: constituents){
-			Assert.assertNotNull(constituent.getPos());
-		}
-		
-	}
-	
-	@Test
-	public void whenConvertingFromStringThenTheParentOfConstituensAreSet() throws UIMAException{
-		StringBuilder aText = new StringBuilder();
-		converter.convertPennTree(aJCas, aText, rootNode);
-		
-		Collection<Constituent> constituents = JCasUtil.select(aJCas, Constituent.class);
+        Collection<Constituent> constituents = JCasUtil.select(aJCas, Constituent.class);
 
-		for (Constituent constituent: constituents)
-			if (!constituent.getConstituentType().equals("ROOT"))
-				Assert.assertNotNull(constituent.getParent());
-		
-		for (Token token: JCasUtil.select(aJCas, Token.class)){
-			Assert.assertNotNull(token.getParent());
-		}
-	}
+        for (Constituent constituent : constituents)
+            if (!constituent.getConstituentType().equals("ROOT"))
+                Assert.assertNotNull(constituent.getParent());
 
+        for (Token token : JCasUtil.select(aJCas, Token.class)) {
+            Assert.assertNotNull(token.getParent());
+        }
+    }
 
-	
-	@Test
-	public void givenPosTagsSetWhenConvertingFromStringThenThePosOfTokensAreSet() throws UIMAException{
-		converter.setCreatePosTags(true);
-		StringBuilder aText = new StringBuilder();
-		converter.convertPennTree(aJCas, aText, rootNode);
-		
-		Collection<Token> constituents = JCasUtil.select(aJCas, Token.class);
+    @Test
+    public void givenPosTagsSetWhenConvertingFromStringWithSentenceThenThePosOfTokensAreSet()
+        throws UIMAException
+    {
+        addTokens(aJCas.getDocumentText());
+        converter.setCreatePosTags(true);
+        converter.convertPennTree(aSentence, rootNode);
 
-		for (Token constituent: constituents){
-			Assert.assertNotNull(constituent.getPos());
-		}
-		
-	}
+        Collection<Token> constituents = JCasUtil.select(aJCas, Token.class);
+
+        for (Token constituent : constituents) {
+            Assert.assertNotNull(constituent.getPos());
+        }
+
+    }
+
+    @Test
+    public void whenConvertingFromStringThenTheParentOfConstituensAreSet()
+        throws UIMAException
+    {
+        StringBuilder aText = new StringBuilder();
+        converter.convertPennTree(aJCas, aText, rootNode);
+
+        Collection<Constituent> constituents = JCasUtil.select(aJCas, Constituent.class);
+
+        for (Constituent constituent : constituents)
+            if (!constituent.getConstituentType().equals("ROOT"))
+                Assert.assertNotNull(constituent.getParent());
+
+        for (Token token : JCasUtil.select(aJCas, Token.class)) {
+            Assert.assertNotNull(token.getParent());
+        }
+    }
+
+    @Test
+    public void givenPosTagsSetWhenConvertingFromStringThenThePosOfTokensAreSet()
+        throws UIMAException
+    {
+        converter.setCreatePosTags(true);
+        StringBuilder aText = new StringBuilder();
+        converter.convertPennTree(aJCas, aText, rootNode);
+
+        Collection<Token> constituents = JCasUtil.select(aJCas, Token.class);
+
+        for (Token constituent : constituents) {
+            Assert.assertNotNull(constituent.getPos());
+        }
+
+    }
 }
