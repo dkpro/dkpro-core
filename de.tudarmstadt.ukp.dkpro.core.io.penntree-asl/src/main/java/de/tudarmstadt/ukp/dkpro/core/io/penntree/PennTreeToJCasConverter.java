@@ -159,21 +159,11 @@ public class PennTreeToJCasConverter
                 int end = aText.length();
 
                 // only add POS to index if we want POS-tagging
-                POS posAnno = null;
-                if (createPosTags) {
-                    if (posMappingProvider != null) {
-                        Type posTag = posMappingProvider.getTagType(c.getLabel());
-                        posAnno = (POS) aJCas.getCas().createAnnotation(posTag, begin, end);
-                    }
-                    else {
-                        posAnno = new POS(aJCas, begin, end);
-                    }
-                    posAnno.setPosValue(internTags ? c.getLabel().intern() : c.getLabel());
-                    posAnno.addToIndexes();
-                }
+                POS posAnno = createPos(aJCas, c, begin, end);
                 
                 Token token = new Token(aJCas, begin, end);
                 token.setPos(posAnno);
+                token.setParent(constituent);
                 token.addToIndexes();
                 
                 children.add(token);
@@ -203,6 +193,22 @@ public class PennTreeToJCasConverter
         
         return constituent;        
     }
+
+	private POS createPos(JCas aJCas, PennTreeNode c, int begin, int end) {
+		POS posAnno = null;
+		if (createPosTags) {
+		    if (posMappingProvider != null) {
+		        Type posTag = posMappingProvider.getTagType(c.getLabel());
+		        posAnno = (POS) aJCas.getCas().createAnnotation(posTag, begin, end);
+		    }
+		    else {
+		        posAnno = new POS(aJCas, begin, end);
+		    }
+		    posAnno.setPosValue(internTags ? c.getLabel().intern() : c.getLabel());
+		    posAnno.addToIndexes();
+		}
+		return posAnno;
+	}
 
     public Constituent convertPennTree(Sentence aSentence, PennTreeNode aNode)
     {
@@ -260,7 +266,10 @@ public class PennTreeToJCasConverter
         for (PennTreeNode c : aNode.getChildren()) {
             if (c.isPreTerminal()) {
                 Token token = aTokenMap.get(c);
+                token.setParent(constituent);
                 children.add(token);
+                POS posAnno = createPos(aJCas, c, token.getBegin(), token.getEnd());
+                token.setPos(posAnno);
             }
             else {
                 children.add(convertPennTree(aJCas, c, constituent, aTokenMap));
