@@ -28,7 +28,7 @@
 
   <artifactId>de.tudarmstadt.ukp.dkpro.core.io.reuters-asl</artifactId>
   <packaging>jar</packaging>
-  <name>DKPro Core ASL - IO - Reuters-21578 Format</name>
+  <name>DKPro Core ASL - IO - Reuters-21578</name>
 
   <dependencies>
     <dependency>
