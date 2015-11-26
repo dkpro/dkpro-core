@@ -18,8 +18,10 @@
 package de.tudarmstadt.ukp.dkpro.core.performance;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.util.JCasUtil.getType;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -32,9 +34,12 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
+import org.apache.uima.collection.CollectionException;
+import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceConfigurationException;
 import org.apache.uima.resource.ResourceInitializationException;
-
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -46,7 +51,7 @@ public final class PerformanceTestUtil
         // No instances
     }
 
-    public static SummaryStatistics measurePerformance(AnalysisEngineDescription aWriterDesc,
+    public static SummaryStatistics measureWritePerformance(AnalysisEngineDescription aWriterDesc,
             Iterable<JCas> aTestData)
         throws ResourceInitializationException, AnalysisEngineProcessException
     {
@@ -62,6 +67,31 @@ public final class PerformanceTestUtil
 
         writer.collectionProcessComplete();
         writer.destroy();
+
+        return stats;
+    }
+
+    public static SummaryStatistics measureReadPerformance(
+            CollectionReaderDescription aReaderDesc, JCas aJCas, int aIterations)
+        throws ResourceInitializationException, CollectionException, IOException,
+        ResourceConfigurationException
+    {
+        CollectionReader reader = createReader(aReaderDesc);
+
+        SummaryStatistics stats = new SummaryStatistics();
+        
+        CAS cas = aJCas.getCas();
+        
+        for (int i = 0; i < aIterations; i++) {
+            long begin = System.currentTimeMillis();
+            reader.getNext(cas);
+            stats.addValue(System.currentTimeMillis() - begin);
+            reader.reconfigure();
+            cas.reset();
+        }
+
+        reader.close();
+        reader.destroy();
 
         return stats;
     }

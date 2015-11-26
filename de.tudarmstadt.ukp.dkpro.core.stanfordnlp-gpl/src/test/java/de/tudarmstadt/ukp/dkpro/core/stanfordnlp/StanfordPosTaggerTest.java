@@ -203,7 +203,7 @@ public class StanfordPosTaggerTest
     {
         runTest("en", "This is a ( small ) test . \n",
                 new String[] { "DT", "VBZ", "DT",  "-LRB-", "JJ",  "-RRB-", "NN", "." },
-                new String[] { "ART", "V",  "ART", "O",     "ADJ", "O",     "NN", "PUNC" });
+                new String[] { "ART", "V",  "ART", "PUNC",     "ADJ", "PUNC",     "NN", "PUNC" });
     }
 
     /**

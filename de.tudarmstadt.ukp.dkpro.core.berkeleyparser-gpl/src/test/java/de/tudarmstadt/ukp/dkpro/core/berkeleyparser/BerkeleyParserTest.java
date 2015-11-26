@@ -256,7 +256,7 @@ public class BerkeleyParserTest
                 "NAC", "NP", "NX", "PP", "PRN", "PRT", "PRT|ADVP", "QP", "ROOT", "RRC", "S", "SBAR",
                 "SBARQ", "SINV", "SQ", "UCP", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
 
-        String[] unmappedPos = { "$", "-LRB-", "-RRB-" };
+        String[] unmappedPos = { "$" };
 
         String[] unmappedConst = { };
 
@@ -304,7 +304,7 @@ public class BerkeleyParserTest
                 "NX", "PP", "PRN", "PRT", "PRT|ADVP", "QP", "ROOT", "RRC", "S", "SBAR", "SBARQ",
                 "SINV", "SQ", "UCP", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
 
-        String[] unmappedPos = { "$","-LRB-", "-RRB-" };
+        String[] unmappedPos = { "$"  };
 
         String[] unmappedConst = {};
 

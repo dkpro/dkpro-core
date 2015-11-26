@@ -18,13 +18,15 @@
 package de.tudarmstadt.ukp.dkpro.core.io.bincas;
 
 import static de.tudarmstadt.ukp.dkpro.core.performance.PerformanceTestUtil.initRandomCas;
-import static de.tudarmstadt.ukp.dkpro.core.performance.PerformanceTestUtil.measurePerformance;
+import static de.tudarmstadt.ukp.dkpro.core.performance.PerformanceTestUtil.measureReadPerformance;
+import static de.tudarmstadt.ukp.dkpro.core.performance.PerformanceTestUtil.measureWritePerformance;
 import static de.tudarmstadt.ukp.dkpro.core.performance.PerformanceTestUtil.repeat;
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.apache.uima.cas.impl.Serialization.deserializeCASComplete;
 import static org.apache.uima.cas.impl.Serialization.serializeCASComplete;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.junit.Assert.assertEquals;
@@ -37,6 +39,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -50,6 +53,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.impl.CASCompleteSerializer;
 import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.fit.factory.JCasFactory;
@@ -352,11 +356,10 @@ public class BinaryCasWriterReaderTest
         
         System.out.printf("= write%n");
         SummaryStatistics statsWrite = measureWriteSerializedCas(data, file);
-        printStats(statsWrite);
         
         System.out.printf("= read%n");
         SummaryStatistics statsRead = measureReadSerializedCas(file, 100);
-        printStats(statsRead);
+        printStats(statsWrite, statsRead);
     }
     
     private static SummaryStatistics measureWriteSerializedCas(Iterable<JCas> aTestData, File aFile)
@@ -394,7 +397,7 @@ public class BinaryCasWriterReaderTest
         throws UIMAException
     {
         SummaryStatistics statsRead = measureCasCreation(100);
-        printStats(statsRead);
+        printStats("CREATE", statsRead);
     }
     
     private static SummaryStatistics measureCasCreation(int aRepeat)
@@ -458,17 +461,28 @@ public class BinaryCasWriterReaderTest
     public void performanceTest()
         throws Exception
     {
+        int REPEATS = 100;
+        
         // Generate test data
-        Iterable<JCas> testdata = repeat(generateRandomCas(), 100);
+        Iterable<JCas> testdata = repeat(generateRandomCas(), REPEATS);
         
         System.out.printf("Data serialized to %s %n", testFolder.getRoot());
         
         // Set up configurations
         Map<String, AnalysisEngineDescription> configs = new LinkedHashMap<String, AnalysisEngineDescription>();
         configs.put(
+                "Format S - no compression",
+                createEngineDescription(
+                    BinaryCasWriter.class, 
+                    BinaryCasWriter.PARAM_OVERWRITE, true,
+                    BinaryCasWriter.PARAM_FORMAT, "S", 
+                    BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
+                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
+        configs.put(
                 "Format S+ - no compression",
                 createEngineDescription(
                     BinaryCasWriter.class, 
+                    BinaryCasWriter.PARAM_OVERWRITE, true,
                     BinaryCasWriter.PARAM_FORMAT, "S+", 
                     BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
                     BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
@@ -476,6 +490,7 @@ public class BinaryCasWriterReaderTest
                 "Format 0 - no compression",
                 createEngineDescription(
                     BinaryCasWriter.class, 
+                    BinaryCasWriter.PARAM_OVERWRITE, true,
                     BinaryCasWriter.PARAM_FORMAT, "0", 
                     BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
                     BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
@@ -483,64 +498,100 @@ public class BinaryCasWriterReaderTest
                 "Format 4 - no compression",
                 createEngineDescription(
                     BinaryCasWriter.class, 
+                    BinaryCasWriter.PARAM_OVERWRITE, true,
                     BinaryCasWriter.PARAM_FORMAT, "4", 
+                    BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
+                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
+        configs.put(
+                "Format 6 - no compression",
+                createEngineDescription(
+                    BinaryCasWriter.class, 
+                    BinaryCasWriter.PARAM_OVERWRITE, true,
+                    BinaryCasWriter.PARAM_FORMAT, "6", 
                     BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
                     BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
         configs.put(
                 "Format 6+ - no compression",
                 createEngineDescription(
                     BinaryCasWriter.class, 
+                    BinaryCasWriter.PARAM_OVERWRITE, true,
                     BinaryCasWriter.PARAM_FORMAT, "6+", 
                     BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
                     BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
-        configs.put(
-                "Format 6+ - GZip compression",
-                createEngineDescription(
-                    BinaryCasWriter.class, 
-                    BinaryCasWriter.PARAM_FORMAT, "6+", 
-                    BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.GZIP,
-                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
-        configs.put(
-                "Format 6+ - BZIP2 compression",
-                createEngineDescription(
-                    BinaryCasWriter.class, 
-                    BinaryCasWriter.PARAM_FORMAT, "6+", 
-                    BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.BZIP2,
-                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
-        configs.put(
-                "Format 6+ - XZ compression",
-                createEngineDescription(
-                    BinaryCasWriter.class, 
-                    BinaryCasWriter.PARAM_FORMAT, "6+", 
-                    BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.XZ,
-                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
+//        configs.put(
+//                "Format 6+ - GZip compression",
+//                createEngineDescription(
+//                    BinaryCasWriter.class, 
+//                    BinaryCasWriter.PARAM_FORMAT, "6+", 
+//                    BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.GZIP,
+//                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
+//        configs.put(
+//                "Format 6+ - BZIP2 compression",
+//                createEngineDescription(
+//                    BinaryCasWriter.class, 
+//                    BinaryCasWriter.PARAM_FORMAT, "6+", 
+//                    BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.BZIP2,
+//                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
+//        configs.put(
+//                "Format 6+ - XZ compression",
+//                createEngineDescription(
+//                    BinaryCasWriter.class, 
+//                    BinaryCasWriter.PARAM_FORMAT, "6+", 
+//                    BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.XZ,
+//                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
 
         // Run tests
+        System.out.printf("--------------------------------------------%n");
         for (Entry<String, AnalysisEngineDescription> cfg : configs.entrySet()) {
             System.out.printf("%s%n", cfg.getKey());
+            System.out.printf("  Measuring WRITE%n");
             
             for (File f : FileUtils.listFiles(testFolder.getRoot(), new PrefixFileFilter("dummy.bin"), null)) {
                 f.delete();
             }
             
-            SummaryStatistics stats = measurePerformance(cfg.getValue(), testdata);
-            printStats(stats);
+            SummaryStatistics writeStats = measureWritePerformance(cfg.getValue(), testdata);
+
+            Collection<File> files = FileUtils.listFiles(testFolder.getRoot(), new PrefixFileFilter("dummy.bin"), null);
+            assertEquals(1, files.size());
+            File f = files.iterator().next();
             
-            for (File f : FileUtils.listFiles(testFolder.getRoot(), new PrefixFileFilter("dummy.bin"), null)) {
-                System.out.printf("  Size    %10d bytes%n", f.length());
-            }
+            // For some readers, we may need a CAS with is already initialized with the proper 
+            // type system, so we create one here
+            JCas jcas = JCasFactory.createJCas();
+            System.out.printf("  Measuring READ%n");
+            CollectionReaderDescription reader = createReaderDescription(
+                    BinaryCasReader.class,
+                    BinaryCasReader.PARAM_SOURCE_LOCATION, f);
+            
+            SummaryStatistics readStats = measureReadPerformance(reader, jcas, REPEATS);
+            
+            printStats(writeStats, readStats);
+            System.out.printf("  Size    %10d bytes%n", f.length());
+            System.out.printf("--------------------------------------------%n");
         }
         
         measureWriteSerializedCas(testdata, testFolder.newFile("dummy.bin"));
     }
     
-    private static void printStats(SummaryStatistics stats)
+    private static void printStats(String aTitle, SummaryStatistics aStats)
     {
-        System.out.printf("  Repeat  %10d times%n", stats.getN());
-        System.out.printf("  Total   %10.0f ms %n", stats.getSum());
-        System.out.printf("  Mean    %10.0f ms %n", stats.getMean());
-        System.out.printf("  Min     %10.0f ms %n", stats.getMin());
-        System.out.printf("  Max     %10.0f ms %n", stats.getMax());
+        System.out.printf("          %10s%n", aTitle, "READ");
+        System.out.printf("  Repeat  %10d times%n", aStats.getN());
+        System.out.printf("  Total   %10.0f ms%n", aStats.getSum());
+        System.out.printf("  Mean    %10.0f ms%n", aStats.getMean());
+        System.out.printf("  Min     %10.0f ms%n", aStats.getMin());
+        System.out.printf("  Max     %10.0f ms%n", aStats.getMax());
+    }
+    
+    private static void printStats(SummaryStatistics aWrite, SummaryStatistics aRead)
+    {
+        System.out.printf("          %10s         %10s%n", "WRITE", "READ");
+        System.out.printf("  Repeat  %10d times %10d times%n", aWrite.getN(), aRead.getN());
+        System.out.printf("  Total   %10.0f ms    %10.0f ms%n", aWrite.getSum(), aRead.getSum());
+        System.out.printf("  Mean    %10.0f ms    %10.0f ms%n", aWrite.getMean(), aRead.getMean());
+        System.out.printf("  Min     %10.0f ms    %10.0f ms%n", aWrite.getMin(), aRead.getMin());
+        System.out.printf("  Max     %10.0f ms    %10.0f ms%n", aWrite.getMax(), aRead.getMax());
     }
     
     @Before

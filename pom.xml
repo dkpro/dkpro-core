@@ -46,6 +46,13 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+        <repository>
+            <id>jcenter</id>
+            <url>http://jcenter.bintray.com</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
         <!-- For UIMA/uimaFIT RCs -->
         <!--  
         <repository>

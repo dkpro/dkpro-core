@@ -282,6 +282,9 @@ image::ts_segmentation.png[align="center"]
 |ClearNlpSegmenter
 |
 
+|JTokSegmenter
+|
+
 |LanguageToolSegmenter
 |
 

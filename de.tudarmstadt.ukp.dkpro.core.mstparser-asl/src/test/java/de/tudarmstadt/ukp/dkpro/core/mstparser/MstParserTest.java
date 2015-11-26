@@ -244,7 +244,7 @@ public class MstParserTest
                 "SYM", "TO", "UH", "VB", "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$",
                 "WRB", "``" };
 
-        String[] unmappedPos = { "$", "-LRB-", "-RRB-", "<root-POS>"};
+        String[] unmappedPos = { "$", "<root-POS>"};
 
         AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
@@ -292,7 +292,7 @@ public class MstParserTest
                 "POS", "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "TO", "VB", "VBD", "VBG", "VBN",
                 "VBP", "VBZ", "WDT", "WP", "WRB", "``" };
 
-        String[] unmappedPos = { "$","-LRB-", "-RRB-", "<root-POS>"};
+        String[] unmappedPos = { "$","<root-POS>"};
 
         String[] depTags = { "<no-type>", "ADJP", "ADVP", "CONJP", "DEP", "FRAG",
                 "NAC", "NP", "NP-OBJ", "NP-PRD", "NP-SBJ", "NX", "PP", "PRN", "PRT", "QP", "ROOT",

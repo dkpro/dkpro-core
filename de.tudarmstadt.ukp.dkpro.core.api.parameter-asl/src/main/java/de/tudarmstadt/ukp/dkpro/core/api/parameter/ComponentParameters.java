@@ -112,6 +112,8 @@ public final class ComponentParameters
 	// Annotation types
 	// =============================================================================================
 
+    private static final String PARAGRAPH = "Paragraph";
+    
 	private static final String SENTENCE = "Sentence";
 	
 	private static final String TOKEN = "Token";
@@ -154,6 +156,8 @@ public final class ComponentParameters
 	// Enable / disable reading or writing of particular annotation types.
 	// =============================================================================================
 	
+    public static final String PARAM_READ_PARAGRAPH = READ + PARAGRAPH;
+    
 	public static final String PARAM_READ_SENTENCE = READ + SENTENCE;
 	
 	public static final String PARAM_READ_TOKEN = READ + TOKEN;
@@ -176,6 +180,8 @@ public final class ComponentParameters
 	
 	public static final String PARAM_READ_NAMED_ENTITY = READ + NAMED_ENTITY;
 
+    public static final String PARAM_WRITE_PARAGRAPH = WRITE + PARAGRAPH;
+    
 	public static final String PARAM_WRITE_SENTENCE = WRITE + SENTENCE;
 	
 	public static final String PARAM_WRITE_TOKEN = WRITE + TOKEN;
