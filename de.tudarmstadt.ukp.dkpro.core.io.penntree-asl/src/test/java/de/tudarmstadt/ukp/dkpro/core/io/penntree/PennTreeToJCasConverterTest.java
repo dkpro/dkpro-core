@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2014
+ * Copyright 2015
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -35,7 +35,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 
 public class PennTreeToJCasConverterTest
 {
-
     @Test
     public void whenConvertingFromStringThenTheParentOfConstituensAreSet()
         throws UIMAException
@@ -69,8 +68,13 @@ public class PennTreeToJCasConverterTest
 
         Collection<Constituent> constituents = JCasUtil.select(aJCas, Constituent.class);
 
-        for (Constituent constituent : constituents)
-            if (!constituent.getConstituentType().equals("ROOT"))
+        for (Constituent constituent : constituents) {
+            if (!constituent.getConstituentType().equals("ROOT")) {
                 Assert.assertNotNull(constituent.getParent());
+            }
+            else {
+                Assert.assertNull(constituent.getParent());
+            }
+        }
     }
 }
