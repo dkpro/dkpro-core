@@ -192,6 +192,7 @@ public class PennTreeToJCasConverter
         constituent.setEnd(offsets[1]);
         constituent.setChildren(createFSArray(aJCas, children));
         constituent.addToIndexes();
+        constituent.setParent(parent);
         
         // We we created an additional ROOT node, then we need to set its offsets as well
         if (generatedParent) {
@@ -269,6 +270,7 @@ public class PennTreeToJCasConverter
         constituent.setBegin(children.get(0).getBegin());
         constituent.setEnd(children.get(children.size()-1).getEnd());
         constituent.setChildren(createFSArray(aJCas, children));
+        constituent.setParent(parent);
         constituent.addToIndexes();
         
         // We we created an additional ROOT node, then we need to set its offsets as well
