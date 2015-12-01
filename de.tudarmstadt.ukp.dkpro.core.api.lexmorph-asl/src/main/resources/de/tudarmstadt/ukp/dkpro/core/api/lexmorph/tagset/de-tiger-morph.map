@@ -111,7 +111,7 @@ gender.Com=\.Ind
 # Tagset: http://universaldependencies.github.io/docs/u/feat/Negative.html (2014-11-18)
 #
 #neg.Pos=
-neg.Neg=\.Neg
+negative.Neg=\.Neg
 
 #
 # Feature: numType
