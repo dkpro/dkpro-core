@@ -3,7 +3,7 @@
 These short guidelines will show you how to get a local copy of the dkpro page template and how to correctly import it into a special branch used for github websites (gh-pages). At the end you will have 
 
 - (on github) a branch **gh-pages** where the website for your project is stored
-- (locally) a seperate directory for the gh-pages branch of your project which (initially) includes the files of the dkpro-page-template
+- (locally) a separate directory for the gh-pages branch of your project which (initially) includes the files of the dkpro-page-template
 
 Below, replace YourProjectName with... your project name (e.g. dkpro-csniper, dkpro-statistics, ...)
 
