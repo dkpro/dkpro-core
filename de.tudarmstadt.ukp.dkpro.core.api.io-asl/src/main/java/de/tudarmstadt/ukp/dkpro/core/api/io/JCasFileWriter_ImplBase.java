@@ -29,6 +29,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.output.CloseShieldOutputStream;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -47,10 +48,10 @@ public abstract class JCasFileWriter_ImplBase
     protected static final String JAR_PREFIX = "jar:file:";
     
 	/**
-	 * Target location
+	 * Target location. If this parameter is not yet, data is written to stdout.
 	 */
 	public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
-	@ConfigurationParameter(name=PARAM_TARGET_LOCATION, mandatory=true)
+	@ConfigurationParameter(name=PARAM_TARGET_LOCATION, mandatory=false)
 	private String targetLocation;
 
     /**
@@ -122,6 +123,9 @@ public abstract class JCasFileWriter_ImplBase
     protected NamedOutputStream getOutputStream(JCas aJCas, String aExtension)
         throws IOException
     {
+        if (targetLocation == null) {
+            return new NamedOutputStream(null, new CloseShieldOutputStream(System.out));
+        }
         return getOutputStream(getRelativePath(aJCas), aExtension);
     }
 
@@ -133,7 +137,10 @@ public abstract class JCasFileWriter_ImplBase
     protected NamedOutputStream getOutputStream(String aRelativePath, String aExtension)
         throws IOException
     {
-        if (targetLocation.startsWith(JAR_PREFIX)) {
+        if (targetLocation == null) {
+            return new NamedOutputStream(null, new CloseShieldOutputStream(System.out));
+        }
+        else if (targetLocation.startsWith(JAR_PREFIX)) {
             if (zipOutputStream == null) {
                 zipPath = targetLocation.substring(JAR_PREFIX.length());
                 zipEntryPrefix = "";
@@ -279,7 +286,7 @@ public abstract class JCasFileWriter_ImplBase
         @Override
         public String toString()
         {
-            return getName();
+            return getName() != null ? getName() : "<stdout>";
         }
     }
     
