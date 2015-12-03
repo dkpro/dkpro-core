@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -123,7 +124,7 @@ public class TcfWriter
         // error" approach that we take to trying to merge with an existing file. In particular, if 
         // the attempt fails and we go without merging, we cannot delete the broken entry from the
         // ZIP file. 
-        if (getTargetLocation().startsWith(JAR_PREFIX)) {
+        if (StringUtils.startsWith(getTargetLocation(), JAR_PREFIX)) {
             throw new ResourceInitializationException(new IllegalStateException(
                     "TcfWriter cannot write to ZIP files."));
         }
@@ -171,7 +172,9 @@ public class TcfWriter
                         // Have to delete the output file from this try and will try again without
                         // merging. Deleting is necessary as not to trigger the overwrite safeguard
                         // in JCasFileWriter_ImplBase
-                        FileUtils.deleteQuietly(new File(docOS.getName()));
+                        if (docOS.getName() != null) {
+                            FileUtils.deleteQuietly(new File(docOS.getName()));
+                        }
                     }
                     closeQuietly(docOS);
                 }
