@@ -24,6 +24,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.output.CloseShieldOutputStream;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Type;
@@ -116,11 +117,23 @@ public class TokenizedTextWriter
         throws ResourceInitializationException
     {
         super.initialize(context);
-        getLogger().info("Writing to file " + getTargetLocation());
         try {
-            targetWriter = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream(getTargetLocation()),
-                    targetEncoding));
+            if (getTargetLocation() == null) {
+                getLogger().info("Writing to file <stdout>");
+                targetWriter = new BufferedWriter(new OutputStreamWriter(
+                        new CloseShieldOutputStream(System.out), targetEncoding));
+            }
+            else {
+                getLogger().info("Writing to file " + getTargetLocation());
+                targetWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(
+                        getTargetLocation()), targetEncoding));
+            }
+        }
+        catch (IOException e) {
+            throw new ResourceInitializationException(e);
+        }
+        
+        try {
             stopwords = stopwordsFile == null
                     ? Collections.emptySet()
                     : readStopwordsFile(stopwordsFile);
@@ -219,7 +232,14 @@ public class TokenizedTextWriter
         throws AnalysisEngineProcessException
     {
         IOUtils.closeQuietly(targetWriter);
-        getLogger().info("Output written to file " + getTargetLocation());
+        
+        if (getTargetLocation() == null) {
+            getLogger().info("Output written to file <stdout>");
+        }
+        else {
+            getLogger().info("Output written to file " + getTargetLocation());
+        }
+            
         super.collectionProcessComplete();
     }
 }

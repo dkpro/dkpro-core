@@ -261,99 +261,99 @@ E50	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T103 pos:T50
 E51	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T104 pos:T51
 E52	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T105 pos:T52
 E53	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T106 pos:T53
-E54	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T107 children:E55 children1:E56 children2:E6
+E54	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T107 parent:E101 children:E55 children1:E56 children2:E6
 A54	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E54 S
-E55	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T108 children:E1
+E55	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T108 parent:E54 children:E1
 A55	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E55 NP
-E56	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T109 children:E2 children1:E57
+E56	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T109 parent:E54 children:E2 children1:E57
 A56	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E56 VP
-E57	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T110 children:E3 children1:E58
+E57	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T110 parent:E56 children:E3 children1:E58
 A57	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E57 PP
-E58	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T111 children:E4 children1:E5
+E58	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T111 parent:E57 children:E4 children1:E5
 A58	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E58 NP
-E59	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T112 children:E60 children1:E61 children2:E17
+E59	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T112 parent:E102 children:E60 children1:E61 children2:E17
 A59	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E59 S
-E60	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T113 children:E7
+E60	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T113 parent:E59 children:E7
 A60	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E60 NP
-E61	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T114 children:E8 children1:E62
+E61	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T114 parent:E59 children:E8 children1:E62
 A61	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E61 VP
-E62	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T115 children:E9 children1:E63
+E62	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T115 parent:E61 children:E9 children1:E63
 A62	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E62 VP
-E63	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T116 children:E10 children1:E64
+E63	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T116 parent:E62 children:E10 children1:E64
 A63	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E63 PP
-E64	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T117 children:E65 children1:E67 children2:E70
+E64	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T117 parent:E63 children:E65 children1:E67 children2:E70
 A64	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E64 NP
-E65	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T118 children:E11 children1:E12
+E65	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T118 parent:E64 children:E11 children1:E12
 A65	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E65 NP
-E66	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T119 children:E13 children1:E69
+E66	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T119 parent:E68 children:E13 children1:E69
 A66	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E66 VP
-E67	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T120 children:E68
+E67	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T120 parent:E64 children:E68
 A67	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E67 SBAR
-E68	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T121 children:E66
+E68	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T121 parent:E67 children:E66
 A68	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E68 S
-E69	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T122 children:E14
+E69	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T122 parent:E66 children:E14
 A69	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E69 VP
-E70	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T123 children:E15 children1:E71
+E70	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T123 parent:E64 children:E15 children1:E71
 A70	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E70 PP
-E71	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T124 children:E16
+E71	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T124 parent:E70 children:E16
 A71	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E71 NP
-E72	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T125 children:E73 children1:E74 children2:E28
+E72	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T125 parent:E103 children:E73 children1:E74 children2:E28
 A72	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E72 S
-E73	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T126 children:E18
+E73	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T126 parent:E72 children:E18
 A73	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E73 NP
-E74	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T127 children:E19 children1:E75
+E74	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T127 parent:E72 children:E19 children1:E75
 A74	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E74 VP
-E75	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T128 children:E20 children1:E76 children2:E77
+E75	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T128 parent:E74 children:E20 children1:E76 children2:E77
 A75	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E75 VP
-E76	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T129 children:E21 children1:E22 children2:E23
+E76	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T129 parent:E75 children:E21 children1:E22 children2:E23
 A76	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E76 NP
-E77	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T130 children:E24 children1:E78
+E77	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T130 parent:E75 children:E24 children1:E78
 A77	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E77 PP
-E78	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T131 children:E25 children1:E26 children2:E27
+E78	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T131 parent:E77 children:E25 children1:E26 children2:E27
 A78	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E78 NP
-E79	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T132 children:E80 children1:E38 children2:E87 children3:E53
+E79	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T132 parent:E104 children:E80 children1:E38 children2:E87 children3:E53
 A79	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E79 S
-E80	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T133 children:E81 children1:E82
+E80	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T133 parent:E79 children:E81 children1:E82
 A80	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E80 S
-E81	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T134 children:E29
+E81	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T134 parent:E80 children:E29
 A81	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E81 NP
-E82	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T135 children:E30 children1:E83 children2:E84 children3:E86
+E82	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T135 parent:E80 children:E30 children1:E83 children2:E84 children3:E86
 A82	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E82 VP
-E83	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T136 children:E31 children1:E32
+E83	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T136 parent:E82 children:E31 children1:E32
 A83	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E83 NP
-E84	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T137 children:E33 children1:E85
+E84	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T137 parent:E82 children:E33 children1:E85
 A84	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E84 PP
-E85	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T138 children:E34 children1:E35 children2:E36
+E85	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T138 parent:E84 children:E34 children1:E35 children2:E36
 A85	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E85 NP
-E86	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T139 children:E37
+E86	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T139 parent:E82 children:E37
 A86	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E86 ADVP
-E87	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T140 children:E88 children1:E47 children2:E96 children3:E97 children4:E98
+E87	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T140 parent:E79 children:E88 children1:E47 children2:E96 children3:E97 children4:E98
 A87	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E87 S
-E88	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T141 children:E89 children1:E90
+E88	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T141 parent:E87 children:E89 children1:E90
 A88	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E88 SBAR
-E89	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T142 children:E39
+E89	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T142 parent:E88 children:E39
 A89	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E89 WHADVP
-E90	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T143 children:E91 children1:E92
+E90	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T143 parent:E88 children:E91 children1:E92
 A90	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E90 S
-E91	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T144 children:E40
+E91	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T144 parent:E90 children:E40
 A91	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E91 NP
-E92	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T145 children:E41 children1:E93
+E92	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T145 parent:E90 children:E41 children1:E93
 A92	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E92 VP
-E93	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T146 children:E42 children1:E94
+E93	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T146 parent:E92 children:E42 children1:E94
 A93	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E93 PP
-E94	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T147 children:E95 children1:E45 children2:E46
+E94	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T147 parent:E93 children:E95 children1:E45 children2:E46
 A94	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E94 NP
-E95	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T148 children:E43 children1:E44
+E95	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T148 parent:E94 children:E43 children1:E44
 A95	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E95 NP
-E96	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T149 children:E48
+E96	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T149 parent:E87 children:E48
 A96	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E96 NP
-E97	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T150 children:E49
+E97	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T150 parent:E87 children:E49
 A97	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E97 ADVP
-E98	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T151 children:E50 children1:E99
+E98	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T151 parent:E87 children:E50 children1:E99
 A98	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E98 VP
-E99	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T152 children:E51 children1:E100
+E99	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T152 parent:E98 children:E51 children1:E100
 A99	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E99 PP
-E100	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T153 children:E52
+E100	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T153 parent:E99 children:E52
 A100	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E100 NP
 E101	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-ROOT:T154 children:E54
 A101	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E101 ROOT
