@@ -145,8 +145,8 @@
 
 		<!-- FILE: english-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2014-05-20 | 2015-02-09 | db60237f6f42faac4c89e511f33960ec
-          - 2015-02-09 | 2015-12-04 | 17d93abadfd8786b9a36dfdfd12f8d98
-          - 2015-12-04 | now        | 441b51369b6888387a17a26a5dc2d146 
+          - 2015-02-09 | 2015-11-19 | 17d93abadfd8786b9a36dfdfd12f8d98
+          - 2015-11-19 | now        | 441b51369b6888387a17a26a5dc2d146 
 		  -->
     	<get 
     		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-par-linux-3.2-utf8.bin.gz" 
@@ -158,7 +158,7 @@
     		md5="441b51369b6888387a17a26a5dc2d146"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
-    		upstreamVersion="20151204"
+    		upstreamVersion="20151119"
     		metaDataVersion="1"
     		tool="tagger" 
     		language="en" 
@@ -237,8 +237,8 @@
 		  - 2013-02-14 | 2013-04-03 | 33359d3deca5f9acab7f3b5b38529e17
 		  - 2013-04-03 | 2013-10-07 | 30a9c4deed380e7986a4a76753ecde51
 		  - 2013-10-07 | 2014-05-20 | 8488c4319fac414802637b654a61db37
-		  - 2014-05-20 | 2015-12-04 | 48f14061833274842d6cf5ed3db7b903
-		  - 2015-12-04 | now        | ea8142cb5a0efc59226a0f5d41d690ac
+		  - 2014-05-20 | 2015-07-24 | 48f14061833274842d6cf5ed3db7b903
+		  - 2015-07-24 | now        | ea8142cb5a0efc59226a0f5d41d690ac
 		  -->
     	<get 
     		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/spanish-par-linux-3.2-utf8.bin.gz" 
@@ -250,7 +250,7 @@
     		md5="ea8142cb5a0efc59226a0f5d41d690ac"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
-    		upstreamVersion="20151204"
+    		upstreamVersion="20150724"
     		metaDataVersion="1"
     		tool="tagger" 
     		language="es" 
