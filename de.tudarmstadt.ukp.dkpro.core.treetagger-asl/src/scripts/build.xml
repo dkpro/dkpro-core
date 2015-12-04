@@ -154,7 +154,7 @@
 		<gunzip src="target/download/english-par-linux-3.2-utf8.bin.gz"/>
     	<install-stub-and-upstream-file 
     		file="target/download/english-par-linux-3.2-utf8.bin" 
-    		md5="17d93abadfd8786b9a36dfdfd12f8d98"
+    		md5="441b51369b6888387a17a26a5dc2d146"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20150209"
@@ -245,7 +245,7 @@
 		<gunzip src="target/download/spanish-par-linux-3.2-utf8.bin.gz"/>
     	<install-stub-and-upstream-file 
     		file="target/download/spanish-par-linux-3.2-utf8.bin" 
-    		md5="48f14061833274842d6cf5ed3db7b903"
+    		md5="ea8142cb5a0efc59226a0f5d41d690ac"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20140520"
