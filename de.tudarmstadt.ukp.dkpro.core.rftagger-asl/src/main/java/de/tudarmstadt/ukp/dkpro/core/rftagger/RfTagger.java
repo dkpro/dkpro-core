@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.lang.ProcessBuilder.Redirect;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -107,7 +108,7 @@ public class RfTagger extends JCasAnnotator_ImplBase {
 	private BufferedWriter writer;
 	private BufferedReader reader;
 	private MorphologicalFeaturesParser featuresParser;
-
+	
 	@Override
 	public void initialize(UimaContext aContext)
 			throws ResourceInitializationException {
@@ -139,7 +140,7 @@ public class RfTagger extends JCasAnnotator_ImplBase {
 				+ PARAMETER_FILE);
 		try {
 			ProcessBuilder pb = new ProcessBuilder();
-			// pb.redirectError(Redirect.INHERIT);
+			 pb.redirectError(Redirect.INHERIT);
 			pb.command(cmd);
 			process = pb.start();
 		} catch (IOException e) {
@@ -205,7 +206,6 @@ public class RfTagger extends JCasAnnotator_ImplBase {
 	public void process(JCas aJCas) throws AnalysisEngineProcessException {
 		
 		configure(aJCas);
-		
 		try {
 			for (Sentence sentence : JCasUtil.select(aJCas, Sentence.class)) {
 				StringBuilder sb = new StringBuilder();
@@ -217,14 +217,13 @@ public class RfTagger extends JCasAnnotator_ImplBase {
 
 				writeInput(sb);
 				annotateOutput(readOutput(), aJCas, tokens);
-
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new AnalysisEngineProcessException(e);
 		}
 	}
 
-	private void configure(JCas aJCas) throws AnalysisEngineProcessException{
+    private void configure(JCas aJCas) throws AnalysisEngineProcessException{
 		String modelEncoding = (String) modelProvider.getResourceMetaData()
 				.get("model.encoding");
 		if (modelEncoding == null) {
