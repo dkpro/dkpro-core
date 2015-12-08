@@ -139,6 +139,15 @@ public class StanfordPosTagger
     @ConfigurationParameter(name = PARAM_QUOTE_END, mandatory = false)
     private List<String> quoteEnd;
 	
+	/**
+     * Sentences with more tokens than the specified max amount will be ignored if this parameter
+     * is set to a value larger than zero. The default value zero will allow all sentences to be
+     * POS tagged.
+	 */
+	public static final String PARAM_MAX_SENTENCE_TOKENS = "maxSentenceTokens";
+	@ConfigurationParameter(name = PARAM_MAX_SENTENCE_TOKENS, mandatory = false)
+	private int maxSentenceTokens = 0;
+
 	private CasConfigurableProviderBase<MaxentTagger> modelProvider;
 	private MappingProvider posMappingProvider;
 
@@ -210,6 +219,8 @@ public class StanfordPosTagger
 
 		for (Sentence sentence : select(aJCas, Sentence.class)) {
 			List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
+			
+			if(maxSentenceTokens > 0 && tokens.size() > maxSentenceTokens) continue;
 
 			List<HasWord> words = new ArrayList<HasWord>(tokens.size());
 			for (Token t : tokens) {
