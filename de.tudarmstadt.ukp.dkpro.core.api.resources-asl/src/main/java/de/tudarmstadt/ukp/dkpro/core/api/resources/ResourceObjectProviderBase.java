@@ -101,6 +101,7 @@ public abstract class ResourceObjectProviderBase<M>
     public static final String PROP_REPO_OFFLINE = "dkpro.model.repository.offline";
     public static final String PROP_REPO_ID = "dkpro.model.repository.id";
     public static final String PROP_REPO_URL = "dkpro.model.repository.url";
+    public static final String PROP_REPO_CACHE = "dkpro.model.repository.cache";
 
     private static final String DEFAULT_REPO_ID = "ukp-model-releases";
 
@@ -739,6 +740,9 @@ public abstract class ResourceObjectProviderBase<M>
         ivySettings.loadDefault();
         ivySettings.configureRepositories(true);
         ivySettings.configureDefaultVersionMatcher();
+        if (System.getProperties().contains(PROP_REPO_CACHE)) {
+            ivySettings.setDefaultCache(new File(System.getProperty(PROP_REPO_CACHE)));
+        }
 
         // Add a resolver for the UKP model repository
         DependencyResolver modelResolver = getModelResolver();
