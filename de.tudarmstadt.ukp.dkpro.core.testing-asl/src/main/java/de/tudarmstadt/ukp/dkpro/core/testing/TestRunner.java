@@ -123,7 +123,10 @@ public class TestRunner
     {
         // No automatic downloading from repository during testing. This makes sure we fail if
         // models are not properly added as test dependencies.
-        System.setProperty(ResourceObjectProviderBase.PROP_REPO_OFFLINE, "true");
+        if (offline) {
+            System.setProperty(ResourceObjectProviderBase.PROP_REPO_OFFLINE, "true");
+        }
+        offline = true;
         
         JCas jcas = aEngine.newJCas();
 
@@ -141,5 +144,12 @@ public class TestRunner
         aEngine.process(jcas);
         
         return jcas;
+    }
+    
+    private static boolean offline = true;
+    
+    public static void autoloadModelsOnNextTestRun()
+    {
+        offline = false;
     }
 }
