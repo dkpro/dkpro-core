@@ -28,6 +28,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -98,8 +99,10 @@ public class RfTagger extends JCasAnnotator_ImplBase {
 	@ConfigurationParameter(name = PARAM_MORPH_MAPPING_LOCATION, mandatory = false)
 	private String morphMappingLocation;
 
+	private Log log = LogFactory.getLog(RfTagger.class);
+	
 	private static final String PARAMETER_FILE = "param.par";
-
+	
 	private MappingProvider mappingProvider;
 	private RuntimeProvider rfTaggerExecutables;
 	private ModelProviderBase<File> modelProvider;
@@ -136,6 +139,7 @@ public class RfTagger extends JCasAnnotator_ImplBase {
 	private void startExecutable() {
 		List<String> cmd = new ArrayList<>();
 		cmd.add(executableFile.getAbsolutePath());
+		cmd.add("-q"); //quiet mode
 		cmd.add(modelProvider.getResource().getAbsolutePath() + "/"
 				+ PARAMETER_FILE);
 		try {
@@ -189,7 +193,7 @@ public class RfTagger extends JCasAnnotator_ImplBase {
 	private void loadExecutable() {
 		PlatformDetector pd = new PlatformDetector();
 		String platform = pd.getPlatformId();
-		LogFactory.getLog(getClass()).info(
+		log.info(
 				"Load binary for platform: [" + platform + "]");
 
 		rfTaggerExecutables = new RuntimeProvider(
