@@ -102,6 +102,8 @@ public abstract class ResourceObjectProviderBase<M>
     public static final String PROP_REPO_ID = "dkpro.model.repository.id";
     public static final String PROP_REPO_URL = "dkpro.model.repository.url";
     public static final String PROP_REPO_CACHE = "dkpro.model.repository.cache";
+    
+    public static final String FORCE_AUTO_LOAD = "forceAutoLoad";
 
     private static final String DEFAULT_REPO_ID = "ukp-model-releases";
 
@@ -480,6 +482,9 @@ public abstract class ResourceObjectProviderBase<M>
             else {
                 URL initialUrl;
                 try {
+                    if (FORCE_AUTO_LOAD.equals(System.getProperty(PROP_REPO_OFFLINE))) {
+                        throw new IOException("Auto-loading forced");
+                    }
                     initialUrl = resolveLocation(modelLocation, loader, null);
                 }
                 catch (IOException e) {
@@ -740,7 +745,7 @@ public abstract class ResourceObjectProviderBase<M>
         ivySettings.loadDefault();
         ivySettings.configureRepositories(true);
         ivySettings.configureDefaultVersionMatcher();
-        if (System.getProperties().contains(PROP_REPO_CACHE)) {
+        if (System.getProperties().containsKey(PROP_REPO_CACHE)) {
             ivySettings.setDefaultCache(new File(System.getProperty(PROP_REPO_CACHE)));
         }
 
@@ -1014,6 +1019,52 @@ public abstract class ResourceObjectProviderBase<M>
         public void addURL(URL aUrl)
         {
             super.addURL(aUrl);
+        }
+
+        @Override
+        public URL getResource(String name)
+        {
+            if (FORCE_AUTO_LOAD.equals(System.getProperty(PROP_REPO_OFFLINE))) {
+                URL url = findResource(name);
+                if (url == null) {
+                    url = super.getResource(name);
+                }
+                return url;
+            }
+            else {
+                return super.getResource(name);
+            }
+        }
+
+        @Override
+        protected Class<?> loadClass(String name, boolean resolve)
+            throws ClassNotFoundException
+        {
+            if (FORCE_AUTO_LOAD.equals(System.getProperty(PROP_REPO_OFFLINE))) {
+                synchronized (getClassLoadingLock(name)) {
+                    // First, check if the class has already been loaded
+                    Class<?> c = findLoadedClass(name);
+                    if (c == null) {
+                        try {
+                            c = findClass(name);
+                        }
+                        catch (ClassNotFoundException e) {
+                            // ClassNotFoundException thrown if class not found
+                        }
+                        
+                        if (c == null) {
+                            c = super.loadClass(name, false);
+                        }
+                    }
+                    if (resolve) {
+                        resolveClass(c);
+                    }
+                    return c;
+                }
+            }
+            else {
+                return super.loadClass(name, resolve);
+            }
         }
     }
 }

@@ -25,14 +25,47 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class OpenNlpPosTaggerTest
 {
-	@Test
+    @Test
+    public void testEnglishAutoLoad()
+        throws Exception
+    {
+        String oldModelCache = System.setProperty(ResourceObjectProviderBase.PROP_REPO_CACHE, 
+                "target/test-output/models");
+        String oldOfflineMode = System.setProperty(ResourceObjectProviderBase.PROP_REPO_OFFLINE, 
+                ResourceObjectProviderBase.FORCE_AUTO_LOAD);
+        
+        try {
+            TestRunner.autoloadModelsOnNextTestRun();
+            runTest("en", null, "This is a test .",
+                    new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
+                    new String[] { "ART",  "V",   "ART", "NN",   "PUNC" });
+        }
+        finally {
+            if (oldModelCache != null) {
+                System.setProperty(ResourceObjectProviderBase.PROP_REPO_CACHE, oldModelCache);
+            }
+            else {
+                System.getProperties().remove(ResourceObjectProviderBase.PROP_REPO_CACHE);
+            }
+            if (oldOfflineMode != null) {
+                System.setProperty(ResourceObjectProviderBase.PROP_REPO_OFFLINE, oldOfflineMode);
+            }
+            else {
+                System.getProperties().remove(ResourceObjectProviderBase.PROP_REPO_OFFLINE);
+            }
+        }
+    }
+
+    @Test
 	public void testEnglish()
 		throws Exception
 	{
