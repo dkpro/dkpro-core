@@ -487,7 +487,7 @@ public abstract class ResourceCollectionReaderBase
                 if (isSingleLocation()) {
                     // If it was a single location, then use the parent folder as base
                     p = StringUtils.substringAfterLast(matchBase, "/");
-                    matchBase = StringUtils.substringBeforeLast(matchBase, "/");
+                    matchBase = StringUtils.substringBeforeLast(matchBase, "/") + '/';
                 }
                 Resource r = new Resource(loc, base, resource.getURI(), matchBase, p, resource);
                 result.add(r);

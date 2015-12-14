@@ -196,6 +196,11 @@ public abstract class JCasFileWriter_ImplBase
 		String docUri = meta.getDocumentUri();
 
 		if (!useDocumentId && (baseUri != null)) {
+	        // In some cases, the baseUri may not end with a slash - if so, we add one
+	        if (baseUri.length() > 0 && !baseUri.endsWith("/")) {
+	            baseUri += '/';
+	        }
+		    
 			String relativeDocumentPath;
 			if ((docUri == null) || !docUri.startsWith(baseUri)) {
 				throw new IllegalStateException("Base URI [" + baseUri
@@ -205,6 +210,12 @@ public abstract class JCasFileWriter_ImplBase
 			if (stripExtension) {
 				relativeDocumentPath = FilenameUtils.removeExtension(relativeDocumentPath);
 			}
+			
+			// relativeDocumentPath must not start with as slash - if there are any, remove them
+			while (relativeDocumentPath.startsWith("/")) {
+			    relativeDocumentPath = relativeDocumentPath.substring(1);
+			}
+			
 			return relativeDocumentPath;
 		}
 		else {
