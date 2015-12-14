@@ -53,6 +53,21 @@ public abstract class JCasFileWriter_ImplBase
 	public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
 	@ConfigurationParameter(name=PARAM_TARGET_LOCATION, mandatory=false)
 	private String targetLocation;
+	
+	/**
+	 * Treat target location as a single file name. This is particularly useful if only a single
+	 * input file is processed and the result should be written to a pre-defined output file instead
+	 * of deriving the file name from the document URI or document ID. It can also be useful if
+	 * the user wishes to force multiple input files to be written to a single target file. The
+	 * latter case does not work for all formats (e.g. binary, XMI, etc.), but can be useful, e.g.
+	 * for Conll-based formats. This option has no effect if the target location points to an
+	 * archive location (ZIP/JAR). The {@link #PARAM_COMPRESSION} is respected, but does not 
+	 * automatically add an extension. The {@link #PARAM_STRIP_EXTENSION} has no effect as the
+	 * original extension is not preserved.
+	 */
+    public static final String PARAM_SINGULAR_TARGET = "singularTarget";
+    @ConfigurationParameter(name=PARAM_SINGULAR_TARGET, mandatory=true, defaultValue="false")
+    private boolean singularTarget;
 
     /**
      * Choose a compression method. (default: {@link CompressionMethod#NONE})
@@ -95,6 +110,8 @@ public abstract class JCasFileWriter_ImplBase
     private String zipPath;
     private String zipEntryPrefix;
     
+    private OutputStream singularTargetStream;
+    
     protected CompressionMethod getCompressionMethod()
 	{
 		return compression;
@@ -116,6 +133,9 @@ public abstract class JCasFileWriter_ImplBase
     {
         if (zipOutputStream != null) {
             closeQuietly(zipOutputStream);
+        }
+        if (singularTargetStream != null) {
+            closeQuietly(singularTargetStream);
         }
         super.collectionProcessComplete();
     }
@@ -153,8 +173,14 @@ public abstract class JCasFileWriter_ImplBase
                 if (zipEntryPrefix.length() > 0 && !zipEntryPrefix.endsWith("/")) {
                     zipEntryPrefix += '/';
                 }
-                
-                zipOutputStream = new ZipOutputStream(new FileOutputStream(zipPath));
+
+                File zipFile = new File(zipPath);
+                if (!overwrite && zipFile.exists()) {
+                    throw new IOException("Target file [" + zipFile
+                            + "] already exists and overwriting not enabled.");
+                }
+
+                zipOutputStream = new ZipOutputStream(new FileOutputStream(zipFile));
             }
             
             // Begin new entry
@@ -167,6 +193,20 @@ public abstract class JCasFileWriter_ImplBase
             // collectionProcessComplete event is triggered
             return new ZipEntryOutputStream(JAR_PREFIX + zipPath + '!' + entry.getName(),
                     zipOutputStream);
+        }
+        else if (singularTarget) {
+            File outputFile = new File(targetLocation);
+            if (singularTargetStream == null) {
+                
+                if (!overwrite && outputFile.exists()) {
+                    throw new IOException("Target file [" + outputFile
+                            + "] already exists and overwriting not enabled.");
+                }
+                
+                singularTargetStream = CompressionUtils.getOutputStream(outputFile);
+            }
+            return new NamedOutputStream(outputFile.getAbsolutePath(),
+                    new CloseShieldOutputStream(singularTargetStream));
         }
         else {
             File outputFile = new File(targetLocation, aRelativePath + aExtension
