@@ -53,7 +53,7 @@
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.auebtools-gpl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.9.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -160,7 +160,7 @@
 					<dependency>
 						<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 						<artifactId>de.tudarmstadt.ukp.dkpro.core.auebtools-gpl</artifactId>
-						<version>1.8.0-SNAPSHOT</version>
+						<version>1.9.0-SNAPSHOT</version>
 					</dependency>
 				</dependencies>
 			</dependencyManagement>
