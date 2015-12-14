@@ -18,11 +18,12 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.io;
 
-import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
+import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.apache.uima.cas.CAS;
@@ -31,6 +32,7 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.resource.ExternalResourceDescription;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.CasCreationUtils;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -38,6 +40,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class ResourceCollectionReaderBaseTest
 {
+    @BeforeClass
+    public static void before()
+    {
+        // Route logging through log4j
+        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
+    }
+    
     @Test
     public void testClasspath()
         throws Exception
@@ -86,6 +95,20 @@ public class ResourceCollectionReaderBaseTest
         CollectionReader reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
                 "jar:file:src/test/resources/testfiles.zip",
+                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
+                        "[+]**/FileSetCollectionReaderBase.class",
+                        "[-]test*/ResourceCollectionReaderBase.class" });
+
+        searchForResourceCollectionReaderBase(reader);
+    }
+
+    @Test
+    public void testZip4()
+        throws Exception
+    {
+        String path = "jar:file:" + new File("src/test/resources/testfiles.zip").getAbsolutePath();
+        CollectionReader reader = createReader(DummyReader.class,
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, path,
                 ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
                         "[+]**/FileSetCollectionReaderBase.class",
                         "[-]test*/ResourceCollectionReaderBase.class" });
@@ -243,7 +266,15 @@ public class ResourceCollectionReaderBaseTest
         while (aReader.hasNext()) {
             aReader.getNext(cas);
             DocumentMetaData meta = DocumentMetaData.get(cas);
-            System.out.printf("Found: %s (base: %s)%n ", meta.getDocumentUri(), meta.getDocumentBaseUri());
+            System.out.printf("Found  : [%s]%n", meta.getDocumentUri());
+            System.out.printf("  Base : [%s]%n", meta.getDocumentBaseUri());
+            System.out.printf("  ColID: [%s]%n", meta.getCollectionId());
+            System.out.printf("  DocID: [%s]%n", meta.getDocumentId());
+            System.out.println();
+            
+            assertTrue(meta.getDocumentBaseUri().length() == 0
+                    || meta.getDocumentBaseUri().endsWith("/"));
+            
             if (meta.getDocumentUri().contains(goodNeedle)) {
                 found = true;
                 break;
