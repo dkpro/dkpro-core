@@ -37,6 +37,7 @@ import org.junit.rules.TemporaryFolder;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class XmiWriterReaderTest
 {
@@ -85,4 +86,7 @@ public class XmiWriterReaderTest
 		assertEquals(refText, cas.getDocumentText());
 		assertEquals("latin", cas.getDocumentLanguage());
 	}
+
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }
