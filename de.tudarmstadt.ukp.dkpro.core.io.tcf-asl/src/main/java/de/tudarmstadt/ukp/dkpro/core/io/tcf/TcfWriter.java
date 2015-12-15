@@ -172,7 +172,7 @@ public class TcfWriter
                         // Have to delete the output file from this try and will try again without
                         // merging. Deleting is necessary as not to trigger the overwrite safeguard
                         // in JCasFileWriter_ImplBase
-                        if (docOS.getName() != null) {
+                        if ((docOS != null) && (docOS.getName() != null)) {
                             FileUtils.deleteQuietly(new File(docOS.getName()));
                         }
                     }
