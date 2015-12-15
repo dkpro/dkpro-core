@@ -197,6 +197,7 @@ public class BinaryCasWriterReaderTest
                 BinaryCasWriter.class, 
                 BinaryCasWriter.PARAM_FORMAT, "6", 
                 BinaryCasWriter.PARAM_TARGET_LOCATION, targetZip,
+                BinaryCasWriter.PARAM_OVERWRITE, true,
                 BinaryCasWriter.PARAM_TYPE_SYSTEM_LOCATION, "typesystem.bin");
         
         writer.process(out);

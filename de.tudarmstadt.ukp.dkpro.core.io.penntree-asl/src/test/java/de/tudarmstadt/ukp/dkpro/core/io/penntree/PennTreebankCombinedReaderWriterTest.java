@@ -20,6 +20,8 @@ package de.tudarmstadt.ukp.dkpro.core.io.penntree;
 import static java.util.Arrays.asList;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.apache.uima.fit.factory.ConfigurationParameterFactory.canParameterBeSet;
+import static org.apache.uima.fit.factory.ConfigurationParameterFactory.setParameter;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.junit.Assert.assertEquals;
 
@@ -115,6 +117,10 @@ public class PennTreebankCombinedReaderWriterTest
 
         AnalysisEngineDescription writer = createEngineDescription(PennTreebankCombinedWriter.class,
                 extraWriterParams.toArray());
+
+        if (canParameterBeSet(writer, "overwrite")) {
+            setParameter(writer, "overwrite", true);
+        }
 
         runPipeline(reader, writer);
 

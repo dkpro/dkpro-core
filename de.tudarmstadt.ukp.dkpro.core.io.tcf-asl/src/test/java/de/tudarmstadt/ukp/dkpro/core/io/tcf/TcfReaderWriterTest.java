@@ -68,6 +68,7 @@ public class TcfReaderWriterTest
         AnalysisEngineDescription writer = createEngineDescription(
                 TcfWriter.class,
                 TcfWriter.PARAM_TARGET_LOCATION, "target/test-output/oneway",
+                TcfWriter.PARAM_OVERWRITE, true,
                 TcfWriter.PARAM_FILENAME_SUFFIX, ".xml",
                 TcfWriter.PARAM_STRIP_EXTENSION, true);
 
@@ -115,7 +116,6 @@ public class TcfReaderWriterTest
     }
     
     @Test
-    // @Ignore("The TCF library generates different xml namespaces and assertEquals fails on Jenkins ")
     public void testRoundtrip()
         throws Exception
     {
@@ -126,6 +126,7 @@ public class TcfReaderWriterTest
         AnalysisEngineDescription writer = createEngineDescription(
                 TcfWriter.class,
                 TcfWriter.PARAM_TARGET_LOCATION, "target/test-output/roundtrip",
+                TcfWriter.PARAM_OVERWRITE, true,
                 TcfWriter.PARAM_FILENAME_SUFFIX, ".xml",
                 TcfWriter.PARAM_STRIP_EXTENSION, true);
 

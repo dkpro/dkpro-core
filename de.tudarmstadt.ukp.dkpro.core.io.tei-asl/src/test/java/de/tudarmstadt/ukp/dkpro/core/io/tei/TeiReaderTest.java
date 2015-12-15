@@ -58,6 +58,7 @@ public class TeiReaderTest
 
         AnalysisEngine writer = createEngine(TextWriter.class,
         		TextWriter.PARAM_USE_DOCUMENT_ID, true,
+        		TextWriter.PARAM_OVERWRITE, true,
         		TextWriter.PARAM_TARGET_LOCATION, "target/digibibTest/");
 
         Map<String, Integer> actualSizes = new LinkedHashMap<String, Integer>();
