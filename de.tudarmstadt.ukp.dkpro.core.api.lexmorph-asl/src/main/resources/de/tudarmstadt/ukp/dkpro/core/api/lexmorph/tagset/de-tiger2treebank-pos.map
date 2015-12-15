@@ -5,6 +5,7 @@ ADJA=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
 
 ADJD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
 ADV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+PROADV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
 
 APPO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
 APPR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP

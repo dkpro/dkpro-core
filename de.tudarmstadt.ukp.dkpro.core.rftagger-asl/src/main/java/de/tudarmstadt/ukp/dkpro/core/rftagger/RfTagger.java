@@ -53,12 +53,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.RuntimeProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
-@TypeCapability(
-    inputs = { 
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, 
-    outputs = { 
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = { "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class RfTagger
     extends JCasAnnotator_ImplBase
 {
@@ -86,7 +82,6 @@ public class RfTagger
     /**
      * The character encoding used by the model.
      */
-    // FIXME This parameter is not yet used
     public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
     @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = false)
     protected String modelEncoding;
@@ -113,12 +108,14 @@ public class RfTagger
     private BufferedReader reader;
     private MorphologicalFeaturesParser featuresParser;
 
+    private String encodingLoadedFromModel;
+
     @Override
     public void initialize(UimaContext aContext)
         throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
+
         runtimeProvider = new RuntimeProvider(
                 "classpath:/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/");
 
@@ -152,10 +149,12 @@ public class RfTagger
 
         mappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
                 language, modelProvider);
-        
+
         featuresParser = new MorphologicalFeaturesParser();
-        featuresParser.setDefault(MorphologicalFeaturesParser.LOCATION,
-            "classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/${language}-${morph.tagset}-morph.map");
+        featuresParser
+                .setDefault(
+                        MorphologicalFeaturesParser.LOCATION,
+                        "classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/${language}-${morph.tagset}-morph.map");
         featuresParser.setOverride(MorphologicalFeaturesParser.LOCATION, morphMappingLocation);
         featuresParser.setOverride(MorphologicalFeaturesParser.LANGUAGE, language);
         featuresParser.addImport("morph.tagset", modelProvider);
@@ -169,9 +168,9 @@ public class RfTagger
                 PlatformDetector pd = new PlatformDetector();
                 String platform = pd.getPlatformId();
                 getLogger().info("Load binary for platform: [" + platform + "]");
-                
+
                 File executableFile = runtimeProvider.getFile("rft-annotate");
-                
+
                 List<String> cmd = new ArrayList<>();
                 cmd.add(executableFile.getAbsolutePath());
                 cmd.add("-q"); // quiet mode
@@ -180,16 +179,29 @@ public class RfTagger
                 pb.redirectError(Redirect.INHERIT);
                 pb.command(cmd);
                 process = pb.start();
+
+                writer = new BufferedWriter(new OutputStreamWriter(process.getOutputStream(),
+                        getEncoding()));
+                reader = new BufferedReader(new InputStreamReader(process.getInputStream(),
+                        getEncoding()));
             }
-            catch (IOException e) {
+            catch (Exception e) {
                 throw new AnalysisEngineProcessException(e);
             }
-            
-            // FIXME The model encoding (parameter + model metadata) are not used here yet
-            // The parameter (if specified) must override the model metadata)
-            writer = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
-            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
         }
+    }
+
+    private String getEncoding()
+    {
+        if (modelEncoding != null && !modelEncoding.isEmpty()) {
+            return modelEncoding;
+        }
+
+        if (encodingLoadedFromModel != null) {
+            return encodingLoadedFromModel;
+        }
+
+        return "utf-8";
     }
 
     @Override
@@ -198,7 +210,7 @@ public class RfTagger
     {
         configure(aJCas);
         ensureTaggerRunning();
-        
+
         try {
             for (Sentence sentence : JCasUtil.select(aJCas, Sentence.class)) {
                 StringBuilder sb = new StringBuilder();
@@ -223,17 +235,9 @@ public class RfTagger
         modelProvider.configure(aJCas.getCas());
         mappingProvider.configure(aJCas.getCas());
         featuresParser.configure(aJCas.getCas());
-        
-        // FIXME This model metadata information is not yet used
-        // Mind that a user might specify a model location manually - then there is no
-        // "model.encoding" metadata and the information must be picked up from the
-        // PARAM_MODEL_ENCODING. In any case, PARAM_MODEL_ENCODING should override the metadata
-        // from the model if the parameter is specified
-        String encoding = (String) modelProvider.getResourceMetaData().get("model.encoding");
-        if (encoding == null) {
-            throw new AnalysisEngineProcessException(new Throwable(
-                    "Model should contain encoding metadata"));
-        }
+
+        encodingLoadedFromModel = (String) modelProvider.getResourceMetaData()
+                .get("model.encoding");
     }
 
     private void annotateOutput(List<String> readOutput, JCas aJCas, List<Token> tokens)
