@@ -265,6 +265,10 @@ public abstract class JCasFileWriter_ImplBase
 			}
 
 			relativeDocumentPath = meta.getDocumentId();
+			
+            if (stripExtension) {
+                relativeDocumentPath = FilenameUtils.removeExtension(relativeDocumentPath);
+            }
 
 			if (escapeDocumentId) {
 				try {
