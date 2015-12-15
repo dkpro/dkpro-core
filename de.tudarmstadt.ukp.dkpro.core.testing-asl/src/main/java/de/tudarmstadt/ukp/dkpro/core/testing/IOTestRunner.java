@@ -178,7 +178,10 @@ public class IOTestRunner
             setParameter(aWriter, ComponentParameters.PARAM_TARGET_LOCATION, output);
         }
 
-        runPipeline(aReader, aWriter);
+        AnalysisEngineDescription metadataStripper = createEngineDescription(
+                DocumentMetaDataStripper.class);
+        
+        runPipeline(aReader, metadataStripper, aWriter);
 
         String expected = FileUtils.readFileToString(reference, "UTF-8");
         String actual = FileUtils.readFileToString(new File(output, aOutputFile), "UTF-8");
