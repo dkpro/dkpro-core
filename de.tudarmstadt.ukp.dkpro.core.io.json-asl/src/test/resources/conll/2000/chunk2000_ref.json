@@ -27,7 +27,7 @@
     "_InitialView" : {
       "POS" : [33,  47,  61,  75,  89,  103,  117,  131,  145,  159,  173,  187,  201,  215,  229,  243,  257,  271,  285,  299,  313,  327,  341,  355,  369,  383,  397,  411,  425,  439,  453,  467,  481,  495,  509,  523,  537,  645,  659,  673,  687,  701,  715,  729,  743,  757,  771,  785,  799,  813,  827,  841,  855,  869,  883,  897,  911,  925,  939,  953,  967,  981,  995,  1009,  1087,  1101,  1115,  1129,  1143,  1157,  1171,  1185,  1199,  1213,  1227,  1241,  1255,  1269,  1283,  1297,  1311,  1325,  1339,  1353,  1367,  1381,  1395,  1409,  1423,  1437,  1451,  1465,  1479 ], 
       "DocumentMetaData" : [
-        {"sofa" : 6,  "end" : 552,  "language" : "x-unspecified",  "documentTitle" : "chunk2000_test.conll",  "documentId" : "chunk2000_test.conll",  "documentUri" : "file:/Users/bluefire/git/dkpro-core/de.tudarmstadt.ukp.dkpro.core.io.json-asl/src/test/resources/conll/2000/chunk2000_test.conll",  "collectionId" : "file:/Users/bluefire/git/dkpro-core/de.tudarmstadt.ukp.dkpro.core.io.json-asl/src/test/resources/conll/2000/",  "documentBaseUri" : "file:/Users/bluefire/git/dkpro-core/de.tudarmstadt.ukp.dkpro.core.io.json-asl/src/test/resources/conll/2000/",  "isLastSegment" : false } ], 
+        {"sofa" : 6,  "end" : 552,  "language" : "x-unspecified",  "documentTitle" : "chunk2000_test.conll",  "documentId" : "chunk2000_test.conll",  "isLastSegment" : false } ], 
       "Sentence" : [
         {"sofa" : 6,  "end" : 215 }, 
         {"sofa" : 6,  "begin" : 217,  "end" : 372 }, 
