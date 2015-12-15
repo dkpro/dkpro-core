@@ -1,59 +1,59 @@
-#begin document (sample.txt); part 000
-sample.txt   0   0       John   NNP   (TOP(S(NP*)      john   -   -          -   (PERSON)       (A0) (1)
-sample.txt   0   1       went   VBD         (VP*         go go.02   -          -         *        (V*) -
-sample.txt   0   2         to    TO         (PP*         to   -   -          -         *          *  -
-sample.txt   0   3        the    DT         (NP*        the   -   -          -         *          *  (2
-sample.txt   0   4     market    NN          *)))    market   -   -          -         *        (A1) 2)
-sample.txt   0   5          .     .           *))         .   -   -          -         *          *  -
+#begin document (en-orig.conll); part 000
+en-orig.conll   0   0       John   NNP   (TOP(S(NP*)      john   -   -          -   (PERSON)       (A0) (1)
+en-orig.conll   0   1       went   VBD         (VP*         go go.02   -          -         *        (V*) -
+en-orig.conll   0   2         to    TO         (PP*         to   -   -          -         *          *  -
+en-orig.conll   0   3        the    DT         (NP*        the   -   -          -         *          *  (2
+en-orig.conll   0   4     market    NN          *)))    market   -   -          -         *        (A1) 2)
+en-orig.conll   0   5          .     .           *))         .   -   -          -         *          *  -
 
-sample.txt   0   0         He   PRP   (TOP(S(NP*)        he   -   -          -         *        (A0) (1)
-sample.txt   0   1        was   VBD         (VP*         be   -   -          -         *          *  -
-sample.txt   0   2    looking   VBG         (VP*       look look.01   -          -         *        (V*) -
-sample.txt   0   3        for    IN         (PP*        for   -   -          -         *          *  -
-sample.txt   0   4          a    DT      (NP(NP*          a   -   -          -         *          *  (3
-sample.txt   0   5    present    JJ            *)   present   -   -          -         *        (A1) -
-sample.txt   0   6         to    TO  (SBAR(S(VP*         to   -   -          -         *          *  -
-sample.txt   0   7       give    VB      (VP*))))      give   -   -          -         *          *  -
-sample.txt   0   8         to    TO         (PP*         to   -   -          -         *          *  -
-sample.txt   0   9       Mary   NNP    (NP*))))))      mary   -   -          -   (PERSON)         *  3)|(4)
-sample.txt   0  10          .     .           *))         .   -   -          -         *          *  -
+en-orig.conll   0   0         He   PRP   (TOP(S(NP*)        he   -   -          -         *        (A0) (1)
+en-orig.conll   0   1        was   VBD         (VP*         be   -   -          -         *          *  -
+en-orig.conll   0   2    looking   VBG         (VP*       look look.01   -          -         *        (V*) -
+en-orig.conll   0   3        for    IN         (PP*        for   -   -          -         *          *  -
+en-orig.conll   0   4          a    DT      (NP(NP*          a   -   -          -         *          *  (3
+en-orig.conll   0   5    present    JJ            *)   present   -   -          -         *        (A1) -
+en-orig.conll   0   6         to    TO  (SBAR(S(VP*         to   -   -          -         *          *  -
+en-orig.conll   0   7       give    VB      (VP*))))      give   -   -          -         *          *  -
+en-orig.conll   0   8         to    TO         (PP*         to   -   -          -         *          *  -
+en-orig.conll   0   9       Mary   NNP    (NP*))))))      mary   -   -          -   (PERSON)         *  3)|(4)
+en-orig.conll   0  10          .     .           *))         .   -   -          -         *          *  -
 
-sample.txt   0   0         He   PRP   (TOP(S(NP*)        he   -   -          -         *        (A0) (1)
-sample.txt   0   1        had   VBD         (VP*       have   -   -          -         *          *  -
-sample.txt   0   2        met   VBN         (VP*       meet meet.02   -          -         *        (V*) -
-sample.txt   0   3        her  PRP$         (NP*        her   -   -          -         *          *  (5|(6)
-sample.txt   0   4       last    JJ            *       last   -   -          -         *          *  -
-sample.txt   0   5       year    NN            *)      year   -   -          -         *    (AM-TMP) 5)
-sample.txt   0   6         at    IN         (PP*         at   -   -          -         *          *  -
-sample.txt   0   7        the    DT         (NP*        the   -   -          -         *          *  (7
-sample.txt   0   8        fun    NN            *        fun   -   -          -         *          *  -
-sample.txt   0   9       fair    NN         *))))      fair   -   -          -         *        (A1) 7)
-sample.txt   0  10          .     .           *))         .   -   -          -         *          *  -
+en-orig.conll   0   0         He   PRP   (TOP(S(NP*)        he   -   -          -         *        (A0) (1)
+en-orig.conll   0   1        had   VBD         (VP*       have   -   -          -         *          *  -
+en-orig.conll   0   2        met   VBN         (VP*       meet meet.02   -          -         *        (V*) -
+en-orig.conll   0   3        her  PRP$         (NP*        her   -   -          -         *          *  (5|(6)
+en-orig.conll   0   4       last    JJ            *       last   -   -          -         *          *  -
+en-orig.conll   0   5       year    NN            *)      year   -   -          -         *    (AM-TMP) 5)
+en-orig.conll   0   6         at    IN         (PP*         at   -   -          -         *          *  -
+en-orig.conll   0   7        the    DT         (NP*        the   -   -          -         *          *  (7
+en-orig.conll   0   8        fun    NN            *        fun   -   -          -         *          *  -
+en-orig.conll   0   9       fair    NN         *))))      fair   -   -          -         *        (A1) 7)
+en-orig.conll   0  10          .     .           *))         .   -   -          -         *          *  -
 
-sample.txt   0   0       They   PRP (TOP(S(S(NP*)      they   -   -          -         *        (A0)                     *                      *  (8)
-sample.txt   0   1        had   VBD         (VP*       have have.03   -          -         *        (V*)                   (V*)                   (V*) -
-sample.txt   0   2          a    DT         (NP*          a   -   -          -         *          *                      *                      *  (9
-sample.txt   0   3       ride    NN            *)      ride   -   -          -         *        (A1)                     *                      *  9)
-sample.txt   0   4         on    IN         (PP*         on   -   -          -         *          *                      *                      *  -
-sample.txt   0   5        the    DT         (NP*        the   -   -          -         *          *                      *                      *  (10
-sample.txt   0   6     ferris    JJ            *     ferris   -   -          -         *          *                      *                      *  -
-sample.txt   0   7      wheel    NN           *))     wheel   -   -          -         *          *                      *                      *  10)
-sample.txt   0   8   together    RB     (ADVP*)))  together   -   -          -         *          *                      *                      *  -
-sample.txt   0   9        and    CC            *        and   -   -          -         *          *                      *                      *  -
-sample.txt   0  10       when   WRB (S(SBAR(WHADVP*)      when   -   -          -         *          *              (R-AM-TMP)                     *  -
-sample.txt   0  11         he   PRP       (S(NP*)        he   -   -          -         *          *                    (A0)                     *  (1)
-sample.txt   0  12     looked   VBD         (VP*       look look.01   -          -         *        (V*)                   (V*)               (AM-TMP) -
-sample.txt   0  13       into    IN         (PP*       into   -   -          -         *          *                      *                      *  -
-sample.txt   0  14       Mary   NNP      (NP(NP*       mary   -   -          -   (PERSON)         *                      *                      *  (11|(4
-sample.txt   0  15         's   POS            *)         '   -   -          -         *          *                      *                      *  4)
-sample.txt   0  16       blue    JJ            *       blue   -   -          -         *          *                      *                      *  -
-sample.txt   0  17       eyes   NNS        *)))))       eye   -   -          -         *          *                    (A1)                     *  11)
-sample.txt   0  18          ,     ,            *          ,   -   -          -         *          *                      *                      *  -
-sample.txt   0  19       John   NNP         (NP*)      john   -   -          -   (PERSON)         *                      *                    (A1) (1)
-sample.txt   0  20 immediately    RB       (ADVP*) immediately   -   -          -         *          *                      *                (AM-TMP) -
-sample.txt   0  21       fell   VBD         (VP*       fall fall.01   -          -         *        (V*)                   (V*)                   (V*) -
-sample.txt   0  22         in    IN         (PP*         in   -   -          -         *          *                      *                      *  -
-sample.txt   0  23       love    NN      (NP*))))      love   -   -          -         *          *                      *                      *  -
-sample.txt   0  24          .     .           *))         .   -   -          -         *          *                      *                      *  -
+en-orig.conll   0   0       They   PRP (TOP(S(S(NP*)      they   -   -          -         *        (A0)                     *                      *  (8)
+en-orig.conll   0   1        had   VBD         (VP*       have have.03   -          -         *        (V*)                   (V*)                   (V*) -
+en-orig.conll   0   2          a    DT         (NP*          a   -   -          -         *          *                      *                      *  (9
+en-orig.conll   0   3       ride    NN            *)      ride   -   -          -         *        (A1)                     *                      *  9)
+en-orig.conll   0   4         on    IN         (PP*         on   -   -          -         *          *                      *                      *  -
+en-orig.conll   0   5        the    DT         (NP*        the   -   -          -         *          *                      *                      *  (10
+en-orig.conll   0   6     ferris    JJ            *     ferris   -   -          -         *          *                      *                      *  -
+en-orig.conll   0   7      wheel    NN           *))     wheel   -   -          -         *          *                      *                      *  10)
+en-orig.conll   0   8   together    RB     (ADVP*)))  together   -   -          -         *          *                      *                      *  -
+en-orig.conll   0   9        and    CC            *        and   -   -          -         *          *                      *                      *  -
+en-orig.conll   0  10       when   WRB (S(SBAR(WHADVP*)      when   -   -          -         *          *              (R-AM-TMP)                     *  -
+en-orig.conll   0  11         he   PRP       (S(NP*)        he   -   -          -         *          *                    (A0)                     *  (1)
+en-orig.conll   0  12     looked   VBD         (VP*       look look.01   -          -         *        (V*)                   (V*)               (AM-TMP) -
+en-orig.conll   0  13       into    IN         (PP*       into   -   -          -         *          *                      *                      *  -
+en-orig.conll   0  14       Mary   NNP      (NP(NP*       mary   -   -          -   (PERSON)         *                      *                      *  (11|(4
+en-orig.conll   0  15         's   POS            *)         '   -   -          -         *          *                      *                      *  4)
+en-orig.conll   0  16       blue    JJ            *       blue   -   -          -         *          *                      *                      *  -
+en-orig.conll   0  17       eyes   NNS        *)))))       eye   -   -          -         *          *                    (A1)                     *  11)
+en-orig.conll   0  18          ,     ,            *          ,   -   -          -         *          *                      *                      *  -
+en-orig.conll   0  19       John   NNP         (NP*)      john   -   -          -   (PERSON)         *                      *                    (A1) (1)
+en-orig.conll   0  20 immediately    RB       (ADVP*) immediately   -   -          -         *          *                      *                (AM-TMP) -
+en-orig.conll   0  21       fell   VBD         (VP*       fall fall.01   -          -         *        (V*)                   (V*)                   (V*) -
+en-orig.conll   0  22         in    IN         (PP*         in   -   -          -         *          *                      *                      *  -
+en-orig.conll   0  23       love    NN      (NP*))))      love   -   -          -         *          *                      *                      *  -
+en-orig.conll   0  24          .     .           *))         .   -   -          -         *          *                      *                      *  -
 
 #end document
