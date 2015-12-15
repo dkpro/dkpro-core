@@ -1,3 +1,9 @@
+# This file contains a tag-mapping as it is used by the German model of the RfTagger. 
+# The mapping is a modified version of the STTS tagset as the RfTagger.
+# A fine-grained tag distinction is replaced by the morphological information the RfTagger outputs (e.g. tense, etc.)
+# The de-tiger-morph file contains the morphological mappings.
+# https://www.sketchengine.co.uk/xdocumentation/wiki/tagsets/german_rftagger
+
 # Catch-all rule
 *=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
 
