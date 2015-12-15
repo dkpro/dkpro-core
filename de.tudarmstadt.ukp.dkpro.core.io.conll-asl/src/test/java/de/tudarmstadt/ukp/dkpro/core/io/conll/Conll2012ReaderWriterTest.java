@@ -34,6 +34,7 @@ public class Conll2012ReaderWriterTest
     {
         testRoundTrip(
                 createReaderDescription(Conll2012Reader.class,
+                        Conll2012Reader.PARAM_USE_HEADER_METADATA, false, 
                         Conll2012Reader.PARAM_READ_LEMMA, true), 
                 createEngineDescription(Conll2012Writer.class), 
                 "conll/2012/en-orig.conll");

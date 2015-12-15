@@ -61,7 +61,8 @@ public class BratReaderWriterTest
         throws Exception
     {
         testOneWay(
-                createReaderDescription(Conll2012Reader.class), 
+                createReaderDescription(Conll2012Reader.class,
+                        Conll2012Reader.PARAM_USE_HEADER_METADATA, false), 
                 createEngineDescription(BratWriter.class), 
                 "conll/2012/en-ref.ann",
                 "conll/2012/en-orig.conll");
@@ -87,7 +88,8 @@ public class BratReaderWriterTest
                         Conll2012Reader.PARAM_READ_LEMMA, false,
                         Conll2012Reader.PARAM_READ_NAMED_ENTITY, false,
                         Conll2012Reader.PARAM_READ_SEMANTIC_PREDICATE, false,
-                        Conll2012Reader.PARAM_READ_COREFERENCE, false), 
+                        Conll2012Reader.PARAM_READ_COREFERENCE, false, 
+                        Conll2012Reader.PARAM_USE_HEADER_METADATA, false), 
                 createEngineDescription(BratWriter.class), 
                 "conll/2012/en-ref-min.ann",
                 "conll/2012/en-orig.conll");
