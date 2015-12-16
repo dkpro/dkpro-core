@@ -17,15 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.rftagger;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
-import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.junit.Rule;
@@ -34,8 +27,9 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
+import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class RfTaggerTest
 {
@@ -46,106 +40,64 @@ public class RfTaggerTest
     public void testGerman()
         throws Exception
     {
-        JCas runTest = runTest("de", "Er nahm meine Fackel und schlug sie dem Bär ins Gesicht.",
-                new String[] { "Er", "nahm", "meine", "Fackel", "und", "schlug", "sie", "dem",
-                        "Bär", "ins", "Gesicht", "." }, new String[] { "PRO", "VFIN", "PRO", "N",
-                        "CONJ", "VFIN", "PRO", "ART", "N", "APPRART", "N", "SYM" }, new String[] {
-                        "PR", "V", "PR", "NN", "CONJ", "V", "PR", "ART", "NN", "PP", "NN", "PUNC" });
+        JCas runTest = runTest("de", "Er nahm meine Fackel und schlug sie dem Bär ins Gesicht .",
+               new String[] { "Er", "nahm", "meine", "Fackel", "und", "schlug", "sie", "dem", "Bär", "ins", "Gesicht", "." }, 
+               new String[] { "PRO", "VFIN", "PRO", "N", "CONJ", "VFIN", "PRO", "ART", "N", "APPRART", "N", "SYM" }, 
+               new String[] { "PR", "V", "PR", "NN", "CONJ", "V", "PR", "ART", "NN", "PP", "NN", "PUNC" });
 
+        verifyTokens(runTest);
+        verifyPartOfSpeech(runTest);
         verifyMorphologicalAnnotation(runTest);
     }
-    
-    // FIXME Should use AssertAnnotation.assertMorph
-    private void verifyMorphologicalAnnotation(JCas runTest)
+
+    private void verifyPartOfSpeech(JCas runTest)
     {
-        List<Token> tokens = new ArrayList<Token>(JCasUtil.select(runTest, Token.class));
-
-        // 1st token "Er"
-        Token token1 = tokens.get(0);
-        MorphologicalFeatures morph = token1.getMorph();
-        assertTrue(morph != null);
-        assertEquals("3", morph.getPerson());
-        assertEquals("Masc", morph.getGender());
-        assertEquals("Nom", morph.getCase());
-        assertEquals("Sing", morph.getNumber());
-        assertEquals(null, morph.getDefiniteness());
-        assertEquals("Prs", morph.getPronType());
-
-        // 4th token "Fackel"
-        Token token4 = tokens.get(3);
-        morph = token4.getMorph();
-        assertTrue(morph != null);
-        assertEquals(null, morph.getPerson());
-        assertEquals("Fem", morph.getGender());
-        assertEquals("Acc", morph.getCase());
-        assertEquals("Sing", morph.getNumber());
-        assertEquals(null, morph.getDefiniteness());
-        assertEquals(null, morph.getPronType());
-
-        // 8th token "dem"
-        Token token8 = tokens.get(7);
-        morph = token8.getMorph();
-        assertTrue(morph != null);
-        assertEquals(null, morph.getPerson());
-        assertEquals("Masc", morph.getGender());
-        assertEquals("Dat", morph.getCase());
-        assertEquals("Sing", morph.getNumber());
-        assertEquals("Def", morph.getDefiniteness());
-        assertEquals(null, morph.getPronType());
+        AssertAnnotations.assertPOS(
+                new String[] { "PR", "V", "PR", "NN", "CONJ", "V", "PR", "ART", "NN", "PP", "NN", "PUNC" }, 
+                new String[] { "PRO", "VFIN", "PRO", "N", "CONJ", "VFIN", "PRO", "ART", "N", "APPRART", "N", "SYM" },  
+                JCasUtil.select(runTest, POS.class));
     }
 
-    // FIXME Should use TestRunner.runTest() - cf SfstAnnotatorTest
+    private void verifyTokens(JCas runTest)
+    {
+        AssertAnnotations.assertToken(new String[] 
+                { 
+                "Er", "nahm", "meine", "Fackel", "und", "schlug", "sie", "dem", "Bär", "ins", "Gesicht", "." 
+                }, 
+                JCasUtil.select(runTest, Token.class));
+    }
+
+    private void verifyMorphologicalAnnotation(JCas runTest)
+    {
+
+        AssertAnnotations
+                .assertMorph(
+                        new String[] {
+                                "[  0,  2]     -     -  Nom    -    -  Masc    -    -  Sing      -  3    -  Prs    -     -      -     - Er (PRO.Pers.Subst.3.Nom.Sg.Masc)",
+                                "[  3,  7]     -     -    -    -    -   Com    -    -  Sing      -  3    -    -    -  Past      -     - nahm (VFIN.Full.3.Sg.Past.Ind)",
+                                "[  8, 13]     -     -  Acc    -  Pos   Fem    -    -  Sing      -  -  Yes    -    -     -      -     - meine (PRO.Poss.Attr.-.Acc.Sg.Fem)",
+                                "[ 14, 20]     -     -  Acc    -    -   Fem    -    -  Sing      -  -    -    -    -     -      -     - Fackel (N.Reg.Acc.Sg.Fem)",
+                                "[ 21, 24]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - und (CONJ.Coord.-)",
+                                "[ 25, 31]     -     -    -    -    -   Com    -    -  Sing      -  3    -    -    -  Past      -     - schlug (VFIN.Full.3.Sg.Past.Ind)",
+                                "[ 32, 35]     -     -  Acc    -    -     -    -    -  Plur      -  3    -  Prs    -     -      -     - sie (PRO.Pers.Subst.3.Acc.Pl.*)",
+                                "[ 36, 39]     -     -  Dat  Def  Cmp  Masc    -    -  Sing      -  -    -    -    -     -      -     - dem (ART.Def.Dat.Sg.Masc)",
+                                "[ 40, 43]     -     -  Dat    -  Cmp  Masc    -    -  Sing      -  -    -    -    -     -      -     - Bär (N.Reg.Dat.Sg.Masc)",
+                                "[ 44, 47]     -     -  Acc    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - ins (APPRART.Acc.Sg.Neut)",
+                                "[ 48, 55]     -     -  Acc    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Gesicht (N.Reg.Acc.Sg.Neut)",
+                                "[ 56, 57]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (SYM.Pun.Sent)" },
+                        JCasUtil.select(runTest, MorphologicalFeatures.class));
+    }
+
     private JCas runTest(String language, String testDocument, String[] tokens, String[] tags,
             String[] tagClasses)
         throws Exception
     {
-        AnalysisEngine tokenizer = createEngine(BreakIteratorSegmenter.class);
+        AnalysisEngineDescription tagger = AnalysisEngineFactory.createEngineDescription(
+                RfTagger.class, RfTagger.PARAM_LANGUAGE, language, RfTagger.PARAM_VARIANT,
+                "tiger2treebank");
 
-        AnalysisEngine tagger = createEngine(RfTagger.class, RfTagger.PARAM_LANGUAGE, language,
-                RfTagger.PARAM_VARIANT, "tiger2treebank"
-        // ,
-        // RfTagger.PARAM_POS_MAPPING_LOCATION,
-        // "classpath:de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/de-tiger2treebank-pos.map",
-        // RfTagger.PARAM_MORPH_MAPPING_LOCATION,
-        // "classpath:de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/de-tiger-morph.map"
-        );
+        JCas jcas = TestRunner.runTest(tagger, language, testDocument);
 
-        JCas aJCas = tagger.newJCas();
-        aJCas.setDocumentLanguage(language);
-        aJCas.setDocumentText(testDocument);
-
-        tokenizer.process(aJCas);
-        tagger.process(aJCas);
-
-        // test tokens
-        checkTokens(tokens, select(aJCas, Token.class));
-
-        // test POS annotations
-        if (tagClasses != null && tags != null) {
-            checkTags(tagClasses, tags, select(aJCas, POS.class));
-        }
-
-        return aJCas;
-    }
-
-    // FIXME Should be replaced with AssertAnnotations.assertToken
-    private void checkTokens(String[] expected, Collection<Token> actual)
-    {
-        int i = 0;
-        for (Token tokenAnnotation : actual) {
-            assertEquals("In position " + i, expected[i], tokenAnnotation.getCoveredText());
-            i++;
-        }
-    }
-
-    // FIXME Should be replaced with AssertAnnotations.assertPOS
-    private void checkTags(String[] tagClasses, String[] tags, Collection<POS> actual)
-    {
-        int i = 0;
-        for (POS posAnnotation : actual) {
-            assertEquals("In position " + i, tagClasses[i], posAnnotation.getType().getShortName());
-            assertEquals("In position " + i, tags[i], posAnnotation.getPosValue());
-            i++;
-        }
+        return jcas;
     }
 }
