@@ -127,6 +127,7 @@ public class RfTagger
                 setDefault(ARTIFACT_ID, "${groupId}.rftagger-model-${language}-${variant}");
                 setDefault(LOCATION,
                         "classpath:/${package}/lib/tagger-${language}-${variant}.properties");
+                setDefaultVariantsLocation("${package}/lib/tagger-default-variants.map");
 
                 setOverride(LOCATION, modelLocation);
                 setOverride(LANGUAGE, language);
@@ -151,10 +152,8 @@ public class RfTagger
                 language, modelProvider);
 
         featuresParser = new MorphologicalFeaturesParser();
-        featuresParser
-                .setDefault(
-                        MorphologicalFeaturesParser.LOCATION,
-                        "classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/${language}-${morph.tagset}-morph.map");
+        featuresParser.setDefault(MorphologicalFeaturesParser.LOCATION,
+            "classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/${language}-${morph.tagset}-morph.map");
         featuresParser.setOverride(MorphologicalFeaturesParser.LOCATION, morphMappingLocation);
         featuresParser.setOverride(MorphologicalFeaturesParser.LANGUAGE, language);
         featuresParser.addImport("morph.tagset", modelProvider);
