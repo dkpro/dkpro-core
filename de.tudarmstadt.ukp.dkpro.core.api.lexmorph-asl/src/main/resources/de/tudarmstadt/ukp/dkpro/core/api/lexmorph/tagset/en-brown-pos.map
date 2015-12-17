@@ -1,85 +1,187 @@
-# Brown ta$set as in DKPro Toolbox
+# Brown tagset as in DKPro Toolbox
+#
+# http://clu.uni.no/icame/brown/bcm.html#bc6
 # 
-NN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
-pct=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
-IN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
-AT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
-DTI=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
-DTX=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
-NNS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
-NNS$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
-NP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
-NRS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
-NPS$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
-JJ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
-VB=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-VBD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-VBN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-CD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
-CC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
-CS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
-VBG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-MD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-TO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
-RB=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
-RB$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
-PPS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
-AP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
-PP$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
-PP$$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
-BEDZ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-BE=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-BEZ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-DT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
-NR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
-WDT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
-OD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
-CD$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
-VBZ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-WPS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
-WP$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
-PPSS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
-PN$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
-NN$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N
-NEG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
-PPO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
-QL=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
-QLP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
-RP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
-RP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
-DTS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
-NP$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N
-HVZ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-HVN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-HVG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-WRB=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
-BER=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-BEM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-BEN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-EX=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
-DT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
-HV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-BED=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-HVD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-RBR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
-ABN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
-NPS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N
-JJT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
-BEG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-PN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
-JJR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
-DOD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-ABX=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
-JJS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
-NNSG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N
-PPL=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
-DOZ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-DO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# sentence closer (. ; ? !)
+.=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+# left paren
+(=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# right paren
+)=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# not, n't
+#*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# dash
+-=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# comma
+,=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# colon
+:=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# pre-qualifier (quite, rather)
 ABL=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+# pre-quantifier (half, all)
+ABN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+# pre-quantifier (both)
+ABX=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+# post-determiner (many, several, next)
+AP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+# article (a, the, no)
+AT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+# be
+BE=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# were
+BED=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# was
+BEDZ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# being
+BEG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# am
+BEM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# been
+BEN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# are, art
+BER=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# is
+BEZ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# coordinating conjunction (and, or)
+CC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+# cardinal numeral (one, two, 2, etc.)
+CD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
+# subordinating conjunction (if, although)
+CS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+# do
+DO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# did
+DOD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# does
+DOZ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# singular determiner (this, that)
+DT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+# singular or plural determiner/quantifier (some, any)
+DTI=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+# plural determiner (these, those)
+DTS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+# determiner/double conjunction (either)
+DTX=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+# existentil there
+EX=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+# foreign word (hyphenated before regular tag)
+FW=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# word occurring in headline (hyphenated after regular tag)
+HL=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# have
+HV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# had (past tense)
+HVD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# having
+HVG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# had (past participle)
+HVN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# has
+HVZ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# preposition
+IN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+# adjective
+JJ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+# comparative adjective
+JJR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+# semantically superlative adjective (chief, top)
+JJS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+# morphologically superlative adjective (biggest)
+JJT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+# modal auxiliary (can, should, will)
+MD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# cited word (hyphenated after regular tag)
+NC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# singular or mass noun
+NN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+# possessive singular noun
+NN$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+# plural noun
+NNS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+# possessive plural noun
+NNS$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+# proper noun or part of name phrase     
+NP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
+# possessive proper noun
+NP$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
+# plural proper noun
+NPS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
+# possessive plural proper noun
+NPS$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
+# adverbial noun (home, today, west)
+NR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+# plural adverbial noun
+NRS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+# ordinal numeral (first, 2nd)
+OD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
+# nominal pronoun (everybody, nothing)
+PN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# possessive nominal pronoun
+PN$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# possessive personal pronoun (my, our)
+PP$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# second (nominal) possessive pronoun (mine, ours)
+PP$$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# singular reflexive/intensive personal pronoun (myself)
+PPL=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# plural reflexive/intensive personal pronoun (ourselves)
 PPLS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
-WPO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
-NR$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N
+# objective personal pronoun (me, him, it, them)
+PPO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# 3rd. singular nominative pronoun (he, she, it, one)
+PPS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# other nominative personal pronoun (I, we, they, you)
+PPSS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# qualifier (very, fairly)
+QL=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+# post-qualifier (enough, indeed)
+QLP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+# adverb
+RB=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+# comparative adverb
+RBR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+# superlative adverb
 RBT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+# nominal adverb (here then, indoors)
+RN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+# adverb/particle (about, off, up)
+RP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+# word occurring in title (hyphenated after regular tag)
+TL=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# infinitive marker to
+TO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+# interjection, exclamation
 UH=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRT
+# verb, base form
+VB=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# verb, past tense
+VBD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# verb, present participle/gerund
+VBG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# verb, past participle
+VBN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# verb, 3rd. singular present
+VBZ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# wh- determiner (what, which)
+WDT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+# possessive wh- pronoun (whose)
+WP$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# objective wh- pronoun (whom, which, that)
+WPO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# nominative wh- pronoun (who, which, that)
+WPS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# wh- qualifier (how)
 WQL=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+# wh- adverb (how, where, when)
+WRB=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+
+# The following tags appear in the NLTK Brown Corpus (?) but are not part of the 
+# regular Brown corpus tagset (http://clu.uni.no/icame/brown/bcm.html#bc6)
+pct=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+RB$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+CD$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
+NEG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+NNSG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N
+NR$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N
+
 *=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
