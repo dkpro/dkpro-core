@@ -114,7 +114,7 @@ VVGN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
 # . end-of-sentence period 
 .=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 # : dashes, colons 
-:=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+\:=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 # “ left quote 
 ``=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 # ” right quote 

@@ -59,7 +59,7 @@ public class MappingsTest
                     Class.forName(typeName);
                 }
                 catch (Throwable e) {
-                    System.out.printf("%s FAILED: %s %n", tag, e.getMessage());
+                    System.out.printf("%s No type with name: %s %n", tag, e.getMessage());
                     failure = true;
                 }
             }
