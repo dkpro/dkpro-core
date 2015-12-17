@@ -1,0 +1,186 @@
+<!--
+
+    Copyright 2007-2014    
+    Ubiquitous Knowledge Processing (UKP) Lab
+    Technische Universität Darmstadt
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see http://www.gnu.org/licenses/.
+
+-->
+<project basedir="../.." default="separate-jars">
+	<import>
+		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.6.0/ant-macros.xml"/>
+	</import>
+
+	<!-- 
+	  - Output package configuration
+	  -->
+	<property name="outputPackage" value="de/tudarmstadt/ukp/dkpro/core/lingpipe/lib"/>
+
+	<target name="local-maven">
+		<property name="install-artifact-mode" value="local"/>
+		<antcall target="separate-jars"/>
+	</target>
+	
+	<target name="remote-maven">
+		<property name="install-artifact-mode" value="remote"/>
+		<antcall target="separate-jars"/>
+	</target>
+
+	<target name="separate-jars" depends="en"/>
+
+	<target name="en">
+		<antcall target="en-tagger-bio-genia"/>
+        <antcall target="en-tagger-bio-medpost"/>
+        <antcall target="en-tagger-general-brown"/>
+        <antcall target="en-ner-news-muc6"/>
+        <antcall target="en-ner-bio-genetag"/>
+        <antcall target="en-ner-bio-genia"/>
+	</target>
+
+	<target name="en-tagger-bio-genia">
+		<mkdir dir="target/download"/>
+		<!-- FILE: pos-en-bio-genia.HiddenMarkovModel - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2011-06-23 | now        | 69029ed4ddbf01094aca18d135430648
+		  -->
+    	<get 
+    		src="http://alias-i.com/lingpipe/demos/models/pos-en-bio-genia.HiddenMarkovModel" 
+    		dest="target/download/pos-en-bio-genia.HiddenMarkovModel" 
+    		skipexisting="true"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/pos-en-bio-genia.HiddenMarkovModel" 
+    		md5="69029ed4ddbf01094aca18d135430648"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.lingpipe"
+    		upstreamVersion="20110623"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="en" 
+    		variant="bio-genia" 
+    		extension="bin">
+            <metadata>
+                <entry key="pos.tagset" value="ptb"/>
+            </metadata>
+		</install-stub-and-upstream-file>
+	</target>
+
+    <target name="en-tagger-bio-medpost">
+        <mkdir dir="target/download"/>
+        <!-- FILE: pos-en-bio-medpost.HiddenMarkovModel - - - - - - - - - - - - - - - - - - - - - - -
+          - 2011-06-23 | now        | c28529a6dbb01164ad4daad7af798f43
+          -->
+        <get 
+            src="http://alias-i.com/lingpipe/demos/models/pos-en-bio-medpost.HiddenMarkovModel" 
+            dest="target/download/pos-en-bio-medpost.HiddenMarkovModel" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/pos-en-bio-medpost.HiddenMarkovModel" 
+            md5="c28529a6dbb01164ad4daad7af798f43"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.lingpipe"
+            upstreamVersion="20110623"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="en" 
+            variant="bio-medpost" 
+            extension="bin">
+            <metadata>
+                <entry key="pos.tagset" value="medpost"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
+	
+    <target name="en-tagger-general-brown">
+        <mkdir dir="target/download"/>
+        <!-- FILE: pos-en-general-brown.HiddenMarkovModel - - - - - - - - - - - - - - - - - - - - - - -
+          - 2011-06-23 | now        | 6405e5654d9360844cfd99cda54e39c0
+          -->
+        <get 
+            src="http://alias-i.com/lingpipe/demos/models/pos-en-general-brown.HiddenMarkovModel" 
+            dest="target/download/pos-en-general-brown.HiddenMarkovModel" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/pos-en-general-brown.HiddenMarkovModel" 
+            md5="6405e5654d9360844cfd99cda54e39c0"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.lingpipe"
+            upstreamVersion="20110623"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="en" 
+            variant="general-brown" 
+            extension="bin">
+            <metadata>
+                <entry key="pos.tagset" value="brown"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
+	
+    <target name="en-ner-news-muc6">
+        <get 
+            src="http://alias-i.com/lingpipe/demos/models/ne-en-news-muc6.AbstractCharLmRescoringChunker" 
+            dest="target/download/ne-en-news-muc6.AbstractCharLmRescoringChunker" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/ne-en-news-muc6.AbstractCharLmRescoringChunker" 
+            md5="980f050f3f74f879fe6130fd01c17988"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.lingpipe"
+            tool="ner" 
+            language="en" 
+            variant="news-muc6" 
+            upstreamVersion="20110623"
+            metaDataVersion="1"
+            extension="bin">     
+        </install-stub-and-upstream-file>       
+    </target>
+
+    <target name="en-ner-bio-genetag">
+        <get 
+            src="http://alias-i.com/lingpipe/demos/models/ne-en-bio-genetag.HmmChunker" 
+            dest="target/download/ne-en-bio-genetag.HmmChunker" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/ne-en-bio-genetag.HmmChunker" 
+            md5="8e1a19ebfffa4aaf941e4e7f6864ea03"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.lingpipe"
+            tool="ner" 
+            language="en" 
+            variant="bio-genetag" 
+            upstreamVersion="20110623"
+            metaDataVersion="1"
+            extension="bin">     
+        </install-stub-and-upstream-file>       
+    </target>
+
+    <target name="en-ner-bio-genia">
+        <get 
+            src="http://alias-i.com/lingpipe/demos/models/ne-en-bio-genia.TokenShapeChunker" 
+            dest="target/download/ne-en-bio-genia.TokenShapeChunker" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/ne-en-bio-genia.TokenShapeChunker" 
+            md5="31a215b29258a3d3ee5f8521fb66a459"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.lingpipe"
+            tool="ner" 
+            language="en" 
+            variant="bio-genia" 
+            upstreamVersion="20110623"
+            metaDataVersion="1"
+            extension="bin">     
+        </install-stub-and-upstream-file>       
+    </target>
+</project>
