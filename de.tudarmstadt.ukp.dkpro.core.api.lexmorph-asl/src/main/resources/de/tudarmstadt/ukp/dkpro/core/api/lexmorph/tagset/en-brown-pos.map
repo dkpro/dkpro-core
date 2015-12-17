@@ -15,7 +15,7 @@
 # comma
 ,=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
 # colon
-:=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+\:=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
 # pre-qualifier (quite, rather)
 ABL=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
 # pre-quantifier (half, all)
