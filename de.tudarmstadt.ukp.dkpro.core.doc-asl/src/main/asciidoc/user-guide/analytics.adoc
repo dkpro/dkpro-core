@@ -148,6 +148,9 @@ image::ts_lemmatization.png[align="center"]
 [options="header"]
 |====
 |Component|Description
+|LingPipeNamedEntityRecognizer
+|
+
 | OpenNlpNameFinder
 |
 
@@ -245,6 +248,9 @@ image::ts_part-of-speech.png[align="center"]
 // | LbjPosTagger
 // | (not in release)
 
+|LingPipePosTagger
+|
+
 |MatePosTagger
 |
 
@@ -286,6 +292,9 @@ image::ts_segmentation.png[align="center"]
 |
 
 |LanguageToolSegmenter
+|
+
+|LingPipeSegmenter
 |
 
 |OpenNlpSegmenter
