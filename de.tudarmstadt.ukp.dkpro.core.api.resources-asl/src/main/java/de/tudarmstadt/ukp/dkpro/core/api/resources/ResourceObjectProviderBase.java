@@ -22,6 +22,7 @@ import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils.resolveL
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -41,6 +42,7 @@ import java.util.WeakHashMap;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.commons.lang.reflect.FieldUtils;
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -60,6 +62,8 @@ import org.apache.ivy.util.Message;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.apache.uima.fit.factory.ConfigurationParameterFactory;
+import org.apache.uima.fit.internal.ReflectionUtil;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -180,6 +184,8 @@ public abstract class ResourceObjectProviderBase<M>
 
     private static Map<ResourceHandle, Object> cache = new WeakHashMap<ResourceHandle, Object>();
 
+    private Map<String, String> autoOverrides = new HashMap<>();
+    
     /**
      * Maintain a reference to the handle for the currently loaded resource. This handle is used
      * as a key in the resource cache and makes sure that the resource is not removed from the
@@ -317,6 +323,38 @@ public abstract class ResourceObjectProviderBase<M>
         setDefault(PACKAGE, contextClass.getPackage().getName().replace('.', '/'));
     }
 
+    public Map<String, String> getAutoOverrides()
+    {
+        return autoOverrides;
+    }
+    
+    public void addAutoOverride(String aParameter, String aProperty)
+    {
+        autoOverrides.put(aParameter, aProperty);
+    }
+    
+    public void applyAutoOverrides(Object aObject)
+    {
+        for (Field field : ReflectionUtil.getFields(aObject)) {
+            if (ConfigurationParameterFactory.isConfigurationParameterField(field)) {
+                String parameterName = ConfigurationParameterFactory
+                        .getConfigurationParameterName(field);
+                
+                // Check if there is an auto-override for this parameter
+                String property = autoOverrides.get(parameterName);
+                
+                if (property != null) {
+                    try {
+                        setOverride(property, (String) FieldUtils.readField(field, aObject, true));
+                    }
+                    catch (IllegalAccessException e) {
+                        throw new IllegalStateException(e);
+                    }
+                }
+            }
+        }
+    }
+    
     /**
      * Tries to get the version of the required model from the dependency management section of the
      * Maven POM belonging to the context object.
