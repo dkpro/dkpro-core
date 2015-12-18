@@ -199,12 +199,7 @@ public class SfstAnnotator
             }
         };
 
-        featuresParser = new MorphologicalFeaturesParser();
-        featuresParser.setDefault(MorphologicalFeaturesParser.LOCATION, 
-                "classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/${language}-${morph.tagset}-morph.map");
-        featuresParser.setOverride(MorphologicalFeaturesParser.LOCATION, morphMappingLocation);
-        featuresParser.setOverride(MorphologicalFeaturesParser.LANGUAGE, language);
-        featuresParser.addImport("morph.tagset", modelProvider);
+        featuresParser = new MorphologicalFeaturesParser(this, modelProvider);
         
         // provider for the sfst binary
         runtimeProvider = new RuntimeProvider("classpath:/de/tudarmstadt/ukp/dkpro/core/sfst/bin/");
