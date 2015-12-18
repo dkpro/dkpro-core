@@ -35,7 +35,8 @@
 		<antcall target="separate-jars"/>
 	</target>
 
-	<target name="separate-jars" depends="install-executables,install-models"/>
+	<target name="separate-jars" depends="install-executables,models"/>
+	
 	<target name="install-executables">
 		<property name="version.bin" value="20130430.0"/>
 
@@ -45,15 +46,15 @@
 		<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/windows-x86_64"/>
 
 		<get 
-			    		src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20130430-windows-x86_64.tar.gz" 
-			    		dest="target/download/20130430-windows-x86_64.tar.gz" 
-			    		skipexisting="true"/>
+    		src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20130430-windows-x86_64.tar.gz" 
+    		dest="target/download/20130430-windows-x86_64.tar.gz" 
+    		skipexisting="true"/>
 		<gunzip 
-						src="target/download/20130430-windows-x86_64.tar.gz"
-						dest="target/download/20130430-windows-x86_64.tar"/>
+			src="target/download/20130430-windows-x86_64.tar.gz"
+			dest="target/download/20130430-windows-x86_64.tar"/>
 		<untar 
-					src="target/download/20130430-windows-x86_64.tar"
-					dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/windows-x86_64">
+			src="target/download/20130430-windows-x86_64.tar"
+			dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/windows-x86_64">
 			<patternset>
 				<include name="*/*" />
 			</patternset>
@@ -61,29 +62,29 @@
 		</untar>
 		<delete dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/windows-x86_64"/>
 		<propertyfile
-				    file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/windows-x86_64/manifest.properties">
+		    file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/windows-x86_64/manifest.properties">
 			<entry  key="rft-annotate" value="executable"/>
 			<entry  key="rft-train" value="executable"/>
 			<entry  key="rft-print" value="executable"/>
 		</propertyfile>
 
 		<echo file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/windows-x86_64/README">
-					rf tagger version 2013-04-30
-				</echo>
+			rf tagger version 2013-04-30
+		</echo>
 
 		<!-- LINUX 32 bit -->
 		<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/linux-x86_32"/>
 
 		<get 
-			    		src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20130430-linux-x86_32.tar.gz" 
-			    		dest="target/download/20130430-linux-x86_32.tar.gz" 
-			    		skipexisting="true"/>
+    		src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20130430-linux-x86_32.tar.gz" 
+    		dest="target/download/20130430-linux-x86_32.tar.gz" 
+    		skipexisting="true"/>
 		<gunzip 
-						src="target/download/20130430-linux-x86_32.tar.gz"
-						dest="target/download/20130430-linux-x86_32.tar"/>
+			src="target/download/20130430-linux-x86_32.tar.gz"
+			dest="target/download/20130430-linux-x86_32.tar"/>
 		<untar 
-					src="target/download/20130430-linux-x86_32.tar"
-					dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/linux-x86_32">
+			src="target/download/20130430-linux-x86_32.tar"
+			dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/linux-x86_32">
 			<patternset>
 				<include name="*/*" />
 			</patternset>
@@ -98,22 +99,22 @@
 		</propertyfile>
 
 		<echo file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/linux-x86_32/README">
-					rf tagger version 2013-04-30
-				</echo>
+			rf tagger version 2013-04-30
+		</echo>
 
 		<!-- LINUX 64 bit -->
 		<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/linux-x86_64"/>
 
 		<get 
-			    		src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20130430-linux-x86_64.tar.gz" 
-			    		dest="target/download/20130430-linux-x86_64.tar.gz" 
-			    		skipexisting="true"/>
+    		src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20130430-linux-x86_64.tar.gz" 
+    		dest="target/download/20130430-linux-x86_64.tar.gz" 
+    		skipexisting="true"/>
 		<gunzip 
-						src="target/download/20130430-linux-x86_64.tar.gz"
-						dest="target/download/20130430-linux-x86_64.tar"/>
+			src="target/download/20130430-linux-x86_64.tar.gz"
+			dest="target/download/20130430-linux-x86_64.tar"/>
 		<untar 
-					src="target/download/20130430-linux-x86_64.tar"
-					dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/linux-x86_64">
+			src="target/download/20130430-linux-x86_64.tar"
+			dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/linux-x86_64">
 			<patternset>
 				<include name="*/*" />
 			</patternset>
@@ -128,19 +129,19 @@
 		</propertyfile>
 
 		<echo file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/linux-x86_64/README">
-					rf tagger version 2013-04-30
-				</echo>
+			rf tagger version 2013-04-30
+		</echo>
 
 		<!-- OSX -->
 		<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/osx-x86_64"/>
 
 		<get 
-	    		src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20130430-osx-x86_64.tar.gz" 
-	    		dest="target/download/20130430-osx-x86_64.tar.gz" 
-	    		skipexisting="true"/>
+    		src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20130430-osx-x86_64.tar.gz" 
+    		dest="target/download/20130430-osx-x86_64.tar.gz" 
+    		skipexisting="true"/>
 		<gunzip 
-				src="target/download/20130430-osx-x86_64.tar.gz"
-				dest="target/download/20130430-osx-x86_64.tar"/>
+			src="target/download/20130430-osx-x86_64.tar.gz"
+			dest="target/download/20130430-osx-x86_64.tar"/>
 		<untar 
 			src="target/download/20130430-osx-x86_64.tar"
 			dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/osx-x86_64">
@@ -185,38 +186,238 @@
 		<delete dir="target/download"/>
 	</target>
 
-	<target name="install-models">
+    <target name="download-rftagger">
+        <mkdir dir="target/download"/>
+            
+        <get src="http://www.cis.uni-muenchen.de/~schmid/tools/RFTagger/data/RFTagger.tar.gz" 
+            dest="target/download/RFTagger.tar.gz" 
+            skipexisting="true"/>
+        <untar src="target/download/RFTagger.tar.gz" 
+            dest="target/download/" 
+            compression="gzip">
+            <patternset>
+                <include name="**/*.par" />
+            </patternset>
+            <flattenmapper />
+        </untar>
+    	<!--
+        <untar src="target/download/RFTagger.tar.gz" 
+            dest="target/download/" 
+            compression="gzip"/>
+        --> 
+    </target>
+    
+	<target name="models" depends="cz,de,hu,ru,sk,sl"/>
+	
+    <target name="cz">
+        <antcall target="cz-cac"/>
+    </target>
 
-		<mkdir dir="target/download"/>
+    <target name="cz-cac" depends="download-rftagger">
+        <mkdir dir="target/download"/>
+        
+        <!-- FILE: czech.par - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2015-07-28 | now        | e89f7ee8207ba4e49f7ad8cc8f52ec47
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/czech.par" 
+            md5="e89f7ee8207ba4e49f7ad8cc8f52ec47"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
+            upstreamVersion="20150728"
+            metaDataVersion="1"
+            tool="morph" 
+            language="cz"
+            variant="cac" 
+            extension="par">
+            <metadata>
+            	<!--
+                  The Czech parameter file was trained on the Czech Academic Corpus 1.0
+                  (http://ufal.mff.cuni.cz/rest/CAC/cac_10.html).
+                -->
+                <entry key="model.encoding" value="UTF-8" />
+                <entry key="pos.tagset" value="cac" />
+            	<!-- http://ufal.mff.cuni.cz/rest/CAC/doc-cac10/cac-guide/eng/html/chapter12.html -->
+                <entry key="morph.tagset" value="cac-rftagger" />
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
 
-		<get src="http://www.cis.uni-muenchen.de/~schmid/tools/RFTagger/data/RFTagger.tar.gz" 
-								    		dest="target/download/RFTagger.tar.gz" 
-								    		skipexisting="true"/>
-		<untar src="target/download/RFTagger.tar.gz" 
-											dest="target/download/" 
-											compression="gzip"/>
+    <target name="de">
+        <antcall target="de-tiger"/>
+    </target>
 
-		<!-- GERMAN -->
-		<mkdir dir="target/download/german"/>
+    <target name="de-tiger" depends="download-rftagger">
+        <mkdir dir="target/download"/>
+        
+        <!-- FILE: german.par - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2015-09-28 | now        | 365a63f36771637c4c97086661b7431e
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/german.par" 
+            md5="365a63f36771637c4c97086661b7431e"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
+            upstreamVersion="20150928"
+            metaDataVersion="1"
+            tool="morph" 
+            language="de"
+            variant="tiger" 
+            extension="par">
+            <metadata>  
+                <!--
+                The German parameter file was trained on the Tiger2 treebank. 
+                (http://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora/tiger.html)
+                -->
+                <entry key="model.encoding" value="UTF-8" />
+                <entry key="pos.tagset" value="tiger-rftagger" />
+                <entry key="morph.tagset" value="tiger-rftagger" />
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
 
-		<copy file="target/download/RFTagger/lib/german.par" tofile="target/download/german/param.par"/>
-		<copy file="target/download/RFTagger/lib/german-rft-tagger-lemma-lexicon.txt" tofile="target/download/german/german-rft-tagger-lemma-lexicon.txt"/>
-		<copy file="target/download/RFTagger/lib/german-abbreviations" tofile="target/download/german/german-abbreviations"/>
+    <target name="hu">
+        <antcall target="hu-szeged"/>
+    </target>
 
-		<install-stub-and-upstream-folder 
-		folder="target/download/german" 
-		groupId="de.tudarmstadt.ukp.dkpro.core" 
-		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
-		upstreamVersion="20150928"
-		metaDataVersion="1"
-		tool="tagger"
-		language="de"
-		variant="tiger2treebank">
-			<metadata>
-				<entry key="model.encoding" value="UTF-8" />
-				<entry key="pos.tagset" value="tiger2treebank" />
-				<entry key="morph.tagset" value="tiger" />
-			</metadata>
-		</install-stub-and-upstream-folder>
-	</target>
+    <target name="hu-szeged" depends="download-rftagger">
+        <mkdir dir="target/download"/>
+        
+        <!-- FILE: hungarian.par - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2015-07-28 | now        | 0d77450d9b42c8f60eb9d8827305c2fb
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/hungarian.par" 
+            md5="0d77450d9b42c8f60eb9d8827305c2fb"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
+            upstreamVersion="20150728"
+            metaDataVersion="1"
+            tool="morph" 
+            language="hu"
+            variant="szeged" 
+            extension="par">
+            <metadata>
+            	<!--
+                The Hungarian parameter file was trained on the Szeged treebank 2.0
+                (http://www.inf.u-szeged.hu/projectdirs/hlt/).
+            	-->
+                <entry key="model.encoding" value="UTF-8" />
+                <entry key="pos.tagset" value="szeged-rftagger" />
+                <entry key="morph.tagset" value="szeged-rftagger" />
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
+
+    <target name="ru">
+        <antcall target="ru-ric"/>
+    </target>
+
+    <target name="ru-ric" depends="download-rftagger">
+        <mkdir dir="target/download"/>
+        
+        <!-- FILE: russian.par - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2015-07-28 | now        | 01b88e73e65ee4e5af8155c68e14b2aa
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/russian.par" 
+            md5="01b88e73e65ee4e5af8155c68e14b2aa"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
+            upstreamVersion="20150728"
+            metaDataVersion="1"
+            tool="morph" 
+            language="ru"
+            variant="ric" 
+            extension="par">
+            <metadata>
+            	<!--
+                The Russian parameter file was trained on the corpus
+                i-ru-sample.txt.gz which was kindly provided by Serge Sharoff.        
+                It is a 5mln word subset from the Russian Internet Corpus 
+                (Sharoff, 2006 in http://wackybook.sslmit.unibo.it/)      
+            	-->
+                <entry key="model.encoding" value="UTF-8" />
+                <entry key="pos.tagset" value="ric-rftagger" />
+                <entry key="morph.tagset" value="ric-rftagger" />
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
+
+    <target name="sk">
+        <antcall target="sk-snk"/>
+    </target>
+
+    <target name="sk-snk" depends="download-rftagger">
+        <mkdir dir="target/download"/>
+        
+        <!-- FILE: slovak.par - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2015-07-28 | now        | 5f4e9e037f98af44e429ecee46174b82
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/slovak.par" 
+            md5="5f4e9e037f98af44e429ecee46174b82"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
+            upstreamVersion="20150728"
+            metaDataVersion="1"
+            tool="morph" 
+            language="sk"
+            variant="snk" 
+            extension="par">
+            <metadata>
+            	<!--
+                The Slovak parameter file was trained on the Slovak National Corpus.
+                (http://korpus.juls.savba.sk/).
+            	-->
+                <entry key="model.encoding" value="UTF-8" />
+                <entry key="pos.tagset" value="snk-rftagger" />
+                <entry key="morph.tagset" value="snk-rftagger" />
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
+
+    <target name="sl">
+        <antcall target="sl-jos"/>
+    </target>
+
+    <target name="sl-jos" depends="download-rftagger">
+        <mkdir dir="target/download"/>
+        
+        <!-- FILE: slovak.par - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2015-07-28 | now        | 2ffa411841956e005471c13585c124b5
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/slovene.par" 
+            md5="2ffa411841956e005471c13585c124b5"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
+            upstreamVersion="20150728"
+            metaDataVersion="1"
+            tool="morph" 
+            language="sl"
+            variant="jos" 
+            extension="par">
+            <metadata>
+            	<!--
+                The Slovene parameter file was trained on the JOS corpus
+                (http://nl.ijs.si/jos/index-en.html). This corpus is described in the
+                following publication:
+                Toma. Erjavec, Darja Fi.er, Simon Krek, Nina Ledinek: The JOS
+                Linguistically Tagged Corpus of Slovene. Proceedings of the Seventh
+                International Conference on Language Resources and Evaluation
+                (LREC'10), Malta, 2010.
+            	-->
+                <entry key="model.encoding" value="UTF-8" />
+                <entry key="pos.tagset" value="jos-rftagger" />
+                <entry key="morph.tagset" value="jos-rftagger" />
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
+
+	<!--
+	   Additional models we can add:
+	   - Slovak - https://nlp.fi.muni.cz/trac/majka/wiki/sk
+	   - Russian - http://corpus.leeds.ac.uk/mocky/
+	-->
 </project>
