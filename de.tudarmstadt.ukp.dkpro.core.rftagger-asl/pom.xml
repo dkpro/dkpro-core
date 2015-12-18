@@ -78,13 +78,41 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-bin</artifactId>
 			<scope>test</scope>
 		</dependency>
-    <!--  
-		<dependency>
-			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-tagger-de-tiger2treebank</artifactId>
-			<scope>test</scope>
-		</dependency>
-    -->
+        <dependency>
+            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+            <artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-bin</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+            <artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-morph-cz-cac</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+            <artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-morph-de-tiger</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+            <artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-morph-hu-szeged</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+            <artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-morph-ru-ric</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+            <artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-morph-sk-snk</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+            <artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-morph-sl-jos</artifactId>
+            <scope>test</scope>
+        </dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -93,13 +121,36 @@
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-bin</artifactId>
 				<version>20130430.0</version>
 			</dependency>
-      <!--  
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-tagger-de-tiger2treebank</artifactId>
-				<version>20150928.1</version>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-morph-cz-cac</artifactId>
+				<version>20150728.1</version>
 			</dependency>
-      -->
+            <dependency>
+                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                <artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-morph-de-tiger</artifactId>
+                <version>20150928.1</version>
+            </dependency>
+            <dependency>
+                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                <artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-morph-hu-szeged</artifactId>
+                <version>20150728.1</version>
+            </dependency>
+            <dependency>
+                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                <artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-morph-ru-ric</artifactId>
+                <version>20150728.1</version>
+            </dependency>
+            <dependency>
+                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                <artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-morph-sk-snk</artifactId>
+                <version>20150728.1</version>
+            </dependency>
+            <dependency>
+                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                <artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-morph-sl-jos</artifactId>
+                <version>20150728.1</version>
+            </dependency>
 		</dependencies>
 	</dependencyManagement>
     <build>
@@ -112,23 +163,16 @@
                         <usedDependencies>
                             <!-- Models not detected by byte-code analysis -->
                             <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.rftagger-bin</usedDependency>
-                            <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.rftagger-model-tagger-de-tiger2treebank</usedDependency>
+                            <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.rftagger-model-morph-cz-cac</usedDependency>
+                            <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.rftagger-model-morph-de-tiger</usedDependency>
+                            <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.rftagger-model-morph-hu-szeged</usedDependency>
+                            <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.rftagger-model-morph-ru-ric</usedDependency>
+                            <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.rftagger-model-morph-sk-snk</usedDependency>
+                            <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.rftagger-model-morph-sl-jos</usedDependency>
                         </usedDependencies>
                     </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
     </build>
-	<repositories>
-		<repository>
-			<releases>
-			  <enabled>true</enabled>
-			</releases>
-		    <snapshots>
-		      <enabled>false</enabled>
-		    </snapshots>
-		    <id>ukp-oss-staging</id>
-		    <url>http://134.91.18.140:8081/artifactory/models</url>
-		  </repository>
-    </repositories>
 </project>
