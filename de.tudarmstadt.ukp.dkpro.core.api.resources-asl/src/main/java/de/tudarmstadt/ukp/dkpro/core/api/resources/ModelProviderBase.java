@@ -34,6 +34,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.AggregateTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.Tagset;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagDescription;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagsetDescription;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
 public class ModelProviderBase<M>
     extends CasConfigurableStreamProviderBase<M>
@@ -42,6 +43,28 @@ public class ModelProviderBase<M>
     private AggregateTagset tagsets = new AggregateTagset();
     private Set<String> skipRecord = new HashSet<String>();
 
+    public ModelProviderBase()
+    {
+        // Nothing to do
+    }
+
+    public ModelProviderBase(Object aObject, String aShortName, String aType)
+    {
+        setContextObject(aObject);
+
+        setDefault(ARTIFACT_ID, "${groupId}." + aShortName + "-model-" + aType
+                + "-${language}-${variant}");
+        setDefault(LOCATION,
+                "classpath:/${package}/lib/"+aType+"-${language}-${variant}.properties");
+        setDefaultVariantsLocation("${package}/lib/"+aType+"-default-variants.map");
+
+        addAutoOverride(ComponentParameters.PARAM_MODEL_LOCATION, LOCATION);
+        addAutoOverride(ComponentParameters.PARAM_VARIANT, VARIANT);
+        addAutoOverride(ComponentParameters.PARAM_LANGUAGE, LANGUAGE);
+        
+        applyAutoOverrides(aObject);
+    }
+    
     @Override
     public void configure(CAS aCas)
         throws AnalysisEngineProcessException
