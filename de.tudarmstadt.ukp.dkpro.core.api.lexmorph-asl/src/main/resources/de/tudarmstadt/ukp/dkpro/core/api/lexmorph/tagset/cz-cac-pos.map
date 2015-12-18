@@ -1,0 +1,31 @@
+# Czech Academic Corpus 1.0 tagset
+#
+# Source: http://ufal.mff.cuni.cz/rest/CAC/doc-cac10/cac-guide/eng/html/chapter12.html
+#
+# Catch-all rule
+*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# 
+# A   Adjective
+A=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+# C   Numeral
+C=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
+# D   Adverb
+D=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+# I   Interjection
+I=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# J   Conjunction
+J=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+# N   Noun
+N=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N
+# P   Pronoun
+P=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# V   Verb
+V=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# R   Preposition
+R=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+# T   Particle
+T=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# X   Unknown, Not Determined, Unclassifiable
+X=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# Z   Punctuation (also used for the Sentence Boundary token)
+Z=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC

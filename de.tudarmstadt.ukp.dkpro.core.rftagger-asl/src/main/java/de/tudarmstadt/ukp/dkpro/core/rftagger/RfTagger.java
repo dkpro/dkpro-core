@@ -21,6 +21,8 @@ import static org.apache.commons.io.IOUtils.closeQuietly;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInput;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -29,6 +31,7 @@ import java.lang.ProcessBuilder.Redirect;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -43,7 +46,9 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.morph.MorphologicalFeaturesParser;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.LittleEndianDataInputStream;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
@@ -53,8 +58,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.RuntimeProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
-@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = { "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
+@TypeCapability(
+    inputs = { 
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, 
+    outputs = { 
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"})
 public class RfTagger
     extends JCasAnnotator_ImplBase
 {
@@ -98,7 +108,12 @@ public class RfTagger
     @ConfigurationParameter(name = PARAM_MORPH_MAPPING_LOCATION, mandatory = false)
     private String morphMappingLocation;
 
-    private static final String PARAMETER_FILE = "param.par";
+    /**
+     * Write the tag set(s) to the log when a model is loaded.
+     */
+    public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
+    protected boolean printTagSet;
 
     private MappingProvider mappingProvider;
     private RuntimeProvider runtimeProvider;
@@ -119,32 +134,59 @@ public class RfTagger
         runtimeProvider = new RuntimeProvider(
                 "classpath:/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/");
 
-        modelProvider = new ModelProviderBase<File>()
+        modelProvider = new ModelProviderBase<File>(this, "rftagger", "morph")
         {
-            {
-                setContextObject(RfTagger.this);
-
-                setDefault(ARTIFACT_ID, "${groupId}.rftagger-model-${language}-${variant}");
-                setDefault(LOCATION,
-                        "classpath:/${package}/lib/tagger-${language}-${variant}.properties");
-                setDefaultVariantsLocation("${package}/lib/tagger-default-variants.map");
-
-                setOverride(LOCATION, modelLocation);
-                setOverride(LANGUAGE, language);
-                setOverride(VARIANT, variant);
-            }
-
             @Override
             protected File produceResource(URL aUrl)
                 throws IOException
             {
+                Properties metadata = getResourceMetaData();
+                encodingLoadedFromModel = (String) metadata.get("model.encoding");
+                
+                SingletonTagset morphFeats = new SingletonTagset(
+                        MorphologicalFeatures.class, metadata.getProperty("morph.tagset"));
+
+                SingletonTagset posTags = new SingletonTagset(
+                        POS.class, metadata.getProperty("pos.tagset"));
+
+                try (LittleEndianDataInputStream is = new LittleEndianDataInputStream(
+                        aUrl.openStream())) {
+                    long n = is.readLong(); // alphabet size
+                    for (int i = 0; i < n; i++) {
+                        String symbol = readZeroTerminatedString(is, getEncoding());
+                        if ("BOUNDARY".equals(symbol)) {
+                            // Appears to be an internally used symbol
+                            continue;
+                        }
+                        morphFeats.add(symbol);
+                        posTags.add(extractTag(symbol));
+                    }
+                }
+                addTagset(posTags);
+                addTagset(morphFeats);
+
+                if (printTagSet) {
+                    getLogger().info(getTagset().toString());
+                }
+                
                 // FIXME Actually, this is the place where the rftagger process should be
                 // started/stopped so that if the language changes during processing, the
                 // rftagger is reloaded with the required model.
                 // It might not be easy to fix this - but then at least a bug should be
                 // opened.
-                File folder = ResourceUtils.getClasspathAsFolder(aUrl.toString(), true);
-                return folder;
+                return ResourceUtils.getUrlAsFile(aUrl, true);
+            }
+
+            private String readZeroTerminatedString(DataInput aIn, String aEncoding)
+                throws IOException
+            {
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                byte b = aIn.readByte();
+                while (b != 0) {
+                    bos.write(b);
+                    b = aIn.readByte();
+                }
+                return new String(bos.toByteArray(), aEncoding);
             }
         };
 
@@ -168,7 +210,7 @@ public class RfTagger
                 List<String> cmd = new ArrayList<>();
                 cmd.add(executableFile.getAbsolutePath());
                 cmd.add("-q"); // quiet mode
-                cmd.add(modelProvider.getResource().getAbsolutePath() + "/" + PARAMETER_FILE);
+                cmd.add(modelProvider.getResource().getAbsolutePath());
                 ProcessBuilder pb = new ProcessBuilder();
                 pb.redirectError(Redirect.INHERIT);
                 pb.command(cmd);
@@ -229,9 +271,6 @@ public class RfTagger
         modelProvider.configure(aJCas.getCas());
         mappingProvider.configure(aJCas.getCas());
         featuresParser.configure(aJCas.getCas());
-
-        encodingLoadedFromModel = (String) modelProvider.getResourceMetaData()
-                .get("model.encoding");
     }
 
     private void annotateOutput(List<String> readOutput, JCas aJCas, List<Token> tokens)

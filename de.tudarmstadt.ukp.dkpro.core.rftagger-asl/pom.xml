@@ -78,11 +78,13 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-bin</artifactId>
 			<scope>test</scope>
 		</dependency>
+    <!--  
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-tagger-de-tiger2treebank</artifactId>
 			<scope>test</scope>
 		</dependency>
+    -->
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -91,11 +93,13 @@
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-bin</artifactId>
 				<version>20130430.0</version>
 			</dependency>
+      <!--  
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-tagger-de-tiger2treebank</artifactId>
 				<version>20150928.1</version>
 			</dependency>
+      -->
 		</dependencies>
 	</dependencyManagement>
     <build>
