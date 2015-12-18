@@ -139,6 +139,9 @@ image::ts_lemmatization.png[align="center"]
 
 |SfstAnnotator
 |(uses native binary)
+
+|RfTagger
+|(uses native binary)
 |====
 
 
