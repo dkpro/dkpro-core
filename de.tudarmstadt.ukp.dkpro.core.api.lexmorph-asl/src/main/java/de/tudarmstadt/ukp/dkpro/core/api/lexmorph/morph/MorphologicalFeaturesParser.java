@@ -32,14 +32,39 @@ import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.morph.internal.AnalysisMapping;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.HasResourceMetadata;
 
 public class MorphologicalFeaturesParser
     extends CasConfigurableProviderBase<List<AnalysisMapping>>
-{
+{   
+    public static final String META_MORPH_TAGSET = "morph.tagset";
+    
     private static final String IGNORE = "__IGNORE__";
     private boolean notFound = false;
 
+    {
+        setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/"
+                + "${language}-${morph.tagset}-morph.map");
+    }
+
+    public MorphologicalFeaturesParser()
+    {
+        // Nothing to do
+    }
+    
+    public MorphologicalFeaturesParser(Object aObject, HasResourceMetadata aModelProvider)
+    {
+        setContextObject(aObject);
+
+        addAutoOverride(ComponentParameters.PARAM_MORPH_MAPPING_LOCATION, LOCATION);
+        addAutoOverride(ComponentParameters.PARAM_LANGUAGE, LANGUAGE);
+        applyAutoOverrides(aObject);
+
+        addImport(META_MORPH_TAGSET, aModelProvider);
+    }    
+    
     @Override
     public void configure(CAS aCas)
         throws AnalysisEngineProcessException
