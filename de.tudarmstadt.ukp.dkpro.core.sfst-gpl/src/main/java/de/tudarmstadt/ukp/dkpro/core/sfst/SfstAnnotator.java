@@ -135,21 +135,8 @@ public class SfstAnnotator
 
         // Returns FST automaton for specified language, which is then passed to fst-infl from SFST.
         // Currently available for Turkish and German.
-        modelProvider = new ModelProviderBase<File>()
+        modelProvider = new ModelProviderBase<File>(this, "sfst", "morph")
         {
-            {
-                setContextObject(SfstAnnotator.this);
-
-                setDefault(ARTIFACT_ID, "${groupId}.sfst-model-morph-${language}-${variant}");
-                setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/sfst/lib/"
-                                + "morph-${language}-${variant}.ca");
-                setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/sfst/lib/sfst-default-variants.map");
-
-                setOverride(LOCATION, modelLocation);
-                setOverride(LANGUAGE, language);
-                setOverride(VARIANT, variant);
-            }
-
             @Override
             protected File produceResource(URL aUrl)
                 throws IOException
