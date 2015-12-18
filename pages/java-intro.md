@@ -93,5 +93,10 @@ The result is written to a file called *document.txt.conll* and could look somet
 18	.	.	.	.	_	9	punct	_	_
 {% endhighlight text %}
 
+## Where to go from here?
+
+You can find many more examples of what you can do with DKPro Core and Java on our [Java recipes for DKPro Core pipelines][recipes] page
+
 [1]: http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html
 [2]: http://eclipse.org/downloads/
+[recipes]: {{ site.url }}/java/recipes/

@@ -26,6 +26,10 @@
     url: "/releases/!LATEST!/apidocs/index.html"
   - title: "Recipes (Groovy)"
     url: "/groovy/recipes/"
+  - title: "Recipes (Java)"
+    url: "/java/recipes/"
+  - title: "Recipes (Jython)"
+    url: "/jython/recipes/"
 
 #- title: "Blog"
 #  side: left

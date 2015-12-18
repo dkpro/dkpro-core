@@ -96,9 +96,9 @@ The result is written to a file called *document.txt.conll* and could look somet
 
 ## Where to go from here?
 
-You can find many more examples of what you can do with DKPro Core and Groovy on our [Groovy recipes for DKPro Core pipelines][4] page
+You can find many more examples of what you can do with DKPro Core and Groovy on our [Groovy recipes for DKPro Core pipelines][recipes] page
 
 [1]: http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html 
 [2]: http://www.groovy-lang.org/download.html
 [3]: http://gvmtool.net
-[4]: {{ site.url }}/groovy/recipes/
+[recipes]: {{ site.url }}/groovy/recipes/

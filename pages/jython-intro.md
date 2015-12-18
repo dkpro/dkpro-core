@@ -101,10 +101,10 @@ The result is written to a file called *document.txt.conll* and could look somet
 
 ## Where to go from here?
 
-You can find many more examples of what you can do with DKPro Core and Python on our  [Python scripts for DKPro Core pipelines][jython-cookbook] page
+You can find many more examples of what you can do with DKPro Core and Java on our [Jython recipes for DKPro Core pipelines][recipes] page
 
 [jdk]: http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html
 [jip]: https://pypi.python.org/pypi/jip
 [jython-installer]: http://search.maven.org/remotecontent?filepath=org/python/jython-installer/2.7-b3/jython-installer-2.7-b3.jar
-[jython-cookbook]: jython-cookbook.html
+[recipes]: {{ site.url }}/jython/recipes/
 

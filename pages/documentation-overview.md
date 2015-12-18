@@ -15,7 +15,9 @@ permalink: "/documentation/"
 
 ## Recipes: Specific Use Cases
 
+* [Java recipes]({{ site.url }}/java/recipes/)
 * [Groovy recipes]({{ site.url }}/groovy/recipes/)
+* [Jython recipes]({{ site.url }}/jython/recipes/)
 
 ## Reference Documentation
 

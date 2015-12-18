@@ -110,6 +110,30 @@ defaults:
       sticky-link-title: "Troubleshooting"
       comments: false
 #      author: "your_author_name"
+  -
+    scope:
+      path: ""        
+      type: "recipes_java"
+    values:
+      show_meta: false   # Show metadata beneath all posts
+      layout: article
+      sidebar: left
+      sticky-link-url: "/java/recipes/troubleshooting"
+      sticky-link-title: "Troubleshooting"
+      comments: false
+#      author: "your_author_name"
+  -
+    scope:
+      path: ""        
+      type: "recipes_jython"
+    values:
+      show_meta: false   # Show metadata beneath all posts
+      layout: article
+      sidebar: left
+      sticky-link-url: "/jython/recipes/troubleshooting"
+      sticky-link-title: "Troubleshooting"
+      comments: false
+#      author: "your_author_name"
 
 
 
@@ -243,3 +267,14 @@ collections:
         layout: article
         sidebar: left
         permalink: /groovy/recipes/:path/
+    recipes_java:
+        output: true
+        layout: article
+        sidebar: left
+        permalink: /java/recipes/:path/
+    recipes_jython:
+        output: true
+        layout: article
+        sidebar: left
+        permalink: /jython/recipes/:path/
+        
