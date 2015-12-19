@@ -30,13 +30,15 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NGram;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
+/**
+ * N-gram annotator.
+ */
 @TypeCapability(
-        inputs={
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
-        outputs={
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NGram"})
-
+    inputs={
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
+    outputs={
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NGram"})
 public class NGramAnnotator
 	extends JCasAnnotator_ImplBase
 {

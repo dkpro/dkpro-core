@@ -40,6 +40,9 @@ import de.dfki.lt.tools.tokenizer.output.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 
+/**
+ * JTok segmenter.
+ */
 @TypeCapability(outputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",

@@ -36,9 +36,13 @@ import org.apache.uima.resource.ResourceAccessException;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField;
 
-@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+@TypeCapability(
+    inputs = { 
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-        "de.tudarmstadt.ukp.dkpro.core.lexmorph.type.POS" }, outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NamedEntity" })
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" }, 
+    outputs = { 
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NamedEntity" })
 /**
  *
  * This Analysis Engine annotates

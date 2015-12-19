@@ -38,6 +38,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 
+/**
+ * Langdetect language identifier.
+ */
 public class LangDetectLanguageIdentifier
     extends JCasAnnotator_ImplBase
 {

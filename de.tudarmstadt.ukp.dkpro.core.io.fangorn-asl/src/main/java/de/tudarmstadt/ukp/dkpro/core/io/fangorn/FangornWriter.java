@@ -44,12 +44,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 
-
+/**
+ * Fangorn index writer.
+ */
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
                 "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree"})
-
 public class FangornWriter
 	extends JCasConsumer_ImplBase
 {

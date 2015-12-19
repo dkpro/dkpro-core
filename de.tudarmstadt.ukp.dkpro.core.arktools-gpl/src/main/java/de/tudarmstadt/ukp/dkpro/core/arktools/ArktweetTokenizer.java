@@ -1,5 +1,3 @@
-package de.tudarmstadt.ukp.dkpro.core.arktools;
-
 /**
  * Copyright 2007-2014
  * Ubiquitous Knowledge Processing (UKP) Lab
@@ -18,6 +16,7 @@ package de.tudarmstadt.ukp.dkpro.core.arktools;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
+package de.tudarmstadt.ukp.dkpro.core.arktools;
 
 import java.util.List;
 
@@ -32,6 +31,9 @@ import cmu.arktweetnlp.Twokenize;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
+/**
+ * ArkTweet tokenizer.
+ */
 public class ArktweetTokenizer
     extends CasAnnotator_ImplBase
 {

@@ -45,6 +45,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.tc.api.type.TextClassificationOutcome;
 import de.tudarmstadt.ukp.dkpro.tc.ml.uima.TcAnnotatorSequence;
 
+/**
+ * Flexible part-of-speech tagger.
+ */
 public class FlexTag
     extends JCasAnnotator_ImplBase
 {

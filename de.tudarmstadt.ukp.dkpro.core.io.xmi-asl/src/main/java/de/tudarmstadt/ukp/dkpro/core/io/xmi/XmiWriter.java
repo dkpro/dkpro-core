@@ -37,6 +37,9 @@ import org.xml.sax.SAXException;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 
+/**
+ * UIMA XMI format writer.
+ */
 @TypeCapability(
         inputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})

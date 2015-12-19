@@ -49,6 +49,9 @@ import de.tudarmstadt.ukp.wikipedia.api.WikiConstants;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
 import de.tudarmstadt.ukp.wikipedia.api.sweble.PlainTextConverter;
 
+/**
+ * Bliki-based Wikipedia reader.
+ */
 @TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class BlikiWikipediaReader
     extends JCasCollectionReader_ImplBase

@@ -29,10 +29,12 @@ import org.xces.graf.uima.GraphFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 
+/**
+ * ISO GrAF writer.
+ */
 @TypeCapability(
         inputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
-
 public class GrafWriter
 extends JCasFileWriter_ImplBase
 {

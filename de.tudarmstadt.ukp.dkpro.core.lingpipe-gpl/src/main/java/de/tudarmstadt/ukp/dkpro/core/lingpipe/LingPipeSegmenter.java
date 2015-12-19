@@ -32,6 +32,9 @@ import com.aliasi.tokenizer.TokenizerFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 
+/**
+ * LingPipe segmenter.
+ */
 @TypeCapability(
         outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",

@@ -32,8 +32,6 @@ import de.tudarmstadt.ukp.wikipedia.parser.ParsedPage;
  * A parameter controls whether the full article or only the first paragraph is set as the document text.
  *
  * No Redirects or disambiguation pages are regarded, however.
- *
- *
  */
 @TypeCapability(
         outputs={
