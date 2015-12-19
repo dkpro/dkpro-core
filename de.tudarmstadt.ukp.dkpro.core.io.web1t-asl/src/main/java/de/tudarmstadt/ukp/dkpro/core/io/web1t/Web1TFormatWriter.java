@@ -31,10 +31,12 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.io.web1t.util.Web1TConverter;
 
+/**
+ * Web1T n-gram index format writer.
+ */
 @TypeCapability(
         inputs={
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"})
-
 public class Web1TFormatWriter
 	extends JCasAnnotator_ImplBase
 {

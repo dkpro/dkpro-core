@@ -26,9 +26,12 @@ import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
+/**
+ * Dump dependencies to screen.
+ */
 @TypeCapability(
-        inputs={
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"})
+    inputs={
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"})
 public class DependencyDumper
 	extends JCasConsumer_ImplBase
 {

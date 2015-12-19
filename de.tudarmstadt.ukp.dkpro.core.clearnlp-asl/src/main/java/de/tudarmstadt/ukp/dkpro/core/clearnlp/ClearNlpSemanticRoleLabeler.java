@@ -65,17 +65,20 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
+/**
+ * ClearNLP semantic role labeller.
+ */
 @TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"},
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate",
-                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument"}
-        )
+    inputs = {
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"},
+    outputs = {
+        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate",
+        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument"}
+    )
 public class ClearNlpSemanticRoleLabeler
 	extends JCasAnnotator_ImplBase
 {

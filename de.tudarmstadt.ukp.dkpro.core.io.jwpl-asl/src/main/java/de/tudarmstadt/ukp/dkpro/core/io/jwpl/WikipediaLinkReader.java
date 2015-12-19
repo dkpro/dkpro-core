@@ -32,10 +32,12 @@ import de.tudarmstadt.ukp.wikipedia.api.exception.WikiTitleParsingException;
 import de.tudarmstadt.ukp.wikipedia.parser.Link;
 import de.tudarmstadt.ukp.wikipedia.parser.ParsedPage;
 
+/**
+ * Read links from Wikipedia.
+ */
 @TypeCapability(outputs={
     "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig",
     "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaLink"})
-
 public class WikipediaLinkReader extends WikipediaStandardReaderBase {
 
 	/**

@@ -45,6 +45,9 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 
+/**
+ * UIMA Binary CAS formats reader.
+ */
 public class BinaryCasReader
     extends ResourceCollectionReaderBase
 {

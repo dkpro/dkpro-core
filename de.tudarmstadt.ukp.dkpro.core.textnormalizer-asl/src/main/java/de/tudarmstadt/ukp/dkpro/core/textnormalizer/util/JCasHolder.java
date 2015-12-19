@@ -27,6 +27,9 @@ import org.apache.uima.util.CasCopier;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
+/**
+ * Utility analysis engine for use with CAS multipliers in uimaFIT pipelines.
+ */
 public class JCasHolder extends JCasAnnotator_ImplBase
 {
     private static JCas value;

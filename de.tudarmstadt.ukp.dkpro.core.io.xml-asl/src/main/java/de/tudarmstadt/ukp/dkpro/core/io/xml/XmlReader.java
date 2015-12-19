@@ -46,11 +46,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field;
 
+/**
+ * Reader for XML files.
+ */
 @TypeCapability(
         outputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field",
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
-
 public class XmlReader extends CasCollectionReader_ImplBase {
 
 	/**

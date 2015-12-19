@@ -42,6 +42,9 @@ import org.xml.sax.SAXException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 
+/**
+ * ISO GrAF reader.
+ */
 public class GrafReader
 	extends ResourceCollectionReaderBase
 {

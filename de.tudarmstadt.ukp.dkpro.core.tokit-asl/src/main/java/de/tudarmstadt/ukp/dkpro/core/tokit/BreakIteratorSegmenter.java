@@ -27,7 +27,12 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 
-@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+/**
+ * BreakIterator segmenter.
+ */
+@TypeCapability(
+    outputs = { 
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class BreakIteratorSegmenter
     extends SegmenterBase
