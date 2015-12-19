@@ -119,20 +119,11 @@ public class OpenNlpPosTagger
 	{
 		super.initialize(aContext);
 
-		modelProvider = new ModelProviderBase<POSTagger>() {
-			{
-                setContextObject(OpenNlpPosTagger.this);
-
-                setDefault(ARTIFACT_ID, "${groupId}.opennlp-model-tagger-${language}-${variant}");
-				setDefault(LOCATION, "classpath:/${package}/lib/tagger-${language}-${variant}.properties");
-                setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/opennlp/lib/tagger-default-variants.map");
-				setDefault(VARIANT, "maxent");
-
-				setOverride(LOCATION, modelLocation);
-				setOverride(LANGUAGE, language);
-				setOverride(VARIANT, variant);
-			}
-
+		modelProvider = new ModelProviderBase<POSTagger>(this, "opennlp", "tagger") {
+		    {
+		        setDefault(VARIANT, "maxent");
+		    }
+		    
 			@Override
 			protected POSTagger produceResource(InputStream aStream)
 			    throws Exception

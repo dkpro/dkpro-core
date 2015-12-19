@@ -107,24 +107,8 @@ public class MateMorphTagger
     {
         super.initialize(aContext);
 
-        modelProvider = new ModelProviderBase<Tagger>()
+        modelProvider = new ModelProviderBase<Tagger>(this, "matetools", "morphtagger")
         {
-            {
-                setContextObject(MateMorphTagger.this);
-
-                setDefault(ARTIFACT_ID,
-                        "${groupId}.matetools-model-morphtagger-${language}-${variant}");
-                setDefault(LOCATION,
-                        "classpath:/${package}/lib/morphtagger-${language}-${variant}.properties");
-                setDefaultVariantsLocation("${package}/lib/morphtagger-default-variants.map");
-
-                setDefault(VARIANT, "default");
-
-                setOverride(LOCATION, modelLocation);
-                setOverride(LANGUAGE, language);
-                setOverride(VARIANT, variant);
-            }
-
             @Override
             protected Tagger produceResource(URL aUrl)
                 throws IOException

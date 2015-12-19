@@ -121,20 +121,7 @@ public class OpenNlpChunker
 	{
 		super.initialize(aContext);
 
-		modelProvider = new ModelProviderBase<Chunker>() {
-			{
-                setContextObject(OpenNlpChunker.this);
-
-                setDefault(ARTIFACT_ID, "${groupId}.opennlp-model-chunker-${language}-${variant}");
-				setDefault(LOCATION, "classpath:/${package}/lib/chunker-${language}-${variant}.properties");
-                //setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/opennlp/lib/chunker-default-variants.map");
-				setDefault(VARIANT, "default");
-
-				setOverride(LOCATION, modelLocation);
-				setOverride(LANGUAGE, language);
-				setOverride(VARIANT, variant);
-			}
-
+		modelProvider = new ModelProviderBase<Chunker>(this, "opennlp", "chunker") {
 			@Override
 			protected Chunker produceResource(InputStream aStream)
 			    throws Exception

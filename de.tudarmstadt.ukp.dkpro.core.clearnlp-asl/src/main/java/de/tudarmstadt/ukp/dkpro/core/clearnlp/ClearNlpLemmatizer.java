@@ -91,21 +91,8 @@ public class ClearNlpLemmatizer
     {
         super.initialize(aContext);
 
-        modelProvider = new ModelProviderBase<AbstractComponent>()
+        modelProvider = new ModelProviderBase<AbstractComponent>(this, "clearnlp", "dictionary")
         {
-            {
-                setContextObject(ClearNlpLemmatizer.this);
-
-                setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-dictionary-${language}-${variant}");
-                setDefault(LOCATION,
-                        "classpath:/${package}/lib/dictionary-${language}-${variant}.properties");
-                setDefault(VARIANT, "default");
-
-                setOverride(LOCATION, modelLocation);
-                setOverride(LANGUAGE, language);
-                setOverride(VARIANT, variant);
-            }
-
             @Override
             protected AbstractComponent produceResource(InputStream aStream)
                 throws Exception

@@ -156,22 +156,8 @@ public class MstParser
         super.initialize(context);
 
         // the modelProvider reads in the model and produces a parser
-        modelProvider = new ModelProviderBase<DependencyParser>()
+        modelProvider = new ModelProviderBase<DependencyParser>(this, "mstparser", "parser")
         {
-            {
-                setContextObject(MstParser.this);
-
-                setDefault(ARTIFACT_ID, "${groupId}.mstparser-model-parser-${language}-${variant}");
-
-                setDefaultVariantsLocation("${package}/lib/parser-default-variants.map");
-                setDefault(LOCATION,
-                        "classpath:${package}/lib/parser-${language}-${variant}.properties");
-
-                setOverride(LOCATION, modelLocation);
-                setOverride(LANGUAGE, language);
-                setOverride(VARIANT, variant);
-            }
-
             @Override
             protected DependencyParser produceResource(URL aUrl)
                 throws IOException

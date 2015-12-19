@@ -143,21 +143,8 @@ public class ClearNlpPosTagger
     {
         super.initialize(aContext);
 
-        dictModelProvider = new ModelProviderBase<InputStream>()
+        dictModelProvider = new ModelProviderBase<InputStream>(this, "clearnlp", "dictionary")
         {
-            {
-                setContextObject(ClearNlpPosTagger.this);
-
-                setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-dictionary-${language}-${variant}");
-                setDefault(LOCATION,
-                        "classpath:/${package}/lib/dictionary-${language}-${variant}.properties");
-                setDefault(VARIANT, "default");
-
-                setOverride(LOCATION, dictLocation);
-                setOverride(LANGUAGE, language);
-                setOverride(VARIANT, dictVariant);
-            }
-
             @Override
             protected InputStream produceResource(InputStream aStream)
                 throws Exception
@@ -171,19 +158,10 @@ public class ClearNlpPosTagger
         };
 
 
-        posTaggingModelProvider = new ModelProviderBase<AbstractPOSTagger>()
+        posTaggingModelProvider = new ModelProviderBase<AbstractPOSTagger>(this, "clearnlp", "tagger")
         {
             {
-                setContextObject(ClearNlpPosTagger.this);
-
-                setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-tagger-${language}-${variant}");
-                setDefault(LOCATION,
-                        "classpath:/${package}/lib/tagger-${language}-${variant}.properties");
                 setDefault(VARIANT, "ontonotes");
-
-                setOverride(LOCATION, posModelLocation);
-                setOverride(LANGUAGE, language);
-                setOverride(VARIANT, posVariant);
             }
 
             @Override

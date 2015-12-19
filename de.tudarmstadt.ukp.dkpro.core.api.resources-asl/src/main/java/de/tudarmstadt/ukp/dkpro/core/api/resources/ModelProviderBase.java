@@ -57,6 +57,7 @@ public class ModelProviderBase<M>
         setDefault(LOCATION,
                 "classpath:/${package}/lib/"+aType+"-${language}-${variant}.properties");
         setDefaultVariantsLocation("${package}/lib/"+aType+"-default-variants.map");
+        setDefault(VARIANT, "default");
 
         addAutoOverride(ComponentParameters.PARAM_MODEL_LOCATION, LOCATION);
         addAutoOverride(ComponentParameters.PARAM_VARIANT, VARIANT);

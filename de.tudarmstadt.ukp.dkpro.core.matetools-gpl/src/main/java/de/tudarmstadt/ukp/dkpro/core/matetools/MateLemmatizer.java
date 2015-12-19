@@ -102,22 +102,8 @@ public class MateLemmatizer
     {
         super.initialize(aContext);
 
-        modelProvider = new ModelProviderBase<Lemmatizer>()
+        modelProvider = new ModelProviderBase<Lemmatizer>(this, "matetools", "lemmatizer")
         {
-            {
-                setContextObject(MateLemmatizer.this);
-
-                setDefault(ARTIFACT_ID,
-                        "${groupId}.matetools-model-lemmatizer-${language}-${variant}");
-                setDefault(LOCATION,
-                        "classpath:/${package}/lib/lemmatizer-${language}-${variant}.properties");
-                setDefaultVariantsLocation("${package}/lib/lemmatizer-default-variants.map");
-
-                setOverride(LOCATION, modelLocation);
-                setOverride(LANGUAGE, language);
-                setOverride(VARIANT, variant);
-            }
-
             @Override
             protected Lemmatizer produceResource(URL aUrl)
                 throws IOException

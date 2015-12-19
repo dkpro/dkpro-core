@@ -137,21 +137,8 @@ public class MateParser
 	{
 		super.initialize(aContext);
 
-		modelProvider = new ModelProviderBase<Parser>()
+		modelProvider = new ModelProviderBase<Parser>(this, "matetools", "parser")
 		{
-			{
-				setContextObject(MateParser.this);
-
-				setDefault(ARTIFACT_ID,
-						"${groupId}.matetools-model-parser-${language}-${variant}");
-				setDefault(LOCATION, "classpath:/${package}/lib/parser-${language}-${variant}.properties");
-                setDefaultVariantsLocation("${package}/lib/parser-default-variants.map");
-
-				setOverride(LOCATION, modelLocation);
-				setOverride(LANGUAGE, language);
-				setOverride(VARIANT, variant);
-			}
-
 			@Override
 			protected Parser produceResource(URL aUrl)
 				throws IOException

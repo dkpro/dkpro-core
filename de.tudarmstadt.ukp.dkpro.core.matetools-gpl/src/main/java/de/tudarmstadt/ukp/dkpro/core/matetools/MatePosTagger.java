@@ -112,21 +112,8 @@ public class MatePosTagger
     {
         super.initialize(aContext);
 
-        modelProvider = new ModelProviderBase<Tagger>()
+        modelProvider = new ModelProviderBase<Tagger>(this, "matetools", "tagger")
         {
-            {
-                setContextObject(MatePosTagger.this);
-
-                setDefault(ARTIFACT_ID, "${groupId}.matetools-model-tagger-${language}-${variant}");
-                setDefault(LOCATION,
-                        "classpath:/${package}/lib/tagger-${language}-${variant}.properties");
-                setDefaultVariantsLocation("${package}/lib/tagger-default-variants.map");
-
-                setOverride(LOCATION, modelLocation);
-                setOverride(LANGUAGE, language);
-                setOverride(VARIANT, variant);
-            }
-
             @Override
             protected Tagger produceResource(URL aUrl)
                 throws IOException

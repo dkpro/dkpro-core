@@ -78,7 +78,7 @@ public class ClearNlpSegmenter
     {
         super.initialize(aContext);
 
-        modelProvider = new ModelProviderBase<AbstractSegmenter>()
+        modelProvider = new ModelProviderBase<AbstractSegmenter>(this, "clearnlp", "dictionary")
         {
             {
                 setContextObject(ClearNlpSegmenter.this);

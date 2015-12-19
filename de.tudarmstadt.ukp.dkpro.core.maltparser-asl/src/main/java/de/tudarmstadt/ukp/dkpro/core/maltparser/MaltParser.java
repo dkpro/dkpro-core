@@ -170,21 +170,11 @@ public class MaltParser
 			throw new ResourceInitializationException(e);
 		}
 
-		modelProvider = new ModelProviderBase<MaltParserService>() {
+		modelProvider = new ModelProviderBase<MaltParserService>(this, "maltparser", "parser") {
 			private MaltParserService parser;
 
 			{
-			    setContextObject(MaltParser.this);
-
-				setDefault(ARTIFACT_ID,
-						"${groupId}.maltparser-model-parser-${language}-${variant}");
 				setDefault(VARIANT, "linear");
-
-				setDefault(LOCATION, "classpath:/${package}/lib/parser-${language}-${variant}.mco");
-
-				setOverride(LOCATION, modelLocation);
-				setOverride(LANGUAGE, language);
-				setOverride(VARIANT, variant);
 			}
 
 			@Override

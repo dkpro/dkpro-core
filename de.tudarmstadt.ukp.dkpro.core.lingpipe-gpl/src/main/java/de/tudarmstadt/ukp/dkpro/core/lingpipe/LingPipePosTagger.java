@@ -126,20 +126,7 @@ public class LingPipePosTagger
     {
         super.initialize(aContext);
 
-        modelProvider = new ModelProviderBase<HmmDecoder>() {
-            {
-                setContextObject(LingPipePosTagger.this);
-
-                setDefault(ARTIFACT_ID, "${groupId}.lingpipe-model-tagger-${language}-${variant}");
-                setDefault(LOCATION, "classpath:/${package}/lib/tagger-${language}-${variant}.properties");
-                setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/lingpipe/lib/tagger-default-variants.map");
-                setDefault(VARIANT, "general-brown");
-
-                setOverride(LOCATION, modelLocation);
-                setOverride(LANGUAGE, language);
-                setOverride(VARIANT, variant);
-            }
-
+        modelProvider = new ModelProviderBase<HmmDecoder>(this, "lingpipe", "tagger") {
             @Override
             protected HmmDecoder produceResource(InputStream aStream)
                 throws Exception

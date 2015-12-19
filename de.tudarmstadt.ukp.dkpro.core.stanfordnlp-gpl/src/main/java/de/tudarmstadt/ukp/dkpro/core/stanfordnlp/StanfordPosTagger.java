@@ -159,21 +159,12 @@ public class StanfordPosTagger
 	{
 		super.initialize(aContext);
 
-		modelProvider = new ModelProviderBase<MaxentTagger>() {
-			{
-			    setContextObject(StanfordPosTagger.this);
-
-                setDefault(ARTIFACT_ID,
-                        "${groupId}.stanfordnlp-model-tagger-${language}-${variant}");
-                setDefault(LOCATION, "classpath:/${package}/lib/tagger-${language}-${variant}.properties");
-				setDefaultVariantsLocation(
-						"${package}/lib/tagger-default-variants.map");
-
-				setOverride(LOCATION, modelLocation);
-				setOverride(LANGUAGE, language);
-				setOverride(VARIANT, variant);
-			}
-
+		modelProvider = new ModelProviderBase<MaxentTagger>(this, "stanfordnlp", "tagger") {
+		    {
+                setDefault(LOCATION,
+                        "classpath:/${package}/lib/coref/${language}/${variant}/countries");
+		    }
+		    
             @Override
             protected MaxentTagger produceResource(URL aUrl) throws IOException
             {
@@ -220,7 +211,9 @@ public class StanfordPosTagger
 		for (Sentence sentence : select(aJCas, Sentence.class)) {
 			List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
 			
-			if(maxSentenceTokens > 0 && tokens.size() > maxSentenceTokens) continue;
+			if(maxSentenceTokens > 0 && tokens.size() > maxSentenceTokens) {
+                continue;
+            }
 
 			List<HasWord> words = new ArrayList<HasWord>(tokens.size());
 			for (Token t : tokens) {

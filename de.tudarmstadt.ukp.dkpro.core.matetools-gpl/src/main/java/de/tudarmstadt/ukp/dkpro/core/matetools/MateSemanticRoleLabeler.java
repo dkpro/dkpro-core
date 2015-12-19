@@ -18,8 +18,6 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.matetools;
 
-
-
 import static org.apache.uima.fit.util.JCasUtil.indexCovered;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
@@ -57,7 +55,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -65,12 +62,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
-
-
-
-
-
-
 
 /**
  * <p>
@@ -96,21 +87,17 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * <li>SemanticPredicate</li>
  * <li>SemanticArgument</li>
  * </ul>
- *
- *
- *
  */
 @TypeCapability(
-		inputs = {
-				"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-				"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-				"de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-				"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-		"de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"},
-		outputs = {
-				"de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate",
-		"de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument"}
-		)
+	inputs = {
+    	"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+    	"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+    	"de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+    	"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+    	"de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" },
+	outputs = {
+		"de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate",
+		"de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument" })
 public class MateSemanticRoleLabeler extends JCasConsumer_ImplBase {
 	/**
 	 * Use this language instead of the document language to resolve the model.
@@ -134,68 +121,42 @@ public class MateSemanticRoleLabeler extends JCasConsumer_ImplBase {
     @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
     protected String variant;
     
-    
 	private CasConfigurableProviderBase<SemanticRoleLabeler> modelProvider;
-	private MappingProvider mappingProvider;
-
-
-
 
 	private static final String UNUSED = "_";
 	private static final int UNUSED_INT = -1;	
 	private static final Pattern NEWLINE_PATTERN=Pattern.compile("\n");
-//	private SemanticRoleLabeler srl;
 
-	@Override
-	public void initialize(UimaContext context)
-			throws ResourceInitializationException {
-		super.initialize(context);
+    @Override
+    public void initialize(UimaContext context)
+        throws ResourceInitializationException
+    {
+        super.initialize(context);
 
-
-		modelProvider = new ModelProviderBase<SemanticRoleLabeler>()
-				{
-					{
-						setContextObject(MateSemanticRoleLabeler.this);
-
-						setDefault(ARTIFACT_ID,
-								"${groupId}.matetools-model-srl-${language}-${variant}");
-						setDefault(LOCATION, "classpath:/${package}/lib/srl-${language}-${variant}.properties");
-						setDefaultVariantsLocation("${package}/lib/srl-default-variants.map");
-										
-						setOverride(LOCATION, modelLocation);
-						setOverride(LANGUAGE, language);
-						setOverride(VARIANT, variant);
-					}
-
-					@Override
-					protected SemanticRoleLabeler produceResource(URL aUrl)
-						throws IOException
-					{
-						File modelFile = ResourceUtils.getUrlAsFile(aUrl, false);
-						try {
-							ZipFile zipFile=new ZipFile(modelFile);
-							SemanticRoleLabeler srl = Pipeline.fromZipFile(zipFile);
-							zipFile.close();
-							return srl;
-						} catch(Exception e) {
-							throw new IOException(e);
-						}
-					}
-				};
-				
-		//mappingProvider = MappingProviderFactory.createDependencyMappingProvider(dependencyMappingLocation, language, modelProvider);
-
-				
-
-		File modelFile = new File("/home/likewise-open/UKP/reimers/workspace/dkpro_core/mate_tools_srl/srl-4.31/models/CoNLL2009-ST-English-ALL.anna-3.3.srl-4.1.srl.model");
-		boolean skipPI = false;
-
+        modelProvider = new ModelProviderBase<SemanticRoleLabeler>(this, "matetools", "srl")
+        {
+            @Override
+            protected SemanticRoleLabeler produceResource(URL aUrl)
+                throws IOException
+            {
+                File modelFile = ResourceUtils.getUrlAsFile(aUrl, false);
+                try {
+                    ZipFile zipFile = new ZipFile(modelFile);
+                    SemanticRoleLabeler srl = Pipeline.fromZipFile(zipFile);
+                    zipFile.close();
+                    return srl;
+                }
+                catch (Exception e) {
+                    throw new IOException(e);
+                }
+            }
+        };
 	}
 
 	@Override
-	public void process(JCas jcas) throws AnalysisEngineProcessException {
-
-		
+    public void process(JCas jcas)
+        throws AnalysisEngineProcessException
+    {
 		modelProvider.configure(jcas.getCas());
 		SemanticRoleLabeler srl = modelProvider.getResource();
 		

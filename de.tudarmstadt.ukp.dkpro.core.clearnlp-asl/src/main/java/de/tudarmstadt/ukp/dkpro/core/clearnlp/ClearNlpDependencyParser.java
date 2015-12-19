@@ -109,20 +109,8 @@ public class ClearNlpDependencyParser
     {
         super.initialize(context);
         
-        parserProvider = new ModelProviderBase<AbstractDEPParser>()
+        parserProvider = new ModelProviderBase<AbstractDEPParser>(this, "clearnlp", "parser")
         {
-            {
-                setContextObject(ClearNlpDependencyParser.this);
-
-                setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-parser-${language}-${variant}");
-                setDefault(LOCATION, "classpath:/${package}/lib/parser-${language}-${variant}.properties");
-                setDefault(VARIANT, "ontonotes");
-
-                setOverride(LOCATION, modelLocation);
-                setOverride(LANGUAGE, language);
-                setOverride(VARIANT, variant);
-            }
-
             @Override
             protected AbstractDEPParser produceResource(URL aUrl)
                 throws IOException

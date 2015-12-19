@@ -113,24 +113,8 @@ public class LingPipeNamedEntityRecognizer
     {
         super.initialize(aContext);
 
-        modelProvider = new ModelProviderBase<Chunker>()
+        modelProvider = new ModelProviderBase<Chunker>(this, "lingpipe", "ner")
         {
-            {
-                setContextObject(LingPipeNamedEntityRecognizer.this);
-
-                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
-                setDefault(ARTIFACT_ID,
-                        "de.tudarmstadt.ukp.dkpro.core.lingpipe-model-ner-${language}-${variant}");
-
-                setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/lingpipe/lib/ner-default-variants.map");
-                setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/lingpipe/lib/"
-                        + "ner-${language}-${variant}.bin");
-
-                setOverride(LOCATION, modelLocation);
-                setOverride(LANGUAGE, language);
-                setOverride(VARIANT, variant);
-            }
-
             @Override
             protected Chunker produceResource(InputStream aStream)
                 throws Exception
