@@ -41,7 +41,9 @@ image::ts_coreference.png[align="center"]
 [options="header"]
 |====
 |Component|Description
-|OpenNlpChunker|
+
+|OpenNlpChunker
+|
 
 |TreeTaggerChunker
 |(uses native binary)

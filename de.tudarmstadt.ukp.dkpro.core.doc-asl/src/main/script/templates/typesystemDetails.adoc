@@ -1,0 +1,18 @@
+<% typesystems.collect { it.types }.flatten().sort { it.name.tokenize('.')[-1] }.unique { it.name }.each { %>
+[[type-${ it.name }]]
+=== ${it.name.tokenize('.')[-1]}
+
+*_Name:_* __${it.name}__ +
+
+++++
+${it.description}
+++++
+
+<% if (it.features) {%>
+.Features
+<% it.features.sort { it.name }.each { %>
+${it.name} (__${it.rangeTypeName}__):: ${it.description ?: '__No description__'}
+<% } %>
+<% } // if (it.features) %>
+
+<% } %>

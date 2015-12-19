@@ -1,0 +1,30 @@
+<% 
+formats.sort { it.key }.each { %>
+[[format-${ it.key }]]
+=== ${it.key}
+
+*_Artifact ID:_* __${it.value.artifactId}__ +
+
+<% if (it.value.readerSpec) { %>
+[[format-${ it.value.readerClass }]]
+[discrete]
+==== Reader
+*_Reader class:_* __${it.value.readerClass}__
+
+++++
+${it.value.readerSpec.metaData.description}
+++++
+<% } // if (it.value.readerSpec) %>
+
+<% if (it.value.writerSpec) { %>
+[[format-${ it.value.writerClass }]]
+[discrete]
+==== Writer
+*_Writer class:_* __${it.value.writerClass}__
+
+++++
+${it.value.writerSpec.metaData.description}
+++++
+<% } // if (it.value.writerSpec) %>
+
+<% } // format %>
