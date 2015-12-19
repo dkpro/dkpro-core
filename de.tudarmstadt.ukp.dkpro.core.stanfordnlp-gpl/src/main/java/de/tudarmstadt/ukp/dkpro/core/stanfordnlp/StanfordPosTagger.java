@@ -160,11 +160,6 @@ public class StanfordPosTagger
 		super.initialize(aContext);
 
 		modelProvider = new ModelProviderBase<MaxentTagger>(this, "stanfordnlp", "tagger") {
-		    {
-                setDefault(LOCATION,
-                        "classpath:/${package}/lib/coref/${language}/${variant}/countries");
-		    }
-		    
             @Override
             protected MaxentTagger produceResource(URL aUrl) throws IOException
             {

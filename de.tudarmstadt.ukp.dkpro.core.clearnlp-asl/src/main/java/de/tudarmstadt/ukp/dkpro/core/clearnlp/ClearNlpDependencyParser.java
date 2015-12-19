@@ -58,15 +58,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 /**
- * Clear parser annotator.
- *
+ * CLEAR parser annotator.
  */
 @TypeCapability(
-    inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+    inputs = { 
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
         "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" }, 
-    outputs = { "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
+    outputs = { 
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 public class ClearNlpDependencyParser
     extends JCasAnnotator_ImplBase
 {
