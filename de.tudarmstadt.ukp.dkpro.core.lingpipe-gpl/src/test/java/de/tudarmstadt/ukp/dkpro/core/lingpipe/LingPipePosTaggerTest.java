@@ -63,7 +63,7 @@ public class LingPipePosTaggerTest
                 "RB", "RB$", "RBR", "RBT", "RN", "RP", "TL", "TO", "UH", "VB", "VBD", "VBG", "VBN",
                 "VBZ", "WDT", "WP$", "WPO", "WPS", "WQL", "WRB", "``" };
 
-        String[] unmappedBrown = { "'", "''", "*", "--", ":", "AP$", "DT$", "JJ$", "NIL", "``" };
+        String[] unmappedBrown = { "'", "''", "*", "--", "AP$", "DT$", "JJ$", "NIL", "``" };
         
         AssertAnnotations.assertTagset(POS.class, "brown", brownTags, jcas);
         AssertAnnotations.assertTagsetMapping(POS.class, "brown", unmappedBrown, jcas);
@@ -95,7 +95,7 @@ public class LingPipePosTaggerTest
                 "VHD", "VHG", "VHI", "VHZ", "VM", "VVB", "VVD", "VVG", "VVGJ", "VVGN", "VVI",
                 "VVN", "VVNJ", "VVZ", "``" };
 
-        String[] unmappedMedpost = { ":", "CC+", "CS+", "II+", "JJ+", "NN+", "RR+" };
+        String[] unmappedMedpost = { "CC+", "CS+", "II+", "JJ+", "NN+", "RR+" };
 
         AssertAnnotations.assertTagset(POS.class, "medpost", medpostTags, jcas);
         AssertAnnotations.assertTagsetMapping(POS.class, "medpost", unmappedMedpost, jcas);
