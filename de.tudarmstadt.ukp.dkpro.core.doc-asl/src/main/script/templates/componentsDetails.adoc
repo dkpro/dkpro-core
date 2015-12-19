@@ -1,0 +1,56 @@
+<% 
+engines
+    .sort { it.key }
+    .groupBy {it.value.role }
+    .sort { it.key != 'Other' ? it.key : 'Z' }
+    .each { group -> 
+%>
+=== ${group.key}
+
+<% group.value.each { %>
+[[engine-${ it.key }]]
+==== ${it.key}
+
+*_Role_:* __${it.value.role}__ +
+*_Artifact ID:_* __${it.value.artifactId}__ +
+*_Class:_* __${it.value.spec.annotatorImplementationName}__
+
+++++
+${it.value.spec.metaData.description}
+++++
+
+[cols="h,v"]
+|====
+<% /*
+| Group ID
+| ${it.value.groupId}
+
+| Artifact ID
+| ${it.value.artifactId}
+
+| Version
+| ${it.value.version}
+
+| Class
+| ${it.value.spec.annotatorImplementationName}
+*/ %>
+
+| Inputs
+| <% it.value.spec.analysisEngineMetaData?.capabilities?.collect { 
+        it.inputs?.collect { it.name  } 
+    }.flatten().sort().unique().each {
+      out.println "<<typesystem-reference.adoc#type-${it},${it.tokenize('.')[-1]}>>"
+    }
+  %>
+
+| Outputs
+| <% it.value.spec.analysisEngineMetaData?.capabilities?.collect { 
+        it.outputs?.collect { it.name  } 
+    }.flatten().sort().unique().each {
+      out.println "<<typesystem-reference.adoc#type-${it},${it.tokenize('.')[-1]}>>"
+    }
+  %>
+|====
+
+<% } // component %>
+<% } // component group%>

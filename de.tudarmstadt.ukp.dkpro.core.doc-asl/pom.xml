@@ -29,6 +29,34 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.codehaus.gmaven</groupId>
+                <artifactId>groovy-maven-plugin</artifactId>
+                <version>2.0</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <source>${project.basedir}/src/main/script/generateDocumentation.groovy</source>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                  <dependency>
+                      <groupId>org.codehaus.groovy</groupId>
+                      <artifactId>groovy-all</artifactId>
+                      <version>2.4.5</version>
+                  </dependency>
+                    <dependency>
+                        <groupId>org.apache.uima</groupId>
+                        <artifactId>uimafit-core</artifactId>
+                        <version>${uimafit.version}</version>
+                    </dependency>
+                </dependencies>
+              </plugin>
+            <plugin>
                 <groupId>org.asciidoctor</groupId>
                 <artifactId>asciidoctor-maven-plugin</artifactId>
                 <executions>
@@ -46,6 +74,7 @@
                             <attributes>
                                 <toc>left</toc>
                                 <include-dir>./user-guide/</include-dir>
+                                <generated-dir>${project.basedir}/target/generated-adoc/</generated-dir>
                             </attributes>
                         </configuration>
                     </execution>
@@ -82,6 +111,43 @@
                             <attributes>
                                 <toc>left</toc>
                                 <include-dir>./developer-guide/</include-dir>
+                                <generated-dir>${project.basedir}/target/generated-adoc/</generated-dir>
+                            </attributes>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>typesystem-reference-html</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <backend>html5</backend>
+                            <sourceHighlighter>coderay</sourceHighlighter>
+                            <sourceDocumentName>typesystem-reference.adoc</sourceDocumentName>
+                            <imagesDir>./typesystem-reference/images</imagesDir>
+                            <attributes>
+                                <toc>left</toc>
+                                <include-dir>./typesystem-reference/</include-dir>
+                                <generated-dir>${project.basedir}/target/generated-adoc/</generated-dir>
+                            </attributes>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>component-reference-html</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <backend>html5</backend>
+                            <sourceHighlighter>coderay</sourceHighlighter>
+                            <sourceDocumentName>component-reference.adoc</sourceDocumentName>
+                            <imagesDir>./component-reference/images</imagesDir>
+                            <attributes>
+                                <toc>left</toc>
+                                <include-dir>./component-reference/</include-dir>
+                                <generated-dir>${project.basedir}/target/generated-adoc/</generated-dir>
                             </attributes>
                         </configuration>
                     </execution>

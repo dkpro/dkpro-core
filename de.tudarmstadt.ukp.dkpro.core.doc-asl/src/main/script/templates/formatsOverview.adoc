@@ -1,0 +1,19 @@
+.I/O Components
+[options="header"]
+|====
+|Format|Reader|Writer
+
+<% formats.sort { it.key }.each { %>
+| <<format-${ it.key },${ it.key }>>
+<% if (it.value.readerClass) { %>
+| <<format-${it.value.readerClass},${it.value.readerClass.tokenize('.')[-1]}>>
+<% } else { %>
+| none
+<% } %>
+<% if (it.value.writerClass) { %>
+| <<format-${it.value.writerClass},${it.value.writerClass.tokenize('.')[-1]}>>
+<% } else { %>
+| none
+<% } %>
+<% } // format %>
+|====

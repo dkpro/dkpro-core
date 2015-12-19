@@ -1,0 +1,26 @@
+.Producers and consumers by type
+[options="header",cols="s,v,v"]
+|====
+|Type|Producer|Consumer
+
+<% inputOutputTypes.sort().each { type -> %>
+|${type.tokenize('.')[-1]}
+| <%
+    engines.sort{ it.key }.findAll { engine ->
+      engine.value.spec.analysisEngineMetaData?.capabilities?.any { 
+        it.outputs?.any { it.name == type } } 
+    }.each { engine ->
+      out.println "<<engine-${ engine.value.spec.annotatorImplementationName },${engine.key}>>"
+    }
+  %>
+| <%
+    engines.sort{ it.key }.findAll {
+      it.value.spec.analysisEngineMetaData?.capabilities?.any {
+        it.inputs?.any { it.name == type } }
+    }.each { engine ->
+      out.println "<<engine-${ engine.value.spec.annotatorImplementationName },${engine.key}>>"
+    }
+  %>
+
+<% } %>
+|====
