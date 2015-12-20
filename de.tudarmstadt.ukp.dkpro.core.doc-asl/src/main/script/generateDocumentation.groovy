@@ -105,6 +105,8 @@ def getTool(componentName, spec) {
 new File(properties['baseDir'], '..').eachFileRecurse(FILES) {
     if (
         it.name.endsWith('.xml') && 
+        // No testing module
+        !it.path.contains('/de.tudarmstadt.ukp.dkpro.core.testing-asl/') &&
         (
             // For the typesystem descriptors
             it.path.contains('/src/main/resources/') || 
