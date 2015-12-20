@@ -43,7 +43,8 @@ if (it.elementType) {
 <%
 def subtypes = typesystems
     .collect { it.types }
-    .flatten().sort { it.name.tokenize('.')[-1] }
+    .flatten()
+    .sort { it.name.tokenize('.')[-1] }
     .unique { it.name }
     .findAll { it.supertypeName == type.name };
     
@@ -55,7 +56,7 @@ if (subtypes) {
 |====
 |Type|Description
 <% subtypes.each { subtype -> %>
-|${typeLink(subtype.supertypeName)}
+|${typeLink(subtype.name)}
 |<%
 def description = subtype.description;
 BreakIterator tokenizer = BreakIterator.getSentenceInstance(Locale.US);
