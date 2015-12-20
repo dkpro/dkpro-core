@@ -10,8 +10,9 @@ def shortDesc(description) {
         if (start > -1 && end > -1) {
             description = description.substring(start, end);
         }
+        description = description.replaceAll(']', '{endsb}').replaceAll('\n', '<br />').trim();
     }
-    return description;
+    return description ? "pass:[${description}]" : '__No description__';
 }
 %>
 
