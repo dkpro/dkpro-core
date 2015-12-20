@@ -84,7 +84,7 @@ def getRole(componentName, spec) {
 new File(properties['baseDir'], '..').eachFileRecurse(FILES) {
     if (
         it.name.endsWith('.xml') && 
-        it.path.contains('/src/main/resources/')
+        (it.path.contains('/src/main/resources/') || it.path.contains('/target/classes/'))
 //        !it.path.contains('src/test/') && 
 //        !it.path.contains('/target/surefire-reports/') && 
 //        !it.path.contains('/target/test-classes/') && 
