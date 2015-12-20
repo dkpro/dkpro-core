@@ -1,0 +1,37 @@
+<%
+def engineLink(name)
+{
+    return "<<component-reference.adoc#engine-${name},${name}>>"
+}
+%>
+
+<% models.each { model -> %>
+[[model-${model.@artifactId}]]
+[discrete]
+=== ${model.@shortArtifactId} 
+
+*_Artifact ID:_* __${model.@artifactId}__ +
+*_Version:_* __${model.@version}__ +
+*_Engine:_* __<% 
+if (model.@engine as String) {
+    out.println engineLink(model.@engine);
+} else {
+    out.println "`${model.@tool}` @ `${model.@package}`";
+} %>__ +
+*_Language:_* __${model.@language}__ +
+*_Variant:_* __${model.@variant}__ +
+
+<% if (model.metadata.entry.size() > 0) { %>
+.Metadata for ${model.@shortArtifactId} 
+
+[options="header"]
+|====
+|Key|Value
+<% model.metadata.entry.each { %>
+| ${ it.@key }
+| ${ it.@value }
+<% } %>
+|====
+<% } // if (model.metadata.entry) %>
+
+<% } %>

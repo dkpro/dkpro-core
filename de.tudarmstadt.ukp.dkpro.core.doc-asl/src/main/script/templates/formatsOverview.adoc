@@ -1,4 +1,4 @@
-.I/O Components
+.Formats (${formats.size()})
 [options="header"]
 |====
 |Format|Reader|Writer

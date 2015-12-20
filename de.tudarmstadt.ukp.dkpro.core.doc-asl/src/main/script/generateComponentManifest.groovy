@@ -55,6 +55,7 @@ new File(baseDir).eachFileRecurse(FILES) {
                     }
                     else {
                         engines[uniqueName] = [
+                            name: uniqueName,
                             groupId: pom.groupId ? pom.groupId.text() : pom.parent.groupId.text(),
                             artifactId: pom.artifactId.text(),
                             version: pom.version ? pom.version.text() : pom.parent.version.text(),

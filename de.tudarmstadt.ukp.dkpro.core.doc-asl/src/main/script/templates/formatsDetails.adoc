@@ -1,6 +1,19 @@
 <% 
 import static groovy.json.StringEscapeUtils.escapeJava;
 
+def typeLink(name)
+{
+    if (name.startsWith('uima.cas.')) {
+      return name.substring(9);
+    }
+    if (name.startsWith('uima.tcas.')) {
+      return "${name.tokenize('.')[-1]}"
+    }
+    else {
+      return "<<typesystem-reference.adoc#type-${name},${name.tokenize('.')[-1]}>>"
+    }
+}
+
 formats.sort { it.key }.each { %>
 [[format-${ it.key }]]
 === ${it.key}
@@ -32,7 +45,7 @@ ${it.key} (__${it.value[0].type}<%
 if (it.value[0].multiValued) { %>[]<% } 
 %>__)<%
 if (paramValues[it.key]) { %> = `<%
-out.print escapeJava(String.valueOf(paramValues[it.key][0].value))
+out.print escapeJava((paramValues[it.key][0].value ?: 'null') as String)
     .replaceAll('`','{backtick}')   
 %>` <% } 
 if (!it.value[0].mandatory) { %> [optional]<% } 
@@ -54,15 +67,14 @@ if (outputs) {
 ===== Outputs
 [cols="h,v"]
 |====
-| Outputs <% 
-if (outputs) { %>
-| <% outputs.each {
-      out.println "<<typesystem-reference.adoc#type-${it},${it.tokenize('.')[-1]}>>"
-    }
-  %>
-<% } else { // outputs %>
-| __none specified__
-<% } // outputs %>
+| Outputs
+| <% 
+if (outputs) { 
+  outputs.each { out.println typeLink(it) };
+} else { 
+  out.println '__none specified__';
+}
+%>
 |====
 <% } // outputs %>
 
@@ -93,7 +105,7 @@ ${it.key} (__${it.value[0].type}<%
 if (it.value[0].multiValued) { %>[]<% } 
 %>__)<%
 if (paramValues[it.key]) { %> = `<%
-out.print escapeJava(String.valueOf(paramValues[it.key][0].value))
+out.print escapeJava((paramValues[it.key][0].value ?: 'null') as String)
     .replaceAll('`','{backtick}')   
 %>` <% } 
 if (!it.value[0].mandatory) { %> [optional]<% } 
@@ -115,15 +127,14 @@ if (inputs) {
 ===== Inputs
 [cols="h,v"]
 |====
-| Inputs <% 
-if (inputs) { %>
-| <% inputs.each {
-      out.println "<<typesystem-reference.adoc#type-${it},${it.tokenize('.')[-1]}>>"
-    }
-  %>
-<% } else { // inputs %>
-| __none specified__
-<% } // inputs %>
+| Inputs 
+| <% 
+if (inputs) { 
+  inputs.each { out.println typeLink(it) };
+} else { 
+  out.println '__none specified__';
+}
+%>
 |====
 <% } // inputs %>
 

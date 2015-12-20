@@ -3,15 +3,16 @@ import java.text.BreakIterator;
 
 def typeLink(name)
 {
-if (name.startsWith('uima.cas.')) {
-  return name.substring(9);
+    if (name.startsWith('uima.cas.')) {
+      return name.substring(9);
+    }
+    if (name.startsWith('uima.tcas.')) {
+      return "${name.tokenize('.')[-1]}"
+    }
+    else {
+      return "<<type-${name},${name.tokenize('.')[-1]}>>"
+    }
 }
-if (name.startsWith('uima.tcas.')) {
-  return "${name.tokenize('.')[-1]}"
-}
-else {
-  return "<<type-${name},${name.tokenize('.')[-1]}>>"
-}}
 
 typesystems
     .collect { it.types }

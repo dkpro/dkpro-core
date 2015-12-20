@@ -21,20 +21,29 @@
 The document provides detailed information about the DKPro Core UIMA components.
 
 == Analytics components
+
+include::{generated-dir}componentsOverview.adoc[]
+
 include::{generated-dir}componentsDetails.adoc[]
 
 <<<
 
 == I/O components
 
+include::{generated-dir}formatsOverview.adoc[]
+
 include::{generated-dir}formatsDetails.adoc[]
 
 <<<
 
-== Tables
+== Models
 
-include::{generated-dir}componentsOverview.adoc[]
+include::{generated-dir}modelsOverview.adoc[]
+
+include::{generated-dir}modelsDetails.adoc[]
+
+
+== Appendix
 
 include::{generated-dir}componentsProducersConsumers.adoc[]
 
-include::{generated-dir}formatsOverview.adoc[]

@@ -1,0 +1,26 @@
+<%
+def engineLink(name)
+{
+    return "<<component-reference.adoc#engine-${name},${name}>>"
+}
+%>
+
+.Models (${models.size()})
+[options="header"]
+|====
+|Language|Tool|Variant|Version|Link
+
+<% models.each { model -> %>
+|${model.@language}
+| <% 
+if (model.@engine as String) {
+    out.println engineLink(model.@engine);
+} else {
+    out.println "`${model.@tool}` @ `${model.@shortBase}`";
+} %>
+|${model.@variant}
+|${model.@version}
+|<<model-${model.@artifactId},details>>
+
+<% } %>
+|====
