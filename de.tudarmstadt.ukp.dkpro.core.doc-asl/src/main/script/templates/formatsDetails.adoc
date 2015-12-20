@@ -1,18 +1,6 @@
 <% 
+import Util;
 import static groovy.json.StringEscapeUtils.escapeJava;
-
-def typeLink(name)
-{
-    if (name.startsWith('uima.cas.')) {
-      return name.substring(9);
-    }
-    if (name.startsWith('uima.tcas.')) {
-      return "${name.tokenize('.')[-1]}"
-    }
-    else {
-      return "<<typesystem-reference.adoc#type-${name},${name.tokenize('.')[-1]}>>"
-    }
-}
 
 formats.sort { it.key }.each { %>
 [[format-${ it.key }]]
@@ -45,8 +33,8 @@ ${it.key} (__${it.value[0].type}<%
 if (it.value[0].multiValued) { %>[]<% } 
 %>__)<%
 if (paramValues[it.key]) { %> = `<%
-out.print escapeJava((paramValues[it.key][0].value ?: 'null') as String)
-    .replaceAll('`','{backtick}')   
+out.print escapeJava((paramValues[it.key][0].value != null ? 
+    paramValues[it.key][0].value : 'null') as String).replaceAll('`','{backtick}')   
 %>` <% } 
 if (!it.value[0].mandatory) { %> [optional]<% } 
 %>::
@@ -70,7 +58,7 @@ if (outputs) {
 | Outputs
 | <% 
 if (outputs) { 
-  outputs.each { out.println typeLink(it) };
+  outputs.each { out.println Util.typeLink(it) };
 } else { 
   out.println '__none specified__';
 }
@@ -105,8 +93,8 @@ ${it.key} (__${it.value[0].type}<%
 if (it.value[0].multiValued) { %>[]<% } 
 %>__)<%
 if (paramValues[it.key]) { %> = `<%
-out.print escapeJava((paramValues[it.key][0].value ?: 'null') as String)
-    .replaceAll('`','{backtick}')   
+out.print escapeJava((paramValues[it.key][0].value != null ? 
+    paramValues[it.key][0].value : 'null') as String).replaceAll('`','{backtick}')   
 %>` <% } 
 if (!it.value[0].mandatory) { %> [optional]<% } 
 %>::
@@ -130,7 +118,7 @@ if (inputs) {
 | Inputs 
 | <% 
 if (inputs) { 
-  inputs.each { out.println typeLink(it) };
+  inputs.each { out.println Util.typeLink(it) };
 } else { 
   out.println '__none specified__';
 }

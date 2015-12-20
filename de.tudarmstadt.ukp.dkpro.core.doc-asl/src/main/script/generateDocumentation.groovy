@@ -91,7 +91,7 @@ def getTool(componentName, spec) {
         return "tagger";
     case { it.endsWith("Parser") }: 
         return "parser";
-    case { it.endsWith("Segmenter") }: 
+    case { it.endsWith("Segmenter") || it.endsWith("Tokenizer") }: 
         return "segmenter";
     case { it.endsWith("Normalizer") }: 
         return "normalizer";
@@ -255,7 +255,7 @@ engines.each {
 inputOutputTypes = inputOutputTypes.sort().unique();
 
 
-def te = new groovy.text.SimpleTemplateEngine();
+def te = new groovy.text.SimpleTemplateEngine(this.class.classLoader);
 new File("${properties['baseDir']}/src/main/script/templates/").eachFile(FILES) { tf ->
     def template = te.createTemplate(tf.getText("UTF-8"));
     def result = template.make([

@@ -1,19 +1,5 @@
 <%
-import java.text.BreakIterator;
-
-def shortDesc(description) {
-    if (description) {
-        BreakIterator tokenizer = BreakIterator.getSentenceInstance(Locale.US);
-        tokenizer.setText(description);
-        def start = tokenizer.first();
-        def end = tokenizer.next();
-        if (start > -1 && end > -1) {
-            description = description.substring(start, end);
-        }
-        description = description.replaceAll(']', '{endsb}').replaceAll('\n', '<br />').trim();
-    }
-    return description ? "pass:[${description}]" :  '__No description__';
-}
+import Util;
 %>
 
 .Analysis Components (${engines.size()})
@@ -23,7 +9,7 @@ def shortDesc(description) {
 
 <% engines.sort{ it.key }.each { %>
 |<<engine-${ it.key },${it.key}>>
-|${shortDesc(it.value.spec.metaData.description)}
+|${Util.shortDesc(it.value.spec.metaData.description)}
 
 <% } %>
 |====
