@@ -72,7 +72,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
         },
         outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme"
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures"
         }
 )
 public class MateMorphTagger
