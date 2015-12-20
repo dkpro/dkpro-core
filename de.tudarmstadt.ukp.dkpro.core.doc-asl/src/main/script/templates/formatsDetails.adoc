@@ -1,4 +1,6 @@
 <% 
+import static groovy.json.StringEscapeUtils.escapeJava;
+
 formats.sort { it.key }.each { %>
 [[format-${ it.key }]]
 === ${it.key}
@@ -8,23 +10,123 @@ formats.sort { it.key }.each { %>
 <% if (it.value.readerSpec) { %>
 [[format-${ it.value.readerClass }]]
 [discrete]
-==== Reader
+==== ${ it.key }Reader
 *_Reader class:_* __${it.value.readerClass}__
 
 ++++
 ${it.value.readerSpec.metaData.description}
 ++++
+
+<%
+def paramDecls = it.value.readerSpec.metaData.configurationParameterDeclarations
+    .configurationParameters.sort { it.name }.groupBy { it.name };
+def paramValues = it.value.readerSpec.metaData.configurationParameterSettings
+    .parameterSettings.sort { it.name }.groupBy { it.name };
+    
+if (paramDecls) { 
+%>
+[discrete]
+===== Parameters
+<% paramDecls.each { %>
+${it.key} (__${it.value[0].type}<% 
+if (it.value[0].multiValued) { %>[]<% } 
+%>__)<%
+if (paramValues[it.key]) { %> = `<%
+out.print escapeJava(String.valueOf(paramValues[it.key][0].value))
+    .replaceAll('`','{backtick}')   
+%>` <% } 
+if (!it.value[0].mandatory) { %> [optional]<% } 
+%>::
++ 
+++++
+${it.value[0].description}
+++++
+<% } // paramDecls.each %>
+<% } // if (paramDecls) %>
+
+<%
+def outputs = it.value.readerSpec.collectionReaderMetaData?.capabilities?.collect { 
+        it.outputs?.collect { it.name  } }.flatten().sort().unique();
+
+if (outputs) {
+%>
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs <% 
+if (outputs) { %>
+| <% outputs.each {
+      out.println "<<typesystem-reference.adoc#type-${it},${it.tokenize('.')[-1]}>>"
+    }
+  %>
+<% } else { // outputs %>
+| __none specified__
+<% } // outputs %>
+|====
+<% } // outputs %>
+
 <% } // if (it.value.readerSpec) %>
 
 <% if (it.value.writerSpec) { %>
 [[format-${ it.value.writerClass }]]
 [discrete]
-==== Writer
+==== ${ it.key }Writer
 *_Writer class:_* __${it.value.writerClass}__
 
 ++++
 ${it.value.writerSpec.metaData.description}
 ++++
+
+<%
+def paramDecls = it.value.writerSpec.metaData.configurationParameterDeclarations
+    .configurationParameters.sort { it.name }.groupBy { it.name };
+def paramValues = it.value.writerSpec.metaData.configurationParameterSettings
+    .parameterSettings.sort { it.name }.groupBy { it.name };
+    
+if (paramDecls) { 
+%>
+[discrete]
+===== Parameters
+<% paramDecls.each { %>
+${it.key} (__${it.value[0].type}<% 
+if (it.value[0].multiValued) { %>[]<% } 
+%>__)<%
+if (paramValues[it.key]) { %> = `<%
+out.print escapeJava(String.valueOf(paramValues[it.key][0].value))
+    .replaceAll('`','{backtick}')   
+%>` <% } 
+if (!it.value[0].mandatory) { %> [optional]<% } 
+%>::
++ 
+++++
+${it.value[0].description}
+++++
+<% } // paramDecls.each %>
+<% } // if (paramDecls) %>
+
+<%
+def inputs = it.value.writerSpec.analysisEngineMetaData?.capabilities?.collect { 
+        it.inputs?.collect { it.name  } }.flatten().sort().unique();
+
+if (inputs) {
+%>
+[discrete]
+===== Inputs
+[cols="h,v"]
+|====
+| Inputs <% 
+if (inputs) { %>
+| <% inputs.each {
+      out.println "<<typesystem-reference.adoc#type-${it},${it.tokenize('.')[-1]}>>"
+    }
+  %>
+<% } else { // inputs %>
+| __none specified__
+<% } // inputs %>
+|====
+<% } // inputs %>
+
 <% } // if (it.value.writerSpec) %>
 
 <% } // format %>

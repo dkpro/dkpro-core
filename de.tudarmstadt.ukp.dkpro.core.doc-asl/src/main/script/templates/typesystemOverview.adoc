@@ -1,3 +1,7 @@
+<%
+import java.text.BreakIterator;
+%>
+
 .Top-level Types
 [options="header"]
 |====
@@ -6,7 +10,17 @@
 <% typesystems.collect { it.types }.flatten().sort { it.name.tokenize('.')[-1] }.unique { it.name }.findAll {
    it.supertypeName in ['org.apache.uima.jcas.cas.TOP', 'uima.tcas.Annotation'] }.each { %>
 |<<type-${ it.name },${ it.name.tokenize('.')[-1] }>>
-|${it.description}
+|<%
+def description = it.description;
+BreakIterator tokenizer = BreakIterator.getSentenceInstance(Locale.US);
+tokenizer.setText(description);
+def start = tokenizer.first();
+def end = tokenizer.next();
+if (start > -1 && end > -1) {
+    description = description.substring(start, end);
+}
+out.print description;        
+%>
 
 <% } %>
 |====
@@ -20,7 +34,17 @@
 |Type|Description
 <% it.value.each { %>
 |<<type-${ it.name },${ it.name.tokenize('.')[-1] }>>
-|${it.description}
+|<%
+def description = it.description;
+BreakIterator tokenizer = BreakIterator.getSentenceInstance(Locale.US);
+tokenizer.setText(description);
+def start = tokenizer.first();
+def end = tokenizer.next();
+if (start > -1 && end > -1) {
+    description = description.substring(start, end);
+}
+out.print description;        
+%>
 
 <% } %>
 

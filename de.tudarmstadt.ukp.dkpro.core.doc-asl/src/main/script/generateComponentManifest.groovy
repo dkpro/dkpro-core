@@ -9,8 +9,6 @@ import static org.apache.uima.fit.factory.ResourceCreationSpecifierFactory.*;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 
-def PATH = ".."
-
 @Field def engines = [:];
 
 @Field def formats = [:];
@@ -39,8 +37,8 @@ def addFormat(format, kind, pom, clazz) {
     formats[format][kind] = clazz;
 }
 
-new File(PATH).eachFileRecurse(FILES) {
-    if(it.name.endsWith('.xml') && !it.path.contains('src/test/java')) {
+new File(baseDir).eachFileRecurse(FILES) {
+    if(it.name.endsWith('.xml') && !it.path.contains("src/test/java")) {
         try {
             def spec = createResourceCreationSpecifier(it.path, null);
             if (spec instanceof AnalysisEngineDescription) {
