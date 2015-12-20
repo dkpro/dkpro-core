@@ -1,23 +1,6 @@
 <% 
+import Util;
 import static groovy.json.StringEscapeUtils.escapeJava;
-
-def engineLink(name)
-{
-    return "<<component-reference.adoc#engine-${name},${name}>>"
-}
-
-def typeLink(name)
-{
-    if (name.startsWith('uima.cas.')) {
-      return name.substring(9);
-    }
-    if (name.startsWith('uima.tcas.')) {
-      return "${name.tokenize('.')[-1]}"
-    }
-    else {
-      return "<<typesystem-reference.adoc#type-${name},${name.tokenize('.')[-1]}>>"
-    }
-}
 
 engines
     .sort { it.key }
@@ -37,7 +20,7 @@ def engine = it.value; %>
 *_Class:_* __${engine.spec.annotatorImplementationName}__
 
 ++++
-${engine.spec.metaData.description}
+${Util.preparePassthrough(engine.spec.metaData.description)}
 ++++
 
 <%
@@ -55,14 +38,14 @@ ${it.key} (__${it.value[0].type}<%
 if (it.value[0].multiValued) { %>[]<% } 
 %>__)<%
 if (paramValues[it.key]) { %> = `<%
-out.print escapeJava((paramValues[it.key][0].value ?: 'null') as String)
-    .replaceAll('`','{backtick}')   
+out.print escapeJava((paramValues[it.key][0].value != null ? 
+    paramValues[it.key][0].value : 'null') as String).replaceAll('`','{backtick}')   
 %>` <% } 
 if (!it.value[0].mandatory) { %> [optional]<% } 
 %>::
-+ 
++
 ++++
-${it.value[0].description}
+${Util.preparePassthrough(it.value[0].description)}
 ++++
 <% } // paramDecls.each %>
 <% } // if (paramDecls) %>
@@ -82,7 +65,7 @@ if (inputs || outputs) {
 | Inputs 
 | <% 
 if (inputs) { 
-  inputs.each { out.println typeLink(it) };
+  inputs.each { out.println Util.typeLink(it) };
 } else { 
   out.println '__none specified__';
 }
@@ -91,7 +74,7 @@ if (inputs) {
 | Outputs
 | <% 
 if (outputs) { 
-  outputs.each { out.println typeLink(it) };
+  outputs.each { out.println Util.typeLink(it) };
 } else { 
   out.println '__none specified__';
 }

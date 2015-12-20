@@ -40,6 +40,9 @@
                         </goals>
                         <configuration>
                             <source>${project.basedir}/src/main/script/generateDocumentation.groovy</source>
+                            <scriptpath>
+                                <path>${project.basedir}/src/main/script</path>
+                            </scriptpath>
                             <properties>
                                 <baseDir>${project.basedir}</baseDir>
                             </properties>

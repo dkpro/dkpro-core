@@ -1,19 +1,5 @@
 <%
-import java.text.BreakIterator;
-
-def shortDesc(description) {
-    if (description) {
-        BreakIterator tokenizer = BreakIterator.getSentenceInstance(Locale.US);
-        tokenizer.setText(description);
-        def start = tokenizer.first();
-        def end = tokenizer.next();
-        if (start > -1 && end > -1) {
-            description = description.substring(start, end);
-        }
-        description = description.replaceAll(']', '{endsb}').replaceAll('\n', '<br />').trim();
-    }
-    return description ? "pass:[${description}]" : '__No description__';
-}
+import Util;
 %>
 
 .Top-level Types
@@ -24,7 +10,7 @@ def shortDesc(description) {
 <% typesystems.collect { it.types }.flatten().sort { it.name.tokenize('.')[-1] }.unique { it.name }.findAll {
    it.supertypeName in ['org.apache.uima.jcas.cas.TOP', 'uima.tcas.Annotation'] }.each { %>
 | <<type-${ it.name },${ it.name.tokenize('.')[-1] }>>
-| ${shortDesc(it.description)}
+| ${Util.shortDesc(it.description)}
 
 <% } %>
 |====
@@ -38,7 +24,7 @@ def shortDesc(description) {
 |Type|Description
 <% it.value.each { %>
 |<<type-${ it.name },${ it.name.tokenize('.')[-1] }>>
-| ${shortDesc(it.description)}
+| ${Util.shortDesc(it.description)}
 
 <% } %>
 

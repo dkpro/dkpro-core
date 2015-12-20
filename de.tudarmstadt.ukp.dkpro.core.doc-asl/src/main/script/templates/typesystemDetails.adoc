@@ -1,18 +1,5 @@
 <%
-import java.text.BreakIterator;
-
-def typeLink(name)
-{
-    if (name.startsWith('uima.cas.')) {
-      return name.substring(9);
-    }
-    if (name.startsWith('uima.tcas.')) {
-      return "${name.tokenize('.')[-1]}"
-    }
-    else {
-      return "<<type-${name},${name.tokenize('.')[-1]}>>"
-    }
-}
+import Util;
 
 typesystems
     .collect { it.types }
@@ -24,7 +11,7 @@ typesystems
 === ${type.name.tokenize('.')[-1]}
 
 *_Name:_* __${type.name}__ +
-*_Supertype:_* __${typeLink(type.supertypeName)}__ +
+*_Supertype:_* __${Util.typeLink(type.supertypeName)}__ +
 
 ++++
 ${type.description}
@@ -32,11 +19,11 @@ ${type.description}
 
 <% if (type.features) {%>
 [discrete]
-==== Features of ${typeLink(type.name)}
+==== Features of ${Util.typeLink(type.name)}
 <% type.features.sort { type.name }.each { %>
-${it.name} (__${typeLink(it.rangeTypeName)}__<%
+${it.name} (__${Util.typeLink(it.rangeTypeName)}__<%
 if (it.elementType) {
-  out.print " of ${typeLink(it.elementType)}"
+  out.print " of ${Util.typeLink(it.elementType)}"
 } %>):: ${it.description ?: '__No description__'}
 <% } %>
 <% } // if (type.features) %>
@@ -52,23 +39,13 @@ def subtypes = typesystems
 if (subtypes) {
 %>
 [discrete]
-==== Sub-types of ${typeLink(type.name)}
+==== Sub-types of ${Util.typeLink(type.name)}
 [options="header"]
 |====
 |Type|Description
 <% subtypes.each { subtype -> %>
-|${typeLink(subtype.name)}
-|<%
-def description = subtype.description;
-BreakIterator tokenizer = BreakIterator.getSentenceInstance(Locale.US);
-tokenizer.setText(description);
-def start = tokenizer.first();
-def end = tokenizer.next();
-if (start > -1 && end > -1) {
-    description = description.substring(start, end);
-}
-out.print description;        
-%>
+|${Util.typeLink(subtype.name)}
+|${Util.shortDesc(subtype.description)}
 <% } // subtypes.each { subtype -> %>
 
 |====
