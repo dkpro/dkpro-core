@@ -47,23 +47,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * <p>
- * DKPro Annotator for the MateToolsMorphTagger
- * </p>
- *
- * Required annotations:
- * <ul>
- * <li>Sentence</li>
- * <li>Token</li>
- * <li>Lemma</li>
- * </ul>
- *
- * Generated annotations:
- * <ul>
- * <li>MorphTag</li>
- * </ul>
- *
- *
+ * DKPro Annotator for the MateToolsMorphTagger.
  */
 @TypeCapability(
         inputs = {

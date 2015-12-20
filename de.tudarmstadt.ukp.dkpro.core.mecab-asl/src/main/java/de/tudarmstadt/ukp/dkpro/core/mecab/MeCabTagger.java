@@ -43,27 +43,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.mecab.type.JapaneseToken;
 
 /**
- * <p>
- * DKPro Annotator for the MeCab Japanese POS Tagger
- * </p>
- *
- * Required annotations:
- * <ul>
- * <li>None</li>
- * </ul>
- *
- * Generated annotations:
- * <ul>
- * <li>Sentence</li>
- * <li>Token</li>
- * <li>Lemma</li>
- * <li>POS</li>
- * </ul>
- *
- *
+ * Annotator for the MeCab Japanese POS Tagger.
  */
 @TypeCapability(
-        outputs={ "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        outputs={ 
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
                 "de.tudarmstadt.ukp.dkpro.core.mecab.type.JapaneseToken",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
                 "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"}
