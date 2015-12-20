@@ -36,7 +36,7 @@ ${type.description}
 ${it.name} (__${typeLink(it.rangeTypeName)}__<%
 if (it.elementType) {
   out.print " of ${typeLink(it.elementType)}"
-} %>):: ${it.description ?: ''}
+} %>):: ${it.description ?: '__No description__'}
 <% } %>
 <% } // if (type.features) %>
 

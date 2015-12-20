@@ -170,7 +170,7 @@ new File("${properties['baseDir']}/src/main/script/templates/").eachFile(FILES) 
         formats: formats,
         typesystems: typesystems,
         inputOutputTypes: inputOutputTypes]);
-    def output = new File("target/generated-adoc/${tf.name}");
+    def output = new File("${properties['baseDir']}/target/generated-adoc/${tf.name}");
     output.parentFile.mkdirs();
     output.setText(result.toString(), 'UTF-8');
 }
