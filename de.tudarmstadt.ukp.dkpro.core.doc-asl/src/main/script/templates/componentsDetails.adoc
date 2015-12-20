@@ -1,6 +1,24 @@
 <% 
 import static groovy.json.StringEscapeUtils.escapeJava;
 
+def engineLink(name)
+{
+    return "<<component-reference.adoc#engine-${name},${name}>>"
+}
+
+def typeLink(name)
+{
+    if (name.startsWith('uima.cas.')) {
+      return name.substring(9);
+    }
+    if (name.startsWith('uima.tcas.')) {
+      return "${name.tokenize('.')[-1]}"
+    }
+    else {
+      return "<<typesystem-reference.adoc#type-${name},${name.tokenize('.')[-1]}>>"
+    }
+}
+
 engines
     .sort { it.key }
     .groupBy {it.value.role }
@@ -9,22 +27,23 @@ engines
 %>
 === ${group.key}
 
-<% group.value.each { %>
+<% group.value.each { 
+def engine = it.value; %>
 [[engine-${ it.key }]]
 ==== ${it.key}
 
-*_Role_:* __${it.value.role}__ +
-*_Artifact ID:_* __${it.value.artifactId}__ +
-*_Class:_* __${it.value.spec.annotatorImplementationName}__
+*_Role_:* __${engine.role}__ +
+*_Artifact ID:_* __${engine.artifactId}__ +
+*_Class:_* __${engine.spec.annotatorImplementationName}__
 
 ++++
-${it.value.spec.metaData.description}
+${engine.spec.metaData.description}
 ++++
 
 <%
-def paramDecls = it.value.spec.metaData.configurationParameterDeclarations
+def paramDecls = engine.spec.metaData.configurationParameterDeclarations
     .configurationParameters.sort { it.name }.groupBy { it.name };
-def paramValues = it.value.spec.metaData.configurationParameterSettings
+def paramValues = engine.spec.metaData.configurationParameterSettings
     .parameterSettings.sort { it.name }.groupBy { it.name };
     
 if (paramDecls) { 
@@ -36,7 +55,7 @@ ${it.key} (__${it.value[0].type}<%
 if (it.value[0].multiValued) { %>[]<% } 
 %>__)<%
 if (paramValues[it.key]) { %> = `<%
-out.print escapeJava(String.valueOf(paramValues[it.key][0].value))
+out.print escapeJava((paramValues[it.key][0].value ?: 'null') as String)
     .replaceAll('`','{backtick}')   
 %>` <% } 
 if (!it.value[0].mandatory) { %> [optional]<% } 
@@ -49,9 +68,9 @@ ${it.value[0].description}
 <% } // if (paramDecls) %>
 
 <%
-def inputs = it.value.spec.analysisEngineMetaData?.capabilities?.collect { 
+def inputs = engine.spec.analysisEngineMetaData?.capabilities?.collect { 
         it.inputs?.collect { it.name  } }.flatten().sort().unique();
-def outputs = it.value.spec.analysisEngineMetaData?.capabilities?.collect { 
+def outputs = engine.spec.analysisEngineMetaData?.capabilities?.collect { 
         it.outputs?.collect { it.name  } }.flatten().sort().unique();
 
 if (inputs || outputs) {
@@ -60,27 +79,44 @@ if (inputs || outputs) {
 ===== Inputs and outputs
 [cols="h,v"]
 |====
-| Inputs <% 
-if (inputs) { %>
-| <% inputs.each {
-      out.println "<<typesystem-reference.adoc#type-${it},${it.tokenize('.')[-1]}>>"
-    }
-  %>
-<% } else { // inputs %>
-| __none specified__
-<% } // inputs %>
+| Inputs 
+| <% 
+if (inputs) { 
+  inputs.each { out.println typeLink(it) };
+} else { 
+  out.println '__none specified__';
+}
+%>
 
-| Outputs <% 
-if (outputs) { %>
-| <% outputs.each {
-      out.println "<<typesystem-reference.adoc#type-${it},${it.tokenize('.')[-1]}>>"
-    }
-  %>
-<% } else { // outputs %>
-| __none specified__
-<% } // outputs %>
+| Outputs
+| <% 
+if (outputs) { 
+  outputs.each { out.println typeLink(it) };
+} else { 
+  out.println '__none specified__';
+}
+%>
 |====
 <% } // inputs/outputs %>
+
+<%
+def mods = models.findAll { it.@engine == engine.name };
+
+if (mods) { %>
+[discrete]
+===== Models
+[options="header"]
+|====
+|Language|Variant|Version|Link
+<% mods.each { model -> %>
+|${model.@language}
+|${model.@variant}
+|${model.@version}
+|<<model-${model.@artifactId},details>>
+
+<% } // mods.each { model -> %>
+|====
+<% } // if (mods) %>
 
 <% } // component %>
 <% } // component group%>

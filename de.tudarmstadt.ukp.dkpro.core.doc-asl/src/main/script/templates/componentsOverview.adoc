@@ -1,17 +1,28 @@
-<% /*
-====================================================================================================
-Component overview
-====================================================================================================
-*/ %>
+<%
+import java.text.BreakIterator;
 
-.Analysis Components
+def shortDesc(description) {
+    if (description) {
+        BreakIterator tokenizer = BreakIterator.getSentenceInstance(Locale.US);
+        tokenizer.setText(description);
+        def start = tokenizer.first();
+        def end = tokenizer.next();
+        if (start > -1 && end > -1) {
+            description = description.substring(start, end);
+        }
+    }
+    return description;
+}
+%>
+
+.Analysis Components (${engines.size()})
 [options="header"]
 |====
-|Component|Module
+|Component|Description
 
 <% engines.sort{ it.key }.each { %>
 |<<engine-${ it.key },${it.key}>>
-|${it.value.artifactId}
+|${shortDesc(it.value.spec.metaData.description)}
 
 <% } %>
 |====

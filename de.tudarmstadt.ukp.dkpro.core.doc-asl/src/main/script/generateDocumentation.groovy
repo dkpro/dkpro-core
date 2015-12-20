@@ -18,6 +18,8 @@ import org.apache.uima.util.XMLInputSource;
 
 @Field def typesystems = [];
 
+@Field def models = [];
+
 def locatePom(path) {
     def pom = new File(path, "pom.xml");
     if (pom.exists()) {
@@ -44,55 +46,71 @@ def addFormat(format, kind, pom, spec, clazz) {
     formats[format][kind+'Spec'] = spec;
 }
 
-def getRole(componentName, spec) {
+def roleNames = [
+    coref: 'Coreference resolver',
+    tagger: 'Part-of-speech tagger',
+    parser: 'Parser',
+    chunker: 'Chunker',
+    segmenter: 'Segmenter',
+    normalizer: 'Normalizer',
+    checker: 'Checker',
+    lemmatizer: 'Lemmatizer',
+    srl: 'Semantic role labeler',
+    morph: 'Morphological analyzer',
+    transformer: 'Transformer',
+    stem: 'Stemmer',
+    ner: 'Named Entity Recognizer',
+    langdetect: 'Language Identifier',
+    other: 'Other' ];
+
+def getTool(componentName, spec) {
     def outputs = spec.analysisEngineMetaData?.capabilities?.collect { 
         it.outputs?.collect { it.name } }.flatten().sort().unique()
     
     switch (componentName) {
     case { 'de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain' in outputs }: 
-        return "Coreference resolver";
+        return "coref";
     case { 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity' in outputs }: 
-        return "Named Entity Recognizer";
+        return "ner";
     case { 'de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.GrammarAnomaly' in outputs ||
            'de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly' in outputs }: 
-        return "Checker";
-    case { it.endsWith("Transformer") || it.endsWith("Normalizer") }: 
-        return "Transformer";
-    case { it.endsWith("Chunker") }: 
-        return "Chunker";
-    case { it.endsWith("Tagger") }: 
-        return "Part-of-speech tagger";
-    case { it.endsWith("Parser") }: 
-        return "Parser";
-    case { it.endsWith("Segmenter") }: 
-        return "Segmenter";
-    case { it.endsWith("Normalizer") }: 
-        return "Normalizer";
-    case { it.endsWith("Lemmatizer") }: 
-        return "Lemmatizer";
-    case { 'de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument' in outputs }: 
-        return "Semantic role labeller";
+        return "checker";
     case { 'de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures' in outputs }: 
-        return "Morphological analyzer";
+        return "morph";
+    case { 'de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument' in outputs }: 
+        return "srl";
     case { 'de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem' in outputs }: 
-        return "Stemmer";
+        return "stem";
+    case { it.endsWith("Transformer") || it.endsWith("Normalizer") }: 
+        return "transformer";
+    case { it.endsWith("Chunker") }: 
+        return "chunker";
+    case { it.endsWith("LanguageIdentifier") || it.contains("LanguageDetector") }: 
+        return "langdetect";
+    case { it.endsWith("Tagger") }: 
+        return "tagger";
+    case { it.endsWith("Parser") }: 
+        return "parser";
+    case { it.endsWith("Segmenter") }: 
+        return "segmenter";
+    case { it.endsWith("Normalizer") }: 
+        return "normalizer";
+    case { it.endsWith("Lemmatizer") }: 
+        return "lemmatizer";
     default:
-        return "Other";
+        return "other";
     }
 }
 
 new File(properties['baseDir'], '..').eachFileRecurse(FILES) {
     if (
         it.name.endsWith('.xml') && 
-        (it.path.contains('/src/main/resources/') || it.path.contains('/target/classes/'))
-//        !it.path.contains('src/test/') && 
-//        !it.path.contains('/target/surefire-reports/') && 
-//        !it.path.contains('/target/test-classes/') && 
-//        !it.path.contains('/target/test-output/') && 
-//        !it.path.contains('/.settings/') && 
-//        !it.path.endsWith('/build.xml') && 
-//        !it.path.endsWith('/pom.xml') && 
-//        !it.path.contains('core.testing-asl')
+        (
+            // For the typesystem descriptors
+            it.path.contains('/src/main/resources/') || 
+            // For the analysis engine and reader descriptions
+            it.path.contains('/target/classes/')
+        )
     ) {
         def processed = false;
         try {
@@ -111,12 +129,14 @@ new File(properties['baseDir'], '..').eachFileRecurse(FILES) {
                     }
                     else {
                         engines[uniqueName] = [
+                            name: uniqueName,
                             groupId: pom.groupId ? pom.groupId.text() : pom.parent.groupId.text(),
                             artifactId: pom.artifactId.text(),
                             version: pom.version ? pom.version.text() : pom.parent.version.text(),
                             pom: pom,
                             spec: spec,
-                            role: getRole(uniqueName, spec)
+                            role: roleNames[getTool(uniqueName, spec)],
+                            tool: getTool(uniqueName, spec)
                         ];
                     }
                 }
@@ -144,6 +164,7 @@ new File(properties['baseDir'], '..').eachFileRecurse(FILES) {
             try {
                 typesystems << getXMLParser().parseTypeSystemDescription(
                     new XMLInputSource(it.path));
+                processed = true;
             }
             catch (org.apache.uima.util.InvalidXMLException e) {
                 // Ignore
@@ -152,6 +173,76 @@ new File(properties['baseDir'], '..').eachFileRecurse(FILES) {
     }
 }
 
+new File(properties['baseDir'], '..').eachFileRecurse(FILES) {
+    if (it.path.endsWith('/src/scripts/build.xml')) {
+        def buildXml = new XmlSlurper().parse(it);
+        def modelXmls = buildXml.'**'.findAll{ node -> node.name() in [
+            'install-stub-and-upstream-file', 'install-stub-and-upstream-folder',
+            'install-upstream-file', 'install-upstream-folder' ]};
+        
+        // Extrack package
+        def pack = buildXml.'**'.find { it.name() == 'property' && it.@name == 'outputPackage' }.@value as String;
+        if (pack.endsWith('/')) {
+            pack = pack[0..-2];
+        }
+        if (pack.endsWith('/lib')) {
+            pack = pack[0..-5];
+        }
+        pack = pack.replaceAll('/', '.');
+        
+        // Auto-generate some additional attributes for convenience!
+        modelXmls.each { model ->
+            def shortBase = model.@artifactIdBase.text().tokenize('.')[-1];
+            model.@shortBase = shortBase as String;
+            model.@shortArtifactId = "${shortBase}-model-${model.@tool}-${model.@language}-${model.@variant}" as String;
+            model.@artifactId = "${model.@artifactIdBase}-model-${model.@tool}-${model.@language}-${model.@variant}" as String;
+            model.@package = pack as String;
+            model.@version = "${model.@upstreamVersion}.${model.@metaDataVersion}" as String;
+            
+            def engine = engines.values()
+                .findAll { engine ->
+                    def clazz = engine.spec.annotatorImplementationName;
+                    def enginePack = clazz.substring(0, clazz.lastIndexOf('.'));
+                    enginePack == pack;
+                }
+                .find { engine ->
+                    // There should be only one tool matching here - at least we don't have models
+                    // yet that apply to multiple tools... I believe - REC
+                    switch (model.@tool as String) {
+                    case 'token':
+                        return engine.tool == 'segmenter';
+                    case 'sentence':
+                        return engine.tool == 'segmenter';
+                    // Special handling for langdetect models which use wrong tool designation
+                    case 'languageidentifier':
+                        return engine.tool == 'langdetect';
+                    // Special handling for MateTools models which use wrong tool designation
+                    case 'morphtagger':
+                        return engine.tool == 'morph';
+                    // Special handling for ClearNLP lemmatizer because dictionary is actually
+                    // used in multiple places
+                    case 'dictionary':
+                        return engine.tool == 'lemmatizer';
+                    default:
+                        return engine.tool == (model.@tool as String);
+                    }
+                };
+            if (engine) {
+                model.@engine = engine.name;
+            }
+            
+        }
+        models.addAll(modelXmls);
+    }
+}
+
+models = models.sort { a,b ->
+    (a.@language as String) <=> (b.@language as String) ?: 
+    (a.@tool as String) <=> (b.@tool as String) ?: 
+    (a.@engine as String) <=> (b.@engine as String) ?: 
+    (a.@variant as String) <=> (b.@variant as String)  
+}; 
+    
 def inputOutputTypes = [];
 engines.each {
     it.value.spec.analysisEngineMetaData?.capabilities?.each { capability ->
@@ -168,6 +259,7 @@ new File("${properties['baseDir']}/src/main/script/templates/").eachFile(FILES) 
     def result = template.make([
         engines: engines,
         formats: formats,
+        models: models,
         typesystems: typesystems,
         inputOutputTypes: inputOutputTypes]);
     def output = new File("${properties['baseDir']}/target/generated-adoc/${tf.name}");
