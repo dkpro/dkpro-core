@@ -44,14 +44,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField;
     outputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NamedEntity" })
 /**
- *
  * This Analysis Engine annotates
- * English single words with semantic field information retrieved from an ExternalResource
+ * English single words with semantic field information retrieved from an ExternalResource.
  * This could be a lexical resource such as WordNet or a simple key-value map.
  * The annotation is stored in the SemanticField annotation type.
- *
- *
- *
  */
 public class SemanticFieldAnnotator
     extends JCasAnnotator_ImplBase

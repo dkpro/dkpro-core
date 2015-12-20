@@ -57,27 +57,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 /**
- * <p>
- * DKPro Annotator for the MateToolsParser
- * </p>
+ * DKPro Annotator for the MateToolsParser.
  *
- * Please cite the following paper, if you use the parser Bernd Bohnet. 2010. Top Accuracy and Fast
+ * <p>
+ * Please cite the following paper, if you use the parser: Bernd Bohnet. 2010. Top Accuracy and Fast
  * Dependency Parsing is not a Contradiction. The 23rd International Conference on Computational
  * Linguistics (COLING 2010), Beijing, China.
- *
- * Required annotations:
- * <ul>
- * <li>Sentence</li>
- * <li>Token</li>
- * <li>POS</li>
- * </ul>
- *
- * Generated annotations:
- * <ul>
- * <li>Dependency</li>
- * </ul>
- *
- *
+ * </p>
  */
 @TypeCapability(
         inputs = {

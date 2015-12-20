@@ -64,29 +64,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 /**
- * <p>
- * DKPro Annotator for the MateTools Semantic Role Labeler
- * </p>
- *
+ * DKPro Annotator for the MateTools Semantic Role Labeler.
+ *<p>
  * Please cite the following paper, if you use the semantic role labeler
  * Anders Björkelund, Love Hafdell, and Pierre Nugues.  Multilingual semantic role labeling. 
  * In Proceedings of The Thirteenth Conference on Computational Natural Language Learning (CoNLL-2009),
  * pages 43--48, Boulder, June 4--5 2009. 
- *
- * Required annotations:
- * <ul>
- * <li>Sentence</li>
- * <li>Token</li>
- * <li>POS</li>
- * <li>Lemma</li>
- * <li>Dependency</li>
- * </ul>
- *
- * Generated annotations:
- * <ul>
- * <li>SemanticPredicate</li>
- * <li>SemanticArgument</li>
- * </ul>
+ * </p>
  */
 @TypeCapability(
 	inputs = {

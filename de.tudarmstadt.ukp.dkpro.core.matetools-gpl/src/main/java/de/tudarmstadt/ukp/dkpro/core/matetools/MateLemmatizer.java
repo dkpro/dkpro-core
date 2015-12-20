@@ -47,22 +47,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * <p>
- * DKPro Annotator for the MateToolsLemmatizer
- * </p>
- *
- * Required annotations:
- * <ul>
- * <li>Token</li>
- * <li>Sentence</li>
- * </ul>
- *
- * Generated annotations:
- * <ul>
- * <li>Lemma</li>
- * </ul>
- *
- *
+ * DKPro Annotator for the MateToolsLemmatizer.
  */
 @TypeCapability(
         inputs = {
