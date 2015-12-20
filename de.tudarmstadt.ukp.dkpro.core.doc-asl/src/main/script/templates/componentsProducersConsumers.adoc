@@ -1,16 +1,20 @@
+<%
+import Util;
+%>
+
 .Producers and consumers by type
 [options="header",cols="s,v,v"]
 |====
 |Type|Producer|Consumer
 
 <% inputOutputTypes.sort().each { type -> %>
-|${type.tokenize('.')[-1]}
+|${Util.typeLink(type)}
 | <%
     engines.sort{ it.key }.findAll { engine ->
       engine.value.spec.analysisEngineMetaData?.capabilities?.any { 
         it.outputs?.any { it.name == type } } 
     }.each { engine ->
-      out.println "<<engine-${ engine.value.spec.annotatorImplementationName },${engine.key}>>"
+      out.println Util.engineLink(engine.key)
     }
   %>
 | <%
@@ -18,7 +22,7 @@
       it.value.spec.analysisEngineMetaData?.capabilities?.any {
         it.inputs?.any { it.name == type } }
     }.each { engine ->
-      out.println "<<engine-${ engine.value.spec.annotatorImplementationName },${engine.key}>>"
+      out.println Util.engineLink(engine.key)
     }
   %>
 
