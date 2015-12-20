@@ -130,6 +130,8 @@
 	<modules>
 		<module>de.tudarmstadt.ukp.dkpro.core-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core-gpl</module>
+        <!-- Documentation and examples modules -->
+        <module>de.tudarmstadt.ukp.dkpro.core.doc-asl</module>
 	</modules>
     <dependencyManagement>
         <dependencies>
