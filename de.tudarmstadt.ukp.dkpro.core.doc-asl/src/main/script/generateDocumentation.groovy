@@ -12,8 +12,6 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.resource.metadata.TypeSystemDescription;
 import org.apache.uima.util.XMLInputSource;
 
-def PATH = ".."
-
 @Field def engines = [:];
 
 @Field def formats = [:];
@@ -83,8 +81,19 @@ def getRole(componentName, spec) {
     }
 }
 
-new File(PATH).eachFileRecurse(FILES) {
-    if(it.name.endsWith('.xml') && !it.path.contains('src/test/java') && !it.path.contains('core.testing-asl')) {
+new File(properties['baseDir']).eachFileRecurse(FILES) {
+    if (
+        it.name.endsWith('.xml') && 
+        it.path.contains('/src/main/resources/')
+//        !it.path.contains('src/test/') && 
+//        !it.path.contains('/target/surefire-reports/') && 
+//        !it.path.contains('/target/test-classes/') && 
+//        !it.path.contains('/target/test-output/') && 
+//        !it.path.contains('/.settings/') && 
+//        !it.path.endsWith('/build.xml') && 
+//        !it.path.endsWith('/pom.xml') && 
+//        !it.path.contains('core.testing-asl')
+    ) {
         def processed = false;
         try {
             def spec = createResourceCreationSpecifier(it.path, null);
@@ -154,7 +163,7 @@ inputOutputTypes = inputOutputTypes.sort().unique();
 
 
 def te = new groovy.text.SimpleTemplateEngine();
-new File("src/main/script/templates/").eachFile(FILES) { tf ->
+new File("${properties['baseDir']}/src/main/script/templates/").eachFile(FILES) { tf ->
     def template = te.createTemplate(tf.getText("UTF-8"));
     def result = template.make([
         engines: engines,

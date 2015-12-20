@@ -1,18 +1,75 @@
-<% typesystems.collect { it.types }.flatten().sort { it.name.tokenize('.')[-1] }.unique { it.name }.each { %>
-[[type-${ it.name }]]
-=== ${it.name.tokenize('.')[-1]}
+<%
+import java.text.BreakIterator;
 
-*_Name:_* __${it.name}__ +
+def typeLink(name)
+{
+if (name.startsWith('uima.cas.')) {
+  return name.substring(9);
+}
+if (name.startsWith('uima.tcas.')) {
+  return "${name.tokenize('.')[-1]}"
+}
+else {
+  return "<<type-${name},${name.tokenize('.')[-1]}>>"
+}}
+
+typesystems
+    .collect { it.types }
+    .flatten()
+    .sort { it.name.tokenize('.')[-1] }
+    .unique { it.name }
+    .each { type -> %>
+[[type-${ type.name }]]
+=== ${type.name.tokenize('.')[-1]}
+
+*_Name:_* __${type.name}__ +
+*_Supertype:_* __${typeLink(type.supertypeName)}__ +
 
 ++++
-${it.description}
+${type.description}
 ++++
 
-<% if (it.features) {%>
-.Features
-<% it.features.sort { it.name }.each { %>
-${it.name} (__${it.rangeTypeName}__):: ${it.description ?: '__No description__'}
+<% if (type.features) {%>
+[discrete]
+==== Features of ${typeLink(type.name)}
+<% type.features.sort { type.name }.each { %>
+${it.name} (__${typeLink(it.rangeTypeName)}__<%
+if (it.elementType) {
+  out.print " of ${typeLink(it.elementType)}"
+} %>):: ${it.description ?: ''}
 <% } %>
-<% } // if (it.features) %>
+<% } // if (type.features) %>
+
+<%
+def subtypes = typesystems
+    .collect { it.types }
+    .flatten().sort { it.name.tokenize('.')[-1] }
+    .unique { it.name }
+    .findAll { it.supertypeName == type.name };
+    
+if (subtypes) {
+%>
+[discrete]
+==== Sub-types of ${typeLink(type.name)}
+[options="header"]
+|====
+|Type|Description
+<% subtypes.each { subtype -> %>
+|${typeLink(subtype.supertypeName)}
+|<%
+def description = subtype.description;
+BreakIterator tokenizer = BreakIterator.getSentenceInstance(Locale.US);
+tokenizer.setText(description);
+def start = tokenizer.first();
+def end = tokenizer.next();
+if (start > -1 && end > -1) {
+    description = description.substring(start, end);
+}
+out.print description;        
+%>
+<% } // subtypes.each { subtype -> %>
+
+|====
+<% } // if (subtypes) %>
 
 <% } %>

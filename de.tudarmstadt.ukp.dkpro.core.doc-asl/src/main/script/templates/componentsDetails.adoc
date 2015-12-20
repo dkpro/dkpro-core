@@ -1,4 +1,6 @@
 <% 
+import static groovy.json.StringEscapeUtils.escapeJava;
+
 engines
     .sort { it.key }
     .groupBy {it.value.role }
@@ -19,38 +21,66 @@ engines
 ${it.value.spec.metaData.description}
 ++++
 
+<%
+def paramDecls = it.value.spec.metaData.configurationParameterDeclarations
+    .configurationParameters.sort { it.name }.groupBy { it.name };
+def paramValues = it.value.spec.metaData.configurationParameterSettings
+    .parameterSettings.sort { it.name }.groupBy { it.name };
+    
+if (paramDecls) { 
+%>
+[discrete]
+===== Parameters
+<% paramDecls.each { %>
+${it.key} (__${it.value[0].type}<% 
+if (it.value[0].multiValued) { %>[]<% } 
+%>__)<%
+if (paramValues[it.key]) { %> = `<%
+out.print escapeJava(String.valueOf(paramValues[it.key][0].value))
+    .replaceAll('`','{backtick}')   
+%>` <% } 
+if (!it.value[0].mandatory) { %> [optional]<% } 
+%>::
++ 
+++++
+${it.value[0].description}
+++++
+<% } // paramDecls.each %>
+<% } // if (paramDecls) %>
+
+<%
+def inputs = it.value.spec.analysisEngineMetaData?.capabilities?.collect { 
+        it.inputs?.collect { it.name  } }.flatten().sort().unique();
+def outputs = it.value.spec.analysisEngineMetaData?.capabilities?.collect { 
+        it.outputs?.collect { it.name  } }.flatten().sort().unique();
+
+if (inputs || outputs) {
+%>
+[discrete]
+===== Inputs and outputs
 [cols="h,v"]
 |====
-<% /*
-| Group ID
-| ${it.value.groupId}
-
-| Artifact ID
-| ${it.value.artifactId}
-
-| Version
-| ${it.value.version}
-
-| Class
-| ${it.value.spec.annotatorImplementationName}
-*/ %>
-
-| Inputs
-| <% it.value.spec.analysisEngineMetaData?.capabilities?.collect { 
-        it.inputs?.collect { it.name  } 
-    }.flatten().sort().unique().each {
+| Inputs <% 
+if (inputs) { %>
+| <% inputs.each {
       out.println "<<typesystem-reference.adoc#type-${it},${it.tokenize('.')[-1]}>>"
     }
   %>
+<% } else { // inputs %>
+| __none specified__
+<% } // inputs %>
 
-| Outputs
-| <% it.value.spec.analysisEngineMetaData?.capabilities?.collect { 
-        it.outputs?.collect { it.name  } 
-    }.flatten().sort().unique().each {
+| Outputs <% 
+if (outputs) { %>
+| <% outputs.each {
       out.println "<<typesystem-reference.adoc#type-${it},${it.tokenize('.')[-1]}>>"
     }
   %>
+<% } else { // outputs %>
+| __none specified__
+<% } // outputs %>
 |====
+<% } // inputs/outputs %>
 
 <% } // component %>
 <% } // component group%>
