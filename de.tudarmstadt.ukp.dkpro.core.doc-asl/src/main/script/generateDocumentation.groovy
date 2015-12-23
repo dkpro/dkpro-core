@@ -55,7 +55,6 @@ def roleNames = [
     parser: 'Parser',
     chunker: 'Chunker',
     segmenter: 'Segmenter',
-    normalizer: 'Normalizer',
     checker: 'Checker',
     lemmatizer: 'Lemmatizer',
     srl: 'Semantic role labeler',
@@ -64,6 +63,7 @@ def roleNames = [
     stem: 'Stemmer',
     ner: 'Named Entity Recognizer',
     langdetect: 'Language Identifier',
+    transcriptor: 'Phonetic Transcriptor',
     other: 'Other' ];
 
 /**
@@ -88,7 +88,10 @@ def getTool(componentName, spec) {
         return "srl";
     case { 'de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem' in outputs }: 
         return "stem";
-    case { it.endsWith("Transformer") || it.endsWith("Normalizer") }: 
+    case { 
+            it.endsWith("Transformer") || 
+            it.endsWith("Normalizer") ||
+            spec.annotatorImplementationName.contains('.textnormalizer.transformation.') }: 
         return "transformer";
     case { it.endsWith("Chunker") }: 
         return "chunker";
@@ -98,12 +101,15 @@ def getTool(componentName, spec) {
         return "tagger";
     case { it.endsWith("Parser") }: 
         return "parser";
-    case { it.endsWith("Segmenter") || it.endsWith("Tokenizer") }: 
+    case { 
+            it.endsWith("Segmenter") || 
+            it.endsWith("Tokenizer") ||
+            spec.annotatorImplementationName.contains('.tokit.')}: 
         return "segmenter";
-    case { it.endsWith("Normalizer") }: 
-        return "normalizer";
     case { it.endsWith("Lemmatizer") }: 
         return "lemmatizer";
+    case { it.endsWith("PhoneticTranscriptor") }: 
+        return "transcriptor";
     default:
         return "other";
     }
