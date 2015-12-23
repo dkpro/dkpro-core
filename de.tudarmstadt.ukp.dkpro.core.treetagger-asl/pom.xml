@@ -122,12 +122,12 @@
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-en-le</artifactId>
-				<version>20150209.1</version>
+				<version>20151119.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-es-le</artifactId>
-				<version>20140520.1</version>
+				<version>20150724.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
