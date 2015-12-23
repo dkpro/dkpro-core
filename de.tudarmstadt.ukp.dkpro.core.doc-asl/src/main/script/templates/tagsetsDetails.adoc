@@ -133,20 +133,20 @@ def redirectText(tagset)
 
 ${Util.editOnGithub(tagset.url)}
 
-*_Tagset:_* __${tagset.name}__ +
-*_Layer:_* __${tool}__ +
-*_Language:_* __${tagset.lang}__ + 
-*_Redirecting to:_* __${redirectText(tagset)}__ + 
+[small]#*_Tagset:_* __${tagset.name}__# +
+[small]#*_Layer:_* __${tool}__# +
+[small]#*_Language:_* __${tagset.lang}__# + 
+[small]#*_Redirecting to:_* __${redirectText(tagset)}__# + 
 <% } else { %>
 ==== ${tagset.longName} (${tagset.lang})
 
 ${Util.editOnGithub(tagset.url)}
 
-*_Tagset:_* __${tagset.name}__ +
-*_Layer:_* __${tool}__ +
-*_Language:_* __${tagset.lang}__ + 
-*_Type base:_* __${tagset.mapping.getString('__META_TYPE_BASE__') ?: 'None'}__ +
-*_Default type:_* __${defaultTypeText(tagset)}__
+[small]#*_Tagset:_* __${tagset.name}__# +
+[small]#*_Layer:_* __${tool}__# +
+[small]#*_Language:_* __${tagset.lang}__# + 
+[small]#*_Type base:_* __${tagset.mapping.getString('__META_TYPE_BASE__') ?: 'None'}__# +
+[small]#*_Default type:_* __${defaultTypeText(tagset)}__#
 
 // DESCRIPTION
 ${headerCommentText(tagset)}

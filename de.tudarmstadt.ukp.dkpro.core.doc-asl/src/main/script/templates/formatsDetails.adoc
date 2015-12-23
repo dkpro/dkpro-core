@@ -6,16 +6,16 @@ formats.sort { it.key }.each { %>
 [[format-${ it.key }]]
 === ${it.key}
 
-*_Artifact ID:_* __${it.value.artifactId}__ +
+[small]#*_Artifact ID:_* __${it.value.artifactId}__#
 
 <% if (it.value.readerSpec) { %>
 [[format-${ it.value.readerClass }]]
 [discrete]
 ==== ${ it.key }Reader
-*_Reader class:_* __${it.value.readerClass}__
+[small]#*_Reader class:_* __${it.value.readerClass}__#
 
 ++++
-${it.value.readerSpec.metaData.description}
+${Util.preparePassthrough(it.value.readerSpec.metaData.description)}
 ++++
 
 <%
@@ -72,10 +72,11 @@ if (outputs) {
 [[format-${ it.value.writerClass }]]
 [discrete]
 ==== ${ it.key }Writer
-*_Writer class:_* __${it.value.writerClass}__
+
+[small]#*_Writer class:_* __${it.value.writerClass}__#
 
 ++++
-${it.value.writerSpec.metaData.description}
+${Util.preparePassthrough(it.value.writerSpec.metaData.description)}
 ++++
 
 <%
