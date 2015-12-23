@@ -13,7 +13,7 @@ def shortTypeName = type.name.tokenize('.')[-1];
 // Hide elevated types from the TOC
 if ( 
     // Not a top-level type
-    !type.supertypeName in ['org.apache.uima.jcas.cas.TOP', 'uima.tcas.Annotation'] ||
+    !(type.supertypeName in ['org.apache.uima.jcas.cas.TOP', 'uima.tcas.Annotation']) &&
     // Does not define new features
     type.features.size() == 0
 ) {
