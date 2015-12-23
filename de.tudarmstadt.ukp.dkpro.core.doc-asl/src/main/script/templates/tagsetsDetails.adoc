@@ -183,7 +183,8 @@ def linkedModels = models
         }
     };
 if (!linkedModels.isEmpty()) { %>
-.Models using ${tagset.longName} (${tagset.lang})
+[discrete]
+===== Models using ${tagset.longName} (${tagset.lang})
 <% 
 linkedModels.each { model ->
     out.println "* ${Util.modelLink(model)}"
@@ -194,7 +195,8 @@ __This mapping is not used in any models.__
 <% } %>
 
 // TABLE OF TAGS IN THE TAGSET
-.Tag mappings in ${tagset.longName} (${tagset.lang})
+[discrete]
+===== Tag mappings in ${tagset.longName} (${tagset.lang})
 [options="header",cols="1,1,3"]
 |====
 |Tag|Type|Description
