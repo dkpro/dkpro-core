@@ -179,7 +179,8 @@ def linkedModels = models
     .findAll { model ->
         model.metadata.entry.any { entry -> 
             entry.@key == "${tool}.tagset" &&
-            entry.@value == tagset.name
+            entry.@value == tagset.name &&
+            model.@language == tagset.lang
         }
     };
 if (!linkedModels.isEmpty()) { %>
