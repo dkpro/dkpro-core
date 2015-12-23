@@ -30,7 +30,7 @@ import org.junit.rules.TemporaryFolder;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
-public class XmlWriterInlineTest
+public class InlineXmlWriterTest
 {
 	@Rule
 	public TemporaryFolder workspace = new TemporaryFolder();
@@ -41,9 +41,9 @@ public class XmlWriterInlineTest
 	{
 		String testDocument = "This is a test.";
 
-		AnalysisEngine consumer = createEngine(XmlWriterInline.class,
-				XmlWriterInline.PARAM_TARGET_LOCATION, workspace.getRoot().getPath(),
-				XmlWriterInline.PARAM_STRIP_EXTENSION, true);
+		AnalysisEngine consumer = createEngine(InlineXmlWriter.class,
+				InlineXmlWriter.PARAM_TARGET_LOCATION, workspace.getRoot().getPath(),
+				InlineXmlWriter.PARAM_STRIP_EXTENSION, true);
 
 		JCas jcas = consumer.newJCas();
 		jcas.setDocumentText(testDocument);

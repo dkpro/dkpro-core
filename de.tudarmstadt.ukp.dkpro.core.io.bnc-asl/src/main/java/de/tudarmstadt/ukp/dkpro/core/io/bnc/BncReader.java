@@ -38,7 +38,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.io.xml.XmlReaderText;
+import de.tudarmstadt.ukp.dkpro.core.io.xml.XmlTextReader;
 
 /**
  * Reader for the British National Corpus (XML version).
@@ -52,7 +52,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.xml.XmlReaderText;
 		    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
 		    "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class BncReader
-	extends XmlReaderText
+	extends XmlTextReader
 {
 	/**
 	 * (character) contains a significant punctuation mark as identified by the CLAWS tagger.

@@ -29,7 +29,7 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.component.CasDumpWriter;
 import org.junit.Test;
 
-public class XmlReaderXPathIdValidationTest
+public class XPathXmlReaderIdValidationTest
 {
 	private static final String VALID_DOCS_ROOT = "src/test/resources/input/valid_docs";
 	private static final String INVALID_DOCS_ROOT = "src/test/resources/input/invalid_docs";
@@ -40,12 +40,12 @@ public class XmlReaderXPathIdValidationTest
 	public void idValidationTest() throws UIMAException, IOException
 	{
 		CollectionReader reader = createReader(
-				XmlReaderXPath.class,
-				XmlReaderXPath.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
-				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]**/abbr*.xml" },
-		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top",
-		        XmlReaderXPath.PARAM_LANGUAGE, "en",
-		        XmlReaderXPath.PARAM_DOC_ID_TAG, "num"
+				XmlXPathReader.class,
+				XmlXPathReader.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
+				XmlXPathReader.PARAM_PATTERNS, new String[] { "[+]**/abbr*.xml" },
+		        XmlXPathReader.PARAM_XPATH_EXPRESSION, "/topics/top",
+		        XmlXPathReader.PARAM_LANGUAGE, "en",
+		        XmlXPathReader.PARAM_DOC_ID_TAG, "num"
 		);
 
 		// Should find two files
@@ -62,12 +62,12 @@ public class XmlReaderXPathIdValidationTest
 	public void heteroFormatsIdValidationTest() throws UIMAException, IOException
 	{
 		CollectionReader reader = createReader(
-				XmlReaderXPath.class,
-				XmlReaderXPath.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
-				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]full*.xml", "[+]abbr*.xml" },
-		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/topic | /topics/top",
-		        XmlReaderXPath.PARAM_LANGUAGE, "en",
-		        XmlReaderXPath.PARAM_DOC_ID_TAG, "identifier | num"
+				XmlXPathReader.class,
+				XmlXPathReader.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
+				XmlXPathReader.PARAM_PATTERNS, new String[] { "[+]full*.xml", "[+]abbr*.xml" },
+		        XmlXPathReader.PARAM_XPATH_EXPRESSION, "/topics/topic | /topics/top",
+		        XmlXPathReader.PARAM_LANGUAGE, "en",
+		        XmlXPathReader.PARAM_DOC_ID_TAG, "identifier | num"
 		);
 
 		// Should find two files
@@ -84,11 +84,11 @@ public class XmlReaderXPathIdValidationTest
 	public void attributeIdTest() throws UIMAException, IOException
 	{
 		CollectionReader reader = createReader(
-				XmlReaderXPath.class,
-				XmlReaderXPath.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
-				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]attribute_id.xml" },
-		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top",
-		        XmlReaderXPath.PARAM_DOC_ID_TAG, "@num"
+				XmlXPathReader.class,
+				XmlXPathReader.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
+				XmlXPathReader.PARAM_PATTERNS, new String[] { "[+]attribute_id.xml" },
+		        XmlXPathReader.PARAM_XPATH_EXPRESSION, "/topics/top",
+		        XmlXPathReader.PARAM_DOC_ID_TAG, "@num"
 		);
 
 		AnalysisEngineDescription writer = createEngineDescription(
@@ -104,11 +104,11 @@ public class XmlReaderXPathIdValidationTest
 	public void deepTagIdTest() throws UIMAException, IOException
 	{
 		CollectionReader reader = createReader(
-				XmlReaderXPath.class,
-				XmlReaderXPath.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
-				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]deep_tag_id.xml" },
-		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top",
-		        XmlReaderXPath.PARAM_DOC_ID_TAG, "EN-title/num"
+				XmlXPathReader.class,
+				XmlXPathReader.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
+				XmlXPathReader.PARAM_PATTERNS, new String[] { "[+]deep_tag_id.xml" },
+		        XmlXPathReader.PARAM_XPATH_EXPRESSION, "/topics/top",
+		        XmlXPathReader.PARAM_DOC_ID_TAG, "EN-title/num"
 		);
 
 		AnalysisEngineDescription writer = createEngineDescription(
@@ -124,11 +124,11 @@ public class XmlReaderXPathIdValidationTest
 	public void deepAttributeIdTest() throws UIMAException, IOException
 	{
 		CollectionReader reader = createReader(
-				XmlReaderXPath.class,
-				XmlReaderXPath.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
-				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]deep_attribute_id.xml" },
-		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top",
-		        XmlReaderXPath.PARAM_DOC_ID_TAG, "EN-title/@num"
+				XmlXPathReader.class,
+				XmlXPathReader.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
+				XmlXPathReader.PARAM_PATTERNS, new String[] { "[+]deep_attribute_id.xml" },
+		        XmlXPathReader.PARAM_XPATH_EXPRESSION, "/topics/top",
+		        XmlXPathReader.PARAM_DOC_ID_TAG, "EN-title/@num"
 		);
 
 		AnalysisEngineDescription writer = createEngineDescription(
@@ -146,12 +146,12 @@ public class XmlReaderXPathIdValidationTest
 	public void invalidSubstitutionParameterTest() throws UIMAException, IOException
 	{
 		CollectionReader reader = createReader(
-				XmlReaderXPath.class,
-				XmlReaderXPath.PARAM_SOURCE_LOCATION, INVALID_DOCS_ROOT,
-				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]*.*" },
-		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top",
-		        XmlReaderXPath.PARAM_SUBSTITUTE_TAGS, new String[] { "EN-title" }, // User should provide even number parameters
-		        XmlReaderXPath.PARAM_LANGUAGE, "en"
+				XmlXPathReader.class,
+				XmlXPathReader.PARAM_SOURCE_LOCATION, INVALID_DOCS_ROOT,
+				XmlXPathReader.PARAM_PATTERNS, new String[] { "[+]*.*" },
+		        XmlXPathReader.PARAM_XPATH_EXPRESSION, "/topics/top",
+		        XmlXPathReader.PARAM_SUBSTITUTE_TAGS, new String[] { "EN-title" }, // User should provide even number parameters
+		        XmlXPathReader.PARAM_LANGUAGE, "en"
 		);
 
 		AnalysisEngineDescription writer = createEngineDescription(
@@ -169,12 +169,12 @@ public class XmlReaderXPathIdValidationTest
 		// Doc contains ID tag but no value is provided within the tag.
 		// E.g. <num></num>
 		CollectionReader reader = createReader(
-				XmlReaderXPath.class,
-				XmlReaderXPath.PARAM_SOURCE_LOCATION, INVALID_DOCS_ROOT,
-				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]empty_id.xml" },
-				XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top",
-		        XmlReaderXPath.PARAM_DOC_ID_TAG, "num",
-		        XmlReaderXPath.PARAM_LANGUAGE, "en"
+				XmlXPathReader.class,
+				XmlXPathReader.PARAM_SOURCE_LOCATION, INVALID_DOCS_ROOT,
+				XmlXPathReader.PARAM_PATTERNS, new String[] { "[+]empty_id.xml" },
+				XmlXPathReader.PARAM_XPATH_EXPRESSION, "/topics/top",
+		        XmlXPathReader.PARAM_DOC_ID_TAG, "num",
+		        XmlXPathReader.PARAM_LANGUAGE, "en"
 		);
 
 		AnalysisEngineDescription writer = createEngineDescription(
@@ -191,12 +191,12 @@ public class XmlReaderXPathIdValidationTest
 	{
 		// Doc doesn't contain ID tag at all
 		CollectionReader reader = createReader(
-				XmlReaderXPath.class,
-				XmlReaderXPath.PARAM_SOURCE_LOCATION, INVALID_DOCS_ROOT,
-				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]no_id_tag.xml" },
-				XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top",
-		        XmlReaderXPath.PARAM_DOC_ID_TAG, "num",
-		        XmlReaderXPath.PARAM_LANGUAGE, "en"
+				XmlXPathReader.class,
+				XmlXPathReader.PARAM_SOURCE_LOCATION, INVALID_DOCS_ROOT,
+				XmlXPathReader.PARAM_PATTERNS, new String[] { "[+]no_id_tag.xml" },
+				XmlXPathReader.PARAM_XPATH_EXPRESSION, "/topics/top",
+		        XmlXPathReader.PARAM_DOC_ID_TAG, "num",
+		        XmlXPathReader.PARAM_LANGUAGE, "en"
 		);
 
 		AnalysisEngineDescription writer = createEngineDescription(
@@ -219,12 +219,12 @@ public class XmlReaderXPathIdValidationTest
 		//        ...
 		//      </top>
 		CollectionReader reader = createReader(
-				XmlReaderXPath.class,
-				XmlReaderXPath.PARAM_SOURCE_LOCATION, INVALID_DOCS_ROOT,
-				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]duplicated_id_tags.xml" },
-				XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top",
-		        XmlReaderXPath.PARAM_DOC_ID_TAG, "num",
-		        XmlReaderXPath.PARAM_LANGUAGE, "en"
+				XmlXPathReader.class,
+				XmlXPathReader.PARAM_SOURCE_LOCATION, INVALID_DOCS_ROOT,
+				XmlXPathReader.PARAM_PATTERNS, new String[] { "[+]duplicated_id_tags.xml" },
+				XmlXPathReader.PARAM_XPATH_EXPRESSION, "/topics/top",
+		        XmlXPathReader.PARAM_DOC_ID_TAG, "num",
+		        XmlXPathReader.PARAM_LANGUAGE, "en"
 		);
 
 		AnalysisEngineDescription writer = createEngineDescription(

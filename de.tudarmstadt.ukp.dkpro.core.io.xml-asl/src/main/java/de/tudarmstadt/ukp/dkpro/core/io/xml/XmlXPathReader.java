@@ -65,7 +65,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field;
  */
 @TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field" })
-public class XmlReaderXPath
+public class XmlXPathReader
     extends FileSetCollectionReaderBase
 {
 
