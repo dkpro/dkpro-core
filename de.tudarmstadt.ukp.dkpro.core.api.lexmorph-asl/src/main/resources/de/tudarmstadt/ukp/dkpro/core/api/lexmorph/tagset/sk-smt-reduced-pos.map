@@ -1,7 +1,8 @@
+# SNK
+#
 # Slovak Morphosyntactic Tagset - Tagset used by the Slovak National Corpus
-#
-# Source: http://jlm.ipipan.waw.pl/index.php/JLM/article/view/35
-#
+
+__META_SOURCE_URL__=http://jlm.ipipan.waw.pl/index.php/JLM/article/view/35
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # # - non-word element

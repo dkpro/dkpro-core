@@ -1,7 +1,8 @@
+# MSD
+#
 # Morphosyntactic Specifications for Russian
-#
-# Source: http://corpus.leeds.ac.uk/mocky/msd-ru.html
-#
+
+__META_SOURCE_URL__=http://corpus.leeds.ac.uk/mocky/msd-ru.html
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 ,=PUNC

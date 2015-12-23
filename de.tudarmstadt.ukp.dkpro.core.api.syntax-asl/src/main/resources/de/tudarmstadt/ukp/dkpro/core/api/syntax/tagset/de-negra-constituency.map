@@ -1,7 +1,9 @@
+# NEGRA
+#
 # NEGRA phrasal categories
-#
-# Source: http://www.coli.uni-saarland.de/projects/sfb378/negra-corpus/knoten.html
-#
+
+__META_SOURCE_URL__=http://www.coli.uni-saarland.de/projects/sfb378/negra-corpus/knoten.html
+
 
 # AA superlative phrase with "am"
 AA=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ADJP

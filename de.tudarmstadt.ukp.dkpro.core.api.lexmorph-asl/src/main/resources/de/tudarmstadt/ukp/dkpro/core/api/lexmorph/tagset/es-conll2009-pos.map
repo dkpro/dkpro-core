@@ -1,5 +1,9 @@
-#Ancora part-of-speech tags
-#http://clic.ub.edu/corpus/webfm_send/18
+# Ancora (CoNLL 2009)
+#
+# Ancora part-of-speech tags
+
+__META_SOURCE_URL__=http://clic.ub.edu/corpus/webfm_send/18
+
 *=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
 #Adjective
 a=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ

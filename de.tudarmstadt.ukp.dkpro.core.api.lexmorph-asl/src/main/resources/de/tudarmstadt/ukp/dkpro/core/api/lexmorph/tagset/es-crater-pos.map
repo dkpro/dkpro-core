@@ -1,10 +1,13 @@
+# CRATER (TreeTagger)
+#
 # Spanish TreeTagger Part-of-Speech Tags
 # 
-# Source: http://arxiv.org/pdf/cmp-lg/9406023v1.pdf
-#         ftp://ftp.ims.uni-stuttgart.de/pub/corpora/spanish-tagset.txt
-#
 # This looks like a simpified version of the CRATER tagset for Spanish.
 # See: http://arxiv.org/pdf/cmp-lg/9406023.pdf
+
+__META_SOURCE_URL__=http://arxiv.org/pdf/cmp-lg/9406023v1.pdf
+__META_SOURCE_URL__.1=ftp://ftp.ims.uni-stuttgart.de/pub/corpora/spanish-tagset.txt
+
 # ACRNM	acronym (ISO, CEI)
 # ADJ	Adjectives (mayores, mayor)
 # ADV	Adverbs (muy, demasiado, cómo)

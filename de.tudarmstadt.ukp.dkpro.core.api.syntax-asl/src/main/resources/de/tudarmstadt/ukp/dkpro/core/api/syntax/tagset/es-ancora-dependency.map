@@ -1,5 +1,8 @@
-#Ancora tagset dependencies
-#Source: https://github.com/nlplab/brat/blob/master/configurations/CoNLL-ST-2009-Catalan/annotation.conf
+# Ancora
+#
+# Ancora tagset dependencies
+
+__META_SOURCE_URL__=https://github.com/nlplab/brat/blob/master/configurations/CoNLL-ST-2009-Catalan/annotation.conf
 
 #determiner
 d=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DET

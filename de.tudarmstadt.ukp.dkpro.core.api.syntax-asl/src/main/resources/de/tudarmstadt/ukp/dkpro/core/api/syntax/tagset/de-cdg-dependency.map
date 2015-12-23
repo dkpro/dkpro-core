@@ -1,9 +1,12 @@
+# Constraint-Dependenz Grammatik 
+#
 # Constraint-Dependenz Grammatik (Foth ,2004)
-#
-# Source: http://nats-www.informatik.uni-hamburg.de/pub/CDG/DeutschGrammar/doc.ps
-#
-# Source: http://www.versley.de/versley_tlt05.pdf
-# Source: r5r6_101024.malt.tab
+
+__META_SOURCE_URL__=http://nats-www.informatik.uni-hamburg.de/pub/CDG/DeutschGrammar/doc.p\
+    [Foth, 2004. "Eine umfassende Constraint-Dependenz-Grammatik des Deutschen"]
+__META_SOURCE_URL__.1=http://www.versley.de/versley_tlt05.pd\
+    [Versley, 2005. "Parser evaluation across Text Types"]
+
 # ADV: adverbial modifier
 # APP: apposition
 # ATTR: attribute (of noun)

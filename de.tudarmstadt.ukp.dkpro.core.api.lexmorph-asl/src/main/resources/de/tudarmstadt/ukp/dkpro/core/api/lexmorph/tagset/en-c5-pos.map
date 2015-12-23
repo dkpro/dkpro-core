@@ -1,6 +1,8 @@
-# British National Corpus C5 Tagset
+# BNC Basic Tagset (C5)
 #
-# Source: http://www.natcorp.ox.ac.uk/docs/gramtag.html
+# British National Corpus Basic Tagset C5 Tagset
+
+__META_SOURCE_URL__=http://www.natcorp.ox.ac.uk/docs/gramtag.html
 
 # Default mapping
 *=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O

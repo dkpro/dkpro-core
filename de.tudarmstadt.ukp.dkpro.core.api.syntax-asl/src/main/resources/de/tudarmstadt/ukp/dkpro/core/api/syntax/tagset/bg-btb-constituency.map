@@ -1,7 +1,8 @@
+# BulTreeBank
+#
 # BulTreeBank syntactic tagset
-#
-# Source: http://www.bultreebank.org/TechRep/BTB-TR05.pdf
-#
+
+__META_SOURCE_URL__=http://www.bultreebank.org/TechRep/BTB-TR05.pdf
 
 # A - Adjective Lexical Element
 A=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X

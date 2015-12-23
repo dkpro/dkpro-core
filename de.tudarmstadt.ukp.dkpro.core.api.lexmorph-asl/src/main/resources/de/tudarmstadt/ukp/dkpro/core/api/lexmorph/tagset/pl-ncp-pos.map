@@ -1,8 +1,10 @@
+# NKJP
+#
 # National Corpus of Polish Part-of-Speech tags
-#
-# Source: http://nkjp.pl/poliqarp/help/ense2.html
-#
+
+__META_SOURCE_URL__=http://nkjp.pl/poliqarp/help/ense2.html
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
 SENT=PUNC
 adj\:pl\:acc\:f\:com=ADJ
 adj\:pl\:acc\:f\:pos=ADJ

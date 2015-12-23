@@ -1,3 +1,5 @@
+# AUEB (simple)
+
 noun=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N
 article=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
 verb=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V

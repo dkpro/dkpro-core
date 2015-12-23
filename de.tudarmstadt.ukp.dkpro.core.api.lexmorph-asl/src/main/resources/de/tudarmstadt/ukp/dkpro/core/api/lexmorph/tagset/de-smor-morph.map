@@ -1,8 +1,8 @@
+# SMOR
 #
 # Stuttgarter Morphologisches Analysewerkzeug (SMOR)
-#
-# Source: http://www.cis.uni-muenchen.de/~schmid/tools/SMOR/dspin/
-#
+
+__META_SOURCE_URL__=http://www.cis.uni-muenchen.de/~schmid/tools/SMOR/dspin/
 
 #
 # Feature: animacy

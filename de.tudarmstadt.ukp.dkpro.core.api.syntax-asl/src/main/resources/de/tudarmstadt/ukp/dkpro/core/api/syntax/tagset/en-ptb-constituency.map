@@ -1,7 +1,8 @@
+# Penn Treebank
+#
 # Penn Treebank syntactic tagset
-#
-# Source: http://bulba.sdsu.edu/jeanette/thesis/PennTags.html
-#
+
+__META_SOURCE_URL__=http://bulba.sdsu.edu/jeanette/thesis/PennTags.html
 
 # == Clause level ==
 # S - simple declarative clause, i.e. one that is not introduced by a (possible empty) subordinating 

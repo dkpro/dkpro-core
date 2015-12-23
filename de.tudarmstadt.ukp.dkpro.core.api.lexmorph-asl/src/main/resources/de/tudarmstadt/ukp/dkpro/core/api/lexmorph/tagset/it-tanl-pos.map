@@ -1,6 +1,9 @@
-# Tanl tagset adapted for Italian
+# Tanl
 #
-# Source: http://medialab.di.unipi.it/wiki/Tanl_POS_Tagset
+# Tanl tagset adapted for Italian
+
+__META_SOURCE_URL__=Source: http://medialab.di.unipi.it/wiki/Tanl_POS_Tagset
+
 *=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
 APn=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
 APp=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ

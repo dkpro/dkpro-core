@@ -1,8 +1,11 @@
+# Brandolini
+#
 # Latin TreeTagger Part-of-Speech Tags
 #
 # Gabriele Brandolini
 #
 # Source: extracted from model file using TT4J
+
 # ABBR
 # ADJ
 # ADJ:COM

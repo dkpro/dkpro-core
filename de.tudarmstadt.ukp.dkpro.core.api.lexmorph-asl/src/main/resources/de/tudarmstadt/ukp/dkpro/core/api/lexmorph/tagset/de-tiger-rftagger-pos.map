@@ -1,3 +1,11 @@
+# TIGER (RfTagger)
+#
+# This file contains a tag-mapping as it is used by the German model of the RfTagger. 
+# The mapping is a modified version of the STTS tagset.
+# A fine-grained tag distinction is replaced by the morphological information the RfTagger outputs (e.g. tense, etc.)
+# The de-tiger-morph file contains the morphological mappings.
+# https://www.sketchengine.co.uk/xdocumentation/wiki/tagsets/german_rftagger
+
 # Catch-all rule
 *=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
 
@@ -5,6 +13,7 @@ ADJA=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
 
 ADJD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
 ADV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+PROADV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
 
 APPO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
 APPR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP

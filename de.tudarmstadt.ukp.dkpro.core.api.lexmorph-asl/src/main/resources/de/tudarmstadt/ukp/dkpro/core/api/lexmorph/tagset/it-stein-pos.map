@@ -1,8 +1,11 @@
+# Stein
+#
 # Italian TreeTagger Part-of-Speech Tags
 #
 # Achim Stein
-#
-# Source: ftp://ftp.ims.uni-stuttgart.de/pub/corpora/italian-tagset.txt
+
+__META_SOURCE_URL__=ftp://ftp.ims.uni-stuttgart.de/pub/corpora/italian-tagset.txt
+
 *=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
 # ABR	abbreviation
 ABR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O

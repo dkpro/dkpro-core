@@ -1,7 +1,8 @@
-# Penn Arabic Treebank syntactic tagset
+# Penn Arabic Treebank
 #
-# Source: http://www.ircs.upenn.edu/arabic/Jan03release/TBParsing-info.txt
+# Penn Arabic Treebank syntactic tagset
 
+__META_SOURCE_URL__=http://www.ircs.upenn.edu/arabic/Jan03release/TBParsing-info.txt
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.
 
 # S	sentence

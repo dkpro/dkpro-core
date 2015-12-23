@@ -1,6 +1,9 @@
-# Dutch TreeTagger Part-of-Speech Tags
+# TreeTagger
 #
-# Source: ftp://ftp.ims.uni-stuttgart.de/pub/corpora/dutch-tagset.txt
+# Dutch TreeTagger Part-of-Speech Tags
+
+__META_SOURCE_URL__=ftp://ftp.ims.uni-stuttgart.de/pub/corpora/dutch-tagset.txt
+
 *=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS
 # $.		sentence-final punctuation
 # adj		adjective

@@ -1,6 +1,8 @@
-# French Treebank Dependency Tagset
+# French Treebank
 #
-# Source: http://alpage.inria.fr/statgram/frdep/Publications/FTB-GuideDepSurface.pdf
+# French Treebank Dependency Tagset
+
+__META_SOURCE_URL__=http://alpage.inria.fr/statgram/frdep/Publications/FTB-GuideDepSurface.pdf
 
 # ￼￼￼suj
 suj=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency

@@ -1,6 +1,9 @@
+# Gamallo
+#
 # Galician TreeTagger Part-of-Speech Tags
 #
 # Source: extracted from model using TT4J
+
 *=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS
 # ADJ
 # ADV
