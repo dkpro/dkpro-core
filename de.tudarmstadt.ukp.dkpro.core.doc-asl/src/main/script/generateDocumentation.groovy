@@ -265,6 +265,7 @@ new File(properties['baseDir'], '..').eachFileRecurse(FILES) {
         def config = new PropertiesConfiguration();
         config.setFile(it);
         config.setEncoding("UTF-8");
+        config.setListDelimiter(0 as char);
         config.load();
         
         // Remove .map and split
@@ -290,9 +291,23 @@ new File(properties['baseDir'], '..').eachFileRecurse(FILES) {
             tool = "constituent"
         }
         
+        // Try extracting the long tagset name
+        def longName = config.layout.getCanonicalHeaderComment(true);
+        if (longName) {
+            def lines = longName.split('\n');
+            if (lines.size() > 0) {
+                longName = lines[0];
+            }
+            
+            if (longName.startsWith('#')) {
+                longName = longName.length() > 1 ? longName[1..-1].trim() : '';
+            }
+        }
+        
         tagsets["${lang}-${name}-${tool}"] = [
             lang: lang,
             name: name,
+            longName: longName ?: name,
             tool: tool,
             mapping: config,
             source: it,
