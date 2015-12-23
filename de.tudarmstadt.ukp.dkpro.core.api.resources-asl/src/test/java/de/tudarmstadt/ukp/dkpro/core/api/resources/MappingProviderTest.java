@@ -119,7 +119,7 @@ public class MappingProviderTest
 	}
 
 	@Test
-	public void testRedirect() throws Exception
+	public void testRedirectedModel() throws Exception
 	{
 		CasConfigurableProviderBase<String> modelProvider = new CasConfigurableProviderBase<String>()
 		{
@@ -151,4 +151,23 @@ public class MappingProviderTest
 		assertEquals("true", meta.getProperty("redirect"));
 		assertEquals("true", meta.getProperty("redirect2"));
 	}
+
+    @Test
+    public void testRedirectedTagset() throws Exception
+    {
+        MappingProvider mappingProvider = new MappingProvider();
+        mappingProvider.setOverride(MappingProvider.LOCATION, "src/test/resources/${language}-${tagset}.map");
+        mappingProvider.setDefault("tagset", "redirect");
+        
+        CAS cas = CasCreationUtils.createCas(new TypeSystemDescription_impl(), null, null);
+        
+        cas.setDocumentLanguage("de");
+        mappingProvider.configure(cas);
+        
+        Map<String, String> deMap = mappingProvider.getResource();
+        assertEquals("de", deMap.get("value"));
+        
+        Properties meta = mappingProvider.getResourceMetaData();
+        assertEquals("redirected", meta.getProperty("tagset"));
+    }
 }
