@@ -262,7 +262,10 @@ new File(properties['baseDir'], '..').eachFileRecurse(FILES) {
         !it.name.startsWith('TEMPLATE')
     ) {
         def canonicalBase = new File(properties['baseDir'], '..').canonicalPath;
-        def config = new PropertiesConfiguration(it);
+        def config = new PropertiesConfiguration();
+        config.setFile(it);
+        config.setEncoding("UTF-8");
+        config.load();
         
         // Remove .map and split
         def parts = it.name[0..-5].tokenize('-');
