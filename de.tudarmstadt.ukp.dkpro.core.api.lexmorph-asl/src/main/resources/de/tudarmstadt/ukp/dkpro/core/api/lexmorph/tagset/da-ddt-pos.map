@@ -1,0 +1,70 @@
+# Danish Dependency Treebank 
+
+__META_SOURCE_URL__=http://www.buch-kromann.dk/matthias/treebank/theory.html\
+    [Kromann, 2004. "Danish Dependency Treebank - Annotation guide: Theory"]
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
+# A     adjectives
+A=ADJA
+# AN    normal adjective
+AN=ADJA
+# AC    cardinals
+AC=CARD
+# AO    ordinals
+AO=CARD
+# C     conjunction
+C=KON
+# CC    coordinating conjunction
+CC=KON
+# CS    subordinating conjunction
+CS=KON
+# I     interjection
+I=O
+# N     noun
+N=N
+# NP    proper noun
+N=NP
+# NC    common noun
+NC=NN
+# P     pronoun
+P=PR
+# PP    personal pronoun
+PP=PR
+# PD    demonstrative pronoun
+PD=PR
+# PI    indefinite pronoun
+PI=PR
+# PT    interrogative/relative pronoun
+PT=PR
+# PC    reciprocal pronoun
+PC=PR
+# PO    possessive pronoun
+PO=PR
+# RG    adverb
+RG=ADV
+# SP    preposition
+SP=PP
+# U     unique
+U=O
+# V     verb
+V=V
+# VA    main verb
+VA=V
+# VE    medial verb
+VE=V
+# X     extra-linguistic units
+X=O
+# XA    abbreviation
+XA=O
+# XF    foreign word
+XF=O
+# XP    punctuation
+XP=PUNC
+# XR    formulae
+XR=O
+# XS    symbol
+XS=PUNC
+# XX    other
+XX=O
+# Catch-all
+*=POS

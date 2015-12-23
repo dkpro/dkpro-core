@@ -67,7 +67,7 @@ public class HunPosTaggerTest
     {
         runTest("da", null, "Dette er en test .",
                 new String[] { "PD", "VA", "PI", "NC", "XP" },
-                new String[] { "POS",  "POS", "POS", "POS", "POS" });
+                new String[] { "PR", "V", "PR", "NN", "PUNC" });
     }
 
     @Test
