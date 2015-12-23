@@ -67,7 +67,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
         inputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
 
-public class XmlWriterInline
+public class InlineXmlWriter
 	extends JCasFileWriter_ImplBase
 {
 	/**

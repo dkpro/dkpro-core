@@ -45,7 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
         outputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
 
-public class XmlReaderText
+public class XmlTextReader
 	extends ResourceCollectionReaderBase
 {
 	@Override
