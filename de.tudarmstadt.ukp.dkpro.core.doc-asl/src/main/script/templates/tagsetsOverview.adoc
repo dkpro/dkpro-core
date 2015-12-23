@@ -1,18 +1,66 @@
-.Formats (${tagsets.size()})
-<% tagsets.groupBy { it.value.tool }.each{ tool, toolTagsets -> %>
+<%
+def redirection(tagset) 
+{
+    def id = tagset.mapping.getString('__META_REDIRECT__');
+    if (id) {
+        id = id.tokenize('/')[-1]; // Keep only filename
+        id = id[0..-5]; // Remove .map
+        
+        // Fix the currently bad practice of naming mappings for constituent parse types
+        if (id.endsWith("constituency")) {
+            id = id - "constituency" + "constituent";    
+        }
+    }
+    return id;        
+}
 
-.Tagsets for ${tool} (${toolTagsets.size()})
-[options="header"]
+def redirectText(tagset)
+{
+    def newId = redirection(tagset);
+    if (newId) {    
+        return tagsets[id] ? 
+            "<<tagset-${tagsets[id].name},${tagsets[id].longName}>>" : 
+            "Unknown tagset ${id}"
+    }
+    else {
+        return "__FIXME: default model doesn't redirect yet__";
+    }
+}
+%>
+
+.Tagsets (${tagsets.size()})
+<% tagsets.groupBy { it.value.tool }.each{ tool, toolTagsets -> 
+def nonDefaultTagsets = toolTagsets.findAll { it.value.name != "default" };
+def defaultTagsets = toolTagsets.findAll { it.value.name == "default" };
+def defaultLookup = [:];
+defaultTagsets.each { id, tagset ->
+    def targetId = redirection(tagset);
+    if (targetId) {
+        defaultLookup[targetId] = id;
+    }
+}
+%>
+
+.All tagsets for ${tool} (${nonDefaultTagsets.size()})
+[options="header", cols="1d,3v"]
 |====
 |Language|Tagset
-<% toolTagsets
+<% 
+nonDefaultTagsets
     .sort { a,b ->
         (a.value.lang as String) <=> (b.value.lang as String) ?:
         (a.value.name as String) <=> (b.value.name as String) }
-    .each { id, tagset -> %>
-| ${tagset.lang}
-| <<tagset-${ id },${ tagset.name }>>
-<% } // tagsets.sort { it.key }.each { %>
+    .groupBy { it.value.lang }
+    .each { lang, langTagsets -> %>
+| ${lang}
+| <% langTagsets.each { id, tagset -> 
+if (defaultLookup[id]) {
+    out.println "**<<tagset-${ id },${ tagset.longName }>> (default)**";
+} else {
+    out.println "<<tagset-${ id },${ tagset.longName }>>";
+}
+} // langTagsets %>
+<% } // nonDefaultTagsets  %>
 |====
 
 <% } %>
