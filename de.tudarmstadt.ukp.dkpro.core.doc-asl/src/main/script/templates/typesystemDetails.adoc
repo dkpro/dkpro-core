@@ -6,9 +6,22 @@ typesystems
     .flatten()
     .sort { it.name.tokenize('.')[-1] }
     .unique { it.name }
-    .each { type -> %>
+    .each { type -> 
+
+def shortTypeName = type.name.tokenize('.')[-1];
+
+// Hide elevated types from the TOC
+if ( 
+    // Not a top-level type
+    !type.supertypeName in ['org.apache.uima.jcas.cas.TOP', 'uima.tcas.Annotation'] ||
+    // Does not define new features
+    type.features.size() == 0
+) {
+    out.println "[discrete]" 
+}
+%>
 [[type-${ type.name }]]
-=== ${type.name.tokenize('.')[-1]}
+=== ${shortTypeName}
 
 *_Name:_* __${type.name}__ +
 *_Supertype:_* __${Util.typeLink(type.supertypeName)}__ +
@@ -19,7 +32,7 @@ ${type.description}
 
 <% if (type.features) {%>
 [discrete]
-==== Features of ${Util.typeLink(type.name)}
+===== Features of ${shortTypeName} (${type.features.size()})
 <% type.features.sort { type.name }.each { %>
 ${it.name} (__${Util.typeLink(it.rangeTypeName)}__<%
 if (it.elementType) {
@@ -27,6 +40,39 @@ if (it.elementType) {
 } %>):: ${it.description ?: '__No description__'}
 <% } %>
 <% } // if (type.features) %>
+
+[discrete]
+===== Producers and consumers of ${shortTypeName} 
+[cols="1h,2v"]
+|====
+|Producers
+| <%
+def producers = engines
+    .sort{ it.key }
+    .findAll { engine ->
+        engine.value.spec.analysisEngineMetaData?.capabilities?.any { 
+            it.outputs?.any { it.name == type.name } } };
+if (producers) {            
+    producers.each { engine -> out.println Util.engineLink(engine.key) }
+} else {
+    out.println('__None declared__');
+}
+%>
+|Consumers
+| <%
+def consumers = engines
+    .sort{ it.key }
+    .findAll { engine ->
+        engine.value.spec.analysisEngineMetaData?.capabilities?.any { 
+            it.inputs?.any { it.name == type.name } } };
+if (consumers) {            
+    consumers.each { engine -> out.println Util.engineLink(engine.key) }
+} else {
+    out.println('__None declared__');
+}
+%>
+|====
+
 
 <%
 def subtypes = typesystems
@@ -39,8 +85,8 @@ def subtypes = typesystems
 if (subtypes) {
 %>
 [discrete]
-==== Sub-types of ${Util.typeLink(type.name)}
-[options="header"]
+===== Sub-types of ${shortTypeName} (${subtypes.size()})
+[options="header",cols="1,3"]
 |====
 |Type|Description
 <% subtypes.each { subtype -> %>

@@ -32,7 +32,8 @@ if (model.@engine as String) {
 *_Variant:_* __${model.@variant}__ +
 
 <% if (model.metadata.entry.size() > 0) { %>
-.Metadata for ${model.@shortArtifactId} 
+[discrete]
+===== Metadata for ${model.@shortArtifactId} 
 
 [options="header"]
 |====

@@ -21,9 +21,11 @@
 The document provides detailed information about the DKPro Core type system.
 
 == Types
+include::{generated-dir}typesystemOverview.adoc[]
+
 include::{generated-dir}typesystemDetails.adoc[]
 
 <<<
 
-== Tables
-include::{generated-dir}typesystemOverview.adoc[]
+== Subtype tables
+include::{generated-dir}typesystemSubtypeOverview.adoc[]

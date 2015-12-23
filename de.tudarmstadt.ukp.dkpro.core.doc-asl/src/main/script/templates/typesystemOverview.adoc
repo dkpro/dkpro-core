@@ -7,26 +7,16 @@ import Util;
 |====
 |Type|Description
 
-<% typesystems.collect { it.types }.flatten().sort { it.name.tokenize('.')[-1] }.unique { it.name }.findAll {
-   it.supertypeName in ['org.apache.uima.jcas.cas.TOP', 'uima.tcas.Annotation'] }.each { %>
+<% 
+typesystems
+    .collect { it.types }
+    .flatten()
+    .sort { it.name.tokenize('.')[-1] }
+    .unique { it.name }
+    .findAll { it.supertypeName in ['org.apache.uima.jcas.cas.TOP', 'uima.tcas.Annotation'] }
+    .each { %>
 | <<type-${ it.name },${ it.name.tokenize('.')[-1] }>>
 | ${Util.shortDesc(it.description)}
 
 <% } %>
 |====
-
-<% typesystems.collect { it.types }.flatten().sort { it.name.tokenize('.')[-1] }.unique { it.name }.findAll {
-   !(it.supertypeName in ['org.apache.uima.jcas.cas.TOP', 'uima.tcas.Annotation']) }.
-   groupBy { it.supertypeName }.each { %>
-.Sub-types of <<type-${it.key},${it.key.tokenize('.')[-1]}>>
-[options="header"]
-|====
-|Type|Description
-<% it.value.each { %>
-|<<type-${ it.name },${ it.name.tokenize('.')[-1] }>>
-| ${Util.shortDesc(it.description)}
-
-<% } %>
-
-|====
-<% } %>
