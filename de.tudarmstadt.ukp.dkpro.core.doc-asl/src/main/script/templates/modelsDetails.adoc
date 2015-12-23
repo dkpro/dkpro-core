@@ -1,5 +1,18 @@
 <%
 import Util;
+
+def metadataValueText(model, key, value)
+{
+    if (key.endsWith(".tagset")) {
+        def layer = key.tokenize('.')[0];
+        def tagset = value;
+        def lang = model.@language;
+        return "<<tagset-reference.adoc#tagset-${lang}-${tagset}-${layer},${ tagset }>>";
+    }
+    else {
+        return value;
+    }
+}
 %>
 
 <% models.each { model -> %>
@@ -26,7 +39,7 @@ if (model.@engine as String) {
 |Key|Value
 <% model.metadata.entry.each { %>
 | ${ it.@key }
-| ${ it.@value }
+| ${ metadataValueText(model, it.@key as String, it.@value as String) }
 <% } %>
 |====
 <% } // if (model.metadata.entry) %>
