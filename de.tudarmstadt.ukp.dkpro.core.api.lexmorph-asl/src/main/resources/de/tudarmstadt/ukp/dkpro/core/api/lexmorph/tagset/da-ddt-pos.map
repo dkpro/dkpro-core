@@ -5,19 +5,19 @@ __META_SOURCE_URL__=http://www.buch-kromann.dk/matthias/treebank/theory.html\
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # A     adjectives
-A=ADJA
+A=ADJ
 # AN    normal adjective
-AN=ADJA
+AN=ADJ
 # AC    cardinals
 AC=CARD
 # AO    ordinals
 AO=CARD
 # C     conjunction
-C=KON
+C=CONJ
 # CC    coordinating conjunction
-CC=KON
+CC=CONJ
 # CS    subordinating conjunction
-CS=KON
+CS=CONJ
 # I     interjection
 I=O
 # N     noun
