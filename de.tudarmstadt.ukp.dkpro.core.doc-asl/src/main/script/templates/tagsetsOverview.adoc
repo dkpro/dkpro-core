@@ -1,0 +1,18 @@
+.Formats (${tagsets.size()})
+<% tagsets.groupBy { it.value.tool }.each{ tool, toolTagsets -> %>
+
+.Tagsets for ${tool} (${toolTagsets.size()})
+[options="header"]
+|====
+|Language|Tagset
+<% toolTagsets
+    .sort { a,b ->
+        (a.value.lang as String) <=> (b.value.lang as String) ?:
+        (a.value.name as String) <=> (b.value.name as String) }
+    .each { id, tagset -> %>
+| ${tagset.lang}
+| <<tagset-${ id },${ tagset.name }>>
+<% } // tagsets.sort { it.key }.each { %>
+|====
+
+<% } %>

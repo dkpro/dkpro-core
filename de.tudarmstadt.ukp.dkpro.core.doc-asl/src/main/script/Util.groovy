@@ -1,6 +1,24 @@
 import java.text.BreakIterator;
 
 class Util {
+    static def editOnGithub(url)
+    {
+        """
+        ++++
+        <div style="float:right">
+          <a href="${url}">Edit on GitHub</a>
+        </div>
+        ++++
+        """.stripIndent()
+    }
+    
+    /*
+    static def tagsetLink(name)
+    {
+        return "<<tagset-reference.adoc#tagset-${ id },${ name }>>
+    }
+    */
+    
     static def typeLink(name)
     {
         if (name.startsWith('uima.cas.')) {
@@ -17,6 +35,11 @@ class Util {
     static def engineLink(name)
     {
         return "<<component-reference.adoc#engine-${name},${name}>>"
+    }
+    
+    static def modelLink(model)
+    {
+        return "<<component-reference.adoc#model-${model.@artifactId},${model.@shortArtifactId}>>"
     }
     
     static def preparePassthrough(description)

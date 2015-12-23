@@ -60,7 +60,12 @@
                         <artifactId>uimafit-core</artifactId>
                         <version>${uimafit.version}</version>
                     </dependency>
-                </dependencies>
+                    <dependency>
+                        <groupId>commons-configuration</groupId>
+                        <artifactId>commons-configuration</artifactId>
+                        <version>1.10</version>
+                    </dependency>
+                  </dependencies>
               </plugin>
             <plugin>
                 <groupId>org.asciidoctor</groupId>
@@ -135,6 +140,24 @@
                             <attributes>
                                 <toc>left</toc>
                                 <include-dir>./typesystem-reference/</include-dir>
+                                <generated-dir>${project.basedir}/target/generated-adoc/</generated-dir>
+                            </attributes>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>tagset-reference-html</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <backend>html5</backend>
+                            <sourceHighlighter>coderay</sourceHighlighter>
+                            <sourceDocumentName>tagset-reference.adoc</sourceDocumentName>
+                            <imagesDir>./tagset-reference/images</imagesDir>
+                            <attributes>
+                                <toc>left</toc>
+                                <include-dir>./tagset-reference/</include-dir>
                                 <generated-dir>${project.basedir}/target/generated-adoc/</generated-dir>
                             </attributes>
                         </configuration>

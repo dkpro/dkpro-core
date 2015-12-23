@@ -6,6 +6,7 @@ import groovy.transform.Field;
 import static org.apache.uima.UIMAFramework.getXMLParser;
 import static org.apache.uima.fit.factory.ResourceCreationSpecifierFactory.*;
 import static org.apache.uima.util.CasCreationUtils.mergeTypeSystems;
+import org.apache.commons.configuration.PropertiesConfiguration;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
@@ -19,6 +20,8 @@ import org.apache.uima.util.XMLInputSource;
 @Field def typesystems = [];
 
 @Field def models = [];
+
+@Field def tagsets = [:];
 
 def locatePom(path) {
     def pom = new File(path, "pom.xml");
@@ -63,6 +66,10 @@ def roleNames = [
     langdetect: 'Language Identifier',
     other: 'Other' ];
 
+/**
+ * Get a short tool type identifier for the given component. This may be used to resolve tagset
+ * mappings, model identifiers, etc.
+ */
 def getTool(componentName, spec) {
     def outputs = spec.analysisEngineMetaData?.capabilities?.collect { 
         it.outputs?.collect { it.name } }.flatten().sort().unique()
@@ -102,6 +109,7 @@ def getTool(componentName, spec) {
     }
 }
 
+// Scan the UIMA descriptors.
 new File(properties['baseDir'], '..').eachFileRecurse(FILES) {
     if (
         it.name.endsWith('.xml') && 
@@ -175,6 +183,7 @@ new File(properties['baseDir'], '..').eachFileRecurse(FILES) {
     }
 }
 
+// Scan the build.xmf files used for packaging models.
 new File(properties['baseDir'], '..').eachFileRecurse(FILES) {
     if (it.path.endsWith('/src/scripts/build.xml')) {
         def buildXml = new XmlSlurper().parse(it);
@@ -244,7 +253,58 @@ models = models.sort { a,b ->
     (a.@engine as String) <=> (b.@engine as String) ?: 
     (a.@variant as String) <=> (b.@variant as String)  
 }; 
-    
+   
+new File(properties['baseDir'], '..').eachFileRecurse(FILES) {
+    if (
+        it.path.contains('/src/main/resources/') && 
+        it.path.contains('/tagset/') && 
+        it.path.endsWith('.map') && 
+        !it.name.startsWith('TEMPLATE')
+    ) {
+        def canonicalBase = new File(properties['baseDir'], '..').canonicalPath;
+        def config = new PropertiesConfiguration(it);
+        
+        // Remove .map and split
+        def parts = it.name[0..-5].tokenize('-');
+
+        // Skip legacy default mappings that were only layer + language.
+        if (parts.size <= 2) {
+            return;
+        }
+        
+        def lang = parts[0];
+        def name = parts[1..-2].join('-');
+        def tool = parts[-1];
+        
+        // Skip the morphological features mapping for now because the files have completely
+        // different semantics from the other mapping files.
+        if (tool == "morph") {
+            return;
+        }
+        
+        // Fix the currently bad practice of naming mappings for constituent parse types
+        if (tool == "constituency") {
+            tool = "constituent"
+        }
+        
+        tagsets["${lang}-${name}-${tool}"] = [
+            lang: lang,
+            name: name,
+            tool: tool,
+            mapping: config,
+            source: it,
+            url: 'https://github.com/dkpro/dkpro-core/edit/master/' + 
+                it.canonicalPath[canonicalBase.length()..-1]
+            ];
+    }
+}
+
+tagsets = tagsets.sort { a,b ->
+    (a.value.tool as String) <=> (b.value.tool as String) ?:
+    (a.value.lang as String) <=> (b.value.lang as String) ?:
+    (a.value.tagset as String) <=> (b.value.tagset as String)
+};
+ 
 def inputOutputTypes = [];
 engines.each {
     it.value.spec.analysisEngineMetaData?.capabilities?.each { capability ->
@@ -257,14 +317,24 @@ inputOutputTypes = inputOutputTypes.sort().unique();
 
 def te = new groovy.text.SimpleTemplateEngine(this.class.classLoader);
 new File("${properties['baseDir']}/src/main/script/templates/").eachFile(FILES) { tf ->
-    def template = te.createTemplate(tf.getText("UTF-8"));
-    def result = template.make([
-        engines: engines,
-        formats: formats,
-        models: models,
-        typesystems: typesystems,
-        inputOutputTypes: inputOutputTypes]);
-    def output = new File("${properties['baseDir']}/target/generated-adoc/${tf.name}");
-    output.parentFile.mkdirs();
-    output.setText(result.toString(), 'UTF-8');
+    log.info("Processing ${tf.name}...");
+    try {
+        def template = te.createTemplate(tf.getText("UTF-8"));
+        def result = template.make([
+            engines: engines,
+            formats: formats,
+            models: models,
+            log: log,
+            tagsets: tagsets,
+            typesystems: typesystems,
+            inputOutputTypes: inputOutputTypes]);
+        def output = new File("${properties['baseDir']}/target/generated-adoc/${tf.name}");
+        output.parentFile.mkdirs();
+        output.setText(result.toString(), 'UTF-8');
+    }
+    catch (Exception e) {
+        te.setVerbose(true);
+        te.createTemplate(tf.getText("UTF-8"));
+        throw e;
+    }
 }
