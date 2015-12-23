@@ -15,9 +15,9 @@ def engine = it.value; %>
 [[engine-${ it.key }]]
 ==== ${it.key}
 
-*_Role_:* __${engine.role}__ +
-*_Artifact ID:_* __${engine.artifactId}__ +
-*_Class:_* __${engine.spec.annotatorImplementationName}__
+[small]#*_Role_:* __${engine.role}__# +
+[small]#*_Artifact ID:_* __${engine.artifactId}__# +
+[small]#*_Class:_* __${engine.spec.annotatorImplementationName}__#
 
 ++++
 ${Util.preparePassthrough(engine.spec.metaData.description)}

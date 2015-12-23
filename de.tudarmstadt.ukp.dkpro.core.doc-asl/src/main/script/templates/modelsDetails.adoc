@@ -20,16 +20,16 @@ def metadataValueText(model, key, value)
 [discrete]
 === ${model.@shortArtifactId} 
 
-*_Artifact ID:_* __${model.@artifactId}__ +
-*_Version:_* __${model.@version}__ +
-*_Engine:_* __<% 
+[small]#*_Artifact ID:_* __${model.@artifactId}__# +
+[small]#*_Version:_* __${model.@version}__# +
+[small]#*_Engine:_* __<% 
 if (model.@engine as String) {
     out.println Util.engineLink(model.@engine);
 } else {
     out.println "`${model.@tool}` @ `${model.@package}`";
-} %>__ +
-*_Language:_* __${model.@language}__ +
-*_Variant:_* __${model.@variant}__ +
+} %>__# +
+[small]#*_Language:_* __${model.@language}__# +
+[small]#*_Variant:_* __${model.@variant}__#
 
 <% if (model.metadata.entry.size() > 0) { %>
 [discrete]

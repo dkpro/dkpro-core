@@ -23,8 +23,8 @@ if (
 [[type-${ type.name }]]
 === ${shortTypeName}
 
-*_Name:_* __${type.name}__ +
-*_Supertype:_* __${Util.typeLink(type.supertypeName)}__ +
+[small]#*_Name:_* __${type.name}__# +
+[small]#*_Supertype:_* __${Util.typeLink(type.supertypeName)}__# +
 
 ++++
 ${type.description}
