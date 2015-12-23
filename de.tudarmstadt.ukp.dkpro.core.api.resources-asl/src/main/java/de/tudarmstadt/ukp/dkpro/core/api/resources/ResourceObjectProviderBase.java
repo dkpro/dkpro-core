@@ -914,6 +914,11 @@ public abstract class ResourceObjectProviderBase<M>
         return resource;
     }
 
+    public ExtensibleURLClassLoader getClassLoader()
+    {
+        return loader;
+    }
+    
     /**
      * Builds the aggregated configuration from defaults and overrides.
      *
@@ -971,7 +976,7 @@ public abstract class ResourceObjectProviderBase<M>
      * @param aTarget the properties to merge into.
      * @param aSource the properties to merge from.
      */
-    private void mergeProperties(Properties aTarget, Properties aSource)
+    protected void mergeProperties(Properties aTarget, Properties aSource)
     {
         for (Object key : aSource.keySet()) {
             if (!aTarget.containsKey(key)) {

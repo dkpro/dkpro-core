@@ -17,6 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils.resolveLocation;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
@@ -37,6 +39,9 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
 	// private final Log log = LogFactory.getLog(getClass());
 
 	private static final String META_TYPE_BASE = "__META_TYPE_BASE__";
+    private static final String META_REDIRECT = "__META_REDIRECT__";
+    private static final String META_OVERRIDE = "__META_OVERRIDE__";
+    private static final String META_SOURCE_URL = "__META_SOURCE_URL__";
 
     public static final String BASE_TYPE = "baseType";
 
@@ -136,5 +141,37 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
 		else {
 			return null;
 		}
+    }
+	
+    @Override
+    protected URL followRedirects(URL aUrl) throws IOException
+    {
+        URL url = aUrl;
+        while (true) {
+            Properties tmpResourceMetaData = PropertiesLoaderUtils.loadProperties(new UrlResource(
+                    url));
+
+            // Values in the redirecting properties override values in the redirected-to
+            // properties - except META_REDIRECT
+            getResourceMetaData().remove(META_REDIRECT);
+            
+            Properties overrides = new Properties();
+            for (String key : tmpResourceMetaData.stringPropertyNames()) {
+                if (key.startsWith(META_OVERRIDE)) {
+                    overrides.put(key.substring(META_OVERRIDE.length()+1), 
+                            tmpResourceMetaData.getProperty(key));
+                }
+            }
+            
+            mergeProperties(getResourceMetaData(), overrides);
+
+            String redirect = tmpResourceMetaData.getProperty(META_REDIRECT);
+            if (redirect == null) {
+                return url;
+            }
+            else {
+                url = resolveLocation(redirect, getClassLoader(), null);
+            }
+        }
     }
 }
