@@ -1,8 +1,9 @@
+# XIADA
+#
 # Tagset used by the XIADA: Etiquetador/Lematizador do Galego Actual
-#
-# Source: http://corpus.cirp.es/xiada/
-#         http://corpus.cirp.es/xiada/etiquetario.html
-#
+
+__META_SOURCE_URL__=http://corpus.cirp.es/xiada/
+__META_SOURCE_URL__.1=http://corpus.cirp.es/xiada/etiquetario.html
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # A - Adxectivo

@@ -1,7 +1,8 @@
-# Adapted Penn Arabic Treebank tagset used by Stanford PosTagger
+# Penn Arabic Treebank
 #
-# Source http://www.ircs.upenn.edu/arabic/Jan03release/arabic-POStags-collapse-to-PennPOStags.txt
+# Adapted Penn Arabic Treebank tagset used by Stanford PosTagger
 
+__META_SOURCE_URL__=https://catalog.ldc.upenn.edu/docs/LDC2003T06/arabic-POStags-collapse-to-PennPOStags.txt
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # CC - coordinating conjunction

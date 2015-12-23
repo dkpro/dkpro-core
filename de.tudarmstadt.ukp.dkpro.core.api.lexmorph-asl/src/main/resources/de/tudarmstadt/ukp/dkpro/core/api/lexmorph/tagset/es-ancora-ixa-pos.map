@@ -1,14 +1,16 @@
-# Spanish Part-of-Speech Tags from the Ancora Corpus
-# 
-# Source: http://clic.ub.edu/corpus/webfm_send/18
-#         http://www.lrec-conf.org/proceedings/lrec2008/pdf/35_paper.pdf
-#         https://github.com/ixa-ehu/ixa-pipe-pos/blob/master/README.md
+# Ancora (IXA)
 #
-# This list was extracted from the Spanish model used by the OpenNLP models from IXY
+# Spanish Part-of-Speech Tags from the Ancora Corpus
+#
+# This list was extracted from the Spanish model used by the OpenNLP models from IXA
 # and matched against the official Ancora documentation. It may be incomplete with regards to the
 # tags actually used in the corpus.
 
+__META_SOURCE_URL__=http://clic.ub.edu/corpus/webfm_send/18
+__META_SOURCE_URL__.1=http://www.lrec-conf.org/proceedings/lrec2008/pdf/35_paper.pdf
+__META_SOURCE_URL__.2=https://github.com/ixa-ehu/ixa-pipe-pos/blob/master/README.md
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
 A00000=ADJ
 AO0FP0=ADJ
 AO0FS0=ADJ

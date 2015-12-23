@@ -1,11 +1,13 @@
-# Portuguese Bosque Part-of-Speech Tags
+# Bosque
 #
-# Source: http://www.linguateca.pt/floresta/BibliaFlorestal/anexo4.html
-# Source: http://code.google.com/p/universal-pos-tags/source/browse/trunk/pt-bosque.map
+# Portuguese Bosque Part-of-Speech Tags
 #
 # NOTE: the tags here are primarily from the universal pos tags list. Some of these tags do not
 # appear in the documentation of the Bosque corpus, but they do appear in the CoGrOO models.
-#
+
+__META_SOURCE_URL__=http://www.linguateca.pt/floresta/BibliaFlorestal/anexo4.html
+__META_SOURCE_URL__.1=http://code.google.com/p/universal-pos-tags/source/browse/trunk/pt-bosque.map
+
 # ?	.
 ?=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 # adj	ADJ

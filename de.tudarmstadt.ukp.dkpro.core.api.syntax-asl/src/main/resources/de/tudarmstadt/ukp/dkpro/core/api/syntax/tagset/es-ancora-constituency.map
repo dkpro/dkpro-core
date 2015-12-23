@@ -1,8 +1,10 @@
-# Ancora consituent tagset
+# Ancora
 #
-# Source: http://clic.ub.edu/corpus/webfm_send/20
-#         http://www.lrec-conf.org/proceedings/lrec2008/pdf/35_paper.pdf
+# Ancora consituent tagset
 
+__META_SOURCE_URL__=http://clic.ub.edu/corpus/webfm_send/20[Ancora: Note on constituents annotation]
+__META_SOURCE_URL__.1=http://www.lrec-conf.org/proceedings/lrec2008/pdf/35_paper.pdf\
+    [Taulé et al. 2008. "AnCora: Multilevel Annotated Corpora for Catalan and Spanish"]
 
 # clause
 S=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.S

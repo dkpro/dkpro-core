@@ -1,8 +1,11 @@
+# Stein
+#
 # French TreeTagger Part-of-Speech Tags
 #
 # Achim Stein, April 2003
-#
-# Source: http://www.ims.uni-stuttgart.de/~schmid/french-tagset.html
+
+__META_SOURCE_URL__=http://www.ims.uni-stuttgart.de/~schmid/french-tagset.html
+
 *=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
 # ABR	abreviation
 ABR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O

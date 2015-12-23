@@ -1,7 +1,9 @@
+# LCMC
+#
 # The LCMC tagset
-#
-# Source: http://www.lancs.ac.uk/fass/projects/corpus/LCMC/lcmc/lcmc_tagset.htm
-#
+
+__META_SOURCE_URL__=http://www.lancs.ac.uk/fass/projects/corpus/LCMC/lcmc/lcmc_tagset.htm
+
 # Catch-all rule
 *=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
 

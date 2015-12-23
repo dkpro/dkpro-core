@@ -1,3 +1,5 @@
+# TIGER (RfTagger)
+#
 # This file contains a tag-mapping as it is used by the German model of the RfTagger. 
 # The mapping is a modified version of the STTS tagset.
 # A fine-grained tag distinction is replaced by the morphological information the RfTagger outputs (e.g. tense, etc.)

@@ -1,14 +1,13 @@
-# MElt Tagger Tagset
+# MElt
 #
 # Follows Benoit Crabbé and Marie Candito. 2008
 #
 # Benoit Crabbé and Marie Candito. 2008. Expériences d’analyse syntaxique statistique du français.
 # In Proc. of TALN’08, pages 45–54, Senlis, France.
 # http://hal.inria.fr/docs/00/52/57/69/PDF/crabbecandi-taln2008-final.pdf
-#
-# Source: http://opus.lingfil.uu.se/tools/public/tagger/melt-0.6/README
-# 
 # Mapped according to universal_pos_tags.1.03 (http://code.google.com/p/universal-pos-tags/)
+
+__META_SOURCE_URL__=http://opus.lingfil.uu.se/tools/public/tagger/melt-0.6/README
 
 # ADJ 	   adjective
 ADJ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ

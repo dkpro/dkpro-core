@@ -1,6 +1,9 @@
-# French Treebank Chunk Tags
+# French Treebank
 #
-# Source: http://www.llf.cnrs.fr/Gens/Abeille/French-Treebank-fr.php
+# French Treebank Chunk Tags
+
+__META_SOURCE_URL__=http://www.llf.cnrs.fr/Gens/Abeille/French-Treebank-fr.php
+
 *=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.O
 # 0
 # AP

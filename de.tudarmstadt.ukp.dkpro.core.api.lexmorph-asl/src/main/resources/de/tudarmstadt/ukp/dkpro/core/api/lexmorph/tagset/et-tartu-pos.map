@@ -1,6 +1,9 @@
-# Estonian POS tagset
+# Tartu
 #
-# Source: http://www.cl.ut.ee/korpused/morfliides/seletus
+# Estonian POS tagset
+
+__META_SOURCE_URL__=http://www.cl.ut.ee/korpused/morfliides/seletus
+
 S.com.?=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
 S.com.sg.nom=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
 S.com.sg.gen=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN

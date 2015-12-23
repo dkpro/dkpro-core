@@ -1,7 +1,7 @@
-# Brown tagset as in DKPro Toolbox
-#
-# http://clu.uni.no/icame/brown/bcm.html#bc6
-# 
+# Brown
+
+__META_SOURCE_URL__=http://clu.uni.no/icame/brown/bcm.html#bc6
+
 # sentence closer (. ; ? !)
 .=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 # left paren

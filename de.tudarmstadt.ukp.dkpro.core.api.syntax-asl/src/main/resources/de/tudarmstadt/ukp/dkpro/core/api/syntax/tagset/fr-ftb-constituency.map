@@ -1,7 +1,9 @@
+# French Treebank
+#
 # French Treebank Tagset
-#
-# Source: http://www.llf.cnrs.fr/Gens/Abeille/guide-annot.pdf
-#
+
+__META_SOURCE_URL__=http://www.llf.cnrs.fr/Gens/Abeille/guide-annot.pdf
+
 # == Syntactic categories ==
 # AP - Adjective phase
 AP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ADJP

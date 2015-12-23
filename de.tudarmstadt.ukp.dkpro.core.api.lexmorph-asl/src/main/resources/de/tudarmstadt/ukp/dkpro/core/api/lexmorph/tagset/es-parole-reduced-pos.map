@@ -1,7 +1,10 @@
-# Parole Reduced Tagset
+# Parole (reduced)
 #
-# Source: http://www.lsi.upc.edu/~nlp/SVMTool/parole.html
+# Parole Reduced Tagset
+
+__META_SOURCE_URL__=http://www.lsi.upc.edu/~nlp/SVMTool/parole.html
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
 # AO	Adjective, Ordinal
 AO=ADJ
 # AQ	Adjective, Qualificator

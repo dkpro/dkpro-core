@@ -1,7 +1,9 @@
-# TIGER Corpus Release 1 (July 2003) grammatical functions - Kantennamen
+# TIGER
 #
-# Source: http://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora/TIGERCorpus/annotation/tiger_scheme-syntax.pdf
-# 
+# TIGER Corpus Release 1 (July 2003) grammatical functions - Kantennamen
+
+__META_SOURCE_URL__=http://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora/TIGERCorpus/annotation/tiger_scheme-syntax.pdf
+
 # AC Adpositional Case marker - Adposition od. Kasusmarkierung
 AC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # ADC ADjective Component - Komponente eines komplexen Adjektivs

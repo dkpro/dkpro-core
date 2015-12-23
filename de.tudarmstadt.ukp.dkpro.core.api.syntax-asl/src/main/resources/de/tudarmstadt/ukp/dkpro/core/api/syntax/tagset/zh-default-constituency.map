@@ -1,7 +1,9 @@
+# Chinese Treebank
+#
 # Chinese Treebank Tagset
-#
-# Source: http://www.cis.upenn.edu/~chinese/parseguide.3rd.ch.pdf
-#
+
+__META_SOURCE_URL__=http://www.cis.upenn.edu/~chinese/parseguide.3rd.ch.pdf
+
 # == Tags for phrases ==
 # ADJP - adjective phrase
 ADJP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ADJP

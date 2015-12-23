@@ -1,7 +1,7 @@
 # Uppsala Persian Dependency Treebank
-#
-# Source: http://stp.lingfil.uu.se/~mojgan/Manual.pdf
-#
+
+__META_SOURCE_URL__=http://stp.lingfil.uu.se/~mojgan/Manual.pdf
+
 # ADJ_CMPR - Comparative adjective
 ADJ_CMPR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
 # ADJ_INO - Participle adjective

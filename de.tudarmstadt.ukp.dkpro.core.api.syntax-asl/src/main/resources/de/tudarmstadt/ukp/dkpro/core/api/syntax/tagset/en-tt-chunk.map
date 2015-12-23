@@ -1,10 +1,13 @@
+# Penn Treebank (TreeTagger)
+#
 # English TreeTagger Chunk Tags
 #
 # The English chunker was trained on the Penn treebank and uses the following chunk labels.
 # The TreeTagger models use different tag names than the PTB-2 chunk tags. E.g. NP becomes NC,
 # ADJP becomes ADJC, and so on.
-#
-# Source: ftp://ftp.ims.uni-stuttgart.de/pub/corpora/chunker-tagset-english.txt
+
+__META_SOURCE_URL__=ftp://ftp.ims.uni-stuttgart.de/pub/corpora/chunker-tagset-english.txt
+
 *=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.O
 0=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.O
 # ADJC	  adjective chunks (not inside of noun chunks)

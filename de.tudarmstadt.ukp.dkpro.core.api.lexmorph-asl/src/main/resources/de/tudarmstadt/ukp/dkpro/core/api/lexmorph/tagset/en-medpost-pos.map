@@ -1,4 +1,7 @@
-# http://www.ncbi.nlm.nih.gov/staff/lsmith/papers/smith04a.pdf
+# MedPost
+
+__META_SOURCE_URL__=http://www.ncbi.nlm.nih.gov/staff/lsmith/papers/smith04a.pdf
+
 # CC coordinating conjunction 
 CC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
 # CS subordinating conjunction 

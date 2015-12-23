@@ -1,7 +1,9 @@
+# CoNLL 2008
+#
 # CONLL 2008 Dependency labels
-#
-# Source: http://aclweb.org/anthology//W/W08/W08-2121.pdf
-#
+
+__META_SOURCE_URL__=http://aclweb.org/anthology//W/W08/W08-2121.pdf
+
 # ADV Unclassified adverbial
 ADV=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # AMOD Modifier of adjective or adverb

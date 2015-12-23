@@ -1,9 +1,10 @@
+# Chinese Treebank
+#
 # Chinese Treebank tagset
-#
-# Source: http://www.cs.brandeis.edu/~clp/ctb/posguide.3rd.ch.pdf
-#
 # Mapped according to universal-pos-tags 1.03 zh-ctb6.map 
-#
+
+__META_SOURCE_URL__=http://www.cs.brandeis.edu/~clp/ctb/posguide.3rd.ch.pdf
+
 # AD - adverb
 AD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
 # AS - aspect marker

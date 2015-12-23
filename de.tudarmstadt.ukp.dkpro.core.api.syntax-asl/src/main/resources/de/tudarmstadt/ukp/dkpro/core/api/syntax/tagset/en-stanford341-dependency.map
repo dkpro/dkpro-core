@@ -1,11 +1,13 @@
+# Stanford (3.4.1)
+#
 # Stanford typed dependencies
 #
-# Source: http://nlp.stanford.edu/software/dependencies_manual.pdf
-# 
 # Change in CoreNLP 3.3.1: In the English dependencies, "infmod" and "partmod" have been combined
 # into "vmod".
 # Change in CoreNLP 3.4.1: In the English dependencies, "xsubj" has been merged into "nsubj"
-#
+
+__META_SOURCE_URL__=http://nlp.stanford.edu/software/dependencies_manual.pdf
+
 # abbrev: abbreviation modifier
 abbrev=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # acomp: adjectival complement

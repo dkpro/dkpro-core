@@ -1,31 +1,29 @@
-# Czech Academic Corpus 1.0 tagset
-#
-# Source: http://ufal.mff.cuni.cz/rest/CAC/doc-cac10/cac-guide/eng/html/chapter12.html
-#
-# Catch-all rule
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
-# 
+# Czech Academic Corpus 1.0
+
+__META_SOURCE_URL__=http://ufal.mff.cuni.cz/rest/CAC/doc-cac10/cac-guide/eng/html/chapter12.html
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
 # A   Adjective
-A=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+A=ADJ
 # C   Numeral
-C=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
+C=CARD
 # D   Adverb
-D=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+D=ADV
 # I   Interjection
-I=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+I=O
 # J   Conjunction
-J=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+J=CONJ
 # N   Noun
-N=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N
+N=N
 # P   Pronoun
-P=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+P=PR
 # V   Verb
-V=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+V=V
 # R   Preposition
-R=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+R=PP
 # T   Particle
-T=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+T=O
 # X   Unknown, Not Determined, Unclassifiable
-X=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+X=O
 # Z   Punctuation (also used for the Sentence Boundary token)
-Z=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+Z=PUNC

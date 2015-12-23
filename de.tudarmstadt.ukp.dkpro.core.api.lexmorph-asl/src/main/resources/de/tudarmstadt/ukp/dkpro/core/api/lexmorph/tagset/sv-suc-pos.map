@@ -1,9 +1,11 @@
+# SUC 2.0
+#
 # Stockholm Umeå Corpus POS Tags
 #
 # also used by the Swedish Treebank
-# 
-# Source: http://spraakbanken.gu.se/parole/Docs/SUC2.0-manual.pdf
-# Source: http://stp.lingfil.uu.se/~nivre/swedish_treebank/pos.html
+
+__META_SOURCE_URL__=http://spraakbanken.gu.se/parole/Docs/SUC2.0-manual.pdf
+__META_SOURCE_URL__.1=http://stp.lingfil.uu.se/~nivre/swedish_treebank/pos.html
 
 # AB	Adverb
 # DT	Determiner

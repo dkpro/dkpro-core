@@ -1,7 +1,7 @@
 # French Treebank
-#
-# Source: http://www.llf.cnrs.fr/Gens/Abeille/guide-morpho-synt.02.pdf
-#
+
+__META_SOURCE_URL__=http://www.llf.cnrs.fr/Gens/Abeille/guide-morpho-synt.02.pdf
+
 # A - Adjective
 A=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
 # ADV - Adverb

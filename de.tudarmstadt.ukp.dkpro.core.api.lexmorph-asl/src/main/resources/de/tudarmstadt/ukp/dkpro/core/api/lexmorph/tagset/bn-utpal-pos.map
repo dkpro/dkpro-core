@@ -1,46 +1,47 @@
 # Utpal Garain's part-of-speech tagset
-#
-# Source: http://www.isical.ac.in/~utpal/docs/POS-Tag%20List.pdf
-# 
+
+__META_SOURCE_URL__=http://www.isical.ac.in/~utpal/docs/POS-Tag%20List.pdf
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
 # NN   Noun
-NN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+NN=NN
 # NNP  Proper Noun
-NNP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
+NNP=NP
 # PRP  Pronoun
-PRP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PRP=PR
 # DEM  Demonstrative
-DEM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+DEM=PR
 # VM   Verb-finite
-VM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VM=V
 # VAUX Verb Auxiliary
-VAUX=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VAUX=V
 # JJ   Adjective
-JJ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+JJ=ADJ
 # RB   Adverb
-RB=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+RB=ADV
 # PSP  Post position
-PSP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+PSP=O
 # RP   Particles
-RP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+RP=O
 # CC   Conjuncts
-CC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+CC=CONJ
 # WQ   Question Words
-WQ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+WQ=O
 # QF   Quantifiers
-QF=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+QF=O
 # QC   Cardinal
-QC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
+QC=CARD
 # INTF Intensifier
-INTF=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+INTF=O
 # INJ  Interjection
-INJ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+INJ=O
 # NEG  Negation
-NEG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+NEG=O
 # SYM  Symbol
-SYM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+SYM=O
 # RDP  Re-duplicative
-RDP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+RDP=O
 # UNK  Unknown
-UNK=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+UNK=O
+*=O
 

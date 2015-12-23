@@ -1,7 +1,9 @@
+# Swedish Treebank
+#
 # Swedish treebank dependencies
-#
-# Source: http://stp.lingfil.uu.se/~nivre/swedish_treebank/dep.html
-#
+
+__META_SOURCE_URL__=http://stp.lingfil.uu.se/~nivre/swedish_treebank/dep.html
+
 # ++: Coordinating conjunction
 # +A: Conjunctional adverbial
 # +F: Coordination at main clause level

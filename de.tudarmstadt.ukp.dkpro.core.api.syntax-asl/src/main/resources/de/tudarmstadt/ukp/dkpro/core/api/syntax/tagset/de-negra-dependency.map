@@ -1,8 +1,11 @@
+# NEGRA
+#
 # NEGRA grammatical functions
 #
-# Source: http://www.coli.uni-saarland.de/projects/sfb378/negra-corpus/kanten.html
 # see also http://doras.dcu.ie/14900/1/Ines-Rehbein-PhD-Thesis-09.pdf, p. 30 ff.
-#
+
+__META_SOURCE_URL__=http://www.coli.uni-saarland.de/projects/sfb378/negra-corpus/kanten.html
+
 # AC Adpositional Case marker - Adposition od. Kasusmarkierung
 AC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # ADC ADjective Component - Komponente eines komplexen Adjektivs
