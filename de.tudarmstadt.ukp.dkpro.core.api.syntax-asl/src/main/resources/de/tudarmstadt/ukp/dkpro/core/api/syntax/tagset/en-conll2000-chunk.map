@@ -1,0 +1,31 @@
+# CoNLL 2000
+#
+# Chunk labels used in the CoNLL 2000 shared task.
+
+__META_SOURCE_URL__=http://www.cnts.ua.ac.be/conll2000/pdf/12732tjo.pdf
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.
+
+# NP    noun phrase
+NP=NC
+# VP    verb phrase
+VP=VC
+# PP    prepositional phrase
+PP=PC
+# ADVP  adverb phrase
+ADVP=ADVC
+# SBAR  subordinate clause
+SBAR=O
+# ADJP  adjective phrase
+ADJP=ADJC
+# PRT   particles
+PRT=PRT
+# CONJP conjunction phrase
+CONJP=CONCJ
+# INTJ  interjection
+INTJ=INTJ
+# LST   list marker
+LST=LST
+# UCP   unlike coordinated phrase
+UCP=O
+# Catch-all
+*=O
