@@ -22,6 +22,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -35,10 +36,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatur
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.HasResourceMetadata;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingUtils;
 
 public class MorphologicalFeaturesParser
     extends CasConfigurableProviderBase<List<AnalysisMapping>>
 {   
+    private static final String META_TYPE_BASE = "__META_TYPE_BASE__";
+    private static final String META_REDIRECT = "__META_REDIRECT__";
+    private static final String META_OVERRIDE = "__META_OVERRIDE__";
+    private static final String META_SOURCE_URL = "__META_SOURCE_URL__";
+    
     public static final String META_MORPH_TAGSET = "morph.tagset";
     
     private static final String IGNORE = "__IGNORE__";
@@ -137,7 +144,8 @@ public class MorphologicalFeaturesParser
         if (aUrl != null) {
             List<AnalysisMapping> mappings = new ArrayList<>();
             Properties props = PropertiesLoaderUtils.loadProperties(new UrlResource(aUrl));
-            for (String key : props.stringPropertyNames()) {
+            Set<String> keys = MappingUtils.stripMetadata(props.stringPropertyNames());
+            for (String key : keys) {
                 try {
                     String[] pkey = key.split("\\.", 2);
                     mappings.add(new AnalysisMapping(pkey[0], pkey[1], props.getProperty(key)));
