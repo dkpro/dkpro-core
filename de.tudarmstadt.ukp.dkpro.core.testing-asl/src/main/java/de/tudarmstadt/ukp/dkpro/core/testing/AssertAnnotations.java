@@ -69,6 +69,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagsetDescription;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
@@ -623,6 +624,7 @@ public class AssertAnnotations
         Map<String, String> mapping = mp.getResource();
         Assert.assertNotNull("No mapping found for layer [" + aLayer.getName() + "] tagset ["
                 + aName + "]", mapping);
+        mapping.keySet().retainAll(MappingUtils.stripMetadata(mapping.keySet()));
         mapping.remove("*"); // Remove wildcard
 
         List<String> expected = new ArrayList<String>(asList(aDefaultMapped));

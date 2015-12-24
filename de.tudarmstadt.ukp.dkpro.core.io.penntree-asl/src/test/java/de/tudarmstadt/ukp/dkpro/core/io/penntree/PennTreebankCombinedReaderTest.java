@@ -105,7 +105,7 @@ public class PennTreebankCombinedReaderTest
         
         String[] tokens = { "``", "And", "what", "do", "you", "know", "?", "''" };
 
-        String[] posMapped = { "O", "CONJ", "PR", "V", "PR", "V", "PUNC", "O" };
+        String[] posMapped = { "PUNC", "CONJ", "PR", "V", "PR", "V", "PUNC", "PUNC" };
 
         String[] posOriginal = { "``", "CC", "WP", "VBP", "PRP", "VB", ".", "''" };
 
@@ -137,7 +137,7 @@ public class PennTreebankCombinedReaderTest
         
         String[] tokens = { "(", "CNN", ")", "." };
 
-        String[] posMapped = { "O", "NP", "O", "PUNC" };
+        String[] posMapped = { "PUNC", "NP", "PUNC", "PUNC" };
 
         String[] posOriginal = { "-LRB-", "NNP", "-RRB-", "." };
         

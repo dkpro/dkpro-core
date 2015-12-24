@@ -17,14 +17,14 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingUtils.META_OVERRIDE;
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingUtils.META_REDIRECT;
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.MappingUtils.META_TYPE_BASE;
 import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils.resolveLocation;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
@@ -39,11 +39,6 @@ import org.springframework.core.io.support.PropertiesLoaderUtils;
 public class MappingProvider extends CasConfigurableProviderBase<Map<String, String>>
 {
 	// private final Log log = LogFactory.getLog(getClass());
-
-	private static final String META_TYPE_BASE = "__META_TYPE_BASE__";
-    private static final String META_REDIRECT = "__META_REDIRECT__";
-    private static final String META_OVERRIDE = "__META_OVERRIDE__";
-    private static final String META_SOURCE_URL = "__META_SOURCE_URL__";
 
     public static final String BASE_TYPE = "baseType";
 
@@ -124,17 +119,7 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
     
     public Set<String> getTags()
     {
-        Set<String> tags = new LinkedHashSet<String>(getResource().keySet());
-        List<String> toRemove = new ArrayList<>();
-        for (String tag : tags) {
-            if (tag.startsWith(META_OVERRIDE) || tag.startsWith(META_SOURCE_URL)) {
-                toRemove.add(tag);
-            }
-        }
-        tags.remove(META_TYPE_BASE);
-        tags.remove(META_REDIRECT);
-        tags.removeAll(toRemove);
-        return tags;
+        return MappingUtils.stripMetadata(getResource().keySet());
     }
 
 	@Override
