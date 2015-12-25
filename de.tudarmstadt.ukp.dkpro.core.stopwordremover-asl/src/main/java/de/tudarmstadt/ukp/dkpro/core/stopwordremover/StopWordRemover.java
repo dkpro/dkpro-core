@@ -22,6 +22,7 @@ import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.CasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.getView;
 import static org.apache.uima.util.Level.FINE;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -42,6 +43,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -57,8 +59,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * Remove all of the specified types from the CAS if their covered text is in the stop word
  * dictionary. Also remove any other of the specified types that is covered by a matching instance.
- *
  */
+@TypeCapability(
+        inputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.StopWord" })
 public class StopWordRemover
 	extends JCasAnnotator_ImplBase
 {
