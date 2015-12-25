@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
-    <name>metadata</name>
-    <description>A general purpose annotation to store document-wide information in the form of arbitrary key-value string pairs.</description>
+    <name>Metadata</name>
+    <description/>
     <version>${version}</version>
     <vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
   <types>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.metadata.type.MetaDataStringField</name>
-      <description/>
+      <description>&lt;p&gt;A general purpose annotation to store document-wide information in the form of arbitrary key-value string pairs.&lt;/p&gt;</description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>

@@ -1,12 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?><typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
-  <name>NamedEntity</name>
-  <description>Represents a named entity.</description>
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <name>Semantics</name>
+  <description/>
   <version>${version}</version>
   <vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
   <types>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity</name>
-      <description/>
+      <description>Named entities refer e.g. to persons, locations, organizations and so on. They often consist of multiple tokens. 
+</description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>

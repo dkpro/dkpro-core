@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <name>Coreference</name>
-  <description>This type system contains two types: CoreferenceChain and CoreferenceLink. The CoreferenceChain marks the beginning of a chain. It points to the first CoreferenceLink in the chain. Each CoreferenceLink then points to the next link.</description>
+  <description/>
   <version>${version}</version>
   <vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
   <types>

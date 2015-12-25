@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
-  <name>TimerAnnotation</name>
-  <description>Used for storing timing information (e.g. for performance testing).</description>
+  <name>Utility</name>
+  <description/>
   <version>${version}</version>
   <vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
   <types>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.performance.type.TimerAnnotation</name>
-      <description/>
+      <description>Used for storing timing information (e.g. for performance testing).</description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
