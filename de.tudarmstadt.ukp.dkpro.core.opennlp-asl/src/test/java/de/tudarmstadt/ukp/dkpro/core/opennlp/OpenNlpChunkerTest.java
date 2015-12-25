@@ -43,15 +43,15 @@ public class OpenNlpChunkerTest
                 "contains as many constituents and dependencies as possible.");
 
         String[] chunks = new String[] { 
-                "[  0,  2]Chunk(NP) (We)", 
-                "[  3,  7]Chunk(VP) (need)",
-                "[  8, 43]Chunk(NP) (a very complicated example sentence)",
-                "[ 45, 50]Chunk(NP) (which)",
-                "[ 51, 59]Chunk(VP) (contains)", 
-                "[ 60, 62]Chunk(PP) (as)",
-                "[ 63, 97]Chunk(NP) (many constituents and dependencies)",
-                "[ 98,100]Chunk(PP) (as)", 
-                "[101,109]Chunk(ADJP) (possible)" };
+                "[  0,  2]NC(NP) (We)",
+                "[  3,  7]VC(VP) (need)",
+                "[  8, 43]NC(NP) (a very complicated example sentence)",
+                "[ 45, 50]NC(NP) (which)",
+                "[ 51, 59]VC(VP) (contains)",
+                "[ 60, 62]PC(PP) (as)",
+                "[ 63, 97]NC(NP) (many constituents and dependencies)",
+                "[ 98,100]PC(PP) (as)",
+                "[101,109]ADJC(ADJP) (possible)" };
 
         String[] chunkTags = new String[] { "ADJP", "ADVP", "CONJP", "INTJ", "LST", "NP", "O",
                 "PP", "PRT", "SBAR", "UCP", "VP" };
