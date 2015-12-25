@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
-  <name>Constituent</name>
-  <description>A constituent of a parser.</description>
+  <name>Syntax</name>
+  <description/>
   <version>${version}</version>
   <vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
   <types>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
-  <name>SofaChangeAnnotation</name>
-  <description>Encodes an edit operation that can be interpreted by the ApplyChangesAnnotator.</description>
-  <version/>
-  <vendor>Ubiquitous Knowledge Processing Lab, Technische Universität Darmstadt</vendor>
+  <name>Transformation</name>
+  <description/>
+  <version>${version}</version>
+  <vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
   <types>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation</name>
-      <description>Describes a change to the Sofa.</description>
+      <description>Encodes an edit operation that can be interpreted by the ApplyChangesAnnotator.</description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>

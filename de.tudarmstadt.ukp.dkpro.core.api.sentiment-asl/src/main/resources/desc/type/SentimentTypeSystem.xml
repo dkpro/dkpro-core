@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
-	<name>Sentiment</name>
-	<description>Type system for sentiment annotations</description>
+	<name>Semantics</name>
+	<description/>
 	<version>${version}</version>
 	<vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
 	<types>
 		<typeDescription>
 			<name>de.tudarmstadt.ukp.dkpro.core.sentiment.type.StanfordSentimentAnnotation</name>
-			<description>Stanford CoreNLP Sentiment annotation</description>
+			<description>&lt;p&gt;Stanford CoreNLP Sentiment annotation&lt;/p&gt;</description>
 			<supertypeName>uima.tcas.Annotation</supertypeName>
 			<features>
 				<featureDescription>

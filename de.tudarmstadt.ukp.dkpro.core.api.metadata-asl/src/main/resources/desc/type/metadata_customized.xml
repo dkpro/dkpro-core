@@ -1,18 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
-	<name>Document Meta Data</name>
-	<description>Meta data about a document.
-&lt;p&gt;
-In addition to the features given here, there is a
-&lt;i&gt;language&lt;/i&gt; feature inherited from UIMA's {@link
-DocumentAnnotation}. DKPro Core components expect a two letter ISO
-639-1 language code there.</description>
+	<name>Metadata</name>
+	<description/>
 	<version>${version}</version>
 	<vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
 	<types>
 		<typeDescription>
 			<name>de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData</name>
-			<description/>
+			<description>&lt;p&gt;The DocumentMetaData annotation stores information about a single processed
+document. There can only be one of these annotations per CAS. The annotation is
+created by readers and contains information to uniquely identify the document from
+which a CAS was created. Writer components use this information when determining
+under which filename a CAS is stored.&lt;p&gt;
+
+&lt;p&gt;There are two principle ways of identifying a document:&lt;p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;b&gt;collection id / document id:&lt;/b&gt; this simple system identifies a document
+  within a collection. The ID of the collection and the document are each
+  simple strings without any further semantics such as e.g. a hierarchy. For
+  this reason, this identification scheme is not well suited to preserve
+  information about directory structures.&lt;/li&gt;
+
+&lt;li&gt;&lt;b&gt;document base URI / document URI:&lt;/b&gt; this system identifies a document using
+  a URI. The base URI is used to derive the relative path of the document with
+  respect to the base location from where it has been read. E.g. if the base
+  URI is &lt;code&gt;file:/texts&lt;/code&gt; and the document URI is &lt;code&gt;file:/texts/english/text1.txt&lt;/code&gt;, then the relativ
+  path of the document is &lt;code&gt;english/text1.txt&lt;/code&gt;. This
+  information is used by writers to recreate the directory structure found
+  under the base location in the target location.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It is possible and indeed common for a writer to initialize both systems of
+identification. If both systems are present, most writers default to using the
+URI-based systems. However, most writers also allow forcing the use of the ID-based
+systems.&lt;/p&gt;
+
+&lt;p&gt;In addition to the features given here, there is a &lt;i&gt;language&lt;/i&gt; feature inherited from UIMA's DocumentAnnotation. DKPro Core components expect a two letter ISO
+639-1 language code there.&lt;/p&gt;</description>
 			<supertypeName>uima.tcas.DocumentAnnotation</supertypeName>
 			<features>
 				<featureDescription>
