@@ -1,0 +1,6 @@
+.Coreference types
+image::ts_coreference.png[align="center"]
+
+This type system contains two types: CoreferenceChain and CoreferenceLink. The CoreferenceChain 
+marks the beginning of a chain. It points to the first CoreferenceLink in the chain. Each 
+CoreferenceLink then points to the next link.

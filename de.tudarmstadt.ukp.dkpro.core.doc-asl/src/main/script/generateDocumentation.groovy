@@ -39,6 +39,7 @@ def locatePom(path) {
 def addFormat(format, kind, pom, spec, clazz) {
     if (!formats[format]) {
         formats[format] = [
+            name: format,
             groupId: pom.groupId ? pom.groupId.text() : pom.parent.groupId.text(),
             artifactId: pom.artifactId.text(),
             version: pom.version ? pom.version.text() : pom.parent.version.text(),
@@ -115,20 +116,35 @@ def getTool(componentName, spec) {
     }
 }
 
-// Scan the UIMA descriptors.
-new File(properties['baseDir'], '..').eachFileRecurse(FILES) {
+// Scan the UIMA type system descriptors.
+new File(project.basedir, '..').eachFileRecurse(FILES) {
+    if (
+        it.name.endsWith('.xml') &&
+        // No testing module
+        !it.path.contains('/de.tudarmstadt.ukp.dkpro.core.testing-asl/') &&
+        // For the typesystem descriptors
+        it.path.contains('/src/main/resources/')
+    ) {
+        try {
+            typesystems << getXMLParser().parseTypeSystemDescription(
+                new XMLInputSource(it.path));
+            processed = true;
+        }
+        catch (org.apache.uima.util.InvalidXMLException e) {
+            // Ignore
+        }
+    }
+}
+
+// Scan the UIMA component descriptors.
+new File(project.basedir, '..').eachFileRecurse(FILES) {
     if (
         it.name.endsWith('.xml') && 
         // No testing module
         !it.path.contains('/de.tudarmstadt.ukp.dkpro.core.testing-asl/') &&
-        (
-            // For the typesystem descriptors
-            it.path.contains('/src/main/resources/') || 
-            // For the analysis engine and reader descriptions
-            it.path.contains('/target/classes/')
-        )
+        // For the analysis engine and reader descriptions
+        it.path.contains('/target/classes/')
     ) {
-        def processed = false;
         try {
             def spec = createResourceCreationSpecifier(it.path, null);
             if (spec instanceof AnalysisEngineDescription) {
@@ -170,27 +186,15 @@ new File(properties['baseDir'], '..').eachFileRecurse(FILES) {
             else {
                 // println "?? " + it;
             }
-            processed = true;
         }
         catch (org.apache.uima.util.InvalidXMLException e) {
             // Ignore
-        }
-        
-        if (!processed) {
-            try {
-                typesystems << getXMLParser().parseTypeSystemDescription(
-                    new XMLInputSource(it.path));
-                processed = true;
-            }
-            catch (org.apache.uima.util.InvalidXMLException e) {
-                // Ignore
-            }
         }
     }
 }
 
 // Scan the build.xmf files used for packaging models.
-new File(properties['baseDir'], '..').eachFileRecurse(FILES) {
+new File(project.basedir, '..').eachFileRecurse(FILES) {
     if (it.path.endsWith('/src/scripts/build.xml')) {
         def buildXml = new XmlSlurper().parse(it);
         def modelXmls = buildXml.'**'.findAll{ node -> node.name() in [
@@ -260,14 +264,14 @@ models = models.sort { a,b ->
     (a.@variant as String) <=> (b.@variant as String)  
 }; 
    
-new File(properties['baseDir'], '..').eachFileRecurse(FILES) {
+new File(project.basedir, '..').eachFileRecurse(FILES) {
     if (
         it.path.contains('/src/main/resources/') && 
         it.path.contains('/tagset/') && 
         it.path.endsWith('.map') && 
         !it.name.startsWith('TEMPLATE')
     ) {
-        def canonicalBase = new File(properties['baseDir'], '..').canonicalPath;
+        def canonicalBase = new File(project.basedir, '..').canonicalPath;
         def config = new PropertiesConfiguration();
         config.setFile(it);
         config.setEncoding("UTF-8");
@@ -340,11 +344,12 @@ inputOutputTypes = inputOutputTypes.sort().unique();
 
 
 def te = new groovy.text.SimpleTemplateEngine(this.class.classLoader);
-new File("${properties['baseDir']}/src/main/script/templates/").eachFile(FILES) { tf ->
+new File("${project.basedir}/src/main/script/templates/").eachFile(FILES) { tf ->
     log.info("Processing ${tf.name}...");
     try {
         def template = te.createTemplate(tf.getText("UTF-8"));
         def result = template.make([
+            project: project,
             engines: engines,
             formats: formats,
             models: models,
@@ -352,7 +357,7 @@ new File("${properties['baseDir']}/src/main/script/templates/").eachFile(FILES) 
             tagsets: tagsets,
             typesystems: typesystems,
             inputOutputTypes: inputOutputTypes]);
-        def output = new File("${properties['baseDir']}/target/generated-adoc/${tf.name}");
+        def output = new File("${project.basedir}/target/generated-adoc/${tf.name}");
         output.parentFile.mkdirs();
         output.setText(result.toString(), 'UTF-8');
     }

@@ -24,10 +24,6 @@ include::{include-dir}introduction.adoc[]
 
 <<<
 
-include::{include-dir}typesystem.adoc[]
-
-<<<
-
 include::{include-dir}analytics.adoc[]
 
 <<<

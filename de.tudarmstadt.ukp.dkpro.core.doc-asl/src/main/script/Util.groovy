@@ -42,13 +42,20 @@ class Util {
         return "<<component-reference.adoc#model-${model.@artifactId},${model.@shortArtifactId}>>"
     }
     
+    static def formatLink(format)
+    {
+        return "<<component-reference.adoc#format-${ format.name },${ format.name }>>";
+    }
+
     static def preparePassthrough(description)
     {
         if (description) {
             if (
-                !description.contains('<p>') ||
-                description.contains('<div>') ||
-                description.contains('<table>')
+                !description.contains('<p>') &&
+                !description.contains('<div>') &&
+                !description.contains('<ol>') &&
+                !description.contains('<ul>') &&
+                !description.contains('<table>')
             ) {
                 description = "<p>${description}</p>";
             }
@@ -70,7 +77,12 @@ class Util {
             if (start > -1 && end > -1) {
                 description = description.substring(start, end);
             }
-            description = description.trim().replaceAll(']', '{endsb}');
+            description = description
+                // Remove HTML tags in tables
+                .replaceAll(/<.+?>/, '') 
+                // Make sure the text doesn't cluse the passthrough block
+                .replaceAll(']', '{endsb}')
+                .trim();
         }
         return description ? "pass:[${description}]" : '__No description__';
     }

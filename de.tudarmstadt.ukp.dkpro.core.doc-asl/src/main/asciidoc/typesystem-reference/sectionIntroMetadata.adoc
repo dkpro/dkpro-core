@@ -1,0 +1,10 @@
+[NOTE]
+====
+Recording tagset and tag descriptions in the CAS is still a feature under
+development. It is not supported by all components and it is not yet well
+defined. Expect changes and enhancements to this feature in future versions of
+DKPro Core. 
+====
+
+.Metadata types
+image::ts_metadata.png[align="center"]

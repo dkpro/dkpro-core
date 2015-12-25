@@ -1,0 +1,2 @@
+.Morphology types
+image::ts_morphology.png[align="center"]

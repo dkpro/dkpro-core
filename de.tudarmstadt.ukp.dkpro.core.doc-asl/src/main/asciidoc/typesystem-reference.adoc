@@ -20,6 +20,11 @@
 
 The document provides detailed information about the DKPro Core type system.
 
+The DKPro Core type system forms the interface between all the integrated components.
+Components store and retrieve their data from the UIMA CAS based on this type system. The
+type system design is using a rather flat hierarchy and a mostly loose coupling between
+annotations. It is offered as a set of modules, not as a single monolithic type system. 
+
 == Types
 include::{generated-dir}typesystemOverview.adoc[]
 

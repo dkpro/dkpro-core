@@ -29,7 +29,7 @@ if (paramDecls) {
 [discrete]
 ===== Parameters
 <% paramDecls.each { %>
-${it.key} (__${it.value[0].type}<% 
+`${it.key}` (__${it.value[0].type}<% 
 if (it.value[0].multiValued) { %>[]<% } 
 %>__)<%
 if (paramValues[it.key]) { %> = `<%
@@ -90,7 +90,7 @@ if (paramDecls) {
 [discrete]
 ===== Parameters
 <% paramDecls.each { %>
-${it.key} (__${it.value[0].type}<% 
+`${it.key}` (__${it.value[0].type}<% 
 if (it.value[0].multiValued) { %>[]<% } 
 %>__)<%
 if (paramValues[it.key]) { %> = `<%
