@@ -1,0 +1,2 @@
+.Phonetics types
+image::ts_phonetics.png[align="center"]

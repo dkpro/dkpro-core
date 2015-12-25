@@ -43,9 +43,6 @@
                             <scriptpath>
                                 <path>${project.basedir}/src/main/script</path>
                             </scriptpath>
-                            <properties>
-                                <baseDir>${project.basedir}</baseDir>
-                            </properties>
                         </configuration>
                     </execution>
                 </executions>
@@ -139,7 +136,7 @@
                             <imagesDir>./typesystem-reference/images</imagesDir>
                             <attributes>
                                 <toc>left</toc>
-                                <include-dir>./typesystem-reference/</include-dir>
+                                <include-dir>${project.basedir}/src/main/asciidoc/typesystem-reference/</include-dir>
                                 <generated-dir>${project.basedir}/target/generated-adoc/</generated-dir>
                             </attributes>
                         </configuration>

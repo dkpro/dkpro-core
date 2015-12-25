@@ -1,0 +1,2 @@
+.Syntax types
+image::ts_syntax.png[align="center"]

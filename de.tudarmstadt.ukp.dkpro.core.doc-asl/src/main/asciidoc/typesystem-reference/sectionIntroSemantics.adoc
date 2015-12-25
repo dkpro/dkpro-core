@@ -1,0 +1,4 @@
+.Segmentation types
+image::ts_semantics.png[align="center"]
+
+
