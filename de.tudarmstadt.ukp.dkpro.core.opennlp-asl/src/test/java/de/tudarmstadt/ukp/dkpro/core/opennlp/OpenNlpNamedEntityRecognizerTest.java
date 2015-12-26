@@ -30,18 +30,26 @@ import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
+// NOTE: This file contains Asciidoc markers for partial inclusion of this file in the documentation
+// Do not remove these tags!
 public class OpenNlpNamedEntityRecognizerTest
 {
+// tag::test[]
     @Test
     public void testEnglish()
         throws Exception
     {
+        // Run the test pipeline. Note the full stop at the end of a sentence is preceded by a
+        // whitespace. This is necessary for it to be detected as a separate token!
         JCas jcas = runTest("en", "person", "SAP where John Doe works is in Germany .");
 
+        // Define the reference data that we expect to get back from the test
         String[] namedEntity = { "[ 10, 18]NamedEntity(person) (John Doe)" };
 
+        // Compare the annotations created in the pipeline to the reference data
         AssertAnnotations.assertNamedEntity(namedEntity, select(jcas, NamedEntity.class));
     }
+// end::test[]
     
     @Test(expected=AnalysisEngineProcessException.class)
     public void testExceptionWithWrongMappingFileLocation()
@@ -54,6 +62,10 @@ public class OpenNlpNamedEntityRecognizerTest
         TestRunner.runTest(engine, "en", "SAP where John Doe works is in Germany .");
     }
 
+// tag::test[]
+    
+    // Auxiliary method that sets up the analysis engine or pipeline used in the test.
+    // Typically, we have multiple tests per unit test file that each invoke this method.
     private JCas runTest(String language, String variant, String testDocument)
         throws Exception
     {
@@ -61,8 +73,13 @@ public class OpenNlpNamedEntityRecognizerTest
                 OpenNlpNamedEntityRecognizer.PARAM_VARIANT, variant,
                 OpenNlpNamedEntityRecognizer.PARAM_PRINT_TAGSET, true);
 
+        // Here we invoke the TestRunner which performs basic whitespace tokenization and 
+        // sentence splitting, creates a CAS, runs the pipeline, etc. TestRunner explicitly
+        // disables automatic model loading. Thus, models used in unit tests must be explicitly
+        // made dependencies in the pom.xml file.
         return TestRunner.runTest(engine, language, testDocument);
     }
+// end::test[]
 
 
     @Rule

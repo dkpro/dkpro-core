@@ -15,11 +15,11 @@
 // limitations under the License.
 
 [[ugr.dkpro.core.testing]]
-== Testing
+= Testing
 
 The testing module offers a convenient way to create unit tests for UIMA components.
 
-=== Basic test setup
+== Basic test setup
 
 There are a couple of things useful in every unit test:
 
@@ -42,7 +42,7 @@ Additional benefits you get from this `testContext` are:
 * getting the method name of the current test (`getMethodName()`)
 * getting the name of a folder you can use to store test results (`getTestOutputFolder()`).
 
-=== Unit test example
+== Unit test example
 
 A typical unit test class has consists of two parts
 
@@ -54,62 +54,16 @@ In the following example, mind that the text must be provided with spaces
 separating the tokens (thus there must be a space before the full stop at the end of the
 sentence) and with newline characters (`\n`) separating the sentences:
 
-.Typical unit test for an analysis component
-[source,java]
+.Typical unit test for an analysis component from the OpenNlpNamedEntityRecognizer test (shortened)
+[source,java,indent=0]
 ----
-@Rule
-public DkproTestContext testContext = new DkproTestContext();
-
-@Test
-public void testEnglish() throws Exception
-{   
-  JCas jcas = runTest("en", null, "This is a test .");
-
-  String[] constituentMapped =
-    { "NP 0,4", "NP 8,14", "ROOT 0,16", "S 0,16", "VP 5,14" };
-
-  String[] constituentOriginal = 
-    { "NP 0,4", "NP 8,14", "ROOT 0,16", "S 0,16","VP 5,14" };
-
-  String pennTree = "(ROOT (S (NP (DT This)) (VP (VBZ is) " +
-    "(NP (DT a) (NN test))) (. .)))";
-
-  String[] constituentTags = 
-    { "ADJP", "ADV", "ADVP", "AUX", "CONJP", "FRAG", "INTJ", 
-      "LST", "NAC", "NEG", "NP", "NX", "O", "PP", "PRN", "PRT",
-      "QP", "S", "SBAR", "SQ", "TYPO", "UCP", "UH", "VP", 
-      "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
-
-  String[] unmappedConst = 
-    { "ADV", "AUX", "NEG", "O", "TYPO", "UH" };
-        
-  AssertAnnotations.assertPennTree(
-    pennTree, selectSingle(jcas, PennTree.class));
-  AssertAnnotations.assertConstituents(
-    constituentMapped, constituentOriginal, 
-    select(jcas, Constituent.class));
-  AssertAnnotations.assertTagset(
-    Constituent.class, "ptb", constituentTags, jcas);
-  AssertAnnotations.assertTagsetMapping(
-    Constituent.class, "ptb", unmappedConst, jcas);
-}
-
-private JCas runTest(String aLanguage, String aVariant, String aDocument)
-  throws Exception
-{
-  AnalysisEngineDescription parser = createEngineDescription(
-    OpenNlpParser.class,
-    OpenNlpParser.PARAM_VARIANT, aVariant,
-    OpenNlpParser.PARAM_PRINT_TAGSET, true,
-    OpenNlpParser.PARAM_WRITE_PENN_TREE, true);
-  return TestRunner.runTest(parser, aLanguage, aDocument);
-}
+include::{source-dir}de.tudarmstadt.ukp.dkpro.core.opennlp-asl/src/test/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpNamedEntityRecognizerTest.java[tags=test]
 ----
 
 Test cases for segmenter components should not make use of the `TestRunner`
 class, which already performs tokenization and sentence splitting internally.
 
-=== AssertAnnotations
+== AssertAnnotations
 
 The AssertAnnotations class offers various static methods to test if a component has
 properly created annotations of a certain kind. There are methods to test almost every kind
@@ -133,7 +87,7 @@ of annotation supported by DKPro Core, e.g.:
 * `assertTagsetMapping`
 
 
-=== Testing I/O componets
+== Testing I/O componets
 
 The IOTestRunner class offers convenient methods to test I/O components:
 
@@ -144,32 +98,22 @@ The IOTestRunner class offers convenient methods to test I/O components:
   because some information is lost or cannot be exported exactly as ingested from the original file.
 
 The input file and reference file path given to these methods is always considered relative to
-src/test/resources`.
+`src/test/resources`.
 
-.Example using `testRoundTrip`
-[source,java]
+.Example using `testRoundTrip` with extra parameters (Conll2006ReaderWriterTest)
+[source,java,indent=0]
 ----
-testRoundTrip(Conll2002Reader.class, Conll2002Writer.class,
-  "conll/2002/ner2002_test.conll");
-----
-
-.Example using `testRoundTrip` with extra parameters
-[source,java]
-----
-testRoundTrip(
-  createReaderDescription(BratReader.class), 
-  createEngineDescription(BratWriter.class, 
-    BratWriter.PARAM_WRITE_RELATION_ATTRIBUTES, true),
-  "conll/2009/en-ref.ann");
+include::{source-dir}de.tudarmstadt.ukp.dkpro.core.io.conll-asl/src/test/java/de/tudarmstadt/ukp/dkpro/core/io/conll/Conll2006ReaderWriterTest.java[tags=testRoundTrip]
 ----
 
-.Example using `testOneWay` with extra parameters
-[source,java]
+.Example using `testOneWay` with extra parameters (Conll2006ReaderWriterTest)
+[source,java,indent=0]
 ----
-testOneWay(
-  createReaderDescription(Conll2009Reader.class), 
-  createEngineDescription(BratWriter.class,
-    BratWriter.PARAM_WRITE_RELATION_ATTRIBUTES, true),
-  "conll/2009/en-ref.ann",
-  "conll/2009/en-orig.conll");
+include::{source-dir}de.tudarmstadt.ukp.dkpro.core.io.conll-asl/src/test/java/de/tudarmstadt/ukp/dkpro/core/io/conll/Conll2006ReaderWriterTest.java[tags=testOneWay]
+----
+
+.Example using `testRoundTrip` with extra parameters (BratReaderWriterTest)
+[source,java,indent=0]]
+----
+include::{source-dir}de.tudarmstadt.ukp.dkpro.core.io.brat-asl/src/test/java/de/tudarmstadt/ukp/dkpro/core/io/brat/BratReaderWriterTest.java[tags=testOneWay]
 ----

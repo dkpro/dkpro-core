@@ -20,6 +20,8 @@
 
 This document is targets developers of DKPro Core components.
 
+:sectnums:
+
 <<<
 
 include::{include-dir}components.adoc[]

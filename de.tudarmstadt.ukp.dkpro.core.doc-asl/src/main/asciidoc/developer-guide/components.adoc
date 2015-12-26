@@ -15,11 +15,11 @@
 // limitations under the License.
 
 [[sect_components]]
-== Implementing Components
+= Implementing Components
 
-=== General
+== General
 
-==== Capabilities
+=== Capabilities
 
 All components should declare the types they consume by default as input and they produced by
 default as output. Some components may not know before runtime what they produce or consume,
@@ -31,14 +31,125 @@ so nothing can be declared here.
 include::{source-dir}de.tudarmstadt.ukp.dkpro.core.opennlp-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTagger.java[tags=capabilities]
 ----
 
-=== Analysis components
+== Analysis components
+
+=== Base classes
 
 The base classes for analysis components are provided by uimaFIT: `JCasAnnotator_ImplBase` and 
 `CasAnnotator_ImplBase`.
 
-=== I/O components
+=== Models
 
-==== Base classes
+The `ModelProviderBase` class offers convenient support for working with model resources. 
+The following code is taken from the `OpenNlpPosTagger` component. It shows how the POS Tagger 
+model is addressed using a parametrized classpath URL with parameters for language and variant.
+
+.Model provider setup in OpenNlpPosTagger.initialize() (shortened)
+[source,java,indent=0]
+----
+include::{source-dir}de.tudarmstadt.ukp.dkpro.core.opennlp-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTagger.java[tags=model-provider-decl]
+----
+
+The `produceResource()` method is called with the URL of the model once it has been located by
+`CasConfigurableProviderBase`.
+
+.Model provider use in OpenNlpPosTagger.process() (shortened)
+[source,java,indent=0]
+----
+include::{source-dir}de.tudarmstadt.ukp.dkpro.core.opennlp-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTagger.java[tags=model-provider-use-1]
+----
+[source,java,indent=0]
+----
+include::{source-dir}de.tudarmstadt.ukp.dkpro.core.opennlp-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTagger.java[tags=model-provider-use-2]
+----
+
+
+=== Type mappings
+
+The DKPro type system design provides two levels of abstraction on most annotations: 
+
+* a generic annotation type, e.g. POS (part of speech) with a feature value
+  containing the original tag produced by an analysis component, e.g. TreeTagger 
+* a set of high-level types for very common categories, e.g. N (noun), V (verb), etc. 
+
+DKPro maintains mappings for commonly used tagsets, e.g. in the module
+`de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl`. They are named: 
+
+
+.Naming scheme for tag mapping files
+----
+{language}-{tagset}-{layer}.map
+----
+
+The following values are commonly used for `layer`: 
+
+* `pos` - part-of-speech tag mapping 
+* `morph` - morphological features mapping 
+* `constituency` - constituent tag mapping
+* `dependency` - dependency relation mapping
+
+The mapping provder is create in the `initialize()` method of the UIMA component after the 
+respective model provider. This is necessary because the mapping provider obtains the tagset
+information for the current model from the model provider.
+
+.Mapping provider setup in OpenNlpPosTagger.initialize() (shortened)
+[source,java,indent=0]
+----
+include::{source-dir}de.tudarmstadt.ukp.dkpro.core.opennlp-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTagger.java[tags=mapping-provider-decl]
+----
+
+In the `process()` method, the mapping provider is used to to create an UIMA annotation. First,
+it is configured for the current document and model. Then, it is invoked for each tag produced
+by the tagger obtain the UIMA type for the annotation to be created. If there is no mapping file,
+the mapping provide will fall back to a suitable default annotation, e.g. POS for part-of-speech
+tags or NamedEntity.
+
+.Mapping provider use in OpenNlpPosTagger.process() (shortened)
+[source,java,indent=0]
+----
+include::{source-dir}de.tudarmstadt.ukp.dkpro.core.opennlp-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTagger.java[tags=mapping-provider-use-1]
+----
+[source,java,indent=0]
+----
+include::{source-dir}de.tudarmstadt.ukp.dkpro.core.opennlp-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTagger.java[tags=mapping-provider-use-2]
+----
+
+
+=== Default variants
+
+It is possible a different default variant needs to be used depending on the language. This
+can be configured by placing a properties file in the classpath and setting its
+location using `setDefaultVariantsLocation(String)`. The key in the
+properties is the language and the value is used a default variant. These file
+should always reside in the `lib` sub-package of a component and use the naming
+convention: 
+
+----
+{tool}-default-variants.map
+----
+
+The default variant file is a Java properties file which defines for each language which variant 
+should be assumed as default. It is possible to declare a __catch-all__ variant using `*`. This is
+used if none of the other default variants apply.
+
+.OpenNLP POS tagger default variants configuration
+[source,text,indent=0]
+----
+include::{source-dir}de.tudarmstadt.ukp.dkpro.core.opennlp-asl/src/main/resources/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/tagger-default-variants.map[]
+----
+
+
+Use the convenience constructor of `ModelProviderBase` to create model providers that are already 
+correctly set up to use default variants:
+
+[source,java,indent=0]
+----
+include::{source-dir}de.tudarmstadt.ukp.dkpro.core.api.resources-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/api/resources/ModelProviderBase.java[tags=model-provider-convenience]
+----
+
+== I/O components
+
+=== Base classes
 
 The base classes for I/O components are located in the `api.io-asl` module. 
 

@@ -52,6 +52,8 @@ import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionPr
 /**
  * Part-of-Speech annotator using OpenNLP. Requires {@link Sentence}s to be annotated before.
  */
+//NOTE: This file contains Asciidoc markers for partial inclusion of this file in the documentation
+//Do not remove these tags!
 // tag::capabilities[]
 @TypeCapability(
         inputs = { 
