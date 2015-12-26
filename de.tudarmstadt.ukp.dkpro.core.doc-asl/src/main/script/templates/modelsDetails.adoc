@@ -17,8 +17,7 @@ def metadataValueText(model, key, value)
 
 <% models.each { model -> %>
 [[model-${model.@artifactId}]]
-[discrete]
-=== ${model.@shortArtifactId} 
+== ${model.@shortArtifactId} 
 
 [small]#*_Artifact ID:_* __${model.@artifactId}__# +
 [small]#*_Version:_* __${model.@version}__# +

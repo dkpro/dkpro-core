@@ -24,8 +24,6 @@ The document provides detailed information about the DKPro Core UIMA components.
 
 * <<sect_componentsOverview,Components>>
 ** <<sect_componentsProducersConsumers,Components by types they produce and consume>>
-* <<sect_formatsOverview,Formats>>
-* <<sect_modelsOverview,Models>>
 
 <<<
 
@@ -37,23 +35,6 @@ include::{generated-dir}componentsOverview.adoc[]
 include::{generated-dir}componentsDetails.adoc[]
 
 <<<
-
-[[sect_formatsOverview]]
-== I/O components
-
-include::{generated-dir}formatsOverview.adoc[]
-
-include::{generated-dir}formatsDetails.adoc[]
-
-<<<
-
-[[sect_modelsOverview]]
-== Models
-
-include::{generated-dir}modelsOverview.adoc[]
-
-include::{generated-dir}modelsDetails.adoc[]
-
 
 == Appendix
 
