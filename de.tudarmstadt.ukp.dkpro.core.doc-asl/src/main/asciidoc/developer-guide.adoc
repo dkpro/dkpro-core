@@ -20,7 +20,9 @@
 
 This document is targets developers of DKPro Core components.
 
-include::{include-dir}models.adoc[]
+<<<
+
+include::{include-dir}components.adoc[]
 
 <<<
 
@@ -29,3 +31,8 @@ include::{include-dir}testing.adoc[]
 <<<
 
 include::{include-dir}typesystem.adoc[]
+
+<<<
+
+include::{include-dir}models.adoc[]
+
