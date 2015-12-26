@@ -1,0 +1,80 @@
+// Copyright 2015
+// Ubiquitous Knowledge Processing (UKP) Lab
+// Technische Universität Darmstadt
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+// http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+[[sect_components]]
+== Implemennting Components
+
+=== General
+
+==== Capabilities
+
+All components should declare the types they consume by default as input and they produced by
+default as output. Some components may not know before runtime what they produce or consume,
+so nothing can be declared here. 
+
+.Example of declaring input/output types on a component
+[source,java]
+----
+@TypeCapability(
+        inputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
+        outputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
+public class OpenNlpPosTagger
+    extends JCasAnnotator_ImplBase
+{
+----
+
+=== Analysis components
+
+The base classes for analysis components are provided by uimaFIT: `JCasAnnotator_ImplBase` and 
+`CasAnnotator_ImplBase`.
+
+=== I/O components
+
+==== Base classes
+
+The base classes for I/O components are located in the `api.io-asl` module. 
+
+Most reader components are derived from `JCasResourceCollectionReaderBase` or 
+`ResourceCollectionReaderBase`. These class offers support for many common functionalities, e.g.:
+
+* common parameters like `PARAM_SOURCE_LOCATION` and `PARAM_PATTERNS`
+* reading from the file system, classpath, or ZIP archives
+* file-based compression (GZ, BZIP2, XZ)
+* handling of `DocumentMetaData (`initCas` methods)
+* Ant-like include/exclude patterns
+* handling of default excludes and hidden files
+* progress reporting support
+* extensibility with own Spring resource resolvers
+
+Most writer components are derived from `JCasFileWriter_ImplBase`. This class offers support for
+common functionality such as:
+
+* common parameters like `PARAM_TARGET_LOCATION`
+* writing to the file system, classpath, or ZIP archives (`getOutputStream` methods)
+* file-based compression (GZ, BZIP2, XZ)
+* properly interpreting `DocumentMetaData (`getOutputStream` methods)
+* overwrite protection
+* replacing file extensions
+
+If an I/O component interacts with a different data source, e.g. a database, the base classes above
+are not suitable. Such readers should derive from the uimaFIT `JCasCollectionReader_ImplBase`
+(or `CasCollectionReader_ImplBase`) and writers from `JCasAnnotator_ImplBase` (or 
+`CasAnnotator_ImplBase`). However, the developer should ensure that the component's parameters
+reflect the standard DKPro Core reader/writer parameters defined in `ComponentParameters` 
+(`api.parameters-asl` module).
