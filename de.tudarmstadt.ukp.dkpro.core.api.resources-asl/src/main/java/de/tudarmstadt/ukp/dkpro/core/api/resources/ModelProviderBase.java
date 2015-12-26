@@ -48,6 +48,7 @@ public class ModelProviderBase<M>
         // Nothing to do
     }
 
+    // tag::model-provider-convenience[]
     public ModelProviderBase(Object aObject, String aShortName, String aType)
     {
         setContextObject(aObject);
@@ -65,6 +66,7 @@ public class ModelProviderBase<M>
         
         applyAutoOverrides(aObject);
     }
+    // end::model-provider-convenience[]
     
     @Override
     public void configure(CAS aCas)

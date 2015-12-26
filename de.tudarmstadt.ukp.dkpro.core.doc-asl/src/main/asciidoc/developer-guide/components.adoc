@@ -15,7 +15,7 @@
 // limitations under the License.
 
 [[sect_components]]
-== Implemennting Components
+== Implementing Components
 
 === General
 
@@ -26,17 +26,9 @@ default as output. Some components may not know before runtime what they produce
 so nothing can be declared here. 
 
 .Example of declaring input/output types on a component
-[source,java]
+[source,java,indent=0]
 ----
-@TypeCapability(
-        inputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
-        outputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
-public class OpenNlpPosTagger
-    extends JCasAnnotator_ImplBase
-{
+include::{source-dir}de.tudarmstadt.ukp.dkpro.core.opennlp-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTagger.java[tags=capabilities]
 ----
 
 === Analysis components
