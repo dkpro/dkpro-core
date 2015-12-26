@@ -25,22 +25,33 @@ import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
+//NOTE: This file contains Asciidoc markers for partial inclusion of this file in the documentation
+//Do not remove these tags!
 public class Conll2006ReaderWriterTest
 {
     @Test
     public void roundTrip()
         throws Exception
     {
-        testRoundTrip(Conll2006Reader.class, Conll2006Writer.class,
-                "conll/2006/fk003_2006_08_ZH1.conll");
+// tag::testRoundTrip[]
+        testRoundTrip(
+                Conll2006Reader.class, // the reader
+                Conll2006Writer.class,  // the writer
+                "conll/2006/fk003_2006_08_ZH1.conll"); // the input also used as output reference
+// end::testRoundTrip[]
     }
 
     @Test
     public void testFinnTreeBank()
         throws Exception
     {
-        testOneWay(Conll2006Reader.class, Conll2006Writer.class, "conll/2006/fi-ref.conll",
-                "conll/2006/fi-orig.conll");
+// tag::testOneWay[]
+        testOneWay(
+                Conll2006Reader.class, // the reader
+                Conll2006Writer.class,  // the writer
+                "conll/2006/fi-ref.conll", // the reference file for the output
+                "conll/2006/fi-orig.conll"); // the input file for the test
+// end::testOneWay[]
     }
 
     @Rule

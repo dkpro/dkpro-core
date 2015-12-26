@@ -31,18 +31,22 @@ import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2009Reader;
 import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2012Reader;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
+//NOTE: This file contains Asciidoc markers for partial inclusion of this file in the documentation
+//Do not remove these tags!
 public class BratReaderWriterTest
 {
     @Test
     public void testConll2009()
         throws Exception
     {
+// tag::testOneWay[]
         testOneWay(
-                createReaderDescription(Conll2009Reader.class), 
-                createEngineDescription(BratWriter.class,
+                createReaderDescription(Conll2009Reader.class), // the reader
+                createEngineDescription(BratWriter.class, // the writer
                         BratWriter.PARAM_WRITE_RELATION_ATTRIBUTES, true),
-                "conll/2009/en-ref.ann",
-                "conll/2009/en-orig.conll");
+                "conll/2009/en-ref.ann", // the reference file for the output
+                "conll/2009/en-orig.conll"); // the input file for the test
+// end::testOneWay[]
     }
 
     @Test

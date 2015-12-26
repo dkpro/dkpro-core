@@ -16,9 +16,9 @@
 
 [[sect_models]]
 
-== Type System
+= Type System
 
-=== Adding a type
+== Adding a type
 
 To add a new type, first locate the relevant module. Typically types are added to an *API* module
 because types are supposed to be independent of individual analysis tools. In rare circumstances,
@@ -50,7 +50,7 @@ consisting of a list of type system descriptor locations prefixed with `classpat
 NOTE: The type system location corresponds to the location within the classpath at runtime, thus
       `src/main/resources` is stripped from the beginning.
 
-=== JCas classes
+== JCas classes
 
 Instead of pre-generating the JCas classes and storing them in the version control, we use the
 _jcasgen-maven-plugin_ to automatically generate JCas classes at build time. The automatic
