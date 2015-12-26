@@ -95,7 +95,7 @@ if (mods) { %>
 |${model.@language}
 |${model.@variant}
 |${model.@version}
-|<<model-${model.@artifactId},details>>
+|${Util.modelLink(model,"details")}
 
 <% } // mods.each { model -> %>
 |====

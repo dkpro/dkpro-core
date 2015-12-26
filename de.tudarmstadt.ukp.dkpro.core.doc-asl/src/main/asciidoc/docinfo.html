@@ -1,0 +1,21 @@
+<style>
+.customLinksHeader{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;
+    font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;
+    margin-bottom:.5em;line-height:1.0125em}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+$( document ).ready(function() {
+    $( "#toc" ).prepend( "\
+    		<ul style='margin-bottom: 1.5em;'>\
+    		  <li><a href='user-guide.html'>User Guide</a>\
+              <li><a href='developer-guide.html'>Developer Guide</a>\
+              <li><a href='component-reference.html'>Component Reference</a>\
+              <li><a href='format-reference.html'>Format Reference</a>\
+              <li><a href='typesystem-reference.html'>Typesystem Reference</a>\
+              <li><a href='tagset-reference.html'>Tagset Reference</a>\
+              <li><a href='model-reference.html'>Model Reference</a>\
+    		</ul>\
+	" );
+})
+</script>

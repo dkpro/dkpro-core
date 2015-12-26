@@ -39,9 +39,14 @@ class Util {
     
     static def modelLink(model)
     {
-        return "<<component-reference.adoc#model-${model.@artifactId},${model.@shortArtifactId}>>"
+        return "<<model-reference.adoc#model-${model.@artifactId},${model.@shortArtifactId}>>"
     }
     
+    static def modelLink(model, title)
+    {
+        return "<<model-reference.adoc#model-${model.@artifactId},${title}>>"
+    }
+
     static def formatLink(format)
     {
         return "<<component-reference.adoc#format-${ format.name },${ format.name }>>";

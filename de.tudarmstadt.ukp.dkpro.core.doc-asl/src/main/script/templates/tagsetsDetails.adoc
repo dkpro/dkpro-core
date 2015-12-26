@@ -156,7 +156,10 @@ ${headerCommentText(tagset)}
 def sources = tagset.mapping.keys.sort()
     .findAll { it.startsWith('__META_SOURCE_URL__') };
 if (sources) {
-    out.println ".See also"
+%>
+[discrete]
+===== See also
+<%
     sources.each { source ->
         def link = tagset.mapping.getString(source).trim();
         if (!link.endsWith(']') && !link.contains('?') && !link.endsWith('/')) {

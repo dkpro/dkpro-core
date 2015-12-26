@@ -4,7 +4,7 @@ import static groovy.json.StringEscapeUtils.escapeJava;
 
 formats.sort { it.key }.each { %>
 [[format-${ it.key }]]
-=== ${it.key}
+== ${it.key}
 
 [small]#*_Artifact ID:_* __${it.value.artifactId}__#
 
