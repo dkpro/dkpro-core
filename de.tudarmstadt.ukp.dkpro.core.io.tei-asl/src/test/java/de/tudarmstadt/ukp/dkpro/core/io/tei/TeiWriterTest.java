@@ -30,7 +30,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpNameFinder;
+import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpNamedEntityRecognizer;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpParser;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
@@ -57,7 +57,7 @@ public class TeiWriterTest
 
         AnalysisEngineDescription parser = createEngineDescription(OpenNlpParser.class);
 
-        AnalysisEngineDescription ner = createEngineDescription(OpenNlpNameFinder.class);
+        AnalysisEngineDescription ner = createEngineDescription(OpenNlpNamedEntityRecognizer.class);
 
         AnalysisEngineDescription dump = createEngineDescription(CasDumpWriter.class);
 
