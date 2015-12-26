@@ -960,7 +960,7 @@ public abstract class ResourceObjectProviderBase<M>
             if (defaultVariants.containsKey(language)) {
                 defaultValues.setProperty(VARIANT, defaultVariants.getProperty(language));
             }
-            if (defaultVariants.containsKey(CATCH_ALL)) {
+            else if (defaultVariants.containsKey(CATCH_ALL)) {
                 defaultValues.setProperty(VARIANT, defaultVariants.getProperty(CATCH_ALL));
             }
         }
