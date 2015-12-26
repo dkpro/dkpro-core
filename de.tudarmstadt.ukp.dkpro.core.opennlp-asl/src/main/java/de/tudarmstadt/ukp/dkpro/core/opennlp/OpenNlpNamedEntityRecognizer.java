@@ -57,7 +57,7 @@ import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionPr
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
         outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" })
-public class OpenNlpNameFinder
+public class OpenNlpNamedEntityRecognizer
     extends JCasAnnotator_ImplBase
 {
     /**
@@ -108,7 +108,7 @@ public class OpenNlpNameFinder
         modelProvider = new CasConfigurableStreamProviderBase<TokenNameFinder>()
         {
             {
-                setContextObject(OpenNlpNameFinder.this);
+                setContextObject(OpenNlpNamedEntityRecognizer.this);
 
                 setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
                 setDefault(ARTIFACT_ID,
