@@ -161,6 +161,8 @@ public abstract class ResourceObjectProviderBase<M>
      */
     public static final String SHARABLE = "sharable";
 
+    public static final String CATCH_ALL = "*";
+    
     private Properties resourceMetaData;
     private URL resourceUrl;
     private URL initialResourceUrl;
@@ -946,14 +948,21 @@ public abstract class ResourceObjectProviderBase<M>
         Properties overriddenValues = new Properties(importedValues);
         overriddenValues.putAll(overrides);
 
+        // Load default variants if available and not already loaded
         if ((defaultVariants == null) && (defaultVariantsLocation != null)) {
             String dvl = pph.replacePlaceholders(defaultVariantsLocation, overriddenValues);
             setDefaultVariants(PropertiesLoaderUtils.loadAllProperties(dvl));
         }
 
+        // Apply default variant
         String language = overriddenValues.getProperty(LANGUAGE);
-        if ((defaultVariants != null) && defaultVariants.containsKey(language)) {
-            defaultValues.setProperty(VARIANT, defaultVariants.getProperty(language));
+        if ((defaultVariants != null)) {
+            if (defaultVariants.containsKey(language)) {
+                defaultValues.setProperty(VARIANT, defaultVariants.getProperty(language));
+            }
+            if (defaultVariants.containsKey(CATCH_ALL)) {
+                defaultValues.setProperty(VARIANT, defaultVariants.getProperty(CATCH_ALL));
+            }
         }
 
         return overriddenValues;
