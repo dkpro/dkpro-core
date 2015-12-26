@@ -51,17 +51,18 @@ import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionPr
 
 /**
  * Part-of-Speech annotator using OpenNLP. Requires {@link Sentence}s to be annotated before.
- *
  */
+// tag::capabilities[]
 @TypeCapability(
-	    inputs = {
-	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
-		outputs = {
-		    "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
+        inputs = { 
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, 
+        outputs = { 
+            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class OpenNlpPosTagger
 	extends JCasAnnotator_ImplBase
 {
+// end::capabilities[]
 	/**
 	 * Use this language instead of the document language to resolve the model.
 	 */
@@ -119,79 +120,106 @@ public class OpenNlpPosTagger
 	{
 		super.initialize(aContext);
 
-		modelProvider = new ModelProviderBase<POSTagger>() {
-			{
-                setContextObject(OpenNlpPosTagger.this);
+// tag::model-provider-decl[]
+		// Use ModelProviderBase convenience constructor to set up a model provider that
+		// auto-detects most of its settings and is configured to use default variants.
+		// Auto-detection inspects the configuration parameter fields (@ConfigurationParameter)
+		// of the analysis engine class and looks for default parameters such as PARAM_LANGUAGE,
+		// PARAM_VARIANT, and PARAM_MODEL_LOCATION.
+        modelProvider = new ModelProviderBase<POSTagger>(this, "opennlp", "tagger")
+        {
+            @Override
+            protected POSTagger produceResource(InputStream aStream)
+                throws Exception
+            {
+                // Load the POS tagger model from the location the model provider offers
+                POSModel model = new POSModel(aStream);
+// end::model-provider-decl[]
 
-                setDefault(ARTIFACT_ID, "${groupId}.opennlp-model-tagger-${language}-${variant}");
-				setDefault(LOCATION, "classpath:/${package}/lib/tagger-${language}-${variant}.properties");
-                setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/opennlp/lib/tagger-default-variants.map");
-				setDefault(VARIANT, "maxent");
-
-				setOverride(LOCATION, modelLocation);
-				setOverride(LANGUAGE, language);
-				setOverride(VARIANT, variant);
-			}
-
-			@Override
-			protected POSTagger produceResource(InputStream aStream)
-			    throws Exception
-			{
-				POSModel model = new POSModel(aStream);
-
-				OpenNlpTagsetDescriptionProvider tsdp = new OpenNlpTagsetDescriptionProvider(
-				        getResourceMetaData().getProperty("pos.tagset"), POS.class, 
-				        model.getPosModel());
+                // Extract tagset information from the model
+                OpenNlpTagsetDescriptionProvider tsdp = new OpenNlpTagsetDescriptionProvider(
+                        getResourceMetaData().getProperty("pos.tagset"), POS.class,
+                        model.getPosModel());
                 if (getResourceMetaData().containsKey("pos.tagset.tagSplitPattern")) {
-                    tsdp.setTagSplitPattern(getResourceMetaData().getProperty("pos.tagset.tagSplitPattern"));
+                    tsdp.setTagSplitPattern(getResourceMetaData().getProperty(
+                            "pos.tagset.tagSplitPattern"));
                 }
                 addTagset(tsdp);
 
-				if (printTagSet) {
-					getContext().getLogger().log(INFO, tsdp.toString());
-				}
+                if (printTagSet) {
+                    getContext().getLogger().log(INFO, tsdp.toString());
+                }
 
-				return new POSTaggerME(model);
-			}
-		};
+// tag::model-provider-decl[]
+                // Create a new POS tagger instance from the loaded model
+                return new POSTaggerME(model);
+            }
+        };
+// end::model-provider-decl[]
 
+// tag::mapping-provider-decl[]
+        // General setup of the mapping provider in initialize()
         mappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
                 language, modelProvider);
+// end::mapping-provider-decl[]
 	}
 
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
-		CAS cas = aJCas.getCas();
+    @Override
+    public void process(JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
+// tag::model-provider-use-1[]
+        CAS cas = aJCas.getCas();
 
-		modelProvider.configure(cas);
-		mappingProvider.configure(cas);
+        // Document-specific configuration of model and mapping provider in process()
+        modelProvider.configure(cas);
+// end::model-provider-use-1[]
+        
+// tag::mapping-provider-use-1[]
+        // Mind the mapping provider must be configured after the model provider as it uses the
+        // model metadata
+        mappingProvider.configure(cas);
+// end::mapping-provider-use-1[]
 
+        // When packaging a model, it is possible to store additional metadata. Here we fetch such a
+        // model metadata property that we use to determine if the tag produced by the tagger needs
+        // to be post-processed. This property is specific to the DKPro Core OpenNLP models
         String tagSplitPattern = modelProvider.getResourceMetaData().getProperty(
                 "pos.tagset.tagSplitPattern");
-		
-		for (Sentence sentence : select(aJCas, Sentence.class)) {
-			List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
-			String[] tokenTexts = toText(tokens).toArray(new String[tokens.size()]);
 
-			String[] tags = modelProvider.getResource().tag(tokenTexts);
+        for (Sentence sentence : select(aJCas, Sentence.class)) {
+// tag::model-provider-use-2[]
+            List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
+            String[] tokenTexts = toText(tokens).toArray(new String[tokens.size()]);
 
-			int i = 0;
-			for (Token t : tokens) {
-			    String tag = tags[i];
-			    
-	            if (tagSplitPattern != null) {
-	                tag = tag.split(tagSplitPattern)[0];
-	            }
-			    
-				Type posTag = mappingProvider.getTagType(tag);
-				POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
-				posAnno.setPosValue(internTags ? tag.intern() : tag);
-				posAnno.addToIndexes();
-				t.setPos(posAnno);
-				i++;
-			}
-		}
-	}
+            // Fetch the OpenNLP pos tagger instance configured with the right model and use it to
+            // tag the text
+            String[] tags = modelProvider.getResource().tag(tokenTexts);
+// end::model-provider-use-2[]
+
+            int i = 0;
+            for (Token t : tokens) {
+                String tag = tags[i];
+
+                // Post-process the tag if necessary
+                if (tagSplitPattern != null) {
+                    tag = tag.split(tagSplitPattern)[0];
+                }
+
+// tag::mapping-provider-use-2[]
+                // Convert the tag produced by the tagger to an UIMA type, create an annotation
+                // of this type, and add it to the document.
+                Type posTag = mappingProvider.getTagType(tag);
+                POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
+                // To save memory, we typically intern() tag strings
+                posAnno.setPosValue(internTags ? tag.intern() : tag);
+                posAnno.addToIndexes();
+// end::mapping-provider-use-2[]
+                
+                // Connect the POS annotation to the respective token annotation
+                t.setPos(posAnno);
+                i++;
+            }
+        }
+    }
 }

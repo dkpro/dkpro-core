@@ -82,6 +82,7 @@
                             <attributes>
                                 <toc>left</toc>
                                 <include-dir>./user-guide/</include-dir>
+                                <source-dir>${project.basedir}/../</source-dir>
                                 <generated-dir>${project.basedir}/target/generated-adoc/</generated-dir>
                             </attributes>
                         </configuration>
@@ -119,6 +120,7 @@
                             <attributes>
                                 <toc>left</toc>
                                 <include-dir>./developer-guide/</include-dir>
+                                <source-dir>${project.basedir}/../</source-dir>
                                 <generated-dir>${project.basedir}/target/generated-adoc/</generated-dir>
                             </attributes>
                         </configuration>
@@ -137,6 +139,7 @@
                             <attributes>
                                 <toc>left</toc>
                                 <include-dir>${project.basedir}/src/main/asciidoc/typesystem-reference/</include-dir>
+                                <source-dir>${project.basedir}/../</source-dir>
                                 <generated-dir>${project.basedir}/target/generated-adoc/</generated-dir>
                             </attributes>
                         </configuration>
@@ -155,6 +158,7 @@
                             <attributes>
                                 <toc>left</toc>
                                 <include-dir>./tagset-reference/</include-dir>
+                                <source-dir>${project.basedir}/../</source-dir>
                                 <generated-dir>${project.basedir}/target/generated-adoc/</generated-dir>
                             </attributes>
                         </configuration>
@@ -173,6 +177,7 @@
                             <attributes>
                                 <toc>left</toc>
                                 <include-dir>./component-reference/</include-dir>
+                                <source-dir>${project.basedir}/../</source-dir>
                                 <generated-dir>${project.basedir}/target/generated-adoc/</generated-dir>
                             </attributes>
                         </configuration>
