@@ -14,7 +14,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-[[ugr.dkpro.core.testing]]
+[[sect_testing]]
 = Testing
 
 The testing module offers a convenient way to create unit tests for UIMA components.
