@@ -822,7 +822,20 @@ public class AssertAnnotations
         List<String> expected = Collections.emptyList();
         assertEquals(asCopyableString(expected, true), asCopyableString(errors, true));
     }
-    
+
+    public static void assertValid(Collection<Message> messages)
+    {
+        messages.forEach(m -> System.out.println(m));
+        
+        List<String> errors = messages.stream()
+                .filter(m -> m.level == ERROR)
+                .map(m -> m.toString())
+                .collect(Collectors.toList());
+        
+        List<String> expected = Collections.emptyList();
+        assertEquals(asCopyableString(expected, true), asCopyableString(errors, true));
+    }
+
     public static String asCopyableString(Collection<String> aCollection, boolean aLinebreak)
     {
         String result;
