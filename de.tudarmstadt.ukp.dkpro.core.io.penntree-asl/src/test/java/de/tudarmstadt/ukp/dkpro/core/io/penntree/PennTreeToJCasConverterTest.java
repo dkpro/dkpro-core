@@ -33,6 +33,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.validation.extras.AllTokensHavePos;
 
 public class PennTreeToJCasConverterTest
 {
@@ -65,9 +66,10 @@ public class PennTreeToJCasConverterTest
             new Token(jcas, pos, pos + tokenStr.length()).addToIndexes();
             pos += tokenStr.length() + 1;
         }
+        converter.setCreatePosTags(true);
         converter.convertPennTree(aSentence, parsePennTree);
 
-        AssertAnnotations.assertValid(jcas);
+        AssertAnnotations.assertValid(jcas, AllTokensHavePos.class);
         
         Collection<Constituent> constituents = JCasUtil.select(jcas, Constituent.class);
 

@@ -156,22 +156,8 @@ public class PennTreeToJCasConverter
                 aText.append(unescapeToken(c.getChildren().get(0).getLabel()));
                 int end = aText.length();
 
-                // only add POS to index if we want POS-tagging
-                POS posAnno = null;
-                if (createPosTags) {
-                    if (posMappingProvider != null) {
-                        Type posTag = posMappingProvider.getTagType(c.getLabel());
-                        posAnno = (POS) aJCas.getCas().createAnnotation(posTag, begin, end);
-                    }
-                    else {
-                        posAnno = new POS(aJCas, begin, end);
-                    }
-                    posAnno.setPosValue(internTags ? c.getLabel().intern() : c.getLabel());
-                    posAnno.addToIndexes();
-                }
-                
                 Token token = new Token(aJCas, begin, end);
-                token.setPos(posAnno);
+                token.setPos(createPOS(aJCas, c, begin, end));
                 token.setParent(constituent);
                 token.addToIndexes();
                 
@@ -258,6 +244,7 @@ public class PennTreeToJCasConverter
             if (c.isPreTerminal()) {
                 Token token = aTokenMap.get(c);
                 token.setParent(constituent);
+                token.setPos(createPOS(aJCas, c, token.getBegin(), token.getEnd()));
                 children.add(token);
             }
             else {
@@ -281,6 +268,25 @@ public class PennTreeToJCasConverter
         return constituent;        
     }
 
+    private POS createPOS(JCas aJCas, PennTreeNode aPreterminal, int aBegin, int aEnd)
+    {
+        POS posAnno = null;
+        // only add POS to index if we want POS-tagging
+        if (isCreatePosTags()) {
+            if (posMappingProvider != null) {
+                Type posTag = posMappingProvider.getTagType(aPreterminal.getLabel());
+                posAnno = (POS) aJCas.getCas().createAnnotation(posTag, aBegin, aEnd); 
+            }
+            else {
+                posAnno = new POS(aJCas, aBegin, aEnd);
+            }
+            posAnno.setPosValue(internTags ? aPreterminal.getLabel().intern() : aPreterminal
+                    .getLabel());
+            posAnno.addToIndexes();
+        }
+        return posAnno;
+    }
+    
     private Constituent createConstituent(JCas aJCas, String aLabel)
     {
         if (NONE.equals(aLabel)) {
