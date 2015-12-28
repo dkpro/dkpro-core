@@ -157,7 +157,10 @@ public class PennTreeToJCasConverter
                 int end = aText.length();
 
                 Token token = new Token(aJCas, begin, end);
-                token.setPos(createPOS(aJCas, c, begin, end));
+                // only add POS to index if we want POS-tagging
+                if (isCreatePosTags()) {
+                    token.setPos(createPOS(aJCas, c, begin, end));
+                }
                 token.setParent(constituent);
                 token.addToIndexes();
                 
@@ -244,7 +247,10 @@ public class PennTreeToJCasConverter
             if (c.isPreTerminal()) {
                 Token token = aTokenMap.get(c);
                 token.setParent(constituent);
-                token.setPos(createPOS(aJCas, c, token.getBegin(), token.getEnd()));
+                // only add POS to index if we want POS-tagging
+                if (isCreatePosTags()) {
+                    token.setPos(createPOS(aJCas, c, token.getBegin(), token.getEnd()));
+                }
                 children.add(token);
             }
             else {
@@ -270,20 +276,17 @@ public class PennTreeToJCasConverter
 
     private POS createPOS(JCas aJCas, PennTreeNode aPreterminal, int aBegin, int aEnd)
     {
-        POS posAnno = null;
-        // only add POS to index if we want POS-tagging
-        if (isCreatePosTags()) {
-            if (posMappingProvider != null) {
-                Type posTag = posMappingProvider.getTagType(aPreterminal.getLabel());
-                posAnno = (POS) aJCas.getCas().createAnnotation(posTag, aBegin, aEnd); 
-            }
-            else {
-                posAnno = new POS(aJCas, aBegin, aEnd);
-            }
-            posAnno.setPosValue(internTags ? aPreterminal.getLabel().intern() : aPreterminal
-                    .getLabel());
-            posAnno.addToIndexes();
+        POS posAnno;
+        if (posMappingProvider != null) {
+            Type posTag = posMappingProvider.getTagType(aPreterminal.getLabel());
+            posAnno = (POS) aJCas.getCas().createAnnotation(posTag, aBegin, aEnd); 
         }
+        else {
+            posAnno = new POS(aJCas, aBegin, aEnd);
+        }
+        posAnno.setPosValue(internTags ? aPreterminal.getLabel().intern() : aPreterminal
+                .getLabel());
+        posAnno.addToIndexes();
         return posAnno;
     }
     
