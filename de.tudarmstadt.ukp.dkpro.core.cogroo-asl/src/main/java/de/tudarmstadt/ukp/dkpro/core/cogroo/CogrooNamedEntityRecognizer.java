@@ -59,7 +59,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
         outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" })
-public class CogrooNameFinder
+public class CogrooNamedEntityRecognizer
 	extends JCasAnnotator_ImplBase
 {
 	/**
@@ -79,7 +79,7 @@ public class CogrooNameFinder
 
 		modelProvider = new ModelProviderBase<Analyzer>() {
 			{
-			    setContextObject(CogrooNameFinder.this);
+			    setContextObject(CogrooNamedEntityRecognizer.this);
 
 				setDefault(LOCATION, NOT_REQUIRED);
 				setOverride(LANGUAGE, language);

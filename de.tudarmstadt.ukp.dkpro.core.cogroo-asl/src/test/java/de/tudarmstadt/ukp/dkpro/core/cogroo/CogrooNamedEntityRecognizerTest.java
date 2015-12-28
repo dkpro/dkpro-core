@@ -28,7 +28,7 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
-public class CogrooNameFinderTest
+public class CogrooNamedEntityRecognizerTest
 {
     /**
      * The CogRoo name finder is a bit strange because it appears to find only multi-word named
@@ -52,7 +52,7 @@ public class CogrooNameFinderTest
         throws Exception
     {
         AnalysisEngineDescription desc = createEngineDescription(
-                CogrooNameFinder.class
+                CogrooNamedEntityRecognizer.class
                 //CogrooNameFinder.PARAM_PRINT_TAGSET, true
                 );
 
