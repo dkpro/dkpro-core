@@ -19,23 +19,33 @@ package de.tudarmstadt.ukp.dkpro.core.testing;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.apache.uima.fit.factory.ConfigurationParameterFactory.canParameterBeSet;
 import static org.apache.uima.fit.factory.ConfigurationParameterFactory.getParameterSettings;
-import static org.apache.uima.fit.factory.ConfigurationParameterFactory.*;
+import static org.apache.uima.fit.factory.ConfigurationParameterFactory.setParameter;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_component.AnalysisComponent;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.collection.CollectionReaderDescription;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.testing.dumper.CasDumpWriter;
+import de.tudarmstadt.ukp.dkpro.core.testing.validation.CasValidator;
+import de.tudarmstadt.ukp.dkpro.core.testing.validation.Message;
 
 public class IOTestRunner
 {
@@ -66,11 +76,6 @@ public class IOTestRunner
     /**
      * One-way test reading a file and writing to the same format but comparing against a reference
      * file instead of the original file.
-     * 
-     * @param aReader
-     * @param aExpectedFile
-     * @param aFile
-     * @throws Exception
      */
     public static void testOneWay(CollectionReaderDescription aReader, String aExpectedFile,
             String aFile)
@@ -180,11 +185,39 @@ public class IOTestRunner
 
         AnalysisEngineDescription metadataStripper = createEngineDescription(
                 DocumentMetaDataStripper.class);
-        
-        runPipeline(aReader, metadataStripper, aWriter);
 
+        AnalysisEngineDescription validator = createEngineDescription(
+                Validator.class);
+
+        runPipeline(aReader, validator, metadataStripper, aWriter);
+
+        AssertAnnotations.assertValid(Validator.messages);
+        
         String expected = FileUtils.readFileToString(reference, "UTF-8");
         String actual = FileUtils.readFileToString(new File(output, aOutputFile), "UTF-8");
         assertEquals(expected.trim(), actual.trim());
+    }
+    
+    public static class Validator
+        extends JCasAnnotator_ImplBase
+    {
+        public static List<Message> messages;
+        
+        @Override
+        public void initialize(UimaContext aContext)
+            throws ResourceInitializationException
+        {
+            super.initialize(aContext);
+            
+            messages = new ArrayList<>();
+        }
+        
+        @Override
+        public void process(JCas aJCas)
+            throws AnalysisEngineProcessException
+        {
+            CasValidator validator = CasValidator.createWithAllChecks();
+            messages = validator.analyze(aJCas);
+        }
     }
 }
