@@ -143,6 +143,8 @@ public class TestRunner
 
         aEngine.process(jcas);
         
+        AssertAnnotations.assertValid(jcas);
+        
         return jcas;
     }
     

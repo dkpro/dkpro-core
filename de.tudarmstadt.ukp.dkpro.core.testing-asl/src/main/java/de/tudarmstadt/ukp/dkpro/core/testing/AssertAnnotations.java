@@ -17,6 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.testing;
 
+import static de.tudarmstadt.ukp.dkpro.core.testing.validation.Message.Level.ERROR;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang.StringUtils.normalizeSpace;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -81,6 +82,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.testing.validation.CasValidator;
+import de.tudarmstadt.ukp.dkpro.core.testing.validation.Message;
+import de.tudarmstadt.ukp.dkpro.core.testing.validation.checks.Check;
 
 public class AssertAnnotations
 {
@@ -797,6 +801,26 @@ public class AssertAnnotations
             // multiplier. In order to access the new CAS, we use the JCasHolder (not thread-safe!)
             assertEquals(normalizedText, InternalJCasHolder.get().getDocumentText());
         }
+    }
+
+    @SafeVarargs
+    public static void assertValid(JCas jcas, Class<? extends Check>... aExtras)
+    {
+        CasValidator validator = CasValidator.createWithAllChecks();
+        for (Class<? extends Check> extra : aExtras) {
+            validator.addCheck(extra);
+        }
+        List<Message> messages = validator.analyze(jcas);
+        
+        messages.forEach(m -> System.out.println(m));
+        
+        List<String> errors = messages.stream()
+                .filter(m -> m.level == ERROR)
+                .map(m -> m.toString())
+                .collect(Collectors.toList());
+        
+        List<String> expected = Collections.emptyList();
+        assertEquals(asCopyableString(expected, true), asCopyableString(errors, true));
     }
     
     public static String asCopyableString(Collection<String> aCollection, boolean aLinebreak)
