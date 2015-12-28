@@ -68,7 +68,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" }, 
     outputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
-public class ClearNlpDependencyParser
+public class ClearNlpParser
     extends JCasAnnotator_ImplBase
 {
     /**

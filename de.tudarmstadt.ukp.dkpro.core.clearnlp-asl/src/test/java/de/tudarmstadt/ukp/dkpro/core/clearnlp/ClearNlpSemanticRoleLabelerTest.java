@@ -76,10 +76,10 @@ public class ClearNlpSemanticRoleLabelerTest
 		AnalysisEngineDescription engine = createEngineDescription(
 				createEngineDescription(OpenNlpPosTagger.class),
 				createEngineDescription(ClearNlpLemmatizer.class),
-				createEngineDescription(ClearNlpDependencyParser.class),
+				createEngineDescription(ClearNlpParser.class),
 				createEngineDescription(ClearNlpSemanticRoleLabeler.class,
-						ClearNlpDependencyParser.PARAM_VARIANT, aVariant,
-						ClearNlpDependencyParser.PARAM_PRINT_TAGSET, true));
+						ClearNlpParser.PARAM_VARIANT, aVariant,
+						ClearNlpParser.PARAM_PRINT_TAGSET, true));
 
 		return TestRunner.runTest(engine, aLanguage, aText);
 	}
