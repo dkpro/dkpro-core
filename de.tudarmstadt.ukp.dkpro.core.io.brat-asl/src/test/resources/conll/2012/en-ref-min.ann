@@ -208,59 +208,59 @@ T154	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-ROOT 0 25	John we
 T155	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-ROOT 27 73	He was looking for a present to give to Mary .
 T156	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-ROOT 75 117	He had met her last year at the fun fair .
 T157	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-ROOT 119 239	They had a ride on the ferris wheel together and when he looked into Mary 's blue eyes , John immediately fell in love .
-E1	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T54 pos:T1
-E2	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T55 pos:T2
-E3	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T56 pos:T3
-E4	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T57 pos:T4
-E5	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T58 pos:T5
-E6	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T59 pos:T6
-E7	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T60 pos:T7
-E8	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T61 pos:T8
-E9	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T62 pos:T9
-E10	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T63 pos:T10
-E11	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T64 pos:T11
-E12	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T65 pos:T12
-E13	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T66 pos:T13
-E14	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T67 pos:T14
-E15	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T68 pos:T15
-E16	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T69 pos:T16
-E17	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T70 pos:T17
-E18	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T71 pos:T18
-E19	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T72 pos:T19
-E20	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T73 pos:T20
-E21	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T74 pos:T21
-E22	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T75 pos:T22
-E23	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T76 pos:T23
-E24	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T77 pos:T24
-E25	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T78 pos:T25
-E26	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T79 pos:T26
-E27	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T80 pos:T27
-E28	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T81 pos:T28
-E29	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T82 pos:T29
-E30	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T83 pos:T30
-E31	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T84 pos:T31
-E32	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T85 pos:T32
-E33	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T86 pos:T33
-E34	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T87 pos:T34
-E35	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T88 pos:T35
-E36	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T89 pos:T36
-E37	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T90 pos:T37
-E38	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T91 pos:T38
-E39	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T92 pos:T39
-E40	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T93 pos:T40
-E41	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T94 pos:T41
-E42	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T95 pos:T42
-E43	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T96 pos:T43
-E44	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T97 pos:T44
-E45	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T98 pos:T45
-E46	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T99 pos:T46
-E47	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T100 pos:T47
-E48	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T101 pos:T48
-E49	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T102 pos:T49
-E50	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T103 pos:T50
-E51	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T104 pos:T51
-E52	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T105 pos:T52
-E53	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T106 pos:T53
+E1	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T54 parent:E55 pos:T1
+E2	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T55 parent:E56 pos:T2
+E3	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T56 parent:E57 pos:T3
+E4	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T57 parent:E58 pos:T4
+E5	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T58 parent:E58 pos:T5
+E6	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T59 parent:E54 pos:T6
+E7	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T60 parent:E60 pos:T7
+E8	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T61 parent:E61 pos:T8
+E9	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T62 parent:E62 pos:T9
+E10	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T63 parent:E63 pos:T10
+E11	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T64 parent:E65 pos:T11
+E12	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T65 parent:E65 pos:T12
+E13	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T66 parent:E66 pos:T13
+E14	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T67 parent:E69 pos:T14
+E15	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T68 parent:E70 pos:T15
+E16	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T69 parent:E71 pos:T16
+E17	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T70 parent:E59 pos:T17
+E18	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T71 parent:E73 pos:T18
+E19	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T72 parent:E74 pos:T19
+E20	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T73 parent:E75 pos:T20
+E21	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T74 parent:E76 pos:T21
+E22	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T75 parent:E76 pos:T22
+E23	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T76 parent:E76 pos:T23
+E24	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T77 parent:E77 pos:T24
+E25	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T78 parent:E78 pos:T25
+E26	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T79 parent:E78 pos:T26
+E27	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T80 parent:E78 pos:T27
+E28	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T81 parent:E72 pos:T28
+E29	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T82 parent:E81 pos:T29
+E30	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T83 parent:E82 pos:T30
+E31	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T84 parent:E83 pos:T31
+E32	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T85 parent:E83 pos:T32
+E33	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T86 parent:E84 pos:T33
+E34	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T87 parent:E85 pos:T34
+E35	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T88 parent:E85 pos:T35
+E36	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T89 parent:E85 pos:T36
+E37	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T90 parent:E86 pos:T37
+E38	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T91 parent:E79 pos:T38
+E39	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T92 parent:E89 pos:T39
+E40	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T93 parent:E91 pos:T40
+E41	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T94 parent:E92 pos:T41
+E42	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T95 parent:E93 pos:T42
+E43	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T96 parent:E95 pos:T43
+E44	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T97 parent:E95 pos:T44
+E45	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T98 parent:E94 pos:T45
+E46	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T99 parent:E94 pos:T46
+E47	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T100 parent:E87 pos:T47
+E48	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T101 parent:E96 pos:T48
+E49	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T102 parent:E97 pos:T49
+E50	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T103 parent:E98 pos:T50
+E51	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T104 parent:E99 pos:T51
+E52	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T105 parent:E100 pos:T52
+E53	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T106 parent:E79 pos:T53
 E54	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T107 parent:E101 children:E55 children1:E56 children2:E6
 A54	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E54 S
 E55	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T108 parent:E54 children:E1
