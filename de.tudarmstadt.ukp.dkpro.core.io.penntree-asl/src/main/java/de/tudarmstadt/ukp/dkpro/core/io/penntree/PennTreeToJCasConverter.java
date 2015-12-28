@@ -172,6 +172,7 @@ public class PennTreeToJCasConverter
                 
                 Token token = new Token(aJCas, begin, end);
                 token.setPos(posAnno);
+                token.setParent(constituent);
                 token.addToIndexes();
                 
                 children.add(token);
@@ -256,6 +257,7 @@ public class PennTreeToJCasConverter
         for (PennTreeNode c : aNode.getChildren()) {
             if (c.isPreTerminal()) {
                 Token token = aTokenMap.get(c);
+                token.setParent(constituent);
                 children.add(token);
             }
             else {

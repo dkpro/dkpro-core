@@ -32,6 +32,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 
 public class PennTreeToJCasConverterTest
 {
@@ -49,24 +50,26 @@ public class PennTreeToJCasConverterTest
 
         String parseTree = "(ROOT (S (NP (PRP It)) (VP (VBZ is) (NP (DT a) (NN test))) (. .)))";
 
-        JCas aJCas = JCasFactory.createJCas();
-        posMappingProvider.configure(aJCas.getCas());
-        constituentMappingProvider.configure(aJCas.getCas());
+        JCas jcas = JCasFactory.createJCas();
+        posMappingProvider.configure(jcas.getCas());
+        constituentMappingProvider.configure(jcas.getCas());
         PennTreeNode parsePennTree = PennTreeUtils.parsePennTree(parseTree);
         String sent = PennTreeUtils.toText(parsePennTree);
 
-        aJCas.setDocumentText(sent);
-        aJCas.setDocumentLanguage("en");
-        Sentence aSentence = new Sentence(aJCas, 0, sent.length());
+        jcas.setDocumentText(sent);
+        jcas.setDocumentLanguage("en");
+        Sentence aSentence = new Sentence(jcas, 0, sent.length());
         aSentence.addToIndexes();
         int pos = 0;
         for (String tokenStr : sent.split(" ")) {
-            new Token(aJCas, pos, pos + tokenStr.length()).addToIndexes();
+            new Token(jcas, pos, pos + tokenStr.length()).addToIndexes();
             pos += tokenStr.length() + 1;
         }
         converter.convertPennTree(aSentence, parsePennTree);
 
-        Collection<Constituent> constituents = JCasUtil.select(aJCas, Constituent.class);
+        AssertAnnotations.assertValid(jcas);
+        
+        Collection<Constituent> constituents = JCasUtil.select(jcas, Constituent.class);
 
         for (Constituent constituent : constituents) {
             if (!constituent.getConstituentType().equals("ROOT")) {
