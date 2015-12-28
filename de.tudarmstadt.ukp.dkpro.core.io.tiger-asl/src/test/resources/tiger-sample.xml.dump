@@ -52,7 +52,14 @@ Token
    sofa: _InitialView
    begin: 0
    end: 2
-   parent: <null>
+   parent: ROOT
+      sofa: _InitialView
+      begin: 0
+      end: 56
+      constituentType: "VROOT"
+      parent: <null>
+      children: FSArray
+      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 0
@@ -121,7 +128,28 @@ Token
    sofa: _InitialView
    begin: 3
    end: 7
-   parent: <null>
+   parent: Constituent
+      sofa: _InitialView
+      begin: 3
+      end: 13
+      constituentType: "PN"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 3
+         end: 53
+         constituentType: "S"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 56
+            constituentType: "VROOT"
+            parent: <null>
+            children: FSArray
+            syntacticFunction: <null>
+         children: FSArray
+         syntacticFunction: <null>
+      children: FSArray
+      syntacticFunction: "SB"
    lemma: Lemma
       sofa: _InitialView
       begin: 3
@@ -151,7 +179,28 @@ Token
    sofa: _InitialView
    begin: 8
    end: 13
-   parent: <null>
+   parent: Constituent
+      sofa: _InitialView
+      begin: 3
+      end: 13
+      constituentType: "PN"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 3
+         end: 53
+         constituentType: "S"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 56
+            constituentType: "VROOT"
+            parent: <null>
+            children: FSArray
+            syntacticFunction: <null>
+         children: FSArray
+         syntacticFunction: <null>
+      children: FSArray
+      syntacticFunction: "SB"
    lemma: Lemma
       sofa: _InitialView
       begin: 8
@@ -181,7 +230,21 @@ Token
    sofa: _InitialView
    begin: 14
    end: 18
-   parent: <null>
+   parent: Constituent
+      sofa: _InitialView
+      begin: 3
+      end: 53
+      constituentType: "S"
+      parent: ROOT
+         sofa: _InitialView
+         begin: 0
+         end: 56
+         constituentType: "VROOT"
+         parent: <null>
+         children: FSArray
+         syntacticFunction: <null>
+      children: FSArray
+      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 14
@@ -211,7 +274,21 @@ Token
    sofa: _InitialView
    begin: 19
    end: 29
-   parent: <null>
+   parent: Constituent
+      sofa: _InitialView
+      begin: 3
+      end: 53
+      constituentType: "S"
+      parent: ROOT
+         sofa: _InitialView
+         begin: 0
+         end: 56
+         constituentType: "VROOT"
+         parent: <null>
+         children: FSArray
+         syntacticFunction: <null>
+      children: FSArray
+      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 19
@@ -264,7 +341,28 @@ Token
    sofa: _InitialView
    begin: 30
    end: 33
-   parent: <null>
+   parent: Constituent
+      sofa: _InitialView
+      begin: 30
+      end: 53
+      constituentType: "NP"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 3
+         end: 53
+         constituentType: "S"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 56
+            constituentType: "VROOT"
+            parent: <null>
+            children: FSArray
+            syntacticFunction: <null>
+         children: FSArray
+         syntacticFunction: <null>
+      children: FSArray
+      syntacticFunction: "PD"
    lemma: Lemma
       sofa: _InitialView
       begin: 30
@@ -294,7 +392,28 @@ Token
    sofa: _InitialView
    begin: 34
    end: 44
-   parent: <null>
+   parent: Constituent
+      sofa: _InitialView
+      begin: 30
+      end: 53
+      constituentType: "NP"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 3
+         end: 53
+         constituentType: "S"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 56
+            constituentType: "VROOT"
+            parent: <null>
+            children: FSArray
+            syntacticFunction: <null>
+         children: FSArray
+         syntacticFunction: <null>
+      children: FSArray
+      syntacticFunction: "PD"
    lemma: Lemma
       sofa: _InitialView
       begin: 34
@@ -324,7 +443,28 @@ Token
    sofa: _InitialView
    begin: 45
    end: 53
-   parent: <null>
+   parent: Constituent
+      sofa: _InitialView
+      begin: 30
+      end: 53
+      constituentType: "NP"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 3
+         end: 53
+         constituentType: "S"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 56
+            constituentType: "VROOT"
+            parent: <null>
+            children: FSArray
+            syntacticFunction: <null>
+         children: FSArray
+         syntacticFunction: <null>
+      children: FSArray
+      syntacticFunction: "PD"
    lemma: Lemma
       sofa: _InitialView
       begin: 45
@@ -354,7 +494,14 @@ Token
    sofa: _InitialView
    begin: 54
    end: 56
-   parent: <null>
+   parent: ROOT
+      sofa: _InitialView
+      begin: 0
+      end: 56
+      constituentType: "VROOT"
+      parent: <null>
+      children: FSArray
+      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 54

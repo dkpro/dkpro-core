@@ -378,6 +378,9 @@ public class TigerXmlReader
             for (TigerEdge edge : aNode.edges) {
                 Annotation child = readNode(aJCas, aTerminals, aNonTerminals, aGraph, con, edge,
                         aGraph.get(edge.idref));
+                if (child instanceof Token) {
+                    ((Token) child).setParent(con);
+                }
                 children.add(child);
                 begin = Math.min(child.getBegin(), begin);
                 end = Math.max(child.getEnd(), end);
