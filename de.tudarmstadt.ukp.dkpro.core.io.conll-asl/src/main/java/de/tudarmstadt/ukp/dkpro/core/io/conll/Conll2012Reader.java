@@ -232,7 +232,7 @@ public class Conll2012Reader
         converter = new PennTreeToJCasConverter(posMappingProvider, constituentMappingProvider);
         converter.setInternTags(internTags);
         converter.setWriteTracesToText(writeTracesToText);
-        converter.setCreatePosTags(readPos);
+        converter.setCreatePosTags(false); // We handle POS tags via the column already
         converter.setRootLabel("TOP");
     }
     
