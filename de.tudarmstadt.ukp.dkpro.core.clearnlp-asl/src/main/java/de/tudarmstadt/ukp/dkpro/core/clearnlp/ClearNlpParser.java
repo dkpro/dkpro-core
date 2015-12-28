@@ -67,7 +67,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
         "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" }, 
     outputs = { "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
-public class ClearNlpDependencyParser
+public class ClearNlpParser
     extends JCasAnnotator_ImplBase
 {
     /**
@@ -112,7 +112,7 @@ public class ClearNlpDependencyParser
         parserProvider = new ModelProviderBase<AbstractDEPParser>()
         {
             {
-                setContextObject(ClearNlpDependencyParser.this);
+                setContextObject(ClearNlpParser.this);
 
                 setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-parser-${language}-${variant}");
                 setDefault(LOCATION, "classpath:/${package}/lib/parser-${language}-${variant}.properties");

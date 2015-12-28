@@ -34,7 +34,7 @@ import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 import de.tudarmstadt.ukp.dkpro.core.testing.dumper.DependencyDumper;
 
-public class ClearNlpDependencyParserTest
+public class ClearNlpParserTest
 {
 	static final String documentEnglish = "We need a very complicated example sentence , which " +
 			"contains as many constituents and dependencies as possible .";
@@ -105,9 +105,9 @@ public class ClearNlpDependencyParserTest
 		AnalysisEngineDescription engine = createEngineDescription(
 				createEngineDescription(OpenNlpPosTagger.class),
 				createEngineDescription(ClearNlpLemmatizer.class),
-				createEngineDescription(ClearNlpDependencyParser.class,
-						ClearNlpDependencyParser.PARAM_VARIANT, aVariant,
-						ClearNlpDependencyParser.PARAM_PRINT_TAGSET, true),
+				createEngineDescription(ClearNlpParser.class,
+						ClearNlpParser.PARAM_VARIANT, aVariant,
+						ClearNlpParser.PARAM_PRINT_TAGSET, true),
 		        createEngineDescription(DependencyDumper.class));
 
 		return TestRunner.runTest(engine, aLanguage, aText);
