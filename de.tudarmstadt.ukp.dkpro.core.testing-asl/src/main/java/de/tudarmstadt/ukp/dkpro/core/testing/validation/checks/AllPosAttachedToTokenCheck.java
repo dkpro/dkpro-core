@@ -31,6 +31,7 @@ import static de.tudarmstadt.ukp.dkpro.core.testing.validation.Message.Level.*;
 
 public class AllPosAttachedToTokenCheck implements Check
 {
+    // tag::check-example[]
     @Override
     public boolean check(JCas aJCas, List<Message> aMessages)
     {
@@ -47,5 +48,5 @@ public class AllPosAttachedToTokenCheck implements Check
         
         return allPOS.isEmpty();
     }
-
+    // end::check-example[]
 }

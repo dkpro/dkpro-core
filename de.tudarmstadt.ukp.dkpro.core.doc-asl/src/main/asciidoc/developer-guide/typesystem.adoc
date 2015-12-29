@@ -18,7 +18,7 @@
 
 = Type System
 
-== Adding a type
+== Types
 
 To add a new type, first locate the relevant module. Typically types are added to an *API* module
 because types are supposed to be independent of individual analysis tools. In rare circumstances,
@@ -29,14 +29,24 @@ Typically, there is only a single descriptor file called `dkpro-types.xml`. With
 this descriptor in the folder `src/main/resources` under the top-level package plus _type_ name of
 the module. E.g. for the module 
 
-    de.tudarmstadt.ukp.dkpro.core.api.semantics-asl
+[source,text]
+----
+de.tudarmstadt.ukp.dkpro.core.api.semantics-asl
+----
 
 the type descriptor would be 
 
-    src/main/resources/de/tudarmstadt/ukp/dkpro/core/api/semantics/type/dkpro-types.xml
+[source,text]
+----
+src/main/resources/de/tudarmstadt/ukp/dkpro/core/api/semantics/type/dkpro-types.xml
+----
 
 NOTE: For the time being, descriptors in `src/main/resources/desc/type` are also supported. 
       However, this support is going to be removed in the future.
+
+== Type descriptors
+
+If there is no suitable type descriptor file yet, create a new one.
 
 When a new type system descriptor has been added to a module, it needs to be registered with 
 uimaFIT. This happens by creating the file
@@ -45,10 +55,53 @@ uimaFIT. This happens by creating the file
     
 consisting of a list of type system descriptor locations prefixed with `classpath*:`, e.g.:
 
-    classpath*:de/tudarmstadt/ukp/dkpro/core/api/semantics/type/dkpro-types.xml
+[source,text]
+----
+classpath*:de/tudarmstadt/ukp/dkpro/core/api/semantics/type/dkpro-types.xml
+----
 
 NOTE: The type system location corresponds to the location within the classpath at runtime, thus
       `src/main/resources` is stripped from the beginning.
+
+== Documentation
+
+=== Type descriptors
+
+To play nicely with the automatic documentation generation system, the following points should be
+observed when creating a new type descriptor file:
+
+Name:: field of the type descriptor corresponds to the *section* under which the types 
+  declared in the descriptor appear. If a type descriptor name field is e.g. *Syntax*, all types
+  declared in the file will appear under that heading in the documentation. Multiple descriptors
+  can declare the same name and the types declared in them are listed in the documentation in 
+  alphabetical order.
+Description:: field should be emtpy. Create instead a `sectionIntroXXX.adoc` file under 
+  `src/main/asciidoc/typesystem-reference` in the `core.doc-asl` module (`XXX` is the name of the
+   section - see *Name* above).
+Version:: should be set to `${version}`. If it does not exist yet, create a file 
+  `src/filter/filter.properties` in the module that creates the new type descriptor with the
+  following content: 
++
+[source,text,indent=0]
+----
+include::{source-dir}de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl/src/filter/filter.properties[]
+----
++
+Also add the following section to the `pom.xml` file in the respective module: 
++
+[source,xml,indent=0]
+----
+include::{source-dir}de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl/pom.xml[tags=version-filtering]
+----
++
+NOTE: Replace the pattern inside the `include` and `exclude` elements with the location of your
+      type descriptor file, e.g. `de/tudarmstadt/ukp/dkpro/core/api/semantics/type/*.xml`.
+
+=== Types
+
+When creating a new type or feature, you can use HTML tags to format the description. Line breaks,
+indentation, etc. will not be preserved. Mind that the description will be placed into the JavaDoc
+for the generated JCas classes as well as into the auto-generated DKPro Core documentation.
 
 == JCas classes
 
@@ -57,8 +110,11 @@ _jcasgen-maven-plugin_ to automatically generate JCas classes at build time. The
 generation of JCas classes need to be explictily enabled for modules containing types. This
 is done by placing a file called `.activate-run-jcasgen` in the module root with the content
     
-    Marker to activate run-jcasgen profile.
-    
+[source,xml,indent=0]
+----
+include::{source-dir}de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl/.activate-run-jcasgen[]
+----
+
 NOTE: Actually the content is irrelevant, but it is a good idea to place a note here regarding the
       purpose of the file.
 
@@ -66,7 +122,29 @@ However, in some we customized the JCas classes, e.g. we added the method
 `DocumentMetaData.get(JCas)`. Such classes are excluded from being generated automatically by
 placing them in a second descriptor file called `dkpro-types-customized.xml`, e.g.
 
-    src/main/resources/de/tudarmstadt/ukp/dkpro/core/api/semantics/type/dkpro-types-customized.xml
+[source,text]
+----
+src/main/resources/de/tudarmstadt/ukp/dkpro/core/api/semantics/type/dkpro-types-customized.xml
+----
     
 NOTE: The `dkpro-types-customized.xml` descriptor must be also registered with uimaFIT in the 
       `types.txt` file.
+
+== Compliance validation
+
+Often a type comes with a certain policy. For example, root nodes in a dependency relation tree
+should have the type `ROOT` and the features `governor` and `dependent` should point to the same
+token. Another example would be that if a constituent is a child of another constituent, then its
+`parent` feature should be set accordingly.
+
+To ensure that all components adhere to such policies, it is a good idea to implement checks for
+them. This can be done simply by placing a new check implementation into the package
+`de.tudarmstadt.ukp.dkpro.core.testing.validation.checks` in the testing module. Tests implemented
+with `TestRunner` and ÌOTestRunner` use these checks automatically. All other checks should invoke
+`AssertAnnotations.assertValid(jcas)`.
+
+.Example check ensuring that POS annotations are attached to a Token (shortened)
+[source,java,indent=0]
+----
+include::{source-dir}de.tudarmstadt.ukp.dkpro.core.testing-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/testing/validation/checks/AllPosAttachedToTokenCheck.java[tags=check-example]
+----

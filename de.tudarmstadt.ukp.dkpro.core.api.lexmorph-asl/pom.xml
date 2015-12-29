@@ -52,6 +52,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+    <!-- tag::version-filtering[] -->
 	<build>
 		<resources>
 			<resource>
@@ -70,4 +71,5 @@
 			</resource>
 		</resources>
 	</build>
+    <!-- end::version-filtering[] -->
 </project>

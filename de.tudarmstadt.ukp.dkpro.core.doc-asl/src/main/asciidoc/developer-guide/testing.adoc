@@ -73,7 +73,7 @@ of annotation supported by DKPro Core, e.g.:
 * `assertSentence`
 * `assertPOS`
 * `assertLemma`
-* `assertMorpheme`
+* `assertMorph`
 * `assertStem`
 * `assertNamedEntity`
 * `assertConstituents`
@@ -85,6 +85,8 @@ of annotation supported by DKPro Core, e.g.:
 * `assertCoreference`
 * `assertTagset`
 * `assertTagsetMapping`
+* `assertValid`
+* etc.
 
 
 == Testing I/O componets
