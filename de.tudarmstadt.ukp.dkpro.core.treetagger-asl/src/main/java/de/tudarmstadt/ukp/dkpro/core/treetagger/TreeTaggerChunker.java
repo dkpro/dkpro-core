@@ -18,6 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.treetagger;
 
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.util.Level.INFO;
 
 import java.io.File;
@@ -54,6 +55,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 import de.tudarmstadt.ukp.dkpro.core.treetagger.internal.DKProExecutableResolver;
 
@@ -228,66 +230,71 @@ public class TreeTaggerChunker
 
 		modelProvider.configure(cas);
 		mappingProvider.configure(cas);
-		
-        try {
-            List<POS> posTags = new ArrayList<POS>(select(aJCas, POS.class));
 
-            // Set the handler creating new UIMA annotations from the analyzed tokens
-            final TokenHandler<POS> handler = new TokenHandler<POS>()
+        // Set the handler creating new UIMA annotations from the analyzed tokens
+        final TokenHandler<POS> handler = new TokenHandler<POS>()
+        {
+            private String openChunk;
+            private int start;
+            private int end;
+
+            @Override
+            public void token(POS aPOS, String aChunk, String aDummy)
             {
-                private String openChunk;
-                private int start;
-                private int end;
+                synchronized (cas) {
+                    if (aChunk == null) {
+                        // End of processing signal
+                        chunkComplete();
+                        return;
+                    }
 
-                @Override
-                public void token(POS aPOS, String aChunk, String aDummy)
-                {
-                    synchronized (cas) {
-                        if (aChunk == null) {
-                            // End of processing signal
+                    String fields1[] = aChunk.split("/");
+                    String fields2[] = fields1[1].split("-");
+                    //String tag = fields1[0];
+                    String flag = fields2.length == 2 ? fields2[0] : "NONE";
+                    String chunk = fields2.length == 2 ? fields2[1] : fields2[0];
+
+                    // Start of a new hunk
+                    if (!chunk.equals(openChunk) || "B".equals(flag)) {
+                        if (openChunk != null) {
+                            // End of previous chunk
                             chunkComplete();
-                            return;
                         }
 
-                        String fields1[] = aChunk.split("/");
-                        String fields2[] = fields1[1].split("-");
-                        //String tag = fields1[0];
-                        String flag = fields2.length == 2 ? fields2[0] : "NONE";
-                        String chunk = fields2.length == 2 ? fields2[1] : fields2[0];
-
-                        // Start of a new hunk
-                        if (!chunk.equals(openChunk) || "B".equals(flag)) {
-                            if (openChunk != null) {
-                                // End of previous chunk
-                                chunkComplete();
-                            }
-
-                            openChunk = chunk;
-                            start = aPOS.getBegin();
-                        }
-
-                        // Record how much of the chunk we have seen so far
-                        end = aPOS.getEnd();
+                        openChunk = chunk;
+                        start = aPOS.getBegin();
                     }
-                }
 
-                private void chunkComplete()
-                {
-                    if (openChunk != null) {
-                        Type chunkType = mappingProvider.getTagType(openChunk);
-                        Chunk chunk = (Chunk) cas.createAnnotation(chunkType, start, end);
-                        chunk.setChunkValue(internTags ? openChunk.intern() : openChunk);
-                        cas.addFsToIndexes(chunk);
-                        openChunk = null;
-                    }
+                    // Record how much of the chunk we have seen so far
+                    end = aPOS.getEnd();
                 }
-            };
-            
+            }
+
+            private void chunkComplete()
+            {
+                if (openChunk != null) {
+                    Type chunkType = mappingProvider.getTagType(openChunk);
+                    Chunk chunk = (Chunk) cas.createAnnotation(chunkType, start, end);
+                    chunk.setChunkValue(internTags ? openChunk.intern() : openChunk);
+                    cas.addFsToIndexes(chunk);
+                    openChunk = null;
+                }
+            }
+        };
+
+        try {
             TreeTaggerWrapper<POS> treetagger = modelProvider.getResource();
             treetagger.setHandler(handler);
-            treetagger.process(posTags);
-            // Commit the final chunk
-            handler.token(null, null, null);
+            
+            // Issue #636 - process each sentence individually to ensure that sentence boundaries
+            // are respected
+            for (Sentence sentence : select(aJCas, Sentence.class)) {
+                List<POS> posTags = new ArrayList<POS>(selectCovered(POS.class, sentence));
+                treetagger.process(posTags);
+                
+                // Commit the final chunk
+                handler.token(null, null, null);
+            }
         }
         catch (TreeTaggerException e) {
             throw new AnalysisEngineProcessException(e);
