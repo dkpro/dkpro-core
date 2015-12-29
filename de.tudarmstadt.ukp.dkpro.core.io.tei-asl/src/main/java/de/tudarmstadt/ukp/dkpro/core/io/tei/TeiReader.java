@@ -529,6 +529,7 @@ public class TeiReader
                     rootWrapper.constituent.setEnd(getBuffer().length());
                     rootWrapper.constituent.setChildren(FSCollectionFactory.createFSArray(
                             getJCas(), rootWrapper.children));
+                    rootWrapper.constituent.addToIndexes();
                 }
             }
             else if (inTextElement
