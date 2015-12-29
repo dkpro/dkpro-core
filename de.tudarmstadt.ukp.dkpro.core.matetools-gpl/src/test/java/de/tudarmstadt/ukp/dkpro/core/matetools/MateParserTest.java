@@ -44,6 +44,7 @@ public class MateParserTest
 
         String[] dependencies = new String[] {
                 "[  0,  3]Dependency(SB) D[0,3](Wir) G[4,12](brauchen)",
+                "[  4, 12]ROOT(--) D[4,12](brauchen) G[4,12](brauchen)",
                 "[ 13, 16]Dependency(NK) D[13,16](ein) G[36,44](Beispiel)",
                 "[ 17, 21]Dependency(MO) D[17,21](sehr) G[22,35](kompliziertes)",
                 "[ 22, 35]Dependency(NK) D[22,35](kompliziertes) G[36,44](Beispiel)",
@@ -86,6 +87,7 @@ public class MateParserTest
 
         String[] dependencies = new String[] {
                 "[  0,  2]Dependency(SBJ) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(ROOT) D[3,7](need) G[3,7](need)",
                 "[  8,  9]Dependency(NMOD) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]Dependency(AMOD) D[10,14](very) G[15,26](complicated)",
                 "[ 15, 26]Dependency(NMOD) D[15,26](complicated) G[35,43](sentence)",
@@ -134,6 +136,7 @@ public class MateParserTest
 
         String[] dependencies = new String[] {
                 "[  0,  4]Dependency(suj) D[0,4](Nous) G[5,10](avons)",
+                "[  5, 10]ROOT(root) D[5,10](avons) G[5,10](avons)",
                 "[ 11, 17]Dependency(obj) D[11,17](besoin) G[5,10](avons)",
                 "[ 18, 23]Dependency(mod) D[18,23](d'une) G[5,10](avons)",
                 "[ 24, 30]Dependency(obj) D[24,30](phrase) G[18,23](d'une)",

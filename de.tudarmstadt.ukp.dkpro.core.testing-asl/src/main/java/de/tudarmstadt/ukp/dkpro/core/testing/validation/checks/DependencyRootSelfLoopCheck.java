@@ -17,35 +17,44 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.testing.validation.checks;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.validation.CasAnalysisUtils.getNonIndexedFSesWithOwner;
 import static de.tudarmstadt.ukp.dkpro.core.testing.validation.Message.Level.ERROR;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+
+import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import org.apache.uima.cas.FeatureStructure;
+import java.util.stream.Collectors;
 import org.apache.uima.jcas.JCas;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.testing.validation.Message;
 
-public class AllAnnotationsIndexedCheck
+public class DependencyRootSelfLoopCheck
     implements Check
 {
     @Override
     public boolean check(JCas aCas, List<Message> aMessages)
     {
-        Map<FeatureStructure, FeatureStructure> nonIndexed = getNonIndexedFSesWithOwner(aCas
-                .getCas());
-
-        if (!nonIndexed.isEmpty()) {
-            aMessages.add(new Message(this, ERROR, "Unindexed annotations: %d", nonIndexed.size()));
-
-            for (Entry<FeatureStructure, FeatureStructure> e : nonIndexed.entrySet()) {
+        for (Sentence sentence : select(aCas, Sentence.class)) {
+            Collection<Dependency> dependencies = selectCovered(Dependency.class, sentence);
+            if (dependencies.isEmpty()) {
+                continue;
+            }
+            
+            List<Dependency> roots = dependencies.stream()
+                    .filter(dep -> 
+                        dep.getGovernor() != null && 
+                        dep.getDependent() != null &&
+                        dep.getGovernor() == dep.getDependent())
+                    .collect(Collectors.toList());
+            
+            if (roots.isEmpty()) {
                 aMessages.add(new Message(this, ERROR,
-                        "Non-index annotation [%s] reachable through [%s]", e.getKey(), e
-                                .getValue()));
+                        "Sentence has no self-looping dependency root: %s", sentence));
             }
         }
-
-        return nonIndexed.isEmpty();
+        
+        return aMessages.stream().anyMatch(m -> m.level == ERROR);
     }
 }

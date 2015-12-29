@@ -155,6 +155,7 @@ public class MaltParserTest
 
         String[] dependencies = new String[] {
                 "[  0,  2]Dependency(nsubj) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(ROOT) D[3,7](need) G[3,7](need)",
                 "[  8,  9]Dependency(det) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]Dependency(advmod) D[10,14](very) G[15,26](complicated)",
                 "[ 15, 26]Dependency(amod) D[15,26](complicated) G[35,43](sentence)",
@@ -203,6 +204,7 @@ public class MaltParserTest
 
         String[] dependencies = new String[] {
                 "[  0,  2]Dependency(nsubj) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(ROOT) D[3,7](need) G[3,7](need)",
                 "[  8,  9]Dependency(det) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]Dependency(advmod) D[10,14](very) G[15,26](complicated)",
                 "[ 15, 26]Dependency(amod) D[15,26](complicated) G[35,43](sentence)",
@@ -251,6 +253,7 @@ public class MaltParserTest
 
         String[] dependencies = new String[] {
                 "[  0,  2]Dependency(nsubj) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(ROOT) D[3,7](need) G[3,7](need)",
                 "[  8,  9]Dependency(det) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]Dependency(advmod) D[10,14](very) G[15,26](complicated)",
                 "[ 15, 26]Dependency(amod) D[15,26](complicated) G[35,43](sentence)",
@@ -305,6 +308,7 @@ public class MaltParserTest
                         + "zawiera tak wiele składników i zależności , jak to możliwe .");
 
         String[] dependencies = new String[] {
+                "[  0,  6]ROOT(ROOT) D[0,6](Musimy) G[0,6](Musimy)",
                 "[  7, 13]Dependency(adjunct) D[7,13](bardzo) G[28,36](przykład)",
                 "[ 14, 27]Dependency(mwe) D[14,27](skomplikowany) G[7,13](bardzo)",
                 "[ 28, 36]Dependency(pred) D[28,36](przykład) G[0,6](Musimy)",
@@ -408,6 +412,7 @@ public class MaltParserTest
                         + "contiene tantas componentes y dependencias como sea posible .");
 
         String[] dependencies = new String[] {
+                "[  0,  7]ROOT(ROOT) D[0,7](Tenemos) G[0,7](Tenemos)",
                 "[  8, 10]Dependency(SPEC) D[8,10](un) G[11,18](ejemplo)",
                 "[ 11, 18]Dependency(SUBJ) D[11,18](ejemplo) G[19,21](de)",
                 "[ 19, 21]Dependency(MOD) D[19,21](de) G[0,7](Tenemos)",
@@ -483,7 +488,7 @@ public class MaltParserTest
                 + "welches möglichst viele Konstituenten und Dependenzen beinhaltet .");
 
         String[] dependencies = new String[] {
-                "[  4, 12]Dependency(ROOT) D[4,12](brauchen) G[0,3](Wir)",
+                "[  4, 12]ROOT(ROOT) D[4,12](brauchen) G[0,3](Wir)",
                 "[ 13, 16]Dependency(DET) D[13,16](ein) G[4,12](brauchen)",
                 "[ 17, 21]Dependency(DET) D[17,21](sehr) G[13,16](ein)",
                 "[ 22, 35]Dependency(DET) D[22,35](kompliziertes) G[36,44](Beispiel)",
@@ -527,6 +532,7 @@ public class MaltParserTest
                         + "innehåller lika många beståndsdelar och beroenden som möjligt.");
 
         String[] dependencies = new String[] {
+                "[  0,  2]ROOT(ROOT) D[0,2](Vi) G[0,2](Vi)",
                 "[  3, 10]Dependency(HD) D[3,10](behöver) G[0,2](Vi)",
                 "[ 11, 13]Dependency(HD) D[11,13](en) G[3,10](behöver)",
                 "[ 14, 20]Dependency(HD) D[14,20](mycket) G[11,13](en)",
@@ -593,6 +599,7 @@ public class MaltParserTest
                 "[ 88, 92]Dependency(rcmod) D[88,92](ممکن) G[82,84](ها)",
                 "[ 93, 96]Dependency(cop) D[93,96](است) G[88,92](ممکن)",
                 "[ 97,101]Dependency(dobj-lvc) D[97,101](نیاز) G[102,107](دارید)",
+                "[102,107]ROOT(ROOT) D[102,107](دارید) G[102,107](دارید)",
                 "[108,109]Dependency(punct) D[108,109](.) G[102,107](دارید)" };
 
         String[] posTags = new String[] { "ADJ", "ADJ_CMPR", "ADJ_INO", "ADJ_SUP", "ADV",
@@ -651,6 +658,21 @@ public class MaltParserTest
                         + "possible.");
 
         String[] dependencies = new String[] {
+                "[  0,  4]ROOT(ROOT) D[0,4](Nous) G[0,4](Nous)",
+                "[  5, 10]ROOT(ROOT) D[5,10](avons) G[5,10](avons)",
+                "[ 11, 17]ROOT(ROOT) D[11,17](besoin) G[11,17](besoin)",
+                "[ 18, 23]ROOT(ROOT) D[18,23](d'une) G[18,23](d'une)",
+                "[ 24, 30]ROOT(ROOT) D[24,30](phrase) G[24,30](phrase)",
+                "[ 31, 34]ROOT(ROOT) D[31,34](par) G[31,34](par)",
+                "[ 35, 42]ROOT(ROOT) D[35,42](exemple) G[35,42](exemple)",
+                "[ 43, 47]ROOT(ROOT) D[43,47](très) G[43,47](très)",
+                "[ 48, 58]ROOT(ROOT) D[48,58](compliqué,) G[48,58](compliqué,)",
+                "[ 59, 62]ROOT(ROOT) D[59,62](qui) G[59,62](qui)",
+                "[ 63, 71]ROOT(ROOT) D[63,71](contient) G[63,71](contient)",
+                "[ 72, 75]ROOT(ROOT) D[72,75](des) G[72,75](des)",
+                "[ 76, 88]ROOT(ROOT) D[76,88](constituants) G[76,88](constituants)",
+                "[ 89, 92]ROOT(ROOT) D[89,92](que) G[89,92](que)",
+                "[ 93, 95]ROOT(ROOT) D[93,95](de) G[93,95](de)",
                 "[ 96,106]Dependency(det) D[96,106](nombreuses) G[107,118](dépendances)",
                 "[107,118]Dependency(obj) D[107,118](dépendances) G[93,95](de)",
                 "[119,121]Dependency(dep) D[119,121](et) G[107,118](dépendances)",

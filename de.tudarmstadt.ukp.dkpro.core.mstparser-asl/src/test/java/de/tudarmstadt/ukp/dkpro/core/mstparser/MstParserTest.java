@@ -17,16 +17,18 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.mstparser;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.hunpos.HunPosTagger;
@@ -38,6 +40,7 @@ import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
  */
 public class MstParserTest
 {
+    @Ignore("Takes too long")
     @Test
     public void testCroatianMte5Defnpout()
         throws Exception
@@ -152,6 +155,7 @@ public class MstParserTest
      * @throws Exception
      *             if an error occurs.
      */
+    @Ignore("Takes too long")
     @Test
     public void testCroatianMte5Pos()
         throws Exception
@@ -269,7 +273,7 @@ public class MstParserTest
 
         String[] dependencies = { 
                 "[  0,  2]Dependency(NP-SBJ) D[0,2](We) G[3,7](need)",
-                "[  3,  7]Dependency(ROOT) D[3,7](need) G[3,7](need)",
+                "[  3,  7]ROOT(ROOT) D[3,7](need) G[3,7](need)",
                 "[  8,  9]Dependency(DEP) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]Dependency(DEP) D[10,14](very) G[15,26](complicated)",
                 "[ 15, 26]Dependency(DEP) D[15,26](complicated) G[35,43](sentence)",

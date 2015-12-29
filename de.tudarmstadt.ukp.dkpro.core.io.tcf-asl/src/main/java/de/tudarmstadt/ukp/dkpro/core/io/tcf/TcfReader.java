@@ -43,6 +43,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 import eu.clarin.weblicht.wlfxb.io.TextCorpusStreamed;
 import eu.clarin.weblicht.wlfxb.io.WLDObjector;
 import eu.clarin.weblicht.wlfxb.io.WLFormatException;
@@ -279,6 +280,7 @@ public class TcfReader
                     dependentPos.addToIndexes();
                     aTokens.get(dependentTokens[0].getID()).setPos(dependentPos);
                 }
+                
                 if (governorTokens != null) {
                     POS governerPos = aTokens.get(governorTokens[0].getID()).getPos();
                     if (governerPos == null) {
@@ -300,15 +302,27 @@ public class TcfReader
                 else {
                     governorTokens = dependentTokens;
                 }
-                Dependency outDependency = new Dependency(aJCas);
-                outDependency.setDependencyType(dependency.getFunction());
-                outDependency.setGovernor(aTokens.get(governorTokens[0].getID()));
-                outDependency.setDependent(dependency.getFunction().equals("ROOT") ? aTokens
-                        .get(governorTokens[0].getID()) : aTokens.get(dependentTokens[0].getID()));
-                outDependency.setBegin(outDependency.getDependent().getBegin());
-                outDependency.setEnd(outDependency.getDependent().getEnd());
-                outDependency.addToIndexes();
-
+                
+                // We set governorTokens = dependentTokens above for root nodes
+                if (governorTokens == dependentTokens) {
+                    Dependency outDependency = new ROOT(aJCas);
+                    outDependency.setDependencyType(dependency.getFunction());
+                    outDependency.setGovernor(aTokens.get(dependentTokens[0].getID()));
+                    outDependency.setDependent(aTokens.get(dependentTokens[0].getID()));
+                    outDependency.setBegin(outDependency.getDependent().getBegin());
+                    outDependency.setEnd(outDependency.getDependent().getEnd());
+                    outDependency.addToIndexes();
+                    
+                }
+                else {
+                    Dependency outDependency = new Dependency(aJCas);
+                    outDependency.setDependencyType(dependency.getFunction());
+                    outDependency.setGovernor(aTokens.get(governorTokens[0].getID()));
+                    outDependency.setDependent(aTokens.get(dependentTokens[0].getID()));
+                    outDependency.setBegin(outDependency.getDependent().getBegin());
+                    outDependency.setEnd(outDependency.getDependent().getEnd());
+                    outDependency.addToIndexes();
+                }
             }
         }
     }

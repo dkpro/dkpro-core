@@ -55,6 +55,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 
 /**
  * DKPro Annotator for the MateToolsParser.
@@ -211,6 +212,17 @@ public class MateParser
                     dep.setBegin(dep.getDependent().getBegin());
                     dep.setEnd(dep.getDependent().getEnd());
 					dep.addToIndexes();
+				}
+				else {
+                    Token rootToken = tokens.get(i);
+
+                    Dependency dep = new ROOT(jcas);
+                    dep.setGovernor(rootToken);
+                    dep.setDependent(rootToken);
+                    dep.setDependencyType(parsed.plabels[i]);
+                    dep.setBegin(dep.getDependent().getBegin());
+                    dep.setEnd(dep.getDependent().getEnd());
+                    dep.addToIndexes();
 				}
 			}
 		}

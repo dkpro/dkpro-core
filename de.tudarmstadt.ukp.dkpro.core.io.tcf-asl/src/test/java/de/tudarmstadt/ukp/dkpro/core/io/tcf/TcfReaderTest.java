@@ -67,7 +67,7 @@ public class TcfReaderTest
 
         String[] ref1 = new String[] {
                 "[  0,  5]Dependency(SB) D[0,5](Karin) G[6,12](fliegt)",
-                "[  6, 12]Dependency(ROOT) D[6,12](fliegt) G[6,12](fliegt)",
+                "[  6, 12]ROOT(ROOT) D[6,12](fliegt) G[6,12](fliegt)",
                 "[ 13, 17]Dependency(MO) D[13,17](nach) G[6,12](fliegt)",
                 "[ 18, 21]Dependency(PNC) D[18,21](New) G[22,26](York)",
                 "[ 22, 26]Dependency(NK) D[22,26](York) G[13,17](nach)",
@@ -75,7 +75,7 @@ public class TcfReaderTest
 
         String[] ref2 = new String[] {
                 "[ 29, 32]Dependency(SB) D[29,32](Sie) G[33,37](will)",
-                "[ 33, 37]Dependency(ROOT) D[33,37](will) G[33,37](will)",
+                "[ 33, 37]ROOT(ROOT) D[33,37](will) G[33,37](will)",
                 "[ 38, 42]Dependency(MO) D[38,42](dort) G[50,56](machen)",
                 "[ 43, 49]Dependency(OA) D[43,49](Urlaub) G[50,56](machen)",
                 "[ 50, 56]Dependency(OC) D[50,56](machen) G[33,37](will)",
@@ -88,5 +88,6 @@ public class TcfReaderTest
         
         AssertAnnotations.assertDependencies(ref1, selectCovered(Dependency.class, s1));
         AssertAnnotations.assertDependencies(ref2, selectCovered(Dependency.class, s2));
+        AssertAnnotations.assertValid(jcas);
     }
 }

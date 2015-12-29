@@ -56,6 +56,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 
 /**
  * CLEAR parser annotator.
@@ -215,18 +216,24 @@ public class ClearNlpParser
                 DEPNode node = tree.get(i);
 
                 if (node.hasHead()) {
-                    if (node.getHead().id == 0) {
-                        // Skip root relation
-                        continue;
+                    if (node.getHead().id != 0) {
+                        Dependency dep = new Dependency(aJCas);
+                        dep.setGovernor(tokens.get(node.getHead().id - 1));
+                        dep.setDependent(tokens.get(node.id - 1));
+                        dep.setDependencyType(node.getLabel());
+                        dep.setBegin(dep.getDependent().getBegin());
+                        dep.setEnd(dep.getDependent().getEnd());
+                        dep.addToIndexes();
                     }
-
-                    Dependency dep = new Dependency(aJCas);
-                    dep.setGovernor(tokens.get(node.getHead().id - 1));
-                    dep.setDependent(tokens.get(node.id - 1));
-                    dep.setDependencyType(node.getLabel());
-                    dep.setBegin(dep.getDependent().getBegin());
-                    dep.setEnd(dep.getDependent().getEnd());
-                    dep.addToIndexes();
+                    else {
+                        Dependency dep = new ROOT(aJCas);
+                        dep.setGovernor(tokens.get(node.id - 1));
+                        dep.setDependent(tokens.get(node.id - 1));
+                        dep.setDependencyType("ROOT");
+                        dep.setBegin(dep.getDependent().getBegin());
+                        dep.setEnd(dep.getDependent().getEnd());
+                        dep.addToIndexes();
+                    }
                 }
             }
         }

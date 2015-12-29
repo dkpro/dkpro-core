@@ -27,6 +27,7 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeNode;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeToJCasConverter;
@@ -46,6 +47,7 @@ public class StanfordDependencyConverterTest
 
         String[] dependencies = {
                 "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(root) D[3,7](need) G[3,7](need)",
                 "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
                 "[ 15, 26]AMOD(amod) D[15,26](complicated) G[35,43](sentence)",
@@ -59,6 +61,9 @@ public class StanfordDependencyConverterTest
                 "[ 86, 98]CONJ(conj_and) D[86,98](dependencies) G[69,81](constituents)",
                 "[102,110]PREP(prep_as) D[102,110](possible) G[52,60](contains)" };
 
+        String[] sentences = { "We need a very complicated example sentence , which contains as "
+                + "many constituents and dependencies as possible ." };
+        
         PennTreeNode root = PennTreeUtils.parsePennTree(pennTree);
         
         JCas jcas = JCasFactory.createJCas();
@@ -69,12 +74,15 @@ public class StanfordDependencyConverterTest
         converter.convertPennTree(jcas, sb, root);
         jcas.setDocumentText(sb.toString());
         jcas.setDocumentLanguage("en");
+        new Sentence(jcas, 0, jcas.getDocumentText().length()).addToIndexes();
         
         AnalysisEngineDescription annotator = createEngineDescription(
                 StanfordDependencyConverter.class);
         
         runPipeline(jcas, annotator);
         
+        AssertAnnotations.assertSentence(sentences, select(jcas, Sentence.class));
         AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+        AssertAnnotations.assertValid(jcas);
     }
 }

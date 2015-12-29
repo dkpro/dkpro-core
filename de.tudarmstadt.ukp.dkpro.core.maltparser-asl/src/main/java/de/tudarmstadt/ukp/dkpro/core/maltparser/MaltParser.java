@@ -66,6 +66,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 
 /**
  * Dependency parsing using MaltPaser.
@@ -418,6 +419,19 @@ public class MaltParser
 		                    dep.setBegin(dep.getDependent().getBegin());
 		                    dep.setEnd(dep.getDependent().getEnd());
 							dep.addToIndexes();
+						}
+						else if (targetToken != null && sourceToken == null) {
+                            Dependency dep = new ROOT(aJCas);
+                            // Trying to get the label triggers Exception
+                            dep.setDependencyType("ROOT");
+                            dep.setGovernor(targetToken);
+                            dep.setDependent(targetToken);
+                            dep.setBegin(dep.getDependent().getBegin());
+                            dep.setEnd(dep.getDependent().getEnd());
+                            dep.addToIndexes();
+						}
+						else {
+						    throw new IllegalStateException("Source token must exist.");
 						}
 					}
 				}
