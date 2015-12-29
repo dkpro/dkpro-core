@@ -211,6 +211,7 @@ public class StanfordParserTest
 
         String[] dependencies = {
                 "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(root) D[3,7](need) G[3,7](need)",
                 "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
                 "[ 15, 26]AMOD(amod) D[15,26](complicated) G[35,43](sentence)",
@@ -267,6 +268,7 @@ public class StanfordParserTest
 
         String[] dependencies = {
                 "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(root) D[3,7](need) G[3,7](need)",
                 "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
                 "[ 15, 26]AMOD(amod) D[15,26](complicated) G[35,43](sentence)",
@@ -322,6 +324,7 @@ public class StanfordParserTest
 
         String[] dependencies = {
                 "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(root) D[3,7](need) G[3,7](need)",
                 "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
                 "[ 15, 26]AMOD(amod) D[15,26](complicated) G[35,43](sentence)",
@@ -378,6 +381,7 @@ public class StanfordParserTest
 
         String[] dependencies = {
                 "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(root) D[3,7](need) G[3,7](need)",
                 "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
                 "[ 15, 26]AMOD(amod) D[15,26](complicated) G[35,43](sentence)",
@@ -434,6 +438,7 @@ public class StanfordParserTest
 
         String[] dependencies = {
                 "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(root) D[3,7](need) G[3,7](need)",
                 "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
                 "[ 15, 26]AMOD(amod) D[15,26](complicated) G[35,43](sentence)",
@@ -487,7 +492,9 @@ public class StanfordParserTest
                 "NP 8,110", "NP 8,43", "PP 61,110", "PP 61,98", "PP 99,110", "ROOT 0,112",
                 "S 0,112", "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
-        String[] dependencies = { "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
+        String[] dependencies = { 
+                "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(root) D[3,7](need) G[3,7](need)",
                 "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
                 "[ 15, 26]AMOD(amod) D[15,26](complicated) G[35,43](sentence)",
@@ -543,6 +550,7 @@ public class StanfordParserTest
 
         String[] dependencies = { 
                 "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(root) D[3,7](need) G[3,7](need)",
                 "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
                 "[ 15, 26]AMOD(amod) D[15,26](complicated) G[35,43](sentence)",
@@ -844,6 +852,7 @@ public class StanfordParserTest
 
         String[] dependencies = {
                 "[  0,  2]NSUBJ(nsubj) D[0,2](我们) G[3,5](需要)",
+                "[  3,  5]ROOT(root) D[3,5](需要) G[3,5](需要)",
                 "[  6,  8]Dependency(nummod) D[6,8](一个) G[17,19](句子)",
                 "[  9, 11]ADVMOD(advmod) D[9,11](非常) G[12,14](复杂)",
                 "[ 12, 14]Dependency(assmod) D[12,14](复杂) G[17,19](句子)",
@@ -919,6 +928,7 @@ public class StanfordParserTest
 
         String[] dependencies = {
                 "[  0,  2]NSUBJ(nsubj) D[0,2](我们) G[3,5](需要)",
+                "[  3,  5]ROOT(root) D[3,5](需要) G[3,5](需要)",
                 "[  6,  8]Dependency(nummod) D[6,8](一个) G[43,45](依赖)",
                 "[  9, 11]ADVMOD(advmod) D[9,11](非常) G[12,14](复杂)",
                 "[ 12, 14]Dependency(relcl) D[12,14](复杂) G[17,19](句子)",
@@ -1116,8 +1126,9 @@ public class StanfordParserTest
             String[] dependencies = { 
                     "[  0,  4]NSUBJ(nsubj) D[0,4](This) G[10,14](test)",
                     "[  5,  7]COP(cop) D[5,7](is) G[10,14](test)",
-                    "[  8,  9]DET(det) D[8,9](a) G[10,14](test)" };
-
+                    "[  8,  9]DET(det) D[8,9](a) G[10,14](test)",
+                    "[ 10, 14]ROOT(root) D[10,14](test) G[10,14](test)" };
+            
             AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
         }
         finally {

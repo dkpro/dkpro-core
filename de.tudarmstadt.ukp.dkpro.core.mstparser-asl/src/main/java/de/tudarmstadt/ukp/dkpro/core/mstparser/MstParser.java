@@ -62,6 +62,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 
 /**
  * Dependency parsing using MSTParser.
@@ -300,21 +301,25 @@ public class MstParser
 
                 // write dependency information as annotation to JCas
                 Type depRel = mappingProvider.getTagType(instance.deprels[formsIndex]);
-                Dependency dep = (Dependency) cas.createFS(depRel);
-                dep.setDependencyType(instance.deprels[formsIndex]);
-
-                // the dependent is the token itself
-                dep.setDependent(token);
+                
                 if (head > 0) {
+                    Dependency dep = (Dependency) cas.createFS(depRel);
+                    dep.setDependencyType(instance.deprels[formsIndex]);
+                    dep.setDependent(token);
                     dep.setGovernor(tokens.get(head - 1));
+                    dep.setBegin(dep.getDependent().getBegin());
+                    dep.setEnd(dep.getDependent().getEnd());
+                    dep.addToIndexes();
                 }
-                // the root is its own head
                 else {
+                    Dependency dep = new ROOT(jcas);
+                    dep.setDependencyType(instance.deprels[formsIndex]);
+                    dep.setDependent(token);
                     dep.setGovernor(token);
+                    dep.setBegin(dep.getDependent().getBegin());
+                    dep.setEnd(dep.getDependent().getEnd());
+                    dep.addToIndexes();
                 }
-                dep.setBegin(dep.getDependent().getBegin());
-                dep.setEnd(dep.getDependent().getEnd());
-                dep.addToIndexes();
             }
         }
     }

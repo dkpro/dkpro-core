@@ -320,5 +320,10 @@
       <description/>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency</supertypeName>
     </typeDescription>
+  <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT</name>
+      <description>Dependency tree root.</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency</supertypeName>
+    </typeDescription>
   </types>
 </typeSystemDescription>

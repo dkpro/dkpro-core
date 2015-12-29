@@ -27,7 +27,9 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -46,6 +48,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.testing.dumper.CasDumpWriter;
 import de.tudarmstadt.ukp.dkpro.core.testing.validation.CasValidator;
 import de.tudarmstadt.ukp.dkpro.core.testing.validation.Message;
+import de.tudarmstadt.ukp.dkpro.core.testing.validation.checks.Check;
 
 public class IOTestRunner
 {
@@ -57,6 +60,21 @@ public class IOTestRunner
         throws Exception
     {
         testOneWay(createReaderDescription(aReader), createEngineDescription(aWriter), aFile, aFile);
+    }
+
+    public static void testRoundTrip(Class<? extends CollectionReader> aReader,
+            Class<? extends AnalysisComponent> aWriter, String aFile, Options aOptions)
+        throws Exception
+    {
+        testOneWay(createReaderDescription(aReader), createEngineDescription(aWriter), aFile,
+                aFile, aOptions);
+    }
+
+    public static void testRoundTrip(CollectionReaderDescription aReader,
+            AnalysisEngineDescription aWriter, String aFile, Options aOptions)
+        throws Exception
+    {
+        testOneWay(aReader, aWriter, aFile, aFile, aOptions);
     }
 
     public static void testRoundTrip(CollectionReaderDescription aReader,
@@ -73,12 +91,19 @@ public class IOTestRunner
         testOneWay(createReaderDescription(aReader), aExpectedFile, aFile);
     }
 
+    public static void testOneWay(CollectionReaderDescription aReader, String aExpectedFile,
+            String aFile)
+        throws Exception
+    {
+        testOneWay(aReader, aExpectedFile, aFile, null);
+    }
+    
     /**
      * One-way test reading a file and writing to the same format but comparing against a reference
      * file instead of the original file.
      */
     public static void testOneWay(CollectionReaderDescription aReader, String aExpectedFile,
-            String aFile)
+            String aFile, Options aOptions)
         throws Exception
     {
         String outputFolder = StringUtils.substringAfterLast(aReader.getImplementationName(), ".")
@@ -92,11 +117,19 @@ public class IOTestRunner
                 CasDumpWriter.class, CasDumpWriter.PARAM_TARGET_LOCATION, output,
                 CasDumpWriter.PARAM_SORT, true);
 
-        testOneWay2(aReader, writer, aExpectedFile, "dump.txt", aFile);
+        testOneWay2(aReader, writer, aExpectedFile, "dump.txt", aFile, aOptions);
+    }
+    
+    public static void testOneWay(Class<? extends CollectionReader> aReader,
+            Class<? extends AnalysisComponent> aWriter, String aExpectedFile, String aFile)
+        throws Exception
+    {
+        testOneWay(aReader, aWriter, aExpectedFile, aFile, null);
     }
 
     public static void testOneWay(Class<? extends CollectionReader> aReader,
-            Class<? extends AnalysisComponent> aWriter, String aExpectedFile, String aFile)
+            Class<? extends AnalysisComponent> aWriter, String aExpectedFile, String aFile,
+            Options aOptions)
         throws Exception
     {
         Class<?> dkproReaderBase = Class.forName(RESOURCE_COLLECTION_READER_BASE);
@@ -115,12 +148,22 @@ public class IOTestRunner
         // the expected file
         String extension = FilenameUtils.getExtension(aExpectedFile);
         String name = FilenameUtils.getBaseName(aFile);
+        Object[] aExtraParams = {};
 
-        testOneWay2(aReader, aWriter, aExpectedFile, name + "." + extension, aFile);
+        testOneWay2(createReaderDescription(aReader, aExtraParams),
+                createEngineDescription(aWriter, aExtraParams), aExpectedFile, name + "."
+                        + extension, aFile, null);
     }
 
     public static void testOneWay(CollectionReaderDescription aReader,
             AnalysisEngineDescription aWriter, String aExpectedFile, String aFile)
+        throws Exception
+    {
+        testOneWay(aReader, aWriter, aExpectedFile, aFile, null);
+    }
+
+    public static void testOneWay(CollectionReaderDescription aReader,
+            AnalysisEngineDescription aWriter, String aExpectedFile, String aFile, Options aOptions)
         throws Exception
     {
         Class<?> dkproReaderBase = Class.forName(RESOURCE_COLLECTION_READER_BASE);
@@ -140,7 +183,7 @@ public class IOTestRunner
         String extension = FilenameUtils.getExtension(aExpectedFile);
         String name = FilenameUtils.getBaseName(aFile);
 
-        testOneWay2(aReader, aWriter, aExpectedFile, name + "." + extension, aFile);
+        testOneWay2(aReader, aWriter, aExpectedFile, name + "." + extension, aFile, aOptions);
     }
     
     @Deprecated
@@ -151,12 +194,12 @@ public class IOTestRunner
     {
         testOneWay2(createReaderDescription(aReader, aExtraParams),
                 createEngineDescription(aWriter, aExtraParams),
-                aExpectedFile, aOutputFile, aFile);
+                aExpectedFile, aOutputFile, aFile, null);
     }
 
     public static void testOneWay2(CollectionReaderDescription aReader,
             AnalysisEngineDescription aWriter, String aExpectedFile, String aOutputFile,
-            String aInputFile)
+            String aInputFile, Options aOptions)
         throws Exception
     {
         String outputFolder = StringUtils.substringAfterLast(aReader.getImplementationName(), ".")
@@ -189,6 +232,8 @@ public class IOTestRunner
         AnalysisEngineDescription validator = createEngineDescription(
                 Validator.class);
 
+        Validator.options = aOptions != null ? aOptions : new Options();
+        
         runPipeline(aReader, validator, metadataStripper, aWriter);
 
         AssertAnnotations.assertValid(Validator.messages);
@@ -202,6 +247,8 @@ public class IOTestRunner
         extends JCasAnnotator_ImplBase
     {
         public static List<Message> messages;
+        
+        public static Options options;
         
         @Override
         public void initialize(UimaContext aContext)
@@ -217,7 +264,19 @@ public class IOTestRunner
             throws AnalysisEngineProcessException
         {
             CasValidator validator = CasValidator.createWithAllChecks();
+            options.skippedChecks.forEach(check -> validator.removeCheck(check));
             messages = validator.analyze(aJCas);
+        }
+    }
+    
+    public static class Options
+    {
+        private Set<Class<? extends Check>> skippedChecks = new HashSet<>();
+        
+        public Options skipCheck(Class<? extends Check> aCheck)
+        {
+            skippedChecks.add(aCheck);
+            return this;
         }
     }
 }

@@ -48,6 +48,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 
 /**
  * Reads a file in the CoNLL-2006 format (aka CoNLL-X).
@@ -243,19 +244,26 @@ public class Conll2006Reader
                     if (!UNUSED.equals(word[DEPREL])) {
                         int depId = Integer.valueOf(word[ID]);
                         int govId = Integer.valueOf(word[HEAD]);
-    
+                        
                         // Model the root as a loop onto itself
                         if (govId == 0) {
-                            govId = depId;
+                            Dependency rel = new ROOT(aJCas);
+                            rel.setGovernor(tokens.get(depId));
+                            rel.setDependent(tokens.get(depId));
+                            rel.setDependencyType(word[DEPREL]);
+                            rel.setBegin(rel.getDependent().getBegin());
+                            rel.setEnd(rel.getDependent().getEnd());
+                            rel.addToIndexes();
                         }
-    
-                        Dependency rel = new Dependency(aJCas);
-                        rel.setGovernor(tokens.get(govId));
-                        rel.setDependent(tokens.get(depId));
-                        rel.setDependencyType(word[DEPREL]);
-                        rel.setBegin(rel.getDependent().getBegin());
-                        rel.setEnd(rel.getDependent().getEnd());
-                        rel.addToIndexes();
+                        else {
+                            Dependency rel = new Dependency(aJCas);
+                            rel.setGovernor(tokens.get(govId));
+                            rel.setDependent(tokens.get(depId));
+                            rel.setDependencyType(word[DEPREL]);
+                            rel.setBegin(rel.getDependent().getBegin());
+                            rel.setEnd(rel.getDependent().getEnd());
+                            rel.addToIndexes();
+                        }
                     }
                 }
             }

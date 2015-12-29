@@ -33,7 +33,7 @@ import de.tudarmstadt.ukp.dkpro.core.testing.validation.checks.Check;
 
 public class CasValidator
 {
-    private Set<Class<? extends Check>> checkClasses = new LinkedHashSet<>();
+    private Set<Class<? extends Check>> checks = new LinkedHashSet<>();
 
     public CasValidator()
     {
@@ -48,17 +48,17 @@ public class CasValidator
     
     public void setChecks(Collection<Class<? extends Check>> aChecks)
     {
-        checkClasses = new LinkedHashSet<>();
+        checks = new LinkedHashSet<>();
         if (aChecks != null) {
-            checkClasses.addAll(aChecks);
+            checks.addAll(aChecks);
         }
     }
 
     public void setChecks(Class<? extends Check>... aChecks)
     {
-        checkClasses = new LinkedHashSet<>();
+        checks = new LinkedHashSet<>();
         if (aChecks != null) {
-            checkClasses.addAll(asList(aChecks));
+            checks.addAll(asList(aChecks));
         }
     }
 
@@ -72,7 +72,7 @@ public class CasValidator
     private boolean analyze(JCas aCas, List<Message> aMessages)
     {
         boolean ok = true;
-        for (Class<? extends Check> checkClass : checkClasses) {
+        for (Class<? extends Check> checkClass : checks) {
             try {
                 Check check = checkClass.newInstance();
                 ok &= check.check(aCas, aMessages);
@@ -97,6 +97,11 @@ public class CasValidator
 
     public void addCheck(Class<? extends Check> aExtra)
     {
-        checkClasses.add(aExtra);
+        checks.add(aExtra);
+    }
+
+    public void removeCheck(Class<? extends Check> aCheck)
+    {
+        checks.remove(aCheck);
     }
 }

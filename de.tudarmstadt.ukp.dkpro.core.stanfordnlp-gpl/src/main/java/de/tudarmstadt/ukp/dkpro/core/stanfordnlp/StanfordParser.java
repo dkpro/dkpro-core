@@ -60,6 +60,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.CoreNlpUtils;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.StanfordAnnotator;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.TreeWithTokens;
@@ -474,12 +475,21 @@ public class StanfordParser
             int govIndex = currTypedDep.gov().index();
             int depIndex = currTypedDep.dep().index();
             if (govIndex != 0) {
-                // Stanford CoreNLP produces a dependency relation between a verb and ROOT-0 which
-                // is not token at all!
                 Token govToken = tokens.get(govIndex - 1);
                 Token depToken = tokens.get(depIndex - 1);
 
                 sfAnnotator.createDependencyAnnotation(currTypedDep.reln(), govToken, depToken);
+            }
+            else {
+                Token depToken = tokens.get(depIndex - 1);
+                
+                Dependency dep = new ROOT(sfAnnotator.getJCas());
+                dep.setDependencyType(currTypedDep.reln().toString());
+                dep.setGovernor(depToken);
+                dep.setDependent(depToken);
+                dep.setBegin(dep.getDependent().getBegin());
+                dep.setEnd(dep.getDependent().getEnd());
+                dep.addToIndexes();
             }
         }
     }
