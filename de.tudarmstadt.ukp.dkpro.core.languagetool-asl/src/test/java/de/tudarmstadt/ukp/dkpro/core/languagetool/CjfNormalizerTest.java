@@ -21,9 +21,11 @@ import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTran
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.languagetool.CjfNormalizer.Direction;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class CjfNormalizerTest
 {
@@ -49,4 +51,7 @@ public class CjfNormalizerTest
 
         assertTransformedText(normalizedText, inputText, "zh", normalizer);
     }
+
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }

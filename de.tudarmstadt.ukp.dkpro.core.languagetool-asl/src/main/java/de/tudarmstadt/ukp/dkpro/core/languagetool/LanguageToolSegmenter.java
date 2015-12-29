@@ -43,6 +43,13 @@ public class LanguageToolSegmenter extends SegmenterBase
 		throws AnalysisEngineProcessException
 	{
 		Language lang = Languages.getLanguageForShortName(getLanguage(aJCas));
+        Language defaultVariant = lang.getDefaultLanguageVariant();
+        if (defaultVariant != null) {
+            getLogger().info(
+                    "Using default variant [" + defaultVariant.getShortNameWithCountryAndVariant()
+                            + "] for language [" + getLanguage(aJCas) + "]");
+            lang = defaultVariant;
+        }
 
 		List<String> sentences = lang.getSentenceTokenizer().tokenize(aText);
 

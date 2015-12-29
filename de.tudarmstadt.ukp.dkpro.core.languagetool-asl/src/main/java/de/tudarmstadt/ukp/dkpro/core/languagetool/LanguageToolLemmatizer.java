@@ -92,6 +92,14 @@ public class LanguageToolLemmatizer
 	    
 		try {
 			Language lang = Languages.getLanguageForShortName(aJCas.getDocumentLanguage());
+            Language defaultVariant = lang.getDefaultLanguageVariant();
+            if (defaultVariant != null) {
+                getLogger().info(
+                        "Using default variant ["
+                                + defaultVariant.getShortNameWithCountryAndVariant()
+                                + "] for language [" + aJCas.getDocumentLanguage() + "]");
+                lang = defaultVariant;
+            }
 
 			for (Sentence s : select(aJCas, Sentence.class)) {
 				// Get the tokens from the sentence

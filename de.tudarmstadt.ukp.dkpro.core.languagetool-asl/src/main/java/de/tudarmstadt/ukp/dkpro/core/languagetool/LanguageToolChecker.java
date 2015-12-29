@@ -78,10 +78,21 @@ public class LanguageToolChecker
 		    {
                 Properties props = getAggregatedProperties();
 		        Language lang = Languages.getLanguageForShortName(props.getProperty(LANGUAGE));
+		        
 		        if (lang == null) {
 		            throw new IOException("The language code '"
 		                    + props.getProperty(LANGUAGE) + "' is not supported by LanguageTool.");
 		        }
+		        
+                Language defaultVariant = lang.getDefaultLanguageVariant();
+                if (defaultVariant != null) {
+                    getLogger().info(
+                            "Using default variant ["
+                                    + defaultVariant.getShortNameWithCountryAndVariant()
+                                    + "] for language [" + props.getProperty(LANGUAGE) + "]");
+                   lang = defaultVariant;
+                }
+		        
 		        return new JLanguageTool(lang);
 		    }
 		};
