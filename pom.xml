@@ -72,6 +72,9 @@
 			<releases>
 				<enabled>false</enabled>
 			</releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
 		</repository>
         <!-- For DKPro Parent POM SNAPSHOT -->
         <!--  
@@ -107,6 +110,9 @@
 			<releases>
 				<enabled>false</enabled>
 			</releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
 		</pluginRepository>
 	</pluginRepositories>
 	<issueManagement>
