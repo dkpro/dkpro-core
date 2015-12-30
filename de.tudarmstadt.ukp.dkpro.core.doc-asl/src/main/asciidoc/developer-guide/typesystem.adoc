@@ -140,7 +140,7 @@ token. Another example would be that if a constituent is a child of another cons
 To ensure that all components adhere to such policies, it is a good idea to implement checks for
 them. This can be done simply by placing a new check implementation into the package
 `de.tudarmstadt.ukp.dkpro.core.testing.validation.checks` in the testing module. Tests implemented
-with `TestRunner` and ÌOTestRunner` use these checks automatically. All other checks should invoke
+with `TestRunner` and `IOTestRunner` use these unit tests automatically. All other checks should invoke
 `AssertAnnotations.assertValid(jcas)`.
 
 .Example check ensuring that POS annotations are attached to a Token (shortened)
