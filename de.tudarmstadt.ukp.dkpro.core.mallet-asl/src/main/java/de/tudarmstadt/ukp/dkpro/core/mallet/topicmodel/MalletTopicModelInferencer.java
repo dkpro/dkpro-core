@@ -17,24 +17,6 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.mallet.topicmodel;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import org.apache.commons.lang.ArrayUtils;
-import org.apache.uima.UimaContext;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.Type;
-import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
-import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.fit.util.CasUtil;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.cas.DoubleArray;
-import org.apache.uima.jcas.cas.IntegerArray;
-import org.apache.uima.resource.ResourceInitializationException;
-
 import cc.mallet.pipe.Pipe;
 import cc.mallet.pipe.TokenSequence2FeatureSequence;
 import cc.mallet.topics.ParallelTopicModel;
@@ -45,13 +27,34 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
+import org.apache.commons.lang.ArrayUtils;
+import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.Type;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
+import org.apache.uima.fit.util.CasUtil;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.cas.DoubleArray;
+import org.apache.uima.jcas.cas.IntegerArray;
+import org.apache.uima.resource.ResourceInitializationException;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Infers the topic distribution over documents using a Mallet {@link ParallelTopicModel}.
- *
  */
+@TypeCapability(
+        outputs = { "de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution" }
+)
+
 public class MalletTopicModelInferencer
-    extends JCasAnnotator_ImplBase
+        extends JCasAnnotator_ImplBase
 {
     private static final String NONE_LABEL = "X";
 
@@ -118,7 +121,7 @@ public class MalletTopicModelInferencer
 
     @Override
     public void initialize(UimaContext context)
-        throws ResourceInitializationException
+            throws ResourceInitializationException
     {
         super.initialize(context);
 
@@ -138,12 +141,11 @@ public class MalletTopicModelInferencer
 
         inferencer = model.getInferencer();
         malletPipe = new TokenSequence2FeatureSequence(model.getAlphabet());
-
-    };
+    }
 
     @Override
     public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+            throws AnalysisEngineProcessException
     {
         Type type = CasUtil.getType(aJCas.getCas(), typeName);
         Instance instance;
@@ -188,11 +190,10 @@ public class MalletTopicModelInferencer
      * minTopicProb. If more topics comply with these criteria, only retain the n
      * (maxTopicAssignments) largest values.
      *
-     * @param topicDistribution
-     *            a double array containing the document's topic proportions
+     * @param topicDistribution a double array containing the document's topic proportions
      * @return an array of integers pointing to the topics assigned to the document
      * @deprecated this method should be removed at some point because assignment / topic tagging
-     *             should be done in a dedicated step (module).
+     * should be done in a dedicated step (module).
      */
     // TODO: should return a boolean[] of the same size as topicDistribution
     // TODO: should probably be moved to a dedicated module because assignments (topic tagging)
