@@ -37,9 +37,9 @@ import de.tudarmstadt.ukp.dkpro.lab.task.ParameterSpace;
 import de.tudarmstadt.ukp.dkpro.tc.core.Constants;
 import de.tudarmstadt.ukp.dkpro.tc.crfsuite.CRFSuiteAdapter;
 import de.tudarmstadt.ukp.dkpro.tc.crfsuite.task.serialization.SaveModelCRFSuiteBatchTask;
-import de.tudarmstadt.ukp.dkpro.tc.features.token.CurrentToken;
-import de.tudarmstadt.ukp.dkpro.tc.features.token.NextToken;
-import de.tudarmstadt.ukp.dkpro.tc.features.token.PreviousToken;
+import de.tudarmstadt.ukp.dkpro.tc.features.tcu.CurrentUnit;
+import de.tudarmstadt.ukp.dkpro.tc.features.tcu.NextUnit;
+import de.tudarmstadt.ukp.dkpro.tc.features.tcu.PrevUnit;
 
 /**
  * Example class of how to train an own model
@@ -78,9 +78,9 @@ public class TrainAndSaveNewModelCRFSuite implements Constants {
 
 		Dimension<List<String>> dimFeatureSets = Dimension.create(
 				DIM_FEATURE_SET,
-				Arrays.asList(new String[] { CurrentToken.class.getName(),
-						NextToken.class.getName(),
-						PreviousToken.class.getName(),
+				Arrays.asList(new String[] { CurrentUnit.class.getName(),
+						NextUnit.class.getName(),
+						PrevUnit.class.getName(),
 				// TODO: Add further features here
 				}));
 
