@@ -85,7 +85,8 @@ of annotation supported by DKPro Core, e.g.:
 * `assertCoreference`
 * `assertTagset`
 * `assertTagsetMapping`
-* `assertValid`
+* `assertValid` - Tests implemented with `TestRunner` and `IOTestRunner` perform validation checks
+   automatically. All other unit tests should invoke `AssertAnnotations.assertValid(jcas)`.
 * etc.
 
 
