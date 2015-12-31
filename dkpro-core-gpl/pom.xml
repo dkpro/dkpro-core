@@ -109,7 +109,7 @@
 				<inherited>true</inherited>
 				<groupId>com.mycila</groupId>
 				<artifactId>license-maven-plugin</artifactId>
-				<version>2.6</version>
+				<version>2.11</version>
 				<configuration>
 					<header>${basedir}/.license-header.txt</header>
 					<failIfMissing>true</failIfMissing>
