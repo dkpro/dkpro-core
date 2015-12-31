@@ -49,7 +49,7 @@ public class MateSemanticRoleLabelerTest
                 "The economy 's temperature will be taken from several vantage points this week , with readings on trade , output , housing and inflation .");
 
         String[] predicates = new String[] { "readings (reading.01): [[(A1:on)]]",
-                "taken (take.01): [[(A2:from), (AM-ADV:with), (AM-MOD:will), (AM-TMP:week)]]",
+                "taken (take.01): [[(A1:temperature), (A2:from), (AM-ADV:with), (AM-MOD:will), (AM-TMP:week)]]",
                 "temperature (temperature.01): [[(A1:economy)]]" };
 
         assertSemanticPredicates(predicates, select(jcas, SemanticPredicate.class));
