@@ -143,8 +143,8 @@ them. This can be done simply by placing a new check implementation into the pac
 with `TestRunner` and `IOTestRunner` use these unit tests automatically. All other checks should invoke
 `AssertAnnotations.assertValid(jcas)`.
 
-.Example check ensuring that POS annotations are attached to a Token (shortened)
+.Example check ensuring that parent of constituents and tokens is properly set (shortened)
 [source,java,indent=0]
 ----
-include::{source-dir}dkpro-core-testing-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/testing/validation/checks/AllPosAttachedToTokenCheck.java[tags=check-example]
+include::{source-dir}dkpro-core-testing-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/testing/validation/checks/ParentSetCheck.java[tags=check-example]
 ----
