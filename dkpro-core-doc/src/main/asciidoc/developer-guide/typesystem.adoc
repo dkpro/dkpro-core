@@ -31,7 +31,7 @@ the module. E.g. for the module
 
 [source,text]
 ----
-de.tudarmstadt.ukp.dkpro.core.api.semantics-asl
+dkpro-core-api-semantics-asl
 ----
 
 the type descriptor would be 
@@ -76,7 +76,7 @@ Name:: field of the type descriptor corresponds to the *section* under which the
   can declare the same name and the types declared in them are listed in the documentation in 
   alphabetical order.
 Description:: field should be emtpy. Create instead a `sectionIntroXXX.adoc` file under 
-  `src/main/asciidoc/typesystem-reference` in the `core.doc-asl` module (`XXX` is the name of the
+  `src/main/asciidoc/typesystem-reference` in the `dkpro-core-doc` module (`XXX` is the name of the
    section - see *Name* above).
 Version:: should be set to `${version}`. If it does not exist yet, create a file 
   `src/filter/filter.properties` in the module that creates the new type descriptor with the
@@ -84,14 +84,14 @@ Version:: should be set to `${version}`. If it does not exist yet, create a file
 +
 [source,text,indent=0]
 ----
-include::{source-dir}de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl/src/filter/filter.properties[]
+include::{source-dir}dkpro-core-api-lexmorph-asl/src/filter/filter.properties[]
 ----
 +
 Also add the following section to the `pom.xml` file in the respective module: 
 +
 [source,xml,indent=0]
 ----
-include::{source-dir}de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl/pom.xml[tags=version-filtering]
+include::{source-dir}dkpro-core-api-lexmorph-asl/pom.xml[tags=version-filtering]
 ----
 +
 NOTE: Replace the pattern inside the `include` and `exclude` elements with the location of your
@@ -112,7 +112,7 @@ is done by placing a file called `.activate-run-jcasgen` in the module root with
     
 [source,xml,indent=0]
 ----
-include::{source-dir}de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl/.activate-run-jcasgen[]
+include::{source-dir}dkpro-core-api-lexmorph-asl/.activate-run-jcasgen[]
 ----
 
 NOTE: Actually the content is irrelevant, but it is a good idea to place a note here regarding the
@@ -146,5 +146,5 @@ with `TestRunner` and `IOTestRunner` use these unit tests automatically. All oth
 .Example check ensuring that POS annotations are attached to a Token (shortened)
 [source,java,indent=0]
 ----
-include::{source-dir}de.tudarmstadt.ukp.dkpro.core.testing-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/testing/validation/checks/AllPosAttachedToTokenCheck.java[tags=check-example]
+include::{source-dir}dkpro-core-testing-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/testing/validation/checks/AllPosAttachedToTokenCheck.java[tags=check-example]
 ----

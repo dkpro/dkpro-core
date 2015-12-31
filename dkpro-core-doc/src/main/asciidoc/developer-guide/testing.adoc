@@ -57,7 +57,7 @@ sentence) and with newline characters (`\n`) separating the sentences:
 .Typical unit test for an analysis component from the OpenNlpNamedEntityRecognizer test (shortened)
 [source,java,indent=0]
 ----
-include::{source-dir}de.tudarmstadt.ukp.dkpro.core.opennlp-asl/src/test/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpNamedEntityRecognizerTest.java[tags=test]
+include::{source-dir}dkpro-core-opennlp-asl/src/test/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpNamedEntityRecognizerTest.java[tags=test]
 ----
 
 Test cases for segmenter components should not make use of the `TestRunner`
@@ -106,17 +106,17 @@ The input file and reference file path given to these methods is always consider
 .Example using `testRoundTrip` with extra parameters (Conll2006ReaderWriterTest)
 [source,java,indent=0]
 ----
-include::{source-dir}de.tudarmstadt.ukp.dkpro.core.io.conll-asl/src/test/java/de/tudarmstadt/ukp/dkpro/core/io/conll/Conll2006ReaderWriterTest.java[tags=testRoundTrip]
+include::{source-dir}dkpro-core-io-conll-asl/src/test/java/de/tudarmstadt/ukp/dkpro/core/io/conll/Conll2006ReaderWriterTest.java[tags=testRoundTrip]
 ----
 
 .Example using `testOneWay` with extra parameters (Conll2006ReaderWriterTest)
 [source,java,indent=0]
 ----
-include::{source-dir}de.tudarmstadt.ukp.dkpro.core.io.conll-asl/src/test/java/de/tudarmstadt/ukp/dkpro/core/io/conll/Conll2006ReaderWriterTest.java[tags=testOneWay]
+include::{source-dir}dkpro-core-io-conll-asl/src/test/java/de/tudarmstadt/ukp/dkpro/core/io/conll/Conll2006ReaderWriterTest.java[tags=testOneWay]
 ----
 
 .Example using `testRoundTrip` with extra parameters (BratReaderWriterTest)
 [source,java,indent=0]]
 ----
-include::{source-dir}de.tudarmstadt.ukp.dkpro.core.io.brat-asl/src/test/java/de/tudarmstadt/ukp/dkpro/core/io/brat/BratReaderWriterTest.java[tags=testOneWay]
+include::{source-dir}dkpro-core-io-brat-asl/src/test/java/de/tudarmstadt/ukp/dkpro/core/io/brat/BratReaderWriterTest.java[tags=testOneWay]
 ----

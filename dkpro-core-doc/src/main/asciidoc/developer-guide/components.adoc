@@ -28,7 +28,7 @@ so nothing can be declared here.
 .Example of declaring input/output types on a component
 [source,java,indent=0]
 ----
-include::{source-dir}de.tudarmstadt.ukp.dkpro.core.opennlp-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTagger.java[tags=capabilities]
+include::{source-dir}dkpro-core-opennlp-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTagger.java[tags=capabilities]
 ----
 
 == Analysis components
@@ -47,7 +47,7 @@ model is addressed using a parametrized classpath URL with parameters for langua
 .Model provider setup in OpenNlpPosTagger.initialize() (shortened)
 [source,java,indent=0]
 ----
-include::{source-dir}de.tudarmstadt.ukp.dkpro.core.opennlp-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTagger.java[tags=model-provider-decl]
+include::{source-dir}dkpro-core-opennlp-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTagger.java[tags=model-provider-decl]
 ----
 
 The `produceResource()` method is called with the URL of the model once it has been located by
@@ -56,11 +56,11 @@ The `produceResource()` method is called with the URL of the model once it has b
 .Model provider use in OpenNlpPosTagger.process() (shortened)
 [source,java,indent=0]
 ----
-include::{source-dir}de.tudarmstadt.ukp.dkpro.core.opennlp-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTagger.java[tags=model-provider-use-1]
+include::{source-dir}dkpro-core-opennlp-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTagger.java[tags=model-provider-use-1]
 ----
 [source,java,indent=0]
 ----
-include::{source-dir}de.tudarmstadt.ukp.dkpro.core.opennlp-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTagger.java[tags=model-provider-use-2]
+include::{source-dir}dkpro-core-opennlp-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTagger.java[tags=model-provider-use-2]
 ----
 
 
@@ -73,7 +73,7 @@ The DKPro type system design provides two levels of abstraction on most annotati
 * a set of high-level types for very common categories, e.g. N (noun), V (verb), etc. 
 
 DKPro maintains mappings for commonly used tagsets, e.g. in the module
-`de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl`. They are named: 
+`dkpro-core-api-lexmorph-asl`. They are named: 
 
 
 .Naming scheme for tag mapping files
@@ -95,7 +95,7 @@ information for the current model from the model provider.
 .Mapping provider setup in OpenNlpPosTagger.initialize() (shortened)
 [source,java,indent=0]
 ----
-include::{source-dir}de.tudarmstadt.ukp.dkpro.core.opennlp-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTagger.java[tags=mapping-provider-decl]
+include::{source-dir}dkpro-core-opennlp-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTagger.java[tags=mapping-provider-decl]
 ----
 
 In the `process()` method, the mapping provider is used to to create an UIMA annotation. First,
@@ -107,11 +107,11 @@ tags or NamedEntity.
 .Mapping provider use in OpenNlpPosTagger.process() (shortened)
 [source,java,indent=0]
 ----
-include::{source-dir}de.tudarmstadt.ukp.dkpro.core.opennlp-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTagger.java[tags=mapping-provider-use-1]
+include::{source-dir}dkpro-core-opennlp-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTagger.java[tags=mapping-provider-use-1]
 ----
 [source,java,indent=0]
 ----
-include::{source-dir}de.tudarmstadt.ukp.dkpro.core.opennlp-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTagger.java[tags=mapping-provider-use-2]
+include::{source-dir}dkpro-core-opennlp-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTagger.java[tags=mapping-provider-use-2]
 ----
 
 
@@ -135,7 +135,7 @@ used if none of the other default variants apply.
 .OpenNLP POS tagger default variants configuration
 [source,text,indent=0]
 ----
-include::{source-dir}de.tudarmstadt.ukp.dkpro.core.opennlp-asl/src/main/resources/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/tagger-default-variants.map[]
+include::{source-dir}dkpro-core-opennlp-asl/src/main/resources/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/tagger-default-variants.map[]
 ----
 
 
@@ -144,14 +144,14 @@ correctly set up to use default variants:
 
 [source,java,indent=0]
 ----
-include::{source-dir}de.tudarmstadt.ukp.dkpro.core.api.resources-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/api/resources/ModelProviderBase.java[tags=model-provider-convenience]
+include::{source-dir}dkpro-core-api-resources-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/api/resources/ModelProviderBase.java[tags=model-provider-convenience]
 ----
 
 == I/O components
 
 === Base classes
 
-The base classes for I/O components are located in the `api.io-asl` module. 
+The base classes for I/O components are located in the `dkpro-core-api-io-asl` module. 
 
 Most reader components are derived from `JCasResourceCollectionReaderBase` or 
 `ResourceCollectionReaderBase`. These class offers support for many common functionalities, e.g.:
@@ -180,4 +180,4 @@ are not suitable. Such readers should derive from the uimaFIT `JCasCollectionRea
 (or `CasCollectionReader_ImplBase`) and writers from `JCasAnnotator_ImplBase` (or 
 `CasAnnotator_ImplBase`). However, the developer should ensure that the component's parameters
 reflect the standard DKPro Core reader/writer parameters defined in `ComponentParameters` 
-(`api.parameters-asl` module).
+(`dkpro-core-api-parameters-asl` module).
