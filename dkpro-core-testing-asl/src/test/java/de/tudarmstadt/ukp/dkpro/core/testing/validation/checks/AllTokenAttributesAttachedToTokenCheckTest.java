@@ -17,36 +17,34 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.testing.validation.checks;
 
-import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
+import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
+import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.testing.validation.CasValidator;
 import de.tudarmstadt.ukp.dkpro.core.testing.validation.Message;
-import static de.tudarmstadt.ukp.dkpro.core.testing.validation.Message.Level.*;
+import static de.tudarmstadt.ukp.dkpro.core.testing.validation.Message.Level.ERROR;
 
-public class AllPosAttachedToTokenCheck implements Check
+public class AllTokenAttributesAttachedToTokenCheckTest
 {
-    // tag::check-example[]
-    @Override
-    public boolean check(JCas aJCas, List<Message> aMessages)
+    @Test
+    public void test()
+        throws Exception
     {
-        List<POS> attachedPOS = select(aJCas, Token.class).stream().map(t -> t.getPos())
-                .collect(Collectors.toList());
-        List<POS> allPOS = select(aJCas, POS.class).stream().collect(Collectors.toList());
+        JCas jcas = JCasFactory.createJCas();
+        jcas.setDocumentText("test");
+        new POS(jcas, 0, 4).addToIndexes();
         
-        allPOS.removeAll(attachedPOS);
+        CasValidator validator = new CasValidator(AllTokenAttributesAttachedToTokenCheck.class);
+        List<Message> messages = validator.analyze(jcas);
         
-        for (POS p : allPOS) {
-            aMessages.add(new Message(this, ERROR, String.format("Unattached POS: %s [%d..%d]", p
-                    .getType().getName(), p.getBegin(), p.getEnd())));
-        }
+        messages.forEach(m -> System.out.println(m));
         
-        return allPOS.isEmpty();
+        assertTrue(messages.stream().anyMatch(m -> m.level == ERROR));
     }
-    // end::check-example[]
 }

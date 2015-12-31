@@ -31,6 +31,7 @@ import de.tudarmstadt.ukp.dkpro.core.testing.validation.Message;
 
 public class ParentSetCheck implements Check
 {
+    // tag::check-example[]
     @Override
     public boolean check(JCas aJCas, List<Message> aMessages)
     {
@@ -54,4 +55,5 @@ public class ParentSetCheck implements Check
         
         return aMessages.stream().anyMatch(m -> m.level == ERROR);
     }
+    // end::check-example[]
 }
