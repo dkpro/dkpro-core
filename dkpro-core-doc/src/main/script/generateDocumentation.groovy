@@ -121,7 +121,7 @@ new File(project.basedir, '..').eachFileRecurse(FILES) {
     if (
         it.name.endsWith('.xml') &&
         // No testing module
-        !it.path.contains('/de.tudarmstadt.ukp.dkpro.core.testing-asl/') &&
+        !it.path.contains('/dkpro-core-testing-asl/') &&
         // For the typesystem descriptors
         it.path.contains('/src/main/resources/')
     ) {
@@ -141,7 +141,7 @@ new File(project.basedir, '..').eachFileRecurse(FILES) {
     if (
         it.name.endsWith('.xml') && 
         // No testing module
-        !it.path.contains('/de.tudarmstadt.ukp.dkpro.core.testing-asl/') &&
+        !it.path.contains('/dkpro-core-testing-asl/') &&
         // For the analysis engine and reader descriptions
         it.path.contains('/target/classes/')
     ) {

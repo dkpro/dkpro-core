@@ -312,7 +312,7 @@ Now to build the TreeTagger artifacts:
 
 
 * Locate the Ant build script (`build.xml`) in the scripts directory (`src/scripts`) of the
-  `de.tudarmstadt.ukp.dkpro.core.treetagger-asl` module.		
+  `dkpro-core-treetagger-asl` module.		
 * Right-click, choose *Run As > External Tools Configurations*. In the *Target* tab,
   select *local-maven*, *run*. 
 * Read the license in the Ant console and - if you care - accept the license terms. 
