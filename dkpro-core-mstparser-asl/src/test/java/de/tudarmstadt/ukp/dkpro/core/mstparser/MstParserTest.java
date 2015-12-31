@@ -217,7 +217,7 @@ public class MstParserTest
 
         String[] dependencies = {
                 "[  0,  2]Dependency(nsubj) D[0,2](We) G[3,7](need)",
-                "[  3,  7]Dependency(null) D[3,7](need) G[3,7](need)",
+                "[  3,  7]ROOT(null) D[3,7](need) G[3,7](need)",
                 "[  8,  9]Dependency(det) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]Dependency(advmod) D[10,14](very) G[15,26](complicated)",
                 "[ 15, 26]Dependency(amod) D[15,26](complicated) G[35,43](sentence)",

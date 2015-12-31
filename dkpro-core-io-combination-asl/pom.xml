@@ -40,4 +40,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <name>DKPro Core ASL - IO - Combination</name>
 </project>
