@@ -19,11 +19,13 @@ package de.tudarmstadt.ukp.dkpro.core.testing.validation;
 
 import static java.util.Arrays.asList;
 
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.uima.jcas.JCas;
@@ -91,7 +93,8 @@ public class CasValidator
     {
         Reflections reflections = new Reflections(Check.class.getPackage().getName());
         CasValidator validator = new CasValidator();
-        validator.setChecks(reflections.getSubTypesOf(Check.class));
+        validator.setChecks(reflections.getSubTypesOf(Check.class).stream()
+                .filter(c -> !Modifier.isAbstract(c.getModifiers())).collect(Collectors.toList()));
         return validator;
     }
 

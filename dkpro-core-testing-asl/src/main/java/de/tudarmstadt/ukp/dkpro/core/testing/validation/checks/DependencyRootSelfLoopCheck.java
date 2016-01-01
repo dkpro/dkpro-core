@@ -24,6 +24,7 @@ import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;

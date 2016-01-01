@@ -17,37 +17,34 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.testing.validation.checks;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.validation.CasAnalysisUtils.getNonIndexedFSesWithOwner;
 import static de.tudarmstadt.ukp.dkpro.core.testing.validation.Message.Level.ERROR;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
-import org.apache.uima.cas.FeatureStructure;
+import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
+import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.testing.validation.CasValidator;
 import de.tudarmstadt.ukp.dkpro.core.testing.validation.Message;
 
-public class AllAnnotationsIndexedCheck
-    implements Check
+public class PosAttachedToTokenCheckTest
 {
-    @Override
-    public boolean check(JCas aCas, List<Message> aMessages)
+    @Test
+    public void test()
+        throws Exception
     {
-        Map<FeatureStructure, FeatureStructure> nonIndexed = getNonIndexedFSesWithOwner(aCas
-                .getCas());
-
-        if (!nonIndexed.isEmpty()) {
-            aMessages.add(new Message(this, ERROR, "Unindexed annotations: %d", nonIndexed.size()));
-
-            for (Entry<FeatureStructure, FeatureStructure> e : nonIndexed.entrySet()) {
-                aMessages.add(new Message(this, ERROR,
-                        "Non-index annotation [%s] reachable through [%s]", e.getKey(), e
-                                .getValue()));
-            }
-        }
-
-        return nonIndexed.isEmpty();
+        JCas jcas = JCasFactory.createJCas();
+        jcas.setDocumentText("test");
+        new POS(jcas, 0, 4).addToIndexes();
+        
+        CasValidator validator = new CasValidator(PosAttachedToTokenCheck.class);
+        List<Message> messages = validator.analyze(jcas);
+        
+        messages.forEach(m -> System.out.println(m));
+        
+        assertTrue(messages.stream().anyMatch(m -> m.level == ERROR));
     }
 }

@@ -27,9 +27,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -48,7 +46,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.testing.dumper.CasDumpWriter;
 import de.tudarmstadt.ukp.dkpro.core.testing.validation.CasValidator;
 import de.tudarmstadt.ukp.dkpro.core.testing.validation.Message;
-import de.tudarmstadt.ukp.dkpro.core.testing.validation.checks.Check;
 
 public class IOTestRunner
 {
@@ -63,7 +60,7 @@ public class IOTestRunner
     }
 
     public static void testRoundTrip(Class<? extends CollectionReader> aReader,
-            Class<? extends AnalysisComponent> aWriter, String aFile, Options aOptions)
+            Class<? extends AnalysisComponent> aWriter, String aFile, TestOptions aOptions)
         throws Exception
     {
         testOneWay(createReaderDescription(aReader), createEngineDescription(aWriter), aFile,
@@ -71,7 +68,7 @@ public class IOTestRunner
     }
 
     public static void testRoundTrip(CollectionReaderDescription aReader,
-            AnalysisEngineDescription aWriter, String aFile, Options aOptions)
+            AnalysisEngineDescription aWriter, String aFile, TestOptions aOptions)
         throws Exception
     {
         testOneWay(aReader, aWriter, aFile, aFile, aOptions);
@@ -103,7 +100,7 @@ public class IOTestRunner
      * file instead of the original file.
      */
     public static void testOneWay(CollectionReaderDescription aReader, String aExpectedFile,
-            String aFile, Options aOptions)
+            String aFile, TestOptions aOptions)
         throws Exception
     {
         String outputFolder = StringUtils.substringAfterLast(aReader.getImplementationName(), ".")
@@ -129,7 +126,7 @@ public class IOTestRunner
 
     public static void testOneWay(Class<? extends CollectionReader> aReader,
             Class<? extends AnalysisComponent> aWriter, String aExpectedFile, String aFile,
-            Options aOptions)
+            TestOptions aOptions)
         throws Exception
     {
         Class<?> dkproReaderBase = Class.forName(RESOURCE_COLLECTION_READER_BASE);
@@ -163,7 +160,7 @@ public class IOTestRunner
     }
 
     public static void testOneWay(CollectionReaderDescription aReader,
-            AnalysisEngineDescription aWriter, String aExpectedFile, String aFile, Options aOptions)
+            AnalysisEngineDescription aWriter, String aExpectedFile, String aFile, TestOptions aOptions)
         throws Exception
     {
         Class<?> dkproReaderBase = Class.forName(RESOURCE_COLLECTION_READER_BASE);
@@ -199,7 +196,7 @@ public class IOTestRunner
 
     public static void testOneWay2(CollectionReaderDescription aReader,
             AnalysisEngineDescription aWriter, String aExpectedFile, String aOutputFile,
-            String aInputFile, Options aOptions)
+            String aInputFile, TestOptions aOptions)
         throws Exception
     {
         String outputFolder = StringUtils.substringAfterLast(aReader.getImplementationName(), ".")
@@ -232,7 +229,7 @@ public class IOTestRunner
         AnalysisEngineDescription validator = createEngineDescription(
                 Validator.class);
 
-        Validator.options = aOptions != null ? aOptions : new Options();
+        Validator.options = aOptions != null ? aOptions : new TestOptions();
         
         runPipeline(aReader, validator, metadataStripper, aWriter);
 
@@ -248,7 +245,7 @@ public class IOTestRunner
     {
         public static List<Message> messages;
         
-        public static Options options;
+        public static TestOptions options;
         
         @Override
         public void initialize(UimaContext aContext)
@@ -266,17 +263,6 @@ public class IOTestRunner
             CasValidator validator = CasValidator.createWithAllChecks();
             options.skippedChecks.forEach(check -> validator.removeCheck(check));
             messages = validator.analyze(aJCas);
-        }
-    }
-    
-    public static class Options
-    {
-        private Set<Class<? extends Check>> skippedChecks = new HashSet<>();
-        
-        public Options skipCheck(Class<? extends Check> aCheck)
-        {
-            skippedChecks.add(aCheck);
-            return this;
         }
     }
 }
