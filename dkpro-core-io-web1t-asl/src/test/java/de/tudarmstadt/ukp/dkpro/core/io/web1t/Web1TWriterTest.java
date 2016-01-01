@@ -45,7 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
-public class Web1TFormatWriterTest {
+public class Web1TWriterTest {
 
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();
@@ -133,12 +133,12 @@ public class Web1TFormatWriterTest {
         AnalysisEngineDescription lemmatizer = createEngineDescription(ClearNlpLemmatizer.class);
 
 		AnalysisEngineDescription ngramWriter = createEngineDescription(
-				Web1TFormatWriter.class,
-				Web1TFormatWriter.PARAM_TARGET_LOCATION, INDEX_FOLDER.getAbsolutePath(),
-				Web1TFormatWriter.PARAM_INPUT_TYPES, strings,
-				Web1TFormatWriter.PARAM_MIN_NGRAM_LENGTH, MIN_NGRAM,
-				Web1TFormatWriter.PARAM_MAX_NGRAM_LENGTH, MAX_NGRAM,
-				Web1TFormatWriter.PARAM_MIN_FREQUENCY, minFreq);
+				Web1TWriter.class,
+				Web1TWriter.PARAM_TARGET_LOCATION, INDEX_FOLDER.getAbsolutePath(),
+				Web1TWriter.PARAM_INPUT_TYPES, strings,
+				Web1TWriter.PARAM_MIN_NGRAM_LENGTH, MIN_NGRAM,
+				Web1TWriter.PARAM_MAX_NGRAM_LENGTH, MAX_NGRAM,
+				Web1TWriter.PARAM_MIN_FREQUENCY, minFreq);
 
 		SimplePipeline.runPipeline(reader, segmenter, tagger, lemmatizer, ngramWriter);
 	}
@@ -175,11 +175,11 @@ public class Web1TFormatWriterTest {
 		AnalysisEngineDescription lemmatizer = createEngineDescription(ClearNlpLemmatizer.class);
 
 		AnalysisEngineDescription ngramWriter = createEngineDescription(
-				Web1TFormatWriter.class,
-				Web1TFormatWriter.PARAM_TARGET_LOCATION, INDEX_FOLDER.getAbsolutePath(),
-				Web1TFormatWriter.PARAM_INPUT_TYPES, inputPath,
-				Web1TFormatWriter.PARAM_MIN_NGRAM_LENGTH, MIN_NGRAM,
-				Web1TFormatWriter.PARAM_MAX_NGRAM_LENGTH, MAX_NGRAM);
+				Web1TWriter.class,
+				Web1TWriter.PARAM_TARGET_LOCATION, INDEX_FOLDER.getAbsolutePath(),
+				Web1TWriter.PARAM_INPUT_TYPES, inputPath,
+				Web1TWriter.PARAM_MIN_NGRAM_LENGTH, MIN_NGRAM,
+				Web1TWriter.PARAM_MAX_NGRAM_LENGTH, MAX_NGRAM);
 
 		SimplePipeline.runPipeline(reader, segmenter, tagger, lemmatizer, ngramWriter);
 	}

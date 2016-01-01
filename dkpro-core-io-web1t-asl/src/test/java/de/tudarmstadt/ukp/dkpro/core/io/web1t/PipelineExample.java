@@ -52,12 +52,12 @@ public class PipelineExample
         );
 
         AnalysisEngineDescription ngramWriter = createEngineDescription(
-                Web1TFormatWriter.class,
-                Web1TFormatWriter.PARAM_TARGET_LOCATION, "target/web1t/",
-                Web1TFormatWriter.PARAM_INPUT_TYPES, new String[] { Token.class.getName() },
-                Web1TFormatWriter.PARAM_MIN_NGRAM_LENGTH, 1,
-                Web1TFormatWriter.PARAM_MAX_NGRAM_LENGTH, 3,
-                Web1TFormatWriter.PARAM_MIN_FREQUENCY, 2
+                Web1TWriter.class,
+                Web1TWriter.PARAM_TARGET_LOCATION, "target/web1t/",
+                Web1TWriter.PARAM_INPUT_TYPES, new String[] { Token.class.getName() },
+                Web1TWriter.PARAM_MIN_NGRAM_LENGTH, 1,
+                Web1TWriter.PARAM_MAX_NGRAM_LENGTH, 3,
+                Web1TWriter.PARAM_MIN_FREQUENCY, 2
         );
 
         SimplePipeline.runPipeline(

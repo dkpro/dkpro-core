@@ -37,7 +37,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.web1t.util.Web1TConverter;
 @TypeCapability(
         inputs={
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"})
-public class Web1TFormatWriter
+public class Web1TWriter
 	extends JCasAnnotator_ImplBase
 {
 	/**
