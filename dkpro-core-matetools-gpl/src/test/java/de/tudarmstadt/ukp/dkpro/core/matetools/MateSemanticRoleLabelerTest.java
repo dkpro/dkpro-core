@@ -31,11 +31,13 @@ import java.util.List;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
+import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class MateSemanticRoleLabelerTest
@@ -48,7 +50,7 @@ public class MateSemanticRoleLabelerTest
                 "en",
                 "The economy 's temperature will be taken from several vantage points this week , with readings on trade , output , housing and inflation .");
 
-        String[] predicates = new String[] { "readings (reading.01): [[(A1:on)]]",
+        String[] predicates = { "readings (reading.01): [[(A1:on)]]",
                 "taken (take.01): [[(A1:temperature), (A2:from), (AM-ADV:with), (AM-MOD:will), (AM-TMP:week)]]",
                 "temperature (temperature.01): [[(A1:economy)]]" };
 
@@ -64,7 +66,7 @@ public class MateSemanticRoleLabelerTest
                 "de",
                 "Wir brauchen ein sehr kompliziertes Beispiel , welches möglichst viele Konstituenten und Dependenzen beinhaltet .");
 
-        String[] predicates = new String[] { "brauchen (brauchen.1): [[(A0:Wir), (A3:Beispiel)]]" };
+        String[] predicates = { "brauchen (brauchen.1): [[(A0:Wir), (A3:Beispiel)]]" };
 
         assertSemanticPredicates(predicates, select(jcas, SemanticPredicate.class));
 
@@ -128,4 +130,7 @@ public class MateSemanticRoleLabelerTest
         assertEquals(AssertAnnotations.asCopyableString(expected, true),
                 AssertAnnotations.asCopyableString(actual, true));
     }
+
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }
