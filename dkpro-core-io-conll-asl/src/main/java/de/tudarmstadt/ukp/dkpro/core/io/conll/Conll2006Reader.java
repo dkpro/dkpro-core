@@ -233,6 +233,7 @@ public class Conll2006Reader
                             token.getBegin(), token.getEnd());
                     morphtag.setValue(word[FEATS]);
                     morphtag.addToIndexes();
+                    token.setMorph(morphtag);
                 }
 
                 sentenceEnd = token.getEnd();
