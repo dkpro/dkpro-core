@@ -20,17 +20,16 @@ package de.tudarmstadt.ukp.dkpro.core.matetools;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
+
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
-
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class MateParserTest
@@ -42,7 +41,7 @@ public class MateParserTest
 		JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel , welches "
 				+ "möglichst viele Konstituenten und Dependenzen beinhaltet .");
 
-        String[] dependencies = new String[] {
+        String[] dependencies = {
                 "[  0,  3]Dependency(SB) D[0,3](Wir) G[4,12](brauchen)",
                 "[  4, 12]ROOT(--) D[4,12](brauchen) G[4,12](brauchen)",
                 "[ 13, 16]Dependency(NK) D[13,16](ein) G[36,44](Beispiel)",
@@ -59,19 +58,18 @@ public class MateParserTest
                 "[101,111]Dependency(RC) D[101,111](beinhaltet) G[36,44](Beispiel)",
                 "[112,113]Dependency(--) D[112,113](.) G[101,111](beinhaltet)" };
 
-        String[] posTags = new String[] { "$(", "$,", "$.", "<None>", "<root-POS>", "ADJA", "ADJD",
-                "ADV", "APPO", "APPR", "APPRART", "APZR", "ART", "CARD", "END", "FM", "ITJ",
-                "KOKOM", "KON", "KOUI", "KOUS", "MID", "NE", "NN", "NNE", "PDAT", "PDS", "PIAT",
-                "PIS", "PPER", "PPOSAT", "PPOSS", "PRELAT", "PRELS", "PRF", "PROAV", "PTKA",
-                "PTKANT", "PTKNEG", "PTKVZ", "PTKZU", "PWAT", "PWAV", "PWS", "STPOS", "STR",
-                "TRUNC", "VAFIN", "VAIMP", "VAINF", "VAPP", "VMFIN", "VMINF", "VMPP", "VVFIN",
-                "VVIMP", "VVINF", "VVIZU", "VVPP", "XY" };
+        String[] posTags = { "$(", "$,", "$.", "<None>", "<root-POS>", "ADJA", "ADJD", "ADV",
+                "APPO", "APPR", "APPRART", "APZR", "ART", "CARD", "END", "FM", "ITJ", "KOKOM",
+                "KON", "KOUI", "KOUS", "MID", "NE", "NN", "NNE", "PDAT", "PDS", "PIAT", "PIS",
+                "PPER", "PPOSAT", "PPOSS", "PRELAT", "PRELS", "PRF", "PROAV", "PTKA", "PTKANT",
+                "PTKNEG", "PTKVZ", "PTKZU", "PWAT", "PWAV", "PWS", "STPOS", "STR", "TRUNC",
+                "VAFIN", "VAIMP", "VAINF", "VAPP", "VMFIN", "VMINF", "VMPP", "VVFIN", "VVIMP",
+                "VVINF", "VVIZU", "VVPP", "XY" };
 
-        String[] dependencyTags = new String[] { "--", "<None>", "<no-type>", "<root-type>",
-                "AC", "ADC", "AG", "AMS", "APP", "AVC", "CC", "CD", "CJ", "CM", "CP", "CVC",
-                "DA", "DH", "DM", "END", "EP", "JU", "MNR", "MO", "NG", "NK", "NMC", "OA", "OA2",
-                "OC", "OG", "OP", "PAR", "PD", "PG", "PH", "PM", "PNC", "RC", "RE", "RS", "SB",
-                "SBP", "SP", "SVP", "UC", "VO"  };
+        String[] dependencyTags = { "--", "<None>", "<no-type>", "<root-type>", "AC", "ADC", "AG",
+                "AMS", "APP", "AVC", "CC", "CD", "CJ", "CM", "CP", "CVC", "DA", "DM", "END", "EP",
+                "JU", "MNR", "MO", "NG", "NK", "NMC", "OA", "OA2", "OC", "OG", "OP", "PAR", "PD",
+                "PG", "PH", "PM", "PNC", "RC", "RE", "RS", "SB", "SBP", "SP", "SVP", "UC", "VO" };
 
 		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "stts", posTags, jcas);
@@ -85,7 +83,7 @@ public class MateParserTest
         JCas jcas = runTest("en", "We need a very complicated example sentence , which " +
                 "contains as many constituents and dependencies as possible .");
 
-        String[] dependencies = new String[] {
+        String[] dependencies = {
                 "[  0,  2]Dependency(SBJ) D[0,2](We) G[3,7](need)",
                 "[  3,  7]ROOT(ROOT) D[3,7](need) G[3,7](need)",
                 "[  8,  9]Dependency(NMOD) D[8,9](a) G[35,43](sentence)",
@@ -105,13 +103,13 @@ public class MateParserTest
                 "[102,110]Dependency(PMOD) D[102,110](possible) G[99,101](as)",
                 "[111,112]Dependency(P) D[111,112](.) G[3,7](need)" };
 
-        String[] posTags = new String[] { "#", "$", "''", "(", ")", ",", ".", ":", "<None>",
+        String[] posTags = { "#", "$", "''", "(", ")", ",", ".", ":", "<None>",
                 "<root-POS>", "CC", "CD", "DT", "END", "EX", "FW", "HYPH", "IN", "JJ", "JJR",
                 "JJS", "LS", "MD", "MID", "NIL", "NN", "NNP", "NNPS", "NNS", "PDT", "POS", "PRF",
                 "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "STPOS", "STR", "SYM", "TO", "UH", "VB",
                 "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB", "``" };
 
-        String[] dependencyTags = new String[] { "<None>", "<no-type>", "<root-type>", "ADV",
+        String[] dependencyTags = { "<None>", "<no-type>", "<root-type>", "ADV",
                 "ADV-GAP", "AMOD", "AMOD-GAP", "APPO", "BNF", "CONJ", "COORD", "DEP", "DEP-GAP",
                 "DIR", "DIR-GAP", "DIR-OPRD", "DIR-PRD", "DTV", "DTV-GAP", "END", "EXT", "EXT-GAP",
                 "EXTR", "EXTR-GAP", "GAP-LGS", "GAP-LOC", "GAP-LOC-PRD", "GAP-MNR", "GAP-NMOD",
@@ -134,7 +132,7 @@ public class MateParserTest
                 + "compliqué, qui contient des constituants que de nombreuses dépendances et que "
                 + "possible .");
 
-        String[] dependencies = new String[] {
+        String[] dependencies = {
                 "[  0,  4]Dependency(suj) D[0,4](Nous) G[5,10](avons)",
                 "[  5, 10]ROOT(root) D[5,10](avons) G[5,10](avons)",
                 "[ 11, 17]Dependency(obj) D[11,17](besoin) G[5,10](avons)",
@@ -157,25 +155,25 @@ public class MateParserTest
                 "[126,134]Dependency(obj) D[126,134](possible) G[122,125](que)",
                 "[135,136]Dependency(ponct) D[135,136](.) G[5,10](avons)" };
 
-        String[] posMapped = new String[] { "PR", "V", "NN", "PP", "NN", "PP", "NN", "ADV", "ADJ",
+        String[] posMapped = { "PR", "V", "NN", "PP", "NN", "PP", "NN", "ADV", "ADJ",
                 "PR", "V", "ART", "NN", "CONJ", "ART", "ADJ", "NN", "CONJ", "CONJ", "ADJ", "PUNC" };
 
-        String[] posOriginal = new String[] { "CLS", "V", "NC", "P", "NC", "P", "NC", "ADV", "ADJ",
+        String[] posOriginal = { "CLS", "V", "NC", "P", "NC", "P", "NC", "ADV", "ADJ",
                 "PROREL", "V", "DET", "NC", "CS", "DET", "ADJ", "NC", "CC", "CS", "ADJ", "PONCT" };
 
-        String[] posTags = new String[] { "<None>", "<root-POS>", "ADJ", "ADJWH", "ADV", "ADVWH",
+        String[] posTags = { "<None>", "<root-POS>", "ADJ", "ADJWH", "ADV", "ADVWH",
                 "CC", "CLO", "CLR", "CLS", "CS", "DET", "DETWH", "END", "ET", "I", "MID", "NC",
                 "NPP", "P", "P+D", "P+PRO", "PONCT", "PREF", "PRO", "PROREL", "PROWH", "STPOS",
                 "STR", "V", "VIMP", "VINF", "VPP", "VPR", "VS" };
 
-        String[] depTags = new String[] { "<None>", "<no-type>", "<root-type>", "END", "a_obj",
+        String[] depTags = { "<None>", "<no-type>", "<root-type>", "END", "a_obj",
                 "aff", "arg", "ato", "ats", "aux_caus", "aux_pass", "aux_tps", "comp", "coord",
                 "de_obj", "dep", "dep_coord", "det", "missinghead", "mod", "mod_rel", "obj",
                 "obj1", "p_obj", "ponct", "root", "suj" };
 
-        String[] unmappedPos = new String[] { "<None>", "<root-POS>", "END", "MID", "STPOS", "STR" };
+        String[] unmappedPos = { "<None>", "<root-POS>", "END", "MID", "STPOS", "STR" };
 
-        String[] unmappedDep = new String[] { "<None>", "<no-type>", "<root-type>", "END", "comp",
+        String[] unmappedDep = { "<None>", "<no-type>", "<root-type>", "END", "comp",
                 "missinghead", "obj1", "root" };
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
@@ -199,12 +197,6 @@ public class MateParserTest
         return TestRunner.runTest(aggregate, aLanguage, aText);
 	}
 
-	@Rule
-	public TestName name = new TestName();
-
-	@Before
-	public void printSeparator()
-	{
-		System.out.println("\n=== " + name.getMethodName() + " =====================");
-	}
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }

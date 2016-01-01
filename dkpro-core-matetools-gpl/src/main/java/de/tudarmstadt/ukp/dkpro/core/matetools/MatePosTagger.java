@@ -174,8 +174,8 @@ public class MatePosTagger
             sd.setLemmas(lemmas.toArray(new String[0]));
             String[] posTags = modelProvider.getResource().apply(sd).ppos;
 
-            for (int i = 0; i < posTags.length; i++) {
-                Token token = tokens.get(i);
+            for (int i = 1; i < posTags.length; i++) {
+                Token token = tokens.get(i-1);
                 Type posType = posMappingProvider.getTagType(posTags[i]);
                 POS posTag = (POS) cas.createAnnotation(posType, token.getBegin(), token.getEnd());
                 posTag.setPosValue(posTags[i]);
