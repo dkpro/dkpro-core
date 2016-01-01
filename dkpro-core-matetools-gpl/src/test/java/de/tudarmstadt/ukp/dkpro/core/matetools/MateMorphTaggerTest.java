@@ -24,15 +24,13 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
-import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
-
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class MateMorphTaggerTest
@@ -46,19 +44,31 @@ public class MateMorphTaggerTest
         JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel , welches "
                 + "möglichst viele Konstituenten und Dependenzen beinhaltet .");
 
-        String[] lemmas = new String[] { "wir", "brauchen", "ein", "sehr", "kompliziert",
+        String[] lemmas = { "wir", "brauchen", "ein", "sehr", "kompliziert",
                 "Beispiel", "--", "welcher", "möglichst", "vieler", "Konstituent", "und",
                 "Dependenz", "beinhalten", "--" };
 
-        String[] morphTagsExpected = { "nom|pl|*|1", "pl|1|pres|ind", "acc|sg|neut", "_",
-                "nom|sg|neut|pos", "nom|sg|neut", "_", "nom|sg|neut", "_", "nom|pl|*",
-                "gen|pl|masc", "_", "gen|pl|masc", "sg|3|pres|ind", "_"};
+        String[] morphTagsExpected = { 
+                "[  0,  3]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - Wir (nom|pl|*|1)",
+                "[  4, 12]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - brauchen (pl|1|pres|ind)",
+                "[ 13, 16]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - ein (acc|sg|neut)",
+                "[ 17, 21]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - sehr (_)",
+                "[ 22, 35]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - kompliziertes (nom|sg|neut|pos)",
+                "[ 36, 44]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - Beispiel (nom|sg|neut)",
+                "[ 45, 46]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - , (_)",
+                "[ 47, 54]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - welches (nom|sg|neut)",
+                "[ 55, 64]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - möglichst (_)",
+                "[ 65, 70]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - viele (nom|pl|*)",
+                "[ 71, 84]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - Konstituenten (gen|pl|masc)",
+                "[ 85, 88]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - und (_)",
+                "[ 89,100]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - Dependenzen (gen|pl|masc)",
+                "[101,111]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - beinhaltet (sg|3|pres|ind)",
+                "[112,113]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (_)" };
 
         AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
-        AssertAnnotations.assertMorpheme(morphTagsExpected, select(jcas, Morpheme.class));
+        AssertAnnotations.assertMorph(morphTagsExpected, select(jcas, MorphologicalFeatures.class));
     }
 
-    @Ignore
     @Test
     public void testFrench()
         throws Exception
@@ -82,7 +92,6 @@ public class MateMorphTaggerTest
         AssertAnnotations.assertMorpheme(morphTagsExpected, select(jcas, Morpheme.class));
     }
 
-    @Ignore
     @Test
     public void testSpanish()
         throws Exception
@@ -128,11 +137,5 @@ public class MateMorphTaggerTest
     }
 
     @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
-    }
+    public DkproTestContext testContext = new DkproTestContext();
 }

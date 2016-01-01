@@ -20,17 +20,16 @@ package de.tudarmstadt.ukp.dkpro.core.matetools;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
+
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
-
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class MateParserTest
@@ -199,12 +198,7 @@ public class MateParserTest
         return TestRunner.runTest(aggregate, aLanguage, aText);
 	}
 
-	@Rule
-	public TestName name = new TestName();
 
-	@Before
-	public void printSeparator()
-	{
-		System.out.println("\n=== " + name.getMethodName() + " =====================");
-	}
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }

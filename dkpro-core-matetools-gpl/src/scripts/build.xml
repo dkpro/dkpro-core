@@ -40,37 +40,49 @@
 
 	<target name="separate-jars" depends="de, en, es, fr, zh"/>
 
-	<target name="de">
+    <target name="de">
+        <antcall target="de-lemmatizer-tiger"/>
+        <antcall target="de-morphtagger-tiger"/>
+        <antcall target="de-tagger-tiger"/>
+        <antcall target="de-parser-tiger"/>
+        <antcall target="de-srl-tiger"/>
+	</target>
+
+	<target name="de-download">
+        <get
+            src="http://mate-tools.googlecode.com/files/ger-tagger%2Blemmatizer%2Bmorphology%2Bgraph-based-3.6%2B.tgz"
+            dest="target/download/ger-tagger_lemmatizer_morphology_graph-based-3.6_2B.tgz"
+            skipexisting="true"/>
+            
+        <untar
+            src="target/download/ger-tagger_lemmatizer_morphology_graph-based-3.6_2B.tgz"
+            dest="target/download"
+            compression="gzip"/>
+    </target>
+	
+	<target name="de-lemmatizer-tiger">
 		<mkdir dir="target/download"/>
-		
-		<get
-			src="http://mate-tools.googlecode.com/files/ger-tagger%2Blemmatizer%2Bmorphology%2Bgraph-based-3.6%2B.tgz"
-			dest="target/download/ger-tagger_lemmatizer_morphology_graph-based-3.6_2B.tgz"
-			skipexisting="true"/>
-			
-		<untar
-			src="target/download/ger-tagger_lemmatizer_morphology_graph-based-3.6_2B.tgz"
-			dest="target/download"
-			compression="gzip"/>
 
 		<!-- FILE: lemma-ger-3.6.model - - - - - - -  - - - - - - - - - - - - - 
 		  - 2012-10-24 | 2014-01-13  | 8ba8c53fe00c5fd254f347d7342b5e84
-		  - 2014-01-13 | now		 | 8a2db7cf8ad13c7f227db56b3930a4ed
+		  - 2014-01-13 | 2014-03-11  | 8a2db7cf8ad13c7f227db56b3930a4ed
+          - 2014-03-11 | now         | 5843016f334de7957a325ecd1866c64f
 		  -->
 		<install-stub-and-upstream-file 
-    		file="target/download/ger-tagger+lemmatizer+morphology+graph-based-3.6/lemma-ger-3.6.model" 
-    		md5="8a2db7cf8ad13c7f227db56b3930a4ed"
+    		file="target/download/lemma-ger-3.6.model" 
+    		md5="5843016f334de7957a325ecd1866c64f"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.matetools"
-    		upstreamVersion="20140113"
+    		upstreamVersion="20140311"
     		metaDataVersion="0"
     		tool="lemmatizer" 
     		language="de" 
     		variant="tiger" 
     		extension="model" >
 		</install-stub-and-upstream-file>
+    </target>
 
-
+    <target name="de-morphtagger-tiger" depends="de-download">
 		<!-- FILE: morphology-ger-3.6.model - - - - - - - - - - - - - - - - - - - - 
 		  - 2012-10-24 | 2014-01-13 | fb68d604f189feeb77afd06a023ddd59
 		  - 2014-01-13 | now        | ab42749fe4775d62431448066b9bcd5d
@@ -86,7 +98,9 @@
     		language="de" 
     		variant="tiger" 
     		extension="model"/>
+    </target>
 
+    <target name="de-tagger-tiger" depends="de-download">
 		<!-- FILE: tag-ger-3.6.model - - - - - - - - - - - - - - - - - - - - -
 		  - 2012-10-24 | 2014-01-13 | 62539b0c8f6f4a30715cc64c0ac2bb9d
 		  - 2014-01-13 | now        | 85d3ca987be7d78d39ff837f3ad79e2e
@@ -106,7 +120,9 @@
 				<entry key="pos.tagset" value="stts"/>
 			</metadata>
 		</install-stub-and-upstream-file>
+    </target>
 
+    <target name="de-parser-tiger" depends="de-download">
 		<!-- FILE: parser-ger-3.6.model - - - - - - - - - - - - - - - - - - - - - -
 		  - 2012-10-24 | 2014-01-13 | 015a08643dfc022ed9ff2378ef858af2
 		  - 2014-01-13 | now        | 9be4b94068acf55ab25f468aaca33677
@@ -128,10 +144,12 @@
 				<entry key="dependency.tagset" value="negra"/>
 			</metadata>
 		</install-stub-and-upstream-file>
-		
-		<!-- FILE: tiger-complete-predsonly-srl-4.11.srl.model  - - - - - - - - - - - - - - - - - - - - - -				  
-				  - 2013-01-05 | now        | 7408c578b0b7ee3a43565a1f3b056876
-				  -->
+    </target>
+
+    <target name="de-srl-tiger" depends="de-download">
+		<!-- FILE: tiger-complete-predsonly-srl-4.11.srl.model  - - - - - - - - - - - - - - - - - -			  
+		  - 2013-01-05 | now        | 7408c578b0b7ee3a43565a1f3b056876
+		  -->
 		<get 
     		src="https://mate-tools.googlecode.com/files/tiger-complete-predsonly-srl-4.11.srl.model" 
     		dest="target/download/srl-de.model" 
@@ -151,11 +169,17 @@
 	</target>
 
 	<target name="en">
-		<mkdir dir="target/download"/>
+        <antcall target="en-lemmatizer-conll2009"/>
+        <antcall target="en-tagger-conll2009"/>
+        <antcall target="en-parser-conll2009"/>
+        <antcall target="en-srl-conll2009"/>
+    </target>
 
+    <target name="en-lemmatizer-conll2009">
 		<!-- FILE: CoNLL2009-ST-English-ALL.anna-3.3.lemmatizer.model - - - - - - - - - - - - - - - 
 		  - 2013-01-17 | now        | 2b9bbdc88c84e3577b74ded1f214c42b
 		  -->
+        <mkdir dir="target/download"/>
 		<get 
     		src="http://mate-tools.googlecode.com/files/CoNLL2009-ST-English-ALL.anna-3.3.lemmatizer.model" 
     		dest="target/download/lemmatizer-en-conll2009.model" 
@@ -171,10 +195,13 @@
     		language="en" 
     		variant="conll2009" 
     		extension="model"/>
+    </target>
 
+    <target name="en-tagger-conll2009">
 		<!-- FILE: CoNLL2009-ST-English-ALL.anna-3.3.postagger.model - - - - - - - - - - - - - - - - 
 		  - 2013-01-17 | now        | f6d8bfdc70ffa41de4f009ec62423807
 		  -->
+        <mkdir dir="target/download"/>
 		<get 
     		src="http://mate-tools.googlecode.com/files/CoNLL2009-ST-English-ALL.anna-3.3.postagger.model" 
     		dest="target/download/tagger-en-conll2009.model" 
@@ -194,10 +221,13 @@
 				<entry key="pos.tagset" value="ptb"/>
 			</metadata>
 		</install-stub-and-upstream-file>
+    </target>
 
+    <target name="en-parser-conll2009">
 		<!-- FILE: CoNLL2009-ST-English-ALL.anna-3.3.parser.model - - - - - - - - - - - - - - - - - 
 		  - 2013-01-17 | now        | 50377962a1d2f37f953834bfb3b4b7b9
 		  -->
+        <mkdir dir="target/download"/>
 		<get 
     		src="http://mate-tools.googlecode.com/files/CoNLL2009-ST-English-ALL.anna-3.3.parser.model" 
     		dest="target/download/parser-en-conll2009.model" 
@@ -218,11 +248,13 @@
 				<entry key="dependency.tagset" value="conll2008"/>
 			</metadata>
 		</install-stub-and-upstream-file>
-		
+    </target>
 
+    <target name="en-srl-conll2009">
 		<!-- FILE: CoNLL2009-ST-English-ALL.anna-3.3.srl-4.1.srl.model - - - - - - - - - - - - - - - - - 
 		  - 2013-01-17 | now        | 5b6eafa91b6223899935a8c608dfbc17
 		  -->
+        <mkdir dir="target/download"/>
 		<get 
     		src="https://mate-tools.googlecode.com/files/CoNLL2009-ST-English-ALL.anna-3.3.srl-4.1.srl.model" 
     		dest="target/download/srl-en.model" 
@@ -239,36 +271,46 @@
     		variant="conll2009" 
     		extension="model">			
 		</install-stub-and-upstream-file>
-		
 	</target>
 
 	<target name="fr">
-		<mkdir dir="target/download"/>
+        <antcall target="fr-lemmatizer-ftb"/>
+        <antcall target="fr-morphtagger-ftb"/>
+        <antcall target="fr-tagger-ftb"/>
+        <antcall target="fr-parser-ftb"/>
+    </target>
 
+    <target name="fr-lemmatizer-ftb">
 		<!-- FILE: ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.lemmatizer.model- - - - - - - - - -
-		  - 2013-09-18 | now        | 42d0dcd2aefbd2a7e2a315ed240b460f
+		  - 2013-09-18 | 2014-02-23 | 42d0dcd2aefbd2a7e2a315ed240b460f
+          - 2014-02-23 | now        | 21dd8b646db0d15a4263ab4f65bab7cf
 		  -->
+        <mkdir dir="target/download"/>
+    	<!--
 		<get 
     		src="http://mate-tools.googlecode.com/files/ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.lemmatizer.model" 
     		dest="target/download/lemmatizer-fr-ftb.model" 
     		skipexisting="true"/>
+        -->
 		<install-stub-and-upstream-file 
-    		file="target/download/lemmatizer-fr-ftb.model" 
-    		md5="42d0dcd2aefbd2a7e2a315ed240b460f"
+    		file="target/download/lemma-fra.mdl" 
+    		md5="21dd8b646db0d15a4263ab4f65bab7cf"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.matetools"
-    		upstreamVersion="20130918"
+    		upstreamVersion="20140223"
     		metaDataVersion="0"
     		tool="lemmatizer" 
     		language="fr" 
     		variant="ftb" 
     		extension="model" >
 		</install-stub-and-upstream-file>
+    </target>
 
-
+    <target name="fr-morphtagger-ftb">
 		<!-- FILE: ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.morphtagger.model - - - - - - - - -
 		  - 2013-09-18 | now        | d305f33557c185ce483658dff37762aa
 		  -->
+        <mkdir dir="target/download"/>
 		<get 
     		src="http://mate-tools.googlecode.com/files/ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.morphtagger.model" 
     		dest="target/download/morphtagger-fr-ftb.model" 
@@ -284,10 +326,13 @@
     		language="fr" 
     		variant="ftb" 
     		extension="model"/>
+    </target>
 
+    <target name="fr-tagger-ftb">
 		<!-- FILE: ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.postagger.model - - - - - - - - - -
 		  - 2013-09-18 | now        | 5bfa668db119e8974768480a5b5ef5d7
 		  -->
+        <mkdir dir="target/download"/>
 		<get 
     		src="http://mate-tools.googlecode.com/files/ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.postagger.model" 
     		dest="target/download/tagger-fr-ftb.model" 
@@ -308,10 +353,13 @@
 				<entry key="pos.tagset" value="melt"/>
 			</metadata>
 		</install-stub-and-upstream-file>
+    </target>
 
+    <target name="fr-parser-ftb">
 		<!-- FILE: ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.parser.model - - - - - - - - - - - 
 		  - 2013-09-18 | now        | 37b1b7fad6a3798d0c9853036d928d37
 		  -->
+        <mkdir dir="target/download"/>
 		<get 
     		src="http://mate-tools.googlecode.com/files/ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.parser.model" 
     		dest="target/download/parser-fr-ftb.model" 

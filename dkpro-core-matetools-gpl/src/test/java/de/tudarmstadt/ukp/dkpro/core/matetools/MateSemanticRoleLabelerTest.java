@@ -31,11 +31,13 @@ import java.util.List;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
+import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class MateSemanticRoleLabelerTest
@@ -128,4 +130,7 @@ public class MateSemanticRoleLabelerTest
         assertEquals(AssertAnnotations.asCopyableString(expected, true),
                 AssertAnnotations.asCopyableString(actual, true));
     }
+
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }
