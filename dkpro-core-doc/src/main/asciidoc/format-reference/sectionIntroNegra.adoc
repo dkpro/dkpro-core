@@ -1,0 +1,10 @@
+See also:
+
+* link:http://www.coli.uni-saarland.de/%7Ethorsten/publications/Brants-CLAUS98.pdf[Thorsten Brants, 1997, NeGra Export Format for Annotated Corpora (Version 3)]
+
+Known corpora in this format:
+
+* link:http://www.linguateca.pt/floresta/corpus.html[Floresta Sintá(c)tica (Bosque)] - Portuguese
+* link:http://www.coli.uni-saarland.de/projects/sfb378/negra-corpus/[NeGra] - German
+* link:http://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora/tiger.html[TIGER] (until version 2.1) - German
+* link:http://www.sfs.uni-tuebingen.de/de/ascl/ressourcen/corpora/tueba-dz.html[TüBa D/Z] - German

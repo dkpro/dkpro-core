@@ -1,0 +1,4 @@
+Known corpora in this format:
+
+* link:http://nltk.org/nltk_data/[Brown Corpus (TEI XML Version)]
+* link:http://www.textgrid.de/Digitale-Bibliothek[Digitale Bibliothek bei TextGrid]

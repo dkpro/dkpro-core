@@ -1,0 +1,3 @@
+The TCF (Text Corpus Format) was created in the context of the CLARIN project. It is
+mainly used to exchange data between the different web-services that are part of the
+WebLicht platform.

@@ -1,0 +1,3 @@
+Known corpora in this format:
+
+* link:http://nltk.org/nltk_data/[CoNLL 2000 Chunking Corpus] - English (CoNLL 2000 format)

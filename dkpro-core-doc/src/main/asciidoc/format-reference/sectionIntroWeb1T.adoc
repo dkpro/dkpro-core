@@ -1,0 +1,9 @@
+The Web1T n-gram corpus is a huge collection of n-grams collected from the internet. The
+jweb1t library allows to access this corpus efficiently. This module provides support
+for the file format used by the Web1T n-gram corpus and allows to conveniently created
+jweb1t indexes.
+
+See also:
+
+* link:http://code.google.com/p/jweb1t/[jweb1t - Java API for text n-gram frequency data in Web1T format]
+* link:http://catalog.ldc.upenn.edu/LDC2006T13[Web1T n-gram corpus]
