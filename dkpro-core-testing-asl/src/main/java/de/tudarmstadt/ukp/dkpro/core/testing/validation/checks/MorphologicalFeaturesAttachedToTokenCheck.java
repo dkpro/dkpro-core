@@ -18,43 +18,22 @@
 package de.tudarmstadt.ukp.dkpro.core.testing.validation.checks;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.validation.Message.Level.ERROR;
-import static org.apache.uima.fit.util.JCasUtil.select;
 
-import java.util.Collection;
 import java.util.List;
 
-import org.apache.uima.fit.util.FSUtil;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.tcas.Annotation;
 
-import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.testing.validation.Message;
 
-public class ParentSetCheck implements Check
+public class MorphologicalFeaturesAttachedToTokenCheck
+    extends TokenAttributeAttachedToTokenCheck_ImplBase
 {
-    // tag::check-example[]
     @Override
     public boolean check(JCas aJCas, List<Message> aMessages)
     {
-        for (Constituent parent : select(aJCas, Constituent.class)) {
-            Collection<Annotation> children = select(parent.getChildren(), Annotation.class);
-            for (Annotation child : children) {
-                Annotation declParent = FSUtil.getFeature(child, "parent", Annotation.class);
-                
-                if (declParent == null) {
-                    aMessages.add(new Message(this, ERROR, String.format(
-                            "Child without parent set: %s", child)));
-                    
-                }
-                else if (declParent != parent) {
-                    aMessages.add(new Message(this, ERROR, String.format(
-                            "Child points to wrong parent: %s", child)));
-                    
-                }
-            }
-        }
-        
+        check(aJCas, aMessages, "morph", MorphologicalFeatures.class);
+
         return aMessages.stream().anyMatch(m -> m.level == ERROR);
     }
-    // end::check-example[]
 }

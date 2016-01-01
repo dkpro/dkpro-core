@@ -18,8 +18,11 @@
 package de.tudarmstadt.ukp.dkpro.core.testing.validation.checks;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.validation.Message.Level.ERROR;
+import static de.tudarmstadt.ukp.dkpro.core.testing.validation.Message.Level.INFO;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectAt;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,41 +32,43 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.testing.validation.Message;
 
-public class AllTokenAttributesAttachedToTokenCheck implements Check
+public abstract class TokenAttributeAttachedToTokenCheck_ImplBase
+    implements Check
 {
-    @Override
-    public boolean check(JCas aJCas, List<Message> aMessages)
-    {
-        check(aJCas, aMessages, "lemma", Lemma.class);
-        check(aJCas, aMessages, "stem", Stem.class);
-        check(aJCas, aMessages, "pos", POS.class);
-        check(aJCas, aMessages, "morph", MorphologicalFeatures.class);
-        
-        return aMessages.stream().anyMatch(m -> m.level == ERROR);
-    }
-    
-    public void check(JCas aJCas, List<Message> aMessages, String aFeature, Class<? extends Annotation> aType)
+    protected void check(JCas aJCas, List<Message> aMessages, String aFeature,
+            Class<? extends Annotation> aType)
     {
         Feature feat = JCasUtil.getType(aJCas, Token.class).getFeatureByBaseName(aFeature);
-        
+
         List<AnnotationFS> attached = select(aJCas, Token.class).stream()
                 .map(t -> (AnnotationFS) t.getFeatureValue(feat))
+                .filter(v -> v != null)
                 .collect(Collectors.toList());
-        List<AnnotationFS> all = select(aJCas, aType).stream()
-                .collect(Collectors.toList());
-        
+        List<AnnotationFS> all = select(aJCas, aType).stream().collect(Collectors.toList());
+
         all.removeAll(attached);
         
+        // We only require that one attribute at a given position is attached. There may be
+        // additional secondary attributes at the same position that are not attached.
+        List<AnnotationFS> secondary = new ArrayList<>();
+        attached.forEach(attr -> 
+                selectAt(aJCas, aType, attr.getBegin(), attr.getEnd()).forEach(
+                            secAttr -> secondary.add(secAttr)));
+        all.removeAll(secondary);
+        
         for (AnnotationFS a : all) {
-            aMessages.add(new Message(this, ERROR, String.format("Unattached %s: %s [%d..%d]",
-                    aType.getSimpleName(), a.getType().getName(), a.getBegin(), a.getEnd())));
+            aMessages.add(new Message(this, ERROR, String.format(
+                    "Unattached attribute %s: %s [%d..%d]", aType.getSimpleName(), a.getType()
+                            .getName(), a.getBegin(), a.getEnd())));
+        }
+
+        for (AnnotationFS a : secondary) {
+            aMessages.add(new Message(this, INFO, String.format(
+                    "Secondary attribute %s: %s [%d..%d]", aType.getSimpleName(), a.getType()
+                            .getName(), a.getBegin(), a.getEnd())));
         }
     }
 }

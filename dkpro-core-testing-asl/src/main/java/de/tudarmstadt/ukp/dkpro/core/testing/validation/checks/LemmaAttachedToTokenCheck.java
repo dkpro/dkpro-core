@@ -17,34 +17,23 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.testing.validation.checks;
 
-import static org.junit.Assert.assertTrue;
+import static de.tudarmstadt.ukp.dkpro.core.testing.validation.Message.Level.ERROR;
 
 import java.util.List;
 
-import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
-import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.testing.validation.CasValidator;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.testing.validation.Message;
-import static de.tudarmstadt.ukp.dkpro.core.testing.validation.Message.Level.ERROR;
 
-public class AllTokenAttributesAttachedToTokenCheckTest
+public class LemmaAttachedToTokenCheck
+    extends TokenAttributeAttachedToTokenCheck_ImplBase
 {
-    @Test
-    public void test()
-        throws Exception
+    @Override
+    public boolean check(JCas aJCas, List<Message> aMessages)
     {
-        JCas jcas = JCasFactory.createJCas();
-        jcas.setDocumentText("test");
-        new POS(jcas, 0, 4).addToIndexes();
-        
-        CasValidator validator = new CasValidator(AllTokenAttributesAttachedToTokenCheck.class);
-        List<Message> messages = validator.analyze(jcas);
-        
-        messages.forEach(m -> System.out.println(m));
-        
-        assertTrue(messages.stream().anyMatch(m -> m.level == ERROR));
+        check(aJCas, aMessages, "lemma", Lemma.class);
+
+        return aMessages.stream().anyMatch(m -> m.level == ERROR);
     }
 }

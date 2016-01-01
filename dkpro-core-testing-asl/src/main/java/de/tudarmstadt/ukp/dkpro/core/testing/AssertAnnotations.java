@@ -205,6 +205,10 @@ public class AssertAnnotations
         assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
     }
 
+    /**
+     * @deprecated Use {@link #assertMorph(String[], Collection)}
+     */
+    @Deprecated
     public static void assertMorpheme(String[] aExpected, Collection<Morpheme> aActual)
     {
         if (aExpected == null) {
@@ -804,7 +808,7 @@ public class AssertAnnotations
     }
 
     @SafeVarargs
-    public static void assertValid(JCas jcas, Class<? extends Check>... aExtras)
+    public static List<Message> assertValid(JCas jcas, Class<? extends Check>... aExtras)
     {
         CasValidator validator = CasValidator.createWithAllChecks();
         for (Class<? extends Check> extra : aExtras) {
@@ -812,15 +816,17 @@ public class AssertAnnotations
         }
         List<Message> messages = validator.analyze(jcas);
         
-        messages.forEach(m -> System.out.println(m));
-        
         List<String> errors = messages.stream()
                 .filter(m -> m.level == ERROR)
                 .map(m -> m.toString())
                 .collect(Collectors.toList());
-        
+
+        errors.forEach(m -> System.out.println(m));
+
         List<String> expected = Collections.emptyList();
         assertEquals(asCopyableString(expected, true), asCopyableString(errors, true));
+        
+        return messages;
     }
 
     public static void assertValid(Collection<Message> messages)
