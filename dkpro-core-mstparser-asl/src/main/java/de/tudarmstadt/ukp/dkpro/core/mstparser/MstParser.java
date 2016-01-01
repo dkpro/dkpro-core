@@ -329,13 +329,14 @@ public class MstParser
         for (Sentence sentence : select(jcas, Sentence.class)) {
             int tokencount = 0;
 
-            for (Token token : selectCovered(jcas, Token.class, sentence)) {
+            List<Token> tokens = selectCovered(jcas, Token.class, sentence);
+            for (Token token : tokens) {
                 out.write(token.getCoveredText() + "\t");
                 tokencount++;
             }
             out.write("\n");
-            for (POS pos : selectCovered(jcas, POS.class, sentence)) {
-                out.write(pos.getPosValue() + "\t");
+            for (Token token : tokens) {
+                out.write(token.getPos().getPosValue() + "\t");
 
             }
             // Dummy values for labels
