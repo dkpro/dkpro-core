@@ -884,6 +884,10 @@ public abstract class ResourceObjectProviderBase<M>
                 sb.append("  <artifactId>").append(artifactId).append("</artifactId>\n");
                 sb.append("  <version>").append(version).append("</version>\n");
                 sb.append("</dependency>\n");
+                sb.append('\n');
+                sb.append("Please consider that the model you are trying to use may not be publicly\n");
+                sb.append("distributable. Please refer to the DKPro Core User Guide for instructions\n"); 
+                sb.append("on how to package non-redistributable models.");
             }
             else {
                 sb.append(
