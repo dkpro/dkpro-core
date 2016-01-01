@@ -24,15 +24,12 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
-import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class MateMorphTaggerTest
@@ -46,19 +43,26 @@ public class MateMorphTaggerTest
         JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel , welches "
                 + "möglichst viele Konstituenten und Dependenzen beinhaltet .");
 
-        String[] lemmas = new String[] { "wir", "brauchen", "ein", "sehr", "kompliziert",
-                "Beispiel", "--", "welcher", "möglichst", "vieler", "Konstituent", "und",
-                "Dependenz", "beinhalten", "--" };
+        String[] morphTagsExpected = { 
+                "[  0,  3]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - Wir (case=nom|number=pl|gender=*|person=1)",
+                "[  4, 12]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - brauchen (number=pl|person=1|tense=pres|mood=ind)",
+                "[ 13, 16]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - ein (case=acc|number=sg|gender=neut)",
+                "[ 17, 21]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - sehr (_)",
+                "[ 22, 35]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - kompliziertes (case=acc|number=sg|gender=neut|degree=pos)",
+                "[ 36, 44]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - Beispiel (case=acc|number=sg|gender=neut)",
+                "[ 45, 46]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - , (_)",
+                "[ 47, 54]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - welches (case=acc|number=sg|gender=neut)",
+                "[ 55, 64]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - möglichst (_)",
+                "[ 65, 70]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - viele (case=acc|number=pl|gender=*)",
+                "[ 71, 84]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - Konstituenten (case=acc|number=pl|gender=*)",
+                "[ 85, 88]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - und (_)",
+                "[ 89,100]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - Dependenzen (case=acc|number=pl|gender=fem)",
+                "[101,111]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - beinhaltet (number=sg|person=3|tense=pres|mood=ind)",
+                "[112,113]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (_)" };
 
-        String[] morphTagsExpected = { "nom|pl|*|1", "pl|1|pres|ind", "acc|sg|neut", "_",
-                "nom|sg|neut|pos", "nom|sg|neut", "_", "nom|sg|neut", "_", "nom|pl|*",
-                "gen|pl|masc", "_", "gen|pl|masc", "sg|3|pres|ind", "_"};
-
-        AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
-        AssertAnnotations.assertMorpheme(morphTagsExpected, select(jcas, Morpheme.class));
+        AssertAnnotations.assertMorph(morphTagsExpected, select(jcas, MorphologicalFeatures.class));
     }
 
-    @Ignore
     @Test
     public void testFrench()
         throws Exception
@@ -69,20 +73,32 @@ public class MateMorphTaggerTest
                 + "compliqué, qui contient des constituants que de nombreuses dépendances et que "
                 + "possible .");
 
-        String[] lemmas = new String[] { "il", "avoir", "besoin", "d'une", "phrase", "par",
-                "exemple", "très", "compliqué,", "qui", "contenir", "de", "constituant", "que",
-                "de", "nombreux", "dépendance", "et", "que", "possible", "." };
+        String[] morphTagsExpected = { 
+                "[  0,  4]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - Nous (g=m|n=p|p=1|s=suj)",
+                "[  5, 10]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - avons (m=ind|n=p|p=1|t=pst)",
+                "[ 11, 17]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - besoin (g=m|n=s|s=c)",
+                "[ 18, 23]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - d'une (_)",
+                "[ 24, 30]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - phrase (g=f|n=s|s=c)",
+                "[ 31, 34]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - par (_)",
+                "[ 35, 42]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - exemple (g=m|n=s|s=c)",
+                "[ 43, 47]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - très (_)",
+                "[ 48, 58]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - compliqué, (g=m|n=s|s=qual)",
+                "[ 59, 62]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - qui (g=m|n=p|p=3|s=rel)",
+                "[ 63, 71]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - contient (m=ind|n=s|p=3|t=pst)",
+                "[ 72, 75]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - des (g=m|n=p|s=ind)",
+                "[ 76, 88]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - constituants (g=m|n=p|s=c)",
+                "[ 89, 92]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - que (g=m|n=p|p=3|s=rel)",
+                "[ 93, 95]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - de (g=f|n=p|s=ind)",
+                "[ 96,106]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - nombreuses (g=f|n=p|s=qual)",
+                "[107,118]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - dépendances (g=f|n=p|s=c)",
+                "[119,121]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - et (s=c)",
+                "[122,125]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - que (s=s)",
+                "[126,134]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - possible (g=m|n=s|s=qual)",
+                "[135,136]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (s=s)" };
 
-        String[] morphTagsExpected = { "nom|pl|masc|pos", "acc|sg|neut", "nom|pl|neut",
-                "nom|pl|neut", "_", "acc|sg|neut", "_", "nom|pl|neut", "nom|pl|neut", "*|*|*",
-                "nom|pl|neut", "nom|pl|neut", "dat|sg|masc", "acc|pl|*", "gen|sg|masc",
-                "nom|pl|neut", "acc|sg|fem|sup", "nom|pl|neut", "nom|pl|neut", "nom|pl|neut" };
-
-        AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
-        AssertAnnotations.assertMorpheme(morphTagsExpected, select(jcas, Morpheme.class));
+        AssertAnnotations.assertMorph(morphTagsExpected, select(jcas, MorphologicalFeatures.class));
     }
 
-    @Ignore
     @Test
     public void testSpanish()
         throws Exception
@@ -92,26 +108,30 @@ public class MateMorphTaggerTest
         JCas jcas = runTest("es", "Necesitamos una oración de ejemplo muy complicado , que "
                 + "contiene la mayor cantidad de componentes y dependencias como sea posible .");
 
-        String[] lemmas = new String[] { "necesitar", "uno", "oración", "de", "ejemplo", "mucho",
-                "complicado", ",", "que", "contener", "el", "mayor", "cantidad", "de",
-                "componente", "y", "dependencia", "como", "ser", "posible", "."};
-
         String[] morphTagsExpected = {
-                "postype=main|gen=c|num=p|person=1|mood=indicative|tense=present",
-                "postype=indefinite|gen=f|num=s", "postype=common|gen=f|num=s",
-                "postype=preposition|gen=c|num=c", "postype=common|gen=m|num=s", "_",
-                "postype=qualificative|gen=m|num=s|posfunction=participle", "punct=comma",
-                "postype=relative|gen=c|num=c",
-                "postype=main|gen=c|num=s|person=3|mood=indicative|tense=present",
-                "postype=article|gen=f|num=s", "postype=qualificative|gen=c|num=s",
-                "postype=common|gen=f|num=s", "postype=preposition|gen=c|num=c",
-                "postype=common|gen=m|num=p", "postype=coordinating", "postype=common|gen=f|num=p",
-                "postype=subordinating",
-                "postype=semiauxiliary|gen=c|num=s|person=3|mood=subjunctive|tense=present",
-                "postype=qualificative|gen=c|num=s", "punct=period"};
+                "[  0, 11]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - Necesitamos (postype=main|gen=c|num=p|person=1|mood=indicative|tense=present)",
+                "[ 12, 15]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - una (postype=indefinite|gen=f|num=s)",
+                "[ 16, 23]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - oración (postype=common|gen=f|num=s)",
+                "[ 24, 26]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - de (postype=preposition|gen=c|num=c)",
+                "[ 27, 34]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - ejemplo (postype=common|gen=m|num=s)",
+                "[ 35, 38]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - muy (_)",
+                "[ 39, 49]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - complicado (postype=qualificative|gen=m|num=s|posfunction=participle)",
+                "[ 50, 51]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - , (punct=comma)",
+                "[ 52, 55]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - que (postype=relative|gen=c|num=c)",
+                "[ 56, 64]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - contiene (postype=main|gen=c|num=s|person=3|mood=indicative|tense=present)",
+                "[ 65, 67]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - la (postype=article|gen=f|num=s)",
+                "[ 68, 73]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - mayor (postype=qualificative|gen=c|num=s)",
+                "[ 74, 82]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - cantidad (postype=common|gen=f|num=s)",
+                "[ 83, 85]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - de (postype=preposition|gen=c|num=c)",
+                "[ 86, 97]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - componentes (postype=common|gen=m|num=p)",
+                "[ 98, 99]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - y (postype=coordinating)",
+                "[100,112]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - dependencias (postype=common|gen=f|num=p)",
+                "[113,117]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - como (postype=subordinating)",
+                "[118,121]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - sea (postype=semiauxiliary|gen=c|num=s|person=3|mood=subjunctive|tense=present)",
+                "[122,129]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - posible (postype=qualificative|gen=c|num=s)",
+                "[130,131]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (punct=period)"};
 
-        AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
-        AssertAnnotations.assertMorpheme(morphTagsExpected, select(jcas, Morpheme.class));
+        AssertAnnotations.assertMorph(morphTagsExpected, select(jcas, MorphologicalFeatures.class));
     }
 
     private JCas runTest(String aLanguage, String aText)
@@ -128,11 +148,5 @@ public class MateMorphTaggerTest
     }
 
     @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
-    }
+    public DkproTestContext testContext = new DkproTestContext();
 }
