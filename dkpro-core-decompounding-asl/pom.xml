@@ -96,6 +96,8 @@
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-core</artifactId>
+            <!-- #745 - Decompounding module needs upgrade to Lucene 4.4.0 -->
+            <version>3.6.2</version>
 		</dependency>
 		<dependency>
 			<groupId>de.abelssoft</groupId>
