@@ -65,6 +65,8 @@ public class MorphologicalFeaturesParser
     {
         setContextObject(aObject);
 
+        setDefault(META_MORPH_TAGSET, "default");
+        
         addAutoOverride(ComponentParameters.PARAM_MORPH_MAPPING_LOCATION, LOCATION);
         addAutoOverride(ComponentParameters.PARAM_LANGUAGE, LANGUAGE);
         applyAutoOverrides(aObject);
