@@ -23,15 +23,13 @@ import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
-
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class OpenNlpParserTest
@@ -97,17 +95,12 @@ public class OpenNlpParserTest
 		AnalysisEngineDescription parser = createEngineDescription(OpenNlpParser.class,
 				OpenNlpParser.PARAM_VARIANT, aVariant,
 				OpenNlpParser.PARAM_PRINT_TAGSET, true,
+				OpenNlpParser.PARAM_WRITE_POS, true,
 				OpenNlpParser.PARAM_WRITE_PENN_TREE, true);
 
 		return TestRunner.runTest(parser, aLanguage, aDocument);
 	}
 
-	@Rule
-	public TestName name = new TestName();
-
-	@Before
-	public void printSeparator()
-	{
-		System.out.println("\n=== " + name.getMethodName() + " =====================");
-	}
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }

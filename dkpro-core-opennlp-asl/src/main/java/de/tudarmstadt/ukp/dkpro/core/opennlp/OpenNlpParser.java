@@ -60,7 +60,8 @@ import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpParserTagsetDescrip
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionProvider;
 
 /**
- * Parser annotator using OpenNLP. Requires {@link Sentence}s to be annotated before.
+ * OpenNLP parser. The parser ignores existing POS tags and internally creates new ones. However,
+ * these tags are only added as annotation if explicitly requested via {@link #PARAM_WRITE_POS}.
  */
 @TypeCapability(
 	    inputs = {
@@ -134,7 +135,7 @@ public class OpenNlpParser
 	 * <p>Default: {@code true}</p>
 	 */
 	public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
-	@ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
+	@ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "false")
 	private boolean createPosTags;
 
 	/**
