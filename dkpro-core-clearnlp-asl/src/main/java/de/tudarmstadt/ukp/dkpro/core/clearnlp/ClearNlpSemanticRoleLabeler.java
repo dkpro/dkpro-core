@@ -64,6 +64,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 
 /**
  * ClearNLP semantic role labeller.
@@ -293,6 +294,13 @@ public class ClearNlpSemanticRoleLabeler
 			// Generate:
 			// Dependency relations
 			for (Dependency dep : selectCovered(Dependency.class, sentence)) {
+			    if (dep instanceof ROOT) {
+			        // #736 ClearNlpSemanticRoleLabelerTest gets caught in infinite loop
+			        // ClearNLP parser creates roots that do not have a head. We have to replicate
+			        // this here to avoid running into an endless loop.
+			        continue;
+			    }
+			    
 				int headIndex = tokens.indexOf(dep.getGovernor());
 				int tokenIndex = tokens.indexOf(dep.getDependent());
 

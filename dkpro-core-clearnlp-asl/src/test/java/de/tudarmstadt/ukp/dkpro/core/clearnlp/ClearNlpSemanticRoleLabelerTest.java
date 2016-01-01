@@ -24,7 +24,6 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
@@ -34,7 +33,6 @@ import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
-@Ignore("Test appears to get caught in an infinite loop - needs investigation")
 public class ClearNlpSemanticRoleLabelerTest
 {
 	static final String documentEnglish = "We need a very complicated example sentence , which "
