@@ -63,22 +63,30 @@ public class MateLemmatizer
      */
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-    protected String language;
+    private String language;
 
     /**
      * Override the default variant used to locate the model.
      */
     public static final String PARAM_VARIANT = "variant";
     @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
-    protected String variant;
+    private String variant;
 
     /**
      * Load the model from this location instead of locating the model automatically.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
-    protected String modelLocation;
+    private String modelLocation;
 
+    /**
+     * Try reconstructing proper casing for lemmata. This is useful for German, but e.g. for 
+     * English creates odd results.
+     */
+    public static final String PARAM_UPPERCASE = "uppercase";
+    @ConfigurationParameter(name = PARAM_UPPERCASE, mandatory = true, defaultValue="false")
+    private boolean uppercase;
+    
     private CasConfigurableProviderBase<Lemmatizer> modelProvider;
 
     @Override
@@ -109,7 +117,7 @@ public class MateLemmatizer
             {
                 File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
 
-                return new Lemmatizer(modelFile.getPath()); // create a lemmatizer
+                return new Lemmatizer(modelFile.getPath(), uppercase); // create a lemmatizer
             }
         };
     }
