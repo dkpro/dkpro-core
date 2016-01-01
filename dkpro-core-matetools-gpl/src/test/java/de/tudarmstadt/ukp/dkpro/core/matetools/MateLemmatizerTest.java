@@ -38,9 +38,9 @@ public class MateLemmatizerTest
         throws Exception
     {
         JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel , welches "
-                + "möglichst viele Konstituenten und Dependenzen beinhaltet .");
+                + "möglichst viele Konstituenten und Dependenzen beinhaltet .", true);
 
-        String[] lemmas = new String[] { "wir", "brauchen", "ein", "sehr", "kompliziert",
+        String[] lemmas = { "wir", "brauchen", "ein", "sehr", "kompliziert",
                 "Beispiel", "--", "welcher", "möglichst", "vieler", "Konstituent", "und",
                 "Dependenz", "beinhalten", "--" };
 
@@ -52,9 +52,9 @@ public class MateLemmatizerTest
         throws Exception
     {
         JCas jcas = runTest("en", "We need a very complicated example sentence , which "
-                + "contains as many constituents and dependencies as possible .");
+                + "contains as many constituents and dependencies as possible .", false);
 
-        String[] lemmas = new String[] { "we", "need", "a", "very", "complicate", "example",
+        String[] lemmas = { "we", "need", "a", "very", "complicate", "example",
                 "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
                 "dependency", "as", "possible", "." };
 
@@ -67,21 +67,22 @@ public class MateLemmatizerTest
     {
         JCas jcas = runTest("fr", "Nous avons besoin d'une phrase par exemple très "
                 + "compliqué, qui contient des constituants que de nombreuses dépendances et que "
-                + "possible .");
+                + "possible .", false);
 
-        String[] lemmas = new String[] { "il", "avoir", "besoin", "d'une", "phrase", "par",
+        String[] lemmas = { "il", "avoir", "besoin", "d'une", "phrase", "par",
                 "exemple", "très", "compliqué,", "qui", "contenir", "de", "constituant", "que",
                 "de", "nombreux", "dépendance", "et", "que", "possible", "." };
 
         AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
     }
 
-    private JCas runTest(String aLanguage, String aText)
+    private JCas runTest(String aLanguage, String aText, boolean aUppercase)
         throws Exception
     {
         Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 2000000000);
 
-        AnalysisEngineDescription lemma = createEngineDescription(MateLemmatizer.class);
+        AnalysisEngineDescription lemma = createEngineDescription(MateLemmatizer.class,
+                MateLemmatizer.PARAM_UPPERCASE, aUppercase);
 
         return TestRunner.runTest(lemma, aLanguage, aText);
     }
