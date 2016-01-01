@@ -82,7 +82,7 @@
                             <doctype>book</doctype>
                             <attributes>
                                 <toc>left</toc>
-                                <include-dir>./user-guide/</include-dir>
+                                <include-dir>${project.basedir}/src/main/asciidoc/user-guide/</include-dir>
                                 <source-dir>${project.basedir}/../</source-dir>
                                 <generated-dir>${project.basedir}/target/generated-adoc/</generated-dir>
                             </attributes>
@@ -121,7 +121,7 @@
                             <doctype>book</doctype>
                             <attributes>
                                 <toc>left</toc>
-                                <include-dir>./developer-guide/</include-dir>
+                                <include-dir>${project.basedir}/src/main/asciidoc/developer-guide/</include-dir>
                                 <source-dir>${project.basedir}/../</source-dir>
                                 <generated-dir>${project.basedir}/target/generated-adoc/</generated-dir>
                             </attributes>
@@ -161,7 +161,7 @@
                             <doctype>book</doctype>
                             <attributes>
                                 <toc>left</toc>
-                                <include-dir>./tagset-reference/</include-dir>
+                                <include-dir>${project.basedir}/src/main/asciidoc/tagset-reference/</include-dir>
                                 <source-dir>${project.basedir}/../</source-dir>
                                 <generated-dir>${project.basedir}/target/generated-adoc/</generated-dir>
                             </attributes>
@@ -181,7 +181,7 @@
                             <doctype>book</doctype>
                             <attributes>
                                 <toc>left</toc>
-                                <include-dir>./component-reference/</include-dir>
+                                <include-dir>${project.basedir}/src/main/asciidoc/component-reference/</include-dir>
                                 <source-dir>${project.basedir}/../</source-dir>
                                 <generated-dir>${project.basedir}/target/generated-adoc/</generated-dir>
                             </attributes>
@@ -201,7 +201,7 @@
                             <doctype>book</doctype>
                             <attributes>
                                 <toc>left</toc>
-                                <include-dir>./format-reference/</include-dir>
+                                <include-dir>${project.basedir}/src/main/asciidoc/format-reference/</include-dir>
                                 <source-dir>${project.basedir}/../</source-dir>
                                 <generated-dir>${project.basedir}/target/generated-adoc/</generated-dir>
                             </attributes>

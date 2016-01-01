@@ -1,0 +1,14 @@
+The IMS Open Corpus Workbench is a linguistic search engine. It uses a tab-separated format
+with limited markup (e.g. for sentences, documents, but not recursive structures like
+parse-trees). If a local installation of the corpus workbench is available, it can be used
+by this module to immediately generate the corpus workbench index format. Search is not
+supported by this module.
+
+See also: 
+
+* link:http://cwb.sourceforge.net[IMS Open Corpus Workbench]
+
+Known corpora in this format:
+
+* link:http://wacky.sslmit.unibo.it[WaCky - The Web-As-Corpus Kool Yinitiative] - corpora crawled 
+  from the world wide web in several different languages (DeWaC, UkWaC, ItWaC, etc.)

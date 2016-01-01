@@ -1,0 +1,6 @@
+The CAS is the native data model used by UIMA. There are various ways of saving CAS
+data, using XMI, XCAS, or binary formats. This module supports the binary formats. 
+
+See also:
+
+* link:http://uima.apache.org/d/uimaj-2.4.2/references.html#ugr.ref.compress[Compressed Binary CASes]

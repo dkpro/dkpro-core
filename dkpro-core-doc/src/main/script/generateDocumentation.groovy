@@ -135,6 +135,7 @@ new File(project.basedir, '..').eachFileRecurse(FILES) {
         }
     }
 }
+log.info("Found ${typesystems.size()} typesystems");
 
 // Scan the UIMA component descriptors.
 new File(project.basedir, '..').eachFileRecurse(FILES) {
@@ -192,6 +193,8 @@ new File(project.basedir, '..').eachFileRecurse(FILES) {
         }
     }
 }
+log.info("Found ${engines.size()} components");
+log.info("Found ${formats.size()} formats");
 
 // Scan the build.xmf files used for packaging models.
 new File(project.basedir, '..').eachFileRecurse(FILES) {
@@ -256,6 +259,8 @@ new File(project.basedir, '..').eachFileRecurse(FILES) {
         models.addAll(modelXmls);
     }
 }
+
+log.info("Found ${models.size()} models");
 
 models = models.sort { a,b ->
     (a.@language as String) <=> (b.@language as String) ?: 
@@ -327,6 +332,8 @@ new File(project.basedir, '..').eachFileRecurse(FILES) {
     }
 }
 
+log.info("Found ${tagsets.size()} tagsets");
+
 tagsets = tagsets.sort { a,b ->
     (a.value.tool as String) <=> (b.value.tool as String) ?:
     (a.value.lang as String) <=> (b.value.lang as String) ?:
@@ -341,7 +348,6 @@ engines.each {
     }
 }
 inputOutputTypes = inputOutputTypes.sort().unique();
-
 
 def te = new groovy.text.SimpleTemplateEngine(this.class.classLoader);
 new File("${project.basedir}/src/main/script/templates/").eachFile(FILES) { tf ->

@@ -10,6 +10,19 @@ engines
 %>
 === ${group.key}
 
+.Analysis Components in group ${group.key} (${group.value.size()})
+[options="header"]
+|====
+|Component|Description
+
+<% group.value.each { %>
+|${Util.engineLink(it.key)}
+|${Util.shortDesc(it.value.spec.metaData.description)}
+
+<% } %>
+|====
+
+
 <% group.value.each { 
 def engine = it.value; %>
 [[engine-${ it.key }]]

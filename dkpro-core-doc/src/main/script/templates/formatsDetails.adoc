@@ -8,6 +8,11 @@ formats.sort { it.key }.each { %>
 
 [small]#*_Artifact ID:_* __${it.value.artifactId}__#
 
+<% if (new File(project.basedir, 
+    "src/main/asciidoc/format-reference/sectionIntro${it.key}.adoc").exists()) { %>
+include::{include-dir}sectionIntro${it.key}.adoc[]
+<% } %>
+
 <% if (it.value.readerSpec) { %>
 [[format-${ it.value.readerClass }]]
 [discrete]

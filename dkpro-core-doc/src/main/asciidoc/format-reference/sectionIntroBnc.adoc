@@ -1,0 +1,3 @@
+Known corpora in this format:
+
+* link:http://www.natcorp.ox.ac.uk[British National Corpus]

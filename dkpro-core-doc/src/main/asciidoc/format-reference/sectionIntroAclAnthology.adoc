@@ -1,0 +1,3 @@
+Known corpora in this format:
+
+* link:http://acl-arc.comp.nus.edu.sg[ACL Anthology Reference Corpus (ACL ARC)]

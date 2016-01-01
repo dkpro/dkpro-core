@@ -1,0 +1,8 @@
+TGrep and TGrep2 are a tools to search over syntactic parse trees represented as bracketed
+structures. This module supports in particular TGrep2 and allows to conveniently
+generate TGrep2 indexes which can then be searched. Search is not supported by this
+module.
+
+See also:
+
+* link:http://tedlab.mit.edu/%7Edr/Tgrep2/[TGrep2]

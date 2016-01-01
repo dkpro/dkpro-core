@@ -1,0 +1,5 @@
+Access the online Wikipedia and extract its contents using the Bliki engine.
+
+See also: 
+
+* link:http://code.google.com/p/gwtwiki/[Java Wikipedia API (Bliki engine)]

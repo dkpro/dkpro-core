@@ -1,0 +1,13 @@
+Known corpora in this format:
+
+* link:http://ilk.uvt.nl/conll/free_data.html[CoNLL-X Shared Task free data] - Danish, Dutch, Portuguese, and Swedish
+* link:https://code.google.com/p/copenhagen-dependency-treebank/[Copenhagen Dependency Treebanks] - Danish
+* link:http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/[FinnTreeBank] - Finnish (in recent versions with additional pseudo-XML metadata)
+* link:http://www.linguateca.pt/floresta/CoNLL-X[Floresta Sintá(c)tica (Bosque-CoNLL)] - Portuguese
+* link:https://gforge.inria.fr/projects/sequoiabank/[Sequoia corpus] - French
+* link:http://nlp.ffzg.hr/resources/corpora/setimes-hr/[SETimes.HR corpus and dependency treebank of Croatian] - Croatian
+* link:http://zil.ipipan.waw.pl/Sk%C5%82adnica[Składnica zależnościowa] - Polish
+* link:http://nl.ijs.si/sdt/[Slovene Dependency Treebank] - Slovene
+* link:http://stp.lingfil.uu.se/%7Enivre/swedish_treebank/[Swedish Treebank] - Swedish
+* link:http://stp.lingfil.uu.se/%7Enivre/research/Talbanken05.html[Talbanken05] - Swedish
+* link:http://stp.lingfil.uu.se/%7Emojgan/UPDT.html[Uppsala Persian Dependency Treebank] - Persian (Farsi)
