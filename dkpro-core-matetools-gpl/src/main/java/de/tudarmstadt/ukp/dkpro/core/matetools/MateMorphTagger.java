@@ -38,7 +38,8 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.morph.MorphologicalFeaturesParser;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
@@ -85,6 +86,7 @@ public class MateMorphTagger
     protected String modelLocation;
 
     private CasConfigurableProviderBase<Tagger> modelProvider;
+    private MorphologicalFeaturesParser featuresParser;
 
     @Override
     public void initialize(UimaContext aContext)
@@ -104,6 +106,7 @@ public class MateMorphTagger
             }
         };
 
+        featuresParser = new MorphologicalFeaturesParser(this, modelProvider);
     }
 
     @Override
@@ -113,6 +116,7 @@ public class MateMorphTagger
         CAS cas = jcas.getCas();
 
         modelProvider.configure(cas);
+        featuresParser.configure(cas);
 
         try {
             for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
@@ -133,11 +137,11 @@ public class MateMorphTagger
                 sd.setLemmas(lemmas.toArray(new String[0]));
                 String[] morphTags = modelProvider.getResource().apply(sd).pfeats;
                 
-                for (int i = 0; i < morphTags.length; i++) {
-                    Token token = tokens.get(i);
-                    Morpheme morpheme = new Morpheme(jcas, token.getBegin(), token.getEnd());
-                    morpheme.setMorphTag(morphTags[i]);
-                    morpheme.addToIndexes();
+                for (int i = 1; i < morphTags.length; i++) {
+                    Token token = tokens.get(i-1);
+                    MorphologicalFeatures analysis = featuresParser
+                            .parse(jcas, token, morphTags[i]);
+                    token.setMorph(analysis);
                 }
             }
         }
