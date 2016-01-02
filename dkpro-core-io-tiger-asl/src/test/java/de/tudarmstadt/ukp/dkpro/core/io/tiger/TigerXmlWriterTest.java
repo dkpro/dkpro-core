@@ -40,7 +40,8 @@ public class TigerXmlWriterTest
     {
         File targetFolder = testContext.getTestOutputFolder();
         
-        AnalysisEngine parser = createEngine(OpenNlpParser.class);
+        AnalysisEngine parser = createEngine(OpenNlpParser.class,
+                OpenNlpParser.PARAM_WRITE_POS, true);
         JCas jcas = TestRunner.runTest(parser, "en", "This is a test .");
 
         DocumentMetaData meta = DocumentMetaData.create(jcas);
