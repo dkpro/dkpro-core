@@ -108,6 +108,11 @@ public final class ComponentParameters
 	 */
 	public static final String PARAM_DELETE_COVER = "deleteCover";
 
+	/**
+	 * Maximal sentence length in tokens that is still being processed.
+	 */
+	public static final String PARAM_MAX_SENTENCE_LENGTH = "maxSentenceLength";
+	
 	// =============================================================================================
 	// Annotation types
 	// =============================================================================================
