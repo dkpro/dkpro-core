@@ -282,6 +282,10 @@ public class SfstAnnotator
                             morph.setValue("");
                             morph.addToIndexes();
                             
+                            if (token.getMorph() == null) {
+                                token.setMorph(morph);
+                            }
+                            
                             // We need to continue the inner loop because we still need to consume
                             // the flush marker.
                             continue analysisLoop;
@@ -289,11 +293,11 @@ public class SfstAnnotator
                         
                         // Analysis line
                         if (!skip) {
-                            MorphologicalFeatures analysis = featuresParser.parse(aJCas, token,
-                                    lastIn);
+                            MorphologicalFeatures morph = featuresParser
+                                    .parse(aJCas, token, lastIn);
                             
                             if (token.getMorph() == null) {
-                                token.setMorph(analysis);
+                                token.setMorph(morph);
                             }
                         }
                             
