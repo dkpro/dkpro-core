@@ -49,14 +49,15 @@ public class CoreNlpUtils
         return t;
     }
     
-    public static List<HasWord> applyPtbEscaping(List<HasWord> words,
+    @SuppressWarnings("unchecked")
+    public static <T extends HasWord> List<T> applyPtbEscaping(List<T> words,
             Collection<String> quoteBegin, Collection<String> quoteEnd)
     {
-        PTBEscapingProcessor<HasWord, String, Word> escaper = new PTBEscapingProcessor<HasWord, String, Word>();
+        PTBEscapingProcessor<T, String, Word> escaper = new PTBEscapingProcessor<T, String, Word>();
         // Apply escaper to the whole sentence, not to each token individually. The
         // escaper takes context into account, e.g. when transforming regular double
         // quotes into PTB opening and closing quotes (`` and '').
-        words = escaper.apply(words);
+        words = (List<T>) escaper.apply(words);
         
         for (HasWord w : words) {
             if (quoteBegin != null && quoteBegin.contains(w.word())) {
