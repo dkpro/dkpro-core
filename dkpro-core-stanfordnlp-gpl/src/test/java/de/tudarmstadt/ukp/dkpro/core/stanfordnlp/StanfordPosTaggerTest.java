@@ -29,8 +29,10 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.languagetool.LanguageToolSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
@@ -110,6 +112,10 @@ public class StanfordPosTaggerTest
                 + "compliqué, qui contient des constituants que de nombreuses dépendances et que "
                 + "possible.");
 
+        String[] tokens = { "Nous", "avons", "besoin", "d'", "une", "phrase", "par", "exemple",
+                "très", "compliqué", ",", "qui", "contient", "des", "constituants", "que", "de",
+                "nombreuses", "dépendances", "et", "que", "possible", "." };
+        
         String[] posMapped = new String[] { "PR", "V", "NN", "PP", "ART", "NN", "PP", "N", "ADV",
                 "ADJ", "PUNC", "PR", "V", "ART", "NN", "CONJ", "ART", "ADJ", "NN", "CONJ", "CONJ",
                 "ADJ", "PUNC" };
@@ -124,6 +130,7 @@ public class StanfordPosTaggerTest
 
         String[] unmappedPos = new String[] { ".$$." };
 
+        AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
         AssertAnnotations.assertTagset(POS.class, "corenlp34", posTags, jcas);
         AssertAnnotations.assertTagsetMapping(POS.class, "corenlp34", unmappedPos, jcas);
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
