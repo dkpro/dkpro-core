@@ -36,8 +36,10 @@ import org.lappsgrid.vocabulary.Features;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
@@ -71,13 +73,23 @@ public class LifReader
 
         View view = container.getView(0);
 
+        // Paragraph
+        view.getAnnotations().stream()
+            .filter(a -> Discriminators.Uri.PARAGRAPH.equals(a.getAtType()))
+            .forEach(
+                    para -> {
+                        Paragraph paraAnno = new Paragraph(aJCas, para.getStart().intValue(),
+                                para.getEnd().intValue());
+                        paraAnno.addToIndexes();
+                    });
+
         // Sentence
         view.getAnnotations().stream()
             .filter(a -> Discriminators.Uri.SENTENCE.equals(a.getAtType()))
             .forEach(
-                    sentence -> {
-                        Sentence sentAnno = new Sentence(aJCas, sentence.getStart().intValue(),
-                                sentence.getEnd().intValue());
+                    sent -> {
+                        Sentence sentAnno = new Sentence(aJCas, sent.getStart().intValue(),
+                                sent.getEnd().intValue());
                         sentAnno.addToIndexes();
                     });
 
@@ -113,6 +125,17 @@ public class LifReader
                         tokenIdx.put(token.getId(), tokenAnno);
                     });
 
+        // NamedEntity
+        view.getAnnotations().stream()
+            .filter(a -> Discriminators.Uri.NE.equals(a.getAtType()))
+            .forEach(
+                    ne -> {
+                        NamedEntity neAnno = new NamedEntity(aJCas, ne.getStart().intValue(),
+                                ne.getEnd().intValue());
+                        neAnno.setValue(ne.getLabel());
+                        neAnno.addToIndexes();
+                    });
+        
         // Dependencies
         view.getAnnotations().stream()
             .filter(a -> Discriminators.Uri.DEPENDENCY.equals(a.getAtType()))

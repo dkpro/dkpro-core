@@ -39,7 +39,9 @@ import org.lappsgrid.serialization.lif.View;
 import org.lappsgrid.vocabulary.Features;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
@@ -64,8 +66,10 @@ public class LifWriter
 
     private static final String DEPENDENCY_STRUCTURE = "depstruct";
     private static final String DEPENDENCY = "dep";
+    private static final String PARAGRAPH = "para";
     private static final String SENTENCE = "sent";
     private static final String TOKEN = "tok";
+    private static final String NAMED_ENTITY = "ne";
     
     private Object2IntOpenHashMap<String> counters = new Object2IntOpenHashMap<>();
     private Int2IntOpenHashMap ids = new Int2IntOpenHashMap();
@@ -80,6 +84,12 @@ public class LifWriter
         container.setText(aJCas.getDocumentText());
         
         View view = container.newView();
+
+        // Paragraph
+        for (Paragraph p : select(aJCas, Paragraph.class)) {
+            view.newAnnotation(id(PARAGRAPH, p), Discriminators.Uri.PARAGRAPH, p.getBegin(),
+                    p.getEnd());
+        }
 
         // Sentence
         for (Sentence s : select(aJCas, Sentence.class)) {
@@ -101,7 +111,14 @@ public class LifWriter
                 a.addFeature(Features.Token.LEMMA, t.getLemma().getValue());
             }
         }
-        
+
+        // NamedEntity
+        for (NamedEntity neAnno : select(aJCas, NamedEntity.class)) {
+            Annotation ne = view.newAnnotation(id(NAMED_ENTITY, neAnno), Discriminators.Uri.NE,
+                    neAnno.getBegin(), neAnno.getEnd());
+            ne.setLabel(neAnno.getValue());
+        }
+
         // Dependency
         for (Sentence s : select(aJCas, Sentence.class)) {
             Annotation depStruct = view.newAnnotation(id(DEPENDENCY_STRUCTURE, s),
