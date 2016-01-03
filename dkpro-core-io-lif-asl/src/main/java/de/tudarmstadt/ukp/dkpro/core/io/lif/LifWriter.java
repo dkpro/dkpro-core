@@ -154,14 +154,12 @@ public class LifWriter
         // if we already have an ID for the given FS return it
         if (ids.containsKey(aFS.getAddress())) {
             id = ids.get(aFS.getAddress());
-            System.out.printf("USE %s %s %d%n", aPrefix, aFS.getType().getName(), aFS.getAddress());
         }
         // otherwise generate a new ID
         else {
             id = counters.getInt(aPrefix);
             ids.put(aFS.getAddress(), id);
             counters.put(aPrefix, id + 1);
-            System.out.printf("NEW %s %s %d%n", aPrefix, aFS.getType().getName(), aFS.getAddress());
         }
         
         return aPrefix + '-' + id;
