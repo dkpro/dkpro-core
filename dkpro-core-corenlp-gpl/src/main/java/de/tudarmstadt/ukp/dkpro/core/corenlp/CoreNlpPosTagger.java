@@ -182,7 +182,9 @@ public class CoreNlpPosTagger
         public CoreNlpPosTaggerModelProvider(Object aObject)
         {
             super(aObject, "stanfordnlp", "tagger");
-            setDefault(PACKAGE, "de/tudarmstadt/ukp/dkpro/core/stanfordnlp");
+            // setDefault(PACKAGE, "de/tudarmstadt/ukp/dkpro/core/stanfordnlp");
+            setDefault(LOCATION,
+                    "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/tagger-${language}-${variant}.properties");
         }
         
         @Override

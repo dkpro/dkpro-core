@@ -187,7 +187,9 @@ public class CoreNlpDependencyParser
         public CoreNlpDependencyParserModelProvider(Object aObject)
         {
             super(aObject, "stanfordnlp", "parser");
-            setDefault(PACKAGE, "de/tudarmstadt/ukp/dkpro/core/stanfordnlp");
+            // setDefault(PACKAGE, "de/tudarmstadt/ukp/dkpro/core/stanfordnlp");
+            setDefault(LOCATION,
+                    "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/parser-${language}-${variant}.properties");
         }
         
         @Override

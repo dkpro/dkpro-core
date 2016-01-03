@@ -213,7 +213,9 @@ public class CoreNlpNamedEntityRecognizer
         public CoreNlpNamedEntityRecognizerModelProvider(Object aObject)
         {
             super(aObject, "stanfordnlp", "ner");
-            setDefault(PACKAGE, "de/tudarmstadt/ukp/dkpro/core/stanfordnlp");
+            // setDefault(PACKAGE, "de/tudarmstadt/ukp/dkpro/core/stanfordnlp");
+            setDefault(LOCATION,
+                    "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/ner-${language}-${variant}.properties");
         }
         
         @Override
