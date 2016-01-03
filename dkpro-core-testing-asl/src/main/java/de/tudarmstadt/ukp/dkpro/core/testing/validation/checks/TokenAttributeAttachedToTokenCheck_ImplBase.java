@@ -54,9 +54,10 @@ public abstract class TokenAttributeAttachedToTokenCheck_ImplBase
         // We only require that one attribute at a given position is attached. There may be
         // additional secondary attributes at the same position that are not attached.
         List<AnnotationFS> secondary = new ArrayList<>();
-        attached.forEach(attr -> 
-                selectAt(aJCas, aType, attr.getBegin(), attr.getEnd()).forEach(
-                            secAttr -> secondary.add(secAttr)));
+        attached.forEach(attr ->
+                selectAt(aJCas, aType, attr.getBegin(), attr.getEnd()).stream()
+                    .filter(secAttr -> attr != secAttr)
+                    .forEach(secAttr -> secondary.add(secAttr)));
         all.removeAll(secondary);
         
         for (AnnotationFS a : all) {
