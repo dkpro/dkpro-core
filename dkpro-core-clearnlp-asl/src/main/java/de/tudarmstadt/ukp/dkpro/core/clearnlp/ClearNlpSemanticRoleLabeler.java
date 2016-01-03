@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.zip.GZIPInputStream;
 
 import org.apache.uima.UimaContext;
@@ -126,6 +127,23 @@ public class ClearNlpSemanticRoleLabeler
 	@ConfigurationParameter(name = PARAM_SRL_MODEL_LOCATION, mandatory = false)
 	protected String srlModelLocation;
 
+    /**
+     * <p>Normally the arguments point only to the head words of arguments in the dependency tree.
+     * With this option enabled, they are expanded to the text covered by the minimal and maximal
+     * token offsets of all descendants (or self) of the head word.</p>
+     * 
+     * <p>Warning: this parameter should be used with caution! For one, if the descentants of a
+     * head word cover a non-continuous region of the text, this information is lost. The arguments
+     * will appear to be spanning a continuous region. For another, the arguments may overlap with
+     * each other. E.g. if a sentence contains a relative clause with a verb, the subject of the
+     * main clause may be recognized as a dependent of the verb and may cause the whole main
+     * clause to be recorded in the argument.</p>
+     */
+    public static final String PARAM_EXPAND_ARGUMENTS = "expandArguments";
+    @ConfigurationParameter(name = PARAM_EXPAND_ARGUMENTS, mandatory = true, defaultValue="false")
+    protected boolean expandArguments;
+	
+	
 	private CasConfigurableProviderBase<AbstractComponent> predicateFinder;
 
 	private CasConfigurableProviderBase<AbstractComponent> roleSetClassifier;
@@ -326,8 +344,8 @@ public class ClearNlpSemanticRoleLabeler
 			roleLabeller.getResource().process(tree);
 
 			// Convert the results into UIMA annotations
-			Map<Token, SemanticPredicate> predicates = new HashMap<Token, SemanticPredicate>();
-			Map<SemanticPredicate, List<SemanticArgument>> predArgs = new HashMap<SemanticPredicate, List<SemanticArgument>>();
+			Map<Token, SemanticPredicate> predicates = new HashMap<>();
+			Map<SemanticPredicate, List<SemanticArgument>> predArgs = new HashMap<>();
 
 			for (int i = 0; i < tokens.size(); i++) {
 				DEPNode parserNode = tree.get(i + 1);
@@ -347,12 +365,31 @@ public class ClearNlpSemanticRoleLabeler
 						predicates.put(predToken, pred);
 
 						// Prepare a list to store its arguments
-						predArgs.put(pred, new ArrayList<SemanticArgument>());
+						predArgs.put(pred, new ArrayList<>());
 					}
 
 					// Instantiate the semantic argument annotation
-					SemanticArgument arg = new SemanticArgument(aJCas, argumentToken.getBegin(),
-							argumentToken.getEnd());
+					SemanticArgument arg = new SemanticArgument(aJCas);
+					
+                    if (expandArguments) {
+                        List<DEPNode> descendents = parserNode.getDescendents(Integer.MAX_VALUE)
+                                .stream()
+                                .map(arc -> arc.getNode())
+                                .collect(Collectors.toList());
+                        descendents.add(parserNode);
+                        List<Token> descTokens = descendents.stream()
+                                .map(node -> tokens.get(node.id - 1))
+                                .collect(Collectors.toList());
+                        int begin = descTokens.stream().mapToInt(t -> t.getBegin()).min().getAsInt();
+                        int end = descTokens.stream().mapToInt(t -> t.getEnd()).max().getAsInt();
+                        arg.setBegin(begin);
+                        arg.setEnd(end);
+                    }
+                    else {
+                        arg.setBegin(argumentToken.getBegin());
+                        arg.setEnd(argumentToken.getEnd());
+                    }
+					
 					arg.setRole(argPredArc.getLabel());
 					arg.addToIndexes();
 
