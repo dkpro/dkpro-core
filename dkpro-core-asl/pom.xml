@@ -215,13 +215,8 @@
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.imscwb-asl</artifactId>
 				<version>1.9.0-SNAPSHOT</version>
 			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.graf-asl</artifactId>
-				<version>1.9.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+            <dependency>
+                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
                 <artifactId>de.tudarmstadt.ukp.dkpro.core.io.json-asl</artifactId>
                 <version>1.9.0-SNAPSHOT</version>
             </dependency>
@@ -453,7 +448,6 @@
 		<module>../dkpro-core-io-conll-asl</module>
 		<module>../dkpro-core-io-ditop-asl</module>
 		<module>../dkpro-core-io-imscwb-asl</module>
-		<module>../dkpro-core-io-graf-asl</module>
 		<module>../dkpro-core-io-html-asl</module>
         <module>../dkpro-core-io-json-asl</module>
 		<module>../dkpro-core-io-jdbc-asl</module>
@@ -522,9 +516,13 @@
 				</repository>
 			</repositories>
 			<modules>
-				<module>../de.tudarmstadt.ukp.dkpro.core.flextag-asl</module>
-				<module>../de.tudarmstadt.ukp.dkpro.core.io.fangorn-asl</module>
-                <module>../de.tudarmstadt.ukp.dkpro.core.lbj-asl</module>
+                <!-- IO modules -->
+                <module>../dkpro-core-io-lif-asl</module>
+                <module>../dkpro-core-io-fangorn-asl</module>
+                <module>../dkpro-core-io-graf-asl</module>
+                <!-- Processing modules -->
+                <module>../dkpro-core-flextag-asl</module>
+                <module>../dkpro-core-lbj-asl</module>
 			</modules>
 			<dependencyManagement>
 				<dependencies>
@@ -538,6 +536,16 @@
 						<artifactId>de.tudarmstadt.ukp.dkpro.core.io.fangorn-asl</artifactId>
 						<version>1.9.0-SNAPSHOT</version>
 					</dependency>
+                    <dependency>
+                        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                        <artifactId>de.tudarmstadt.ukp.dkpro.core.io.graf-asl</artifactId>
+                        <version>1.9.0-SNAPSHOT</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                        <artifactId>de.tudarmstadt.ukp.dkpro.core.io.lif-asl</artifactId>
+                        <version>1.9.0-SNAPSHOT</version>
+                    </dependency>
                     <dependency>
                         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
                         <artifactId>de.tudarmstadt.ukp.dkpro.core.lbj-asl</artifactId>

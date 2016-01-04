@@ -1,0 +1,698 @@
+{
+  "@context" : "http://vocab.lappsgrid.org/context-1.0.0.jsonld",
+  "metadata" : { },
+  "text" : {
+    "@value" : "NEUVOSTO EURATOMIN HANKINTAKESKUKSEN PERUSSÄÄNTÖ EUROOPAN ATOMIENERGIAYHTEISÖN NEUVOSTO , joka ottaa huomioon perustamissopimuksen 54 artiklan , ja ottaa huomioon komission ehdotuksen , ON PÄÄTTÄNYT antaa Euratomin hankintakeskuksen perussäännön seuraavasti : \n1 artikla Nimi ja tarkoitus \n",
+    "@language" : "x-unspecified"
+  },
+  "views" : [ {
+    "metadata" : { },
+    "annotations" : [ {
+      "id" : "sent-0",
+      "start" : 0,
+      "end" : 259,
+      "@type" : "http://vocab.lappsgrid.org/Sentence"
+    }, {
+      "id" : "sent-1",
+      "start" : 261,
+      "end" : 288,
+      "@type" : "http://vocab.lappsgrid.org/Sentence"
+    }, {
+      "id" : "tok-0",
+      "start" : 0,
+      "end" : 8,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "NEUVOSTO",
+        "pos" : "N",
+        "lemma" : "neuvosto"
+      }
+    }, {
+      "id" : "tok-1",
+      "start" : 9,
+      "end" : 18,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "EURATOMIN",
+        "pos" : "N",
+        "lemma" : "Euratom"
+      }
+    }, {
+      "id" : "tok-2",
+      "start" : 19,
+      "end" : 36,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "HANKINTAKESKUKSEN",
+        "pos" : "N",
+        "lemma" : "hankinta#keskus"
+      }
+    }, {
+      "id" : "tok-3",
+      "start" : 37,
+      "end" : 48,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "PERUSSÄÄNTÖ",
+        "pos" : "N",
+        "lemma" : "perus#sääntö"
+      }
+    }, {
+      "id" : "tok-4",
+      "start" : 49,
+      "end" : 57,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "EUROOPAN",
+        "pos" : "N",
+        "lemma" : "Eurooppa"
+      }
+    }, {
+      "id" : "tok-5",
+      "start" : 58,
+      "end" : 78,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "ATOMIENERGIAYHTEISÖN",
+        "pos" : "N",
+        "lemma" : "atomi#energia#yhteisö"
+      }
+    }, {
+      "id" : "tok-6",
+      "start" : 79,
+      "end" : 87,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "NEUVOSTO",
+        "pos" : "N",
+        "lemma" : "neuvosto"
+      }
+    }, {
+      "id" : "tok-7",
+      "start" : 88,
+      "end" : 89,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : ",",
+        "pos" : "Punct",
+        "lemma" : ","
+      }
+    }, {
+      "id" : "tok-8",
+      "start" : 90,
+      "end" : 94,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "joka",
+        "pos" : "Pron",
+        "lemma" : "joka"
+      }
+    }, {
+      "id" : "tok-9",
+      "start" : 95,
+      "end" : 100,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "ottaa",
+        "pos" : "V",
+        "lemma" : "ottaa"
+      }
+    }, {
+      "id" : "tok-10",
+      "start" : 101,
+      "end" : 109,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "huomioon",
+        "pos" : "N",
+        "lemma" : "huomio"
+      }
+    }, {
+      "id" : "tok-11",
+      "start" : 110,
+      "end" : 130,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "perustamissopimuksen",
+        "pos" : "N",
+        "lemma" : "perustamis#sopimus"
+      }
+    }, {
+      "id" : "tok-12",
+      "start" : 131,
+      "end" : 133,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "54",
+        "pos" : "Num",
+        "lemma" : "54"
+      }
+    }, {
+      "id" : "tok-13",
+      "start" : 134,
+      "end" : 142,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "artiklan",
+        "pos" : "N",
+        "lemma" : "artikla"
+      }
+    }, {
+      "id" : "tok-14",
+      "start" : 143,
+      "end" : 144,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : ",",
+        "pos" : "Punct",
+        "lemma" : ","
+      }
+    }, {
+      "id" : "tok-15",
+      "start" : 145,
+      "end" : 147,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "ja",
+        "pos" : "CC",
+        "lemma" : "ja"
+      }
+    }, {
+      "id" : "tok-16",
+      "start" : 148,
+      "end" : 153,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "ottaa",
+        "pos" : "V",
+        "lemma" : "ottaa"
+      }
+    }, {
+      "id" : "tok-17",
+      "start" : 154,
+      "end" : 162,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "huomioon",
+        "pos" : "N",
+        "lemma" : "huomio"
+      }
+    }, {
+      "id" : "tok-18",
+      "start" : 163,
+      "end" : 172,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "komission",
+        "pos" : "N",
+        "lemma" : "komissio"
+      }
+    }, {
+      "id" : "tok-19",
+      "start" : 173,
+      "end" : 183,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "ehdotuksen",
+        "pos" : "N",
+        "lemma" : "ehdotus"
+      }
+    }, {
+      "id" : "tok-20",
+      "start" : 184,
+      "end" : 185,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : ",",
+        "pos" : "Punct",
+        "lemma" : ","
+      }
+    }, {
+      "id" : "tok-21",
+      "start" : 186,
+      "end" : 188,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "ON",
+        "pos" : "V",
+        "lemma" : "olla"
+      }
+    }, {
+      "id" : "tok-22",
+      "start" : 189,
+      "end" : 198,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "PÄÄTTÄNYT",
+        "pos" : "PrfPrc",
+        "lemma" : "päättää"
+      }
+    }, {
+      "id" : "tok-23",
+      "start" : 199,
+      "end" : 204,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "antaa",
+        "pos" : "V",
+        "lemma" : "antaa"
+      }
+    }, {
+      "id" : "tok-24",
+      "start" : 205,
+      "end" : 214,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "Euratomin",
+        "pos" : "N",
+        "lemma" : "Euratom"
+      }
+    }, {
+      "id" : "tok-25",
+      "start" : 215,
+      "end" : 232,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "hankintakeskuksen",
+        "pos" : "N",
+        "lemma" : "hankinta#keskus"
+      }
+    }, {
+      "id" : "tok-26",
+      "start" : 233,
+      "end" : 245,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "perussäännön",
+        "pos" : "N",
+        "lemma" : "perus#sääntö"
+      }
+    }, {
+      "id" : "tok-27",
+      "start" : 246,
+      "end" : 257,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "seuraavasti",
+        "pos" : "Adv",
+        "lemma" : "seuraava"
+      }
+    }, {
+      "id" : "tok-28",
+      "start" : 258,
+      "end" : 259,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : ":",
+        "pos" : "Punct",
+        "lemma" : ":"
+      }
+    }, {
+      "id" : "tok-29",
+      "start" : 261,
+      "end" : 262,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "1",
+        "pos" : "Num",
+        "lemma" : "1"
+      }
+    }, {
+      "id" : "tok-30",
+      "start" : 263,
+      "end" : 270,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "artikla",
+        "pos" : "N",
+        "lemma" : "artikla"
+      }
+    }, {
+      "id" : "tok-31",
+      "start" : 271,
+      "end" : 275,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "Nimi",
+        "pos" : "N",
+        "lemma" : "nimi"
+      }
+    }, {
+      "id" : "tok-32",
+      "start" : 276,
+      "end" : 278,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "ja",
+        "pos" : "CC",
+        "lemma" : "ja"
+      }
+    }, {
+      "id" : "tok-33",
+      "start" : 279,
+      "end" : 288,
+      "@type" : "http://vocab.lappsgrid.org/Token",
+      "features" : {
+        "orth" : "tarkoitus",
+        "pos" : "N",
+        "lemma" : "tarkoitus"
+      }
+    }, {
+      "id" : "depstruct-0",
+      "start" : 0,
+      "end" : 259,
+      "@type" : "http://vocab.lappsgrid.org/DependencyStructure",
+      "features" : {
+        "dependencies" : [ "dep-0", "dep-1", "dep-10", "dep-11", "dep-12", "dep-13", "dep-14", "dep-15", "dep-16", "dep-17", "dep-18", "dep-19", "dep-2", "dep-20", "dep-21", "dep-22", "dep-23", "dep-24", "dep-25", "dep-26", "dep-3", "dep-4", "dep-5", "dep-6", "dep-7", "dep-8", "dep-9" ]
+      }
+    }, {
+      "id" : "dep-0",
+      "start" : 0,
+      "end" : 8,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "attr",
+      "features" : {
+        "governor" : "tok-1",
+        "dependent" : "tok-0"
+      }
+    }, {
+      "id" : "dep-1",
+      "start" : 9,
+      "end" : 18,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "attr",
+      "features" : {
+        "governor" : "tok-2",
+        "dependent" : "tok-1"
+      }
+    }, {
+      "id" : "dep-2",
+      "start" : 19,
+      "end" : 36,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "attr",
+      "features" : {
+        "governor" : "tok-3",
+        "dependent" : "tok-2"
+      }
+    }, {
+      "id" : "dep-3",
+      "start" : 37,
+      "end" : 48,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "attr",
+      "features" : {
+        "governor" : "tok-6",
+        "dependent" : "tok-3"
+      }
+    }, {
+      "id" : "dep-4",
+      "start" : 49,
+      "end" : 57,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "attr",
+      "features" : {
+        "governor" : "tok-5",
+        "dependent" : "tok-4"
+      }
+    }, {
+      "id" : "dep-5",
+      "start" : 58,
+      "end" : 78,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "attr",
+      "features" : {
+        "governor" : "tok-6",
+        "dependent" : "tok-5"
+      }
+    }, {
+      "id" : "dep-6",
+      "start" : 79,
+      "end" : 87,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "main",
+      "features" : {
+        "governor" : "tok-6",
+        "dependent" : "tok-6"
+      }
+    }, {
+      "id" : "dep-7",
+      "start" : 90,
+      "end" : 94,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "subj",
+      "features" : {
+        "governor" : "tok-9",
+        "dependent" : "tok-8"
+      }
+    }, {
+      "id" : "dep-8",
+      "start" : 95,
+      "end" : 100,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "mod",
+      "features" : {
+        "governor" : "tok-6",
+        "dependent" : "tok-9"
+      }
+    }, {
+      "id" : "dep-9",
+      "start" : 101,
+      "end" : 109,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "phrv",
+      "features" : {
+        "governor" : "tok-9",
+        "dependent" : "tok-10"
+      }
+    }, {
+      "id" : "dep-10",
+      "start" : 110,
+      "end" : 130,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "attr",
+      "features" : {
+        "governor" : "tok-13",
+        "dependent" : "tok-11"
+      }
+    }, {
+      "id" : "dep-11",
+      "start" : 131,
+      "end" : 133,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "attr",
+      "features" : {
+        "governor" : "tok-13",
+        "dependent" : "tok-12"
+      }
+    }, {
+      "id" : "dep-12",
+      "start" : 134,
+      "end" : 142,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "obj",
+      "features" : {
+        "governor" : "tok-9",
+        "dependent" : "tok-13"
+      }
+    }, {
+      "id" : "dep-13",
+      "start" : 143,
+      "end" : 144,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "phrm",
+      "features" : {
+        "governor" : "tok-16",
+        "dependent" : "tok-14"
+      }
+    }, {
+      "id" : "dep-14",
+      "start" : 145,
+      "end" : 147,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "phrm",
+      "features" : {
+        "governor" : "tok-16",
+        "dependent" : "tok-15"
+      }
+    }, {
+      "id" : "dep-15",
+      "start" : 148,
+      "end" : 153,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "conjunct",
+      "features" : {
+        "governor" : "tok-9",
+        "dependent" : "tok-16"
+      }
+    }, {
+      "id" : "dep-16",
+      "start" : 154,
+      "end" : 162,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "phrv",
+      "features" : {
+        "governor" : "tok-16",
+        "dependent" : "tok-17"
+      }
+    }, {
+      "id" : "dep-17",
+      "start" : 163,
+      "end" : 172,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "subj",
+      "features" : {
+        "governor" : "tok-19",
+        "dependent" : "tok-18"
+      }
+    }, {
+      "id" : "dep-18",
+      "start" : 173,
+      "end" : 183,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "obj",
+      "features" : {
+        "governor" : "tok-16",
+        "dependent" : "tok-19"
+      }
+    }, {
+      "id" : "dep-19",
+      "start" : 184,
+      "end" : 185,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "phrm",
+      "features" : {
+        "governor" : "tok-22",
+        "dependent" : "tok-20"
+      }
+    }, {
+      "id" : "dep-20",
+      "start" : 186,
+      "end" : 188,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "aux",
+      "features" : {
+        "governor" : "tok-22",
+        "dependent" : "tok-21"
+      }
+    }, {
+      "id" : "dep-21",
+      "start" : 189,
+      "end" : 198,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "conjunct",
+      "features" : {
+        "governor" : "tok-16",
+        "dependent" : "tok-22"
+      }
+    }, {
+      "id" : "dep-22",
+      "start" : 199,
+      "end" : 204,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "obj",
+      "features" : {
+        "governor" : "tok-22",
+        "dependent" : "tok-23"
+      }
+    }, {
+      "id" : "dep-23",
+      "start" : 205,
+      "end" : 214,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "attr",
+      "features" : {
+        "governor" : "tok-25",
+        "dependent" : "tok-24"
+      }
+    }, {
+      "id" : "dep-24",
+      "start" : 215,
+      "end" : 232,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "attr",
+      "features" : {
+        "governor" : "tok-26",
+        "dependent" : "tok-25"
+      }
+    }, {
+      "id" : "dep-25",
+      "start" : 233,
+      "end" : 245,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "obj",
+      "features" : {
+        "governor" : "tok-23",
+        "dependent" : "tok-26"
+      }
+    }, {
+      "id" : "dep-26",
+      "start" : 246,
+      "end" : 257,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "advl",
+      "features" : {
+        "governor" : "tok-23",
+        "dependent" : "tok-27"
+      }
+    }, {
+      "id" : "depstruct-1",
+      "start" : 261,
+      "end" : 288,
+      "@type" : "http://vocab.lappsgrid.org/DependencyStructure",
+      "features" : {
+        "dependencies" : [ "dep-27", "dep-28", "dep-29", "dep-30", "dep-31" ]
+      }
+    }, {
+      "id" : "dep-27",
+      "start" : 261,
+      "end" : 262,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "attr",
+      "features" : {
+        "governor" : "tok-30",
+        "dependent" : "tok-29"
+      }
+    }, {
+      "id" : "dep-28",
+      "start" : 263,
+      "end" : 270,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "attr",
+      "features" : {
+        "governor" : "tok-31",
+        "dependent" : "tok-30"
+      }
+    }, {
+      "id" : "dep-29",
+      "start" : 271,
+      "end" : 275,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "main",
+      "features" : {
+        "governor" : "tok-31",
+        "dependent" : "tok-31"
+      }
+    }, {
+      "id" : "dep-30",
+      "start" : 276,
+      "end" : 278,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "phrm",
+      "features" : {
+        "governor" : "tok-33",
+        "dependent" : "tok-32"
+      }
+    }, {
+      "id" : "dep-31",
+      "start" : 279,
+      "end" : 288,
+      "@type" : "http://vocab.lappsgrid.org/Dependency",
+      "label" : "conjunct",
+      "features" : {
+        "governor" : "tok-31",
+        "dependent" : "tok-33"
+      }
+    } ]
+  } ]
+}
