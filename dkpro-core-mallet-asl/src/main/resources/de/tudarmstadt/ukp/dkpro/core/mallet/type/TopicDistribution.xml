@@ -7,7 +7,7 @@
   <types>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution</name>
-      <description/>
+      <description>An array representing the topic proportions in a document.</description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
