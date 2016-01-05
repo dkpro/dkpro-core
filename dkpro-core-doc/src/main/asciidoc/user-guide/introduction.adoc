@@ -43,6 +43,9 @@ be lost.
 DKPro Core integrates many state-of-the-art NLP tools as uimaFIT components so that they 
 can be seamlessly combined into an experiment pipeline.
 
+Check out the https://github.com/dkpro/dkpro-core-examples[dkpro-core examples repository]
+to see some working Java examples.
+
 === Choosing components
 
 ////
