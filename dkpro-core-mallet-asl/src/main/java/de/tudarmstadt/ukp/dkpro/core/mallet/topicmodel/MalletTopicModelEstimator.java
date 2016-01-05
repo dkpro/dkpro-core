@@ -2,13 +2,13 @@
  * Copyright 2014
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,24 +16,6 @@
  * limitations under the License.
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.mallet.topicmodel;
-
-import static org.apache.uima.fit.util.JCasUtil.selectCovered;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-
-import org.apache.uima.UimaContext;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.CAS;
-import org.apache.uima.cas.Type;
-import org.apache.uima.cas.text.AnnotationFS;
-import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
-import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.fit.util.CasUtil;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ResourceInitializationException;
 
 import cc.mallet.pipe.TokenSequence2FeatureSequence;
 import cc.mallet.topics.ParallelTopicModel;
@@ -46,6 +28,24 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.CAS;
+import org.apache.uima.cas.Type;
+import org.apache.uima.cas.text.AnnotationFS;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
+import org.apache.uima.fit.util.CasUtil;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 /**
  * This component estimates an LDA model using Mallet. It stores all incoming CAS' to Mallet
@@ -53,8 +53,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  *
  *
  */
+@TypeCapability(
+        inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }
+)
 public class MalletTopicModelEstimator
-    extends JCasAnnotator_ImplBase
+        extends JCasAnnotator_ImplBase
 {
     /**
      * The annotation type to use for the topic model. Default:
@@ -189,7 +192,7 @@ public class MalletTopicModelEstimator
 
     @Override
     public void initialize(UimaContext context)
-        throws ResourceInitializationException
+            throws ResourceInitializationException
     {
         super.initialize(context);
         instanceList = new InstanceList(new TokenSequence2FeatureSequence());
@@ -197,7 +200,7 @@ public class MalletTopicModelEstimator
 
     @Override
     public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+            throws AnalysisEngineProcessException
     {
         DocumentMetaData metadata = DocumentMetaData.get(aJCas);
         try {
@@ -221,7 +224,7 @@ public class MalletTopicModelEstimator
      * @throws FeaturePathException
      */
     protected Collection<TokenSequence> generateTokenSequences(JCas aJCas)
-        throws FeaturePathException
+            throws FeaturePathException
     {
         Collection<TokenSequence> tokenSequences;
         CAS cas = aJCas.getCas();
@@ -235,7 +238,8 @@ public class MalletTopicModelEstimator
         else {
             /* generate tokenSequences for every segment (e.g. sentence) */
             tokenSequences = new ArrayList<>();
-            for (AnnotationFS segment : CasUtil.select(cas, CasUtil.getType(cas, modelEntityType))) {
+            for (AnnotationFS segment : CasUtil
+                    .select(cas, CasUtil.getType(cas, modelEntityType))) {
                 tokenSequences.add(generateTokenSequence(segment, tokenType));
             }
         }
@@ -260,7 +264,7 @@ public class MalletTopicModelEstimator
      */
     protected static TokenSequence generateTokenSequence(JCas aJCas, Type tokenType,
             boolean useLemma, int minTokenLength)
-        throws FeaturePathException
+            throws FeaturePathException
     {
         TokenSequence tokenSequence = new TokenSequence();
         for (AnnotationFS token : CasUtil.select(aJCas.getCas(), tokenType)) {
@@ -327,7 +331,7 @@ public class MalletTopicModelEstimator
 
     @Override
     public void collectionProcessComplete()
-        throws AnalysisEngineProcessException
+            throws AnalysisEngineProcessException
     {
         try {
             generateParallelModel();
@@ -338,7 +342,7 @@ public class MalletTopicModelEstimator
     }
 
     private void generateParallelModel()
-        throws IOException, SecurityException
+            throws IOException, SecurityException
     {
         targetLocation.getParentFile().mkdirs();
         ParallelTopicModel model = new ParallelTopicModel(nTopics, alphaSum, beta);
