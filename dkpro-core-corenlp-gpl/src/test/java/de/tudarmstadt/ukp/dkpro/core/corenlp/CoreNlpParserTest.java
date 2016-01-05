@@ -215,9 +215,9 @@ public class CoreNlpParserTest
                 "[ 46, 51]NSUBJ(nsubj) D[46,51](which) G[52,60](contains)",
                 "[ 52, 60]RCMOD(rcmod) D[52,60](contains) G[35,43](sentence)",
                 "[ 64, 68]AMOD(amod) D[64,68](many) G[69,81](constituents)",
-                "[ 69, 81]PREP(prep) D[69,81](constituents) G[52,60](contains)",
-                "[ 86, 98]CONJ(conj) D[86,98](dependencies) G[69,81](constituents)",
-                "[102,110]PREP(prep) D[102,110](possible) G[52,60](contains)" };
+                "[ 69, 81]PREP(prep_as) D[69,81](constituents) G[52,60](contains)",
+                "[ 86, 98]CONJ(conj_and) D[86,98](dependencies) G[69,81](constituents)",
+                "[102,110]PREP(prep_as) D[102,110](possible) G[52,60](contains)" };
 
         String[] posMapped = { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC", "ART", "V", "PP",
                 "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
@@ -273,8 +273,8 @@ public class CoreNlpParserTest
                 "[ 61, 63]ADVMOD(advmod) D[61,63](as) G[64,68](many)",
                 "[ 64, 68]AMOD(amod) D[64,68](many) G[69,81](constituents)",
                 "[ 69, 81]DOBJ(dobj) D[69,81](constituents) G[52,60](contains)",
-                "[ 86, 98]CONJ(conj) D[86,98](dependencies) G[69,81](constituents)",
-                "[102,110]PREP(prep) D[102,110](possible) G[52,60](contains)" };
+                "[ 86, 98]CONJ(conj_and) D[86,98](dependencies) G[69,81](constituents)",
+                "[102,110]PREP(prep_as) D[102,110](possible) G[52,60](contains)" };
 
         String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC",
                 "ART", "V", "ADV", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
@@ -330,8 +330,8 @@ public class CoreNlpParserTest
                 "[ 61, 63]QUANTMOD(quantmod) D[61,63](as) G[64,68](many)",
                 "[ 64, 68]NUM(num) D[64,68](many) G[69,81](constituents)",
                 "[ 69, 81]DOBJ(dobj) D[69,81](constituents) G[52,60](contains)",
-                "[ 86, 98]CONJ(conj) D[86,98](dependencies) G[69,81](constituents)",
-                "[102,110]PREP(prep) D[102,110](possible) G[52,60](contains)" };
+                "[ 86, 98]CONJ(conj_and) D[86,98](dependencies) G[69,81](constituents)",
+                "[102,110]PREP(prep_as) D[102,110](possible) G[52,60](contains)" };
 
         String[] posMapped = { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC", "ART", "V", "ADV",
                 "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
@@ -385,9 +385,9 @@ public class CoreNlpParserTest
                 "[ 46, 51]NSUBJ(nsubj) D[46,51](which) G[52,60](contains)",
                 "[ 52, 60]RCMOD(rcmod) D[52,60](contains) G[35,43](sentence)",
                 "[ 64, 68]AMOD(amod) D[64,68](many) G[69,81](constituents)",
-                "[ 69, 81]PREP(prep) D[69,81](constituents) G[52,60](contains)",
-                "[ 86, 98]CONJ(conj) D[86,98](dependencies) G[69,81](constituents)",
-                "[102,110]PREP(prep) D[102,110](possible) G[69,81](constituents)" };
+                "[ 69, 81]PREP(prep_as) D[69,81](constituents) G[52,60](contains)",
+                "[ 86, 98]CONJ(conj_and) D[86,98](dependencies) G[69,81](constituents)",
+                "[102,110]PREP(prep_as) D[102,110](possible) G[69,81](constituents)" };
 
         String[] posMapped = { "PR", "V", "ART", "ADV", "ADJ", "NN", "NN", "PUNC", "ART", "V",
                 "PP", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
@@ -441,9 +441,9 @@ public class CoreNlpParserTest
                 "[ 46, 51]NSUBJ(nsubj) D[46,51](which) G[52,60](contains)",
                 "[ 52, 60]RCMOD(rcmod) D[52,60](contains) G[35,43](sentence)",
                 "[ 64, 68]AMOD(amod) D[64,68](many) G[69,81](constituents)",
-                "[ 69, 81]PREP(prep) D[69,81](constituents) G[52,60](contains)",
-                "[ 86, 98]CONJ(conj) D[86,98](dependencies) G[69,81](constituents)",
-                "[102,110]PREP(prep) D[102,110](possible) G[52,60](contains)" };
+                "[ 69, 81]PREP(prep_as) D[69,81](constituents) G[52,60](contains)",
+                "[ 86, 98]CONJ(conj_and) D[86,98](dependencies) G[69,81](constituents)",
+                "[102,110]PREP(prep_as) D[102,110](possible) G[52,60](contains)" };
 
         String[] posMapped = { "PR", "V", "ART", "ADV", "ADJ", "NN", "NN", "PUNC", "ART", "V",
                 "PP", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
@@ -499,8 +499,8 @@ public class CoreNlpParserTest
                 "[ 61, 63]QUANTMOD(quantmod) D[61,63](as) G[64,68](many)",
                 "[ 64, 68]NUM(num) D[64,68](many) G[69,81](constituents)",
                 "[ 69, 81]DOBJ(dobj) D[69,81](constituents) G[52,60](contains)",
-                "[ 86, 98]CONJ(conj) D[86,98](dependencies) G[69,81](constituents)",
-                "[102,110]PREP(prep) D[102,110](possible) G[52,60](contains)"};
+                "[ 86, 98]CONJ(conj_and) D[86,98](dependencies) G[69,81](constituents)",
+                "[102,110]PREP(prep_as) D[102,110](possible) G[52,60](contains)"};
 
         String[] posMapped = { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC", "ART", "V", "ADV",
                 "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };

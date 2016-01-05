@@ -136,9 +136,13 @@ public class ConvertToUima
             for (SemanticGraphEdge edge : graph.edgeListSorted()) {
                 Token dependent = edge.getDependent().get(TokenKey.class);
                 Token governor = edge.getGovernor().get(TokenKey.class);
-                String label = edge.getRelation().getShortName();
                 
-                Type depRel = mappingProvider.getTagType(label);
+                // Need to use toString() here to get "<shortname>_<specific>"
+                String label = edge.getRelation().toString();
+                
+                // For the type mapping, we use getShortName() instead, because the <specific>
+                // actually doesn't change the relation type
+                Type depRel = mappingProvider.getTagType(edge.getRelation().getShortName());
                 Dependency dep = (Dependency) aJCas.getCas().createFS(depRel);
                 dep.setDependencyType(internStrings ? label.intern() : label);
                 dep.setDependent(dependent);

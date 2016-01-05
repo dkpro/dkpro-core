@@ -442,6 +442,10 @@ public class CoreNlpParser
                         "Current model does not seem to support " + "dependencies.");
             }
             
+            // TODO: Consider whether r.getShortName() or r.toString() is the right one to use
+            // here. Cf. 
+            // https://mailman.stanford.edu/pipermail/java-nlp-user/2016-January/007417.html
+            // https://mailman.stanford.edu/pipermail/java-nlp-user/2013-December/004429.html
             if (gsf != null && EnglishGrammaticalStructureFactory.class.equals(gsf.getClass())) {
                 SingletonTagset depTags = new SingletonTagset(Dependency.class, "stanford341");
                 for (GrammaticalRelation r : EnglishGrammaticalRelations.values()) {
