@@ -50,6 +50,7 @@ import java.util.List;
  * Infers the topic distribution over documents using a Mallet {@link ParallelTopicModel}.
  */
 @TypeCapability(
+        inputs = {"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
         outputs = { "de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution" }
 )
 
