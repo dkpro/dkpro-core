@@ -1,0 +1,88 @@
+# Universal Dependencies
+
+__META_SOURCE_URL__=https://universaldependencies.github.io/docs/u/dep/index.html
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.
+
+# acl: clausal modifier of noun (adjectival clause)
+acl=Dependency
+# advcl: adverbial clause modifier
+advcl=ADVCL
+# advmod: adverbial modifier
+advmod=ADVMOD
+# amod: adjectival modifier
+amod=AMOD
+# appos: appositional modifier
+appos=APPOS
+# aux: auxiliary
+aux=AUX0
+# auxpass: passive auxiliary
+auxpass=AUXPASS
+# case: case marking
+case=PREP
+# cc: coordinating conjunction
+cc=CC
+# ccomp: clausal complement
+ccomp=CCOMP
+# compound: compound
+compound=NN
+# conj: conjunct
+conj=CONJ
+# cop: copula
+cop=COP
+# csubj: clausal subject
+csubj=CSUBJ
+# csubjpass: clausal passive subject
+csubjpass=CSUBJPASS
+# dep: unspecified dependency
+dep=DEP
+# det: determiner
+det=DET
+# discourse: discourse element
+discourse=Dependency
+# dislocated: dislocated elements
+dislocated=Dependency
+# dobj: direct object
+dobj=DOBJ
+# expl: expletive
+expl=EXPL
+# foreign: foreign words
+foreign=Dependency
+# goeswith: goes with
+goeswith=Dependency
+# iobj: indirect object
+iobj=IOBJ
+# list: list
+list=Dependency
+# mark: marker
+mark=MARK
+# mwe: multi-word expression
+mwe=MWE
+# name: name
+name=Dependency
+# neg: negation modifier
+neg=NEG
+# nmod: nominal modifier
+nmod=Dependency
+# nsubj: nominal subject
+nsubj=NSUBJ
+# nsubjpass: passive nominal subject
+nsubjpass=NSUBJPASS
+# nummod: numeric modifier
+nummod=Dependency
+# parataxis: parataxis
+parataxis=PARATAXIS
+# punct: punctuation
+punct=PUNCT
+# remnant: remnant in ellipsis
+remnant=Dependency
+# reparandum: overridden disfluency
+reparandum=Dependency
+# root: root
+root=ROOT
+# vocative: vocative
+vocative=Dependency
+# xcomp: open clausal complement
+xcomp=XCOMP
+
+# Catch-all mapping
+*=Dependency
