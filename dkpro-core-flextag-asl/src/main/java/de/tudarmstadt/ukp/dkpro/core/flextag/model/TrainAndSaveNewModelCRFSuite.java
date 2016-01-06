@@ -108,8 +108,7 @@ public class TrainAndSaveNewModelCRFSuite implements Constants {
 
 	protected void validation(ParameterSpace pSpace) throws Exception {
 		SaveModelCRFSuiteBatchTask batch = new SaveModelCRFSuiteBatchTask(
-				experimentName, modelOutputFolder, CRFSuiteAdapter.class,
-				getPreprocessing());
+				experimentName, modelOutputFolder, CRFSuiteAdapter.class);
 		batch.setParameterSpace(pSpace);
 
 		// Run
