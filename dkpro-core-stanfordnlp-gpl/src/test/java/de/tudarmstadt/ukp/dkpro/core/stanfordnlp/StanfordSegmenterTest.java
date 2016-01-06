@@ -40,7 +40,6 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.languagetool.LanguageToolSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.harness.SegmenterHarness;
@@ -65,13 +64,29 @@ class StanfordSegmenterTest
 	}
 	
     @Test
+    public void testEnglishSpeech() throws Exception
+    {
+        JCas jcas = JCasFactory.createJCas();
+        jcas.setDocumentLanguage("en");
+        jcas.setDocumentText("'Let's go! I want to see the Don', he said.");
+        
+        AnalysisEngine aed = createEngine(StanfordSegmenter.class);
+        aed.process(jcas);
+        
+        String[] tokens = { "'", "Let", "'s", "go", "!", "I", "want", "to", "see", "the", "Don",
+                "'", ",", "he", "said", "." };
+        
+        AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
+    }
+    
+    @Test
     public void testSpanish() throws Exception
     {
         JCas jcas = JCasFactory.createJCas();
         jcas.setDocumentLanguage("es");
         jcas.setDocumentText("Tim dijo a Jamie para la 100ª vez que abandone la sala.");
         
-        AnalysisEngine aed = createEngine(LanguageToolSegmenter.class);
+        AnalysisEngine aed = createEngine(StanfordSegmenter.class);
         aed.process(jcas);
         
         String[] tokens = { "Tim", "dijo", "a", "Jamie", "para", "la", "100ª", "vez", "que",

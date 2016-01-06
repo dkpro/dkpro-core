@@ -18,11 +18,14 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.corenlp;
 
+import static org.apache.uima.util.Level.INFO;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.commons.lang.reflect.FieldUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -32,13 +35,16 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.ConvertToCoreNlp;
 import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.ConvertToUima;
+import edu.stanford.nlp.parser.nndep.DependencyParser;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.DependencyParseAnnotator;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
@@ -186,13 +192,11 @@ public class CoreNlpDependencyParser
     {
         public CoreNlpDependencyParserModelProvider(Object aObject)
         {
-            super(aObject, "stanfordnlp", "parser");
-            // setDefault(PACKAGE, "de/tudarmstadt/ukp/dkpro/core/stanfordnlp");
-            setDefault(LOCATION,
-                    "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/parser-${language}-${variant}.properties");
+            super(aObject, "corenlp", "depparser");
         }
         
         @Override
+        @SuppressWarnings("unchecked")
         protected DependencyParseAnnotator produceResource(URL aUrl) throws IOException
         {
             String modelFile = aUrl.toString();
@@ -210,15 +214,24 @@ public class CoreNlpDependencyParser
             coreNlpProps.setProperty("extradependencies", extraDependencies.toString());
             
             DependencyParseAnnotator annotator = new DependencyParseAnnotator(coreNlpProps);
+
+            List<String> knownLabels;
+            try {
+                DependencyParser parser = (DependencyParser) FieldUtils.readField(annotator, "parser", true);
+                knownLabels = (List<String>) FieldUtils.readField(parser, "knownLabels", true);
+            }
+            catch (IllegalAccessException e) {
+                throw new IOException(e);
+            }
             
-            // SingletonTagset tags = new SingletonTagset(POS.class, getResourceMetaData()
-            // .getProperty(("pos.tagset")));
-            // tags.addAll(tagger.tagSet());
-            // addTagset(tags);
-            //
-            // if (printTagSet) {
-            // getContext().getLogger().log(INFO, getTagset().toString());
-            // }
+            SingletonTagset tags = new SingletonTagset(Dependency.class, getResourceMetaData()
+                    .getProperty(("dependency.tagset")));
+            tags.addAll(knownLabels);
+            addTagset(tags);
+
+            if (printTagSet) {
+                getContext().getLogger().log(INFO, getTagset().toString());
+            }
 
             return annotator;
         }

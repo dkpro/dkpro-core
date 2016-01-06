@@ -1,0 +1,177 @@
+<!--
+
+    Copyright 2007-2014    
+    Ubiquitous Knowledge Processing (UKP) Lab
+    Technische Universität Darmstadt
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see http://www.gnu.org/licenses/.
+
+-->
+<project basedir="../.." default="separate-jars">
+	<import>
+		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.7.0/ant-macros.xml"/>
+	</import>
+	
+	<!-- 
+	  - Upstream versions - meta data versions are maintained per model below 
+	  -->
+	<!-- http://nlp.stanford.edu/software/corenlp.shtml -->
+	<property name="core.date" value="2015-04-20"/>
+	
+
+	<!-- 
+	  - Output package configuration
+	  -->
+	<property name="outputPackage" value="de/tudarmstadt/ukp/dkpro/core/corenlp/lib"/>
+
+	<target name="local-maven">
+		<property name="install-artifact-mode" value="local"/>
+		<antcall target="separate-jars"/>
+	</target>
+
+	<target name="remote-maven">
+		<property name="install-artifact-mode" value="remote"/>
+		<antcall target="separate-jars"/>
+	</target>
+
+	<target name="separate-jars" depends="en">
+		<antcall target="jar-notice"/>
+	</target>
+
+	<target name="en" depends="download-core">
+		<antcall target="depparser-en-sd"/>
+        <antcall target="depparser-en-ud"/>
+        <antcall target="depparser-en-wsj-sd"/>
+	</target>
+	
+	<target name="depparser-en-ud">
+    	<install-stub-and-upstream-file 
+    		file="target/download/core/english_UD.gz" 
+    		md5="1f34d35983a51a95e66895dad273a649"
+    	    groupId="de.tudarmstadt.ukp.dkpro.core" 
+    	    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.corenlp"
+    		upstreamVersion="20150418"
+    		metaDataVersion="1"
+    		tool="depparser" 
+    		language="en" 
+    		variant="ud" 
+    		extension="gz">		
+			<metadata>
+	    		<!-- entry key="pos.tagset" value="FIXME"/ -->
+				<entry key="dependency.tagset" value="universal"/>
+			</metadata>
+		</install-stub-and-upstream-file>		
+	</target>
+		
+    <target name="depparser-en-wsj-sd">
+        <install-stub-and-upstream-file 
+            file="target/download/core/wsj_SD.gz" 
+            md5="5c565dbb4321a161bc6b620ce70daee8"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.corenlp"
+            upstreamVersion="20150418"
+            metaDataVersion="1"
+            tool="depparser" 
+            language="en" 
+            variant="wsj-sd" 
+            extension="gz">     
+            <metadata>
+                <!-- entry key="pos.tagset" value="FIXME"/ -->
+                <entry key="dependency.tagset" value="stanford341"/>
+            </metadata>
+        </install-stub-and-upstream-file>       
+    </target>
+        
+    <target name="depparser-en-sd">
+        <install-stub-and-upstream-file 
+            file="target/download/core/english_SD.gz" 
+            md5="dbb3dd903dd081bf5d6563a643fe206b"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.corenlp"
+            upstreamVersion="20150418"
+            metaDataVersion="1"
+            tool="depparser" 
+            language="en" 
+            variant="sd" 
+            extension="gz">     
+            <metadata>
+                <!-- entry key="pos.tagset" value="FIXME"/ -->
+                <entry key="dependency.tagset" value="stanford341"/>
+            </metadata>
+        </install-stub-and-upstream-file>       
+    </target>
+        
+	<target name="-check-download-core">
+		<available property="download-core.DONE" file="target/download/core/DONE"/>
+	</target>
+
+	<target name="download-core" depends="-check-download-core" unless="download-core.DONE">
+		<mkdir dir="target/download/core"/>
+    	<get src="http://nlp.stanford.edu/downloads/stanford-corenlp-full-${core.date}.zip" dest="target/download/core/core-nlp.zip" skipexisting="true"/>
+    	<unzip src="target/download/core/core-nlp.zip" dest="target/download/core">
+    		<patternset>
+    			<include name="**/stanford-corenlp-*-models.jar"/>		
+			</patternset>
+    		<chainedmapper>
+	    		<mapper type="flatten"/>
+	    		<firstmatchmapper>
+					<globmapper from="*" to="stanford-corenlp-models.jar"/>
+				</firstmatchmapper>
+    		</chainedmapper>
+    	</unzip>
+		<unzip src="target/download/core/stanford-corenlp-models.jar" dest="target/download/core">
+    		<patternset>
+    			<include name="**/parser/nndep/*"/>		
+			</patternset>
+    		<chainedmapper>
+	    		<mapper type="flatten"/>
+    		</chainedmapper>
+		</unzip>
+    	<delete file="target/download/core/stanford-corenlp-models.jar"/>
+		<touch file="target/download/core/DONE"/>
+	</target>
+	
+	<target name="jar-notice">
+		<echo>================================</echo>
+		<echo>== IMPORTANT LICENSE REMINDER ==</echo>
+		<echo>================================</echo>
+		<echo> </echo>
+		<echo>YOU MAY NOT BE ALLOWED TO REDISTRIBUTE THESE JARS WITHOUT EXPLICIT PERMISSION</echo>
+		<echo> </echo>
+		<echo>from their respective original creators. Please make sure to check the licenses.</echo>
+		<echo> </echo>
+		<echo>For Maven users:</echo>
+		<echo> </echo>
+		<echo>Use the build target "local-maven" (ant local-maven) to automatically install</echo>
+		<echo>the jars into your local Maven repository at ~/.m2/repository.</echo>
+		<echo> </echo>
+		<echo>If you choose to upload these JARs to a PRIVATE repository or install them in</echo>
+		<echo>your local repository manually, use the following groupId and artifactId scheme:</echo>
+		<echo> </echo>
+		<echo>    groupId: de.tudarmstadt.ukp.dkpro.core</echo>
+		<echo> artifactId: de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-&lt;tool&gt;-&lt;lang&gt;-&lt;variant&gt;</echo>
+		<echo>    version: &lt;use the timestamp encoded in the JAR file name&gt;</echo>
+		<echo> </echo>
+		<echo> Example:</echo>
+		<echo> </echo>
+		<echo>    groupId: de.tudarmstadt.ukp.dkpro.core</echo>
+		<echo> artifactId: de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-en-pcfg</echo>
+		<echo>    version: 1.0.2</echo>
+		<echo> </echo>
+		<echo>If you have done that, you may enable the Maven profile "use-proprietary-resources"</echo>
+		<echo>to enable additional test cases when building the DKPro Stanford NLP Integration.</echo>
+		<echo> </echo>
+		<echo>YOU MAY NOT BE ALLOWED TO REDISTRIBUTE THESE JARS WITHOUT EXPLICIT PERMISSION</echo>
+	</target>
+</project>

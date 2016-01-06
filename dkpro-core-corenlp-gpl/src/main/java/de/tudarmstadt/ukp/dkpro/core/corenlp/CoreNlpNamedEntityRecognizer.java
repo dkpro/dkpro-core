@@ -47,7 +47,6 @@ import edu.stanford.nlp.ie.AbstractSequenceClassifier;
 import edu.stanford.nlp.ie.NERClassifierCombiner;
 import edu.stanford.nlp.ie.crf.CRFClassifier;
 import edu.stanford.nlp.ie.ner.CMMClassifier;
-import edu.stanford.nlp.ie.regexp.NumberSequenceClassifier;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.NERCombinerAnnotator;
@@ -158,7 +157,9 @@ public class CoreNlpNamedEntityRecognizer
 
     // FIXME Using USE_SUTIME_DEFAULT autodetects presence of SUTime. Need three values here:
     // on, off, auto
-    boolean useSUTime = NumberSequenceClassifier.USE_SUTIME_DEFAULT;    
+    public static final String PARAM_USE_SUTIME = "useSUTime";
+    @ConfigurationParameter(name = PARAM_USE_SUTIME, mandatory = true, defaultValue="false")
+    boolean useSUTime; // = NumberSequenceClassifier.USE_SUTIME_DEFAULT;    
     
     boolean verbose = false;
     
@@ -175,9 +176,9 @@ public class CoreNlpNamedEntityRecognizer
 
         mappingProvider = new MappingProvider();
         mappingProvider
-                .setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/ner-default-variants.map");
+                .setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/corenlp/lib/ner-default-variants.map");
         mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/"
-                + "core/stanfordnlp/lib/ner-${language}-${variant}.map");
+                + "core/corenlp/lib/ner-${language}-${variant}.map");
         mappingProvider.setDefault(MappingProvider.BASE_TYPE, NamedEntity.class.getName());
         mappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
         mappingProvider.setOverride(MappingProvider.LANGUAGE, language);

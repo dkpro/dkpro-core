@@ -71,6 +71,7 @@ import edu.stanford.nlp.trees.international.pennchinese.ChineseGrammaticalRelati
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
                 "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"},
         outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
                 "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"})
 public class CoreNlpParser
     extends JCasAnnotator_ImplBase

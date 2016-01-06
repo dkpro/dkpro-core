@@ -16,21 +16,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
-package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
+package de.tudarmstadt.ukp.dkpro.core.corenlp;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.junit.Assert.assertFalse;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Filter;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.LogRecord;
-
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
 import org.junit.Ignore;
@@ -42,9 +32,7 @@ import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import edu.stanford.nlp.dcoref.Constants;
 
-/**
- */
-public class StanfordCoreferenceResolverTest
+public class CoreNlpCoreferenceResolverTest
 {
 	@Test
 	public void test()
@@ -58,58 +46,6 @@ public class StanfordCoreferenceResolverTest
 		
         AssertAnnotations.assertCoreference(ref, select(jcas, CoreferenceChain.class));
 	}
-
-	// https://github.com/dkpro/dkpro-core/issues/582
-    //	Jan 22, 2015 5:11:54 PM edu.stanford.nlp.dcoref.Document findSpeaker
-    //	WARNING: Cannot find node in dependency for word rally
-    //	Jan 22, 2015 5:11:54 PM edu.stanford.nlp.dcoref.Document findSpeaker
-    //	WARNING: Cannot find node in dependency for word told
-    @Test
-    public void test2()
-        throws Exception
-    {
-        final List<LogRecord> records = new ArrayList<LogRecord>();
-        ConsoleHandler handler = (ConsoleHandler) LogManager.getLogManager().getLogger("")
-                .getHandlers()[0];
-        java.util.logging.Level oldLevel = handler.getLevel();
-        handler.setLevel(Level.ALL);
-        handler.setFilter(new Filter()
-        {
-            @Override
-            public boolean isLoggable(LogRecord record)
-            {
-                records.add(record);
-                return false;
-            }
-        });
-
-        try {
-            JCas jcas = runTest("en",
-                    "\" We cannot forgive this war , \" Miyako Fuji , 20 , one of the rally 's "
-                            + "organisers told Jiji news agency .");
-
-            String[][] ref = { 
-                    { "Jiji" }, 
-                    { "We" },
-                    { "this war" },
-                    { "Miyako Fuji , 20 , one of the rally 's organisers" },
-                    { "Miyako Fuji" }, 
-                    { "one of the rally 's organisers" },
-                    { "Jiji news agency" } };
-
-            for (LogRecord r : records) {
-                assertFalse(r.getMessage().contains("Cannot find node in dependency for word"));
-            }
-
-            AssertAnnotations.assertCoreference(ref, select(jcas, CoreferenceChain.class));
-        }
-        finally {
-            if (oldLevel != null) {
-                handler.setLevel(oldLevel);
-                handler.setFilter(null);
-            }
-        }
-    }
 
     @Test
     public void testDictionarySieve()
@@ -143,8 +79,8 @@ public class StanfordCoreferenceResolverTest
                 + "(NNPS Don) (POS '))))))) (, ,) (NP (PRP he)) (VP (VBD said)) (. .)))"
         };
 
-        AssertAnnotations.assertPennTree(pennTree, select(jcas, PennTree.class));
         AssertAnnotations.assertCoreference(ref, select(jcas, CoreferenceChain.class));
+        AssertAnnotations.assertPennTree(pennTree, select(jcas, PennTree.class));
     }
 
     @Test
@@ -209,17 +145,18 @@ public class StanfordCoreferenceResolverTest
     {
         // Coreference resolution requires the parser and the NER to run before
         AnalysisEngine engine = createEngine(createEngineDescription(
-                createEngineDescription(StanfordSegmenter.class),
-                createEngineDescription(StanfordLemmatizer.class),
-                createEngineDescription(StanfordParser.class,
-                        StanfordParser.PARAM_WRITE_CONSTITUENT, true,
-                        StanfordParser.PARAM_WRITE_DEPENDENCY, true,
-                        StanfordParser.PARAM_WRITE_PENN_TREE, true,
-                        StanfordParser.PARAM_WRITE_POS, true),
+                createEngineDescription(CoreNlpSegmenter.class),
+                createEngineDescription(CoreNlpPosTagger.class),
+                createEngineDescription(CoreNlpLemmatizer.class),
+                createEngineDescription(CoreNlpParser.class,
+                        CoreNlpParser.PARAM_WRITE_CONSTITUENT, true,
+                        CoreNlpParser.PARAM_WRITE_DEPENDENCY, true,
+                        CoreNlpParser.PARAM_WRITE_PENN_TREE, true,
+                        CoreNlpParser.PARAM_WRITE_POS, true),
                 createEngineDescription(
-                        StanfordNamedEntityRecognizer.class),
-                createEngineDescription(StanfordCoreferenceResolver.class,
-                        StanfordCoreferenceResolver.PARAM_SIEVES, aSieves)));
+                        CoreNlpNamedEntityRecognizer.class),
+                createEngineDescription(CoreNlpCoreferenceResolver.class,
+                        CoreNlpCoreferenceResolver.PARAM_SIEVES, aSieves)));
 
         // Set up a simple example
         JCas jcas = engine.newJCas();

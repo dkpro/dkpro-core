@@ -18,17 +18,23 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.corenlp;
 
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
+import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.fit.factory.JCasFactory;
+import org.apache.uima.jcas.JCas;
 import org.junit.Rule;
 import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.harness.SegmenterHarness;
 
-public
-class CoreNlpSegmenterTest
+public class CoreNlpSegmenterTest
 {
 	@Test
 	public void run() throws Throwable
@@ -38,6 +44,38 @@ class CoreNlpSegmenterTest
         SegmenterHarness.run(aed, "de.4", "en.9", "ar.1", "zh.1", "zh.2");
 	}
 	
+    @Test
+    public void testEnglishSpeech() throws Exception
+    {
+        JCas jcas = JCasFactory.createJCas();
+        jcas.setDocumentLanguage("en");
+        jcas.setDocumentText("'Let's go! I want to see the Don', he said.");
+        
+        AnalysisEngine aed = createEngine(CoreNlpSegmenter.class);
+        aed.process(jcas);
+        
+        String[] tokens = { "'", "Let", "'s", "go", "!", "I", "want", "to", "see", "the", "Don",
+                "'", ",", "he", "said", "." };
+        
+        AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
+    }
+    
+    @Test
+    public void testSpanish() throws Exception
+    {
+        JCas jcas = JCasFactory.createJCas();
+        jcas.setDocumentLanguage("es");
+        jcas.setDocumentText("Tim dijo a Jamie para la 100ª vez que abandone la sala.");
+        
+        AnalysisEngine aed = createEngine(CoreNlpSegmenter.class);
+        aed.process(jcas);
+        
+        String[] tokens = { "Tim", "dijo", "a", "Jamie", "para", "la", "100ª", "vez", "que",
+                "abandone", "la", "sala", "." };
+        
+        AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
+    }
+    
     @Test
     public void testZoning() throws Exception
     {

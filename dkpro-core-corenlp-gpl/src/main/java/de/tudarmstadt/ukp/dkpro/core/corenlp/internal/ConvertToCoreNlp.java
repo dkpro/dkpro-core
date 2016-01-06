@@ -29,11 +29,11 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.uima.cas.CASException;
-import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
@@ -49,6 +49,7 @@ import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.trees.LabeledScoredTreeFactory;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TreeFactory;
+import edu.stanford.nlp.trees.TreeCoreAnnotations.TreeAnnotation;
 import edu.stanford.nlp.util.CoreMap;
 
 public class ConvertToCoreNlp
@@ -104,7 +105,7 @@ public class ConvertToCoreNlp
             
             // Tokens
             List<CoreLabel> tokens = new ArrayList<>();
-            for (Token t : selectCovered(aJCas, Token.class, s)) {
+            for (Token t : selectCovered(Token.class, s)) {
                 CoreLabel token = tokenFactory.makeToken(t.getCoveredText(), t.getBegin(),
                         t.getEnd() - t.getBegin());
                 // First add token so that tokens.size() returns a 1-based counting as required
@@ -128,8 +129,27 @@ public class ConvertToCoreNlp
                 if (t.getStem() != null) {
                     token.set(StemAnnotation.class, t.getStem().getValue());
                 }
+                
+                // NamedEntity
+                // TODO: only token-based NEs are supported, but not multi-token NEs
+                // Supporting multi-token NEs via selectCovering would be very slow. To support
+                // them, another approach would need to be implemented, e.g. via indexCovering.
+                List<NamedEntity> nes = selectCovered(NamedEntity.class, t);
+                if (nes.size() > 0) {
+                    token.set(NamedEntityTagAnnotation.class, nes.get(0).getValue());
+                }
+                else {
+                    token.set(NamedEntityTagAnnotation.class, "O");
+                }
             }
 
+            // Constituents
+            for (ROOT r : selectCovered(ROOT.class, s)) {
+                Tree tree = createStanfordTree(r);
+                tree.indexSpans();
+                sentence.set(TreeAnnotation.class, tree);
+            }
+            
             if (ptb3Escaping) {
                 tokens = applyPtbEscaping(tokens, quoteBegin, quoteEnd);
             }
@@ -228,11 +248,7 @@ public class ConvertToCoreNlp
                     trailWhitespaces.toString());
 
             // get POS-annotation
-            // get the token that is covered by the POS
-            List<POS> coveredPos = JCasUtil.selectCovered(aJCas, POS.class, wordAnnotation);
-            // the POS should only cover one token
-            assert coveredPos.size() == 1;
-            POS pos = coveredPos.get(0);
+            POS pos = wordAnnotation.getPos();
 
             // create POS-Node in the tree and attach word-node to it
             rootNode = tFact.newTreeNode(pos.getPosValue(),

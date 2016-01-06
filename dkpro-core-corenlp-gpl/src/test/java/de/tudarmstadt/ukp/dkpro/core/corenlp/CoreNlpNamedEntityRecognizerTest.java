@@ -161,7 +161,6 @@ public class CoreNlpNamedEntityRecognizerTest
 
         String[] ne = {
                 "[  0,  6]Person(I-PER) (Markus)",
-                "[ 21, 23]NamedEntity(NUMBER) (10)",
                 "[ 35, 38]Organization(I-ORG) (SAP)",
                 "[ 42, 53]Location(I-LOC) (Deutschland)" };
 
@@ -178,7 +177,6 @@ public class CoreNlpNamedEntityRecognizerTest
 
         String[] ne = {
                 "[  0,  6]Person(I-PER) (Markus)",
-                "[ 21, 23]NamedEntity(NUMBER) (10)",
                 "[ 35, 38]Organization(I-ORG) (SAP)",
                 "[ 42, 53]Location(I-LOC) (Deutschland)" };
 
@@ -194,7 +192,6 @@ public class CoreNlpNamedEntityRecognizerTest
        JCas jcas = runTest("es", null, "Hace 10 años Markus trabaja en SAP en Alemania .");
 
        String[] ne = {
-               "[  5,  7]NamedEntity(NUMBER) (10)",
                "[ 13, 19]Person(PERS) (Markus)",
                "[ 31, 34]Organization(ORG) (SAP)",
                "[ 38, 46]Location(LUG) (Alemania)" };

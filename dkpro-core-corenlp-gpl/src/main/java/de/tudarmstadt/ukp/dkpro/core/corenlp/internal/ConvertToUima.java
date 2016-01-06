@@ -20,11 +20,14 @@ package de.tudarmstadt.ukp.dkpro.core.corenlp.internal;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.uima.cas.Type;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
 
+import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
+import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
@@ -34,6 +37,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
+import edu.stanford.nlp.dcoref.CorefChain;
+import edu.stanford.nlp.dcoref.CorefCoreAnnotations;
+import edu.stanford.nlp.dcoref.CorefChain.CorefMention;
 import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetBeginAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetEndAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.LemmaAnnotation;
@@ -252,5 +258,41 @@ public class ConvertToUima
             pTree.addToIndexes();
         }
         
+    }
+
+    public static void convertCorefChains(JCas aJCas, Annotation aDocument)
+    {
+        List<CoreMap> sentences = aDocument.get(SentencesAnnotation.class);
+        Map<Integer, CorefChain> chains = aDocument
+                .get(CorefCoreAnnotations.CorefChainAnnotation.class);
+        for (CorefChain chain : chains.values()) {
+            CoreferenceLink last = null;
+            for (CorefMention mention : chain.getMentionsInTextualOrder()) {
+                CoreLabel beginLabel = sentences.get(mention.sentNum - 1)
+                        .get(TokensAnnotation.class).get(mention.startIndex - 1);
+                CoreLabel endLabel = sentences.get(mention.sentNum - 1).get(TokensAnnotation.class)
+                        .get(mention.endIndex - 2);
+                CoreferenceLink link = new CoreferenceLink(aJCas, beginLabel.get(TokenKey.class)
+                        .getBegin(), endLabel.get(TokenKey.class).getEnd());
+    
+                if (mention.mentionType != null) {
+                    link.setReferenceType(mention.mentionType.toString());
+                }
+    
+                if (last == null) {
+                    // This is the first mention. Here we'll initialize the chain
+                    CoreferenceChain corefChain = new CoreferenceChain(aJCas);
+                    corefChain.setFirst(link);
+                    corefChain.addToIndexes();
+                }
+                else {
+                    // For the other mentions, we'll add them to the chain.
+                    last.setNext(link);
+                }
+                last = link;
+    
+                link.addToIndexes();
+            }
+        }
     }
 }
