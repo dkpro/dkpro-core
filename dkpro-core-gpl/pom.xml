@@ -90,7 +90,6 @@
 	<modules>
 		<module>../dkpro-core-arktools-gpl</module>
 		<module>../dkpro-core-berkeleyparser-gpl</module>
-		<module>../dkpro-core-distribution-gpl</module>
 		<module>../dkpro-core-gate-gpl</module>
         <module>../dkpro-core-lingpipe-gpl</module>
 		<module>../dkpro-core-matetools-gpl</module>
