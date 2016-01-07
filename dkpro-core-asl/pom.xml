@@ -499,8 +499,6 @@
 		<module>../dkpro-core-tokit-asl</module>
 		<module>../dkpro-core-treetagger-asl</module>
 		<module>../dkpro-core-textnormalizer-asl</module>
-	    <!-- Distribution modules -->
-		<module>../dkpro-core-distribution-asl</module>
 	</modules>
 	<profiles>
 		<profile>
