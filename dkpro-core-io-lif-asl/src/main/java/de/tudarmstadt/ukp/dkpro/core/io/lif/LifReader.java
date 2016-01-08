@@ -45,6 +45,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 
+/**
+ * Writer for the LIF format.
+ */
 public class LifReader
     extends JCasResourceCollectionReader_ImplBase
 {

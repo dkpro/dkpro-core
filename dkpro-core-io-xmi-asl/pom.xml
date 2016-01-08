@@ -25,7 +25,7 @@
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.io.xmi-asl</artifactId>
     <packaging>jar</packaging>
-	<name>DKPro Core ASL - IO - XMI</name>
+	<name>DKPro Core ASL - IO - UIMA XMI</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>

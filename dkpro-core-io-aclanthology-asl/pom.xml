@@ -25,7 +25,7 @@
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.io.aclanthology-asl</artifactId>
     <packaging>jar</packaging>
-	<name>DKPro Core ASL - IO - ACL Anthology (ASL)</name>
+	<name>DKPro Core ASL - IO - ACL Anthology</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>

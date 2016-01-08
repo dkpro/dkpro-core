@@ -5,7 +5,7 @@ import Util;
 .Models (${models.size()})
 [options="header"]
 |====
-|Language|Tool|Variant|Version|Link
+|Language|Tool|Variant|Version
 
 <% models.each { model -> %>
 |${model.@language}
@@ -15,9 +15,8 @@ if (model.@engine as String) {
 } else {
     out.println "`${model.@tool}` @ `${model.@shortBase}`";
 } %>
-|${model.@variant}
+|<<model-${model.@artifactId},${model.@variant}>>
 |${model.@version}
-|<<model-${model.@artifactId},details>>
 
 <% } %>
 |====
