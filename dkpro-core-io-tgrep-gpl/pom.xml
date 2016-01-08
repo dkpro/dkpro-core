@@ -28,7 +28,7 @@
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.io.tgrep-gpl</artifactId>
     <packaging>jar</packaging>
-	<name>DKPro Core GPL - TGrep2</name>
+	<name>DKPro Core GPL - IO - TGrep2</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>

@@ -1,8 +1,139 @@
 <%
 import Util;
 
+def isElevatedType(type) {
+    // Not a top-level type
+    !(type.supertypeName in ['org.apache.uima.jcas.cas.TOP', 'uima.tcas.Annotation']) &&
+    // Does not define new features
+    type.features.size() == 0;
+}
+
+def renderType(type) {
+    def shortTypeName = type.name.tokenize('.')[-1];
+
+    if (isElevatedType(type)) {
+        out.println("[discrete]");
+    }
+%>
+[[type-${ type.name }]]
+==== ${shortTypeName}
+
+[small]#*_Name:_* __${type.name}__# +
+[small]#*_Supertype:_* __${Util.typeLink(type.supertypeName)}__# +
+
+++++
+${Util.preparePassthrough(type.description)}
+++++
+
+<%
+    if (type.features) { 
+%>
+[discrete]
+===== Features of ${shortTypeName} (${type.features.size()})
+<%                  
+        type.features.sort { type.name }.each { 
+%>
+`${it.name}` (__${Util.typeLink(it.rangeTypeName)}__<%
+            if (it.elementType) {
+                out.print " of ${Util.typeLink(it.elementType)}"
+            } 
+%>):: ${it.description ?: '__No description__'}
+<%                  
+        } 
+    } // if (type.features) 
+%>
+
+[discrete]
+===== Producers and consumers of ${shortTypeName} 
+[cols="1h,2v"]
+|====
+|Producers
+| <%
+    def producers = engines
+        .sort{ it.key }
+        .findAll { id, engine ->
+            engine.spec.analysisEngineMetaData?.capabilities?.any { 
+                it.outputs?.any { it.name == type.name } } };
+    producers += formats
+        .sort{ it.key }
+        .findAll { id, format ->
+            format.readerSpec?.collectionReaderMetaData?.capabilities?.any { 
+                it.outputs?.any { it.name == type.name } } };
+    if (producers) {            
+        producers.each { id, producer -> 
+            if (producer.spec) {
+                out.println Util.engineLink(id);
+            }
+            else {
+                out.println "${Util.formatLink(producer)} (format)";
+            }
+        }
+    } else {
+        out.println('__None declared__');
+    }
+%>
+|Consumers
+| <%
+    def consumers = engines
+        .sort{ it.key }
+        .findAll { engine ->
+            engine.value.spec.analysisEngineMetaData?.capabilities?.any { 
+                it.inputs?.any { it.name == type.name } } };
+    consumers += formats
+        .sort{ it.key }
+        .findAll { id, format ->
+            format.writerSpec?.analysisEngineMetaData?.capabilities?.any { 
+                it.outputs?.any { it.name == type.name } } };
+    if (consumers) {            
+        producers.each { id, consumer -> 
+            if (consumer.spec) {
+                out.println Util.engineLink(id);
+            }
+            else {
+                out.println "${Util.formatLink(consumer)} (format)";
+            }
+        }
+    } else {
+        out.println('__None declared__');
+    }
+%>
+|====
+
+
+<%
+    def subtypes = typesystems
+        .collect { it.types }
+        .flatten()
+        .sort { it.name.tokenize('.')[-1] }
+        .unique { it.name }
+        .findAll { it.supertypeName == type.name };
+    
+    if (subtypes) {
+%>
+[discrete]
+===== Sub-types of ${shortTypeName} (${subtypes.size()})
+[options="header",cols="1,3"]
+|====
+|Type|Description
+<%  
+        subtypes.each { subtype -> 
+%>
+|${Util.typeLink(subtype.name)}
+|${Util.shortDesc(subtype.description)}
+<% 
+        } // subtypes.each
+%>
+
+|====
+<%
+    } // if (subtypes)
+} // renderType()
+
+
+
 typesystems
     .groupBy { it.name }
+    .sort { it.key }
     .each { section, sectionTypesystems -> 
 %>
 === ${section}
@@ -24,131 +155,21 @@ ${Util.preparePassthrough(typesystem.description)}
 
 <%        
         }
+        
+        sectionTypesystems
+            .collect { it.types }
+            .flatten()
+            .unique { it.name }
+            .findAll { !isElevatedType(it) }
+            .sort { it.name.tokenize('.')[-1] }
+            .each { renderType(it) }
 
         sectionTypesystems
             .collect { it.types }
             .flatten()
-            .sort { it.name.tokenize('.')[-1] }
             .unique { it.name }
-            .each { type -> 
-                def shortTypeName = type.name.tokenize('.')[-1];
-                
-                // Hide elevated types from the TOC
-                if ( 
-                    // Not a top-level type
-                    !(type.supertypeName in ['org.apache.uima.jcas.cas.TOP', 'uima.tcas.Annotation']) &&
-                    // Does not define new features
-                    type.features.size() == 0
-                ) {
-                    out.println "[discrete]" 
-                }
-%>
-[[type-${ type.name }]]
-==== ${shortTypeName}
-
-[small]#*_Name:_* __${type.name}__# +
-[small]#*_Supertype:_* __${Util.typeLink(type.supertypeName)}__# +
-
-++++
-${Util.preparePassthrough(type.description)}
-++++
-
-<%              if (type.features) { %>
-[discrete]
-===== Features of ${shortTypeName} (${type.features.size()})
-<%                  type.features.sort { type.name }.each { %>
-`${it.name}` (__${Util.typeLink(it.rangeTypeName)}__<%
-                        if (it.elementType) {
-                            out.print " of ${Util.typeLink(it.elementType)}"
-                        } 
-%>):: ${it.description ?: '__No description__'}
-<%                  } %>
-<%              } // if (type.features) %>
-
-[discrete]
-===== Producers and consumers of ${shortTypeName} 
-[cols="1h,2v"]
-|====
-|Producers
-| <%
-                def producers = engines
-                    .sort{ it.key }
-                    .findAll { id, engine ->
-                        engine.spec.analysisEngineMetaData?.capabilities?.any { 
-                            it.outputs?.any { it.name == type.name } } };
-                producers += formats
-                    .sort{ it.key }
-                    .findAll { id, format ->
-                        format.readerSpec?.collectionReaderMetaData?.capabilities?.any { 
-                            it.outputs?.any { it.name == type.name } } };
-                if (producers) {            
-                    producers.each { id, producer -> 
-                        if (producer.spec) {
-                            out.println Util.engineLink(id);
-                        }
-                        else {
-                            out.println "${Util.formatLink(producer)} (format)";
-                        }
-                    }
-                } else {
-                    out.println('__None declared__');
-                }
-%>
-|Consumers
-| <%
-                def consumers = engines
-                    .sort{ it.key }
-                    .findAll { engine ->
-                        engine.value.spec.analysisEngineMetaData?.capabilities?.any { 
-                            it.inputs?.any { it.name == type.name } } };
-                consumers += formats
-                    .sort{ it.key }
-                    .findAll { id, format ->
-                        format.writerSpec?.analysisEngineMetaData?.capabilities?.any { 
-                            it.outputs?.any { it.name == type.name } } };
-                if (consumers) {            
-                    producers.each { id, consumer -> 
-                        if (consumer.spec) {
-                            out.println Util.engineLink(id);
-                        }
-                        else {
-                            out.println "${Util.formatLink(consumer)} (format)";
-                        }
-                    }
-                } else {
-                    out.println('__None declared__');
-                }
-%>
-|====
-
-
-<%
-                def subtypes = typesystems
-                    .collect { it.types }
-                    .flatten()
-                    .sort { it.name.tokenize('.')[-1] }
-                    .unique { it.name }
-                    .findAll { it.supertypeName == type.name };
-            
-                if (subtypes) {
-%>
-[discrete]
-===== Sub-types of ${shortTypeName} (${subtypes.size()})
-[options="header",cols="1,3"]
-|====
-|Type|Description
-<%  
-                    subtypes.each { subtype -> 
-%>
-|${Util.typeLink(subtype.name)}
-|${Util.shortDesc(subtype.description)}
-<% 
-                    } // subtypes.each
-%>
-
-|====
-<%
-                } // if (subtypes)
-        } // sectionTypesystems
+            .findAll { isElevatedType(it) }
+            .sort { it.name.tokenize('.')[-1] }
+            .each { renderType(it) }
 } // typesystems 
 %>

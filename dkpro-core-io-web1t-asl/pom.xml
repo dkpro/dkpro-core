@@ -25,7 +25,7 @@
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.io.web1t-asl</artifactId>
     <packaging>jar</packaging>
-	<name>DKPro Core ASL - IO - WEB1T (ASL)</name>
+	<name>DKPro Core ASL - IO - Web1T n-grams</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
