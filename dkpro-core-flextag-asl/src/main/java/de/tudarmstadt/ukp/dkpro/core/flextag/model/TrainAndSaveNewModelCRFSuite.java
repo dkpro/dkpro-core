@@ -107,12 +107,12 @@ public class TrainAndSaveNewModelCRFSuite implements Constants {
 	}
 
 	protected void validation(ParameterSpace pSpace) throws Exception {
-		SaveModelCRFSuiteBatchTask batch = new SaveModelCRFSuiteBatchTask(
-				experimentName, modelOutputFolder, CRFSuiteAdapter.class);
-		batch.setParameterSpace(pSpace);
-
-		// Run
-		Lab.getInstance().run(batch);
+//		SaveModelCRFSuiteBatchTask batch = new SaveModelCRFSuiteBatchTask(
+//				experimentName, modelOutputFolder, CRFSuiteAdapter.class);
+//		batch.setParameterSpace(pSpace);
+//
+//		// Run
+//		Lab.getInstance().run(batch);
 	}
 
 	protected AnalysisEngineDescription getPreprocessing()

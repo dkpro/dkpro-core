@@ -109,13 +109,13 @@ public class TrainAndSaveNewModelSVMHMM implements Constants {
 	}
 
 	protected void validation(ParameterSpace pSpace) throws Exception {
-		SaveModelSvmhmmBatchTask batch = new SaveModelSvmhmmBatchTask(
-				experimentName, modelOutputFolder, SVMHMMAdapter.class,
-				getPreprocessing());
-		batch.setParameterSpace(pSpace);
-
-		// Run
-		Lab.getInstance().run(batch);
+//		SaveModelSvmhmmBatchTask batch = new SaveModelSvmhmmBatchTask(
+//				experimentName, modelOutputFolder, SVMHMMAdapter.class,
+//				getPreprocessing());
+//		batch.setParameterSpace(pSpace);
+//
+//		// Run
+//		Lab.getInstance().run(batch);
 	}
 
 	protected AnalysisEngineDescription getPreprocessing()
