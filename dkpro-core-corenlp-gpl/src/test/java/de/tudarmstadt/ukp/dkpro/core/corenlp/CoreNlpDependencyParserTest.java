@@ -34,16 +34,16 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class CoreNlpDependencyParserTest
 {
-    private static final String[] STANFORD_DEPENDENCY_TAGS = { "-NULL-", "acomp", "advcl", "advmod",
-            "amod", "appos", "aux", "auxpass", "cc", "ccomp", "conj", "cop", "csubj", "csubjpass",
-            "dep", "det", "discourse", "dobj", "expl", "iobj", "mark", "mwe", "neg", "nn",
-            "npadvmod", "nsubj", "nsubjpass", "num", "number", "parataxis", "pcomp", "pobj",
-            "poss", "possessive", "preconj", "predet", "prep", "prt", "punct", "quantmod", "rcmod",
-            "root", "tmod", "vmod", "xcomp" };
+    private static final String[] STANFORD_DEPENDENCY_TAGS = { "acomp", "advcl", "advmod", "amod",
+            "appos", "aux", "auxpass", "cc", "ccomp", "conj", "cop", "csubj", "csubjpass", "dep",
+            "det", "discourse", "dobj", "expl", "iobj", "mark", "mwe", "neg", "nn", "npadvmod",
+            "nsubj", "nsubjpass", "num", "number", "parataxis", "pcomp", "pobj", "poss",
+            "possessive", "preconj", "predet", "prep", "prt", "punct", "quantmod", "rcmod", "root",
+            "tmod", "vmod", "xcomp" };
 
-    private static final String[] UNIVERSAL_DEPENDENCY_TAGS = { "-NULL-", "acl", "acl:relcl",
-            "advcl", "advmod", "amod", "appos", "aux", "auxpass", "case", "cc", "cc:preconj",
-            "ccomp", "compound", "compound:prt", "conj", "cop", "csubj", "csubjpass", "dep", "det",
+    private static final String[] UNIVERSAL_DEPENDENCY_TAGS = { "acl", "acl:relcl", "advcl",
+            "advmod", "amod", "appos", "aux", "auxpass", "case", "cc", "cc:preconj", "ccomp",
+            "compound", "compound:prt", "conj", "cop", "csubj", "csubjpass", "dep", "det",
             "det:predet", "discourse", "dobj", "expl", "iobj", "list", "mark", "mwe", "neg",
             "nmod", "nmod:npmod", "nmod:poss", "nmod:tmod", "nsubj", "nsubjpass", "nummod",
             "parataxis", "punct", "root", "xcomp" };
@@ -75,7 +75,7 @@ public class CoreNlpDependencyParserTest
                 "[102,110]POBJ(pobj) D[102,110](possible) G[99,101](as)",
                 "[111,112]DEP(dep) D[111,112](.) G[86,98](dependencies)" };
 
-        String[] unmappedDep = { "-NULL-" };
+        String[] unmappedDep = {};
 
         AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(Dependency.class, "stanford341", STANFORD_DEPENDENCY_TAGS, jcas);
@@ -109,7 +109,7 @@ public class CoreNlpDependencyParserTest
                 "[102,110]ADVCL(advcl) D[102,110](possible) G[86,98](dependencies)",
                 "[111,112]PUNCT(punct) D[111,112](.) G[82,85](and)" };
 
-        String[] unmappedDep = { "-NULL-", "acl:relcl", "cc:preconj", "compound:prt", "det:predet",
+        String[] unmappedDep = { "acl:relcl", "cc:preconj", "compound:prt", "det:predet",
                 "nmod:npmod", "nmod:poss", "nmod:tmod" };
 
         AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
@@ -144,7 +144,7 @@ public class CoreNlpDependencyParserTest
                 "[102,110]POBJ(pobj) D[102,110](possible) G[99,101](as)",
                 "[111,112]DEP(dep) D[111,112](.) G[8,9](a)" };
 
-        String[] unmappedDep = { "-NULL-" };
+        String[] unmappedDep = {};
 
         AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(Dependency.class, "stanford341", STANFORD_DEPENDENCY_TAGS, jcas);

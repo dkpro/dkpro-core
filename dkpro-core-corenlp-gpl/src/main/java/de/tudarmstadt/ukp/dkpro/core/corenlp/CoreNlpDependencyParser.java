@@ -217,12 +217,16 @@ public class CoreNlpDependencyParser
 
             List<String> knownLabels;
             try {
-                DependencyParser parser = (DependencyParser) FieldUtils.readField(annotator, "parser", true);
+                DependencyParser parser = (DependencyParser) FieldUtils.readField(annotator,
+                        "parser", true);
                 knownLabels = (List<String>) FieldUtils.readField(parser, "knownLabels", true);
             }
             catch (IllegalAccessException e) {
                 throw new IOException(e);
             }
+            
+            // Internal category used by the parser
+            knownLabels.remove("-NULL-");
             
             SingletonTagset tags = new SingletonTagset(Dependency.class, getResourceMetaData()
                     .getProperty(("dependency.tagset")));

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.uima.cas.Type;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
@@ -143,14 +144,21 @@ public class ConvertToUima
                 Token dependent = edge.getDependent().get(TokenKey.class);
                 Token governor = edge.getGovernor().get(TokenKey.class);
                 
-                // Need to use toString() here to get "<shortname>_<specific>"
-                String label = edge.getRelation().toString();
-                
                 // For the type mapping, we use getShortName() instead, because the <specific>
                 // actually doesn't change the relation type
-                Type depRel = mappingProvider.getTagType(edge.getRelation().getShortName());
+                String labelUsedForMapping = edge.getRelation().getShortName();
+                
+                // The nndepparser may produce labels in which the shortName contains a colon.
+                // These represent language-specific labels of the UD, cf: 
+                // http://universaldependencies.github.io/docs/ext-dep-index.html
+                labelUsedForMapping = StringUtils.substringBefore(labelUsedForMapping, ":");
+                
+                // Need to use toString() here to get "<shortname>_<specific>"
+                String actualLabel = edge.getRelation().toString();
+                
+                Type depRel = mappingProvider.getTagType(labelUsedForMapping);
                 Dependency dep = (Dependency) aJCas.getCas().createFS(depRel);
-                dep.setDependencyType(internStrings ? label.intern() : label);
+                dep.setDependencyType(internStrings ? actualLabel.intern() : actualLabel);
                 dep.setDependent(dependent);
                 dep.setGovernor(governor);
                 dep.setBegin(dep.getDependent().getBegin());
