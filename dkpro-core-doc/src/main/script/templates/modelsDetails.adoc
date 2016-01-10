@@ -13,20 +13,23 @@ def metadataValueText(model, key, value)
         return value;
     }
 }
-%>
 
-<% models.each { model -> %>
+def getEngineLink(model) {
+    if (model.@engine as String) {
+        return Util.engineLink(model.@engine);
+    } else {
+        return "`${model.@tool}` @ `${model.@package}`";
+    } 
+}
+
+def renderModel(model) {
+%>
 [[model-${model.@artifactId}]]
-== ${model.@shortArtifactId} 
+==== ${model.@variant.text() } 
 
 [small]#*_Artifact ID:_* __${model.@artifactId}__# +
 [small]#*_Version:_* __${model.@version}__# +
-[small]#*_Engine:_* __<% 
-if (model.@engine as String) {
-    out.println Util.engineLink(model.@engine);
-} else {
-    out.println "`${model.@tool}` @ `${model.@package}`";
-} %>__# +
+[small]#*_Engine:_* __${getEngineLink(model)}__# +
 [small]#*_Language:_* __${model.@language}__# +
 [small]#*_Variant:_* __${model.@variant}__#
 
@@ -43,5 +46,25 @@ if (model.@engine as String) {
 <% } %>
 |====
 <% } // if (model.metadata.entry) %>
+<% 
+}
+%>
 
-<% } %>
+<% 
+models
+    .findAll { it.@engine as String }
+    .groupBy { it.@language.text() }
+    .sort { it.key }
+    .each { language, languageGroup ->
+%>
+== ${language} 
+<%
+    languageGroup.groupBy { it.@engine.text() }.sort { it.key }.each { engine, engineGroup ->
+%>
+=== ${engine} 
+
+<%
+        engineGroup.sort { it.@variant.text() }.each { renderModel(it) }
+    }
+}
+%>

@@ -25,7 +25,7 @@
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.io.tiger-asl</artifactId>
     <packaging>jar</packaging>
-	<name>DKPro Core ASL - IO - Tiger</name>
+	<name>DKPro Core ASL - IO - TIGER-XML</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>

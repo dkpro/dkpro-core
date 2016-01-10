@@ -1,10 +1,39 @@
 <% 
 import Util;
 import static groovy.json.StringEscapeUtils.escapeJava;
+import org.apache.commons.lang3.StringUtils;
+import groovy.transform.Field;
 
-formats.sort { it.key }.each { %>
+@Field def poms = [:];
+
+def getName(pom) {
+  String name = poms[pom.artifactId.text()].name.text();
+  if (name.contains("- IO -")) {
+    return StringUtils.substringAfter(name, "- IO -").trim();
+  }
+  else if (name.contains("ASL -")) {
+    return StringUtils.substringAfter(name, "ASL -").trim();
+  }
+  else if (name.contains("GPL -")) {
+    return StringUtils.substringAfter(name, "ASL -").trim();
+  }
+  else {
+    return name.trim();
+  }
+}
+
+formats.each { id, format -> poms[format.pom.artifactId.text()] = format.pom };
+
+formats.groupBy { getName(it.value.pom) }
+        .sort{ it.key.toLowerCase() }
+        .each{ name, formatGroup -> %>
+        
+[[format-${formatGroup.values().first().pom.artifactId.text() }]]
+== ${ name }
+
+<%formatGroup.sort { it.key }.each { %>
 [[format-${ it.key }]]
-== ${it.key}
+=== ${it.key}
 
 [small]#*_Artifact ID:_* __${it.value.artifactId}__#
 
@@ -135,3 +164,5 @@ if (inputs) {
 <% } // if (it.value.writerSpec) %>
 
 <% } // format %>
+
+<% } // format group %>

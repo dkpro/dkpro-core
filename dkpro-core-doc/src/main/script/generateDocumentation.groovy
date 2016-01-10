@@ -254,6 +254,9 @@ new File(project.basedir, '..').eachFileRecurse(FILES) {
             if (engine) {
                 model.@engine = engine.name;
             }
+            else {
+                log.warn("No engine found for model ${model.@shortArtifactId}");
+            }
             
         }
         models.addAll(modelXmls);

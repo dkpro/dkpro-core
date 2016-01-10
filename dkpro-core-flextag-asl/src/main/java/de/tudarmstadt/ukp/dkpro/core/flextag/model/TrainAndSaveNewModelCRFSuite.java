@@ -31,12 +31,10 @@ import org.apache.uima.fit.component.NoOpAnnotator;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
-import de.tudarmstadt.ukp.dkpro.lab.Lab;
 import de.tudarmstadt.ukp.dkpro.lab.task.Dimension;
 import de.tudarmstadt.ukp.dkpro.lab.task.ParameterSpace;
 import de.tudarmstadt.ukp.dkpro.tc.core.Constants;
 import de.tudarmstadt.ukp.dkpro.tc.crfsuite.CRFSuiteAdapter;
-import de.tudarmstadt.ukp.dkpro.tc.crfsuite.task.serialization.SaveModelCRFSuiteBatchTask;
 import de.tudarmstadt.ukp.dkpro.tc.features.tcu.CurrentUnit;
 import de.tudarmstadt.ukp.dkpro.tc.features.tcu.NextUnit;
 import de.tudarmstadt.ukp.dkpro.tc.features.tcu.PrevUnit;
@@ -107,12 +105,12 @@ public class TrainAndSaveNewModelCRFSuite implements Constants {
 	}
 
 	protected void validation(ParameterSpace pSpace) throws Exception {
-		SaveModelCRFSuiteBatchTask batch = new SaveModelCRFSuiteBatchTask(
-				experimentName, modelOutputFolder, CRFSuiteAdapter.class);
-		batch.setParameterSpace(pSpace);
-
-		// Run
-		Lab.getInstance().run(batch);
+//		SaveModelCRFSuiteBatchTask batch = new SaveModelCRFSuiteBatchTask(
+//				experimentName, modelOutputFolder, CRFSuiteAdapter.class);
+//		batch.setParameterSpace(pSpace);
+//
+//		// Run
+//		Lab.getInstance().run(batch);
 	}
 
 	protected AnalysisEngineDescription getPreprocessing()
