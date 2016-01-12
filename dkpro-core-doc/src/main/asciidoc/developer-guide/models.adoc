@@ -359,3 +359,86 @@ error when you try to package the resources yourself. If this happens, open the
 `build.xml` file with a text editor, locate the MD5 checksum that fails, update it and
 update the version of the corresponding resource. You can also tell us on the DKPro
 Core User Group and we will update the `build.xml` file.
+
+== Metadata
+
+Typical metadata items for a model.
+
+Almost all models should declare at least one tagset. We currently declare only the tagsets that
+a model produces, not those that it consumes.
+
+.Tagsets
+[options="header"]
+|====
+|Entry|Description
+
+| `constituent.tagset`
+|
+
+| `chunk.tagset`
+|
+
+
+| `dependency.tagset`
+|
+
+
+| `pos.tagset`
+|
+
+| `morph.tagset`
+| 
+
+|====
+
+.Model properties
+[options="header"]
+|====
+|Entry|Description
+| `encoding`
+| Deprecated, use `model.encoding` instead
+
+| `model.encoding`
+| The character encoding of the model. In particular relevant for native tools, e.g. TreeTagger,
+Sfst, as we communicate with  as external processes them through pipes or files.
+
+|====
+
+The Dublin Core (DC) metadata items are not (yet) widely used throughout the models. This might
+change in the future.
+
+.Dublin Core metadata
+[options="header"]
+|====
+|Entry|Description
+| `DC.title`
+| 
+
+| `DC.creator`
+| 
+
+| `DC.identifier`
+| 
+
+| `DC.rights`
+| 
+
+|====
+
+.Component-specific metadata
+[options="header"]
+|====
+|Entry|Description
+| `mstparser.param.order`
+| Used by the MstParser component to indicate the type of model
+
+| `flushSequence`
+| Used by the TreeTagger components to mark the boundary between two documents.
+
+| `pos.tagset.tagSplitPattern`
+|
+
+| `pos.tag.map.XXX`
+| 
+
+|====
