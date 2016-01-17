@@ -18,22 +18,21 @@
 
 package de.tudarmstadt.ukp.dkpro.core.api.transform;
 
-import java.util.HashSet;
-import java.util.Set;
+import static org.apache.uima.fit.util.CasUtil.getType;
+import static org.apache.uima.fit.util.CasUtil.selectFS;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.AbstractCas;
+import org.apache.uima.cas.AnnotationBaseFS;
 import org.apache.uima.cas.CAS;
-import org.apache.uima.cas.FSIterator;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.FeatureStructure;
-import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasMultiplier_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.util.CasCopier;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.transform.internal.CasCopier;
 
 public abstract class JCasTransformer_ImplBase
     extends JCasMultiplier_ImplBase
@@ -65,7 +64,7 @@ public abstract class JCasTransformer_ImplBase
         return buffer;
     }
 
-    public void beforeProcess(JCas aInput, JCas aOutput)
+    protected void beforeProcess(JCas aInput, JCas aOutput)
         throws AnalysisEngineProcessException
     {
         try {
@@ -78,45 +77,45 @@ public abstract class JCasTransformer_ImplBase
         }
     }
 
-    public void afterProcess(JCas aInput, JCas aOutput)
+    protected void afterProcess(JCas aInput, JCas aOutput)
     {
         // Copy the annotation types mentioned in PARAM_TYPES_TO_COPY
         // We have do do this in the afterProcess() phase, because otherwise the SofA in the
         // target CAS does not exist yet.
         CAS inputCas = aInput.getCas();
-        CasCopier copier = new CasCopier(inputCas, aOutput.getCas());
 
+        CasCopier copier = new CasCopier(inputCas, aOutput.getCas());
+        
         Feature mDestSofaFeature = aOutput.getTypeSystem()
                 .getFeatureByFullName(CAS.FEATURE_FULL_NAME_SOFA);
 
-        // Avoid indexing twice, even if we see an feature structure multiple time because it
-        // appears in multiple indexes e.g. via inheritance
-        Set<FeatureStructure> indexedFs = new HashSet<FeatureStructure>();
         for (String typeName : typesToCopy) {
-            FSIterator<FeatureStructure> fsIterator = inputCas.getIndexRepository().getAllIndexedFS(
-                    inputCas.getTypeSystem().getType(typeName));
-            while (fsIterator.hasNext()) {
-                FeatureStructure fs = fsIterator.next();
-                if (!indexedFs.contains(fs)) {
+            for (FeatureStructure fs : selectFS(inputCas, getType(inputCas, typeName))) {
+                if (!copier.alreadyCopied(fs)) {
                     FeatureStructure fsCopy = copier.copyFs(fs);
                     // Make sure that the sofa annotation in the copy is set
-                    if (fs instanceof AnnotationFS) {
+                    if (fs instanceof AnnotationBaseFS) {
                         FeatureStructure sofa = fsCopy.getFeatureValue(mDestSofaFeature);
                         if (sofa == null) {
                             fsCopy.setFeatureValue(mDestSofaFeature, aOutput.getSofa());
                         }
                     }
                     aOutput.addFsToIndexes(fsCopy);
-                    indexedFs.add(fs);
                 }
             }
         }
     }
 
+    protected String[] getTypesToCopy()
+    {
+        return typesToCopy;
+    }
+    
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
+        CAS inputCas = aJCas.getCas();
         output = getEmptyJCas();
 
         beforeProcess(aJCas, output);

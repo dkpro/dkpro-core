@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.tudarmstadt.ukp.dkpro.core.castransformation;
+package de.tudarmstadt.ukp.dkpro.core.castransformation.internal;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +24,8 @@ import java.util.WeakHashMap;
 import org.apache.uima.cas.CAS;
 
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
+import de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator;
+import de.tudarmstadt.ukp.dkpro.core.castransformation.Backmapper;
 
 /**
  * Use to smuggle the alignment state from the {@link ApplyChangesAnnotator} to the
