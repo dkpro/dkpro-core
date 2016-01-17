@@ -44,7 +44,8 @@ extends JCasAnnotator_ImplBase
      * A list of type names used for zoning.
      */
 	public final static String PARAM_ZONE_TYPES = "zoneTypes";
-	@ConfigurationParameter(name=PARAM_ZONE_TYPES, mandatory=false)
+	@ConfigurationParameter(name=PARAM_ZONE_TYPES, mandatory=false, defaultValue = { 
+	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div" })
     private String[] zoneTypes;
 
     /**
@@ -57,7 +58,7 @@ extends JCasAnnotator_ImplBase
      * happens between them.
      */
 	public final static String PARAM_STRICT_ZONING = "strictZoning";
-	@ConfigurationParameter(name=PARAM_STRICT_ZONING, mandatory=true, defaultValue="true")
+	@ConfigurationParameter(name=PARAM_STRICT_ZONING, mandatory=true, defaultValue="false")
     private boolean strictZoning;
 
 	/**
