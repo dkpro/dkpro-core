@@ -51,11 +51,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 
 /**
- * Reads a file in the CoNLL-2006 format (aka CoNLL-X).
+ * <p>Reads a file in the CoNLL-2006 format (aka CoNLL-X).</p>
  * 
- * <pre>
+ * <pre><code>
  * Heutzutage heutzutage ADV _ _ ADV _ _
- * </pre>
+ * </code></pre>
+ * 
  * <ol>
  * <li>ID - <b>(ignored)</b> Token counter, starting at 1 for each new sentence.</li>
  * <li>FORM - <b>(Token)</b> Word form or punctuation symbol.</li>
@@ -83,8 +84,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
  * original treebank annotation, the dependency relation may be meaningful or simply 'ROOT'.</b></li>
  * </ol>
  * 
- * Sentences are separated by a blank new line.
- * 
+ * <p>Sentences are separated by a blank new line.</p>
  * 
  * @see <a href="https://web.archive.org/web/20131216222420/http://ilk.uvt.nl/conll/">CoNLL-X Shared Task: Multi-lingual Dependency Parsing</a>
  */

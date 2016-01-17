@@ -47,10 +47,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * Writes the CoNLL 2002 named entity format. The columns are separated by a single space, unlike
- * illustrated below.
+ * <p>Writes the CoNLL 2002 named entity format. The columns are separated by a single space, unlike
+ * illustrated below.</p>
  * 
- * <pre>
+ * <pre><code>
  * Wolff      B-PER
  * ,          O
  * currently  O
@@ -74,14 +74,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * Real       B-ORG
  * Madrid     I-ORG
  * .          O
- * </pre>
+ * </code></pre>
  * 
  * <ol>
  * <li>FORM - token</li>
  * <li>NER - named entity (BIO encoded)</li>
  * </ol>
  * 
- * Sentences are separated by a blank new line.
+ * <p>Sentences are separated by a blank new line.</p>
  * 
  * @see <a href="http://www.clips.ua.ac.be/conll2002/ner/">CoNLL 2002 shared task</a>
  */

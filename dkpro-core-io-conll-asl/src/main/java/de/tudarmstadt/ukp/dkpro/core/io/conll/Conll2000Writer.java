@@ -44,9 +44,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 
 /**
- * Writes the CoNLL 2000 chunking format. The columns are separated by spaces. 
+ * <p>Writes the CoNLL 2000 chunking format. The columns are separated by spaces.</p>
  * 
- * <pre>
+ * <pre><code>
  * He        PRP  B-NP
  * reckons   VBZ  B-VP
  * the       DT   B-NP
@@ -63,7 +63,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
  * in        IN   B-PP
  * September NNP  B-NP
  * .         .    O
- * </pre>
+ * </code></pre>
  * 
  * <ol>
  * <li>FORM - token</li>
@@ -71,7 +71,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
  * <li>CHUNK - chunk (BIO encoded)</li>
  * </ol>
  * 
- * Sentences are separated by a blank new line.
+ * <p>Sentences are separated by a blank new line.</p>
  * 
  * @see <a href="http://www.cnts.ua.ac.be/conll2000/chunking/">CoNLL 2000 shared task</a>
  */

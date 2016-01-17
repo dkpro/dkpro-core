@@ -60,9 +60,8 @@ import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeToJCasConverter;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
 
 /**
- * Reads a file in the CoNLL-2009 format.
+ * <p>Reads a file in the CoNLL-2009 format.</p>
  * 
- *
  * <ol>
  * <li>Document ID - <b>(ignored)</b> This is a variation on the document filename.</li>
  * <li>Part number - <b>(ignored)</b> Some files are divided into multiple parts numbered as 000,
@@ -91,7 +90,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
  * parenthesis structure.</li>
  * </ol>
  * 
- * Sentences are separated by a blank new line.
+ * <p>Sentences are separated by a blank new line.</p>
  * 
  * @see <a href="http://conll.cemantix.org/2012/data.html">CoNLL 2012 Shared Task:
  *      Modeling Multilingual Unrestricted Coreference in OntoNotes</a>
