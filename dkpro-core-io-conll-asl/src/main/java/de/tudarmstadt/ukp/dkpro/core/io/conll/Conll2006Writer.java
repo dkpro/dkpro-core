@@ -41,11 +41,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 /**
- * Writes a file in the CoNLL-2006 format (aka CoNLL-X).
+ * <p>Writes a file in the CoNLL-2006 format (aka CoNLL-X).</p>
  * 
- * <pre>
+ * <pre><code>
  * Heutzutage heutzutage ADV _ _ ADV _ _
- * </pre>
+ * </code></pre>
+ * 
  * <ol>
  * <li>ID - token number in sentence</li>
  * <li>FORM - token</li>
@@ -59,7 +60,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * <li>PDEPREL - unused</li>
  * </ol>
  * 
- * Sentences are separated by a blank new line
+ * <p>Sentences are separated by a blank new line</p>
  * 
  * 
  * @see <a href="https://web.archive.org/web/20131216222420/http://ilk.uvt.nl/conll/">CoNLL-X Shared Task: Multi-lingual Dependency Parsing</a>

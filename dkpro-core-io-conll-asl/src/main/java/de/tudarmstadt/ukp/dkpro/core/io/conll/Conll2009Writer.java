@@ -45,6 +45,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 /**
+ * <p>Writes a file in the CoNLL-2009 format.</p>
+ * 
  * <ol>
  * <li>ID - <b>(ignored)</b> Token counter, starting at 1 for each new sentence.</li>
  * <li>FORM - <b>(Token)</b> Word form or punctuation symbol.</li>
@@ -72,7 +74,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * (in the ID order)</li>
  * </ol>
  * 
- * Sentences are separated by a blank new line
+ * <p>Sentences are separated by a blank new line</p>
  * 
  * @see <a href="http://ufal.mff.cuni.cz/conll2009-st/task-description.html">CoNLL 2009 Shared Task:
  *      predict syntactic and semantic dependencies and their labeling</a>
