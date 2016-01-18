@@ -7,7 +7,6 @@ DocumentMetaData
    begin: 0
    end: 92
    language: "de"
-   documentTitle: <null>
    documentId: "1"
    isLastSegment: false
 
@@ -24,16 +23,13 @@ PennTree
    begin: 0
    end: 91
    PennTree: "(ROOT ($, ,) ($. .) (CS--- (S-CJ (PPER Sie) (VVFIN gehen) (PTKVZ ein) (CNP-OA (KON und) (NN Risiken) (NP-CJ (ADJA gewagte) (NN Verbindungen)))) (S-CJ (VVFIN versuchen) (VP-OC (VVIZU auszureizen) (NP-OA (PPOSAT ihre) (NN Möglichkeiten))))))"
-   TransformationNames: <null>
 [Sie gehen gewagte Verbindungen und Risiken ein , versuchen ihre Möglichkeiten auszureizen .]
 ROOT
    sofa: _InitialView
    begin: 0
    end: 91
    constituentType: "ROOT"
-   parent: <null>
    children: FSArray
-   syntacticFunction: <null>
 [Sie gehen gewagte Verbindungen und Risiken ein , versuchen ihre Möglichkeiten auszureizen]
 Constituent
    sofa: _InitialView
@@ -45,9 +41,7 @@ Constituent
       begin: 0
       end: 91
       constituentType: "ROOT"
-      parent: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
    syntacticFunction: "--"
 [Sie gehen gewagte Verbindungen und Risiken ein]
@@ -66,9 +60,7 @@ Constituent
          begin: 0
          end: 91
          constituentType: "ROOT"
-         parent: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
       syntacticFunction: "--"
    children: FSArray
@@ -99,21 +91,16 @@ Token
             begin: 0
             end: 91
             constituentType: "ROOT"
-            parent: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
          syntacticFunction: "--"
       children: FSArray
       syntacticFunction: "CJ"
-   lemma: <null>
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 0
       end: 3
       PosValue: "PPER"
-   morph: <null>
 [gehen]
 V
    sofa: _InitialView
@@ -140,21 +127,16 @@ Token
             begin: 0
             end: 91
             constituentType: "ROOT"
-            parent: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
          syntacticFunction: "--"
       children: FSArray
       syntacticFunction: "CJ"
-   lemma: <null>
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 4
       end: 9
       PosValue: "VVFIN"
-   morph: <null>
 [gewagte Verbindungen und Risiken]
 Constituent
    sofa: _InitialView
@@ -176,9 +158,7 @@ Constituent
             begin: 0
             end: 91
             constituentType: "ROOT"
-            parent: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
          syntacticFunction: "--"
       children: FSArray
@@ -211,9 +191,7 @@ Constituent
                begin: 0
                end: 91
                constituentType: "ROOT"
-               parent: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
             syntacticFunction: "--"
          children: FSArray
@@ -258,9 +236,7 @@ Token
                   begin: 0
                   end: 91
                   constituentType: "ROOT"
-                  parent: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
                syntacticFunction: "--"
             children: FSArray
@@ -269,14 +245,11 @@ Token
          syntacticFunction: "OA"
       children: FSArray
       syntacticFunction: "CJ"
-   lemma: <null>
-   stem: <null>
    pos: ADJ
       sofa: _InitialView
       begin: 10
       end: 17
       PosValue: "ADJA"
-   morph: <null>
 [Verbindungen]
 NN
    sofa: _InitialView
@@ -313,9 +286,7 @@ Token
                   begin: 0
                   end: 91
                   constituentType: "ROOT"
-                  parent: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
                syntacticFunction: "--"
             children: FSArray
@@ -324,14 +295,11 @@ Token
          syntacticFunction: "OA"
       children: FSArray
       syntacticFunction: "CJ"
-   lemma: <null>
-   stem: <null>
    pos: NN
       sofa: _InitialView
       begin: 18
       end: 30
       PosValue: "NN"
-   morph: <null>
 [und]
 CONJ
    sofa: _InitialView
@@ -363,23 +331,18 @@ Token
                begin: 0
                end: 91
                constituentType: "ROOT"
-               parent: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
             syntacticFunction: "--"
          children: FSArray
          syntacticFunction: "CJ"
       children: FSArray
       syntacticFunction: "OA"
-   lemma: <null>
-   stem: <null>
    pos: CONJ
       sofa: _InitialView
       begin: 31
       end: 34
       PosValue: "KON"
-   morph: <null>
 [Risiken]
 NN
    sofa: _InitialView
@@ -411,23 +374,18 @@ Token
                begin: 0
                end: 91
                constituentType: "ROOT"
-               parent: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
             syntacticFunction: "--"
          children: FSArray
          syntacticFunction: "CJ"
       children: FSArray
       syntacticFunction: "OA"
-   lemma: <null>
-   stem: <null>
    pos: NN
       sofa: _InitialView
       begin: 35
       end: 42
       PosValue: "NN"
-   morph: <null>
 [ein]
 V
    sofa: _InitialView
@@ -454,21 +412,16 @@ Token
             begin: 0
             end: 91
             constituentType: "ROOT"
-            parent: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
          syntacticFunction: "--"
       children: FSArray
       syntacticFunction: "CJ"
-   lemma: <null>
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 43
       end: 46
       PosValue: "PTKVZ"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -485,17 +438,12 @@ Token
       begin: 0
       end: 91
       constituentType: "ROOT"
-      parent: <null>
       children: FSArray
-      syntacticFunction: <null>
-   lemma: <null>
-   stem: <null>
    pos: PUNC
       sofa: _InitialView
       begin: 47
       end: 48
       PosValue: "$,"
-   morph: <null>
 [versuchen ihre Möglichkeiten auszureizen]
 Constituent
    sofa: _InitialView
@@ -512,9 +460,7 @@ Constituent
          begin: 0
          end: 91
          constituentType: "ROOT"
-         parent: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
       syntacticFunction: "--"
    children: FSArray
@@ -545,21 +491,16 @@ Token
             begin: 0
             end: 91
             constituentType: "ROOT"
-            parent: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
          syntacticFunction: "--"
       children: FSArray
       syntacticFunction: "CJ"
-   lemma: <null>
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 49
       end: 58
       PosValue: "VVFIN"
-   morph: <null>
 [ihre Möglichkeiten auszureizen]
 Constituent
    sofa: _InitialView
@@ -581,9 +522,7 @@ Constituent
             begin: 0
             end: 91
             constituentType: "ROOT"
-            parent: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
          syntacticFunction: "--"
       children: FSArray
@@ -616,9 +555,7 @@ Constituent
                begin: 0
                end: 91
                constituentType: "ROOT"
-               parent: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
             syntacticFunction: "--"
          children: FSArray
@@ -663,9 +600,7 @@ Token
                   begin: 0
                   end: 91
                   constituentType: "ROOT"
-                  parent: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
                syntacticFunction: "--"
             children: FSArray
@@ -674,14 +609,11 @@ Token
          syntacticFunction: "OC"
       children: FSArray
       syntacticFunction: "OA"
-   lemma: <null>
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 59
       end: 63
       PosValue: "PPOSAT"
-   morph: <null>
 [Möglichkeiten]
 NN
    sofa: _InitialView
@@ -718,9 +650,7 @@ Token
                   begin: 0
                   end: 91
                   constituentType: "ROOT"
-                  parent: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
                syntacticFunction: "--"
             children: FSArray
@@ -729,14 +659,11 @@ Token
          syntacticFunction: "OC"
       children: FSArray
       syntacticFunction: "OA"
-   lemma: <null>
-   stem: <null>
    pos: NN
       sofa: _InitialView
       begin: 64
       end: 77
       PosValue: "NN"
-   morph: <null>
 [auszureizen]
 V
    sofa: _InitialView
@@ -768,23 +695,18 @@ Token
                begin: 0
                end: 91
                constituentType: "ROOT"
-               parent: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
             syntacticFunction: "--"
          children: FSArray
          syntacticFunction: "CJ"
       children: FSArray
       syntacticFunction: "OC"
-   lemma: <null>
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 78
       end: 89
       PosValue: "VVIZU"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -801,17 +723,12 @@ Token
       begin: 0
       end: 91
       constituentType: "ROOT"
-      parent: <null>
       children: FSArray
-      syntacticFunction: <null>
-   lemma: <null>
-   stem: <null>
    pos: PUNC
       sofa: _InitialView
       begin: 90
       end: 91
       PosValue: "$."
-   morph: <null>
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================

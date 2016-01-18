@@ -25,16 +25,13 @@ PennTree
    begin: 0
    end: 169
    PennTree: "(S (PRP he) (VP (VBD spent) (PP (PP (IN in) (NPB (ADJP (JJ long) (CC and) (ADJP (RB often) (JJ solitary))) (VBZ walks) (PUNC, ,))) (CC or) (PP (IN in) (VP (VBG chatting) (PP (IN with) (NP (NPB (DT a) (NN number)) (PP (IN of) (NP (NPB (NN village) (NNS gossips)) (SBAR (WHNP (WP$ whose) (NN acquaintance)) (S (PRP he) (VP (VBD had) (VP (VBN cultivated) (PUNC. .)))))))))))) (NPB (PRP$ his) (NNS days))) (VP (VB Save) (PP (IN for) (NPB (DT this) (CD one) (NN excursion) (PUNC, ,)))))"
-   TransformationNames: <null>
 [Save for this one excursion , he spent his days in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated .]
 ROOT
    sofa: _InitialView
    begin: 0
    end: 169
    constituentType: "S"
-   parent: <null>
    children: FSArray
-   syntacticFunction: <null>
 [Save for this one excursion ,]
 Constituent
    sofa: _InitialView
@@ -46,11 +43,8 @@ Constituent
       begin: 0
       end: 169
       constituentType: "S"
-      parent: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: <null>
 [Save]
 V
    sofa: _InitialView
@@ -78,23 +72,18 @@ Token
          begin: 0
          end: 169
          constituentType: "S"
-         parent: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 0
       end: 4
       value: "save"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 0
       end: 4
       PosValue: "VB"
-   morph: <null>
 [for this one excursion ,]
 Constituent
    sofa: _InitialView
@@ -111,13 +100,9 @@ Constituent
          begin: 0
          end: 169
          constituentType: "S"
-         parent: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: <null>
 [for]
 PP
    sofa: _InitialView
@@ -150,25 +135,19 @@ Token
             begin: 0
             end: 169
             constituentType: "S"
-            parent: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 5
       end: 8
       value: "for"
-   stem: <null>
    pos: PP
       sofa: _InitialView
       begin: 5
       end: 8
       PosValue: "IN"
-   morph: <null>
 [this one excursion ,]
 SemanticArgument
    sofa: _InitialView
@@ -196,15 +175,10 @@ Constituent
             begin: 0
             end: 169
             constituentType: "S"
-            parent: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: <null>
 [this]
 ART
    sofa: _InitialView
@@ -242,27 +216,20 @@ Token
                begin: 0
                end: 169
                constituentType: "S"
-               parent: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 9
       end: 13
       value: "this"
-   stem: <null>
    pos: ART
       sofa: _InitialView
       begin: 9
       end: 13
       PosValue: "DT"
-   morph: <null>
 [one]
 CARD
    sofa: _InitialView
@@ -300,27 +267,20 @@ Token
                begin: 0
                end: 169
                constituentType: "S"
-               parent: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 14
       end: 17
       value: "one"
-   stem: <null>
    pos: CARD
       sofa: _InitialView
       begin: 14
       end: 17
       PosValue: "CD"
-   morph: <null>
 [excursion]
 NN
    sofa: _InitialView
@@ -358,27 +318,20 @@ Token
                begin: 0
                end: 169
                constituentType: "S"
-               parent: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 18
       end: 27
       value: "excursion"
-   stem: <null>
    pos: NN
       sofa: _InitialView
       begin: 18
       end: 27
       PosValue: "NN"
-   morph: <null>
 [excursion]
 SemanticPredicate
    sofa: _InitialView
@@ -430,27 +383,20 @@ Token
                begin: 0
                end: 169
                constituentType: "S"
-               parent: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 28
       end: 29
       value: ","
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 28
       end: 29
       PosValue: "PUNC,"
-   morph: <null>
 [he]
 PR
    sofa: _InitialView
@@ -473,21 +419,17 @@ Token
       begin: 0
       end: 169
       constituentType: "S"
-      parent: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 30
       end: 32
       value: "he"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 30
       end: 32
       PosValue: "PRP"
-   morph: <null>
 [he]
 SemanticArgument
    sofa: _InitialView
@@ -542,11 +484,8 @@ Constituent
       begin: 0
       end: 169
       constituentType: "S"
-      parent: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: <null>
 [spent]
 V
    sofa: _InitialView
@@ -574,23 +513,18 @@ Token
          begin: 0
          end: 169
          constituentType: "S"
-         parent: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 33
       end: 38
       value: "spend"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 33
       end: 38
       PosValue: "VBD"
-   morph: <null>
 [his days]
 Constituent
    sofa: _InitialView
@@ -607,13 +541,9 @@ Constituent
          begin: 0
          end: 169
          constituentType: "S"
-         parent: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: <null>
 [his]
 PR
    sofa: _InitialView
@@ -646,25 +576,19 @@ Token
             begin: 0
             end: 169
             constituentType: "S"
-            parent: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 39
       end: 42
       value: "his"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 39
       end: 42
       PosValue: "PRP$"
-   morph: <null>
 [his]
 SemanticArgument
    sofa: _InitialView
@@ -710,25 +634,19 @@ Token
             begin: 0
             end: 169
             constituentType: "S"
-            parent: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 43
       end: 47
       value: "day"
-   stem: <null>
    pos: NN
       sofa: _InitialView
       begin: 43
       end: 47
       PosValue: "NNS"
-   morph: <null>
 [days]
 SemanticArgument
    sofa: _InitialView
@@ -758,13 +676,9 @@ Constituent
          begin: 0
          end: 169
          constituentType: "S"
-         parent: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: <null>
 [in long and often solitary walks ,]
 Constituent
    sofa: _InitialView
@@ -786,15 +700,10 @@ Constituent
             begin: 0
             end: 169
             constituentType: "S"
-            parent: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: <null>
 [in]
 PP
    sofa: _InitialView
@@ -832,27 +741,20 @@ Token
                begin: 0
                end: 169
                constituentType: "S"
-               parent: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 48
       end: 50
       value: "in"
-   stem: <null>
    pos: PP
       sofa: _InitialView
       begin: 48
       end: 50
       PosValue: "IN"
-   morph: <null>
 [long and often solitary walks ,]
 Constituent
    sofa: _InitialView
@@ -879,17 +781,11 @@ Constituent
                begin: 0
                end: 169
                constituentType: "S"
-               parent: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: <null>
 [long and often solitary]
 Constituent
    sofa: _InitialView
@@ -921,19 +817,12 @@ Constituent
                   begin: 0
                   end: 169
                   constituentType: "S"
-                  parent: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: <null>
 [long]
 ADJ
    sofa: _InitialView
@@ -981,31 +870,22 @@ Token
                      begin: 0
                      end: 169
                      constituentType: "S"
-                     parent: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 51
       end: 55
       value: "long"
-   stem: <null>
    pos: ADJ
       sofa: _InitialView
       begin: 51
       end: 55
       PosValue: "JJ"
-   morph: <null>
 [long]
 SemanticPredicate
    sofa: _InitialView
@@ -1060,31 +940,22 @@ Token
                      begin: 0
                      end: 169
                      constituentType: "S"
-                     parent: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 56
       end: 59
       value: "and"
-   stem: <null>
    pos: CONJ
       sofa: _InitialView
       begin: 56
       end: 59
       PosValue: "CC"
-   morph: <null>
 [often solitary]
 SemanticArgument
    sofa: _InitialView
@@ -1127,21 +998,13 @@ Constituent
                      begin: 0
                      end: 169
                      constituentType: "S"
-                     parent: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: <null>
 [often]
 ADV
    sofa: _InitialView
@@ -1194,33 +1057,23 @@ Token
                         begin: 0
                         end: 169
                         constituentType: "S"
-                        parent: <null>
                         children: FSArray
-                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 60
       end: 65
       value: "often"
-   stem: <null>
    pos: ADV
       sofa: _InitialView
       begin: 60
       end: 65
       PosValue: "RB"
-   morph: <null>
 [solitary]
 ADJ
    sofa: _InitialView
@@ -1273,33 +1126,23 @@ Token
                         begin: 0
                         end: 169
                         constituentType: "S"
-                        parent: <null>
                         children: FSArray
-                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 66
       end: 74
       value: "solitary"
-   stem: <null>
    pos: ADJ
       sofa: _InitialView
       begin: 66
       end: 74
       PosValue: "JJ"
-   morph: <null>
 [walks]
 V
    sofa: _InitialView
@@ -1342,29 +1185,21 @@ Token
                   begin: 0
                   end: 169
                   constituentType: "S"
-                  parent: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 75
       end: 80
       value: "walk"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 75
       end: 80
       PosValue: "VBZ"
-   morph: <null>
 [walks]
 SemanticArgument
    sofa: _InitialView
@@ -1420,29 +1255,21 @@ Token
                   begin: 0
                   end: 169
                   constituentType: "S"
-                  parent: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 81
       end: 82
       value: ","
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 81
       end: 82
       PosValue: "PUNC,"
-   morph: <null>
 [or]
 CONJ
    sofa: _InitialView
@@ -1475,25 +1302,19 @@ Token
             begin: 0
             end: 169
             constituentType: "S"
-            parent: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 83
       end: 85
       value: "or"
-   stem: <null>
    pos: CONJ
       sofa: _InitialView
       begin: 83
       end: 85
       PosValue: "CC"
-   morph: <null>
 [in chatting with a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1515,15 +1336,10 @@ Constituent
             begin: 0
             end: 169
             constituentType: "S"
-            parent: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: <null>
 [in]
 PP
    sofa: _InitialView
@@ -1561,27 +1377,20 @@ Token
                begin: 0
                end: 169
                constituentType: "S"
-               parent: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 86
       end: 88
       value: "in"
-   stem: <null>
    pos: PP
       sofa: _InitialView
       begin: 86
       end: 88
       PosValue: "IN"
-   morph: <null>
 [chatting with a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1608,17 +1417,11 @@ Constituent
                begin: 0
                end: 169
                constituentType: "S"
-               parent: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: <null>
 [chatting]
 V
    sofa: _InitialView
@@ -1661,29 +1464,21 @@ Token
                   begin: 0
                   end: 169
                   constituentType: "S"
-                  parent: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 89
       end: 97
       value: "chat"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 89
       end: 97
       PosValue: "VBG"
-   morph: <null>
 [chatting]
 SemanticPredicate
    sofa: _InitialView
@@ -1728,19 +1523,12 @@ Constituent
                   begin: 0
                   end: 169
                   constituentType: "S"
-                  parent: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: <null>
 [with]
 PP
    sofa: _InitialView
@@ -1788,31 +1576,22 @@ Token
                      begin: 0
                      end: 169
                      constituentType: "S"
-                     parent: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 98
       end: 102
       value: "with"
-   stem: <null>
    pos: PP
       sofa: _InitialView
       begin: 98
       end: 102
       PosValue: "IN"
-   morph: <null>
 [a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1849,21 +1628,13 @@ Constituent
                      begin: 0
                      end: 169
                      constituentType: "S"
-                     parent: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: <null>
 [a number]
 Constituent
    sofa: _InitialView
@@ -1905,23 +1676,14 @@ Constituent
                         begin: 0
                         end: 169
                         constituentType: "S"
-                        parent: <null>
                         children: FSArray
-                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: <null>
 [a]
 ART
    sofa: _InitialView
@@ -1979,35 +1741,24 @@ Token
                            begin: 0
                            end: 169
                            constituentType: "S"
-                           parent: <null>
                            children: FSArray
-                           syntacticFunction: <null>
                         children: FSArray
-                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 103
       end: 104
       value: "a"
-   stem: <null>
    pos: ART
       sofa: _InitialView
       begin: 103
       end: 104
       PosValue: "DT"
-   morph: <null>
 [number]
 NN
    sofa: _InitialView
@@ -2065,35 +1816,24 @@ Token
                            begin: 0
                            end: 169
                            constituentType: "S"
-                           parent: <null>
                            children: FSArray
-                           syntacticFunction: <null>
                         children: FSArray
-                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 105
       end: 111
       value: "number"
-   stem: <null>
    pos: NN
       sofa: _InitialView
       begin: 105
       end: 111
       PosValue: "NN"
-   morph: <null>
 [number]
 SemanticArgument
    sofa: _InitialView
@@ -2154,23 +1894,14 @@ Constituent
                         begin: 0
                         end: 169
                         constituentType: "S"
-                        parent: <null>
                         children: FSArray
-                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: <null>
 [of]
 PP
    sofa: _InitialView
@@ -2228,35 +1959,24 @@ Token
                            begin: 0
                            end: 169
                            constituentType: "S"
-                           parent: <null>
                            children: FSArray
-                           syntacticFunction: <null>
                         children: FSArray
-                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 112
       end: 114
       value: "of"
-   stem: <null>
    pos: PP
       sofa: _InitialView
       begin: 112
       end: 114
       PosValue: "IN"
-   morph: <null>
 [village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -2303,25 +2023,15 @@ Constituent
                            begin: 0
                            end: 169
                            constituentType: "S"
-                           parent: <null>
                            children: FSArray
-                           syntacticFunction: <null>
                         children: FSArray
-                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: <null>
 [village gossips]
 Constituent
    sofa: _InitialView
@@ -2373,27 +2083,16 @@ Constituent
                               begin: 0
                               end: 169
                               constituentType: "S"
-                              parent: <null>
                               children: FSArray
-                              syntacticFunction: <null>
                            children: FSArray
-                           syntacticFunction: <null>
                         children: FSArray
-                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: <null>
 [village]
 NN
    sofa: _InitialView
@@ -2461,39 +2160,26 @@ Token
                                  begin: 0
                                  end: 169
                                  constituentType: "S"
-                                 parent: <null>
                                  children: FSArray
-                                 syntacticFunction: <null>
                               children: FSArray
-                              syntacticFunction: <null>
                            children: FSArray
-                           syntacticFunction: <null>
                         children: FSArray
-                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 115
       end: 122
       value: "village"
-   stem: <null>
    pos: NN
       sofa: _InitialView
       begin: 115
       end: 122
       PosValue: "NN"
-   morph: <null>
 [gossips]
 NN
    sofa: _InitialView
@@ -2561,39 +2247,26 @@ Token
                                  begin: 0
                                  end: 169
                                  constituentType: "S"
-                                 parent: <null>
                                  children: FSArray
-                                 syntacticFunction: <null>
                               children: FSArray
-                              syntacticFunction: <null>
                            children: FSArray
-                           syntacticFunction: <null>
                         children: FSArray
-                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 123
       end: 130
       value: "gossip"
-   stem: <null>
    pos: NN
       sofa: _InitialView
       begin: 123
       end: 130
       PosValue: "NNS"
-   morph: <null>
 [whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -2645,27 +2318,16 @@ Constituent
                               begin: 0
                               end: 169
                               constituentType: "S"
-                              parent: <null>
                               children: FSArray
-                              syntacticFunction: <null>
                            children: FSArray
-                           syntacticFunction: <null>
                         children: FSArray
-                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: <null>
 [whose acquaintance]
 Constituent
    sofa: _InitialView
@@ -2722,29 +2384,17 @@ Constituent
                                  begin: 0
                                  end: 169
                                  constituentType: "S"
-                                 parent: <null>
                                  children: FSArray
-                                 syntacticFunction: <null>
                               children: FSArray
-                              syntacticFunction: <null>
                            children: FSArray
-                           syntacticFunction: <null>
                         children: FSArray
-                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: <null>
 [whose]
 PR
    sofa: _InitialView
@@ -2817,41 +2467,27 @@ Token
                                     begin: 0
                                     end: 169
                                     constituentType: "S"
-                                    parent: <null>
                                     children: FSArray
-                                    syntacticFunction: <null>
                                  children: FSArray
-                                 syntacticFunction: <null>
                               children: FSArray
-                              syntacticFunction: <null>
                            children: FSArray
-                           syntacticFunction: <null>
                         children: FSArray
-                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 131
       end: 136
       value: "whose"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 131
       end: 136
       PosValue: "WP$"
-   morph: <null>
 [acquaintance]
 NN
    sofa: _InitialView
@@ -2924,41 +2560,27 @@ Token
                                     begin: 0
                                     end: 169
                                     constituentType: "S"
-                                    parent: <null>
                                     children: FSArray
-                                    syntacticFunction: <null>
                                  children: FSArray
-                                 syntacticFunction: <null>
                               children: FSArray
-                              syntacticFunction: <null>
                            children: FSArray
-                           syntacticFunction: <null>
                         children: FSArray
-                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 137
       end: 149
       value: "acquaintance"
-   stem: <null>
    pos: NN
       sofa: _InitialView
       begin: 137
       end: 149
       PosValue: "NN"
-   morph: <null>
 [he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -3015,29 +2637,17 @@ Constituent
                                  begin: 0
                                  end: 169
                                  constituentType: "S"
-                                 parent: <null>
                                  children: FSArray
-                                 syntacticFunction: <null>
                               children: FSArray
-                              syntacticFunction: <null>
                            children: FSArray
-                           syntacticFunction: <null>
                         children: FSArray
-                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: <null>
 [he]
 PR
    sofa: _InitialView
@@ -3110,41 +2720,27 @@ Token
                                     begin: 0
                                     end: 169
                                     constituentType: "S"
-                                    parent: <null>
                                     children: FSArray
-                                    syntacticFunction: <null>
                                  children: FSArray
-                                 syntacticFunction: <null>
                               children: FSArray
-                              syntacticFunction: <null>
                            children: FSArray
-                           syntacticFunction: <null>
                         children: FSArray
-                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 150
       end: 152
       value: "he"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 150
       end: 152
       PosValue: "PRP"
-   morph: <null>
 [he]
 SemanticArgument
    sofa: _InitialView
@@ -3219,31 +2815,18 @@ Constituent
                                     begin: 0
                                     end: 169
                                     constituentType: "S"
-                                    parent: <null>
                                     children: FSArray
-                                    syntacticFunction: <null>
                                  children: FSArray
-                                 syntacticFunction: <null>
                               children: FSArray
-                              syntacticFunction: <null>
                            children: FSArray
-                           syntacticFunction: <null>
                         children: FSArray
-                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: <null>
 [had]
 V
    sofa: _InitialView
@@ -3321,43 +2904,28 @@ Token
                                        begin: 0
                                        end: 169
                                        constituentType: "S"
-                                       parent: <null>
                                        children: FSArray
-                                       syntacticFunction: <null>
                                     children: FSArray
-                                    syntacticFunction: <null>
                                  children: FSArray
-                                 syntacticFunction: <null>
                               children: FSArray
-                              syntacticFunction: <null>
                            children: FSArray
-                           syntacticFunction: <null>
                         children: FSArray
-                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 153
       end: 156
       value: "have"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 153
       end: 156
       PosValue: "VBD"
-   morph: <null>
 [cultivated .]
 Constituent
    sofa: _InitialView
@@ -3424,33 +2992,19 @@ Constituent
                                        begin: 0
                                        end: 169
                                        constituentType: "S"
-                                       parent: <null>
                                        children: FSArray
-                                       syntacticFunction: <null>
                                     children: FSArray
-                                    syntacticFunction: <null>
                                  children: FSArray
-                                 syntacticFunction: <null>
                               children: FSArray
-                              syntacticFunction: <null>
                            children: FSArray
-                           syntacticFunction: <null>
                         children: FSArray
-                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: <null>
 [cultivated]
 V
    sofa: _InitialView
@@ -3533,45 +3087,29 @@ Token
                                           begin: 0
                                           end: 169
                                           constituentType: "S"
-                                          parent: <null>
                                           children: FSArray
-                                          syntacticFunction: <null>
                                        children: FSArray
-                                       syntacticFunction: <null>
                                     children: FSArray
-                                    syntacticFunction: <null>
                                  children: FSArray
-                                 syntacticFunction: <null>
                               children: FSArray
-                              syntacticFunction: <null>
                            children: FSArray
-                           syntacticFunction: <null>
                         children: FSArray
-                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 157
       end: 167
       value: "cultivate"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 157
       end: 167
       PosValue: "VBN"
-   morph: <null>
 [cultivated]
 SemanticArgument
    sofa: _InitialView
@@ -3660,45 +3198,29 @@ Token
                                           begin: 0
                                           end: 169
                                           constituentType: "S"
-                                          parent: <null>
                                           children: FSArray
-                                          syntacticFunction: <null>
                                        children: FSArray
-                                       syntacticFunction: <null>
                                     children: FSArray
-                                    syntacticFunction: <null>
                                  children: FSArray
-                                 syntacticFunction: <null>
                               children: FSArray
-                              syntacticFunction: <null>
                            children: FSArray
-                           syntacticFunction: <null>
                         children: FSArray
-                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 168
       end: 169
       value: "."
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 168
       end: 169
       PosValue: "PUNC."
-   morph: <null>
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================
