@@ -69,6 +69,12 @@ public class CasDumpWriter
      */
     public static final String EXCLUDE_PREFIX = "-|";
 
+    public static final String PATTERN_ANY = ".*";
+    public static final String PATTERN_NULL_VALUE = "^\\s+\\w+: <null>$";
+    public static final String PATTERN_COLLECTION_ID = "^.*collectionId:.*$";
+    public static final String PATTERN_DOCUMENT_URI = "^.*documentUri:.*$";
+    public static final String PATTERN_DOCUMENT_BASE_URI = "^.*documentBaseUri:.*$";
+    
     /**
      * Output file. If multiple CASes as processed, their contents are concatenated into this file.
      * Mind that a test case using this consumer with multiple CASes requires a reader which
@@ -92,7 +98,9 @@ public class CasDumpWriter
      */
     public static final String PARAM_FEATURE_PATTERNS = "featurePatterns";
     @ConfigurationParameter(name = PARAM_FEATURE_PATTERNS, mandatory = true, defaultValue = {
-            "+|.*", "-|^.*documentUri:.*$", "-|^.*collectionId:.*$", "-|^.*documentBaseUri:.*$" })
+            INCLUDE_PREFIX+PATTERN_ANY, EXCLUDE_PREFIX+PATTERN_DOCUMENT_URI, 
+            EXCLUDE_PREFIX+PATTERN_COLLECTION_ID, EXCLUDE_PREFIX+PATTERN_DOCUMENT_BASE_URI, 
+            EXCLUDE_PREFIX+PATTERN_NULL_VALUE })
     private String[] featurePatterns;
 
     private InExPattern[] cookedFeaturePatterns;

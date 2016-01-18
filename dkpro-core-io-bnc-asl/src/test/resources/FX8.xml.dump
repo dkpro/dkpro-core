@@ -50,19 +50,16 @@ Token
    sofa: _InitialView
    begin: 1
    end: 3
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 1
       end: 3
       value: "ah"
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 1
       end: 3
       PosValue: "ITJ"
-   morph: <null>
 [there]
 ADV
    sofa: _InitialView
@@ -80,19 +77,16 @@ Token
    sofa: _InitialView
    begin: 4
    end: 9
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 4
       end: 9
       value: "there"
-   stem: <null>
    pos: ADV
       sofa: _InitialView
       begin: 4
       end: 9
       PosValue: "AV0"
-   morph: <null>
 [we]
 PR
    sofa: _InitialView
@@ -110,19 +104,16 @@ Token
    sofa: _InitialView
    begin: 10
    end: 12
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 10
       end: 12
       value: "we"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 10
       end: 12
       PosValue: "PNP"
-   morph: <null>
 [are]
 V
    sofa: _InitialView
@@ -140,19 +131,16 @@ Token
    sofa: _InitialView
    begin: 13
    end: 16
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 13
       end: 16
       value: "be"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 13
       end: 16
       PosValue: "VBB"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -164,15 +152,11 @@ Token
    sofa: _InitialView
    begin: 16
    end: 17
-   parent: <null>
-   lemma: <null>
-   stem: <null>
    pos: PUNC
       sofa: _InitialView
       begin: 16
       end: 17
       PosValue: "PUN"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -184,15 +168,11 @@ Token
    sofa: _InitialView
    begin: 17
    end: 18
-   parent: <null>
-   lemma: <null>
-   stem: <null>
    pos: PUNC
       sofa: _InitialView
       begin: 17
       end: 18
       PosValue: "PUN"
-   morph: <null>
 [Right  abdominal wound, she's a wee bit  confused.]
 Sentence
    sofa: _InitialView
@@ -215,19 +195,16 @@ Token
    sofa: _InitialView
    begin: 19
    end: 24
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 19
       end: 24
       value: "right"
-   stem: <null>
    pos: ADV
       sofa: _InitialView
       begin: 19
       end: 24
       PosValue: "AV0"
-   morph: <null>
 [abdominal]
 ADJ
    sofa: _InitialView
@@ -245,19 +222,16 @@ Token
    sofa: _InitialView
    begin: 26
    end: 35
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 26
       end: 35
       value: "abdominal"
-   stem: <null>
    pos: ADJ
       sofa: _InitialView
       begin: 26
       end: 35
       PosValue: "AJ0"
-   morph: <null>
 [wound]
 NN
    sofa: _InitialView
@@ -275,19 +249,16 @@ Token
    sofa: _InitialView
    begin: 36
    end: 41
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 36
       end: 41
       value: "wound"
-   stem: <null>
    pos: NN
       sofa: _InitialView
       begin: 36
       end: 41
       PosValue: "NN1"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -299,15 +270,11 @@ Token
    sofa: _InitialView
    begin: 41
    end: 42
-   parent: <null>
-   lemma: <null>
-   stem: <null>
    pos: PUNC
       sofa: _InitialView
       begin: 41
       end: 42
       PosValue: "PUN"
-   morph: <null>
 [she]
 PR
    sofa: _InitialView
@@ -325,19 +292,16 @@ Token
    sofa: _InitialView
    begin: 43
    end: 46
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 43
       end: 46
       value: "she"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 43
       end: 46
       PosValue: "PNP"
-   morph: <null>
 ['s]
 V
    sofa: _InitialView
@@ -355,19 +319,16 @@ Token
    sofa: _InitialView
    begin: 46
    end: 48
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 46
       end: 48
       value: "be"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 46
       end: 48
       PosValue: "VBZ"
-   morph: <null>
 [a]
 ART
    sofa: _InitialView
@@ -385,19 +346,16 @@ Token
    sofa: _InitialView
    begin: 49
    end: 50
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 49
       end: 50
       value: "a"
-   stem: <null>
    pos: ART
       sofa: _InitialView
       begin: 49
       end: 50
       PosValue: "AT0"
-   morph: <null>
 [wee]
 O
    sofa: _InitialView
@@ -415,19 +373,16 @@ Token
    sofa: _InitialView
    begin: 51
    end: 54
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 51
       end: 54
       value: "wee"
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 51
       end: 54
       PosValue: "AJ0-NN1"
-   morph: <null>
 [bit]
 NN
    sofa: _InitialView
@@ -445,19 +400,16 @@ Token
    sofa: _InitialView
    begin: 55
    end: 58
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 55
       end: 58
       value: "bit"
-   stem: <null>
    pos: NN
       sofa: _InitialView
       begin: 55
       end: 58
       PosValue: "NN1"
-   morph: <null>
 [confused]
 O
    sofa: _InitialView
@@ -475,19 +427,16 @@ Token
    sofa: _InitialView
    begin: 60
    end: 68
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 60
       end: 68
       value: "confuse"
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 60
       end: 68
       PosValue: "VVN-AJ0"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -499,15 +448,11 @@ Token
    sofa: _InitialView
    begin: 68
    end: 69
-   parent: <null>
-   lemma: <null>
-   stem: <null>
    pos: PUNC
       sofa: _InitialView
       begin: 68
       end: 69
       PosValue: "PUN"
-   morph: <null>
 [She didn't bother to tell me that she'd only got  to call you, right?]
 Sentence
    sofa: _InitialView
@@ -530,19 +475,16 @@ Token
    sofa: _InitialView
    begin: 70
    end: 73
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 70
       end: 73
       value: "she"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 70
       end: 73
       PosValue: "PNP"
-   morph: <null>
 [did]
 V
    sofa: _InitialView
@@ -560,19 +502,16 @@ Token
    sofa: _InitialView
    begin: 74
    end: 77
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 74
       end: 77
       value: "do"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 74
       end: 77
       PosValue: "VDD"
-   morph: <null>
 [n't]
 O
    sofa: _InitialView
@@ -590,19 +529,16 @@ Token
    sofa: _InitialView
    begin: 77
    end: 80
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 77
       end: 80
       value: "not"
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 77
       end: 80
       PosValue: "XX0"
-   morph: <null>
 [bother]
 V
    sofa: _InitialView
@@ -620,19 +556,16 @@ Token
    sofa: _InitialView
    begin: 81
    end: 87
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 81
       end: 87
       value: "bother"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 81
       end: 87
       PosValue: "VVI"
-   morph: <null>
 [to]
 O
    sofa: _InitialView
@@ -650,19 +583,16 @@ Token
    sofa: _InitialView
    begin: 88
    end: 90
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 88
       end: 90
       value: "to"
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 88
       end: 90
       PosValue: "TO0"
-   morph: <null>
 [tell]
 V
    sofa: _InitialView
@@ -680,19 +610,16 @@ Token
    sofa: _InitialView
    begin: 91
    end: 95
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 91
       end: 95
       value: "tell"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 91
       end: 95
       PosValue: "VVI"
-   morph: <null>
 [me]
 PR
    sofa: _InitialView
@@ -710,19 +637,16 @@ Token
    sofa: _InitialView
    begin: 96
    end: 98
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 96
       end: 98
       value: "i"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 96
       end: 98
       PosValue: "PNP"
-   morph: <null>
 [that]
 CONJ
    sofa: _InitialView
@@ -740,19 +664,16 @@ Token
    sofa: _InitialView
    begin: 99
    end: 103
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 99
       end: 103
       value: "that"
-   stem: <null>
    pos: CONJ
       sofa: _InitialView
       begin: 99
       end: 103
       PosValue: "CJT"
-   morph: <null>
 [she]
 PR
    sofa: _InitialView
@@ -770,19 +691,16 @@ Token
    sofa: _InitialView
    begin: 104
    end: 107
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 104
       end: 107
       value: "she"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 104
       end: 107
       PosValue: "PNP"
-   morph: <null>
 ['d]
 V
    sofa: _InitialView
@@ -800,19 +718,16 @@ Token
    sofa: _InitialView
    begin: 107
    end: 109
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 107
       end: 109
       value: "have"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 107
       end: 109
       PosValue: "VHD"
-   morph: <null>
 [only]
 ADV
    sofa: _InitialView
@@ -830,19 +745,16 @@ Token
    sofa: _InitialView
    begin: 110
    end: 114
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 110
       end: 114
       value: "only"
-   stem: <null>
    pos: ADV
       sofa: _InitialView
       begin: 110
       end: 114
       PosValue: "AV0"
-   morph: <null>
 [got]
 V
    sofa: _InitialView
@@ -860,19 +772,16 @@ Token
    sofa: _InitialView
    begin: 115
    end: 118
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 115
       end: 118
       value: "get"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 115
       end: 118
       PosValue: "VVN"
-   morph: <null>
 [to]
 O
    sofa: _InitialView
@@ -890,19 +799,16 @@ Token
    sofa: _InitialView
    begin: 120
    end: 122
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 120
       end: 122
       value: "to"
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 120
       end: 122
       PosValue: "TO0"
-   morph: <null>
 [call]
 V
    sofa: _InitialView
@@ -920,19 +826,16 @@ Token
    sofa: _InitialView
    begin: 123
    end: 127
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 123
       end: 127
       value: "call"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 123
       end: 127
       PosValue: "VVI"
-   morph: <null>
 [you]
 PR
    sofa: _InitialView
@@ -950,19 +853,16 @@ Token
    sofa: _InitialView
    begin: 128
    end: 131
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 128
       end: 131
       value: "you"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 128
       end: 131
       PosValue: "PNP"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -974,15 +874,11 @@ Token
    sofa: _InitialView
    begin: 131
    end: 132
-   parent: <null>
-   lemma: <null>
-   stem: <null>
    pos: PUNC
       sofa: _InitialView
       begin: 131
       end: 132
       PosValue: "PUN"
-   morph: <null>
 [right]
 ADV
    sofa: _InitialView
@@ -1000,19 +896,16 @@ Token
    sofa: _InitialView
    begin: 133
    end: 138
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 133
       end: 138
       value: "right"
-   stem: <null>
    pos: ADV
       sofa: _InitialView
       begin: 133
       end: 138
       PosValue: "AV0"
-   morph: <null>
 [?]
 PUNC
    sofa: _InitialView
@@ -1024,15 +917,11 @@ Token
    sofa: _InitialView
    begin: 138
    end: 139
-   parent: <null>
-   lemma: <null>
-   stem: <null>
    pos: PUNC
       sofa: _InitialView
       begin: 138
       end: 139
       PosValue: "PUN"
-   morph: <null>
 [Erm she wasn't in her nightdress but she only dressed herself, she said  ]
 Sentence
    sofa: _InitialView
@@ -1055,19 +944,16 @@ Token
    sofa: _InitialView
    begin: 140
    end: 143
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 140
       end: 143
       value: "erm"
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 140
       end: 143
       PosValue: "UNC"
-   morph: <null>
 [she]
 PR
    sofa: _InitialView
@@ -1085,19 +971,16 @@ Token
    sofa: _InitialView
    begin: 144
    end: 147
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 144
       end: 147
       value: "she"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 144
       end: 147
       PosValue: "PNP"
-   morph: <null>
 [was]
 V
    sofa: _InitialView
@@ -1115,19 +998,16 @@ Token
    sofa: _InitialView
    begin: 148
    end: 151
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 148
       end: 151
       value: "be"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 148
       end: 151
       PosValue: "VBD"
-   morph: <null>
 [n't]
 O
    sofa: _InitialView
@@ -1145,19 +1025,16 @@ Token
    sofa: _InitialView
    begin: 151
    end: 154
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 151
       end: 154
       value: "not"
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 151
       end: 154
       PosValue: "XX0"
-   morph: <null>
 [in]
 PP
    sofa: _InitialView
@@ -1175,19 +1052,16 @@ Token
    sofa: _InitialView
    begin: 155
    end: 157
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 155
       end: 157
       value: "in"
-   stem: <null>
    pos: PP
       sofa: _InitialView
       begin: 155
       end: 157
       PosValue: "PRP"
-   morph: <null>
 [her]
 ART
    sofa: _InitialView
@@ -1205,19 +1079,16 @@ Token
    sofa: _InitialView
    begin: 158
    end: 161
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 158
       end: 161
       value: "she"
-   stem: <null>
    pos: ART
       sofa: _InitialView
       begin: 158
       end: 161
       PosValue: "DPS"
-   morph: <null>
 [nightdress]
 NN
    sofa: _InitialView
@@ -1235,19 +1106,16 @@ Token
    sofa: _InitialView
    begin: 162
    end: 172
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 162
       end: 172
       value: "nightdress"
-   stem: <null>
    pos: NN
       sofa: _InitialView
       begin: 162
       end: 172
       PosValue: "NN1"
-   morph: <null>
 [but]
 CONJ
    sofa: _InitialView
@@ -1265,19 +1133,16 @@ Token
    sofa: _InitialView
    begin: 173
    end: 176
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 173
       end: 176
       value: "but"
-   stem: <null>
    pos: CONJ
       sofa: _InitialView
       begin: 173
       end: 176
       PosValue: "CJC"
-   morph: <null>
 [she]
 PR
    sofa: _InitialView
@@ -1295,19 +1160,16 @@ Token
    sofa: _InitialView
    begin: 177
    end: 180
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 177
       end: 180
       value: "she"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 177
       end: 180
       PosValue: "PNP"
-   morph: <null>
 [only]
 ADV
    sofa: _InitialView
@@ -1325,19 +1187,16 @@ Token
    sofa: _InitialView
    begin: 181
    end: 185
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 181
       end: 185
       value: "only"
-   stem: <null>
    pos: ADV
       sofa: _InitialView
       begin: 181
       end: 185
       PosValue: "AV0"
-   morph: <null>
 [dressed]
 V
    sofa: _InitialView
@@ -1355,19 +1214,16 @@ Token
    sofa: _InitialView
    begin: 186
    end: 193
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 186
       end: 193
       value: "dress"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 186
       end: 193
       PosValue: "VVD"
-   morph: <null>
 [herself]
 O
    sofa: _InitialView
@@ -1385,19 +1241,16 @@ Token
    sofa: _InitialView
    begin: 194
    end: 201
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 194
       end: 201
       value: "herself"
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 194
       end: 201
       PosValue: "PNX"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -1409,15 +1262,11 @@ Token
    sofa: _InitialView
    begin: 201
    end: 202
-   parent: <null>
-   lemma: <null>
-   stem: <null>
    pos: PUNC
       sofa: _InitialView
       begin: 201
       end: 202
       PosValue: "PUN"
-   morph: <null>
 [she]
 PR
    sofa: _InitialView
@@ -1435,19 +1284,16 @@ Token
    sofa: _InitialView
    begin: 203
    end: 206
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 203
       end: 206
       value: "she"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 203
       end: 206
       PosValue: "PNP"
-   morph: <null>
 [said]
 V
    sofa: _InitialView
@@ -1465,19 +1311,16 @@ Token
    sofa: _InitialView
    begin: 207
    end: 211
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 207
       end: 211
       value: "say"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 207
       end: 211
       PosValue: "VVD"
-   morph: <null>
 [And you  ]
 Sentence
    sofa: _InitialView
@@ -1500,19 +1343,16 @@ Token
    sofa: _InitialView
    begin: 214
    end: 217
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 214
       end: 217
       value: "and"
-   stem: <null>
    pos: CONJ
       sofa: _InitialView
       begin: 214
       end: 217
       PosValue: "CJC"
-   morph: <null>
 [you]
 PR
    sofa: _InitialView
@@ -1530,19 +1370,16 @@ Token
    sofa: _InitialView
    begin: 218
    end: 221
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 218
       end: 221
       value: "you"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 218
       end: 221
       PosValue: "PNP"
-   morph: <null>
 [She said she went to buy something  herself, she phoned the clinic and the clinic .]
 Sentence
    sofa: _InitialView
@@ -1565,19 +1402,16 @@ Token
    sofa: _InitialView
    begin: 224
    end: 227
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 224
       end: 227
       value: "she"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 224
       end: 227
       PosValue: "PNP"
-   morph: <null>
 [said]
 V
    sofa: _InitialView
@@ -1595,19 +1429,16 @@ Token
    sofa: _InitialView
    begin: 228
    end: 232
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 228
       end: 232
       value: "say"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 228
       end: 232
       PosValue: "VVD"
-   morph: <null>
 [she]
 PR
    sofa: _InitialView
@@ -1625,19 +1456,16 @@ Token
    sofa: _InitialView
    begin: 233
    end: 236
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 233
       end: 236
       value: "she"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 233
       end: 236
       PosValue: "PNP"
-   morph: <null>
 [went]
 V
    sofa: _InitialView
@@ -1655,19 +1483,16 @@ Token
    sofa: _InitialView
    begin: 237
    end: 241
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 237
       end: 241
       value: "go"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 237
       end: 241
       PosValue: "VVD"
-   morph: <null>
 [to]
 O
    sofa: _InitialView
@@ -1685,19 +1510,16 @@ Token
    sofa: _InitialView
    begin: 242
    end: 244
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 242
       end: 244
       value: "to"
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 242
       end: 244
       PosValue: "TO0"
-   morph: <null>
 [buy]
 V
    sofa: _InitialView
@@ -1715,19 +1537,16 @@ Token
    sofa: _InitialView
    begin: 245
    end: 248
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 245
       end: 248
       value: "buy"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 245
       end: 248
       PosValue: "VVI"
-   morph: <null>
 [something]
 PR
    sofa: _InitialView
@@ -1745,19 +1564,16 @@ Token
    sofa: _InitialView
    begin: 249
    end: 258
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 249
       end: 258
       value: "something"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 249
       end: 258
       PosValue: "PNI"
-   morph: <null>
 [herself]
 O
    sofa: _InitialView
@@ -1775,19 +1591,16 @@ Token
    sofa: _InitialView
    begin: 260
    end: 267
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 260
       end: 267
       value: "herself"
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 260
       end: 267
       PosValue: "PNX"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -1799,15 +1612,11 @@ Token
    sofa: _InitialView
    begin: 267
    end: 268
-   parent: <null>
-   lemma: <null>
-   stem: <null>
    pos: PUNC
       sofa: _InitialView
       begin: 267
       end: 268
       PosValue: "PUN"
-   morph: <null>
 [she]
 PR
    sofa: _InitialView
@@ -1825,19 +1634,16 @@ Token
    sofa: _InitialView
    begin: 269
    end: 272
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 269
       end: 272
       value: "she"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 269
       end: 272
       PosValue: "PNP"
-   morph: <null>
 [phoned]
 V
    sofa: _InitialView
@@ -1855,19 +1661,16 @@ Token
    sofa: _InitialView
    begin: 273
    end: 279
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 273
       end: 279
       value: "phone"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 273
       end: 279
       PosValue: "VVD"
-   morph: <null>
 [the]
 ART
    sofa: _InitialView
@@ -1885,19 +1688,16 @@ Token
    sofa: _InitialView
    begin: 280
    end: 283
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 280
       end: 283
       value: "the"
-   stem: <null>
    pos: ART
       sofa: _InitialView
       begin: 280
       end: 283
       PosValue: "AT0"
-   morph: <null>
 [clinic]
 NN
    sofa: _InitialView
@@ -1915,19 +1715,16 @@ Token
    sofa: _InitialView
    begin: 284
    end: 290
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 284
       end: 290
       value: "clinic"
-   stem: <null>
    pos: NN
       sofa: _InitialView
       begin: 284
       end: 290
       PosValue: "NN1"
-   morph: <null>
 [and]
 CONJ
    sofa: _InitialView
@@ -1945,19 +1742,16 @@ Token
    sofa: _InitialView
    begin: 291
    end: 294
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 291
       end: 294
       value: "and"
-   stem: <null>
    pos: CONJ
       sofa: _InitialView
       begin: 291
       end: 294
       PosValue: "CJC"
-   morph: <null>
 [the]
 ART
    sofa: _InitialView
@@ -1975,19 +1769,16 @@ Token
    sofa: _InitialView
    begin: 295
    end: 298
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 295
       end: 298
       value: "the"
-   stem: <null>
    pos: ART
       sofa: _InitialView
       begin: 295
       end: 298
       PosValue: "AT0"
-   morph: <null>
 [clinic]
 NN
    sofa: _InitialView
@@ -2005,19 +1796,16 @@ Token
    sofa: _InitialView
    begin: 299
    end: 305
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 299
       end: 305
       value: "clinic"
-   stem: <null>
    pos: NN
       sofa: _InitialView
       begin: 299
       end: 305
       PosValue: "NN1"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -2029,15 +1817,11 @@ Token
    sofa: _InitialView
    begin: 306
    end: 307
-   parent: <null>
-   lemma: <null>
-   stem: <null>
    pos: PUNC
       sofa: _InitialView
       begin: 306
       end: 307
       PosValue: "PUN"
-   morph: <null>
 [She's  here and  says she should be  fortnightly .]
 Sentence
    sofa: _InitialView
@@ -2060,19 +1844,16 @@ Token
    sofa: _InitialView
    begin: 308
    end: 311
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 308
       end: 311
       value: "she"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 308
       end: 311
       PosValue: "PNP"
-   morph: <null>
 ['s]
 V
    sofa: _InitialView
@@ -2090,19 +1871,16 @@ Token
    sofa: _InitialView
    begin: 311
    end: 313
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 311
       end: 313
       value: "be"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 311
       end: 313
       PosValue: "VBZ"
-   morph: <null>
 [here]
 ADV
    sofa: _InitialView
@@ -2120,19 +1898,16 @@ Token
    sofa: _InitialView
    begin: 315
    end: 319
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 315
       end: 319
       value: "here"
-   stem: <null>
    pos: ADV
       sofa: _InitialView
       begin: 315
       end: 319
       PosValue: "AV0"
-   morph: <null>
 [and]
 CONJ
    sofa: _InitialView
@@ -2150,19 +1925,16 @@ Token
    sofa: _InitialView
    begin: 320
    end: 323
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 320
       end: 323
       value: "and"
-   stem: <null>
    pos: CONJ
       sofa: _InitialView
       begin: 320
       end: 323
       PosValue: "CJC"
-   morph: <null>
 [says]
 V
    sofa: _InitialView
@@ -2180,19 +1952,16 @@ Token
    sofa: _InitialView
    begin: 325
    end: 329
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 325
       end: 329
       value: "say"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 325
       end: 329
       PosValue: "VVZ"
-   morph: <null>
 [she]
 PR
    sofa: _InitialView
@@ -2210,19 +1979,16 @@ Token
    sofa: _InitialView
    begin: 330
    end: 333
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 330
       end: 333
       value: "she"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 330
       end: 333
       PosValue: "PNP"
-   morph: <null>
 [should]
 V
    sofa: _InitialView
@@ -2240,19 +2006,16 @@ Token
    sofa: _InitialView
    begin: 334
    end: 340
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 334
       end: 340
       value: "should"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 334
       end: 340
       PosValue: "VM0"
-   morph: <null>
 [be]
 V
    sofa: _InitialView
@@ -2270,19 +2033,16 @@ Token
    sofa: _InitialView
    begin: 341
    end: 343
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 341
       end: 343
       value: "be"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 341
       end: 343
       PosValue: "VBI"
-   morph: <null>
 [fortnightly]
 ADV
    sofa: _InitialView
@@ -2300,19 +2060,16 @@ Token
    sofa: _InitialView
    begin: 345
    end: 356
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 345
       end: 356
       value: "fortnightly"
-   stem: <null>
    pos: ADV
       sofa: _InitialView
       begin: 345
       end: 356
       PosValue: "AV0"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -2324,15 +2081,11 @@ Token
    sofa: _InitialView
    begin: 357
    end: 358
-   parent: <null>
-   lemma: <null>
-   stem: <null>
    pos: PUNC
       sofa: _InitialView
       begin: 357
       end: 358
       PosValue: "PUN"
-   morph: <null>
 [So I don't know whether you want to go and see her rather than, I could get a doctor to go and see her and phone,.]
 Sentence
    sofa: _InitialView
@@ -2355,19 +2108,16 @@ Token
    sofa: _InitialView
    begin: 359
    end: 361
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 359
       end: 361
       value: "so"
-   stem: <null>
    pos: ADV
       sofa: _InitialView
       begin: 359
       end: 361
       PosValue: "AV0"
-   morph: <null>
 [I]
 PR
    sofa: _InitialView
@@ -2385,19 +2135,16 @@ Token
    sofa: _InitialView
    begin: 362
    end: 363
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 362
       end: 363
       value: "i"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 362
       end: 363
       PosValue: "PNP"
-   morph: <null>
 [do]
 V
    sofa: _InitialView
@@ -2415,19 +2162,16 @@ Token
    sofa: _InitialView
    begin: 364
    end: 366
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 364
       end: 366
       value: "do"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 364
       end: 366
       PosValue: "VDB"
-   morph: <null>
 [n't]
 O
    sofa: _InitialView
@@ -2445,19 +2189,16 @@ Token
    sofa: _InitialView
    begin: 366
    end: 369
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 366
       end: 369
       value: "not"
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 366
       end: 369
       PosValue: "XX0"
-   morph: <null>
 [know]
 V
    sofa: _InitialView
@@ -2475,19 +2216,16 @@ Token
    sofa: _InitialView
    begin: 370
    end: 374
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 370
       end: 374
       value: "know"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 370
       end: 374
       PosValue: "VVI"
-   morph: <null>
 [whether]
 CONJ
    sofa: _InitialView
@@ -2505,19 +2243,16 @@ Token
    sofa: _InitialView
    begin: 375
    end: 382
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 375
       end: 382
       value: "whether"
-   stem: <null>
    pos: CONJ
       sofa: _InitialView
       begin: 375
       end: 382
       PosValue: "CJS"
-   morph: <null>
 [you]
 PR
    sofa: _InitialView
@@ -2535,19 +2270,16 @@ Token
    sofa: _InitialView
    begin: 383
    end: 386
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 383
       end: 386
       value: "you"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 383
       end: 386
       PosValue: "PNP"
-   morph: <null>
 [want]
 V
    sofa: _InitialView
@@ -2565,19 +2297,16 @@ Token
    sofa: _InitialView
    begin: 387
    end: 391
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 387
       end: 391
       value: "want"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 387
       end: 391
       PosValue: "VVB"
-   morph: <null>
 [to]
 O
    sofa: _InitialView
@@ -2595,19 +2324,16 @@ Token
    sofa: _InitialView
    begin: 392
    end: 394
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 392
       end: 394
       value: "to"
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 392
       end: 394
       PosValue: "TO0"
-   morph: <null>
 [go]
 V
    sofa: _InitialView
@@ -2625,19 +2351,16 @@ Token
    sofa: _InitialView
    begin: 395
    end: 397
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 395
       end: 397
       value: "go"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 395
       end: 397
       PosValue: "VVI"
-   morph: <null>
 [and]
 CONJ
    sofa: _InitialView
@@ -2655,19 +2378,16 @@ Token
    sofa: _InitialView
    begin: 398
    end: 401
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 398
       end: 401
       value: "and"
-   stem: <null>
    pos: CONJ
       sofa: _InitialView
       begin: 398
       end: 401
       PosValue: "CJC"
-   morph: <null>
 [see]
 V
    sofa: _InitialView
@@ -2685,19 +2405,16 @@ Token
    sofa: _InitialView
    begin: 402
    end: 405
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 402
       end: 405
       value: "see"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 402
       end: 405
       PosValue: "VVI"
-   morph: <null>
 [her]
 PR
    sofa: _InitialView
@@ -2715,19 +2432,16 @@ Token
    sofa: _InitialView
    begin: 406
    end: 409
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 406
       end: 409
       value: "she"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 406
       end: 409
       PosValue: "PNP"
-   morph: <null>
 [rather]
 ADV
    sofa: _InitialView
@@ -2745,19 +2459,16 @@ Token
    sofa: _InitialView
    begin: 410
    end: 416
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 410
       end: 416
       value: "rather"
-   stem: <null>
    pos: ADV
       sofa: _InitialView
       begin: 410
       end: 416
       PosValue: "AV0"
-   morph: <null>
 [than]
 CONJ
    sofa: _InitialView
@@ -2775,19 +2486,16 @@ Token
    sofa: _InitialView
    begin: 417
    end: 421
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 417
       end: 421
       value: "than"
-   stem: <null>
    pos: CONJ
       sofa: _InitialView
       begin: 417
       end: 421
       PosValue: "CJS"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -2799,15 +2507,11 @@ Token
    sofa: _InitialView
    begin: 421
    end: 422
-   parent: <null>
-   lemma: <null>
-   stem: <null>
    pos: PUNC
       sofa: _InitialView
       begin: 421
       end: 422
       PosValue: "PUN"
-   morph: <null>
 [I]
 PR
    sofa: _InitialView
@@ -2825,19 +2529,16 @@ Token
    sofa: _InitialView
    begin: 423
    end: 424
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 423
       end: 424
       value: "i"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 423
       end: 424
       PosValue: "PNP"
-   morph: <null>
 [could]
 V
    sofa: _InitialView
@@ -2855,19 +2556,16 @@ Token
    sofa: _InitialView
    begin: 425
    end: 430
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 425
       end: 430
       value: "could"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 425
       end: 430
       PosValue: "VM0"
-   morph: <null>
 [get]
 V
    sofa: _InitialView
@@ -2885,19 +2583,16 @@ Token
    sofa: _InitialView
    begin: 431
    end: 434
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 431
       end: 434
       value: "get"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 431
       end: 434
       PosValue: "VVI"
-   morph: <null>
 [a]
 ART
    sofa: _InitialView
@@ -2915,19 +2610,16 @@ Token
    sofa: _InitialView
    begin: 435
    end: 436
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 435
       end: 436
       value: "a"
-   stem: <null>
    pos: ART
       sofa: _InitialView
       begin: 435
       end: 436
       PosValue: "AT0"
-   morph: <null>
 [doctor]
 NN
    sofa: _InitialView
@@ -2945,19 +2637,16 @@ Token
    sofa: _InitialView
    begin: 437
    end: 443
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 437
       end: 443
       value: "doctor"
-   stem: <null>
    pos: NN
       sofa: _InitialView
       begin: 437
       end: 443
       PosValue: "NN1"
-   morph: <null>
 [to]
 O
    sofa: _InitialView
@@ -2975,19 +2664,16 @@ Token
    sofa: _InitialView
    begin: 444
    end: 446
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 444
       end: 446
       value: "to"
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 444
       end: 446
       PosValue: "TO0"
-   morph: <null>
 [go]
 V
    sofa: _InitialView
@@ -3005,19 +2691,16 @@ Token
    sofa: _InitialView
    begin: 447
    end: 449
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 447
       end: 449
       value: "go"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 447
       end: 449
       PosValue: "VVI"
-   morph: <null>
 [and]
 CONJ
    sofa: _InitialView
@@ -3035,19 +2718,16 @@ Token
    sofa: _InitialView
    begin: 450
    end: 453
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 450
       end: 453
       value: "and"
-   stem: <null>
    pos: CONJ
       sofa: _InitialView
       begin: 450
       end: 453
       PosValue: "CJC"
-   morph: <null>
 [see]
 V
    sofa: _InitialView
@@ -3065,19 +2745,16 @@ Token
    sofa: _InitialView
    begin: 454
    end: 457
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 454
       end: 457
       value: "see"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 454
       end: 457
       PosValue: "VVI"
-   morph: <null>
 [her]
 PR
    sofa: _InitialView
@@ -3095,19 +2772,16 @@ Token
    sofa: _InitialView
    begin: 458
    end: 461
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 458
       end: 461
       value: "she"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 458
       end: 461
       PosValue: "PNP"
-   morph: <null>
 [and]
 CONJ
    sofa: _InitialView
@@ -3125,19 +2799,16 @@ Token
    sofa: _InitialView
    begin: 462
    end: 465
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 462
       end: 465
       value: "and"
-   stem: <null>
    pos: CONJ
       sofa: _InitialView
       begin: 462
       end: 465
       PosValue: "CJC"
-   morph: <null>
 [phone]
 O
    sofa: _InitialView
@@ -3155,19 +2826,16 @@ Token
    sofa: _InitialView
    begin: 466
    end: 471
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 466
       end: 471
       value: "phone"
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 466
       end: 471
       PosValue: "NN1-VVB"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -3179,15 +2847,11 @@ Token
    sofa: _InitialView
    begin: 471
    end: 472
-   parent: <null>
-   lemma: <null>
-   stem: <null>
    pos: PUNC
       sofa: _InitialView
       begin: 471
       end: 472
       PosValue: "PUN"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -3199,15 +2863,11 @@ Token
    sofa: _InitialView
    begin: 472
    end: 473
-   parent: <null>
-   lemma: <null>
-   stem: <null>
    pos: PUNC
       sofa: _InitialView
       begin: 472
       end: 473
       PosValue: "PUN"
-   morph: <null>
 [it's just that I'm never gonna get to up to.]
 Sentence
    sofa: _InitialView
@@ -3230,19 +2890,16 @@ Token
    sofa: _InitialView
    begin: 474
    end: 476
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 474
       end: 476
       value: "it"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 474
       end: 476
       PosValue: "PNP"
-   morph: <null>
 ['s]
 V
    sofa: _InitialView
@@ -3260,19 +2917,16 @@ Token
    sofa: _InitialView
    begin: 476
    end: 478
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 476
       end: 478
       value: "be"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 476
       end: 478
       PosValue: "VBZ"
-   morph: <null>
 [just]
 ADV
    sofa: _InitialView
@@ -3290,19 +2944,16 @@ Token
    sofa: _InitialView
    begin: 479
    end: 483
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 479
       end: 483
       value: "just"
-   stem: <null>
    pos: ADV
       sofa: _InitialView
       begin: 479
       end: 483
       PosValue: "AV0"
-   morph: <null>
 [that]
 CONJ
    sofa: _InitialView
@@ -3320,19 +2971,16 @@ Token
    sofa: _InitialView
    begin: 484
    end: 488
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 484
       end: 488
       value: "that"
-   stem: <null>
    pos: CONJ
       sofa: _InitialView
       begin: 484
       end: 488
       PosValue: "CJT"
-   morph: <null>
 [I]
 PR
    sofa: _InitialView
@@ -3350,19 +2998,16 @@ Token
    sofa: _InitialView
    begin: 489
    end: 490
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 489
       end: 490
       value: "i"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 489
       end: 490
       PosValue: "PNP"
-   morph: <null>
 ['m]
 V
    sofa: _InitialView
@@ -3380,19 +3025,16 @@ Token
    sofa: _InitialView
    begin: 490
    end: 492
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 490
       end: 492
       value: "be"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 490
       end: 492
       PosValue: "VBB"
-   morph: <null>
 [never]
 ADV
    sofa: _InitialView
@@ -3410,19 +3052,16 @@ Token
    sofa: _InitialView
    begin: 493
    end: 498
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 493
       end: 498
       value: "never"
-   stem: <null>
    pos: ADV
       sofa: _InitialView
       begin: 493
       end: 498
       PosValue: "AV0"
-   morph: <null>
 [gon]
 V
    sofa: _InitialView
@@ -3440,19 +3079,16 @@ Token
    sofa: _InitialView
    begin: 499
    end: 502
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 499
       end: 502
       value: "gon"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 499
       end: 502
       PosValue: "VVG"
-   morph: <null>
 [na]
 O
    sofa: _InitialView
@@ -3470,19 +3106,16 @@ Token
    sofa: _InitialView
    begin: 502
    end: 504
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 502
       end: 504
       value: "na"
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 502
       end: 504
       PosValue: "TO0"
-   morph: <null>
 [get]
 V
    sofa: _InitialView
@@ -3500,19 +3133,16 @@ Token
    sofa: _InitialView
    begin: 505
    end: 508
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 505
       end: 508
       value: "get"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 505
       end: 508
       PosValue: "VVI"
-   morph: <null>
 [to]
 PP
    sofa: _InitialView
@@ -3530,19 +3160,16 @@ Token
    sofa: _InitialView
    begin: 509
    end: 511
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 509
       end: 511
       value: "to"
-   stem: <null>
    pos: PP
       sofa: _InitialView
       begin: 509
       end: 511
       PosValue: "PRP"
-   morph: <null>
 [up]
 O
    sofa: _InitialView
@@ -3560,19 +3187,16 @@ Token
    sofa: _InitialView
    begin: 512
    end: 514
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 512
       end: 514
       value: "up"
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 512
       end: 514
       PosValue: "AVP"
-   morph: <null>
 [to]
 PP
    sofa: _InitialView
@@ -3590,19 +3214,16 @@ Token
    sofa: _InitialView
    begin: 515
    end: 517
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 515
       end: 517
       value: "to"
-   stem: <null>
    pos: PP
       sofa: _InitialView
       begin: 515
       end: 517
       PosValue: "PRP"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -3614,15 +3235,11 @@ Token
    sofa: _InitialView
    begin: 517
    end: 518
-   parent: <null>
-   lemma: <null>
-   stem: <null>
    pos: PUNC
       sofa: _InitialView
       begin: 517
       end: 518
       PosValue: "PUN"
-   morph: <null>
 [?]
 PUNC
    sofa: _InitialView
@@ -3639,15 +3256,11 @@ Token
    sofa: _InitialView
    begin: 519
    end: 520
-   parent: <null>
-   lemma: <null>
-   stem: <null>
    pos: PUNC
       sofa: _InitialView
       begin: 519
       end: 520
       PosValue: "PUN"
-   morph: <null>
 [Yeah.]
 Sentence
    sofa: _InitialView
@@ -3670,19 +3283,16 @@ Token
    sofa: _InitialView
    begin: 521
    end: 525
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 521
       end: 525
       value: "yeah"
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 521
       end: 525
       PosValue: "ITJ"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -3694,15 +3304,11 @@ Token
    sofa: _InitialView
    begin: 525
    end: 526
-   parent: <null>
-   lemma: <null>
-   stem: <null>
    pos: PUNC
       sofa: _InitialView
       begin: 525
       end: 526
       PosValue: "PUN"
-   morph: <null>
 [Okay.]
 Sentence
    sofa: _InitialView
@@ -3725,19 +3331,16 @@ Token
    sofa: _InitialView
    begin: 527
    end: 531
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 527
       end: 531
       value: "okay"
-   stem: <null>
    pos: ADV
       sofa: _InitialView
       begin: 527
       end: 531
       PosValue: "AV0"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -3749,15 +3352,11 @@ Token
    sofa: _InitialView
    begin: 531
    end: 532
-   parent: <null>
-   lemma: <null>
-   stem: <null>
    pos: PUNC
       sofa: _InitialView
       begin: 531
       end: 532
       PosValue: "PUN"
-   morph: <null>
 [Yeah.]
 Sentence
    sofa: _InitialView
@@ -3780,19 +3379,16 @@ Token
    sofa: _InitialView
    begin: 533
    end: 537
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 533
       end: 537
       value: "yeah"
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 533
       end: 537
       PosValue: "ITJ"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -3804,15 +3400,11 @@ Token
    sofa: _InitialView
    begin: 537
    end: 538
-   parent: <null>
-   lemma: <null>
-   stem: <null>
    pos: PUNC
       sofa: _InitialView
       begin: 537
       end: 538
       PosValue: "PUN"
-   morph: <null>
 [erm, first  twelve weeks pregnant so should I mark at the bottom when she types .]
 Sentence
    sofa: _InitialView
@@ -3835,19 +3427,16 @@ Token
    sofa: _InitialView
    begin: 539
    end: 542
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 539
       end: 542
       value: "erm"
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 539
       end: 542
       PosValue: "UNC"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -3859,15 +3448,11 @@ Token
    sofa: _InitialView
    begin: 542
    end: 543
-   parent: <null>
-   lemma: <null>
-   stem: <null>
    pos: PUNC
       sofa: _InitialView
       begin: 542
       end: 543
       PosValue: "PUN"
-   morph: <null>
 [first]
 O
    sofa: _InitialView
@@ -3885,19 +3470,16 @@ Token
    sofa: _InitialView
    begin: 544
    end: 549
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 544
       end: 549
       value: "first"
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 544
       end: 549
       PosValue: "ORD"
-   morph: <null>
 [twelve]
 CARD
    sofa: _InitialView
@@ -3915,19 +3497,16 @@ Token
    sofa: _InitialView
    begin: 551
    end: 557
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 551
       end: 557
       value: "twelve"
-   stem: <null>
    pos: CARD
       sofa: _InitialView
       begin: 551
       end: 557
       PosValue: "CRD"
-   morph: <null>
 [weeks]
 NN
    sofa: _InitialView
@@ -3945,19 +3524,16 @@ Token
    sofa: _InitialView
    begin: 558
    end: 563
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 558
       end: 563
       value: "week"
-   stem: <null>
    pos: NN
       sofa: _InitialView
       begin: 558
       end: 563
       PosValue: "NN2"
-   morph: <null>
 [pregnant]
 ADJ
    sofa: _InitialView
@@ -3975,19 +3551,16 @@ Token
    sofa: _InitialView
    begin: 564
    end: 572
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 564
       end: 572
       value: "pregnant"
-   stem: <null>
    pos: ADJ
       sofa: _InitialView
       begin: 564
       end: 572
       PosValue: "AJ0"
-   morph: <null>
 [so]
 ADV
    sofa: _InitialView
@@ -4005,19 +3578,16 @@ Token
    sofa: _InitialView
    begin: 573
    end: 575
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 573
       end: 575
       value: "so"
-   stem: <null>
    pos: ADV
       sofa: _InitialView
       begin: 573
       end: 575
       PosValue: "AV0"
-   morph: <null>
 [should]
 V
    sofa: _InitialView
@@ -4035,19 +3605,16 @@ Token
    sofa: _InitialView
    begin: 576
    end: 582
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 576
       end: 582
       value: "should"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 576
       end: 582
       PosValue: "VM0"
-   morph: <null>
 [I]
 PR
    sofa: _InitialView
@@ -4065,19 +3632,16 @@ Token
    sofa: _InitialView
    begin: 583
    end: 584
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 583
       end: 584
       value: "i"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 583
       end: 584
       PosValue: "PNP"
-   morph: <null>
 [mark]
 V
    sofa: _InitialView
@@ -4095,19 +3659,16 @@ Token
    sofa: _InitialView
    begin: 585
    end: 589
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 585
       end: 589
       value: "mark"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 585
       end: 589
       PosValue: "VVI"
-   morph: <null>
 [at]
 PP
    sofa: _InitialView
@@ -4125,19 +3686,16 @@ Token
    sofa: _InitialView
    begin: 590
    end: 592
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 590
       end: 592
       value: "at"
-   stem: <null>
    pos: PP
       sofa: _InitialView
       begin: 590
       end: 592
       PosValue: "PRP"
-   morph: <null>
 [the]
 ART
    sofa: _InitialView
@@ -4155,19 +3713,16 @@ Token
    sofa: _InitialView
    begin: 593
    end: 596
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 593
       end: 596
       value: "the"
-   stem: <null>
    pos: ART
       sofa: _InitialView
       begin: 593
       end: 596
       PosValue: "AT0"
-   morph: <null>
 [bottom]
 O
    sofa: _InitialView
@@ -4185,19 +3740,16 @@ Token
    sofa: _InitialView
    begin: 597
    end: 603
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 597
       end: 603
       value: "bottom"
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 597
       end: 603
       PosValue: "NN1-AJ0"
-   morph: <null>
 [when]
 CONJ
    sofa: _InitialView
@@ -4215,19 +3767,16 @@ Token
    sofa: _InitialView
    begin: 604
    end: 608
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 604
       end: 608
       value: "when"
-   stem: <null>
    pos: CONJ
       sofa: _InitialView
       begin: 604
       end: 608
       PosValue: "CJS"
-   morph: <null>
 [she]
 PR
    sofa: _InitialView
@@ -4245,19 +3794,16 @@ Token
    sofa: _InitialView
    begin: 609
    end: 612
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 609
       end: 612
       value: "she"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 609
       end: 612
       PosValue: "PNP"
-   morph: <null>
 [types]
 V
    sofa: _InitialView
@@ -4275,19 +3821,16 @@ Token
    sofa: _InitialView
    begin: 613
    end: 618
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 613
       end: 618
       value: "type"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 613
       end: 618
       PosValue: "VVZ"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -4299,15 +3842,11 @@ Token
    sofa: _InitialView
    begin: 619
    end: 620
-   parent: <null>
-   lemma: <null>
-   stem: <null>
    pos: PUNC
       sofa: _InitialView
       begin: 619
       end: 620
       PosValue: "PUN"
-   morph: <null>
 [Erm  this one.]
 Sentence
    sofa: _InitialView
@@ -4330,19 +3869,16 @@ Token
    sofa: _InitialView
    begin: 621
    end: 624
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 621
       end: 624
       value: "erm"
-   stem: <null>
    pos: O
       sofa: _InitialView
       begin: 621
       end: 624
       PosValue: "UNC"
-   morph: <null>
 [this]
 ART
    sofa: _InitialView
@@ -4360,19 +3896,16 @@ Token
    sofa: _InitialView
    begin: 626
    end: 630
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 626
       end: 630
       value: "this"
-   stem: <null>
    pos: ART
       sofa: _InitialView
       begin: 626
       end: 630
       PosValue: "DT0"
-   morph: <null>
 [one]
 PR
    sofa: _InitialView
@@ -4390,19 +3923,16 @@ Token
    sofa: _InitialView
    begin: 631
    end: 634
-   parent: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 631
       end: 634
       value: "one"
-   stem: <null>
    pos: PR
       sofa: _InitialView
       begin: 631
       end: 634
       PosValue: "PNI"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -4414,15 +3944,11 @@ Token
    sofa: _InitialView
    begin: 634
    end: 635
-   parent: <null>
-   lemma: <null>
-   stem: <null>
    pos: PUNC
       sofa: _InitialView
       begin: 634
       end: 635
       PosValue: "PUN"
-   morph: <null>
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================

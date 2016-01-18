@@ -25,16 +25,13 @@ PennTree
    begin: 0
    end: 56
    PennTree: "(VROOT ($( ``) (S (PN-SB (NE Ross) (NE Perot)) (VAFIN wäre) (ADV vielleicht) (NP-PD (ART ein) (ADJA prächtiger) (NN Diktator))) ($( ''))"
-   TransformationNames: <null>
 [`` Ross Perot wäre vielleicht ein prächtiger Diktator '']
 ROOT
    sofa: _InitialView
    begin: 0
    end: 56
    constituentType: "VROOT"
-   parent: <null>
    children: FSArray
-   syntacticFunction: <null>
 [``]
 PUNC
    sofa: _InitialView
@@ -57,21 +54,17 @@ Token
       begin: 0
       end: 56
       constituentType: "VROOT"
-      parent: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 0
       end: 2
       value: "--"
-   stem: <null>
    pos: PUNC
       sofa: _InitialView
       begin: 0
       end: 2
       PosValue: "$("
-   morph: <null>
 [Ross Perot wäre vielleicht ein prächtiger Diktator]
 Constituent
    sofa: _InitialView
@@ -83,11 +76,8 @@ Constituent
       begin: 0
       end: 56
       constituentType: "VROOT"
-      parent: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: <null>
 [Ross Perot]
 Constituent
    sofa: _InitialView
@@ -104,11 +94,8 @@ Constituent
          begin: 0
          end: 56
          constituentType: "VROOT"
-         parent: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
    syntacticFunction: "SB"
 [Ross]
@@ -143,11 +130,8 @@ Token
             begin: 0
             end: 56
             constituentType: "VROOT"
-            parent: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
       syntacticFunction: "SB"
    lemma: Lemma
@@ -155,13 +139,11 @@ Token
       begin: 3
       end: 7
       value: "Ross"
-   stem: <null>
    pos: NP
       sofa: _InitialView
       begin: 3
       end: 7
       PosValue: "NE"
-   morph: <null>
 [Perot]
 NP
    sofa: _InitialView
@@ -194,11 +176,8 @@ Token
             begin: 0
             end: 56
             constituentType: "VROOT"
-            parent: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
       syntacticFunction: "SB"
    lemma: Lemma
@@ -206,13 +185,11 @@ Token
       begin: 8
       end: 13
       value: "Perot"
-   stem: <null>
    pos: NP
       sofa: _InitialView
       begin: 8
       end: 13
       PosValue: "NE"
-   morph: <null>
 [wäre]
 V
    sofa: _InitialView
@@ -240,23 +217,18 @@ Token
          begin: 0
          end: 56
          constituentType: "VROOT"
-         parent: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 14
       end: 18
       value: "sein"
-   stem: <null>
    pos: V
       sofa: _InitialView
       begin: 14
       end: 18
       PosValue: "VAFIN"
-   morph: <null>
 [vielleicht]
 ADV
    sofa: _InitialView
@@ -284,23 +256,18 @@ Token
          begin: 0
          end: 56
          constituentType: "VROOT"
-         parent: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 19
       end: 29
       value: "vielleicht"
-   stem: <null>
    pos: ADV
       sofa: _InitialView
       begin: 19
       end: 29
       PosValue: "ADV"
-   morph: <null>
 [ein prächtiger Diktator]
 Constituent
    sofa: _InitialView
@@ -317,11 +284,8 @@ Constituent
          begin: 0
          end: 56
          constituentType: "VROOT"
-         parent: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: <null>
    children: FSArray
    syntacticFunction: "PD"
 [ein]
@@ -356,11 +320,8 @@ Token
             begin: 0
             end: 56
             constituentType: "VROOT"
-            parent: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
       syntacticFunction: "PD"
    lemma: Lemma
@@ -368,13 +329,11 @@ Token
       begin: 30
       end: 33
       value: "ein"
-   stem: <null>
    pos: ART
       sofa: _InitialView
       begin: 30
       end: 33
       PosValue: "ART"
-   morph: <null>
 [prächtiger]
 ADJ
    sofa: _InitialView
@@ -407,11 +366,8 @@ Token
             begin: 0
             end: 56
             constituentType: "VROOT"
-            parent: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
       syntacticFunction: "PD"
    lemma: Lemma
@@ -419,13 +375,11 @@ Token
       begin: 34
       end: 44
       value: "prächtig"
-   stem: <null>
    pos: ADJ
       sofa: _InitialView
       begin: 34
       end: 44
       PosValue: "ADJA"
-   morph: <null>
 [Diktator]
 NN
    sofa: _InitialView
@@ -458,11 +412,8 @@ Token
             begin: 0
             end: 56
             constituentType: "VROOT"
-            parent: <null>
             children: FSArray
-            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: <null>
       children: FSArray
       syntacticFunction: "PD"
    lemma: Lemma
@@ -470,13 +421,11 @@ Token
       begin: 45
       end: 53
       value: "Diktator"
-   stem: <null>
    pos: NN
       sofa: _InitialView
       begin: 45
       end: 53
       PosValue: "NN"
-   morph: <null>
 ['']
 PUNC
    sofa: _InitialView
@@ -499,21 +448,17 @@ Token
       begin: 0
       end: 56
       constituentType: "VROOT"
-      parent: <null>
       children: FSArray
-      syntacticFunction: <null>
    lemma: Lemma
       sofa: _InitialView
       begin: 54
       end: 56
       value: "--"
-   stem: <null>
    pos: PUNC
       sofa: _InitialView
       begin: 54
       end: 56
       PosValue: "$("
-   morph: <null>
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================
