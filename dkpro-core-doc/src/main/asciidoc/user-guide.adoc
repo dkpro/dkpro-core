@@ -33,7 +33,3 @@ include::{include-dir}io.adoc[]
 <<<
 
 include::{include-dir}models.adoc[]
-
-<<<
-
-include::{include-dir}bibliography.adoc[]

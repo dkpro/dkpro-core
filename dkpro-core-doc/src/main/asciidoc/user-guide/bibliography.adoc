@@ -1,7 +1,0 @@
-[bibliography]
-
-== Bibliography
-
-- [[[MinnenEtal:2001]]] Minnen, G., J. Carroll and D. Pearce (2001). Applied morphological 
-  processing of English, Natural Language Engineering, 7(3). 207-223.
-  
