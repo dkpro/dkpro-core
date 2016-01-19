@@ -39,7 +39,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 
 /**
- * Langdetect language identifier.
+ * Langdetect language identifier based on character n-grams.
  */
 public class LangDetectLanguageIdentifier
     extends JCasAnnotator_ImplBase

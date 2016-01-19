@@ -16,354 +16,282 @@
 
 [[sect_analytics]]
 
-== Analysis Components
+== Analytics
+
+////
+EJ: This section would be more helpful if, instead of telling what not to do ('Don't ask
+us what components to use!'), it provided guidelines on what __to__ do.  
+////
+
+To begin selecting tools to use in your pipeline, you may wish to use the same tools you 
+were running on your data before switching to uimaFIT, or use the same tool specifications 
+as others working on the your NLP task.  With DKPro Core, it is easy to import the exact 
+tool version and model version you need to replicate the work of others.  Or, you may 
+wish to conduct a comparison of multiple tools with the same function, to see which 
+performs best on your data.  With DKPro Core, it is simple to switch between multiple
+tools with the same function, or multiple models for a tool.
+
+Because DKPro Core does not alter any of the integrated tools, however, it is up to the 
+user to make sure that sequential components or models use matching tokenizations or 
+tagsets, and that the component or model is appropriate for the user's data (i.e., 
+a pos-tagger for newstext may perform badly if applied to Twitter data).
+
+////
+Sometimes we get asked which parser, tagger, etc. is the best and which should be
+used. We currently do not make any evaluations of the integrated tools. Also, building a
+pipeline just of the "best" components may not actually yield the best results, because
+of several reasons:
+
+* components or models may expect different tokenizations or tagsets
+* components or models may be good for one domain (e.g. news) but not for
+  another (e.g. twitter data)
+
+We recommend that you try various combinations and stick with the one that gives the
+best result for __your__ data.
+////
+
+=== Compatibility of Components
+
+When selecting components for your pipeline you should make sure that the
+components are compatible regarding the annotation types they expect or
+offer.
+
+
+* if a component expects an annotation type that is not provided by the
+  preceding component, that may lead to an error or simply to no
+  results
+* if a component (e.g. a reader which adds sentence annotations) provides an
+  annotation that is added again by a subsequent component (e.g. a segmenter),
+  that will result in undefined behaviour of other components when you iterate
+  over the annotation that has been added more than once.
+
+To check whether components are compatible, you can look at the
+++@TypeCapability++ annotation which is available in most DKPro
+Core components. Mind that many components can be configured with regards to which
+types they consume or produce, so the ++@TypeCapability++ should be
+taken as a rough indicator, not as a definitive information. It is also important to
+note, that the ++@TypeCapability++ does say anything about the tagset
+being consumed or produced by a component. E.g. one if a POS-tagger uses a model
+that produces POS-tags from the tagset X and a dependency-parser uses a model that
+requires POS-tags from the tagset Y, then the two models are not semantically
+compatible - even though the POS-tagger and dependency-parser components are
+compatible on the level of the type system.
+
+
+=== Dictionaries and other lexical resources
+
+If you use components in your pipeline that access dictionaries or other
+lexical resources, it might be essential to include a Lemmatizer in your
+pipeline: Many dictionaries and well-known lexical resources such as WordNet
+require at minimum a lemma form as a search word in order to return information
+about that word. For large-scale lexical resources, e.g. for Wiktionary,
+additional information about POS is very helpful in order to reduce the
+ambiguity of a given lemma form.
+
+
+=== Lemmatizing multiwords 
+
+If you use lemma information in your pipeline, you should bear in mind that
+multiword expressions, in particular discontinuous multiwords, might not be
+lemmatized as one word (or expression), but rather each multiword part might be
+lemmatized separately. In languages such as German, there are verbs with
+separable particle such as _anfangen_ (_an_ occurs separate from _fangen_ in
+particular sentence constructions). Therefore - depending on your use case - you
+might consider postprocessing the output of the lemmatizer in order to get the
+true lemmas (which you might need, e.g. in order to look up information in a
+lexical resource).
+
+
+=== Morphologically Rich Languages
+
+////
+EJ: What's the goal of this subsection?  Other sister sections have advice
+for how to construct a different pipeline, but this section just says,
+'Your individual tools might not work well.'
+////
+
+* Parsing: Morphologically rich languages (e.g. Czech, German, and
+  Hungarian) pose a particular challenge to parser components (Tsarfaty et
+  al. 2013).
+
+
+* Morphological analysis: for languages with case syncretism (displaying
+  forms that are ambiguous regarding their case, e.g. _Frauen_ in German
+  can be nominative or genitive or dative or accusative), it might be
+  better to leave case underspecified at the morphosyntactic level and
+  leave disambiguation to the components at the syntactic level. Otherwise
+  errors might be introduced that will then be propagated to the next
+  pipeline component (Seeker and Kuhn 2013).
+
+
+==== Domain-specific and other non-standard data
+
+Most components (sentence splitters, POS taggers, parsers ...) are trained on
+(standard) newspaper text. As a consequence, you might encounter a significant
+performance drop if you apply the components to domain specific or other
+non-standard data (scientific abstracts, Twitter data, etc.) without adaptation.
+
+* Tokenizing: adapting the tokenizer to your specific domain is crucial,
+  since tokenizer errors propagate to all subsequent components in the
+  pipeline and worsen their performance. For example, you might adapt your
+  tokenizer to become aware of emoticons or chemical formulae in order to
+  process social media data or text from the biochemical domain.
+  
+////
+  EJ: Ok, I want to adapt my tokenizer.  How do I do this/ what's the next step?
+  Please give pointers.
+////
+
+
+=== Shallow processing and POS tagsets
+
+While more advanced semantic processing (e.g. discourse analysis) typically
+depends on the output of a parser component, there might be settings where you
+prefer to perform shallow processing (i.e. POS tagging and chunking).
+
+For shallow processing, it might be necessary to become familiar with the
+original POS tagsets of the POS taggers rather than relying on the uniform, but
+coarse-grained DKPro Core POS tags (because the original fine-grained POS tags
+carry more information).
+
+Although many POS taggers in a given language are trained on the same POS
+tagset (e.g. the Penn TreeBank Tagset for English, the STTS Tagset for German),
+the individual POS Taggers might output variants of this tagset. You should be
+aware of the fact that in the DKPro Core version of the tagger, the original POS
+tagger output possibly has been mapped to a version that is compatible with the
+corresponding original tagset. (Example)
+
+////
+EJ: Ok, I want to switch to the original POS tagset.  How do I do this?  Pointers?
+////
+
+=== Headings
+
+Headings typically do not end with a sentence end marker (i.e. a full stop `.`). As a consequence
+segmenters are confused and consider a heading and the first sentence of the following paragraph
+to be a single sentence unit. This can be resolved by adding <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div,Div>> annotations to the document
+(and its subtypes) and configuring segmenters to respect these. Such annotations can be obtained
+for example by using:
+
+* a reader component that creates Paragraph and Heading annotations (e.g. the <<format-reference.adoc#format-Pdf, PdfReader>>)
+* an analysis component that detects Paragraph boundaries (e.g. the <<component-reference.adoc#engine-ParagraphSplitter,ParagraphSplitter>>)
+
+Segmenters are by default configured to respect Div-type annotations (the default value for
+`PARAM_ZONE_TYPES` is <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div,Div>>). 
+This means,  segmenters will ensure that sentences and tokens to not overlap with their boundaries. 
+If desired, `PARAM_STRICT_ZONING` can be set to `true` (default `false`) to ensure that tokens and
+sentences are only created within the boundaries of the zone types.
+
+=== Hyphenation
+
+Hyphenated words cannot be properly processed by NLP tools. The 
+<<component-reference.adoc#engine-HyphenationRemover,HyphenationRemover>> component can be used
+to join hypenated words.
+
+=== References
+
+Here are some further references that might be helpful when deciding which tools to use:
+
+* Giesbrecht, Eugenie and Evert, Stefan (2009). Part-of-speech tagging - a
+  solved task? An evaluation of POS taggers for the Web as corpus. In I.
+  Alegria, I. Leturia, and S. Sharoff, editors, Proceedings of the 5th Web as
+  Corpus Workshop (WAC5), San Sebastian, Spain. 
+  link:$$http://purl.org/stefan.evert/PUB/GiesbrechtEvert2009_Tagging.pdf$$[PDF]
+
+* Reut Tsarfaty, Djamé Seddah, Sandra Kübler, and Joakim Nivre. 2013.
+  Parsing morphologically rich languages: Introduction to the special issue.
+  Comput. Linguist. 39, 1 (March 2013), 15-22. link:$$https://aclweb.org/anthology/J/J13/J13-1003.pdf$$[PDF]
+
+* Wolfgang Seeker and Jonas Kuhn. 2013. Morphological and syntactic case in
+  statistical dependency parsing. Comput. Linguist. 39, 1 (March 2013), 23-55.
+  link:$$http://aclweb.org/anthology//J/J13/J13-1004.pdf$$[PDF]
+  
+=== Adding components as dependencies (Maven)
+
+In order to start using an integrated tool from DKPro Core, we can add it as a
+Maven dependency to our experiment.
+
+As an example, we take the OpenNlpPosTagger component. To make it available in a
+pipeline, we add the following dependency to our POM file:
+
+
+[source,xml,subs="+attributes"]
+----
+<properties>
+  <dkpro.core.version>{revnumber}</dkpro.core.version>
+</properties>
+<dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
+      <version>${dkpro.core.version}</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+  </dependencies>
+</dependencyManagement>
+
+<dependencies>
+  <dependency>
+    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+    <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
+  </dependency>
+</dependencies>
+----
+
+The dependency on DKPro Core declared in the dependency management section fixes the
+version of all DKPro Core dependencies that are added to the POM. Hence, it is not
+necessary to declare the version for each dependency. When upgrading to a new DKPro Core
+version, it is sufficient to change the value of the
+++dkpro.core.version++ property in the properties section.
+
+NOTE: If you use a multi-module project, the `properties` and `dependencyManagement` sections should
+      go into the parent-pom of your project, while the `dependencies` section should be added to
+      the respective module requiring the dependency.
+
+=== Adding resources as dependencies (Maven)
+
+Most components (i.e., tools such as OpenNlpPosTagger) require resources such as models 
+(such as opennlp-model-tagger-en-maxent) in order to operate. Since components
+and resources are versioned separately, it can be non-trivial to find the right version
+of a resource for a particular version of a component. For this reason, DKPro Core
+components each maintain a list of resources known to be compatible with them. This
+information can be accessed in a Maven POM, thus avoiding the need to manually specify
+the version of the models. Consequently, when you upgrade to a new version of DKPro
+Core, all models are automatically upgraded as well. This is usually the desired
+solution, although it can mean that your pipelines may produce slightly different
+results.
+
+As an example, we take the OpenNlpPosTagger component. In the previous section, we
+have seen how to make it available in a pipeline. Now we also add the model for
+English.
+
+[source,xml,subs="+attributes"]
+----
+<dependencies>
+  <dependency>
+    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+    <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent</artifactId>
+  </dependency>
+</dependencies>
+<dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
+      <version>${dkpro.core.version}</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+  </dependencies>
+</dependencyManagement>
+----
+
+The dependency on the DKPro Core OpenNLP module declared in the dependency management
+section fixes the version of all known OpenNLP models. Thus, it is not necessary to
+declare a version on each model dependency. When upgrading to a new DKPro Core version,
+it is sufficient to change the value of the ++dkpro.core.version++
+property in the properties section.
 
-This section provides an overview of the analysis componens that can be deployed at the
-different levels of analysis.
-
-=== Coreference Resolution
-
-.Coreference types
-image::ts_coreference.png[align="center"]
-
-.Coreference components
-[options="header"]
-|====
-|Component|Description
-|StanfordCoreferenceResolver
-|
-|====
-
-
-=== Chunking
-
-.Chunking components
-[options="header"]
-|====
-|Component|Description
-
-|OpenNlpChunker
-|
-
-|TreeTaggerChunker
-|(uses native binary)
-|====
-
-
-=== Decompounding
-
-.Decompounding components
-[options="header"]
-|====
-|Component|Description
-|CompoundAnnotator
-|
-|====
-
-
-=== Dictionary-Based Annotation
-
-.Dictionary-based annotation components
-[options="header"]
-|====
-|Component|Description
-|DictionaryAnnotator
-|
-
-|SemanticFieldAnnotator
-|
-|====
-
-
-=== Language Identification
-
-.DocumentAnnotation type
-image::ts_document_meta_data.png[align="center"]
-
-.Language identification components
-[options="header"]
-|====
-| Component|Description
-| LangDetectLanguageIdentifier
-| Detection based on character n-grams.
-
-| LanguageDetectorWeb1T
-| Detection based on token n-grams.
-
-| TextCat
-| Detection based on character n-grams. Used the link:http://textcat.sourceforge.net[Java Text Categorizing Library]
-  based on a technique by Cavnar and Trenkle <<Cavnar:1994>>.
-|====
-
-
-=== Lemmatization
-
-.Lemma type
-image::ts_lemmatization.png[align="center"]
-
-.Lemmatization components
-[options="header"]
-|====
-|Component|Description
-|ClearNlpLemmatizer
-|
-
-|GateLemmatizer
-|
-
-|LanguageToolLemmatizer
-|
-
-|MateLemmatizer
-|
-
-| MorphaLemmatizer
-| Lemmatize based on a finite-state machine. Uses the link:https://github.com/knowitall/morpha[Java
-  port] of link:http://www.informatics.sussex.ac.uk/research/groups/nlp/carroll/morph.html[Morpha].
-  <<MinnenEtal:2001>>.
-
-|StanfordLemmatizer
-|(variant of Morpha)
-
-|TreeTaggerPosTagger
-|(uses native binary)
-|====
-
-
-=== Morphological Analysis
-
-.Morphological analysis components
-[options="header"]
-|====
-|Component|Description
-|MateMorphTagger
-|
-
-|SfstAnnotator
-|(uses native binary)
-
-|RfTagger
-|(uses native binary)
-|====
-
-
-=== Named-Entity Recognition
-
-.Named-entity recognition components
-[options="header"]
-|====
-|Component|Description
-| OpenNlpNameFinder
-|
-
-| StanfordNamedEntityRecognizer
-|
-|====
-
-=== Normalization
-
-.Text normalization components
-[options="header"]
-|====
-|Component|Description
-| CjfNormalizer
-| Converts traditional Chinese to simplified Chinese or vice-versa.
-
-| CapitalizationNormalizer
-| 
-
-| DictionaryBasedTokenTransformer
-| 
-
-| ExpressiveLengtheningNormalizer
-| 
-
-| HyphenationRemover
-| 
-
-| SharpSNormalizer
-| 
-
-| SpellingNormalizer
-| 
-
-| StanfordPtbTransformer
-| 
-
-| TokenCaseTransformer
-| 
-
-| UmlautNormalizer
-|====
-
-
-=== Parsing
-
-.Parsing components
-[options="header"]
-|====
-|Component|Description
-|BerkeleyParser
-|constituents
-
-|ClearNlpDependencyParser
-|dependencies
-
-|OpenNlpParser
-|constituents
-
-|MaltParser
-|dependencies
-
-|MateParser
-|dependencies
-
-|MstParser
-|dependencies
-
-|StanfordParser
-|constituents, dependencies (for some languages)
-|====
-
-
-=== Part-of-Speech Tagging
-
-.Part-of-speech type
-image::ts_part-of-speech.png[align="center"]
-
-.Part-of-speech tagging components
-[options="header"]
-|====
-|Component|Description
-|ArktweetTagger
-|
-
-|ClearNlpPosTagger
-|
-
-|HepplePosTagger
-|
-
-|HunPosTagger
-|(uses native binary)
-
-// | LbjPosTagger
-// | (not in release)
-
-|MatePosTagger
-|
-
-|MeCabTagger
-|(uses native binary)
-
-|OpenNlpPosTagger
-|
-
-|StanfordPosTagger
-|
-
-|TreeTaggerPosTagger
-|also does lemmatization (uses native binary)
-|====
-
-
-=== Segmentation
-
-Segmenter components identify sentence boundaries and tokens. The order in which sentence
-splitting and tokenization are done differs between the integrated the NLP libraries.
-Thus, we chose to integrate both steps into a segmenter component to avoid the need to
-reorder the components in a pipeline when replacing one segmenter with another.
-
-.Segmentation types
-image::ts_segmentation.png[align="center"]
-
-.Segmentation components
-[options="header"]
-|====
-|Component|Description
-|BreakIteratorSegmenter
-|
-
-|ClearNlpSegmenter
-|
-
-|JTokSegmenter
-|
-
-|LanguageToolSegmenter
-|
-
-|OpenNlpSegmenter
-|
-
-|StanfordSegmenter
-|
-|====
-
-
-=== Semantic Role Labeling
-
-.Semantic role labeling types
-image::ts_semantics.png[align="center"]
-
-.Semantic role labeling components
-[options="header"]
-|====
-|Component|Description
-|ClearNlpSemanticRoleLabeler
-|
-|====
-
-
-=== Spell Checking
-
-.Spell checking components
-[options="header"]
-|====
-|Component|Description
-|LanguageToolChecker
-|
-
-|NorvigSpellingCorrector
-|
-
-|JazzyChecker
-|
-|====
-
-
-=== Stemming
-
-.Stem type
-image::ts_stemming.png[align="center"]
-
-.Stemming components
-[options="header"]
-|====
-|Component|Description
-|SnowballStemmer
-|
-|====
-
-
-=== Topic Modeling
-
-Topic modeling is a statistical approach to discover abstract _topics_ in a collection of documents. 
-A topic is characterized by a probability distribution of the words in the document collection.
-Once a topic model has been generated, it can be used to analyze unseen documents. The result of the
-analysis is describes the probability by which a document _belongs_ to each of the _topics_ in the
-model.
-
-.Topic model type
-image::ts_topicmodel.png[align="center"]
-
-.Topic modeling components
-[options="header"]
-|====
-|Component|Description
-| MalletTopicModelEstimator
-| Estimate a topic model using Mallet and write it to a file.
-| MalletTopicModelInferencer
-| Detect the topic distribution in documents.
-|====
 

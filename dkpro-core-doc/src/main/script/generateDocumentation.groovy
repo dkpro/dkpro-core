@@ -65,6 +65,7 @@ def roleNames = [
     ner: 'Named Entity Recognizer',
     langdetect: 'Language Identifier',
     transcriptor: 'Phonetic Transcriptor',
+    topicmodel: 'Topic Model',
     other: 'Other' ];
 
 /**
@@ -111,6 +112,8 @@ def getTool(componentName, spec) {
         return "lemmatizer";
     case { it.endsWith("PhoneticTranscriptor") }: 
         return "transcriptor";
+    case { it.contains("TopicModel") }:
+        return "topicmodel";
     default:
         return "other";
     }

@@ -10,6 +10,13 @@ engines
 %>
 === ${group.key}
 
+<% 
+def fileSuffix = group.key.replaceAll(' ', '_');
+if (new File(project.basedir, 
+    "src/main/asciidoc/component-reference/sectionIntro${fileSuffix}.adoc").exists()) { %>
+include::{include-dir}sectionIntro${fileSuffix}.adoc[]
+<% } %>
+
 .Analysis Components in group ${group.key} (${group.value.size()})
 [options="header"]
 |====

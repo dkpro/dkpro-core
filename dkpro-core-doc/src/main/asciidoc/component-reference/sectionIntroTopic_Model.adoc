@@ -1,0 +1,5 @@
+Topic modeling is a statistical approach to discover abstract _topics_ in a collection of documents. 
+A topic is characterized by a probability distribution of the words in the document collection.
+Once a topic model has been generated, it can be used to analyze unseen documents. The result of the
+analysis is describes the probability by which a document _belongs_ to each of the _topics_ in the
+model.
