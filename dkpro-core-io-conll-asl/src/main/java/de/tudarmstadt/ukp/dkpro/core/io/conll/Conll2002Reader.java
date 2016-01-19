@@ -47,7 +47,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * <p>Writes the CoNLL 2002 named entity format. The columns are separated by a single space, unlike
+ * <p>Reads the CoNLL 2002 named entity format. The columns are separated by a single space, like
  * illustrated below.</p>
  * 
  * <pre><code>
