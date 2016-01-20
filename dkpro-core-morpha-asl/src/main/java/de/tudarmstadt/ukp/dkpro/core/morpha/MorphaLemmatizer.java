@@ -34,8 +34,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * Stemmer using Morpha.
+ * Lemmatize based on a finite-state machine. Uses the <a href="https://github.com/knowitall/morpha">
+ * Java port</a> of <a href="http://www.informatics.sussex.ac.uk/research/groups/nlp/carroll/morph.html">Morpha</a>.
  *
+ * <p>References:</p>
+ * <ul>
+ * <li>Minnen, G., J. Carroll and D. Pearce (2001). Applied morphological 
+ * processing of English, Natural Language Engineering, 7(3). 207-223.</li>
+ * </ul>
  */
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",

@@ -48,10 +48,8 @@ import java.util.Collection;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 /**
- * This component estimates an LDA model using Mallet. It stores all incoming CAS' to Mallet
- * {@link Instance}s before estimating the model, using a {@link ParallelTopicModel}.
- *
- *
+ * Estimate an LDA topic model using Mallet and write it to a file. It stores all incoming CAS' to
+ * Mallet {@link Instance}s before estimating the model, using a {@link ParallelTopicModel}.
  */
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }
