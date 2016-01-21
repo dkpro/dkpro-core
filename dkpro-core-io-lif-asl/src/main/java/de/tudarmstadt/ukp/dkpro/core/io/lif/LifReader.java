@@ -18,18 +18,27 @@
 package de.tudarmstadt.ukp.dkpro.core.io.lif;
 
 import static org.apache.commons.lang.StringUtils.*;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
 import org.lappsgrid.discriminator.Discriminators;
+import org.lappsgrid.serialization.LappsIOException;
 import org.lappsgrid.serialization.Serializer;
+import org.lappsgrid.serialization.lif.Annotation;
 import org.lappsgrid.serialization.lif.Container;
 import org.lappsgrid.serialization.lif.View;
 import org.lappsgrid.vocabulary.Features;
@@ -42,6 +51,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.*;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 
@@ -166,5 +176,153 @@ public class LifReader
                             depAnno.addToIndexes();
                         }
                     });
+        
+        // Constituents
+        view.getAnnotations().stream()
+            .filter(a -> Discriminators.Uri.PHRASE_STRUCTURE.equals(a.getAtType()))
+            .forEach(
+                    ps -> {
+                        String rootId = findRoot(view, ps);
+                        // Get the constituent IDs
+                        Set<String> constituentIDs;
+                            constituentIDs = new HashSet<>(
+                                    getSetFeature(ps,Features.PhraseStructure.CONSTITUENTS));
+                        
+                        List<Annotation> constituents = new ArrayList<>();
+                        Map<String, Constituent> constituentIdx = new HashMap<>();
+
+                        // Instantiate all the constituents
+                        view.getAnnotations().stream()
+                            .filter(a -> constituentIDs.contains(a.getId()))
+                            .forEach(con -> {
+                                if (Discriminators.Uri.CONSTITUENT.equals(con.getAtType())) {
+                                    Constituent conAnno;
+                                    if (rootId.equals(con.getId())) {
+                                        conAnno = new de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT(aJCas);
+                                    }
+                                    else {
+                                        conAnno = new Constituent(aJCas);
+                                    }
+                                    if (con.getStart() != null) {
+                                        conAnno.setBegin(con.getStart().intValue());
+                                    }
+                                    if (con.getEnd() != null) {
+                                        conAnno.setEnd(con.getEnd().intValue());
+                                    }
+                                    conAnno.setConstituentType(con.getLabel());
+                                    constituentIdx.put(con.getId(), conAnno);
+                                    constituents.add(con);
+                                }
+                                // If it is not a constituent, it must be a token ID - we already
+                                // have created the tokens and recorded them in the tokenIdx
+                            });
+                        
+                        // Set parent and children features
+                        constituents.forEach(con -> {
+                            // Check if it is a constituent or token
+                            Constituent conAnno = constituentIdx.get(con.getId());
+                            Set<String> childIDs = getSetFeature(con, 
+                                    Features.Constituent.CHILDREN);
+                            
+                            List<org.apache.uima.jcas.tcas.Annotation> children = new ArrayList<>();
+                            childIDs.forEach(childID -> {
+                                Constituent conChild = constituentIdx.get(childID);
+                                Token tokenChild = tokenIdx.get(childID);
+                                if (conChild != null && tokenChild == null) {
+                                    conChild.setParent(conAnno);
+                                    children.add(conChild);
+                                }
+                                else if (conChild == null && tokenChild != null) {
+                                    tokenChild.setParent(conAnno);
+                                    children.add(tokenChild);
+                                }
+                                else if (conChild == null && tokenChild == null) {
+                                    throw new IllegalStateException("ID [" + con.getId()
+                                            + "] not found");
+                                }
+                                else {
+                                    throw new IllegalStateException("ID [" + con.getId()
+                                            + "] is constituent AND token? Impossible!");
+                                }
+                            });
+                            
+                            conAnno.setChildren(FSCollectionFactory.createFSArray(aJCas, children));
+                        });
+                        
+                        // Percolate offsets - they might not have been set on the constituents!
+                        Constituent root = constituentIdx.get(rootId);
+                        percolateOffsets(root);
+                        
+                        // Add to indexes
+                        constituentIdx.values().forEach(conAnno -> {
+                            conAnno.addToIndexes();
+                        });
+                    });
+            
+    }
+    
+    @SuppressWarnings("unchecked")
+    private <T> Set<T> getSetFeature(Annotation aAnnotation, String aName)
+    {
+        try {
+            return aAnnotation.getFeatureSet(aName);
+        }
+        catch (LappsIOException e) {
+            throw new IllegalArgumentException(e.getMessage(), e);
+        }
+    }
+    
+    private void percolateOffsets(org.apache.uima.jcas.tcas.Annotation aNode)
+    {
+        if (aNode instanceof Constituent) {
+            Constituent conAnno = (Constituent) aNode;
+            int begin = Integer.MAX_VALUE;
+            int end = 0;
+            for (org.apache.uima.jcas.tcas.Annotation a : select(conAnno.getChildren(),
+                    org.apache.uima.jcas.tcas.Annotation.class)) {
+                percolateOffsets(a);
+                
+                begin = Math.min(a.getBegin(), begin);
+                end = Math.max(a.getEnd(), end);
+            }
+            
+            if (aNode.getBegin() != 0) {
+                assert begin == aNode.getBegin();
+            }
+            else {
+                aNode.setBegin(begin);
+            }
+
+            if (aNode.getEnd() != 0) {
+                assert end == aNode.getEnd();
+            }
+            else {
+                aNode.setEnd(end);
+            }
+        }
+    }
+    
+    private String findRoot(View aView, Annotation aPS)
+    {
+        // Get all the constituents int he phrase structure
+        Set<String> constituents = new HashSet<>(
+                getSetFeature(aPS, Features.PhraseStructure.CONSTITUENTS));
+
+        List<Annotation> psConstituents = aView.getAnnotations().stream()
+                .filter(a -> Discriminators.Uri.CONSTITUENT.equals(a.getAtType()))
+                .filter(con -> constituents.contains(con.getId()))
+                .collect(Collectors.toList());
+        
+        // Remove all constituents that are children of other constituents within the PS
+        psConstituents.forEach(con -> {
+            Set<String> children = getSetFeature(con, Features.Constituent.CHILDREN);
+            children.forEach(child -> constituents.remove(child));
+        });
+        
+        // If all went well, only one constituent should be left and that is the root constituent
+        assert 1 == constituents.size();
+        
+        // Return the ID of the root constituent
+        return constituents.iterator().next();
     }
 }

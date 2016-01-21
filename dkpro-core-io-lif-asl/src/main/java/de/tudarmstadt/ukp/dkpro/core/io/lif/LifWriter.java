@@ -23,6 +23,7 @@ import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 
 import java.io.OutputStream;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -44,6 +45,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 /**
@@ -67,6 +70,8 @@ public class LifWriter
     @ConfigurationParameter(name = PARAM_FILENAME_SUFFIX, mandatory = true, defaultValue = ".json")
     private String filenameSuffix;
 
+    private static final String PHRASE_STRUCTURE = "phrasestruct";
+    private static final String CONSTITUENT = "const";
     private static final String DEPENDENCY_STRUCTURE = "depstruct";
     private static final String DEPENDENCY = "dep";
     private static final String PARAGRAPH = "para";
@@ -104,8 +109,6 @@ public class LifWriter
         for (Token t : select(aJCas, Token.class)) {
             Annotation a = view.newAnnotation(id(TOKEN, t), Discriminators.Uri.TOKEN, t.getBegin(),
                     t.getEnd());
-            a.addFeature(Features.Token.ORTH, t.getCoveredText());
-            
             if (t.getPos() != null) {
                 a.addFeature(Features.Token.POS, t.getPos().getPosValue());
             }
@@ -124,9 +127,6 @@ public class LifWriter
 
         // Dependency
         for (Sentence s : select(aJCas, Sentence.class)) {
-            Annotation depStruct = view.newAnnotation(id(DEPENDENCY_STRUCTURE, s),
-                    Discriminators.Uri.DEPENDENCY_STRUCTURE, s.getBegin(), s.getEnd());
-
             Set<String> depRelIds = new TreeSet<>();
             
             for (Dependency dep : selectCovered(Dependency.class, s)) {
@@ -139,7 +139,21 @@ public class LifWriter
                 depRelIds.add(depRelId);
             }
             
-            depStruct.getFeatures().put(Features.DependencyStructure.DEPENDENCIES, depRelIds);
+            if (!depRelIds.isEmpty()) {
+                Annotation depStruct = view.newAnnotation(id(DEPENDENCY_STRUCTURE, s),
+                        Discriminators.Uri.DEPENDENCY_STRUCTURE, s.getBegin(), s.getEnd());
+                depStruct.addFeature(Features.DependencyStructure.DEPENDENCIES, depRelIds);
+            }
+        }
+        
+        // Constituents
+        for (ROOT r : select(aJCas, ROOT.class)) {
+            Set<String> constituents = new LinkedHashSet<>();
+            convertConstituent(view, r, constituents);
+            
+            Annotation phraseStruct = view.newAnnotation(id(PHRASE_STRUCTURE, r),
+                    Discriminators.Uri.PHRASE_STRUCTURE, r.getBegin(), r.getEnd());
+            phraseStruct.addFeature(Features.PhraseStructure.CONSTITUENTS, constituents);
         }
         
         try (OutputStream docOS = getOutputStream(aJCas, filenameSuffix)) {
@@ -148,6 +162,27 @@ public class LifWriter
         }
         catch (Exception e) {
             throw new AnalysisEngineProcessException(e);
+        }
+    }
+    
+    private void convertConstituent(View aView, org.apache.uima.jcas.tcas.Annotation aNode,
+            Set<String> aConstituents)
+    {
+        if (aNode instanceof Constituent) {
+            Annotation constituent = aView.newAnnotation(id(CONSTITUENT, aNode),
+                    Discriminators.Uri.CONSTITUENT, aNode.getBegin(), aNode.getEnd());
+            aConstituents.add(constituent.getId());
+            
+            for (org.apache.uima.jcas.tcas.Annotation child : select(
+                    ((Constituent) aNode).getChildren(), org.apache.uima.jcas.tcas.Annotation.class)) {
+                convertConstituent(aView, child, aConstituents);
+            }
+        }
+        else if (aNode instanceof Token) {
+            aConstituents.add(id(TOKEN, aNode));
+        }
+        else {
+            throw new IllegalStateException("Unexpected node type: " + aNode);
         }
     }
     

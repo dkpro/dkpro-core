@@ -23,7 +23,6 @@
       "end" : 8,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "NEUVOSTO",
         "pos" : "N",
         "lemma" : "neuvosto"
       }
@@ -33,7 +32,6 @@
       "end" : 18,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "EURATOMIN",
         "pos" : "N",
         "lemma" : "Euratom"
       }
@@ -43,7 +41,6 @@
       "end" : 36,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "HANKINTAKESKUKSEN",
         "pos" : "N",
         "lemma" : "hankinta#keskus"
       }
@@ -53,7 +50,6 @@
       "end" : 48,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "PERUSSÄÄNTÖ",
         "pos" : "N",
         "lemma" : "perus#sääntö"
       }
@@ -63,7 +59,6 @@
       "end" : 57,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "EUROOPAN",
         "pos" : "N",
         "lemma" : "Eurooppa"
       }
@@ -73,7 +68,6 @@
       "end" : 78,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "ATOMIENERGIAYHTEISÖN",
         "pos" : "N",
         "lemma" : "atomi#energia#yhteisö"
       }
@@ -83,7 +77,6 @@
       "end" : 87,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "NEUVOSTO",
         "pos" : "N",
         "lemma" : "neuvosto"
       }
@@ -93,7 +86,6 @@
       "end" : 89,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : ",",
         "pos" : "Punct",
         "lemma" : ","
       }
@@ -103,7 +95,6 @@
       "end" : 94,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "joka",
         "pos" : "Pron",
         "lemma" : "joka"
       }
@@ -113,7 +104,6 @@
       "end" : 100,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "ottaa",
         "pos" : "V",
         "lemma" : "ottaa"
       }
@@ -123,7 +113,6 @@
       "end" : 109,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "huomioon",
         "pos" : "N",
         "lemma" : "huomio"
       }
@@ -133,7 +122,6 @@
       "end" : 130,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "perustamissopimuksen",
         "pos" : "N",
         "lemma" : "perustamis#sopimus"
       }
@@ -143,7 +131,6 @@
       "end" : 133,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "54",
         "pos" : "Num",
         "lemma" : "54"
       }
@@ -153,7 +140,6 @@
       "end" : 142,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "artiklan",
         "pos" : "N",
         "lemma" : "artikla"
       }
@@ -163,7 +149,6 @@
       "end" : 144,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : ",",
         "pos" : "Punct",
         "lemma" : ","
       }
@@ -173,7 +158,6 @@
       "end" : 147,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "ja",
         "pos" : "CC",
         "lemma" : "ja"
       }
@@ -183,7 +167,6 @@
       "end" : 153,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "ottaa",
         "pos" : "V",
         "lemma" : "ottaa"
       }
@@ -193,7 +176,6 @@
       "end" : 162,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "huomioon",
         "pos" : "N",
         "lemma" : "huomio"
       }
@@ -203,7 +185,6 @@
       "end" : 172,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "komission",
         "pos" : "N",
         "lemma" : "komissio"
       }
@@ -213,7 +194,6 @@
       "end" : 183,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "ehdotuksen",
         "pos" : "N",
         "lemma" : "ehdotus"
       }
@@ -223,7 +203,6 @@
       "end" : 185,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : ",",
         "pos" : "Punct",
         "lemma" : ","
       }
@@ -233,7 +212,6 @@
       "end" : 188,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "ON",
         "pos" : "V",
         "lemma" : "olla"
       }
@@ -243,7 +221,6 @@
       "end" : 198,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "PÄÄTTÄNYT",
         "pos" : "PrfPrc",
         "lemma" : "päättää"
       }
@@ -253,7 +230,6 @@
       "end" : 204,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "antaa",
         "pos" : "V",
         "lemma" : "antaa"
       }
@@ -263,7 +239,6 @@
       "end" : 214,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "Euratomin",
         "pos" : "N",
         "lemma" : "Euratom"
       }
@@ -273,7 +248,6 @@
       "end" : 232,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "hankintakeskuksen",
         "pos" : "N",
         "lemma" : "hankinta#keskus"
       }
@@ -283,7 +257,6 @@
       "end" : 245,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "perussäännön",
         "pos" : "N",
         "lemma" : "perus#sääntö"
       }
@@ -293,7 +266,6 @@
       "end" : 257,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "seuraavasti",
         "pos" : "Adv",
         "lemma" : "seuraava"
       }
@@ -303,7 +275,6 @@
       "end" : 259,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : ":",
         "pos" : "Punct",
         "lemma" : ":"
       }
@@ -313,7 +284,6 @@
       "end" : 262,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "1",
         "pos" : "Num",
         "lemma" : "1"
       }
@@ -323,7 +293,6 @@
       "end" : 270,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "artikla",
         "pos" : "N",
         "lemma" : "artikla"
       }
@@ -333,7 +302,6 @@
       "end" : 275,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "Nimi",
         "pos" : "N",
         "lemma" : "nimi"
       }
@@ -343,7 +311,6 @@
       "end" : 278,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "ja",
         "pos" : "CC",
         "lemma" : "ja"
       }
@@ -353,17 +320,8 @@
       "end" : 288,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
-        "orth" : "tarkoitus",
         "pos" : "N",
         "lemma" : "tarkoitus"
-      }
-    }, {
-      "id" : "depstruct-0",
-      "start" : 0,
-      "end" : 259,
-      "@type" : "http://vocab.lappsgrid.org/DependencyStructure",
-      "features" : {
-        "dependencies" : [ "dep-0", "dep-1", "dep-10", "dep-11", "dep-12", "dep-13", "dep-14", "dep-15", "dep-16", "dep-17", "dep-18", "dep-19", "dep-2", "dep-20", "dep-21", "dep-22", "dep-23", "dep-24", "dep-25", "dep-26", "dep-3", "dep-4", "dep-5", "dep-6", "dep-7", "dep-8", "dep-9" ]
       }
     }, {
       "id" : "dep-0",
@@ -636,12 +594,12 @@
         "dependent" : "tok-27"
       }
     }, {
-      "id" : "depstruct-1",
-      "start" : 261,
-      "end" : 288,
+      "id" : "depstruct-0",
+      "start" : 0,
+      "end" : 259,
       "@type" : "http://vocab.lappsgrid.org/DependencyStructure",
       "features" : {
-        "dependencies" : [ "dep-27", "dep-28", "dep-29", "dep-30", "dep-31" ]
+        "dependencies" : [ "dep-0", "dep-1", "dep-10", "dep-11", "dep-12", "dep-13", "dep-14", "dep-15", "dep-16", "dep-17", "dep-18", "dep-19", "dep-2", "dep-20", "dep-21", "dep-22", "dep-23", "dep-24", "dep-25", "dep-26", "dep-3", "dep-4", "dep-5", "dep-6", "dep-7", "dep-8", "dep-9" ]
       }
     }, {
       "id" : "dep-27",
@@ -692,6 +650,14 @@
       "features" : {
         "governor" : "tok-31",
         "dependent" : "tok-33"
+      }
+    }, {
+      "id" : "depstruct-1",
+      "start" : 261,
+      "end" : 288,
+      "@type" : "http://vocab.lappsgrid.org/DependencyStructure",
+      "features" : {
+        "dependencies" : [ "dep-27", "dep-28", "dep-29", "dep-30", "dep-31" ]
       }
     } ]
   } ]

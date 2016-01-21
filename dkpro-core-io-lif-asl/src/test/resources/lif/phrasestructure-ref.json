@@ -28,42 +28,27 @@
       "end" : 16,
       "@type" : "http://vocab.lappsgrid.org/Token"
     }, {
-      "id" : "dep-0",
+      "id" : "const-0",
+      "start" : 0,
+      "end" : 16,
+      "@type" : "http://vocab.lappsgrid.org/Constituent"
+    }, {
+      "id" : "const-1",
       "start" : 0,
       "end" : 3,
-      "@type" : "http://vocab.lappsgrid.org/Dependency",
-      "label" : "nsubj",
-      "features" : {
-        "governor" : "tok-1",
-        "dependent" : "tok-0"
-      }
+      "@type" : "http://vocab.lappsgrid.org/Constituent"
     }, {
-      "id" : "dep-1",
+      "id" : "const-2",
       "start" : 4,
-      "end" : 8,
-      "@type" : "http://vocab.lappsgrid.org/Dependency",
-      "label" : "ROOT",
-      "features" : {
-        "governor" : "tok-1",
-        "dependent" : "tok-1"
-      }
-    }, {
-      "id" : "dep-2",
-      "start" : 9,
       "end" : 16,
-      "@type" : "http://vocab.lappsgrid.org/Dependency",
-      "label" : "nobj",
-      "features" : {
-        "governor" : "tok-1",
-        "dependent" : "tok-2"
-      }
+      "@type" : "http://vocab.lappsgrid.org/Constituent"
     }, {
-      "id" : "depstruct-0",
+      "id" : "phrasestruct-0",
       "start" : 0,
       "end" : 16,
-      "@type" : "http://vocab.lappsgrid.org/DependencyStructure",
+      "@type" : "http://vocab.lappsgrid.org/PhraseStructure",
       "features" : {
-        "dependencies" : [ "dep-0", "dep-1", "dep-2" ]
+        "constituents" : [ "const-0", "const-1", "tok-0", "const-2", "tok-2", "tok-1" ]
       }
     } ]
   } ]
