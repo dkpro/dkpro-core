@@ -101,6 +101,16 @@ public final class ComponentParameters
 	public static final String PARAM_COLUMN_SEPARATOR = "columnSeparator";
 
 	/**
+	 * Some formats (eg. conll2002-based GermEval 2014) have an extra column for token number
+	 */
+	public static final String PARAM_HAS_TOKEN_NUMBER = "has_TokenNumber";
+
+	/**
+	 * Some formats (eg. conll2002-based GermEval 2014) have an extra header line before the sentence
+	 */
+	public static final String PARAM_HAS_HEADER = "has_Header";
+
+	/**
 	 * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
 	 * spamming the heap with thousands of strings representing only a few different tags.
 	 */

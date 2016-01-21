@@ -18,6 +18,9 @@
 package de.tudarmstadt.ukp.dkpro.core.io.conll;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testRoundTrip;
+import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -31,6 +34,21 @@ public class Conll2002ReaderWriterTest
     {
         testRoundTrip(Conll2002Reader.class, Conll2002Writer.class,
                 "conll/2002/ner2002_test.conll");
+    }
+
+    @Test
+    public void testGermeval2014()
+        throws Exception
+    {
+    	testOneWay( 
+                createReaderDescription(Conll2002Reader.class,
+                        Conll2002Reader.PARAM_LANGUAGE, "de", 
+                        Conll2002Reader.PARAM_HAS_HEADER, true, 
+                        Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true, 
+                        Conll2002Reader.PARAM_COLUMN_SEPARATOR, "tab",
+                        Conll2002Reader.PARAM_READ_EMBEDDED_NAMED_ENTITY, true), 
+                "conll/2002/germeval2014_test.conll.out",
+        		"conll/2002/germeval2014_test.conll");
     }
 
     @Rule

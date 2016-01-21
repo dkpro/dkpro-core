@@ -86,39 +86,43 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * @see <a href="http://www.clips.ua.ac.be/conll2002/ner/">CoNLL 2002 shared task</a>
  *
  * <p>The reader is also compatible with the Conll-based GermEval 2014 named entity format,
- * in which the columns are separated by a tab, and there is an extra column for embedded named entities (see below). 
- * Currently, the reader only reads the outer named entities, not the embedded ones.</p>
+ * in which the columns are separated by a tab, and there is an extra column for embedded named entities,
+ * besides the token number being put in the first column (see below).
+ * For that, additional parameters are provided, by which one can determine the column separator,
+ * whether there is an additional first column for token numbers, and whether embedded
+ * named entities should be read.
+ * (Note: Currently, the reader only reads the outer named entities, not the embedded ones.</p>
  * 
  * <pre>
  * The following snippet shows an example of the TSV format 
  * # http://de.wikipedia.org/wiki/Manfred_Korfmann [2009-10-17]
- * 1 Aufgrund O O
- * 2 seiner O O
- * 3 Initiative O O
- * 4 fand O O
- * 5 2001/2002 O O
- * 6 in O O
- * 7 Stuttgart B-LOC O
- * 8 , O O
- * 9 Braunschweig B-LOC O
- * 10 und O O
- * 11 Bonn B-LOC O
- * 12 eine O O
- * 13 große O O
- * 14 und O O
- * 15 publizistisch O O
- * 16 vielbeachtete O O
- * 17 Troia-Ausstellung B-LOCpart O
- * 18 statt O O
- * 19 , O O
- * 20 „ O O
- * 21 Troia B-OTH B-LOC
- * 22 - I-OTH O
- * 23 Traum I-OTH O
- * 24 und I-OTH O
- * 25 Wirklichkeit I-OTH O
- * 26 “ O O
- * 27 . O O
+ * 1 Aufgrund 			O 			O
+ * 2 seiner 			O 			O
+ * 3 Initiative 		O 			O
+ * 4 fand 				O 			O
+ * 5 2001/2002 			O 			O
+ * 6 in 				O 			O
+ * 7 Stuttgart 			B-LOC 		O
+ * 8 , 					O 			O
+ * 9 Braunschweig 		B-LOC 		O
+ * 10 und 				O 			O
+ * 11 Bonn 				B-LOC 		O
+ * 12 eine 				O 			O
+ * 13 große 			O 			O
+ * 14 und 				O 			O
+ * 15 publizistisch 	O 			O
+ * 16 vielbeachtete 	O 			O
+ * 17 Troia-Ausstellung B-LOCpart 	O
+ * 18 statt 			O 			O
+ * 19 , 				O 			O
+ * 20 „ 				O 			O
+ * 21 Troia 			B-OTH 		B-LOC
+ * 22 - 				I-OTH 		O
+ * 23 Traum 			I-OTH 		O
+ * 24 und 				I-OTH 		O
+ * 25 Wirklichkeit 		I-OTH 		O
+ * 26 “ 				O 			O
+ * 27 . 				O 			O
  * </pre>
  * 
  * <ol>
@@ -146,16 +150,15 @@ public class Conll2002Reader
 	/**
 	 * Column positions
 	 */
-	private static final int FORM = 0;
-    private static final int IOB  = 1;
-    private static final int IOB_EMBEDDED = 2;
+	private int FORM = 0;
+    private int IOB  = 1;
+    private int IOB_EMBEDDED = 2;
     
     /** 
      * Constants
      */
     private static final String TAB   = "\t";
     private static final String SPACE = " ";
-    private static final char NUMBER_SIGN = '#';
 
     /**
      * Column separator value
@@ -165,9 +168,24 @@ public class Conll2002Reader
     /**
      * Column separator parameter.
      */
-    public static final String COLUMN_SEPARATOR = ComponentParameters.PARAM_COLUMN_SEPARATOR;
-    @ConfigurationParameter(name = PARAM_ENCODING, mandatory = false, defaultValue = "space")
+    public static final String PARAM_COLUMN_SEPARATOR = ComponentParameters.PARAM_COLUMN_SEPARATOR;
+    @ConfigurationParameter(name = PARAM_COLUMN_SEPARATOR, mandatory = false, defaultValue = "space")
     private String paramColumnSeparator;
+
+    /**
+     * Token number flag. When true, the first column contains the token number 
+     * inside the sentence (as in GermEval 2014 format)
+     */
+    public static final String PARAM_HAS_TOKEN_NUMBER = ComponentParameters.PARAM_HAS_TOKEN_NUMBER;
+    @ConfigurationParameter(name = PARAM_HAS_TOKEN_NUMBER, mandatory = false, defaultValue = "false")
+    private boolean hasTokenNumber;
+
+    /**
+     * Indicates that there is a header line before the sentence 
+     */
+    public static final String PARAM_HAS_HEADER = ComponentParameters.PARAM_HAS_HEADER;
+    @ConfigurationParameter(name = PARAM_HAS_HEADER, mandatory = false, defaultValue = "false")
+    private boolean hasHeader;
 
     /**
      * Character encoding of the input data.
@@ -235,6 +253,12 @@ public class Conll2002Reader
 //        namedEntityMappingProvider.setOverride(MappingProvider.LOCATION, namedEntityMappingLocation);
 //        namedEntityMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
 
+        // Configure column positions. First column may be used for token number
+        FORM = hasTokenNumber?1:0;        
+        IOB  = hasTokenNumber?2:1;        
+        IOB_EMBEDDED = hasTokenNumber?3:2;
+        
+        // Configure the column separator
         if (paramColumnSeparator.equals("tab")) {
         	columnSeparator = TAB;
         } else { 
@@ -325,19 +349,28 @@ public class Conll2002Reader
     {
         List<String[]> words = new ArrayList<String[]>();
         String line;
+        boolean beginSentence = true;
+        
         while ((line = aReader.readLine()) != null) {
             if (StringUtils.isBlank(line)) {
+                beginSentence = true;
                 break; // End of sentence
             }
-
+            
+            if (hasHeader && beginSentence) {
+            	// Ignore header line
+            	beginSentence = false;
+            	continue;
+            }
+            
             String[] fields = line.split(columnSeparator);
 
-           	if (!embeddedNamedEntityEnabled && fields.length != 2) {
+           	if (!embeddedNamedEntityEnabled && fields.length != 2 + FORM) {
                 throw new IOException(
-                        "Invalid file format. Line needs to have 2 " + paramColumnSeparator + "-separated fields.");
-            } else if (embeddedNamedEntityEnabled && fields.length != 3) {
+                        String.format("Invalid file format. Line needs to have %d %s-separated fields.", 2 + FORM, paramColumnSeparator));
+            } else if (embeddedNamedEntityEnabled && fields.length != 3 + FORM) {
                     throw new IOException(
-                            "Invalid file format. Line needs to have 3 " + paramColumnSeparator + "-separated fields.");
+                        String.format("Invalid file format. Line needs to have %d %s-separated fields.", 3 + FORM, paramColumnSeparator));
             }
             words.add(fields);
         }
