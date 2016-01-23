@@ -26,19 +26,6 @@
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.io.lif-asl</artifactId>
     <packaging>jar</packaging>
 	<name>DKPro Core ASL - IO - LIF</name>
-    <repositories>
-        <repository>
-            <!-- Required while org.lappsgrid:serialization is not yet on Maven Central -->
-            <id>ext-staging</id>
-            <url>http://www.anc.org:8080/nexus/content/repositories/releases/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
@@ -77,12 +64,12 @@
         <dependency>
             <groupId>org.lappsgrid</groupId>
             <artifactId>serialization</artifactId>
-            <version>2.1.0</version>
+            <version>2.2.0</version>
         </dependency>
         <dependency>
             <groupId>org.lappsgrid</groupId>
             <artifactId>vocabulary</artifactId>
-            <version>2.1.1</version>
+            <version>2.2.0</version>
         </dependency> 
         <dependency>
             <groupId>it.unimi.dsi</groupId>

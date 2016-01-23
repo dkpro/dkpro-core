@@ -49,7 +49,7 @@ class Util {
 
     static def formatLink(format)
     {
-        return "<<component-reference.adoc#format-${ format.name },${ format.name }>>";
+        return "<<format-reference.adoc#format-${ format.name },${ format.name }>>";
     }
 
     static def preparePassthrough(description)

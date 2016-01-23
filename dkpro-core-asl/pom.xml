@@ -230,6 +230,11 @@
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl</artifactId>
 				<version>1.9.0-SNAPSHOT</version>
 			</dependency>
+            <dependency>
+                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                <artifactId>de.tudarmstadt.ukp.dkpro.core.io.lif-asl</artifactId>
+                <version>1.9.0-SNAPSHOT</version>
+            </dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.negra-asl</artifactId>
@@ -273,6 +278,11 @@
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.tiger-asl</artifactId>
+				<version>1.9.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.tuebadz-asl</artifactId>
 				<version>1.9.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
@@ -452,6 +462,7 @@
         <module>../dkpro-core-io-json-asl</module>
 		<module>../dkpro-core-io-jdbc-asl</module>
 		<module>../dkpro-core-io-jwpl-asl</module>
+        <module>../dkpro-core-io-lif-asl</module>
 		<module>../dkpro-core-io-negra-asl</module>
 		<module>../dkpro-core-io-pdf-asl</module>
 		<module>../dkpro-core-io-penntree-asl</module>
@@ -515,7 +526,6 @@
 			</repositories>
 			<modules>
                 <!-- IO modules -->
-                <module>../dkpro-core-io-lif-asl</module>
                 <module>../dkpro-core-io-fangorn-asl</module>
                 <module>../dkpro-core-io-graf-asl</module>
                 <!-- Processing modules -->
@@ -537,11 +547,6 @@
                     <dependency>
                         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
                         <artifactId>de.tudarmstadt.ukp.dkpro.core.io.graf-asl</artifactId>
-                        <version>1.9.0-SNAPSHOT</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-                        <artifactId>de.tudarmstadt.ukp.dkpro.core.io.lif-asl</artifactId>
                         <version>1.9.0-SNAPSHOT</version>
                     </dependency>
                     <dependency>

@@ -1,0 +1,191 @@
+======== CAS 0 begin ==================================
+
+-------- View _InitialView begin ----------------------------------
+
+DocumentMetaData
+   sofa: _InitialView
+   begin: 0
+   end: 186
+   language: "x-unspecified"
+   documentTitle: "germeval2014_test.conll"
+   documentId: "germeval2014_test.conll"
+   isLastSegment: false
+
+CAS-Text:
+Aufgrund seiner Initiative fand 2001/2002 in Stuttgart , Braunschweig und Bonn eine große und publizistisch vielbeachtete Troia-Ausstellung statt , „ Troia - Traum und Wirklichkeit “ . 
+
+[Aufgrund seiner Initiative fand 2001/2002 in Stuttgart , Braunschweig und Bonn eine große und publizistisch vielbeachtete Troia-Ausstellung statt , „ Troia - Traum und Wirklichkeit “ .]
+Sentence
+   sofa: _InitialView
+   begin: 0
+   end: 184
+[Aufgrund]
+Token
+   sofa: _InitialView
+   begin: 0
+   end: 8
+[seiner]
+Token
+   sofa: _InitialView
+   begin: 9
+   end: 15
+[Initiative]
+Token
+   sofa: _InitialView
+   begin: 16
+   end: 26
+[fand]
+Token
+   sofa: _InitialView
+   begin: 27
+   end: 31
+[2001/2002]
+Token
+   sofa: _InitialView
+   begin: 32
+   end: 41
+[in]
+Token
+   sofa: _InitialView
+   begin: 42
+   end: 44
+[Stuttgart]
+NamedEntity
+   sofa: _InitialView
+   begin: 45
+   end: 54
+   value: "LOC"
+[Stuttgart]
+Token
+   sofa: _InitialView
+   begin: 45
+   end: 54
+[,]
+Token
+   sofa: _InitialView
+   begin: 55
+   end: 56
+[Braunschweig]
+NamedEntity
+   sofa: _InitialView
+   begin: 57
+   end: 69
+   value: "LOC"
+[Braunschweig]
+Token
+   sofa: _InitialView
+   begin: 57
+   end: 69
+[und]
+Token
+   sofa: _InitialView
+   begin: 70
+   end: 73
+[Bonn]
+NamedEntity
+   sofa: _InitialView
+   begin: 74
+   end: 78
+   value: "LOC"
+[Bonn]
+Token
+   sofa: _InitialView
+   begin: 74
+   end: 78
+[eine]
+Token
+   sofa: _InitialView
+   begin: 79
+   end: 83
+[große]
+Token
+   sofa: _InitialView
+   begin: 84
+   end: 89
+[und]
+Token
+   sofa: _InitialView
+   begin: 90
+   end: 93
+[publizistisch]
+Token
+   sofa: _InitialView
+   begin: 94
+   end: 107
+[vielbeachtete]
+Token
+   sofa: _InitialView
+   begin: 108
+   end: 121
+[Troia-Ausstellung]
+NamedEntity
+   sofa: _InitialView
+   begin: 122
+   end: 139
+   value: "LOCpart"
+[Troia-Ausstellung]
+Token
+   sofa: _InitialView
+   begin: 122
+   end: 139
+[statt]
+Token
+   sofa: _InitialView
+   begin: 140
+   end: 145
+[,]
+Token
+   sofa: _InitialView
+   begin: 146
+   end: 147
+[„]
+Token
+   sofa: _InitialView
+   begin: 148
+   end: 149
+[Troia - Traum und Wirklichkeit]
+NamedEntity
+   sofa: _InitialView
+   begin: 150
+   end: 180
+   value: "OTH"
+[Troia]
+Token
+   sofa: _InitialView
+   begin: 150
+   end: 155
+[-]
+Token
+   sofa: _InitialView
+   begin: 156
+   end: 157
+[Traum]
+Token
+   sofa: _InitialView
+   begin: 158
+   end: 163
+[und]
+Token
+   sofa: _InitialView
+   begin: 164
+   end: 167
+[Wirklichkeit]
+Token
+   sofa: _InitialView
+   begin: 168
+   end: 180
+[“]
+Token
+   sofa: _InitialView
+   begin: 181
+   end: 182
+[.]
+Token
+   sofa: _InitialView
+   begin: 183
+   end: 184
+-------- View _InitialView end ----------------------------------
+
+======== CAS 0 end ==================================
+
+

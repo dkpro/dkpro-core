@@ -20,7 +20,8 @@ package de.tudarmstadt.ukp.dkpro.core.castransformation;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.ImmutableInterval;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.Interval;
-import de.tudarmstadt.ukp.dkpro.core.api.transform.internal.CasCopier;
+import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentStorage;
+
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.*;
@@ -28,6 +29,7 @@ import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
+import org.apache.uima.util.CasCopier;
 
 import java.util.LinkedList;
 
@@ -129,7 +131,7 @@ extends JCasAnnotator_ImplBase
 
 			// We only update annotations that were copied, nothing that
 			// was already there.
-			if (!cc.isCopied(fs)) {
+			if (!cc.alreadyCopied(fs)) {
 				it.moveToNext();
 				continue;
 			}

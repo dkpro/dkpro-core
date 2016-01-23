@@ -20,7 +20,6 @@ package de.tudarmstadt.ukp.dkpro.core.io.lif;
 import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
 import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testRoundTrip;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -38,9 +37,8 @@ public class LifReaderWriterTest
                 "conll/2006/fi-ref.json"); // the input also used as output reference
     }
     
-    @Ignore("Doesn't work")
     @Test
-    public void oneWay()
+    public void oneDependencyStructure()
         throws Exception
     {
         testOneWay(
@@ -48,6 +46,17 @@ public class LifReaderWriterTest
                 LifWriter.class,  // the writer
                 "lif/dependencystructure-ref.json", // the reference file for the output
                 "lif/dependencystructure.json"); // the input file for the test
+    }
+    
+    @Test
+    public void onePhraseStructure()
+        throws Exception
+    {
+        testOneWay(
+                LifReader.class, // the reader
+                LifWriter.class,  // the writer
+                "lif/phrasestructure-ref.json", // the reference file for the output
+                "lif/phrasestructure.json"); // the input file for the test
     }
     
     @Rule

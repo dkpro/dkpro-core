@@ -55,7 +55,7 @@ public class CasFilter_ImplBaseTest
     {
         tmpFile = new File("target/filteroutput.txt");
         tmpFile.getParentFile().mkdirs();
-        tmpFile.deleteOnExit();
+        //tmpFile.deleteOnExit();
     }
 
     @Test
@@ -79,8 +79,8 @@ public class CasFilter_ImplBaseTest
 
         List<String> output = FileUtils.readLines(tmpFile);
         assertEquals(expectedFirstLine, output.get(0));
-        assertEquals(input, output.get(14));
-        assertEquals("Sentence", output.get(16));
+        assertEquals(input, output.get(13));
+        assertEquals("Sentence", output.get(15));
     }
 
     @Test

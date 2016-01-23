@@ -47,10 +47,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * Writes the CoNLL 2002 named entity format. The columns are separated by a single space, unlike
- * illustrated below.
+ * <p>Reads by default the original the CoNLL 2002 named entity format. By default, columns are separated by a single space, like
+ * illustrated below.</p>
  * 
- * <pre>
+ * <pre><code>
  * Wolff      B-PER
  * ,          O
  * currently  O
@@ -74,16 +74,71 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * Real       B-ORG
  * Madrid     I-ORG
  * .          O
- * </pre>
+ * </code></pre>
  * 
  * <ol>
  * <li>FORM - token</li>
  * <li>NER - named entity (BIO encoded)</li>
  * </ol>
  * 
- * Sentences are separated by a blank new line.
+ * <p>Sentences are separated by a blank new line.</p>
  * 
  * @see <a href="http://www.clips.ua.ac.be/conll2002/ner/">CoNLL 2002 shared task</a>
+ *
+ * <p>The reader is also compatible with the Conll-based GermEval 2014 named entity format,
+ * in which the columns are separated by a tab, and there is an extra column for embedded named entities,
+ * besides the token number being put in the first column (see below).
+ * For that, additional parameters are provided, by which one can determine the column separator,
+ * whether there is an additional first column for token numbers, and whether embedded
+ * named entities should be read.
+ * (Note: Currently, the reader only reads the outer named entities, not the embedded ones.</p>
+ * 
+ * <pre>
+ * The following snippet shows an example of the TSV format 
+ * # http://de.wikipedia.org/wiki/Manfred_Korfmann [2009-10-17]
+ * 1 Aufgrund 			O 			O
+ * 2 seiner 			O 			O
+ * 3 Initiative 		O 			O
+ * 4 fand 				O 			O
+ * 5 2001/2002 			O 			O
+ * 6 in 				O 			O
+ * 7 Stuttgart 			B-LOC 		O
+ * 8 , 					O 			O
+ * 9 Braunschweig 		B-LOC 		O
+ * 10 und 				O 			O
+ * 11 Bonn 				B-LOC 		O
+ * 12 eine 				O 			O
+ * 13 große 			O 			O
+ * 14 und 				O 			O
+ * 15 publizistisch 	O 			O
+ * 16 vielbeachtete 	O 			O
+ * 17 Troia-Ausstellung B-LOCpart 	O
+ * 18 statt 			O 			O
+ * 19 , 				O 			O
+ * 20 „ 				O 			O
+ * 21 Troia 			B-OTH 		B-LOC
+ * 22 - 				I-OTH 		O
+ * 23 Traum 			I-OTH 		O
+ * 24 und 				I-OTH 		O
+ * 25 Wirklichkeit 		I-OTH 		O
+ * 26 “ 				O 			O
+ * 27 . 				O 			O
+ * </pre>
+ * 
+ * <ol>
+ * <li>WORD_NUMBER - token number</li>
+ * <li>FORM - token</li>
+ * <li>NER1 - outer named entity (BIO encoded)</li>
+ * <li>NER2 - embedded named entity (BIO encoded)</li>
+ * </ol>
+
+ * The sentence is encoded as one token per line, with information provided in tab-separated columns. 
+ * The first column contains either a #, which signals the source the sentence is cited from and the date it was retrieved, 
+ * or the token number within the sentence. The second column contains the token.
+ * Name spans are encoded in the BIO-scheme. Outer spans are encoded in the third column, 
+ * embedded spans in the fourth column.
+ * 
+ * @see <a href="https://sites.google.com/site/germeval2014ner/data">GermEval 2014 NER task</a> 
  */
 @TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -92,8 +147,45 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class Conll2002Reader
     extends JCasResourceCollectionReader_ImplBase
 {
-    private static final int FORM = 0;
-    private static final int IOB = 1;
+	/**
+	 * Column positions
+	 */
+	private int FORM = 0;
+    private int IOB  = 1;
+    private int IOB_EMBEDDED = 2;
+    
+    /** 
+     * Constants
+     */
+    private static final String TAB   = "\t";
+    private static final String SPACE = " ";
+
+    /**
+     * Column separator value
+     */
+    private String columnSeparator = SPACE;
+    
+    /**
+     * Column separator parameter.
+     */
+    public static final String PARAM_COLUMN_SEPARATOR = ComponentParameters.PARAM_COLUMN_SEPARATOR;
+    @ConfigurationParameter(name = PARAM_COLUMN_SEPARATOR, mandatory = false, defaultValue = "space")
+    private String paramColumnSeparator;
+
+    /**
+     * Token number flag. When true, the first column contains the token number 
+     * inside the sentence (as in GermEval 2014 format)
+     */
+    public static final String PARAM_HAS_TOKEN_NUMBER = ComponentParameters.PARAM_HAS_TOKEN_NUMBER;
+    @ConfigurationParameter(name = PARAM_HAS_TOKEN_NUMBER, mandatory = false, defaultValue = "false")
+    private boolean hasTokenNumber;
+
+    /**
+     * Indicates that there is a header line before the sentence 
+     */
+    public static final String PARAM_HAS_HEADER = ComponentParameters.PARAM_HAS_HEADER;
+    @ConfigurationParameter(name = PARAM_HAS_HEADER, mandatory = false, defaultValue = "false")
+    private boolean hasHeader;
 
     /**
      * Character encoding of the input data.
@@ -128,6 +220,15 @@ public class Conll2002Reader
     @ConfigurationParameter(name = PARAM_READ_NAMED_ENTITY, mandatory = true, defaultValue = "true")
     private boolean namedEntityEnabled;
 
+    /**
+     * Write embedded named entity information.
+     *
+     * Default: {@code false}
+     */
+    public static final String PARAM_READ_EMBEDDED_NAMED_ENTITY = ComponentParameters.PARAM_READ_EMBEDDED_NAMED_ENTITY;
+    @ConfigurationParameter(name = PARAM_READ_EMBEDDED_NAMED_ENTITY, mandatory = false, defaultValue = "false")
+    private boolean embeddedNamedEntityEnabled;
+
 //    /**
 //     * Load the chunk tag to UIMA type mapping from this location instead of locating
 //     * the mapping automatically.
@@ -151,6 +252,18 @@ public class Conll2002Reader
         namedEntityMappingProvider.setDefault(MappingProvider.BASE_TYPE, NamedEntity.class.getName());
 //        namedEntityMappingProvider.setOverride(MappingProvider.LOCATION, namedEntityMappingLocation);
 //        namedEntityMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
+
+        // Configure column positions. First column may be used for token number
+        FORM = hasTokenNumber?1:0;        
+        IOB  = hasTokenNumber?2:1;        
+        IOB_EMBEDDED = hasTokenNumber?3:2;
+        
+        // Configure the column separator
+        if (paramColumnSeparator.equals("tab")) {
+        	columnSeparator = TAB;
+        } else { 
+        	columnSeparator = SPACE;
+        }
     }
     
     @Override
@@ -231,19 +344,33 @@ public class Conll2002Reader
     /**
      * Read a single sentence.
      */
-    private static List<String[]> readSentence(BufferedReader aReader)
+    private List<String[]> readSentence(BufferedReader aReader)
         throws IOException
     {
         List<String[]> words = new ArrayList<String[]>();
         String line;
+        boolean beginSentence = true;
+        
         while ((line = aReader.readLine()) != null) {
             if (StringUtils.isBlank(line)) {
+                beginSentence = true;
                 break; // End of sentence
             }
-            String[] fields = line.split(" ");
-            if (fields.length != 2) {
+            
+            if (hasHeader && beginSentence) {
+            	// Ignore header line
+            	beginSentence = false;
+            	continue;
+            }
+            
+            String[] fields = line.split(columnSeparator);
+
+           	if (!embeddedNamedEntityEnabled && fields.length != 2 + FORM) {
                 throw new IOException(
-                        "Invalid file format. Line needs to have 2 space-separted fields.");
+                        String.format("Invalid file format. Line needs to have %d %s-separated fields.", 2 + FORM, paramColumnSeparator));
+            } else if (embeddedNamedEntityEnabled && fields.length != 3 + FORM) {
+                    throw new IOException(
+                        String.format("Invalid file format. Line needs to have %d %s-separated fields.", 3 + FORM, paramColumnSeparator));
             }
             words.add(fields);
         }

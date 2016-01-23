@@ -1,0 +1,48 @@
+{
+  "@context" : "http://vocab.lappsgrid.org/context-1.0.0.jsonld",
+  "metadata" : { },
+  "text" : {
+    "@value" : "Sue sees herself",
+    "@language" : "en"
+  },
+  "views": [ {
+      "metadata": {
+        "contains": {
+          "Token": {
+            "producer": "edu.brandeis.cs.lappsgrid.opennlp.Tokenizer:n.n.n",
+            "type": "tokenizer:opennlp" },
+          "PhraseStructure": {
+            "producer": "edu.brandeis.cs.lappsgrid.SimpleParser:1.0.0",
+            "categorySet": "ns/types/PTBcategories",
+            "type": "PhraseStructure:SimpleParser" },
+          "Constituent": {
+            "producer": "edu.brandeis.cs.lappsgrid.SimpleParser:1.0.0",
+            "categorySet": "ns/types/PTBcategories",
+            "type": "PhraseStructure:SimpleParser" }}},
+      "annotations": [
+         { "@type": "http://vocab.lappsgrid.org/Sentence", "id": "sent1", "start": 0, "end": 16 }, 
+         { "@type": "http://vocab.lappsgrid.org/Token", "id": "tok0", "start": 0, "end": 3 },
+         { "@type": "http://vocab.lappsgrid.org/Token", "id": "tok1", "start": 4, "end": 8 },
+         { "@type": "http://vocab.lappsgrid.org/Token", "id": "tok2", "start": 9, "end": 16 },
+         { "@type": "http://vocab.lappsgrid.org/PhraseStructure",
+           "id": "phrase0",
+           "start": 0,
+           "end": 16,
+           "features": {
+              "constituents": [ "c0", "c1", "c2", "tok0", "tok1", "tok2" ] }},
+         { "@type": "http://vocab.lappsgrid.org/Constituent",
+           "label": "S",
+           "id": "c0",
+           "features": {
+             "children": [ "c1", "c2"] } },
+         { "@type": "http://vocab.lappsgrid.org/Constituent",
+           "label": "NP",
+           "id": "c1",
+           "features": {
+             "children": [ "tok0" ] }},
+         { "@type": "http://vocab.lappsgrid.org/Constituent",
+           "label": "VP",
+           "id": "c2",
+           "features": {
+             "children": [ "tok1", "tok2" ] }}]}]
+}

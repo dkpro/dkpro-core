@@ -19,6 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.api.frequency.util;
 
 import it.unimi.dsi.fastutil.longs.LongIterator;
 import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectSet;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -251,11 +252,23 @@ public class FrequencyDistribution<T>
         
         LongIterator sampleIter = freqDist.values().iterator();
 
+        // determine total frequency
         while (sampleIter.hasNext()) {
             long count = sampleIter.next();
             samples += count;
         }
         n = samples;
+        
+        // determine max sample
+         for(T key : freqDist.keySet()){
+            Long freq = freqDist.get(key);
+            if (freq > maxFreq) {
+                maxFreq = freq;
+                maxSample = key;
+            }
+        }
+        
+        
     }
     
     public void clear() {

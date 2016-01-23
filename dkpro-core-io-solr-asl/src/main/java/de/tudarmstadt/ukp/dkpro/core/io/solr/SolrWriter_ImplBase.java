@@ -17,8 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.solr;
 
-import java.io.IOException;
-
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.ConcurrentUpdateSolrClient;
@@ -31,7 +30,7 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import java.io.IOException;
 
 /**
  * This class implements a basic SolrWriter. Specific writers should define a subclass that
@@ -108,6 +107,13 @@ public abstract class SolrWriter_ImplBase
     @ConfigurationParameter(name = PARAM_ID_FIELD, mandatory = true, defaultValue = "id")
     private String idField;
 
+    /**
+     * If set to true, the index is optimized once all documents are uploaded. Default is false.
+     */
+    public static final String PARAM_OPTIMIZE_INDEX = "optimizeIndex";
+    @ConfigurationParameter(name = PARAM_OPTIMIZE_INDEX, mandatory = true, defaultValue = "false")
+    private boolean optimizeIndex;
+
     private SolrClient solrServer;
 
     @Override
@@ -129,7 +135,7 @@ public abstract class SolrWriter_ImplBase
         catch (SolrServerException | IOException e) {
             throw new ResourceInitializationException(e);
         }
-    };
+    }
 
     @Override
     public void process(JCas aJCas)
@@ -146,21 +152,26 @@ public abstract class SolrWriter_ImplBase
 
     @Override
     public void collectionProcessComplete()
-        throws AnalysisEngineProcessException
+            throws AnalysisEngineProcessException
     {
         super.collectionProcessComplete();
 
         try {
             UpdateResponse response = solrServer.commit(waitFlush, waitSearcher);
-            getLogger().info(
-                    String.format("Solr server at '%s' responded: %s",
-                            targetLocation, response.toString()));
+            getLogger().info(String.format("Solr server at '%s' responded: %s",
+                    targetLocation, response.toString()));
+            if (optimizeIndex) {
+                getLogger().info("Starting index optimization...");
+                solrServer.optimize(waitFlush, waitSearcher);
+                getLogger().info(String.format("Solr server at '%s' responded: %s",
+                        targetLocation, response.toString()));
+            }
             solrServer.close();
         }
         catch (SolrServerException | IOException e) {
             throw new AnalysisEngineProcessException(e);
         }
-    };
+    }
 
     /**
      * Perform updates if added documents already exist?

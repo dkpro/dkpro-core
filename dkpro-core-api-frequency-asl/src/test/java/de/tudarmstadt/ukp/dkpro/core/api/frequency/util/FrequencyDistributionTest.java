@@ -85,20 +85,22 @@ public class FrequencyDistributionTest
 
         FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
         fd.incAll(tokens);
-
+        
         File outputFile = folder.newFile();
 
         fd.save(outputFile);
 
         FrequencyDistribution<String> loadedFd = new FrequencyDistribution<String>();
         loadedFd.load(outputFile);
-
+        
         assertEquals(11, loadedFd.getN());
         assertEquals(8, loadedFd.getB());
 
         assertEquals(0, loadedFd.getCount("humpelgrumpf"));
         assertEquals(1, loadedFd.getCount("This"));
         assertEquals(2, loadedFd.getCount("test"));
+        
+        assertEquals("a", loadedFd.getSampleWithMaxFreq());
     }
 
     @Test
