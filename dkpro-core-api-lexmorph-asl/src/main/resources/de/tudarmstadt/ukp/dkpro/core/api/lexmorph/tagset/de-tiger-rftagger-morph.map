@@ -1,6 +1,7 @@
 # TIGER (RfTagger)
 #
-# Source: SOME URL
+# Source: http://www.cis.uni-muenchen.de/~schmid/tools/RFTagger/data/RFTagger.tar.gz
+# See: /doc/german-tagset
 #
 
 #
@@ -74,7 +75,7 @@ definiteness.Def=\.Def\.
 # Tagset: http://universaldependencies.github.io/docs/u/feat/Degree.html (2014-11-18)
 #
 degree.Pos=\.Pos\.
-degree.Cmp=\.Dat\.
+degree.Cmp=\.Comp\.
 degree.Sup=\.Sup\.
 # degree.Abs=
 
@@ -86,18 +87,18 @@ degree.Sup=\.Sup\.
 gender.Masc=\.Masc
 gender.Fem=\.Fem
 gender.Neut=\.Neut
-gender.Com=\.Ind
+# gender.Com=
 
 #
 # Feature: mood
 #
 # Tagset: http://universaldependencies.github.io/docs/u/feat/Mood.html (2014-11-18)
 #
-# mood.Ind=
+mood.Ind=VFIN.*\.Ind
 # mood.Imp=
 # mood.Cnd=
 # mood.Pot=
-# mood.Sub=
+mood.Sub=VFIN.*\.Subj
 # mood.Jus=
 # mood.Qot=
 # mood.Opt=
