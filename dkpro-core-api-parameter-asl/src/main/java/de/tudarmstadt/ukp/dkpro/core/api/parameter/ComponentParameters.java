@@ -96,21 +96,6 @@ public final class ComponentParameters
 	public static final String PARAM_PRINT_TAGSET = "printTagSet";
 
 	/**
-	 * Column separator used in some readers (space, tab, etc.)
-	 */
-	public static final String PARAM_COLUMN_SEPARATOR = "columnSeparator";
-
-	/**
-	 * Some formats (eg. conll2002-based GermEval 2014) have an extra column for token number
-	 */
-	public static final String PARAM_HAS_TOKEN_NUMBER = "has_TokenNumber";
-
-	/**
-	 * Some formats (eg. conll2002-based GermEval 2014) have an extra header line before the sentence
-	 */
-	public static final String PARAM_HAS_HEADER = "has_Header";
-
-	/**
 	 * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
 	 * spamming the heap with thousands of strings representing only a few different tags.
 	 */
@@ -173,12 +158,6 @@ public final class ComponentParameters
 	private static final String MAPPING_LOCATION = "MappingLocation";
 	
 	// =============================================================================================
-	// Adjectives for parameters
-	// =============================================================================================
-
-	private static final String EMBEDDED = "Embedded";
-
-	// =============================================================================================
 	// Enable / disable reading or writing of particular annotation types.
 	// =============================================================================================
 	
@@ -205,8 +184,6 @@ public final class ComponentParameters
 	public static final String PARAM_READ_DEPENDENCY = READ + DEPENDENCY;
 	
 	public static final String PARAM_READ_NAMED_ENTITY = READ + NAMED_ENTITY;
-
-	public static final String PARAM_READ_EMBEDDED_NAMED_ENTITY = READ + EMBEDDED + NAMED_ENTITY;
 
     public static final String PARAM_WRITE_PARAGRAPH = WRITE + PARAGRAPH;
     

@@ -147,43 +147,78 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class Conll2002Reader
     extends JCasResourceCollectionReader_ImplBase
 {
+
+	/**
+	 * 
+	 * Column Separators
+	 *
+	 */
+	public enum ColumnSeparators
+	{
+		SPACE("space", " "),
+		TAB("tab", "\t"),
+		INVALID("", "");
+		
+		private String name;
+		private String value;
+		
+		private ColumnSeparators(String aName, String aValue)
+		{
+			name = aName;
+			value = aValue;
+		}
+		
+		public String getName()
+		{
+			return name;
+		}
+		
+		private String getValue()
+		{
+			return value;
+		}
+		
+		private static ColumnSeparators getInstance(String Name) {
+			for (ColumnSeparators cs : ColumnSeparators.values()) {
+			    if (Name.equals(cs.getName())) {
+			    	return cs;
+			    }
+			}
+			return INVALID;
+		}
+	}	
+
+	/** 
+	 * Column separator
+	 */
+	
+	ColumnSeparators columnSeparator;
+	
 	/**
 	 * Column positions
 	 */
 	private int FORM = 0;
     private int IOB  = 1;
-    private int IOB_EMBEDDED = 2;
-    
-    /** 
-     * Constants
-     */
-    private static final String TAB   = "\t";
-    private static final String SPACE = " ";
-
-    /**
-     * Column separator value
-     */
-    private String columnSeparator = SPACE;
     
     /**
-     * Column separator parameter.
+     * Column separator parameter (.
      */
-    public static final String PARAM_COLUMN_SEPARATOR = ComponentParameters.PARAM_COLUMN_SEPARATOR;
+    public static final String PARAM_COLUMN_SEPARATOR = "columnSeparator";
     @ConfigurationParameter(name = PARAM_COLUMN_SEPARATOR, mandatory = false, defaultValue = "space")
-    private String paramColumnSeparator;
+    private String columnSeparatorName;
 
     /**
      * Token number flag. When true, the first column contains the token number 
      * inside the sentence (as in GermEval 2014 format)
      */
-    public static final String PARAM_HAS_TOKEN_NUMBER = ComponentParameters.PARAM_HAS_TOKEN_NUMBER;
+    public static final String PARAM_HAS_TOKEN_NUMBER = "hasTokenNumber";
     @ConfigurationParameter(name = PARAM_HAS_TOKEN_NUMBER, mandatory = false, defaultValue = "false")
     private boolean hasTokenNumber;
 
     /**
      * Indicates that there is a header line before the sentence 
      */
-    public static final String PARAM_HAS_HEADER = ComponentParameters.PARAM_HAS_HEADER;
+    public static final String PARAM_HAS_HEADER = "hasHeader";
     @ConfigurationParameter(name = PARAM_HAS_HEADER, mandatory = false, defaultValue = "false")
     private boolean hasHeader;
 
@@ -212,7 +247,7 @@ public class Conll2002Reader
     private boolean internTags;
 
     /**
-     * Write named entity information.
+     * Read named entity information.
      *
      * Default: {@code true}
      */
@@ -221,13 +256,13 @@ public class Conll2002Reader
     private boolean namedEntityEnabled;
 
     /**
-     * Write embedded named entity information.
+     * Has embedded named entity extra column.
      *
      * Default: {@code false}
      */
-    public static final String PARAM_READ_EMBEDDED_NAMED_ENTITY = ComponentParameters.PARAM_READ_EMBEDDED_NAMED_ENTITY;
-    @ConfigurationParameter(name = PARAM_READ_EMBEDDED_NAMED_ENTITY, mandatory = false, defaultValue = "false")
-    private boolean embeddedNamedEntityEnabled;
+    public static final String PARAM_HAS_EMBEDDED_NAMED_ENTITY = "hasEmbeddedNamedEntity";
+    @ConfigurationParameter(name = PARAM_HAS_EMBEDDED_NAMED_ENTITY, mandatory = false, defaultValue = "false")
+    private boolean hasEmbeddedNamedEntity;
 
 //    /**
 //     * Load the chunk tag to UIMA type mapping from this location instead of locating
@@ -256,14 +291,16 @@ public class Conll2002Reader
         // Configure column positions. First column may be used for token number
         FORM = hasTokenNumber?1:0;        
         IOB  = hasTokenNumber?2:1;        
-        IOB_EMBEDDED = hasTokenNumber?3:2;
         
-        // Configure the column separator
-        if (paramColumnSeparator.equals("tab")) {
-        	columnSeparator = TAB;
-        } else { 
-        	columnSeparator = SPACE;
+        // Configure column separator
+        columnSeparator = ColumnSeparators.getInstance(columnSeparatorName);
+        
+        if (columnSeparator == ColumnSeparators.INVALID) {
+        	Object[] params = {columnSeparatorName, PARAM_COLUMN_SEPARATOR};
+            throw new ResourceInitializationException(
+            		ResourceInitializationException.RESOURCE_DATA_NOT_VALID, params);
         }
+        
     }
     
     @Override
@@ -363,14 +400,14 @@ public class Conll2002Reader
             	continue;
             }
             
-            String[] fields = line.split(columnSeparator);
+            String[] fields = line.split(columnSeparator.getValue());
 
-           	if (!embeddedNamedEntityEnabled && fields.length != 2 + FORM) {
+           	if (!hasEmbeddedNamedEntity && fields.length != 2 + FORM) {
                 throw new IOException(
-                        String.format("Invalid file format. Line needs to have %d %s-separated fields.", 2 + FORM, paramColumnSeparator));
-            } else if (embeddedNamedEntityEnabled && fields.length != 3 + FORM) {
+                        String.format("Invalid file format. Line needs to have %d %s-separated fields.", 2 + FORM, columnSeparator.getName()));
+            } else if (hasEmbeddedNamedEntity && fields.length != 3 + FORM) {
                     throw new IOException(
-                        String.format("Invalid file format. Line needs to have %d %s-separated fields.", 3 + FORM, paramColumnSeparator));
+                        String.format("Invalid file format. Line needs to have %d %s-separated fields.", 3 + FORM, columnSeparator.getName()));
             }
             words.add(fields);
         }
