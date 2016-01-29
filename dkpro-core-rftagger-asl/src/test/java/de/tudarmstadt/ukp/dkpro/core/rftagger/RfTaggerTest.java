@@ -1066,7 +1066,7 @@ public class RfTaggerTest
                 "APPR.Auf", "APPR.Außer", "APPR.Bis", "APPR.Dat", "APPR.Gen", "APPR.Hinter",
                 "APPR.In", "APPR.Je", "APPR.Namens", "APPR.Nom", "APPR.Per", "APPR.Pro",
                 "APPR.Unter", "APPR.Vor", "APPR.Zwischen", "APPR.Über", "APPRART.*.*.*", "APZR",
-                "CARD", "CONJ.Comp.-", "CONJ.Coord.-", "CONJ.Coord.Aber",
+                "CARD", "CONJ.Coord.-", "CONJ.Coord.Aber",
                 "CONJ.Coord.Als", "CONJ.Coord.Bis", "CONJ.Coord.Denn", "CONJ.Coord.Doch",
                 "CONJ.Coord.Noch", "CONJ.Coord.Wie", "CONJ.SubFin.-", "CONJ.SubInf.-", "FM", "ITJ",
                 "N.Name.*.*.*", "N.Reg.*.*.*", "PART.Ans", "PART.Deg", "PART.Verb", "PART.Zu",
