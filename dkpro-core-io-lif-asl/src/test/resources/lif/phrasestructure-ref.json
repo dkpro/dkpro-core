@@ -29,18 +29,18 @@
       "@type" : "http://vocab.lappsgrid.org/Token"
     }, {
       "id" : "const-0",
-      "start" : 0,
-      "end" : 16,
+      "start" : -1,
+      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Constituent"
     }, {
       "id" : "const-1",
-      "start" : 0,
-      "end" : 3,
+      "start" : -1,
+      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Constituent"
     }, {
       "id" : "const-2",
-      "start" : 4,
-      "end" : 16,
+      "start" : -1,
+      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Constituent"
     }, {
       "id" : "phrasestruct-0",

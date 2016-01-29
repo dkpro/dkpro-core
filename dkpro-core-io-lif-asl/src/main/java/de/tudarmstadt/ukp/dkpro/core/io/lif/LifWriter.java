@@ -131,8 +131,8 @@ public class LifWriter
             
             for (Dependency dep : selectCovered(Dependency.class, s)) {
                 String depRelId = id(DEPENDENCY, dep);
-                Annotation depRel = view.newAnnotation(depRelId,
-                        Discriminators.Uri.DEPENDENCY, dep.getBegin(), dep.getEnd());
+                // LAPPS dependencies inherit from Relation which has no offsets
+                Annotation depRel = view.newAnnotation(depRelId, Discriminators.Uri.DEPENDENCY);
                 depRel.setLabel(dep.getDependencyType());
                 depRel.addFeature(Features.Dependency.GOVERNOR, id(TOKEN, dep.getGovernor()));
                 depRel.addFeature(Features.Dependency.DEPENDENT, id(TOKEN, dep.getDependent()));
@@ -169,8 +169,9 @@ public class LifWriter
             Set<String> aConstituents)
     {
         if (aNode instanceof Constituent) {
+            // LAPPS constituents inherit from Relation which has no offsets
             Annotation constituent = aView.newAnnotation(id(CONSTITUENT, aNode),
-                    Discriminators.Uri.CONSTITUENT, aNode.getBegin(), aNode.getEnd());
+                    Discriminators.Uri.CONSTITUENT);
             aConstituents.add(constituent.getId());
             
             for (org.apache.uima.jcas.tcas.Annotation child : select(
