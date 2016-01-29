@@ -28,6 +28,11 @@
 	  -->
 	<!-- http://nlp.stanford.edu/software/corenlp.shtml -->
 	<property name="core.date" value="2015-04-20"/>
+    <property name="chinese.date" value="2016-01-19"/>
+    <property name="english.date" value="2016-01-10"/>
+    <property name="french.date" value="2016-01-14"/>
+    <property name="german.date" value="2016-01-19"/>
+    <property name="spanish.date" value="2015-10-24"/>
 	
 
 	<!-- 
@@ -49,15 +54,21 @@
 		<antcall target="jar-notice"/>
 	</target>
 
-	<target name="en" depends="download-core">
+	<target name="en" depends="download-english">
 		<antcall target="depparser-en-sd"/>
         <antcall target="depparser-en-ud"/>
         <antcall target="depparser-en-wsj-sd"/>
 	</target>
 	
 	<target name="depparser-en-ud">
+        <mkdir dir="target/download/tmp"/>
+        <unzip src="target/download/english/english-models.zip" dest="target/download/tmp">
+            <patternset>
+                <include name="edu/stanford/nlp/models/parser/nndep/english_UD.gz"/>      
+            </patternset>
+        </unzip>
     	<install-stub-and-upstream-file 
-    		file="target/download/core/english_UD.gz" 
+    		file="target/download/tmp/edu/stanford/nlp/models/parser/nndep/english_UD.gz" 
     		md5="1f34d35983a51a95e66895dad273a649"
     	    groupId="de.tudarmstadt.ukp.dkpro.core" 
     	    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.corenlp"
@@ -72,11 +83,18 @@
 				<entry key="dependency.tagset" value="universal"/>
 			</metadata>
 		</install-stub-and-upstream-file>		
+        <deltree dir="target/download/tmp"/>
 	</target>
 		
     <target name="depparser-en-wsj-sd">
+        <mkdir dir="target/download/tmp"/>
+        <unzip src="target/download/english/english-models.zip" dest="target/download/tmp">
+            <patternset>
+                <include name="edu/stanford/nlp/models/parser/nndep/wsj_SD.gz"/>      
+            </patternset>
+        </unzip>
         <install-stub-and-upstream-file 
-            file="target/download/core/wsj_SD.gz" 
+            file="target/download/tmp/edu/stanford/nlp/models/parser/nndep/wsj_SD.gz" 
             md5="5c565dbb4321a161bc6b620ce70daee8"
             groupId="de.tudarmstadt.ukp.dkpro.core" 
             artifactIdBase="de.tudarmstadt.ukp.dkpro.core.corenlp"
@@ -91,11 +109,18 @@
                 <entry key="dependency.tagset" value="stanford341"/>
             </metadata>
         </install-stub-and-upstream-file>       
+        <deltree dir="target/download/tmp"/>
     </target>
         
     <target name="depparser-en-sd">
+        <mkdir dir="target/download/tmp"/>
+        <unzip src="target/download/english/english-models.zip" dest="target/download/tmp">
+            <patternset>
+                <include name="edu/stanford/nlp/models/parser/nndep/english_SD.gz"/>      
+            </patternset>
+        </unzip>
         <install-stub-and-upstream-file 
-            file="target/download/core/english_SD.gz" 
+            file="target/download/tmp/edu/stanford/nlp/models/parser/nndep/english_SD.gz" 
             md5="dbb3dd903dd081bf5d6563a643fe206b"
             groupId="de.tudarmstadt.ukp.dkpro.core" 
             artifactIdBase="de.tudarmstadt.ukp.dkpro.core.corenlp"
@@ -111,7 +136,18 @@
             </metadata>
         </install-stub-and-upstream-file>       
     </target>
-        
+
+    <target name="-check-download-english">
+        <available property="download-english.DONE" file="target/download/english/DONE"/>
+    </target>
+
+    <target name="download-english" depends="-check-download-english" unless="download-english.DONE">
+        <mkdir dir="target/download/english"/>
+        <get src="http://nlp.stanford.edu/software/stanford-english-corenlp-${english.date}-models.jar" 
+        	dest="target/download/english/english-models.zip" skipexisting="true"/>
+        <touch file="target/download/core/DONE"/>
+    </target>
+    
 	<target name="-check-download-core">
 		<available property="download-core.DONE" file="target/download/core/DONE"/>
 	</target>

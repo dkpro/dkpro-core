@@ -222,6 +222,10 @@ public class CoreNlpParser
     @ConfigurationParameter(name = PARAM_ORIGINAL_DEPENDENCIES, mandatory = true, defaultValue = "true")
     private boolean originalDependencies;
 
+    public static final String PARAM_KEEP_PUNCTUATION = "keepPunctuation";
+    @ConfigurationParameter(name = PARAM_KEEP_PUNCTUATION, mandatory = true, defaultValue = "true")
+    private boolean keepPunctuation;
+
     private CasConfigurableProviderBase<ParserAnnotator> annotatorProvider;
     private MappingProvider dependencyMappingProvider;
     private MappingProvider constituentMappingProvider;
@@ -327,9 +331,11 @@ public class CoreNlpParser
             coreNlpProps.setProperty("parse.model", modelFile);
 //          coreNlpProps.setProperty("parse.flags", ...);
             coreNlpProps.setProperty("parse.maxlen", Integer.toString(maxSentenceLength));
+            coreNlpProps.setProperty("parse.kbest", Integer.toString(3));
+            coreNlpProps.setProperty("parse.keepPunct", Boolean.toString(keepPunctuation));
 //          coreNlpProps.setProperty("parse.treemap", ...);
             coreNlpProps.setProperty("parse.maxtime", Integer.toString(maxTime));
-//          coreNlpProps.setProperty("parse.buildgraphs", ...);
+            coreNlpProps.setProperty("parse.buildgraphs", Boolean.toString(writeDependency));
             coreNlpProps.setProperty("parse.originalDependencies", Boolean.toString(originalDependencies));
             coreNlpProps.setProperty("parse.nthreads", Integer.toString(numThreads));
 //          coreNlpProps.setProperty("parse.binaryTrees", ...);
