@@ -201,7 +201,7 @@ public class Conll2002Reader
     private int IOB  = 1;
     
     /**
-     * Column separator parameter. Acceptable input values come from {@link Conll2002Reader#ColumnSeparators}.</br>
+     * Column separator parameter. Acceptable input values come from {@link ColumnSeparators}.</br>
      * Example usage: if you want to define 'tab' as the column separator the following value should be input for 
      * this parameter {@code Conll2002Reader.ColumnSeparators.TAB.getName()}
      */
@@ -230,13 +230,6 @@ public class Conll2002Reader
     public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
     @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
     private String encoding;
-
-    /**
-     * The language.
-     */
-    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-    private String language;
 
     /**
      * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
