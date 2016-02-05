@@ -346,37 +346,37 @@ public class FeaturePathInfo  {
             // switch feature type code
             switch (currentFeatureTypeCode) {
             case LowLevelCAS.TYPE_CLASS_STRING:
-               checkCondidtion = checkString(annotFS.getStringValue(feature),
+               checkCondidtion = checkString(currentFS.getStringValue(feature),
                      condition);
                noFurtherElementsPossible = true;
                break;
             case LowLevelCAS.TYPE_CLASS_INT:
-               checkCondidtion = checkInt(annotFS.getIntValue(feature),
+               checkCondidtion = checkInt(currentFS.getIntValue(feature),
                      condition);
                noFurtherElementsPossible = true;
                break;
             case LowLevelCAS.TYPE_CLASS_BOOLEAN:
-               checkCondidtion = checkBoolean(annotFS.getBooleanValue(feature),
+               checkCondidtion = checkBoolean(currentFS.getBooleanValue(feature),
                      condition);
                noFurtherElementsPossible = true;
                break;
             case LowLevelCAS.TYPE_CLASS_BYTE:
-               checkCondidtion = checkByte(annotFS.getByteValue(feature),
+               checkCondidtion = checkByte(currentFS.getByteValue(feature),
                      condition);
                noFurtherElementsPossible = true;
                break;
             case LowLevelCAS.TYPE_CLASS_DOUBLE:
-               checkCondidtion = checkDouble(annotFS.getDoubleValue(feature),
+               checkCondidtion = checkDouble(currentFS.getDoubleValue(feature),
                      condition);
                noFurtherElementsPossible = true;
                break;
             case LowLevelCAS.TYPE_CLASS_FLOAT:
-               checkCondidtion = checkFloat(annotFS.getFloatValue(feature),
+               checkCondidtion = checkFloat(currentFS.getFloatValue(feature),
                      condition);
                noFurtherElementsPossible = true;
                break;
             case LowLevelCAS.TYPE_CLASS_LONG:
-               checkCondidtion = checkLong(annotFS.getLongValue(feature),
+               checkCondidtion = checkLong(currentFS.getLongValue(feature),
                      condition);
                noFurtherElementsPossible = true;
                break;
@@ -385,7 +385,7 @@ public class FeaturePathInfo  {
                checkCondidtion = false;
                break;
             case LowLevelCAS.TYPE_CLASS_SHORT:
-               checkCondidtion = checkShort(annotFS.getShortValue(feature),
+               checkCondidtion = checkShort(currentFS.getShortValue(feature),
                      condition);
                noFurtherElementsPossible = true;
                break;

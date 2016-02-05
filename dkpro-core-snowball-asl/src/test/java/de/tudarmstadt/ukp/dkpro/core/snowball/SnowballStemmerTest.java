@@ -20,14 +20,16 @@ package de.tudarmstadt.ukp.dkpro.core.snowball;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
+import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class SnowballStemmerTest
@@ -72,6 +74,27 @@ public class SnowballStemmerTest
                 SnowballStemmer.PARAM_LOWER_CASE, false);
     }
 
+    @Test
+    public void testEnglishCaseFiltered()
+        throws Exception
+    {
+        String[] stems = { "educ" };
+        String[] pos = { "NNS", "JJ", "NN", "NNS" };
+        
+        AnalysisEngineDescription aggregate = createEngineDescription(
+                createEngineDescription(OpenNlpPosTagger.class),
+                createEngineDescription(SnowballStemmer.class, 
+                        SnowballStemmer.PARAM_LOWER_CASE, true,
+                        SnowballStemmer.PARAM_FILTER_FEATUREPATH, "pos/PosValue",
+                        SnowballStemmer.PARAM_FILTER_CONDITION_OPERATOR, "EQUALS",
+                        SnowballStemmer.PARAM_FILTER_CONDITION_VALUE, "JJ"));
+        
+        JCas result = TestRunner.runTest(aggregate, "en", "Babies educational sleep .s");
+
+        AssertAnnotations.assertStem(stems, select(result, Stem.class));
+        AssertAnnotations.assertPOS(null, pos, select(result, POS.class));
+    }
+
     private JCas runTest(String aLanguage, String aText, String[] aStems, Object... aParams)
         throws Exception
     {
@@ -84,11 +107,5 @@ public class SnowballStemmerTest
     }
 
     @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
-    }
+    public DkproTestContext testContext = new DkproTestContext();
 }
