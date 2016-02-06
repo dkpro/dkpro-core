@@ -201,7 +201,7 @@ public class Conll2002Reader
     private int IOB  = 1;
     
     /**
-     * Column separator parameter. Acceptable input values come from {@link ColumnSeparators}.</br>
+     * Column separator parameter. Acceptable input values come from {@link ColumnSeparators}.<br>
      * Example usage: if you want to define 'tab' as the column separator the following value should be input for 
      * this parameter {@code Conll2002Reader.ColumnSeparators.TAB.getName()}
      */
