@@ -6,7 +6,7 @@ DocumentMetaData
    sofa: _InitialView
    begin: 0
    end: 186
-   language: "x-unspecified"
+   language: "de"
    documentTitle: "germeval2014_test.conll"
    documentId: "germeval2014_test.conll"
    isLastSegment: false
@@ -187,5 +187,3 @@ Token
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================
-
-
