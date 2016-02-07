@@ -130,18 +130,18 @@ public class ApplyChangesAnnotator
 			Collections.reverse(edits);
 			for (SofaChangeAnnotation a : edits) {
 				if (OP_INSERT.equals(a.getOperation())) {
-					// getContext().getLogger().log(INFO,
-					// "Performing insert: "+a.getBegin()+"-"+a.getEnd());
+//                    getLogger().debug("Performing insert[" + a.getBegin() + "-" + a.getEnd() + "]: ["
+//                                    + a.getCoveredText() + "]");
 					as.insert(a.getBegin(), a.getValue());
 				}
 				if (OP_DELETE.equals(a.getOperation())) {
-					// getContext().getLogger().log(INFO,
-					// "Performing delete: "+a.getBegin()+"-"+a.getEnd());
+//                    getLogger().debug("Performing delete[" + a.getBegin() + "-" + a.getEnd() + "]: ["
+//                            + a.getCoveredText() + "]");
 					as.delete(a.getBegin(), a.getEnd());
 				}
 				if (OP_REPLACE.equals(a.getOperation())) {
-					// getContext().getLogger().log(INFO,
-					// "Performing replace: "+a.getBegin()+"-"+a.getEnd());
+//                    getLogger().debug("Performing replace[" + a.getBegin() + "-" + a.getEnd() + "]: ["
+//                            + a.getCoveredText() + "]");
 					as.replace(a.getBegin(), a.getEnd(), a.getValue());
 				}
 			}

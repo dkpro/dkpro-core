@@ -1,0 +1,297 @@
+======== CAS 0 begin ==================================
+
+-------- View _InitialView begin ----------------------------------
+
+DocumentMetaData
+   sofa: _InitialView
+   begin: 0
+   end: 141
+   language: "en"
+   documentTitle: "input.txt"
+   documentId: "input.txt"
+   isLastSegment: false
+
+CAS-Text:
+Lumbo labi bumbo nabi noo. Labibi humba doopi jamba Too. Mekoman jalla hembembel! Labumbu jakka
+lembi nabi. Humba jumbaba tumba Jalla Jamba.
+
+[Lumbo labi bumbo nabi noo.]
+SofaChangeAnnotation
+   sofa: _InitialView
+   begin: 0
+   end: 26
+   operation: "delete"
+[Labibi humba doopi jamba Too.]
+Sentence
+   sofa: _InitialView
+   begin: 27
+   end: 56
+[Labibi]
+Token
+   sofa: _InitialView
+   begin: 27
+   end: 33
+[humba]
+Token
+   sofa: _InitialView
+   begin: 34
+   end: 39
+[doopi]
+Token
+   sofa: _InitialView
+   begin: 40
+   end: 45
+[jamba]
+Token
+   sofa: _InitialView
+   begin: 46
+   end: 51
+[Too]
+Token
+   sofa: _InitialView
+   begin: 52
+   end: 55
+[.]
+Token
+   sofa: _InitialView
+   begin: 55
+   end: 56
+[Mekoman jalla hembembel!]
+Sentence
+   sofa: _InitialView
+   begin: 57
+   end: 81
+[Mekoman]
+Token
+   sofa: _InitialView
+   begin: 57
+   end: 64
+[jalla]
+Token
+   sofa: _InitialView
+   begin: 65
+   end: 70
+[hembembel]
+Token
+   sofa: _InitialView
+   begin: 71
+   end: 80
+[!]
+Token
+   sofa: _InitialView
+   begin: 80
+   end: 81
+[Labumbu jakka
+lembi nabi.]
+Sentence
+   sofa: _InitialView
+   begin: 82
+   end: 107
+[Labumbu]
+Token
+   sofa: _InitialView
+   begin: 82
+   end: 89
+[jakka]
+Token
+   sofa: _InitialView
+   begin: 90
+   end: 95
+[lembi]
+Token
+   sofa: _InitialView
+   begin: 96
+   end: 101
+[nabi]
+Token
+   sofa: _InitialView
+   begin: 102
+   end: 106
+[.]
+Token
+   sofa: _InitialView
+   begin: 106
+   end: 107
+[Humba jumbaba tumba Jalla Jamba.]
+Sentence
+   sofa: _InitialView
+   begin: 108
+   end: 140
+[Humba]
+Token
+   sofa: _InitialView
+   begin: 108
+   end: 113
+[jumbaba]
+Token
+   sofa: _InitialView
+   begin: 114
+   end: 121
+[tumba]
+Token
+   sofa: _InitialView
+   begin: 122
+   end: 127
+[Jalla]
+Token
+   sofa: _InitialView
+   begin: 128
+   end: 133
+[Jamba]
+Token
+   sofa: _InitialView
+   begin: 134
+   end: 139
+[.]
+Token
+   sofa: _InitialView
+   begin: 139
+   end: 140
+-------- View _InitialView end ----------------------------------
+
+-------- View TargetView begin ----------------------------------
+
+DocumentMetaData
+   sofa: TargetView
+   begin: 0
+   end: 115
+   language: "en"
+   documentTitle: "input.txt"
+   documentId: "input.txt"
+   isLastSegment: false
+
+CAS-Text:
+ Labibi humba doopi jamba Too. Mekoman jalla hembembel! Labumbu jakka
+lembi nabi. Humba jumbaba tumba Jalla Jamba.
+
+[Labibi humba doopi jamba Too.]
+Sentence
+   sofa: TargetView
+   begin: 1
+   end: 30
+[Labibi]
+Token
+   sofa: TargetView
+   begin: 1
+   end: 7
+[humba]
+Token
+   sofa: TargetView
+   begin: 8
+   end: 13
+[doopi]
+Token
+   sofa: TargetView
+   begin: 14
+   end: 19
+[jamba]
+Token
+   sofa: TargetView
+   begin: 20
+   end: 25
+[Too]
+Token
+   sofa: TargetView
+   begin: 26
+   end: 29
+[.]
+Token
+   sofa: TargetView
+   begin: 29
+   end: 30
+[Mekoman jalla hembembel!]
+Sentence
+   sofa: TargetView
+   begin: 31
+   end: 55
+[Mekoman]
+Token
+   sofa: TargetView
+   begin: 31
+   end: 38
+[jalla]
+Token
+   sofa: TargetView
+   begin: 39
+   end: 44
+[hembembel]
+Token
+   sofa: TargetView
+   begin: 45
+   end: 54
+[!]
+Token
+   sofa: TargetView
+   begin: 54
+   end: 55
+[Labumbu jakka
+lembi nabi.]
+Sentence
+   sofa: TargetView
+   begin: 56
+   end: 81
+[Labumbu]
+Token
+   sofa: TargetView
+   begin: 56
+   end: 63
+[jakka]
+Token
+   sofa: TargetView
+   begin: 64
+   end: 69
+[lembi]
+Token
+   sofa: TargetView
+   begin: 70
+   end: 75
+[nabi]
+Token
+   sofa: TargetView
+   begin: 76
+   end: 80
+[.]
+Token
+   sofa: TargetView
+   begin: 80
+   end: 81
+[Humba jumbaba tumba Jalla Jamba.]
+Sentence
+   sofa: TargetView
+   begin: 82
+   end: 114
+[Humba]
+Token
+   sofa: TargetView
+   begin: 82
+   end: 87
+[jumbaba]
+Token
+   sofa: TargetView
+   begin: 88
+   end: 95
+[tumba]
+Token
+   sofa: TargetView
+   begin: 96
+   end: 101
+[Jalla]
+Token
+   sofa: TargetView
+   begin: 102
+   end: 107
+[Jamba]
+Token
+   sofa: TargetView
+   begin: 108
+   end: 113
+[.]
+Token
+   sofa: TargetView
+   begin: 113
+   end: 114
+-------- View TargetView end ----------------------------------
+
+======== CAS 0 end ==================================
+
+
