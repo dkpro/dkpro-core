@@ -57,11 +57,11 @@ models
     .sort { it.key }
     .each { language, languageGroup ->
 %>
-== ${language} 
+== ${language} (${languageGroup.size()})
 <%
     languageGroup.groupBy { it.@engine.text() }.sort { it.key }.each { engine, engineGroup ->
 %>
-=== ${engine} 
+=== ${engine} (${engineGroup.size()})
 
 <%
         engineGroup.sort { it.@variant.text() }.each { renderModel(it) }
