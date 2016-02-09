@@ -432,6 +432,7 @@
 		<module>../dkpro-core-api-anomaly-asl</module>
 		<module>../dkpro-core-api-coref-asl</module>
 		<module>../dkpro-core-api-corpus-asl</module>
+		<module>../dkpro-core-api-discourse-asl</module>
 		<module>../dkpro-core-api-featurepath-asl</module>
 		<module>../dkpro-core-api-io-asl</module>
 		<module>../dkpro-core-api-lexmorph-asl</module>

@@ -1,0 +1,2 @@
+classpath*:desc/types/RSTTypeSystem.xml
+classpath*:desc/types/PennDiscourseTreeBankTypeSystem.xml
