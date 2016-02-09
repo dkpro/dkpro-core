@@ -29,11 +29,11 @@ permalink: "/documentation/"
 _latest release_
 
 * [Release notes](https://github.com/dkpro/dkpro-core/releases/tag/de.tudarmstadt.ukp.dkpro.core-asl-{{ stable.version }})
-* [Components]({{ site.url }}/releases/{{ stable.version }}/components.html)
-* [Formats]({{ site.url }}/releases/{{ stable.version }}/formats.html)
-* [Models]({{ site.url }}/releases/{{ stable.version }}/models.html)
-* [Type system]({{ site.url }}/releases/{{ stable.version }}/typesystem.html)
-* [API documentation]({{ site.url }}/releases/{{ stable.version }}/apidocs/index.html)
+* [Components]({{ site.url }}/releases/{{ stable.version }}/components/)
+* [Formats]({{ site.url }}/releases/{{ stable.version }}/formats/)
+* [Models]({{ site.url }}/releases/{{ stable.version }}/models/)
+* [Type system]({{ site.url }}/releases/{{ stable.version }}/typesystem/)
+* [API documentation]({{ site.url }}/releases/{{ stable.version }}/apidocs/)
 
 ### DKPro Core {{ unstable.version }}
 _upcoming release - links may be temporarily broken while a build is in progress_
@@ -45,4 +45,4 @@ _upcoming release - links may be temporarily broken while a build is in progress
 
 * [Release Guide]({{ site.url }}/pages/release-guide.html)
 * [How to contribute](http://dkpro.github.io/contributing/)
-* [Unintegratable software]({{ site.url }}/pages/unintegratable.html)
+* [Unintegratable software]({{ site.url }}/pages/unintegratable/)
