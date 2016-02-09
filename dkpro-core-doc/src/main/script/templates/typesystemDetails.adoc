@@ -148,7 +148,6 @@ include::{include-dir}sectionIntro${section}.adoc[]
             .findAll { it.description }
             .each { typesystem ->
 %>
-[small]#${(typesystem.sourceUrl as String) - (project.basedir.toURI().toURL() as String) - '../'}#
 ++++
 ${Util.preparePassthrough(typesystem.description)}
 ++++
