@@ -15,15 +15,15 @@
   side: left
   dropdown:
   - title: "Components"
-    url: "/releases/!LATEST!/components.html"
+    url: "/releases/!LATEST!/components/"
   - title: "Models"
-    url: "/releases/!LATEST!/models.html"
+    url: "/releases/!LATEST!/models/"
   - title: "Formats"
-    url: "/releases/!LATEST!/formats.html"
+    url: "/releases/!LATEST!/formats/"
   - title: "Typesystem"
-    url: "/releases/!LATEST!/typesystem.html"
+    url: "/releases/!LATEST!/typesystem/"
   - title: "Javadoc"
-    url: "/releases/!LATEST!/apidocs/index.html"
+    url: "/releases/!LATEST!/apidocs/"
   - title: "Recipes (Groovy)"
     url: "/groovy/recipes/"
   - title: "Recipes (Java)"
@@ -47,7 +47,7 @@
   side: left
   dropdown:
   - title: "Mailing lists"
-    url: "/pages/mailinglists.html"
+    url: "/pages/mailinglists/"
   - title: "Twitter"
     url: "http://twitter.com/dkprocore"
   - title: "Contributing"
