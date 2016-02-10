@@ -11,37 +11,37 @@ title: "DKPro Core"
 #   image_fullwidth: "header_unsplash_12.jpg"
 widget-1:
     title: "Components"
-    url: 'releases/!LATEST!/components.html'
+    url: 'releases/!LATEST!/components/'
     text: 'Find out more about our bundled components.'
     image: IconComponents.png
 widget-2:
     title: "Models/Languages"
-    url: 'releases/!LATEST!/models.html'
+    url: 'releases/!LATEST!/models/'
     text: 'Various models covering different languages accompany the components.'
     image: IconModels.png
 widget-3:
     title: "Formats"
-    url: 'releases/!LATEST!/formats.html'
+    url: 'releases/!LATEST!/formats/'
     text: 'Reading and writing various formats is just one line of code away.'
     image: IconFormatBlank.png
 widget-4:
     title: "Typesystem"
-    url: 'releases/!LATEST!/typesystem.html'
+    url: 'releases/!LATEST!/typesystem/'
     text: 'Our typesystem is comprehensive, yet simple.'
     image: IconTypeSystem.png
 widget-5:
     title: "DKPro with Java"
-    url: 'pages/java-intro.html'
+    url: 'pages/java-intro/'
     text: 'The original flavour. Use DKPro in your Java projects.'
     image: LogoJava.png
 widget-6:
     title: "DKPro with Groovy"
-    url: 'pages/groovy-intro.html'
+    url: 'pages/groovy-intro/'
     text: 'Create self-contained scripts using DKPro and Groovy!'
     image: LogoGroovy.png
 widget-7:
     title: "DKPro with Jython"
-    url: 'pages/jython-intro.html'
+    url: 'pages/jython-intro/'
     text: 'Easily integrate DKPro into your python projects!'
     image: LogoPython.png
 header-1:
