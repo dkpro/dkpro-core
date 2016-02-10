@@ -134,6 +134,12 @@
 			<artifactId>plexus-utils</artifactId>
 			<version>2.0.6</version>
 		</dependency>
+        <dependency>
+            <!-- This library is required to be able to read xz archives! -->
+            <groupId>org.tukaani</groupId>
+            <artifactId>xz</artifactId>
+            <version>1.5</version>
+        </dependency>
 	</dependencies>
 
 	
