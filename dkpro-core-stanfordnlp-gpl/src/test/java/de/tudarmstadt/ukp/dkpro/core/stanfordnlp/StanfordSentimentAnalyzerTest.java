@@ -18,8 +18,8 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.sentiment.type.StanfordSentimentAnnotation;
+import static org.junit.Assert.assertTrue;
+
 import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.component.CasDumpWriter;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
@@ -27,13 +27,16 @@ import org.apache.uima.fit.factory.TypeSystemDescriptionFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.util.CasCreationUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.sentiment.type.StanfordSentimentAnnotation;
 
 /**
  * Test for {@link de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSentimentAnalyzer}
  */
+@Ignore("https://github.com/dkpro/dkpro-core/issues/779")
 public class StanfordSentimentAnalyzerTest {
 
 	@Test

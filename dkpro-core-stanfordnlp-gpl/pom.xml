@@ -51,12 +51,14 @@
 			<artifactId>stanford-corenlp</artifactId>
 			<version>3.6.0</version>
 		</dependency>
+        <!-- https://github.com/dkpro/dkpro-core/issues/779
         <dependency>
             <groupId>edu.stanford.nlp</groupId>
             <artifactId>stanford-corenlp</artifactId>
             <version>3.6.0</version>
             <classifier>models</classifier>
         </dependency>
+        -->
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</artifactId>
