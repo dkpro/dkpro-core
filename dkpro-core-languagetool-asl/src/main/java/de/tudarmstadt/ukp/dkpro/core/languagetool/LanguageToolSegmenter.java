@@ -45,7 +45,7 @@ public class LanguageToolSegmenter extends SegmenterBase
 		Language lang = Languages.getLanguageForShortName(getLanguage(aJCas));
         Language defaultVariant = lang.getDefaultLanguageVariant();
         if (defaultVariant != null) {
-            getLogger().info(
+            getLogger().debug(
                     "Using default variant [" + defaultVariant.getShortNameWithCountryAndVariant()
                             + "] for language [" + getLanguage(aJCas) + "]");
             lang = defaultVariant;
