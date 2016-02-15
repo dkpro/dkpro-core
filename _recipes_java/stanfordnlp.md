@@ -21,7 +21,7 @@ All these components are UIMA annotators for the [Stanford CoreNLP](http://www-n
 
 ## Pre-requisites
 
-Either, create a new Maven project or incorporate the following to your existing Maven project. It is expected that you read the [introductory material]({{ site.url }}/pages/java-intro.html). You'll need the following dependencies.
+Either, create a new Maven project or incorporate the following to your existing Maven project. It is expected that you read the [introductory material]({{ site.url }}/pages/java-intro/). You'll need the following dependencies.
 
 Dependencies:
 

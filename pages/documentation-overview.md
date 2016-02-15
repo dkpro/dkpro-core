@@ -9,9 +9,9 @@ permalink: "/documentation/"
 
 ## Introduction
 
-* [Using DKPro Core with Java]({{ site.url }}/pages/java-intro.html)
-* [Using DKPro Core with Groovy]({{ site.url }}/pages/groovy-intro.html)
-* [Using DKPro Core with Jython]({{ site.url }}/pages/jython-intro.html)
+* [Using DKPro Core with Java]({{ site.url }}/pages/java-intro/)
+* [Using DKPro Core with Groovy]({{ site.url }}/pages/groovy-intro/)
+* [Using DKPro Core with Jython]({{ site.url }}/pages/jython-intro/)
 
 ## Recipes: Specific Use Cases
 
@@ -23,7 +23,7 @@ permalink: "/documentation/"
 
 ### Setup
 
-* [User setup]({{ site.url }}/pages/setup-user.html)
+* [User setup]({{ site.url }}/pages/setup-user/)
 
 ### DKPro Core {{ stable.version }}
 _latest release_
@@ -43,6 +43,6 @@ _upcoming release - links may be temporarily broken while a build is in progress
 
 ## Developer Documentation
 
-* [Release Guide]({{ site.url }}/pages/release-guide.html)
+* [Release Guide]({{ site.url }}/pages/release-guide/)
 * [How to contribute](http://dkpro.github.io/contributing/)
 * [Unintegratable software]({{ site.url }}/pages/unintegratable/)

@@ -34,11 +34,11 @@ C:/Program Files/Java/jdk1.8.0_51/bin/javaw.exe
 
 *Since version 1.4.0, DKPro Core is available from [Maven Central][MAVEN_CENTRAL].* 
 
-If you do not want rely on our automatic download mechanism for models and instead want to add models as dependencies to your Maven POM, it is necessary to configure the [public UKP Maven repository]({{ site.url }}/pages/setup-maven.html).
+If you do not want rely on our automatic download mechanism for models and instead want to add models as dependencies to your Maven POM, it is necessary to configure the [public UKP Maven repository]({{ site.url }}/pages/setup-maven/).
 
-*Only if you are using DKPro Core 1.4.0 or older:* If you want to use our pre-packaged models, it is necessary to configure the [public UKP Maven repository]({{ site.url }}/pages/setup-maven.html).
+*Only if you are using DKPro Core 1.4.0 or older:* If you want to use our pre-packaged models, it is necessary to configure the [public UKP Maven repository]({{ site.url }}/pages/setup-maven/).
 
-*Only if you are using DKPro Core 1.3.0 or older:* If you need to use DKPro Core versions 1.3.0 or older, it is necessary to configure the [public UKP Maven repository]({{ site.url }}/pages/setup-maven.html).
+*Only if you are using DKPro Core 1.3.0 or older:* If you need to use DKPro Core versions 1.3.0 or older, it is necessary to configure the [public UKP Maven repository]({{ site.url }}/pages/setup-maven/).
 
 [ECLIPSE]: http://eclipse.org/
 [MAVEN_CENTRAL]: http://search.maven.org/#search%7Cga%7C1%7Cde.tudarmstadt.ukp.dkpro

@@ -6,7 +6,7 @@ docs-gpl: "http://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.cor
 docs-asl: "http://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/tags/de.tudarmstadt.ukp.dkpro.core-asl-1.6.2/apidocs/index.html?de/tudarmstadt/ukp/dkpro/core/"
 ---
 
-Further information on models for particular components can be found in the [list of models](models.html)
+Further information on models for particular components can be found in the [list of models](models)
 
 ## Coreference
   * [StanfordCoreferenceResolver]({{ page.docs-gpl }}stanfordnlp/StanfordCoreferenceResolver.html)
