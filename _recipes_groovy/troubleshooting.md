@@ -1,6 +1,6 @@
 ---
 title: Groovy trouble-shooting
-published: false
+hidden: true
 ---
 
 * TOC

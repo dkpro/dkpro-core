@@ -1,6 +1,6 @@
 ---
 title: Overview
-published: false
+hidden: true
 permalink: /groovy/recipes/
 ---
 

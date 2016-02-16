@@ -1,6 +1,6 @@
 ---
 title: Java trouble-shooting
-published: false
+hidden: true
 ---
 
 If you are having problems with DKPro Core in Java, please let us know:

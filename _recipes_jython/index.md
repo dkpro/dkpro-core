@@ -1,7 +1,7 @@
 ---
 title: Overview
-published: false
 permalink: /jython/recipes/
+hidden: true
 ---
 
 Recipes are small, self-contained examples that showcase a specific use of DKPro Core. 

@@ -1,6 +1,6 @@
 ---
 title: Jython trouble-shooting
-published: false
+hidden: true
 ---
 
 * TOC
