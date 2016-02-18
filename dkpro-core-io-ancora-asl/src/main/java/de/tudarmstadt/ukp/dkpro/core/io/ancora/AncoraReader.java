@@ -21,10 +21,12 @@ import static de.tudarmstadt.ukp.dkpro.core.io.ancora.internal.AncoraConstants.A
 import static de.tudarmstadt.ukp.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_POS;
 import static de.tudarmstadt.ukp.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_WD;
 import static de.tudarmstadt.ukp.dkpro.core.io.ancora.internal.AncoraConstants.TAG_SENTENCE;
+import static java.util.Arrays.asList;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -110,6 +112,10 @@ public class AncoraReader
     public static final String PARAM_POS_TAG_SET = ComponentParameters.PARAM_POS_TAG_SET;
     @ConfigurationParameter(name = PARAM_POS_TAG_SET, mandatory = false)
     protected String posTagset;
+    
+    public static final String PARAM_SPLIT_MULTI_WORD_TOKENS = "splitMultiWordTokens";
+    @ConfigurationParameter(name = PARAM_SPLIT_MULTI_WORD_TOKENS, mandatory = true, defaultValue="false")
+    protected boolean splitMultiWordTokens;
 
     private MappingProvider posMappingProvider;
 
@@ -211,6 +217,48 @@ public class AncoraReader
             return buffer;
         }
 
+        private void addToken(String aWord, String aLemma, String aPos)
+        {
+            // Add spacing to previous token (if present)
+            if (buffer.length() > 0) {
+                buffer.append(' ');
+            }
+            
+            // Add current token
+            int start = getBuffer().length();
+            buffer.append(aWord);
+            int end = getBuffer().length();
+            
+            Token token = null;
+            
+            if (readToken) {
+                token = new Token(getJCas(), start, end);
+            }
+
+            if (aPos != null && readPOS) {
+                Type posTagType = posMappingProvider.getTagType(aPos);
+                POS pos = (POS) getJCas().getCas().createAnnotation(posTagType, start, end);
+                pos.setPosValue(aPos);
+                pos.addToIndexes();
+                if (token != null) {
+                    token.setPos(pos);
+                }
+            }
+
+            if (aLemma != null && readLemma) {
+                Lemma l = new Lemma(getJCas(), start, end);
+                l.setValue(aLemma);
+                l.addToIndexes();
+                if (token != null) {
+                    token.setLemma(l);
+                }
+            }
+
+            if (token != null) {
+                token.addToIndexes();
+            }
+        }
+        
         @Override
         public void startElement(String aUri, String aLocalName, String aName,
                 Attributes aAttributes)
@@ -222,45 +270,24 @@ public class AncoraReader
                 sentenceStart = getBuffer().length();
             }
             else if (wd != null) {
-                // Add spacing to previous token (if present)
-                if (buffer.length() > 0) {
-                    buffer.append(' ');
-                }
-                
-                // Add current token
-                int start = getBuffer().length();
-                buffer.append(wd);
-                int end = getBuffer().length();
-                
-                Token token = null;
-                
-                if (readToken) {
-                    token = new Token(getJCas(), start, end);
-                }
-
                 String posTag = aAttributes.getValue(ATTR_POS);
-                if (posTag != null && readPOS) {
-                    Type posTagType = posMappingProvider.getTagType(posTag);
-                    POS pos = (POS) getJCas().getCas().createAnnotation(posTagType, start, end);
-                    pos.setPosValue(posTag);
-                    pos.addToIndexes();
-                    if (token != null) {
-                        token.setPos(pos);
-                    }
-                }
-
                 String lemma = aAttributes.getValue(ATTR_LEM);
-                if (lemma != null && readLemma) {
-                    Lemma l = new Lemma(getJCas(), start, end);
-                    l.setValue(lemma);
-                    l.addToIndexes();
-                    if (token != null) {
-                        token.setLemma(l);
-                    }
+                
+                // Default case without multiword splitting
+                List<String> words = asList(wd);
+                List<String> lemmas = asList(lemma);
+                
+                // Override default case if multiword splitting is enabled
+                if (splitMultiWordTokens && wd.contains("_")) {
+                    words = asList(wd.split("_"));
+                    lemmas = asList(wd.split("_"));
+                    // If the numbers of words do not match the numbers of lemmas after separation
+                    // then something is fishy!
+                    assert words.size() == lemmas.size();
                 }
-
-                if (token != null) {
-                    token.addToIndexes();
+                
+                for (int i = 0; i < words.size(); i++) {
+                    addToken(words.get(i), lemmas.get(i), posTag);
                 }
             }
         }

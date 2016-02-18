@@ -38,6 +38,17 @@ public class AncoraReaderTest
                 "ancora/19004_20000725.tbf.xml"); // the input file for the test
     }
 
+    @Test
+    public void testWithMultiWordSplitting() throws Exception
+    {
+        testOneWay(
+                createReaderDescription(AncoraReader.class,
+                        AncoraReader.PARAM_SPLIT_MULTI_WORD_TOKENS, true),
+                createEngineDescription(Conll2006Writer.class),
+                "ancora/19004_20000725.tbf-split.conll", // the reference file for the output
+                "ancora/19004_20000725.tbf.xml"); // the input file for the test
+    }
+
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
 }
