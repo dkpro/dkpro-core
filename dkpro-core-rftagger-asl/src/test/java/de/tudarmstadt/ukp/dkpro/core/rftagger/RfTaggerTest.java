@@ -727,14 +727,14 @@ public class RfTaggerTest
         
         String[] morph = {
                 "[  0,  2]     -     -  Nom    -    -  Masc    -    -  Sing      -  3    -  Prs    -     -      -     - Er (PRO.Pers.Subst.3.Nom.Sg.Masc)",
-                "[  3,  7]     -     -    -    -    -   Com    -    -  Sing      -  3    -    -    -  Past      -     - nahm (VFIN.Full.3.Sg.Past.Ind)",
+                "[  3,  7]     -     -    -    -    -     -  Ind    -  Sing      -  3    -    -    -  Past      -     - nahm (VFIN.Full.3.Sg.Past.Ind)",
                 "[  8, 13]     -     -  Acc    -  Pos   Fem    -    -  Sing      -  -  Yes    -    -     -      -     - meine (PRO.Poss.Attr.-.Acc.Sg.Fem)",
                 "[ 14, 20]     -     -  Acc    -    -   Fem    -    -  Sing      -  -    -    -    -     -      -     - Fackel (N.Reg.Acc.Sg.Fem)",
                 "[ 21, 24]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - und (CONJ.Coord.-)",
-                "[ 25, 31]     -     -    -    -    -   Com    -    -  Sing      -  3    -    -    -  Past      -     - schlug (VFIN.Full.3.Sg.Past.Ind)",
+                "[ 25, 31]     -     -    -    -    -     -  Ind    -  Sing      -  3    -    -    -  Past      -     - schlug (VFIN.Full.3.Sg.Past.Ind)",
                 "[ 32, 35]     -     -  Acc    -    -     -    -    -  Plur      -  3    -  Prs    -     -      -     - sie (PRO.Pers.Subst.3.Acc.Pl.*)",
-                "[ 36, 39]     -     -  Dat  Def  Cmp  Masc    -    -  Sing      -  -    -    -    -     -      -     - dem (ART.Def.Dat.Sg.Masc)",
-                "[ 40, 43]     -     -  Dat    -  Cmp  Masc    -    -  Sing      -  -    -    -    -     -      -     - Bär (N.Reg.Dat.Sg.Masc)",
+                "[ 36, 39]     -     -  Dat  Def    -  Masc    -    -  Sing      -  -    -    -    -     -      -     - dem (ART.Def.Dat.Sg.Masc)",
+                "[ 40, 43]     -     -  Dat    -    -  Masc    -    -  Sing      -  -    -    -    -     -      -     - Bär (N.Reg.Dat.Sg.Masc)",
                 "[ 44, 47]     -     -  Acc    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - ins (APPRART.Acc.Sg.Neut)",
                 "[ 48, 55]     -     -  Acc    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Gesicht (N.Reg.Acc.Sg.Neut)",
                 "[ 56, 57]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (SYM.Pun.Sent)" };               
@@ -1066,7 +1066,7 @@ public class RfTaggerTest
                 "APPR.Auf", "APPR.Außer", "APPR.Bis", "APPR.Dat", "APPR.Gen", "APPR.Hinter",
                 "APPR.In", "APPR.Je", "APPR.Namens", "APPR.Nom", "APPR.Per", "APPR.Pro",
                 "APPR.Unter", "APPR.Vor", "APPR.Zwischen", "APPR.Über", "APPRART.*.*.*", "APZR",
-                "CARD", "CONJ.Comp.-", "CONJ.Coord.-", "CONJ.Coord.Aber",
+                "CARD", "CONJ.Coord.-", "CONJ.Coord.Aber",
                 "CONJ.Coord.Als", "CONJ.Coord.Bis", "CONJ.Coord.Denn", "CONJ.Coord.Doch",
                 "CONJ.Coord.Noch", "CONJ.Coord.Wie", "CONJ.SubFin.-", "CONJ.SubInf.-", "FM", "ITJ",
                 "N.Name.*.*.*", "N.Reg.*.*.*", "PART.Ans", "PART.Deg", "PART.Verb", "PART.Zu",

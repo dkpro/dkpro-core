@@ -170,6 +170,11 @@
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.aclanthology-asl</artifactId>
 				<version>1.9.0-SNAPSHOT</version>
 			</dependency>
+            <dependency>
+                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                <artifactId>de.tudarmstadt.ukp.dkpro.core.io.ancora-asl</artifactId>
+                <version>1.9.0-SNAPSHOT</version>
+            </dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.annis-asl</artifactId>
@@ -432,6 +437,7 @@
 		<module>../dkpro-core-api-anomaly-asl</module>
 		<module>../dkpro-core-api-coref-asl</module>
 		<module>../dkpro-core-api-corpus-asl</module>
+		<module>../dkpro-core-api-discourse-asl</module>
 		<module>../dkpro-core-api-featurepath-asl</module>
 		<module>../dkpro-core-api-io-asl</module>
 		<module>../dkpro-core-api-lexmorph-asl</module>
@@ -449,6 +455,7 @@
 		<module>../dkpro-core-api-frequency-asl</module>
 	    <!-- IO modules -->
 		<module>../dkpro-core-io-aclanthology-asl</module>
+        <module>../dkpro-core-io-ancora-asl</module>
 		<module>../dkpro-core-io-annis-asl</module>
 		<module>../dkpro-core-io-bincas-asl</module>
 		<module>../dkpro-core-io-bliki-asl</module>

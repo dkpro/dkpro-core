@@ -83,9 +83,9 @@ ${Util.preparePassthrough(type.description)}
         .sort{ it.key }
         .findAll { id, format ->
             format.writerSpec?.analysisEngineMetaData?.capabilities?.any { 
-                it.outputs?.any { it.name == type.name } } };
+                it.inputs?.any { it.name == type.name } } };
     if (consumers) {            
-        producers.each { id, consumer -> 
+        consumers.each { id, consumer -> 
             if (consumer.spec) {
                 out.println Util.engineLink(id);
             }
@@ -148,7 +148,6 @@ include::{include-dir}sectionIntro${section}.adoc[]
             .findAll { it.description }
             .each { typesystem ->
 %>
-[small]#${(typesystem.sourceUrl as String) - (project.basedir.toURI().toURL() as String) - '../'}#
 ++++
 ${Util.preparePassthrough(typesystem.description)}
 ++++

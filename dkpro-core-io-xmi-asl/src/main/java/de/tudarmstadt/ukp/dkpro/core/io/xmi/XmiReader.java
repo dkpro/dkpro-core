@@ -59,6 +59,11 @@ public class XmiReader
         try {
             is = CompressionUtils.getInputStream(res.getLocation(), res.getInputStream());
 			XmiCasDeserializer.deserialize(is, aCAS, lenient);
+			
+			// Override language using PARAM_LANG if that is set
+			if (getLanguage() != null) {
+			    aCAS.setDocumentLanguage(getLanguage());
+			}
 		}
 		catch (SAXException e) {
 			throw new IOException(e);

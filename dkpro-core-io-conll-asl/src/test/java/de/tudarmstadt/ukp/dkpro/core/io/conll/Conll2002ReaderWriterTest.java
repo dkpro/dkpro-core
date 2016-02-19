@@ -45,8 +45,8 @@ public class Conll2002ReaderWriterTest
                         Conll2002Reader.PARAM_LANGUAGE, "de", 
                         Conll2002Reader.PARAM_HAS_HEADER, true, 
                         Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true, 
-                        Conll2002Reader.PARAM_COLUMN_SEPARATOR, "tab",
-                        Conll2002Reader.PARAM_READ_EMBEDDED_NAMED_ENTITY, true), 
+                        Conll2002Reader.PARAM_COLUMN_SEPARATOR, Conll2002Reader.ColumnSeparators.TAB.getName(),
+                        Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true), 
                 "conll/2002/germeval2014_test.conll.out",
         		"conll/2002/germeval2014_test.conll");
     }

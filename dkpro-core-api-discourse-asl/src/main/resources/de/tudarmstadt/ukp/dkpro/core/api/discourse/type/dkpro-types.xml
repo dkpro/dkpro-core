@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2016
+  ~ Ubiquitous Knowledge Processing (UKP) Lab
+  ~ Technische Universität Darmstadt
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+	<name>Discourse</name>
+	<description/>
+	<version>${version}</version>
+	<vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
+	<types>
+
+		<!-- RST types -->
+
+		<typeDescription>
+			<name>de.tudarmstadt.ukp.dkpro.core.api.discourse.type.rst.RSTTreeNode</name>
+			<description>RST Tree node</description>
+			<supertypeName>uima.tcas.Annotation</supertypeName>
+			<features>
+				<featureDescription>
+					<name>unitType</name>
+					<description>N or S (nucleus/satellite)</description>
+					<rangeTypeName>uima.cas.String</rangeTypeName>
+				</featureDescription>
+			</features>
+		</typeDescription>
+
+		<typeDescription>
+			<name>de.tudarmstadt.ukp.dkpro.core.api.discourse.type.rst.DiscourseRelation</name>
+			<supertypeName>de.tudarmstadt.ukp.dkpro.core.api.discourse.type.rst.RSTTreeNode
+			</supertypeName>
+			<features>
+				<featureDescription>
+					<name>relationType</name>
+					<description>Relation type (elaboration, contrast, etc.)</description>
+					<rangeTypeName>uima.cas.String</rangeTypeName>
+				</featureDescription>
+				<featureDescription>
+					<name>arg1</name>
+					<rangeTypeName>de.tudarmstadt.ukp.dkpro.core.api.discourse.type.rst.RSTTreeNode
+					</rangeTypeName>
+				</featureDescription>
+				<featureDescription>
+					<name>arg2</name>
+					<rangeTypeName>de.tudarmstadt.ukp.dkpro.core.api.discourse.type.rst.RSTTreeNode
+					</rangeTypeName>
+				</featureDescription>
+			</features>
+		</typeDescription>
+
+		<typeDescription>
+			<name>de.tudarmstadt.ukp.dkpro.core.api.discourse.type.rst.EDU</name>
+			<supertypeName>de.tudarmstadt.ukp.dkpro.core.api.discourse.type.rst.RSTTreeNode
+			</supertypeName>
+			<features>
+				<featureDescription>
+					<name>originalText</name>
+					<rangeTypeName>uima.cas.String</rangeTypeName>
+				</featureDescription>
+			</features>
+		</typeDescription>
+
+		<!-- PDTB types -->
+		<typeDescription>
+			<name>de.tudarmstadt.ukp.dkpro.core.api.discourse.type.pdtb.DiscourseArgument</name>
+			<description>Discourse argument (arg1, arg2)</description>
+			<supertypeName>uima.tcas.Annotation</supertypeName>
+			<features>
+				<featureDescription>
+					<name>parentRelationId</name>
+					<description>ID of the parent relation</description>
+					<rangeTypeName>uima.cas.Integer</rangeTypeName>
+				</featureDescription>
+				<featureDescription>
+					<name>argumentNumber</name>
+					<description>1 or 2</description>
+					<rangeTypeName>uima.cas.Integer</rangeTypeName>
+				</featureDescription>
+				<featureDescription>
+					<name>argumentType</name>
+					<description>argument type, e.g. Cause, etc.</description>
+					<rangeTypeName>uima.cas.String</rangeTypeName>
+				</featureDescription>
+			</features>
+		</typeDescription>
+		<typeDescription>
+			<name>de.tudarmstadt.ukp.dkpro.core.api.discourse.type.pdtb.DiscourseConnective</name>
+			<description>Discourse connective</description>
+			<supertypeName>uima.tcas.Annotation</supertypeName>
+			<features>
+				<featureDescription>
+					<name>connectiveType</name>
+					<description>connective type</description>
+					<rangeTypeName>uima.cas.String</rangeTypeName>
+				</featureDescription>
+				<featureDescription>
+					<name>parentRelationId</name>
+					<description>ID of the parent relation</description>
+					<rangeTypeName>uima.cas.Integer</rangeTypeName>
+				</featureDescription>
+			</features>
+		</typeDescription>
+		<typeDescription>
+			<name>de.tudarmstadt.ukp.dkpro.core.api.discourse.type.pdtb.DiscourseRelation</name>
+			<description>Discourse relation</description>
+			<supertypeName>uima.tcas.Annotation</supertypeName>
+			<features>
+				<featureDescription>
+					<name>relationId</name>
+					<description>id of the relation</description>
+					<rangeTypeName>uima.cas.Integer</rangeTypeName>
+				</featureDescription>
+				<featureDescription>
+					<name>arg1</name>
+					<description>arg 1</description>
+					<rangeTypeName>de.tudarmstadt.ukp.dkpro.core.api.discourse.type.pdtb.DiscourseArgument
+					</rangeTypeName>
+				</featureDescription>
+				<featureDescription>
+					<name>arg2</name>
+					<description>arg 2</description>
+					<rangeTypeName>de.tudarmstadt.ukp.dkpro.core.api.discourse.type.pdtb.DiscourseArgument
+					</rangeTypeName>
+				</featureDescription>
+			</features>
+		</typeDescription>
+
+		<typeDescription>
+			<name>de.tudarmstadt.ukp.dkpro.core.api.discourse.type.pdtb.ImplicitDiscourseRelation</name>
+			<description>Implicit discourse relation</description>
+			<supertypeName>de.tudarmstadt.ukp.dkpro.core.discourse.pdtb.DiscourseRelation
+			</supertypeName>
+		</typeDescription>
+
+		<typeDescription>
+			<name>de.tudarmstadt.ukp.dkpro.core.api.discourse.type.pdtb.ExplicitDiscourseRelation</name>
+			<description>Discourse relation</description>
+			<supertypeName>de.tudarmstadt.ukp.dkpro.core.api.discourse.type.pdtb.DiscourseRelation
+			</supertypeName>
+			<features>
+				<featureDescription>
+					<name>discourseConnective1</name>
+					<description>Discourse connective (in case of explicit relations)</description>
+					<rangeTypeName>
+						de.tudarmstadt.ukp.dkpro.core.api.discourse.type.pdtb.DiscourseConnective
+					</rangeTypeName>
+				</featureDescription>
+				<featureDescription>
+					<name>discourseConnective2</name>
+					<description>Discourse connective (in case of explicit relations)</description>
+					<rangeTypeName>
+						de.tudarmstadt.ukp.dkpro.core.api.discourse.type.pdtb.DiscourseConnective
+					</rangeTypeName>
+				</featureDescription>
+			</features>
+		</typeDescription>
+
+		<typeDescription>
+			<name>de.tudarmstadt.ukp.dkpro.core.api.discourse.type.pdtb.DiscourseAttribution</name>
+			<description>Attribution annotation (see PTDB for details); not connected
+				to any particular relation as it may belong to two relations thus is covered
+				by DiscourseRelation
+			</description>
+			<supertypeName>uima.tcas.Annotation</supertypeName>
+			<features>
+				<featureDescription>
+					<name>attributeId</name>
+					<rangeTypeName>uima.cas.Integer</rangeTypeName>
+				</featureDescription>
+			</features>
+		</typeDescription>
+
+	</types>
+</typeSystemDescription>

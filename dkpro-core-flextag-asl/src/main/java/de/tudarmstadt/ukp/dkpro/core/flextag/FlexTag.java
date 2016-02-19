@@ -43,7 +43,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.tc.api.type.TextClassificationOutcome;
-import de.tudarmstadt.ukp.dkpro.tc.ml.uima.TcAnnotatorSequence;
+import de.tudarmstadt.ukp.dkpro.tc.ml.uima.TcAnnotator;
 
 /**
  * Flexible part-of-speech tagger.
@@ -82,10 +82,10 @@ public class FlexTag
         mappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
                 language, modelProvider);
 
-        flexTagEngine = AnalysisEngineFactory.createEngine(TcAnnotatorSequence.class,
-                TcAnnotatorSequence.PARAM_TC_MODEL_LOCATION, modelProvider.getResource(),
-                TcAnnotatorSequence.PARAM_NAME_SEQUENCE_ANNOTATION, Sentence.class.getName(),
-                TcAnnotatorSequence.PARAM_NAME_UNIT_ANNOTATION, Token.class.getName());
+        flexTagEngine = AnalysisEngineFactory.createEngine(TcAnnotator.class,
+                TcAnnotator.PARAM_TC_MODEL_LOCATION, modelProvider.getResource(),
+                TcAnnotator.PARAM_NAME_SEQUENCE_ANNOTATION, Sentence.class.getName(),
+                TcAnnotator.PARAM_NAME_UNIT_ANNOTATION, Token.class.getName());
     }
 
     @Override

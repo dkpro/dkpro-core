@@ -1,0 +1,1 @@
+classpath*:de/tudarmstadt/ukp/dkpro/core/api/discourse/type/rst/type/dkpro-types.xml

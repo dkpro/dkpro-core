@@ -29,8 +29,8 @@
       "@type" : "http://vocab.lappsgrid.org/Token"
     }, {
       "id" : "dep-0",
-      "start" : 0,
-      "end" : 3,
+      "start" : -1,
+      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "nsubj",
       "features" : {
@@ -39,8 +39,8 @@
       }
     }, {
       "id" : "dep-1",
-      "start" : 4,
-      "end" : 8,
+      "start" : -1,
+      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "ROOT",
       "features" : {
@@ -49,8 +49,8 @@
       }
     }, {
       "id" : "dep-2",
-      "start" : 9,
-      "end" : 16,
+      "start" : -1,
+      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "nobj",
       "features" : {

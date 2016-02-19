@@ -18,6 +18,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
+import static java.util.Arrays.asList;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
@@ -277,8 +278,8 @@ public class StanfordCoreferenceResolver
             TreebankLanguagePack tlp = new PennTreebankLanguagePack();
             GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory(
                     tlp.punctuationWordRejectFilter(), tlp.typedDependencyHeadFinder());
-            ParserAnnotatorUtils.fillInParseAnnotations(false, true, gsf, sentence, treeCopy, 
-                    GrammaticalStructure.Extras.NONE);
+            ParserAnnotatorUtils.fillInParseAnnotations(false, true, gsf, sentence,
+                    asList(treeCopy), GrammaticalStructure.Extras.NONE);
             
             // https://github.com/dkpro/dkpro-core/issues/582
             SemanticGraph deps = sentence
