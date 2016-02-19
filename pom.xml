@@ -54,7 +54,7 @@
             </snapshots>
         </repository>
         <!-- For UIMA/uimaFIT RCs -->
-        <!--  
+        <!--
         <repository>
             <id>ext-staging</id>
             <name>Staging repo</name>
@@ -77,7 +77,7 @@
             </snapshots>
 		</repository>
         <!-- For DKPro Parent POM SNAPSHOT -->
-        <!--  
+        <!--
         <repository>
             <id>ukp-oss-snapshots</id>
             <url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-snapshots</url>
@@ -87,12 +87,18 @@
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
-        </repository>	
+        </repository>
         -->
+        <!-- added this to resolve fangorn artifact -->
+		<repository>
+			<id>ukp-oss</id>
+			<name>ukp-oss-releases</name>
+			<url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-ext-releases-local</url>
+		</repository>
     </repositories>
 	<pluginRepositories>
         <!-- For UIMA/uimaFIT RCs -->
-        <!--  
+        <!--
         <pluginRepository>
             <id>ext-staging</id>
             <name>Staging repo</name>
