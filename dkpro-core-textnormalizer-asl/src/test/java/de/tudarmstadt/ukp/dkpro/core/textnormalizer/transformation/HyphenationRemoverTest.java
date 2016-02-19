@@ -19,15 +19,24 @@
 package de.tudarmstadt.ukp.dkpro.core.textnormalizer.transformation;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTransformedText;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
+import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.jcas.JCas;
 import org.junit.Test;
+
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 
 public class HyphenationRemoverTest
 {
     @Test
-    public void test()
+    public void testHyphenationRemover()
         throws Exception
     {
         String inputText = "Ich habe ein- en super-tollen Bär-\nen.";
@@ -37,5 +46,36 @@ public class HyphenationRemoverTest
                 HyphenationRemover.PARAM_MODEL_LOCATION, "src/test/resources/dictionary/ngerman");
 
         assertTransformedText(normalizedText, inputText, "de", normalizer);
+    }
+
+    @Test
+    public void testHyphenationRemoverInPipeline()
+        throws Exception
+    {
+        final String language = "de";
+        final String variant = "maxent";
+        final String text = "Ich habe ein- en super-tollen Bär-\nen. "
+                + "Für eine Registrierung einer Organisation und eine EMail Adresse.";
+        final String[] sentences = { "Ich habe einen super-tollen Bären.",
+                "Für eine Registrierung einer Organisation und eine EMail Adresse." };
+        final String[] tokens = { "Ich", "habe", "einen", "super-tollen", "Bären", ".", "Für",
+                "eine", "Registrierung", "einer", "Organisation", "und", "eine", "EMail", "Adresse",
+                "." };
+
+        AnalysisEngineDescription normalizerAndSegmenter = createEngineDescription(
+                createEngineDescription(HyphenationRemover.class,
+                        HyphenationRemover.PARAM_MODEL_LOCATION,
+                        "src/test/resources/dictionary/ngerman"),
+                createEngineDescription(OpenNlpSegmenter.class, OpenNlpSegmenter.PARAM_LANGUAGE,
+                        "de", OpenNlpSegmenter.PARAM_VARIANT, variant));
+        AnalysisEngine engine = createEngine(normalizerAndSegmenter);
+
+        JCas jcas = engine.newJCas();
+        jcas.setDocumentLanguage(text);
+        jcas.setDocumentText(language);
+        engine.process(jcas);
+
+        AssertAnnotations.assertSentence(sentences, select(jcas, Sentence.class));
+        AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
     }
 }
