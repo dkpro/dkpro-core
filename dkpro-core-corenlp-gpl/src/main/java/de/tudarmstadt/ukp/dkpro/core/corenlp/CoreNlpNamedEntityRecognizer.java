@@ -23,7 +23,6 @@ import static org.apache.uima.util.Level.INFO;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -207,7 +206,7 @@ public class CoreNlpNamedEntityRecognizer
         converter.setPtb3Escaping(ptb3Escaping);
         converter.setQuoteBegin(quoteBegin);
         converter.setQuoteEnd(quoteEnd);
-        converter.setEncoding(Charset.forName(modelEncoding));
+        converter.setEncoding(modelEncoding);
         Annotation document = converter.convert(aJCas);
 
         // Actual processing

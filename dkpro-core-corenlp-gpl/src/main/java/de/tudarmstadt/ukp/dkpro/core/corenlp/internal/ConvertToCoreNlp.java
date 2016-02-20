@@ -72,14 +72,14 @@ public class ConvertToCoreNlp
     private List<String> quoteEnd;
     private Charset encoding;
 
-    public Charset getEncoding()
+    public String getEncoding()
     {
-        return encoding;
+        return encoding != null ? encoding.name() : null;
     }
 
-    public void setEncoding(Charset aEncoding)
+    public void setEncoding(String aEncoding)
     {
-        encoding = aEncoding;
+        encoding = aEncoding != null ? Charset.forName(aEncoding) : null;
     }
 
     public boolean isPtb3Escaping()
