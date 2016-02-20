@@ -23,11 +23,13 @@ import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.fit.util.JCasUtil.selectFollowing;
 import static org.apache.uima.fit.util.JCasUtil.selectPreceding;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
@@ -38,8 +40,17 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
-import edu.stanford.nlp.ling.CoreAnnotations.*;
 import edu.stanford.nlp.ling.CoreAnnotations;
+import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetBeginAnnotation;
+import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetEndAnnotation;
+import edu.stanford.nlp.ling.CoreAnnotations.IndexAnnotation;
+import edu.stanford.nlp.ling.CoreAnnotations.LemmaAnnotation;
+import edu.stanford.nlp.ling.CoreAnnotations.NamedEntityTagAnnotation;
+import edu.stanford.nlp.ling.CoreAnnotations.PartOfSpeechAnnotation;
+import edu.stanford.nlp.ling.CoreAnnotations.SentenceIndexAnnotation;
+import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
+import edu.stanford.nlp.ling.CoreAnnotations.StemAnnotation;
+import edu.stanford.nlp.ling.CoreAnnotations.TokensAnnotation;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.ling.Word;
@@ -48,8 +59,8 @@ import edu.stanford.nlp.process.CoreLabelTokenFactory;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.trees.LabeledScoredTreeFactory;
 import edu.stanford.nlp.trees.Tree;
-import edu.stanford.nlp.trees.TreeFactory;
 import edu.stanford.nlp.trees.TreeCoreAnnotations.TreeAnnotation;
+import edu.stanford.nlp.trees.TreeFactory;
 import edu.stanford.nlp.util.CoreMap;
 
 public class ConvertToCoreNlp
@@ -59,7 +70,18 @@ public class ConvertToCoreNlp
     private boolean ptb3Escaping;
     private List<String> quoteBegin;
     private List<String> quoteEnd;
-    
+    private Charset encoding;
+
+    public Charset getEncoding()
+    {
+        return encoding;
+    }
+
+    public void setEncoding(Charset aEncoding)
+    {
+        encoding = aEncoding;
+    }
+
     public boolean isPtb3Escaping()
     {
         return ptb3Escaping;
@@ -98,7 +120,16 @@ public class ConvertToCoreNlp
         // Sentences
         List<CoreMap> sentences = new ArrayList<>();
         for (Sentence s : select(aJCas, Sentence.class)) {
-            Annotation sentence = new Annotation(s.getCoveredText());
+            if (StringUtils.isBlank(s.getCoveredText())) {
+                continue;
+            }
+            
+            String sentenceText = s.getCoveredText();
+            if (encoding != null && !"UTF-8".equals(encoding.name())) {
+                sentenceText = new String(sentenceText.getBytes(), encoding);                
+            }
+            
+            Annotation sentence = new Annotation(sentenceText);
             sentence.set(CharacterOffsetBeginAnnotation.class, s.getBegin());
             sentence.set(CharacterOffsetEndAnnotation.class, s.getEnd());
             sentence.set(SentenceIndexAnnotation.class, sentences.size());
@@ -106,7 +137,12 @@ public class ConvertToCoreNlp
             // Tokens
             List<CoreLabel> tokens = new ArrayList<>();
             for (Token t : selectCovered(Token.class, s)) {
-                CoreLabel token = tokenFactory.makeToken(t.getCoveredText(), t.getBegin(),
+                String tokenText = t.getCoveredText();
+                if (encoding != null && !"UTF-8".equals(encoding.name())) {
+                    tokenText = new String(tokenText.getBytes(), encoding);                
+                }
+                
+                CoreLabel token = tokenFactory.makeToken(tokenText, t.getBegin(),
                         t.getEnd() - t.getBegin());
                 // First add token so that tokens.size() returns a 1-based counting as required
                 // by IndexAnnotation

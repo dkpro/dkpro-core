@@ -22,6 +22,7 @@ import static org.apache.uima.util.Level.INFO;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.List;
 
 import org.apache.uima.UimaContext;
@@ -87,6 +88,13 @@ public class CoreNlpPosTagger
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
     private String modelLocation;
+
+    /**
+     * The character encoding used by the model.
+     */
+    public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
+    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = false)
+    private String modelEncoding;
 
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
@@ -167,6 +175,7 @@ public class CoreNlpPosTagger
         converter.setPtb3Escaping(ptb3Escaping);
         converter.setQuoteBegin(quoteBegin);
         converter.setQuoteEnd(quoteEnd);
+        converter.setEncoding(Charset.forName(modelEncoding));
         Annotation document = converter.convert(aJCas);
 
         // Actual processing
