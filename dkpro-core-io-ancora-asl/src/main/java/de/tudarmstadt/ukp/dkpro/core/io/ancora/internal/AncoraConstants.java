@@ -22,7 +22,13 @@ public final class AncoraConstants
     public static final String TAG_ARTICLE = "article";
     public static final String TAG_SENTENCE = "sentence";
     
-    public static final String ATTR_WD = "wd";
-    public static final String ATTR_LEM = "lem";
+    public static final String ATTR_WORD = "wd";
+    public static final String ATTR_LEMMA = "lem";
     public static final String ATTR_POS = "pos";
-}
+    public static final String ATTR_FUNC = "func";
+    public static final String ATTR_NAMED_ENTITY = "ne";
+    public static final String ATTR_POSTYPE = "postype";
+    public static final String ATTR_ELLIPTIC = "elliptic";
+    public static final String ATTR_PUNCT = "punct";
+    public static final String ATTR_GENDER = "gen";
+    public static final String ATTR_NUMBER = "num";}
