@@ -29,6 +29,9 @@
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.corenlp-gpl</artifactId>
     <packaging>jar</packaging>
 	<name>DKPro Core GPL - Stanford CoreNLP Suite</name>
+    <properties>
+        <corenlp.version>3.5.2</corenlp.version>
+    </properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
@@ -49,43 +52,43 @@
 		<dependency>
 			<groupId>edu.stanford.nlp</groupId>
 			<artifactId>stanford-corenlp</artifactId>
-			<version>3.5.2</version>
+			<version>${corenlp.version}</version>
 		</dependency>
         <!--
         <dependency>
             <groupId>edu.stanford.nlp</groupId>
             <artifactId>stanford-corenlp</artifactId>
-            <version>3.6.0</version>
+            <version>${corenlp.version}</version>
             <classifier>models-chinese</classifier>
         </dependency>
         <dependency>
             <groupId>edu.stanford.nlp</groupId>
             <artifactId>stanford-corenlp</artifactId>
-            <version>3.6.0</version>
+            <version>${corenlp.version}</version>
             <classifier>models-english</classifier>
         </dependency>
         <dependency>
             <groupId>edu.stanford.nlp</groupId>
             <artifactId>stanford-corenlp</artifactId>
-            <version>3.6.0</version>
+            <version>${corenlp.version}</version>
             <classifier>models-french</classifier>
         </dependency>
         <dependency>
             <groupId>edu.stanford.nlp</groupId>
             <artifactId>stanford-corenlp</artifactId>
-            <version>3.6.0</version>
+            <version>${corenlp.version}</version>
             <classifier>models-german</classifier>
         </dependency>
         <dependency>
             <groupId>edu.stanford.nlp</groupId>
             <artifactId>stanford-corenlp</artifactId>
-            <version>3.6.0</version>
+            <version>${corenlp.version}</version>
             <classifier>models-spanish</classifier>
         </dependency>
         <dependency>
             <groupId>edu.stanford.nlp</groupId>
             <artifactId>stanford-corenlp</artifactId>
-            <version>3.6.0</version>
+            <version>${corenlp.version}</version>
             <classifier>models</classifier>
         </dependency>
         -->
@@ -419,12 +422,24 @@
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-all.3class.caseless.distsim.crf</artifactId>
+				<!--
+				This is the CoreNLP 3.6.0 version, but it produces no annotations anymore!
 				<version>20160110.0</version>
+				
+				Sticking with 3.5.2 version for the moment
+				-->
+				<version>20150420.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-nowiki.3class.caseless.distsim.crf</artifactId>
+				<!--
+				This is the CoreNLP 3.6.0 version, but it it fails during loading with a file not found exception
 				<version>20160110.0</version>
+				
+				Sticking with 3.5.2 version for the moment
+				-->
+				<version>20140225.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
