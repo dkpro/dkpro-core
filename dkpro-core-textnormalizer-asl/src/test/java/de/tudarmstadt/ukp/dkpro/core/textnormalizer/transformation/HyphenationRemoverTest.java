@@ -97,34 +97,31 @@ public class HyphenationRemoverTest
         String sourcePath = "src/test/resources/texts/test3.txt";
         String outputPath = "src/test/resources/texts/test3-out.txt";
 
-        final String[] sentences = { "Ich habe einen super-tollen Bären.",
-                "Für eine Registrierung einer Organisation und eine EMail Adresse." };
-        final String expectedOutput = sentences[0] + System.lineSeparator() + sentences[1];
+        final String[] sentences = { "Ich habe einen super-tollen Bären .",
+                "Für eine Registrierung einer Organisation und eine EMail Adresse ." };
+        final String expectedOutput = sentences[0] + System.lineSeparator() + sentences[1]
+                + System.lineSeparator();
 
         /* process input file */
         final CollectionReader reader = createReader(TextReader.class,
                 TextReader.PARAM_SOURCE_LOCATION, sourcePath);
 
-        AnalysisEngineDescription writer = createEngineDescription(
-                TokenizedTextWriter.class,
+        AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
                 TokenizedTextWriter.PARAM_TARGET_LOCATION, outputPath,
                 TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
                 TokenizedTextWriter.PARAM_OVERWRITE, true);
 
         AnalysisEngineDescription hyphenationRemover = createEngineDescription(
-                HyphenationRemover.class,
-                HyphenationRemover.PARAM_MODEL_LOCATION, "src/test/resources/dictionary/ngerman");
-        
-        AnalysisEngineDescription segmenter = createEngineDescription(
-                OpenNlpSegmenter.class, 
-                OpenNlpSegmenter.PARAM_LANGUAGE, language, 
-                OpenNlpSegmenter.PARAM_VARIANT, variant);
+                HyphenationRemover.class, HyphenationRemover.PARAM_MODEL_LOCATION,
+                "src/test/resources/dictionary/ngerman");
+
+        AnalysisEngineDescription segmenter = createEngineDescription(OpenNlpSegmenter.class,
+                OpenNlpSegmenter.PARAM_LANGUAGE, language, OpenNlpSegmenter.PARAM_VARIANT, variant);
 
         SimplePipeline.runPipeline(reader, hyphenationRemover, segmenter, writer);
 
         /* check the output file */
-        final CollectionReaderDescription readerDesc = createReaderDescription(
-                TextReader.class,
+        final CollectionReaderDescription readerDesc = createReaderDescription(TextReader.class,
                 TextReader.PARAM_SOURCE_LOCATION, outputPath);
 
         JCas jcas = new JCasIterable(readerDesc).iterator().next();
