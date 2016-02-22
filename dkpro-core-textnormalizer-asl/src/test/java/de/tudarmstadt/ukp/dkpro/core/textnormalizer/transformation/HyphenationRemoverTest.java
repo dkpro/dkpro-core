@@ -21,23 +21,21 @@ package de.tudarmstadt.ukp.dkpro.core.textnormalizer.transformation;
 import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 
+import static org.apache.commons.io.FileUtils.*;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
-import org.apache.uima.collection.CollectionReaderDescription;
-import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.pipeline.SimplePipeline;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.util.FileUtils;
+import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TokenizedTextWriter;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class HyphenationRemoverTest
 {
@@ -60,43 +58,39 @@ public class HyphenationRemoverTest
     public void testHyphenationRemoverInPipelineReaderWriter()
         throws Exception
     {
+        File outputPath = testContext.getTestOutputFolder();
+        
         final String language = "de";
         final String variant = "maxent";
         String sourcePath = "src/test/resources/texts/test3.txt";
-        String outputPath = "src/test/resources/texts/test3-out.txt";
 
-        final String[] sentences = { "Ich habe einen super-tollen Bären .",
-                "Für eine Registrierung einer Organisation und eine EMail Adresse ." };
-        final String expectedOutput = sentences[0] + System.lineSeparator() + sentences[1]
-                + System.lineSeparator();
+        final String expected = "Ich habe einen super-tollen Bären .\n"+
+                "Für eine Registrierung einer Organisation und eine EMail Adresse .\n";
 
         /* process input file */
         final CollectionReader reader = createReader(TextReader.class,
                 TextReader.PARAM_SOURCE_LOCATION, sourcePath);
 
-        AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
-                TokenizedTextWriter.PARAM_TARGET_LOCATION, outputPath,
+        AnalysisEngineDescription hyphenationRemover = createEngineDescription(
+                HyphenationRemover.class, 
+                HyphenationRemover.PARAM_MODEL_LOCATION, RESOURCE_GERMAN_DICTIONARY);
+
+        AnalysisEngineDescription segmenter = createEngineDescription(
+                OpenNlpSegmenter.class,
+                OpenNlpSegmenter.PARAM_LANGUAGE, language, 
+                OpenNlpSegmenter.PARAM_VARIANT, variant);
+
+        AnalysisEngineDescription writer = createEngineDescription(
+                TokenizedTextWriter.class,
+                TokenizedTextWriter.PARAM_TARGET_LOCATION, new File(outputPath, "test3.txt"),
                 TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
                 TokenizedTextWriter.PARAM_OVERWRITE, true);
 
-        AnalysisEngineDescription hyphenationRemover = createEngineDescription(
-                HyphenationRemover.class, HyphenationRemover.PARAM_MODEL_LOCATION,
-                RESOURCE_GERMAN_DICTIONARY);
-
-        AnalysisEngineDescription segmenter = createEngineDescription(OpenNlpSegmenter.class,
-                OpenNlpSegmenter.PARAM_LANGUAGE, language, OpenNlpSegmenter.PARAM_VARIANT, variant);
-
         SimplePipeline.runPipeline(reader, hyphenationRemover, segmenter, writer);
 
-        /* check the output file */
-        final CollectionReaderDescription readerDesc = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, outputPath);
-
-        JCas jcas = new JCasIterable(readerDesc).iterator().next();
-        try{
-            assertEquals(expectedOutput, jcas.getDocumentText());
-        }finally{
-            FileUtils.deleteRecursive(new File(outputPath));
-        }
+        assertEquals(expected, readFileToString(new File(outputPath, "test3.txt"), "UTF-8"));
     }
+
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }
