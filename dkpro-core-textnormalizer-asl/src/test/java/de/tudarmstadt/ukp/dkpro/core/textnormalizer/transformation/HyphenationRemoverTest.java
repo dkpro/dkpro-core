@@ -26,8 +26,6 @@ import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDe
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
 
-import java.io.File;
-
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
@@ -107,24 +105,26 @@ public class HyphenationRemoverTest
         final CollectionReader reader = createReader(TextReader.class,
                 TextReader.PARAM_SOURCE_LOCATION, sourcePath);
 
-        File outputFile = new File(outputPath);
-        AnalysisEngine writer = createEngine(TokenizedTextWriter.class,
-                TokenizedTextWriter.PARAM_TARGET_LOCATION, outputFile,
+        AnalysisEngineDescription writer = createEngineDescription(
+                TokenizedTextWriter.class,
+                TokenizedTextWriter.PARAM_TARGET_LOCATION, outputPath,
                 TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
                 TokenizedTextWriter.PARAM_OVERWRITE, true);
 
-        AnalysisEngineDescription hyphenationRemoverAndSegmenter = createEngineDescription(
-                createEngineDescription(HyphenationRemover.class,
-                        HyphenationRemover.PARAM_MODEL_LOCATION,
-                        "src/test/resources/dictionary/ngerman"),
-                createEngineDescription(OpenNlpSegmenter.class, OpenNlpSegmenter.PARAM_LANGUAGE,
-                        language, OpenNlpSegmenter.PARAM_VARIANT, variant));
+        AnalysisEngineDescription hyphenationRemover = createEngineDescription(
+                HyphenationRemover.class,
+                HyphenationRemover.PARAM_MODEL_LOCATION, "src/test/resources/dictionary/ngerman");
+        
+        AnalysisEngineDescription segmenter = createEngineDescription(
+                OpenNlpSegmenter.class, 
+                OpenNlpSegmenter.PARAM_LANGUAGE, language, 
+                OpenNlpSegmenter.PARAM_VARIANT, variant);
 
-        AnalysisEngine engine = createEngine(hyphenationRemoverAndSegmenter);
-        SimplePipeline.runPipeline(reader, engine, writer);
+        SimplePipeline.runPipeline(reader, hyphenationRemover, segmenter, writer);
 
         /* check the output file */
-        final CollectionReaderDescription readerDesc = createReaderDescription(TextReader.class,
+        final CollectionReaderDescription readerDesc = createReaderDescription(
+                TextReader.class,
                 TextReader.PARAM_SOURCE_LOCATION, outputPath);
 
         JCas jcas = new JCasIterable(readerDesc).iterator().next();
