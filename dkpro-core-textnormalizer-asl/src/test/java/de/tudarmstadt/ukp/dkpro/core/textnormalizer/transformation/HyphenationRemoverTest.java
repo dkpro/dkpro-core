@@ -19,31 +19,30 @@
 package de.tudarmstadt.ukp.dkpro.core.textnormalizer.transformation;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTransformedText;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
 
-import org.apache.uima.analysis_engine.AnalysisEngine;
+import java.io.File;
+
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.util.FileUtils;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TokenizedTextWriter;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 
 public class HyphenationRemoverTest
 {
+    private static final String RESOURCE_GERMAN_DICTIONARY = "src/test/resources/dictionary/ngerman";
+
     @Test
     public void testHyphenationRemover()
         throws Exception
@@ -52,40 +51,9 @@ public class HyphenationRemoverTest
         String normalizedText = "Ich habe einen super-tollen Bären.";
 
         AnalysisEngineDescription normalizer = createEngineDescription(HyphenationRemover.class,
-                HyphenationRemover.PARAM_MODEL_LOCATION, "src/test/resources/dictionary/ngerman");
+                HyphenationRemover.PARAM_MODEL_LOCATION, RESOURCE_GERMAN_DICTIONARY);
 
         assertTransformedText(normalizedText, inputText, "de", normalizer);
-    }
-
-    @Test
-    public void testHyphenationRemoverInPipeline()
-        throws Exception
-    {
-        final String language = "de";
-        final String variant = "maxent";
-        final String text = "Ich habe ein- en super-tollen Bär-\nen. "
-                + "Für eine Registrierung einer Organisation und eine EMail Adresse.";
-        final String[] sentences = { "Ich habe einen super-tollen Bären.",
-                "Für eine Registrierung einer Organisation und eine EMail Adresse." };
-        final String[] tokens = { "Ich", "habe", "einen", "super-tollen", "Bären", ".", "Für",
-                "eine", "Registrierung", "einer", "Organisation", "und", "eine", "EMail", "Adresse",
-                "." };
-
-        AnalysisEngineDescription normalizerAndSegmenter = createEngineDescription(
-                createEngineDescription(HyphenationRemover.class,
-                        HyphenationRemover.PARAM_MODEL_LOCATION,
-                        "src/test/resources/dictionary/ngerman"),
-                createEngineDescription(OpenNlpSegmenter.class, OpenNlpSegmenter.PARAM_LANGUAGE,
-                        "de", OpenNlpSegmenter.PARAM_VARIANT, variant));
-        AnalysisEngine engine = createEngine(normalizerAndSegmenter);
-
-        JCas jcas = engine.newJCas();
-        jcas.setDocumentLanguage(language);
-        jcas.setDocumentText(text);
-        engine.process(jcas);
-
-        AssertAnnotations.assertSentence(sentences, select(jcas, Sentence.class));
-        AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
     }
 
     @Test
@@ -113,7 +81,7 @@ public class HyphenationRemoverTest
 
         AnalysisEngineDescription hyphenationRemover = createEngineDescription(
                 HyphenationRemover.class, HyphenationRemover.PARAM_MODEL_LOCATION,
-                "src/test/resources/dictionary/ngerman");
+                RESOURCE_GERMAN_DICTIONARY);
 
         AnalysisEngineDescription segmenter = createEngineDescription(OpenNlpSegmenter.class,
                 OpenNlpSegmenter.PARAM_LANGUAGE, language, OpenNlpSegmenter.PARAM_VARIANT, variant);
@@ -125,6 +93,10 @@ public class HyphenationRemoverTest
                 TextReader.PARAM_SOURCE_LOCATION, outputPath);
 
         JCas jcas = new JCasIterable(readerDesc).iterator().next();
-        assertEquals(expectedOutput, jcas.getDocumentText());
+        try{
+            assertEquals(expectedOutput, jcas.getDocumentText());
+        }finally{
+            FileUtils.deleteRecursive(new File(outputPath));
+        }
     }
 }
