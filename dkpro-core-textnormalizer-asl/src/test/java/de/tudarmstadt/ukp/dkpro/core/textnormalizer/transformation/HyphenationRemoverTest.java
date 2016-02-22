@@ -21,15 +21,26 @@ package de.tudarmstadt.ukp.dkpro.core.textnormalizer.transformation;
 import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.junit.Assert.assertEquals;
+
+import java.io.File;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.collection.CollectionReaderDescription;
+import org.apache.uima.fit.pipeline.JCasIterable;
+import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
+import de.tudarmstadt.ukp.dkpro.core.io.text.TokenizedTextWriter;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 
@@ -77,5 +88,46 @@ public class HyphenationRemoverTest
 
         AssertAnnotations.assertSentence(sentences, select(jcas, Sentence.class));
         AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
+    }
+
+    @Test
+    public void testHyphenationRemoverInPipelineReaderWriter()
+        throws Exception
+    {
+        final String language = "de";
+        final String variant = "maxent";
+        String sourcePath = "src/test/resources/texts/test3.txt";
+        String outputPath = "src/test/resources/texts/test3-out.txt";
+
+        final String[] sentences = { "Ich habe einen super-tollen Bären.",
+                "Für eine Registrierung einer Organisation und eine EMail Adresse." };
+        final String expectedOutput = sentences[0] + System.lineSeparator() + sentences[1];
+
+        /* process input file */
+        final CollectionReader reader = createReader(TextReader.class,
+                TextReader.PARAM_SOURCE_LOCATION, sourcePath);
+
+        File outputFile = new File(outputPath);
+        AnalysisEngine writer = createEngine(TokenizedTextWriter.class,
+                TokenizedTextWriter.PARAM_TARGET_LOCATION, outputFile,
+                TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
+                TokenizedTextWriter.PARAM_OVERWRITE, true);
+
+        AnalysisEngineDescription hyphenationRemoverAndSegmenter = createEngineDescription(
+                createEngineDescription(HyphenationRemover.class,
+                        HyphenationRemover.PARAM_MODEL_LOCATION,
+                        "src/test/resources/dictionary/ngerman"),
+                createEngineDescription(OpenNlpSegmenter.class, OpenNlpSegmenter.PARAM_LANGUAGE,
+                        language, OpenNlpSegmenter.PARAM_VARIANT, variant));
+
+        AnalysisEngine engine = createEngine(hyphenationRemoverAndSegmenter);
+        SimplePipeline.runPipeline(reader, engine, writer);
+
+        /* check the output file */
+        final CollectionReaderDescription readerDesc = createReaderDescription(TextReader.class,
+                TextReader.PARAM_SOURCE_LOCATION, outputPath);
+
+        JCas jcas = new JCasIterable(readerDesc).iterator().next();
+        assertEquals(expectedOutput, jcas.getDocumentText());
     }
 }
