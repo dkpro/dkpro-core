@@ -71,8 +71,8 @@ public class HyphenationRemoverTest
         AnalysisEngine engine = createEngine(normalizerAndSegmenter);
 
         JCas jcas = engine.newJCas();
-        jcas.setDocumentLanguage(text);
-        jcas.setDocumentText(language);
+        jcas.setDocumentLanguage(language);
+        jcas.setDocumentText(text);
         engine.process(jcas);
 
         AssertAnnotations.assertSentence(sentences, select(jcas, Sentence.class));
