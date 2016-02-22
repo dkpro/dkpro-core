@@ -34,10 +34,10 @@ import java.util.List;
 import java.util.Properties;
 import java.util.zip.GZIPInputStream;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.reflect.FieldUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
@@ -369,6 +369,11 @@ public class StanfordParser
 
         while (typeToParseIterator.hasNext()) {
             Annotation currAnnotationToParse = typeToParseIterator.next();
+            
+            if (StringUtils.isBlank(currAnnotationToParse.getCoveredText())) {
+                continue;
+            }
+            
             List<HasWord> tokenizedSentence = new ArrayList<HasWord>();
             List<Token> tokens = new ArrayList<Token>();
 
@@ -408,7 +413,9 @@ public class StanfordParser
                 sfAnnotator.setPosMappingProvider(posMappingProvider);
                 sfAnnotator.setConstituentMappingProvider(constituentMappingProvider);
             }
-            catch (CASException e) {
+            catch (Exception e) {
+                getLogger().error(
+                        "Unable to parse [" + currAnnotationToParse.getCoveredText() + "]");
                 throw new AnalysisEngineProcessException(e);
             }
 
