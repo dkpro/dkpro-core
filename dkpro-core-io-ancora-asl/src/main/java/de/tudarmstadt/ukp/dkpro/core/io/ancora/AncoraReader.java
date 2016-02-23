@@ -17,13 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.ancora;
 
-import static de.tudarmstadt.ukp.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_GENDER;
 import static de.tudarmstadt.ukp.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_LEMMA;
-import static de.tudarmstadt.ukp.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_NAMED_ENTITY;
-import static de.tudarmstadt.ukp.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_NUMBER;
 import static de.tudarmstadt.ukp.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_POS;
-import static de.tudarmstadt.ukp.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_POSTYPE;
-import static de.tudarmstadt.ukp.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_PUNCT;
 import static de.tudarmstadt.ukp.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_WORD;
 import static de.tudarmstadt.ukp.dkpro.core.io.ancora.internal.AncoraConstants.TAG_SENTENCE;
 import static java.util.Arrays.asList;
@@ -40,7 +35,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.FeatureStructure;
@@ -124,9 +118,17 @@ public class AncoraReader
     protected String posTagset;
     
     public static final String PARAM_SPLIT_MULTI_WORD_TOKENS = "splitMultiWordTokens";
-    @ConfigurationParameter(name = PARAM_SPLIT_MULTI_WORD_TOKENS, mandatory = true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_SPLIT_MULTI_WORD_TOKENS, mandatory = true, defaultValue="true")
     protected boolean splitMultiWordTokens;
 
+    public static final String PARAM_DROP_SENTENCES_WITH_MISSING_POS = "dropSentencesMissingPosTags";
+    @ConfigurationParameter(name = PARAM_DROP_SENTENCES_WITH_MISSING_POS, mandatory = true, defaultValue="false")
+    protected boolean dropSentencesMissingPosTags;
+    
+    public static final String PARAM_REDUCE_TAGSET = "reduceTagset";
+    @ConfigurationParameter(name = PARAM_REDUCE_TAGSET, mandatory = true, defaultValue="true")
+    protected boolean reduceTagset;
+    
     private MappingProvider posMappingProvider;
 
     @Override
@@ -182,6 +184,56 @@ public class AncoraReader
         }
         finally {
             closeQuietly(is);
+        }
+        
+        if (dropSentencesMissingPosTags) {
+            List<FeatureStructure> toRemove = new ArrayList<>();
+            
+            // Remove sentences without pos TAGs
+            for (Sentence s : select(aJCas, Sentence.class)) {
+                boolean remove = false;
+                for (Token t : selectCovered(Token.class, s)) {
+                    if (t.getPos() == null) {
+                        toRemove.add(s);
+                        remove = true;
+                        break;
+                    }
+                }
+                
+                if (remove) {
+                    for (Token t : selectCovered(Token.class, s)) {
+                        toRemove.add(t);
+                        if (t.getLemma() != null) {
+                            toRemove.add(t.getLemma());
+                        }
+                        if (t.getPos() != null) {
+                            toRemove.add(t.getPos());
+                        }
+                    }
+                }
+            }
+            
+            for (FeatureStructure fs : toRemove) {
+                aJCas.getCas().removeFsFromIndexes(fs);
+            }
+            
+            // Remove tokens without pos tags that are located *BETWEEN* sentences!
+            toRemove.clear();
+            for (Token t : select(aJCas, Token.class)) {
+                if (t.getPos() == null) {
+                    toRemove.add(t);
+                    if (t.getLemma() != null) {
+                        toRemove.add(t.getLemma());
+                    }
+                    if (t.getPos() != null) {
+                        toRemove.add(t.getPos());
+                    }
+                }
+            }
+            
+            for (FeatureStructure fs : toRemove) {
+                aJCas.getCas().removeFsFromIndexes(fs);
+            }
         }
     }
     
