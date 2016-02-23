@@ -58,6 +58,25 @@ public class TokenizedTextWriterTest
     }
 
     @Test
+    public void testMultipleFiles()
+            throws UIMAException, IOException
+    {
+        String text = "This is the 1st sentence .\nHere is another sentence .";
+        File targetDir = new File("target/TokenizedTextWriterTest.dir");
+        File targetFile = new File(targetDir, "id.txt");
+        File tokenized = new File("src/test/resources/tokenizedTexts/textTokenized.txt");
+
+        AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
+                TokenizedTextWriter.PARAM_TARGET_LOCATION, targetDir,
+                TokenizedTextWriter.PARAM_SINGULAR_TARGET, false,
+                TokenizedTextWriter.PARAM_OVERWRITE, true);
+        TestRunner.runTest("id", writer, "en", text);
+        assertTrue(targetDir.isDirectory());
+        assertTrue(targetFile.exists());
+        assertTrue(FileUtils.contentEquals(tokenized, targetFile));
+    }
+
+    @Test
     public void testTokens()
             throws UIMAException, IOException
     {
