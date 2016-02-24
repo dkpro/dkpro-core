@@ -33,6 +33,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.util.Collections;
 import java.util.Set;
@@ -92,6 +93,13 @@ public class TokenizedTextWriter
     @ConfigurationParameter(name = PARAM_STOPWORDS_FILE, mandatory = false)
     private File stopwordsFile;
     private Set<String> stopwords;
+
+    /**
+     * Set the output file extension. Default: {@code .txt}.
+     */
+    public static final String PARAM_EXTENSION = "extension";
+    @ConfigurationParameter(name = PARAM_EXTENSION, mandatory = true, defaultValue = ".txt")
+    private String extension = ".txt";
 
     /**
      * Read a file containing stopwords (one per line).
@@ -161,19 +169,15 @@ public class TokenizedTextWriter
      * the specified annotations type to the output file. Every sentence is written to a single
      * line; the tokens are separated by whitespaces.
      *
-     * @param aJCas
-     *            a {@link JCas}
-     * @param type
-     *            the annotation {@link Type}
-     * @param fpInfo
-     *            a {@link FeaturePathInfo} to be used to the {@link FeaturePathIterator}
-     * @throws IOException
-     *             if an IO error occurs while writing
+     * @param aJCas  a {@link JCas}
+     * @param type   the annotation {@link Type}
+     * @param fpInfo a {@link FeaturePathInfo} to be used to the {@link FeaturePathIterator}
+     * @throws IOException if an IO error occurs while writing
      */
     private void writeTokens(JCas aJCas, Type type, FeaturePathInfo fpInfo)
             throws IOException
     {
-        NamedOutputStream outputStream = getOutputStream(aJCas, ".txt");
+        NamedOutputStream outputStream = getOutputStream(aJCas, extension);
 
         /* iterate over sentences */
         for (Sentence sentence : select(aJCas, Sentence.class)) {
@@ -181,17 +185,14 @@ public class TokenizedTextWriter
             FeaturePathIterator<AnnotationFS> valueIterator = new FeaturePathIterator<>(
                     selectCovered(aJCas.getCas(), type, sentence).iterator(), fpInfo);
 
-            boolean isFirst = true; // this is the first token of a sentence
+            if (valueIterator.hasNext()) {
+                // write first token
+                writeToken(outputStream, valueIterator.next().getValue());
+            }
             while (valueIterator.hasNext()) {
-                String text = valueIterator.next().getValue();
-                text = stopwords.contains(text.toLowerCase()) ? STOPWORD_REPLACEMENT : text;
-                text = (numberRegex != null && text.matches(numberRegex))
-                        ? NUMBER_REPLACEMENT
-                        : text;
-                outputStream.write(isFirst ?
-                        text.getBytes(targetEncoding) :
-                        (TOKEN_SEPARATOR + text).getBytes(targetEncoding));
-                isFirst = false;
+                // write other tokens
+                outputStream.write(TOKEN_SEPARATOR.getBytes(targetEncoding));
+                writeToken(outputStream, valueIterator.next().getValue());
             }
             getLogger().trace("End of sentence.");
             outputStream.write(System.lineSeparator().getBytes(targetEncoding));
@@ -199,14 +200,29 @@ public class TokenizedTextWriter
     }
 
     /**
+     * Write a token while replacing stopwords and numbers if specified,
+     *
+     * @param outputStream the {@link OutputStream} to write to
+     * @param text         the token to write
+     * @throws IOException if a low-level I/O error occurs
+     */
+    private void writeToken(OutputStream outputStream, String text)
+            throws IOException
+    {
+        text = stopwords.contains(text.toLowerCase()) ? STOPWORD_REPLACEMENT : text;
+        text = numberRegex != null && text.matches(numberRegex)
+                ? NUMBER_REPLACEMENT
+                : text;
+        outputStream.write(text.getBytes(targetEncoding));
+    }
+
+    /**
      * Generate a feature path info.
      *
-     * @param segments
-     *            an array of strings previously split so that the first element represents the
-     *            feature type and the second element (if applicable) contains the feature path.
+     * @param segments an array of strings previously split so that the first element represents the
+     *                 feature type and the second element (if applicable) contains the feature path.
      * @return a {@link FeaturePathInfo}
-     * @throws FeaturePathException
-     *             if an error occurs during initialization of the feature path
+     * @throws FeaturePathException if an error occurs during initialization of the feature path
      */
     private FeaturePathInfo initFeaturePathInfo(String[] segments)
             throws FeaturePathException
