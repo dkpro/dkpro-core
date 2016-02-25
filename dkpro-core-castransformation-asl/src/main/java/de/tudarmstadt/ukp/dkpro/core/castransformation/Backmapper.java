@@ -161,19 +161,21 @@ extends JCasAnnotator_ImplBase
 	    
         while (it.hasNext()) {
             FeatureStructure fs = targetView.getLowLevelCas().ll_getFSForRef(it.next());
+            if(fs instanceof Annotation) {
 
-            // Now we update the offsets
-            Annotation a = (Annotation) fs;
+                // Now we update the offsets
+                Annotation a = (Annotation) fs;
 //            System.out.printf("Orig   %s %3d %3d : %s%n", a.getType().getShortName(),
 //                    a.getBegin(), a.getEnd(),
 //                    sourceView.getDocumentText().substring(a.getBegin(), a.getEnd()));
 //            System.out.printf("Before %s %3d %3d : %s%n", a.getType().getShortName(),
 //                    a.getBegin(), a.getEnd(), a.getCoveredText());
-            Interval resolved = as.resolve(new ImmutableInterval(a.getBegin(), a.getEnd()));
-            a.setBegin(resolved.getStart());
-            a.setEnd(resolved.getEnd());
+                Interval resolved = as.resolve(new ImmutableInterval(a.getBegin(), a.getEnd()));
+                a.setBegin(resolved.getStart());
+                a.setEnd(resolved.getEnd());
 //            System.out.printf("After  %s %3d %3d : %s%n", a.getType().getShortName(),
 //                    a.getBegin(), a.getEnd(), a.getCoveredText());
+            }
         }
 	}
 }
