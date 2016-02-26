@@ -17,31 +17,33 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.castransformation;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertEquals;
-
-import java.io.File;
-import java.io.FileWriter;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.CAS;
-import org.apache.uima.collection.CollectionReaderDescription;
-import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
-import org.apache.uima.fit.factory.AggregateBuilder;
-import org.apache.uima.fit.pipeline.SimplePipeline;
-import org.apache.uima.jcas.JCas;
-import org.junit.Rule;
-import org.junit.Test;
-
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiWriter;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.dumper.CasDumpWriter;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
+import org.apache.commons.io.FileUtils;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.CAS;
+import org.apache.uima.collection.CollectionReaderDescription;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.factory.AggregateBuilder;
+import org.apache.uima.fit.pipeline.SimplePipeline;
+import org.apache.uima.fit.util.JCasUtil;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.cas.AnnotationBase;
+import org.junit.Rule;
+import org.junit.Test;
+
+import java.io.File;
+import java.io.FileWriter;
+
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.junit.Assert.assertEquals;
 
 public class ApplyChangesBackmapperTest
 {
@@ -140,4 +142,73 @@ public class ApplyChangesBackmapperTest
 
    @Rule
    public DkproTestContext testContext = new DkproTestContext();
+
+    @Test
+    public void testBackMappingOfGeneralFeatureStructures() throws Exception {
+
+        File inputFile = new File("src/test/resources/input.txt");
+        CollectionReaderDescription reader = createReaderDescription(
+                TextReader.class,
+                TextReader.PARAM_SOURCE_LOCATION, inputFile,
+                TextReader.PARAM_LANGUAGE, "en");
+
+        AnalysisEngineDescription applyChanges = createEngineDescription(
+                ApplyChangesAnnotator.class);
+
+        AnalysisEngineDescription fsCreator = createEngineDescription(CreateFeatureStructure.class);
+
+        AnalysisEngineDescription backMapper = createEngineDescription(
+                Backmapper.class,
+                Backmapper.PARAM_CHAIN, new String[]{TARGET_VIEW, CAS.NAME_DEFAULT_SOFA});
+
+        AnalysisEngineDescription assertNotYetMappedBack = createEngineDescription(
+                AssertFeatureStructureCount.class,
+                AssertFeatureStructureCount.PARAM_EXPECTED_COUNT, 0
+        );
+
+        AnalysisEngineDescription assertMappedBack = createEngineDescription(
+                AssertFeatureStructureCount.class,
+                AssertFeatureStructureCount.PARAM_EXPECTED_COUNT, 1
+        );
+
+        AggregateBuilder builder = new AggregateBuilder();
+        builder.add(
+                applyChanges,
+                ApplyChangesAnnotator.VIEW_TARGET, TARGET_VIEW,
+                ApplyChangesAnnotator.VIEW_SOURCE, CAS.NAME_DEFAULT_SOFA);
+        builder.add(fsCreator, CAS.NAME_DEFAULT_SOFA, TARGET_VIEW);
+        builder.add(assertNotYetMappedBack); // Should only exist in target view
+        builder.add(backMapper);
+        builder.add(assertMappedBack); // Should now be present in initial view
+
+        AnalysisEngineDescription pipeline = builder.createAggregateDescription();
+
+        SimplePipeline.runPipeline(reader, pipeline);
+    }
+
+
+    public static class CreateFeatureStructure  extends JCasAnnotator_ImplBase {
+
+        @Override
+        public void process(JCas jCas) throws AnalysisEngineProcessException {
+            new AnnotationBase(jCas).addToIndexes();
+        }
+    }
+
+    public static class AssertFeatureStructureCount extends JCasAnnotator_ImplBase {
+
+        public static final String PARAM_EXPECTED_COUNT = "expectedCount";
+
+        @ConfigurationParameter(name = PARAM_EXPECTED_COUNT, mandatory = true)
+        private int expectedCount;
+
+        @Override
+        public void process(JCas jCas) throws AnalysisEngineProcessException {
+            int fsCount =  (int) JCasUtil.select(jCas, AnnotationBase.class).stream()
+                                        .filter(t -> t.getClass().equals(AnnotationBase.class))
+                                        .count();
+
+            assertEquals (fsCount, expectedCount);
+        }
+    }
 }
