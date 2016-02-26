@@ -18,7 +18,14 @@
 
 package de.tudarmstadt.ukp.dkpro.core.textnormalizer.transformation;
 
-import static org.apache.uima.fit.util.JCasUtil.select;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_ImplBase;
+import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,20 +33,12 @@ import java.nio.file.Files;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import org.apache.uima.UimaContext;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ResourceInitializationException;
-
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_ImplBase;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 /**
  * Replaces all tokens that are listed in the file in {@link #PARAM_MODEL_LOCATION} by the string
  * specified in {@link #PARAM_REPLACEMENT}.
- * 
+ *
  *
  */
 public class FileBasedTokenTransformer
@@ -70,17 +69,20 @@ public class FileBasedTokenTransformer
         catch (IOException e) {
             throw new ResourceInitializationException(e);
         }
-    };
+    }
 
     @Override
     public void process(JCas aInput, JCas aOutput)
         throws AnalysisEngineProcessException
     {
-        select(aInput, Token.class).stream()
-                .filter(token -> ignoreCase
-                        ? tokensToReplace.contains(token.getCoveredText().toLowerCase())
-                        : tokensToReplace.contains(token.getCoveredText()))
-                .forEach(token -> replace(token.getBegin(), token.getEnd(), replacement));
+        for (Token token : select(aInput, Token.class)) {
+            String tokenText = ignoreCase
+                    ? token.getCoveredText().toLowerCase()
+                    : token.getCoveredText();
+            if (tokensToReplace.contains(tokenText)) {
+                replace(token.getBegin(), token.getEnd(), replacement);
+            }
+        }
     }
 
     private Collection<String> readTokens(File file)
