@@ -38,7 +38,7 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 /**
  * Replaces all tokens that are listed in the file in {@link #PARAM_MODEL_LOCATION} by the string
  * specified in {@link #PARAM_REPLACEMENT}.
- *
+ * 
  *
  */
 public class FileBasedTokenTransformer
@@ -75,14 +75,11 @@ public class FileBasedTokenTransformer
     public void process(JCas aInput, JCas aOutput)
         throws AnalysisEngineProcessException
     {
-        for (Token token : select(aInput, Token.class)) {
-            String tokenText = ignoreCase
-                    ? token.getCoveredText().toLowerCase()
-                    : token.getCoveredText();
-            if (tokensToReplace.contains(tokenText)) {
-                replace(token.getBegin(), token.getEnd(), replacement);
-            }
-        }
+        select(aInput, Token.class).stream()
+                .filter(token -> ignoreCase
+                        ? tokensToReplace.contains(token.getCoveredText().toLowerCase())
+                        : tokensToReplace.contains(token.getCoveredText()))
+                .forEach(token -> replace(token.getBegin(), token.getEnd(), replacement));
     }
 
     private Collection<String> readTokens(File file)
