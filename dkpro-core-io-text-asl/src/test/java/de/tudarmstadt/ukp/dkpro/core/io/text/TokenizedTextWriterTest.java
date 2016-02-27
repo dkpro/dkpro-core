@@ -17,6 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.text;
 
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -49,8 +50,29 @@ public class TokenizedTextWriterTest
         File tokenized = new File("src/test/resources/tokenizedTexts/textTokenized.txt");
 
         AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
-                TokenizedTextWriter.PARAM_TARGET_LOCATION, targetFile);
-        TestRunner.runTest(writer, "en", text);
+                TokenizedTextWriter.PARAM_TARGET_LOCATION, targetFile,
+                TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
+                TokenizedTextWriter.PARAM_OVERWRITE, true);
+        TestRunner.runTest("id", writer, "en", text);
+        assertTrue(FileUtils.contentEquals(tokenized, targetFile));
+    }
+
+    @Test
+    public void testMultipleFiles()
+            throws UIMAException, IOException
+    {
+        String text = "This is the 1st sentence .\nHere is another sentence .";
+        File targetDir = new File("target/TokenizedTextWriterTest.dir");
+        File targetFile = new File(targetDir, "id.txt");
+        File tokenized = new File("src/test/resources/tokenizedTexts/textTokenized.txt");
+
+        AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
+                TokenizedTextWriter.PARAM_TARGET_LOCATION, targetDir,
+                TokenizedTextWriter.PARAM_SINGULAR_TARGET, false,
+                TokenizedTextWriter.PARAM_OVERWRITE, true);
+        TestRunner.runTest("id", writer, "en", text);
+        assertTrue(targetDir.isDirectory());
+        assertTrue(targetFile.exists());
         assertTrue(FileUtils.contentEquals(tokenized, targetFile));
     }
 
@@ -66,8 +88,10 @@ public class TokenizedTextWriterTest
 
         AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
                 TokenizedTextWriter.PARAM_TARGET_LOCATION, targetFile,
-                TokenizedTextWriter.PARAM_FEATURE_PATH, typeName);
-        TestRunner.runTest(writer, "en", text);
+                TokenizedTextWriter.PARAM_FEATURE_PATH, typeName,
+                TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
+                TokenizedTextWriter.PARAM_OVERWRITE, true);
+        TestRunner.runTest("id", writer, "en", text);
         assertTrue(FileUtils.contentEquals(tokenized, targetFile));
     }
 
@@ -83,6 +107,10 @@ public class TokenizedTextWriterTest
 
         JCas jCas = JCasFactory.createJCas();
         jCas.setDocumentText("token1 token2");
+        DocumentMetaData metaData = DocumentMetaData.create(jCas);
+        metaData.setDocumentId("lemmasTest");
+        metaData.addToIndexes(jCas);
+
         Token token1 = new Token(jCas, 0, 6);
         Token token2 = new Token(jCas, 7, 13);
         Lemma lemma1 = new Lemma(jCas, 0, 6);
@@ -103,7 +131,9 @@ public class TokenizedTextWriterTest
 
         AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
                 TokenizedTextWriter.PARAM_TARGET_LOCATION, targetFile,
-                TokenizedTextWriter.PARAM_FEATURE_PATH, featurePath);
+                TokenizedTextWriter.PARAM_FEATURE_PATH, featurePath,
+                TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
+                TokenizedTextWriter.PARAM_OVERWRITE, true);
 
         SimplePipeline.runPipeline(jCas, writer);
 
@@ -124,8 +154,10 @@ public class TokenizedTextWriterTest
 
         AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
                 TokenizedTextWriter.PARAM_TARGET_LOCATION, targetFile,
-                TokenizedTextWriter.PARAM_STOPWORDS_FILE, stopwordsFile);
-        TestRunner.runTest(writer, "en", text);
+                TokenizedTextWriter.PARAM_STOPWORDS_FILE, stopwordsFile,
+                TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
+                TokenizedTextWriter.PARAM_OVERWRITE, true);
+        TestRunner.runTest("id", writer, "en", text);
         assertTrue(FileUtils.contentEquals(tokenized, targetFile));
     }
 
@@ -141,8 +173,10 @@ public class TokenizedTextWriterTest
 
         AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
                 TokenizedTextWriter.PARAM_TARGET_LOCATION, targetFile,
-                TokenizedTextWriter.PARAM_NUMBER_REGEX, numbersRegex);
-        TestRunner.runTest(writer, "en", text);
+                TokenizedTextWriter.PARAM_NUMBER_REGEX, numbersRegex,
+                TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
+                TokenizedTextWriter.PARAM_OVERWRITE, true);
+        TestRunner.runTest("id", writer, "en", text);
         assertTrue(FileUtils.contentEquals(tokenized, targetFile));
     }
 }

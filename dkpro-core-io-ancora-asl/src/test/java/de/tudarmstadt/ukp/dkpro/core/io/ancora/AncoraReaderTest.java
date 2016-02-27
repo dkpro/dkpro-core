@@ -32,7 +32,8 @@ public class AncoraReaderTest
     public void test() throws Exception
     {
         testOneWay(
-                createReaderDescription(AncoraReader.class),
+                createReaderDescription(AncoraReader.class,
+                        AncoraReader.PARAM_SPLIT_MULTI_WORD_TOKENS ,false),
                 createEngineDescription(Conll2006Writer.class),
                 "ancora/19004_20000725.tbf.conll", // the reference file for the output
                 "ancora/19004_20000725.tbf.xml"); // the input file for the test

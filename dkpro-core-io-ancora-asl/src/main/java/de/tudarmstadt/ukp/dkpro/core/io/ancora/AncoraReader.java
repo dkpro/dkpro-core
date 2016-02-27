@@ -17,15 +17,18 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.ancora;
 
-import static de.tudarmstadt.ukp.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_LEM;
+import static de.tudarmstadt.ukp.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_LEMMA;
 import static de.tudarmstadt.ukp.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_POS;
-import static de.tudarmstadt.ukp.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_WD;
+import static de.tudarmstadt.ukp.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_WORD;
 import static de.tudarmstadt.ukp.dkpro.core.io.ancora.internal.AncoraConstants.TAG_SENTENCE;
 import static java.util.Arrays.asList;
 import static org.apache.commons.io.IOUtils.closeQuietly;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -34,13 +37,14 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.TypeCapability;
+import org.apache.uima.fit.internal.ExtendedLogger;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.apache.uima.util.Logger;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -114,9 +118,17 @@ public class AncoraReader
     protected String posTagset;
     
     public static final String PARAM_SPLIT_MULTI_WORD_TOKENS = "splitMultiWordTokens";
-    @ConfigurationParameter(name = PARAM_SPLIT_MULTI_WORD_TOKENS, mandatory = true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_SPLIT_MULTI_WORD_TOKENS, mandatory = true, defaultValue="true")
     protected boolean splitMultiWordTokens;
 
+    public static final String PARAM_DROP_SENTENCES_WITH_MISSING_POS = "dropSentencesMissingPosTags";
+    @ConfigurationParameter(name = PARAM_DROP_SENTENCES_WITH_MISSING_POS, mandatory = true, defaultValue="false")
+    protected boolean dropSentencesMissingPosTags;
+    
+    public static final String PARAM_REDUCE_TAGSET = "reduceTagset";
+    @ConfigurationParameter(name = PARAM_REDUCE_TAGSET, mandatory = true, defaultValue="true")
+    protected boolean reduceTagset;
+    
     private MappingProvider posMappingProvider;
 
     @Override
@@ -173,6 +185,56 @@ public class AncoraReader
         finally {
             closeQuietly(is);
         }
+        
+        if (dropSentencesMissingPosTags) {
+            List<FeatureStructure> toRemove = new ArrayList<>();
+            
+            // Remove sentences without pos TAGs
+            for (Sentence s : select(aJCas, Sentence.class)) {
+                boolean remove = false;
+                for (Token t : selectCovered(Token.class, s)) {
+                    if (t.getPos() == null) {
+                        toRemove.add(s);
+                        remove = true;
+                        break;
+                    }
+                }
+                
+                if (remove) {
+                    for (Token t : selectCovered(Token.class, s)) {
+                        toRemove.add(t);
+                        if (t.getLemma() != null) {
+                            toRemove.add(t.getLemma());
+                        }
+                        if (t.getPos() != null) {
+                            toRemove.add(t.getPos());
+                        }
+                    }
+                }
+            }
+            
+            for (FeatureStructure fs : toRemove) {
+                aJCas.getCas().removeFsFromIndexes(fs);
+            }
+            
+            // Remove tokens without pos tags that are located *BETWEEN* sentences!
+            toRemove.clear();
+            for (Token t : select(aJCas, Token.class)) {
+                if (t.getPos() == null) {
+                    toRemove.add(t);
+                    if (t.getLemma() != null) {
+                        toRemove.add(t.getLemma());
+                    }
+                    if (t.getPos() != null) {
+                        toRemove.add(t.getPos());
+                    }
+                }
+            }
+            
+            for (FeatureStructure fs : toRemove) {
+                aJCas.getCas().removeFsFromIndexes(fs);
+            }
+        }
     }
     
     public class AncoraHandler
@@ -183,7 +245,7 @@ public class AncoraReader
         private final StringBuilder buffer = new StringBuilder();
 
         private JCas jcas;
-        private Logger logger;
+        private ExtendedLogger logger;
 
         public void setJCas(final JCas aJCas)
         {
@@ -195,12 +257,12 @@ public class AncoraReader
             return jcas;
         }
 
-        public void setLogger(Logger aLogger)
+        public void setLogger(ExtendedLogger aLogger)
         {
             logger = aLogger;
         }
 
-        public Logger getLogger()
+        public ExtendedLogger getLogger()
         {
             return logger;
         }
@@ -264,14 +326,17 @@ public class AncoraReader
                 Attributes aAttributes)
             throws SAXException
         {
-            String wd = aAttributes.getValue(ATTR_WD);
+            String wd = aAttributes.getValue(ATTR_WORD);
             
             if (TAG_SENTENCE.equals(aName)) {
                 sentenceStart = getBuffer().length();
             }
-            else if (wd != null) {
+            else if (wd != null && sentenceStart == -1) {
+                getLogger().info("Ignoring token outside sentence boundaries: ["+wd+"]");
+            }
+            else if (wd != null && sentenceStart != -1) {
                 String posTag = aAttributes.getValue(ATTR_POS);
-                String lemma = aAttributes.getValue(ATTR_LEM);
+                String lemma = aAttributes.getValue(ATTR_LEMMA);
                 
                 // Default case without multiword splitting
                 List<String> words = asList(wd);
@@ -297,10 +362,13 @@ public class AncoraReader
             throws SAXException
         {
             if (TAG_SENTENCE.equals(aName)) {
-                if (readSentence) {
-                    new Sentence(getJCas(), sentenceStart, getBuffer().length()).addToIndexes();
+                // AnCora contains some empty/missing sentences
+                if (sentenceStart < getBuffer().length()) {
+                    if (readSentence) {
+                        new Sentence(getJCas(), sentenceStart, getBuffer().length()).addToIndexes();
+                    }
+                    buffer.append("\n");
                 }
-                buffer.append("\n");
                 sentenceStart = -1;
             }
         }

@@ -18,7 +18,14 @@
 
 package de.tudarmstadt.ukp.dkpro.core.textnormalizer.transformation;
 
-import static org.apache.uima.fit.util.JCasUtil.select;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_ImplBase;
+import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,15 +33,7 @@ import java.nio.file.Files;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import org.apache.uima.UimaContext;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ResourceInitializationException;
-
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_ImplBase;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 /**
  * Replaces all tokens that are listed in the file in {@link #PARAM_MODEL_LOCATION} by the string
@@ -70,7 +69,7 @@ public class FileBasedTokenTransformer
         catch (IOException e) {
             throw new ResourceInitializationException(e);
         }
-    };
+    }
 
     @Override
     public void process(JCas aInput, JCas aOutput)
