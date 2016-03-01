@@ -1,6 +1,8 @@
 - version: 1.7.0
   date: 2014-11-28
   status: stable
+  groupId: de.tudarmstadt.ukp.dkpro.core
+  artifactId: de.tudarmstadt.ukp.dkpro.core-asl
 
 - version: 1.6.2
   date: 2014-08-22

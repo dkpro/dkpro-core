@@ -8,6 +8,12 @@ Latest release: {{ stable.version }} ({{ stable.date }})
 </div>
 {% endif %}
 
+{% if stable.groupId %}
+<div class="center radius b20">
+<a href="//maven-badges.herokuapp.com/maven-central/{{ stable.groupId }}/{{ stable.artifactId }}"><img src="//maven-badges.herokuapp.com/maven-central/{{ stable.groupId }}/{{ stable.artifactId }}/badge.svg"/></a>
+</div>
+{% endif %}
+
 {% if site.posts[0] %}
 <div class="radius b20">
 <h5>Blog posts</h5>
