@@ -22,3 +22,7 @@ AnnoLab within the DFG-Projekt "Linguistische Profile interdisziplinärer Regist
 (10.2006 - 09.2009). Originally these had been licensed under the Lesser GNU Public License. 
 For the purpose of being used in DKPro and being developed further, they have been re-licensed 
 under the Apache Software License 2.0 by the orignal author Richard Eckart de Castilho.
+
+CasCopier.java
+
+Taken from Apache UIMA 2.8.1 and made a small extension to access mFsMap.
