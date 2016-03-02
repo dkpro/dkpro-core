@@ -29,6 +29,9 @@
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl</artifactId>
     <packaging>jar</packaging>
 	<name>DKPro Core GPL - Stanford CoreNLP Suite</name>
+    <properties>
+        <corenlp.version>3.6.0</corenlp.version>
+    </properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
@@ -49,12 +52,12 @@
 		<dependency>
 			<groupId>edu.stanford.nlp</groupId>
 			<artifactId>stanford-corenlp</artifactId>
-			<version>3.6.0</version>
+			<version>${corenlp.version}</version>
 		</dependency>
         <dependency>
             <groupId>edu.stanford.nlp</groupId>
             <artifactId>stanford-corenlp</artifactId>
-            <version>3.6.0</version>
+            <version>${corenlp.version}</version>
             <classifier>models</classifier>
         </dependency>
 		<dependency>
