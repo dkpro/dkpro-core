@@ -33,7 +33,7 @@ import org.apache.uima.internal.util.PositiveIntSet;
 import org.apache.uima.internal.util.PositiveIntSet_impl;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
-import org.apache.uima.util.CasCopier;
+import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.CasCopier;
 
 import java.util.LinkedList;
 
@@ -97,6 +97,10 @@ extends JCasAnnotator_ImplBase
                     }
                     // We will still update the offsets, so we do not index the copy just yet
                     copiedFs.add(targetView.getLowLevelCAS().ll_getFSRef(fsCopy));
+                }
+                else {
+                    // Record transitively copied FSes for later indexing
+                    copiedFs.add(cc.getCopy(ref));
                 }
             }
 			
