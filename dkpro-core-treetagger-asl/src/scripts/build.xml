@@ -630,14 +630,14 @@
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20101115"
-    		metaDataVersion="1"
+    		metaDataVersion="2"
     		tool="tagger" 
     		language="pt" 
     		variant="le" 
     		extension="bin">
 			<metadata>
 	    		<entry key="pos.tagset" value="gamallo"/>
-	    		<entry key="encoding" value="UTF-8"/>
+	    		<entry key="encoding" value="ISO-8859-1"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
