@@ -422,12 +422,12 @@ public class CoreNlpParserTest
         JCas jcas = runTestWithPosTagger("en", "sr-beam", "We need a very complicated example "
                 + "sentence , which contains as many constituents and dependencies as possible .");
 
-        String[] constituentMapped = { "ADJP 10,26", "ADJP 102,110", "NP 0,2", "NP 64,98",
-                "NP 8,110", "NP 8,43", "PP 61,110", "PP 61,98", "PP 99,110", "ROOT 0,112",
+        String[] constituentMapped = { "ADJP 10,26", "ADJP 102,110", "NP 0,2", "NP 64,110",
+                "NP 64,98", "NP 8,110", "NP 8,43", "PP 61,110", "PP 99,110", "ROOT 0,112",
                 "S 0,112", "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
-        String[] constituentOriginal = { "ADJP 10,26", "ADJP 102,110", "NP 0,2", "NP 64,98",
-                "NP 8,110", "NP 8,43", "PP 61,110", "PP 61,98", "PP 99,110", "ROOT 0,112",
+        String[] constituentOriginal = { "ADJP 10,26", "ADJP 102,110", "NP 0,2", "NP 64,110",
+                "NP 64,98", "NP 8,110", "NP 8,43", "PP 61,110", "PP 99,110", "ROOT 0,112",
                 "S 0,112", "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
         String[] dependencies = { 
@@ -443,7 +443,7 @@ public class CoreNlpParserTest
                 "[ 64, 68]AMOD(amod) D[64,68](many) G[69,81](constituents)",
                 "[ 69, 81]PREP(prep_as) D[69,81](constituents) G[52,60](contains)",
                 "[ 86, 98]CONJ(conj_and) D[86,98](dependencies) G[69,81](constituents)",
-                "[102,110]PREP(prep_as) D[102,110](possible) G[52,60](contains)" };
+                "[102,110]PREP(prep_as) D[102,110](possible) G[69,81](constituents)"};
 
         String[] posMapped = { "PR", "V", "ART", "ADV", "ADJ", "NN", "NN", "PUNC", "ART", "V",
                 "PP", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
@@ -453,8 +453,8 @@ public class CoreNlpParserTest
 
         String pennTree = "(ROOT (S (NP (PRP We)) (VP (VBP need) (NP (NP (DT a) (ADJP (RB very) "
                 + "(JJ complicated)) (NN example) (NN sentence)) (, ,) (SBAR (WHNP (WDT which)) "
-                + "(S (VP (VBZ contains) (PP (PP (IN as) (NP (JJ many) (NNS constituents) "
-                + "(CC and) (NNS dependencies))) (PP (IN as) (ADJP (JJ possible))))))))) (. .)))";
+                + "(S (VP (VBZ contains) (PP (IN as) (NP (NP (JJ many) (NNS constituents) (CC and) "
+                + "(NNS dependencies)) (PP (IN as) (ADJP (JJ possible)))))))))) (. .)))";
 
         String[] unmappedDep = { "gov" };
 
