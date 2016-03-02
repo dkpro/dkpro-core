@@ -139,6 +139,8 @@ public abstract class ResourceCollectionReaderBase
     private int completed;
     private Collection<Resource> resources;
     private Iterator<Resource> resourceIterator;
+    
+    private ProgressMeter progress;
 
     @Override
     public void initialize(UimaContext aContext)
@@ -212,6 +214,8 @@ public abstract class ResourceCollectionReaderBase
 
             resources = scan(getSourceLocation(), includes, excludes);
 
+            progress = new ProgressMeter(resources.size());
+            
             // Get the iterator that will be used to actually traverse the FileSet.
             resourceIterator = resources.iterator();
 
@@ -311,7 +315,11 @@ public abstract class ResourceCollectionReaderBase
     protected Resource nextFile()
     {
         try {
-            return resourceIterator.next();
+            Resource res = resourceIterator.next();
+            progress.setDone(completed);
+            getLogger().info(
+                    String.format("%s: %s", progress, res.location));
+            return res;
         }
         finally {
             completed++;

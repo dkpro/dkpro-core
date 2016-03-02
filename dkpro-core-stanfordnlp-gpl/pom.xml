@@ -29,6 +29,9 @@
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl</artifactId>
     <packaging>jar</packaging>
 	<name>DKPro Core GPL - Stanford CoreNLP Suite</name>
+    <properties>
+        <corenlp.version>3.6.0</corenlp.version>
+    </properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
@@ -49,13 +52,13 @@
 		<dependency>
 			<groupId>edu.stanford.nlp</groupId>
 			<artifactId>stanford-corenlp</artifactId>
-			<version>3.6.0</version>
+			<version>${corenlp.version}</version>
 		</dependency>
         <!-- https://github.com/dkpro/dkpro-core/issues/779
         <dependency>
             <groupId>edu.stanford.nlp</groupId>
             <artifactId>stanford-corenlp</artifactId>
-            <version>3.6.0</version>
+            <version>${corenlp.version}</version>
             <classifier>models</classifier>
         </dependency>
         -->
@@ -90,9 +93,7 @@
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
-			<!-- Constants in this dependency are inlined - dependency not required 
-				at runtime -->
-			<scope>provided</scope>
+            <!-- Required as compile for de.tudarmstadt.ukp.dkpro.core.api.parameter.Messages -->
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
