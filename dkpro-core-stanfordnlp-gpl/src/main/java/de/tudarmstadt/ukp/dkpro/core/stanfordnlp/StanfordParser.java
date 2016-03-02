@@ -267,8 +267,8 @@ public class StanfordParser
      * 
      * @see TestOptions#maxLength
      */
-    public static final String PARAM_MAX_TOKENS = "maxTokens";
-    @ConfigurationParameter(name = PARAM_MAX_TOKENS, mandatory = true, defaultValue = "130")
+    public static final String PARAM_MAX_SENTENCE_LENGTH = ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
+    @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = true, defaultValue = "130")
     private int maxTokens;
 
     /**
