@@ -144,8 +144,8 @@ public class StanfordPosTagger
      * is set to a value larger than zero. The default value zero will allow all sentences to be
      * POS tagged.
 	 */
-	public static final String PARAM_MAX_SENTENCE_TOKENS = "maxSentenceTokens";
-	@ConfigurationParameter(name = PARAM_MAX_SENTENCE_TOKENS, mandatory = false)
+	public static final String PARAM_MAX_SENTENCE_LENGTH = ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;;
+	@ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = false)
 	private int maxSentenceTokens = 0;
 
 	private CasConfigurableProviderBase<MaxentTagger> modelProvider;
