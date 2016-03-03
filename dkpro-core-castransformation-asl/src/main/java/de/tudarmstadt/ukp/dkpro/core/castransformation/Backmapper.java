@@ -86,22 +86,20 @@ extends JCasAnnotator_ImplBase
                     continue;
                 }
                 
-                if (!cc.alreadyCopied(fs)) {
-                    FeatureStructure fsCopy = cc.copyFs(fs);
-                    // Make sure that the sofa annotation in the copy is set
-                    if (fs instanceof AnnotationBaseFS) {
-                        FeatureStructure sofa = fsCopy.getFeatureValue(mDestSofaFeature);
-                        if (sofa == null) {
-                            fsCopy.setFeatureValue(mDestSofaFeature, targetView.getSofa());
-                        }
+                // This returns either a new copy -- or -- if an FS has been copied as a
+                // transitively referenced feature of another FS, it will return an existing copy
+                FeatureStructure fsCopy = cc.copyFs(fs);
+                
+                // Make sure that the sofa annotation in the copy is set
+                if (fs instanceof AnnotationBaseFS) {
+                    FeatureStructure sofa = fsCopy.getFeatureValue(mDestSofaFeature);
+                    if (sofa == null) {
+                        fsCopy.setFeatureValue(mDestSofaFeature, targetView.getSofa());
                     }
-                    // We will still update the offsets, so we do not index the copy just yet
-                    copiedFs.add(targetView.getLowLevelCAS().ll_getFSRef(fsCopy));
                 }
-                else {
-                    // Record transitively copied FSes for later indexing
-                    copiedFs.add(cc.getCopy(ref));
-                }
+                
+                // We will still update the offsets, so we do not index the copy just yet
+                copiedFs.add(targetView.getLowLevelCAS().ll_getFSRef(fsCopy));
             }
 			
 			// Get the final target view
