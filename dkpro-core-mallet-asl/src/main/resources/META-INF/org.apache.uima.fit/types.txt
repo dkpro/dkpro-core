@@ -1,1 +1,2 @@
 classpath*:de/tudarmstadt/ukp/dkpro/core/mallet/type/TopicDistribution.xml
+classpath*:de/tudarmstadt/ukp/dkpro/core/mallet/type/WordEmbedding.xml
