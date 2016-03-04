@@ -149,8 +149,8 @@ public class CoreNlpParser
     @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = true, defaultValue = "2147483647")
     private int maxSentenceLength;
     
-    public static final String PARAM_NUM_THREADS = "numThreads";
-    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = "1")
+    public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
+    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = ComponentParameters.AUTO_NUM_THREADS)
     private int numThreads;
 
     public static final String PARAM_MAX_TIME = "maxTime";
@@ -254,6 +254,8 @@ public class CoreNlpParser
         
         posMappingProvider = MappingProviderFactory.createPosMappingProvider(
                 posMappingLocation, language, annotatorProvider);
+
+        numThreads = ComponentParameters.computeNumThreads(numThreads);
     }
     
     @Override
@@ -307,8 +309,8 @@ public class CoreNlpParser
             ConvertToUima.convertDependencies(aJCas, document, dependencyMappingProvider,
                     internStrings);
         }        
-    };
-    
+    }
+
     private class CoreNlpParserModelProvider
         extends ModelProviderBase<ParserAnnotator>
     {

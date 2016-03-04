@@ -116,8 +116,8 @@ public class CoreNlpPosTagger
     @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = true, defaultValue = "2147483647")
     private int maxSentenceLength;
     
-    public static final String PARAM_NUM_THREADS = "numThreads";
-    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = "1")
+    public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
+    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = ComponentParameters.AUTO_NUM_THREADS)
     private int numThreads;
 
     /**
@@ -158,6 +158,8 @@ public class CoreNlpPosTagger
         
         mappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
                 language, annotatorProvider);
+
+        numThreads = ComponentParameters.computeNumThreads(numThreads);
     }
     
     @Override
@@ -182,8 +184,8 @@ public class CoreNlpPosTagger
         
         // Transfer back into the CAS
         ConvertToUima.convertPOSs(aJCas, document, mappingProvider, internStrings);
-    };
-    
+    }
+
     private class CoreNlpPosTaggerModelProvider
         extends ModelProviderBase<POSTaggerAnnotator>
     {
@@ -207,7 +209,7 @@ public class CoreNlpPosTagger
             }
             
             MaxentTagger tagger = new MaxentTagger(modelFile,
-                    StringUtils.argsToProperties(new String[] { "-model", modelFile }),
+                    StringUtils.argsToProperties("-model", modelFile),
                     false);
 
             SingletonTagset tags = new SingletonTagset(POS.class, getResourceMetaData()
