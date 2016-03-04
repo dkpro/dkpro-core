@@ -74,8 +74,6 @@ public class LdaTopicsProportionsSortedWriterTest
                 LdaTopicModelEstimator.PARAM_N_TOPICS, N_TOPICS,
                 LdaTopicModelEstimator.PARAM_USE_LEMMA, USE_LEMMAS);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
-
-        MODEL_FILE.deleteOnExit();
     }
 
     @Test
@@ -116,5 +114,6 @@ public class LdaTopicsProportionsSortedWriterTest
         lines.stream()
                 .map(line -> line.split("\t"))
                 .forEach(fields -> assertTrue(fields[0].startsWith("dummy")));
+        MODEL_FILE.delete();
     }
 }
