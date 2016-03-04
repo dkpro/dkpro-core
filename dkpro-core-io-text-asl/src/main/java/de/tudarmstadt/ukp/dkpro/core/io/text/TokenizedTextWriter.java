@@ -177,7 +177,7 @@ public class TokenizedTextWriter
     private void writeTokens(JCas aJCas, Type type, FeaturePathInfo fpInfo)
             throws IOException
     {
-        NamedOutputStream outputStream = getOutputStream(aJCas, extension);
+        OutputStream outputStream = getOutputStream(aJCas, extension);
 
         /* iterate over sentences */
         for (Sentence sentence : select(aJCas, Sentence.class)) {
