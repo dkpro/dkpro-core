@@ -67,8 +67,6 @@ public class LdaTopicModelUtilsTest
                 LdaTopicModelEstimator.PARAM_N_TOPICS, N_TOPICS,
                 LdaTopicModelEstimator.PARAM_USE_LEMMA, USE_LEMMAS);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
-
-        MODEL_FILE.deleteOnExit();
     }
 
     @Test
@@ -83,6 +81,6 @@ public class LdaTopicModelUtilsTest
         for (Map<String, Double> topic : topWords) {
             assertEquals(nWords, topic.size());
         }
+        MODEL_FILE.delete();
     }
-
 }

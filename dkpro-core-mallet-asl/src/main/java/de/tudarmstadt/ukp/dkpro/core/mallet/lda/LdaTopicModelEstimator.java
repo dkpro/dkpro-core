@@ -20,11 +20,9 @@ package de.tudarmstadt.ukp.dkpro.core.mallet.lda;
 import cc.mallet.topics.ParallelTopicModel;
 import cc.mallet.types.Instance;
 import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelEstimator;
-import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.TypeCapability;
-import org.apache.uima.resource.ResourceInitializationException;
 
 import java.io.File;
 import java.io.IOException;
@@ -120,13 +118,6 @@ public class LdaTopicModelEstimator
     private float beta;
 
     @Override
-    public void initialize(UimaContext context)
-            throws ResourceInitializationException
-    {
-        super.initialize(context);
-    }
-
-    @Override
     public void collectionProcessComplete()
             throws AnalysisEngineProcessException
     {
@@ -141,7 +132,6 @@ public class LdaTopicModelEstimator
     private void generateParallelModel()
             throws IOException, SecurityException
     {
-        new File(getTargetLocation()).getParentFile().mkdirs();
         ParallelTopicModel model = new ParallelTopicModel(nTopics, alphaSum, beta);
         model.addInstances(getInstanceList());
         model.setNumThreads(getNumThreads());

@@ -24,7 +24,6 @@ import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
@@ -39,12 +38,6 @@ public class LdaTopicModelEstimatorTest
     private static final File MODEL_FILE = new File("target/mallet/model");
     private static final String TXT_DIR = "src/test/resources/txt";
     private static final String TXT_FILE_PATTERN = "[+]*.txt";
-
-    @Before
-    public void setUp()
-    {
-        MODEL_FILE.deleteOnExit();
-    }
 
     @Test
     public void testEstimator()
@@ -72,6 +65,7 @@ public class LdaTopicModelEstimatorTest
         assertTrue(MODEL_FILE.exists());
         ParallelTopicModel model = ParallelTopicModel.read(MODEL_FILE);
         assertEquals(nTopics, model.getNumTopics());
+        MODEL_FILE.delete();
     }
 
     @Test
@@ -102,6 +96,7 @@ public class LdaTopicModelEstimatorTest
         assertTrue(MODEL_FILE.exists());
         ParallelTopicModel model = ParallelTopicModel.read(MODEL_FILE);
         assertEquals(nTopics, model.getNumTopics());
+        MODEL_FILE.delete();
     }
 
     @Test
@@ -132,5 +127,6 @@ public class LdaTopicModelEstimatorTest
         assertTrue(MODEL_FILE.exists());
         ParallelTopicModel model = ParallelTopicModel.read(MODEL_FILE);
         assertEquals(nTopics, model.getNumTopics());
+        MODEL_FILE.delete();
     }
 }

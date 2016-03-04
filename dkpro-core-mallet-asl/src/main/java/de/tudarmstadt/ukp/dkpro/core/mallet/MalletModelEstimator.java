@@ -30,6 +30,9 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import java.io.File;
+import java.io.IOException;
+
 /**
  * This class defines parameters and methods that are common for Mallet model estimators.
  */
@@ -88,6 +91,14 @@ public abstract class MalletModelEstimator
             numThreads = Math.max(Runtime.getRuntime().availableProcessors() - 1, 1);
         }
         instanceList = new InstanceList(new TokenSequence2FeatureSequence());
+
+        /* make sure target file does not exist and create target directory */
+        File targetFile = new File(getTargetLocation());
+        if (targetFile.exists()) {
+            throw new ResourceInitializationException(
+                    new IOException(targetFile + " already exists."));
+        }
+        new File(getTargetLocation()).getParentFile().mkdirs();
     }
 
     @Override

@@ -73,7 +73,6 @@ public class LdaTopicModelInferencerTest
                 LdaTopicModelEstimator.PARAM_USE_LEMMA, USE_LEMMAS);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
 
-        MODEL_FILE.deleteOnExit();
     }
 
     @Test
@@ -100,5 +99,6 @@ public class LdaTopicModelInferencerTest
                 }
             }
         }
+        MODEL_FILE.delete();
     }
 }
