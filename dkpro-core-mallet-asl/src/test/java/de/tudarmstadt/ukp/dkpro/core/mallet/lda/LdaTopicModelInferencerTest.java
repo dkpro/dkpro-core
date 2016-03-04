@@ -43,7 +43,6 @@ import static org.junit.Assert.assertTrue;
  */
 public class LdaTopicModelInferencerTest
 {
-    private static final int N_THREADS = 1;
     private static final File MODEL_FILE = new File("target/mallet/model");
     private static final String TXT_DIR = "src/test/resources/txt";
     private static final String TXT_FILE_PATTERN = "[+]*.txt";
@@ -66,7 +65,6 @@ public class LdaTopicModelInferencerTest
 
         AnalysisEngineDescription estimator = createEngineDescription(
                 LdaTopicModelEstimator.class,
-                LdaTopicModelEstimator.PARAM_NUM_THREADS, N_THREADS,
                 LdaTopicModelEstimator.PARAM_TARGET_LOCATION, MODEL_FILE,
                 LdaTopicModelEstimator.PARAM_N_ITERATIONS, N_ITERATIONS,
                 LdaTopicModelEstimator.PARAM_N_TOPICS, N_TOPICS,

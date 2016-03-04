@@ -45,7 +45,6 @@ import static org.junit.Assert.assertTrue;
 @Deprecated
 public class LdaTopicProportionsWriterTest
 {
-    private static final int N_THREADS = 4;
     private static final File MODEL_FILE = new File("target/mallet/model");
     private static final String CAS_DIR = "src/test/resources/txt";
     private static final String CAS_FILE_PATTERN = "[+]*.txt";
@@ -68,14 +67,11 @@ public class LdaTopicProportionsWriterTest
 
         AnalysisEngineDescription estimator = createEngineDescription(
                 LdaTopicModelEstimator.class,
-                LdaTopicModelEstimator.PARAM_NUM_THREADS, N_THREADS,
                 LdaTopicModelEstimator.PARAM_TARGET_LOCATION, MODEL_FILE,
                 LdaTopicModelEstimator.PARAM_N_ITERATIONS, N_ITERATIONS,
                 LdaTopicModelEstimator.PARAM_N_TOPICS, N_TOPICS,
                 LdaTopicModelEstimator.PARAM_USE_LEMMA, USE_LEMMAS);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
-
-        MODEL_FILE.deleteOnExit();
     }
 
     @Test
@@ -109,5 +105,6 @@ public class LdaTopicProportionsWriterTest
         assertTrue(lines.get(0).matches(expectedLine0Regex));
         assertTrue(lines.get(1).matches(expectedLine1Regex));
         assertEquals(expectedLines, lines.size());
+        MODEL_FILE.delete();
     }
 }

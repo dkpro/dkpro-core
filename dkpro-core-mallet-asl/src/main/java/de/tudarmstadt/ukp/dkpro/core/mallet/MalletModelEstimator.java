@@ -24,6 +24,7 @@ import cc.mallet.types.TokenSequence;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -47,10 +48,10 @@ public abstract class MalletModelEstimator
     private String typeName;
 
     /**
-     * The number of threads to use during model estimation. Default: 1.
+     * The number of threads to use during model estimation. If not set, the number of threads is determined automatically.
      */
-    public static final String PARAM_NUM_THREADS = "numThreads";
-    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = "0")
+    public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
+    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = ComponentParameters.AUTO_NUM_THREADS)
     private int numThreads;
 
     /**
@@ -86,10 +87,9 @@ public abstract class MalletModelEstimator
             throws ResourceInitializationException
     {
         super.initialize(context);
-        // TODO: use ComponentParameters.computeNumThreads when #800 is implemented.
-        if (numThreads == 0) {
-            numThreads = Math.max(Runtime.getRuntime().availableProcessors() - 1, 1);
-        }
+
+        numThreads = ComponentParameters.computeNumThreads(numThreads);
+        getLogger().info(String.format("Using %d threads.", numThreads));
         instanceList = new InstanceList(new TokenSequence2FeatureSequence());
 
         /* make sure target file does not exist and create target directory */
@@ -105,20 +105,18 @@ public abstract class MalletModelEstimator
     public void process(JCas aJCas)
             throws AnalysisEngineProcessException
     {
-        {
-            DocumentMetaData metadata = DocumentMetaData.get(aJCas);
-            try {
-                for (TokenSequence ts : MalletUtils
-                        .generateTokenSequences(aJCas, getTypeName(), useLemma(),
-                                getMinTokenLength(), getModelEntityType())) {
-                    instanceList.addThruPipe(
-                            new Instance(ts, MalletUtils.NONE_LABEL, metadata.getDocumentId(),
-                                    metadata.getDocumentUri()));
-                }
+        DocumentMetaData metadata = DocumentMetaData.get(aJCas);
+        try {
+            for (TokenSequence ts : MalletUtils
+                    .generateTokenSequences(aJCas, getTypeName(), useLemma(),
+                            getMinTokenLength(), getModelEntityType())) {
+                instanceList.addThruPipe(
+                        new Instance(ts, MalletUtils.NONE_LABEL, metadata.getDocumentId(),
+                                metadata.getDocumentUri()));
             }
-            catch (FeaturePathException e) {
-                throw new AnalysisEngineProcessException(e);
-            }
+        }
+        catch (FeaturePathException e) {
+            throw new AnalysisEngineProcessException(e);
         }
     }
 
