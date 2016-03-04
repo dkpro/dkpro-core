@@ -29,6 +29,7 @@ import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Arrays;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
@@ -61,7 +62,11 @@ public class WordEmbeddingsEstimatorTest
         assertEquals(expectedLength, output.size());
         output.stream()
                 .map(line -> line.split(" "))
-                .forEach(line -> assertEquals(dimensions + 1, line.length));
+                .peek(line -> assertEquals(dimensions + 1, line.length))
+                .map(line -> Arrays.copyOfRange(line, 1, dimensions))
+                /* fine if each value can be parsed to a double */
+                .forEach(array -> Arrays.stream(array).forEach(Double::parseDouble));
+
         embeddingsFile.delete();
     }
 }

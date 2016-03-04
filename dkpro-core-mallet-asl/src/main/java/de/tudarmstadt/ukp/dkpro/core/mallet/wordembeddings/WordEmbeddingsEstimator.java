@@ -25,6 +25,7 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Locale;
 
 /**
  * Compute word embeddings from the given collection using skip-grams.

@@ -33,6 +33,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 
 /**
  * This class defines parameters and methods that are common for Mallet model estimators.
@@ -40,6 +41,8 @@ import java.io.IOException;
 public abstract class MalletModelEstimator
         extends JCasFileWriter_ImplBase
 {
+    private static final Locale locale = Locale.US;
+
     /**
      * The annotation type to use for the model. Default: de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token.
      */
@@ -87,6 +90,8 @@ public abstract class MalletModelEstimator
             throws ResourceInitializationException
     {
         super.initialize(context);
+
+        Locale.setDefault(locale);
 
         numThreads = ComponentParameters.computeNumThreads(numThreads);
         getLogger().info(String.format("Using %d threads.", numThreads));
