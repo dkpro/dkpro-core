@@ -112,7 +112,43 @@ public final class ComponentParameters
 	 * Maximal sentence length in tokens that is still being processed.
 	 */
 	public static final String PARAM_MAX_SENTENCE_LENGTH = "maxSentenceLength";
-	
+
+    /**
+     * The number of threads to use for components that implement multi-threading
+     */
+    public static final String PARAM_NUM_THREADS = "numThreads";
+    /**
+     * Use smart number of threads if PARAM_NUM_THREADS is set to this value
+     */
+    public static final String AUTO_NUM_THREADS = "0";
+
+    /**
+     * Compute the number of threads to use for components that can make use of multi-threading.
+     * <p>
+     * <li>for positive values: use the given number of threads, with the number of available CPUs maximum.</li>
+     * <li>for negative value: use the number of available CPUs minus the given value, minimum 1.</li>
+     * <li>for {@link #AUTO_NUM_THREADS} (0): use the number of available CPUs minus one.</li>
+     * </li>
+     * </p>
+     *
+     * @param value the user-proposed number of threads (positive, negative, or 0)
+     * @return the actual number of threads to use.
+     */
+    public static int computeNumThreads(int value)
+    {
+        int cpus = Runtime.getRuntime().availableProcessors();
+
+        if (value > 0) {
+            return Math.min(cpus, value);
+        }
+        else if (value < 0) {
+            return Math.max(1, cpus + value);
+        }
+        else {
+            return Math.max(1, cpus - 1);
+        }
+    }
+
 	// =============================================================================================
 	// Annotation types
 	// =============================================================================================
