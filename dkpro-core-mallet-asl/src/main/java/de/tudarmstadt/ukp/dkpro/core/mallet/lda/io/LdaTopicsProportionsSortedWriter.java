@@ -15,9 +15,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.tudarmstadt.ukp.dkpro.core.mallet.topicmodel.io;
+package de.tudarmstadt.ukp.dkpro.core.mallet.lda.io;
 
-import static org.apache.uima.fit.util.JCasUtil.selectSingle;
+import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.mallet.lda.LdaTopicModelInferencer;
+import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
+import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -28,25 +37,15 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import org.apache.uima.UimaContext;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ResourceInitializationException;
-
-import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.mallet.topicmodel.MalletTopicModelInferencer;
-import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
+import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 
 /**
  * Write the topic proportions according to an LDA topic model to an output file. The proportions
- * need to be inferred in a previous step using {@link MalletTopicModelInferencer}.
+ * need to be inferred in a previous step using {@link LdaTopicModelInferencer}.
  *
  *
  */
-public class MalletTopicsProportionsSortedWriter
+public class LdaTopicsProportionsSortedWriter
     extends JCasFileWriter_ImplBase
 {
     public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
@@ -73,7 +72,7 @@ public class MalletTopicsProportionsSortedWriter
             throw new ResourceInitializationException(e);
         }
         getLogger().info("Writing output to " + targetLocation);
-    };
+    }
 
     /*
      * (non-Javadoc)
