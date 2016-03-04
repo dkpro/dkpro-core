@@ -23,7 +23,7 @@ public final class ComponentParameters
 	/**
 	 * For analysis engines: Use this language instead of the document language to resolve the model
 	 * and tag set mapping.
-	 * 
+	 *
 	 * For readers: Set this as the language of the produced documents.
 	 */
 	public static final String PARAM_LANGUAGE = "language";
@@ -33,7 +33,7 @@ public final class ComponentParameters
 	 * for one language.
 	 */
 	public static final String PARAM_PATTERNS = "patterns";
-	
+
 	/**
 	 * Variant of a model the model. Used to address a specific model if here are multiple models
 	 * for one language.
@@ -44,7 +44,7 @@ public final class ComponentParameters
 	 * Location from which the model is read.
 	 */
 	public static final String PARAM_MODEL_LOCATION = "modelLocation";
-	
+
 	/**
      * Location from which the segmentation model is read.
      */
@@ -100,9 +100,9 @@ public final class ComponentParameters
 	 * spamming the heap with thousands of strings representing only a few different tags.
 	 */
 	public static final String PARAM_INTERN_TAGS = "internTags";
-	
+
 	/**
-	 * When splitting an annotation into multiple parts, e.g. when splitting a token that is a 
+	 * When splitting an annotation into multiple parts, e.g. when splitting a token that is a
 	 * compound word into multiple tokens, each representing a part of the word, this parameter
 	 * controls if the original annotation is kept or removed.
 	 */
@@ -124,12 +124,11 @@ public final class ComponentParameters
 
     /**
      * Compute the number of threads to use for components that can make use of multi-threading.
-     * <p>
+     * <ul>
      * <li>for positive values: use the given number of threads, with the number of available CPUs maximum.</li>
      * <li>for negative value: use the number of available CPUs minus the given value, minimum 1.</li>
      * <li>for {@link #AUTO_NUM_THREADS} (0): use the number of available CPUs minus one.</li>
-     * </li>
-     * </p>
+     * </ul>
      *
      * @param value the user-proposed number of threads (positive, negative, or 0)
      * @return the actual number of threads to use.
@@ -154,9 +153,9 @@ public final class ComponentParameters
 	// =============================================================================================
 
     private static final String PARAGRAPH = "Paragraph";
-    
+
 	private static final String SENTENCE = "Sentence";
-	
+
 	private static final String TOKEN = "Token";
 
 	private static final String LEMMA = "Lemma";
@@ -166,15 +165,15 @@ public final class ComponentParameters
     private static final String MORPH = "Morph";
 
 	private static final String CHUNK = "Chunk";
-	
+
 	private static final String CONSTITUENT = "Constituent";
 
     private static final String COREFERENCE = "Coreference";
 
 	private static final String PENN_TREE = "PennTree";
-	
+
 	private static final String DEPENDENCY = "Dependency";
-	
+
 	private static final String NAMED_ENTITY = "NamedEntity";
 
 	// =============================================================================================
@@ -182,7 +181,7 @@ public final class ComponentParameters
 	// =============================================================================================
 
 	private static final String READ = "read";
-	
+
 	private static final String WRITE = "write";
 
 	// =============================================================================================
@@ -190,17 +189,17 @@ public final class ComponentParameters
 	// =============================================================================================
 
 	private static final String TAG_SET = "TagSet";
-	
+
 	private static final String MAPPING_LOCATION = "MappingLocation";
-	
+
 	// =============================================================================================
 	// Enable / disable reading or writing of particular annotation types.
 	// =============================================================================================
-	
+
     public static final String PARAM_READ_PARAGRAPH = READ + PARAGRAPH;
-    
+
 	public static final String PARAM_READ_SENTENCE = READ + SENTENCE;
-	
+
 	public static final String PARAM_READ_TOKEN = READ + TOKEN;
 
 	public static final String PARAM_READ_LEMMA = READ + LEMMA;
@@ -208,23 +207,23 @@ public final class ComponentParameters
 	public static final String PARAM_READ_POS = READ + POS;
 
     public static final String PARAM_READ_CHUNK = READ + CHUNK;
-    
+
     public static final String PARAM_READ_MORPH = READ + MORPH;
-    
+
 	public static final String PARAM_READ_CONSTITUENT = READ + CONSTITUENT;
 
     public static final String PARAM_READ_COREFERENCE = READ + COREFERENCE;
 
 	public static final String PARAM_READ_PENN_TREE = READ + PENN_TREE;
-	
+
 	public static final String PARAM_READ_DEPENDENCY = READ + DEPENDENCY;
-	
+
 	public static final String PARAM_READ_NAMED_ENTITY = READ + NAMED_ENTITY;
 
     public static final String PARAM_WRITE_PARAGRAPH = WRITE + PARAGRAPH;
-    
+
 	public static final String PARAM_WRITE_SENTENCE = WRITE + SENTENCE;
-	
+
 	public static final String PARAM_WRITE_TOKEN = WRITE + TOKEN;
 
 	public static final String PARAM_WRITE_LEMMA = WRITE + LEMMA;
@@ -232,7 +231,7 @@ public final class ComponentParameters
 	public static final String PARAM_WRITE_POS = WRITE + POS;
 
     public static final String PARAM_WRITE_CHUNK = WRITE + CHUNK;
-    
+
     public static final String PARAM_WRITE_MORPH = WRITE + MORPH;
 
 	public static final String PARAM_WRITE_CONSTITUENT = WRITE + CONSTITUENT;
@@ -242,7 +241,7 @@ public final class ComponentParameters
 	public static final String PARAM_WRITE_PENN_TREE = WRITE + PENN_TREE;
 
 	public static final String PARAM_WRITE_DEPENDENCY = WRITE + DEPENDENCY;
-	
+
 	public static final String PARAM_WRITE_NAMED_ENTITY = WRITE + NAMED_ENTITY;
 
 	// =============================================================================================
