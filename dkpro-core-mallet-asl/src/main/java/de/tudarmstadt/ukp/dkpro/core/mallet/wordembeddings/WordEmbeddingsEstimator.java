@@ -27,7 +27,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * Compute word embeddings using skip-grams from the given collection and write results into a file.
+ * Compute word embeddings from the given collection using skip-grams.
+ * <p>
+ * Use lemmas instead of tokens by setting {@link #PARAM_USE_LEMMA} to true.
  */
 public class WordEmbeddingsEstimator
         extends MalletModelEstimator
