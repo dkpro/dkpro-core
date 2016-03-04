@@ -16,17 +16,10 @@
  * limitations under the License.
  ******************************************************************************/
 
-package de.tudarmstadt.ukp.dkpro.core.mallet.topicmodel;
+package de.tudarmstadt.ukp.dkpro.core.mallet.lda;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertEquals;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-
+import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
+import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
@@ -34,10 +27,16 @@ import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
-public class MalletTopicModelUtilsTest
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.junit.Assert.assertEquals;
+
+public class LdaTopicModelUtilsTest
 {
     private static final int N_THREADS = 4;
     private static final File MODEL_FILE = new File("target/mallet/model");
@@ -61,12 +60,12 @@ public class MalletTopicModelUtilsTest
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription estimator = createEngineDescription(
-                MalletTopicModelEstimator.class,
-                MalletTopicModelEstimator.PARAM_N_THREADS, N_THREADS,
-                MalletTopicModelEstimator.PARAM_TARGET_LOCATION, MODEL_FILE,
-                MalletTopicModelEstimator.PARAM_N_ITERATIONS, N_ITERATIONS,
-                MalletTopicModelEstimator.PARAM_N_TOPICS, N_TOPICS,
-                MalletTopicModelEstimator.PARAM_USE_LEMMA, USE_LEMMAS);
+                LdaTopicModelEstimator.class,
+                LdaTopicModelEstimator.PARAM_NUM_THREADS, N_THREADS,
+                LdaTopicModelEstimator.PARAM_TARGET_LOCATION, MODEL_FILE,
+                LdaTopicModelEstimator.PARAM_N_ITERATIONS, N_ITERATIONS,
+                LdaTopicModelEstimator.PARAM_N_TOPICS, N_TOPICS,
+                LdaTopicModelEstimator.PARAM_USE_LEMMA, USE_LEMMAS);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
 
         MODEL_FILE.deleteOnExit();
@@ -77,7 +76,7 @@ public class MalletTopicModelUtilsTest
         throws Exception
     {
         int nWords = 10;
-        List<Map<String, Double>> topWords = MalletTopicModelUtils.getTopWords(MODEL_FILE, nWords,
+        List<Map<String, Double>> topWords = LdaTopicModelUtils.getTopWords(MODEL_FILE, nWords,
                 false);
 
         assertEquals(N_TOPICS, topWords.size());

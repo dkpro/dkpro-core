@@ -15,17 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.tudarmstadt.ukp.dkpro.core.mallet.topicmodel.io;
+package de.tudarmstadt.ukp.dkpro.core.mallet.lda.io;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-
+import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
+import de.tudarmstadt.ukp.dkpro.core.mallet.lda.LdaTopicModelEstimator;
+import de.tudarmstadt.ukp.dkpro.core.mallet.lda.LdaTopicModelInferencer;
+import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -34,15 +29,21 @@ import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
-import de.tudarmstadt.ukp.dkpro.core.mallet.topicmodel.MalletTopicModelEstimator;
-import de.tudarmstadt.ukp.dkpro.core.mallet.topicmodel.MalletTopicModelInferencer;
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  *
+ * @deprecated {@link LdaTopicProportionsWriter} has been deprecated
  */
-public class MalletTopicsProportionsSortedWriterTest
+@Deprecated
+public class LdaTopicProportionsWriterTest
 {
     private static final int N_THREADS = 4;
     private static final File MODEL_FILE = new File("target/mallet/model");
@@ -54,13 +55,11 @@ public class MalletTopicsProportionsSortedWriterTest
     private static final boolean USE_LEMMAS = false;
     private static final String LANGUAGE = "en";
 
-    /**
-     * @throws java.lang.Exception
-     */
     @Before
     public void setUp()
-        throws Exception
-    { /* Generate model */
+        throws UIMAException, IOException
+    {
+        /* Generate model */
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
                 TextReader.PARAM_SOURCE_LOCATION, CAS_DIR,
                 TextReader.PARAM_PATTERNS, CAS_FILE_PATTERN,
@@ -68,12 +67,12 @@ public class MalletTopicsProportionsSortedWriterTest
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription estimator = createEngineDescription(
-                MalletTopicModelEstimator.class,
-                MalletTopicModelEstimator.PARAM_N_THREADS, N_THREADS,
-                MalletTopicModelEstimator.PARAM_TARGET_LOCATION, MODEL_FILE,
-                MalletTopicModelEstimator.PARAM_N_ITERATIONS, N_ITERATIONS,
-                MalletTopicModelEstimator.PARAM_N_TOPICS, N_TOPICS,
-                MalletTopicModelEstimator.PARAM_USE_LEMMA, USE_LEMMAS);
+                LdaTopicModelEstimator.class,
+                LdaTopicModelEstimator.PARAM_NUM_THREADS, N_THREADS,
+                LdaTopicModelEstimator.PARAM_TARGET_LOCATION, MODEL_FILE,
+                LdaTopicModelEstimator.PARAM_N_ITERATIONS, N_ITERATIONS,
+                LdaTopicModelEstimator.PARAM_N_TOPICS, N_TOPICS,
+                LdaTopicModelEstimator.PARAM_USE_LEMMA, USE_LEMMAS);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
 
         MODEL_FILE.deleteOnExit();
@@ -87,9 +86,8 @@ public class MalletTopicsProportionsSortedWriterTest
         targetFile.deleteOnExit();
 
         int expectedLines = 2;
-        int nTopicsOutput = 3;
-        String expectedLine0Regex = "dummy1.txt(\t[0-9]+:0\\.[0-9]{4}){" + nTopicsOutput + "}";
-        String expectedLine1Regex = "dummy2.txt(\t[0-9]+:0\\.[0-9]{4}){" + nTopicsOutput + "}";
+        String expectedLine0Regex = "dummy1.txt\t(0\\.[0-9]{4},){9}0\\.[0-9]{4}";
+        String expectedLine1Regex = "dummy2.txt\t(0\\.[0-9]{4},){9}0\\.[0-9]{4}";
 
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
                 TextReader.PARAM_SOURCE_LOCATION, CAS_DIR,
@@ -98,24 +96,18 @@ public class MalletTopicsProportionsSortedWriterTest
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription inferencer = createEngineDescription(
-                MalletTopicModelInferencer.class,
-                MalletTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE,
-                MalletTopicModelInferencer.PARAM_USE_LEMMA, USE_LEMMAS);
+                LdaTopicModelInferencer.class,
+                LdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE,
+                LdaTopicModelInferencer.PARAM_USE_LEMMA, USE_LEMMAS);
 
         AnalysisEngineDescription writer = createEngineDescription(
-                MalletTopicsProportionsSortedWriter.class,
-                MalletTopicsProportionsSortedWriter.PARAM_TARGET_LOCATION, targetFile,
-                MalletTopicsProportionsSortedWriter.PARAM_N_TOPICS, nTopicsOutput);
+                LdaTopicProportionsWriter.class,
+                LdaTopicProportionsWriter.PARAM_TARGET_LOCATION, targetFile);
 
         SimplePipeline.runPipeline(reader, segmenter, inferencer, writer);
         List<String> lines = FileUtils.readLines(targetFile);
         assertTrue(lines.get(0).matches(expectedLine0Regex));
         assertTrue(lines.get(1).matches(expectedLine1Regex));
         assertEquals(expectedLines, lines.size());
-
-        /* assert first field */
-        lines.stream()
-                .map(line -> line.split("\t"))
-                .forEach(fields -> assertTrue(fields[0].startsWith("dummy")));
     }
 }

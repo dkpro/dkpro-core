@@ -15,9 +15,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.tudarmstadt.ukp.dkpro.core.mallet.topicmodel.io;
+package de.tudarmstadt.ukp.dkpro.core.mallet.lda.io;
 
-import static org.apache.uima.fit.util.JCasUtil.select;
+import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.mallet.lda.LdaTopicModelInferencer;
+import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
+import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,29 +34,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Locale;
 
-import org.apache.uima.UimaContext;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ResourceInitializationException;
-
-import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.mallet.topicmodel.MalletTopicModelInferencer;
-import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 /**
  * Write topic proportions to a file in the shape {@code<docId>\t<topic1>,<topic2>,...}
  * <p>
  * This depends on the {@link TopicDistribution} annotation which should have been created by
- * {@link MalletTopicModelInferencer} before.
+ * {@link LdaTopicModelInferencer} before.
  * </p>
  *
- * @deprecated use {@link MalletTopicsProportionsSortedWriter}
+ * @deprecated use {@link LdaTopicsProportionsSortedWriter}
  */
 @Deprecated
-public class MalletTopicProportionsWriter
+public class LdaTopicProportionsWriter
     extends JCasFileWriter_ImplBase
 {
     private static final Locale LOCALE = Locale.US;

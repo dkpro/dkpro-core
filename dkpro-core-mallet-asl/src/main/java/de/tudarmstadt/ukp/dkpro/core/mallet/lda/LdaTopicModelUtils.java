@@ -16,26 +16,21 @@
  * limitations under the License.
  ******************************************************************************/
 
-package de.tudarmstadt.ukp.dkpro.core.mallet.topicmodel;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeSet;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+package de.tudarmstadt.ukp.dkpro.core.mallet.lda;
 
 import cc.mallet.topics.ParallelTopicModel;
 import cc.mallet.types.Alphabet;
 import cc.mallet.types.IDSorter;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
-public class MalletTopicModelUtils
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
+
+public class LdaTopicModelUtils
 {
-    private static final Log LOGGER = LogFactory.getLog(MalletTopicModelUtils.class);
+    private static final Log LOGGER = LogFactory.getLog(LdaTopicModelUtils.class);
 
     /**
      * Retrieve the top n topic words for each topic in the given model.
