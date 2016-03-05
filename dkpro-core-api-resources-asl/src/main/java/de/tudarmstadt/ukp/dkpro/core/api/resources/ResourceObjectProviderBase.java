@@ -511,7 +511,7 @@ public abstract class ResourceObjectProviderBase<M>
         lastModelLocation = modelLocation;
 
         try {
-            if (NOT_REQUIRED.equals(modelLocation)) {
+            if (modelLocation.startsWith(NOT_REQUIRED)) {
                 resourceUrl = null;
                 initialResourceUrl = null;
                 if (modelLocationChanged) {
