@@ -3,21 +3,19 @@ package de.tudarmstadt.ukp.dkpro.core.mallet.wordembeddings;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by schnober on 04.03.16.
- */
 public class WordEmbeddingsUtilsTest
 {
     @Test
     public void testReadEmbeddingFileTxt()
-            throws Exception
+            throws IOException, URISyntaxException
     {
-        File modelFile = new File(
-                Thread.currentThread().getContextClassLoader().getResource("dummy.vec").toURI());
+        File modelFile = new File("src/test/resources/dummy.vec");
         int expectedSize = 699;
         int expectedDimensions = 50;
 
