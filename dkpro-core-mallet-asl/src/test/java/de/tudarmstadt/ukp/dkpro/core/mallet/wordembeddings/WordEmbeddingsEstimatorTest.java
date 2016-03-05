@@ -62,9 +62,10 @@ public class WordEmbeddingsEstimatorTest
         assertEquals(expectedLength, output.size());
         output.stream()
                 .map(line -> line.split(" "))
+                /* each line should have 1 + <#dimensions> fields */
                 .peek(line -> assertEquals(dimensions + 1, line.length))
+                /* each value must be parsable to a double */
                 .map(line -> Arrays.copyOfRange(line, 1, dimensions))
-                /* fine if each value can be parsed to a double */
                 .forEach(array -> Arrays.stream(array).forEach(Double::parseDouble));
 
         embeddingsFile.delete();
