@@ -126,8 +126,8 @@ public class CoreNlpNamedEntityRecognizer
     @ConfigurationParameter(name = PARAM_MAX_TIME, mandatory = true, defaultValue = "-1")
     private int maxTime;
 
-    public static final String PARAM_NUM_THREADS = "numThreads";
-    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = "1")
+    public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
+    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = ComponentParameters.AUTO_NUM_THREADS)
     private int numThreads;
 
     /**
@@ -190,6 +190,8 @@ public class CoreNlpNamedEntityRecognizer
         mappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
         mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
         mappingProvider.setOverride(MappingProvider.VARIANT, variant);
+
+        numThreads = ComponentParameters.computeNumThreads(numThreads);
     }
     
     @Override
@@ -214,8 +216,8 @@ public class CoreNlpNamedEntityRecognizer
         
         // Transfer back into the CAS
         ConvertToUima.convertNamedEntities(aJCas, document, mappingProvider, internStrings);
-    };
-    
+    }
+
     private class CoreNlpNamedEntityRecognizerModelProvider
     extends ModelProviderBase<NERCombinerAnnotator>
     {
