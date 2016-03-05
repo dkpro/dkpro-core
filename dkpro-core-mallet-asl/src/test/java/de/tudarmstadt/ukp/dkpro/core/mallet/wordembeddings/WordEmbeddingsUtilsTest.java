@@ -18,9 +18,26 @@ public class WordEmbeddingsUtilsTest
         File modelFile = new File("src/test/resources/dummy.vec");
         int expectedSize = 699;
         int expectedDimensions = 50;
+        boolean hasHeader = false;
 
         Map<String, double[]> embeddings = WordEmbeddingsUtils
-                .readEmbeddingFileTxt(modelFile, false);
+                .readEmbeddingFileTxt(modelFile, hasHeader);
+
+        assertEquals(expectedSize, embeddings.size());
+        embeddings.values().forEach(vector -> assertEquals(expectedDimensions, vector.length));
+    }
+
+    @Test
+    public void testReadEmbeddingFileTxtWithHeader()
+            throws IOException, URISyntaxException
+    {
+        File modelFile = new File("src/test/resources/dummy_with_header.vec");
+        int expectedSize = 699;
+        int expectedDimensions = 50;
+        boolean hasHeader = true;
+
+        Map<String, double[]> embeddings = WordEmbeddingsUtils
+                .readEmbeddingFileTxt(modelFile, hasHeader);
 
         assertEquals(expectedSize, embeddings.size());
         embeddings.values().forEach(vector -> assertEquals(expectedDimensions, vector.length));
