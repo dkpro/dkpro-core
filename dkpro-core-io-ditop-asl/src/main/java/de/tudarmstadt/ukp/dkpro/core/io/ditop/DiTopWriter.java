@@ -288,7 +288,7 @@ public class DiTopWriter
             // read existing entries from config file
             corpora = readConfigFile(configFile);
             currentCorpusTopicNumbers = corpora.containsKey(corpusName) ?
-                    corpora.get(corpusName) : new HashSet<Integer>();
+                    corpora.get(corpusName) : new HashSet<>();
         }
         else {
             corpora = new HashMap<>();

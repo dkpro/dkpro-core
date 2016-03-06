@@ -112,6 +112,7 @@ public class DiTopWriterTest
         assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File).size());
         assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile).size());
         assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile).size());
+        MODEL_FILE.delete();
     }
 
     @Test
@@ -159,6 +160,7 @@ public class DiTopWriterTest
         assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File).size());
         assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile).size());
         assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile).size());
+        MODEL_FILE.delete();
     }
 
     @Test
@@ -205,6 +207,7 @@ public class DiTopWriterTest
         assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File).size());
         assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile).size());
         assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile).size());
+        MODEL_FILE.delete();
     }
 
     @Test
@@ -251,6 +254,7 @@ public class DiTopWriterTest
         assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File).size());
         assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile).size());
         assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile).size());
+        MODEL_FILE.delete();
     }
 
     @Test
@@ -297,5 +301,6 @@ public class DiTopWriterTest
         assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File).size());
         assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile).size());
         assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile).size());
+        MODEL_FILE.delete();
     }
 }
