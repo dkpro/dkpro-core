@@ -18,15 +18,14 @@
 package de.tudarmstadt.ukp.dkpro.core.mallet.wordembeddings;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelEstimator;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.WordEmbedding;
-import org.apache.commons.lang3.tuple.Triple;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.DoubleArray;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -34,8 +33,6 @@ import org.apache.uima.resource.ResourceInitializationException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-
-import static org.apache.uima.fit.util.JCasUtil.select;
 
 /**
  * Reads word embeddings from a file and adds {@link WordEmbedding} annotations to tokens/lemmas.
@@ -52,6 +49,7 @@ public class WordEmbeddingsAnnotator
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
     private File modelLocation;
+    // TODO: optionally store the embeddings in a Lucene index
     private Map<String, double[]> embeddings;
 
     /**
@@ -63,15 +61,16 @@ public class WordEmbeddingsAnnotator
     private boolean modelHasHeader;
 
     /**
-     * If true (default: false), annotate lemmas instead of tokens.
+     * The annotation type to use for the model. Default: {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token}.
+     * For lemmas, use {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value}
      */
-    public static final String PARAM_USE_LEMMAS = MalletModelEstimator.PARAM_USE_LEMMA;
-    @ConfigurationParameter(name = PARAM_USE_LEMMAS, mandatory = true, defaultValue = "false")
-    private boolean useLemmas;
+    public static final String PARAM_TOKEN_FEATURE_PATH = MalletModelEstimator.PARAM_TOKEN_FEATURE_PATH;
+    @ConfigurationParameter(name = PARAM_TOKEN_FEATURE_PATH, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
+    private String tokenFeaturePath;
 
     /**
      * If set to true (default: false), the model is expected to be in Word2Vec binary format.
-     * TODO: this is not supported yet.
+     * TODO: binary model format is not supported yet.
      */
     //    public static final String PARAM_MODEL_IS_BINARY = "modelIsBinary";
     //    @ConfigurationParameter(name = PARAM_MODEL_IS_BINARY, mandatory = true, defaultValue = "false")
@@ -93,26 +92,18 @@ public class WordEmbeddingsAnnotator
     public void process(JCas aJCas)
             throws AnalysisEngineProcessException
     {
-        if (useLemmas) {
-            select(aJCas, Lemma.class).stream()
-                    .map(lemma -> Triple.of(lemma.getValue(), lemma.getBegin(), lemma.getEnd()))
-                    .forEach(triple -> addAnnotation(aJCas, triple));
-        }
-        else {
-            select(aJCas, Token.class).stream()
-                    .map(token -> Triple
-                            .of(token.getCoveredText(), token.getBegin(), token.getEnd()))
-                    .forEach(triple -> addAnnotation(aJCas, triple));
-        }
+        Type type = aJCas.getTypeSystem().getType(tokenFeaturePath);
+
+        CasUtil.select(aJCas.getCas(), type)
+                .forEach(token -> addAnnotation(aJCas,
+                        token.getCoveredText(), token.getBegin(), token.getEnd()));
     }
 
-    private void addAnnotation(JCas aJCas, Triple<String, Integer, Integer> triple)
+    private void addAnnotation(JCas aJCas, String text, int begin, int end)
     {
-        String text = triple.getLeft();
         if (embeddings.containsKey(text)) {
             double[] vector = embeddings.get(text);
-            WordEmbedding embedding = new WordEmbedding(
-                    aJCas, triple.getMiddle(), triple.getRight());
+            WordEmbedding embedding = new WordEmbedding(aJCas, begin, end);
             DoubleArray da = new DoubleArray(aJCas, vector.length);
             for (int i = 0; i < vector.length; i++) {
                 da.set(i, vector[i]);

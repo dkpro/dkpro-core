@@ -34,6 +34,8 @@ import org.apache.uima.resource.ResourceInitializationException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
+import java.util.Optional;
+import java.util.OptionalInt;
 
 /**
  * This class defines parameters and methods that are common for Mallet model estimators.
@@ -44,11 +46,12 @@ public abstract class MalletModelEstimator
     private static final Locale locale = Locale.US;
 
     /**
-     * The annotation type to use for the model. Default: de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token.
+     * The annotation type to use for the model. Default: {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token}.
+     * For lemmas, use {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value}
      */
-    public static final String PARAM_TYPE_NAME = "typeName";
-    @ConfigurationParameter(name = PARAM_TYPE_NAME, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
-    private String typeName;
+    public static final String PARAM_TOKEN_FEATURE_PATH = "tokenFeaturePath";
+    @ConfigurationParameter(name = PARAM_TOKEN_FEATURE_PATH, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
+    private String tokenFeaturePath;
 
     /**
      * The number of threads to use during model estimation. If not set, the number of threads is determined automatically.
@@ -59,7 +62,10 @@ public abstract class MalletModelEstimator
 
     /**
      * If set, uses lemmas instead of original text as features.
+     *
+     * @deprecated use {@link #PARAM_TOKEN_FEATURE_PATH} instead
      */
+    @Deprecated
     public static final String PARAM_USE_LEMMA = "useLemma";
     @ConfigurationParameter(name = PARAM_USE_LEMMA, mandatory = true, defaultValue = "false")
     private boolean useLemma;
@@ -112,9 +118,10 @@ public abstract class MalletModelEstimator
     {
         DocumentMetaData metadata = DocumentMetaData.get(aJCas);
         try {
+
             for (TokenSequence ts : MalletUtils
-                    .generateTokenSequences(aJCas, getTypeName(), useLemma(),
-                            getMinTokenLength(), getModelEntityType())) {
+                    .generateTokenSequences(aJCas, getTokenFeaturePath(), getModelEntityType(),
+                            OptionalInt.of(getMinTokenLength()))) {
                 instanceList.addThruPipe(
                         new Instance(ts, MalletUtils.NONE_LABEL, metadata.getDocumentId(),
                                 metadata.getDocumentUri()));
@@ -125,9 +132,11 @@ public abstract class MalletModelEstimator
         }
     }
 
-    protected String getModelEntityType()
+    protected Optional<String> getModelEntityType()
     {
-        return modelEntityType;
+        return modelEntityType == null
+                ? Optional.empty()
+                : Optional.of(modelEntityType);
     }
 
     protected int getMinTokenLength()
@@ -145,9 +154,9 @@ public abstract class MalletModelEstimator
         return numThreads;
     }
 
-    protected String getTypeName()
+    protected String getTokenFeaturePath()
     {
-        return typeName;
+        return tokenFeaturePath;
     }
 
     public InstanceList getInstanceList()

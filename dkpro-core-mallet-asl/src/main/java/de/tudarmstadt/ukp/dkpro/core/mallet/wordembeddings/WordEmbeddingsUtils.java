@@ -21,11 +21,11 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -52,33 +52,49 @@ public class WordEmbeddingsUtils
             throws IOException
     {
         LOG.info("Reading embeddings file " + file);
-        List<String> lines = Files.readAllLines(file.toPath());
+        BufferedReader reader = Files.newBufferedReader(file.toPath());
 
-        int dimensions = -1;
-        int size = lines.size();
+        final int dimensions;
+        final int size;
 
         if (hasHeader) {
-            String[] header = lines.get(0).split(" ");
+            String[] header = reader.readLine().split(" ");
             assert (header.length == 2);
             size = Integer.parseInt(header[0]);
-            assert (size == lines.size() - 1);
             dimensions = Integer.parseInt(header[1]);
-            lines.remove(0);
+        }
+        else {
+            dimensions = -1;
+            size = -1;
         }
 
-        return lines.stream()
+        Map<String, double[]> embeddings = reader.lines()
                 .map(WordEmbeddingsUtils::lineToEmbedding)
                 .collect(Collectors.toMap(Pair::getKey, Pair::getValue));
+
+        if (hasHeader) {
+            /* check that size read matches header information */
+            LOG.debug("Checking number and vector sizes for all embeddings.");
+            assert size == embeddings.size();
+            assert embeddings.values().stream().allMatch(vector -> dimensions == vector.length);
+        }
+        else {
+            LOG.debug("Checking vector sizes for all embeddings.");
+            int firstLength = embeddings.values().stream().findAny().get().length;
+            assert embeddings.values().stream().allMatch(vector -> firstLength == vector.length);
+        }
+
+        reader.close();
+        return embeddings;
     }
 
     private static Pair<String, double[]> lineToEmbedding(String line)
     {
         String[] array = line.split(" ");
         int size = array.length;
-        String token = array[0];
         double[] vector = Arrays.stream(array, 1, size)
                 .mapToDouble(Double::parseDouble)
                 .toArray();
-        return Pair.of(token, vector);
+        return Pair.of(array[0], vector);
     }
 }
