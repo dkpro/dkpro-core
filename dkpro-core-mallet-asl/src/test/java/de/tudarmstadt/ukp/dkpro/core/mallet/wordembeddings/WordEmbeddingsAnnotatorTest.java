@@ -84,7 +84,6 @@ public class WordEmbeddingsAnnotatorTest
                     assertTrue(selectCovered(WordEmbedding.class, token).isEmpty());
                 }
             }
-
         }
     }
 }

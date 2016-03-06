@@ -26,6 +26,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelEstimator;
 import de.tudarmstadt.ukp.dkpro.core.mallet.MalletUtils;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
 import org.apache.commons.lang.ArrayUtils;
@@ -42,10 +43,7 @@ import org.apache.uima.jcas.cas.IntegerArray;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Infers the topic distribution over documents using a Mallet {@link ParallelTopicModel}.
@@ -106,11 +104,22 @@ public class LdaTopicModelInferencer
 
     /**
      * If set, uses lemmas instead of original text as features.
+     *
+     * @deprecated use feature path instead
      */
+    @Deprecated
     public static final String PARAM_USE_LEMMA = "useLemma";
     @ConfigurationParameter(name = PARAM_USE_LEMMA, mandatory = true, defaultValue = "false")
+    @Deprecated
     private boolean useLemma;
 
+    /**
+     * The annotation type to use for the model. Default: {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token}.
+     * For lemmas, use {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value}
+     */
+    public static final String PARAM_TOKEN_FEATURE_PATH = MalletModelEstimator.PARAM_TOKEN_FEATURE_PATH;
+    @ConfigurationParameter(name = PARAM_TOKEN_FEATURE_PATH, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
+    private String tokenFeaturePath;
     /**
      * Ignore tokens (or lemmas, respectively) that are shorter than the given value. Default: 3.
      */
@@ -156,8 +165,8 @@ public class LdaTopicModelInferencer
             /* create Mallet Instance */
             DocumentMetaData metadata = DocumentMetaData.get(aJCas);
             instance = new Instance(
-                    MalletUtils.generateTokenSequence(aJCas, type, useLemma,
-                            minTokenLength),
+                    MalletUtils.generateTokenSequence(aJCas, tokenFeaturePath, Optional.empty(),
+                            OptionalInt.of(minTokenLength)),
                     NONE_LABEL, metadata.getDocumentId(),
                     metadata.getDocumentUri());
         }
