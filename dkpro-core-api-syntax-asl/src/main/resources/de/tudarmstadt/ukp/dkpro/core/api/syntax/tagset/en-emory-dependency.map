@@ -1,0 +1,100 @@
+# Emory NLP4J
+#
+# Emory NLP4J dependencies
+
+__META_SOURCE_URL__=https://github.com/emorynlp/nlp4j/blob/master/md/components/dependency_parsing.md
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.
+
+# acl       Clausal modifier of noun
+acl=Dependency
+# acomp     Adjectival complement
+acomp=ACOMP
+# advcl     Adverbial clause modifier   
+advcl=ADVCL
+# advmod    Adverbial modifier  
+advmod=ADVMOD
+# agent     Agent (passive) 
+agent=AGENT
+# appos     Appositional modifier   
+appos=APPOS
+# attr      Attribute   
+attr=ATTR
+# aux       Auxiliary verb  
+aux=AUX0
+# auxpass   Auxiliary verb (passive)    
+auxpass=AUXPASS
+# case      Case marker 
+case=Dependency
+# cc        Coordinating conjunction    
+cc=CC
+# ccomp     Clausal complement  
+ccomp=CCOMP
+# compound  Compound word   
+compound=Dependency
+# conj      Conjunct    
+conj=CONJ
+# csubj     Clausal subject 
+csubj=CSUBJ
+# csubjpass Clausal subject (passive)   
+csubjpass=CSUBJPASS
+# dative    Dative  
+dative=Dependency
+# dep       Unclassified dependent  
+dep=DEP
+# det       Determiner  
+det=DET
+# discourse Discourse element
+discourse=Dependency 
+# dobj      Direct Object
+dobj=DOBJ   
+# expl      Expletive
+expl=EXPL
+# mark      Marker  
+mark=MARK
+# meta      Meta data   
+meta=Dependency
+# neg       Negation modifier   
+neg=NEG
+# nmod      Modifier of nominal 
+nmod=Dependency
+# npadvmod  Noun phrase as adverbial modifier   
+npadvmod=NPADVMOD
+# nsubj     Nominal subject 
+nsubj=NSUBJ
+# nsubjpass Nominal subject (passive)   
+nsubjpass=NSUBJPASS
+# oprd      Object predicate    
+oprd=Dependency
+# parataxis Parataxis   
+parataxis=PARATAXIS
+# pcomp     Preposition complement  
+pcomp=PCOMP
+# pobj      Preposition object  
+pobj=POBJ
+# poss      Possession modifier 
+poss=POSS
+# preconj   Precorrelative conjunction  
+preconj=PRECONJ
+# predet    Predeterminer   
+predet=PREDET
+# prep      Prepositional modifier  
+prep=PREP
+# prt       Verb particle 
+prt=PRT
+# punct     Punctuation 
+punct=PUNCT
+# qmod      Modifier of quantifier  
+qmod=QUANTMOD
+# relcl     Relative clause modifier    
+relcl=Dependency
+# root      Root  
+root=ROOT  
+# vocative  Vocative modifier   
+vocative=Dependency
+# xcomp     Open clausal complement 
+xcomp=XCOMP
+
+#
+# Categories used by DKPro internally
+#
+*=Dependency
