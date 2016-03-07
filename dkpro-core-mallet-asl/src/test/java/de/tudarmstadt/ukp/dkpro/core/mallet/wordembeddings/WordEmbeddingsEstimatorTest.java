@@ -117,6 +117,6 @@ public class WordEmbeddingsEstimatorTest
         assertEquals(expectedLength, lineCounter);
 
         bufferedReader.close();
-        //        embeddingsFile.delete();
+        embeddingsFile.delete();
     }
 }
