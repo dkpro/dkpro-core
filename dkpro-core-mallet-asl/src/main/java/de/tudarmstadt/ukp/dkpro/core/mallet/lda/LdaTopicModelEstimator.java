@@ -143,6 +143,8 @@ public class LdaTopicModelEstimator
         model.setSymmetricAlpha(useSymmetricAlpha);
         model.setTopicDisplay(displayInterval, displayNTopicWords);
         model.estimate();
-        model.write(new File(getTargetLocation()));
+        File targetFile = new File(getTargetLocation());
+        targetFile.getParentFile().mkdirs();
+        model.write(targetFile);
     }
 }

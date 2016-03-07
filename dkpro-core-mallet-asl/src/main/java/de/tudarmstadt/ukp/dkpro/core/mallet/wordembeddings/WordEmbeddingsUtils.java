@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * Created by schnober on 04.03.16.
+ * Helper Methods for reading word embeddings.
  */
 public class WordEmbeddingsUtils
 {

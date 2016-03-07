@@ -31,8 +31,6 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.OptionalInt;
@@ -102,14 +100,6 @@ public abstract class MalletModelEstimator
         numThreads = ComponentParameters.computeNumThreads(numThreads);
         getLogger().info(String.format("Using %d threads.", numThreads));
         instanceList = new InstanceList(new TokenSequence2FeatureSequence());
-
-        /* make sure target file does not exist and create target directory */
-        File targetFile = new File(getTargetLocation());
-        if (targetFile.exists()) {
-            throw new ResourceInitializationException(
-                    new IOException(targetFile + " already exists."));
-        }
-        new File(getTargetLocation()).getParentFile().mkdirs();
     }
 
     @Override
