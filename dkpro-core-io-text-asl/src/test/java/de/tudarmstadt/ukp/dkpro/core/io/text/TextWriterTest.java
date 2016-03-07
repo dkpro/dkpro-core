@@ -22,11 +22,23 @@ import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.junit.Assert.assertEquals;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.PrintStream;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
+import org.junit.Rule;
 import org.junit.Test;
+
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class TextWriterTest
 {
@@ -35,25 +47,52 @@ public class TextWriterTest
         throws Exception
     {
         final String text = "This is a test";
-        
+
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        
+
         PrintStream originalOut = System.out;
         try {
             System.setOut(new PrintStream(baos));
-            
+
             JCas jcas = JCasFactory.createJCas();
             jcas.setDocumentText(text);
-    
+
             AnalysisEngineDescription writer = createEngineDescription(TextWriter.class);
-            runPipeline(jcas,  writer);
-            
+            runPipeline(jcas, writer);
+
             System.out.close();
         }
         finally {
             System.setOut(originalOut);
         }
-        
+
         assertEquals(text, baos.toString("UTF-8"));
     }
+
+    @Test
+    public void testCompressed()
+        throws Exception
+    {
+        String text = StringUtils.repeat("This is a test. ", 100000);
+        
+        File outputPath = testContext.getTestOutputFolder();
+        
+        JCas jcas = JCasFactory.createJCas();
+        jcas.setDocumentText(text);
+        
+        DocumentMetaData meta = DocumentMetaData.create(jcas);
+        meta.setDocumentId("dummy");
+
+        AnalysisEngineDescription writer = createEngineDescription(TextWriter.class,
+                TextWriter.PARAM_COMPRESSION, CompressionMethod.GZIP,
+                TextWriter.PARAM_TARGET_LOCATION, outputPath);
+        runPipeline(jcas, writer);
+        
+        File input = new File(outputPath, "dummy.txt.gz");
+        InputStream is = CompressionUtils.getInputStream(input.getPath(), new FileInputStream(input));
+        assertEquals(text, IOUtils.toString(is));
+    }
+
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }
