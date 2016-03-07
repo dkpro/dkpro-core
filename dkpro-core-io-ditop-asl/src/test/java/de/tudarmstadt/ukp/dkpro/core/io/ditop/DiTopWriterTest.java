@@ -47,7 +47,6 @@ public class DiTopWriterTest
 
     private static final int N_TOPICS = 10;
     private static final int N_ITERATIONS = 50;
-    private static final boolean USE_LEMMAS = false;
     private static final String LANGUAGE = "en";
 
     @Before
@@ -65,8 +64,7 @@ public class DiTopWriterTest
                 LdaTopicModelEstimator.class,
                 LdaTopicModelEstimator.PARAM_TARGET_LOCATION, MODEL_FILE,
                 LdaTopicModelEstimator.PARAM_N_ITERATIONS, N_ITERATIONS,
-                LdaTopicModelEstimator.PARAM_N_TOPICS, N_TOPICS,
-                LdaTopicModelEstimator.PARAM_USE_LEMMA, USE_LEMMAS);
+                LdaTopicModelEstimator.PARAM_N_TOPICS, N_TOPICS);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
 
         MODEL_FILE.deleteOnExit();
