@@ -59,16 +59,6 @@ public abstract class MalletModelEstimator
     private int numThreads;
 
     /**
-     * If set, uses lemmas instead of original text as features.
-     *
-     * @deprecated use {@link #PARAM_TOKEN_FEATURE_PATH} instead
-     */
-    @Deprecated
-    public static final String PARAM_USE_LEMMA = "useLemma";
-    @ConfigurationParameter(name = PARAM_USE_LEMMA, mandatory = true, defaultValue = "false")
-    private boolean useLemma;
-
-    /**
      * Ignore tokens (or lemmas, respectively) that are shorter than the given value. Default: 3.
      */
     public static final String PARAM_MIN_TOKEN_LENGTH = "minTokenLength";
@@ -132,11 +122,6 @@ public abstract class MalletModelEstimator
     protected int getMinTokenLength()
     {
         return minTokenLength;
-    }
-
-    protected boolean useLemma()
-    {
-        return useLemma;
     }
 
     protected int getNumThreads()
