@@ -21,10 +21,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
+import java.io.*;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -52,7 +49,15 @@ public class WordEmbeddingsUtils
             throws IOException
     {
         LOG.info("Reading embeddings file " + file);
-        BufferedReader reader = Files.newBufferedReader(file.toPath());
+        return readEmbeddingFileTxt(new FileInputStream(file), hasHeader);
+    }
+
+    public static Map<String, double[]> readEmbeddingFileTxt(InputStream inputStream,
+            boolean hasHeader)
+            throws IOException
+    {
+        LOG.info("Reading embeddings...");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
         final int dimensions;
         final int size;
@@ -72,6 +77,15 @@ public class WordEmbeddingsUtils
                 .map(WordEmbeddingsUtils::lineToEmbedding)
                 .collect(Collectors.toMap(Pair::getKey, Pair::getValue));
 
+        assertInput(hasHeader, dimensions, size, embeddings);
+
+        reader.close();
+        return embeddings;
+    }
+
+    private static void assertInput(boolean hasHeader, int dimensions, int size,
+            Map<String, double[]> embeddings)
+    {
         if (hasHeader) {
             /* check that size read matches header information */
             LOG.debug("Checking number and vector sizes for all embeddings.");
@@ -83,9 +97,6 @@ public class WordEmbeddingsUtils
             int firstLength = embeddings.values().stream().findAny().get().length;
             assert embeddings.values().stream().allMatch(vector -> firstLength == vector.length);
         }
-
-        reader.close();
-        return embeddings;
     }
 
     private static Pair<String, double[]> lineToEmbedding(String line)
