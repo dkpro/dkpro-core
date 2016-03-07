@@ -45,7 +45,6 @@ public class LdaTopicModelEstimatorTest
     {
         int nTopics = 10;
         int nIterations = 50;
-        boolean useLemmas = false;
         String language = "en";
 
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
@@ -58,8 +57,7 @@ public class LdaTopicModelEstimatorTest
                 LdaTopicModelEstimator.class,
                 LdaTopicModelEstimator.PARAM_TARGET_LOCATION, MODEL_FILE,
                 LdaTopicModelEstimator.PARAM_N_ITERATIONS, nIterations,
-                LdaTopicModelEstimator.PARAM_N_TOPICS, nTopics,
-                LdaTopicModelEstimator.PARAM_USE_LEMMA, useLemmas);
+                LdaTopicModelEstimator.PARAM_N_TOPICS, nTopics);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
 
         assertTrue(MODEL_FILE.exists());
@@ -74,7 +72,6 @@ public class LdaTopicModelEstimatorTest
     {
         int nTopics = 10;
         int nIterations = 50;
-        boolean useLemmas = false;
         String language = "en";
         String entity = Sentence.class.getName();
 
@@ -89,7 +86,6 @@ public class LdaTopicModelEstimatorTest
                 LdaTopicModelEstimator.PARAM_TARGET_LOCATION, MODEL_FILE,
                 LdaTopicModelEstimator.PARAM_N_ITERATIONS, nIterations,
                 LdaTopicModelEstimator.PARAM_N_TOPICS, nTopics,
-                LdaTopicModelEstimator.PARAM_USE_LEMMA, useLemmas,
                 LdaTopicModelEstimator.PARAM_MODEL_ENTITY_TYPE, entity);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
 

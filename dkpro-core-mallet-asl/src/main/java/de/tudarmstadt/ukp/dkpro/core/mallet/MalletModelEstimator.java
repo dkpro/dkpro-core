@@ -31,8 +31,6 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.OptionalInt;
@@ -59,16 +57,6 @@ public abstract class MalletModelEstimator
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
     @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = ComponentParameters.AUTO_NUM_THREADS)
     private int numThreads;
-
-    /**
-     * If set, uses lemmas instead of original text as features.
-     *
-     * @deprecated use {@link #PARAM_TOKEN_FEATURE_PATH} instead
-     */
-    @Deprecated
-    public static final String PARAM_USE_LEMMA = "useLemma";
-    @ConfigurationParameter(name = PARAM_USE_LEMMA, mandatory = true, defaultValue = "false")
-    private boolean useLemma;
 
     /**
      * Ignore tokens (or lemmas, respectively) that are shorter than the given value. Default: 3.
@@ -102,14 +90,6 @@ public abstract class MalletModelEstimator
         numThreads = ComponentParameters.computeNumThreads(numThreads);
         getLogger().info(String.format("Using %d threads.", numThreads));
         instanceList = new InstanceList(new TokenSequence2FeatureSequence());
-
-        /* make sure target file does not exist and create target directory */
-        File targetFile = new File(getTargetLocation());
-        if (targetFile.exists()) {
-            throw new ResourceInitializationException(
-                    new IOException(targetFile + " already exists."));
-        }
-        new File(getTargetLocation()).getParentFile().mkdirs();
     }
 
     @Override
@@ -142,11 +122,6 @@ public abstract class MalletModelEstimator
     protected int getMinTokenLength()
     {
         return minTokenLength;
-    }
-
-    protected boolean useLemma()
-    {
-        return useLemma;
     }
 
     protected int getNumThreads()

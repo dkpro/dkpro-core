@@ -23,9 +23,9 @@ import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelEstimator;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Locale;
 
 /**
  * Compute word embeddings from the given collection using skip-grams.
@@ -79,8 +79,10 @@ public class WordEmbeddingsEstimator
         matrix.train(instanceList, getNumThreads(), numNegativeSamples);
 
         getLogger().info("Writing output to " + getTargetLocation());
+        File parentDir = new File(getTargetLocation()).getParentFile();
         try {
-            PrintWriter printWriter = new PrintWriter(getTargetLocation());
+            PrintWriter printWriter = new PrintWriter(getOutputStream(parentDir.getPath(),
+                    getCompressionMethod().getExtension()));
             matrix.write(printWriter);
             printWriter.close();
         }
