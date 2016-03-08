@@ -17,6 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.mallet.wordembeddings;
 
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -49,7 +50,10 @@ public class WordEmbeddingsUtils
             throws IOException
     {
         LOG.info("Reading embeddings from file " + file);
-        return readEmbeddingFileTxt(new FileInputStream(file), hasHeader);
+        InputStream is = CompressionUtils
+                .getInputStream(file.getAbsolutePath(), new FileInputStream(file));
+
+        return readEmbeddingFileTxt(is, hasHeader);
     }
 
     /**

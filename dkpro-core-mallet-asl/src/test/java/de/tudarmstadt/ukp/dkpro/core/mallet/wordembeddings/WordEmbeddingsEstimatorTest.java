@@ -21,12 +21,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
-import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -44,12 +45,16 @@ import static org.junit.Assert.assertTrue;
 
 public class WordEmbeddingsEstimatorTest
 {
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
+
     @Test
     public void test()
             throws UIMAException, IOException
     {
         File text = new File("src/test/resources/txt/*");
-        File embeddingsFile = new File("target/dummy.vec");
+        File embeddingsFile = new File(testContext.getTestOutputFolder(), "dummy.vec");
+        boolean singularTarget = true;
         int expectedLength = 699;
         int dimensions = 50;
 
@@ -60,7 +65,7 @@ public class WordEmbeddingsEstimatorTest
         AnalysisEngineDescription embeddings = createEngineDescription(
                 WordEmbeddingsEstimator.class,
                 WordEmbeddingsEstimator.PARAM_TARGET_LOCATION, embeddingsFile,
-                WordEmbeddingsEstimator.PARAM_SINGULAR_TARGET, true,
+                WordEmbeddingsEstimator.PARAM_SINGULAR_TARGET, singularTarget,
                 WordEmbeddingsEstimator.PARAM_OVERWRITE, true,
                 WordEmbeddingsEstimator.PARAM_MODEL_ENTITY_TYPE, Sentence.class.getCanonicalName());
         SimplePipeline.runPipeline(reader, segmenter, embeddings);
@@ -78,14 +83,15 @@ public class WordEmbeddingsEstimatorTest
         embeddingsFile.delete();
     }
 
-    @Ignore("The compressed output files are corrupt (unexpected end of file).")
     @Test
     public void testCompressed()
             throws UIMAException, IOException
     {
         CompressionMethod compressionMethod = CompressionMethod.GZIP;
         File text = new File("src/test/resources/txt/*");
-        File embeddingsFile = new File("target/dummy.vec" + compressionMethod.getExtension());
+
+        File targetDir = testContext.getTestOutputFolder();
+        File targetFile = new File(targetDir, "embeddings" + compressionMethod.getExtension());
         int expectedLength = 699;
         int dimensions = 50;
 
@@ -95,15 +101,14 @@ public class WordEmbeddingsEstimatorTest
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription embeddings = createEngineDescription(
                 WordEmbeddingsEstimator.class,
-                WordEmbeddingsEstimator.PARAM_TARGET_LOCATION, embeddingsFile,
+                WordEmbeddingsEstimator.PARAM_TARGET_LOCATION, targetDir,
                 WordEmbeddingsEstimator.PARAM_MODEL_ENTITY_TYPE, Sentence.class.getCanonicalName(),
-                WordEmbeddingsEstimator.PARAM_OVERWRITE, true,
                 WordEmbeddingsEstimator.PARAM_COMPRESSION, compressionMethod);
         SimplePipeline.runPipeline(reader, segmenter, embeddings);
 
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
-                CompressionUtils.getInputStream(embeddingsFile.getAbsolutePath(),
-                        Files.newInputStream(embeddingsFile.toPath()))));
+        BufferedReader bufferedReader = new BufferedReader(
+                new InputStreamReader(CompressionUtils.getInputStream(
+                        targetFile.getAbsolutePath(), Files.newInputStream(targetFile.toPath()))));
         String line;
         int lineCounter = 0;
         while ((line = bufferedReader.readLine()) != null) {
@@ -117,6 +122,5 @@ public class WordEmbeddingsEstimatorTest
         assertEquals(expectedLength, lineCounter);
 
         bufferedReader.close();
-        embeddingsFile.delete();
     }
 }

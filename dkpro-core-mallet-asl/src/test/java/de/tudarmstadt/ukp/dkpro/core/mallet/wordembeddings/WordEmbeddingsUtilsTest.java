@@ -59,4 +59,21 @@ public class WordEmbeddingsUtilsTest
         assertEquals(expectedSize, embeddings.size());
         embeddings.values().forEach(vector -> assertEquals(expectedDimensions, vector.length));
     }
+
+    @Test
+    public void testReadEmbeddingFileTxtCompressed()
+            throws IOException, URISyntaxException
+    {
+        File modelFile = new File("src/test/resources/embeddings.gz");
+        int expectedSize = 699;
+        int expectedDimensions = 50;
+        boolean hasHeader = false;
+
+        Map<String, double[]> embeddings = WordEmbeddingsUtils
+                .readEmbeddingFileTxt(modelFile, hasHeader);
+
+        assertEquals(expectedSize, embeddings.size());
+        embeddings.values().forEach(vector -> assertEquals(expectedDimensions, vector.length));
+    }
+
 }

@@ -39,9 +39,6 @@ import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by schnober on 04.03.16.
- */
 public class WordEmbeddingsAnnotatorTest
 {
     private File modelFile;
