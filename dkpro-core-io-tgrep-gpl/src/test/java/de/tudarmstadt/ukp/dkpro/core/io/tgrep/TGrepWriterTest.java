@@ -29,26 +29,24 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class TGrepWriterTest
 {
-	private final File outputPath = new File("src/test/resources/tgrep");
-
 	@Test
 	public void testTxt()
 		throws Exception
 	{
+	    File outputPath = testContext.getTestOutputFolder();
+	    
 		String language = "en";
 		String text = "This is a sample sentence. Followed by another one.";
 		AnalysisEngineDescription seg = createEngineDescription(StanfordSegmenter.class);
@@ -88,18 +86,6 @@ public class TGrepWriterTest
 		}
 	}
 
-	@Rule
-	public TestName name = new TestName();
-
-	@Before
-	public void printSeparator()
-	{
-		System.out.println("\n=== " + name.getMethodName() + " =====================");
-	}
-
-	@After
-	public void cleanUp()
-	{
-		FileUtils.deleteQuietly(outputPath);
-	}
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }
