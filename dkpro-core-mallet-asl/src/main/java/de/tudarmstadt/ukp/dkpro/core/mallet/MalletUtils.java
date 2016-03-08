@@ -195,11 +195,11 @@ public class MalletUtils
     /**
      * Extract a list of feature values.
      *
-     * @param aJCas
-     * @param featurePath
-     * @param coveringAnnotation
-     * @param minTokenLength
-     * @return
+     * @param aJCas              a {@link JCas}
+     * @param featurePath        the feature path of the "tokens"
+     * @param coveringAnnotation if set, extract only tokens covered by this annotation (e.g. a sentences); otherwise, all tokens in the CAS are extracted
+     * @param minTokenLength     tokens that are shorter than this value are omitted
+     * @return a list of strings
      * @throws FeaturePathException
      */
     public static List<String> extractAnnotationValues(JCas aJCas, String featurePath,

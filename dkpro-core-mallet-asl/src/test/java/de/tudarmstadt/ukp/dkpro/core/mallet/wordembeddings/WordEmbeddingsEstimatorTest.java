@@ -78,8 +78,8 @@ public class WordEmbeddingsEstimatorTest
         embeddingsFile.delete();
     }
 
-    //@Ignore("The compressed output files are corrupt (unexpected end of file).")
-    //@Test
+    @Ignore("The compressed output files are corrupt (unexpected end of file).")
+    @Test
     public void testCompressed()
             throws UIMAException, IOException
     {

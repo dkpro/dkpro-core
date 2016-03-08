@@ -29,6 +29,9 @@ import java.io.PrintWriter;
 
 /**
  * Compute word embeddings from the given collection using skip-grams.
+ * <p>
+ * Set {@link #PARAM_TOKEN_FEATURE_PATH} to determine what is considered as token (Tokens, Lemmas, etc.)
+ * and {@link #PARAM_MODEL_ENTITY_TYPE} to determine what is considered a document (sentences, paragraphs, etc.).
  */
 public class WordEmbeddingsEstimator
         extends MalletModelEstimator

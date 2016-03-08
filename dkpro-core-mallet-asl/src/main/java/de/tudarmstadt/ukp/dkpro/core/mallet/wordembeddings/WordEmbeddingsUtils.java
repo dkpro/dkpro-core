@@ -104,7 +104,7 @@ public class WordEmbeddingsUtils
 
     /**
      * Convert a single line in the expected format ({@code <token> <value1> ... <valueN>} int a pair
-     * holding the token and the corresponsing vector.
+     * holding the token and the corresponding vector.
      *
      * @param line a line
      * @return a {@link Pair}
