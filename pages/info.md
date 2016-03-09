@@ -6,9 +6,15 @@ permalink: "/info/"
 
 This project was initiated by the Ubiquitous Knowledge Processing Lab (UKP) at the Technische Universität Darmstadt, Germany under the auspices of Prof. Iryna Gurevych.
 
-## What is DKPro and DKPro Core?
+## What are DKPro and DKPro Core?
 
-*DKPro* was created as the *Darmstadt Knowledge Processing Repository* and first presented at the GSCL 2007. The *Core* part of DKPro addresses tasks that are commonly referred to as *linguistic pre-processing*, e.g. part-of-speech taggers, parsers, etc. Within DKPro Core, a steadily growing set of third-party tools for such tasks have been wrapped into interoperable and interchangeable components for the Apache UIMA framework.
+*DKPro Core* addresses tasks that are commonly referred to as *linguistic pre-processing*, e.g. part-of-speech taggers, parsers, etc. Within DKPro Core, a steadily growing set of third-party tools for such tasks have been wrapped into interoperable and interchangeable components for the Apache UIMA framework.
+
+*DKPro* was created as the *Darmstadt Knowledge Processing Repository* and first presented at the GSCL 2007. As part of becoming a community project, it was decided to drop the old long name. Presently, we continue to use *DKPro* as a neutral brand without any long form.
+
+It is not uncommon for people to use *DKPro* and *DKPro Core* synonymously. However, they are not the
+same. *DKPro* is a community that incorporates multiple projects and *DKPro Core* is but one of these
+projects. Also, no all projects in the DKPro community are based on UIMA, but DKPro Core is.
 
 ## Who is developing DKPro Core?
 
