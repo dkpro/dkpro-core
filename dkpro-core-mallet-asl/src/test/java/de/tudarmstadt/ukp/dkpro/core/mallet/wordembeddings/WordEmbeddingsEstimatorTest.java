@@ -48,7 +48,7 @@ public class WordEmbeddingsEstimatorTest
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
 
-    @Test
+    @Test(timeout = 60000)
     public void test()
             throws UIMAException, IOException
     {
@@ -67,6 +67,7 @@ public class WordEmbeddingsEstimatorTest
                 WordEmbeddingsEstimator.PARAM_TARGET_LOCATION, embeddingsFile,
                 WordEmbeddingsEstimator.PARAM_SINGULAR_TARGET, singularTarget,
                 WordEmbeddingsEstimator.PARAM_OVERWRITE, true,
+                WordEmbeddingsEstimator.PARAM_NUM_THREADS, 1,
                 WordEmbeddingsEstimator.PARAM_MODEL_ENTITY_TYPE, Sentence.class.getCanonicalName());
         SimplePipeline.runPipeline(reader, segmenter, embeddings);
 
@@ -83,7 +84,7 @@ public class WordEmbeddingsEstimatorTest
         embeddingsFile.delete();
     }
 
-    @Test
+    @Test(timeout = 60000)
     public void testCompressed()
             throws UIMAException, IOException
     {
@@ -103,6 +104,7 @@ public class WordEmbeddingsEstimatorTest
                 WordEmbeddingsEstimator.class,
                 WordEmbeddingsEstimator.PARAM_TARGET_LOCATION, targetDir,
                 WordEmbeddingsEstimator.PARAM_MODEL_ENTITY_TYPE, Sentence.class.getCanonicalName(),
+                WordEmbeddingsEstimator.PARAM_NUM_THREADS, 1,
                 WordEmbeddingsEstimator.PARAM_COMPRESSION, compressionMethod);
         SimplePipeline.runPipeline(reader, segmenter, embeddings);
 
@@ -122,5 +124,41 @@ public class WordEmbeddingsEstimatorTest
         assertEquals(expectedLength, lineCounter);
 
         bufferedReader.close();
+    }
+
+    @Test(timeout = 60000)
+    public void testCharacterEmbeddings()
+            throws IOException, UIMAException
+    {
+        File text = new File("src/test/resources/txt/*");
+        File embeddingsFile = new File(testContext.getTestOutputFolder(), "embeddings.vec");
+        boolean singularTarget = true;
+        boolean useCharacters = true;
+        int expectedLength = 47;
+        int dimensions = 50;
+
+        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
+                TextReader.PARAM_SOURCE_LOCATION, text,
+                TextReader.PARAM_LANGUAGE, "en");
+        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
+        AnalysisEngineDescription embeddings = createEngineDescription(
+                WordEmbeddingsEstimator.class,
+                WordEmbeddingsEstimator.PARAM_TARGET_LOCATION, embeddingsFile,
+                WordEmbeddingsEstimator.PARAM_SINGULAR_TARGET, singularTarget,
+                WordEmbeddingsEstimator.PARAM_USE_CHARACTERS, useCharacters,
+                WordEmbeddingsEstimator.PARAM_EXAMPLE_WORD, "a",
+                WordEmbeddingsEstimator.PARAM_NUM_THREADS, 1,
+                WordEmbeddingsEstimator.PARAM_OVERWRITE, true);
+        SimplePipeline.runPipeline(reader, segmenter, embeddings);
+
+        List<String> output = Files.readAllLines(embeddingsFile.toPath());
+        assertEquals(expectedLength, output.size());
+        output.stream()
+                .map(line -> line.split(" "))
+                /* each line should have 1 + <#dimensions> fields */
+                .peek(line -> assertEquals(dimensions + 1, line.length))
+                /* each value must be parsable to a double */
+                .map(line -> Arrays.copyOfRange(line, 1, dimensions))
+                .forEach(array -> Arrays.stream(array).forEach(Double::parseDouble));
     }
 }

@@ -31,6 +31,7 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.OptionalInt;
@@ -41,30 +42,19 @@ import java.util.OptionalInt;
 public abstract class MalletModelEstimator
         extends JCasFileWriter_ImplBase
 {
-    private static final Locale locale = Locale.US;
-
     /**
      * The annotation type to use for the model. Default: {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token}.
      * For lemmas, use {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value}
      */
     public static final String PARAM_TOKEN_FEATURE_PATH = "tokenFeaturePath";
-    @ConfigurationParameter(name = PARAM_TOKEN_FEATURE_PATH, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
-    private String tokenFeaturePath;
-
     /**
      * The number of threads to use during model estimation. If not set, the number of threads is determined automatically.
      */
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
-    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = ComponentParameters.AUTO_NUM_THREADS)
-    private int numThreads;
-
     /**
      * Ignore tokens (or lemmas, respectively) that are shorter than the given value. Default: 3.
      */
     public static final String PARAM_MIN_TOKEN_LENGTH = "minTokenLength";
-    @ConfigurationParameter(name = PARAM_MIN_TOKEN_LENGTH, mandatory = true, defaultValue = "3")
-    private int minTokenLength;
-
     /**
      * If specific, the text contained in the given segmentation type annotations are fed as
      * separate units to the topic model estimator e.g.
@@ -74,8 +64,18 @@ public abstract class MalletModelEstimator
      * By default, the full document text is used as a document.
      */
     public static final String PARAM_MODEL_ENTITY_TYPE = "modelEntityType";
+    public static final String PARAM_USE_CHARACTERS = "useCharacters";
+    private static final Locale locale = Locale.US;
+    @ConfigurationParameter(name = PARAM_TOKEN_FEATURE_PATH, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
+    private String tokenFeaturePath;
+    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = ComponentParameters.AUTO_NUM_THREADS)
+    private int numThreads;
+    @ConfigurationParameter(name = PARAM_MIN_TOKEN_LENGTH, mandatory = true, defaultValue = "3")
+    private int minTokenLength;
     @ConfigurationParameter(name = PARAM_MODEL_ENTITY_TYPE, mandatory = false)
     private String modelEntityType;
+    @ConfigurationParameter(name = PARAM_USE_CHARACTERS, mandatory = true, defaultValue = "false")
+    private boolean useCharacters;
 
     private InstanceList instanceList; // contains the Mallet instances
 
@@ -98,14 +98,14 @@ public abstract class MalletModelEstimator
     {
         DocumentMetaData metadata = DocumentMetaData.get(aJCas);
         try {
-
-            for (TokenSequence ts : MalletUtils
-                    .generateTokenSequences(aJCas, getTokenFeaturePath(), getModelEntityType(),
-                            OptionalInt.of(getMinTokenLength()))) {
-                instanceList.addThruPipe(
-                        new Instance(ts, MalletUtils.NONE_LABEL, metadata.getDocumentId(),
-                                metadata.getDocumentUri()));
-            }
+            List<TokenSequence> tokenSequences = useCharacters
+                    ? MalletUtils.characterSequences(aJCas, getModelEntityType())
+                    : MalletUtils.generateTokenSequences(aJCas, getTokenFeaturePath(),
+                    getModelEntityType(), OptionalInt.of(getMinTokenLength()));
+            tokenSequences.stream()
+                    .map(ts -> new Instance(ts, MalletUtils.NONE_LABEL,
+                            metadata.getDocumentId(), metadata.getDocumentUri()))
+                    .forEach(instance -> instanceList.addThruPipe(instance));
         }
         catch (FeaturePathException e) {
             throw new AnalysisEngineProcessException(e);

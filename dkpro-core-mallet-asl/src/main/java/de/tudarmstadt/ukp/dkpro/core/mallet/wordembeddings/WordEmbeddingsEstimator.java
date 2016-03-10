@@ -39,28 +39,25 @@ public class WordEmbeddingsEstimator
      * The number of negative samples to be generated for each token (default: 5).
      */
     public static final String PARAM_NUM_NEGATIVE_SAMPLES = "numNegativeSamples";
-    @ConfigurationParameter(name = PARAM_NUM_NEGATIVE_SAMPLES, mandatory = true, defaultValue = "5")
-    private int numNegativeSamples;
-
     /**
      * The dimensionality of the output word embeddings (default: 50).
      */
     public static final String PARAM_DIMENSIONS = "dimensions";
-    @ConfigurationParameter(name = PARAM_DIMENSIONS, mandatory = true, defaultValue = "50")
-    private int dimensions;
-
     /**
      * The context size when generating embeddings (default: 5).
      */
     public static final String PARAM_WINDOW_SIZE = "windowSize";
-    @ConfigurationParameter(name = PARAM_WINDOW_SIZE, mandatory = true, defaultValue = "5")
-    private int windowSize;
-
     /**
      * An example word that is output with its nearest neighbours once in a while (FIXME: currently
      * not working, see {@link #collectionProcessComplete()}). (default: null, i.e. none).
      */
     public static final String PARAM_EXAMPLE_WORD = "exampleWord";
+    @ConfigurationParameter(name = PARAM_NUM_NEGATIVE_SAMPLES, mandatory = true, defaultValue = "5")
+    private int numNegativeSamples;
+    @ConfigurationParameter(name = PARAM_DIMENSIONS, mandatory = true, defaultValue = "50")
+    private int dimensions;
+    @ConfigurationParameter(name = PARAM_WINDOW_SIZE, mandatory = true, defaultValue = "5")
+    private int windowSize;
     @ConfigurationParameter(name = PARAM_EXAMPLE_WORD, mandatory = false)
     private String exampleWord;
 
@@ -73,8 +70,7 @@ public class WordEmbeddingsEstimator
 
         WordEmbeddings matrix = new WordEmbeddings(instanceList.getDataAlphabet(), dimensions,
                 windowSize);
-        // FIXME: needs to be resolved in Mallet; matrix.queryword does not have a setter and cannot be accessed from outside.
-        //        matrix.queryWord = exampleWord;
+        matrix.setQueryWord(exampleWord);
         matrix.countWords(instanceList);
         matrix.train(instanceList, getNumThreads(), numNegativeSamples);
 

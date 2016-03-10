@@ -41,6 +41,7 @@ import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 public class MalletUtils
 {
     public static final String NONE_LABEL = "X"; // some label has to be set for Mallet instances
+    public static final String WHITESPACE_CHAR_REPLACEMENT = "SPACE";
 
     /**
      * Generate a TokenSequence from the whole document.
@@ -185,11 +186,9 @@ public class MalletUtils
             Optional<AnnotationFS> coveringAnnotation, OptionalInt minTokenLength)
             throws FeaturePathException
     {
-        List<String> tokens = extractAnnotationValues(aJCas, featurePath, coveringAnnotation,
-                minTokenLength);
-        TokenSequence ts = new TokenSequence(tokens.size());
-        ts.addAll(tokens.toArray());
-        return ts;
+        return new TokenSequence(extractAnnotationValues(aJCas, featurePath, coveringAnnotation,
+                minTokenLength)
+                .toArray());
     }
 
     /**
@@ -286,7 +285,7 @@ public class MalletUtils
     }
 
     /**
-     * Generate a token sequence where each 'token' is a character.
+     * Generate a token sequence where each 'token' is a character. Non-alphabet characters are omitted.
      *
      * @param text a string
      * @return a {@link TokenSequence}
@@ -295,6 +294,11 @@ public class MalletUtils
     {
         return new TokenSequence(text.chars()
                 .mapToObj(i -> (char) i)
+                /* filter out strange characters */
+                .filter(c -> Character.isAlphabetic(c) || Character.isDigit(c) || Character
+                        .isWhitespace(c))
+                /* replace whitespace characters */
+                .map(c -> Character.isWhitespace(c) ? WHITESPACE_CHAR_REPLACEMENT : c)
                 .toArray());
     }
 
@@ -328,5 +332,13 @@ public class MalletUtils
                 .map(MalletUtils::characterSequence)
                 .collect(Collectors.toList());
         return tokenSequences;
+    }
+
+    public static List<TokenSequence> characterSequences(JCas aJCas,
+            Optional<String> documentTypeName)
+    {
+        return documentTypeName.isPresent()
+                ? characterSequences(aJCas, documentTypeName.get())
+                : Arrays.asList(characterSequence(aJCas));
     }
 }

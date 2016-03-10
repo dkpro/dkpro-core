@@ -244,7 +244,7 @@ public class MalletUtilsTest
         TokenSequence ts = MalletUtils.characterSequence(jcas);
         assertEquals(expectedSize, ts.size());
         assertEquals(expectedFirst, ts.get(0).getText());
-        assertEquals(expectedLast, ts.get(12).getText());
+        assertEquals(expectedLast, ts.get(expectedSize - 1).getText());
     }
 
     @Test
@@ -263,6 +263,6 @@ public class MalletUtilsTest
         TokenSequence ts = tokenSequences.get(0);
         assertEquals(expectedSize, ts.size());
         assertEquals(expectedFirst, ts.get(0).getText());
-        assertEquals(expectedLast, ts.get(12).getText());
+        assertEquals(expectedLast, ts.get(expectedSize - 1).getText());
     }
 }
