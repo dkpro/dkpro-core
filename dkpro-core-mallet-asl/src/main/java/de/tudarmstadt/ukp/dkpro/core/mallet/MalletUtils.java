@@ -284,4 +284,49 @@ public class MalletUtils
         fpInfo.initialize(segments.length > 1 ? segments[1] : "");
         return fpInfo;
     }
+
+    /**
+     * Generate a token sequence where each 'token' is a character.
+     *
+     * @param text a string
+     * @return a {@link TokenSequence}
+     */
+    private static TokenSequence characterSequence(String text)
+    {
+        return new TokenSequence(text.chars()
+                .mapToObj(i -> (char) i)
+                .toArray());
+    }
+
+    /**
+     * Generate a character sequence for the whole document text.
+     *
+     * @param jCas a {@link JCas}
+     * @return a {@link TokenSequence}
+     */
+    public static TokenSequence characterSequence(JCas jCas)
+    {
+        return characterSequence(jCas.getDocumentText());
+    }
+
+    private static TokenSequence characterSequence(AnnotationFS coveringAnnotation)
+    {
+        return characterSequence(coveringAnnotation.getCoveredText());
+    }
+
+    /**
+     * Generate a list of character sequences, one for each documentType (e.g. Sentence).
+     *
+     * @param aJCas            a {@link JCas}
+     * @param documentTypeName a type name, e.g. {@code Sentence.class.getTypeName()}
+     * @return a list of {@link TokenSequence}s
+     */
+    public static List<TokenSequence> characterSequences(JCas aJCas, String documentTypeName)
+    {
+        Type documentType = aJCas.getTypeSystem().getType(documentTypeName);
+        List<TokenSequence> tokenSequences = CasUtil.select(aJCas.getCas(), documentType).stream()
+                .map(MalletUtils::characterSequence)
+                .collect(Collectors.toList());
+        return tokenSequences;
+    }
 }

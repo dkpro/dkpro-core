@@ -51,6 +51,12 @@ public class MalletUtilsTest
     private static final String TXT_DIR = "src/test/resources/txt";
     private static final String TXT_FILE_PATTERN = "[+]*.txt";
 
+    /**
+     * Generate a JCas with two token annotations.
+     *
+     * @return a {@link JCas} with two tokens.
+     * @throws UIMAException
+     */
     private static JCas jCasWithTokens()
             throws UIMAException
     {
@@ -68,6 +74,12 @@ public class MalletUtilsTest
         return jCas;
     }
 
+    /**
+     * Generate a JCas with two tokens and two lemmas.
+     *
+     * @return a {@link JCas}
+     * @throws UIMAException
+     */
     private static JCas jcasWithLemmas()
             throws UIMAException
     {
@@ -91,6 +103,23 @@ public class MalletUtilsTest
         token2.addToIndexes(jCas);
         lemma1.addToIndexes(jCas);
         lemma2.addToIndexes(jCas);
+        return jCas;
+    }
+
+    /**
+     * Create a JCas with one sentence.
+     *
+     * @return a {@link JCas} with a sentence annotation.
+     * @throws UIMAException
+     * @see #jCasWithTokens()
+     */
+    private static JCas jcasWithSentence()
+            throws UIMAException
+    {
+        JCas jCas = jCasWithTokens();
+
+        Sentence sentence = new Sentence(jCas, 0, 13);
+        sentence.addToIndexes();
         return jCas;
     }
 
@@ -193,10 +222,7 @@ public class MalletUtilsTest
         String expectedLastToken = "token2";
         Optional<String> covering = Optional.of(Sentence.class.getTypeName());
 
-        JCas jCas = jCasWithTokens();
-
-        Sentence sentence = new Sentence(jCas, 0, 13);
-        sentence.addToIndexes();
+        JCas jCas = jcasWithSentence();
 
         List<TokenSequence> sequences = MalletUtils
                 .generateTokenSequences(jCas, featurePath, covering, OptionalInt.empty());
@@ -205,5 +231,38 @@ public class MalletUtilsTest
         assertEquals(expectedSize, ts.size());
         assertEquals(expectedFirstToken, ts.get(0).getText());
         assertEquals(expectedLastToken, ts.get(ts.size() - 1).getText());
+    }
+
+    @Test
+    public void testCharacterSequence()
+            throws UIMAException
+    {
+        JCas jcas = jCasWithTokens();
+        int expectedSize = 13;
+        String expectedFirst = "t";
+        String expectedLast = "2";
+        TokenSequence ts = MalletUtils.characterSequence(jcas);
+        assertEquals(expectedSize, ts.size());
+        assertEquals(expectedFirst, ts.get(0).getText());
+        assertEquals(expectedLast, ts.get(12).getText());
+    }
+
+    @Test
+    public void testCharacterSequenceWithCovering()
+            throws UIMAException
+    {
+        String covering = Sentence.class.getTypeName();
+        JCas jCas = jcasWithSentence();
+        int expectedSequences = 1;
+        int expectedSize = 13;
+        String expectedFirst = "t";
+        String expectedLast = "2";
+
+        List<TokenSequence> tokenSequences = MalletUtils.characterSequences(jCas, covering);
+        assertEquals(expectedSequences, tokenSequences.size());
+        TokenSequence ts = tokenSequences.get(0);
+        assertEquals(expectedSize, ts.size());
+        assertEquals(expectedFirst, ts.get(0).getText());
+        assertEquals(expectedLast, ts.get(12).getText());
     }
 }
