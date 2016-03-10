@@ -70,10 +70,10 @@ public class LdaTopicModelInferencer
     private String typeName;
 
     /**
-     * The number of iterations during inference. Default: 10.
+     * The number of iterations during inference. Default: 100.
      */
     public final static String PARAM_N_ITERATIONS = "nIterations";
-    @ConfigurationParameter(name = PARAM_N_ITERATIONS, mandatory = true, defaultValue = "10")
+    @ConfigurationParameter(name = PARAM_N_ITERATIONS, mandatory = true, defaultValue = "100")
     private int nIterations;
 
     /**
