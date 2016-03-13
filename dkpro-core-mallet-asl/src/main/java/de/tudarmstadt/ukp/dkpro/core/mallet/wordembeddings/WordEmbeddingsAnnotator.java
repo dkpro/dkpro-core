@@ -69,6 +69,13 @@ public class WordEmbeddingsAnnotator
     private String tokenFeaturePath;
 
     /**
+     * If set to true (default: false), all tokens are lowercased.
+     */
+    public static final String PARAM_LOWERCASE = "lowercase";
+    @ConfigurationParameter(name = PARAM_LOWERCASE, mandatory = true, defaultValue = "false")
+    private boolean lowercase;
+
+    /**
      * If set to true (default: false), the model is expected to be in Word2Vec binary format.
      * TODO: binary model format is not supported yet.
      */
@@ -101,6 +108,9 @@ public class WordEmbeddingsAnnotator
 
     private void addAnnotation(JCas aJCas, String text, int begin, int end)
     {
+        if (lowercase) {
+            text = text.toLowerCase();
+        }
         if (embeddings.containsKey(text)) {
             double[] vector = embeddings.get(text);
             WordEmbedding embedding = new WordEmbedding(aJCas, begin, end);

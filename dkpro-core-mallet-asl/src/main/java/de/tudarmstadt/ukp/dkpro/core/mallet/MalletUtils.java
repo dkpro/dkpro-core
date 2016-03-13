@@ -52,7 +52,7 @@ public class MalletUtils
      * @param minTokenLength the minimum token length to use
      * @return a {@link TokenSequence}
      * @throws FeaturePathException if the annotation type specified in {@code PARAM_TOKEN_FEATURE_PATH} cannot be extracted.
-     * @deprecated use {@link #generateTokenSequence(JCas, String, Optional, OptionalInt)} instead
+     * @deprecated use {@link #generateTokenSequence(JCas, String, Optional, OptionalInt, boolean)} instead
      */
     @Deprecated
     public static TokenSequence generateTokenSequence(JCas aJCas, Type tokenType,
@@ -74,7 +74,7 @@ public class MalletUtils
      * @param useLemma       if true, extract lemmas instead of token texts.
      * @param minTokenLength the minimum length for the tokens (or lemmas); shorter tokens ar omitted.
      * @return a list of strings
-     * @deprecated no longer required when using {@link #generateTokenSequences(JCas, String, Optional, OptionalInt)}
+     * @deprecated no longer required when using {@link #generateTokenSequences(JCas, String, Optional, OptionalInt, boolean)}
      */
     @Deprecated
     private static Collection<String> getTokensFromAnnotation(AnnotationFS annotation,
@@ -117,7 +117,7 @@ public class MalletUtils
      * @param tokenType      the type to use for representing tokens, usually {@link Token}, but could also be
      *                       any other type.
      * @return a {@link TokenSequence}
-     * @deprecated use {@link #generateTokenSequence(JCas, String, Optional, OptionalInt)} instead
+     * @deprecated use {@link #generateTokenSequence(JCas, String, Optional, OptionalInt, boolean)} instead
      */
     @Deprecated
     public static TokenSequence generateTokenSequence(int minTokenLength, boolean useLemma,
@@ -144,7 +144,7 @@ public class MalletUtils
      * @param useLemma       if true, use lemmas instead of tokens
      * @return a list of {@link TokenSequence}s representing the documents (or e.g. sentences).
      * @throws FeaturePathException
-     * @deprecated use {@link #generateTokenSequences(JCas, String, Optional, OptionalInt)} instead
+     * @deprecated use {@link #generateTokenSequences(JCas, String, Optional, OptionalInt, boolean)} instead
      */
     @Deprecated
     public static Collection<TokenSequence> generateTokenSequences(JCas aJCas, String typeName,
@@ -179,15 +179,17 @@ public class MalletUtils
      * @param featurePath        a feature path, e.g. {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token} or {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value}
      * @param coveringAnnotation an Optional covering annotation from which tokens are selected, e.g. a {@link Sentence}
      * @param minTokenLength     an OptionalInt defining the minimum token length; all shorter tokens are omitted
+     * @param lowercase          if true, all tokens are lowercased
      * @return a {@link TokenSequence} holding all extracted tokens
      * @throws FeaturePathException
      */
     public static TokenSequence generateTokenSequence(JCas aJCas, String featurePath,
-            Optional<AnnotationFS> coveringAnnotation, OptionalInt minTokenLength)
+            Optional<AnnotationFS> coveringAnnotation, OptionalInt minTokenLength,
+            boolean lowercase)
             throws FeaturePathException
     {
         return new TokenSequence(extractAnnotationValues(aJCas, featurePath, coveringAnnotation,
-                minTokenLength)
+                minTokenLength, lowercase)
                 .toArray());
     }
 
@@ -198,11 +200,13 @@ public class MalletUtils
      * @param featurePath        the feature path of the "tokens"
      * @param coveringAnnotation if set, extract only tokens covered by this annotation (e.g. a sentences); otherwise, all tokens in the CAS are extracted
      * @param minTokenLength     tokens that are shorter than this value are omitted
+     * @param lowercase          if true, all tokens are lowercased
      * @return a list of strings
      * @throws FeaturePathException
      */
     public static List<String> extractAnnotationValues(JCas aJCas, String featurePath,
-            Optional<AnnotationFS> coveringAnnotation, OptionalInt minTokenLength)
+            Optional<AnnotationFS> coveringAnnotation, OptionalInt minTokenLength,
+            boolean lowercase)
             throws FeaturePathException
     {
         String[] segments = featurePath.split("/", 2);
@@ -225,7 +229,9 @@ public class MalletUtils
 
         /* iterate over tokens */
         while (valueIterator.hasNext()) {
-            String value = valueIterator.next().getValue();
+            String value = lowercase
+                    ? valueIterator.next().getValue().toLowerCase()
+                    : valueIterator.next().getValue();
             if (!minTokenLength.isPresent() || value.length() >= minTokenLength.getAsInt()) {
                 tokenSequence.add(value);
             }
@@ -246,7 +252,7 @@ public class MalletUtils
      * @throws FeaturePathException
      */
     public static List<TokenSequence> generateTokenSequences(JCas aJCas, String featurePath,
-            Optional<String> documentTypeName, OptionalInt minTokenLength)
+            Optional<String> documentTypeName, OptionalInt minTokenLength, boolean lowercase)
             throws FeaturePathException
     {
         List<TokenSequence> tokenSequences = new ArrayList<>();
@@ -255,13 +261,13 @@ public class MalletUtils
 
             for (AnnotationFS covering : CasUtil.select(aJCas.getCas(), documentType)) {
                 TokenSequence ts = generateTokenSequence(aJCas, featurePath, Optional.of(covering),
-                        minTokenLength);
+                        minTokenLength, lowercase);
                 tokenSequences.add(ts);
             }
         }
         else {
             TokenSequence ts = generateTokenSequence(aJCas, featurePath, Optional.empty(),
-                    minTokenLength);
+                    minTokenLength, lowercase);
             tokenSequences.add(ts);
         }
         return tokenSequences;
@@ -308,14 +314,19 @@ public class MalletUtils
      * @param jCas a {@link JCas}
      * @return a {@link TokenSequence}
      */
-    public static TokenSequence characterSequence(JCas jCas)
+    public static TokenSequence characterSequence(JCas jCas, boolean lowercase)
     {
-        return characterSequence(jCas.getDocumentText());
+        return characterSequence(lowercase
+                ? jCas.getDocumentText().toLowerCase()
+                : jCas.getDocumentText());
     }
 
-    private static TokenSequence characterSequence(AnnotationFS coveringAnnotation)
+    private static TokenSequence characterSequence(AnnotationFS coveringAnnotation,
+            boolean lowercase)
     {
-        return characterSequence(coveringAnnotation.getCoveredText());
+        return characterSequence(lowercase
+                ? coveringAnnotation.getCoveredText().toLowerCase()
+                : coveringAnnotation.getCoveredText());
     }
 
     /**
@@ -327,18 +338,24 @@ public class MalletUtils
      */
     public static List<TokenSequence> characterSequences(JCas aJCas, String documentTypeName)
     {
+        return characterSequences(aJCas, documentTypeName, false);
+    }
+
+    public static List<TokenSequence> characterSequences(JCas aJCas, String documentTypeName,
+            boolean lowercase)
+    {
         Type documentType = aJCas.getTypeSystem().getType(documentTypeName);
-        List<TokenSequence> tokenSequences = CasUtil.select(aJCas.getCas(), documentType).stream()
-                .map(MalletUtils::characterSequence)
+        return CasUtil.select(aJCas.getCas(), documentType).stream()
+                .map(token -> characterSequence(token, lowercase))
                 .collect(Collectors.toList());
-        return tokenSequences;
+
     }
 
     public static List<TokenSequence> characterSequences(JCas aJCas,
-            Optional<String> documentTypeName)
+            Optional<String> documentTypeName, boolean lowercase)
     {
         return documentTypeName.isPresent()
-                ? characterSequences(aJCas, documentTypeName.get())
-                : Arrays.asList(characterSequence(aJCas));
+                ? characterSequences(aJCas, documentTypeName.get(), lowercase)
+                : Collections.singletonList(characterSequence(aJCas, lowercase));
     }
 }

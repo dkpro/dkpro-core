@@ -127,6 +127,13 @@ public class LdaTopicModelInferencer
     @ConfigurationParameter(name = PARAM_MIN_TOKEN_LENGTH, mandatory = true, defaultValue = "3")
     private int minTokenLength;
 
+    /**
+     * If set to true (default: false), all tokens are lowercased.
+     */
+    public static final String PARAM_LOWERCASE = "lowercase";
+    @ConfigurationParameter(name = PARAM_LOWERCASE, mandatory = true, defaultValue = "false")
+    private boolean lowercase;
+
     private TopicInferencer inferencer;
     private Pipe malletPipe;
 
@@ -166,7 +173,7 @@ public class LdaTopicModelInferencer
             DocumentMetaData metadata = DocumentMetaData.get(aJCas);
             instance = new Instance(
                     MalletUtils.generateTokenSequence(aJCas, tokenFeaturePath, Optional.empty(),
-                            OptionalInt.of(minTokenLength)),
+                            OptionalInt.of(minTokenLength), lowercase),
                     NONE_LABEL, metadata.getDocumentId(),
                     metadata.getDocumentUri());
         }

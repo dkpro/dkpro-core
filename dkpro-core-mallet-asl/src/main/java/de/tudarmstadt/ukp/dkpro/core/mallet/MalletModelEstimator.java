@@ -82,6 +82,13 @@ public abstract class MalletModelEstimator
     @ConfigurationParameter(name = PARAM_USE_CHARACTERS, mandatory = true, defaultValue = "false")
     private boolean useCharacters;
 
+    /**
+     * If set to true (default: false), all tokens are lowercased.
+     */
+    public static final String PARAM_LOWERCASE = "lowercase";
+    @ConfigurationParameter(name = PARAM_LOWERCASE, mandatory = true, defaultValue = "false")
+    private boolean lowercase;
+
     private InstanceList instanceList; // contains the Mallet instances
 
     @Override
@@ -104,9 +111,10 @@ public abstract class MalletModelEstimator
         DocumentMetaData metadata = DocumentMetaData.get(aJCas);
         try {
             List<TokenSequence> tokenSequences = useCharacters
-                    ? MalletUtils.characterSequences(aJCas, getModelEntityType())
+                    ? MalletUtils.characterSequences(aJCas, getModelEntityType(), lowercase)
                     : MalletUtils.generateTokenSequences(aJCas, getTokenFeaturePath(),
-                    getModelEntityType(), OptionalInt.of(getMinTokenLength()));
+                    getModelEntityType(), OptionalInt.of(getMinTokenLength()), lowercase);
+
             tokenSequences.stream()
                     .map(ts -> new Instance(ts, MalletUtils.NONE_LABEL,
                             metadata.getDocumentId(), metadata.getDocumentUri()))

@@ -61,7 +61,7 @@ public class MalletUtilsTest
             throws UIMAException
     {
         JCas jCas = JCasFactory.createJCas();
-        jCas.setDocumentText("token1 token2");
+        jCas.setDocumentText("Token1 Token2");
         DocumentMetaData metaData = DocumentMetaData.create(jCas);
         metaData.setDocumentId("tokensTest");
         metaData.addToIndexes(jCas);
@@ -182,13 +182,35 @@ public class MalletUtilsTest
     {
         String featurePath = Token.class.getName();
         int expectedSize = 2;
-        String expectedFirstToken = "token1";
-        String expectedLastToken = "token2";
+        String expectedFirstToken = "Token1";
+        String expectedLastToken = "Token2";
+        boolean lowercase = false;
 
         JCas jCas = jCasWithTokens();
 
         TokenSequence ts = MalletUtils
-                .generateTokenSequence(jCas, featurePath, Optional.empty(), OptionalInt.empty());
+                .generateTokenSequence(jCas, featurePath, Optional.empty(), OptionalInt.empty(),
+                        lowercase);
+        assertEquals(expectedSize, ts.size());
+        assertEquals(expectedFirstToken, ts.get(0).getText());
+        assertEquals(expectedLastToken, ts.get(ts.size() - 1).getText());
+    }
+
+    @Test
+    public void testGenerateSequenceFeaturePathLowercase()
+            throws FeaturePathException, UIMAException
+    {
+        String featurePath = Token.class.getName();
+        int expectedSize = 2;
+        String expectedFirstToken = "token1";
+        String expectedLastToken = "token2";
+        boolean lowercase = true;
+
+        JCas jCas = jCasWithTokens();
+
+        TokenSequence ts = MalletUtils
+                .generateTokenSequence(jCas, featurePath, Optional.empty(), OptionalInt.empty(),
+                        lowercase);
         assertEquals(expectedSize, ts.size());
         assertEquals(expectedFirstToken, ts.get(0).getText());
         assertEquals(expectedLastToken, ts.get(ts.size() - 1).getText());
@@ -202,11 +224,13 @@ public class MalletUtilsTest
         int expectedSize = 2;
         String expectedFirstLemma = "lemma1";
         String expectedLastLemma = "lemma2";
+        boolean lowercase = false;
 
         JCas jCas = jcasWithLemmas();
 
         TokenSequence ts = MalletUtils
-                .generateTokenSequence(jCas, featurePath, Optional.empty(), OptionalInt.empty());
+                .generateTokenSequence(jCas, featurePath, Optional.empty(), OptionalInt.empty(),
+                        lowercase);
         assertEquals(expectedSize, ts.size());
         assertEquals(expectedFirstLemma, ts.get(0).getText());
         assertEquals(expectedLastLemma, ts.get(ts.size() - 1).getText());
@@ -218,14 +242,16 @@ public class MalletUtilsTest
     {
         String featurePath = Token.class.getName();
         int expectedSize = 2;
-        String expectedFirstToken = "token1";
-        String expectedLastToken = "token2";
+        String expectedFirstToken = "Token1";
+        String expectedLastToken = "Token2";
         Optional<String> covering = Optional.of(Sentence.class.getTypeName());
+        boolean lowercase = false;
 
         JCas jCas = jcasWithSentence();
 
         List<TokenSequence> sequences = MalletUtils
-                .generateTokenSequences(jCas, featurePath, covering, OptionalInt.empty());
+                .generateTokenSequences(jCas, featurePath, covering, OptionalInt.empty(),
+                        lowercase);
         assertEquals(1, sequences.size());
         TokenSequence ts = sequences.get(0);
         assertEquals(expectedSize, ts.size());
@@ -239,9 +265,25 @@ public class MalletUtilsTest
     {
         JCas jcas = jCasWithTokens();
         int expectedSize = 13;
+        String expectedFirst = "T";
+        String expectedLast = "2";
+        boolean lowercase = false;
+        TokenSequence ts = MalletUtils.characterSequence(jcas, lowercase);
+        assertEquals(expectedSize, ts.size());
+        assertEquals(expectedFirst, ts.get(0).getText());
+        assertEquals(expectedLast, ts.get(expectedSize - 1).getText());
+    }
+
+    @Test
+    public void testCharacterSequenceLowercase()
+            throws UIMAException
+    {
+        JCas jcas = jCasWithTokens();
+        int expectedSize = 13;
         String expectedFirst = "t";
         String expectedLast = "2";
-        TokenSequence ts = MalletUtils.characterSequence(jcas);
+        boolean lowercase = true;
+        TokenSequence ts = MalletUtils.characterSequence(jcas, lowercase);
         assertEquals(expectedSize, ts.size());
         assertEquals(expectedFirst, ts.get(0).getText());
         assertEquals(expectedLast, ts.get(expectedSize - 1).getText());
@@ -255,7 +297,7 @@ public class MalletUtilsTest
         JCas jCas = jcasWithSentence();
         int expectedSequences = 1;
         int expectedSize = 13;
-        String expectedFirst = "t";
+        String expectedFirst = "T";
         String expectedLast = "2";
 
         List<TokenSequence> tokenSequences = MalletUtils.characterSequences(jCas, covering);
