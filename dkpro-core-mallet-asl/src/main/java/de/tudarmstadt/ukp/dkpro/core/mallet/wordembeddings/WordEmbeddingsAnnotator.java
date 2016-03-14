@@ -25,6 +25,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.DoubleArray;
@@ -37,6 +38,10 @@ import java.util.Map;
 /**
  * Reads word embeddings from a file and adds {@link WordEmbedding} annotations to tokens/lemmas.
  */
+@TypeCapability(
+        inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
+        outputs = { "de.tudarmstadt.ukp.dkpro.core.mallet.type.WordEmbedding" }
+)
 public class WordEmbeddingsAnnotator
         extends JCasAnnotator_ImplBase
 {
