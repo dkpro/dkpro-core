@@ -115,6 +115,19 @@ def redirectText(tagset)
     def name = id.tokenize('-')[1..-2].join('-');
     return "<<tagset-${id},${name}>>"
 }
+
+def links(tagset)
+{
+    """
+    ++++
+    <div style="float:right">
+      <a href="${tagset.url}">Edit on GitHub</a><br/>
+      <a href="tagsets/${tagset.id}.json">WebAnno Tagset file (JSON)</a>
+    </div>
+    ++++
+    """.stripIndent()
+}
+
 %>
 
 <% tagsets.groupBy { it.value.tool }.each{ tool, toolTagsets -> %>
@@ -131,7 +144,7 @@ def redirectText(tagset)
 [discrete]
 ==== ${tagset.longName} (${tagset.lang})
 
-${Util.editOnGithub(tagset.url)}
+${links(tagset)}
 
 [small]#*_Tagset:_* __${tagset.name}__# +
 [small]#*_Layer:_* __${tool}__# +
@@ -140,7 +153,7 @@ ${Util.editOnGithub(tagset.url)}
 <% } else { %>
 ==== ${tagset.longName} (${tagset.lang})
 
-${Util.editOnGithub(tagset.url)}
+${links(tagset)}
 
 [small]#*_Tagset:_* __${tagset.name}__# +
 [small]#*_Layer:_* __${tool}__# +
