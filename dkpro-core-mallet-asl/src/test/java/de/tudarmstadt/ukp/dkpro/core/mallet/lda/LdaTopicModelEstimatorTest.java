@@ -86,7 +86,7 @@ public class LdaTopicModelEstimatorTest
                 LdaTopicModelEstimator.PARAM_TARGET_LOCATION, MODEL_FILE,
                 LdaTopicModelEstimator.PARAM_N_ITERATIONS, nIterations,
                 LdaTopicModelEstimator.PARAM_N_TOPICS, nTopics,
-                LdaTopicModelEstimator.PARAM_MODEL_ENTITY_TYPE, entity);
+                LdaTopicModelEstimator.PARAM_COVERING_ANNOTATION_TYPE, entity);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
 
         assertTrue(MODEL_FILE.exists());

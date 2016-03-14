@@ -74,10 +74,14 @@ public abstract class MalletModelEstimator
      * <p>
      * By default, the full document text is used as a document.
      */
-    public static final String PARAM_MODEL_ENTITY_TYPE = "modelEntityType";
-    @ConfigurationParameter(name = PARAM_MODEL_ENTITY_TYPE, mandatory = false)
-    private String modelEntityType;
+    public static final String PARAM_COVERING_ANNOTATION_TYPE = "coveringAnnotationType";
+    @ConfigurationParameter(name = PARAM_COVERING_ANNOTATION_TYPE, mandatory = false)
+    private String coveringAnnotationType;
 
+    /**
+     * If true (default: false), estimate character embeddings. {@link #PARAM_TOKEN_FEATURE_PATH} is
+     * ignored.
+     */
     public static final String PARAM_USE_CHARACTERS = "useCharacters";
     @ConfigurationParameter(name = PARAM_USE_CHARACTERS, mandatory = true, defaultValue = "false")
     private boolean useCharacters;
@@ -111,9 +115,9 @@ public abstract class MalletModelEstimator
         DocumentMetaData metadata = DocumentMetaData.get(aJCas);
         try {
             List<TokenSequence> tokenSequences = useCharacters
-                    ? MalletUtils.characterSequences(aJCas, getModelEntityType(), lowercase)
+                    ? MalletUtils.characterSequences(aJCas, getCoveringAnnotationType(), lowercase)
                     : MalletUtils.generateTokenSequences(aJCas, getTokenFeaturePath(),
-                    getModelEntityType(), OptionalInt.of(getMinTokenLength()), lowercase);
+                    getCoveringAnnotationType(), OptionalInt.of(getMinTokenLength()), lowercase);
 
             tokenSequences.stream()
                     .map(ts -> new Instance(ts, MalletUtils.NONE_LABEL,
@@ -125,11 +129,11 @@ public abstract class MalletModelEstimator
         }
     }
 
-    protected Optional<String> getModelEntityType()
+    protected Optional<String> getCoveringAnnotationType()
     {
-        return modelEntityType == null
+        return coveringAnnotationType == null
                 ? Optional.empty()
-                : Optional.of(modelEntityType);
+                : Optional.of(coveringAnnotationType);
     }
 
     protected int getMinTokenLength()
