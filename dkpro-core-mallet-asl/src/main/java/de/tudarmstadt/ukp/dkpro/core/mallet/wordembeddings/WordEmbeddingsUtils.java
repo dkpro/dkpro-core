@@ -76,7 +76,7 @@ public class WordEmbeddingsUtils
 
         if (hasHeader) {
             String[] header = reader.readLine().split(" ");
-            assert (header.length == 2);
+            assert header.length == 2;
             size = Integer.parseInt(header[0]);
             dimensions = Integer.parseInt(header[1]);
         }
