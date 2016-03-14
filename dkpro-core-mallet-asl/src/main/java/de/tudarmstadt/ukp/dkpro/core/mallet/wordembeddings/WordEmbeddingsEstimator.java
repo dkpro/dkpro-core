@@ -64,6 +64,13 @@ public class WordEmbeddingsEstimator
     @ConfigurationParameter(name = PARAM_EXAMPLE_WORD, mandatory = false)
     private String exampleWord;
 
+    /**
+     * All documents with fewer tokens than this (default: 10) are omitted.
+     */
+    public static final String PARAM_MIN_DOCUMENT_LENGTH = "minDocumentLength";
+    @ConfigurationParameter(name = PARAM_MIN_DOCUMENT_LENGTH, mandatory = true, defaultValue = "10")
+    private int minDocumentLength;
+
     @Override
     public void collectionProcessComplete()
             throws AnalysisEngineProcessException
@@ -74,6 +81,7 @@ public class WordEmbeddingsEstimator
         WordEmbeddings matrix = new WordEmbeddings(instanceList.getDataAlphabet(), dimensions,
                 windowSize);
         matrix.setQueryWord(exampleWord);
+        matrix.setMinDocumentLength(minDocumentLength);
         matrix.countWords(instanceList);
         matrix.train(instanceList, getNumThreads(), numNegativeSamples);
 
