@@ -41,7 +41,7 @@ import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 public class MalletUtils
 {
     public static final String NONE_LABEL = "X"; // some label has to be set for Mallet instances
-    public static final String WHITESPACE_CHAR_REPLACEMENT = "SPACE";
+    public static final String WHITESPACE_CHAR_REPLACEMENT = "</s>";
 
     /**
      * Generate a TokenSequence from the whole document.
