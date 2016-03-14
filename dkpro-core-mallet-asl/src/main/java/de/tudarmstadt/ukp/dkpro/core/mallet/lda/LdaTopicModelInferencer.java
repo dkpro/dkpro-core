@@ -32,11 +32,9 @@ import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.TypeCapability;
-import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.DoubleArray;
 import org.apache.uima.jcas.cas.IntegerArray;
@@ -103,17 +101,6 @@ public class LdaTopicModelInferencer
     private int maxTopicAssignments;
 
     /**
-     * If set, uses lemmas instead of original text as features.
-     *
-     * @deprecated use feature path instead
-     */
-    @Deprecated
-    public static final String PARAM_USE_LEMMA = "useLemma";
-    @ConfigurationParameter(name = PARAM_USE_LEMMA, mandatory = true, defaultValue = "false")
-    @Deprecated
-    private boolean useLemma;
-
-    /**
      * The annotation type to use for the model. Default: {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token}.
      * For lemmas, use {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value}
      */
@@ -165,7 +152,6 @@ public class LdaTopicModelInferencer
     public void process(JCas aJCas)
             throws AnalysisEngineProcessException
     {
-        Type type = CasUtil.getType(aJCas.getCas(), typeName);
         Instance instance;
 
         try {

@@ -51,7 +51,6 @@ public class LdaTopicProportionsWriterTest
 
     private static final int N_TOPICS = 10;
     private static final int N_ITERATIONS = 50;
-    private static final boolean USE_LEMMAS = false;
     private static final String LANGUAGE = "en";
 
     @Before
@@ -92,8 +91,7 @@ public class LdaTopicProportionsWriterTest
 
         AnalysisEngineDescription inferencer = createEngineDescription(
                 LdaTopicModelInferencer.class,
-                LdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE,
-                LdaTopicModelInferencer.PARAM_USE_LEMMA, USE_LEMMAS);
+                LdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
 
         AnalysisEngineDescription writer = createEngineDescription(
                 LdaTopicProportionsWriter.class,
