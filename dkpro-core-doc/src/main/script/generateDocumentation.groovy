@@ -326,6 +326,7 @@ new File(project.basedir, '..').eachFileRecurse(FILES) {
         }
         
         tagsets["${lang}-${name}-${tool}"] = [
+            id: "${lang}-${name}-${tool}",
             lang: lang,
             name: name,
             longName: longName ?: name,
@@ -357,10 +358,35 @@ inputOutputTypes = inputOutputTypes.sort().unique();
 
 def te = new groovy.text.SimpleTemplateEngine(this.class.classLoader);
 new File("${project.basedir}/src/main/script/templates/").eachFile(FILES) { tf ->
-    log.info("Processing ${tf.name}...");
-    try {
-        def template = te.createTemplate(tf.getText("UTF-8"));
-        def result = template.make([
+    if (tf.name.endsWith('.adoc')) {
+        log.info("Processing ${tf.name}...");
+        try {
+            def template = te.createTemplate(tf.getText("UTF-8"));
+            def result = template.make([
+                project: project,
+                engines: engines,
+                formats: formats,
+                models: models,
+                log: log,
+                tagsets: tagsets,
+                typesystems: typesystems,
+                inputOutputTypes: inputOutputTypes]);
+            def output = new File("${project.basedir}/target/generated-adoc/${tf.name}");
+            output.parentFile.mkdirs();
+            output.setText(result.toString(), 'UTF-8');
+        }
+        catch (Exception e) {
+            te.setVerbose(true);
+            te.createTemplate(tf.getText("UTF-8"));
+            throw e;
+        }
+    }
+}
+
+new File("${project.basedir}/src/main/script/templates/").eachFile(FILES) { tf ->
+    if (tf.name.endsWith('.groovy')) {
+        log.info("Processing ${tf.name}...");
+        def shell = new GroovyShell(new Binding([
             project: project,
             engines: engines,
             formats: formats,
@@ -368,14 +394,7 @@ new File("${project.basedir}/src/main/script/templates/").eachFile(FILES) { tf -
             log: log,
             tagsets: tagsets,
             typesystems: typesystems,
-            inputOutputTypes: inputOutputTypes]);
-        def output = new File("${project.basedir}/target/generated-adoc/${tf.name}");
-        output.parentFile.mkdirs();
-        output.setText(result.toString(), 'UTF-8');
-    }
-    catch (Exception e) {
-        te.setVerbose(true);
-        te.createTemplate(tf.getText("UTF-8"));
-        throw e;
+            inputOutputTypes: inputOutputTypes]));
+        shell.evaluate(tf.getText("UTF-8"));
     }
 }
