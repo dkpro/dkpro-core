@@ -118,14 +118,13 @@ def redirectText(tagset)
 
 def links(tagset)
 {
-    """
-    ++++
-    <div style="float:right">
-      <a href="${tagset.url}">Edit on GitHub</a><br/>
-      <a href="tagsets/${tagset.id}.json">WebAnno Tagset file (JSON)</a>
-    </div>
-    ++++
-    """.stripIndent()
+    def html = '++++\n<div style="float:right">\n';
+    html += "<a href=\"${tagset.url}\">Edit on GitHub</a><br/>\n";
+    if (!tagset.mapping.getString('__META_REDIRECT__')) {
+        html += "<a href=\"tagsets/${tagset.id}.json\">WebAnno tagset</a>\n";
+    }
+    html += '</div>\n++++\n';
+    return html;
 }
 
 %>
