@@ -45,7 +45,7 @@ N=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
 # NPA - Head-Adjunct Noun Phrase
 NPA=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
 # NPC - Head-Complement Noun Phrase
-NPA=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+NPC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
 # PP - Prepositional Phrase
 PP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
 # Participle - Participle Lexical Element
