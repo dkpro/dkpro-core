@@ -162,7 +162,7 @@ public class BerkeleyParserTest
                 "Gerund", "H", "M", "N", "NPA", "NPC", "PP", "Participle", "Prep", "Pron", "ROOT",
                 "S", "T", "V", "VPA", "VPC", "VPF", "VPS", "Verbalised" };
         
-        String[] unmappedConstituents = { "Conj", "ConjArg", "NPC", "Verbalised" };
+        String[] unmappedConstituents = { "Conj", "ConjArg", "Verbalised" };
 
 		assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 		assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
