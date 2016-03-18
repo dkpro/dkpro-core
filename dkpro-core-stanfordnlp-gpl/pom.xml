@@ -54,12 +54,6 @@
 			<artifactId>stanford-corenlp</artifactId>
 			<version>${corenlp.version}</version>
 		</dependency>
-        <dependency>
-            <groupId>edu.stanford.nlp</groupId>
-            <artifactId>stanford-corenlp</artifactId>
-            <version>${corenlp.version}</version>
-            <classifier>models</classifier>
-        </dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</artifactId>
