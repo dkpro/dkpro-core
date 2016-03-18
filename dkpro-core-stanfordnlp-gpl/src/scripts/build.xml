@@ -26,22 +26,19 @@
 	<!-- 
 	  - Upstream versions - meta data versions are maintained per model below 
 	  -->
-	<!-- http://nlp.stanford.edu/software/segmenter.shtml -->
-	<property name="segmenter.version.real" value="3.5.2"/>
-	<property name="segmenter.date" value="2015-04-20"/>
-	
 	<!-- http://nlp.stanford.edu/software/tagger.shtml -->
-	<property name="tagger.version.real" value="3.5.2"/>
-	<property name="tagger.date" value="2015-04-20"/>
+	<property name="tagger.version.real" value="3.6.0"/>
+	<property name="tagger.date" value="2015-12-09"/>
 	
 	<!-- http://nlp.stanford.edu/software/lex-parser.shtml -->
-	<property name="parser.version.real" value="3.5.2"/>
-	<property name="parser.date" value="2015-04-20"/>
+	<property name="parser.version.real" value="3.6.0"/>
+	<property name="parser.date" value="2015-12-09"/>
+	<property name="core.srparser.date" value="2014-10-23"/>
 	
 	<!-- http://nlp.stanford.edu/software/corenlp.shtml -->
-	<property name="core.version.real" value="3.5.2"/>
-	<property name="core.version" value="20150420"/>
-	<property name="core.date" value="2015-04-20"/>
+	<property name="core.version.real" value="3.6.0"/>
+	<property name="core.version" value="20151209"/>
+	<property name="core.date" value="2015-12-09"/>
 	
     <property name="core.chinese.date" value="2016-01-19"/>
     <property name="core.english.date" value="2016-01-10"/>
@@ -49,12 +46,6 @@
     <property name="core.german.date" value="2016-01-19"/>
     <property name="core.spanish.date" value="2015-10-14"/>
 	
-	
-	<!-- http://nlp.stanford.edu/software/CRF-NER.shtml -->
-	<property name="german.ner.date" value="2015-01-30"/>
-    <property name="nodistsim.ner.date" value="2012-11-11"/>
-	
-
 	<!-- 
 	  - Output package configuration
 	  -->
@@ -100,7 +91,7 @@
 		<antcall target="coref-en-default"/>
 	</target>
 	
-	<target name="ar" depends="download-tagger,download-parser">
+	<target name="ar">
 		<!-- 
 		  - Non-english models are not contained in the CoreNLP models (yet) 
 		  - We cannot use the one from the stanford-parser:models artifact, because the packages
@@ -111,7 +102,7 @@
 		<antcall target="parser-ar-sr"/>
 	</target>
 	
-	<target name="tagger-ar-accurate">	
+	<target name="tagger-ar-accurate" depends="download-tagger">	
     	<install-stub-and-upstream-file 
        		file="target/download/tagger/arabic.tagger"
        		md5="f6c1a9a591e5a8210549feefb1cc8e1e"
@@ -129,7 +120,7 @@
 		</install-stub-and-upstream-file>
 	</target>
 	
-	<target name="parser-ar-factored">	
+	<target name="parser-ar-factored" depends="download-parser">	
     	<install-stub-and-upstream-file 
     		file="target/download/parser/arabicFactored.ser.gz" 
     		md5="3d04cbd017e2c7c321e938fb344d91d3"
@@ -148,7 +139,7 @@
 		</install-stub-and-upstream-file>
 	</target>
 
-	<target name="parser-ar-sr">	
+	<target name="parser-ar-sr" depends="download-parser">	
     	<install-stub-and-upstream-file 
     		file="target/download/parser/arabicSR.ser.gz" 
     		md5="7bf3eeb2ddd5dda934a88157f94b1c0a"
@@ -224,7 +215,7 @@
             </patternset>
         </unzip>
     	<install-stub-and-upstream-file 
-    		file="target/download/tmp/edu/stanford/nlp/models/pos-tagger/german/german-dewac.tagger*" 
+    		file="target/download/tmp/edu/stanford/nlp/models/pos-tagger/german/german-dewac.tagger" 
     		md5="a209ddb12142338762a7cb848733a916"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
@@ -1972,7 +1963,10 @@
 
 	<target name="download-core" depends="-check-download-core" unless="download-core.DONE">
 		<mkdir dir="target/download/core"/>
-    	<get src="http://nlp.stanford.edu/downloads/stanford-corenlp-full-${core.date}.zip" dest="target/download/core/core-nlp.zip" skipexisting="true"/>
+    	<get 
+    		src="http://nlp.stanford.edu/software/stanford-corenlp-full-${core.date}.zip"
+    		dest="target/download/core/core-nlp.zip"
+    		skipexisting="true"/>
     	<unzip src="target/download/core/core-nlp.zip" dest="target/download/core">
     		<patternset>
     			<include name="**/stanford-corenlp-*-models.jar"/>		
@@ -2035,7 +2029,7 @@
 		<mkdir dir="target/download/parser"/>
 		
     	<get 
-    		src="http://nlp.stanford.edu/downloads/stanford-parser-full-${parser.date}.zip" 
+    		src="http://nlp.stanford.edu/software/stanford-parser-full-${parser.date}.zip"
     		dest="target/download/parser/parser.zip" 
     		skipexisting="true"/>
     	<unzip src="target/download/parser/parser.zip" dest="target/download/parser">
@@ -2101,29 +2095,6 @@
 		<touch file="target/download/parser/DONE"/>
 	</target>
 	
-	<target name="-check-download-segmenter">
-		<available property="download-segmenter.DONE" file="target/download/segmenter/DONE"/>
-	</target>
-
-	<target name="download-segmenter" depends="-check-download-segmenter" unless="download-segmenter.DONE">
-		<mkdir dir="target/download/segmenter"/>
-    	<get 
-    		src="http://nlp.stanford.edu/downloads/stanford-segmenter-${segmenter.date}.zip" 
-    		dest="target/download/segmenter/segmenter.zip" 
-    		skipexisting="true"/>
-		<unzip src="target/download/segmenter/segmenter.zip" dest="target/download/segmenter">
-    		<patternset>
-    			<include name="*/data/**/*"/>		
-			</patternset>
-			<!--
-    		<chainedmapper>
-	    		<mapper type="flatten"/>
-    		</chainedmapper>
-    		-->
-    	</unzip>
-		<touch file="target/download/segmenter/DONE"/>
-	</target>
-
    <target name="-check-download-twitie">
         <available property="download-twitie.DONE" file="target/download/twitie/DONE"/>
     </target>
