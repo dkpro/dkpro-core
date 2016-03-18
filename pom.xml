@@ -125,7 +125,7 @@
         <uimafit.plugin.version>2.1.0</uimafit.plugin.version>
 		<lucene.version>4.4.0</lucene.version>
 		<!-- The Spring version should be at least whatever uimaFIT requires -->
-		<spring.version>3.1.2.RELEASE</spring.version>
+		<spring.version>3.2.16.RELEASE</spring.version>
 	</properties>
 	<modules>
 		<module>dkpro-core-asl</module>
