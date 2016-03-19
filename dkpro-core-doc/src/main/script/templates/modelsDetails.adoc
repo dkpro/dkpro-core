@@ -22,6 +22,18 @@ def getEngineLink(model) {
     } 
 }
 
+def getSource(model) {
+    def source;
+    def getStatement = model.parent().children().find { node -> node.name() in [ 'get' ]};
+    if (getStatement?.@src) {
+        source = getStatement?.@src.text()
+    }
+    else {
+        source = "No get statement found";
+    }
+    return source;
+}
+
 def renderModel(model) {
 %>
 [[model-${model.@artifactId}]]
@@ -31,7 +43,16 @@ def renderModel(model) {
 [small]#*_Version:_* __${model.@version}__# +
 [small]#*_Engine:_* __${getEngineLink(model)}__# +
 [small]#*_Language:_* __${model.@language}__# +
-[small]#*_Variant:_* __${model.@variant}__#
+[small]#*_Variant:_* __${model.@variant}__# <% 
+if (getSource(model)) { 
+%>+
+[small]#*_Source:_* __${getSource(model)}__# <% 
+}
+if (model.@md5) { 
+%>+
+[small]#*_MD5:_* __${model.@md5.text()}__#
+<% } %>
+
 
 <% if (model.metadata.entry.size() > 0) { %>
 [discrete]
