@@ -110,12 +110,11 @@ if (mods) { %>
 ===== Models
 [options="header"]
 |====
-|Language|Variant|Version|Link
+|Language|Variant|Version
 <% mods.each { model -> %>
 |${model.@language}
-|${model.@variant}
+|${Util.modelLink(model,model.@variant)}
 |${model.@version}
-|${Util.modelLink(model,"details")}
 
 <% } // mods.each { model -> %>
 |====
