@@ -1,4 +1,5 @@
 import groovy.json.*;
+import java.util.regex.Pattern;
 
 def headerCommentText(tagset)
 {
@@ -53,9 +54,9 @@ def commentText(tag,tagset)
         if (text == tag) {
             text = '';
         }
-        else if (text.startsWith(tag)) {
+        else if (text ==~ "${Pattern.quote(tag)}\\b.*") {
             text = text[tag.length()..-1].trim();
-            if (text.startsWith('-')) {
+            if (text.startsWith('-') || text.startsWith(':')) {
                 text = text[1..-1].trim();
             }
         }
