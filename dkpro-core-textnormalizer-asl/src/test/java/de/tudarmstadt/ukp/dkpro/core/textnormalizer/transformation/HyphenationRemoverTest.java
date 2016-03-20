@@ -69,6 +69,7 @@ public class HyphenationRemoverTest
 
         /* process input file */
         final CollectionReader reader = createReader(TextReader.class,
+                TextReader.PARAM_LANGUAGE, language,
                 TextReader.PARAM_SOURCE_LOCATION, sourcePath);
 
         AnalysisEngineDescription hyphenationRemover = createEngineDescription(
@@ -77,7 +78,6 @@ public class HyphenationRemoverTest
 
         AnalysisEngineDescription segmenter = createEngineDescription(
                 OpenNlpSegmenter.class,
-                OpenNlpSegmenter.PARAM_LANGUAGE, language, 
                 OpenNlpSegmenter.PARAM_VARIANT, variant);
 
         AnalysisEngineDescription writer = createEngineDescription(

@@ -361,8 +361,9 @@ public class DocumentMetaData
 	 */
 	public static void copy(final JCas aSourceView, final JCas aTargetView)
 	{
+	    // First get the DMD then create. In case the get fails, we do not create.
+        DocumentMetaData dmd = get(aSourceView);
 		DocumentMetaData docMetaData = create(aTargetView);
-		DocumentMetaData dmd = get(aSourceView);
 		docMetaData.setCollectionId(dmd.getCollectionId());
 		docMetaData.setDocumentBaseUri(dmd.getDocumentBaseUri());
 		docMetaData.setDocumentId(dmd.getDocumentId());

@@ -74,6 +74,12 @@ public abstract class JCasTransformer_ImplBase
             // If there is no metadata, then it is not there and we do not copy it. No need to
             // warn.
             //getLogger().warn("Document does not have a DocumentMetaData annotation.");
+            
+            // If the source document has a language set, copy it to the target even if we do not
+            // use a DKPro Core DocumentMetaData annotation as document annotation
+            if (aInput.getDocumentLanguage() != null) {
+                aOutput.setDocumentLanguage(aInput.getDocumentLanguage());
+            }
         }
     }
 
