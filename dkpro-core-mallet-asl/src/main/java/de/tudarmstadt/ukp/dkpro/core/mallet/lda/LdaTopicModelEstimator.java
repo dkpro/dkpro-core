@@ -30,8 +30,6 @@ import java.io.IOException;
 /**
  * Estimate an LDA topic model using Mallet and write it to a file. It stores all incoming CAS' to
  * Mallet {@link Instance}s before estimating the model, using a {@link ParallelTopicModel}.
- * @since 1.9.0
- * @apiNote successor of {@code MalletTopicModelEstimator}
  */
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }

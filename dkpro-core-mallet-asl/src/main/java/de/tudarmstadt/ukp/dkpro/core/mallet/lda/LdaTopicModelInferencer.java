@@ -45,8 +45,6 @@ import java.util.*;
 
 /**
  * Infers the topic distribution over documents using a Mallet {@link ParallelTopicModel}.
- * @apiNote successor of {@code MalletTopicModelInferencer}
- * @since 1.9.0
  */
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },

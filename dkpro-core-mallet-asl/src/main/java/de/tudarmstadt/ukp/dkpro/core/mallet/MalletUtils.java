@@ -143,7 +143,7 @@ public class MalletUtils
      * @param typeName       the annotation type of a token
      * @param useLemma       if true, use lemmas instead of tokens
      * @return a list of {@link TokenSequence}s representing the documents (or e.g. sentences).
-     * @throws FeaturePathException
+     * @throws FeaturePathException if the annotation type specified in PARAM_TOKEN_FEATURE_PATH cannot be extracted.
      * @deprecated use {@link #generateTokenSequences(JCas, String, Optional, OptionalInt, boolean)} instead
      */
     @Deprecated
@@ -181,7 +181,7 @@ public class MalletUtils
      * @param minTokenLength     an OptionalInt defining the minimum token length; all shorter tokens are omitted
      * @param lowercase          if true, all tokens are lowercased
      * @return a {@link TokenSequence} holding all extracted tokens
-     * @throws FeaturePathException
+     * @throws FeaturePathException if the annotation type specified in PARAM_TOKEN_FEATURE_PATH cannot be extracted.
      */
     public static TokenSequence generateTokenSequence(JCas aJCas, String featurePath,
             Optional<AnnotationFS> coveringAnnotation, OptionalInt minTokenLength,
@@ -202,7 +202,7 @@ public class MalletUtils
      * @param minTokenLength     tokens that are shorter than this value are omitted
      * @param lowercase          if true, all tokens are lowercased
      * @return a list of strings
-     * @throws FeaturePathException
+     * @throws FeaturePathException if the annotation type specified in PARAM_TOKEN_FEATURE_PATH cannot be extracted.
      */
     public static List<String> extractAnnotationValues(JCas aJCas, String featurePath,
             Optional<AnnotationFS> coveringAnnotation, OptionalInt minTokenLength,
@@ -248,8 +248,9 @@ public class MalletUtils
      * @param featurePath      a feature path, e.g. (
      * @param documentTypeName a  {@code Optional<String>} defining the covering annotation type name from which tokens are selected, e.g. {@code Sentence.getClass().getTokenFeaturePath()}
      * @param minTokenLength   an {@code OptionalInt} defining the minimum token length; all shorter tokens are omitted
+     * @param lowercase        if true, all tokens are lowercased
      * @return a {@code Collection<TokenSequence>}
-     * @throws FeaturePathException
+     * @throws FeaturePathException if the annotation type specified in PARAM_TOKEN_FEATURE_PATH cannot be extracted.
      */
     public static List<TokenSequence> generateTokenSequences(JCas aJCas, String featurePath,
             Optional<String> documentTypeName, OptionalInt minTokenLength, boolean lowercase)
@@ -311,7 +312,8 @@ public class MalletUtils
     /**
      * Generate a character sequence for the whole document text.
      *
-     * @param jCas a {@link JCas}
+     * @param jCas      a {@link JCas}
+     * @param lowercase if true, all tokens are lowercased
      * @return a {@link TokenSequence}
      */
     public static TokenSequence characterSequence(JCas jCas, boolean lowercase)
