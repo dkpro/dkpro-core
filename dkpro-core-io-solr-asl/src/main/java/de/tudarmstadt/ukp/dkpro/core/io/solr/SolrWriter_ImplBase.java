@@ -70,11 +70,11 @@ public abstract class SolrWriter_ImplBase
     private int queueSize;
 
     /**
-     * The number of background threads used to empty the queue. Default: 1.
+     * The number of background numThreads used to empty the queue. Default: 1.
      */
-    public static final String PARAM_THREADS = "threads";
-    @ConfigurationParameter(name = PARAM_THREADS, mandatory = true, defaultValue = "1")
-    private int threads;
+    public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
+    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = "1")
+    private int numThreads;
 
     /**
      * When committing to the index, i.e. when all documents are processed, block until index
@@ -123,8 +123,8 @@ public abstract class SolrWriter_ImplBase
         super.initialize(context);
         getLogger().info(
                 String.format("Using Solr server at %s.%nQueue size: %d\tThreads: %d%n",
-                        targetLocation, queueSize, threads));
-        solrServer = new ConcurrentUpdateSolrClient(targetLocation, queueSize, threads);
+                        targetLocation, queueSize, numThreads));
+        solrServer = new ConcurrentUpdateSolrClient(targetLocation, queueSize, numThreads);
         try {
             int status = solrServer.ping().getStatus();
             if (status != 0) {
