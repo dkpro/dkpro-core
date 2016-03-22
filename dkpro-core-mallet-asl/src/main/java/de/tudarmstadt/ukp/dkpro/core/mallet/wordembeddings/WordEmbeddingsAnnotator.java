@@ -37,6 +37,7 @@ import java.util.Map;
 
 /**
  * Reads word embeddings from a file and adds {@link WordEmbedding} annotations to tokens/lemmas.
+ * @since 1.9.0
  */
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
@@ -54,7 +55,7 @@ public class WordEmbeddingsAnnotator
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
     private File modelLocation;
-    // TODO: optionally store the embeddings in a Lucene index
+    // TODO: optionally read the embeddings from some disk-cache
     private Map<String, double[]> embeddings;
 
     /**

@@ -38,6 +38,7 @@ import java.util.OptionalInt;
 
 /**
  * This class defines parameters and methods that are common for Mallet model estimators.
+ * @since 1.9.0
  */
 public abstract class MalletModelEstimator
         extends JCasFileWriter_ImplBase
@@ -54,6 +55,9 @@ public abstract class MalletModelEstimator
 
     /**
      * The number of threads to use during model estimation. If not set, the number of threads is determined automatically.
+     * <p>
+     * Warning: do not set this to more than 1 when using very small (test) data sets on {@link de.tudarmstadt.ukp.dkpro.core.mallet.wordembeddings.WordEmbeddingsEstimator}
+     * because the process might then run infinitely!
      */
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
     @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = ComponentParameters.AUTO_NUM_THREADS)

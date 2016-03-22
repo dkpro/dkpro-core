@@ -31,6 +31,7 @@ import java.io.PrintWriter;
  * <p>
  * Set {@link #PARAM_TOKEN_FEATURE_PATH} to determine what is considered as token (Tokens, Lemmas, etc.)
  * and {@link #PARAM_COVERING_ANNOTATION_TYPE} to determine what is considered a document (sentences, paragraphs, etc.).
+ * @since 1.9.0
  */
 public class WordEmbeddingsEstimator
         extends MalletModelEstimator
