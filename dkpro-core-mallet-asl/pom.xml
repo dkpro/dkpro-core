@@ -30,6 +30,17 @@
     <properties>
         <maven.surefire.heap>1g</maven.surefire.heap>
     </properties>
+    <repositories>
+        <repository>
+            <id>ukp-oss-ext-releases</id>
+            <url>
+                http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-ext-snapshots-local/
+            </url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
     <dependencies>
         <dependency>
             <groupId>cc.mallet</groupId>
