@@ -921,7 +921,12 @@ public class AssertAnnotations
             catch (UIMAException e) {
                 throw new AnalysisEngineProcessException(e);
             }
-            DocumentMetaData.copy(aJCas, value);
+            try {
+                DocumentMetaData.copy(aJCas, value);
+            }
+            catch (IllegalArgumentException e) {
+                // Ignore missing DocumentMetaData
+            }
             CasCopier.copyCas(aJCas.getCas(), value.getCas(), true);
         }
 
