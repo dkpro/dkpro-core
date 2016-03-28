@@ -28,19 +28,19 @@
   <name>DKPro Core ASL - FlexTag</name>
   <dependencies>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.tc</groupId>
+      <groupId>org.dkpro.tc</groupId>
       <artifactId>dkpro-tc-ml-crfsuite</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.tc</groupId>
+      <groupId>org.dkpro.tc</groupId>
       <artifactId>dkpro-tc-features</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.tc</groupId>
+      <groupId>org.dkpro.tc</groupId>
       <artifactId>dkpro-tc-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.tc</groupId>
+      <groupId>org.dkpro.tc</groupId>
       <artifactId>dkpro-tc-features-ngram</artifactId>
     </dependency>
     <dependency>
@@ -56,7 +56,7 @@
       <artifactId>lucene-core</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.tc</groupId>
+      <groupId>org.dkpro.tc</groupId>
       <artifactId>dkpro-tc-ml-svmhmm</artifactId>
     </dependency>
     <dependency>
@@ -72,7 +72,7 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>de.tudarmstadt.ukp.dkpro.tc</groupId>
+        <groupId>org.dkpro.tc</groupId>
         <artifactId>dkpro-tc</artifactId>
         <version>0.8.0-SNAPSHOT</version>
         <type>pom</type>
