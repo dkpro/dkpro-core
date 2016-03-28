@@ -29,15 +29,15 @@ import java.util.Map;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.component.NoOpAnnotator;
 import org.apache.uima.resource.ResourceInitializationException;
-
-import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import org.dkpro.lab.task.Dimension;
 import org.dkpro.lab.task.ParameterSpace;
-import de.tudarmstadt.ukp.dkpro.tc.core.Constants;
-import de.tudarmstadt.ukp.dkpro.tc.crfsuite.CRFSuiteAdapter;
-import de.tudarmstadt.ukp.dkpro.tc.features.tcu.CurrentUnit;
-import de.tudarmstadt.ukp.dkpro.tc.features.tcu.NextUnit;
-import de.tudarmstadt.ukp.dkpro.tc.features.tcu.PrevUnit;
+import org.dkpro.tc.core.Constants;
+import org.dkpro.tc.crfsuite.CRFSuiteAdapter;
+import org.dkpro.tc.features.tcu.CurrentUnit;
+import org.dkpro.tc.features.tcu.NextUnit;
+import org.dkpro.tc.features.tcu.PrevUnit;
+
+import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 
 /**
  * Example class of how to train an own model
