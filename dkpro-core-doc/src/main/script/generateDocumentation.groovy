@@ -26,7 +26,7 @@ import org.yaml.snakeyaml.Yaml;
 
 @Field def tagsets = [:];
 
-typesystemMappings = new File("src/main/script/mappings/typesystemmapping.yaml").withInputStream { 
+typesystemMappings = new File(project.basedir, "src/main/script/mappings/typesystemmapping.yaml").withInputStream { 
     new Yaml().load(it) };
 
 def locatePom(path) {
