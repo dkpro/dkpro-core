@@ -12,6 +12,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.resource.metadata.TypeSystemDescription;
 import org.apache.uima.util.XMLInputSource;
+import org.yaml.snakeyaml.Yaml;
 
 @Field def engines = [:];
 
@@ -19,9 +20,14 @@ import org.apache.uima.util.XMLInputSource;
 
 @Field def typesystems = [];
 
+@Field def typesystemMappings = [:];
+
 @Field def models = [];
 
 @Field def tagsets = [:];
+
+typesystemMappings = new File("src/main/script/mappings/typesystemmapping.yaml").withInputStream { 
+    new Yaml().load(it) };
 
 def locatePom(path) {
     def pom = new File(path, "pom.xml");
@@ -370,6 +376,7 @@ new File("${project.basedir}/src/main/script/templates/").eachFile(FILES) { tf -
                 log: log,
                 tagsets: tagsets,
                 typesystems: typesystems,
+                typesystemMappings: typesystemMappings,
                 inputOutputTypes: inputOutputTypes]);
             def output = new File("${project.basedir}/target/generated-adoc/${tf.name}");
             output.parentFile.mkdirs();
@@ -394,6 +401,7 @@ new File("${project.basedir}/src/main/script/templates/").eachFile(FILES) { tf -
             log: log,
             tagsets: tagsets,
             typesystems: typesystems,
+            typesystemMappings: typesystemMappings,
             inputOutputTypes: inputOutputTypes]));
         shell.evaluate(tf.getText("UTF-8"));
     }
