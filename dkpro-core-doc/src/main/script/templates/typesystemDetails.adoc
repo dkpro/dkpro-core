@@ -18,8 +18,14 @@ def renderType(type) {
 [[type-${ type.name }]]
 ==== ${shortTypeName}
 
+[small]#*_URI:_* __http://dkpro.github.io/dkpro-core/releases/${project.version}/docs/typesystem-reference.html#${type.name}__# +
 [small]#*_Name:_* __${type.name}__# +
 [small]#*_Supertype:_* __${Util.typeLink(type.supertypeName)}__# +
+<%
+typesystemMappings[type.name].externalReferences.each { ref ->
+    out.println("[small]#*_${ref.rel}:_* __${ref.id}__ (${ref.source})# +");
+}
+%>
 
 ++++
 ${Util.preparePassthrough(type.description)}

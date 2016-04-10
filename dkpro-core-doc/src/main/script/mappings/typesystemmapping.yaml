@@ -1,0 +1,909 @@
+de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.Anomaly:
+  features:
+    description:
+      externalReferences: []
+    suggestions:
+      externalReferences: []
+    category:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.GrammarAnomaly:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SuggestedAction:
+  features:
+    replacement:
+      externalReferences: []
+    certainty:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain:
+  features:
+    first:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink:
+  features:
+    next:
+      externalReferences: []
+    referenceType:
+      externalReferences: []
+    referenceRelation:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.discourse.type.pdtb.DiscourseArgument:
+  features:
+    parentRelationId:
+      externalReferences: []
+    argumentNumber:
+      externalReferences: []
+    argumentType:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.discourse.type.pdtb.DiscourseAttribution:
+  features:
+    attributeId:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.discourse.type.pdtb.DiscourseConnective:
+  features:
+    connectiveType:
+      externalReferences: []
+    parentRelationId:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.discourse.type.pdtb.DiscourseRelation:
+  features:
+    relationId:
+      externalReferences: []
+    arg1:
+      externalReferences: []
+    arg2:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.discourse.type.pdtb.ExplicitDiscourseRelation:
+  features:
+    discourseConnective1:
+      externalReferences: []
+    discourseConnective2:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.discourse.type.pdtb.ImplicitDiscourseRelation:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.discourse.type.rst.DiscourseRelation:
+  features:
+    relationType:
+      externalReferences: []
+    arg1:
+      externalReferences: []
+    arg2:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.discourse.type.rst.EDU:
+  features:
+    originalText:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.discourse.type.rst.RSTTreeNode:
+  features:
+    unitType:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.type.Tfidf:
+  features:
+    tfidfValue:
+      externalReferences: []
+    term:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme:
+  features:
+    morphTag:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures:
+  features:
+    gender:
+      externalReferences: []
+    number:
+      externalReferences: []
+    case:
+      externalReferences: []
+    degree:
+      externalReferences: []
+    verbForm:
+      externalReferences: []
+    tense:
+      externalReferences: []
+    mood:
+      externalReferences: []
+    voice:
+      externalReferences: []
+    definiteness:
+      externalReferences: []
+    value:
+      externalReferences: []
+    person:
+      externalReferences: []
+    aspect:
+      externalReferences: []
+    animacy:
+      externalReferences: []
+    negative:
+      externalReferences: []
+    numType:
+      externalReferences: []
+    possessive:
+      externalReferences: []
+    pronType:
+      externalReferences: []
+    reflex:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS:
+  features:
+    PosValue:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRT:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.AT:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.DM:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.EMO:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.HASH:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.INT:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.NNV:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.NPV:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.URL:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData:
+  features:
+    documentTitle:
+      externalReferences: []
+    documentId:
+      externalReferences: []
+    documentUri:
+      externalReferences: []
+    collectionId:
+      externalReferences: []
+    documentBaseUri:
+      externalReferences: []
+    isLastSegment:
+      externalReferences: []
+  externalReferences:
+  - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Document', rel: similar}
+de.tudarmstadt.ukp.dkpro.core.api.metadata.type.MetaDataStringField:
+  features:
+    key:
+      externalReferences: []
+    value:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagDescription:
+  features:
+    name:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagsetDescription:
+  features:
+    layer:
+      externalReferences: []
+    name:
+      externalReferences: []
+    tags:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.Animal:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.Cardinal:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.ContactInfo:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.Date:
+  features: {}
+  externalReferences:
+  - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Date', rel: similar}
+  - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-6123', rel: similar}
+  - {source: 'schema.org', id: 'http://schema.org/Date', rel: similar}
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.Disease:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.Event:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.Fac:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.FacDesc:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.Game:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.Gpe:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.GpeDesc:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.Language:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.Law:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location:
+  features: {}
+  externalReferences:
+  - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Location', rel: similar}
+  - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-4339', rel: similar}
+  - {source: 'schema.org', id: 'http://schema.org/Location', rel: similar}
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.Money:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity:
+  features:
+    value:
+      externalReferences: []
+  externalReferences:
+  - {source: LAPPS, id: 'http://vocab.lappsgrid.org/NamedEntity', rel: similar}
+  - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-2275', rel: similar}
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.Nationality:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.Norp:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.Ordinal:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.OrgDesc:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization:
+  features: {}
+  externalReferences:
+  - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Organization', rel: similar}
+  - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-2979', rel: similar}
+  - {source: 'schema.org', id: 'http://schema.org/Organization', rel: similar}
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.PerDesc:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.Percent:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.Person:
+  features: {}
+  externalReferences:
+  - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Person', rel: similar}
+  - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-2978', rel: similar}
+  - {source: 'schema.org', id: 'http://schema.org/Person', rel: similar}
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.Plant:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.Product:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.ProductDesc:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.Quantity:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.Substance:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.Time:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.ner.type.WorkOfArt:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.phonetics.type.PhoneticTranscription:
+  features:
+    transcription:
+      externalReferences: []
+    name:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound:
+  features:
+    splits:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.CompoundPart:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div:
+  features:
+    divType:
+      externalReferences: []
+    id:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Document:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma:
+  features:
+    value:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LinkingMorpheme:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NGram:
+  features:
+    text:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph:
+  features: {}
+  externalReferences:
+  - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Paragraph', rel: similar}
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence:
+  features:
+    id:
+      externalReferences: []
+  externalReferences:
+  - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Sentence', rel: similar}
+  - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-1386', rel: similar}
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split:
+  features:
+    splits:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem:
+  features:
+    value:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.StopWord:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token:
+  features:
+    parent:
+      externalReferences: []
+    lemma:
+      externalReferences: []
+    stem:
+      externalReferences: []
+    pos:
+      externalReferences: []
+    morph:
+      externalReferences: []
+    id:
+      externalReferences: []
+  externalReferences:
+  - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Token', rel: similar}
+  - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-1403', rel: similar}
+de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument:
+  features:
+    role:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField:
+  features:
+    value:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate:
+  features:
+    category:
+      externalReferences: []
+    arguments:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.semantics.type.WordSense:
+  features:
+    value:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field:
+  features:
+    name:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree:
+  features:
+    PennTree:
+      externalReferences: []
+    TransformationNames:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.Tag:
+  features:
+    value:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.ADJC:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.ADVC:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.CONCJ:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk:
+  features:
+    chunkValue:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.INTJ:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.LST:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.NC:
+  features: {}
+  externalReferences:
+  - {source: LAPPS, id: 'http://vocab.lappsgrid.org/NounChunk', rel: similar}
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.O:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.PC:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.PRT:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.VC:
+  features: {}
+  externalReferences:
+  - {source: LAPPS, id: 'http://vocab.lappsgrid.org/VerbChunk', rel: similar}
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ADJP:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ADVP:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.CONJP:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent:
+  features:
+    constituentType:
+      externalReferences: []
+    parent:
+      externalReferences: []
+    children:
+      externalReferences: []
+    syntacticFunction:
+      externalReferences: []
+  externalReferences:
+  - {source: LAPPS, id: 'http//vocab.lappsgrid.org/Constituent', rel: similar}
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.FRAG:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.INTJ:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.LST:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.NAC:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.NP:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.NX:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.PP:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.PRN:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.PRP:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.PRT:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.QP:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.RRC:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.S:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.SBAR:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.SBARQ:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.SINV:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.SQ:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.UCP:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.VP:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.WHADJP:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.WHADVP:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.WHNP:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.WHPP:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ABBREV:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ACOMP:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ADVCL:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ADVMOD:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.AGENT:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.AMOD:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.APPOS:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ATTR:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.AUX0:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.AUXPASS:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.CC:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.CCOMP:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.COMPLM:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.CONJ:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.CONJP:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.CONJ_YET:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.COP:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.CSUBJ:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.CSUBJPASS:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DEP:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DET:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DOBJ:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:
+  features:
+    Governor:
+      externalReferences: []
+    Dependent:
+      externalReferences: []
+    DependencyType:
+      externalReferences: []
+  externalReferences:
+  - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Dependency', rel: similar}
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.EXPL:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.INFMOD:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.IOBJ:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.MARK:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.MEASURE:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.MWE:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.NEG:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.NN:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.NPADVMOD:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.NSUBJ:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.NSUBJPASS:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.NUM:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.NUMBER:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.PARATAXIS:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.PARTMOD:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.PCOMP:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.POBJ:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.POSS:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.POSSESSIVE:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.PRECONJ:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.PRED:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.PREDET:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.PREP:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.PREPC:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.PRT:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.PUNCT:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.PURPCL:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.QUANTMOD:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.RCMOD:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.REF:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.REL:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.TMOD:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.XCOMP:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.XSUBJ:
+  features: {}
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation:
+  features:
+    value:
+      externalReferences: []
+    operation:
+      externalReferences: []
+    reason:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.ArticleInfo:
+  features:
+    Authors:
+      externalReferences: []
+    Revisions:
+      externalReferences: []
+    FirstAppearance:
+      externalReferences: []
+    LastAppearance:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig:
+  features:
+    Host:
+      externalReferences: []
+    DB:
+      externalReferences: []
+    User:
+      externalReferences: []
+    Password:
+      externalReferences: []
+    Language:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaLink:
+  features:
+    LinkType:
+      externalReferences: []
+    Target:
+      externalReferences: []
+    Anchor:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision:
+  features:
+    revisionId:
+      externalReferences: []
+    pageId:
+      externalReferences: []
+    contributorName:
+      externalReferences: []
+    comment:
+      externalReferences: []
+    contributorId:
+      externalReferences: []
+    timestamp:
+      externalReferences: []
+    minor:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution:
+  features:
+    TopicProportions:
+      externalReferences: []
+    TopicAssignment:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.mallet.type.WordEmbedding:
+  features:
+    WordEmbedding:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.mecab.type.JapaneseToken:
+  features:
+    kana:
+      externalReferences: []
+    ibo:
+      externalReferences: []
+    kei:
+      externalReferences: []
+    dan:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.performance.type.TimerAnnotation:
+  features:
+    startTime:
+      externalReferences: []
+    endTime:
+      externalReferences: []
+    name:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.sentiment.type.StanfordSentimentAnnotation:
+  features:
+    veryNegative:
+      externalReferences: []
+    negative:
+      externalReferences: []
+    neutral:
+      externalReferences: []
+    positive:
+      externalReferences: []
+    veryPositive:
+      externalReferences: []
+  externalReferences: []
+de.tudarmstadt.ukp.dkpro.core.type.ReadabilityScore:
+  features:
+    measureName:
+      externalReferences: []
+    score:
+      externalReferences: []
+  externalReferences: []
