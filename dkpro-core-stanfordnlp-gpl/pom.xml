@@ -28,7 +28,7 @@
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl</artifactId>
     <packaging>jar</packaging>
-	<name>DKPro Core GPL - Stanford CoreNLP Suite</name>
+	<name>DKPro Core GPL - Stanford CoreNLP Suite (v ${corenlp.version}) (GPL)</name>
     <properties>
         <corenlp.version>3.6.0</corenlp.version>
     </properties>

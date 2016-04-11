@@ -25,7 +25,7 @@
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
     <packaging>jar</packaging>
-	<name>DKPro Core ASL - OpenNLP (ASL)</name>
+	<name>DKPro Core ASL - OpenNLP (v ${opennlp.version}) (ASL)</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
@@ -38,7 +38,7 @@
 		<dependency>
 			<groupId>org.apache.opennlp</groupId>
 			<artifactId>opennlp-tools</artifactId>
-			<version>1.6.0</version>
+			<version>${opennlp.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -549,4 +549,7 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+	<properties>
+	  <opennlp.version>1.6.0</opennlp.version>
+	</properties>
 </project>

@@ -25,7 +25,7 @@
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.textcat-asl</artifactId>
     <packaging>jar</packaging>
-	<name>DKPro Core ASL - TextCat (LGPL)</name>
+	<name>DKPro Core ASL - TextCat (v ${corenlp.version}) (LGPL)</name>
 	<description>http://textcat.sourceforge.net/</description>
 	<dependencies>
 		<dependency>
@@ -39,7 +39,7 @@
 		<dependency>
 			<groupId>org.knallgrau.utils</groupId>
 			<artifactId>textcat</artifactId>
-			<version>1.0.1</version>
+			<version>${textcat.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -47,4 +47,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<properties>
+	  <textcat.version>1.0.1</textcat.version>
+	</properties>
 </project>
