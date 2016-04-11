@@ -25,7 +25,7 @@
     </parent>
     <artifactId>de.tudarmstadt.ukp.dkpro.core.jtok-asl</artifactId>
     <packaging>jar</packaging>
-    <name>DKPro Core ASL - JTok (LGPL)</name>
+    <name>DKPro Core ASL - JTok (v ${jtok.version}) (LGPL)</name>
     <description>http://jazzy.sourceforge.net/</description>
     <dependencies>
         <dependency>
@@ -39,7 +39,7 @@
         <dependency>
             <groupId>de.dfki.lt.jtok</groupId>
             <artifactId>jtok-core</artifactId>
-            <version>2.16</version>
+            <version>${jtok.version}</version>
         </dependency>
         <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -57,4 +57,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <properties>
+      <jtok.version>2.16</jtok.version>
+    </properties>
 </project>

@@ -29,7 +29,7 @@
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-gpl</artifactId>
     <packaging>jar</packaging>
-	<name>DKPro Core GPL - LingPipe</name>
+	<name>DKPro Core GPL - LingPipe (v ${lingpipe.version})</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
@@ -42,7 +42,7 @@
         <dependency>
             <groupId>de.julielab</groupId>
             <artifactId>aliasi-lingpipe</artifactId>
-            <version>4.1.0</version>
+            <version>${lingpipe.version}</version>
         </dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -167,4 +167,7 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+	<properties>
+	  <lingpipe.version>4.1.0</lingpipe.version>
+	</properties>
 </project>

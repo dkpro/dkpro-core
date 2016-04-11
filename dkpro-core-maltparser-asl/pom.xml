@@ -25,7 +25,7 @@
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.maltparser-asl</artifactId>
     <packaging>jar</packaging>
-	<name>DKPro Core ASL - MaltParser</name>
+	<name>DKPro Core ASL - MaltParser (v ${maltparser.version})</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
@@ -46,7 +46,7 @@
 		<dependency>
 			<groupId>org.maltparser</groupId>
 			<artifactId>maltparser</artifactId>
-			<version>1.8.1</version>
+			<version>${maltparser.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -247,4 +247,7 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+	<properties>
+	  <maltparser.version>1.8.1</maltparser.version>
+	</properties>
 </project>

@@ -25,7 +25,7 @@
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.mstparser-asl</artifactId>
     <packaging>jar</packaging>
-	<name>DKPro Core ASL - MSTParser</name>
+	<name>DKPro Core ASL - MSTParser (v ${mstparser.version})</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
@@ -46,7 +46,7 @@
 		<dependency>
 			<groupId>net.sourceforge.mstparser</groupId>
 			<artifactId>mstparser</artifactId>
-			<version>0.5.1</version>
+			<version>${mstparser.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -186,4 +186,7 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+	<properties>
+	  <mstparser.version>0.5.1</mstparser.version>
+	</properties>
 </project>
