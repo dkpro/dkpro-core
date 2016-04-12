@@ -147,9 +147,15 @@ public abstract class ResourceCollectionReaderBase
         throws ResourceInitializationException
     {
         super.initialize(aContext);
+        
+        if ((patterns == null || patterns.length == 0) && StringUtils.isBlank(sourceLocation)) {
+            throw new IllegalArgumentException(
+                    "Either a source location, pattern, or both must be specified.");
+        }
+        
         // if an ExternalResourceLocator providing a custom ResourcePatternResolver
         // has been specified, use it, by default use PathMatchingResourcePatternresolver
-
+        
         // If there are no patterns, then look for a pattern in the location itself.
         // If the source location contains a wildcard, split it up into a base and a pattern
         if (patterns == null) {
