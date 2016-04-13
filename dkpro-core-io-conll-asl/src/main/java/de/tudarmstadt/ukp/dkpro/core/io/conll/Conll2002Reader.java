@@ -83,8 +83,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * 
  * <p>Sentences are separated by a blank new line.</p>
  * 
- * @see <a href="http://www.clips.ua.ac.be/conll2002/ner/">CoNLL 2002 shared task</a>
- *
  * <p>The reader is also compatible with the Conll-based GermEval 2014 named entity format,
  * in which the columns are separated by a tab, and there is an extra column for embedded named entities,
  * besides the token number being put in the first column (see below).
@@ -93,37 +91,37 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * named entities should be read.
  * (Note: Currently, the reader only reads the outer named entities, not the embedded ones.</p>
  * 
- * <pre>
+ * <pre><code>
  * The following snippet shows an example of the TSV format 
  * # http://de.wikipedia.org/wiki/Manfred_Korfmann [2009-10-17]
- * 1 Aufgrund 			O 			O
- * 2 seiner 			O 			O
- * 3 Initiative 		O 			O
- * 4 fand 				O 			O
- * 5 2001/2002 			O 			O
- * 6 in 				O 			O
- * 7 Stuttgart 			B-LOC 		O
- * 8 , 					O 			O
- * 9 Braunschweig 		B-LOC 		O
- * 10 und 				O 			O
- * 11 Bonn 				B-LOC 		O
- * 12 eine 				O 			O
- * 13 große 			O 			O
- * 14 und 				O 			O
- * 15 publizistisch 	O 			O
- * 16 vielbeachtete 	O 			O
- * 17 Troia-Ausstellung B-LOCpart 	O
- * 18 statt 			O 			O
- * 19 , 				O 			O
- * 20 „ 				O 			O
- * 21 Troia 			B-OTH 		B-LOC
- * 22 - 				I-OTH 		O
- * 23 Traum 			I-OTH 		O
- * 24 und 				I-OTH 		O
- * 25 Wirklichkeit 		I-OTH 		O
- * 26 “ 				O 			O
- * 27 . 				O 			O
- * </pre>
+ * 1  Aufgrund          O           O
+ * 2  seiner            O           O
+ * 3  Initiative        O           O
+ * 4  fand              O           O
+ * 5  2001/2002         O           O
+ * 6  in                O           O
+ * 7  Stuttgart         B-LOC       O
+ * 8  ,                 O           O
+ * 9  Braunschweig      B-LOC       O
+ * 10 und               O           O
+ * 11 Bonn              B-LOC       O
+ * 12 eine              O           O
+ * 13 große             O           O
+ * 14 und               O           O
+ * 15 publizistisch     O           O
+ * 16 vielbeachtete     O           O
+ * 17 Troia-Ausstellung B-LOCpart   O
+ * 18 statt             O           O
+ * 19 ,                 O           O
+ * 20 „                 O           O
+ * 21 Troia             B-OTH       B-LOC
+ * 22 -                 I-OTH       O
+ * 23 Traum             I-OTH       O
+ * 24 und               I-OTH       O
+ * 25 Wirklichkeit      I-OTH       O
+ * 26 “                 O           O
+ * 27 .                 O           O
+ * </code></pre>
  * 
  * <ol>
  * <li>WORD_NUMBER - token number</li>
@@ -138,6 +136,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * Name spans are encoded in the BIO-scheme. Outer spans are encoded in the third column, 
  * embedded spans in the fourth column.
  * 
+ * @see <a href="http://www.clips.ua.ac.be/conll2002/ner/">CoNLL 2002 shared task</a>
  * @see <a href="https://sites.google.com/site/germeval2014ner/data">GermEval 2014 NER task</a> 
  */
 @TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
