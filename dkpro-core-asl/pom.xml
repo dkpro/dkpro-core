@@ -337,11 +337,6 @@
             </dependency>
    			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.mallet-asl</artifactId>
-				<version>1.9.0-SNAPSHOT</version>
-			</dependency>
-   			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.maltparser-asl</artifactId>
 				<version>1.9.0-SNAPSHOT</version>
 			</dependency>
@@ -503,7 +498,6 @@
 		<module>../dkpro-core-languagetool-asl</module>
 		<module>../dkpro-core-langdetect-asl</module>
         <module>../dkpro-core-ldweb1t-asl</module>
-		<module>../dkpro-core-mallet-asl</module>
 		<module>../dkpro-core-maltparser-asl</module>
 		<module>../dkpro-core-mecab-asl</module>
 		<module>../dkpro-core-morpha-asl</module>
@@ -536,6 +530,46 @@
 						<enabled>false</enabled>
 					</snapshots>
 				</repository>
+                <repository>
+                    <id>ukp-oss-ext-snapshots</id>
+                    <url>
+                        http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-ext-snapshots-local/
+                    </url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>cogcomp.cs.uiuc.edu-releases</id>
+                    <url>http://cogcomp.cs.uiuc.edu/m2repo</url>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <!-- Required while UimaUtils 3.0.0 is not yet one Maven Central -->
+                    <id>anc-releases</id>
+                    <url>http://www.anc.org:8080/nexus/content/repositories/releases/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+            <!-- Required while UimaUtils 3.0.0 is not yet released -->
+            <!--
+                <repository>
+                    <id>anc-snapshots</id>
+                    <url>http://www.anc.org:8080/nexus/content/repositories/snapshots</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            -->
 			</repositories>
 			<modules>
                 <!-- IO modules -->
@@ -544,6 +578,7 @@
                 <!-- Processing modules -->
                 <module>../dkpro-core-flextag-asl</module>
                 <module>../dkpro-core-lbj-asl</module>
+                <module>../dkpro-core-mallet-asl</module>
 			</modules>
 			<dependencyManagement>
 				<dependencies>
@@ -565,6 +600,11 @@
                     <dependency>
                         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
                         <artifactId>de.tudarmstadt.ukp.dkpro.core.lbj-asl</artifactId>
+                        <version>1.9.0-SNAPSHOT</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                        <artifactId>de.tudarmstadt.ukp.dkpro.core.mallet-asl</artifactId>
                         <version>1.9.0-SNAPSHOT</version>
                     </dependency>
 				</dependencies>

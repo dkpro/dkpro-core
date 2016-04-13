@@ -26,18 +26,6 @@
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.io.bliki-asl</artifactId>
     <packaging>jar</packaging>
 	<name>DKPro Core ASL - IO - Wikipedia via Bliki Engine</name>
-	<repositories>
-		<repository>
-			<id>info-bliki-repository</id>
-			<url>http://gwtwiki.googlecode.com/svn/maven-repository/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
