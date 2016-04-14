@@ -17,36 +17,40 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.lbj;
 
-import static java.util.Arrays.asList;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.util.Level.INFO;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.reflect.FieldUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
-import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import LBJ2.nlp.Word;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import edu.illinois.cs.cogcomp.lbj.pos.POSTagger;
+import de.tudarmstadt.ukp.dkpro.core.lbj.internal.ConvertToIllinois;
+import de.tudarmstadt.ukp.dkpro.core.lbj.internal.ConvertToUima;
+import edu.illinois.cs.cogcomp.annotation.AnnotatorException;
+import edu.illinois.cs.cogcomp.core.datastructures.textannotation.TextAnnotation;
+import edu.illinois.cs.cogcomp.lbjava.learn.Learner;
+import edu.illinois.cs.cogcomp.pos.POSAnnotator;
+import edu.illinois.cs.cogcomp.pos.TrainedPOSTagger;
+import edu.illinois.cs.cogcomp.pos.lbjava.POSTaggerKnown;
+import edu.illinois.cs.cogcomp.pos.lbjava.POSTaggerUnknown;
 
 /**
  * Wrapper for the Illinois POS-tagger from the Cognitive Computation Group (CCG).
@@ -61,7 +65,7 @@ import edu.illinois.cs.cogcomp.lbj.pos.POSTagger;
        outputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"})
 
-public class LbjPosTagger
+public class IllinoisPosTagger
     extends JCasAnnotator_ImplBase
 {
 	/**
@@ -99,7 +103,7 @@ public class LbjPosTagger
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false, defaultValue="classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/en-lbj-pos.map")
     private String posMappingLocation;
 
-    private ModelProviderBase<POSTagger> taggerProvider;
+    private ModelProviderBase<POSAnnotator> taggerProvider;
 
     private MappingProvider mappingProvider;
 
@@ -109,28 +113,49 @@ public class LbjPosTagger
     {
         super.initialize(context);
 
-        taggerProvider = new ModelProviderBase<POSTagger>() {
+        taggerProvider = new ModelProviderBase<POSAnnotator>() {
             {
-                setContextObject(LbjPosTagger.this);
+                setContextObject(IllinoisPosTagger.this);
                 setDefault(LOCATION, NOT_REQUIRED);
             }
 
             @Override
-            protected POSTagger produceResource(URL aUrl) throws IOException
+            protected POSAnnotator produceResource(URL aUrl) throws IOException
             {
                 if (!"en".equals(getAggregatedProperties().getProperty(LANGUAGE))) {
                     throw new IllegalArgumentException("Only language [en] is supported");
                 }
+                
+                POSAnnotator annotator = new POSAnnotator();
 
                 SingletonTagset tags = new SingletonTagset(POS.class, "ptb");
-                tags.addAll(asList(LBJ2.nlp.POS.tokens));
+
+                try {
+                    TrainedPOSTagger trainedTagger = (TrainedPOSTagger) FieldUtils
+                            .readField(annotator, "tagger", true);
+                    Learner known = (POSTaggerKnown) FieldUtils.readField(trainedTagger, "known",
+                            true);
+                    for (int i = 0; i < known.getLabelLexicon().size(); i++) {
+                        tags.add(known.getLabelLexicon().lookupKey(i).getStringValue());
+                    }
+
+                    Learner unknown = (POSTaggerUnknown) FieldUtils.readField(trainedTagger,
+                            "unknown", true);
+                    for (int i = 0; i < unknown.getLabelLexicon().size(); i++) {
+                        tags.add(unknown.getLabelLexicon().lookupKey(i).getStringValue());
+                    }
+                }
+                catch (IllegalAccessException e) {
+                    throw new IllegalStateException(e);
+                }
+                
                 addTagset(tags);
 
                 if (printTagSet) {
                     getContext().getLogger().log(INFO, getTagset().toString());
                 }
-
-                return new POSTagger();
+                
+                return annotator;
             }
 
         };
@@ -152,33 +177,23 @@ public class LbjPosTagger
     	taggerProvider.configure(cas);
         mappingProvider.configure(cas);
 
+        ConvertToIllinois converter = new ConvertToIllinois();
+        
         for (Sentence s : select(aJCas, Sentence.class)) {
         	// Get tokens from CAS
         	List<Token> casTokens = selectCovered(aJCas, Token.class, s);
 
-        	// Convert to tagger input
-            List<LBJ2.nlp.seg.Token> tokens = new ArrayList<LBJ2.nlp.seg.Token>();
-            LBJ2.nlp.seg.Token lastToken = null;
-            for (Token t : casTokens) {
-            	Word w = new Word(t.getCoveredText(), t.getBegin(), t.getEnd());
-                LBJ2.nlp.seg.Token lbjToken = new LBJ2.nlp.seg.Token(w, lastToken, null);
-                lastToken = lbjToken;
-                tokens.add(lbjToken);
-            }
+        	TextAnnotation document = converter.convert(aJCas);
 
-            int i = 0;
-            for (LBJ2.nlp.seg.Token t : tokens) {
-            	// Run tagger
-                String tag = taggerProvider.getResource().discreteValue(t);
-
-                // Convert tagger output to CAS
-				Type posTag = mappingProvider.getTagType(tag);
-				POS posAnno = (POS) cas.createAnnotation(posTag, t.start, t.end);
-				posAnno.setPosValue(internTags ? tag.intern() : tag);
-				posAnno.addToIndexes();
-				casTokens.get(i).setPos(posAnno);
-				i++;
+            // Run tagger
+        	try {
+                taggerProvider.getResource().addView(document);
             }
+            catch (AnnotatorException e) {
+                throw new IllegalStateException(e);
+            }
+        	
+        	ConvertToUima.convertPOSs(aJCas, casTokens, document, mappingProvider, internTags);
         }
     }
 }

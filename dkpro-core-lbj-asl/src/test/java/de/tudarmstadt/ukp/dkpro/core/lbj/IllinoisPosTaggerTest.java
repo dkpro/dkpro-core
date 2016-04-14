@@ -31,7 +31,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
-public class LbjPosTaggerTest
+public class IllinoisPosTaggerTest
 {
     @Test
     public void testEnglish()
@@ -45,20 +45,32 @@ public class LbjPosTaggerTest
                 new String[] { "DT",  "NN",     "NN",  "." },
                 new String[] { "ART", "NN",    "NN",  "PUNC" });
 
-        runTest("en", null, "John is purchasing oranges . \n",
+        JCas jcas = runTest("en", null, "John is purchasing oranges . \n",
                 new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
                 new String[] { "NP",   "V",   "V",        "NN",     "PUNC" });
+        
+        String[] posTags = { "#", "$", "''", ",", "-LRB-", "-RRB-", ".", ":", "CC", "CD", "DT",
+                "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNP", "NNPS", "NNS", "PDT",
+                "POS", "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "SYM", "TO", "UH", "VB", "VBD",
+                "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB", "``" };
+
+        String[] unmappedPos = { "$" };
+
+        AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
+        AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
     }
 
-    private void runTest(String language, String variant, String testDocument, String[] tags,
+    private JCas runTest(String language, String variant, String testDocument, String[] tags,
             String[] tagClasses)
         throws Exception
     {
-        AnalysisEngine engine = createEngine(LbjPosTagger.class);
+        AnalysisEngine engine = createEngine(IllinoisPosTagger.class);
 
         JCas jcas = TestRunner.runTest(engine, language, testDocument);
 
         AssertAnnotations.assertPOS(tagClasses, tags, select(jcas, POS.class));
+        
+        return jcas;
     }
 
     @Rule
