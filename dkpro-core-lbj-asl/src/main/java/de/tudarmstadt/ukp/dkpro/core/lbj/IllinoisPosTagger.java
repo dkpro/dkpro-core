@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2012
+ * Copyright 2016
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -44,6 +44,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.lbj.internal.ConvertToIllinois;
 import de.tudarmstadt.ukp.dkpro.core.lbj.internal.ConvertToUima;
+import edu.illinois.cs.cogcomp.annotation.Annotator;
 import edu.illinois.cs.cogcomp.annotation.AnnotatorException;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.TextAnnotation;
 import edu.illinois.cs.cogcomp.lbjava.learn.Learner;
@@ -54,10 +55,7 @@ import edu.illinois.cs.cogcomp.pos.lbjava.POSTaggerUnknown;
 
 /**
  * Wrapper for the Illinois POS-tagger from the Cognitive Computation Group (CCG).
- * http://cogcomp.cs.illinois.edu/page/software
- *
  */
-
 @TypeCapability(
         inputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -87,23 +85,23 @@ public class IllinoisPosTagger
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
     protected boolean printTagSet;
     
-    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
-    private String modelLocation;
+//    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+//    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+//    private String modelLocation;
 
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
     private String language;
 
-    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
-    private String variant;
+//    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+//    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+//    private String variant;
     
     public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false, defaultValue="classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/en-lbj-pos.map")
     private String posMappingLocation;
 
-    private ModelProviderBase<POSAnnotator> taggerProvider;
+    private ModelProviderBase<Annotator> modelProvider;
 
     private MappingProvider mappingProvider;
 
@@ -113,7 +111,7 @@ public class IllinoisPosTagger
     {
         super.initialize(context);
 
-        taggerProvider = new ModelProviderBase<POSAnnotator>() {
+        modelProvider = new ModelProviderBase<Annotator>() {
             {
                 setContextObject(IllinoisPosTagger.this);
                 setDefault(LOCATION, NOT_REQUIRED);
@@ -157,7 +155,6 @@ public class IllinoisPosTagger
                 
                 return annotator;
             }
-
         };
         
 //        mappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
@@ -174,24 +171,23 @@ public class IllinoisPosTagger
     {
     	CAS cas = aJCas.getCas();
 
-    	taggerProvider.configure(cas);
+    	modelProvider.configure(cas);
         mappingProvider.configure(cas);
 
         ConvertToIllinois converter = new ConvertToIllinois();
-        
+        TextAnnotation document = converter.convert(aJCas);
+
+        // Run tagger
+        try {
+            modelProvider.getResource().addView(document);
+        }
+        catch (AnnotatorException e) {
+            throw new IllegalStateException(e);
+        }
+
         for (Sentence s : select(aJCas, Sentence.class)) {
         	// Get tokens from CAS
         	List<Token> casTokens = selectCovered(aJCas, Token.class, s);
-
-        	TextAnnotation document = converter.convert(aJCas);
-
-            // Run tagger
-        	try {
-                taggerProvider.getResource().addView(document);
-            }
-            catch (AnnotatorException e) {
-                throw new IllegalStateException(e);
-            }
         	
         	ConvertToUima.convertPOSs(aJCas, casTokens, document, mappingProvider, internTags);
         }

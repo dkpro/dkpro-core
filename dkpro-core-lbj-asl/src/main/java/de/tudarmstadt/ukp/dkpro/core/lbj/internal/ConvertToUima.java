@@ -24,7 +24,9 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.illinois.cs.cogcomp.core.datastructures.ViewNames;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.Constituent;
@@ -53,4 +55,36 @@ public class ConvertToUima
         }
     }
     
+    public static void convertNamedEntity(JCas aJCas, TextAnnotation document,
+            MappingProvider mappingProvider, boolean internStrings)
+    {
+        CAS cas = aJCas.getCas();
+        List<Constituent> ne = document.getView(ViewNames.NER_CONLL).getConstituents();
+        
+        for (Constituent p : ne) {
+            String tag = p.getLabel();
+
+            // Convert tagger output to CAS
+            Type neTag = mappingProvider.getTagType(tag);
+            NamedEntity neAnno = (NamedEntity) cas.createAnnotation(neTag, p.getStartCharOffset(),
+                    p.getEndCharOffset());
+            neAnno.setValue(internStrings ? tag.intern() : tag);
+            neAnno.addToIndexes();
+        }
+    }
+    
+    public static void convertLemma(JCas aJCas, List<Token> casTokens, TextAnnotation document)
+    {
+        List<Constituent> lemma = document.getView(ViewNames.LEMMA).getConstituents();
+        
+        int i = 0;
+        for (Constituent l : lemma) {
+            Lemma casLemma = new Lemma(aJCas, l.getStartCharOffset(), l.getEndCharOffset());
+            casLemma.setValue(l.getLabel());
+            casLemma.addToIndexes();
+            
+            casTokens.get(i).setLemma(casLemma);
+            i++;
+        }
+    }
 }

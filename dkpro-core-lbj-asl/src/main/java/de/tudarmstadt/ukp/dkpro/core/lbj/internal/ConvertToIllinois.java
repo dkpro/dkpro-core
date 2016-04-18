@@ -22,10 +22,15 @@ import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 import org.apache.uima.jcas.JCas;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.illinois.cs.cogcomp.core.datastructures.IntPair;
+import edu.illinois.cs.cogcomp.core.datastructures.ViewNames;
+import edu.illinois.cs.cogcomp.core.datastructures.textannotation.Constituent;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.TextAnnotation;
+import edu.illinois.cs.cogcomp.core.datastructures.textannotation.TokenLabelView;
 
 public class ConvertToIllinois
 {
@@ -53,6 +58,36 @@ public class ConvertToIllinois
         TextAnnotation document = new TextAnnotation(corpusId, id, text, tokens, sTokens,
                 sentences);
 
+        // Lemmas & POS
+        TokenLabelView lemmaView = new TokenLabelView(ViewNames.LEMMA, null, document, 1.0);
+        TokenLabelView posView = new TokenLabelView(ViewNames.POS, null, document, 1.0);
+        int i = 0;
+        for (Token t : select(aJCas, Token.class)) {
+            
+            Lemma lemma = t.getLemma();
+            if (lemma != null) {
+                Constituent lemmaConstituent =
+                        new Constituent(lemma.getValue(), ViewNames.LEMMA, document, i, i + 1);
+                lemmaView.addConstituent(lemmaConstituent);
+            }
+
+            POS pos = t.getPos();
+            if (pos != null) {
+                Constituent posConstituent =
+                        new Constituent(pos.getPosValue(), ViewNames.POS, document, i, i + 1);
+                posView.addConstituent(posConstituent);
+            }
+
+            i++;
+        }
+        if (lemmaView.count() > 0) {
+            document.addView(ViewNames.LEMMA, lemmaView);
+        }
+        if (posView.count() > 0) {
+            document.addView(ViewNames.POS, posView);
+        }
+            
+        
         return document;
     }
 }
