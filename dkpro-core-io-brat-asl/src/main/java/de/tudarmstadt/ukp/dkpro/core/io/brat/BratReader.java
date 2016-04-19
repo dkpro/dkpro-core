@@ -91,14 +91,12 @@ public class BratReader
 
     /**
      * Types that are text annotations. It is mandatory to provide the type name which can
-     * optionally be followed by a subcategorization feature.}</code>. Using this parameter is
+     * optionally be followed by a subcategorization feature. Using this parameter is
      * only necessary to specify a subcategorization feature. Otherwise, text annotation types are
      * automatically detected.
      */
     public static final String PARAM_TEXT_ANNOTATION_TYPES = "textAnnotationTypes";
-    @ConfigurationParameter(name = PARAM_TEXT_ANNOTATION_TYPES, mandatory = true, defaultValue = { 
-            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent{A}" 
-            })
+    @ConfigurationParameter(name = PARAM_TEXT_ANNOTATION_TYPES, mandatory = true, defaultValue = {})
     private Set<String> textAnnotationTypes;
     private Map<String, TextAnnotationParam> parsedTextAnnotationTypes;    
 
