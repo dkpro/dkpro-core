@@ -57,6 +57,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratEventArgument;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratRelationAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratTextAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.RelationParam;
+import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TextAnnotationParam;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TypeMapping;
 
 /**
@@ -79,6 +80,7 @@ public class BratReader
      * Types that are relations. It is mandatory to provide the type name followed by two feature
      * names that represent Arg1 and Arg2 separated by colons, e.g. 
      * <code>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent{A}</code>.
+     * Additionally, a subcategorization feature may be specified.
      */
     public static final String PARAM_RELATION_TYPES = "relationTypes";
     @ConfigurationParameter(name = PARAM_RELATION_TYPES, mandatory = true, defaultValue = { 
@@ -86,7 +88,20 @@ public class BratReader
             })
     private Set<String> relationTypes;
     private Map<String, RelationParam> parsedRelationTypes;    
-    
+
+    /**
+     * Types that are text annotations. It is mandatory to provide the type name which can
+     * optionally be followed by a subcategorization feature.}</code>. Using this parameter is
+     * only necessary to specify a subcategorization feature. Otherwise, text annotation types are
+     * automatically detected.
+     */
+    public static final String PARAM_TEXT_ANNOTATION_TYPES = "textAnnotationTypes";
+    @ConfigurationParameter(name = PARAM_TEXT_ANNOTATION_TYPES, mandatory = true, defaultValue = { 
+            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent{A}" 
+            })
+    private Set<String> textAnnotationTypes;
+    private Map<String, TextAnnotationParam> parsedTextAnnotationTypes;    
+
     public static final String PARAM_TYPE_MAPPINGS = "typeMappings";
     @ConfigurationParameter(name = PARAM_TYPE_MAPPINGS, mandatory = false, defaultValue = {
 //            "Token -> de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -111,7 +126,13 @@ public class BratReader
             RelationParam p = RelationParam.parse(rel);
             parsedRelationTypes.put(p.getType(), p);
         }
-        
+
+        parsedTextAnnotationTypes = new HashMap<>();
+        for (String rel : textAnnotationTypes) {
+            TextAnnotationParam p = TextAnnotationParam.parse(rel);
+            parsedTextAnnotationTypes.put(p.getType(), p);
+        }
+
         typeMapping = new TypeMapping(typeMappings);
 
         warnings = new LinkedHashSet<String>();
@@ -196,9 +217,16 @@ public class BratReader
         }
     }
     
-    private void create(CAS aCAS, Type type, BratTextAnnotation aAnno)
+    private void create(CAS aCAS, Type aType, BratTextAnnotation aAnno)
     {
-        AnnotationFS anno = aCAS.createAnnotation(type, aAnno.getBegin(), aAnno.getEnd());
+        TextAnnotationParam param = parsedTextAnnotationTypes.get(aType.getName());
+        
+        AnnotationFS anno = aCAS.createAnnotation(aType, aAnno.getBegin(), aAnno.getEnd());
+        
+        if (param != null && param.getSubcat() != null) {
+            anno.setStringValue(getFeature(anno, param.getSubcat()), aAnno.getType());
+        }
+        
         fillAttributes(anno, aAnno.getAttributes());
         aCAS.addFsToIndexes(anno);
         spanIdMap.put(aAnno.getId(), anno);
