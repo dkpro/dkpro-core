@@ -84,7 +84,7 @@ public class IllinoisNamedEntityRecognizer
 //     */
 //    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
 //    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = true, defaultValue="person")
-    protected String variant;
+    protected String variant = "conll";
 
 //    /**
 //     * Location from which the model is read.
@@ -159,9 +159,9 @@ public class IllinoisNamedEntityRecognizer
 
         mappingProvider = new MappingProvider();
         mappingProvider
-                .setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/opennlp/lib/ner-default-variants.map");
+                .setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/lbj/lib/ner-default-variants.map");
         mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/"
-                + "core/opennlp/lib/ner-${language}-${variant}.map");
+                + "core/lbj/lib/ner-${language}-${variant}.map");
         mappingProvider.setDefault(MappingProvider.BASE_TYPE, NamedEntity.class.getName());
         mappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
         mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
@@ -175,7 +175,7 @@ public class IllinoisNamedEntityRecognizer
         CAS cas = aJCas.getCas();
 
         modelProvider.configure(cas);
-//        mappingProvider.configure(cas);
+        mappingProvider.configure(cas);
 
         ConvertToIllinois converter = new ConvertToIllinois();
         TextAnnotation document = converter.convert(aJCas);
