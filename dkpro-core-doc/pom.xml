@@ -26,6 +26,9 @@
     <packaging>pom</packaging>
     <artifactId>de.tudarmstadt.ukp.dkpro.core.doc-asl</artifactId>
     <name>DKPro Core ASL - Documentation</name>
+    <properties>
+      <maven.deploy.skip>true</maven.deploy.skip>
+    </properties>  
     <build>
         <plugins>
             <plugin>
