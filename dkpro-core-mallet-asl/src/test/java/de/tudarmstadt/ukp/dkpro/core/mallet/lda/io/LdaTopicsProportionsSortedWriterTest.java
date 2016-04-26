@@ -2,13 +2,13 @@
  * Copyright 2015
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -56,7 +56,7 @@ public class LdaTopicsProportionsSortedWriterTest
      */
     @Before
     public void setUp()
-        throws Exception
+            throws Exception
     { /* Generate model */
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
                 TextReader.PARAM_SOURCE_LOCATION, CAS_DIR,
@@ -74,10 +74,9 @@ public class LdaTopicsProportionsSortedWriterTest
 
     @Test
     public void test()
-        throws UIMAException, IOException
+            throws UIMAException, IOException
     {
         File targetFile = new File("target/topics.txt");
-        targetFile.deleteOnExit();
 
         int expectedLines = 2;
         int nTopicsOutput = 3;
@@ -109,6 +108,6 @@ public class LdaTopicsProportionsSortedWriterTest
         lines.stream()
                 .map(line -> line.split("\t"))
                 .forEach(fields -> assertTrue(fields[0].startsWith("dummy")));
-        MODEL_FILE.delete();
+        targetFile.delete();
     }
 }
