@@ -153,12 +153,7 @@ public abstract class JCasFileWriter_ImplBase
     {
         return targetLocation;
     }
-
-    public boolean isSingularTarget()
-    {
-        return singularTarget;
-    }
-
+    
     protected NamedOutputStream getOutputStream(String aRelativePath, String aExtension)
         throws IOException
     {
@@ -288,7 +283,7 @@ public abstract class JCasFileWriter_ImplBase
 
 			return relativeDocumentPath;
 		}
-    }
+	}
 	
     public static class NamedOutputStream
         extends OutputStream
