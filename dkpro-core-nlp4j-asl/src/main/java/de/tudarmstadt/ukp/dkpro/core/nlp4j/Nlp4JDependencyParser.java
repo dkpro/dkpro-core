@@ -51,7 +51,7 @@ import de.tudarmstadt.ukp.dkpro.core.nlp4j.internal.Uima2EmoryNlp;
 import edu.emory.mathcs.nlp.component.dep.DEPState;
 import edu.emory.mathcs.nlp.component.template.OnlineComponent;
 import edu.emory.mathcs.nlp.component.template.node.NLPNode;
-import edu.emory.mathcs.nlp.decode.NLPDecoder;
+import edu.emory.mathcs.nlp.decode.NLPUtils;
 
 @TypeCapability(
         inputs = {
@@ -155,14 +155,14 @@ public class Nlp4JDependencyParser
     }
     
     private class Nlp4JDependencyParserModelProvider
-        extends ModelProviderBase<OnlineComponent<DEPState>>
+        extends ModelProviderBase<OnlineComponent<NLPNode, DEPState<NLPNode>>>
     {
         public Nlp4JDependencyParserModelProvider(Object aObject)
         {
             super(aObject, "nlp4j", "parser");
         }
         @Override
-        protected OnlineComponent<DEPState> produceResource(InputStream aStream)
+        protected OnlineComponent<NLPNode, DEPState<NLPNode>> produceResource(InputStream aStream)
             throws Exception
         {
             String language = getAggregatedProperties().getProperty(LANGUAGE);
@@ -175,13 +175,15 @@ public class Nlp4JDependencyParser
             EmoryNlpUtils.initGlobalLexica();
 
             // Load the POS tagger model from the location the model provider offers
-            NLPDecoder decoder = new NLPDecoder();
-            OnlineComponent<DEPState> component = (OnlineComponent<DEPState>) 
-                    decoder.getComponent(aStream);
+            OnlineComponent<NLPNode, DEPState<NLPNode>> component = (OnlineComponent) 
+                    NLPUtils.getComponent(aStream);
 
             // Extract tagset information from the model
-            OnlineComponentTagsetDescriptionProvider tsdp = new OnlineComponentTagsetDescriptionProvider(
-                    getResourceMetaData().getProperty("dependency.tagset"), Dependency.class, component) {
+            OnlineComponentTagsetDescriptionProvider<NLPNode, DEPState<NLPNode>> tsdp = 
+                    new OnlineComponentTagsetDescriptionProvider<NLPNode, DEPState<NLPNode>>(
+                    getResourceMetaData().getProperty("dependency.tagset"), Dependency.class,
+                    component)
+            {
                 @Override
                 public Set<String> listTags(String aLayer, String aTagsetName)
                 {

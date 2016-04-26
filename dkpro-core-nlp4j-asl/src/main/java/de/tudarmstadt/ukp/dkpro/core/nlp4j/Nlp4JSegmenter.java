@@ -32,8 +32,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
-import edu.emory.mathcs.nlp.component.template.node.NLPNode;
 import edu.emory.mathcs.nlp.tokenization.EnglishTokenizer;
+import edu.emory.mathcs.nlp.tokenization.Token;
 import edu.emory.mathcs.nlp.tokenization.Tokenizer;
 
 /**
@@ -90,17 +90,17 @@ public class Nlp4JSegmenter
         modelProvider.configure(aJCas.getCas());
         Tokenizer segmenter = modelProvider.getResource();
 
-        List<NLPNode[]> sentences = segmenter.segmentize(aText);
+        List<List<Token>> sentences = segmenter.segmentize(aText);
 
-        for (NLPNode[] sentence : sentences) {
+        for (List<Token> sentence : sentences) {
             // Tokens actually start only at index 1 - the 0 index is some odd "@#r$%"
-            for (int i = 1; i < sentence.length; i++) {
-                createToken(aJCas, aZoneBegin + sentence[i].getStartOffset(),
-                        aZoneBegin + sentence[i].getEndOffset());
+            for (Token token : sentence) {
+                createToken(aJCas, aZoneBegin + token.getStartOffset(),
+                        aZoneBegin + token.getEndOffset());
             }
             
-            int sentBegin = aZoneBegin + sentence[1].getStartOffset();
-            int sentEnd = aZoneBegin + sentence[sentence.length - 1].getEndOffset();
+            int sentBegin = aZoneBegin + sentence.get(0).getStartOffset();
+            int sentEnd = aZoneBegin + sentence.get(sentence.size() - 1).getEndOffset();
             
             createSentence(aJCas, sentBegin, sentEnd);
         }

@@ -38,7 +38,7 @@ public class Nlp4JNamedEntityRecognizerTest
         throws Exception
     {
         long maxMemory = Runtime.getRuntime().maxMemory();
-        Assume.assumeTrue("Insufficient max memory: " + maxMemory, maxMemory > 4600000000l);
+        Assume.assumeTrue("Insufficient max memory: " + maxMemory, maxMemory > 3700000000l);
         
         // Run the test pipeline. Note the full stop at the end of a sentence is preceded by a
         // whitespace. This is necessary for it to be detected as a separate token!

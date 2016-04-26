@@ -21,7 +21,6 @@ import java.util.List;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.emory.mathcs.nlp.component.template.node.NLPNode;
-import edu.emory.mathcs.nlp.component.template.util.GlobalLexica;
 
 public class Uima2EmoryNlp
 {
@@ -34,7 +33,10 @@ public class Uima2EmoryNlp
         
         int i = 1;
         for (Token t : aTokens) {
-            nodes[i] = new NLPNode(t.getBegin(), t.getEnd(), t.getCoveredText());
+            nodes[i] = new NLPNode();
+            nodes[i].setStartOffset(t.getBegin());
+            nodes[i].setEndOffset(t.getEnd());
+            nodes[i].setWordForm(t.getCoveredText());
             nodes[i].setID(i);
             
             if (t.getPos() != null) {
@@ -52,7 +54,7 @@ public class Uima2EmoryNlp
             i++;
         }
         
-        GlobalLexica.assignGlobalLexica(nodes);
+        EmoryNlpUtils.assignGlobalLexica(nodes);
         
         return nodes;
     }

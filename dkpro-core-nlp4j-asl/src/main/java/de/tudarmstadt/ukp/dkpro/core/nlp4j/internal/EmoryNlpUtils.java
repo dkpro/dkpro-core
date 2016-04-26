@@ -20,63 +20,90 @@ package de.tudarmstadt.ukp.dkpro.core.nlp4j.internal;
 import static java.util.Arrays.asList;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
+import edu.emory.mathcs.nlp.common.collection.tree.PrefixTree;
+import edu.emory.mathcs.nlp.common.collection.tuple.Pair;
 import edu.emory.mathcs.nlp.common.util.IOUtils;
 import edu.emory.mathcs.nlp.component.template.OnlineComponent;
 import edu.emory.mathcs.nlp.component.template.feature.FeatureItem;
 import edu.emory.mathcs.nlp.component.template.feature.Field;
-import edu.emory.mathcs.nlp.component.template.state.NLPState;
+import edu.emory.mathcs.nlp.component.template.node.NLPNode;
 import edu.emory.mathcs.nlp.component.template.util.GlobalLexica;
 
 public class EmoryNlpUtils
 {
-    private static boolean initialized = false;
+    private static GlobalLexica<NLPNode> lexica;
     
     public static synchronized void initGlobalLexica()
-        throws IOException
+        throws IOException, ParserConfigurationException
     {
-        if (initialized) {
+        if (lexica != null) {
             return;
         }
-
-        initialized = true;
 
         // Cf. classpath:/edu/emory/mathcs/nlp/configuration/config-decode-en.xml
         
         String LEXICA_PREFIX = "classpath:/edu/emory/mathcs/nlp/lexica/";
 
-        GlobalLexica.initAmbiguityClasses(IOUtils.createXZBufferedInputStream(ResourceUtils
-                .resolveLocation(LEXICA_PREFIX + "en-ambiguity-classes-simplified-lowercase.xz")
-                .openStream()), Field.word_form_simplified_lowercase);
+        DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        Document xmlDoc = builder.newDocument();                
+        Element root = xmlDoc.createElement("dummy");
+        
+        lexica = new GlobalLexica<>(root);
+        
+        lexica.setAmbiguityClasses(new Pair<Map<String, List<String>>, Field>(
+                loadLexicon(LEXICA_PREFIX + "en-ambiguity-classes-simplified-lowercase.xz"),
+                Field.word_form_simplified_lowercase));
 
-        GlobalLexica.initWordClusters(
-                IOUtils.createXZBufferedInputStream(ResourceUtils.resolveLocation(
-                        LEXICA_PREFIX + "en-brown-clusters-simplified-lowercase.xz").openStream()),
-                Field.word_form_simplified_lowercase);
+        lexica.setWordClusters(new Pair<Map<String,Set<String>>, Field>(
+                loadLexicon(LEXICA_PREFIX + "en-brown-clusters-simplified-lowercase.xz"),
+                Field.word_form_simplified_lowercase));
 
-        GlobalLexica.initNamedEntityGazetteers(
-                IOUtils.createXZBufferedInputStream(ResourceUtils.resolveLocation(
-                        LEXICA_PREFIX + "en-named-entity-gazetteers-simplified.xz").openStream()),
-                Field.word_form_simplified);
+        lexica.setNamedEntityGazetteers(new Pair<PrefixTree<String,Set<String>>, Field>(
+                loadLexicon(LEXICA_PREFIX + "en-named-entity-gazetteers-simplified.xz"),
+                Field.word_form_simplified));
+        
+        lexica.setWordEmbeddings(new Pair<Map<String,float[]>, Field>(
+                loadLexicon(LEXICA_PREFIX + "en-word-embeddings-undigitalized.xz"),
+                Field.word_form_undigitalized));
 
-        GlobalLexica.initWordEmbeddings(
-                IOUtils.createXZBufferedInputStream(ResourceUtils.resolveLocation(
-                        LEXICA_PREFIX + "en-word-embeddings-undigitalized.xz").openStream()),
-                Field.word_form_undigitalized);
-
-//        GlobalLexica.initStopWords(
-//                IOUtils.createXZBufferedInputStream(ResourceUtils.resolveLocation(
-//                        LEXICA_PREFIX + "en-stop-words-simplified-lowercase.xz").openStream()),
-//                Field.word_form_undigitalized);
+//        lexica.setStopWords(
+//                loadLexicon(LEXICA_PREFIX + "en-stop-words-simplified-lowercase.xz"));
     }
     
-    public static Set<String> extractFeatures(OnlineComponent<? extends NLPState> component)
+    public static void assignGlobalLexica(NLPNode[] aNodes)
+    {
+        lexica.process(aNodes);
+    }
+    
+    @SuppressWarnings("unchecked")
+    private static <T> T loadLexicon(String aLocation)
+        throws IOException
+    {
+        try (ObjectInputStream is = IOUtils.createObjectXZBufferedInputStream(
+                ResourceUtils.resolveLocation(aLocation).openStream())) {
+            return (T) is.readObject();
+        }
+        catch (ClassNotFoundException e) {
+            throw new IOException(e);
+        }
+    }
+    
+    public static Set<String> extractFeatures(OnlineComponent<?, ?> component)
         throws IllegalAccessException
     {
         Set<String> features = new HashSet<String>();
@@ -99,7 +126,7 @@ public class EmoryNlpUtils
     }
     
     public static Set<String> extractUnsupportedFeatures(
-            OnlineComponent<? extends NLPState> component, String... aExtra)
+            OnlineComponent<?, ?> component, String... aExtra)
         throws IllegalAccessException
     {
         Set<String> features = extractFeatures(component);
