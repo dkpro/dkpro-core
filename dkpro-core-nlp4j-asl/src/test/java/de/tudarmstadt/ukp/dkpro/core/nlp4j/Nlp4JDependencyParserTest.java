@@ -46,7 +46,7 @@ public class Nlp4JDependencyParserTest
         throws Exception
     {
         long maxMemory = Runtime.getRuntime().maxMemory();
-        Assume.assumeTrue("Insufficient max memory: " + maxMemory, maxMemory > 8300000000l);
+        Assume.assumeTrue("Insufficient max memory: " + maxMemory, maxMemory > 3700000000l);
         
         JCas jcas = runTest("en", null, "We need a very complicated example sentence , which "
                 + "contains as many constituents and dependencies as possible .");
@@ -69,7 +69,7 @@ public class Nlp4JDependencyParserTest
                 "[ 86, 98]CONJ(conj) D[86,98](dependencies) G[69,81](constituents)",
                 "[ 99,101]PREP(prep) D[99,101](as) G[69,81](constituents)",
                 "[102,110]PCOMP(pcomp) D[102,110](possible) G[99,101](as)",
-                "[111,112]PUNCT(punct) D[111,112](.) G[3,7](need)" };
+                "[111,112]PUNCT(punct) D[111,112](.) G[69,81](constituents)" };
 
         String[] unmappedDep = {};
 

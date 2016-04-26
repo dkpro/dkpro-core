@@ -49,7 +49,7 @@ import de.tudarmstadt.ukp.dkpro.core.nlp4j.internal.Uima2EmoryNlp;
 import edu.emory.mathcs.nlp.component.pos.POSState;
 import edu.emory.mathcs.nlp.component.template.OnlineComponent;
 import edu.emory.mathcs.nlp.component.template.node.NLPNode;
-import edu.emory.mathcs.nlp.decode.NLPDecoder;
+import edu.emory.mathcs.nlp.decode.NLPUtils;
 
 /**
  * Part-of-Speech annotator using Emory NLP4J. Requires {@link Sentence}s to be annotated before.
@@ -160,7 +160,7 @@ public class Nlp4JPosTagger
     }
     
     private class Nlp4JPosTaggerModelProvider
-        extends ModelProviderBase<OnlineComponent<POSState>>
+        extends ModelProviderBase<OnlineComponent<NLPNode, POSState<NLPNode>>>
     {
         public Nlp4JPosTaggerModelProvider(Object aOwner)
         {
@@ -168,7 +168,7 @@ public class Nlp4JPosTagger
         }
         
         @Override
-        protected OnlineComponent<POSState> produceResource(InputStream aStream)
+        protected OnlineComponent<NLPNode, POSState<NLPNode>> produceResource(InputStream aStream)
             throws Exception
         {
             String language = getAggregatedProperties().getProperty(LANGUAGE);
@@ -181,13 +181,13 @@ public class Nlp4JPosTagger
             EmoryNlpUtils.initGlobalLexica();
 
             // Load the POS tagger model from the location the model provider offers
-            NLPDecoder decoder = new NLPDecoder();
-            OnlineComponent<POSState> component = (OnlineComponent<POSState>) 
-                    decoder.getComponent(aStream);
+            OnlineComponent<NLPNode, POSState<NLPNode>> component = (OnlineComponent) 
+                    NLPUtils.getComponent(aStream);
 
             // Extract tagset information from the model
-            OnlineComponentTagsetDescriptionProvider tsdp = new OnlineComponentTagsetDescriptionProvider(
-                    getResourceMetaData().getProperty("pos.tagset"), POS.class, component);
+            OnlineComponentTagsetDescriptionProvider<NLPNode, POSState<NLPNode>> tsdp = 
+                    new OnlineComponentTagsetDescriptionProvider<>(
+                            getResourceMetaData().getProperty("pos.tagset"), POS.class, component);
             addTagset(tsdp);
 
             if (printTagSet) {

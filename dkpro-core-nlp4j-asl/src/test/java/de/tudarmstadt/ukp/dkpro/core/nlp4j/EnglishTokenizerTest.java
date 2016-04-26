@@ -21,18 +21,18 @@ import java.util.List;
 
 import org.junit.Test;
 
-import edu.emory.mathcs.nlp.component.template.node.NLPNode;
 import edu.emory.mathcs.nlp.tokenization.EnglishTokenizer;
 import edu.emory.mathcs.nlp.tokenization.Tokenizer;
+import edu.emory.mathcs.nlp.tokenization.Token;
 
 public class EnglishTokenizerTest
 {
     @Test
     public void test() {
         Tokenizer tokenizer = new EnglishTokenizer();
-        List<NLPNode[]> sentences = tokenizer.segmentize("A a a a . B b b b -");
-        for (NLPNode[] sentence : sentences) {
-            for (NLPNode token : sentence) {
+        List<List<Token>> sentences = tokenizer.segmentize("A a a a . B b b b -");
+        for (List<Token> sentence : sentences) {
+            for (Token token : sentence) {
                 System.out.printf("%d %d %s%n", token.getStartOffset(), token.getEndOffset(),
                         token.getWordForm());
             }

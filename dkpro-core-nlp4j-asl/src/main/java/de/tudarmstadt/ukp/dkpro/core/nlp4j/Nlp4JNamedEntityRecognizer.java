@@ -49,7 +49,7 @@ import de.tudarmstadt.ukp.dkpro.core.nlp4j.internal.Uima2EmoryNlp;
 import edu.emory.mathcs.nlp.component.ner.NERState;
 import edu.emory.mathcs.nlp.component.template.OnlineComponent;
 import edu.emory.mathcs.nlp.component.template.node.NLPNode;
-import edu.emory.mathcs.nlp.decode.NLPDecoder;
+import edu.emory.mathcs.nlp.decode.NLPUtils;
 
 /**
  * Emory NLP4J name finder wrapper.
@@ -161,7 +161,7 @@ public class Nlp4JNamedEntityRecognizer
     }
     
     private class Nlp4JNamedEntityRecognizerModelProvider
-        extends ModelProviderBase<OnlineComponent<NERState>>
+        extends ModelProviderBase<OnlineComponent<NLPNode, NERState<NLPNode>>>
     {
         public Nlp4JNamedEntityRecognizerModelProvider(Object aOwner)
         {
@@ -169,7 +169,7 @@ public class Nlp4JNamedEntityRecognizer
         }
 
         @Override
-        protected OnlineComponent<NERState> produceResource(InputStream aStream)
+        protected OnlineComponent<NLPNode, NERState<NLPNode>> produceResource(InputStream aStream)
             throws Exception
         {
             String language = getAggregatedProperties().getProperty(LANGUAGE);
@@ -182,13 +182,13 @@ public class Nlp4JNamedEntityRecognizer
             EmoryNlpUtils.initGlobalLexica();
 
             // Load the POS tagger model from the location the model provider offers
-            NLPDecoder decoder = new NLPDecoder();
-            OnlineComponent<NERState> component = (OnlineComponent<NERState>) decoder
+            OnlineComponent<NLPNode, NERState<NLPNode>> component = (OnlineComponent) NLPUtils
                     .getComponent(aStream);
 
             // Extract tagset information from the model
-            OnlineComponentTagsetDescriptionProvider tsdp = new OnlineComponentTagsetDescriptionProvider(
-                    getResourceMetaData().getProperty("ner.tagset"), POS.class, component);
+            OnlineComponentTagsetDescriptionProvider<NLPNode, NERState<NLPNode>> tsdp = 
+                    new OnlineComponentTagsetDescriptionProvider<NLPNode, NERState<NLPNode>>(
+                            getResourceMetaData().getProperty("ner.tagset"), POS.class, component);
             // addTagset(tsdp);
 
             if (printTagSet) {

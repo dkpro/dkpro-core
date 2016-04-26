@@ -25,18 +25,19 @@ import java.util.TreeSet;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.TagsetBase;
 import edu.emory.mathcs.nlp.component.template.OnlineComponent;
+import edu.emory.mathcs.nlp.component.template.node.AbstractNLPNode;
 import edu.emory.mathcs.nlp.component.template.state.NLPState;
 import edu.emory.mathcs.nlp.learning.optimization.OnlineOptimizer;
 
-public class OnlineComponentTagsetDescriptionProvider
+public class OnlineComponentTagsetDescriptionProvider<N extends AbstractNLPNode<N>, S extends NLPState<N>>
     extends TagsetBase
 {
     private String name;
     private String layer;
-    private OnlineComponent<? extends NLPState> model;
+    private OnlineComponent<N, S> model;
 
     public OnlineComponentTagsetDescriptionProvider(String aName, Class<?> aLayer,
-            OnlineComponent<? extends NLPState> aModel)
+            OnlineComponent<N, S> aModel)
     {
         name = aName;
         layer = aLayer.getName();
@@ -63,7 +64,7 @@ public class OnlineComponentTagsetDescriptionProvider
         return tagSet;
     }
 
-    public OnlineComponent<? extends NLPState> getModel()
+    public OnlineComponent<N, S> getModel()
     {
         return model;
     }
