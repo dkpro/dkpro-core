@@ -32,10 +32,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Read a Reuters-21578 corpus that has been transformed into text format using {@code ExtractReuters} in
@@ -92,11 +89,10 @@ public class Reuters21578TxtReader
         super.initialize(context);
 
         FileFilter filter = new WildcardFileFilter(FILE_PATTERN);
-        File[] files = sourceLocation.listFiles(filter);
-
-        getLogger().info("Found " + files.length + " files.");
-        fileIter = Arrays.asList(files).iterator();
-
+        List<File> files = Arrays.asList(sourceLocation.listFiles(filter));
+        getLogger().info("Found " + files.size() + " files.");
+        files.sort((f1, f2) -> f1.getName().compareTo(f2.getName()));
+        fileIter = files.iterator();
     }
 
     @Override public void getNext(JCas jCas)
