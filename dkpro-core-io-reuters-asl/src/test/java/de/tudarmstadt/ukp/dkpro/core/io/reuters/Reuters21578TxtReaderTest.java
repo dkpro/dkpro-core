@@ -31,6 +31,7 @@ import java.io.File;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class Reuters21578TxtReaderTest
@@ -41,9 +42,8 @@ public class Reuters21578TxtReaderTest
     public void test()
             throws ResourceInitializationException
     {
-        String[] expectedTitles = new String[] { "BAHIA COCOA REVIEW",
-                "STANDARD OIL <SRD> TO FORM FINANCIAL UNIT" };
-        String[] expectedTextStarts = new String[] { "Showers", "Standard" };
+        String expectedTitle = "BAHIA COCOA REVIEW";
+        String expectedTextStart = "Showers";
         File outputFile = new File("target/output");
         outputFile.deleteOnExit();
 
@@ -55,10 +55,8 @@ public class Reuters21578TxtReaderTest
         JCasIterator jcasIter = SimplePipeline.iteratePipeline(reader, writer).iterator();
         JCas jcas = jcasIter.next();
         DocumentMetaData metaData = DocumentMetaData.get(jcas);
-        assertTrue(metaData.getDocumentTitle().equals(expectedTitles[0]) ||
-                metaData.getDocumentTitle().equals(expectedTitles[1]));
-        assertTrue(jcas.getDocumentText().startsWith(expectedTextStarts[0]) ||
-                jcas.getDocumentText().startsWith(expectedTextStarts[1]));
+        assertEquals(expectedTitle, metaData.getDocumentTitle());
+        assertTrue(jcas.getDocumentText().startsWith(expectedTextStart));
         assertTrue("Only one of two documents found.", jcasIter.hasNext());
     }
 }
