@@ -54,6 +54,9 @@ import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.util.ErasureUtils;
 import edu.stanford.nlp.util.StringUtils;
 
+/**
+ * Named entity recognizer from CoreNLP.
+ */
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",

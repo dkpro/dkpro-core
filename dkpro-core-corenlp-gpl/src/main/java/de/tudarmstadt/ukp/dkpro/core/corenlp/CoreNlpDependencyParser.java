@@ -50,6 +50,9 @@ import edu.stanford.nlp.pipeline.DependencyParseAnnotator;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.trees.GrammaticalStructure;
 
+/**
+ * Dependency parser from CoreNLP.
+ */
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",

@@ -42,6 +42,9 @@ import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.DeterministicCorefAnnotator;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
 
+/**
+ * Deterministic coreference annotator from CoreNLP.
+ */
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
