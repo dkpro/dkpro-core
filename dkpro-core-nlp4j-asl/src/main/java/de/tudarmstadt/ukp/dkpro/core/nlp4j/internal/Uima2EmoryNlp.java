@@ -33,11 +33,9 @@ public class Uima2EmoryNlp
         
         int i = 1;
         for (Token t : aTokens) {
-            nodes[i] = new NLPNode();
+            nodes[i] = new NLPNode(i, t.getCoveredText());
             nodes[i].setStartOffset(t.getBegin());
             nodes[i].setEndOffset(t.getEnd());
-            nodes[i].setWordForm(t.getCoveredText());
-            nodes[i].setID(i);
             
             if (t.getPos() != null) {
                 nodes[i].setPartOfSpeechTag(t.getPos().getPosValue());

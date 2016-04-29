@@ -28,7 +28,7 @@
   <packaging>jar</packaging>
   <name>DKPro Core ASL - NLP4J</name>
   <properties>
-    <nlp4j.version>1.1.0</nlp4j.version>
+    <nlp4j.version>1.1.1</nlp4j.version>
   </properties>
   <dependencies>
     <dependency>
@@ -46,6 +46,21 @@
     <dependency>
       <groupId>edu.emory.mathcs.nlp</groupId>
       <artifactId>nlp4j</artifactId>
+      <version>${nlp4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>edu.emory.mathcs.nlp</groupId>
+      <artifactId>nlp4j-core</artifactId>
+      <version>${nlp4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>edu.emory.mathcs.nlp</groupId>
+      <artifactId>nlp4j-tokenization</artifactId>
+      <version>${nlp4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>edu.emory.mathcs.nlp</groupId>
+      <artifactId>nlp4j-morphology</artifactId>
       <version>${nlp4j.version}</version>
     </dependency>
     <!--  
@@ -108,17 +123,17 @@
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.nlp4j-model-tagger-en-default</artifactId>
-        <version>20160421.0</version>
+        <version>20160429.0</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.nlp4j-model-ner-en-default</artifactId>
-        <version>20160421.0</version>
+        <version>20160429.0</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.nlp4j-model-parser-en-default</artifactId>
-        <version>20160421.0</version>
+        <version>20160429.0</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

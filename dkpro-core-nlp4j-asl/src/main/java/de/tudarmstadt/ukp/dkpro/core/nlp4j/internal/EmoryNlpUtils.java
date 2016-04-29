@@ -30,7 +30,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.apache.commons.lang3.reflect.FieldUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -108,15 +107,15 @@ public class EmoryNlpUtils
     {
         Set<String> features = new HashSet<String>();
 
-        List<FeatureItem> featureSet = (List<FeatureItem>) FieldUtils.readField(
-                component.getFeatureTemplate(), "feature_set", true);
-        for (FeatureItem f : featureSet) {
+        for (FeatureItem f : component.getFeatureTemplate().getSetFeatureList()) {
             features.add(f.field.name());
         }
-                
-        List<FeatureItem[]> featureList = (List<FeatureItem[]>) FieldUtils.readField(
-                component.getFeatureTemplate(), "feature_list", true);
-        for (FeatureItem[] fl : featureList) {
+
+        for (FeatureItem f : component.getFeatureTemplate().getEmbeddingFeatureList()) {
+            features.add(f.field.name());
+        }
+
+        for (FeatureItem[] fl : component.getFeatureTemplate().getFeatureList()) {
             for (FeatureItem f : fl) {
                 features.add(f.field.name());
             }
@@ -152,6 +151,7 @@ public class EmoryNlpUtils
         unsupportedFeatures.remove("ambiguity_classes");
         unsupportedFeatures.remove("word_clusters");
         unsupportedFeatures.remove("named_entity_gazetteers");
+        unsupportedFeatures.remove("word_embedding");
         // We know POS tag if POS tagger ran before
         unsupportedFeatures.remove("part_of_speech_tag");
         // We know the lemma if we ran a lemmatizer before
