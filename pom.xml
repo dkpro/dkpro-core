@@ -120,6 +120,22 @@
 		</pluginRepository>
         -->
 	</pluginRepositories>
+    <mailingLists>
+        <mailingList>
+            <name>DKPro Core user mailing list</name>
+            <archive>https://groups.google.com/forum/#!forum/dkpro-core-user</archive>
+            <post>dkpro-core-user@googlegroups.com</post>
+            <subscribe>dkpro-core-user+subscribe@googlegroups.com</subscribe>
+            <unsubscribe>dkpro-core-user+unsubscribe@googlegroups.com</unsubscribe>
+        </mailingList>
+        <mailingList>
+            <name>DKPro Core developer mailing list</name>
+            <archive>https://groups.google.com/forum/#!forum/dkpro-core-developers</archive>
+            <post>dkpro-core-developers@googlegroups.com</post>
+            <subscribe>dkpro-core-developers+subscribe@googlegroups.com</subscribe>
+            <unsubscribe>dkpro-core-developers+unsubscribe@googlegroups.com</unsubscribe>
+        </mailingList>
+    </mailingLists>
 	<issueManagement>
 		<system>GitHub Issues</system>
 		<url>https://github.com/dkpro/dkpro-core/issues</url>
