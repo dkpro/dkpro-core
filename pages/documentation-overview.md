@@ -5,7 +5,6 @@ permalink: "/documentation/"
 ---
 
 {% assign stable = (site.data.releases | where:"status", "stable" | first) %}
-{% assign unstable = (site.data.releases | where:"status", "unstable" | first) %}
 
 ## Introduction
 
@@ -35,11 +34,15 @@ _latest release_
 * [Type system]({{ site.url }}/releases/{{ stable.version }}/typesystem/)
 * [API documentation]({{ site.url }}/releases/{{ stable.version }}/apidocs/)
 
+{% for unstable in site.data.releases reversed %}
+{% if unstable.status == 'unstable' %}
 ### DKPro Core {{ unstable.version }}
 _upcoming release - links may be temporarily broken while a build is in progress_
 
 {% for link in unstable.doclinks %}
 * [{{ link.title }}]({{ link.url }}){% endfor %}
+{% endif %}
+{% endfor %}
 
 ## Developer Documentation
 
