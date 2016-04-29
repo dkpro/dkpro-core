@@ -23,6 +23,7 @@ import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.apache.uima.util.Level.INFO;
 
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.List;
 
 import opennlp.tools.postag.POSModel;
@@ -86,6 +87,13 @@ public class OpenNlpPosTagger
 	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
 	protected String modelLocation;
 
+    /**
+     * The character encoding used by the model.
+     */
+    public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
+    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = false)
+    private String modelEncoding;
+
 	/**
 	 * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
 	 * the mapping automatically.
@@ -115,6 +123,7 @@ public class OpenNlpPosTagger
 
 	private CasConfigurableProviderBase<POSTagger> modelProvider;
 	private MappingProvider mappingProvider;
+    private Charset encoding;
 
 	@Override
 	public void initialize(UimaContext aContext)
@@ -122,6 +131,8 @@ public class OpenNlpPosTagger
 	{
 		super.initialize(aContext);
 
+        encoding = modelEncoding != null ? Charset.forName(modelEncoding) : null;
+		
 // tag::model-provider-decl[]
 		// Use ModelProviderBase convenience constructor to set up a model provider that
 		// auto-detects most of its settings and is configured to use default variants.
@@ -194,6 +205,13 @@ public class OpenNlpPosTagger
             List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
             String[] tokenTexts = toText(tokens).toArray(new String[tokens.size()]);
 
+            // "Fix" encoding before passing to a model which was trained with encoding problems
+            if (encoding != null && !"UTF-8".equals(encoding.name())) {
+                for (int i = 0; i < tokenTexts.length; i++) {
+                    tokenTexts[i] = new String(tokenTexts[i].getBytes(), encoding);                
+                }
+            }
+            
             // Fetch the OpenNLP pos tagger instance configured with the right model and use it to
             // tag the text
             String[] tags = modelProvider.getResource().tag(tokenTexts);
