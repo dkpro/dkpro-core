@@ -156,7 +156,7 @@ public class Nlp4JNamedEntityRecognizer
             // Process the sentences - new results will be stored in the existing NLPNodes
             modelProvider.getResource().process(nodes);
             
-            EmoryNlp2Uima.convertNamedEntities(cas, nodes, mappingProvider, internTags);
+            EmoryNlp2Uima.convertNamedEntities(cas, tokens, nodes, mappingProvider, internTags);
         }
     }
     

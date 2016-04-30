@@ -45,8 +45,9 @@ public class Nlp4JNamedEntityRecognizerTest
         JCas jcas = runTest("en", null, "SAP where John Doe works is in Germany .");
 
         // Define the reference data that we expect to get back from the test
-        String[] namedEntity = { "[ 10, 14]NamedEntity(B-PERSON) (John)",
-                "[ 15, 18]NamedEntity(L-PERSON) (Doe)", "[ 31, 38]NamedEntity(U-GPE) (Germany)" };
+        String[] namedEntity = { 
+                "[ 10, 18]NamedEntity(PERSON) (John Doe)",
+                "[ 31, 38]NamedEntity(GPE) (Germany)" };
 
         // Compare the annotations created in the pipeline to the reference data
         AssertAnnotations.assertNamedEntity(namedEntity, select(jcas, NamedEntity.class));

@@ -19,11 +19,12 @@ package de.tudarmstadt.ukp.dkpro.core.nlp4j.internal;
 
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.uima.cas.CAS;
+import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.JCas;
 
+import de.tudarmstadt.ukp.dkpro.core.api.io.BilouDecoder;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
@@ -86,22 +87,19 @@ public class EmoryNlp2Uima
         }
     }
 
-    public static void convertNamedEntities(CAS aCas, NLPNode[] aNodes,
+    public static void convertNamedEntities(CAS aCas, List<Token> aTokens, NLPNode[] aNodes,
             MappingProvider aMappingProvider, boolean aInternTags)
     {
-        // FIXME Handle BILOU encoding used in the model
-        for (int i = 1; i < aNodes.length; i++) {
-            NLPNode node = aNodes[i];
-            String tag = node.getNamedEntityTag();
-            if (StringUtils.isNotBlank(tag) && !"O".equals(tag)) {
-                int begin = node.getStartOffset();
-                int end = node.getEndOffset();
+        Type neType = aCas.getTypeSystem().getType(NamedEntity.class.getName());
+        Feature valueFeat = neType.getFeatureByBaseName("value");
 
-                Type type = aMappingProvider.getTagType(tag);
-                NamedEntity neAnno = (NamedEntity) aCas.createAnnotation(type, begin, end);
-                neAnno.setValue(aInternTags ? tag.intern() : tag);
-                neAnno.addToIndexes();
-            }
+        String[] neTags = new String[aNodes.length-1];
+        for (int i = 1; i < aNodes.length; i++) {
+            neTags[i-1] = aNodes[i].getNamedEntityTag();
         }
+        
+        BilouDecoder decoder = new BilouDecoder(aCas, valueFeat, aMappingProvider);
+        decoder.setInternTags(aInternTags);
+        decoder.decode(aTokens, neTags);
     }
 }
