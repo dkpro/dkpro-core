@@ -91,7 +91,12 @@ import edu.stanford.nlp.trees.international.pennchinese.ChineseGrammaticalRelati
  *
  */
 @TypeCapability(
-        inputs = {"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"}
+        inputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" },
+        outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent"}
 )
 public class StanfordParser
     extends JCasAnnotator_ImplBase

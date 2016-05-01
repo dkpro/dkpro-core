@@ -48,7 +48,7 @@ public class StanfordLemmatizerTest
 
         runTest("en", "We need a very complicated example sentence , which "
                 + "contains as many constituents and dependencies as possible .",
-                new String[] { "we", "need", "a", "very", "complicate", "example",
+                new String[] { "we", "need", "a", "very", "complicated", "example",
                 "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
                 "dependency", "as", "possible", "." });
 	}
@@ -63,9 +63,10 @@ public class StanfordLemmatizerTest
     @Test
     public void testUrl() throws Exception
     {
-        runTest("en", "Details hinzu findet man unter http://www.armytimes.com/news/2009/11/army_M4_112109w/ .",
-                new String[] { "detail", "hinzu", "findet", "man", "unter", "http://www.armytimes.com/news/2009/11/army", "." });
-
+        runTest("en",
+                "Details hinzu findet man unter http://www.armytimes.com/news/2009/11/army_M4_112109w/ .",
+                new String[] { "detail", "hinzu", "findet", "man", "unter",
+                        "http://www.armytimes.com/news/2009/11/army_m4_112109w/", "." });
     }
 	
     private void runTest(String aLanguage, String testDocument, String[] lemmas)
