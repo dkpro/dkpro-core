@@ -39,6 +39,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.DependenciesMode;
+import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.internal.RootKey;
+import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.internal.TokenKey;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.CoreNlpUtils;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.StanfordAnnotator;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.TreeUtils;
@@ -48,13 +50,12 @@ import edu.stanford.nlp.trees.GrammaticalStructure;
 import edu.stanford.nlp.trees.LabeledScoredTreeFactory;
 import edu.stanford.nlp.trees.PennTreebankLanguagePack;
 import edu.stanford.nlp.trees.Tree;
-import edu.stanford.nlp.trees.Trees;
 import edu.stanford.nlp.trees.TreeCoreAnnotations.TreeAnnotation;
 import edu.stanford.nlp.trees.TreeFactory;
 import edu.stanford.nlp.trees.TreebankLanguagePack;
+import edu.stanford.nlp.trees.Trees;
 import edu.stanford.nlp.trees.TypedDependency;
 import edu.stanford.nlp.util.CoreMap;
-import edu.stanford.nlp.util.TypesafeMap.Key;
 
 /**
  * Converts a constituency structure into a dependency structure.
@@ -244,14 +245,4 @@ public class StanfordDependencyConverter
         }
         return t;
     }
-
-    private static class RootKey
-        implements Key<ROOT>
-    {
-    };
-
-    private static class TokenKey
-        implements Key<Token>
-    {
-    };
 }

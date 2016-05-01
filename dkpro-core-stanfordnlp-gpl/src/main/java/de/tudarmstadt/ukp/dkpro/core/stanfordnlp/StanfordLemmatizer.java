@@ -19,20 +19,39 @@
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.Messages;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import edu.stanford.nlp.ling.WordTag;
-import edu.stanford.nlp.process.Morphology;
+import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.internal.TokenKey;
+import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.CoreNlpUtils;
+import edu.stanford.nlp.ling.CoreLabel;
+import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetBeginAnnotation;
+import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetEndAnnotation;
+import edu.stanford.nlp.ling.CoreAnnotations.IndexAnnotation;
+import edu.stanford.nlp.ling.CoreAnnotations.LemmaAnnotation;
+import edu.stanford.nlp.ling.CoreAnnotations.PartOfSpeechAnnotation;
+import edu.stanford.nlp.ling.CoreAnnotations.SentenceIndexAnnotation;
+import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
+import edu.stanford.nlp.ling.CoreAnnotations.TokensAnnotation;
+import edu.stanford.nlp.pipeline.Annotation;
+import edu.stanford.nlp.pipeline.MorphaAnnotator;
+import edu.stanford.nlp.process.CoreLabelTokenFactory;
+import edu.stanford.nlp.process.PTBEscapingProcessor;
+import edu.stanford.nlp.util.CoreMap;
 
 /**
  * Stanford Lemmatizer component. The Stanford Morphology-class computes the base form of English
@@ -45,12 +64,40 @@ import edu.stanford.nlp.process.Morphology;
  * <p>This only works for ENGLISH.</p>
  */
 @TypeCapability(
-        inputs = {"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
+        inputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" },
         outputs = {"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"})
 public class StanfordLemmatizer
     extends JCasAnnotator_ImplBase
 {
-    private Morphology morphology;
+    /**
+     * Enable all traditional PTB3 token transforms (like -LRB-, -RRB-).
+     *
+     * @see PTBEscapingProcessor
+     */
+    public static final String PARAM_PTB3_ESCAPING = "ptb3Escaping";
+    @ConfigurationParameter(name = PARAM_PTB3_ESCAPING, mandatory = true, defaultValue = "true")
+    private boolean ptb3Escaping;
+
+    /**
+     * List of extra token texts (usually single character strings) that should be treated like
+     * opening quotes and escaped accordingly before being sent to the parser.
+     */
+    public static final String PARAM_QUOTE_BEGIN = "quoteBegin";
+    @ConfigurationParameter(name = PARAM_QUOTE_BEGIN, mandatory = false)
+    private List<String> quoteBegin;
+
+    /**
+     * List of extra token texts (usually single character strings) that should be treated like
+     * closing quotes and escaped accordingly before being sent to the parser.
+     */
+    public static final String PARAM_QUOTE_END = "quoteEnd";
+    @ConfigurationParameter(name = PARAM_QUOTE_END, mandatory = false)
+    private List<String> quoteEnd;
+    
+    private MorphaAnnotator annotator;
+    private CoreLabelTokenFactory tokenFactory = new CoreLabelTokenFactory();
 
     @Override
     public void initialize(UimaContext aContext)
@@ -58,7 +105,7 @@ public class StanfordLemmatizer
     {
         super.initialize(aContext);
 
-        morphology = new Morphology();
+        annotator = new MorphaAnnotator(false);
     }
 
     @Override
@@ -70,24 +117,48 @@ public class StanfordLemmatizer
                     Messages.ERR_UNSUPPORTED_LANGUAGE, new String[] { aJCas.getDocumentLanguage() });
         }
         
-        for (Token t : select(aJCas, Token.class)) {
-            // Only verbs are lemmatized, the other words are simply stemmed. This corresponds
-            // roughly to what is happening in MorphaAnnotator.
-            String token = t.getCoveredText();
-            String lemma;
-            if (t.getPos() instanceof V) {
-                lemma = morphology.lemmatize(new WordTag(token, t.getPos().getPosValue())).lemma();
+        Annotation document = new Annotation(aJCas.getDocumentText());
+        List<CoreMap> sentences = new ArrayList<>();
+        for (Sentence s : select(aJCas, Sentence.class)) {
+            Annotation sentence = new Annotation(s.getCoveredText());
+            sentence.set(CharacterOffsetBeginAnnotation.class, s.getBegin());
+            sentence.set(CharacterOffsetEndAnnotation.class, s.getEnd());
+            sentence.set(SentenceIndexAnnotation.class, sentences.size());
+            
+            List<CoreLabel> tokens = new ArrayList<>();
+            for (Token t : selectCovered(Token.class, s)) {
+                CoreLabel token = tokenFactory.makeToken(t.getCoveredText(), t.getBegin(),
+                        t.getEnd() - t.getBegin());
+                // First add token so that tokens.size() returns a 1-based counting as required
+                // by IndexAnnotation
+                tokens.add(token);
+                //token.set(SentenceIndexAnnotation.class, sentences.size());
+                token.set(IndexAnnotation.class, tokens.size());
+                token.set(TokenKey.class, t);
+                token.set(PartOfSpeechAnnotation.class, t.getPos().getPosValue());
             }
-            else {
-                lemma = morphology.stem(token);
+
+            if (ptb3Escaping) {
+                tokens = CoreNlpUtils.applyPtbEscaping(tokens, quoteBegin, quoteEnd);
             }
-            if (lemma == null) {
-                lemma = token;
+
+            sentence.set(TokensAnnotation.class, tokens);
+            sentences.add(sentence);
+        }
+        
+        document.set(SentencesAnnotation.class, sentences);
+
+        annotator.annotate(document);
+
+        for (CoreMap s : document.get(SentencesAnnotation.class)) {
+            for (CoreLabel t : s.get(TokensAnnotation.class)) {
+                Token token = t.get(TokenKey.class);
+                String tag = t.get(LemmaAnnotation.class);
+                Lemma anno = new Lemma(aJCas, token.getBegin(), token.getEnd());
+                anno.setValue(tag);
+                anno.addToIndexes();
+                token.setLemma(anno);
             }
-            Lemma l = new Lemma(aJCas, t.getBegin(), t.getEnd());
-            l.setValue(lemma);
-            l.addToIndexes();
-            t.setLemma(l);
         }
     }
 }
