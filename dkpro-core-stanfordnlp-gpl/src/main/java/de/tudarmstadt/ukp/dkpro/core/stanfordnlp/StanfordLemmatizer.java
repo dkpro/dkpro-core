@@ -132,7 +132,7 @@ public class StanfordLemmatizer
                 // First add token so that tokens.size() returns a 1-based counting as required
                 // by IndexAnnotation
                 tokens.add(token);
-                //token.set(SentenceIndexAnnotation.class, sentences.size());
+                token.set(SentenceIndexAnnotation.class, sentences.size());
                 token.set(IndexAnnotation.class, tokens.size());
                 token.set(TokenKey.class, t);
                 token.set(PartOfSpeechAnnotation.class, t.getPos().getPosValue());
