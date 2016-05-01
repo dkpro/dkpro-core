@@ -216,8 +216,7 @@ public class StanfordCoreferenceResolverTest
                         StanfordParser.PARAM_WRITE_PENN_TREE, true,
                         StanfordParser.PARAM_WRITE_POS, true),
                 createEngineDescription(StanfordLemmatizer.class),
-                createEngineDescription(
-                        StanfordNamedEntityRecognizer.class),
+                createEngineDescription(StanfordNamedEntityRecognizer.class),
                 createEngineDescription(StanfordCoreferenceResolver.class,
                         StanfordCoreferenceResolver.PARAM_SIEVES, aSieves)));
 
