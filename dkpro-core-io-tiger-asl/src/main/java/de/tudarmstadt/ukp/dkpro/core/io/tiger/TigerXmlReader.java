@@ -58,8 +58,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument;
-import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArgLink;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
@@ -297,7 +298,7 @@ public class TigerXmlReader
     {
         if (sem.frames != null) {
             for (TigerFrame frame : sem.frames) {
-                SemanticPredicate p = new SemanticPredicate(jCas);
+                SemPred p = new SemPred(jCas);
                 p.setCategory(frame.name);
                 int begin = Integer.MAX_VALUE;
                 int end = 0;
@@ -317,26 +318,30 @@ public class TigerXmlReader
                 p.setBegin(begin);
                 p.setEnd(end);
 
-                List<SemanticArgument> arguments = new ArrayList<SemanticArgument>();
+                List<SemArgLink> arguments = new ArrayList<>();
                 if (frame.fes != null) {
                     for (TigerFrameElement fe : frame.fes) {
                         if (fe.fenodes != null) {
                             for (TigerFeNode fenode : fe.fenodes) {
                                 if (terminals.containsKey(fenode.idref)) {
                                     Token argument = terminals.get(fenode.idref);
-                                    SemanticArgument a = new SemanticArgument(jCas,
-                                            argument.getBegin(), argument.getEnd());
-                                    a.setRole(fe.name);
+                                    SemArg a = new SemArg(jCas, argument.getBegin(),
+                                            argument.getEnd());
                                     a.addToIndexes();
-                                    arguments.add(a);
+                                    SemArgLink link = new SemArgLink(jCas);
+                                    link.setRole(fe.name);
+                                    link.setTarget(a);
+                                    arguments.add(link);
                                 }
                                 else if (nonterminals.containsKey(fenode.idref)) {
                                     Constituent argument = nonterminals.get(fenode.idref);
-                                    SemanticArgument a = new SemanticArgument(jCas,
-                                            argument.getBegin(), argument.getEnd());
-                                    a.setRole(fe.name);
+                                    SemArg a = new SemArg(jCas, argument.getBegin(),
+                                            argument.getEnd());
                                     a.addToIndexes();
-                                    arguments.add(a);
+                                    SemArgLink link = new SemArgLink(jCas);
+                                    link.setRole(fe.name);
+                                    link.setTarget(a);
+                                    arguments.add(link);
                                 }
                             }
                         }

@@ -53,8 +53,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument;
-import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArgLink;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.WordSense;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeToJCasConverter;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
@@ -286,7 +287,7 @@ public class Conll2012Reader
 
             // Tokens, Lemma, POS
             Map<Integer, Token> tokenById = new HashMap<Integer, Token>();
-            List<SemanticPredicate> preds = new ArrayList<>();
+            List<SemPred> preds = new ArrayList<>();
             for (String[] word : words) {
                 // Read token
                 Token token = doc.add(word[FORM], Token.class);
@@ -312,7 +313,7 @@ public class Conll2012Reader
                 }
 
                 if (!UNUSED.equals(word[PRED]) && readSemanticPredicate) {
-                    SemanticPredicate pred = new SemanticPredicate(aJCas, token.getBegin(), token.getEnd());
+                    SemPred pred = new SemPred(aJCas, token.getBegin(), token.getEnd());
                     pred.setCategory(word[PRED]);
                     pred.addToIndexes();
                     preds.add(pred);
@@ -406,8 +407,8 @@ public class Conll2012Reader
             if (readSemanticPredicate) {
                 // Get arguments for one predicate at a time
                 for (int p = 0; p < preds.size(); p++) {
-                    SemanticPredicate pred = preds.get(p);
-                    List<SemanticArgument> args = new ArrayList<SemanticArgument>();
+                    SemPred pred = preds.get(p);
+                    List<SemArgLink> args = new ArrayList<>();
 
                     int currentArgBegin = -1;
                     String currentArgType = null;
@@ -434,10 +435,13 @@ public class Conll2012Reader
                             // Add named entity unless it is a (V*) which has the same offsets as
                             // the predicate
                             if (!(pred.getBegin() == begin && pred.getEnd() == end)) {
-                                SemanticArgument arg = new SemanticArgument(aJCas, begin, end);
-                                arg.setRole(currentArgType);
+                                SemArg arg = new SemArg(aJCas, begin, end);
                                 arg.addToIndexes();
-                                args.add(arg);
+                                
+                                SemArgLink link = new SemArgLink(aJCas);
+                                link.setRole(currentArgType);
+                                link.setTarget(arg);
+                                args.add(link);
                             }
                             
                             // Forget remembered arg

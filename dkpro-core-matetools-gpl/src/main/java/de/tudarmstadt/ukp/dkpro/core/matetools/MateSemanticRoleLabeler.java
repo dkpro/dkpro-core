@@ -45,12 +45,6 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import se.lth.cs.srl.SemanticRoleLabeler;
-import se.lth.cs.srl.corpus.Predicate;
-import se.lth.cs.srl.corpus.Word;
-import se.lth.cs.srl.languages.Language;
-import se.lth.cs.srl.languages.Language.L;
-import se.lth.cs.srl.pipeline.Pipeline;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -59,9 +53,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument;
-import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArgLink;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import se.lth.cs.srl.SemanticRoleLabeler;
+import se.lth.cs.srl.corpus.Predicate;
+import se.lth.cs.srl.corpus.Word;
+import se.lth.cs.srl.languages.Language;
+import se.lth.cs.srl.languages.Language.L;
+import se.lth.cs.srl.pipeline.Pipeline;
 
 /**
  * DKPro Annotator for the MateTools Semantic Role Labeler.
@@ -166,21 +167,24 @@ public class MateSemanticRoleLabeler extends JCasConsumer_ImplBase {
 			for(Predicate pred : preds) {
 				//Add the predicates
 				Token predToken = tokens.get(pred.getIdx()-1);
-				SemanticPredicate semanticPredicate = new SemanticPredicate(jcas, predToken.getBegin(), predToken.getEnd());
+				SemPred semanticPredicate = new SemPred(jcas, predToken.getBegin(), predToken.getEnd());
 				semanticPredicate.setCategory(pred.getSense());
 				semanticPredicate.addToIndexes();
 
 				//Add the arguments
 				Map<Word, String> argmap = pred.getArgMap();
-				List<SemanticArgument> arguments = new LinkedList<>();				
+				List<SemArgLink> arguments = new LinkedList<>();				
 				for(Map.Entry<Word, String> entry : argmap.entrySet()) {
 					Token argumentToken = tokens.get(entry.getKey().getIdx()-1);
 
-					SemanticArgument arg = new SemanticArgument(jcas, argumentToken.getBegin(), argumentToken.getEnd());
-					arg.setRole(pred.getArgumentTag(entry.getKey()));
+					SemArg arg = new SemArg(jcas, argumentToken.getBegin(), argumentToken.getEnd());
 					arg.addToIndexes();
+					
+					SemArgLink link = new SemArgLink(jcas);
+                    link.setRole(pred.getArgumentTag(entry.getKey()));
+                    link.setTarget(arg);
 
-					arguments.add(arg);
+					arguments.add(link);
 				}
 
 				//Add the arguments to the predicate
@@ -192,10 +196,8 @@ public class MateSemanticRoleLabeler extends JCasConsumer_ImplBase {
 
 	private String convert(JCas aJCas, Sentence sentence)
 	{
-		Map<Token, Collection<SemanticPredicate>> predIdx = indexCovered(aJCas, Token.class,
-				SemanticPredicate.class);
-		Map<SemanticArgument, Collection<Token>> argIdx = indexCovered(aJCas,
-				SemanticArgument.class, Token.class);
+        Map<Token, Collection<SemPred>> predIdx = indexCovered(aJCas, Token.class, SemPred.class);
+        Map<SemArg, Collection<Token>> argIdx = indexCovered(aJCas, SemArg.class, Token.class);
 		HashMap<Token, Row> ctokens = new LinkedHashMap<Token, Row>();
 
 		StringBuilder conll2009String = new StringBuilder();
@@ -210,20 +212,20 @@ public class MateSemanticRoleLabeler extends JCasConsumer_ImplBase {
 		int tokenSize = tokens.size();
 		int morhSize = morphology.size();
 
-		List<SemanticPredicate> preds = selectCovered(SemanticPredicate.class, sentence);
+		List<SemPred> preds = selectCovered(SemPred.class, sentence);
 
 		for (int i = 0; i < tokens.size(); i++) {
 			Row row = new Row();
 			row.id = i+1;
 			row.token = tokens.get(i);
-			row.args = new SemanticArgument[preds.size()];
+			row.args = new SemArgLink[preds.size()];
 			if (useFeats) {
 				row.feats = morphology.get(i);
 			}
 
 			// If there are multiple semantic predicates for the current token, then 
 			// we keep only the first
-			Collection<SemanticPredicate> predsForToken = predIdx.get(row.token);
+			Collection<SemPred> predsForToken = predIdx.get(row.token);
 			if (predsForToken != null && !predsForToken.isEmpty()) {
 				row.pred = predsForToken.iterator().next();
 			}
@@ -238,10 +240,10 @@ public class MateSemanticRoleLabeler extends JCasConsumer_ImplBase {
 		// Semantic arguments
 		for (int p = 0; p < preds.size(); p++) {
 			FSArray args = preds.get(p).getArguments();
-			for (SemanticArgument arg : select(args, SemanticArgument.class)) {
-				for (Token t : argIdx.get(arg)) {
+			for (SemArgLink link : select(args, SemArgLink.class)) {
+				for (Token t : argIdx.get(link.getTarget())) {
 					Row row = ctokens.get(t);
-					row.args[p] = arg;
+					row.args[p] = link;
 				}
 			}
 		}
@@ -310,8 +312,8 @@ public class MateSemanticRoleLabeler extends JCasConsumer_ImplBase {
 		Token token;
 		Morpheme feats;
 		Dependency deprel;
-		SemanticPredicate pred;
-		SemanticArgument[] args; // These are the arguments roles for the current token!
+		SemPred pred;
+		SemArgLink[] args; // These are the arguments roles for the current token!
 	}
 
 }

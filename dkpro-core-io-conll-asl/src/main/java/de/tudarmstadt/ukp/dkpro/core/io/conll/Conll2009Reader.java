@@ -48,8 +48,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument;
-import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArgLink;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 
@@ -99,8 +100,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
         "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
         "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency",
-        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate",
-        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument"})
+        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred",
+        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg"})
 public class Conll2009Reader
     extends JCasResourceCollectionReader_ImplBase
 {
@@ -218,7 +219,7 @@ public class Conll2009Reader
 
             // Tokens, Lemma, POS
             Map<Integer, Token> tokens = new HashMap<Integer, Token>();
-            List<SemanticPredicate> preds = new ArrayList<>();
+            List<SemPred> preds = new ArrayList<>();
             for (String[] word : words) {
                 // Read token
                 Token token = doc.add(word[FORM], Token.class);
@@ -252,7 +253,7 @@ public class Conll2009Reader
                 }
 
                 if (!UNUSED.equals(word[PRED]) && readSemanticPredicate) {
-                    SemanticPredicate pred = new SemanticPredicate(aJCas, token.getBegin(), token.getEnd());
+                    SemPred pred = new SemPred(aJCas, token.getBegin(), token.getEnd());
                     pred.setCategory(word[PRED]);
                     pred.addToIndexes();
                     preds.add(pred);
@@ -295,18 +296,20 @@ public class Conll2009Reader
             if (readSemanticPredicate) {
                 // Get arguments for one predicate at a time
                 for (int p = 0; p < preds.size(); p++) {
-                    List<SemanticArgument> args = new ArrayList<SemanticArgument>();
+                    List<SemArgLink> args = new ArrayList<>();
                     for (String[] word : words) {
                         if (!UNUSED.equals(word[APRED+p])) {
                             Token token = tokens.get(Integer.valueOf(word[ID]));
-                            SemanticArgument arg = new SemanticArgument(aJCas, token.getBegin(),
-                                    token.getEnd());
-                            arg.setRole(word[APRED+p]);
+                            SemArg arg = new SemArg(aJCas, token.getBegin(), token.getEnd());
                             arg.addToIndexes();
-                            args.add(arg);
+                            
+                            SemArgLink link = new SemArgLink(aJCas);
+                            link.setRole(word[APRED+p]);
+                            link.setTarget(arg);
+                            args.add(link);
                         }
                     }
-                    SemanticPredicate pred = preds.get(p);
+                    SemPred pred = preds.get(p);
                     pred.setArguments(FSCollectionFactory.createFSArray(aJCas, args));
                 }
             }

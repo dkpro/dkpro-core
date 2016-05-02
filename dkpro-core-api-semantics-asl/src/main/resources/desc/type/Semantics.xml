@@ -13,7 +13,10 @@ expressing the participants in these events ore situations. All forms of main ve
 can be annotated with a SemanticPredicate. However, there are also many nouns and
 adjectives that take arguments and can thus be annotated with a SemanticPredicate,
 e.g. event nouns, such as "suggestion" (with arguments what and by whom), or
-relational adjectives, such as "proud" (with arguments who and of what). 
+relational adjectives, such as "proud" (with arguments who and of what).
+
+@deprecated use SemPred instead
+
 </description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
@@ -38,6 +41,9 @@ Experiencer, Topic. The semantic role of an argument is related to its semantic 
 (for communication verbs, the Agent can be a person or an organization, but
 typically not food). The semantic type of arguments is not yet covered by the
 SemanticType.
+
+@deprecated Use SemArg instead.
+
 </description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
@@ -53,8 +59,7 @@ SemanticType.
       <description>The SemanticField is a coarse-grained semantic category that can be attached to
 nouns, verbs or adjectives. Semantic field information is present e.g. in WordNet as
 lexicographer file names. Previously, this kind of semantic information has also
-been called supersenses or semantic types.
-</description>
+been called supersenses or semantic types.</description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
@@ -73,6 +78,57 @@ been called supersenses or semantic types.
           <name>value</name>
           <description>The sense identifier.</description>
           <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg</name>
+      <description>The SemArg annotation is attached to semantic arguments of semantic
+predicates. Semantic arguments are characterized by their semantic role, e.g. Agent,
+Experiencer, Topic. The semantic role of an argument is related to its semantic type
+(for communication verbs, the Agent can be a person or an organization, but
+typically not food).</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred</name>
+      <description>One of the predicates of a sentence (often a main verb, but nouns and adjectives can also be predicates). 
+The SemPred annotation can be attached to predicates in a sentences.
+Semantic predicates express events or situations and take semantic arguments
+expressing the participants in these events ore situations. All forms of main verbs
+can be annotated with a SemPred. However, there are also many nouns and
+adjectives that take arguments and can thus be annotated with a SemanticPredicate,
+e.g. event nouns, such as "suggestion" (with arguments what and by whom), or
+relational adjectives, such as "proud" (with arguments who and of what).</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>arguments</name>
+          <description>The predicate's arguments.</description>
+          <rangeTypeName>uima.cas.FSArray</rangeTypeName>
+          <elementType>de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArgLink</elementType>
+        </featureDescription>
+        <featureDescription>
+          <name>category</name>
+          <description>A more detailed specification of the predicate type depending on the theory being used, e.g. a frame name.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArgLink</name>
+      <description>The SemArgLink type is used to attach SemPred annotations to their respective SemArg annotations while giving each link a role. </description>
+      <supertypeName>uima.cas.TOP</supertypeName>
+      <features>
+        <featureDescription>
+          <name>role</name>
+          <description>The role which the argument takes. The value depends on the theory being used, e.g. Arg0, Arg1, etc. or Buyer, Seller, etc.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>target</name>
+          <description>The target argument.</description>
+          <rangeTypeName>de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg</rangeTypeName>
         </featureDescription>
       </features>
     </typeDescription>

@@ -149,11 +149,10 @@ Token
       end: 8
       PosValue: "IN"
 [this one excursion ,]
-SemanticArgument
+SemArg
    sofa: _InitialView
    begin: 9
    end: 29
-   role: "Current"
 [this one excursion ,]
 Constituent
    sofa: _InitialView
@@ -333,19 +332,19 @@ Token
       end: 27
       PosValue: "NN"
 [excursion]
-SemanticPredicate
+SemPred
    sofa: _InitialView
    begin: 18
    end: 27
+   arguments: FSArray
    category: "Travel"
-   arguments: FSArray
 [excursion]
-SemanticPredicate
+SemPred
    sofa: _InitialView
    begin: 18
    end: 27
-   category: "Coreference"
    arguments: FSArray
+   category: "Coreference"
 [,]
 O
    sofa: _InitialView
@@ -431,48 +430,42 @@ Token
       end: 32
       PosValue: "PRP"
 [he]
-SemanticArgument
+SemArg
    sofa: _InitialView
    begin: 30
    end: 32
-   role: "Interlocutor_1"
 [he]
-SemanticArgument
+SemArg
    sofa: _InitialView
    begin: 30
    end: 32
-   role: "Traveler"
 [he]
-SemanticArgument
+SemArg
    sofa: _InitialView
    begin: 30
    end: 32
-   role: "Self_mover"
 [he]
-SemanticArgument
+SemArg
    sofa: _InitialView
    begin: 30
    end: 32
-   role: "Coreferent"
 [he]
-SemanticArgument
+SemArg
    sofa: _InitialView
    begin: 30
    end: 32
-   role: "Coreferent"
 [he]
-SemanticArgument
+SemArg
    sofa: _InitialView
    begin: 30
    end: 32
-   role: "Current"
 [he]
-SemanticPredicate
+SemPred
    sofa: _InitialView
    begin: 30
    end: 32
-   category: "Coreference"
    arguments: FSArray
+   category: "Coreference"
 [spent his days in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -590,18 +583,17 @@ Token
       end: 42
       PosValue: "PRP$"
 [his]
-SemanticArgument
+SemArg
    sofa: _InitialView
    begin: 39
    end: 42
-   role: "Current"
 [his]
-SemanticPredicate
+SemPred
    sofa: _InitialView
    begin: 39
    end: 42
-   category: "Coreference"
    arguments: FSArray
+   category: "Coreference"
 [days]
 NN
    sofa: _InitialView
@@ -648,18 +640,17 @@ Token
       end: 47
       PosValue: "NNS"
 [days]
-SemanticArgument
+SemArg
    sofa: _InitialView
    begin: 43
    end: 47
-   role: "Unit"
 [days]
-SemanticPredicate
+SemPred
    sofa: _InitialView
    begin: 43
    end: 47
-   category: "Calendric_unit"
    arguments: FSArray
+   category: "Calendric_unit"
 [in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -887,12 +878,12 @@ Token
       end: 55
       PosValue: "JJ"
 [long]
-SemanticPredicate
+SemPred
    sofa: _InitialView
    begin: 51
    end: 55
-   category: "Duration"
    arguments: FSArray
+   category: "Duration"
 [and]
 CONJ
    sofa: _InitialView
@@ -957,11 +948,10 @@ Token
       end: 59
       PosValue: "CC"
 [often solitary]
-SemanticArgument
+SemArg
    sofa: _InitialView
    begin: 60
    end: 74
-   role: "Depictive"
 [often solitary]
 Constituent
    sofa: _InitialView
@@ -1201,18 +1191,17 @@ Token
       end: 80
       PosValue: "VBZ"
 [walks]
-SemanticArgument
+SemArg
    sofa: _InitialView
    begin: 75
    end: 80
-   role: "Eventuality"
 [walks]
-SemanticPredicate
+SemPred
    sofa: _InitialView
    begin: 75
    end: 80
-   category: "Self_motion"
    arguments: FSArray
+   category: "Self_motion"
 [,]
 O
    sofa: _InitialView
@@ -1480,18 +1469,17 @@ Token
       end: 97
       PosValue: "VBG"
 [chatting]
-SemanticPredicate
+SemPred
    sofa: _InitialView
    begin: 89
    end: 97
-   category: "Chatting"
    arguments: FSArray
+   category: "Chatting"
 [with a number of village gossips whose acquaintance he had cultivated .]
-SemanticArgument
+SemArg
    sofa: _InitialView
    begin: 98
    end: 169
-   role: "Interlocutor_2"
 [with a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1835,24 +1823,22 @@ Token
       end: 111
       PosValue: "NN"
 [number]
-SemanticArgument
+SemArg
    sofa: _InitialView
    begin: 105
    end: 111
-   role: "Quantity"
 [number]
-SemanticPredicate
+SemPred
    sofa: _InitialView
    begin: 105
    end: 111
-   category: "Quantity"
    arguments: FSArray
+   category: "Quantity"
 [of village gossips whose acquaintance he had cultivated .]
-SemanticArgument
+SemArg
    sofa: _InitialView
    begin: 112
    end: 169
-   role: "Individuals"
 [of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -2742,18 +2728,17 @@ Token
       end: 152
       PosValue: "PRP"
 [he]
-SemanticArgument
+SemArg
    sofa: _InitialView
    begin: 150
    end: 152
-   role: "Current"
 [he]
-SemanticPredicate
+SemPred
    sofa: _InitialView
    begin: 150
    end: 152
-   category: "Coreference"
    arguments: FSArray
+   category: "Coreference"
 [had cultivated .]
 Constituent
    sofa: _InitialView
@@ -3111,11 +3096,10 @@ Token
       end: 167
       PosValue: "VBN"
 [cultivated]
-SemanticArgument
+SemArg
    sofa: _InitialView
    begin: 157
    end: 167
-   role: "Current"
 [.]
 O
    sofa: _InitialView

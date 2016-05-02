@@ -28,7 +28,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
@@ -48,11 +48,10 @@ public class ClearNlpSemanticRoleLabelerTest
 		JCas jcas = runTest("en", null, documentEnglish);
 
 		String[] predicates = {
-				"contains (contain.01): [(A0:sentence)(R-A0:which)(A1:as)]",
-				"need (need.01): [(A0:We)(A1:sentence)]" };
+		        "contains (contain.01): [(A0:sentence)(A1:as)(R-A0:which)]",
+		        "need (need.01): [(A0:We)(A1:sentence)]" };
 
-		AssertAnnotations.assertSemanticPredicates(predicates,
-				select(jcas, SemanticPredicate.class));
+        AssertAnnotations.assertSemPred(predicates, select(jcas, SemPred.class));
 	}
 
     @Test
@@ -67,14 +66,13 @@ public class ClearNlpSemanticRoleLabelerTest
         String[] predicates = {
                 "contains (contain.01): ["
                 + "(A0:a very complicated example sentence , which contains as many constituents and dependencies as possible)"
-                + "(R-A0:which)"
-                + "(A1:as many constituents and dependencies as possible)]",
+                + "(A1:as many constituents and dependencies as possible)"
+                + "(R-A0:which)]",
                 "need (need.01): ["
                 + "(A0:We)"
                 + "(A1:a very complicated example sentence , which contains as many constituents and dependencies as possible)]" };
 
-        AssertAnnotations.assertSemanticPredicates(predicates,
-                select(jcas, SemanticPredicate.class));
+        AssertAnnotations.assertSemPred(predicates, select(jcas, SemPred.class));
     }
     
     @Test
@@ -86,10 +84,9 @@ public class ClearNlpSemanticRoleLabelerTest
         JCas jcas = runTest("en", null, "The man was sued by Jacqueline Kennedy Onassis .",
                 ClearNlpSemanticRoleLabeler.PARAM_EXPAND_ARGUMENTS, true);
 
-        String[] predicates = { "sued (sue.01): [(A1:The man)(A0:by Jacqueline Kennedy Onassis)]" };
+        String[] predicates = { "sued (sue.01): [(A0:by Jacqueline Kennedy Onassis)(A1:The man)]" };
 
-        AssertAnnotations.assertSemanticPredicates(predicates,
-                select(jcas, SemanticPredicate.class));
+        AssertAnnotations.assertSemPred(predicates, select(jcas, SemPred.class));
     }
 	@Test
 	public void testEnglishMayo()
@@ -100,11 +97,10 @@ public class ClearNlpSemanticRoleLabelerTest
 		JCas jcas = runTest("en", "mayo", documentEnglish);
 
 		String[] predicates = {
-				"contains (contain.01): [(A0:sentence)(R-A0:which)(A1:as)]",
-				"need (need.01): [(A0:We)(A1:sentence)]" };
+		        "contains (contain.01): [(A0:sentence)(A1:as)(R-A0:which)]",
+		        "need (need.01): [(A0:We)(A1:sentence)]" };
 
-		AssertAnnotations.assertSemanticPredicates(predicates,
-				select(jcas, SemanticPredicate.class));
+        AssertAnnotations.assertSemPred(predicates, select(jcas, SemPred.class));
 	}
 
 	private JCas runTest(String aLanguage, String aVariant, String aText, Object... aExtraParams)

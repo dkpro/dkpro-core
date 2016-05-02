@@ -17,6 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.tiger;
 
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.*;
 import static org.apache.uima.fit.pipeline.SimplePipeline.*;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
@@ -31,6 +32,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
+import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2012Writer;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
@@ -91,6 +93,19 @@ public class TigerXmlReaderTest
                         TigerXmlReader.PARAM_LANGUAGE, "en",
                         TigerXmlReader.PARAM_READ_PENN_TREE, true), 
                 "semeval1010-sample.xml.dump", 
+                "semeval1010-en-sample.xml");
+    }
+
+    @Test
+    public void semevalSampleTest2()
+        throws Exception
+    {
+        testOneWay(
+                createReaderDescription(TigerXmlReader.class,
+                        TigerXmlReader.PARAM_LANGUAGE, "en",
+                        TigerXmlReader.PARAM_READ_PENN_TREE, true), 
+                createEngineDescription(Conll2012Writer.class),
+                "semeval1010-en-sample.conll", 
                 "semeval1010-en-sample.xml");
     }
 

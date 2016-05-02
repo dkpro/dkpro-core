@@ -62,8 +62,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableStreamProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument;
-import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArgLink;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 
@@ -78,8 +79,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
         "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"},
     outputs = {
-        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate",
-        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument"}
+        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred",
+        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg"}
     )
 public class ClearNlpSemanticRoleLabeler
 	extends JCasAnnotator_ImplBase
@@ -344,8 +345,8 @@ public class ClearNlpSemanticRoleLabeler
 			roleLabeller.getResource().process(tree);
 
 			// Convert the results into UIMA annotations
-			Map<Token, SemanticPredicate> predicates = new HashMap<>();
-			Map<SemanticPredicate, List<SemanticArgument>> predArgs = new HashMap<>();
+			Map<Token, SemPred> predicates = new HashMap<>();
+			Map<SemPred, List<SemArgLink>> predArgs = new HashMap<>();
 
 			for (int i = 0; i < tokens.size(); i++) {
 				DEPNode parserNode = tree.get(i + 1);
@@ -355,11 +356,10 @@ public class ClearNlpSemanticRoleLabeler
 					Token predToken = tokens.get(argPredArc.getNode().id - 1);
 
 					// Instantiate the semantic predicate annotation if it hasn't been done yet
-					SemanticPredicate pred = predicates.get(predToken);
+					SemPred pred = predicates.get(predToken);
 					if (pred == null) {
 						// Create the semantic predicate annotation itself
-						pred = new SemanticPredicate(aJCas, predToken.getBegin(),
-								predToken.getEnd());
+                        pred = new SemPred(aJCas, predToken.getBegin(), predToken.getEnd());
 						pred.setCategory(argPredArc.getNode().getFeat(DEPLib.FEAT_PB));
 						pred.addToIndexes();
 						predicates.put(predToken, pred);
@@ -369,7 +369,7 @@ public class ClearNlpSemanticRoleLabeler
 					}
 
 					// Instantiate the semantic argument annotation
-					SemanticArgument arg = new SemanticArgument(aJCas);
+					SemArg arg = new SemArg(aJCas);
 					
                     if (expandArguments) {
                         List<DEPNode> descendents = parserNode.getDescendents(Integer.MAX_VALUE)
@@ -390,17 +390,19 @@ public class ClearNlpSemanticRoleLabeler
                         arg.setEnd(argumentToken.getEnd());
                     }
 					
-					arg.setRole(argPredArc.getLabel());
 					arg.addToIndexes();
+					
+					SemArgLink link = new SemArgLink(aJCas);
+					link.setRole(argPredArc.getLabel());
+					link.setTarget(arg);
 
 					// Remember to which predicate this argument belongs
-					predArgs.get(pred).add(arg);
+					predArgs.get(pred).add(link);
 				}
 			}
 
-			for (Entry<SemanticPredicate, List<SemanticArgument>> e : predArgs.entrySet()) {
-				e.getKey().setArguments(
-						FSCollectionFactory.createFSArray(aJCas, e.getValue()));
+			for (Entry<SemPred, List<SemArgLink>> e : predArgs.entrySet()) {
+                e.getKey().setArguments(FSCollectionFactory.createFSArray(aJCas, e.getValue()));
 			}
 		}
 	}

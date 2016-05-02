@@ -50,8 +50,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument;
-import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArgLink;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.WordSense;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeNode;
@@ -60,13 +61,14 @@ import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
 /**
  * Writer for the CoNLL-2009 format.
  */
-@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+@TypeCapability(inputs = { 
+        "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
         "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate",
-        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument"})
+        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred",
+        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg"})
 public class Conll2012Writer
     extends JCasFileWriter_ImplBase
 {
@@ -126,10 +128,8 @@ public class Conll2012Writer
 
     private void convert(JCas aJCas, PrintWriter aOut)
     {
-        Map<Token, Collection<SemanticPredicate>> predIdx = indexCovered(aJCas, Token.class,
-                SemanticPredicate.class);
-        Map<SemanticArgument, Collection<Token>> argIdx = indexCovered(aJCas,
-                SemanticArgument.class, Token.class);
+        Map<Token, Collection<SemPred>> predIdx = indexCovered(aJCas, Token.class, SemPred.class);
+        Map<SemArg, Collection<Token>> argIdx = indexCovered(aJCas, SemArg.class, Token.class);
         Map<Token, Collection<NamedEntity>> neIdx = indexCovering(aJCas, Token.class,
                 NamedEntity.class);
         Map<Token, Collection<WordSense>> wordSenseIdx = indexCovered(aJCas, Token.class,
@@ -152,7 +152,7 @@ public class Conll2012Writer
             // Tokens
             List<Token> tokens = selectCovered(Token.class, sentence);
             
-            List<SemanticPredicate> preds = selectCovered(SemanticPredicate.class, sentence);
+            List<SemPred> preds = selectCovered(SemPred.class, sentence);
 
             String[] parseFragments = null;
             List<ROOT> root = selectCovered(ROOT.class, sentence);
@@ -173,12 +173,12 @@ public class Conll2012Writer
                 Row row = new Row();
                 row.id = i;
                 row.token = tokens.get(i);
-                row.args = new SemanticArgument[preds.size()];
+                row.args = new SemArgLink[preds.size()];
                 row.parse = parseFragments != null ? parseFragments[i] : UNUSED;
                 
                 // If there are multiple semantic predicates for the current token, then 
                 // we keep only the first
-                Collection<SemanticPredicate> predsForToken = predIdx.get(row.token);
+                Collection<SemPred> predsForToken = predIdx.get(row.token);
                 if (predsForToken != null && !predsForToken.isEmpty()) {
                     row.pred = predsForToken.iterator().next();
                 }
@@ -205,8 +205,8 @@ public class Conll2012Writer
             // Semantic arguments
             for (int p = 0; p < preds.size(); p++) {
                 FSArray args = preds.get(p).getArguments();
-                for (SemanticArgument arg : select(args, SemanticArgument.class)) {
-                    for (Token t : argIdx.get(arg)) {
+                for (SemArgLink arg : select(args, SemArgLink.class)) {
+                    for (Token t : argIdx.get(arg.getTarget())) {
                         Row row = ctokens.get(t);
                         row.args[p] = arg;
                     }
@@ -267,14 +267,14 @@ public class Conll2012Writer
                         pred = row.pred.getCategory();
                     }
                     
-                    for (SemanticArgument arg : row.args) {
+                    for (SemArgLink link : row.args) {
                         
                         if (apreds.length() > 0) {
                             apreds.append("             ");
                         }
                         
                         String value;
-                        if (arg == null) {
+                        if (link == null) {
                             if (row.pred != null && row.pred.getBegin() == row.token.getBegin()
                                     && row.pred.getEnd() == row.token.getEnd()) {
                                 value = "(V*)";
@@ -284,7 +284,8 @@ public class Conll2012Writer
                             }
                         }
                         else {
-                            value = encodeMultiTokenAnnotation(row.token, arg, arg.getRole());
+                            value = encodeMultiTokenAnnotation(row.token, link.getTarget(),
+                                    link.getRole());
                         }
                         apreds.append(String.format("%10s", value));
                     }
@@ -368,8 +369,8 @@ public class Conll2012Writer
         WordSense wordSense;
         int id;
         Token token;
-        SemanticPredicate pred;
-        SemanticArgument[] args; // These are the arguments roles for the current token!
+        SemPred pred;
+        SemArgLink[] args; // These are the arguments roles for the current token!
         Collection<CoreferenceLink> coref;
     }
     

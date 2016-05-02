@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,7 @@ import java.util.stream.Collectors;
 
 import junit.framework.Assert;
 
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UIMAException;
 import org.apache.uima.UimaContext;
@@ -75,6 +77,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArgLink;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate;
@@ -481,6 +485,10 @@ public class AssertAnnotations
         assertEquals(expected, actual);
     }
 
+    /**
+     * @deprecated Use {@link #assertSemPred(String[], Collection)}
+     */
+    @Deprecated
     public static void assertSemanticPredicates(String[] aExpected,
             Collection<SemanticPredicate> aActual)
     {
@@ -492,6 +500,40 @@ public class AssertAnnotations
             sb.append(p.getCoveredText()).append(" (").append(p.getCategory()).append("): [");
             for (SemanticArgument a : select(p.getArguments(), SemanticArgument.class)) {
                 sb.append('(').append(a.getRole()).append(':').append(a.getCoveredText())
+                        .append(')');
+            }
+            sb.append(']');
+            actual.add(sb.toString());
+        }
+
+        Collections.sort(actual);
+        Collections.sort(expected);
+
+        System.out.printf("%-20s - Expected: %s%n", "Semantic predicates",
+                asCopyableString(expected));
+        System.out
+                .printf("%-20s - Actual  : %s%n", "Semantic predicates", asCopyableString(actual));
+
+        assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
+    }
+    
+    public static void assertSemPred(String[] aExpected, Collection<SemPred> aActual)
+    {
+        List<String> expected = new ArrayList<String>(asList(aExpected));
+        List<String> actual = new ArrayList<String>();
+
+        for (SemPred p : aActual) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(p.getCoveredText()).append(" (").append(p.getCategory()).append("): [");
+            List<SemArgLink> args = new ArrayList<>(select(p.getArguments(), SemArgLink.class));
+            
+            // Sort arguments by role to avoid sensitivity to unstable iteration orders in 
+            // annotation tools
+            Comparator<SemArgLink> byRole = (a,b) -> ObjectUtils.compare(a.getRole(), b.getRole());
+            args.sort(byRole);
+            
+            for (SemArgLink a : args) {
+                sb.append('(').append(a.getRole()).append(':').append(a.getTarget().getCoveredText())
                         .append(')');
             }
             sb.append(']');
