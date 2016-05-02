@@ -75,7 +75,7 @@ public class ClearNlpPosTaggerTest
 		throws Exception
 	{
 		AnalysisEngine engine = createEngine(ClearNlpPosTagger.class,
-				ClearNlpPosTagger.PARAM_POS_VARIANT, variant,
+				ClearNlpPosTagger.PARAM_VARIANT, variant,
 				ClearNlpPosTagger.PARAM_PRINT_TAGSET, true);
 
 		JCas jcas = TestRunner.runTest(engine, language, testDocument);
