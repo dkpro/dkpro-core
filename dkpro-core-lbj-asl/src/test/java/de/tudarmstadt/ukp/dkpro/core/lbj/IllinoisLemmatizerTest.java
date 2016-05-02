@@ -39,7 +39,7 @@ public class IllinoisLemmatizerTest
         JCas jcas = runTest("en", "We need a very complicated example sentence , which " +
             "contains as many constituents and dependencies as possible .");
 
-        String[] lemmas = { "we", "need", "a", "very", "complicated", "example", "sentence", ",",
+        String[] lemmas = { "we", "need", "a", "very", "complicate", "example", "sentence", ",",
                 "which", "contain", "as", "many", "constituent", "and", "dependency", "as",
                 "possible", "." };
 

@@ -28,6 +28,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 import edu.illinois.cs.cogcomp.core.datastructures.ViewNames;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.Constituent;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.TextAnnotation;
@@ -52,6 +53,24 @@ public class ConvertToUima
             posAnno.addToIndexes();
             casTokens.get(i).setPos(posAnno);
             i++;
+        }
+    }
+    
+    public static void convertChunks(JCas aJCas, List<Token> casTokens, TextAnnotation document,
+            MappingProvider mappingProvider, boolean internStrings)
+    {
+        CAS cas = aJCas.getCas();
+        List<Constituent> pos = document.getView(ViewNames.SHALLOW_PARSE).getConstituents();
+        
+        for (Constituent p : pos) {
+            String tag = p.getLabel();
+
+            // Convert tagger output to CAS
+            Type chunkTag = mappingProvider.getTagType(tag);
+            Chunk chunkAnno = (Chunk) cas.createAnnotation(chunkTag, p.getStartCharOffset(),
+                    p.getEndCharOffset());
+            chunkAnno.setChunkValue(internStrings ? tag.intern() : tag);
+            chunkAnno.addToIndexes();
         }
     }
     

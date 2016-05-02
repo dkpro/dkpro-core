@@ -49,7 +49,7 @@ import edu.illinois.cs.cogcomp.annotation.AnnotatorException;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.TextAnnotation;
 import edu.illinois.cs.cogcomp.lbjava.learn.Learner;
 import edu.illinois.cs.cogcomp.pos.POSAnnotator;
-import edu.illinois.cs.cogcomp.pos.TrainedPOSTagger;
+import edu.illinois.cs.cogcomp.pos.lbjava.POSTagger;
 import edu.illinois.cs.cogcomp.pos.lbjava.POSTaggerKnown;
 import edu.illinois.cs.cogcomp.pos.lbjava.POSTaggerUnknown;
 
@@ -129,16 +129,16 @@ public class IllinoisPosTagger
                 SingletonTagset tags = new SingletonTagset(POS.class, "ptb");
 
                 try {
-                    TrainedPOSTagger trainedTagger = (TrainedPOSTagger) FieldUtils
+                    POSTagger trainedTagger = (POSTagger) FieldUtils
                             .readField(annotator, "tagger", true);
-                    Learner known = (POSTaggerKnown) FieldUtils.readField(trainedTagger, "known",
+                    Learner known = (POSTaggerKnown) FieldUtils.readField(trainedTagger, "taggerKnown",
                             true);
                     for (int i = 0; i < known.getLabelLexicon().size(); i++) {
                         tags.add(known.getLabelLexicon().lookupKey(i).getStringValue());
                     }
 
                     Learner unknown = (POSTaggerUnknown) FieldUtils.readField(trainedTagger,
-                            "unknown", true);
+                            "taggerUnknown", true);
                     for (int i = 0; i < unknown.getLabelLexicon().size(); i++) {
                         tags.add(unknown.getLabelLexicon().lookupKey(i).getStringValue());
                     }
