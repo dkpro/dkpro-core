@@ -57,6 +57,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableStreamProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
@@ -99,15 +100,15 @@ public class ClearNlpPosTagger
     /**
      * Override the default variant used to locate the pos-tagging model.
      */
-    public static final String PARAM_POS_VARIANT = "posVariant";
-    @ConfigurationParameter(name = PARAM_POS_VARIANT, mandatory = false)
+    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
     protected String posVariant;
 
     /**
      * Load the model from this location instead of locating the pos-tagging model automatically.
      */
-    public static final String PARAM_POS_MODEL_LOCATION = "posModelLocation";
-    @ConfigurationParameter(name = PARAM_POS_MODEL_LOCATION, mandatory = false)
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
     protected String posModelLocation;
 
     /**
@@ -143,8 +144,22 @@ public class ClearNlpPosTagger
     {
         super.initialize(aContext);
 
-        dictModelProvider = new ModelProviderBase<InputStream>(this, "clearnlp", "dictionary")
+        dictModelProvider = new CasConfigurableStreamProviderBase<InputStream>()
         {
+            {
+                setContextObject(ClearNlpPosTagger.this);
+
+                setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-dictionary-${language}-${variant}");
+                setDefault(LOCATION,
+                        "classpath:/${package}/lib/dictionary-${language}-${variant}.properties");
+                setDefaultVariantsLocation("${package}/lib/dictionary-default-variants.map");
+                setDefault(VARIANT, "default");
+                
+                setOverride(LOCATION, dictLocation);
+                setOverride(LANGUAGE, language);
+                setOverride(VARIANT, dictVariant);
+            }
+            
             @Override
             protected InputStream produceResource(InputStream aStream)
                 throws Exception
@@ -156,7 +171,6 @@ public class ClearNlpPosTagger
                 return is;
             }
         };
-
 
         posTaggingModelProvider = new ModelProviderBase<AbstractPOSTagger>(this, "clearnlp", "tagger")
         {
