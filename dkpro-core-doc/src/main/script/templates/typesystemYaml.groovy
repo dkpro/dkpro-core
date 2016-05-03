@@ -21,8 +21,6 @@ typesystems
     .sort { it.name }
     .unique { it.name }
     .each { type ->
-        println "Writing tagset: ${type.name}"
-        
         def simpleType = [:];
         simpleType.features = [:];
         simpleType.externalReferences = [];

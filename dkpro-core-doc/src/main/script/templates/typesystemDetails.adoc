@@ -22,8 +22,10 @@ def renderType(type) {
 [small]#*_Name:_* __${type.name}__# +
 [small]#*_Supertype:_* __${Util.typeLink(type.supertypeName)}__# +
 <%
-typesystemMappings[type.name].externalReferences.each { ref ->
-    out.println("[small]#*_${ref.rel}:_* __${ref.id}__ (${ref.source})# +");
+if (typesystemMappings[type.name]) {
+    typesystemMappings[type.name].externalReferences.each { ref ->
+        out.println("[small]#*_${ref.rel}:_* __${ref.id}__ (${ref.source})# +");
+    }
 }
 %>
 
