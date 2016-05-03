@@ -43,6 +43,12 @@
 			<groupId>edu.illinois.cs.cogcomp</groupId>
 			<artifactId>illinois-pos</artifactId>
 			<version>${illinois-cogcomp-nlp.version}</version>
+			<exclusions>
+			  <exclusion>
+			    <artifactId>weka-stable</artifactId>
+			    <groupId>nz.ac.waikato.cms.weka</groupId>
+			  </exclusion>
+			</exclusions>
 		</dependency>
         <dependency>
             <groupId>edu.illinois.cs.cogcomp</groupId>
@@ -63,6 +69,12 @@
             <groupId>edu.illinois.cs.cogcomp</groupId>
             <artifactId>illinois-lemmatizer</artifactId>
             <version>${illinois-cogcomp-nlp.version}</version>
+            <exclusions>
+              <exclusion>
+                <artifactId>stanford-corenlp</artifactId>
+                <groupId>edu.stanford.nlp</groupId>
+              </exclusion>
+            </exclusions>
         </dependency>
         <!--  
         <dependency>

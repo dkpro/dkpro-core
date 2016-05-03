@@ -20,15 +20,21 @@ package de.tudarmstadt.ukp.dkpro.core.lbj.internal;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
+import org.apache.uima.cas.Feature;
+import org.apache.uima.cas.Type;
+import org.apache.uima.cas.text.AnnotationFS;
+import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
-
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 import edu.illinois.cs.cogcomp.core.datastructures.IntPair;
 import edu.illinois.cs.cogcomp.core.datastructures.ViewNames;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.Constituent;
+import edu.illinois.cs.cogcomp.core.datastructures.textannotation.SpanLabelView;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.TextAnnotation;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.TokenLabelView;
 
@@ -63,31 +69,63 @@ public class ConvertToIllinois
         TokenLabelView posView = new TokenLabelView(ViewNames.POS, null, document, 1.0);
         int i = 0;
         for (Token t : select(aJCas, Token.class)) {
-            
+
             Lemma lemma = t.getLemma();
             if (lemma != null) {
-                Constituent lemmaConstituent =
-                        new Constituent(lemma.getValue(), ViewNames.LEMMA, document, i, i + 1);
+                Constituent lemmaConstituent = new Constituent(lemma.getValue(), ViewNames.LEMMA,
+                        document, i, i + 1);
                 lemmaView.addConstituent(lemmaConstituent);
             }
 
             POS pos = t.getPos();
             if (pos != null) {
-                Constituent posConstituent =
-                        new Constituent(pos.getPosValue(), ViewNames.POS, document, i, i + 1);
+                Constituent posConstituent = new Constituent(pos.getPosValue(), ViewNames.POS,
+                        document, i, i + 1);
                 posView.addConstituent(posConstituent);
             }
 
             i++;
         }
+
         if (lemmaView.count() > 0) {
             document.addView(ViewNames.LEMMA, lemmaView);
         }
+
         if (posView.count() > 0) {
             document.addView(ViewNames.POS, posView);
         }
-            
-        
+
+        convertSpanLabelView(document, ViewNames.NER_CONLL, aJCas, tokens, NamedEntity.class,
+                "value");
+        convertSpanLabelView(document, ViewNames.SHALLOW_PARSE, aJCas, tokens, Chunk.class,
+                "chunkValue");
+
         return document;
+    }
+    
+    private void convertSpanLabelView(TextAnnotation document, String aView, JCas aJCas,
+            IntPair[] tokens, Class<?> type, String aFeature)
+    {
+        SpanLabelView view = new SpanLabelView(aView, document);
+        int t = 0;
+        Type uimaType = CasUtil.getType(aJCas.getCas(), type);
+        Feature valueFeat = uimaType.getFeatureByBaseName(aFeature);
+        for (AnnotationFS chunk : CasUtil.select(aJCas.getCas(), uimaType)) {
+            int begin = t;
+            while (tokens[begin].getFirst() < chunk.getBegin()) {
+                begin++;
+            }
+            assert tokens[begin].getFirst() == chunk.getBegin();
+
+            int end = begin;
+            while (tokens[end].getSecond() < chunk.getEnd()) {
+                end++;
+            }
+            assert tokens[end].getSecond() == chunk.getEnd();
+
+            view.addSpanLabel(begin, end, chunk.getStringValue(valueFeat), 1.0);
+            t = end + 1;
+        }
+        document.addView(aView, view);
     }
 }
