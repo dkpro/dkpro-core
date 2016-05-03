@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.reuters;
 
-import java.nio.file.Path;
+import java.net.URI;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -48,7 +48,7 @@ public class ReutersDocument
     private String title;
     private String dateline;
     private String body;
-    private Path path;
+    private URI path;
 
     public ReutersDocument()
     {
@@ -62,12 +62,12 @@ public class ReutersDocument
         companies = new HashSet<>();
     }
 
-    public Path getPath()
+    public URI getPath()
     {
         return path;
     }
 
-    public void setPath(Path path)
+    public void setPath(URI path)
     {
         this.path = path;
     }

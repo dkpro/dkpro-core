@@ -17,6 +17,9 @@ package de.tudarmstadt.ukp.dkpro.core.io.reuters;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -48,7 +51,7 @@ public class ExtractReuters
             "&apos;" };
 
     /**
-     * Reag all the SGML file in the given directory.
+     * Read all the SGML file in the given directory.
      *
      * @param reutersDir the directory that contains the Reuters SGML files.
      * @return a list of {@link ReutersDocument}s
@@ -60,7 +63,8 @@ public class ExtractReuters
         List<ReutersDocument> docs = new ArrayList<>();
         DirectoryStream<Path> stream = Files.newDirectoryStream(reutersDir, "*.sgm");
         for (Path sgmFile : stream) {
-            docs.addAll(extractFile(sgmFile));
+            InputStream inputStream = Files.newInputStream(sgmFile);
+            docs.addAll(extractFile(inputStream, sgmFile.toUri()));
         }
         return docs;
     }
@@ -68,13 +72,15 @@ public class ExtractReuters
     /**
      * Read the documents out of a single file. Each file contains approximately 1000 documents.
      *
-     * @param sgmFile a Reuters SGML file.
-     * @return a list of {@link ReutersDocument}s
+     * @param sgmFile an {@link InputStream} of a Reuters SGML file.
+     * @param uri     an {@link URI} pointing to the original SGML file location
+     * @return a list of {@link ReutersDocument}s extracted from the input stream
      */
-    private static List<ReutersDocument> extractFile(Path sgmFile)
+    public static List<ReutersDocument> extractFile(InputStream sgmFile, URI uri)
             throws IOException, ParseException
     {
-        BufferedReader reader = Files.newBufferedReader(sgmFile, StandardCharsets.ISO_8859_1);
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(sgmFile, StandardCharsets.ISO_8859_1));
 
         List<ReutersDocument> entries = new ArrayList<>();  // collection of all documents in file
         StringBuilder docBuffer = new StringBuilder(1024);  // text of current document
@@ -120,7 +126,7 @@ public class ExtractReuters
                     }
                 }
                 /* add metadata information for current doc */
-                reutersDocument.setPath(sgmFile);
+                reutersDocument.setPath(uri);
                 entries.add(reutersDocument);
                 /* reset document buffer */
                 docBuffer.setLength(0);

@@ -18,8 +18,6 @@
 package de.tudarmstadt.ukp.dkpro.core.io.reuters;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.testing.dumper.CasDumpWriter;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterator;
 import org.apache.uima.fit.pipeline.SimplePipeline;
@@ -29,7 +27,6 @@ import org.junit.Test;
 
 import java.io.File;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -37,6 +34,7 @@ import static org.junit.Assert.assertTrue;
 public class Reuters21578TxtReaderTest
 {
     private static final String REUTERS_DIR = "src/test/resources/reuters-txt/";
+    private static final String REUTERS_FILE_PATTERN = "reut2-*.txt";
 
     @Test
     public void test()
@@ -48,11 +46,9 @@ public class Reuters21578TxtReaderTest
         outputFile.deleteOnExit();
 
         CollectionReaderDescription reader = createReaderDescription(Reuters21578TxtReader.class,
-                Reuters21578TxtReader.PARAM_SOURCE_LOCATION, REUTERS_DIR);
-        AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
-                CasDumpWriter.PARAM_TARGET_LOCATION, outputFile);
+                Reuters21578TxtReader.PARAM_SOURCE_LOCATION, REUTERS_DIR + REUTERS_FILE_PATTERN);
 
-        JCasIterator jcasIter = SimplePipeline.iteratePipeline(reader, writer).iterator();
+        JCasIterator jcasIter = SimplePipeline.iteratePipeline(reader).iterator();
         JCas jcas = jcasIter.next();
         DocumentMetaData metaData = DocumentMetaData.get(jcas);
         assertEquals(expectedTitle, metaData.getDocumentTitle());

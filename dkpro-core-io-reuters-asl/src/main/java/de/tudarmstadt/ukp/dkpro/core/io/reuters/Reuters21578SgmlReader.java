@@ -17,24 +17,21 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.reuters;
 
+import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.MetaDataStringField;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.collection.CollectionException;
-import org.apache.uima.fit.component.JCasCollectionReader_ImplBase;
-import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.Iterator;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Read a Reuters-21578 corpus in SGML format.
@@ -42,38 +39,37 @@ import java.util.List;
  * Set the directory that contains the SGML files with {@link #PARAM_SOURCE_LOCATION}.
  */
 public class Reuters21578SgmlReader
-        extends JCasCollectionReader_ImplBase
+        extends JCasResourceCollectionReader_ImplBase
 {
-    /**
-     * The directory that contains the Reuters-21578 SGML files.
-     */
-    public static final String PARAM_SOURCE_LOCATION = ComponentParameters.PARAM_SOURCE_LOCATION;
-    private static final String LANGUAGE = "en";
-    @ConfigurationParameter(name = PARAM_SOURCE_LOCATION, mandatory = true)
-    private File sourceLocation;
-    private Iterator<ReutersDocument> docIter;
+    private Queue<ReutersDocument> documentQueue;
 
     @Override
     public void initialize(UimaContext context)
             throws ResourceInitializationException
     {
         super.initialize(context);
-        try {
-            getLogger().info("Extracting Reuters-21578 documents from " + sourceLocation);
-            List<ReutersDocument> docs = ExtractReuters.extract(sourceLocation.toPath());
-            getLogger().info(docs.size() + " documents read.");
-            docIter = docs.iterator();
-        }
-        catch (IOException | ParseException e) {
-            throw new ResourceInitializationException(e);
-        }
+        documentQueue = new LinkedList<>();
     }
 
     @Override public void getNext(JCas jCas)
             throws IOException, CollectionException
     {
+        if (documentQueue.isEmpty()) {
+            /* read next SGML file */
+            assert getResourceIterator().hasNext();
+            Resource resource = getResourceIterator().next();
+            try {
+                documentQueue.addAll(ExtractReuters
+                        .extractFile(resource.getInputStream(), resource.getResolvedUri()));
+            }
+            catch (ParseException e) {
+                throw new CollectionException(e);
+            }
+        }
+
+        /* process 1st element of document queue */
         try {
-            ReutersDocument doc = docIter.next();
+            ReutersDocument doc = documentQueue.poll();
             initCas(jCas.getCas(), doc);
             MetaDataStringField date = new MetaDataStringField(jCas);
             date.setKey("DATE");
@@ -85,10 +81,11 @@ public class Reuters21578SgmlReader
         }
     }
 
-    @Override public boolean hasNext()
+    @Override
+    public boolean hasNext()
             throws IOException, CollectionException
     {
-        return docIter.hasNext();
+        return !documentQueue.isEmpty() || getResourceIterator().hasNext();
     }
 
     @Override public Progress[] getProgress()
@@ -101,12 +98,12 @@ public class Reuters21578SgmlReader
     {
         DocumentMetaData docMetaData = DocumentMetaData.create(aCas);
         docMetaData.setDocumentTitle(doc.getTitle());
-        docMetaData.setDocumentUri(doc.getPath().toUri().toString());
+        docMetaData.setDocumentUri(doc.getPath().toString());
         docMetaData.setDocumentId(Integer.toString(doc.getNewid()));
-        docMetaData.setDocumentBaseUri(sourceLocation.toURI().toString());
-        docMetaData.setCollectionId(sourceLocation.getPath());
+        docMetaData.setDocumentBaseUri(getSourceLocation());
+        docMetaData.setCollectionId(getSourceLocation());
 
-        aCas.setDocumentLanguage(LANGUAGE);
+        aCas.setDocumentLanguage(getLanguage());
         aCas.setDocumentText(doc.getBody());
     }
 }
