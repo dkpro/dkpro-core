@@ -151,6 +151,11 @@ public class BratAnnotationDocument
         annotations.put(aAnnotation.getId(), aAnnotation);
     }
     
+    public BratAnnotation getAnnotation(String aId)
+    {
+        return annotations.get(aId);
+    }
+    
     public Collection<BratAnnotation> getAnnotations()
     {
         return annotations.values();

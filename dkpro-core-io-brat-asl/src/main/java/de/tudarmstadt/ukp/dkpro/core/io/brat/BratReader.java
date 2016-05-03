@@ -200,7 +200,7 @@ public class BratReader
         // Go through the events again and handle the slots
         for (BratEventAnnotation e : events) {
             Type type = typeMapping.getUimaType(ts, e);
-            fillSlots(cas, type, e);
+            fillSlots(cas, type, doc, e);
         }
     }
 
@@ -300,7 +300,15 @@ public class BratReader
                 featName = featName.substring(featName.indexOf(TypeSystem.FEATURE_SEPARATOR) + 1);
                 feat = aAnno.getType().getFeatureByBaseName(featName);
             }
-            
+
+            // FIXME HACK! We may not find a "role" feature from slot links in the target type
+            // because it should be in the link type. This here is a bad hack, but it should work
+            // as long as the target type doesn't define a "role" feature itself.
+            if ((("role".equals(attr.getName())) || attr.getName().endsWith("_role"))
+                    && feat == null) {
+                return;
+            }
+
             if (feat == null) {
                 throw new IllegalStateException("Type [" + aAnno.getType().getName()
                         + "] has no feature named [" + attr.getName() + "]");
@@ -318,7 +326,7 @@ public class BratReader
         }
     }
     
-    private void fillSlots(CAS aCas, Type aType, BratEventAnnotation aE)
+    private void fillSlots(CAS aCas, Type aType, BratAnnotationDocument aDoc, BratEventAnnotation aE)
     {
         AnnotationFS event = spanIdMap.get(aE.getId());
         Map<String, List<BratEventArgument>> groupedArgs = aE.getGroupedArguments();
@@ -331,11 +339,33 @@ public class BratReader
             if (FSUtil.hasFeature(event, slot.getKey())
                     && FSUtil.isMultiValuedFeature(event, slot.getKey())) {
                 for (BratEventArgument arg : slot.getValue()) {
-                    AnnotationFS target = spanIdMap.get(arg.getTarget());
+                    FeatureStructure target = spanIdMap.get(arg.getTarget());
                     if (target == null) {
                         throw new IllegalStateException("Unable to resolve id [" + arg.getTarget()
                                 + "]");
                     }
+                    
+                    // Handle WebAnno-style slot links
+                    // FIXME It would be better if the link type could be configured, e.g. what
+                    // is the name of the link feature and what is the name of the role feature...
+                    // but right now we just keep it hard-coded to the values that are used
+                    // in the DKPro Core SemArgLink and that are also hard-coded in WebAnno
+                    Type componentType = event.getType().getFeatureByBaseName(slot.getKey())
+                            .getRange().getComponentType();
+                    if (CAS.TYPE_NAME_TOP
+                            .equals(aCas.getTypeSystem().getParent(componentType).getName())) {
+                        BratAnnotation targetAnno = aDoc.getAnnotation(arg.getTarget());
+                        BratAttribute roleAttr = targetAnno.getAttribute("role");
+                        if (roleAttr == null) {
+                            roleAttr = targetAnno.getAttribute(
+                                    target.getType().getName().replace('.', '-') + "_role");
+                        }
+                        FeatureStructure link = aCas.createFS(componentType);
+                        FSUtil.setFeature(link, "role", roleAttr.getValues());
+                        FSUtil.setFeature(link, "target", target);
+                        target = link;
+                    }
+                    
                     targets.add(target);
                 }
                 FSUtil.setFeature(event, slot.getKey(), targets);

@@ -356,10 +356,10 @@ A99	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_consti
 E100	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T153 parent:E99 children:E52
 A100	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E100 NP
 E101	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-ROOT:T154 children:E54
-A101	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E101 ROOT
+A101	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-ROOT_constituentType E101 ROOT
 E102	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-ROOT:T155 children:E59
-A102	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E102 ROOT
+A102	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-ROOT_constituentType E102 ROOT
 E103	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-ROOT:T156 children:E72
-A103	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E103 ROOT
+A103	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-ROOT_constituentType E103 ROOT
 E104	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-ROOT:T157 children:E79
-A104	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E104 ROOT
+A104	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-ROOT_constituentType E104 ROOT
