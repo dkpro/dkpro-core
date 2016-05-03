@@ -56,6 +56,11 @@ public abstract class BratAnnotation
         return attr;
     }
     
+    public BratAttribute getAttribute(String aAttribute)
+    {
+        return attributes.get(aAttribute);
+    }
+    
     public void addAttribute(BratAttribute aAttribute)
     {
         String target = aAttribute.getTarget();
