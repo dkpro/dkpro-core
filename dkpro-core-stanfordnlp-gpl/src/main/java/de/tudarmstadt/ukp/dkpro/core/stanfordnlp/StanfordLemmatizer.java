@@ -24,6 +24,7 @@ import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
@@ -135,7 +136,14 @@ public class StanfordLemmatizer
                 token.set(SentenceIndexAnnotation.class, sentences.size());
                 token.set(IndexAnnotation.class, tokens.size());
                 token.set(TokenKey.class, t);
-                token.set(PartOfSpeechAnnotation.class, t.getPos().getPosValue());
+                POS pos = t.getPos();
+                if (pos == null) {
+                    throw new AnalysisEngineProcessException(
+                            new IllegalStateException("No POS tag available for token:\n" + t));
+                }
+                else {
+                    token.set(PartOfSpeechAnnotation.class, pos.getPosValue());
+                }
             }
 
             if (ptb3Escaping) {
