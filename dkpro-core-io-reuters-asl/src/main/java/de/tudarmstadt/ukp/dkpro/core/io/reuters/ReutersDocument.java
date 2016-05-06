@@ -17,6 +17,9 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.reuters;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.net.URI;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,6 +33,8 @@ import java.util.Set;
  */
 public class ReutersDocument
 {
+    private Log LOG = LogFactory.getLog(ReutersDocument.class);
+
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat(
             "dd-MMM-yyyy hh:mm:ss.SS", Locale.US);
 
@@ -93,6 +98,8 @@ public class ReutersDocument
         case "COMPANIES":
             setCompanies(value);
             break;
+        default:
+            LOG.warn("Invalid key: " + key);
         }
     }
 
