@@ -492,6 +492,7 @@
 		<module>../dkpro-core-languagetool-asl</module>
 		<module>../dkpro-core-langdetect-asl</module>
         <module>../dkpro-core-ldweb1t-asl</module>
+		<module>../dkpro-core-mallet-asl</module>
 		<module>../dkpro-core-maltparser-asl</module>
 		<module>../dkpro-core-mecab-asl</module>
 		<module>../dkpro-core-morpha-asl</module>
@@ -571,7 +572,6 @@
                 <!-- Processing modules -->
                 <module>../dkpro-core-flextag-asl</module>
                 <module>../dkpro-core-lbj-asl</module>
-                <module>../dkpro-core-mallet-asl</module>
 			</modules>
 			<dependencyManagement>
 				<dependencies>
