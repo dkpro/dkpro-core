@@ -198,38 +198,38 @@ T117	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 212 215	due
 T118	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 216 219	out
 T119	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 220 228	tomorrow
 T120	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 229 230	.
-T121	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument 4 11	economy
-A81	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument_role T121 A1
-T122	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument 15 26	temperature
-A82	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument_role T122 A2
-T123	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument 15 26	temperature
-A83	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument_role T123 A1
-T124	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument 27 31	will
-A84	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument_role T124 AM-MOD
-T125	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument 41 45	from
-A85	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument_role T125 A2
-T126	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument 54 61	vantage
-A86	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument_role T126 A1
-T127	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument 74 78	week
-A87	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument_role T127 AM-TMP
-T128	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument 81 85	with
-A88	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument_role T128 AM-ADV
-T129	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument 95 97	on
-A89	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument_role T129 A1
-T130	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument 179 185	August
-A90	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument_role T130 AM-TMP
-T131	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument 186 197	merchandise
-A91	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument_role T131 A1
-T132	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument 198 203	trade
-A92	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument_role T132 A1
-T133	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument 204 211	deficit
-A93	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticArgument_role T133 A2
-T134	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticPredicate 15 26	temperature
-T135	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticPredicate 35 40	taken
-T136	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticPredicate 62 68	points
-T137	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticPredicate 86 94	readings
-T138	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticPredicate 198 203	trade
-T139	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticPredicate 204 211	deficit
+T121	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 4 11	economy
+A127	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T121 A1
+T122	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 15 26	temperature
+A128	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T122 A2
+T123	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 15 26	temperature
+A129	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T123 A1
+T124	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 27 31	will
+A130	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T124 AM-MOD
+T125	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 41 45	from
+A131	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T125 A2
+T126	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 54 61	vantage
+A134	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T126 A1
+T127	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 74 78	week
+A132	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T127 AM-TMP
+T128	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 81 85	with
+A133	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T128 AM-ADV
+T129	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 95 97	on
+A135	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T129 A1
+T130	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 179 185	August
+A137	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T130 AM-TMP
+T131	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 186 197	merchandise
+A136	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T131 A1
+T132	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 198 203	trade
+A138	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T132 A1
+T133	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 204 211	deficit
+A139	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T133 A2
+T134	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred 15 26	temperature
+T135	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred 35 40	taken
+T136	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred 62 68	points
+T137	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred 86 94	readings
+T138	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred 198 203	trade
+T139	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred 204 211	deficit
 T140	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-ROOT 27 31	will
 T141	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-ROOT 168 171	may
 E1	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T81 lemma:T41 pos:T1
@@ -272,95 +272,95 @@ E37	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T117 lemma:T77 pos
 E38	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T118 lemma:T78 pos:T38
 E39	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T119 lemma:T79 pos:T39
 E40	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T120 lemma:T80 pos:T40
-E41	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticPredicate:T134 arguments:T121 arguments1:T122
-A94	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticPredicate_category E41 temperature.01
-E42	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticPredicate:T135 arguments:T123 arguments1:T124 arguments2:T125 arguments3:T127 arguments4:T128
-A95	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticPredicate_category E42 take.01
-E43	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticPredicate:T136 arguments:T126
-A96	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticPredicate_category E43 point.02
-E44	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticPredicate:T137 arguments:T129
-A97	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticPredicate_category E44 reading.01
-E45	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticPredicate:T138 arguments:T131
-A98	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticPredicate_category E45 trade.01
-E46	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticPredicate:T139 arguments:T130 arguments1:T132 arguments2:T133
-A99	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemanticPredicate_category E46 deficit.01
+E41	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred:T134 arguments:T121 arguments1:T122
+A81	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred_category E41 temperature.01
+E42	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred:T135 arguments:T123 arguments1:T124 arguments2:T125 arguments3:T127 arguments4:T128
+A82	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred_category E42 take.01
+E43	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred:T136 arguments:T126
+A83	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred_category E43 point.02
+E44	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred:T137 arguments:T129
+A84	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred_category E44 reading.01
+E45	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred:T138 arguments:T131
+A85	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred_category E45 trade.01
+E46	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred:T139 arguments:T130 arguments1:T132 arguments2:T133
+A86	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred_category E46 deficit.01
 E47	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-ROOT:T140 Governor:E5 Dependent:E5
-A100	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType E47 ROOT
+A87	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-ROOT_DependencyType E47 ROOT
 E48	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-ROOT:T141 Governor:E30 Dependent:E30
-A101	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType E48 ROOT
+A88	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-ROOT_DependencyType E48 ROOT
 R1	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E2 Dependent:E1
-A102	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R1 NMOD
+A89	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R1 NMOD
 R2	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E4 Dependent:E2
-A103	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R2 NMOD
+A90	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R2 NMOD
 R3	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E2 Dependent:E3
-A104	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R3 SUFFIX
+A91	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R3 SUFFIX
 R4	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E5 Dependent:E4
-A105	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R4 SBJ
+A92	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R4 SBJ
 R5	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E5 Dependent:E6
-A106	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R5 VC
+A93	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R5 VC
 R6	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E6 Dependent:E7
-A107	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R6 VC
+A94	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R6 VC
 R7	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E7 Dependent:E8
-A108	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R7 ADV
+A95	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R7 ADV
 R8	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E11 Dependent:E9
-A109	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R8 NMOD
+A96	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R8 NMOD
 R9	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E11 Dependent:E10
-A110	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R9 NMOD
+A97	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R9 NMOD
 R10	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E8 Dependent:E11
-A111	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R10 PMOD
+A98	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R10 PMOD
 R11	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E13 Dependent:E12
-A112	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R11 NMOD
+A99	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R11 NMOD
 R12	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E7 Dependent:E13
-A113	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R12 TMP
+A100	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R12 TMP
 R13	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E7 Dependent:E14
-A114	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R13 P
+A101	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R13 P
 R14	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E7 Dependent:E15
-A115	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R14 ADV
+A102	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R14 ADV
 R15	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E15 Dependent:E16
-A116	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R15 PMOD
+A103	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R15 PMOD
 R16	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E16 Dependent:E17
-A117	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R16 NMOD
+A104	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R16 NMOD
 R17	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E17 Dependent:E18
-A118	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R17 PMOD
+A105	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R17 PMOD
 R18	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E18 Dependent:E19
-A119	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R18 P
+A106	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R18 P
 R19	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E18 Dependent:E20
-A120	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R19 COORD
+A107	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R19 COORD
 R20	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E20 Dependent:E21
-A121	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R20 P
+A108	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R20 P
 R21	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E20 Dependent:E22
-A122	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R21 COORD
+A109	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R21 COORD
 R22	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E22 Dependent:E23
-A123	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R22 COORD
+A110	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R22 COORD
 R23	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E23 Dependent:E24
-A124	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R23 CONJ
+A111	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R23 CONJ
 R24	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E5 Dependent:E25
-A125	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R24 P
+A112	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R24 P
 R25	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E29 Dependent:E26
-A126	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R25 NMOD
+A113	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R25 NMOD
 R26	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E28 Dependent:E27
-A127	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R26 AMOD
+A114	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R26 AMOD
 R27	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E29 Dependent:E28
-A128	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R27 NMOD
+A115	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R27 NMOD
 R28	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E30 Dependent:E29
-A129	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R28 SBJ
+A116	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R28 SBJ
 R29	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E30 Dependent:E31
-A130	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R29 VC
+A117	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R29 VC
 R30	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E36 Dependent:E32
-A131	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R30 NMOD
+A118	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R30 NMOD
 R31	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E36 Dependent:E33
-A132	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R31 NMOD
+A119	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R31 NMOD
 R32	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E35 Dependent:E34
-A133	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R32 NMOD
+A120	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R32 NMOD
 R33	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E36 Dependent:E35
-A134	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R33 NMOD
+A121	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R33 NMOD
 R34	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E31 Dependent:E36
-A135	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R34 PRD
+A122	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R34 PRD
 R35	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E38 Dependent:E37
-A136	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R35 AMOD
+A123	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R35 AMOD
 R36	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E36 Dependent:E38
-A137	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R36 APPO
+A124	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R36 APPO
 R37	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E38 Dependent:E39
-A138	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R37 TMP
+A125	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R37 TMP
 R38	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency Governor:E30 Dependent:E40
-A139	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R38 P
+A126	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-Dependency_DependencyType R38 P

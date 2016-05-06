@@ -334,7 +334,7 @@ public class BratWriter extends JCasFileWriter_ImplBase
         
         // Handle event slots now since now we can resolve their targets to IDs.
         for (Entry<BratEventAnnotation, FeatureStructure> e : eventFS.entrySet()) {
-            writeSlots(e.getKey(), e.getValue());
+            writeSlots(doc, e.getKey(), e.getValue());
         }
 
         try (Writer out = new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix), "UTF-8")) {
@@ -405,7 +405,8 @@ public class BratWriter extends JCasFileWriter_ImplBase
         return event;
     }
     
-    private void writeSlots(BratEventAnnotation aEvent, FeatureStructure aFS)
+    private void writeSlots(BratAnnotationDocument aDoc, BratEventAnnotation aEvent,
+            FeatureStructure aFS)
     {
         String superType = getBratType(aFS.getCAS().getTypeSystem().getParent(aFS.getType()));
         String type = getBratType(aFS.getType());
@@ -431,7 +432,37 @@ public class BratWriter extends JCasFileWriter_ImplBase
                 slots.put(slot, args);
             }
 
-            if (FSUtil.isMultiValuedFeature(aFS, feat)) {
+            if (
+                FSUtil.isMultiValuedFeature(aFS, feat) && 
+                CAS.TYPE_NAME_TOP.equals(aFS.getCAS().getTypeSystem().getParent(feat.getRange().getComponentType()).getName())
+            ) {
+                // Handle WebAnno-style slot links
+                // FIXME It would be better if the link type could be configured, e.g. what
+                // is the name of the link feature and what is the name of the role feature...
+                // but right now we just keep it hard-coded to the values that are used
+                // in the DKPro Core SemArgLink and that are also hard-coded in WebAnno
+                BratEventArgumentDecl slotDecl = new BratEventArgumentDecl(slot,
+                        BratConstants.CARD_ZERO_OR_MORE);
+                decl.addSlot(slotDecl);
+                
+                FeatureStructure[] links = FSUtil.getFeature(aFS, feat, FeatureStructure[].class);
+                if (links != null) {
+                    for (FeatureStructure link : links) {
+                        FeatureStructure target = FSUtil.getFeature(link, "target",
+                                FeatureStructure.class);
+                        Feature roleFeat = link.getType().getFeatureByBaseName("role");
+                        BratEventArgument arg = new BratEventArgument(slot, args.size(),
+                                spanIdMap.get(target));
+                        args.add(arg);
+
+                        // Attach the role attribute to the target span
+                        BratAnnotation targetAnno = aDoc.getAnnotation(spanIdMap.get(target));
+                        writePrimitiveAttribute(targetAnno, link, roleFeat);
+                    }
+                }
+            }
+            else if (FSUtil.isMultiValuedFeature(aFS, feat)) {
+                // Handle normal multi-valued features
                 BratEventArgumentDecl slotDecl = new BratEventArgumentDecl(slot,
                         BratConstants.CARD_ZERO_OR_MORE);
                 decl.addSlot(slotDecl);
@@ -446,6 +477,7 @@ public class BratWriter extends JCasFileWriter_ImplBase
                 }
             }
             else {
+                // Handle normal single-valued features
                 BratEventArgumentDecl slotDecl = new BratEventArgumentDecl(slot,
                         BratConstants.CARD_OPTIONAL);
                 decl.addSlot(slotDecl);
@@ -568,34 +600,8 @@ public class BratWriter extends JCasFileWriter_ImplBase
                 }
             }
             
-            String attributeName = shortAttributeNames ? feat.getShortName() : feat.getName()
-                    .replace('.', '-').replace(':', '_');
-
             if (feat.getRange().isPrimitive()) {
-                String featureValue = aFS.getFeatureValueAsString(feat);
-                
-                // Do not write attributes with null values unless this is explicitly enabled
-                if (featureValue == null && !writeNullAttributes) {
-                    continue;
-                }
-                
-                aAnno.addAttribute(nextAttributeId, attributeName, featureValue);
-                nextAttributeId++;
-                
-                // Do not write certain values to the visual/annotation configuration because
-                // they are not compatible with the brat annotation file format. The values are
-                // still maintained in the ann file.
-                if (isValidFeatureValue(featureValue)) {
-                    // Features are inherited to subtypes in UIMA. By storing the attribute under
-                    // the name of the type that declares the feature (domain) instead of the name
-                    // of the actual instance we are processing, we make sure not to maintain
-                    // multiple value sets for the same feature.
-                    BratAttributeDecl attrDecl = conf.addAttributeDecl(
-                            getBratType(feat.getDomain()),
-                            getAllSubtypes(aFS.getCAS().getTypeSystem(), feat.getDomain()),
-                            attributeName, featureValue);
-                    visual.addDrawingDecl(attrDecl);
-                }
+                writePrimitiveAttribute(aAnno, aFS, feat);
             }
             // The following warning is not relevant for event annotations because these render such
             // features as slots.
@@ -604,6 +610,37 @@ public class BratWriter extends JCasFileWriter_ImplBase
                         "Unable to render feature [" + feat.getName() + "] with range ["
                                 + feat.getRange().getName() + "] as attribute");
             }
+        }
+    }
+    
+    private void writePrimitiveAttribute(BratAnnotation aAnno, FeatureStructure aFS, Feature feat)
+    {
+        String featureValue = aFS.getFeatureValueAsString(feat);
+        
+        // Do not write attributes with null values unless this is explicitly enabled
+        if (featureValue == null && !writeNullAttributes) {
+            return;
+        }
+        
+        String attributeName = shortAttributeNames ? feat.getShortName()
+                : aAnno.getType() + '_' + feat.getShortName();
+        
+        aAnno.addAttribute(nextAttributeId, attributeName, featureValue);
+        nextAttributeId++;
+        
+        // Do not write certain values to the visual/annotation configuration because
+        // they are not compatible with the brat annotation file format. The values are
+        // still maintained in the ann file.
+        if (isValidFeatureValue(featureValue)) {
+            // Features are inherited to subtypes in UIMA. By storing the attribute under
+            // the name of the type that declares the feature (domain) instead of the name
+            // of the actual instance we are processing, we make sure not to maintain
+            // multiple value sets for the same feature.
+            BratAttributeDecl attrDecl = conf.addAttributeDecl(
+                    aAnno.getType(),
+                    getAllSubtypes(aFS.getCAS().getTypeSystem(), feat.getDomain()),
+                    attributeName, featureValue);
+            visual.addDrawingDecl(attrDecl);
         }
     }
     
