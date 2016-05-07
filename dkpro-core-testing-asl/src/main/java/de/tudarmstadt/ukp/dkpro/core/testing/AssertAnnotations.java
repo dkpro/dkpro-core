@@ -595,8 +595,14 @@ public class AssertAnnotations
             fail("Expected [" + aExpected.length + "] chains but found " + aActual.size() + "]");
         }
     }
-    
+
     public static void assertTagset(Class<?> aLayer, String aName, String[] aExpected, JCas aJCas)
+    {
+        assertTagset(null, aLayer, aName, aExpected, aJCas);
+    }
+    
+    public static void assertTagset(Class<?> aComponent, Class<?> aLayer, String aName,
+            String[] aExpected, JCas aJCas)
     {
         List<String> expected = new ArrayList<String>(asList(aExpected));
         Collections.sort(expected);
@@ -605,13 +611,19 @@ public class AssertAnnotations
 
         for (TagsetDescription tsd : select(aJCas, TagsetDescription.class)) {
             sb.append('\t');
+            sb.append(tsd.getComponentName());
+            sb.append(" - ");
             sb.append(tsd.getLayer());
             sb.append(" - ");
             sb.append(tsd.getName());
             sb.append('\n');
 
-            if (StringUtils.equals(aLayer.getName(), tsd.getLayer())
-                    && StringUtils.equals(aName, tsd.getName())) {
+            boolean layerMatch = StringUtils.equals(aLayer.getName(), tsd.getLayer());
+            boolean tagsetMatch = StringUtils.equals(aName, tsd.getName());
+            boolean optComponentMatch = aComponent == null
+                    || aComponent.getName().equals(tsd.getComponentName());
+            
+            if (layerMatch && tagsetMatch && optComponentMatch) {
                 List<String> actual = new ArrayList<String>();
                 for (TagDescription td : select(tsd.getTags(), TagDescription.class)) {
                     actual.add(td.getName());
@@ -619,8 +631,14 @@ public class AssertAnnotations
 
                 Collections.sort(actual);
 
-                System.out.printf("%-20s - Layer   : %s%n", "Layer", tsd.getLayer());
-                System.out.printf("%-20s - Tagset  : %s%n", "Tagset", tsd.getName());
+                System.out.printf("%-20s           : %s%n", "Layer", tsd.getLayer());
+                System.out.printf("%-20s           : %s%n", "Tagset", tsd.getName());
+                System.out.printf("%-20s           : %s%n", "Component", tsd.getComponentName());
+                System.out.printf("%-20s           : %s%n", "Model location", tsd.getModelLocation());
+                System.out.printf("%-20s           : %s%n", "Model language", tsd.getModelLanguage());
+                System.out.printf("%-20s           : %s%n", "Model variant", tsd.getModelVariant());
+                System.out.printf("%-20s           : %s%n", "Model version", tsd.getModelVersion());
+                System.out.printf("%-20s           : %b%n", "Input", tsd.getInput());
                 System.out.printf("%-20s - Expected: %s%n", "Tags", asCopyableString(expected));
                 System.out.printf("%-20s - Actual  : %s%n", "Tags", asCopyableString(actual));
 
@@ -639,11 +657,26 @@ public class AssertAnnotations
     public static void assertTagsetMapping(Class<?> aLayer, String aName, String[] aDefaultMapped,
             JCas aJCas) throws AnalysisEngineProcessException
     {
-        assertTagsetMapping(aLayer, aName, aDefaultMapped, aJCas, false);
+        assertTagsetMapping(null, aLayer, aName, aDefaultMapped, aJCas, false);
+    }
+    
+    public static void assertTagsetMapping(Class<?> aLayer, String aName,
+            String[] aDefaultMapped, JCas aJCas, boolean aExact)
+                throws AnalysisEngineProcessException
+    {
+        assertTagsetMapping(null, aLayer, aName, aDefaultMapped, aJCas, false);
     }
 
-    public static void assertTagsetMapping(Class<?> aLayer, String aName, String[] aDefaultMapped,
-            JCas aJCas, boolean aExact) throws AnalysisEngineProcessException
+    public static void assertTagsetMapping(Class<?> aComponent, Class<?> aLayer, String aName,
+            String[] aDefaultMapped, JCas aJCas)
+                throws AnalysisEngineProcessException
+    {
+        assertTagsetMapping(aComponent, aLayer, aName, aDefaultMapped, aJCas, false);
+    }
+    
+    public static void assertTagsetMapping(Class<?> aComponent, Class<?> aLayer, String aName,
+            String[] aDefaultMapped, JCas aJCas, boolean aExact)
+                throws AnalysisEngineProcessException
     {
         String pattern;
         if (aLayer == POS.class) {
@@ -687,13 +720,19 @@ public class AssertAnnotations
 
         for (TagsetDescription tsd : select(aJCas, TagsetDescription.class)) {
             sb.append('\t');
+            sb.append(tsd.getComponentName());
+            sb.append(" - ");
             sb.append(tsd.getLayer());
             sb.append(" - ");
             sb.append(tsd.getName());
             sb.append('\n');
 
-            if (StringUtils.equals(aLayer.getName(), tsd.getLayer())
-                    && StringUtils.equals(aName, tsd.getName())) {
+            boolean layerMatch = StringUtils.equals(aLayer.getName(), tsd.getLayer());
+            boolean tagsetMatch = StringUtils.equals(aName, tsd.getName());
+            boolean optComponentMatch = aComponent == null
+                    || aComponent.getName().equals(tsd.getComponentName());
+            
+            if (layerMatch && tagsetMatch && optComponentMatch) {
                 List<String> actual = new ArrayList<String>();
                 for (TagDescription td : select(tsd.getTags(), TagDescription.class)) {
                     actual.add(td.getName());
@@ -708,8 +747,14 @@ public class AssertAnnotations
                 List<String> notInModel = new ArrayList<>(mappedTags);
                 notInModel.removeAll(actual);
 
-                System.out.printf("%-20s - Layer   : %s%n", "Layer", tsd.getLayer());
-                System.out.printf("%-20s - Tagset  : %s%n", "Tagset", tsd.getName());
+                System.out.printf("%-20s           : %s%n", "Layer", tsd.getLayer());
+                System.out.printf("%-20s           : %s%n", "Tagset", tsd.getName());
+                System.out.printf("%-20s           : %s%n", "Component", tsd.getComponentName());
+                System.out.printf("%-20s           : %s%n", "Model location", tsd.getModelLocation());
+                System.out.printf("%-20s           : %s%n", "Model language", tsd.getModelLanguage());
+                System.out.printf("%-20s           : %s%n", "Model variant", tsd.getModelVariant());
+                System.out.printf("%-20s           : %s%n", "Model version", tsd.getModelVersion());
+                System.out.printf("%-20s           : %b%n", "Input", tsd.getInput());
                 System.out.printf("%-20s - Expected: %s%n", "Unmapped tags",
                         asCopyableString(expected));
                 System.out.printf("%-20s - Actual  : %s%n", "Unmapped tags",
