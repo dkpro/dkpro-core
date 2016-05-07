@@ -77,4 +77,10 @@ public class AggregateTagset
     {
         return getTagsetDelegate(aLayerName).listTags(aLayerName, aTagsetName);
     }
+
+    @Override
+    public TagsetMetaData getMetaData(String aLayerName, String aTagsetName)
+    {
+        return getTagsetDelegate(aLayerName).getMetaData(aLayerName, aTagsetName);
+    }
 }

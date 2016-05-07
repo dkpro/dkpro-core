@@ -27,6 +27,24 @@ import java.util.Set;
 public abstract class TagsetBase
     implements Tagset
 {
+    private TagsetMetaData metadata = new TagsetMetaData();
+    
+    public TagsetMetaData getMetadata()
+    {
+        return metadata;
+    }
+
+    public void setMetadata(TagsetMetaData aMetadata)
+    {
+        metadata = aMetadata;
+    }    
+    
+    @Override
+    public TagsetMetaData getMetaData(String aLayer, String aTagsetName)
+    {
+        return metadata;
+    }
+    
     @Override
     public String toString()
     {

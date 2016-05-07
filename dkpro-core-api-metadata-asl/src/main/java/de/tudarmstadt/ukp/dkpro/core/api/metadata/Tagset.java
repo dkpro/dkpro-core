@@ -33,4 +33,6 @@ public interface Tagset
     Map<String, String> getLayers();
 
     Set<String> listTags(String aLayer, String aTagsetName);
+
+    TagsetMetaData getMetaData(String aLayer, String aTagsetName);
 }

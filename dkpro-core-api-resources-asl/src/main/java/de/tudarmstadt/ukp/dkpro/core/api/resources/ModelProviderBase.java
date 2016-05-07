@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Properties;
 import java.util.Set;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -32,6 +33,7 @@ import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.AggregateTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.Tagset;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.TagsetMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagDescription;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagsetDescription;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -41,7 +43,7 @@ public class ModelProviderBase<M>
     implements HasTagsets
 {
     private AggregateTagset tagsets = new AggregateTagset();
-    private Set<String> skipRecord = new HashSet<String>();
+    private Set<String> inputTagsetDescriptions = new HashSet<String>();
 
     public ModelProviderBase()
     {
@@ -100,11 +102,11 @@ public class ModelProviderBase<M>
         addTagset(aProvider, true);
     }    
     
-    protected void addTagset(Tagset aProvider, boolean aRecord)
+    protected void addTagset(Tagset aProvider, boolean aOutput)
     {
         tagsets.add(aProvider);
-        if (!aRecord) {
-            skipRecord.addAll(aProvider.getLayers().keySet());
+        if (!aOutput) {
+            inputTagsetDescriptions.addAll(aProvider.getLayers().keySet());
         }
     }
 
@@ -117,15 +119,42 @@ public class ModelProviderBase<M>
             Tagset provider = ((HasTagsets) this).getTagset();
 
             for (Entry<String, String> e : provider.getLayers().entrySet()) {
-                if (skipRecord.contains(e.getKey())) {
-                    continue;
-                }
-                
                 TagsetDescription tsd = new TagsetDescription(jcas, 0, aCas.getDocumentText()
                         .length());
                 tsd.setLayer(e.getKey());
                 tsd.setName(e.getValue());
 
+                TagsetMetaData meta = provider.getMetaData(e.getKey(), e.getValue());
+                if (meta == null) {
+                    meta = new TagsetMetaData();
+                }
+
+                if (inputTagsetDescriptions.contains(e.getKey())) {
+                    meta.setInput(true);
+                }
+
+                if (getContextClass() != null) {
+                    meta.setComponentName(getContextClass().getName());
+                }
+                
+//                try {
+                    Properties props = getResourceMetaData();
+                    meta.setModelVariant(props.getProperty(VARIANT));
+                    meta.setModelLanguage(props.getProperty(LANGUAGE));
+                    meta.setModelVersion(props.getProperty(VERSION));
+                    meta.setModelLocation(getLastModelLocation());
+//                }
+//                catch (IOException ex) {
+//                    throw new CASException(ex);
+//                }
+                
+                tsd.setComponentName(meta.getComponentName());
+                tsd.setModelLocation(meta.getModelLocation());
+                tsd.setModelLanguage(meta.getModelLanguage());
+                tsd.setModelVariant(meta.getModelVariant());
+                tsd.setModelVersion(meta.getModelVersion());
+                tsd.setInput(meta.isInput());
+                
                 List<TagDescription> tags = new ArrayList<TagDescription>();
                 for (String tag : provider.listTags(e.getKey(), e.getValue())) {
                     TagDescription td = new TagDescription(jcas);

@@ -324,6 +324,11 @@ public abstract class ResourceObjectProviderBase<M>
         contextClass = aClass;
         setDefault(PACKAGE, contextClass.getPackage().getName().replace('.', '/'));
     }
+    
+    public Class<?> getContextClass()
+    {
+        return contextClass;
+    }
 
     public Map<String, String> getAutoOverrides()
     {
@@ -470,6 +475,11 @@ public abstract class ResourceObjectProviderBase<M>
         return getModelLocation(null);
     }
 
+    protected String getLastModelLocation()
+    {
+        return lastModelLocation;
+    }
+    
     protected String getModelLocation(Properties aProperties)
         throws IOException
     {

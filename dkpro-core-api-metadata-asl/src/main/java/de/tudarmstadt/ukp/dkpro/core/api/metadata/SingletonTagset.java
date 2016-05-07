@@ -22,6 +22,7 @@ import static java.util.Collections.singletonMap;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
+
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -37,6 +38,26 @@ public class SingletonTagset
         layer = aLayer.getName();
         tagset = aTagsetName;
         tags = new TreeSet<String>();
+    }
+
+    public String getLayer()
+    {
+        return layer;
+    }
+
+    public void setLayer(String aLayer)
+    {
+        layer = aLayer;
+    }
+
+    public String getTagset()
+    {
+        return tagset;
+    }
+
+    public void setTagset(String aTagset)
+    {
+        tagset = aTagset;
     }
 
     @Override
@@ -70,5 +91,10 @@ public class SingletonTagset
     {
         Entry<String, String> entry = aOther.getLayers().entrySet().iterator().next();
         tags.removeAll(aOther.listTags(entry.getKey(), entry.getValue()));
+    }
+
+    public void removeAll(Collection<String> aTags)
+    {
+        tags.removeAll(aTags);
     }
 }
