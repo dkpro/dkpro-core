@@ -260,7 +260,7 @@ public class MaltParser
                         posTags.add(posTagTable.getSymbolCodeToString(i));
                     }
                     posTags.remove("#null#"); // Technical symbol introduced in MaltParser 1.8
-                    addTagset(posTags);
+                    addTagset(posTags, false);
                     
 	                SingletonTagset depTags = new SingletonTagset(
 	                        Dependency.class, metadata.getProperty("dependency.tagset"));

@@ -630,7 +630,9 @@ public class StanfordParser
                     }
                 }
                 constTags.removeAll(posTags);
-                addTagset(constTags, writeConstituent);
+                if (writeConstituent) {
+                    addTagset(constTags);
+                }
 
                 // There is no way to determine the relations via the GrammaticalStructureFactory
                 // API, so we do it manually here for the languages known to support this.
@@ -650,21 +652,27 @@ public class StanfordParser
                     for (GrammaticalRelation r : EnglishGrammaticalRelations.values()) {
                         depTags.add(r.getShortName());
                     }
-                    addTagset(depTags, writeDependency);
+                    if (writeDependency) {
+                        addTagset(depTags);
+                    }
                 }
                 else if (gsf != null && UniversalEnglishGrammaticalStructureFactory.class.equals(gsf.getClass())) {
                     SingletonTagset depTags = new SingletonTagset(Dependency.class, "universal");
                     for (GrammaticalRelation r : UniversalEnglishGrammaticalRelations.values()) {
                         depTags.add(r.getShortName());
                     }
-                    addTagset(depTags, writeDependency);
+                    if (writeDependency) {
+                        addTagset(depTags);
+                    }
                 }
                 else if (gsf != null && ChineseGrammaticalRelations.class.equals(gsf.getClass())) {
                     SingletonTagset depTags = new SingletonTagset(Dependency.class, "stanford");
                     for (GrammaticalRelation r : ChineseGrammaticalRelations.values()) {
                         depTags.add(r.getShortName());
                     }
-                    addTagset(depTags, writeDependency);
+                    if (writeDependency) {
+                        addTagset(depTags);
+                    }
                 }
 
                 if (printTagSet) {
