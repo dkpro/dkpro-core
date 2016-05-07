@@ -42,6 +42,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.ConvertToCoreNlp;
 import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.ConvertToUima;
+import edu.stanford.nlp.parser.lexparser.Lexicon;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.POSTaggerAnnotator;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
@@ -218,6 +219,7 @@ public class CoreNlpPosTagger
             SingletonTagset tags = new SingletonTagset(POS.class, getResourceMetaData()
                     .getProperty(("pos.tagset")));
             tags.addAll(tagger.tagSet());
+            tags.remove(Lexicon.BOUNDARY_TAG);
             addTagset(tags);
 
             if (printTagSet) {

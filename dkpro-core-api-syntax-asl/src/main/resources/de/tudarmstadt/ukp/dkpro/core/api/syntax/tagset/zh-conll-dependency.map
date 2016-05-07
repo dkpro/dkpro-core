@@ -1,0 +1,37 @@
+# CoNLL 2008 Dependencies
+#
+# Dependency Syntax in the CoNLL Shared Task 2008
+
+__META_SOURCE_URL__=http://wacky.sslmit.unibo.it/lib/exe/fetch.php?media=papers:conll-syntax.pdf
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.
+
+# AMOD - Modifier of adjective or adverb
+AMOD=Dependency
+# DEP - Unclassified relation
+DEP=Dependency
+# NMOD - Modifier of nominal
+NMOD=Dependency
+# OBJ - Direct or indirect object or clause complement
+OBJ=Dependency 
+# P - Punctuation
+P=Dependency
+# PMOD - Between preposition and its child in a PP
+PMOD=Dependency
+# PRD - Predicative complement
+PRD=Dependency
+# ROOT - Root
+ROOT=Dependency
+# SBAR - ???
+SBAR=Dependency
+# SUB - Between subordinating conjunction and verb
+SUB=Dependency
+# VC - Verb chain
+VC=Dependency
+# VMOD - ???
+VMOD=Dependency
+
+#
+# Categories used by DKPro internally
+#
+*=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+

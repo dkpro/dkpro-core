@@ -35,6 +35,7 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
@@ -214,6 +215,8 @@ public class CoreNlpDependencyParser
         {
             String modelFile = aUrl.toString();
             
+            Properties metadata = getResourceMetaData();
+            
             // Loading gzipped files from URL is broken in CoreNLP
             // https://github.com/stanfordnlp/CoreNLP/issues/94
             if (modelFile.startsWith("jar:") && modelFile.endsWith(".gz")) {
@@ -228,23 +231,30 @@ public class CoreNlpDependencyParser
             
             DependencyParseAnnotator annotator = new DependencyParseAnnotator(coreNlpProps);
 
+            List<String> knownPos;
             List<String> knownLabels;
             try {
                 DependencyParser parser = (DependencyParser) FieldUtils.readField(annotator,
                         "parser", true);
+                knownPos = (List<String>) FieldUtils.readField(parser, "knownPos", true);
                 knownLabels = (List<String>) FieldUtils.readField(parser, "knownLabels", true);
             }
             catch (IllegalAccessException e) {
                 throw new IOException(e);
             }
+            SingletonTagset posTags = new SingletonTagset(POS.class,
+                    metadata.getProperty("pos.tagset"));
+            posTags.addAll(knownPos);
+            posTags.remove("-NULL-");
+            posTags.remove("-ROOT-");
+            posTags.remove("-UNKNOWN-");
+            addTagset(posTags, false);
             
-            // Internal category used by the parser
-            knownLabels.remove("-NULL-");
-            
-            SingletonTagset tags = new SingletonTagset(Dependency.class, getResourceMetaData()
-                    .getProperty(("dependency.tagset")));
-            tags.addAll(knownLabels);
-            addTagset(tags);
+            SingletonTagset depTags = new SingletonTagset(Dependency.class,
+                    metadata.getProperty(("dependency.tagset")));
+            depTags.addAll(knownLabels);
+            depTags.remove("-NULL-");
+            addTagset(depTags);
 
             if (printTagSet) {
                 getContext().getLogger().log(INFO, getTagset().toString());

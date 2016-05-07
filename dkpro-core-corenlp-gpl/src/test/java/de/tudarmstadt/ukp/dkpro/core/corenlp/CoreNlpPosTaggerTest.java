@@ -110,19 +110,19 @@ public class CoreNlpPosTaggerTest
                 "très", "compliqué", ",", "qui", "contient", "des", "constituants", "que", "de",
                 "nombreuses", "dépendances", "et", "que", "possible", "." };
         
-        String[] posMapped = new String[] { "PR", "V", "NN", "PP", "ART", "NN", "PP", "N", "ADV",
+        String[] posMapped = { "PR", "V", "NN", "PP", "ART", "NN", "PP", "N", "ADV",
                 "ADJ", "PUNC", "PR", "V", "ART", "NN", "CONJ", "ART", "ADJ", "NN", "CONJ", "CONJ",
                 "ADJ", "PUNC" };
 
-        String[] posOriginal = new String[] { "CLS", "V", "NC", "P", "DET", "NC", "P", "N", "ADV",
+        String[] posOriginal = { "CLS", "V", "NC", "P", "DET", "NC", "P", "N", "ADV",
                 "ADJ", "PUNC", "PROREL", "V", "DET", "NC", "CS", "DET", "ADJ", "NC", "CC", "CS",
                 "ADJ", "PUNC" };
 
-        String[] posTags = new String[] { ".$$.", "A", "ADJ", "ADJWH", "ADV", "ADVWH", "C", "CC",
+        String[] posTags = { "A", "ADJ", "ADJWH", "ADV", "ADVWH", "C", "CC",
                 "CL", "CLO", "CLR", "CLS", "CS", "DET", "DETWH", "ET", "I", "N", "NC", "NPP", "P",
                 "PREF", "PRO", "PROREL", "PROWH", "PUNC", "V", "VIMP", "VINF", "VPP", "VPR", "VS" };
 
-        String[] unmappedPos = new String[] { ".$$." };
+        String[] unmappedPos = { };
 
         AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
         AssertAnnotations.assertTagset(POS.class, "corenlp34", posTags, jcas);
@@ -136,11 +136,11 @@ public class CoreNlpPosTaggerTest
     {
         JCas jcas = runTest("fr", null, "La traduction d' un texte du français vers l' anglais .");
 
-        String[] posMapped = new String[] { "ART", "NN", "PP", "ART", "NN", "PP", "NN", "PP",
-                "ART", "NN", "PUNC" };
+        String[] posMapped = { "ART", "NN", "PP", "ART", "NN", "PP", "NN", "PP", "ART", "NN",
+                "PUNC" };
 
-        String[] posOriginal = new String[] { "DET", "NC", "P", "DET", "NC", "P", "NC", "P", "DET",
-                "NC", "PUNC" };
+        String[] posOriginal = { "DET", "NC", "P", "DET", "NC", "P", "NC", "P", "DET", "NC",
+                "PUNC" };
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
     }

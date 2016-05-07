@@ -48,58 +48,54 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 import edu.stanford.nlp.ling.StringLabel;
 import edu.stanford.nlp.trees.Tree;
 
-/**
- */
 public class CoreNlpParserTest
 {
-    private static final String[] GERMAN_POS_TAGS = { "$,", "$.", "$[", ".$$.", "ADJA", "ADJD",
-        "ADV", "APPO", "APPR", "APPRART", "APZR", "ART", "CARD", "FM", "ITJ", "KOKOM", "KON",
-        "KOUI", "KOUS", "NE", "NN", "PDAT", "PDS", "PIAT", "PIDAT", "PIS", "PPER", "PPOSAT",
-        "PPOSS", "PRELAT", "PRELS", "PRF", "PROAV", "PTKA", "PTKANT", "PTKNEG", "PTKVZ",
-        "PTKZU", "PWAT", "PWAV", "PWS", "TRUNC", "VAFIN", "VAIMP", "VAINF", "VAPP", "VMFIN",
-        "VMINF", "VMPP", "VVFIN", "VVIMP", "VVINF", "VVIZU", "VVPP", "XY" };
+    private static final String[] GERMAN_POS_TAGS = { "$,", "$.", "$[", "ADJA", "ADJD", "ADV",
+            "APPO", "APPR", "APPRART", "APZR", "ART", "CARD", "FM", "ITJ", "KOKOM", "KON", "KOUI",
+            "KOUS", "NE", "NN", "PDAT", "PDS", "PIAT", "PIDAT", "PIS", "PPER", "PPOSAT", "PPOSS",
+            "PRELAT", "PRELS", "PRF", "PROAV", "PTKA", "PTKANT", "PTKNEG", "PTKVZ", "PTKZU", "PWAT",
+            "PWAV", "PWS", "TRUNC", "VAFIN", "VAIMP", "VAINF", "VAPP", "VMFIN", "VMINF", "VMPP",
+            "VVFIN", "VVIMP", "VVINF", "VVIZU", "VVPP", "XY" };
 
     private static final String[] GERMAN_CONSTITUENT_TAGS = { "AA", "AP", "AVP", "CAC", "CAP",
             "CAVP", "CCP", "CH", "CNP", "CO", "CPP", "CS", "CVP", "CVZ", "DL", "ISU", "MPN", "MTA",
             "NM", "NP", "NUR", "PP", "QL", "ROOT", "S", "VP", "VZ" };
-    
+
     private static final String[] ENGLISH_POS_TAGS = { "#", "$", "''", ",", "-LRB-", "-RRB-", ".",
-            ".$$.", ":", "CC", "CD", "DT", "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN",
-            "NNP", "NNPS", "NNS", "PDT", "POS", "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "SYM",
-            "TO", "UH", "VB", "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB", "``" };
-    
-    private static final String[] ENGLISH_POS_UNMAPPED = { "$", ".$$."};
-    
+            ":", "CC", "CD", "DT", "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNP",
+            "NNPS", "NNS", "PDT", "POS", "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "SYM", "TO", "UH",
+            "VB", "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB", "``" };
+
+    private static final String[] ENGLISH_POS_UNMAPPED = { "$" };
+
     private static final String[] ENGLISH_CONSTITUENT_TAGS = { "ADJP", "ADVP", "CONJP", "FRAG",
             "INTJ", "LST", "NAC", "NP", "NX", "PP", "PRN", "PRT", "QP", "ROOT", "RRC", "S", "SBAR",
             "SBARQ", "SINV", "SQ", "UCP", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
-    
-    private static final String[] ENGLISH_CONSTITUENT_UNMAPPED = { };
-    
+
+    private static final String[] ENGLISH_CONSTITUENT_UNMAPPED = {};
+
     private static final String[] ENGLISH_DEPENDENCY_TAGS = { "acomp", "advcl", "advmod", "agent",
-            "amod", "appos", "arg", "aux", "auxpass", "cc", "ccomp", "comp", "conj", "cop",
-            "csubj", "csubjpass", "dep", "det", "discourse", "dobj", "expl", "goeswith", "gov",
-            "iobj", "mark", "mod", "mwe", "neg", "nn", "npadvmod", "nsubj", "nsubjpass", "num",
-            "number", "obj", "parataxis", "pcomp", "pobj", "poss", "possessive", "preconj", "pred",
-            "predet", "prep", "prt", "punct", "quantmod", "rcmod", "ref", "rel", "sdep", "subj",
-            "tmod", "vmod", "xcomp" };
-    
-    private static final String[] SPANISH_POS_TAGS = { ".$$.", "359000", "ao0000", "aq0000", "cc",
-            "cs", "da0000", "dd0000", "de0000", "di0000", "dn0000", "dp0000", "dt0000", "f0",
-            "faa", "fat", "fc", "fd", "fe", "fg", "fh", "fia", "fit", "fp", "fpa", "fpt", "fs",
-            "ft", "fx", "fz", "i", "nc00000", "nc0n000", "nc0p000", "nc0s000", "np00000",
-            "p0000000", "pd000000", "pe000000", "pi000000", "pn000000", "pp000000", "pr000000",
-            "pt000000", "px000000", "rg", "rn", "sp000", "vag0000", "vaic000", "vaif000",
-            "vaii000", "vaip000", "vais000", "vam0000", "van0000", "vap0000", "vasi000", "vasp000",
-            "vmg0000", "vmic000", "vmif000", "vmii000", "vmip000", "vmis000", "vmm0000", "vmn0000",
-            "vmp0000", "vmsi000", "vmsp000", "vsg0000", "vsic000", "vsif000", "vsii000", "vsip000",
-            "vsis000", "vsm0000", "vsn0000", "vsp0000", "vssf000", "vssi000", "vssp000", "w", "z0",
-            "zm", "zu" };
-    
-    private static final String[] FRENCH_POS_TAGS = { ".$$.", "A", "ADJ", "ADJWH", "ADV", "ADVWH",
-            "C", "CC", "CL", "CLO", "CLR", "CLS", "CS", "DET", "DETWH", "ET", "I", "N", "NC",
-            "NPP", "P", "PREF", "PRO", "PROREL", "PROWH", "PUNC", "V", "VIMP", "VINF", "VPP",
-            "VPR", "VS" };
+            "amod", "appos", "arg", "aux", "auxpass", "cc", "ccomp", "comp", "conj", "cop", "csubj",
+            "csubjpass", "dep", "det", "discourse", "dobj", "expl", "goeswith", "gov", "iobj",
+            "mark", "mod", "mwe", "neg", "nn", "npadvmod", "nsubj", "nsubjpass", "num", "number",
+            "obj", "parataxis", "pcomp", "pobj", "poss", "possessive", "preconj", "pred", "predet",
+            "prep", "prt", "punct", "quantmod", "rcmod", "ref", "rel", "sdep", "subj", "tmod",
+            "vmod", "xcomp" };
+
+    private static final String[] SPANISH_POS_TAGS = { "359000", "ao0000", "aq0000", "cc", "cs",
+            "da0000", "dd0000", "de0000", "di0000", "dn0000", "dp0000", "dt0000", "f0", "faa",
+            "fat", "fc", "fd", "fe", "fg", "fh", "fia", "fit", "fp", "fpa", "fpt", "fs", "ft", "fx",
+            "fz", "i", "nc00000", "nc0n000", "nc0p000", "nc0s000", "np00000", "p0000000",
+            "pd000000", "pe000000", "pi000000", "pn000000", "pp000000", "pr000000", "pt000000",
+            "px000000", "rg", "rn", "sp000", "vag0000", "vaic000", "vaif000", "vaii000", "vaip000",
+            "vais000", "vam0000", "van0000", "vap0000", "vasi000", "vasp000", "vmg0000", "vmic000",
+            "vmif000", "vmii000", "vmip000", "vmis000", "vmm0000", "vmn0000", "vmp0000", "vmsi000",
+            "vmsp000", "vsg0000", "vsic000", "vsif000", "vsii000", "vsip000", "vsis000", "vsm0000",
+            "vsn0000", "vsp0000", "vssf000", "vssi000", "vssp000", "w", "z0", "zm", "zu" };
+
+    private static final String[] FRENCH_POS_TAGS = { "A", "ADJ", "ADJWH", "ADV", "ADVWH", "C",
+            "CC", "CL", "CLO", "CLR", "CLS", "CS", "DET", "DETWH", "ET", "I", "N", "NC", "NPP", "P",
+            "PREF", "PRO", "PROREL", "PROWH", "PUNC", "V", "VIMP", "VINF", "VPP", "VPR", "VS" };
     
     // TODO Maybe test link to parents (not tested by syntax tree recreation)
 
@@ -131,7 +127,7 @@ public class CoreNlpParserTest
                 + "(ADV möglichst) (PIDAT viele) (CNP (NN Konstituenten) (KON und) "
                 + "(NN Dependenzen))) (VVFIN beinhaltet))) ($. .)))";
 
-        String[] unmappedPos = { "$[", ".$$." };
+        String[] unmappedPos = { "$[" };
 
         String[] unmappedConst = { "NUR" };
 
@@ -174,7 +170,7 @@ public class CoreNlpParserTest
                 + "(NP (AP (ADV möglichst) (PIDAT viele)) (CNP (NN Konstituenten) (KON und) "
                 + "(NN Dependenzen))) (VVFIN beinhaltet))) ($. .)))";
 
-        String[] unmappedPos = { "$[", ".$$." };
+        String[] unmappedPos = { "$[" };
 
         String[] unmappedConst = { "NUR" };
 
@@ -407,12 +403,18 @@ public class CoreNlpParserTest
                 select(jcas, Constituent.class));
         AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-        AssertAnnotations.assertTagset(POS.class, "ptb", ENGLISH_POS_TAGS, jcas);
-        AssertAnnotations.assertTagsetMapping(POS.class, "ptb", ENGLISH_POS_UNMAPPED, jcas);
-        AssertAnnotations.assertTagset(Constituent.class, "ptb", ENGLISH_CONSTITUENT_TAGS, jcas);
-        AssertAnnotations.assertTagsetMapping(Constituent.class, "ptb", ENGLISH_CONSTITUENT_UNMAPPED, jcas);
-        AssertAnnotations.assertTagset(Dependency.class, "stanford341", ENGLISH_DEPENDENCY_TAGS, jcas);
-        AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford341", unmappedDep, jcas);
+        AssertAnnotations.assertTagset(CoreNlpPosTagger.class, POS.class, "ptb", ENGLISH_POS_TAGS,
+                jcas);
+        AssertAnnotations.assertTagsetMapping(CoreNlpPosTagger.class, POS.class, "ptb",
+                ENGLISH_POS_UNMAPPED, jcas);
+        AssertAnnotations.assertTagset(CoreNlpParser.class, Constituent.class, "ptb",
+                ENGLISH_CONSTITUENT_TAGS, jcas);
+        AssertAnnotations.assertTagsetMapping(CoreNlpParser.class, Constituent.class, "ptb",
+                ENGLISH_CONSTITUENT_UNMAPPED, jcas);
+        AssertAnnotations.assertTagset(CoreNlpParser.class, Dependency.class, "stanford341",
+                ENGLISH_DEPENDENCY_TAGS, jcas);
+        AssertAnnotations.assertTagsetMapping(CoreNlpParser.class, Dependency.class, "stanford341",
+                unmappedDep, jcas);
     }
 
     @Test
@@ -632,7 +634,7 @@ public class CoreNlpParserTest
                 "morfema.verbal", "neg", "participi", "prep", "relatiu", "s.a", "sadv", "sentence",
                 "sn", "sp", "spec" };
 
-        String[] unmappedPos = { ".$$.", "359000" };
+        String[] unmappedPos = { "359000" };
 
         String[] unmappedConst = {};
 
@@ -641,11 +643,14 @@ public class CoreNlpParserTest
                 select(jcas, Constituent.class));
         AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-        AssertAnnotations.assertTagset(POS.class, "ancora", posTags, jcas);
-        AssertAnnotations.assertTagsetMapping(POS.class, "ancora", unmappedPos, jcas);
-        AssertAnnotations.assertTagset(Constituent.class, "ancora", constituentTags, jcas);
-        AssertAnnotations.assertTagsetMapping(Constituent.class, "ancora", unmappedConst, jcas);
-//        AssertAnnotations.assertTagset(Dependency.class, "stanford341", depTags, jcas);
+        AssertAnnotations.assertTagset(CoreNlpPosTagger.class, POS.class, "ancora", posTags, jcas);
+        AssertAnnotations.assertTagsetMapping(CoreNlpPosTagger.class, POS.class, "ancora",
+                unmappedPos, jcas);
+        AssertAnnotations.assertTagset(CoreNlpParser.class, Constituent.class, "ancora",
+                constituentTags, jcas);
+        AssertAnnotations.assertTagsetMapping(CoreNlpParser.class, Constituent.class, "ancora",
+                unmappedConst, jcas);
+        //        AssertAnnotations.assertTagset(Dependency.class, "stanford341", depTags, jcas);
 //        AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford341", unmappedDep, jcas);
     }
 
@@ -718,7 +723,7 @@ public class CoreNlpParserTest
 
         // NO DEP TAGS String[] depTags = {};
 
-        String[] unmappedPos = { ".$$." };
+        String[] unmappedPos = { };
 
         String[] unmappedConst = { "MWA", "MWADV", "MWC", "MWCL", "MWD", "MWET",
                 "MWI", "MWN", "MWP", "MWPRO", "MWV" };
@@ -815,7 +820,7 @@ public class CoreNlpParserTest
                 + "(AD 例如)) (NP (NN 其中)) (VP (VP (VV 包含) (NP (QP (CD 许多)) (NP (NN 成分)))) "
                 + "(CC 和) (VP (DVP (ADVP (AD 尽可能)) (DEV 的)) (VP (VV 依赖))))) (PU 。)))";
 
-        String[] posTags = { ".$$.", "AD", "AS", "BA", "CC", "CD", "CS", "DEC", "DEG", "DER",
+        String[] posTags = { "AD", "AS", "BA", "CC", "CD", "CS", "DEC", "DEG", "DER",
                 "DEV", "DT", "ETC", "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "NN", "NR", "NT",
                 "OD", "ON", "P", "PN", "PU", "SB", "SP", "URL", "VA", "VC", "VE", "VV", "X" };
 
@@ -825,7 +830,7 @@ public class CoreNlpParserTest
 
         // NO DEP TAGS String[] depTags = new String[] {};
 
-        String[] unmappedPos = { ".$$.", "URL" };
+        String[] unmappedPos = { "URL" };
 
         String[] unmappedConst = { "DFL", "FLR", "INC", "WHPP" };
 
@@ -892,9 +897,9 @@ public class CoreNlpParserTest
                 + "(NN 成分)))) (CC 和) (VP (ADVP (AD 尽可能)))))) (DEC 的)) (NP (NN 依赖)))) "
                 + "(PU 。)))";
 
-        String[] posTags = { ".$$.", "AD", "AS", "BA", "CC", "CD", "CS", "DEC", "DEG", "DER",
-                "DEV", "DT", "ETC", "FW", "JJ", "LB", "LC", "M", "MSP", "NN", "NR", "NT", "OD",
-                "P", "PN", "PU", "SB", "SP", "VA", "VC", "VE", "VV" };
+        String[] posTags = { "AD", "AS", "BA", "CC", "CD", "CS", "DEC", "DEG", "DER", "DEV", "DT",
+                "ETC", "FW", "JJ", "LB", "LC", "M", "MSP", "NN", "NR", "NT", "OD", "P", "PN", "PU",
+                "SB", "SP", "VA", "VC", "VE", "VV" };
 
         String[] constituentTags = { "ADJP", "ADVP", "CLP", "CP", "DNP", "DP", "DVP", "FRAG", "IP",
                 "LCP", "LST", "NP", "PP", "PRN", "QP", "ROOT", "UCP", "VCD", "VCP", "VNV", "VP",
@@ -902,7 +907,7 @@ public class CoreNlpParserTest
 
         // NO DEP TAGS String[] depTags = new String[] {};
 
-        String[] unmappedPos = { ".$$." };
+        String[] unmappedPos = { };
 
         String[] unmappedConst = { };
 
@@ -948,7 +953,7 @@ public class CoreNlpParserTest
         String[] posOriginal = { "VBP", "NN", "JJ", "NN", "IN", "NN", "VBP", "IN", "NN", "NN",
                 "JJ", "IN", "DTNN", "CC", "DTNN", "PUNC" };
 
-        String[] posTags = { ".$$.", "ADJ_NUM", "CC", "CD", "DT", "DTJJ", "DTJJR", "DTNN", "DTNNP",
+        String[] posTags = { "ADJ_NUM", "CC", "CD", "DT", "DTJJ", "DTJJR", "DTNN", "DTNNP",
                 "DTNNPS", "DTNNS", "IN", "JJ", "JJR", "NN", "NNP", "NNPS", "NNS", "NOUN_QUANT",
                 "PRP", "PRP$", "PUNC", "RB", "RP", "UH", "VB", "VBD", "VBG", "VBN", "VBP", "VN",
                 "WP", "WRB" };
@@ -957,7 +962,7 @@ public class CoreNlpParserTest
                 "PP", "PRN", "PRT", "ROOT", "S", "SBAR", "SBARQ", "SQ", "UCP", "VP", "WHADVP",
                 "WHNP", "WHPP", "X" };
 
-        String[] unmappedPos = { ".$$.", "ADJ_NUM", "NOUN_QUANT", "PRP$" };
+        String[] unmappedPos = { "ADJ_NUM", "NOUN_QUANT", "PRP$" };
 
         String[] unmappedConst = { "LST" };
         

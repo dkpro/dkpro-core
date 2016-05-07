@@ -1,0 +1,47 @@
+# CoNLL 2008 Dependencies
+#
+# Dependency Syntax in the CoNLL Shared Task 2008
+
+__META_SOURCE_URL__=http://wacky.sslmit.unibo.it/lib/exe/fetch.php?media=papers:conll-syntax.pdf
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.
+
+# AMOD - Modifier of adjective or adverb
+AMOD=Dependency
+# APPO - Apposition
+APPO=Dependency
+# CONJ - Between conjunction and second conjunct in a coordination 
+CONJ=Dependency
+# COORD - Coordination
+COORD=Dependency
+# DEP - Unclassified relation 
+DEP=Dependency
+# IM - Between infinitive marker and verb
+IM=Dependency
+# NAME - Name-internal link 
+NAME=Dependency
+# NMOD - Modifier of nominal 
+NMOD=Dependency
+# P - Punctuation 
+P=Dependency
+# PMOD - Between preposition and its child in a PP
+PMOD=Dependency
+# PRN - Parenthetical
+PRN=Dependency
+# PRT - Particle
+PRT=Dependency
+# ROOT - Root
+ROOT=Dependency
+# SUB - Between subordinating conjunction and verb
+SUB=Dependency
+# SUFFIX -  Possessive 's
+SUFFIX=Dependency
+# VC - Verb chain
+VC=Dependency
+# VMOD - ???
+VMOD=Dependency
+
+#
+# Categories used by DKPro internally
+#
+*=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+
