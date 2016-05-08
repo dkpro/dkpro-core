@@ -136,6 +136,15 @@ public abstract class ResourceCollectionReaderBase
     @ExternalResource(key = KEY_RESOURCE_RESOLVER, mandatory = false)
     private final ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
+    /**
+     * The frequency with which read documents are logged. Default: 1 (log every document).
+     * <p>
+     * Set to 0 or negative values to deactivate logging.
+     */
+    public static final String PARAM_LOG_FREQ = "logFreq";
+    @ConfigurationParameter(name = PARAM_LOG_FREQ, mandatory = true, defaultValue = "1")
+    private int logFreq;
+
     private int completed;
     private Collection<Resource> resources;
     private Iterator<Resource> resourceIterator;
@@ -323,8 +332,9 @@ public abstract class ResourceCollectionReaderBase
         try {
             Resource res = resourceIterator.next();
             progress.setDone(completed);
-            getLogger().info(
-                    String.format("%s: %s", progress, res.location));
+            if (logFreq > 0 && completed % logFreq == 0) {
+                getLogger().info(String.format("%s: %s", progress, res.location));
+            }
             return res;
         }
         finally {
