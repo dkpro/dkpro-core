@@ -60,6 +60,12 @@
         <fs>
             <f name="layer" value="de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"/>
             <f name="name" value="ptb"/>
+            <f name="componentName" value="de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger"/>
+            <f name="modelLocation" value="classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/tagger-en-maxent.properties"/>
+            <f name="modelVariant" value="maxent"/>
+            <f name="modelLanguage" value="en"/>
+            <f name="modelVersion" value="20120616.1"/>
+            <f name="input" value="false"/>
         </fs>
     </a>
     <node xml:id="node10">
