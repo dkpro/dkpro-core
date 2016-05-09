@@ -230,7 +230,8 @@ public class CoreNlpDependencyParser
             coreNlpProps.setProperty("extradependencies", extraDependencies.toString());
             
             // Workaround for https://mailman.stanford.edu/pipermail/parser-user/2016-March/003278.html
-            if ("sd".equals(metadata.getProperty(VARIANT))) {
+            if ("en".equals(metadata.getProperty(LANGUAGE))
+                    && "sd".equals(metadata.getProperty(VARIANT))) {
                 coreNlpProps.setProperty("language", "English");
             }
             
