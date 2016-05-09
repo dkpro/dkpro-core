@@ -79,13 +79,10 @@ public class CoreNlpDependencyParserTest
                 "[ 44, 45]PUNCT(punct) D[44,45](,) G[35,43](sentence)",
                 "[ 46, 51]NSUBJ(nsubj) D[46,51](which) G[52,60](contains)",
                 "[ 52, 60]RCMOD(rcmod) D[52,60](contains) G[35,43](sentence)",
-                "[ 61, 63]PREP(prep) D[61,63](as) G[52,60](contains)",
                 "[ 64, 68]AMOD(amod) D[64,68](many) G[69,81](constituents)",
-                "[ 69, 81]POBJ(pobj) D[69,81](constituents) G[61,63](as)",
-                "[ 82, 85]CC(cc) D[82,85](and) G[69,81](constituents)",
-                "[ 86, 98]CONJ(conj:and) D[86,98](dependencies) G[69,81](constituents)",
-                "[ 99,101]PREP(prep) D[99,101](as) G[69,81](constituents)",
-                "[102,110]POBJ(pobj) D[102,110](possible) G[99,101](as)",
+                "[ 69, 81]PREP(prep_as) D[69,81](constituents) G[52,60](contains)",
+                "[ 86, 98]CONJ(conj_and) D[86,98](dependencies) G[69,81](constituents)",
+                "[102,110]PREP(prep_as) D[102,110](possible) G[69,81](constituents)",
                 "[111,112]PUNCT(punct) D[111,112](.) G[3,7](need)" };
 
         String[] unmappedDep = {};

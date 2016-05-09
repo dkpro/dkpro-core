@@ -229,6 +229,11 @@ public class CoreNlpDependencyParser
             coreNlpProps.setProperty("sentenceTimeout", Integer.toString(maxTime));
             coreNlpProps.setProperty("extradependencies", extraDependencies.toString());
             
+            // Workaround for https://mailman.stanford.edu/pipermail/parser-user/2016-March/003278.html
+            if ("sd".equals(metadata.getProperty(VARIANT))) {
+                coreNlpProps.setProperty("language", "English");
+            }
+            
             DependencyParseAnnotator annotator = new DependencyParseAnnotator(coreNlpProps);
 
             List<String> knownPos;
