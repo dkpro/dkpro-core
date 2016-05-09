@@ -29,7 +29,8 @@
 	<name>DKPro Core ASL - Illinois Cognitive Computation Group NLP (v ${illinois-cogcomp-nlp.version})</name>
     <properties>
         <illinois-cogcomp-nlp.version>3.0.36</illinois-cogcomp-nlp.version>
-    </properties>
+				<maven.surefire.heap>4g</maven.surefire.heap>
+		</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
