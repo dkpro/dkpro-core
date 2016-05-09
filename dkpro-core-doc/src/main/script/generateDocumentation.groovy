@@ -92,7 +92,8 @@ def getTool(componentName, spec) {
         return "checker";
     case { 'de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures' in outputs }: 
         return "morph";
-    case { 'de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument' in outputs }: 
+    case { 'de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument' in outputs ||
+           'de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg' in outputs}: 
         return "srl";
     case { 'de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem' in outputs }: 
         return "stem";

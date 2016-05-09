@@ -93,8 +93,8 @@ import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerTerminal;
             "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
             "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
-            "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument",
-            "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate" })
+            "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg",
+            "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred" })
 public class TigerXmlReader
     extends JCasResourceCollectionReader_ImplBase
 {

@@ -81,8 +81,8 @@ import se.lth.cs.srl.pipeline.Pipeline;
     	"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
     	"de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" },
 	outputs = {
-		"de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate",
-		"de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument" })
+		"de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred",
+		"de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg" })
 public class MateSemanticRoleLabeler extends JCasConsumer_ImplBase {
 	/**
 	 * Use this language instead of the document language to resolve the model.

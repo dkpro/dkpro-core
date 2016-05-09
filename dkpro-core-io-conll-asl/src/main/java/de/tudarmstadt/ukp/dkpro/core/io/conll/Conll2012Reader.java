@@ -101,8 +101,8 @@ import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
         "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate",
-        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument"})
+        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred",
+        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg"})
 public class Conll2012Reader
     extends JCasResourceCollectionReader_ImplBase
 {
