@@ -17,6 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -137,17 +138,27 @@ public class ModelProviderBase<M>
                     meta.setComponentName(getContextClass().getName());
                 }
                 
-//                try {
-                    Properties props = getResourceMetaData();
+                // Initialize with information from the aggregated properties
+                try {
+                    Properties props = getAggregatedProperties();
                     meta.setModelVariant(props.getProperty(VARIANT));
                     meta.setModelLanguage(props.getProperty(LANGUAGE));
                     meta.setModelVersion(props.getProperty(VERSION));
-                    meta.setModelLocation(getLastModelLocation());
-//                }
-//                catch (IOException ex) {
-//                    throw new CASException(ex);
-//                }
+                }
+                catch (IOException ex) {
+                    throw new CASException(ex);
+                }
+
+                // Override with metadata properties if available
+                Properties md = getResourceMetaData();
+                if (md != null) {
+                    meta.setModelVariant(md.getProperty(VARIANT));
+                    meta.setModelLanguage(md.getProperty(LANGUAGE));
+                    meta.setModelVersion(md.getProperty(VERSION));
+                }
                 
+                meta.setModelLocation(getLastModelLocation());
+
                 tsd.setComponentName(meta.getComponentName());
                 tsd.setModelLocation(meta.getModelLocation());
                 tsd.setModelLanguage(meta.getModelLanguage());
