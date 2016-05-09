@@ -33,5 +33,5 @@ VMOD=Dependency
 #
 # Categories used by DKPro internally
 #
-*=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+*=Dependency
 
