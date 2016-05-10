@@ -149,7 +149,8 @@ public class PennTreeUtilsTest
 		System.out.println(selectDfs(n, 12));
 	}
 
-    @Test
+	@Ignore
+	@Test
     public void testFromUimaConversion()
         throws Exception
     {
