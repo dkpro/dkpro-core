@@ -212,6 +212,11 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.ditop-asl</artifactId>
+				<version>1.9.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.imscwb-asl</artifactId>
 				<version>1.9.0-SNAPSHOT</version>
 			</dependency>
@@ -458,6 +463,7 @@
         <module>../dkpro-core-io-brat-asl</module>
         <module>../dkpro-core-io-combination-asl</module>
 		<module>../dkpro-core-io-conll-asl</module>
+		<module>../dkpro-core-io-ditop-asl</module>
 		<module>../dkpro-core-io-imscwb-asl</module>
 		<module>../dkpro-core-io-html-asl</module>
         <module>../dkpro-core-io-json-asl</module>
@@ -566,7 +572,6 @@
 			</repositories>
 			<modules>
                 <!-- IO modules -->
-                <module>../dkpro-core-io-ditop-asl</module>
                 <module>../dkpro-core-io-fangorn-asl</module>
                 <module>../dkpro-core-io-graf-asl</module>
                 <!-- Processing modules -->
@@ -575,11 +580,7 @@
 			</modules>
 			<dependencyManagement>
 				<dependencies>
-                    <dependency>
-                        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-                        <artifactId>de.tudarmstadt.ukp.dkpro.core.io.ditop-asl</artifactId>
-                        <version>1.9.0-SNAPSHOT</version>
-                    </dependency>
+
 					<dependency>
 						<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 						<artifactId>de.tudarmstadt.ukp.dkpro.core.flextag-asl</artifactId>
