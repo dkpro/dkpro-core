@@ -52,11 +52,6 @@
             </dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.auebtools-gpl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.berkeleyparser-gpl</artifactId>
 				<version>1.8.0-SNAPSHOT</version>
 			</dependency>
@@ -88,13 +83,15 @@
 		</dependencies>
 	</dependencyManagement>
 	<modules>
+	    <!-- IO modules -->
+		<module>../dkpro-core-io-tgrep-gpl</module>
+	    <!-- Processing modules -->
 		<module>../dkpro-core-arktools-gpl</module>
 		<module>../dkpro-core-berkeleyparser-gpl</module>
 		<module>../dkpro-core-gate-gpl</module>
 		<module>../dkpro-core-matetools-gpl</module>
-		<module>../dkpro-core-stanfordnlp-gpl</module>
 		<module>../dkpro-core-sfst-gpl</module>
-		<module>../dkpro-core-io-tgrep-gpl</module>
+		<module>../dkpro-core-stanfordnlp-gpl</module>
 	</modules>
 	<build>
 		<plugins>
