@@ -45,7 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 
 /**
  * <p>Writes the CoNLL 2000 chunking format. The columns are separated by spaces.</p>
- * 
+ *
  * <pre><code>
  * He        PRP  B-NP
  * reckons   VBZ  B-VP
@@ -64,15 +64,15 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
  * September NNP  B-NP
  * .         .    O
  * </code></pre>
- * 
+ *
  * <ol>
  * <li>FORM - token</li>
  * <li>POSTAG - part-of-speech tag</li>
  * <li>CHUNK - chunk (BIO encoded)</li>
  * </ol>
- * 
+ *
  * <p>Sentences are separated by a blank new line.</p>
- * 
+ *
  * @see <a href="http://www.cnts.ua.ac.be/conll2000/chunking/">CoNLL 2000 shared task</a>
  */
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
@@ -131,18 +131,17 @@ public class Conll2000Writer
 
             // Tokens
             List<Token> tokens = selectCovered(Token.class, sentence);
-            
+
             // Chunks
             IobEncoder encoder = new IobEncoder(aJCas.getCas(), chunkType, chunkValue);
-            
-            for (int i = 0; i < tokens.size(); i++) {
+
+            for (Token token:tokens) {
                 Row row = new Row();
-                row.id = i+1;
-                row.token = tokens.get(i);
-                row.chunk = encoder.encode(tokens.get(i));
+                row.token = token;
+                row.chunk = encoder.encode(token);
                 ctokens.put(row.token, row);
             }
-            
+
             // Write sentence in CONLL 2006 format
             for (Row row : ctokens.values()) {
                 String pos = UNUSED;
@@ -150,12 +149,12 @@ public class Conll2000Writer
                     POS posAnno = row.token.getPos();
                     pos = posAnno.getPosValue();
                 }
-                
+
                 String chunk = UNUSED;
                 if (writeChunk && (row.chunk != null)) {
                     chunk = encoder.encode(row.token);
                 }
-                
+
                 aOut.printf("%s %s %s\n", row.token.getCoveredText(), pos, chunk);
             }
 
@@ -165,7 +164,6 @@ public class Conll2000Writer
 
     private static final class Row
     {
-        int id;
         Token token;
         String chunk;
     }
