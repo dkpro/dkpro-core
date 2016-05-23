@@ -4,7 +4,7 @@ permalink: /java/recipes/
 hidden: true
 ---
 
-Recipes are small, self-contained examples that showcase a specific use of DKPro Core. 
+Recipes are small, self-contained examples that showcase a specific use of DKPro Core. The [DKPro Core Examples project](Recipes are small) lists a few examples.
 
 Choose one of the recipes to the right to view it in detail.
 
