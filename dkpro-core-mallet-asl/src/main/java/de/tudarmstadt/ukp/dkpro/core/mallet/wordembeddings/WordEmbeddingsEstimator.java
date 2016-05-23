@@ -29,8 +29,10 @@ import java.io.PrintWriter;
 /**
  * Compute word embeddings from the given collection using skip-grams.
  * <p>
- * Set {@link #PARAM_TOKEN_FEATURE_PATH} to determine what is considered as token (Tokens, Lemmas, etc.)
- * and {@link #PARAM_COVERING_ANNOTATION_TYPE} to determine what is considered a document (sentences, paragraphs, etc.).
+ * Set {@link #PARAM_TOKEN_FEATURE_PATH} to define what is considered as a token (Tokens, Lemmas, etc.).
+ * <p>
+ * Set {@link #PARAM_COVERING_ANNOTATION_TYPE} to define what is considered a document (sentences, paragraphs, etc.).
+ *
  * @since 1.9.0
  */
 public class WordEmbeddingsEstimator
@@ -58,15 +60,14 @@ public class WordEmbeddingsEstimator
     private int windowSize;
 
     /**
-     * An example word that is output with its nearest neighbours once in a while (FIXME: currently
-     * not working, see {@link #collectionProcessComplete()}). (default: null, i.e. none).
+     * An example word that is output with its nearest neighbours once in a while (default: null, i.e. none).
      */
     public static final String PARAM_EXAMPLE_WORD = "exampleWord";
     @ConfigurationParameter(name = PARAM_EXAMPLE_WORD, mandatory = false)
     private String exampleWord;
 
     /**
-     * All documents with fewer tokens than this (default: 10) are omitted.
+     * Ignore documents with fewer tokens than this value (default: 10).
      */
     public static final String PARAM_MIN_DOCUMENT_LENGTH = "minDocumentLength";
     @ConfigurationParameter(name = PARAM_MIN_DOCUMENT_LENGTH, mandatory = true, defaultValue = "10")
