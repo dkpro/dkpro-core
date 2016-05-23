@@ -95,7 +95,7 @@ The result is written to a file called *document.txt.conll* and could look somet
 
 ## Where to go from here?
 
-You can find many more examples of what you can do with DKPro Core and Java on our [Java recipes for DKPro Core pipelines][recipes] page
+You can find many more examples of what you can do with DKPro Core and Java on our [Java recipes for DKPro Core pipelines][recipes] page and in the [DKPro Core examples project](https://github.com/dkpro/dkpro-core-examples).
 
 [1]: http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html
 [2]: http://eclipse.org/downloads/
