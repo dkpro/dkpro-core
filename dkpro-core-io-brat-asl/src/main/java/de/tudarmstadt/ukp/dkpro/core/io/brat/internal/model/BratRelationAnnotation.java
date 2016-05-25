@@ -17,8 +17,11 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.fasterxml.jackson.core.JsonGenerator;
 
 public class BratRelationAnnotation
     extends BratAnnotation
@@ -79,6 +82,29 @@ public class BratRelationAnnotation
         return arg2Target;
     }
 
+    @Override
+    public void write(JsonGenerator aJG)
+        throws IOException
+    {
+        // Format: [${ID}, ${TYPE}, [[${ARGNAME}, ${TARGET}], [${ARGNAME}, ${TARGET}]]]
+        // ['R1', 'Anaphora', [['Anaphor', 'T2'], ['Entity', 'T1']]]
+        
+        aJG.writeStartArray();
+        aJG.writeString(getId());
+        aJG.writeString(getType());
+        aJG.writeStartArray();
+        aJG.writeStartArray();
+        aJG.writeString(arg1Label);
+        aJG.writeString(arg1Target);
+        aJG.writeEndArray();
+        aJG.writeStartArray();
+        aJG.writeString(arg2Label);
+        aJG.writeString(arg2Target);
+        aJG.writeEndArray();
+        aJG.writeEndArray();
+        aJG.writeEndArray();
+    }
+    
     @Override
     public String toString()
     {

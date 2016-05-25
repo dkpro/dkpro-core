@@ -61,6 +61,19 @@ public class BratReaderWriterTest
     }
 
     @Test
+    public void testConll2012Html()
+        throws Exception
+    {
+        testOneWay(
+                createReaderDescription(Conll2012Reader.class,
+                        Conll2012Reader.PARAM_USE_HEADER_METADATA, false), 
+                createEngineDescription(BratWriter.class,
+                        BratWriter.PARAM_FILENAME_SUFFIX, ".html"), 
+                "conll/2012/en-ref.html",
+                "conll/2012/en-orig.conll");
+    }
+
+    @Test
     public void testConll2012()
         throws Exception
     {

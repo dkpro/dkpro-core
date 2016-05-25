@@ -17,7 +17,11 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 
+import java.io.IOException;
+
 import org.apache.commons.lang.StringUtils;
+
+import com.fasterxml.jackson.core.JsonGenerator;
 
 public class BratAttributeDrawingDecl
     extends BratDrawingDecl
@@ -36,7 +40,22 @@ public class BratAttributeDrawingDecl
     }
 
     @Override
-    String getSpec()
+    public void write(JsonGenerator aJG)
+        throws IOException
+    {
+        aJG.writeFieldName("values");
+        aJG.writeStartObject();
+        for (String value : attributeDecl.getValues()) {
+            aJG.writeFieldName(value);
+            aJG.writeStartObject();
+            aJG.writeStringField("glyph", value);
+            aJG.writeEndObject();
+        }
+        aJG.writeEndObject();
+    }
+    
+    @Override
+    public String getSpec()
     {
         StringBuilder sb = new StringBuilder();
         sb.append("glyph:");

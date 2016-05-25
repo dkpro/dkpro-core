@@ -17,10 +17,13 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
+
+import com.fasterxml.jackson.core.JsonGenerator;
 
 public class BratEventArgument
 {
@@ -57,6 +60,16 @@ public class BratEventArgument
         return index;
     }
 
+
+    public void write(JsonGenerator aJG)
+        throws IOException
+    {
+        aJG.writeStartArray();
+        aJG.writeString(index == 0 ? slot : slot + index);
+        aJG.writeString(target);
+        aJG.writeEndArray();
+    }
+    
     @Override
     public String toString()
     {

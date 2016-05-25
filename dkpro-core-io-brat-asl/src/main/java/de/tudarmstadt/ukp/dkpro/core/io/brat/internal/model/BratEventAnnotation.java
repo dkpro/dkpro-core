@@ -17,6 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -29,6 +30,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang.StringUtils;
+
+import com.fasterxml.jackson.core.JsonGenerator;
 
 public class BratEventAnnotation
     extends BratAnnotation
@@ -125,6 +128,21 @@ public class BratEventAnnotation
             l.add(e);
         }
         return grouped;
+    }
+
+    @Override
+    public void write(JsonGenerator aJG)
+        throws IOException
+    {
+        aJG.writeStartArray();
+        aJG.writeString(getId());
+        aJG.writeString(trigger);
+        aJG.writeStartArray();
+        for (BratEventArgument arg : arguments) {
+            arg.write(aJG);
+        }
+        aJG.writeEndArray();
+        aJG.writeEndArray();
     }
 
     @Override
