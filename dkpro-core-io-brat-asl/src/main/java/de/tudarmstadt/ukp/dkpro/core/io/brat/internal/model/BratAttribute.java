@@ -17,8 +17,11 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.fasterxml.jackson.core.JsonGenerator;
 
 public class BratAttribute
 {
@@ -74,6 +77,20 @@ public class BratAttribute
     public String[] getValues()
     {
         return values;
+    }
+    
+    
+    public void write(JsonGenerator aJG)
+        throws IOException
+    {
+        // Format: [${ID}, ${TYPE}, ${TARGET}]
+        // ['A1', 'Notorious', 'T4']
+        
+        aJG.writeStartArray();
+        aJG.writeString(id);
+        aJG.writeString(name);
+        aJG.writeString(target);
+        aJG.writeEndArray();
     }
     
     @Override

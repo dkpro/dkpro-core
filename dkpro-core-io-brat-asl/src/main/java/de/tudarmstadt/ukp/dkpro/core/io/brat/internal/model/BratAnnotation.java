@@ -17,9 +17,12 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import com.fasterxml.jackson.core.JsonGenerator;
 
 public abstract class BratAnnotation
 {
@@ -78,4 +81,7 @@ public abstract class BratAnnotation
         
         attributes.put(aAttribute.getName(), aAttribute);
     }
+    
+    public abstract void write(JsonGenerator aJG)
+        throws IOException;
 }

@@ -17,7 +17,11 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 
+import java.io.IOException;
+
 import org.apache.commons.lang.StringUtils;
+
+import com.fasterxml.jackson.core.JsonGenerator;
 
 public class BratLabelDecl
 {
@@ -36,6 +40,17 @@ public class BratLabelDecl
     public String[] getLabels()
     {
         return labels;
+    }
+    
+    public void write(JsonGenerator aJG)
+        throws IOException
+    {
+        aJG.writeFieldName("labels");
+        aJG.writeStartArray();
+        for (String label : labels) {
+            aJG.writeString(label);
+        }
+        aJG.writeEndArray();
     }
     
     @Override

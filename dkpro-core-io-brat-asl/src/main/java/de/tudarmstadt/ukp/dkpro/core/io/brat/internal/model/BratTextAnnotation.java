@@ -17,8 +17,11 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.fasterxml.jackson.core.JsonGenerator;
 
 public class BratTextAnnotation
     extends BratAnnotation
@@ -66,6 +69,26 @@ public class BratTextAnnotation
     public String getText()
     {
         return text;
+    }
+    
+    @Override
+    public void write(JsonGenerator aJG)
+        throws IOException
+    {
+        // Format: [${ID}, ${TYPE}, [[${START}, ${END}]]]
+        // note that range of the offsets are [${START},${END})
+        // ['T1', 'Person', [[0, 11]]]
+        
+        aJG.writeStartArray();
+        aJG.writeString(getId());
+        aJG.writeString(getType());
+        aJG.writeStartArray();
+        aJG.writeStartArray();
+        aJG.writeNumber(begin);
+        aJG.writeNumber(end);
+        aJG.writeEndArray();
+        aJG.writeEndArray();
+        aJG.writeEndArray();
     }
     
     @Override

@@ -17,6 +17,10 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 
+import java.io.IOException;
+
+import com.fasterxml.jackson.core.JsonGenerator;
+
 public abstract class BratDrawingDecl
 {
     private final String type;
@@ -32,7 +36,10 @@ public abstract class BratDrawingDecl
         return type;
     }
 
-    abstract String getSpec();
+    public abstract String getSpec();
+    
+    public abstract void write(JsonGenerator aJG)
+        throws IOException;
     
     @Override
     public String toString()

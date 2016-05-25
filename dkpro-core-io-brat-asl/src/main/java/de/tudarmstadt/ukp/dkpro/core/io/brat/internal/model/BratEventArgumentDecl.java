@@ -35,6 +35,11 @@ public class BratEventArgumentDecl
         range = aRange;
     }
 
+    public String getName()
+    {
+        return name;
+    }
+    
     public String getCardinality()
     {
         return cardinality;

@@ -27,12 +27,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+
 public class BratConfiguration
 {
     private Map<String, BratEventAnnotationDecl> events = new LinkedHashMap<>();
     private Map<String, BratTextAnnotationDecl> entities = new LinkedHashMap<>();
     private Map<String, BratRelationAnnotationDecl> relations = new LinkedHashMap<>();
     private Map<String, BratAttributeDecl> attributes = new LinkedHashMap<>();
+    private Map<String, BratLabelDecl> labels = new LinkedHashMap<>();
+    private Map<String, BratDrawingDecl> drawings = new LinkedHashMap<>();
 
     public void addEventDecl(BratEventAnnotationDecl aDecl)
     {
@@ -118,8 +122,155 @@ public class BratConfiguration
             }
         }
     }
+
+    public void addLabelDecl(String aType, String... aLabels)
+    {
+        labels.put(aType, new BratLabelDecl(aType, aLabels));
+    }
+
+    public void addDrawingDecl(BratAttributeDecl aAttribute)
+    {
+        drawings.put(aAttribute.getName(), new BratAttributeDrawingDecl(aAttribute));
+    }
     
-    public void write(Writer aWriter)
+    public BratDrawingDecl getDrawingDecl(String aType)
+    {
+        return drawings.get(aType);
+    }
+    
+    public void addDrawingDecl(BratDrawingDecl aDecl)
+    {
+        drawings.put(aDecl.getType(), aDecl);
+    }
+
+    public boolean hasDrawingDecl(String aType)
+    {
+        return drawings.containsKey(aType);
+    }
+
+    private void writeLabelAndStyle(JsonGenerator aJG, BratAnnotationDecl aDecl)
+        throws IOException
+    {
+        BratLabelDecl label = labels.get(aDecl.getType());
+        if (label != null) {
+            label.write(aJG);
+        }
+        
+        BratDrawingDecl draw = drawings.get(aDecl.getType());
+        if (draw != null) {
+            draw.write(aJG);
+        }
+    }
+    
+    public void write(JsonGenerator aJG)
+        throws IOException
+    {
+        aJG.writeStartObject();
+        
+        aJG.writeFieldName("entity_types");
+        aJG.writeStartArray();
+        for (BratTextAnnotationDecl decl : entities.values()) {
+            aJG.writeStartObject();
+            aJG.writeStringField("type", decl.getType());
+            writeLabelAndStyle(aJG, decl);
+            aJG.writeEndObject();
+        }
+        aJG.writeEndArray();
+
+        aJG.writeFieldName("entity_attribute_types");
+        aJG.writeStartArray();
+        for (BratAttributeDecl decl : attributes.values()) {
+            aJG.writeStartObject();
+            aJG.writeStringField("type", decl.getName());
+            aJG.writeFieldName("values");
+            aJG.writeStartArray();
+            aJG.writeStartObject();
+            for (String value : decl.getValues()) {
+                aJG.writeFieldName(value);
+                aJG.writeStartObject();
+                aJG.writeStringField("glyph", value);
+                aJG.writeEndObject();
+            }
+            aJG.writeEndObject();
+            aJG.writeEndArray();
+            aJG.writeEndObject();
+        }
+        aJG.writeEndArray();
+        
+        
+        aJG.writeFieldName("relation_types");
+        aJG.writeStartArray();
+        for (BratRelationAnnotationDecl decl : relations.values()) {
+            aJG.writeStartObject();
+            aJG.writeStringField("type", decl.getType());
+            aJG.writeFieldName("args");
+            aJG.writeStartArray();
+
+            // Arg 1
+            aJG.writeStartObject();
+            aJG.writeStringField("role", decl.getArg1Label());
+            aJG.writeFieldName("targets");
+            aJG.writeStartArray();
+            aJG.writeString(decl.getArg1Range());
+            aJG.writeEndArray();
+            aJG.writeEndObject();
+            
+            // Arg 2
+            aJG.writeStartObject();
+            aJG.writeStringField("role", decl.getArg2Label());
+            aJG.writeFieldName("targets");
+            aJG.writeStartArray();
+            aJG.writeString(decl.getArg2Range());
+            aJG.writeEndArray();
+            aJG.writeEndObject();
+            
+            aJG.writeEndArray();
+            writeLabelAndStyle(aJG, decl);
+            aJG.writeEndObject();
+        }
+        aJG.writeEndArray();
+
+        aJG.writeFieldName("event_types");
+        aJG.writeStartArray();
+        for (BratEventAnnotationDecl decl : events.values()) {
+            aJG.writeStartObject();
+            aJG.writeStringField("type", decl.getType());
+            
+            aJG.writeFieldName("arcs");
+            aJG.writeStartArray();
+            for (BratEventArgumentDecl arg : decl.getSlots()) {
+                aJG.writeStartObject();
+                aJG.writeStringField("type", arg.getName());
+                aJG.writeEndObject();
+            }
+            aJG.writeEndArray();
+
+            writeLabelAndStyle(aJG, decl);
+            aJG.writeEndObject();
+        }
+        aJG.writeEndArray();
+        
+        aJG.writeEndObject();
+    }
+    
+    public void writeVisualConfiguration(Writer aWriter)
+        throws IOException
+    {
+        aWriter.append("[labels]\n");
+        for (BratLabelDecl e : labels.values()) {
+            aWriter.append(e.toString());
+            aWriter.append('\n');
+        }
+
+        aWriter.append('\n');
+        aWriter.append("[drawing]\n");
+        for (BratDrawingDecl e : drawings.values()) {
+            aWriter.append(e.toString());
+            aWriter.append('\n');
+        }
+    }
+
+    public void writeAnnotationConfiguration(Writer aWriter)
         throws IOException
     {
         Set<BratAnnotationDecl> rendered = new HashSet<>();

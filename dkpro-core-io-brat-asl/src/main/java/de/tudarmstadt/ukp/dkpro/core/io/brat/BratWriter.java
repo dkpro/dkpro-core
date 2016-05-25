@@ -22,6 +22,7 @@ import static org.apache.uima.fit.util.JCasUtil.selectAll;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.StringWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,6 +35,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -46,6 +48,9 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.util.FSUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonGenerator;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratAnnotation;
@@ -60,7 +65,6 @@ import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratEventArgumentDec
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratRelationAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratTextAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratTextAnnotationDrawingDecl;
-import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratVisualConfiguration;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.RelationParam;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TypeMapping;
 
@@ -200,7 +204,6 @@ public class BratWriter extends JCasFileWriter_ImplBase
     private Map<FeatureStructure, String> spanIdMap;
     
     private BratConfiguration conf;
-    private BratVisualConfiguration visual;
     
     private Set<String> warnings;
     
@@ -210,7 +213,6 @@ public class BratWriter extends JCasFileWriter_ImplBase
     {
         super.initialize(aContext);
         conf = new BratConfiguration();
-        visual = new BratVisualConfiguration();
         
         warnings = new LinkedHashSet<String>();
         
@@ -243,7 +245,9 @@ public class BratWriter extends JCasFileWriter_ImplBase
         spanIdMap = new HashMap<>();
         
         try {
-            writeText(aJCas);
+            if (".ann".equals(filenameSuffix)) {
+                writeText(aJCas);
+            }
             writeAnnotations(aJCas);
         }
         catch (IOException e) {
@@ -255,8 +259,12 @@ public class BratWriter extends JCasFileWriter_ImplBase
     public void collectionProcessComplete()
         throws AnalysisEngineProcessException
     {
+        if (!".ann".equals(filenameSuffix)) {
+            return;
+        }
+        
         try {
-            writeConfiguration();
+            writeAnnotationConfiguration();
             writeVisualConfiguration();
         }
         catch (IOException e) {
@@ -268,11 +276,11 @@ public class BratWriter extends JCasFileWriter_ImplBase
         }
     }
     
-    private void writeConfiguration()
+    private void writeAnnotationConfiguration()
         throws IOException
     {
         try (Writer out = new OutputStreamWriter(getOutputStream("annotation", ".conf"), "UTF-8")) {
-            conf.write(out);
+            conf.writeAnnotationConfiguration(out);
         }
     }
 
@@ -280,7 +288,7 @@ public class BratWriter extends JCasFileWriter_ImplBase
         throws IOException
     {
         try (Writer out = new OutputStreamWriter(getOutputStream("visual", ".conf"), "UTF-8")) {
-            visual.write(out);
+            conf.writeVisualConfiguration(out);
         }
     }
 
@@ -337,8 +345,45 @@ public class BratWriter extends JCasFileWriter_ImplBase
             writeSlots(doc, e.getKey(), e.getValue());
         }
 
-        try (Writer out = new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix), "UTF-8")) {
-            doc.write(out);
+        switch (filenameSuffix) {
+        case ".ann":
+            try (Writer out = new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix), "UTF-8")) {
+                doc.write(out);
+                break;
+            }
+        case ".html":
+            String template = IOUtils.toString(getClass().getResource("html/template.html"));
+            
+            JsonFactory jfactory = new JsonFactory();
+            try (Writer out = new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix), "UTF-8")) {
+                String docData;
+                try (StringWriter buf = new StringWriter()) {
+                    try (JsonGenerator jg = jfactory.createGenerator(buf)) {
+                        jg.useDefaultPrettyPrinter();
+                        doc.write(jg, aJCas.getDocumentText());
+                    }
+                    docData = buf.toString();
+                }
+                
+                String collData;
+                try (StringWriter buf = new StringWriter()) {
+                    try (JsonGenerator jg = jfactory.createGenerator(buf)) {
+                        jg.useDefaultPrettyPrinter();
+                        conf.write(jg);
+                    }
+                    collData = buf.toString();
+                }
+
+                template = StringUtils.replaceEach(template, 
+                        new String[] {"##COLL-DATA##", "##DOC-DATA##"}, 
+                        new String[] {collData, docData}); 
+
+                out.write(template);
+            }
+            conf = new BratConfiguration();
+            break;
+        default:
+            throw new IllegalArgumentException("Unknown file format: [" + filenameSuffix + "]");
         }
     }
     
@@ -392,11 +437,11 @@ public class BratWriter extends JCasFileWriter_ImplBase
         
         // Slots are written later after we know all the span/event IDs
         
-        visual.addLabelDecl(event.getType(), aFS.getType().getShortName(), aFS.getType()
+        conf.addLabelDecl(event.getType(), aFS.getType().getShortName(), aFS.getType()
                 .getShortName().substring(0, 1));
 
-        if (!visual.hasDrawingDecl(event.getType())) {
-            visual.addDrawingDecl(new BratTextAnnotationDrawingDecl(event.getType(), "black",
+        if (!conf.hasDrawingDecl(event.getType())) {
+            conf.addDrawingDecl(new BratTextAnnotationDrawingDecl(event.getType(), "black",
                     palette[nextPaletteIndex % palette.length]));
             nextPaletteIndex++;
         }
@@ -531,7 +576,7 @@ public class BratWriter extends JCasFileWriter_ImplBase
         
         conf.addRelationDecl(superType, type, rel.getArg1(), rel.getArg2());
         
-        visual.addLabelDecl(anno.getType(), aFS.getType().getShortName(), aFS.getType()
+        conf.addLabelDecl(anno.getType(), aFS.getType().getShortName(), aFS.getType()
                 .getShortName().substring(0, 1));
         
         aDoc.addAnnotation(anno);
@@ -554,11 +599,11 @@ public class BratWriter extends JCasFileWriter_ImplBase
 
         conf.addEntityDecl(superType, type);
         
-        visual.addLabelDecl(anno.getType(), aFS.getType().getShortName(), aFS.getType()
+        conf.addLabelDecl(anno.getType(), aFS.getType().getShortName(), aFS.getType()
                 .getShortName().substring(0, 1));
 
-        if (!visual.hasDrawingDecl(anno.getType())) {
-            visual.addDrawingDecl(new BratTextAnnotationDrawingDecl(anno.getType(), "black",
+        if (!conf.hasDrawingDecl(anno.getType())) {
+            conf.addDrawingDecl(new BratTextAnnotationDrawingDecl(anno.getType(), "black",
                     palette[nextPaletteIndex % palette.length]));
             nextPaletteIndex++;
         }
@@ -640,7 +685,7 @@ public class BratWriter extends JCasFileWriter_ImplBase
                     aAnno.getType(),
                     getAllSubtypes(aFS.getCAS().getTypeSystem(), feat.getDomain()),
                     attributeName, featureValue);
-            visual.addDrawingDecl(attrDecl);
+            conf.addDrawingDecl(attrDecl);
         }
     }
     

@@ -29,6 +29,8 @@ import java.util.Map;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.LineIterator;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+
 public class BratAnnotationDocument
 {
     private Map<String, BratAnnotation> annotations = new LinkedHashMap<>();
@@ -103,6 +105,61 @@ public class BratAnnotationDocument
         return doc;
     }
     
+    public void write(JsonGenerator aJG, String aText) 
+        throws IOException
+    {
+        aJG.writeStartObject();
+
+        aJG.writeStringField("text", aText);
+        
+        aJG.writeFieldName("entities");
+        aJG.writeStartArray();
+        for (BratAnnotation ann : annotations.values()) {
+            if (ann instanceof BratTextAnnotation) {
+                ann.write(aJG);
+            }
+        }
+        aJG.writeEndArray();
+
+        aJG.writeFieldName("relations");
+        aJG.writeStartArray();
+        for (BratAnnotation ann : annotations.values()) {
+            if (ann instanceof BratRelationAnnotation) {
+                ann.write(aJG);
+            }
+        }
+        aJG.writeEndArray();
+
+        aJG.writeFieldName("triggers");
+        aJG.writeStartArray();
+        for (BratAnnotation ann : annotations.values()) {
+            if (ann instanceof BratEventAnnotation) {
+                ((BratEventAnnotation) ann).getTriggerAnnotation().write(aJG);
+            }
+        }
+        aJG.writeEndArray();
+        
+        aJG.writeFieldName("events");
+        aJG.writeStartArray();
+        for (BratAnnotation ann : annotations.values()) {
+            if (ann instanceof BratEventAnnotation) {
+                ann.write(aJG);
+            }
+        }
+        aJG.writeEndArray();
+
+        aJG.writeFieldName("attributes");
+        aJG.writeStartArray();
+        for (BratAnnotation ann : annotations.values()) {
+            for (BratAttribute attr : ann.getAttributes()) {
+                attr.write(aJG);
+            }
+        }
+        aJG.writeEndArray();
+
+        aJG.writeEndObject();
+    }
+    
     public void write(Writer aWriter)
         throws IOException
     {
@@ -121,7 +178,7 @@ public class BratAnnotationDocument
         
         // Second render all annotations that point to span annotations
         for (BratAnnotation anno : annotations.values()) {
-            // Skip the text annotations, we already rendered them in thef irst pass
+            // Skip the text annotations, we already rendered them in the first pass
             if (anno instanceof BratTextAnnotation) {
                 continue;
             }

@@ -31,19 +31,39 @@ public class BratRelationAnnotationDecl
         arg2Label = aArg2Label;
     }
 
+    public String getArg1Label()
+    {
+        return arg1Label;
+    }
+
+    public String getArg1Range()
+    {
+        return BratConstants.RANGE_ANY;
+    }
+
+    public String getArg2Label()
+    {
+        return arg2Label;
+    }
+
+    public String getArg2Range()
+    {
+        return BratConstants.RANGE_ANY;
+    }
+
     @Override
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
         sb.append(getType());
         sb.append('\t');
-        sb.append(arg1Label);
+        sb.append(getArg1Label());
         sb.append(':');
-        sb.append(BratConstants.RANGE_ANY);
+        sb.append(getArg1Range());
         sb.append(", ");
-        sb.append(arg2Label);
+        sb.append(getArg2Label());
         sb.append(':');
-        sb.append(BratConstants.RANGE_ANY);
+        sb.append(getArg2Range());
         return sb.toString();
     }
 }
