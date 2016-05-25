@@ -40,12 +40,19 @@
 
 	<target name="separate-jars" depends="de, en, es, fr, zh"/>
 
-	<target name="de">
+    <target name="de">
+        <antcall target="de-lemmatizer-tiger"/>
+        <antcall target="de-morphtagger-tiger"/>
+        <antcall target="de-tagger-tiger"/>
+        <antcall target="de-parser-tiger"/>
+        <antcall target="de-srl-tiger"/>
+    </target>
+	
+    <!-- FILE: tiger-complete.anna-3-1.lemmatizer.model - - - - - - -  - - - - - - - - - - - - - 
+      - 2012-10-24 | now        | 8ba8c53fe00c5fd254f347d7342b5e84
+      -->
+	<target name="de-lemmatizer-tiger">
 		<mkdir dir="target/download"/>
-
-		<!-- FILE: tiger-complete.anna-3-1.lemmatizer.model - - - - - - -  - - - - - - - - - - - - - 
-		  - 2012-10-24 | now        | 8ba8c53fe00c5fd254f347d7342b5e84
-		  -->
 		<get 
     		src="http://mate-tools.googlecode.com/files/tiger-complete.anna-3-1.lemmatizer.model" 
     		dest="target/download/lemmatizer-de-tiger.model" 
@@ -62,11 +69,13 @@
     		variant="tiger" 
     		extension="model" >
 		</install-stub-and-upstream-file>
-
-
-		<!-- FILE: tiger-complete.anna-3-1.morphtagger.model - - - - - - - - - - - - - - - - - - - - 
-		  - 2012-10-24 | now        | fb68d604f189feeb77afd06a023ddd59
-		  -->
+    </target>
+    
+    <!-- FILE: tiger-complete.anna-3-1.morphtagger.model - - - - - - - - - - - - - - - - - - - - 
+      - 2012-10-24 | now        | fb68d604f189feeb77afd06a023ddd59
+      -->
+    <target name="de-morphtagger-tiger">
+        <mkdir dir="target/download"/>
 		<get 
     		src="http://mate-tools.googlecode.com/files/tiger-complete.anna-3-1.morphtagger.model" 
     		dest="target/download/morphtagger-de-tiger.model" 
@@ -82,10 +91,13 @@
     		language="de" 
     		variant="tiger" 
     		extension="model"/>
-
-		<!-- FILE: tiger-complete.anna-3-1.postagger.model - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-10-24 | now        | 62539b0c8f6f4a30715cc64c0ac2bb9d
-		  -->
+    </target>
+    
+    <!-- FILE: tiger-complete.anna-3-1.postagger.model - - - - - - - - - - - - - - - - - - - - -
+      - 2012-10-24 | now        | 62539b0c8f6f4a30715cc64c0ac2bb9d
+      -->
+    <target name="de-tagger-tiger">
+        <mkdir dir="target/download"/>
 		<get 
     		src="http://mate-tools.googlecode.com/files/tiger-complete.anna-3-1.postagger.model" 
     		dest="target/download/tagger-de-tiger.model" 
@@ -105,10 +117,13 @@
 				<entry key="pos.tagset" value="stts"/>
 			</metadata>
 		</install-stub-and-upstream-file>
-
-		<!-- FILE: tiger-complete.anna-3-1.parser.model - - - - - - - - - - - - - - - - - - - - - - 
-		  - 2012-10-24 | now        | 015a08643dfc022ed9ff2378ef858af2
-		  -->
+    </target>
+    
+    <!-- FILE: tiger-complete.anna-3-1.parser.model - - - - - - - - - - - - - - - - - - - - - - 
+      - 2012-10-24 | now        | 015a08643dfc022ed9ff2378ef858af2
+      -->
+    <target name="de-parser-tiger">
+        <mkdir dir="target/download"/>
 		<get 
     		src="http://mate-tools.googlecode.com/files/tiger-complete.anna-3-1.parser.model" 
     		dest="target/download/parser-de-tiger.model" 
@@ -130,10 +145,13 @@
 				<entry key="dependency.tagset" value="negra"/>
 			</metadata>
 		</install-stub-and-upstream-file>
-		
-		<!-- FILE: tiger-complete-predsonly-srl-4.11.srl.model  - - - - - - - - - - - - - - - - - - - - - -				  
-				  - 2013-01-05 | now        | 7408c578b0b7ee3a43565a1f3b056876
-				  -->
+    </target>
+    
+    <!-- FILE: tiger-complete-predsonly-srl-4.11.srl.model  - - - - - - - - - - - - - - - - - - - - - -               
+      - 2013-01-05 | now        | 7408c578b0b7ee3a43565a1f3b056876
+      -->
+    <target name="de-srl-tiger">
+        <mkdir dir="target/download"/>
 		<get 
     		src="https://mate-tools.googlecode.com/files/tiger-complete-predsonly-srl-4.11.srl.model" 
     		dest="target/download/srl-de.model" 
@@ -152,12 +170,18 @@
 		</install-stub-and-upstream-file>		
 	</target>
 
-	<target name="en">
+    <target name="en">
+        <antcall target="en-lemmatizer-conll2009"/>
+        <antcall target="en-tagger-conll2009"/>
+        <antcall target="en-parser-conll2009"/>
+        <antcall target="en-srl-conll2009"/>
+    </target>
+	
+    <!-- FILE: CoNLL2009-ST-English-ALL.anna-3.3.lemmatizer.model - - - - - - - - - - - - - - - 
+      - 2013-01-17 | now        | 2b9bbdc88c84e3577b74ded1f214c42b
+      -->
+	<target name="en-lemmatizer-conll2009">
 		<mkdir dir="target/download"/>
-
-		<!-- FILE: CoNLL2009-ST-English-ALL.anna-3.3.lemmatizer.model - - - - - - - - - - - - - - - 
-		  - 2013-01-17 | now        | 2b9bbdc88c84e3577b74ded1f214c42b
-		  -->
 		<get 
     		src="http://mate-tools.googlecode.com/files/CoNLL2009-ST-English-ALL.anna-3.3.lemmatizer.model" 
     		dest="target/download/lemmatizer-en-conll2009.model" 
@@ -173,10 +197,13 @@
     		language="en" 
     		variant="conll2009" 
     		extension="model"/>
-
-		<!-- FILE: CoNLL2009-ST-English-ALL.anna-3.3.postagger.model - - - - - - - - - - - - - - - - 
-		  - 2013-01-17 | now        | f6d8bfdc70ffa41de4f009ec62423807
-		  -->
+    </target>
+    
+    <!-- FILE: CoNLL2009-ST-English-ALL.anna-3.3.postagger.model - - - - - - - - - - - - - - - - 
+      - 2013-01-17 | now        | f6d8bfdc70ffa41de4f009ec62423807
+      -->
+    <target name="en-tagger-conll2009">
+        <mkdir dir="target/download"/>
 		<get 
     		src="http://mate-tools.googlecode.com/files/CoNLL2009-ST-English-ALL.anna-3.3.postagger.model" 
     		dest="target/download/tagger-en-conll2009.model" 
@@ -196,10 +223,13 @@
 				<entry key="pos.tagset" value="ptb"/>
 			</metadata>
 		</install-stub-and-upstream-file>
-
-		<!-- FILE: CoNLL2009-ST-English-ALL.anna-3.3.parser.model - - - - - - - - - - - - - - - - - 
-		  - 2013-01-17 | now        | 50377962a1d2f37f953834bfb3b4b7b9
-		  -->
+    </target>
+    
+    <!-- FILE: CoNLL2009-ST-English-ALL.anna-3.3.parser.model - - - - - - - - - - - - - - - - - 
+      - 2013-01-17 | now        | 50377962a1d2f37f953834bfb3b4b7b9
+      -->
+    <target name="en-parser-conll2009">
+        <mkdir dir="target/download"/>
 		<get 
     		src="http://mate-tools.googlecode.com/files/CoNLL2009-ST-English-ALL.anna-3.3.parser.model" 
     		dest="target/download/parser-en-conll2009.model" 
@@ -220,11 +250,13 @@
 				<entry key="dependency.tagset" value="conll2008"/>
 			</metadata>
 		</install-stub-and-upstream-file>
-		
-
-		<!-- FILE: CoNLL2009-ST-English-ALL.anna-3.3.srl-4.1.srl.model - - - - - - - - - - - - - - - - - 
-		  - 2013-01-17 | now        | 5b6eafa91b6223899935a8c608dfbc17
-		  -->
+    </target>
+    
+    <!-- FILE: CoNLL2009-ST-English-ALL.anna-3.3.srl-4.1.srl.model - - - - - - - - - - - - - - - - - 
+      - 2013-01-17 | now        | 5b6eafa91b6223899935a8c608dfbc17
+      -->
+    <target name="en-srl-conll2009">
+        <mkdir dir="target/download"/>
 		<get 
     		src="https://mate-tools.googlecode.com/files/CoNLL2009-ST-English-ALL.anna-3.3.srl-4.1.srl.model" 
     		dest="target/download/srl-en.model" 
@@ -241,15 +273,22 @@
     		variant="conll2009" 
     		extension="model">			
 		</install-stub-and-upstream-file>
-		
-	</target>
+
+    </target>
 
 	<target name="fr">
-		<mkdir dir="target/download"/>
-
-		<!-- FILE: ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.lemmatizer.model- - - - - - - - - -
-		  - 2013-09-18 | now        | 42d0dcd2aefbd2a7e2a315ed240b460f
-		  -->
+        <mkdir dir="target/download"/>
+        <antcall target="fr-lemmatizer-ftb"/>
+        <antcall target="fr-morphtagger-ftb"/>
+        <antcall target="fr-tagger-ftb"/>
+        <antcall target="fr-parser-ftb"/>
+    </target>
+            
+    <!-- FILE: ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.lemmatizer.model- - - - - - - - - -
+      - 2013-09-18 | now        | 42d0dcd2aefbd2a7e2a315ed240b460f
+      -->
+	<target name="fr-lemmatizer-ftb">
+        <mkdir dir="target/download"/>
 		<get 
     		src="http://mate-tools.googlecode.com/files/ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.lemmatizer.model" 
     		dest="target/download/lemmatizer-fr-ftb.model" 
@@ -266,11 +305,13 @@
     		variant="ftb" 
     		extension="model" >
 		</install-stub-and-upstream-file>
+    </target>
 
-
-		<!-- FILE: ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.morphtagger.model - - - - - - - - -
-		  - 2013-09-18 | now        | d305f33557c185ce483658dff37762aa
-		  -->
+    <!-- FILE: ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.morphtagger.model - - - - - - - - -
+      - 2013-09-18 | now        | d305f33557c185ce483658dff37762aa
+      -->
+    <target name="fr-morphtagger-ftb">
+        <mkdir dir="target/download"/>
 		<get 
     		src="http://mate-tools.googlecode.com/files/ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.morphtagger.model" 
     		dest="target/download/morphtagger-fr-ftb.model" 
@@ -286,10 +327,13 @@
     		language="fr" 
     		variant="ftb" 
     		extension="model"/>
+    </target>
 
-		<!-- FILE: ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.postagger.model - - - - - - - - - -
-		  - 2013-09-18 | now        | 5bfa668db119e8974768480a5b5ef5d7
-		  -->
+    <!-- FILE: ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.postagger.model - - - - - - - - - -
+      - 2013-09-18 | now        | 5bfa668db119e8974768480a5b5ef5d7
+      -->
+    <target name="fr-tagger-ftb">
+        <mkdir dir="target/download"/>
 		<get 
     		src="http://mate-tools.googlecode.com/files/ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.postagger.model" 
     		dest="target/download/tagger-fr-ftb.model" 
@@ -310,10 +354,13 @@
 				<entry key="pos.tagset" value="melt"/>
 			</metadata>
 		</install-stub-and-upstream-file>
+    </target>
 
-		<!-- FILE: ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.parser.model - - - - - - - - - - - 
-		  - 2013-09-18 | now        | 37b1b7fad6a3798d0c9853036d928d37
-		  -->
+    <!-- FILE: ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.parser.model - - - - - - - - - - - 
+      - 2013-09-18 | now        | 37b1b7fad6a3798d0c9853036d928d37
+      -->
+    <target name="fr-parser-ftb">
+        <mkdir dir="target/download"/>
 		<get 
     		src="http://mate-tools.googlecode.com/files/ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.parser.model" 
     		dest="target/download/parser-fr-ftb.model" 
@@ -337,12 +384,19 @@
 		</install-stub-and-upstream-file>
 	</target>
 	
-	<target name="es">
-		<mkdir dir="target/download"/>
-
-		<!-- FILE: CoNLL2009-ST-Spanish-ALL.anna-3.3.lemmatizer.model - - - - - - - - - - - - - - - 
-		  - 2013-01-17 | now        | de0e3d1ee25602a0f7a57b58aa102422
-		  -->
+    <target name="es">
+        <antcall target="es-lemmatizer-conll2009"/>
+        <antcall target="es-morphtagger-conll2009"/>
+        <antcall target="es-tagger-conll2009"/>
+        <antcall target="es-parser-conll2009"/>
+        <antcall target="es-srl-conll2009"/>
+    </target>
+	
+    <!-- FILE: CoNLL2009-ST-Spanish-ALL.anna-3.3.lemmatizer.model - - - - - - - - - - - - - - - 
+      - 2013-01-17 | now        | de0e3d1ee25602a0f7a57b58aa102422
+      -->
+	<target name="es-lemmatizer-conll2009">
+        <mkdir dir="target/download"/>
 		<get 
     		src="http://mate-tools.googlecode.com/files/CoNLL2009-ST-Spanish-ALL.anna-3.3.lemmatizer.model" 
     		dest="target/download/lemmatizer-es-conll2009.model" 
@@ -359,10 +413,13 @@
     		variant="conll2009" 
     		extension="model">
 		</install-stub-and-upstream-file>
-
-		<!-- FILE: CoNLL2009-ST-Spanish-ALL.anna-3.3.morphtagger.model - - - - - - - - - - - - - - - 
-		  - 2013-01-17 | now        | 7e37d85f91120bcd8990d3bbd5af5fa2
-		  -->
+    </target>
+    
+    <!-- FILE: CoNLL2009-ST-Spanish-ALL.anna-3.3.morphtagger.model - - - - - - - - - - - - - - - 
+      - 2013-01-17 | now        | 7e37d85f91120bcd8990d3bbd5af5fa2
+      -->
+    <target name="es-morphtagger-conll2009">
+        <mkdir dir="target/download"/>
 		<get 
     		src="http://mate-tools.googlecode.com/files/CoNLL2009-ST-Spanish-ALL.anna-3.3.morphtagger.model" 
     		dest="target/download/morphtagger-es-conll2009.model" 
@@ -379,10 +436,13 @@
     		variant="conll2009" 
     		extension="model" >
 		</install-stub-and-upstream-file>
-
-		<!-- FILE: CoNLL2009-ST-Spanish-ALL.anna-3.3.postagger.model - - - - - - - - - - - - - - - -
-		  - 2013-01-17 | now        | 090c002511b0814ee67a563a7e7d897e
-		  -->
+    </target>
+    
+    <!-- FILE: CoNLL2009-ST-Spanish-ALL.anna-3.3.postagger.model - - - - - - - - - - - - - - - -
+      - 2013-01-17 | now        | 090c002511b0814ee67a563a7e7d897e
+      -->
+    <target name="es-tagger-conll2009">
+        <mkdir dir="target/download"/>
 		<get 
     		src="http://mate-tools.googlecode.com/files/CoNLL2009-ST-Spanish-ALL.anna-3.3.postagger.model" 
     		dest="target/download/tagger-es-conll2009.model" 
@@ -403,10 +463,13 @@
 				<entry key="pos.tagset" value="ancora"/>
 			</metadata>
 		</install-stub-and-upstream-file>
-
-		<!-- FILE: CoNLL2009-ST-Spanish-ALL.anna-3.3.parser.model - - - - - - - - - - - - - - - - - 
-		  - 2013-01-17 | now        | cacf5d5ab108c5fb690be5dfcac78b20
-		  -->
+    </target>
+    
+    <!-- FILE: CoNLL2009-ST-Spanish-ALL.anna-3.3.parser.model - - - - - - - - - - - - - - - - - 
+      - 2013-01-17 | now        | cacf5d5ab108c5fb690be5dfcac78b20
+      -->
+    <target name="es-parser-conll2009">
+        <mkdir dir="target/download"/>
 		<get 
     		src="http://mate-tools.googlecode.com/files/CoNLL2009-ST-Spanish-ALL.anna-3.3.parser.model" 
     		dest="target/download/parser-es-conll2009.model" 
@@ -429,10 +492,13 @@
 				<entry key="dependency.tagset" value="ancora"/>
 			</metadata>
 		</install-stub-and-upstream-file>
-		
-		<!-- FILE: CoNLL2009-ST-Spanish-ALL.anna-3.3.srl-4.21.srl-rr.model - - - - - - - - - - - - - - - - - 
-				  - 2013-03-20 | now        | b1634b7683d5af2715bf4ea0791c121b
-				  -->
+    </target>
+    
+    <!-- FILE: CoNLL2009-ST-Spanish-ALL.anna-3.3.srl-4.21.srl-rr.model - - - - - - - - - - - - - - - - - 
+      - 2013-03-20 | now        | b1634b7683d5af2715bf4ea0791c121b
+      -->
+    <target name="es-srl-conll2009">
+        <mkdir dir="target/download"/>
 		<get 
     		src="https://mate-tools.googlecode.com/files/CoNLL2009-ST-Spanish-ALL.anna-3.3.srl-4.21.srl-rr.model" 
     		dest="target/download/srl-es.model" 
@@ -449,15 +515,19 @@
     		variant="conll2009" 
     		extension="model">			
 		</install-stub-and-upstream-file>
-		
 	</target>
 
-	<target name="zh">
-		<mkdir dir="target/download"/>
-
-		<!-- FILE: CoNLL2009-ST-Chinese-ALL.anna-3.3.postagger.model - - - - - - - - - - - - - - - - 
-		  - 2013-01-17 | now        | e0d3ea8bab810ca05e7769afe8b88890
-		  -->
+    <target name="zh">
+        <antcall target="zh-tagger-conll2009"/>
+        <antcall target="zh-parser-conll2009"/>
+        <antcall target="zh-srl-conll2009"/>
+    </target>
+	
+    <!-- FILE: CoNLL2009-ST-Chinese-ALL.anna-3.3.postagger.model - - - - - - - - - - - - - - - - 
+      - 2013-01-17 | now        | e0d3ea8bab810ca05e7769afe8b88890
+      -->
+	<target name="zh-tagger-conll2009">
+        <mkdir dir="target/download"/>
 		<get 
     		src="http://mate-tools.googlecode.com/files/CoNLL2009-ST-Chinese-ALL.anna-3.3.postagger.model" 
     		dest="target/download/tagger-zh-conll2009.model" 
@@ -477,10 +547,13 @@
 				<entry key="pos.tagset" value="ctb"/>
 			</metadata>
 		</install-stub-and-upstream-file>
+    </target>
 
-		<!-- FILE: CoNLL2009-ST-Chinese-ALL.anna-3.3.parser.model - - - - - - - - - - - - - - - - - 
-		  - 2013-01-17 | now        | 1a594bff47dafa43ed608dd5f0005f42
-		  -->
+    <!-- FILE: CoNLL2009-ST-Chinese-ALL.anna-3.3.parser.model - - - - - - - - - - - - - - - - - 
+      - 2013-01-17 | now        | 1a594bff47dafa43ed608dd5f0005f42
+      -->
+    <target name="zh-parser-conll2009">
+        <mkdir dir="target/download"/>
 		<get 
     		src="http://mate-tools.googlecode.com/files/CoNLL2009-ST-Chinese-ALL.anna-3.3.parser.model" 
     		dest="target/download/parser-zh-conll2009.model" 
@@ -503,10 +576,13 @@
 				<entry key="dependency.tagset" value="cpb"/>
 			</metadata>
 		</install-stub-and-upstream-file>
-		
-		<!-- FILE: CoNLL2009-ST-Chinese-ALL.anna-3.3.srl-4.1.srl.model - - - - - - - - - - - - - - - - - 
-						  - 2013-01-17 | now        | 453d5adfd9417a07c0100aca7b78b766
-						  -->
+    </target>
+
+    <!-- FILE: CoNLL2009-ST-Chinese-ALL.anna-3.3.srl-4.1.srl.model - - - - - - - - - - - - - - - - - 
+      - 2013-01-17 | now        | 453d5adfd9417a07c0100aca7b78b766
+      -->
+    <target name="zh-srl-conll2009">
+        <mkdir dir="target/download"/>
 		<get 
     		src="https://mate-tools.googlecode.com/files/CoNLL2009-ST-Chinese-ALL.anna-3.3.srl-4.1.srl.model" 
     		dest="target/download/srl-zh.model" 
