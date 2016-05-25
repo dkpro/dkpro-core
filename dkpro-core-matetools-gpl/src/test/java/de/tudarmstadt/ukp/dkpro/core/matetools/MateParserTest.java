@@ -58,18 +58,17 @@ public class MateParserTest
                 "[101,111]Dependency(RC) D[101,111](beinhaltet) G[36,44](Beispiel)",
                 "[112,113]Dependency(--) D[112,113](.) G[101,111](beinhaltet)" };
 
-        String[] posTags = { "$(", "$,", "$.", "<None>", "<root-POS>", "ADJA", "ADJD", "ADV",
-                "APPO", "APPR", "APPRART", "APZR", "ART", "CARD", "END", "FM", "ITJ", "KOKOM",
-                "KON", "KOUI", "KOUS", "MID", "NE", "NN", "NNE", "PDAT", "PDS", "PIAT", "PIS",
-                "PPER", "PPOSAT", "PPOSS", "PRELAT", "PRELS", "PRF", "PROAV", "PTKA", "PTKANT",
-                "PTKNEG", "PTKVZ", "PTKZU", "PWAT", "PWAV", "PWS", "STPOS", "STR", "TRUNC",
-                "VAFIN", "VAIMP", "VAINF", "VAPP", "VMFIN", "VMINF", "VMPP", "VVFIN", "VVIMP",
-                "VVINF", "VVIZU", "VVPP", "XY" };
+        String[] posTags = { "$(", "$,", "$.", "ADJA", "ADJD", "ADV", "APPO", "APPR", "APPRART",
+                "APZR", "ART", "CARD", "END", "FM", "ITJ", "KOKOM", "KON", "KOUI", "KOUS", "MID",
+                "NE", "NN", "NNE", "PDAT", "PDS", "PIAT", "PIS", "PPER", "PPOSAT", "PPOSS",
+                "PRELAT", "PRELS", "PRF", "PROAV", "PTKA", "PTKANT", "PTKNEG", "PTKVZ", "PTKZU",
+                "PWAT", "PWAV", "PWS", "STPOS", "STR", "TRUNC", "VAFIN", "VAIMP", "VAINF", "VAPP",
+                "VMFIN", "VMINF", "VMPP", "VVFIN", "VVIMP", "VVINF", "VVIZU", "VVPP", "XY" };
 
-        String[] dependencyTags = { "--", "<None>", "<no-type>", "<root-type>", "AC", "ADC", "AG",
-                "AMS", "APP", "AVC", "CC", "CD", "CJ", "CM", "CP", "CVC", "DA", "DM", "END", "EP",
-                "JU", "MNR", "MO", "NG", "NK", "NMC", "OA", "OA2", "OC", "OG", "OP", "PAR", "PD",
-                "PG", "PH", "PM", "PNC", "RC", "RE", "RS", "SB", "SBP", "SP", "SVP", "UC", "VO" };
+        String[] dependencyTags = { "--", "AC", "ADC", "AG", "AMS", "APP", "AVC", "CC", "CD", "CJ",
+                "CM", "CP", "CVC", "DA", "DM", "END", "EP", "JU", "MNR", "MO", "NG", "NK", "NMC",
+                "OA", "OA2", "OC", "OG", "OP", "PAR", "PD", "PG", "PH", "PM", "PNC", "RC", "RE",
+                "RS", "SB", "SBP", "SP", "SVP", "UC", "VO" };
 
 		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "stts", posTags, jcas);
@@ -103,21 +102,21 @@ public class MateParserTest
                 "[102,110]Dependency(PMOD) D[102,110](possible) G[99,101](as)",
                 "[111,112]Dependency(P) D[111,112](.) G[3,7](need)" };
 
-        String[] posTags = { "#", "$", "''", "(", ")", ",", ".", ":", "<None>",
-                "<root-POS>", "CC", "CD", "DT", "END", "EX", "FW", "HYPH", "IN", "JJ", "JJR",
-                "JJS", "LS", "MD", "MID", "NIL", "NN", "NNP", "NNPS", "NNS", "PDT", "POS", "PRF",
-                "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "STPOS", "STR", "SYM", "TO", "UH", "VB",
-                "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB", "``" };
+        String[] posTags = { "#", "$", "''", "(", ")", ",", ".", ":", "CC", "CD", "DT", "END",
+                "EX", "FW", "HYPH", "IN", "JJ", "JJR", "JJS", "LS", "MD", "MID", "NIL", "NN",
+                "NNP", "NNPS", "NNS", "PDT", "POS", "PRF", "PRP", "PRP$", "RB", "RBR", "RBS", "RP",
+                "STPOS", "STR", "SYM", "TO", "UH", "VB", "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT",
+                "WP", "WP$", "WRB", "``" };
 
-        String[] dependencyTags = { "<None>", "<no-type>", "<root-type>", "ADV",
-                "ADV-GAP", "AMOD", "AMOD-GAP", "APPO", "BNF", "CONJ", "COORD", "DEP", "DEP-GAP",
-                "DIR", "DIR-GAP", "DIR-OPRD", "DIR-PRD", "DTV", "DTV-GAP", "END", "EXT", "EXT-GAP",
-                "EXTR", "EXTR-GAP", "GAP-LGS", "GAP-LOC", "GAP-LOC-PRD", "GAP-MNR", "GAP-NMOD",
-                "GAP-OBJ", "GAP-OPRD", "GAP-PMOD", "GAP-PRD", "GAP-PRP", "GAP-PUT", "GAP-SBJ",
-                "GAP-SUB", "GAP-TMP", "GAP-VC", "HMOD", "HYPH", "IM", "LGS", "LOC", "LOC-MNR",
-                "LOC-OPRD", "LOC-PRD", "LOC-TMP", "MNR", "MNR-PRD", "MNR-TMP", "NAME", "NMOD",
-                "OBJ", "OPRD", "P", "PMOD", "POSTHON", "PRD", "PRD-PRP", "PRD-TMP", "PRN", "PRP",
-                "PRT", "PUT", "ROOT", "SBJ", "SUB", "SUFFIX", "TITLE", "TMP", "VC", "VOC" };
+        String[] dependencyTags = { "ADV", "ADV-GAP", "AMOD", "AMOD-GAP", "APPO", "BNF", "CONJ",
+                "COORD", "DEP", "DEP-GAP", "DIR", "DIR-GAP", "DIR-OPRD", "DIR-PRD", "DTV",
+                "DTV-GAP", "END", "EXT", "EXT-GAP", "EXTR", "EXTR-GAP", "GAP-LGS", "GAP-LOC",
+                "GAP-LOC-PRD", "GAP-MNR", "GAP-NMOD", "GAP-OBJ", "GAP-OPRD", "GAP-PMOD", "GAP-PRD",
+                "GAP-PRP", "GAP-PUT", "GAP-SBJ", "GAP-SUB", "GAP-TMP", "GAP-VC", "HMOD", "HYPH",
+                "IM", "LGS", "LOC", "LOC-MNR", "LOC-OPRD", "LOC-PRD", "LOC-TMP", "MNR", "MNR-PRD",
+                "MNR-TMP", "NAME", "NMOD", "OBJ", "OPRD", "P", "PMOD", "POSTHON", "PRD", "PRD-PRP",
+                "PRD-TMP", "PRN", "PRP", "PRT", "PUT", "ROOT", "SBJ", "SUB", "SUFFIX", "TITLE",
+                "TMP", "VC", "VOC" };
 
         AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
@@ -161,20 +160,18 @@ public class MateParserTest
         String[] posOriginal = { "CLS", "V", "NC", "P", "NC", "P", "NC", "ADV", "ADJ",
                 "PROREL", "V", "DET", "NC", "CS", "DET", "ADJ", "NC", "CC", "CS", "ADJ", "PONCT" };
 
-        String[] posTags = { "<None>", "<root-POS>", "ADJ", "ADJWH", "ADV", "ADVWH",
+        String[] posTags = { "ADJ", "ADJWH", "ADV", "ADVWH",
                 "CC", "CLO", "CLR", "CLS", "CS", "DET", "DETWH", "END", "ET", "I", "MID", "NC",
                 "NPP", "P", "P+D", "P+PRO", "PONCT", "PREF", "PRO", "PROREL", "PROWH", "STPOS",
                 "STR", "V", "VIMP", "VINF", "VPP", "VPR", "VS" };
 
-        String[] depTags = { "<None>", "<no-type>", "<root-type>", "END", "a_obj",
-                "aff", "arg", "ato", "ats", "aux_caus", "aux_pass", "aux_tps", "comp", "coord",
-                "de_obj", "dep", "dep_coord", "det", "missinghead", "mod", "mod_rel", "obj",
-                "obj1", "p_obj", "ponct", "root", "suj" };
+        String[] depTags = { "END", "a_obj", "aff", "arg", "ato", "ats", "aux_caus", "aux_pass",
+                "aux_tps", "comp", "coord", "de_obj", "dep", "dep_coord", "det", "missinghead",
+                "mod", "mod_rel", "obj", "obj1", "p_obj", "ponct", "root", "suj" };
 
-        String[] unmappedPos = { "<None>", "<root-POS>", "END", "MID", "STPOS", "STR" };
+        String[] unmappedPos = { "END", "MID", "STPOS", "STR" };
 
-        String[] unmappedDep = { "<None>", "<no-type>", "<root-type>", "END", "comp",
-                "missinghead", "obj1", "root" };
+        String[] unmappedDep = { "END", "comp", "missinghead", "obj1", "root" };
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));

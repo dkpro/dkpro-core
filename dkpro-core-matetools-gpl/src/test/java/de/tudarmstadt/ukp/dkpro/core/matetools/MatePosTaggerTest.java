@@ -40,23 +40,21 @@ public class MatePosTaggerTest
         JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel , welches "
                 + "möglichst viele Konstituenten und Dependenzen beinhaltet .");
 
-        String[] posOriginal = { "PPER", "VVFIN", "ART", "ADV", "ADJA", "NN", "$,",
-                "PRELS", "ADV", "PIAT", "NN", "KON", "NN", "VVFIN", "$." };
+        String[] posOriginal = { "PPER", "VVFIN", "ART", "ADV", "ADJA", "NN", "$,", "PRELS", "ADV",
+                "PIAT", "NN", "KON", "NN", "VVFIN", "$." };
 
-        String[] posMapped = { "PR", "V", "ART", "ADV", "ADJ", "NN", "PUNC", "PR",
-                "ADV", "PR", "NN", "CONJ", "NN", "V", "PUNC" };
+        String[] posMapped = { "PR", "V", "ART", "ADV", "ADJ", "NN", "PUNC", "PR", "ADV", "PR",
+                "NN", "CONJ", "NN", "V", "PUNC" };
 
-        String[] posTags = { "$(", "$,", "$.", "<None>", "<root-POS>", "ADJA", "ADJD",
-                "ADV", "APPO", "APPR", "APPRART", "APZR", "ART", "CARD", "END", "FM", "ITJ",
-                "KOKOM", "KON", "KOUI", "KOUS", "MID", "NE", "NN", "NNE", "PDAT", "PDS", "PIAT",
-                "PIS", "PPER", "PPOSAT", "PPOSS", "PRELAT", "PRELS", "PRF", "PROAV", "PTKA",
-                "PTKANT", "PTKNEG", "PTKVZ", "PTKZU", "PWAT", "PWAV", "PWS", "STPOS", "STR",
-                "TRUNC", "VAFIN", "VAIMP", "VAINF", "VAPP", "VMFIN", "VMINF", "VMPP", "VVFIN",
-                "VVIMP", "VVINF", "VVIZU", "VVPP", "XY" };
+        String[] posTags = { "$(", "$,", "$.", "ADJA", "ADJD", "ADV", "APPO", "APPR", "APPRART",
+                "APZR", "ART", "CARD", "END", "FM", "ITJ", "KOKOM", "KON", "KOUI", "KOUS", "MID",
+                "NE", "NN", "NNE", "PDAT", "PDS", "PIAT", "PIS", "PPER", "PPOSAT", "PPOSS",
+                "PRELAT", "PRELS", "PRF", "PROAV", "PTKA", "PTKANT", "PTKNEG", "PTKVZ", "PTKZU",
+                "PWAT", "PWAV", "PWS", "STPOS", "STR", "TRUNC", "VAFIN", "VAIMP", "VAINF", "VAPP",
+                "VMFIN", "VMINF", "VMPP", "VVFIN", "VVIMP", "VVINF", "VVIZU", "VVPP", "XY" };
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertTagset(POS.class, "stts", posTags, jcas);
-
     }
 
     @Test
@@ -68,17 +66,17 @@ public class MatePosTaggerTest
         JCas jcas = runTest("en", "We need a very complicated example sentence , which " +
                 "contains as many constituents and dependencies as possible .");
 
-        String[] posOriginal = { "PRP", "VBP", "DT", "RB", "JJ", "NN", "NN", ",",
-                "WDT", "VBZ", "IN", "DT", "NNS", "CC", "NNS", "IN", "JJ", "." };
+        String[] posOriginal = { "PRP", "VBP", "DT", "RB", "JJ", "NN", "NN", ",", "WDT", "VBZ",
+                "IN", "DT", "NNS", "CC", "NNS", "IN", "JJ", "." };
 
-        String[] posMapped = { "PR", "V", "ART", "ADV", "ADJ", "NN", "NN", "PUNC",
-                "ART", "V", "PP", "ART", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC"};
+        String[] posMapped = { "PR", "V", "ART", "ADV", "ADJ", "NN", "NN", "PUNC", "ART", "V",
+                "PP", "ART", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
 
-        String[] posTags = { "#", "$", "''", "(", ")", ",", ".", ":", "<None>",
-                "<root-POS>", "CC", "CD", "DT", "END", "EX", "FW", "HYPH", "IN", "JJ", "JJR",
-                "JJS", "LS", "MD", "MID", "NIL", "NN", "NNP", "NNPS", "NNS", "PDT", "POS", "PRF",
-                "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "STPOS", "STR", "SYM", "TO", "UH", "VB",
-                "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB", "``" };
+        String[] posTags = { "#", "$", "''", "(", ")", ",", ".", ":", "CC", "CD", "DT", "END",
+                "EX", "FW", "HYPH", "IN", "JJ", "JJR", "JJS", "LS", "MD", "MID", "NIL", "NN",
+                "NNP", "NNPS", "NNS", "PDT", "POS", "PRF", "PRP", "PRP$", "RB", "RBR", "RBS", "RP",
+                "STPOS", "STR", "SYM", "TO", "UH", "VB", "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT",
+                "WP", "WP$", "WRB", "``" };
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
@@ -92,20 +90,18 @@ public class MatePosTaggerTest
                 + "compliqué, qui contient des constituants que de nombreuses dépendances et que "
                 + "possible .");
 
-        String[] posMapped = { "PR", "V", "NN", "PP", "NN", "PP", "NN", "ADV", "ADJ",
-                "PR", "V", "ART", "NN", "CONJ", "ART", "ADJ", "NN", "CONJ", "CONJ", "ADJ",
-                "PUNC" };
+        String[] posMapped = { "PR", "V", "NN", "PP", "NN", "PP", "NN", "ADV", "ADJ", "PR", "V",
+                "ART", "NN", "CONJ", "ART", "ADJ", "NN", "CONJ", "CONJ", "ADJ", "PUNC" };
 
-        String[] posOriginal = { "CLS", "V", "NC", "P", "NC", "P", "NC", "ADV",
-                "ADJ", "PROREL", "V", "DET", "NC", "CS", "DET", "ADJ", "NC", "CC", "CS", "ADJ",
-                "PONCT" };
+        String[] posOriginal = { "CLS", "V", "NC", "P", "NC", "P", "NC", "ADV", "ADJ", "PROREL",
+                "V", "DET", "NC", "CS", "DET", "ADJ", "NC", "CC", "CS", "ADJ", "PONCT" };
 
-        String[] posTags = { "<None>", "<root-POS>", "ADJ", "ADJWH", "ADV", "ADVWH",
-                "CC", "CLO", "CLR", "CLS", "CS", "DET", "DETWH", "END", "ET", "I", "MID", "NC",
-                "NPP", "P", "P+D", "P+PRO", "PONCT", "PREF", "PRO", "PROREL", "PROWH", "STPOS",
-                "STR", "V", "VIMP", "VINF", "VPP", "VPR", "VS" };
+        String[] posTags = { "ADJ", "ADJWH", "ADV", "ADVWH", "CC", "CLO", "CLR", "CLS", "CS",
+                "DET", "DETWH", "END", "ET", "I", "MID", "NC", "NPP", "P", "P+D", "P+PRO", "PONCT",
+                "PREF", "PRO", "PROREL", "PROWH", "STPOS", "STR", "V", "VIMP", "VINF", "VPP",
+                "VPR", "VS" };
 
-        String[] unmappedPos = { "<None>", "<root-POS>", "END", "MID", "STPOS", "STR" };
+        String[] unmappedPos = { "END", "MID", "STPOS", "STR" };
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 

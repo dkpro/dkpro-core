@@ -18,6 +18,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.matetools;
 
+import static java.util.Arrays.asList;
 import static org.apache.uima.util.Level.INFO;
 import is2.data.SentenceData09;
 import is2.io.CONLLReader09;
@@ -143,12 +144,14 @@ public class MateParser
                         POS.class, metadata.getProperty("pos.tagset"));
                 HashMap<String, Integer> posTagFeatures = featureSet.get("POS");
                 posTags.addAll(posTagFeatures.keySet());
+                posTags.removeAll(asList("<None>", "<root-POS>"));
                 addTagset(posTags);
 
                 SingletonTagset depTags = new SingletonTagset(
                         Dependency.class, metadata.getProperty("dependency.tagset"));
                 HashMap<String, Integer> depTagFeatures = featureSet.get("REL");
                 depTags.addAll(depTagFeatures.keySet());
+                depTags.removeAll(asList("<None>", "<no-type>", "<root-type>"));
                 addTagset(depTags);
 
                 if (printTagSet) {
