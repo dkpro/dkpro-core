@@ -1,0 +1,146 @@
+# Stanford (3.4.1)
+#
+# Stanford typed dependencies
+#
+# Change in CoreNLP 3.3.1: In the English dependencies, "infmod" and "partmod" have been combined
+# into "vmod".
+# Change in CoreNLP 3.4.1: In the English dependencies, "xsubj" has been merged into "nsubj"
+
+__META_SOURCE_URL__=http://nlp.stanford.edu/software/dependencies_manual.pdf
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.
+
+# abbrev: abbreviation modifier
+abbrev=ABBREV
+# acomp: adjectival complement
+acomp=ACOMP
+# advcl: adverbial clause modifier
+advcl=ADVCL
+# advmod: adverbial modifier
+advmod=ADVMOD
+# agent: agent
+agent=AGENT
+# amod: adjectival modifier
+amod=AMOD
+# appos: appositional modifier
+appos=APPOS
+# arg: argument
+arg=Dependency
+# attr: attributive
+attr=ATTR
+# aux: auxiliary
+aux=Dependency
+# auxpass: passive auxiliary
+auxpass=AUXPASS
+# cc: coordination
+cc=CC
+# ccomp: clausal complement
+ccomp=CCOMP
+# comp: complement
+comp=Dependency
+# complm: complementizer
+complm=COMPLM
+# conj: conjunct
+conj=CONJ
+# cop: copula
+cop=COP
+# csubj : clausal subject
+csubj=CSUBJ
+# csubjpass: clausal passive subject
+csubjpass=CSUBJPASS
+# dep: dependent
+dep=DEP
+# det: determiner
+det=DET
+# discourse: discourse element
+discourse=Dependency
+# dobj : direct object
+dobj=DOBJ
+# expl: expletive
+expl=EXPL
+# goeswith: goes with
+goeswith=Dependency
+# iobj : indirect object
+iobj=IOBJ
+# mark: marker
+mark=MARK
+# mod: modifier
+mod=Dependency
+# mwe: multi-word expression
+mwe=MWE
+# neg: negation modifier
+neg=NEG
+# nn: noun compound modifier
+nn=NN
+# npadvmod: noun phrase as adverbial modifier
+npadvmod=NPADVMOD
+# nsubj : nominal subject
+nsubj=NSUBJ
+# nsubjpass: passive nominal subject
+nsubjpass=NSUBJPASS
+# num: numeric modifier
+num=NUM
+# number: element of compound number
+number=NUMBER
+# obj: object
+obj=Dependency
+# parataxis: parataxis
+parataxis=PARATAXIS
+# pcomp: prepositional complement
+pcomp=PCOMP
+# pobj: object of a preposition
+pobj=POBJ
+# poss: possession modifier
+poss=POSS
+# possessive: possessive modifier
+possessive=POSSESSIVE
+# preconj: preconjunct
+preconj=PRECONJ
+# pred: predicate
+pred=PRED
+# predet: predeterminer
+predet=PREDET
+# prep: prepositional modifier
+prep=PREP
+# prepc: prepositional clausal modifier
+prepc=PREPC
+# prt: phrasal verb particle
+prt=PRT
+# punct: punctuation
+punct=PUNCT
+# purpcl: purpose clause modifier
+purpcl=PURPCL
+# quantmod: quantifier phrase modifier
+quantmod=QUANTMOD
+# rcmod: relative clause modifier
+rcmod=RCMOD
+# ref: referent
+ref=REF
+# rel: relative
+rel=REL
+# root: root
+root=ROOT
+# sdep: semantic dependent
+sdep=Dependency
+# subj: subject
+subj=Dependency
+# tmod: temporal modifier
+tmod=TMOD
+# vmod: verb modifier
+vmod=Dependency
+# xcomp: open clausal complement
+xcomp=XCOMP
+
+#
+# Additional tags used in Clear NLP ontoparser model
+#
+# HMOD
+# HYPH
+# INTJ
+# META
+# NMOD
+# OPRD
+
+#
+# Categories used by DKPro internally
+#
+*=Dependency

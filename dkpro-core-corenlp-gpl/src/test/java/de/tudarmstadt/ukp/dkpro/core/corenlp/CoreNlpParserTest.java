@@ -66,7 +66,7 @@ public class CoreNlpParserTest
             "NNPS", "NNS", "PDT", "POS", "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "SYM", "TO", "UH",
             "VB", "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB", "``" };
 
-    private static final String[] ENGLISH_POS_UNMAPPED = { "$" };
+    private static final String[] ENGLISH_POS_UNMAPPED = {};
 
     private static final String[] ENGLISH_CONSTITUENT_TAGS = { "ADJP", "ADVP", "CONJP", "FRAG",
             "INTJ", "LST", "NAC", "NP", "NX", "PP", "PRN", "PRT", "QP", "ROOT", "RRC", "S", "SBAR",
@@ -667,6 +667,8 @@ public class CoreNlpParserTest
         AnalysisEngineDescription engine = createEngineDescription(
                 createEngineDescription(CoreNlpPosTagger.class),
                 createEngineDescription(CoreNlpParser.class,
+                        CoreNlpParser.PARAM_READ_POS, true,
+                        CoreNlpParser.PARAM_WRITE_POS, false,
                         CoreNlpParser.PARAM_WRITE_PENN_TREE, true));
         
         JCas jcas = TestRunner.runTest(engine, "en", "This is a test .");
@@ -792,22 +794,22 @@ public class CoreNlpParserTest
                 "ROOT 0,47", "VP 26,34", "VP 26,45", "VP 3,19", "VP 37,45", "VP 43,45" };
 
         String[] dependencies = {
-                "[  0,  2]Dependency(nsubj) D[0,2](我们) G[3,5](需要)",
+                "[  0,  2]NSUBJ(nsubj) D[0,2](我们) G[3,5](需要)",
                 "[  3,  5]ROOT(root) D[3,5](需要) G[3,5](需要)",
                 "[  6,  8]Dependency(nummod) D[6,8](一个) G[17,19](句子)",
-                "[  9, 11]Dependency(advmod) D[9,11](非常) G[12,14](复杂)",
+                "[  9, 11]ADVMOD(advmod) D[9,11](非常) G[12,14](复杂)",
                 "[ 12, 14]Dependency(assmod) D[12,14](复杂) G[17,19](句子)",
                 "[ 15, 16]Dependency(case) D[15,16](的) G[12,14](复杂)",
-                "[ 17, 19]Dependency(dobj) D[17,19](句子) G[3,5](需要)",
-                "[ 20, 22]Dependency(advmod) D[20,22](例如) G[26,28](包含)",
-                "[ 23, 25]Dependency(nsubj) D[23,25](其中) G[26,28](包含)",
-                "[ 26, 28]Dependency(conj) D[26,28](包含) G[3,5](需要)",
+                "[ 17, 19]DOBJ(dobj) D[17,19](句子) G[3,5](需要)",
+                "[ 20, 22]ADVMOD(advmod) D[20,22](例如) G[26,28](包含)",
+                "[ 23, 25]NSUBJ(nsubj) D[23,25](其中) G[26,28](包含)",
+                "[ 26, 28]CONJ(conj) D[26,28](包含) G[3,5](需要)",
                 "[ 29, 31]Dependency(nummod) D[29,31](许多) G[32,34](成分)",
-                "[ 32, 34]Dependency(dobj) D[32,34](成分) G[26,28](包含)",
-                "[ 35, 36]Dependency(cc) D[35,36](和) G[26,28](包含)",
+                "[ 32, 34]DOBJ(dobj) D[32,34](成分) G[26,28](包含)",
+                "[ 35, 36]CC(cc) D[35,36](和) G[26,28](包含)",
                 "[ 37, 40]Dependency(dvpmod) D[37,40](尽可能) G[43,45](依赖)",
-                "[ 41, 42]Dependency(mark) D[41,42](的) G[37,40](尽可能)",
-                "[ 43, 45]Dependency(conj) D[43,45](依赖) G[26,28](包含)" };
+                "[ 41, 42]MARK(mark) D[41,42](的) G[37,40](尽可能)",
+                "[ 43, 45]CONJ(conj) D[43,45](依赖) G[26,28](包含)" };
 
         String[] posMapped = { "PR", "V", "CARD", "ADJ", "ADJ", "PRT", "NN", "ADJ", "NN", "V",
                 "CARD", "NN", "CONJ", "ADJ", "PRT", "V", "PUNC" };
@@ -868,22 +870,22 @@ public class CoreNlpParserTest
                 "VP 9,14" };
 
         String[] dependencies = {
-                "[  0,  2]Dependency(nsubj) D[0,2](我们) G[3,5](需要)",
+                "[  0,  2]NSUBJ(nsubj) D[0,2](我们) G[3,5](需要)",
                 "[  3,  5]ROOT(root) D[3,5](需要) G[3,5](需要)",
                 "[  6,  8]Dependency(nummod) D[6,8](一个) G[43,45](依赖)",
-                "[  9, 11]Dependency(advmod) D[9,11](非常) G[12,14](复杂)",
+                "[  9, 11]ADVMOD(advmod) D[9,11](非常) G[12,14](复杂)",
                 "[ 12, 14]Dependency(relcl) D[12,14](复杂) G[17,19](句子)",
-                "[ 15, 16]Dependency(mark) D[15,16](的) G[12,14](复杂)",
-                "[ 17, 19]Dependency(nsubj) D[17,19](句子) G[26,28](包含)",
-                "[ 20, 22]Dependency(advmod) D[20,22](例如) G[26,28](包含)",
-                "[ 23, 25]Dependency(nsubj) D[23,25](其中) G[26,28](包含)",
+                "[ 15, 16]MARK(mark) D[15,16](的) G[12,14](复杂)",
+                "[ 17, 19]NSUBJ(nsubj) D[17,19](句子) G[26,28](包含)",
+                "[ 20, 22]ADVMOD(advmod) D[20,22](例如) G[26,28](包含)",
+                "[ 23, 25]NSUBJ(nsubj) D[23,25](其中) G[26,28](包含)",
                 "[ 26, 28]Dependency(relcl) D[26,28](包含) G[43,45](依赖)",
                 "[ 29, 31]Dependency(nummod) D[29,31](许多) G[32,34](成分)",
-                "[ 32, 34]Dependency(dobj) D[32,34](成分) G[26,28](包含)",
-                "[ 35, 36]Dependency(cc) D[35,36](和) G[26,28](包含)",
-                "[ 37, 40]Dependency(conj) D[37,40](尽可能) G[26,28](包含)",
-                "[ 41, 42]Dependency(mark) D[41,42](的) G[26,28](包含)",
-                "[ 43, 45]Dependency(dobj) D[43,45](依赖) G[3,5](需要)" };
+                "[ 32, 34]DOBJ(dobj) D[32,34](成分) G[26,28](包含)",
+                "[ 35, 36]CC(cc) D[35,36](和) G[26,28](包含)",
+                "[ 37, 40]CONJ(conj) D[37,40](尽可能) G[26,28](包含)",
+                "[ 41, 42]MARK(mark) D[41,42](的) G[26,28](包含)",
+                "[ 43, 45]DOBJ(dobj) D[43,45](依赖) G[3,5](需要)" };
 
         String[] posMapped = { "PR", "V", "CARD", "ADJ", "V", "PRT", "NN", "ADJ", "NN", "V",
                 "CARD", "NN", "CONJ", "ADJ", "PRT", "NN", "PUNC" };
@@ -1048,6 +1050,7 @@ public class CoreNlpParserTest
                 CoreNlpParser.PARAM_WRITE_CONSTITUENT, true,
                 CoreNlpParser.PARAM_WRITE_DEPENDENCY, true,
                 CoreNlpParser.PARAM_WRITE_PENN_TREE, true,
+                CoreNlpParser.PARAM_READ_POS, false,
                 CoreNlpParser.PARAM_WRITE_POS, true};
         params = ArrayUtils.addAll(params, aExtraParams);
         aggregate.add(createEngineDescription(CoreNlpParser.class, params));
@@ -1065,6 +1068,7 @@ public class CoreNlpParserTest
                 CoreNlpParser.PARAM_WRITE_CONSTITUENT, true,
                 CoreNlpParser.PARAM_WRITE_DEPENDENCY, true,
                 CoreNlpParser.PARAM_WRITE_PENN_TREE, true,
+                CoreNlpParser.PARAM_READ_POS, false,
                 CoreNlpParser.PARAM_WRITE_POS, true,
                 CoreNlpParser.PARAM_QUOTE_BEGIN, new String[] { "‘" },
                 CoreNlpParser.PARAM_QUOTE_END, new String[] { "’" });

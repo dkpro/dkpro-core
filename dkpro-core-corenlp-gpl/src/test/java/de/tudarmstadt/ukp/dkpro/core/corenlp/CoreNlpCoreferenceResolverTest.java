@@ -152,8 +152,7 @@ public class CoreNlpCoreferenceResolverTest
                 createEngineDescription(CoreNlpParser.class,
                         CoreNlpParser.PARAM_WRITE_CONSTITUENT, true,
                         CoreNlpParser.PARAM_WRITE_DEPENDENCY, true,
-                        CoreNlpParser.PARAM_WRITE_PENN_TREE, true,
-                        CoreNlpParser.PARAM_WRITE_POS, true),
+                        CoreNlpParser.PARAM_WRITE_PENN_TREE, true),
                 createEngineDescription(
                         CoreNlpNamedEntityRecognizer.class),
                 createEngineDescription(CoreNlpCoreferenceResolver.class,

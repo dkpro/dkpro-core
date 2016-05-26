@@ -211,6 +211,15 @@ public class CoreNlpParser
     private boolean writePennTree;
 
     /**
+     * Sets whether to use or not to use existing POS tags.
+     * <p>
+     * Default: {@code true}
+     */
+    public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
+    @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
+    private boolean readPos;
+
+    /**
      * Sets whether to create or not to create POS tags. The creation of constituent tags must be
      * turned on for this to work.
      * <p>
@@ -234,7 +243,7 @@ public class CoreNlpParser
     private boolean originalDependencies;
 
     public static final String PARAM_KEEP_PUNCTUATION = "keepPunctuation";
-    @ConfigurationParameter(name = PARAM_KEEP_PUNCTUATION, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_KEEP_PUNCTUATION, mandatory = true, defaultValue = "false")
     private boolean keepPunctuation;
 
     private CasConfigurableProviderBase<ParserAnnotator> annotatorProvider;
@@ -276,6 +285,7 @@ public class CoreNlpParser
         converter.setQuoteBegin(quoteBegin);
         converter.setQuoteEnd(quoteEnd);
         converter.setEncoding(modelEncoding);
+        converter.setReadPos(readPos);
         Annotation document = converter.convert(aJCas);
 
         // Actual processing

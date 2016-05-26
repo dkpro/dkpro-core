@@ -71,7 +71,18 @@ public class ConvertToCoreNlp
     private List<String> quoteBegin;
     private List<String> quoteEnd;
     private Charset encoding;
+    private boolean readPos = true;
 
+    public void setReadPos(boolean aReadPos)
+    {
+        readPos = aReadPos;
+    }
+    
+    public boolean isReadPos()
+    {
+        return readPos;
+    }
+    
     public String getEncoding()
     {
         return encoding != null ? encoding.name() : null;
@@ -152,7 +163,7 @@ public class ConvertToCoreNlp
                 token.set(TokenKey.class, t);
                 
                 // POS tags
-                if (t.getPos() != null) {
+                if (readPos && t.getPos() != null) {
                     token.set(PartOfSpeechAnnotation.class, t.getPos().getPosValue());
                 }
                 
