@@ -29,8 +29,9 @@
 	<name>DKPro Core ASL - Illinois Cognitive Computation Group NLP (v ${illinois-cogcomp-nlp.version})</name>
     <properties>
         <illinois-cogcomp-nlp.version>3.0.44</illinois-cogcomp-nlp.version>
-				<maven.surefire.heap>4g</maven.surefire.heap>
-		</properties>
+        <illinois-cogcomp-srl.version>5.1.13</illinois-cogcomp-srl.version>
+        <maven.surefire.heap>4g</maven.surefire.heap>
+    </properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
@@ -77,13 +78,17 @@
               </exclusion>
             </exclusions>
         </dependency>
-        <!--  
         <dependency>
             <groupId>edu.illinois.cs.cogcomp</groupId>
             <artifactId>illinois-srl</artifactId>
-            <version>5.1.11</version>
+            <version>${illinois-cogcomp-srl.version}</version>
+            <exclusions>
+              <exclusion>
+                <artifactId>illinois-nlp-pipeline</artifactId>
+                <groupId>edu.illinois.cs.cogcomp</groupId>
+              </exclusion>
+            </exclusions>
         </dependency>
-        -->
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
@@ -100,8 +105,12 @@
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.api.ner-asl</artifactId>
         </dependency>
-		<dependency>
-			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <dependency>
+            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+            <artifactId>de.tudarmstadt.ukp.dkpro.core.api.semantics-asl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.api.syntax-asl</artifactId>
         </dependency>
 		<dependency>
