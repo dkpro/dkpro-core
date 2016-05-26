@@ -37,7 +37,14 @@ import java.util.Optional;
 import java.util.OptionalInt;
 
 /**
- * This class defines parameters and methods that are common for Mallet model estimators.
+ * This abstract class defines parameters and methods that are common for Mallet model estimators.
+ * <p>
+ * It creates a Mallet {@link InstanceList} from the input documents so that inheriting estimators
+ * can create a model, typically implemented by overriding the {@link JCasFileWriter_ImplBase#collectionProcessComplete()}
+ * method.
+ *
+ * @see de.tudarmstadt.ukp.dkpro.core.mallet.wordembeddings.WordEmbeddingsEstimator
+ * @see de.tudarmstadt.ukp.dkpro.core.mallet.lda.LdaTopicModelEstimator
  * @since 1.9.0
  */
 public abstract class MalletModelEstimator
@@ -46,37 +53,40 @@ public abstract class MalletModelEstimator
     private static final Locale locale = Locale.US;
 
     /**
-     * The annotation type to use for the model. Default: {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token}.
-     * For lemmas, use {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value}
+     * The annotation type to use as input tokens for the model estimation.
+     * Default: {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token}.
+     * For lemmas, for instance, use {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value}
      */
     public static final String PARAM_TOKEN_FEATURE_PATH = "tokenFeaturePath";
     @ConfigurationParameter(name = PARAM_TOKEN_FEATURE_PATH, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
     private String tokenFeaturePath;
 
     /**
-     * The number of threads to use during model estimation. If not set, the number of threads is determined automatically.
+     * The number of threads to use during model estimation.
+     * If not set, the number of threads is automatically set by {@link ComponentParameters#computeNumThreads(int)}.
      * <p>
-     * Warning: do not set this to more than 1 when using very small (test) data sets on {@link de.tudarmstadt.ukp.dkpro.core.mallet.wordembeddings.WordEmbeddingsEstimator}
-     * because the process might then run infinitely!
+     * Warning: do not set this to more than 1 when using very small (test) data sets on {@link de.tudarmstadt.ukp.dkpro.core.mallet.wordembeddings.WordEmbeddingsEstimator}!
+     * This might prevent the process from terminating.
      */
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
     @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = ComponentParameters.AUTO_NUM_THREADS)
     private int numThreads;
 
     /**
-     * Ignore tokens (or lemmas, respectively) that are shorter than the given value. Default: 3.
+     * Ignore tokens (or any other annotation type, as specified by {@link #PARAM_TOKEN_FEATURE_PATH})
+     * that are shorter than the given value. Default: 3.
      */
     public static final String PARAM_MIN_TOKEN_LENGTH = "minTokenLength";
     @ConfigurationParameter(name = PARAM_MIN_TOKEN_LENGTH, mandatory = true, defaultValue = "3")
     private int minTokenLength;
 
     /**
-     * If specific, the text contained in the given segmentation type annotations are fed as
-     * separate units to the topic model estimator e.g.
+     * If specified, the text contained in the given segmentation type annotations are fed as
+     * separate units ("documents") to the topic model estimator e.g.
      * {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.sentence}. Text that is not within
      * such annotations is ignored.
      * <p>
-     * By default, the full document text is used as a document.
+     * By default, the full text is used as a document.
      */
     public static final String PARAM_COVERING_ANNOTATION_TYPE = "coveringAnnotationType";
     @ConfigurationParameter(name = PARAM_COVERING_ANNOTATION_TYPE, mandatory = false)

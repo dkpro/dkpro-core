@@ -22,7 +22,6 @@ import cc.mallet.types.Instance;
 import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelEstimator;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.fit.descriptor.TypeCapability;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,15 +29,17 @@ import java.io.IOException;
 /**
  * Estimate an LDA topic model using Mallet and write it to a file. It stores all incoming CAS' to
  * Mallet {@link Instance}s before estimating the model, using a {@link ParallelTopicModel}.
+ * <p>
+ * Set {@link #PARAM_TOKEN_FEATURE_PATH} to define what is considered as a token (Tokens, Lemmas, etc.).
+ * <p>
+ * Set {@link #PARAM_COVERING_ANNOTATION_TYPE} to define what is considered a document (sentences, paragraphs, etc.).
  */
-@TypeCapability(
-        inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }
-)
+
 public class LdaTopicModelEstimator
         extends MalletModelEstimator
 {
     /**
-     * The number of topics to estimate for the topic model.
+     * The number of topics to estimate.
      */
     public static final String PARAM_N_TOPICS = "nTopics";
     @ConfigurationParameter(name = PARAM_N_TOPICS, mandatory = true, defaultValue = "10")
@@ -52,14 +53,14 @@ public class LdaTopicModelEstimator
     private int nIterations;
 
     /**
-     * The number of iterations before hyperparameter optimization begins. Default: 100
+     * The number of iterations before hyper-parameter optimization begins. Default: 100
      */
     public static final String PARAM_BURNIN_PERIOD = "burninPeriod";
     @ConfigurationParameter(name = PARAM_BURNIN_PERIOD, mandatory = true, defaultValue = "100")
     private int burninPeriod;
 
     /**
-     * Interval for optimizing Dirichlet hyperparameters. Default: 50
+     * Interval for optimizing Dirichlet hyper-parameters. Default: 50
      */
     public static final String PARAM_OPTIMIZE_INTERVAL = "optimizeInterval";
     @ConfigurationParameter(name = PARAM_OPTIMIZE_INTERVAL, mandatory = true, defaultValue = "50")
@@ -73,7 +74,7 @@ public class LdaTopicModelEstimator
     private int randomSeed;
 
     /**
-     * Define how often to save a serialized model during estimation. Default: 0 (only save when
+     * Define how frequently a serialized model is saved to disk during estimation. Default: 0 (only save when
      * estimation is done).
      */
     public static final String PARAM_SAVE_INTERVAL = "saveInterval";
@@ -81,7 +82,7 @@ public class LdaTopicModelEstimator
     private int saveInterval;
 
     /**
-     * Use a symmatric alpha value during model estimation? Default: false.
+     * Use a symmetric alpha value during model estimation? Default: false.
      */
     public static final String PARAM_USE_SYMMETRIC_ALPHA = "useSymmetricAlpha";
     @ConfigurationParameter(name = PARAM_USE_SYMMETRIC_ALPHA, mandatory = true, defaultValue = "false")

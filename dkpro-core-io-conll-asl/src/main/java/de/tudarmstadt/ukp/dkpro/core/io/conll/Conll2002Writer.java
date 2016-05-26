@@ -45,7 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * <p>Writes the CoNLL 2002 named entity format. The columns are separated by a single space, unlike
  * illustrated below.</p>
- * 
+ *
  * <pre><code>
  * Wolff      B-PER
  * ,          O
@@ -71,14 +71,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * Madrid     I-ORG
  * .          O
  * </code></pre>
- * 
+ *
  * <ol>
  * <li>FORM - token</li>
  * <li>NER - named entity (BIO encoded)</li>
  * </ol>
- * 
+ *
  * <p>Sentences are separated by a blank new line.</p>
- * 
+ *
  * @see <a href="http://www.clips.ua.ac.be/conll2002/ner/">CoNLL 2002 shared task</a>
  */
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
@@ -133,25 +133,24 @@ public class Conll2002Writer
 
             // Tokens
             List<Token> tokens = selectCovered(Token.class, sentence);
-            
+
             // Chunks
             IobEncoder encoder = new IobEncoder(aJCas.getCas(), neType, neValue);
-            
-            for (int i = 0; i < tokens.size(); i++) {
+
+            for (Token token:tokens) {
                 Row row = new Row();
-                row.id = i+1;
-                row.token = tokens.get(i);
-                row.ne = encoder.encode(tokens.get(i));
+                row.token = token;
+                row.ne = encoder.encode(token);
                 ctokens.put(row.token, row);
             }
-            
+
             // Write sentence in CONLL 2006 format
             for (Row row : ctokens.values()) {
                 String chunk = UNUSED;
                 if (writeNamedEntity && (row.ne != null)) {
                     chunk = encoder.encode(row.token);
                 }
-                
+
                 aOut.printf("%s %s\n", row.token.getCoveredText(), chunk);
             }
 
@@ -161,7 +160,6 @@ public class Conll2002Writer
 
     private static final class Row
     {
-        int id;
         Token token;
         String ne;
     }
