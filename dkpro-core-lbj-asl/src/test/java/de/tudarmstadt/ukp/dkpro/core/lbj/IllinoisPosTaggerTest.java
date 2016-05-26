@@ -52,7 +52,7 @@ public class IllinoisPosTaggerTest
                 "POS", "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "SYM", "TO", "UH", "VB", "VBD",
                 "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB", "``" };
 
-        String[] unmappedPos = { "$" };
+        String[] unmappedPos = {};
 
         AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
         AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);

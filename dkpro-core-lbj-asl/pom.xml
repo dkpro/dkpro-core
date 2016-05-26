@@ -28,7 +28,7 @@
     <packaging>jar</packaging>
 	<name>DKPro Core ASL - Illinois Cognitive Computation Group NLP (v ${illinois-cogcomp-nlp.version})</name>
     <properties>
-        <illinois-cogcomp-nlp.version>3.0.36</illinois-cogcomp-nlp.version>
+        <illinois-cogcomp-nlp.version>3.0.44</illinois-cogcomp-nlp.version>
 				<maven.surefire.heap>4g</maven.surefire.heap>
 		</properties>
 	<dependencies>
