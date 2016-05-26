@@ -21,15 +21,23 @@ package de.tudarmstadt.ukp.dkpro.core.matetools;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Assume;
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.hunpos.HunPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import de.tudarmstadt.ukp.dkpro.core.testing.TagsetDescriptionStripper;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class MateParserTest
@@ -182,6 +190,110 @@ public class MateParserTest
         AssertAnnotations.assertTagsetMapping(Dependency.class, "ftb", unmappedDep, jcas);
     }
 
+    @Test
+    public void testFarsi()
+        throws Exception
+    {
+        JCas jcas = runTest(
+                "fa",
+                "parsper",
+                "ما به عنوان مثال جمله بسیار پیچیده، که شامل به عنوان بسیاری از مولفه ها و وابستگی ها که ممکن است نیاز دارید .");
+
+        String[] dependencies = {
+                "[  0,  2]Dependency(nsubj) D[0,2](ما) G[39,43](شامل)",
+                "[  3,  5]Dependency(prep) D[3,5](به) G[39,43](شامل)",
+                "[  6, 11]Dependency(pobj) D[6,11](عنوان) G[3,5](به)",
+                "[ 12, 16]Dependency(pobj) D[12,16](مثال) G[3,5](به)",
+                "[ 17, 21]Dependency(pobj) D[17,21](جمله) G[3,5](به)",
+                "[ 22, 27]Dependency(advmod) D[22,27](بسیار) G[28,35](پیچیده،)",
+                "[ 28, 35]Dependency(acomp) D[28,35](پیچیده،) G[39,43](شامل)",
+                "[ 36, 38]Dependency(rel) D[36,38](که) G[39,43](شامل)",
+                "[ 39, 43]ROOT(root) D[39,43](شامل) G[39,43](شامل)",
+                "[ 44, 46]Dependency(prep) D[44,46](به) G[39,43](شامل)",
+                "[ 47, 52]Dependency(pobj) D[47,52](عنوان) G[44,46](به)",
+                "[ 53, 59]Dependency(pobj) D[53,59](بسیاری) G[47,52](عنوان)",
+                "[ 60, 62]Dependency(prep) D[60,62](از) G[53,59](بسیاری)",
+                "[ 63, 68]Dependency(pobj) D[63,68](مولفه) G[60,62](از)",
+                "[ 69, 71]Dependency(pobj) D[69,71](ها) G[60,62](از)",
+                "[ 72, 73]Dependency(cc) D[72,73](و) G[53,59](بسیاری)",
+                "[ 74, 81]Dependency(pobj) D[74,81](وابستگی) G[88,92](ممکن)",
+                "[ 82, 84]Dependency(pobj) D[82,84](ها) G[74,81](وابستگی)",
+                "[ 85, 87]Dependency(complm) D[85,87](که) G[88,92](ممکن)",
+                "[ 88, 92]Dependency(conj) D[88,92](ممکن) G[53,59](بسیاری)",
+                "[ 93, 96]Dependency(pobj) D[93,96](است) G[44,46](به)",
+                "[ 97,101]Dependency(pobj) D[97,101](نیاز) G[44,46](به)",
+                "[102,107]Dependency(pobj) D[102,107](دارید) G[44,46](به)",
+                "[108,109]Dependency(punct) D[108,109](.) G[39,43](شامل)" };
+
+        String[] posTags = { "ADJ", "ADV", "CLITIC", "CON", "DELM", "DET", "END", "FW", "INT",
+                "MID", "N", "NUM", "P", "PREV", "PRO", "STPOS", "STR", "V" };
+
+        String[] depTags = { "END", "acc", "acomp", "acomp/pc", "advcl", "advcl/cop", "advcl/pc",
+                "advmod", "advmod/pc", "amod", "amod/cop", "amod/pc", "appos", "appos/pc", "aux",
+                "auxpass", "cc", "ccomp", "ccomp/cop", "ccomp/pc", "ccomp/pc/cop", "ccomp\\cpobj",
+                "ccomp\\nsubj", "ccomp\\pobj", "ccomp\\poss", "complm", "conj", "conj/cop",
+                "conj/pc", "conj\\pobj", "conj\\poss", "cop", "cpobj", "cpobj/pc", "cprep", "dep",
+                "dep-top", "dep-voc", "dep/pc", "det", "dobj", "dobj/acc", "dobj/pc", "fw", "lvc",
+                "lvc/pc", "mark", "mwe", "mwe/pc", "neg", "nn", "nn/cop", "npadvmod", "nsubj",
+                "nsubj/pc", "nsubjpass", "nsubjpass/pc", "num", "number", "parataxis",
+                "parataxis/cop", "parataxis/pc", "pobj", "pobj/cop", "pobj/pc", "poss", "poss/acc",
+                "poss/cop", "poss/pc", "preconj", "predet", "prep", "prep/det", "prep/pc",
+                "prep/pobj", "prt", "punct", "quantmod", "rcmod", "rcmod/cop", "rcmod/pc",
+                "rcmod\\amod", "rcmod\\pobj", "rcmod\\poss", "rel", "root", "root/cop", "root/pc",
+                "root\\conj", "root\\pobj", "root\\poss", "tmod", "xcomp" };
+
+        String[] unmappedPos = { };
+        
+        String[] origPos = { "PRO", "P", "N_SING", "N_SING", "N_SING", "ADV", "ADJ", "CON", "ADJ",
+                "P", "N_SING", "ADJ", "P", "N_SING", "N_SING", "CON", "N_SING", "N_PL", "CON",
+                "ADJ", "V_COP", "N_SING", "V_PRS", "DELM" };
+
+        String[] mappedPos = { "PR", "PP", "N", "N", "N", "ADV", "ADJ", "CONJ", "ADJ", "PP", "N",
+                "ADJ", "PP", "N", "N", "CONJ", "N", "N", "CONJ", "ADJ", "V", "N", "V", "PUNC" };
+
+        AssertAnnotations.assertPOS(mappedPos, origPos, JCasUtil.select(jcas, POS.class));
+        AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
+        AssertAnnotations.assertTagset(POS.class, "upc-reduced", posTags, jcas);
+        AssertAnnotations.assertTagsetMapping(POS.class, "upc-reduced", unmappedPos, jcas);
+        AssertAnnotations.assertTagset(Dependency.class, "updt", depTags, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "ftb", new String[] {},
+        // jcas);
+    }
+    
+    private JCas runTest(String aLanguage, String aVariant, String aText)
+            throws Exception
+        {
+            AnalysisEngineDescription engine = getEngines(aLanguage, aVariant);
+
+            if (aLanguage.startsWith("dummy-")) {
+                aLanguage = aLanguage.substring("dummy-".length());
+            }
+
+            return TestRunner.runTest(engine, aLanguage, aText);
+        }
+
+        public static AnalysisEngineDescription getEngines(String aLanguage, String aVariant)
+            throws ResourceInitializationException
+        {
+            List<AnalysisEngineDescription> engines = new ArrayList<AnalysisEngineDescription>();
+
+            if ("fa".equals(aLanguage) || "sv".equals(aLanguage)) {
+                engines.add(createEngineDescription(HunPosTagger.class));
+            }
+            else {
+                engines.add(createEngineDescription(MatePosTagger.class));
+            }
+
+            engines.add(createEngineDescription(TagsetDescriptionStripper.class));
+
+            engines.add(createEngineDescription(MateParser.class, 
+                    MateParser.PARAM_VARIANT, aVariant,
+                    MateParser.PARAM_PRINT_TAGSET, true));
+
+            return createEngineDescription(engines
+                    .toArray(new AnalysisEngineDescription[engines.size()]));
+        }
+    
 	private JCas runTest(String aLanguage, String aText)
 		throws Exception
 	{

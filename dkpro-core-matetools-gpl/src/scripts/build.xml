@@ -20,7 +20,7 @@
 -->
 <project basedir="../.." default="separate-jars">
 	<import>
-		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.6.0/ant-macros.xml"/>
+		<url url="https://raw.githubusercontent.com/dkpro/resource-packager/0.6.0/ant-macros.xml"/>
 	</import>
 
 	<!-- 
@@ -273,11 +273,44 @@
     		variant="conll2009" 
     		extension="model">			
 		</install-stub-and-upstream-file>
+	</target>
 
+    <target name="fa">
+        <antcall target="fa-parser-parsper"/>
     </target>
 
-	<target name="fr">
+    <!-- FILE: ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.parser.model - - - - - - - - - - - 
+      - 2013-09-18 | now        | 37b1b7fad6a3798d0c9853036d928d37
+      -->
+    <target name="fa-parser-parsper">
         <mkdir dir="target/download"/>
+        <get 
+            src="http://stp.lingfil.uu.se/~mojgan/model_ParsPer.tar.gz" 
+            dest="target/download/model_ParsPer.tar.gz" 
+            skipexisting="true"/>
+        <untar 
+            src="target/download/model_ParsPer.tar.gz" 
+            dest="target/download/" 
+            compression="gzip"/>
+        <install-stub-and-upstream-file 
+            file="target/download/model-all" 
+            md5="b18b69f4842cfa4b9f6a8f230dd7eb74"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.matetools"
+            upstreamVersion="20141124"
+            metaDataVersion="0"
+            tool="parser" 
+            language="fa" 
+            variant="parsper" 
+            extension="model">
+            <metadata>
+                <entry key="pos.tagset" value="upc-reduced"/>
+                <entry key="dependency.tagset" value="updt"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
+	
+    <target name="fr">
         <antcall target="fr-lemmatizer-ftb"/>
         <antcall target="fr-morphtagger-ftb"/>
         <antcall target="fr-tagger-ftb"/>
