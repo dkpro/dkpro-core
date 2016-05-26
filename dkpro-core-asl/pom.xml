@@ -305,6 +305,11 @@
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.xml-asl</artifactId>
 				<version>1.9.0-SNAPSHOT</version>
 			</dependency>
+            <dependency>
+                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-asl</artifactId>
+                <version>1.9.0-SNAPSHOT</version>
+            </dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.jazzy-asl</artifactId>
@@ -487,6 +492,7 @@
 		<module>../dkpro-core-dictionaryannotator-asl</module>
 		<module>../dkpro-core-frequency-asl</module>
 		<module>../dkpro-core-hunpos-asl</module>
+        <module>../dkpro-core-ixa-asl</module>
 		<module>../dkpro-core-jazzy-asl</module>
         <module>../dkpro-core-jtok-asl</module>
 		<module>../dkpro-core-languagetool-asl</module>
