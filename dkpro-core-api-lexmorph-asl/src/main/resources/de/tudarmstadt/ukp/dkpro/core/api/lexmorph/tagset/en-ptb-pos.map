@@ -2,28 +2,41 @@
 #
 # Source (PTB 1): http://faculty.washington.edu/dillon/GramResources/penntable.html
 # Source (PTB 2): http://www.clips.ua.ac.be/pages/mbsp-tags
+# Source: http://repository.upenn.edu/cis_reports/570/
 
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # punctuation mark, comma
 ,=PUNC
--=PUNC
 # punctuation mark, sentence closer
 .=PUNC
+# dollar
+$=PUNC
+# dash
+-=PUNC
+# semi-colon
 ;=PUNC
+# question mark
 ?=PUNC
+# exclamation mark
 \!=PUNC
+# opening quotes
 ``=PUNC
+# closing quotes
 ''=PUNC
--LRB-=PUNC
--RRB-=PUNC
 # punctuation mark, colon
 \:=PUNC
 # contextual separator, left paren
+-LRB-=PUNC
+# contextual separator, left paren
 (=PUNC
+# contextual separator, right paren
+-RRB-=PUNC
 # contextual separator, right paren
 )=PUNC
 \#=PUNC
+# sentence end marker
+SENT=PUNC
 # 1.	CC	Coordinating conjunction
 CC=CONJ
 # 2.	CD	Cardinal number
@@ -76,7 +89,6 @@ RBR=ADV
 RBS=ADV
 # 23.	RP	Particle
 RP=PP
-SENT=PUNC
 # 24.	SYM	Symbol
 SYM=PUNC
 # 25.	TO	to
