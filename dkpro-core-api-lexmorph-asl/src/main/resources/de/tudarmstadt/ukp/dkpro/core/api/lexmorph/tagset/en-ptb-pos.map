@@ -5,7 +5,6 @@
 
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
-*=O
 # punctuation mark, comma
 ,=PUNC
 -=PUNC
@@ -113,3 +112,5 @@ WRB=ADV
 # AFX - unbound affix (Warner et al., 2004)
 # GW - mistranscription (Taylor, 1996)
 # XX - uninterpretable material (Mott et al., 2009)
+
+*=POS
