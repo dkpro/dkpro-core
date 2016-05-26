@@ -1,0 +1,3 @@
+Known corpora in this format:
+
+* link:http://www.cs.cmu.edu/~ark/ArabicNER/[AQMAR Arabic Wikipedia Named Entity Corpus] - Arabic (CoNLL 2002 format)
