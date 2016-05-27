@@ -346,7 +346,7 @@ SemPred
    arguments: FSArray
    category: "Coreference"
 [,]
-O
+POS
    sofa: _InitialView
    begin: 28
    end: 29
@@ -391,7 +391,7 @@ Token
       begin: 28
       end: 29
       value: ","
-   pos: O
+   pos: POS
       sofa: _InitialView
       begin: 28
       end: 29
@@ -1203,7 +1203,7 @@ SemPred
    arguments: FSArray
    category: "Self_motion"
 [,]
-O
+POS
    sofa: _InitialView
    begin: 81
    end: 82
@@ -1254,7 +1254,7 @@ Token
       begin: 81
       end: 82
       value: ","
-   pos: O
+   pos: POS
       sofa: _InitialView
       begin: 81
       end: 82
@@ -3101,7 +3101,7 @@ SemArg
    begin: 157
    end: 167
 [.]
-O
+POS
    sofa: _InitialView
    begin: 168
    end: 169
@@ -3200,7 +3200,7 @@ Token
       begin: 168
       end: 169
       value: "."
-   pos: O
+   pos: POS
       sofa: _InitialView
       begin: 168
       end: 169

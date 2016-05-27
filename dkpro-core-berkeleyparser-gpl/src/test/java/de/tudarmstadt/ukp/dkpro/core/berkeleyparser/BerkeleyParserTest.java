@@ -256,9 +256,9 @@ public class BerkeleyParserTest
                 "NAC", "NP", "NX", "PP", "PRN", "PRT", "PRT|ADVP", "QP", "ROOT", "RRC", "S", "SBAR",
                 "SBARQ", "SINV", "SQ", "UCP", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
 
-        String[] unmappedPos = { "$" };
+        String[] unmappedPos = {};
 
-        String[] unmappedConst = { };
+        String[] unmappedConst = {};
 
 		assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 		assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
@@ -304,7 +304,7 @@ public class BerkeleyParserTest
                 "NX", "PP", "PRN", "PRT", "PRT|ADVP", "QP", "ROOT", "RRC", "S", "SBAR", "SBARQ",
                 "SINV", "SQ", "UCP", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
 
-        String[] unmappedPos = { "$"  };
+        String[] unmappedPos = {};
 
         String[] unmappedConst = {};
 

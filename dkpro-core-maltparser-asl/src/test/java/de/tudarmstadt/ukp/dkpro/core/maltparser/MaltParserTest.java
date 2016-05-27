@@ -184,7 +184,7 @@ public class MaltParserTest
                 "pcomp", "pobj", "poss", "possessive", "preconj", "pred", "predet", "prep", "prt",
                 "punct", "purpcl", "quantmod", "rcmod", "rel", "tmod", "xcomp" };
 
-        String[] unmappedPos = { "$", "PRT" };
+        String[] unmappedPos = { "PRT" };
 
         assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
         assertTagset(MaltParser.class, POS.class, "ptb", posTags, jcas);
@@ -233,7 +233,7 @@ public class MaltParserTest
                 "pcomp", "pobj", "poss", "possessive", "preconj", "pred", "predet", "prep", "prt",
                 "punct", "purpcl", "quantmod", "rcmod", "rel", "tmod", "xcomp" };
 
-        String[] unmappedPos = { "$", "PRT" };
+        String[] unmappedPos = { "PRT" };
 
         assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
         //assertTagset(OpenNlpPosTagger.class, POS.class, "ptb", posTags, jcas);
@@ -283,7 +283,7 @@ public class MaltParserTest
                 "pcomp", "pobj", "poss", "possessive", "preconj", "pred", "predet", "prep", "prt",
                 "punct", "purpcl", "quantmod", "rcmod", "rel", "tmod", "xcomp" };
 
-        String[] unmappedPos = { "$", "PRT" };
+        String[] unmappedPos = { "PRT" };
 
         assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
         // There are some minor differences between the tags produced by the POS tagger and the

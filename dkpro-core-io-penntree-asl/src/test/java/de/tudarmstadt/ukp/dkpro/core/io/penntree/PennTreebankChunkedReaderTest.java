@@ -52,13 +52,13 @@ public class PennTreebankChunkedReaderTest
     {
         JCas jCas = readTestFile("generalTest.pos");
 
-        String[] posOriginal = new String[] { "DT", "NN", "IN", "JJ", "NNS", "VBG", "IN", "NNP",
-                "NNP", "NNP", "VBD", "PRP", "VBZ", "VBN", "DT", "$", "CD", "CD", "NN", "NN", "IN",
-                "JJS", "IN", "NNP", "NNP", "NNP", "POS", "NN", "CC", "NN", "NNS", "." };
+        String[] posOriginal = { "DT", "NN", "IN", "JJ", "NNS", "VBG", "IN", "NNP", "NNP", "NNP",
+                "VBD", "PRP", "VBZ", "VBN", "DT", "$", "CD", "CD", "NN", "NN", "IN", "JJS", "IN",
+                "NNP", "NNP", "NNP", "POS", "NN", "CC", "NN", "NNS", "." };
 
-        String[] posMapped = new String[] { "ART", "NN", "PP", "ADJ", "NN", "V", "PP", "NP", "NP",
-                "NP", "V", "PR", "V", "V", "ART", "O", "CARD", "CARD", "NN", "NN", "PP", "ADJ",
-                "PP", "NP", "NP", "NP", "O", "NN", "CONJ", "NN", "NN", "PUNC" };
+        String[] posMapped = { "ART", "NN", "PP", "ADJ", "NN", "V", "PP", "NP", "NP", "NP", "V",
+                "PR", "V", "V", "ART", "PUNC", "CARD", "CARD", "NN", "NN", "PP", "ADJ", "PP", "NP",
+                "NP", "NP", "O", "NN", "CONJ", "NN", "NN", "PUNC" };
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jCas, POS.class));
     }
