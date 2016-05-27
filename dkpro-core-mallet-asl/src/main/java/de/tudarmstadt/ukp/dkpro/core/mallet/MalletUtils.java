@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.mallet;
 import cc.mallet.types.TokenSequence;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathInfo;
+import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -209,23 +209,10 @@ public class MalletUtils
             boolean lowercase)
             throws FeaturePathException
     {
-        String[] segments = featurePath.split("/", 2);
-        String typeName = segments[0];
-
-        Type type = aJCas.getTypeSystem().getType(typeName);
-        if (type == null) {
-            throw new IllegalStateException("Type [" + typeName + "] not found in type system");
-        }
-
-        FeaturePathInfo fpInfo = initFeaturePathInfo(segments);
-
         List<String> tokenSequence = new ArrayList<>();
 
-        Collection<AnnotationFS> features = coveringAnnotation.isPresent()
-                ? CasUtil.selectCovered(type, coveringAnnotation.get())
-                : CasUtil.select(aJCas.getCas(), type);
         FeaturePathFactory.FeaturePathIterator<AnnotationFS> valueIterator =
-                new FeaturePathFactory.FeaturePathIterator<>(features.iterator(), fpInfo);
+                FeaturePathUtils.featurePathIterator(aJCas, featurePath, coveringAnnotation);
 
         /* iterate over tokens */
         while (valueIterator.hasNext()) {
@@ -241,26 +228,26 @@ public class MalletUtils
 
     /**
      * Return a collection of {@link TokenSequence}s from a single CAS. The coverage of each
-     * token sequence is determined by the documentType parameter (e.g. sentence). If no documentTypeName
+     * token sequence is determined by the coveringTypeName parameter (e.g. sentence). If no coveringTypeName
      * is set, one token sequence is created from the whole CAS.
      *
      * @param aJCas            a {@link JCas}
      * @param featurePath      a feature path, e.g. (
-     * @param documentTypeName a  {@code Optional<String>} defining the covering annotation type name from which tokens are selected, e.g. {@code Sentence.getClass().getTokenFeaturePath()}
+     * @param coveringTypeName a  {@code Optional<String>} defining the covering annotation type name from which tokens are selected, e.g. {@code Sentence.getClass().getTokenFeaturePath()}
      * @param minTokenLength   an {@code OptionalInt} defining the minimum token length; all shorter tokens are omitted
      * @param lowercase        if true, all tokens are lowercased
      * @return a {@code Collection<TokenSequence>}
      * @throws FeaturePathException if the annotation type specified in PARAM_TOKEN_FEATURE_PATH cannot be extracted.
      */
     public static List<TokenSequence> generateTokenSequences(JCas aJCas, String featurePath,
-            Optional<String> documentTypeName, OptionalInt minTokenLength, boolean lowercase)
+            Optional<String> coveringTypeName, OptionalInt minTokenLength, boolean lowercase)
             throws FeaturePathException
     {
         List<TokenSequence> tokenSequences = new ArrayList<>();
-        if (documentTypeName.isPresent()) {
-            Type documentType = aJCas.getTypeSystem().getType(documentTypeName.get());
+        if (coveringTypeName.isPresent()) {
+            Type coveringType = aJCas.getTypeSystem().getType(coveringTypeName.get());
 
-            for (AnnotationFS covering : CasUtil.select(aJCas.getCas(), documentType)) {
+            for (AnnotationFS covering : CasUtil.select(aJCas.getCas(), coveringType)) {
                 TokenSequence ts = generateTokenSequence(aJCas, featurePath, Optional.of(covering),
                         minTokenLength, lowercase);
                 tokenSequences.add(ts);
@@ -272,23 +259,6 @@ public class MalletUtils
             tokenSequences.add(ts);
         }
         return tokenSequences;
-    }
-
-    /**
-     * Generate a feature path info.
-     *
-     * @param segments an array of strings previously split so that the first element represents the
-     *                 feature type and the second element (if applicable) contains the feature path.
-     * @return a {@link FeaturePathInfo}
-     * @throws FeaturePathException if an error occurs during initialization of the feature path
-     */
-
-    private static FeaturePathInfo initFeaturePathInfo(String[] segments)
-            throws FeaturePathException
-    {
-        FeaturePathInfo fpInfo = new FeaturePathInfo();
-        fpInfo.initialize(segments.length > 1 ? segments[1] : "");
-        return fpInfo;
     }
 
     /**

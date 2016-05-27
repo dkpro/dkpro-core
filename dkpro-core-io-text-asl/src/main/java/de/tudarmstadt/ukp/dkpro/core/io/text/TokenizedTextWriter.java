@@ -19,13 +19,12 @@ package de.tudarmstadt.ukp.dkpro.core.io.text;
 
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory.FeaturePathIterator;
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathInfo;
+import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
@@ -36,10 +35,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.util.Collections;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.apache.uima.fit.util.CasUtil.selectCovered;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 /**
@@ -147,55 +146,30 @@ public class TokenizedTextWriter
     public void process(JCas aJCas)
             throws AnalysisEngineProcessException
     {
-        String[] segments = featurePath.split("/", 2);
-        String typeName = segments[0];
-
-        Type type = aJCas.getTypeSystem().getType(typeName);
-        if (type == null) {
-            throw new IllegalStateException("Type [" + typeName + "] not found in type system");
-        }
-
         try {
-            FeaturePathInfo fpInfo = initFeaturePathInfo(segments);
-            writeTokens(aJCas, type, fpInfo);
+            OutputStream outputStream = getOutputStream(aJCas, extension);
+
+            /* iterate over sentences */
+            for (Sentence sentence : select(aJCas, Sentence.class)) {
+                getLogger().trace("Sentence: '" + sentence.getCoveredText() + "'.");
+                FeaturePathIterator<AnnotationFS> valueIterator = FeaturePathUtils
+                        .featurePathIterator(aJCas, featurePath, Optional.of(sentence));
+
+                if (valueIterator.hasNext()) {
+                    // write first token
+                    writeToken(outputStream, valueIterator.next().getValue());
+                }
+                while (valueIterator.hasNext()) {
+                    // write other tokens
+                    outputStream.write(TOKEN_SEPARATOR.getBytes(targetEncoding));
+                    writeToken(outputStream, valueIterator.next().getValue());
+                }
+                getLogger().trace("End of sentence.");
+                outputStream.write(System.lineSeparator().getBytes(targetEncoding));
+            }
         }
         catch (FeaturePathException | IOException e) {
             throw new AnalysisEngineProcessException(e);
-        }
-    }
-
-    /**
-     * Iterates over each {@link Sentence} and writes all the contained elements (e.g. tokens) of
-     * the specified annotations type to the output file. Every sentence is written to a single
-     * line; the tokens are separated by whitespaces.
-     *
-     * @param aJCas  a {@link JCas}
-     * @param type   the annotation {@link Type}
-     * @param fpInfo a {@link FeaturePathInfo} to be used to the {@link FeaturePathIterator}
-     * @throws IOException if an IO error occurs while writing
-     */
-    private void writeTokens(JCas aJCas, Type type, FeaturePathInfo fpInfo)
-            throws IOException
-    {
-        OutputStream outputStream = getOutputStream(aJCas, extension);
-
-        /* iterate over sentences */
-        for (Sentence sentence : select(aJCas, Sentence.class)) {
-            getLogger().trace("Sentence: '" + sentence.getCoveredText() + "'.");
-            FeaturePathIterator<AnnotationFS> valueIterator = new FeaturePathIterator<>(
-                    selectCovered(aJCas.getCas(), type, sentence).iterator(), fpInfo);
-
-            if (valueIterator.hasNext()) {
-                // write first token
-                writeToken(outputStream, valueIterator.next().getValue());
-            }
-            while (valueIterator.hasNext()) {
-                // write other tokens
-                outputStream.write(TOKEN_SEPARATOR.getBytes(targetEncoding));
-                writeToken(outputStream, valueIterator.next().getValue());
-            }
-            getLogger().trace("End of sentence.");
-            outputStream.write(System.lineSeparator().getBytes(targetEncoding));
         }
     }
 
@@ -214,22 +188,6 @@ public class TokenizedTextWriter
                 ? NUMBER_REPLACEMENT
                 : text;
         outputStream.write(text.getBytes(targetEncoding));
-    }
-
-    /**
-     * Generate a feature path info.
-     *
-     * @param segments an array of strings previously split so that the first element represents the
-     *                 feature type and the second element (if applicable) contains the feature path.
-     * @return a {@link FeaturePathInfo}
-     * @throws FeaturePathException if an error occurs during initialization of the feature path
-     */
-    private FeaturePathInfo initFeaturePathInfo(String[] segments)
-            throws FeaturePathException
-    {
-        FeaturePathInfo fpInfo = new FeaturePathInfo();
-        fpInfo.initialize(segments.length > 1 ? segments[1] : "");
-        return fpInfo;
     }
 
     @Override
