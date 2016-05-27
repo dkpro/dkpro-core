@@ -41,40 +41,37 @@ public class OpenNlpParserTest
 		JCas jcas = runTest("en", "chunking", "We need a very complicated example sentence , "
 		        + "which contains as many constituents and dependencies as possible .");
 
-        String[] constituentMapped = new String[] { "ADJP 10,26", "ADJP 102,110", "NP 0,2",
-                "NP 64,110", "NP 64,98", "NP 8,110", "NP 8,43", "PP 61,110", "PP 99,110",
-                "ROOT 0,112", "S 0,112", "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110",
-                "WHNP 46,51" };
+        String[] constituentMapped = { "ADJP 10,26", "ADJP 102,110", "NP 0,2", "NP 64,110",
+                "NP 64,98", "NP 8,110", "NP 8,43", "PP 61,110", "PP 99,110", "ROOT 0,112",
+                "S 0,112", "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
-        String[] constituentOriginal = new String[] { "ADJP 10,26", "ADJP 102,110", "NP 0,2",
-                "NP 64,110", "NP 64,98", "NP 8,110", "NP 8,43", "PP 61,110", "PP 99,110",
-                "ROOT 0,112", "S 0,112", "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110",
-                "WHNP 46,51" };
+        String[] constituentOriginal = { "ADJP 10,26", "ADJP 102,110", "NP 0,2", "NP 64,110",
+                "NP 64,98", "NP 8,110", "NP 8,43", "PP 61,110", "PP 99,110", "ROOT 0,112",
+                "S 0,112", "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
-		String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC",
-				"ART", "V", "PP", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
+        String[] posMapped = { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC", "ART", "V", "PP",
+                "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
 
-		String[] posOriginal = new String[] { "PRP", "VBP", "DT", "RB", "VBN", "NN",
-				"NN", ",", "WDT", "VBZ", "IN", "JJ", "NNS", "CC",
-				"NNS", "IN", "JJ", "." };
+        String[] posOriginal = { "PRP", "VBP", "DT", "RB", "VBN", "NN", "NN", ",", "WDT", "VBZ",
+                "IN", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
 
-		String pennTree = "(ROOT (S (NP (PRP We)) (VP (VBP need) (NP (NP (DT a) (ADJP (RB very) " +
-				"(VBN complicated)) (NN example) (NN sentence)) (, ,) (SBAR (WHNP (WDT which)) " +
-				"(S (VP (VBZ contains) (PP (IN as) (NP (NP (JJ many) (NNS constituents) (CC and) " +
-				"(NNS dependencies)) (PP (IN as) (ADJP (JJ possible)))))))))) (. .)))";
+        String pennTree = "(ROOT (S (NP (PRP We)) (VP (VBP need) (NP (NP (DT a) (ADJP (RB very) "
+                + "(VBN complicated)) (NN example) (NN sentence)) (, ,) (SBAR (WHNP (WDT which)) "
+                + "(S (VP (VBZ contains) (PP (IN as) (NP (NP (JJ many) (NNS constituents) (CC and) "
+                + "(NNS dependencies)) (PP (IN as) (ADJP (JJ possible)))))))))) (. .)))";
 
-        String[] posTags = new String[] { "#", "$", "''", ",", "-LRB-", "-RRB-", ".", ":", "CC",
-                "CD", "DT", "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNP", "NNPS",
-                "NNS", "PDT", "POS", "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "SYM", "TO", "UH",
-                "VB", "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB", "``" };
+        String[] posTags = { "#", "$", "''", ",", "-LRB-", "-RRB-", ".", ":", "CC", "CD", "DT",
+                "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNP", "NNPS", "NNS", "PDT",
+                "POS", "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "SYM", "TO", "UH", "VB", "VBD",
+                "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB", "``" };
 
-        String[] constituentTags = new String[] { "ADJP", "ADV", "ADVP", "AUX", "CONJP", "FRAG",
-                "INTJ", "LST", "NAC", "NEG", "NP", "NX", "O", "PP", "PRN", "PRT", "QP", "S",
-                "SBAR", "SQ", "TYPO", "UCP", "UH", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
+        String[] constituentTags = { "ADJP", "ADV", "ADVP", "AUX", "CONJP", "FRAG", "INTJ", "LST",
+                "NAC", "NEG", "NP", "NX", "O", "PP", "PRN", "PRT", "QP", "S", "SBAR", "SQ", "TYPO",
+                "UCP", "UH", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
 
-        String[] unmappedPos = new String[] { "$"};
+        String[] unmappedPos = {};
 
-        String[] unmappedConst = new String[] { "ADV", "AUX", "NEG", "O", "TYPO", "UH" };
+        String[] unmappedConst = { "ADV", "AUX", "NEG", "O", "TYPO", "UH" };
         
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
