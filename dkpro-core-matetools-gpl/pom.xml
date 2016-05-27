@@ -137,6 +137,11 @@
         </dependency>
         <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+            <artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-parser-fa-parsper</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-tagger-fr-ftb</artifactId>
             <scope>test</scope>
         </dependency>
@@ -252,6 +257,11 @@
             </dependency>
             <dependency>
                 <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                <artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-parser-fa-parsper</artifactId>
+                <version>20141124.0</version>
+            </dependency>
+            <dependency>
+                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
                 <artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-tagger-fr-ftb</artifactId>
                 <version>20130918.0</version>
             </dependency>
@@ -322,6 +332,7 @@
                             <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.matetools-model-parser-fr-ftb</usedDependency>
                             <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.matetools-model-morphtagger-fr-ftb</usedDependency>
                             <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.matetools-model-lemmatizer-fr-ftb</usedDependency>
+                            <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.matetools-model-parser-fa-parsper</usedDependency>
                         </usedDependencies>
                     </configuration>
                 </plugin>
