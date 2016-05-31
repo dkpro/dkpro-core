@@ -27,7 +27,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelEstimator;
-import de.tudarmstadt.ukp.dkpro.core.mallet.MalletUtils;
+import de.tudarmstadt.ukp.dkpro.core.mallet.internal.MalletUtils;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.uima.UimaContext;

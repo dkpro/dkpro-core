@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.tudarmstadt.ukp.dkpro.core.mallet.wordembeddings;
+package de.tudarmstadt.ukp.dkpro.core.mallet.internal.wordembeddings;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import org.apache.commons.lang3.tuple.Pair;

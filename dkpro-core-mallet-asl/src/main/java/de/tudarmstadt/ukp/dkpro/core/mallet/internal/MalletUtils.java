@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.tudarmstadt.ukp.dkpro.core.mallet;
+package de.tudarmstadt.ukp.dkpro.core.mallet.internal;
 
 import cc.mallet.types.TokenSequence;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;

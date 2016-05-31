@@ -19,6 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.mallet.wordembeddings;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelEstimator;
+import de.tudarmstadt.ukp.dkpro.core.mallet.internal.wordembeddings.WordEmbeddingsUtils;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.WordEmbedding;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
