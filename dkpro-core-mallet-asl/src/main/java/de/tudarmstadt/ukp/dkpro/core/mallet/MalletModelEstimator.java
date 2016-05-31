@@ -20,22 +20,19 @@ package de.tudarmstadt.ukp.dkpro.core.mallet;
 import cc.mallet.pipe.TokenSequence2FeatureSequence;
 import cc.mallet.types.Instance;
 import cc.mallet.types.InstanceList;
-import cc.mallet.types.TokenSequence;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.mallet.internal.MalletUtils;
+import de.tudarmstadt.ukp.dkpro.core.mallet.internal.TokenSequenceGenerator;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
-import java.util.OptionalInt;
 
 /**
  * This abstract class defines parameters and methods that are common for Mallet model estimators.
@@ -109,6 +106,7 @@ public abstract class MalletModelEstimator
     private boolean lowercase;
 
     private InstanceList instanceList; // contains the Mallet instances
+    private TokenSequenceGenerator tsGenerator;
 
     @Override
     public void initialize(UimaContext context)
@@ -121,6 +119,10 @@ public abstract class MalletModelEstimator
         numThreads = ComponentParameters.computeNumThreads(numThreads);
         getLogger().info(String.format("Using %d threads.", numThreads));
         instanceList = new InstanceList(new TokenSequence2FeatureSequence());
+        tsGenerator = new TokenSequenceGenerator(tokenFeaturePath);
+        tsGenerator.setLowercase(lowercase);
+        tsGenerator.setUseCharacters(useCharacters);
+        tsGenerator.setMinTokenLength(minTokenLength);
     }
 
     @Override
@@ -129,13 +131,9 @@ public abstract class MalletModelEstimator
     {
         DocumentMetaData metadata = DocumentMetaData.get(aJCas);
         try {
-            List<TokenSequence> tokenSequences = useCharacters
-                    ? MalletUtils.characterSequences(aJCas, getCoveringAnnotationType(), lowercase)
-                    : MalletUtils.tokenSequences(aJCas, getTokenFeaturePath(),
-                    getCoveringAnnotationType(), OptionalInt.of(getMinTokenLength()), lowercase);
-
-            tokenSequences.stream()
-                    .map(ts -> new Instance(ts, MalletUtils.NONE_LABEL,
+            /* retrieve token sequences and convert token sequences to instances */
+            tsGenerator.tokenSequences(aJCas, getCoveringAnnotationType()).stream()
+                    .map(ts -> new Instance(ts, TokenSequenceGenerator.NONE_LABEL,
                             metadata.getDocumentId(), metadata.getDocumentUri()))
                     .forEach(instance -> instanceList.addThruPipe(instance));
         }
@@ -151,19 +149,9 @@ public abstract class MalletModelEstimator
                 : Optional.of(coveringAnnotationType);
     }
 
-    protected int getMinTokenLength()
-    {
-        return minTokenLength;
-    }
-
     protected int getNumThreads()
     {
         return numThreads;
-    }
-
-    protected String getTokenFeaturePath()
-    {
-        return tokenFeaturePath;
     }
 
     public InstanceList getInstanceList()

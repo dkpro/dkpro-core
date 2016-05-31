@@ -22,12 +22,13 @@ import cc.mallet.pipe.TokenSequence2FeatureSequence;
 import cc.mallet.topics.ParallelTopicModel;
 import cc.mallet.topics.TopicInferencer;
 import cc.mallet.types.Instance;
+import cc.mallet.types.TokenSequence;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelEstimator;
-import de.tudarmstadt.ukp.dkpro.core.mallet.internal.MalletUtils;
+import de.tudarmstadt.ukp.dkpro.core.mallet.internal.TokenSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.uima.UimaContext;
@@ -123,6 +124,7 @@ public class LdaTopicModelInferencer
 
     private TopicInferencer inferencer;
     private Pipe malletPipe;
+    private TokenSequenceGenerator tsGenerator;
 
     @Override
     public void initialize(UimaContext context)
@@ -146,44 +148,53 @@ public class LdaTopicModelInferencer
 
         inferencer = model.getInferencer();
         malletPipe = new TokenSequence2FeatureSequence(model.getAlphabet());
+        tsGenerator = new TokenSequenceGenerator(tokenFeaturePath);
+        tsGenerator.setLowercase(lowercase);
+        tsGenerator.setMinTokenLength(minTokenLength);
     }
 
     @Override
     public void process(JCas aJCas)
             throws AnalysisEngineProcessException
     {
-        Instance instance;
-
         try {
-            /* create Mallet Instance */
-            DocumentMetaData metadata = DocumentMetaData.get(aJCas);
-            instance = new Instance(
-                    MalletUtils.tokenSequence(aJCas, tokenFeaturePath, Optional.empty(),
-                            OptionalInt.of(minTokenLength), lowercase),
-                    NONE_LABEL, metadata.getDocumentId(),
-                    metadata.getDocumentUri());
+            List<TokenSequence> tokenSequences = tsGenerator
+                    .tokenSequences(aJCas, Optional.empty());
+
+            if (tokenSequences.isEmpty()) {
+                getLogger().warn("Empty document.");
+            }
+            else {
+                DocumentMetaData metadata = DocumentMetaData.get(aJCas);
+
+                /* create Mallet Instance */
+                TokenSequence ts = tokenSequences.get(0);
+                Instance instance = new Instance(ts, NONE_LABEL, metadata.getDocumentId(),
+                        metadata.getDocumentUri());
+
+
+                /* infer topic distribution across document */
+                TopicDistribution topicDistributionAnnotation = new TopicDistribution(aJCas);
+                double[] topicDistribution = inferencer.getSampledDistribution(
+                        malletPipe.instanceFrom(instance), nIterations, thinning, burnIn);
+
+                /* convert data type (Mallet output -> Dkpro array) */
+                DoubleArray da = new DoubleArray(aJCas, topicDistribution.length);
+                da.copyFromArray(topicDistribution, 0, 0, topicDistribution.length);
+                topicDistributionAnnotation.setTopicProportions(da);
+
+                /* assign topics to document according to topic distribution */
+                int[] assignedTopicIndexes = assignTopics(topicDistribution);
+                IntegerArray topicIndexes = new IntegerArray(aJCas, assignedTopicIndexes.length);
+                topicIndexes.copyFromArray(assignedTopicIndexes, 0, 0, assignedTopicIndexes.length);
+                topicDistributionAnnotation.setTopicAssignment(topicIndexes);
+
+                aJCas.addFsToIndexes(topicDistributionAnnotation);
+            }
         }
         catch (FeaturePathException e) {
             throw new AnalysisEngineProcessException(e);
         }
-
-        /* infer topic distribution across document */
-        TopicDistribution topicDistributionAnnotation = new TopicDistribution(aJCas);
-        double[] topicDistribution = inferencer.getSampledDistribution(
-                malletPipe.instanceFrom(instance), nIterations, thinning, burnIn);
-
-        /* convert data type (Mallet output -> Dkpro array) */
-        DoubleArray da = new DoubleArray(aJCas, topicDistribution.length);
-        da.copyFromArray(topicDistribution, 0, 0, topicDistribution.length);
-        topicDistributionAnnotation.setTopicProportions(da);
-
-        /* assign topics to document according to topic distribution */
-        int[] assignedTopicIndexes = assignTopics(topicDistribution);
-        IntegerArray topicIndexes = new IntegerArray(aJCas, assignedTopicIndexes.length);
-        topicIndexes.copyFromArray(assignedTopicIndexes, 0, 0, assignedTopicIndexes.length);
-        topicDistributionAnnotation.setTopicAssignment(topicIndexes);
-
-        aJCas.addFsToIndexes(topicDistributionAnnotation);
     }
 
     /**
