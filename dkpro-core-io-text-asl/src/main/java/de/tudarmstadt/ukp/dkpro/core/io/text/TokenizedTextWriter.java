@@ -33,11 +33,9 @@ import org.apache.uima.resource.ResourceInitializationException;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.file.Files;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static org.apache.uima.fit.util.JCasUtil.select;
 
@@ -52,6 +50,7 @@ public class TokenizedTextWriter
     private static final String TOKEN_SEPARATOR = " ";
     private static final String NUMBER_REPLACEMENT = "NUM";
     private static final String STOPWORD_REPLACEMENT = "STOP";
+    public static final boolean LOWERCASE_STOPWORDS = true;
 
     /**
      * Encoding for the target file. Default is UTF-8.
@@ -100,26 +99,6 @@ public class TokenizedTextWriter
     @ConfigurationParameter(name = PARAM_EXTENSION, mandatory = true, defaultValue = ".txt")
     private String extension = ".txt";
 
-    /**
-     * Read a file containing stopwords (one per line).
-     * <p>
-     * Empty lines and lines starting with ("#") are filtered out.
-     *
-     * @param f input file
-     * @return a collection of unique stopwords
-     * @throws IOException
-     */
-    private static Set<String> readStopwordsFile(File f)
-            throws IOException
-    {
-        return Files.readAllLines(f.toPath()).stream()
-                .map(String::trim)
-                .filter(l -> !l.isEmpty())
-                .filter(l -> !l.startsWith("#"))
-                .map(String::toLowerCase)
-                .collect(Collectors.toSet());
-    }
-
     @Override
     public void initialize(UimaContext context)
             throws ResourceInitializationException
@@ -129,7 +108,7 @@ public class TokenizedTextWriter
         try {
             stopwords = stopwordsFile == null
                     ? Collections.emptySet()
-                    : readStopwordsFile(stopwordsFile);
+                    : TextUtils.readStopwordsFile(stopwordsFile, LOWERCASE_STOPWORDS);
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);
