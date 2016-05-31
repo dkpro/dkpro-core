@@ -130,7 +130,7 @@ public abstract class MalletModelEstimator
         try {
             List<TokenSequence> tokenSequences = useCharacters
                     ? MalletUtils.characterSequences(aJCas, getCoveringAnnotationType(), lowercase)
-                    : MalletUtils.generateTokenSequences(aJCas, getTokenFeaturePath(),
+                    : MalletUtils.tokenSequences(aJCas, getTokenFeaturePath(),
                     getCoveringAnnotationType(), OptionalInt.of(getMinTokenLength()), lowercase);
 
             tokenSequences.stream()

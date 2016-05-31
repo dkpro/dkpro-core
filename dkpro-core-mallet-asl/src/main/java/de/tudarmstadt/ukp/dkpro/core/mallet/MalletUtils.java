@@ -21,10 +21,7 @@ import cc.mallet.types.TokenSequence;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathUtils;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.util.CasUtil;
@@ -33,8 +30,6 @@ import org.apache.uima.jcas.JCas;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.apache.uima.fit.util.JCasUtil.selectCovered;
-
 /**
  * Utility methods for Mallet for creating {@link TokenSequence}s etc.
  */
@@ -42,133 +37,6 @@ public class MalletUtils
 {
     public static final String NONE_LABEL = "X"; // some label has to be set for Mallet instances
     public static final String WHITESPACE_CHAR_REPLACEMENT = "</s>";
-
-    /**
-     * Generate a TokenSequence from the whole document.
-     *
-     * @param aJCas          a CAS holding the document
-     * @param tokenType      this type will be used as token, e.g. Token, N-gram etc.
-     * @param useLemma       if this is true, use lemmas
-     * @param minTokenLength the minimum token length to use
-     * @return a {@link TokenSequence}
-     * @throws FeaturePathException if the annotation type specified in {@code PARAM_TOKEN_FEATURE_PATH} cannot be extracted.
-     * @deprecated use {@link #generateTokenSequence(JCas, String, Optional, OptionalInt, boolean)} instead
-     */
-    @Deprecated
-    public static TokenSequence generateTokenSequence(JCas aJCas, Type tokenType,
-            boolean useLemma, int minTokenLength)
-            throws FeaturePathException
-    {
-        TokenSequence tokenSequence = new TokenSequence();
-        for (AnnotationFS segment : CasUtil.select(aJCas.getCas(), tokenType)) {
-            tokenSequence
-                    .addAll(getTokensFromAnnotation(segment, useLemma, minTokenLength).toArray());
-        }
-        return tokenSequence;
-    }
-
-    /**
-     * Extract the token texts (or lemmas) covered by the given annotation (e.g. a {@link Sentence}).
-     *
-     * @param annotation     a covering annotation (e.g. {@link Sentence})
-     * @param useLemma       if true, extract lemmas instead of token texts.
-     * @param minTokenLength the minimum length for the tokens (or lemmas); shorter tokens ar omitted.
-     * @return a list of strings
-     * @deprecated no longer required when using {@link #generateTokenSequences(JCas, String, Optional, OptionalInt, boolean)}
-     */
-    @Deprecated
-    private static Collection<String> getTokensFromAnnotation(AnnotationFS annotation,
-            boolean useLemma, int minTokenLength)
-    {
-        Collection<String> tokens;
-        if (useLemma) {
-            tokens = new ArrayList<>();
-
-            /* concatenate multiple lemmas: */
-            // selectCovered(Lemma.class, annotation).stream()
-            // .map(lemma -> lemma.getValue())
-            // .filter(lemma -> lemma.length() >= minTokenLength)
-            // .reduce((l1, l2) -> l1 + "_" + l2)
-            // .ifPresent(token -> tokens.add(token));
-
-            for (Lemma lemma : selectCovered(Lemma.class, annotation)) {
-                String text = lemma.getValue();
-                if (text.length() >= minTokenLength) {
-                    tokens.add(text);
-                }
-            }
-        }
-        else {
-            tokens = new ArrayList<>(1);
-            String text = annotation.getCoveredText();
-            if (text.length() >= minTokenLength) {
-                tokens.add(text);
-            }
-        }
-        return tokens;
-    }
-
-    /**
-     * Generate an instance from the text covered by the given annotation.
-     *
-     * @param minTokenLength the minimum length for the tokens (or lemmas); shorter tokens ar omitted.
-     * @param useLemma       if this is true, use lemmas
-     * @param annotation     an annotation representing a document segment, e.g. {@link Sentence}.
-     * @param tokenType      the type to use for representing tokens, usually {@link Token}, but could also be
-     *                       any other type.
-     * @return a {@link TokenSequence}
-     * @deprecated use {@link #generateTokenSequence(JCas, String, Optional, OptionalInt, boolean)} instead
-     */
-    @Deprecated
-    public static TokenSequence generateTokenSequence(int minTokenLength, boolean useLemma,
-            AnnotationFS annotation, Type tokenType)
-    {
-        TokenSequence tokenSequence = new TokenSequence();
-
-        for (AnnotationFS segment : CasUtil.selectCovered(tokenType, annotation)) {
-            tokenSequence
-                    .addAll(getTokensFromAnnotation(segment, useLemma, minTokenLength).toArray());
-        }
-        return tokenSequence;
-    }
-
-    /**
-     * Generate one or multiple TokenSequences from the given document. If
-     * {@code documentEntity} is set, an instance is generated from each segment annotated
-     * with the given type. Otherwise, one instance is generated from the whole document.
-     *
-     * @param aJCas          the current {@link JCas}
-     * @param documentEntity the entity determining a document, e.g. Sentence
-     * @param minTokenLength all tokens with less characters are omitted
-     * @param typeName       the annotation type of a token
-     * @param useLemma       if true, use lemmas instead of tokens
-     * @return a list of {@link TokenSequence}s representing the documents (or e.g. sentences).
-     * @throws FeaturePathException if the annotation type specified in PARAM_TOKEN_FEATURE_PATH cannot be extracted.
-     * @deprecated use {@link #generateTokenSequences(JCas, String, Optional, OptionalInt, boolean)} instead
-     */
-    @Deprecated
-    public static Collection<TokenSequence> generateTokenSequences(JCas aJCas, String typeName,
-            boolean useLemma, int minTokenLength, String documentEntity)
-            throws FeaturePathException
-    {
-        Collection<TokenSequence> tokenSequences;
-        CAS cas = aJCas.getCas();
-        Type tokenType = CasUtil.getType(cas, typeName);
-
-        if (documentEntity == null) {
-            /* generate only one tokenSequence (for the whole document) */
-            tokenSequences = new ArrayList<>(1);
-            tokenSequences.add(generateTokenSequence(aJCas, tokenType, useLemma, minTokenLength));
-        }
-        else {
-            /* generate tokenSequences for every segment (e.g. sentence) */
-            tokenSequences = CasUtil.select(cas, CasUtil.getType(cas, documentEntity)).stream()
-                    .map(segment -> generateTokenSequence(minTokenLength, useLemma, segment,
-                            tokenType))
-                    .collect(Collectors.toList());
-        }
-        return tokenSequences;
-    }
 
     /**
      * Generate a {@link TokenSequence} of all features (e.g. tokens or lemmas) covered by an
@@ -183,28 +51,7 @@ public class MalletUtils
      * @return a {@link TokenSequence} holding all extracted tokens
      * @throws FeaturePathException if the annotation type specified in PARAM_TOKEN_FEATURE_PATH cannot be extracted.
      */
-    public static TokenSequence generateTokenSequence(JCas aJCas, String featurePath,
-            Optional<AnnotationFS> coveringAnnotation, OptionalInt minTokenLength,
-            boolean lowercase)
-            throws FeaturePathException
-    {
-        return new TokenSequence(extractAnnotationValues(aJCas, featurePath, coveringAnnotation,
-                minTokenLength, lowercase)
-                .toArray());
-    }
-
-    /**
-     * Extract a list of feature values.
-     *
-     * @param aJCas              a {@link JCas}
-     * @param featurePath        the feature path of the "tokens"
-     * @param coveringAnnotation if set, extract only tokens covered by this annotation (e.g. a sentences); otherwise, all tokens in the CAS are extracted
-     * @param minTokenLength     tokens that are shorter than this value are omitted
-     * @param lowercase          if true, all tokens are lowercased
-     * @return a list of strings
-     * @throws FeaturePathException if the annotation type specified in PARAM_TOKEN_FEATURE_PATH cannot be extracted.
-     */
-    public static List<String> extractAnnotationValues(JCas aJCas, String featurePath,
+    public static TokenSequence tokenSequence(JCas aJCas, String featurePath,
             Optional<AnnotationFS> coveringAnnotation, OptionalInt minTokenLength,
             boolean lowercase)
             throws FeaturePathException
@@ -223,7 +70,7 @@ public class MalletUtils
                 tokenSequence.add(value);
             }
         }
-        return tokenSequence;
+        return new TokenSequence(tokenSequence.toArray());
     }
 
     /**
@@ -239,7 +86,7 @@ public class MalletUtils
      * @return a {@code Collection<TokenSequence>}
      * @throws FeaturePathException if the annotation type specified in PARAM_TOKEN_FEATURE_PATH cannot be extracted.
      */
-    public static List<TokenSequence> generateTokenSequences(JCas aJCas, String featurePath,
+    public static List<TokenSequence> tokenSequences(JCas aJCas, String featurePath,
             Optional<String> coveringTypeName, OptionalInt minTokenLength, boolean lowercase)
             throws FeaturePathException
     {
@@ -248,13 +95,13 @@ public class MalletUtils
             Type coveringType = aJCas.getTypeSystem().getType(coveringTypeName.get());
 
             for (AnnotationFS covering : CasUtil.select(aJCas.getCas(), coveringType)) {
-                TokenSequence ts = generateTokenSequence(aJCas, featurePath, Optional.of(covering),
+                TokenSequence ts = tokenSequence(aJCas, featurePath, Optional.of(covering),
                         minTokenLength, lowercase);
                 tokenSequences.add(ts);
             }
         }
         else {
-            TokenSequence ts = generateTokenSequence(aJCas, featurePath, Optional.empty(),
+            TokenSequence ts = tokenSequence(aJCas, featurePath, Optional.empty(),
                     minTokenLength, lowercase);
             tokenSequences.add(ts);
         }

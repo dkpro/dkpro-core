@@ -158,7 +158,7 @@ public class LdaTopicModelInferencer
             /* create Mallet Instance */
             DocumentMetaData metadata = DocumentMetaData.get(aJCas);
             instance = new Instance(
-                    MalletUtils.generateTokenSequence(aJCas, tokenFeaturePath, Optional.empty(),
+                    MalletUtils.tokenSequence(aJCas, tokenFeaturePath, Optional.empty(),
                             OptionalInt.of(minTokenLength), lowercase),
                     NONE_LABEL, metadata.getDocumentId(),
                     metadata.getDocumentUri());
