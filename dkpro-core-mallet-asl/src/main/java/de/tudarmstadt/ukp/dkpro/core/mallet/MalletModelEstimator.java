@@ -31,6 +31,8 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -48,7 +50,7 @@ import java.util.Optional;
 public abstract class MalletModelEstimator
         extends JCasFileWriter_ImplBase
 {
-    private static final Locale locale = Locale.US;
+    private static final Locale LOCALE = Locale.US;
 
     /**
      * The annotation type to use as input tokens for the model estimation.
@@ -105,8 +107,16 @@ public abstract class MalletModelEstimator
     @ConfigurationParameter(name = PARAM_LOWERCASE, mandatory = true, defaultValue = "false")
     private boolean lowercase;
 
+    public static final String PARAM_STOPWORDS_FILE = "paramStopwordsFile";
+    @ConfigurationParameter(name = PARAM_STOPWORDS_FILE, mandatory = false)
+    private File stopwordsFile;
+
+    public static final String PARAM_STOPWORDS_REPLACEMENT = "paramStopwordsReplacement";
+    @ConfigurationParameter(name = PARAM_STOPWORDS_REPLACEMENT, mandatory = true, defaultValue = "")
+    private String stopwordsReplacement;
+
     private InstanceList instanceList; // contains the Mallet instances
-    private TokenSequenceGenerator tsGenerator;
+    private TokenSequenceGenerator tokenSequenceGenerator;
 
     @Override
     public void initialize(UimaContext context)
@@ -114,15 +124,27 @@ public abstract class MalletModelEstimator
     {
         super.initialize(context);
 
-        Locale.setDefault(locale);
+        // locale should be set to US to define the output format of the Mallet models (especially decimal numbers).
+        Locale.setDefault(LOCALE);
 
         numThreads = ComponentParameters.computeNumThreads(numThreads);
         getLogger().info(String.format("Using %d threads.", numThreads));
+
+        /* Mallet instance list and token sequence generator */
         instanceList = new InstanceList(new TokenSequence2FeatureSequence());
-        tsGenerator = new TokenSequenceGenerator(tokenFeaturePath);
-        tsGenerator.setLowercase(lowercase);
-        tsGenerator.setUseCharacters(useCharacters);
-        tsGenerator.setMinTokenLength(minTokenLength);
+        tokenSequenceGenerator = new TokenSequenceGenerator(tokenFeaturePath);
+        tokenSequenceGenerator.setLowercase(lowercase);
+        tokenSequenceGenerator.setUseCharacters(useCharacters);
+        tokenSequenceGenerator.setMinTokenLength(minTokenLength);
+        if (stopwordsFile != null) {
+            try {
+                tokenSequenceGenerator.setStopwords(stopwordsFile);
+            }
+            catch (IOException e) {
+                throw new ResourceInitializationException(e);
+            }
+            tokenSequenceGenerator.setStopwordReplacement(stopwordsReplacement);
+        }
     }
 
     @Override
@@ -132,7 +154,7 @@ public abstract class MalletModelEstimator
         DocumentMetaData metadata = DocumentMetaData.get(aJCas);
         try {
             /* retrieve token sequences and convert token sequences to instances */
-            tsGenerator.tokenSequences(aJCas, getCoveringAnnotationType()).stream()
+            tokenSequenceGenerator.tokenSequences(aJCas, getCoveringAnnotationType()).stream()
                     .map(ts -> new Instance(ts, TokenSequenceGenerator.NONE_LABEL,
                             metadata.getDocumentId(), metadata.getDocumentUri()))
                     .forEach(instance -> instanceList.addThruPipe(instance));
