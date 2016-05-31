@@ -23,15 +23,15 @@ import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.io.text.TextUtils;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -54,6 +54,18 @@ public class TokenSequenceGenerator
     private int minTokenLength = 0;
     private boolean lowercase = false;
     private boolean useCharacters = false;
+    private Set<String> stopwords = Collections.EMPTY_SET;
+
+    /**
+     * @param stopwordReplacement stopwords are replaced by this token.
+     *                            If empty (default) stopwords are omited.
+     */
+    public void setStopwordReplacement(String stopwordReplacement)
+    {
+        this.stopwordReplacement = stopwordReplacement;
+    }
+
+    private String stopwordReplacement = new String();
 
     /**
      * Default constructor. Uses {@link Token}s to create token sequences.
@@ -94,6 +106,12 @@ public class TokenSequenceGenerator
     public void setUseCharacters(boolean useCharacters)
     {
         this.useCharacters = useCharacters;
+    }
+
+    public void setStopwords(File stopwordsFile)
+            throws IOException
+    {
+        stopwords = TextUtils.readStopwordsFile(stopwordsFile, lowercase);
     }
 
     /**
@@ -186,12 +204,17 @@ public class TokenSequenceGenerator
 
         /* iterate over tokens (optionally within covering annotation) */
         while (valueIterator.hasNext()) {
-            String value = valueIterator.next().getValue();
-            if (value.length() >= minTokenLength) {
+            String token = valueIterator.next().getValue();
+            if (token.length() >= minTokenLength) {
                 if (lowercase) {
-                    value = value.toLowerCase();
+                    token = token.toLowerCase();
                 }
-                tokenSequence.add(value);
+                if (stopwords.contains(token)) {
+                    token = stopwordReplacement;
+                }
+                if (!token.isEmpty()) {
+                    tokenSequence.add(token);
+                }
             }
         }
         return new TokenSequence(tokenSequence.toArray());
