@@ -1,3 +1,20 @@
+/*******************************************************************************
+ * Copyright 2016
+ * Ubiquitous Knowledge Processing (UKP) Lab
+ * Technische Universität Darmstadt
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.text;
 
 import java.io.File;
@@ -16,7 +33,7 @@ public class TextUtils
      * @param file      input file
      * @param lowercase if true, lowercase everything
      * @return a collection of unique stopwords
-     * @throws IOException
+     * @throws IOException if the file cannot be read
      */
     public static Set<String> readStopwordsFile(File file, boolean lowercase)
             throws IOException
