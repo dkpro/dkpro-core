@@ -18,6 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.mallet.wordembeddings;
 
 import cc.mallet.topics.WordEmbeddings;
+import cc.mallet.types.Alphabet;
 import cc.mallet.types.InstanceList;
 import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelEstimator;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -77,10 +78,20 @@ public class WordEmbeddingsEstimator
     public void collectionProcessComplete()
             throws AnalysisEngineProcessException
     {
-        getLogger().info("Computing word embeddings...");
         InstanceList instanceList = getInstanceList();
+        Alphabet alphabet = instanceList.getDataAlphabet();
+        int vocabSize = alphabet.size();
 
-        WordEmbeddings matrix = new WordEmbeddings(instanceList.getDataAlphabet(), dimensions,
+        getLogger().info(
+                String.format("Computing word embeddings with %d dimensions for %d tokens...",
+                        dimensions, vocabSize));
+
+        if (vocabSize * dimensions * 2 > Integer.MAX_VALUE - 12) {
+            throw new AnalysisEngineProcessException(new IllegalStateException(String.format(
+                    "Maximum matrix size (number of words * number of columns/dimensions * 2 exceeded: %d * %d * 2 = %d",
+                    vocabSize, dimensions, vocabSize * dimensions * 2)));
+        }
+        WordEmbeddings matrix = new WordEmbeddings(alphabet, dimensions,
                 windowSize);
         matrix.setQueryWord(exampleWord);
         matrix.setMinDocumentLength(minDocumentLength);
