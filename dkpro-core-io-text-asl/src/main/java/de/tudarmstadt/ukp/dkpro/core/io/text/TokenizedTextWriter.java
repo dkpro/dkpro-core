@@ -21,6 +21,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory.FeaturePathIterator;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.io.TextUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import org.apache.uima.UimaContext;
