@@ -107,10 +107,17 @@ public abstract class MalletModelEstimator
     @ConfigurationParameter(name = PARAM_LOWERCASE, mandatory = true, defaultValue = "false")
     private boolean lowercase;
 
+    /**
+     * The location of the stopwords file.
+     */
     public static final String PARAM_STOPWORDS_FILE = "paramStopwordsFile";
     @ConfigurationParameter(name = PARAM_STOPWORDS_FILE, mandatory = false)
     private File stopwordsFile;
 
+    /**
+     * If set, stopwords found in the {@link #PARAM_STOPWORDS_FILE} location are not removed, but
+     * replaced by the given string (e.g. {@code STOP}).
+     */
     public static final String PARAM_STOPWORDS_REPLACEMENT = "paramStopwordsReplacement";
     @ConfigurationParameter(name = PARAM_STOPWORDS_REPLACEMENT, mandatory = true, defaultValue = "")
     private String stopwordsReplacement;
