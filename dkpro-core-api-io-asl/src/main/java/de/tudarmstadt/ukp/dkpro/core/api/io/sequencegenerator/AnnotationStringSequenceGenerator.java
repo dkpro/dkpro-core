@@ -43,7 +43,6 @@ import java.util.*;
 public class AnnotationStringSequenceGenerator
         extends StringSequenceGenerator
 {
-    public static final String NONE_LABEL = "X"; // some label has to be set for Mallet instances
     private String featurePath = Token.class.getCanonicalName();
     /**
      * ignore tokens that are shorter than this value. If <= 0 or negative, filter nothing.
@@ -136,8 +135,8 @@ public class AnnotationStringSequenceGenerator
         private String stopwordsFile = "";
         private String stopwordsReplacement = "";
         private String featurePath = Token.class.getCanonicalName();
-        private String filterRegex;
-        private String filterRegexReplacement;
+        private String filterRegex = "";
+        private String filterRegexReplacement = "";
 
         /**
          * @param featurePath set the feature path to use for creating token sequences.

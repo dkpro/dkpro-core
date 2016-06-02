@@ -51,6 +51,7 @@ import java.util.Locale;
 public abstract class MalletModelEstimator
         extends JCasFileWriter_ImplBase
 {
+    private static final String NONE_LABEL = "X"; // some label has to be set for Mallet instances
     private static final Locale LOCALE = Locale.US;
 
     /**
@@ -169,7 +170,7 @@ public abstract class MalletModelEstimator
             /* retrieve token sequences and convert token sequences to instances */
             sequenceGenerator.tokenSequences(aJCas).stream()
                     .map(TokenSequence::new)
-                    .map(ts -> new Instance(ts, AnnotationStringSequenceGenerator.NONE_LABEL,
+                    .map(ts -> new Instance(ts, NONE_LABEL,
                             metadata.getDocumentId(), metadata.getDocumentUri()))
                     .forEach(instance -> instanceList.addThruPipe(instance));
         }
