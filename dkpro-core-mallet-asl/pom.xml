@@ -28,6 +28,14 @@
     <name>DKPro Core ASL - Mallet</name>
     <description>A DKPro Core component interfacing the Mallet LDA implementation.</description>
     <dependencies>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.uima</groupId>
+			<artifactId>uimafit-core</artifactId>
+		</dependency>
         <dependency>
             <groupId>cc.mallet</groupId>
             <artifactId>mallet</artifactId>
@@ -47,25 +55,7 @@
         </dependency>
         <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-            <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
-            <!-- Constants in this dependency are inlined - dependency not required at runtime -->
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-            <artifactId>de.tudarmstadt.ukp.dkpro.core.tokit-asl</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.io.text-asl</artifactId>
-        </dependency>
-        <dependency>
-        	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-        	<artifactId>
-        		de.tudarmstadt.ukp.dkpro.core.morpha-asl
-        	</artifactId>
-        	<scope>test</scope>
         </dependency>
         <dependency>
           <groupId>commons-cli</groupId>
@@ -76,6 +66,47 @@
           <groupId>org.slf4j</groupId>
           <artifactId>slf4j-simple</artifactId>
           <version>1.7.12</version>
+        </dependency>
+		<dependency>
+			<groupId>org.apache.uima</groupId>
+			<artifactId>uimaj-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+		    <artifactId>de.tudarmstadt.ukp.dkpro.core.api.io-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.12</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+            <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
+            <!-- Constants in this dependency are inlined - dependency not required at runtime -->
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+        	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        	<artifactId>de.tudarmstadt.ukp.dkpro.core.morpha-asl</artifactId>
+        	<scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+            <artifactId>de.tudarmstadt.ukp.dkpro.core.tokit-asl</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>

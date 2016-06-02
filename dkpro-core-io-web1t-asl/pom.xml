@@ -28,6 +28,10 @@
 	<name>DKPro Core ASL - IO - Web1T n-grams</name>
 	<dependencies>
 		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging-api</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.uima</groupId>
 			<artifactId>uimaj-core</artifactId>
 		</dependency>
@@ -62,6 +66,10 @@
 		<dependency>
 			<groupId>com.googlecode.jweb1t</groupId>
 			<artifactId>com.googlecode.jweb1t</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -119,6 +127,11 @@
             <artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-model-dictionary-en-default</artifactId>
             <scope>test</scope>
         </dependency>
+		<dependency>
+		    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+		    <artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
+		    <scope>test</scope>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>

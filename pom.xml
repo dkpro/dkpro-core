@@ -323,6 +323,16 @@
             <artifactId>xmlunit</artifactId>
             <version>1.6</version>
           </dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-core</artifactId>
+			<version>1.3</version>
+		</dependency>
+        <dependency>
+            <groupId>com.google.code</groupId>
+            <artifactId>cjftransform</artifactId>
+            <version>1.0.1</version>
+        </dependency>
         </dependencies>
     </dependencyManagement>
     <build>

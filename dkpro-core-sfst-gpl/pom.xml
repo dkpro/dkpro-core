@@ -105,6 +105,11 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-tr-trmorph-ca</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+		    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+		    <artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
+		    <scope>compile</scope>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
