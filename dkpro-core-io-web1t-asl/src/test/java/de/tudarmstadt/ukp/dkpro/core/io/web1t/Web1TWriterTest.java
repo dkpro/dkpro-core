@@ -32,8 +32,6 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Rule;
 import org.junit.Test;
 
-import com.googlecode.jweb1t.JWeb1TIndexer;
-
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.clearnlp.ClearNlpLemmatizer;
 import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TFileAccessProvider;
@@ -140,19 +138,11 @@ public class Web1TWriterTest
         throws Exception
     {
         writeWeb1TFormat(target, inputTypes);
-        createIndex(target);
 
         Web1TFileAccessProvider web1tProvider = new Web1TFileAccessProvider("en", target,
                 MIN_NGRAM, MAX_NGRAM);
 
         return web1tProvider;
-    }
-
-    private void createIndex(File target)
-        throws Exception
-    {
-        JWeb1TIndexer indexCreator = new JWeb1TIndexer(target.getAbsolutePath(), MAX_NGRAM);
-        indexCreator.create();
     }
 
     private void writeWeb1TFormat(File target, String[] inputPath)
