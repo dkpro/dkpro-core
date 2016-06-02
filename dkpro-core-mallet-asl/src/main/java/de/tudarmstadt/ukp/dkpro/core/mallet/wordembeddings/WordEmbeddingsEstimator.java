@@ -91,8 +91,7 @@ public class WordEmbeddingsEstimator
                     "Maximum matrix size (number of words * number of columns/dimensions * 2 exceeded: %d * %d * 2 = %d",
                     vocabSize, dimensions, vocabSize * dimensions * 2)));
         }
-        WordEmbeddings matrix = new WordEmbeddings(alphabet, dimensions,
-                windowSize);
+        WordEmbeddings matrix = new WordEmbeddings(alphabet, dimensions, windowSize);
         matrix.setQueryWord(exampleWord);
         matrix.setMinDocumentLength(minDocumentLength);
         matrix.countWords(instanceList);

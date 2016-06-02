@@ -29,7 +29,6 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 
@@ -174,14 +173,15 @@ public class TokenSequenceGeneratorTest
         int expectedSize = 2;
         String expectedFirstToken = "Token1";
         String expectedLastToken = "Token2";
-        Optional<String> covering = Optional.of(Sentence.class.getTypeName());
+        String covering = Sentence.class.getTypeName();
 
         JCas jCas = jcasWithSentence();
 
         TokenSequenceGenerator tsg = new TokenSequenceGenerator(featurePath);
         tsg.setLowercase(false);
+        tsg.setCoveringTypeName(covering);
 
-        List<TokenSequence> sequences = tsg.tokenSequences(jCas, covering);
+        List<TokenSequence> sequences = tsg.tokenSequences(jCas);
         assertEquals(1, sequences.size());
         TokenSequence ts = sequences.get(0);
         assertEquals(expectedSize, ts.size());
@@ -240,8 +240,9 @@ public class TokenSequenceGeneratorTest
 
         TokenSequenceGenerator tsg = new TokenSequenceGenerator();
         tsg.setUseCharacters(true);
+        tsg.setCoveringTypeName(covering);
 
-        List<TokenSequence> tokenSequences = tsg.tokenSequences(jCas, Optional.of(covering));
+        List<TokenSequence> tokenSequences = tsg.tokenSequences(jCas);
         assertEquals(expectedSequences, tokenSequences.size());
         TokenSequence ts = tokenSequences.get(0);
         assertEquals(expectedSize, ts.size());

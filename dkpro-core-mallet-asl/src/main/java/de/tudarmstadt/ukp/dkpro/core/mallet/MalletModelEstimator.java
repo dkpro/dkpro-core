@@ -34,7 +34,6 @@ import org.apache.uima.resource.ResourceInitializationException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
-import java.util.Optional;
 
 /**
  * This abstract class defines parameters and methods that are common for Mallet model estimators.
@@ -89,7 +88,7 @@ public abstract class MalletModelEstimator
      * By default, the full text is used as a document.
      */
     public static final String PARAM_COVERING_ANNOTATION_TYPE = "coveringAnnotationType";
-    @ConfigurationParameter(name = PARAM_COVERING_ANNOTATION_TYPE, mandatory = false)
+    @ConfigurationParameter(name = PARAM_COVERING_ANNOTATION_TYPE, mandatory = true, defaultValue = "")
     private String coveringAnnotationType;
 
     /**
@@ -152,6 +151,7 @@ public abstract class MalletModelEstimator
             }
             tokenSequenceGenerator.setStopwordReplacement(stopwordsReplacement);
         }
+        tokenSequenceGenerator.setCoveringTypeName(coveringAnnotationType);
     }
 
     @Override
@@ -161,7 +161,7 @@ public abstract class MalletModelEstimator
         DocumentMetaData metadata = DocumentMetaData.get(aJCas);
         try {
             /* retrieve token sequences and convert token sequences to instances */
-            tokenSequenceGenerator.tokenSequences(aJCas, getCoveringAnnotationType()).stream()
+            tokenSequenceGenerator.tokenSequences(aJCas).stream()
                     .map(ts -> new Instance(ts, TokenSequenceGenerator.NONE_LABEL,
                             metadata.getDocumentId(), metadata.getDocumentUri()))
                     .forEach(instance -> instanceList.addThruPipe(instance));
@@ -169,13 +169,6 @@ public abstract class MalletModelEstimator
         catch (FeaturePathException e) {
             throw new AnalysisEngineProcessException(e);
         }
-    }
-
-    protected Optional<String> getCoveringAnnotationType()
-    {
-        return coveringAnnotationType == null
-                ? Optional.empty()
-                : Optional.of(coveringAnnotationType);
     }
 
     protected int getNumThreads()

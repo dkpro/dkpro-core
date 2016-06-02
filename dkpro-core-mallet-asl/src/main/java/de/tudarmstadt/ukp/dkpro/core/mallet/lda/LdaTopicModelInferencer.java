@@ -42,7 +42,10 @@ import org.apache.uima.jcas.cas.IntegerArray;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Infers the topic distribution over documents using a Mallet {@link ParallelTopicModel}.
@@ -158,8 +161,7 @@ public class LdaTopicModelInferencer
             throws AnalysisEngineProcessException
     {
         try {
-            List<TokenSequence> tokenSequences = tsGenerator
-                    .tokenSequences(aJCas, Optional.empty());
+            List<TokenSequence> tokenSequences = tsGenerator.tokenSequences(aJCas);
 
             if (tokenSequences.isEmpty()) {
                 getLogger().warn("Empty document.");

@@ -56,6 +56,7 @@ public class TokenSequenceGenerator
     private boolean useCharacters = false;
     private Set<String> stopwords = Collections.emptySet();
     private String stopwordReplacement = "";
+    private Optional<String> coveringTypeName = Optional.empty();
 
     /**
      * Default constructor. Uses {@link Token}s to create token sequences.
@@ -72,6 +73,13 @@ public class TokenSequenceGenerator
     public TokenSequenceGenerator(String featurePath)
     {
         this.featurePath = featurePath;
+    }
+
+    public void setCoveringTypeName(String coveringTypeName)
+    {
+        this.coveringTypeName = coveringTypeName.isEmpty()
+                ? Optional.empty()
+                : Optional.of(coveringTypeName);
     }
 
     /**
@@ -114,19 +122,6 @@ public class TokenSequenceGenerator
     }
 
     /**
-     * Create a list containing only one {@link TokenSequence} from the whole document.
-     *
-     * @param aJCas a {@link JCas}
-     * @return a list containing a single {@link TokenSequence}
-     * @throws FeaturePathException
-     */
-    public List<TokenSequence> tokenSequences(JCas aJCas)
-            throws FeaturePathException
-    {
-        return tokenSequences(aJCas, Optional.empty());
-    }
-
-    /**
      * Create a list containing {@link TokenSequence}s from the document.
      * <p>
      * If the covering type parameter is empty, the resulting list contains only one {@link TokenSequence}
@@ -137,22 +132,21 @@ public class TokenSequenceGenerator
      * @return a list containing {@link TokenSequence}s
      * @throws FeaturePathException
      */
-    public List<TokenSequence> tokenSequences(JCas aJCas, Optional<String> coveringType)
+    public List<TokenSequence> tokenSequences(JCas aJCas)
             throws FeaturePathException
     {
         return useCharacters ?
-                characterSequences(aJCas, coveringType) :
-                annotationSequences(aJCas, coveringType);
+                characterSequences(aJCas) :
+                annotationSequences(aJCas);
     }
 
     /**
      * Generate a list of {@link TokenSequence}s from characters.
      *
-     * @param aJCas            a {@link JCas}
-     * @param coveringTypeName if present, create a dedicated token sequence for each covering type, e.g. token or sentence
+     * @param aJCas a {@link JCas}
      * @return a list of {@link TokenSequence}s
      */
-    private List<TokenSequence> characterSequences(JCas aJCas, Optional<String> coveringTypeName)
+    private List<TokenSequence> characterSequences(JCas aJCas)
     {
         if (coveringTypeName.isPresent()) {
             Type coveringType = aJCas.getTypeSystem().getType(coveringTypeName.get());
@@ -208,12 +202,11 @@ public class TokenSequenceGenerator
      * token sequence is determined by the coveringTypeName parameter (e.g. sentence). If no coveringTypeName
      * is set, one token sequence is created from the whole CAS.
      *
-     * @param aJCas            a {@link JCas}
-     * @param coveringTypeName a  {@code Optional<String>} defining the covering annotation type name from which tokens are selected, e.g. {@code Sentence.getClass().getTokenFeaturePath()}
+     * @param aJCas a {@link JCas}
      * @return a {@code Collection<TokenSequence>}
      * @throws FeaturePathException if the annotation type specified in PARAM_TOKEN_FEATURE_PATH cannot be extracted.
      */
-    private List<TokenSequence> annotationSequences(JCas aJCas, Optional<String> coveringTypeName)
+    private List<TokenSequence> annotationSequences(JCas aJCas)
             throws FeaturePathException
     {
         List<TokenSequence> tokenSequences = new ArrayList<>();
