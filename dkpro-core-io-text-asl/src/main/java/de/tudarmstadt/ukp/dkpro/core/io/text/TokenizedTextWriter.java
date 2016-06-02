@@ -18,27 +18,19 @@
 package de.tudarmstadt.ukp.dkpro.core.io.text;
 
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory.FeaturePathIterator;
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.io.TextUtils;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.AnnotationStringSequenceGenerator;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.Set;
-
-import static org.apache.uima.fit.util.JCasUtil.select;
 
 /**
  * This class writes a set of pre-processed documents into a large text file containing one sentence
@@ -51,7 +43,6 @@ public class TokenizedTextWriter
     private static final String TOKEN_SEPARATOR = " ";
     private static final String NUMBER_REPLACEMENT = "NUM";
     private static final String STOPWORD_REPLACEMENT = "STOP";
-    public static final boolean LOWERCASE_STOPWORDS = true;
 
     /**
      * Encoding for the target file. Default is UTF-8.
@@ -81,7 +72,7 @@ public class TokenizedTextWriter
     private String featurePath;
 
     public static final String PARAM_NUMBER_REGEX = "numberRegex";
-    @ConfigurationParameter(name = PARAM_NUMBER_REGEX, mandatory = false)
+    @ConfigurationParameter(name = PARAM_NUMBER_REGEX, mandatory = true, defaultValue = "")
     private String numberRegex;
 
     /**
@@ -89,9 +80,8 @@ public class TokenizedTextWriter
      * lines and lines starting with {@code #} are ignored. Casing is ignored.
      */
     public static final String PARAM_STOPWORDS_FILE = "stopwordsFile";
-    @ConfigurationParameter(name = PARAM_STOPWORDS_FILE, mandatory = false)
-    private File stopwordsFile;
-    private Set<String> stopwords;
+    @ConfigurationParameter(name = PARAM_STOPWORDS_FILE, mandatory = true, defaultValue = "")
+    private String stopwordsFile;
 
     /**
      * Set the output file extension. Default: {@code .txt}.
@@ -100,6 +90,8 @@ public class TokenizedTextWriter
     @ConfigurationParameter(name = PARAM_EXTENSION, mandatory = true, defaultValue = ".txt")
     private String extension = ".txt";
 
+    private StringSequenceGenerator sequenceGenerator;
+
     @Override
     public void initialize(UimaContext context)
             throws ResourceInitializationException
@@ -107,13 +99,18 @@ public class TokenizedTextWriter
         super.initialize(context);
 
         try {
-            stopwords = stopwordsFile == null
-                    ? Collections.emptySet()
-                    : TextUtils.readStopwordsFile(stopwordsFile, LOWERCASE_STOPWORDS);
+            sequenceGenerator = new AnnotationStringSequenceGenerator.Builder()
+                    .featurePath(featurePath)
+                    .filterRegex(numberRegex)
+                    .filterRegexReplacement(NUMBER_REPLACEMENT)
+                    .stopwordsFile(stopwordsFile)
+                    .stopwordsReplacement(STOPWORD_REPLACEMENT)
+                    .build();
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);
         }
+        sequenceGenerator.setCoveringTypeName(Sentence.class.getCanonicalName());
     }
 
     /*
@@ -130,44 +127,19 @@ public class TokenizedTextWriter
             OutputStream outputStream = getOutputStream(aJCas, extension);
 
             /* iterate over sentences */
-            for (Sentence sentence : select(aJCas, Sentence.class)) {
-                getLogger().trace("Sentence: '" + sentence.getCoveredText() + "'.");
-                FeaturePathIterator<AnnotationFS> valueIterator = FeaturePathUtils
-                        .featurePathIterator(aJCas, featurePath, Optional.of(sentence));
-
-                if (valueIterator.hasNext()) {
-                    // write first token
-                    writeToken(outputStream, valueIterator.next().getValue());
+            for (String[] sentence : sequenceGenerator.tokenSequences(aJCas)) {
+                if (sentence.length > 0) {
+                    outputStream.write(sentence[0].getBytes());
+                    for (int i = 1; i < sentence.length; i++) {
+                        outputStream.write((TOKEN_SEPARATOR + sentence[i]).getBytes());
+                    }
                 }
-                while (valueIterator.hasNext()) {
-                    // write other tokens
-                    outputStream.write(TOKEN_SEPARATOR.getBytes(targetEncoding));
-                    writeToken(outputStream, valueIterator.next().getValue());
-                }
-                getLogger().trace("End of sentence.");
                 outputStream.write(System.lineSeparator().getBytes(targetEncoding));
             }
         }
         catch (FeaturePathException | IOException e) {
             throw new AnalysisEngineProcessException(e);
         }
-    }
-
-    /**
-     * Write a token while replacing stopwords and numbers if specified,
-     *
-     * @param outputStream the {@link OutputStream} to write to
-     * @param text         the token to write
-     * @throws IOException if a low-level I/O error occurs
-     */
-    private void writeToken(OutputStream outputStream, String text)
-            throws IOException
-    {
-        text = stopwords.contains(text.toLowerCase()) ? STOPWORD_REPLACEMENT : text;
-        text = numberRegex != null && text.matches(numberRegex)
-                ? NUMBER_REPLACEMENT
-                : text;
-        outputStream.write(text.getBytes(targetEncoding));
     }
 
     @Override
