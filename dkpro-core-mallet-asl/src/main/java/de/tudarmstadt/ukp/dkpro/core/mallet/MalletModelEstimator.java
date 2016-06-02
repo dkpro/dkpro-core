@@ -23,11 +23,11 @@ import cc.mallet.types.InstanceList;
 import cc.mallet.types.TokenSequence;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.AnnotationStringSequenceGenerator;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.CharacterStringSequenceGenerator;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.mallet.internal.AnnotationStringSequenceGenerator;
-import de.tudarmstadt.ukp.dkpro.core.mallet.internal.CharacterStringSequenceGenerator;
-import de.tudarmstadt.ukp.dkpro.core.mallet.internal.StringSequenceGenerator;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -51,12 +51,17 @@ import java.util.Locale;
 public abstract class MalletModelEstimator
         extends JCasFileWriter_ImplBase
 {
+    private static final Locale LOCALE = Locale.US;
+
     /**
      * The annotation type to use as input tokens for the model estimation.
      * Default: {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token}.
      * For lemmas, for instance, use {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value}
      */
     public static final String PARAM_TOKEN_FEATURE_PATH = "tokenFeaturePath";
+    @ConfigurationParameter(name = PARAM_TOKEN_FEATURE_PATH, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
+    private String tokenFeaturePath;
+
     /**
      * The number of threads to use during model estimation.
      * If not set, the number of threads is automatically set by {@link ComponentParameters#computeNumThreads(int)}.
@@ -65,11 +70,17 @@ public abstract class MalletModelEstimator
      * This might prevent the process from terminating.
      */
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
+    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = ComponentParameters.AUTO_NUM_THREADS)
+    private int numThreads;
+
     /**
      * Ignore tokens (or any other annotation type, as specified by {@link #PARAM_TOKEN_FEATURE_PATH})
      * that are shorter than the given value. Default: 3.
      */
     public static final String PARAM_MIN_TOKEN_LENGTH = "minTokenLength";
+    @ConfigurationParameter(name = PARAM_MIN_TOKEN_LENGTH, mandatory = true, defaultValue = "3")
+    private int minTokenLength;
+
     /**
      * If specified, the text contained in the given segmentation type annotations are fed as
      * separate units ("documents") to the topic model estimator e.g.
@@ -79,39 +90,36 @@ public abstract class MalletModelEstimator
      * By default, the full text is used as a document.
      */
     public static final String PARAM_COVERING_ANNOTATION_TYPE = "coveringAnnotationType";
+    @ConfigurationParameter(name = PARAM_COVERING_ANNOTATION_TYPE, mandatory = true, defaultValue = "")
+    private String coveringAnnotationType;
+
     /**
      * If true (default: false), estimate character embeddings. {@link #PARAM_TOKEN_FEATURE_PATH} is
      * ignored.
      */
     public static final String PARAM_USE_CHARACTERS = "useCharacters";
+    @ConfigurationParameter(name = PARAM_USE_CHARACTERS, mandatory = true, defaultValue = "false")
+    private boolean useCharacters;
+
     /**
      * If set to true (default: false), all tokens are lowercased.
      */
     public static final String PARAM_LOWERCASE = "lowercase";
+    @ConfigurationParameter(name = PARAM_LOWERCASE, mandatory = true, defaultValue = "false")
+    private boolean lowercase;
+
     /**
      * The location of the stopwords file.
      */
     public static final String PARAM_STOPWORDS_FILE = "paramStopwordsFile";
+    @ConfigurationParameter(name = PARAM_STOPWORDS_FILE, mandatory = true, defaultValue = "")
+    private String stopwordsFile;
+
     /**
      * If set, stopwords found in the {@link #PARAM_STOPWORDS_FILE} location are not removed, but
      * replaced by the given string (e.g. {@code STOP}).
      */
     public static final String PARAM_STOPWORDS_REPLACEMENT = "paramStopwordsReplacement";
-    private static final Locale LOCALE = Locale.US;
-    @ConfigurationParameter(name = PARAM_TOKEN_FEATURE_PATH, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
-    private String tokenFeaturePath;
-    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = ComponentParameters.AUTO_NUM_THREADS)
-    private int numThreads;
-    @ConfigurationParameter(name = PARAM_MIN_TOKEN_LENGTH, mandatory = true, defaultValue = "3")
-    private int minTokenLength;
-    @ConfigurationParameter(name = PARAM_COVERING_ANNOTATION_TYPE, mandatory = true, defaultValue = "")
-    private String coveringAnnotationType;
-    @ConfigurationParameter(name = PARAM_USE_CHARACTERS, mandatory = true, defaultValue = "false")
-    private boolean useCharacters;
-    @ConfigurationParameter(name = PARAM_LOWERCASE, mandatory = true, defaultValue = "false")
-    private boolean lowercase;
-    @ConfigurationParameter(name = PARAM_STOPWORDS_FILE, mandatory = true, defaultValue = "")
-    private String stopwordsFile;
     @ConfigurationParameter(name = PARAM_STOPWORDS_REPLACEMENT, mandatory = true, defaultValue = "")
     private String stopwordsReplacement;
 

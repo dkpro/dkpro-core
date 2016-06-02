@@ -15,9 +15,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.tudarmstadt.ukp.dkpro.core.mallet.internal;
+package de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator;
 
-import cc.mallet.types.TokenSequence;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -26,6 +25,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import org.apache.uima.UIMAException;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -192,10 +192,10 @@ public class AnnotationStringSequenceGeneratorTest
 
         List<String[]> sequences = sequenceGenerator.tokenSequences(jCas);
         assertEquals(1, sequences.size());
-        TokenSequence ts = new TokenSequence(sequences.get(0));
-        assertEquals(expectedSize, ts.size());
-        assertEquals(expectedFirstToken, ts.get(0).getText());
-        assertEquals(expectedLastToken, ts.get(ts.size() - 1).getText());
+        String[] sequence = sequences.get(0);
+        Assert.assertEquals(expectedSize, sequence.length);
+        Assert.assertEquals(expectedFirstToken, sequence[0]);
+        Assert.assertEquals(expectedLastToken, sequence[sequence.length - 1]);
     }
 
 }

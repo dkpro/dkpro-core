@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.tudarmstadt.ukp.dkpro.core.mallet.internal;
+package de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator;
 
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -25,8 +25,8 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static de.tudarmstadt.ukp.dkpro.core.mallet.internal.AnnotationStringSequenceGeneratorTest.jCasWithTokens;
-import static de.tudarmstadt.ukp.dkpro.core.mallet.internal.AnnotationStringSequenceGeneratorTest.jcasWithSentence;
+import static de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.AnnotationStringSequenceGeneratorTest.jCasWithTokens;
+import static de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.AnnotationStringSequenceGeneratorTest.jcasWithSentence;
 import static org.junit.Assert.assertEquals;
 
 public class CharacterStringSequenceGeneratorTest

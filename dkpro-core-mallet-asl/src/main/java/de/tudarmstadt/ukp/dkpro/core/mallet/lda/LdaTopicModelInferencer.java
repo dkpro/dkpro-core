@@ -24,11 +24,11 @@ import cc.mallet.topics.TopicInferencer;
 import cc.mallet.types.Instance;
 import cc.mallet.types.TokenSequence;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.AnnotationStringSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelEstimator;
-import de.tudarmstadt.ukp.dkpro.core.mallet.internal.AnnotationStringSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.uima.UimaContext;
@@ -59,61 +59,70 @@ import java.util.List;
 public class LdaTopicModelInferencer
         extends JCasAnnotator_ImplBase
 {
+    private static final String NONE_LABEL = "X";
+
     public final static String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
+    private File modelLocation;
+
     /**
      * The annotation type to use as tokens. Default: {@link Token}
      */
     public final static String PARAM_TYPE_NAME = "typeName";
+    @ConfigurationParameter(name = PARAM_TYPE_NAME, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
+    private String typeName;
+
     /**
      * The number of iterations during inference. Default: 100.
      */
     public final static String PARAM_N_ITERATIONS = "nIterations";
+    @ConfigurationParameter(name = PARAM_N_ITERATIONS, mandatory = true, defaultValue = "100")
+    private int nIterations;
+
     /**
      * The number of iterations before hyperparameter optimization begins. Default: 1
      */
     public final static String PARAM_BURN_IN = "burnIn";
+    @ConfigurationParameter(name = PARAM_BURN_IN, mandatory = true, defaultValue = "1")
+    private int burnIn;
+
     public final static String PARAM_THINNING = "thinning";
+    @ConfigurationParameter(name = PARAM_THINNING, mandatory = true, defaultValue = "5")
+    private int thinning;
+
     /**
      * Minimum topic proportion for the document-topic assignment.
      */
     public final static String PARAM_MIN_TOPIC_PROB = "minTopicProb";
+    @ConfigurationParameter(name = PARAM_MIN_TOPIC_PROB, mandatory = true, defaultValue = "0.2")
+    private double minTopicProb;
+
     /**
      * Maximum number of topics to assign. If not set (or &lt;= 0), the number of topics in the
      * model divided by 10 is set.
      */
     public final static String PARAM_MAX_TOPIC_ASSIGNMENTS = "maxTopicAssignments";
+    @ConfigurationParameter(name = PARAM_MAX_TOPIC_ASSIGNMENTS, mandatory = true, defaultValue = "0")
+    private int maxTopicAssignments;
+
     /**
      * The annotation type to use for the model. Default: {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token}.
      * For lemmas, use {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value}
      */
     public static final String PARAM_TOKEN_FEATURE_PATH = MalletModelEstimator.PARAM_TOKEN_FEATURE_PATH;
+    @ConfigurationParameter(name = PARAM_TOKEN_FEATURE_PATH, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
+    private String tokenFeaturePath;
     /**
      * Ignore tokens (or lemmas, respectively) that are shorter than the given value. Default: 3.
      */
     public static final String PARAM_MIN_TOKEN_LENGTH = "minTokenLength";
+    @ConfigurationParameter(name = PARAM_MIN_TOKEN_LENGTH, mandatory = true, defaultValue = "3")
+    private int minTokenLength;
+
     /**
      * If set to true (default: false), all tokens are lowercased.
      */
     public static final String PARAM_LOWERCASE = "lowercase";
-    private static final String NONE_LABEL = "X";
-    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
-    private File modelLocation;
-    @ConfigurationParameter(name = PARAM_TYPE_NAME, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
-    private String typeName;
-    @ConfigurationParameter(name = PARAM_N_ITERATIONS, mandatory = true, defaultValue = "100")
-    private int nIterations;
-    @ConfigurationParameter(name = PARAM_BURN_IN, mandatory = true, defaultValue = "1")
-    private int burnIn;
-    @ConfigurationParameter(name = PARAM_THINNING, mandatory = true, defaultValue = "5")
-    private int thinning;
-    @ConfigurationParameter(name = PARAM_MIN_TOPIC_PROB, mandatory = true, defaultValue = "0.2")
-    private double minTopicProb;
-    @ConfigurationParameter(name = PARAM_MAX_TOPIC_ASSIGNMENTS, mandatory = true, defaultValue = "0")
-    private int maxTopicAssignments;
-    @ConfigurationParameter(name = PARAM_TOKEN_FEATURE_PATH, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
-    private String tokenFeaturePath;
-    @ConfigurationParameter(name = PARAM_MIN_TOKEN_LENGTH, mandatory = true, defaultValue = "3")
-    private int minTokenLength;
     @ConfigurationParameter(name = PARAM_LOWERCASE, mandatory = true, defaultValue = "false")
     private boolean lowercase;
 
