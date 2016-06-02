@@ -24,8 +24,8 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.TreeSet;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import cc.mallet.topics.ParallelTopicModel;
 import cc.mallet.types.Alphabet;
@@ -45,7 +45,7 @@ public class PrintTopicWordWeights
     private static final Locale LOCALE = Locale.US;
     private static final String FIELD_SEPARATOR = ",";
     private static final String OUTPUTFILE_SUFFIX = ".topics";
-    private final static Logger LOGGER = LoggerFactory.getLogger(PrintTopicWordWeights.class);
+    private final static Log LOGGER = LogFactory.getLog(PrintTopicWordWeights.class);
     private ParallelTopicModel model;
     private Alphabet alphabet;
     private final int nWords;

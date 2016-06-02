@@ -26,8 +26,8 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import cc.mallet.topics.ParallelTopicModel;
 
@@ -40,7 +40,7 @@ public class PrintTopWords
     private static final String TARGET_FILE_SUFFIX = ".twords";
     private static File modelFile;
     private static int nWords;
-    private static final Logger LOG = LoggerFactory.getLogger(PrintTopWords.class);
+    private static final Log LOG = LogFactory.getLog(PrintTopWords.class);
 
     public static void main(String[] args)
         throws IOException
