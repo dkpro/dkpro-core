@@ -51,6 +51,8 @@ public class AnnotationStringSequenceGenerator
     private int minTokenLength = 0;
     private Set<String> stopwords = Collections.emptySet();
     private String stopwordReplacement = "";
+    private String filterRegex = "";
+    private String filterRegexReplacement = "";
 
     private AnnotationStringSequenceGenerator(Builder builder)
             throws IOException
@@ -61,6 +63,8 @@ public class AnnotationStringSequenceGenerator
             this.stopwords = TextUtils.readStopwordsFile(builder.stopwordsFile, isLowercase());
         }
         this.stopwordReplacement = builder.stopwordsReplacement;
+        this.filterRegex = builder.filterRegex;
+        this.filterRegexReplacement = builder.filterRegexReplacement;
     }
 
     @Override
@@ -112,6 +116,9 @@ public class AnnotationStringSequenceGenerator
                 if (stopwords.contains(token)) {
                     token = stopwordReplacement;
                 }
+                if (!filterRegex.isEmpty() && token.matches(filterRegex)) {
+                    token = filterRegexReplacement;
+                }
                 if (!token.isEmpty()) {
                     tokenSequence.add(token);
                 }
@@ -129,6 +136,8 @@ public class AnnotationStringSequenceGenerator
         private String stopwordsFile = "";
         private String stopwordsReplacement = "";
         private String featurePath = Token.class.getCanonicalName();
+        private String filterRegex;
+        private String filterRegexReplacement;
 
         /**
          * @param featurePath set the feature path to use for creating token sequences.
@@ -167,6 +176,26 @@ public class AnnotationStringSequenceGenerator
         public Builder minTokenLength(int minTokenLength)
         {
             this.minTokenLength = minTokenLength;
+            return this;
+        }
+
+        /**
+         * @param filterRegex Tokens matching this regular expression are filtered out.
+         * @return a {@link Builder}
+         */
+        public Builder filterRegex(String filterRegex)
+        {
+            this.filterRegex = filterRegex;
+            return this;
+        }
+
+        /**
+         * @param filterRegexReplacement tokens matching the {@link #filterRegex} are replaced by this string. If this is empty, these tokens are removed.
+         * @return a {@link Builder}
+         */
+        public Builder filterRegexReplacement(String filterRegexReplacement)
+        {
+            this.filterRegexReplacement = filterRegexReplacement;
             return this;
         }
 
