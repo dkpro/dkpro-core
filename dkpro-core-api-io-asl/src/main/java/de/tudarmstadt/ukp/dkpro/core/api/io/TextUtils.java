@@ -17,11 +17,12 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.io;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class TextUtils
 {
@@ -38,8 +39,61 @@ public class TextUtils
     public static Set<String> readStopwordsFile(File file, boolean lowercase)
             throws IOException
     {
-        return Files.readAllLines(file.toPath()).stream()
-                .map(String::trim)
+        return readStopwordsFile(file.toPath(), lowercase);
+    }
+
+    /**
+     * Read a file containing stopwords (one per line).
+     * <p>
+     * Empty lines and lines starting with ("#") are filtered out.
+     *
+     * @param location  input file locateion
+     * @param lowercase if true, lowercase everything
+     * @return a collection of unique stopwords
+     * @throws IOException if the file cannot be read
+     */
+    public static Set<String> readStopwordsFile(String location, boolean lowercase)
+            throws IOException
+    {
+        return readStopwordsFile(new File(location), lowercase);
+    }
+
+    /**
+     * Read an {@link InputStream} containing stopwords (one per line).
+     * <p>
+     * Empty lines and lines starting with ("#") are filtered out.
+     *
+     * @param inputStream input stream
+     * @param lowercase   if true, lowercase everything
+     * @return a collection of unique stopwords
+     * @throws IOException if the file cannot be read
+     */
+    public static Set<String> readStopwordsFile(InputStream inputStream, boolean lowercase)
+    {
+        return readStream(
+                new BufferedReader(new InputStreamReader(inputStream)).lines(), lowercase);
+    }
+
+    /**
+     * Read a file containing stopwords (one per line).
+     * <p>
+     * Empty lines and lines starting with ("#") are filtered out.
+     *
+     * @param path      input file {@link Path}
+     * @param lowercase if true, lowercase everything
+     * @return a collection of unique stopwords
+     * @throws IOException if the file cannot be read
+     */
+    public static Set<String> readStopwordsFile(Path path, boolean lowercase)
+            throws IOException
+    {
+        return readStopwordsFile(Files.newInputStream(path), lowercase);
+
+    }
+
+    private static Set<String> readStream(Stream<String> s, boolean lowercase)
+    {
+        return s.map(String::trim)
                 .filter(l -> !l.isEmpty())
                 .filter(l -> !l.startsWith("#"))
                 .map(l -> lowercase ? l.toLowerCase() : l)
