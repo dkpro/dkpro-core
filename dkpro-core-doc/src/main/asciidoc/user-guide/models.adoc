@@ -18,7 +18,7 @@
 
 == Models and Resources
 
-==== Packaging models
+=== Packaging models
 
 Most models used by DKPro Core are available through our Maven repository. However, in some cases,
 we cannot redistribute the models. For these cases, we provide Ànt-based `build.xml` scripts that
