@@ -22,7 +22,7 @@ The document provides detailed information about the models available for the DK
 components.
 
 [[sect_modelsOverview]]
-= Models
+== Models
 
 include::{generated-dir}modelsOverview.adoc[]
 

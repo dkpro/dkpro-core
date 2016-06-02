@@ -22,8 +22,8 @@
 The document provides detailed information about the DKPro Core input and output formats.
 
 
-= Overview
+== Overview
 include::{generated-dir}formatsOverview.adoc[]
 
-= I/O components
+== I/O components
 include::{generated-dir}formatsDetails.adoc[]
