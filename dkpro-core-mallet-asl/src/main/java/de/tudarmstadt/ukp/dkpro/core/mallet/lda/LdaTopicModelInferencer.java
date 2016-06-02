@@ -28,7 +28,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelEstimator;
-import de.tudarmstadt.ukp.dkpro.core.mallet.internal.TokenSequenceGenerator;
+import de.tudarmstadt.ukp.dkpro.core.mallet.internal.AnnotationSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.uima.UimaContext;
@@ -42,6 +42,7 @@ import org.apache.uima.jcas.cas.IntegerArray;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -127,7 +128,7 @@ public class LdaTopicModelInferencer
 
     private TopicInferencer inferencer;
     private Pipe malletPipe;
-    private TokenSequenceGenerator tsGenerator;
+    private AnnotationSequenceGenerator tsGenerator;
 
     @Override
     public void initialize(UimaContext context)
@@ -151,9 +152,16 @@ public class LdaTopicModelInferencer
 
         inferencer = model.getInferencer();
         malletPipe = new TokenSequence2FeatureSequence(model.getAlphabet());
-        tsGenerator = new TokenSequenceGenerator(tokenFeaturePath);
+        try {
+            tsGenerator = new AnnotationSequenceGenerator.Builder()
+                    .featurePath(tokenFeaturePath)
+                    .minTokenLength(minTokenLength)
+                    .build();
+        }
+        catch (IOException e) {
+            throw new ResourceInitializationException(e);
+        }
         tsGenerator.setLowercase(lowercase);
-        tsGenerator.setMinTokenLength(minTokenLength);
     }
 
     @Override

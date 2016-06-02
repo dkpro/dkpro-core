@@ -24,6 +24,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.mallet.internal.AnnotationSequenceGenerator;
+import de.tudarmstadt.ukp.dkpro.core.mallet.internal.CharacterSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.mallet.internal.TokenSequenceGenerator;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -31,7 +33,6 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
 
@@ -110,8 +111,8 @@ public abstract class MalletModelEstimator
      * The location of the stopwords file.
      */
     public static final String PARAM_STOPWORDS_FILE = "paramStopwordsFile";
-    @ConfigurationParameter(name = PARAM_STOPWORDS_FILE, mandatory = false)
-    private File stopwordsFile;
+    @ConfigurationParameter(name = PARAM_STOPWORDS_FILE, mandatory = true, defaultValue = "")
+    private String stopwordsFile;
 
     /**
      * If set, stopwords found in the {@link #PARAM_STOPWORDS_FILE} location are not removed, but
@@ -138,19 +139,23 @@ public abstract class MalletModelEstimator
 
         /* Mallet instance list and token sequence generator */
         instanceList = new InstanceList(new TokenSequence2FeatureSequence());
-        tokenSequenceGenerator = new TokenSequenceGenerator(tokenFeaturePath);
-        tokenSequenceGenerator.setLowercase(lowercase);
-        tokenSequenceGenerator.setUseCharacters(useCharacters);
-        tokenSequenceGenerator.setMinTokenLength(minTokenLength);
-        if (stopwordsFile != null) {
+
+        if (useCharacters) {
+            tokenSequenceGenerator = new CharacterSequenceGenerator();
+        }
+        else {
             try {
-                tokenSequenceGenerator.setStopwords(stopwordsFile);
+                tokenSequenceGenerator = new AnnotationSequenceGenerator.Builder()
+                        .minTokenLength(minTokenLength)
+                        .stopwordsFile(stopwordsFile)
+                        .stopwordsReplacement(stopwordsReplacement)
+                        .build();
             }
             catch (IOException e) {
                 throw new ResourceInitializationException(e);
             }
-            tokenSequenceGenerator.setStopwordReplacement(stopwordsReplacement);
         }
+
         tokenSequenceGenerator.setCoveringTypeName(coveringAnnotationType);
     }
 
@@ -162,7 +167,7 @@ public abstract class MalletModelEstimator
         try {
             /* retrieve token sequences and convert token sequences to instances */
             tokenSequenceGenerator.tokenSequences(aJCas).stream()
-                    .map(ts -> new Instance(ts, TokenSequenceGenerator.NONE_LABEL,
+                    .map(ts -> new Instance(ts, AnnotationSequenceGenerator.NONE_LABEL,
                             metadata.getDocumentId(), metadata.getDocumentUri()))
                     .forEach(instance -> instanceList.addThruPipe(instance));
         }

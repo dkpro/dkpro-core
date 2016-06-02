@@ -28,11 +28,12 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class TokenSequenceGeneratorTest
+public class AnnotationSequenceGeneratorTest
 {
 
     /**
@@ -41,7 +42,7 @@ public class TokenSequenceGeneratorTest
      * @return a {@link JCas} with two tokens.
      * @throws UIMAException
      */
-    private static JCas jCasWithTokens()
+    protected static JCas jCasWithTokens()
             throws UIMAException
     {
         JCas jCas = JCasFactory.createJCas();
@@ -64,7 +65,7 @@ public class TokenSequenceGeneratorTest
      * @return a {@link JCas}
      * @throws UIMAException
      */
-    private static JCas jcasWithLemmas()
+    protected static JCas jcasWithLemmas()
             throws UIMAException
     {
         JCas jCas = JCasFactory.createJCas();
@@ -97,7 +98,7 @@ public class TokenSequenceGeneratorTest
      * @throws UIMAException
      * @see #jCasWithTokens()
      */
-    private static JCas jcasWithSentence()
+    protected static JCas jcasWithSentence()
             throws UIMAException
     {
         JCas jCas = jCasWithTokens();
@@ -109,7 +110,7 @@ public class TokenSequenceGeneratorTest
 
     @Test
     public void testGenerateSequenceFeaturePath()
-            throws FeaturePathException, UIMAException
+            throws FeaturePathException, UIMAException, IOException
     {
         String featurePath = Token.class.getName();
         int expectedSize = 2;
@@ -118,7 +119,9 @@ public class TokenSequenceGeneratorTest
 
         JCas jCas = jCasWithTokens();
 
-        TokenSequenceGenerator tsg = new TokenSequenceGenerator(featurePath);
+        AnnotationSequenceGenerator tsg = new AnnotationSequenceGenerator.Builder()
+                .featurePath(featurePath)
+                .build();
 
         TokenSequence ts = tsg.tokenSequences(jCas).get(0);
         assertEquals(expectedSize, ts.size());
@@ -128,7 +131,7 @@ public class TokenSequenceGeneratorTest
 
     @Test
     public void testGenerateSequenceFeaturePathLowercase()
-            throws FeaturePathException, UIMAException
+            throws FeaturePathException, UIMAException, IOException
     {
         String featurePath = Token.class.getName();
         int expectedSize = 2;
@@ -137,7 +140,9 @@ public class TokenSequenceGeneratorTest
 
         JCas jCas = jCasWithTokens();
 
-        TokenSequenceGenerator tsg = new TokenSequenceGenerator(featurePath);
+        AnnotationSequenceGenerator tsg = new AnnotationSequenceGenerator.Builder()
+                .featurePath(featurePath)
+                .build();
         tsg.setLowercase(true);
 
         TokenSequence ts = tsg.tokenSequences(jCas).get(0);
@@ -148,7 +153,7 @@ public class TokenSequenceGeneratorTest
 
     @Test
     public void testGenerateSequenceFeaturePathLemmas()
-            throws UIMAException, FeaturePathException
+            throws UIMAException, FeaturePathException, IOException
     {
         String featurePath = Token.class.getName() + "/lemma/value";
         int expectedSize = 2;
@@ -157,7 +162,9 @@ public class TokenSequenceGeneratorTest
 
         JCas jCas = jcasWithLemmas();
 
-        TokenSequenceGenerator tsg = new TokenSequenceGenerator(featurePath);
+        AnnotationSequenceGenerator tsg = new AnnotationSequenceGenerator.Builder()
+                .featurePath(featurePath)
+                .build();
 
         TokenSequence ts = tsg.tokenSequences(jCas).get(0);
         assertEquals(expectedSize, ts.size());
@@ -167,7 +174,7 @@ public class TokenSequenceGeneratorTest
 
     @Test
     public void testGenerateSequenceFeaturePathCovering()
-            throws FeaturePathException, UIMAException
+            throws FeaturePathException, UIMAException, IOException
     {
         String featurePath = Token.class.getName();
         int expectedSize = 2;
@@ -177,7 +184,9 @@ public class TokenSequenceGeneratorTest
 
         JCas jCas = jcasWithSentence();
 
-        TokenSequenceGenerator tsg = new TokenSequenceGenerator(featurePath);
+        AnnotationSequenceGenerator tsg = new AnnotationSequenceGenerator.Builder()
+                .featurePath(featurePath)
+                .build();
         tsg.setLowercase(false);
         tsg.setCoveringTypeName(covering);
 
@@ -189,64 +198,4 @@ public class TokenSequenceGeneratorTest
         assertEquals(expectedLastToken, ts.get(ts.size() - 1).getText());
     }
 
-    @Test
-    public void testCharacterSequence()
-            throws UIMAException, FeaturePathException
-    {
-        JCas jcas = jCasWithTokens();
-        int expectedSize = 13;
-        String expectedFirst = "T";
-        String expectedLast = "2";
-
-        TokenSequenceGenerator tsg = new TokenSequenceGenerator();
-        tsg.setUseCharacters(true);
-
-        TokenSequence ts = tsg.tokenSequences(jcas).get(0);
-
-        assertEquals(expectedSize, ts.size());
-        assertEquals(expectedFirst, ts.get(0).getText());
-        assertEquals(expectedLast, ts.get(expectedSize - 1).getText());
-    }
-
-    @Test
-    public void testCharacterSequenceLowercase()
-            throws UIMAException, FeaturePathException
-    {
-        JCas jcas = jCasWithTokens();
-        int expectedSize = 13;
-        String expectedFirst = "t";
-        String expectedLast = "2";
-        TokenSequenceGenerator tsg = new TokenSequenceGenerator();
-        tsg.setUseCharacters(true);
-        tsg.setLowercase(true);
-
-        TokenSequence ts = tsg.tokenSequences(jcas).get(0);
-
-        assertEquals(expectedSize, ts.size());
-        assertEquals(expectedFirst, ts.get(0).getText());
-        assertEquals(expectedLast, ts.get(expectedSize - 1).getText());
-    }
-
-    @Test
-    public void testCharacterSequenceWithCovering()
-            throws UIMAException, FeaturePathException
-    {
-        String covering = Sentence.class.getTypeName();
-        JCas jCas = jcasWithSentence();
-        int expectedSequences = 1;
-        int expectedSize = 13;
-        String expectedFirst = "T";
-        String expectedLast = "2";
-
-        TokenSequenceGenerator tsg = new TokenSequenceGenerator();
-        tsg.setUseCharacters(true);
-        tsg.setCoveringTypeName(covering);
-
-        List<TokenSequence> tokenSequences = tsg.tokenSequences(jCas);
-        assertEquals(expectedSequences, tokenSequences.size());
-        TokenSequence ts = tokenSequences.get(0);
-        assertEquals(expectedSize, ts.size());
-        assertEquals(expectedFirst, ts.get(0).getText());
-        assertEquals(expectedLast, ts.get(expectedSize - 1).getText());
-    }
 }
