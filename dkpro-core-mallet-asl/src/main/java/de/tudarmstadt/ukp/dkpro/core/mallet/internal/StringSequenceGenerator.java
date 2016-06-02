@@ -17,7 +17,6 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.mallet.internal;
 
-import cc.mallet.types.TokenSequence;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import org.apache.uima.jcas.JCas;
 
@@ -25,10 +24,10 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * @see AnnotationSequenceGenerator
- * @see CharacterSequenceGenerator
+ * @see AnnotationStringSequenceGenerator
+ * @see CharacterStringSequenceGenerator
  */
-public abstract class TokenSequenceGenerator
+public abstract class StringSequenceGenerator
 {
     private boolean lowercase = false;
     private Optional<String> coveringTypeName = Optional.empty();
@@ -59,16 +58,16 @@ public abstract class TokenSequenceGenerator
     }
 
     /**
-     * Create a list containing {@link TokenSequence}s from the document.
+     * Create a list of string arrays from the document.
      * <p>
-     * If the covering type parameter is empty, the resulting list contains only one {@link TokenSequence}
+     * If the covering type parameter is empty, the resulting list contains only one string array
      * for the whole document. Otherwise, iterate over the annotations
      * specified by the covering type, e.g. sentences, and create a dedicated token sequence for each one.
      *
      * @param aJCas a {@link JCas}
-     * @return a list containing {@link TokenSequence}s
+     * @return a list containing string arrays
      * @throws FeaturePathException
      */
-    public abstract List<TokenSequence> tokenSequences(JCas aJCas)
+    public abstract List<String[]> tokenSequences(JCas aJCas)
             throws FeaturePathException;
 }

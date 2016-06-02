@@ -17,7 +17,6 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.mallet.internal;
 
-import cc.mallet.types.TokenSequence;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathUtils;
@@ -33,7 +32,7 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * Create {@link TokenSequence}s from JCas'.
+ * Create token sequences from JCas annotations.
  * <p>
  * Either create a single token sequence from the whole document, or multiple sequences based on
  * covering annotations, e.g. one sequence for each sentence.
@@ -41,8 +40,8 @@ import java.util.*;
  * By default, the sequences are created from {@link Token}s found in the input document. In order to use
  * other annotations, e.g. lemmas, specify the feature path in {@link Builder#featurePath(String)}.
  */
-public class AnnotationSequenceGenerator
-        extends TokenSequenceGenerator
+public class AnnotationStringSequenceGenerator
+        extends StringSequenceGenerator
 {
     public static final String NONE_LABEL = "X"; // some label has to be set for Mallet instances
     private String featurePath = Token.class.getCanonicalName();
@@ -53,7 +52,7 @@ public class AnnotationSequenceGenerator
     private Set<String> stopwords = Collections.emptySet();
     private String stopwordReplacement = "";
 
-    private AnnotationSequenceGenerator(Builder builder)
+    private AnnotationStringSequenceGenerator(Builder builder)
             throws IOException
     {
         this.minTokenLength = builder.minTokenLength;
@@ -65,38 +64,37 @@ public class AnnotationSequenceGenerator
     }
 
     @Override
-    public List<TokenSequence> tokenSequences(JCas aJCas)
+    public List<String[]> tokenSequences(JCas aJCas)
             throws FeaturePathException
     {
-        List<TokenSequence> tokenSequences = new ArrayList<>();
+        List<String[]> tokenSequences = new ArrayList<>();
         if (getCoveringTypeName().isPresent()) {
             Type coveringType = aJCas.getTypeSystem().getType(getCoveringTypeName().get());
 
             /* iterate over covering annotations */
             for (AnnotationFS covering : CasUtil.select(aJCas.getCas(), coveringType)) {
-                tokenSequences.add(new TokenSequence(
-                        annotationSequence(aJCas, Optional.of(covering)).toArray()));
+                tokenSequences.add(annotationSequence(aJCas, Optional.of(covering)));
             }
         }
         else {
             /* add a single token sequence for the whole document */
             tokenSequences
-                    .add(new TokenSequence(annotationSequence(aJCas, Optional.empty()).toArray()));
+                    .add(annotationSequence(aJCas, Optional.empty()));
         }
         return tokenSequences;
     }
 
     /**
-     * Generate a {@link TokenSequence} of all features (e.g. tokens or lemmas) covered by an
+     * Generate a string array of all features (e.g. tokens or lemmas) covered by an
      * annotation (e.g. a sentence). If no coveringAnnotation is given (i.e. null), return all
      * features in the CAS.
      *
      * @param aJCas              a {@link JCas}
      * @param coveringAnnotation an Optional covering annotation from which tokens are selected, e.g. a {@link Sentence}
-     * @return a {@link TokenSequence} holding all extracted tokens
+     * @return a string array representing all extracted tokens
      * @throws FeaturePathException if the annotation type specified in PARAM_TOKEN_FEATURE_PATH cannot be extracted.
      */
-    private List<String> annotationSequence(JCas aJCas, Optional<AnnotationFS> coveringAnnotation)
+    private String[] annotationSequence(JCas aJCas, Optional<AnnotationFS> coveringAnnotation)
             throws FeaturePathException
     {
         List<String> tokenSequence = new ArrayList<>();
@@ -119,11 +117,11 @@ public class AnnotationSequenceGenerator
                 }
             }
         }
-        return tokenSequence;
+        return tokenSequence.toArray(new String[tokenSequence.size()]);
     }
 
     /**
-     * Builder for {@link AnnotationSequenceGenerator} instances.
+     * Builder for {@link AnnotationStringSequenceGenerator} instances.
      */
     public static class Builder
     {
@@ -173,16 +171,15 @@ public class AnnotationSequenceGenerator
         }
 
         /**
-         * Generate a {@link AnnotationSequenceGenerator}
+         * Generate a {@link AnnotationStringSequenceGenerator}
          *
-         * @return a {@link AnnotationSequenceGenerator} instance
+         * @return a {@link AnnotationStringSequenceGenerator} instance
          * @throws IOException if the stopwords file is specified and cannot be read
          */
-        public AnnotationSequenceGenerator build()
+        public AnnotationStringSequenceGenerator build()
                 throws IOException
         {
-            return new AnnotationSequenceGenerator(this);
+            return new AnnotationStringSequenceGenerator(this);
         }
-
     }
 }

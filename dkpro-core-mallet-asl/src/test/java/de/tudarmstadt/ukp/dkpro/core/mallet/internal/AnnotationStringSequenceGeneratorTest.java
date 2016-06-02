@@ -33,7 +33,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class AnnotationSequenceGeneratorTest
+public class AnnotationStringSequenceGeneratorTest
 {
 
     /**
@@ -119,14 +119,14 @@ public class AnnotationSequenceGeneratorTest
 
         JCas jCas = jCasWithTokens();
 
-        AnnotationSequenceGenerator tsg = new AnnotationSequenceGenerator.Builder()
+        AnnotationStringSequenceGenerator sequenceGenerator = new AnnotationStringSequenceGenerator.Builder()
                 .featurePath(featurePath)
                 .build();
 
-        TokenSequence ts = tsg.tokenSequences(jCas).get(0);
-        assertEquals(expectedSize, ts.size());
-        assertEquals(expectedFirstToken, ts.get(0).getText());
-        assertEquals(expectedLastToken, ts.get(ts.size() - 1).getText());
+        String[] sequence = sequenceGenerator.tokenSequences(jCas).get(0);
+        assertEquals(expectedSize, sequence.length);
+        assertEquals(expectedFirstToken, sequence[0]);
+        assertEquals(expectedLastToken, sequence[sequence.length - 1]);
     }
 
     @Test
@@ -140,15 +140,15 @@ public class AnnotationSequenceGeneratorTest
 
         JCas jCas = jCasWithTokens();
 
-        AnnotationSequenceGenerator tsg = new AnnotationSequenceGenerator.Builder()
+        AnnotationStringSequenceGenerator sequenceGenerator = new AnnotationStringSequenceGenerator.Builder()
                 .featurePath(featurePath)
                 .build();
-        tsg.setLowercase(true);
+        sequenceGenerator.setLowercase(true);
 
-        TokenSequence ts = tsg.tokenSequences(jCas).get(0);
-        assertEquals(expectedSize, ts.size());
-        assertEquals(expectedFirstToken, ts.get(0).getText());
-        assertEquals(expectedLastToken, ts.get(ts.size() - 1).getText());
+        String[] sequence = sequenceGenerator.tokenSequences(jCas).get(0);
+        assertEquals(expectedSize, sequence.length);
+        assertEquals(expectedFirstToken, sequence[0]);
+        assertEquals(expectedLastToken, sequence[sequence.length - 1]);
     }
 
     @Test
@@ -162,14 +162,14 @@ public class AnnotationSequenceGeneratorTest
 
         JCas jCas = jcasWithLemmas();
 
-        AnnotationSequenceGenerator tsg = new AnnotationSequenceGenerator.Builder()
+        AnnotationStringSequenceGenerator sequenceGenerator = new AnnotationStringSequenceGenerator.Builder()
                 .featurePath(featurePath)
                 .build();
 
-        TokenSequence ts = tsg.tokenSequences(jCas).get(0);
-        assertEquals(expectedSize, ts.size());
-        assertEquals(expectedFirstLemma, ts.get(0).getText());
-        assertEquals(expectedLastLemma, ts.get(ts.size() - 1).getText());
+        String[] sequence = sequenceGenerator.tokenSequences(jCas).get(0);
+        assertEquals(expectedSize, sequence.length);
+        assertEquals(expectedFirstLemma, sequence[0]);
+        assertEquals(expectedLastLemma, sequence[sequence.length - 1]);
     }
 
     @Test
@@ -184,15 +184,15 @@ public class AnnotationSequenceGeneratorTest
 
         JCas jCas = jcasWithSentence();
 
-        AnnotationSequenceGenerator tsg = new AnnotationSequenceGenerator.Builder()
+        AnnotationStringSequenceGenerator sequenceGenerator = new AnnotationStringSequenceGenerator.Builder()
                 .featurePath(featurePath)
                 .build();
-        tsg.setLowercase(false);
-        tsg.setCoveringTypeName(covering);
+        sequenceGenerator.setLowercase(false);
+        sequenceGenerator.setCoveringTypeName(covering);
 
-        List<TokenSequence> sequences = tsg.tokenSequences(jCas);
+        List<String[]> sequences = sequenceGenerator.tokenSequences(jCas);
         assertEquals(1, sequences.size());
-        TokenSequence ts = sequences.get(0);
+        TokenSequence ts = new TokenSequence(sequences.get(0));
         assertEquals(expectedSize, ts.size());
         assertEquals(expectedFirstToken, ts.get(0).getText());
         assertEquals(expectedLastToken, ts.get(ts.size() - 1).getText());

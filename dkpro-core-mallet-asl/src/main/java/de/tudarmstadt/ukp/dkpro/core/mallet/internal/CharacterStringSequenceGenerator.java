@@ -17,7 +17,6 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.mallet.internal;
 
-import cc.mallet.types.TokenSequence;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
@@ -29,15 +28,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * A {@link TokenSequenceGenerator} that generates character based tokens.
+ * A {@link StringSequenceGenerator} that generates character based tokens.
  */
-public class CharacterSequenceGenerator
-        extends TokenSequenceGenerator
+public class CharacterStringSequenceGenerator
+        extends StringSequenceGenerator
 {
     public static final String WHITESPACE_CHAR_REPLACEMENT = "</s>";
 
     @Override
-    public List<TokenSequence> tokenSequences(JCas aJCas)
+    public List<String[]> tokenSequences(JCas aJCas)
             throws FeaturePathException
     {
         if (getCoveringTypeName().isPresent()) {
@@ -56,21 +55,20 @@ public class CharacterSequenceGenerator
      * Generate a token sequence where each 'token' is a character. Non-alphabet characters are omitted.
      *
      * @param text a string
-     * @return a {@link TokenSequence}
+     * @return a string array
      */
-    private TokenSequence characterSequence(String text)
+    private String[] characterSequence(String text)
     {
-        if (isLowercase()) {
-            text = text.toLowerCase();
-        }
-        return new TokenSequence(text.chars()
-                .mapToObj(i -> (char) i)
+        return text.chars()
                 /* filter out strange characters */
-                .filter(c -> Character.isAlphabetic(c) || Character.isDigit(c) || Character
-                        .isWhitespace(c))
+                .filter(c -> Character.isAlphabetic(c) || Character.isDigit(c) ||
+                        Character.isWhitespace(c))
                 /* replace whitespace characters */
-                .map(c -> Character.isWhitespace(c) ? WHITESPACE_CHAR_REPLACEMENT : c)
-                .toArray());
+                .mapToObj(c -> Character.isWhitespace(c) ?
+                        WHITESPACE_CHAR_REPLACEMENT :
+                        Character.toString((char) c))
+                .map(s -> isLowercase() ? s.toLowerCase() : s)
+                .toArray(String[]::new);
     }
 
 }

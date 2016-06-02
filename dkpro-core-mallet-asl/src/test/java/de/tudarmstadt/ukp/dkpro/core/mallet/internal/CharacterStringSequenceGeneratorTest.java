@@ -17,7 +17,6 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.mallet.internal;
 
-import cc.mallet.types.TokenSequence;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import org.apache.uima.UIMAException;
@@ -26,11 +25,11 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static de.tudarmstadt.ukp.dkpro.core.mallet.internal.AnnotationSequenceGeneratorTest.jCasWithTokens;
-import static de.tudarmstadt.ukp.dkpro.core.mallet.internal.AnnotationSequenceGeneratorTest.jcasWithSentence;
+import static de.tudarmstadt.ukp.dkpro.core.mallet.internal.AnnotationStringSequenceGeneratorTest.jCasWithTokens;
+import static de.tudarmstadt.ukp.dkpro.core.mallet.internal.AnnotationStringSequenceGeneratorTest.jcasWithSentence;
 import static org.junit.Assert.assertEquals;
 
-public class CharacterSequenceGeneratorTest
+public class CharacterStringSequenceGeneratorTest
 {
     @Test
     public void testCharacterSequence()
@@ -41,13 +40,13 @@ public class CharacterSequenceGeneratorTest
         String expectedFirst = "T";
         String expectedLast = "2";
 
-        CharacterSequenceGenerator tsg = new CharacterSequenceGenerator();
+        CharacterStringSequenceGenerator sequenceGenerator = new CharacterStringSequenceGenerator();
 
-        TokenSequence ts = tsg.tokenSequences(jcas).get(0);
+        String[] sequence = sequenceGenerator.tokenSequences(jcas).get(0);
 
-        assertEquals(expectedSize, ts.size());
-        assertEquals(expectedFirst, ts.get(0).getText());
-        assertEquals(expectedLast, ts.get(expectedSize - 1).getText());
+        assertEquals(expectedSize, sequence.length);
+        assertEquals(expectedFirst, sequence[0]);
+        assertEquals(expectedLast, sequence[expectedSize - 1]);
     }
 
     @Test
@@ -58,14 +57,14 @@ public class CharacterSequenceGeneratorTest
         int expectedSize = 13;
         String expectedFirst = "t";
         String expectedLast = "2";
-        CharacterSequenceGenerator tsg = new CharacterSequenceGenerator();
-        tsg.setLowercase(true);
+        CharacterStringSequenceGenerator sequenceGenerator = new CharacterStringSequenceGenerator();
+        sequenceGenerator.setLowercase(true);
 
-        TokenSequence ts = tsg.tokenSequences(jcas).get(0);
+        String[] sequence = sequenceGenerator.tokenSequences(jcas).get(0);
 
-        assertEquals(expectedSize, ts.size());
-        assertEquals(expectedFirst, ts.get(0).getText());
-        assertEquals(expectedLast, ts.get(expectedSize - 1).getText());
+        assertEquals(expectedSize, sequence.length);
+        assertEquals(expectedFirst, sequence[0]);
+        assertEquals(expectedLast, sequence[expectedSize - 1]);
     }
 
     @Test
@@ -79,14 +78,14 @@ public class CharacterSequenceGeneratorTest
         String expectedFirst = "T";
         String expectedLast = "2";
 
-        TokenSequenceGenerator tsg = new CharacterSequenceGenerator();
-        tsg.setCoveringTypeName(covering);
+        StringSequenceGenerator sequenceGenerator = new CharacterStringSequenceGenerator();
+        sequenceGenerator.setCoveringTypeName(covering);
 
-        List<TokenSequence> tokenSequences = tsg.tokenSequences(jCas);
-        assertEquals(expectedSequences, tokenSequences.size());
-        TokenSequence ts = tokenSequences.get(0);
-        assertEquals(expectedSize, ts.size());
-        assertEquals(expectedFirst, ts.get(0).getText());
-        assertEquals(expectedLast, ts.get(expectedSize - 1).getText());
+        List<String[]> sequences = sequenceGenerator.tokenSequences(jCas);
+        assertEquals(expectedSequences, sequences.size());
+        String[] sequence = sequences.get(0);
+        assertEquals(expectedSize, sequence.length);
+        assertEquals(expectedFirst, sequence[0]);
+        assertEquals(expectedLast, sequence[expectedSize - 1]);
     }
 }
