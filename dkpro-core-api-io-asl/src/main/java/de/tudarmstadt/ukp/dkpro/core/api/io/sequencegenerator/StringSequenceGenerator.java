@@ -90,7 +90,7 @@ public abstract class StringSequenceGenerator
     public abstract List<String[]> tokenSequences(JCas aJCas)
             throws FeaturePathException;
 
-    protected static abstract class Builder<T extends Builder>
+    public static abstract class Builder<T extends Builder>
     {
         private boolean lowercase = false;
         private Optional<String> coveringType = Optional.empty();

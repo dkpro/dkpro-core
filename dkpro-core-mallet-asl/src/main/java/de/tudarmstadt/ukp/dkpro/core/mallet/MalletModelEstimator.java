@@ -142,23 +142,20 @@ public abstract class MalletModelEstimator
         /* Mallet instance list and token sequence generator */
         instanceList = new InstanceList(new TokenSequence2FeatureSequence());
 
-        if (useCharacters) {
-            sequenceGenerator = new CharacterStringSequenceGenerator.Builder()
+        try {
+            /* build sequence generator (for characters or annotations) */
+            StringSequenceGenerator.Builder builder = useCharacters
+                    ? new CharacterStringSequenceGenerator.Builder()
+                    : new AnnotationStringSequenceGenerator.Builder()
+                    .minTokenLength(minTokenLength)
+                    .stopwordsFile(stopwordsFile)
+                    .stopwordsReplacement(stopwordsReplacement);
+            sequenceGenerator = builder
                     .coveringType(coveringAnnotationType)
                     .build();
         }
-        else {
-            try {
-                sequenceGenerator = new AnnotationStringSequenceGenerator.Builder()
-                        .minTokenLength(minTokenLength)
-                        .stopwordsFile(stopwordsFile)
-                        .stopwordsReplacement(stopwordsReplacement)
-                        .coveringType(coveringAnnotationType)
-                        .build();
-            }
-            catch (IOException e) {
-                throw new ResourceInitializationException(e);
-            }
+        catch (IOException e) {
+            throw new ResourceInitializationException(e);
         }
     }
 
