@@ -66,7 +66,7 @@ public abstract class StringSequenceGenerator
      *
      * @param aJCas a {@link JCas}
      * @return a list containing string arrays
-     * @throws FeaturePathException
+     * @throws FeaturePathException if the feature path cannot be resolved
      */
     public abstract List<String[]> tokenSequences(JCas aJCas)
             throws FeaturePathException;

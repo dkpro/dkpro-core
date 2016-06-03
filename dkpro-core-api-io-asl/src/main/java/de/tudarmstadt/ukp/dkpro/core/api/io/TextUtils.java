@@ -47,7 +47,7 @@ public class TextUtils
      * <p>
      * Empty lines and lines starting with ("#") are filtered out.
      *
-     * @param location  input file locateion
+     * @param location  input file location
      * @param lowercase if true, lowercase everything
      * @return a collection of unique stopwords
      * @throws IOException if the file cannot be read
@@ -66,7 +66,6 @@ public class TextUtils
      * @param inputStream input stream
      * @param lowercase   if true, lowercase everything
      * @return a collection of unique stopwords
-     * @throws IOException if the file cannot be read
      */
     public static Set<String> readStopwordsFile(InputStream inputStream, boolean lowercase)
     {
