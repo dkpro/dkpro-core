@@ -32,7 +32,7 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * Create token sequences from JCas annotations.
+ * Create token sequences from JCas annotations. Use a {@link Builder} to create class instances.
  * <p>
  * Either create a single token sequence from the whole document, or multiple sequences based on
  * covering annotations, e.g. one sequence for each sentence.

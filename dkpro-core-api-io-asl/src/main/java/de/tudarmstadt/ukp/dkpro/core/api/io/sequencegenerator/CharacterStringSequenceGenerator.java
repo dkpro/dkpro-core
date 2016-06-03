@@ -31,6 +31,8 @@ import java.util.stream.Collectors;
  * A {@link StringSequenceGenerator} that generates character-based tokens. Hence, each String represents one token.
  * Whitespace characters are replaced by {@link #WHITESPACE_CHAR_REPLACEMENT}.
  * <p>
+ * Use a {@link Builder} to create class instances.
+ * <p>
  * Currently, only alphabetic characters, digits, and whitespaces are retained. All others are omitted.
  */
 public class CharacterStringSequenceGenerator

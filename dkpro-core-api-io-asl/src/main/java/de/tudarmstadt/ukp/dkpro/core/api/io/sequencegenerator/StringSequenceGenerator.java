@@ -29,6 +29,7 @@ import java.util.Optional;
 /**
  * Generic class for implementing classes that generate sequences of strings based on annotations or
  * other criteria.
+ * <p>
  *
  * @see AnnotationStringSequenceGenerator
  * @see CharacterStringSequenceGenerator
