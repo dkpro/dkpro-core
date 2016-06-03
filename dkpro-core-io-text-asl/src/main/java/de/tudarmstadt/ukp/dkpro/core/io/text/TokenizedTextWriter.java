@@ -105,12 +105,12 @@ public class TokenizedTextWriter
                     .filterRegexReplacement(NUMBER_REPLACEMENT)
                     .stopwordsFile(stopwordsFile)
                     .stopwordsReplacement(STOPWORD_REPLACEMENT)
+                    .coveringType(Sentence.class.getCanonicalName())
                     .build();
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);
         }
-        sequenceGenerator.setCoveringTypeName(Sentence.class.getCanonicalName());
     }
 
     /*

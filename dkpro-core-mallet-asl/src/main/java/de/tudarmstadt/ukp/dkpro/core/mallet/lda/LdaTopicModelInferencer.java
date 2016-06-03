@@ -156,12 +156,12 @@ public class LdaTopicModelInferencer
             tsGenerator = new AnnotationStringSequenceGenerator.Builder()
                     .featurePath(tokenFeaturePath)
                     .minTokenLength(minTokenLength)
+                    .lowercase(lowercase)
                     .build();
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);
         }
-        tsGenerator.setLowercase(lowercase);
     }
 
     @Override

@@ -97,6 +97,7 @@ public class WordEmbeddingsEstimatorTest
         File targetFile = new File(targetDir, "embeddings" + compressionMethod.getExtension());
         int expectedLength = 699;
         int dimensions = 50;
+        String covering = Sentence.class.getCanonicalName();
 
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
                 TextReader.PARAM_SOURCE_LOCATION, text,
@@ -105,8 +106,7 @@ public class WordEmbeddingsEstimatorTest
         AnalysisEngineDescription embeddings = createEngineDescription(
                 WordEmbeddingsEstimator.class,
                 WordEmbeddingsEstimator.PARAM_TARGET_LOCATION, targetDir,
-                WordEmbeddingsEstimator.PARAM_COVERING_ANNOTATION_TYPE,
-                Sentence.class.getCanonicalName(),
+                WordEmbeddingsEstimator.PARAM_COVERING_ANNOTATION_TYPE, covering,
                 WordEmbeddingsEstimator.PARAM_NUM_THREADS, 1,
                 WordEmbeddingsEstimator.PARAM_COMPRESSION, compressionMethod);
         SimplePipeline.runPipeline(reader, segmenter, embeddings);

@@ -28,19 +28,27 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * A {@link StringSequenceGenerator} that generates character based tokens.
+ * A {@link StringSequenceGenerator} that generates character-based tokens. Hence, each String represents one token.
+ * Whitespace characters are replaced by {@link #WHITESPACE_CHAR_REPLACEMENT}.
+ * <p>
+ * Currently, only alphabetic characters, digits, and whitespaces are retained. All others are omitted.
  */
 public class CharacterStringSequenceGenerator
         extends StringSequenceGenerator
 {
     public static final String WHITESPACE_CHAR_REPLACEMENT = "</s>";
 
+    private CharacterStringSequenceGenerator(Builder builder)
+    {
+        super(builder);
+    }
+
     @Override
     public List<String[]> tokenSequences(JCas aJCas)
             throws FeaturePathException
     {
         if (getCoveringTypeName().isPresent()) {
-            Type coveringType = aJCas.getTypeSystem().getType(getCoveringTypeName().get());
+            Type coveringType = getType(aJCas.getTypeSystem(), getCoveringTypeName().get());
             return CasUtil.select(aJCas.getCas(), coveringType).stream()
                     .map(AnnotationFS::getCoveredText)
                     .map(this::characterSequence)
@@ -52,7 +60,8 @@ public class CharacterStringSequenceGenerator
     }
 
     /**
-     * Generate a token sequence where each 'token' is a character. Non-alphabet characters are omitted.
+     * Generate a token sequence where each 'token' is a character.
+     * Currently, only alphabetic characters, digits, and whitespaces are retained. All others are omitted.
      *
      * @param text a string
      * @return a string array
@@ -71,4 +80,18 @@ public class CharacterStringSequenceGenerator
                 .toArray(String[]::new);
     }
 
+    public static class Builder
+            extends StringSequenceGenerator.Builder<Builder>
+    {
+        /**
+         * Generate a {@link CharacterStringSequenceGenerator}
+         *
+         * @return a {@link CharacterStringSequenceGenerator} instance
+         */
+        @Override
+        public CharacterStringSequenceGenerator build()
+        {
+            return new CharacterStringSequenceGenerator(this);
+        }
+    }
 }

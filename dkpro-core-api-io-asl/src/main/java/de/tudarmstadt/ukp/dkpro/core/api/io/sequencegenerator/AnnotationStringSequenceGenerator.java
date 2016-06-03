@@ -39,6 +39,8 @@ import java.util.*;
  * <p>
  * By default, the sequences are created from {@link Token}s found in the input document. In order to use
  * other annotations, e.g. lemmas, specify the feature path in {@link Builder#featurePath(String)}.
+ *
+ * @since 1.9.0
  */
 public class AnnotationStringSequenceGenerator
         extends StringSequenceGenerator
@@ -47,20 +49,21 @@ public class AnnotationStringSequenceGenerator
     /**
      * ignore tokens that are shorter than this value. If <= 0 or negative, filter nothing.
      */
-    private int minTokenLength = 0;
-    private Set<String> stopwords = Collections.emptySet();
-    private String stopwordReplacement = "";
-    private String filterRegex = "";
-    private String filterRegexReplacement = "";
+    private int minTokenLength;
+    private Set<String> stopwords;
+    private Optional<String> stopwordReplacement;
+    private Optional<String> filterRegex;
+    private Optional<String> filterRegexReplacement;
 
     private AnnotationStringSequenceGenerator(Builder builder)
             throws IOException
     {
+        super(builder);
         this.minTokenLength = builder.minTokenLength;
         this.featurePath = builder.featurePath;
-        if (!builder.stopwordsFile.isEmpty()) {
-            this.stopwords = TextUtils.readStopwordsFile(builder.stopwordsFile, isLowercase());
-        }
+        stopwords = builder.stopwordsFile.isPresent()
+                ? TextUtils.readStopwordsFile(builder.stopwordsFile.get(), isLowercase())
+                : Collections.emptySet();
         this.stopwordReplacement = builder.stopwordsReplacement;
         this.filterRegex = builder.filterRegex;
         this.filterRegexReplacement = builder.filterRegexReplacement;
@@ -72,8 +75,7 @@ public class AnnotationStringSequenceGenerator
     {
         List<String[]> tokenSequences = new ArrayList<>();
         if (getCoveringTypeName().isPresent()) {
-            Type coveringType = aJCas.getTypeSystem().getType(getCoveringTypeName().get());
-
+            Type coveringType = getType(aJCas.getTypeSystem(), getCoveringTypeName().get());
             /* iterate over covering annotations */
             for (AnnotationFS covering : CasUtil.select(aJCas.getCas(), coveringType)) {
                 tokenSequences.add(annotationSequence(aJCas, Optional.of(covering)));
@@ -113,10 +115,10 @@ public class AnnotationStringSequenceGenerator
                     token = token.toLowerCase();
                 }
                 if (stopwords.contains(token)) {
-                    token = stopwordReplacement;
+                    token = stopwordReplacement.orElse("");
                 }
-                if (!filterRegex.isEmpty() && token.matches(filterRegex)) {
-                    token = filterRegexReplacement;
+                if (filterRegex.isPresent() && token.matches(filterRegex.get())) {
+                    token = filterRegexReplacement.orElse("");
                 }
                 if (!token.isEmpty()) {
                     tokenSequence.add(token);
@@ -130,13 +132,14 @@ public class AnnotationStringSequenceGenerator
      * Builder for {@link AnnotationStringSequenceGenerator} instances.
      */
     public static class Builder
+            extends StringSequenceGenerator.Builder<Builder>
     {
         private int minTokenLength = 0;
-        private String stopwordsFile = "";
-        private String stopwordsReplacement = "";
+        private Optional<String> stopwordsFile = Optional.empty();
+        private Optional<String> stopwordsReplacement = Optional.empty();
         private String featurePath = Token.class.getCanonicalName();
-        private String filterRegex = "";
-        private String filterRegexReplacement = "";
+        private Optional<String> filterRegex = Optional.empty();
+        private Optional<String> filterRegexReplacement = Optional.empty();
 
         /**
          * @param featurePath set the feature path to use for creating token sequences.
@@ -154,7 +157,9 @@ public class AnnotationStringSequenceGenerator
          */
         public Builder stopwordsFile(String stopwordsFile)
         {
-            this.stopwordsFile = stopwordsFile;
+            this.stopwordsFile = stopwordsFile.isEmpty() ?
+                    Optional.empty() :
+                    Optional.of(stopwordsFile);
             return this;
         }
 
@@ -164,7 +169,9 @@ public class AnnotationStringSequenceGenerator
          */
         public Builder stopwordsReplacement(String stopwordsReplacement)
         {
-            this.stopwordsReplacement = stopwordsReplacement;
+            this.stopwordsReplacement = stopwordsReplacement.isEmpty() ?
+                    Optional.empty() :
+                    Optional.of(stopwordsReplacement);
             return this;
         }
 
@@ -184,7 +191,7 @@ public class AnnotationStringSequenceGenerator
          */
         public Builder filterRegex(String filterRegex)
         {
-            this.filterRegex = filterRegex;
+            this.filterRegex = filterRegex.isEmpty() ? Optional.empty() : Optional.of(filterRegex);
             return this;
         }
 
@@ -194,7 +201,9 @@ public class AnnotationStringSequenceGenerator
          */
         public Builder filterRegexReplacement(String filterRegexReplacement)
         {
-            this.filterRegexReplacement = filterRegexReplacement;
+            this.filterRegexReplacement = filterRegexReplacement.isEmpty() ?
+                    Optional.empty() :
+                    Optional.of(filterRegexReplacement);
             return this;
         }
 
@@ -202,7 +211,7 @@ public class AnnotationStringSequenceGenerator
          * Generate a {@link AnnotationStringSequenceGenerator}
          *
          * @return a {@link AnnotationStringSequenceGenerator} instance
-         * @throws IOException if the stopwords file is specified and cannot be read
+         * @throws IOException if a stopwords file is specified and cannot be read
          */
         public AnnotationStringSequenceGenerator build()
                 throws IOException

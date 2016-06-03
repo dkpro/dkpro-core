@@ -23,6 +23,7 @@ import org.apache.uima.UIMAException;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.List;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.AnnotationStringSequenceGeneratorTest.jCasWithTokens;
@@ -40,7 +41,8 @@ public class CharacterStringSequenceGeneratorTest
         String expectedFirst = "T";
         String expectedLast = "2";
 
-        CharacterStringSequenceGenerator sequenceGenerator = new CharacterStringSequenceGenerator();
+        StringSequenceGenerator sequenceGenerator = new CharacterStringSequenceGenerator.Builder()
+                .build();
 
         String[] sequence = sequenceGenerator.tokenSequences(jcas).get(0);
 
@@ -51,14 +53,15 @@ public class CharacterStringSequenceGeneratorTest
 
     @Test
     public void testCharacterSequenceLowercase()
-            throws UIMAException, FeaturePathException
+            throws UIMAException, FeaturePathException, IOException
     {
         JCas jcas = jCasWithTokens();
         int expectedSize = 13;
         String expectedFirst = "t";
         String expectedLast = "2";
-        CharacterStringSequenceGenerator sequenceGenerator = new CharacterStringSequenceGenerator();
-        sequenceGenerator.setLowercase(true);
+        StringSequenceGenerator sequenceGenerator = new CharacterStringSequenceGenerator.Builder()
+                .lowercase(true)
+                .build();
 
         String[] sequence = sequenceGenerator.tokenSequences(jcas).get(0);
 
@@ -69,7 +72,7 @@ public class CharacterStringSequenceGeneratorTest
 
     @Test
     public void testCharacterSequenceWithCovering()
-            throws UIMAException, FeaturePathException
+            throws UIMAException, FeaturePathException, IOException
     {
         String covering = Sentence.class.getTypeName();
         JCas jCas = jcasWithSentence();
@@ -78,8 +81,9 @@ public class CharacterStringSequenceGeneratorTest
         String expectedFirst = "T";
         String expectedLast = "2";
 
-        StringSequenceGenerator sequenceGenerator = new CharacterStringSequenceGenerator();
-        sequenceGenerator.setCoveringTypeName(covering);
+        StringSequenceGenerator sequenceGenerator = new CharacterStringSequenceGenerator.Builder()
+                .coveringType(covering)
+                .build();
 
         List<String[]> sequences = sequenceGenerator.tokenSequences(jCas);
         assertEquals(expectedSequences, sequences.size());

@@ -143,7 +143,9 @@ public abstract class MalletModelEstimator
         instanceList = new InstanceList(new TokenSequence2FeatureSequence());
 
         if (useCharacters) {
-            sequenceGenerator = new CharacterStringSequenceGenerator();
+            sequenceGenerator = new CharacterStringSequenceGenerator.Builder()
+                    .coveringType(coveringAnnotationType)
+                    .build();
         }
         else {
             try {
@@ -151,14 +153,13 @@ public abstract class MalletModelEstimator
                         .minTokenLength(minTokenLength)
                         .stopwordsFile(stopwordsFile)
                         .stopwordsReplacement(stopwordsReplacement)
+                        .coveringType(coveringAnnotationType)
                         .build();
             }
             catch (IOException e) {
                 throw new ResourceInitializationException(e);
             }
         }
-
-        sequenceGenerator.setCoveringTypeName(coveringAnnotationType);
     }
 
     @Override

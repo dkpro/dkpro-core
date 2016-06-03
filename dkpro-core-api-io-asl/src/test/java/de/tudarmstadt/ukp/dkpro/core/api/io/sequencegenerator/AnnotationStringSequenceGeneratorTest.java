@@ -142,8 +142,8 @@ public class AnnotationStringSequenceGeneratorTest
 
         AnnotationStringSequenceGenerator sequenceGenerator = new AnnotationStringSequenceGenerator.Builder()
                 .featurePath(featurePath)
+                .lowercase(true)
                 .build();
-        sequenceGenerator.setLowercase(true);
 
         String[] sequence = sequenceGenerator.tokenSequences(jCas).get(0);
         assertEquals(expectedSize, sequence.length);
@@ -186,9 +186,9 @@ public class AnnotationStringSequenceGeneratorTest
 
         AnnotationStringSequenceGenerator sequenceGenerator = new AnnotationStringSequenceGenerator.Builder()
                 .featurePath(featurePath)
+                .lowercase(false)
+                .coveringType(covering)
                 .build();
-        sequenceGenerator.setLowercase(false);
-        sequenceGenerator.setCoveringTypeName(covering);
 
         List<String[]> sequences = sequenceGenerator.tokenSequences(jCas);
         assertEquals(1, sequences.size());
