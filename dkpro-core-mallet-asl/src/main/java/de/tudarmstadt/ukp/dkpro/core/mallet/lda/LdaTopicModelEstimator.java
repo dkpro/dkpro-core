@@ -145,7 +145,9 @@ public class LdaTopicModelEstimator
         model.setTopicDisplay(displayInterval, displayNTopicWords);
         model.estimate();
         File targetFile = new File(getTargetLocation());
-        targetFile.getParentFile().mkdirs();
+        if (targetFile.getParentFile() != null) {
+            targetFile.getParentFile().mkdirs();
+        }
         model.write(targetFile);
     }
 }
