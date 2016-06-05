@@ -19,6 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator;
 
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -88,6 +89,26 @@ public class AnnotationStringSequenceGeneratorTest
         token2.addToIndexes(jCas);
         lemma1.addToIndexes(jCas);
         lemma2.addToIndexes(jCas);
+        return jCas;
+    }
+
+    protected static JCas jcasWithNamedEntity()
+            throws UIMAException
+    {
+        JCas jCas = JCasFactory.createJCas();
+        jCas.setDocumentText("token1 token2");
+        DocumentMetaData metaData = DocumentMetaData.create(jCas);
+        metaData.setDocumentId("lemmasTest");
+        metaData.addToIndexes(jCas);
+
+        Token token1 = new Token(jCas, 0, 6);
+        Token token2 = new Token(jCas, 7, 13);
+        NamedEntity ne = new NamedEntity(jCas, 0, 6);
+        ne.setValue("TEST");
+        ne.addToIndexes(jCas);
+
+        token1.addToIndexes(jCas);
+        token2.addToIndexes(jCas);
         return jCas;
     }
 
@@ -173,6 +194,24 @@ public class AnnotationStringSequenceGeneratorTest
     }
 
     @Test
+    public void testFeaturePathNamedEntities()
+            throws UIMAException, IOException, FeaturePathException
+    {
+        String featurePath = NamedEntity.class.getCanonicalName();
+        int expectedSize = 1;
+        String expectedNamedEntity = "token1";
+        JCas jCas = jcasWithNamedEntity();
+        AnnotationStringSequenceGenerator sequenceGenerator = new AnnotationStringSequenceGenerator.Builder()
+                .featurePath(featurePath)
+                .build();
+
+        String[] sequence = sequenceGenerator.tokenSequences(jCas).get(0);
+        assertEquals(expectedSize, sequence.length);
+        assertEquals(expectedNamedEntity, sequence[0]);
+
+    }
+
+    @Test
     public void testGenerateSequenceFeaturePathCovering()
             throws FeaturePathException, UIMAException, IOException
     {
@@ -198,4 +237,68 @@ public class AnnotationStringSequenceGeneratorTest
         Assert.assertEquals(expectedLastToken, sequence[sequence.length - 1]);
     }
 
+    @Test
+    public void testFilterRegex()
+            throws UIMAException, IOException, FeaturePathException
+    {
+        JCas jCas = jCasWithTokens();
+        String filterRegex = ".*1";
+
+        int expectedSize = 1;
+        String expectedToken = "Token2";
+
+        AnnotationStringSequenceGenerator sequenceGenerator = new AnnotationStringSequenceGenerator.Builder()
+                .filterRegex(filterRegex)
+                .build();
+        List<String[]> sequences = sequenceGenerator.tokenSequences(jCas);
+        assertEquals(1, sequences.size());
+        String[] sequence = sequences.get(0);
+        assertEquals(expectedSize, sequence.length);
+        assertEquals(expectedToken, sequence[0]);
+    }
+
+    @Test
+    public void testFilterRegexReplace()
+            throws UIMAException, IOException, FeaturePathException
+    {
+        JCas jCas = jCasWithTokens();
+        String filterRegex = ".*1";
+        String replacement = "REPLACED";
+
+        int expectedSize = 2;
+        String expectedToken2 = "Token2";
+
+        AnnotationStringSequenceGenerator sequenceGenerator = new AnnotationStringSequenceGenerator.Builder()
+                .filterRegex(filterRegex)
+                .filterRegexReplacement(replacement)
+                .build();
+        List<String[]> sequences = sequenceGenerator.tokenSequences(jCas);
+        assertEquals(1, sequences.size());
+        String[] sequence = sequences.get(0);
+        assertEquals(expectedSize, sequence.length);
+        assertEquals(replacement, sequence[0]);
+        assertEquals(expectedToken2, sequence[1]);
+    }
+
+    @Test
+    public void testFilterRegexMultiple()
+            throws UIMAException, IOException, FeaturePathException
+    {
+        JCas jCas = jCasWithTokens();
+        String filterRegex1 = ".*1";
+        String filterRegex2 = "xyz";
+
+        int expectedSize = 1;
+        String expectedToken = "Token2";
+
+        AnnotationStringSequenceGenerator sequenceGenerator = new AnnotationStringSequenceGenerator.Builder()
+                .filterRegex(filterRegex1)
+                .filterRegex(filterRegex2)
+                .build();
+        List<String[]> sequences = sequenceGenerator.tokenSequences(jCas);
+        assertEquals(1, sequences.size());
+        String[] sequence = sequences.get(0);
+        assertEquals(expectedSize, sequence.length);
+        assertEquals(expectedToken, sequence[0]);
+    }
 }

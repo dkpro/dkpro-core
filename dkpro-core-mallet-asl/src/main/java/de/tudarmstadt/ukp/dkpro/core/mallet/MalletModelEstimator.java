@@ -124,6 +124,17 @@ public abstract class MalletModelEstimator
     @ConfigurationParameter(name = PARAM_STOPWORDS_REPLACEMENT, mandatory = true, defaultValue = "")
     private String stopwordsReplacement;
 
+    /**
+     * Filter out all tokens matching that regular expression.
+     */
+    public static final String PARAM_FILTER_REGEX = "filterRegex";
+    @ConfigurationParameter(name = PARAM_FILTER_REGEX, mandatory = true, defaultValue = "")
+    private String filterRegex;
+
+    public static final String PARAM_FILTER_REGEX_REPLACEMENT = "filterRegexReplacement";
+    @ConfigurationParameter(name = PARAM_FILTER_REGEX_REPLACEMENT, mandatory = true, defaultValue = "")
+    private String filterRegexReplacement;
+
     private InstanceList instanceList; // contains the Mallet instances
     private StringSequenceGenerator sequenceGenerator;
 
@@ -149,7 +160,10 @@ public abstract class MalletModelEstimator
                     : new AnnotationStringSequenceGenerator.Builder()
                     .minTokenLength(minTokenLength)
                     .stopwordsFile(stopwordsFile)
-                    .stopwordsReplacement(stopwordsReplacement);
+                    .stopwordsReplacement(stopwordsReplacement)
+                    .featurePath(tokenFeaturePath)
+                    .filterRegex(filterRegex)
+                    .filterRegexReplacement(filterRegexReplacement);
             sequenceGenerator = builder
                     .coveringType(coveringAnnotationType)
                     .lowercase(lowercase)

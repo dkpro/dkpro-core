@@ -55,9 +55,9 @@ public class WordEmbeddingsEstimatorTest
     {
         File text = new File("src/test/resources/txt/*");
         File embeddingsFile = new File(testContext.getTestOutputFolder(), "dummy.vec");
-        boolean singularTarget = true;
         int expectedLength = 699;
         int dimensions = 50;
+        String coveringType = Sentence.class.getCanonicalName();
 
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
                 TextReader.PARAM_SOURCE_LOCATION, text,
@@ -66,22 +66,61 @@ public class WordEmbeddingsEstimatorTest
         AnalysisEngineDescription embeddings = createEngineDescription(
                 WordEmbeddingsEstimator.class,
                 WordEmbeddingsEstimator.PARAM_TARGET_LOCATION, embeddingsFile,
-                WordEmbeddingsEstimator.PARAM_SINGULAR_TARGET, singularTarget,
+                WordEmbeddingsEstimator.PARAM_SINGULAR_TARGET, true,
                 WordEmbeddingsEstimator.PARAM_OVERWRITE, true,
                 WordEmbeddingsEstimator.PARAM_NUM_THREADS, 1,
-                WordEmbeddingsEstimator.PARAM_COVERING_ANNOTATION_TYPE,
-                Sentence.class.getCanonicalName());
+                WordEmbeddingsEstimator.PARAM_COVERING_ANNOTATION_TYPE, coveringType);
         SimplePipeline.runPipeline(reader, segmenter, embeddings);
 
         List<String> output = Files.readAllLines(embeddingsFile.toPath());
         assertEquals(expectedLength, output.size());
+
+        /* assert dimensionality for each line */
         output.stream()
                 .map(line -> line.split(" "))
                 /* each line should have 1 + <#dimensions> fields */
                 .peek(line -> assertEquals(dimensions + 1, line.length))
                 /* each value must be parsable to a double */
                 .map(line -> Arrays.copyOfRange(line, 1, dimensions))
+                /* assert each value can be parsed to double */
                 .forEach(array -> Arrays.stream(array).forEach(Double::parseDouble));
+
+        embeddingsFile.delete();
+    }
+
+    @Test(timeout = 60000)
+    public void testFilterRegex()
+            throws UIMAException, IOException
+    {
+        File text = new File("src/test/resources/txt/*");
+        File embeddingsFile = new File(testContext.getTestOutputFolder(), "dummy.vec");
+        int expectedLength = 629;
+        String coveringType = Sentence.class.getCanonicalName();
+
+        String filterRegex = ".*y"; // tokens ending with "y"
+
+        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
+                TextReader.PARAM_SOURCE_LOCATION, text,
+                TextReader.PARAM_LANGUAGE, "en");
+        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
+        AnalysisEngineDescription embeddings = createEngineDescription(
+                WordEmbeddingsEstimator.class,
+                WordEmbeddingsEstimator.PARAM_TARGET_LOCATION, embeddingsFile,
+                WordEmbeddingsEstimator.PARAM_SINGULAR_TARGET, true,
+                WordEmbeddingsEstimator.PARAM_OVERWRITE, true,
+                WordEmbeddingsEstimator.PARAM_NUM_THREADS, 1,
+                WordEmbeddingsEstimator.PARAM_COVERING_ANNOTATION_TYPE, coveringType,
+                WordEmbeddingsEstimator.PARAM_FILTER_REGEX, filterRegex);
+        SimplePipeline.runPipeline(reader, segmenter, embeddings);
+
+        List<String> output = Files.readAllLines(embeddingsFile.toPath());
+        assertEquals(expectedLength, output.size());
+
+        /* assert that no token matches filter regex */
+        assertTrue(output.stream()
+                .map(line -> line.split(" "))
+                .map(tokens -> tokens[0])
+                .noneMatch(token -> token.matches(filterRegex)));
 
         embeddingsFile.delete();
     }
@@ -135,8 +174,6 @@ public class WordEmbeddingsEstimatorTest
     {
         File text = new File("src/test/resources/txt/*");
         File embeddingsFile = new File(testContext.getTestOutputFolder(), "embeddings.vec");
-        boolean singularTarget = true;
-        boolean useCharacters = true;
         int expectedLength = 47;
         int dimensions = 50;
 
@@ -147,8 +184,8 @@ public class WordEmbeddingsEstimatorTest
         AnalysisEngineDescription embeddings = createEngineDescription(
                 WordEmbeddingsEstimator.class,
                 WordEmbeddingsEstimator.PARAM_TARGET_LOCATION, embeddingsFile,
-                WordEmbeddingsEstimator.PARAM_SINGULAR_TARGET, singularTarget,
-                WordEmbeddingsEstimator.PARAM_USE_CHARACTERS, useCharacters,
+                WordEmbeddingsEstimator.PARAM_SINGULAR_TARGET, true,
+                WordEmbeddingsEstimator.PARAM_USE_CHARACTERS, true,
                 WordEmbeddingsEstimator.PARAM_EXAMPLE_WORD, "a",
                 WordEmbeddingsEstimator.PARAM_NUM_THREADS, 1,
                 WordEmbeddingsEstimator.PARAM_OVERWRITE, true);
@@ -171,8 +208,6 @@ public class WordEmbeddingsEstimatorTest
     {
         File text = new File("src/test/resources/txt/*");
         File embeddingsFile = new File(testContext.getTestOutputFolder(), "embeddings.vec");
-        boolean singularTarget = true;
-        boolean useCharacters = true;
         int expectedLength = 46;
         int dimensions = 50;
         String covering = Token.class.getTypeName();
@@ -184,8 +219,8 @@ public class WordEmbeddingsEstimatorTest
         AnalysisEngineDescription embeddings = createEngineDescription(
                 WordEmbeddingsEstimator.class,
                 WordEmbeddingsEstimator.PARAM_TARGET_LOCATION, embeddingsFile,
-                WordEmbeddingsEstimator.PARAM_SINGULAR_TARGET, singularTarget,
-                WordEmbeddingsEstimator.PARAM_USE_CHARACTERS, useCharacters,
+                WordEmbeddingsEstimator.PARAM_SINGULAR_TARGET, true,
+                WordEmbeddingsEstimator.PARAM_USE_CHARACTERS, true,
                 WordEmbeddingsEstimator.PARAM_EXAMPLE_WORD, "a",
                 WordEmbeddingsEstimator.PARAM_NUM_THREADS, 1,
                 WordEmbeddingsEstimator.PARAM_OVERWRITE, true,
@@ -202,4 +237,5 @@ public class WordEmbeddingsEstimatorTest
                 .map(line -> Arrays.copyOfRange(line, 1, dimensions))
                 .forEach(array -> Arrays.stream(array).forEach(Double::parseDouble));
     }
+
 }

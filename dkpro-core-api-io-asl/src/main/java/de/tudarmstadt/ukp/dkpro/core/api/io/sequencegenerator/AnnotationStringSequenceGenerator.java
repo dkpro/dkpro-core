@@ -52,7 +52,7 @@ public class AnnotationStringSequenceGenerator
     private int minTokenLength;
     private Set<String> stopwords;
     private Optional<String> stopwordReplacement;
-    private Optional<String> filterRegex;
+    @SuppressWarnings("SpellCheckingInspection") private Set<String> filterRegexes;
     private Optional<String> filterRegexReplacement;
 
     private AnnotationStringSequenceGenerator(Builder builder)
@@ -65,7 +65,7 @@ public class AnnotationStringSequenceGenerator
                 ? TextUtils.readStopwordsFile(builder.stopwordsFile.get(), isLowercase())
                 : Collections.emptySet();
         this.stopwordReplacement = builder.stopwordsReplacement;
-        this.filterRegex = builder.filterRegex;
+        this.filterRegexes = builder.filterRegexes;
         this.filterRegexReplacement = builder.filterRegexReplacement;
     }
 
@@ -117,8 +117,10 @@ public class AnnotationStringSequenceGenerator
                 if (stopwords.contains(token)) {
                     token = stopwordReplacement.orElse("");
                 }
-                if (filterRegex.isPresent() && token.matches(filterRegex.get())) {
-                    token = filterRegexReplacement.orElse("");
+                for (String filterRegex : filterRegexes) {
+                    if (token.matches(filterRegex)) {
+                        token = filterRegexReplacement.orElse("");
+                    }
                 }
                 if (!token.isEmpty()) {
                     tokenSequence.add(token);
@@ -138,7 +140,7 @@ public class AnnotationStringSequenceGenerator
         private Optional<String> stopwordsFile = Optional.empty();
         private Optional<String> stopwordsReplacement = Optional.empty();
         private String featurePath = Token.class.getCanonicalName();
-        private Optional<String> filterRegex = Optional.empty();
+        @SuppressWarnings("SpellCheckingInspection") private Set<String> filterRegexes = new HashSet<>();
         private Optional<String> filterRegexReplacement = Optional.empty();
 
         /**
@@ -186,17 +188,22 @@ public class AnnotationStringSequenceGenerator
         }
 
         /**
+         * This method can be called multiple times in order to add multiple regular expressions for filtering.
+         * If a token matches any of the regular expression, it is omitted.
+         *
          * @param filterRegex Tokens matching this regular expression are filtered out.
          * @return a {@link Builder}
          */
         public Builder filterRegex(String filterRegex)
         {
-            this.filterRegex = filterRegex.isEmpty() ? Optional.empty() : Optional.of(filterRegex);
+            if (!filterRegex.isEmpty()) {
+                this.filterRegexes.add(filterRegex);
+            }
             return this;
         }
 
         /**
-         * @param filterRegexReplacement tokens matching the {@link #filterRegex} are replaced by this string. If this is empty, these tokens are removed.
+         * @param filterRegexReplacement tokens matching the {@link #filterRegexes} are replaced by this string. If this is empty, these tokens are removed.
          * @return a {@link Builder}
          */
         public Builder filterRegexReplacement(String filterRegexReplacement)
