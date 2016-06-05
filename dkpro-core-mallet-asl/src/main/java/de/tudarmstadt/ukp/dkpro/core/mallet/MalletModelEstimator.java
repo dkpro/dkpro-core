@@ -152,6 +152,7 @@ public abstract class MalletModelEstimator
                     .stopwordsReplacement(stopwordsReplacement);
             sequenceGenerator = builder
                     .coveringType(coveringAnnotationType)
+                    .lowercase(lowercase)
                     .build();
         }
         catch (IOException e) {
