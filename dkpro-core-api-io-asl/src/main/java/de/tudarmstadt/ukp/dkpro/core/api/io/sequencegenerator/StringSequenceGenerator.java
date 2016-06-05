@@ -37,7 +37,7 @@ import java.util.Optional;
 public abstract class StringSequenceGenerator
 {
     private boolean lowercase;
-    private Optional coveringTypeName;
+    private Optional<String> coveringTypeName;
 
     protected StringSequenceGenerator(Builder builder)
     {
@@ -113,7 +113,7 @@ public abstract class StringSequenceGenerator
          */
         public T coveringType(String coveringType)
         {
-            this.coveringType = coveringType.isEmpty() ?
+            this.coveringType = coveringType == null || coveringType.isEmpty() ?
                     Optional.empty() :
                     Optional.of(coveringType);
             return (T) this;
