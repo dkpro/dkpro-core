@@ -71,4 +71,66 @@ public class FrequencyCounterTest
                 Files.lines(expectedFile.toPath()).sorted().toArray(),
                 Files.lines(targetFile.toPath()).sorted().toArray());
     }
+
+    @Test
+    public void testCountSortedAlphabetically()
+            throws Exception
+    {
+        int minCount = 1;
+
+        File targetFile = new File(DkproTestContext.get().getTestOutputFolder(), "counts.txt");
+        URL resource = getClass().getClassLoader().getResource("phrasedetection/counts.txt");
+        assertNotNull(resource);
+        File expectedFile = new File(resource.getFile());
+
+        String sentence = "This is a first test that contains a first test example";
+        String language = "en";
+
+        CollectionReaderDescription reader = createReaderDescription(
+                StringReader.class,
+                StringReader.PARAM_DOCUMENT_TEXT, sentence,
+                StringReader.PARAM_LANGUAGE, language);
+        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
+        AnalysisEngineDescription writer = createEngineDescription(FrequencyCounter.class,
+                FrequencyCounter.PARAM_TARGET_LOCATION, targetFile,
+                FrequencyCounter.PARAM_MIN_COUNT, minCount,
+                FrequencyCounter.PARAM_SORT_BY_ALPHABET, true);
+
+        SimplePipeline.runPipeline(reader, segmenter, writer);
+
+        assertTrue(targetFile.exists());
+        assertArrayEquals(
+                Files.lines(expectedFile.toPath()).sorted(String::compareTo).toArray(),
+                Files.lines(targetFile.toPath()).toArray());
+    }
+
+    @Test
+    public void testCountSortedByValue()
+            throws Exception
+    {
+        int minCount = 1;
+
+        File targetFile = new File(DkproTestContext.get().getTestOutputFolder(), "counts.txt");
+        URL resource = getClass().getClassLoader().getResource("phrasedetection/counts.txt");
+        assertNotNull(resource);
+        File expectedFile = new File(resource.getFile());
+
+        String sentence = "This is a first test that contains a first test example";
+        String language = "en";
+
+        CollectionReaderDescription reader = createReaderDescription(
+                StringReader.class,
+                StringReader.PARAM_DOCUMENT_TEXT, sentence,
+                StringReader.PARAM_LANGUAGE, language);
+        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
+        AnalysisEngineDescription writer = createEngineDescription(FrequencyCounter.class,
+                FrequencyCounter.PARAM_TARGET_LOCATION, targetFile,
+                FrequencyCounter.PARAM_MIN_COUNT, minCount,
+                FrequencyCounter.PARAM_SORT_BY_COUNT, true);
+
+        SimplePipeline.runPipeline(reader, segmenter, writer);
+
+        assertTrue(targetFile.exists());
+        // TODO: test sorting
+    }
 }

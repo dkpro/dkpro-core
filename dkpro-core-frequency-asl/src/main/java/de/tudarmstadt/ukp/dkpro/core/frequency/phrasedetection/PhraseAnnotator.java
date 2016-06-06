@@ -89,6 +89,7 @@ public class PhraseAnnotator
 
     /**
      * The threshold score for phrase construction. Default is 100. Lower values result in fewer phrases.
+     * The value strongly depends on the size of the corpus and the token counts.
      */
     public static final String PARAM_THRESHOLD = "threshold";
     @ConfigurationParameter(name = PARAM_THRESHOLD, mandatory = true, defaultValue = "100")

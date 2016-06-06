@@ -35,6 +35,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * Count unigrams and bigrams in a collection.
@@ -74,6 +77,22 @@ public class FrequencyCounter
     @ConfigurationParameter(name = PARAM_MIN_COUNT, mandatory = true, defaultValue = "5")
     private int minCount;
 
+    /**
+     * If true, sort output by count (descending order).
+     */
+    public static final String PARAM_SORT_BY_COUNT = "sortByCount";
+    @ConfigurationParameter(name = PARAM_SORT_BY_COUNT, mandatory = true, defaultValue = "false")
+    private boolean sortByCount;
+
+    /**
+     * If true, sort output alphabetically.
+     */
+    public static final String PARAM_SORT_BY_ALPHABET = "sortByAlphabet";
+    @ConfigurationParameter(name = PARAM_SORT_BY_ALPHABET, mandatory = true, defaultValue = "false")
+    private boolean sortByAlphabet;
+
+    Optional<Comparator<String>> outputComparator;
+
     private Bag<String> counter;
     private StringSequenceGenerator sequenceGenerator;
 
@@ -99,6 +118,21 @@ public class FrequencyCounter
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);
+        }
+
+        if (sortByAlphabet && sortByCount) {
+            throw new ResourceInitializationException(new IllegalArgumentException(
+                    "Can only sort either by count or alphabetically."));
+        }
+        if (sortByAlphabet) {
+            outputComparator = Optional.of(String::compareTo);
+        }
+        else if (sortByCount) {
+            outputComparator = Optional.of((o1, o2) ->
+                    -Integer.compare(counter.getCount(o1), counter.getCount(o2)));
+        }
+        else {
+            outputComparator = Optional.empty();
         }
     }
 
@@ -130,15 +164,22 @@ public class FrequencyCounter
         try {
             OutputStream os = CompressionUtils.getOutputStream(new File(getTargetLocation()));
 
-            for (String token : counter.uniqueSet()) {
-                int count = counter.getCount(token);
-                if (count >= minCount) {
-                    os.write((token + "\t" + count + "\n").getBytes());
-                }
+            Stream<String> stream = counter.uniqueSet().stream();
+            if (outputComparator.isPresent()) {
+                stream = stream.sorted(outputComparator.get());
             }
+            stream.forEach(token -> {
+                try {
+                    os.write((token + "\t" + counter.getCount(token) + "\n").getBytes());
+                }
+                catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
         }
         catch (IOException e) {
             throw new AnalysisEngineProcessException(e);
         }
     }
+
 }
