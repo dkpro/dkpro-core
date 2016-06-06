@@ -75,7 +75,8 @@ public class AnnotationStringSequenceGenerator
     {
         List<String[]> tokenSequences = new ArrayList<>();
         if (getCoveringTypeName().isPresent()) {
-            Type coveringType = getType(aJCas.getTypeSystem(), getCoveringTypeName().get());
+            Type coveringType = FeaturePathUtils
+                    .getType(aJCas.getTypeSystem(), getCoveringTypeName().get());
             /* iterate over covering annotations */
             for (AnnotationFS covering : CasUtil.select(aJCas.getCas(), coveringType)) {
                 tokenSequences.add(annotationSequence(aJCas, Optional.of(covering)));

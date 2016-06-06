@@ -18,6 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.api.featurepath;
 
 import org.apache.uima.cas.Type;
+import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
@@ -63,5 +64,23 @@ public class FeaturePathUtils
                 ? CasUtil.selectCovered(type, coveringAnnotation.get())
                 : CasUtil.select(aJCas.getCas(), type);
         return new FeaturePathFactory.FeaturePathIterator<>(features.iterator(), fpInfo);
+    }
+
+    /**
+     * Get the {@link Type} for a given name from a {@link TypeSystem}. Throws  a {@link IllegalStateException}
+     * if the type name cannot be resolved.
+     *
+     * @param typeSystem the {@link TypeSystem}
+     * @param typeName   the type name
+     * @return a {@link Type}
+     * @throws IllegalStateException if the type name cannot be resolved
+     */
+    public static Type getType(TypeSystem typeSystem, String typeName)
+    {
+        Type coveringType = typeSystem.getType(typeName);
+        if (coveringType == null) {
+            throw new IllegalStateException("Unable to find type for " + typeName);
+        }
+        return coveringType;
     }
 }

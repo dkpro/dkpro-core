@@ -18,6 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator;
 
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
+import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathUtils;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.util.CasUtil;
@@ -50,7 +51,8 @@ public class CharacterStringSequenceGenerator
             throws FeaturePathException
     {
         if (getCoveringTypeName().isPresent()) {
-            Type coveringType = getType(aJCas.getTypeSystem(), getCoveringTypeName().get());
+            Type coveringType = FeaturePathUtils
+                    .getType(aJCas.getTypeSystem(), getCoveringTypeName().get());
             return CasUtil.select(aJCas.getCas(), coveringType).stream()
                     .map(AnnotationFS::getCoveredText)
                     .map(this::characterSequence)
