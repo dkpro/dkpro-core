@@ -34,7 +34,6 @@ import org.apache.uima.resource.ResourceInitializationException;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -45,8 +44,9 @@ import java.util.stream.Stream;
 public class FrequencyCounter
         extends JCasFileWriter_ImplBase
 {
-    private static final String EXTENSION = ".count";
-    static final String BIGRAM_SEPARATOR = " ";
+    static final String COLUMN_SEP_REPLACEMENT = " ";
+    static final String BIGRAM_SEPARATOR = COLUMN_SEP_REPLACEMENT;
+    static final String COLUMN_SEPARATOR = "\t";
 
     /**
      * The feature path. Default: tokens.
@@ -144,11 +144,16 @@ public class FrequencyCounter
             for (String[] sequence : sequenceGenerator.tokenSequences(aJCas)) {
             /* iterate over sequences (e.g. sentences)*/
                 /* count unigrams */
-                Collections.addAll(counter, sequence);
+                Stream.of(sequence)
+                        .map(s -> s.replaceAll(COLUMN_SEPARATOR, COLUMN_SEP_REPLACEMENT))
+                        .forEach(s -> counter.add(s));
 
                 /* count bigrams */
                 for (int i = 0; i < sequence.length - 1; i++) {
-                    counter.add(sequence[i] + BIGRAM_SEPARATOR + sequence[i + 1]);
+                    /* replacing tabs as they are used as column separators */
+                    counter.add(sequence[i].replaceAll(COLUMN_SEPARATOR, COLUMN_SEP_REPLACEMENT)
+                            + BIGRAM_SEPARATOR
+                            + sequence[i + 1].replaceAll(COLUMN_SEPARATOR, COLUMN_SEP_REPLACEMENT));
                 }
             }
         }
@@ -164,13 +169,15 @@ public class FrequencyCounter
         try {
             OutputStream os = CompressionUtils.getOutputStream(new File(getTargetLocation()));
 
-            Stream<String> stream = counter.uniqueSet().stream();
+            Stream<String> stream = counter.uniqueSet().stream()
+                    .filter(token -> counter.getCount(token) >= minCount);
             if (outputComparator.isPresent()) {
                 stream = stream.sorted(outputComparator.get());
             }
             stream.forEach(token -> {
                 try {
-                    os.write((token + "\t" + counter.getCount(token) + "\n").getBytes());
+                    os.write(
+                            (token + COLUMN_SEPARATOR + counter.getCount(token) + "\n").getBytes());
                 }
                 catch (IOException e) {
                     throw new RuntimeException(e);

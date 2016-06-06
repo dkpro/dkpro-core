@@ -44,6 +44,10 @@ import java.util.stream.Collectors;
 /**
  * Annotate phrases in a sentence. Depending on the provided counts and the threshold, these
  * comprise either one or two annotations (tokens, lemmas, ...).
+ * <p>
+ * In order to identify longer phrases, run the {@link FrequencyCounter} and this annotator
+ * multiple times, each time taking the results of the previous run as input. From the second run on, set phrases
+ * in the feature path parameter {@link #PARAM_FEATURE_PATH}.
  */
 public class PhraseAnnotator
         extends JCasAnnotator_ImplBase
@@ -108,7 +112,7 @@ public class PhraseAnnotator
                     new InputStreamReader(CompressionUtils
                             .getInputStream(modelLocation, new FileInputStream(modelLocation))))
                     .lines()
-                    .map(line -> line.split("\t"))
+                    .map(line -> line.split(FrequencyCounter.COLUMN_SEPARATOR))
                     .collect(Collectors.toMap(line -> line[0], line -> Integer.parseInt(line[1])));
         }
         catch (IOException e) {
@@ -125,29 +129,34 @@ public class PhraseAnnotator
     public void process(JCas aJCas)
             throws AnalysisEngineProcessException
     {
-        FeaturePathFactory.FeaturePathIterator<AnnotationFS> it;
+        FeaturePathFactory.FeaturePathIterator<AnnotationFS> featurePathIterator;
         try {
-            it = FeaturePathUtils.featurePathIterator(aJCas, featurePath, Optional.empty());
+            featurePathIterator = FeaturePathUtils
+                    .featurePathIterator(aJCas, featurePath, Optional.empty());
         }
         catch (FeaturePathException e) {
             throw new AnalysisEngineProcessException(e);
         }
 
         Map.Entry<AnnotationFS, String> lookahead;
-        if (it.hasNext()) {
+        if (featurePathIterator.hasNext()) {
                 /* start iteration if at least one annotation is present */
-            lookahead = it.next();
+            lookahead = featurePathIterator.next();
 
-            while (it.hasNext()) {
+            while (featurePathIterator.hasNext()) {
                 Map.Entry<AnnotationFS, String> token = lookahead;
                 assert token.getKey() instanceof Annotation;
 
-                if (it.hasNext()) {
+                if (featurePathIterator.hasNext()) {
                         /* there is another token in the sequence */
-                    lookahead = it.next();
+                    lookahead = featurePathIterator.next();
 
-                    String token1 = token.getValue();
-                    String token2 = lookahead.getValue();
+                    String token1 = token.getValue()
+                            .replaceAll(FrequencyCounter.COLUMN_SEPARATOR,
+                                    FrequencyCounter.COLUMN_SEP_REPLACEMENT);
+                    String token2 = lookahead.getValue()
+                            .replaceAll(FrequencyCounter.COLUMN_SEPARATOR,
+                                    FrequencyCounter.COLUMN_SEP_REPLACEMENT);
                     String bigram = token1 + FrequencyCounter.BIGRAM_SEPARATOR + token2;
 
                     if (counts.containsKey(bigram)) {
@@ -162,7 +171,9 @@ public class PhraseAnnotator
                                     token.getKey().getBegin(),
                                     lookahead.getKey().getEnd())
                                     .addToIndexes(aJCas);
-                            lookahead = it.next();  // skip following token
+                            if (featurePathIterator.hasNext()) {
+                                lookahead = featurePathIterator.next();  // skip following token
+                            }
                         }
                         else {
                             /* unigram phrase */
