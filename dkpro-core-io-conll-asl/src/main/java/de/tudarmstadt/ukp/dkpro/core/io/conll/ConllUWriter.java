@@ -18,14 +18,17 @@
 package de.tudarmstadt.ukp.dkpro.core.io.conll;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
+import static org.apache.uima.fit.util.JCasUtil.indexCovered;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -36,8 +39,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.SurfaceForm;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 
 /**
  * Writes a file in the CoNLL-2006 format (aka CoNLL-X).
@@ -125,6 +131,14 @@ public class ConllUWriter
 
     private void convert(JCas aJCas, PrintWriter aOut)
     {
+        Map<SurfaceForm, Collection<Token>> surfaceIdx = indexCovered(aJCas, SurfaceForm.class,
+                Token.class);
+        Int2ObjectMap<SurfaceForm> surfaceBeginIdx = new Int2ObjectOpenHashMap<>();
+        for (SurfaceForm sf : select(aJCas, SurfaceForm.class)) {
+            surfaceBeginIdx.put(sf.getBegin(), sf);
+        }
+        
+        
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             HashMap<Token, Row> ctokens = new LinkedHashMap<Token, Row>();
 
@@ -187,6 +201,17 @@ public class ConllUWriter
                 String phead = UNUSED;
                 String pdeprel = UNUSED;
 
+                SurfaceForm sf = surfaceBeginIdx.get(row.token.getBegin());
+                if (sf != null) {
+                    @SuppressWarnings({ "unchecked", "rawtypes" })
+                    List<Token> covered = (List) surfaceIdx.get(sf);
+                    int id1 = ctokens.get(covered.get(0)).id;
+                    int id2 = ctokens.get(covered.get(covered.size()-1)).id;
+                    aOut.printf("%d-%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", id1, id2,
+                            sf.getValue(), UNUSED, UNUSED, UNUSED, UNUSED, UNUSED, UNUSED, UNUSED,
+                            UNUSED);
+                }
+                
                 aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", row.id,
                         row.token.getCoveredText(), lemma, cpos, pos, feats, head, deprel, phead,
                         pdeprel);

@@ -23,10 +23,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -46,9 +43,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.SurfaceForm;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 
 /**
  * Reads a file in the CoNLL-U format.
@@ -191,16 +191,25 @@ public class ConllUReader
             int sentenceBegin = doc.getPosition();
             int sentenceEnd = sentenceBegin;
 
+            int surfaceBegin = -1;
+            int surfaceEnd = -1;
+            String surfaceString = null;
+            
             // Tokens, Lemma, POS
-            Map<Integer, Token> tokens = new HashMap<Integer, Token>();
+            Int2ObjectMap<Token> tokens = new Int2ObjectOpenHashMap<>();
             for (String[] word : words) {
                 if (word[ID].contains("-")) {
+                    String[] fragments = word[ID].split("-");
+                    surfaceBegin = Integer.valueOf(fragments[0]);
+                    surfaceEnd = Integer.valueOf(fragments[1]);
+                    surfaceString = word[FORM];
                     continue;
                 }
                 
                 // Read token
+                int tokenIdx = Integer.valueOf(word[ID]);
                 Token token = doc.add(word[FORM], Token.class);
-                tokens.put(Integer.valueOf(word[ID]), token);
+                tokens.put(tokenIdx, token);
                 doc.add(" ");
 
                 // Read lemma
@@ -230,6 +239,18 @@ public class ConllUReader
                     token.setMorph(morphtag);
                 }
 
+                // Read surface form
+                if (tokenIdx == surfaceEnd) {
+                    int begin = tokens.get(surfaceBegin).getBegin();
+                    int end = tokens.get(surfaceEnd).getEnd();
+                    SurfaceForm surfaceForm = new SurfaceForm(aJCas, begin, end);
+                    surfaceForm.setValue(surfaceString);
+                    surfaceForm.addToIndexes();
+                    surfaceBegin = -1;
+                    surfaceEnd = -1;
+                    surfaceString = null;
+                }
+                
                 sentenceEnd = token.getEnd();
             }
 
