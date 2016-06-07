@@ -138,58 +138,58 @@ public class PhraseAnnotator
             throw new AnalysisEngineProcessException(e);
         }
 
-        Map.Entry<AnnotationFS, String> lookahead;
+        /* start iteration if at least one annotation is present */
         if (featurePathIterator.hasNext()) {
-                /* start iteration if at least one annotation is present */
-            lookahead = featurePathIterator.next();
+            // stores the second token of a (potential) bigram
+            Map.Entry<AnnotationFS, String> second = featurePathIterator.next();
 
             while (featurePathIterator.hasNext()) {
-                Map.Entry<AnnotationFS, String> token = lookahead;
-                assert token.getKey() instanceof Annotation;
+                // move forward to the previously second token of a bigram
+                Map.Entry<AnnotationFS, String> first = second;
+                assert first.getKey() instanceof Annotation;
 
                 if (featurePathIterator.hasNext()) {
-                        /* there is another token in the sequence */
-                    lookahead = featurePathIterator.next();
+                    second = featurePathIterator.next(); // the second token of the bigram
 
-                    String token1 = token.getValue()
+                    String token1 = first.getValue()
                             .replaceAll(FrequencyCounter.COLUMN_SEPARATOR,
                                     FrequencyCounter.COLUMN_SEP_REPLACEMENT);
-                    String token2 = lookahead.getValue()
+                    String token2 = second.getValue()
                             .replaceAll(FrequencyCounter.COLUMN_SEPARATOR,
                                     FrequencyCounter.COLUMN_SEP_REPLACEMENT);
                     String bigram = token1 + FrequencyCounter.BIGRAM_SEPARATOR + token2;
 
                     if (counts.containsKey(bigram)) {
-                             /* compute score */
+                         /* compute score */
                         double score = (double) (counts.get(bigram) - discount) /
                                 (double) (counts.get(token1) * counts.get(token2));
                         getLogger().debug(bigram + "\t" + score);
 
                         if (score >= threshold) {
-                                /* bigram phrase */
-                            new Phrase(aJCas,
-                                    token.getKey().getBegin(),
-                                    lookahead.getKey().getEnd())
+                            /* bigram phrase */
+                            new Phrase(aJCas, first.getKey().getBegin(), second.getKey().getEnd())
                                     .addToIndexes(aJCas);
+
+                            /* skip second token of bigram to prevent overlapping phrases */
                             if (featurePathIterator.hasNext()) {
-                                lookahead = featurePathIterator.next();  // skip following token
+                                second = featurePathIterator.next();
                             }
                         }
                         else {
                             /* unigram phrase */
-                            new Phrase(aJCas, token.getKey().getBegin(), token.getKey().getEnd())
+                            new Phrase(aJCas, first.getKey().getBegin(), first.getKey().getEnd())
                                     .addToIndexes(aJCas);
                         }
                     }
                     else {
-                        /* out of vocabulary bigram, phrase over one token */
-                        new Phrase(aJCas, token.getKey().getBegin(), token.getKey().getEnd())
+                        /* out of vocabulary bigram, unigram phrase */
+                        new Phrase(aJCas, first.getKey().getBegin(), first.getKey().getEnd())
                                 .addToIndexes(aJCas);
                     }
                 }
             }
             /* last token in sequence */
-            new Phrase(aJCas, lookahead.getKey().getBegin(), lookahead.getKey().getEnd())
+            new Phrase(aJCas, second.getKey().getBegin(), second.getKey().getEnd())
                     .addToIndexes(aJCas);
         }
     }
