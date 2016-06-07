@@ -89,7 +89,7 @@ public class PhraseAnnotator
      */
     public static final String PARAM_DISCOUNT = "discount";
     @ConfigurationParameter(name = PARAM_DISCOUNT, mandatory = true, defaultValue = "5")
-    private int discount;   // TODO: should this be a double/float?
+    private int discount;
 
     /**
      * The threshold score for phrase construction. Default is 100. Lower values result in fewer phrases.

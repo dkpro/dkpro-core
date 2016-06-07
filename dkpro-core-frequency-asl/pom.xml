@@ -104,4 +104,22 @@
 			<artifactId>commons-collections4</artifactId>
 		</dependency>
 	</dependencies>
+	<build>
+		<resources>
+			<resource>
+				<filtering>false</filtering>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>desc/type/Phrase.xml</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<filtering>true</filtering>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>desc/type/Phrase.xml</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
 </project>

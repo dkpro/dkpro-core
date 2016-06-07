@@ -1,0 +1,4 @@
+.Phrase types
+image::ts_phrase.png[align="center"]
+
+A Phrase has a begin and an end that typically spans over one or multiple tokens.
