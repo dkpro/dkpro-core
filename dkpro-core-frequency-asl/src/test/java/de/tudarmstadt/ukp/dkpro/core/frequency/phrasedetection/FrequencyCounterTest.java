@@ -27,8 +27,8 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import java.io.File;
-import java.net.URL;
 import java.nio.file.Files;
+import java.util.stream.Collectors;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
@@ -46,16 +46,12 @@ public class FrequencyCounterTest
         int minCount = 1;
 
         File targetFile = new File(DkproTestContext.get().getTestOutputFolder(), "counts.txt");
-        targetFile.delete();
-        URL resource = getClass().getClassLoader().getResource("phrasedetection/counts.txt");
-        assertNotNull(resource);
-        File expectedFile = new File(resource.getFile());
+        File expectedFile = new File("src/test/resources/phrasedetection/counts.txt");
 
         String sentence = "This is a first test that contains a first test example";
         String language = "en";
 
-        CollectionReaderDescription reader = createReaderDescription(
-                StringReader.class,
+        CollectionReaderDescription reader = createReaderDescription(StringReader.class,
                 StringReader.PARAM_DOCUMENT_TEXT, sentence,
                 StringReader.PARAM_LANGUAGE, language);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
@@ -79,15 +75,12 @@ public class FrequencyCounterTest
         int minCount = 1;
 
         File targetFile = new File(DkproTestContext.get().getTestOutputFolder(), "counts.txt");
-        URL resource = getClass().getClassLoader().getResource("phrasedetection/counts.txt");
-        assertNotNull(resource);
-        File expectedFile = new File(resource.getFile());
+        File expectedFile = new File("src/test/resources/phrasedetection/counts.txt");
 
         String sentence = "This is a first test that contains a first test example";
         String language = "en";
 
-        CollectionReaderDescription reader = createReaderDescription(
-                StringReader.class,
+        CollectionReaderDescription reader = createReaderDescription(StringReader.class,
                 StringReader.PARAM_DOCUMENT_TEXT, sentence,
                 StringReader.PARAM_LANGUAGE, language);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
@@ -111,15 +104,11 @@ public class FrequencyCounterTest
         int minCount = 1;
 
         File targetFile = new File(DkproTestContext.get().getTestOutputFolder(), "counts.txt");
-        URL resource = getClass().getClassLoader().getResource("phrasedetection/counts.txt");
-        assertNotNull(resource);
-        File expectedFile = new File(resource.getFile());
 
         String sentence = "This is a first test that contains a first test example";
         String language = "en";
 
-        CollectionReaderDescription reader = createReaderDescription(
-                StringReader.class,
+        CollectionReaderDescription reader = createReaderDescription(StringReader.class,
                 StringReader.PARAM_DOCUMENT_TEXT, sentence,
                 StringReader.PARAM_LANGUAGE, language);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
@@ -131,6 +120,17 @@ public class FrequencyCounterTest
         SimplePipeline.runPipeline(reader, segmenter, writer);
 
         assertTrue(targetFile.exists());
-        // TODO: test sorting
+
+        /* check sorting */
+        assertEquals(Files.lines(targetFile.toPath())
+                        .map(line -> line.split("\t"))
+                        .map(line -> Integer.parseInt(line[1]))
+                        .collect(Collectors.toList()),
+                Files.lines(targetFile.toPath())
+                        .map(line -> line.split("\t"))
+                        .map(line -> Integer.parseInt(line[1]))
+                        .sorted((i1, i2) -> -Integer.compare(i1, i2))
+                        .collect(Collectors.toList()));
+
     }
 }

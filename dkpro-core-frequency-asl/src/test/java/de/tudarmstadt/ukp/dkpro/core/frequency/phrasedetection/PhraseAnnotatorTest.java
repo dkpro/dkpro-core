@@ -46,16 +46,16 @@ public class PhraseAnnotatorTest
     public void test()
             throws UIMAException, IOException
     {
-        File countsFile = new File(
-                getClass().getClassLoader().getResource("phrasedetection/counts.txt").getFile());
+        //        File countsFile = new File(
+        //                getClass().getClassLoader().getResource("phrasedetection/counts.txt").getFile());
+        File countsFile = new File("src/test/resources/phrasedetection/counts.txt");
 
         String sentence = "This is a first test that contains a first test example";
         String language = "en";
         int expectedPhrases = 9;
         float threshold = (float) 1.0;
 
-        CollectionReaderDescription reader = createReaderDescription(
-                StringReader.class,
+        CollectionReaderDescription reader = createReaderDescription(StringReader.class,
                 StringReader.PARAM_DOCUMENT_TEXT, sentence,
                 StringReader.PARAM_LANGUAGE, language);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
@@ -64,8 +64,7 @@ public class PhraseAnnotatorTest
                 PhraseAnnotator.PARAM_DISCOUNT, 0,
                 PhraseAnnotator.PARAM_THRESHOLD, threshold);
 
-        for (JCas jcas : SimplePipeline
-                .iteratePipeline(reader, segmenter, phraseAnnotator)) {
+        for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter, phraseAnnotator)) {
             assertEquals(expectedPhrases, JCasUtil.select(jcas, Phrase.class).size());
         }
     }
