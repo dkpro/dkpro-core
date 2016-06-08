@@ -1,7 +1,7 @@
 # This is the list of people who have contributed code to the DKPro Core repository.
 #
 # This list is to be used in favor over author attributions in individual files,
-# e.g. via @author tags. 
+# e.g. via @author tags.
 #
 # Code integrated from third parties by others than their original authors may not have any
 # @author tags removed and respective names must not be added to this file. Integration of
@@ -10,14 +10,13 @@
 # See also https://github.com/dkpro/dkpro-core/blob/master/CONTRIBUTING.md
 
 # Please keep the list sorted.
-    
+
 Andriy Nadolskyy
 Anil Narassiguing
 Benjamin Herbert
 Carsten Schnober <schnober@ukp.informatik.tu-darmstadt.de>
 Cigdem Toprak <cigdem.toprak@gmail.com>
 Delphine Bernhard
-Dr. Judith Eckle-Kohler
 Emily K. Jamison
 Erik-Lân Do Dinh
 Hans-Peter Zorn
