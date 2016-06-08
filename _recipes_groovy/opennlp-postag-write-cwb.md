@@ -8,7 +8,6 @@ Reads all text files (`*.txt`) in the specified folder and writes to the specifi
 Call with `pipeline <foldername> <language> <outputfile>`, e.g. `pipeline myFolder en output.tsv`.
 
 {% highlight groovy %}
-#!/usr/bin/env groovy
 @Grab(group='de.tudarmstadt.ukp.dkpro.core', 
       module='de.tudarmstadt.ukp.dkpro.core.opennlp-asl', 
       version='1.5.0')

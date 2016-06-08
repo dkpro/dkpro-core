@@ -8,7 +8,6 @@ This pipeline internally creates data, processes it, and writes results to the c
 Mind to provide more memory to Groovy using the command `export JAVA_OPTS="-Xmx1g"` before trying to run this.
 
 {% highlight groovy %}
-#!/usr/bin/env groovy
 @Grab(group='de.tudarmstadt.ukp.dkpro.core', 
       module='de.tudarmstadt.ukp.dkpro.core.opennlp-asl', 
       version='1.5.0')

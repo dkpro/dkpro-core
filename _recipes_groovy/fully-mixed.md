@@ -8,7 +8,6 @@ Reads all text files (`*.txt`) in the specified folder and prints token, part-of
 Call with `pipeline <inputfolder> <language>`, e.g. `pipeline input en`.
 
 {% highlight groovy %}
-#!/usr/bin/env groovy
 @Grab(group='de.tudarmstadt.ukp.dkpro.core', 
       module='de.tudarmstadt.ukp.dkpro.core.io.text-asl', 
       version='1.5.0')

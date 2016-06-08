@@ -26,7 +26,6 @@ Original NLTK example:
 DKPro Core Groovy version:
 
 {% highlight groovy %}
-#!/usr/bin/env groovy
 @Grab(group='de.tudarmstadt.ukp.dkpro.core', version='1.5.0',
       module='de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl')
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.*;
@@ -83,7 +82,6 @@ Tree('S', [('At', 'IN'), ('eight', 'CD'), ("o'clock", 'JJ'),
 DKPro Core Groovy version:
 
 {% highlight groovy %}
-#!/usr/bin/env groovy
 @Grab(group='de.tudarmstadt.ukp.dkpro.core', version='1.5.0',
       module='de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl')
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.*;

@@ -5,10 +5,9 @@ subheadline: Conversion
 
 Reads each Penn Treebank bracketed format file from the corpus in the specified folder and writes them to the target folder with Tiger XML format.
 
-Copy the script to a file called "penn2tiger.groovy" and call it e.g. using `groovy penn2tiger.groovy pennTreebankFile.txt .`. This creates a file called `pennTrebankFile.xml` in Tiger XML format in the current directory.
+Copy the script to a file called `penn2tiger.groovy` and call it e.g. using `groovy penn2tiger.groovy pennTreebankFile.txt .`. This creates a file called `pennTrebankFile.xml` in Tiger XML format in the current directory.
 
 {% highlight groovy %}
-#!/usr/bin/env groovy
 @GrabResolver(name='ukp-oss-snapshots',
      root='http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-snapshots')
 @Grab(group='de.tudarmstadt.ukp.dkpro.core', 

@@ -5,17 +5,10 @@ subheadline: Analytics
 Uses the `LeftToRightSplitter` as the splitter resource and no ranker resource, decompounds the compounds in a sentence after tokenizing it, then print the tokens and each compound part.
 
 {% highlight groovy %}
-#!/usr/bin/env groovy
-
-@GrabResolver(name='ukp-oss-snapshots',
-     root='http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-snapshots')
-
-@Grab(group='de.tudarmstadt.ukp.dkpro.core', version='1.7.0-SNAPSHOT',
+@Grab(group='de.tudarmstadt.ukp.dkpro.core', version='1.7.0',
      module='de.tudarmstadt.ukp.dkpro.core.decompounding-asl')
-
-@Grab(group='de.tudarmstadt.ukp.dkpro.core', version='1.7.0-SNAPSHOT',
+@Grab(group='de.tudarmstadt.ukp.dkpro.core', version='1.7.0',
      module='de.tudarmstadt.ukp.dkpro.core.opennlp-asl')
-
 
 import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.annotator.*;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.*;
@@ -30,7 +23,6 @@ import static org.apache.uima.fit.factory.ExternalResourceFactory.*;
 import static org.apache.uima.fit.util.JCasUtil.*;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.*;
-
 
 def doc = createJCas();
 doc.documentText = "Wir brauchen einen Aktionsplan."

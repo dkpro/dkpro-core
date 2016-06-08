@@ -6,7 +6,6 @@ subheadline: Conversion
 Reads each CoNLL 2006 file from the corpus in the specified folder and writes them to the target folder with CoNLL 2009 format.
 
 {% highlight groovy %}
-#!/usr/bin/env groovy
 @Grab(group='de.tudarmstadt.ukp.dkpro.core', 
       module='de.tudarmstadt.ukp.dkpro.core.io.conll-asl', 
       version='1.7.0')

@@ -41,8 +41,8 @@ builder.add(createEngineDescription(ApplyChangesAnnotator), "source",
 def engine = builder.createAggregate()
 
 def text = "Die Buechsenoeffner koennen oefter benuetzt werden. Neuerscheinungen muss " +
-                "der kaeufer kaufen. Schon zum Fruehstueck traf er auf den Maerchenerzaehler, " +
-                "den Uebergeek und den Ueberraschungeioeffner. Sein Oeuvre ist beeindruckend."
+           "der kaeufer kaufen. Schon zum Fruehstueck traf er auf den Maerchenerzaehler, " +
+           "den Uebergeek und den Ueberraschungeioeffner. Sein Oeuvre ist beeindruckend."
 def jcas = engine.newJCas()
 jcas.setDocumentText(text)
 jcas.setDocumentLanguage("de")

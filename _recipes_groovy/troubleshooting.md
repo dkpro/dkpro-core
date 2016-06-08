@@ -6,6 +6,21 @@ hidden: true
 * TOC
 {:toc}
 
+## Making a Groovy script executable on Linux/OS X
+
+To make a Groovy script executable on Linux or OS X, add the following line as the very first line
+in the script:
+
+{% highlight text %}
+#!/usr/bin/env groovy
+{% endhighlight %} 
+
+Then make the file executable using the `chmod` command, e.g.
+
+{% highlight text %}
+$ chmod +x myscript.groovy
+{% endhighlight %} 
+
 ## Out of memory
 
 If a script complains about not having enough heap, try the command 

@@ -8,7 +8,6 @@ Reads all text files (`*.txt`) in the specified folder and prints dependencies, 
 Call with `pipeline <inputfolder> <language> <outputfolder>`, e.g. `pipeline input en output`.
 
 {% highlight groovy %}
-#!/usr/bin/env groovy
 @Grab(group='de.tudarmstadt.ukp.dkpro.core', 
       module='de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl', 
       version='1.5.0')

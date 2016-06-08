@@ -3,14 +3,13 @@ title: MaltParser dependency parsing pipeline with direct access to results
 subheadline: Embedding
 ---
 
-Reads the specified file and prints dependencies, one per line. Multiple files can be specified using a wildcard, e.g. '*.txt' (the single quotes are part of the argument to avoid the shell expanding the wildcard!).
+Reads the specified file and prints dependencies, one per line. Multiple files can be specified using a wildcard, e.g. `'*.txt'` (the single quotes are part of the argument to avoid the shell expanding the wildcard!).
 
 This recipe was motivated by a [question on Stack Overflow](http://stackoverflow.com/questions/17392790/parse-raw-text-with-maltparser-in-java) on how to parse raw text using the MaltParser.
 
 Call with `pipeline <foldername> <language>`, e.g. `pipeline myFolder en`.
 
 {% highlight groovy %}
-#!/usr/bin/env groovy
 @Grab(group='de.tudarmstadt.ukp.dkpro.core', 
       module='de.tudarmstadt.ukp.dkpro.core.opennlp-asl', 
       version='1.5.0')

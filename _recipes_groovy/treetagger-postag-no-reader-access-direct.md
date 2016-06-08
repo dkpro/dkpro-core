@@ -3,11 +3,10 @@ title: TreeTagger Part-of-speech tagging & parsing without reader or writer
 subheadline: Embedding
 ---
 
-This is an example of how to use the DKPro Core !TreeTaggerPosTagger component with a manually
-downloaded !TreeTagger executable and model.
+This is an example of how to use the DKPro Core TreeTaggerPosTagger component with a manually
+downloaded TreeTagger executable and model.
 
 {% highlight groovy %}
-#!/usr/bin/env groovy
 /**
  * SYNOPSIS: treetagger.groovy [executable] [model]
  *
