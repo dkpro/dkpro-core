@@ -177,27 +177,38 @@ public class FrequencyCounter
     public void collectionProcessComplete()
             throws AnalysisEngineProcessException
     {
+        OutputStream os;
         try {
-            OutputStream os = CompressionUtils.getOutputStream(new File(getTargetLocation()));
-
-            Stream<String> stream = counter.uniqueSet().stream()
-                    .filter(token -> counter.getCount(token) >= minCount);
-            if (outputComparator.isPresent()) {
-                stream = stream.sorted(outputComparator.get());
-            }
-            stream.forEach(token -> {
-                try {
-                    os.write(
-                            (token + COLUMN_SEPARATOR + counter.getCount(token) + "\n").getBytes());
-                }
-                catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
+            os = CompressionUtils.getOutputStream(new File(getTargetLocation()));
         }
         catch (IOException e) {
             throw new AnalysisEngineProcessException(e);
         }
+
+        /* create (sorted) token stream */
+        Stream<String> stream = counter.uniqueSet().stream()
+                .filter(token -> counter.getCount(token) >= minCount);
+        if (outputComparator.isPresent()) {
+            stream = stream.sorted(outputComparator.get());
+        }
+
+        /* write tokens */
+        stream.forEach(token -> {
+            try {
+                os.write((token + COLUMN_SEPARATOR + counter.getCount(token) + "\n").getBytes());
+            }
+            catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        try {
+            os.close();
+        }
+        catch (IOException e) {
+            throw new AnalysisEngineProcessException(e);
+        }
+
     }
 
 }
