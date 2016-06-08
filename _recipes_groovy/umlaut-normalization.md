@@ -6,8 +6,6 @@ subheadline: Analytics
 Takes a text and checks for umlauts written as "ae", "oe", or "ue" and normalizes them if they really are umlauts.
 
 {% highlight groovy %}
-#!/usr/bin/env groovy
-
 @GrabResolver(name='ukp-oss-releases',
       root='http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-releases')
 
