@@ -52,7 +52,7 @@ paginate_path: "blog/page:num"
 # Theme works best with Kramdown (using the table of contents function)
 markdown: kramdown
 permalink: /:categories/:title/
-highlight: pygments
+highlight: rouge
 excerpt_separator: "\n\n"
 exclude: []
 include: ['.htaccess']
