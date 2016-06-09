@@ -44,9 +44,18 @@ import java.util.stream.Stream;
 public class FrequencyCounter
         extends JCasFileWriter_ImplBase
 {
-    static final String COLUMN_SEP_REPLACEMENT = " ";
-    static final String BIGRAM_SEPARATOR = COLUMN_SEP_REPLACEMENT;
+    /**
+     * When concatenating multiple tokens, this string is inserted between them.
+     */
+    static final String BIGRAM_SEPARATOR = " ";
+    /**
+     * Columns (i.e. tokens and counts) are separated by this character.
+     */
     static final String COLUMN_SEPARATOR = "\t";
+    /**
+     * When hitting a column separator within a token, it is replaced by this token.
+     */
+    static final String COLUMN_SEP_REPLACEMENT = " ";
 
     /**
      * The feature path. Default: tokens.
@@ -91,7 +100,7 @@ public class FrequencyCounter
     @ConfigurationParameter(name = PARAM_SORT_BY_ALPHABET, mandatory = true, defaultValue = "false")
     private boolean sortByAlphabet;
 
-    Optional<Comparator<String>> outputComparator;
+    private Optional<Comparator<String>> outputComparator;
 
     private Bag<String> counter;
     private StringSequenceGenerator sequenceGenerator;
@@ -141,19 +150,21 @@ public class FrequencyCounter
             throws AnalysisEngineProcessException
     {
         try {
-            for (String[] sequence : sequenceGenerator.tokenSequences(aJCas)) {
             /* iterate over sequences (e.g. sentences)*/
-                /* count unigrams */
-                Stream.of(sequence)
-                        .map(s -> s.replaceAll(COLUMN_SEPARATOR, COLUMN_SEP_REPLACEMENT))
-                        .forEach(s -> counter.add(s));
+            for (String[] sequence : sequenceGenerator.tokenSequences(aJCas)) {
+                /* iterate over tokens in sequence */
+                for (int i = 0; i < sequence.length; i++) {
+                    /* count unigrams */
+                    String unigram = sequence[i]
+                            .replaceAll(COLUMN_SEPARATOR, COLUMN_SEP_REPLACEMENT);
+                    counter.add(unigram);
 
-                /* count bigrams */
-                for (int i = 0; i < sequence.length - 1; i++) {
-                    /* replacing tabs as they are used as column separators */
-                    counter.add(sequence[i].replaceAll(COLUMN_SEPARATOR, COLUMN_SEP_REPLACEMENT)
-                            + BIGRAM_SEPARATOR
-                            + sequence[i + 1].replaceAll(COLUMN_SEPARATOR, COLUMN_SEP_REPLACEMENT));
+                    /* count bigrams */
+                    if (i + 1 < sequence.length) {
+                        String bigram = unigram + BIGRAM_SEPARATOR + sequence[i + 1]
+                                .replaceAll(COLUMN_SEPARATOR, COLUMN_SEP_REPLACEMENT);
+                        counter.add(bigram);
+                    }
                 }
             }
         }
@@ -166,27 +177,38 @@ public class FrequencyCounter
     public void collectionProcessComplete()
             throws AnalysisEngineProcessException
     {
+        OutputStream os;
         try {
-            OutputStream os = CompressionUtils.getOutputStream(new File(getTargetLocation()));
-
-            Stream<String> stream = counter.uniqueSet().stream()
-                    .filter(token -> counter.getCount(token) >= minCount);
-            if (outputComparator.isPresent()) {
-                stream = stream.sorted(outputComparator.get());
-            }
-            stream.forEach(token -> {
-                try {
-                    os.write(
-                            (token + COLUMN_SEPARATOR + counter.getCount(token) + "\n").getBytes());
-                }
-                catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
+            os = CompressionUtils.getOutputStream(new File(getTargetLocation()));
         }
         catch (IOException e) {
             throw new AnalysisEngineProcessException(e);
         }
+
+        /* create (sorted) token stream */
+        Stream<String> stream = counter.uniqueSet().stream()
+                .filter(token -> counter.getCount(token) >= minCount);
+        if (outputComparator.isPresent()) {
+            stream = stream.sorted(outputComparator.get());
+        }
+
+        /* write tokens */
+        stream.forEach(token -> {
+            try {
+                os.write((token + COLUMN_SEPARATOR + counter.getCount(token) + "\n").getBytes());
+            }
+            catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        try {
+            os.close();
+        }
+        catch (IOException e) {
+            throw new AnalysisEngineProcessException(e);
+        }
+
     }
 
 }
