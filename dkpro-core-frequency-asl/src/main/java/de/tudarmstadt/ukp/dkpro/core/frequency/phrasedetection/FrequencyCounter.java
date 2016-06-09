@@ -58,6 +58,11 @@ public class FrequencyCounter
     static final String COLUMN_SEP_REPLACEMENT = " ";
 
     /**
+     * This string (a line) will separate unigrams from bigrams in the output file
+     **/
+    static final String NGRAM_SEPARATOR_LINE = "----------------------------------------------------";
+
+    /**
      * The feature path. Default: tokens.
      */
     public static final String PARAM_FEATURE_PATH = "featurePath";
@@ -102,7 +107,8 @@ public class FrequencyCounter
 
     private Optional<Comparator<String>> outputComparator;
 
-    private Bag<String> counter;
+    private Bag<String> unigrams;
+    private Bag<String> bigrams;
     private StringSequenceGenerator sequenceGenerator;
 
     @Override
@@ -110,7 +116,8 @@ public class FrequencyCounter
             throws ResourceInitializationException
     {
         super.initialize(context);
-        counter = new HashBag<>();
+        unigrams = new HashBag<>();
+        bigrams = new HashBag<>();
 
         /* set feature path to default */
         if (featurePath == null) {
@@ -138,7 +145,7 @@ public class FrequencyCounter
         }
         else if (sortByCount) {
             outputComparator = Optional.of((o1, o2) ->
-                    -Integer.compare(counter.getCount(o1), counter.getCount(o2)));
+                    -Integer.compare(unigrams.getCount(o1), unigrams.getCount(o2)));
         }
         else {
             outputComparator = Optional.empty();
@@ -157,13 +164,13 @@ public class FrequencyCounter
                     /* count unigrams */
                     String unigram = sequence[i]
                             .replaceAll(COLUMN_SEPARATOR, COLUMN_SEP_REPLACEMENT);
-                    counter.add(unigram);
+                    unigrams.add(unigram);
 
                     /* count bigrams */
                     if (i + 1 < sequence.length) {
                         String bigram = unigram + BIGRAM_SEPARATOR + sequence[i + 1]
                                 .replaceAll(COLUMN_SEPARATOR, COLUMN_SEP_REPLACEMENT);
-                        counter.add(bigram);
+                        bigrams.add(bigram);
                     }
                 }
             }
@@ -177,17 +184,25 @@ public class FrequencyCounter
     public void collectionProcessComplete()
             throws AnalysisEngineProcessException
     {
-        OutputStream os;
         try {
-            os = CompressionUtils.getOutputStream(new File(getTargetLocation()));
+            OutputStream os = CompressionUtils.getOutputStream(new File(getTargetLocation()));
+
+            writeNgrams(os, unigrams);
+            os.write((NGRAM_SEPARATOR_LINE + "\n").getBytes());
+            writeNgrams(os, bigrams);
+            os.close();
         }
         catch (IOException e) {
             throw new AnalysisEngineProcessException(e);
         }
 
-        /* create (sorted) token stream */
-        Stream<String> stream = counter.uniqueSet().stream()
-                .filter(token -> counter.getCount(token) >= minCount);
+    }
+
+    private void writeNgrams(OutputStream os, Bag<String> unigrams)
+    {
+    /* create (sorted) token stream */
+        Stream<String> stream = unigrams.uniqueSet().stream()
+                .filter(token -> unigrams.getCount(token) >= minCount);
         if (outputComparator.isPresent()) {
             stream = stream.sorted(outputComparator.get());
         }
@@ -195,20 +210,12 @@ public class FrequencyCounter
         /* write tokens */
         stream.forEach(token -> {
             try {
-                os.write((token + COLUMN_SEPARATOR + counter.getCount(token) + "\n").getBytes());
+                os.write((token + COLUMN_SEPARATOR + unigrams.getCount(token) + "\n").getBytes());
             }
             catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
-
-        try {
-            os.close();
-        }
-        catch (IOException e) {
-            throw new AnalysisEngineProcessException(e);
-        }
-
     }
 
 }

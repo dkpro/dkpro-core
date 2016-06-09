@@ -46,14 +46,12 @@ public class PhraseAnnotatorTest
     public void test()
             throws UIMAException, IOException
     {
-        //        File countsFile = new File(
-        //                getClass().getClassLoader().getResource("phrasedetection/counts.txt").getFile());
         File countsFile = new File("src/test/resources/phrasedetection/counts.txt");
 
         String sentence = "This is a first test that contains a first test example";
         String language = "en";
         int expectedPhrases = 9;
-        float threshold = (float) 1.0;
+        float threshold = (float) 5.0;
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
                 StringReader.PARAM_DOCUMENT_TEXT, sentence,

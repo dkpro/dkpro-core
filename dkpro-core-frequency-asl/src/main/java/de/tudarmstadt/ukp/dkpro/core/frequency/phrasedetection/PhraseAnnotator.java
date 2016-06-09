@@ -37,12 +37,12 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
- * Annotate phrases in a sentence. Depending on the provided counts and the threshold, these
+ * Annotate phrases in a sentence. Depending on the provided unigrams and the threshold, these
  * comprise either one or two annotations (tokens, lemmas, ...).
  * <p>
  * In order to identify longer phrases, run the {@link FrequencyCounter} and this annotator
@@ -76,7 +76,7 @@ public class PhraseAnnotator
     private boolean lowercase;
 
     /**
-     * The file providing the unigram and bigram counts to use.
+     * The file providing the unigram and bigram unigrams to use.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
@@ -93,13 +93,15 @@ public class PhraseAnnotator
 
     /**
      * The threshold score for phrase construction. Default is 100. Lower values result in fewer phrases.
-     * The value strongly depends on the size of the corpus and the token counts.
+     * The value strongly depends on the size of the corpus and the token unigrams.
      */
     public static final String PARAM_THRESHOLD = "threshold";
     @ConfigurationParameter(name = PARAM_THRESHOLD, mandatory = true, defaultValue = "100")
     private float threshold;
 
-    private Map<String, Integer> counts;
+    private Map<String, Integer> unigrams;
+    private Map<String, Integer> bigrams;
+    private int vocabularySize;
 
     @Override
     public void initialize(UimaContext context)
@@ -107,17 +109,8 @@ public class PhraseAnnotator
     {
         super.initialize(context);
 
-        try {
-            counts = new BufferedReader(
-                    new InputStreamReader(CompressionUtils
-                            .getInputStream(modelLocation, new FileInputStream(modelLocation))))
-                    .lines()
-                    .map(line -> line.split(FrequencyCounter.COLUMN_SEPARATOR))
-                    .collect(Collectors.toMap(line -> line[0], line -> Integer.parseInt(line[1])));
-        }
-        catch (IOException e) {
-            throw new ResourceInitializationException(e);
-        }
+        readCounts();
+        vocabularySize = unigrams.size();
 
         /* set feature path to default */
         if (featurePath == null) {
@@ -159,10 +152,14 @@ public class PhraseAnnotator
                                     FrequencyCounter.COLUMN_SEP_REPLACEMENT);
                     String bigram = token1 + FrequencyCounter.BIGRAM_SEPARATOR + token2;
 
-                    if (counts.containsKey(bigram)) {
+                    if (bigrams.containsKey(bigram)) {
+                        assert unigrams.containsKey(token1);
+                        assert unigrams.containsKey(token2);
+
                          /* compute score */
-                        double score = (double) (counts.get(bigram) - discount) /
-                                (double) (counts.get(token1) * counts.get(token2));
+                        double score =
+                                (double) ((bigrams.get(bigram) - discount) * vocabularySize) /
+                                        (double) (unigrams.get(token1) * unigrams.get(token2));
                         getLogger().debug(bigram + "\t" + score);
 
                         if (score >= threshold) {
@@ -191,6 +188,37 @@ public class PhraseAnnotator
             /* last token in sequence */
             new Phrase(aJCas, second.getKey().getBegin(), second.getKey().getEnd())
                     .addToIndexes(aJCas);
+        }
+    }
+
+    private void readCounts()
+            throws ResourceInitializationException
+    {
+        unigrams = new HashMap<>();
+        bigrams = new HashMap<>();
+
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(CompressionUtils
+                    .getInputStream(modelLocation, new FileInputStream(modelLocation))));
+            String line;
+            boolean countingUnigrams = true;
+            while ((line = reader.readLine()) != null) {
+                if (line.equals(FrequencyCounter.NGRAM_SEPARATOR_LINE)) {
+                    countingUnigrams = false;
+                    continue;
+                }
+                String[] columns = line.split(FrequencyCounter.COLUMN_SEPARATOR);
+                assert columns.length == 2;
+                if (countingUnigrams) {
+                    unigrams.put(columns[0], Integer.parseInt(columns[1]));
+                }
+                else {
+                    bigrams.put(columns[0], Integer.parseInt(columns[1]));
+                }
+            }
+        }
+        catch (IOException e) {
+            throw new ResourceInitializationException(e);
         }
     }
 }
