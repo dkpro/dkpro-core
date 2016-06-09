@@ -136,6 +136,7 @@ public class FrequencyCounter
             throw new ResourceInitializationException(e);
         }
 
+        /* initialize comparator for output sorting */
         if (sortByAlphabet && sortByCount) {
             throw new ResourceInitializationException(new IllegalArgumentException(
                     "Can only sort either by count or alphabetically."));
@@ -198,11 +199,17 @@ public class FrequencyCounter
 
     }
 
-    private void writeNgrams(OutputStream os, Bag<String> unigrams)
+    /**
+     * Write tokens with counts from a bag to an output stream.
+     *
+     * @param os     an {@link OutputStream}
+     * @param tokens a {@link Bag} of string tokens
+     */
+    private void writeNgrams(OutputStream os, Bag<String> tokens)
     {
-    /* create (sorted) token stream */
-        Stream<String> stream = unigrams.uniqueSet().stream()
-                .filter(token -> unigrams.getCount(token) >= minCount);
+        /* create (sorted) token stream */
+        Stream<String> stream = tokens.uniqueSet().stream()
+                .filter(token -> tokens.getCount(token) >= minCount);
         if (outputComparator.isPresent()) {
             stream = stream.sorted(outputComparator.get());
         }
@@ -210,7 +217,7 @@ public class FrequencyCounter
         /* write tokens */
         stream.forEach(token -> {
             try {
-                os.write((token + COLUMN_SEPARATOR + unigrams.getCount(token) + "\n").getBytes());
+                os.write((token + COLUMN_SEPARATOR + tokens.getCount(token) + "\n").getBytes());
             }
             catch (IOException e) {
                 throw new RuntimeException(e);
