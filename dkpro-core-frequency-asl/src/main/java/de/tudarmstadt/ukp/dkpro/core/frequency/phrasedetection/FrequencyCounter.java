@@ -34,8 +34,6 @@ import org.apache.uima.resource.ResourceInitializationException;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Comparator;
-import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
@@ -105,8 +103,6 @@ public class FrequencyCounter
     @ConfigurationParameter(name = PARAM_SORT_BY_ALPHABET, mandatory = true, defaultValue = "false")
     private boolean sortByAlphabet;
 
-    private Optional<Comparator<String>> outputComparator;
-
     private Bag<String> unigrams;
     private Bag<String> bigrams;
     private StringSequenceGenerator sequenceGenerator;
@@ -116,6 +112,11 @@ public class FrequencyCounter
             throws ResourceInitializationException
     {
         super.initialize(context);
+        if (sortByAlphabet && sortByCount) {
+            throw new ResourceInitializationException(new IllegalArgumentException(
+                    "Can only sort either by count or alphabetically."));
+        }
+
         unigrams = new HashBag<>();
         bigrams = new HashBag<>();
 
@@ -134,22 +135,6 @@ public class FrequencyCounter
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);
-        }
-
-        /* initialize comparator for output sorting */
-        if (sortByAlphabet && sortByCount) {
-            throw new ResourceInitializationException(new IllegalArgumentException(
-                    "Can only sort either by count or alphabetically."));
-        }
-        if (sortByAlphabet) {
-            outputComparator = Optional.of(String::compareTo);
-        }
-        else if (sortByCount) {
-            outputComparator = Optional.of((o1, o2) ->
-                    -Integer.compare(unigrams.getCount(o1), unigrams.getCount(o2)));
-        }
-        else {
-            outputComparator = Optional.empty();
         }
     }
 
@@ -185,7 +170,9 @@ public class FrequencyCounter
     public void collectionProcessComplete()
             throws AnalysisEngineProcessException
     {
+        getLogger().info("Vocabulary size: " + unigrams.uniqueSet().size());
         try {
+            getLogger().info("Writing frequencies to " + getTargetLocation());
             OutputStream os = CompressionUtils.getOutputStream(new File(getTargetLocation()));
 
             writeNgrams(os, unigrams);
@@ -196,33 +183,37 @@ public class FrequencyCounter
         catch (IOException e) {
             throw new AnalysisEngineProcessException(e);
         }
-
     }
 
     /**
-     * Write tokens with counts from a bag to an output stream.
+     * Write counter with counts from a bag to an output stream.
      *
-     * @param os     an {@link OutputStream}
-     * @param tokens a {@link Bag} of string tokens
+     * @param os      an {@link OutputStream}
+     * @param counter a {@link Bag} of string counter
      */
-    private void writeNgrams(OutputStream os, Bag<String> tokens)
+    private void writeNgrams(OutputStream os, Bag<String> counter)
     {
-        /* create (sorted) token stream */
-        Stream<String> stream = tokens.uniqueSet().stream()
-                .filter(token -> tokens.getCount(token) >= minCount);
-        if (outputComparator.isPresent()) {
-            stream = stream.sorted(outputComparator.get());
+        /* create token stream */
+        Stream<String> stream = counter.uniqueSet().stream()
+                .filter(token -> counter.getCount(token) >= minCount);
+
+        /* sort output */
+        if (sortByAlphabet) {
+            stream = stream.sorted(String::compareTo);
+        }
+        else if (sortByCount) {
+            stream = stream.sorted((o1, o2) ->
+                    -Integer.compare(counter.getCount(o1), counter.getCount(o2)));
         }
 
-        /* write tokens */
+        /* write tokens with counts */
         stream.forEach(token -> {
             try {
-                os.write((token + COLUMN_SEPARATOR + tokens.getCount(token) + "\n").getBytes());
+                os.write((token + COLUMN_SEPARATOR + counter.getCount(token) + "\n").getBytes());
             }
             catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
     }
-
 }

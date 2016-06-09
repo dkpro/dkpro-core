@@ -116,6 +116,7 @@ public class PhraseAnnotator
             throw new ResourceInitializationException(e);
         }
         vocabularySize = unigrams.size();
+        getLogger().info("Vocabulary size: " + vocabularySize);
 
         /* set feature path to default */
         if (featurePath == null) {
@@ -207,6 +208,7 @@ public class PhraseAnnotator
         unigrams = new HashMap<>();
         bigrams = new HashMap<>();
 
+        getLogger().info("Reading frequencies from " + modelLocation);
         BufferedReader reader = new BufferedReader(new InputStreamReader(CompressionUtils
                 .getInputStream(modelLocation, new FileInputStream(modelLocation))));
         boolean countingUnigrams = true;
