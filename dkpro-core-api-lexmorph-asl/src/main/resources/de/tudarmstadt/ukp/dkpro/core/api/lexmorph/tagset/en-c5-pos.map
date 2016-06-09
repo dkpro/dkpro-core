@@ -9,6 +9,11 @@ __META_SOURCE_URL__=http://www.natcorp.ox.ac.uk/docs/gramtag.html
 
 # AJ0	Adjective (general or positive) (e.g. good, old, beautiful)
 AJ0=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+AJ0-AV0=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+AJ0-VVG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+AJ0-VVN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+AJ0-VVD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+AJ0-NN1=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
 
 # AJC	Comparative adjective (e.g. better, older)
 AJC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
@@ -26,28 +31,36 @@ AT0=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
 #       comparative, or superlative.This is because of the relative rarity of comparative and
 #       superlative adverbs.]
 AV0=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+AV0-AJ0=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
 
 # AVP	Adverb particle (e.g. up, off, out) [N.B. AVP is used for such "prepositional adverbs", 
 #       whether or not they are used idiomatically in a phrasal verb: e.g. in 'Come out here' and 
 #       'I can't hold out any longer', the same AVP tag is used for out.
+AVP-PRP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
 
 # AVQ	Wh-adverb (e.g. when, where, how, why, wherever) [The same tag is used, whether the word
 # occurs in interrogative or relative use.]
+AVQ-CJS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
 
 # CJC	Coordinating conjunction (e.g. and, or, but)
 CJC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
 
 # CJS	Subordinating conjunction (e.g. although, when)
 CJS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+CJS-AVQ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+CJS-PRP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+
 
 # CJT	The subordinating conjunction that [N.B. that is tagged CJT when it introduces not only a 
 #       nominal clause, but also a relative clause, as in 'the day that follows Christmas'. Some 
 #       theories treat that here as a relative pronoun, whereas others treat it as a conjunction. We
 #       have adopted the latter analysis.]
 CJT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+CJT-DT0=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
 
 # CRD	Cardinal number (e.g. one, 3, fifty-five, 3609)
 CRD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
+CRD-PNI=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
 
 # DPS	Possessive determiner (e.g. your, their, his)
 DPS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
@@ -57,6 +70,8 @@ DPS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
 #       noun phrase. E.g. This is tagged DT0 both in 'This is my house' and in 'This house is 
 #       mine'.]
 DT0=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+DT0-CJT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+
 
 # DTQ	Wh-determiner (e.g. which, what, whose, whichever) [The category of determiner here is 
 #       defined as for DT0 above. These words are tagged as wh-determiners whether they occur in 
@@ -75,14 +90,20 @@ NN0=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
 
 # NN1	Singular common noun (e.g. pencil, goose, time, revelation)
 NN1=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+NN1-VVG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+NN1-AJ0=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+NN1-NP0=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+
 
 # NN2	Plural common noun (e.g. pencils, geese, times, revelations)
 NN2=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+NN2-VVZ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
 
 # NP0	Proper noun (e.g. London, Michael, Mars, IBM) [N.B. the distinction between singular and 
 #       plural proper nouns is not indicated in the tagset, plural proper nouns being a comparative
 #       rarity.]
-NP0=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N
+NP0=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
+NP0-NN1=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
 
 # ORD	Ordinal numeral (e.g. first, sixth, 77th, last) . [N.B. The ORD tag is used whether these
 #       words are used in a nominal or in an adverbial role. Next and last, as "general ordinals",
@@ -93,6 +114,7 @@ NP0=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N
 #       can also occur before a noun head in an article-like function, are tagged as determiners
 #       (see DT0 and AT0 above).]
 PNI=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PNI-CRD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
 
 # PNP	Personal pronoun (e.g. I, you, them, ours) [Note that possessive pronouns like ours and 
 #       theirs are tagged as personal pronouns.]
@@ -114,6 +136,8 @@ PRF=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
 
 # PRP	Preposition (except for of) (e.g. about, at, in, on, on behalf of, with)
 PRP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+PRP-AVP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+PRP-CJS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
 
 # PUL	Punctuation: left bracket - i.e. ( or [
 PUL=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
@@ -194,41 +218,31 @@ VM0=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
 # VVB	The finite base form of lexical verbs (e.g. forget, send, live, return) [Including the 
 #       imperative and present subjunctive]
 VVB=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VVB-NN1=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
 
 # VVD	The past tense form of lexical verbs (e.g. forgot, sent, lived, returned)
 VVD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VVD-VVN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VVD-AJ0=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
 
 # VVG	The -ing form of lexical verbs (e.g. forgetting, sending, living, returning)
 VVG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VVG-NN1=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VVG-AJ0=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
 
 # VVI	The infinitive form of lexical verbs (e.g. forget, send, live, return)
 VVI=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
 
 # VVN	The past participle form of lexical verbs (e.g. forgotten, sent, lived, returned)
 VVN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VVN-AJ0=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VVN-VVD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
 
 # VVZ	The -s form of lexical verbs (e.g. forgets, sends, lives, returns)
 VVZ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VVZ-NN2=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+
 
 # XX0	The negative particle not or n't
 
 # ZZ0	Alphabetical symbols (e.g. A, a, B, b, c, d)
-
-
-# AJ0-AV0
-# AJ0-VVN
-# AJ0-VVD
-# AJ0-NN1
-# AJ0-VVG
-
-# AVP-PRP
-# AVQ-CJS
-# CJS-PRP
-# CJT-DT0
-# CRD-PNI
-
-# NN1-NP0
-# NN1-VVB
-# NN1-VVG
-# NN2-VVZ
-# VVD-VVN
