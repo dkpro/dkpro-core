@@ -20,14 +20,17 @@ package de.tudarmstadt.ukp.dkpro.core.frequency.phrasedetection;
 import de.tudarmstadt.ukp.dkpro.core.io.text.StringReader;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
+import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
+import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -122,5 +125,22 @@ public class FrequencyCounterTest
         assertTrue(targetFile.exists());
 
         // TODO: test sorting of unigrams and bigrams
+    }
+
+    @Test(expected = ResourceInitializationException.class)
+    public void testSortBoth()
+            throws IOException, UIMAException
+    {
+        String sentence = "This is a first test that contains a first test example";
+        String language = "en";
+
+        CollectionReaderDescription reader = createReaderDescription(StringReader.class,
+                StringReader.PARAM_DOCUMENT_TEXT, sentence,
+                StringReader.PARAM_LANGUAGE, language);
+        AnalysisEngineDescription writer = createEngineDescription(FrequencyCounter.class,
+                FrequencyCounter.PARAM_SORT_BY_COUNT, true,
+                FrequencyCounter.PARAM_SORT_BY_ALPHABET, true);
+
+        SimplePipeline.runPipeline(reader, writer);
     }
 }
