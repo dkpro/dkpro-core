@@ -7,42 +7,6 @@
 				<element name="Target" optional="false"/>
 			</frame>
 		</frames>
-		<wordtags xmlns="http://www.clt-st.de/salsa/wordtags">
-		</wordtags>
-		<flags>
-			<flag for="frame" name="Inferiert">
-				<value>
-							</value>
-			</flag>
-			<flag for="frame" name="PolarFact">
-				<value>
-							</value>
-			</flag>
-			<flag for="frame" name="RhetorischesStilmittel">
-				<value>
-							</value>
-			</flag>
-			<flag for="frame" name="SchweizerDeutsch">
-				<value>
-							</value>
-			</flag>
-			<flag for="frame" name="Unsicher">
-				<value>
-							</value>
-			</flag>
-			<flag for="fe" name="Inferiert">
-				<value>
-							</value>
-			</flag>
-			<flag for="fe" name="Sprecher">
-				<value>
-							</value>
-			</flag>
-			<flag for="fe" name="Unsicher">
-				<value>
-							</value>
-			</flag>
-		</flags>
 		<annotation>
 			<edgelabel>
 			</edgelabel>
