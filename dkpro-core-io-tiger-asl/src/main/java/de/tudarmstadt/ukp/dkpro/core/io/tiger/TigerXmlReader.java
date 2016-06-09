@@ -19,13 +19,16 @@ package de.tudarmstadt.ukp.dkpro.core.io.tiger;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -83,7 +86,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerSplitword;
 import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerTerminal;
 
 /**
- * UIMA collection reader for TIGER-XML files. Also supports the augmented format used in the 
+ * UIMA collection reader for TIGER-XML files. Also supports the augmented format used in the
  * Semeval 2010 task which includes semantic role data.
  */
 @TypeCapability(
@@ -118,7 +121,7 @@ public class TigerXmlReader
      * Write Penn Treebank bracketed structure information. Mind this may not work with all tagsets,
      * in particular not with such that contain "(" or ")" in their tags. The tree is generated
      * using the original tag set in the corpus, not using the mapped tagset!
-     * 
+     *
      * Default: {@code false}
      */
     public static final String PARAM_READ_PENN_TREE = ComponentParameters.PARAM_READ_PENN_TREE;
@@ -128,7 +131,7 @@ public class TigerXmlReader
     /**
      * If a sentence has an illegal structure (e.g. TIGER 2.0 has non-terminal nodes that do not
      * have child nodes), then just ignore these sentences.
-     * 
+     *
      * Default: {@code false}
      */
     public static final String PARAM_IGNORE_ILLEGAL_SENTENCES = "ignoreIllegalSentences";
@@ -300,23 +303,29 @@ public class TigerXmlReader
             for (TigerFrame frame : sem.frames) {
                 SemPred p = new SemPred(jCas);
                 p.setCategory(frame.name);
-                int begin = Integer.MAX_VALUE;
-                int end = 0;
+//                Integer begin = Integer.MAX_VALUE;
+//                Integer end = 0;
+                Set<int[]> tokenIndexList = new HashSet<int[]>();
                 for (TigerFeNode fenode : frame.target.fenodes) {
                     String reference = fenode.idref;
                     if (terminals.containsKey(reference)) {
                         Token target = terminals.get(reference);
-                        begin = Math.min(begin, target.getBegin());
-                        end = Math.max(end, target.getEnd());
+//                        begin = Math.min(begin, target.getBegin());
+//                        end = Math.max(end, target.getEnd());
+
+                        tokenIndexList.add(new int[] {target.getBegin(), target.getEnd()});
                     }
                     else if (nonterminals.containsKey(reference)) {
                         Constituent target = nonterminals.get(reference);
-                        begin = Math.min(begin, target.getBegin());
-                        end = Math.max(end, target.getEnd());
+//                        begin = Math.min(begin, target.getBegin());
+//                        end = Math.max(end, target.getEnd());
+
+                        addAllTokenBoundaries(tokenIndexList, target, nonterminals);
                     }
                 }
-                p.setBegin(begin);
-                p.setEnd(end);
+                int[] boundary = getBoundaryOfFirstContiguousElement(tokenIndexList);
+                p.setBegin(boundary[0]);
+                p.setEnd(boundary[1]);
 
                 List<SemArgLink> arguments = new ArrayList<>();
                 if (frame.fes != null) {
@@ -357,6 +366,66 @@ public class TigerXmlReader
         }
     }
 
+    private void addAllTokenBoundaries(Set<int[]> tokenIndexList, Constituent target,
+            Map<String, Constituent> nonterminals)
+    {
+        for(Annotation child: selectCovered(Annotation.class, target)){
+            if(child instanceof Token){
+                tokenIndexList.add(new int[] {child.getBegin(), child.getEnd()});
+            }else{
+                addAllTokenBoundaries(tokenIndexList, (Constituent) child, nonterminals);
+            }
+        }
+    }
+
+    private int[] getBoundaryOfFirstContiguousElement(Set<int[]> tokenIndexList)
+    {
+        int[][] tokenIndexArray = tokenIndexList.toArray(new int[0][0]);
+        //sort
+        for(int i=0, j; i<tokenIndexArray.length; ++i){
+            int minValue = tokenIndexArray[i][0];
+            int minValueIndex = i;
+            for(j=i+1; j<tokenIndexArray.length; ++j){
+                if(tokenIndexArray[j][0] < minValue){
+                    minValue = tokenIndexArray[j][0];
+                    minValueIndex = j;
+                }
+            }
+
+            int temp = tokenIndexArray[i][0];
+            tokenIndexArray[i][0] = tokenIndexArray[minValueIndex][0];
+            tokenIndexArray[minValueIndex][0] = temp;
+            temp = tokenIndexArray[i][1];
+            tokenIndexArray[i][1] = tokenIndexArray[minValueIndex][1];
+            tokenIndexArray[minValueIndex][1] = temp;
+        }
+
+        // to count for overlap
+        // TODO check if this is correct in all cases
+        //merge nearby tokens
+//        int[][] resultArray = new int[tokenIndexArray.length][2];
+//        int resultArrayIndex=0, newIndex=0;
+//        //join clusters
+//        for(int i=0; i<tokenIndexArray.length; i = newIndex){
+//            ++newIndex;
+//            resultArray[resultArrayIndex][0] = tokenIndexArray[i][0];
+//            resultArray[resultArrayIndex][1] = tokenIndexArray[i][1];
+//
+//            for(int j=i+1; j<tokenIndexArray.length; ++j){
+//
+//                if(tokenIndexArray[j][0] <= tokenIndexArray[i][1] + 1){
+//                    resultArray[resultArrayIndex][1] = tokenIndexArray[j][1];
+//                    newIndex = j+1;
+//                }
+//            }
+//            ++resultArrayIndex;
+//        }
+
+        int begin = tokenIndexArray[0][0];
+        int end = tokenIndexArray[0][1];
+        return new int[]{begin, end};
+    }
+
     private Annotation readNode(JCas aJCas, Map<String, Token> aTerminals,
             Map<String, Constituent> aNonTerminals, TigerGraph aGraph, Constituent aParent,
             TigerEdge aInEdge, TigerNode aNode)
@@ -379,7 +448,7 @@ public class TigerXmlReader
                 throw new IllegalAnnotationStructureException("Non-terminal node [" + aNode.id
                         + "] has no edges.");
             }
-            
+
             for (TigerEdge edge : aNode.edges) {
                 Annotation child = readNode(aJCas, aTerminals, aNonTerminals, aGraph, con, edge,
                         aGraph.get(edge.idref));

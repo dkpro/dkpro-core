@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<corpus corpusname="armut1" target="">
+	<head>
+		<frames xmlns="http://www.clt-st.de/framenet/frame-database">
+			<frame name="SubjectiveExpression">
+				<element name="Source" optional="false"/>
+				<element name="Target" optional="false"/>
+			</frame>
+		</frames>
+		<wordtags xmlns="http://www.clt-st.de/salsa/wordtags">
+		</wordtags>
+		<flags>
+			<flag for="frame" name="Inferiert">
+				<value>
+							</value>
+			</flag>
+			<flag for="frame" name="PolarFact">
+				<value>
+							</value>
+			</flag>
+			<flag for="frame" name="RhetorischesStilmittel">
+				<value>
+							</value>
+			</flag>
+			<flag for="frame" name="SchweizerDeutsch">
+				<value>
+							</value>
+			</flag>
+			<flag for="frame" name="Unsicher">
+				<value>
+							</value>
+			</flag>
+			<flag for="fe" name="Inferiert">
+				<value>
+							</value>
+			</flag>
+			<flag for="fe" name="Sprecher">
+				<value>
+							</value>
+			</flag>
+			<flag for="fe" name="Unsicher">
+				<value>
+							</value>
+			</flag>
+		</flags>
+		<annotation>
+			<edgelabel>
+			</edgelabel>
+			<secedgelabel>
+			</secedgelabel>
+		</annotation>
+	</head>
+	<body>
+		<s id="s8">
+			<graph root="s8_500">
+				<terminals>
+					<t id="s8_1" lemma="" word="Ich" pos="PPER"/>
+					<t id="s8_2" lemma="" word="schlage" pos="VVFIN"/>
+					<t id="s8_3" lemma="" word="mit" pos="APPR"/>
+					<t id="s8_4" lemma="" word="dem" pos="ART"/>
+					<t id="s8_5" lemma="" word="vorliegenden" pos="ADJA"/>
+					<t id="s8_6" lemma="" word="Eventualantrag" pos="NN"/>
+					<t id="s8_7" lemma="" word="deshalb" pos="PROAV"/>
+					<t id="s8_8" lemma="" word="vor" pos="PTKVZ"/>
+					<t id="s8_9" lemma="" word="," pos="$,"/>
+					<t id="s8_10" lemma="" word="dass" pos="KOUS"/>
+					<t id="s8_11" lemma="" word="wir" pos="PPER"/>
+					<t id="s8_12" lemma="" word="uns" pos="PPER"/>
+					<t id="s8_13" lemma="" word="bis" pos="APPR"/>
+					<t id="s8_14" lemma="" word="ins" pos="APPRART"/>
+					<t id="s8_15" lemma="" word="Jahr" pos="NN"/>
+					<t id="s8_16" lemma="" word="2015" pos="CARD"/>
+					<t id="s8_17" lemma="" word="für" pos="VVFIN"/>
+					<t id="s8_18" lemma="" word="die" pos="ART"/>
+					<t id="s8_19" lemma="" word="staatliche" pos="ADJA"/>
+					<t id="s8_20" lemma="" word="Entwicklungszusammenarbeit" pos="NN"/>
+					<t id="s8_21" lemma="" word="das" pos="ART"/>
+					<t id="s8_22" lemma="" word="Ziel" pos="NN"/>
+					<t id="s8_23" lemma="" word="von" pos="APPR"/>
+					<t id="s8_24" lemma="" word="0,5" pos="CARD"/>
+					<t id="s8_25" lemma="" word="Prozent" pos="NN"/>
+					<t id="s8_26" lemma="" word="des" pos="ART"/>
+					<t id="s8_27" lemma="" word="BNE" pos="NN"/>
+					<t id="s8_28" lemma="" word="vornehmen" pos="VVINF"/>
+					<t id="s8_29" lemma="" word="und" pos="KON"/>
+					<t id="s8_30" lemma="" word="dazu" pos="PROAV"/>
+					<t id="s8_31" lemma="" word="vom" pos="APPRART"/>
+					<t id="s8_32" lemma="" word="Bundesrat" pos="NN"/>
+					<t id="s8_33" lemma="" word="für" pos="ADJD"/>
+					<t id="s8_34" lemma="" word="2009" pos="CARD"/>
+					<t id="s8_35" lemma="" word="einen" pos="ART"/>
+					<t id="s8_36" lemma="" word="zusätzlichen" pos="ADJA"/>
+					<t id="s8_37" lemma="" word="Rahmenkredit" pos="NN"/>
+					<t id="s8_38" lemma="" word="verlangen" pos="VVFIN"/>
+					<t id="s8_39" lemma="" word="." pos="$."/>
+				</terminals>
+				<nonterminals>
+					<nt id="s8_502" cat="PP">
+						<edge label="--" idref="s8_3"/>
+						<edge label="--" idref="s8_4"/>
+						<edge label="--" idref="s8_5"/>
+						<edge label="--" idref="s8_6"/>
+					</nt>
+					<nt id="s8_505" cat="PP">
+						<edge label="--" idref="s8_13"/>
+						<edge label="--" idref="s8_14"/>
+						<edge label="--" idref="s8_15"/>
+						<edge label="--" idref="s8_16"/>
+					</nt>
+					<nt id="s8_506" cat="NP">
+						<edge label="--" idref="s8_18"/>
+						<edge label="--" idref="s8_19"/>
+						<edge label="--" idref="s8_20"/>
+					</nt>
+					<nt id="s8_510" cat="NP">
+						<edge label="--" idref="s8_26"/>
+						<edge label="--" idref="s8_27"/>
+					</nt>
+					<nt id="s8_509" cat="PP">
+						<edge label="--" idref="s8_23"/>
+						<edge label="--" idref="s8_24"/>
+						<edge label="--" idref="s8_25"/>
+						<edge label="--" idref="s8_510"/>
+					</nt>
+					<nt id="s8_508" cat="NP">
+						<edge label="--" idref="s8_21"/>
+						<edge label="--" idref="s8_22"/>
+						<edge label="--" idref="s8_509"/>
+					</nt>
+					<nt id="s8_507" cat="VP">
+						<edge label="--" idref="s8_508"/>
+						<edge label="--" idref="s8_28"/>
+					</nt>
+					<nt id="s8_504" cat="S">
+						<edge label="--" idref="s8_10"/>
+						<edge label="--" idref="s8_11"/>
+						<edge label="--" idref="s8_12"/>
+						<edge label="--" idref="s8_505"/>
+						<edge label="--" idref="s8_17"/>
+						<edge label="--" idref="s8_506"/>
+						<edge label="--" idref="s8_507"/>
+					</nt>
+					<nt id="s8_512" cat="PP">
+						<edge label="--" idref="s8_31"/>
+						<edge label="--" idref="s8_32"/>
+					</nt>
+					<nt id="s8_513" cat="NP">
+						<edge label="--" idref="s8_35"/>
+						<edge label="--" idref="s8_36"/>
+						<edge label="--" idref="s8_37"/>
+					</nt>
+					<nt id="s8_511" cat="S">
+						<edge label="--" idref="s8_30"/>
+						<edge label="--" idref="s8_512"/>
+						<edge label="--" idref="s8_33"/>
+						<edge label="--" idref="s8_34"/>
+						<edge label="--" idref="s8_513"/>
+						<edge label="--" idref="s8_38"/>
+					</nt>
+					<nt id="s8_503" cat="CS">
+						<edge label="--" idref="s8_504"/>
+						<edge label="--" idref="s8_29"/>
+						<edge label="--" idref="s8_511"/>
+					</nt>
+					<nt id="s8_501" cat="S">
+						<edge label="--" idref="s8_1"/>
+						<edge label="--" idref="s8_2"/>
+						<edge label="--" idref="s8_502"/>
+						<edge label="--" idref="s8_7"/>
+						<edge label="--" idref="s8_8"/>
+						<edge label="--" idref="s8_9"/>
+						<edge label="--" idref="s8_503"/>
+					</nt>
+					<nt id="s8_500" cat="PSEUDO">
+						<edge label="--" idref="s8_501"/>
+						<edge label="--" idref="s8_39"/>
+					</nt>
+				</nonterminals>
+			</graph>
+			<sem>
+				<globals>
+				</globals>
+				<frames>
+					<frame name="SubjectiveExpression" id="s8_f1a1">
+						<target>
+							<fenode idref="s8_2"/>
+							<fenode idref="s8_8"/>
+						</target>
+						<fe name="Source" id="s8_f1a1_e1">
+							<fenode idref="s8_1"/>
+						</fe>
+						<fe name="Target" id="s8_f1a1_e2">
+							<fenode idref="s8_503"/>
+						</fe>
+					</frame>
+					<frame name="SubjectiveExpression" id="s8_f2a1">
+						<target>
+							<fenode idref="s8_28"/>
+							<fenode idref="s8_12"/>
+						</target>
+						<fe name="Source" id="s8_f2a1_e1">
+							<fenode idref="s8_11"/>
+						</fe>
+						<fe name="Target" id="s8_f2a1_e2">
+							<fenode idref="s8_508"/>
+						</fe>
+					</frame>
+					<frame name="SubjectiveExpression" id="s8_f3a1">
+						<target>
+							<fenode idref="s8_38"/>
+						</target>
+						<fe name="Source" id="s8_f3a1_e1">
+							<fenode idref="s8_11"/>
+						</fe>
+						<fe name="Target" id="s8_f3a1_e2">
+							<fenode idref="s8_513"/>
+						</fe>
+					</frame>
+					<frame name="SubjectiveExpression" id="s8_f1">
+						<target>
+							<fenode idref="s8_6"/>
+						</target>
+					</frame>
+					<frame name="SubjectiveExpression" id="s8_f2">
+						<target>
+							<fenode idref="s8_20"/>
+						</target>
+					</frame>
+					<frame name="SubjectiveExpression" id="s8_f3">
+						<target>
+							<fenode idref="s8_22"/>
+						</target>
+					</frame>
+				</frames>
+				<usp>
+					<uspframes>
+					</uspframes>
+					<uspfes>
+					</uspfes>
+				</usp>
+				<wordtags>
+				</wordtags>
+			</sem>
+		</s>
+	</body>
+</corpus>
