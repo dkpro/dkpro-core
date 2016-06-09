@@ -109,7 +109,12 @@ public class PhraseAnnotator
     {
         super.initialize(context);
 
-        readCounts();
+        try {
+            readCounts();
+        }
+        catch (IOException e) {
+            throw new ResourceInitializationException(e);
+        }
         vocabularySize = unigrams.size();
 
         /* set feature path to default */
@@ -191,34 +196,35 @@ public class PhraseAnnotator
         }
     }
 
+    /**
+     * Read the input file, adding unigrams and bigrams to the respective maps.
+     *
+     * @throws IOException if the input file cannot be read
+     */
     private void readCounts()
-            throws ResourceInitializationException
+            throws IOException
     {
         unigrams = new HashMap<>();
         bigrams = new HashMap<>();
 
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(CompressionUtils
-                    .getInputStream(modelLocation, new FileInputStream(modelLocation))));
-            String line;
-            boolean countingUnigrams = true;
-            while ((line = reader.readLine()) != null) {
-                if (line.equals(FrequencyCounter.NGRAM_SEPARATOR_LINE)) {
-                    countingUnigrams = false;
-                    continue;
-                }
-                String[] columns = line.split(FrequencyCounter.COLUMN_SEPARATOR);
-                assert columns.length == 2;
-                if (countingUnigrams) {
-                    unigrams.put(columns[0], Integer.parseInt(columns[1]));
-                }
-                else {
-                    bigrams.put(columns[0], Integer.parseInt(columns[1]));
-                }
+        BufferedReader reader = new BufferedReader(new InputStreamReader(CompressionUtils
+                .getInputStream(modelLocation, new FileInputStream(modelLocation))));
+        boolean countingUnigrams = true;
+
+        String line;
+        while ((line = reader.readLine()) != null) {
+            if (line.equals(FrequencyCounter.NGRAM_SEPARATOR_LINE)) {
+                countingUnigrams = false;
+                continue;
             }
-        }
-        catch (IOException e) {
-            throw new ResourceInitializationException(e);
+            String[] columns = line.split(FrequencyCounter.COLUMN_SEPARATOR);
+            assert columns.length == 2;
+            if (countingUnigrams) {
+                unigrams.put(columns[0], Integer.parseInt(columns[1]));
+            }
+            else {
+                bigrams.put(columns[0], Integer.parseInt(columns[1]));
+            }
         }
     }
 }
