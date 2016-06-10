@@ -357,7 +357,7 @@ Token
       end: 50
       PosValue: "AT0"
 [wee]
-O
+ADJ
    sofa: _InitialView
    begin: 51
    end: 54
@@ -378,7 +378,7 @@ Token
       begin: 51
       end: 54
       value: "wee"
-   pos: O
+   pos: ADJ
       sofa: _InitialView
       begin: 51
       end: 54
@@ -411,7 +411,7 @@ Token
       end: 58
       PosValue: "NN1"
 [confused]
-O
+V
    sofa: _InitialView
    begin: 60
    end: 68
@@ -432,7 +432,7 @@ Token
       begin: 60
       end: 68
       value: "confuse"
-   pos: O
+   pos: V
       sofa: _InitialView
       begin: 60
       end: 68
@@ -2810,7 +2810,7 @@ Token
       end: 465
       PosValue: "CJC"
 [phone]
-O
+NN
    sofa: _InitialView
    begin: 466
    end: 471
@@ -2831,7 +2831,7 @@ Token
       begin: 466
       end: 471
       value: "phone"
-   pos: O
+   pos: NN
       sofa: _InitialView
       begin: 466
       end: 471
@@ -3724,7 +3724,7 @@ Token
       end: 596
       PosValue: "AT0"
 [bottom]
-O
+NN
    sofa: _InitialView
    begin: 597
    end: 603
@@ -3745,7 +3745,7 @@ Token
       begin: 597
       end: 603
       value: "bottom"
-   pos: O
+   pos: NN
       sofa: _InitialView
       begin: 597
       end: 603

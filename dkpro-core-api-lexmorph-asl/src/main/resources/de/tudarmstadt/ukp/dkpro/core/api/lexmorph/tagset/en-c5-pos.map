@@ -91,6 +91,7 @@ NN0=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
 # NN1	Singular common noun (e.g. pencil, goose, time, revelation)
 NN1=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
 NN1-VVG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+NN1-VVB=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
 NN1-AJ0=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
 NN1-NP0=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
 
