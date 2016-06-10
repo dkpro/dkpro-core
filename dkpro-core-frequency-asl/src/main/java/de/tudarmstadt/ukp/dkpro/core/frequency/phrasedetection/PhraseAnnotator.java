@@ -216,17 +216,24 @@ public class PhraseAnnotator
         String line;
         while ((line = reader.readLine()) != null) {
             if (line.equals(FrequencyCounter.NGRAM_SEPARATOR_LINE)) {
+                /* this should only happen once per file */
+                if (!countingUnigrams) {
+                    throw new IllegalStateException(
+                            "Error reading input file; contains multiple separation lines.");
+                }
                 countingUnigrams = false;
-                continue;
-            }
-            String[] columns = line.split(FrequencyCounter.COLUMN_SEPARATOR);
-            assert columns.length == 2;
-            if (countingUnigrams) {
-                unigrams.put(columns[0], Integer.parseInt(columns[1]));
             }
             else {
-                bigrams.put(columns[0], Integer.parseInt(columns[1]));
+                String[] columns = line.split(FrequencyCounter.COLUMN_SEPARATOR);
+                assert columns.length == 2;
+                if (countingUnigrams) {
+                    unigrams.put(columns[0], Integer.parseInt(columns[1]));
+                }
+                else {
+                    bigrams.put(columns[0], Integer.parseInt(columns[1]));
+                }
             }
         }
+        reader.close();
     }
 }

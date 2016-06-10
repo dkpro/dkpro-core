@@ -149,13 +149,15 @@ public class FrequencyCounter
                 for (int i = 0; i < sequence.length; i++) {
                     /* count unigrams */
                     String unigram = sequence[i]
-                            .replaceAll(COLUMN_SEPARATOR, COLUMN_SEP_REPLACEMENT);
+                            .replaceAll(COLUMN_SEPARATOR, COLUMN_SEP_REPLACEMENT)
+                            .replaceAll("\n", COLUMN_SEP_REPLACEMENT);
                     unigrams.add(unigram);
 
                     /* count bigrams */
                     if (i + 1 < sequence.length) {
                         String bigram = unigram + BIGRAM_SEPARATOR + sequence[i + 1]
-                                .replaceAll(COLUMN_SEPARATOR, COLUMN_SEP_REPLACEMENT);
+                                .replaceAll(COLUMN_SEPARATOR, COLUMN_SEP_REPLACEMENT)
+                                .replaceAll("\n", COLUMN_SEP_REPLACEMENT);
                         bigrams.add(bigram);
                     }
                 }
