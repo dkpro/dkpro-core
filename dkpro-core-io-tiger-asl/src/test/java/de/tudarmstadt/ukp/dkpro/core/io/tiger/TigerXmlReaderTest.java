@@ -144,6 +144,41 @@ public class TigerXmlReaderTest
         }
     }
 
+    @Test
+    public void testContiguousFrame()
+        throws Exception
+    {
+        CollectionReaderDescription reader = createReaderDescription(TigerXmlReader.class,
+                TigerXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
+                TigerXmlReader.PARAM_PATTERNS, "[+]tiger-sample-contiguousframe.xml",
+                TigerXmlReader.PARAM_LANGUAGE, "de",
+                TigerXmlReader.PARAM_READ_PENN_TREE, true);
+
+
+        /**
+         * first element is contiguous
+         * it spans over 2 tokens "schlage" and "mit", so the boundary should be
+         * schlage.begin and mit.end ==> (4, 15)
+         */
+        int[][] frameRanges = new int[][] {{4, 15}, {33, 47}, {71, 74}, {112, 138}, {143, 147}, {246, 255}};
+
+        for (JCas cas : iteratePipeline(reader, new AnalysisEngineDescription[] {})) {
+            for (Sentence sentence : select(cas, Sentence.class)){
+                for(SemPred frame: selectCovered(SemPred.class, sentence)){
+                    System.out.println("frame boundary " + frame.getBegin() + " : " + frame.getEnd());
+                    boolean found = false;
+                    for(int[] element:frameRanges){
+                        if(element[0] == frame.getBegin() && element[1] == frame.getEnd()){
+                            found = true;
+                            break;
+                        }
+                    }
+                    assertEquals(true, found);
+                }
+            }
+        }
+    }
+
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
 }

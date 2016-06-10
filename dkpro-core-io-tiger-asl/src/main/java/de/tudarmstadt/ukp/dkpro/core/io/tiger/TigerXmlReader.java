@@ -26,8 +26,10 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.xml.bind.JAXBContext;
@@ -89,15 +91,13 @@ import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerTerminal;
  * UIMA collection reader for TIGER-XML files. Also supports the augmented format used in the
  * Semeval 2010 task which includes semantic role data.
  */
-@TypeCapability(
-        outputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
-            "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg",
-            "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred" })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
+        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg",
+        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred" })
 public class TigerXmlReader
     extends JCasResourceCollectionReader_ImplBase
 {
@@ -180,15 +180,15 @@ public class TigerXmlReader
             XMLEvent e = null;
             while ((e = xmlEventReader.peek()) != null) {
                 if (isStartElement(e, "s")) {
-                    TigerSentence sentence = unmarshaller.unmarshal(xmlEventReader, TigerSentence.class)
-                            .getValue();
+                    TigerSentence sentence = unmarshaller
+                            .unmarshal(xmlEventReader, TigerSentence.class).getValue();
                     try {
                         readSentence(jb, sentence);
                     }
                     catch (IllegalAnnotationStructureException ex) {
                         if (ignoreIllegalSentences) {
                             getLogger().warn("Unable to read sentence [" + sentence.id + "]: "
-                                            + ex.getMessage());
+                                    + ex.getMessage());
                         }
                         else {
                             getLogger().error("Unable to read sentence [" + sentence.id + "]: "
@@ -232,7 +232,7 @@ public class TigerXmlReader
     {
         int sentenceBegin = aBuilder.getPosition();
         int sentenceEnd = aBuilder.getPosition();
-        Map<String, Token> terminals = new HashMap<String, Token>();
+        Map<String, Token> terminals = new LinkedHashMap<String, Token>();
         Map<String, Constituent> nonterminals = new HashMap<String, Constituent>();
         for (TigerTerminal t : aSentence.graph.terminals) {
             Token token = aBuilder.add(t.word, Token.class);
@@ -247,8 +247,8 @@ public class TigerXmlReader
 
             if (t.pos != null) {
                 Type posType = posMappingProvider.getTagType(t.pos);
-                POS posAnno = (POS) aBuilder.getJCas().getCas()
-                        .createAnnotation(posType, token.getBegin(), token.getEnd());
+                POS posAnno = (POS) aBuilder.getJCas().getCas().createAnnotation(posType,
+                        token.getBegin(), token.getEnd());
                 posAnno.setPosValue(t.pos.intern());
                 posAnno.addToIndexes();
                 token.setPos(posAnno);
@@ -303,27 +303,21 @@ public class TigerXmlReader
             for (TigerFrame frame : sem.frames) {
                 SemPred p = new SemPred(jCas);
                 p.setCategory(frame.name);
-//                Integer begin = Integer.MAX_VALUE;
-//                Integer end = 0;
-                Set<int[]> tokenIndexList = new HashSet<int[]>();
+                Set<Token> frameTokenSet = new HashSet<Token>();
+
                 for (TigerFeNode fenode : frame.target.fenodes) {
                     String reference = fenode.idref;
                     if (terminals.containsKey(reference)) {
                         Token target = terminals.get(reference);
-//                        begin = Math.min(begin, target.getBegin());
-//                        end = Math.max(end, target.getEnd());
-
-                        tokenIndexList.add(new int[] {target.getBegin(), target.getEnd()});
+                        frameTokenSet.add(target);
                     }
                     else if (nonterminals.containsKey(reference)) {
                         Constituent target = nonterminals.get(reference);
-//                        begin = Math.min(begin, target.getBegin());
-//                        end = Math.max(end, target.getEnd());
-
-                        addAllTokenBoundaries(tokenIndexList, target, nonterminals);
+                        addAllTokenBoundaries(frameTokenSet, target, nonterminals);
                     }
                 }
-                int[] boundary = getBoundaryOfFirstContiguousElement(tokenIndexList);
+
+                int[] boundary = getBoundaryOfFirstContiguousElement(frameTokenSet, terminals);
                 p.setBegin(boundary[0]);
                 p.setEnd(boundary[1]);
 
@@ -366,70 +360,92 @@ public class TigerXmlReader
         }
     }
 
-    private void addAllTokenBoundaries(Set<int[]> tokenIndexList, Constituent target,
+    private void addAllTokenBoundaries(Set<Token> frameTokenSet, Constituent target,
             Map<String, Constituent> nonterminals)
     {
-        for(Annotation child: selectCovered(Annotation.class, target)){
-            if(child instanceof Token){
-                tokenIndexList.add(new int[] {child.getBegin(), child.getEnd()});
-            }else{
-                addAllTokenBoundaries(tokenIndexList, (Constituent) child, nonterminals);
+        for (Annotation child : selectCovered(Annotation.class, target)) {
+            if (child instanceof Token) {
+                frameTokenSet.add((Token) child);
+            }
+            else {
+                addAllTokenBoundaries(frameTokenSet, (Constituent) child, nonterminals);
             }
         }
     }
 
-    private int[] getBoundaryOfFirstContiguousElement(Set<int[]> tokenIndexList)
+    /***
+     * returns begin-end offset of first contiguous frame element in frameTokenSet
+     *
+     * @param frameTokenSet
+     *            list of tokens in the current frame
+     * @param terminals
+     *            all tokens of the sentence
+     * @return
+     */
+    private int[] getBoundaryOfFirstContiguousElement(Set<Token> frameTokenSet,
+            Map<String, Token> terminals)
     {
-        int[][] tokenIndexArray = tokenIndexList.toArray(new int[0][0]);
-        //sort
-        for(int i=0, j; i<tokenIndexArray.length; ++i){
-            int minValue = tokenIndexArray[i][0];
-            int minValueIndex = i;
-            for(j=i+1; j<tokenIndexArray.length; ++j){
-                if(tokenIndexArray[j][0] < minValue){
-                    minValue = tokenIndexArray[j][0];
-                    minValueIndex = j;
+        // sort frameTokenSet
+        Token[] tokenArray = frameTokenSet.toArray(new Token[0]);
+        if (tokenArray.length > 1) {
+            // avoid unnecessary computation for single token frames
+            for (int i = 0, j; i < tokenArray.length; ++i) {
+                int minValue = tokenArray[i].getBegin();
+                int minValueIndex = i;
+                for (j = i + 1; j < tokenArray.length; ++j) {
+                    if (tokenArray[j].getBegin() < minValue) {
+                        minValue = tokenArray[j].getBegin();
+                        minValueIndex = j;
+                    }
                 }
-            }
 
-            int temp = tokenIndexArray[i][0];
-            tokenIndexArray[i][0] = tokenIndexArray[minValueIndex][0];
-            tokenIndexArray[minValueIndex][0] = temp;
-            temp = tokenIndexArray[i][1];
-            tokenIndexArray[i][1] = tokenIndexArray[minValueIndex][1];
-            tokenIndexArray[minValueIndex][1] = temp;
+                Token temp = tokenArray[i];
+                tokenArray[i] = tokenArray[minValueIndex];
+                tokenArray[minValueIndex] = temp;
+            }
         }
 
-        // to count for overlap
-        // TODO check if this is correct in all cases
-        //merge nearby tokens
-//        int[][] resultArray = new int[tokenIndexArray.length][2];
-//        int resultArrayIndex=0, newIndex=0;
-//        //join clusters
-//        for(int i=0; i<tokenIndexArray.length; i = newIndex){
-//            ++newIndex;
-//            resultArray[resultArrayIndex][0] = tokenIndexArray[i][0];
-//            resultArray[resultArrayIndex][1] = tokenIndexArray[i][1];
-//
-//            for(int j=i+1; j<tokenIndexArray.length; ++j){
-//
-//                if(tokenIndexArray[j][0] <= tokenIndexArray[i][1] + 1){
-//                    resultArray[resultArrayIndex][1] = tokenIndexArray[j][1];
-//                    newIndex = j+1;
-//                }
-//            }
-//            ++resultArrayIndex;
-//        }
+        // merge begin-end boundary of nearby tokens
+        int i = 0;
+        List<int[]> tokenBoundaryList = new ArrayList<>();
+        boolean continuousToken = false;
+        if (tokenArray.length > 1) {
+            // avoid unnecessary computation for single token frames
+            for (Entry<String, Token> entry : terminals.entrySet()) {
+                if (tokenArray[i].equals(entry.getValue())) {
+                    if (continuousToken == false) {
+                        tokenBoundaryList.add(
+                                new int[] { tokenArray[i].getBegin(), tokenArray[i].getEnd() });
+                    }
+                    else {
+                        tokenBoundaryList.get(tokenBoundaryList.size() - 1)[1] = tokenArray[i]
+                                .getEnd();
+                    }
+                    continuousToken = true;
+                    ++i;
+                }
+                else {
+                    continuousToken = false;
+                }
 
-        int begin = tokenIndexArray[0][0];
-        int end = tokenIndexArray[0][1];
-        return new int[]{begin, end};
+                if (i >= tokenArray.length)
+                    break;
+            }
+        }
+        else {
+            tokenBoundaryList.add(new int[] { tokenArray[0].getBegin(), tokenArray[0].getEnd() });
+        }
+
+        // return begin and end for first element
+        int begin = tokenBoundaryList.get(0)[0];
+        int end = tokenBoundaryList.get(0)[1];
+        return new int[] { begin, end };
     }
 
     private Annotation readNode(JCas aJCas, Map<String, Token> aTerminals,
             Map<String, Constituent> aNonTerminals, TigerGraph aGraph, Constituent aParent,
             TigerEdge aInEdge, TigerNode aNode)
-        throws IllegalAnnotationStructureException
+                throws IllegalAnnotationStructureException
     {
         int begin = Integer.MAX_VALUE;
         int end = 0;
@@ -445,8 +461,8 @@ public class TigerXmlReader
 
             // TIGER 2.0 has some invalid non-terminal nodes without edges
             if (aNode.edges == null) {
-                throw new IllegalAnnotationStructureException("Non-terminal node [" + aNode.id
-                        + "] has no edges.");
+                throw new IllegalAnnotationStructureException(
+                        "Non-terminal node [" + aNode.id + "] has no edges.");
             }
 
             for (TigerEdge edge : aNode.edges) {
@@ -472,7 +488,7 @@ public class TigerXmlReader
             aNonTerminals.put(aNode.id, con);
             return con;
         }
-        else /* Terminal node */{
+        else /* Terminal node */ {
             return aTerminals.get(aNode.id);
         }
     }
