@@ -63,8 +63,6 @@
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
-			<!-- Constants in this dependency are inlined - dependency not required at runtime -->
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -92,7 +90,7 @@
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-bin</artifactId>
-				<version>20150325.0</version>
+				<version>20160430.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -112,7 +110,7 @@
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-bg-le</artifactId>
-				<version>20140702.1</version>
+				<version>20160430.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -227,6 +225,11 @@
 				</dependency>
 				<dependency>
 					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-bg-le</artifactId>
+					<scope>test</scope>
+				</dependency>				
+				<dependency>
+					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-en-le</artifactId>
 					<scope>test</scope>
 				</dependency>
@@ -285,4 +288,19 @@
 			</dependencies>
 		</profile>
 	</profiles>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<configuration>
+						<usedDependencies>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDependency>
+						</usedDependencies>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 </project>

@@ -109,6 +109,7 @@
 					<artifactId>maven-dependency-plugin</artifactId>
 					<configuration>
 						<usedDependencies>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDependency>
 							<!-- We want to avoid the need to each tested module to explicitly 
 								depend on log4j, so we depend on it here. -->
 							<usedDependency>log4j:log4j</usedDependency>

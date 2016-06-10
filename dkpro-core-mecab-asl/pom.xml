@@ -137,6 +137,9 @@
 						<usedDependencies>
 							<!-- Models not detected by byte-code analysis -->
 							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.mecab-model-tagger-jp-ipadic</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.mecab-model-tagger-jp-bin-linux-x86_32</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.mecab-model-tagger-jp-bin-linux-x86_64</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.mecab-model-tagger-jp-bin-osx-x86_64</usedDependency>
 						</usedDependencies>
 					</configuration>
 				</plugin>
