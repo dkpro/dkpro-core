@@ -60,10 +60,6 @@
             <artifactId>de.tudarmstadt.ukp.dkpro.core.api.frequency-asl</artifactId>
         </dependency>
         <dependency>
-            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-            <artifactId>de.tudarmstadt.ukp.dkpro.core.textnormalizer-asl</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.languagetool</groupId>
             <artifactId>languagetool-core</artifactId>
             <version>${languagetool.version}</version>
@@ -84,8 +80,6 @@
         <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
-            <!-- Constants in this dependency are inlined - dependency not required at runtime -->
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -132,6 +126,7 @@
                     <artifactId>maven-dependency-plugin</artifactId>
                     <configuration>
                         <usedDependencies>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDependency>
                             <!-- Models not detected by byte-code analysis -->
                             <usedDependency>org.languagetool:language-all</usedDependency>
                             <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent</usedDependency>

@@ -85,18 +85,8 @@
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
-			<!-- Constants in this dependency are inlined - dependency not required 
-				at runtime -->
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.sentiment-asl</artifactId>
-		</dependency>
-        <dependency>
-            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-            <artifactId>de.tudarmstadt.ukp.dkpro.core.textnormalizer-asl</artifactId>
-        </dependency>
 		<dependency>
 		    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		    <artifactId>de.tudarmstadt.ukp.dkpro.core.api.transform-asl</artifactId>
@@ -190,6 +180,11 @@
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-coref-en-default</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-all.3class.nodistsim.crf</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -691,6 +686,42 @@
 					<configuration>
 						<usedDependencies>
 							<!-- Models not detected by byte-code analysis -->
+							<usedDependency>
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-de-hgc_175m_600.crf
+							</usedDependency>
+							<usedDependency>
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-fast-caseless
+							</usedDependency>
+							<usedDependency>
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-all.3class.nodistsim.crf
+							</usedDependency>
+							<usedDependency>
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-nowiki.3class.caseless.distsim.crf
+							</usedDependency>
+							<usedDependency>
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-nowiki.3class.nodistsim.crf
+							</usedDependency>
+							<usedDependency>
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-muc.7class.distsim.crf
+							</usedDependency>
+							<usedDependency>
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-muc.7class.caseless.distsim.crf
+							</usedDependency>
+							<usedDependency>
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-all.3class.caseless.distsim.crf
+							</usedDependency>
+							<usedDependency>
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-conll.4class.caseless.distsim.crf
+							</usedDependency>
+							<usedDependency>
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-conll.4class.distsim.crf
+							</usedDependency>
+							<usedDependency>
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-wsj-0-18-caseless-left3words-distsim
+							</usedDependency>
+							<usedDependency>
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-caseless-left3words-distsim
+							</usedDependency>
 							<usedDependency>
 								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-en-pcfg
 							</usedDependency>
