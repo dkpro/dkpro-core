@@ -411,6 +411,7 @@ de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence:
     id:
       externalReferences: []
   externalReferences:
+  - {source: GATE, id: 'Sentence', rel: similar }
   - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Sentence', rel: similar}
   - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-1386', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split:
@@ -431,16 +432,20 @@ de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token:
     parent:
       externalReferences: []
     lemma:
-      externalReferences: []
+      externalReferences: 
+      - {source: GATE, id: 'Token:lemma', rel: similar }
     stem:
-      externalReferences: []
+      externalReferences:
+      - {source: GATE, id: 'Token:stem', rel: similar }
     pos:
-      externalReferences: []
+      externalReferences:
+      - {source: GATE, id: 'Token:pos', rel: similar }
     morph:
       externalReferences: []
     id:
       externalReferences: []
   externalReferences:
+  - {source: GATE, id: 'Token', rel: similar }
   - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Token', rel: similar}
   - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-1403', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument:
