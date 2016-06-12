@@ -27,6 +27,9 @@
     <packaging>jar</packaging>
     <name>DKPro Core ASL - JTok (v ${jtok.version}) (LGPL)</name>
     <description>http://jazzy.sourceforge.net/</description>
+     <properties>
+      <jtok.version>2.1.17</jtok.version>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.apache.uima</groupId>
@@ -57,7 +60,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <properties>
-      <jtok.version>2.16</jtok.version>
-    </properties>
 </project>

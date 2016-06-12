@@ -19,6 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.jtok;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Properties;
 
@@ -66,7 +67,7 @@ public class JTokSegmenter
         super.initialize(aContext);
         
         Properties tokProps = new Properties();
-        try (InputStream in = FileTools.openResourceFileAsStream("jtok/jtok.cfg")) {
+        try (InputStream in = FileTools.openResourceFileAsStream(Paths.get("jtok/jtok.cfg"))) {
             tokProps.load(in);
         }
         catch (IOException e) {
