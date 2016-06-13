@@ -116,7 +116,9 @@ When a <b>maintenance release</b> is made from a branch, the Major and Minor com
          <ol>
          <li><code>mvn clean compile dependency:analyze-only > analysis.txt</code></li>
          <li><code>cat analysis.txt | grep "\(maven-dependency-plugin\|WARNING.*:.*\)" | grep -v ".*:test$" | less</code></li>
-         <li>All dependencies that are detected "Unused declared" with scope "compile" must be changed into scope "test"</li>
+         <li>All dependencies that are detected "Unused declared" with scope "compile" must be changed into scope "test".</li>
+         <li>However, in some situations, changing the scope to "test" will break the compile build. In those cases, the scope should be
+         left as "compile" in spite of the warning message.</li>
          </ol>
      </li>
      </ol>
