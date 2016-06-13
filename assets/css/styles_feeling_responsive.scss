@@ -42,3 +42,7 @@
 @import "09_elements";
 
 @import "11_syntax-highlighting";
+
+OL { counter-reset: item }
+OL LI { display: block }
+OL LI:before { content: counters(item, ".") ". "; counter-increment: item }
