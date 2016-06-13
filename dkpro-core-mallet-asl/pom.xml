@@ -33,6 +33,10 @@
     </properties>
     <dependencies>
         <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging-api</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.apache.uima</groupId>
             <artifactId>uimaj-core</artifactId>
         </dependency>
@@ -44,10 +48,6 @@
             <groupId>cc.mallet</groupId>
             <artifactId>mallet</artifactId>
             <version>${mallet.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging-api</artifactId>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
