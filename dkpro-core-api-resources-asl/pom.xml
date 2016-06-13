@@ -26,6 +26,11 @@
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
     <packaging>jar</packaging>
 	<name>DKPro Core ASL - Resources API</name>
+    <properties>
+        <aetherVersion>0.9.0.M2</aetherVersion>
+        <mavenVersion>3.1.0</mavenVersion>
+        <wagonVersion>1.0</wagonVersion>
+    </properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
@@ -55,71 +60,15 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.maven</groupId>
-			<artifactId>maven-model</artifactId>
-			<version>3.0.5</version>
-		</dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-model</artifactId>
+            <version>3.0.5</version>
+        </dependency>
         <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
-            <!-- Constants in this dependency are inlined - dependency not required at runtime -->
-            <scope>provided</scope>
         </dependency>
-
-		<!-- 
-		<dependency>
-			<groupId>org.eclipse.aether</groupId>
-			<artifactId>aether-api</artifactId>
-			<version>${aetherVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.aether</groupId>
-			<artifactId>aether-spi</artifactId>
-			<version>${aetherVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.aether</groupId>
-			<artifactId>aether-util</artifactId>
-			<version>${aetherVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.aether</groupId>
-			<artifactId>aether-impl</artifactId>
-			<version>${aetherVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.aether</groupId>
-			<artifactId>aether-connector-file</artifactId>
-			<version>${aetherVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.aether</groupId>
-			<artifactId>aether-connector-wagon</artifactId>
-			<version>${aetherVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.tesla.maven</groupId>
-			<artifactId>maven-aether-provider</artifactId>
-			<version>${mavenVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.maven.wagon</groupId>
-			<artifactId>wagon-provider-api</artifactId>
-			<version>${wagonVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.sonatype.maven</groupId>
-			<artifactId>wagon-ahc</artifactId>
-			<version>1.2.1</version>
-		</dependency>
-		 -->
-		 
 		<dependency>
 			<groupId>org.apache.ivy</groupId>
 			<artifactId>ivy</artifactId>
@@ -140,12 +89,36 @@
             <artifactId>xz</artifactId>
             <version>1.5</version>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
+        </dependency>
 	</dependencies>
-
-	
-	<properties>
-		<aetherVersion>0.9.0.M2</aetherVersion>
-		<mavenVersion>3.1.0</mavenVersion>
-		<wagonVersion>1.0</wagonVersion>
-	</properties>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <configuration>
+                        <usedDependencies>
+                            <!-- 
+                              - We really want to have XZ as a compression algorithm, despite us
+                              - not depending directly on it in our code - we use it through
+                              - Apache Commons Compress.
+                              -->
+                            <usedDependency>org.tukaani:xz</usedDependency>
+                        </usedDependencies>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
