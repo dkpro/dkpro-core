@@ -87,18 +87,8 @@ When a <b>maintenance release</b> is made from a branch, the Major and Minor com
       <li>Fix dependencies
          <ol>
          <li><code>mvn clean dependency:analyze > analysis.txt</code></li>
-         <li>All dependencies that are detected _Used undeclared_ must be added (mind to set the scope correctly to save you additional work later)</li>
-         <li>When <i>...api.parameter</i> (only for this dependency!) is detected as _Unused declared_, it must be set to the scope _provided_:
-{% highlight xml %}
-<dependency>
-  <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-  <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
-  <!-- Constants in this dependency are inlined - dependency not required at me -->
-  <scope>provided</scope>        
-</dependency>
-{% endhighlight xml %}
-         </li>
-         <li>All other dependencies that are detected "Unused declared" must be removed or must be marked as used dependencies, e.g.:
+         <li>All dependencies that are detected <strong>Used undeclared</strong> must be added (mind to set the scope correctly to save you additional work later)</li>
+         <li>Dependencies that are detected as <strong>Unused declared</strong> must be removed or must be marked as used dependencies, in the case they are really used. Models typically fall in this later case, as well as the <i>...api.parameter</i> module. To mark them as used dependencies, proceed as below:
 {% highlight xml %}
 <build>
   <pluginManagement>
@@ -108,6 +98,8 @@ When a <b>maintenance release</b> is made from a branch, the Major and Minor com
         <artifactId>maven-dependency-plugin</artifactId>
         <configuration>
           <usedDependencies>
+            <!-- api.parameter is used, alghough undetected by byte-code analysis -->
+            <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDependency>
             <!-- Models not detected by byte-code analysis -->
             <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-maxent</usedDependency>
           </usedDependencies>
