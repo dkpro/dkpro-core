@@ -351,11 +351,16 @@
             <artifactId>xmlunit</artifactId>
             <version>1.6</version>
           </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-core</artifactId>
-            <version>1.3</version>
-        </dependency>
+          <dependency>
+              <groupId>org.hamcrest</groupId>
+              <artifactId>hamcrest-core</artifactId>
+              <version>1.3</version>
+          </dependency>
+          <dependency>
+            <groupId>it.unimi.dsi</groupId>
+            <artifactId>fastutil</artifactId>
+            <version>7.0.9</version>
+          </dependency>
         </dependencies>
     </dependencyManagement>
     <build>
