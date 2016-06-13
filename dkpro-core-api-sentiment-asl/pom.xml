@@ -32,15 +32,10 @@
 			<artifactId>uimaj-core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.uima</groupId>
-			<artifactId>uimafit-core</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<resources>
 			<resource>
@@ -58,5 +53,22 @@
 				</includes>
 			</resource>
 		</resources>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <configuration>
+                        <usedDependencies>
+                            <!-- 
+                             - Maven doesn't detect the parameters module to be used because we
+                             - only use the XML type descriptors from it, not any actual Java code.
+                             -->
+                            <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</usedDependency>
+                        </usedDependencies>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
 	</build>
 </project>
