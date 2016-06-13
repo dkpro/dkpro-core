@@ -42,7 +42,9 @@
 	  <dependency>
 	  	<groupId>org.apache.uima</groupId>
 	  	<artifactId>uimafit-core</artifactId>
+	  	<!-- This dependency is used for test, but the scope should not be set, otherwise the build will break. 
 	  	<scope>test</scope>
+	  	 -->
 	  </dependency>
 	  <dependency>
 	  	<groupId>commons-io</groupId>
