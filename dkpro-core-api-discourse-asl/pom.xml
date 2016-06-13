@@ -34,10 +34,6 @@
 			<artifactId>uimaj-core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.uima</groupId>
-			<artifactId>uimafit-core</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
 		</dependency>
@@ -60,5 +56,27 @@
 				</includes>
 			</resource>
 		</resources>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <configuration>
+                        <usedDependencies>
+                            <!-- 
+                             - Maven doesn't detect the parameters module to be used because we
+                             - only use the XML type descriptors from it, not any actual Java code.
+                             -->
+                            <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</usedDependency>
+                            <!-- 
+                             - Maven doesn't detect uimaj as being required, probably because we
+                             - only need it for the generated classes.
+                             -->
+                            <usedDependency>org.apache.uima:uimaj-core</usedDependency>
+                        </usedDependencies>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
 	</build>
 </project>
