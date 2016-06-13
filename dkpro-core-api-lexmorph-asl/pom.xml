@@ -32,14 +32,16 @@
 			<artifactId>uimaj-core</artifactId>
 		</dependency>
 		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
 		</dependency>
         <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
-            <!-- Constants in this dependency are inlined - dependency not required at runtime -->
-            <scope>provided</scope>
         </dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -52,8 +54,8 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-    <!-- tag::version-filtering[] -->
 	<build>
+    <!-- tag::version-filtering[] -->
 		<resources>
 			<resource>
 				<filtering>false</filtering>
@@ -70,6 +72,24 @@
 				</includes>
 			</resource>
 		</resources>
-	</build>
     <!-- end::version-filtering[] -->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <configuration>
+                        <usedDependencies>
+                            <!-- 
+                             - Maven doesn't detect the parameters module to be used, be we actually
+                             - do require it as a compile dependency and also at runtime, so we
+                             - cannot set it to scope provided. Need to tell Maven to ignore it here.
+                             -->
+                            <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDependency>
+                        </usedDependencies>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+	</build>
 </project>
