@@ -43,10 +43,22 @@
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+        </dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+            <artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+            <artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
+        </dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.io-asl</artifactId>
@@ -54,8 +66,6 @@
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
-			<!-- Constants in this dependency are inlined - dependency not required at runtime -->
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -64,16 +74,32 @@
 		</dependency>
 		<dependency>
 		  <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		  <artifactId>
-		    de.tudarmstadt.ukp.dkpro.core.api.featurepath-asl
-		  </artifactId>
+		  <artifactId>de.tudarmstadt.ukp.dkpro.core.api.featurepath-asl</artifactId>
 		</dependency>
 		<dependency>
 		  <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		  <artifactId>
-		    de.tudarmstadt.ukp.dkpro.core.testing-asl
-		  </artifactId>
+		  <artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
 		  <scope>test</scope>
 		</dependency>
 	</dependencies>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <configuration>
+                        <usedDependencies>
+                            <!-- 
+                             - Maven doesn't detect the parameters module to be used, be we actually
+                             - do require it as a compile dependency and also at runtime, so we
+                             - cannot set it to scope provided. Need to tell Maven to ignore it here.
+                             -->
+                            <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDependency>
+                        </usedDependencies>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
