@@ -225,12 +225,25 @@ public class PhraseAnnotator
             }
             else {
                 String[] columns = line.split(FrequencyCounter.COLUMN_SEPARATOR);
-                assert columns.length == 2;
+                if (columns.length != 2) {
+                    throw new IllegalStateException("Invalid line in input file:\n" + line);
+                }
+                String token = columns[0];
+                int count = Integer.parseInt(columns[1]);
+
                 if (countingUnigrams) {
-                    unigrams.put(columns[0], Integer.parseInt(columns[1]));
+                    if (unigrams.containsKey(token)) {
+                        throw new IllegalStateException(
+                                "Duplicate token in input file: '" + token + "'.");
+                    }
+                    unigrams.put(token, count);
                 }
                 else {
-                    bigrams.put(columns[0], Integer.parseInt(columns[1]));
+                    if (bigrams.containsKey(token)) {
+                        throw new IllegalStateException(
+                                "Duplicate token in input file: '" + token + "'.");
+                    }
+                    bigrams.put(token, count);
                 }
             }
         }

@@ -59,6 +59,7 @@ public class FrequencyCounter
      * This string (a line) will separate unigrams from bigrams in the output file
      **/
     static final String NGRAM_SEPARATOR_LINE = "----------------------------------------------------";
+    private static final String NEWLINE_REGEX = "\r\n?|\n";
 
     /**
      * The feature path. Default: tokens.
@@ -103,6 +104,22 @@ public class FrequencyCounter
     @ConfigurationParameter(name = PARAM_SORT_BY_ALPHABET, mandatory = true, defaultValue = "false")
     private boolean sortByAlphabet;
 
+    public static final String PARAM_STOPWORDS_FILE = "stopwordsFile";
+    @ConfigurationParameter(name = PARAM_STOPWORDS_FILE, mandatory = true, defaultValue = "")
+    private String stopwordsFile;
+
+    public static final String PARAM_STOPWORDS_REPLACEMENT = "stopwordsReplacement";
+    @ConfigurationParameter(name = PARAM_STOPWORDS_REPLACEMENT, mandatory = true, defaultValue = "")
+    private String stopwordsReplacement;
+
+    public static final String PARAM_FILTER_REGEX = "filterRegex";
+    @ConfigurationParameter(name = PARAM_FILTER_REGEX, mandatory = true, defaultValue = "")
+    private String filterRegex;
+
+    public static final String PARAM_REGEX_REPLACEMENT = "regexReplacement";
+    @ConfigurationParameter(name = PARAM_REGEX_REPLACEMENT, mandatory = true, defaultValue = "")
+    private String regexReplacement;
+
     private Bag<String> unigrams;
     private Bag<String> bigrams;
     private StringSequenceGenerator sequenceGenerator;
@@ -131,6 +148,10 @@ public class FrequencyCounter
                     .featurePath(featurePath)
                     .coveringType(coveringType)
                     .lowercase(lowercase)
+                    .stopwordsFile(stopwordsFile)
+                    .stopwordsReplacement(stopwordsReplacement)
+                    .filterRegex(filterRegex)
+                    .filterRegexReplacement(regexReplacement)
                     .build();
         }
         catch (IOException e) {
@@ -150,14 +171,14 @@ public class FrequencyCounter
                     /* count unigrams */
                     String unigram = sequence[i]
                             .replaceAll(COLUMN_SEPARATOR, COLUMN_SEP_REPLACEMENT)
-                            .replaceAll("\n", COLUMN_SEP_REPLACEMENT);
+                            .replaceAll(NEWLINE_REGEX, COLUMN_SEP_REPLACEMENT);
                     unigrams.add(unigram);
 
                     /* count bigrams */
                     if (i + 1 < sequence.length) {
                         String bigram = unigram + BIGRAM_SEPARATOR + sequence[i + 1]
                                 .replaceAll(COLUMN_SEPARATOR, COLUMN_SEP_REPLACEMENT)
-                                .replaceAll("\n", COLUMN_SEP_REPLACEMENT);
+                                .replaceAll(NEWLINE_REGEX, COLUMN_SEP_REPLACEMENT);
                         bigrams.add(bigram);
                     }
                 }
