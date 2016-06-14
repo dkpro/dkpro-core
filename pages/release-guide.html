@@ -115,10 +115,12 @@ When a <b>maintenance release</b> is made from a branch, the Major and Minor com
       <li>Fix scopes
          <ol>
          <li><code>mvn clean compile dependency:analyze-only > analysis.txt</code></li>
-         <li><code>cat analysis.txt | grep "\(maven-dependency-plugin\|WARNING.*:.*\)" | grep -v ".*:test$" | less</code></li>
-         <li>All dependencies that are detected "Unused declared" with scope "compile" must be changed into scope "test".</li>
-         <li>However, in some situations, changing the scope to "test" will break the compile build. In those cases, the scope should be
+         <li>All dependencies that are detected "Unused declared" with scope "compile" must have the scope changed to "test". <strong>NOTE:</strong> in some situations, changing the scope to "test" will break the compile build. In those cases, the scope should be
          left as "compile" in spite of the warning message.</li>
+         <li>Finding the scopes to be changed using <strong>pcregrep</strong> (recommended):</li>
+         <li><code>cat analysis_compile.txt | pcregrep -nM "Unused declared dependencies found:\n\[WARNING\](.*):compile"</code></li>
+         <li>If you don't have pcregrep, use the simpler grep (although the results won't be as easy to analyze!):</li>
+         <li><code>cat analysis.txt | grep "\(maven-dependency-plugin\|WARNING.*:.*\)" | grep -v ".*:test$" | less</code></li>
          </ol>
      </li>
      </ol>
