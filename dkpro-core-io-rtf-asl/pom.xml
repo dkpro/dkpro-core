@@ -29,12 +29,20 @@
   <description>Collection reader for RTF (Rich Text Format) files.</description>
   <dependencies>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.io-asl</artifactId>
+      <groupId>org.apache.uima</groupId>
+      <artifactId>uimaj-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.uima</groupId>
+      <artifactId>uimafit-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
     </dependency>
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.io-asl</artifactId>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
