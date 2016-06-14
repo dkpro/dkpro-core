@@ -17,7 +17,6 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.jazzy;
 
-import static de.tudarmstadt.ukp.dkpro.core.frequency.Web1TProviderBase.BOS;
 import static de.tudarmstadt.ukp.dkpro.core.jazzy.util.ContextualizerUtils.getCandidatePosition;
 import static de.tudarmstadt.ukp.dkpro.core.jazzy.util.ContextualizerUtils.getChangedWords;
 import static de.tudarmstadt.ukp.dkpro.core.jazzy.util.ContextualizerUtils.getTrigram;
@@ -53,6 +52,7 @@ import de.tudarmstadt.ukp.dkpro.core.ngrams.util.NGramStringIterable;
 public class CorrectionsContextualizer
     extends JCasAnnotator_ImplBase
 {
+    private static final String BOS ="<S>";
     
     public final static String FREQUENCY_PROVIDER_RESOURCE = "FrequencyProvider";
     @ExternalResource(key = FREQUENCY_PROVIDER_RESOURCE)
