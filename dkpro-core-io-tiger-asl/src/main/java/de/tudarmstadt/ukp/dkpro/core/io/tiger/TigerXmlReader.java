@@ -317,7 +317,7 @@ public class TigerXmlReader
                     }
                 }
 
-                int[] boundary = getBoundaryOfFirstContiguousElement(frameTokenSet, terminals);
+                int[] boundary = getBoundaryOfFirstContiguousElement(frameTokenSet, terminals, frame.id);
                 p.setBegin(boundary[0]);
                 p.setEnd(boundary[1]);
 
@@ -383,7 +383,7 @@ public class TigerXmlReader
      * @return
      */
     private int[] getBoundaryOfFirstContiguousElement(Set<Token> frameTokenSet,
-            Map<String, Token> terminals)
+            Map<String, Token> terminals, String frameName)
     {
         // sort frameTokenSet
         Token[] tokenArray = frameTokenSet.toArray(new Token[0]);
@@ -408,6 +408,7 @@ public class TigerXmlReader
         // merge begin-end boundary of nearby tokens
         int i = 0;
         List<int[]> tokenBoundaryList = new ArrayList<>();
+        List<String> tokenList = new ArrayList<>();
         boolean continuousToken = false;
         if (tokenArray.length > 1) {
             // avoid unnecessary computation for single token frames
@@ -416,10 +417,13 @@ public class TigerXmlReader
                     if (continuousToken == false) {
                         tokenBoundaryList.add(
                                 new int[] { tokenArray[i].getBegin(), tokenArray[i].getEnd() });
+                        tokenList.add(entry.getKey());
                     }
                     else {
                         tokenBoundaryList.get(tokenBoundaryList.size() - 1)[1] = tokenArray[i]
                                 .getEnd();
+                        tokenList.set(tokenList.size() - 1, tokenList.get(tokenList.size() - 1)
+                                + " " + entry.getKey());
                     }
                     continuousToken = true;
                     ++i;
@@ -436,6 +440,12 @@ public class TigerXmlReader
             tokenBoundaryList.add(new int[] { tokenArray[0].getBegin(), tokenArray[0].getEnd() });
         }
 
+        if (tokenBoundaryList.size() > 1) {
+            String completeFrameTarget = "";
+            for(String word:tokenList)
+                completeFrameTarget += "<" + word + "> ";
+            getLogger().warn("Target of [" + frameName + "] frame consists of noncontiguous tokens! Tokens are: " + completeFrameTarget);
+        }
         // return begin and end for first element
         int begin = tokenBoundaryList.get(0)[0];
         int end = tokenBoundaryList.get(0)[1];
