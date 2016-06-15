@@ -44,6 +44,16 @@
 			<artifactId>UimaUtils</artifactId>
 			<version>3.0.0</version>
 		</dependency>
+        <dependency>
+            <groupId>org.tc37sc4.graf</groupId>
+            <artifactId>graf-api</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tc37sc4.graf</groupId>
+            <artifactId>graf-io</artifactId>
+            <version>1.2.3</version>
+        </dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.io-asl</artifactId>
