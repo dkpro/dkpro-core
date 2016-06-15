@@ -1,173 +1,180 @@
 <!--
 
-    Copyright 2007-2014    
-    Ubiquitous Knowledge Processing (UKP) Lab
-    Technische Universität Darmstadt
+  Copyright 2007-2014
+  Ubiquitous Knowledge Processing (UKP) Lab
+  Technische Universität Darmstadt
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see http://www.gnu.org/licenses/.
+  You should have received a copy of the GNU General Public License
+  along with this program. If not, see http://www.gnu.org/licenses/.
 
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
-		<version>1.9.0-SNAPSHOT</version>
-		<relativePath>../dkpro-core-gpl</relativePath>
-	</parent>
-	<artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-gpl</artifactId>
-    <packaging>jar</packaging>
-	<name>DKPro Core GPL - LingPipe (v ${lingpipe.version})</name>
-	<dependencies>
-		<dependency>
-			<groupId>org.apache.uima</groupId>
-			<artifactId>uimaj-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.uima</groupId>
-			<artifactId>uimafit-core</artifactId>
-		</dependency>
-        <dependency>
-            <groupId>de.julielab</groupId>
-            <artifactId>aliasi-lingpipe</artifactId>
-            <version>${lingpipe.version}</version>
-        </dependency>
-		<dependency>
-			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
-		</dependency>
-        <dependency>
-            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-            <artifactId>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-            <artifactId>de.tudarmstadt.ukp.dkpro.core.api.ner-asl</artifactId>
-        </dependency>
-		<dependency>
-			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
-			<!-- Constants in this dependency are inlined - dependency not required 
-				at runtime -->
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
-			<scope>test</scope>
-		</dependency>
-        <dependency>
-            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-            <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-model-tagger-en-bio-genia</artifactId>
-            <scope>test</scope>
-        </dependency>   
-        <dependency>
-            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-            <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-model-tagger-en-bio-medpost</artifactId>
-            <scope>test</scope>
-        </dependency>   
-        <dependency>
-            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-            <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-model-tagger-en-general-brown</artifactId>
-            <scope>test</scope>
-        </dependency>   
-        <dependency>
-            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-            <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-model-ner-en-news-muc6</artifactId>
-            <scope>test</scope>
-        </dependency>   
-        <dependency>
-            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-            <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-model-ner-en-bio-genia</artifactId>
-            <scope>test</scope>
-        </dependency>   
-        <dependency>
-            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-            <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-model-ner-en-bio-genetag</artifactId>
-            <scope>test</scope>
-        </dependency>   
-	</dependencies>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-			    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			    <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-model-tagger-en-bio-genia</artifactId>
-			    <version>20110623.1</version>
-			</dependency>	
-            <dependency>
-                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-                <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-model-tagger-en-bio-medpost</artifactId>
-                <version>20110623.1</version>
-            </dependency>   
-            <dependency>
-                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-                <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-model-tagger-en-general-brown</artifactId>
-                <version>20110623.1</version>
-            </dependency>   
-            <dependency>
-                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-                <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-model-ner-en-news-muc6</artifactId>
-                <version>20110623.1</version>
-            </dependency>   
-            <dependency>
-                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-                <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-model-ner-en-bio-genia</artifactId>
-                <version>20110623.1</version>
-            </dependency>   
-            <dependency>
-                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-                <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-model-ner-en-bio-genetag</artifactId>
-                <version>20110623.1</version>
-            </dependency>   
-		</dependencies>
-	</dependencyManagement>
-	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-dependency-plugin</artifactId>
-					<configuration>
-						<usedDependencies>
-							<!-- Models not detected by byte-code analysis -->
-							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.lingpipe-model-tagger-en-bio-genia</usedDependency>
-                            <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.lingpipe-model-tagger-en-bio-medpost</usedDependency>
-                            <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.lingpipe-model-tagger-en-general-brown</usedDependency>
-                            <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.lingpipe-model-ner-en-news-muc6</usedDependency>
-                            <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.lingpipe-model-ner-en-bio-genia</usedDependency>
-                            <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.lingpipe-model-ner-en-bio-genetag</usedDependency>
-						</usedDependencies>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
-	<properties>
-	  <lingpipe.version>4.1.0</lingpipe.version>
-	</properties>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+    <artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
+    <version>1.9.0-SNAPSHOT</version>
+    <relativePath>../dkpro-core-gpl</relativePath>
+  </parent>
+  <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-gpl</artifactId>
+  <packaging>jar</packaging>
+  <name>DKPro Core GPL - LingPipe (v ${lingpipe.version})</name>
+  <properties>
+    <lingpipe.version>4.1.0</lingpipe.version>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.uima</groupId>
+      <artifactId>uimaj-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.uima</groupId>
+      <artifactId>uimafit-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>de.julielab</groupId>
+      <artifactId>aliasi-lingpipe</artifactId>
+      <version>${lingpipe.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.ner-asl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-model-tagger-en-bio-genia</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-model-tagger-en-bio-medpost</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-model-tagger-en-general-brown</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-model-ner-en-news-muc6</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-model-ner-en-bio-genia</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-model-ner-en-bio-genetag</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-model-tagger-en-bio-genia</artifactId>
+        <version>20110623.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-model-tagger-en-bio-medpost</artifactId>
+        <version>20110623.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-model-tagger-en-general-brown</artifactId>
+        <version>20110623.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-model-ner-en-news-muc6</artifactId>
+        <version>20110623.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-model-ner-en-bio-genia</artifactId>
+        <version>20110623.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-model-ner-en-bio-genetag</artifactId>
+        <version>20110623.1</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <configuration>
+            <usedDependencies>
+              <!--
+                - Maven doesn't detect the parameters module to be used, be we actually
+                - do require it as a compile dependency and also at runtime, so we
+                - cannot set it to scope provided. Need to tell Maven to ignore it here.
+              -->
+              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDependency>
+              <!-- Models not detected by byte-code analysis -->
+              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.lingpipe-model-tagger-en-bio-genia</usedDependency>
+              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.lingpipe-model-tagger-en-bio-medpost</usedDependency>
+              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.lingpipe-model-tagger-en-general-brown</usedDependency>
+              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.lingpipe-model-ner-en-news-muc6</usedDependency>
+              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.lingpipe-model-ner-en-bio-genia</usedDependency>
+              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.lingpipe-model-ner-en-bio-genetag</usedDependency>
+            </usedDependencies>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>
