@@ -64,9 +64,9 @@
       <artifactId>ant</artifactId>
     </dependency>
     <dependency>
-    	<groupId>ant</groupId>
-    	<artifactId>ant-optional</artifactId>
-    	<version>1.5.3-1</version>
+      <groupId>ant</groupId>
+      <artifactId>ant-optional</artifactId>
+      <version>1.5.3-1</version>
     </dependency>
   </dependencies>
   <dependencyManagement>
@@ -80,4 +80,23 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <configuration>
+            <ignoredUsedUndeclaredDependencies>
+                <!-- 
+                  - Unable to figure out why this is detected as used, but we certainly do not want
+                  - to have a dependency on it - the XML APIs are part of the JDK.
+                  -->
+                <ignoredUsedUndeclaredDependency>xml-apis:xml-apis</ignoredUsedUndeclaredDependency>
+            </ignoredUsedUndeclaredDependencies>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>
