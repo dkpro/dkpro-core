@@ -871,6 +871,7 @@ class TreeTaggerPosTaggerTest
 	 * Generate a very large document and test it.
 	 */
 	@Test
+	@Ignore("Ignoring test to avoid memory errors (see issue #850 in GitHub")
 	public void hugeDocumentTest()
 		throws Exception
 	{
