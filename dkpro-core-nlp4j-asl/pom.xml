@@ -50,6 +50,11 @@
     </dependency>
     <dependency>
       <groupId>edu.emory.mathcs.nlp</groupId>
+      <artifactId>nlp4j-common</artifactId>
+      <version>${nlp4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>edu.emory.mathcs.nlp</groupId>
       <artifactId>nlp4j-core</artifactId>
       <version>${nlp4j.version}</version>
     </dependency>
@@ -63,13 +68,21 @@
       <artifactId>nlp4j-morphology</artifactId>
       <version>${nlp4j.version}</version>
     </dependency>
-    <!--  
-    <dependency>
+    <!--
+      <dependency>
       <groupId>edu.emory.mathcs.nlp</groupId>
       <artifactId>nlp4j-english</artifactId>
       <version>${nlp4j.version}</version>
-    </dependency>
+      </dependency>
     -->
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
+    </dependency>
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
@@ -93,8 +106,6 @@
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
-      <!-- Constants in this dependency are inlined - dependency not required at runtime -->
-      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -149,6 +160,12 @@
           <artifactId>maven-dependency-plugin</artifactId>
           <configuration>
             <usedDependencies>
+              <!--
+                - Maven doesn't detect the parameters module to be used, be we actually
+                - do require it as a compile dependency and also at runtime, so we
+                - cannot set it to scope provided. Need to tell Maven to ignore it here.
+              -->
+              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDependency>
               <!-- Models not detected by byte-code analysis -->
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.nlp4j-model-tagger-en-default</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.nlp4j-model-ner-en-default</usedDependency>
