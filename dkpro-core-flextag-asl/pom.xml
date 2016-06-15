@@ -28,8 +28,28 @@
   <name>DKPro Core ASL - FlexTag</name>
   <dependencies>
     <dependency>
+      <groupId>org.apache.uima</groupId>
+      <artifactId>uimaj-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.uima</groupId>
+      <artifactId>uimafit-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.dkpro.lab</groupId>
+      <artifactId>dkpro-lab-core</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.dkpro.tc</groupId>
-      <artifactId>dkpro-tc-ml-crfsuite</artifactId>
+      <artifactId>dkpro-tc-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.dkpro.tc</groupId>
+      <artifactId>dkpro-tc-ml</artifactId>
     </dependency>
     <dependency>
       <groupId>org.dkpro.tc</groupId>
@@ -41,7 +61,7 @@
     </dependency>
     <dependency>
       <groupId>org.dkpro.tc</groupId>
-      <artifactId>dkpro-tc-features-ngram</artifactId>
+      <artifactId>dkpro-tc-ml-crfsuite</artifactId>
     </dependency>
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -49,25 +69,47 @@
     </dependency>
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.tokit-asl</artifactId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.apache.lucene</groupId>
-      <artifactId>lucene-core</artifactId>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.dkpro.tc</groupId>
-      <artifactId>dkpro-tc-ml-svmhmm</artifactId>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.io.text-asl</artifactId>
     </dependency>
     <dependency>
       <groupId>org.apache.ant</groupId>
       <artifactId>ant</artifactId>
+    </dependency>
+    <!--  
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-core</artifactId>
     </dependency>
     <dependency>
       <groupId>ant</groupId>
       <artifactId>ant-optional</artifactId>
       <version>1.5.3-1</version>
     </dependency>
+    <dependency>
+      <groupId>org.dkpro.tc</groupId>
+      <artifactId>dkpro-tc-features-ngram</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.dkpro.tc</groupId>
+      <artifactId>dkpro-tc-ml-svmhmm</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.tokit-asl</artifactId>
+    </dependency>
+    -->
   </dependencies>
   <dependencyManagement>
     <dependencies>
@@ -87,13 +129,16 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-dependency-plugin</artifactId>
           <configuration>
-            <ignoredUsedUndeclaredDependencies>
-                <!-- 
-                  - Unable to figure out why this is detected as used, but we certainly do not want
-                  - to have a dependency on it - the XML APIs are part of the JDK.
-                  -->
-                <ignoredUsedUndeclaredDependency>xml-apis:xml-apis</ignoredUsedUndeclaredDependency>
-            </ignoredUsedUndeclaredDependencies>
+            <usedDependencies>
+              <!--
+                - Maven doesn't detect the parameters module to be used, be we actually
+                - do require it as a compile dependency and also at runtime, so we
+                - cannot set it to scope provided. Need to tell Maven to ignore it here.
+              -->
+              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDependency>
+              <!-- Dependency not detected as used because only a string constance is required. -->
+              <usedDependency>org.dkpro.tc:dkpro-tc-ml-crfsuite</usedDependency>
+            </usedDependencies>
           </configuration>
         </plugin>
       </plugins>
