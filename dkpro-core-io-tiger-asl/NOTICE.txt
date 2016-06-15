@@ -25,8 +25,9 @@ An example sentence from the TIGER corpus.
 
 File src/test/resources/tiger-sample-noncontiguousframe.xml
 File src/test/resources/tiger-sample-contiguousframe.xml is a minor modification form of the above file
+File src/test/resources/tiger-sample-complexframe.xml
 
-And example sentence from IGGSA shared task 2016 corpus
+Are example sentences from IGGSA shared task 2016 corpus
 
 	http://iggsasharedtask2016.github.io/pages/task%20description.html#data
 	http://iggsasharedtask2016.github.io/data/shata14_adjudicated.xml

@@ -116,7 +116,7 @@ public class TigerXmlReaderTest
     }
 
     @Test
-    public void testNoncontiguousFrame()
+    public void testNoncontiguousFrameTarget()
         throws Exception
     {
         CollectionReaderDescription reader = createReaderDescription(TigerXmlReader.class,
@@ -145,7 +145,45 @@ public class TigerXmlReaderTest
     }
 
     @Test
-    public void testContiguousFrame()
+    public void testFrameTargetHavingMultipleChildren()
+        throws Exception
+    {
+        CollectionReaderDescription reader = createReaderDescription(TigerXmlReader.class,
+                TigerXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
+                TigerXmlReader.PARAM_PATTERNS, "[+]tiger-sample-complexframe.xml",
+                TigerXmlReader.PARAM_LANGUAGE, "de",
+                TigerXmlReader.PARAM_READ_PENN_TREE, true);
+
+        int[][] frameRanges = new int[][] {{26, 41}, {54, 61}, {64, 85}, {97, 104}, {120, 130}, {135, 151}, {152, 169}};
+        /* Frame targets:
+         * Glaubwürdigkeit
+         * wichtig
+         * ein Zeichen zu setzen
+         * gewillt
+         * Erreichung
+         * Millenniumsziele
+         * <eine aktive Rolle> ... <übernehmen> (Noncontiguous frame target)
+         * **/
+
+        for (JCas cas : iteratePipeline(reader, new AnalysisEngineDescription[] {})) {
+            for (Sentence sentence : select(cas, Sentence.class)){
+                for(SemPred frame: selectCovered(SemPred.class, sentence)){
+                    System.out.println("frame target text [" +frame.getCoveredText() + "], frame boundary " + frame.getBegin() + " : " + frame.getEnd());
+                    boolean found = false;
+                    for(int[] element:frameRanges){
+                        if(element[0] == frame.getBegin() && element[1] == frame.getEnd()){
+                            found = true;
+                            break;
+                        }
+                    }
+                    assertEquals(true, found);
+                }
+            }
+        }
+    }
+
+    @Test
+    public void testContiguousFrameTarget()
         throws Exception
     {
         CollectionReaderDescription reader = createReaderDescription(TigerXmlReader.class,

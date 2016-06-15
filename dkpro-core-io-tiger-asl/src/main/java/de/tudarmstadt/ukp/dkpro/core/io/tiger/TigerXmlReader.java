@@ -313,11 +313,12 @@ public class TigerXmlReader
                     }
                     else if (nonterminals.containsKey(reference)) {
                         Constituent target = nonterminals.get(reference);
-                        addAllTokenBoundaries(frameTokenSet, target, nonterminals);
+                        addAllTokens(frameTokenSet, target, nonterminals);
                     }
                 }
 
-                int[] boundary = getBoundaryOfFirstContiguousElement(frameTokenSet, terminals, frame.id);
+                int[] boundary = getBoundaryOfFirstContiguousElement(frameTokenSet, terminals,
+                        frame.id);
                 p.setBegin(boundary[0]);
                 p.setEnd(boundary[1]);
 
@@ -360,16 +361,11 @@ public class TigerXmlReader
         }
     }
 
-    private void addAllTokenBoundaries(Set<Token> frameTokenSet, Constituent target,
+    private void addAllTokens(Set<Token> frameTokenSet, Constituent target,
             Map<String, Constituent> nonterminals)
     {
-        for (Annotation child : selectCovered(Annotation.class, target)) {
-            if (child instanceof Token) {
-                frameTokenSet.add((Token) child);
-            }
-            else {
-                addAllTokenBoundaries(frameTokenSet, (Constituent) child, nonterminals);
-            }
+        for (Token child : selectCovered(Token.class, target)) {
+            frameTokenSet.add((Token) child);
         }
     }
 
@@ -422,8 +418,8 @@ public class TigerXmlReader
                     else {
                         tokenBoundaryList.get(tokenBoundaryList.size() - 1)[1] = tokenArray[i]
                                 .getEnd();
-                        tokenList.set(tokenList.size() - 1, tokenList.get(tokenList.size() - 1)
-                                + " " + entry.getKey());
+                        tokenList.set(tokenList.size() - 1,
+                                tokenList.get(tokenList.size() - 1) + " " + entry.getKey());
                     }
                     continuousToken = true;
                     ++i;
@@ -442,9 +438,11 @@ public class TigerXmlReader
 
         if (tokenBoundaryList.size() > 1) {
             String completeFrameTarget = "";
-            for(String word:tokenList)
+            for (String word : tokenList)
                 completeFrameTarget += "<" + word + "> ";
-            getLogger().warn("Target of [" + frameName + "] frame consists of noncontiguous tokens! Tokens are: " + completeFrameTarget);
+            getLogger().warn("Target of [" + frameName
+                    + "] frame consists of noncontiguous tokens! Tokens are: "
+                    + completeFrameTarget);
         }
         // return begin and end for first element
         int begin = tokenBoundaryList.get(0)[0];

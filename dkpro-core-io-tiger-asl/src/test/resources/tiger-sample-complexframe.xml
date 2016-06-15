@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<corpus corpusname="armut1" target="">
+	<body>		
+		<s id="s7">
+			<graph root="s7_500">
+				<terminals>
+					<t id="s7_1" lemma="" word="Für" pos="ADJD"/>
+					<t id="s7_2" lemma="" word="unsere" pos="PPOSAT"/>
+					<t id="s7_3" lemma="" word="internationale" pos="ADJA"/>
+					<t id="s7_4" lemma="" word="Glaubwürdigkeit" pos="NN"/>
+					<t id="s7_5" lemma="" word="ist" pos="VAFIN"/>
+					<t id="s7_6" lemma="" word="es" pos="PPER"/>
+					<t id="s7_7" lemma="" word="aber" pos="ADV"/>
+					<t id="s7_8" lemma="" word="wichtig" pos="ADJD"/>
+					<t id="s7_9" lemma="" word="," pos="$,"/>
+					<t id="s7_10" lemma="" word="ein" pos="ART"/>
+					<t id="s7_11" lemma="" word="Zeichen" pos="NN"/>
+					<t id="s7_12" lemma="" word="zu" pos="PTKZU"/>
+					<t id="s7_13" lemma="" word="setzen" pos="VVINF"/>
+					<t id="s7_14" lemma="" word="," pos="$,"/>
+					<t id="s7_15" lemma="" word="dass" pos="KOUS"/>
+					<t id="s7_16" lemma="" word="wir" pos="PPER"/>
+					<t id="s7_17" lemma="" word="gewillt" pos="ADJD"/>
+					<t id="s7_18" lemma="" word="sind" pos="VAFIN"/>
+					<t id="s7_19" lemma="" word="," pos="$,"/>
+					<t id="s7_20" lemma="" word="bei" pos="APPR"/>
+					<t id="s7_21" lemma="" word="der" pos="ART"/>
+					<t id="s7_22" lemma="" word="Erreichung" pos="NN"/>
+					<t id="s7_23" lemma="" word="der" pos="ART"/>
+					<t id="s7_24" lemma="" word="Millenniumsziele" pos="NN"/>
+					<t id="s7_25" lemma="" word="eine" pos="ART"/>
+					<t id="s7_26" lemma="" word="aktive" pos="ADJA"/>
+					<t id="s7_27" lemma="" word="Rolle" pos="NN"/>
+					<t id="s7_28" lemma="" word="zu" pos="PTKZU"/>
+					<t id="s7_29" lemma="" word="übernehmen" pos="VVINF"/>
+					<t id="s7_30" lemma="" word="." pos="$."/>
+				</terminals>
+				<nonterminals>
+					<nt id="s7_503" cat="NP">
+						<edge label="--" idref="s7_2"/>
+						<edge label="--" idref="s7_3"/>
+						<edge label="--" idref="s7_4"/>
+					</nt>
+					<nt id="s7_502" cat="AP">
+						<edge label="--" idref="s7_1"/>
+						<edge label="--" idref="s7_503"/>
+					</nt>
+					<nt id="s7_505" cat="NP">
+						<edge label="--" idref="s7_10"/>
+						<edge label="--" idref="s7_11"/>
+					</nt>
+					<nt id="s7_506" cat="VZ">
+						<edge label="--" idref="s7_12"/>
+						<edge label="--" idref="s7_13"/>
+					</nt>
+					<nt id="s7_510" cat="NP">
+						<edge label="--" idref="s7_23"/>
+						<edge label="--" idref="s7_24"/>
+					</nt>
+					<nt id="s7_509" cat="PP">
+						<edge label="--" idref="s7_20"/>
+						<edge label="--" idref="s7_21"/>
+						<edge label="--" idref="s7_22"/>
+						<edge label="--" idref="s7_510"/>
+					</nt>
+					<nt id="s7_511" cat="NP">
+						<edge label="--" idref="s7_25"/>
+						<edge label="--" idref="s7_26"/>
+						<edge label="--" idref="s7_27"/>
+					</nt>
+					<nt id="s7_512" cat="VZ">
+						<edge label="--" idref="s7_28"/>
+						<edge label="--" idref="s7_29"/>
+					</nt>
+					<nt id="s7_508" cat="VP">
+						<edge label="--" idref="s7_509"/>
+						<edge label="--" idref="s7_511"/>
+						<edge label="--" idref="s7_512"/>
+					</nt>
+					<nt id="s7_507" cat="S">
+						<edge label="--" idref="s7_15"/>
+						<edge label="--" idref="s7_16"/>
+						<edge label="--" idref="s7_17"/>
+						<edge label="--" idref="s7_18"/>
+						<edge label="--" idref="s7_19"/>
+						<edge label="--" idref="s7_508"/>
+					</nt>
+					<nt id="s7_504" cat="VP">
+						<edge label="--" idref="s7_505"/>
+						<edge label="--" idref="s7_506"/>
+						<edge label="--" idref="s7_14"/>
+						<edge label="--" idref="s7_507"/>
+					</nt>
+					<nt id="s7_501" cat="S">
+						<edge label="--" idref="s7_502"/>
+						<edge label="--" idref="s7_5"/>
+						<edge label="--" idref="s7_6"/>
+						<edge label="--" idref="s7_7"/>
+						<edge label="--" idref="s7_8"/>
+						<edge label="--" idref="s7_9"/>
+						<edge label="--" idref="s7_504"/>
+					</nt>
+					<nt id="s7_500" cat="PSEUDO">
+						<edge label="--" idref="s7_501"/>
+						<edge label="--" idref="s7_30"/>
+					</nt>
+				</nonterminals>
+			</graph>
+			<matches>
+				<match subgraph="s7_503">
+					<variable name="#myN1" idref="s7_503"/>
+				</match>
+				<match subgraph="s7_502">
+					<variable name="#myN1" idref="s7_502"/>
+				</match>
+				<match subgraph="s7_505">
+					<variable name="#myN1" idref="s7_505"/>
+				</match>
+				<match subgraph="s7_506">
+					<variable name="#myN1" idref="s7_506"/>
+				</match>
+				<match subgraph="s7_510">
+					<variable name="#myN1" idref="s7_510"/>
+				</match>
+				<match subgraph="s7_509">
+					<variable name="#myN1" idref="s7_509"/>
+				</match>
+				<match subgraph="s7_511">
+					<variable name="#myN1" idref="s7_511"/>
+				</match>
+				<match subgraph="s7_512">
+					<variable name="#myN1" idref="s7_512"/>
+				</match>
+				<match subgraph="s7_508">
+					<variable name="#myN1" idref="s7_508"/>
+				</match>
+				<match subgraph="s7_507">
+					<variable name="#myN1" idref="s7_507"/>
+				</match>
+				<match subgraph="s7_504">
+					<variable name="#myN1" idref="s7_504"/>
+				</match>
+				<match subgraph="s7_501">
+					<variable name="#myN1" idref="s7_501"/>
+				</match>
+				<match subgraph="s7_500">
+					<variable name="#myN1" idref="s7_500"/>
+				</match>
+				<match subgraph="s7_1">
+					<variable name="#myN1" idref="s7_1"/>
+				</match>
+				<match subgraph="s7_2">
+					<variable name="#myN1" idref="s7_2"/>
+				</match>
+				<match subgraph="s7_3">
+					<variable name="#myN1" idref="s7_3"/>
+				</match>
+				<match subgraph="s7_4">
+					<variable name="#myN1" idref="s7_4"/>
+				</match>
+				<match subgraph="s7_5">
+					<variable name="#myN1" idref="s7_5"/>
+				</match>
+				<match subgraph="s7_6">
+					<variable name="#myN1" idref="s7_6"/>
+				</match>
+				<match subgraph="s7_7">
+					<variable name="#myN1" idref="s7_7"/>
+				</match>
+				<match subgraph="s7_8">
+					<variable name="#myN1" idref="s7_8"/>
+				</match>
+				<match subgraph="s7_9">
+					<variable name="#myN1" idref="s7_9"/>
+				</match>
+				<match subgraph="s7_10">
+					<variable name="#myN1" idref="s7_10"/>
+				</match>
+				<match subgraph="s7_11">
+					<variable name="#myN1" idref="s7_11"/>
+				</match>
+				<match subgraph="s7_12">
+					<variable name="#myN1" idref="s7_12"/>
+				</match>
+				<match subgraph="s7_13">
+					<variable name="#myN1" idref="s7_13"/>
+				</match>
+				<match subgraph="s7_14">
+					<variable name="#myN1" idref="s7_14"/>
+				</match>
+				<match subgraph="s7_15">
+					<variable name="#myN1" idref="s7_15"/>
+				</match>
+				<match subgraph="s7_16">
+					<variable name="#myN1" idref="s7_16"/>
+				</match>
+				<match subgraph="s7_17">
+					<variable name="#myN1" idref="s7_17"/>
+				</match>
+				<match subgraph="s7_18">
+					<variable name="#myN1" idref="s7_18"/>
+				</match>
+				<match subgraph="s7_19">
+					<variable name="#myN1" idref="s7_19"/>
+				</match>
+				<match subgraph="s7_20">
+					<variable name="#myN1" idref="s7_20"/>
+				</match>
+				<match subgraph="s7_21">
+					<variable name="#myN1" idref="s7_21"/>
+				</match>
+				<match subgraph="s7_22">
+					<variable name="#myN1" idref="s7_22"/>
+				</match>
+				<match subgraph="s7_23">
+					<variable name="#myN1" idref="s7_23"/>
+				</match>
+				<match subgraph="s7_24">
+					<variable name="#myN1" idref="s7_24"/>
+				</match>
+				<match subgraph="s7_25">
+					<variable name="#myN1" idref="s7_25"/>
+				</match>
+				<match subgraph="s7_26">
+					<variable name="#myN1" idref="s7_26"/>
+				</match>
+				<match subgraph="s7_27">
+					<variable name="#myN1" idref="s7_27"/>
+				</match>
+				<match subgraph="s7_28">
+					<variable name="#myN1" idref="s7_28"/>
+				</match>
+				<match subgraph="s7_29">
+					<variable name="#myN1" idref="s7_29"/>
+				</match>
+				<match subgraph="s7_30">
+					<variable name="#myN1" idref="s7_30"/>
+				</match>
+			</matches>
+			<sem>
+				<globals>
+				</globals>
+				<frames>
+					<frame name="SubjectiveExpression" id="s7_f2a1">
+						<target>
+							<fenode idref="s7_17"/>
+						</target>
+						<fe name="Source" id="s7_f2a1_e1">
+							<fenode idref="s7_16"/>
+						</fe>
+						<fe name="Target" id="s7_f2a1_e2">
+							<fenode idref="s7_508"/>
+						</fe>
+					</frame>
+					<frame name="SubjectiveExpression" id="s7_f2xxxxa2">
+						<target>
+							<fenode idref="s7_8"/>
+						</target>
+						<fe name="Source" id="s7_f2xxxxa2_e1">
+							<flag name="Sprecher">
+							</flag>
+						</fe>
+						<fe name="Target" id="s7_f2xxxxa2_e2">
+							<fenode idref="s7_504"/>
+						</fe>
+					</frame>
+					<frame name="SubjectiveExpression" id="s7_f2">
+						<target>
+							<fenode idref="s7_4"/>
+						</target>
+						<fe name="Target" id="s7_f2_e1">
+							<fenode idref="s7_2"/>
+						</fe>
+						<fe name="Source" id="s7_f2_e2">
+							<fenode idref="s7_3"/>
+							<flag name="Unsicher">
+							</flag>
+						</fe>
+					</frame>
+					<frame name="SubjectiveExpression" id="s7_f3">
+						<target>
+							<fenode idref="s7_29"/>
+							<fenode idref="s7_511"/>
+						</target>
+						<fe name="Source" id="s7_f3_e1">
+							<fenode idref="s7_16"/>
+						</fe>
+						<fe name="Target" id="s7_f3_e2">
+							<fenode idref="s7_509"/>
+						</fe>
+					</frame>
+					<frame name="SubjectiveExpression" id="s7_f4">
+						<target>
+							<fenode idref="s7_506"/>
+							<fenode idref="s7_505"/>
+						</target>
+						<fe name="Target" id="s7_f4_e1">
+							<fenode idref="s7_507"/>
+						</fe>
+					</frame>
+					<frame name="SubjectiveExpression" id="s7_f5">
+						<target>
+							<fenode idref="s7_22"/>
+						</target>
+						<fe name="Source" id="s7_f5_e1">
+							<flag name="Sprecher">
+							</flag>
+						</fe>
+						<fe name="Target" id="s7_f5_e2">
+							<fenode idref="s7_510"/>
+						</fe>
+					</frame>
+					<frame name="SubjectiveExpression" id="s7_f6">
+						<target>
+							<fenode idref="s7_24"/>
+						</target>
+					</frame>
+				</frames>
+				<usp>
+					<uspframes>
+					</uspframes>
+					<uspfes>
+					</uspfes>
+				</usp>
+				<wordtags>
+				</wordtags>
+			</sem>
+		</s>		
+	</body>
+</corpus>
