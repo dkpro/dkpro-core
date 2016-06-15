@@ -123,31 +123,26 @@ public class LdaTopicModelEstimator
             throws AnalysisEngineProcessException
     {
         try {
-            generateParallelModel();
+            ParallelTopicModel model = new ParallelTopicModel(nTopics, alphaSum, beta);
+            model.addInstances(getInstanceList());
+            model.setNumThreads(getNumThreads());
+            model.setNumIterations(nIterations);
+            model.setBurninPeriod(burninPeriod);
+            model.setOptimizeInterval(optimizeInterval);
+            model.setRandomSeed(randomSeed);
+            model.setSaveSerializedModel(saveInterval, getTargetLocation());
+            model.setSymmetricAlpha(useSymmetricAlpha);
+            model.setTopicDisplay(displayInterval, displayNTopicWords);
+            model.estimate();
+            File targetFile = new File(getTargetLocation());
+            if (targetFile.getParentFile() != null) {
+                targetFile.getParentFile().mkdirs();
+            }
+            model.write(targetFile);
         }
         catch (IOException | SecurityException e) {
             throw new AnalysisEngineProcessException(e);
         }
     }
 
-    private void generateParallelModel()
-            throws IOException, SecurityException
-    {
-        ParallelTopicModel model = new ParallelTopicModel(nTopics, alphaSum, beta);
-        model.addInstances(getInstanceList());
-        model.setNumThreads(getNumThreads());
-        model.setNumIterations(nIterations);
-        model.setBurninPeriod(burninPeriod);
-        model.setOptimizeInterval(optimizeInterval);
-        model.setRandomSeed(randomSeed);
-        model.setSaveSerializedModel(saveInterval, getTargetLocation());
-        model.setSymmetricAlpha(useSymmetricAlpha);
-        model.setTopicDisplay(displayInterval, displayNTopicWords);
-        model.estimate();
-        File targetFile = new File(getTargetLocation());
-        if (targetFile.getParentFile() != null) {
-            targetFile.getParentFile().mkdirs();
-        }
-        model.write(targetFile);
-    }
 }
