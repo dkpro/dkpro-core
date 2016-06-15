@@ -1,2 +1,2 @@
-classpath*:desc/type/LexicalUnits.xml
+classpath*:desc/type/*.xml
 classpath*:desc/type/LexicalUnits_customized.xml

@@ -6,9 +6,16 @@
   <vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
   <types>
     <typeDescription>
-      <name>de.tudarmstadt.ukp.dkpro.core.api.frequency.type.Phrase</name>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LexicalPhrase</name>
       <description/>
       <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>text</name>
+          <description/>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      </features>
     </typeDescription>
   </types>
 </typeSystemDescription>

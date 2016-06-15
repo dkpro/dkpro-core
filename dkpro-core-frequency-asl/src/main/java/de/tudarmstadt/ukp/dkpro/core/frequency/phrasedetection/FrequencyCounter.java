@@ -59,7 +59,7 @@ public class FrequencyCounter
      * This string (a line) will separate unigrams from bigrams in the output file
      **/
     static final String NGRAM_SEPARATOR_LINE = "----------------------------------------------------";
-    private static final String NEWLINE_REGEX = "\r\n?|\n";
+    static final String NEWLINE_REGEX = "\r\n?|\n";
 
     /**
      * The feature path. Default: tokens.

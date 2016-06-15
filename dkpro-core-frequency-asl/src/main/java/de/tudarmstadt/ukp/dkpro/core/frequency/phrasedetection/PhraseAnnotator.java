@@ -20,9 +20,11 @@ package de.tudarmstadt.ukp.dkpro.core.frequency.phrasedetection;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathUtils;
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.type.Phrase;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.AnnotationStringSequenceGenerator;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LexicalPhrase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -99,9 +101,34 @@ public class PhraseAnnotator
     @ConfigurationParameter(name = PARAM_THRESHOLD, mandatory = true, defaultValue = "100")
     private float threshold;
 
+    public static final String PARAM_STOPWORDS_FILE = "stopwordsFile";
+    @ConfigurationParameter(name = PARAM_STOPWORDS_FILE, mandatory = true, defaultValue = "")
+    private String stopwordsFile;
+
+    public static final String PARAM_STOPWORDS_REPLACEMENT = "stopwordsReplacement";
+    @ConfigurationParameter(name = PARAM_STOPWORDS_REPLACEMENT, mandatory = true, defaultValue = "")
+    private String stopwordsReplacement;
+
+    public static final String PARAM_FILTER_REGEX = "filterRegex";
+    @ConfigurationParameter(name = PARAM_FILTER_REGEX, mandatory = true, defaultValue = "")
+    private String filterRegex;
+
+    public static final String PARAM_REGEX_REPLACEMENT = "regexReplacement";
+    @ConfigurationParameter(name = PARAM_REGEX_REPLACEMENT, mandatory = true, defaultValue = "")
+    private String regexReplacement;
+
+    /**
+     * Set this parameter if bigrams should only be counted when occurring within a covering type, e.g. sentences.
+     */
+    public static final String PARAM_COVERING_TYPE = "coveringType";
+    @ConfigurationParameter(name = PARAM_COVERING_TYPE, mandatory = false)
+    private String coveringType;
+
     private Map<String, Integer> unigrams;
     private Map<String, Integer> bigrams;
     private int vocabularySize;
+
+    private StringSequenceGenerator sequenceGenerator;
 
     @Override
     public void initialize(UimaContext context)
@@ -110,11 +137,22 @@ public class PhraseAnnotator
         super.initialize(context);
 
         try {
+            sequenceGenerator = new AnnotationStringSequenceGenerator.Builder()
+                    .featurePath(featurePath)
+                    .coveringType(coveringType)
+                    .lowercase(lowercase)
+                    .stopwordsFile(stopwordsFile)
+                    .stopwordsReplacement(stopwordsReplacement)
+                    .filterRegex(filterRegex)
+                    .filterRegexReplacement(regexReplacement)
+                    .build();
+
             readCounts();
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);
         }
+
         vocabularySize = unigrams.size();
         getLogger().info("Vocabulary size: " + vocabularySize);
 
@@ -152,9 +190,13 @@ public class PhraseAnnotator
 
                     String token1 = first.getValue()
                             .replaceAll(FrequencyCounter.COLUMN_SEPARATOR,
+                                    FrequencyCounter.COLUMN_SEP_REPLACEMENT)
+                            .replaceAll(FrequencyCounter.NEWLINE_REGEX,
                                     FrequencyCounter.COLUMN_SEP_REPLACEMENT);
                     String token2 = second.getValue()
                             .replaceAll(FrequencyCounter.COLUMN_SEPARATOR,
+                                    FrequencyCounter.COLUMN_SEP_REPLACEMENT)
+                            .replaceAll(FrequencyCounter.NEWLINE_REGEX,
                                     FrequencyCounter.COLUMN_SEP_REPLACEMENT);
                     String bigram = token1 + FrequencyCounter.BIGRAM_SEPARATOR + token2;
 
@@ -170,8 +212,10 @@ public class PhraseAnnotator
 
                         if (score >= threshold) {
                             /* bigram phrase */
-                            new Phrase(aJCas, first.getKey().getBegin(), second.getKey().getEnd())
-                                    .addToIndexes(aJCas);
+                            LexicalPhrase phrase = new LexicalPhrase(aJCas,
+                                    first.getKey().getBegin(), second.getKey().getEnd());
+                            phrase.setText(token1 + FrequencyCounter.BIGRAM_SEPARATOR + token2);
+                            phrase.addToIndexes(aJCas);
 
                             /* skip second token of bigram to prevent overlapping phrases */
                             if (featurePathIterator.hasNext()) {
@@ -180,20 +224,32 @@ public class PhraseAnnotator
                         }
                         else {
                             /* unigram phrase */
-                            new Phrase(aJCas, first.getKey().getBegin(), first.getKey().getEnd())
-                                    .addToIndexes(aJCas);
+                            LexicalPhrase phrase = new LexicalPhrase(aJCas,
+                                    first.getKey().getBegin(),
+                                    first.getKey().getEnd());
+                            phrase.setText(token1);
+                            phrase.addToIndexes(aJCas);
                         }
                     }
                     else {
                         /* out of vocabulary bigram, unigram phrase */
-                        new Phrase(aJCas, first.getKey().getBegin(), first.getKey().getEnd())
-                                .addToIndexes(aJCas);
+                        LexicalPhrase phrase = new LexicalPhrase(aJCas,
+                                first.getKey().getBegin(), first.getKey().getEnd());
+                        phrase.setText(token1);
+                        phrase.addToIndexes(aJCas);
                     }
                 }
             }
             /* last token in sequence */
-            new Phrase(aJCas, second.getKey().getBegin(), second.getKey().getEnd())
-                    .addToIndexes(aJCas);
+            LexicalPhrase phrase = new LexicalPhrase(aJCas,
+                    second.getKey().getBegin(),
+                    second.getKey().getEnd());
+            phrase.setText(second.getValue()
+                    .replaceAll(FrequencyCounter.COLUMN_SEPARATOR,
+                            FrequencyCounter.COLUMN_SEP_REPLACEMENT)
+                    .replaceAll(FrequencyCounter.NEWLINE_REGEX,
+                            FrequencyCounter.COLUMN_SEP_REPLACEMENT));
+            phrase.addToIndexes(aJCas);
         }
     }
 
