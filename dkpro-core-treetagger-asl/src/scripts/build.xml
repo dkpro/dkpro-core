@@ -47,6 +47,7 @@
 		
 		<!-- FILE: bulgarian-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2014-07-02 | now        | ee595fb1643760a94591cee91b556911
+		  - 2016-04-30 | now        | 4cae50b7d8adb8269f583052a69e9184
 		  -->
     	<get 
     		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/bulgarian-par-linux-3.2-utf8.bin.gz" 
@@ -55,10 +56,10 @@
 		<gunzip src="target/download/bulgarian-par-linux-3.2-utf8.bin.gz"/>
     	<install-stub-and-upstream-file 
     		file="target/download/bulgarian-par-linux-3.2-utf8.bin" 
-    		md5="ee595fb1643760a94591cee91b556911"
+    		md5="4cae50b7d8adb8269f583052a69e9184"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
-    		upstreamVersion="20140702"
+    		upstreamVersion="20160430"
     		metaDataVersion="1"
     		tool="tagger" 
     		language="bg" 
@@ -817,7 +818,7 @@
 	</target>
 	
 	<target name="install-executables">
-		<property name="version.bin" value="20150325.0"/>
+		<property name="version.bin" value="20160430.0"/>
 			
 		<fail unless="outputDir">No output directory set.</fail>
 		<mkdir dir="${outputDir}/bin"/>
@@ -851,10 +852,11 @@
 		  - 2013-02-28 | 2013-05-07 | 3c8433d34cc2430197f8ed7b9e220b9c : only 64 bit build
 		  - 2013-05-07 | 2013-11-18 | 9c015219f8a5c696f03ee43b72e913b0
 		  - 2013-11-18 | 2015-01-14 | cbc0833fd6cb8c1ec1ea4cae4d40b25a
-          - 2015-01-14 | now        | 2a0a3740cc9a838949219caf0d64544c
+          - 2015-01-14 | 2016-04-30 | 2a0a3740cc9a838949219caf0d64544c
+          - 2016-04-30 | now        | 16cf3578fafd8c39b5b9df0077297025
 		  -->
 		<install-executable-file-tar url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-linux-3.2.tar.gz"
-			platform="linux-x86_64" file="tree-tagger" md5="2a0a3740cc9a838949219caf0d64544c"/>
+			platform="linux-x86_64" file="tree-tagger" md5="16cf3578fafd8c39b5b9df0077297025"/>
 
 		<!-- FILE: tree-tagger-linux-3.2.tar.gz  - - - - - - - - - - - - - - - - - - - - - - - - - - 
 		  - xxxx-xx-xx | 2010-11-19 | 293ecb477a9f3993206674d68e81b792 (contains dynamically linked binary)
