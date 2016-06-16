@@ -23,24 +23,17 @@ import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.selectDfs;
 import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.toPennTree;
 import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.toPrettyPennTree;
 import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.toText;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 import static org.junit.Assert.assertEquals;
 
-import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
-
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpParser;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 /**
  */
@@ -149,7 +142,6 @@ public class PennTreeUtilsTest
 		System.out.println(selectDfs(n, 12));
 	}
 
-	@Ignore
     @Test
     public void testFromUimaConversion()
         throws Exception
@@ -166,8 +158,18 @@ public class PennTreeUtilsTest
                 + "(NN implication))) (PP (TO to) (NP (NP (JJ other) (NN culturalist)) (CC and) "
                 + "(NP (VBG contextualizing) (NNS approaches))))) (. .)))";
 
-        JCas jcas = runTest("en", "chunking", documentEnglish);
-
+        PennTreeToJCasConverter converter = new PennTreeToJCasConverter(null, null);
+        converter.setInternTags(true);
+        converter.setWriteTracesToText(false);
+        converter.setCreatePosTags(true);
+        converter.setRootLabel("ROOT");
+        
+        JCas jcas = JCasFactory.createJCas();
+        
+        StringBuilder text = new StringBuilder();
+        converter.convertPennTree(jcas, text, PennTreeUtils.parsePennTree(pennTree));
+        jcas.setDocumentText(text.toString());
+        
         ROOT root = selectSingle(jcas, ROOT.class);
         PennTreeNode r = convertPennTree(root);
 
@@ -175,47 +177,6 @@ public class PennTreeUtilsTest
         AssertAnnotations.assertPennTree(pennTree, toPennTree(r));
     }
 
-
-	/**
-     * Setup CAS to test parser for the English language (is only called once if
-     * an English test is run)
-     */
-    private JCas runTest(String aLanguage, String aVariant, String aText)
-        throws Exception
-    {
-        AnalysisEngineDescription segmenter = createEngineDescription(OpenNlpSegmenter.class);
-
-        // setup English
-        AnalysisEngineDescription parser = createEngineDescription(OpenNlpParser.class,
-                OpenNlpParser.PARAM_VARIANT, aVariant,
-                OpenNlpParser.PARAM_PRINT_TAGSET, true,
-                OpenNlpParser.PARAM_WRITE_POS, true,
-                OpenNlpParser.PARAM_WRITE_PENN_TREE, true);
-
-        AnalysisEngineDescription aggregate = createEngineDescription(segmenter, parser);
-
-        AnalysisEngine engine = createEngine(aggregate);
-        JCas jcas = engine.newJCas();
-        jcas.setDocumentLanguage(aLanguage);
-        jcas.setDocumentText(aText);
-        engine.process(jcas);
-
-        return jcas;
-    }
-
-
     @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
-    }
-    
-    @Before
-    public void setupLogging()
-    {
-        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
-    }
+    public DkproTestContext testContext = new DkproTestContext();
 }
