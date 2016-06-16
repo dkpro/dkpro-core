@@ -372,7 +372,7 @@ public class TigerXmlReader
         }
     }
 
-    /***
+    /**
      * returns begin-end offset of first contiguous frame element in frameTokenSet
      *
      * @param frameTokenSet
