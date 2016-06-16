@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2008
  * Richard Eckart de Castilho
  * Institut für Sprach- und Literaturwissenschaft
@@ -15,7 +15,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.api.transform.alignment;
 
 import static org.junit.Assert.assertEquals;

@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2012
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -7,7 +7,7 @@
  * are made available under the terms of the GNU Public License v3.0
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/gpl-3.0.txt
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.clearnlp;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
@@ -25,7 +25,7 @@ import org.junit.rules.TestName;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 
-/*******************************************************************************
+/*
  * Copyright 2012 Ubiquitous Knowledge Processing (UKP) Lab Technische Universität Darmstadt
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
@@ -37,7 +37,7 @@ import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
- ******************************************************************************/
+ */
 public class ClearNlpLemmatizerTest
 {
     @Test
