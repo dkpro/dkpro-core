@@ -129,6 +129,8 @@
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-en-maxent</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-sentence-en-maxent</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent</usedDependency>
+              <!-- Used during testing -->
+              <usedDependency>org.slf4j:slf4j-log4j12</usedDependency>
             </usedDependencies>
             <ignoredUsedUndeclaredDependencies>
               <!-- 
