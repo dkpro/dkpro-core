@@ -19,7 +19,7 @@
 	<property name="outputPackage" value="de/tudarmstadt/ukp/dkpro/core/mecab/lib"/>
 	
 	<import>
-		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.7.0/ant-macros.xml"/>
+		<url url="https://raw.githubusercontent.com/dkpro/resource-packager/0.7.0/ant-macros.xml"/>
 	</import>
 	
 	<target name="local-maven">
