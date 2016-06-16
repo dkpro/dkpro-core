@@ -232,11 +232,13 @@ public class TigerXmlReader
     {
         int sentenceBegin = aBuilder.getPosition();
         int sentenceEnd = aBuilder.getPosition();
-        Map<String, Token> terminals = new LinkedHashMap<String, Token>();
-        Map<String, Constituent> nonterminals = new HashMap<String, Constituent>();
+        Map<String, Token> terminals = new LinkedHashMap<>();
+        Map<String, Constituent> nonterminals = new HashMap<>();
+        Map<String, String> tokenIdToTextMap = new HashMap<>();
         for (TigerTerminal t : aSentence.graph.terminals) {
             Token token = aBuilder.add(t.word, Token.class);
             terminals.put(t.id, token);
+            tokenIdToTextMap.put(t.id, t.word);
 
             if (t.lemma != null) {
                 Lemma lemma = new Lemma(aBuilder.getJCas(), token.getBegin(), token.getEnd());
@@ -274,13 +276,13 @@ public class TigerXmlReader
         if (aSentence.sem != null) {
             if (aSentence.sem.splitwords != null) {
                 // read splitwords as terminals/tokens
-                readSplit(aBuilder.getJCas(), terminals, aSentence.sem.splitwords);
+                readSplit(aBuilder.getJCas(), terminals, aSentence.sem.splitwords, tokenIdToTextMap);
             }
-            readSem(aBuilder.getJCas(), terminals, nonterminals, aSentence.sem);
+            readSem(aBuilder.getJCas(), terminals, nonterminals, aSentence.sem, tokenIdToTextMap);
         }
     }
 
-    private void readSplit(JCas jCas, Map<String, Token> terminals, List<TigerSplitword> splitwords)
+    private void readSplit(JCas jCas, Map<String, Token> terminals, List<TigerSplitword> splitwords, Map<String, String> tokenIdToTextMap)
     {
         for (TigerSplitword split : splitwords) {
             Token orig = terminals.get(split.idref);
@@ -292,12 +294,13 @@ public class TigerXmlReader
                 t.addToIndexes();
                 terminals.put(part.id, t);
                 begin = end;
+                tokenIdToTextMap.put(part.id, part.word);
             }
         }
     }
 
     private void readSem(JCas jCas, Map<String, Token> terminals,
-            Map<String, Constituent> nonterminals, TigerSem sem)
+            Map<String, Constituent> nonterminals, TigerSem sem, Map<String, String> tokenIdToTextMap)
     {
         if (sem.frames != null) {
             for (TigerFrame frame : sem.frames) {
@@ -318,7 +321,7 @@ public class TigerXmlReader
                 }
 
                 int[] boundary = getBoundaryOfFirstContiguousElement(frameTokenSet, terminals,
-                        frame.id);
+                        frame.id, tokenIdToTextMap);
                 p.setBegin(boundary[0]);
                 p.setEnd(boundary[1]);
 
@@ -379,7 +382,7 @@ public class TigerXmlReader
      * @return
      */
     private int[] getBoundaryOfFirstContiguousElement(Set<Token> frameTokenSet,
-            Map<String, Token> terminals, String frameName)
+            Map<String, Token> terminals, String frameName, Map<String, String> tokenIdToTextMap)
     {
         // sort frameTokenSet
         Token[] tokenArray = frameTokenSet.toArray(new Token[0]);
@@ -436,10 +439,19 @@ public class TigerXmlReader
             tokenBoundaryList.add(new int[] { tokenArray[0].getBegin(), tokenArray[0].getEnd() });
         }
 
+        //Give warning for noncontiguous frame targets
         if (tokenBoundaryList.size() > 1) {
             String completeFrameTarget = "";
-            for (String word : tokenList)
-                completeFrameTarget += "<" + word + "> ";
+            for (String word : tokenList) {
+                String textRepresentation = tokenIdToTextMap.get(word);
+                if(textRepresentation == null){
+                    textRepresentation = "";
+                    for(String part:word.split(" "))
+                        textRepresentation += tokenIdToTextMap.get(part) + " ";
+                    textRepresentation = textRepresentation.trim();
+                }
+                completeFrameTarget += "<" + word + "," + textRepresentation + "> ";
+            }
             getLogger().warn("Target of [" + frameName
                     + "] frame consists of noncontiguous tokens! Tokens are: "
                     + completeFrameTarget);
