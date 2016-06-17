@@ -26,12 +26,15 @@
   </parent>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-asl</artifactId>
   <packaging>jar</packaging>
-  <name>DKPro Core ASL - Clear NLP</name>
+  <name>DKPro Core ASL - Clear NLP (v ${clearnlp.version})</name>
+  <properties>
+    <clearnlp.version>2.0.2</clearnlp.version>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>com.clearnlp</groupId>
       <artifactId>clearnlp</artifactId>
-      <version>2.0.2</version>
+      <version>${clearnlp.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.uima</groupId>
