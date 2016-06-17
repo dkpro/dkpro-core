@@ -187,7 +187,7 @@ public class ConllUWriter
 
             // Dependencies
             for (Dependency rel : selectCovered(Dependency.class, sentence)) {
-                if (DependencyFlavor.BASIC.equals(rel.getFlavor())) {
+                if (rel.getFlavor() == null || DependencyFlavor.BASIC.equals(rel.getFlavor())) {
                     ctokens.get(rel.getDependent()).deprel = rel;
                 }
                 else {

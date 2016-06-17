@@ -27,6 +27,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -237,6 +238,23 @@ public class ConllUReader
                     morphtag.setValue(word[FEATS]);
                     morphtag.addToIndexes();
                     token.setMorph(morphtag);
+                    
+                    // Try parsing out individual feature values. Since the DKPro Core
+                    // MorphologicalFeatures type is based on the definition from the UD project,
+                    // we can do this rather straightforwardly.
+                    Type morphType = morphtag.getType();
+                    String[] items = word[FEATS].split("\\|");
+                    for (String item : items) {
+                        String[] keyValue = item.split("=");
+                        StringBuilder key = new StringBuilder(keyValue[0]);
+                        key.setCharAt(0, Character.toLowerCase(key.charAt(0)));
+                        String value = keyValue[1];
+                        
+                        Feature feat = morphType.getFeatureByBaseName(key.toString());
+                        if (feat != null) {
+                            morphtag.setStringValue(feat, value);
+                        }
+                    }
                 }
 
                 // Read surface form
