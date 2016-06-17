@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.frequency.phrasedetection;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathUtils;
-import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.AnnotationStringSequenceGenerator;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
@@ -137,7 +137,7 @@ public class PhraseAnnotator
         super.initialize(context);
 
         try {
-            sequenceGenerator = new AnnotationStringSequenceGenerator.Builder()
+            sequenceGenerator = new PhraseSequenceGenerator.Builder()
                     .featurePath(featurePath)
                     .coveringType(coveringType)
                     .lowercase(lowercase)
@@ -145,7 +145,7 @@ public class PhraseAnnotator
                     .stopwordsReplacement(stopwordsReplacement)
                     .filterRegex(filterRegex)
                     .filterRegexReplacement(regexReplacement)
-                    .build();
+                    .buildStringSequenceGenerator();
 
             readCounts();
         }

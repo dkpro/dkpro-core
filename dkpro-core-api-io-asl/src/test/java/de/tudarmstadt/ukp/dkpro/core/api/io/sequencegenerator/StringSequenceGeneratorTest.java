@@ -34,9 +34,8 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class AnnotationStringSequenceGeneratorTest
+public class StringSequenceGeneratorTest
 {
-
     /**
      * Generate a JCas with two token annotations.
      *
@@ -66,7 +65,7 @@ public class AnnotationStringSequenceGeneratorTest
      * @return a {@link JCas}
      * @throws UIMAException
      */
-    protected static JCas jcasWithLemmas()
+    protected static JCas jCasWithLemmas()
             throws UIMAException
     {
         JCas jCas = JCasFactory.createJCas();
@@ -119,7 +118,7 @@ public class AnnotationStringSequenceGeneratorTest
      * @throws UIMAException
      * @see #jCasWithTokens()
      */
-    protected static JCas jcasWithSentence()
+    protected static JCas jCasWithSentence()
             throws UIMAException
     {
         JCas jCas = jCasWithTokens();
@@ -140,9 +139,9 @@ public class AnnotationStringSequenceGeneratorTest
 
         JCas jCas = jCasWithTokens();
 
-        AnnotationStringSequenceGenerator sequenceGenerator = new AnnotationStringSequenceGenerator.Builder()
+        StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
                 .featurePath(featurePath)
-                .build();
+                .buildStringSequenceGenerator();
 
         String[] sequence = sequenceGenerator.tokenSequences(jCas).get(0);
         assertEquals(expectedSize, sequence.length);
@@ -161,10 +160,10 @@ public class AnnotationStringSequenceGeneratorTest
 
         JCas jCas = jCasWithTokens();
 
-        AnnotationStringSequenceGenerator sequenceGenerator = new AnnotationStringSequenceGenerator.Builder()
+        StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
                 .featurePath(featurePath)
                 .lowercase(true)
-                .build();
+                .buildStringSequenceGenerator();
 
         String[] sequence = sequenceGenerator.tokenSequences(jCas).get(0);
         assertEquals(expectedSize, sequence.length);
@@ -181,11 +180,11 @@ public class AnnotationStringSequenceGeneratorTest
         String expectedFirstLemma = "lemma1";
         String expectedLastLemma = "lemma2";
 
-        JCas jCas = jcasWithLemmas();
+        JCas jCas = jCasWithLemmas();
 
-        AnnotationStringSequenceGenerator sequenceGenerator = new AnnotationStringSequenceGenerator.Builder()
+        StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
                 .featurePath(featurePath)
-                .build();
+                .buildStringSequenceGenerator();
 
         String[] sequence = sequenceGenerator.tokenSequences(jCas).get(0);
         assertEquals(expectedSize, sequence.length);
@@ -201,9 +200,9 @@ public class AnnotationStringSequenceGeneratorTest
         int expectedSize = 1;
         String expectedNamedEntity = "token1";
         JCas jCas = jcasWithNamedEntity();
-        AnnotationStringSequenceGenerator sequenceGenerator = new AnnotationStringSequenceGenerator.Builder()
+        StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
                 .featurePath(featurePath)
-                .build();
+                .buildStringSequenceGenerator();
 
         String[] sequence = sequenceGenerator.tokenSequences(jCas).get(0);
         assertEquals(expectedSize, sequence.length);
@@ -221,13 +220,13 @@ public class AnnotationStringSequenceGeneratorTest
         String expectedLastToken = "Token2";
         String covering = Sentence.class.getTypeName();
 
-        JCas jCas = jcasWithSentence();
+        JCas jCas = jCasWithSentence();
 
-        AnnotationStringSequenceGenerator sequenceGenerator = new AnnotationStringSequenceGenerator.Builder()
+        StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
                 .featurePath(featurePath)
                 .lowercase(false)
                 .coveringType(covering)
-                .build();
+                .buildStringSequenceGenerator();
 
         List<String[]> sequences = sequenceGenerator.tokenSequences(jCas);
         assertEquals(1, sequences.size());
@@ -247,9 +246,10 @@ public class AnnotationStringSequenceGeneratorTest
         int expectedSize = 1;
         String expectedToken = "Token2";
 
-        AnnotationStringSequenceGenerator sequenceGenerator = new AnnotationStringSequenceGenerator.Builder()
+        StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
                 .filterRegex(filterRegex)
-                .build();
+                .buildStringSequenceGenerator();
+
         List<String[]> sequences = sequenceGenerator.tokenSequences(jCas);
         assertEquals(1, sequences.size());
         String[] sequence = sequences.get(0);
@@ -268,10 +268,11 @@ public class AnnotationStringSequenceGeneratorTest
         int expectedSize = 2;
         String expectedToken2 = "Token2";
 
-        AnnotationStringSequenceGenerator sequenceGenerator = new AnnotationStringSequenceGenerator.Builder()
+        StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
                 .filterRegex(filterRegex)
                 .filterRegexReplacement(replacement)
-                .build();
+                .buildStringSequenceGenerator();
+
         List<String[]> sequences = sequenceGenerator.tokenSequences(jCas);
         assertEquals(1, sequences.size());
         String[] sequence = sequences.get(0);
@@ -291,14 +292,79 @@ public class AnnotationStringSequenceGeneratorTest
         int expectedSize = 1;
         String expectedToken = "Token2";
 
-        AnnotationStringSequenceGenerator sequenceGenerator = new AnnotationStringSequenceGenerator.Builder()
+        StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
                 .filterRegex(filterRegex1)
                 .filterRegex(filterRegex2)
-                .build();
+                .buildStringSequenceGenerator();
         List<String[]> sequences = sequenceGenerator.tokenSequences(jCas);
         assertEquals(1, sequences.size());
         String[] sequence = sequences.get(0);
         assertEquals(expectedSize, sequence.length);
         assertEquals(expectedToken, sequence[0]);
+    }
+
+    /* test character sequences*/
+    @Test
+    public void testCharacterSequence()
+            throws UIMAException, FeaturePathException, IOException
+    {
+        JCas jcas = jCasWithTokens();
+        int expectedSize = 13;
+        String expectedFirst = "T";
+        String expectedLast = "2";
+
+        StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
+                .characters(true)
+                .buildStringSequenceGenerator();
+
+        String[] sequence = sequenceGenerator.tokenSequences(jcas).get(0);
+
+        assertEquals(expectedSize, sequence.length);
+        assertEquals(expectedFirst, sequence[0]);
+        assertEquals(expectedLast, sequence[expectedSize - 1]);
+    }
+
+    @Test
+    public void testCharacterSequenceLowercase()
+            throws UIMAException, FeaturePathException, IOException
+    {
+        JCas jcas = jCasWithTokens();
+        int expectedSize = 13;
+        String expectedFirst = "t";
+        String expectedLast = "2";
+        StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
+                .lowercase(true)
+                .characters(true)
+                .buildStringSequenceGenerator();
+
+        String[] sequence = sequenceGenerator.tokenSequences(jcas).get(0);
+
+        assertEquals(expectedSize, sequence.length);
+        assertEquals(expectedFirst, sequence[0]);
+        assertEquals(expectedLast, sequence[expectedSize - 1]);
+    }
+
+    @Test
+    public void testCharacterSequenceWithCovering()
+            throws UIMAException, FeaturePathException, IOException
+    {
+        String covering = Sentence.class.getTypeName();
+        JCas jCas = jCasWithSentence();
+        int expectedSequences = 1;
+        int expectedSize = 13;
+        String expectedFirst = "T";
+        String expectedLast = "2";
+
+        StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
+                .coveringType(covering)
+                .characters(true)
+                .buildStringSequenceGenerator();
+
+        List<String[]> sequences = sequenceGenerator.tokenSequences(jCas);
+        assertEquals(expectedSequences, sequences.size());
+        String[] sequence = sequences.get(0);
+        assertEquals(expectedSize, sequence.length);
+        assertEquals(expectedFirst, sequence[0]);
+        assertEquals(expectedLast, sequence[expectedSize - 1]);
     }
 }

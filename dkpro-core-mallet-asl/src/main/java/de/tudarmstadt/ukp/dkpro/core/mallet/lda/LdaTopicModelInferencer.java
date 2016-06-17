@@ -24,7 +24,8 @@ import cc.mallet.topics.TopicInferencer;
 import cc.mallet.types.Instance;
 import cc.mallet.types.TokenSequence;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
-import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.AnnotationStringSequenceGenerator;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGenerator;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -128,7 +129,7 @@ public class LdaTopicModelInferencer
 
     private TopicInferencer inferencer;
     private Pipe malletPipe;
-    private AnnotationStringSequenceGenerator tsGenerator;
+    private StringSequenceGenerator sequenceGenerator;
 
     @Override
     public void initialize(UimaContext context)
@@ -153,11 +154,11 @@ public class LdaTopicModelInferencer
         inferencer = model.getInferencer();
         malletPipe = new TokenSequence2FeatureSequence(model.getAlphabet());
         try {
-            tsGenerator = new AnnotationStringSequenceGenerator.Builder()
+            sequenceGenerator = new PhraseSequenceGenerator.Builder()
                     .featurePath(tokenFeaturePath)
                     .minTokenLength(minTokenLength)
                     .lowercase(lowercase)
-                    .build();
+                    .buildStringSequenceGenerator();
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);
@@ -169,7 +170,7 @@ public class LdaTopicModelInferencer
             throws AnalysisEngineProcessException
     {
         try {
-            List<String[]> tokenSequences = tsGenerator.tokenSequences(aJCas);
+            List<String[]> tokenSequences = sequenceGenerator.tokenSequences(aJCas);
 
             if (tokenSequences.isEmpty()) {
                 getLogger().warn("Empty document.");

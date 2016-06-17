@@ -23,8 +23,7 @@ import cc.mallet.types.InstanceList;
 import cc.mallet.types.TokenSequence;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.AnnotationStringSequenceGenerator;
-import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.CharacterStringSequenceGenerator;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -154,20 +153,17 @@ public abstract class MalletModelEstimator
         instanceList = new InstanceList(new TokenSequence2FeatureSequence());
 
         try {
-            /* build sequence generator (for characters or annotations) */
-            StringSequenceGenerator.Builder builder = useCharacters
-                    ? new CharacterStringSequenceGenerator.Builder()
-                    : new AnnotationStringSequenceGenerator.Builder()
+            sequenceGenerator = new PhraseSequenceGenerator.Builder()
+                    .characters(useCharacters)
                     .minTokenLength(minTokenLength)
                     .stopwordsFile(stopwordsFile)
                     .stopwordsReplacement(stopwordsReplacement)
                     .featurePath(tokenFeaturePath)
                     .filterRegex(filterRegex)
-                    .filterRegexReplacement(filterRegexReplacement);
-            sequenceGenerator = builder
+                    .filterRegexReplacement(filterRegexReplacement)
                     .coveringType(coveringAnnotationType)
                     .lowercase(lowercase)
-                    .build();
+                    .buildStringSequenceGenerator();
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);

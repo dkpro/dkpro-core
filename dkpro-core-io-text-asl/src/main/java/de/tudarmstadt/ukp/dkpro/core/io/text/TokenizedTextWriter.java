@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.io.text;
 
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.AnnotationStringSequenceGenerator;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -99,14 +99,14 @@ public class TokenizedTextWriter
         super.initialize(context);
 
         try {
-            sequenceGenerator = new AnnotationStringSequenceGenerator.Builder()
+            sequenceGenerator = new PhraseSequenceGenerator.Builder()
                     .featurePath(featurePath)
                     .filterRegex(numberRegex)
                     .filterRegexReplacement(NUMBER_REPLACEMENT)
                     .stopwordsFile(stopwordsFile)
                     .stopwordsReplacement(STOPWORD_REPLACEMENT)
                     .coveringType(Sentence.class.getCanonicalName())
-                    .build();
+                    .buildStringSequenceGenerator();
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);

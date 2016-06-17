@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.frequency.phrasedetection;
 
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.AnnotationStringSequenceGenerator;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -144,7 +144,7 @@ public class FrequencyCounter
 
         /* init sequence generator */
         try {
-            sequenceGenerator = new AnnotationStringSequenceGenerator.Builder()
+            sequenceGenerator = new PhraseSequenceGenerator.Builder()
                     .featurePath(featurePath)
                     .coveringType(coveringType)
                     .lowercase(lowercase)
@@ -152,7 +152,7 @@ public class FrequencyCounter
                     .stopwordsReplacement(stopwordsReplacement)
                     .filterRegex(filterRegex)
                     .filterRegexReplacement(regexReplacement)
-                    .build();
+                    .buildStringSequenceGenerator();
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);

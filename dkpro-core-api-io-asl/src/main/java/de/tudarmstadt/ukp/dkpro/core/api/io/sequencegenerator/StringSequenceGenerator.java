@@ -18,94 +18,62 @@
 package de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator;
 
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LexicalPhrase;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import org.apache.uima.jcas.JCas;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
- * Generic class for implementing classes that generate sequences of strings based on annotations or
- * other criteria.
+ * Create String sequences from JCas annotations. Use a {@link PhraseSequenceGenerator.Builder#buildStringSequenceGenerator()} to create class instances.
  * <p>
+ * Either create a single token sequence from the whole document, or multiple sequences based on
+ * covering annotations, e.g. one sequence for each sentence.
+ * <p>
+ * By default, the sequences are created from {@link Token}s found in the input document. In order to use
+ * other annotations, e.g. lemmas, specify the feature path in {@link PhraseSequenceGenerator.Builder#featurePath(String)}.
  *
- * @see AnnotationStringSequenceGenerator
- * @see CharacterStringSequenceGenerator
+ * @since 1.9.0
  */
-public abstract class StringSequenceGenerator
+public class StringSequenceGenerator
 {
-    private boolean lowercase;
-    private Optional<String> coveringTypeName;
+    private PhraseSequenceGenerator psg;
 
-    protected StringSequenceGenerator(Builder builder)
+    protected StringSequenceGenerator(PhraseSequenceGenerator.Builder builder)
+            throws IOException
     {
-        this.lowercase = builder.lowercase;
-        this.coveringTypeName = builder.coveringType;
-    }
-
-    protected boolean isLowercase()
-    {
-        return lowercase;
-    }
-
-    protected Optional<String> getCoveringTypeName()
-    {
-        return coveringTypeName;
+        psg = builder.build();
     }
 
     /**
-     * Create a list of string arrays from the document.
-     * <p>
-     * If the covering type parameter is empty, the resulting list contains one string array
-     * representing the whole document. Otherwise, one string array representing each covering annotation
-     * is generated.
-     * <p>
-     * For instance, if the feature path is token (default) and the covering type is sentence,
-     * a string array is generated for each sentence. In each of these arrays, each string represents
-     * a token.
+     * Generate a list of String sequences.
      *
-     * @param aJCas a {@link JCas}
-     * @return a list containing string arrays
-     * @throws FeaturePathException if the feature path cannot be resolved
+     * @param aJCas the {@link JCas} to generate sequences from.
+     * @return a list of string arrays.
+     * @throws FeaturePathException
      */
-    public abstract List<String[]> tokenSequences(JCas aJCas)
-            throws FeaturePathException;
-
-    public static abstract class Builder<T extends Builder>
+    public List<String[]> tokenSequences(JCas aJCas)
+            throws FeaturePathException
     {
-        private boolean lowercase = false;
-        private Optional<String> coveringType = Optional.empty();
+        return psg.tokenSequences(aJCas).stream()
+                .map(this::phrases2String)
+                .collect(Collectors.toList());
+    }
 
-        /**
-         * @param lowercase If true, all tokens are lowercased
-         * @return a {@link Builder} of type {@link T}
-         */
-        public T lowercase(boolean lowercase)
-        {
-            this.lowercase = lowercase;
-            return (T) this;
-        }
-
-        /**
-         * @param coveringType if set, a separate string sequence is generated for each sequence covered
-         *                     by the covering type, e.g. one sequence for each sentence.
-         * @return a {@link Builder} of type {@link T}
-         */
-        public T coveringType(String coveringType)
-        {
-            this.coveringType = coveringType == null || coveringType.isEmpty() ?
-                    Optional.empty() :
-                    Optional.of(coveringType);
-            return (T) this;
-        }
-
-        /**
-         * Generate a {@link StringSequenceGenerator}
-         *
-         * @return a {@link StringSequenceGenerator} instance
-         * @throws IOException if an I/O error occurs
-         */
-        public abstract StringSequenceGenerator build()
-                throws IOException;
+    /**
+     * Convert {@link LexicalPhrase} arrays to string arrays by extracting their texts.
+     *
+     * @param phrases an array of {@link LexicalPhrase}s.
+     * @return an array of strings.
+     */
+    private String[] phrases2String(LexicalPhrase[] phrases)
+    {
+        return Stream.of(phrases)
+                .map(LexicalPhrase::getText)
+                .filter(string -> !string.isEmpty())
+                .toArray(String[]::new);
     }
 }
