@@ -98,7 +98,7 @@
 					<artifactId>maven-dependency-plugin</artifactId>
 					<configuration>
 						<usedDependencies>
-							 <!-- Those dependencies are used, alghough undetected by byte-code analysis -->
+							 <!-- Those dependencies are used, although undetected by byte-code analysis -->
 							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDependency>
 							<usedDependency>log4j:log4j</usedDependency>
 						</usedDependencies>
