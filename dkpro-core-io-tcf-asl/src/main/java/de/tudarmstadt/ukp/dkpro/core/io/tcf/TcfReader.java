@@ -32,8 +32,6 @@ import java.util.TreeMap;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.util.Level;
-
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
@@ -43,11 +41,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 import eu.clarin.weblicht.wlfxb.io.TextCorpusStreamed;
 import eu.clarin.weblicht.wlfxb.io.WLDObjector;
 import eu.clarin.weblicht.wlfxb.io.WLFormatException;
 import eu.clarin.weblicht.wlfxb.tc.api.DependencyParse;
+import eu.clarin.weblicht.wlfxb.tc.api.DependencyParsingLayer;
 import eu.clarin.weblicht.wlfxb.tc.api.Reference;
 import eu.clarin.weblicht.wlfxb.tc.api.TextCorpus;
 import eu.clarin.weblicht.wlfxb.xb.WLData;
@@ -252,27 +252,28 @@ public class TcfReader
     private void convertDependencies(JCas aJCas, TextCorpus aCorpusData,
             Map<String, Token> aTokens)
     {
-        if (aCorpusData.getDependencyParsingLayer() == null) {
+        DependencyParsingLayer depLayer = aCorpusData.getDependencyParsingLayer();
+
+        if (depLayer == null) {
             // No layer to read from.
             return;
         }
-
-        for (int i = 0; i < aCorpusData.getDependencyParsingLayer().size(); i++) {
-            DependencyParse dependencyParse = aCorpusData.getDependencyParsingLayer().getParse(i);
+        
+        for (int i = 0; i < depLayer.size(); i++) {
+            DependencyParse dependencyParse = depLayer.getParse(i);
             for (eu.clarin.weblicht.wlfxb.tc.api.Dependency dependency : dependencyParse
                     .getDependencies()) {
 
-                eu.clarin.weblicht.wlfxb.tc.api.Token[] governorTokens = aCorpusData
-                        .getDependencyParsingLayer().getGovernorTokens(dependency);
-                eu.clarin.weblicht.wlfxb.tc.api.Token[] dependentTokens = aCorpusData
-                        .getDependencyParsingLayer().getDependentTokens(dependency);
+                eu.clarin.weblicht.wlfxb.tc.api.Token[] governorTokens = depLayer
+                        .getGovernorTokens(dependency);
+                eu.clarin.weblicht.wlfxb.tc.api.Token[] dependentTokens = depLayer
+                        .getDependentTokens(dependency);
 
                 POS dependentPos = aTokens.get(dependentTokens[0].getID()).getPos();
 
                 // For dependency annotations in the TCF file without POS, add as a default POS --
                 if (dependentPos == null) {
-                    getUimaContext().getLogger().log(Level.INFO,
-                            "There is no pos for this token, added is -- as a pos");
+                    getLogger().warn("There is no pos for this token, added [--] as a pos");
                     dependentPos = new POS(aJCas);
                     dependentPos.setBegin(aTokens.get(dependentTokens[0].getID()).getBegin());
                     dependentPos.setEnd(aTokens.get(dependentTokens[0].getID()).getEnd());
@@ -288,8 +289,7 @@ public class TcfReader
                             // do nothing
                         }
                         else {
-                            getUimaContext().getLogger().log(Level.INFO,
-                                    "There is no pos for this token, added is -- as a pos");
+                            getLogger().warn("There is no pos for this token, added [--] as a pos");
                             governerPos = new POS(aJCas);
                             governerPos.setBegin(aTokens.get(governorTokens[0].getID()).getBegin());
                             governerPos.setEnd(aTokens.get(governorTokens[0].getID()).getEnd());
@@ -311,6 +311,8 @@ public class TcfReader
                     outDependency.setDependent(aTokens.get(dependentTokens[0].getID()));
                     outDependency.setBegin(outDependency.getDependent().getBegin());
                     outDependency.setEnd(outDependency.getDependent().getEnd());
+                    outDependency.setFlavor(depLayer.hasMultipleGovernors()
+                            ? DependencyFlavor.ENHANCED : DependencyFlavor.BASIC);
                     outDependency.addToIndexes();
                     
                 }
@@ -321,6 +323,8 @@ public class TcfReader
                     outDependency.setDependent(aTokens.get(dependentTokens[0].getID()));
                     outDependency.setBegin(outDependency.getDependent().getBegin());
                     outDependency.setEnd(outDependency.getDependent().getEnd());
+                    outDependency.setFlavor(depLayer.hasMultipleGovernors()
+                            ? DependencyFlavor.ENHANCED : DependencyFlavor.BASIC);
                     outDependency.addToIndexes();
                 }
             }

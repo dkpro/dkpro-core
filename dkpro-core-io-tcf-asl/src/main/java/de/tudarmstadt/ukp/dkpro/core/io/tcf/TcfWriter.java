@@ -32,6 +32,7 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
@@ -54,6 +55,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import eu.clarin.weblicht.wlfxb.io.TextCorpusStreamedWithReplaceableLayers;
 import eu.clarin.weblicht.wlfxb.io.WLDObjector;
 import eu.clarin.weblicht.wlfxb.io.WLFormatException;
@@ -440,7 +442,11 @@ public class TcfWriter
             }
         }
         
-        dependencyParsingLayer = aTextCorpus.createDependencyParsingLayer(tagSetName, false, true);
+        Optional<Dependency> hasNonBasic = select(aJCas, Dependency.class).stream()
+            .filter(dep -> dep.getFlavor() != null && !DependencyFlavor.BASIC.equals(dep.getFlavor()))
+            .findAny();
+        
+        dependencyParsingLayer = aTextCorpus.createDependencyParsingLayer(tagSetName, hasNonBasic.isPresent(), true);
 
         getLogger().debug("Layer [" + TextCorpusLayerTag.PARSING_DEPENDENCY.getXmlName() + "]: created");
         
@@ -451,7 +457,6 @@ public class TcfWriter
                         .createDependency(d.getDependencyType(),
                                 aTokensBeginPositionMap.get(d.getDependent().getBegin()),
                                 aTokensBeginPositionMap.get(d.getGovernor().getBegin()));
-
                 deps.add(dependency);
             }
             if (deps.size() > 0) {
