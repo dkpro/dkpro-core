@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2016
  * Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.conll;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
@@ -24,6 +24,7 @@ import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -36,40 +37,53 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.SurfaceForm;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 
 /**
- * Writes a file in the CoNLL-2006 format (aka CoNLL-X).
+ * Writes a file in the CoNLL-U format.
  * 
- * <pre>
- * Heutzutage heutzutage ADV _ _ ADV _ _
- * </pre>
  * <ol>
- * <li>ID - token number in sentence</li>
- * <li>FORM - token</li>
- * <li>LEMMA - lemma</li>
- * <li>CPOSTAG - part-of-speech tag (coarse grained)</li>
- * <li>POSTAG - part-of-speech tag</li>
- * <li>FEATS - unused</li>
- * <li>HEAD - target token for a dependency parsing</li>
- * <li>DEPREL - function of the dependency parsing</li>
- * <li>PHEAD - unused</li>
- * <li>PDEPREL - unused</li>
+ * <li>ID - <b>(ignored)</b> Word index, integer starting at 1 for each new sentence; may be a range
+ * for tokens with multiple words.</li>
+ * <li>FORM - <b>(Token)</b> Word form or punctuation symbol.</li>
+ * <li>LEMMA - <b>(Lemma)</b> Lemma or stem of word form.</li>
+ * <li>CPOSTAG - <b>(unused)</b> Google universal part-of-speech tag from the universal POS tag set.
+ * </li>
+ * <li>POSTAG - <b>(POS)</b> Language-specific part-of-speech tag; underscore if not available.</li>
+ * <li>FEATS - <b>(MorphologicalFeatures)</b> List of morphological features from the universal
+ * feature inventory or from a defined language-specific extension; underscore if not available.</li>
+ * <li>HEAD - <b>(Dependency)</b> Head of the current token, which is either a value of ID or zero
+ * (0).</li>
+ * <li>DEPREL - <b>(Dependency)</b> Universal Stanford dependency relation to the HEAD (root iff
+ * HEAD = 0) or a defined language-specific subtype of one.</li>
+ * <li>DEPS - <b>(Dependency)</b> List of secondary dependencies (head-deprel pairs).</li>
+ * <li>MISC - <b>(unused)</b> Any other annotation.</li>
  * </ol>
  * 
- * Sentences are separated by a blank new line
+ * Sentences are separated by a blank new line.
  * 
- * @author Seid Muhie Yimam
- * @author Richard Eckart de Castilho
- * 
- * @see <a href="https://web.archive.org/web/20131216222420/http://ilk.uvt.nl/conll/">CoNLL-X Shared Task: Multi-lingual Dependency Parsing</a>
+ * @see <a href="http://universaldependencies.github.io/docs/format.html">CoNLL-U Format</a>
  */
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -111,6 +125,24 @@ public class ConllUWriter
     @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")
     private boolean writeDependency;
 
+    private Map<Class<?>, String> dkpro2ud = new HashMap<>();
+    
+    {
+        dkpro2ud.put(ADJ.class, "ADJ");
+        dkpro2ud.put(ADV.class, "ADV");
+        dkpro2ud.put(ART.class, "DET");
+        dkpro2ud.put(CARD.class, "NUM");
+        dkpro2ud.put(CONJ.class, "CONJ");
+        dkpro2ud.put(N.class, "NOUN");
+        dkpro2ud.put(NN.class, "NOUN");
+        dkpro2ud.put(NP.class, "PROPN");
+        dkpro2ud.put(O.class, "X");
+        dkpro2ud.put(PP.class, "ADP");
+        dkpro2ud.put(PR.class, "PRON");
+        dkpro2ud.put(V.class, "VERB");
+        dkpro2ud.put(PUNC.class, "PUNCT");
+    }
+    
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
@@ -149,15 +181,21 @@ public class ConllUWriter
                 Row row = new Row();
                 row.id = i+1;
                 row.token = tokens.get(i);
+                row.noSpaceAfter = (i+1 < tokens.size()) && row.token.getEnd() == tokens.get(i+1).getBegin();
                 ctokens.put(row.token, row);
             }
 
             // Dependencies
             for (Dependency rel : selectCovered(Dependency.class, sentence)) {
-                ctokens.get(rel.getDependent()).deprel = rel;
+                if (DependencyFlavor.BASIC.equals(rel.getFlavor())) {
+                    ctokens.get(rel.getDependent()).deprel = rel;
+                }
+                else {
+                    ctokens.get(rel.getDependent()).deps.add(rel);
+                }
             }
 
-            // Write sentence in CONLL 2006 format
+            // Write sentence in CONLL-U format
             for (Row row : ctokens.values()) {
                 String lemma = UNUSED;
                 if (writeLemma && (row.token.getLemma() != null)) {
@@ -169,22 +207,41 @@ public class ConllUWriter
                 if (writePos && (row.token.getPos() != null)) {
                     POS posAnno = row.token.getPos();
                     pos = posAnno.getPosValue();
-                    if (!(posAnno instanceof POS)) {
-                        cpos = posAnno.getClass().getSimpleName();
-                    }
-                    else {
+                    cpos = dkpro2ud.get(posAnno.getClass());
+                    if (cpos == null) {
                         cpos = pos;
                     }
                 }
                 
                 int headId = UNUSED_INT;
                 String deprel = UNUSED;
-                if (writeDependency && (row.deprel != null)) {
-                    deprel = row.deprel.getDependencyType();
-                    headId = ctokens.get(row.deprel.getGovernor()).id;
-                    if (headId == row.id) {
-                        // ROOT dependencies may be modeled as a loop, ignore these.
-                        headId = 0;
+                String deps = UNUSED;
+                if (writeDependency) {
+                    if ((row.deprel != null)) {
+                        deprel = row.deprel.getDependencyType();
+                        headId = ctokens.get(row.deprel.getGovernor()).id;
+                        if (headId == row.id) {
+                            // ROOT dependencies may be modeled as a loop, ignore these.
+                            headId = 0;
+                        }
+                    }
+                    
+                    StringBuilder depsBuf = new StringBuilder();
+                    for (Dependency d : row.deps) {
+                        if (depsBuf.length() > 0) {
+                            depsBuf.append('|');
+                        }
+                        // Resolve self-looping root to 0-indexed root
+                        int govId = ctokens.get(d.getGovernor()).id;
+                        if (govId == row.id) {
+                            govId = 0;
+                        }
+                        depsBuf.append(govId);
+                        depsBuf.append(':');
+                        depsBuf.append(d.getDependencyType());
+                    }
+                    if (depsBuf.length() > 0) {
+                        deps = depsBuf.toString();
                     }
                 }
                 
@@ -198,8 +255,10 @@ public class ConllUWriter
                     feats = row.token.getMorph().getValue();
                 }
                 
-                String phead = UNUSED;
-                String pdeprel = UNUSED;
+                String misc = UNUSED;
+                if (row.noSpaceAfter) {
+                    misc = "SpaceAfter=No";
+                }
 
                 SurfaceForm sf = surfaceBeginIdx.get(row.token.getBegin());
                 if (sf != null) {
@@ -213,8 +272,8 @@ public class ConllUWriter
                 }
                 
                 aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", row.id,
-                        row.token.getCoveredText(), lemma, cpos, pos, feats, head, deprel, phead,
-                        pdeprel);
+                        row.token.getCoveredText(), lemma, cpos, pos, feats, head, deprel, deps,
+                        misc);
             }
 
             aOut.println();
@@ -225,6 +284,8 @@ public class ConllUWriter
     {
         int id;
         Token token;
+        boolean noSpaceAfter;
         Dependency deprel;
+        List<Dependency> deps = new ArrayList<>();
     }
 }

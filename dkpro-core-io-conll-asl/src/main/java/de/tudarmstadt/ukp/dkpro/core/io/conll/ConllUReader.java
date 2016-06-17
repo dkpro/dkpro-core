@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2016
  * Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.conll;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
@@ -46,6 +46,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.SurfaceForm;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
@@ -67,14 +68,11 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
  * (0).</li>
  * <li>DEPREL - <b>(Dependency)</b> Universal Stanford dependency relation to the HEAD (root iff
  * HEAD = 0) or a defined language-specific subtype of one.</li>
- * <li>DEPS - <b>(unused)</b> List of secondary dependencies (head-deprel pairs).</li>
+ * <li>DEPS - <b>(Dependency)</b> List of secondary dependencies (head-deprel pairs).</li>
  * <li>MISC - <b>(unused)</b> Any other annotation.</li>
  * </ol>
  * 
  * Sentences are separated by a blank new line.
- * 
- * @author Seid Muhie Yimam
- * @author Richard Eckart de Castilho
  * 
  * @see <a href="http://universaldependencies.github.io/docs/format.html">CoNLL-U Format</a>
  */
@@ -135,8 +133,8 @@ public class ConllUReader
     private static final int FEATS = 5;
     private static final int HEAD = 6;
     private static final int DEPREL = 7;
-    // private static final int DEPS = 8;
-    // private static final int MISC = 9;
+    private static final int DEPS = 8;
+    private static final int MISC = 9;
 
     private MappingProvider posMappingProvider;
 
@@ -210,7 +208,9 @@ public class ConllUReader
                 int tokenIdx = Integer.valueOf(word[ID]);
                 Token token = doc.add(word[FORM], Token.class);
                 tokens.put(tokenIdx, token);
-                doc.add(" ");
+                if (!StringUtils.contains(word[MISC], "SpaceAfter=No")) {
+                    doc.add(" ");
+                }
 
                 // Read lemma
                 if (!UNUSED.equals(word[LEMMA]) && readLemma) {
@@ -262,23 +262,21 @@ public class ConllUReader
                         int govId = Integer.valueOf(word[HEAD]);
     
                         // Model the root as a loop onto itself
-                        if (govId == 0) {
-                            Dependency rel = new ROOT(aJCas);
-                            rel.setGovernor(tokens.get(depId));
-                            rel.setDependent(tokens.get(depId));
-                            rel.setDependencyType(word[DEPREL]);
-                            rel.setBegin(rel.getDependent().getBegin());
-                            rel.setEnd(rel.getDependent().getEnd());
-                            rel.addToIndexes();
-                        }
-                        else {
-                            Dependency rel = new Dependency(aJCas);
-                            rel.setGovernor(tokens.get(govId));
-                            rel.setDependent(tokens.get(depId));
-                            rel.setDependencyType(word[DEPREL]);
-                            rel.setBegin(rel.getDependent().getBegin());
-                            rel.setEnd(rel.getDependent().getEnd());
-                            rel.addToIndexes();
+                        makeDependency(aJCas, govId, depId, word[DEPREL], DependencyFlavor.BASIC,
+                                tokens, word);
+                    }
+                    
+                    if (!UNUSED.equals(word[DEPS])) {
+                        // list items separated by vertical bar
+                        String[] items = word[DEPS].split("\\|");
+                        for (String item : items) {
+                            String[] sItem = item.split(":");
+                            
+                            int depId = Integer.valueOf(word[ID]);
+                            int govId = Integer.valueOf(sItem[0]);
+
+                            makeDependency(aJCas, govId, depId, sItem[1], DependencyFlavor.ENHANCED,
+                                    tokens, word);
                         }
                     }
                 }
@@ -293,6 +291,31 @@ public class ConllUReader
         }
 
         doc.close();
+    }
+    
+    private Dependency makeDependency(JCas aJCas, int govId, int depId, String label, String flavor,
+            Int2ObjectMap<Token> tokens, String[] word)
+    {
+        Dependency rel;
+
+        if (govId == 0) {
+            rel = new ROOT(aJCas);
+            rel.setGovernor(tokens.get(depId));
+            rel.setDependent(tokens.get(depId));
+        }
+        else {
+            rel = new Dependency(aJCas);
+            rel.setGovernor(tokens.get(govId));
+            rel.setDependent(tokens.get(depId));
+        }
+
+        rel.setDependencyType(label);
+        rel.setFlavor(flavor);
+        rel.setBegin(rel.getDependent().getBegin());
+        rel.setEnd(rel.getDependent().getEnd());
+        rel.addToIndexes();
+
+        return rel;
     }
 
     /**

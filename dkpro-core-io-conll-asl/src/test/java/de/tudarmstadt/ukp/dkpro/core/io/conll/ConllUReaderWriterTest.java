@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2016
  * Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
  * Technische Universität Darmstadt
  *
@@ -14,10 +14,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.conll;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testRoundTrip;
+import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -30,7 +30,8 @@ public class ConllUReaderWriterTest
     public void roundTrip()
         throws Exception
     {
-        testRoundTrip(ConllUReader.class, ConllUWriter.class,
+        testOneWay(ConllUReader.class, ConllUWriter.class,
+                "conll/u/conllu-en-ref.conll",
                 "conll/u/conllu-en-orig.conll");
     }
 
