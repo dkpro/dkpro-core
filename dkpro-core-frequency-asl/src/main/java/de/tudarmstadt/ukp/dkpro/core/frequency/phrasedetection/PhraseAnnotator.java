@@ -18,21 +18,16 @@
 package de.tudarmstadt.ukp.dkpro.core.frequency.phrasedetection;
 
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGenerator;
-import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LexicalPhrase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import java.io.BufferedReader;
@@ -40,8 +35,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 /**
  * Annotate phrases in a sentence. Depending on the provided unigrams and the threshold, these
@@ -128,7 +123,7 @@ public class PhraseAnnotator
     private Map<String, Integer> bigrams;
     private int vocabularySize;
 
-    private StringSequenceGenerator sequenceGenerator;
+    private PhraseSequenceGenerator sequenceGenerator;
 
     @Override
     public void initialize(UimaContext context)
@@ -136,6 +131,10 @@ public class PhraseAnnotator
     {
         super.initialize(context);
 
+        /* set feature path to default */
+        if (featurePath == null) {
+            featurePath = DEFAULT_FEATURE_PATH;
+        }
         try {
             sequenceGenerator = new PhraseSequenceGenerator.Builder()
                     .featurePath(featurePath)
@@ -145,7 +144,7 @@ public class PhraseAnnotator
                     .stopwordsReplacement(stopwordsReplacement)
                     .filterRegex(filterRegex)
                     .filterRegexReplacement(regexReplacement)
-                    .buildStringSequenceGenerator();
+                    .build();
 
             readCounts();
         }
@@ -156,100 +155,57 @@ public class PhraseAnnotator
         vocabularySize = unigrams.size();
         getLogger().info("Vocabulary size: " + vocabularySize);
 
-        /* set feature path to default */
-        if (featurePath == null) {
-            featurePath = DEFAULT_FEATURE_PATH;
-        }
     }
 
     @Override
     public void process(JCas aJCas)
             throws AnalysisEngineProcessException
     {
-        FeaturePathFactory.FeaturePathIterator<AnnotationFS> featurePathIterator;
+        List<LexicalPhrase[]> sequences;
         try {
-            featurePathIterator = FeaturePathUtils
-                    .featurePathIterator(aJCas, featurePath, Optional.empty());
+            sequences = sequenceGenerator.tokenSequences(aJCas);
         }
         catch (FeaturePathException e) {
             throw new AnalysisEngineProcessException(e);
         }
 
-        /* start iteration if at least one annotation is present */
-        if (featurePathIterator.hasNext()) {
-            // stores the second token of a (potential) bigram
-            Map.Entry<AnnotationFS, String> second = featurePathIterator.next();
+        for (LexicalPhrase[] sequence : sequences) {
+        /* iterate over sequences in document */
 
-            while (featurePathIterator.hasNext()) {
-                // move forward to the previously second token of a bigram
-                Map.Entry<AnnotationFS, String> first = second;
-                assert first.getKey() instanceof Annotation;
+            for (int i = 0; i < sequence.length; i++) {
+            /* iterate over tokens within sequence */
+                LexicalPhrase phrase1 = sequence[i];
+                String token1 = phrase1.getText();
+                LexicalPhrase newPhrase = phrase1;
 
-                if (featurePathIterator.hasNext()) {
-                    second = featurePathIterator.next(); // the second token of the bigram
-
-                    String token1 = first.getValue()
-                            .replaceAll(FrequencyCounter.COLUMN_SEPARATOR,
-                                    FrequencyCounter.COLUMN_SEP_REPLACEMENT)
-                            .replaceAll(FrequencyCounter.NEWLINE_REGEX,
-                                    FrequencyCounter.COLUMN_SEP_REPLACEMENT);
-                    String token2 = second.getValue()
-                            .replaceAll(FrequencyCounter.COLUMN_SEPARATOR,
-                                    FrequencyCounter.COLUMN_SEP_REPLACEMENT)
-                            .replaceAll(FrequencyCounter.NEWLINE_REGEX,
-                                    FrequencyCounter.COLUMN_SEP_REPLACEMENT);
+                if (i < sequence.length - 1) {
+                    /* do not look for bigram on last token */
+                    LexicalPhrase phrase2 = sequence[i + 1];
+                    String token2 = phrase2.getText();
                     String bigram = token1 + FrequencyCounter.BIGRAM_SEPARATOR + token2;
 
                     if (bigrams.containsKey(bigram)) {
                         assert unigrams.containsKey(token1);
                         assert unigrams.containsKey(token2);
 
-                         /* compute score */
+                        /* compute score */
                         double score =
                                 (double) ((bigrams.get(bigram) - discount) * vocabularySize) /
                                         (double) (unigrams.get(token1) * unigrams.get(token2));
                         getLogger().debug(bigram + "\t" + score);
 
                         if (score >= threshold) {
-                            /* bigram phrase */
-                            LexicalPhrase phrase = new LexicalPhrase(aJCas,
-                                    first.getKey().getBegin(), second.getKey().getEnd());
-                            phrase.setText(token1 + FrequencyCounter.BIGRAM_SEPARATOR + token2);
-                            phrase.addToIndexes(aJCas);
-
-                            /* skip second token of bigram to prevent overlapping phrases */
-                            if (featurePathIterator.hasNext()) {
-                                second = featurePathIterator.next();
-                            }
+                        /* bigram phrase spanning two tokens found */
+                            newPhrase = new LexicalPhrase(aJCas, phrase1.getBegin(),
+                                    phrase2.getEnd());
+                            newPhrase.setText(bigram);
+                            i++;    // skip following token
                         }
-                        else {
-                            /* unigram phrase */
-                            LexicalPhrase phrase = new LexicalPhrase(aJCas,
-                                    first.getKey().getBegin(),
-                                    first.getKey().getEnd());
-                            phrase.setText(token1);
-                            phrase.addToIndexes(aJCas);
-                        }
-                    }
-                    else {
-                        /* out of vocabulary bigram, unigram phrase */
-                        LexicalPhrase phrase = new LexicalPhrase(aJCas,
-                                first.getKey().getBegin(), first.getKey().getEnd());
-                        phrase.setText(token1);
-                        phrase.addToIndexes(aJCas);
                     }
                 }
+
+                newPhrase.addToIndexes(aJCas);
             }
-            /* last token in sequence */
-            LexicalPhrase phrase = new LexicalPhrase(aJCas,
-                    second.getKey().getBegin(),
-                    second.getKey().getEnd());
-            phrase.setText(second.getValue()
-                    .replaceAll(FrequencyCounter.COLUMN_SEPARATOR,
-                            FrequencyCounter.COLUMN_SEP_REPLACEMENT)
-                    .replaceAll(FrequencyCounter.NEWLINE_REGEX,
-                            FrequencyCounter.COLUMN_SEP_REPLACEMENT));
-            phrase.addToIndexes(aJCas);
         }
     }
 
