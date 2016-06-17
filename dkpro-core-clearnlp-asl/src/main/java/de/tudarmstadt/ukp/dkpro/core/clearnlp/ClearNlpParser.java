@@ -56,6 +56,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 
 /**
@@ -223,6 +224,7 @@ public class ClearNlpParser
                         dep.setDependencyType(node.getLabel());
                         dep.setBegin(dep.getDependent().getBegin());
                         dep.setEnd(dep.getDependent().getEnd());
+                        dep.setFlavor(DependencyFlavor.BASIC);
                         dep.addToIndexes();
                     }
                     else {
@@ -232,6 +234,7 @@ public class ClearNlpParser
                         dep.setDependencyType("ROOT");
                         dep.setBegin(dep.getDependent().getBegin());
                         dep.setEnd(dep.getDependent().getEnd());
+                        dep.setFlavor(DependencyFlavor.BASIC);
                         dep.addToIndexes();
                     }
                 }

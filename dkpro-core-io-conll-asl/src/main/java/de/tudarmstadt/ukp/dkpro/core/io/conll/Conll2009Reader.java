@@ -52,6 +52,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArgLink;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 
 /**
@@ -277,6 +278,7 @@ public class Conll2009Reader
                             rel.setDependencyType(word[DEPREL]);
                             rel.setBegin(rel.getDependent().getBegin());
                             rel.setEnd(rel.getDependent().getEnd());
+                            rel.setFlavor(DependencyFlavor.BASIC);
                             rel.addToIndexes();
                         }
                         else {
@@ -286,6 +288,7 @@ public class Conll2009Reader
                             rel.setDependencyType(word[DEPREL]);
                             rel.setBegin(rel.getDependent().getBegin());
                             rel.setEnd(rel.getDependent().getEnd());
+                            rel.setFlavor(DependencyFlavor.BASIC);
                             rel.addToIndexes();
                         }
                     }

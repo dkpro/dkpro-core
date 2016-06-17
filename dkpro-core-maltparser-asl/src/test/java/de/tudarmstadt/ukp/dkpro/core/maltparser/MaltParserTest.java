@@ -644,12 +644,11 @@ public class MaltParserTest
      * @throws Exception
      *             if an error occurs.
      */
-    // @Ignore("The tags produced by our French TreeTagger model are different form the ones that "
-    // +
-    // "the pre-trained MaltParser model expects. Also the input format in our MaltParser " +
-    // "class is currently hardcoded to the format used by the English pre-trained model. " +
-    // "For the French model the 5th column of the input format should contain fine-grained " +
-    // "tags. See http://www.maltparser.org/mco/french_parser/fremalt.html")
+    @Ignore("The tags produced by our French TreeTagger model are different form the ones that "
+            + "the pre-trained MaltParser model expects. Also the input format in our MaltParser "
+            + "class is currently hardcoded to the format used by the English pre-trained model. "
+            + "For the French model the 5th column of the input format should contain fine-grained "
+            + "tags. See http://www.maltparser.org/mco/french_parser/fremalt.html")
     @Test
     public void testFrench()
         throws Exception

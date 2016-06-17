@@ -30,6 +30,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 import edu.emory.mathcs.nlp.component.template.node.NLPNode;
 
@@ -65,6 +66,9 @@ public class EmoryNlp2Uima
             NLPNode govNode = depNode.getDependencyHead();
             String label = depNode.getDependencyLabel();
 
+            // FIXME Also extract the semantic heads and store them with dependency flavor
+            // ENHANCED
+            
             if (govNode.getID() != 0) {
                 Type depRel = aMappingProvider.getTagType(label);
                 Dependency dep = (Dependency) aJCas.getCas().createFS(depRel);
@@ -73,6 +77,7 @@ public class EmoryNlp2Uima
                 dep.setGovernor(aTokens.get(govNode.getID() - 1));
                 dep.setBegin(dep.getDependent().getBegin());
                 dep.setEnd(dep.getDependent().getEnd());
+                dep.setFlavor(DependencyFlavor.BASIC);
                 dep.addToIndexes();
             }
             else {
@@ -82,6 +87,7 @@ public class EmoryNlp2Uima
                 dep.setGovernor(aTokens.get(depNode.getID() - 1));
                 dep.setBegin(dep.getDependent().getBegin());
                 dep.setEnd(dep.getDependent().getEnd());
+                dep.setFlavor(DependencyFlavor.BASIC);
                 dep.addToIndexes();
             }
         }

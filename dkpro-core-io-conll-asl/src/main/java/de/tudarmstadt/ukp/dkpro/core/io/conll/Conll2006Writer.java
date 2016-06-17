@@ -26,6 +26,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -39,6 +40,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 
 /**
  * <p>Writes a file in the CoNLL-2006 format (aka CoNLL-X).</p>
@@ -146,8 +148,17 @@ public class Conll2006Writer
             }
 
             // Dependencies
-            for (Dependency rel : selectCovered(Dependency.class, sentence)) {
-                ctokens.get(rel.getDependent()).deprel = rel;
+            List<Dependency> basicDeps = selectCovered(Dependency.class, sentence).stream()
+                    .filter(dep -> dep.getFlavor() == null || DependencyFlavor.BASIC.equals(dep.getFlavor()))
+                    .collect(Collectors.toList());
+            for (Dependency rel : basicDeps) {
+                Row row =  ctokens.get(rel.getDependent());
+                if (row.deprel != null) {
+                    throw new IllegalStateException("Illegal basic dependency structure - token ["
+                            + row.token.getCoveredText()
+                            + "] is dependent of more than one dependency.");
+                }
+                row.deprel = rel;
             }
 
             // Write sentence in CONLL 2006 format
