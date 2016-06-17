@@ -685,7 +685,7 @@ public class CoreNlpParserTest
         try {
             AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
         }
-        catch (Exception e) {
+        catch (Throwable e) {
             AssertAnnotations.assertPennTree(pennTreeVariant, selectSingle(jcas, PennTree.class));
         }
     }
