@@ -37,6 +37,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 import edu.stanford.nlp.dcoref.CorefChain;
 import edu.stanford.nlp.dcoref.CorefCoreAnnotations;
@@ -163,6 +164,7 @@ public class ConvertToUima
                 dep.setGovernor(governor);
                 dep.setBegin(dep.getDependent().getBegin());
                 dep.setEnd(dep.getDependent().getEnd());
+                dep.setFlavor(edge.isExtra() ? DependencyFlavor.ENHANCED : DependencyFlavor.BASIC);
                 dep.addToIndexes();
             }
         }

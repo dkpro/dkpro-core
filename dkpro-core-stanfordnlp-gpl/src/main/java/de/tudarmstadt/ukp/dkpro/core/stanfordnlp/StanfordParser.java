@@ -60,6 +60,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.CoreNlpUtils;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.StanfordAnnotator;
@@ -206,7 +207,7 @@ public class StanfordParser
     /**
      * Sets the kind of dependencies being created.
      * 
-     * <p>Default: {@link DependenciesMode#COLLAPSED TREE}
+     * <p>Default: {@link DependenciesMode#TREE TREE}
      * @see DependenciesMode
      */
     public static final String PARAM_MODE = "mode";
@@ -486,16 +487,19 @@ public class StanfordParser
         for (TypedDependency currTypedDep : dependencies) {
             int govIndex = currTypedDep.gov().index();
             int depIndex = currTypedDep.dep().index();
+            
+            Dependency dep;
+            
             if (govIndex != 0) {
                 Token govToken = tokens.get(govIndex - 1);
                 Token depToken = tokens.get(depIndex - 1);
 
-                sfAnnotator.createDependencyAnnotation(currTypedDep.reln(), govToken, depToken);
+                dep = sfAnnotator.createDependencyAnnotation(currTypedDep.reln(), govToken, depToken);
             }
             else {
                 Token depToken = tokens.get(depIndex - 1);
                 
-                Dependency dep = new ROOT(sfAnnotator.getJCas());
+                dep = new ROOT(sfAnnotator.getJCas());
                 dep.setDependencyType(currTypedDep.reln().toString());
                 dep.setGovernor(depToken);
                 dep.setDependent(depToken);
@@ -503,6 +507,8 @@ public class StanfordParser
                 dep.setEnd(dep.getDependent().getEnd());
                 dep.addToIndexes();
             }
+            
+            dep.setFlavor(currTypedDep.extra() ? DependencyFlavor.ENHANCED : DependencyFlavor.BASIC);
         }
     }
 

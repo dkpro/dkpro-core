@@ -297,10 +297,10 @@ public class StanfordAnnotator
         return anno;
     }
 
-    public void createDependencyAnnotation(GrammaticalRelation aDependencyType,
+    public Dependency createDependencyAnnotation(GrammaticalRelation aDependencyType,
             Token aGovernor, Token aDependent)
     {
-        createDependencyAnnotation(jCas, aDependencyType, aGovernor, aDependent);
+        return createDependencyAnnotation(jCas, aDependencyType, aGovernor, aDependent);
     }
     
     /**
@@ -315,7 +315,7 @@ public class StanfordAnnotator
      * @param aDependent
      *            the dependent-word
      */
-    public static void createDependencyAnnotation(JCas jCas, GrammaticalRelation aDependencyType,
+    public static Dependency createDependencyAnnotation(JCas jCas, GrammaticalRelation aDependencyType,
             Token aGovernor, Token aDependent)
     {
         // create the necessary objects and methods
@@ -336,6 +336,8 @@ public class StanfordAnnotator
         dep.setBegin(dep.getDependent().getBegin());
         dep.setEnd(dep.getDependent().getEnd());
         dep.addToIndexes();
+        
+        return dep;
     }
 
     /**
