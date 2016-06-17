@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.io.conll;
 import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
 import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testRoundTrip;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -29,6 +30,10 @@ import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 //Do not remove these tags!
 public class Conll2006ReaderWriterTest
 {
+    // Deleted the test file here because it was malformed *and* we had no provenance info.
+    // However, leaving the test in right now and ignoring it because it is used in the
+    // documentation.
+    @Ignore()
     @Test
     public void roundTrip()
         throws Exception
