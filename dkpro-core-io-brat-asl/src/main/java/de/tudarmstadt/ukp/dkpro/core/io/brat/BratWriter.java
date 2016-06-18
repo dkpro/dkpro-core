@@ -479,7 +479,9 @@ public class BratWriter extends JCasFileWriter_ImplBase
 
             if (
                 FSUtil.isMultiValuedFeature(aFS, feat) && 
-                CAS.TYPE_NAME_TOP.equals(aFS.getCAS().getTypeSystem().getParent(feat.getRange().getComponentType()).getName())
+                CAS.TYPE_NAME_TOP.equals(aFS.getCAS().getTypeSystem().getParent(feat.getRange().getComponentType()).getName()) &&
+                (feat.getRange().getComponentType().getFeatureByBaseName("target") != null) &&
+                (feat.getRange().getComponentType().getFeatureByBaseName("role") != null)
             ) {
                 // Handle WebAnno-style slot links
                 // FIXME It would be better if the link type could be configured, e.g. what
