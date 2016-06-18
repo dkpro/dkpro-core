@@ -3,8 +3,9 @@
 # Dutch TreeTagger Part-of-Speech Tags
 
 __META_SOURCE_URL__=ftp://ftp.ims.uni-stuttgart.de/pub/corpora/dutch-tagset.txt
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS
+*=POS
 # $.		sentence-final punctuation
 # adj		adjective
 # adj*kop		truncated adjective

@@ -66,7 +66,7 @@ Constituent
    children: FSArray
    syntacticFunction: "CJ"
 [Sie]
-PR
+PRON
    sofa: _InitialView
    begin: 0
    end: 3
@@ -96,13 +96,13 @@ Token
          syntacticFunction: "--"
       children: FSArray
       syntacticFunction: "CJ"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 0
       end: 3
       PosValue: "PPER"
 [gehen]
-V
+VERB
    sofa: _InitialView
    begin: 4
    end: 9
@@ -132,7 +132,7 @@ Token
          syntacticFunction: "--"
       children: FSArray
       syntacticFunction: "CJ"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 4
       end: 9
@@ -251,7 +251,7 @@ Token
       end: 17
       PosValue: "ADJA"
 [Verbindungen]
-NN
+NOUN
    sofa: _InitialView
    begin: 18
    end: 30
@@ -295,7 +295,7 @@ Token
          syntacticFunction: "OA"
       children: FSArray
       syntacticFunction: "CJ"
-   pos: NN
+   pos: NOUN
       sofa: _InitialView
       begin: 18
       end: 30
@@ -344,7 +344,7 @@ Token
       end: 34
       PosValue: "KON"
 [Risiken]
-NN
+NOUN
    sofa: _InitialView
    begin: 35
    end: 42
@@ -381,13 +381,13 @@ Token
          syntacticFunction: "CJ"
       children: FSArray
       syntacticFunction: "OA"
-   pos: NN
+   pos: NOUN
       sofa: _InitialView
       begin: 35
       end: 42
       PosValue: "NN"
 [ein]
-V
+VERB
    sofa: _InitialView
    begin: 43
    end: 46
@@ -417,13 +417,13 @@ Token
          syntacticFunction: "--"
       children: FSArray
       syntacticFunction: "CJ"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 43
       end: 46
       PosValue: "PTKVZ"
 [,]
-PUNC
+PUNCT
    sofa: _InitialView
    begin: 47
    end: 48
@@ -439,7 +439,7 @@ Token
       end: 91
       constituentType: "ROOT"
       children: FSArray
-   pos: PUNC
+   pos: PUNCT
       sofa: _InitialView
       begin: 47
       end: 48
@@ -466,7 +466,7 @@ Constituent
    children: FSArray
    syntacticFunction: "CJ"
 [versuchen]
-V
+VERB
    sofa: _InitialView
    begin: 49
    end: 58
@@ -496,7 +496,7 @@ Token
          syntacticFunction: "--"
       children: FSArray
       syntacticFunction: "CJ"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 49
       end: 58
@@ -565,7 +565,7 @@ Constituent
    children: FSArray
    syntacticFunction: "OA"
 [ihre]
-PR
+PRON
    sofa: _InitialView
    begin: 59
    end: 63
@@ -609,13 +609,13 @@ Token
          syntacticFunction: "OC"
       children: FSArray
       syntacticFunction: "OA"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 59
       end: 63
       PosValue: "PPOSAT"
 [Möglichkeiten]
-NN
+NOUN
    sofa: _InitialView
    begin: 64
    end: 77
@@ -659,13 +659,13 @@ Token
          syntacticFunction: "OC"
       children: FSArray
       syntacticFunction: "OA"
-   pos: NN
+   pos: NOUN
       sofa: _InitialView
       begin: 64
       end: 77
       PosValue: "NN"
 [auszureizen]
-V
+VERB
    sofa: _InitialView
    begin: 78
    end: 89
@@ -702,13 +702,13 @@ Token
          syntacticFunction: "CJ"
       children: FSArray
       syntacticFunction: "OC"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 78
       end: 89
       PosValue: "VVIZU"
 [.]
-PUNC
+PUNCT
    sofa: _InitialView
    begin: 90
    end: 91
@@ -724,7 +724,7 @@ Token
       end: 91
       constituentType: "ROOT"
       children: FSArray
-   pos: PUNC
+   pos: PUNCT
       sofa: _InitialView
       begin: 90
       end: 91

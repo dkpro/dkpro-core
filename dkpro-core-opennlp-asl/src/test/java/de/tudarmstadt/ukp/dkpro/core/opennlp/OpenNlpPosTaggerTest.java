@@ -47,7 +47,7 @@ public class OpenNlpPosTaggerTest
             TestRunner.autoloadModelsOnNextTestRun();
             runTest("en", null, "This is a test .",
                     new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
-                    new String[] { "ART",  "V",   "ART", "NN",   "PUNC" });
+                    new String[] { "DET",  "VERB",   "DET", "NOUN",   "PUNCT" });
         }
         finally {
             if (oldModelCache != null) {
@@ -71,28 +71,28 @@ public class OpenNlpPosTaggerTest
 	{
         runTest("en", null, "This is a test .",
 				new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
-				new String[] { "ART",  "V",   "ART", "NN",   "PUNC" });
+				new String[] { "DET",  "VERB",   "DET", "NOUN",   "PUNCT" });
 
         runTest("en", null, "A neural net .",
         		new String[] { "DT",  "JJ",     "NN",  "." },
-        		new String[] { "ART", "ADJ",    "NN",  "PUNC" });
+        		new String[] { "DET", "ADJ",    "NOUN",  "PUNCT" });
 
         runTest("en", null, "John is purchasing oranges .",
         		new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
-        		new String[] { "NP",   "V",   "V",        "NN",     "PUNC" });
+        		new String[] { "PROPN",   "VERB",   "VERB",        "NOUN",     "PUNCT" });
         
         // This is WRONG tagging. "jumps" is tagged as "NNS"
         runTest("en", "maxent", "The quick brown fox jumps over the lazy dog . \n",
                 new String[] { "DT", "JJ", "JJ", "NN", "NNS", "IN", "DT", "JJ", "NN", "." },                
-                new String[] { "ART", "ADJ", "ADJ", "NN", "NN", "PP", "ART", "ADJ", "NN", "PUNC" });
+                new String[] { "DET", "ADJ", "ADJ", "NOUN", "NOUN", "ADP", "DET", "ADJ", "NOUN", "PUNCT" });
         
         runTest("en", "perceptron", "The quick brown fox jumps over the lazy dog . \n",
                 new String[] { "DT", "JJ", "JJ", "NN", "NNS", "IN", "DT", "JJ", "NN", "." },                
-                new String[] { "ART", "ADJ", "ADJ", "NN", "NN", "PP", "ART", "ADJ", "NN", "PUNC" });
+                new String[] { "DET", "ADJ", "ADJ", "NOUN", "NOUN", "ADP", "DET", "ADJ", "NOUN", "PUNCT" });
 
         runTest("en", "perceptron-ixa", "The quick brown fox jumps over the lazy dog . \n",
                 new String[] { "DT", "JJ", "JJ", "NN", "NNS", "IN", "DT", "JJ", "NN", "." },                
-                new String[] { "ART", "ADJ", "ADJ", "NN", "NN", "PP", "ART", "ADJ", "NN", "PUNC" });
+                new String[] { "DET", "ADJ", "ADJ", "NOUN", "NOUN", "ADP", "DET", "ADJ", "NOUN", "PUNCT" });
 	}
 
 	@Test
@@ -101,15 +101,15 @@ public class OpenNlpPosTaggerTest
     {
         runTest("de", null, "Das ist ein Test .",
         		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
-        		new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
+        		new String[] { "PRON",  "VERB",     "DET", "NOUN",   "PUNCT" });
 
         runTest("de", "maxent", "Das ist ein Test .",
         		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
-        		new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
+        		new String[] { "PRON",  "VERB",     "DET", "NOUN",   "PUNCT" });
 
         runTest("de", "perceptron", "Das ist ein Test .",
         		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
-        		new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
+        		new String[] { "PRON",  "VERB",     "DET", "NOUN",   "PUNCT" });
     }
 
     @Test
@@ -118,11 +118,11 @@ public class OpenNlpPosTaggerTest
     {
         runTest("it", null, "Questo è un test .",
                 new String[] { "PD", "Vip3", "RI",  "Sn", "FS"    },
-                new String[] { "PR", "V",    "ART", "NN", "PUNC" });
+                new String[] { "PRON", "VERB",    "DET", "NOUN", "PUNCT" });
         
         runTest("it", "perceptron", "Questo è un test .",
                 new String[] { "PD", "Vip3", "RI",  "Sn", "FS"    },
-                new String[] { "PR", "V",    "ART", "NN", "PUNC" });
+                new String[] { "PRON", "VERB",    "DET", "NOUN", "PUNCT" });
     }
 
     @Ignore("We don't have these models integrated yet")
@@ -136,19 +136,19 @@ public class OpenNlpPosTaggerTest
         
         JCas jcas = runTest("pt", null, "Este é um teste .",
                 new String[] { "pron-det", "v-fin", "art", "n",   "punc" },
-                new String[] { "PR", "V", "ART", "NN", "PUNC" });
+                new String[] { "PRON", "V", "ART", "NN", "PUNC" });
 
         AssertAnnotations.assertTagset(POS.class, "bosque", bosqueTags, jcas);
                 
         jcas = runTest("pt", "maxent", "Este é um teste .",
                 new String[] { "pron-det", "v-fin", "art", "n",   "punc" },
-                new String[] { "PR", "V", "ART", "NN", "PUNC" });
+                new String[] { "PRON", "V", "ART", "NN", "PUNC" });
 
         AssertAnnotations.assertTagset(POS.class, "bosque", bosqueTags, jcas);
         
         jcas = runTest("pt", "perceptron", "Este é um teste .",
                 new String[] { "pron-det", "v-fin", "art", "n",   "punc" },
-                new String[] { "PR", "V", "ART", "NN", "PUNC" });
+                new String[] { "PRON", "V", "ART", "NN", "PUNC" });
 
         AssertAnnotations.assertTagset(POS.class, "bosque", bosqueTags, jcas);
         
@@ -177,15 +177,15 @@ public class OpenNlpPosTaggerTest
     {
         runTest("es", "maxent", "Esta es una prueba .",
         		new String[] { "PD", "VSI", "DI",  "NC", "Fp"   },
-        		new String[] { "PR", "V",   "ART", "NN", "PUNC" });
+        		new String[] { "PRON", "VERB",   "DET", "NOUN", "PUNCT" });
 
         runTest("es", "maxent-ixa", "Esta es una prueba .", 
                 new String[] { "PD0FS000", "VSIP3S0", "DI0FS0", "NCFS000", "Fp"}, 
-                new String[] { "PR",       "V",       "ART",    "NN",      "PUNC" });
+                new String[] { "PRON",       "VERB",       "DET",    "NOUN",      "PUNCT" });
 
         runTest("es", "perceptron-ixa", "Esta es una prueba .",
                 new String[] { "PD0FS000", "VSIP3S0", "DI0FS0", "NCFS000", "Fp"}, 
-                new String[] { "PR",       "V",       "ART",    "NN",      "PUNC" });
+                new String[] { "PRON",       "VERB",       "DET",    "NOUN",      "PUNCT" });
     }
 
     @Test

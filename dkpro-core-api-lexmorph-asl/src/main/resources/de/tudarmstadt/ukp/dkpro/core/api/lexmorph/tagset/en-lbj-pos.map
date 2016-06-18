@@ -5,35 +5,35 @@
 
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
-*=O
+*=X
 # punctuation mark, comma
-,=PUNC
--=PUNC
+,=PUNCT
+-=PUNCT
 # punctuation mark, sentence closer
-.=PUNC
-;=PUNC
-?=PUNC
-\!=PUNC
+.=PUNCT
+;=PUNCT
+?=PUNCT
+\!=PUNCT
 # punctuation mark, colon
-\:=PUNC
+\:=PUNCT
 # contextual separator, left paren
-(=O
+(=X
 # contextual separator, right paren
-)=O
--LRB-=O
--RRB-=O
+)=X
+-LRB-=X
+-RRB-=X
 # 1.	CC	Coordinating conjunction
 CC=CONJ
 # 2.	CD	Cardinal number
-CD=CARD
+CD=NUM
 # 3.	DT	Determiner
-DT=ART
+DT=DET
 # 4.	EX	Existential there
-EX=ART
+EX=DET
 # 5.	FW	Foreign word
-FW=O
+FW=X
 # 6.	IN	Preposition or subordinating conjunction
-IN=PP
+IN=ADP
 # 7.	JJ	Adjective
 JJ=ADJ
 # 8.	JJR	Adjective, comparative
@@ -41,31 +41,31 @@ JJR=ADJ
 # 9.	JJS	Adjective, superlative
 JJS=ADJ
 # 10.	LS	List item marker
-LS=O
+LS=X
 # 11.	MD	Modal
-MD=V
+MD=VERB
 # 12.	NN	Noun, singular or mass
-NN=NN
+NN=NOUN
 # 13.	NNS	Noun, plural
-NNS=NN
+NNS=NOUN
 # 14.	NP	Proper noun, singular (PTB 1)
-NP=NP
+NP=PROPN
 # 14.	NP	Proper noun, singular (PTB 2)
-NNP=NP
+NNP=PROPN
 # 15.	NPS	Proper noun, plural (PTB 1)
-NPS=NP
+NPS=PROPN
 # 15.	NPS	Proper noun, plural (PTB 2)
-NNPS=NP
+NNPS=PROPN
 # 16.	PDT	Predeterminer
-PDT=ART
+PDT=DET
 # 17.	POS	Possessive ending
-POS=O
+POS=X
 # 18.	PP	Personal pronoun
-PP=PR
-PRP=PR
+PP=PRON
+PRP=PRON
 # 19.	PP$	Possessive pronoun
-PP$=PR
-PRP$=PR
+PP$=PRON
+PRP$=PRON
 # 20.	RB	Adverb
 RB=ADV
 # 21.	RBR	Adverb, comparative	
@@ -73,32 +73,32 @@ RBR=ADV
 # 22.	RBS	Adverb, superlative
 RBS=ADV
 # 23.	RP	Particle
-RP=PP
-SENT=PUNC
+RP=ADP
+SENT=PUNCT
 # 24.	SYM	Symbol
-SYM=PUNC
+SYM=PUNCT
 # 25.	TO	to
-TO=PP
+TO=ADP
 # 26.	UH	Interjection
-UH=O
+UH=X
 # 27.	VB	Verb, base form
-VB=V
+VB=VERB
 # 28.	VBD	Verb, past tense
-VBD=V
+VBD=VERB
 # 29.	VBG	Verb, gerund or present participle
-VBG=V
+VBG=VERB
 # 30.	VBN	Verb, past participle
-VBN=V
+VBN=VERB
 # 31.	VBP	Verb, non-3rd person singular present
-VBP=V
+VBP=VERB
 # 32.	VBZ	Verb, 3rd person singular present
-VBZ=V
+VBZ=VERB
 # 33.	WDT	Wh-determiner
-WDT=ART
+WDT=DET
 # 34.	WP	Wh-pronoun
-WP=PR
+WP=PRON
 # 35.	WP$	Possessive wh-pronoun
-WP$=PR
+WP$=PRON
 # 36.	WRB	Wh-adverb
 WRB=ADV
 

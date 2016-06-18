@@ -3,9 +3,10 @@
 # The LCMC tagset
 
 __META_SOURCE_URL__=http://www.lancs.ac.uk/fass/projects/corpus/LCMC/lcmc/lcmc_tagset.htm
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # Catch-all rule
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+*=X
 
 # a          adjective
 # ad        adjective as adverbial
@@ -16,11 +17,11 @@ __META_SOURCE_URL__=http://www.lancs.ac.uk/fass/projects/corpus/LCMC/lcmc/lcmc_t
 # c           conjunction
 # cg         conjunction morpheme
 # d           adverb
-d=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+d=ADV
 # dg         adverb morpheme
 # e           interjection
 # ew        sentential punctuation
-ew=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+ew=PUNCT
 # f            directional locality
 # fg          locality morpheme
 # g           morpheme
@@ -32,7 +33,7 @@ ew=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 # m         numeral
 # mg       numeric morpheme
 # n           common noun
-n=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+n=NOUN
 # ng         noun morpheme
 # nr          personal name
 # ns         place name
@@ -51,7 +52,7 @@ n=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
 # tg          time word morpheme
 # u           auxiliary
 # v           verb
-v=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+v=VERB
 # vd         verb as adverbial
 # vg         verb morpheme
 # vn         verb with nominal function

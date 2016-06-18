@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <name>Morphology</name>
   <description/>
   <version>${version}</version>
@@ -19,72 +20,168 @@
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ</name>
-      <description>Adjectives</description>
+      <description>Adjective</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADP</name>
+      <description>Adposition</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV</name>
-      <description>Adverbs</description>
+      <description>Adverb</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
-      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART</name>
-      <description>Determiners and articles</description>
-      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
-    </typeDescription>
-    <typeDescription>
-      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD</name>
-      <description>Numerals</description>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.AUX</name>
+      <description>Auxiliary verb</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ</name>
-      <description>Conjunctions</description>
+      <description>Conjunction</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
-      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N</name>
-      <description>Nouns</description>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.DET</name>
+      <description>Determiner</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
-      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN</name>
-      <description>Common noun</description>
-      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N</supertypeName>
-    </typeDescription>
-    <typeDescription>
-      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP</name>
-      <description>Noun phrase</description>
-      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N</supertypeName>
-    </typeDescription>
-    <typeDescription>
-      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O</name>
-      <description>Catch-all for other categories such as abbreviations or foreign words</description>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.INTJ</name>
+      <description>Interjection</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
-      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP</name>
-      <description>Prepositions and postpositions</description>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NOUN</name>
+      <description>Noun</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
-      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR</name>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NUM</name>
+      <description>Numeral</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PART</name>
+      <description>Particle</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRON</name>
       <description>Pronoun</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PROPN</name>
+      <description>Proper noun</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNCT</name>
+      <description>Punctuation</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.SCONJ</name>
+      <description>Subordinating conjunction</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.SYM</name>
+      <description>Symbol</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.VERB</name>
+      <description>Verb</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.X</name>
+      <description>Other</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    
+    
+    
+    
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART</name>
+      <description>Determiners and articles.
+
+@Deprecated</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD</name>
+      <description>Numerals
+
+@Deprecated</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N</name>
+      <description>Nouns
+
+@Deprecated</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN</name>
+      <description>Common noun
+
+@Deprecated</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP</name>
+      <description>Proper noun
+
+@Deprecated</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O</name>
+      <description>Catch-all for other categories such as abbreviations or foreign words
+
+@Deprecated</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP</name>
+      <description>Prepositions and postpositions
+
+@Deprecated</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR</name>
+      <description>Pronoun
+
+@Deprecated</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRT</name>
-      <description>Particles</description>
+      <description>Particles
+
+@Deprecated</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC</name>
-      <description>Punctuation marks</description>
+      <description>Punctuation marks
+
+@Deprecated</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V</name>
-      <description>Verbs</description>
+      <description>Verbs
+
+@Deprecated</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>

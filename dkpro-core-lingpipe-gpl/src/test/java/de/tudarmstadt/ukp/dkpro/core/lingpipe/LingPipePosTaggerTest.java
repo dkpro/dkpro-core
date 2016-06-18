@@ -39,20 +39,21 @@ public class LingPipePosTaggerTest
     {
         runTest("en", null, "This is a test .",
                 new String[] { "DT", "BEZ", "AT", "NN", "." },
-                new String[] { "ART", "V", "ART", "NN", "PUNC" });
+                new String[] { "DET", "VERB", "DET", "NOUN", "PUNCT" });
 
         runTest("en", null, "A neural net .", 
                 new String[] { "AT", "JJ", "NN", "." }, 
-                new String[] { "ART", "ADJ", "NN", "PUNC" });
+                new String[] { "DET", "ADJ", "NOUN", "PUNCT" });
 
         runTest("en", null, "John is purchasing oranges .",
                 new String[] { "NP", "BEZ", "VBG", "NNS", "." },
-                new String[] { "NP", "V", "V", "NN", "PUNC" });
+                new String[] { "PROPN", "VERB", "VERB", "NOUN", "PUNCT" });
         
         // This is WRONG tagging. "jumps" is tagged as "NNS"
         JCas jcas = runTest("en", "general-brown", "The quick brown fox jumps over the lazy dog . \n",
                 new String[] { "AT", "JJ", "JJ", "NN", "NNS", "IN", "AT", "JJ", "NN", "." },
-                new String[] { "ART", "ADJ", "ADJ", "NN", "NN", "PP", "ART", "ADJ", "NN", "PUNC" });
+                new String[] { "DET", "ADJ", "ADJ", "NOUN", "NOUN", "ADP", "DET", "ADJ", "NOUN",
+                        "PUNCT" });
 
         String[] brownTags = { "'", "''", "(", ")", "*", ",", "--", ".", ":", "ABL", "ABN", "ABX",
                 "AP", "AP$", "AT", "BE", "BED", "BEDZ", "BEG", "BEM", "BEN", "BER", "BEZ", "CC",
@@ -71,7 +72,8 @@ public class LingPipePosTaggerTest
         
         jcas = runTest("en", "bio-genia", "The quick brown fox jumps over the lazy dog . \n",
                 new String[] { "DT", "RB", "VBN", "NN", "NNS", "IN", "DT", "NN", "NN", "." },                
-                new String[] { "ART", "ADV", "V", "NN", "NN", "PP", "ART", "NN", "NN", "PUNC" });
+                new String[] { "DET", "ADV", "VERB", "NOUN", "NOUN", "ADP", "DET", "NOUN", "NOUN",
+                        "PUNCT" });
 
         String[] ptbTags = { "", "''", "(", ")", ",", "-", ".", ":", "CC", "CD", "CT", "DT", "EX",
                 "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "N", "NN", "NNP", "NNPS", "NNS", "PDT",
@@ -86,7 +88,8 @@ public class LingPipePosTaggerTest
         
         jcas = runTest("en", "bio-medpost", "The quick brown fox jumps over the lazy dog . \n",
                 new String[] { "DD", "NN", "JJ", "NN", "NNS", "II", "DD", "NN", "NN", "." },                
-                new String[] { "ART", "NN", "ADJ", "NN", "NN", "PP", "ART", "NN", "NN", "PUNC" });
+                new String[] { "DET", "NOUN", "ADJ", "NOUN", "NOUN", "ADP", "DET", "NOUN", "NOUN",
+                        "PUNCT" });
         
         String[] medpostTags = { "''", "(", ")", ",", ".", ":", "CC", "CC+", "CS", "CS+", "CSN",
                 "CST", "DB", "DD", "EX", "GE", "II", "II+", "JJ", "JJ+", "JJR", "JJT", "MC", "NN",

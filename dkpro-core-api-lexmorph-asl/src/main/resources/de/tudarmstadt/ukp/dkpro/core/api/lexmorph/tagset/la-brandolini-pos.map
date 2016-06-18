@@ -5,6 +5,7 @@
 # Gabriele Brandolini
 #
 # Source: extracted from model file using TT4J
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # ABBR
 # ADJ
@@ -56,4 +57,4 @@
 # V:SUB
 # V:SUP:abl
 # V:SUP:acc
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS
+*=POS

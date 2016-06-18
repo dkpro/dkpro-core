@@ -33,7 +33,7 @@ ROOT
    constituentType: "VROOT"
    children: FSArray
 [``]
-PUNC
+PUNCT
    sofa: _InitialView
    begin: 0
    end: 2
@@ -60,7 +60,7 @@ Token
       begin: 0
       end: 2
       value: "--"
-   pos: PUNC
+   pos: PUNCT
       sofa: _InitialView
       begin: 0
       end: 2
@@ -99,7 +99,7 @@ Constituent
    children: FSArray
    syntacticFunction: "SB"
 [Ross]
-NP
+PROPN
    sofa: _InitialView
    begin: 3
    end: 7
@@ -139,13 +139,13 @@ Token
       begin: 3
       end: 7
       value: "Ross"
-   pos: NP
+   pos: PROPN
       sofa: _InitialView
       begin: 3
       end: 7
       PosValue: "NE"
 [Perot]
-NP
+PROPN
    sofa: _InitialView
    begin: 8
    end: 13
@@ -185,13 +185,13 @@ Token
       begin: 8
       end: 13
       value: "Perot"
-   pos: NP
+   pos: PROPN
       sofa: _InitialView
       begin: 8
       end: 13
       PosValue: "NE"
 [wäre]
-V
+VERB
    sofa: _InitialView
    begin: 14
    end: 18
@@ -224,7 +224,7 @@ Token
       begin: 14
       end: 18
       value: "sein"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 14
       end: 18
@@ -289,7 +289,7 @@ Constituent
    children: FSArray
    syntacticFunction: "PD"
 [ein]
-ART
+DET
    sofa: _InitialView
    begin: 30
    end: 33
@@ -329,7 +329,7 @@ Token
       begin: 30
       end: 33
       value: "ein"
-   pos: ART
+   pos: DET
       sofa: _InitialView
       begin: 30
       end: 33
@@ -381,7 +381,7 @@ Token
       end: 44
       PosValue: "ADJA"
 [Diktator]
-NN
+NOUN
    sofa: _InitialView
    begin: 45
    end: 53
@@ -421,13 +421,13 @@ Token
       begin: 45
       end: 53
       value: "Diktator"
-   pos: NN
+   pos: NOUN
       sofa: _InitialView
       begin: 45
       end: 53
       PosValue: "NN"
 ['']
-PUNC
+PUNCT
    sofa: _InitialView
    begin: 54
    end: 56
@@ -454,7 +454,7 @@ Token
       begin: 54
       end: 56
       value: "--"
-   pos: PUNC
+   pos: PUNCT
       sofa: _InitialView
       begin: 54
       end: 56

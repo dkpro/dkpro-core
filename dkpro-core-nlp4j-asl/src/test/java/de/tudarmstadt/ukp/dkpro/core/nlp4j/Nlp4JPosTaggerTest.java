@@ -46,7 +46,7 @@ public class Nlp4JPosTaggerTest
     {
         JCas jcas = runTest("en", null, "This is a test .",
                 new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
-                new String[] { "ART",  "V",   "ART", "NN",   "PUNC" });
+                new String[] { "DET",  "VERB",   "DET", "NOUN",   "PUNCT" });
 
         AssertAnnotations.assertTagset(POS.class, "ptb-emory", ENGLISH_POS_TAGS, jcas);
         AssertAnnotations.assertTagsetMapping(POS.class, "ptb-emory", ENGLISH_POS_UNMAPPED, jcas);
@@ -58,15 +58,15 @@ public class Nlp4JPosTaggerTest
     {
         runTest("en", null, "This is a test .",
                 new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
-                new String[] { "ART",  "V",   "ART", "NN",   "PUNC" });
+                new String[] { "DET",  "VERB",   "DET", "NOUN",   "PUNCT" });
 
         runTest("en", null, "A neural net .",
                 new String[] { "DT",  "JJ",     "NN",  "." },
-                new String[] { "ART", "ADJ",    "NN",  "PUNC" });
+                new String[] { "DET", "ADJ",    "NOUN",  "PUNCT" });
 
         runTest("en", null, "John is purchasing oranges .",
                 new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
-                new String[] { "NP",   "V",   "V",        "NN",     "PUNC" });
+                new String[] { "PROPN",   "VERB",   "VERB",        "NOUN",     "PUNCT" });
     }
     
     private JCas runTest(String language, String variant, String testDocument, String[] tags,

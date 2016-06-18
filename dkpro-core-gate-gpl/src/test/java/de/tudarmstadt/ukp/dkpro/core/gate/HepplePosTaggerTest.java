@@ -40,15 +40,15 @@ public class HepplePosTaggerTest
 	{
         runTest("en", null, "This is a test . \n",
 				new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
-				new String[] { "ART",  "V",   "ART", "NN",   "PUNC" });
+				new String[] { "DET", "VERB", "DET", "NOUN", "PUNCT" });
 
         runTest("en", null, "A neural net . \n",
         		new String[] { "DT",  "NN", "JJ",  "." },
-        		new String[] { "ART", "NN", "ADJ", "PUNC" });
+        		new String[] { "DET", "NOUN", "ADJ", "PUNCT" });
 
         runTest("en", null, "John is purchasing oranges . \n",
-        		new String[] { "NNP", "VBZ", "VBG", "NNS", "." },
-        		new String[] { "NP",  "V",   "V",   "NN",  "PUNC" });
+        		new String[] { "NNP",  "VBZ",  "VBG",  "NNS",  "." },
+        		new String[] { "PROPN", "VERB", "VERB", "NOUN", "PUNCT" });
     }
 
 	private void runTest(String language, String variant, String testDocument, String[] tags,

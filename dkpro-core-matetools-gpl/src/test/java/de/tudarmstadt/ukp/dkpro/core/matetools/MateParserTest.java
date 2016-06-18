@@ -162,8 +162,9 @@ public class MateParserTest
                 "[126,134]Dependency(obj) D[126,134](possible) G[122,125](que)",
                 "[135,136]Dependency(ponct) D[135,136](.) G[5,10](avons)" };
 
-        String[] posMapped = { "PR", "V", "NN", "PP", "NN", "PP", "NN", "ADV", "ADJ",
-                "PR", "V", "ART", "NN", "CONJ", "ART", "ADJ", "NN", "CONJ", "CONJ", "ADJ", "PUNC" };
+        String[] posMapped = { "PRON", "VERB", "NOUN", "ADP", "NOUN", "ADP", "NOUN", "ADV", "ADJ",
+                "PRON", "VERB", "DET", "NOUN", "CONJ", "DET", "ADJ", "NOUN", "CONJ", "CONJ", "ADJ",
+                "PUNCT" };
 
         String[] posOriginal = { "CLS", "V", "NC", "P", "NC", "P", "NC", "ADV", "ADJ",
                 "PROREL", "V", "DET", "NC", "CS", "DET", "ADJ", "NC", "CC", "CS", "ADJ", "PONCT" };
@@ -248,8 +249,9 @@ public class MateParserTest
                 "P", "N_SING", "ADJ", "P", "N_SING", "N_SING", "CON", "N_SING", "N_PL", "CON",
                 "ADJ", "V_COP", "N_SING", "V_PRS", "DELM" };
 
-        String[] mappedPos = { "PR", "PP", "N", "N", "N", "ADV", "ADJ", "CONJ", "ADJ", "PP", "N",
-                "ADJ", "PP", "N", "N", "CONJ", "N", "N", "CONJ", "ADJ", "V", "N", "V", "PUNC" };
+        String[] mappedPos = { "PRON", "ADP", "NOUN", "NOUN", "NOUN", "ADV", "ADJ", "CONJ", "ADJ",
+                "ADP", "NOUN", "ADJ", "ADP", "NOUN", "NOUN", "CONJ", "NOUN", "NOUN", "CONJ", "ADJ",
+                "VERB", "NOUN", "VERB", "PUNCT" };
 
         AssertAnnotations.assertPOS(mappedPos, origPos, JCasUtil.select(jcas, POS.class));
         AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));

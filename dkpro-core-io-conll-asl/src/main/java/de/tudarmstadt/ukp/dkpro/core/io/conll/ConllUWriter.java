@@ -31,6 +31,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.TypeCapability;
@@ -187,7 +188,7 @@ public class ConllUWriter
 
             // Dependencies
             for (Dependency rel : selectCovered(Dependency.class, sentence)) {
-                if (rel.getFlavor() == null || DependencyFlavor.BASIC.equals(rel.getFlavor())) {
+                if (StringUtils.isBlank(rel.getFlavor()) || DependencyFlavor.BASIC.equals(rel.getFlavor())) {
                     ctokens.get(rel.getDependent()).deprel = rel;
                 }
                 else {
@@ -208,7 +209,7 @@ public class ConllUWriter
                     POS posAnno = row.token.getPos();
                     pos = posAnno.getPosValue();
                     cpos = dkpro2ud.get(posAnno.getClass());
-                    if (cpos == null) {
+                    if (StringUtils.isBlank(cpos)) {
                         cpos = pos;
                     }
                 }

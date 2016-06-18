@@ -126,8 +126,8 @@ public class StanfordParserTest
         String[] posOriginal = { "PPER", "VVFIN", "ART", "ADV", "ADJA", "NN", "$,", "PRELS", "ADV",
                 "PIDAT", "NN", "KON", "NN", "VVFIN", "$." };
 
-        String[] posMapped = { "PR", "V", "ART", "ADV", "ADJ", "NN", "PUNC", "PR", "ADV", "PR",
-                "NN", "CONJ", "NN", "V", "PUNC" };
+        String[] posMapped = { "PRON", "VERB", "DET", "ADV", "ADJ", "NOUN", "PUNCT", "PRON", "ADV",
+                "PRON", "NOUN", "CONJ", "NOUN", "VERB", "PUNCT" };
 
         String[] dependencies = {/** No dependencies for German */ };
 
@@ -169,8 +169,8 @@ public class StanfordParserTest
         String[] posOriginal = { "PPER", "VVFIN", "ART", "ADV", "ADJA", "NN", "$,", "PRELS", "ADV",
                 "PIDAT", "NN", "KON", "NN", "VVFIN", "$." };
 
-        String[] posMapped = { "PR", "V", "ART", "ADV", "ADJ", "NN", "PUNC", "PR", "ADV", "PR",
-                "NN", "CONJ", "NN", "V", "PUNC" };
+        String[] posMapped = { "PRON", "VERB", "DET", "ADV", "ADJ", "NOUN", "PUNCT", "PRON", "ADV",
+                "PRON", "NOUN", "CONJ", "NOUN", "VERB", "PUNCT" };
 
         String[] dependencies = { /** No dependencies for German */ };
 
@@ -224,8 +224,8 @@ public class StanfordParserTest
                 "[ 86, 98]CONJ(conj_and) D[86,98](dependencies) G[69,81](constituents)",
                 "[102,110]PREP(prep_as) D[102,110](possible) G[52,60](contains)" };
 
-        String[] posMapped = { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC", "ART", "V", "PP",
-                "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
+        String[] posMapped = { "PRON", "VERB", "DET", "ADV", "VERB", "NOUN", "NOUN", "PUNCT", "DET",
+                "VERB", "ADP", "ADJ", "NOUN", "CONJ", "NOUN", "ADP", "ADJ", "PUNCT" };
 
         String[] posOriginal = { "PRP", "VBP", "DT", "RB", "VBN", "NN", "NN", ",", "WDT", "VBZ",
                 "IN", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
@@ -281,8 +281,8 @@ public class StanfordParserTest
                 "[ 86, 98]CONJ(conj_and) D[86,98](dependencies) G[69,81](constituents)",
                 "[102,110]PREP(prep_as) D[102,110](possible) G[52,60](contains)" };
 
-        String[] posMapped = { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC", "ART", "V", "PP",
-                "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
+        String[] posMapped = { "PRON", "VERB", "DET", "ADV", "VERB", "NOUN", "NOUN", "PUNCT", "DET",
+                "VERB", "ADP", "ADJ", "NOUN", "CONJ", "NOUN", "ADP", "ADJ", "PUNCT" };
 
         String[] posOriginal = { "PRP", "VBP", "DT", "RB", "VBN", "NN", "NN", ",", "WDT", "VBZ",
                 "IN", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
@@ -338,11 +338,11 @@ public class StanfordParserTest
                 "[ 86, 98]CONJ(conj_and) D[86,98](dependencies) G[69,81](constituents)",
                 "[102,110]PREP(prep_as) D[102,110](possible) G[52,60](contains)" };
 
-        String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC",
-                "ART", "V", "ADV", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
+        String[] posMapped = { "PRON", "VERB", "DET", "ADV", "VERB", "NOUN", "NOUN", "PUNCT", "DET",
+                "VERB", "ADV", "ADJ", "NOUN", "CONJ", "NOUN", "ADP", "ADJ", "PUNCT" };
 
-        String[] posOriginal = new String[] { "PRP", "VBP", "DT", "RB", "VBN", "NN", "NN", ",",
-                "WDT", "VBZ", "RB", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
+        String[] posOriginal = { "PRP", "VBP", "DT", "RB", "VBN", "NN", "NN", ",", "WDT", "VBZ",
+                "RB", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
 
         String pennTree = "(ROOT (S (NP (PRP We)) (VP (VBP need) (NP (NP (DT a) (ADJP (RB very) "
                 + "(VBN complicated)) (NN example) (NN sentence)) (, ,) (SBAR (WHNP (WDT which)) "
@@ -395,8 +395,8 @@ public class StanfordParserTest
                 "[ 86, 98]CONJ(conj_and) D[86,98](dependencies) G[69,81](constituents)",
                 "[102,110]PREP(prep_as) D[102,110](possible) G[52,60](contains)" };
 
-        String[] posMapped = { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC", "ART", "V", "ADV",
-                "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
+        String[] posMapped = { "PRON", "VERB", "DET", "ADV", "VERB", "NOUN", "NOUN", "PUNCT", "DET",
+                "VERB", "ADV", "ADJ", "NOUN", "CONJ", "NOUN", "ADP", "ADJ", "PUNCT" };
 
         String[] posOriginal = { "PRP", "VBP", "DT", "RB", "VBN", "NN", "NN", ",", "WDT", "VBZ",
                 "RB", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
@@ -451,8 +451,8 @@ public class StanfordParserTest
                 "[ 86, 98]CONJ(conj_and) D[86,98](dependencies) G[69,81](constituents)",
                 "[102,110]PREP(prep_as) D[102,110](possible) G[69,81](constituents)" };
 
-        String[] posMapped = { "PR", "V", "ART", "ADV", "ADJ", "NN", "NN", "PUNC", "ART", "V",
-                "PP", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
+        String[] posMapped = { "PRON", "VERB", "DET", "ADV", "ADJ", "NOUN", "NOUN", "PUNCT", "DET",
+                "VERB", "ADP", "ADJ", "NOUN", "CONJ", "NOUN", "ADP", "ADJ", "PUNCT" };
 
         String[] posOriginal = { "PRP", "VBP", "DT", "RB", "JJ", "NN", "NN", ",", "WDT", "VBZ",
                 "IN", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
@@ -507,8 +507,8 @@ public class StanfordParserTest
                 "[ 86, 98]CONJ(conj_and) D[86,98](dependencies) G[69,81](constituents)",
                 "[102,110]PREP(prep_as) D[102,110](possible) G[52,60](contains)" };
 
-        String[] posMapped = { "PR", "V", "ART", "ADV", "ADJ", "NN", "NN", "PUNC", "ART", "V",
-                "PP", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
+        String[] posMapped = { "PRON", "VERB", "DET", "ADV", "ADJ", "NOUN", "NOUN", "PUNCT", "DET",
+                "VERB", "ADP", "ADJ", "NOUN", "CONJ", "NOUN", "ADP", "ADJ", "PUNCT" };
 
         String[] posOriginal = { "PRP", "VBP", "DT", "RB", "JJ", "NN", "NN", ",", "WDT", "VBZ",
                 "IN", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
@@ -564,8 +564,8 @@ public class StanfordParserTest
                 "[ 86, 98]CONJ(conj_and) D[86,98](dependencies) G[69,81](constituents)",
                 "[102,110]PREP(prep_as) D[102,110](possible) G[52,60](contains)"};
 
-        String[] posMapped = { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC", "ART", "V", "ADV",
-                "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
+        String[] posMapped = { "PRON", "VERB", "DET", "ADV", "VERB", "NOUN", "NOUN", "PUNCT", "DET",
+                "VERB", "ADV", "ADJ", "NOUN", "CONJ", "NOUN", "ADP", "ADJ", "PUNCT" };
 
         String[] posOriginal = { "PRP", "VBP", "DT", "RB", "VBN", "NN", "NN", ",", "WDT", "VBZ",
                 "RB", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
@@ -669,8 +669,9 @@ public class StanfordParserTest
 
         String[] dependencies = { };
 
-        String[] posMapped = { "V", "ART", "NN", "PP", "NN", "ADV", "ADJ", "PUNC", "PR", "V",
-                "ART", "ADJ", "NN", "PP", "NN", "CONJ", "NN", "CONJ", "V", "ADJ", "PUNC" };
+        String[] posMapped = { "VERB", "DET", "NOUN", "ADP", "NOUN", "ADV", "ADJ", "PUNCT", "PRON",
+                "VERB", "DET", "ADJ", "NOUN", "ADP", "NOUN", "CONJ", "NOUN", "CONJ", "VERB", "ADJ",
+                "PUNCT" };
 
         String[] posOriginal = { "vmip000", "di0000", "nc0s000", "sp000", "nc0s000", "rg",
                 "aq0000", "fc", "pr000000", "vmip000", "da0000", "aq0000", "nc0s000", "sp000",
@@ -760,8 +761,9 @@ public class StanfordParserTest
 
         String[] dependencies = {/** No dependencies for French */ };
 
-        String[] posMapped = { "PR", "V", "NN", "PP", "ART", "NN", "PP", "N", "ADV", "V", "PUNC",
-                "PR", "V", "ART", "NN", "CONJ", "ART", "ADJ", "NN", "CONJ", "CONJ", "ADJ", "PUNC" };
+        String[] posMapped = { "PRON", "VERB", "NOUN", "ADP", "DET", "NOUN", "ADP", "NOUN", "ADV",
+                "VERB", "PUNCT", "PRON", "VERB", "DET", "NOUN", "CONJ", "DET", "ADJ", "NOUN",
+                "CONJ", "CONJ", "ADJ", "PUNCT" };
 
         String[] posOriginal = { "CLS", "V", "NC", "P", "DET", "NC", "P", "N", "ADV", "VPP",
                 "PUNC", "PROREL", "V", "DET", "NC", "CS", "DET", "ADJ", "NC", "CC", "CS", "ADJ",
@@ -817,8 +819,8 @@ public class StanfordParserTest
         String[] constituentOriginal = { "AP 29,37", "NP 0,53", "NP 17,37", "NP 43,53", "PP 14,37",
                 "PP 26,37", "PP 38,53", "ROOT 0,55", "SENT 0,55" };
 
-        String[] posMapped = { "ART", "NN", "PP", "ART", "NN", "PP", "ADJ", "PP", "ART", "NN",
-                "PUNC" };
+        String[] posMapped = { "DET", "NOUN", "ADP", "DET", "NOUN", "ADP", "ADJ", "ADP", "DET",
+                "NOUN", "PUNCT" };
 
         String[] posOriginal = { "DET", "NC", "P", "DET", "NC", "P", "ADJ", "P", "DET", "NC",
                 "PUNC" };
@@ -868,8 +870,8 @@ public class StanfordParserTest
                 "[ 41, 42]MARK(mark) D[41,42](的) G[37,40](尽可能)",
                 "[ 43, 45]CONJ(conj) D[43,45](依赖) G[26,28](包含)" };
 
-        String[] posMapped = { "PR", "V", "CARD", "ADJ", "ADJ", "PRT", "NN", "ADJ", "NN", "V",
-                "CARD", "NN", "CONJ", "ADJ", "PRT", "V", "PUNC" };
+        String[] posMapped = { "PRON", "VERB", "NUM", "ADJ", "ADJ", "PART", "NOUN", "ADJ", "NOUN",
+                "VERB", "NUM", "NOUN", "CONJ", "ADJ", "PART", "VERB", "PUNCT" };
 
         String[] posOriginal = { "PN", "VV", "CD", "AD", "JJ", "DEG", "NN", "AD", "NN", "VV", "CD",
                 "NN", "CC", "AD", "DEV", "VV", "PU" };
@@ -944,8 +946,8 @@ public class StanfordParserTest
                 "[ 41, 42]MARK(mark) D[41,42](的) G[26,28](包含)",
                 "[ 43, 45]DOBJ(dobj) D[43,45](依赖) G[3,5](需要)" };
 
-        String[] posMapped = { "PR", "V", "CARD", "ADJ", "V", "PRT", "NN", "ADJ", "NN", "V",
-                "CARD", "NN", "CONJ", "ADJ", "PRT", "NN", "PUNC" };
+        String[] posMapped = { "PRON", "VERB", "NUM", "ADJ", "VERB", "PART", "NOUN", "ADJ", "NOUN",
+                "VERB", "NUM", "NOUN", "CONJ", "ADJ", "PART", "NOUN", "PUNCT" };
 
         String[] posOriginal = { "PN", "VV", "CD", "AD", "VA", "DEC", "NN", "AD", "NN", "VV", "CD",
                 "NN", "CC", "AD", "DEC", "NN", "PU" };
@@ -1006,8 +1008,8 @@ public class StanfordParserTest
                 + "(NP (NN جملة)) (SBAR (S (VP (VBP تحتوي) (PP (IN على) (NP (NN أكبر) (NP (NP (NN قدر) "
                 + "(JJ ممكن)) (PP (IN من) (NP (DTNN العناصر) (CC و) (DTNN الروابط)))))))))))) (PUNC .)))";
 
-        String[] posMapped = { "V", "NN", "ADJ", "NN", "PP", "NN", "V", "PP", "NN", "NN", "ADJ",
-                "PP", "NN", "CONJ", "NN", "PUNC" };
+        String[] posMapped = { "VERB", "NOUN", "ADJ", "NOUN", "ADP", "NOUN", "VERB", "ADP", "NOUN",
+                "NOUN", "ADJ", "ADP", "NOUN", "CONJ", "NOUN", "PUNCT" };
 
         String[] posOriginal = { "VBP", "NN", "JJ", "NN", "IN", "NN", "VBP", "IN", "NN", "NN",
                 "JJ", "IN", "DTNN", "CC", "DTNN", "PUNC" };

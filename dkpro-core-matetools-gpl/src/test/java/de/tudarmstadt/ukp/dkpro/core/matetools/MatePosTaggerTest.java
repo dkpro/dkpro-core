@@ -43,8 +43,8 @@ public class MatePosTaggerTest
         String[] posOriginal = { "PPER", "VVFIN", "ART", "ADV", "ADJA", "NN", "$,", "PRELS", "ADV",
                 "PIAT", "NN", "KON", "NN", "VVFIN", "$." };
 
-        String[] posMapped = { "PR", "V", "ART", "ADV", "ADJ", "NN", "PUNC", "PR", "ADV", "PR",
-                "NN", "CONJ", "NN", "V", "PUNC" };
+        String[] posMapped = { "PRON", "VERB", "DET", "ADV", "ADJ", "NOUN", "PUNCT", "PRON", "ADV",
+                "PRON", "NOUN", "CONJ", "NOUN", "VERB", "PUNCT" };
 
         String[] posTags = { "$(", "$,", "$.", "ADJA", "ADJD", "ADV", "APPO", "APPR", "APPRART",
                 "APZR", "ART", "CARD", "END", "FM", "ITJ", "KOKOM", "KON", "KOUI", "KOUS", "MID",
@@ -69,8 +69,8 @@ public class MatePosTaggerTest
         String[] posOriginal = { "PRP", "VBP", "DT", "RB", "JJ", "NN", "NN", ",", "WDT", "VBZ",
                 "IN", "DT", "NNS", "CC", "NNS", "IN", "JJ", "." };
 
-        String[] posMapped = { "PR", "V", "ART", "ADV", "ADJ", "NN", "NN", "PUNC", "ART", "V",
-                "PP", "ART", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
+        String[] posMapped = { "PRON", "VERB", "DET", "ADV", "ADJ", "NOUN", "NOUN", "PUNCT", "DET",
+                "VERB", "ADP", "DET", "NOUN", "CONJ", "NOUN", "ADP", "ADJ", "PUNCT" };
 
         String[] posTags = { "#", "$", "''", "(", ")", ",", ".", ":", "CC", "CD", "DT", "END",
                 "EX", "FW", "HYPH", "IN", "JJ", "JJR", "JJS", "LS", "MD", "MID", "NIL", "NN",
@@ -90,8 +90,9 @@ public class MatePosTaggerTest
                 + "compliqué, qui contient des constituants que de nombreuses dépendances et que "
                 + "possible .");
 
-        String[] posMapped = { "PR", "V", "NN", "PP", "NN", "PP", "NN", "ADV", "ADJ", "PR", "V",
-                "ART", "NN", "CONJ", "ART", "ADJ", "NN", "CONJ", "CONJ", "ADJ", "PUNC" };
+        String[] posMapped = { "PRON", "VERB", "NOUN", "ADP", "NOUN", "ADP", "NOUN", "ADV", "ADJ",
+                "PRON", "VERB", "DET", "NOUN", "CONJ", "DET", "ADJ", "NOUN", "CONJ", "CONJ", "ADJ",
+                "PUNCT" };
 
         String[] posOriginal = { "CLS", "V", "NC", "P", "NC", "P", "NC", "ADV", "ADJ", "PROREL",
                 "V", "DET", "NC", "CS", "DET", "ADJ", "NC", "CC", "CS", "ADJ", "PONCT" };

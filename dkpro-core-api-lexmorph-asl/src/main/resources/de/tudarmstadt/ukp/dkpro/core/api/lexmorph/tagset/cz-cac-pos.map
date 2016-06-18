@@ -6,24 +6,24 @@ __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 # A   Adjective
 A=ADJ
 # C   Numeral
-C=CARD
+C=NUM
 # D   Adverb
 D=ADV
 # I   Interjection
-I=O
+I=X
 # J   Conjunction
 J=CONJ
 # N   Noun
-N=N
+N=NOUN
 # P   Pronoun
-P=PR
+P=PRON
 # V   Verb
-V=V
+V=VERB
 # R   Preposition
-R=PP
+R=ADP
 # T   Particle
-T=O
+T=X
 # X   Unknown, Not Determined, Unclassifiable
-X=O
+X=X
 # Z   Punctuation (also used for the Sentence Boundary token)
-Z=PUNC
+Z=PUNCT

@@ -9,9 +9,9 @@ A=ADJ
 # AN    normal adjective
 AN=ADJ
 # AC    cardinals
-AC=CARD
+AC=NUM
 # AO    ordinals
-AO=CARD
+AO=NUM
 # C     conjunction
 C=CONJ
 # CC    coordinating conjunction
@@ -19,52 +19,52 @@ CC=CONJ
 # CS    subordinating conjunction
 CS=CONJ
 # I     interjection
-I=O
+I=X
 # N     noun
-N=N
+N=NOUN
 # NP    proper noun
-N=NP
+N=PROPN
 # NC    common noun
-NC=NN
+NC=NOUN
 # P     pronoun
-P=PR
+P=PRON
 # PP    personal pronoun
-PP=PR
+PP=PRON
 # PD    demonstrative pronoun
-PD=PR
+PD=PRON
 # PI    indefinite pronoun
-PI=PR
+PI=PRON
 # PT    interrogative/relative pronoun
-PT=PR
+PT=PRON
 # PC    reciprocal pronoun
-PC=PR
+PC=PRON
 # PO    possessive pronoun
-PO=PR
+PO=PRON
 # RG    adverb
 RG=ADV
 # SP    preposition
-SP=PP
+SP=ADP
 # U     unique
-U=O
+U=X
 # V     verb
-V=V
+V=VERB
 # VA    main verb
-VA=V
+VA=VERB
 # VE    medial verb
-VE=V
+VE=VERB
 # X     extra-linguistic units
-X=O
+X=X
 # XA    abbreviation
-XA=O
+XA=X
 # XF    foreign word
-XF=O
+XF=X
 # XP    punctuation
-XP=PUNC
+XP=PUNCT
 # XR    formulae
-XR=O
+XR=X
 # XS    symbol
-XS=PUNC
+XS=PUNCT
 # XX    other
-XX=O
+XX=X
 # Catch-all
 *=POS

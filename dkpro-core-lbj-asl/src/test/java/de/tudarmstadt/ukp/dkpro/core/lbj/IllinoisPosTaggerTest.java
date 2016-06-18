@@ -37,15 +37,15 @@ public class IllinoisPosTaggerTest
     {
         runTest("en", null, "This is a test . \n",
                 new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
-                new String[] { "ART",  "V",   "ART", "NN",   "PUNC" });
+                new String[] { "DET", "VERB", "DET", "NOUN", "PUNCT" });
 
         runTest("en", null, "A neural net . \n",
                 new String[] { "DT",  "NN",     "NN",  "." },
-                new String[] { "ART", "NN",    "NN",  "PUNC" });
+                new String[] { "DET", "NOUN",    "NOUN",  "PUNCT" });
 
         JCas jcas = runTest("en", null, "John is purchasing oranges . \n",
                 new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
-                new String[] { "NP",   "V",   "V",        "NN",     "PUNC" });
+                new String[] { "PROPN",   "VERB",   "VERB",        "NOUN",     "PUNCT" });
         
         String[] posTags = { "#", "$", "''", ",", "-LRB-", "-RRB-", ".", ":", "CC", "CD", "DT",
                 "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNP", "NNPS", "NNS", "PDT",

@@ -1,187 +1,188 @@
 # Brown
 
 __META_SOURCE_URL__=http://clu.uni.no/icame/brown/bcm.html#bc6
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # sentence closer (. ; ? !)
-.=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+.=PUNCT
 # left paren
-(=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+(=X
 # right paren
-)=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+)=X
 # not, n't
-#*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+#*=X
 # dash
--=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+-=X
 # comma
-,=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+,=X
 # colon
-\:=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+\:=X
 # pre-qualifier (quite, rather)
-ABL=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+ABL=ADV
 # pre-quantifier (half, all)
-ABN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+ABN=ADV
 # pre-quantifier (both)
-ABX=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+ABX=ADV
 # post-determiner (many, several, next)
-AP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+AP=DET
 # article (a, the, no)
-AT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+AT=DET
 # be
-BE=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+BE=VERB
 # were
-BED=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+BED=VERB
 # was
-BEDZ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+BEDZ=VERB
 # being
-BEG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+BEG=VERB
 # am
-BEM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+BEM=VERB
 # been
-BEN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+BEN=VERB
 # are, art
-BER=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+BER=VERB
 # is
-BEZ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+BEZ=VERB
 # coordinating conjunction (and, or)
-CC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+CC=CONJ
 # cardinal numeral (one, two, 2, etc.)
-CD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
+CD=NUM
 # subordinating conjunction (if, although)
-CS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+CS=CONJ
 # do
-DO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+DO=VERB
 # did
-DOD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+DOD=VERB
 # does
-DOZ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+DOZ=VERB
 # singular determiner (this, that)
-DT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+DT=DET
 # singular or plural determiner/quantifier (some, any)
-DTI=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+DTI=DET
 # plural determiner (these, those)
-DTS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+DTS=DET
 # determiner/double conjunction (either)
-DTX=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+DTX=DET
 # existentil there
-EX=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+EX=ADV
 # foreign word (hyphenated before regular tag)
-FW=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+FW=X
 # word occurring in headline (hyphenated after regular tag)
-HL=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+HL=X
 # have
-HV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+HV=VERB
 # had (past tense)
-HVD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+HVD=VERB
 # having
-HVG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+HVG=VERB
 # had (past participle)
-HVN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+HVN=VERB
 # has
-HVZ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+HVZ=VERB
 # preposition
-IN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+IN=ADP
 # adjective
-JJ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+JJ=ADJ
 # comparative adjective
-JJR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+JJR=ADJ
 # semantically superlative adjective (chief, top)
-JJS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+JJS=ADJ
 # morphologically superlative adjective (biggest)
-JJT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+JJT=ADJ
 # modal auxiliary (can, should, will)
-MD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+MD=VERB
 # cited word (hyphenated after regular tag)
-NC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+NC=X
 # singular or mass noun
-NN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+NN=NOUN
 # possessive singular noun
-NN$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+NN$=NOUN
 # plural noun
-NNS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+NNS=NOUN
 # possessive plural noun
-NNS$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+NNS$=NOUN
 # proper noun or part of name phrase     
-NP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
+NP=PROPN
 # possessive proper noun
-NP$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
+NP$=PROPN
 # plural proper noun
-NPS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
+NPS=PROPN
 # possessive plural proper noun
-NPS$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
+NPS$=PROPN
 # adverbial noun (home, today, west)
-NR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+NR=ADV
 # plural adverbial noun
-NRS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+NRS=NOUN
 # ordinal numeral (first, 2nd)
-OD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
+OD=NUM
 # nominal pronoun (everybody, nothing)
-PN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PN=PRON
 # possessive nominal pronoun
-PN$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PN$=PRON
 # possessive personal pronoun (my, our)
-PP$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PP$=PRON
 # second (nominal) possessive pronoun (mine, ours)
-PP$$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PP$$=PRON
 # singular reflexive/intensive personal pronoun (myself)
-PPL=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PPL=PRON
 # plural reflexive/intensive personal pronoun (ourselves)
-PPLS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PPLS=PRON
 # objective personal pronoun (me, him, it, them)
-PPO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PPO=PRON
 # 3rd. singular nominative pronoun (he, she, it, one)
-PPS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PPS=PRON
 # other nominative personal pronoun (I, we, they, you)
-PPSS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PPSS=PRON
 # qualifier (very, fairly)
-QL=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+QL=ADV
 # post-qualifier (enough, indeed)
-QLP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+QLP=ADV
 # adverb
-RB=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+RB=ADV
 # comparative adverb
-RBR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+RBR=ADV
 # superlative adverb
-RBT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+RBT=ADV
 # nominal adverb (here then, indoors)
-RN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+RN=ADV
 # adverb/particle (about, off, up)
-RP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+RP=ADV
 # word occurring in title (hyphenated after regular tag)
-TL=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+TL=X
 # infinitive marker to
-TO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+TO=ADP
 # interjection, exclamation
-UH=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRT
+UH=PART
 # verb, base form
-VB=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VB=VERB
 # verb, past tense
-VBD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VBD=VERB
 # verb, present participle/gerund
-VBG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VBG=VERB
 # verb, past participle
-VBN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VBN=VERB
 # verb, 3rd. singular present
-VBZ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VBZ=VERB
 # wh- determiner (what, which)
-WDT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+WDT=DET
 # possessive wh- pronoun (whose)
-WP$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+WP$=PRON
 # objective wh- pronoun (whom, which, that)
-WPO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+WPO=PRON
 # nominative wh- pronoun (who, which, that)
-WPS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+WPS=PRON
 # wh- qualifier (how)
-WQL=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+WQL=ADV
 # wh- adverb (how, where, when)
-WRB=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+WRB=ADV
 
 # The following tags appear in the NLTK Brown Corpus (?) but are not part of the 
 # regular Brown corpus tagset (http://clu.uni.no/icame/brown/bcm.html#bc6)
-pct=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
-RB$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
-CD$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
-NEG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
-NNSG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N
-NR$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N
+pct=PUNCT
+RB$=ADV
+CD$=NUM
+NEG=ADV
+NNSG=NOUN
+NR$=NOUN
 
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+*=X

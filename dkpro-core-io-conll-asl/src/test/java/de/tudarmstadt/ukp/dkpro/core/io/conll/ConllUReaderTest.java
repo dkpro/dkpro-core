@@ -52,8 +52,8 @@ public class ConllUReaderTest
                 "They buy and sell books.",
                 "I have not a clue." };
 
-        String[] posMapped = { "POS", "V", "CONJ", "V", "NN", "PUNC", "POS", "V", "ADV", "ART",
-                "NN", "PUNC" };
+        String[] posMapped = { "POS", "VERB", "CONJ", "VERB", "NOUN", "PUNCT", "POS", "VERB", "ADV",
+                "DET", "NOUN", "PUNCT" };
 
         String[] posOriginal = { "PRN", "VB", "CC", "VB", "NNS", ".", "PRN", "VB", "RB", "DT", "NN",
                 "." };

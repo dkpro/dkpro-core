@@ -106,23 +106,24 @@ public class Conll2000ReaderTest
                 "[510,534]NC(NP) (his Mansion House speech)",
                 "[535,548]NC(NP) (last Thursday)" };
 
-        String[] posMapped = new String[] { "NN", "PP", "ART", "NN", "V", "ADV", "V", "PP", "V",
-                "ART", "ADJ", "NN", "PP", "NN", "NN", "PP", "NP", "PUNC", "ADJ", "PP", "NN", "NN",
-                "PUNC", "V", "PP", "V", "ART", "ADJ", "NN", "PP", "NP", "CONJ", "NP", "O", "ADJ",
-                "NN", "PUNC", "NP", "PP", "ART", "NP", "NP", "NP", "O", "V", "NN", "PP", "ART",
-                "NN", "ADJ", "NN", "V", "V", "PP", "V", "ART", "NN", "PP", "NN", "PP", "ART",
-                "ADJ", "NN", "PUNC", "CONJ", "NN", "V", "V", "NN", "PP", "NN", "V", "V", "V", "PP",
-                "ART", "NN", "O", "NN", "PP", "V", "ART", "ADJ", "NN", "NN", "PP", "PR", "NP",
-                "NP", "NN", "ADJ", "NP", "PUNC" };
+        String[] posMapped = { "NOUN", "ADP", "DET", "NOUN", "VERB", "ADV", "VERB", "ADP", "VERB",
+                "DET", "ADJ", "NOUN", "ADP", "NOUN", "NOUN", "ADP", "PROPN", "PUNCT", "ADJ", "ADP",
+                "NOUN", "NOUN", "PUNCT", "VERB", "ADP", "VERB", "DET", "ADJ", "NOUN", "ADP",
+                "PROPN", "CONJ", "PROPN", "X", "ADJ", "NOUN", "PUNCT", "PROPN", "ADP", "DET",
+                "PROPN", "PROPN", "PROPN", "X", "VERB", "NOUN", "ADP", "DET", "NOUN", "ADJ", "NOUN",
+                "VERB", "VERB", "ADP", "VERB", "DET", "NOUN", "ADP", "NOUN", "ADP", "DET", "ADJ",
+                "NOUN", "PUNCT", "CONJ", "NOUN", "VERB", "VERB", "NOUN", "ADP", "NOUN", "VERB",
+                "VERB", "VERB", "ADP", "DET", "NOUN", "X", "NOUN", "ADP", "VERB", "DET", "ADJ",
+                "NOUN", "NOUN", "ADP", "PRON", "PROPN", "PROPN", "NOUN", "ADJ", "PROPN", "PUNCT" };
 
-        String[] posOriginal = new String[] { "NN", "IN", "DT", "NN", "VBZ", "RB", "VBN", "TO",
-                "VB", "DT", "JJ", "NN", "IN", "NN", "NNS", "IN", "NNP", ",", "JJ", "IN", "NN",
-                "NN", ",", "VB", "TO", "VB", "DT", "JJ", "NN", "IN", "NNP", "CC", "NNP", "POS",
-                "JJ", "NNS", ".", "NNP", "IN", "DT", "NNP", "NNP", "NNP", "POS", "VBN", "NN", "TO",
-                "DT", "NN", "JJ", "NN", "VBZ", "VBN", "TO", "VB", "DT", "NN", "IN", "NN", "IN",
-                "DT", "JJ", "NN", ".", "CC", "NNS", "VBP", "VBG", "NN", "IN", "NN", "VBZ", "VBN",
-                "VBN", "IN", "DT", "NN", "POS", "NN", "TO", "VB", "DT", "JJ", "NN", "NNS", "IN",
-                "PRP$", "NNP", "NNP", "NN", "JJ", "NNP", "." };
+        String[] posOriginal = { "NN", "IN", "DT", "NN", "VBZ", "RB", "VBN", "TO", "VB", "DT", "JJ",
+                "NN", "IN", "NN", "NNS", "IN", "NNP", ",", "JJ", "IN", "NN", "NN", ",", "VB", "TO",
+                "VB", "DT", "JJ", "NN", "IN", "NNP", "CC", "NNP", "POS", "JJ", "NNS", ".", "NNP",
+                "IN", "DT", "NNP", "NNP", "NNP", "POS", "VBN", "NN", "TO", "DT", "NN", "JJ", "NN",
+                "VBZ", "VBN", "TO", "VB", "DT", "NN", "IN", "NN", "IN", "DT", "JJ", "NN", ".", "CC",
+                "NNS", "VBP", "VBG", "NN", "IN", "NN", "VBZ", "VBN", "VBN", "IN", "DT", "NN", "POS",
+                "NN", "TO", "VB", "DT", "JJ", "NN", "NNS", "IN", "PRP$", "NNP", "NNP", "NN", "JJ",
+                "NNP", "." };
 
         assertSentence(sentences, select(jcas, Sentence.class));
         assertChunks(chunks, select(jcas, Chunk.class));

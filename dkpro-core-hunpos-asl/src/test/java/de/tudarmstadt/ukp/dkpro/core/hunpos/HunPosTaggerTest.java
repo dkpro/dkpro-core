@@ -67,7 +67,7 @@ public class HunPosTaggerTest
     {
         runTest("da", null, "Dette er en test .",
                 new String[] { "PD", "VA", "PI", "NC", "XP" },
-                new String[] { "PR", "V", "PR", "NN", "PUNC" });
+                new String[] { "PRON", "VERB", "PRON", "NOUN", "PUNCT" });
     }
 
     @Test
@@ -76,15 +76,15 @@ public class HunPosTaggerTest
 	{
         runTest("en", null, "This is a test .",
 				new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
-				new String[] { "ART",  "V",   "ART", "NN",   "PUNC" });
+				new String[] { "DET", "VERB", "DET", "NOUN", "PUNCT" });
 
         runTest("en", null, "A neural net .",
         		new String[] { "DT",  "JJ",     "NN",  "." },
-        		new String[] { "ART", "ADJ",    "NN",  "PUNC" });
+        		new String[] { "DET", "ADJ",    "NOUN",  "PUNCT" });
 
         runTest("en", null, "John is purchasing oranges .",
         		new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
-        		new String[] { "NP",   "V",   "V",        "NN",     "PUNC" });
+        		new String[] { "PROPN",   "VERB",   "VERB",        "NOUN",     "PUNCT" });
     }
 
     @Test
@@ -93,7 +93,7 @@ public class HunPosTaggerTest
     {
         runTest("fa", null, "این یک تست است . \n",
                 new String[] { "DET", "PRO", "N_SING", "V_COP", "DELM" },
-                new String[] { "ART", "PR",  "N",      "V",     "PUNC" });
+                new String[] { "DET", "PRON",  "NOUN",      "VERB",     "PUNCT" });
     }
     
     @Test
@@ -102,7 +102,7 @@ public class HunPosTaggerTest
     {
         runTest("de", null, "Das ist ein Test .",
                 new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
-                new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
+                new String[] { "PRON",  "VERB",     "DET", "NOUN",   "PUNCT" });
     }
 
     @Test
@@ -120,7 +120,7 @@ public class HunPosTaggerTest
     {
         runTest("pt", null, "Este é um teste .",
                 new String[] {"pron-det", "v-fin", "art", "n", "punc" },
-                new String[] { "PR", "V", "ART", "NN", "PUNC" });
+                new String[] { "PRON", "VERB", "DET", "NOUN", "PUNCT" });
         
         runTest("pt", "tbchp", "Este é um teste .",
                 new String[] { "D", "SR-P", "D-UM", "N", "." },
@@ -132,7 +132,7 @@ public class HunPosTaggerTest
 
         runTest("pt", "bosque", "Este é um teste .",
                 new String[] { "pron-det", "v-fin", "art", "n", "punc" },
-                new String[] { "PR", "V", "ART", "NN", "PUNC" });
+                new String[] { "PRON", "VERB", "DET", "NOUN", "PUNCT" });
     }
     
     @Test
@@ -159,7 +159,7 @@ public class HunPosTaggerTest
     {
         runTest("sv", null, "Detta är ett test .",
                 new String[] { "PN_NEU_SIN_DEF_SUB/OBJ", "VB_PRS_AKT", "DT_NEU_SIN_IND", "NN_NEU_SIN_IND_NOM", "DL_MAD"    },
-                new String[] { "O", "O", "O", "O", "O" });
+                new String[] { "X", "X", "X", "X", "X" });
         
         runTest("sv", "paroletags", "Detta är ett test .",
                 new String[] { "PF@NS0@S", "V@IPAS", "DI@NS@S", "NCNSN@IS", "FE" },
@@ -167,7 +167,7 @@ public class HunPosTaggerTest
         
         runTest("sv", "suctags", "Detta är ett test .",
                 new String[] { "PN_NEU_SIN_DEF_SUB/OBJ", "VB_PRS_AKT", "DT_NEU_SIN_IND", "NN_NEU_SIN_IND_NOM", "DL_MAD"    },
-                new String[] { "O", "O", "O", "O", "O" });
+                new String[] { "X", "X", "X", "X", "X" });
         
 //        runTest("sv", "suc2x", "Detta är ett test .",
 //                new String[] { "PN_NEU_SIN_DEF_SUB@OBJ", "VB_PRS_AKT", "DT_NEU_SIN_IND", "NN_NEU_SIN_IND_NOM", "MAD"    },
@@ -181,7 +181,7 @@ public class HunPosTaggerTest
     {
         runTest("en", null, "² § ¶ § °",
                 new String[] { "NNP", "NNP", "NNP", "NNP", "NNP" },
-                new String[] { "NP", "NP", "NP", "NP", "NP"});
+                new String[] { "PROPN", "PROPN", "PROPN", "PROPN", "PROPN"});
     }
 
     /**

@@ -6,9 +6,9 @@ __META_SOURCE_URL__=http://jlm.ipipan.waw.pl/index.php/JLM/article/view/35
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # # - non-word element
-\#=O
+\#=X
 # Foreign language citation
-%=O
+%=X
 # A - Adjective
 Apx=ADJ
 Apy=ADJ
@@ -21,80 +21,80 @@ Dx=ADV
 Dy=ADV
 Dz=ADV
 # E - Preposition
-E=PP
+E=ADP
 # G - Participle
-Gpx=V
-Gpy=V
-Gpz=V
-Gsx=V
-Gsy=V
-Gsz=V
+Gpx=VERB
+Gpy=VERB
+Gpz=VERB
+Gsx=VERB
+Gsy=VERB
+Gsz=VERB
 # J - Interjections
-J=O
+J=X
 # N - Numeral
-ND=CARD
-Np=CARD
-Ns=CARD
+ND=NUM
+Np=NUM
+Ns=NUM
 # O - Conjunctions
 O=CONJ
 OY=CONJ
 # P - Pronoun
-PD=PR
-Pp=PR
-Ps=PR
+PD=PRON
+Pp=PRON
+Ps=PRON
 # Q - Undefined part of speech (residual)
-Q=O
+Q=X
 # R - Reflexive morphemes
-R=O
+R=X
 # S - Substantive
-Sp=NN
-Ss=NN
+Sp=NOUN
+Ss=NOUN
 # T - Particles
-T=O
-TY=O
+T=X
+TY=X
 # V - Verb
-VBpa=V
-VBpb=V
-VBpc=V
-VBsa=V
-VBsb=V
-VBsc=V
-VH=V
-VI=V
-VKpa=V
-VKpb=V
-VKpc=V
-VKsa=V
-VKsb=V
-VKsc=V
-VLpa=V
-VLpb=V
-VLpc=V
-VLsa=V
-VLsb=V
-VLsc=V
-VMpa=V
-VMpb=V
-VMsb=V
+VBpa=VERB
+VBpb=VERB
+VBpc=VERB
+VBsa=VERB
+VBsb=VERB
+VBsc=VERB
+VH=VERB
+VI=VERB
+VKpa=VERB
+VKpb=VERB
+VKpc=VERB
+VKsa=VERB
+VKsb=VERB
+VKsc=VERB
+VLpa=VERB
+VLpb=VERB
+VLpc=VERB
+VLsa=VERB
+VLsb=VERB
+VLsc=VERB
+VMpa=VERB
+VMpb=VERB
+VMsb=VERB
 # W - Abbreviations
-W=O
+W=X
 # Y - Conditional morpheme
-Y=O
+Y=X
 # Z - Punctuation
-Z=PUNC
+Z=PUNCT
 
 # Not found in tagset documentation but present in TreeTagger model for Slovak
-!=PUNC
-"=PUNC
-par=O
-(=PUNC
-)=PUNC
-,=PUNC
-.=PUNC
-0=O
-\:=PUNC
-;=PUNC
-?=PUNC
+!=PUNCT
+"=PUNCT
+par=X
+(=PUNCT
+)=PUNCT
+,=PUNCT
+.=PUNCT
+0=X
+\:=PUNCT
+;=PUNCT
+?=PUNCT
 
 *=POS
 

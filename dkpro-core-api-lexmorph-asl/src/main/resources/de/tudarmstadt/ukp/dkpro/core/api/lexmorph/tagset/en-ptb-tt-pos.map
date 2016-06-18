@@ -5,31 +5,31 @@
 __META_SOURCE_URL__=http://faculty.washington.edu/dillon/GramResources/penntable.html
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
-*=O
-,=PUNC
--=PUNC
-.=PUNC
-;=PUNC
-?=PUNC
-(=PUNC
-)=PUNC
-``=PUNC
-''=PUNC
-\#=PUNC
--LRB-=PUNC
--RRB-=PUNC
+*=X
+,=PUNCT
+-=PUNCT
+.=PUNCT
+;=PUNCT
+?=PUNCT
+(=PUNCT
+)=PUNCT
+``=PUNCT
+''=PUNCT
+\#=PUNCT
+-LRB-=PUNCT
+-RRB-=PUNCT
 # 1.	CC	Coordinating conjunction
 CC=CONJ
 # 2.	CD	Cardinal number
-CD=CARD
+CD=NUM
 # 3.	DT	Determiner
-DT=ART
+DT=DET
 # 4.	EX	Existential there
-EX=ART
+EX=DET
 # 5.	FW	Foreign word
-FW=O
+FW=X
 # 6.	IN	Preposition or subordinating conjunction
-IN=PP
+IN=ADP
 # 7.	JJ	Adjective
 JJ=ADJ
 # 8.	JJR	Adjective, comparative
@@ -37,29 +37,29 @@ JJR=ADJ
 # 9.	JJS	Adjective, superlative
 JJS=ADJ
 # 10.	LS	List item marker
-LS=O
+LS=X
 # 11.	MD	Modal
-MD=V
+MD=VERB
 # 12.	NN	Noun, singular or mass
-NN=NN
+NN=NOUN
 # 13.	NNS	Noun, plural
-NNS=NN
+NNS=NOUN
 # 14.	NP	Proper noun, singular
-NP=NP
-NNP=NP
+NP=PROPN
+NNP=PROPN
 # 15.	NPS	Proper noun, plural
-NPS=NP
-NNPS=NP
+NPS=PROPN
+NNPS=PROPN
 # 16.	PDT	Predeterminer
-PDT=ART
+PDT=DET
 # 17.	POS	Possessive ending
-POS=O
+POS=X
 # 18.	PP	Personal pronoun
-PP=PR
-PRP=PR
+PP=PRON
+PRP=PRON
 # 19.	PP$	Possessive pronoun
-PP$=PR
-PRP$=PR
+PP$=PRON
+PRP$=PRON
 # 20.	RB	Adverb
 RB=ADV
 # 21.	RBR	Adverb, comparative	
@@ -67,57 +67,57 @@ RBR=ADV
 # 22.	RBS	Adverb, superlative
 RBS=ADV
 # 23.	RP	Particle
-RP=PP
-SENT=PUNC
+RP=ADP
+SENT=PUNCT
 # 24.	SYM	Symbol
-SYM=PUNC
+SYM=PUNCT
 # 25.	TO	to
-TO=PP
+TO=ADP
 # 26.	UH	Interjection
-UH=O
+UH=X
 # 27.	VB	Verb (be), base form
-VB=V
+VB=VERB
 # 28.	VBD	Verb (be), past tense
-VBD=V
+VBD=VERB
 # 29.	VBG	Verb (be), gerund or present participle
-VBG=V
+VBG=VERB
 # 30.	VBN	Verb (be), past participle
-VBN=V
+VBN=VERB
 # 31.	VBP	Verb (be), non-3rd person singular present
-VBP=V
+VBP=VERB
 # 32.	VBZ	Verb (be), 3rd person singular present
-VBZ=V
+VBZ=VERB
 #		VH	Verb (have), base form
-VH=V
+VH=VERB
 #		VHD	Verb (have), past tense
-VHD=V
+VHD=VERB
 #		VHG	Verb (have), gerund or present participle
-VHG=V
+VHG=VERB
 #		VHN	Verb (have), past participle
-VHN=V
+VHN=VERB
 #		VHP	Verb (have), non-3rd person singular present
-VHP=V
+VHP=VERB
 #		VHZ	Verb (have), 3rd person singular present
-VHZ=V
+VHZ=VERB
 #		VV	Verb (other verbs), base form
-VV=V
+VV=VERB
 #		VvD	Verb (other verbs), past tense
-VVD=V
+VVD=VERB
 #		VVG	Verb (other verbs), gerund or present participle
-VVG=V
+VVG=VERB
 #		VVN	Verb (other verbs), past participle
-VVN=V
+VVN=VERB
 #		VVP	Verb (other verbs), non-3rd person singular present
-VVP=V
+VVP=VERB
 #		VVZ	Verb (other verbs), 3rd person singular present
-VVZ=V
+VVZ=VERB
 # 33.	WDT	Wh-determiner
-WDT=ART
+WDT=DET
 # 34.	WP	Wh-pronoun
-WP=PR
+WP=PRON
 # 35.	WP$	Possessive wh-pronoun
-WP$=PR
+WP$=PRON
 # 36.	WRB	Wh-adverb
 WRB=ADV
-\!=PUNC
-\:=PUNC
+\!=PUNCT
+\:=PUNCT

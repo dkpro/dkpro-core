@@ -8,41 +8,41 @@ __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 # CC - coordinating conjunction
 CC=CONJ
 # CD - cardinal number
-CD=CARD
+CD=NUM
 # DT - determiner/demonstrative pronoun
-DT=ART
+DT=DET
 # FW - foreign word
-FW=O
+FW=X
 # IN - subordinating conjunction (FUNC_WORD) or preposition (PREP)
-IN=PP
+IN=ADP
 # JJ - adjective
 JJ=ADJ
 # NN - common noun, singular
-NN=NN
+NN=NOUN
 # NNP - proper noun, singular
-NNP=NP
+NNP=PROPN
 # NNPS - proper noun, plural or dual
-NNPS=NP
+NNPS=PROPN
 # NNS - common noun, plural or dual
-NNS=NN
+NNS=NOUN
 # PRP - personal pronoun
-PRP=PR
+PRP=PRON
 # PRP$ - possessive personal pronoun
-PRP=PR
+PRP=PRON
 # RB - adverb
 RB=ADV
 # RP - particle
-RP=PRT
+RP=PART
 # UH - interjection
-UH=O
+UH=X
 # VBD - perfect verb (***nb: perfect rather than past tense)
-VBD=V
+VBD=VERB
 # VBN - passive verb (***nb: passive rather than past participle)
-VBN=V
+VBN=VERB
 # VBP - imperfect verb (***nb: imperfect rather than present tense)
-VBP=V
+VBP=VERB
 # WP - relative pronoun
-WP=PR
+WP=PRON
 # WRB - wh-adverb
 WRB=ADV
 
@@ -55,24 +55,24 @@ DTJJ=ADJ
 # DTJJR
 DTJJR=ADJ
 # DTNN
-DTNN=NN
+DTNN=NOUN
 # DTNNP
-DTNNP=NP
+DTNNP=PROPN
 # DTNNPS
-DTNNPS=NP
+DTNNPS=PROPN
 # DTNNS
-DTNNS=NN
+DTNNS=NOUN
 # JJR
 JJR=ADJ
 # NOUN
-NOUN=NN
+NOUN=NOUN
 # PUNC
-PUNC=PUNC
+PUNC=PUNCT
 # VB
-VB=V
+VB=VERB
 # VBG
-VBG=V
+VBG=VERB
 # VN
-VN=V
+VN=VERB
 
 *=POS

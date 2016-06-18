@@ -26,12 +26,35 @@ import java.util.Collection;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
+import org.apache.commons.lang.ArrayUtils;
 import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADP;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.AUX;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.DET;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.INTJ;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NOUN;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NUM;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PART;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRON;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PROPN;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNCT;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.SCONJ;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.SYM;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.VERB;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.X;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 
 public class MappingsTest
 {
+    private static Class<?>[] POS_TAGS = { POS.class, ADJ.class, ADP.class, ADV.class, AUX.class,
+            CONJ.class, DET.class, INTJ.class, NOUN.class, NUM.class, PART.class, PRON.class,
+            PROPN.class, PUNCT.class, SCONJ.class, SYM.class, VERB.class, X.class };
+    
     @Test
     public void testMappings() throws Exception
     {
@@ -56,7 +79,11 @@ public class MappingsTest
             for (String tag : mappingProvider.getTags()) {
                 String typeName = mappingProvider.getTagTypeName(tag);
                 try {
-                    Class.forName(typeName);
+                    Class<?> clazz = Class.forName(typeName);
+                    if (!ArrayUtils.contains(POS_TAGS, clazz) && !typeName.contains(".tweet.")) {
+                        System.out.printf("%s Using deprecated type: %s %n", tag, typeName);
+                        failure = true;
+                    }
                 }
                 catch (Throwable e) {
                     System.out.printf("%s No type with name: %s %n", tag, e.getMessage());

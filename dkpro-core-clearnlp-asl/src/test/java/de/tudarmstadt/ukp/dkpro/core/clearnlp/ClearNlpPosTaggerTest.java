@@ -26,10 +26,9 @@ import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
-
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class ClearNlpPosTaggerTest
@@ -41,16 +40,16 @@ public class ClearNlpPosTaggerTest
 		Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1200000000l);
 
         runTest("en", null, "This is a test . \n",
-				new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
-				new String[] { "ART",  "V",   "ART", "NN",   "PUNC" });
+                new String[] { "DT",  "VBZ",  "DT",  "NN",   "." },
+                new String[] { "DET", "VERB", "DET", "NOUN", "PUNCT" });
 
         runTest("en", null, "A neural net . \n",
-        		new String[] { "DT",  "JJ",     "NN",  "." },
-        		new String[] { "ART", "ADJ",    "NN",  "PUNC" });
+                new String[] { "DT",  "JJ",  "NN",   "." },
+                new String[] { "DET", "ADJ", "NOUN", "PUNCT" });
 
         runTest("en", null, "John is purchasing oranges . \n",
-        		new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
-        		new String[] { "NP",   "V",   "V",        "NN",     "PUNC" });
+                new String[] { "NNP",  "VBZ",  "VBG",  "NNS",  "." },
+                new String[] { "PROPN","VERB", "VERB", "NOUN", "PUNCT" });
     }
 
 	@Test
@@ -58,16 +57,16 @@ public class ClearNlpPosTaggerTest
 		throws Exception
 	{
         runTest("en", "mayo", "This is a test . \n",
-				new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
-				new String[] { "ART",  "V",   "ART", "NN",   "PUNC" });
+				new String[] { "DT",  "VBZ",  "DT",  "NN",   "." },
+				new String[] { "DET", "VERB", "DET", "NOUN", "PUNCT" });
 
         runTest("en", "mayo", "A neural net . \n",
-        		new String[] { "DT",  "JJ",     "NN",  "." },
-        		new String[] { "ART", "ADJ",    "NN",  "PUNC" });
+        		new String[] { "DT",  "JJ",  "NN",   "." },
+        		new String[] { "DET", "ADJ", "NOUN", "PUNCT" });
 
         runTest("en", "mayo", "John is purchasing oranges . \n",
-        		new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
-        		new String[] { "NP",   "V",   "V",        "NN",     "PUNC" });
+        		new String[] { "NNP",  "VBZ",  "VBG",  "NNS",  "." },
+        		new String[] { "PROPN","VERB", "VERB", "NOUN", "PUNCT" });
     }
 
 	private void runTest(String language, String variant, String testDocument, String[] tags,
@@ -83,16 +82,14 @@ public class ClearNlpPosTaggerTest
 		AssertAnnotations.assertPOS(tagClasses, tags, select(jcas, POS.class));
 	}
 
-	@Rule
-	public TestName name = new TestName();
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 
 	@Before
-	public void printSeparator()
+	public void clearMemory()
 	{
 		Runtime.getRuntime().gc();
 		Runtime.getRuntime().gc();
 		Runtime.getRuntime().gc();
-
-		System.out.println("\n=== " + name.getMethodName() + " =====================");
 	}
 }

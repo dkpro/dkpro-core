@@ -46,7 +46,7 @@ Constituent
       children: FSArray
    children: FSArray
 [Save]
-V
+VERB
    sofa: _InitialView
    begin: 0
    end: 4
@@ -79,7 +79,7 @@ Token
       begin: 0
       end: 4
       value: "save"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 0
       end: 4
@@ -104,7 +104,7 @@ Constituent
       children: FSArray
    children: FSArray
 [for]
-PP
+ADP
    sofa: _InitialView
    begin: 5
    end: 8
@@ -143,7 +143,7 @@ Token
       begin: 5
       end: 8
       value: "for"
-   pos: PP
+   pos: ADP
       sofa: _InitialView
       begin: 5
       end: 8
@@ -179,7 +179,7 @@ Constituent
       children: FSArray
    children: FSArray
 [this]
-ART
+DET
    sofa: _InitialView
    begin: 9
    end: 13
@@ -224,13 +224,13 @@ Token
       begin: 9
       end: 13
       value: "this"
-   pos: ART
+   pos: DET
       sofa: _InitialView
       begin: 9
       end: 13
       PosValue: "DT"
 [one]
-CARD
+NUM
    sofa: _InitialView
    begin: 14
    end: 17
@@ -275,13 +275,13 @@ Token
       begin: 14
       end: 17
       value: "one"
-   pos: CARD
+   pos: NUM
       sofa: _InitialView
       begin: 14
       end: 17
       PosValue: "CD"
 [excursion]
-NN
+NOUN
    sofa: _InitialView
    begin: 18
    end: 27
@@ -326,7 +326,7 @@ Token
       begin: 18
       end: 27
       value: "excursion"
-   pos: NN
+   pos: NOUN
       sofa: _InitialView
       begin: 18
       end: 27
@@ -397,7 +397,7 @@ Token
       end: 29
       PosValue: "PUNC,"
 [he]
-PR
+PRON
    sofa: _InitialView
    begin: 30
    end: 32
@@ -424,7 +424,7 @@ Token
       begin: 30
       end: 32
       value: "he"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 30
       end: 32
@@ -480,7 +480,7 @@ Constituent
       children: FSArray
    children: FSArray
 [spent]
-V
+VERB
    sofa: _InitialView
    begin: 33
    end: 38
@@ -513,7 +513,7 @@ Token
       begin: 33
       end: 38
       value: "spend"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 33
       end: 38
@@ -538,7 +538,7 @@ Constituent
       children: FSArray
    children: FSArray
 [his]
-PR
+PRON
    sofa: _InitialView
    begin: 39
    end: 42
@@ -577,7 +577,7 @@ Token
       begin: 39
       end: 42
       value: "his"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 39
       end: 42
@@ -595,7 +595,7 @@ SemPred
    arguments: FSArray
    category: "Coreference"
 [days]
-NN
+NOUN
    sofa: _InitialView
    begin: 43
    end: 47
@@ -634,7 +634,7 @@ Token
       begin: 43
       end: 47
       value: "day"
-   pos: NN
+   pos: NOUN
       sofa: _InitialView
       begin: 43
       end: 47
@@ -696,7 +696,7 @@ Constituent
       children: FSArray
    children: FSArray
 [in]
-PP
+ADP
    sofa: _InitialView
    begin: 48
    end: 50
@@ -741,7 +741,7 @@ Token
       begin: 48
       end: 50
       value: "in"
-   pos: PP
+   pos: ADP
       sofa: _InitialView
       begin: 48
       end: 50
@@ -1134,7 +1134,7 @@ Token
       end: 74
       PosValue: "JJ"
 [walks]
-V
+VERB
    sofa: _InitialView
    begin: 75
    end: 80
@@ -1185,7 +1185,7 @@ Token
       begin: 75
       end: 80
       value: "walk"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 75
       end: 80
@@ -1330,7 +1330,7 @@ Constituent
       children: FSArray
    children: FSArray
 [in]
-PP
+ADP
    sofa: _InitialView
    begin: 86
    end: 88
@@ -1375,7 +1375,7 @@ Token
       begin: 86
       end: 88
       value: "in"
-   pos: PP
+   pos: ADP
       sofa: _InitialView
       begin: 86
       end: 88
@@ -1412,7 +1412,7 @@ Constituent
       children: FSArray
    children: FSArray
 [chatting]
-V
+VERB
    sofa: _InitialView
    begin: 89
    end: 97
@@ -1463,7 +1463,7 @@ Token
       begin: 89
       end: 97
       value: "chat"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 89
       end: 97
@@ -1518,7 +1518,7 @@ Constituent
       children: FSArray
    children: FSArray
 [with]
-PP
+ADP
    sofa: _InitialView
    begin: 98
    end: 102
@@ -1575,7 +1575,7 @@ Token
       begin: 98
       end: 102
       value: "with"
-   pos: PP
+   pos: ADP
       sofa: _InitialView
       begin: 98
       end: 102
@@ -1673,7 +1673,7 @@ Constituent
       children: FSArray
    children: FSArray
 [a]
-ART
+DET
    sofa: _InitialView
    begin: 103
    end: 104
@@ -1742,13 +1742,13 @@ Token
       begin: 103
       end: 104
       value: "a"
-   pos: ART
+   pos: DET
       sofa: _InitialView
       begin: 103
       end: 104
       PosValue: "DT"
 [number]
-NN
+NOUN
    sofa: _InitialView
    begin: 105
    end: 111
@@ -1817,7 +1817,7 @@ Token
       begin: 105
       end: 111
       value: "number"
-   pos: NN
+   pos: NOUN
       sofa: _InitialView
       begin: 105
       end: 111
@@ -1889,7 +1889,7 @@ Constituent
       children: FSArray
    children: FSArray
 [of]
-PP
+ADP
    sofa: _InitialView
    begin: 112
    end: 114
@@ -1958,7 +1958,7 @@ Token
       begin: 112
       end: 114
       value: "of"
-   pos: PP
+   pos: ADP
       sofa: _InitialView
       begin: 112
       end: 114
@@ -2080,7 +2080,7 @@ Constituent
       children: FSArray
    children: FSArray
 [village]
-NN
+NOUN
    sofa: _InitialView
    begin: 115
    end: 122
@@ -2161,13 +2161,13 @@ Token
       begin: 115
       end: 122
       value: "village"
-   pos: NN
+   pos: NOUN
       sofa: _InitialView
       begin: 115
       end: 122
       PosValue: "NN"
 [gossips]
-NN
+NOUN
    sofa: _InitialView
    begin: 123
    end: 130
@@ -2248,7 +2248,7 @@ Token
       begin: 123
       end: 130
       value: "gossip"
-   pos: NN
+   pos: NOUN
       sofa: _InitialView
       begin: 123
       end: 130
@@ -2382,7 +2382,7 @@ Constituent
       children: FSArray
    children: FSArray
 [whose]
-PR
+PRON
    sofa: _InitialView
    begin: 131
    end: 136
@@ -2469,13 +2469,13 @@ Token
       begin: 131
       end: 136
       value: "whose"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 131
       end: 136
       PosValue: "WP$"
 [acquaintance]
-NN
+NOUN
    sofa: _InitialView
    begin: 137
    end: 149
@@ -2562,7 +2562,7 @@ Token
       begin: 137
       end: 149
       value: "acquaintance"
-   pos: NN
+   pos: NOUN
       sofa: _InitialView
       begin: 137
       end: 149
@@ -2635,7 +2635,7 @@ Constituent
       children: FSArray
    children: FSArray
 [he]
-PR
+PRON
    sofa: _InitialView
    begin: 150
    end: 152
@@ -2722,7 +2722,7 @@ Token
       begin: 150
       end: 152
       value: "he"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 150
       end: 152
@@ -2813,7 +2813,7 @@ Constituent
       children: FSArray
    children: FSArray
 [had]
-V
+VERB
    sofa: _InitialView
    begin: 153
    end: 156
@@ -2906,7 +2906,7 @@ Token
       begin: 153
       end: 156
       value: "have"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 153
       end: 156
@@ -2991,7 +2991,7 @@ Constituent
       children: FSArray
    children: FSArray
 [cultivated]
-V
+VERB
    sofa: _InitialView
    begin: 157
    end: 167
@@ -3090,7 +3090,7 @@ Token
       begin: 157
       end: 167
       value: "cultivate"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 157
       end: 167

@@ -3,29 +3,30 @@
 # Ancora part-of-speech tags
 
 __META_SOURCE_URL__=http://clic.ub.edu/corpus/webfm_send/18
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+*=X
 #Adjective
-a=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+a=ADJ
 #Conjuction
-c=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+c=CONJ
 #Determiner
-d=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+d=DET
 #Punctuation
-f=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+f=PUNCT
 #Interjection
-i=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+i=X
 #Noun
-n=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+n=NOUN
 #Pronoun
-p=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+p=PRON
 #Adverb
-r=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+r=ADV
 #Preposition
-s=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+s=ADP
 #Verb
-v=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+v=VERB
 #Date
-w=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+w=X
 #Number
-z=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
+z=NUM

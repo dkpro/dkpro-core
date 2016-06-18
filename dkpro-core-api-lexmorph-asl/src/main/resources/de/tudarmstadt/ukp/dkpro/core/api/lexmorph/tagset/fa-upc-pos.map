@@ -1,70 +1,71 @@
 # Uppsala Persian Dependency Treebank
 
 __META_SOURCE_URL__=http://stp.lingfil.uu.se/~mojgan/Manual.pdf
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # ADJ_CMPR - Comparative adjective
-ADJ_CMPR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+ADJ_CMPR=ADJ
 # ADJ_INO - Participle adjective
-ADJ_INO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+ADJ_INO=ADJ
 # ADJ - Adjective
-ADJ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+ADJ=ADJ
 # ADJ_SUP - Superlative adjective
-ADJ_SUP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+ADJ_SUP=ADJ
 # ADJ_VOC - Vocative adjective
-ADJ_VOC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+ADJ_VOC=ADJ
 # ADV_COMP - Adverb of comparison
-ADV_COMP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+ADV_COMP=ADV
 # ADV_I - Adverb of interrogation
-ADV_I=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+ADV_I=ADV
 # ADV_LOC - Adverb of location
-ADV_LOC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+ADV_LOC=ADV
 # ADV_NEG - Adverb of negation
-ADV_NEG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+ADV_NEG=ADV
 # ADV - Adverb
-ADV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+ADV=ADV
 # ADV_TIME - Adverb of time
-ADV_TIME=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+ADV_TIME=ADV
 # CLITIC - Accusative marker
-CLITIC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+CLITIC=X
 # CON - Conjunction
-CON=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+CON=CONJ
 # DELM - Delimiter
-DELM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+DELM=PUNCT
 # DET - Determiner
-DET=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+DET=DET
 # FW - Foreign Word
-FW=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+FW=X
 # INT - Interjection
-INT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+INT=X
 # SYM - Symbol
-SYM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+SYM=X
 # N_PL - Plural noun
-N_PL=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N
+N_PL=NOUN
 # N_SING - Singular noun
-N_SING=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N
+N_SING=NOUN
 # N_VOC - Vocative noun
-N_VOC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N
+N_VOC=NOUN
 # NUM - Numeral
-NUM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
+NUM=NUM
 # P - Preposition
-P=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+P=ADP
 # PREV - Preverbal particle
-PREV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+PREV=X
 # PRO - Pronoun
-PRO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PRO=PRON
 # V_AUX - Auxiliary verb
-V_AUX=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+V_AUX=VERB
 # V_IMP - Imperative verb
-V_IMP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+V_IMP=VERB
 # V_PA - Past tense verb
-V_PA=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+V_PA=VERB
 # V_PP - Past participle verb
-V_PP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+V_PP=VERB
 # V_COP - Verb copula
-V_COP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+V_COP=VERB
 # V_PRS - Present tense verb
-V_PRS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+V_PRS=VERB
 # V_SUB - Subjunctive verb
-V_SUB=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+V_SUB=VERB
+*=X
 

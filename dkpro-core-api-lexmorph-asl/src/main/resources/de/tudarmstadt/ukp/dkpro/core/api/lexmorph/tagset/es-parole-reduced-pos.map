@@ -14,126 +14,126 @@ CC=CONJ
 # CS	Conjunction, Subordinative
 CS=CONJ
 # DA	Determiner, Article
-DA=ART
+DA=DET
 # DD	Determiner, Demonstrative
-DD=ART
+DD=DET
 # DE	Determiner, Exclamatory
-DE=ART
+DE=DET
 # DI	Determiner, Indefinite
-DI=ART
+DI=DET
 # DN	Determiner, Numeral
-DN=ART
+DN=DET
 # DP	Determiner, Possessive
-DP=ART
+DP=DET
 # DT	Determiner, Interrogative
-DT=ART
+DT=DET
 # Faa	Punctuation, ¡
-Faa=PUNC
+Faa=PUNCT
 # Fat	Punctuation, !
-Fat=PUNC
+Fat=PUNCT
 # Fc	Punctuation, , 
-Fc=PUNC
+Fc=PUNCT
 # Fd	Punctuation, :
-Fd=PUNC
+Fd=PUNCT
 # Fe	Punctuation, "
-Fe=PUNC
+Fe=PUNCT
 # Fg	Punctuation, -
-Fg=PUNC
+Fg=PUNCT
 # Fh	Punctuation, /
-Fh=PUNC
+Fh=PUNCT
 # Fia	Punctuation, ¿
-Fia=PUNC
+Fia=PUNCT
 # Fit	Punctuation, ?
-Fit=PUNC
+Fit=PUNCT
 # Fp	Punctuation, .
-Fp=PUNC
+Fp=PUNCT
 # Fpa	Punctuation, (
-Fpa=PUNC
+Fpa=PUNCT
 # Fpt	Punctuation, )
-Fpt=PUNC
+Fpt=PUNCT
 # Fs	Punctuation, ...
-Fs=PUNC
+Fs=PUNCT
 # Fx	Punctuation, ;
-Fx=PUNC
+Fx=PUNCT
 # Fz	Punctuation, other than those
-Fz=PUNC
+Fz=PUNCT
 # I	Interjection
-I=O
+I=X
 # NC	Noun, Common
-NC=NN
+NC=NOUN
 # NP	Noun, Proper
-NP=NP
+NP=PROPN
 # P0	Pronoun, Clitic
-P0=PR
+P0=PRON
 # PD	Pronoun, Demonstrative#
-PD=PR
+PD=PRON
 # PE	Pronoun, Exclamatory
-PE=PR
+PE=PRON
 # PI	Pronoun, Indefinite
-PI=PR
+PI=PRON
 # PN	Pronoun, Numeral
-PN=PR
+PN=PRON
 # PP	Pronoun, Personal
-PP=PR
+PP=PRON
 # PR	Pronoun, Relative
-PR=PR
+PR=PRON
 # PT	Pronoun, Interrogative
-PT=PR
+PT=PRON
 # PX	Pronoun, Possessive
-PX=PR
+PX=PRON
 # RG	Adverb, General
 RG=ADV
 # RN	Adverb, Negative
 RN=ADV
 # SP	Adposition, Preposition
-SP=PP
+SP=ADP
 # VAG	Verb, Auxiliar, Gerund
-VAG=V
+VAG=VERB
 # VAI	Verb, Auxiliar, Indicative
-VAI=V
+VAI=VERB
 # VAM	Verb, Auxiliar, Imperative
-VAM=V
+VAM=VERB
 # VAN	Verb, Auxiliar, Infinitive
-VAN=V
+VAN=VERB
 # VAP	Verb, Auxiliar, Participle
-VAP=V
+VAP=VERB
 # VAS	Verb, Auxiliar, Subjunctive
-VAS=V
+VAS=VERB
 # VMG	Verb, Main, Gerund
-VMG=V
+VMG=VERB
 # VMI	Verb, Main, Indicative
-VMI=V
+VMI=VERB
 # VMM	Verb, Main, Imperative
-VMM=V
+VMM=VERB
 # VMN	Verb, Main, Infinitive
-VMN=V
+VMN=VERB
 # VMP	Verb, Main, Participle
-VMP=V
+VMP=VERB
 # VMS	Verb, Main, Subjunctive
-VMS=V
+VMS=VERB
 # VSG	Verb, Semi-Auxiliar, Gerund
-VSG=V
+VSG=VERB
 # VSI	Verb, Semi-Auxiliar, Indicative
-VSI=V
+VSI=VERB
 # VSM	Verb, Semi-Auxiliar, Imperative
-VSM=V
+VSM=VERB
 # VSN	Verb, Semi-Auxiliar, Infinitive
-VSN=V
+VSN=VERB
 # VSP	Verb, Semi-Auxiliar, Participle
-VSP=V
+VSP=VERB
 # VSS	Verb, Semi-Auxiliar, Subjunctive
-VSS=V
+VSS=VERB
 # W	Date Times
-W=O
+W=X
 # X	Unknown
-X=O
+X=X
 # Y	Abbreviation
-Y=O
+Y=X
 # Z	Figures
-Z=CARD
+Z=NUM
 # Zm	Currency
-Zm=CARD
+Zm=NUM
 # Zp	Percentage
-Zp=CARD
+Zp=NUM
 
 *=POS

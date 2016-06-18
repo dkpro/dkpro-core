@@ -34,7 +34,7 @@ Sentence
    begin: 1
    end: 18
 [Ah]
-O
+X
    sofa: _InitialView
    begin: 1
    end: 3
@@ -55,7 +55,7 @@ Token
       begin: 1
       end: 3
       value: "ah"
-   pos: O
+   pos: X
       sofa: _InitialView
       begin: 1
       end: 3
@@ -88,7 +88,7 @@ Token
       end: 9
       PosValue: "AV0"
 [we]
-PR
+PRON
    sofa: _InitialView
    begin: 10
    end: 12
@@ -109,13 +109,13 @@ Token
       begin: 10
       end: 12
       value: "we"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 10
       end: 12
       PosValue: "PNP"
 [are]
-V
+VERB
    sofa: _InitialView
    begin: 13
    end: 16
@@ -136,13 +136,13 @@ Token
       begin: 13
       end: 16
       value: "be"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 13
       end: 16
       PosValue: "VBB"
 [,]
-PUNC
+PUNCT
    sofa: _InitialView
    begin: 16
    end: 17
@@ -152,13 +152,13 @@ Token
    sofa: _InitialView
    begin: 16
    end: 17
-   pos: PUNC
+   pos: PUNCT
       sofa: _InitialView
       begin: 16
       end: 17
       PosValue: "PUN"
 [.]
-PUNC
+PUNCT
    sofa: _InitialView
    begin: 17
    end: 18
@@ -168,7 +168,7 @@ Token
    sofa: _InitialView
    begin: 17
    end: 18
-   pos: PUNC
+   pos: PUNCT
       sofa: _InitialView
       begin: 17
       end: 18
@@ -233,7 +233,7 @@ Token
       end: 35
       PosValue: "AJ0"
 [wound]
-NN
+NOUN
    sofa: _InitialView
    begin: 36
    end: 41
@@ -254,13 +254,13 @@ Token
       begin: 36
       end: 41
       value: "wound"
-   pos: NN
+   pos: NOUN
       sofa: _InitialView
       begin: 36
       end: 41
       PosValue: "NN1"
 [,]
-PUNC
+PUNCT
    sofa: _InitialView
    begin: 41
    end: 42
@@ -270,13 +270,13 @@ Token
    sofa: _InitialView
    begin: 41
    end: 42
-   pos: PUNC
+   pos: PUNCT
       sofa: _InitialView
       begin: 41
       end: 42
       PosValue: "PUN"
 [she]
-PR
+PRON
    sofa: _InitialView
    begin: 43
    end: 46
@@ -297,13 +297,13 @@ Token
       begin: 43
       end: 46
       value: "she"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 43
       end: 46
       PosValue: "PNP"
 ['s]
-V
+VERB
    sofa: _InitialView
    begin: 46
    end: 48
@@ -324,13 +324,13 @@ Token
       begin: 46
       end: 48
       value: "be"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 46
       end: 48
       PosValue: "VBZ"
 [a]
-ART
+DET
    sofa: _InitialView
    begin: 49
    end: 50
@@ -351,7 +351,7 @@ Token
       begin: 49
       end: 50
       value: "a"
-   pos: ART
+   pos: DET
       sofa: _InitialView
       begin: 49
       end: 50
@@ -384,7 +384,7 @@ Token
       end: 54
       PosValue: "AJ0-NN1"
 [bit]
-NN
+NOUN
    sofa: _InitialView
    begin: 55
    end: 58
@@ -405,13 +405,13 @@ Token
       begin: 55
       end: 58
       value: "bit"
-   pos: NN
+   pos: NOUN
       sofa: _InitialView
       begin: 55
       end: 58
       PosValue: "NN1"
 [confused]
-V
+VERB
    sofa: _InitialView
    begin: 60
    end: 68
@@ -432,13 +432,13 @@ Token
       begin: 60
       end: 68
       value: "confuse"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 60
       end: 68
       PosValue: "VVN-AJ0"
 [.]
-PUNC
+PUNCT
    sofa: _InitialView
    begin: 68
    end: 69
@@ -448,7 +448,7 @@ Token
    sofa: _InitialView
    begin: 68
    end: 69
-   pos: PUNC
+   pos: PUNCT
       sofa: _InitialView
       begin: 68
       end: 69
@@ -459,7 +459,7 @@ Sentence
    begin: 70
    end: 139
 [She]
-PR
+PRON
    sofa: _InitialView
    begin: 70
    end: 73
@@ -480,13 +480,13 @@ Token
       begin: 70
       end: 73
       value: "she"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 70
       end: 73
       PosValue: "PNP"
 [did]
-V
+VERB
    sofa: _InitialView
    begin: 74
    end: 77
@@ -507,13 +507,13 @@ Token
       begin: 74
       end: 77
       value: "do"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 74
       end: 77
       PosValue: "VDD"
 [n't]
-O
+X
    sofa: _InitialView
    begin: 77
    end: 80
@@ -534,13 +534,13 @@ Token
       begin: 77
       end: 80
       value: "not"
-   pos: O
+   pos: X
       sofa: _InitialView
       begin: 77
       end: 80
       PosValue: "XX0"
 [bother]
-V
+VERB
    sofa: _InitialView
    begin: 81
    end: 87
@@ -561,13 +561,13 @@ Token
       begin: 81
       end: 87
       value: "bother"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 81
       end: 87
       PosValue: "VVI"
 [to]
-O
+X
    sofa: _InitialView
    begin: 88
    end: 90
@@ -588,13 +588,13 @@ Token
       begin: 88
       end: 90
       value: "to"
-   pos: O
+   pos: X
       sofa: _InitialView
       begin: 88
       end: 90
       PosValue: "TO0"
 [tell]
-V
+VERB
    sofa: _InitialView
    begin: 91
    end: 95
@@ -615,13 +615,13 @@ Token
       begin: 91
       end: 95
       value: "tell"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 91
       end: 95
       PosValue: "VVI"
 [me]
-PR
+PRON
    sofa: _InitialView
    begin: 96
    end: 98
@@ -642,7 +642,7 @@ Token
       begin: 96
       end: 98
       value: "i"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 96
       end: 98
@@ -675,7 +675,7 @@ Token
       end: 103
       PosValue: "CJT"
 [she]
-PR
+PRON
    sofa: _InitialView
    begin: 104
    end: 107
@@ -696,13 +696,13 @@ Token
       begin: 104
       end: 107
       value: "she"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 104
       end: 107
       PosValue: "PNP"
 ['d]
-V
+VERB
    sofa: _InitialView
    begin: 107
    end: 109
@@ -723,7 +723,7 @@ Token
       begin: 107
       end: 109
       value: "have"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 107
       end: 109
@@ -756,7 +756,7 @@ Token
       end: 114
       PosValue: "AV0"
 [got]
-V
+VERB
    sofa: _InitialView
    begin: 115
    end: 118
@@ -777,13 +777,13 @@ Token
       begin: 115
       end: 118
       value: "get"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 115
       end: 118
       PosValue: "VVN"
 [to]
-O
+X
    sofa: _InitialView
    begin: 120
    end: 122
@@ -804,13 +804,13 @@ Token
       begin: 120
       end: 122
       value: "to"
-   pos: O
+   pos: X
       sofa: _InitialView
       begin: 120
       end: 122
       PosValue: "TO0"
 [call]
-V
+VERB
    sofa: _InitialView
    begin: 123
    end: 127
@@ -831,13 +831,13 @@ Token
       begin: 123
       end: 127
       value: "call"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 123
       end: 127
       PosValue: "VVI"
 [you]
-PR
+PRON
    sofa: _InitialView
    begin: 128
    end: 131
@@ -858,13 +858,13 @@ Token
       begin: 128
       end: 131
       value: "you"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 128
       end: 131
       PosValue: "PNP"
 [,]
-PUNC
+PUNCT
    sofa: _InitialView
    begin: 131
    end: 132
@@ -874,7 +874,7 @@ Token
    sofa: _InitialView
    begin: 131
    end: 132
-   pos: PUNC
+   pos: PUNCT
       sofa: _InitialView
       begin: 131
       end: 132
@@ -907,7 +907,7 @@ Token
       end: 138
       PosValue: "AV0"
 [?]
-PUNC
+PUNCT
    sofa: _InitialView
    begin: 138
    end: 139
@@ -917,7 +917,7 @@ Token
    sofa: _InitialView
    begin: 138
    end: 139
-   pos: PUNC
+   pos: PUNCT
       sofa: _InitialView
       begin: 138
       end: 139
@@ -928,7 +928,7 @@ Sentence
    begin: 140
    end: 213
 [Erm]
-O
+X
    sofa: _InitialView
    begin: 140
    end: 143
@@ -949,13 +949,13 @@ Token
       begin: 140
       end: 143
       value: "erm"
-   pos: O
+   pos: X
       sofa: _InitialView
       begin: 140
       end: 143
       PosValue: "UNC"
 [she]
-PR
+PRON
    sofa: _InitialView
    begin: 144
    end: 147
@@ -976,13 +976,13 @@ Token
       begin: 144
       end: 147
       value: "she"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 144
       end: 147
       PosValue: "PNP"
 [was]
-V
+VERB
    sofa: _InitialView
    begin: 148
    end: 151
@@ -1003,13 +1003,13 @@ Token
       begin: 148
       end: 151
       value: "be"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 148
       end: 151
       PosValue: "VBD"
 [n't]
-O
+X
    sofa: _InitialView
    begin: 151
    end: 154
@@ -1030,13 +1030,13 @@ Token
       begin: 151
       end: 154
       value: "not"
-   pos: O
+   pos: X
       sofa: _InitialView
       begin: 151
       end: 154
       PosValue: "XX0"
 [in]
-PP
+ADP
    sofa: _InitialView
    begin: 155
    end: 157
@@ -1057,13 +1057,13 @@ Token
       begin: 155
       end: 157
       value: "in"
-   pos: PP
+   pos: ADP
       sofa: _InitialView
       begin: 155
       end: 157
       PosValue: "PRP"
 [her]
-ART
+DET
    sofa: _InitialView
    begin: 158
    end: 161
@@ -1084,13 +1084,13 @@ Token
       begin: 158
       end: 161
       value: "she"
-   pos: ART
+   pos: DET
       sofa: _InitialView
       begin: 158
       end: 161
       PosValue: "DPS"
 [nightdress]
-NN
+NOUN
    sofa: _InitialView
    begin: 162
    end: 172
@@ -1111,7 +1111,7 @@ Token
       begin: 162
       end: 172
       value: "nightdress"
-   pos: NN
+   pos: NOUN
       sofa: _InitialView
       begin: 162
       end: 172
@@ -1144,7 +1144,7 @@ Token
       end: 176
       PosValue: "CJC"
 [she]
-PR
+PRON
    sofa: _InitialView
    begin: 177
    end: 180
@@ -1165,7 +1165,7 @@ Token
       begin: 177
       end: 180
       value: "she"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 177
       end: 180
@@ -1198,7 +1198,7 @@ Token
       end: 185
       PosValue: "AV0"
 [dressed]
-V
+VERB
    sofa: _InitialView
    begin: 186
    end: 193
@@ -1219,13 +1219,13 @@ Token
       begin: 186
       end: 193
       value: "dress"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 186
       end: 193
       PosValue: "VVD"
 [herself]
-O
+X
    sofa: _InitialView
    begin: 194
    end: 201
@@ -1246,13 +1246,13 @@ Token
       begin: 194
       end: 201
       value: "herself"
-   pos: O
+   pos: X
       sofa: _InitialView
       begin: 194
       end: 201
       PosValue: "PNX"
 [,]
-PUNC
+PUNCT
    sofa: _InitialView
    begin: 201
    end: 202
@@ -1262,13 +1262,13 @@ Token
    sofa: _InitialView
    begin: 201
    end: 202
-   pos: PUNC
+   pos: PUNCT
       sofa: _InitialView
       begin: 201
       end: 202
       PosValue: "PUN"
 [she]
-PR
+PRON
    sofa: _InitialView
    begin: 203
    end: 206
@@ -1289,13 +1289,13 @@ Token
       begin: 203
       end: 206
       value: "she"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 203
       end: 206
       PosValue: "PNP"
 [said]
-V
+VERB
    sofa: _InitialView
    begin: 207
    end: 211
@@ -1316,7 +1316,7 @@ Token
       begin: 207
       end: 211
       value: "say"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 207
       end: 211
@@ -1354,7 +1354,7 @@ Token
       end: 217
       PosValue: "CJC"
 [you]
-PR
+PRON
    sofa: _InitialView
    begin: 218
    end: 221
@@ -1375,7 +1375,7 @@ Token
       begin: 218
       end: 221
       value: "you"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 218
       end: 221
@@ -1386,7 +1386,7 @@ Sentence
    begin: 224
    end: 307
 [She]
-PR
+PRON
    sofa: _InitialView
    begin: 224
    end: 227
@@ -1407,13 +1407,13 @@ Token
       begin: 224
       end: 227
       value: "she"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 224
       end: 227
       PosValue: "PNP"
 [said]
-V
+VERB
    sofa: _InitialView
    begin: 228
    end: 232
@@ -1434,13 +1434,13 @@ Token
       begin: 228
       end: 232
       value: "say"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 228
       end: 232
       PosValue: "VVD"
 [she]
-PR
+PRON
    sofa: _InitialView
    begin: 233
    end: 236
@@ -1461,13 +1461,13 @@ Token
       begin: 233
       end: 236
       value: "she"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 233
       end: 236
       PosValue: "PNP"
 [went]
-V
+VERB
    sofa: _InitialView
    begin: 237
    end: 241
@@ -1488,13 +1488,13 @@ Token
       begin: 237
       end: 241
       value: "go"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 237
       end: 241
       PosValue: "VVD"
 [to]
-O
+X
    sofa: _InitialView
    begin: 242
    end: 244
@@ -1515,13 +1515,13 @@ Token
       begin: 242
       end: 244
       value: "to"
-   pos: O
+   pos: X
       sofa: _InitialView
       begin: 242
       end: 244
       PosValue: "TO0"
 [buy]
-V
+VERB
    sofa: _InitialView
    begin: 245
    end: 248
@@ -1542,13 +1542,13 @@ Token
       begin: 245
       end: 248
       value: "buy"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 245
       end: 248
       PosValue: "VVI"
 [something]
-PR
+PRON
    sofa: _InitialView
    begin: 249
    end: 258
@@ -1569,13 +1569,13 @@ Token
       begin: 249
       end: 258
       value: "something"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 249
       end: 258
       PosValue: "PNI"
 [herself]
-O
+X
    sofa: _InitialView
    begin: 260
    end: 267
@@ -1596,13 +1596,13 @@ Token
       begin: 260
       end: 267
       value: "herself"
-   pos: O
+   pos: X
       sofa: _InitialView
       begin: 260
       end: 267
       PosValue: "PNX"
 [,]
-PUNC
+PUNCT
    sofa: _InitialView
    begin: 267
    end: 268
@@ -1612,13 +1612,13 @@ Token
    sofa: _InitialView
    begin: 267
    end: 268
-   pos: PUNC
+   pos: PUNCT
       sofa: _InitialView
       begin: 267
       end: 268
       PosValue: "PUN"
 [she]
-PR
+PRON
    sofa: _InitialView
    begin: 269
    end: 272
@@ -1639,13 +1639,13 @@ Token
       begin: 269
       end: 272
       value: "she"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 269
       end: 272
       PosValue: "PNP"
 [phoned]
-V
+VERB
    sofa: _InitialView
    begin: 273
    end: 279
@@ -1666,13 +1666,13 @@ Token
       begin: 273
       end: 279
       value: "phone"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 273
       end: 279
       PosValue: "VVD"
 [the]
-ART
+DET
    sofa: _InitialView
    begin: 280
    end: 283
@@ -1693,13 +1693,13 @@ Token
       begin: 280
       end: 283
       value: "the"
-   pos: ART
+   pos: DET
       sofa: _InitialView
       begin: 280
       end: 283
       PosValue: "AT0"
 [clinic]
-NN
+NOUN
    sofa: _InitialView
    begin: 284
    end: 290
@@ -1720,7 +1720,7 @@ Token
       begin: 284
       end: 290
       value: "clinic"
-   pos: NN
+   pos: NOUN
       sofa: _InitialView
       begin: 284
       end: 290
@@ -1753,7 +1753,7 @@ Token
       end: 294
       PosValue: "CJC"
 [the]
-ART
+DET
    sofa: _InitialView
    begin: 295
    end: 298
@@ -1774,13 +1774,13 @@ Token
       begin: 295
       end: 298
       value: "the"
-   pos: ART
+   pos: DET
       sofa: _InitialView
       begin: 295
       end: 298
       PosValue: "AT0"
 [clinic]
-NN
+NOUN
    sofa: _InitialView
    begin: 299
    end: 305
@@ -1801,13 +1801,13 @@ Token
       begin: 299
       end: 305
       value: "clinic"
-   pos: NN
+   pos: NOUN
       sofa: _InitialView
       begin: 299
       end: 305
       PosValue: "NN1"
 [.]
-PUNC
+PUNCT
    sofa: _InitialView
    begin: 306
    end: 307
@@ -1817,7 +1817,7 @@ Token
    sofa: _InitialView
    begin: 306
    end: 307
-   pos: PUNC
+   pos: PUNCT
       sofa: _InitialView
       begin: 306
       end: 307
@@ -1828,7 +1828,7 @@ Sentence
    begin: 308
    end: 358
 [She]
-PR
+PRON
    sofa: _InitialView
    begin: 308
    end: 311
@@ -1849,13 +1849,13 @@ Token
       begin: 308
       end: 311
       value: "she"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 308
       end: 311
       PosValue: "PNP"
 ['s]
-V
+VERB
    sofa: _InitialView
    begin: 311
    end: 313
@@ -1876,7 +1876,7 @@ Token
       begin: 311
       end: 313
       value: "be"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 311
       end: 313
@@ -1936,7 +1936,7 @@ Token
       end: 323
       PosValue: "CJC"
 [says]
-V
+VERB
    sofa: _InitialView
    begin: 325
    end: 329
@@ -1957,13 +1957,13 @@ Token
       begin: 325
       end: 329
       value: "say"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 325
       end: 329
       PosValue: "VVZ"
 [she]
-PR
+PRON
    sofa: _InitialView
    begin: 330
    end: 333
@@ -1984,13 +1984,13 @@ Token
       begin: 330
       end: 333
       value: "she"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 330
       end: 333
       PosValue: "PNP"
 [should]
-V
+VERB
    sofa: _InitialView
    begin: 334
    end: 340
@@ -2011,13 +2011,13 @@ Token
       begin: 334
       end: 340
       value: "should"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 334
       end: 340
       PosValue: "VM0"
 [be]
-V
+VERB
    sofa: _InitialView
    begin: 341
    end: 343
@@ -2038,7 +2038,7 @@ Token
       begin: 341
       end: 343
       value: "be"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 341
       end: 343
@@ -2071,7 +2071,7 @@ Token
       end: 356
       PosValue: "AV0"
 [.]
-PUNC
+PUNCT
    sofa: _InitialView
    begin: 357
    end: 358
@@ -2081,7 +2081,7 @@ Token
    sofa: _InitialView
    begin: 357
    end: 358
-   pos: PUNC
+   pos: PUNCT
       sofa: _InitialView
       begin: 357
       end: 358
@@ -2119,7 +2119,7 @@ Token
       end: 361
       PosValue: "AV0"
 [I]
-PR
+PRON
    sofa: _InitialView
    begin: 362
    end: 363
@@ -2140,13 +2140,13 @@ Token
       begin: 362
       end: 363
       value: "i"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 362
       end: 363
       PosValue: "PNP"
 [do]
-V
+VERB
    sofa: _InitialView
    begin: 364
    end: 366
@@ -2167,13 +2167,13 @@ Token
       begin: 364
       end: 366
       value: "do"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 364
       end: 366
       PosValue: "VDB"
 [n't]
-O
+X
    sofa: _InitialView
    begin: 366
    end: 369
@@ -2194,13 +2194,13 @@ Token
       begin: 366
       end: 369
       value: "not"
-   pos: O
+   pos: X
       sofa: _InitialView
       begin: 366
       end: 369
       PosValue: "XX0"
 [know]
-V
+VERB
    sofa: _InitialView
    begin: 370
    end: 374
@@ -2221,7 +2221,7 @@ Token
       begin: 370
       end: 374
       value: "know"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 370
       end: 374
@@ -2254,7 +2254,7 @@ Token
       end: 382
       PosValue: "CJS"
 [you]
-PR
+PRON
    sofa: _InitialView
    begin: 383
    end: 386
@@ -2275,13 +2275,13 @@ Token
       begin: 383
       end: 386
       value: "you"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 383
       end: 386
       PosValue: "PNP"
 [want]
-V
+VERB
    sofa: _InitialView
    begin: 387
    end: 391
@@ -2302,13 +2302,13 @@ Token
       begin: 387
       end: 391
       value: "want"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 387
       end: 391
       PosValue: "VVB"
 [to]
-O
+X
    sofa: _InitialView
    begin: 392
    end: 394
@@ -2329,13 +2329,13 @@ Token
       begin: 392
       end: 394
       value: "to"
-   pos: O
+   pos: X
       sofa: _InitialView
       begin: 392
       end: 394
       PosValue: "TO0"
 [go]
-V
+VERB
    sofa: _InitialView
    begin: 395
    end: 397
@@ -2356,7 +2356,7 @@ Token
       begin: 395
       end: 397
       value: "go"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 395
       end: 397
@@ -2389,7 +2389,7 @@ Token
       end: 401
       PosValue: "CJC"
 [see]
-V
+VERB
    sofa: _InitialView
    begin: 402
    end: 405
@@ -2410,13 +2410,13 @@ Token
       begin: 402
       end: 405
       value: "see"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 402
       end: 405
       PosValue: "VVI"
 [her]
-PR
+PRON
    sofa: _InitialView
    begin: 406
    end: 409
@@ -2437,7 +2437,7 @@ Token
       begin: 406
       end: 409
       value: "she"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 406
       end: 409
@@ -2497,7 +2497,7 @@ Token
       end: 421
       PosValue: "CJS"
 [,]
-PUNC
+PUNCT
    sofa: _InitialView
    begin: 421
    end: 422
@@ -2507,13 +2507,13 @@ Token
    sofa: _InitialView
    begin: 421
    end: 422
-   pos: PUNC
+   pos: PUNCT
       sofa: _InitialView
       begin: 421
       end: 422
       PosValue: "PUN"
 [I]
-PR
+PRON
    sofa: _InitialView
    begin: 423
    end: 424
@@ -2534,13 +2534,13 @@ Token
       begin: 423
       end: 424
       value: "i"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 423
       end: 424
       PosValue: "PNP"
 [could]
-V
+VERB
    sofa: _InitialView
    begin: 425
    end: 430
@@ -2561,13 +2561,13 @@ Token
       begin: 425
       end: 430
       value: "could"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 425
       end: 430
       PosValue: "VM0"
 [get]
-V
+VERB
    sofa: _InitialView
    begin: 431
    end: 434
@@ -2588,13 +2588,13 @@ Token
       begin: 431
       end: 434
       value: "get"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 431
       end: 434
       PosValue: "VVI"
 [a]
-ART
+DET
    sofa: _InitialView
    begin: 435
    end: 436
@@ -2615,13 +2615,13 @@ Token
       begin: 435
       end: 436
       value: "a"
-   pos: ART
+   pos: DET
       sofa: _InitialView
       begin: 435
       end: 436
       PosValue: "AT0"
 [doctor]
-NN
+NOUN
    sofa: _InitialView
    begin: 437
    end: 443
@@ -2642,13 +2642,13 @@ Token
       begin: 437
       end: 443
       value: "doctor"
-   pos: NN
+   pos: NOUN
       sofa: _InitialView
       begin: 437
       end: 443
       PosValue: "NN1"
 [to]
-O
+X
    sofa: _InitialView
    begin: 444
    end: 446
@@ -2669,13 +2669,13 @@ Token
       begin: 444
       end: 446
       value: "to"
-   pos: O
+   pos: X
       sofa: _InitialView
       begin: 444
       end: 446
       PosValue: "TO0"
 [go]
-V
+VERB
    sofa: _InitialView
    begin: 447
    end: 449
@@ -2696,7 +2696,7 @@ Token
       begin: 447
       end: 449
       value: "go"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 447
       end: 449
@@ -2729,7 +2729,7 @@ Token
       end: 453
       PosValue: "CJC"
 [see]
-V
+VERB
    sofa: _InitialView
    begin: 454
    end: 457
@@ -2750,13 +2750,13 @@ Token
       begin: 454
       end: 457
       value: "see"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 454
       end: 457
       PosValue: "VVI"
 [her]
-PR
+PRON
    sofa: _InitialView
    begin: 458
    end: 461
@@ -2777,7 +2777,7 @@ Token
       begin: 458
       end: 461
       value: "she"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 458
       end: 461
@@ -2810,7 +2810,7 @@ Token
       end: 465
       PosValue: "CJC"
 [phone]
-NN
+NOUN
    sofa: _InitialView
    begin: 466
    end: 471
@@ -2831,13 +2831,13 @@ Token
       begin: 466
       end: 471
       value: "phone"
-   pos: NN
+   pos: NOUN
       sofa: _InitialView
       begin: 466
       end: 471
       PosValue: "NN1-VVB"
 [,]
-PUNC
+PUNCT
    sofa: _InitialView
    begin: 471
    end: 472
@@ -2847,13 +2847,13 @@ Token
    sofa: _InitialView
    begin: 471
    end: 472
-   pos: PUNC
+   pos: PUNCT
       sofa: _InitialView
       begin: 471
       end: 472
       PosValue: "PUN"
 [.]
-PUNC
+PUNCT
    sofa: _InitialView
    begin: 472
    end: 473
@@ -2863,7 +2863,7 @@ Token
    sofa: _InitialView
    begin: 472
    end: 473
-   pos: PUNC
+   pos: PUNCT
       sofa: _InitialView
       begin: 472
       end: 473
@@ -2874,7 +2874,7 @@ Sentence
    begin: 474
    end: 518
 [it]
-PR
+PRON
    sofa: _InitialView
    begin: 474
    end: 476
@@ -2895,13 +2895,13 @@ Token
       begin: 474
       end: 476
       value: "it"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 474
       end: 476
       PosValue: "PNP"
 ['s]
-V
+VERB
    sofa: _InitialView
    begin: 476
    end: 478
@@ -2922,7 +2922,7 @@ Token
       begin: 476
       end: 478
       value: "be"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 476
       end: 478
@@ -2982,7 +2982,7 @@ Token
       end: 488
       PosValue: "CJT"
 [I]
-PR
+PRON
    sofa: _InitialView
    begin: 489
    end: 490
@@ -3003,13 +3003,13 @@ Token
       begin: 489
       end: 490
       value: "i"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 489
       end: 490
       PosValue: "PNP"
 ['m]
-V
+VERB
    sofa: _InitialView
    begin: 490
    end: 492
@@ -3030,7 +3030,7 @@ Token
       begin: 490
       end: 492
       value: "be"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 490
       end: 492
@@ -3063,7 +3063,7 @@ Token
       end: 498
       PosValue: "AV0"
 [gon]
-V
+VERB
    sofa: _InitialView
    begin: 499
    end: 502
@@ -3084,13 +3084,13 @@ Token
       begin: 499
       end: 502
       value: "gon"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 499
       end: 502
       PosValue: "VVG"
 [na]
-O
+X
    sofa: _InitialView
    begin: 502
    end: 504
@@ -3111,13 +3111,13 @@ Token
       begin: 502
       end: 504
       value: "na"
-   pos: O
+   pos: X
       sofa: _InitialView
       begin: 502
       end: 504
       PosValue: "TO0"
 [get]
-V
+VERB
    sofa: _InitialView
    begin: 505
    end: 508
@@ -3138,13 +3138,13 @@ Token
       begin: 505
       end: 508
       value: "get"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 505
       end: 508
       PosValue: "VVI"
 [to]
-PP
+ADP
    sofa: _InitialView
    begin: 509
    end: 511
@@ -3165,13 +3165,13 @@ Token
       begin: 509
       end: 511
       value: "to"
-   pos: PP
+   pos: ADP
       sofa: _InitialView
       begin: 509
       end: 511
       PosValue: "PRP"
 [up]
-O
+X
    sofa: _InitialView
    begin: 512
    end: 514
@@ -3192,13 +3192,13 @@ Token
       begin: 512
       end: 514
       value: "up"
-   pos: O
+   pos: X
       sofa: _InitialView
       begin: 512
       end: 514
       PosValue: "AVP"
 [to]
-PP
+ADP
    sofa: _InitialView
    begin: 515
    end: 517
@@ -3219,13 +3219,13 @@ Token
       begin: 515
       end: 517
       value: "to"
-   pos: PP
+   pos: ADP
       sofa: _InitialView
       begin: 515
       end: 517
       PosValue: "PRP"
 [.]
-PUNC
+PUNCT
    sofa: _InitialView
    begin: 517
    end: 518
@@ -3235,13 +3235,13 @@ Token
    sofa: _InitialView
    begin: 517
    end: 518
-   pos: PUNC
+   pos: PUNCT
       sofa: _InitialView
       begin: 517
       end: 518
       PosValue: "PUN"
 [?]
-PUNC
+PUNCT
    sofa: _InitialView
    begin: 519
    end: 520
@@ -3256,7 +3256,7 @@ Token
    sofa: _InitialView
    begin: 519
    end: 520
-   pos: PUNC
+   pos: PUNCT
       sofa: _InitialView
       begin: 519
       end: 520
@@ -3267,7 +3267,7 @@ Sentence
    begin: 521
    end: 526
 [Yeah]
-O
+X
    sofa: _InitialView
    begin: 521
    end: 525
@@ -3288,13 +3288,13 @@ Token
       begin: 521
       end: 525
       value: "yeah"
-   pos: O
+   pos: X
       sofa: _InitialView
       begin: 521
       end: 525
       PosValue: "ITJ"
 [.]
-PUNC
+PUNCT
    sofa: _InitialView
    begin: 525
    end: 526
@@ -3304,7 +3304,7 @@ Token
    sofa: _InitialView
    begin: 525
    end: 526
-   pos: PUNC
+   pos: PUNCT
       sofa: _InitialView
       begin: 525
       end: 526
@@ -3342,7 +3342,7 @@ Token
       end: 531
       PosValue: "AV0"
 [.]
-PUNC
+PUNCT
    sofa: _InitialView
    begin: 531
    end: 532
@@ -3352,7 +3352,7 @@ Token
    sofa: _InitialView
    begin: 531
    end: 532
-   pos: PUNC
+   pos: PUNCT
       sofa: _InitialView
       begin: 531
       end: 532
@@ -3363,7 +3363,7 @@ Sentence
    begin: 533
    end: 538
 [Yeah]
-O
+X
    sofa: _InitialView
    begin: 533
    end: 537
@@ -3384,13 +3384,13 @@ Token
       begin: 533
       end: 537
       value: "yeah"
-   pos: O
+   pos: X
       sofa: _InitialView
       begin: 533
       end: 537
       PosValue: "ITJ"
 [.]
-PUNC
+PUNCT
    sofa: _InitialView
    begin: 537
    end: 538
@@ -3400,7 +3400,7 @@ Token
    sofa: _InitialView
    begin: 537
    end: 538
-   pos: PUNC
+   pos: PUNCT
       sofa: _InitialView
       begin: 537
       end: 538
@@ -3411,7 +3411,7 @@ Sentence
    begin: 539
    end: 620
 [erm]
-O
+X
    sofa: _InitialView
    begin: 539
    end: 542
@@ -3432,13 +3432,13 @@ Token
       begin: 539
       end: 542
       value: "erm"
-   pos: O
+   pos: X
       sofa: _InitialView
       begin: 539
       end: 542
       PosValue: "UNC"
 [,]
-PUNC
+PUNCT
    sofa: _InitialView
    begin: 542
    end: 543
@@ -3448,13 +3448,13 @@ Token
    sofa: _InitialView
    begin: 542
    end: 543
-   pos: PUNC
+   pos: PUNCT
       sofa: _InitialView
       begin: 542
       end: 543
       PosValue: "PUN"
 [first]
-O
+X
    sofa: _InitialView
    begin: 544
    end: 549
@@ -3475,13 +3475,13 @@ Token
       begin: 544
       end: 549
       value: "first"
-   pos: O
+   pos: X
       sofa: _InitialView
       begin: 544
       end: 549
       PosValue: "ORD"
 [twelve]
-CARD
+NUM
    sofa: _InitialView
    begin: 551
    end: 557
@@ -3502,13 +3502,13 @@ Token
       begin: 551
       end: 557
       value: "twelve"
-   pos: CARD
+   pos: NUM
       sofa: _InitialView
       begin: 551
       end: 557
       PosValue: "CRD"
 [weeks]
-NN
+NOUN
    sofa: _InitialView
    begin: 558
    end: 563
@@ -3529,7 +3529,7 @@ Token
       begin: 558
       end: 563
       value: "week"
-   pos: NN
+   pos: NOUN
       sofa: _InitialView
       begin: 558
       end: 563
@@ -3589,7 +3589,7 @@ Token
       end: 575
       PosValue: "AV0"
 [should]
-V
+VERB
    sofa: _InitialView
    begin: 576
    end: 582
@@ -3610,13 +3610,13 @@ Token
       begin: 576
       end: 582
       value: "should"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 576
       end: 582
       PosValue: "VM0"
 [I]
-PR
+PRON
    sofa: _InitialView
    begin: 583
    end: 584
@@ -3637,13 +3637,13 @@ Token
       begin: 583
       end: 584
       value: "i"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 583
       end: 584
       PosValue: "PNP"
 [mark]
-V
+VERB
    sofa: _InitialView
    begin: 585
    end: 589
@@ -3664,13 +3664,13 @@ Token
       begin: 585
       end: 589
       value: "mark"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 585
       end: 589
       PosValue: "VVI"
 [at]
-PP
+ADP
    sofa: _InitialView
    begin: 590
    end: 592
@@ -3691,13 +3691,13 @@ Token
       begin: 590
       end: 592
       value: "at"
-   pos: PP
+   pos: ADP
       sofa: _InitialView
       begin: 590
       end: 592
       PosValue: "PRP"
 [the]
-ART
+DET
    sofa: _InitialView
    begin: 593
    end: 596
@@ -3718,13 +3718,13 @@ Token
       begin: 593
       end: 596
       value: "the"
-   pos: ART
+   pos: DET
       sofa: _InitialView
       begin: 593
       end: 596
       PosValue: "AT0"
 [bottom]
-NN
+NOUN
    sofa: _InitialView
    begin: 597
    end: 603
@@ -3745,7 +3745,7 @@ Token
       begin: 597
       end: 603
       value: "bottom"
-   pos: NN
+   pos: NOUN
       sofa: _InitialView
       begin: 597
       end: 603
@@ -3778,7 +3778,7 @@ Token
       end: 608
       PosValue: "CJS"
 [she]
-PR
+PRON
    sofa: _InitialView
    begin: 609
    end: 612
@@ -3799,13 +3799,13 @@ Token
       begin: 609
       end: 612
       value: "she"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 609
       end: 612
       PosValue: "PNP"
 [types]
-V
+VERB
    sofa: _InitialView
    begin: 613
    end: 618
@@ -3826,13 +3826,13 @@ Token
       begin: 613
       end: 618
       value: "type"
-   pos: V
+   pos: VERB
       sofa: _InitialView
       begin: 613
       end: 618
       PosValue: "VVZ"
 [.]
-PUNC
+PUNCT
    sofa: _InitialView
    begin: 619
    end: 620
@@ -3842,7 +3842,7 @@ Token
    sofa: _InitialView
    begin: 619
    end: 620
-   pos: PUNC
+   pos: PUNCT
       sofa: _InitialView
       begin: 619
       end: 620
@@ -3853,7 +3853,7 @@ Sentence
    begin: 621
    end: 635
 [Erm]
-O
+X
    sofa: _InitialView
    begin: 621
    end: 624
@@ -3874,13 +3874,13 @@ Token
       begin: 621
       end: 624
       value: "erm"
-   pos: O
+   pos: X
       sofa: _InitialView
       begin: 621
       end: 624
       PosValue: "UNC"
 [this]
-ART
+DET
    sofa: _InitialView
    begin: 626
    end: 630
@@ -3901,13 +3901,13 @@ Token
       begin: 626
       end: 630
       value: "this"
-   pos: ART
+   pos: DET
       sofa: _InitialView
       begin: 626
       end: 630
       PosValue: "DT0"
 [one]
-PR
+PRON
    sofa: _InitialView
    begin: 631
    end: 634
@@ -3928,13 +3928,13 @@ Token
       begin: 631
       end: 634
       value: "one"
-   pos: PR
+   pos: PRON
       sofa: _InitialView
       begin: 631
       end: 634
       PosValue: "PNI"
 [.]
-PUNC
+PUNCT
    sofa: _InitialView
    begin: 634
    end: 635
@@ -3944,7 +3944,7 @@ Token
    sofa: _InitialView
    begin: 634
    end: 635
-   pos: PUNC
+   pos: PUNCT
       sofa: _InitialView
       begin: 634
       end: 635

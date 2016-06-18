@@ -38,8 +38,8 @@ public class CogrooPosTaggerTest
         throws Exception
     {
         JCas jcas = runTest("pt", null, "Este é um teste .",
-                new String[] { "pron-det", "v-fin", "art", "n", "." },
-                new String[] { "PR", "V", "ART", "NN", "POS" });
+                new String[] { "pron-det", "v-fin", "art", "n",     "." },
+                new String[] { "PRON",     "VERB",  "DET", "NOUN", "POS" });
                 
 //        String[] posTags = new String[] { "?", "adj", "adv", "art", "conj-c", "conj-s", "ec", "in",
 //                "n", "num", "pp", "pron-det", "pron-indp", "pron-pers", "prop", "prp", "punc",

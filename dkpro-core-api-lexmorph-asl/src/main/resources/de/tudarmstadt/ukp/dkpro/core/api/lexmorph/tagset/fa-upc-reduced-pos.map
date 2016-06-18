@@ -1,41 +1,42 @@
 # Uppsala Persian Dependency Treebank
 
 __META_SOURCE_URL__=http://stp.lingfil.uu.se/~mojgan/Manual.pdf
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # ADJ - Adjective
-ADJ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+ADJ=ADJ
 # ADV - Adverb
-ADV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+ADV=ADV
 # CLITIC - Accusative marker
-CLITIC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+CLITIC=X
 # CON - Conjunction
-CON=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+CON=CONJ
 # DELM - Delimiter
-DELM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+DELM=PUNCT
 # DET - Determiner
-DET=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+DET=DET
 # ???
-END=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+END=X
 # FW - Foreign Word
-FW=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+FW=X
 # INT - Interjection
-INT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+INT=X
 # ???
-MID=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+MID=X
 # N - Noun
-N=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N
+N=NOUN
 # NUM - Numeral
-NUM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
+NUM=NUM
 # P - Preposition
-P=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+P=ADP
 # PREV - Preverbal particle
-PREV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+PREV=X
 # PRO - Pronoun
-PRO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PRO=PRON
 # ???
-STPOS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+STPOS=X
 # ???
-STR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+STR=X
 # V - Verb
-V=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+V=VERB
+*=X

@@ -6,6 +6,7 @@
 
 __META_SOURCE_URL__=http://spraakbanken.gu.se/parole/Docs/SUC2.0-manual.pdf
 __META_SOURCE_URL__.1=http://stp.lingfil.uu.se/~nivre/swedish_treebank/pos.html
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # AB	Adverb
 # DT	Determiner
@@ -38,4 +39,4 @@ __META_SOURCE_URL__.1=http://stp.lingfil.uu.se/~nivre/swedish_treebank/pos.html
 # PAD	Pairwise delimiter
 
 # Catch-all rule
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+*=X

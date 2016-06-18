@@ -5,78 +5,79 @@
 # Achim Stein
 
 __META_SOURCE_URL__=ftp://ftp.ims.uni-stuttgart.de/pub/corpora/italian-tagset.txt
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+*=X
 # ABR	abbreviation
-ABR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+ABR=X
 # ADJ	adjective
-ADJ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+ADJ=ADJ
 # ADV	adverb
-ADV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+ADV=ADV
 # CON	conjunction
-CON=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+CON=CONJ
 # DET:def	definite article
-DET\:def=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+DET\:def=DET
 # DET:indef	indefinite article
-DET\:indef=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+DET\:indef=DET
 # INT	interjection
-INT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+INT=X
 # NOM	noun
-NOM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+NOM=NOUN
 # NPR	name
-NPR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
+NPR=PROPN
 # NUM	numeral
-NUM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
+NUM=NUM
 # PON	punctuation
-PON=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+PON=PUNCT
 # PRE	preposition
-PRE=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+PRE=ADP
 # PRE:det	preposition+article
-PRE\:det=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+PRE\:det=ADP
 # PRO	pronoun
-PRO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PRO=PRON
 # PRO:demo	demonstrative pronoun
-PRO\:demo=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PRO\:demo=PRON
 # PRO:indef	indefinite pronoun
-PRO\:indef=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PRO\:indef=PRON
 # PRO:inter	interrogative pronoun
-PRO\:inter=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PRO\:inter=PRON
 # PRO:pers	personal pronoun
-PRO\:pers=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PRO\:pers=PRON
 # PRO:poss	possessive pronoun
-PRO\:poss=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PRO\:poss=PRON
 # PR:refl	reflexive pronoun
-PRO\:refl=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PRO\:refl=PRON
 # PRO:rela	relative pronoun
-PRO\:rela=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PRO\:rela=PRON
 # SENT	sentence marker
-SENT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+SENT=PUNCT
 # SYM	symbol
-SYM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+SYM=X
 # VER:cimp	verb conjunctive imperfect
-VER\:cimp=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VER\:cimp=VERB
 # VER:cond	verb conditional
-VER\:cond=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VER\:cond=VERB
 # VER:cpre	verb conjunctive present
-VER\:cpre=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VER\:cpre=VERB
 # VER:futu	verb future tense
-VER\:futu=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VER\:futu=VERB
 # VER:geru	verb gerund
-VER\:geru=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VER\:geru=VERB
 # VER:impe	verb imperative
-VER\:impe=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VER\:impe=VERB
 # VER:impf	verb imperfect
-VER\:impf=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VER\:impf=VERB
 # VER:infi	verb infinitive
-VER\:infi=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VER\:infi=VERB
 # VER:pper	verb participle perfect
-VER\:pper=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VER\:pper=VERB
 # VER:ppre	verb participle present
-VER\:ppre=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VER\:ppre=VERB
 # VER:pres	verb present
-VER\:pres=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VER\:pres=VERB
 # VER:refl:infi	verb reflexive infinitive
-VER\:refl\:infi=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VER\:refl\:infi=VERB
 # VER:remo	verb simple past
-VER\:remo=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-##*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS
+VER\:remo=VERB
+##*=POS

@@ -4,74 +4,75 @@
 # Mapped according to universal-pos-tags 1.03 zh-ctb6.map 
 
 __META_SOURCE_URL__=http://www.cs.brandeis.edu/~clp/ctb/posguide.3rd.ch.pdf
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # AD - adverb
-AD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+AD=ADJ
 # AS - aspect marker
-AS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRT
+AS=PART
 # BA - XX in ba-construction
-BA=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+BA=X
 # CC - coordinating conjunction
-CC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+CC=CONJ
 # CD - cardinal number
-CD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
+CD=NUM
 # CS - subordinating conjunction
-CS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+CS=CONJ
 # DEC - XX in a relative clause
-DEC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRT
+DEC=PART
 # DEG - associative XX
-DEG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRT
+DEG=PART
 # DER - XX in V-de const. and V-de-R
-DER=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRT
+DER=PART
 # DEV - XX bevore VP
-DEV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRT
+DEV=PART
 # DT - determiner
-DT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+DT=DET
 # ETC - for words XX, XX XX
-ETC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRT
+ETC=PART
 # FW - foreign words
-FW=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+FW=X
 # IJ - interjection
-IJ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+IJ=X
 # JJ - other noun-modifier
-JJ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+JJ=ADJ
 # LB - X in long bei-const
-LB=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+LB=X
 # LC - localizer
-LC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRT
+LC=PART
 # M - measure word
-M=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
+M=NUM
 # MSP - other particle
-MSP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRT
+MSP=PART
 # NN - common noun
-NN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+NN=NOUN
 # NR - proper noun
-NR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
+NR=PROPN
 # NT - temporal noun
-NT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+NT=NOUN
 # OD - ordinal number
-OD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
+OD=NUM
 # ON - onomatopoeia
-ON=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+ON=X
 # P - preposition excl. XX and XX
-P=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+P=ADP
 # PN - pronoun
-PN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PN=PRON
 # PU - punctuation
-PU=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+PU=PUNCT
 # SB - XX in short bei-const
-SB=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+SB=X
 # SP - sentence final particle
-SP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRT
+SP=PART
 # VA - predicative adjective
-VA=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VA=VERB
 # VC - XX
-VC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VC=VERB
 # VE - XX as the main verb
-VE=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VE=VERB
 # VV - other verb
-VV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VV=VERB
 # X
-X=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+X=X
 
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+*=X
