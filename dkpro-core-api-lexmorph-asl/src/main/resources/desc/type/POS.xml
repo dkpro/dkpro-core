@@ -111,77 +111,77 @@
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART</name>
       <description>Determiners and articles.
 
-@Deprecated</description>
+@deprecated</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD</name>
       <description>Numerals
 
-@Deprecated</description>
+@deprecated</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N</name>
       <description>Nouns
 
-@Deprecated</description>
+@deprecated</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN</name>
       <description>Common noun
 
-@Deprecated</description>
+@deprecated</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N</supertypeName>
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP</name>
       <description>Proper noun
 
-@Deprecated</description>
+@deprecated</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N</supertypeName>
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O</name>
       <description>Catch-all for other categories such as abbreviations or foreign words
 
-@Deprecated</description>
+@deprecated</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP</name>
       <description>Prepositions and postpositions
 
-@Deprecated</description>
+@deprecated</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR</name>
       <description>Pronoun
 
-@Deprecated</description>
+@deprecated</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRT</name>
       <description>Particles
 
-@Deprecated</description>
+@deprecated</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC</name>
       <description>Punctuation marks
 
-@Deprecated</description>
+@deprecated</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V</name>
       <description>Verbs
 
-@Deprecated</description>
+@deprecated</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
