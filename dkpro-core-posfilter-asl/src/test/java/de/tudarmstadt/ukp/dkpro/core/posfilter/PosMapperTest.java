@@ -47,8 +47,8 @@ public class PosMapperTest
 	{
 		String testDocument = testDocument1;
 
-		String[] posOriginal = new String[] { "DT", "NN", "VBZ", "IN", "CD", "NNS", "." };
-		String[] posOriginalDkpro = new String[] { "ART", "NN", "V", "PP", "CARD", "NN", "PUNC" };
+		String[] posOriginal = { "DT", "NN", "VBZ", "IN", "CD", "NNS", "." };
+        String[] posOriginalDkpro = { "DET", "NOUN", "VERB", "ADP", "NUM", "NOUN", "PUNCT" };
 
 		runTest("en", testDocument, posOriginal, posOriginalDkpro, false);
 	}
@@ -59,8 +59,8 @@ public class PosMapperTest
 	{
 		String testDocument = testDocument1;
 
-		String[] posMapped = new String[] { "DET", "N", "V", "IN", "MADE_UP_POS", "N", "." };
-		String[] posMappedDkpro = new String[] { "ART", "NN", "V", "PP", "O", "NN", "PUNC" };
+		String[] posMapped = { "DET", "N", "V", "IN", "MADE_UP_POS", "N", "." };
+        String[] posMappedDkpro = { "DET", "NOUN", "VERB", "ADP", "X", "NOUN", "PUNCT" };
 
 		runTest("en", testDocument, posMapped, posMappedDkpro, true);
 	}
