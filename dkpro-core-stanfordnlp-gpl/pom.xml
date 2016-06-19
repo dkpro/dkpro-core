@@ -217,7 +217,7 @@
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-nowiki.3class.nodistsim.crf</artifactId>
-      <version>20160110.0</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -418,6 +418,11 @@
           Sticking with 3.5.2 version for the moment
         -->
         <version>20140225.0</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-nowiki.3class.nodistsim.crf</artifactId>
+        <version>20160110.0</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>

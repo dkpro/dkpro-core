@@ -208,7 +208,7 @@
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-nowiki.3class.nodistsim.crf</artifactId>
-      <version>20160110.0</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -469,6 +469,11 @@
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-muc.7class.caseless.distsim.crf</artifactId>
         <version>20150129.0</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-nowiki.3class.nodistsim.crf</artifactId>
+        <version>20160110.0</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
