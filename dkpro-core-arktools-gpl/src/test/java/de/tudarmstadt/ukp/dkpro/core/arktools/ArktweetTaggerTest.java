@@ -20,53 +20,60 @@ package de.tudarmstadt.ukp.dkpro.core.arktools;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.junit.Assert.assertEquals;
-
-import java.util.Collection;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.*;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
-
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class ArktweetTaggerTest
 {
-
     @Test
     public void arktweetTaggerTest()
         throws Exception
     {
         runTest("en",
                 "@Gunservatively obozo will go nuts when PA elects a Republican Governor next Tue. Can you say redistricting?",
-                new String[] { "@Gunservatively", "obozo", "will", "go", "nuts", "when", "PA", "elects", "a", "Republican", "Governor", "next", "Tue", ".", "Can", "you", "say", "redistricting", "?" },
-                new String[] { "@", "^", "V", "V", "A", "R", "^", "V", "D", "A", "N", "P", "^", ",", "V", "O", "V", "V", "," },
-                new String[] { "AT", "NP", "V", "V", "ADJ", "ADV", "NP", "V", "ART", "ADJ", "NN", "PP", "NP", "PUNC", "V", "PR", "V", "V", "PUNC" }
+                new String[] { "@Gunservatively", "obozo", "will", "go", "nuts", "when", "PA",
+                        "elects", "a", "Republican", "Governor", "next", "Tue", ".", "Can", "you",
+                        "say", "redistricting", "?" },
+                new String[] { "@", "^", "V", "V", "A", "R", "^", "V", "D", "A", "N", "P", "^", ",",
+                        "V", "O", "V", "V", "," },
+                new String[] { "AT", "PROPN", "VERB", "VERB", "ADJ", "ADV", "PROPN", "VERB", "DET",
+                        "ADJ", "NOUN", "ADP", "PROPN", "PUNCT", "VERB", "PRON", "VERB", "VERB",
+                        "PUNCT" }
         );
 
         runTest("en",
                 "Spending the day withhh mommma !",
-                new String[] { "Spending", "the", "day", "withhh", "mommma", "!"    },
-                new String[] { "V",        "D",   "N",   "P",      "N",      ","    },
-                new String[] { "V",        "ART", "NN",  "PP",     "NN",     "PUNC" }
+                new String[] { "Spending", "the", "day", "withhh", "mommma", "!" },
+                new String[] { "V", "D", "N", "P", "N", "," },
+                new String[] { "VERB", "DET", "NOUN", "ADP", "NOUN", "PUNCT" }
         );
 
         runTest("en",
                 "lmao ... s/o to the cool ass asian officer 4 #1 not runnin my license and #2 not takin dru boo to jail . Thank u God . #amen",
-                new String[] { "lmao", "...",  "s/o", "to", "the", "cool", "ass", "asian", "officer", "4",  "#1",   "not", "runnin", "my",  "license", "and",  "#2",   "not", "takin", "dru", "boo", "to", "jail", ".",    "Thank", "u",  "God", ".",    "#amen" },
-                new String[] { "!",    ",",    "V",   "P",  "D",   "A",    "N",   "A",     "N",       "P",  "$",    "R",   "V",      "D",   "N",       "&",    "$",    "R",   "V",     "N",   "N",   "P",  "N",    ",",    "V",     "O",  "^",   ",",    "#"     },
-                new String[] { "INT",  "PUNC", "V",   "PP", "ART", "ADJ",  "NN",  "ADJ",   "NN",      "PP", "CARD", "ADV", "V",      "ART", "NN",      "CONJ", "CARD", "ADV", "V",     "NN",  "NN",  "PP", "NN",   "PUNC", "V",     "PR", "NP",  "PUNC", "HASH"  }
+                new String[] { "lmao", "...", "s/o", "to", "the", "cool", "ass", "asian", "officer",
+                        "4", "#1", "not", "runnin", "my", "license", "and", "#2", "not", "takin",
+                        "dru", "boo", "to", "jail", ".", "Thank", "u", "God", ".", "#amen" },
+                new String[] { "!", ",", "V", "P", "D", "A", "N", "A", "N", "P", "$", "R", "V", "D",
+                        "N", "&", "$", "R", "V", "N", "N", "P", "N", ",", "V", "O", "^", ",", "#" },
+                new String[] { "INT", "PUNCT", "VERB", "ADP", "DET", "ADJ", "NOUN", "ADJ", "NOUN",
+                        "ADP", "NUM", "ADV", "VERB", "DET", "NOUN", "CONJ", "NUM", "ADV", "VERB",
+                        "NOUN", "NOUN", "ADP", "NOUN", "PUNCT", "VERB", "PRON", "PROPN", "PUNCT",
+                        "HASH" }
         );
 
         runTest("en",
                 "Different smiley styles :) :-) (^_^) ^o #smiley",
-                new String[] { "Different", "smiley",  "styles", ":)", ":-)", "(^_^)", "^o", "#smiley"},
-                new String[] { "A",         "A",       "N",      "E",  "E",   "E",     "E",   "#"},
-                new String[] { "ADJ",       "ADJ",     "NN",     "EMO","EMO", "EMO",   "EMO", "HASH"}
+                new String[] { "Different", "smiley", "styles", ":)", ":-)", "(^_^)", "^o",
+                        "#smiley" },
+                new String[] { "A", "A", "N", "E", "E", "E", "E", "#" },
+                new String[] { "ADJ", "ADJ", "NOUN", "EMO", "EMO", "EMO", "EMO", "HASH" }
         );
     }
 
@@ -81,13 +88,9 @@ public class ArktweetTaggerTest
 //        );
 //    }
     
-    private JCas runTest(
-            String language,
-            String testDocument,
-            String[] tokens,
-            String[] tags,
+    private JCas runTest(String language, String testDocument, String[] tokens, String[] tags,
             String[] tagClasses)
-        throws Exception
+                throws Exception
     {
         AnalysisEngine tokenizer = createEngine(
                 ArktweetTokenizer.class
@@ -105,43 +108,12 @@ public class ArktweetTaggerTest
         tokenizer.process(aJCas);
         tagger.process(aJCas);
 
-        // test tokens
-        checkTokens(tokens, select(aJCas, Token.class));
-
-        // test POS annotations
-        if (tagClasses != null && tags != null) {
-            checkTags(tagClasses, tags, select(aJCas, POS.class));
-        }
-
+        assertToken(tokens, select(aJCas, Token.class));
+        assertPOS(tagClasses, tags, select(aJCas, POS.class));
+        
         return aJCas;
     }
 
-    private void checkTokens(String[] expected, Collection<Token> actual)
-    {
-        int i = 0;
-        for (Token tokenAnnotation : actual) {
-            assertEquals("In position "+i, expected[i], tokenAnnotation.getCoveredText());
-            i++;
-        }
-    }
-
-    private void checkTags(String[] tagClasses, String[] tags, Collection<POS> actual)
-    {
-        int i = 0;
-        for (POS posAnnotation : actual) {
-            assertEquals("In position "+i, tagClasses[i], posAnnotation.getType().getShortName());
-            assertEquals("In position "+i, tags[i],       posAnnotation.getPosValue());
-            i++;
-        }
-    }
-
     @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
-    }
-
+    public DkproTestContext testContext = new DkproTestContext();
 }

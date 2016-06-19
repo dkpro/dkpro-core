@@ -26,8 +26,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import junit.framework.Assert;
-
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
@@ -47,6 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2006Reader;
 import de.tudarmstadt.ukp.dkpro.core.snowball.SnowballStemmer;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import junit.framework.Assert;
 
 public class PosFilterTest
 {
@@ -56,11 +55,11 @@ public class PosFilterTest
     {
         String testDocument = "src/test/resources/posfilter/text1.conll";
 
-        String[] tokens = new String[] { "long", "test", "sentence", "second", "test", "sentence",
-                "More", "sentences", "necessary", "tests" };
+        String[] tokens = { "long", "test", "sentence", "second", "test", "sentence", "More",
+                "sentences", "necessary", "tests" };
 
         runTest("en", testDocument, tokens, null, null, null, null, PosFilter.PARAM_TYPE_TO_REMOVE,
-                Token.class.getName(), PosFilter.PARAM_ADJ, true, PosFilter.PARAM_N, true);
+                Token.class.getName(), PosFilter.PARAM_ADJ, true, PosFilter.PARAM_NOUN, true);
     }
 
     @Test
@@ -69,12 +68,12 @@ public class PosFilterTest
     {
         String testDocument = "src/test/resources/posfilter/text1.conll";
 
-        String[] tokens = new String[] { "is", "long", "test", "sentence", "is", "second", "test",
-                "sentence", "More", "sentences", "are", "necessary", "tests" };
+        String[] tokens = { "is", "long", "test", "sentence", "is", "second", "test", "sentence",
+                "More", "sentences", "are", "necessary", "tests" };
 
         runTest("en", testDocument, tokens, null, null, null, null, PosFilter.PARAM_TYPE_TO_REMOVE,
-                Token.class.getName(), PosFilter.PARAM_ADJ, true, PosFilter.PARAM_N, true,
-                PosFilter.PARAM_V, true);
+                Token.class.getName(), PosFilter.PARAM_ADJ, true, PosFilter.PARAM_NOUN, true,
+                PosFilter.PARAM_VERB, true);
     }
 
     @Test
@@ -83,13 +82,13 @@ public class PosFilterTest
     {
         String testDocument = "src/test/resources/posfilter/text2.conll";
 
-        String[] tokens = new String[] { "This", "is", "a", "not", "so", "long", "test",
-                "sentence", "." };
-        String[] lemmas = new String[] { "be", "long", "test", "sentence" };
+        String[] tokens = { "This", "is", "a", "not", "so", "long", "test", "sentence", "." };
+        
+        String[] lemmas = { "be", "long", "test", "sentence" };
 
         runTest("en", testDocument, tokens, lemmas, null, null, null,
                 PosFilter.PARAM_TYPE_TO_REMOVE, Lemma.class.getName(), PosFilter.PARAM_ADJ, true,
-                PosFilter.PARAM_N, true, PosFilter.PARAM_V, true);
+                PosFilter.PARAM_NOUN, true, PosFilter.PARAM_VERB, true);
     }
 
     @Test
@@ -98,14 +97,15 @@ public class PosFilterTest
     {
         String testDocument = "src/test/resources/posfilter/text2.conll";
 
-        String[] tokens = new String[] { "This", "is", "a", "not", "so", "long", "test",
-                "sentence", "." };
-        String[] pos = new String[] { "VBZ", "JJ", "NN", "NN" };
-        String[] originalPos = new String[] { "V", "ADJ", "NN", "NN" };
+        String[] tokens = { "This", "is", "a", "not", "so", "long", "test", "sentence", "." };
+        
+        String[] originalPos = { "VBZ", "JJ", "NN", "NN" };
+        
+        String[] mappedPos = { "VERB", "ADJ", "NOUN", "NOUN" };
 
-        runTest("en", testDocument, tokens, null, null, pos, originalPos,
+        runTest("en", testDocument, tokens, null, null, originalPos, mappedPos,
                 PosFilter.PARAM_TYPE_TO_REMOVE, POS.class.getName(), PosFilter.PARAM_ADJ, true,
-                PosFilter.PARAM_N, true, PosFilter.PARAM_V, true);
+                PosFilter.PARAM_NOUN, true, PosFilter.PARAM_VERB, true);
     }
 
     private void runTest(String language, String testDocument, String[] aTokens, String[] aLemmas,

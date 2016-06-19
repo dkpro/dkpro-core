@@ -1,41 +1,41 @@
 <text id="T990507.2">
 <s>
-Seine	PPOSAT	PR	-	Sein
-Position	NN	NN	-	Position
-bei	APPR	PP	-	bei
-der	ART	ART	-	der
-Prüfgesellschaft	NN	NN	-	Prufgesellschaft
-mußte	VVFIN	V	-	musst
-er	PPER	PR	-	er
+Seine	PPOSAT	PRON	-	Sein
+Position	NN	NOUN	-	Position
+bei	APPR	ADP	-	bei
+der	ART	DET	-	der
+Prüfgesellschaft	NN	NOUN	-	Prufgesellschaft
+mußte	VVFIN	VERB	-	musst
+er	PPER	PRON	-	er
 damals	ADV	ADV	-	damal
-niederlegen	VVPP	V	-	niederleg
-,	$,	PUNC	-	,
-den	ART	ART	-	den
-AWO-Posten	NN	NN	-	AWO-Post
-nicht	PTKNEG	O	-	nicht
-.	$.	PUNC	-	.
+niederlegen	VVPP	VERB	-	niederleg
+,	$,	PUNCT	-	,
+den	ART	DET	-	den
+AWO-Posten	NN	NOUN	-	AWO-Post
+nicht	PTKNEG	X	-	nicht
+.	$.	PUNCT	-	.
 </s>
 <s>
-K.	NE	NP	-	K.
-W.	NE	NP	-	W.
+K.	NE	PROPN	-	K.
+W.	NE	PROPN	-	W.
 </s>
 </text>
 <text id="T990507.3">
 <s>
-SPD	NE	NP	-	SPD
-/	$(	PUNC	-	/
-CDU	NE	NP	-	CDu
-/	$(	PUNC	-	/
-AfB	NE	NP	-	AfB
-für	$(	PUNC	-	fur
-Daewoo-Millionen	NN	NN	-	Daewoo-Million
+SPD	NE	PROPN	-	SPD
+/	$(	PUNCT	-	/
+CDU	NE	PROPN	-	CDu
+/	$(	PUNCT	-	/
+AfB	NE	PROPN	-	AfB
+für	$(	PUNCT	-	fur
+Daewoo-Millionen	NN	NOUN	-	Daewoo-Million
 </s>
 <s>
 Aber	KON	CONJ	-	Aber
-Bremerhavens	NE	NP	-	Bremerhav
-AfB	NE	NP	-	AfB
-fordert	VVFIN	V	-	fordert
+Bremerhavens	NE	PROPN	-	Bremerhav
+AfB	NE	PROPN	-	AfB
+fordert	VVFIN	VERB	-	fordert
 jetzt	ADV	ADV	-	jetzt
-Untersuchungsausschuß	NN	NN	-	untersuchungsausschuss
+Untersuchungsausschuß	NN	NOUN	-	untersuchungsausschuss
 </s>
 </text>

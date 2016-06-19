@@ -56,9 +56,10 @@ public class PennTreebankChunkedReaderTest
                 "VBD", "PRP", "VBZ", "VBN", "DT", "$", "CD", "CD", "NN", "NN", "IN", "JJS", "IN",
                 "NNP", "NNP", "NNP", "POS", "NN", "CC", "NN", "NNS", "." };
 
-        String[] posMapped = { "ART", "NN", "PP", "ADJ", "NN", "V", "PP", "NP", "NP", "NP", "V",
-                "PR", "V", "V", "ART", "PUNC", "CARD", "CARD", "NN", "NN", "PP", "ADJ", "PP", "NP",
-                "NP", "NP", "O", "NN", "CONJ", "NN", "NN", "PUNC" };
+        String[] posMapped = { "DET", "NOUN", "ADP", "ADJ", "NOUN", "VERB", "ADP", "PROPN", "PROPN",
+                "PROPN", "VERB", "PRON", "VERB", "VERB", "DET", "PUNCT", "NUM", "NUM", "NOUN",
+                "NOUN", "ADP", "ADJ", "ADP", "PROPN", "PROPN", "PROPN", "X", "NOUN", "CONJ", "NOUN",
+                "NOUN", "PUNCT" };
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jCas, POS.class));
     }
@@ -69,10 +70,10 @@ public class PennTreebankChunkedReaderTest
     {
         JCas jCas = readTestFile("generalTest.pos");
 
-        String[] tokens = new String[] { "A", "consortium", "of", "private", "investors",
-                "operating", "as", "LJH", "Funding", "Co.", "said", "it", "has", "made", "a", "$",
-                "409", "million", "cash", "bid", "for", "most", "of", "L.J.", "Hooker", "Corp.",
-                "'s", "real-estate", "and", "shopping-center", "holdings", "." };
+        String[] tokens = { "A", "consortium", "of", "private", "investors", "operating", "as",
+                "LJH", "Funding", "Co.", "said", "it", "has", "made", "a", "$", "409", "million",
+                "cash", "bid", "for", "most", "of", "L.J.", "Hooker", "Corp.", "'s", "real-estate",
+                "and", "shopping-center", "holdings", "." };
 
         AssertAnnotations.assertToken(tokens, select(jCas, Token.class));
     }
@@ -83,9 +84,9 @@ public class PennTreebankChunkedReaderTest
     {
         JCas jcas = readTestFile("erroneouslyJoinedTokensAndTheirTags.pos");
 
-        String[] posOriginal = new String[] { "DT", "NNS", "NNS" };
+        String[] posOriginal = { "DT", "NNS", "NNS" };
 
-        String[] posMapped = new String[] { "ART", "NN", "NN" };
+        String[] posMapped = { "DET", "NOUN", "NOUN" };
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
     }
@@ -96,7 +97,8 @@ public class PennTreebankChunkedReaderTest
     {
         JCas jcas = readTestFile("generalTest.pos");
 
-        String[] chunks = new String[] { "[  0, 12]Chunk(null) (A consortium)",
+        String[] chunks = { 
+                "[  0, 12]Chunk(null) (A consortium)",
                 "[ 16, 33]Chunk(null) (private investors)",
                 "[ 47, 62]Chunk(null) (LJH Funding Co.)", "[ 68, 70]Chunk(null) (it)",
                 "[ 80,104]Chunk(null) (a $ 409 million cash bid)", "[109,113]Chunk(null) (most)",
@@ -115,9 +117,9 @@ public class PennTreebankChunkedReaderTest
     {
         JCas jcas = readTestFile("severalPOSToken.pos");
 
-        String[] posOriginal = new String[] { "VBG", "NN" };
+        String[] posOriginal = { "VBG", "NN" };
 
-        String[] posMapped = new String[] { "V", "NN" };
+        String[] posMapped = { "VERB", "NOUN" };
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
     }

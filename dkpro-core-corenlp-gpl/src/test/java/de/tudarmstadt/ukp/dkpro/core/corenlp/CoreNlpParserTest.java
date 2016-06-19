@@ -822,8 +822,8 @@ public class CoreNlpParserTest
                 "[ 41, 42]MARK(mark) D[41,42](的) G[37,40](尽可能)",
                 "[ 43, 45]CONJ(conj) D[43,45](依赖) G[26,28](包含)" };
 
-        String[] posMapped = { "PR", "V", "CARD", "ADJ", "ADJ", "PRT", "NN", "ADJ", "NN", "V",
-                "CARD", "NN", "CONJ", "ADJ", "PRT", "V", "PUNC" };
+        String[] posMapped = { "PRON", "VERB", "NUM", "ADJ", "ADJ", "PART", "NOUN", "ADJ", "NOUN",
+                "VERB", "NUM", "NOUN", "CONJ", "ADJ", "PART", "VERB", "PUNCT" };
 
         String[] posOriginal = { "PN", "VV", "CD", "AD", "JJ", "DEG", "NN", "AD", "NN", "VV", "CD",
                 "NN", "CC", "AD", "DEV", "VV", "PU" };
