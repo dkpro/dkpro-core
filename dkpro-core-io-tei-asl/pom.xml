@@ -20,7 +20,7 @@
 	<parent>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<version>1.8.0</version>
+		<version>1.8.1-SNAPSHOT</version>
 		<relativePath>../dkpro-core-asl</relativePath>
 	</parent>
     <artifactId>de.tudarmstadt.ukp.dkpro.core.io.tei-asl</artifactId>
@@ -156,7 +156,7 @@
             <dependency>
                 <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
                 <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
-                <version>1.8.0</version>
+                <version>1.8.1-SNAPSHOT</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
