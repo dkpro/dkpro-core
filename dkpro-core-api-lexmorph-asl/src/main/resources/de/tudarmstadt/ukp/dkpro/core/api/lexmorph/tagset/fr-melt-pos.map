@@ -35,7 +35,7 @@ DETWH=DET
 # ET	   foreign word
 ET=X
 # I	       interjection
-I=X
+I=INTJ
 # NC	   common noun
 NC=NOUN
 # NPP	   proper noun

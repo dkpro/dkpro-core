@@ -9,17 +9,27 @@ __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 *=X
 
 # a          adjective
+a=ADJ
 # ad        adjective as adverbial
+ad=ADJ
 # ag        adjective morpheme
+a=ADJ
 # an        adjective with nominal function
+a=ADJ
 # b          non-predicate adjective
+b=ADJ
 # bg        non-predicate adjective morpheme
+bg=ADJ
 # c           conjunction
+c=CONJ
 # cg         conjunction morpheme
+cg=CONJ
 # d           adverb
 d=ADV
 # dg         adverb morpheme
+dg=ADV
 # e           interjection
+e=INTJ
 # ew        sentential punctuation
 ew=PUNCT
 # f            directional locality
@@ -31,34 +41,53 @@ ew=PUNCT
 # k           suffix
 # l            fixed expressions
 # m         numeral
+m=NUM
 # mg       numeric morpheme
+mg=NUM
 # n           common noun
 n=NOUN
 # ng         noun morpheme
+ng=NOUN
 # nr          personal name
+nr=PROPN
 # ns         place name
+ns=PROPN
 # nt          organization name
+nt=PROPN
 # nx         nominal character string
+nx=PROPN
 # nz         other proper noun
+nz=PROPN
 # o           onomatopoeia
 # p           preposition
+p=ADP
 # pg         preposition morpheme
+pg=ADP
 # q           classifier
 # qg         classifier morpheme
 # r            pronoun
+r=PRON
 # rg          pronoun morpheme
+rg=PRON
 # s           space word
 # t            time word
 # tg          time word morpheme
 # u           auxiliary
+u=AUX
 # v           verb
 v=VERB
 # vd         verb as adverbial
+v=VERB
 # vg         verb morpheme
+v=VERB
 # vn         verb with nominal function
+v=VERB
 # w          symbol and non-sentential punctuation
+w=SYM
 # x           unclassified items
-# y           modal particle 
+# y           modal particle
+y=PART
 # yg         modal particle morpheme
+yg=PART
 # z           descriptive
 # zg         descriptive morpheme

@@ -21,7 +21,7 @@ DET\:def=DET
 # DET:indef	indefinite article
 DET\:indef=DET
 # INT	interjection
-INT=X
+INT=INTJ
 # NOM	noun
 NOM=NOUN
 # NPR	name
@@ -53,7 +53,7 @@ PRO\:rela=PRON
 # SENT	sentence marker
 SENT=PUNCT
 # SYM	symbol
-SYM=X
+SYM=SYM
 # VER:cimp	verb conjunctive imperfect
 VER\:cimp=VERB
 # VER:cond	verb conditional

@@ -76,11 +76,11 @@ RBS=ADV
 RP=ADP
 SENT=PUNCT
 # 24.	SYM	Symbol
-SYM=PUNCT
+SYM=SYM
 # 25.	TO	to
 TO=ADP
 # 26.	UH	Interjection
-UH=X
+UH=INTJ
 # 27.	VB	Verb, base form
 VB=VERB
 # 28.	VBD	Verb, past tense

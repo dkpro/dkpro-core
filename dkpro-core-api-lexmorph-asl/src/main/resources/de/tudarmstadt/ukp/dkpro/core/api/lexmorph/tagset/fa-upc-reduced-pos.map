@@ -20,7 +20,7 @@ END=X
 # FW - Foreign Word
 FW=X
 # INT - Interjection
-INT=X
+INT=INTJ
 # ???
 MID=X
 # N - Noun

@@ -14,7 +14,7 @@ DEM=PRON
 # VM   Verb-finite
 VM=VERB
 # VAUX Verb Auxiliary
-VAUX=VERB
+VAUX=AUX
 # JJ   Adjective
 JJ=ADJ
 # RB   Adverb
@@ -34,11 +34,11 @@ QC=NUM
 # INTF Intensifier
 INTF=X
 # INJ  Interjection
-INJ=X
+INJ=INTJ
 # NEG  Negation
 NEG=X
 # SYM  Symbol
-SYM=X
+SYM=SYM
 # RDP  Re-duplicative
 RDP=X
 # UNK  Unknown

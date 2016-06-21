@@ -17,9 +17,9 @@ C=CONJ
 # CC    coordinating conjunction
 CC=CONJ
 # CS    subordinating conjunction
-CS=CONJ
+CS=SCONJ
 # I     interjection
-I=X
+I=INTJ
 # N     noun
 N=NOUN
 # NP    proper noun
@@ -63,7 +63,7 @@ XP=PUNCT
 # XR    formulae
 XR=X
 # XS    symbol
-XS=PUNCT
+XS=SYM
 # XX    other
 XX=X
 # Catch-all

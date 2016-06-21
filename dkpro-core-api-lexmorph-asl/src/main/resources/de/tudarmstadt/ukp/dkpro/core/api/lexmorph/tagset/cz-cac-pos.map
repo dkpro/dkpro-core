@@ -10,7 +10,7 @@ C=NUM
 # D   Adverb
 D=ADV
 # I   Interjection
-I=X
+I=INTJ
 # J   Conjunction
 J=CONJ
 # N   Noun
@@ -22,7 +22,7 @@ V=VERB
 # R   Preposition
 R=ADP
 # T   Particle
-T=X
+T=PART
 # X   Unknown, Not Determined, Unclassifiable
 X=X
 # Z   Punctuation (also used for the Sentence Boundary token)

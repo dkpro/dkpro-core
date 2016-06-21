@@ -6,7 +6,7 @@ __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 # CC coordinating conjunction 
 CC=CONJ
 # CS subordinating conjunction 
-CS=CONJ
+CS=SCONJ
 # CSN comparative conjunction (than) 
 CSN=CONJ
 # CST complementizer (that) 
@@ -50,7 +50,7 @@ RRR=ADV
 # RRT superlative adverb 
 RRT=ADV
 # SYM symbol 
-SYM=PUNCT
+SYM=SYM
 # TO infinitive marker to 
 TO=ADP
 # VM modal 

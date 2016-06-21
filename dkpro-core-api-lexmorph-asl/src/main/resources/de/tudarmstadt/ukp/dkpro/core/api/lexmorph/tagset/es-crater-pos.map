@@ -11,22 +11,31 @@ __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # ACRNM	acronym (ISO, CEI)
 # ADJ	Adjectives (mayores, mayor)
+ADJ=ADJ
 # ADV	Adverbs (muy, demasiado, cómo)
 # ALFP	Plural letter of the alphabet (As/Aes, bes)
 # ALFS	Singular letter of the alphabet (A, b)
 # ART	Articles (un, las, la, unas)
+ART=DET
 # BACKSLASH backslash (\)	
 # CARD	Cardinals
+CARD=NUM
 # CC	Coordinating conjunction (y, o)
+CC=CONJ
 # CCAD	Adversative coordinating conjunction (pero)
+CCAD=CONJ
 # CCNEG	Negative coordinating conjunction (ni)
+CCNEG=CONJ
 # CM	comma (,)
 # CODE	Alphanumeric code
 # COLON	colon (:)
 # CQUE	que (as conjunction)
 # CSUBF	Subordinating conjunction that introduces finite clauses (apenas)
+CSUBF=SCONJ
 # CSUBI	Subordinating conjunction that introduces infinite clauses (al)
+CSUBI=SCONJ
 # CSUBX	Subordinating conjunction underspecified for subord-type (aunque)
+CSUBX=SCONJ
 # DASH	dash (-)
 # DM	Demonstrative pronouns (ésas, ése, esta)
 # DOTS	POS tag for "..."
@@ -34,18 +43,22 @@ __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 # FS	Full stop punctuation marks
 # INT	Interrogative pronouns (quiénes, cuántas, cuánto)
 # ITJN	Interjection (oh, ja)
+ITJN=INTJ
 # LP	left parenthesis ("(", "[")
 # NC	Common nouns (mesas, mesa, libro, ordenador)
 # NEG	Negation
 # NMEA	measure noun (metros, litros)
 # NMON	month name
 # NP	Proper nouns
+NP=PROPN
 # ORD	Ordinals (primer, primeras, primera)
+ORD=NUM
 # PAL	Portmanteau word formed by a and el
 # PDEL	Portmanteau word formed by de and el
 # PE	Foreign word
 # PERCT	percent sign (%)
 # PNC	Unclassified word
+PNC=X
 # PPC	Clitic personal pronoun (le, les)
 # PPO	Possessive pronouns (mi, su, sus)
 # PPX	Clitics and personal pronouns (nos, me, nosotras, te, sí)
@@ -60,6 +73,7 @@ __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 # SEMICOLON	semicolon (;)
 # SLASH	slash (/)
 # SYM	Symbols
+SYM=SYM
 # UMMX	measure unit (MHz, km, mA)
 # VCLIger clitic gerund verb
 # VCLIinf clitic infinitive verb

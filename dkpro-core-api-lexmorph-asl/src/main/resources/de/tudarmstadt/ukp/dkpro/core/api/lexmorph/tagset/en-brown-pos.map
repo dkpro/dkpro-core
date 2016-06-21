@@ -48,7 +48,7 @@ CC=CONJ
 # cardinal numeral (one, two, 2, etc.)
 CD=NUM
 # subordinating conjunction (if, although)
-CS=CONJ
+CS=SCONJ
 # do
 DO=VERB
 # did
@@ -90,7 +90,7 @@ JJS=ADJ
 # morphologically superlative adjective (biggest)
 JJT=ADJ
 # modal auxiliary (can, should, will)
-MD=VERB
+MD=AUX
 # cited word (hyphenated after regular tag)
 NC=X
 # singular or mass noun
@@ -152,7 +152,7 @@ TL=X
 # infinitive marker to
 TO=ADP
 # interjection, exclamation
-UH=PART
+UH=INTJ
 # verb, base form
 VB=VERB
 # verb, past tense

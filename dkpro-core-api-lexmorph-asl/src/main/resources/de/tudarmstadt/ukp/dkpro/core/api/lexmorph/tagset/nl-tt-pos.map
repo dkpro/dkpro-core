@@ -7,43 +7,84 @@ __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 *=POS
 # $.		sentence-final punctuation
+$.=PUNCT
 # adj		adjective
+adj=ADJ
 # adj*kop		truncated adjective
+adj*kop=ADJ
 # adjabbr		abbreviated adjective
+adjabbr=ADJ
 # adv		adverb
+adv=ADV
 # advabbr		abbreviated adverb
+advabbr=ADV
 # conjcoord	coordinating conjunction
+conjcoord=CONJ
 # conjsubo	subordinating conjunction
+conjsubo=SCONJ
 # det__art	article
+det__art=DET
 # det__demo	attributively used demonstrative pronoun
+det__demo=PRON
 # det__indef	attributively used indefinite pronoun
+det__indef=PRON
 # det__poss	attributively used possessive pronoun
+det__poss=PRON
 # det__quest	attributively used question pronoun
+det__quest=PRON
 # det__rel	attributively used relative pronoun
+det__rel=PRON
 # int		interjection
+int=INTJ
 # noun*kop	truncated noun
+noun*kop=NOUN
 # nounabbr	abbreviated noun
+nounabbr=NOUN
 # nounpl		plural noun
+nounpl=NOUN
 # nounprop	proper name
+nounprop=PROPN
 # nounsg		singular noun
+nounsg=NOUN
 # num__card	cardinal number
+num__card=NUM
 # num__ord	ordinal number
+num__ord=NUM
 # partte		particle "te"
+partte=PART
 # prep		preposition
+prep=ADP
 # prepabbr	abbreviated preposition
+prepabbr=ADP
 # pronadv		pronomial adverb
+pronadv=ADV
 # prondemo	demonstrative pronoun (used substitutively)
+prondemo=PRON
 # pronindef	indefined pronoun
+pronindef=PRON
 # pronpers	personal pronoun
+pronpers=PRON
 # pronposs	possessive pronoun
+pronposs=PRON
 # pronquest	question pronoun
+pronquest=PRON
 # pronrefl	reflexive pronoun
+pronrefl=PRON
 # pronrel		relative pronoun
+pronrel=PRON
 # punc		(non-sentential) punctuation
+punc=SYM
 # verbinf		infinitival verb
+verbinf=VERB
 # verbpapa	past participle verb
+verbpapa=VERB
 # verbpastpl	plural past tense verb
+verbpastpl=VERB
 # verbpastsg	singular past tense verb
+verbpastsg=VERB
 # verbpresp	present participle verb
+verbpresp=VERB
 # verbprespl	plural present tense verb
+verbprespl=VERB
 # verbpressg	singular present tense verb
+verbpressg=VERB

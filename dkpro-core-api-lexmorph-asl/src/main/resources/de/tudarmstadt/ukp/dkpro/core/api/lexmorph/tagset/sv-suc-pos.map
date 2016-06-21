@@ -16,6 +16,7 @@ __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 # HS	WH-possessive
 # IE	Infinitival marker
 # IN	Interjection
+IN=INTJ
 # JJ	Adjective
 # KN	Coordinating conjunction
 # NN	Noun

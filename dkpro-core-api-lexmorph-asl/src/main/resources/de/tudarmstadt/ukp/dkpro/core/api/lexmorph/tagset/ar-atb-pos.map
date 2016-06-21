@@ -34,7 +34,7 @@ RB=ADV
 # RP - particle
 RP=PART
 # UH - interjection
-UH=X
+UH=INTJ
 # VBD - perfect verb (***nb: perfect rather than past tense)
 VBD=VERB
 # VBN - passive verb (***nb: passive rather than past participle)

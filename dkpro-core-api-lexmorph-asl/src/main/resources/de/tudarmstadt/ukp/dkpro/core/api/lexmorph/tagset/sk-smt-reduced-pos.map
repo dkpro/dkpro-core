@@ -30,7 +30,7 @@ Gsx=VERB
 Gsy=VERB
 Gsz=VERB
 # J - Interjections
-J=X
+J=INTJ
 # N - Numeral
 ND=NUM
 Np=NUM

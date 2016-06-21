@@ -33,7 +33,7 @@ ETC=PART
 # FW - foreign words
 FW=X
 # IJ - interjection
-IJ=X
+IJ=INTJ
 # JJ - other noun-modifier
 JJ=ADJ
 # LB - X in long bei-const

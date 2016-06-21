@@ -36,9 +36,9 @@ DET=DET
 # FW - Foreign Word
 FW=X
 # INT - Interjection
-INT=X
+INT=INTJ
 # SYM - Symbol
-SYM=X
+SYM=SYM
 # N_PL - Plural noun
 N_PL=NOUN
 # N_SING - Singular noun
@@ -54,7 +54,7 @@ PREV=X
 # PRO - Pronoun
 PRO=PRON
 # V_AUX - Auxiliary verb
-V_AUX=VERB
+V_AUX=AUX
 # V_IMP - Imperative verb
 V_IMP=VERB
 # V_PA - Past tense verb

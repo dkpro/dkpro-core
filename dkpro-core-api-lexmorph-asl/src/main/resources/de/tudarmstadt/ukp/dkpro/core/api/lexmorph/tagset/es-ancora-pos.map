@@ -44,7 +44,7 @@ ft=PUNCT
 fx=PUNCT
 fz=PUNCT
 # interjection
-i=X
+i=INTJ
 # common noun
 nc00000=NOUN
 nc0n000=NOUN

@@ -19,7 +19,7 @@ DET\:ART=DET
 # DET:POS	possessive pronoun (ma, ta, ...)
 DET\:POS=PRON
 # INT	interjection
-INT=X
+INT=INTJ
 # KON	conjunction
 KON=CONJ
 # NAM	proper name
@@ -51,7 +51,7 @@ PUN\:cit=PUNCT
 # SENT	sentence tag
 SENT=PUNCT
 # SYM	symbol
-SYM=X
+SYM=SYM
 # VER:cond	verb conditional
 VER\:cond=VERB
 # VER:futu	verb futur

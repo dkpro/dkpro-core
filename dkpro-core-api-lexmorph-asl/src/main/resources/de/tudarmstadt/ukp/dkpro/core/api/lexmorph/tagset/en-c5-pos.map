@@ -47,17 +47,17 @@ AVQ-CJS=ADV
 CJC=CONJ
 
 # CJS	Subordinating conjunction (e.g. although, when)
-CJS=CONJ
-CJS-AVQ=CONJ
-CJS-PRP=CONJ
+CJS=SCONJ
+CJS-AVQ=SCONJ
+CJS-PRP=SCONJ
 
 
 # CJT	The subordinating conjunction that [N.B. that is tagged CJT when it introduces not only a 
 #       nominal clause, but also a relative clause, as in 'the day that follows Christmas'. Some 
 #       theories treat that here as a relative pronoun, whereas others treat it as a conjunction. We
 #       have adopted the latter analysis.]
-CJT=CONJ
-CJT-DT0=CONJ
+CJT=SCONJ
+CJT-DT0=SCONJ
 
 # CRD	Cardinal number (e.g. one, 3, fifty-five, 3609)
 CRD=NUM
@@ -82,6 +82,7 @@ DTQ=DET
 # EX0	Existential there, i.e. there occurring in the there is ... or there are ... construction
 
 # ITJ	Interjection or other isolate (e.g. oh, yes, mhm, wow)
+ITJ=INTJ
 
 # NN0	Common noun, neutral for number (e.g. aircraft, data, committee) [N.B. Singular collective
 #       nouns such as committee and team are tagged NN0, on the grounds that they are capable of
@@ -110,6 +111,7 @@ NP0-NN1=PROPN
 # ORD	Ordinal numeral (e.g. first, sixth, 77th, last) . [N.B. The ORD tag is used whether these
 #       words are used in a nominal or in an adverbial role. Next and last, as "general ordinals",
 #       are also assigned to this category.]
+ORD=NUM
 
 # PNI	Indefinite pronoun (e.g. none, everything, one [as pronoun], nobody) [N.B. This tag applies
 #       to words which always function as [heads of] noun phrases. Words like some and these, which
@@ -158,6 +160,7 @@ PUR=PUNCT
 # UNC	Unclassified items which are not appropriately classified as items of the English lexicon. 
 #       [Items tagged UNC include foreign (non-English) words, special typographical symbols, 
 #       formulae, and (in spoken language) hesitation fillers such as er and erm.]
+UNC=X
 
 # VBB	The present tense forms of the verb BE, except for is, 's: i.e. am, are, 'm, 're and be 
 #       [subjunctive or imperative]
@@ -215,7 +218,7 @@ VHN=VERB
 VHZ=VERB
 
 # VM0	Modal auxiliary verb (e.g. will, would, can, could, 'll, 'd)
-VM0=VERB
+VM0=AUX
 
 # VVB	The finite base form of lexical verbs (e.g. forget, send, live, return) [Including the 
 #       imperative and present subjunctive]
@@ -246,5 +249,7 @@ VVZ-NN2=VERB
 
 
 # XX0	The negative particle not or n't
+XX0=PART
 
 # ZZ0	Alphabetical symbols (e.g. A, a, B, b, c, d)
+ZZ0=X

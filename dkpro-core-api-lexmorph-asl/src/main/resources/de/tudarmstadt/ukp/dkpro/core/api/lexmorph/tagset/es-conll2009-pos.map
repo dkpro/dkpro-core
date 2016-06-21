@@ -15,7 +15,7 @@ d=DET
 #Punctuation
 f=PUNCT
 #Interjection
-i=X
+i=INTJ
 #Noun
 n=NOUN
 #Pronoun
