@@ -34,7 +34,7 @@ Sentence
    begin: 1
    end: 18
 [Ah]
-X
+INTJ
    sofa: _InitialView
    begin: 1
    end: 3
@@ -55,7 +55,7 @@ Token
       begin: 1
       end: 3
       value: "ah"
-   pos: X
+   pos: INTJ
       sofa: _InitialView
       begin: 1
       end: 3
@@ -513,7 +513,7 @@ Token
       end: 77
       PosValue: "VDD"
 [n't]
-X
+PART
    sofa: _InitialView
    begin: 77
    end: 80
@@ -534,7 +534,7 @@ Token
       begin: 77
       end: 80
       value: "not"
-   pos: X
+   pos: PART
       sofa: _InitialView
       begin: 77
       end: 80
@@ -648,7 +648,7 @@ Token
       end: 98
       PosValue: "PNP"
 [that]
-CONJ
+SCONJ
    sofa: _InitialView
    begin: 99
    end: 103
@@ -669,7 +669,7 @@ Token
       begin: 99
       end: 103
       value: "that"
-   pos: CONJ
+   pos: SCONJ
       sofa: _InitialView
       begin: 99
       end: 103
@@ -1009,7 +1009,7 @@ Token
       end: 151
       PosValue: "VBD"
 [n't]
-X
+PART
    sofa: _InitialView
    begin: 151
    end: 154
@@ -1030,7 +1030,7 @@ Token
       begin: 151
       end: 154
       value: "not"
-   pos: X
+   pos: PART
       sofa: _InitialView
       begin: 151
       end: 154
@@ -1990,7 +1990,7 @@ Token
       end: 333
       PosValue: "PNP"
 [should]
-VERB
+AUX
    sofa: _InitialView
    begin: 334
    end: 340
@@ -2011,7 +2011,7 @@ Token
       begin: 334
       end: 340
       value: "should"
-   pos: VERB
+   pos: AUX
       sofa: _InitialView
       begin: 334
       end: 340
@@ -2173,7 +2173,7 @@ Token
       end: 366
       PosValue: "VDB"
 [n't]
-X
+PART
    sofa: _InitialView
    begin: 366
    end: 369
@@ -2194,7 +2194,7 @@ Token
       begin: 366
       end: 369
       value: "not"
-   pos: X
+   pos: PART
       sofa: _InitialView
       begin: 366
       end: 369
@@ -2227,7 +2227,7 @@ Token
       end: 374
       PosValue: "VVI"
 [whether]
-CONJ
+SCONJ
    sofa: _InitialView
    begin: 375
    end: 382
@@ -2248,7 +2248,7 @@ Token
       begin: 375
       end: 382
       value: "whether"
-   pos: CONJ
+   pos: SCONJ
       sofa: _InitialView
       begin: 375
       end: 382
@@ -2470,7 +2470,7 @@ Token
       end: 416
       PosValue: "AV0"
 [than]
-CONJ
+SCONJ
    sofa: _InitialView
    begin: 417
    end: 421
@@ -2491,7 +2491,7 @@ Token
       begin: 417
       end: 421
       value: "than"
-   pos: CONJ
+   pos: SCONJ
       sofa: _InitialView
       begin: 417
       end: 421
@@ -2540,7 +2540,7 @@ Token
       end: 424
       PosValue: "PNP"
 [could]
-VERB
+AUX
    sofa: _InitialView
    begin: 425
    end: 430
@@ -2561,7 +2561,7 @@ Token
       begin: 425
       end: 430
       value: "could"
-   pos: VERB
+   pos: AUX
       sofa: _InitialView
       begin: 425
       end: 430
@@ -2955,7 +2955,7 @@ Token
       end: 483
       PosValue: "AV0"
 [that]
-CONJ
+SCONJ
    sofa: _InitialView
    begin: 484
    end: 488
@@ -2976,7 +2976,7 @@ Token
       begin: 484
       end: 488
       value: "that"
-   pos: CONJ
+   pos: SCONJ
       sofa: _InitialView
       begin: 484
       end: 488
@@ -3267,7 +3267,7 @@ Sentence
    begin: 521
    end: 526
 [Yeah]
-X
+INTJ
    sofa: _InitialView
    begin: 521
    end: 525
@@ -3288,7 +3288,7 @@ Token
       begin: 521
       end: 525
       value: "yeah"
-   pos: X
+   pos: INTJ
       sofa: _InitialView
       begin: 521
       end: 525
@@ -3363,7 +3363,7 @@ Sentence
    begin: 533
    end: 538
 [Yeah]
-X
+INTJ
    sofa: _InitialView
    begin: 533
    end: 537
@@ -3384,7 +3384,7 @@ Token
       begin: 533
       end: 537
       value: "yeah"
-   pos: X
+   pos: INTJ
       sofa: _InitialView
       begin: 533
       end: 537
@@ -3454,7 +3454,7 @@ Token
       end: 543
       PosValue: "PUN"
 [first]
-X
+NUM
    sofa: _InitialView
    begin: 544
    end: 549
@@ -3475,7 +3475,7 @@ Token
       begin: 544
       end: 549
       value: "first"
-   pos: X
+   pos: NUM
       sofa: _InitialView
       begin: 544
       end: 549
@@ -3589,7 +3589,7 @@ Token
       end: 575
       PosValue: "AV0"
 [should]
-VERB
+AUX
    sofa: _InitialView
    begin: 576
    end: 582
@@ -3610,7 +3610,7 @@ Token
       begin: 576
       end: 582
       value: "should"
-   pos: VERB
+   pos: AUX
       sofa: _InitialView
       begin: 576
       end: 582
@@ -3751,7 +3751,7 @@ Token
       end: 603
       PosValue: "NN1-AJ0"
 [when]
-CONJ
+SCONJ
    sofa: _InitialView
    begin: 604
    end: 608
@@ -3772,7 +3772,7 @@ Token
       begin: 604
       end: 608
       value: "when"
-   pos: CONJ
+   pos: SCONJ
       sofa: _InitialView
       begin: 604
       end: 608
