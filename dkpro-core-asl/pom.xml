@@ -172,6 +172,11 @@
 			</dependency>
             <dependency>
                 <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                <artifactId>de.tudarmstadt.ukp.dkpro.core.fs.hdfs-asl</artifactId>
+                <version>1.9.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
                 <artifactId>de.tudarmstadt.ukp.dkpro.core.io.ancora-asl</artifactId>
                 <version>1.9.0-SNAPSHOT</version>
             </dependency>
@@ -463,6 +468,8 @@
 		<module>../dkpro-core-api-transform-asl</module>
 		<module>../dkpro-core-api-ner-asl</module>
 		<module>../dkpro-core-api-frequency-asl</module>
+        <!-- FS modules -->
+        <module>../dkpro-core-fs-hdfs-asl</module>
 	    <!-- IO modules -->
 		<module>../dkpro-core-io-aclanthology-asl</module>
         <module>../dkpro-core-io-ancora-asl</module>
