@@ -35,6 +35,7 @@ _latest release_
 * [Model Reference]({{ site.url }}/releases/{{ stable.version }}/docs/model-reference.html)
 * [Format Reference]({{ site.url }}/releases/{{ stable.version }}/docs/format-reference.html)
 * [Tagset Mapping Reference]({{ site.url }}/releases/{{ stable.version }}/docs/tagset-reference)
+* [API documentation]({{ site.url }}/releases/{{ stable.version }}/apidocs/)
 
 {% for unstable in site.data.releases reversed %}
 {% if unstable.status == 'unstable' %}
