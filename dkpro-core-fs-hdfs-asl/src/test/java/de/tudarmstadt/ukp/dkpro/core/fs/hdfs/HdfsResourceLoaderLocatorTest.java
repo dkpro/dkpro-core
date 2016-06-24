@@ -34,12 +34,18 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ExternalResourceDescription;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class HdfsResourceLoaderLocatorTest
 {
+    // Need to use this for a proper temporary folder because otherwise we get an error if
+    // the tests runs within some folder that has percentage signs in its path...
+    @Rule
+    public TemporaryFolder folder= new TemporaryFolder();
+    
     @Test
     public void testExternalLoaderLocator()
         throws Exception
@@ -47,7 +53,8 @@ public class HdfsResourceLoaderLocatorTest
         String document = "This is a test.";
         
         // Start dummy HDFS
-        File target = testContext.getTestOutputFolder();
+        File target = folder.newFolder("hdfs");
+        
         File baseDir = new File(target, "hdfs").getAbsoluteFile();
         FileUtil.fullyDelete(baseDir);
         Configuration conf = new Configuration();
