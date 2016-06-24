@@ -28,13 +28,13 @@ permalink: "/documentation/"
 _latest release_
 
 * [Release notes](https://github.com/dkpro/dkpro-core/releases/tag/de.tudarmstadt.ukp.dkpro.core-{{ stable.version }})
-* [User Guide and Reference]({{ site.url }}/releases/{{ stable.version }}/user-guide.html)
-* [Developer Guide]({{ site.url }}/releases/{{ stable.version }}/developer-guide.html)
-* [Component Reference]({{ site.url }}/releases/{{ stable.version }}/component-reference.html)
-* [Type System Reference]({{ site.url }}/releases/{{ stable.version }}/typesystem-reference.html)
-* [Model Reference]({{ site.url }}/releases/{{ stable.version }}/model-reference.html)
-* [Format Reference]({{ site.url }}/releases/{{ stable.version }}/format-reference.html)
-* [Tagset Mapping Reference]({{ site.url }}/releases/{{ stable.version }}/tagset-reference)
+* [User Guide and Reference]({{ site.url }}/releases/{{ stable.version }}/docs/user-guide.html)
+* [Developer Guide]({{ site.url }}/releases/{{ stable.version }}/docs/developer-guide.html)
+* [Component Reference]({{ site.url }}/releases/{{ stable.version }}/docs/component-reference.html)
+* [Type System Reference]({{ site.url }}/releases/{{ stable.version }}/docs/typesystem-reference.html)
+* [Model Reference]({{ site.url }}/releases/{{ stable.version }}/docs/model-reference.html)
+* [Format Reference]({{ site.url }}/releases/{{ stable.version }}/docs/format-reference.html)
+* [Tagset Mapping Reference]({{ site.url }}/releases/{{ stable.version }}/docs/tagset-reference)
 
 {% for unstable in site.data.releases reversed %}
 {% if unstable.status == 'unstable' %}

@@ -15,13 +15,13 @@
   side: left
   dropdown:
   - title: "Components"
-    url: "/releases/!LATEST!/component-reference.html"
+    url: "/releases/!LATEST!/docs/component-reference.html"
   - title: "Models"
-    url: "/releases/!LATEST!/model-reference.html"
+    url: "/releases/!LATEST!/docs/model-reference.html"
   - title: "Formats"
-    url: "/releases/!LATEST!/format-reference.html"
+    url: "/releases/!LATEST!/docs/format-reference.html"
   - title: "Typesystem"
-    url: "/releases/!LATEST!/typesystem-reference.html"
+    url: "/releases/!LATEST!/docs/typesystem-reference.html"
   - title: "Javadoc"
     url: "/releases/!LATEST!/apidocs/"
   - title: "Recipes (Groovy)"
