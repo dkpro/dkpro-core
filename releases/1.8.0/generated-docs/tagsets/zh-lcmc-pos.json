@@ -1,0 +1,23 @@
+{
+    "name": "LCMC",
+    "description": "The LCMC tagset\n\nReferences:\n* http://www.lancs.ac.uk/fass/projects/corpus/LCMC/lcmc/lcmc_tagset.htm\n",
+    "language": "zh",
+    "tags": [
+        {
+            "tag_name": "d",
+            "tag_description": "adverb"
+        },
+        {
+            "tag_name": "ew",
+            "tag_description": "sentential punctuation"
+        },
+        {
+            "tag_name": "n",
+            "tag_description": "common noun"
+        },
+        {
+            "tag_name": "v",
+            "tag_description": "verb"
+        }
+    ]
+}

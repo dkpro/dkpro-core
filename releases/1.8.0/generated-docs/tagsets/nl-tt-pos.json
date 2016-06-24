@@ -1,0 +1,8 @@
+{
+    "name": "TreeTagger",
+    "description": "Dutch TreeTagger Part-of-Speech Tags\n\nReferences:\n* ftp://ftp.ims.uni-stuttgart.de/pub/corpora/dutch-tagset.txt\n",
+    "language": "nl",
+    "tags": [
+        
+    ]
+}

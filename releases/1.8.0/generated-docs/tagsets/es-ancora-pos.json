@@ -1,0 +1,343 @@
+{
+    "name": "Ancora",
+    "description": "Spanish Part-of-Speech Tags from the Ancora Corpus\n\n\nThis list was extracted from the Spanish model used by the Stanford CoreNLP 3.4.1 tagger\nand matched against the official Ancora documentation. It may be incomplete with regards to the\ntags actually used in the corpus.\n\nReferences:\n* http://clic.ub.edu/corpus/webfm_send/18\n* http://www.lrec-conf.org/proceedings/lrec2008/pdf/35_paper.pdf\n",
+    "language": "es",
+    "tags": [
+        {
+            "tag_name": "ao0000",
+            "tag_description": "adjective"
+        },
+        {
+            "tag_name": "aq0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "cc",
+            "tag_description": "conjunction"
+        },
+        {
+            "tag_name": "cs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "da0000",
+            "tag_description": "determiner"
+        },
+        {
+            "tag_name": "dd0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "de0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "di0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "dn0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "dp0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "dt0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "f0",
+            "tag_description": "punctuation"
+        },
+        {
+            "tag_name": "faa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fat",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fe",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fh",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fia",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fit",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fpa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fpt",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ft",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fx",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fz",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "i",
+            "tag_description": "interjection"
+        },
+        {
+            "tag_name": "nc00000",
+            "tag_description": "common noun"
+        },
+        {
+            "tag_name": "nc0n000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "nc0p000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "nc0s000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "np00000",
+            "tag_description": "proper noun"
+        },
+        {
+            "tag_name": "p0000000",
+            "tag_description": "pronoun"
+        },
+        {
+            "tag_name": "pd000000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pe000000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pi000000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pn000000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pp000000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pr000000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pt000000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "px000000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "rg",
+            "tag_description": "adverb"
+        },
+        {
+            "tag_name": "rn",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "sp000",
+            "tag_description": "preposition"
+        },
+        {
+            "tag_name": "vag0000",
+            "tag_description": "verb"
+        },
+        {
+            "tag_name": "vaic000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vaif000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vaii000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vaip000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vais000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vam0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "van0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vap0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vasi000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vasp000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vmg0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vmic000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vmif000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vmii000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vmip000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vmis000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vmm0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vmn0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vmp0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vmsi000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vmsp000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vsg0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vsic000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vsif000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vsii000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vsip000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vsis000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vsm0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vsn0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vsp0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vssf000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vssi000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "vssp000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "w",
+            "tag_description": "date"
+        },
+        {
+            "tag_name": "z0",
+            "tag_description": "number"
+        },
+        {
+            "tag_name": "zm",
+            "tag_description": "number - currency"
+        },
+        {
+            "tag_name": "zu",
+            "tag_description": "No description."
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "name": "Brandolini",
+    "description": "Latin TreeTagger Part-of-Speech Tags\n\nGabriele Brandolini\n\nSource: extracted from model file using TT4J",
+    "language": "la",
+    "tags": [
+        
+    ]
+}

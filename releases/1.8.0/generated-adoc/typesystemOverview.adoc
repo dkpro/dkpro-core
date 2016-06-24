@@ -1,0 +1,167 @@
+
+
+.Top-level Types
+[options="header"]
+|====
+|Type|Description
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.Anomaly,Anomaly>>
+| __No description__
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.ArticleInfo,ArticleInfo>>
+| pass:[Contains basic information about the article.]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk,Chunk>>
+| __No description__
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound,Compound>>
+| pass:[This type represents a decompounding word, i.e.: flowerpot.]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent,Constituent>>
+| __No description__
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink,CoreferenceLink>>
+| pass:[A link in the coreference chain.]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig,DBConfig>>
+| pass:[Database configuration for the connection to the database where the CAS data was retrieved.]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency,Dependency>>
+| pass:[A dependency relation between two tokens.]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div,Div>>
+| pass:[Document structure element.]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field,Field>>
+| __No description__
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma,Lemma>>
+| __No description__
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.MetaDataStringField,MetaDataStringField>>
+| pass:[A general purpose annotation to store document-wide information in the form of arbitrary key-value string pairs.]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme,Morpheme>>
+| __No description__
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures,MorphologicalFeatures>>
+| pass:[Morphological categories that can be attached to tokens.]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NGram,NGram>>
+| __No description__
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity,NamedEntity>>
+| pass:[Named entities refer e.g. to persons, locations, organizations and so on.]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS,POS>>
+| pass:[The part of speech of a word or a phrase.]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree,PennTree>>
+| pass:[The Penn Treebank-style phrase structure string.]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.phonetics.type.PhoneticTranscription,PhoneticTranscription>>
+| pass:[Represents the phonetic transcription of some textual element (usually a Token).]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.type.ReadabilityScore,ReadabilityScore>>
+| __No description__
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument,SemanticArgument>>
+| pass:[The SemanticArgument annotation is attached to semantic arguments of semantic
+predicates.]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField,SemanticField>>
+| pass:[The SemanticField is a coarse-grained semantic category that can be attached to
+nouns, verbs or adjectives.]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate,SemanticPredicate>>
+| pass:[One of the predicates of a sentence (often a main verb, but nouns and adjectives can also be predicates).]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+| __No description__
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation,SofaChangeAnnotation>>
+| pass:[Encodes an edit operation that can be interpreted by the ApplyChangesAnnotator.]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split,Split>>
+| pass:[This type represents a part of a decompounding word.]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.sentiment.type.StanfordSentimentAnnotation,StanfordSentimentAnnotation>>
+| pass:[Stanford CoreNLP Sentiment annotation]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem,Stem>>
+| __No description__
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.StopWord,StopWord>>
+| __No description__
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SuggestedAction,SuggestedAction>>
+| __No description__
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.syntax.type.Tag,Tag>>
+| pass:[A multi purpose tag]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagsetDescription,TagsetDescription>>
+| pass:[Information about a tagset (controlled vocabulary).]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.type.Tfidf,Tfidf>>
+| pass:[Annotates the tf.idf score of a token, stem, or lemma.]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.performance.type.TimerAnnotation,TimerAnnotation>>
+| pass:[Used for storing timing information (e.g. for performance testing).]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token,Token>>
+| pass:[Token is one of the two types commonly produced by a segmenter (the other being Sentence).]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution,TopicDistribution>>
+| pass:[An array representing the topic proportions in a document.]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaLink,WikipediaLink>>
+| pass:[Wikipedia link]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision,WikipediaRevision>>
+| pass:[Represents a revision in Wikipedia.]
+
+
+| <<type-de.tudarmstadt.ukp.dkpro.core.api.semantics.type.WordSense,WordSense>>
+| __No description__
+
+
+|====

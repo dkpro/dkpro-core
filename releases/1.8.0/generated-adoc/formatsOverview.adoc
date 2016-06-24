@@ -1,0 +1,399 @@
+.Formats (49)
+[options="header"]
+|====
+|Format|Reader|Writer
+
+
+| <<format-AclAnthology,AclAnthology>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.aclanthology.AclAnthologyReader,AclAnthologyReader>>
+
+
+| none
+
+
+| <<format-BinaryCas,BinaryCas>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasReader,BinaryCasReader>>
+
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasWriter,BinaryCasWriter>>
+
+
+| <<format-BlikiWikipedia,BlikiWikipedia>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.bliki.BlikiWikipediaReader,BlikiWikipediaReader>>
+
+
+| none
+
+
+| <<format-Bnc,Bnc>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.bnc.BncReader,BncReader>>
+
+
+| none
+
+
+| <<format-Brat,Brat>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.brat.BratReader,BratReader>>
+
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.brat.BratWriter,BratWriter>>
+
+
+| <<format-Combination,Combination>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.combination.CombinationReader,CombinationReader>>
+
+
+| none
+
+
+| <<format-Conll2000,Conll2000>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2000Reader,Conll2000Reader>>
+
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2000Writer,Conll2000Writer>>
+
+
+| <<format-Conll2002,Conll2002>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2002Reader,Conll2002Reader>>
+
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2002Writer,Conll2002Writer>>
+
+
+| <<format-Conll2006,Conll2006>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2006Reader,Conll2006Reader>>
+
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2006Writer,Conll2006Writer>>
+
+
+| <<format-Conll2009,Conll2009>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2009Reader,Conll2009Reader>>
+
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2009Writer,Conll2009Writer>>
+
+
+| <<format-Conll2012,Conll2012>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2012Reader,Conll2012Reader>>
+
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2012Writer,Conll2012Writer>>
+
+
+| <<format-Html,Html>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.html.HtmlReader,HtmlReader>>
+
+
+| none
+
+
+| <<format-ImsCwb,ImsCwb>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbReader,ImsCwbReader>>
+
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter,ImsCwbWriter>>
+
+
+| <<format-InlineXml,InlineXml>>
+
+| none
+
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.xml.InlineXmlWriter,InlineXmlWriter>>
+
+
+| <<format-Jdbc,Jdbc>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.jdbc.JdbcReader,JdbcReader>>
+
+
+| none
+
+
+| <<format-Json,Json>>
+
+| none
+
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.json.JsonWriter,JsonWriter>>
+
+
+| <<format-MalletTopicProportions,MalletTopicProportions>>
+
+| none
+
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.mallet.topicmodel.io.MalletTopicProportionsWriter,MalletTopicProportionsWriter>>
+
+
+| <<format-MalletTopicsProportionsSorted,MalletTopicsProportionsSorted>>
+
+| none
+
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.mallet.topicmodel.io.MalletTopicsProportionsSortedWriter,MalletTopicsProportionsSortedWriter>>
+
+
+| <<format-NegraExport,NegraExport>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.negra.NegraExportReader,NegraExportReader>>
+
+
+| none
+
+
+| <<format-Pdf,Pdf>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfReader,PdfReader>>
+
+
+| none
+
+
+| <<format-PennTreebankChunked,PennTreebankChunked>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreebankChunkedReader,PennTreebankChunkedReader>>
+
+
+| none
+
+
+| <<format-PennTreebankCombined,PennTreebankCombined>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreebankCombinedReader,PennTreebankCombinedReader>>
+
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreebankCombinedWriter,PennTreebankCombinedWriter>>
+
+
+| <<format-RTF,RTF>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.rtf.RTFReader,RTFReader>>
+
+
+| none
+
+
+| <<format-Reuters21578Sgml,Reuters21578Sgml>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.reuters.Reuters21578SgmlReader,Reuters21578SgmlReader>>
+
+
+| none
+
+
+| <<format-Reuters21578Txt,Reuters21578Txt>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.reuters.Reuters21578TxtReader,Reuters21578TxtReader>>
+
+
+| none
+
+
+| <<format-SerializedCas,SerializedCas>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.bincas.SerializedCasReader,SerializedCasReader>>
+
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.bincas.SerializedCasWriter,SerializedCasWriter>>
+
+
+| <<format-Solr,Solr>>
+
+| none
+
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.solr.SolrWriter,SolrWriter>>
+
+
+| <<format-String,String>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.text.StringReader,StringReader>>
+
+
+| none
+
+
+| <<format-TGrep,TGrep>>
+
+| none
+
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.tgrep.TGrepWriter,TGrepWriter>>
+
+
+| <<format-Tcf,Tcf>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.tcf.TcfReader,TcfReader>>
+
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.tcf.TcfWriter,TcfWriter>>
+
+
+| <<format-Tei,Tei>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.tei.TeiReader,TeiReader>>
+
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.tei.TeiWriter,TeiWriter>>
+
+
+| <<format-Text,Text>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.text.TextReader,TextReader>>
+
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.text.TextWriter,TextWriter>>
+
+
+| <<format-TigerXml,TigerXml>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.tiger.TigerXmlReader,TigerXmlReader>>
+
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.tiger.TigerXmlWriter,TigerXmlWriter>>
+
+
+| <<format-TokenizedText,TokenizedText>>
+
+| none
+
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.text.TokenizedTextWriter,TokenizedTextWriter>>
+
+
+| <<format-Tuepp,Tuepp>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.tuepp.TueppReader,TueppReader>>
+
+
+| none
+
+
+| <<format-Web1T,Web1T>>
+
+| none
+
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.web1t.Web1TWriter,Web1TWriter>>
+
+
+| <<format-WikipediaArticle,WikipediaArticle>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaArticleReader,WikipediaArticleReader>>
+
+
+| none
+
+
+| <<format-WikipediaArticleInfo,WikipediaArticleInfo>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaArticleInfoReader,WikipediaArticleInfoReader>>
+
+
+| none
+
+
+| <<format-WikipediaDiscussion,WikipediaDiscussion>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaDiscussionReader,WikipediaDiscussionReader>>
+
+
+| none
+
+
+| <<format-WikipediaLink,WikipediaLink>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaLinkReader,WikipediaLinkReader>>
+
+
+| none
+
+
+| <<format-WikipediaPage,WikipediaPage>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaPageReader,WikipediaPageReader>>
+
+
+| none
+
+
+| <<format-WikipediaQuery,WikipediaQuery>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaQueryReader,WikipediaQueryReader>>
+
+
+| none
+
+
+| <<format-WikipediaRevision,WikipediaRevision>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaRevisionReader,WikipediaRevisionReader>>
+
+
+| none
+
+
+| <<format-WikipediaRevisionPair,WikipediaRevisionPair>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaRevisionPairReader,WikipediaRevisionPairReader>>
+
+
+| none
+
+
+| <<format-WikipediaTemplateFilteredArticle,WikipediaTemplateFilteredArticle>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaTemplateFilteredArticleReader,WikipediaTemplateFilteredArticleReader>>
+
+
+| none
+
+
+| <<format-Xmi,Xmi>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiReader,XmiReader>>
+
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiWriter,XmiWriter>>
+
+
+| <<format-Xml,Xml>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.xml.XmlReader,XmlReader>>
+
+
+| none
+
+
+| <<format-XmlText,XmlText>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.xml.XmlTextReader,XmlTextReader>>
+
+
+| none
+
+
+| <<format-XmlXPath,XmlXPath>>
+
+| <<format-de.tudarmstadt.ukp.dkpro.core.io.xml.XmlXPathReader,XmlXPathReader>>
+
+
+| none
+
+
+|====

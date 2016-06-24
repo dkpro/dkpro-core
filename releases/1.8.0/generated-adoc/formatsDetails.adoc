@@ -1,0 +1,7247 @@
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.aclanthology-asl]]
+== ACL Anthology
+
+
+[[format-AclAnthology]]
+=== AclAnthology
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.aclanthology-asl__#
+
+
+include::{include-dir}sectionIntroAclAnthology.adoc[]
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.aclanthology.AclAnthologyReader]]
+[discrete]
+==== AclAnthologyReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.aclanthology.AclAnthologyReader__#
+
+++++
+<div class='paragraph'><p>Reada the ACL anthology corpus and outputs CASes with plain text documents.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`Encoding` (__String__) = `UTF-8` ::
++ 
+++++
+Name of configuration parameter that contains the character encoding used by the input files.
+If not specified, the default system encoding will be used.
+++++
+
+`includeHidden` (__Boolean__) = `false` ::
++ 
+++++
+Include hidden files and directories.
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+Name of optional configuration parameter that contains the language of the documents in the
+input directory. If specified, this information will be added to the CAS.
+++++
+
+`patterns` (__String[]__) [optional]::
++ 
+++++
+A set of Ant-like include/exclude patterns. A pattern starts with #INCLUDE_PREFIX [+]
+if it is an include pattern and with #EXCLUDE_PREFIX [-] if it is an exclude pattern.
+The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+The wildcard * can be used to a address a part of a name.
+++++
+
+`sourceLocation` (__String__) [optional]::
++ 
+++++
+Location from which the input is read.
+++++
+
+`useDefaultExcludes` (__Boolean__) = `true` ::
++ 
+++++
+Use the default excludes.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+
+|====
+
+
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.brat-asl]]
+== brat file format
+
+
+[[format-Brat]]
+=== Brat
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.brat-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.brat.BratReader]]
+[discrete]
+==== BratReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.brat.BratReader__#
+
+++++
+<div class='paragraph'><p>Reader for the brat format.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`includeHidden` (__Boolean__) = `false` ::
++ 
+++++
+Include hidden files and directories.
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+Name of optional configuration parameter that contains the language of the documents in the
+input directory. If specified, this information will be added to the CAS.
+++++
+
+`patterns` (__String[]__) [optional]::
++ 
+++++
+A set of Ant-like include/exclude patterns. A pattern starts with #INCLUDE_PREFIX [+]
+if it is an include pattern and with #EXCLUDE_PREFIX [-] if it is an exclude pattern.
+The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+The wildcard * can be used to a address a part of a name.
+++++
+
+`relationTypes` (__String[]__) = `[de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent{A}]` ::
++ 
+++++
+Types that are relations. It is mandatory to provide the type name followed by two feature
+names that represent Arg1 and Arg2 separated by colons, e.g. 
+<code>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent{A}</code>.
+Additionally, a subcategorization feature may be specified.
+++++
+
+`sourceEncoding` (__String__) = `UTF-8` ::
++ 
+++++
+Name of configuration parameter that contains the character encoding used by the input files.
+++++
+
+`sourceLocation` (__String__) [optional]::
++ 
+++++
+Location from which the input is read.
+++++
+
+`textAnnotationTypes` (__String[]__) = `[]` ::
++ 
+++++
+Types that are text annotations. It is mandatory to provide the type name which can
+optionally be followed by a subcategorization feature. Using this parameter is
+only necessary to specify a subcategorization feature. Otherwise, text annotation types are
+automatically detected.
+++++
+
+`typeMappings` (__String[]__) = `[]`  [optional]::
++ 
+++++
+
+++++
+
+`useDefaultExcludes` (__Boolean__) = `true` ::
++ 
+++++
+Use the default excludes.
+++++
+
+
+
+
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.brat.BratWriter]]
+[discrete]
+==== BratWriter
+
+[small]#*_Writer class:_* __de.tudarmstadt.ukp.dkpro.core.io.brat.BratWriter__#
+
+++++
+<div class='paragraph'><p>Writer for the brat annotation format.
+
+</p><p>Known issues:</p>
+<ul>
+<li><a href="https://github.com/nlplab/brat/issues/791">Brat is unable to read relation 
+attributes created by this writer.</a></li>
+<li>PARAM_TYPE_MAPPINGS not implemented yet</li>
+</ul></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`compression` (__String__) = `NONE`  [optional]::
++ 
+++++
+Choose a compression method. (default: CompressionMethod#NONE)
+++++
+
+`enableTypeMappings` (__Boolean__) = `false` ::
++ 
+++++
+Enable type mappings.
+++++
+
+`escapeDocumentId` (__Boolean__) = `true` ::
++ 
+++++
+URL-encode the document ID in the file name to avoid illegal characters (e.g. \, :, etc.)
+++++
+
+`excludeTypes` (__String[]__) = `[de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence]` ::
++ 
+++++
+Types that will not be written to the exported file.
+++++
+
+`filenameSuffix` (__String__) = `.ann` ::
++ 
+++++
+Specify the suffix of output files. Default value <code>.ann</code>. If the suffix is not
+needed, provide an empty string as value.
+++++
+
+`overwrite` (__Boolean__) = `false` ::
++ 
+++++
+Allow overwriting target files (ignored when writing to ZIP archives).
+++++
+
+`palette` (__String[]__) = `[#8dd3c7, #ffffb3, #bebada, #fb8072, #80b1d3, #fdb462, #b3de69, #fccde5, #d9d9d9, #bc80bd, #ccebc5, #ffed6f]`  [optional]::
++ 
+++++
+Colors to be used for the visual configuration that is generated for brat.
+++++
+
+`relationTypes` (__String[]__) = `[de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent]` ::
++ 
+++++
+Types that are relations. It is mandatory to provide the type name followed by two feature
+names that represent Arg1 and Arg2 separated by colons, e.g. 
+<code>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent</code>.
+++++
+
+`shortAttributeNames` (__Boolean__) = `false` ::
++ 
+++++
+Whether to render attributes by their short name or by their qualified name.
+++++
+
+`singularTarget` (__Boolean__) = `false` ::
++ 
+++++
+Treat target location as a single file name. This is particularly useful if only a single
+input file is processed and the result should be written to a pre-defined output file instead
+of deriving the file name from the document URI or document ID. It can also be useful if
+the user wishes to force multiple input files to be written to a single target file. The
+latter case does not work for all formats (e.g. binary, XMI, etc.), but can be useful, e.g.
+for Conll-based formats. This option has no effect if the target location points to an
+archive location (ZIP/JAR). The #PARAM_COMPRESSION is respected, but does not 
+automatically add an extension. The #PARAM_STRIP_EXTENSION has no effect as the
+original extension is not preserved.
+++++
+
+`spanTypes` (__String[]__) = `[]` ::
++ 
+++++
+Types that are text annotations (aka entities or spans).
+++++
+
+`stripExtension` (__Boolean__) = `false` ::
++ 
+++++
+Remove the original extension.
+++++
+
+`targetLocation` (__String__) [optional]::
++ 
+++++
+Target location. If this parameter is not yet, data is written to stdout.
+++++
+
+`textFilenameSuffix` (__String__) = `.txt` ::
++ 
+++++
+Specify the suffix of text output files. Default value <code>.txt</code>. If the suffix is not
+needed, provide an empty string as value.
+++++
+
+`typeMappings` (__String[]__) = `[de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.(\\w+) -> $1, de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.(\\w+) -> $1, de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.(\\w+) -> $1, de.tudarmstadt.ukp.dkpro.core.api.ner.type.(\\w+) -> $1]`  [optional]::
++ 
+++++
+FIXME
+++++
+
+`useDocumentId` (__Boolean__) = `false` ::
++ 
+++++
+Use the document ID as file name even if a relative path information is present.
+++++
+
+`writeNullAttributes` (__Boolean__) = `false` ::
++ 
+++++
+Enable writing of features with null values.
+++++
+
+`writeRelationAttributes` (__Boolean__) = `false` ::
++ 
+++++
+The brat web application can currently not handle attributes on relations, thus they are
+disabled by default. Here they can be enabled again.
+++++
+
+
+
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.bnc-asl]]
+== British National Corpus
+
+
+[[format-Bnc]]
+=== Bnc
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.bnc-asl__#
+
+
+include::{include-dir}sectionIntroBnc.adoc[]
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.bnc.BncReader]]
+[discrete]
+==== BncReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.bnc.BncReader__#
+
+++++
+<div class='paragraph'><p>Reader for the British National Corpus (XML version).</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`POSMappingLocation` (__String__) [optional]::
++ 
+++++
+Location of the mapping file for part-of-speech tags to UIMA types.
+++++
+
+`POSTagSet` (__String__) [optional]::
++ 
+++++
+Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
+tag set defined as part of the model meta data.
+++++
+
+`includeHidden` (__Boolean__) = `false` ::
++ 
+++++
+Include hidden files and directories.
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+Name of optional configuration parameter that contains the language of the documents in the
+input directory. If specified, this information will be added to the CAS.
+++++
+
+`patterns` (__String[]__) [optional]::
++ 
+++++
+A set of Ant-like include/exclude patterns. A pattern starts with #INCLUDE_PREFIX [+]
+if it is an include pattern and with #EXCLUDE_PREFIX [-] if it is an exclude pattern.
+The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+The wildcard * can be used to a address a part of a name.
+++++
+
+`sourceLocation` (__String__) [optional]::
++ 
+++++
+Location from which the input is read.
+++++
+
+`useDefaultExcludes` (__Boolean__) = `true` ::
++ 
+++++
+Use the default excludes.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS,POS>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma,Lemma>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token,Token>>
+
+|====
+
+
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.combination-asl]]
+== Combination
+
+
+[[format-Combination]]
+=== Combination
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.combination-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.combination.CombinationReader]]
+[discrete]
+==== CombinationReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.combination.CombinationReader__#
+
+++++
+<div class='paragraph'><p>Combines multiple readers into a single reader.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`readers` (__String[]__)::
++ 
+++++
+
+++++
+
+
+
+
+
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.conll-asl]]
+== CoNLL
+
+
+[[format-Conll2000]]
+=== Conll2000
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.conll-asl__#
+
+
+include::{include-dir}sectionIntroConll2000.adoc[]
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2000Reader]]
+[discrete]
+==== Conll2000Reader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2000Reader__#
+
+++++
+<div class='paragraph'><p>Reads the Conll 2000 chunking format.</p>
+
+<pre><code>
+He        PRP  B-NP
+reckons   VBZ  B-VP
+the       DT   B-NP
+current   JJ   I-NP
+account   NN   I-NP
+deficit   NN   I-NP
+will      MD   B-VP
+narrow    VB   I-VP
+to        TO   B-PP
+only      RB   B-NP
+#         #    I-NP
+1.8       CD   I-NP
+billion   CD   I-NP
+in        IN   B-PP
+September NNP  B-NP
+.         .    O
+</code></pre>
+
+<ol>
+<li>FORM - token</li>
+<li>POSTAG - part-of-speech tag</li>
+<li>CHUNK - chunk (BIO encoded)</li>
+</ol>
+
+<p>Sentences are separated by a blank new line.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`ChunkMappingLocation` (__String__) [optional]::
++ 
+++++
+Load the chunk tag to UIMA type mapping from this location instead of locating
+the mapping automatically.
+++++
+
+`ChunkTagSet` (__String__) [optional]::
++ 
+++++
+Use this chunk tag set to use to resolve the tag set mapping instead of using the
+tag set defined as part of the model meta data. This can be useful if a custom model is
+specified which does not have such meta data, or it can be used in readers.
+++++
+
+`POSMappingLocation` (__String__) [optional]::
++ 
+++++
+Load the part-of-speech tag to UIMA type mapping from this location instead of locating
+the mapping automatically.
+++++
+
+`POSTagSet` (__String__) [optional]::
++ 
+++++
+Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
+tag set defined as part of the model meta data. This can be useful if a custom model is
+specified which does not have such meta data, or it can be used in readers.
+++++
+
+`includeHidden` (__Boolean__) = `false` ::
++ 
+++++
+Include hidden files and directories.
+++++
+
+`internTags` (__Boolean__) = `true`  [optional]::
++ 
+++++
+Use the String#intern() method on tags. This is usually a good idea to avoid
+spamming the heap with thousands of strings representing only a few different tags.
+
+Default: true
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+Name of optional configuration parameter that contains the language of the documents in the
+input directory. If specified, this information will be added to the CAS.
+++++
+
+`patterns` (__String[]__) [optional]::
++ 
+++++
+A set of Ant-like include/exclude patterns. A pattern starts with #INCLUDE_PREFIX [+]
+if it is an include pattern and with #EXCLUDE_PREFIX [-] if it is an exclude pattern.
+The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+The wildcard * can be used to a address a part of a name.
+++++
+
+`readChunk` (__Boolean__) = `true` ::
++ 
+++++
+Write chunk information.
+
+Default: true
+++++
+
+`readPOS` (__Boolean__) = `true` ::
++ 
+++++
+Write part-of-speech information.
+
+Default: true
+++++
+
+`sourceEncoding` (__String__) = `UTF-8` ::
++ 
+++++
+Character encoding of the input data.
+++++
+
+`sourceLocation` (__String__) [optional]::
++ 
+++++
+Location from which the input is read.
+++++
+
+`useDefaultExcludes` (__Boolean__) = `true` ::
++ 
+++++
+Use the default excludes.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token,Token>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk,Chunk>>
+
+|====
+
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2000Writer]]
+[discrete]
+==== Conll2000Writer
+
+[small]#*_Writer class:_* __de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2000Writer__#
+
+++++
+<div class='paragraph'><p>Writes the CoNLL 2000 chunking format. The columns are separated by spaces.</p>
+
+<pre><code>
+He        PRP  B-NP
+reckons   VBZ  B-VP
+the       DT   B-NP
+current   JJ   I-NP
+account   NN   I-NP
+deficit   NN   I-NP
+will      MD   B-VP
+narrow    VB   I-VP
+to        TO   B-PP
+only      RB   B-NP
+#         #    I-NP
+1.8       CD   I-NP
+billion   CD   I-NP
+in        IN   B-PP
+September NNP  B-NP
+.         .    O
+</code></pre>
+
+<ol>
+<li>FORM - token</li>
+<li>POSTAG - part-of-speech tag</li>
+<li>CHUNK - chunk (BIO encoded)</li>
+</ol>
+
+<p>Sentences are separated by a blank new line.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`compression` (__String__) = `NONE`  [optional]::
++ 
+++++
+Choose a compression method. (default: CompressionMethod#NONE)
+++++
+
+`escapeDocumentId` (__Boolean__) = `true` ::
++ 
+++++
+URL-encode the document ID in the file name to avoid illegal characters (e.g. \, :, etc.)
+++++
+
+`filenameSuffix` (__String__) = `.conll` ::
++ 
+++++
+
+++++
+
+`overwrite` (__Boolean__) = `false` ::
++ 
+++++
+Allow overwriting target files (ignored when writing to ZIP archives).
+++++
+
+`singularTarget` (__Boolean__) = `false` ::
++ 
+++++
+Treat target location as a single file name. This is particularly useful if only a single
+input file is processed and the result should be written to a pre-defined output file instead
+of deriving the file name from the document URI or document ID. It can also be useful if
+the user wishes to force multiple input files to be written to a single target file. The
+latter case does not work for all formats (e.g. binary, XMI, etc.), but can be useful, e.g.
+for Conll-based formats. This option has no effect if the target location points to an
+archive location (ZIP/JAR). The #PARAM_COMPRESSION is respected, but does not 
+automatically add an extension. The #PARAM_STRIP_EXTENSION has no effect as the
+original extension is not preserved.
+++++
+
+`sourceEncoding` (__String__) = `UTF-8` ::
++ 
+++++
+Name of configuration parameter that contains the character encoding used by the input files.
+++++
+
+`stripExtension` (__Boolean__) = `false` ::
++ 
+++++
+Remove the original extension.
+++++
+
+`targetLocation` (__String__) [optional]::
++ 
+++++
+Target location. If this parameter is not yet, data is written to stdout.
+++++
+
+`useDocumentId` (__Boolean__) = `false` ::
++ 
+++++
+Use the document ID as file name even if a relative path information is present.
+++++
+
+`writeChunk` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`writePOS` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+
+
+
+[discrete]
+===== Inputs
+[cols="h,v"]
+|====
+| Inputs 
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token,Token>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk,Chunk>>
+
+|====
+
+
+
+
+
+[[format-Conll2002]]
+=== Conll2002
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.conll-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2002Reader]]
+[discrete]
+==== Conll2002Reader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2002Reader__#
+
+++++
+<div class='paragraph'><p>Reads the CoNLL 2002 named entity format. The columns are separated by a single space, like
+illustrated below.</p>
+
+<pre><code>
+Wolff      B-PER
+,          O
+currently  O
+a          O
+journalist O
+in         O
+Argentina  B-LOC
+,          O
+played     O
+with       O
+Del        B-PER
+Bosque     I-PER
+in         O
+the        O
+final      O
+years      O
+of         O
+the        O
+seventies  O
+in         O
+Real       B-ORG
+Madrid     I-ORG
+.          O
+</code></pre>
+
+<ol>
+<li>FORM - token</li>
+<li>NER - named entity (BIO encoded)</li>
+</ol>
+
+<p>Sentences are separated by a blank new line.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`includeHidden` (__Boolean__) = `false` ::
++ 
+++++
+Include hidden files and directories.
+++++
+
+`internTags` (__Boolean__) = `true`  [optional]::
++ 
+++++
+Use the String#intern() method on tags. This is usually a good idea to avoid
+spamming the heap with thousands of strings representing only a few different tags.
+
+Default: true
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+The language.
+++++
+
+`patterns` (__String[]__) [optional]::
++ 
+++++
+A set of Ant-like include/exclude patterns. A pattern starts with #INCLUDE_PREFIX [+]
+if it is an include pattern and with #EXCLUDE_PREFIX [-] if it is an exclude pattern.
+The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+The wildcard * can be used to a address a part of a name.
+++++
+
+`readNamedEntity` (__Boolean__) = `true` ::
++ 
+++++
+Write named entity information.
+
+Default: true
+++++
+
+`sourceEncoding` (__String__) = `UTF-8` ::
++ 
+++++
+Character encoding of the input data.
+++++
+
+`sourceLocation` (__String__) [optional]::
++ 
+++++
+Location from which the input is read.
+++++
+
+`useDefaultExcludes` (__Boolean__) = `true` ::
++ 
+++++
+Use the default excludes.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity,NamedEntity>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token,Token>>
+
+|====
+
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2002Writer]]
+[discrete]
+==== Conll2002Writer
+
+[small]#*_Writer class:_* __de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2002Writer__#
+
+++++
+<div class='paragraph'><p>Writes the CoNLL 2002 named entity format. The columns are separated by a single space, unlike
+illustrated below.</p>
+
+<pre><code>
+Wolff      B-PER
+,          O
+currently  O
+a          O
+journalist O
+in         O
+Argentina  B-LOC
+,          O
+played     O
+with       O
+Del        B-PER
+Bosque     I-PER
+in         O
+the        O
+final      O
+years      O
+of         O
+the        O
+seventies  O
+in         O
+Real       B-ORG
+Madrid     I-ORG
+.          O
+</code></pre>
+
+<ol>
+<li>FORM - token</li>
+<li>NER - named entity (BIO encoded)</li>
+</ol>
+
+<p>Sentences are separated by a blank new line.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`compression` (__String__) = `NONE`  [optional]::
++ 
+++++
+Choose a compression method. (default: CompressionMethod#NONE)
+++++
+
+`escapeDocumentId` (__Boolean__) = `true` ::
++ 
+++++
+URL-encode the document ID in the file name to avoid illegal characters (e.g. \, :, etc.)
+++++
+
+`filenameSuffix` (__String__) = `.conll` ::
++ 
+++++
+
+++++
+
+`overwrite` (__Boolean__) = `false` ::
++ 
+++++
+Allow overwriting target files (ignored when writing to ZIP archives).
+++++
+
+`singularTarget` (__Boolean__) = `false` ::
++ 
+++++
+Treat target location as a single file name. This is particularly useful if only a single
+input file is processed and the result should be written to a pre-defined output file instead
+of deriving the file name from the document URI or document ID. It can also be useful if
+the user wishes to force multiple input files to be written to a single target file. The
+latter case does not work for all formats (e.g. binary, XMI, etc.), but can be useful, e.g.
+for Conll-based formats. This option has no effect if the target location points to an
+archive location (ZIP/JAR). The #PARAM_COMPRESSION is respected, but does not 
+automatically add an extension. The #PARAM_STRIP_EXTENSION has no effect as the
+original extension is not preserved.
+++++
+
+`sourceEncoding` (__String__) = `UTF-8` ::
++ 
+++++
+Name of configuration parameter that contains the character encoding used by the input files.
+++++
+
+`stripExtension` (__Boolean__) = `false` ::
++ 
+++++
+Remove the original extension.
+++++
+
+`targetLocation` (__String__) [optional]::
++ 
+++++
+Target location. If this parameter is not yet, data is written to stdout.
+++++
+
+`useDocumentId` (__Boolean__) = `false` ::
++ 
+++++
+Use the document ID as file name even if a relative path information is present.
+++++
+
+`writeNamedEntity` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+
+
+
+[discrete]
+===== Inputs
+[cols="h,v"]
+|====
+| Inputs 
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity,NamedEntity>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token,Token>>
+
+|====
+
+
+
+
+
+[[format-Conll2006]]
+=== Conll2006
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.conll-asl__#
+
+
+include::{include-dir}sectionIntroConll2006.adoc[]
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2006Reader]]
+[discrete]
+==== Conll2006Reader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2006Reader__#
+
+++++
+<div class='paragraph'><p>Reads a file in the CoNLL-2006 format (aka CoNLL-X).</p>
+
+<pre><code>
+Heutzutage heutzutage ADV _ _ ADV _ _
+</code></pre>
+
+<ol>
+<li>ID - <b>(ignored)</b> Token counter, starting at 1 for each new sentence.</li>
+<li>FORM - <b>(Token)</b> Word form or punctuation symbol.</li>
+<li>LEMMA - <b>(Lemma)</b> Fine-grained part-of-speech tag, where the tagset depends on the
+language, or identical to the coarse-grained part-of-speech tag if not available.</li>
+<li>CPOSTAG - <b>(unused)</b></li>
+<li>POSTAG - <b>(POS)</b> Fine-grained part-of-speech tag, where the tagset depends on the
+language, or identical to the coarse-grained part-of-speech tag if not available.</li>
+<li>FEATS - <b>(MorphologicalFeatures)</b> Unordered set of syntactic and/or morphological features (depending
+on the particular language), separated by a vertical bar (|), or an underscore if not available.</li>
+<li>HEAD - <b>(Dependency)</b> Head of the current token, which is either a value of ID or zero
+('0'). Note that depending on the original treebank annotation, there may be multiple tokens with
+an ID of zero.</li>
+<li>DEPREL - <b>(Dependency)</b> Dependency relation to the HEAD. The set of dependency relations
+depends on the particular language. Note that depending on the original treebank annotation, the
+dependency relation may be meaningful or simply 'ROOT'.</li>
+<li>PHEAD - <b>(ignored)</b> Projective head of current token, which is either a value of ID or
+zero ('0'), or an underscore if not available. Note that depending on the original treebank
+annotation, there may be multiple tokens an with ID of zero. The dependency structure resulting
+from the PHEAD column is guaranteed to be projective (but is not available for all languages),
+whereas the structures resulting from the HEAD column will be non-projective for some sentences
+of some languages (but is always available).</li>
+<li>PDEPREL - <b>(ignored) Dependency relation to the PHEAD, or an underscore if not available.
+The set of dependency relations depends on the particular language. Note that depending on the
+original treebank annotation, the dependency relation may be meaningful or simply 'ROOT'.</b></li>
+</ol>
+
+<p>Sentences are separated by a blank new line.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`POSMappingLocation` (__String__) [optional]::
++ 
+++++
+Load the part-of-speech tag to UIMA type mapping from this location instead of locating
+the mapping automatically.
+++++
+
+`POSTagSet` (__String__) [optional]::
++ 
+++++
+Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
+tag set defined as part of the model meta data. This can be useful if a custom model is
+specified which does not have such meta data, or it can be used in readers.
+++++
+
+`includeHidden` (__Boolean__) = `false` ::
++ 
+++++
+Include hidden files and directories.
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+Name of optional configuration parameter that contains the language of the documents in the
+input directory. If specified, this information will be added to the CAS.
+++++
+
+`patterns` (__String[]__) [optional]::
++ 
+++++
+A set of Ant-like include/exclude patterns. A pattern starts with #INCLUDE_PREFIX [+]
+if it is an include pattern and with #EXCLUDE_PREFIX [-] if it is an exclude pattern.
+The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+The wildcard * can be used to a address a part of a name.
+++++
+
+`readDependency` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`readLemma` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`readMorph` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`readPOS` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`sourceEncoding` (__String__) = `UTF-8` ::
++ 
+++++
+
+++++
+
+`sourceLocation` (__String__) [optional]::
++ 
+++++
+Location from which the input is read.
+++++
+
+`useDefaultExcludes` (__Boolean__) = `true` ::
++ 
+++++
+Use the default excludes.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures,MorphologicalFeatures>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS,POS>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma,Lemma>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token,Token>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency,Dependency>>
+
+|====
+
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2006Writer]]
+[discrete]
+==== Conll2006Writer
+
+[small]#*_Writer class:_* __de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2006Writer__#
+
+++++
+<div class='paragraph'><p>Writes a file in the CoNLL-2006 format (aka CoNLL-X).</p>
+
+<pre><code>
+Heutzutage heutzutage ADV _ _ ADV _ _
+</code></pre>
+
+<ol>
+<li>ID - token number in sentence</li>
+<li>FORM - token</li>
+<li>LEMMA - lemma</li>
+<li>CPOSTAG - part-of-speech tag (coarse grained)</li>
+<li>POSTAG - part-of-speech tag</li>
+<li>FEATS - unused</li>
+<li>HEAD - target token for a dependency parsing</li>
+<li>DEPREL - function of the dependency parsing</li>
+<li>PHEAD - unused</li>
+<li>PDEPREL - unused</li>
+</ol>
+
+<p>Sentences are separated by a blank new line</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`compression` (__String__) = `NONE`  [optional]::
++ 
+++++
+Choose a compression method. (default: CompressionMethod#NONE)
+++++
+
+`escapeDocumentId` (__Boolean__) = `true` ::
++ 
+++++
+URL-encode the document ID in the file name to avoid illegal characters (e.g. \, :, etc.)
+++++
+
+`filenameSuffix` (__String__) = `.conll` ::
++ 
+++++
+
+++++
+
+`overwrite` (__Boolean__) = `false` ::
++ 
+++++
+Allow overwriting target files (ignored when writing to ZIP archives).
+++++
+
+`singularTarget` (__Boolean__) = `false` ::
++ 
+++++
+Treat target location as a single file name. This is particularly useful if only a single
+input file is processed and the result should be written to a pre-defined output file instead
+of deriving the file name from the document URI or document ID. It can also be useful if
+the user wishes to force multiple input files to be written to a single target file. The
+latter case does not work for all formats (e.g. binary, XMI, etc.), but can be useful, e.g.
+for Conll-based formats. This option has no effect if the target location points to an
+archive location (ZIP/JAR). The #PARAM_COMPRESSION is respected, but does not 
+automatically add an extension. The #PARAM_STRIP_EXTENSION has no effect as the
+original extension is not preserved.
+++++
+
+`sourceEncoding` (__String__) = `UTF-8` ::
++ 
+++++
+Name of configuration parameter that contains the character encoding used by the input files.
+++++
+
+`stripExtension` (__Boolean__) = `false` ::
++ 
+++++
+Remove the original extension.
+++++
+
+`targetLocation` (__String__) [optional]::
++ 
+++++
+Target location. If this parameter is not yet, data is written to stdout.
+++++
+
+`useDocumentId` (__Boolean__) = `false` ::
++ 
+++++
+Use the document ID as file name even if a relative path information is present.
+++++
+
+`writeDependency` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`writeLemma` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`writeMorph` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`writePOS` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+
+
+
+[discrete]
+===== Inputs
+[cols="h,v"]
+|====
+| Inputs 
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures,MorphologicalFeatures>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS,POS>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma,Lemma>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token,Token>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency,Dependency>>
+
+|====
+
+
+
+
+
+[[format-Conll2009]]
+=== Conll2009
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.conll-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2009Reader]]
+[discrete]
+==== Conll2009Reader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2009Reader__#
+
+++++
+<div class='paragraph'><p>Reads a file in the CoNLL-2009 format.</p>
+
+<ol>
+<li>ID - <b>(ignored)</b> Token counter, starting at 1 for each new sentence.</li>
+<li>FORM - <b>(Token)</b> Word form or punctuation symbol.</li>
+<li>LEMMA - <b>(Lemma)</b> Fine-grained part-of-speech tag, where the tagset depends on the
+language, or identical to the coarse-grained part-of-speech tag if not available.</li>
+<li>PLEMMA - <b>(ignored)</b> Automatically predicted lemma of FORM</li>
+<li>POS - <b>(POS)</b> Fine-grained part-of-speech tag, where the tagset depends on the language,
+or identical to the coarse-grained part-of-speech tag if not available.</li>
+<li>PPOS - <b>(ignored)</b> Automatically predicted major POS by a language-specific tagger</li>
+<li>FEAT - <b>(MorphologicalFeatures)</b> Unordered set of syntactic and/or morphological features (depending
+on the particular language), separated by a vertical bar (|), or an underscore if not available.</li>
+<li>PFEAT - <b>(ignored)</b> Automatically predicted morphological features (if applicable)</li>
+<li>HEAD - <b>(Dependency)</b> Head of the current token, which is either a value of ID or zero
+('0'). Note that depending on the original treebank annotation, there may be multiple tokens with
+an ID of zero.</li>
+<li>PHEAD - <b>(ignored)</b> Automatically predicted syntactic head</li>
+<li>DEPREL - <b>(Dependency)</b> Dependency relation to the HEAD. The set of dependency relations
+depends on the particular language. Note that depending on the original treebank annotation, the
+dependency relation may be meaningfull or simply 'ROOT'.</li>
+<li>PDEPREL - <b>(ignored)</b> Automatically predicted dependency relation to PHEAD</li>
+<li>FILLPRED - <b>(ignored)</b> Contains 'Y' for argument-bearing tokens</li>
+<li>PRED - <b>(SemanticPredicate)</b> (sense) identifier of a semantic 'predicate' coming from a
+current token</li>
+<li>APREDs - <b>(SemanticArgument)</b> Columns with argument labels for each semantic predicate
+(in the ID order)</li>
+</ol>
+
+<p>Sentences are separated by a blank new line.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`POSMappingLocation` (__String__) [optional]::
++ 
+++++
+Load the part-of-speech tag to UIMA type mapping from this location instead of locating
+the mapping automatically.
+++++
+
+`POSTagSet` (__String__) [optional]::
++ 
+++++
+Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
+tag set defined as part of the model meta data. This can be useful if a custom model is
+specified which does not have such meta data, or it can be used in readers.
+++++
+
+`includeHidden` (__Boolean__) = `false` ::
++ 
+++++
+Include hidden files and directories.
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+Name of optional configuration parameter that contains the language of the documents in the
+input directory. If specified, this information will be added to the CAS.
+++++
+
+`patterns` (__String[]__) [optional]::
++ 
+++++
+A set of Ant-like include/exclude patterns. A pattern starts with #INCLUDE_PREFIX [+]
+if it is an include pattern and with #EXCLUDE_PREFIX [-] if it is an exclude pattern.
+The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+The wildcard * can be used to a address a part of a name.
+++++
+
+`readDependency` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`readLemma` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`readMorph` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`readPOS` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`readSemanticPredicate` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`sourceEncoding` (__String__) = `UTF-8` ::
++ 
+++++
+
+++++
+
+`sourceLocation` (__String__) [optional]::
++ 
+++++
+Location from which the input is read.
+++++
+
+`useDefaultExcludes` (__Boolean__) = `true` ::
++ 
+++++
+Use the default excludes.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures,MorphologicalFeatures>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS,POS>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma,Lemma>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token,Token>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument,SemanticArgument>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate,SemanticPredicate>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency,Dependency>>
+
+|====
+
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2009Writer]]
+[discrete]
+==== Conll2009Writer
+
+[small]#*_Writer class:_* __de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2009Writer__#
+
+++++
+<div class='paragraph'><p>Writes a file in the CoNLL-2009 format.</p>
+
+<ol>
+<li>ID - <b>(ignored)</b> Token counter, starting at 1 for each new sentence.</li>
+<li>FORM - <b>(Token)</b> Word form or punctuation symbol.</li>
+<li>LEMMA - <b>(Lemma)</b> Fine-grained part-of-speech tag, where the tagset depends on the
+language, or identical to the coarse-grained part-of-speech tag if not available.</li>
+<li>PLEMMA - <b>(ignored)</b> Automatically predicted lemma of FORM</li>
+<li>POS - <b>(POS)</b> Fine-grained part-of-speech tag, where the tagset depends on the language,
+or identical to the coarse-grained part-of-speech tag if not available.</li>
+<li>PPOS - <b>(ignored)</b> Automatically predicted major POS by a language-specific tagger</li>
+<li>FEAT - <b>(MorphologicalFeatures)</b> Unordered set of syntactic and/or morphological features (depending
+on the particular language), separated by a vertical bar (|), or an underscore if not available.</li>
+<li>PFEAT - <b>(ignored)</b> Automatically predicted morphological features (if applicable)</li>
+<li>HEAD - <b>(Dependency)</b> Head of the current token, which is either a value of ID or zero
+('0'). Note that depending on the original treebank annotation, there may be multiple tokens with
+an ID of zero.</li>
+<li>PHEAD - <b>(ignored)</b> Automatically predicted syntactic head</li>
+<li>DEPREL - <b>(Dependency)</b> Dependency relation to the HEAD. The set of dependency relations
+depends on the particular language. Note that depending on the original treebank annotation, the
+dependency relation may be meaningfull or simply 'ROOT'.</li>
+<li>PDEPREL - <b>(ignored)</b> Automatically predicted dependency relation to PHEAD</li>
+<li>FILLPRED - <b>(auto-generated)</b> Contains 'Y' for argument-bearing tokens</li>
+<li>PRED - <b>(SemanticPredicate)</b> (sense) identifier of a semantic 'predicate' coming from a
+current token</li>
+<li>APREDs - <b>(SemanticArgument)</b> Columns with argument labels for each semantic predicate
+(in the ID order)</li>
+</ol>
+
+<p>Sentences are separated by a blank new line</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`compression` (__String__) = `NONE`  [optional]::
++ 
+++++
+Choose a compression method. (default: CompressionMethod#NONE)
+++++
+
+`escapeDocumentId` (__Boolean__) = `true` ::
++ 
+++++
+URL-encode the document ID in the file name to avoid illegal characters (e.g. \, :, etc.)
+++++
+
+`filenameSuffix` (__String__) = `.conll` ::
++ 
+++++
+
+++++
+
+`overwrite` (__Boolean__) = `false` ::
++ 
+++++
+Allow overwriting target files (ignored when writing to ZIP archives).
+++++
+
+`singularTarget` (__Boolean__) = `false` ::
++ 
+++++
+Treat target location as a single file name. This is particularly useful if only a single
+input file is processed and the result should be written to a pre-defined output file instead
+of deriving the file name from the document URI or document ID. It can also be useful if
+the user wishes to force multiple input files to be written to a single target file. The
+latter case does not work for all formats (e.g. binary, XMI, etc.), but can be useful, e.g.
+for Conll-based formats. This option has no effect if the target location points to an
+archive location (ZIP/JAR). The #PARAM_COMPRESSION is respected, but does not 
+automatically add an extension. The #PARAM_STRIP_EXTENSION has no effect as the
+original extension is not preserved.
+++++
+
+`sourceEncoding` (__String__) = `UTF-8` ::
++ 
+++++
+Name of configuration parameter that contains the character encoding used by the input files.
+++++
+
+`stripExtension` (__Boolean__) = `false` ::
++ 
+++++
+Remove the original extension.
+++++
+
+`targetLocation` (__String__) [optional]::
++ 
+++++
+Target location. If this parameter is not yet, data is written to stdout.
+++++
+
+`useDocumentId` (__Boolean__) = `false` ::
++ 
+++++
+Use the document ID as file name even if a relative path information is present.
+++++
+
+`writeDependency` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`writeLemma` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`writeMorph` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`writePOS` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`writeSemanticPredicate` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+
+
+
+[discrete]
+===== Inputs
+[cols="h,v"]
+|====
+| Inputs 
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures,MorphologicalFeatures>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS,POS>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma,Lemma>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token,Token>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument,SemanticArgument>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate,SemanticPredicate>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency,Dependency>>
+
+|====
+
+
+
+
+
+[[format-Conll2012]]
+=== Conll2012
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.conll-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2012Reader]]
+[discrete]
+==== Conll2012Reader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2012Reader__#
+
+++++
+<div class='paragraph'><p>Reads a file in the CoNLL-2009 format.</p>
+
+<ol>
+<li>Document ID - <b>(ignored)</b> This is a variation on the document filename.</li>
+<li>Part number - <b>(ignored)</b> Some files are divided into multiple parts numbered as 000,
+001, 002, ... etc.</li>
+<li>Word number - <b>(ignored)</b></li>
+<li>Word itself - <b>(document text)</b> This is the token as segmented/tokenized in the
+Treebank. Initially the *_skel file contain the placeholder [WORD] which gets replaced by the
+actual token from the Treebank which is part of the OntoNotes release.</li>
+<li>Part-of-Speech - <b>(POS)</b></li>
+<li>Parse bit - <b>(Constituent)</b> This is the bracketed structure broken before the first open
+parenthesis in the parse, and the word/part-of-speech leaf replaced with a *. The full parse can
+be created by substituting the asterix with the "([pos] [word])" string (or leaf) and
+concatenating the items in the rows of that column.</li>
+<li>Predicate lemma - <b>(Lemma)</b> The predicate lemma is mentioned for the rows for which we
+have semantic role information. All other rows are marked with a "-"</li>
+<li>Predicate Frameset ID - <b>(SemanticPredicate)</b> This is the PropBank frameset ID of the
+predicate in Column 7.</li>
+<li>Word sense - <b>(ignored)</b> This is the word sense of the word in Column 3.</li>
+<li>Speaker/Author - <b>(ignored)</b> This is the speaker or author name where available. Mostly
+in Broadcast Conversation and Web Log data.</li>
+<li>Named Entities - <b>(NamedEntity)</b> These columns identifies the spans representing various
+named entities.</li>
+<li>Predicate Arguments - <b>(SemanticPredicate)</b> There is one column each of predicate
+argument structure information for the predicate mentioned in Column 7.</li>
+<li>Coreference - <b>(CoreferenceChain)</b> Coreference chain information encoded in a
+parenthesis structure.</li>
+</ol>
+
+<p>Sentences are separated by a blank new line.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`ConstituentMappingLocation` (__String__) [optional]::
++ 
+++++
+Load the constituent tag to UIMA type mapping from this location instead of locating
+the mapping automatically.
+++++
+
+`ConstituentTagSet` (__String__) [optional]::
++ 
+++++
+Use this constituent tag set to use to resolve the tag set mapping instead of using the
+tag set defined as part of the model meta data. This can be useful if a custom model is
+specified which does not have such meta data, or it can be used in readers.
+++++
+
+`POSMappingLocation` (__String__) [optional]::
++ 
+++++
+Load the part-of-speech tag to UIMA type mapping from this location instead of locating
+the mapping automatically.
+++++
+
+`POSTagSet` (__String__) [optional]::
++ 
+++++
+Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
+tag set defined as part of the model meta data. This can be useful if a custom model is
+specified which does not have such meta data, or it can be used in readers.
+++++
+
+`includeHidden` (__Boolean__) = `false` ::
++ 
+++++
+Include hidden files and directories.
+++++
+
+`internTags` (__Boolean__) = `true`  [optional]::
++ 
+++++
+Use the String#intern() method on tags. This is usually a good idea to avoid
+spaming the heap with thousands of strings representing only a few different tags.
+
+Default: true
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+Name of optional configuration parameter that contains the language of the documents in the
+input directory. If specified, this information will be added to the CAS.
+++++
+
+`patterns` (__String[]__) [optional]::
++ 
+++++
+A set of Ant-like include/exclude patterns. A pattern starts with #INCLUDE_PREFIX [+]
+if it is an include pattern and with #EXCLUDE_PREFIX [-] if it is an exclude pattern.
+The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+The wildcard * can be used to a address a part of a name.
+++++
+
+`readConstituent` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`readCoreference` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`readLemma` (__Boolean__) = `false` ::
++ 
+++++
+Disabled by default because CoNLL 2012 format does not include lemmata for all words, only
+for predicates.
+++++
+
+`readNamedEntity` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`readPOS` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`readSemanticPredicate` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`readWordSense` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`sourceEncoding` (__String__) = `UTF-8` ::
++ 
+++++
+
+++++
+
+`sourceLocation` (__String__) [optional]::
++ 
+++++
+Location from which the input is read.
+++++
+
+`useDefaultExcludes` (__Boolean__) = `true` ::
++ 
+++++
+Use the default excludes.
+++++
+
+`useHeaderMetadata` (__Boolean__) = `true` ::
++ 
+++++
+Use the document ID declared in the file header instead of using the filename.
+++++
+
+`writeTracesToText` (__Boolean__) = `false`  [optional]::
++ 
+++++
+
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS,POS>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma,Lemma>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token,Token>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument,SemanticArgument>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate,SemanticPredicate>>
+
+|====
+
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2012Writer]]
+[discrete]
+==== Conll2012Writer
+
+[small]#*_Writer class:_* __de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2012Writer__#
+
+++++
+<div class='paragraph'><p>Writer for the CoNLL-2009 format.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`compression` (__String__) = `NONE`  [optional]::
++ 
+++++
+Choose a compression method. (default: CompressionMethod#NONE)
+++++
+
+`escapeDocumentId` (__Boolean__) = `true` ::
++ 
+++++
+URL-encode the document ID in the file name to avoid illegal characters (e.g. \, :, etc.)
+++++
+
+`filenameSuffix` (__String__) = `.conll` ::
++ 
+++++
+
+++++
+
+`overwrite` (__Boolean__) = `false` ::
++ 
+++++
+Allow overwriting target files (ignored when writing to ZIP archives).
+++++
+
+`singularTarget` (__Boolean__) = `false` ::
++ 
+++++
+Treat target location as a single file name. This is particularly useful if only a single
+input file is processed and the result should be written to a pre-defined output file instead
+of deriving the file name from the document URI or document ID. It can also be useful if
+the user wishes to force multiple input files to be written to a single target file. The
+latter case does not work for all formats (e.g. binary, XMI, etc.), but can be useful, e.g.
+for Conll-based formats. This option has no effect if the target location points to an
+archive location (ZIP/JAR). The #PARAM_COMPRESSION is respected, but does not 
+automatically add an extension. The #PARAM_STRIP_EXTENSION has no effect as the
+original extension is not preserved.
+++++
+
+`sourceEncoding` (__String__) = `UTF-8` ::
++ 
+++++
+Name of configuration parameter that contains the character encoding used by the input files.
+++++
+
+`stripExtension` (__Boolean__) = `false` ::
++ 
+++++
+Remove the original extension.
+++++
+
+`targetLocation` (__String__) [optional]::
++ 
+++++
+Target location. If this parameter is not yet, data is written to stdout.
+++++
+
+`useDocumentId` (__Boolean__) = `false` ::
++ 
+++++
+Use the document ID as file name even if a relative path information is present.
+++++
+
+`writeLemma` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`writePOS` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`writeSemanticPredicate` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+
+
+
+[discrete]
+===== Inputs
+[cols="h,v"]
+|====
+| Inputs 
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS,POS>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma,Lemma>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token,Token>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument,SemanticArgument>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate,SemanticPredicate>>
+
+|====
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.html-asl]]
+== HTML
+
+
+[[format-Html]]
+=== Html
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.html-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.html.HtmlReader]]
+[discrete]
+==== HtmlReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.html.HtmlReader__#
+
+++++
+<div class='paragraph'><p>Reads the contents of a given URL and strips the HTML.
+Returns only the textual contents.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`language` (__String__) [optional]::
++ 
+++++
+Set this as the language of the produced documents.
+++++
+
+`sourceEncoding` (__String__) = `UTF-8` ::
++ 
+++++
+Name of configuration parameter that contains the character encoding used by the input files.
+++++
+
+`sourceLocation` (__String__)::
++ 
+++++
+URL from which the input is read.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+
+|====
+
+
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.imscwb-asl]]
+== IMS Corpus Workbench
+
+
+[[format-ImsCwb]]
+=== ImsCwb
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.imscwb-asl__#
+
+
+include::{include-dir}sectionIntroImsCwb.adoc[]
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbReader]]
+[discrete]
+==== ImsCwbReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbReader__#
+
+++++
+<div class='paragraph'><p>Reads a tab-separated format including pseudo-XML tags.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`POSMappingLocation` (__String__) [optional]::
++ 
+++++
+Location of the mapping file for part-of-speech tags to UIMA types.
+++++
+
+`POSTagSet` (__String__) [optional]::
++ 
+++++
+Specify which tag set should be used to locate the mapping file.
+++++
+
+`generateNewIds` (__Boolean__) = `false` ::
++ 
+++++
+If true, the unit IDs are used only to detect if a new document (CAS) needs to be created,
+but for the purpose of setting the document ID, a new ID is generated. (Default: false)
+++++
+
+`idIsUrl` (__Boolean__) = `false` ::
++ 
+++++
+If true, the unit text ID encoded in the corpus file is stored as the URI in the document
+meta data. This setting has is not affected by #PARAM_GENERATE_NEW_IDS
+(Default: false)
+++++
+
+`includeHidden` (__Boolean__) = `false` ::
++ 
+++++
+Include hidden files and directories.
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+Name of optional configuration parameter that contains the language of the documents in the
+input directory. If specified, this information will be added to the CAS.
+++++
+
+`patterns` (__String[]__) [optional]::
++ 
+++++
+A set of Ant-like include/exclude patterns. A pattern starts with #INCLUDE_PREFIX [+]
+if it is an include pattern and with #EXCLUDE_PREFIX [-] if it is an exclude pattern.
+The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+The wildcard * can be used to a address a part of a name.
+++++
+
+`readLemma` (__Boolean__) = `true` ::
++ 
+++++
+Read lemmas.
+
+Default: true
+++++
+
+`readPOS` (__Boolean__) = `true` ::
++ 
+++++
+Read part-of-speech tags and generate POS annotations or subclasses if a
+#PARAM_POS_TAG_SET tag set or #PARAM_POS_MAPPING_LOCATION mapping file is
+used.
+
+Default: true
+++++
+
+`readSentence` (__Boolean__) = `true` ::
++ 
+++++
+Read sentences.
+
+Default: true
+++++
+
+`readToken` (__Boolean__) = `true` ::
++ 
+++++
+Read tokens and generate Token annotations.
+
+Default: true
+++++
+
+`replaceNonXml` (__Boolean__) = `true` ::
++ 
+++++
+Replace non-XML characters with spaces.
+(Default: true)
+++++
+
+`sourceEncoding` (__String__) = `UTF-8` ::
++ 
+++++
+
+++++
+
+`sourceLocation` (__String__) [optional]::
++ 
+++++
+Location from which the input is read.
+++++
+
+`useDefaultExcludes` (__Boolean__) = `true` ::
++ 
+++++
+Use the default excludes.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS,POS>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma,Lemma>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token,Token>>
+
+|====
+
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter]]
+[discrete]
+==== ImsCwbWriter
+
+[small]#*_Writer class:_* __de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter__#
+
+++++
+<div class='paragraph'><p>This Consumer outputs the content of all CASes into the IMS workbench format.
+
+This writer produces a text file which needs to be converted to the binary IMS CWB index files
+using the command line tools that come with the CWB.
+
+It is possible to set the parameter #PARAM_CQP_HOME to directly create output in the
+native binary CQP format via the original CWB command line tools.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`additionalFeatures` (__String[]__) [optional]::
++ 
+++++
+Write additional token-level annotation features. These have to be given as an array of fully
+qualified feature paths (fully.qualified.classname/featureName). The names for these
+annotations in CQP are their lowercase shortnames.
+++++
+
+`corpusName` (__String__) = `corpus` ::
++ 
+++++
+The name of the generated corpus.
+++++
+
+`cqpCompress` (__Boolean__) = `false` ::
++ 
+++++
+Set this parameter to compress the token streams and the indexes using cwb-huffcode and
+cwb-compress-rdx. With modern hardware, this may actually slow down queries, so we turn it
+off by default. If you have large data sets, you best try yourself what works best for you.
+(default: false)
+++++
+
+`cqpHome` (__String__) [optional]::
++ 
+++++
+Set this parameter to the directory containing the cwb-encode and cwb-makeall commands if you
+want the write to directly encode into the CQP binary format.
+++++
+
+`cqpwebCompatibility` (__Boolean__) = `false` ::
++ 
+++++
+Make document IDs compatible with CQPweb. CQPweb demands an id consisting of only letters,
+numbers and underscore.
+++++
+
+`sentenceTag` (__String__) = `s` ::
++ 
+++++
+
+++++
+
+`targetEncoding` (__String__) = `UTF-8` ::
++ 
+++++
+Character encoding of the output data.
+++++
+
+`targetLocation` (__String__)::
++ 
+++++
+Location to which the output is written.
+++++
+
+`writeCPOS` (__Boolean__) = `false` ::
++ 
+++++
+Write coarse-grained part-of-speech tags. These are the simple names of the UIMA types used
+to represent the part-of-speech tag.
+++++
+
+`writeDocId` (__Boolean__) = `false` ::
++ 
+++++
+Write the document ID for each token. It is usually a better idea to generate a
+#PARAM_WRITE_DOCUMENT_TAG document tag or a #PARAM_WRITE_TEXT_TAG text tag
+which also contain the document ID that can be queried in CQP.
+++++
+
+`writeDocumentTag` (__Boolean__) = `false` ::
++ 
+++++
+Write a pseudo-XML tag with the name document to mark the start and end of a
+document.
+++++
+
+`writeLemma` (__Boolean__) = `true` ::
++ 
+++++
+Write lemmata.
+++++
+
+`writeOffsets` (__Boolean__) = `false` ::
++ 
+++++
+Write the start and end position of each token.
+++++
+
+`writePOS` (__Boolean__) = `true` ::
++ 
+++++
+Write part-of-speech tags.
+++++
+
+`writeTextTag` (__Boolean__) = `true` ::
++ 
+++++
+Write a pseudo-XML tag with the name text to mark the start and end of a document.
+This is used by CQPweb.
+++++
+
+
+
+
+[discrete]
+===== Inputs
+[cols="h,v"]
+|====
+| Inputs 
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS,POS>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma,Lemma>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token,Token>>
+
+|====
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.jdbc-asl]]
+== JDBC
+
+
+[[format-Jdbc]]
+=== Jdbc
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.jdbc-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.jdbc.JdbcReader]]
+[discrete]
+==== JdbcReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.jdbc.JdbcReader__#
+
+++++
+<div class='paragraph'><p>Collection reader for JDBC database.The obtained data will be written into CAS DocumentText as
+well as fields of the DocumentMetaData annotation.
+</p><p>
+The field names are available as constants and begin with <code>CAS_</code>. Please specify the
+mapping of the columns and the field names in the query. For example,
+<p>
+<code>SELECT text AS cas_text, title AS cas_metadata_title FROM test_table</code>
+<p>
+will create a CAS for each record, write the content of "text" column into CAS documen text and
+that of "title" column into the document title field of the DocumentMetaData annotation.</div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`connection` (__String__) = `jdbc:mysql://127.0.0.1/` ::
++ 
+++++
+Specifies the URL to the database.
+<p>
+If used with uimaFIT and the value is not given, <code>jdbc:mysql://127.0.0.1/</code> will be
+taken.
+++++
+
+`database` (__String__)::
++ 
+++++
+Specifies name of the database to be accessed.
+++++
+
+`driver` (__String__) = `com.mysql.jdbc.Driver` ::
++ 
+++++
+Specify the class name of the JDBC driver.
+<p>
+If used with uimaFIT and the value is not given, <code>com.mysql.jdbc.Driver</code> will be
+taken.
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+Specifies the language.
+++++
+
+`password` (__String__)::
++ 
+++++
+Specifies the password for database access.
+++++
+
+`query` (__String__)::
++ 
+++++
+Specifies the query.
+++++
+
+`user` (__String__)::
++ 
+++++
+Specifies the user name for database access.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+
+|====
+
+
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.mallet-asl]]
+== Mallet
+
+
+[[format-MalletTopicProportions]]
+=== MalletTopicProportions
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.mallet-asl__#
+
+
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.mallet.topicmodel.io.MalletTopicProportionsWriter]]
+[discrete]
+==== MalletTopicProportionsWriter
+
+[small]#*_Writer class:_* __de.tudarmstadt.ukp.dkpro.core.mallet.topicmodel.io.MalletTopicProportionsWriter__#
+
+++++
+<div class='paragraph'><p>Write topic proportions to a file in the shape depends on the {@link TopicDistribution annotation which should have been created by
+MalletTopicModelInferencer before.
+</p></p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`compression` (__String__) = `NONE`  [optional]::
++ 
+++++
+Choose a compression method. (default: CompressionMethod#NONE)
+++++
+
+`escapeDocumentId` (__Boolean__) = `true` ::
++ 
+++++
+URL-encode the document ID in the file name to avoid illegal characters (e.g. \, :, etc.)
+++++
+
+`overwrite` (__Boolean__) = `false` ::
++ 
+++++
+Allow overwriting target files (ignored when writing to ZIP archives).
+++++
+
+`singularTarget` (__Boolean__) = `false` ::
++ 
+++++
+Treat target location as a single file name. This is particularly useful if only a single
+input file is processed and the result should be written to a pre-defined output file instead
+of deriving the file name from the document URI or document ID. It can also be useful if
+the user wishes to force multiple input files to be written to a single target file. The
+latter case does not work for all formats (e.g. binary, XMI, etc.), but can be useful, e.g.
+for Conll-based formats. This option has no effect if the target location points to an
+archive location (ZIP/JAR). The #PARAM_COMPRESSION is respected, but does not 
+automatically add an extension. The #PARAM_STRIP_EXTENSION has no effect as the
+original extension is not preserved.
+++++
+
+`stripExtension` (__Boolean__) = `false` ::
++ 
+++++
+Remove the original extension.
+++++
+
+`targetLocation` (__String__)::
++ 
+++++
+
+++++
+
+`useDocumentId` (__Boolean__) = `false` ::
++ 
+++++
+Use the document ID as file name even if a relative path information is present.
+++++
+
+
+
+
+
+
+
+
+[[format-MalletTopicsProportionsSorted]]
+=== MalletTopicsProportionsSorted
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.mallet-asl__#
+
+
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.mallet.topicmodel.io.MalletTopicsProportionsSortedWriter]]
+[discrete]
+==== MalletTopicsProportionsSortedWriter
+
+[small]#*_Writer class:_* __de.tudarmstadt.ukp.dkpro.core.mallet.topicmodel.io.MalletTopicsProportionsSortedWriter__#
+
+++++
+<div class='paragraph'><p>Write the topic proportions according to an LDA topic model to an output file. The proportions
+need to be inferred in a previous step using MalletTopicModelInferencer.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`compression` (__String__) = `NONE`  [optional]::
++ 
+++++
+Choose a compression method. (default: CompressionMethod#NONE)
+++++
+
+`escapeDocumentId` (__Boolean__) = `true` ::
++ 
+++++
+URL-encode the document ID in the file name to avoid illegal characters (e.g. \, :, etc.)
+++++
+
+`nTopics` (__Integer__) = `3` ::
++ 
+++++
+
+++++
+
+`overwrite` (__Boolean__) = `false` ::
++ 
+++++
+Allow overwriting target files (ignored when writing to ZIP archives).
+++++
+
+`singularTarget` (__Boolean__) = `false` ::
++ 
+++++
+Treat target location as a single file name. This is particularly useful if only a single
+input file is processed and the result should be written to a pre-defined output file instead
+of deriving the file name from the document URI or document ID. It can also be useful if
+the user wishes to force multiple input files to be written to a single target file. The
+latter case does not work for all formats (e.g. binary, XMI, etc.), but can be useful, e.g.
+for Conll-based formats. This option has no effect if the target location points to an
+archive location (ZIP/JAR). The #PARAM_COMPRESSION is respected, but does not 
+automatically add an extension. The #PARAM_STRIP_EXTENSION has no effect as the
+original extension is not preserved.
+++++
+
+`stripExtension` (__Boolean__) = `false` ::
++ 
+++++
+Remove the original extension.
+++++
+
+`targetLocation` (__String__)::
++ 
+++++
+
+++++
+
+`useDocumentId` (__Boolean__) = `false` ::
++ 
+++++
+Use the document ID as file name even if a relative path information is present.
+++++
+
+
+
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.negra-asl]]
+== NEGRA
+
+
+[[format-NegraExport]]
+=== NegraExport
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.negra-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.negra.NegraExportReader]]
+[discrete]
+==== NegraExportReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.negra.NegraExportReader__#
+
+++++
+<div class='paragraph'><p>This CollectionReader reads a file which is formatted in the NEGRA export format. The texts and
+add. information like constituent structure is reproduced in CASes, one CAS per text (article) .</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`POSMappingLocation` (__String__) [optional]::
++ 
+++++
+Location of the mapping file for part-of-speech tags to UIMA types.
+++++
+
+`POSTagSet` (__String__) [optional]::
++ 
+++++
+Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
+tag set defined as part of the model meta data. This can be useful if a custom model is
+specified which does not have such meta data, or it can be used in readers.
+++++
+
+`collectionId` (__String__) [optional]::
++ 
+++++
+The collection ID to the written to the document meta data. (Default: none)
+++++
+
+`documentUnit` (__String__) = `ORIGIN_NAME` ::
++ 
+++++
+What indicates if a new CAS should be started. E.g., if set to
+DocumentUnit#ORIGIN_NAME ORIGIN_NAME, a new CAS is generated whenever the origin name
+of the current sentence differs from the origin name of the last sentence. (Default:
+ORIGIN_NAME)
+++++
+
+`generateNewIds` (__Boolean__) = `false` ::
++ 
+++++
+If true, the unit IDs are used only to detect if a new document (CAS) needs to be created,
+but for the purpose of setting the document ID, a new ID is generated. (Default: false)
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+The language.
+++++
+
+`readLemma` (__Boolean__) = `true` ::
++ 
+++++
+Write lemma information.
+
+Default: true
+++++
+
+`readPOS` (__Boolean__) = `true` ::
++ 
+++++
+Write part-of-speech information.
+
+Default: true
+++++
+
+`readPennTree` (__Boolean__) = `false` ::
++ 
+++++
+Write Penn Treebank bracketed structure information. Mind this may not work with all tagsets,
+in particular not with such that contain "(" or ")" in their tags. The tree is generated
+using the original tag set in the corpus, not using the mapped tagset!
+
+Default: false
+++++
+
+`sourceEncoding` (__String__) = `UTF-8` ::
++ 
+++++
+Character encoding of the input data.
+++++
+
+`sourceLocation` (__String__)::
++ 
+++++
+Location from which the input is read.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS,POS>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma,Lemma>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token,Token>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent,Constituent>>
+
+|====
+
+
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.pdf-asl]]
+== PDF
+
+
+[[format-Pdf]]
+=== Pdf
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.pdf-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfReader]]
+[discrete]
+==== PdfReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfReader__#
+
+++++
+<div class='paragraph'><p>Collection reader for PDF files. Uses simple heuristics to detect headings and paragraphs.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`endPage` (__Integer__) = `-1`  [optional]::
++ 
+++++
+The last page to be extracted from the PDF.
+++++
+
+`headingType` (__String__) = `<built-in>`  [optional]::
++ 
+++++
+The type used to annotate headings.
+++++
+
+`includeHidden` (__Boolean__) = `false` ::
++ 
+++++
+Include hidden files and directories.
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+Name of optional configuration parameter that contains the language of the documents in the
+input directory. If specified, this information will be added to the CAS.
+++++
+
+`paragraphType` (__String__) = `<built-in>`  [optional]::
++ 
+++++
+The type used to annotate paragraphs.
+++++
+
+`patterns` (__String[]__) [optional]::
++ 
+++++
+A set of Ant-like include/exclude patterns. A pattern starts with #INCLUDE_PREFIX [+]
+if it is an include pattern and with #EXCLUDE_PREFIX [-] if it is an exclude pattern.
+The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+The wildcard * can be used to a address a part of a name.
+++++
+
+`sourceLocation` (__String__) [optional]::
++ 
+++++
+Location from which the input is read.
+++++
+
+`startPage` (__Integer__) = `-1`  [optional]::
++ 
+++++
+The first page to be extracted from the PDF.
+++++
+
+`substitutionTableLocation` (__String__) = `<built-in>`  [optional]::
++ 
+++++
+The location of the substitution table use to post-process the text extracted form the PDF,
+e.g. to convert ligatures to separate characters.
+++++
+
+`useDefaultExcludes` (__Boolean__) = `true` ::
++ 
+++++
+Use the default excludes.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+
+|====
+
+
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.penntree-asl]]
+== Penn Treebank Format
+
+
+[[format-PennTreebankChunked]]
+=== PennTreebankChunked
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.penntree-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreebankChunkedReader]]
+[discrete]
+==== PennTreebankChunkedReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreebankChunkedReader__#
+
+++++
+<div class='paragraph'><p>Penn Treebank chunked format reader.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`POSMappingLocation` (__String__) [optional]::
++ 
+++++
+Location of the mapping file for part-of-speech tags to UIMA types.
+++++
+
+`POSTagSet` (__String__) [optional]::
++ 
+++++
+Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
+tag set defined as part of the model meta data. This can be useful if a custom model is
+specified which does not have such meta data, or it can be used in readers.
+++++
+
+`includeHidden` (__Boolean__) = `false` ::
++ 
+++++
+Include hidden files and directories.
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+Name of optional configuration parameter that contains the language of the documents in the
+input directory. If specified, this information will be added to the CAS.
+++++
+
+`patterns` (__String[]__) [optional]::
++ 
+++++
+A set of Ant-like include/exclude patterns. A pattern starts with #INCLUDE_PREFIX [+]
+if it is an include pattern and with #EXCLUDE_PREFIX [-] if it is an exclude pattern.
+The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+The wildcard * can be used to a address a part of a name.
+++++
+
+`readChunk` (__Boolean__) = `true` ::
++ 
+++++
+Write chunk annotations to the CAS.
+++++
+
+`readPOS` (__Boolean__) = `true` ::
++ 
+++++
+Write part-of-speech annotations to the CAS.
+++++
+
+`readSentence` (__Boolean__) = `true` ::
++ 
+++++
+Write sentence annotations to the CAS.
+++++
+
+`readToken` (__Boolean__) = `true` ::
++ 
+++++
+Write token annotations to the CAS.
+++++
+
+`sourceEncoding` (__String__) = `UTF-8` ::
++ 
+++++
+Character encoding of the input data.
+++++
+
+`sourceLocation` (__String__) [optional]::
++ 
+++++
+Location from which the input is read.
+++++
+
+`useDefaultExcludes` (__Boolean__) = `true` ::
++ 
+++++
+Use the default excludes.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS,POS>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token,Token>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk,Chunk>>
+
+|====
+
+
+
+
+
+
+
+[[format-PennTreebankCombined]]
+=== PennTreebankCombined
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.penntree-asl__#
+
+
+include::{include-dir}sectionIntroPennTreebankCombined.adoc[]
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreebankCombinedReader]]
+[discrete]
+==== PennTreebankCombinedReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreebankCombinedReader__#
+
+++++
+<div class='paragraph'><p>Penn Treebank combined format reader.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`ConstituentMappingLocation` (__String__) [optional]::
++ 
+++++
+Load the constituent tag to UIMA type mapping from this location instead of locating
+the mapping automatically.
+++++
+
+`ConstituentTagSet` (__String__) [optional]::
++ 
+++++
+Use this constituent tag set to use to resolve the tag set mapping instead of using the
+tag set defined as part of the model meta data. This can be useful if a custom model is
+specified which does not have such meta data, or it can be used in readers.
+++++
+
+`POSMappingLocation` (__String__) [optional]::
++ 
+++++
+Load the part-of-speech tag to UIMA type mapping from this location instead of locating
+the mapping automatically.
+++++
+
+`POSTagSet` (__String__) [optional]::
++ 
+++++
+Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
+tag set defined as part of the model meta data. This can be useful if a custom model is
+specified which does not have such meta data, or it can be used in readers.
+++++
+
+`includeHidden` (__Boolean__) = `false` ::
++ 
+++++
+Include hidden files and directories.
+++++
+
+`internTags` (__Boolean__) = `true`  [optional]::
++ 
+++++
+Use the String#intern() method on tags. This is usually a good idea to avoid
+spaming the heap with thousands of strings representing only a few different tags.
+
+<p>Default: true</p>
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+Name of optional configuration parameter that contains the language of the documents in the
+input directory. If specified, this information will be added to the CAS.
+++++
+
+`patterns` (__String[]__) [optional]::
++ 
+++++
+A set of Ant-like include/exclude patterns. A pattern starts with #INCLUDE_PREFIX [+]
+if it is an include pattern and with #EXCLUDE_PREFIX [-] if it is an exclude pattern.
+The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+The wildcard * can be used to a address a part of a name.
+++++
+
+`readPOS` (__Boolean__) = `true` ::
++ 
+++++
+Sets whether to create or not to create POS tags. The creation of
+constituent tags must be turned on for this to work.
+
+<p>Default: true</p>
+++++
+
+`removeTraces` (__Boolean__) = `true`  [optional]::
++ 
+++++
+
+++++
+
+`sourceEncoding` (__String__) = `UTF-8` ::
++ 
+++++
+Name of configuration parameter that contains the character encoding used by the input files.
+++++
+
+`sourceLocation` (__String__) [optional]::
++ 
+++++
+Location from which the input is read.
+++++
+
+`useDefaultExcludes` (__Boolean__) = `true` ::
++ 
+++++
+Use the default excludes.
+++++
+
+`writeTracesToText` (__Boolean__) = `false`  [optional]::
++ 
+++++
+
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS,POS>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token,Token>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent,Constituent>>
+
+|====
+
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreebankCombinedWriter]]
+[discrete]
+==== PennTreebankCombinedWriter
+
+[small]#*_Writer class:_* __de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreebankCombinedWriter__#
+
+++++
+<div class='paragraph'><p>Penn Treebank combined format writer.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`compression` (__String__) = `NONE`  [optional]::
++ 
+++++
+Choose a compression method. (default: CompressionMethod#NONE)
+++++
+
+`emptyRootLabel` (__Boolean__) = `false` ::
++ 
+++++
+
+++++
+
+`escapeDocumentId` (__Boolean__) = `true` ::
++ 
+++++
+URL-encode the document ID in the file name to avoid illegal characters (e.g. \, :, etc.)
+++++
+
+`filenameSuffix` (__String__) = `.penn` ::
++ 
+++++
+Specify the suffix of output files. Default value <code>.penn</code>. If the suffix is not
+needed, provide an empty string as value.
+++++
+
+`noRootLabel` (__Boolean__) = `false` ::
++ 
+++++
+
+++++
+
+`overwrite` (__Boolean__) = `false` ::
++ 
+++++
+Allow overwriting target files (ignored when writing to ZIP archives).
+++++
+
+`singularTarget` (__Boolean__) = `false` ::
++ 
+++++
+Treat target location as a single file name. This is particularly useful if only a single
+input file is processed and the result should be written to a pre-defined output file instead
+of deriving the file name from the document URI or document ID. It can also be useful if
+the user wishes to force multiple input files to be written to a single target file. The
+latter case does not work for all formats (e.g. binary, XMI, etc.), but can be useful, e.g.
+for Conll-based formats. This option has no effect if the target location points to an
+archive location (ZIP/JAR). The #PARAM_COMPRESSION is respected, but does not 
+automatically add an extension. The #PARAM_STRIP_EXTENSION has no effect as the
+original extension is not preserved.
+++++
+
+`sourceEncoding` (__String__) = `UTF-8` ::
++ 
+++++
+Name of configuration parameter that contains the character encoding used by the input files.
+++++
+
+`stripExtension` (__Boolean__) = `false` ::
++ 
+++++
+Remove the original extension.
+++++
+
+`targetLocation` (__String__) [optional]::
++ 
+++++
+Target location. If this parameter is not yet, data is written to stdout.
+++++
+
+`useDocumentId` (__Boolean__) = `false` ::
++ 
+++++
+Use the document ID as file name even if a relative path information is present.
+++++
+
+
+
+
+[discrete]
+===== Inputs
+[cols="h,v"]
+|====
+| Inputs 
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS,POS>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token,Token>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent,Constituent>>
+
+|====
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.reuters-asl]]
+== Reuters-21578
+
+
+[[format-Reuters21578Sgml]]
+=== Reuters21578Sgml
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.reuters-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.reuters.Reuters21578SgmlReader]]
+[discrete]
+==== Reuters21578SgmlReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.reuters.Reuters21578SgmlReader__#
+
+++++
+<div class='paragraph'><p>Read a Reuters-21578 corpus in SGML format.
+</p><p>
+Set the directory that contains the SGML files with #PARAM_SOURCE_LOCATION.</div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`sourceLocation` (__String__)::
++ 
+++++
+The directory that contains the Reuters-21578 SGML files.
+++++
+
+
+
+
+
+
+
+
+
+
+[[format-Reuters21578Txt]]
+=== Reuters21578Txt
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.reuters-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.reuters.Reuters21578TxtReader]]
+[discrete]
+==== Reuters21578TxtReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.reuters.Reuters21578TxtReader__#
+
+++++
+<div class='paragraph'><p>Read a Reuters-21578 corpus that has been transformed into text format using ExtractReuters in
+the lucene-benchmarks project.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`sourceLocation` (__String__)::
++ 
+++++
+The directory that contains the Reuters-21578 text files, named according to the pattern #FILE_PATTERN.
+++++
+
+
+
+
+
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.rtf-asl]]
+== RTF
+
+
+[[format-RTF]]
+=== RTF
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.rtf-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.rtf.RTFReader]]
+[discrete]
+==== RTFReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.rtf.RTFReader__#
+
+++++
+<div class='paragraph'><p>Read RTF (Rich Test Format) files. Uses RTFEditorKit for parsing RTF..</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`includeHidden` (__Boolean__) = `false` ::
++ 
+++++
+Include hidden files and directories.
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+Name of optional configuration parameter that contains the language of the documents in the
+input directory. If specified, this information will be added to the CAS.
+++++
+
+`patterns` (__String[]__) [optional]::
++ 
+++++
+A set of Ant-like include/exclude patterns. A pattern starts with #INCLUDE_PREFIX [+]
+if it is an include pattern and with #EXCLUDE_PREFIX [-] if it is an exclude pattern.
+The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+The wildcard * can be used to a address a part of a name.
+++++
+
+`sourceLocation` (__String__) [optional]::
++ 
+++++
+Location from which the input is read.
+++++
+
+`useDefaultExcludes` (__Boolean__) = `true` ::
++ 
+++++
+Use the default excludes.
+++++
+
+
+
+
+
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.solr-asl]]
+== Solr
+
+
+[[format-Solr]]
+=== Solr
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.solr-asl__#
+
+
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.solr.SolrWriter]]
+[discrete]
+==== SolrWriter
+
+[small]#*_Writer class:_* __de.tudarmstadt.ukp.dkpro.core.io.solr.SolrWriter__#
+
+++++
+<div class='paragraph'><p>A simple implementation of SolrWriter_ImplBase</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`optimizeIndex` (__Boolean__) = `false` ::
++ 
+++++
+If set to true, the index is optimized once all documents are uploaded. Default is false.
+++++
+
+`queueSize` (__Integer__) = `10000` ::
++ 
+++++
+The buffer size before the documents are sent to the server (default: 10000).
+++++
+
+`solrIdField` (__String__) = `id` ::
++ 
+++++
+The name of the id field in the Solr schema (default: "id").
+++++
+
+`targetLocation` (__String__)::
++ 
+++++
+Solr server URL string in the form <prot>://<host>:<port>/<path>, e.g.
+http://localhost:8983/solr/collection1.
+++++
+
+`textField` (__String__) = `text` ::
++ 
+++++
+The name of the text field in the Solr schema (default: "text").
+++++
+
+`threads` (__Integer__) = `1` ::
++ 
+++++
+The number of background threads used to empty the queue. Default: 1.
+++++
+
+`update` (__Boolean__) = `true` ::
++ 
+++++
+Define whether existing documents with same ID are updated (true) of overwritten (false)?
+Default: true (update).
+++++
+
+`waitFlush` (__Boolean__) = `true` ::
++ 
+++++
+When committing to the index, i.e. when all documents are processed, block until index
+changes are flushed to disk? Default: true.
+++++
+
+`waitSearcher` (__Boolean__) = `true` ::
++ 
+++++
+When committing to the index, i.e. when all documents are processed, block until a new
+searcher is opened and registered as the main query searcher, making the changes visible?
+Default: true.
+++++
+
+
+
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.tcf-asl]]
+== TCF
+
+
+[[format-Tcf]]
+=== Tcf
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.tcf-asl__#
+
+
+include::{include-dir}sectionIntroTcf.adoc[]
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.tcf.TcfReader]]
+[discrete]
+==== TcfReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.tcf.TcfReader__#
+
+++++
+<div class='paragraph'><p>Reader for the WebLicht TCF format. It reads all the available annotation Layers from the TCF
+file and convert it to a CAS annotations. The TCF data do not have begin/end offsets for all of
+its annotations which is required in CAS annotation. Hence, addresses are manually calculated per
+tokens and stored in a map (token_id, token(CAS object)) where later we get can get the offset
+from the token</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`includeHidden` (__Boolean__) = `false` ::
++ 
+++++
+Include hidden files and directories.
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+Name of optional configuration parameter that contains the language of the documents in the
+input directory. If specified, this information will be added to the CAS.
+++++
+
+`patterns` (__String[]__) [optional]::
++ 
+++++
+A set of Ant-like include/exclude patterns. A pattern starts with #INCLUDE_PREFIX [+]
+if it is an include pattern and with #EXCLUDE_PREFIX [-] if it is an exclude pattern.
+The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+The wildcard * can be used to a address a part of a name.
+++++
+
+`sourceLocation` (__String__) [optional]::
++ 
+++++
+Location from which the input is read.
+++++
+
+`useDefaultExcludes` (__Boolean__) = `true` ::
++ 
+++++
+Use the default excludes.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain,CoreferenceChain>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink,CoreferenceLink>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS,POS>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity,NamedEntity>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma,Lemma>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token,Token>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency,Dependency>>
+
+|====
+
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.tcf.TcfWriter]]
+[discrete]
+==== TcfWriter
+
+[small]#*_Writer class:_* __de.tudarmstadt.ukp.dkpro.core.io.tcf.TcfWriter__#
+
+++++
+<div class='paragraph'><p>Writer for the WebLicht TCF format.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`compression` (__String__) = `NONE`  [optional]::
++ 
+++++
+Choose a compression method. (default: CompressionMethod#NONE)
+++++
+
+`escapeDocumentId` (__Boolean__) = `true` ::
++ 
+++++
+URL-encode the document ID in the file name to avoid illegal characters (e.g. \, :, etc.)
+++++
+
+`filenameSuffix` (__String__) = `.tcf` ::
++ 
+++++
+Specify the suffix of output files. Default value <code>.tcf</code>. If the suffix is not
+needed, provide an empty string as value.
+++++
+
+`merge` (__Boolean__) = `true` ::
++ 
+++++
+Merge with source TCF file if one is available.<br>
+Default: true
+++++
+
+`overwrite` (__Boolean__) = `false` ::
++ 
+++++
+Allow overwriting target files (ignored when writing to ZIP archives).
+++++
+
+`preserveIfEmpty` (__Boolean__) = `false` ::
++ 
+++++
+If there are no annotations for a particular layer in the CAS, preserve any potentially
+existing annotations in the original TCF.<br>
+Default: false
+++++
+
+`singularTarget` (__Boolean__) = `false` ::
++ 
+++++
+Treat target location as a single file name. This is particularly useful if only a single
+input file is processed and the result should be written to a pre-defined output file instead
+of deriving the file name from the document URI or document ID. It can also be useful if
+the user wishes to force multiple input files to be written to a single target file. The
+latter case does not work for all formats (e.g. binary, XMI, etc.), but can be useful, e.g.
+for Conll-based formats. This option has no effect if the target location points to an
+archive location (ZIP/JAR). The #PARAM_COMPRESSION is respected, but does not 
+automatically add an extension. The #PARAM_STRIP_EXTENSION has no effect as the
+original extension is not preserved.
+++++
+
+`stripExtension` (__Boolean__) = `false` ::
++ 
+++++
+Remove the original extension.
+++++
+
+`targetLocation` (__String__) [optional]::
++ 
+++++
+Target location. If this parameter is not yet, data is written to stdout.
+++++
+
+`useDocumentId` (__Boolean__) = `false` ::
++ 
+++++
+Use the document ID as file name even if a relative path information is present.
+++++
+
+
+
+
+[discrete]
+===== Inputs
+[cols="h,v"]
+|====
+| Inputs 
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain,CoreferenceChain>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink,CoreferenceLink>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS,POS>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity,NamedEntity>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma,Lemma>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token,Token>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency,Dependency>>
+
+|====
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.tei-asl]]
+== TEI
+
+
+[[format-Tei]]
+=== Tei
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.tei-asl__#
+
+
+include::{include-dir}sectionIntroTei.adoc[]
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.tei.TeiReader]]
+[discrete]
+==== TeiReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.tei.TeiReader__#
+
+++++
+<div class='paragraph'><p>Reader for the TEI XML.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`POSMappingLocation` (__String__) [optional]::
++ 
+++++
+Location of the mapping file for part-of-speech tags to UIMA types.
+++++
+
+`POSTagSet` (__String__) [optional]::
++ 
+++++
+Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
+tag set defined as part of the model meta data. This can be useful if a custom model is
+specified which does not have such meta data, or it can be used in readers.
+++++
+
+`includeHidden` (__Boolean__) = `false` ::
++ 
+++++
+Include hidden files and directories.
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+Name of optional configuration parameter that contains the language of the documents in the
+input directory. If specified, this information will be added to the CAS.
+++++
+
+`omitIgnorableWhitespace` (__Boolean__) = `false` ::
++ 
+++++
+Do not write <em>ignoreable whitespace</em> from the XML file to the CAS.
+++++
+
+`patterns` (__String[]__) [optional]::
++ 
+++++
+A set of Ant-like include/exclude patterns. A pattern starts with #INCLUDE_PREFIX [+]
+if it is an include pattern and with #EXCLUDE_PREFIX [-] if it is an exclude pattern.
+The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+The wildcard * can be used to a address a part of a name.
+++++
+
+`readConstituent` (__Boolean__) = `true` ::
++ 
+++++
+Write constituent annotations to the CAS.
+++++
+
+`readLemma` (__Boolean__) = `true` ::
++ 
+++++
+Write lemma annotations to the CAS.
+++++
+
+`readNamedEntity` (__Boolean__) = `true` ::
++ 
+++++
+Write named entity annotations to the CAS.
+++++
+
+`readPOS` (__Boolean__) = `true` ::
++ 
+++++
+Write part-of-speech annotations to the CAS.
+++++
+
+`readParagraph` (__Boolean__) = `true` ::
++ 
+++++
+Write paragraphs annotations to the CAS.
+++++
+
+`readSentence` (__Boolean__) = `true` ::
++ 
+++++
+Write sentence annotations to the CAS.
+++++
+
+`readToken` (__Boolean__) = `true` ::
++ 
+++++
+Write token annotations to the CAS.
+++++
+
+`sourceLocation` (__String__) [optional]::
++ 
+++++
+Location from which the input is read.
+++++
+
+`useDefaultExcludes` (__Boolean__) = `true` ::
++ 
+++++
+Use the default excludes.
+++++
+
+`useFilenameId` (__Boolean__) = `false` ::
++ 
+++++
+When not using the XML ID, use only the filename instead of the whole URL as ID. Mind that
+the filenames should be unique in this case.
+++++
+
+`useXmlId` (__Boolean__) = `false` ::
++ 
+++++
+Use the xml:id attribute on the TEI elements as document ID. Mind that many TEI files
+may not have this attribute on all TEI elements and you may end up with no document ID
+at all. Also mind that the IDs should be unique.
+++++
+
+`utterancesAsSentences` (__Boolean__) = `false` ::
++ 
+++++
+Interpret utterances "u" as sentenes "s". (EXPERIMENTAL)
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS,POS>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity,NamedEntity>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma,Lemma>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph,Paragraph>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token,Token>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent,Constituent>>
+
+|====
+
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.tei.TeiWriter]]
+[discrete]
+==== TeiWriter
+
+[small]#*_Writer class:_* __de.tudarmstadt.ukp.dkpro.core.io.tei.TeiWriter__#
+
+++++
+<div class='paragraph'><p>UIMA CAS consumer writing the CAS document text in TEI format.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`cTextPattern` (__String__) = `[,.:;()]|({backtick}{backtick})|('')|(--)` ::
++ 
+++++
+A token matching this pattern is rendered as a TEI "c" element instead of a "w" element.
+++++
+
+`compression` (__String__) = `NONE`  [optional]::
++ 
+++++
+Choose a compression method. (default: CompressionMethod#NONE)
+++++
+
+`escapeDocumentId` (__Boolean__) = `true` ::
++ 
+++++
+URL-encode the document ID in the file name to avoid illegal characters (e.g. \, :, etc.)
+++++
+
+`filenameSuffix` (__String__) = `.xml` ::
++ 
+++++
+Specify the suffix of output files. Default value <code>.xml</code>. If the suffix is not
+needed, provide an empty string as value.
+++++
+
+`indent` (__Boolean__) = `false` ::
++ 
+++++
+Indent the XML.
+++++
+
+`overwrite` (__Boolean__) = `false` ::
++ 
+++++
+Allow overwriting target files (ignored when writing to ZIP archives).
+++++
+
+`singularTarget` (__Boolean__) = `false` ::
++ 
+++++
+Treat target location as a single file name. This is particularly useful if only a single
+input file is processed and the result should be written to a pre-defined output file instead
+of deriving the file name from the document URI or document ID. It can also be useful if
+the user wishes to force multiple input files to be written to a single target file. The
+latter case does not work for all formats (e.g. binary, XMI, etc.), but can be useful, e.g.
+for Conll-based formats. This option has no effect if the target location points to an
+archive location (ZIP/JAR). The #PARAM_COMPRESSION is respected, but does not 
+automatically add an extension. The #PARAM_STRIP_EXTENSION has no effect as the
+original extension is not preserved.
+++++
+
+`stripExtension` (__Boolean__) = `false` ::
++ 
+++++
+Remove the original extension.
+++++
+
+`targetLocation` (__String__) [optional]::
++ 
+++++
+Target location. If this parameter is not yet, data is written to stdout.
+++++
+
+`useDocumentId` (__Boolean__) = `false` ::
++ 
+++++
+Use the document ID as file name even if a relative path information is present.
+++++
+
+`writeConstituent` (__Boolean__) = `false` ::
++ 
+++++
+Write constituent annotations to the CAS. Disabled by default because it requires type
+priorities to be set up (Constituents must have a higher prio than Tokens).
+++++
+
+`writeNamedEntity` (__Boolean__) = `true` ::
++ 
+++++
+Write named entity annotations to the CAS. Overlapping named entities are not supported.
+++++
+
+
+
+
+[discrete]
+===== Inputs
+[cols="h,v"]
+|====
+| Inputs 
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS,POS>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity,NamedEntity>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma,Lemma>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph,Paragraph>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token,Token>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent,Constituent>>
+
+|====
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.text-asl]]
+== Text
+
+
+[[format-String]]
+=== String
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.text-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.text.StringReader]]
+[discrete]
+==== StringReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.text.StringReader__#
+
+++++
+<div class='paragraph'><p>Simple reader that generates a CAS from a String. This can be useful in situations where a reader
+is preferred over manually crafting a CAS using JCasFactory#createJCas().</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`collectionId` (__String__) = `COLLECTION_ID` ::
++ 
+++++
+The collection ID to set in the DocumentMetaData.
+++++
+
+`documentBaseUri` (__String__) [optional]::
++ 
+++++
+The document base URI to set in the DocumentMetaData.
+++++
+
+`documentId` (__String__) = `DOCUMENT_ID` ::
++ 
+++++
+The document ID to set in the DocumentMetaData.
+++++
+
+`documentText` (__String__)::
++ 
+++++
+The document text.
+++++
+
+`documentUri` (__String__) = `STRING` ::
++ 
+++++
+The document URI to set in the DocumentMetaData.
+++++
+
+`language` (__String__)::
++ 
+++++
+Set this as the language of the produced documents.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+
+|====
+
+
+
+
+
+
+
+[[format-Text]]
+=== Text
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.text-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.text.TextReader]]
+[discrete]
+==== TextReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.text.TextReader__#
+
+++++
+<div class='paragraph'><p>UIMA collection reader for plain text files.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`includeHidden` (__Boolean__) = `false` ::
++ 
+++++
+Include hidden files and directories.
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+Name of optional configuration parameter that contains the language of the documents in the
+input directory. If specified, this information will be added to the CAS.
+++++
+
+`patterns` (__String[]__) [optional]::
++ 
+++++
+A set of Ant-like include/exclude patterns. A pattern starts with #INCLUDE_PREFIX [+]
+if it is an include pattern and with #EXCLUDE_PREFIX [-] if it is an exclude pattern.
+The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+The wildcard * can be used to a address a part of a name.
+++++
+
+`sourceEncoding` (__String__) = `UTF-8` ::
++ 
+++++
+Name of configuration parameter that contains the character encoding used by the input files.
+++++
+
+`sourceLocation` (__String__) [optional]::
++ 
+++++
+Location from which the input is read.
+++++
+
+`useDefaultExcludes` (__Boolean__) = `true` ::
++ 
+++++
+Use the default excludes.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+
+|====
+
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.text.TextWriter]]
+[discrete]
+==== TextWriter
+
+[small]#*_Writer class:_* __de.tudarmstadt.ukp.dkpro.core.io.text.TextWriter__#
+
+++++
+<div class='paragraph'><p>UIMA CAS consumer writing the CAS document text as plain text file.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`compression` (__String__) = `NONE`  [optional]::
++ 
+++++
+Choose a compression method. (default: CompressionMethod#NONE)
+++++
+
+`escapeDocumentId` (__Boolean__) = `true` ::
++ 
+++++
+URL-encode the document ID in the file name to avoid illegal characters (e.g. \, :, etc.)
+++++
+
+`filenameSuffix` (__String__) = `.txt` ::
++ 
+++++
+Specify the suffix of output files. Default value <code>.txt</code>. If the suffix is not
+needed, provide an empty string as value.
+++++
+
+`overwrite` (__Boolean__) = `false` ::
++ 
+++++
+Allow overwriting target files (ignored when writing to ZIP archives).
+++++
+
+`singularTarget` (__Boolean__) = `false` ::
++ 
+++++
+Treat target location as a single file name. This is particularly useful if only a single
+input file is processed and the result should be written to a pre-defined output file instead
+of deriving the file name from the document URI or document ID. It can also be useful if
+the user wishes to force multiple input files to be written to a single target file. The
+latter case does not work for all formats (e.g. binary, XMI, etc.), but can be useful, e.g.
+for Conll-based formats. This option has no effect if the target location points to an
+archive location (ZIP/JAR). The #PARAM_COMPRESSION is respected, but does not 
+automatically add an extension. The #PARAM_STRIP_EXTENSION has no effect as the
+original extension is not preserved.
+++++
+
+`stripExtension` (__Boolean__) = `false` ::
++ 
+++++
+Remove the original extension.
+++++
+
+`targetLocation` (__String__) [optional]::
++ 
+++++
+Target location. If this parameter is not yet, data is written to stdout.
+++++
+
+`useDocumentId` (__Boolean__) = `false` ::
++ 
+++++
+Use the document ID as file name even if a relative path information is present.
+++++
+
+
+
+
+[discrete]
+===== Inputs
+[cols="h,v"]
+|====
+| Inputs 
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+
+|====
+
+
+
+
+
+[[format-TokenizedText]]
+=== TokenizedText
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.text-asl__#
+
+
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.text.TokenizedTextWriter]]
+[discrete]
+==== TokenizedTextWriter
+
+[small]#*_Writer class:_* __de.tudarmstadt.ukp.dkpro.core.io.text.TokenizedTextWriter__#
+
+++++
+<div class='paragraph'><p>This class writes a set of pre-processed documents into a large text file containing one sentence
+per line and tokens split by whitespaces. Optionally, annotations other than tokens (e.g. lemmas)
+are written as specified by #PARAM_FEATURE_PATH.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`compression` (__String__) = `NONE`  [optional]::
++ 
+++++
+Choose a compression method. (default: CompressionMethod#NONE)
+++++
+
+`escapeDocumentId` (__Boolean__) = `true` ::
++ 
+++++
+URL-encode the document ID in the file name to avoid illegal characters (e.g. \, :, etc.)
+++++
+
+`featurePath` (__String__) = `de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token` ::
++ 
+++++
+The feature path, e.g.
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma/value for lemmas. Default:
+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token (i.e. token texts).
+<p>
+In order to specify a different annotation use the annotation class' type name (e.g.
+Token.class.getTypeName()) and optionally append a field, e.g. /value to
+specify the feature path. If you do not specify a field, the covered text is used.
+++++
+
+`numberRegex` (__String__) [optional]::
++ 
+++++
+All tokens that match this regex are replaced by NUM. Examples:
+<ul>
+<li>^[0-9]+$
+<li>^[0-9,\.]+$
+<li>^[0-9]+(\.[0-9]*)?$
+</ul>
+<p>
+Make sure that these regular expressions are fit to the segmentation, e.g. if your work on
+tokens, your tokenizer might split prefixes such as + and - from the rest of the number.
+++++
+
+`overwrite` (__Boolean__) = `false` ::
++ 
+++++
+Allow overwriting target files (ignored when writing to ZIP archives).
+++++
+
+`singularTarget` (__Boolean__) = `false` ::
++ 
+++++
+Treat target location as a single file name. This is particularly useful if only a single
+input file is processed and the result should be written to a pre-defined output file instead
+of deriving the file name from the document URI or document ID. It can also be useful if
+the user wishes to force multiple input files to be written to a single target file. The
+latter case does not work for all formats (e.g. binary, XMI, etc.), but can be useful, e.g.
+for Conll-based formats. This option has no effect if the target location points to an
+archive location (ZIP/JAR). The #PARAM_COMPRESSION is respected, but does not 
+automatically add an extension. The #PARAM_STRIP_EXTENSION has no effect as the
+original extension is not preserved.
+++++
+
+`stopwordsFile` (__String__) [optional]::
++ 
+++++
+All the tokens listed in this file (one token per line) are replaced by STOP. Empty
+lines and lines starting with # are ignored. Casing is ignored.
+++++
+
+`stripExtension` (__Boolean__) = `false` ::
++ 
+++++
+Remove the original extension.
+++++
+
+`targetEncoding` (__String__) = `UTF-8` ::
++ 
+++++
+Encoding for the target file. Default is UTF-8.
+++++
+
+`targetLocation` (__String__) [optional]::
++ 
+++++
+Target location. If this parameter is not yet, data is written to stdout.
+++++
+
+`useDocumentId` (__Boolean__) = `false` ::
++ 
+++++
+Use the document ID as file name even if a relative path information is present.
+++++
+
+
+
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.tgrep-gpl]]
+== TGrep2
+
+
+[[format-TGrep]]
+=== TGrep
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.tgrep-gpl__#
+
+
+include::{include-dir}sectionIntroTGrep.adoc[]
+
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.tgrep.TGrepWriter]]
+[discrete]
+==== TGrepWriter
+
+[small]#*_Writer class:_* __de.tudarmstadt.ukp.dkpro.core.io.tgrep.TGrepWriter__#
+
+++++
+<div class='paragraph'><p>TGrep2 corpus file writer. Requires PennTrees to be annotated before.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`compression` (__String__) = `NONE` ::
++ 
+++++
+Method to compress the tgrep file (only used if PARAM_WRITE_T2C is true). Only NONE, GZIP and
+BZIP2 are supported.
+
+Default: CompressionMethod#NONE
+++++
+
+`dropMalformedTrees` (__Boolean__) = `false` ::
++ 
+++++
+If true, silently drops malformed Penn Trees instead of throwing an exception.
+
+Default: false
+++++
+
+`targetLocation` (__String__)::
++ 
+++++
+Path to which the output is written.
+++++
+
+`writeComments` (__Boolean__) = `true` ::
++ 
+++++
+Set this parameter to true if you want to add a comment to each PennTree which is written to
+the output files. The comment is of the form documentId,beginOffset,endOffset.
+
+Default: true
+++++
+
+`writeT2c` (__Boolean__) = `true` ::
++ 
+++++
+Set this parameter to true if you want to encode directly into the tgrep2 binary format.
+
+Default: true
+++++
+
+
+
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.tiger-asl]]
+== TIGER-XML
+
+
+[[format-TigerXml]]
+=== TigerXml
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.tiger-asl__#
+
+
+include::{include-dir}sectionIntroTigerXml.adoc[]
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.tiger.TigerXmlReader]]
+[discrete]
+==== TigerXmlReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.tiger.TigerXmlReader__#
+
+++++
+<div class='paragraph'><p>UIMA collection reader for TIGER-XML files. Also supports the augmented format used in the 
+Semeval 2010 task which includes semantic role data.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`POSMappingLocation` (__String__) [optional]::
++ 
+++++
+Location of the mapping file for part-of-speech tags to UIMA types.
+++++
+
+`POSTagSet` (__String__) [optional]::
++ 
+++++
+Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
+tag set defined as part of the model meta data. This can be useful if a custom model is
+specified which does not have such meta data, or it can be used in readers.
+++++
+
+`ignoreIllegalSentences` (__Boolean__) = `false` ::
++ 
+++++
+If a sentence has an illegal structure (e.g. TIGER 2.0 has non-terminal nodes that do not
+have child nodes), then just ignore these sentences.
+
+Default: false
+++++
+
+`includeHidden` (__Boolean__) = `false` ::
++ 
+++++
+Include hidden files and directories.
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+Name of optional configuration parameter that contains the language of the documents in the
+input directory. If specified, this information will be added to the CAS.
+++++
+
+`patterns` (__String[]__) [optional]::
++ 
+++++
+A set of Ant-like include/exclude patterns. A pattern starts with #INCLUDE_PREFIX [+]
+if it is an include pattern and with #EXCLUDE_PREFIX [-] if it is an exclude pattern.
+The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+The wildcard * can be used to a address a part of a name.
+++++
+
+`readPennTree` (__Boolean__) = `false` ::
++ 
+++++
+Write Penn Treebank bracketed structure information. Mind this may not work with all tagsets,
+in particular not with such that contain "(" or ")" in their tags. The tree is generated
+using the original tag set in the corpus, not using the mapped tagset!
+
+Default: false
+++++
+
+`sourceLocation` (__String__) [optional]::
++ 
+++++
+Location from which the input is read.
+++++
+
+`useDefaultExcludes` (__Boolean__) = `true` ::
++ 
+++++
+Use the default excludes.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS,POS>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma,Lemma>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token,Token>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument,SemanticArgument>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate,SemanticPredicate>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent,Constituent>>
+
+|====
+
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.tiger.TigerXmlWriter]]
+[discrete]
+==== TigerXmlWriter
+
+[small]#*_Writer class:_* __de.tudarmstadt.ukp.dkpro.core.io.tiger.TigerXmlWriter__#
+
+++++
+<div class='paragraph'><p>UIMA CAS consumer writing the CAS document text in the TIGER-XML format.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`compression` (__String__) = `NONE`  [optional]::
++ 
+++++
+Choose a compression method. (default: CompressionMethod#NONE)
+++++
+
+`escapeDocumentId` (__Boolean__) = `true` ::
++ 
+++++
+URL-encode the document ID in the file name to avoid illegal characters (e.g. \, :, etc.)
+++++
+
+`filenameSuffix` (__String__) = `.xml` ::
++ 
+++++
+Specify the suffix of output files. Default value <code>.xml</code>. If the suffix is not
+needed, provide an empty string as value.
+++++
+
+`overwrite` (__Boolean__) = `false` ::
++ 
+++++
+Allow overwriting target files (ignored when writing to ZIP archives).
+++++
+
+`singularTarget` (__Boolean__) = `false` ::
++ 
+++++
+Treat target location as a single file name. This is particularly useful if only a single
+input file is processed and the result should be written to a pre-defined output file instead
+of deriving the file name from the document URI or document ID. It can also be useful if
+the user wishes to force multiple input files to be written to a single target file. The
+latter case does not work for all formats (e.g. binary, XMI, etc.), but can be useful, e.g.
+for Conll-based formats. This option has no effect if the target location points to an
+archive location (ZIP/JAR). The #PARAM_COMPRESSION is respected, but does not 
+automatically add an extension. The #PARAM_STRIP_EXTENSION has no effect as the
+original extension is not preserved.
+++++
+
+`stripExtension` (__Boolean__) = `false` ::
++ 
+++++
+Remove the original extension.
+++++
+
+`targetLocation` (__String__) [optional]::
++ 
+++++
+Target location. If this parameter is not yet, data is written to stdout.
+++++
+
+`useDocumentId` (__Boolean__) = `false` ::
++ 
+++++
+Use the document ID as file name even if a relative path information is present.
+++++
+
+
+
+
+[discrete]
+===== Inputs
+[cols="h,v"]
+|====
+| Inputs 
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS,POS>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma,Lemma>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token,Token>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent,Constituent>>
+
+|====
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.tuepp-asl]]
+== TüPP-D/Z
+
+
+[[format-Tuepp]]
+=== Tuepp
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.tuepp-asl__#
+
+
+include::{include-dir}sectionIntroTuepp.adoc[]
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.tuepp.TueppReader]]
+[discrete]
+==== TueppReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.tuepp.TueppReader__#
+
+++++
+<div class='paragraph'>UIMA collection reader for Tübingen Partially Parsed Corpus of Written German (TüPP-D/Z) XML 
+files. 
+<ul>
+<li>Only the part-of-speech with the best rank (rank 1) is read, if there is a tie between
+multiple tags, the first one from the XML file is read.</li>
+<li>Only the first lemma (baseform) from the XML file is read.</li>
+<li>Token are read, but not the specific kind of token (e.g. TEL, AREA, etc.).</li>
+<li>Article boundaries are not read.</li>
+<li>Paragraph boundaries are not read.</li>
+<li>Lemma information is read, but morphological information is not read.</li>
+<li>Chunk, field, and clause information is not read.</li>
+<li>Meta data headers are not read.</li>
+</ul></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`POSMappingLocation` (__String__) [optional]::
++ 
+++++
+Location of the mapping file for part-of-speech tags to UIMA types.
+++++
+
+`POSTagSet` (__String__) [optional]::
++ 
+++++
+Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
+tag set defined as part of the model meta data. This can be useful if a custom model is
+specified which does not have such meta data, or it can be used in readers.
+++++
+
+`includeHidden` (__Boolean__) = `false` ::
++ 
+++++
+Include hidden files and directories.
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+Name of optional configuration parameter that contains the language of the documents in the
+input directory. If specified, this information will be added to the CAS.
+++++
+
+`patterns` (__String[]__) [optional]::
++ 
+++++
+A set of Ant-like include/exclude patterns. A pattern starts with #INCLUDE_PREFIX [+]
+if it is an include pattern and with #EXCLUDE_PREFIX [-] if it is an exclude pattern.
+The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+The wildcard * can be used to a address a part of a name.
+++++
+
+`sourceEncoding` (__String__) = `UTF-8` ::
++ 
+++++
+Character encoding of the input data.
+++++
+
+`sourceLocation` (__String__) [optional]::
++ 
+++++
+Location from which the input is read.
+++++
+
+`useDefaultExcludes` (__Boolean__) = `true` ::
++ 
+++++
+Use the default excludes.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS,POS>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma,Lemma>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token,Token>>
+
+|====
+
+
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.bincas-asl]]
+== UIMA Binary CAS
+
+
+[[format-BinaryCas]]
+=== BinaryCas
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.bincas-asl__#
+
+
+include::{include-dir}sectionIntroBinaryCas.adoc[]
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasReader]]
+[discrete]
+==== BinaryCasReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasReader__#
+
+++++
+<div class='paragraph'><p>UIMA Binary CAS formats reader.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`includeHidden` (__Boolean__) = `false` ::
++ 
+++++
+Include hidden files and directories.
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+Name of optional configuration parameter that contains the language of the documents in the
+input directory. If specified, this information will be added to the CAS.
+++++
+
+`patterns` (__String[]__) [optional]::
++ 
+++++
+A set of Ant-like include/exclude patterns. A pattern starts with #INCLUDE_PREFIX [+]
+if it is an include pattern and with #EXCLUDE_PREFIX [-] if it is an exclude pattern.
+The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+The wildcard * can be used to a address a part of a name.
+++++
+
+`sourceLocation` (__String__) [optional]::
++ 
+++++
+Location from which the input is read.
+++++
+
+`typeSystemLocation` (__String__) [optional]::
++ 
+++++
+The location from which to obtain the type system when the CAS is stored in form 0.
+++++
+
+`useDefaultExcludes` (__Boolean__) = `true` ::
++ 
+++++
+Use the default excludes.
+++++
+
+
+
+
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasWriter]]
+[discrete]
+==== BinaryCasWriter
+
+[small]#*_Writer class:_* __de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasWriter__#
+
+++++
+<div class='paragraph'>Write CAS in one of the UIMA binary formats.
+
+<table>
+<caption>Supported formats</caption>
+<tr>
+<th>Format</th>
+<th>Description</th>
+<th>Type system on load</th>
+<th>CAS Addresses preserved</th>
+</tr>
+<tr>
+<td>S</td>
+<td>CAS structures are dumped to disc as they are using Java serialization (CASSerializer
+). Because these structures are pre-allocated in memory at larger sizes than what is actually
+required, files in this format may be larger than necessary. However, the CAS addresses of
+feature structures are preserved in this format. When the data is loaded back into a CAS, it must
+have been initialized with the same type system as the original CAS.</td>
+<td>must be the same</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>S+</td>
+<td>CAS structures are dumped to disc as they are using Java serialization as in form 0, but
+now using the CASCompleteSerializer which includes CAS metadata like type system and
+index repositories.</td>
+<td>is reinitialized</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>0</td>
+<td>CAS structures are dumped to disc as they are using Java serialization (CASSerializer
+). This is basically the same as format S but includes a UIMA header and can be read
+using org.apache.uima.cas.impl.Serialization#deserializeCAS.</td>
+<td>must be the same</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>4</td>
+<td>
+UIMA binary serialization saving all feature structures (reachable or not). This format
+internally uses gzip compression and a binary representation of the CAS, making it much more
+efficient than format 0.</td>
+<td>must be the same</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>6</td>
+<td>
+UIMA binary serialization as format 4, but saving only reachable feature structures.</td>
+<td>must be the same</td>
+<td>no</td>
+</tr>
+<tr>
+<td>6+</td>
+<td>
+UIMA binary serialization as format 6, but also contains the type system defintion. This allows
+the BinaryCasReader to load data leniently into a CAS that has been initialized with a
+different type system.</td>
+<td>lenient loading</td>
+<td>no</td>
+</tr>
+</table></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`compression` (__String__) = `NONE`  [optional]::
++ 
+++++
+Choose a compression method. (default: CompressionMethod#NONE)
+++++
+
+`escapeDocumentId` (__Boolean__) = `true` ::
++ 
+++++
+URL-encode the document ID in the file name to avoid illegal characters (e.g. \, :, etc.)
+++++
+
+`filenameExtension` (__String__) = `.bin` ::
++ 
+++++
+
+++++
+
+`format` (__String__) = `6+` ::
++ 
+++++
+
+++++
+
+`overwrite` (__Boolean__) = `false` ::
++ 
+++++
+Allow overwriting target files (ignored when writing to ZIP archives).
+++++
+
+`singularTarget` (__Boolean__) = `false` ::
++ 
+++++
+Treat target location as a single file name. This is particularly useful if only a single
+input file is processed and the result should be written to a pre-defined output file instead
+of deriving the file name from the document URI or document ID. It can also be useful if
+the user wishes to force multiple input files to be written to a single target file. The
+latter case does not work for all formats (e.g. binary, XMI, etc.), but can be useful, e.g.
+for Conll-based formats. This option has no effect if the target location points to an
+archive location (ZIP/JAR). The #PARAM_COMPRESSION is respected, but does not 
+automatically add an extension. The #PARAM_STRIP_EXTENSION has no effect as the
+original extension is not preserved.
+++++
+
+`stripExtension` (__Boolean__) = `false` ::
++ 
+++++
+Remove the original extension.
+++++
+
+`targetLocation` (__String__) [optional]::
++ 
+++++
+Target location. If this parameter is not yet, data is written to stdout.
+++++
+
+`typeSystemLocation` (__String__) [optional]::
++ 
+++++
+Location to write the type system to. The type system is saved using Java serialization, it
+is not saved as a XML type system description. We recommend to use the name
+typesystem.ser.
+<br>
+The #PARAM_COMPRESSION parameter has no effect on the
+type system. Instead, if the type system file should be compressed or not is detected from
+the file name extension (e.g. ".gz").
+<br>
+If this parameter is set, the type system and index repository are no longer serialized into
+the same file as the test of the CAS. The SerializedCasReader can currently not
+read such files. Use this only if you really know what you are doing.
+<br>
+This parameter has no effect if formats S+ or 6+ are used as the type system information
+is embedded in each individual file. Otherwise, it is recommended that this parameter be
+set unless some other mechanism is used to initialize the CAS with the same type system and
+index repository during reading that was used during writing.
+++++
+
+`useDocumentId` (__Boolean__) = `false` ::
++ 
+++++
+Use the document ID as file name even if a relative path information is present.
+++++
+
+
+
+
+[discrete]
+===== Inputs
+[cols="h,v"]
+|====
+| Inputs 
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+
+|====
+
+
+
+
+
+[[format-SerializedCas]]
+=== SerializedCas
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.bincas-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.bincas.SerializedCasReader]]
+[discrete]
+==== SerializedCasReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.bincas.SerializedCasReader__#
+
+++++
+null
+++++
+
+
+[discrete]
+===== Parameters
+
+`includeHidden` (__Boolean__) = `false` ::
++ 
+++++
+Include hidden files and directories.
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+Name of optional configuration parameter that contains the language of the documents in the
+input directory. If specified, this information will be added to the CAS.
+++++
+
+`patterns` (__String[]__) [optional]::
++ 
+++++
+A set of Ant-like include/exclude patterns. A pattern starts with #INCLUDE_PREFIX [+]
+if it is an include pattern and with #EXCLUDE_PREFIX [-] if it is an exclude pattern.
+The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+The wildcard * can be used to a address a part of a name.
+++++
+
+`sourceLocation` (__String__) [optional]::
++ 
+++++
+Location from which the input is read.
+++++
+
+`typeSystemLocation` (__String__) [optional]::
++ 
+++++
+The file from which to obtain the type system if it is not embedded in the serialized CAS.
+++++
+
+`useDefaultExcludes` (__Boolean__) = `true` ::
++ 
+++++
+Use the default excludes.
+++++
+
+
+
+
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.bincas.SerializedCasWriter]]
+[discrete]
+==== SerializedCasWriter
+
+[small]#*_Writer class:_* __de.tudarmstadt.ukp.dkpro.core.io.bincas.SerializedCasWriter__#
+
+++++
+null
+++++
+
+
+[discrete]
+===== Parameters
+
+`compression` (__String__) = `NONE`  [optional]::
++ 
+++++
+Choose a compression method. (default: CompressionMethod#NONE)
+++++
+
+`escapeDocumentId` (__Boolean__) = `true` ::
++ 
+++++
+URL-encode the document ID in the file name to avoid illegal characters (e.g. \, :, etc.)
+++++
+
+`filenameExtension` (__String__) = `.ser` ::
++ 
+++++
+
+++++
+
+`overwrite` (__Boolean__) = `false` ::
++ 
+++++
+Allow overwriting target files (ignored when writing to ZIP archives).
+++++
+
+`singularTarget` (__Boolean__) = `false` ::
++ 
+++++
+Treat target location as a single file name. This is particularly useful if only a single
+input file is processed and the result should be written to a pre-defined output file instead
+of deriving the file name from the document URI or document ID. It can also be useful if
+the user wishes to force multiple input files to be written to a single target file. The
+latter case does not work for all formats (e.g. binary, XMI, etc.), but can be useful, e.g.
+for Conll-based formats. This option has no effect if the target location points to an
+archive location (ZIP/JAR). The #PARAM_COMPRESSION is respected, but does not 
+automatically add an extension. The #PARAM_STRIP_EXTENSION has no effect as the
+original extension is not preserved.
+++++
+
+`stripExtension` (__Boolean__) = `false` ::
++ 
+++++
+Remove the original extension.
+++++
+
+`targetLocation` (__String__) [optional]::
++ 
+++++
+Target location. If this parameter is not yet, data is written to stdout.
+++++
+
+`typeSystemLocation` (__String__) [optional]::
++ 
+++++
+Location to write the type system to. The type system is saved using Java serialization, it
+is not saved as a XML type system description. We recommend to use the name
+typesystem.ser.
+<br>
+The #PARAM_COMPRESSION parameter has no effect on the
+type system. Instead, if the type system file should be compressed or not is detected from
+the file name extension (e.g. ".gz").
+<br>
+If this parameter is set, the type system and index repository are no longer serialized into
+the same file as the test of the CAS. The SerializedCasReader can currently not
+read such files. Use this only if you really know what you are doing.
+++++
+
+`useDocumentId` (__Boolean__) = `false` ::
++ 
+++++
+Use the document ID as file name even if a relative path information is present.
+++++
+
+
+
+
+[discrete]
+===== Inputs
+[cols="h,v"]
+|====
+| Inputs 
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+
+|====
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.json-asl]]
+== UIMA JSON
+
+
+[[format-Json]]
+=== Json
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.json-asl__#
+
+
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.json.JsonWriter]]
+[discrete]
+==== JsonWriter
+
+[small]#*_Writer class:_* __de.tudarmstadt.ukp.dkpro.core.io.json.JsonWriter__#
+
+++++
+<div class='paragraph'><p>UIMA JSON format writer.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`compression` (__String__) = `NONE`  [optional]::
++ 
+++++
+Choose a compression method. (default: CompressionMethod#NONE)
+++++
+
+`escapeDocumentId` (__Boolean__) = `true` ::
++ 
+++++
+URL-encode the document ID in the file name to avoid illegal characters (e.g. \, :, etc.)
+++++
+
+`jsonContextFormat` (__String__) = `omitExpandedTypeNames` ::
++ 
+++++
+
+++++
+
+`omitDefaultValues` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`overwrite` (__Boolean__) = `false` ::
++ 
+++++
+Allow overwriting target files (ignored when writing to ZIP archives).
+++++
+
+`prettyPrint` (__Boolean__) = `true` ::
++ 
+++++
+
+++++
+
+`singularTarget` (__Boolean__) = `false` ::
++ 
+++++
+Treat target location as a single file name. This is particularly useful if only a single
+input file is processed and the result should be written to a pre-defined output file instead
+of deriving the file name from the document URI or document ID. It can also be useful if
+the user wishes to force multiple input files to be written to a single target file. The
+latter case does not work for all formats (e.g. binary, XMI, etc.), but can be useful, e.g.
+for Conll-based formats. This option has no effect if the target location points to an
+archive location (ZIP/JAR). The #PARAM_COMPRESSION is respected, but does not 
+automatically add an extension. The #PARAM_STRIP_EXTENSION has no effect as the
+original extension is not preserved.
+++++
+
+`stripExtension` (__Boolean__) = `false` ::
++ 
+++++
+Remove the original extension.
+++++
+
+`targetLocation` (__String__) [optional]::
++ 
+++++
+Target location. If this parameter is not yet, data is written to stdout.
+++++
+
+`typeSystemFile` (__String__) [optional]::
++ 
+++++
+Location to write the type system to. If this is not set, a file called typesystem.xml will
+be written to the XMI output path. If this is set, it is expected to be a file relative
+to the current work directory or an absolute file.
+<br>
+If this parameter is set, the #PARAM_COMPRESSION parameter has no effect on the
+type system. Instead, if the file name ends in ".gz", the file will be compressed,
+otherwise not.
+++++
+
+`useDocumentId` (__Boolean__) = `false` ::
++ 
+++++
+Use the document ID as file name even if a relative path information is present.
+++++
+
+
+
+
+[discrete]
+===== Inputs
+[cols="h,v"]
+|====
+| Inputs 
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+
+|====
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.xmi-asl]]
+== UIMA XMI
+
+
+[[format-Xmi]]
+=== Xmi
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.xmi-asl__#
+
+
+include::{include-dir}sectionIntroXmi.adoc[]
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiReader]]
+[discrete]
+==== XmiReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiReader__#
+
+++++
+<div class='paragraph'><p>Reader for UIMA XMI files.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`includeHidden` (__Boolean__) = `false` ::
++ 
+++++
+Include hidden files and directories.
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+Name of optional configuration parameter that contains the language of the documents in the
+input directory. If specified, this information will be added to the CAS.
+++++
+
+`lenient` (__Boolean__) = `false` ::
++ 
+++++
+In lenient mode, unknown types are ignored and do not cause an exception to be thrown.
+++++
+
+`patterns` (__String[]__) [optional]::
++ 
+++++
+A set of Ant-like include/exclude patterns. A pattern starts with #INCLUDE_PREFIX [+]
+if it is an include pattern and with #EXCLUDE_PREFIX [-] if it is an exclude pattern.
+The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+The wildcard * can be used to a address a part of a name.
+++++
+
+`sourceLocation` (__String__) [optional]::
++ 
+++++
+Location from which the input is read.
+++++
+
+`useDefaultExcludes` (__Boolean__) = `true` ::
++ 
+++++
+Use the default excludes.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+
+|====
+
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiWriter]]
+[discrete]
+==== XmiWriter
+
+[small]#*_Writer class:_* __de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiWriter__#
+
+++++
+<div class='paragraph'><p>UIMA XMI format writer.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`compression` (__String__) = `NONE`  [optional]::
++ 
+++++
+Choose a compression method. (default: CompressionMethod#NONE)
+++++
+
+`escapeDocumentId` (__Boolean__) = `true` ::
++ 
+++++
+URL-encode the document ID in the file name to avoid illegal characters (e.g. \, :, etc.)
+++++
+
+`overwrite` (__Boolean__) = `false` ::
++ 
+++++
+Allow overwriting target files (ignored when writing to ZIP archives).
+++++
+
+`singularTarget` (__Boolean__) = `false` ::
++ 
+++++
+Treat target location as a single file name. This is particularly useful if only a single
+input file is processed and the result should be written to a pre-defined output file instead
+of deriving the file name from the document URI or document ID. It can also be useful if
+the user wishes to force multiple input files to be written to a single target file. The
+latter case does not work for all formats (e.g. binary, XMI, etc.), but can be useful, e.g.
+for Conll-based formats. This option has no effect if the target location points to an
+archive location (ZIP/JAR). The #PARAM_COMPRESSION is respected, but does not 
+automatically add an extension. The #PARAM_STRIP_EXTENSION has no effect as the
+original extension is not preserved.
+++++
+
+`stripExtension` (__Boolean__) = `false` ::
++ 
+++++
+Remove the original extension.
+++++
+
+`targetLocation` (__String__) [optional]::
++ 
+++++
+Target location. If this parameter is not yet, data is written to stdout.
+++++
+
+`typeSystemFile` (__String__) [optional]::
++ 
+++++
+Location to write the type system to. If this is not set, a file called typesystem.xml will
+be written to the XMI output path. If this is set, it is expected to be a file relative
+to the current work directory or an absolute file.
+<br>
+If this parameter is set, the #PARAM_COMPRESSION parameter has no effect on the
+type system. Instead, if the file name ends in ".gz", the file will be compressed,
+otherwise not.
+++++
+
+`useDocumentId` (__Boolean__) = `false` ::
++ 
+++++
+Use the document ID as file name even if a relative path information is present.
+++++
+
+
+
+
+[discrete]
+===== Inputs
+[cols="h,v"]
+|====
+| Inputs 
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+
+|====
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.web1t-asl]]
+== Web1T n-grams
+
+
+[[format-Web1T]]
+=== Web1T
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.web1t-asl__#
+
+
+include::{include-dir}sectionIntroWeb1T.adoc[]
+
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.web1t.Web1TWriter]]
+[discrete]
+==== Web1TWriter
+
+[small]#*_Writer class:_* __de.tudarmstadt.ukp.dkpro.core.io.web1t.Web1TWriter__#
+
+++++
+<div class='paragraph'><p>Web1T n-gram index format writer.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`contextType` (__String__) = `de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence` ::
++ 
+++++
+The type being used for segments
+++++
+
+`createIndexes` (__Boolean__) = `true`  [optional]::
++ 
+++++
+Create the indexes that jWeb1T needs to operate. (default: true)
+++++
+
+`inputTypes` (__String[]__)::
++ 
+++++
+Types to generate n-grams from.
+
+Example: Token.class.getName() + "/pos/PosValue" for part-of-speech n-grams
+++++
+
+`lowercase` (__Boolean__) = `false`  [optional]::
++ 
+++++
+Create a lower case index.
+++++
+
+`maxNgramLength` (__Integer__) = `3`  [optional]::
++ 
+++++
+Maximum n-gram length.
+
+Default: 3
+++++
+
+`minFreq` (__Integer__) = `1`  [optional]::
++ 
+++++
+Specifies the minimum frequency a NGram must have to be written to the
+final index. The specified value is interpreted as inclusive value, the
+default is 1. Thus, all NGrams with a frequency of at least 1 or higher
+will be written.
+++++
+
+`minNgramLength` (__Integer__) = `1`  [optional]::
++ 
+++++
+Minimum n-gram length.
+
+Default: 1
+++++
+
+`splitFileTreshold` (__Float__) = `1.0`  [optional]::
++ 
+++++
+The input file(s) is/are split into smaller files for quick access. An
+own file is created if the first two starting letters (or the starting
+letter if the word has a length of 1 character) account for at least x%
+of all starting letters in the input file(s). The default value for
+splitting a file is 1.0%. Every word that has starting characters which
+does not suffice the threshold is written with other words that also did
+not meet the threshold into an own file for miscellaneous words. A high
+threshold will lead to only a few, but large files and a most likely very
+large misc. file. A low threshold results in many small files. Use a zero or a negative
+value to write everything to one file.
+++++
+
+`targetEncoding` (__String__) = `UTF-8`  [optional]::
++ 
+++++
+Character encoding of the output data.
+++++
+
+`targetLocation` (__String__)::
++ 
+++++
+Location to which the output is written.
+++++
+
+
+
+
+[discrete]
+===== Inputs
+[cols="h,v"]
+|====
+| Inputs 
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence,Sentence>>
+
+|====
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.bliki-asl]]
+== Wikipedia via Bliki Engine
+
+
+[[format-BlikiWikipedia]]
+=== BlikiWikipedia
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.bliki-asl__#
+
+
+include::{include-dir}sectionIntroBlikiWikipedia.adoc[]
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.bliki.BlikiWikipediaReader]]
+[discrete]
+==== BlikiWikipediaReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.bliki.BlikiWikipediaReader__#
+
+++++
+<div class='paragraph'><p>Bliki-based Wikipedia reader.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`language` (__String__)::
++ 
+++++
+The language of the wiki installation.
+++++
+
+`outputPlainText` (__Boolean__) = `true` ::
++ 
+++++
+Whether the reader outputs plain text or wiki markup.
+++++
+
+`pageTitles` (__String[]__)::
++ 
+++++
+Which page titles should be retrieved.
+++++
+
+`sourceLocation` (__String__)::
++ 
+++++
+Wikiapi URL E.g. for the English Wikipedia it should be: http://en.wikipedia.org/w/api.php
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+
+|====
+
+
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl]]
+== Wikipedia via JWPL
+
+
+[[format-WikipediaArticle]]
+=== WikipediaArticle
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaArticleReader]]
+[discrete]
+==== WikipediaArticleReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaArticleReader__#
+
+++++
+<div class='paragraph'><p>Reads all article pages.
+
+A parameter controls whether the full article or only the first paragraph is set as the document text.
+
+No Redirects, disambiguation pages, or discussion pages are regarded, however.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`CreateDBAnno` (__Boolean__) = `false` ::
++ 
+++++
+Sets whether the database configuration should be stored in the CAS,
+ so that annotators down the pipeline can access additional data.
+++++
+
+`Database` (__String__)::
++ 
+++++
+The name of the database.
+++++
+
+`Host` (__String__)::
++ 
+++++
+The host server.
+++++
+
+`Language` (__String__)::
++ 
+++++
+The language of the Wikipedia that should be connected to.
+++++
+
+`OnlyFirstParagraph` (__Boolean__) = `false` ::
++ 
+++++
+If set to true, only the first paragraph instead of the whole article is used.
+++++
+
+`OutputPlainText` (__Boolean__) = `true` ::
++ 
+++++
+Whether the reader outputs plain text or wiki markup.
+++++
+
+`PageBuffer` (__Integer__) = `1000` ::
++ 
+++++
+The page buffer size (#pages) of the page iterator.
+++++
+
+`PageIdFromArray` (__String[]__) [optional]::
++ 
+++++
+Defines an array of
+page ids of the pages that should be retrieved. (Optional)
+++++
+
+`PageIdsFromFile` (__String__) [optional]::
++ 
+++++
+Defines the path to a file containing a line-separated list of
+page ids of the pages that should be retrieved. (Optional)
+++++
+
+`PageTitleFromFile` (__String__) [optional]::
++ 
+++++
+Defines the path to a file containing a line-separated list of
+page titles of the pages that should be retrieved. (Optional)
+++++
+
+`PageTitlesFromArray` (__String[]__) [optional]::
++ 
+++++
+Defines an array of  page titles of the pages that should be retrieved.
+(Optional)
+++++
+
+`Password` (__String__)::
++ 
+++++
+The password of the database account.
+++++
+
+`User` (__String__)::
++ 
+++++
+The username of the database account.
+++++
+
+
+
+
+
+
+
+
+
+
+[[format-WikipediaArticleInfo]]
+=== WikipediaArticleInfo
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaArticleInfoReader]]
+[discrete]
+==== WikipediaArticleInfoReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaArticleInfoReader__#
+
+++++
+<div class='paragraph'><p>Reads all general article infos without retrieving the whole Page objects</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`CreateDBAnno` (__Boolean__) = `false` ::
++ 
+++++
+Sets whether the database configuration should be stored in the CAS,
+ so that annotators down the pipeline can access additional data.
+++++
+
+`Database` (__String__)::
++ 
+++++
+The name of the database.
+++++
+
+`Host` (__String__)::
++ 
+++++
+The host server.
+++++
+
+`Language` (__String__)::
++ 
+++++
+The language of the Wikipedia that should be connected to.
+++++
+
+`Password` (__String__)::
++ 
+++++
+The password of the database account.
+++++
+
+`User` (__String__)::
++ 
+++++
+The username of the database account.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.ArticleInfo,ArticleInfo>>
+
+|====
+
+
+
+
+
+
+
+[[format-WikipediaDiscussion]]
+=== WikipediaDiscussion
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaDiscussionReader]]
+[discrete]
+==== WikipediaDiscussionReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaDiscussionReader__#
+
+++++
+<div class='paragraph'><p>Reads all discussion pages.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`CreateDBAnno` (__Boolean__) = `false` ::
++ 
+++++
+Sets whether the database configuration should be stored in the CAS,
+ so that annotators down the pipeline can access additional data.
+++++
+
+`Database` (__String__)::
++ 
+++++
+The name of the database.
+++++
+
+`Host` (__String__)::
++ 
+++++
+The host server.
+++++
+
+`Language` (__String__)::
++ 
+++++
+The language of the Wikipedia that should be connected to.
+++++
+
+`OutputPlainText` (__Boolean__) = `true` ::
++ 
+++++
+Whether the reader outputs plain text or wiki markup.
+++++
+
+`PageBuffer` (__Integer__) = `1000` ::
++ 
+++++
+The page buffer size (#pages) of the page iterator.
+++++
+
+`PageIdFromArray` (__String[]__) [optional]::
++ 
+++++
+Defines an array of
+page ids of the pages that should be retrieved. (Optional)
+++++
+
+`PageIdsFromFile` (__String__) [optional]::
++ 
+++++
+Defines the path to a file containing a line-separated list of
+page ids of the pages that should be retrieved. (Optional)
+++++
+
+`PageTitleFromFile` (__String__) [optional]::
++ 
+++++
+Defines the path to a file containing a line-separated list of
+page titles of the pages that should be retrieved. (Optional)
+++++
+
+`PageTitlesFromArray` (__String[]__) [optional]::
++ 
+++++
+Defines an array of  page titles of the pages that should be retrieved.
+(Optional)
+++++
+
+`Password` (__String__)::
++ 
+++++
+The password of the database account.
+++++
+
+`User` (__String__)::
++ 
+++++
+The username of the database account.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig,DBConfig>>
+
+|====
+
+
+
+
+
+
+
+[[format-WikipediaLink]]
+=== WikipediaLink
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaLinkReader]]
+[discrete]
+==== WikipediaLinkReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaLinkReader__#
+
+++++
+<div class='paragraph'><p>Read links from Wikipedia.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`AllowedLinkTypes` (__String[]__)::
++ 
+++++
+Which types of links are allowed?
+++++
+
+`CreateDBAnno` (__Boolean__) = `false` ::
++ 
+++++
+Sets whether the database configuration should be stored in the CAS,
+ so that annotators down the pipeline can access additional data.
+++++
+
+`Database` (__String__)::
++ 
+++++
+The name of the database.
+++++
+
+`Host` (__String__)::
++ 
+++++
+The host server.
+++++
+
+`Language` (__String__)::
++ 
+++++
+The language of the Wikipedia that should be connected to.
+++++
+
+`OutputPlainText` (__Boolean__) = `true` ::
++ 
+++++
+Whether the reader outputs plain text or wiki markup.
+++++
+
+`PageBuffer` (__Integer__) = `1000` ::
++ 
+++++
+The page buffer size (#pages) of the page iterator.
+++++
+
+`PageIdFromArray` (__String[]__) [optional]::
++ 
+++++
+Defines an array of
+page ids of the pages that should be retrieved. (Optional)
+++++
+
+`PageIdsFromFile` (__String__) [optional]::
++ 
+++++
+Defines the path to a file containing a line-separated list of
+page ids of the pages that should be retrieved. (Optional)
+++++
+
+`PageTitleFromFile` (__String__) [optional]::
++ 
+++++
+Defines the path to a file containing a line-separated list of
+page titles of the pages that should be retrieved. (Optional)
+++++
+
+`PageTitlesFromArray` (__String[]__) [optional]::
++ 
+++++
+Defines an array of  page titles of the pages that should be retrieved.
+(Optional)
+++++
+
+`Password` (__String__)::
++ 
+++++
+The password of the database account.
+++++
+
+`User` (__String__)::
++ 
+++++
+The username of the database account.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig,DBConfig>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaLink,WikipediaLink>>
+
+|====
+
+
+
+
+
+
+
+[[format-WikipediaPage]]
+=== WikipediaPage
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaPageReader]]
+[discrete]
+==== WikipediaPageReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaPageReader__#
+
+++++
+<div class='paragraph'><p>Reads all Wikipedia pages in the database (articles, discussions, etc).
+
+A parameter controls whether the full article or only the first paragraph is set as the document text.
+
+No Redirects or disambiguation pages are regarded, however.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`CreateDBAnno` (__Boolean__) = `false` ::
++ 
+++++
+Sets whether the database configuration should be stored in the CAS,
+ so that annotators down the pipeline can access additional data.
+++++
+
+`Database` (__String__)::
++ 
+++++
+The name of the database.
+++++
+
+`Host` (__String__)::
++ 
+++++
+The host server.
+++++
+
+`Language` (__String__)::
++ 
+++++
+The language of the Wikipedia that should be connected to.
+++++
+
+`OnlyFirstParagraph` (__Boolean__) = `false` ::
++ 
+++++
+If set to true, only the first paragraph instead of the whole article is used.
+++++
+
+`OutputPlainText` (__Boolean__) = `true` ::
++ 
+++++
+Whether the reader outputs plain text or wiki markup.
+++++
+
+`PageBuffer` (__Integer__) = `1000` ::
++ 
+++++
+The page buffer size (#pages) of the page iterator.
+++++
+
+`PageIdFromArray` (__String[]__) [optional]::
++ 
+++++
+Defines an array of
+page ids of the pages that should be retrieved. (Optional)
+++++
+
+`PageIdsFromFile` (__String__) [optional]::
++ 
+++++
+Defines the path to a file containing a line-separated list of
+page ids of the pages that should be retrieved. (Optional)
+++++
+
+`PageTitleFromFile` (__String__) [optional]::
++ 
+++++
+Defines the path to a file containing a line-separated list of
+page titles of the pages that should be retrieved. (Optional)
+++++
+
+`PageTitlesFromArray` (__String[]__) [optional]::
++ 
+++++
+Defines an array of  page titles of the pages that should be retrieved.
+(Optional)
+++++
+
+`Password` (__String__)::
++ 
+++++
+The password of the database account.
+++++
+
+`User` (__String__)::
++ 
+++++
+The username of the database account.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig,DBConfig>>
+
+|====
+
+
+
+
+
+
+
+[[format-WikipediaQuery]]
+=== WikipediaQuery
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaQueryReader]]
+[discrete]
+==== WikipediaQueryReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaQueryReader__#
+
+++++
+<div class='paragraph'><p>Reads all article pages that match a query created by the numerous parameters of this class.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`CreateDBAnno` (__Boolean__) = `false` ::
++ 
+++++
+Sets whether the database configuration should be stored in the CAS,
+ so that annotators down the pipeline can access additional data.
+++++
+
+`Database` (__String__)::
++ 
+++++
+The name of the database.
+++++
+
+`Host` (__String__)::
++ 
+++++
+The host server.
+++++
+
+`Language` (__String__)::
++ 
+++++
+The language of the Wikipedia that should be connected to.
+++++
+
+`MaxCategories` (__Integer__) = `-1`  [optional]::
++ 
+++++
+Maximum number of categories.
+Articles with a higher number of categories will not be returned by the query.
+++++
+
+`MaxInlinks` (__Integer__) = `-1`  [optional]::
++ 
+++++
+Maximum number of incoming links.
+Articles with a higher number of incoming links will not be returned by the query.
+++++
+
+`MaxOutlinks` (__Integer__) = `-1`  [optional]::
++ 
+++++
+Maximum number of outgoing links.
+Articles with a higher number of outgoing links will not be returned by the query.
+++++
+
+`MaxRedirects` (__Integer__) = `-1`  [optional]::
++ 
+++++
+Maximum number of redirects.
+Articles with a higher number of redirects will not be returned by the query.
+++++
+
+`MaxTokens` (__Integer__) = `-1`  [optional]::
++ 
+++++
+Maximum number of tokens.
+Articles with a higher number of tokens will not be returned by the query.
+++++
+
+`MinCategories` (__Integer__) = `-1`  [optional]::
++ 
+++++
+Minimum number of categories.
+Articles with a lower number of categories will not be returned by the query.
+++++
+
+`MinInlinks` (__Integer__) = `-1`  [optional]::
++ 
+++++
+Minimum number of incoming links.
+Articles with a lower number of incoming links will not be returned by the query.
+++++
+
+`MinOutlinks` (__Integer__) = `-1`  [optional]::
++ 
+++++
+Minimum number of outgoing links.
+Articles with a lower number of outgoing links will not be returned by the query.
+++++
+
+`MinRedirects` (__Integer__) = `-1`  [optional]::
++ 
+++++
+Minimum number of redirects.
+Articles with a lower number of redirects will not be returned by the query.
+++++
+
+`MinTokens` (__Integer__) = `-1`  [optional]::
++ 
+++++
+Minimum number of tokens.
+Articles with a lower number of tokens will not be returned by the query.
+++++
+
+`OnlyFirstParagraph` (__Boolean__) = `false` ::
++ 
+++++
+If set to true, only the first paragraph instead of the whole article is used.
+++++
+
+`OutputPlainText` (__Boolean__) = `true` ::
++ 
+++++
+Whether the reader outputs plain text or wiki markup.
+++++
+
+`PageBuffer` (__Integer__) = `1000` ::
++ 
+++++
+The page buffer size (#pages) of the page iterator.
+++++
+
+`PageIdFromArray` (__String[]__) [optional]::
++ 
+++++
+Defines an array of
+page ids of the pages that should be retrieved. (Optional)
+++++
+
+`PageIdsFromFile` (__String__) [optional]::
++ 
+++++
+Defines the path to a file containing a line-separated list of
+page ids of the pages that should be retrieved. (Optional)
+++++
+
+`PageTitleFromFile` (__String__) [optional]::
++ 
+++++
+Defines the path to a file containing a line-separated list of
+page titles of the pages that should be retrieved. (Optional)
+++++
+
+`PageTitlesFromArray` (__String[]__) [optional]::
++ 
+++++
+Defines an array of  page titles of the pages that should be retrieved.
+(Optional)
+++++
+
+`Password` (__String__)::
++ 
+++++
+The password of the database account.
+++++
+
+`TitlePattern` (__String__) = ``  [optional]::
++ 
+++++
+SQL-style title pattern.
+Only articles that  match the pattern will be returned by the query.
+++++
+
+`User` (__String__)::
++ 
+++++
+The username of the database account.
+++++
+
+
+
+
+
+
+
+
+
+
+[[format-WikipediaRevision]]
+=== WikipediaRevision
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaRevisionReader]]
+[discrete]
+==== WikipediaRevisionReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaRevisionReader__#
+
+++++
+<div class='paragraph'><p>Reads Wikipedia page revisions.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`CreateDBAnno` (__Boolean__) = `false` ::
++ 
+++++
+Sets whether the database configuration should be stored in the CAS,
+ so that annotators down the pipeline can access additional data.
+++++
+
+`Database` (__String__)::
++ 
+++++
+The name of the database.
+++++
+
+`Host` (__String__)::
++ 
+++++
+The host server.
+++++
+
+`Language` (__String__)::
++ 
+++++
+The language of the Wikipedia that should be connected to.
+++++
+
+`OutputPlainText` (__Boolean__) = `true` ::
++ 
+++++
+Whether the reader outputs plain text or wiki markup.
+++++
+
+`PageBuffer` (__Integer__) = `1000` ::
++ 
+++++
+The page buffer size (#pages) of the page iterator.
+++++
+
+`Password` (__String__)::
++ 
+++++
+The password of the database account.
+++++
+
+`RevisionIdFromArray` (__String[]__) [optional]::
++ 
+++++
+Defines an array of revision ids of the revisions that should be retrieved. (Optional)
+++++
+
+`RevisionIdsFromFile` (__String__) [optional]::
++ 
+++++
+Defines the path to a file containing a line-separated list of revision ids of the revisions
+that should be retrieved. (Optional)
+++++
+
+`User` (__String__)::
++ 
+++++
+The username of the database account.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig,DBConfig>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision,WikipediaRevision>>
+
+|====
+
+
+
+
+
+
+
+[[format-WikipediaRevisionPair]]
+=== WikipediaRevisionPair
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaRevisionPairReader]]
+[discrete]
+==== WikipediaRevisionPairReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaRevisionPairReader__#
+
+++++
+<div class='paragraph'><p>Reads pairs of adjacent revisions of all articles.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`CreateDBAnno` (__Boolean__) = `false` ::
++ 
+++++
+Sets whether the database configuration should be stored in the CAS,
+ so that annotators down the pipeline can access additional data.
+++++
+
+`Database` (__String__)::
++ 
+++++
+The name of the database.
+++++
+
+`Host` (__String__)::
++ 
+++++
+The host server.
+++++
+
+`Language` (__String__)::
++ 
+++++
+The language of the Wikipedia that should be connected to.
+++++
+
+`MaxChange` (__Integer__) = `10000` ::
++ 
+++++
+Restrict revision pairs to cases where the length of the revisions does not differ more than
+this value (counted in characters).
+++++
+
+`MinChange` (__Integer__) = `0` ::
++ 
+++++
+Restrict revision pairs to cases where the length of the revisions differ more than this
+value (counted in characters).
+++++
+
+`OutputPlainText` (__Boolean__) = `true` ::
++ 
+++++
+Whether the reader outputs plain text or wiki markup.
+++++
+
+`PageBuffer` (__Integer__) = `1000` ::
++ 
+++++
+The page buffer size (#pages) of the page iterator.
+++++
+
+`Password` (__String__)::
++ 
+++++
+The password of the database account.
+++++
+
+`RevisionIdFromArray` (__String[]__) [optional]::
++ 
+++++
+Defines an array of revision ids of the revisions that should be retrieved. (Optional)
+++++
+
+`RevisionIdsFromFile` (__String__) [optional]::
++ 
+++++
+Defines the path to a file containing a line-separated list of revision ids of the revisions
+that should be retrieved. (Optional)
+++++
+
+`SkipFirstNPairs` (__Integer__) [optional]::
++ 
+++++
+The number of revision pairs that should be skipped in the beginning.
+++++
+
+`User` (__String__)::
++ 
+++++
+The username of the database account.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig,DBConfig>>
+
+|====
+
+
+
+
+
+
+
+[[format-WikipediaTemplateFilteredArticle]]
+=== WikipediaTemplateFilteredArticle
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaTemplateFilteredArticleReader]]
+[discrete]
+==== WikipediaTemplateFilteredArticleReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaTemplateFilteredArticleReader__#
+
+++++
+<div class='paragraph'><p>Reads all pages that contain or do not contain the templates specified in the template whitelist
+and template blacklist.
+
+</p><p>
+It is possible to just define a whitelist OR a blacklist. If both whitelist and blacklist are
+provided, the articles are chosen that DO contain the templates from the whitelist and at the
+same time DO NOT contain the templates from the blacklist (= the intersection of the
+"whitelist page set" and the "blacklist page set")
+</p>
+
+<p>
+This reader only works if template tables have been generated for the JWPL database using the
+WikipediaTemplateInfoGenerator.
+</p>
+
+<p>
+<strong>NOTE:</strong> This reader directly extends the WikipediaReaderBase and not the
+WikipediaStandardReaderBase
+</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`CreateDBAnno` (__Boolean__) = `false` ::
++ 
+++++
+Sets whether the database configuration should be stored in the CAS,
+ so that annotators down the pipeline can access additional data.
+++++
+
+`Database` (__String__)::
++ 
+++++
+The name of the database.
+++++
+
+`DoubleCheckAssociatedPages` (__Boolean__) = `false` ::
++ 
+++++
+If this option is set, discussion pages are rejected that are associated with a blacklisted
+article. Analogously, articles are rejected that are associated with a blacklisted discussion
+page.
+<p>
+This check is rather expensive and could take a long time. This is option is not active if
+only a whitelist is used.
+</p>
+<p>
+Default Value: false
+</p>
+++++
+
+`ExactTemplateMatching` (__Boolean__) = `true` ::
++ 
+++++
+Defines whether to match the templates exactly or whether to match all
+templates that start with the String given in the respective parameter
+list.
+<p>Default Value: true</p>
+++++
+
+`Host` (__String__)::
++ 
+++++
+The host server.
+++++
+
+`IncludeDiscussions` (__Boolean__) = `true` ::
++ 
+++++
+Whether the reader should read also include talk pages.
+++++
+
+`Language` (__String__)::
++ 
+++++
+The language of the Wikipedia that should be connected to.
+++++
+
+`LimitNUmberOfArticlesToRead` (__Integer__) [optional]::
++ 
+++++
+Optional parameter that allows to define the max number of articles that should be delivered
+by the reader.
+<p>
+This avoids unnecessary filtering if only a small number of articles is needed.
+</p>
+++++
+
+`OnlyFirstParagraph` (__Boolean__) = `false` ::
++ 
+++++
+If set to true, only the first paragraph instead of the whole article is used.
+++++
+
+`OutputPlainText` (__Boolean__) = `true` ::
++ 
+++++
+Whether the reader outputs plain text or wiki markup.
+++++
+
+`PageBuffer` (__Integer__) = `1000` ::
++ 
+++++
+The page buffer size (#pages) of the page iterator.
+++++
+
+`Password` (__String__)::
++ 
+++++
+The password of the database account.
+++++
+
+`TemplateBlacklist` (__String[]__) [optional]::
++ 
+++++
+Defines templates that the articles MUST NOT contain.
+<p>
+If you also define a whitelist, the intersection of both sets is used. (= pages that DO
+contain templates from the whitelist, but DO NOT contain templates from the blacklist)
+</p>
+++++
+
+`TemplateWhitelist` (__String[]__) [optional]::
++ 
+++++
+Defines templates that the articles MUST contain.
+<p>
+If you also define a blacklist, the intersection of both sets is used. (= pages that DO
+contain templates from the whitelist, but DO NOT contain templates from the blacklist)
+</p>
+++++
+
+`User` (__String__)::
++ 
+++++
+The username of the database account.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig,DBConfig>>
+
+|====
+
+
+
+
+
+
+
+
+
+        
+[[format-de.tudarmstadt.ukp.dkpro.core.io.xml-asl]]
+== XML
+
+
+[[format-InlineXml]]
+=== InlineXml
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.xml-asl__#
+
+
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.xml.InlineXmlWriter]]
+[discrete]
+==== InlineXmlWriter
+
+[small]#*_Writer class:_* __de.tudarmstadt.ukp.dkpro.core.io.xml.InlineXmlWriter__#
+
+++++
+<div class='paragraph'><p>Writes an approximation of the content of a textual CAS as an inline XML file. Optionally applies
+an XSLT stylesheet.
+</p><p>
+Note this component inherits the restrictions from CasToInlineXml:
+
+<ul>
+<li>Features whose values are FeatureStructures are not represented.</li>
+<li>Feature values which are strings longer than 64 characters are truncated.</li>
+<li>Feature values which are arrays of primitives are represented by strings that look like [
+xxx, xxx ]</li>
+<li>The Subject of analysis is presumed to be a text string.</li>
+<li>Some characters in the document's Subject-of-analysis are replaced by blanks, because the
+characters aren't valid in xml documents.</li>
+<li>It doesn't work for annotations which are overlapping, because these cannot be properly
+represented as properly - nested XML.</li>
+</ul></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`Xslt` (__String__) [optional]::
++ 
+++++
+XSLT stylesheet to apply.
+++++
+
+`compression` (__String__) = `NONE`  [optional]::
++ 
+++++
+Choose a compression method. (default: CompressionMethod#NONE)
+++++
+
+`escapeDocumentId` (__Boolean__) = `true` ::
++ 
+++++
+URL-encode the document ID in the file name to avoid illegal characters (e.g. \, :, etc.)
+++++
+
+`overwrite` (__Boolean__) = `false` ::
++ 
+++++
+Allow overwriting target files (ignored when writing to ZIP archives).
+++++
+
+`singularTarget` (__Boolean__) = `false` ::
++ 
+++++
+Treat target location as a single file name. This is particularly useful if only a single
+input file is processed and the result should be written to a pre-defined output file instead
+of deriving the file name from the document URI or document ID. It can also be useful if
+the user wishes to force multiple input files to be written to a single target file. The
+latter case does not work for all formats (e.g. binary, XMI, etc.), but can be useful, e.g.
+for Conll-based formats. This option has no effect if the target location points to an
+archive location (ZIP/JAR). The #PARAM_COMPRESSION is respected, but does not 
+automatically add an extension. The #PARAM_STRIP_EXTENSION has no effect as the
+original extension is not preserved.
+++++
+
+`stripExtension` (__Boolean__) = `false` ::
++ 
+++++
+Remove the original extension.
+++++
+
+`targetLocation` (__String__) [optional]::
++ 
+++++
+Target location. If this parameter is not yet, data is written to stdout.
+++++
+
+`useDocumentId` (__Boolean__) = `false` ::
++ 
+++++
+Use the document ID as file name even if a relative path information is present.
+++++
+
+
+
+
+[discrete]
+===== Inputs
+[cols="h,v"]
+|====
+| Inputs 
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+
+|====
+
+
+
+
+
+[[format-Xml]]
+=== Xml
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.xml-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.xml.XmlReader]]
+[discrete]
+==== XmlReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.xml.XmlReader__#
+
+++++
+<div class='paragraph'><p>Reader for XML files.</p></div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`DocIdTag` (__String__) [optional]::
++ 
+++++
+tag which contains the docId
+++++
+
+`ExcludeTag` (__String[]__) = `[]` ::
++ 
+++++
+optional, tags those should not be worked on. Out them should no
+text be extracted and also no Annotations be produced.
+++++
+
+`IncludeTag` (__String[]__) = `[]` ::
++ 
+++++
+optional, tags those should be worked on (if empty, then all tags
+except those ExcludeTags will be worked on)
+++++
+
+`collectionId` (__String__) [optional]::
++ 
+++++
+The collection ID to set in the DocumentMetaData.
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+Set this as the language of the produced documents.
+++++
+
+`sourceLocation` (__String__)::
++ 
+++++
+Location from which the input is read.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field,Field>>
+
+|====
+
+
+
+
+
+
+
+[[format-XmlText]]
+=== XmlText
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.xml-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.xml.XmlTextReader]]
+[discrete]
+==== XmlTextReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.xml.XmlTextReader__#
+
+++++
+null
+++++
+
+
+[discrete]
+===== Parameters
+
+`includeHidden` (__Boolean__) = `false` ::
++ 
+++++
+Include hidden files and directories.
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+Name of optional configuration parameter that contains the language of the documents in the
+input directory. If specified, this information will be added to the CAS.
+++++
+
+`patterns` (__String[]__) [optional]::
++ 
+++++
+A set of Ant-like include/exclude patterns. A pattern starts with #INCLUDE_PREFIX [+]
+if it is an include pattern and with #EXCLUDE_PREFIX [-] if it is an exclude pattern.
+The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+The wildcard * can be used to a address a part of a name.
+++++
+
+`sourceLocation` (__String__) [optional]::
++ 
+++++
+Location from which the input is read.
+++++
+
+`useDefaultExcludes` (__Boolean__) = `true` ::
++ 
+++++
+Use the default excludes.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+
+|====
+
+
+
+
+
+
+
+[[format-XmlXPath]]
+=== XmlXPath
+
+[small]#*_Artifact ID:_* __de.tudarmstadt.ukp.dkpro.core.io.xml-asl__#
+
+
+
+
+[[format-de.tudarmstadt.ukp.dkpro.core.io.xml.XmlXPathReader]]
+[discrete]
+==== XmlXPathReader
+[small]#*_Reader class:_* __de.tudarmstadt.ukp.dkpro.core.io.xml.XmlXPathReader__#
+
+++++
+<div class='paragraph'><p>A component reader for XML files implemented with XPath.
+</p><p>
+This is currently optimized for TREC format, which means the style topics are presented in. You
+should provide the parameter XPath expression that of the <i>parent</i> node And the child nodes
+of each parent node will be stored separately in its own CAS.
+<p>
+If your expression evaluates to leaf nodes, empty CASes will be created.</div>
+++++
+
+
+[discrete]
+===== Parameters
+
+`caseSensitive` (__Boolean__) = `true`  [optional]::
++ 
+++++
+States whether the matching is done case sensitive. (default: true)
+++++
+
+`docIdTag` (__String__) [optional]::
++ 
+++++
+Tag which contains the docId. If it is given, it will be ensured that within the same
+document there is only one id tag and it is not empty
+++++
+
+`excludeTags` (__String[]__) = `[]` ::
++ 
+++++
+Tags which should be ignored. If empty then all tags will be processed.
+<p>
+
+If this and PARAM_INCLUDE_TAGS are both provided, tags in set PARAM_INCLUDE_TAGS -
+PARAM_EXCLUDE_TAGS will be processed.
+++++
+
+`includeTags` (__String[]__) = `[]` ::
++ 
+++++
+Tags which should be worked on. If empty then all tags will be processed.
+<p>
+
+If this and PARAM_EXCLUDE_TAGS are both provided, tags in set PARAM_INCLUDE_TAGS -
+PARAM_EXCLUDE_TAGS will be processed.
+++++
+
+`language` (__String__) [optional]::
++ 
+++++
+Language of the documents. If given, it will be set in each CAS.
+++++
+
+`patterns` (__String[]__)::
++ 
+++++
+A set of Ant-like include/exclude patterns. A pattern starts with #INCLUDE_PREFIX [+]
+if it is an include pattern and with #EXCLUDE_PREFIX [-] if it is an exclude pattern.
+The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+The wildcard * can be used to a address a part of a name.
+++++
+
+`rootXPath` (__String__)::
++ 
+++++
+Specifies the XPath expression to all nodes to be processed. Different segments will be
+separated via PARAM_ID_TAG, and each segment will be stored in a separate CAS.
+++++
+
+`sourceLocation` (__String__) [optional]::
++ 
+++++
+Location from which the input is read.
+++++
+
+`useDefaultExcludes` (__Boolean__) = `true` ::
++ 
+++++
+Use the default excludes.
+++++
+
+`workingDir` (__String[]__) [optional]::
++ 
+++++
+Specify to substitute tag names in CAS.
+<p>
+Please give the substitutions each in before - after order. For example to substitute "foo"
+with "bar", and "hey" with "ho", you can provide { "foo", "bar", "hey", "ho" }.
+++++
+
+
+
+
+[discrete]
+===== Outputs
+[cols="h,v"]
+|====
+| Outputs
+| <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData,DocumentMetaData>>
+<<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field,Field>>
+
+|====
+
+
+
+
+
+
+
+
+

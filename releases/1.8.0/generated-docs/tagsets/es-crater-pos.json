@@ -1,0 +1,8 @@
+{
+    "name": "CRATER (TreeTagger)",
+    "description": "Spanish TreeTagger Part-of-Speech Tags\n\nThis looks like a simpified version of the CRATER tagset for Spanish.\nSee: http://arxiv.org/pdf/cmp-lg/9406023.pdf\n\nReferences:\n* http://arxiv.org/pdf/cmp-lg/9406023v1.pdf\n* ftp://ftp.ims.uni-stuttgart.de/pub/corpora/spanish-tagset.txt\n",
+    "language": "es",
+    "tags": [
+        
+    ]
+}

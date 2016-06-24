@@ -1,0 +1,283 @@
+{
+    "name": "SNK",
+    "description": "Slovak Morphosyntactic Tagset - Tagset used by the Slovak National Corpus\n\nReferences:\n* http://jlm.ipipan.waw.pl/index.php/JLM/article/view/35\n",
+    "language": "sk",
+    "tags": [
+        {
+            "tag_name": "\"",
+            "tag_description": "!=PUNC"
+        },
+        {
+            "tag_name": "#",
+            "tag_description": "# - non-word element"
+        },
+        {
+            "tag_name": "%",
+            "tag_description": "Foreign language citation"
+        },
+        {
+            "tag_name": "(",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": ")",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": ",",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": ".",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": ":",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": ";",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "?",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Apx",
+            "tag_description": "A - Adjective"
+        },
+        {
+            "tag_name": "Apy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Apz",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Asx",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Asy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Asz",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Dx",
+            "tag_description": "D - ADV"
+        },
+        {
+            "tag_name": "Dy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Dz",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "E",
+            "tag_description": "Preposition"
+        },
+        {
+            "tag_name": "Gpx",
+            "tag_description": "G - Participle"
+        },
+        {
+            "tag_name": "Gpy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Gpz",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Gsx",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Gsy",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Gsz",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "J",
+            "tag_description": "Interjections"
+        },
+        {
+            "tag_name": "ND",
+            "tag_description": "N - Numeral"
+        },
+        {
+            "tag_name": "Np",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ns",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "O",
+            "tag_description": "Conjunctions"
+        },
+        {
+            "tag_name": "OY",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PD",
+            "tag_description": "P - Pronoun"
+        },
+        {
+            "tag_name": "Pp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Ps",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Q",
+            "tag_description": "Undefined part of speech (residual)"
+        },
+        {
+            "tag_name": "R",
+            "tag_description": "Reflexive morphemes"
+        },
+        {
+            "tag_name": "Sp",
+            "tag_description": "S - Substantive"
+        },
+        {
+            "tag_name": "Ss",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "T",
+            "tag_description": "Particles"
+        },
+        {
+            "tag_name": "TY",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VBpa",
+            "tag_description": "V - Verb"
+        },
+        {
+            "tag_name": "VBpb",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VBpc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VBsa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VBsb",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VBsc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VH",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VI",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VKpa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VKpb",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VKpc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VKsa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VKsb",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VKsc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VLpa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VLpb",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VLpc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VLsa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VLsb",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VLsc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMpa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMpb",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMsb",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "W",
+            "tag_description": "Abbreviations"
+        },
+        {
+            "tag_name": "Y",
+            "tag_description": "Conditional morpheme"
+        },
+        {
+            "tag_name": "Z",
+            "tag_description": "Punctuation"
+        },
+        {
+            "tag_name": "par",
+            "tag_description": "No description."
+        }
+    ]
+}

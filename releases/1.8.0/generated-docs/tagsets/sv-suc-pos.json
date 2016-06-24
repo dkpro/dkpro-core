@@ -1,0 +1,8 @@
+{
+    "name": "SUC 2.0",
+    "description": "Stockholm Umea\u030a Corpus POS Tags\n\nalso used by the Swedish Treebank\n\nReferences:\n* http://spraakbanken.gu.se/parole/Docs/SUC2.0-manual.pdf\n* http://stp.lingfil.uu.se/~nivre/swedish_treebank/pos.html\n",
+    "language": "sv",
+    "tags": [
+        
+    ]
+}

@@ -1,0 +1,55 @@
+{
+    "name": "AUEB (simple)",
+    "description": "No description.",
+    "language": "gr",
+    "tags": [
+        {
+            "tag_name": "adjective",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adverb",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "article",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "conjunction",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "noun",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "numeral",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "other",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "particle",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "preposition",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pronoun",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "punctuation",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "verb",
+            "tag_description": "No description."
+        }
+    ]
+}

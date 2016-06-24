@@ -1,0 +1,115 @@
+{
+    "name": "French Treebank",
+    "description": "French Treebank Dependency Tagset\n\nReferences:\n* http://alpage.inria.fr/statgram/frdep/Publications/FTB-GuideDepSurface.pdf\n",
+    "language": "fr",
+    "tags": [
+        {
+            "tag_name": "a_obj",
+            "tag_description": "\ufffca_obj"
+        },
+        {
+            "tag_name": "aff",
+            "tag_description": "\ufffcaff"
+        },
+        {
+            "tag_name": "aff_moyen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "arg",
+            "tag_description": "\ufffcarg"
+        },
+        {
+            "tag_name": "arg_comp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "arg_cons",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ato",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ats",
+            "tag_description": "\ufffcats"
+        },
+        {
+            "tag_name": "aux_caus",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "aux_pass",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "aux_tps",
+            "tag_description": "\ufffcaux_tps"
+        },
+        {
+            "tag_name": "coord",
+            "tag_description": "\ufffccoord"
+        },
+        {
+            "tag_name": "de_obj",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "dep",
+            "tag_description": "\ufffcdep"
+        },
+        {
+            "tag_name": "dep_coord",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "det",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "mod",
+            "tag_description": "\ufffcmod"
+        },
+        {
+            "tag_name": "mod_cleft",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "mod_loc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "mod_rel",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "obj",
+            "tag_description": "\ufffcobj"
+        },
+        {
+            "tag_name": "p_obj",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "p_obj_agt",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "p_obj_loc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ponct",
+            "tag_description": "\ufffcponct"
+        },
+        {
+            "tag_name": "suj",
+            "tag_description": "\ufffc\ufffc\ufffcsuj"
+        },
+        {
+            "tag_name": "suj_imper",
+            "tag_description": "No description."
+        }
+    ]
+}

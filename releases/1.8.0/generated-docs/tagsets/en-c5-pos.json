@@ -1,0 +1,331 @@
+{
+    "name": "BNC Basic Tagset (C5)",
+    "description": "British National Corpus Basic Tagset C5 Tagset\n\nReferences:\n* http://www.natcorp.ox.ac.uk/docs/gramtag.html\n",
+    "language": "en",
+    "tags": [
+        {
+            "tag_name": "AJ0",
+            "tag_description": "Adjective (general or positive) (e.g. good, old, beautiful)"
+        },
+        {
+            "tag_name": "AJ0-AV0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AJ0-NN1",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AJ0-VVD",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AJ0-VVG",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AJ0-VVN",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AJC",
+            "tag_description": "Comparative adjective (e.g. better, older)"
+        },
+        {
+            "tag_name": "AJS",
+            "tag_description": "Superlative adjective (e.g. best, oldest)"
+        },
+        {
+            "tag_name": "AT0",
+            "tag_description": "Article (e.g. the, a, an, no) [N.B. no is included among articles, which are defined here as\ndeterminer words which typically begin a noun phrase, but which cannot occur as the head of\na noun phrase.]"
+        },
+        {
+            "tag_name": "AV0",
+            "tag_description": "General adverb: an adverb not subclassified as AVP or AVQ (see below) (e.g. often, well,\nlonger (adv.), furthest. [Note that adverbs, unlike adjectives, are not tagged as positive,\ncomparative, or superlative.This is because of the relative rarity of comparative and\nsuperlative adverbs.]"
+        },
+        {
+            "tag_name": "AV0-AJ0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AVP-PRP",
+            "tag_description": "'I can't hold out any longer', the same AVP tag is used for out."
+        },
+        {
+            "tag_name": "AVQ-CJS",
+            "tag_description": "occurs in interrogative or relative use.]"
+        },
+        {
+            "tag_name": "CJC",
+            "tag_description": "Coordinating conjunction (e.g. and, or, but)"
+        },
+        {
+            "tag_name": "CJS",
+            "tag_description": "Subordinating conjunction (e.g. although, when)"
+        },
+        {
+            "tag_name": "CJS-AVQ",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "CJS-PRP",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "CJT",
+            "tag_description": "The subordinating conjunction that [N.B. that is tagged CJT when it introduces not only a\nnominal clause, but also a relative clause, as in 'the day that follows Christmas'. Some\ntheories treat that here as a relative pronoun, whereas others treat it as a conjunction. We\nhave adopted the latter analysis.]"
+        },
+        {
+            "tag_name": "CJT-DT0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "CRD",
+            "tag_description": "Cardinal number (e.g. one, 3, fifty-five, 3609)"
+        },
+        {
+            "tag_name": "CRD-PNI",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DPS",
+            "tag_description": "Possessive determiner (e.g. your, their, his)"
+        },
+        {
+            "tag_name": "DT0",
+            "tag_description": "General determiner: i.e. a determiner which is not a DTQ. [Here a determiner is defined as a\nword which typically occurs either as the first word in a noun phrase, or as the head of a\nnoun phrase. E.g. This is tagged DT0 both in 'This is my house' and in 'This house is\nmine'.]"
+        },
+        {
+            "tag_name": "DT0-CJT",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DTQ",
+            "tag_description": "Wh-determiner (e.g. which, what, whose, whichever) [The category of determiner here is\ndefined as for DT0 above. These words are tagged as wh-determiners whether they occur in\ninterrogative use or in relative use.]"
+        },
+        {
+            "tag_name": "NN0",
+            "tag_description": "disagree'.]"
+        },
+        {
+            "tag_name": "NN1",
+            "tag_description": "Singular common noun (e.g. pencil, goose, time, revelation)"
+        },
+        {
+            "tag_name": "NN1-AJ0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NN1-NP0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NN1-VVB",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NN1-VVG",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NN2",
+            "tag_description": "Plural common noun (e.g. pencils, geese, times, revelations)"
+        },
+        {
+            "tag_name": "NN2-VVZ",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NP0",
+            "tag_description": "Proper noun (e.g. London, Michael, Mars, IBM) [N.B. the distinction between singular and\nplural proper nouns is not indicated in the tagset, plural proper nouns being a comparative\nrarity.]"
+        },
+        {
+            "tag_name": "NP0-NN1",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PNI",
+            "tag_description": "(see DT0 and AT0 above).]"
+        },
+        {
+            "tag_name": "PNI-CRD",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PNN",
+            "tag_description": "PNX\tReflexive pronoun (e.g. myself, yourself, itself, ourselves)"
+        },
+        {
+            "tag_name": "PNP",
+            "tag_description": "Personal pronoun (e.g. I, you, them, ours) [Note that possessive pronouns like ours and\ntheirs are tagged as personal pronouns.]"
+        },
+        {
+            "tag_name": "PNQ",
+            "tag_description": "Wh-pronoun (e.g. who, whoever, whom) [N.B. These words are tagged as wh-pronouns whether\nthey occur in interrogative or in relative use.]"
+        },
+        {
+            "tag_name": "PRF",
+            "tag_description": "function, of is assigned a special tag of its own."
+        },
+        {
+            "tag_name": "PRP",
+            "tag_description": "Preposition (except for of) (e.g. about, at, in, on, on behalf of, with)"
+        },
+        {
+            "tag_name": "PRP-AVP",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PRP-CJS",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PUL",
+            "tag_description": "Punctuation: left bracket - i.e. ( or ["
+        },
+        {
+            "tag_name": "PUN",
+            "tag_description": "Punctuation: general separating mark - i.e. . , ! , : ; - or ?"
+        },
+        {
+            "tag_name": "PUQ",
+            "tag_description": "Punctuation: quotation mark - i.e. ' or \""
+        },
+        {
+            "tag_name": "PUR",
+            "tag_description": "Punctuation: right bracket - i.e. ) or ]"
+        },
+        {
+            "tag_name": "VBB",
+            "tag_description": "[subjunctive or imperative]"
+        },
+        {
+            "tag_name": "VBD",
+            "tag_description": "The past tense forms of the verb BE: was and were"
+        },
+        {
+            "tag_name": "VBG",
+            "tag_description": "The -ing form of the verb BE: being"
+        },
+        {
+            "tag_name": "VBI",
+            "tag_description": "The infinitive form of the verb BE: be"
+        },
+        {
+            "tag_name": "VBN",
+            "tag_description": "The past participle form of the verb BE: been"
+        },
+        {
+            "tag_name": "VBZ",
+            "tag_description": "The -s form of the verb BE: is, 's"
+        },
+        {
+            "tag_name": "VDB",
+            "tag_description": "The finite base form of the verb BE: do"
+        },
+        {
+            "tag_name": "VDD",
+            "tag_description": "The past tense form of the verb DO: did"
+        },
+        {
+            "tag_name": "VDG",
+            "tag_description": "The -ing form of the verb DO: doing"
+        },
+        {
+            "tag_name": "VDI",
+            "tag_description": "The infinitive form of the verb DO: do"
+        },
+        {
+            "tag_name": "VDN",
+            "tag_description": "The past participle form of the verb DO: done"
+        },
+        {
+            "tag_name": "VDZ",
+            "tag_description": "The -s form of the verb DO: does, 's"
+        },
+        {
+            "tag_name": "VHB",
+            "tag_description": "The finite base form of the verb HAVE: have, 've"
+        },
+        {
+            "tag_name": "VHD",
+            "tag_description": "The past tense form of the verb HAVE: had, 'd"
+        },
+        {
+            "tag_name": "VHG",
+            "tag_description": "The -ing form of the verb HAVE: having"
+        },
+        {
+            "tag_name": "VHI",
+            "tag_description": "The infinitive form of the verb HAVE: have"
+        },
+        {
+            "tag_name": "VHN",
+            "tag_description": "The past participle form of the verb HAVE: had"
+        },
+        {
+            "tag_name": "VHZ",
+            "tag_description": "The -s form of the verb HAVE: has, 's"
+        },
+        {
+            "tag_name": "VM0",
+            "tag_description": "Modal auxiliary verb (e.g. will, would, can, could, 'll, 'd)"
+        },
+        {
+            "tag_name": "VVB",
+            "tag_description": "The finite base form of lexical verbs (e.g. forget, send, live, return) [Including the\nimperative and present subjunctive]"
+        },
+        {
+            "tag_name": "VVB-NN1",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VVD",
+            "tag_description": "The past tense form of lexical verbs (e.g. forgot, sent, lived, returned)"
+        },
+        {
+            "tag_name": "VVD-AJ0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VVD-VVN",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VVG",
+            "tag_description": "The -ing form of lexical verbs (e.g. forgetting, sending, living, returning)"
+        },
+        {
+            "tag_name": "VVG-AJ0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VVG-NN1",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VVI",
+            "tag_description": "The infinitive form of lexical verbs (e.g. forget, send, live, return)"
+        },
+        {
+            "tag_name": "VVN",
+            "tag_description": "The past participle form of lexical verbs (e.g. forgotten, sent, lived, returned)"
+        },
+        {
+            "tag_name": "VVN-AJ0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VVN-VVD",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VVZ",
+            "tag_description": "The -s form of lexical verbs (e.g. forgets, sends, lives, returns)"
+        },
+        {
+            "tag_name": "VVZ-NN2",
+            "tag_description": "No description."
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "name": "Gamallo",
+    "description": "Portuguese TreeTagger Part-of-Speech Tags\n\nSource: extracted from model using TT4J",
+    "language": "pt",
+    "tags": [
+        
+    ]
+}

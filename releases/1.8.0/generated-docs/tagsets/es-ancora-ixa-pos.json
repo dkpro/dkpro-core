@@ -1,0 +1,1255 @@
+{
+    "name": "Ancora (IXA)",
+    "description": "Spanish Part-of-Speech Tags from the Ancora Corpus\n\nThis list was extracted from the Spanish model used by the OpenNLP models from IXA\nand matched against the official Ancora documentation. It may be incomplete with regards to the\ntags actually used in the corpus.\n\nReferences:\n* http://clic.ub.edu/corpus/webfm_send/18\n* http://www.lrec-conf.org/proceedings/lrec2008/pdf/35_paper.pdf\n* https://github.com/ixa-ehu/ixa-pipe-pos/blob/master/README.md\n",
+    "language": "es",
+    "tags": [
+        {
+            "tag_name": "A00000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AO0FP0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AO0FS0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AO0MP0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AO0MS0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AQ0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AQ000P",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AQ0CC0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AQ0CP0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AQ0CS0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AQ0FP0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AQ0FPP",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AQ0FS0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AQ0FSP",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AQ0MC0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AQ0MP0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AQ0MPP",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AQ0MS0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "AQ0MSP",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "CC",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "CS",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DA0CC0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DA0CS0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DA0FP0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DA0FS0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DA0MP0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DA0MS0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DD0CP0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DD0CS0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DD0FP0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DD0FS0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DD0MP0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DD0MS0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DE0CC0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DI0CP0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DI0CS0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DI0FP0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DI0FS0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DI0MP0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DI0MS0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DN0CP0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DN0CS0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DN0FP0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DN0FS0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DN0MP0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DN0MS0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DP1CPS",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DP1CSS",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DP1FPP",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DP1FSP",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DP1MPP",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DP1MSP",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DP1MSS",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DP2CPS",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DP2CSS",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DP2FPP",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DP2FSP",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DP3CP0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DP3CS0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DP3FS0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DP3MP0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DP3MS0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DT0CC0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DT0MP0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "DT0MS0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "F0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Faa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Fat",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Fc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Fd",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Fe",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Fg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Fh",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Fia",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Fit",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Fp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Fpa",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Fpt",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Fs",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Fx",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Fz",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "I",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "N000000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NCCC000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NCCP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NCCS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NCF0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NCFC000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NCFP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NCFS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NCMC000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NCMP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NCMS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NP00000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NPCC000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P0000000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P00CC000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P01CP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P01CS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P02CS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "P03CC000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PD0CP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PD0CS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PD0FP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PD0FS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PD0MP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PD0MS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PE0CC000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PI0CC000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PI0CP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PI0CS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PI0FP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PI0FS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PI0MP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PI0MS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PN0CP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PN0CS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PN0FP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PN0FS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PN0MP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PN0MS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP1CC000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP1CP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP1CS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP1CSN00",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP1CSO00",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP1FS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP1MP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP2CP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP2CP00P",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP2CS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP2CS00P",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP2CSN00",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP2CSO00",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP3CC000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP3CCA00",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP3CCO00",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP3CP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP3CPA00",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP3CPD00",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP3CS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP3CSA00",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP3CSD00",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP3FP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP3FPA00",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP3FS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP3FSA00",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP3MP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP3MPA00",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP3MS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PP3MSA00",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PR000000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PR0CC000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PR0CP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PR0CS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PR0FP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PR0FS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PR0MP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PR0MS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PT000000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PT0CC000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PT0CP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PT0CS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PT0FP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PT0MP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PT0MS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PX1FP0P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PX1FS0P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PX1FS0S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PX1MP0P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PX1MS0P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PX1MS0S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PX2FS0S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PX2MP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PX2MS0S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PX3CS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PX3FP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PX3FS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PX3MP000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "PX3MS000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "RG",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "RN",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "SPCMS",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "SPS00",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "SPSCC",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAG0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAIC1P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAIC3P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAIC3S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAIF1P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAIF1S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAIF2S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAIF3P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAIF3S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAII1P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAII1S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAII3P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAII3S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAII3SC",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAIP1P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAIP1S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAIP2P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAIP2S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAIP3P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAIP3S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAIP3SC",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAIS3P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAIS3S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAM02S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAM03S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAN0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAN00CC",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VAP00SM",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VASI1P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VASI1S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VASI3P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VASI3S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VASP1P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VASP1S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VASP3P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VASP3S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMG0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIC1P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIC1S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIC2S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIC3P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIC3S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIF1P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIF1S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIF2S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIF3P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIF3S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMII1P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMII1S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMII2P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMII2S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMII3P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMII3S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIP1P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIP1S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIP1SC",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIP2P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIP2S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIP300",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIP3P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIP3PC",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIP3S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIP3SC",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIS1P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIS1S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIS2S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIS3P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIS3S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMIS3SC",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMM01P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMM02P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMM02S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMM03P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMM03S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMN0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMN00CC",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMP00PF",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMP00PM",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMP00SF",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMP00SM",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMSI1P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMSI1S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMSI3P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMSI3S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMSP1P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMSP1S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMSP2P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMSP2S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMSP3P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VMSP3S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSG0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSIC1S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSIC2S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSIC3P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSIC3S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSIF1S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSIF3P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSIF3S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSII1P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSII1S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSII3P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSII3S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSIP1P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSIP1S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSIP2S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSIP3P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSIP3S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSIP3SC",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSIS1S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSIS3P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSIS3S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSM02S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSM03S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSN0000",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSP00SM",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSSI3P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSSI3S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSSP1P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSSP1S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSSP2S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSSP3P0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VSSP3S0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "W",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Z",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Zm",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "Zp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "default",
+            "tag_description": "No description."
+        }
+    ]
+}
