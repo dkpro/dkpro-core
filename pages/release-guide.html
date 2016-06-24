@@ -65,11 +65,12 @@ When a <b>maintenance release</b> is made from a branch, the Major and Minor com
 <h3>Preparation</h3>
 
    <ol>
-   <li>issue tracker
+   <li>GitHub
    	    <ol>
-        <li>create new issue for the new release</li>
-        <li>create next milestone</li>
-        <li>move all bugs on the to-be-released milestone which were not fixed to the next milestone</li>
+        <li>Create new issue for the new release</li>
+        <li>Create next milestone</li>
+        <li>Move all bugs on the to-be-released milestone which were not fixed to the next milestone</li>
+        <li>In <strong>Releases</strong>, draft a new release and copy its initial structure from the release notes of the last stable release</li>
         </ol>
    </li>
    <li>Create branch x.x.x for new release (using Mavem)
@@ -132,14 +133,14 @@ When a <b>maintenance release</b> is made from a branch, the Major and Minor com
    <li>make sure the version number in your POM is a -SNAPSHOT version. (This should always be the case for projects under version control.)</li>
    <li>commit all changes to GitHub</li>
    <li>from the command line, type <code>mvn clean install</code> to test if the build works
-      <ul>
+      <ol>
       <li>if some of the unit tests fails due to the error <b>java.lang.!OutOfMemoryError: GC overhead limit exceeded</b>, try the command <code>mvn  -Dmaven.surefire.heap=4g clean install</code>
-      </ul>
+      </ol>
    </li>
    <li>if this command is successful, type the command <code>mvn -DautoVersionSubmodules=true release:prepare</code>
-      <ul>
+      <ol>
       <li>if some of the unit tests fails due to the error <b>java.lang.!OutOfMemoryError: GC overhead limit exceeded</b>, try the command <code>mvn  -Darguments="-Dmaven.surefire.heap=4g" -DautoVersionSubmodules=true release:prepare</code>
-      </ul>
+      </ol>
    </li>
    <li>when prompted, 
       <ol>
@@ -150,9 +151,9 @@ When a <b>maintenance release</b> is made from a branch, the Major and Minor com
       </ol>
    </li>
    <li>if you run into problems accessing GitHub or creating the tag, try specifying your username, password and keyname like this. Mind that if you do that on a machine with other users, it may leak your password via the process list and shell history. So better do this on a private machine and clear your history afterwards:
-      <ul>
+      <ol>
       <li><code>mvn -Dusername={GITHUB-USERNAME} -Dpassword={GITHUB-PASSWORD} -DautoVersionSubmodules=true release:prepare</code></li>
-      </ul>
+      </ol>
    </li>
    <li>finally type the command <code>mvn release:perform</code> 
       1 if some of the unit tests fails due to the error <b>java.lang.!OutOfMemoryError: GC overhead limit exceeded</b>, try the command <code>mvn  -Darguments="-Dmaven.surefire.heap=4g" release:perform</code></li>
@@ -165,41 +166,47 @@ When a <b>maintenance release</b> is made from a branch, the Major and Minor com
    <li>release the staging repository as <a href="https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide#SonatypeOSSMavenRepositoryUsageGuide-8a.ReleaseIt">described here</a></li>
 </ol>
 
+<h3>Publish release in GitHub</h3>
+
+<ol>
+   <li>In <strong>Releases</strong>, edit the (previously created) draft of the new release, updating the release notes properly</li>
+   <li>Publish the release</li>
+</ol>
+
+<h3>Documentation</h3>
+
+<ol>
+   <li>Create a new release folder named after the version number (e.g. 1.8.0) under the folder <strong>releases</strong> in the 
+   	   <strong>gh-pages</strong> branch of DKPro Core</li>
+   <li>Create a folder named <strong>docs</strong> under the new release folder</li>
+   <li>Go to the <strong>core.doc</strong> module of the new release and build it</li>
+   <li>Copy the <strong>generated-docs</strong> folder contents from <strong>core.doc</strong> target 
+       to the <strong>releases/version_number/docs</strong> folder of DKPro Core <strong>gh-pages</strong> branch
+   <ol>
+   <li>This assumes you have the <strong>gh-pages</strong> branch in a different local repository than the new release branch.
+   Otherwise, use a temporary location to do the copy before switching between branches or tags.</li>
+   </ol>
+   </li>
+   <li>Edit the <strong>_data/releases.yml</strong> file in the DKPro Core <strong>gh-pages</strong> branch. Change the new release from unstable to stable, without any automatic links. The next unstable release (SNAPSHOT) 
+	   should be updated accordingly, with the automatic links. 
+   	   Just follow the templates for stable and unstable releases</li>
+   <li>Commit DKPro Core <strong>gh-pages</strong> branch to GitHub with all the changes you've just made.</li>
+</ol>
+
 <h3>JavaDoc</h3>
 
 For every stable release, Javadoc should be generated. To Generate Javadoc
 
 <ol>
-   <li>Copy the "apidocs" folder from the previous stable release GitHub tag to the current release branch folder in GitHub</li>
-   <li>from the command line in the root folder just checked out, type <code>mvn javadoc:aggregate</code> to generate the javadoc</li>
-   <li>replace the folder <b>apidocs</b> from the root folder with <b>target/site/apidocs</b>
-      <ul>
-      <li><code>rm apidocs</code></li>
-      <li><code>cp -a target/site/apidocs .</code></li>
-      </ul>
-   <li>commit your change in Eclipse (Eclipse should automatically delete files that are no longer part of the Javadoc)</li>
-</ol>
-
-<h3>Publish release in GitHub</h3>
-
-<ol>
-   <li>in GitHub, edit the draft of the new release, update the release notes and publish the release so that a new tag is created</li>
-</ol>
-
-<h3>Reference Guide</h3>
-
-<ol>
-   <li>Copy the "book" folder from the previous stable release GitHub tag to the current release branch folder in GitHub</li>
-   <li>change the active directory to the <b>dkpro-core-doc</b> module</li>
-   <li>on the command line type <code>mvn clean install</code> to compile the !DocBook format to HTML and PDF</li>
-   <li>change the active directory to the root of the checked out tag</li>
-   <li>replace the folder <b>book</b> with the <b>de.tudarmstadt.ukp.dkpro.core.docbook-asl/target/site/d</b>
-      <ul>
-      <li><code>rm book</code></li>
-      <li><code>cp -a de.tudarmstadt.ukp.dkpro.core.docbook-asl/target/site/d book</code></li>
-      </ul>
+   <li>From the command line in DKPro Core root folder, switch to the tag of the newly created release (use the git checkout commands to choose the proper tag)</li>
+   <li>Run <code>mvn javadoc:aggregate</code> to generate the javadoc</li>
+   <li>Copy the newly created  <strong>target/site/apidocs</strong> folder to the <strong>releases/version_number</strong> folder of DKPro Core <strong>gh-pages</strong> branch. 
+   <ol>
+   <li>This assumes you have the <strong>gh-pages</strong> branch in a different local repository than the new release branch.
+   Otherwise, use a temporary location to do the copy before switching between branches or tags.</li>
+   </ol>
    </li>
-   <li>commit your change in Eclipse (Eclipse should automatically delete files that are no longer part of the book)</li>
+   <li>Commit your new folder in Eclipse</li>
 </ol>
 
 <h3>Announcement</h3>
