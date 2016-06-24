@@ -21,7 +21,7 @@ widget-2:
     image: IconModels.png
 widget-3:
     title: "Formats"
-    url: 'releases/!LATEST!format-reference.html'
+    url: 'releases/!LATEST!/docs/format-reference.html'
     text: 'Reading and writing various formats is just one line of code away.'
     image: IconFormatBlank.png
 widget-4:
