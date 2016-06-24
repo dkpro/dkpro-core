@@ -1,3 +1,8 @@
+---
+layout: plain
+google_analytics_anchor_tracking: true
+permalink: "/releases/1.8.0/docs/user-guide.html"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -511,7 +516,6 @@ table.CodeRay td.code>pre{padding:0}
 </style>
 <!-- Generate cross-document links to the other documentation files -->
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-
 <script>
 $( document ).ready(function() {
     $( "#toc" ).prepend( "\
@@ -602,6 +606,9 @@ $( document ).ready(function() {
         handleTocOnResize();
     });
 </script>
+
+{% include analytics.html %}
+
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
