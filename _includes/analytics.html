@@ -20,13 +20,13 @@
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
   {% if page.google_analytics_anchor_tracking %}
-  ga('create', '{{ site.google_analytics_tracking_id }}', {'allowAnchor': true});
+  ga('create', '{{ site.google_analytics_tracking_id }}', 'auto', {'allowAnchor': true});
   ga('set', 'anonymizeIp', true);
   ga('send', 'pageview', { 'page': location.pathname + location.search + location.hash});
   
   jQuery(document).ready(function () {
     $('.tocify-item').on('click', function() {
-      _gaq.push(['_setAllowAnchor', true]);
+      ga('send', 'pageview', { 'page': location.pathname + location.search + location.hash});
     });
   });
   {% else %}
