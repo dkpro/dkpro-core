@@ -11,22 +11,22 @@ title: "DKPro Core"
 #   image_fullwidth: "header_unsplash_12.jpg"
 widget-1:
     title: "Components"
-    url: 'releases/!LATEST!/components/'
+    url: 'releases/!LATEST!/docs/component-reference.html'
     text: 'Find out more about our bundled components.'
     image: IconComponents.png
 widget-2:
     title: "Models/Languages"
-    url: 'releases/!LATEST!/models/'
+    url: 'releases/!LATEST!/docs/model-reference.html'
     text: 'Various models covering different languages accompany the components.'
     image: IconModels.png
 widget-3:
     title: "Formats"
-    url: 'releases/!LATEST!/formats/'
+    url: 'releases/!LATEST!format-reference.html'
     text: 'Reading and writing various formats is just one line of code away.'
     image: IconFormatBlank.png
 widget-4:
     title: "Typesystem"
-    url: 'releases/!LATEST!/typesystem/'
+    url: 'releases/!LATEST!/docs/typesystem-reference.html'
     text: 'Our typesystem is comprehensive, yet simple.'
     image: IconTypeSystem.png
 widget-5:
