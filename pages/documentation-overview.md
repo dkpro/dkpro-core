@@ -27,14 +27,14 @@ permalink: "/documentation/"
 ### DKPro Core {{ stable.version }}
 _latest release_
 
-* [Release notes](https://github.com/dkpro/dkpro-core/releases/tag/de.tudarmstadt.ukp.dkpro.core-asl-{{ stable.version }})
-* [User Guide and Reference]({{ site.url }}/releases/{{ stable.version }}/generated/docs/user-guide/)
-* [Developer Guide]({{ site.url }}/releases/{{ stable.version }}/generated/docs/developer-guide/)
-* [Component Reference]({{ site.url }}/releases/{{ stable.version }}/generated/component-reference/)
-* [Type System Reference]({{ site.url }}/releases/{{ stable.version }}/generated/typesystem-reference/)
-* [Model Reference]({{ site.url }}/releases/{{ stable.version }}/generated/model-reference/)
-* [Format Reference]({{ site.url }}/releases/{{ stable.version }}/generated/format-reference/)
-* [Tagset Mapping Reference]({{ site.url }}/releases/{{ stable.version }}/generated/format-reference/)
+* [Release notes](https://github.com/dkpro/dkpro-core/releases/tag/de.tudarmstadt.ukp.dkpro.core-{{ stable.version }})
+* [User Guide and Reference]({{ site.url }}/releases/{{ stable.version }}/generated-docs/user-guide/)
+* [Developer Guide]({{ site.url }}/releases/{{ stable.version }}/generated-docs/developer-guide/)
+* [Component Reference]({{ site.url }}/releases/{{ stable.version }}/generated-docs/component-reference/)
+* [Type System Reference]({{ site.url }}/releases/{{ stable.version }}/generated-docs/typesystem-reference/)
+* [Model Reference]({{ site.url }}/releases/{{ stable.version }}/generated-docs/model-reference/)
+* [Format Reference]({{ site.url }}/releases/{{ stable.version }}/generated-docs/format-reference/)
+* [Tagset Mapping Reference]({{ site.url }}/releases/{{ stable.version }}/generated-docs/tagset-reference/)
 
 {% for unstable in site.data.releases reversed %}
 {% if unstable.status == 'unstable' %}
