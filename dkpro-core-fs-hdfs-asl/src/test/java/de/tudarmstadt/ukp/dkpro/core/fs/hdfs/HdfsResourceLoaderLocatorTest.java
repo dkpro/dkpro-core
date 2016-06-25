@@ -32,6 +32,8 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ExternalResourceDescription;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -46,22 +48,40 @@ public class HdfsResourceLoaderLocatorTest
     @Rule
     public TemporaryFolder folder= new TemporaryFolder();
     
-    @Test
-    public void testExternalLoaderLocator()
+    private MiniDFSCluster hdfsCluster;
+    
+    private File hadoopTmp;
+
+    @Before
+    public void startCluster()
         throws Exception
     {
-        String document = "This is a test.";
-        
         // Start dummy HDFS
         File target = folder.newFolder("hdfs");
-        
+        hadoopTmp = folder.newFolder("hadoop");
+
         File baseDir = new File(target, "hdfs").getAbsoluteFile();
         FileUtil.fullyDelete(baseDir);
         Configuration conf = new Configuration();
         conf.set(MiniDFSCluster.HDFS_MINIDFS_BASEDIR, baseDir.getAbsolutePath());
+        conf.set("hadoop.tmp.dir", hadoopTmp.getAbsolutePath());
         MiniDFSCluster.Builder builder = new MiniDFSCluster.Builder(conf);
-        MiniDFSCluster hdfsCluster = builder.build();
-        String hdfsURI = "hdfs://localhost:"+ hdfsCluster.getNameNodePort() + "/";
+        hdfsCluster = builder.build();
+    }
+    
+    @After
+    public void shutdownCluster()
+    {
+        hdfsCluster.shutdown();
+    }
+    
+    @Test
+    public void testExternalLoaderLocator()
+        throws Exception
+    {
+        String hdfsURI = "hdfs://localhost:" + hdfsCluster.getNameNodePort() + "/";
+        
+        String document = "This is a test.";
         
         // Write test document
         hdfsCluster.getFileSystem().mkdirs(new Path("/user/test"));
@@ -74,7 +94,6 @@ public class HdfsResourceLoaderLocatorTest
         ExternalResourceDescription locator = createExternalResourceDescription(
                 HdfsResourceLoaderLocator.class,
                 HdfsResourceLoaderLocator.PARAM_FILESYSTEM, hdfsURI);
-                //"hdfs://node-00a.ukp.informatik.tu-darmstadt.de:8020");
         
         // Configure reader to read from HDFS
         CollectionReader reader = createReader(
