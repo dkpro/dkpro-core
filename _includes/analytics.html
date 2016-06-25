@@ -25,8 +25,9 @@
   ga('send', 'pageview', { 'page': location.pathname + location.search + location.hash});
   
   jQuery(document).ready(function () {
-    $('.tocify-item').on('click', function() {
-      ga('send', 'pageview', { 'page': location.pathname + location.search + location.hash});
+    $('.tocify-item').on('click', function(event) {
+      var anchor = $(event.target).closest('li').attr('data-unique');
+      ga('send', 'pageview', { 'page': location.pathname + location.search + '#' + anchor});
     });
   });
   {% else %}
