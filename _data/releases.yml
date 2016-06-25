@@ -21,13 +21,53 @@
   status: stable
   groupId: de.tudarmstadt.ukp.dkpro.core
   artifactId: de.tudarmstadt.ukp.dkpro.core-asl
+  doclinks:
+  - title: "User Guide and Reference"
+    url: "docs/user-guide.html"
+  - title: "Developer Guide"
+    url: "docs/developer-guide.html"
+  - title: "Component Reference"
+    url: "docs/component-reference.html"
+  - title: "Typesystem Reference"
+    url: "docs/typesystem-reference.html"
+  - title: "Model Reference"
+    url: "docs/model-reference.html"
+  - title: "Format Reference"
+    url: "docs/format-reference.html"
+  - title: "Tagset Reference"
+    url: "docs/tagset-reference.html"
+  - title: "API Documentation"
+    url: "apidocs"
 
 - version: 1.7.0
   date: 2014-11-28
   status: stable
+  tag: de.tudarmstadt.ukp.dkpro.core-asl-1.7.0
   groupId: de.tudarmstadt.ukp.dkpro.core
   artifactId: de.tudarmstadt.ukp.dkpro.core-asl
-
+  doclinks:
+  - title: "Component Reference"
+    url: "components"
+  - title: "Typesystem Reference"
+    url: "typesystem"
+  - title: "Model Reference"
+    url: "models"
+  - title: "Format Reference"
+    url: "formats"
+  - title: "API Documentation"
+    url: "apidocs"
+    
 - version: 1.6.2
   date: 2014-08-22
   status: stable
+  tag: de.tudarmstadt.ukp.dkpro.core-asl-1.6.2
+  doclinks:
+  - title: "Component Reference"
+    url: "components"
+  - title: "Typesystem Reference"
+    url: "typesystem"
+  - title: "Model Reference"
+    url: "models"
+  - title: "Format Reference"
+    url: "formats"
+  
