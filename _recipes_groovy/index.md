@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Groovy Recipes
 hidden: true
 permalink: /groovy/recipes/
 ---

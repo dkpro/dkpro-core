@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Jython Recipes
 permalink: /jython/recipes/
 hidden: true
 ---

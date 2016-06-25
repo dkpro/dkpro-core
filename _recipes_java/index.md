@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Java Recipes
 permalink: /java/recipes/
 hidden: true
 ---
