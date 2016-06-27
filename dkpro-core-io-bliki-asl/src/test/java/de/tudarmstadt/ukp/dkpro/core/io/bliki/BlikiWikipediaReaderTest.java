@@ -25,11 +25,12 @@ import static org.junit.Assert.assertTrue;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class BlikiWikipediaReaderTest
 {
-
+    @Ignore("May fail due to Wikipedia API problems.")
     @Test
     public void wikipediaReaderTestPlainText()
         throws Exception
@@ -51,6 +52,7 @@ public class BlikiWikipediaReaderTest
         assertEquals(2, i);
     }
 
+    @Ignore("May fail due to Wikipedia API problems.")
     @Test
     public void wikipediaReaderTestMarkup()
         throws Exception
@@ -73,6 +75,7 @@ public class BlikiWikipediaReaderTest
         assertEquals(2, i);
     }
 
+    @Ignore("May fail due to Wikipedia API problems.")
     @Test
     public void wikipediaReaderUnknownPage()
         throws Exception
