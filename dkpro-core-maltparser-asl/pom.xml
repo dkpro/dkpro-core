@@ -28,7 +28,7 @@
   <packaging>jar</packaging>
   <name>DKPro Core ASL - MaltParser (v ${maltparser.version})</name>
   <properties>
-    <maltparser.version>1.8.1</maltparser.version>
+    <maltparser.version>1.9.0</maltparser.version>
   </properties>
   <dependencies>
     <dependency>
