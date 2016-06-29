@@ -24,7 +24,7 @@ permalink: "/documentation/"
 _latest release_
 
 * [Release Notes](https://github.com/dkpro/dkpro-core/releases/tag/de.tudarmstadt.ukp.dkpro.core-{{stable.version}}){% for link in stable.doclinks %}
-* [{{ link.title }}](../releases/{{stable.version}}/{{ link.url }}){% endfor %}
+* [{{ link.title }}]({{site.url}}/releases/{{stable.version}}/{{ link.url }}){% endfor %}
 
 ## Developer Documentation
 
