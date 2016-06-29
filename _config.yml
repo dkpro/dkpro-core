@@ -24,6 +24,8 @@ description: "DKPro Core is a collection of software components for natural lang
 url: "//dkpro.github.io/dkpro-core"
 baseurl: ""
 
+sourceurl: "//github.com/dkpro/dkpro-core"
+
 # This is for the editing function in _/includes/improve_content.html
 # Leave it empty if your site is not on GitHub/GitHub Pages
 improve_content: https://github.com/dkpro/dkpro-core/edit/gh-pages
@@ -35,7 +37,6 @@ improve_content: https://github.com/dkpro/dkpro-core/edit/gh-pages
 # Markdown-Example for posts ![Image Text]({{ site.urlimg }}/image.jpg)
 #
 urlimg: "/dkpro-core/images/"
-
 
 # Logo size is 600x80 pixels
 logo: "logo.png"
