@@ -179,12 +179,6 @@ public class StanfordPosTagger
             {
                 String modelFile = aUrl.toString();
                 
-                // Loading gzipped files from URL is broken in CoreNLP
-                // https://github.com/stanfordnlp/CoreNLP/issues/94
-                if (modelFile.startsWith("jar:") && modelFile.endsWith(".gz")) {
-                    modelFile = org.apache.commons.lang.StringUtils.substringAfter(modelFile, "!/");
-                }
-                
                 MaxentTagger tagger = new MaxentTagger(modelFile,
                         StringUtils.argsToProperties(new String[] { "-model", modelFile }),
                         false);
