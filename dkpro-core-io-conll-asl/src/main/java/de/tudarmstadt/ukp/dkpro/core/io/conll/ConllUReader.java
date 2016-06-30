@@ -60,9 +60,9 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
  * for tokens with multiple words.</li>
  * <li>FORM - <b>(Token)</b> Word form or punctuation symbol.</li>
  * <li>LEMMA - <b>(Lemma)</b> Lemma or stem of word form.</li>
- * <li>CPOSTAG - <b>(unused)</b> Google universal part-of-speech tag from the universal POS tag set.
+ * <li>CPOSTAG - <b>(POS coarseValue)</b> Google universal part-of-speech tag from the universal POS tag set.
  * </li>
- * <li>POSTAG - <b>(POS)</b> Language-specific part-of-speech tag; underscore if not available.</li>
+ * <li>POSTAG - <b>(POS PosValue)</b> Language-specific part-of-speech tag; underscore if not available.</li>
  * <li>FEATS - <b>(MorphologicalFeatures)</b> List of morphological features from the universal
  * feature inventory or from a defined language-specific extension; underscore if not available.</li>
  * <li>HEAD - <b>(Dependency)</b> Head of the current token, which is either a value of ID or zero
@@ -95,6 +95,14 @@ public class ConllUReader
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
     private boolean readPos;
 
+    public static final String PARAM_READ_CPOS = ComponentParameters.PARAM_READ_CPOS;
+    @ConfigurationParameter(name = PARAM_READ_CPOS, mandatory = true, defaultValue = "true")
+    private boolean readCPos;
+
+    public static final String PARAM_USE_CPOS_AS_POS = "useCPosAsPos";
+    @ConfigurationParameter(name = PARAM_USE_CPOS_AS_POS, mandatory = true, defaultValue = "false")
+    private boolean useCPosAsPos;
+
     /**
      * Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
      * tag set defined as part of the model meta data. This can be useful if a custom model is
@@ -123,13 +131,13 @@ public class ConllUReader
     public static final String PARAM_READ_DEPENDENCY = ComponentParameters.PARAM_READ_DEPENDENCY;
     @ConfigurationParameter(name = PARAM_READ_DEPENDENCY, mandatory = true, defaultValue = "true")
     private boolean readDependency;
-
+    
     private static final String UNUSED = "_";
 
     private static final int ID = 0;
     private static final int FORM = 1;
     private static final int LEMMA = 2;
-    // private static final int CPOSTAG = 3;
+    private static final int CPOSTAG = 3;
     private static final int POSTAG = 4;
     private static final int FEATS = 5;
     private static final int HEAD = 6;
@@ -222,11 +230,21 @@ public class ConllUReader
                 }
 
                 // Read part-of-speech tag
-                if (!UNUSED.equals(word[POSTAG]) && readPos) {
-                    Type posTag = posMappingProvider.getTagType(word[POSTAG]);
-                    POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
+                POS pos = null;
+                String tag = useCPosAsPos ? word[CPOSTAG] : word[POSTAG];
+                if (!UNUSED.equals(tag) && readPos) {
+                    Type posTag = posMappingProvider.getTagType(tag);
+                    pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
-                    pos.setPosValue(word[POSTAG]);
+                    pos.setPosValue(tag.intern());
+                }
+
+                // Read coarse part-of-speech tag
+                if (!UNUSED.equals(word[CPOSTAG]) && readCPos && pos != null) {
+                    pos.setCoarseValue(word[CPOSTAG].intern());
+                }
+                
+                if (pos != null) {
                     pos.addToIndexes();
                     token.setPos(pos);
                 }

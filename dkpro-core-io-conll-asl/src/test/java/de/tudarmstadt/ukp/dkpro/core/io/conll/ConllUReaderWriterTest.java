@@ -17,7 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.conll;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
+import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.*;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -30,9 +30,16 @@ public class ConllUReaderWriterTest
     public void roundTrip()
         throws Exception
     {
+        testRoundTrip(ConllUReader.class, ConllUWriter.class, "conll/u/conllu-en-orig.conll");
+    }
+
+    @Test
+    public void withComments()
+        throws Exception
+    {
         testOneWay(ConllUReader.class, ConllUWriter.class,
                 "conll/u/conllu-en-ref.conll",
-                "conll/u/conllu-en-orig.conll");
+                "conll/u/conllu-en-orig2.conll");
     }
 
     @Rule

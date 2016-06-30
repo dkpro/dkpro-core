@@ -63,8 +63,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
  * <li>FORM - <b>(Token)</b> Word form or punctuation symbol.</li>
  * <li>LEMMA - <b>(Lemma)</b> Fine-grained part-of-speech tag, where the tagset depends on the
  * language, or identical to the coarse-grained part-of-speech tag if not available.</li>
- * <li>CPOSTAG - <b>(unused)</b></li>
- * <li>POSTAG - <b>(POS)</b> Fine-grained part-of-speech tag, where the tagset depends on the
+ * <li>CPOSTAG - <b>(POS coarseValue)</b></li>
+ * <li>POSTAG - <b>(POS PosValue)</b> Fine-grained part-of-speech tag, where the tagset depends on the
  * language, or identical to the coarse-grained part-of-speech tag if not available.</li>
  * <li>FEATS - <b>(MorphologicalFeatures)</b> Unordered set of syntactic and/or morphological features (depending
  * on the particular language), separated by a vertical bar (|), or an underscore if not available.</li>
@@ -107,6 +107,10 @@ public class Conll2006Reader
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
     private boolean readPos;
 
+    public static final String PARAM_READ_CPOS = ComponentParameters.PARAM_READ_CPOS;
+    @ConfigurationParameter(name = PARAM_READ_CPOS, mandatory = true, defaultValue = "true")
+    private boolean readCPos;
+
     /**
      * Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
      * tag set defined as part of the model meta data. This can be useful if a custom model is
@@ -141,7 +145,7 @@ public class Conll2006Reader
     private static final int ID = 0;
     private static final int FORM = 1;
     private static final int LEMMA = 2;
-    // private static final int CPOSTAG = 3;
+    private static final int CPOSTAG = 3;
     private static final int POSTAG = 4;
     private static final int FEATS = 5;
     private static final int HEAD = 6;
@@ -219,15 +223,24 @@ public class Conll2006Reader
                 }
 
                 // Read part-of-speech tag
+                POS pos = null;
                 if (!UNUSED.equals(word[POSTAG]) && readPos) {
                     Type posTag = posMappingProvider.getTagType(word[POSTAG]);
-                    POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
+                    pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
-                    pos.setPosValue(word[POSTAG]);
+                    pos.setPosValue(word[POSTAG].intern());
+                }
+
+                // Read coarse part-of-speech tag
+                if (!UNUSED.equals(word[CPOSTAG]) && readCPos && pos != null) {
+                    pos.setCoarseValue(word[CPOSTAG].intern());
+                }
+                
+                if (pos != null) {
                     pos.addToIndexes();
                     token.setPos(pos);
                 }
-
+                
                 // Read morphological features
                 if (!UNUSED.equals(word[FEATS]) && readMorph) {
                     MorphologicalFeatures morphtag = new MorphologicalFeatures(aJCas,

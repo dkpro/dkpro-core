@@ -12,8 +12,12 @@
       <features>
         <featureDescription>
           <name>PosValue</name>
-          <description>The string representation of POS. Mostly it is the POS
-                        representation of the wrapped POS tagger.</description>
+          <description>Fine-grained POS tag. This is the tag as produced by a POS tagger or obtained from a reader.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      <featureDescription>
+          <name>coarseValue</name>
+          <description>Coarse-grained POS tag. This may be produced by a POS tagger or reader in addition to the fine-grained tag. </description>
           <rangeTypeName>uima.cas.String</rangeTypeName>
         </featureDescription>
       </features>

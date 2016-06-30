@@ -125,6 +125,7 @@ public class PosMapper
 
 					POS newPos = (POS) cas.createAnnotation(type, begin, end);
 					newPos.setPosValue(newTag);
+					newPos.setCoarseValue(type.getShortName().intern());
 
 					oldPos.removeFromIndexes();
 					newPos.addToIndexes();

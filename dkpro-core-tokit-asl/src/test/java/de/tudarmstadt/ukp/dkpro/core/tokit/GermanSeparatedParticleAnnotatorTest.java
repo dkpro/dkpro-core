@@ -38,37 +38,30 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 
-
-
-/**
- *
- */
 public class GermanSeparatedParticleAnnotatorTest
 {
-
-
-
 	@Test
 	public void testGermanSeparatedParticles()
 		throws Exception
 	{
         runTest("de", "Wir schlagen ein Treffen vor .",
         		new String[] { "wir", "schlagen", "eine", "Treffen", "vor", "."    },
+                new String[] { "PPER", "VVFIN", "ART", "NN", "PTKVZ", "$."    },
         		new String[] { "PPER", "VVFIN", "ART", "NN", "PTKVZ", "$."    },
         		new String[] { "wir", "vorschlagen", "eine", "Treffen", "vor", "."    });
 
 
         runTest("de", "Fangen wir jetzt an ?",
         		new String[] { "fangen", "wir", "jetzt", "an", "?"    },
+                new String[] { "VVFIN", "PPER", "ADV", "PTKVZ", "$."    },
 				new String[] { "VVFIN", "PPER", "ADV", "PTKVZ", "$."    },
 				new String[] { "anfangen", "wir", "jetzt", "an", "?"    });
-
-
 	}
 
-	private void runTest(String language, String testDocument, String[] documentTreeTaggerLemmas,
-			String[] documentPosTags, String[] lemmatizedDocument) throws UIMAException
-	{
+    private void runTest(String language, String testDocument, String[] documentTreeTaggerLemmas,
+            String[] documentCPosTags, String[] documentPosTags, String[] lemmatizedDocument)
+                throws UIMAException
+    {
 
 		AnalysisEngineDescription processor = createEngineDescription(
 
@@ -83,11 +76,11 @@ public class GermanSeparatedParticleAnnotatorTest
 				Sentence.class);
 		tb.buildTokens(aJCas, testDocument);
 
-
 		int offset = 0;
 		for (Token token : JCasUtil.select(aJCas, Token.class)) {
 			POS pos = new POS(aJCas, token.getBegin(), token.getEnd());
 			pos.setPosValue(documentPosTags[offset]);
+            pos.setCoarseValue(documentCPosTags[offset]);
 			pos.addToIndexes();
 
 			token.setPos(pos);
@@ -98,17 +91,12 @@ public class GermanSeparatedParticleAnnotatorTest
 
 			token.setLemma(lemma);
 
-
 			offset++;
 		}
 		engine.process(aJCas);
 
 		AssertAnnotations.assertLemma(lemmatizedDocument, select(aJCas, Lemma.class));
-
-
-
 	}
-
 
 	@Rule
 	public TestName name = new TestName();
@@ -118,6 +106,4 @@ public class GermanSeparatedParticleAnnotatorTest
 	{
 		System.out.println("\n=== " + name.getMethodName() + " =====================");
 	}
-
-
 }

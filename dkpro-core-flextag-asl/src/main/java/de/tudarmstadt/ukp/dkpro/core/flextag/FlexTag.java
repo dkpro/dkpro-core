@@ -121,6 +121,7 @@ public class FlexTag
         Type posTag = mappingProvider.getTagType(aOutcome);
         POS posAnno = (POS) aJCas.getCas().createAnnotation(posTag, begin, end);
         posAnno.setPosValue(aOutcome);
+        posAnno.setCoarseValue(posTag.getShortName());
         posAnno.addToIndexes();
         
         return posAnno;

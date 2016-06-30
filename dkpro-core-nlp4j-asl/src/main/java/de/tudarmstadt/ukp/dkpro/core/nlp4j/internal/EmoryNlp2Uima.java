@@ -50,6 +50,7 @@ public class EmoryNlp2Uima
             POS posAnno = (POS) aCas.createAnnotation(posTag, t.getBegin(), t.getEnd());
             // To save memory, we typically intern() tag strings
             posAnno.setPosValue(internStrings ? tag.intern() : tag);
+            posAnno.setCoarseValue(posTag.getShortName().intern());
             posAnno.addToIndexes();
             
             // Connect the POS annotation to the respective token annotation

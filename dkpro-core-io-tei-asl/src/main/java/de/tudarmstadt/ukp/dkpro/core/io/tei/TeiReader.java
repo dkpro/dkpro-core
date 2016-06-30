@@ -544,6 +544,7 @@ public class TeiReader
 						POS pos = (POS) getJCas().getCas().createAnnotation(posTagType,
 								token.getBegin(), token.getEnd());
 						pos.setPosValue(posTag);
+						pos.setCoarseValue(pos.getType().getShortName().intern());
 						pos.addToIndexes();
 						token.setPos(pos);
 					}

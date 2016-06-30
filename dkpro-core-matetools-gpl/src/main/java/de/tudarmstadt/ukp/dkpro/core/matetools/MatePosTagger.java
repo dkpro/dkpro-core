@@ -180,7 +180,8 @@ public class MatePosTagger
                 Token token = tokens.get(i-1);
                 Type posType = posMappingProvider.getTagType(posTags[i]);
                 POS posTag = (POS) cas.createAnnotation(posType, token.getBegin(), token.getEnd());
-                posTag.setPosValue(posTags[i]);
+                posTag.setPosValue(posTags[i].intern());
+                posTag.setCoarseValue(posType.getShortName().intern());
                 posTag.addToIndexes();
                 token.setPos(posTag);
             }

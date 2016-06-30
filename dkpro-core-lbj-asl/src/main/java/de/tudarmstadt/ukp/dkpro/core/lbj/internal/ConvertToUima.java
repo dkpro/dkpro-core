@@ -50,6 +50,7 @@ public class ConvertToUima
             POS posAnno = (POS) cas.createAnnotation(posTag, p.getStartCharOffset(),
                     p.getEndCharOffset());
             posAnno.setPosValue(internStrings ? tag.intern() : tag);
+            posAnno.setCoarseValue(posTag.getShortName().intern());
             posAnno.addToIndexes();
             casTokens.get(i).setPos(posAnno);
             i++;

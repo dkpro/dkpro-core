@@ -300,7 +300,8 @@ public class AncoraReader
             if (aPos != null && readPOS) {
                 Type posTagType = posMappingProvider.getTagType(aPos);
                 POS pos = (POS) getJCas().getCas().createAnnotation(posTagType, start, end);
-                pos.setPosValue(aPos);
+                pos.setPosValue(aPos.intern());
+                pos.setCoarseValue(posTagType.getShortName().intern());
                 pos.addToIndexes();
                 if (token != null) {
                     token.setPos(pos);

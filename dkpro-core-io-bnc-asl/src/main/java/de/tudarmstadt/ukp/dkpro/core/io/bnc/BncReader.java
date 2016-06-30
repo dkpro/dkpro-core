@@ -202,7 +202,8 @@ public class BncReader
 						Type posTag = posMappingProvider.getTagType(c5Tag);
 						POS pos = (POS) getJCas().getCas().createAnnotation(posTag,
 								token.getBegin(), token.getEnd());
-						pos.setPosValue(c5Tag);
+						pos.setPosValue(c5Tag.intern());
+		                pos.setCoarseValue(posTag.getShortName().intern());
 						pos.addToIndexes();
 						token.setPos(pos);
 					}

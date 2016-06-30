@@ -102,6 +102,15 @@ public class TokenMerger
 	@ConfigurationParameter(name=PARAM_POS_VALUE, mandatory=false)
 	private String posValue;
 
+    /**
+     * Set a new coarse POS value for the new merged token. This is the actual tag set value and is
+     * subject to tagset mapping. For example when merging tokens for named entities, the new POS
+     * value may be set to "NNP" (English/Penn Treebank Tagset).
+     */
+    public static final String PARAM_CPOS_VALUE = "cposValue";
+    @ConfigurationParameter(name=PARAM_CPOS_VALUE, mandatory=false)
+    private String cposValue;
+
 	/**
 	 * Set a new POS tag for the new merged token. This is the mapped type. If this is specified,
 	 * tag set mapping will not be performed. This parameter has no effect unless PARAM_POS_VALUE
@@ -278,6 +287,7 @@ public class TokenMerger
 
 		// Update the POS value
 		pos.setPosValue(posValue);
+		pos.setCoarseValue(cposValue);
 		aToken.setPos(pos);
 	}
 }

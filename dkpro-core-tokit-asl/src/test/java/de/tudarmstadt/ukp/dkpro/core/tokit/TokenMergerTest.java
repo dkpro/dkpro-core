@@ -144,6 +144,7 @@ public class TokenMergerTest
 		POS pos = (POS) cas.createAnnotation(CasUtil.getType(cas, aPosType), aToken.getBegin(),
 				aToken.getEnd());
 		pos.setPosValue(aPosValue);
+		pos.setCoarseValue(pos.getType().getShortName().intern());
 		aToken.setPos(pos);
 
 		Lemma lemma = new Lemma(aToken.getCAS().getJCas(), aToken.getBegin(), aToken.getEnd());

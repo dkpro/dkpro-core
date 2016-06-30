@@ -397,11 +397,14 @@ public class Conll2002Reader
             String[] fields = line.split(columnSeparator.getValue());
 
            	if (!hasEmbeddedNamedEntity && fields.length != 2 + FORM) {
-                throw new IOException(
-                        String.format("Invalid file format. Line needs to have %d %s-separated fields.", 2 + FORM, columnSeparator.getName()));
-            } else if (hasEmbeddedNamedEntity && fields.length != 3 + FORM) {
-                    throw new IOException(
-                        String.format("Invalid file format. Line needs to have %d %s-separated fields.", 3 + FORM, columnSeparator.getName()));
+                throw new IOException(String.format(
+                        "Invalid file format. Line needs to have %d %s-separated fields: [%s]", 2 + FORM,
+                        columnSeparator.getName(), line));
+            }
+            else if (hasEmbeddedNamedEntity && fields.length != 3 + FORM) {
+                throw new IOException(String.format(
+                        "Invalid file format. Line needs to have %d %s-separated fields: [%s]", 3 + FORM,
+                        columnSeparator.getName(), line));
             }
             words.add(fields);
         }

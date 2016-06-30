@@ -252,6 +252,7 @@ public class TigerXmlReader
                 POS posAnno = (POS) aBuilder.getJCas().getCas().createAnnotation(posType,
                         token.getBegin(), token.getEnd());
                 posAnno.setPosValue(t.pos.intern());
+                posAnno.setCoarseValue(posType.getShortName().intern());
                 posAnno.addToIndexes();
                 token.setPos(posAnno);
             }
@@ -431,8 +432,9 @@ public class TigerXmlReader
                     continuousToken = false;
                 }
 
-                if (i >= tokenArray.length)
+                if (i >= tokenArray.length) {
                     break;
+                }
             }
         }
         else {
@@ -446,8 +448,9 @@ public class TigerXmlReader
                 String textRepresentation = tokenIdToTextMap.get(word);
                 if(textRepresentation == null){
                     textRepresentation = "";
-                    for(String part:word.split(" "))
+                    for(String part:word.split(" ")) {
                         textRepresentation += tokenIdToTextMap.get(part) + " ";
+                    }
                     textRepresentation = textRepresentation.trim();
                 }
                 completeFrameTarget += "<" + word + "," + textRepresentation + "> ";

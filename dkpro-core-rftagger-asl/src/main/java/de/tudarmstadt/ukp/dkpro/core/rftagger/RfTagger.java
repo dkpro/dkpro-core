@@ -295,6 +295,7 @@ public class RfTagger
             Type posTag = mappingProvider.getTagType(tag);
             POS posAnno = (POS) aJCas.getCas().createAnnotation(posTag, begin, end);
             posAnno.setPosValue(tag);
+            posAnno.setCoarseValue(posTag.getShortName().intern());
             posAnno.addToIndexes();
             tokens.get(i).setPos(posAnno);
 

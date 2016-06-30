@@ -238,7 +238,8 @@ public class Conll2000Reader
                     Type posTag = posMappingProvider.getTagType(word[POSTAG]);
                     POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
-                    pos.setPosValue(word[POSTAG]);
+                    pos.setPosValue(word[POSTAG].intern());
+                    pos.setCoarseValue(posTag.getShortName().intern());
                     pos.addToIndexes();
                     token.setPos(pos);
                 }

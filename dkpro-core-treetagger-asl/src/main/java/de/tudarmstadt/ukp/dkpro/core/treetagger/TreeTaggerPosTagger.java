@@ -259,6 +259,7 @@ public class TreeTaggerPosTagger
                             POS posAnno = (POS) cas.createAnnotation(posTag, aToken.getBegin(),
                                     aToken.getEnd());
                             posAnno.setPosValue(internTags ? aPos.intern() : aPos);
+                            posAnno.setCoarseValue(posTag.getShortName().intern());
                             aToken.setPos(posAnno);
                             pos[count.get()] = posAnno;
                         }

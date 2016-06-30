@@ -38,20 +38,7 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.SurfaceForm;
@@ -69,9 +56,9 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
  * for tokens with multiple words.</li>
  * <li>FORM - <b>(Token)</b> Word form or punctuation symbol.</li>
  * <li>LEMMA - <b>(Lemma)</b> Lemma or stem of word form.</li>
- * <li>CPOSTAG - <b>(unused)</b> Google universal part-of-speech tag from the universal POS tag set.
+ * <li>CPOSTAG - <b>(POS coarseValue)</b> Google universal part-of-speech tag from the universal POS tag set.
  * </li>
- * <li>POSTAG - <b>(POS)</b> Language-specific part-of-speech tag; underscore if not available.</li>
+ * <li>POSTAG - <b>(POS PosValue)</b> Language-specific part-of-speech tag; underscore if not available.</li>
  * <li>FEATS - <b>(MorphologicalFeatures)</b> List of morphological features from the universal
  * feature inventory or from a defined language-specific extension; underscore if not available.</li>
  * <li>HEAD - <b>(Dependency)</b> Head of the current token, which is either a value of ID or zero
@@ -114,6 +101,10 @@ public class ConllUWriter
     @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
     private boolean writePos;
 
+    public static final String PARAM_WRITE_CPOS = ComponentParameters.PARAM_WRITE_CPOS;
+    @ConfigurationParameter(name = PARAM_WRITE_CPOS, mandatory = true, defaultValue = "true")
+    private boolean writeCPos;
+
     public static final String PARAM_WRITE_MORPH = ComponentParameters.PARAM_WRITE_MORPH;
     @ConfigurationParameter(name = PARAM_WRITE_MORPH, mandatory = true, defaultValue = "true")
     private boolean writeMorph;
@@ -125,24 +116,6 @@ public class ConllUWriter
     public static final String PARAM_WRITE_DEPENDENCY = ComponentParameters.PARAM_WRITE_DEPENDENCY;
     @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")
     private boolean writeDependency;
-
-    private Map<Class<?>, String> dkpro2ud = new HashMap<>();
-    
-    {
-        dkpro2ud.put(ADJ.class, "ADJ");
-        dkpro2ud.put(ADV.class, "ADV");
-        dkpro2ud.put(ART.class, "DET");
-        dkpro2ud.put(CARD.class, "NUM");
-        dkpro2ud.put(CONJ.class, "CONJ");
-        dkpro2ud.put(N.class, "NOUN");
-        dkpro2ud.put(NN.class, "NOUN");
-        dkpro2ud.put(NP.class, "PROPN");
-        dkpro2ud.put(O.class, "X");
-        dkpro2ud.put(PP.class, "ADP");
-        dkpro2ud.put(PR.class, "PRON");
-        dkpro2ud.put(V.class, "VERB");
-        dkpro2ud.put(PUNC.class, "PUNCT");
-    }
     
     @Override
     public void process(JCas aJCas)
@@ -204,16 +177,17 @@ public class ConllUWriter
                 }
 
                 String pos = UNUSED;
-                String cpos = UNUSED;
                 if (writePos && (row.token.getPos() != null)) {
                     POS posAnno = row.token.getPos();
                     pos = posAnno.getPosValue();
-                    cpos = dkpro2ud.get(posAnno.getClass());
-                    if (StringUtils.isBlank(cpos)) {
-                        cpos = pos;
-                    }
                 }
-                
+
+                String cpos = UNUSED;
+                if (writeCPos && (row.token.getPos() != null)) {
+                    POS posAnno = row.token.getPos();
+                    cpos = posAnno.getCoarseValue();
+                }
+
                 int headId = UNUSED_INT;
                 String deprel = UNUSED;
                 String deps = UNUSED;

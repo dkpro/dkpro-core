@@ -198,6 +198,7 @@ public class TcfReader
             outPos.setBegin(aTokens.get(posTokens[0].getID()).getBegin());
             outPos.setEnd(aTokens.get(posTokens[0].getID()).getEnd());
             outPos.setPosValue(value);
+            outPos.setCoarseValue(outPos.getType().getShortName().intern());
             outPos.addToIndexes();
 
             // Set the POS to the token
@@ -278,6 +279,7 @@ public class TcfReader
                     dependentPos.setBegin(aTokens.get(dependentTokens[0].getID()).getBegin());
                     dependentPos.setEnd(aTokens.get(dependentTokens[0].getID()).getEnd());
                     dependentPos.setPosValue("--");
+                    dependentPos.setCoarseValue("--");
                     dependentPos.addToIndexes();
                     aTokens.get(dependentTokens[0].getID()).setPos(dependentPos);
                 }

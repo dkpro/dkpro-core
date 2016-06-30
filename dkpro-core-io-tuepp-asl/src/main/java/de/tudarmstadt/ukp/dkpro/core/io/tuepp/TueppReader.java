@@ -369,6 +369,7 @@ public class TueppReader
             POS posAnno = (POS) aBuilder.getJCas().getCas()
                     .createAnnotation(posType, token.getBegin(), token.getEnd());
             posAnno.setPosValue(pos.tag.intern());
+            posAnno.setCoarseValue(posType.getShortName().intern());
             posAnno.addToIndexes();
             token.setPos(posAnno);
             

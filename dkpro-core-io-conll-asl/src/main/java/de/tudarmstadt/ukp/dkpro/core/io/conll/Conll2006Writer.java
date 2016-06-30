@@ -95,6 +95,10 @@ public class Conll2006Writer
     @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
     private boolean writePos;
 
+    public static final String PARAM_WRITE_CPOS = ComponentParameters.PARAM_WRITE_CPOS;
+    @ConfigurationParameter(name = PARAM_WRITE_CPOS, mandatory = true, defaultValue = "true")
+    private boolean writeCPos;
+
     public static final String PARAM_WRITE_MORPH = "writeMorph";
     @ConfigurationParameter(name = PARAM_WRITE_MORPH, mandatory = true, defaultValue = "true")
     private boolean writeMorph;
@@ -169,16 +173,15 @@ public class Conll2006Writer
                 }
 
                 String pos = UNUSED;
-                String cpos = UNUSED;
                 if (writePos && (row.token.getPos() != null)) {
                     POS posAnno = row.token.getPos();
                     pos = posAnno.getPosValue();
-                    if (!posAnno.getClass().equals(POS.class)) {
-                        cpos = posAnno.getClass().getSimpleName();
-                    }
-                    else {
-                        cpos = pos;
-                    }
+                }
+
+                String cpos = UNUSED;
+                if (writeCPos && (row.token.getPos() != null)) {
+                    POS posAnno = row.token.getPos();
+                    cpos = posAnno.getCoarseValue();
                 }
                 
                 int headId = UNUSED_INT;

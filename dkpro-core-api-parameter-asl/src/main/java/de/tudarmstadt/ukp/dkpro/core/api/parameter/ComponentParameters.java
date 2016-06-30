@@ -162,6 +162,8 @@ public final class ComponentParameters
 
 	private static final String POS = "POS";
 
+    private static final String CPOS = "CPOS";
+
     private static final String MORPH = "Morph";
 
 	private static final String CHUNK = "Chunk";
@@ -206,6 +208,8 @@ public final class ComponentParameters
 
 	public static final String PARAM_READ_POS = READ + POS;
 
+    public static final String PARAM_READ_CPOS = READ + CPOS;
+
     public static final String PARAM_READ_CHUNK = READ + CHUNK;
 
     public static final String PARAM_READ_MORPH = READ + MORPH;
@@ -229,6 +233,8 @@ public final class ComponentParameters
 	public static final String PARAM_WRITE_LEMMA = WRITE + LEMMA;
 
 	public static final String PARAM_WRITE_POS = WRITE + POS;
+
+    public static final String PARAM_WRITE_CPOS = WRITE + CPOS;
 
     public static final String PARAM_WRITE_CHUNK = WRITE + CHUNK;
 

@@ -293,6 +293,7 @@ public class StanfordAnnotator
 
         // save original (unmapped) postype in feature
         anno.setPosValue(aPosType);
+        anno.setCoarseValue(type.getShortName().intern());
 
         return anno;
     }

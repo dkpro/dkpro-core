@@ -233,6 +233,8 @@ public class OpenNlpPosTagger
                 POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
                 // To save memory, we typically intern() tag strings
                 posAnno.setPosValue(internTags ? tag.intern() : tag);
+                posAnno.setCoarseValue(
+                        internTags ? posTag.getShortName().intern() : posTag.getShortName());
                 posAnno.addToIndexes();
 // end::mapping-provider-use-2[]
                 

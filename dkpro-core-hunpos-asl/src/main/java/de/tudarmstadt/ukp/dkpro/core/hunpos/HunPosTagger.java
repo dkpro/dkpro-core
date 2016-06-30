@@ -218,6 +218,8 @@ public class HunPosTagger
                     Type posTag = posMappingProvider.getTagType(tags[i]);
                     POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
                     posAnno.setPosValue(internTags ? tags[i].intern() : tags[i]);
+                    posAnno.setCoarseValue(
+                            internTags ? posTag.getShortName() : posTag.getShortName().intern());
                     posAnno.addToIndexes();
                     t.setPos(posAnno);
                     i++;

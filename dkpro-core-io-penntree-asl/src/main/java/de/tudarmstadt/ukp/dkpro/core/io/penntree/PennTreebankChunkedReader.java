@@ -335,6 +335,7 @@ public class PennTreebankChunkedReader
                 POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                         token.getEnd());
                 pos.setPosValue(aTag);
+                pos.setCoarseValue(pos.getType().getShortName().intern());
                 pos.addToIndexes();
 
                 // Set the POS for the Token
