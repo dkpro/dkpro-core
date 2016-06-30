@@ -352,7 +352,14 @@ public class BratWriter extends JCasFileWriter_ImplBase
                 break;
             }
         case ".html":
-            String template = IOUtils.toString(getClass().getResource("html/template.html"));
+        case ".json":
+            String template ;
+            if (filenameSuffix.equals(".html")) {
+                template = IOUtils.toString(getClass().getResource("html/template.html"));
+            }
+            else {
+                template = "{ \"collData\" : ##COLL-DATA## , \"docData\" : ##DOC-DATA## }";
+            }
             
             JsonFactory jfactory = new JsonFactory();
             try (Writer out = new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix), "UTF-8")) {
