@@ -157,12 +157,6 @@ public class StanfordCoreferenceResolver
             {
                 String base = FilenameUtils.getFullPathNoEndSeparator(aUrl.toString())+"/";
 
-                // Loading gzipped files from URL is broken in CoreNLP
-                // https://github.com/stanfordnlp/CoreNLP/issues/94
-                String logicalBase = getModelLocation(getAggregatedProperties());
-                logicalBase = FilenameUtils.getFullPathNoEndSeparator(logicalBase)+"/";
-                logicalBase = logicalBase.substring("classpath:/".length());
-
                 Properties props = new Properties();
                 props.setProperty(Constants.SIEVES_PROP, sieves);
                 props.setProperty(Constants.SCORE_PROP, String.valueOf(score));
@@ -195,7 +189,7 @@ public class StanfordCoreferenceResolver
                 // props.getProperty(Constants.STATES_PROP, DefaultPaths.DEFAULT_DCOREF_STATES),
                 props.setProperty(Constants.STATES_PROP, base + "state-abbreviations.txt");
                 //props.getProperty(Constants.GENDER_NUMBER_PROP, DefaultPaths.DEFAULT_DCOREF_GENDER_NUMBER);
-                props.setProperty(Constants.GENDER_NUMBER_PROP, logicalBase + "gender.map.ser.gz");
+                props.setProperty(Constants.GENDER_NUMBER_PROP, base + "gender.map.ser.gz");
                 // props.getProperty(Constants.COUNTRIES_PROP, DefaultPaths.DEFAULT_DCOREF_COUNTRIES),
                 props.setProperty(Constants.COUNTRIES_PROP, base + "countries");
                 // props.getProperty(Constants.STATES_PROVINCES_PROP, DefaultPaths.DEFAULT_DCOREF_STATES_AND_PROVINCES),
