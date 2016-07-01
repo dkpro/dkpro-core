@@ -198,7 +198,8 @@ public class TcfReader
             outPos.setBegin(aTokens.get(posTokens[0].getID()).getBegin());
             outPos.setEnd(aTokens.get(posTokens[0].getID()).getEnd());
             outPos.setPosValue(value);
-            outPos.setCoarseValue(outPos.getType().getShortName().intern());
+            outPos.setCoarseValue(outPos.getClass().equals(POS.class) ? null
+                    : outPos.getType().getShortName().intern());
             outPos.addToIndexes();
 
             // Set the POS to the token

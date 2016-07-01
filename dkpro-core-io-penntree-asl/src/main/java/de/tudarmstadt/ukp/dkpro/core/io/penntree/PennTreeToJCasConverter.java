@@ -286,7 +286,8 @@ public class PennTreeToJCasConverter
         }
         posAnno.setPosValue(internTags ? aPreterminal.getLabel().intern() : aPreterminal
                 .getLabel());
-        posAnno.setCoarseValue(posAnno.getType().getShortName().intern());
+        posAnno.setCoarseValue(posAnno.getClass().equals(POS.class) ? null
+                : posAnno.getType().getShortName().intern());
         posAnno.addToIndexes();
         return posAnno;
     }

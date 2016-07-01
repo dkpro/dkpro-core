@@ -317,8 +317,8 @@ public class BerkeleyParser
                 POS posAnno = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                         token.getEnd());
                 posAnno.setPosValue(internTags ? typeName.intern() : typeName);
-                posAnno.setCoarseValue(
-                        internTags ? posTag.getShortName() : posTag.getShortName().intern());
+                posAnno.setCoarseValue(posAnno.getClass().equals(POS.class) ? null
+                        : posAnno.getType().getShortName().intern());
                 posAnno.addToIndexes();
                 token.setPos(posAnno);
             }

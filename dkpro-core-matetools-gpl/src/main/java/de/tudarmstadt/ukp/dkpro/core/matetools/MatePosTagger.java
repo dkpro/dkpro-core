@@ -181,7 +181,8 @@ public class MatePosTagger
                 Type posType = posMappingProvider.getTagType(posTags[i]);
                 POS posTag = (POS) cas.createAnnotation(posType, token.getBegin(), token.getEnd());
                 posTag.setPosValue(posTags[i].intern());
-                posTag.setCoarseValue(posType.getShortName().intern());
+                posTag.setCoarseValue(posTag.getClass().equals(POS.class) ? null
+                        : posTag.getType().getShortName().intern());
                 posTag.addToIndexes();
                 token.setPos(posTag);
             }

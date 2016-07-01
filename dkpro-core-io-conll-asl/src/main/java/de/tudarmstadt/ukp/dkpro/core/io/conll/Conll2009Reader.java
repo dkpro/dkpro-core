@@ -241,7 +241,8 @@ public class Conll2009Reader
                     POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
                     pos.setPosValue(word[POS].intern());
-                    pos.setCoarseValue(posTag.getShortName().intern());
+                    pos.setCoarseValue(pos.getClass().equals(POS.class) ? null
+                            : posTag.getShortName().intern());
                     pos.addToIndexes();
                     token.setPos(pos);
                 }

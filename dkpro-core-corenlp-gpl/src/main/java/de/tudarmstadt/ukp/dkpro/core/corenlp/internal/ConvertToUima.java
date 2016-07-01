@@ -76,8 +76,8 @@ public class ConvertToUima
                 POS anno = (POS) aJCas.getCas().createAnnotation(tagType, token.getBegin(),
                         token.getEnd());
                 anno.setPosValue(internStrings ? tag.intern() : tag);
-                anno.setCoarseValue(
-                        internStrings ? tagType.getShortName() : tagType.getShortName().intern());
+                anno.setCoarseValue(anno.getClass().equals(POS.class) ? null
+                        : anno.getType().getShortName().intern());
                 anno.addToIndexes();
                 token.setPos(anno);
             }

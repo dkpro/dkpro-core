@@ -122,7 +122,8 @@ public class LifReader
                             POS posAnno = new POS(aJCas, tokenAnno.getBegin(), tokenAnno
                                     .getEnd());
                             posAnno.setPosValue(pos.intern());
-                            posAnno.setCoarseValue(posAnno.getType().getShortName().intern());
+                            posAnno.setCoarseValue(posAnno.getClass().equals(POS.class) ? null
+                                    : posAnno.getType().getShortName().intern());
                             posAnno.addToIndexes();
                             tokenAnno.setPos(posAnno);
                         }

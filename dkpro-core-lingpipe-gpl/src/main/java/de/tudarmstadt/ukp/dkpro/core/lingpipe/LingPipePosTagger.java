@@ -184,7 +184,8 @@ public class LingPipePosTagger
                 Type posTag = mappingProvider.getTagType(tag);
                 POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
                 posAnno.setPosValue(internTags ? tag.intern() : tag);
-                posAnno.setCoarseValue(posTag.getShortName().intern());
+                posAnno.setCoarseValue(posAnno.getClass().equals(POS.class) ? null
+                        : posAnno.getType().getShortName().intern());
                 posAnno.addToIndexes();
                 t.setPos(posAnno);
             }

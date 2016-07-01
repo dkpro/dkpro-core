@@ -179,7 +179,8 @@ public class Conll2006Writer
                 }
 
                 String cpos = UNUSED;
-                if (writeCPos && (row.token.getPos() != null)) {
+                if (writeCPos && (row.token.getPos() != null)
+                        && row.token.getPos().getCoarseValue() != null) {
                     POS posAnno = row.token.getPos();
                     cpos = posAnno.getCoarseValue();
                 }

@@ -252,7 +252,8 @@ public class TigerXmlReader
                 POS posAnno = (POS) aBuilder.getJCas().getCas().createAnnotation(posType,
                         token.getBegin(), token.getEnd());
                 posAnno.setPosValue(t.pos.intern());
-                posAnno.setCoarseValue(posType.getShortName().intern());
+                posAnno.setCoarseValue(posAnno.getClass().equals(POS.class) ? null
+                        : posAnno.getType().getShortName().intern());
                 posAnno.addToIndexes();
                 token.setPos(posAnno);
             }

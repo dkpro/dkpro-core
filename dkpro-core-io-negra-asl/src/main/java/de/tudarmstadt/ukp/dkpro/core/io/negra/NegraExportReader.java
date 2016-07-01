@@ -571,7 +571,8 @@ public class NegraExportReader
                 POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                         token.getEnd());
                 pos.setPosValue(parts[TOKEN_POS_TAG].intern());
-                pos.setCoarseValue(pos.getType().getShortName().intern());
+                pos.setCoarseValue(pos.getClass().equals(POS.class) ? null
+                        : pos.getType().getShortName().intern());
                 pos.addToIndexes();
                 token.setPos(pos);
             }

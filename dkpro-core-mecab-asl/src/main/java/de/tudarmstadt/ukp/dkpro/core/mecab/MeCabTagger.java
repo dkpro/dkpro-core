@@ -405,7 +405,8 @@ public class MeCabTagger
 			POS curPOS = new POS(aJCas, begin + curSenBegin + curMorphBegin, begin + curSenBegin
 					+ curMorphBegin + curMorph.length());
 			curPOS.setPosValue(curPOSList.get(j));
-			curPOS.setCoarseValue(curPOS.getType().getShortName().intern());
+			curPOS.setCoarseValue(curPOS.getClass().equals(POS.class) ? null
+	                : curPOS.getType().getShortName().intern());
 			curPOS.addToIndexes();
 			String lemmaString = curBaseFormList.get(j);
 			if (lemmaString == null) {
