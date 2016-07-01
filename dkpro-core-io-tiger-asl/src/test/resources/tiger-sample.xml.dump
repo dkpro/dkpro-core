@@ -38,6 +38,7 @@ PUNCT
    begin: 0
    end: 2
    PosValue: "$("
+   coarseValue: "PUNCT"
 [``]
 Lemma
    sofa: _InitialView
@@ -65,6 +66,7 @@ Token
       begin: 0
       end: 2
       PosValue: "$("
+      coarseValue: "PUNCT"
 [Ross Perot wäre vielleicht ein prächtiger Diktator]
 Constituent
    sofa: _InitialView
@@ -104,6 +106,7 @@ PROPN
    begin: 3
    end: 7
    PosValue: "NE"
+   coarseValue: "PROPN"
 [Ross]
 Lemma
    sofa: _InitialView
@@ -144,12 +147,14 @@ Token
       begin: 3
       end: 7
       PosValue: "NE"
+      coarseValue: "PROPN"
 [Perot]
 PROPN
    sofa: _InitialView
    begin: 8
    end: 13
    PosValue: "NE"
+   coarseValue: "PROPN"
 [Perot]
 Lemma
    sofa: _InitialView
@@ -190,12 +195,14 @@ Token
       begin: 8
       end: 13
       PosValue: "NE"
+      coarseValue: "PROPN"
 [wäre]
 VERB
    sofa: _InitialView
    begin: 14
    end: 18
    PosValue: "VAFIN"
+   coarseValue: "VERB"
 [wäre]
 Lemma
    sofa: _InitialView
@@ -229,12 +236,14 @@ Token
       begin: 14
       end: 18
       PosValue: "VAFIN"
+      coarseValue: "VERB"
 [vielleicht]
 ADV
    sofa: _InitialView
    begin: 19
    end: 29
    PosValue: "ADV"
+   coarseValue: "ADV"
 [vielleicht]
 Lemma
    sofa: _InitialView
@@ -268,6 +277,7 @@ Token
       begin: 19
       end: 29
       PosValue: "ADV"
+      coarseValue: "ADV"
 [ein prächtiger Diktator]
 Constituent
    sofa: _InitialView
@@ -294,6 +304,7 @@ DET
    begin: 30
    end: 33
    PosValue: "ART"
+   coarseValue: "DET"
 [ein]
 Lemma
    sofa: _InitialView
@@ -334,12 +345,14 @@ Token
       begin: 30
       end: 33
       PosValue: "ART"
+      coarseValue: "DET"
 [prächtiger]
 ADJ
    sofa: _InitialView
    begin: 34
    end: 44
    PosValue: "ADJA"
+   coarseValue: "ADJ"
 [prächtiger]
 Lemma
    sofa: _InitialView
@@ -380,12 +393,14 @@ Token
       begin: 34
       end: 44
       PosValue: "ADJA"
+      coarseValue: "ADJ"
 [Diktator]
 NOUN
    sofa: _InitialView
    begin: 45
    end: 53
    PosValue: "NN"
+   coarseValue: "NOUN"
 [Diktator]
 Lemma
    sofa: _InitialView
@@ -426,12 +441,14 @@ Token
       begin: 45
       end: 53
       PosValue: "NN"
+      coarseValue: "NOUN"
 ['']
 PUNCT
    sofa: _InitialView
    begin: 54
    end: 56
    PosValue: "$("
+   coarseValue: "PUNCT"
 ['']
 Lemma
    sofa: _InitialView
@@ -459,6 +476,7 @@ Token
       begin: 54
       end: 56
       PosValue: "$("
+      coarseValue: "PUNCT"
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================

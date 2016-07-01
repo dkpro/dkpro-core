@@ -74,6 +74,7 @@
     <a xml:id="a-10" label="PUNCT" ref="node10" as="pos">
         <fs>
             <f name="PosValue" value="."/>
+            <f name="coarseValue" value="PUNCT"/>
         </fs>
     </a>
     <node xml:id="node11">
@@ -90,6 +91,7 @@
     <a xml:id="a-13" label="ADV" ref="node13" as="pos">
         <fs>
             <f name="PosValue" value="RB"/>
+            <f name="coarseValue" value="ADV"/>
         </fs>
     </a>
     <node xml:id="node14">
@@ -102,6 +104,7 @@
     <a xml:id="a-15" label="PROPN" ref="node15" as="pos">
         <fs>
             <f name="PosValue" value="NNP"/>
+            <f name="coarseValue" value="PROPN"/>
         </fs>
     </a>
     <node xml:id="node16">
@@ -114,6 +117,7 @@
     <a xml:id="a-17" label="VERB" ref="node17" as="pos">
         <fs>
             <f name="PosValue" value="VBZ"/>
+            <f name="coarseValue" value="VERB"/>
         </fs>
     </a>
     <node xml:id="node18">
@@ -126,6 +130,7 @@
     <a xml:id="a-19" label="ADP" ref="node19" as="pos">
         <fs>
             <f name="PosValue" value="RP"/>
+            <f name="coarseValue" value="ADP"/>
         </fs>
     </a>
     <node xml:id="node2">
@@ -142,6 +147,7 @@
     <a xml:id="a-21" label="PUNCT" ref="node21" as="pos">
         <fs>
             <f name="PosValue" value=":"/>
+            <f name="coarseValue" value="PUNCT"/>
         </fs>
     </a>
     <node xml:id="node22">
@@ -154,6 +160,7 @@
     <a xml:id="a-23" label="PUNCT" ref="node23" as="pos">
         <fs>
             <f name="PosValue" value="``"/>
+            <f name="coarseValue" value="PUNCT"/>
         </fs>
     </a>
     <node xml:id="node24">
@@ -166,6 +173,7 @@
     <a xml:id="a-25" label="DET" ref="node25" as="pos">
         <fs>
             <f name="PosValue" value="EX"/>
+            <f name="coarseValue" value="DET"/>
         </fs>
     </a>
     <node xml:id="node26">
@@ -178,6 +186,7 @@
     <a xml:id="a-27" label="VERB" ref="node27" as="pos">
         <fs>
             <f name="PosValue" value="VBZ"/>
+            <f name="coarseValue" value="VERB"/>
         </fs>
     </a>
     <node xml:id="node28">
@@ -190,6 +199,7 @@
     <a xml:id="a-29" label="PROPN" ref="node29" as="pos">
         <fs>
             <f name="PosValue" value="NNP"/>
+            <f name="coarseValue" value="PROPN"/>
         </fs>
     </a>
     <node xml:id="node3">
@@ -206,6 +216,7 @@
     <a xml:id="a-31" label="PUNCT" ref="node31" as="pos">
         <fs>
             <f name="PosValue" value=","/>
+            <f name="coarseValue" value="PUNCT"/>
         </fs>
     </a>
     <node xml:id="node32">
@@ -218,6 +229,7 @@
     <a xml:id="a-33" label="PRON" ref="node33" as="pos">
         <fs>
             <f name="PosValue" value="PRP"/>
+            <f name="coarseValue" value="PRON"/>
         </fs>
     </a>
     <node xml:id="node34">
@@ -230,6 +242,7 @@
     <a xml:id="a-35" label="VERB" ref="node35" as="pos">
         <fs>
             <f name="PosValue" value="VBZ"/>
+            <f name="coarseValue" value="VERB"/>
         </fs>
     </a>
     <node xml:id="node36">
@@ -242,6 +255,7 @@
     <a xml:id="a-37" label="ADP" ref="node37" as="pos">
         <fs>
             <f name="PosValue" value="IN"/>
+            <f name="coarseValue" value="ADP"/>
         </fs>
     </a>
     <node xml:id="node38">
@@ -254,6 +268,7 @@
     <a xml:id="a-39" label="DET" ref="node39" as="pos">
         <fs>
             <f name="PosValue" value="EX"/>
+            <f name="coarseValue" value="DET"/>
         </fs>
     </a>
     <node xml:id="node4">
@@ -262,6 +277,7 @@
     <a xml:id="a-4" label="ADV" ref="node4" as="pos">
         <fs>
             <f name="PosValue" value="WRB"/>
+            <f name="coarseValue" value="ADV"/>
         </fs>
     </a>
     <node xml:id="node40">
@@ -274,6 +290,7 @@
     <a xml:id="a-41" label="PUNCT" ref="node41" as="pos">
         <fs>
             <f name="PosValue" value="."/>
+            <f name="coarseValue" value="PUNCT"/>
         </fs>
     </a>
     <node xml:id="node42">
@@ -286,6 +303,7 @@
     <a xml:id="a-43" label="PUNCT" ref="node43" as="pos">
         <fs>
             <f name="PosValue" value="''"/>
+            <f name="coarseValue" value="PUNCT"/>
         </fs>
     </a>
     <node xml:id="node5">
@@ -298,6 +316,7 @@
     <a xml:id="a-6" label="VERB" ref="node6" as="pos">
         <fs>
             <f name="PosValue" value="VBZ"/>
+            <f name="coarseValue" value="VERB"/>
         </fs>
     </a>
     <node xml:id="node7">
@@ -310,6 +329,7 @@
     <a xml:id="a-8" label="PROPN" ref="node8" as="pos">
         <fs>
             <f name="PosValue" value="NNP"/>
+            <f name="coarseValue" value="PROPN"/>
         </fs>
     </a>
     <node xml:id="node9">

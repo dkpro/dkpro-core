@@ -51,6 +51,7 @@ VERB
    begin: 0
    end: 4
    PosValue: "VB"
+   coarseValue: "VERB"
 [Save]
 Lemma
    sofa: _InitialView
@@ -84,6 +85,7 @@ Token
       begin: 0
       end: 4
       PosValue: "VB"
+      coarseValue: "VERB"
 [for this one excursion ,]
 Constituent
    sofa: _InitialView
@@ -109,6 +111,7 @@ ADP
    begin: 5
    end: 8
    PosValue: "IN"
+   coarseValue: "ADP"
 [for]
 Lemma
    sofa: _InitialView
@@ -148,6 +151,7 @@ Token
       begin: 5
       end: 8
       PosValue: "IN"
+      coarseValue: "ADP"
 [this one excursion ,]
 SemArg
    sofa: _InitialView
@@ -184,6 +188,7 @@ DET
    begin: 9
    end: 13
    PosValue: "DT"
+   coarseValue: "DET"
 [this]
 Lemma
    sofa: _InitialView
@@ -229,12 +234,14 @@ Token
       begin: 9
       end: 13
       PosValue: "DT"
+      coarseValue: "DET"
 [one]
 NUM
    sofa: _InitialView
    begin: 14
    end: 17
    PosValue: "CD"
+   coarseValue: "NUM"
 [one]
 Lemma
    sofa: _InitialView
@@ -280,12 +287,14 @@ Token
       begin: 14
       end: 17
       PosValue: "CD"
+      coarseValue: "NUM"
 [excursion]
 NOUN
    sofa: _InitialView
    begin: 18
    end: 27
    PosValue: "NN"
+   coarseValue: "NOUN"
 [excursion]
 Lemma
    sofa: _InitialView
@@ -331,6 +340,7 @@ Token
       begin: 18
       end: 27
       PosValue: "NN"
+      coarseValue: "NOUN"
 [excursion]
 SemPred
    sofa: _InitialView
@@ -402,6 +412,7 @@ PRON
    begin: 30
    end: 32
    PosValue: "PRP"
+   coarseValue: "PRON"
 [he]
 Lemma
    sofa: _InitialView
@@ -429,6 +440,7 @@ Token
       begin: 30
       end: 32
       PosValue: "PRP"
+      coarseValue: "PRON"
 [he]
 SemArg
    sofa: _InitialView
@@ -485,6 +497,7 @@ VERB
    begin: 33
    end: 38
    PosValue: "VBD"
+   coarseValue: "VERB"
 [spent]
 Lemma
    sofa: _InitialView
@@ -518,6 +531,7 @@ Token
       begin: 33
       end: 38
       PosValue: "VBD"
+      coarseValue: "VERB"
 [his days]
 Constituent
    sofa: _InitialView
@@ -543,6 +557,7 @@ PRON
    begin: 39
    end: 42
    PosValue: "PRP$"
+   coarseValue: "PRON"
 [his]
 Lemma
    sofa: _InitialView
@@ -582,6 +597,7 @@ Token
       begin: 39
       end: 42
       PosValue: "PRP$"
+      coarseValue: "PRON"
 [his]
 SemArg
    sofa: _InitialView
@@ -600,6 +616,7 @@ NOUN
    begin: 43
    end: 47
    PosValue: "NNS"
+   coarseValue: "NOUN"
 [days]
 Lemma
    sofa: _InitialView
@@ -639,6 +656,7 @@ Token
       begin: 43
       end: 47
       PosValue: "NNS"
+      coarseValue: "NOUN"
 [days]
 SemArg
    sofa: _InitialView
@@ -701,6 +719,7 @@ ADP
    begin: 48
    end: 50
    PosValue: "IN"
+   coarseValue: "ADP"
 [in]
 Lemma
    sofa: _InitialView
@@ -746,6 +765,7 @@ Token
       begin: 48
       end: 50
       PosValue: "IN"
+      coarseValue: "ADP"
 [long and often solitary walks ,]
 Constituent
    sofa: _InitialView
@@ -820,6 +840,7 @@ ADJ
    begin: 51
    end: 55
    PosValue: "JJ"
+   coarseValue: "ADJ"
 [long]
 Lemma
    sofa: _InitialView
@@ -877,6 +898,7 @@ Token
       begin: 51
       end: 55
       PosValue: "JJ"
+      coarseValue: "ADJ"
 [long]
 SemPred
    sofa: _InitialView
@@ -890,6 +912,7 @@ CONJ
    begin: 56
    end: 59
    PosValue: "CC"
+   coarseValue: "CONJ"
 [and]
 Lemma
    sofa: _InitialView
@@ -947,6 +970,7 @@ Token
       begin: 56
       end: 59
       PosValue: "CC"
+      coarseValue: "CONJ"
 [often solitary]
 SemArg
    sofa: _InitialView
@@ -1001,6 +1025,7 @@ ADV
    begin: 60
    end: 65
    PosValue: "RB"
+   coarseValue: "ADV"
 [often]
 Lemma
    sofa: _InitialView
@@ -1064,12 +1089,14 @@ Token
       begin: 60
       end: 65
       PosValue: "RB"
+      coarseValue: "ADV"
 [solitary]
 ADJ
    sofa: _InitialView
    begin: 66
    end: 74
    PosValue: "JJ"
+   coarseValue: "ADJ"
 [solitary]
 Lemma
    sofa: _InitialView
@@ -1133,12 +1160,14 @@ Token
       begin: 66
       end: 74
       PosValue: "JJ"
+      coarseValue: "ADJ"
 [walks]
 VERB
    sofa: _InitialView
    begin: 75
    end: 80
    PosValue: "VBZ"
+   coarseValue: "VERB"
 [walks]
 Lemma
    sofa: _InitialView
@@ -1190,6 +1219,7 @@ Token
       begin: 75
       end: 80
       PosValue: "VBZ"
+      coarseValue: "VERB"
 [walks]
 SemArg
    sofa: _InitialView
@@ -1265,6 +1295,7 @@ CONJ
    begin: 83
    end: 85
    PosValue: "CC"
+   coarseValue: "CONJ"
 [or]
 Lemma
    sofa: _InitialView
@@ -1304,6 +1335,7 @@ Token
       begin: 83
       end: 85
       PosValue: "CC"
+      coarseValue: "CONJ"
 [in chatting with a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1335,6 +1367,7 @@ ADP
    begin: 86
    end: 88
    PosValue: "IN"
+   coarseValue: "ADP"
 [in]
 Lemma
    sofa: _InitialView
@@ -1380,6 +1413,7 @@ Token
       begin: 86
       end: 88
       PosValue: "IN"
+      coarseValue: "ADP"
 [chatting with a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1417,6 +1451,7 @@ VERB
    begin: 89
    end: 97
    PosValue: "VBG"
+   coarseValue: "VERB"
 [chatting]
 Lemma
    sofa: _InitialView
@@ -1468,6 +1503,7 @@ Token
       begin: 89
       end: 97
       PosValue: "VBG"
+      coarseValue: "VERB"
 [chatting]
 SemPred
    sofa: _InitialView
@@ -1523,6 +1559,7 @@ ADP
    begin: 98
    end: 102
    PosValue: "IN"
+   coarseValue: "ADP"
 [with]
 Lemma
    sofa: _InitialView
@@ -1580,6 +1617,7 @@ Token
       begin: 98
       end: 102
       PosValue: "IN"
+      coarseValue: "ADP"
 [a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1678,6 +1716,7 @@ DET
    begin: 103
    end: 104
    PosValue: "DT"
+   coarseValue: "DET"
 [a]
 Lemma
    sofa: _InitialView
@@ -1747,12 +1786,14 @@ Token
       begin: 103
       end: 104
       PosValue: "DT"
+      coarseValue: "DET"
 [number]
 NOUN
    sofa: _InitialView
    begin: 105
    end: 111
    PosValue: "NN"
+   coarseValue: "NOUN"
 [number]
 Lemma
    sofa: _InitialView
@@ -1822,6 +1863,7 @@ Token
       begin: 105
       end: 111
       PosValue: "NN"
+      coarseValue: "NOUN"
 [number]
 SemArg
    sofa: _InitialView
@@ -1894,6 +1936,7 @@ ADP
    begin: 112
    end: 114
    PosValue: "IN"
+   coarseValue: "ADP"
 [of]
 Lemma
    sofa: _InitialView
@@ -1963,6 +2006,7 @@ Token
       begin: 112
       end: 114
       PosValue: "IN"
+      coarseValue: "ADP"
 [village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -2085,6 +2129,7 @@ NOUN
    begin: 115
    end: 122
    PosValue: "NN"
+   coarseValue: "NOUN"
 [village]
 Lemma
    sofa: _InitialView
@@ -2166,12 +2211,14 @@ Token
       begin: 115
       end: 122
       PosValue: "NN"
+      coarseValue: "NOUN"
 [gossips]
 NOUN
    sofa: _InitialView
    begin: 123
    end: 130
    PosValue: "NNS"
+   coarseValue: "NOUN"
 [gossips]
 Lemma
    sofa: _InitialView
@@ -2253,6 +2300,7 @@ Token
       begin: 123
       end: 130
       PosValue: "NNS"
+      coarseValue: "NOUN"
 [whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -2387,6 +2435,7 @@ PRON
    begin: 131
    end: 136
    PosValue: "WP$"
+   coarseValue: "PRON"
 [whose]
 Lemma
    sofa: _InitialView
@@ -2474,12 +2523,14 @@ Token
       begin: 131
       end: 136
       PosValue: "WP$"
+      coarseValue: "PRON"
 [acquaintance]
 NOUN
    sofa: _InitialView
    begin: 137
    end: 149
    PosValue: "NN"
+   coarseValue: "NOUN"
 [acquaintance]
 Lemma
    sofa: _InitialView
@@ -2567,6 +2618,7 @@ Token
       begin: 137
       end: 149
       PosValue: "NN"
+      coarseValue: "NOUN"
 [he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -2640,6 +2692,7 @@ PRON
    begin: 150
    end: 152
    PosValue: "PRP"
+   coarseValue: "PRON"
 [he]
 Lemma
    sofa: _InitialView
@@ -2727,6 +2780,7 @@ Token
       begin: 150
       end: 152
       PosValue: "PRP"
+      coarseValue: "PRON"
 [he]
 SemArg
    sofa: _InitialView
@@ -2818,6 +2872,7 @@ VERB
    begin: 153
    end: 156
    PosValue: "VBD"
+   coarseValue: "VERB"
 [had]
 Lemma
    sofa: _InitialView
@@ -2911,6 +2966,7 @@ Token
       begin: 153
       end: 156
       PosValue: "VBD"
+      coarseValue: "VERB"
 [cultivated .]
 Constituent
    sofa: _InitialView
@@ -2996,6 +3052,7 @@ VERB
    begin: 157
    end: 167
    PosValue: "VBN"
+   coarseValue: "VERB"
 [cultivated]
 Lemma
    sofa: _InitialView
@@ -3095,6 +3152,7 @@ Token
       begin: 157
       end: 167
       PosValue: "VBN"
+      coarseValue: "VERB"
 [cultivated]
 SemArg
    sofa: _InitialView
