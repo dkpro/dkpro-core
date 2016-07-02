@@ -20,7 +20,6 @@ package de.tudarmstadt.ukp.dkpro.core.io.negra;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.commons.lang.StringUtils.startsWith;
 import static org.apache.uima.fit.util.JCasUtil.select;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -189,9 +188,9 @@ public class NegraExportReader
     private int TOKEN_COMMENT = 6;
 
     // Fields for a constituent in a sentence
-    private static final int CONSTITUENT_ID = 0;
-    private static final int CONSTITUENT_TYPE = 1;
-    private static final int CONSTITUENT_FUNCTION = 3;
+    private int CONSTITUENT_ID = 0;
+    private int CONSTITUENT_TYPE = 1;
+    private int CONSTITUENT_FUNCTION = 3;
 
     // #FORMAT fields
     private static final int FORMAT_FIELD_NUM = 1;
@@ -470,6 +469,9 @@ public class NegraExportReader
             TOKEN_PARENT_ID = 4;
             TOKEN_SECEDGE = 5;
             TOKEN_COMMENT = 6;
+            CONSTITUENT_ID = 0;
+            CONSTITUENT_TYPE = 1;
+            CONSTITUENT_FUNCTION = 3;
             getLogger().log(Level.INFO, "Corpus format 3 detected - no lemmas");
             break;
         case 4:
@@ -481,6 +483,9 @@ public class NegraExportReader
             TOKEN_PARENT_ID = 5;
             TOKEN_SECEDGE = 6;
             TOKEN_COMMENT = 7;
+            CONSTITUENT_ID = 0;
+            CONSTITUENT_TYPE = 2;
+            CONSTITUENT_FUNCTION = 4;
             getLogger().log(Level.INFO, "Corpus format 4 detected");
             break;
         default:
