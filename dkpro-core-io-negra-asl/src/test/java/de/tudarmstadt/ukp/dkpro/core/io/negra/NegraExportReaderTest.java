@@ -72,6 +72,19 @@ public class NegraExportReaderTest
                 "tueba-sample.export");
 	}
 
+    @Test
+    public void testFormat4WithCoref()
+        throws Exception
+    {
+        testOneWay(
+                createReaderDescription(NegraExportReader.class,
+                        NegraExportReader.PARAM_LANGUAGE, "de",
+                        NegraExportReader.PARAM_ENCODING, "UTF-8",
+                        NegraExportReader.PARAM_READ_PENN_TREE, true), 
+                "format4-with-coref-sample.export.dump", 
+                "format4-with-coref-sample.export");
+    }
+
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
 }

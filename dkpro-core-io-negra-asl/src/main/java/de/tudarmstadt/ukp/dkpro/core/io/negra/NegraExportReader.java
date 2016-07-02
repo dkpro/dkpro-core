@@ -546,10 +546,13 @@ public class NegraExportReader
         // handle tokens
         String line;
         int id = 1;
+        int sentBegin = aBuilder.getPosition();
+        int sentEnd = -1;
         for (line = br.readLine(); startsNotWith(line, "#"); line = br.readLine()) {
             String[] parts = splitLine(line, "\t+");
             // create token
             Token token = aBuilder.add(parts[TOKEN_TEXT], Token.class);
+            sentEnd = token.getEnd();
             aBuilder.add(" ");
             aIdMap.put(aSentenceId+":"+id, token);
 
@@ -581,7 +584,7 @@ public class NegraExportReader
                 pos.addToIndexes();
                 token.setPos(pos);
             }
-
+            
             // create lemma
             if (lemmaEnabled && (TOKEN_LEMMA >= 0)) {
                 Lemma lemma = new Lemma(aJCas, token.getBegin(), token.getEnd());
@@ -595,6 +598,9 @@ public class NegraExportReader
         // handle constituent relations
         Constituent constituent;
         for (; startsNotWith(line, END_OF_SENTENCE); line = br.readLine()) {
+            // Ignore trailing coreferential information in Tüba D/Z
+            line = StringUtils.substringBefore(line, "%%").trim();
+            
             // substring(1) to get rid of leading #
             String[] parts = splitLine(line.substring(1), "\t+");
             // get/create constituent, set type, function
@@ -627,6 +633,10 @@ public class NegraExportReader
         // set all children at the end of the sentence
         setChildren(aJCas, relations);
 
+        // Sanity check
+        assert root.getBegin() == sentBegin;
+        assert root.getEnd() == sentEnd;
+        
         // set sentence annotation
         Sentence sentence = new Sentence(aJCas, root.getBegin(), root.getEnd());
         sentence.addToIndexes(aJCas);

@@ -1,0 +1,20 @@
+#FORMAT 4
+#BOT ORIGIN
+0   S1
+#EOT ORIGIN
+#BOS 0 0 0 0
+A			A			P1	--		HD	500
+B			B			P2	--		HD	501
+C			C			P3	--		--	0
+D		D		P4	--		HD	502
+E			E			P5	--		--	0
+F		F		P6	--		HD	503
+20			20			CARD	--		HD	504
+#500			--			NX	--		-	501
+#501			--			NX	--		--	0
+#502			--			NX	--		HD	506
+#503			--			NX	--		HD	505
+#504			--			NX	--		-	505
+#505			--			NX	--		-	506
+#506			--			NX	--		--	0 %% R=coreferential.XXX:YYY
+#EOS 0
