@@ -28,58 +28,6 @@
   <name>DKPro Core ASL - FlexTag</name>
   <dependencies>
     <dependency>
-      <groupId>org.apache.uima</groupId>
-      <artifactId>uimaj-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.uima</groupId>
-      <artifactId>uimafit-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.dkpro.lab</groupId>
-      <artifactId>dkpro-lab-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.dkpro.tc</groupId>
-      <artifactId>dkpro-tc-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.dkpro.tc</groupId>
-      <artifactId>dkpro-tc-ml</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.dkpro.tc</groupId>
-      <artifactId>dkpro-tc-features</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.dkpro.tc</groupId>
-      <artifactId>dkpro-tc-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.dkpro.tc</groupId>
-      <artifactId>dkpro-tc-ml-crfsuite</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
-    </dependency>
-    <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.io.text-asl</artifactId>
     </dependency>
@@ -110,6 +58,22 @@
       <artifactId>de.tudarmstadt.ukp.dkpro.core.tokit-asl</artifactId>
     </dependency>
     -->
+    <dependency>
+    	<groupId>de.unidue.ltl.flextag</groupId>
+    	<artifactId>de.unidue.ltl.flextag.core</artifactId>
+    	<version>0.1.0</version>
+    </dependency>
+    <dependency>
+    	<groupId>de.unidue.ltl.flextag</groupId>
+    	<artifactId>de.unidue.ltl.flextag.features</artifactId>
+    	<version>0.1.0</version>
+    </dependency>
+    <dependency>
+    	<groupId>de.unidue.ltl.flextag</groupId>
+    	<artifactId>FlexTag</artifactId>
+    	<version>0.1.0</version>
+    	<type>pom</type>
+    </dependency>
   </dependencies>
   <build>
     <pluginManagement>
@@ -133,15 +97,4 @@
       </plugins>
     </pluginManagement>
   </build>
-  <dependencyManagement>
-  	<dependencies>
-  		<dependency>
-  			<groupId>de.unidue.ltl.flextag</groupId>
-  			<artifactId>FlexTag</artifactId>
-  			<version>0.1.0</version>
-  			<type>pom</type>
-  			<scope>import</scope>
-  		</dependency>
-  	</dependencies>
-  </dependencyManagement>
 </project>
