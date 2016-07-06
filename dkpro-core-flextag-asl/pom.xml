@@ -111,17 +111,6 @@
     </dependency>
     -->
   </dependencies>
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.dkpro.tc</groupId>
-        <artifactId>dkpro-tc</artifactId>
-        <version>0.8.0</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
   <build>
     <pluginManagement>
       <plugins>
@@ -144,4 +133,15 @@
       </plugins>
     </pluginManagement>
   </build>
+  <dependencyManagement>
+  	<dependencies>
+  		<dependency>
+  			<groupId>de.unidue.ltl.flextag</groupId>
+  			<artifactId>FlexTag</artifactId>
+  			<version>0.1.0</version>
+  			<type>pom</type>
+  			<scope>import</scope>
+  		</dependency>
+  	</dependencies>
+  </dependencyManagement>
 </project>
