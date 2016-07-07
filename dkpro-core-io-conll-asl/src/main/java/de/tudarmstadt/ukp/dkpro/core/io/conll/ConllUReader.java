@@ -23,6 +23,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
@@ -204,7 +205,9 @@ public class ConllUReader
             
             // Tokens, Lemma, POS
             Int2ObjectMap<Token> tokens = new Int2ObjectOpenHashMap<>();
-            for (String[] word : words) {
+            Iterator<String[]> wordIterator = words.iterator();
+            while (wordIterator.hasNext()) {
+                String[] word = wordIterator.next();
                 if (word[ID].contains("-")) {
                     String[] fragments = word[ID].split("-");
                     surfaceBegin = Integer.valueOf(fragments[0]);
@@ -217,7 +220,7 @@ public class ConllUReader
                 int tokenIdx = Integer.valueOf(word[ID]);
                 Token token = doc.add(word[FORM], Token.class);
                 tokens.put(tokenIdx, token);
-                if (!StringUtils.contains(word[MISC], "SpaceAfter=No")) {
+                if (!StringUtils.contains(word[MISC], "SpaceAfter=No") && wordIterator.hasNext()) {
                     doc.add(" ");
                 }
 

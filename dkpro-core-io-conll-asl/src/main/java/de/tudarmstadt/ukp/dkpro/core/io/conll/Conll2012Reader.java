@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -288,11 +289,15 @@ public class Conll2012Reader
             // Tokens, Lemma, POS
             Map<Integer, Token> tokenById = new HashMap<Integer, Token>();
             List<SemPred> preds = new ArrayList<>();
-            for (String[] word : words) {
+            Iterator<String[]> wordIterator = words.iterator();
+            while (wordIterator.hasNext()) {
+                String[] word = wordIterator.next();
                 // Read token
                 Token token = doc.add(word[FORM], Token.class);
                 tokenById.put(Integer.valueOf(word[ID]), token);
-                doc.add(" ");
+                if (wordIterator.hasNext()) {
+                    doc.add(" ");
+                }
 
                 // Read lemma
                 if (!UNUSED.equals(word[LEMMA]) && readLemma) {

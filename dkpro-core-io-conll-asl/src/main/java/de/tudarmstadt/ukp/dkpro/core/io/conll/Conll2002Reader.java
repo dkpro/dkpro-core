@@ -23,6 +23,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -346,11 +347,16 @@ public class Conll2002Reader
             
             // Tokens, POS
             int i = 0;
-            for (String[] word : words) {
+            Iterator<String[]> wordIterator = words.iterator();
+            while (wordIterator.hasNext()) {
+                String[] word = wordIterator.next();
+                
                 // Read token
                 Token token = doc.add(word[FORM], Token.class);
                 sentenceEnd = token.getEnd();
-                doc.add(" ");
+                if (wordIterator.hasNext()) {
+                    doc.add(" ");
+                }
                 
                 tokens.add(token);
                 namedEntityTags[i] = word[IOB];

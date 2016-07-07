@@ -5,14 +5,14 @@
 DocumentMetaData
    sofa: _InitialView
    begin: 0
-   end: 186
+   end: 185
    language: "de"
    documentTitle: "germeval2014_test.conll"
    documentId: "germeval2014_test.conll"
    isLastSegment: false
 
 CAS-Text:
-Aufgrund seiner Initiative fand 2001/2002 in Stuttgart , Braunschweig und Bonn eine große und publizistisch vielbeachtete Troia-Ausstellung statt , „ Troia - Traum und Wirklichkeit “ . 
+Aufgrund seiner Initiative fand 2001/2002 in Stuttgart , Braunschweig und Bonn eine große und publizistisch vielbeachtete Troia-Ausstellung statt , „ Troia - Traum und Wirklichkeit “ .
 
 [Aufgrund seiner Initiative fand 2001/2002 in Stuttgart , Braunschweig und Bonn eine große und publizistisch vielbeachtete Troia-Ausstellung statt , „ Troia - Traum und Wirklichkeit “ .]
 Sentence

@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -208,11 +209,15 @@ public class Conll2006Reader
 
             // Tokens, Lemma, POS
             Map<Integer, Token> tokens = new HashMap<Integer, Token>();
-            for (String[] word : words) {
+            Iterator<String[]> wordIterator = words.iterator();
+            while (wordIterator.hasNext()) {
+                String[] word = wordIterator.next();
                 // Read token
                 Token token = doc.add(word[FORM], Token.class);
                 tokens.put(Integer.valueOf(word[ID]), token);
-                doc.add(" ");
+                if (wordIterator.hasNext()) {
+                    doc.add(" ");
+                }
 
                 // Read lemma
                 if (!UNUSED.equals(word[LEMMA]) && readLemma) {
