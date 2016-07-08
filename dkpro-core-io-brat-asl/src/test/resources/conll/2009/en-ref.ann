@@ -48,35 +48,35 @@ T24	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 127 136	inflation
 A24	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T24 NN
 T25	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 137 138	.
 A25	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T25 .
-T26	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 140 143	The
+T26	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 139 142	The
 A26	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T26 DT
-T27	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 144 148	most
+T27	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 143 147	most
 A27	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T27 RBS
-T28	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 149 160	troublesome
+T28	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 148 159	troublesome
 A28	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T28 JJ
-T29	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 161 167	report
+T29	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 160 166	report
 A29	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T29 NN
-T30	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 168 171	may
+T30	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 167 170	may
 A30	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T30 MD
-T31	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 172 174	be
+T31	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 171 173	be
 A31	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T31 VB
-T32	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 175 178	the
+T32	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 174 177	the
 A32	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T32 DT
-T33	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 179 185	August
+T33	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 178 184	August
 A33	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T33 NNP
-T34	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 186 197	merchandise
+T34	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 185 196	merchandise
 A34	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T34 NN
-T35	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 198 203	trade
+T35	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 197 202	trade
 A35	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T35 NN
-T36	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 204 211	deficit
+T36	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 203 210	deficit
 A36	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T36 NN
-T37	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 212 215	due
+T37	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 211 214	due
 A37	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T37 JJ
-T38	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 216 219	out
+T38	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 215 218	out
 A38	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T38 IN
-T39	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 220 228	tomorrow
+T39	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 219 227	tomorrow
 A39	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T39 NN
-T40	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 229 230	.
+T40	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 228 229	.
 A40	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T40 .
 T41	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 0 3	The
 A41	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma_value T41 the
@@ -128,35 +128,35 @@ T64	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 127 136	inflation
 A64	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma_value T64 inflation
 T65	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 137 138	.
 A65	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma_value T65 .
-T66	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 140 143	The
+T66	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 139 142	The
 A66	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma_value T66 the
-T67	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 144 148	most
+T67	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 143 147	most
 A67	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma_value T67 most
-T68	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 149 160	troublesome
+T68	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 148 159	troublesome
 A68	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma_value T68 troublesome
-T69	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 161 167	report
+T69	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 160 166	report
 A69	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma_value T69 report
-T70	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 168 171	may
+T70	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 167 170	may
 A70	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma_value T70 may
-T71	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 172 174	be
+T71	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 171 173	be
 A71	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma_value T71 be
-T72	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 175 178	the
+T72	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 174 177	the
 A72	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma_value T72 the
-T73	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 179 185	August
+T73	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 178 184	August
 A73	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma_value T73 august
-T74	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 186 197	merchandise
+T74	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 185 196	merchandise
 A74	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma_value T74 merchandise
-T75	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 198 203	trade
+T75	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 197 202	trade
 A75	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma_value T75 trade
-T76	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 204 211	deficit
+T76	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 203 210	deficit
 A76	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma_value T76 deficit
-T77	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 212 215	due
+T77	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 211 214	due
 A77	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma_value T77 due
-T78	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 216 219	out
+T78	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 215 218	out
 A78	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma_value T78 out
-T79	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 220 228	tomorrow
+T79	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 219 227	tomorrow
 A79	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma_value T79 tomorrow
-T80	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 229 230	.
+T80	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma 228 229	.
 A80	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Lemma_value T80 .
 T81	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 0 3	The
 T82	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 4 11	economy
@@ -183,21 +183,21 @@ T102	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 115 122	housing
 T103	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 123 126	and
 T104	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 127 136	inflation
 T105	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 137 138	.
-T106	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 140 143	The
-T107	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 144 148	most
-T108	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 149 160	troublesome
-T109	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 161 167	report
-T110	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 168 171	may
-T111	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 172 174	be
-T112	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 175 178	the
-T113	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 179 185	August
-T114	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 186 197	merchandise
-T115	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 198 203	trade
-T116	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 204 211	deficit
-T117	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 212 215	due
-T118	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 216 219	out
-T119	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 220 228	tomorrow
-T120	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 229 230	.
+T106	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 139 142	The
+T107	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 143 147	most
+T108	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 148 159	troublesome
+T109	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 160 166	report
+T110	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 167 170	may
+T111	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 171 173	be
+T112	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 174 177	the
+T113	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 178 184	August
+T114	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 185 196	merchandise
+T115	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 197 202	trade
+T116	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 203 210	deficit
+T117	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 211 214	due
+T118	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 215 218	out
+T119	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 219 227	tomorrow
+T120	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 228 229	.
 T121	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 4 11	economy
 A167	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T121 A1
 T122	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 15 26	temperature
@@ -216,22 +216,22 @@ T128	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 81 85	with
 A173	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T128 AM-ADV
 T129	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 95 97	on
 A175	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T129 A1
-T130	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 179 185	August
+T130	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 178 184	August
 A177	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T130 AM-TMP
-T131	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 186 197	merchandise
+T131	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 185 196	merchandise
 A176	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T131 A1
-T132	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 198 203	trade
+T132	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 197 202	trade
 A178	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T132 A1
-T133	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 204 211	deficit
+T133	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 203 210	deficit
 A179	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T133 A2
 T134	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred 15 26	temperature
 T135	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred 35 40	taken
 T136	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred 62 68	points
 T137	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred 86 94	readings
-T138	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred 198 203	trade
-T139	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred 204 211	deficit
+T138	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred 197 202	trade
+T139	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred 203 210	deficit
 T140	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-ROOT 27 31	will
-T141	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-ROOT 168 171	may
+T141	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-dependency-ROOT 167 170	may
 E1	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T81 lemma:T41 pos:T1
 E2	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T82 lemma:T42 pos:T2
 E3	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T83 lemma:T43 pos:T3

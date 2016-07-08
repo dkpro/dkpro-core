@@ -2,7 +2,7 @@
   "@context" : "http://vocab.lappsgrid.org/context-1.0.0.jsonld",
   "metadata" : { },
   "text" : {
-    "@value" : "NEUVOSTO EURATOMIN HANKINTAKESKUKSEN PERUSSÄÄNTÖ EUROOPAN ATOMIENERGIAYHTEISÖN NEUVOSTO , joka ottaa huomioon perustamissopimuksen 54 artiklan , ja ottaa huomioon komission ehdotuksen , ON PÄÄTTÄNYT antaa Euratomin hankintakeskuksen perussäännön seuraavasti : \n1 artikla Nimi ja tarkoitus \n",
+    "@value" : "NEUVOSTO EURATOMIN HANKINTAKESKUKSEN PERUSSÄÄNTÖ EUROOPAN ATOMIENERGIAYHTEISÖN NEUVOSTO , joka ottaa huomioon perustamissopimuksen 54 artiklan , ja ottaa huomioon komission ehdotuksen , ON PÄÄTTÄNYT antaa Euratomin hankintakeskuksen perussäännön seuraavasti :\n1 artikla Nimi ja tarkoitus\n",
     "@language" : "x-unspecified"
   },
   "views" : [ {
@@ -14,8 +14,8 @@
       "@type" : "http://vocab.lappsgrid.org/Sentence"
     }, {
       "id" : "sent-1",
-      "start" : 261,
-      "end" : 288,
+      "start" : 260,
+      "end" : 287,
       "@type" : "http://vocab.lappsgrid.org/Sentence"
     }, {
       "id" : "tok-0",
@@ -280,8 +280,8 @@
       }
     }, {
       "id" : "tok-29",
-      "start" : 261,
-      "end" : 262,
+      "start" : 260,
+      "end" : 261,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
         "pos" : "Num",
@@ -289,8 +289,8 @@
       }
     }, {
       "id" : "tok-30",
-      "start" : 263,
-      "end" : 270,
+      "start" : 262,
+      "end" : 269,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
         "pos" : "N",
@@ -298,8 +298,8 @@
       }
     }, {
       "id" : "tok-31",
-      "start" : 271,
-      "end" : 275,
+      "start" : 270,
+      "end" : 274,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
         "pos" : "N",
@@ -307,8 +307,8 @@
       }
     }, {
       "id" : "tok-32",
-      "start" : 276,
-      "end" : 278,
+      "start" : 275,
+      "end" : 277,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
         "pos" : "CC",
@@ -316,8 +316,8 @@
       }
     }, {
       "id" : "tok-33",
-      "start" : 279,
-      "end" : 288,
+      "start" : 278,
+      "end" : 287,
       "@type" : "http://vocab.lappsgrid.org/Token",
       "features" : {
         "pos" : "N",
@@ -653,8 +653,8 @@
       }
     }, {
       "id" : "depstruct-1",
-      "start" : 261,
-      "end" : 288,
+      "start" : 260,
+      "end" : 287,
       "@type" : "http://vocab.lappsgrid.org/DependencyStructure",
       "features" : {
         "dependencies" : [ "dep-27", "dep-28", "dep-29", "dep-30", "dep-31" ]
