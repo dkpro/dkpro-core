@@ -106,10 +106,17 @@ public class LangDetectLanguageIdentifier
         modelProvider.getResource();
 
         String documentText = aJCas.getDocumentText();
-        
+
         // Unescape text, if Chinese, Arabic and stuff are thrown in as UTF-8 escaped sequence it
         // will lead to an increased error rate
-        String unescapedDocumentText = StringEscapeUtils.unescapeJava(documentText);
+        String unescapedDocumentText = "";
+        try {
+            unescapedDocumentText = StringEscapeUtils.unescapeJava(documentText);
+        }
+        catch (Exception e) {
+            //silently ignore and just do nothing
+            unescapedDocumentText = documentText;
+        }
         String language = detectLanguage(unescapedDocumentText);
 
         aJCas.setDocumentLanguage(language);
