@@ -21,7 +21,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
@@ -106,19 +105,7 @@ public class LangDetectLanguageIdentifier
         modelProvider.getResource();
 
         String documentText = aJCas.getDocumentText();
-
-        // Unescape text, if Chinese, Arabic and stuff are thrown in as UTF-8 escaped sequence it
-        // will lead to an increased error rate
-        String unescapedDocumentText = "";
-        try {
-            unescapedDocumentText = StringEscapeUtils.unescapeJava(documentText);
-        }
-        catch (Exception e) {
-            //silently ignore and just do nothing
-            unescapedDocumentText = documentText;
-        }
-        String language = detectLanguage(unescapedDocumentText);
-
+        String language = detectLanguage(documentText);
         aJCas.setDocumentLanguage(language);
     }
 
