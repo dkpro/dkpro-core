@@ -127,14 +127,14 @@ public class TigerXmlWriter extends JCasFileWriter_ImplBase
         Map<FeatureStructure, TigerNode> nodes = new HashMap<FeatureStructure, TigerNode>();
         
         TigerSentence sentence = new TigerSentence();
-        sentence.id = "s_" + aSentNum;
+        sentence.id = aSentence.getId() != null ? aSentence.getId() : "s_" + aSentNum;
         sentence.graph = new TigerGraph();
         sentence.graph.terminals = new ArrayList<TigerTerminal>();
         
         // Convert the tokens
         for (Token token : selectCovered(Token.class, aSentence)) {
             TigerTerminal terminal = new TigerTerminal();
-            terminal.id = sentence.id + "_" + nodeNum;
+            terminal.id = token.getId() != null ? token.getId() : sentence.id + "_" + nodeNum;
             if (token.getPos() != null) {
                 terminal.pos = token.getPos().getPosValue();
             }

@@ -237,6 +237,7 @@ public class TigerXmlReader
         Map<String, String> tokenIdToTextMap = new HashMap<>();
         for (TigerTerminal t : aSentence.graph.terminals) {
             Token token = aBuilder.add(t.word, Token.class);
+            token.setId(t.id);
             terminals.put(t.id, token);
             tokenIdToTextMap.put(t.id, t.word);
 
@@ -267,6 +268,7 @@ public class TigerXmlReader
         aBuilder.add("\n");
 
         Sentence sentence = new Sentence(aBuilder.getJCas(), sentenceBegin, sentenceEnd);
+        sentence.setId(aSentence.id);
         sentence.addToIndexes();
 
         if (aSentence.graph.root != null) {

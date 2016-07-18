@@ -19,6 +19,7 @@ Sentence
    sofa: _InitialView
    begin: 0
    end: 56
+   id: "s1"
 [`` Ross Perot wäre vielleicht ein prächtiger Diktator '']
 PennTree
    sofa: _InitialView
@@ -67,6 +68,7 @@ Token
       end: 2
       PosValue: "$("
       coarseValue: "PUNCT"
+   id: "s1_1"
 [Ross Perot wäre vielleicht ein prächtiger Diktator]
 Constituent
    sofa: _InitialView
@@ -148,6 +150,7 @@ Token
       end: 7
       PosValue: "NE"
       coarseValue: "PROPN"
+   id: "s1_2"
 [Perot]
 PROPN
    sofa: _InitialView
@@ -196,6 +199,7 @@ Token
       end: 13
       PosValue: "NE"
       coarseValue: "PROPN"
+   id: "s1_3"
 [wäre]
 VERB
    sofa: _InitialView
@@ -237,6 +241,7 @@ Token
       end: 18
       PosValue: "VAFIN"
       coarseValue: "VERB"
+   id: "s1_4"
 [vielleicht]
 ADV
    sofa: _InitialView
@@ -278,6 +283,7 @@ Token
       end: 29
       PosValue: "ADV"
       coarseValue: "ADV"
+   id: "s1_5"
 [ein prächtiger Diktator]
 Constituent
    sofa: _InitialView
@@ -346,6 +352,7 @@ Token
       end: 33
       PosValue: "ART"
       coarseValue: "DET"
+   id: "s1_6"
 [prächtiger]
 ADJ
    sofa: _InitialView
@@ -394,6 +401,7 @@ Token
       end: 44
       PosValue: "ADJA"
       coarseValue: "ADJ"
+   id: "s1_7"
 [Diktator]
 NOUN
    sofa: _InitialView
@@ -442,6 +450,7 @@ Token
       end: 53
       PosValue: "NN"
       coarseValue: "NOUN"
+   id: "s1_8"
 ['']
 PUNCT
    sofa: _InitialView
@@ -477,6 +486,7 @@ Token
       end: 56
       PosValue: "$("
       coarseValue: "PUNCT"
+   id: "s1_9"
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================

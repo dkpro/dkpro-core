@@ -19,6 +19,7 @@ Sentence
    sofa: _InitialView
    begin: 0
    end: 169
+   id: "s115"
 [Save for this one excursion , he spent his days in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated .]
 PennTree
    sofa: _InitialView
@@ -86,6 +87,7 @@ Token
       end: 4
       PosValue: "VB"
       coarseValue: "VERB"
+   id: "s115_0"
 [for this one excursion ,]
 Constituent
    sofa: _InitialView
@@ -152,6 +154,7 @@ Token
       end: 8
       PosValue: "IN"
       coarseValue: "ADP"
+   id: "s115_1"
 [this one excursion ,]
 SemArg
    sofa: _InitialView
@@ -235,6 +238,7 @@ Token
       end: 13
       PosValue: "DT"
       coarseValue: "DET"
+   id: "s115_2"
 [one]
 NUM
    sofa: _InitialView
@@ -288,6 +292,7 @@ Token
       end: 17
       PosValue: "CD"
       coarseValue: "NUM"
+   id: "s115_3"
 [excursion]
 NOUN
    sofa: _InitialView
@@ -341,6 +346,7 @@ Token
       end: 27
       PosValue: "NN"
       coarseValue: "NOUN"
+   id: "s115_4"
 [excursion]
 SemPred
    sofa: _InitialView
@@ -406,6 +412,7 @@ Token
       begin: 28
       end: 29
       PosValue: "PUNC,"
+   id: "s115_5"
 [he]
 PRON
    sofa: _InitialView
@@ -441,6 +448,7 @@ Token
       end: 32
       PosValue: "PRP"
       coarseValue: "PRON"
+   id: "s115_6"
 [he]
 SemArg
    sofa: _InitialView
@@ -532,6 +540,7 @@ Token
       end: 38
       PosValue: "VBD"
       coarseValue: "VERB"
+   id: "s115_7"
 [his days]
 Constituent
    sofa: _InitialView
@@ -598,6 +607,7 @@ Token
       end: 42
       PosValue: "PRP$"
       coarseValue: "PRON"
+   id: "s115_8"
 [his]
 SemArg
    sofa: _InitialView
@@ -657,6 +667,7 @@ Token
       end: 47
       PosValue: "NNS"
       coarseValue: "NOUN"
+   id: "s115_9"
 [days]
 SemArg
    sofa: _InitialView
@@ -766,6 +777,7 @@ Token
       end: 50
       PosValue: "IN"
       coarseValue: "ADP"
+   id: "s115_10"
 [long and often solitary walks ,]
 Constituent
    sofa: _InitialView
@@ -899,6 +911,7 @@ Token
       end: 55
       PosValue: "JJ"
       coarseValue: "ADJ"
+   id: "s115_11"
 [long]
 SemPred
    sofa: _InitialView
@@ -971,6 +984,7 @@ Token
       end: 59
       PosValue: "CC"
       coarseValue: "CONJ"
+   id: "s115_12"
 [often solitary]
 SemArg
    sofa: _InitialView
@@ -1090,6 +1104,7 @@ Token
       end: 65
       PosValue: "RB"
       coarseValue: "ADV"
+   id: "s115_13"
 [solitary]
 ADJ
    sofa: _InitialView
@@ -1161,6 +1176,7 @@ Token
       end: 74
       PosValue: "JJ"
       coarseValue: "ADJ"
+   id: "s115_14"
 [walks]
 VERB
    sofa: _InitialView
@@ -1220,6 +1236,7 @@ Token
       end: 80
       PosValue: "VBZ"
       coarseValue: "VERB"
+   id: "s115_15"
 [walks]
 SemArg
    sofa: _InitialView
@@ -1289,6 +1306,7 @@ Token
       begin: 81
       end: 82
       PosValue: "PUNC,"
+   id: "s115_16"
 [or]
 CONJ
    sofa: _InitialView
@@ -1336,6 +1354,7 @@ Token
       end: 85
       PosValue: "CC"
       coarseValue: "CONJ"
+   id: "s115_17"
 [in chatting with a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1414,6 +1433,7 @@ Token
       end: 88
       PosValue: "IN"
       coarseValue: "ADP"
+   id: "s115_18"
 [chatting with a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1504,6 +1524,7 @@ Token
       end: 97
       PosValue: "VBG"
       coarseValue: "VERB"
+   id: "s115_19"
 [chatting]
 SemPred
    sofa: _InitialView
@@ -1618,6 +1639,7 @@ Token
       end: 102
       PosValue: "IN"
       coarseValue: "ADP"
+   id: "s115_20"
 [a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1787,6 +1809,7 @@ Token
       end: 104
       PosValue: "DT"
       coarseValue: "DET"
+   id: "s115_21"
 [number]
 NOUN
    sofa: _InitialView
@@ -1864,6 +1887,7 @@ Token
       end: 111
       PosValue: "NN"
       coarseValue: "NOUN"
+   id: "s115_22"
 [number]
 SemArg
    sofa: _InitialView
@@ -2007,6 +2031,7 @@ Token
       end: 114
       PosValue: "IN"
       coarseValue: "ADP"
+   id: "s115_23"
 [village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -2212,6 +2237,7 @@ Token
       end: 122
       PosValue: "NN"
       coarseValue: "NOUN"
+   id: "s115_24"
 [gossips]
 NOUN
    sofa: _InitialView
@@ -2301,6 +2327,7 @@ Token
       end: 130
       PosValue: "NNS"
       coarseValue: "NOUN"
+   id: "s115_25"
 [whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -2524,6 +2551,7 @@ Token
       end: 136
       PosValue: "WP$"
       coarseValue: "PRON"
+   id: "s115_26"
 [acquaintance]
 NOUN
    sofa: _InitialView
@@ -2619,6 +2647,7 @@ Token
       end: 149
       PosValue: "NN"
       coarseValue: "NOUN"
+   id: "s115_27"
 [he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -2781,6 +2810,7 @@ Token
       end: 152
       PosValue: "PRP"
       coarseValue: "PRON"
+   id: "s115_28"
 [he]
 SemArg
    sofa: _InitialView
@@ -2967,6 +2997,7 @@ Token
       end: 156
       PosValue: "VBD"
       coarseValue: "VERB"
+   id: "s115_29"
 [cultivated .]
 Constituent
    sofa: _InitialView
@@ -3153,6 +3184,7 @@ Token
       end: 167
       PosValue: "VBN"
       coarseValue: "VERB"
+   id: "s115_30"
 [cultivated]
 SemArg
    sofa: _InitialView
@@ -3263,6 +3295,7 @@ Token
       begin: 168
       end: 169
       PosValue: "PUNC."
+   id: "s115_31"
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================
