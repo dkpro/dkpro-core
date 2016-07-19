@@ -28,6 +28,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.cas.TOP;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import java.io.BufferedReader;
@@ -37,6 +38,8 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 /**
  * Annotate phrases in a sentence. Depending on the provided unigrams and the threshold, these
@@ -168,6 +171,9 @@ public class PhraseAnnotator
         catch (FeaturePathException e) {
             throw new AnalysisEngineProcessException(e);
         }
+
+        /* remove existing phrases */
+        select(aJCas, LexicalPhrase.class).forEach(TOP::removeFromIndexes);
 
         for (LexicalPhrase[] sequence : sequences) {
         /* iterate over sequences in document */

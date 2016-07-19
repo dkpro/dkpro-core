@@ -25,7 +25,6 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -72,7 +71,6 @@ public class FrequencyCounterTest
                 Files.lines(targetFile.toPath()).sorted().toArray());
     }
 
-    @Ignore
     @Test
     public void testCountSortedAlphabetically()
             throws Exception
@@ -80,7 +78,8 @@ public class FrequencyCounterTest
         int minCount = 1;
 
         File targetFile = new File(DkproTestContext.get().getTestOutputFolder(), "counts.txt");
-        File expectedFile = new File("src/test/resources/phrasedetection/counts.txt");
+        File expectedFile = new File(
+                "src/test/resources/phrasedetection/counts_sorted_alphabetically.txt");
 
         String sentence = "This is a first test that contains a first test example";
         String language = "en";
@@ -96,10 +95,11 @@ public class FrequencyCounterTest
 
         SimplePipeline.runPipeline(reader, segmenter, writer);
 
-        // TODO: test sorting of unigrams and bigrams
+        assertArrayEquals("Alphabetic sorting invalid.",
+                Files.readAllBytes(expectedFile.toPath()),
+                Files.readAllBytes(targetFile.toPath()));
     }
 
-    @Ignore
     @Test
     public void testCountSortedByValue()
             throws Exception
@@ -124,7 +124,29 @@ public class FrequencyCounterTest
 
         assertTrue(targetFile.exists());
 
-        // TODO: test sorting of unigrams and bigrams
+        /* check unigram sorting */
+        double[] unigrams = Files.lines(targetFile.toPath())
+                .filter(line -> !line.equals(FrequencyCounter.NGRAM_SEPARATOR_LINE))
+                .map(line -> line.split(FrequencyCounter.COLUMN_SEPARATOR))
+                .filter(fields -> !fields[0].contains(FrequencyCounter.BIGRAM_SEPARATOR))
+                .map(fields -> fields[1])
+                .mapToDouble(Double::parseDouble)
+                .toArray();
+        for (int i = 0; i < unigrams.length - 1; i++) {
+            assertTrue(unigrams[i] >= unigrams[i + 1]);
+        }
+
+        /* check bigram sorting */
+        double[] bigrams = Files.lines(targetFile.toPath())
+                .filter(line -> !line.equals(FrequencyCounter.NGRAM_SEPARATOR_LINE))
+                .map(line -> line.split(FrequencyCounter.COLUMN_SEPARATOR))
+                .filter(fields -> fields[0].contains(FrequencyCounter.BIGRAM_SEPARATOR))
+                .map(fields -> fields[1])
+                .mapToDouble(Double::parseDouble)
+                .toArray();
+        for (int i = 0; i < bigrams.length - 1; i++) {
+            assertTrue(bigrams[i] >= bigrams[i + 1]);
+        }
     }
 
     @Test(expected = ResourceInitializationException.class)
