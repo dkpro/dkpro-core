@@ -270,6 +270,7 @@
 
 	<target name="en">
 		<antcall target="en-chunker-default"/>
+        <antcall target="en-chunker-perceptron-ixa"/>
 		<antcall target="en-ner-date"/>
 		<antcall target="en-ner-location"/>
 		<antcall target="en-ner-money"/>
