@@ -29,7 +29,7 @@ import org.knallgrau.utils.textcat.TextCategorizer;
  * <p>Detection based on character n-grams. Uses the <a href="http://textcat.sourceforge.net">Java
  * Text Categorizing Library</a> based on a technique by Cavnar and Trenkle.</p>
  * 
- * <p>References:</p>
+ * <h5>References</h5>
  * <ul>
  * <li>Cavnar, W. B. and J. M. Trenkle (1994). N-Gram-Based Text Categorization. 
  * In Proceedings of Third Annual Symposium on Document Analysis and Information Retrieval, 
