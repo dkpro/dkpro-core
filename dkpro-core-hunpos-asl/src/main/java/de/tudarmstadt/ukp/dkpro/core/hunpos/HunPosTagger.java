@@ -54,7 +54,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * Part-of-Speech annotator using HunPos. Requires {@link Sentence}s to be annotated
  * before.
  *
- * <h5>References</h5>
+ * <p><b>References</b></p>
  * <ul>
  * <li>HALÁCSY, Péter; KORNAI, András; ORAVECZ, Csaba. HunPos: an open source trigram tagger. In:
  * Proceedings of the 45th annual meeting of the ACL on interactive poster and demonstration
