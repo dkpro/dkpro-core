@@ -125,10 +125,6 @@ public class AncoraReader
     @ConfigurationParameter(name = PARAM_DROP_SENTENCES_WITH_MISSING_POS, mandatory = true, defaultValue="false")
     protected boolean dropSentencesMissingPosTags;
     
-    public static final String PARAM_REDUCE_TAGSET = "reduceTagset";
-    @ConfigurationParameter(name = PARAM_REDUCE_TAGSET, mandatory = true, defaultValue="true")
-    protected boolean reduceTagset;
-    
     private MappingProvider posMappingProvider;
 
     @Override
