@@ -65,13 +65,14 @@ public class OpenNlpParserTest
                 "POS", "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "SYM", "TO", "UH", "VB", "VBD",
                 "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB", "``" };
 
-        String[] constituentTags = { "ADJP", "ADV", "ADVP", "AUX", "CONJP", "FRAG", "INTJ", "LST",
-                "NAC", "NEG", "NP", "NX", "O", "PP", "PRN", "PRT", "QP", "S", "SBAR", "SQ", "TYPO",
-                "UCP", "UH", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
+        String[] constituentTags = { "ADJP", "ADV", "ADVP", "AUX", "CONJP", "EDITED", "FRAG",
+                "INTJ", "LST", "NAC", "NEG", "NP", "NX", "O", "PP", "PRN", "PRT", "QP", "RRC", "S",
+                "SBAR", "SBARQ", "SINV", "SQ", "TOP", "TYPO", "UCP", "UH", "VP", "WHADJP", "WHADVP",
+                "WHNP", "WHPP", "X" };
 
         String[] unmappedPos = {};
 
-        String[] unmappedConst = { "ADV", "AUX", "NEG", "O", "TYPO", "UH" };
+        String[] unmappedConst = { "ADV", "AUX", "EDITED", "NEG", "O", "TOP", "TYPO", "UH" };
         
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
