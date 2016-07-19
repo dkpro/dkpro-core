@@ -254,7 +254,7 @@ public class TreeTaggerChunker
                     String flag = fields2.length == 2 ? fields2[0] : "NONE";
                     String chunk = fields2.length == 2 ? fields2[1] : fields2[0];
 
-                    // Start of a new hunk
+                    // Start of a new chunk
                     if (!chunk.equals(openChunk) || "B".equals(flag)) {
                         if (openChunk != null) {
                             // End of previous chunk
