@@ -411,6 +411,29 @@
 		</install-stub-and-upstream-file>
 	</target>
 
+    <target name="en-chunker-perceptron-ixa" depends="download-ixa-chunk-resources">
+        <mkdir dir="target/download"/>
+        <!-- FILE: en-perceptron-conll00.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2016-02-05 | now        | a3b5a46eb9990300337fbfe84ed62ed8
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-chunk-resources/en-perceptron-conll00.bin" 
+            md5="a3b5a46eb9990300337fbfe84ed62ed8"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20160205"
+            metaDataVersion="1"
+            tool="chunker" 
+            language="en" 
+            variant="perceptron-ixa" 
+            extension="bin">
+            <metadata>
+                <entry key="pos.tagset" value="ptb"/>
+                <entry key="chunk.tagset" value="conll2000"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
+
 	<target name="en-parser-chunking">
 		<mkdir dir="target/download"/>
 		<!-- FILE: models-1.5/en-parser-chunking.bin - - - - - - - - - - - - - - - - - - - - - - - -

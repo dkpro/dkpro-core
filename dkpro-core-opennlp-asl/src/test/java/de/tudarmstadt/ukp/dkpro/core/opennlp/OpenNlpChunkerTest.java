@@ -42,7 +42,7 @@ public class OpenNlpChunkerTest
         JCas jcas = runTest("en", null, "We need a very complicated example sentence, which " +
                 "contains as many constituents and dependencies as possible.");
 
-        String[] chunks = new String[] { 
+        String[] chunks = { 
                 "[  0,  2]NC(NP) (We)",
                 "[  3,  7]VC(VP) (need)",
                 "[  8, 43]NC(NP) (a very complicated example sentence)",
@@ -53,16 +53,43 @@ public class OpenNlpChunkerTest
                 "[ 98,100]PC(PP) (as)",
                 "[101,109]ADJC(ADJP) (possible)" };
 
-        String[] chunkTags = new String[] { "ADJP", "ADVP", "CONJP", "INTJ", "LST", "NP", "O",
-                "PP", "PRT", "SBAR", "UCP", "VP" };
+        String[] chunkTags = { "ADJP", "ADVP", "CONJP", "INTJ", "LST", "NP", "PP", "PRT", "SBAR",
+                "UCP", "VP" };
 
-        // String[] unmappedChunk = new String[] { "#", "$", "''", "-LRB-", "-RRB-", "``" };
+        String[] unmappedChunk = {};
 
         assertChunks(chunks, select(jcas, Chunk.class));
         assertTagset(Chunk.class, "conll2000", chunkTags, jcas);
-        // FIXME assertTagsetMapping(Chunk.class, "conll2000", unmappedChunk, jcas);
+        assertTagsetMapping(Chunk.class, "conll2000", unmappedChunk, jcas);
     }
 
+    @Test
+    public void testEnglishIxa()
+        throws Exception
+    {
+        JCas jcas = runTest("en", "perceptron-ixa", "We need a very complicated example sentence, "
+                + "which contains as many constituents and dependencies as possible.");
+
+        String[] chunks = { 
+                "[  0,  2]NC(NP) (We)",
+                "[  3,  7]VC(VP) (need)",
+                "[  8, 43]NC(NP) (a very complicated example sentence)",
+                "[ 45, 50]NC(NP) (which)",
+                "[ 51, 59]VC(VP) (contains)",
+                "[ 60, 62]O(SBAR) (as)",
+                "[ 63, 97]NC(NP) (many constituents and dependencies)",
+                "[ 98,100]PC(PP) (as)",
+                "[101,109]ADJC(ADJP) (possible)" };
+
+        String[] chunkTags = { "ADJP", "ADVP", "CONJP", "INTJ", "LST", "NP", "PP", "PRT", "SBAR",
+                "UCP", "VP" };
+
+        String[] unmappedChunk = {};
+
+        assertChunks(chunks, select(jcas, Chunk.class));
+        assertTagset(Chunk.class, "conll2000", chunkTags, jcas);
+        assertTagsetMapping(Chunk.class, "conll2000", unmappedChunk, jcas);
+    }    
     @Ignore("We don't have these models integrated yet")
     @Test
     public void testPortuguese()
