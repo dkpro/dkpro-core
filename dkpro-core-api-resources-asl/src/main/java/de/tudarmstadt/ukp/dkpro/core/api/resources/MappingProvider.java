@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 
@@ -45,6 +46,10 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
 	private TypeSystem typeSystem;
 	private boolean notFound = false;
 	
+	private Map<String, String> tagMappings;
+
+    private Map<String, HasResourceMetadata> tagMappingImports = new HashMap<>();
+
 	@Override
 	public void configure(CAS aCas) throws AnalysisEngineProcessException
 	{
@@ -53,6 +58,19 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
 		try {
 			notFound = false;
 			super.configure(aCas);
+			
+	        tagMappings = new HashMap<>();
+	        for (Entry<String, HasResourceMetadata> imp : tagMappingImports.entrySet()) {
+    	        String prefix = imp.getKey() + ".tag.map.";
+    	        Properties props = imp.getValue().getResourceMetaData();
+    	        for (String key : props.stringPropertyNames()) {
+    	            if (key.startsWith(prefix)) {
+    	                String originalTag = key.substring(prefix.length());
+    	                String mappedTag = props.getProperty(key);
+    	                tagMappings.put(originalTag, mappedTag);
+    	            }
+    	        }
+	        }
 		}
 		catch (AnalysisEngineProcessException e) {
 		    if(getOverride(LOCATION)!=null){
@@ -100,7 +118,17 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
             }
         }
         else {
-            type = getResource().get(aTag);
+            String tag = aTag;
+            
+            // Apply tag mapping if configured
+            if (tagMappings != null) {
+                String t = tagMappings.get(aTag);
+                if (t != null) {
+                    tag = t;
+                }
+            }
+            
+            type = getResource().get(tag);
             if (type == null) {
                 type = getResource().get("*");
             }
@@ -168,5 +196,10 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
                 url = resolveLocation(redirect, getClassLoader(), null);
             }
         }
+    }
+    
+    public void addTagMappingImport(String aLayerPrefix, HasResourceMetadata aSource)
+    {
+        tagMappingImports.put(aLayerPrefix, aSource);
     }
 }

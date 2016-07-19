@@ -77,6 +77,7 @@ public class MappingProviderFactory
     {
         MappingProvider p = createConstituentMappingProvider(aMappingLocation, null, aLanguage);
         p.addImport(CONSTITUENT_TAGSET, aSource);
+        p.addTagMappingImport("constituent", aSource);
         return p;
     }
     

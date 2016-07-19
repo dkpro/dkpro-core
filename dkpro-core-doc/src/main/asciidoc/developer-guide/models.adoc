@@ -442,3 +442,26 @@ change in the future.
 | 
 
 |====
+
+=== Low-level tagset mapping
+
+Some models require minimalistic tag mapping, e.g. because the tags in the model are upper-case, 
+while the tagset normally uses lower-case tags - or because there is a typo in a tag, etc. 
+For this reason, DKPro Core offers a  way of mapping tags directly in the model metadata provider
+such that DKPro Core components do not see the original model tags, but the fixed mapped tags.
+
+A tag mapping is defined as `<level>.tag.map.<originalTag>=<newTag>`. For example:
+
+.Example tag mapping in properties file
+----
+pos.tag.map.nn=NN
+----
+
+.Example tag mapping in build.xml
+----
+<entry key="pos.tag.map.nn" value="NN"/>
+----
+
+
+NOTE: This functionality is successively added and may not be available for all types of models.
+
