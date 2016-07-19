@@ -279,6 +279,7 @@
 		<antcall target="en-ner-person"/>
 		<antcall target="en-ner-time"/>
 		<antcall target="en-parser-chunking"/>
+        <antcall target="en-parser-chunking-ixa"/>
 		<antcall target="en-sentence-maxent"/>
 		<antcall target="en-tagger-maxent"/>
 		<antcall target="en-tagger-perceptron"/>
@@ -654,6 +655,32 @@
 		</install-stub-and-upstream-file>
 	</target>
 
+    <target name="en-parser-chunking-ixa" depends="download-ixa-parser-resources">
+        <!-- FILE: en-parser-chunking.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2014-04-26 | now        | 47c1b3f4dd7d08e992abdca4e16638ce
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-parser-resources/en-parser-chunking.bin" 
+            md5="47c1b3f4dd7d08e992abdca4e16638ce"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20140426"
+            metaDataVersion="1"
+            tool="parser" 
+            language="en" 
+            variant="chunking-ixa" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="en-parser-chunking.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri"/>
+                <entry key="DC.identifier" value="http://ixa2.si.ehu.es/ixa-pipes/models/parse-models.tgz#en-pos-perceptron-c0-b3.bin"/>
+                <entry key="pos.tagset" value="ptb"/>
+                <entry key="constituent.tagset" value="ptb"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
+    
+
 	<target name="es">
 		<antcall target="es-ner-location"/>
 		<antcall target="es-ner-misc"/>
@@ -665,6 +692,7 @@
 		<antcall target="es-tagger-perceptron"/>
 		<antcall target="es-tagger-perceptron-ixa"/>
 		<antcall target="es-tagger-perceptron-universal"/>
+        <antcall target="es-parser-chunking-ixa"/>
 	</target>
 
 	<target name="es-tagger-maxent">
@@ -906,6 +934,55 @@
 		</install-stub-and-upstream-file>
 	</target>
 	
+    <target name="es-parser-chunking-ixa" depends="download-ixa-parser-resources">
+        <!-- FILE: es-parser-chunking.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2014-04-26 | now        | 42589e408c5ed89beaf8107662bc751c
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-parser-resources/es-parser-chunking.bin" 
+            md5="42589e408c5ed89beaf8107662bc751c"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20140426"
+            metaDataVersion="1"
+            tool="parser" 
+            language="es" 
+            variant="chunking-ixa" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="es-parser-chunking.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri"/>
+                <entry key="DC.identifier" value="http://ixa2.si.ehu.es/ixa-pipes/models/parse-models.tgz#es-pos-perceptron-c0-b3.bin"/>
+                <entry key="pos.tagset" value="ancora-ixa"/>
+                <entry key="constituent.tagset" value="ancora"/>
+                <entry key="constituent.tag.map.CONJ" value="conj"/>
+                <entry key="constituent.tag.map.GERUNDI" value="gerundi"/>
+                <entry key="constituent.tag.map.GRUP.A" value="grup.a"/>
+                <entry key="constituent.tag.map.GRUP.ADV" value="grup.adv"/>
+                <entry key="constituent.tag.map.GRUP.NOM" value="grup.nom"/>
+                <entry key="constituent.tag.map.GRUP.VERB" value="grup.verb"/>
+            	<entry key="constituent.tag.map.INC" value="inc"/>
+                <entry key="constituent.tag.map.INFINITIU" value="infinitiu"/>
+                <entry key="constituent.tag.map.INTERJECCIO" value="interjeccio"/>
+                <entry key="constituent.tag.map.MORFEMA.PRONOMINAL" value="morfema.pronominal"/>
+                <entry key="constituent.tag.map.MORFEMA.VERBAL" value="morfema.verbal"/>
+                <entry key="constituent.tag.map.NEG" value="neg"/>
+            	<!-- entry key="constituent.tag.map.O" -->
+                <entry key="constituent.tag.map.PARTICIPI" value="participi"/>
+                <entry key="constituent.tag.map.PREP" value="prep"/>
+                <entry key="constituent.tag.map.RELATIU" value="relatiu"/>
+            	<!-- entry key="constituent.tag.map.S" -->
+                <entry key="constituent.tag.map.S.A" value="s.a"/>
+            	<entry key="constituent.tag.map.SA" value="sa"/>
+                <entry key="constituent.tag.map.SADV" value="sadv"/>
+                <entry key="constituent.tag.map.SENTENCE" value="sentence"/>
+                <entry key="constituent.tag.map.SN" value="sn"/>
+                <entry key="constituent.tag.map.SP" value="sp"/>
+            	<!-- entry key="constituent.tag.map.TOP" -->
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
+    
 	<target name="it">
 		<antcall target="it-sentence-maxent"/>
 		<antcall target="it-tagger-maxent"/>
@@ -1649,10 +1726,10 @@
     		src="http://ixa2.si.ehu.es/ixa-pipes/models/pos-resources.tgz" 
     		dest="target/download/ixa-pos-resources/pos-resources.tgz" 
     		skipexisting="true"/>
-		<gunzip 
-			src="target/download/ixa-pos-resources/pos-resources.tgz"
-			dest="target/download/ixa-pos-resources/pos-resources.tar"/>
-		<untar src="target/download/ixa-pos-resources/pos-resources.tar" dest="target/download/ixa-pos-resources">
+		<untar 
+			src="target/download/ixa-pos-resources/pos-resources.tgz" 
+			dest="target/download/ixa-pos-resources"
+            compression="gzip">
     		<patternset>
     			<include name="**/*.bin"/>		
 			</patternset>
@@ -1663,6 +1740,32 @@
 		<touch file="target/download/ixa-pos-resources/DONE"/>
 	</target>
 	
+    <target name="-check-download-ixa-parser-resources">
+        <available 
+            property="download-ixa-parser-resources.DONE" 
+            file="target/download/ixa-parser-resources/DONE"/>
+    </target>
+
+    <target name="download-ixa-parser-resources" depends="-check-download-ixa-parser-resources" unless="download-ixa-parser-resources.DONE">
+        <mkdir dir="target/download/ixa-parser-resources"/>
+        <get 
+            src="http://ixa2.si.ehu.es/ixa-pipes/models/parse-models.tgz" 
+            dest="target/download/ixa-parser-resources/parse-models.tgz" 
+            skipexisting="true"/>
+        <untar 
+        	src="target/download/ixa-parser-resources/parse-models.tgz" 
+        	dest="target/download/ixa-parser-resources"
+            compression="gzip">
+            <patternset>
+                <include name="**/*.bin"/>      
+            </patternset>
+            <chainedmapper>
+                <mapper type="flatten"/>
+            </chainedmapper>
+        </untar>
+        <touch file="target/download/ixa-parser-resources/DONE"/>
+    </target>
+
     <target name="-check-download-ixa-chunk-resources">
         <available 
             property="download-ixa-chunk-resources.DONE" 
