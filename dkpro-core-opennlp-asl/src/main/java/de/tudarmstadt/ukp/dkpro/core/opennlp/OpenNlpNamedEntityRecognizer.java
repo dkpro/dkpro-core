@@ -40,7 +40,6 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.Tagset;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
@@ -130,8 +129,10 @@ public class OpenNlpNamedEntityRecognizer
                 TokenNameFinderModel model = new TokenNameFinderModel(aStream);
 
                 if (printTagSet) {
-                    Tagset tsdp = new OpenNlpTagsetDescriptionProvider(
+                    OpenNlpTagsetDescriptionProvider tsdp = new OpenNlpTagsetDescriptionProvider(
                             null, NamedEntity.class, model.getNameFinderModel());
+                    tsdp.setTagSplitPattern("-(?=[^-]*$)");
+                    // FIXME addTagset(tsdp)
                     getContext().getLogger().log(INFO, tsdp.toString());
                 }
 

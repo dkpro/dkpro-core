@@ -39,6 +39,9 @@ public class OpenNlpChunkerTagsetDescriptionProvider
             if (t.startsWith("B-") || t.startsWith("I-")) {
                 tagSet.add(t.substring(2));
             }
+            else if ("O".equals(t)) {
+                // ignore
+            }
             else {
                 tagSet.add(t);
             }
