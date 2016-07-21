@@ -145,6 +145,11 @@
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.commonscodec-asl</artifactId>
 				<version>1.9.0-SNAPSHOT</version>
 			</dependency>
+            <dependency>
+                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                <artifactId>de.tudarmstadt.ukp.dkpro.core.datasets-asl</artifactId>
+                <version>1.9.0-SNAPSHOT</version>
+            </dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.decompounding-asl</artifactId>
@@ -506,6 +511,7 @@
 		<module>../dkpro-core-clearnlp-asl</module>
 		<module>../dkpro-core-cogroo-asl</module>
 		<module>../dkpro-core-commonscodec-asl</module>
+        <module>../dkpro-core-datasets-asl</module>
 		<module>../dkpro-core-decompounding-asl</module>
 		<module>../dkpro-core-dictionaryannotator-asl</module>
         <module>../dkpro-core-flextag-asl</module>		
