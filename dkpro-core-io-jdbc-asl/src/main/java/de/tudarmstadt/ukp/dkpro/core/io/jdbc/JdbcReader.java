@@ -181,6 +181,8 @@ public class JdbcReader
         resultSet = statement.executeQuery(query);
         resultSet.last();
         resultSetSize = resultSet.getRow();
+        getLogger().info(resultSetSize + " documents retrieved.");
+
         resultSet.beforeFirst();
         completed = 0;
 
