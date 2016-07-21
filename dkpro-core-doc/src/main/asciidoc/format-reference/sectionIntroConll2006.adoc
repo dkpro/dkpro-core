@@ -11,3 +11,7 @@ Known corpora in this format:
 * link:http://stp.lingfil.uu.se/%7Enivre/swedish_treebank/[Swedish Treebank] - Swedish
 * link:http://stp.lingfil.uu.se/%7Enivre/research/Talbanken05.html[Talbanken05] - Swedish
 * link:http://stp.lingfil.uu.se/%7Emojgan/UPDT.html[Uppsala Persian Dependency Treebank] - Persian (Farsi)
+* link:http://www.nb.no/sprakbanken/show?serial=sbr-10[Norwegian Dependency Treebank (NDT)] - Norwegian
+* link:https://www.iula.upf.edu/recurs01_tbk_uk.htm[IULA Resources. Corpus & Tools. IULA Spanish LSP Treebank] - Spanish
+* link:http://www.di.unito.it/~tutreeb/treebanks.html[Turin University Treebank] - Italian
+
