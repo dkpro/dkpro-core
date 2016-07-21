@@ -146,6 +146,7 @@
 		<antcall target="de-tagger-maxent"/>
 		<antcall target="de-tagger-perceptron"/>
 		<antcall target="de-chunker-default"/>
+        <antcall target="de-ner-nemgp"/>
 	</target>
 	
 	<target name="de-sentence-maxent">
@@ -242,6 +243,28 @@
 		</install-stub-and-upstream-file>
 	</target>
 	
+    <target name="de-ner-nemgp">
+        <!-- FILE: nemgp_opennlp_01.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2014-10-24 | now        | 699fa598f94cee6d5ff3074b0a6cfdda
+          -->
+        <get 
+            src="http://www.thomas-zastrow.de/nlp/nemgp_opennlp_01.bin" 
+            dest="target/download/nemgp_opennlp_01.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/nemgp_opennlp_01.bin" 
+            md5="699fa598f94cee6d5ff3074b0a6cfdda"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20141024"
+            metaDataVersion="1"
+            tool="ner" 
+            language="de" 
+            variant="nemgp" 
+            extension="bin">
+        </install-stub-and-upstream-file>
+    </target>
+    
 	<target name="de-chunker-default">
 		<!-- This model is quite useless. It only knows of noun phrases -->
 		<!-- FILE: OpenNLP_1.5.1-German-Chunker-TigerCorps07.zip - - - - - - - - - - - - - - - - - -

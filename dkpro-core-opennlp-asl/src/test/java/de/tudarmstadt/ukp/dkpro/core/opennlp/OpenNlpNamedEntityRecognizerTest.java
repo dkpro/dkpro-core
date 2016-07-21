@@ -62,6 +62,23 @@ public class OpenNlpNamedEntityRecognizerTest
         TestRunner.runTest(engine, "en", "SAP where John Doe works is in Germany .");
     }
 
+    @Test
+    public void testGerman()
+        throws Exception
+    {
+        // Run the test pipeline. Note the full stop at the end of a sentence is preceded by a
+        // whitespace. This is necessary for it to be detected as a separate token!
+        JCas jcas = runTest("de", "nemgp", "Markus arbeitet seit 10 Jahren bei SAP in Deutschland .");
+
+        // Define the reference data that we expect to get back from the test
+        String[] namedEntity = { 
+                "[ 35, 38]NamedEntity(org) (SAP)",
+                "[ 42, 53]NamedEntity(loc) (Deutschland)" };
+
+        // Compare the annotations created in the pipeline to the reference data
+        AssertAnnotations.assertNamedEntity(namedEntity, select(jcas, NamedEntity.class));
+    }
+
 // tag::test[]
     
     // Auxiliary method that sets up the analysis engine or pipeline used in the test.
