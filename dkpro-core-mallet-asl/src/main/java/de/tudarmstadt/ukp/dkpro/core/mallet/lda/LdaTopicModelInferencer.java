@@ -189,7 +189,7 @@ public class LdaTopicModelInferencer
                 double[] topicDistribution = inferencer.getSampledDistribution(
                         malletPipe.instanceFrom(instance), nIterations, thinning, burnIn);
 
-                /* convert data type (Mallet output -> Dkpro array) */
+                /* convert data type (Mallet output -> UIMA double array) */
                 DoubleArray da = new DoubleArray(aJCas, topicDistribution.length);
                 da.copyFromArray(topicDistribution, 0, 0, topicDistribution.length);
                 topicDistributionAnnotation.setTopicProportions(da);
