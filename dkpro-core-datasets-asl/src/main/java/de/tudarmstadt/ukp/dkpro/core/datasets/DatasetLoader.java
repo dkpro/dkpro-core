@@ -18,15 +18,19 @@
 package de.tudarmstadt.ukp.dkpro.core.datasets;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.compress.archivers.ArchiveEntry;
@@ -40,45 +44,44 @@ import org.apache.commons.io.input.CloseShieldInputStream;
 public class DatasetLoader
 {
     private File cacheRoot;
-    
+
     public DatasetLoader()
     {
     }
-    
+
     public DatasetLoader(File aCacheRoot)
     {
         setCacheRoot(aCacheRoot);
     }
-    
+
     public void setCacheRoot(File aCacheRoot)
     {
         cacheRoot = aCacheRoot;
     }
-    
+
     public File getCacheRoot()
     {
         return cacheRoot;
     }
-    
+
     public File loadNEMGP()
-            throws IOException
+        throws IOException
     {
         File dataDir = new File(cacheRoot, "NEMGP");
-        
+
         File target = new File(dataDir, "nemgp_trainingdata_01.txt.zip");
-        
-        fetch(target,
-                "http://www.thomas-zastrow.de/nlp/nemgp_trainingdata_01.txt.zip",
-                "FIXME", null);
-        
+
+        fetch(target, "http://www.thomas-zastrow.de/nlp/nemgp_trainingdata_01.txt.zip", "FIXME",
+                null);
+
         return target;
     }
-    
+
     public File loadGermEval2014NER()
-            throws IOException
+        throws IOException
     {
         File dataDir = new File(cacheRoot, "germeval2014ner");
-        
+
         fetch(new File(dataDir, "NER-de-dev.tsv"),
                 "https://sites.google.com/site/germeval2014ner/data/NER-de-dev.tsv?attredirects=0&d=1",
                 "1a427a764c8cbd1bcb64e673da1a7d08", null);
@@ -88,22 +91,68 @@ public class DatasetLoader
         fetch(new File(dataDir, "NER-de-train.tsv"),
                 "https://sites.google.com/site/germeval2014ner/data/NER-de-train.tsv?attredirects=0&d=1",
                 "17fdf2ef0ce76896d575f9a5f4b62e14", null);
-        
+
         return dataDir;
     }
-    
+
+    public File loadEnglishBrownCorpus()
+        throws IOException
+    {
+        File dataDir = new File(cacheRoot, "brownCorpus");
+
+        File target = new File(dataDir, "brown.zip");
+
+        fetch(target,
+                "https://raw.githubusercontent.com/nltk/nltk_data/gh-pages/packages/corpora/brown_tei.zip",
+                "3c7fe43ebf0a4c7ad3ebb63dab027e09", null);
+        unZip(target, dataDir);
+        return dataDir;
+    }
+
+    private void unZip(File target, File dataDir)
+        throws IOException
+    {
+        BufferedOutputStream dest = null;
+        FileInputStream fis = new FileInputStream(target);
+        ZipInputStream zis = new ZipInputStream(new BufferedInputStream(fis));
+        ZipEntry entry;
+        while ((entry = zis.getNextEntry()) != null) {
+            
+            if(entry.isDirectory()){
+                new File(dataDir, entry.getName()).mkdirs();
+                continue;
+            }
+            
+            int count;
+            byte data[] = new byte[1024];
+            // write the files to the disk
+            File file = new File(dataDir, entry.getName());
+            file.createNewFile();
+            FileOutputStream fos = new FileOutputStream(file);
+            dest = new BufferedOutputStream(fos, 1024);
+            while ((count = zis.read(data, 0, 1024)) != -1) {
+                dest.write(data, 0, count);
+            }
+            dest.flush();
+            dest.close();
+        }
+        zis.close();
+
+    }
+
     public File loadUniversalDependencyTreebankV1_3()
         throws IOException
     {
         File dataDir = cacheRoot;
-        
+
         File target = new File(dataDir, "ud-treebanks-v1.3.tgz");
-        
-        fetch(target, "https://lindat.mff.cuni.cz/repository/xmlui/bitstream/handle/11234/"
-                + "1-1699/ud-treebanks-v1.3.tgz?sequence=1&isAllowed=y", 
+
+        fetch(target,
+                "https://lindat.mff.cuni.cz/repository/xmlui/bitstream/handle/11234/"
+                        + "1-1699/ud-treebanks-v1.3.tgz?sequence=1&isAllowed=y",
                 "2ed9122f164ec1a19729983e68a2ce9a", null);
         untar(target, dataDir);
-        
+
         return new File(dataDir, "ud-treebanks-v1.3");
     }
 
@@ -113,7 +162,7 @@ public class DatasetLoader
         if (!aTarget.exists()) {
             aTarget.getParentFile().mkdirs();
             URL source = new URL(aUrl);
-            
+
             MessageDigest md5;
             try {
                 md5 = MessageDigest.getInstance("MD5");
@@ -121,7 +170,7 @@ public class DatasetLoader
             catch (NoSuchAlgorithmException e) {
                 throw new IOException(e);
             }
-            
+
             MessageDigest sha1;
             try {
                 sha1 = MessageDigest.getInstance("SHA1");
@@ -129,7 +178,7 @@ public class DatasetLoader
             catch (NoSuchAlgorithmException e) {
                 throw new IOException(e);
             }
-            
+
             try (InputStream is = source.openStream()) {
                 DigestInputStream md5Filter = new DigestInputStream(is, md5);
                 DigestInputStream sha1Filter = new DigestInputStream(md5Filter, sha1);
@@ -154,21 +203,20 @@ public class DatasetLoader
             }
         }
     }
-    
+
     public static void untar(File aArchive, File aTarget)
         throws FileNotFoundException, IOException
     {
-        try (ArchiveInputStream tarIn = new TarArchiveInputStream(
-                new GzipCompressorInputStream(
-                        new BufferedInputStream(new FileInputStream(aArchive))))) {
+        try (ArchiveInputStream tarIn = new TarArchiveInputStream(new GzipCompressorInputStream(
+                new BufferedInputStream(new FileInputStream(aArchive))))) {
             ArchiveEntry entry = null;
             while ((entry = (TarArchiveEntry) tarIn.getNextEntry()) != null) {
                 File out = new File(aTarget, entry.getName());
-//                if (entry.getName().endsWith("stats.xml")) {
-//                    // Some stats.xml files are actually invalid XML and show as annoying errors
-//                    // in Eclipse.
-//                    continue;
-//                }
+                // if (entry.getName().endsWith("stats.xml")) {
+                // // Some stats.xml files are actually invalid XML and show as annoying errors
+                // // in Eclipse.
+                // continue;
+                // }
                 if (entry.isDirectory()) {
                     FileUtils.forceMkdir(out);
                 }
