@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.mallet.wordembeddings;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelEstimator;
+import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
 import de.tudarmstadt.ukp.dkpro.core.mallet.internal.wordembeddings.WordEmbeddingsUtils;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.WordEmbedding;
 import org.apache.uima.UimaContext;
@@ -71,7 +71,7 @@ public class WordEmbeddingsAnnotator
      * The annotation type to use for the model. Default: {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token}.
      * For lemmas, use {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value}
      */
-    public static final String PARAM_TOKEN_FEATURE_PATH = MalletModelEstimator.PARAM_TOKEN_FEATURE_PATH;
+    public static final String PARAM_TOKEN_FEATURE_PATH = MalletModelTrainer.PARAM_TOKEN_FEATURE_PATH;
     @ConfigurationParameter(name = PARAM_TOKEN_FEATURE_PATH, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
     private String tokenFeaturePath;
 

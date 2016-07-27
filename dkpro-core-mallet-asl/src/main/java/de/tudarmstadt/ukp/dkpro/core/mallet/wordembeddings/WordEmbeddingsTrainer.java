@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.mallet.wordembeddings;
 import cc.mallet.topics.WordEmbeddings;
 import cc.mallet.types.Alphabet;
 import cc.mallet.types.InstanceList;
-import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelEstimator;
+import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 
@@ -36,8 +36,8 @@ import java.io.PrintWriter;
  *
  * @since 1.9.0
  */
-public class WordEmbeddingsEstimator
-        extends MalletModelEstimator
+public class WordEmbeddingsTrainer
+        extends MalletModelTrainer
 {
     /**
      * The number of negative samples to be generated for each token (default: 5).

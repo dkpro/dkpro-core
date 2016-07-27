@@ -29,7 +29,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGene
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelEstimator;
+import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.uima.UimaContext;
@@ -110,7 +110,7 @@ public class LdaTopicModelInferencer
      * The annotation type to use for the model. Default: {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token}.
      * For lemmas, use {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value}
      */
-    public static final String PARAM_TOKEN_FEATURE_PATH = MalletModelEstimator.PARAM_TOKEN_FEATURE_PATH;
+    public static final String PARAM_TOKEN_FEATURE_PATH = MalletModelTrainer.PARAM_TOKEN_FEATURE_PATH;
     @ConfigurationParameter(name = PARAM_TOKEN_FEATURE_PATH, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
     private String tokenFeaturePath;
     /**

@@ -27,6 +27,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGene
 import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.mallet.lda.LdaTopicModelTrainer;
+import de.tudarmstadt.ukp.dkpro.core.mallet.wordembeddings.WordEmbeddingsTrainer;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -43,11 +45,11 @@ import java.util.Locale;
  * can create a model, typically implemented by overriding the {@link JCasFileWriter_ImplBase#collectionProcessComplete()}
  * method.
  *
- * @see de.tudarmstadt.ukp.dkpro.core.mallet.wordembeddings.WordEmbeddingsEstimator
- * @see de.tudarmstadt.ukp.dkpro.core.mallet.lda.LdaTopicModelEstimator
+ * @see WordEmbeddingsTrainer
+ * @see LdaTopicModelTrainer
  * @since 1.9.0
  */
-public abstract class MalletModelEstimator
+public abstract class MalletModelTrainer
         extends JCasFileWriter_ImplBase
 {
     private static final String NONE_LABEL = "X"; // some label has to be set for Mallet instances
@@ -66,7 +68,7 @@ public abstract class MalletModelEstimator
      * The number of threads to use during model estimation.
      * If not set, the number of threads is automatically set by {@link ComponentParameters#computeNumThreads(int)}.
      * <p>
-     * Warning: do not set this to more than 1 when using very small (test) data sets on {@link de.tudarmstadt.ukp.dkpro.core.mallet.wordembeddings.WordEmbeddingsEstimator}!
+     * Warning: do not set this to more than 1 when using very small (test) data sets on {@link WordEmbeddingsTrainer}!
      * This might prevent the process from terminating.
      */
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;

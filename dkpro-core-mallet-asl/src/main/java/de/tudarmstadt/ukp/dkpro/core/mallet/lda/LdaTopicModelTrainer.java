@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.mallet.lda;
 
 import cc.mallet.topics.ParallelTopicModel;
 import cc.mallet.types.Instance;
-import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelEstimator;
+import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 
@@ -35,8 +35,8 @@ import java.io.IOException;
  * Set {@link #PARAM_COVERING_ANNOTATION_TYPE} to define what is considered a document (sentences, paragraphs, etc.).
  */
 
-public class LdaTopicModelEstimator
-        extends MalletModelEstimator
+public class LdaTopicModelTrainer
+        extends MalletModelTrainer
 {
     /**
      * The number of topics to estimate.

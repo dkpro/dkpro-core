@@ -58,10 +58,10 @@ public class LdaTopicModelUtilsTest
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription estimator = createEngineDescription(
-                LdaTopicModelEstimator.class,
-                LdaTopicModelEstimator.PARAM_TARGET_LOCATION, MODEL_FILE,
-                LdaTopicModelEstimator.PARAM_N_ITERATIONS, N_ITERATIONS,
-                LdaTopicModelEstimator.PARAM_N_TOPICS, N_TOPICS);
+                LdaTopicModelTrainer.class,
+                LdaTopicModelTrainer.PARAM_TARGET_LOCATION, MODEL_FILE,
+                LdaTopicModelTrainer.PARAM_N_ITERATIONS, N_ITERATIONS,
+                LdaTopicModelTrainer.PARAM_N_TOPICS, N_TOPICS);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
     }
 
