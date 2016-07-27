@@ -57,22 +57,23 @@ def addFormat(format, kind, pom, spec, clazz) {
 }
 
 def roleNames = [
-    coref: 'Coreference resolver',
-    tagger: 'Part-of-speech tagger',
-    parser: 'Parser',
-    chunker: 'Chunker',
-    segmenter: 'Segmenter',
-    checker: 'Checker',
-    lemmatizer: 'Lemmatizer',
-    srl: 'Semantic role labeler',
-    morph: 'Morphological analyzer',
-    transformer: 'Transformer',
-    stem: 'Stemmer',
-    ner: 'Named Entity Recognizer',
-    langdetect: 'Language Identifier',
-    transcriptor: 'Phonetic Transcriptor',
-    topicmodel: 'Topic Model',
-    other: 'Other' ];
+    coref:          'Coreference resolver',
+    tagger:         'Part-of-speech tagger',
+    parser:         'Parser',
+    chunker:        'Chunker',
+    segmenter:      'Segmenter',
+    checker:        'Checker',
+    lemmatizer:     'Lemmatizer',
+    srl:            'Semantic role labeler',
+    morph:          'Morphological analyzer',
+    transformer:    'Transformer',
+    stem:           'Stemmer',
+    ner:            'Named Entity Recognizer',
+    langdetect:     'Language Identifier',
+    transcriptor:   'Phonetic Transcriptor',
+    topicmodel:     'Topic Model',
+    embeddings:     'Embeddings',
+    other:          'Other' ];
 
 /**
  * Get a short tool type identifier for the given component. This may be used to resolve tagset
@@ -82,7 +83,10 @@ def getTool(componentName, spec) {
     def outputs = spec.analysisEngineMetaData?.capabilities?.collect { 
         it.outputs?.collect { it.name } }.flatten().sort().unique()
     
-    switch (componentName) {
+    def baseComponentName = componentName.endsWith("Trainer") ? 
+        componentName[0..-8] : componentName;
+        
+    switch (baseComponentName) {
     case { 'de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain' in outputs }: 
         return "coref";
     case { 'de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity' in outputs }: 
@@ -121,6 +125,8 @@ def getTool(componentName, spec) {
         return "transcriptor";
     case { it.contains("TopicModel") }:
         return "topicmodel";
+    case { it.contains("Embeddings") }:
+        return "embeddings";
     default:
         return "other";
     }
