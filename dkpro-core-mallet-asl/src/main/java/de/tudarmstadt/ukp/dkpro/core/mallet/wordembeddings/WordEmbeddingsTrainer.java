@@ -20,11 +20,14 @@ package de.tudarmstadt.ukp.dkpro.core.mallet.wordembeddings;
 import cc.mallet.topics.WordEmbeddings;
 import cc.mallet.types.Alphabet;
 import cc.mallet.types.InstanceList;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 
 /**
@@ -98,8 +101,14 @@ public class WordEmbeddingsTrainer
         matrix.train(instanceList, getNumThreads(), numNegativeSamples);
 
         getLogger().info("Writing output to " + getTargetLocation());
+        File targetFile = new File(getTargetLocation());
+        if (targetFile.getParentFile() != null) {
+            targetFile.getParentFile().mkdirs();
+        }
+
         try {
-            PrintWriter printWriter = new PrintWriter(getOutputStream("embeddings", ""));
+            OutputStream outputStream = CompressionUtils.getOutputStream(targetFile);
+            PrintWriter printWriter = new PrintWriter(outputStream);
             matrix.write(printWriter);
             printWriter.close();
         }

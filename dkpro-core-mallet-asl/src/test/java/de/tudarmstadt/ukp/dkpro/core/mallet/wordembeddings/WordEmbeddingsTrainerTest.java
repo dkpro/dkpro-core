@@ -106,7 +106,6 @@ public class WordEmbeddingsTrainerTest
         AnalysisEngineDescription embeddings = createEngineDescription(
                 WordEmbeddingsTrainer.class,
                 WordEmbeddingsTrainer.PARAM_TARGET_LOCATION, embeddingsFile,
-                WordEmbeddingsTrainer.PARAM_SINGULAR_TARGET, true,
                 WordEmbeddingsTrainer.PARAM_OVERWRITE, true,
                 WordEmbeddingsTrainer.PARAM_NUM_THREADS, 1,
                 WordEmbeddingsTrainer.PARAM_COVERING_ANNOTATION_TYPE, coveringType,
@@ -144,7 +143,7 @@ public class WordEmbeddingsTrainerTest
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription embeddings = createEngineDescription(
                 WordEmbeddingsTrainer.class,
-                WordEmbeddingsTrainer.PARAM_TARGET_LOCATION, targetDir,
+                WordEmbeddingsTrainer.PARAM_TARGET_LOCATION, targetFile,
                 WordEmbeddingsTrainer.PARAM_COVERING_ANNOTATION_TYPE, covering,
                 WordEmbeddingsTrainer.PARAM_NUM_THREADS, 1,
                 WordEmbeddingsTrainer.PARAM_COMPRESSION, compressionMethod);
@@ -184,7 +183,6 @@ public class WordEmbeddingsTrainerTest
         AnalysisEngineDescription embeddings = createEngineDescription(
                 WordEmbeddingsTrainer.class,
                 WordEmbeddingsTrainer.PARAM_TARGET_LOCATION, embeddingsFile,
-                WordEmbeddingsTrainer.PARAM_SINGULAR_TARGET, true,
                 WordEmbeddingsTrainer.PARAM_USE_CHARACTERS, true,
                 WordEmbeddingsTrainer.PARAM_EXAMPLE_WORD, "a",
                 WordEmbeddingsTrainer.PARAM_NUM_THREADS, 1,
@@ -219,7 +217,6 @@ public class WordEmbeddingsTrainerTest
         AnalysisEngineDescription embeddings = createEngineDescription(
                 WordEmbeddingsTrainer.class,
                 WordEmbeddingsTrainer.PARAM_TARGET_LOCATION, embeddingsFile,
-                WordEmbeddingsTrainer.PARAM_SINGULAR_TARGET, true,
                 WordEmbeddingsTrainer.PARAM_USE_CHARACTERS, true,
                 WordEmbeddingsTrainer.PARAM_EXAMPLE_WORD, "a",
                 WordEmbeddingsTrainer.PARAM_NUM_THREADS, 1,
