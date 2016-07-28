@@ -17,10 +17,14 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertPOS;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -28,12 +32,37 @@ import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class OpenNlpPosTaggerTest
 {
+    @Test
+    public void simpleExample()
+        throws Exception
+    {
+        // NOTE: This file contains Asciidoc markers for partial inclusion of this file in the 
+        // documentation. Do not remove these tags!
+        // tag::example[]
+        JCas jcas = JCasFactory.createText("This is a test", "en");
+        
+        runPipeline(jcas,
+                createEngineDescription(OpenNlpSegmenter.class),
+                createEngineDescription(OpenNlpPosTagger.class));
+        
+        for (Token t : select(jcas, Token.class)) {
+            System.out.printf("%s %s%n", t.getCoveredText(), t.getPos().getPosValue());
+        }
+        // end::example[]
+        
+        assertPOS(
+                new String[] { "DT", "VBZ", "DT", "NN" },
+                new String[] { "DET", "VERB", "DET", "NOUN" }, 
+                select(jcas, POS.class));
+    }
+    
     @Test
     public void testEnglishAutoLoad()
         throws Exception

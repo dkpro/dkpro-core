@@ -22,10 +22,13 @@ import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertSent
 import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertToken;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
+import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -37,6 +40,36 @@ import de.tudarmstadt.ukp.dkpro.core.io.text.StringReader;
 
 public class WhitespaceTokenizerTest
 {
+    @Test
+    public void simpleExample()
+        throws Exception
+    {
+        // NOTE: This file contains Asciidoc markers for partial inclusion of this file in the 
+        // documentation. Do not remove these tags!
+        // tag::example[]
+        JCas jcas = JCasFactory.createText("This is sentence 1 .\nThis is number 2 .", "en");
+        
+        runPipeline(jcas,
+                createEngineDescription(WhitespaceTokenizer.class));
+        
+        for (Sentence s : select(jcas, Sentence.class)) {
+            for (Token t : selectCovered(Token.class, s)) {
+                System.out.printf("[%s] ", t.getCoveredText());
+            }
+            System.out.println();
+        }
+        // end::example[]
+        
+        assertToken(
+                new String[] { "This", "is", "sentence", "1", ".", "This", "is", "number", "2", "." },
+                select(jcas, Token.class));
+        assertSentence(
+                new String[] { 
+                        "This is sentence 1 .",
+                        "This is number 2 ." },
+                select(jcas, Sentence.class));
+    }
+    
     @Test
     public void test()
         throws ResourceInitializationException
