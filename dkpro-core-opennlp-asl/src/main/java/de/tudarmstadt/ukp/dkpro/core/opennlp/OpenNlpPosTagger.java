@@ -51,7 +51,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionProvider;
 
 /**
- * Part-of-Speech annotator using OpenNLP. Requires {@link Sentence}s to be annotated before.
+ * Part-of-Speech annotator using OpenNLP.
  */
 //NOTE: This file contains Asciidoc markers for partial inclusion of this file in the documentation
 //Do not remove these tags!
