@@ -58,8 +58,8 @@ public class OpenNlpPosTaggerTest
         // end::example[]
         
         assertPOS(
-                new String[] { "DT", "VBZ", "DT", "NN" },
                 new String[] { "DET", "VERB", "DET", "NOUN" }, 
+                new String[] { "DT", "VBZ", "DT", "NN" },
                 select(jcas, POS.class));
     }
     
