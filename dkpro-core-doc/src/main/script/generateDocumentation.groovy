@@ -170,6 +170,8 @@ new File(project.basedir, '..').eachFileRecurse(FILES) {
                 def uniqueName = implName.substring(implName.lastIndexOf('.')+1);
                 def pomFile = locatePom(it);
                 def pom = new XmlParser().parse(pomFile);
+                def module = it.path[project.basedir.path.length()+4..-1];
+                module = module[0..module.indexOf('/')-1]
 
                 if (!implName.contains('$')) {
                     if (implName.endsWith('Writer')) {
@@ -179,9 +181,11 @@ new File(project.basedir, '..').eachFileRecurse(FILES) {
                     else {
                         engines[uniqueName] = [
                             name: uniqueName,
+                            implName: implName,
                             groupId: pom.groupId ? pom.groupId.text() : pom.parent.groupId.text(),
                             artifactId: pom.artifactId.text(),
                             version: pom.version ? pom.version.text() : pom.parent.version.text(),
+                            module: module,
                             pom: pom,
                             spec: spec,
                             role: roleNames[getTool(uniqueName, spec)],

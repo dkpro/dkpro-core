@@ -44,6 +44,20 @@ ${Util.preparePassthrough(engine.spec.metaData.description)}
 ++++
 
 <%
+def testClass = new File(project.basedir, 
+    "../${it.value.module}/src/test/java/${it.value.implName.replaceAll('\\.', '/')}Test.java");
+if (testClass.exists() && testClass.text.contains('tag::example[]')) {
+%>
+.Example using ${it.key}
+[source,java,indent=0]
+----
+include::${testClass}[tags=example]
+----
+<%
+}
+%>
+
+<%
 def paramDecls = engine.spec.metaData.configurationParameterDeclarations
     .configurationParameters.sort { it.name }.groupBy { it.name };
 def paramValues = engine.spec.metaData.configurationParameterSettings
