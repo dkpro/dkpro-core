@@ -17,29 +17,17 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.datasets;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.security.DigestInputStream;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
+import static de.tudarmstadt.ukp.dkpro.core.datasets.internal.Util.fetch;
+import static de.tudarmstadt.ukp.dkpro.core.datasets.internal.Util.untar;
+import static de.tudarmstadt.ukp.dkpro.core.datasets.internal.Util.unzip;
 
-import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.compress.archivers.ArchiveEntry;
-import org.apache.commons.compress.archivers.ArchiveInputStream;
-import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
-import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
-import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.input.CloseShieldInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import de.tudarmstadt.ukp.dkpro.core.datasets.internal.DefaultDataset;
+import de.tudarmstadt.ukp.dkpro.core.datasets.internal.ud.UDDataset;
 
 public class DatasetLoader
 {
@@ -64,35 +52,48 @@ public class DatasetLoader
         return cacheRoot;
     }
 
-    public File loadNEMGP()
+    public Dataset loadNEMGP()
         throws IOException
     {
-        File dataDir = new File(cacheRoot, "NEMGP");
+        DefaultDataset ds = new DefaultDataset("NEMGP", "de");
+        File dataDir = new File(cacheRoot, ds.getName());
 
         File target = new File(dataDir, "nemgp_trainingdata_01.txt.zip");
 
         fetch(target, "http://www.thomas-zastrow.de/nlp/nemgp_trainingdata_01.txt.zip", "FIXME",
                 null);
 
-        return target;
+        unzip(target, dataDir);
+        
+        ds.setTrainingFiles(new File(dataDir, "nemgp_trainingdata_01.txt"));
+        
+        return ds;
     }
 
-    public File loadGermEval2014NER()
+    public Dataset loadGermEval2014NER()
         throws IOException
     {
-        File dataDir = new File(cacheRoot, "germeval2014ner");
-
-        fetch(new File(dataDir, "NER-de-dev.tsv"),
+        DefaultDataset ds = new DefaultDataset("germeval2014ner", "de");
+        File dataDir = new File(cacheRoot, ds.getName());
+        
+        File dev = new File(dataDir, "NER-de-dev.tsv");
+        File train = new File(dataDir, "NER-de-train.tsv");
+        File test = new File(dataDir, "NER-de-test.tsv");
+        ds.setDevelopmentFiles(dev);
+        ds.setTrainingFiles(train);
+        ds.setTestFiles(test);
+        
+        fetch(dev,
                 "https://sites.google.com/site/germeval2014ner/data/NER-de-dev.tsv?attredirects=0&d=1",
                 "1a427a764c8cbd1bcb64e673da1a7d08", null);
-        fetch(new File(dataDir, "NER-de-test.tsv"),
+        fetch(test,
                 "https://sites.google.com/site/germeval2014ner/data/NER-de-test.tsv?attredirects=0&d=1",
                 "e5f80415426eb4c651ac99550fdc8487", null);
-        fetch(new File(dataDir, "NER-de-train.tsv"),
+        fetch(train,
                 "https://sites.google.com/site/germeval2014ner/data/NER-de-train.tsv?attredirects=0&d=1",
                 "17fdf2ef0ce76896d575f9a5f4b62e14", null);
 
-        return dataDir;
+        return ds;
     }
 
     public File loadEnglishBrownCorpus()
@@ -105,42 +106,11 @@ public class DatasetLoader
         fetch(target,
                 "https://raw.githubusercontent.com/nltk/nltk_data/gh-pages/packages/corpora/brown_tei.zip",
                 "3c7fe43ebf0a4c7ad3ebb63dab027e09", null);
-        unZip(target, dataDir);
+        unzip(target, dataDir);
         return dataDir;
     }
 
-    private void unZip(File target, File dataDir)
-        throws IOException
-    {
-        BufferedOutputStream dest = null;
-        FileInputStream fis = new FileInputStream(target);
-        ZipInputStream zis = new ZipInputStream(new BufferedInputStream(fis));
-        ZipEntry entry;
-        while ((entry = zis.getNextEntry()) != null) {
-            
-            if(entry.isDirectory()){
-                new File(dataDir, entry.getName()).mkdirs();
-                continue;
-            }
-            
-            int count;
-            byte data[] = new byte[1024];
-            // write the files to the disk
-            File file = new File(dataDir, entry.getName());
-            file.createNewFile();
-            FileOutputStream fos = new FileOutputStream(file);
-            dest = new BufferedOutputStream(fos, 1024);
-            while ((count = zis.read(data, 0, 1024)) != -1) {
-                dest.write(data, 0, count);
-            }
-            dest.flush();
-            dest.close();
-        }
-        zis.close();
-
-    }
-
-    public File loadUniversalDependencyTreebankV1_3()
+    public List<Dataset> loadUniversalDependencyTreebankV1_3()
         throws IOException
     {
         File dataDir = cacheRoot;
@@ -153,77 +123,10 @@ public class DatasetLoader
                 "2ed9122f164ec1a19729983e68a2ce9a", null);
         untar(target, dataDir);
 
-        return new File(dataDir, "ud-treebanks-v1.3");
-    }
-
-    public static void fetch(File aTarget, String aUrl, String aSha1, String aMd5)
-        throws IOException
-    {
-        if (!aTarget.exists()) {
-            aTarget.getParentFile().mkdirs();
-            URL source = new URL(aUrl);
-
-            MessageDigest md5;
-            try {
-                md5 = MessageDigest.getInstance("MD5");
-            }
-            catch (NoSuchAlgorithmException e) {
-                throw new IOException(e);
-            }
-
-            MessageDigest sha1;
-            try {
-                sha1 = MessageDigest.getInstance("SHA1");
-            }
-            catch (NoSuchAlgorithmException e) {
-                throw new IOException(e);
-            }
-
-            try (InputStream is = source.openStream()) {
-                DigestInputStream md5Filter = new DigestInputStream(is, md5);
-                DigestInputStream sha1Filter = new DigestInputStream(md5Filter, sha1);
-                FileUtils.copyInputStreamToFile(sha1Filter, aTarget);
-
-                if (aMd5 != null) {
-                    String md5Hex = new String(
-                            Hex.encodeHex(md5Filter.getMessageDigest().digest()));
-                    if (!aMd5.equals(md5Hex)) {
-                        throw new IOException(
-                                "MD5 mismatch. Expected [" + aMd5 + "] but got [" + md5Hex + "].");
-                    }
-                }
-                if (aSha1 != null) {
-                    String sha1Hex = new String(
-                            Hex.encodeHex(md5Filter.getMessageDigest().digest()));
-                    if (!aSha1.equals(sha1Hex)) {
-                        throw new IOException("SHA1 mismatch. Expected [" + aSha1 + "] but got ["
-                                + sha1Hex + "].");
-                    }
-                }
-            }
+        List<Dataset> sets = new ArrayList<>();
+        for (File f : new File(dataDir, "ud-treebanks-v1.3").listFiles()) {
+            sets.add(new UDDataset(f));
         }
-    }
-
-    public static void untar(File aArchive, File aTarget)
-        throws FileNotFoundException, IOException
-    {
-        try (ArchiveInputStream tarIn = new TarArchiveInputStream(new GzipCompressorInputStream(
-                new BufferedInputStream(new FileInputStream(aArchive))))) {
-            ArchiveEntry entry = null;
-            while ((entry = (TarArchiveEntry) tarIn.getNextEntry()) != null) {
-                File out = new File(aTarget, entry.getName());
-                // if (entry.getName().endsWith("stats.xml")) {
-                // // Some stats.xml files are actually invalid XML and show as annoying errors
-                // // in Eclipse.
-                // continue;
-                // }
-                if (entry.isDirectory()) {
-                    FileUtils.forceMkdir(out);
-                }
-                else {
-                    FileUtils.copyInputStreamToFile(new CloseShieldInputStream(tarIn), out);
-                }
-            }
-        }
+        return sets;
     }
 }
