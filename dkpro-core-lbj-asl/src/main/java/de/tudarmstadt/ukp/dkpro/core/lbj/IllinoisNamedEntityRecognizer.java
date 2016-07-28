@@ -44,7 +44,7 @@ import edu.illinois.cs.cogcomp.core.utilities.configuration.ResourceManager;
 import edu.illinois.cs.cogcomp.ner.NERAnnotator;
 
 /**
- * OpenNLP name finder wrapper.
+ * Wrapper for the Illinois named entity recognizer from the Cognitive Computation Group (CCG).
  */
 @TypeCapability(
         inputs = {
