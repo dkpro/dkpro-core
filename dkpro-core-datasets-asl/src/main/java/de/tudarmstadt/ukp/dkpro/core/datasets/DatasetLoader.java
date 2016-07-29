@@ -26,6 +26,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
+
 import de.tudarmstadt.ukp.dkpro.core.datasets.internal.DefaultDataset;
 import de.tudarmstadt.ukp.dkpro.core.datasets.internal.ud.UDDataset;
 
@@ -58,13 +60,18 @@ public class DatasetLoader
         DefaultDataset ds = new DefaultDataset("NEMGP", "de");
         File dataDir = new File(cacheRoot, ds.getName());
 
+        File license = new File(dataDir, "LICENSE.txt");
         File target = new File(dataDir, "nemgp_trainingdata_01.txt.zip");
 
+        fetch(license,
+                "http://creativecommons.org/licenses/by-sa/3.0/legalcode.txt",
+                "eacc0b19e3fb8dd12d2e110b24be0452", null);
         fetch(target, "http://www.thomas-zastrow.de/nlp/nemgp_trainingdata_01.txt.zip", "FIXME",
                 null);
 
         unzip(target, dataDir);
         
+        ds.setLicenseFile(license);
         ds.setTrainingFiles(new File(dataDir, "nemgp_trainingdata_01.txt"));
         
         return ds;
@@ -76,13 +83,18 @@ public class DatasetLoader
         DefaultDataset ds = new DefaultDataset("germeval2014ner", "de");
         File dataDir = new File(cacheRoot, ds.getName());
         
+        File license = new File(dataDir, "LICENSE.txt");
         File dev = new File(dataDir, "NER-de-dev.tsv");
         File train = new File(dataDir, "NER-de-train.tsv");
         File test = new File(dataDir, "NER-de-test.tsv");
         ds.setDevelopmentFiles(dev);
         ds.setTrainingFiles(train);
         ds.setTestFiles(test);
+        ds.setLicenseFile(license);
         
+        fetch(license,
+                "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+                "eacc0b19e3fb8dd12d2e110b24be0452", null);
         fetch(dev,
                 "https://sites.google.com/site/germeval2014ner/data/NER-de-dev.tsv?attredirects=0&d=1",
                 "1a427a764c8cbd1bcb64e673da1a7d08", null);
@@ -96,18 +108,24 @@ public class DatasetLoader
         return ds;
     }
 
-    public File loadEnglishBrownCorpus()
+    public Dataset loadEnglishBrownCorpus()
         throws IOException
     {
-        File dataDir = new File(cacheRoot, "brownCorpus");
+        DefaultDataset ds = new DefaultDataset("brownCorpus-TEI-XML", "en");
+        File dataDir = new File(cacheRoot, ds.getName());
 
         File target = new File(dataDir, "brown.zip");
+        File license = new File(dataDir, "LICENSE.txt");
+        ds.setLicenseFile(license);
 
+        FileUtils.writeStringToFile(license, "May be used for non-commercial purposes.", "UTF-8");
+                
         fetch(target,
                 "https://raw.githubusercontent.com/nltk/nltk_data/gh-pages/packages/corpora/brown_tei.zip",
                 "3c7fe43ebf0a4c7ad3ebb63dab027e09", null);
         unzip(target, dataDir);
-        return dataDir;
+        
+        return ds;
     }
 
     public List<Dataset> loadUniversalDependencyTreebankV1_3()
