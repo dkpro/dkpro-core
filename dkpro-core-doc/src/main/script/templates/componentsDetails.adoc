@@ -44,10 +44,20 @@ ${Util.preparePassthrough(engine.spec.metaData.description)}
 ++++
 
 <%
-def testClass = new File(project.basedir, 
-    "../${it.value.module}/src/test/java/${it.value.implName.replaceAll('\\.', '/')}Test.java");
-if (testClass.exists() && testClass.text.contains('tag::example[]')) {
+def testClassPath = "${it.value.module}/src/test/java/${it.value.implName.replaceAll('\\.', '/')}Test.java";
+def testClass = new File(project.basedir, "../${testClassPath}");
+def testClassCode = testClass.exists() ? testClass.text : null;
+if (testClass.exists() && testClassCode.contains('tag::example[]')) {
+    def lines = testClassCode.readLines();
+    def exampleLine = lines.find { it =~ /tag::example\[\]/ };
+    def linenumber = lines.indexOf(exampleLine) + 2;
 %>
+++++
+<div style="float:right">
+<a href="https://github.com/dkpro/dkpro-core/blob/master/${testClassPath}#L${linenumber}">View on GitHub</a><br/>
+</div>
+++++
+
 .Example using ${it.key}
 [source,java,indent=0]
 ----
