@@ -59,6 +59,7 @@ public class WordEmbeddingsAnnotatorTest
             throws ResourceInitializationException
     {
         int expectedEmbeddingsPerToken = 1;
+        // tag::example[]
         int minTokenLength = 3; // minimum token length in test vector file
 
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
@@ -70,6 +71,7 @@ public class WordEmbeddingsAnnotatorTest
         AnalysisEngineDescription inferencer = createEngineDescription(
                 WordEmbeddingsAnnotator.class,
                 WordEmbeddingsAnnotator.PARAM_MODEL_LOCATION, modelFile);
+        //end::example[]
 
         for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter, inferencer)) {
             for (Token token : select(jcas, Token.class)) {

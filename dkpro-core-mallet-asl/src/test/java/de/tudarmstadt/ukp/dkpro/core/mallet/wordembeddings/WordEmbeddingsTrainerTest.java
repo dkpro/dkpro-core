@@ -53,9 +53,11 @@ public class WordEmbeddingsTrainerTest
     public void test()
             throws UIMAException, IOException
     {
+        int expectedLength = 699;
+
+        // tag::example[]
         File text = new File("src/test/resources/txt/*");
         File embeddingsFile = new File(testContext.getTestOutputFolder(), "dummy.vec");
-        int expectedLength = 699;
         int dimensions = 50;
         String coveringType = Sentence.class.getCanonicalName();
 
@@ -71,6 +73,7 @@ public class WordEmbeddingsTrainerTest
                 WordEmbeddingsTrainer.PARAM_NUM_THREADS, 1,
                 WordEmbeddingsTrainer.PARAM_COVERING_ANNOTATION_TYPE, coveringType);
         SimplePipeline.runPipeline(reader, segmenter, embeddings);
+        // end::example[]
 
         List<String> output = Files.readAllLines(embeddingsFile.toPath());
         assertEquals(expectedLength, output.size());

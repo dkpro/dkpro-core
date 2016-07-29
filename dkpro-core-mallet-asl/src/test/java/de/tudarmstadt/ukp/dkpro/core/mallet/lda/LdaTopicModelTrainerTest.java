@@ -43,6 +43,7 @@ public class LdaTopicModelTrainerTest
     public void testEstimator()
             throws Exception
     {
+        // tag::example[]
         int nTopics = 10;
         int nIterations = 50;
         String language = "en";
@@ -59,6 +60,7 @@ public class LdaTopicModelTrainerTest
                 LdaTopicModelTrainer.PARAM_N_ITERATIONS, nIterations,
                 LdaTopicModelTrainer.PARAM_N_TOPICS, nTopics);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
+        // end::example[]
 
         assertTrue(MODEL_FILE.exists());
         ParallelTopicModel model = ParallelTopicModel.read(MODEL_FILE);

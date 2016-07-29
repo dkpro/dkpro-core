@@ -56,6 +56,7 @@ public class LdaTopicModelInferencerTest
         throws UIMAException, IOException
     {
         /* Generate model */
+        // tag::example[]
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
                 TextReader.PARAM_SOURCE_LOCATION, TXT_DIR,
                 TextReader.PARAM_PATTERNS, TXT_FILE_PATTERN,
@@ -68,7 +69,7 @@ public class LdaTopicModelInferencerTest
                 LdaTopicModelTrainer.PARAM_N_ITERATIONS, N_ITERATIONS,
                 LdaTopicModelTrainer.PARAM_N_TOPICS, N_TOPICS);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
-
+        // end::example[]
     }
 
     @Test
