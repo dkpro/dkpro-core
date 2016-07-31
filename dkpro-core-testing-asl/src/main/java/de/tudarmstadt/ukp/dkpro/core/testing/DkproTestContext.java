@@ -71,6 +71,13 @@ public class DkproTestContext extends TestWatcher
         return getClassName() + "-" + getMethodName();
     }
 
+    public File getCacheFolder()
+    {
+        File folder = new File("../cache");
+        folder.mkdirs();
+        return folder;
+    }
+
     public File getTestOutputFolder()
     {
         File folder = new File("target/test-output/" + getTestOutputFolderName());
