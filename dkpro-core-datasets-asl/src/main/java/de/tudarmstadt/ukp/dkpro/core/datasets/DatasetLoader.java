@@ -146,7 +146,11 @@ public class DatasetLoader
         ds.setLicenseFile(license);
 
         FileUtils.writeStringToFile(license,
-                "May be used for non-commercial purposes only (Creative Commons license). Commercial and/or non-open source use of those texts is prohibited",
+                "This corpus was built on data obtained from three different sources. The respective annotations are licensed under the same conditions as the underlying texts:\nWikinews: http://creativecommons.org/licenses/by/2.5/ (Source: https://en.wikinews.org/wiki/Wikinews:Copyright)"
+                        + "\n"
+                        + "WikiVoyage: https://creativecommons.org/licenses/by-sa/3.0/ (Source: https://wikimediafoundation.org/wiki/Terms_of_Use)"
+                        + "\n"
+                        + "WikiHow: http://creativecommons.org/licenses/by-nc-sa/3.0/ (Source: http://www.wikihow.com/wikiHow:Creative-Commons)",
                 "UTF-8");
 
         fetch(target,
