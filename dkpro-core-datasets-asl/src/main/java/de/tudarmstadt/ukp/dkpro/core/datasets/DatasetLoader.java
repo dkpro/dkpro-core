@@ -135,7 +135,7 @@ public class DatasetLoader
     /**
      * Georgetown University Multilayer Corpus https://corpling.uis.georgetown.edu/gum/
      */
-    public Dataset loadEnglishGeorgetownUniversityMultilayerCorpusCorpus()
+    public Dataset loadEnglishGUMCorpus()
         throws IOException
     {
         DefaultDataset ds = new DefaultDataset("GeorgetownUniversityMultilayerCorpus", "en");
