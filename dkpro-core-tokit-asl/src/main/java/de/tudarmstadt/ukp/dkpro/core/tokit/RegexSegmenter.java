@@ -24,6 +24,7 @@ import java.util.regex.Pattern;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
@@ -37,7 +38,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * <p>
  * The default behaviour is to split sentences by a line break and tokens by whitespace.
  */
-public class RegexTokenizer
+@TypeCapability(
+        outputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
+public class RegexSegmenter
     extends SegmenterBase
 {
     private static final String LINEBREAK_PATTERN = "\n";

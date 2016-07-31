@@ -22,6 +22,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
@@ -34,10 +35,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * If {@code PARAM_WRITE_SENTENCES} is set to true, one sentence per line is assumed. Otherwise, no
  * sentences are created.
  * 
- * @deprecated Use {@link RegexTokenizer}
+ * @deprecated Use {@link RegexSegmenter}
  */
+@TypeCapability(
+        outputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
 @Deprecated
-public class WhitespaceTokenizer
+public class WhitespaceSegmenter
     extends SegmenterBase
 {
     // FIXME: this does not match Windows linebreaks ("\r\n")
