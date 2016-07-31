@@ -38,7 +38,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.io.text.StringReader;
 
-public class RegexTokenizerTest
+public class RegexSegmenterTest
 {
     @Test
     public void simpleExample()
@@ -50,11 +50,11 @@ public class RegexTokenizerTest
         JCas jcas = JCasFactory.createText("This is sentence 1 .\nThis is number 2 .", "en");
         
         runPipeline(jcas,
-                createEngineDescription(RegexTokenizer.class,
+                createEngineDescription(RegexSegmenter.class,
                         // Treat each line as a sentence
-                        RegexTokenizer.PARAM_SENTENCE_BOUNDARY_REGEX, "\n",
+                        RegexSegmenter.PARAM_SENTENCE_BOUNDARY_REGEX, "\n",
                         // Use whitespace to detect tokens
-                        RegexTokenizer.PARAM_TOKEN_BOUNDARY_REGEX, "\\s+"));
+                        RegexSegmenter.PARAM_TOKEN_BOUNDARY_REGEX, "\\s+"));
         
         for (Sentence s : select(jcas, Sentence.class)) {
             for (Token t : selectCovered(Token.class, s)) {
@@ -84,7 +84,7 @@ public class RegexTokenizerTest
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
                 StringReader.PARAM_DOCUMENT_TEXT, text,
                 StringReader.PARAM_LANGUAGE, "en");
-        AnalysisEngineDescription segmenter = createEngineDescription(RegexTokenizer.class);
+        AnalysisEngineDescription segmenter = createEngineDescription(RegexSegmenter.class);
 
         for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter)) {
             assertSentence(expectedSentences, select(jcas, Sentence.class));
@@ -105,7 +105,7 @@ public class RegexTokenizerTest
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
                 StringReader.PARAM_DOCUMENT_TEXT, text,
                 StringReader.PARAM_LANGUAGE, "en");
-        AnalysisEngineDescription segmenter = createEngineDescription(RegexTokenizer.class);
+        AnalysisEngineDescription segmenter = createEngineDescription(RegexSegmenter.class);
 
         for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter)) {
             assertSentence(expectedSentences, select(jcas, Sentence.class));
@@ -123,7 +123,7 @@ public class RegexTokenizerTest
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
                 StringReader.PARAM_DOCUMENT_TEXT, text,
                 StringReader.PARAM_LANGUAGE, "en");
-        AnalysisEngineDescription segmenter = createEngineDescription(RegexTokenizer.class);
+        AnalysisEngineDescription segmenter = createEngineDescription(RegexSegmenter.class);
 
         for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter)) {
             assertSentence(expectedSentences, select(jcas, Sentence.class));
@@ -141,7 +141,7 @@ public class RegexTokenizerTest
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
                 StringReader.PARAM_DOCUMENT_TEXT, text,
                 StringReader.PARAM_LANGUAGE, "en");
-        AnalysisEngineDescription segmenter = createEngineDescription(RegexTokenizer.class);
+        AnalysisEngineDescription segmenter = createEngineDescription(RegexSegmenter.class);
 
         for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter)) {
             assertSentence(expectedSentences, select(jcas, Sentence.class));
@@ -162,7 +162,7 @@ public class RegexTokenizerTest
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
                 StringReader.PARAM_DOCUMENT_TEXT, text,
                 StringReader.PARAM_LANGUAGE, "en");
-        AnalysisEngineDescription segmenter = createEngineDescription(RegexTokenizer.class);
+        AnalysisEngineDescription segmenter = createEngineDescription(RegexSegmenter.class);
 
         for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter)) {
             assertSentence(expectedSentences, select(jcas, Sentence.class));
@@ -182,8 +182,8 @@ public class RegexTokenizerTest
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
                 StringReader.PARAM_DOCUMENT_TEXT, text,
                 StringReader.PARAM_LANGUAGE, "en");
-        AnalysisEngineDescription segmenter = createEngineDescription(RegexTokenizer.class,
-                RegexTokenizer.PARAM_TOKEN_BOUNDARY_REGEX, regex);
+        AnalysisEngineDescription segmenter = createEngineDescription(RegexSegmenter.class,
+                RegexSegmenter.PARAM_TOKEN_BOUNDARY_REGEX, regex);
 
         for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter)) {
             assertSentence(expectedSentences, select(jcas, Sentence.class));
