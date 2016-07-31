@@ -28,6 +28,7 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Rule;
 import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
@@ -45,6 +46,30 @@ public class IcuSegmenterTest
         
         String[] tokens = { "滧", "の", "べ滦榥榜ぶ", "廤", "ま", "楺", "獣", "お", "䨣", "み", "ゅ", "騪" };
         
+        AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
+    }
+    
+    @Test
+    public void testJapanese2() throws Exception
+    {
+        JCas jcas = JCasFactory.createText("1993年（平成5年）12月にはユネスコの世界遺産（文化遺産）"
+                + "に登録された[13]。この他、「国宝五城」[注釈 1]や「三名城」、"
+                + "「三大平山城・三大連立式平山城」の一つにも数えられている。", "ja");
+        
+        AnalysisEngine aed = createEngine(IcuSegmenter.class);
+        aed.process(jcas);
+        
+        String[] sentences = { 
+                "1993年（平成5年）12月にはユネスコの世界遺産（文化遺産）に登録された[13]。",
+                "この他、「国宝五城」[注釈 1]や「三名城」、「三大平山城・三大連立式平山城」の一つにも数えられている。" };
+        
+        String[] tokens = { "1993", "年", "（", "平成", "5", "年", "）", "12", "月", "に", "は", "ユネスコ", "の",
+                "世界", "遺産", "（", "文化", "遺産", "）", "に登録された", "[", "13", "]", "。", "この", "他", "、",
+                "「", "国宝", "五城", "」", "[", "注釈", "1", "]", "や", "「", "三", "名城", "」", "、", "「", "三大",
+                "平山", "城", "・", "三大", "連立", "式", "平山", "城", "」", "の", "一つ", "に", "も", "数", "え", "ら",
+                "れ", "て", "いる", "。" };
+       
+        AssertAnnotations.assertSentence(sentences, select(jcas, Sentence.class));
         AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
     }
     
