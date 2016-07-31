@@ -17,17 +17,37 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.icu;
 
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
+import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.fit.factory.JCasFactory;
+import org.apache.uima.jcas.JCas;
 import org.junit.Rule;
 import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.harness.SegmenterHarness;
 
 public class IcuSegmenterTest
 {
+    @Test
+    public void testJapanese() throws Exception
+    {
+        JCas jcas = JCasFactory.createText("滧の べ滦榥榜ぶ 廤ま楺獣お 䨣みゅ騪", "ja");
+        
+        AnalysisEngine aed = createEngine(IcuSegmenter.class);
+        aed.process(jcas);
+        
+        String[] tokens = { "滧", "の", "べ滦榥榜ぶ", "廤", "ま", "楺", "獣", "お", "䨣", "み", "ゅ", "騪" };
+        
+        AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
+    }
+    
     @Test
     public void run()
         throws Throwable
