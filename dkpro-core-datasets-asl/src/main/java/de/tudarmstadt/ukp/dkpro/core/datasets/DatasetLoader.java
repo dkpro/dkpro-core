@@ -161,6 +161,25 @@ public class DatasetLoader
         return ds;
     }
 
+    /**
+     * Deep-sequoia is a corpus of French sentences annotated with both surface and deep syntactic
+     * dependency structures
+     */
+    public Dataset loadFrenchDeepSequoiaCorpus()
+        throws IOException
+    {
+        DefaultDataset ds = new DefaultDataset("Sequoia_0.7", "en");
+        File dataDir = new File(cacheRoot, ds.getName());
+
+        File target = new File(dataDir, "sequoia.tgz");
+
+        fetch(target, "http://talc2.loria.fr/deep-sequoia/sequoia-7.0.tgz",
+                "f2dc51aa1b1cb64d1d1a027e2ad304e0", null);
+        untar(target, dataDir);
+
+        return ds;
+    }
+
     public List<Dataset> loadUniversalDependencyTreebankV1_3()
         throws IOException
     {
