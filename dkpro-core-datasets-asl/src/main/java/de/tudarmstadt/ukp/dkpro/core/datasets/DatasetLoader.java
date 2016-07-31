@@ -63,17 +63,16 @@ public class DatasetLoader
         File license = new File(dataDir, "LICENSE.txt");
         File target = new File(dataDir, "nemgp_trainingdata_01.txt.zip");
 
-        fetch(license,
-                "http://creativecommons.org/licenses/by-sa/3.0/legalcode.txt",
+        fetch(license, "http://creativecommons.org/licenses/by-sa/3.0/legalcode.txt",
                 "eacc0b19e3fb8dd12d2e110b24be0452", null);
         fetch(target, "http://www.thomas-zastrow.de/nlp/nemgp_trainingdata_01.txt.zip", "FIXME",
                 null);
 
         unzip(target, dataDir);
-        
+
         ds.setLicenseFile(license);
         ds.setTrainingFiles(new File(dataDir, "nemgp_trainingdata_01.txt"));
-        
+
         return ds;
     }
 
@@ -82,7 +81,7 @@ public class DatasetLoader
     {
         DefaultDataset ds = new DefaultDataset("germeval2014ner", "de");
         File dataDir = new File(cacheRoot, ds.getName());
-        
+
         File license = new File(dataDir, "LICENSE.txt");
         File dev = new File(dataDir, "NER-de-dev.tsv");
         File train = new File(dataDir, "NER-de-train.tsv");
@@ -91,9 +90,8 @@ public class DatasetLoader
         ds.setTrainingFiles(train);
         ds.setTestFiles(test);
         ds.setLicenseFile(license);
-        
-        fetch(license,
-                "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+
+        fetch(license, "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
                 "eacc0b19e3fb8dd12d2e110b24be0452", null);
         fetch(dev,
                 "https://sites.google.com/site/germeval2014ner/data/NER-de-dev.tsv?attredirects=0&d=1",
@@ -119,12 +117,43 @@ public class DatasetLoader
         ds.setLicenseFile(license);
 
         FileUtils.writeStringToFile(license, "May be used for non-commercial purposes.", "UTF-8");
-                
+
         fetch(target,
                 "https://raw.githubusercontent.com/nltk/nltk_data/gh-pages/packages/corpora/brown_tei.zip",
                 "3c7fe43ebf0a4c7ad3ebb63dab027e09", null);
         unzip(target, dataDir);
-        
+
+        /*
+         * Archive contains the corpus twice. Once as single-fat file and split up in many smaller
+         * files. We delete the fat-file.
+         */
+        new File(dataDir + "/brown_tei", "Corpus.xml").delete();
+
+        return ds;
+    }
+
+    /**
+     * Georgetown University Multilayer Corpus https://corpling.uis.georgetown.edu/gum/
+     */
+    public Dataset loadEnglishGeorgetownUniversityMultilayerCorpusCorpus()
+        throws IOException
+    {
+        DefaultDataset ds = new DefaultDataset("GeorgetownUniversityMultilayerCorpus", "en");
+        File dataDir = new File(cacheRoot, ds.getName());
+
+        File target = new File(dataDir, "gum.zip");
+        File license = new File(dataDir, "LICENSE.txt");
+        ds.setLicenseFile(license);
+
+        FileUtils.writeStringToFile(license,
+                "May be used for non-commercial purposes only (Creative Commons license). Commercial and/or non-open source use of those texts is prohibited",
+                "UTF-8");
+
+        fetch(target,
+                "https://github.com/amir-zeldes/gum/archive/747b4d51b843fa09e3c3f4af58b48820c34fb0ca.zip",
+                "04cceb8a5a0c100eb34875c717d2eb41", null);
+        unzip(target, dataDir);
+
         return ds;
     }
 
