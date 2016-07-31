@@ -48,7 +48,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * Flexible part-of-speech tagger.
  */
-public class FlexTag
+public class FlexTagPosTagger
     extends JCasAnnotator_ImplBase
 {
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -146,7 +146,7 @@ public class FlexTag
         modelProvider = new ModelProviderBase<File>()
         {
             {
-                setContextObject(FlexTag.this);
+                setContextObject(FlexTagPosTagger.this);
 
                 setDefault(ARTIFACT_ID, "${groupId}.flextag-model-${language}-${variant}");
                 setDefault(LOCATION,
