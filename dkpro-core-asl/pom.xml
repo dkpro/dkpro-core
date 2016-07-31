@@ -172,6 +172,11 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                <artifactId>de.tudarmstadt.ukp.dkpro.core.icu-asl</artifactId>
+                <version>1.9.0-SNAPSHOT</version>
+            </dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.aclanthology-asl</artifactId>
 				<version>1.9.0-SNAPSHOT</version>
 			</dependency>
@@ -517,6 +522,7 @@
         <module>../dkpro-core-flextag-asl</module>		
 		<module>../dkpro-core-frequency-asl</module>
 		<module>../dkpro-core-hunpos-asl</module>
+        <module>../dkpro-core-icu-asl</module>
         <module>../dkpro-core-ixa-asl</module>
 		<module>../dkpro-core-jazzy-asl</module>
         <module>../dkpro-core-jtok-asl</module>
