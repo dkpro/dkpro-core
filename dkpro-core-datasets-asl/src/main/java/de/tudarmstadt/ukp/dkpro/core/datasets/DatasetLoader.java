@@ -164,6 +164,7 @@ public class DatasetLoader
     /**
      * Deep-sequoia is a corpus of French sentences annotated with both surface and deep syntactic
      * dependency structures
+     * https://deep-sequoia.inria.fr
      */
     public Dataset loadFrenchDeepSequoiaCorpus()
         throws IOException
