@@ -30,9 +30,9 @@ import java.util.stream.Collectors;
 /**
  * Helper Methods for reading word embeddings.
  */
-public class WordEmbeddingsUtils
+public class MalletEmbeddingsUtils
 {
-    private static final Log LOG = LogFactory.getLog(WordEmbeddingsUtils.class);
+    private static final Log LOG = LogFactory.getLog(MalletEmbeddingsUtils.class);
 
     /**
      * Read an embeddings file in text format.
@@ -86,7 +86,7 @@ public class WordEmbeddingsUtils
         }
 
         Map<String, double[]> embeddings = reader.lines()
-                .map(WordEmbeddingsUtils::lineToEmbedding)
+                .map(MalletEmbeddingsUtils::lineToEmbedding)
                 .collect(Collectors.toMap(Pair::getKey, Pair::getValue));
         reader.close();
 

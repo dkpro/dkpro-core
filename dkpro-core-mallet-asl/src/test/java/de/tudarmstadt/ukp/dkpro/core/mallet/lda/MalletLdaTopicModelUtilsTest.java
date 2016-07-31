@@ -36,7 +36,7 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.junit.Assert.assertEquals;
 
-public class LdaTopicModelUtilsTest
+public class MalletLdaTopicModelUtilsTest
 {
     private static final File MODEL_FILE = new File("target/mallet/model");
     private static final String CAS_DIR = "src/test/resources/txt";
@@ -58,10 +58,10 @@ public class LdaTopicModelUtilsTest
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription estimator = createEngineDescription(
-                LdaTopicModelTrainer.class,
-                LdaTopicModelTrainer.PARAM_TARGET_LOCATION, MODEL_FILE,
-                LdaTopicModelTrainer.PARAM_N_ITERATIONS, N_ITERATIONS,
-                LdaTopicModelTrainer.PARAM_N_TOPICS, N_TOPICS);
+                MalletLdaTopicModelTrainer.class,
+                MalletLdaTopicModelTrainer.PARAM_TARGET_LOCATION, MODEL_FILE,
+                MalletLdaTopicModelTrainer.PARAM_N_ITERATIONS, N_ITERATIONS,
+                MalletLdaTopicModelTrainer.PARAM_N_TOPICS, N_TOPICS);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
     }
 
@@ -70,7 +70,8 @@ public class LdaTopicModelUtilsTest
         throws Exception
     {
         int nWords = 10;
-        List<Map<String, Double>> topWords = LdaTopicModelUtils.getTopWords(MODEL_FILE, nWords,
+        List<Map<String, Double>> topWords = MalletLdaTopicModelUtils
+                .getTopWords(MODEL_FILE, nWords,
                 false);
 
         assertEquals(N_TOPICS, topWords.size());

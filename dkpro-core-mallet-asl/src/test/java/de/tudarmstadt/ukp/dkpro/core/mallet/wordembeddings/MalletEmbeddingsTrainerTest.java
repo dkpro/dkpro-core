@@ -44,7 +44,7 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.junit.Assert.assertTrue;
 
-public class WordEmbeddingsTrainerTest
+public class MalletEmbeddingsTrainerTest
 {
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
@@ -66,12 +66,12 @@ public class WordEmbeddingsTrainerTest
                 TextReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription embeddings = createEngineDescription(
-                WordEmbeddingsTrainer.class,
-                WordEmbeddingsTrainer.PARAM_TARGET_LOCATION, embeddingsFile,
-                WordEmbeddingsTrainer.PARAM_SINGULAR_TARGET, true,
-                WordEmbeddingsTrainer.PARAM_OVERWRITE, true,
-                WordEmbeddingsTrainer.PARAM_NUM_THREADS, 1,
-                WordEmbeddingsTrainer.PARAM_COVERING_ANNOTATION_TYPE, coveringType);
+                MalletEmbeddingsTrainer.class,
+                MalletEmbeddingsTrainer.PARAM_TARGET_LOCATION, embeddingsFile,
+                MalletEmbeddingsTrainer.PARAM_SINGULAR_TARGET, true,
+                MalletEmbeddingsTrainer.PARAM_OVERWRITE, true,
+                MalletEmbeddingsTrainer.PARAM_NUM_THREADS, 1,
+                MalletEmbeddingsTrainer.PARAM_COVERING_ANNOTATION_TYPE, coveringType);
         SimplePipeline.runPipeline(reader, segmenter, embeddings);
         // end::example[]
 
@@ -107,12 +107,12 @@ public class WordEmbeddingsTrainerTest
                 TextReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription embeddings = createEngineDescription(
-                WordEmbeddingsTrainer.class,
-                WordEmbeddingsTrainer.PARAM_TARGET_LOCATION, embeddingsFile,
-                WordEmbeddingsTrainer.PARAM_OVERWRITE, true,
-                WordEmbeddingsTrainer.PARAM_NUM_THREADS, 1,
-                WordEmbeddingsTrainer.PARAM_COVERING_ANNOTATION_TYPE, coveringType,
-                WordEmbeddingsTrainer.PARAM_FILTER_REGEX, filterRegex);
+                MalletEmbeddingsTrainer.class,
+                MalletEmbeddingsTrainer.PARAM_TARGET_LOCATION, embeddingsFile,
+                MalletEmbeddingsTrainer.PARAM_OVERWRITE, true,
+                MalletEmbeddingsTrainer.PARAM_NUM_THREADS, 1,
+                MalletEmbeddingsTrainer.PARAM_COVERING_ANNOTATION_TYPE, coveringType,
+                MalletEmbeddingsTrainer.PARAM_FILTER_REGEX, filterRegex);
         SimplePipeline.runPipeline(reader, segmenter, embeddings);
 
         List<String> output = Files.readAllLines(embeddingsFile.toPath());
@@ -145,11 +145,11 @@ public class WordEmbeddingsTrainerTest
                 TextReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription embeddings = createEngineDescription(
-                WordEmbeddingsTrainer.class,
-                WordEmbeddingsTrainer.PARAM_TARGET_LOCATION, targetFile,
-                WordEmbeddingsTrainer.PARAM_COVERING_ANNOTATION_TYPE, covering,
-                WordEmbeddingsTrainer.PARAM_NUM_THREADS, 1,
-                WordEmbeddingsTrainer.PARAM_COMPRESSION, compressionMethod);
+                MalletEmbeddingsTrainer.class,
+                MalletEmbeddingsTrainer.PARAM_TARGET_LOCATION, targetFile,
+                MalletEmbeddingsTrainer.PARAM_COVERING_ANNOTATION_TYPE, covering,
+                MalletEmbeddingsTrainer.PARAM_NUM_THREADS, 1,
+                MalletEmbeddingsTrainer.PARAM_COMPRESSION, compressionMethod);
         SimplePipeline.runPipeline(reader, segmenter, embeddings);
 
         BufferedReader bufferedReader = new BufferedReader(
@@ -184,12 +184,12 @@ public class WordEmbeddingsTrainerTest
                 TextReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription embeddings = createEngineDescription(
-                WordEmbeddingsTrainer.class,
-                WordEmbeddingsTrainer.PARAM_TARGET_LOCATION, embeddingsFile,
-                WordEmbeddingsTrainer.PARAM_USE_CHARACTERS, true,
-                WordEmbeddingsTrainer.PARAM_EXAMPLE_WORD, "a",
-                WordEmbeddingsTrainer.PARAM_NUM_THREADS, 1,
-                WordEmbeddingsTrainer.PARAM_OVERWRITE, true);
+                MalletEmbeddingsTrainer.class,
+                MalletEmbeddingsTrainer.PARAM_TARGET_LOCATION, embeddingsFile,
+                MalletEmbeddingsTrainer.PARAM_USE_CHARACTERS, true,
+                MalletEmbeddingsTrainer.PARAM_EXAMPLE_WORD, "a",
+                MalletEmbeddingsTrainer.PARAM_NUM_THREADS, 1,
+                MalletEmbeddingsTrainer.PARAM_OVERWRITE, true);
         SimplePipeline.runPipeline(reader, segmenter, embeddings);
 
         List<String> output = Files.readAllLines(embeddingsFile.toPath());
@@ -218,13 +218,13 @@ public class WordEmbeddingsTrainerTest
                 TextReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription embeddings = createEngineDescription(
-                WordEmbeddingsTrainer.class,
-                WordEmbeddingsTrainer.PARAM_TARGET_LOCATION, embeddingsFile,
-                WordEmbeddingsTrainer.PARAM_USE_CHARACTERS, true,
-                WordEmbeddingsTrainer.PARAM_EXAMPLE_WORD, "a",
-                WordEmbeddingsTrainer.PARAM_NUM_THREADS, 1,
-                WordEmbeddingsTrainer.PARAM_OVERWRITE, true,
-                WordEmbeddingsTrainer.PARAM_COVERING_ANNOTATION_TYPE, covering);
+                MalletEmbeddingsTrainer.class,
+                MalletEmbeddingsTrainer.PARAM_TARGET_LOCATION, embeddingsFile,
+                MalletEmbeddingsTrainer.PARAM_USE_CHARACTERS, true,
+                MalletEmbeddingsTrainer.PARAM_EXAMPLE_WORD, "a",
+                MalletEmbeddingsTrainer.PARAM_NUM_THREADS, 1,
+                MalletEmbeddingsTrainer.PARAM_OVERWRITE, true,
+                MalletEmbeddingsTrainer.PARAM_COVERING_ANNOTATION_TYPE, covering);
         SimplePipeline.runPipeline(reader, segmenter, embeddings);
 
         List<String> output = Files.readAllLines(embeddingsFile.toPath());

@@ -39,7 +39,7 @@ import java.io.PrintWriter;
  *
  * @since 1.9.0
  */
-public class WordEmbeddingsTrainer
+public class MalletEmbeddingsTrainer
         extends MalletModelTrainer
 {
     /**

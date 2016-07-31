@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.mallet.lda.io;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.mallet.lda.LdaTopicModelInferencer;
+import de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -41,11 +41,11 @@ import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 
 /**
  * Write the topic proportions according to an LDA topic model to an output file. The proportions
- * need to be inferred in a previous step using {@link LdaTopicModelInferencer}.
+ * need to be inferred in a previous step using {@link MalletLdaTopicModelInferencer}.
  *
  *
  */
-public class LdaTopicsProportionsSortedWriter
+public class MalletLdaTopicsProportionsSortedWriter
     extends JCasFileWriter_ImplBase
 {
     public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;

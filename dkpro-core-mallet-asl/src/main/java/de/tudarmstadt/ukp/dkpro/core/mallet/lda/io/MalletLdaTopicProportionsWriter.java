@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.mallet.lda.io;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.mallet.lda.LdaTopicModelInferencer;
+import de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -36,10 +36,10 @@ import static org.apache.uima.fit.util.JCasUtil.select;
  * Write topic proportions to a file in the shape {@code [<docId>\t]<topic_1>\t<topic_2>\t...<topic_n>}
  * <p>
  * This writer depends on the {@link TopicDistribution} annotation which needs to be created by
- * {@link LdaTopicModelInferencer} before.
+ * {@link MalletLdaTopicModelInferencer} before.
  * </p>
  */
-public class LdaTopicProportionsWriter
+public class MalletLdaTopicProportionsWriter
         extends JCasFileWriter_ImplBase
 {
     private static final Locale LOCALE = Locale.US;

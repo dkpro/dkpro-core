@@ -39,7 +39,7 @@ import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class WordEmbeddingsAnnotatorTest
+public class MalletEmbeddingsAnnotatorTest
 {
     private File modelFile;
 
@@ -69,8 +69,8 @@ public class WordEmbeddingsAnnotatorTest
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription inferencer = createEngineDescription(
-                WordEmbeddingsAnnotator.class,
-                WordEmbeddingsAnnotator.PARAM_MODEL_LOCATION, modelFile);
+                MalletEmbeddingsAnnotator.class,
+                MalletEmbeddingsAnnotator.PARAM_MODEL_LOCATION, modelFile);
         //end::example[]
 
         for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter, inferencer)) {

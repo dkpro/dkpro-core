@@ -41,7 +41,7 @@ import static org.junit.Assert.assertTrue;
  *
  *
  */
-public class LdaTopicModelInferencerTest
+public class MalletLdaTopicModelInferencerTest
 {
     private static final File MODEL_FILE = new File("target/mallet/model");
     private static final String TXT_DIR = "src/test/resources/txt";
@@ -64,10 +64,10 @@ public class LdaTopicModelInferencerTest
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription estimator = createEngineDescription(
-                LdaTopicModelTrainer.class,
-                LdaTopicModelTrainer.PARAM_TARGET_LOCATION, MODEL_FILE,
-                LdaTopicModelTrainer.PARAM_N_ITERATIONS, N_ITERATIONS,
-                LdaTopicModelTrainer.PARAM_N_TOPICS, N_TOPICS);
+                MalletLdaTopicModelTrainer.class,
+                MalletLdaTopicModelTrainer.PARAM_TARGET_LOCATION, MODEL_FILE,
+                MalletLdaTopicModelTrainer.PARAM_N_ITERATIONS, N_ITERATIONS,
+                MalletLdaTopicModelTrainer.PARAM_N_TOPICS, N_TOPICS);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
         // end::example[]
     }
@@ -83,8 +83,8 @@ public class LdaTopicModelInferencerTest
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription inferencer = createEngineDescription(
-                LdaTopicModelInferencer.class,
-                LdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
+                MalletLdaTopicModelInferencer.class,
+                MalletLdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
 
         for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter, inferencer)) {
             for (TopicDistribution td : select(jcas, TopicDistribution.class)) {

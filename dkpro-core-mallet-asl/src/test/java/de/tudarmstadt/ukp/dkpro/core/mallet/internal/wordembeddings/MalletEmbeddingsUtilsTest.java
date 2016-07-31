@@ -26,7 +26,7 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
-public class WordEmbeddingsUtilsTest
+public class MalletEmbeddingsUtilsTest
 {
     @Test
     public void testReadEmbeddingFileTxt()
@@ -37,7 +37,7 @@ public class WordEmbeddingsUtilsTest
         int expectedDimensions = 50;
         boolean hasHeader = false;
 
-        Map<String, double[]> embeddings = WordEmbeddingsUtils
+        Map<String, double[]> embeddings = MalletEmbeddingsUtils
                 .readEmbeddingFileTxt(modelFile, hasHeader);
 
         assertEquals(expectedSize, embeddings.size());
@@ -53,7 +53,7 @@ public class WordEmbeddingsUtilsTest
         int expectedDimensions = 50;
         boolean hasHeader = true;
 
-        Map<String, double[]> embeddings = WordEmbeddingsUtils
+        Map<String, double[]> embeddings = MalletEmbeddingsUtils
                 .readEmbeddingFileTxt(modelFile, hasHeader);
 
         assertEquals(expectedSize, embeddings.size());
@@ -69,7 +69,7 @@ public class WordEmbeddingsUtilsTest
         int expectedDimensions = 50;
         boolean hasHeader = false;
 
-        Map<String, double[]> embeddings = WordEmbeddingsUtils
+        Map<String, double[]> embeddings = MalletEmbeddingsUtils
                 .readEmbeddingFileTxt(modelFile, hasHeader);
 
         assertEquals(expectedSize, embeddings.size());

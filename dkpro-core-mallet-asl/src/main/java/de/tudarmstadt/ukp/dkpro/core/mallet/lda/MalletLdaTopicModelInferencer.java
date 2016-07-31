@@ -57,7 +57,7 @@ import java.util.List;
         outputs = { "de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution" }
 )
 
-public class LdaTopicModelInferencer
+public class MalletLdaTopicModelInferencer
         extends JCasAnnotator_ImplBase
 {
     private static final String NONE_LABEL = "X";

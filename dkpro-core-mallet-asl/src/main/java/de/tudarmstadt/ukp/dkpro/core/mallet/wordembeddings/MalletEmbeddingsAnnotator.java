@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.mallet.wordembeddings;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
-import de.tudarmstadt.ukp.dkpro.core.mallet.internal.wordembeddings.WordEmbeddingsUtils;
+import de.tudarmstadt.ukp.dkpro.core.mallet.internal.wordembeddings.MalletEmbeddingsUtils;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.WordEmbedding;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -44,7 +44,7 @@ import java.util.Map;
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
         outputs = { "de.tudarmstadt.ukp.dkpro.core.mallet.type.WordEmbedding" }
 )
-public class WordEmbeddingsAnnotator
+public class MalletEmbeddingsAnnotator
         extends JCasAnnotator_ImplBase
 {
     /**
@@ -95,7 +95,7 @@ public class WordEmbeddingsAnnotator
     {
         super.initialize(context);
         try {
-            embeddings = WordEmbeddingsUtils.readEmbeddingFileTxt(modelLocation, modelHasHeader);
+            embeddings = MalletEmbeddingsUtils.readEmbeddingFileTxt(modelLocation, modelHasHeader);
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);

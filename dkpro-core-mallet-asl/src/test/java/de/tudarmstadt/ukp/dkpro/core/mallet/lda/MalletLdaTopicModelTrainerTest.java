@@ -33,7 +33,7 @@ import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDe
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class LdaTopicModelTrainerTest
+public class MalletLdaTopicModelTrainerTest
 {
     private static final File MODEL_FILE = new File("target/mallet/model");
     private static final String TXT_DIR = "src/test/resources/txt";
@@ -55,10 +55,10 @@ public class LdaTopicModelTrainerTest
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription estimator = createEngineDescription(
-                LdaTopicModelTrainer.class,
-                LdaTopicModelTrainer.PARAM_TARGET_LOCATION, MODEL_FILE,
-                LdaTopicModelTrainer.PARAM_N_ITERATIONS, nIterations,
-                LdaTopicModelTrainer.PARAM_N_TOPICS, nTopics);
+                MalletLdaTopicModelTrainer.class,
+                MalletLdaTopicModelTrainer.PARAM_TARGET_LOCATION, MODEL_FILE,
+                MalletLdaTopicModelTrainer.PARAM_N_ITERATIONS, nIterations,
+                MalletLdaTopicModelTrainer.PARAM_N_TOPICS, nTopics);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
         // end::example[]
 
@@ -84,11 +84,11 @@ public class LdaTopicModelTrainerTest
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription estimator = createEngineDescription(
-                LdaTopicModelTrainer.class,
-                LdaTopicModelTrainer.PARAM_TARGET_LOCATION, MODEL_FILE,
-                LdaTopicModelTrainer.PARAM_N_ITERATIONS, nIterations,
-                LdaTopicModelTrainer.PARAM_N_TOPICS, nTopics,
-                LdaTopicModelTrainer.PARAM_COVERING_ANNOTATION_TYPE, entity);
+                MalletLdaTopicModelTrainer.class,
+                MalletLdaTopicModelTrainer.PARAM_TARGET_LOCATION, MODEL_FILE,
+                MalletLdaTopicModelTrainer.PARAM_N_ITERATIONS, nIterations,
+                MalletLdaTopicModelTrainer.PARAM_N_TOPICS, nTopics,
+                MalletLdaTopicModelTrainer.PARAM_COVERING_ANNOTATION_TYPE, entity);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
 
         assertTrue(MODEL_FILE.exists());
@@ -114,12 +114,12 @@ public class LdaTopicModelTrainerTest
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription estimator = createEngineDescription(
-                LdaTopicModelTrainer.class,
-                LdaTopicModelTrainer.PARAM_TARGET_LOCATION, MODEL_FILE,
-                LdaTopicModelTrainer.PARAM_N_ITERATIONS, nIterations,
-                LdaTopicModelTrainer.PARAM_N_TOPICS, nTopics,
-                LdaTopicModelTrainer.PARAM_ALPHA_SUM, alpha,
-                LdaTopicModelTrainer.PARAM_BETA, beta);
+                MalletLdaTopicModelTrainer.class,
+                MalletLdaTopicModelTrainer.PARAM_TARGET_LOCATION, MODEL_FILE,
+                MalletLdaTopicModelTrainer.PARAM_N_ITERATIONS, nIterations,
+                MalletLdaTopicModelTrainer.PARAM_N_TOPICS, nTopics,
+                MalletLdaTopicModelTrainer.PARAM_ALPHA_SUM, alpha,
+                MalletLdaTopicModelTrainer.PARAM_BETA, beta);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
 
         assertTrue(MODEL_FILE.exists());

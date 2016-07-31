@@ -28,9 +28,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class LdaTopicModelUtils
+public class MalletLdaTopicModelUtils
 {
-    private static final Log LOGGER = LogFactory.getLog(LdaTopicModelUtils.class);
+    private static final Log LOGGER = LogFactory.getLog(MalletLdaTopicModelUtils.class);
 
     /**
      * Retrieve the top n topic words for each topic in the given model.

@@ -35,7 +35,7 @@ import java.io.IOException;
  * Set {@link #PARAM_COVERING_ANNOTATION_TYPE} to define what is considered a document (sentences, paragraphs, etc.).
  */
 
-public class LdaTopicModelTrainer
+public class MalletLdaTopicModelTrainer
         extends MalletModelTrainer
 {
     /**
