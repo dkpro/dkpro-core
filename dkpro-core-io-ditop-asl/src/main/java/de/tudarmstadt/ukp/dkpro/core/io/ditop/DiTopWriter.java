@@ -53,7 +53,7 @@ import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
 /**
  * This annotator (consumer) writes output files as required by <a
  * href="https://ditop.hs8.de/">DiTop</a>. It requires JCas input annotated by
- * {@link LdaTopicModelInferencer} using the same model.
+ * {@link de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer} using the same model.
  *
  */
 public class DiTopWriter
