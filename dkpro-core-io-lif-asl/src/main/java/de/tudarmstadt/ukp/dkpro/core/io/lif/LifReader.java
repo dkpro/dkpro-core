@@ -36,7 +36,6 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
 import org.lappsgrid.discriminator.Discriminators;
-import org.lappsgrid.serialization.LappsIOException;
 import org.lappsgrid.serialization.Serializer;
 import org.lappsgrid.serialization.lif.Annotation;
 import org.lappsgrid.serialization.lif.Container;
@@ -266,12 +265,7 @@ public class LifReader
     @SuppressWarnings("unchecked")
     private <T> Set<T> getSetFeature(Annotation aAnnotation, String aName)
     {
-        try {
-            return aAnnotation.getFeatureSet(aName);
-        }
-        catch (LappsIOException e) {
-            throw new IllegalArgumentException(e.getMessage(), e);
-        }
+        return aAnnotation.getFeatureSet(aName);
     }
     
     private void percolateOffsets(org.apache.uima.jcas.tcas.Annotation aNode)

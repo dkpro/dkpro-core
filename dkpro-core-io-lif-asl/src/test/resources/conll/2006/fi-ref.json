@@ -325,8 +325,6 @@
       }
     }, {
       "id" : "dep-0",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "attr",
       "features" : {
@@ -335,8 +333,6 @@
       }
     }, {
       "id" : "dep-1",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "attr",
       "features" : {
@@ -345,8 +341,6 @@
       }
     }, {
       "id" : "dep-2",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "attr",
       "features" : {
@@ -355,8 +349,6 @@
       }
     }, {
       "id" : "dep-3",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "attr",
       "features" : {
@@ -365,8 +357,6 @@
       }
     }, {
       "id" : "dep-4",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "attr",
       "features" : {
@@ -375,8 +365,6 @@
       }
     }, {
       "id" : "dep-5",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "attr",
       "features" : {
@@ -385,8 +373,6 @@
       }
     }, {
       "id" : "dep-6",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "main",
       "features" : {
@@ -395,8 +381,6 @@
       }
     }, {
       "id" : "dep-7",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "subj",
       "features" : {
@@ -405,8 +389,6 @@
       }
     }, {
       "id" : "dep-8",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "mod",
       "features" : {
@@ -415,8 +397,6 @@
       }
     }, {
       "id" : "dep-9",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "phrv",
       "features" : {
@@ -425,8 +405,6 @@
       }
     }, {
       "id" : "dep-10",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "attr",
       "features" : {
@@ -435,8 +413,6 @@
       }
     }, {
       "id" : "dep-11",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "attr",
       "features" : {
@@ -445,8 +421,6 @@
       }
     }, {
       "id" : "dep-12",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "obj",
       "features" : {
@@ -455,8 +429,6 @@
       }
     }, {
       "id" : "dep-13",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "phrm",
       "features" : {
@@ -465,8 +437,6 @@
       }
     }, {
       "id" : "dep-14",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "phrm",
       "features" : {
@@ -475,8 +445,6 @@
       }
     }, {
       "id" : "dep-15",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "conjunct",
       "features" : {
@@ -485,8 +453,6 @@
       }
     }, {
       "id" : "dep-16",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "phrv",
       "features" : {
@@ -495,8 +461,6 @@
       }
     }, {
       "id" : "dep-17",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "subj",
       "features" : {
@@ -505,8 +469,6 @@
       }
     }, {
       "id" : "dep-18",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "obj",
       "features" : {
@@ -515,8 +477,6 @@
       }
     }, {
       "id" : "dep-19",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "phrm",
       "features" : {
@@ -525,8 +485,6 @@
       }
     }, {
       "id" : "dep-20",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "aux",
       "features" : {
@@ -535,8 +493,6 @@
       }
     }, {
       "id" : "dep-21",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "conjunct",
       "features" : {
@@ -545,8 +501,6 @@
       }
     }, {
       "id" : "dep-22",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "obj",
       "features" : {
@@ -555,8 +509,6 @@
       }
     }, {
       "id" : "dep-23",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "attr",
       "features" : {
@@ -565,8 +517,6 @@
       }
     }, {
       "id" : "dep-24",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "attr",
       "features" : {
@@ -575,8 +525,6 @@
       }
     }, {
       "id" : "dep-25",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "obj",
       "features" : {
@@ -585,8 +533,6 @@
       }
     }, {
       "id" : "dep-26",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "advl",
       "features" : {
@@ -603,8 +549,6 @@
       }
     }, {
       "id" : "dep-27",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "attr",
       "features" : {
@@ -613,8 +557,6 @@
       }
     }, {
       "id" : "dep-28",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "attr",
       "features" : {
@@ -623,8 +565,6 @@
       }
     }, {
       "id" : "dep-29",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "main",
       "features" : {
@@ -633,8 +573,6 @@
       }
     }, {
       "id" : "dep-30",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "phrm",
       "features" : {
@@ -643,8 +581,6 @@
       }
     }, {
       "id" : "dep-31",
-      "start" : -1,
-      "end" : -1,
       "@type" : "http://vocab.lappsgrid.org/Dependency",
       "label" : "conjunct",
       "features" : {
