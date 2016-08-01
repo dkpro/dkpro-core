@@ -294,4 +294,17 @@ declare a version on each model dependency. When upgrading to a new DKPro Core v
 it is sufficient to change the value of the ++dkpro.core.version++
 property in the properties section.
 
+Models are presently maintained in a separate repository that needs to be explicitly added to your
+POM:
+
+[source,xml,subs="+attributes"]
+----
+<repositories>
+  <repository>
+    <id>ukp-oss-model-releases</id>
+    <url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-model-releases-local</url>
+  </repository>
+</repositories>
+----
+
 
