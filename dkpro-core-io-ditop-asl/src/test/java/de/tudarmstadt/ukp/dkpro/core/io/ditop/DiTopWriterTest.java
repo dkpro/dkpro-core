@@ -17,10 +17,14 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.ditop;
 
-import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
-import de.tudarmstadt.ukp.dkpro.core.mallet.lda.LdaTopicModelInferencer;
-import de.tudarmstadt.ukp.dkpro.core.mallet.lda.LdaTopicModelTrainer;
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+import java.io.IOException;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -29,13 +33,10 @@ import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.File;
-import java.io.IOException;
-
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
+import de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer;
+import de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaTopicModelTrainer;
+import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 public class DiTopWriterTest
 {
@@ -61,10 +62,10 @@ public class DiTopWriterTest
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription estimator = createEngineDescription(
-                LdaTopicModelTrainer.class,
-                LdaTopicModelTrainer.PARAM_TARGET_LOCATION, MODEL_FILE,
-                LdaTopicModelTrainer.PARAM_N_ITERATIONS, N_ITERATIONS,
-                LdaTopicModelTrainer.PARAM_N_TOPICS, N_TOPICS);
+                MalletLdaTopicModelTrainer.class,
+                MalletLdaTopicModelTrainer.PARAM_TARGET_LOCATION, MODEL_FILE,
+                MalletLdaTopicModelTrainer.PARAM_N_ITERATIONS, N_ITERATIONS,
+                MalletLdaTopicModelTrainer.PARAM_N_TOPICS, N_TOPICS);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
 
         MODEL_FILE.deleteOnExit();
@@ -82,8 +83,8 @@ public class DiTopWriterTest
                 TextReader.PARAM_LANGUAGE, LANGUAGE);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription inferencer = createEngineDescription(
-                LdaTopicModelInferencer.class,
-                LdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
+                MalletLdaTopicModelInferencer.class,
+                MalletLdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
         AnalysisEngineDescription ditopwriter = createEngineDescription(DiTopWriter.class,
                 DiTopWriter.PARAM_TARGET_LOCATION, TARGET_DITOP,
                 DiTopWriter.PARAM_MODEL_LOCATION, MODEL_FILE,
@@ -128,8 +129,8 @@ public class DiTopWriterTest
                 TextReader.PARAM_LANGUAGE, LANGUAGE);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription inferencer = createEngineDescription(
-                LdaTopicModelInferencer.class,
-                LdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
+                MalletLdaTopicModelInferencer.class,
+                MalletLdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
         AnalysisEngineDescription ditopwriter = createEngineDescription(DiTopWriter.class,
                 DiTopWriter.PARAM_TARGET_LOCATION, TARGET_DITOP,
                 DiTopWriter.PARAM_MODEL_LOCATION, MODEL_FILE,
@@ -175,8 +176,8 @@ public class DiTopWriterTest
                 TextReader.PARAM_LANGUAGE, LANGUAGE);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription inferencer = createEngineDescription(
-                LdaTopicModelInferencer.class,
-                LdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
+                MalletLdaTopicModelInferencer.class,
+                MalletLdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
         AnalysisEngineDescription ditopwriter = createEngineDescription(DiTopWriter.class,
                 DiTopWriter.PARAM_TARGET_LOCATION, TARGET_DITOP,
                 DiTopWriter.PARAM_MODEL_LOCATION, MODEL_FILE,
@@ -222,8 +223,8 @@ public class DiTopWriterTest
                 TextReader.PARAM_LANGUAGE, LANGUAGE);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription inferencer = createEngineDescription(
-                LdaTopicModelInferencer.class,
-                LdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
+                MalletLdaTopicModelInferencer.class,
+                MalletLdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
         AnalysisEngineDescription ditopwriter = createEngineDescription(DiTopWriter.class,
                 DiTopWriter.PARAM_TARGET_LOCATION, TARGET_DITOP,
                 DiTopWriter.PARAM_MODEL_LOCATION, MODEL_FILE,
@@ -269,8 +270,8 @@ public class DiTopWriterTest
                 TextReader.PARAM_LANGUAGE, LANGUAGE);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription inferencer = createEngineDescription(
-                LdaTopicModelInferencer.class,
-                LdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
+                MalletLdaTopicModelInferencer.class,
+                MalletLdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
         AnalysisEngineDescription ditopwriter = createEngineDescription(DiTopWriter.class,
                 DiTopWriter.PARAM_TARGET_LOCATION, TARGET_DITOP,
                 DiTopWriter.PARAM_MODEL_LOCATION, MODEL_FILE,
