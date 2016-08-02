@@ -262,6 +262,12 @@
             language="de" 
             variant="nemgp" 
             extension="bin">
+            <metadata>
+                <entry key="DC.title" value="nemgp_opennlp_01.bin"/>
+                <entry key="DC.creator" value="Thomas Zastrow"/>
+                <entry key="DC.identifier" value="http://www.thomas-zastrow.de/nlp/nemgp_opennlp_01.bin"/>
+                <entry key="DC.rights" value="http://creativecommons.org/licenses/by-sa/3.0/deed.de"/>
+            </metadata>
         </install-stub-and-upstream-file>
     </target>
     
