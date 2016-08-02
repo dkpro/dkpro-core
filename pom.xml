@@ -474,6 +474,33 @@
         </pluginManagement>
     </build>
 	<profiles>
+        <profile>
+            <id>spdx</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.spdx</groupId>
+                        <artifactId>spdx-maven-plugin</artifactId>
+                        <version>0.2.5</version>
+                        <executions>
+                            <execution>
+                                <id>build-spdx</id>
+                                <goals>
+                                    <goal>createSPDX</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                          <spdxFile>${project.build.outputDirectory}/META-INF/maven/${project.groupId}/${project.artifactId}/license.spdx</spdxFile>
+                          <excludedFilePatterns>
+                            <param>*.spdx</param>
+                          </excludedFilePatterns>
+                          <!-- See documentation below for additional configuration -->
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
 		<profile>
 			<id>run-jcasgen</id>
 			<activation>
