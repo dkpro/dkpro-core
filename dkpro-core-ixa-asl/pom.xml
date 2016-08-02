@@ -28,7 +28,6 @@
   <packaging>jar</packaging>
   <name>DKPro Core ASL - IXA</name>
   <dependencies>
-    <!--  
     <dependency>
       <groupId>org.apache.uima</groupId>
       <artifactId>uimaj-core</artifactId>
@@ -39,14 +38,20 @@
     </dependency>
     <dependency>
       <groupId>eus.ixa</groupId>
-      <artifactId>ixa-pipe-nerc</artifactId>
-      <version>1.6.0</version>
+      <artifactId>ixa-pipe-tok</artifactId>
+      <version>1.8.5</version>
     </dependency>
     <dependency>
       <groupId>eus.ixa</groupId>
       <artifactId>ixa-pipe-pos</artifactId>
-      <version>1.5.0</version>
+      <version>1.5.1</version>
     </dependency>
+    <dependency>
+      <groupId>eus.ixa</groupId>
+      <artifactId>ixa-pipe-nerc</artifactId>
+      <version>1.6.1</version>
+    </dependency>
+    <!--  
     <dependency>
       <groupId>eus.ixa</groupId>
       <artifactId>ixa-pipe-chunk</artifactId>
@@ -57,11 +62,7 @@
       <artifactId>ixa-pipe-parse</artifactId>
       <version>1.1.1</version>
     </dependency>
-    <dependency>
-      <groupId>eus.ixa</groupId>
-      <artifactId>ixa-pipe-tok</artifactId>
-      <version>1.8.3</version>
-    </dependency>
+    -->
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
@@ -100,6 +101,5 @@
       <artifactId>junit</artifactId>
       <scope>test</scope>
     </dependency>
-    -->
   </dependencies>
 </project>
