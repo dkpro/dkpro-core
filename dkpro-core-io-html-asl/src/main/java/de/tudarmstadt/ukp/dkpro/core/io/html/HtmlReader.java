@@ -29,6 +29,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.component.JCasCollectionReader_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -44,9 +45,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 /**
  * Reads the contents of a given URL and strips the HTML.
  * Returns only the textual contents.
- *
- *
  */
+@MimeTypeCapability({"text/html", "application/xhtml+xml"})
 @TypeCapability(
 		outputs = {
 			"de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
