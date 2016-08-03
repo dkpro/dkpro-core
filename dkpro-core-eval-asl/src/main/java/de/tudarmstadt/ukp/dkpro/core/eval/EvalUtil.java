@@ -75,7 +75,7 @@ public class EvalUtil
         return samples;
     }
     
-    public static void dumpResults(File targetFolder, Collection<? extends Object> aExpected,
+    public static Result dumpResults(File targetFolder, Collection<? extends Object> aExpected,
             Collection<? extends Object> aActual)
                 throws UnsupportedEncodingException, FileNotFoundException
     {
@@ -95,5 +95,7 @@ public class EvalUtil
         Yaml yaml = new Yaml();
         yaml.dump(results, new OutputStreamWriter(
                 new FileOutputStream(new File(targetFolder, "results.yaml")), "UTF-8"));
+        
+        return results;
     }
 }
