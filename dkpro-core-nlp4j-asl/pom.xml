@@ -28,7 +28,7 @@
   <packaging>jar</packaging>
   <name>DKPro Core ASL - NLP4J</name>
   <properties>
-    <nlp4j.version>1.1.2</nlp4j.version>
+    <nlp4j.version>1.1.3</nlp4j.version>
   </properties>
   <dependencies>
     <dependency>
@@ -45,27 +45,7 @@
     </dependency>
     <dependency>
       <groupId>edu.emory.mathcs.nlp</groupId>
-      <artifactId>nlp4j</artifactId>
-      <version>${nlp4j.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>edu.emory.mathcs.nlp</groupId>
-      <artifactId>nlp4j-common</artifactId>
-      <version>${nlp4j.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>edu.emory.mathcs.nlp</groupId>
-      <artifactId>nlp4j-core</artifactId>
-      <version>${nlp4j.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>edu.emory.mathcs.nlp</groupId>
-      <artifactId>nlp4j-tokenization</artifactId>
-      <version>${nlp4j.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>edu.emory.mathcs.nlp</groupId>
-      <artifactId>nlp4j-morphology</artifactId>
+      <artifactId>nlp4j-api</artifactId>
       <version>${nlp4j.version}</version>
     </dependency>
     <!--
@@ -113,6 +93,12 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.7.12</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
       <scope>test</scope>
@@ -138,17 +124,17 @@
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.nlp4j-model-tagger-en-default</artifactId>
-        <version>20160629.0</version>
+        <version>20160802.0</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.nlp4j-model-ner-en-default</artifactId>
-        <version>20160629.0</version>
+        <version>20160802.0</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.nlp4j-model-parser-en-default</artifactId>
-        <version>20160629.0</version>
+        <version>20160802.0</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

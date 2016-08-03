@@ -32,9 +32,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
-import edu.emory.mathcs.nlp.tokenization.EnglishTokenizer;
-import edu.emory.mathcs.nlp.tokenization.Token;
-import edu.emory.mathcs.nlp.tokenization.Tokenizer;
+import edu.emory.mathcs.nlp.component.tokenizer.EnglishTokenizer;
+import edu.emory.mathcs.nlp.component.tokenizer.Tokenizer;
+import edu.emory.mathcs.nlp.component.tokenizer.token.Token;
 
 /**
  * Segmenter using Emory NLP4J.

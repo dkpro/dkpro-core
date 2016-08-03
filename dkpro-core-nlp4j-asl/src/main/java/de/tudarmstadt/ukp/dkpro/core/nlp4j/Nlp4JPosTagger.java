@@ -49,7 +49,7 @@ import de.tudarmstadt.ukp.dkpro.core.nlp4j.internal.Uima2EmoryNlp;
 import edu.emory.mathcs.nlp.component.pos.POSState;
 import edu.emory.mathcs.nlp.component.template.OnlineComponent;
 import edu.emory.mathcs.nlp.component.template.node.NLPNode;
-import edu.emory.mathcs.nlp.decode.NLPUtils;
+import edu.emory.mathcs.nlp.common.util.NLPUtils;
 
 /**
  * Part-of-Speech annotator using Emory NLP4J. Requires {@link Sentence}s to be annotated before.

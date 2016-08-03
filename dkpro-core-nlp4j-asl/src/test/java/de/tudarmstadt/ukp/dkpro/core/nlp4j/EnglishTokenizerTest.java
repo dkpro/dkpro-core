@@ -21,9 +21,9 @@ import java.util.List;
 
 import org.junit.Test;
 
-import edu.emory.mathcs.nlp.tokenization.EnglishTokenizer;
-import edu.emory.mathcs.nlp.tokenization.Tokenizer;
-import edu.emory.mathcs.nlp.tokenization.Token;
+import edu.emory.mathcs.nlp.component.tokenizer.EnglishTokenizer;
+import edu.emory.mathcs.nlp.component.tokenizer.Tokenizer;
+import edu.emory.mathcs.nlp.component.tokenizer.token.Token;
 
 public class EnglishTokenizerTest
 {

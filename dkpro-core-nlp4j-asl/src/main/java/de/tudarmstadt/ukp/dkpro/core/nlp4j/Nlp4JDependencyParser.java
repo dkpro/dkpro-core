@@ -48,10 +48,10 @@ import de.tudarmstadt.ukp.dkpro.core.nlp4j.internal.EmoryNlp2Uima;
 import de.tudarmstadt.ukp.dkpro.core.nlp4j.internal.EmoryNlpUtils;
 import de.tudarmstadt.ukp.dkpro.core.nlp4j.internal.OnlineComponentTagsetDescriptionProvider;
 import de.tudarmstadt.ukp.dkpro.core.nlp4j.internal.Uima2EmoryNlp;
+import edu.emory.mathcs.nlp.common.util.NLPUtils;
 import edu.emory.mathcs.nlp.component.dep.DEPState;
 import edu.emory.mathcs.nlp.component.template.OnlineComponent;
 import edu.emory.mathcs.nlp.component.template.node.NLPNode;
-import edu.emory.mathcs.nlp.decode.NLPUtils;
 
 /**
  * Emory NLP4J dependency parser.

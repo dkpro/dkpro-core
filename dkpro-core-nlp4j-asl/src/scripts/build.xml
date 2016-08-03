@@ -48,13 +48,13 @@
         <install-model-stub 
             groupId="de.tudarmstadt.ukp.dkpro.core"
             artifactIdBase="de.tudarmstadt.ukp.dkpro.core.nlp4j"
-            version="20160629.0"
+            version="20160802.0"
             tool="tagger"
             language="en"
             variant="default"
             targetGroupId="edu.emory.mathcs.nlp"
             targetArtifactId="nlp4j-english"
-            targetVersion="1.1.2"
+            targetVersion="1.1.3"
             targetLocation="classpath:/edu/emory/mathcs/nlp/models/en-pos.xz">
             <entry key="pos.tagset" value="ptb-emory"/>
     	</install-model-stub>
@@ -64,13 +64,13 @@
         <install-model-stub 
             groupId="de.tudarmstadt.ukp.dkpro.core"
             artifactIdBase="de.tudarmstadt.ukp.dkpro.core.nlp4j"
-            version="20160629.0"
+            version="20160802.0"
             tool="parser"
             language="en"
             variant="default"
             targetGroupId="edu.emory.mathcs.nlp"
             targetArtifactId="nlp4j-english"
-            targetVersion="1.1.2"
+            targetVersion="1.1.3"
             targetLocation="classpath:/edu/emory/mathcs/nlp/models/en-dep.xz">
             <entry key="pos.tagset" value="ptb-emory"/>
             <entry key="dependency.tagset" value="emory"/>
@@ -81,13 +81,13 @@
         <install-model-stub 
             groupId="de.tudarmstadt.ukp.dkpro.core"
             artifactIdBase="de.tudarmstadt.ukp.dkpro.core.nlp4j"
-            version="20160629.0"
+            version="20160802.0"
             tool="ner"
             language="en"
             variant="default"
             targetGroupId="edu.emory.mathcs.nlp"
             targetArtifactId="nlp4j-english"
-            targetVersion="1.1.2"
+            targetVersion="1.1.3"
             targetLocation="classpath:/edu/emory/mathcs/nlp/models/en-ner.xz">
         </install-model-stub>
     </target>
