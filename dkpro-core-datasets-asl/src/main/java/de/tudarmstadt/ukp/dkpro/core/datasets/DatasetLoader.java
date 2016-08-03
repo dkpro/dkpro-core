@@ -24,9 +24,11 @@ import static de.tudarmstadt.ukp.dkpro.core.datasets.internal.Util.unzip;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.ArrayUtils;
 
 import de.tudarmstadt.ukp.dkpro.core.datasets.internal.DefaultDataset;
 import de.tudarmstadt.ukp.dkpro.core.datasets.internal.ud.UDDataset;
@@ -142,20 +144,23 @@ public class DatasetLoader
         File dataDir = new File(cacheRoot, ds.getName());
 
         File target = new File(dataDir, "gum.zip");
-        File license = new File(dataDir, "LICENSE.txt");
+        File license = new File(dataDir, "gum-c119554a33ed48659edb6cfd788c6d8173cc7aa9/LICENSE.txt");
         ds.setLicenseFile(license);
 
-        FileUtils.writeStringToFile(license,
-                "This corpus was built on data obtained from three different sources. The respective annotations are licensed under the same conditions as the underlying texts:\nWikinews: http://creativecommons.org/licenses/by/2.5/ (Source: https://en.wikinews.org/wiki/Wikinews:Copyright)"
-                        + "\n"
-                        + "WikiVoyage: https://creativecommons.org/licenses/by-sa/3.0/ (Source: https://wikimediafoundation.org/wiki/Terms_of_Use)"
-                        + "\n"
-                        + "WikiHow: http://creativecommons.org/licenses/by-nc-sa/3.0/ (Source: http://www.wikihow.com/wikiHow:Creative-Commons)",
-                "UTF-8");
-
+        File conll2006Path = new File(dataDir, "gum-c119554a33ed48659edb6cfd788c6d8173cc7aa9/dep");
+        File[] all = conll2006Path.listFiles(file -> { return file.getName().endsWith(".conll10"); });
+        Arrays.sort(all, (File a, File b) -> { return a.getName().compareTo(b.getName()); });
+        
+        int pivot = all.length / 2;
+        File[] train = (File[]) ArrayUtils.subarray(all, 0, pivot);
+        File[] test = (File[]) ArrayUtils.subarray(all, pivot, all.length);
+        
+        ds.setTrainingFiles(train);
+        ds.setTestFiles(test);
+        
         fetch(target,
-                "https://github.com/amir-zeldes/gum/archive/747b4d51b843fa09e3c3f4af58b48820c34fb0ca.zip",
-                "04cceb8a5a0c100eb34875c717d2eb41", null);
+                "https://github.com/amir-zeldes/gum/archive/c119554a33ed48659edb6cfd788c6d8173cc7aa9.zip",
+                "bd512ffc85d491c42dfdada37f0886fe", null);
         unzip(target, dataDir);
 
         return ds;
