@@ -199,6 +199,7 @@
 		<antcall target="tagger-de-hgc"/>
 		<antcall target="tagger-de-fast"/>
 		<antcall target="tagger-de-fast-caseless"/>
+        <antcall target="ner-de-nemgp"/>
 		<antcall target="ner-de-hgc_175m_600.crf"/>
 		<antcall target="ner-de-dewac_175m_600.crf"/>
 		<antcall target="parser-de-pcfg"/>
@@ -307,6 +308,40 @@
         <delete dir="target/download/tmp"/>
 	</target>
 		
+    <target name="ner-de-nemgp">
+        <mkdir dir="target/download"/>
+        <!-- FILE: nemgp_stanford_01.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2014-10-24 | now        | 0feec395d8db89909360a4a3e172b96a
+          -->
+        <get 
+            src="http://www.thomas-zastrow.de/nlp/nemgp_stanford_01.gz" 
+            dest="target/download/nemgp_stanford_01.ser.gz" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/nemgp_stanford_01.ser.gz" 
+            md5="0feec395d8db89909360a4a3e172b96a"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+            upstreamVersion="20141024"
+            metaDataVersion="1"
+            tool="ner" 
+            language="de" 
+            variant="nemgp" 
+            extension="ser.gz">
+            <metadata>
+                <entry key="DC.title" value="nemgp_stanford_01.ser"/>
+                <entry key="DC.creator" value="Thomas Zastrow"/>
+                <entry key="DC.identifier" value="http://www.thomas-zastrow.de/nlp/nemgp_stanford_01.gz"/>
+                <entry key="DC.rights" value="http://creativecommons.org/licenses/by-sa/3.0/deed.de"/>
+                <entry key="ner.tag.map.0" value="O"/>
+                <entry key="ner.tag.map.per" value="PER"/>
+                <entry key="ner.tag.map.loc" value="LOC"/>
+                <entry key="ner.tag.map.org" value="ORG"/>
+                <entry key="ner.tag.map.misc" value="MISC"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
+        
 	<target name="ner-de-hgc_175m_600.crf" depends="download-de">
         <mkdir dir="target/download/tmp"/>
         <unzip src="target/download/de/de-models.zip" dest="target/download/tmp">

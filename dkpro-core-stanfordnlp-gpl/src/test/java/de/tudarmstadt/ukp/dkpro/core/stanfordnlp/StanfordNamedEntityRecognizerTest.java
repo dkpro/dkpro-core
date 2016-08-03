@@ -167,6 +167,22 @@ public class StanfordNamedEntityRecognizerTest
 	}
 
    @Test
+    public void testGermanNemgp()
+        throws Exception
+    {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+
+        JCas jcas = runTest("de", "nemgp", "Markus arbeitet seit 10 Jahren bei SAP in Deutschland .");
+
+        String[] ne = {
+                "[  0,  6]Person(PER) (Markus)",
+                "[ 35, 38]Organization(ORG) (SAP)",
+                "[ 42, 53]Location(LOC) (Deutschland)" };
+
+        AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
+    }
+
+    @Test
     public void testHgcGerman()
         throws Exception
     {
