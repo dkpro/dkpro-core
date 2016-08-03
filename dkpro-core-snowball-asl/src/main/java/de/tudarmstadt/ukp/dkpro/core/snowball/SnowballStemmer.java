@@ -36,6 +36,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.cas.text.AnnotationIndex;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.LanguageCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.tartarus.snowball.SnowballProgram;
@@ -56,10 +57,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * @see FeaturePathAnnotatorBase
  * @since 1.1.0
  */
+@LanguageCapability({ "da", "nl", "en", "fi", "fr", "de", "hu", "it", "no", "pt", "ro", "ru", "es",
+        "sv", "tr" })
 @TypeCapability(
         outputs={
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem"})
-
 public class SnowballStemmer
 	extends FeaturePathAnnotatorBase
 {
