@@ -127,6 +127,24 @@ if (outputs) {
 <% } // inputs/outputs %>
 
 <%
+def languages = engine.spec.analysisEngineMetaData?.capabilities?.collect { 
+        it.languagesSupported }.flatten().sort().unique();
+if (languages) {
+%>
+[discrete]
+===== Languages
+[options="header"]
+|====
+|Language
+<% languages.each { lang -> %>
+|${lang}
+
+<% } // languages.each { lang -> %>
+|====
+<% } // if (languages) %>
+
+
+<%
 def mods = models.findAll { it.@engine == engine.name };
 
 if (mods) { %>
