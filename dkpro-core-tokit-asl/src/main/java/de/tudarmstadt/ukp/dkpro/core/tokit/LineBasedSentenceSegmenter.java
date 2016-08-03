@@ -27,10 +27,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 /**
  * Annotates each line in the source text as a sentence. This segmenter is not capable of creating
  * tokens! All respective parameters have no functionality.
+ * 
+ * @deprecated Use {@link RegexSegmenter}
  */
 @TypeCapability(
         outputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"})
+@Deprecated
 public class LineBasedSentenceSegmenter
 	extends SegmenterBase
 {
