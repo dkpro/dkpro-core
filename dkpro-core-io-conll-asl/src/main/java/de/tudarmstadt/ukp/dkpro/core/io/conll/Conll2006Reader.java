@@ -90,13 +90,15 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
  * 
  * @see <a href="https://web.archive.org/web/20131216222420/http://ilk.uvt.nl/conll/">CoNLL-X Shared Task: Multi-lingual Dependency Parsing</a>
  */
-@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures",
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
+@TypeCapability(
+        outputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 public class Conll2006Reader
     extends JCasResourceCollectionReader_ImplBase
 {
@@ -111,6 +113,10 @@ public class Conll2006Reader
     public static final String PARAM_READ_CPOS = ComponentParameters.PARAM_READ_CPOS;
     @ConfigurationParameter(name = PARAM_READ_CPOS, mandatory = true, defaultValue = "true")
     private boolean readCPos;
+
+    public static final String PARAM_USE_CPOS_AS_POS = "useCPosAsPos";
+    @ConfigurationParameter(name = PARAM_USE_CPOS_AS_POS, mandatory = true, defaultValue = "false")
+    private boolean useCPosAsPos;
 
     /**
      * Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
@@ -229,11 +235,12 @@ public class Conll2006Reader
 
                 // Read part-of-speech tag
                 POS pos = null;
-                if (!UNUSED.equals(word[POSTAG]) && readPos) {
-                    Type posTag = posMappingProvider.getTagType(word[POSTAG]);
+                String tag = useCPosAsPos ? word[CPOSTAG] : word[POSTAG];
+                if (!UNUSED.equals(tag) && readPos) {
+                    Type posTag = posMappingProvider.getTagType(tag);
                     pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
-                    pos.setPosValue(word[POSTAG].intern());
+                    pos.setPosValue(tag.intern());
                 }
 
                 // Read coarse part-of-speech tag
