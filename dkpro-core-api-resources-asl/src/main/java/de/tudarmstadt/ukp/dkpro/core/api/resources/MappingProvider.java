@@ -55,22 +55,25 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
 	{
 		typeSystem = aCas.getTypeSystem();
 
+        // Tag mappings can exist independently from the type mappings because tag mappings
+        // are configured in the model metadata
+        tagMappings = new HashMap<>();
+        for (Entry<String, HasResourceMetadata> imp : tagMappingImports.entrySet()) {
+            String prefix = imp.getKey() + ".tag.map.";
+            Properties props = imp.getValue().getResourceMetaData();
+            for (String key : props.stringPropertyNames()) {
+                if (key.startsWith(prefix)) {
+                    String originalTag = key.substring(prefix.length());
+                    String mappedTag = props.getProperty(key);
+                    tagMappings.put(originalTag, mappedTag);
+                }
+            }
+        }
+
+        // Try loading the type mappings
 		try {
 			notFound = false;
 			super.configure(aCas);
-			
-	        tagMappings = new HashMap<>();
-	        for (Entry<String, HasResourceMetadata> imp : tagMappingImports.entrySet()) {
-    	        String prefix = imp.getKey() + ".tag.map.";
-    	        Properties props = imp.getValue().getResourceMetaData();
-    	        for (String key : props.stringPropertyNames()) {
-    	            if (key.startsWith(prefix)) {
-    	                String originalTag = key.substring(prefix.length());
-    	                String mappedTag = props.getProperty(key);
-    	                tagMappings.put(originalTag, mappedTag);
-    	            }
-    	        }
-	        }
 		}
 		catch (AnalysisEngineProcessException e) {
 		    if(getOverride(LOCATION)!=null){
@@ -80,6 +83,21 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
 		}
 	}
 
+	public String getTag(String aTag)
+	{
+        String tag = aTag;
+        
+        // Apply tag mapping if configured
+        if (tagMappings != null) {
+            String t = tagMappings.get(aTag);
+            if (t != null) {
+                tag = t;
+            }
+        }
+        
+        return tag;
+	}
+	
 	/**
 	 * Get the type for the given tag.
 	 * 
@@ -118,15 +136,7 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
             }
         }
         else {
-            String tag = aTag;
-            
-            // Apply tag mapping if configured
-            if (tagMappings != null) {
-                String t = tagMappings.get(aTag);
-                if (t != null) {
-                    tag = t;
-                }
-            }
+            String tag = getTag(aTag);
             
             type = getResource().get(tag);
             if (type == null) {
