@@ -27,6 +27,7 @@
   <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-asl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core ASL - IXA</name>
+  <!--  
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>
@@ -102,4 +103,5 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  -->
 </project>
