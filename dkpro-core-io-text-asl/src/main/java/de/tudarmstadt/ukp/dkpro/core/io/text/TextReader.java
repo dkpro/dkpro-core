@@ -27,6 +27,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 
 import com.ibm.icu.text.CharsetDetector;
@@ -36,12 +37,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
 /**
  * UIMA collection reader for plain text files.
- *
  */
+@MimeTypeCapability("text/plain")
 @TypeCapability(
         outputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
-
 public class TextReader
 	extends ResourceCollectionReaderBase
 {
