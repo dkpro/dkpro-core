@@ -56,6 +56,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 
 /**
@@ -212,6 +213,7 @@ public class MateParser
 					dep.setGovernor(sourceToken);
 					dep.setDependent(targetToken);
 					dep.setDependencyType(parsed.plabels[i]);
+                    dep.setFlavor(DependencyFlavor.BASIC);
                     dep.setBegin(dep.getDependent().getBegin());
                     dep.setEnd(dep.getDependent().getEnd());
 					dep.addToIndexes();
@@ -223,6 +225,7 @@ public class MateParser
                     dep.setGovernor(rootToken);
                     dep.setDependent(rootToken);
                     dep.setDependencyType(parsed.plabels[i]);
+                    dep.setFlavor(DependencyFlavor.BASIC);
                     dep.setBegin(dep.getDependent().getBegin());
                     dep.setEnd(dep.getDependent().getEnd());
                     dep.addToIndexes();

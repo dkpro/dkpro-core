@@ -66,6 +66,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 
 /**
@@ -414,6 +415,7 @@ public class MaltParser
 						if (sourceToken != null && targetToken != null) {
 							Dependency dep = new Dependency(aJCas);
                             dep.setDependencyType(edge.getLabelSymbol(symbolTable));
+                            dep.setFlavor(DependencyFlavor.BASIC);
 							dep.setGovernor(sourceToken); // TODO check if source=Governor
 							dep.setDependent(targetToken); // TODO check if target=Dependent
 		                    dep.setBegin(dep.getDependent().getBegin());
@@ -424,6 +426,7 @@ public class MaltParser
                             Dependency dep = new ROOT(aJCas);
                             // Trying to get the label triggers Exception
                             dep.setDependencyType("ROOT");
+                            dep.setFlavor(DependencyFlavor.BASIC);
                             dep.setGovernor(targetToken);
                             dep.setDependent(targetToken);
                             dep.setBegin(dep.getDependent().getBegin());

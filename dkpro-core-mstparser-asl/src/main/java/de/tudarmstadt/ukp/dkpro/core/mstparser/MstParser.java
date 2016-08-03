@@ -62,6 +62,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 
 /**
@@ -291,6 +292,7 @@ public class MstParser
                 if (head > 0) {
                     Dependency dep = (Dependency) cas.createFS(depRel);
                     dep.setDependencyType(instance.deprels[formsIndex]);
+                    dep.setFlavor(DependencyFlavor.BASIC);
                     dep.setDependent(token);
                     dep.setGovernor(tokens.get(head - 1));
                     dep.setBegin(dep.getDependent().getBegin());
@@ -300,6 +302,7 @@ public class MstParser
                 else {
                     Dependency dep = new ROOT(jcas);
                     dep.setDependencyType(instance.deprels[formsIndex]);
+                    dep.setFlavor(DependencyFlavor.BASIC);
                     dep.setDependent(token);
                     dep.setGovernor(token);
                     dep.setBegin(dep.getDependent().getBegin());
