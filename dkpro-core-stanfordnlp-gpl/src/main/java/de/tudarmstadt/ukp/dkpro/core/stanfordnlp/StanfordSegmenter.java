@@ -32,6 +32,7 @@ import java.util.Set;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.LanguageCapability;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.Messages;
@@ -52,10 +53,11 @@ import edu.stanford.nlp.process.WordToSentenceProcessor;
 import edu.stanford.nlp.process.WordToSentenceProcessor.NewlineIsSentenceBreak;
 
 /**
+ * Stanford sentence splitter and tokenizer.
  */
-public
-class StanfordSegmenter
-extends SegmenterBase
+@LanguageCapability({"ar", "en", "es", "fr"})
+public class StanfordSegmenter
+    extends SegmenterBase
 {
     private static final Map<String, InternalTokenizerFactory> tokenizerFactories;
 //    private static final Map<String, TreebankLanguagePack> languagePacks;
@@ -78,6 +80,10 @@ extends SegmenterBase
 //    	languagePacks.put("de", new NegraPennLanguagePack());
     }
 
+    /**
+     * If this component is not configured for a specific language and if the language stored in
+     * the document metadata is not supported, use the given language as a fallback.
+     */
     public static final String PARAM_LANGUAGE_FALLBACK = "languageFallback";
     @ConfigurationParameter(name = PARAM_LANGUAGE_FALLBACK, mandatory = false)
     private String languageFallback;
