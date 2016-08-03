@@ -80,6 +80,25 @@ ${it.value[0].description}
 <% } // if (paramDecls) %>
 
 <%
+def mimetypes = it.value.readerSpec.collectionReaderMetaData?.capabilities?.collect { 
+        it.mimeTypesSupported }.flatten().sort().unique();
+        
+if (mimetypes) {
+%>
+[discrete]
+===== MIME Types
+[options="header"]
+|====
+|MIME types
+<% mimetypes.each { mimetype -> %>
+|${mimetype}
+
+<% } // mimetypes.each { mimetype -> %>
+|====
+<% } // if (mimetypes) %>
+
+
+<%
 def outputs = it.value.readerSpec.collectionReaderMetaData?.capabilities?.collect { 
         it.outputs?.collect { it.name  } }.flatten().sort().unique();
 
@@ -139,6 +158,24 @@ ${it.value[0].description}
 ++++
 <% } // paramDecls.each %>
 <% } // if (paramDecls) %>
+
+<%
+def mimetypes = it.value.writerSpec.analysisEngineMetaData?.capabilities?.collect { 
+        it.mimeTypesSupported }.flatten().sort().unique();
+
+if (mimetypes) {
+%>
+[discrete]
+===== MIME Types
+[options="header"]
+|====
+|Language
+<% mimetypes.each { mimetype -> %>
+|${mimetype}
+
+<% } // mimetypes.each { mimetype -> %>
+|====
+<% } // if (mimetypes) %>
 
 <%
 def inputs = it.value.writerSpec.analysisEngineMetaData?.capabilities?.collect { 
