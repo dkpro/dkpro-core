@@ -147,6 +147,11 @@ public class DatasetLoader
         File license = new File(dataDir, "gum-c119554a33ed48659edb6cfd788c6d8173cc7aa9/LICENSE.txt");
         ds.setLicenseFile(license);
 
+        fetch(target,
+                "https://github.com/amir-zeldes/gum/archive/c119554a33ed48659edb6cfd788c6d8173cc7aa9.zip",
+                "bd512ffc85d491c42dfdada37f0886fe", null);
+        unzip(target, dataDir);
+        
         File conll2006Path = new File(dataDir, "gum-c119554a33ed48659edb6cfd788c6d8173cc7aa9/dep");
         File[] all = conll2006Path.listFiles(file -> { return file.getName().endsWith(".conll10"); });
         Arrays.sort(all, (File a, File b) -> { return a.getName().compareTo(b.getName()); });
@@ -158,10 +163,6 @@ public class DatasetLoader
         ds.setTrainingFiles(train);
         ds.setTestFiles(test);
         
-        fetch(target,
-                "https://github.com/amir-zeldes/gum/archive/c119554a33ed48659edb6cfd788c6d8173cc7aa9.zip",
-                "bd512ffc85d491c42dfdada37f0886fe", null);
-        unzip(target, dataDir);
 
         return ds;
     }
