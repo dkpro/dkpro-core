@@ -36,23 +36,55 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
  */
 public class StanfordNamedEntityRecognizerTest
 {
+    @Test
+    public void testDutchFremeNer()
+       throws Exception
+    {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+
+        JCas jcas = runTest("nl", "freme-wikiner", "10 jaar Markus werkzaam bij SAP in Duitsland .");
+
+        String[] ne = {
+                "[  8, 14]Person(I-PER) (Markus)",
+                "[ 28, 31]Organization(I-ORG) (SAP)",
+                "[ 35, 44]Location(I-LOC) (Duitsland)" };
+
+        AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
+    }
+    
 	@Test
 	public void testEnglish()
 		throws Exception
 	{
 		Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
 
-        JCas jcas = runTest("en", null, "IBM where John works is in Germany .");
+        JCas jcas = runTest("en", null, "IBM where John Miller works is in Germany .");
 
         String[] ne = {
                 "[  0,  3]Organization(ORGANIZATION) (IBM)",
-                "[ 10, 14]Person(PERSON) (John)",
-                "[ 27, 34]Location(LOCATION) (Germany)" };
+                "[ 10, 21]Person(PERSON) (John Miller)", 
+                "[ 34, 41]Location(LOCATION) (Germany)" };
 
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
 	}
 
-   @Test
+    @Test
+    public void testEnglishFremeNer()
+        throws Exception
+    {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+
+        JCas jcas = runTest("en", "freme-wikiner", "IBM where John Miller works is in Germany .");
+
+        String[] ne = {
+                "[  0,  3]Organization(I-ORG) (IBM)", 
+                "[ 10, 21]Person(I-PER) (John Miller)", 
+                "[ 34, 41]Location(I-LOC) (Germany)" };
+
+        AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
+    }
+
+    @Test
     public void test3classCaselessEnglish()
         throws Exception
     {
@@ -166,7 +198,7 @@ public class StanfordNamedEntityRecognizerTest
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
 	}
 
-   @Test
+    @Test
     public void testGermanNemgp()
         throws Exception
     {
@@ -197,22 +229,86 @@ public class StanfordNamedEntityRecognizerTest
 
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
     }
-
-   @Test
-   public void testSpanish()
+    
+    @Test
+    public void testFrenchFremeNer()
        throws Exception
-   {
-       Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+    {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
 
-       JCas jcas = runTest("es", null, "Hace 10 años Markus trabaja en SAP en Alemania .");
+        JCas jcas = runTest("fr", "freme-wikiner", "Il y a 10 ans Markus travaille dans SAP en Allemagne .");
 
-       String[] ne = {
-               "[ 13, 19]Person(PERS) (Markus)",
-               "[ 31, 34]Organization(ORG) (SAP)",
-               "[ 38, 46]Location(LUG) (Alemania)" };
+        String[] ne = {
+                "[ 14, 20]Person(I-PER) (Markus)",
+                "[ 36, 39]Organization(I-ORG) (SAP)",
+                "[ 43, 52]Location(I-LOC) (Allemagne)" };
 
-       AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
-   }
+        AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
+    }
+
+    @Test
+    public void testItalianFremeNer()
+       throws Exception
+    {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+
+        JCas jcas = runTest("it", "freme-wikiner", "10 anni fa Markus lavora in SAP in Germania .");
+
+        String[] ne = {
+                "[ 11, 17]Person(I-PER) (Markus)",
+                "[ 28, 31]Organization(I-ORG) (SAP)",
+                "[ 35, 43]Location(I-LOC) (Germania)" };
+
+        AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
+    }
+    
+    @Test
+    public void testRussianFremeNer()
+       throws Exception
+    {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+
+        JCas jcas = runTest("ru", "freme-wikiner", "10 лет Маркус работал в SAP в Германии .");
+
+        String[] ne = {
+                "[  7, 13]Person(I-PER) (Маркус)",
+                "[ 24, 27]Organization(I-ORG) (SAP)",
+                "[ 30, 38]Location(I-LOC) (Германии)" };
+
+        AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
+    }
+    
+    @Test
+    public void testSpanish()
+        throws Exception
+    {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+
+        JCas jcas = runTest("es", null, "Hace 10 años Markus trabaja en SAP en Alemania .");
+
+        String[] ne = {
+                "[ 13, 19]Person(PERS) (Markus)",
+                "[ 31, 34]Organization(ORG) (SAP)",
+                "[ 38, 46]Location(LUG) (Alemania)" };
+
+        AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
+    }
+   
+    @Test
+    public void testSpanishFremeNer()
+       throws Exception
+    {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+
+        JCas jcas = runTest("es", "freme-wikiner", "Hace 10 años Markus trabaja en SAP en Alemania .");
+
+        String[] ne = {
+                "[ 13, 19]Person(I-PER) (Markus)",
+                "[ 31, 34]Organization(I-MISC) (SAP)",
+                "[ 38, 46]Location(I-LOC) (Alemania)" };
+
+        AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
+    }
 
 	@Test(expected = AnalysisEngineProcessException.class)
 	public void testMissingModel() throws Exception

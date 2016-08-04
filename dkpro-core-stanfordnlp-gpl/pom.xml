@@ -374,6 +374,36 @@
       <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-es-distsim</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-freme-wikiner</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-es-freme-wikiner</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-fr-freme-wikiner</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-it-freme-wikiner</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-nl-freme-wikiner</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-ru-freme-wikiner</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <dependencyManagement>
     <dependencies>
@@ -699,6 +729,36 @@
         <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-es-distsim</artifactId>
         <version>20150108.1</version>
       </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-freme-wikiner</artifactId>
+        <version>20150925.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-es-freme-wikiner</artifactId>
+        <version>20150925.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-fr-freme-wikiner</artifactId>
+        <version>20150925.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-it-freme-wikiner</artifactId>
+        <version>20150925.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-nl-freme-wikiner</artifactId>
+        <version>20150925.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-ru-freme-wikiner</artifactId>
+        <version>20160726.1</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <build>
@@ -724,6 +784,12 @@
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-nowiki.3class.caseless.distsim.crf</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-nowiki.3class.nodistsim.crf</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-es-ancora.distsim.s512.crf</usedDependency>
+              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-freme-wikiner</usedDependency>
+              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-es-freme-wikiner</usedDependency>
+              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-fr-freme-wikiner</usedDependency>
+              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-it-freme-wikiner</usedDependency>
+              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-nl-freme-wikiner</usedDependency>
+              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-ru-freme-wikiner</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-ar-factored</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-de-factored</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-de-pcfg</usedDependency>

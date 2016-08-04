@@ -20,7 +20,7 @@
 -->
 <project basedir="../.." default="separate-jars">
 	<import>
-		<url url="https://raw.githubusercontent.com/dkpro/resource-packager/0.6.0/ant-macros.xml"/>
+		<url url="https://raw.githubusercontent.com/dkpro/resource-packager/0.8.0/ant-macros.xml"/>
 	</import>
 	
 	<!-- 
@@ -87,8 +87,19 @@
         <!- - FIXME depparser-en-wsj-sd - ->
         <antcall target="depparser-fr-ud"/>
         -->
+
+		<!--
+        <antcall target="ner-en-freme-wikiner"/>
+        <antcall target="ner-es-freme-wikiner"/>
+        <antcall target="ner-fr-freme-wikiner"/>
+        <antcall target="ner-it-freme-wikiner"/>
+        <antcall target="ner-nl-freme-wikiner"/>
+        -->
+        <antcall target="ner-ru-freme-wikiner"/>
 		
+		<!--
 		<antcall target="coref-en-default"/>
+		-->
 	</target>
 	
 	<target name="ar">
@@ -512,6 +523,7 @@
 		<antcall target="ner-en-all.3class.caseless.distsim.crf"/>
 		<antcall target="ner-en-nowiki.3class.caseless.distsim.crf"/>
         <antcall target="ner-en-nowiki.3class.nodistsim.crf"/>
+		<antcall target="ner-en-freme-wikiner"/>
 		<antcall target="parser-en-pcfg"/>
 		<antcall target="parser-en-pcfg.caseless"/>
 		<antcall target="parser-en-factored"/>
@@ -1090,6 +1102,36 @@
         <delete dir="target/download/tmp"/>
     </target>
 
+    <target name="ner-en-freme-wikiner">
+        <mkdir dir="target/download"/>
+        <!-- FILE: wikiner-en-ner-model.ser.gz - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2015-09-25 | now        | 6c1ae67323d607ad858898b92957775d
+          -->
+        <get 
+            src="http://api.freme-project.eu/datasets/ner-trained-models/wikiner/wikiner-en-ner-model.ser.gz" 
+            dest="target/download/wikiner-en-ner-model.ser.gz" 
+            skipexisting="true"/>
+            
+        <install-stub-and-upstream-file 
+            file="target/download/wikiner-en-ner-model.ser.gz" 
+            md5="6c1ae67323d607ad858898b92957775d"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+            upstreamVersion="20150925"
+            metaDataVersion="1"
+            tool="ner" 
+            language="en" 
+            variant="freme-wikiner" 
+            extension="ser.gz">     
+            <metadata>
+                <entry key="DC.title" value="wikiner-en-ner-model.ser.gz"/>
+                <entry key="DC.identifier" value="http://api.freme-project.eu/datasets/ner-trained-models/wikiner/wikiner-en-ner-model.ser.gz"/>
+                <entry key="DC.creator" value="http://www.freme-project.eu"/>
+                <entry key="DC.rights" value="http://creativecommons.org/licenses/by-sa/3.0/"/>
+            </metadata>
+        </install-stub-and-upstream-file>       
+    </target>
+	
 	<target name="parser-en-pcfg" depends="download-en">
         <mkdir dir="target/download/tmp"/>
         <unzip src="target/download/en/en-models.zip" dest="target/download/tmp">
@@ -1384,6 +1426,7 @@
 		<antcall target="tagger-es-default"/>
 		<antcall target="tagger-es-distsim"/>
 		<antcall target="ner-es-ancora.distsim.s512.crf"/>
+        <antcall target="ner-es-freme-wikiner"/>
 		<antcall target="parser-es-pcfg"/>
 		<antcall target="parser-es-sr"/>
 		<antcall target="parser-es-sr-beam"/>
@@ -1473,6 +1516,36 @@
         <delete dir="target/download/tmp"/>
 	</target>
 	
+    <target name="ner-es-freme-wikiner">
+        <mkdir dir="target/download"/>
+        <!-- FILE: wikiner-es-ner-model.ser.gz - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2015-09-25 | now        | 07860b099d21dfd526bfa902a8acfe5b
+          -->
+        <get 
+            src="http://api.freme-project.eu/datasets/ner-trained-models/wikiner/wikiner-es-ner-model.ser.gz" 
+            dest="target/download/wikiner-es-ner-model.ser.gz" 
+            skipexisting="true"/>
+            
+        <install-stub-and-upstream-file 
+            file="target/download/wikiner-es-ner-model.ser.gz" 
+            md5="07860b099d21dfd526bfa902a8acfe5b"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+            upstreamVersion="20150925"
+            metaDataVersion="1"
+            tool="ner" 
+            language="es" 
+            variant="freme-wikiner" 
+            extension="ser.gz">     
+            <metadata>
+                <entry key="DC.title" value="wikiner-es-ner-model.ser.gz"/>
+                <entry key="DC.identifier" value="http://api.freme-project.eu/datasets/ner-trained-models/wikiner/wikiner-es-ner-model.ser.gz"/>
+                <entry key="DC.creator" value="http://www.freme-project.eu"/>
+                <entry key="DC.rights" value="http://creativecommons.org/licenses/by-sa/3.0/"/>
+            </metadata>
+        </install-stub-and-upstream-file>       
+    </target>
+    
 	<target name="parser-es-pcfg" depends="download-es">
         <mkdir dir="target/download/tmp"/>
         <unzip src="target/download/es/es-models.zip" dest="target/download/tmp">
@@ -1563,6 +1636,7 @@
 		<antcall target="parser-fr-sr-beam"/>
 		<antcall target="depparser-fr-ud"/>
 		<antcall target="tagger-fr-default"/>
+        <antcall target="ner-fr-freme-wikiner"/>
 	</target>
 
 	<target name="parser-fr-factored" depends="download-fr">
@@ -1703,6 +1777,36 @@
         <delete dir="target/download/tmp"/>
 	</target>
 
+    <target name="ner-fr-freme-wikiner">
+        <mkdir dir="target/download"/>
+        <!-- FILE: wikiner-fr-ner-model.ser.gz - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2015-09-25 | now        | 6de6c1ada3e1909462c59bffe4e63703
+          -->
+        <get 
+            src="http://api.freme-project.eu/datasets/ner-trained-models/wikiner/wikiner-fr-ner-model.ser.gz" 
+            dest="target/download/wikiner-fr-ner-model.ser.gz" 
+            skipexisting="true"/>
+            
+        <install-stub-and-upstream-file 
+            file="target/download/wikiner-fr-ner-model.ser.gz" 
+            md5="6de6c1ada3e1909462c59bffe4e63703"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+            upstreamVersion="20150925"
+            metaDataVersion="1"
+            tool="ner" 
+            language="fr" 
+            variant="freme-wikiner" 
+            extension="ser.gz">     
+            <metadata>
+                <entry key="DC.title" value="wikiner-fr-ner-model.ser.gz"/>
+                <entry key="DC.identifier" value="http://api.freme-project.eu/datasets/ner-trained-models/wikiner/wikiner-fr-ner-model.ser.gz"/>
+                <entry key="DC.creator" value="http://www.freme-project.eu"/>
+                <entry key="DC.rights" value="http://creativecommons.org/licenses/by-sa/3.0/"/>
+            </metadata>
+        </install-stub-and-upstream-file>       
+    </target>
+	
 	<target name="hr">
 		<antcall target="ner-hr-3-class.distsim"/>
 	</target>
@@ -1732,6 +1836,74 @@
 	     -->
 	</target>
 	
+    <target name="it">
+        <antcall target="ner-it-freme-wikiner"/>
+    </target>
+        
+    <target name="ner-it-freme-wikiner">
+        <mkdir dir="target/download"/>
+        <!-- FILE: wikiner-it-ner-model.ser.gz - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2015-09-25 | now        | 575954bac98ab4fab646fbc96fdb383a
+          -->
+        <get 
+            src="http://api.freme-project.eu/datasets/ner-trained-models/wikiner/wikiner-it-ner-model.ser.gz" 
+            dest="target/download/wikiner-it-ner-model.ser.gz" 
+            skipexisting="true"/>
+            
+        <install-stub-and-upstream-file 
+            file="target/download/wikiner-it-ner-model.ser.gz" 
+            md5="575954bac98ab4fab646fbc96fdb383a"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+            upstreamVersion="20150925"
+            metaDataVersion="1"
+            tool="ner" 
+            language="it" 
+            variant="freme-wikiner" 
+            extension="ser.gz">     
+            <metadata>
+                <entry key="DC.title" value="wikiner-it-ner-model.ser.gz"/>
+                <entry key="DC.identifier" value="http://api.freme-project.eu/datasets/ner-trained-models/wikiner/wikiner-it-ner-model.ser.gz"/>
+                <entry key="DC.creator" value="http://www.freme-project.eu"/>
+                <entry key="DC.rights" value="http://creativecommons.org/licenses/by-sa/3.0/"/>
+            </metadata>
+        </install-stub-and-upstream-file>       
+    </target>
+    
+    <target name="nl">
+        <antcall target="ner-nl-freme-wikiner"/>
+    </target>
+        
+    <target name="ner-nl-freme-wikiner">
+        <mkdir dir="target/download"/>
+        <!-- FILE: wikiner-nl-ner-model.ser.gz - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2015-09-25 | now        | 9d871832e43316b90efd9a4ec68fe83f
+          -->
+        <get 
+            src="http://api.freme-project.eu/datasets/ner-trained-models/wikiner/wikiner-nl-ner-model.ser.gz" 
+            dest="target/download/wikiner-nl-ner-model.ser.gz" 
+            skipexisting="true"/>
+            
+        <install-stub-and-upstream-file 
+            file="target/download/wikiner-nl-ner-model.ser.gz" 
+            md5="9d871832e43316b90efd9a4ec68fe83f"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+            upstreamVersion="20150925"
+            metaDataVersion="1"
+            tool="ner" 
+            language="nl" 
+            variant="freme-wikiner" 
+            extension="ser.gz">     
+            <metadata>
+                <entry key="DC.title" value="wikiner-nl-ner-model.ser.gz"/>
+                <entry key="DC.identifier" value="http://api.freme-project.eu/datasets/ner-trained-models/wikiner/wikiner-nl-ner-model.ser.gz"/>
+                <entry key="DC.creator" value="http://www.freme-project.eu"/>
+                <entry key="DC.rights" value="http://creativecommons.org/licenses/by-sa/3.0/"/>
+            </metadata>
+        </install-stub-and-upstream-file>       
+    </target>
+    
 	<target name="pt">
 		<antcall target="tagger-pt-mm"/>
 	</target>
@@ -1771,6 +1943,41 @@
 		</install-stub-and-upstream-file>
 		-->
 	</target>
+
+    <target name="ru">
+        <antcall target="ner-ru-freme-wikiner"/>
+    </target>
+        
+    <target name="ner-ru-freme-wikiner">
+        <mkdir dir="target/download"/>
+        <!-- FILE: wikiner-ru-ner-model.ser.gz - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2016-07-26 | now        | 1be836d82461349ca4ea1bde4f8f07f7
+          -->
+        <get 
+            src="http://api.freme-project.eu/datasets/ner-trained-models/wikiner/wikiner-ru-ner-model.ser.gz" 
+            dest="target/download/wikiner-ru-ner-model.ser.gz" 
+            skipexisting="true"/>
+            
+        <install-stub-and-upstream-file 
+            file="target/download/wikiner-ru-ner-model.ser.gz" 
+            md5="1be836d82461349ca4ea1bde4f8f07f7"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+            upstreamVersion="20160726"
+            metaDataVersion="1"
+            tool="ner" 
+            language="ru" 
+            variant="freme-wikiner" 
+            extension="ser.gz">     
+            <metadata>
+                <entry key="DC.title" value="wikiner-ru-ner-model.ser.gz"/>
+                <entry key="DC.identifier" value="http://api.freme-project.eu/datasets/ner-trained-models/wikiner/wikiner-ru-ner-model.ser.gz"/>
+                <entry key="DC.creator" value="http://www.freme-project.eu"/>
+                <entry key="DC.rights" value="http://creativecommons.org/licenses/by-sa/3.0/"/>
+            </metadata>
+        </install-stub-and-upstream-file>       
+    </target>
+    
 
 	<target name="zh">
 		<antcall target="tagger-zh-distsim"/>
