@@ -69,6 +69,20 @@ public class StanfordNamedEntityRecognizerTest
 	}
 
     @Test
+    public void testEnglishAdjacent()
+        throws Exception
+    {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+
+        JCas jcas = runTest("en", null, "Jake John called late at night .");
+
+        String[] ne = {
+                "[  0,  9]Person(PERSON) (Jake John)" };
+
+        AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
+    }
+
+    @Test
     public void testEnglishFremeNer()
         throws Exception
     {
