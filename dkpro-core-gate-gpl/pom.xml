@@ -29,7 +29,10 @@
   </parent>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.gate-gpl</artifactId>
   <packaging>jar</packaging>
-  <name>DKPro Core GPL - GATE</name>
+  <name>DKPro Core GPL - GATE (v ${gate.version})</name>
+  <properties>
+    <gate.version>8.0</gate.version>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>
@@ -54,7 +57,7 @@
     <dependency>
       <groupId>uk.ac.gate</groupId>
       <artifactId>gate-core</artifactId>
-      <version>8.0</version>
+      <version>${gate.version}</version>
     </dependency>
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>

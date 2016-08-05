@@ -17,11 +17,11 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.gate.internal;
 
-import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateConstants.FEAT_CATEGORY;
-import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateConstants.FEAT_LEMMA;
-import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateConstants.FEAT_STEM;
-import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateConstants.TYPE_SENTENCE;
-import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateConstants.TYPE_TOKEN;
+import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateAnnieConstants.FEAT_CATEGORY;
+import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateAnnieConstants.FEAT_LEMMA;
+import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateAnnieConstants.FEAT_STEM;
+import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateAnnieConstants.TYPE_SENTENCE;
+import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateAnnieConstants.TYPE_TOKEN;
 
 import org.apache.uima.jcas.JCas;
 

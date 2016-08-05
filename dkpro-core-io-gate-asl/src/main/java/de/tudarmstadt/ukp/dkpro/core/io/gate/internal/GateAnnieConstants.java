@@ -17,7 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.gate.internal;
 
-public final class GateConstants
+public final class GateAnnieConstants
 {
     public static final String TYPE_TOKEN = "Token";
     public static final String TYPE_SENTENCE = "Sentence";
@@ -28,7 +28,7 @@ public final class GateConstants
     public static final String FEAT_LEMMA = "lemma";
     public static final String FEAT_STEM = "stem";
     
-    private GateConstants()
+    private GateAnnieConstants()
     {
         // No instances
     }
