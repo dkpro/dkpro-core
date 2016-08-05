@@ -17,11 +17,11 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.gate.internal;
 
-import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateAnnieConstants.FEAT_CATEGORY;
 import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateAnnieConstants.FEAT_LEMMA;
 import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateAnnieConstants.FEAT_STEM;
-import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateAnnieConstants.TYPE_SENTENCE;
-import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateAnnieConstants.TYPE_TOKEN;
+import static gate.creole.ANNIEConstants.SENTENCE_ANNOTATION_TYPE;
+import static gate.creole.ANNIEConstants.TOKEN_ANNOTATION_TYPE;
+import static gate.creole.ANNIEConstants.TOKEN_CATEGORY_FEATURE_NAME;
 
 import org.apache.uima.jcas.JCas;
 
@@ -49,19 +49,19 @@ public class Gate2DKPro
                 continue;
             }
 
-            if (TYPE_SENTENCE.equals(ann.getType())) {
+            if (SENTENCE_ANNOTATION_TYPE.equals(ann.getType())) {
                 Sentence s = new Sentence(jcas, ann.getStartNode().getOffset().intValue(),
                         ann.getEndNode().getOffset().intValue());
                 s.addToIndexes(jcas);
             }
-            else if (TYPE_TOKEN.equals(ann.getType())) {
+            else if (TOKEN_ANNOTATION_TYPE.equals(ann.getType())) {
                 FeatureMap fm = ann.getFeatures();
                 int startIndex = ann.getStartNode().getOffset().intValue();
                 int endIndex = ann.getEndNode().getOffset().intValue();
 
                 Token token = new Token(jcas, startIndex, endIndex);
 
-                String posValue = (String) fm.get(FEAT_CATEGORY);
+                String posValue = (String) fm.get(TOKEN_CATEGORY_FEATURE_NAME);
                 if (posValue != null) {
                     POS pos = new POS(jcas, startIndex, endIndex);
                     pos.setPosValue(posValue);

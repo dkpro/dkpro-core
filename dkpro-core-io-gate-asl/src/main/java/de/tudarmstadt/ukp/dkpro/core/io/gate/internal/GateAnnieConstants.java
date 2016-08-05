@@ -19,12 +19,6 @@ package de.tudarmstadt.ukp.dkpro.core.io.gate.internal;
 
 public final class GateAnnieConstants
 {
-    public static final String TYPE_TOKEN = "Token";
-    public static final String TYPE_SENTENCE = "Sentence";
-    
-    public static final String FEAT_LENGTH = "length";
-    public static final String FEAT_STRING = "string";
-    public static final String FEAT_CATEGORY = "category";
     public static final String FEAT_LEMMA = "lemma";
     public static final String FEAT_STEM = "stem";
     

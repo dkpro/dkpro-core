@@ -17,13 +17,9 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.gate.internal;
 
-import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateAnnieConstants.FEAT_CATEGORY;
+import static gate.creole.ANNIEConstants.*;
 import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateAnnieConstants.FEAT_LEMMA;
-import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateAnnieConstants.FEAT_LENGTH;
 import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateAnnieConstants.FEAT_STEM;
-import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateAnnieConstants.FEAT_STRING;
-import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateAnnieConstants.TYPE_SENTENCE;
-import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateAnnieConstants.TYPE_TOKEN;
 import static org.apache.uima.fit.util.JCasUtil.selectAll;
 
 import org.apache.uima.jcas.JCas;
@@ -60,10 +56,10 @@ public class DKPro2Gate
             if (fs instanceof Token) {
                 Token t = (Token) fs;
                 FeatureMap fm = new SimpleFeatureMapImpl();
-                fm.put(FEAT_LENGTH, t.getCoveredText().length());
-                fm.put(FEAT_STRING, t.getCoveredText());
+                fm.put(TOKEN_LENGTH_FEATURE_NAME, t.getCoveredText().length());
+                fm.put(TOKEN_STRING_FEATURE_NAME, t.getCoveredText());
                 if (t.getPos() != null) {
-                    fm.put(FEAT_CATEGORY, t.getPos().getPosValue());
+                    fm.put(TOKEN_CATEGORY_FEATURE_NAME, t.getPos().getPosValue());
                 }
                 if (t.getLemma() != null) {
                     fm.put(FEAT_LEMMA, t.getLemma().getValue());
@@ -71,7 +67,8 @@ public class DKPro2Gate
                 if (t.getStem() != null) {
                     fm.put(FEAT_STEM, t.getStem().getValue());
                 }
-                as.add(Long.valueOf(t.getBegin()), Long.valueOf(t.getEnd()), TYPE_TOKEN, fm);
+                as.add(Long.valueOf(t.getBegin()), Long.valueOf(t.getEnd()), TOKEN_ANNOTATION_TYPE,
+                        fm);
             }
             else if (fs instanceof Lemma) {
                 // Do nothing - handled as part of Token
@@ -82,7 +79,8 @@ public class DKPro2Gate
             else if (fs instanceof Sentence) {
                 Sentence s = (Sentence) fs;
                 FeatureMap fm = new SimpleFeatureMapImpl();
-                as.add(Long.valueOf(s.getBegin()), Long.valueOf(s.getEnd()), TYPE_SENTENCE, fm);
+                as.add(Long.valueOf(s.getBegin()), Long.valueOf(s.getEnd()),
+                        SENTENCE_ANNOTATION_TYPE, fm);
             }
             else {
                 System.out.printf("Don't know how to handle type: %s%n", fs.getType().getName());
