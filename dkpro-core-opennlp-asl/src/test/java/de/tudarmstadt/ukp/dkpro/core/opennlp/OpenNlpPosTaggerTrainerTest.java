@@ -57,8 +57,7 @@ public class OpenNlpPosTaggerTrainerTest
         CollectionReaderDescription trainReader = createReaderDescription(
                 Conll2006Reader.class,
                 Conll2006Reader.PARAM_PATTERNS, ds.getTrainingFiles(),
-                Conll2006Reader.PARAM_LANGUAGE, ds.getLanguage(),
-                Conll2006Reader.PARAM_USE_CPOS_AS_POS, true);
+                Conll2006Reader.PARAM_LANGUAGE, ds.getLanguage());
         
         AnalysisEngineDescription trainer = createEngineDescription(
                 OpenNlpPosTaggerTrainer.class,
@@ -96,9 +95,9 @@ public class OpenNlpPosTaggerTrainerTest
 
         Result results = EvalUtil.dumpResults(targetFolder, expected, actual);
         
-        assertEquals(0.754858, results.getFscore(), 0.0001);
-        assertEquals(0.750121, results.getPrecision(), 0.0001);
-        assertEquals(0.759655, results.getRecall(), 0.0001);
+        assertEquals(0.752208, results.getFscore(), 0.0001);
+        assertEquals(0.747488, results.getPrecision(), 0.0001);
+        assertEquals(0.756989, results.getRecall(), 0.0001);
     }
     
     @Before
