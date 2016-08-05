@@ -13,7 +13,13 @@
 <!-- The default annotation set -->
 
 <AnnotationSet>
-<Annotation Id="0" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="0" EndNode="10">
+<Annotation Id="0" Type="Sentence" StartNode="0" EndNode="215">
+</Annotation>
+<Annotation Id="1" Type="Sentence" StartNode="217" EndNode="372">
+</Annotation>
+<Annotation Id="2" Type="Sentence" StartNode="374" EndNode="550">
+</Annotation>
+<Annotation Id="3" Type="Token" StartNode="0" EndNode="10">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">10</Value>
@@ -22,8 +28,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">Confidence</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="1" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="11" EndNode="13">
+<Annotation Id="4" Type="Token" StartNode="11" EndNode="13">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">2</Value>
@@ -32,8 +42,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">in</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">IN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="2" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="14" EndNode="17">
+<Annotation Id="5" Type="Token" StartNode="14" EndNode="17">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">3</Value>
@@ -42,8 +56,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">the</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">DT</Value>
+</Feature>
 </Annotation>
-<Annotation Id="3" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="18" EndNode="23">
+<Annotation Id="6" Type="Token" StartNode="18" EndNode="23">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">5</Value>
@@ -52,8 +70,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">pound</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="4" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="24" EndNode="26">
+<Annotation Id="7" Type="Token" StartNode="24" EndNode="26">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">2</Value>
@@ -62,8 +84,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">is</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">VBZ</Value>
+</Feature>
 </Annotation>
-<Annotation Id="5" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="27" EndNode="33">
+<Annotation Id="8" Type="Token" StartNode="27" EndNode="33">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">6</Value>
@@ -72,8 +98,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">widely</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">RB</Value>
+</Feature>
 </Annotation>
-<Annotation Id="6" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="34" EndNode="42">
+<Annotation Id="9" Type="Token" StartNode="34" EndNode="42">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">8</Value>
@@ -82,8 +112,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">expected</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">VBN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="7" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="43" EndNode="45">
+<Annotation Id="10" Type="Token" StartNode="43" EndNode="45">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">2</Value>
@@ -92,8 +126,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">to</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">TO</Value>
+</Feature>
 </Annotation>
-<Annotation Id="8" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="46" EndNode="50">
+<Annotation Id="11" Type="Token" StartNode="46" EndNode="50">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">4</Value>
@@ -102,8 +140,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">take</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">VB</Value>
+</Feature>
 </Annotation>
-<Annotation Id="9" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="51" EndNode="58">
+<Annotation Id="12" Type="Token" StartNode="51" EndNode="58">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">7</Value>
@@ -112,8 +154,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">another</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">DT</Value>
+</Feature>
 </Annotation>
-<Annotation Id="10" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="59" EndNode="64">
+<Annotation Id="13" Type="Token" StartNode="59" EndNode="64">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">5</Value>
@@ -122,8 +168,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">sharp</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">JJ</Value>
+</Feature>
 </Annotation>
-<Annotation Id="11" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="65" EndNode="69">
+<Annotation Id="14" Type="Token" StartNode="65" EndNode="69">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">4</Value>
@@ -132,8 +182,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">dive</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="12" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="70" EndNode="72">
+<Annotation Id="15" Type="Token" StartNode="70" EndNode="72">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">2</Value>
@@ -142,8 +196,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">if</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">IN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="13" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="73" EndNode="78">
+<Annotation Id="16" Type="Token" StartNode="73" EndNode="78">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">5</Value>
@@ -152,8 +210,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">trade</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="14" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="79" EndNode="86">
+<Annotation Id="17" Type="Token" StartNode="79" EndNode="86">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">7</Value>
@@ -162,8 +224,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">figures</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NNS</Value>
+</Feature>
 </Annotation>
-<Annotation Id="15" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="87" EndNode="90">
+<Annotation Id="18" Type="Token" StartNode="87" EndNode="90">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">3</Value>
@@ -172,8 +238,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">for</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">IN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="16" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="91" EndNode="100">
+<Annotation Id="19" Type="Token" StartNode="91" EndNode="100">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">9</Value>
@@ -182,8 +252,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">September</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NNP</Value>
+</Feature>
 </Annotation>
-<Annotation Id="17" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="101" EndNode="102">
+<Annotation Id="20" Type="Token" StartNode="101" EndNode="102">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">1</Value>
@@ -192,8 +266,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">,</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">,</Value>
+</Feature>
 </Annotation>
-<Annotation Id="18" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="103" EndNode="106">
+<Annotation Id="21" Type="Token" StartNode="103" EndNode="106">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">3</Value>
@@ -202,8 +280,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">due</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">JJ</Value>
+</Feature>
 </Annotation>
-<Annotation Id="19" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="107" EndNode="110">
+<Annotation Id="22" Type="Token" StartNode="107" EndNode="110">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">3</Value>
@@ -212,8 +294,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">for</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">IN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="20" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="111" EndNode="118">
+<Annotation Id="23" Type="Token" StartNode="111" EndNode="118">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">7</Value>
@@ -222,8 +308,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">release</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="21" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="119" EndNode="127">
+<Annotation Id="24" Type="Token" StartNode="119" EndNode="127">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">8</Value>
@@ -232,8 +322,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">tomorrow</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="22" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="128" EndNode="129">
+<Annotation Id="25" Type="Token" StartNode="128" EndNode="129">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">1</Value>
@@ -242,8 +336,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">,</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">,</Value>
+</Feature>
 </Annotation>
-<Annotation Id="23" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="130" EndNode="134">
+<Annotation Id="26" Type="Token" StartNode="130" EndNode="134">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">4</Value>
@@ -252,8 +350,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">fail</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">VB</Value>
+</Feature>
 </Annotation>
-<Annotation Id="24" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="135" EndNode="137">
+<Annotation Id="27" Type="Token" StartNode="135" EndNode="137">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">2</Value>
@@ -262,8 +364,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">to</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">TO</Value>
+</Feature>
 </Annotation>
-<Annotation Id="25" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="138" EndNode="142">
+<Annotation Id="28" Type="Token" StartNode="138" EndNode="142">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">4</Value>
@@ -272,8 +378,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">show</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">VB</Value>
+</Feature>
 </Annotation>
-<Annotation Id="26" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="143" EndNode="144">
+<Annotation Id="29" Type="Token" StartNode="143" EndNode="144">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">1</Value>
@@ -282,8 +392,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">a</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">DT</Value>
+</Feature>
 </Annotation>
-<Annotation Id="27" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="145" EndNode="156">
+<Annotation Id="30" Type="Token" StartNode="145" EndNode="156">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">11</Value>
@@ -292,8 +406,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">substantial</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">JJ</Value>
+</Feature>
 </Annotation>
-<Annotation Id="28" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="157" EndNode="168">
+<Annotation Id="31" Type="Token" StartNode="157" EndNode="168">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">11</Value>
@@ -302,8 +420,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">improvement</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="29" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="169" EndNode="173">
+<Annotation Id="32" Type="Token" StartNode="169" EndNode="173">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">4</Value>
@@ -312,8 +434,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">from</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">IN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="30" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="174" EndNode="178">
+<Annotation Id="33" Type="Token" StartNode="174" EndNode="178">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">4</Value>
@@ -322,8 +448,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">July</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NNP</Value>
+</Feature>
 </Annotation>
-<Annotation Id="31" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="179" EndNode="182">
+<Annotation Id="34" Type="Token" StartNode="179" EndNode="182">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">3</Value>
@@ -332,8 +462,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">and</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">CC</Value>
+</Feature>
 </Annotation>
-<Annotation Id="32" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="183" EndNode="189">
+<Annotation Id="35" Type="Token" StartNode="183" EndNode="189">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">6</Value>
@@ -342,8 +476,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">August</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NNP</Value>
+</Feature>
 </Annotation>
-<Annotation Id="33" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="190" EndNode="192">
+<Annotation Id="36" Type="Token" StartNode="190" EndNode="192">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">2</Value>
@@ -352,8 +490,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">'s</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">POS</Value>
+</Feature>
 </Annotation>
-<Annotation Id="34" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="193" EndNode="204">
+<Annotation Id="37" Type="Token" StartNode="193" EndNode="204">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">11</Value>
@@ -362,8 +504,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">near-record</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">JJ</Value>
+</Feature>
 </Annotation>
-<Annotation Id="35" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="205" EndNode="213">
+<Annotation Id="38" Type="Token" StartNode="205" EndNode="213">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">8</Value>
@@ -372,8 +518,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">deficits</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NNS</Value>
+</Feature>
 </Annotation>
-<Annotation Id="36" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="214" EndNode="215">
+<Annotation Id="39" Type="Token" StartNode="214" EndNode="215">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">1</Value>
@@ -382,8 +532,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">.</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">.</Value>
+</Feature>
 </Annotation>
-<Annotation Id="37" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="217" EndNode="227">
+<Annotation Id="40" Type="Token" StartNode="217" EndNode="227">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">10</Value>
@@ -392,8 +546,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">Chancellor</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NNP</Value>
+</Feature>
 </Annotation>
-<Annotation Id="38" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="228" EndNode="230">
+<Annotation Id="41" Type="Token" StartNode="228" EndNode="230">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">2</Value>
@@ -402,8 +560,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">of</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">IN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="39" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="231" EndNode="234">
+<Annotation Id="42" Type="Token" StartNode="231" EndNode="234">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">3</Value>
@@ -412,8 +574,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">the</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">DT</Value>
+</Feature>
 </Annotation>
-<Annotation Id="40" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="235" EndNode="244">
+<Annotation Id="43" Type="Token" StartNode="235" EndNode="244">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">9</Value>
@@ -422,8 +588,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">Exchequer</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NNP</Value>
+</Feature>
 </Annotation>
-<Annotation Id="41" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="245" EndNode="250">
+<Annotation Id="44" Type="Token" StartNode="245" EndNode="250">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">5</Value>
@@ -432,8 +602,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">Nigel</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NNP</Value>
+</Feature>
 </Annotation>
-<Annotation Id="42" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="251" EndNode="257">
+<Annotation Id="45" Type="Token" StartNode="251" EndNode="257">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">6</Value>
@@ -442,8 +616,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">Lawson</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NNP</Value>
+</Feature>
 </Annotation>
-<Annotation Id="43" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="258" EndNode="260">
+<Annotation Id="46" Type="Token" StartNode="258" EndNode="260">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">2</Value>
@@ -452,8 +630,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">'s</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">POS</Value>
+</Feature>
 </Annotation>
-<Annotation Id="44" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="261" EndNode="269">
+<Annotation Id="47" Type="Token" StartNode="261" EndNode="269">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">8</Value>
@@ -462,8 +644,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">restated</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">VBN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="45" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="270" EndNode="280">
+<Annotation Id="48" Type="Token" StartNode="270" EndNode="280">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">10</Value>
@@ -472,8 +658,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">commitment</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="46" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="281" EndNode="283">
+<Annotation Id="49" Type="Token" StartNode="281" EndNode="283">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">2</Value>
@@ -482,8 +672,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">to</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">TO</Value>
+</Feature>
 </Annotation>
-<Annotation Id="47" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="284" EndNode="285">
+<Annotation Id="50" Type="Token" StartNode="284" EndNode="285">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">1</Value>
@@ -492,8 +686,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">a</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">DT</Value>
+</Feature>
 </Annotation>
-<Annotation Id="48" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="286" EndNode="290">
+<Annotation Id="51" Type="Token" StartNode="286" EndNode="290">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">4</Value>
@@ -502,8 +700,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">firm</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="49" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="291" EndNode="299">
+<Annotation Id="52" Type="Token" StartNode="291" EndNode="299">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">8</Value>
@@ -512,8 +714,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">monetary</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">JJ</Value>
+</Feature>
 </Annotation>
-<Annotation Id="50" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="300" EndNode="306">
+<Annotation Id="53" Type="Token" StartNode="300" EndNode="306">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">6</Value>
@@ -522,8 +728,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">policy</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="51" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="307" EndNode="310">
+<Annotation Id="54" Type="Token" StartNode="307" EndNode="310">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">3</Value>
@@ -532,8 +742,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">has</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">VBZ</Value>
+</Feature>
 </Annotation>
-<Annotation Id="52" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="311" EndNode="317">
+<Annotation Id="55" Type="Token" StartNode="311" EndNode="317">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">6</Value>
@@ -542,8 +756,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">helped</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">VBN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="53" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="318" EndNode="320">
+<Annotation Id="56" Type="Token" StartNode="318" EndNode="320">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">2</Value>
@@ -552,8 +770,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">to</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">TO</Value>
+</Feature>
 </Annotation>
-<Annotation Id="54" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="321" EndNode="328">
+<Annotation Id="57" Type="Token" StartNode="321" EndNode="328">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">7</Value>
@@ -562,8 +784,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">prevent</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">VB</Value>
+</Feature>
 </Annotation>
-<Annotation Id="55" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="329" EndNode="330">
+<Annotation Id="58" Type="Token" StartNode="329" EndNode="330">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">1</Value>
@@ -572,8 +798,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">a</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">DT</Value>
+</Feature>
 </Annotation>
-<Annotation Id="56" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="331" EndNode="339">
+<Annotation Id="59" Type="Token" StartNode="331" EndNode="339">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">8</Value>
@@ -582,8 +812,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">freefall</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="57" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="340" EndNode="342">
+<Annotation Id="60" Type="Token" StartNode="340" EndNode="342">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">2</Value>
@@ -592,8 +826,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">in</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">IN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="58" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="343" EndNode="351">
+<Annotation Id="61" Type="Token" StartNode="343" EndNode="351">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">8</Value>
@@ -602,8 +840,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">sterling</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="59" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="352" EndNode="356">
+<Annotation Id="62" Type="Token" StartNode="352" EndNode="356">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">4</Value>
@@ -612,8 +854,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">over</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">IN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="60" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="357" EndNode="360">
+<Annotation Id="63" Type="Token" StartNode="357" EndNode="360">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">3</Value>
@@ -622,8 +868,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">the</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">DT</Value>
+</Feature>
 </Annotation>
-<Annotation Id="61" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="361" EndNode="365">
+<Annotation Id="64" Type="Token" StartNode="361" EndNode="365">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">4</Value>
@@ -632,8 +882,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">past</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">JJ</Value>
+</Feature>
 </Annotation>
-<Annotation Id="62" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="366" EndNode="370">
+<Annotation Id="65" Type="Token" StartNode="366" EndNode="370">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">4</Value>
@@ -642,8 +896,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">week</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="63" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="371" EndNode="372">
+<Annotation Id="66" Type="Token" StartNode="371" EndNode="372">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">1</Value>
@@ -652,8 +910,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">.</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">.</Value>
+</Feature>
 </Annotation>
-<Annotation Id="64" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="374" EndNode="377">
+<Annotation Id="67" Type="Token" StartNode="374" EndNode="377">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">3</Value>
@@ -662,8 +924,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">But</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">CC</Value>
+</Feature>
 </Annotation>
-<Annotation Id="65" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="378" EndNode="386">
+<Annotation Id="68" Type="Token" StartNode="378" EndNode="386">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">8</Value>
@@ -672,8 +938,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">analysts</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NNS</Value>
+</Feature>
 </Annotation>
-<Annotation Id="66" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="387" EndNode="393">
+<Annotation Id="69" Type="Token" StartNode="387" EndNode="393">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">6</Value>
@@ -682,8 +952,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">reckon</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">VBP</Value>
+</Feature>
 </Annotation>
-<Annotation Id="67" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="394" EndNode="404">
+<Annotation Id="70" Type="Token" StartNode="394" EndNode="404">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">10</Value>
@@ -692,8 +966,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">underlying</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">VBG</Value>
+</Feature>
 </Annotation>
-<Annotation Id="68" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="405" EndNode="412">
+<Annotation Id="71" Type="Token" StartNode="405" EndNode="412">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">7</Value>
@@ -702,8 +980,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">support</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="69" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="413" EndNode="416">
+<Annotation Id="72" Type="Token" StartNode="413" EndNode="416">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">3</Value>
@@ -712,8 +994,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">for</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">IN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="70" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="417" EndNode="425">
+<Annotation Id="73" Type="Token" StartNode="417" EndNode="425">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">8</Value>
@@ -722,8 +1008,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">sterling</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="71" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="426" EndNode="429">
+<Annotation Id="74" Type="Token" StartNode="426" EndNode="429">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">3</Value>
@@ -732,8 +1022,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">has</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">VBZ</Value>
+</Feature>
 </Annotation>
-<Annotation Id="72" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="430" EndNode="434">
+<Annotation Id="75" Type="Token" StartNode="430" EndNode="434">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">4</Value>
@@ -742,8 +1036,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">been</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">VBN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="73" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="435" EndNode="441">
+<Annotation Id="76" Type="Token" StartNode="435" EndNode="441">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">6</Value>
@@ -752,8 +1050,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">eroded</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">VBN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="74" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="442" EndNode="444">
+<Annotation Id="77" Type="Token" StartNode="442" EndNode="444">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">2</Value>
@@ -762,8 +1064,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">by</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">IN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="75" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="445" EndNode="448">
+<Annotation Id="78" Type="Token" StartNode="445" EndNode="448">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">3</Value>
@@ -772,8 +1078,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">the</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">DT</Value>
+</Feature>
 </Annotation>
-<Annotation Id="76" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="449" EndNode="459">
+<Annotation Id="79" Type="Token" StartNode="449" EndNode="459">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">10</Value>
@@ -782,8 +1092,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">chancellor</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="77" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="460" EndNode="462">
+<Annotation Id="80" Type="Token" StartNode="460" EndNode="462">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">2</Value>
@@ -792,8 +1106,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">'s</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">POS</Value>
+</Feature>
 </Annotation>
-<Annotation Id="78" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="463" EndNode="470">
+<Annotation Id="81" Type="Token" StartNode="463" EndNode="470">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">7</Value>
@@ -802,8 +1120,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">failure</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="79" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="471" EndNode="473">
+<Annotation Id="82" Type="Token" StartNode="471" EndNode="473">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">2</Value>
@@ -812,8 +1134,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">to</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">TO</Value>
+</Feature>
 </Annotation>
-<Annotation Id="80" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="474" EndNode="482">
+<Annotation Id="83" Type="Token" StartNode="474" EndNode="482">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">8</Value>
@@ -822,8 +1148,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">announce</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">VB</Value>
+</Feature>
 </Annotation>
-<Annotation Id="81" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="483" EndNode="486">
+<Annotation Id="84" Type="Token" StartNode="483" EndNode="486">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">3</Value>
@@ -832,8 +1162,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">any</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">DT</Value>
+</Feature>
 </Annotation>
-<Annotation Id="82" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="487" EndNode="490">
+<Annotation Id="85" Type="Token" StartNode="487" EndNode="490">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">3</Value>
@@ -842,8 +1176,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">new</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">JJ</Value>
+</Feature>
 </Annotation>
-<Annotation Id="83" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="491" EndNode="497">
+<Annotation Id="86" Type="Token" StartNode="491" EndNode="497">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">6</Value>
@@ -852,8 +1190,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">policy</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="84" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="498" EndNode="506">
+<Annotation Id="87" Type="Token" StartNode="498" EndNode="506">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">8</Value>
@@ -862,8 +1204,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">measures</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NNS</Value>
+</Feature>
 </Annotation>
-<Annotation Id="85" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="507" EndNode="509">
+<Annotation Id="88" Type="Token" StartNode="507" EndNode="509">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">2</Value>
@@ -872,8 +1218,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">in</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">IN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="86" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="510" EndNode="513">
+<Annotation Id="89" Type="Token" StartNode="510" EndNode="513">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">3</Value>
@@ -882,8 +1232,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">his</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">PRP$</Value>
+</Feature>
 </Annotation>
-<Annotation Id="87" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="514" EndNode="521">
+<Annotation Id="90" Type="Token" StartNode="514" EndNode="521">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">7</Value>
@@ -892,8 +1246,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">Mansion</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NNP</Value>
+</Feature>
 </Annotation>
-<Annotation Id="88" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="522" EndNode="527">
+<Annotation Id="91" Type="Token" StartNode="522" EndNode="527">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">5</Value>
@@ -902,8 +1260,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">House</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NNP</Value>
+</Feature>
 </Annotation>
-<Annotation Id="89" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="528" EndNode="534">
+<Annotation Id="92" Type="Token" StartNode="528" EndNode="534">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">6</Value>
@@ -912,8 +1274,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">speech</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NN</Value>
+</Feature>
 </Annotation>
-<Annotation Id="90" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="535" EndNode="539">
+<Annotation Id="93" Type="Token" StartNode="535" EndNode="539">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">4</Value>
@@ -922,8 +1288,12 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">last</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">JJ</Value>
+</Feature>
 </Annotation>
-<Annotation Id="91" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="540" EndNode="548">
+<Annotation Id="94" Type="Token" StartNode="540" EndNode="548">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">8</Value>
@@ -932,14 +1302,22 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">Thursday</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
+  <Value className="java.lang.String">NNP</Value>
+</Feature>
 </Annotation>
-<Annotation Id="92" Type="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" StartNode="549" EndNode="550">
+<Annotation Id="95" Type="Token" StartNode="549" EndNode="550">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">1</Value>
 </Feature>
 <Feature>
   <Name className="java.lang.String">string</Name>
+  <Value className="java.lang.String">.</Value>
+</Feature>
+<Feature>
+  <Name className="java.lang.String">category</Name>
   <Value className="java.lang.String">.</Value>
 </Feature>
 </Annotation>
