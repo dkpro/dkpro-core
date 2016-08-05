@@ -26,9 +26,10 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.io.gate.internal.ConvertToGate;
+import de.tudarmstadt.ukp.dkpro.core.io.gate.internal.DKPro2Gate;
 import gate.Document;
 import gate.DocumentExporter;
+import gate.corpora.DocumentImpl;
 import gate.corpora.export.GateXMLExporter;
 import gate.util.GateException;
 
@@ -44,7 +45,7 @@ public class GateXmlWriter extends JCasFileWriter_ImplBase
 
     private DocumentExporter exporter;
     
-    private ConvertToGate converter;
+    private DKPro2Gate converter;
     
     @Override
     public void initialize(UimaContext aContext)
@@ -52,16 +53,17 @@ public class GateXmlWriter extends JCasFileWriter_ImplBase
     {
         super.initialize(aContext);
         exporter = new GateXMLExporter();
-        converter = new ConvertToGate();
+        converter = new DKPro2Gate();
     }
     
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
-        Document document = null;
+        Document document;
         try {
-            document = converter.convert(aJCas);
+            document = new DocumentImpl();
+            converter.convert(aJCas, document);
         }
         catch (GateException e) {
             throw new AnalysisEngineProcessException(e);
