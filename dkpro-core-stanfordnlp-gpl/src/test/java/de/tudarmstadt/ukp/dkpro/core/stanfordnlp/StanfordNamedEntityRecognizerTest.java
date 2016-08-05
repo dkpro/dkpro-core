@@ -318,7 +318,7 @@ public class StanfordNamedEntityRecognizerTest
 
         String[] ne = {
                 "[ 13, 19]Person(I-PER) (Markus)",
-                "[ 31, 34]Organization(I-MISC) (SAP)",
+                "[ 31, 34]NamedEntity(I-MISC) (SAP)",
                 "[ 38, 46]Location(I-LOC) (Alemania)" };
 
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
