@@ -1,4 +1,4 @@
-! .
+De! .
 # #
 $ $
 % NN JJ
@@ -32,6 +32,7 @@ $ $
 ) )
 , ,
 - :
+– :	
 -- :
 . .
 ... :
@@ -928,6 +929,7 @@ Billionaire NN
 Billions NNS
 Bills NNS
 BioSciences NNP NNPS
+Biodiesel NN
 Bioengineers NNS
 Biological NNP JJ
 Biotechnology NNP NN
@@ -1721,6 +1723,7 @@ Defenders NNS
 Defending VBG
 Defense NNP NN
 Defining VBG
+Deforestation NN
 Defuse VB
 Del.-based JJ
 Delayed JJ
@@ -2036,7 +2039,7 @@ Entertainment NNP NN
 Enthusiasts NNS
 Entrepreneurs NNS
 Environmental NNP JJ
-Environmentalists NNPS NNS
+Environmentalists NNS
 Epinalers NNPS
 Episcopalians NNPS
 Equally RB
@@ -2345,7 +2348,7 @@ Foreign-exchange NN
 Foreigners NNS
 Foremost NNP RB
 Foresight NN
-Forest NNP NN
+Forest NN NNP
 Forest-products NNS
 Forget VB
 Form NN NNP
@@ -3431,6 +3434,7 @@ Metal NNP NN
 Metallgesellschaft NNP NN
 Metals NNP NNPS NNS
 Metamorphosis NN
+Methane NN
 Methodists NNPS
 Metzenbaums NNPS
 Mexican JJ NNP
@@ -3567,6 +3571,7 @@ NEC-compatible JJ
 NEW JJ NNP NN
 NEWS NN NNP
 NEWSPAPERS NNPS
+NHS NNP
 NIH-appointed JJ
 NO DT RB UH
 NORTHEAST NN
@@ -3633,6 +3638,7 @@ Newspapers NNS NNP
 Newsprint NN
 Newsstands NNS
 Next JJ NNP RB IN
+Nhs NNP
 Nicaraguan JJ NNP
 Niche-itis NN
 Nicholas NNP NNS
@@ -3951,7 +3957,7 @@ Passport NN
 Past JJ NNP
 Patent NNP NN
 Path NNP NN
-Patients NNPS NNS
+Patients NNS
 Patrician NN
 Patriots NNPS
 Patterns NNS
@@ -4074,6 +4080,7 @@ Poachers NNS
 Pockets NNS
 Points NNPS
 Poison NN
+Polar JJ
 Poles NNPS NNS
 Police NNP NNS NN
 Policies NNS
@@ -4086,6 +4093,7 @@ Politicians NNS
 Politics NNS NNP NN NNPS
 Politrick NN
 Polls NNS
+Pollution NN
 Polysilicon NN
 Polyurethane NN
 Polyvinyl NN
@@ -4319,6 +4327,7 @@ Railroad NN NNP
 Railroad-rate JJ
 Rails NNPS
 Rain NN
+Rainforest NN
 Raise VB
 Raising VBG NNP
 Rake NN
@@ -6824,6 +6833,7 @@ bimonthly JJ
 binding JJ VBG
 bio-research NN
 bioTechnology NNP
+biodiesel NN
 biographer\/critic NN
 biomedical-products NNS
 biotech JJ
@@ -7715,6 +7725,7 @@ color-coded VBN
 color-coding VBG
 color-television NN
 colored VBN
+coloured VBN
 colorlessness NN
 colossus NN
 combat NN VB
@@ -8283,6 +8294,7 @@ crusty JJ
 cry NN VBP VB
 crystal-lattice JJ NN
 crystalline JJ
+cuddly JJ
 cuff VB
 culled VBN
 culminated VBN VBD
@@ -8493,6 +8505,7 @@ deflate VB
 deflated VBN VBD
 deflect VB
 deflected VBD
+deforestation NN
 deformed VBN
 defraud VB
 defrauded VBD VBN
@@ -11811,7 +11824,7 @@ lightest JJS
 lighting NN VBG
 lightning NN
 lightweight JJ
-like IN VB VBP JJ
+like VB VBP IN JJ
 liked VBD VBN
 likely JJ RB
 likened VBD VBN
@@ -12251,6 +12264,7 @@ met VBD VBN
 metabolized VBN
 metal-workers NNS
 meted VBN
+methane NN
 metric JJ NN
 metropolitan JJ
 mice NNS
@@ -12662,6 +12676,8 @@ newsworthiness NN
 newsworthy JJ
 next JJ IN RB
 nexus NN
+nhs NNP
+nhS NNP
 nibble NN
 nice JJ
 nicer JJR
@@ -13549,6 +13565,7 @@ pollinated VBN
 polling NN
 polls NNS VBZ
 pollute VB
+pollution NN
 pollution-control JJ NN
 pollution-reduction NN
 ponder VB VBP

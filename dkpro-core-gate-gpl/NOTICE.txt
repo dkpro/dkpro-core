@@ -1,15 +1,15 @@
 = GATE resource files =
 
-Taken from https://sourceforge.net/projects/gate/files/gate/8.0/gate-8.0-build4825-ALL.zip/download
+Taken from https://sourceforge.net/projects/gate/files/gate/8.2/gate-8.2-build5482-ALL.zip/download
 
 == morph-en-default.rul ==
 
-Original name: gate-8.0-build4825-ALL/plugins/Tools/resources/morph/default.rul
+Original name: gate-8.2-build5482-ALL/plugins/Tools/resources/morph/default.rul
 
 == tagger-en-default.lex ==
 
-Original name: gate-8.0-build4825-ALL/plugins/ANNIE/resources/heptag/lexicon
+Original name: gate-8.2-build5482-ALL/plugins/ANNIE/resources/heptag/lexicon
 
 == tagger-en-default.rul == 
 
-Original name: gate-8.0-build4825-ALL/plugins/ANNIE/resources/heptag/ruleset
+Original name: gate-8.2-build5482-ALL/plugins/ANNIE/resources/heptag/ruleset

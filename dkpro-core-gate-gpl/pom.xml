@@ -31,7 +31,7 @@
   <packaging>jar</packaging>
   <name>DKPro Core GPL - GATE (v ${gate.version})</name>
   <properties>
-    <gate.version>8.0</gate.version>
+    <gate.version>8.2</gate.version>
   </properties>
   <dependencies>
     <dependency>
