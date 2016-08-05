@@ -32,10 +32,10 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NOUN;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRON;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.VERB;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -124,13 +124,13 @@ public class GateLemmatizer
 			POS pos = token.getPos();
 
 			if (pos != null) {
-				if (pos.getClass().equals(V.class)) {
+				if (pos.getClass().equals(VERB.class)) {
 					category = GATE_LEMMATIZER_VERB_CATEGORY_STRING;
 				}
-				else if (pos.getClass().equals(N.class)) {
+				else if (pos.getClass().equals(NOUN.class)) {
 					category = GATE_LEMMATIZER_NOUN_CATEGORY_STRING;
 				}
-				else if (pos.getClass().equals(PR.class)) {
+				else if (pos.getClass().equals(PRON.class)) {
 					category = GATE_LEMMATIZER_NOUN_CATEGORY_STRING;
 				}
 				else {
