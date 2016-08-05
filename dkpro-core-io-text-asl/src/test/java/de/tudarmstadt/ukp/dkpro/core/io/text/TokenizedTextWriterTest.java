@@ -21,6 +21,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.UIMAException;
@@ -28,6 +29,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
+import org.junit.Rule;
 import org.junit.Test;
 
 import java.io.File;
@@ -41,6 +43,9 @@ import static org.junit.Assert.assertTrue;
 
 public class TokenizedTextWriterTest
 {
+    @Rule
+    public DkproTestContext context = new DkproTestContext();
+
     @Test
     public void testDefault()
             throws UIMAException, IOException
@@ -80,8 +85,8 @@ public class TokenizedTextWriterTest
     public void testTokens()
             throws UIMAException, IOException
     {
-        File targetFile = new File("target/TokenizedTextWriterTokensTest.out");
-        targetFile.deleteOnExit();
+        File targetFile = new File(context.getTestOutputFolder(),
+                "TokenizedTextWriterTokensTest.out");
         String text = "This is the 1st sentence .\nHere is another sentence .";
         String typeName = Token.class.getTypeName();
         File tokenized = new File("src/test/resources/tokenizedTexts/textTokenized.txt");
@@ -89,8 +94,7 @@ public class TokenizedTextWriterTest
         AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
                 TokenizedTextWriter.PARAM_TARGET_LOCATION, targetFile,
                 TokenizedTextWriter.PARAM_FEATURE_PATH, typeName,
-                TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
-                TokenizedTextWriter.PARAM_OVERWRITE, true);
+                TokenizedTextWriter.PARAM_SINGULAR_TARGET, true);
         TestRunner.runTest("id", writer, "en", text);
         assertTrue(FileUtils.contentEquals(tokenized, targetFile));
     }
@@ -176,6 +180,24 @@ public class TokenizedTextWriterTest
                 TokenizedTextWriter.PARAM_NUMBER_REGEX, numbersRegex,
                 TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
                 TokenizedTextWriter.PARAM_OVERWRITE, true);
+        TestRunner.runTest("id", writer, "en", text);
+        assertTrue(FileUtils.contentEquals(tokenized, targetFile));
+    }
+
+    @Test
+    public void testNoSentences()
+            throws IOException, UIMAException
+    {
+        File targetFile = new File(context.getTestOutputFolder(),
+                "TokenizedTextWriterNoSentences.out");
+        File tokenized = new File("src/test/resources/tokenizedTexts/textNoSentences.txt");
+        String text = "This is the 1st sentence . Here is another sentence .";
+
+        AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
+                TokenizedTextWriter.PARAM_TARGET_LOCATION, targetFile,
+                TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
+                TokenizedTextWriter.PARAM_OVERWRITE, true,
+                TokenizedTextWriter.PARAM_COVERING_TYPE, null);
         TestRunner.runTest("id", writer, "en", text);
         assertTrue(FileUtils.contentEquals(tokenized, targetFile));
     }

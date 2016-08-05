@@ -22,7 +22,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -43,6 +42,7 @@ public class TokenizedTextWriter
     private static final String TOKEN_SEPARATOR = " ";
     private static final String NUMBER_REPLACEMENT = "NUM";
     private static final String STOPWORD_REPLACEMENT = "STOP";
+    private static final String DEFAULT_COVERING_TYPE = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence";
 
     /**
      * Encoding for the target file. Default is UTF-8.
@@ -90,6 +90,16 @@ public class TokenizedTextWriter
     @ConfigurationParameter(name = PARAM_EXTENSION, mandatory = true, defaultValue = ".txt")
     private String extension = ".txt";
 
+    /**
+     * In the output file, each unit of the covering type is written into a separate line. The default
+     * (set in {@link #DEFAULT_COVERING_TYPE}), is sentences so that each sentence is written to a line.
+     * <p>
+     * If no linebreaks within a document is desired, set this value to {@code null}.
+     */
+    public static final String PARAM_COVERING_TYPE = "coveringType";
+    @ConfigurationParameter(name = PARAM_COVERING_TYPE, mandatory = true, defaultValue = DEFAULT_COVERING_TYPE)
+    private String coveringType;
+
     private StringSequenceGenerator sequenceGenerator;
 
     @Override
@@ -105,7 +115,7 @@ public class TokenizedTextWriter
                     .filterRegexReplacement(NUMBER_REPLACEMENT)
                     .stopwordsFile(stopwordsFile)
                     .stopwordsReplacement(STOPWORD_REPLACEMENT)
-                    .coveringType(Sentence.class.getCanonicalName())
+                    .coveringType(coveringType)
                     .buildStringSequenceGenerator();
         }
         catch (IOException e) {
@@ -127,11 +137,14 @@ public class TokenizedTextWriter
             OutputStream outputStream = getOutputStream(aJCas, extension);
 
             /* iterate over sentences */
-            for (String[] sentence : sequenceGenerator.tokenSequences(aJCas)) {
-                if (sentence.length > 0) {
-                    outputStream.write(sentence[0].getBytes());
-                    for (int i = 1; i < sentence.length; i++) {
-                        outputStream.write((TOKEN_SEPARATOR + sentence[i]).getBytes());
+            for (String[] line : sequenceGenerator.tokenSequences(aJCas)) {
+                if (line.length > 0) {
+                    /* write first token */
+                    outputStream.write(line[0].getBytes(targetEncoding));
+
+                    /* write remaining tokens with token separator */
+                    for (int i = 1; i < line.length; i++) {
+                        outputStream.write((TOKEN_SEPARATOR + line[i]).getBytes(targetEncoding));
                     }
                 }
                 outputStream.write(System.lineSeparator().getBytes(targetEncoding));
