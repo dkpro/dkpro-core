@@ -63,7 +63,7 @@ import edu.stanford.nlp.trees.TreeCoreAnnotations.TreeAnnotation;
 import edu.stanford.nlp.trees.TreeFactory;
 import edu.stanford.nlp.util.CoreMap;
 
-public class ConvertToCoreNlp
+public class DKPro2CoreNlp
 {
     private CoreLabelTokenFactory tokenFactory = new CoreLabelTokenFactory();
     
@@ -123,14 +123,14 @@ public class ConvertToCoreNlp
         quoteEnd = aQuoteEnd;
     }
 
-    public Annotation convert(JCas aJCas)
+    public Annotation convert(JCas aSource, Annotation aTarget)
     {
         // Document annotation
-        Annotation document = new Annotation(aJCas.getDocumentText());
+        aTarget.set(CoreAnnotations.TextAnnotation.class, aSource.getDocumentText());
         
         // Sentences
         List<CoreMap> sentences = new ArrayList<>();
-        for (Sentence s : select(aJCas, Sentence.class)) {
+        for (Sentence s : select(aSource, Sentence.class)) {
             if (StringUtils.isBlank(s.getCoveredText())) {
                 continue;
             }
@@ -204,9 +204,9 @@ public class ConvertToCoreNlp
             sentence.set(TokensAnnotation.class, tokens);
             sentences.add(sentence);
         }
-        document.set(SentencesAnnotation.class, sentences);
+        aTarget.set(SentencesAnnotation.class, sentences);
         
-        return document;
+        return aTarget;
     }
 
     /**

@@ -35,8 +35,8 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.ConvertToCoreNlp;
-import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.ConvertToUima;
+import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
+import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.CoreNlp2DKPro;
 import edu.stanford.nlp.dcoref.Constants;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.DeterministicCorefAnnotator;
@@ -141,17 +141,19 @@ public class CoreNlpCoreferenceResolver
         annotatorProvider.configure(cas);
         
         // Transfer from CAS to CoreNLP
-        ConvertToCoreNlp converter = new ConvertToCoreNlp();
+        DKPro2CoreNlp converter = new DKPro2CoreNlp();
         converter.setPtb3Escaping(ptb3Escaping);
         converter.setQuoteBegin(quoteBegin);
         converter.setQuoteEnd(quoteEnd);
-        Annotation document = converter.convert(aJCas);
+        
+        Annotation document = new Annotation((String) null);
+        converter.convert(aJCas, document);
 
         // Actual processing
         annotatorProvider.getResource().annotate(document);
         
         // Transfer back into the CAS
-        ConvertToUima.convertCorefChains(aJCas, document);
+        CoreNlp2DKPro.convertCorefChains(aJCas, document);
     };
     
     private class CoreNlpPosTaggerModelProvider

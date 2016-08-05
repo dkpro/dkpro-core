@@ -45,8 +45,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
-import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.ConvertToCoreNlp;
-import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.ConvertToUima;
+import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
+import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.CoreNlp2DKPro;
 import edu.stanford.nlp.parser.common.ParserGrammar;
 import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
 import edu.stanford.nlp.parser.lexparser.Lexicon;
@@ -280,13 +280,15 @@ public class CoreNlpParser
         annotatorProvider.configure(cas);
         
         // Transfer from CAS to CoreNLP
-        ConvertToCoreNlp converter = new ConvertToCoreNlp();
+        DKPro2CoreNlp converter = new DKPro2CoreNlp();
         converter.setPtb3Escaping(ptb3Escaping);
         converter.setQuoteBegin(quoteBegin);
         converter.setQuoteEnd(quoteEnd);
         converter.setEncoding(modelEncoding);
         converter.setReadPos(readPos);
-        Annotation document = converter.convert(aJCas);
+        
+        Annotation document = new Annotation((String) null);
+        converter.convert(aJCas, document);
 
         // Actual processing
         ParserAnnotator annotator = annotatorProvider.getResource();
@@ -305,22 +307,22 @@ public class CoreNlpParser
         // Transfer back into the CAS
         if (writePos) {
            posMappingProvider.configure(cas);
-           ConvertToUima.convertPOSs(aJCas, document, posMappingProvider, internStrings);
+           CoreNlp2DKPro.convertPOSs(aJCas, document, posMappingProvider, internStrings);
         }
         
         if (writeConstituent) {
             constituentMappingProvider.configure(cas);
-            ConvertToUima.convertConstituents(aJCas, document, constituentMappingProvider,
+            CoreNlp2DKPro.convertConstituents(aJCas, document, constituentMappingProvider,
                     internStrings, tlp);
         }
         
         if (writePennTree) {
-            ConvertToUima.convertPennTree(aJCas, document);
+            CoreNlp2DKPro.convertPennTree(aJCas, document);
         }
         
         if (writeDependency) {
             dependencyMappingProvider.configure(cas);
-            ConvertToUima.convertDependencies(aJCas, document, dependencyMappingProvider,
+            CoreNlp2DKPro.convertDependencies(aJCas, document, dependencyMappingProvider,
                     internStrings);
         }        
     }

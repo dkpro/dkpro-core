@@ -63,7 +63,7 @@ import edu.stanford.nlp.trees.TreebankLanguagePack;
 import edu.stanford.nlp.util.CoreMap;
 import edu.stanford.nlp.util.IntPair;
 
-public class ConvertToUima
+public class CoreNlp2DKPro
 {
     public static void convertPOSs(JCas aJCas, Annotation document,
             MappingProvider mappingProvider, boolean internStrings)

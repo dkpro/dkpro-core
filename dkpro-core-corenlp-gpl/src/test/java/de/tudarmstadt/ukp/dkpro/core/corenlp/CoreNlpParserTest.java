@@ -25,7 +25,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
-import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.ConvertToCoreNlp;
+import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
@@ -1017,7 +1017,7 @@ public class CoreNlpParserTest
 
         for (ROOT curRoot : select(jcas, ROOT.class)) {
             // recreate syntax tree
-            Tree recreation = ConvertToCoreNlp.createStanfordTree(curRoot);
+            Tree recreation = DKPro2CoreNlp.createStanfordTree(curRoot);
 
             // make a tree with simple string-labels
             recreation = recreation.deepCopy(recreation.treeFactory(), StringLabel.factory());
