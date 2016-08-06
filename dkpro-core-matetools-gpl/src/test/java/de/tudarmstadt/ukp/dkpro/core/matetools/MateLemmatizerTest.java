@@ -28,6 +28,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
@@ -80,6 +81,8 @@ public class MateLemmatizerTest
         throws Exception
     {
         Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 2000000000);
+
+        AssumeResource.assumeResource(MateLemmatizer.class, "lemmatizer", aLanguage, null);
 
         AnalysisEngineDescription lemma = createEngineDescription(MateLemmatizer.class,
                 MateLemmatizer.PARAM_UPPERCASE, aUppercase);

@@ -29,6 +29,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
@@ -68,6 +69,8 @@ public class MateSemanticRoleLabelerTest
     {
         Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 2000000000);
 
+        AssumeResource.assumeResource(MateSemanticRoleLabeler.class, "srl", aLanguage, null);
+        
         AnalysisEngineDescription aggregate;
 
         if (aLanguage == "en") {

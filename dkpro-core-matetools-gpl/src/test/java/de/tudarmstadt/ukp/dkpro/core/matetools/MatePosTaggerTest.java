@@ -28,6 +28,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
@@ -113,6 +114,8 @@ public class MatePosTaggerTest
     private JCas runTest(String aLanguage, String aText)
         throws Exception
     {
+        AssumeResource.assumeResource(MatePosTagger.class, "tagger", aLanguage, null);
+        
         AnalysisEngineDescription posTag = createEngineDescription(MatePosTagger.class);
 
         return TestRunner.runTest(posTag, aLanguage, aText);

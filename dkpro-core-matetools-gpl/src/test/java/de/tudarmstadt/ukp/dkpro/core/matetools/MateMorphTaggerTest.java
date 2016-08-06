@@ -29,6 +29,7 @@ import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
@@ -138,6 +139,8 @@ public class MateMorphTaggerTest
         throws Exception
     {
         Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 2000000000);
+        
+        AssumeResource.assumeResource(MateMorphTagger.class, "morphtagger", aLanguage, null);
 
         AnalysisEngineDescription lemma = createEngineDescription(MateLemmatizer.class);
         AnalysisEngineDescription morphTag = createEngineDescription(MateMorphTagger.class);

@@ -36,6 +36,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.hunpos.HunPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TagsetDescriptionStripper;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
@@ -263,44 +264,48 @@ public class MateParserTest
     }
     
     private JCas runTest(String aLanguage, String aVariant, String aText)
-            throws Exception
-        {
-            AnalysisEngineDescription engine = getEngines(aLanguage, aVariant);
+        throws Exception
+    {
+        AssumeResource.assumeResource(MateSemanticRoleLabeler.class, "parser", aLanguage, aVariant);
+        
+        AnalysisEngineDescription engine = getEngines(aLanguage, aVariant);
 
-            if (aLanguage.startsWith("dummy-")) {
-                aLanguage = aLanguage.substring("dummy-".length());
-            }
-
-            return TestRunner.runTest(engine, aLanguage, aText);
+        if (aLanguage.startsWith("dummy-")) {
+            aLanguage = aLanguage.substring("dummy-".length());
         }
 
-        public static AnalysisEngineDescription getEngines(String aLanguage, String aVariant)
-            throws ResourceInitializationException
-        {
-            List<AnalysisEngineDescription> engines = new ArrayList<AnalysisEngineDescription>();
+        return TestRunner.runTest(engine, aLanguage, aText);
+    }
 
-            if ("fa".equals(aLanguage) || "sv".equals(aLanguage)) {
-                engines.add(createEngineDescription(HunPosTagger.class));
-            }
-            else {
-                engines.add(createEngineDescription(MatePosTagger.class));
-            }
+    public static AnalysisEngineDescription getEngines(String aLanguage, String aVariant)
+        throws ResourceInitializationException
+    {
+        List<AnalysisEngineDescription> engines = new ArrayList<AnalysisEngineDescription>();
 
-            engines.add(createEngineDescription(TagsetDescriptionStripper.class));
-
-            engines.add(createEngineDescription(MateParser.class, 
-                    MateParser.PARAM_VARIANT, aVariant,
-                    MateParser.PARAM_PRINT_TAGSET, true));
-
-            return createEngineDescription(engines
-                    .toArray(new AnalysisEngineDescription[engines.size()]));
+        if ("fa".equals(aLanguage) || "sv".equals(aLanguage)) {
+            engines.add(createEngineDescription(HunPosTagger.class));
         }
+        else {
+            engines.add(createEngineDescription(MatePosTagger.class));
+        }
+
+        engines.add(createEngineDescription(TagsetDescriptionStripper.class));
+
+        engines.add(createEngineDescription(MateParser.class, 
+                MateParser.PARAM_VARIANT, aVariant,
+                MateParser.PARAM_PRINT_TAGSET, true));
+
+        return createEngineDescription(engines
+                .toArray(new AnalysisEngineDescription[engines.size()]));
+    }
     
 	private JCas runTest(String aLanguage, String aText)
 		throws Exception
 	{
         Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 2000000000);
 
+        AssumeResource.assumeResource(MateSemanticRoleLabeler.class, "parser", aLanguage, null);
+        
 		AnalysisEngineDescription aggregate = createEngineDescription(
 				createEngineDescription(MatePosTagger.class),
 				createEngineDescription(MateParser.class));
