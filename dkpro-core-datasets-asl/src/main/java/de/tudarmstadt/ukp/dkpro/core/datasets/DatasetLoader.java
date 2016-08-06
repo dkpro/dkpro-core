@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.datasets;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -37,6 +38,7 @@ import org.apache.commons.compress.archivers.ArchiveInputStream;
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
 import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
 import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream;
+import org.apache.commons.compress.compressors.xz.XZCompressorInputStream;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.CloseShieldInputStream;
@@ -222,6 +224,27 @@ public class DatasetLoader
 
         return ds;
     }
+    
+    /**
+     * German Hamburg Dependency Treebank 
+     * Contains annotated text from the German technical news website <i>www.heise.de</i>  
+     * https://corpora.uni-hamburg.de/drupal/de/islandora/object/treebank:hdt 
+     */
+    public Dataset loadGermanHamburgDependencyTreebank() throws IOException{
+        DefaultDataset ds = new DefaultDataset("HamburgDependencyTreebank", "de");
+        File dataDir = new File(cacheRoot, ds.getName());
+
+        DataPackage data = new DataPackage.Builder()
+                .url("http://hdl.handle.net/11022/0000-0000-91AE-8")
+                .sha1("3f938141325a9254a6cb5ff47bff336ea456d45a")
+                .target("hamburgDepTreebank.tar.xz")
+                .postAction((d) -> { untarxz(new File(dataDir, d.getTarget()), dataDir); })
+                .build();
+        
+        fetch(dataDir, data);
+
+        return ds;
+    }
 
     public List<Dataset> loadUniversalDependencyTreebankV1_3()
         throws IOException
@@ -392,6 +415,37 @@ public class DatasetLoader
                 new BufferedInputStream(new FileInputStream(aArchive))))) {
             extract(aArchive, archive, aTarget);
         }
+    }
+    
+    public void untarxz(File aArchive, File aTarget) throws IOException {
+        
+        File tmp = unxz(aArchive, aTarget);
+        
+        try (ArchiveInputStream archive = new TarArchiveInputStream(
+                new BufferedInputStream(new FileInputStream(tmp)))) {
+            extract(aArchive, archive, aTarget);
+        }
+        
+        tmp.delete();
+    }
+
+    private File unxz(File aArchive, File aTarget) throws IOException
+    {
+        File tarOut = new File(aTarget, "tmp.tar");
+        
+        FileInputStream fin = new FileInputStream(aArchive);
+        BufferedInputStream in = new BufferedInputStream(fin);
+        FileOutputStream out = new FileOutputStream(tarOut);
+        XZCompressorInputStream xzIn = new XZCompressorInputStream(in);
+        final byte[] buffer = new byte[1024];
+        int n = 0;
+        while (-1 != (n = xzIn.read(buffer))) {
+            out.write(buffer, 0, n);
+        }
+        out.close();
+        xzIn.close();
+        
+        return tarOut;
     }
 
     private void unzip(File aArchive, File aTarget)
