@@ -86,7 +86,6 @@
             <!-- This library is required to be able to read xz archives! -->
             <groupId>org.tukaani</groupId>
             <artifactId>xz</artifactId>
-            <version>1.5</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
