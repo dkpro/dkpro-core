@@ -20,7 +20,6 @@ package de.tudarmstadt.ukp.dkpro.core.datasets;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -428,25 +427,6 @@ public class DatasetLoader
                 new BufferedInputStream(new FileInputStream(aArchive))))) {
             extract(aArchive, archive, aTarget);
         }
-    }
-
-    private File unxz(File aArchive, File aTarget) throws IOException
-    {
-        File tarOut = new File(aTarget, "tmp.tar");
-        
-        FileInputStream fin = new FileInputStream(aArchive);
-        BufferedInputStream in = new BufferedInputStream(fin);
-        FileOutputStream out = new FileOutputStream(tarOut);
-        XZCompressorInputStream xzIn = new XZCompressorInputStream(in);
-        final byte[] buffer = new byte[1024];
-        int n = 0;
-        while (-1 != (n = xzIn.read(buffer))) {
-            out.write(buffer, 0, n);
-        }
-        out.close();
-        xzIn.close();
-        
-        return tarOut;
     }
 
     private void unzip(File aArchive, File aTarget)
