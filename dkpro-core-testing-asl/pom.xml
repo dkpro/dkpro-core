@@ -101,6 +101,10 @@
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+    </dependency>
   </dependencies>
   <build>
     <pluginManagement>
@@ -115,6 +119,11 @@
                 - depend on log4j, so we depend on it here.
               -->
               <usedDependency>log4j:log4j</usedDependency>
+              <!-- 
+                - Also a default testing dependency to avoid warnings on all libraries that use
+                - SLF4J
+                -->
+              <usedDependency>org.slf4j:slf4j-log4j12</usedDependency>
               <!--
                 - Maven doesn't detect the parameters module to be used, be we actually
                 - do require it as a compile dependency and also at runtime, so we
