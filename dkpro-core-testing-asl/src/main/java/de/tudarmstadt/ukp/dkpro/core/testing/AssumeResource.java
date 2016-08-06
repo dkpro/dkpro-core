@@ -33,11 +33,18 @@ public class AssumeResource
                 throws IOException
     {
         String pack = aClass.getPackage().getName().replace('.', '/');
+        assumeResource(aClass, pack, aTool, aLanguage, aVariant);
+    }
+    
+    public static void assumeResource(Class<?> aClass, String aPackage, String aTool,
+            String aLanguage, String aVariant)
+                throws IOException
+    {
         String variant = aVariant;
 
         // Handle default variants
         if (variant == null) {
-            String defModelsLoc = pack + "/lib/" + aTool + "-default-variants.map";
+            String defModelsLoc = aPackage + "/lib/" + aTool + "-default-variants.map";
             Properties defaultVariants = PropertiesLoaderUtils.loadAllProperties(defModelsLoc);
             variant = defaultVariants.getProperty(aLanguage);
         }
@@ -45,7 +52,7 @@ public class AssumeResource
         // Check if the model exists by checking for it's DKPro Core metadata file
         boolean exists;
         try {
-            String propLoc = "classpath:/" + pack + "/lib/" + aTool + "-" + aLanguage + "-"
+            String propLoc = "classpath:/" + aPackage + "/lib/" + aTool + "-" + aLanguage + "-"
                     + variant + ".properties";
             ResourceUtils.resolveLocation(propLoc);
             exists = true;

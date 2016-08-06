@@ -30,6 +30,7 @@ import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
@@ -208,6 +209,9 @@ public class CoreNlpNamedEntityRecognizerTest
     private JCas runTest(String language, String variant, String testDocument)
         throws Exception
     {
+        AssumeResource.assumeResource(CoreNlpNamedEntityRecognizer.class,
+                "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "tagger", language, "default");
+
         AnalysisEngine engine = createEngine(CoreNlpNamedEntityRecognizer.class,
                 CoreNlpNamedEntityRecognizer.PARAM_VARIANT, variant,
                 CoreNlpNamedEntityRecognizer.PARAM_PRINT_TAGSET, true);

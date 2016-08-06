@@ -30,6 +30,7 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
@@ -323,6 +324,9 @@ public class CoreNlpDependencyParserTest
     private JCas runTest(String aLanguage, String aVariant, String aText, Object... aExtraParams)
         throws Exception
     {
+        AssumeResource.assumeResource(CoreNlpDependencyParser.class, "depparser", aLanguage,
+                "default");
+        
         AggregateBuilder aggregate = new AggregateBuilder();
         
         aggregate.add(createEngineDescription(CoreNlpPosTagger.class));

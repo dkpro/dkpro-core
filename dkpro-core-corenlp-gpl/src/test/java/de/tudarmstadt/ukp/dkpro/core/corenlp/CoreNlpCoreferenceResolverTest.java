@@ -29,6 +29,7 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import edu.stanford.nlp.dcoref.Constants;
 
@@ -144,6 +145,9 @@ public class CoreNlpCoreferenceResolverTest
     private JCas runTest(String aLanguage, String aText, String aSieves)
         throws Exception
     {
+        AssumeResource.assumeResource(CoreNlpCoreferenceResolver.class,
+                "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "coref", aLanguage, "default");
+        
         // Coreference resolution requires the parser and the NER to run before
         AnalysisEngine engine = createEngine(createEngineDescription(
                 createEngineDescription(CoreNlpSegmenter.class),

@@ -27,6 +27,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 import edu.stanford.nlp.ling.StringLabel;
@@ -1033,6 +1034,9 @@ public class CoreNlpParserTest
             Object... aExtraParams)
         throws Exception
     {
+        AssumeResource.assumeResource(CoreNlpParser.class,
+                "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "parser", aLanguage, "default");
+        
         AggregateBuilder aggregate = new AggregateBuilder();
 
         aggregate.add(createEngineDescription(CoreNlpPosTagger.class));
@@ -1053,6 +1057,9 @@ public class CoreNlpParserTest
     private JCas runTest(String aLanguage, String aVariant, String aText, Object... aExtraParams)
         throws Exception
     {
+        AssumeResource.assumeResource(CoreNlpParser.class,
+                "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "parser", aLanguage, "default");
+        
         AggregateBuilder aggregate = new AggregateBuilder();
 
         Object[] params = new Object[] {
@@ -1072,6 +1079,9 @@ public class CoreNlpParserTest
     private JCas runTest(String aLanguage, String aVariant, String[] aTokens)
         throws Exception
     {
+        AssumeResource.assumeResource(CoreNlpParser.class,
+                "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "parser", aLanguage, "default");
+
         // setup English
         AnalysisEngineDescription parser = createEngineDescription(CoreNlpParser.class,
                 CoreNlpParser.PARAM_VARIANT, aVariant,

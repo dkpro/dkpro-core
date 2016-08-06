@@ -29,6 +29,7 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
@@ -49,7 +50,12 @@ public class CoreNlpPosTaggerTest
         runTest("en", "John is purchasing oranges . \n",
         		new String[] { "NNP", "VBZ", "VBG", "NNS", "." },
         		new String[] { "PROPN",  "VERB",   "VERB",   "NOUN",  "PUNCT" });
+	}
 
+    @Test
+    public void testEnglishExtra()
+        throws Exception
+    {
         runTest("en", "fast.41", "This is a test . \n",
                 new String[] { "DT",  "VBZ", "DT",  "NN", "." },
                 new String[] { "DET", "VERB",   "DET", "NOUN", "PUNCT" });
@@ -204,6 +210,9 @@ public class CoreNlpPosTaggerTest
             String[] tagClasses)
         throws Exception
     {
+        AssumeResource.assumeResource(CoreNlpPosTagger.class,
+                "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "tagger", language, "default");
+        
         JCas aJCas = runTest(language, variant, testDocument);
 
         AssertAnnotations.assertPOS(tagClasses, tags, select(aJCas, POS.class));
@@ -212,6 +221,9 @@ public class CoreNlpPosTaggerTest
     private JCas runTest(String aLanguage, String aVariant, String aText)
         throws Exception
     {
+        AssumeResource.assumeResource(CoreNlpPosTagger.class,
+                "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "tagger", aLanguage, "default");
+        
         AnalysisEngine engine = createEngine(CoreNlpPosTagger.class,
                 CoreNlpPosTagger.PARAM_VARIANT, aVariant, 
                 CoreNlpPosTagger.PARAM_PRINT_TAGSET, true);
