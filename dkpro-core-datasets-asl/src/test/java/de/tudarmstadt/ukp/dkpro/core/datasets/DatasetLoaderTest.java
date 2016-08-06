@@ -74,6 +74,13 @@ public class DatasetLoaderTest
     {
         new DatasetLoader(DkproTestContext.getCacheFolder()).loadGermanHamburgDependencyTreebank();
     }
+    
+    @Test
+    public void testAncientGreekAndLatinTreebank()
+        throws Exception
+    {
+        new DatasetLoader(DkproTestContext.getCacheFolder()).loadAncientGreekAndLatingDependencyTreebank();
+    }
 
     @Rule
     public DkproTestContext testContext = new DkproTestContext();

@@ -134,6 +134,30 @@ public class DatasetLoader
 
         return ds;
     }
+    
+    /**
+     * Dependency TreeBank of Ancient Greek and Latin
+     * https://perseusdl.github.io/treebank_data/ 
+     */
+    public Dataset loadAncientGreekAndLatingDependencyTreebank()
+            throws IOException
+        {
+            DefaultDataset ds = new DefaultDataset("perseus", "grc/la");
+            File dataDir = new File(cacheRoot, ds.getName());
+
+            String commit = "f56a35f65ef15ac454f6fbd2cfc6ea97bf2ca9b8";
+
+            DataPackage data = new DataPackage.Builder()
+                    .url("https://github.com/PerseusDL/treebank_data/archive/" + commit + ".zip")
+                    .sha1("140eee6d2e3e83745f95d3d5274d9e965d898980")
+                    .target("Perseus.zip")
+                    .postAction((d) -> { unzip(new File(dataDir, d.getTarget()), dataDir); })
+                    .build();
+            
+            fetch(dataDir, data);
+            
+            return ds;
+        }
 
     public Dataset loadEnglishBrownCorpus()
         throws IOException
