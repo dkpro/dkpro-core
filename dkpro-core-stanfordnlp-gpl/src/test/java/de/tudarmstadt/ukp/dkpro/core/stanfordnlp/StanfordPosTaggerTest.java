@@ -35,6 +35,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.languagetool.LanguageToolSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
@@ -55,7 +56,12 @@ public class StanfordPosTaggerTest
         runTest("en", "John is purchasing oranges . \n",
         		new String[] { "NNP", "VBZ", "VBG", "NNS", "." },
         		new String[] { "PROPN",  "VERB",   "VERB",   "NOUN",  "PUNCT" });
+	}
 
+    @Test
+    public void testEnglishExtra()
+        throws Exception
+    {
         runTest("en", "fast.41", "This is a test . \n",
                 new String[] { "DT",  "VBZ", "DT",  "NN", "." },
                 new String[] { "DET", "VERB",   "DET", "NOUN", "PUNCT" });
@@ -225,6 +231,9 @@ public class StanfordPosTaggerTest
         // models are not properly added as test dependencies.
         System.setProperty(ResourceObjectProviderBase.PROP_REPO_OFFLINE, "true");
 
+        AssumeResource.assumeResource(StanfordPosTagger.class, "tagger", aLanguage,
+                aVariant);
+        
         AnalysisEngineDescription segmenter;
 
         if ("zh".equals(aLanguage)) {
@@ -259,6 +268,9 @@ public class StanfordPosTaggerTest
             String[] tagClasses)
         throws Exception
     {
+        AssumeResource.assumeResource(StanfordPosTagger.class, "tagger", language,
+                variant);
+        
         AnalysisEngine engine = createEngine(StanfordPosTagger.class,
                 StanfordPosTagger.PARAM_VARIANT, variant, StanfordPosTagger.PARAM_PRINT_TAGSET,
                 true);

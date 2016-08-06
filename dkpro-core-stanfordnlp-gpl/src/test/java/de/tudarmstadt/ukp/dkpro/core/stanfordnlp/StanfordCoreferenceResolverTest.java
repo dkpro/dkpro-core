@@ -22,7 +22,6 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertFalse;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.ConsoleHandler;
@@ -39,6 +38,7 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import edu.stanford.nlp.dcoref.Constants;
 
@@ -207,6 +207,9 @@ public class StanfordCoreferenceResolverTest
     private JCas runTest(String aLanguage, String aText, String aSieves)
         throws Exception
     {
+        AssumeResource.assumeResource(StanfordCoreferenceResolver.class, "coref", aLanguage,
+                "default");
+        
         // Coreference resolution requires the parser and the NER to run before
         AnalysisEngine engine = createEngine(createEngineDescription(
                 createEngineDescription(StanfordSegmenter.class),

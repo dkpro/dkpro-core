@@ -48,6 +48,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.TreeUtils;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 import edu.stanford.nlp.ling.StringLabel;
@@ -1152,6 +1153,8 @@ public class StanfordParserTest
             Object... aExtraParams)
         throws Exception
     {
+        AssumeResource.assumeResource(StanfordPosTagger.class, "tagger", aLanguage, aVariant);
+        
         AggregateBuilder aggregate = new AggregateBuilder();
         
         aggregate.add(createEngineDescription(StanfordPosTagger.class));
@@ -1173,6 +1176,8 @@ public class StanfordParserTest
     private JCas runTest(String aLanguage, String aVariant, String aText, Object... aExtraParams)
         throws Exception
     {
+        AssumeResource.assumeResource(StanfordParser.class, "parser", aLanguage, aVariant);
+        
         AggregateBuilder aggregate = new AggregateBuilder();
         
         Object[] params = new Object[] {
@@ -1191,6 +1196,8 @@ public class StanfordParserTest
     private JCas runTest(String aLanguage, String aVariant, String[] aTokens)
         throws Exception
     {
+        AssumeResource.assumeResource(StanfordParser.class, "parser", aLanguage, aVariant);
+        
         // setup English
         AnalysisEngineDescription parser = createEngineDescription(StanfordParser.class,
                 StanfordParser.PARAM_VARIANT, aVariant,

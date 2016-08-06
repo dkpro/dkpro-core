@@ -29,6 +29,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
@@ -333,6 +334,9 @@ public class StanfordNamedEntityRecognizerTest
     private JCas runTest(String language, String variant, String testDocument)
         throws Exception
     {
+        AssumeResource.assumeResource(StanfordNamedEntityRecognizer.class, "ner", language,
+                variant);
+
         AnalysisEngine engine = createEngine(StanfordNamedEntityRecognizer.class,
                 StanfordNamedEntityRecognizer.PARAM_VARIANT, variant,
                 StanfordNamedEntityRecognizer.PARAM_PRINT_TAGSET, true);
