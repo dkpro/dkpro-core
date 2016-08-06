@@ -17,11 +17,10 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.mstparser;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
-import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.commons.lang.ArrayUtils;
+import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
@@ -33,20 +32,21 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.hunpos.HunPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
+import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 /**
  */
 public class MstParserTest
 {
-    @Ignore("Takes too long")
+    @Ignore("Takes too long - also needs update")
     @Test
     public void testCroatianMte5Defnpout()
         throws Exception
     {
         JCas jcas = runTest("hr", "mte5.defnpout", "Moramo vrlo kompliciran primjer rečenicu, "
-                + "koja sadrži što više sastojaka i ovisnosti što je više moguće.");
+                + "koja sadrži što više sastojaka i ovisnosti što je više moguće .");
 
         String[] dependencies = {
                 "[  0,  6]Dependency(Pred) D[0,6](Moramo) G[40,41](,)",
@@ -155,13 +155,13 @@ public class MstParserTest
      * @throws Exception
      *             if an error occurs.
      */
-    @Ignore("Takes too long")
+    @Ignore("Takes too long - also needs update")
     @Test
     public void testCroatianMte5Pos()
         throws Exception
     {
         JCas jcas = runTest("hr", "mte5.pos", "Moramo vrlo kompliciran primjer rečenicu, "
-                + "koja sadrži što više sastojaka i ovisnosti što je više moguće.");
+                + "koja sadrži što više sastojaka i ovisnosti što je više moguće .");
 
         String[] dependencies = {
                 "[  0,  6]Dependency(Oth) D[0,6](Moramo) G[12,23](kompliciran)",
@@ -308,39 +308,23 @@ public class MstParserTest
         AssertAnnotations.assertTagset(Dependency.class, "conll2008", depTags, jcas);
     }
 
-    /**
-     * Generates a JCas from the input text and annotates it with dependencies.
-     * 
-     * @param aLanguage
-     *            the text language.
-     * @param aVariant
-     *            the model variant.
-     * @param aText
-     *            the text.
-     * @return the JCas.
-     * @throws Exception
-     *             if an error occurs.
-     */
-	private JCas runTest(String aLanguage, String aVariant, String aText)
-		throws Exception
-	{
-		AnalysisEngineDescription aggregate = createEngineDescription(
-				createEngineDescription(BreakIteratorSegmenter.class),
-				createEngineDescription(HunPosTagger.class),
-				createEngineDescription(MstParser.class, 
-				        MstParser.PARAM_VARIANT, aVariant,
-				        MstParser.PARAM_PRINT_TAGSET, true));
+    private JCas runTest(String aLanguage, String aVariant, String aText, Object... aExtraParams)
+        throws Exception
+    {
+        AssumeResource.assumeResource(MstParser.class, "parser", aLanguage, aVariant);
+        
+        AggregateBuilder aggregate = new AggregateBuilder();
+        
+        aggregate.add(createEngineDescription(HunPosTagger.class));
+        Object[] params = new Object[] {
+                MstParser.PARAM_VARIANT, aVariant,
+                MstParser.PARAM_PRINT_TAGSET, true};
+        params = ArrayUtils.addAll(params, aExtraParams);
+        aggregate.add(createEngineDescription(MstParser.class, params));
 
-		AnalysisEngine engine = createEngine(aggregate);
-		JCas jcas = engine.newJCas();
-		jcas.setDocumentLanguage(aLanguage);
-		jcas.setDocumentText(aText);
-		engine.process(jcas);
+        return TestRunner.runTest(aggregate.createAggregateDescription(), aLanguage, aText);
+    }
 
-		return jcas;
-	}
-
-    
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
 }
