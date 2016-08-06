@@ -68,6 +68,13 @@ public class DatasetLoaderTest
         new DatasetLoader(DkproTestContext.getCacheFolder()).loadUniversalDependencyTreebankV1_3();
     }
 
+    @Test
+    public void testGermanHamburgDependencyTreebank()
+        throws Exception
+    {
+        new DatasetLoader(DkproTestContext.getCacheFolder()).loadGermanHamburgDependencyTreebank();
+    }
+
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
 }

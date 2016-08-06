@@ -230,17 +230,19 @@ public class DatasetLoader
      * Contains annotated text from the German technical news website <i>www.heise.de</i>  
      * https://corpora.uni-hamburg.de/drupal/de/islandora/object/treebank:hdt 
      */
-    public Dataset loadGermanHamburgDependencyTreebank() throws IOException{
+    public Dataset loadGermanHamburgDependencyTreebank()
+        throws IOException
+    {
         DefaultDataset ds = new DefaultDataset("HamburgDependencyTreebank", "de");
         File dataDir = new File(cacheRoot, ds.getName());
 
         DataPackage data = new DataPackage.Builder()
-                .url("http://hdl.handle.net/11022/0000-0000-91AE-8")
-                .sha1("3f938141325a9254a6cb5ff47bff336ea456d45a")
+                .url("https://corpora.uni-hamburg.de:8443/fedora/objects/file:hdt_hdt-conll/datastreams/hdt-conll-tar-xz/content?asOfDateTime=2016-02-17T15:38:47.643Z&amp;download=true")
+                .sha1("6594e5cd48966db7dac04f2b5ff948eb2bcadf37")
                 .target("hamburgDepTreebank.tar.xz")
                 .postAction((d) -> { untarxz(new File(dataDir, d.getTarget()), dataDir); })
                 .build();
-        
+
         fetch(dataDir, data);
 
         return ds;
@@ -374,8 +376,11 @@ public class DatasetLoader
                     }
                 }
             }
+        }
                  
-            // Perform a post-fetch action such as unpacking
+        // Perform a post-fetch action such as unpacking
+        for (DataPackage pack : aPackages) {
+            File cachedFile = new File(aTarget, pack.getTarget());
             File postActionCompleteMarker = new File(cachedFile.getPath()+".postComplete");
             if (pack.getPostAction() != null && !postActionCompleteMarker.exists()) {
                 try {
@@ -419,14 +424,10 @@ public class DatasetLoader
     
     public void untarxz(File aArchive, File aTarget) throws IOException {
         
-        File tmp = unxz(aArchive, aTarget);
-        
-        try (ArchiveInputStream archive = new TarArchiveInputStream(
-                new BufferedInputStream(new FileInputStream(tmp)))) {
+        try (ArchiveInputStream archive = new TarArchiveInputStream(new XZCompressorInputStream(
+                new BufferedInputStream(new FileInputStream(aArchive))))) {
             extract(aArchive, archive, aTarget);
         }
-        
-        tmp.delete();
     }
 
     private File unxz(File aArchive, File aTarget) throws IOException
