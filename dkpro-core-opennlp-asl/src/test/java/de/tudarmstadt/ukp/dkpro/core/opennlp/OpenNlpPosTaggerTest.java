@@ -34,6 +34,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
@@ -114,7 +115,12 @@ public class OpenNlpPosTaggerTest
         runTest("en", "maxent", "The quick brown fox jumps over the lazy dog . \n",
                 new String[] { "DT", "JJ", "JJ", "NN", "NNS", "IN", "DT", "JJ", "NN", "." },                
                 new String[] { "DET", "ADJ", "ADJ", "NOUN", "NOUN", "ADP", "DET", "ADJ", "NOUN", "PUNCT" });
-        
+	}
+    
+    @Test
+    public void testEnglishExtra()
+        throws Exception
+    {
         runTest("en", "perceptron", "The quick brown fox jumps over the lazy dog . \n",
                 new String[] { "DT", "JJ", "JJ", "NN", "NNS", "IN", "DT", "JJ", "NN", "." },                
                 new String[] { "DET", "ADJ", "ADJ", "NOUN", "NOUN", "ADP", "DET", "ADJ", "NOUN", "PUNCT" });
@@ -230,7 +236,9 @@ public class OpenNlpPosTaggerTest
 			String[] tagClasses)
 		throws Exception
 	{
-		AnalysisEngine engine = createEngine(OpenNlpPosTagger.class,
+        AssumeResource.assumeResource(OpenNlpPosTagger.class, "tagger", language, variant);
+
+        AnalysisEngine engine = createEngine(OpenNlpPosTagger.class,
 				OpenNlpPosTagger.PARAM_VARIANT, variant,
 				OpenNlpPosTagger.PARAM_PRINT_TAGSET, true);
 

@@ -29,6 +29,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
@@ -252,6 +253,8 @@ public class OpenNlpParserTest
 	private JCas runTest(String aLanguage, String aVariant, String aDocument)
 		throws Exception
 	{
+        AssumeResource.assumeResource(OpenNlpParser.class, "parser", aLanguage, aVariant);
+	    
 		AnalysisEngineDescription parser = createEngineDescription(OpenNlpParser.class,
 				OpenNlpParser.PARAM_VARIANT, aVariant,
 				OpenNlpParser.PARAM_PRINT_TAGSET, true,

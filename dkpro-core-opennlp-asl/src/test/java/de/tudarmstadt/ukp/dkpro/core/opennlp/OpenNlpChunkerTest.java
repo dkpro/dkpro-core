@@ -32,6 +32,7 @@ import org.junit.Test;
 import org.junit.rules.TestName;
 
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 
 public class OpenNlpChunkerTest
 {
@@ -117,6 +118,8 @@ public class OpenNlpChunkerTest
     private JCas runTest(String aLanguage, String aVariant, String aText)
         throws Exception
     {
+        AssumeResource.assumeResource(OpenNlpChunker.class, "chunker", aLanguage, aVariant);
+
         AnalysisEngineDescription segmenter = createEngineDescription(OpenNlpSegmenter.class);
 
         AnalysisEngineDescription tagger = createEngineDescription(OpenNlpPosTagger.class);

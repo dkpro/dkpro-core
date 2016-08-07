@@ -27,6 +27,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
@@ -86,6 +87,8 @@ public class OpenNlpNamedEntityRecognizerTest
     private JCas runTest(String language, String variant, String testDocument)
         throws Exception
     {
+        AssumeResource.assumeResource(OpenNlpNamedEntityRecognizer.class, "ner", language, variant);
+        
         AnalysisEngine engine = createEngine(OpenNlpNamedEntityRecognizer.class,
                 OpenNlpNamedEntityRecognizer.PARAM_VARIANT, variant,
                 OpenNlpNamedEntityRecognizer.PARAM_PRINT_TAGSET, true);

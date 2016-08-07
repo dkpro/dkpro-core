@@ -22,6 +22,7 @@ import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertToke
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,8 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assert;
+import org.junit.internal.AssumptionViolatedException;
+
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -124,8 +127,22 @@ public final class SegmenterHarness
 		// No instances
 	}
 
-	public static void run(AnalysisEngineDescription aAed, String... aIgnoreIds) throws Throwable
-	{
+	@FunctionalInterface
+	public static interface AssumeResourcePredicate {
+        void assume(String aLanguage, String aVariant)
+            throws AssumptionViolatedException, IOException;
+	}
+
+    public static void run(AnalysisEngineDescription aAed, String... aIgnoreIds)
+        throws Throwable
+    {
+        run(aAed, null, aIgnoreIds);
+    }
+	
+    public static void run(AnalysisEngineDescription aAed, AssumeResourcePredicate aCheck,
+            String... aIgnoreIds)
+                throws Throwable
+    {
 		AnalysisEngine ae = createEngine(aAed);
 		JCas jCas = ae.newJCas();
 
@@ -135,6 +152,17 @@ public final class SegmenterHarness
 			for (TestData td : DATA) {
 				System.out.printf("== %s ==%n", td.id);
 				jCas.reset();
+				
+				if (aCheck != null) {
+				    try {
+				        aCheck.assume(td.language, null);
+				    }
+				    catch (AssumptionViolatedException e) {
+                        results.add(String.format("%s skipped", td.id));
+				        continue;
+				    }
+				}
+				
 				jCas.setDocumentLanguage(td.language);
 				jCas.setDocumentText(td.text);
 

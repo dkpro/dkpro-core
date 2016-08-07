@@ -30,6 +30,7 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.harness.SegmenterHarness;
 
@@ -65,13 +66,19 @@ public class OpenNlpSegmenterTest
     {
         AnalysisEngineDescription aed = createEngineDescription(OpenNlpSegmenter.class);
 
-        SegmenterHarness.run(aed, "de.1", "en.7", "en.9", "ar.1", "zh.1", "zh.2");
+        SegmenterHarness.run(aed, (language, variant) -> {
+                    AssumeResource.assumeResource(OpenNlpSegmenter.class, "sentence", language, 
+                            "maxent");
+                },
+                "de.1", "en.7", "en.9", "ar.1", "zh.1", "zh.2");
     }
 
     private JCas runTest(String aLanguage, String aVariant, String aDocument, String[] sentences,
             String[] tokens)
         throws Exception
     {
+        AssumeResource.assumeResource(OpenNlpSegmenter.class, "sentence", aLanguage, aVariant);
+        
         AnalysisEngine engine = createEngine(OpenNlpSegmenter.class,
                 OpenNlpSegmenter.PARAM_VARIANT, aVariant);
         
@@ -91,6 +98,8 @@ public class OpenNlpSegmenterTest
             final String aDocument, final String[] sentences, final String[] tokens)
         throws Exception
     {
+        AssumeResource.assumeResource(OpenNlpSegmenter.class, "sentence", aLanguage, variant);
+        
         final AnalysisEngine engine = createEngine(OpenNlpSegmenter.class,
                 OpenNlpSegmenter.PARAM_VARIANT, variant,
                 OpenNlpSegmenter.PARAM_SEGMENTATION_MODEL_LOCATION,
