@@ -103,6 +103,10 @@ PARAM_SOURCE_LOCATION, "classpath*:texts/*.txt"
   algorithm. Supported are: NONE, GZIP, BZIP2, and XZ (see class CompressionMethod).
 | NONE
 
+| PARAM_FILENAME_EXTENSION
+| Append this extension to files names. If PARAM_STRIP_EXTENSION is set to true, the original extension is replaced.
+| depends on writer
+
 | PARAM_STRIP_EXTENSION
 | Whether to remove the original file extension when writing. E.g. with the XmiWriter without 
   extension stripping, an input file __MyText.txt__ would be written as __MyText.txt.xmi__ - with 

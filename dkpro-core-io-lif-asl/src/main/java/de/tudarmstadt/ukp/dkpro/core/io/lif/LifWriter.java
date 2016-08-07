@@ -58,8 +58,8 @@ public class LifWriter
      * Specify the suffix of output files. Default value <code>.json</code>. If the suffix is not
      * needed, provide an empty string as value.
      */
-    public static final String PARAM_FILENAME_SUFFIX = "filenameSuffix";
-    @ConfigurationParameter(name = PARAM_FILENAME_SUFFIX, mandatory = true, defaultValue = ".json")
+    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
+    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".json")
     private String filenameSuffix;
 
     @Override

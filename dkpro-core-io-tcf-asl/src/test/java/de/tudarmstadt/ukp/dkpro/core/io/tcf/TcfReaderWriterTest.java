@@ -69,7 +69,7 @@ public class TcfReaderWriterTest
                 TcfWriter.class,
                 TcfWriter.PARAM_TARGET_LOCATION, "target/test-output/oneway",
                 TcfWriter.PARAM_OVERWRITE, true,
-                TcfWriter.PARAM_FILENAME_SUFFIX, ".xml",
+                TcfWriter.PARAM_FILENAME_EXTENSION, ".xml",
                 TcfWriter.PARAM_STRIP_EXTENSION, true);
 
         AnalysisEngineDescription dumper = createEngineDescription(CasDumpWriter.class,
@@ -127,7 +127,7 @@ public class TcfReaderWriterTest
                 TcfWriter.class,
                 TcfWriter.PARAM_TARGET_LOCATION, "target/test-output/roundtrip",
                 TcfWriter.PARAM_OVERWRITE, true,
-                TcfWriter.PARAM_FILENAME_SUFFIX, ".xml",
+                TcfWriter.PARAM_FILENAME_EXTENSION, ".xml",
                 TcfWriter.PARAM_STRIP_EXTENSION, true);
 
         runPipeline(reader, writer);

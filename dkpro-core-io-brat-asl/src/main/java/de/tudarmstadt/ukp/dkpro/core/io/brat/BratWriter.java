@@ -53,6 +53,7 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratAnnotationDocument;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratAttributeDecl;
@@ -87,16 +88,16 @@ public class BratWriter extends JCasFileWriter_ImplBase
      * Specify the suffix of text output files. Default value <code>.txt</code>. If the suffix is not
      * needed, provide an empty string as value.
      */
-    public static final String PARAM_TEXT_FILENAME_SUFFIX = "textFilenameSuffix";
-    @ConfigurationParameter(name = PARAM_TEXT_FILENAME_SUFFIX, mandatory = true, defaultValue = ".txt")
-    private String textFilenameSuffix;
+    public static final String PARAM_TEXT_FILENAME_EXTENSION = "textFilenameExtension";
+    @ConfigurationParameter(name = PARAM_TEXT_FILENAME_EXTENSION, mandatory = true, defaultValue = ".txt")
+    private String textFilenameExtension;
 
     /**
      * Specify the suffix of output files. Default value <code>.ann</code>. If the suffix is not
      * needed, provide an empty string as value.
      */
-    public static final String PARAM_FILENAME_SUFFIX = "filenameSuffix";
-    @ConfigurationParameter(name = PARAM_FILENAME_SUFFIX, mandatory = true, defaultValue = ".ann")
+    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
+    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".ann")
     private String filenameSuffix;
     
     /**
@@ -720,7 +721,7 @@ public class BratWriter extends JCasFileWriter_ImplBase
     private void writeText(JCas aJCas)
         throws IOException
     {
-        try (OutputStream docOS = getOutputStream(aJCas, textFilenameSuffix)) {
+        try (OutputStream docOS = getOutputStream(aJCas, textFilenameExtension)) {
             IOUtils.write(aJCas.getDocumentText(), docOS);
         }
     }

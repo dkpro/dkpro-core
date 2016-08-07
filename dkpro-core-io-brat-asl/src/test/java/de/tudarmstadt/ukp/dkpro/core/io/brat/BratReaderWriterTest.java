@@ -68,7 +68,7 @@ public class BratReaderWriterTest
                 createReaderDescription(Conll2012Reader.class,
                         Conll2012Reader.PARAM_USE_HEADER_METADATA, false), 
                 createEngineDescription(BratWriter.class,
-                        BratWriter.PARAM_FILENAME_SUFFIX, ".html"), 
+                        BratWriter.PARAM_FILENAME_EXTENSION, ".html"), 
                 "conll/2012/en-ref.html",
                 "conll/2012/en-orig.conll");
     }
@@ -81,7 +81,7 @@ public class BratReaderWriterTest
                 createReaderDescription(Conll2012Reader.class,
                         Conll2012Reader.PARAM_USE_HEADER_METADATA, false), 
                 createEngineDescription(BratWriter.class,
-                        BratWriter.PARAM_FILENAME_SUFFIX, ".json"), 
+                        BratWriter.PARAM_FILENAME_EXTENSION, ".json"), 
                 "conll/2012/en-ref.json",
                 "conll/2012/en-orig.conll");
     }
