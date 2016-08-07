@@ -24,16 +24,19 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.io.web1t.util.Web1TConverter;
 
 /**
  * Web1T n-gram index format writer.
  */
+@MimeTypeCapability({MimeTypes.TEXT_X_NGRAM})
 @TypeCapability(
         inputs={
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"})

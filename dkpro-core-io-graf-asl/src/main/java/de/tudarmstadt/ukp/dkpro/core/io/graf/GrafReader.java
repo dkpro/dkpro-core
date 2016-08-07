@@ -26,6 +26,8 @@ import org.apache.uima.cas.impl.CASCompleteSerializer;
 import org.apache.uima.cas.impl.CASImpl;
 import org.apache.uima.cas.impl.Serialization;
 import org.apache.uima.collection.CollectionException;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.FsIndexFactory;
 import org.apache.uima.fit.factory.TypePrioritiesFactory;
 import org.apache.uima.fit.factory.TypeSystemDescriptionFactory;
@@ -41,10 +43,15 @@ import org.xces.graf.uima.CASFactory;
 import org.xml.sax.SAXException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 
 /**
  * ISO GrAF reader.
  */
+@MimeTypeCapability({MimeTypes.APPLICATION_X_GRAF_XML})
+@TypeCapability(
+        outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
 public class GrafReader
 	extends ResourceCollectionReaderBase
 {

@@ -27,21 +27,25 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 
 /**
  * Collection reader for PDF files. Uses simple heuristics to detect headings and paragraphs.
- *
  */
+@MimeTypeCapability({MimeTypes.APPLICATION_PDF})
 @TypeCapability(
-		outputs = {
-			"de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
+        outputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading", 
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph"})
 public class PdfReader
     extends ResourceCollectionReaderBase
 {

@@ -46,6 +46,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.util.FSCollectionFactory;
@@ -57,6 +58,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
@@ -91,13 +93,17 @@ import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerTerminal;
  * UIMA collection reader for TIGER-XML files. Also supports the augmented format used in the
  * Semeval 2010 task which includes semantic role data.
  */
-@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
-        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg",
-        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred" })
+@MimeTypeCapability({MimeTypes.APPLICATION_X_TIGER_XML, MimeTypes.APPLICATION_X_SEMEVAL_2010_XML})
+@TypeCapability(
+        outputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
+                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg",
+                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred" })
 public class TigerXmlReader
     extends JCasResourceCollectionReader_ImplBase
 {

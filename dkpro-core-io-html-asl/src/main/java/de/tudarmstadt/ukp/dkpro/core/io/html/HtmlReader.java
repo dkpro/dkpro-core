@@ -41,12 +41,12 @@ import com.ibm.icu.text.CharsetDetector;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 
 /**
- * Reads the contents of a given URL and strips the HTML.
- * Returns only the textual contents.
+ * Reads the contents of a given URL and strips the HTML. Returns only the textual contents.
  */
-@MimeTypeCapability({"text/html", "application/xhtml+xml"})
+@MimeTypeCapability({MimeTypes.APPLICATION_XHTML, MimeTypes.TEXT_HTML})
 @TypeCapability(
 		outputs = {
 			"de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })

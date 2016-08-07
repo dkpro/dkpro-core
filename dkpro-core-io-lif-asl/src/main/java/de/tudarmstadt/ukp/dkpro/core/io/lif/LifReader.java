@@ -22,16 +22,29 @@ import java.io.InputStream;
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.lappsgrid.serialization.Serializer;
 import org.lappsgrid.serialization.lif.Container;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.io.lif.internal.Lif2DKPro;
 
 /**
  * Writer for the LIF format.
  */
+@MimeTypeCapability({MimeTypes.APPLICATION_X_LIF_JSON})
+@TypeCapability(
+        outputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"})
 public class LifReader
     extends JCasResourceCollectionReader_ImplBase
 {

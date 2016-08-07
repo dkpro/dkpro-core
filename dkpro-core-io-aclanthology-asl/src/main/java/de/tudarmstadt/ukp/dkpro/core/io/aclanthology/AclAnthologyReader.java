@@ -27,44 +27,47 @@ import org.apache.commons.io.IOUtils;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 
 import com.ibm.icu.text.CharsetDetector;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 
 /**
- * Reada the ACL anthology corpus and outputs CASes with plain text documents.
+ * <p>Reads the ACL anthology corpus and outputs CASes with plain text documents.</p>
  *
- *
+ * <p>The reader tries to strip out hyphenation and replace problematic characters to produce a
+ * cleaned text. Otherwise, it is a plain text reader.</p>
  */
-
+@MimeTypeCapability(MimeTypes.TEXT_PLAIN)
 @TypeCapability(
         outputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
-
 public class AclAnthologyReader
     extends ResourceCollectionReaderBase
 {
-
     /**
      * Name of configuration parameter that contains the character encoding used by the input files.
      * If not specified, the default system encoding will be used.
      */
-    public static final String PARAM_ENCODING = "Encoding";
-    @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
+    public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = "UTF-8")
     private String encoding;
 
     // replace some nasty characters
-    final char[] replaceChars = new char[] {
-            (char) 1,    (char) 8,    (char) 11,   (char) 12,    (char) 14,    (char) 15,   (char) 16,
-            (char) 17,   (char) 18,   (char) 19,   (char) 20,    (char) 21,    (char) 22,   (char) 24,   (char) 25,  (char) 28,
-            (char) 30,   (char) 31,   (char) 127,  (char) 154,   (char) 159,   (char) 167,  (char) 168,  (char) 169, (char) 171,
-            (char) 174,  (char) 176,  (char) 177,  (char) 182,   (char) 187,   (char) 405,  (char) 406,  (char) 407, (char) 534,
-            (char) 543,  (char) 596,  (char) 726,  (char) 937,   (char) 1227,  (char) 1366, (char) 1367, (char) 1372,
-            (char) 1378, (char) 1390, (char) 1426, (char) 1436,  (char) 1462,  (char) 1490, (char) 1525, (char) 1562,
-            (char) 1697, (char) 1720, (char) 1802, (char) 1954,  (char) 8222,  (char) 8226, (char) 8228, (char) 8249,
-            (char) 8250, (char) 9632, (char) 9642, (char) 10003, (char) 65279, (char) 65533 };
+    final char[] replaceChars = new char[] { (char) 1, (char) 8, (char) 11, (char) 12, (char) 14,
+            (char) 15, (char) 16, (char) 17, (char) 18, (char) 19, (char) 20, (char) 21, (char) 22,
+            (char) 24, (char) 25, (char) 28, (char) 30, (char) 31, (char) 127, (char) 154,
+            (char) 159, (char) 167, (char) 168, (char) 169, (char) 171, (char) 174, (char) 176,
+            (char) 177, (char) 182, (char) 187, (char) 405, (char) 406, (char) 407, (char) 534,
+            (char) 543, (char) 596, (char) 726, (char) 937, (char) 1227, (char) 1366, (char) 1367,
+            (char) 1372, (char) 1378, (char) 1390, (char) 1426, (char) 1436, (char) 1462,
+            (char) 1490, (char) 1525, (char) 1562, (char) 1697, (char) 1720, (char) 1802,
+            (char) 1954, (char) 8222, (char) 8226, (char) 8228, (char) 8249, (char) 8250,
+            (char) 9632, (char) 9642, (char) 10003, (char) 65279, (char) 65533 };
 
     @Override
     public void getNext(CAS aCAS)

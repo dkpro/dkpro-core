@@ -34,11 +34,12 @@ import com.ibm.icu.text.CharsetDetector;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 
 /**
  * UIMA collection reader for plain text files.
  */
-@MimeTypeCapability("text/plain")
+@MimeTypeCapability(MimeTypes.TEXT_PLAIN)
 @TypeCapability(
         outputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})

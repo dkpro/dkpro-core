@@ -53,6 +53,7 @@ import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
@@ -77,6 +78,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -89,6 +91,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 /**
  * Reader for the TEI XML.
  */
+@MimeTypeCapability({MimeTypes.APPLICATION_TEI_XML})
 @TypeCapability(
 		outputs = {
 			"de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",

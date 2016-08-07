@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
@@ -37,6 +38,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
@@ -67,6 +69,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor
  * 
  * @see <a href="https://web.archive.org/web/20131216222420/http://ilk.uvt.nl/conll/">CoNLL-X Shared Task: Multi-lingual Dependency Parsing</a>
  */
+@MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2006})
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",

@@ -40,11 +40,13 @@ import javax.xml.stream.XMLOutputFactory;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
@@ -58,6 +60,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerTerminal;
 /**
  * UIMA CAS consumer writing the CAS document text in the TIGER-XML format.
  */
+@MimeTypeCapability({MimeTypes.APPLICATION_X_TIGER_XML})
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",

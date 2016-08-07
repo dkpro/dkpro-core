@@ -38,6 +38,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.DoubleArray;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -48,14 +50,19 @@ import cc.mallet.types.IDSorter;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
 
 /**
  * This annotator (consumer) writes output files as required by <a
  * href="https://ditop.hs8.de/">DiTop</a>. It requires JCas input annotated by
  * {@link de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer} using the same model.
- *
  */
+@MimeTypeCapability({MimeTypes.APPLICATION_X_DITOP})
+@TypeCapability(
+        inputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution" })
 public class DiTopWriter
     extends JCasFileWriter_ImplBase
 {

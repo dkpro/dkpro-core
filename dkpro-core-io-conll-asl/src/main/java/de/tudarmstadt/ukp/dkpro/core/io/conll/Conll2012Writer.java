@@ -37,6 +37,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
@@ -48,6 +49,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg;
@@ -61,14 +63,16 @@ import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
 /**
  * Writer for the CoNLL-2009 format.
  */
-@TypeCapability(inputs = { 
-        "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred",
-        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg"})
+@MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2012})
+@TypeCapability(
+        inputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred",
+                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg" })
 public class Conll2012Writer
     extends JCasFileWriter_ImplBase
 {

@@ -54,6 +54,7 @@ import javax.xml.stream.events.Attribute;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
@@ -62,6 +63,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -71,6 +73,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 /**
  * UIMA CAS consumer writing the CAS document text in TEI format.
  */
+@MimeTypeCapability({MimeTypes.APPLICATION_TEI_XML})
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",

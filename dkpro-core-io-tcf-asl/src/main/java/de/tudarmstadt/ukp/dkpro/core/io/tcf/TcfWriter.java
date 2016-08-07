@@ -39,6 +39,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
@@ -51,6 +52,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagsetDescription;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -74,18 +76,19 @@ import eu.clarin.weblicht.wlfxb.xb.WLData;
 
 /**
  * Writer for the WebLicht TCF format.
- *
  */
-@TypeCapability(inputs = { 
-        "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-        "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain",
-        "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink",
-        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
+@MimeTypeCapability({MimeTypes.TEXT_TCF})
+@TypeCapability(
+        inputs = { 
+            "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+            "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
+            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+            "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain",
+            "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink",
+            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 public class TcfWriter
     extends JCasFileWriter_ImplBase
 {

@@ -30,6 +30,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -42,11 +43,13 @@ import au.edu.unimelb.csse.analyser.OverflowException;
 import au.edu.unimelb.csse.analyser.String2NodesParser;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 
 /**
  * Fangorn index writer.
  */
+@MimeTypeCapability({MimeTypes.APPLICATION_X_FANGORN})
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",

@@ -25,16 +25,19 @@ import java.io.Writer;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 
 /**
  * Penn Treebank combined format writer.
  */
+@MimeTypeCapability({MimeTypes.TEXT_X_PTB_COMBINED})
 @TypeCapability(
         inputs = { 
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",

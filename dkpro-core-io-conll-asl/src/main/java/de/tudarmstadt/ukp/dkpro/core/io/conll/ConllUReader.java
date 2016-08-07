@@ -32,6 +32,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.jcas.JCas;
@@ -41,6 +42,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBas
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -78,13 +80,16 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
  * 
  * @see <a href="http://universaldependencies.github.io/docs/format.html">CoNLL-U Format</a>
  */
-@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures",
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
+@MimeTypeCapability({MimeTypes.TEXT_X_CONLL_U})
+@TypeCapability(
+        outputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 public class ConllUReader
     extends JCasResourceCollectionReader_ImplBase
 {

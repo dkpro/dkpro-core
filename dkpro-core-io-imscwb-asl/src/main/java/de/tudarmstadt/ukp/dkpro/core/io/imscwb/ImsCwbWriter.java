@@ -46,6 +46,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
@@ -53,6 +54,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -66,12 +68,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * native binary CQP format via the original CWB command line tools.
  *
  */
-
-@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
+@MimeTypeCapability({MimeTypes.TEXT_X_IMSCWB})
+@TypeCapability(
+        inputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
 public class ImsCwbWriter
     extends JCasAnnotator_ImplBase
 {

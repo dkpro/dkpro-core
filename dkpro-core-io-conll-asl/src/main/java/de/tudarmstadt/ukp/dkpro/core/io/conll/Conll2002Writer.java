@@ -31,6 +31,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
@@ -39,6 +40,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.IobEncoder;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -77,10 +79,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * <li>NER - named entity (BIO encoded)</li>
  * </ol>
  *
- * <p>Sentences are separated by a blank new line.</p>
+ * <p>Fields are separated by a single space. Sentences are separated by a blank new line.</p>
  *
  * @see <a href="http://www.clips.ua.ac.be/conll2002/ner/">CoNLL 2002 shared task</a>
  */
+@MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2002})
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",

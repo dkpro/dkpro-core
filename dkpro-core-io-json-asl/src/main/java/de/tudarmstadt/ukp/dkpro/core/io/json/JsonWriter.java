@@ -27,6 +27,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CASRuntimeException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.json.JsonCasSerializer;
@@ -36,11 +37,13 @@ import org.apache.uima.util.TypeSystemUtil;
 import org.xml.sax.SAXException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 
 /**
  * UIMA JSON format writer.
  */
+@MimeTypeCapability({MimeTypes.APPLICATION_X_UIMA_JSON})
 @TypeCapability(
         inputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})

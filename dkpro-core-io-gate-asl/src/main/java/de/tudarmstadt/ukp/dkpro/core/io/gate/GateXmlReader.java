@@ -21,21 +21,29 @@ import java.io.IOException;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.collection.CollectionException;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import gate.Gate;
 import gate.util.GateException;
 
-public class GateXmlReader extends JCasResourceCollectionReader_ImplBase
+@MimeTypeCapability({MimeTypes.APPLICATION_X_GATE_XML})
+@TypeCapability(
+        outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
+public class GateXmlReader
+    extends JCasResourceCollectionReader_ImplBase
 {
     @Override
     public void initialize(UimaContext aContext)
         throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
+
         if (!Gate.isInitialised()) {
             try {
                 // must be called before you can do anything with the GATE API
@@ -46,12 +54,12 @@ public class GateXmlReader extends JCasResourceCollectionReader_ImplBase
             }
         }
     }
-    
+
     @Override
     public void getNext(JCas aJCas)
         throws IOException, CollectionException
     {
         // TODO Auto-generated method stub
-        
+
     }
 }

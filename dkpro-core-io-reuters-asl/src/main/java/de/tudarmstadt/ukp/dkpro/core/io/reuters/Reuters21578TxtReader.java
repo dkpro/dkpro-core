@@ -19,10 +19,14 @@ package de.tudarmstadt.ukp.dkpro.core.io.reuters;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+
 import org.apache.commons.io.FilenameUtils;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.collection.CollectionException;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
 import java.io.BufferedReader;
@@ -43,8 +47,12 @@ import java.util.Map;
  * @see <a href="http://lucene.apache.org/core/5_3_1/benchmark/org/apache/lucene/benchmark/utils/ExtractReuters.html">ExtractReuters</a>
  * @see <a href="https://github.com/apache/mahout/blob/master/examples/bin/cluster-reuters.sh">cluster-reuters.sh</a>
  */
+@MimeTypeCapability({MimeTypes.TEXT_X_REUTERS21578})
+@TypeCapability(
+        outputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class Reuters21578TxtReader
-        extends JCasResourceCollectionReader_ImplBase
+    extends JCasResourceCollectionReader_ImplBase
 {
     @Override
     public void getNext(JCas jCas)
@@ -59,7 +67,6 @@ public class Reuters21578TxtReader
         catch (CASException e) {
             throw new CollectionException(e);
         }
-
     }
 
     private void initCas(CAS aCas, File aFile)

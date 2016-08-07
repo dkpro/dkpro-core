@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.io.graf;
 import java.io.OutputStream;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.xces.graf.api.IGraph;
@@ -28,10 +29,12 @@ import org.xces.graf.io.IRenderer;
 import org.xces.graf.uima.GraphFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 
 /**
  * ISO GrAF writer.
  */
+@MimeTypeCapability({MimeTypes.APPLICATION_X_GRAF_XML})
 @TypeCapability(
         inputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})

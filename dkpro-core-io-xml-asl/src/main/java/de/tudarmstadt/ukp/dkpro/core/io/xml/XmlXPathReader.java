@@ -41,6 +41,7 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -51,6 +52,7 @@ import org.xml.sax.InputSource;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field;
 
 /**
@@ -61,10 +63,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field;
  * of each parent node will be stored separately in its own CAS.
  * <p>
  * If your expression evaluates to leaf nodes, empty CASes will be created.
- * 
  */
-@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-        "de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field" })
+@MimeTypeCapability({MimeTypes.APPLICATION_XML, MimeTypes.TEXT_XML})
+@TypeCapability(
+        outputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field" })
 public class XmlXPathReader
     extends FileSetCollectionReaderBase
 {

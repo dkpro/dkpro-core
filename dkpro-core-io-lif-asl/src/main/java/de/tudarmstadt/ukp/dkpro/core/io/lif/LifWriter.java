@@ -21,16 +21,29 @@ import java.io.OutputStream;
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.lappsgrid.serialization.Serializer;
 import org.lappsgrid.serialization.lif.Container;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.io.lif.internal.DKPro2Lif;
 
 /**
  * Reader for the LIF format.
  */
+@MimeTypeCapability({MimeTypes.APPLICATION_X_LIF_JSON})
+@TypeCapability(
+        inputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"})
 public class LifWriter
     extends JCasFileWriter_ImplBase
 {

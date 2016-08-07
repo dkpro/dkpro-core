@@ -41,6 +41,7 @@ import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.internal.ExtendedLogger;
 import org.apache.uima.jcas.JCas;
@@ -53,6 +54,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
@@ -63,6 +65,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * Read AnCora XML format.
  */
+@MimeTypeCapability({MimeTypes.APPLICATION_XML, MimeTypes.APPLICATION_X_ANCORA_XML})
 @TypeCapability(
         outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",

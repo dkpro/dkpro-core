@@ -33,6 +33,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.util.JCasUtil;
@@ -43,6 +44,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.IobDecoder;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -82,7 +84,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * <li>NER - named entity (BIO encoded)</li>
  * </ol>
  * 
- * <p>Sentences are separated by a blank new line.</p>
+ * <p>Fields are separated by a single space. Sentences are separated by a blank new line.</p>
  * 
  * <p>The reader is also compatible with the Conll-based GermEval 2014 named entity format,
  * in which the columns are separated by a tab, and there is an extra column for embedded named entities,
@@ -140,10 +142,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * @see <a href="http://www.clips.ua.ac.be/conll2002/ner/">CoNLL 2002 shared task</a>
  * @see <a href="https://sites.google.com/site/germeval2014ner/data">GermEval 2014 NER task</a> 
  */
-@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity"})
+@MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2002, MimeTypes.TEXT_X_GERMEVAL_2014})
+@TypeCapability(
+        outputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity"})
 public class Conll2002Reader
     extends JCasResourceCollectionReader_ImplBase
 {

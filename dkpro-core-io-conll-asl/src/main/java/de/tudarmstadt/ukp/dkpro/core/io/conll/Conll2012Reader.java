@@ -36,6 +36,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.util.FSCollectionFactory;
@@ -49,6 +50,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -97,13 +99,16 @@ import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
  * @see <a href="http://conll.cemantix.org/2012/data.html">CoNLL 2012 Shared Task:
  *      Modeling Multilingual Unrestricted Coreference in OntoNotes</a>
  */
-@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred",
-        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg"})
+@MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2012})
+@TypeCapability(
+        outputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred",
+                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg"})
 public class Conll2012Reader
     extends JCasResourceCollectionReader_ImplBase
 {

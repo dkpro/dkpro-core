@@ -26,15 +26,18 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.impl.XmiCasDeserializer;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.xml.sax.SAXException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 
 /**
  * Reader for UIMA XMI files.
  */
+@MimeTypeCapability({MimeTypes.APPLICATION_VND_XMI_XML, MimeTypes.APPLICATION_X_UIMA_XMI})
 @TypeCapability(
         outputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})

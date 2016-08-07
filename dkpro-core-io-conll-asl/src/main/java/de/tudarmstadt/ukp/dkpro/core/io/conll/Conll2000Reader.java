@@ -32,6 +32,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.util.JCasUtil;
@@ -42,6 +43,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.IobDecoder;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -76,14 +78,17 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
  * <li>CHUNK - chunk (BIO encoded)</li>
  * </ol>
  * 
- * <p>Sentences are separated by a blank new line.</p>
+ * <p>Fields in a line are separated by spaces. Sentences are separated by a blank new line.</p>
  * 
  * @see <a href="http://www.cnts.ua.ac.be/conll2000/chunking/">CoNLL 2000 shared task</a>
  */
-@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk"})
+@MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2000})
+@TypeCapability(
+        outputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk"})
 public class Conll2000Reader
     extends JCasResourceCollectionReader_ImplBase
 {

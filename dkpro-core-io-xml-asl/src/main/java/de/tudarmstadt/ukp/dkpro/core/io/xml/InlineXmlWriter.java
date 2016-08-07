@@ -34,12 +34,14 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.CasToInlineXml;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 
 /**
@@ -62,7 +64,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
  *
  * @since 1.1.0
  */
-
+@MimeTypeCapability({MimeTypes.APPLICATION_XML, MimeTypes.TEXT_XML})
 @TypeCapability(
         inputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})

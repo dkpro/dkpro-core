@@ -29,6 +29,7 @@ import javax.xml.parsers.SAXParserFactory;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.collection.CollectionException;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.util.Logger;
@@ -37,10 +38,12 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 
 /**
  * @since 1.1.0
  */
+@MimeTypeCapability({MimeTypes.APPLICATION_XML, MimeTypes.TEXT_XML})
 @TypeCapability(
         outputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})

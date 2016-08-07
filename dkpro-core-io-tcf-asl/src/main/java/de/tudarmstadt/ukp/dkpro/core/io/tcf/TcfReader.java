@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.apache.uima.collection.CollectionException;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
@@ -37,6 +38,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -58,8 +60,8 @@ import eu.clarin.weblicht.wlfxb.xb.WLData;
  * its annotations which is required in CAS annotation. Hence, addresses are manually calculated per
  * tokens and stored in a map (token_id, token(CAS object)) where later we get can get the offset
  * from the token
- *
  */
+@MimeTypeCapability({MimeTypes.TEXT_TCF})
 @TypeCapability(outputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",

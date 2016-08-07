@@ -22,9 +22,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
@@ -36,6 +40,10 @@ import java.io.OutputStream;
  * per line and tokens split by whitespaces. Optionally, annotations other than tokens (e.g. lemmas)
  * are written as specified by {@link #PARAM_FEATURE_PATH}.
  */
+@MimeTypeCapability({MimeTypes.TEXT_PLAIN})
+@TypeCapability(
+        inputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
 public class TokenizedTextWriter
         extends JCasFileWriter_ImplBase
 {

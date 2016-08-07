@@ -29,11 +29,12 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 
 /**
  * UIMA CAS consumer writing the CAS document text as plain text file.
  */
-@MimeTypeCapability("text/plain")
+@MimeTypeCapability({MimeTypes.TEXT_PLAIN})
 @TypeCapability(
         inputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})

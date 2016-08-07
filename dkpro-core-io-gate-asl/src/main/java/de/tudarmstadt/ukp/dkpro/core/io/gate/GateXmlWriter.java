@@ -22,10 +22,13 @@ import java.io.OutputStream;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.io.gate.internal.DKPro2Gate;
 import gate.Document;
 import gate.DocumentExporter;
@@ -33,7 +36,12 @@ import gate.corpora.DocumentImpl;
 import gate.corpora.export.GateXMLExporter;
 import gate.util.GateException;
 
-public class GateXmlWriter extends JCasFileWriter_ImplBase
+@MimeTypeCapability({MimeTypes.APPLICATION_X_GATE_XML})
+@TypeCapability(
+        inputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
+public class GateXmlWriter
+    extends JCasFileWriter_ImplBase
 {
     /**
      * Specify the suffix of output files. Default value <code>.xml</code>. If the suffix is not
