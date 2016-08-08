@@ -129,8 +129,8 @@ public class HepplePosTagger
                 setContextObject(HepplePosTagger.this);
 
                 setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/gate/lib/" +
-                        "tagger-${language}-${variant}.rul");
-                setDefault(VARIANT, "default");
+                        "tagger/${language}/${variant}/ruleset");
+                setDefault(VARIANT, "annie");
 
                 setOverride(LOCATION, rulesetLocation);
                 setOverride(LANGUAGE, language);
@@ -147,8 +147,8 @@ public class HepplePosTagger
         lexiconProvider = new CasConfigurableProviderBase<URL>() {
             {
                 setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/gate/lib/" +
-                        "tagger-${language}-${variant}.lex");
-                setDefault(VARIANT, "default");
+                        "tagger/${language}/${variant}/lexicon");
+                setDefault(VARIANT, "annie");
 
                 setOverride(LOCATION, lexiconLocation);
                 setOverride(LANGUAGE, language);

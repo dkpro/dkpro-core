@@ -90,7 +90,7 @@ public class GateLemmatizer
                 setContextObject(GateLemmatizer.this);
 
                 setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/gate/lib/" +
-                        "morph-${language}-${variant}.rul");
+                        "lemmatizer-${language}-${variant}.properties");
                 setDefault(VARIANT, "default");
 
                 setOverride(LOCATION, modelLocation);

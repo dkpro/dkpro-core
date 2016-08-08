@@ -19,19 +19,16 @@
 package de.tudarmstadt.ukp.dkpro.core.gate;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
-import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Rule;
 import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class GateLemmatizerTest
 {
@@ -39,7 +36,7 @@ public class GateLemmatizerTest
 	public void testEnglish()
 		throws Exception
 	{
-		JCas jcas = runTest("en", "We need a very complicated example sentence, which " +
+		JCas jcas = runTest("en", "We need a very complicated example sentence , which " +
 			"contains as many constituents and dependencies as possible .");
 
         String[] lemmas = { "We", "need", "a", "very", "complicate", "example", "sentence", ",",
@@ -63,18 +60,13 @@ public class GateLemmatizerTest
 	private JCas runTest(String aLanguage, String aText)
 		throws Exception
 	{
-		AnalysisEngineDescription seg = createEngineDescription(OpenNlpSegmenter.class);
-		AnalysisEngineDescription tagger = createEngineDescription(OpenNlpPosTagger.class);
+		AnalysisEngineDescription tagger = createEngineDescription(HepplePosTagger.class);
 		AnalysisEngineDescription lemma = createEngineDescription(GateLemmatizer.class);
 
-		AnalysisEngineDescription aggregate = createEngineDescription(seg, tagger, lemma);
+		AnalysisEngineDescription aggregate = createEngineDescription(tagger, lemma);
 
-		AnalysisEngine engine = createEngine(aggregate);
-		JCas jcas = engine.newJCas();
-		jcas.setDocumentLanguage(aLanguage);
-		jcas.setDocumentText(aText);
-		engine.process(jcas);
-
+        JCas jcas = TestRunner.runTest(aggregate, aLanguage, aText);
+		
 		return jcas;
 	}
 
