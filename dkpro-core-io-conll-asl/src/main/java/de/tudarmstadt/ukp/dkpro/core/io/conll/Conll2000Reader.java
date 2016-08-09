@@ -44,6 +44,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBas
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -201,7 +202,9 @@ public class Conll2000Reader
         initCas(aJCas, res);
         BufferedReader reader = null;
         try {
-            reader = new BufferedReader(new InputStreamReader(res.getInputStream(), encoding));
+            reader = new BufferedReader(new InputStreamReader(
+                    CompressionUtils.getInputStream(res.getLocation(), res.getInputStream()),
+                    encoding));
             convert(aJCas, reader);
         }
         finally {
@@ -285,7 +288,8 @@ public class Conll2000Reader
             String[] fields = line.split(" ");
             if (fields.length != 3) {
                 throw new IOException(
-                        "Invalid file format. Line needs to have 3 space-separted fields.");
+                        "Invalid file format. Line needs to have 3 space-separted fields: [" + line
+                                + "]");
             }
             words.add(fields);
         }

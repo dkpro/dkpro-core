@@ -43,6 +43,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatur
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -171,7 +172,9 @@ public class ConllUReader
         initCas(aJCas, res);
         BufferedReader reader = null;
         try {
-            reader = new BufferedReader(new InputStreamReader(res.getInputStream(), encoding));
+            reader = new BufferedReader(new InputStreamReader(
+                    CompressionUtils.getInputStream(res.getLocation(), res.getInputStream()),
+                    encoding));
             convert(aJCas, reader);
         }
         finally {
