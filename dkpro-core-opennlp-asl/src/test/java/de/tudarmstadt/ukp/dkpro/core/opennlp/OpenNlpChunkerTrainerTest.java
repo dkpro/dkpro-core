@@ -96,9 +96,9 @@ public class OpenNlpChunkerTrainerTest
 
         Result results = EvalUtil.dumpResults(targetFolder, expected, actual);
         
-        assertEquals(0.752208, results.getFscore(), 0.0001);
-        assertEquals(0.747488, results.getPrecision(), 0.0001);
-        assertEquals(0.756989, results.getRecall(), 0.0001);
+        assertEquals(0.923969, results.getFscore(), 0.0001);
+        assertEquals(0.925758, results.getPrecision(), 0.0001);
+        assertEquals(0.922187, results.getRecall(), 0.0001);
     }
     
     @Before
