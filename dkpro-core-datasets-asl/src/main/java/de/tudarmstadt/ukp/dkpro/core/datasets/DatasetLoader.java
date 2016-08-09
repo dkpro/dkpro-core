@@ -77,7 +77,10 @@ public class DatasetLoader
     public Dataset loadNEMGP()
         throws IOException
     {
-        DefaultDataset ds = new DefaultDataset("NEMGP", "de");
+        DefaultDataset ds = new DefaultDataset.Builder()
+                .name("NEMGP")
+                .language("de")
+                .build();
         File dataDir = new File(cacheRoot, ds.getName());
 
         DataPackage license = DataPackage.LICENSE_CC_BY_SA_3_0;
@@ -226,6 +229,35 @@ public class DatasetLoader
     }
 
     /**
+     * @see <a href="http://www.cnts.ua.ac.be/conll2000/chunking/">CoNLL-2000 NER Shared Task</a>
+     */
+    public Dataset loadEnglishConll2000()
+        throws IOException
+    {
+        DefaultDataset ds = new DefaultDataset("CoNLL-2000", "en");
+        File dataDir = new File(cacheRoot, ds.getName());
+
+        DataPackage train = new DataPackage.Builder()
+                .url("http://www.cnts.ua.ac.be/conll2000/chunking/train.txt.gz")
+                .sha1("9f31cf936554cebf558d07cce923dca0b7f31864")
+                .target("train.txt.gz")
+                .build();
+
+        DataPackage test = new DataPackage.Builder()
+                .url("http://www.cnts.ua.ac.be/conll2000/chunking/test.txt.gz")
+                .sha1("dc57527f1f60eeafad03da51235185141152f849")
+                .target("test.txt.gz")
+                .build();
+
+        ds.setTestFiles(new File(dataDir, test.getTarget()));
+        ds.setTrainingFiles(new File(dataDir, train.getTarget()));
+        
+        fetch(dataDir, train, test);
+
+        return ds;
+    }
+
+    /**
      * Deep-sequoia is a corpus of French sentences annotated with both surface and deep syntactic
      * dependency structures
      * https://deep-sequoia.inria.fr
@@ -313,8 +345,7 @@ public class DatasetLoader
                     break packageValidationLoop;
                 }
                 else {
-                    LOG.info("Local SHA1 hash verified on [" + cachedFile + "] - expected ["
-                            + pack.getSha1() + "] - actual [" + actual + "]");
+                    LOG.info("Local SHA1 hash verified on [" + cachedFile + "] - [" + actual + "]");
                 }
             }
             
@@ -327,8 +358,7 @@ public class DatasetLoader
                     break packageValidationLoop;
                 }
                 else {
-                    LOG.info("Local MD5 hash verified on [" + cachedFile + "] - expected ["
-                            + pack.getMd5() + "] - actual [" + actual + "]");
+                    LOG.info("Local MD5 hash verified on [" + cachedFile + "] - [" + actual + "]");
                 }
             }
             

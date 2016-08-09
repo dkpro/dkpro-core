@@ -31,17 +31,21 @@ public class DefaultDataset
     private File[] testFiles;
     private File[] developmentFiles;
 
+    public DefaultDataset()
+    {
+    }
+
     public DefaultDataset(String aName, String aLanguage)
     {
         name = aName;
         language = aLanguage;
     }
-    
+
     public void setName(String aName)
     {
         name = aName;
     }
-    
+
     @Override
     public String getName()
     {
@@ -63,7 +67,7 @@ public class DefaultDataset
     {
         licenseFile = aLicenseFile;
     }
-    
+
     @Override
     public File getLicenseFile()
     {
@@ -74,7 +78,7 @@ public class DefaultDataset
     {
         trainingFiles = aTrainingFiles;
     }
-    
+
     @Override
     public File[] getTrainingFiles()
     {
@@ -85,7 +89,7 @@ public class DefaultDataset
     {
         testFiles = aTestFiles;
     }
-    
+
     @Override
     public File[] getTestFiles()
     {
@@ -96,11 +100,61 @@ public class DefaultDataset
     {
         developmentFiles = aDevelopmentFiles;
     }
-    
+
     @Override
     public File[] getDevelopmentFiles()
     {
         return developmentFiles;
     }
 
+    public static class Builder
+    {
+        private DefaultDataset ds;
+
+        public Builder()
+        {
+            ds = new DefaultDataset();
+        }
+
+        public Builder name(String aName)
+        {
+            ds.name = aName;
+            return this;
+        }
+
+        public Builder language(String aLanguage)
+        {
+            ds.language = aLanguage;
+            return this;
+        }
+        
+        public Builder licenseFile(File aLicenseFile)
+        {
+            ds.licenseFile = aLicenseFile;
+            return this;
+        }
+        
+        public Builder developmentFiles(File... aDevelopmentFiles)
+        {
+            ds.developmentFiles = aDevelopmentFiles;
+            return this;
+        }
+
+        public Builder trainingFiles(File... aTrainingFiles)
+        {
+            ds.trainingFiles = aTrainingFiles;
+            return this;
+        }
+
+        public Builder testFiles(File... aTestFiles)
+        {
+            ds.testFiles = aTestFiles;
+            return this;
+        }
+
+        public DefaultDataset build()
+        {
+            return ds;
+        }
+    }
 }
