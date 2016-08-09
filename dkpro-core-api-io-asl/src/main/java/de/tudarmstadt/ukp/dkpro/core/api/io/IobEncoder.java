@@ -17,6 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.api.io;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +26,6 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.util.CasUtil;
-
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
@@ -46,11 +46,13 @@ public class IobEncoder
         iobBeginMap = new HashMap<Integer, String>();
         iobInsideMap = new HashMap<Integer, String>();
 
+        Map<AnnotationFS, Collection<AnnotationFS>> idx = CasUtil.indexCovered(aCas, chunkType,
+                CasUtil.getType(aCas, Token.class));
+        
         for (AnnotationFS chunk : CasUtil.select(aCas, chunkType)) {
             String chunkValue = chunk.getStringValue(aChunkValueFeature);
 
-            for (AnnotationFS token : CasUtil.selectCovered(aCas, CasUtil.getType(aCas, Token.class), chunk)) {
-
+            for (AnnotationFS token : idx.get(chunk)) {
                 if (token.getBegin() == chunk.getBegin()) {
                     iobBeginMap.put(token.getBegin(), chunkValue);
                 }
