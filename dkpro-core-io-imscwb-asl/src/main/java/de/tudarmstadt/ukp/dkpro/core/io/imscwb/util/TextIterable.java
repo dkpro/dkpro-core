@@ -30,7 +30,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.Resource;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 
 public class TextIterable
     implements Iterable<CorpusText>, Iterator<CorpusText>
@@ -167,10 +167,8 @@ public class TextIterable
         if (!fileQueue.isEmpty()) {
             currentResource = fileQueue.poll();
             
-            InputStream resolvedStream = ResourceUtils.resolveCompressedInputStream(
-                    currentResource.getInputStream(),
-                    currentResource.getPath()
-            );
+            InputStream resolvedStream = CompressionUtils.getInputStream(currentResource.getPath(),
+                    currentResource.getInputStream());
                 
             r = new BufferedReader(new InputStreamReader(resolvedStream, encoding));
         }

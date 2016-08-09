@@ -55,9 +55,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -239,8 +239,8 @@ public class NegraExportReader
             // Detect if the file is compressed
             InputStream fileStream = new FileInputStream(inputFile);
 
-            InputStream resolvedStream = ResourceUtils.resolveCompressedInputStream(fileStream,
-                    inputFile.getName());
+            InputStream resolvedStream = CompressionUtils.getInputStream(inputFile.getName(),
+                    fileStream);
 
             br = new BufferedReader(new InputStreamReader(resolvedStream, encoding));
 

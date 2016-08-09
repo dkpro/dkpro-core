@@ -335,7 +335,9 @@ public class ResourceUtils
      * @return A resolved {@link InputStream}
      * @throws IOException
      *             if something went wrong during resolving the input stream
+     * @deprecated Use {@link CompressionUtils#getInputStream(String, InputStream)}
      */
+    @Deprecated
     public static InputStream resolveCompressedInputStream(InputStream is, String filename)
         throws IOException
     {
