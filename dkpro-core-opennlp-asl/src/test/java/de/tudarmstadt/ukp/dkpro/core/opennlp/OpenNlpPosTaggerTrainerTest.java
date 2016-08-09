@@ -39,7 +39,6 @@ import de.tudarmstadt.ukp.dkpro.core.eval.EvalUtil;
 import de.tudarmstadt.ukp.dkpro.core.eval.model.Span;
 import de.tudarmstadt.ukp.dkpro.core.eval.report.Result;
 import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2006Reader;
-import de.tudarmstadt.ukp.dkpro.core.io.conll.ConllUReader;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class OpenNlpPosTaggerTrainerTest
@@ -87,7 +86,7 @@ public class OpenNlpPosTaggerTrainerTest
         
         // Read reference data collect labels
         ConfigurationParameterFactory.setParameter(testReader, 
-                ConllUReader.PARAM_READ_POS, true);
+                Conll2006Reader.PARAM_READ_POS, true);
         List<Span<String>> expected = EvalUtil.loadSamples(testReader, POS.class, pos -> {
             return pos.getPosValue();
         });
