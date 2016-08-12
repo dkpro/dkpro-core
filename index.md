@@ -68,7 +68,7 @@ A comprehensive (but probably not complete) list of scientific publications citi
 License
 -------
 
-All components in DKPro Core ASL are licensed under the [Apache Software License (ASL) version 2][3] or where necessary under [GPL][GPL] - but their dependencies may not be:
+All components in DKPro Core are licensed under the [Apache Software License (ASL) version 2][3] or where necessary under [GPL][GPL] - but their dependencies may not be:
 
 **IMPORTANT LICENSE NOTE** - It must be pointed out that while the component’s source code itself may be licensed under the ASL, individual components might make use of third-party libraries or products that are not licensed under the ASL, such as LGPL libraries or libraries which are free for research but may not be used in commercial scenarios. Please be aware of the third party licenses and respect them. Please observe that parts of DKPro Core are distributed under GPL due to third-party GPL-licensed dependencies.
 
