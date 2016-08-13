@@ -65,37 +65,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeToJCasConverter;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
 
 /**
- * <p>Reads a file in the CoNLL-2009 format.</p>
- * 
- * <ol>
- * <li>Document ID - <b>(ignored)</b> This is a variation on the document filename.</li>
- * <li>Part number - <b>(ignored)</b> Some files are divided into multiple parts numbered as 000,
- * 001, 002, ... etc.</li>
- * <li>Word number - <b>(ignored)</b></li>
- * <li>Word itself - <b>(document text)</b> This is the token as segmented/tokenized in the
- * Treebank. Initially the *_skel file contain the placeholder [WORD] which gets replaced by the
- * actual token from the Treebank which is part of the OntoNotes release.</li>
- * <li>Part-of-Speech - <b>(POS)</b></li>
- * <li>Parse bit - <b>(Constituent)</b> This is the bracketed structure broken before the first open
- * parenthesis in the parse, and the word/part-of-speech leaf replaced with a *. The full parse can
- * be created by substituting the asterix with the "([pos] [word])" string (or leaf) and
- * concatenating the items in the rows of that column.</li>
- * <li>Predicate lemma - <b>(Lemma)</b> The predicate lemma is mentioned for the rows for which we
- * have semantic role information. All other rows are marked with a "-"</li>
- * <li>Predicate Frameset ID - <b>(SemanticPredicate)</b> This is the PropBank frameset ID of the
- * predicate in Column 7.</li>
- * <li>Word sense - <b>(ignored)</b> This is the word sense of the word in Column 3.</li>
- * <li>Speaker/Author - <b>(ignored)</b> This is the speaker or author name where available. Mostly
- * in Broadcast Conversation and Web Log data.</li>
- * <li>Named Entities - <b>(NamedEntity)</b> These columns identifies the spans representing various
- * named entities.</li>
- * <li>Predicate Arguments - <b>(SemanticPredicate)</b> There is one column each of predicate
- * argument structure information for the predicate mentioned in Column 7.</li>
- * <li>Coreference - <b>(CoreferenceChain)</b> Coreference chain information encoded in a
- * parenthesis structure.</li>
- * </ol>
- * 
- * <p>Sentences are separated by a blank new line.</p>
+ * Reads a file in the CoNLL-2012 format.
  * 
  * @see <a href="http://conll.cemantix.org/2012/data.html">CoNLL 2012 Shared Task:
  *      Modeling Multilingual Unrestricted Coreference in OntoNotes</a>

@@ -59,26 +59,6 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 /**
  * Reads a file in the CoNLL-U format.
  * 
- * <ol>
- * <li>ID - <b>(ignored)</b> Word index, integer starting at 1 for each new sentence; may be a range
- * for tokens with multiple words.</li>
- * <li>FORM - <b>(Token)</b> Word form or punctuation symbol.</li>
- * <li>LEMMA - <b>(Lemma)</b> Lemma or stem of word form.</li>
- * <li>CPOSTAG - <b>(POS coarseValue)</b> Google universal part-of-speech tag from the universal POS tag set.
- * </li>
- * <li>POSTAG - <b>(POS PosValue)</b> Language-specific part-of-speech tag; underscore if not available.</li>
- * <li>FEATS - <b>(MorphologicalFeatures)</b> List of morphological features from the universal
- * feature inventory or from a defined language-specific extension; underscore if not available.</li>
- * <li>HEAD - <b>(Dependency)</b> Head of the current token, which is either a value of ID or zero
- * (0).</li>
- * <li>DEPREL - <b>(Dependency)</b> Universal Stanford dependency relation to the HEAD (root iff
- * HEAD = 0) or a defined language-specific subtype of one.</li>
- * <li>DEPS - <b>(Dependency)</b> List of secondary dependencies (head-deprel pairs).</li>
- * <li>MISC - <b>(unused)</b> Any other annotation.</li>
- * </ol>
- * 
- * Sentences are separated by a blank new line.
- * 
  * @see <a href="http://universaldependencies.github.io/docs/format.html">CoNLL-U Format</a>
  */
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_U})

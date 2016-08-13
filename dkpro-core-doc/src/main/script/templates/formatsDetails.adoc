@@ -9,17 +9,24 @@ import groovy.transform.Field;
 def getName(pom) {
   String name = poms[pom.artifactId.text()].name.text();
   if (name.contains("- IO -")) {
-    return StringUtils.substringAfter(name, "- IO -").trim();
+    name = StringUtils.substringAfter(name, "- IO -").trim();
   }
   else if (name.contains("ASL -")) {
-    return StringUtils.substringAfter(name, "ASL -").trim();
+    name = StringUtils.substringAfter(name, "ASL -").trim();
   }
   else if (name.contains("GPL -")) {
-    return StringUtils.substringAfter(name, "ASL -").trim();
+    name = StringUtils.substringAfter(name, "ASL -").trim();
   }
   else {
-    return name.trim();
+    name = name.trim();
   }
+  
+  // Strip auxiliary information like version, e.g. '(v${solr-solrj.version}) (ASL)'
+  if (name.contains('(')) {
+    name = name[0..(name.indexOf('(')-1)].trim();
+  }
+  
+  return name;
 }
 
 formats.each { id, format -> poms[format.pom.artifactId.text()] = format.pom };
@@ -86,10 +93,10 @@ def mimetypes = it.value.readerSpec.collectionReaderMetaData?.capabilities?.coll
 if (mimetypes) {
 %>
 [discrete]
-===== MIME Types
+===== Media Types
 [options="header"]
 |====
-|MIME types
+|Media type
 <% mimetypes.each { mimetype -> %>
 |${mimetype}
 
@@ -166,10 +173,10 @@ def mimetypes = it.value.writerSpec.analysisEngineMetaData?.capabilities?.collec
 if (mimetypes) {
 %>
 [discrete]
-===== MIME Types
+===== Media types
 [options="header"]
 |====
-|Language
+|Media type
 <% mimetypes.each { mimetype -> %>
 |${mimetype}
 

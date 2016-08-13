@@ -1,0 +1,70 @@
+The CoNLL 2012 format targets semantic role labeling and coreference. Columns are tab-separated. Sentences are separated by a blank new line.
+
+.Columns
+[cols="3*", options="header"]
+|====
+| Column  | Type/Feature | Description
+
+| Document ID
+| ignored
+| This is a variation on the document filename.</li>
+
+| Part number
+| ignored
+|  Some files are divided into multiple parts numbered as 000, 001, 002, ... etc.
+
+| Word number
+| ignored
+| </li>
+
+| Word itself
+| document text
+|  This is the token as segmented/tokenized in the Treebank. Initially the `*_skel` file contain the placeholder `[WORD]` which gets replaced by the actual token from the Treebank which is part of the OntoNotes release.
+
+| Part-of-Speech
+| POS
+| 
+
+| Parse bit
+| Constituent
+| This is the bracketed structure broken before the first open parenthesis in the parse, and the word/part-of-speech leaf replaced with a `*`. The full parse can be created by substituting the asterix with the `([pos] [word])` string (or leaf) and concatenating the items in the rows of that column.
+
+| Predicate lemma
+| Lemma
+|  The predicate lemma is mentioned for the rows for which we have semantic role information. All other rows are marked with a "-".
+
+| Predicate Frameset ID
+| SemPred
+| This is the PropBank frameset ID of the predicate in Column 7.
+
+| Word sense
+| ignored
+| This is the word sense of the word in Column 3.
+
+| Speaker/Author
+| ignored
+| This is the speaker or author name where available. Mostly in Broadcast Conversation and Web Log data.
+
+| Named Entities
+| NamedEntity
+| These columns identifies the spans representing various named entities.
+
+| Predicate Arguments
+| SemPred
+| There is one column each of predicate argument structure information for the predicate mentioned in Column 7.
+
+| Coreference
+| CoreferenceChain
+| Coreference chain information encoded in a parenthesis structure.
+|====
+ 
+.Example
+[source,text]
+----
+en-orig.conll   0   0       John   NNP   (TOP(S(NP*)      john   -   -          -   (PERSON)       (A0) (1)
+en-orig.conll   0   1       went   VBD         (VP*         go go.02   -          -         *        (V*) -
+en-orig.conll   0   2         to    TO         (PP*         to   -   -          -         *          *  -
+en-orig.conll   0   3        the    DT         (NP*        the   -   -          -         *          *  (2
+en-orig.conll   0   4     market    NN          *)))    market   -   -          -         *        (A1) 2)
+en-orig.conll   0   5          .     .           *))         .   -   -          -         *          *  -
+----

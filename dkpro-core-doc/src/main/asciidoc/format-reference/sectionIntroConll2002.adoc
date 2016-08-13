@@ -1,3 +1,59 @@
-Known corpora in this format:
+The CoNLL 2002 format encodes named entity spans. Fields are separated by a single space. 
+Sentences are separated by a blank new line. 
+ 
+.Columns
+[cols="3*", options="header"]
+|====
+| Column  | Type/Feature | Description
+| FORM    
+| Token 
+| Word form or punctuation symbol.
 
-* link:http://www.cs.cmu.edu/~ark/ArabicNER/[AQMAR Arabic Wikipedia Named Entity Corpus] - Arabic (CoNLL 2002 format)
+| NER     
+| NamedEntity  
+| named entity (BIO encoded)
+|====
+ 
+.Example
+[source,text]
+----
+Wolff      B-PER
+,          O
+currently  O
+a          O
+journalist O
+in         O
+Argentina  B-LOC
+,          O
+played     O
+with       O
+Del        B-PER
+Bosque     I-PER
+in         O
+the        O
+final      O
+years      O
+of         O
+the        O
+seventies  O
+in         O
+Real       B-ORG
+Madrid     I-ORG
+.          O
+----
+
+.Known corpora in this format
+[cols="2*", options="header"]
+|====
+| Corpus 
+| Language
+
+| link:http://www.cs.cmu.edu/~ark/ArabicNER/[AQMAR Arabic Wikipedia Named Entity Corpus]
+| Arabic
+
+| link:http://www.clips.ua.ac.be/conll2002/ner/[CoNLL 2002 dataset]
+| Spanish
+
+| link:http://www.clips.ua.ac.be/conll2002/ner/[CoNLL 2002 dataset]
+| Dutch
+|====

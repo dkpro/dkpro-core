@@ -58,39 +58,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 /**
  * <p>Reads a file in the CoNLL-2006 format (aka CoNLL-X).</p>
  * 
- * <pre><code>
- * Heutzutage heutzutage ADV _ _ ADV _ _
- * </code></pre>
- * 
- * <ol>
- * <li>ID - <b>(ignored)</b> Token counter, starting at 1 for each new sentence.</li>
- * <li>FORM - <b>(Token)</b> Word form or punctuation symbol.</li>
- * <li>LEMMA - <b>(Lemma)</b> Fine-grained part-of-speech tag, where the tagset depends on the
- * language, or identical to the coarse-grained part-of-speech tag if not available.</li>
- * <li>CPOSTAG - <b>(POS coarseValue)</b></li>
- * <li>POSTAG - <b>(POS PosValue)</b> Fine-grained part-of-speech tag, where the tagset depends on the
- * language, or identical to the coarse-grained part-of-speech tag if not available.</li>
- * <li>FEATS - <b>(MorphologicalFeatures)</b> Unordered set of syntactic and/or morphological features (depending
- * on the particular language), separated by a vertical bar (|), or an underscore if not available.</li>
- * <li>HEAD - <b>(Dependency)</b> Head of the current token, which is either a value of ID or zero
- * ('0'). Note that depending on the original treebank annotation, there may be multiple tokens with
- * an ID of zero.</li>
- * <li>DEPREL - <b>(Dependency)</b> Dependency relation to the HEAD. The set of dependency relations
- * depends on the particular language. Note that depending on the original treebank annotation, the
- * dependency relation may be meaningful or simply 'ROOT'.</li>
- * <li>PHEAD - <b>(ignored)</b> Projective head of current token, which is either a value of ID or
- * zero ('0'), or an underscore if not available. Note that depending on the original treebank
- * annotation, there may be multiple tokens an with ID of zero. The dependency structure resulting
- * from the PHEAD column is guaranteed to be projective (but is not available for all languages),
- * whereas the structures resulting from the HEAD column will be non-projective for some sentences
- * of some languages (but is always available).</li>
- * <li>PDEPREL - <b>(ignored) Dependency relation to the PHEAD, or an underscore if not available.
- * The set of dependency relations depends on the particular language. Note that depending on the
- * original treebank annotation, the dependency relation may be meaningful or simply 'ROOT'.</b></li>
- * </ol>
- * 
- * <p>Sentences are separated by a blank new line.</p>
- * 
  * @see <a href="https://web.archive.org/web/20131216222420/http://ilk.uvt.nl/conll/">CoNLL-X Shared Task: Multi-lingual Dependency Parsing</a>
  */
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2006})

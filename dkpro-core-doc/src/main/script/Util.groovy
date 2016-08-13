@@ -27,6 +27,9 @@ class Util {
         if (name.startsWith('uima.tcas.')) {
           return "${name.tokenize('.')[-1]}"
         }
+        if (!name.contains('.')) {
+          throw new IllegalArgumentException("Type names must have a package: ${name}")
+        }
         else {
           return "<<typesystem-reference.adoc#type-${name},${name.tokenize('.')[-1]}>>"
         }

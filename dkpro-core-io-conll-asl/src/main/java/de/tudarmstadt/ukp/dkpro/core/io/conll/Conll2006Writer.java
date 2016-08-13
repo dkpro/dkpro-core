@@ -45,27 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 
 /**
- * <p>Writes a file in the CoNLL-2006 format (aka CoNLL-X).</p>
- * 
- * <pre><code>
- * Heutzutage heutzutage ADV _ _ ADV _ _
- * </code></pre>
- * 
- * <ol>
- * <li>ID - token number in sentence</li>
- * <li>FORM - token</li>
- * <li>LEMMA - lemma</li>
- * <li>CPOSTAG - part-of-speech tag (coarse grained)</li>
- * <li>POSTAG - part-of-speech tag</li>
- * <li>FEATS - unused</li>
- * <li>HEAD - target token for a dependency parsing</li>
- * <li>DEPREL - function of the dependency parsing</li>
- * <li>PHEAD - unused</li>
- * <li>PDEPREL - unused</li>
- * </ol>
- * 
- * <p>Sentences are separated by a blank new line</p>
- * 
+ * Writes a file in the CoNLL-2006 format (aka CoNLL-X).
  * 
  * @see <a href="https://web.archive.org/web/20131216222420/http://ilk.uvt.nl/conll/">CoNLL-X Shared Task: Multi-lingual Dependency Parsing</a>
  */

@@ -51,43 +51,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * <p>Reads by default the original the CoNLL 2002 named entity format. By default, columns are separated by a single space, like
- * illustrated below.</p>
+ * <p>Reads by default the CoNLL 2002 named entity format.<p>
  * 
- * <pre><code>
- * Wolff      B-PER
- * ,          O
- * currently  O
- * a          O
- * journalist O
- * in         O
- * Argentina  B-LOC
- * ,          O
- * played     O
- * with       O
- * Del        B-PER
- * Bosque     I-PER
- * in         O
- * the        O
- * final      O
- * years      O
- * of         O
- * the        O
- * seventies  O
- * in         O
- * Real       B-ORG
- * Madrid     I-ORG
- * .          O
- * </code></pre>
- * 
- * <ol>
- * <li>FORM - token</li>
- * <li>NER - named entity (BIO encoded)</li>
- * </ol>
- * 
- * <p>Fields are separated by a single space. Sentences are separated by a blank new line.</p>
- * 
- * <p>The reader is also compatible with the Conll-based GermEval 2014 named entity format,
+ * <p>The reader is also compatible with the CoNLL-based GermEval 2014 named entity format,
  * in which the columns are separated by a tab, and there is an extra column for embedded named entities,
  * besides the token number being put in the first column (see below).
  * For that, additional parameters are provided, by which one can determine the column separator,

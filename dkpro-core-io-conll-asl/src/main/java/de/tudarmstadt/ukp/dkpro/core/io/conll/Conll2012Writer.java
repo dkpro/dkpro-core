@@ -61,7 +61,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeNode;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
 
 /**
- * Writer for the CoNLL-2009 format.
+ * Writer for the CoNLL-2012 format.
  */
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2012})
 @TypeCapability(

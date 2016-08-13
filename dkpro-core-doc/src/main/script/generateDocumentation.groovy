@@ -73,6 +73,7 @@ def roleNames = [
     transcriptor:   'Phonetic Transcriptor',
     topicmodel:     'Topic Model',
     embeddings:     'Embeddings',
+    gazeteer:       'Gazeteer',
     other:          'Other' ];
 
 /**
@@ -104,12 +105,16 @@ def getTool(componentName, spec) {
     case { 
             it.endsWith("Transformer") || 
             it.endsWith("Normalizer") ||
+            it.endsWith("ApplyChangesAnnotator") ||
+            it.endsWith("Backmapper") ||
             spec.annotatorImplementationName.contains('.textnormalizer.transformation.') }: 
         return "transformer";
     case { it.endsWith("Chunker") }: 
         return "chunker";
     case { it.endsWith("LanguageIdentifier") || it.contains("LanguageDetector") }: 
         return "langdetect";
+    case { it.endsWith("NamedEntityRecognizer") }: 
+        return "ner";
     case { it.endsWith("Tagger") }: 
         return "tagger";
     case { it.endsWith("Parser") }: 
@@ -117,6 +122,8 @@ def getTool(componentName, spec) {
     case { 
             it.endsWith("Segmenter") || 
             it.endsWith("Tokenizer") ||
+            it.endsWith("Sentence") ||
+            it.endsWith("Token") ||
             spec.annotatorImplementationName.contains('.tokit.')}: 
         return "segmenter";
     case { it.endsWith("Lemmatizer") }: 
@@ -125,8 +132,12 @@ def getTool(componentName, spec) {
         return "transcriptor";
     case { it.contains("TopicModel") }:
         return "topicmodel";
+    case { it.contains("DictionaryAnnotator") }:
+        return "gazeteer";
     case { it.contains("Embeddings") }:
         return "embeddings";
+    case { it.contains("DependencyConverter") }:
+        return "parser";
     default:
         return "other";
     }

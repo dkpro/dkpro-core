@@ -1,3 +1,46 @@
-Known corpora in this format:
+The CoNLL 2000 format represents POS and Chunk tags. Fields in a line are separated by spaces. 
+Sentences are separated by a blank new line.
 
-* link:http://nltk.org/nltk_data/[CoNLL 2000 Chunking Corpus] - English (CoNLL 2000 format)
+.Columns
+[cols="3*", options="header"]
+|====
+| Column | Type         | Description
+| FORM   | Token        | token
+| POSTAG | POS          | part-of-speech tag
+| CHUNK  | Chunk        | chunk (BIO encoded)
+|====
+
+.Example
+[source,text]
+----
+He        PRP  B-NP
+reckons   VBZ  B-VP
+the       DT   B-NP
+current   JJ   I-NP
+account   NN   I-NP
+deficit   NN   I-NP
+will      MD   B-VP
+narrow    VB   I-VP
+to        TO   B-PP
+only      RB   B-NP
+#         #    I-NP
+1.8       CD   I-NP
+billion   CD   I-NP
+in        IN   B-PP
+September NNP  B-NP
+.         .    O
+----
+
+.Known corpora in this format
+[cols="2*", options="header"]
+|====
+| Corpus 
+| Language
+
+| link:http://www.cnts.ua.ac.be/conll2000/chunking/[CoNLL 2000 Chunking Corpus]
+| English
+
+| link:http://nltk.org/nltk_data/[CoNLL 2000 Chunking Corpus (NLTK)] 
+| English
+
+|====

@@ -45,49 +45,17 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * <p>Writes the CoNLL 2002 named entity format. The columns are separated by a single space, unlike
- * illustrated below.</p>
- *
- * <pre><code>
- * Wolff      B-PER
- * ,          O
- * currently  O
- * a          O
- * journalist O
- * in         O
- * Argentina  B-LOC
- * ,          O
- * played     O
- * with       O
- * Del        B-PER
- * Bosque     I-PER
- * in         O
- * the        O
- * final      O
- * years      O
- * of         O
- * the        O
- * seventies  O
- * in         O
- * Real       B-ORG
- * Madrid     I-ORG
- * .          O
- * </code></pre>
- *
- * <ol>
- * <li>FORM - token</li>
- * <li>NER - named entity (BIO encoded)</li>
- * </ol>
- *
- * <p>Fields are separated by a single space. Sentences are separated by a blank new line.</p>
+ * Writes the CoNLL 2002 named entity format.</p>
  *
  * @see <a href="http://www.clips.ua.ac.be/conll2002/ner/">CoNLL 2002 shared task</a>
  */
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2002})
-@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity"})
+@TypeCapability(
+        inputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity"})
 public class Conll2002Writer
     extends JCasFileWriter_ImplBase
 {
