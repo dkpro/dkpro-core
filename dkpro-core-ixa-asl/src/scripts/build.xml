@@ -1,0 +1,403 @@
+<!--
+   Copyright 2016
+   Ubiquitous Knowledge Processing (UKP) Lab
+   Technische Universität Darmstadt
+   
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+   
+     http://www.apache.org/licenses/LICENSE-2.0
+   
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<project basedir="../.." default="separate-jars">
+    <import>
+        <url url="https://raw.githubusercontent.com/dkpro/resource-packager/0.8.0/ant-macros.xml"/>
+    </import>
+
+    <!-- 
+      - Output package configuration
+      -->
+    <property name="outputPackage" value="de/tudarmstadt/ukp/dkpro/core/ixa/lib"/>
+
+    <target name="local-maven">
+        <property name="install-artifact-mode" value="local"/>
+        <antcall target="separate-jars"/>
+    </target>
+    
+    <target name="remote-maven">
+        <property name="install-artifact-mode" value="remote"/>
+        <antcall target="separate-jars"/>
+    </target>
+
+    <target name="separate-jars" depends="de,en,es,eu,fr,gl,it,nl"/>
+
+    <target name="de">
+        <antcall target="de-tagger-perceptron-autodict01-conll09"/>
+    </target>
+
+    <target name="de-tagger-perceptron-autodict01-conll09" depends="download-ixa-morph-resources">
+        <!-- FILE: de-pos-perceptron-autodict01-conll09.bin - - - - - - - - - - - - - - - - - - -
+          - 2016-02-13 | now        | ecddce6529b98060736f7e9d0cb865be
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-morph-resources/de-pos-perceptron-autodict01-conll09.bin" 
+            md5="ecddce6529b98060736f7e9d0cb865be"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.ixa"
+            upstreamVersion="20160213"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="de" 
+            variant="perceptron-autodict01-conll09" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="de-pos-perceptron-autodict01-conll09.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri, IXA NLP Group"/>
+                <entry key="pos.tagset" value="stts"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>   
+
+    <target name="en">
+        <antcall target="en-tagger-maxent-100-c5-baseline-autodict01-conll09"/>
+        <antcall target="en-tagger-perceptron-autodict01-conll09"/>
+    </target>
+
+    <target name="en-tagger-maxent-100-c5-baseline-autodict01-conll09" depends="download-ixa-morph-resources">
+        <!-- FILE: en-pos-maxent-100-c5-baseline-autodict01-conll09.bin - - - - - - - - - - - - - -
+          - 2016-02-11 | now        | ae905398b57b4df6e0882ad3b55f681f
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-morph-resources/en-pos-maxent-100-c5-baseline-autodict01-conll09.bin" 
+            md5="ae905398b57b4df6e0882ad3b55f681f"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.ixa"
+            upstreamVersion="20160211"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="en" 
+            variant="maxent-100-c5-baseline-autodict01-conll09" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="en-pos-maxent-100-c5-baseline-autodict01-conll09.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri, IXA NLP Group"/>
+                <entry key="pos.tagset" value="ptb"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>   
+
+    <target name="en-tagger-perceptron-autodict01-conll09" depends="download-ixa-morph-resources">
+        <!-- FILE: en-pos-perceptron-autodict01-conll09.bin - - - - - - - - - - - - - - - - - - - -
+          - 2016-02-11 | now        | 10c30f699cab41806490967c36b0a4ea
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-morph-resources/en-pos-perceptron-autodict01-conll09.bin" 
+            md5="10c30f699cab41806490967c36b0a4ea"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.ixa"
+            upstreamVersion="20160211"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="en" 
+            variant="perceptron-autodict01-conll09" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="en-pos-perceptron-autodict01-conll09.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri, IXA NLP Group"/>
+                <entry key="pos.tagset" value="ptb"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>   
+
+    <target name="en-tagger-perceptron-autodict01-ud" depends="download-ixa-ud-morph-resources">
+        <!-- FILE: en-pos-perceptron-autodict01-ud.bin - - - - - - - - - - - - - - - - - - - - - - -
+          - 2016-02-14 | now        | 314e7c9afab346b81edb92dc21c701c9
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-ud-morph-resources/en-pos-perceptron-autodict01-ud.bin" 
+            md5="314e7c9afab346b81edb92dc21c701c9"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.ixa"
+            upstreamVersion="20160214"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="en" 
+            variant="perceptron-autodict01-ud" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="en-pos-perceptron-autodict01-ud.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri, IXA NLP Group"/>
+                <entry key="pos.tagset" value="ud"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>   
+
+    <target name="en-tagger-xpos-perceptron-autodict01-ud" depends="download-ixa-ud-morph-resources">
+        <!-- FILE: en-xpos-perceptron-autodict01-ud.bin - - - - - - - - - - - - - - - - - - - - - -
+          - 2016-02-14 | now        | a4c446d6817c308d979c0c558dd4e858
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-ud-morph-resources/en-xpos-perceptron-autodict01-ud.bin" 
+            md5="a4c446d6817c308d979c0c558dd4e858"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.ixa"
+            upstreamVersion="20160214"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="en" 
+            variant="xpos-perceptron-autodict01-ud" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="en-xpos-perceptron-autodict01-ud.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri, IXA NLP Group"/>
+                <entry key="pos.tagset" value="ptb"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>   
+
+    <target name="es">
+        <antcall target="es-tagger-perceptron-autodict01-ancora-2.0"/>
+    </target>
+
+    <target name="es-tagger-perceptron-autodict01-ancora-2.0" depends="download-ixa-morph-resources">
+        <!-- FILE: es-pos-perceptron-autodict01-ancora-2.0.bin - - - - - - - - - - - - - - - - - - -
+          - 2016-02-12 | now        | e0a64cfbda9c33834fe45e7f1dc36c1d
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-morph-resources/es-pos-perceptron-autodict01-ancora-2.0.bin" 
+            md5="e0a64cfbda9c33834fe45e7f1dc36c1d"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.ixa"
+            upstreamVersion="20160212"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="es" 
+            variant="perceptron-autodict01-ancora-2.0" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="es-pos-perceptron-autodict01-ancora-2.0.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri, IXA NLP Group"/>
+                <entry key="pos.tagset" value="ancora-ixa"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>   
+
+    <target name="eu">
+        <antcall target="eu-tagger-perceptron-ud"/>
+    </target>
+
+    <target name="eu-tagger-perceptron-ud" depends="download-ixa-morph-resources">
+        <!-- FILE: eu-pos-perceptron-ud.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+          - 2016-02-12 | now        | fec5544d4d776d144042b190b94005cc
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-ud-morph-resources/eu-pos-perceptron-ud.bin" 
+            md5="fec5544d4d776d144042b190b94005cc"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.ixa"
+            upstreamVersion="20160212"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="eu" 
+            variant="perceptron-ud" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="eu-pos-perceptron-ud.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri, IXA NLP Group"/>
+                <entry key="pos.tagset" value="ud"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>   
+
+    <target name="fr">
+        <antcall target="fr-tagger-perceptron-autodict01-sequoia"/>
+    </target>
+
+    <target name="fr-tagger-perceptron-autodict01-sequoia" depends="download-ixa-morph-resources">
+        <!-- FILE: fr-pos-perceptron-autodict01-sequoia.bin - - - - - - - - - - - - - - - - - - - -
+          - 2016-02-15 | now        | 9476b2a5570dd205afaea9412e403484
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-morph-resources/fr-pos-perceptron-autodict01-sequoia.bin" 
+            md5="9476b2a5570dd205afaea9412e403484"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.ixa"
+            upstreamVersion="20160215"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="fr" 
+            variant="perceptron-autodict01-sequoia" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="es-pos-perceptron-autodict01-ancora-2.0.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri, IXA NLP Group"/>
+                <entry key="pos.tagset" value="melt"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>   
+	
+    <target name="gl">
+        <antcall target="gl-tagger-perceptron-autdict05-ctag"/>
+    </target>
+
+    <target name="gl-tagger-perceptron-autdict05-ctag" depends="download-ixa-morph-resources">
+        <!-- FILE: gl-pos-perceptron-autdict05-ctag.bin - - - - - - - - - - - - - - - - - - - - - - 
+          - 2016-02-12 | now        | 18385637ad288e69eb57f12096dc551c
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-morph-resources/gl-pos-perceptron-autdict05-ctag.bin" 
+            md5="18385637ad288e69eb57f12096dc551c"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.ixa"
+            upstreamVersion="20160212"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="gl" 
+            variant="perceptron-autdict05-ctag" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="gl-pos-perceptron-autdict05-ctag.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri, IXA NLP Group"/>
+                <entry key="pos.tagset" value="ctag-ixa"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>   
+
+    <target name="it">
+        <antcall target="it-tagger-perceptron-autodict01-ud"/>
+    </target>
+
+    <target name="it-tagger-perceptron-autodict01-ud" depends="download-ixa-morph-resources">
+        <!-- FILE: it-pos-perceptron-autodict01-ud.bin - - - - - - - - - - - - - - - - - - - - - - -
+          - 2016-02-13 | now        | f2901d9aed2e844e6d5763cf13cec986
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-ud-morph-resources/it-pos-perceptron-autodict01-ud.bin" 
+            md5="f2901d9aed2e844e6d5763cf13cec986"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.ixa"
+            upstreamVersion="20160213"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="it" 
+            variant="perceptron-autodict01-ud" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="it-pos-perceptron-autodict01-ud.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri, IXA NLP Group"/>
+                <entry key="pos.tagset" value="ud"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>   
+
+    <target name="nl">
+        <antcall target="nl-tagger-maxent-100-c5-autodict01-alpino"/>
+        <antcall target="nl-tagger-perceptron-autodict01-alpino"/>
+    </target>
+
+    <target name="nl-tagger-maxent-100-c5-autodict01-alpino" depends="download-ixa-morph-resources">
+        <!-- FILE: nl-pos-maxent-100-c5-autodict01-alpino.bin - - - - - - - - - - - - - - - - - - -
+          - 2016-02-14 | now        | 66e8aea74da01344962a91a90c2a44dd
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-morph-resources/nl-pos-maxent-100-c5-autodict01-alpino.bin" 
+            md5="66e8aea74da01344962a91a90c2a44dd"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.ixa"
+            upstreamVersion="20160214"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="nl" 
+            variant="maxent-100-c5-autodict01-alpino" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="nl-pos-maxent-100-c5-autodict01-alpino.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri, IXA NLP Group"/>
+                <entry key="pos.tagset" value="alpino-ixa"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>   
+
+    <target name="nl-tagger-perceptron-autodict01-alpino" depends="download-ixa-morph-resources">
+        <!-- FILE: nl-pos-perceptron-autodict01-alpino.bin - - - - - - - - - - - - - - - - - - -
+          - 2016-02-14 | now        | ebec2b9ab771fe5d5fa5d273bdb8af09
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-morph-resources/nl-pos-perceptron-autodict01-alpino.bin" 
+            md5="ebec2b9ab771fe5d5fa5d273bdb8af09"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.ixa"
+            upstreamVersion="20160214"
+            metaDataVersion="1"
+            tool="tagger" 
+            language="nl" 
+            variant="perceptron-autodict01-alpino" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="nl-pos-perceptron-autodict01-alpino.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri, IXA NLP Group"/>
+                <entry key="pos.tagset" value="alpino-ixa"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>   
+
+    <target name="-check-download-ixa-morph-resources">
+        <available 
+            property="download-ixa-morph-resources.DONE" 
+            file="target/download/ixa-morph-resources/DONE"/>
+    </target>
+
+    <target name="download-ixa-morph-resources" depends="-check-download-ixa-morph-resources" 
+        unless="download-ixa-morph-resources.DONE">
+        <mkdir dir="target/download/ixa-morph-resources"/>
+        <get 
+            src="http://ixa2.si.ehu.es/ixa-pipes/models/morph-models-1.5.0.tar.gz" 
+            dest="target/download/ixa-morph-resources/morph-models-1.5.0.tar.gz" 
+            skipexisting="true"/>
+        <untar 
+            src="target/download/ixa-morph-resources/morph-models-1.5.0.tar.gz" 
+            dest="target/download/ixa-morph-resources"
+            compression="gzip">
+            <patternset>
+                <include name="**/*.bin"/>      
+            </patternset>
+            <chainedmapper>
+                <mapper type="flatten"/>
+            </chainedmapper>
+        </untar>
+        <touch file="target/download/ixa-morph-resources/DONE"/>
+    </target>
+
+    <target name="-check-download-ixa-ud-morph-resources">
+        <available 
+            property="download-ixa-ud-morph-resources.DONE" 
+            file="target/download/ixa-ud-morph-resources/DONE"/>
+    </target>
+    
+    <target name="download-ixa-ud-morph-resources" depends="-check-download-ixa-ud-morph-resources" 
+        unless="download-ixa-ud-morph-resources.DONE">
+        <mkdir dir="target/download/ixa-ud-morph-resources"/>
+        <get 
+            src="http://ixa2.si.ehu.es/ixa-pipes/models/ud-morph-models-1.5.0.tar.gz" 
+            dest="target/download/ixa-ud-morph-resources/ud-morph-models-1.5.0.tar.gz" 
+            skipexisting="true"/>
+        <untar 
+            src="target/download/ixa-ud-morph-resources/ud-morph-models-1.5.0.tar.gz" 
+            dest="target/download/ixa-ud-morph-resources"
+            compression="gzip">
+            <patternset>
+                <include name="**/*.bin"/>      
+            </patternset>
+            <chainedmapper>
+                <mapper type="flatten"/>
+            </chainedmapper>
+        </untar>
+        <touch file="target/download/ixa-ud-morph-resources/DONE"/>
+    </target>
+</project>

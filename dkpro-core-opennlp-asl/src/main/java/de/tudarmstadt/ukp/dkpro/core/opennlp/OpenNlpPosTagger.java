@@ -139,7 +139,7 @@ public class OpenNlpPosTagger
 		// Auto-detection inspects the configuration parameter fields (@ConfigurationParameter)
 		// of the analysis engine class and looks for default parameters such as PARAM_LANGUAGE,
 		// PARAM_VARIANT, and PARAM_MODEL_LOCATION.
-        modelProvider = new ModelProviderBase<POSTagger>(this, "opennlp", "tagger")
+        modelProvider = new ModelProviderBase<POSTagger>(this, "tagger")
         {
             @Override
             protected POSTagger produceResource(InputStream aStream)

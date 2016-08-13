@@ -27,7 +27,6 @@
   <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-asl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core ASL - IXA</name>
-  <!--  
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>
@@ -39,14 +38,10 @@
     </dependency>
     <dependency>
       <groupId>eus.ixa</groupId>
-      <artifactId>ixa-pipe-tok</artifactId>
-      <version>1.8.5</version>
-    </dependency>
-    <dependency>
-      <groupId>eus.ixa</groupId>
       <artifactId>ixa-pipe-pos</artifactId>
       <version>1.5.1</version>
     </dependency>
+    <!--
     <dependency>
       <groupId>eus.ixa</groupId>
       <artifactId>ixa-pipe-nerc</artifactId>
@@ -54,25 +49,32 @@
     </dependency>
     <dependency>
       <groupId>eus.ixa</groupId>
+      <artifactId>ixa-pipe-tok</artifactId>
+      <version>1.8.5</version>
+    </dependency>
+      <dependency>
+      <groupId>eus.ixa</groupId>
       <artifactId>ixa-pipe-chunk</artifactId>
       <version>1.1.0</version>
-    </dependency>
-    <dependency>
+      </dependency>
+      <dependency>
       <groupId>eus.ixa</groupId>
       <artifactId>ixa-pipe-parse</artifactId>
       <version>1.1.1</version>
-    </dependency>
+      </dependency>
+    -->
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</artifactId>
     </dependency>
+    <!--  
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
     </dependency>
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</artifactId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
     </dependency>
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -90,6 +92,11 @@
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
     </dependency>
+    -->
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
+    </dependency>
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
@@ -100,6 +107,194 @@
       <artifactId>junit</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-en-perceptron-autodict01-conll09</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
-  -->
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-de-perceptron-perceptron-autodict01-conll09</artifactId>
+        <version>20160213.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-en-perceptron-autodict01-conll09</artifactId>
+        <version>20160211.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-en-maxent-100-c5-baseline-autodict01-conll09</artifactId>
+        <version>20160211.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-en-perceptron-autodict01-ud</artifactId>
+        <version>20160214.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-en-xpos-perceptron-autodict01-ud</artifactId>
+        <version>20160214.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-es-perceptron-autodict01-ancora-2.0</artifactId>
+        <version>20160212.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-eu-perceptron-ud</artifactId>
+        <version>20160212.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-fr-perceptron-autdict05-ctag</artifactId>
+        <version>20160212.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-fr-perceptron-autodict01-sequoia</artifactId>
+        <version>20160215.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-gl-perceptron-autdict05-ctag</artifactId>
+        <version>20160212.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-it-perceptron-autodict01-ud</artifactId>
+        <version>20160213.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-nl-maxent-100-c5-autodict01-alpino</artifactId>
+        <version>20160214.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-nl-perceptron-autodict01-alpino</artifactId>
+        <version>20160214.1</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <configuration>
+            <usedDependencies>
+              <!-- 
+                - We need IXA POS on the classpath because the models require classes from it,
+                - but we do not depend directly on it.
+                -->
+              <usedDependency>eus.ixa:ixa-pipe-pos</usedDependency>
+              <!-- Models not detected by byte-code analysis -->
+              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-en-perceptron-autodict01-conll09</usedDependency>
+            </usedDependencies>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+  <profiles>
+    <profile>
+      <id>use-full-resources</id>
+      <dependencies>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-en-perceptron-autodict01-conll09</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-en-maxent-100-c5-baseline-autodict01-conll09</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-en-perceptron-autodict01-ud</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-en-xpos-perceptron-autodict01-ud</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-es-perceptron-autodict01-ancora-2.0</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-eu-perceptron-ud</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-fr-perceptron-autdict05-ctag</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-fr-perceptron-autodict01-sequoia</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-gl-perceptron-autdict05-ctag</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-it-perceptron-autodict01-ud</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-nl-maxent-100-c5-autodict01-alpino</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-nl-perceptron-autodict01-alpino</artifactId>
+          <scope>test</scope>
+        </dependency>
+      </dependencies>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-dependency-plugin</artifactId>
+              <configuration>
+                <usedDependencies combine.children="append">
+                  <!-- Models not detected by byte-code analysis -->
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-en-perceptron-autodict01-conll09</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-en-maxent-100-c5-baseline-autodict01-conll09</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-en-perceptron-autodict01-ud</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-en-xpos-perceptron-autodict01-ud</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-es-perceptron-autodict01-ancora-2.0</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-eu-perceptron-ud</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-fr-perceptron-autdict05-ctag</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-fr-perceptron-autodict01-sequoia</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-gl-perceptron-autdict05-ctag</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-it-perceptron-autodict01</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-nl-maxent-100-c5-autodict01-alpino</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-nl-perceptron-autodict01-alpino</usedDependency>
+                </usedDependencies>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
+  </profiles>
 </project>

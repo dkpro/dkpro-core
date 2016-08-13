@@ -26,6 +26,7 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
@@ -49,6 +50,13 @@ public class ModelProviderBase<M>
     public ModelProviderBase()
     {
         // Nothing to do
+    }
+
+    public ModelProviderBase(Object aObject, String aType)
+    {
+        this(aObject,
+                StringUtils.substringAfterLast(aObject.getClass().getPackage().getName(), "."),
+                aType);
     }
 
     // tag::model-provider-convenience[]
