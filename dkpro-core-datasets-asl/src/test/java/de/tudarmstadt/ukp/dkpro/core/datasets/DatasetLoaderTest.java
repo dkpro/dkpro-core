@@ -17,6 +17,12 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.datasets;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+import java.util.List;
+
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
@@ -30,56 +36,121 @@ public class DatasetLoaderTest
     public void testEnglishBrownCorpus()
         throws Exception
     {
-        new DatasetLoader(DkproTestContext.getCacheFolder()).loadEnglishBrownCorpus();
+        Dataset ds = new DatasetLoader(DkproTestContext.getCacheFolder()).loadEnglishBrownCorpus();
+        assertDatasetOk(ds);
     }
 
     @Test
     public void testEnglishGUMCorpus()
         throws Exception
     {
-        new DatasetLoader(DkproTestContext.getCacheFolder()).loadEnglishGUMCorpus();
+        Dataset ds = new DatasetLoader(DkproTestContext.getCacheFolder()).loadEnglishGUMCorpus();
+        assertDatasetOk(ds);
     }
 
     @Test
     public void testFrenchDeepSequoiaCorpus()
         throws Exception
     {
-        new DatasetLoader(DkproTestContext.getCacheFolder()).loadFrenchDeepSequoiaCorpus();
+        Dataset ds = new DatasetLoader(DkproTestContext.getCacheFolder())
+                .loadFrenchDeepSequoiaCorpus();
+        assertDatasetOk(ds);
     }
 
     @Test
     public void testGermEval2014NER()
         throws Exception
     {
-        new DatasetLoader(DkproTestContext.getCacheFolder()).loadGermEval2014NER();
+        Dataset ds = new DatasetLoader(DkproTestContext.getCacheFolder()).loadGermEval2014NER();
+        assertDatasetOk(ds);
     }
 
     @Test
     public void testNEMGP()
         throws Exception
     {
-        new DatasetLoader(DkproTestContext.getCacheFolder()).loadNEMGP();
+        Dataset ds = new DatasetLoader(DkproTestContext.getCacheFolder()).loadNEMGP();
+        assertDatasetOk(ds);
     }
 
     @Test
     public void testUniversalDependencyTreebankV1_3()
         throws Exception
     {
-        new DatasetLoader(DkproTestContext.getCacheFolder()).loadUniversalDependencyTreebankV1_3();
+        List<Dataset> dss = new DatasetLoader(DkproTestContext.getCacheFolder())
+                .loadUniversalDependencyTreebankV1_3();
+        for (Dataset ds : dss) {
+            assertDatasetOk(ds);
+        }
     }
 
     @Test
     public void testGermanHamburgDependencyTreebank()
         throws Exception
     {
-        new DatasetLoader(DkproTestContext.getCacheFolder()).loadGermanHamburgDependencyTreebank();
+        Dataset ds = new DatasetLoader(DkproTestContext.getCacheFolder())
+                .loadGermanHamburgDependencyTreebank();
+        assertDatasetOk(ds);
     }
-    
+
     @Test
     public void testAncientGreekAndLatinTreebank()
         throws Exception
     {
-        new DatasetLoader(DkproTestContext.getCacheFolder()).loadAncientGreekAndLatingDependencyTreebank();
+        Dataset ds = new DatasetLoader(DkproTestContext.getCacheFolder())
+                .loadAncientGreekAndLatingDependencyTreebank();
+        assertDatasetOk(ds);
+    }
+
+    @Test
+    public void testCatalanConll2009()
+        throws Exception
+    {
+        Dataset ds = new DatasetLoader(DkproTestContext.getCacheFolder()).loadCatalanConll2009();
+        assertDatasetOk(ds);
+    }
+
+    @Test
+    public void testGermanConll2009()
+        throws Exception
+    {
+        Dataset ds = new DatasetLoader(DkproTestContext.getCacheFolder()).loadGermanConll2009();
+        assertDatasetOk(ds);
+    }
+
+    @Test
+    public void testJapaneseConll2009()
+        throws Exception
+    {
+        Dataset ds = new DatasetLoader(DkproTestContext.getCacheFolder()).loadJapaneseConll2009();
+        assertDatasetOk(ds);
+    }
+
+    @Test
+    public void testSpanishConll2009()
+        throws Exception
+    {
+        Dataset ds = new DatasetLoader(DkproTestContext.getCacheFolder()).loadSpanishConll2009();
+        assertDatasetOk(ds);
+    }
+
+    private void assertDatasetOk(Dataset ds)
+    {
+        assertNotNull("Name not set", ds.getName());
+        assertNotNull("Language not set", ds.getLanguage());
+        assertNullOrExists(ds.getTestFiles());
+        assertNullOrExists(ds.getTestFiles());
+        assertNullOrExists(ds.getDevelopmentFiles());
+        assertNullOrExists(ds.getLicenseFiles());
+    }
+
+    private void assertNullOrExists(File... aFiles)
+    {
+        if (aFiles != null) {
+            for (File f : aFiles) {
+                assertTrue("File does not exist: [" + f + "]", f.exists());
+            }
+        }
     }
 
     @Rule

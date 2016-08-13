@@ -25,7 +25,7 @@ public interface Dataset
     
     String getLanguage();
     
-    File getLicenseFile();
+    File[] getLicenseFiles();
     
     File[] getTrainingFiles();
     

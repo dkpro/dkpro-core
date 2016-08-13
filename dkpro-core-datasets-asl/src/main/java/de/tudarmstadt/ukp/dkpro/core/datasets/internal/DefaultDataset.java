@@ -18,6 +18,8 @@
 package de.tudarmstadt.ukp.dkpro.core.datasets.internal;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import de.tudarmstadt.ukp.dkpro.core.datasets.Dataset;
 
@@ -26,7 +28,7 @@ public class DefaultDataset
 {
     private String name;
     private String language;
-    private File licenseFile;
+    private File[] licenseFiles;
     private File[] trainingFiles;
     private File[] testFiles;
     private File[] developmentFiles;
@@ -63,15 +65,15 @@ public class DefaultDataset
         language = aLanguage;
     }
 
-    public void setLicenseFile(File aLicenseFile)
+    public void setLicenseFiles(File... aLicenseFile)
     {
-        licenseFile = aLicenseFile;
+        licenseFiles = aLicenseFile;
     }
 
     @Override
-    public File getLicenseFile()
+    public File[] getLicenseFiles()
     {
-        return licenseFile;
+        return licenseFiles;
     }
 
     public void setTrainingFiles(File... aTrainingFiles)
@@ -110,7 +112,8 @@ public class DefaultDataset
     public static class Builder
     {
         private DefaultDataset ds;
-
+        private List<File> builderLicenseFiles = new ArrayList<>();
+        
         public Builder()
         {
             ds = new DefaultDataset();
@@ -130,7 +133,7 @@ public class DefaultDataset
         
         public Builder licenseFile(File aLicenseFile)
         {
-            ds.licenseFile = aLicenseFile;
+            builderLicenseFiles.add(aLicenseFile);
             return this;
         }
         
@@ -154,6 +157,7 @@ public class DefaultDataset
 
         public DefaultDataset build()
         {
+            ds.licenseFiles = builderLicenseFiles.toArray(new File[builderLicenseFiles.size()]);
             return ds;
         }
     }

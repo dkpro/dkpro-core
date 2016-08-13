@@ -94,7 +94,7 @@ public class DatasetLoader
         
         fetch(dataDir, license, data);
 
-        ds.setLicenseFile(new File(dataDir, license.getTarget()));
+        ds.setLicenseFiles(new File(dataDir, license.getTarget()));
         ds.setTrainingFiles(new File(dataDir, "nemgp_trainingdata_01.txt"));
 
         return ds;
@@ -133,7 +133,7 @@ public class DatasetLoader
         ds.setDevelopmentFiles(new File(dataDir, dev.getTarget()));
         ds.setTrainingFiles(new File(dataDir, train.getTarget()));
         ds.setTestFiles(new File(dataDir, test.getTarget()));
-        ds.setLicenseFile(new File(dataDir, license.getTarget()));
+        ds.setLicenseFiles(new File(dataDir, license.getTarget()));
 
         return ds;
     }
@@ -178,7 +178,7 @@ public class DatasetLoader
         fetch(dataDir, data);
         
         File license = new File(dataDir, "LICENSE.txt");
-        ds.setLicenseFile(license);
+        ds.setLicenseFiles(license);
 
         FileUtils.writeStringToFile(license, "May be used for non-commercial purposes.", "UTF-8");
 
@@ -197,14 +197,14 @@ public class DatasetLoader
     public Dataset loadEnglishGUMCorpus()
         throws IOException
     {
-        String commit = "a92eca9847185627c282d9c4c0f9a2d521149c79";
+        String commit = "patch-3";
         
         DefaultDataset ds = new DefaultDataset("GeorgetownUniversityMultilayerCorpus", "en");
         File dataDir = new File(cacheRoot, ds.getName());
 
         DataPackage data = new DataPackage.Builder()
-                .url("https://github.com/amir-zeldes/gum/archive/" + commit + ".zip")
-                .sha1("a2c368f7a5cdb045219011557bec0fea1b56468e")
+                .url("https://github.com/reckart/gum/archive/" + commit + ".zip")
+                .sha1("0202b8c3853f7e53ab33dfacc0bc7ff5e8045d54")
                 .target("gum.zip")
                 .postAction((d) -> { unzip(new File(dataDir, d.getTarget()), dataDir); })
                 .build();
@@ -212,7 +212,7 @@ public class DatasetLoader
         fetch(dataDir, data);
         
         File license = new File(dataDir, "gum-" + commit + "/LICENSE.txt");
-        ds.setLicenseFile(license);
+        ds.setLicenseFiles(license);
         
         File conll2006Path = new File(dataDir, "gum-" + commit + "/dep");
         File[] all = conll2006Path.listFiles(file -> { return file.getName().endsWith(".conll10"); });
@@ -253,6 +253,123 @@ public class DatasetLoader
         ds.setTrainingFiles(new File(dataDir, train.getTarget()));
         
         fetch(dataDir, train, test);
+
+        return ds;
+    }
+
+    /**
+     * @see <a href="http://ufal.mff.cuni.cz/conll2009-st/data/traindev.html">CoNLL-2009 Shared Task</a>
+     */
+    public Dataset loadCatalanConll2009()
+        throws IOException
+    {
+        DefaultDataset ds = new DefaultDataset("CoNLL-2009", "ca");
+        File dataDir = new File(cacheRoot, ds.getName() + "-" + ds.getLanguage());
+
+        DataPackage data = new DataPackage.Builder()
+                .url("http://ufal.mff.cuni.cz/conll2009-st/data/CoNLL2009-ST-Catalan-traindevC.zip")
+                .sha1("500cbb81709012cce4d23bfa72d93c320b0b7e6f")
+                .target("CoNLL2009-ST-Catalan-traindevC.zip")
+                .postAction((d) -> { unzip(new File(dataDir, d.getTarget()), dataDir); })
+                .build();
+
+        ds.setDevelopmentFiles(new File(dataDir, 
+                "CoNLL2009-ST-Catalan-traindev/datasets/CoNLL2009-ST-Catalan-development.txt"));
+        ds.setTrainingFiles(new File(dataDir, 
+                "CoNLL2009-ST-Catalan-traindev/datasets/CoNLL2009-ST-Catalan-train.txt"));
+        ds.setTestFiles(new File(dataDir, 
+                "CoNLL2009-ST-Catalan-traindev/datasets/CoNLL2009-ST-Catalan-trial.txt"));
+        
+        fetch(dataDir, data);
+
+        return ds;
+    }
+
+    /**
+     * @see <a href="http://ufal.mff.cuni.cz/conll2009-st/data/traindev.html">CoNLL-2009 Shared Task</a>
+     */
+    public Dataset loadGermanConll2009()
+        throws IOException
+    {
+        DefaultDataset ds = new DefaultDataset("CoNLL-2009", "de");
+        File dataDir = new File(cacheRoot, ds.getName() + "-" + ds.getLanguage());
+
+        DataPackage data = new DataPackage.Builder()
+                .url("http://ufal.mff.cuni.cz/conll2009-st/data/CoNLL2009-ST-German-traindevB.zip")
+                .sha1("ad4c03c3c4e4668c8beb34c399e71f539e6d633d")
+                .target("CoNLL2009-ST-German-traindevB.zip")
+                .postAction((d) -> { unzip(new File(dataDir, d.getTarget()), dataDir); })
+                .build();
+
+        ds.setDevelopmentFiles(new File(dataDir, 
+                "CoNLL2009-ST-German-traindev/CoNLL2009-ST-German-development.txt"));
+        ds.setTrainingFiles(new File(dataDir, 
+                "CoNLL2009-ST-German-traindev/CoNLL2009-ST-German-train.txt"));
+        ds.setTestFiles(new File(dataDir, 
+                "CoNLL2009-ST-German-traindev/CoNLL2009-ST-German-trial.txt"));
+        ds.setLicenseFiles(
+                new File(dataDir, "CoNLL2009-ST-German-traindev/license-salsa.html"),
+                new File(dataDir, "CoNLL2009-ST-German-traindev/license-tiger.html"));
+        
+        fetch(dataDir, data);
+
+        return ds;
+    }
+
+    /**
+     * @see <a href="http://ufal.mff.cuni.cz/conll2009-st/data/traindev.html">CoNLL-2009 Shared Task</a>
+     */
+    public Dataset loadJapaneseConll2009()
+        throws IOException
+    {
+        DefaultDataset ds = new DefaultDataset("CoNLL-2009", "ja");
+        File dataDir = new File(cacheRoot, ds.getName() + "-" + ds.getLanguage());
+
+        DataPackage data = new DataPackage.Builder()
+                .url("http://ufal.mff.cuni.cz/conll2009-st/data/CoNLL2009-ST-Japanese-traindevA.zip")
+                .sha1("8c96a1eda2527a9ba1bf37dd4125cc6af11e7dd4")
+                .target("CoNLL2009-ST-Japanese-traindevA.zip")
+                .postAction((d) -> { unzip(new File(dataDir, d.getTarget()), dataDir); })
+                .build();
+
+        ds.setDevelopmentFiles(new File(dataDir, 
+                "CoNLL2009-ST-Japanese-traindev/CoNLL2009-ST-Japanese-development.txt"));
+        ds.setTrainingFiles(new File(dataDir, 
+                "CoNLL2009-ST-Japanese-traindev/CoNLL2009-ST-Japanese-train.txt"));
+        ds.setTestFiles(new File(dataDir, 
+                "CoNLL2009-ST-Japanese-traindev/CoNLL2009-ST-Japanese-trial.txt"));
+        ds.setLicenseFiles(new File(dataDir, "CoNLL2009-ST-Japanese-traindev/README.TXT"));
+        
+        fetch(dataDir, data);
+
+        return ds;
+    }
+
+    /**
+     * @see <a href="http://ufal.mff.cuni.cz/conll2009-st/data/traindev.html">CoNLL-2009 Shared Task</a>
+     */
+    public Dataset loadSpanishConll2009()
+        throws IOException
+    {
+        DefaultDataset ds = new DefaultDataset("CoNLL-2009", "es");
+        File dataDir = new File(cacheRoot, ds.getName() + "-" + ds.getLanguage());
+
+        DataPackage data = new DataPackage.Builder()
+                .url("http://ufal.mff.cuni.cz/conll2009-st/data/CoNLL2009-ST-Spanish-traindevB.zip")
+                .sha1("ef36c3369bd05966609b4b13d6bf78884c23ece1")
+                .target("CoNLL2009-ST-Spanish-traindevB.zip")
+                .postAction((d) -> { unzip(new File(dataDir, d.getTarget()), dataDir); })
+                .build();
+
+        ds.setDevelopmentFiles(new File(dataDir, 
+                "CoNLL2009-ST-Spanish-traindev/datasets/CoNLL2009-ST-Spanish-development.txt"));
+        ds.setTrainingFiles(new File(dataDir, 
+                "CoNLL2009-ST-Spanish-traindev/datasets/CoNLL2009-ST-Spanish-train.txt"));
+        ds.setTestFiles(new File(dataDir, 
+                "CoNLL2009-ST-Spanish-traindev/datasets/CoNLL2009-ST-Spanish-trial.txt"));
+        ds.setLicenseFiles(new File(dataDir, "CoNLL2009-ST-Spanish-traindev/README.TXT"));
+        
+        fetch(dataDir, data);
 
         return ds;
     }

@@ -43,9 +43,9 @@ public class UDDataset
     }
 
     @Override
-    public File getLicenseFile()
+    public File[] getLicenseFiles()
     {
-        return new File(baseDir, "LICENSE.txt");
+        return new File[] { new File(baseDir, "LICENSE.txt") };
     }
 
     @Override
