@@ -45,7 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * Writes the CoNLL 2002 named entity format.</p>
+ * Writes the CoNLL 2002 named entity format.
  *
  * @see <a href="http://www.clips.ua.ac.be/conll2002/ner/">CoNLL 2002 shared task</a>
  */
