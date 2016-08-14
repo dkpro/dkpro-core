@@ -268,8 +268,7 @@ public class StanfordPosTaggerTest
             String[] tagClasses)
         throws Exception
     {
-        AssumeResource.assumeResource(StanfordPosTagger.class, "tagger", language,
-                variant);
+        AssumeResource.assumeResource(StanfordPosTagger.class, "tagger", language, variant);
         
         AnalysisEngine engine = createEngine(StanfordPosTagger.class,
                 StanfordPosTagger.PARAM_VARIANT, variant, StanfordPosTagger.PARAM_PRINT_TAGSET,
