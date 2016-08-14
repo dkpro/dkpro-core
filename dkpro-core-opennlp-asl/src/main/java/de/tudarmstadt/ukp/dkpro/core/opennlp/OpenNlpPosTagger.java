@@ -204,13 +204,7 @@ public class OpenNlpPosTagger
 // tag::model-provider-use-2[]
             List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
             String[] tokenTexts = toText(tokens).toArray(new String[tokens.size()]);
-
-            // "Fix" encoding before passing to a model which was trained with encoding problems
-            if (encoding != null && !"UTF-8".equals(encoding.name())) {
-                for (int i = 0; i < tokenTexts.length; i++) {
-                    tokenTexts[i] = new String(tokenTexts[i].getBytes(), encoding);                
-                }
-            }
+            fixEncoding(tokenTexts);
             
             // Fetch the OpenNLP pos tagger instance configured with the right model and use it to
             // tag the text
@@ -244,4 +238,16 @@ public class OpenNlpPosTagger
             }
         }
     }
+
+    private void fixEncoding(String[] aTokenTexts)
+        throws AnalysisEngineProcessException
+    {
+            // "Fix" encoding before passing to a model which was trained with encoding problems
+            if (encoding != null && !"UTF-8".equals(encoding.name())) {
+                for (int i = 0; i < aTokenTexts.length; i++) {
+                aTokenTexts[i] = new String(aTokenTexts[i].getBytes(StandardCharsets.UTF_8),
+                        encoding);
+                }
+            }
+        }
 }

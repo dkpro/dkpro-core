@@ -24,6 +24,7 @@ import static org.apache.uima.fit.util.JCasUtil.selectFollowing;
 import static org.apache.uima.fit.util.JCasUtil.selectPreceding;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -137,7 +138,7 @@ public class DKPro2CoreNlp
             
             String sentenceText = s.getCoveredText();
             if (encoding != null && !"UTF-8".equals(encoding.name())) {
-                sentenceText = new String(sentenceText.getBytes(), encoding);                
+                sentenceText = new String(sentenceText.getBytes(StandardCharsets.UTF_8), encoding);
             }
             
             Annotation sentence = new Annotation(sentenceText);
