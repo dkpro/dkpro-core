@@ -245,11 +245,6 @@
           <artifactId>maven-dependency-plugin</artifactId>
           <configuration>
             <usedDependencies>
-              <!--
-                - We need IXA POS on the classpath because the models require classes from it,
-                - but we do not depend directly on it.
-              -->
-              <usedDependency>eus.ixa:ixa-pipe-pos</usedDependency>
               <!-- Models not detected by byte-code analysis -->
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-en-perceptron-autodict01-conll09</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-en-perceptron-conll09</usedDependency>
