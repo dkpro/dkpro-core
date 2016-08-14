@@ -17,19 +17,16 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
+import static org.apache.uima.fit.util.JCasUtil.indexCovered;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.apache.uima.util.Level.INFO;
 
 import java.io.InputStream;
 import java.nio.charset.Charset;
-import java.util.List;
 import java.nio.charset.StandardCharsets;
-
-import opennlp.tools.postag.POSModel;
-import opennlp.tools.postag.POSTagger;
-import opennlp.tools.postag.POSTaggerME;
+import java.util.Collection;
+import java.util.Map;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -50,6 +47,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionProvider;
+import opennlp.tools.postag.POSModel;
+import opennlp.tools.postag.POSTagger;
+import opennlp.tools.postag.POSTaggerME;
 
 /**
  * Part-of-Speech annotator using OpenNLP.
@@ -200,10 +200,11 @@ public class OpenNlpPosTagger
         // to be post-processed. This property is specific to the DKPro Core OpenNLP models
         String tagSplitPattern = modelProvider.getResourceMetaData().getProperty(
                 "pos.tagset.tagSplitPattern");
-
+        
+        Map<Sentence, Collection<Token>> index = indexCovered(aJCas, Sentence.class, Token.class);
         for (Sentence sentence : select(aJCas, Sentence.class)) {
 // tag::model-provider-use-2[]
-            List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
+            Collection<Token> tokens = index.get(sentence);
             String[] tokenTexts = toText(tokens).toArray(new String[tokens.size()]);
             fixEncoding(tokenTexts);
             
@@ -243,12 +244,12 @@ public class OpenNlpPosTagger
     private void fixEncoding(String[] aTokenTexts)
         throws AnalysisEngineProcessException
     {
-            // "Fix" encoding before passing to a model which was trained with encoding problems
-            if (encoding != null && !"UTF-8".equals(encoding.name())) {
-                for (int i = 0; i < aTokenTexts.length; i++) {
+        // "Fix" encoding before passing to a model which was trained with encoding problems
+        if (encoding != null && !"UTF-8".equals(encoding.name())) {
+            for (int i = 0; i < aTokenTexts.length; i++) {
                 aTokenTexts[i] = new String(aTokenTexts[i].getBytes(StandardCharsets.UTF_8),
                         encoding);
-                }
             }
         }
+    }
 }
