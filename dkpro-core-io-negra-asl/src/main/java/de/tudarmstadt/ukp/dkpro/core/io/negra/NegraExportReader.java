@@ -462,7 +462,7 @@ public class NegraExportReader
     private void readFormat(String[] aLine)
         throws IOException
     {
-        format = Integer.valueOf(aLine[FORMAT_FIELD_NUM]);
+        format = Integer.parseInt(aLine[FORMAT_FIELD_NUM]);
         switch (format) {
         case 3:
             TOKEN_TEXT = 0;
