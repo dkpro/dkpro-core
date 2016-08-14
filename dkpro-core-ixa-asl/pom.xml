@@ -42,16 +42,16 @@
       <version>1.5.1</version>
     </dependency>
     <!--
-    <dependency>
+      <dependency>
       <groupId>eus.ixa</groupId>
       <artifactId>ixa-pipe-nerc</artifactId>
       <version>1.6.1</version>
-    </dependency>
-    <dependency>
+      </dependency>
+      <dependency>
       <groupId>eus.ixa</groupId>
       <artifactId>ixa-pipe-tok</artifactId>
       <version>1.8.5</version>
-    </dependency>
+      </dependency>
       <dependency>
       <groupId>eus.ixa</groupId>
       <artifactId>ixa-pipe-chunk</artifactId>
@@ -67,31 +67,31 @@
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</artifactId>
     </dependency>
-    <!--  
-    <dependency>
+    <!--
+      <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
-    </dependency>
-    <dependency>
+      </dependency>
+      <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
-    </dependency>
-    <dependency>
+      </dependency>
+      <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.ner-asl</artifactId>
-    </dependency>
-    <dependency>
+      </dependency>
+      <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.syntax-asl</artifactId>
-    </dependency>
-    <dependency>
+      </dependency>
+      <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
-    </dependency>
-    <dependency>
+      </dependency>
+      <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
-    </dependency>
+      </dependency>
     -->
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -112,9 +112,19 @@
       <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-en-perceptron-autodict01-conll09</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-en-perceptron-conll09</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-de-perceptron-autodict01-conll09</artifactId>
+        <version>20160213.1</version>
+      </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-de-perceptron-perceptron-autodict01-conll09</artifactId>
@@ -152,11 +162,6 @@
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-fr-perceptron-autdict05-ctag</artifactId>
-        <version>20160212.1</version>
-      </dependency>
-      <dependency>
-        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-fr-perceptron-autodict01-sequoia</artifactId>
         <version>20160215.1</version>
       </dependency>
@@ -180,6 +185,56 @@
         <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-nl-perceptron-autodict01-alpino</artifactId>
         <version>20160214.1</version>
       </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-de-perceptron-conll09</artifactId>
+        <version>20160213.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-en-perceptron-conll09</artifactId>
+        <version>20160211.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-en-perceptron-ud</artifactId>
+        <version>20160214.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-en-xlemma-perceptron-ud</artifactId>
+        <version>20160214.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-es-perceptron-ancora-2.0</artifactId>
+        <version>20160211.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-eu-perceptron-ud</artifactId>
+        <version>20160212.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-fr-perceptron-sequoia</artifactId>
+        <version>20160215.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-gl-perceptron-autodict05-ctag</artifactId>
+        <version>20160212.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-it-perceptron-ud</artifactId>
+        <version>20160213.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-nl-perceptron-alpino</artifactId>
+        <version>20160215.1</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <build>
@@ -190,13 +245,14 @@
           <artifactId>maven-dependency-plugin</artifactId>
           <configuration>
             <usedDependencies>
-              <!-- 
+              <!--
                 - We need IXA POS on the classpath because the models require classes from it,
                 - but we do not depend directly on it.
-                -->
+              -->
               <usedDependency>eus.ixa:ixa-pipe-pos</usedDependency>
               <!-- Models not detected by byte-code analysis -->
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-en-perceptron-autodict01-conll09</usedDependency>
+              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-en-perceptron-conll09</usedDependency>
             </usedDependencies>
           </configuration>
         </plugin>
@@ -207,6 +263,11 @@
     <profile>
       <id>use-full-resources</id>
       <dependencies>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-de-perceptron-autodict01-conll09</artifactId>
+          <scope>test</scope>
+        </dependency>
         <dependency>
           <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
           <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-en-perceptron-autodict01-conll09</artifactId>
@@ -239,11 +300,6 @@
         </dependency>
         <dependency>
           <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-          <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-fr-perceptron-autdict05-ctag</artifactId>
-          <scope>test</scope>
-        </dependency>
-        <dependency>
-          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
           <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-fr-perceptron-autodict01-sequoia</artifactId>
           <scope>test</scope>
         </dependency>
@@ -267,6 +323,51 @@
           <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-nl-perceptron-autodict01-alpino</artifactId>
           <scope>test</scope>
         </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-de-perceptron-conll09</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-en-perceptron-ud</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-en-xlemma-perceptron-ud</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-es-perceptron-ancora-2.0</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-eu-perceptron-ud</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-fr-perceptron-sequoia</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-gl-perceptron-autodict05-ctag</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-it-perceptron-ud</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-nl-perceptron-alpino</artifactId>
+          <scope>test</scope>
+        </dependency>
       </dependencies>
       <build>
         <pluginManagement>
@@ -277,18 +378,26 @@
               <configuration>
                 <usedDependencies combine.children="append">
                   <!-- Models not detected by byte-code analysis -->
-                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-en-perceptron-autodict01-conll09</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-de-perceptron-autodict01-conll09</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-en-maxent-100-c5-baseline-autodict01-conll09</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-en-perceptron-autodict01-ud</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-en-xpos-perceptron-autodict01-ud</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-es-perceptron-autodict01-ancora-2.0</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-eu-perceptron-ud</usedDependency>
-                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-fr-perceptron-autdict05-ctag</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-fr-perceptron-autodict01-sequoia</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-gl-perceptron-autdict05-ctag</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-it-perceptron-autodict01</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-nl-maxent-100-c5-autodict01-alpino</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-tagger-nl-perceptron-autodict01-alpino</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-de-perceptron-conll09</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-en-perceptron-ud</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-en-xlemma-perceptron-ud</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-es-perceptron-ancora-2.0</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-eu-perceptron-ud</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-fr-perceptron-sequoia</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-gl-perceptron-autodict05-ctag</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-it-perceptron-ud</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.ixa-model-lemmatizer-nl-perceptron-alpino</usedDependency>
                 </usedDependencies>
               </configuration>
             </plugin>

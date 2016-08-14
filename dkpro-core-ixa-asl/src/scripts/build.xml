@@ -35,12 +35,51 @@
         <antcall target="separate-jars"/>
     </target>
 
+    <target name="new-artifatcs">
+        <property name="install-artifact-mode" value="remote"/>
+    	
+        <antcall target="de-lemmatizer-perceptron-conll09"/>
+        <antcall target="en-lemmatizer-perceptron-conll09"/>
+        <antcall target="en-lemmatizer-perceptron-ud"/>
+        <antcall target="en-lemmatizer-xlemma-perceptron-ud"/>
+        <antcall target="es-lemmatizer-perceptron-ancora-2.0"/>
+        <antcall target="eu-lemmatizer-perceptron-ud"/>
+        <antcall target="fr-lemmatizer-perceptron-sequoia"/>
+        <antcall target="gl-lemmatizer-perceptron-autodict05-ctag"/>
+        <antcall target="it-lemmatizer-perceptron-ud"/>
+        <antcall target="nl-lemmatizer-perceptron-alpino"/>
+    </target>
+
     <target name="separate-jars" depends="de,en,es,eu,fr,gl,it,nl"/>
 
     <target name="de">
+        <antcall target="de-lemmatizer-perceptron-conll09"/>
         <antcall target="de-tagger-perceptron-autodict01-conll09"/>
     </target>
 
+    <target name="de-lemmatizer-perceptron-conll09" depends="download-ixa-morph-resources">
+        <!-- FILE: de-lemma-perceptron-conll09.bin - - - - - - - - - - - - - - - - - - - - - -
+          - 2016-02-13 | now        | 103baa9b25ec9b2da1f740c03bcde185
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-morph-resources/de-lemma-perceptron-conll09.bin" 
+            md5="103baa9b25ec9b2da1f740c03bcde185"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.ixa"
+            upstreamVersion="20160213"
+            metaDataVersion="1"
+            tool="lemmatizer" 
+            language="de" 
+            variant="perceptron-conll09" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="de-lemma-perceptron-conll09.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri, IXA NLP Group"/>
+                <entry key="pos.tagset" value="stts"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>   
+    
     <target name="de-tagger-perceptron-autodict01-conll09" depends="download-ixa-morph-resources">
         <!-- FILE: de-pos-perceptron-autodict01-conll09.bin - - - - - - - - - - - - - - - - - - -
           - 2016-02-13 | now        | ecddce6529b98060736f7e9d0cb865be
@@ -65,10 +104,83 @@
     </target>   
 
     <target name="en">
+        <antcall target="en-lemmatizer-perceptron-conll09"/>
+        <antcall target="en-lemmatizer-perceptron-ud"/>
+        <antcall target="en-lemmatizer-xlemma-perceptron-ud"/>
         <antcall target="en-tagger-maxent-100-c5-baseline-autodict01-conll09"/>
         <antcall target="en-tagger-perceptron-autodict01-conll09"/>
+        <antcall target="en-tagger-perceptron-autodict01-ud"/>
+        <antcall target="en-tagger-xpos-perceptron-autodict01-ud"/>
     </target>
 
+    <target name="en-lemmatizer-perceptron-conll09" depends="download-ixa-morph-resources">
+        <!-- FILE: en-lemma-perceptron-conll09.bin - - - - - - - - - - - - - - - - - - - - - -
+          - 2016-02-11 | now        | d3c8c4694ad9ddf22673ef67f4b67b66
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-morph-resources/en-lemma-perceptron-conll09.bin" 
+            md5="d3c8c4694ad9ddf22673ef67f4b67b66"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.ixa"
+            upstreamVersion="20160211"
+            metaDataVersion="1"
+            tool="lemmatizer" 
+            language="en" 
+            variant="perceptron-conll09" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="en-lemma-perceptron-conll09.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri, IXA NLP Group"/>
+                <entry key="pos.tagset" value="ptb"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>   
+	
+    <target name="en-lemmatizer-perceptron-ud" depends="download-ixa-ud-morph-resources">
+        <!-- FILE: en-lemma-perceptron-ud.bin - - - - - - - - - - - - - - - - - - - - - - -
+          - 2016-02-14 | now        | 8f49d3b953c0f3d34811ea63108de5eb
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-ud-morph-resources/en-lemma-perceptron-ud.bin" 
+            md5="8f49d3b953c0f3d34811ea63108de5eb"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.ixa"
+            upstreamVersion="20160214"
+            metaDataVersion="1"
+            tool="lemmatizer" 
+            language="en" 
+            variant="perceptron-ud" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="en-lemma-perceptron-ud.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri, IXA NLP Group"/>
+                <entry key="pos.tagset" value="ud"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>   
+    
+    <target name="en-lemmatizer-xlemma-perceptron-ud" depends="download-ixa-ud-morph-resources">
+        <!-- FILE: en-xlemma-perceptron-ud.bin - - - - - - - - - - - - - - - - - - - - - - -
+          - 2016-02-14 | now        | 03d68981b825619c1b91a4f6304c1177
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-ud-morph-resources/en-xlemma-perceptron-ud.bin" 
+            md5="03d68981b825619c1b91a4f6304c1177"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.ixa"
+            upstreamVersion="20160214"
+            metaDataVersion="1"
+            tool="lemmatizer" 
+            language="en" 
+            variant="xlemma-perceptron-ud" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="en-xlemma-perceptron-ud.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri, IXA NLP Group"/>
+                <entry key="pos.tagset" value="ptb"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>   
     <target name="en-tagger-maxent-100-c5-baseline-autodict01-conll09" depends="download-ixa-morph-resources">
         <!-- FILE: en-pos-maxent-100-c5-baseline-autodict01-conll09.bin - - - - - - - - - - - - - -
           - 2016-02-11 | now        | ae905398b57b4df6e0882ad3b55f681f
@@ -162,9 +274,33 @@
     </target>   
 
     <target name="es">
+        <antcall target="es-lemmatizer-perceptron-ancora-2.0"/>
         <antcall target="es-tagger-perceptron-autodict01-ancora-2.0"/>
     </target>
 
+    <target name="es-lemmatizer-perceptron-ancora-2.0" depends="download-ixa-morph-resources">
+        <!-- FILE: es-lemma-perceptron-ancora-2.0.bin - - - - - - - - - - - - - - - - - - - - - - -
+          - 2016-02-11 | now        | 120d8d51b218fee5da434804a021eb6f
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-morph-resources/es-lemma-perceptron-ancora-2.0.bin" 
+            md5="120d8d51b218fee5da434804a021eb6f"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.ixa"
+            upstreamVersion="20160211"
+            metaDataVersion="1"
+            tool="lemmatizer" 
+            language="es" 
+            variant="perceptron-ancora-2.0" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="es-lemma-perceptron-ancora-2.0.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri, IXA NLP Group"/>
+                <entry key="pos.tagset" value="ancora-ixa"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>   
+    
     <target name="es-tagger-perceptron-autodict01-ancora-2.0" depends="download-ixa-morph-resources">
         <!-- FILE: es-pos-perceptron-autodict01-ancora-2.0.bin - - - - - - - - - - - - - - - - - - -
           - 2016-02-12 | now        | e0a64cfbda9c33834fe45e7f1dc36c1d
@@ -189,9 +325,33 @@
     </target>   
 
     <target name="eu">
+        <antcall target="eu-lemmatizer-perceptron-ud"/>
         <antcall target="eu-tagger-perceptron-ud"/>
     </target>
 
+    <target name="eu-lemmatizer-perceptron-ud" depends="download-ixa-ud-morph-resources">
+        <!-- FILE: eu-lemma-perceptron-ud.bin - - - - - - - - - - - - - - - - - - - - - - -
+          - 2016-02-12 | now        | 8baa7d6236585a98e50b6e2343a33456
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-ud-morph-resources/eu-lemma-perceptron-ud.bin" 
+            md5="8baa7d6236585a98e50b6e2343a33456"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.ixa"
+            upstreamVersion="20160212"
+            metaDataVersion="1"
+            tool="lemmatizer" 
+            language="eu" 
+            variant="perceptron-ud" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="eu-lemma-perceptron-ud.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri, IXA NLP Group"/>
+                <entry key="pos.tagset" value="ud"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>   
+    
     <target name="eu-tagger-perceptron-ud" depends="download-ixa-morph-resources">
         <!-- FILE: eu-pos-perceptron-ud.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
           - 2016-02-12 | now        | fec5544d4d776d144042b190b94005cc
@@ -210,15 +370,38 @@
             <metadata>
                 <entry key="DC.title" value="eu-pos-perceptron-ud.bin"/>
                 <entry key="DC.creator" value="Rodrigo Agerri, IXA NLP Group"/>
-                <entry key="pos.tagset" value="ud"/>
             </metadata>
         </install-stub-and-upstream-file>
     </target>   
 
     <target name="fr">
+        <antcall target="fr-lemmatizer-perceptron-sequoia"/>
         <antcall target="fr-tagger-perceptron-autodict01-sequoia"/>
     </target>
 
+    <target name="fr-lemmatizer-perceptron-sequoia" depends="download-ixa-morph-resources">
+        <!-- FILE: fr-lemma-perceptron-sequoia.bin - - - - - - - - - - - - - - - - - - - - - -
+          - 2016-02-15 | now        | fc90213128a8d9724c871a8aa02128d2
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-morph-resources/fr-lemma-perceptron-sequoia.bin" 
+            md5="fc90213128a8d9724c871a8aa02128d2"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.ixa"
+            upstreamVersion="20160215"
+            metaDataVersion="1"
+            tool="lemmatizer" 
+            language="fr" 
+            variant="perceptron-sequoia" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="fr-lemma-perceptron-sequoia.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri, IXA NLP Group"/>
+                <entry key="pos.tagset" value="melt"/>
+           </metadata>
+        </install-stub-and-upstream-file>
+    </target>   
+    
     <target name="fr-tagger-perceptron-autodict01-sequoia" depends="download-ixa-morph-resources">
         <!-- FILE: fr-pos-perceptron-autodict01-sequoia.bin - - - - - - - - - - - - - - - - - - - -
           - 2016-02-15 | now        | 9476b2a5570dd205afaea9412e403484
@@ -243,9 +426,33 @@
     </target>   
 	
     <target name="gl">
+        <antcall target="gl-lemmatizer-perceptron-autodict05-ctag"/>
         <antcall target="gl-tagger-perceptron-autdict05-ctag"/>
     </target>
 
+    <target name="gl-lemmatizer-perceptron-autodict05-ctag" depends="download-ixa-morph-resources">
+        <!-- FILE: gl-lemma-perceptron-autodict05-ctag.bin - - - - - - - - - - - - - - - - - - - - - -
+          - 2016-02-12 | now        | e0e4eb2d9e86def8859af943fdcade16
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-morph-resources/gl-lemma-perceptron-autodict05-ctag.bin" 
+            md5="e0e4eb2d9e86def8859af943fdcade16"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.ixa"
+            upstreamVersion="20160212"
+            metaDataVersion="1"
+            tool="lemmatizer" 
+            language="gl" 
+            variant="perceptron-autodict05-ctag" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="gl-lemma-perceptron-autodict05-ctag.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri, IXA NLP Group"/>
+                <entry key="pos.tagset" value="ctag-ixa"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>   
+    
     <target name="gl-tagger-perceptron-autdict05-ctag" depends="download-ixa-morph-resources">
         <!-- FILE: gl-pos-perceptron-autdict05-ctag.bin - - - - - - - - - - - - - - - - - - - - - - 
           - 2016-02-12 | now        | 18385637ad288e69eb57f12096dc551c
@@ -270,9 +477,33 @@
     </target>   
 
     <target name="it">
+        <antcall target="it-lemmatizer-perceptron-ud"/>
         <antcall target="it-tagger-perceptron-autodict01-ud"/>
     </target>
 
+    <target name="it-lemmatizer-perceptron-ud" depends="download-ixa-ud-morph-resources">
+        <!-- FILE: it-lemma-perceptron-ud.bin - - - - - - - - - - - - - - - - - - - - - - -
+          - 2016-02-13 | now        | 935266eb6488d81f8992dde1bcd2f67f
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-ud-morph-resources/it-lemma-perceptron-ud.bin" 
+            md5="935266eb6488d81f8992dde1bcd2f67f"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.ixa"
+            upstreamVersion="20160213"
+            metaDataVersion="1"
+            tool="lemmatizer" 
+            language="it" 
+            variant="perceptron-ud" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="it-lemma-perceptron-ud.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri, IXA NLP Group"/>
+                <entry key="pos.tagset" value="ud"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>   
+    
     <target name="it-tagger-perceptron-autodict01-ud" depends="download-ixa-morph-resources">
         <!-- FILE: it-pos-perceptron-autodict01-ud.bin - - - - - - - - - - - - - - - - - - - - - - -
           - 2016-02-13 | now        | f2901d9aed2e844e6d5763cf13cec986
@@ -297,10 +528,34 @@
     </target>   
 
     <target name="nl">
+        <antcall target="nl-lemmatizer-perceptron-alpino"/>
         <antcall target="nl-tagger-maxent-100-c5-autodict01-alpino"/>
         <antcall target="nl-tagger-perceptron-autodict01-alpino"/>
     </target>
 
+    <target name="nl-lemmatizer-perceptron-alpino" depends="download-ixa-morph-resources">
+        <!-- FILE: nl-lemma-perceptron-alpino.bin - - - - - - - - - - - - - - - - - - - - - -
+          - 2016-02-15 | now        | 0f13fdf25b5aea917c8fd8e50b3e4235
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-morph-resources/nl-lemma-perceptron-alpino.bin" 
+            md5="0f13fdf25b5aea917c8fd8e50b3e4235"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.ixa"
+            upstreamVersion="20160215"
+            metaDataVersion="1"
+            tool="lemmatizer" 
+            language="nl" 
+            variant="perceptron-alpino" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="nl-lemma-perceptron-alpino.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri, IXA NLP Group"/>
+                <entry key="pos.tagset" value="alpino-ixa"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>   
+    
     <target name="nl-tagger-maxent-100-c5-autodict01-alpino" depends="download-ixa-morph-resources">
         <!-- FILE: nl-pos-maxent-100-c5-autodict01-alpino.bin - - - - - - - - - - - - - - - - - - -
           - 2016-02-14 | now        | 66e8aea74da01344962a91a90c2a44dd
