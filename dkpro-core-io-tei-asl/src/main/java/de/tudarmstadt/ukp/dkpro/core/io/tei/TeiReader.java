@@ -227,11 +227,8 @@ public class TeiReader
 			// Make sure we know about the first element;
 			nextTeiElement();
 		}
-		catch (CollectionException e) {
-			new ResourceInitializationException(e);
-		}
-		catch (IOException e) {
-			new ResourceInitializationException(e);
+		catch (CollectionException | IOException e) {
+			throw new ResourceInitializationException(e);
 		}
 
         posMappingProvider = MappingProviderFactory.createPosMappingProvider(mappingPosLocation,
