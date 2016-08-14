@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -46,6 +47,7 @@ import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.CasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.codehaus.plexus.util.StringUtils;
 import org.springframework.util.DigestUtils;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -84,6 +86,14 @@ public class CasDumpWriter
     public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
     @ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true, defaultValue = "-")
     private File outputFile;
+
+    /**
+     * Output encoding. If unset, this defaults to UTF-8 if the target is a file and to the system
+     * default encoding if the target is the console.
+     */
+    public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = false)
+    private String targetEncoding;
 
     /**
      * Whether to dump the content of the {@link CAS#getDocumentAnnotation()}.
@@ -135,14 +145,17 @@ public class CasDumpWriter
         try {
             if (out == null) {
                 if ("-".equals(outputFile.getName())) {
-                    out = new PrintWriter(new CloseShieldOutputStream(System.out));
+                    out = new PrintWriter(
+                            new OutputStreamWriter(new CloseShieldOutputStream(System.out),
+                                    StringUtils.defaultString(targetEncoding,
+                                            Charset.defaultCharset().name())));
                 }
                 else {
                     if (outputFile.getParentFile() != null) {
                         outputFile.getParentFile().mkdirs();
                     }
                     out = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outputFile),
-                            "UTF-8"));
+                            StringUtils.defaultString(targetEncoding, "UTF-8")));
                 }
             }
         }
