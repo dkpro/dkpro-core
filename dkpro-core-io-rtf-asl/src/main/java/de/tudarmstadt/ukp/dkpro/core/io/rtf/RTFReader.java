@@ -34,7 +34,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 
 /**
- * Read RTF (Rich Test Format) files. Uses {@link RTFEditorKit} for parsing RTF..
+ * Read RTF (Rich Test Format) files. Uses {@link RTFEditorKit} for parsing RTF.
  */
 @MimeTypeCapability({MimeTypes.APPLICATION_RTF, MimeTypes.TEXT_RTF})
 @TypeCapability(
