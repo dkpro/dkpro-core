@@ -127,7 +127,7 @@ public class CasDumpWriter
      * order.
      */
     public static final String PARAM_SORT = "sort";
-    @ConfigurationParameter(name = PARAM_SORT, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_SORT, mandatory = true, defaultValue = "true")
     private boolean sort;
     
     private InExPattern[] cookedTypePatterns;
