@@ -249,10 +249,13 @@ public class IxaPosTaggerTest
                     new String[] { "DT", "VBZ", "DT", "NN", "." },
                     new String[] { "DET", "VERB", "DET", "NOUN", "PUNCT" });
 
-            String[] posTags = { "ADJ", "ADP", "ADV", "AUX", "CONJ", "DET", "INTJ", "NOUN", "NUM",
-                    "PART", "PRON", "PROPN", "PUNCT", "SCONJ", "SYM", "VERB", "X" };
+            String[] posTags = { "$", "''", ",", "-LRB-", "-RRB-", ".", ":", "ADD", "AFX", "CC",
+                    "CD", "DT", "EX", "FW", "GW", "HYPH", "IN", "JJ", "JJR", "JJS", "LS", "MD",
+                    "NFP", "NN", "NNP", "NNPS", "NNS", "PDT", "POS", "PRP", "PRP$", "RB", "RBR",
+                    "RBS", "RP", "SYM", "TO", "UH", "VB", "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT",
+                    "WP", "WP$", "WRB", "XX", "``" };
 
-            String[] unmappedPos = {};
+            String[] unmappedPos = { "ADD", "AFX", "GW", "HYPH", "NFP", "XX" };
 
             AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
             AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
