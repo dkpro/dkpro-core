@@ -25,6 +25,7 @@ import static org.apache.uima.util.Level.INFO;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.List;
+import java.nio.charset.StandardCharsets;
 
 import opennlp.tools.postag.POSModel;
 import opennlp.tools.postag.POSTagger;
