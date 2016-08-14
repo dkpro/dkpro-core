@@ -214,7 +214,7 @@ public class IxaPosTaggerTest
         throws Exception
     {
         { 
-            JCas jcas = runTest("en", "perceptron-autodict01-conll09", "This is a test .",
+            JCas jcas = runTest("en", "maxent-100-c5-baseline-autodict01-conll09", "This is a test .",
                     new String[] { "DT", "VBZ", "DT", "NN", "." },
                     new String[] { "DET", "VERB", "DET", "NOUN", "PUNCT" });
 
