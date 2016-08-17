@@ -152,48 +152,55 @@ de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV:
   features: {}
   externalReferences:
   - {source: 'http://universaldependencies.org/u/pos/', id: 'http://universaldependencies.org/u/pos/ADV.html', rel: similar}
-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART:
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.DET:
   features: {}
-  externalReferences: []
-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD:
+  externalReferences:
+  - {source: 'http://universaldependencies.org/u/pos/', id: 'http://universaldependencies.org/u/pos/DET.html', rel: similar}
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NUM:
   features: {}
-  externalReferences: []
+  externalReferences:
+  - {source: 'http://universaldependencies.org/u/pos/', id: 'http://universaldependencies.org/u/pos/NUM.html', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ:
   features: {}
   externalReferences:
   - {source: 'http://universaldependencies.org/u/pos/', id: 'http://universaldependencies.org/u/pos/CONJ.html', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N:
   features: {}
-  externalReferences: []
-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN:
+  externalReferences:
+  - {source: 'http://universaldependencies.org/u/pos/', id: 'http://universaldependencies.org/u/pos/NOUN.html', rel: similar}
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PROPN:
   features: {}
-  externalReferences: []
-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP:
+  externalReferences:
+  - {source: 'http://universaldependencies.org/u/pos/', id: 'http://universaldependencies.org/u/pos/PROPN.html', rel: similar}
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.X:
   features: {}
-  externalReferences: []
-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O:
-  features: {}
-  externalReferences: []
+  externalReferences:
+  - {source: 'http://universaldependencies.org/u/pos/', id: 'http://universaldependencies.org/u/pos/X.html', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS:
   features:
     PosValue:
       externalReferences: []
   externalReferences: []
-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP:
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADP:
   features: {}
-  externalReferences: []
-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR:
+  externalReferences:
+  - {source: 'http://universaldependencies.org/u/pos/', id: 'http://universaldependencies.org/u/pos/ADP.html', rel: similar}
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRON:
   features: {}
-  externalReferences: []
-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRT:
+  externalReferences:
+  - {source: 'http://universaldependencies.org/u/pos/', id: 'http://universaldependencies.org/u/pos/PRON.html', rel: similar}
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PART:
   features: {}
-  externalReferences: []
-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC:
+  externalReferences:
+  - {source: 'http://universaldependencies.org/u/pos/', id: 'http://universaldependencies.org/u/pos/PART.html', rel: similar}
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNCT:
   features: {}
-  externalReferences: []
-de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V:
+  externalReferences:
+  - {source: 'http://universaldependencies.org/u/pos/', id: 'http://universaldependencies.org/u/pos/PUNCT.html', rel: similar}
+de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.VERB:
   features: {}
-  externalReferences: []
+  externalReferences:
+  - {source: 'http://universaldependencies.org/u/pos/', id: 'http://universaldependencies.org/u/pos/VERB.html', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.AT:
   features: {}
   externalReferences: []
