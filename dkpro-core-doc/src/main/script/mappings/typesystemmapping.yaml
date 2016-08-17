@@ -180,7 +180,8 @@ de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS:
   features:
     PosValue:
       externalReferences: []
-  externalReferences: []
+  externalReferences:
+  - {source: 'http://universaldependencies.org/u/pos/', id: 'http://universaldependencies.org/u/pos/', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADP:
   features: {}
   externalReferences:
