@@ -33,47 +33,6 @@ import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 public class DatasetLoaderTest
 {
     @Test
-    public void testEnglishBrownCorpus()
-        throws Exception
-    {
-        Dataset ds = new DatasetLoader(DkproTestContext.getCacheFolder()).loadEnglishBrownCorpus();
-        assertDatasetOk(ds);
-    }
-
-    @Test
-    public void testEnglishGUMCorpus()
-        throws Exception
-    {
-        Dataset ds = new DatasetLoader(DkproTestContext.getCacheFolder()).loadEnglishGUMCorpus();
-        assertDatasetOk(ds);
-    }
-
-    @Test
-    public void testFrenchDeepSequoiaCorpus()
-        throws Exception
-    {
-        Dataset ds = new DatasetLoader(DkproTestContext.getCacheFolder())
-                .loadFrenchDeepSequoiaCorpus();
-        assertDatasetOk(ds);
-    }
-
-    @Test
-    public void testGermEval2014NER()
-        throws Exception
-    {
-        Dataset ds = new DatasetLoader(DkproTestContext.getCacheFolder()).loadGermEval2014NER();
-        assertDatasetOk(ds);
-    }
-
-    @Test
-    public void testNEMGP()
-        throws Exception
-    {
-        Dataset ds = new DatasetLoader(DkproTestContext.getCacheFolder()).loadNEMGP();
-        assertDatasetOk(ds);
-    }
-
-    @Test
     public void testUniversalDependencyTreebankV1_3()
         throws Exception
     {
@@ -83,57 +42,6 @@ public class DatasetLoaderTest
             assertDatasetOk(ds);
         }
     }
-
-    @Test
-    public void testGermanHamburgDependencyTreebank()
-        throws Exception
-    {
-        Dataset ds = new DatasetLoader(DkproTestContext.getCacheFolder())
-                .loadGermanHamburgDependencyTreebank();
-        assertDatasetOk(ds);
-    }
-
-    @Test
-    public void testAncientGreekAndLatinTreebank()
-        throws Exception
-    {
-        Dataset ds = new DatasetLoader(DkproTestContext.getCacheFolder())
-                .loadAncientGreekAndLatingDependencyTreebank();
-        assertDatasetOk(ds);
-    }
-
-    @Test
-    public void testCatalanConll2009()
-        throws Exception
-    {
-        Dataset ds = new DatasetLoader(DkproTestContext.getCacheFolder()).loadCatalanConll2009();
-        assertDatasetOk(ds);
-    }
-
-    @Test
-    public void testGermanConll2009()
-        throws Exception
-    {
-        Dataset ds = new DatasetLoader(DkproTestContext.getCacheFolder()).loadGermanConll2009();
-        assertDatasetOk(ds);
-    }
-
-    @Test
-    public void testJapaneseConll2009()
-        throws Exception
-    {
-        Dataset ds = new DatasetLoader(DkproTestContext.getCacheFolder()).loadJapaneseConll2009();
-        assertDatasetOk(ds);
-    }
-
-    @Test
-    public void testSpanishConll2009()
-        throws Exception
-    {
-        Dataset ds = new DatasetLoader(DkproTestContext.getCacheFolder()).loadSpanishConll2009();
-        assertDatasetOk(ds);
-    }
-
     private void assertDatasetOk(Dataset ds)
     {
         assertNotNull("Name not set", ds.getName());

@@ -17,21 +17,15 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.datasets;
 
-import java.io.File;
-
-public interface Dataset
+public final class ArtifactRole
 {
-    String getName();
-    
-    String getLanguage();
-    
-    File[] getAllFiles();
-    
-    File[] getLicenseFiles();
-    
-    File[] getTrainingFiles();
-    
-    File[] getTestFiles();
-    
-    File[] getDevelopmentFiles();
+    public static final String LICENSE = "licenses";
+    public static final String TRAINING = "training";
+    public static final String TESTING = "testing";
+    public static final String DEVELOPMENT = "development";
+ 
+    private ArtifactRole() {
+        // No instances
+    }
 }
+

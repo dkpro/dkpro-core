@@ -34,7 +34,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 import de.tudarmstadt.ukp.dkpro.core.datasets.Dataset;
-import de.tudarmstadt.ukp.dkpro.core.datasets.DatasetLoader;
+import de.tudarmstadt.ukp.dkpro.core.datasets.DatasetFactory;
 import de.tudarmstadt.ukp.dkpro.core.eval.EvalUtil;
 import de.tudarmstadt.ukp.dkpro.core.eval.model.Span;
 import de.tudarmstadt.ukp.dkpro.core.eval.report.Result;
@@ -104,8 +104,8 @@ public class OpenNlpChunkerTrainerTest
     @Before
     public void setup() throws IOException
     {
-        DatasetLoader loader = new DatasetLoader(DkproTestContext.getCacheFolder());
-        ds = loader.loadEnglishConll2000();
+        DatasetFactory loader = new DatasetFactory(DkproTestContext.getCacheFolder());
+        ds = loader.load("conll2000-en");
     }    
     
     @Rule

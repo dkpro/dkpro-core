@@ -1,0 +1,28 @@
+<% 
+def links(dataset)
+{
+    def html = '++++\n<div style="float:right">\n';
+    html += "<a href=\"${dataset.githubUrl}\">Edit on GitHub</a><br/>\n";
+    html += '</div>\n++++\n';
+    return html;
+}
+
+datasets.each { key, dataset ->
+%>
+[[dataset-${key}]]
+=== ${dataset.name} 
+
+${links(dataset)}
+
+[small]#*_ID:_* __${key}__# +
+[small]#*_Version:_* __${dataset.version ?: 'unknown'}__# +
+[small]#*_Media type:_* __${dataset.mediaType ?: 'unknown'}__# +
+[small]#*_Language:_* __${dataset.language ?: 'unknown'}__# +
+[small]#*_URL:_* __${dataset.url ?: 'unknown'}__# +
+[small]#*_Attribution:_* __${dataset.attribution ?: 'unknown'}__#
+
+${dataset.description ?: ''}
+
+<%
+}
+%>

@@ -1,0 +1,25 @@
+groupId: org.dkpro.core.datasets.nemgp
+datasetId: nemgp
+version: 0.1
+language: de
+# mediaType: text/x.org.dkpro.opennlp-ne
+
+name: Named Entity Model for German, Politics (NEMGP)
+url: http://www.thomas-zastrow.de/nlp/
+attribution: Thomas Zastrow 
+description: |
+  The Named Entity Model for German, Politics (NEMGP) is a collection of texts from Wikipedia and
+  WikiNews, manually annotated with named entity information.
+
+  (This description has been sourced from the dataset website).
+
+artifacts:
+  nemgp_trainingdata_01.txt.zip:
+    url: "http://www.thomas-zastrow.de/nlp/nemgp_trainingdata_01.txt.zip"
+    sha1: f2a1fd54df9232741a3a1892d1ffb0a4d7205991
+    actions:
+      - action: explode
+
+roles:
+  training:
+    - nemgp_trainingdata_01.txt/nemgp_trainingdata_01.txt

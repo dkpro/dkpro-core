@@ -36,7 +36,7 @@ import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.datasets.Dataset;
-import de.tudarmstadt.ukp.dkpro.core.datasets.DatasetLoader;
+import de.tudarmstadt.ukp.dkpro.core.datasets.DatasetFactory;
 import de.tudarmstadt.ukp.dkpro.core.eval.EvalUtil;
 import de.tudarmstadt.ukp.dkpro.core.eval.model.Span;
 import de.tudarmstadt.ukp.dkpro.core.eval.report.Result;
@@ -112,8 +112,8 @@ public class OpenNlpNamedEntityRecognizerTrainerTest
     @Before
     public void setup() throws IOException
     {
-        DatasetLoader loader = new DatasetLoader(testContext.getCacheFolder());
-        germevalData = loader.loadGermEval2014NER();
+        DatasetFactory loader = new DatasetFactory(testContext.getCacheFolder());
+        germevalData = loader.load("germeval2014-de");
     }    
     
     @Rule

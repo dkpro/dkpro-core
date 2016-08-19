@@ -15,43 +15,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.datasets.internal.ud;
+package de.tudarmstadt.ukp.dkpro.core.datasets.internal;
 
 import static java.util.Arrays.asList;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import de.tudarmstadt.ukp.dkpro.core.datasets.ArtifactRole;
 import de.tudarmstadt.ukp.dkpro.core.datasets.Dataset;
+import de.tudarmstadt.ukp.dkpro.core.datasets.DatasetDescription;
+import de.tudarmstadt.ukp.dkpro.core.datasets.DatasetFactory;
 
-public class UDDataset
+public class LoadedDataset
     implements Dataset
 {
-    private File baseDir;
+    private DatasetFactory factory;
+    private DatasetDescription description;
     
-    public UDDataset(File aBaseDir)
+    public LoadedDataset(DatasetFactory aFactory, DatasetDescription aDescription)
     {
-        baseDir = aBaseDir;
+        super();
+        factory = aFactory;
+        description = aDescription;
     }
 
     @Override
     public String getName()
     {
-        return baseDir.getName();
-    }
-    
-    @Override
-    public String getLanguage()
-    {
-        return getTrainingFiles()[0].getName().split("-")[0];
+        return description.getId();
     }
 
     @Override
-    public File[] getLicenseFiles()
+    public String getLanguage()
     {
-        return new File[] { new File(baseDir, "LICENSE.txt") };
+        return description.getLanguage();
     }
 
     @Override
@@ -67,21 +69,42 @@ public class UDDataset
     }
     
     @Override
+    public File[] getLicenseFiles()
+    {
+        return getFiles(ArtifactRole.LICENSE);
+    }
+
+    @Override
     public File[] getTrainingFiles()
     {
-        return baseDir.listFiles((File f) -> { return f.getName().endsWith("-train.conllu"); });
+        return getFiles(ArtifactRole.TRAINING);
     }
 
     @Override
     public File[] getTestFiles()
     {
-        return baseDir.listFiles((File f) -> { return f.getName().endsWith("-test.conllu"); });
+        return getFiles(ArtifactRole.TESTING);
     }
 
     @Override
     public File[] getDevelopmentFiles()
     {
-        return baseDir.listFiles((File f) -> { return f.getName().endsWith("-dev.conllu"); });
+        return getFiles(ArtifactRole.DEVELOPMENT);
     }
 
+    private File[] getFiles(String aRole)
+    {
+        List<File> files = new ArrayList<>();
+        
+        List<String> locations = description.getRoles().get(aRole);
+        if (locations == null) {
+            return new File[0];
+        }
+        
+        for (String location : locations) {
+            files.add(factory.resolve(description).resolve(location).toFile());
+        }
+        
+        return files.toArray(new File[files.size()]);
+    }
 }

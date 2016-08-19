@@ -15,23 +15,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.datasets;
+package de.tudarmstadt.ukp.dkpro.core.datasets.internal.actions;
 
-import java.io.File;
+import java.nio.file.Path;
 
-public interface Dataset
+import de.tudarmstadt.ukp.dkpro.core.datasets.ActionDescription;
+import de.tudarmstadt.ukp.dkpro.core.datasets.ArtifactDescription;
+import de.tudarmstadt.ukp.dkpro.core.datasets.DatasetDescription;
+
+public abstract class Action_ImplBase
 {
-    String getName();
-    
-    String getLanguage();
-    
-    File[] getAllFiles();
-    
-    File[] getLicenseFiles();
-    
-    File[] getTrainingFiles();
-    
-    File[] getTestFiles();
-    
-    File[] getDevelopmentFiles();
+    public abstract void apply(ActionDescription aAction, DatasetDescription aDataset,
+            ArtifactDescription aPack, Path aCachedFile) throws Exception;
 }

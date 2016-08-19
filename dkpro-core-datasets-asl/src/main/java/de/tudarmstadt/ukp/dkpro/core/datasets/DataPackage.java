@@ -17,6 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.datasets;
 
+@Deprecated
 public class DataPackage
 {
     public static final DataPackage LICENSE_CC_BY_4_0 = new DataPackage.Builder()

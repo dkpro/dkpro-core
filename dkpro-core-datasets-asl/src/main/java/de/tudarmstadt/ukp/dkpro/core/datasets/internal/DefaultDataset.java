@@ -17,12 +17,18 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.datasets.internal;
 
+import static java.util.Arrays.asList;
+
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import de.tudarmstadt.ukp.dkpro.core.datasets.Dataset;
 
+@Deprecated
 public class DefaultDataset
     implements Dataset
 {
@@ -76,6 +82,18 @@ public class DefaultDataset
         return licenseFiles;
     }
 
+    @Override
+    public File[] getAllFiles()
+    {
+        Set<File> all = new HashSet<>();
+        all.addAll(asList(getTrainingFiles()));
+        all.addAll(asList(getTestFiles()));
+        all.addAll(asList(getDevelopmentFiles()));
+        File[] result = all.toArray(all.toArray(new File[all.size()]));
+        Arrays.sort(result, (a, b) -> { return a.getPath().compareTo(b.getPath()); });
+        return result;
+    }
+    
     public void setTrainingFiles(File... aTrainingFiles)
     {
         trainingFiles = aTrainingFiles;

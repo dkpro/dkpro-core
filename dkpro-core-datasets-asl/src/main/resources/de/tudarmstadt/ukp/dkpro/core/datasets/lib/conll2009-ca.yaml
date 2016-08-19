@@ -1,0 +1,32 @@
+groupId: org.dkpro.core.datasets.conll2009
+datasetId: conll2009
+version: 2.1
+language: ca
+mediaType: text/x.org.dkpro.conll-2009
+
+name: CoNLL-2009 Shared Task (Catalan)
+url: http://ufal.mff.cuni.cz/conll2009-st/
+attribution: Lluís Màrquez, Ma. Antònia Martí, Mariona Taulé, Manuel Bertran, Oriol Borrega
+description: |
+  This is a subset of the Ancora corpus (see http://clic.ub.edu/ancora) which was used in the 
+  CoNLL-2009 shared task on extracting syntactic and semantic Dependencies in multiple languages.
+
+  496,672 lexical tokens; training: 390,302; development: 53,015; test: 53,355
+
+  (This description has been partially copied from the README file included with the corpus).
+
+artifacts:
+  data.zip:
+    url: "http://ufal.mff.cuni.cz/conll2009-st/data/CoNLL2009-ST-Catalan-traindevC.zip"
+    sha1: 500cbb81709012cce4d23bfa72d93c320b0b7e6f
+    actions:
+      - action: explode
+        configuration: { strip: 1, includes: ["README.TXT", "datasets/*" ]}
+
+roles:
+  training:
+    - data/datasets/CoNLL2009-ST-Catalan-train.txt
+  development:
+    - data/datasets/CoNLL2009-ST-Catalan-development.txt
+  testing:
+    - data/datasets/CoNLL2009-ST-Catalan-trial.txt

@@ -1,0 +1,31 @@
+groupId: org.dkpro.core.datasets.agdt
+datasetId: agdt
+version: 2.1
+language: la
+# mediaType: unknown
+
+name: Ancient Greek and Latin Dependency Treebank (Latin)
+url: https://perseusdl.github.io/treebank_data/ 
+attribution: Giuseppe G. A. Celano, Gregory Crane, Bridget Almas et al.
+description: |
+  The Ancient Greek and Latin Dependency Treebank (AGLDT) is the earliest treebank for Ancient Greek
+  and Latin. The project started at Tufts University in 2006 and is currently under development and
+  maintenance at Leipzig University-Tufts University.
+
+  (This description has been sourced from the dataset website).
+
+artifacts:
+  LICENSE.txt:
+    url: http://creativecommons.org/licenses/by-sa/3.0/legalcode.txt
+    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+  perseus.zip:
+    url: "https://github.com/PerseusDL/treebank_data/archive/f56a35f65ef15ac454f6fbd2cfc6ea97bf2ca9b8.zip"
+    sha1: 140eee6d2e3e83745f95d3d5274d9e965d898980
+    shared: true
+    actions:
+      - action: explode
+        configuration: { strip: 1, includes: [ "README.md", "v2.1/Latin/**/*" ] }
+
+roles:
+  licenses:
+    - LICENSE.txt

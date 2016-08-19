@@ -1,0 +1,38 @@
+groupId: org.dkpro.core.datasets.conll2009
+datasetId: conll2009
+version: 1.1
+language: de
+mediaType: text/x.org.dkpro.conll-2009
+
+name: CoNLL-2009 Shared Task (German)
+url: http://ufal.mff.cuni.cz/conll2009-st/
+attribution: Yi Zhang, Sebastian Pado
+description: |
+  This dataset contains the basic information regarding the German corpus
+  provided for the CoNLL-2009 shared task on "Syntactic and Semantic
+  Dependencies in Multiple Languages"
+  (http://ufal.mff.cuni.cz/conll2009-st/). The data of this distribution
+  is derived from the TIGER Treebank and the SALSA Corpus, converted
+  into the syntactic and semantic dependencies compatible with the
+  CoNLL-2009 shared task. 
+  
+  (This description has been sourced from the README file included with the corpus).
+
+artifacts:
+  data.zip:
+    url: "http://ufal.mff.cuni.cz/conll2009-st/data/CoNLL2009-ST-German-traindevB.zip"
+    sha1: ad4c03c3c4e4668c8beb34c399e71f539e6d633d
+    actions:
+      - action: explode
+        configuration: { strip: 1 }
+
+roles:
+  licenses:
+    - data/license-salsa.html
+    - data/license-tiger.html
+  training:
+    - data/CoNLL2009-ST-German-train.txt
+  development:
+    - data/CoNLL2009-ST-German-development.txt
+  testing:
+    - data/CoNLL2009-ST-German-trial.txt

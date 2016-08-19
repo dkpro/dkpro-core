@@ -17,21 +17,20 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.datasets;
 
-import java.io.File;
+import java.util.List;
+import java.util.Map;
 
-public interface Dataset
+public interface DatasetDescription
 {
-    String getName();
-    
+    /**
+     * @deprecated to be superseded by groupId/datasetId/version/language/mediaType
+     */
+    @Deprecated
+    String getId();
+
     String getLanguage();
-    
-    File[] getAllFiles();
-    
-    File[] getLicenseFiles();
-    
-    File[] getTrainingFiles();
-    
-    File[] getTestFiles();
-    
-    File[] getDevelopmentFiles();
+
+    Map<String, List<String>> getRoles();
+
+    Map<String, ArtifactDescription> getArtifacts();
 }

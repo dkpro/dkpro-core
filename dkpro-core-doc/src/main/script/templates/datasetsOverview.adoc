@@ -1,0 +1,15 @@
+.Datasets (${datasets.size()})
+[options="header", cols="4,1,1"]
+|====
+|Dataset|Version|Language
+
+<% 
+datasets.each { key, dataset -> 
+%>
+| <<dataset-${ key },${ dataset.name }>>
+| ${dataset.version ?: '_unknown_'}
+| ${dataset.language ?: '_unknown_'}
+<% 
+} // datasets 
+%>
+|====

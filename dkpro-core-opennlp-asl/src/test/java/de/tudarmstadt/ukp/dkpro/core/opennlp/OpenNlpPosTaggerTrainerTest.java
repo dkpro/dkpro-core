@@ -34,7 +34,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.datasets.Dataset;
-import de.tudarmstadt.ukp.dkpro.core.datasets.DatasetLoader;
+import de.tudarmstadt.ukp.dkpro.core.datasets.DatasetFactory;
 import de.tudarmstadt.ukp.dkpro.core.eval.EvalUtil;
 import de.tudarmstadt.ukp.dkpro.core.eval.model.Span;
 import de.tudarmstadt.ukp.dkpro.core.eval.report.Result;
@@ -94,16 +94,16 @@ public class OpenNlpPosTaggerTrainerTest
 
         Result results = EvalUtil.dumpResults(targetFolder, expected, actual);
         
-        assertEquals(0.760157, results.getFscore(), 0.0001);
-        assertEquals(0.755387, results.getPrecision(), 0.0001);
-        assertEquals(0.764988, results.getRecall(), 0.0001);
+        assertEquals(0.753489, results.getFscore(), 0.0001);
+        assertEquals(0.748760, results.getPrecision(), 0.0001);
+        assertEquals(0.758277, results.getRecall(), 0.0001);
     }
     
     @Before
     public void setup() throws IOException
     {
-        DatasetLoader loader = new DatasetLoader(DkproTestContext.getCacheFolder());
-        ds = loader.loadEnglishGUMCorpus();
+        DatasetFactory loader = new DatasetFactory(DkproTestContext.getCacheFolder());
+        ds = loader.load("gum-en-conll-2.2.0");
     }    
     
     @Rule
