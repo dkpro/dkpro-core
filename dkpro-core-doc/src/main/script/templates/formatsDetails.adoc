@@ -1,5 +1,5 @@
 <% 
-import Util;
+import de.tudarmstadt.ukp.dkpro.core.doc.Util;
 import static groovy.json.StringEscapeUtils.escapeJava;
 import org.apache.commons.lang3.StringUtils;
 import groovy.transform.Field;

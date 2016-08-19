@@ -1,0 +1,45 @@
+// Copyright 2016
+// Ubiquitous Knowledge Processing (UKP) Lab
+// Technische Universität Darmstadt
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+// http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+    
+= DKPro Core™ Dataset Reference
+:Author: The DKPro Core Team
+:toc-title: Datasets
+:docinfo:
+
+The document provides information about the datasets available through the DKPro Core
+`DatasetFactory` class. 
+
+The factory automatically downloads the datasets. It maintains a local
+cache to avoid redundant downloads. Datasets are validated against checksums stored in the dataset
+descriptions included with DKPro Core to ensure the descriptions match the datasets. While we try
+to maintain a good quality of the descriptions, they may not be perfect. Please use the *Edit on
+GitHub* links next to the descriptions in the document below or the 
+link:https://github.com/dkpro/dkpro-core/issues[issue tracker] to report/fix any problems you may
+notice.
+
+[discrete]
+==== ... more datasets?
+
+This is *not* an exhaustive list of the datasets supported by DKPro Core. Any dataset in a format
+supported by DKPro Core can be used. For more details, refer to the 
+<<format-reference.adoc#,Format Reference>>. If you are missing any datasets from the list, please
+tell us by opening an issue in our link:https://github.com/dkpro/dkpro-core/issues[issue tracker].
+
+== Overview
+include::{generated-dir}datasetsOverview.adoc[]
+
+== Datasets
+include::{generated-dir}datasetsDetails.adoc[]

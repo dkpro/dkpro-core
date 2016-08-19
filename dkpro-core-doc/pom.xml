@@ -24,73 +24,109 @@
     <version>1.9.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.doc-asl</artifactId>
   <name>DKPro Core ASL - Documentation</name>
   <properties>
     <maven.deploy.skip>true</maven.deploy.skip>
+    <groovy.version>2.4.7</groovy.version>
   </properties>
+  <dependencies>
+  <!--  
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-json</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-templates</artifactId>
+    </dependency>
+    -->
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-all</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.uima</groupId>
+      <artifactId>uimafit-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-configuration</groupId>
+      <artifactId>commons-configuration</artifactId>
+      <version>1.10</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.yaml</groupId>
+      <artifactId>snakeyaml</artifactId>
+    </dependency>
+  </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.codehaus.groovy</groupId>
+        <artifactId>groovy-all</artifactId>
+        <version>${groovy.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.groovy</groupId>
+        <artifactId>groovy</artifactId>
+        <version>${groovy.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.groovy</groupId>
+        <artifactId>groovy-json</artifactId>
+        <version>${groovy.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.groovy</groupId>
+        <artifactId>groovy-templates</artifactId>
+        <version>${groovy.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <build>
     <plugins>
       <plugin>
-        <groupId>org.codehaus.gmaven</groupId>
-        <artifactId>groovy-maven-plugin</artifactId>
-        <version>2.0</version>
+        <groupId>org.codehaus.gmavenplus</groupId>
+        <artifactId>gmavenplus-plugin</artifactId>
+        <version>1.5</version>
         <executions>
           <execution>
             <id>generate-documentation</id>
-            <phase>generate-resources</phase>
+            <phase>process-classes</phase>
             <goals>
               <goal>execute</goal>
             </goals>
             <configuration>
-              <source>${project.basedir}/src/main/script/generateDocumentation.groovy</source>
-              <scriptpath>
-                <path>${project.basedir}/src/main/script</path>
-              </scriptpath>
+              <scripts>
+                <script>file:///${project.basedir}/src/main/script/generateDocumentation.groovy</script>
+              </scripts>
             </configuration>
           </execution>
           <execution>
             <id>pom-sanity-check</id>
-            <phase>generate-resources</phase>
+            <phase>process-classes</phase>
             <goals>
               <goal>execute</goal>
             </goals>
             <configuration>
-              <source>${project.basedir}/src/main/script/pomSanityCheck.groovy</source>
-              <scriptpath>
-                <path>${project.basedir}/src/main/script</path>
-              </scriptpath>
+              <scripts>
+                <script><![CDATA[
+                de.tudarmstadt.ukp.dkpro.core.doc.internal.ContextHolder.setBinding(binding);
+                de.tudarmstadt.ukp.dkpro.core.doc.PomSanityCheck.main();
+                ]]></script>
+              </scripts>
             </configuration>
           </execution>
         </executions>
-        <dependencies>
-          <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>2.4.5</version>
-          </dependency>
-          <dependency>
-            <groupId>org.apache.uima</groupId>
-            <artifactId>uimafit-core</artifactId>
-            <version>${uimafit.version}</version>
-          </dependency>
-          <dependency>
-            <groupId>commons-configuration</groupId>
-            <artifactId>commons-configuration</artifactId>
-            <version>1.10</version>
-          </dependency>
-          <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.4</version>
-          </dependency>
-          <dependency>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>1.16</version>
-          </dependency>
-        </dependencies>
       </plugin>
       <plugin>
         <groupId>org.asciidoctor</groupId>
@@ -98,7 +134,7 @@
         <executions>
           <execution>
             <id>user-guide-html</id>
-            <phase>generate-resources</phase>
+            <phase>prepare-package</phase>
             <goals>
               <goal>process-asciidoc</goal>
             </goals>
@@ -119,7 +155,7 @@
           <!--
             <execution>
             <id>user-guide-pdf</id>
-            <phase>generate-resources</phase>
+            <phase>prepare-package</phase>
             <goals>
             <goal>process-asciidoc</goal>
             </goals>
@@ -137,7 +173,7 @@
           -->
           <execution>
             <id>developer-guide-html</id>
-            <phase>generate-resources</phase>
+            <phase>prepare-package</phase>
             <goals>
               <goal>process-asciidoc</goal>
             </goals>
@@ -157,7 +193,7 @@
           </execution>
           <execution>
             <id>typesystem-reference-html</id>
-            <phase>generate-resources</phase>
+            <phase>prepare-package</phase>
             <goals>
               <goal>process-asciidoc</goal>
             </goals>
@@ -177,7 +213,7 @@
           </execution>
           <execution>
             <id>tagset-reference-html</id>
-            <phase>generate-resources</phase>
+            <phase>prepare-package</phase>
             <goals>
               <goal>process-asciidoc</goal>
             </goals>
@@ -197,7 +233,7 @@
           </execution>
           <execution>
             <id>component-reference-html</id>
-            <phase>generate-resources</phase>
+            <phase>prepare-package</phase>
             <goals>
               <goal>process-asciidoc</goal>
             </goals>
@@ -217,7 +253,7 @@
           </execution>
           <execution>
             <id>format-reference-html</id>
-            <phase>generate-resources</phase>
+            <phase>prepare-package</phase>
             <goals>
               <goal>process-asciidoc</goal>
             </goals>
@@ -236,8 +272,28 @@
             </configuration>
           </execution>
           <execution>
+            <id>dataset-reference-html</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>process-asciidoc</goal>
+            </goals>
+            <configuration>
+              <backend>html5</backend>
+              <sourceHighlighter>coderay</sourceHighlighter>
+              <sourceDocumentName>dataset-reference.adoc</sourceDocumentName>
+              <imagesDir>./dataset-reference/images</imagesDir>
+              <doctype>book</doctype>
+              <attributes>
+                <toc>left</toc>
+                <include-dir>${project.basedir}/src/main/asciidoc/dataset-reference/</include-dir>
+                <source-dir>${project.basedir}/../</source-dir>
+                <generated-dir>${project.basedir}/target/generated-adoc/</generated-dir>
+              </attributes>
+            </configuration>
+          </execution>
+          <execution>
             <id>model-reference-html</id>
-            <phase>generate-resources</phase>
+            <phase>prepare-package</phase>
             <goals>
               <goal>process-asciidoc</goal>
             </goals>
@@ -290,4 +346,123 @@
       </plugins>
     </pluginManagement>
   </build>
+  <profiles>
+    <profile>
+      <id>groovy</id>
+      <activation>
+        <file>
+          <exists>src/main/groovy</exists>
+        </file>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.gmavenplus</groupId>
+            <artifactId>gmavenplus-plugin</artifactId>
+            <version>1.5</version>
+            <executions>
+              <execution>
+                <id>build</id>
+                <goals>
+                  <goal>addSources</goal>
+                  <goal>addTestSources</goal>
+                  <goal>generateStubs</goal>
+                  <goal>compile</goal>
+                  <goal>testGenerateStubs</goal>
+                  <goal>testCompile</goal>
+                  <goal>removeStubs</goal>
+                  <goal>removeTestStubs</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>com.bluetrainsoftware.maven</groupId>
+            <artifactId>groovydoc-maven-plugin</artifactId>
+            <version>1.3</version>
+            <executions>
+              <execution>
+                <id>attach-docs</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>attach-docs</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+        <pluginManagement>
+          <plugins>
+            <!--
+              - This plugin's configuration is used to store Eclipse m2e settings only.
+              - It has no influence on the Maven build itself.
+            -->
+            <plugin>
+              <groupId>org.eclipse.m2e</groupId>
+              <artifactId>lifecycle-mapping</artifactId>
+              <version>1.0.0</version>
+              <configuration>
+                <lifecycleMappingMetadata>
+                  <pluginExecutions>
+                    <pluginExecution>
+                      <pluginExecutionFilter>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctor-maven-plugin</artifactId>
+                        <versionRange>[1.5.3,)</versionRange>
+                        <goals>
+                          <goal>process-asciidoc</goal>
+                        </goals>
+                      </pluginExecutionFilter>
+                      <action>
+                        <ignore />
+                      </action>
+                    </pluginExecution>
+                    <pluginExecution>
+                      <pluginExecutionFilter>
+                        <groupId>org.codehaus.gmavenplus</groupId>
+                        <artifactId>gmavenplus-plugin</artifactId>
+                        <versionRange>[1.5,)</versionRange>
+                        <goals>
+                          <goal>execute</goal>
+                        </goals>
+                      </pluginExecutionFilter>
+                      <action>
+                        <ignore />
+                      </action>
+                    </pluginExecution>
+                    <pluginExecution>
+                      <pluginExecutionFilter>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-enforcer-plugin</artifactId>
+                        <versionRange>[1,)</versionRange>
+                        <goals>
+                          <goal>enforce</goal>
+                        </goals>
+                      </pluginExecutionFilter>
+                      <action>
+                        <ignore />
+                      </action>
+                    </pluginExecution>
+                    <pluginExecution>
+                      <pluginExecutionFilter>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-remote-resources-plugin</artifactId>
+                        <versionRange>[1.4,)</versionRange>
+                        <goals>
+                          <goal>process</goal>
+                        </goals>
+                      </pluginExecutionFilter>
+                      <action>
+                        <ignore />
+                      </action>
+                    </pluginExecution>
+                  </pluginExecutions>
+                </lifecycleMappingMetadata>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
+  </profiles>
 </project>

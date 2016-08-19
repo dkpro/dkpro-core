@@ -1,5 +1,5 @@
 <%
-import Util;
+import de.tudarmstadt.ukp.dkpro.core.doc.Util;
 import java.util.regex.Pattern;
 
 def escape(text) 

@@ -1,4 +1,23 @@
-import java.text.BreakIterator;
+/*
+ * Copyright 2016
+ * Ubiquitous Knowledge Processing (UKP) Lab
+ * Technische Universität Darmstadt
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package de.tudarmstadt.ukp.dkpro.core.doc
+
+import java.text.BreakIterator
 
 class Util {
     static def editOnGithub(url)
@@ -22,7 +41,7 @@ class Util {
     static def typeLink(name)
     {
         if (name.startsWith('uima.cas.')) {
-          return name.substring(9);
+          return name.substring(9)
         }
         if (name.startsWith('uima.tcas.')) {
           return "${name.tokenize('.')[-1]}"
@@ -52,7 +71,7 @@ class Util {
 
     static def formatLink(format)
     {
-        return "<<format-reference.adoc#format-${ format.name },${ format.name }>>";
+        return "<<format-reference.adoc#format-${ format.name },${ format.name }>>"
     }
 
     static def preparePassthrough(description)
@@ -65,33 +84,33 @@ class Util {
                 !description.contains('<ul>') &&
                 !description.contains('<table>')
             ) {
-                description = "<p>${description}</p>";
+                description = "<p>${description}</p>"
             }
             if (!description.startsWith('<p>') && description.contains('<p>')) {
-                def i = description.indexOf('<p>');
-                description = "<p>${description[0..i-1]}</p>${description[i..-1]}";
+                def i = description.indexOf('<p>')
+                description = "<p>${description[0..i-1]}</p>${description[i..-1]}"
             }
-            description = "<div class='paragraph'>${description}</div>";
+            description = "<div class='paragraph'>${description}</div>"
         }
-        return description;
+        return description
     }
     
     static def shortDesc(description) {
         if (description) {
-            BreakIterator tokenizer = BreakIterator.getSentenceInstance(Locale.US);
-            tokenizer.setText(description);
-            def start = tokenizer.first();
-            def end = tokenizer.next();
+            BreakIterator tokenizer = BreakIterator.getSentenceInstance(Locale.US)
+            tokenizer.setText(description)
+            def start = tokenizer.first()
+            def end = tokenizer.next()
             if (start > -1 && end > -1) {
-                description = description.substring(start, end);
+                description = description.substring(start, end)
             }
             description = description
                 // Remove HTML tags in tables
                 .replaceAll(/<.+?>/, '') 
                 // Make sure the text doesn't cluse the passthrough block
                 .replaceAll(']', '{endsb}')
-                .trim();
+                .trim()
         }
-        return description ? "pass:[${description}]" : '__No description__';
+        return description ? "pass:[${description}]" : '__No description__'
     }
 }
