@@ -121,7 +121,6 @@
     <dependency>
       <groupId>org.apache.uima</groupId>
       <artifactId>uimafit-cpe</artifactId>
-      <version>${uimafit.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
