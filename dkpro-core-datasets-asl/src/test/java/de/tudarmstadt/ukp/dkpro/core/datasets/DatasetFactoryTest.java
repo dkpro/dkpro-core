@@ -33,6 +33,7 @@ import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class DatasetFactoryTest
 {
+    @Ignore("Used at times for offline testing / development")
     @Test
     public void testOne()
         throws Exception
@@ -50,18 +51,7 @@ public class DatasetFactoryTest
 //        }
     }
     
-    @Ignore
-    @Test
-    public void testListContents()
-        throws Exception
-    {
-        DatasetFactory df = new DatasetFactory();
-        for (String id : df.listIds()) {
-            DatasetDescription ds = df.getDescription(id);
-        }
-    }
-
-    @Ignore
+    @Ignore("Used at times for offline testing / development")
     @Test
     public void testLoadAll()
         throws Exception
@@ -82,7 +72,7 @@ public class DatasetFactoryTest
         Path cache = testContext.getTestOutputFolder().toPath();
         
         DatasetFactory df = new DatasetFactory(cache);
-        Dataset ds1 = df.load("perseus-gr-2.1");
+        Dataset ds1 = df.load("perseus-el-2.1");
         assertDatasetOk(ds1);
         Dataset ds2 = df.load("perseus-la-2.1");
         assertDatasetOk(ds2);
@@ -106,7 +96,7 @@ public class DatasetFactoryTest
         Path cache = testContext.getTestOutputFolder().toPath();
         
         DatasetFactory df = new DatasetFactory(cache);
-        Dataset ds = df.load("brownCorpus-TEI-XML");
+        Dataset ds = df.load("brown-en-teixml");
         assertDatasetOk(ds);
         
         assertFalse(Files.exists(cache.resolve("brownCorpus-TEI-XML/brown_tei/Corpus.xml")));
@@ -119,7 +109,7 @@ public class DatasetFactoryTest
         Path cache = testContext.getTestOutputFolder().toPath();
         
         DatasetFactory df = new DatasetFactory(cache);
-        Dataset ds = df.load("gum");
+        Dataset ds = df.load("gum-en-conll-2.2.0");
         assertDatasetOk(ds);
         
         assertTrue(ds.getTestFiles().length > 0);
