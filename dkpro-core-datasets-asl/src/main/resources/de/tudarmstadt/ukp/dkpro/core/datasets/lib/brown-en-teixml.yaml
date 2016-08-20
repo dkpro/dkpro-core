@@ -20,8 +20,16 @@ description: |
     http://www.hit.uib.no/icame/brown/bcm.html
     
     as distributed with NLTK (version 0.9.2)
-    
+
     (This description has been taken from the README file included with the corpus).
+    
+    NOTE: We did not find license information included with this dataset. One might assume the TEI
+          version of the Brown Corpus is provided under the same conditions as the original Brown
+          Corpus. 
+    
+licenses:
+  - name: Brown Corpus License (?)
+    url: http://clu.uni.no/icame/brown/bcm.html
 
 artifacts:
   LICENSE.txt:
@@ -36,4 +44,5 @@ artifacts:
 roles:
   licenses:
     - LICENSE.txt
-        
+  data:
+    - "brown/*.xml"

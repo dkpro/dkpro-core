@@ -26,6 +26,7 @@ import java.util.Map;
 import de.tudarmstadt.ukp.dkpro.core.datasets.ArtifactDescription;
 import de.tudarmstadt.ukp.dkpro.core.datasets.DatasetDescription;
 import de.tudarmstadt.ukp.dkpro.core.datasets.DatasetFactory;
+import de.tudarmstadt.ukp.dkpro.core.datasets.LicenseDescription;
 
 public class DatasetDescriptionImpl
     implements DatasetDescription
@@ -38,17 +39,21 @@ public class DatasetDescriptionImpl
     @Deprecated
     private String id;
 
+    // Coordinates - these fields form the "primary key" of the dataset
     private String groupId;
     private String datasetId;
     private String version;
     private String language;
     private String mediaType;
 
+    // Informative fields
     private String name;
     private String attribution;
     private String description;
     private String url;
+    private String encoding;
 
+    private List<LicenseDescription> licenses;
     private Map<String, List<String>> roles;
     private Map<String, ArtifactDescription> artifacts;
 
@@ -200,5 +205,25 @@ public class DatasetDescriptionImpl
     public void setDatasetId(String aDatasetId)
     {
         datasetId = aDatasetId;
+    }
+
+    public List<LicenseDescription> getLicenses()
+    {
+        return licenses;
+    }
+
+    public void setLicenses(List<LicenseDescription> aLicenses)
+    {
+        licenses = aLicenses;
+    }
+
+    public String getEncoding()
+    {
+        return encoding;
+    }
+
+    public void setEncoding(String aEncoding)
+    {
+        encoding = aEncoding;
     }
 }

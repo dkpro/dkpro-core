@@ -56,6 +56,7 @@ import org.yaml.snakeyaml.constructor.Constructor;
 import de.tudarmstadt.ukp.dkpro.core.datasets.internal.ActionDescriptionImpl;
 import de.tudarmstadt.ukp.dkpro.core.datasets.internal.ArtifactDescriptionImpl;
 import de.tudarmstadt.ukp.dkpro.core.datasets.internal.DatasetDescriptionImpl;
+import de.tudarmstadt.ukp.dkpro.core.datasets.internal.LicenseDescriptionImpl;
 import de.tudarmstadt.ukp.dkpro.core.datasets.internal.LoadedDataset;
 import de.tudarmstadt.ukp.dkpro.core.datasets.internal.actions.Action_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.datasets.internal.actions.Explode;
@@ -150,6 +151,7 @@ public class DatasetFactory
         Constructor datasetConstructor = new Constructor(DatasetDescriptionImpl.class);
         TypeDescription datasetDesc = new TypeDescription(DatasetDescriptionImpl.class);
         datasetDesc.putMapPropertyType("artifacts", String.class, ArtifactDescriptionImpl.class);
+        datasetDesc.putListPropertyType("licenses", LicenseDescriptionImpl.class);
         datasetConstructor.addTypeDescription(datasetDesc);
         TypeDescription artifactDesc = new TypeDescription(ArtifactDescriptionImpl.class);
         artifactDesc.putListPropertyType("actions", ActionDescriptionImpl.class);

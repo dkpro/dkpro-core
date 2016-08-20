@@ -25,10 +25,14 @@ The document provides information about the datasets available through the DKPro
 The factory automatically downloads the datasets. It maintains a local
 cache to avoid redundant downloads. Datasets are validated against checksums stored in the dataset
 descriptions included with DKPro Core to ensure the descriptions match the datasets. While we try
-to maintain a good quality of the descriptions, they may not be perfect. Please use the *Edit on
-GitHub* links next to the descriptions in the document below or the 
+to maintain a good quality of the descriptions, they may not be perfect.footnoteref:[attributionDisclaimer,
+Provided attribution information is indicative and typically for the annotations. Additional attributions may be due, e.g.
+for the underlying texts.] footnoteref:[licenseDisclaimer, Provided license information is indicative and 
+typically for the annotations. Additional license may apply, e.g. for the underlying texts.]
+Please use the *Edit on GitHub* links next to the descriptions in the document below or the 
 link:https://github.com/dkpro/dkpro-core/issues[issue tracker] to report/fix any problems you may
 notice.
+
 
 [discrete]
 ==== ... more datasets?

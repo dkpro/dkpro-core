@@ -22,6 +22,10 @@ description: |
 
   (This description has been sourced from the dataset website).
 
+licenses:
+  - name: CC-BY 4.0
+    url: http://creativecommons.org/licenses/by/4.0/
+
 artifacts:
   LICENSE.txt:
     url: "https://creativecommons.org/licenses/by/4.0/legalcode.txt"

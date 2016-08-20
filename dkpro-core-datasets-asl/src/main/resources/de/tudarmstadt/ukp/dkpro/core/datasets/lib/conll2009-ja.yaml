@@ -5,7 +5,7 @@ language: ja
 mediaType: text/x.org.dkpro.conll-2009
 
 name: CoNLL-2009 Shared Task (Japanese)
-url: http://ufal.mff.cuni.cz/conll2009-st/data/traindev.html
+url: http://ufal.mff.cuni.cz/conll2009-st/
 attribution: Daisuke Kawahara
 description: |
   This file contains the basic information regarding the Japanese corpus
@@ -18,7 +18,7 @@ description: |
   at http://nlp.kuee.kyoto-u.ac.jp/nl-resource/corpus-e.html.
   
   (This description has been sourced from the README file included with the corpus).
-  
+
 artifacts:
   data.zip:
     url: "http://ufal.mff.cuni.cz/conll2009-st/data/CoNLL2009-ST-Japanese-traindevA.zip"

@@ -18,6 +18,12 @@ description: |
   
   (This description has been sourced from the README file included with the corpus).
 
+licenses:
+  - name: TIGER Corpus License
+    url: http://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora/TIGERCorpus/license/index.html
+  - name: SALSA Corpus License
+    url: http://www.coli.uni-saarland.de/projects/salsa/corpus/doc/license.html
+
 artifacts:
   data.zip:
     url: "http://ufal.mff.cuni.cz/conll2009-st/data/CoNLL2009-ST-German-traindevB.zip"

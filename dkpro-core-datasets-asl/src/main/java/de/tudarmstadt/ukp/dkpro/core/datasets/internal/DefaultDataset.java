@@ -83,7 +83,7 @@ public class DefaultDataset
     }
 
     @Override
-    public File[] getAllFiles()
+    public File[] getDataFiles()
     {
         Set<File> all = new HashSet<>();
         all.addAll(asList(getTrainingFiles()));

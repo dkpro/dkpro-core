@@ -10,6 +10,10 @@ attribution: Wolfgang Menzel
 description: | 
   Contains annotated text from the German technical news website www.heise.de.
 
+licenses:
+  - name: CC-BY-SA 4.0
+    url: http://creativecommons.org/licenses/by-sa/4.0/
+
 artifacts:
   LICENSE.txt:
     url: https://creativecommons.org/licenses/by-sa/4.0/legalcode.txt

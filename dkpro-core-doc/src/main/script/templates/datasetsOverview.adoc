@@ -1,7 +1,7 @@
 .Datasets (${datasets.size()})
-[options="header", cols="4,1,1"]
+[options="header", cols="4,1,1,1"]
 |====
-|Dataset|Version|Language
+|Dataset|Version|Language|License footnoteref:[licenseDisclaimer]
 
 <% 
 datasets.each { key, dataset -> 
@@ -9,6 +9,18 @@ datasets.each { key, dataset ->
 | <<dataset-${ key },${ dataset.name }>>
 | ${dataset.version ?: '_unknown_'}
 | ${dataset.language ?: '_unknown_'}
+| <% 
+  if (dataset.licenses) {
+    switch (dataset.licenses.size()) {
+    case 0: print "__unknown__"; break;
+    case 1: print "__${dataset.licenses[0].name}__"; break;
+    default: print "__multiple__"; break;
+    }
+  }
+  else {
+    print "__unknown__"
+  }
+  %>
 <% 
 } // datasets 
 %>

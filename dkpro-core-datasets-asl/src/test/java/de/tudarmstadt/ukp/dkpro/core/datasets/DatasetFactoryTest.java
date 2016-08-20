@@ -42,7 +42,7 @@ public class DatasetFactoryTest
         
         DatasetFactory df = new DatasetFactory(cache);
         {
-            Dataset ds = df.load("perseus-el-2.1");
+            Dataset ds = df.load("gum-en-conll-2.2.0");
             assertDatasetOk(ds);
         }
 //        {
@@ -118,6 +118,9 @@ public class DatasetFactoryTest
 
     private void assertDatasetOk(Dataset ds)
     {
+        System.out.printf("Dataset    : %s%n", ds.getName());
+        System.out.printf("Data files : %d%n", ds.getDataFiles().length);
+        
         assertNotNull("Name not set", ds.getName());
         assertNotNull("Language not set", ds.getLanguage());
         assertNullOrExists(ds.getTrainingFiles());

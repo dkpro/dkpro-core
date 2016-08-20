@@ -6,12 +6,18 @@ mediaType: text/x.org.dkpro.conll-2000
 
 name: AQMAR Arabic Wikipedia Named Entity Corpus
 url: http://www.cs.cmu.edu/~ark/ArabicNER/
-attribution: By Behrang Mohit, Nathan Schneider, Rishav Bhowmick, Kemal Oflazer, and Noah Smith as part of the AQMAR project.
 description: |
   73,853 tokens in 28 Arabic Wikipedia articles hand-annotated for named entities.
   
   (This description has been partially copied from the corpus website).
 
+attribution: | 
+  By Behrang Mohit, Nathan Schneider, Rishav Bhowmick, Kemal Oflazer, and Noah Smith as part of the
+  AQMAR project.
+
+licenses:
+  - name: CC-BY-SA 3.0
+    url: https://creativecommons.org/licenses/by-sa/3.0/
 
 artifacts:
   LICENSE.txt:
@@ -29,4 +35,6 @@ artifacts:
 roles:
   licenses:
     - LICENSE.txt
+  data:
+    - "data/*.txt"
     

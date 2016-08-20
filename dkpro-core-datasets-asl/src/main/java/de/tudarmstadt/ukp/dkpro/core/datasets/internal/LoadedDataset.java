@@ -20,13 +20,19 @@ package de.tudarmstadt.ukp.dkpro.core.datasets.internal;
 import static java.util.Arrays.asList;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import de.tudarmstadt.ukp.dkpro.core.datasets.ArtifactRole;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.TrueFileFilter;
+
+import de.tudarmstadt.ukp.dkpro.core.datasets.FileRole;
+import de.tudarmstadt.ukp.dkpro.core.datasets.internal.util.AntFileFilter;
 import de.tudarmstadt.ukp.dkpro.core.datasets.Dataset;
 import de.tudarmstadt.ukp.dkpro.core.datasets.DatasetDescription;
 import de.tudarmstadt.ukp.dkpro.core.datasets.DatasetFactory;
@@ -57,54 +63,72 @@ public class LoadedDataset
     }
 
     @Override
-    public File[] getAllFiles()
+    public File[] getDataFiles()
     {
         Set<File> all = new HashSet<>();
-        all.addAll(asList(getTrainingFiles()));
-        all.addAll(asList(getTestFiles()));
-        all.addAll(asList(getDevelopmentFiles()));
+        
+        // Collect all data files
+        all.addAll(asList(getFiles(FileRole.DATA)));
+
+        // If no files are marked as data files, try aggregating over test/dev/train sets
+        if (all.isEmpty()) {
+            all.addAll(asList(getTrainingFiles()));
+            all.addAll(asList(getTestFiles()));
+            all.addAll(asList(getDevelopmentFiles()));
+        }
+        
+        // Sort to ensure stable order
         File[] result = all.toArray(all.toArray(new File[all.size()]));
         Arrays.sort(result, (a, b) -> { return a.getPath().compareTo(b.getPath()); });
+        
         return result;
     }
     
     @Override
     public File[] getLicenseFiles()
     {
-        return getFiles(ArtifactRole.LICENSE);
+        return getFiles(FileRole.LICENSE);
     }
 
     @Override
     public File[] getTrainingFiles()
     {
-        return getFiles(ArtifactRole.TRAINING);
+        return getFiles(FileRole.TRAINING);
     }
 
     @Override
     public File[] getTestFiles()
     {
-        return getFiles(ArtifactRole.TESTING);
+        return getFiles(FileRole.TESTING);
     }
 
     @Override
     public File[] getDevelopmentFiles()
     {
-        return getFiles(ArtifactRole.DEVELOPMENT);
+        return getFiles(FileRole.DEVELOPMENT);
     }
 
     private File[] getFiles(String aRole)
     {
         List<File> files = new ArrayList<>();
         
-        List<String> locations = description.getRoles().get(aRole);
-        if (locations == null) {
+        List<String> patterns = description.getRoles().get(aRole);
+        if (patterns == null) {
             return new File[0];
         }
         
-        for (String location : locations) {
-            files.add(factory.resolve(description).resolve(location).toFile());
+        for (String pattern : patterns) {
+            Path baseDir = factory.resolve(description);
+            
+            Collection<File> matchedFiles = FileUtils.listFiles(baseDir.toFile(),
+                    new AntFileFilter(baseDir, asList(pattern), null), TrueFileFilter.TRUE);
+            
+            files.addAll(matchedFiles);
         }
         
-        return files.toArray(new File[files.size()]);
+        File[] all = files.toArray(new File[files.size()]);
+        Arrays.sort(all, (File a, File b) -> { return a.getName().compareTo(b.getName()); });
+        
+        return all;
     }
 }

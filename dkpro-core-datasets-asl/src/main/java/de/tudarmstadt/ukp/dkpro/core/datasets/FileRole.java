@@ -17,14 +17,35 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.datasets;
 
-public final class ArtifactRole
+public final class FileRole
 {
+    /**
+     * File contains licensing information.
+     */
     public static final String LICENSE = "licenses";
+    
+    /**
+     * File is part of the data. This is mainly meant for datasets which do not make a distinction
+     * between training, testing and development data.
+     */
+    public static final String DATA = "data";
+    
+    /**
+     * File is part of the training set.
+     */
     public static final String TRAINING = "training";
+    
+    /**
+     * File is part of the test set.
+     */
     public static final String TESTING = "testing";
+
+    /**
+     * File is part of the development set.
+     */
     public static final String DEVELOPMENT = "development";
  
-    private ArtifactRole() {
+    private FileRole() {
         // No instances
     }
 }

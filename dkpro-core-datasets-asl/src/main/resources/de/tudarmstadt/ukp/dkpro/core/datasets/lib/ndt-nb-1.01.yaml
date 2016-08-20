@@ -15,6 +15,10 @@ description: |
 
   (This description has been sourced from the dataset website).
 
+licenses:
+  - name: CC0 1.0
+    url: http://creativecommons.org/publicdomain/zero/1.0/
+
 artifacts:
   LICENSE_NDT.txt:
     url: http://www.nb.no/sbfil/dok/LICENSE_NDT.txt

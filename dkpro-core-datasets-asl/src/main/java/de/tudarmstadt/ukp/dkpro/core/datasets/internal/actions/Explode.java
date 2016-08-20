@@ -34,12 +34,11 @@ import org.apache.commons.compress.archivers.ArchiveStreamFactory;
 import org.apache.commons.compress.compressors.CompressorException;
 import org.apache.commons.compress.compressors.CompressorStreamFactory;
 import org.apache.commons.io.FilenameUtils;
-import org.springframework.util.AntPathMatcher;
-
 import de.tudarmstadt.ukp.dkpro.core.datasets.ActionDescription;
 import de.tudarmstadt.ukp.dkpro.core.datasets.ArtifactDescription;
 import de.tudarmstadt.ukp.dkpro.core.datasets.DatasetDescription;
 import de.tudarmstadt.ukp.dkpro.core.datasets.internal.DatasetDescriptionImpl;
+import de.tudarmstadt.ukp.dkpro.core.datasets.internal.util.AntFileFilter;
 
 public class Explode
     extends Action_ImplBase
@@ -76,12 +75,12 @@ public class Explode
         // We always extract archives into a subfolder. Figure out the name of the folder.
         String base = getBase(aArchive.getFileName().toString());
         
-        AntPathMatcher matcher = new AntPathMatcher();
-        
         Map<String, Object> cfg = aAction.getConfiguration();
         List<String> includes = coerceToList(cfg.get("includes"));
         List<String> excludes = coerceToList(cfg.get("excludes"));
         int strip = cfg.containsKey("strip") ? (int) cfg.get("strip") : 0;
+        
+        AntFileFilter filter = new AntFileFilter(includes, excludes);
         
         ArchiveEntry entry = null;
         while ((entry = aArchiveStream.getNextEntry()) != null) {
@@ -108,25 +107,8 @@ public class Explode
             
             Path out = aTarget.resolve(base).resolve(name);
             
-            // If includes are set, we only consider stuff that is included
-            if (!skip && includes != null) {
+            if (!skip && !filter.accept(name)) {
                 skip = true;
-                for (String include : includes) {
-                    if (matcher.match(include, name)) {
-                        skip = false;
-                        break;
-                    }
-                }
-            }
-            
-            // If excludes are set, they are applied after any includes
-            if (!skip && excludes != null) {
-                for (String exclude : excludes) {
-                    if (matcher.match(exclude, name)) {
-                        skip = true;
-                        break;
-                    }
-                }
             }
             
             if (!skip) {

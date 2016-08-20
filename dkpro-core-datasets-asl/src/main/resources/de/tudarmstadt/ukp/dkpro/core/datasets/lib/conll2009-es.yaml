@@ -15,6 +15,16 @@ description: |
 
   (This description has been partially copied from the README file included with the corpus).
 
+  NOTE: The description states that the data was extracted from the Ancora corpus, but it does not
+        say from which version. One might assume it comes from AnCora Spanish dependency 1.0.1. However,
+        this version does not include a license file. The next version is AnCora Catalan 2.0.0 which
+        was released under GPL 3.0. Thus, one might conclude that this data can also be
+        used under these conditions.
+
+licenses:
+  - name: GPL 3.0 (?)
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+
 artifacts:
   data.zip:
     url: "http://ufal.mff.cuni.cz/conll2009-st/data/CoNLL2009-ST-Spanish-traindevB.zip"

@@ -18,6 +18,20 @@ description: |
   
   (This description has been sourced from the dataset website).
   
+licenses:
+  - name: CC-BY 2.5
+    url: http://creativecommons.org/licenses/by/2.5/
+    comment: "Wikinews texts (Source: https://en.wikinews.org/wiki/Wikinews:Copyright)"
+  - name: CC-BY-SA 3.0
+    url: https://creativecommons.org/licenses/by-sa/3.0/
+    comment: "WikiVoyage texts (Source: https://wikimediafoundation.org/wiki/Terms_of_Use)"
+  - name: CC-BY-NC-SA 3.0
+    url: http://creativecommons.org/licenses/by-nc-sa/3.0/
+    comment: "WikiVoyage texts (Source: http://www.wikihow.com/wikiHow:Creative-Commons)"
+  - name: CC-BY 4.0
+    url: https://creativecommons.org/licenses/by/4.0/
+    comment: "Annotations (Source: https://corpling.uis.georgetown.edu/gum/)"
+
 artifacts:
   gum.zip:
     url: "https://github.com/amir-zeldes/gum/archive/V2.2.0.zip"
@@ -36,4 +50,5 @@ artifacts:
 roles:
   licenses:
     - gum/LICENSE.txt
-        
+  data:
+    - "**/dep/*.conll10"

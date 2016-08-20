@@ -5,7 +5,7 @@ version: 20000221
 language: en
 mediaType: text/x.org.dkpro.conll-2000
 
-name: CoNLL-2000 NER Shared Task Data (English)
+name: CoNLL-2000 Chunking Shared Task Data (English)
 url: http://www.cnts.ua.ac.be/conll2000/chunking/
 description: |
   This is the data from the CoNLL-2000 shared task on text chunking.
@@ -17,11 +17,18 @@ description: |
    
   (This description has been partially copied from the corpus website).
   
+  NOTE: We did not find any license information for this dataset. However, as the texts appear to
+        come from the WSJ corpus, probably the WSJ corpus license applies here.
+
+licenses:
+  - name: WSJ Corpus License (?)
+
 roles:
   training:
     - train.txt.gz
   testing: 
     - test.txt.gz
+
 artifacts:
   train.txt.gz:
     url: "http://www.cnts.ua.ac.be/conll2000/chunking/train.txt.gz"

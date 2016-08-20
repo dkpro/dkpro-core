@@ -17,21 +17,12 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.datasets;
 
-import java.io.File;
-
-public interface Dataset
+public interface LicenseDescription
 {
+
     String getName();
-    
-    String getLanguage();
-    
-    File[] getDataFiles();
-    
-    File[] getLicenseFiles();
-    
-    File[] getTrainingFiles();
-    
-    File[] getTestFiles();
-    
-    File[] getDevelopmentFiles();
+
+    String getUrl();
+
+    String getComment();
 }
