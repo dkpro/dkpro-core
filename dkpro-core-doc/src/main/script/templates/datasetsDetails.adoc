@@ -44,11 +44,11 @@ ${dataset.description ?: ''}
 <%
   dataset.artifacts.each { artifactKey, artifact ->
     if (artifact.text) {
-      println "| ${artifact.name}"
+      println "| ${artifactKey}"
       println "| __generated__"
     }
     else {
-      println "| link:${artifact.url}[${artifact.name}]"
+      println "| link:${artifact.url}[${artifactKey}]"
       println "| ${artifact.sha1}"
     }
   }

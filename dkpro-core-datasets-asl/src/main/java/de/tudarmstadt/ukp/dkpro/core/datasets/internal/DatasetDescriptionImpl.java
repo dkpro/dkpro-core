@@ -44,7 +44,6 @@ public class DatasetDescriptionImpl
     private String datasetId;
     private String version;
     private String language;
-    private String mediaType;
 
     // Informative fields
     private String name;
@@ -52,6 +51,7 @@ public class DatasetDescriptionImpl
     private String description;
     private String url;
     private String encoding;
+    private String mediaType;
 
     private List<LicenseDescription> licenses;
     private Map<String, List<String>> roles;

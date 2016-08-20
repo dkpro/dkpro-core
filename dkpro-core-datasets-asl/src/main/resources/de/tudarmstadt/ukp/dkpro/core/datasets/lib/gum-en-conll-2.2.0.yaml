@@ -1,5 +1,5 @@
 groupId: org.dkpro.core.datasets.gum
-datasetId: gum
+datasetId: gum-dep
 version: 2.2.0
 language: en
 mediaType: text/x.org.dkpro.conll-2006
@@ -15,6 +15,11 @@ description: |
   corpus of English texts from four text types (interviews, news, travel guides, instructional
   texts). The corpus is created as part of the course LING-367 (Computational Corpus Linguistics) at
   Georgetown University. For more details see: http://corpling.uis.georgetown.edu/gum.
+  
+  The dep layer gives a dependency syntax analysis according to the Stanford Dependencies manual.
+  This layer was intially produced using the Stanford Parser and then manually corrected using the
+  Arborator collaborative syntax annotation software. For the annotation project we used
+  non-collapsed dependencies, and dependencies for punctuation tokens have been removed.
   
   (This description has been sourced from the dataset website).
   
