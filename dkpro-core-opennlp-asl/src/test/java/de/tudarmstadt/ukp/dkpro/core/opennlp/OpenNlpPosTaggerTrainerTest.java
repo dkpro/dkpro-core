@@ -35,6 +35,7 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.datasets.Dataset;
 import de.tudarmstadt.ukp.dkpro.core.datasets.DatasetFactory;
+import de.tudarmstadt.ukp.dkpro.core.datasets.Split;
 import de.tudarmstadt.ukp.dkpro.core.eval.EvalUtil;
 import de.tudarmstadt.ukp.dkpro.core.eval.model.Span;
 import de.tudarmstadt.ukp.dkpro.core.eval.report.Result;
@@ -51,11 +52,24 @@ public class OpenNlpPosTaggerTrainerTest
     {
         File targetFolder = testContext.getTestOutputFolder();
         
+        Split split = ds.getSplit(0.8);
+        
+//        System.out.println("Training model from training data");
+//        CollectionReaderDescription xr = createReaderDescription(
+//                Conll2006Reader.class,
+//                Conll2006Reader.PARAM_PATTERNS, ds.getDataFiles(),
+//                Conll2006Reader.PARAM_LANGUAGE, ds.getLanguage());
+//
+//        SimplePipeline.runPipeline(xr);
+//        
+//        System.exit(0);
+        
         // Train model
         System.out.println("Training model from training data");
         CollectionReaderDescription trainReader = createReaderDescription(
                 Conll2006Reader.class,
-                Conll2006Reader.PARAM_PATTERNS, ds.getTrainingFiles(),
+                Conll2006Reader.PARAM_PATTERNS, split.getTrainingFiles(),
+                Conll2006Reader.PARAM_USE_CPOS_AS_POS, true,
                 Conll2006Reader.PARAM_LANGUAGE, ds.getLanguage());
         
         AnalysisEngineDescription trainer = createEngineDescription(
@@ -69,7 +83,7 @@ public class OpenNlpPosTaggerTrainerTest
         System.out.println("Applying model to test data");
         CollectionReaderDescription testReader = createReaderDescription(
                 Conll2006Reader.class,
-                Conll2006Reader.PARAM_PATTERNS, ds.getTestFiles(),
+                Conll2006Reader.PARAM_PATTERNS, split.getTestFiles(),
                 Conll2006Reader.PARAM_READ_POS, false,
                 Conll2006Reader.PARAM_LANGUAGE, ds.getLanguage());
         
@@ -94,9 +108,9 @@ public class OpenNlpPosTaggerTrainerTest
 
         Result results = EvalUtil.dumpResults(targetFolder, expected, actual);
         
-        assertEquals(0.753489, results.getFscore(), 0.0001);
-        assertEquals(0.748760, results.getPrecision(), 0.0001);
-        assertEquals(0.758277, results.getRecall(), 0.0001);
+        assertEquals(0.740437, results.getFscore(), 0.0001);
+        assertEquals(0.732623, results.getPrecision(), 0.0001);
+        assertEquals(0.748419, results.getRecall(), 0.0001);
     }
     
     @Before

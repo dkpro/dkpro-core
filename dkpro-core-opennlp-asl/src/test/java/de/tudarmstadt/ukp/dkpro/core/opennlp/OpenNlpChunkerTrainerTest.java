@@ -35,6 +35,7 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 import de.tudarmstadt.ukp.dkpro.core.datasets.Dataset;
 import de.tudarmstadt.ukp.dkpro.core.datasets.DatasetFactory;
+import de.tudarmstadt.ukp.dkpro.core.datasets.Split;
 import de.tudarmstadt.ukp.dkpro.core.eval.EvalUtil;
 import de.tudarmstadt.ukp.dkpro.core.eval.model.Span;
 import de.tudarmstadt.ukp.dkpro.core.eval.report.Result;
@@ -51,11 +52,13 @@ public class OpenNlpChunkerTrainerTest
     {
         File targetFolder = testContext.getTestOutputFolder();
         
+        Split split = ds.getDefaultSplit();
+        
         // Train model
         System.out.println("Training model from training data");
         CollectionReaderDescription trainReader = createReaderDescription(
                 Conll2000Reader.class,
-                Conll2000Reader.PARAM_PATTERNS, ds.getTrainingFiles(),
+                Conll2000Reader.PARAM_PATTERNS, split.getTrainingFiles(),
                 Conll2000Reader.PARAM_LANGUAGE, ds.getLanguage());
         
         AnalysisEngineDescription trainer = createEngineDescription(
@@ -71,7 +74,7 @@ public class OpenNlpChunkerTrainerTest
         System.out.println("Applying model to test data");
         CollectionReaderDescription testReader = createReaderDescription(
                 Conll2000Reader.class,
-                Conll2000Reader.PARAM_PATTERNS, ds.getTestFiles(),
+                Conll2000Reader.PARAM_PATTERNS, split.getTestFiles(),
                 Conll2000Reader.PARAM_READ_CHUNK, false,
                 Conll2000Reader.PARAM_LANGUAGE, ds.getLanguage());
         

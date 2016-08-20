@@ -60,7 +60,6 @@ import de.tudarmstadt.ukp.dkpro.core.datasets.internal.LicenseDescriptionImpl;
 import de.tudarmstadt.ukp.dkpro.core.datasets.internal.LoadedDataset;
 import de.tudarmstadt.ukp.dkpro.core.datasets.internal.actions.Action_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.datasets.internal.actions.Explode;
-import de.tudarmstadt.ukp.dkpro.core.datasets.internal.actions.Split;
 
 public class DatasetFactory
 {
@@ -75,7 +74,6 @@ public class DatasetFactory
     {
         actionRegistry = new HashMap<>();
         actionRegistry.put("explode", Explode.class);
-        actionRegistry.put("split", Split.class);
     }
 
     public DatasetFactory()

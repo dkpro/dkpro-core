@@ -25,15 +25,29 @@ import java.util.HashSet;
 import java.util.Set;
 
 import de.tudarmstadt.ukp.dkpro.core.datasets.Dataset;
+import de.tudarmstadt.ukp.dkpro.core.datasets.Split;
+import de.tudarmstadt.ukp.dkpro.core.datasets.internal.SplitImpl;
 
 public class UDDataset
     implements Dataset
 {
     private File baseDir;
+    private Split defaultSplit;
     
     public UDDataset(File aBaseDir)
     {
         baseDir = aBaseDir;
+        
+        File[] train = baseDir.listFiles((File f) -> {
+            return f.getName().endsWith("-train.conllu");
+        });
+        File[] test = baseDir.listFiles((File f) -> {
+            return f.getName().endsWith("-test.conllu");
+        });
+        File[] dev = baseDir.listFiles((File f) -> {
+            return f.getName().endsWith("-dev.conllu");
+        });
+        defaultSplit = new SplitImpl(train, test, dev);
     }
 
     @Override
@@ -45,7 +59,7 @@ public class UDDataset
     @Override
     public String getLanguage()
     {
-        return getTrainingFiles()[0].getName().split("-")[0];
+        return defaultSplit.getTrainingFiles()[0].getName().split("-")[0];
     }
 
     @Override
@@ -58,30 +72,17 @@ public class UDDataset
     public File[] getDataFiles()
     {
         Set<File> all = new HashSet<>();
-        all.addAll(asList(getTrainingFiles()));
-        all.addAll(asList(getTestFiles()));
-        all.addAll(asList(getDevelopmentFiles()));
+        all.addAll(asList(defaultSplit.getTrainingFiles()));
+        all.addAll(asList(defaultSplit.getTestFiles()));
+        all.addAll(asList(defaultSplit.getDevelopmentFiles()));
         File[] result = all.toArray(all.toArray(new File[all.size()]));
         Arrays.sort(result, (a, b) -> { return a.getPath().compareTo(b.getPath()); });
         return result;
     }
     
     @Override
-    public File[] getTrainingFiles()
+    public Split getDefaultSplit()
     {
-        return baseDir.listFiles((File f) -> { return f.getName().endsWith("-train.conllu"); });
+        return defaultSplit;
     }
-
-    @Override
-    public File[] getTestFiles()
-    {
-        return baseDir.listFiles((File f) -> { return f.getName().endsWith("-test.conllu"); });
-    }
-
-    @Override
-    public File[] getDevelopmentFiles()
-    {
-        return baseDir.listFiles((File f) -> { return f.getName().endsWith("-dev.conllu"); });
-    }
-
 }

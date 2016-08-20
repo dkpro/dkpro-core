@@ -102,30 +102,29 @@ public class DatasetFactoryTest
         assertFalse(Files.exists(cache.resolve("brownCorpus-TEI-XML/brown_tei/Corpus.xml")));
     }
 
-    @Test
-    public void testLoadWithSplit()
-        throws Exception
-    {
-        Path cache = testContext.getTestOutputFolder().toPath();
-        
-        DatasetFactory df = new DatasetFactory(cache);
-        Dataset ds = df.load("gum-en-conll-2.2.0");
-        assertDatasetOk(ds);
-        
-        assertTrue(ds.getTestFiles().length > 0);
-        assertTrue(ds.getTrainingFiles().length > 0);
-    }
-
     private void assertDatasetOk(Dataset ds)
     {
+        
         System.out.printf("Dataset    : %s%n", ds.getName());
         System.out.printf("Data files : %d%n", ds.getDataFiles().length);
         
+        Split split = ds.getDefaultSplit();
+        if (split != null) {
+            System.out.printf("Training set    : %d%n",
+                    split.getTrainingFiles() != null ? split.getTrainingFiles().length : "none");
+            System.out.printf("Development set : %d%n",
+                    split.getDevelopmentFiles() != null ? split.getDevelopmentFiles().length : "none");
+            System.out.printf("Testing set     : %d%n",
+                    split.getTestFiles() != null ? split.getTestFiles().length : "none");
+        }
+        
         assertNotNull("Name not set", ds.getName());
         assertNotNull("Language not set", ds.getLanguage());
-        assertNullOrExists(ds.getTrainingFiles());
-        assertNullOrExists(ds.getTestFiles());
-        assertNullOrExists(ds.getDevelopmentFiles());
+        if (split != null) {
+            assertNullOrExists(split.getTrainingFiles());
+            assertNullOrExists(split.getTestFiles());
+            assertNullOrExists(split.getDevelopmentFiles());
+        }
         assertNullOrExists(ds.getLicenseFiles());
     }
 

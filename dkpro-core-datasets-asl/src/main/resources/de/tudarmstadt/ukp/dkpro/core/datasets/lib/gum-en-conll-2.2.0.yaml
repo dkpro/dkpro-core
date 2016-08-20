@@ -44,13 +44,6 @@ artifacts:
     actions:
       - action: explode
         configuration: { includes: ["dep/*", "LICENSE.txt", "README.md"], strip: 1 }
-      # FIXME having split as an artifact action doesn make so much sense. If the data is
-      # distributed over multiple artifacts, it does not work. Even if the data is in one
-      # artifact, split always operates on the dataset root - it does not take into account
-      # if an artifact has been exploded or not. Thus we need a different includes pattern here
-      # than for the explode action above - this seems stuipidly inconsistent
-      - action: split
-        configuration: { includes: "**/dep/*.conll10", train: 0.5, test: 0.5 }
 
 roles:
   licenses:

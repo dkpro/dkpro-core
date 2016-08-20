@@ -1,0 +1,50 @@
+groupId: org.dkpro.core.datasets.tut
+datasetId: tut
+version: 20101122
+language: it
+mediaType: text/x.org.dkpro.conll-2006
+
+name: Turin University Treebank
+url: http://www.di.unito.it/~tutreeb/treebanks.html
+attribution: |
+  Cristina Bosco, Leonardo Lesmo, Vincenzo Lombardo, Alessandro Mazzei, Livio Robaldo
+description: |
+  TUT is a morpho-syntactically annotated collection of Italian sentences, which includes texts
+  from different text genres and domains, released in several annotation formats. 
+   
+  (This description has been sourced from the corpus website).
+  
+licenses:
+  - name: CC-BY-NC-SA 2.5
+    url: http://creativecommons.org/licenses/by-nc-sa/2.5/it/
+
+artifacts:
+  NEWS.zip:
+    url: http://www.di.unito.it/~tutreeb/corpora/tutINconll/NEWS-22nov2010.conl.zip
+    sha1: 3d9b22d8ebf533aa1d6d39d417316c30900b9a0e
+    actions:
+      - action: explode
+  VEDCH.zip:
+    url: http://www.di.unito.it/~tutreeb/corpora/tutINconll/VEDCH-22nov2010.conl.zip
+    sha1: 2278e6e770ddc4a8eea5e045c4a77a5df2ae0977
+    actions:
+      - action: explode
+  CODICECIVILE.zip:
+    url: http://www.di.unito.it/~tutreeb/corpora/tutINconll/CODICECIVILE-22nov2010.conl.zip
+    sha1: 9cf9c0a9c652b3df6564d1fa0ca97c2d7905faa3
+    actions:
+      - action: explode
+  EUDIR.zip:
+    url: http://www.di.unito.it/~tutreeb/corpora/tutINconll/EUDIR-22nov2010.conl.zip
+    sha1: 72a6e55627481ff99930b59714cfc0909ccf60e1
+    actions:
+      - action: explode
+  WIKI.zip:
+    url: http://www.di.unito.it/~tutreeb/corpora/tutINconll/WIKI-22nov2010.conl.zip
+    sha1: a421f488859324e3e12687b9a3067652248eb8df
+    actions:
+      - action: explode
+      
+roles:
+  data:
+    - "**/*.conl"

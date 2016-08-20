@@ -22,7 +22,7 @@ description: |
         used under these conditions.
 
 licenses:
-  - name: GPL 3.0 (?)
+  - name: GPLv3 (?)
     url: https://www.gnu.org/licenses/gpl-3.0.html
 
 artifacts:

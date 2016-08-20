@@ -32,6 +32,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 
 import de.tudarmstadt.ukp.dkpro.core.datasets.FileRole;
+import de.tudarmstadt.ukp.dkpro.core.datasets.Split;
 import de.tudarmstadt.ukp.dkpro.core.datasets.internal.util.AntFileFilter;
 import de.tudarmstadt.ukp.dkpro.core.datasets.Dataset;
 import de.tudarmstadt.ukp.dkpro.core.datasets.DatasetDescription;
@@ -42,12 +43,21 @@ public class LoadedDataset
 {
     private DatasetFactory factory;
     private DatasetDescription description;
+    private Split defaultSplit;
     
     public LoadedDataset(DatasetFactory aFactory, DatasetDescription aDescription)
     {
         super();
         factory = aFactory;
         description = aDescription;
+        
+        File[] train =  getFiles(FileRole.TRAINING);
+        File[] dev =  getFiles(FileRole.DEVELOPMENT);
+        File[] test =  getFiles(FileRole.TESTING);
+        
+        if (train.length > 0 || dev.length > 0 || test.length > 0) {
+            defaultSplit = new SplitImpl(train, test, dev);
+        }
     }
 
     @Override
@@ -72,9 +82,12 @@ public class LoadedDataset
 
         // If no files are marked as data files, try aggregating over test/dev/train sets
         if (all.isEmpty()) {
-            all.addAll(asList(getTrainingFiles()));
-            all.addAll(asList(getTestFiles()));
-            all.addAll(asList(getDevelopmentFiles()));
+            Split split = getDefaultSplit();
+            if (split != null) {
+                all.addAll(asList(split.getTrainingFiles()));
+                all.addAll(asList(split.getTestFiles()));
+                all.addAll(asList(split.getDevelopmentFiles()));
+            }
         }
         
         // Sort to ensure stable order
@@ -91,21 +104,9 @@ public class LoadedDataset
     }
 
     @Override
-    public File[] getTrainingFiles()
+    public Split getDefaultSplit()
     {
-        return getFiles(FileRole.TRAINING);
-    }
-
-    @Override
-    public File[] getTestFiles()
-    {
-        return getFiles(FileRole.TESTING);
-    }
-
-    @Override
-    public File[] getDevelopmentFiles()
-    {
-        return getFiles(FileRole.DEVELOPMENT);
+        return defaultSplit;
     }
 
     private File[] getFiles(String aRole)

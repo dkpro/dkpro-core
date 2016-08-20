@@ -1,0 +1,44 @@
+groupId: org.dkpro.core.datasets.sdt
+datasetId: sdt-conll
+version: 0.1
+language: sl
+mediaType: text/x.org.dkpro.conll-2006
+
+name: Slovene Dependency Treebank
+url: http://nl.ijs.si/sdt/
+attribution: |
+  Sašo Džeroski, Tomaž Erjavec, Nina Ledinek, Petr Pajas, Zdenek Žabokrtský, Andreja Žele: 
+  Towards a Slovene Dependency Treebank. In Proceedings of Fifth International Conference on
+  Language Resources and Evaluation, LREC'06, 24-26 May 2006. Genoa.
+  (link:http://nl.ijs.si/sdt/bib/SDT-LREC06.pdf[PDF])
+description: |
+  The Slovene Dependency Treebank project built a small syntactically annotated corpus of Slovene
+  texts. The corpus was annotated with dependency analyses, taking the Prague Dependecy Treebank as
+  the model. The Slovene Dependency Treebank is annotated with Analytic Tree Structures and contains
+  a part of the morphosyntactically annotated Slovene component of the parallel MULTEXT-East corpus,
+  i.e. the first third of the Slovene translation of the novel "1984" by G. Orwell, containing
+  30,000 words.
+   
+  (This description has been sourced from the corpus website).
+
+licenses:
+  - name: SDT CoNLL-X
+    url: http://nl.ijs.si/sdt/data/SDT-2006-01-06-CoNLL-X/data/slovene/sdt/doc/sdtCoNLL-licence.html
+
+artifacts:
+  data.zip:
+    url: http://nl.ijs.si/sdt/data/SDT-2006-01-06-CoNLL-X/data.zip
+    sha1: 2bd85ad77c35d0c305a6afb7ee092676d5d22a35
+    actions:
+      - action: explode
+        configuration: { strip: 3 }
+      
+roles:
+  licenses:
+    - data/doc/sdtCoNLL-licence.html
+  training:
+    - "data/treebank/slovene_sdt_train.conll"
+  testing:
+    - "data/treebank/slovene_sdt_test_blind.conll"
+  development:
+    - "data/treebank/slovene_sdt_test.conll"

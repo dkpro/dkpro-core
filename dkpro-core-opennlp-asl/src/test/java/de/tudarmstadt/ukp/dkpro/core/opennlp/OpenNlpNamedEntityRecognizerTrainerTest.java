@@ -37,6 +37,7 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.datasets.Dataset;
 import de.tudarmstadt.ukp.dkpro.core.datasets.DatasetFactory;
+import de.tudarmstadt.ukp.dkpro.core.datasets.Split;
 import de.tudarmstadt.ukp.dkpro.core.eval.EvalUtil;
 import de.tudarmstadt.ukp.dkpro.core.eval.model.Span;
 import de.tudarmstadt.ukp.dkpro.core.eval.report.Result;
@@ -45,7 +46,7 @@ import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class OpenNlpNamedEntityRecognizerTrainerTest
 {
-    private Dataset germevalData;
+    private Dataset ds;
     
     @Test
     public void test()
@@ -53,12 +54,14 @@ public class OpenNlpNamedEntityRecognizerTrainerTest
     {
         File targetFolder = testContext.getTestOutputFolder();
         
+        Split split = ds.getDefaultSplit();
+        
         // Train model
         File model = new File(targetFolder, "model.bin");
         CollectionReaderDescription trainReader = createReaderDescription(
                 Conll2002Reader.class,
-                Conll2002Reader.PARAM_PATTERNS, germevalData.getTrainingFiles(),
-                Conll2002Reader.PARAM_LANGUAGE, germevalData.getLanguage(),
+                Conll2002Reader.PARAM_PATTERNS, split.getTrainingFiles(),
+                Conll2002Reader.PARAM_LANGUAGE, ds.getLanguage(),
                 Conll2002Reader.PARAM_COLUMN_SEPARATOR, Conll2002Reader.ColumnSeparators.TAB.getName(),
                 Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true,
                 Conll2002Reader.PARAM_HAS_HEADER, true,
@@ -76,7 +79,7 @@ public class OpenNlpNamedEntityRecognizerTrainerTest
         System.out.println("Applying model to test data");
         CollectionReaderDescription testReader = createReaderDescription(
                 Conll2002Reader.class,
-                Conll2002Reader.PARAM_PATTERNS, germevalData.getTestFiles(),
+                Conll2002Reader.PARAM_PATTERNS, split.getTestFiles(),
                 Conll2002Reader.PARAM_LANGUAGE, "de",
                 Conll2002Reader.PARAM_COLUMN_SEPARATOR, Conll2002Reader.ColumnSeparators.TAB.getName(),
                 Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true,
@@ -113,7 +116,7 @@ public class OpenNlpNamedEntityRecognizerTrainerTest
     public void setup() throws IOException
     {
         DatasetFactory loader = new DatasetFactory(testContext.getCacheFolder());
-        germevalData = loader.load("germeval2014-de");
+        ds = loader.load("germeval2014-de");
     }    
     
     @Rule

@@ -18,6 +18,13 @@
 package de.tudarmstadt.ukp.dkpro.core.datasets;
 
 import java.io.File;
+import java.util.Arrays;
+
+import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import de.tudarmstadt.ukp.dkpro.core.datasets.internal.SplitImpl;
 
 public interface Dataset
 {
@@ -27,11 +34,35 @@ public interface Dataset
     
     File[] getDataFiles();
     
-    File[] getLicenseFiles();
+    File[] getLicenseFiles();  
     
-    File[] getTrainingFiles();
-    
-    File[] getTestFiles();
-    
-    File[] getDevelopmentFiles();
+    Split getDefaultSplit();
+
+    default Split getSplit(double aTrainRatio)
+    {
+        return getSplit(aTrainRatio, 1.0 - aTrainRatio);
+    }
+
+    default Split getSplit(double aTrainRatio, double aTestRatio)
+    {
+        Log LOG = LogFactory.getLog(getClass());
+        
+        File[] all = getDataFiles();
+        Arrays.sort(all, (File a, File b) -> { return a.getName().compareTo(b.getName()); });
+        LOG.info("Found " + all.length + " files");
+        
+        int trainPivot = (int) Math.round(all.length * aTrainRatio);
+        int testPivot = (int) Math.round(all.length * aTestRatio) + trainPivot;
+        File[] train = (File[]) ArrayUtils.subarray(all, 0, trainPivot);
+        File[] test = (File[]) ArrayUtils.subarray(all, trainPivot, testPivot);
+
+        LOG.debug("Assigned " + train.length + " files to training set");
+        LOG.debug("Assigned " + test.length + " files to test set");
+        
+        if (testPivot != all.length) {
+            LOG.info("Files missing from split: [" + (all.length - testPivot) + "]");
+        }
+        
+        return new SplitImpl(train, test, null);
+    }
 }

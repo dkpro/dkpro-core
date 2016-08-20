@@ -46,9 +46,10 @@ public class DatasetLoaderTest
     {
         assertNotNull("Name not set", ds.getName());
         assertNotNull("Language not set", ds.getLanguage());
-        assertNullOrExists(ds.getTestFiles());
-        assertNullOrExists(ds.getTestFiles());
-        assertNullOrExists(ds.getDevelopmentFiles());
+        Split split = ds.getDefaultSplit();
+        assertNullOrExists(split.getTestFiles());
+        assertNullOrExists(split.getTestFiles());
+        assertNullOrExists(split.getDevelopmentFiles());
         assertNullOrExists(ds.getLicenseFiles());
     }
 

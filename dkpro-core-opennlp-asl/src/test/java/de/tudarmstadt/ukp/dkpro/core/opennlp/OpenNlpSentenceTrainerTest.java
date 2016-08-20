@@ -40,6 +40,7 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.datasets.Dataset;
 import de.tudarmstadt.ukp.dkpro.core.datasets.DatasetFactory;
+import de.tudarmstadt.ukp.dkpro.core.datasets.Split;
 import de.tudarmstadt.ukp.dkpro.core.eval.EvalUtil;
 import de.tudarmstadt.ukp.dkpro.core.eval.model.Span;
 import de.tudarmstadt.ukp.dkpro.core.eval.report.Result;
@@ -48,7 +49,7 @@ import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class OpenNlpSentenceTrainerTest
 {
-    private Dataset germevalData;
+    private Dataset ds;
     
     @Test
     public void test()
@@ -56,12 +57,14 @@ public class OpenNlpSentenceTrainerTest
     {
         File targetFolder = testContext.getTestOutputFolder();
         
+        Split split = ds.getDefaultSplit();
+        
         // Train model
         System.out.println("Training model from training data");
         CollectionReaderDescription trainReader = createReaderDescription(
                 Conll2002Reader.class,
-                Conll2002Reader.PARAM_PATTERNS, germevalData.getTrainingFiles(),
-                Conll2002Reader.PARAM_LANGUAGE, germevalData.getLanguage(),
+                Conll2002Reader.PARAM_PATTERNS, split.getTrainingFiles(),
+                Conll2002Reader.PARAM_LANGUAGE, ds.getLanguage(),
                 Conll2002Reader.PARAM_COLUMN_SEPARATOR, Conll2002Reader.ColumnSeparators.TAB.getName(),
                 Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true,
                 Conll2002Reader.PARAM_HAS_HEADER, true,
@@ -74,7 +77,7 @@ public class OpenNlpSentenceTrainerTest
                 OpenNlpSentenceTrainer.PARAM_ABBREVIATION_DICTIONARY_LOCATION, 
                         "src/test/resources/dict/abbreviation_de.txt",
                 OpenNlpSentenceTrainer.PARAM_TARGET_LOCATION, new File(targetFolder, "model.bin"),
-                OpenNlpSentenceTrainer.PARAM_LANGUAGE, germevalData.getLanguage());
+                OpenNlpSentenceTrainer.PARAM_LANGUAGE, ds.getLanguage());
         
         SimplePipeline.runPipeline(trainReader, trainer);
         
@@ -82,8 +85,8 @@ public class OpenNlpSentenceTrainerTest
         System.out.println("Applying model to test data");
         CollectionReaderDescription testReader = createReaderDescription(
                 Conll2002Reader.class,
-                Conll2002Reader.PARAM_PATTERNS, germevalData.getTestFiles(),
-                Conll2002Reader.PARAM_LANGUAGE, germevalData.getLanguage(),
+                Conll2002Reader.PARAM_PATTERNS, split.getTestFiles(),
+                Conll2002Reader.PARAM_LANGUAGE, ds.getLanguage(),
                 Conll2002Reader.PARAM_COLUMN_SEPARATOR, Conll2002Reader.ColumnSeparators.TAB.getName(),
                 Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true,
                 Conll2002Reader.PARAM_HAS_HEADER, true,
@@ -129,7 +132,7 @@ public class OpenNlpSentenceTrainerTest
     public void setup() throws IOException
     {
         DatasetFactory loader = new DatasetFactory(testContext.getCacheFolder());
-        germevalData = loader.load("germeval2014-de");
+        ds = loader.load("germeval2014-de");
     }    
     
     @Rule

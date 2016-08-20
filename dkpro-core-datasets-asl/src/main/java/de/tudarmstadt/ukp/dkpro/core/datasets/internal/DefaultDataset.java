@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Set;
 
 import de.tudarmstadt.ukp.dkpro.core.datasets.Dataset;
+import de.tudarmstadt.ukp.dkpro.core.datasets.Split;
 
 @Deprecated
 public class DefaultDataset
@@ -35,9 +36,7 @@ public class DefaultDataset
     private String name;
     private String language;
     private File[] licenseFiles;
-    private File[] trainingFiles;
-    private File[] testFiles;
-    private File[] developmentFiles;
+    private Split defaultSplit;
 
     public DefaultDataset()
     {
@@ -86,51 +85,27 @@ public class DefaultDataset
     public File[] getDataFiles()
     {
         Set<File> all = new HashSet<>();
-        all.addAll(asList(getTrainingFiles()));
-        all.addAll(asList(getTestFiles()));
-        all.addAll(asList(getDevelopmentFiles()));
+        all.addAll(asList(defaultSplit.getTrainingFiles()));
+        all.addAll(asList(defaultSplit.getTestFiles()));
+        all.addAll(asList(defaultSplit.getDevelopmentFiles()));
         File[] result = all.toArray(all.toArray(new File[all.size()]));
         Arrays.sort(result, (a, b) -> { return a.getPath().compareTo(b.getPath()); });
         return result;
     }
     
-    public void setTrainingFiles(File... aTrainingFiles)
-    {
-        trainingFiles = aTrainingFiles;
-    }
-
     @Override
-    public File[] getTrainingFiles()
+    public Split getDefaultSplit()
     {
-        return trainingFiles;
-    }
-
-    public void setTestFiles(File... aTestFiles)
-    {
-        testFiles = aTestFiles;
-    }
-
-    @Override
-    public File[] getTestFiles()
-    {
-        return testFiles;
-    }
-
-    public void setDevelopmentFiles(File... aDevelopmentFiles)
-    {
-        developmentFiles = aDevelopmentFiles;
-    }
-
-    @Override
-    public File[] getDevelopmentFiles()
-    {
-        return developmentFiles;
+        return defaultSplit;
     }
 
     public static class Builder
     {
         private DefaultDataset ds;
         private List<File> builderLicenseFiles = new ArrayList<>();
+        private File[] developmentFiles;
+        private File[] trainingFiles;
+        private File[] testFiles;
         
         public Builder()
         {
@@ -157,25 +132,29 @@ public class DefaultDataset
         
         public Builder developmentFiles(File... aDevelopmentFiles)
         {
-            ds.developmentFiles = aDevelopmentFiles;
+            developmentFiles = aDevelopmentFiles;
             return this;
         }
 
         public Builder trainingFiles(File... aTrainingFiles)
         {
-            ds.trainingFiles = aTrainingFiles;
+            trainingFiles = aTrainingFiles;
             return this;
         }
 
         public Builder testFiles(File... aTestFiles)
         {
-            ds.testFiles = aTestFiles;
+            testFiles = aTestFiles;
             return this;
         }
 
         public DefaultDataset build()
         {
             ds.licenseFiles = builderLicenseFiles.toArray(new File[builderLicenseFiles.size()]);
+            if (developmentFiles != null || trainingFiles != null || testFiles != null) {
+                SplitImpl split = new SplitImpl(trainingFiles, testFiles, developmentFiles);
+                ds.defaultSplit = split;
+            }
             return ds;
         }
     }

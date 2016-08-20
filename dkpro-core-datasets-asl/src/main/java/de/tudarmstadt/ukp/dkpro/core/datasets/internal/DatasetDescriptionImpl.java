@@ -19,7 +19,6 @@ package de.tudarmstadt.ukp.dkpro.core.datasets.internal;
 
 import static java.util.Collections.*;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -157,14 +156,6 @@ public class DatasetDescriptionImpl
     public void setUrl(String aUrl)
     {
         url = aUrl;
-    }
-
-    public void putRoles(String aRole, List<String> aFiles)
-    {
-        if (roles == null) {
-            roles = new LinkedHashMap<>();
-        }
-        roles.put(aRole, aFiles);
     }
 
     public String getAttribution()
