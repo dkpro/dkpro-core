@@ -5,9 +5,17 @@ Sentences are separated by a blank new line.
 [cols="3*", options="header"]
 |====
 | Column | Type         | Description
-| FORM   | Token        | token
-| POSTAG | POS          | part-of-speech tag
-| CHUNK  | Chunk        | chunk (BIO encoded)
+| FORM   
+| Token        
+| token
+
+| POSTAG 
+| POS          
+| part-of-speech tag
+
+| CHUNK  
+| Chunk
+| chunk (IOB1 encoded)
 |====
 
 .Example

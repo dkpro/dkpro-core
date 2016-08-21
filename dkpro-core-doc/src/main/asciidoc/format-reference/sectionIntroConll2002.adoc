@@ -11,7 +11,7 @@ Sentences are separated by a blank new line.
 
 | NER     
 | NamedEntity  
-| named entity (BIO encoded)
+| named entity (IOB2 encoded)
 |====
  
 .Example
@@ -41,6 +41,9 @@ Real       B-ORG
 Madrid     I-ORG
 .          O
 ----
+
+NOTE: For readability, the columns in the example above are aligned. In actual files, there is only
+      a single space separating the fields in each line.
 
 .Known corpora in this format
 [cols="2*", options="header"]
