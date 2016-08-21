@@ -1,0 +1,52 @@
+The CoNLL 2004 format encodes named entity spans and chunk spans. Fields are separated by a single
+space. Sentences are separated by a blank new line. Named entities and chunks are encoded in the
+IOB1 format. I.e. a `B` prefix is only used if the category of the following span differs from the
+category of the current span.
+ 
+.Columns
+[cols="3*", options="header"]
+|====
+| Column  | Type/Feature | Description
+| FORM    
+| Token 
+| Word form or punctuation symbol.
+
+| CHUNK     
+| Chunk
+| chunk (IOB1 encoded)
+
+| NER     
+| Named entity
+| named entity (IOB1 encoded)
+|====
+ 
+.Example
+[source,text]
+----
+U.N.         NNP  I-NP  I-ORG 
+official     NN   I-NP  O 
+Ekeus        NNP  I-NP  I-PER 
+heads        VBZ  I-VP  O 
+for          IN   I-PP  O 
+Baghdad      NNP  I-NP  I-LOC 
+.            .    O     O 
+----
+
+NOTE: For readability, the columns in the example above are aligned. In actual files, there is only
+      a single space separating the fields in each line.
+
+.Known corpora in this format
+[cols="2*", options="header"]
+|====
+| Corpus 
+| Language
+
+| link:http://www.cs.cmu.edu/~ark/ArabicNER/[AQMAR Arabic Wikipedia Named Entity Corpus]
+| Arabic
+
+| link:http://www.clips.ua.ac.be/conll2002/ner/[CoNLL 2002 dataset]
+| Spanish
+
+| link:http://www.clips.ua.ac.be/conll2002/ner/[CoNLL 2002 dataset]
+| Dutch
+|====
