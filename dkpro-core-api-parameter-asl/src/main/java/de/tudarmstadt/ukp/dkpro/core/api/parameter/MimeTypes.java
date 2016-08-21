@@ -59,6 +59,7 @@ public final class MimeTypes
     // DKPro text types
     public final static String TEXT_X_CONLL_2000 = "text/x.org.dkpro.conll-2000";
     public final static String TEXT_X_CONLL_2002 = "text/x.org.dkpro.conll-2002";
+    public final static String TEXT_X_CONLL_2003 = "text/x.org.dkpro.conll-2003";
     public final static String TEXT_X_CONLL_2006 = "text/x.org.dkpro.conll-2006";
     public final static String TEXT_X_CONLL_2009 = "text/x.org.dkpro.conll-2009";
     public final static String TEXT_X_CONLL_2012 = "text/x.org.dkpro.conll-2012";

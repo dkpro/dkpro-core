@@ -18,7 +18,6 @@
 package de.tudarmstadt.ukp.dkpro.core.api.io;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.uima.cas.CAS;
@@ -27,39 +26,52 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.util.CasUtil;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 
 /**
  * Converts a chunk annotations into IOB-style 
- * 
- *
  */
 public class IobEncoder
 {  
-    private Map<Integer, String> iobBeginMap;
-    private Map<Integer, String> iobInsideMap;
+    private Int2ObjectMap<String> iobBeginMap;
+    private Int2ObjectMap<String> iobInsideMap;
 
-    public IobEncoder(CAS aCas, Type chunkType, Feature aChunkValueFeature)
+    private boolean iob1 = false;
+
+    public IobEncoder(CAS aCas, Type aType, Feature aValueFeature)
     {
-        super();
-        
-        // fill map for whole jcas in order to efficiently encode IOB
-        iobBeginMap = new HashMap<Integer, String>();
-        iobInsideMap = new HashMap<Integer, String>();
+        this(aCas, aType, aValueFeature, false);
+    }
 
-        Map<AnnotationFS, Collection<AnnotationFS>> idx = CasUtil.indexCovered(aCas, chunkType,
+    public IobEncoder(CAS aCas, Type aType, Feature aValueFeature, boolean aIob1)
+    {
+        iob1 = aIob1;
+        
+        // fill map for whole JCas in order to efficiently encode IOB
+        iobBeginMap = new Int2ObjectOpenHashMap<String>();
+        iobInsideMap = new Int2ObjectOpenHashMap<String>();
+
+        Map<AnnotationFS, Collection<AnnotationFS>> idx = CasUtil.indexCovered(aCas, aType,
                 CasUtil.getType(aCas, Token.class));
         
-        for (AnnotationFS chunk : CasUtil.select(aCas, chunkType)) {
-            String chunkValue = chunk.getStringValue(aChunkValueFeature);
+        String lastValue = null;
+        for (AnnotationFS chunk : CasUtil.select(aCas, aType)) {
+            String value = chunk.getStringValue(aValueFeature);
 
             for (AnnotationFS token : idx.get(chunk)) {
-                if (token.getBegin() == chunk.getBegin()) {
-                    iobBeginMap.put(token.getBegin(), chunkValue);
+                if (
+                        token.getBegin() == chunk.getBegin() && 
+                        (!iob1 || (lastValue != null && lastValue.equals(value)))
+                ) {
+                    iobBeginMap.put(token.getBegin(), value);
                 }
                 else {
-                    iobInsideMap.put(token.getBegin(), chunkValue);
+                    iobInsideMap.put(token.getBegin(), value);
                 }
             }
+            
+            lastValue = value;
         }
     }
     
