@@ -231,14 +231,13 @@ public class Conll2002Reader
     @ConfigurationParameter(name = PARAM_HAS_EMBEDDED_NAMED_ENTITY, mandatory = false, defaultValue = "false")
     private boolean hasEmbeddedNamedEntity;
 
-//    /**
-//     * Load the chunk tag to UIMA type mapping from this location instead of locating
-//     * the mapping automatically.
-//     */
-//    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
-//    @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
-//    protected String namedEntityMappingLocation;
-//    
+    /**
+     * Location of the mapping file for named entity tags to UIMA types.
+     */
+    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
+    private String namedEntityMappingLocation;
+
     private MappingProvider namedEntityMappingProvider;
 
     @Override
@@ -248,12 +247,10 @@ public class Conll2002Reader
         super.initialize(aContext);
         
         namedEntityMappingProvider = new MappingProvider();
-//        namedEntityMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/"
-//                + "dkpro/core/api/syntax/tagset/${language}-${chunk.tagset}-chunk.map");
         namedEntityMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/there/is/no/mapping/yet");
         namedEntityMappingProvider.setDefault(MappingProvider.BASE_TYPE, NamedEntity.class.getName());
-//        namedEntityMappingProvider.setOverride(MappingProvider.LOCATION, namedEntityMappingLocation);
-//        namedEntityMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
+        namedEntityMappingProvider.setOverride(MappingProvider.LOCATION, namedEntityMappingLocation);
+        namedEntityMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
 
         // Configure column positions. First column may be used for token number
         FORM = hasTokenNumber?1:0;        

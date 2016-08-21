@@ -105,7 +105,7 @@ public class Conll2002Writer
             // Tokens
             List<Token> tokens = selectCovered(Token.class, sentence);
 
-            // Chunks
+            // Named Entities
             IobEncoder encoder = new IobEncoder(aJCas.getCas(), neType, neValue);
 
             for (Token token:tokens) {
@@ -117,12 +117,12 @@ public class Conll2002Writer
 
             // Write sentence in CONLL 2006 format
             for (Row row : ctokens.values()) {
-                String chunk = UNUSED;
+                String namedEntity = UNUSED;
                 if (writeNamedEntity && (row.ne != null)) {
-                    chunk = encoder.encode(row.token);
+                    namedEntity = row.ne;
                 }
 
-                aOut.printf("%s %s\n", row.token.getCoveredText(), chunk);
+                aOut.printf("%s %s\n", row.token.getCoveredText(), namedEntity);
             }
 
             aOut.println();

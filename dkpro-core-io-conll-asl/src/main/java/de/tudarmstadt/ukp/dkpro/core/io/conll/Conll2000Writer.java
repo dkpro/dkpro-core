@@ -128,7 +128,7 @@ public class Conll2000Writer
 
                 String chunk = UNUSED;
                 if (writeChunk && (row.chunk != null)) {
-                    chunk = encoder.encode(row.token);
+                    chunk = row.chunk;
                 }
 
                 aOut.printf("%s %s %s\n", row.token.getCoveredText(), pos, chunk);
