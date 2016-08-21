@@ -1,4 +1,13 @@
 <% 
+def renderLicense(license)
+{
+  if (license.url) {
+     return "link:${license.url}[${license.name}]"
+  } else {
+     return "${license.name}"
+  }
+}
+
 def links(dataset)
 {
     def html = '++++\n<div style="float:right">\n';
@@ -14,31 +23,49 @@ datasets.each { key, dataset ->
 
 ${links(dataset)}
 
-[small]#*_ID:_* __${key}__# +
-[small]#*_Version:_* __${dataset.version ?: 'unknown'}__# +
-[small]#*_Media type:_* __${dataset.mediaType ?: 'unknown'}__# +
-[small]#*_Language:_* __${dataset.language ?: 'unknown'}__# +
-[small]#*_URL:_* __${dataset.url ?: 'unknown'}__# +
-[small]#*_Attribution footnoteref:[attributionDisclaimer]:_* __${dataset.attribution ?: 'unknown'}__# +
-[small]#*_License footnoteref:[licenseDisclaimer]:_* <%
+[horizontal, role="small"]
+ID::          ${key}
+Version::     ${dataset.version ?: 'unknown'}
+Media type::  ${dataset.mediaType ?: 'unknown'}
+Language::    ${dataset.language ?: 'unknown'}
+Encoding::    ${dataset.encoding ?: 'unknown'}
+URL::         ${dataset.url ?: 'unknown'}
+Attribution{empty}footnoteref:[attributionDisclaimer]:: ${dataset.attribution ?: 'unknown'}
+License{empty}footnoteref:[licenseDisclaimer]:: <%
   if (dataset.licenses) {
     dataset.licenses.eachWithIndex { license, i ->
       if (i > 0) print ", "
-      if (license.url) {
-         print "__link:${license.url}[${license.name}]__"
-      } else {
-         print "__${license.name}__<%"
-      }
+      print "__${renderLicense(license)}__";
     }
   }
   else {
     %>__unknown__<%
   }
-%>#
+%>
 
 ${dataset.description ?: ''}
 
+<%
+  def licensesWithComments = dataset.licenses.grep { it.comment };
+  if (licensesWithComments) {
+  %>
+.License comments for ${dataset.name}
+[options="header", cols="1,2", role="small"]
+|====
+| License | Comment
+  <%
+    licensesWithComments.each { license -> 
+      print "| ${renderLicense(license)}";
+      print "| ${license.comment}"
+    }
+  %>
+|====
+  <%
+  }
+%>
+
 .Artifacts for ${dataset.name}
+[options="header", cols="1,2", role="small"]
 |====
 | Artifact | SHA1
 <%

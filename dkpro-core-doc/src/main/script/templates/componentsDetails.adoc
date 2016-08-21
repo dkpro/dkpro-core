@@ -18,7 +18,7 @@ include::{include-dir}sectionIntro${fileSuffix}.adoc[]
 <% } %>
 
 .Analysis Components in group ${group.key} (${group.value.size()})
-[options="header"]
+[options="header", cols="1,2"]
 |====
 |Component|Description
 
@@ -35,9 +35,10 @@ def engine = it.value; %>
 [[engine-${ it.key }]]
 ==== ${it.key}
 
-[small]#*_Role_:* __${engine.role}__# +
-[small]#*_Artifact ID:_* __${engine.artifactId}__# +
-[small]#*_Class:_* __${engine.spec.annotatorImplementationName}__#
+[horizontal, role="small"]
+Role::             ${engine.role}
+Artifact{nbsp}ID:: ${engine.artifactId}
+Class::            ${engine.spec.annotatorImplementationName}
 
 ++++
 ${Util.preparePassthrough(engine.spec.metaData.description)}
@@ -77,6 +78,7 @@ if (paramDecls) {
 %>
 [discrete]
 ===== Parameters
+
 <% paramDecls.each { %>
 `${it.key}` (__${it.value[0].type}<% 
 if (it.value[0].multiValued) { %>[]<% } 
@@ -104,7 +106,7 @@ if (inputs || outputs) {
 %>
 [discrete]
 ===== Inputs and outputs
-[cols="h,v"]
+[cols="h,v", role="small"]
 |====
 | Inputs 
 | <% 
@@ -133,7 +135,7 @@ if (languages) {
 %>
 [discrete]
 ===== Languages
-[options="header"]
+[options="header", role="small"]
 |====
 |Language
 <% languages.each { lang -> %>
@@ -150,7 +152,7 @@ def mods = models.findAll { it.@engine == engine.name };
 if (mods) { %>
 [discrete]
 ===== Models
-[options="header"]
+[options="header", role="small"]
 |====
 |Language|Variant|Version
 <% mods.each { model -> %>

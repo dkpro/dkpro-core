@@ -53,7 +53,9 @@ include::{include-dir}sectionIntro${it.key}.adoc[]
 [[format-${ it.value.readerClass }]]
 [discrete]
 ==== ${ it.key }Reader
-[small]#*_Reader class:_* __${it.value.readerClass}__#
+
+[horizontal, role="small"]
+Reader{nbsp}class::          ${it.value.readerClass}
 
 ++++
 ${Util.preparePassthrough(it.value.readerSpec.metaData.description)}

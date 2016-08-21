@@ -39,18 +39,17 @@ def renderModel(model) {
 [[model-${model.@artifactId}]]
 ==== ${model.@variant.text() } 
 
-[small]#*_Artifact ID:_* __${model.@artifactId}__# +
-[small]#*_Version:_* __${model.@version}__# +
-[small]#*_Engine:_* __${getEngineLink(model)}__# +
-[small]#*_Language:_* __${model.@language}__# +
-[small]#*_Variant:_* __${model.@variant}__# <% 
-if (getSource(model)) { 
-%>+
-[small]#*_Source:_* __${getSource(model)}__# <% 
+[horizontal, role="small"]
+Artifact{nbsp}ID:: ${model.@artifactId}
+Version::          ${model.@version}
+Engine::           ${getEngineLink(model)}
+Language::         ${model.@language}
+Variant::          ${model.@variant} <% 
+if (getSource(model)) { %>
+Source::           ${getSource(model)} <% 
 }
-if (model.@md5) { 
-%>+
-[small]#*_MD5:_* __${model.@md5.text()}__#
+if (model.@md5.text()) { %>
+MD5::              ${model.@md5.text()}
 <% } %>
 
 
@@ -58,7 +57,7 @@ if (model.@md5) {
 [discrete]
 ===== Metadata for ${model.@shortArtifactId} 
 
-[options="header"]
+[options="header", role="small"]
 |====
 |Key|Value
 <% model.metadata.entry.each { %>

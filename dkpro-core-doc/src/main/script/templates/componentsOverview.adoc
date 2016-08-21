@@ -3,7 +3,7 @@ import de.tudarmstadt.ukp.dkpro.core.doc.Util;
 %>
 
 .Analysis Components (${engines.size()})
-[options="header"]
+[options="header", cols="1,2"]
 |====
 |Component|Description
 

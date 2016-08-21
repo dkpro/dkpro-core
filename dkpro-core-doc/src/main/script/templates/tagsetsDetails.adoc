@@ -214,7 +214,7 @@ __This mapping is not used in any models.__
 // TABLE OF TAGS IN THE TAGSET
 [discrete]
 ===== Tag mappings in ${tagset.longName} (${tagset.lang})
-[options="header",cols="1,1,3"]
+[options="header",cols="1,1,3", role="small"]
 |====
 |Tag|Type|Description
 <% tagset.mapping.keys.sort()

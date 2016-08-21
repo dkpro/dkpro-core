@@ -281,6 +281,10 @@ def scanModelBuilderFiles(File aDirectory, def aEngines) {
                         // used in multiple places
                         case 'dictionary':
                             return engine.tool == 'lemmatizer';
+                        // Required to handle CoreNLP "depparser" models because depparser component
+                        // is categorized as "parser" not as "depparser"
+                        case 'depparser':
+                            return engine.tool == 'parser';
                         default:
                             return engine.tool == (model.@tool as String);
                         }

@@ -1,7 +1,7 @@
 .Datasets (${datasets.size()})
-[options="header", cols="4,1,1,1"]
+[options="header", cols="4,1,1,1,1"]
 |====
-|Dataset|Version|Language|License footnoteref:[licenseDisclaimer]
+|Dataset|Version|Language|Encoding|License footnoteref:[licenseDisclaimer]
 
 <% 
 datasets.each { key, dataset -> 
@@ -9,6 +9,7 @@ datasets.each { key, dataset ->
 | <<dataset-${ key },${ dataset.name }>>
 | ${dataset.version ?: '_unknown_'}
 | ${dataset.language ?: '_unknown_'}
+| ${dataset.encoding ?: '_unknown_'}
 | <% 
   if (dataset.licenses) {
     switch (dataset.licenses.size()) {
