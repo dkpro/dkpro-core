@@ -71,6 +71,12 @@ public class LoadedDataset
     {
         return description.getLanguage();
     }
+    
+    @Override
+    public String getEncoding()
+    {
+        return description.getEncoding();
+    }
 
     @Override
     public File[] getDataFiles()

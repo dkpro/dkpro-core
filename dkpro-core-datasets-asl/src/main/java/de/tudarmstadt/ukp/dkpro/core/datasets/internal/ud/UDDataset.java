@@ -63,6 +63,12 @@ public class UDDataset
     }
 
     @Override
+    public String getEncoding()
+    {
+        return "UTF-8";
+    }
+    
+    @Override
     public File[] getLicenseFiles()
     {
         return new File[] { new File(baseDir, "LICENSE.txt") };

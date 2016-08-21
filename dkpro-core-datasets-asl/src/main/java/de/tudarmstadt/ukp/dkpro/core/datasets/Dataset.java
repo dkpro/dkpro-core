@@ -32,6 +32,8 @@ public interface Dataset
     
     String getLanguage();
     
+    String getEncoding();
+    
     File[] getDataFiles();
     
     File[] getLicenseFiles();  
