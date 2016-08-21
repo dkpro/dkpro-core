@@ -3,6 +3,7 @@ datasetId: gum-dep
 version: 2.2.0
 language: en
 mediaType: text/x.org.dkpro.conll-2006
+encoding: UTF-8
 
 name: Georgetown University Multilayer Corpus
 url: https://corpling.uis.georgetown.edu/gum/

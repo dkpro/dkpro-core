@@ -4,7 +4,7 @@ version: 0.1
 language: sl
 mediaType: text/x.org.dkpro.conll-2006
 
-name: Slovene Dependency Treebank
+name: Slovene Dependency Treebank 0.1
 url: http://nl.ijs.si/sdt/
 attribution: |
   Sašo Džeroski, Tomaž Erjavec, Nina Ledinek, Petr Pajas, Zdenek Žabokrtský, Andreja Žele: 

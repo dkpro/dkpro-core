@@ -5,7 +5,7 @@ language: sv
 mediaType: text/x.org.dkpro.conll-2006
 encoding: UTF-8
 
-name: Talbanken05
+name: Talbanken05 DEP
 url: http://stp.lingfil.uu.se/%7Enivre/research/Talbanken05.html
 attribution: |
   Joakim Nivre, Jens Nilsson and Johan Hall (2006) Talbanken05: A Swedish Treebank with Phrase

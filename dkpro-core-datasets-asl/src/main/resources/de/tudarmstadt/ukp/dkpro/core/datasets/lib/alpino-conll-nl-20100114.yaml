@@ -1,0 +1,31 @@
+groupId: org.dkpro.core.datasets.alpino
+datasetId: alpino-alpino2conll
+version: 20100114
+language: nl
+mediaType: text/x.org.dkpro.conll-2006
+
+name: Alpino2conll
+url: http://www.let.rug.nl/~bplank/alpino2conll/
+attribution: |
+  Barbara Plank. Improved statistical measures to assess natural language parser performance across
+  domains. In Proceedings of the 7th International Conference on Language Resources and Evaluation
+  (LREC2010), Valletta, Malta, May 2010.
+description: |
+  Training and test datasets for Dutch in retagged CoNLL format. The data was converted from Alpino
+  XML into CoNLL format based on an adapted version of Erwin Marsi's conversion software, but PoS
+  tags were replaced by automatically assigned Alpino tags.
+   
+  (This description has been sourced from the corpus website).
+
+artifacts:
+  cdb.conll.utf8:
+    url: http://www.let.rug.nl/~bplank/alpino2conll/data/cdb.conll.utf8
+    sha1: 11313d405abb0f268247a2d5420afa413eb244e7
+  conll2006-test.conll:
+    url: http://www.let.rug.nl/~bplank/alpino2conll/data/conll2006-test.conll
+    sha1: 11313d405abb0f268247a2d5420afa413eb244e7
+          
+roles:
+  data:
+    - "cdb.conll.utf8"
+    - "conll2006-test.conll"

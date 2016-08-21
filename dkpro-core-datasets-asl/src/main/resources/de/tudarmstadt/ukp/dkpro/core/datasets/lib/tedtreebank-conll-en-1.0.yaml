@@ -1,0 +1,46 @@
+groupId: org.dkpro.core.datasets.tedtreebank
+datasetId: tedtreebank-conll
+version: 1.0
+language: en
+mediaType: text/x.org.dkpro.conll-2006
+
+name: NAIST/NTT TED Treebank
+url: http://ahclab.naist.jp/resource/tedtreebank/
+attribution: |
+  Graham Neubig, Katsuhito Sudoh, Yusuke Oda, Kevin Duh, Hajime Tsukada, Masaaki Nagata.
+  The NAIST-NTT Ted Talk Treebank. In proceedings of International Workshop on Spoken Language
+  Translation (IWSLT). Lake Tahoe, USA. December 2014.
+  (link:http://www.phontron.com/paper/neubig14iwslt.pdf[PDF])
+  (link:http://phontron.com/bibtex.php?n=222[bib])
+
+licenses:
+  - name: CC-BY-NC-SA 3.0 (?)
+    url: https://creativecommons.org/licenses/by-nc-sa/3.0/    
+
+description: |
+  The NAIST-NTT Ted Talk Treebank is a manually annotated treebank of TED talks that was created
+  through a joint research project of NAIST and the NTT CS Lab. All treebank annotation follows the
+  Penn Treebank standard.
+  
+  (This description has been sourced from the corpus website/README file in the corpus).
+
+  NOTE: The website does not state which version of the CC-BY-SA-NC applies. One might consider
+        it is the version 3.0 which is also used for the TED talks themselves.
+
+artifacts:
+  LICENSE.txt:
+    url: http://creativecommons.org/licenses/by-nc-sa/3.0/legalcode.txt
+    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+  data.tar.gz:
+    url: http://ahclab.naist.jp/resource/tedtreebank/naist-ntt-ted-treebank-v1.tar.gz
+    sha1: 89c6495bd64c4b3e699b4c478b47a0c827ea46ea
+    actions:
+      - action: explode
+        configuration: { strip: 1, includes: [ "README.md", "en-dep/*.dep" ] } 
+          
+roles:
+  licenses:
+    - LICENSE.txt
+    - data/README.md
+  data:
+    - "data/en-dep/*.dep"

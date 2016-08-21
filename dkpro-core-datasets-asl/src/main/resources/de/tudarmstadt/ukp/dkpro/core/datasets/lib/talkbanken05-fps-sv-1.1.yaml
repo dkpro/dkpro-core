@@ -5,7 +5,7 @@ language: sv
 mediaType: application/x.org.dkpro.tiger+xml
 encoding: ISO-8859-1
 
-name: Talbanken05
+name: Talbanken05 FPS
 url: http://stp.lingfil.uu.se/%7Enivre/research/Talbanken05.html
 attribution: |
   Joakim Nivre, Jens Nilsson and Johan Hall (2006) Talbanken05: A Swedish Treebank with Phrase
@@ -23,6 +23,10 @@ description: |
    
   (This description has been sourced from the corpus website).
   
+licenses:
+  - name: Talbanken05 License
+    url: http://stp.lingfil.uu.se/%7Enivre/research/Talbanken05.html
+
 artifacts:
   data.tar.gz:
     url: http://stp.lingfil.uu.se/%7Enivre/research/Talbanken05_1.1.tar.gz

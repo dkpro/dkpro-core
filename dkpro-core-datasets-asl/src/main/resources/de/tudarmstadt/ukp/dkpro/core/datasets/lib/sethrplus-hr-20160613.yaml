@@ -7,7 +7,8 @@ mediaType: text/x.org.dkpro.conll-u
 name: SETimes.HR+ Croatian dependency treebank
 url: https://github.com/ffnlp/sethr
 attribution: |
-  link:http://www.lrec-conf.org/proceedings/lrec2014/pdf/690_Paper.pdf[Agić and Ljubešić (2014)]
+  Agić and Ljubešić (2014)
+  (link:http://www.lrec-conf.org/proceedings/lrec2014/pdf/690_Paper.pdf[PDF])
   (link:http://aclweb.org/anthology/L/L14/L14-1542.bib[bib])
 description: |
   The treebank is a result of an effort in providing free-culture language resources for Croatian by

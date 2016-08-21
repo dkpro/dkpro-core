@@ -1,0 +1,27 @@
+groupId: org.dkpro.core.datasets.coptictb
+datasetId: coptictb
+version: 1.0
+# There is no ISO 639-1 language code for Coptic. Have to use ISO 639-3
+language: cop
+mediaType: text/x.org.dkpro.conll-2006
+
+name: Coptic Treebank
+url: http://copticscriptorium.org
+attribution: Amir Zeldes
+description: |
+  The Coptic Treebank from the Coptic SCRIPTORIUM corpora (http://copticscriptorium.org/).
+
+licenses:
+  - name: FIXME
+    url: https://github.com/CopticScriptorium/corpora/issues/8
+
+artifacts:
+  coptic.treebank.conll10:
+    url: "https://github.com/CopticScriptorium/corpora/raw/64310f2a52dc9aaaccbb05b125371a2c534a3c10/coptic-treebank/coptic.treebank.conll10"
+    sha1: 8c363df27408cb14cb42f3869916c1575fe1625a
+
+roles:
+  data:
+    - coptic.treebank.conll10
+
+
