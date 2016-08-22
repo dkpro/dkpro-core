@@ -42,7 +42,10 @@ formats.groupBy { getName(it.value.pom) }
 [[format-${ it.key }]]
 === ${it.key}
 
-[small]#*_Artifact ID:_* __${it.value.artifactId}__#
+****
+[horizontal, role="small"]
+Artifact{nbsp}ID::          ${it.value.artifactId}
+****
 
 <% if (new File(project.basedir, 
     "src/main/asciidoc/format-reference/sectionIntro${it.key}.adoc").exists()) { %>
@@ -54,12 +57,17 @@ include::{include-dir}sectionIntro${it.key}.adoc[]
 [discrete]
 ==== ${ it.key }Reader
 
+****
 [horizontal, role="small"]
 Reader{nbsp}class::          ${it.value.readerClass}
+****
 
+.Description
+--
 ++++
 ${Util.preparePassthrough(it.value.readerSpec.metaData.description)}
 ++++
+--
 
 <%
 def paramDecls = it.value.readerSpec.metaData.configurationParameterDeclarations
@@ -69,8 +77,7 @@ def paramValues = it.value.readerSpec.metaData.configurationParameterSettings
     
 if (paramDecls) { 
 %>
-[discrete]
-===== Parameters
+.Parameters
 <% paramDecls.each { %>
 `${it.key}` (__${it.value[0].type}<% 
 if (it.value[0].multiValued) { %>[]<% } 
@@ -94,9 +101,8 @@ def mimetypes = it.value.readerSpec.collectionReaderMetaData?.capabilities?.coll
         
 if (mimetypes) {
 %>
-[discrete]
-===== Media Types
-[options="header"]
+.Media Types
+[options="header", role="small"]
 |====
 |Media type
 <% mimetypes.each { mimetype -> %>
@@ -113,9 +119,8 @@ def outputs = it.value.readerSpec.collectionReaderMetaData?.capabilities?.collec
 
 if (outputs) {
 %>
-[discrete]
-===== Outputs
-[cols="h,v"]
+.Outputs
+[cols="h,v", role="small"]
 |====
 | Outputs
 | <% 
@@ -135,11 +140,17 @@ if (outputs) {
 [discrete]
 ==== ${ it.key }Writer
 
-[small]#*_Writer class:_* __${it.value.writerClass}__#
+****
+[horizontal, role="small"]
+Writer{nbsp}class::          ${it.value.writerClass}
+****
 
+.Description
+--
 ++++
 ${Util.preparePassthrough(it.value.writerSpec.metaData.description)}
 ++++
+--
 
 <%
 def paramDecls = it.value.writerSpec.metaData.configurationParameterDeclarations
@@ -149,8 +160,7 @@ def paramValues = it.value.writerSpec.metaData.configurationParameterSettings
     
 if (paramDecls) { 
 %>
-[discrete]
-===== Parameters
+.Parameters
 <% paramDecls.each { %>
 `${it.key}` (__${it.value[0].type}<% 
 if (it.value[0].multiValued) { %>[]<% } 
@@ -174,9 +184,8 @@ def mimetypes = it.value.writerSpec.analysisEngineMetaData?.capabilities?.collec
 
 if (mimetypes) {
 %>
-[discrete]
-===== Media types
-[options="header"]
+.Media types
+[options="header", role="small"]
 |====
 |Media type
 <% mimetypes.each { mimetype -> %>
@@ -192,9 +201,8 @@ def inputs = it.value.writerSpec.analysisEngineMetaData?.capabilities?.collect {
 
 if (inputs) {
 %>
-[discrete]
-===== Inputs
-[cols="h,v"]
+.Inputs
+[cols="h,v", role="small"]
 |====
 | Inputs 
 | <% 

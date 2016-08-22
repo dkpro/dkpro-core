@@ -1,3 +1,2 @@
-Known corpora in this format:
-
+.Known corpora in this format
 * link:http://www.linguateca.pt/floresta/corpus.html[Floresta Sintá(c)tica (Bosque)] - Portuguese

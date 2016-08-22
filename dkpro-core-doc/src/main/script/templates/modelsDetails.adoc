@@ -39,6 +39,7 @@ def renderModel(model) {
 [[model-${model.@artifactId}]]
 ==== ${model.@variant.text() } 
 
+****
 [horizontal, role="small"]
 Artifact{nbsp}ID:: ${model.@artifactId}
 Version::          ${model.@version}
@@ -51,12 +52,11 @@ Source::           ${getSource(model)} <%
 if (model.@md5.text()) { %>
 MD5::              ${model.@md5.text()}
 <% } %>
+****
 
 
 <% if (model.metadata.entry.size() > 0) { %>
-[discrete]
-===== Metadata for ${model.@shortArtifactId} 
-
+.Metadata for ${model.@shortArtifactId} 
 [options="header", role="small"]
 |====
 |Key|Value

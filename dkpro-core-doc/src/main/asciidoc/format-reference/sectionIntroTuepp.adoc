@@ -1,6 +1,5 @@
 TüPP D/Z is a collection of articles from the German newspaper taz (die tageszeitung)
 annotated and encoded in a XML format.
 
-Known corpora in this format:
-
+.Known corpora in this format
 * link:http://www.sfs.uni-tuebingen.de/de/ascl/ressourcen/corpora/tuepp-dz.html[TüPP-D/Z] - German

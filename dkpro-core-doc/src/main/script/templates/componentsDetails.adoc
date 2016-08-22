@@ -35,14 +35,19 @@ def engine = it.value; %>
 [[engine-${ it.key }]]
 ==== ${it.key}
 
+****
 [horizontal, role="small"]
 Role::             ${engine.role}
 Artifact{nbsp}ID:: ${engine.artifactId}
 Class::            ${engine.spec.annotatorImplementationName}
+****
 
+.Description
+--
 ++++
 ${Util.preparePassthrough(engine.spec.metaData.description)}
 ++++
+--
 
 <%
 def testClassPath = "${it.value.module}/src/test/java/${it.value.implName.replaceAll('\\.', '/')}Test.java";
@@ -76,9 +81,8 @@ def paramValues = engine.spec.metaData.configurationParameterSettings
     
 if (paramDecls) { 
 %>
-[discrete]
-===== Parameters
 
+.Parameters
 <% paramDecls.each { %>
 `${it.key}` (__${it.value[0].type}<% 
 if (it.value[0].multiValued) { %>[]<% } 
@@ -104,8 +108,8 @@ def outputs = engine.spec.analysisEngineMetaData?.capabilities?.collect {
 
 if (inputs || outputs) {
 %>
-[discrete]
-===== Inputs and outputs
+
+.Inputs and outputs
 [cols="h,v", role="small"]
 |====
 | Inputs 
@@ -133,8 +137,7 @@ def languages = engine.spec.analysisEngineMetaData?.capabilities?.collect {
         it.languagesSupported }.flatten().sort().unique();
 if (languages) {
 %>
-[discrete]
-===== Languages
+.Languages
 [options="header", role="small"]
 |====
 |Language
@@ -150,8 +153,7 @@ if (languages) {
 def mods = models.findAll { it.@engine == engine.name };
 
 if (mods) { %>
-[discrete]
-===== Models
+.Models
 [options="header", role="small"]
 |====
 |Language|Variant|Version

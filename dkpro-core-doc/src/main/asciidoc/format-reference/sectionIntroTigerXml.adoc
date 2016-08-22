@@ -4,8 +4,7 @@ link:http://www.ims.uni-stuttgart.de/forschung/ressourcen/werkzeuge/tigersearch.
 format. The format has later been link:http://www.lrec-conf.org/proceedings/lrec2004/pdf/202.pdf[extended] to
 also support semantic frame annotations.
 
-Known corpora in this format:
-
+.Known corpora in this format
 * link:http://www.linguateca.pt/floresta/corpus.html[Floresta Sintá(c)tica (Bosque)] - Portuguese
 * link:http://semeval2.fbk.eu/semeval2.php[Semeval-2 Task 10] - (extended format)
 * link:http://zil.ipipan.waw.pl/Sk%C5%82adnica[Składnica frazowa] -  Polish

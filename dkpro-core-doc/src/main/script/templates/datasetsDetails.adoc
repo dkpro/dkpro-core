@@ -23,6 +23,7 @@ datasets.each { key, dataset ->
 
 ${links(dataset)}
 
+****
 [horizontal, role="small"]
 ID::          ${key}
 Version::     ${dataset.version ?: 'unknown'}
@@ -42,7 +43,9 @@ License{empty}footnoteref:[licenseDisclaimer]:: <%
     %>__unknown__<%
   }
 %>
+****
 
+.Description
 ${dataset.description ?: ''}
 
 <%
