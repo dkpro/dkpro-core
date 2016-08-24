@@ -537,7 +537,6 @@
 		<module>../dkpro-core-clearnlp-asl</module>
 		<module>../dkpro-core-cogroo-asl</module>
 		<module>../dkpro-core-commonscodec-asl</module>
-        <module>../dkpro-core-datasets-asl</module>
 		<module>../dkpro-core-decompounding-asl</module>
 		<module>../dkpro-core-dictionaryannotator-asl</module>
         <module>../dkpro-core-eval-asl</module>
