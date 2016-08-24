@@ -37,10 +37,10 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.api.datasets.Dataset;
+import de.tudarmstadt.ukp.dkpro.core.api.datasets.DatasetFactory;
+import de.tudarmstadt.ukp.dkpro.core.api.datasets.Split;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.datasets.Dataset;
-import de.tudarmstadt.ukp.dkpro.core.datasets.DatasetFactory;
-import de.tudarmstadt.ukp.dkpro.core.datasets.Split;
 import de.tudarmstadt.ukp.dkpro.core.eval.EvalUtil;
 import de.tudarmstadt.ukp.dkpro.core.eval.model.Span;
 import de.tudarmstadt.ukp.dkpro.core.eval.report.Result;

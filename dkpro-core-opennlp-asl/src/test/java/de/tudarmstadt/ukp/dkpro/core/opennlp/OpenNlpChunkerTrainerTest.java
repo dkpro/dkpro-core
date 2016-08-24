@@ -25,6 +25,7 @@ import static org.junit.Assert.assertEquals;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.ConfigurationParameterFactory;
@@ -32,10 +33,11 @@ import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+
+import de.tudarmstadt.ukp.dkpro.core.api.datasets.Dataset;
+import de.tudarmstadt.ukp.dkpro.core.api.datasets.DatasetFactory;
+import de.tudarmstadt.ukp.dkpro.core.api.datasets.Split;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
-import de.tudarmstadt.ukp.dkpro.core.datasets.Dataset;
-import de.tudarmstadt.ukp.dkpro.core.datasets.DatasetFactory;
-import de.tudarmstadt.ukp.dkpro.core.datasets.Split;
 import de.tudarmstadt.ukp.dkpro.core.eval.EvalUtil;
 import de.tudarmstadt.ukp.dkpro.core.eval.model.Span;
 import de.tudarmstadt.ukp.dkpro.core.eval.report.Result;
