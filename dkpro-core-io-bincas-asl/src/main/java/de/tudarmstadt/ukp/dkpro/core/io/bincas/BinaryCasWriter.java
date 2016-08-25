@@ -30,6 +30,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.cas.impl.CASCompleteSerializer;
 import org.apache.uima.cas.impl.CASMgrSerializer;
 import org.apache.uima.cas.impl.CASSerializer;
@@ -185,7 +186,7 @@ public class BinaryCasWriter
                     writeTypeSystem(aJCas, docOS);
                     typeSystemWritten = true; // Embedded type system
                 }
-                serializeWithCompression(aJCas.getCas(), docOS, aJCas.getTypeSystem());
+                serializeWithCompression(aJCas.getCas(), docOS, (TypeSystem) null);
             }
             else {
                 throw new IllegalArgumentException("Unknown format [" + format
