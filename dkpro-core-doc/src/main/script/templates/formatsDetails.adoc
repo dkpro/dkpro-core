@@ -44,6 +44,7 @@ formats.groupBy { getName(it.value.pom) }
 
 ****
 [horizontal, role="small"]
+Group{nbsp}ID::             ${it.value.groupId}
 Artifact{nbsp}ID::          ${it.value.artifactId}
 ****
 
@@ -59,7 +60,7 @@ include::{include-dir}sectionIntro${it.key}.adoc[]
 
 ****
 [horizontal, role="small"]
-Reader{nbsp}class::          ${it.value.readerClass}
+Implementation::      ${it.value.readerClass}
 ****
 
 .Description
@@ -142,7 +143,7 @@ if (outputs) {
 
 ****
 [horizontal, role="small"]
-Writer{nbsp}class::          ${it.value.writerClass}
+Implementation::      ${it.value.writerClass}
 ****
 
 .Description

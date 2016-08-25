@@ -17,7 +17,7 @@ if (new File(project.basedir,
 include::{include-dir}sectionIntro${fileSuffix}.adoc[]
 <% } %>
 
-.Analysis Components in group ${group.key} (${group.value.size()})
+.Analysis Components in category ${group.key} (${group.value.size()})
 [options="header", cols="1,2"]
 |====
 |Component|Description
@@ -37,9 +37,10 @@ def engine = it.value; %>
 
 ****
 [horizontal, role="small"]
-Role::             ${engine.role}
+Category::         ${engine.role}
+Group{nbsp}ID::    ${engine.groupId}
 Artifact{nbsp}ID:: ${engine.artifactId}
-Class::            ${engine.spec.annotatorImplementationName}
+Implementation::   ${engine.spec.annotatorImplementationName}
 ****
 
 .Description
