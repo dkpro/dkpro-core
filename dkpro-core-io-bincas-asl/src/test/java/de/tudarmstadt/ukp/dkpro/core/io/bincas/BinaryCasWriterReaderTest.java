@@ -51,6 +51,7 @@ import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.cas.CAS;
+import org.apache.uima.cas.SerialFormat;
 import org.apache.uima.cas.impl.CASCompleteSerializer;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.collection.CollectionReaderDescription;
@@ -88,7 +89,7 @@ public class BinaryCasWriterReaderTest
     public void testSReinitialize()
         throws Exception
     {
-        write(testFolder.getPath(), "S", true);
+        write(testFolder.getPath(), SerialFormat.SERIALIZED.toString(), true);
         read(testFolder.getPath(), NONE, true); // Type system is reinitialized from the persisted type system
     }
 
@@ -120,7 +121,7 @@ public class BinaryCasWriterReaderTest
     public void test0Preinitialized()
         throws Exception
     {
-        write(testFolder.getPath(), "0", false);
+        write(testFolder.getPath(), SerialFormat.BINARY.toString(), false);
         read(testFolder.getPath(), ALL, false);
     }
 
@@ -140,7 +141,7 @@ public class BinaryCasWriterReaderTest
     public void test6Lenient()
         throws Exception
     {
-        write(testFolder.getPath(), "6", true);
+        write(testFolder.getPath(), SerialFormat.COMPRESSED_FILTERED.toString(), true);
         read(testFolder.getPath(), METADATA, true);
     }
 
@@ -150,6 +151,22 @@ public class BinaryCasWriterReaderTest
     {
         write(testFolder.getPath(), "6", false);
         read(testFolder.getPath(), ALL, false);
+    }
+
+    @Test
+    public void test_COMPRESSED_FILTERED_TSI_preinitialized()
+        throws Exception
+    {
+        write(testFolder.getPath(), SerialFormat.COMPRESSED_FILTERED_TSI.toString(), false);
+        read(testFolder.getPath(), ALL, false);
+    }
+
+    @Test
+    public void test_COMPRESSED_FILTERED_TSI_lenient()
+        throws Exception
+    {
+        write(testFolder.getPath(), SerialFormat.COMPRESSED_FILTERED_TSI.toString(), false);
+        read(testFolder.getPath(), METADATA, false);
     }
 
     @Test
@@ -235,6 +252,7 @@ public class BinaryCasWriterReaderTest
                     BinaryCasWriter.class, 
                     BinaryCasWriter.PARAM_FORMAT, aFormat, 
                     BinaryCasWriter.PARAM_TARGET_LOCATION, aLocation,
+                    BinaryCasWriter.PARAM_FILENAME_EXTENSION, ".bin",
                     BinaryCasWriter.PARAM_TYPE_SYSTEM_LOCATION, 
                             aWriteTypeSystem ? new File(aLocation, "typesystem.bin") : null);
         }
@@ -243,6 +261,7 @@ public class BinaryCasWriterReaderTest
                     BinaryCasWriter.class, 
                     BinaryCasWriter.PARAM_FORMAT, aFormat, 
                     BinaryCasWriter.PARAM_TARGET_LOCATION, aLocation,
+                    BinaryCasWriter.PARAM_FILENAME_EXTENSION, ".bin",
                     BinaryCasWriter.PARAM_TYPE_SYSTEM_LOCATION, 
                             aWriteTypeSystem ? "typesystem.bin" : null);
         }
