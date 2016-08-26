@@ -32,13 +32,15 @@ import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.io.FileUtils;
@@ -140,10 +142,26 @@ public class DatasetFactory
     private Map<String, DatasetDescriptionImpl> loadFromYaml()
         throws IOException
     {
-        // Scan for YAML dataset descriptions
+        // Scan for locators
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        Resource[] resources = resolver
-                .getResources("classpath:de/tudarmstadt/ukp/dkpro/core/api/datasets/lib/*.yaml");
+        Resource[] locators = resolver
+                .getResources("classpath:META-INF/org.dkpro.core/datasets.txt");
+
+        // Read locators
+        Set<String> patterns = new LinkedHashSet<>();
+        for (Resource locator : locators) {
+            try (InputStream is = locator.getInputStream()) {
+                IOUtils.lineIterator(is, "UTF-8").forEachRemaining(l -> patterns.add(l));
+            }
+        }
+        
+        // Scan for YAML dataset descriptions
+        List<Resource> resources = new ArrayList<>();
+        for (String pattern : patterns) {
+            for (Resource r : resolver.getResources(pattern)) {
+                resources.add(r);
+            }
+        }
 
         // Configure YAML deserialization
         Constructor datasetConstructor = new Constructor(DatasetDescriptionImpl.class);
@@ -157,7 +175,7 @@ public class DatasetFactory
         Yaml yaml = new Yaml(datasetConstructor);
         
         // Ensure that there is a fixed order (at least if toString is correctly implemented)
-        Arrays.sort(resources, (a, b) -> {
+        Collections.sort(resources, (a, b) -> {
             return a.toString().compareTo(b.toString());
         });
         
