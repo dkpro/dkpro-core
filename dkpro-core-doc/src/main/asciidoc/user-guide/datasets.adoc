@@ -152,8 +152,11 @@ Such post-processing can be declared via the **actions** section of an artifact 
 
 This action extracts an archive. The archive format is automatically detected (ensure that
 the artifact name extension is retained if you assign an alternative name for an archive).
-Supported formats are: zip, jar, tar, tar.gz (tgz), tar.bz2, tar.xz, xz, rar, ... (and
-possibly more formats supported by Apache Commons Compress). 
+Supported formats are: zip, jar, tar, tar.gz (tgz), tar.bz2, tar.xz, xz, rar, 7z, ... (and
+possibly more formats supported by Apache Commons Compress).
+
+The explode action can be specified multiple times on an artifact, e.g. to extract nested archives.
+In this case, for all but the first, the additional parameter **file** needs to be specified.
 
 NOTE: Files are always extracted into a subfolder of the dataset cache which has the name of the
       artifact without any extensions. E.g. if the artifact name is `data.zip`, then its contents
@@ -175,6 +178,10 @@ includes:: This can be a single pattern string or a list of pattern strings. Sup
 excludes:: Same patterns as for **includes**. If includes and excludes are both specified, the
            excludes apply only to the included files. The order in which the includes/excludes are
            specified in the YAML file is irrelevant.
+file:: When extracting nested archives, this parameter points to the archive to be exploded. E.g.
+       if result from extracting the archive `data.zip` is a set of new files `data/part1.zip` and
+       `data/part2.zip`, then these nested archives can be exploded using additional explode actions
+       that specify the **file** parameter.
           
 .Example explode configuration
 [source,yaml,indent=0]
