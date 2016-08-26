@@ -33,9 +33,12 @@ import java.util.Map;
 import org.apache.commons.compress.archivers.ArchiveEntry;
 import org.apache.commons.compress.archivers.ArchiveInputStream;
 import org.apache.commons.compress.archivers.ArchiveStreamFactory;
+import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry;
+import org.apache.commons.compress.archivers.sevenz.SevenZFile;
 import org.apache.commons.compress.compressors.CompressorException;
 import org.apache.commons.compress.compressors.CompressorStreamFactory;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 
 import com.github.junrar.Archive;
 import com.github.junrar.exception.RarException;
@@ -68,6 +71,10 @@ public class Explode
         if (targetFile.toString().toLowerCase(Locale.ENGLISH).endsWith(".rar")) {
             extractRar(aAction, targetFile, dsi.getOwner().resolve(dsi));
         }
+        if (targetFile.toString().toLowerCase(Locale.ENGLISH).endsWith(".7z")) {
+            // 7z does not support streaming in Apache Commons Compress
+            extract7z(aAction, targetFile, dsi.getOwner().resolve(dsi));
+        }
         else {
             // Auto-detect the archive format using Apache Commons Compress 
             try (InputStream is = new BufferedInputStream(Files.newInputStream(targetFile))) {
@@ -86,6 +93,47 @@ public class Explode
                 ArchiveInputStream archive = new ArchiveStreamFactory()
                         .createArchiveInputStream(uncompressed);
                 extract(aAction, targetFile, archive, dsi.getOwner().resolve(dsi));
+            }
+        }
+    }
+
+    private void extract7z(ActionDescription aAction, Path aCachedFile, Path aTarget)
+        throws IOException, RarException
+    {
+        // We always extract archives into a subfolder. Figure out the name of the folder.
+        String base = getBase(aCachedFile.getFileName().toString());
+        
+        Map<String, Object> cfg = aAction.getConfiguration();
+        int strip = cfg.containsKey("strip") ? (int) cfg.get("strip") : 0;
+        
+        AntFileFilter filter = new AntFileFilter(coerceToList(cfg.get("includes")),
+                coerceToList(cfg.get("excludes")));
+        
+        try (SevenZFile archive = new SevenZFile(aCachedFile.toFile())) {
+            SevenZArchiveEntry entry = archive.getNextEntry();
+            while (entry != null) {
+                String name = stripLeadingFolders(entry.getName(), strip);
+                
+                if (name == null) {
+                    // Stripped to null - nothing left to extract - continue;
+                    continue;
+                }
+                
+                if (filter.accept(name)) {
+                    Path out = aTarget.resolve(base).resolve(name);
+                    if (entry.isDirectory()) {
+                        Files.createDirectories(out);
+                    }
+                    else {
+                        Files.createDirectories(out.getParent());
+                        try (OutputStream os = Files.newOutputStream(out)) {
+                            InputStream is = new SevenZEntryInputStream(archive, entry);
+                            IOUtils.copyLarge(is, os);
+                        }
+                    }
+                }
+                
+                entry = archive.getNextEntry();
             }
         }
     }
@@ -211,5 +259,47 @@ public class Explode
             throw new IllegalArgumentException("Cannot coerce to String list: [" + aRaw + "]");
         }
         return cooked;
+    }
+    
+    private static class SevenZEntryInputStream
+        extends InputStream
+    {
+        private SevenZFile archive;
+        private SevenZArchiveEntry entry;
+        private int totalRead;
+        
+        public SevenZEntryInputStream(SevenZFile aArchive, SevenZArchiveEntry aEnty)
+        {
+            archive = aArchive;
+            entry = aEnty;
+        }
+        
+        @Override
+        public int read()
+            throws IOException
+        {
+            if (totalRead < entry.getSize()) {
+                totalRead++;
+                return archive.read();
+            }
+            else {
+                return -1;
+            }
+        }
+        
+        @Override
+        public int read(byte[] aB, int aOff, int aLen)
+            throws IOException
+        {
+            if (totalRead < entry.getSize()) {
+                int blocksize = (int) Math.min(aLen, entry.getSize() - totalRead);
+                int read = archive.read(aB, aOff, blocksize);
+                totalRead += read;
+                return read;
+            }
+            else {
+                return -1;
+            }
+        }
     }
 }

@@ -36,7 +36,7 @@ import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class DatasetFactoryTest
 {
-    //@Ignore("Used at times for offline testing / development")
+    @Ignore("Used at times for offline testing / development")
     @Test
     public void testOne()
         throws Exception
@@ -45,7 +45,7 @@ public class DatasetFactoryTest
         
         DatasetFactory df = new DatasetFactory(cache);
         {
-            Dataset ds = df.load("tedtreebank-conll-en-1.0");
+            Dataset ds = df.load("wasr-en-xl-1.00");
             assertDatasetOk(ds);
         }
 //        {
@@ -68,6 +68,7 @@ public class DatasetFactoryTest
         }
     }
 
+    @Ignore("Used at times for offline testing / development")
     @Test
     public void testShared()
         throws Exception
@@ -81,6 +82,7 @@ public class DatasetFactoryTest
         assertDatasetOk(ds2);
     }
 
+    @Ignore("Used at times for offline testing / development")
     @Test
     public void testLoadSimple()
         throws Exception
@@ -92,6 +94,7 @@ public class DatasetFactoryTest
         assertDatasetOk(ds);
     }
 
+    @Ignore("Used at times for offline testing / development")
     @Test
     public void testLoadWithExplode()
         throws Exception

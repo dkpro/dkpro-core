@@ -1,0 +1,62 @@
+groupId: org.dkpro.core.datasets.wasr
+datasetId: wasr-xl-en
+version: 1.00
+language: en
+mediaType: text/x.org.dkpro.conll-2009
+
+name: English Word Sense and Semantic Role Datasets (WaSR)
+url: https://www.ukp.tu-darmstadt.de/data/semantic-role-resources/knowledge-based-semantic-role-labeling/
+attribution: |
+  Silvana Hartmann, Judith Eckle-Kohler, and Iryna Gurevych. Generating Training Data for Semantic
+  Role Labeling based on Label Transfer from Linked Lexical Resources. In: Transactions of the
+  Association for Computational Linguistics, vol. 4, no. 1, p. (to appear), 2016.
+  (link:https://www.ukp.tu-darmstadt.de/fileadmin/user_upload/Group_UKP/publikationen/2016/717-cameraready.pdf[PDF])
+description: |
+  English Frame and Role Annotations.
+   
+  (This description has been sourced from the README file included with the corpus).
+
+licenses:
+  - name: CC-BY-NC-ND 3.0
+    url: https://creativecommons.org/licenses/by-nc-nd/3.0/
+
+artifacts:
+  LICENSE.txt:
+    url: http://creativecommons.org/licenses/by-nc-nd/3.0/legalcode.txt
+    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+  part1.tar.bz2:
+    url: "https://www.ukp.tu-darmstadt.de/fileadmin/user_upload/Group_UKP/data/semantic_role_resources/WaSR-en_v1_part1.tar.bz2"
+    sha1: ef7ccf5cb23da63003bdb19d99b15b0ea2821e55
+    shared: true
+    actions:
+    - action: explode
+      configuration: { strip: 1, includes: [ "README", "WaSR_XL_part1_3.7z" ] }
+    - action: explode
+      configuration: { file: "part1/WaSR_XL_part1_3.7z" } 
+  part2.tar.bz2:
+    url: "https://www.ukp.tu-darmstadt.de/fileadmin/user_upload/Group_UKP/data/semantic_role_resources/WaSR-en_v1_part2.tar.bz2"
+    sha1: 0a9c98cbf1fe02841edf52e963444a7e38986577
+    shared: true
+    actions:
+    - action: explode
+      configuration: { strip: 1 }
+    - action: explode
+      configuration: { file: "part2/WaSR_XL_part2_3.7z" } 
+  part3.tar.bz2:
+    url: "https://www.ukp.tu-darmstadt.de/fileadmin/user_upload/Group_UKP/data/semantic_role_resources/WaSR-en_v1_part3.tar.bz2"
+    sha1: 9c0cc79ecab9140f82683d39ed6acb51b148f9f7
+    shared: true
+    actions:
+    - action: explode
+      configuration: { strip: 1 }
+    - action: explode
+      configuration: { file: "part3/WaSR_XL_part3_3.7z" } 
+    
+roles:
+  licenses:
+    - LICENSE.txt
+  data:
+    - "WaSR_XL_part1_3/WaSR_XL_part1_3.tsv"    
+    - "WaSR_XL_part2_3/WaSR_XL_part2_3.tsv"    
+    - "WaSR_XL_part3_3/WaSR_XL_part3_3.tsv"    
+    
