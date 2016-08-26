@@ -51,7 +51,7 @@ public class TokenizedTextWriterTest
             throws UIMAException, IOException
     {
         String text = "This is the 1st sentence .\nHere is another sentence .";
-        File targetFile = new File("target/TokenizedTextWriterTest.out");
+        File targetFile = new File(context.getTestOutputFolder(), "TokenizedTextWriterTest.out");
         File tokenized = new File("src/test/resources/tokenizedTexts/textTokenized.txt");
 
         AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
@@ -67,7 +67,7 @@ public class TokenizedTextWriterTest
             throws UIMAException, IOException
     {
         String text = "This is the 1st sentence .\nHere is another sentence .";
-        File targetDir = new File("target/TokenizedTextWriterTest.dir");
+        File targetDir = context.getTestOutputFolder();
         File targetFile = new File(targetDir, "id.txt");
         File tokenized = new File("src/test/resources/tokenizedTexts/textTokenized.txt");
 
@@ -103,7 +103,7 @@ public class TokenizedTextWriterTest
     public void testLemmas()
             throws IOException, UIMAException
     {
-        File targetFile = new File("target/lemmas.out");
+        File targetFile = new File(context.getTestOutputFolder(), "lemmas.out");
         targetFile.deleteOnExit();
         String expected = "lemma1 lemma2";
         int expectedLines = 1;
@@ -150,7 +150,7 @@ public class TokenizedTextWriterTest
     public void testStopwords()
             throws UIMAException, IOException
     {
-        File targetFile = new File("target/TokenizedTextWriterNoStopwords.out");
+        File targetFile = new File(context.getTestOutputFolder(),"TokenizedTextWriterNoStopwords.out");
         targetFile.deleteOnExit();
         File tokenized = new File("src/test/resources/tokenizedTexts/textTokenizedNoStopwords.txt");
         String text = "This is the 1st sentence .\nHere is another sentence .";
@@ -169,7 +169,7 @@ public class TokenizedTextWriterTest
     public void testNumbers()
             throws UIMAException, IOException
     {
-        File targetFile = new File("target/TokenizedTextWriterNoStopwords.out");
+        File targetFile = new File(context.getTestOutputFolder(), "TokenizedTextWriterNoStopwords.out");
         targetFile.deleteOnExit();
         File tokenized = new File("src/test/resources/tokenizedTexts/textTokenizedNoNumbers.txt");
         String text = "This is 1 sentence .\nHere is 2 sentences , or even 2.5 .";
