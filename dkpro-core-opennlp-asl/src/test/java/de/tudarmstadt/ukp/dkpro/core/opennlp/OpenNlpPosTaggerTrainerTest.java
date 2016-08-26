@@ -23,14 +23,12 @@ import static org.apache.uima.fit.pipeline.SimplePipeline.iteratePipeline;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.ConfigurationParameterFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -46,25 +44,20 @@ import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class OpenNlpPosTaggerTrainerTest
 {
-    private Dataset ds;
-
     @Test
     public void test()
         throws Exception
     {
+        File cache = DkproTestContext.getCacheFolder();
         File targetFolder = testContext.getTestOutputFolder();
         
+        // NOTE: This file contains Asciidoc markers for partial inclusion of this file in the 
+        // documentation. Do not remove these tags!
+        // tag::datasets[]
+        // Obtain dataset
+        DatasetFactory loader = new DatasetFactory(cache);
+        Dataset ds = loader.load("gum-en-conll-2.2.0");
         Split split = ds.getSplit(0.8);
-        
-//        System.out.println("Training model from training data");
-//        CollectionReaderDescription xr = createReaderDescription(
-//                Conll2006Reader.class,
-//                Conll2006Reader.PARAM_PATTERNS, ds.getDataFiles(),
-//                Conll2006Reader.PARAM_LANGUAGE, ds.getLanguage());
-//
-//        SimplePipeline.runPipeline(xr);
-//        
-//        System.exit(0);
         
         // Train model
         System.out.println("Training model from training data");
@@ -73,6 +66,7 @@ public class OpenNlpPosTaggerTrainerTest
                 Conll2006Reader.PARAM_PATTERNS, split.getTrainingFiles(),
                 Conll2006Reader.PARAM_USE_CPOS_AS_POS, true,
                 Conll2006Reader.PARAM_LANGUAGE, ds.getLanguage());
+        // end::datasets[]
         
         AnalysisEngineDescription trainer = createEngineDescription(
                 OpenNlpPosTaggerTrainer.class,
@@ -114,13 +108,6 @@ public class OpenNlpPosTaggerTrainerTest
         assertEquals(0.732623, results.getPrecision(), 0.0001);
         assertEquals(0.748419, results.getRecall(), 0.0001);
     }
-    
-    @Before
-    public void setup() throws IOException
-    {
-        DatasetFactory loader = new DatasetFactory(DkproTestContext.getCacheFolder());
-        ds = loader.load("gum-en-conll-2.2.0");
-    }    
     
     @Rule
     public DkproTestContext testContext = new DkproTestContext();

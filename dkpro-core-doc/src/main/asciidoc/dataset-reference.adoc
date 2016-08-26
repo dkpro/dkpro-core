@@ -20,7 +20,7 @@
 :docinfo:
 
 The document provides information about the datasets available through the DKPro Core
-`DatasetFactory` class. 
+<<user-guide.adoc#sect_datasets,`DatasetFactory`>> class.
 
 The factory automatically downloads the datasets. It maintains a local
 cache to avoid redundant downloads. Datasets are validated against checksums stored in the dataset
@@ -41,6 +41,8 @@ This is *not* an exhaustive list of the datasets supported by DKPro Core. Any da
 supported by DKPro Core can be used. For more details, refer to the 
 <<format-reference.adoc#,Format Reference>>. If you are missing any datasets from the list, please
 tell us by opening an issue in our link:https://github.com/dkpro/dkpro-core/issues[issue tracker].
+You can also simply create a new dataset description yourself and submit a pull request. For details
+on describing new datasets, please refer to the <<user-guide.adoc#sect_datasets,User Guide>>.
 
 == Overview
 include::{generated-dir}datasetsOverview.adoc[]

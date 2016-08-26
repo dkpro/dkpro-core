@@ -16,10 +16,17 @@ def links(dataset)
     return html;
 }
 
-datasets.each { key, dataset ->
+datasets
+    .groupBy { it.value.language }
+    .sort { it.key }
+    .each { language, languageDatasets ->
+%>
+=== ${language} 
+<%
+        languageDatasets.each { key, dataset ->
 %>
 [[dataset-${key}]]
-=== ${dataset.name} 
+==== ${dataset.name} 
 
 ${links(dataset)}
 
@@ -85,5 +92,6 @@ ${dataset.description ?: ''}
 %>
 |====
 <%
+    }
 }
 %>
