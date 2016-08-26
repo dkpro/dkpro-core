@@ -1,4 +1,4 @@
-The CoNLL 2009 (aka CoNLL-X) format targets semantic role labeling. Columns are tab-separated. Sentences are separated by a blank new line.
+The CoNLL 2009 format targets semantic role labeling. Columns are tab-separated. Sentences are separated by a blank new line.
 
 .Columns
 [cols="3*", options="header"]
