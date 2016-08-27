@@ -45,7 +45,7 @@ public class PennTreebankCombinedReaderWriterTest
     public void testTreeWithRoot()
         throws Exception
     {
-        testRoundTrip("tree_with_ROOT.txt", 
+        testRoundTrip("tree_with_ROOT.mrg", 
                 PennTreebankCombinedWriter.PARAM_NO_ROOT_LABEL, false);
     }
 
@@ -53,7 +53,7 @@ public class PennTreebankCombinedReaderWriterTest
     public void testTreeWithTraceRemoved()
         throws Exception
     {
-        testOneWay("tree_with_trace_filtered.txt", "tree_with_trace.txt",
+        testOneWay("tree_with_trace_filtered.mrg", "tree_with_trace.mrg",
                 PennTreebankCombinedWriter.PARAM_EMPTY_ROOT_LABEL, true);
     }
 
@@ -61,7 +61,7 @@ public class PennTreebankCombinedReaderWriterTest
     public void testTreeWithTrace()
         throws Exception
     {
-        testRoundTrip("tree_with_trace.txt",
+        testRoundTrip("tree_with_trace.mrg",
                 PennTreebankCombinedReader.PARAM_REMOVE_TRACES, false,
                 PennTreebankCombinedReader.PARAM_WRITE_TRACES_TO_TEXT, true,
                 PennTreebankCombinedWriter.PARAM_EMPTY_ROOT_LABEL, true);
@@ -71,7 +71,7 @@ public class PennTreebankCombinedReaderWriterTest
     public void testTreeWithParentheses()
         throws Exception
     {
-        testRoundTrip("tree_with_parentheses.txt",
+        testRoundTrip("tree_with_parentheses.mrg",
                 PennTreebankCombinedWriter.PARAM_EMPTY_ROOT_LABEL, true);
     }
 
@@ -79,7 +79,7 @@ public class PennTreebankCombinedReaderWriterTest
     public void testTreeWithDirectSpeech()
         throws Exception
     {
-        testRoundTrip("tree_with_direct_speech.txt",
+        testRoundTrip("tree_with_direct_speech.mrg",
                 PennTreebankCombinedWriter.PARAM_EMPTY_ROOT_LABEL, true);
     }
 
@@ -89,7 +89,7 @@ public class PennTreebankCombinedReaderWriterTest
     public void testAll()
         throws Exception
     {
-        testRoundTrip("stanford-english-trees.txt",
+        testRoundTrip("stanford-english-trees.mrg",
                 PennTreebankCombinedWriter.PARAM_EMPTY_ROOT_LABEL, true);
     }
 
@@ -126,7 +126,7 @@ public class PennTreebankCombinedReaderWriterTest
 
         String expected = FileUtils.readFileToString(reference, "UTF-8");
         String actual = FileUtils.readFileToString(
-                new File(output, FilenameUtils.getBaseName(input.toString()) + ".penn"), "UTF-8");
+                new File(output, FilenameUtils.getBaseName(input.toString()) + ".mrg"), "UTF-8");
         assertEquals(expected.trim(), actual.trim());
     }
 

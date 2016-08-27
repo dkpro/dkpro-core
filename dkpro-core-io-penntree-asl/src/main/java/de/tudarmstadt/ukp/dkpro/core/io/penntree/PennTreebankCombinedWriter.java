@@ -49,11 +49,11 @@ public class PennTreebankCombinedWriter
     extends JCasFileWriter_ImplBase
 {
     /**
-     * Specify the suffix of output files. Default value <code>.penn</code>. If the suffix is not
+     * Specify the suffix of output files. Default value <code>.mrg</code>. If the suffix is not
      * needed, provide an empty string as value.
      */
     public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
-    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".penn")
+    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".mrg")
     private String filenameSuffix;
 
     /**

@@ -47,7 +47,7 @@ public class PennTreebankCombinedReaderTest
     {
         CollectionReader reader = createReader(PennTreebankCombinedReader.class, 
                 PennTreebankCombinedReader.PARAM_SOURCE_LOCATION, 
-                "src/test/resources/stanfordPennTrees/stanford-english-trees-first2.txt");
+                "src/test/resources/stanfordPennTrees/stanford-english-trees-first2.mrg");
         
         JCas jcas = JCasFactory.createJCas();
         reader.getNext(jcas.getCas());
@@ -96,7 +96,7 @@ public class PennTreebankCombinedReaderTest
         CollectionReader reader = createReader(PennTreebankCombinedReader.class, 
                 PennTreebankCombinedReader.PARAM_LANGUAGE, "en",
                 PennTreebankCombinedReader.PARAM_SOURCE_LOCATION, 
-                "src/test/resources/stanfordPennTrees/tree_with_direct_speech.txt");
+                "src/test/resources/stanfordPennTrees/tree_with_direct_speech.mrg");
         
         JCas jcas = JCasFactory.createJCas();
         reader.getNext(jcas.getCas());
@@ -128,7 +128,7 @@ public class PennTreebankCombinedReaderTest
         CollectionReader reader = createReader(PennTreebankCombinedReader.class, 
                 PennTreebankCombinedReader.PARAM_LANGUAGE, "en",
                 PennTreebankCombinedReader.PARAM_SOURCE_LOCATION, 
-                "src/test/resources/stanfordPennTrees/tree_with_parentheses.txt");
+                "src/test/resources/stanfordPennTrees/tree_with_parentheses.mrg");
         
         JCas jcas = JCasFactory.createJCas();
         reader.getNext(jcas.getCas());
