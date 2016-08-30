@@ -169,8 +169,8 @@
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent</supertypeName>
     </typeDescription>
   <typeDescription>
-      <name>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.PRN</name>
-      <description/>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.PARN</name>
+      <description>This cateory is called PRN in the Penn Treebank tagset. However, PRN is a reserved device name on Window. Thus we had to rename this category. The old PRN type is still present in the DKPro Core type system, but it is deprecated, no longer used, and no JCas classes are generated for it.</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent</supertypeName>
     </typeDescription>
   </types>

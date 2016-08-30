@@ -22,7 +22,7 @@ SQ=S
 # NX	noun head in certain complex coordination contexts
 NX=NX
 # PRN	parenthetical
-PRN=PRN
+PRN=PARN
 # PRT	particle
 PRT=PRT
 # QP	quantity phrase (multi-word numbers)

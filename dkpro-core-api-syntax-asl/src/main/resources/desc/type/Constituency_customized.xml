@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <name>Syntax</name>
+  <description/>
+  <version>${version}</version>
+  <vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
+  <imports>
+    <import name="desc.type.Constituency"/>
+  </imports>
+  <types>
+  <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.PRN</name>
+      <description>This type is no longer used and no JCas wrapper is generated for it because on Windows, it conflicts with the reserved device name for printers.
+
+@Deprecated Use PARN instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent</supertypeName>
+    </typeDescription>
+  </types>
+</typeSystemDescription>
