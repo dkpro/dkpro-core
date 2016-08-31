@@ -182,7 +182,7 @@ public class BerkeleyParserTest
 
         String[] constituentMapped = { "ADVP 20,22", "ADVP 9,11", "NP 0,2", "NP 17,19", "NP 23,25",
                 "NP 23,34", "NP 32,34", "NP 37,40", "NP 37,45", "NP 43,45", "NP 6,34", "NP 6,45",
-                "NP 6,8", "PRN 20,34", "QP 29,31", "ROOT 0,47", "VP 12,14", "VP 26,28", "VP 3,45",
+                "NP 6,8", "PARN 20,34", "QP 29,31", "ROOT 0,47", "VP 12,14", "VP 26,28", "VP 3,45",
                 "VP 9,14", "X 0,47", "X 23,28", "X 37,42", "X 6,14", "X 6,16" };
 
         String[] constituentOriginal = { "ADVP 20,22", "ADVP 9,11", "CP 6,16", "DNP 37,42",
