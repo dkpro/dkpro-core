@@ -143,7 +143,7 @@
 	</scm>
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-		<uima.version>2.9.0-SNAPSHOT</uima.version>
+		<uima.version>2.9.0</uima.version>
 		<uimafit.version>2.3.0-SNAPSHOT</uimafit.version>
         <uimafit.plugin.version>2.3.0-SNAPSHOT</uimafit.plugin.version>
 		<lucene.version>4.4.0</lucene.version>
