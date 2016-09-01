@@ -19,6 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.io.penntree;
 
 import java.io.IOException;
 import java.io.InputStream;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.LineIterator;
 import org.apache.commons.lang.StringUtils;
@@ -218,13 +219,9 @@ public class PennTreebankCombinedReader
             String line = lineBuffer != null ? lineBuffer : aLi.nextLine();
             lineNumber++;
             lineBuffer = null;
+            
             if (StringUtils.isBlank(line)) {
-                if (tree.length() > 0) {
-                    break;
-                }
-                else {
-                    continue;
-                }
+                continue;
             }
             
             // If the next line starts at the beginning and with an opening round bracket 
