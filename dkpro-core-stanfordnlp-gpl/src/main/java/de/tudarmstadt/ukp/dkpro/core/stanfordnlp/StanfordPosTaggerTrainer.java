@@ -34,6 +34,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
@@ -70,8 +71,9 @@ public class StanfordPosTaggerTrainer
      */
     public static final String PARAM_CLUSTER_FILE = "clusterFile";
     @ConfigurationParameter(name = PARAM_CLUSTER_FILE, mandatory = false)
-    private File clusterFiles;
+    private File clusterFile;
 
+    private boolean clusterFilesTemporary;
     private File tempData;
     private PrintWriter out;
     
@@ -98,6 +100,27 @@ public class StanfordPosTaggerTrainer
             }
             out.println();
         }
+        
+        try {
+            String p = clusterFile.getPath();
+            if (p.contains("(") || p.contains(")") || p.contains(",")) {
+                // The Stanford POS tagger trainer does not suppor these characters in the cluster
+                // files path. If we have those, try to copy the clusters somewhere save before
+                // training. See: https://github.com/stanfordnlp/CoreNLP/issues/255
+                File tempClusterFile = File.createTempFile("dkpro-stanford-pos-trainer",
+                        ".cluster");
+                FileUtils.copyFile(clusterFile, tempClusterFile);
+                clusterFile = tempClusterFile;
+                clusterFilesTemporary = true;
+            }
+            else {
+                clusterFilesTemporary = false;
+            }
+        }
+        catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
     
     @Override
@@ -122,9 +145,9 @@ public class StanfordPosTaggerTrainer
                 "format=TSV,wordColumn=0,tagColumn=1," + tempData.getAbsolutePath());
         props.setProperty("model", targetLocation.getAbsolutePath());
         props.setProperty("encoding", "UTF-8");
-        if (clusterFiles != null) {
+        if (clusterFile != null) {
             String arch = props.getProperty("arch");
-            arch = arch.replaceAll("\\$\\{distsimCluster\\}", clusterFiles.getAbsolutePath());
+            arch = arch.replaceAll("\\$\\{distsimCluster\\}", clusterFile.getAbsolutePath());
             props.setProperty("arch", arch);
         }
 
@@ -158,6 +181,10 @@ public class StanfordPosTaggerTrainer
         // Clean up temporary data file
         if (tempData != null) {
             tempData.delete();
+        }
+        
+        if (clusterFilesTemporary) {
+            clusterFile.delete();
         }
     }
     
