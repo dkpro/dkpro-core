@@ -36,10 +36,12 @@ import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -78,6 +80,33 @@ public class StanfordPosTaggerTrainer
     private PrintWriter out;
     
     @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
+        
+        try {
+            String p = clusterFile.getPath();
+            if (p.contains("(") || p.contains(")") || p.contains(",")) {
+                // The Stanford POS tagger trainer does not suppor these characters in the cluster
+                // files path. If we have those, try to copy the clusters somewhere save before
+                // training. See: https://github.com/stanfordnlp/CoreNLP/issues/255
+                File tempClusterFile = File.createTempFile("dkpro-stanford-pos-trainer",
+                        ".cluster");
+                FileUtils.copyFile(clusterFile, tempClusterFile);
+                clusterFile = tempClusterFile;
+                clusterFilesTemporary = true;
+            }
+            else {
+                clusterFilesTemporary = false;
+            }
+        }
+        catch (IOException e) {
+            throw new ResourceInitializationException(e);
+        }
+    }
+    
+    @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
@@ -99,27 +128,6 @@ public class StanfordPosTaggerTrainer
                 out.printf("%s\t%s%n", token.getCoveredText(), token.getPos().getPosValue());
             }
             out.println();
-        }
-        
-        try {
-            String p = clusterFile.getPath();
-            if (p.contains("(") || p.contains(")") || p.contains(",")) {
-                // The Stanford POS tagger trainer does not suppor these characters in the cluster
-                // files path. If we have those, try to copy the clusters somewhere save before
-                // training. See: https://github.com/stanfordnlp/CoreNLP/issues/255
-                File tempClusterFile = File.createTempFile("dkpro-stanford-pos-trainer",
-                        ".cluster");
-                FileUtils.copyFile(clusterFile, tempClusterFile);
-                clusterFile = tempClusterFile;
-                clusterFilesTemporary = true;
-            }
-            else {
-                clusterFilesTemporary = false;
-            }
-        }
-        catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
     }
     
