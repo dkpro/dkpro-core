@@ -86,7 +86,7 @@ public class StanfordPosTaggerTrainer
         super.initialize(aContext);
         
         try {
-            String p = clusterFile.getPath();
+            String p = clusterFile.getAbsolutePath();
             if (p.contains("(") || p.contains(")") || p.contains(",")) {
                 // The Stanford POS tagger trainer does not suppor these characters in the cluster
                 // files path. If we have those, try to copy the clusters somewhere save before
