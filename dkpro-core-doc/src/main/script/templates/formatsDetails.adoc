@@ -79,20 +79,22 @@ def paramValues = it.value.readerSpec.metaData.configurationParameterSettings
 if (paramDecls) { 
 %>
 .Parameters
+[horizontal, role="small"]
 <% paramDecls.each { %>
-`${it.key}` (__${it.value[0].type}<% 
+${it.key}::
++
+++++
+${Util.preparePassthrough(it.value[0].description)}
+++++
+<% if (!it.value[0].mandatory) { %>Optional -- <% }
+%>Type: __${it.value[0].type}<% 
 if (it.value[0].multiValued) { %>[]<% } 
-%>__)<%
-if (paramValues[it.key]) { %> = `<%
+%>__ <%
+if (paramValues[it.key]) { %> -- 
+Default value: `<%
 out.print escapeJava((paramValues[it.key][0].value != null ? 
     paramValues[it.key][0].value : 'null') as String).replaceAll('`','{backtick}')   
-%>` <% } 
-if (!it.value[0].mandatory) { %> [optional]<% } 
-%>::
-+ 
-++++
-${it.value[0].description}
-++++
+%>` <% } %>
 <% } // paramDecls.each %>
 <% } // if (paramDecls) %>
 
@@ -162,20 +164,22 @@ def paramValues = it.value.writerSpec.metaData.configurationParameterSettings
 if (paramDecls) { 
 %>
 .Parameters
+[horizontal, role="small"]
 <% paramDecls.each { %>
-`${it.key}` (__${it.value[0].type}<% 
+${it.key}::
++
+++++
+${Util.preparePassthrough(it.value[0].description)}
+++++
+<% if (!it.value[0].mandatory) { %>Optional -- <% }
+%>Type: __${it.value[0].type}<% 
 if (it.value[0].multiValued) { %>[]<% } 
-%>__)<%
-if (paramValues[it.key]) { %> = `<%
+%>__ <%
+if (paramValues[it.key]) { %> -- 
+Default value: `<%
 out.print escapeJava((paramValues[it.key][0].value != null ? 
     paramValues[it.key][0].value : 'null') as String).replaceAll('`','{backtick}')   
-%>` <% } 
-if (!it.value[0].mandatory) { %> [optional]<% } 
-%>::
-+ 
-++++
-${it.value[0].description}
-++++
+%>` <% } %>
 <% } // paramDecls.each %>
 <% } // if (paramDecls) %>
 
