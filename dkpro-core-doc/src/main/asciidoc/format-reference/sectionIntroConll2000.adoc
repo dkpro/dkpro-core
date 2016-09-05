@@ -2,7 +2,7 @@ The CoNLL 2000 format represents POS and Chunk tags. Fields in a line are separa
 Sentences are separated by a blank new line.
 
 .Columns
-[cols="3*", options="header"]
+[cols="1,2,3", options="header"]
 |====
 | Column | Type         | Description
 | FORM   

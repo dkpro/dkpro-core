@@ -1,7 +1,7 @@
 The CoNLL 2006 (aka CoNLL-X) format targets dependency parsing. Columns are tab-separated. Sentences are separated by a blank new line.
 
 .Columns
-[cols="3*", options="header"]
+[cols="1,2,3", options="header"]
 |====
 | Column  | Type/Feature | Description
 

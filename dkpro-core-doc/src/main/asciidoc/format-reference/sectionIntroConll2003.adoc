@@ -4,7 +4,7 @@ IOB1 format. I.e. a `B` prefix is only used if the category of the following spa
 category of the current span.
  
 .Columns
-[cols="3*", options="header"]
+[cols="1,2,3", options="header"]
 |====
 | Column  | Type/Feature | Description
 | FORM    
