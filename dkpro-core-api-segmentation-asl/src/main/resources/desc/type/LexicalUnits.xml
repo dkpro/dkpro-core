@@ -124,6 +124,11 @@
           <description>If this unit had an ID in the source format from which it was imported, it may be stored here. IDs are typically not assiged by DKPro Core components. If an ID is present, it should be respected by writers.</description>
           <rangeTypeName>uima.cas.String</rangeTypeName>
         </featureDescription>
+      <featureDescription>
+          <name>form</name>
+          <description>Potentially normalized form of the token text.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
       </features>
     </typeDescription>
     <typeDescription>
