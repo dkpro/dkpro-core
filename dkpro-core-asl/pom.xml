@@ -272,6 +272,11 @@
             </dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                <artifactId>de.tudarmstadt.ukp.dkpro.core.io.lxf-asl</artifactId>
+                <version>1.9.0-SNAPSHOT</version>
+            </dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.negra-asl</artifactId>
 				<version>1.9.0-SNAPSHOT</version>
 			</dependency>
@@ -513,6 +518,7 @@
 		<module>../dkpro-core-io-jdbc-asl</module>
 		<module>../dkpro-core-io-jwpl-asl</module>
         <module>../dkpro-core-io-lif-asl</module>
+        <module>../dkpro-core-io-lxf-asl</module>
 		<module>../dkpro-core-io-negra-asl</module>
 		<module>../dkpro-core-io-pdf-asl</module>
 		<module>../dkpro-core-io-penntree-asl</module>
