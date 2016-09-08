@@ -28,6 +28,7 @@ import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
+import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -89,6 +90,22 @@ public class MalletEmbeddingsTrainerTest
                 .forEach(array -> Arrays.stream(array).forEach(Double::parseDouble));
 
         embeddingsFile.delete();
+    }
+
+    @Test(timeout = 60000, expected = ResourceInitializationException.class)
+    public void testNoTarget()
+            throws IOException, UIMAException
+    {
+        File text = new File("src/test/resources/txt/*");
+
+        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
+                TextReader.PARAM_SOURCE_LOCATION, text,
+                TextReader.PARAM_LANGUAGE, "en");
+        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
+        AnalysisEngineDescription embeddings = createEngineDescription(
+                MalletEmbeddingsTrainer.class,
+                MalletEmbeddingsTrainer.PARAM_NUM_THREADS, 1);
+        SimplePipeline.runPipeline(reader, segmenter, embeddings);
     }
 
     @Test(timeout = 60000)

@@ -144,6 +144,10 @@ public abstract class MalletModelTrainer
             throws ResourceInitializationException
     {
         super.initialize(context);
+        if (getTargetLocation() == null) {
+            throw new ResourceInitializationException(
+                    new IllegalArgumentException("No target location set!"));
+        }
 
         // locale should be set to US to define the output format of the Mallet models (especially decimal numbers).
         Locale.setDefault(LOCALE);

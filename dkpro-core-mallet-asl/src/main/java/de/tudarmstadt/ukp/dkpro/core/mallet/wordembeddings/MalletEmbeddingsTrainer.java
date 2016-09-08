@@ -100,6 +100,7 @@ public class MalletEmbeddingsTrainer
         matrix.countWords(instanceList);
         matrix.train(instanceList, getNumThreads(), numNegativeSamples);
 
+        assert(getTargetLocation() != null);
         getLogger().info("Writing output to " + getTargetLocation());
         File targetFile = new File(getTargetLocation());
         if (targetFile.getParentFile() != null) {
