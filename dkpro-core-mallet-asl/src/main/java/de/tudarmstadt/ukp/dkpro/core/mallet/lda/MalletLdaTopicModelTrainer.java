@@ -134,6 +134,8 @@ public class MalletLdaTopicModelTrainer
             model.setSymmetricAlpha(useSymmetricAlpha);
             model.setTopicDisplay(displayInterval, displayNTopicWords);
             model.estimate();
+
+            getLogger().info("Writing model to " + getTargetLocation());
             File targetFile = new File(getTargetLocation());
             if (targetFile.getParentFile() != null) {
                 targetFile.getParentFile().mkdirs();
