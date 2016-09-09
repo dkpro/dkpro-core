@@ -29,7 +29,10 @@ import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -67,7 +70,7 @@ public class PhraseSequenceGenerator
         this.minTokenLength = builder.minTokenLength;
         this.featurePath = builder.featurePath;
         stopwords = builder.stopwordsFile.isPresent()
-                ? TextUtils.readStopwordsFile(builder.stopwordsFile.get(), lowercase)
+                ? TextUtils.readStopwordsURL(builder.stopwordsFile.get(), lowercase)
                 : Collections.emptySet();
         this.stopwordReplacement = builder.stopwordsReplacement;
         this.filterRegexes = builder.filterRegexes;
@@ -234,7 +237,7 @@ public class PhraseSequenceGenerator
         private boolean lowercase = false;
         private Optional<String> coveringType = Optional.empty();
         private int minTokenLength = 0;
-        private Optional<String> stopwordsFile = Optional.empty();
+        private Optional<URL> stopwordsFile = Optional.empty();
         private String stopwordsReplacement = "";
         private String featurePath = Token.class.getCanonicalName();
         @SuppressWarnings("SpellCheckingInspection") private Set<String> filterRegexes = new HashSet<>();
@@ -251,15 +254,31 @@ public class PhraseSequenceGenerator
             return this;
         }
 
+        public Builder stopwordsFile(String stopwordsFile)
+                throws MalformedURLException
+        {
+            if (stopwordsFile.isEmpty()) {
+                this.stopwordsFile = Optional.empty();
+                return this;
+            } else {
+                return stopwordsFile(new File(stopwordsFile));
+            }
+        }
+
+        public Builder stopwordsFile(File stopwordsFile)
+                throws MalformedURLException
+        {
+            URL url = stopwordsFile.toURI().toURL();
+            return stopwordsURL(url);
+        }
+
         /**
-         * @param stopwordsFile set the location of the stopwords file
+         * @param stopwordsURL set the location of the stopwords file
          * @return a {@link Builder}
          */
-        public Builder stopwordsFile(String stopwordsFile)
+        public Builder stopwordsURL(URL stopwordsURL)
         {
-            this.stopwordsFile = stopwordsFile.isEmpty() ?
-                    Optional.empty() :
-                    Optional.of(stopwordsFile);
+            this.stopwordsFile = Optional.of(stopwordsURL);
             return this;
         }
 
