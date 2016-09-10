@@ -80,6 +80,22 @@ class StanfordSegmenterTest
     }
     
     @Test
+    public void testFrench() throws Exception
+    {
+        JCas jcas = JCasFactory.createJCas();
+        jcas.setDocumentLanguage("fr");
+        jcas.setDocumentText("Tim a dit Jamie pour la 100e fois de quitter la salle .");
+        
+        AnalysisEngine aed = createEngine(StanfordSegmenter.class);
+        aed.process(jcas);
+        
+        String[] tokens = { "Tim", "a", "dit", "Jamie", "pour", "la", "100e", "fois", "de",
+                "quitter", "la", "salle", "." };
+        
+        AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
+    }
+    
+    @Test
     public void testSpanish() throws Exception
     {
         JCas jcas = JCasFactory.createJCas();

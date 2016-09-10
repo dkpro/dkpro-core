@@ -18,8 +18,6 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
-import static java.lang.Character.isWhitespace;
-import static java.lang.Math.min;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 import java.io.StringReader;
@@ -44,7 +42,6 @@ import edu.stanford.nlp.international.spanish.process.SpanishTokenizer;
 import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetBeginAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetEndAnnotation;
 import edu.stanford.nlp.ling.CoreLabel;
-import edu.stanford.nlp.ling.Word;
 import edu.stanford.nlp.process.CoreLabelTokenFactory;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.process.PTBTokenizer;
@@ -55,7 +52,7 @@ import edu.stanford.nlp.process.WordToSentenceProcessor.NewlineIsSentenceBreak;
 /**
  * Stanford sentence splitter and tokenizer.
  */
-@LanguageCapability({"ar", "en", "es", "fr"})
+@LanguageCapability({"en", "es", "fr"})
 public class StanfordSegmenter
     extends SegmenterBase
 {
@@ -64,7 +61,7 @@ public class StanfordSegmenter
 
     static {
     	tokenizerFactories = new HashMap<String, InternalTokenizerFactory>();
-        tokenizerFactories.put("ar", new InternalArabicTokenizerFactory());
+//        tokenizerFactories.put("ar", new InternalArabicTokenizerFactory());
     	tokenizerFactories.put("en", new InternalPTBTokenizerFactory());
         tokenizerFactories.put("es", new InternalSpanishTokenizerFactory());
         tokenizerFactories.put("fr", new InternalFrenchTokenizerFactory());
@@ -176,61 +173,18 @@ public class StanfordSegmenter
         
         if (isWriteToken()) {
             casTokens = new ArrayList<Token>();
-            final String text = aText;
             final Tokenizer<?> tokenizer = getTokenizer(language, aText);
-            int offsetInSentence = 0;
 
             List<?> tokens = tokenizer.tokenize();
-            outer: for (int i = 0; i < tokens.size(); i++) {
+            for (int i = 0; i < tokens.size(); i++) {
                 final Object token = tokens.get(i);
                 // System.out.println("Token class: "+token.getClass());
-                String t = null;
-                if (token instanceof String) {
-                    t = (String) token;
-                }
-                if (token instanceof CoreLabel) {
-                    CoreLabel l = (CoreLabel) token;
-                    t = l.word();
-                    int begin = l.get(CharacterOffsetBeginAnnotation.class);
-                    int end = l.get(CharacterOffsetEndAnnotation.class);
+                CoreLabel l = (CoreLabel) token;
+                String t = l.word();
+                int begin = l.get(CharacterOffsetBeginAnnotation.class);
+                int end = l.get(CharacterOffsetEndAnnotation.class);
 
-                    casTokens.add(createToken(aJCas, aZoneBegin + begin, aZoneBegin + end, i));
-                    offsetInSentence = end;
-                    continue;
-                }
-                if (token instanceof Word) {
-                    Word w = (Word) token;
-                    t = w.word();
-                }
-
-                if (t == null) {
-                    throw new AnalysisEngineProcessException(new IllegalStateException(
-                            "Unknown token type: " + token.getClass()));
-                }
-
-                // Skip whitespace
-                while (isWhitespace(text.charAt(offsetInSentence))) {
-                    offsetInSentence++;
-                    if (offsetInSentence >= text.length()) {
-                        break outer;
-                    }
-                }
-
-                // Match
-                if (text.startsWith(t, offsetInSentence)) {
-                    casTokens.add(createToken(aJCas, aZoneBegin + offsetInSentence, aZoneBegin
-                            + offsetInSentence + t.length(), i));
-                    offsetInSentence = offsetInSentence + t.length();
-                }
-                else {
-//                    System.out.println(aText);
-                    throw new AnalysisEngineProcessException(new IllegalStateException(
-                            "Text mismatch. Tokenizer: ["
-                                    + t
-                                    + "] CAS: ["
-                                    + text.substring(offsetInSentence,
-                                            min(offsetInSentence + t.length(), text.length()))));
-                }
+                casTokens.add(createToken(aJCas, t, aZoneBegin + begin, aZoneBegin + end));
             }
         }
 
