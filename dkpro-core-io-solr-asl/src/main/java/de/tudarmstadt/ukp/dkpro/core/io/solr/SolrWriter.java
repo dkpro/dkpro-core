@@ -27,7 +27,6 @@ import de.tudarmstadt.ukp.dkpro.core.io.solr.util.SolrUtils;
 /**
  * A simple implementation of {@link SolrWriter_ImplBase}
  *
- *
  */
 public class SolrWriter
     extends SolrWriter_ImplBase

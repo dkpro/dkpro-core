@@ -20,10 +20,12 @@ package de.tudarmstadt.ukp.dkpro.core.mallet.lda;
 import cc.mallet.topics.ParallelTopicModel;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
+import org.junit.Rule;
 import org.junit.Test;
 
 import java.io.File;
@@ -35,7 +37,9 @@ import static org.junit.Assert.assertTrue;
 
 public class MalletLdaTopicModelTrainerTest
 {
-    private static final File MODEL_FILE = new File("target/mallet/model");
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
+
     private static final String TXT_DIR = "src/test/resources/txt";
     private static final String TXT_FILE_PATTERN = "[+]*.txt";
 
@@ -43,6 +47,8 @@ public class MalletLdaTopicModelTrainerTest
     public void testEstimator()
             throws Exception
     {
+        File modelFile = new File(testContext.getTestOutputFolder(), "model");
+
         // tag::example[]
         int nTopics = 10;
         int nIterations = 50;
@@ -56,22 +62,22 @@ public class MalletLdaTopicModelTrainerTest
 
         AnalysisEngineDescription estimator = createEngineDescription(
                 MalletLdaTopicModelTrainer.class,
-                MalletLdaTopicModelTrainer.PARAM_TARGET_LOCATION, MODEL_FILE,
+                MalletLdaTopicModelTrainer.PARAM_TARGET_LOCATION, modelFile,
                 MalletLdaTopicModelTrainer.PARAM_N_ITERATIONS, nIterations,
                 MalletLdaTopicModelTrainer.PARAM_N_TOPICS, nTopics);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
         // end::example[]
 
-        assertTrue(MODEL_FILE.exists());
-        ParallelTopicModel model = ParallelTopicModel.read(MODEL_FILE);
+        assertTrue(modelFile.exists());
+        ParallelTopicModel model = ParallelTopicModel.read(modelFile);
         assertEquals(nTopics, model.getNumTopics());
-        MODEL_FILE.delete();
     }
 
     @Test
     public void testEstimatorSentence()
             throws Exception
     {
+        File modelFile = new File(testContext.getTestOutputFolder(), "model");
         int nTopics = 10;
         int nIterations = 50;
         String language = "en";
@@ -85,22 +91,22 @@ public class MalletLdaTopicModelTrainerTest
 
         AnalysisEngineDescription estimator = createEngineDescription(
                 MalletLdaTopicModelTrainer.class,
-                MalletLdaTopicModelTrainer.PARAM_TARGET_LOCATION, MODEL_FILE,
+                MalletLdaTopicModelTrainer.PARAM_TARGET_LOCATION, modelFile,
                 MalletLdaTopicModelTrainer.PARAM_N_ITERATIONS, nIterations,
                 MalletLdaTopicModelTrainer.PARAM_N_TOPICS, nTopics,
                 MalletLdaTopicModelTrainer.PARAM_COVERING_ANNOTATION_TYPE, entity);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
 
-        assertTrue(MODEL_FILE.exists());
-        ParallelTopicModel model = ParallelTopicModel.read(MODEL_FILE);
+        assertTrue(modelFile.exists());
+        ParallelTopicModel model = ParallelTopicModel.read(modelFile);
         assertEquals(nTopics, model.getNumTopics());
-        MODEL_FILE.delete();
     }
 
     @Test
     public void testEstimatorAlphaBeta()
             throws Exception
     {
+        File modelFile = new File(testContext.getTestOutputFolder(), "model");
         int nTopics = 10;
         int nIterations = 50;
         float alpha = nTopics / 50.0f;
@@ -115,16 +121,15 @@ public class MalletLdaTopicModelTrainerTest
 
         AnalysisEngineDescription estimator = createEngineDescription(
                 MalletLdaTopicModelTrainer.class,
-                MalletLdaTopicModelTrainer.PARAM_TARGET_LOCATION, MODEL_FILE,
+                MalletLdaTopicModelTrainer.PARAM_TARGET_LOCATION, modelFile,
                 MalletLdaTopicModelTrainer.PARAM_N_ITERATIONS, nIterations,
                 MalletLdaTopicModelTrainer.PARAM_N_TOPICS, nTopics,
                 MalletLdaTopicModelTrainer.PARAM_ALPHA_SUM, alpha,
                 MalletLdaTopicModelTrainer.PARAM_BETA, beta);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
 
-        assertTrue(MODEL_FILE.exists());
-        ParallelTopicModel model = ParallelTopicModel.read(MODEL_FILE);
+        assertTrue(modelFile.exists());
+        ParallelTopicModel model = ParallelTopicModel.read(modelFile);
         assertEquals(nTopics, model.getNumTopics());
-        MODEL_FILE.delete();
     }
 }

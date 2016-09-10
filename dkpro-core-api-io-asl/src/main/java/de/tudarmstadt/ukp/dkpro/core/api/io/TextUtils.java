@@ -18,6 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.api.io;
 
 import java.io.*;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Set;
@@ -39,7 +40,7 @@ public class TextUtils
     public static Set<String> readStopwordsFile(File file, boolean lowercase)
             throws IOException
     {
-        return readStopwordsFile(file.toPath(), lowercase);
+        return readStopwordsPath(file.toPath(), lowercase);
     }
 
     /**
@@ -67,10 +68,10 @@ public class TextUtils
      * @param lowercase   if true, lowercase everything
      * @return a collection of unique stopwords
      */
-    public static Set<String> readStopwordsFile(InputStream inputStream, boolean lowercase)
+    public static Set<String> readStopwordsInputStream(InputStream inputStream, boolean lowercase)
     {
-        return readStream(
-                new BufferedReader(new InputStreamReader(inputStream)).lines(), lowercase);
+        return readStream(new BufferedReader(new InputStreamReader(inputStream)).lines(),
+                lowercase);
     }
 
     /**
@@ -83,11 +84,16 @@ public class TextUtils
      * @return a collection of unique stopwords
      * @throws IOException if the file cannot be read
      */
-    public static Set<String> readStopwordsFile(Path path, boolean lowercase)
+    public static Set<String> readStopwordsPath(Path path, boolean lowercase)
             throws IOException
     {
-        return readStopwordsFile(Files.newInputStream(path), lowercase);
+        return readStopwordsInputStream(Files.newInputStream(path), lowercase);
+    }
 
+    public static Set<String> readStopwordsURL(URL url, boolean lowercase)
+            throws IOException
+    {
+        return readStopwordsInputStream(url.openStream(), lowercase);
     }
 
     private static Set<String> readStream(Stream<String> s, boolean lowercase)

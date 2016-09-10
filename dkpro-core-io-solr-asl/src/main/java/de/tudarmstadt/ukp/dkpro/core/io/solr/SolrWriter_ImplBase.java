@@ -56,7 +56,7 @@ public abstract class SolrWriter_ImplBase
 
     /**
      * Solr server URL string in the form {@code <prot>://<host>:<port>/<path>}, e.g.
-     * {@code http://localhost:8983/solr/collection1}.
+     * {@code http://localhost:8983/solr/collection1}
      */
     public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
     @ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true)
@@ -114,7 +114,7 @@ public abstract class SolrWriter_ImplBase
     @ConfigurationParameter(name = PARAM_OPTIMIZE_INDEX, mandatory = true, defaultValue = "false")
     private boolean optimizeIndex;
 
-    private SolrClient solrServer;
+    private SolrClient solrClient;
 
     @Override
     public void initialize(UimaContext context)
@@ -124,9 +124,12 @@ public abstract class SolrWriter_ImplBase
         getLogger().info(
                 String.format("Using Solr server at %s.%nQueue size: %d\tThreads: %d%n",
                         targetLocation, queueSize, numThreads));
-        solrServer = new ConcurrentUpdateSolrClient(targetLocation, queueSize, numThreads);
+        solrClient = new ConcurrentUpdateSolrClient.Builder(targetLocation)
+                .withQueueSize(queueSize)
+                .withThreadCount(numThreads)
+                .build();
         try {
-            int status = solrServer.ping().getStatus();
+            int status = solrClient.ping().getStatus();
             if (status != 0) {
                 throw new ResourceInitializationException(
                         "Server error. Response status: " + status, new Integer[] { status });
@@ -143,7 +146,7 @@ public abstract class SolrWriter_ImplBase
     {
         try {
             SolrInputDocument solrDocument = generateSolrDocument(aJCas);
-            solrServer.add(solrDocument);
+            solrClient.add(solrDocument);
         }
         catch (IOException | SolrServerException e) {
             throw new AnalysisEngineProcessException(e);
@@ -157,16 +160,16 @@ public abstract class SolrWriter_ImplBase
         super.collectionProcessComplete();
 
         try {
-            UpdateResponse response = solrServer.commit(waitFlush, waitSearcher);
+            UpdateResponse response = solrClient.commit(waitFlush, waitSearcher);
             getLogger().info(String.format("Solr server at '%s' responded: %s",
                     targetLocation, response.toString()));
             if (optimizeIndex) {
                 getLogger().info("Starting index optimization...");
-                solrServer.optimize(waitFlush, waitSearcher);
+                solrClient.optimize(waitFlush, waitSearcher);
                 getLogger().info(String.format("Solr server at '%s' responded: %s",
                         targetLocation, response.toString()));
             }
-            solrServer.close();
+            solrClient.close();
         }
         catch (SolrServerException | IOException e) {
             throw new AnalysisEngineProcessException(e);

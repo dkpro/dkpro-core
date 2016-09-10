@@ -26,7 +26,9 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGeneratorTest.*;
@@ -100,5 +102,71 @@ public class PhraseSequenceGeneratorTest
         Assert.assertEquals(expectedSize, sequence.length);
         Assert.assertEquals(expectedFirstToken, sequence[0].getText());
         Assert.assertEquals(expectedLastToken, sequence[sequence.length - 1].getText());
+    }
+
+    @Test
+    public void testGenerateSequenceStopwordsURL()
+            throws FeaturePathException, UIMAException, IOException
+    {
+        int expectedSize = 2;
+        URL stopwordsFile = this.getClass().getResource("/stopwords.txt");
+
+        String expectedFirstToken = "";
+        JCas jCas = jCasWithTokens();
+
+        PhraseSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
+                .stopwordsURL(stopwordsFile)
+                .lowercase(false)
+                .build();
+
+        List<LexicalPhrase[]> sequences = sequenceGenerator.tokenSequences(jCas);
+        assertEquals(1, sequences.size());
+        LexicalPhrase[] sequence = sequences.get(0);
+        Assert.assertEquals(expectedSize, sequence.length);
+        Assert.assertEquals(expectedFirstToken, sequence[0].getText());
+    }
+
+    @Test
+    public void testGenerateSequenceStopwordsFile()
+            throws FeaturePathException, UIMAException, IOException
+    {
+        int expectedSize = 2;
+        File stopwordsFile = new File("src/test/resources/stopwords.txt");
+
+        String expectedFirstToken = "";
+        JCas jCas = jCasWithTokens();
+
+        PhraseSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
+                .stopwordsFile(stopwordsFile)
+                .lowercase(false)
+                .build();
+
+        List<LexicalPhrase[]> sequences = sequenceGenerator.tokenSequences(jCas);
+        assertEquals(1, sequences.size());
+        LexicalPhrase[] sequence = sequences.get(0);
+        Assert.assertEquals(expectedSize, sequence.length);
+        Assert.assertEquals(expectedFirstToken, sequence[0].getText());
+    }
+
+    @Test
+    public void testGenerateSequenceStopwordsFileString()
+            throws FeaturePathException, UIMAException, IOException
+    {
+        int expectedSize = 2;
+        String stopwordsFile = "src/test/resources/stopwords.txt";
+        String expectedFirstToken = "";
+
+        JCas jCas = jCasWithTokens();
+
+        PhraseSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
+                .stopwordsFile(stopwordsFile)
+                .lowercase(false)
+                .build();
+
+        List<LexicalPhrase[]> sequences = sequenceGenerator.tokenSequences(jCas);
+        assertEquals(1, sequences.size());
+        LexicalPhrase[] sequence = sequences.get(0);
+        Assert.assertEquals(expectedSize, sequence.length);
+        Assert.assertEquals(expectedFirstToken, sequence[0].getText());
     }
 }

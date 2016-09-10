@@ -29,7 +29,9 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -301,6 +303,63 @@ public class StringSequenceGeneratorTest
         String[] sequence = sequences.get(0);
         assertEquals(expectedSize, sequence.length);
         assertEquals(expectedToken, sequence[0]);
+    }
+
+    @Test
+    public void testFilterStopwordsURL()
+            throws UIMAException, FeaturePathException, IOException
+    {
+        JCas jcas = jCasWithTokens();
+        URL stopwordsFile = this.getClass().getResource("/stopwords.txt");
+        int expectedSize = 1;
+        String expectedFirst = "Token2";
+
+        StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
+                .stopwordsURL(stopwordsFile)
+                .buildStringSequenceGenerator();
+
+        String[] sequence = sequenceGenerator.tokenSequences(jcas).get(0);
+
+        assertEquals(expectedSize, sequence.length);
+        assertEquals(expectedFirst, sequence[0]);
+    }
+
+    @Test
+    public void testFilterStopwordsFileString()
+            throws UIMAException, FeaturePathException, IOException
+    {
+        JCas jcas = jCasWithTokens();
+        String stopwordsFile = "src/test/resources/stopwords.txt";
+        int expectedSize = 1;
+        String expectedFirst = "Token2";
+
+        StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
+                .stopwordsFile(stopwordsFile)
+                .buildStringSequenceGenerator();
+
+        String[] sequence = sequenceGenerator.tokenSequences(jcas).get(0);
+
+        assertEquals(expectedSize, sequence.length);
+        assertEquals(expectedFirst, sequence[0]);
+    }
+
+    @Test
+    public void testFilterStopwordsFile()
+            throws UIMAException, FeaturePathException, IOException
+    {
+        JCas jcas = jCasWithTokens();
+        File stopwordsFile = new File("src/test/resources/stopwords.txt");
+        int expectedSize = 1;
+        String expectedFirst = "Token2";
+
+        StringSequenceGenerator sequenceGenerator = new PhraseSequenceGenerator.Builder()
+                .stopwordsFile(stopwordsFile)
+                .buildStringSequenceGenerator();
+
+        String[] sequence = sequenceGenerator.tokenSequences(jcas).get(0);
+
+        assertEquals(expectedSize, sequence.length);
+        assertEquals(expectedFirst, sequence[0]);
     }
 
     /* test character sequences*/
