@@ -124,7 +124,7 @@ public class IllinoisPosTagger
                     throw new IllegalArgumentException("Only language [en] is supported");
                 }
                 
-                POSAnnotator annotator = new POSAnnotator();
+                POSAnnotator annotator = new POSAnnotator(false);
 
                 SingletonTagset tags = new SingletonTagset(POS.class, "ptb");
 
@@ -179,7 +179,7 @@ public class IllinoisPosTagger
 
         // Run tagger
         try {
-            modelProvider.getResource().addView(document);
+            modelProvider.getResource().getView(document);
         }
         catch (AnnotatorException e) {
             throw new IllegalStateException(e);

@@ -20,6 +20,9 @@ package de.tudarmstadt.ukp.dkpro.core.lbj;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
+import java.io.File;
+
+import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
 import org.junit.Rule;
@@ -28,9 +31,19 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
+import edu.illinois.cs.cogcomp.pos.POSTagPlain;
 
 public class IllinoisPosTaggerTest
 {
+    @Test
+    public void testEnglishNative()
+        throws Exception
+    {
+        File tempFile = File.createTempFile("dkpro", ".txt");
+        FileUtils.write(tempFile, "This is a test .");
+        POSTagPlain.main(new String[] { tempFile.getAbsolutePath() });
+    }
+    
     @Test
     public void testEnglish()
         throws Exception

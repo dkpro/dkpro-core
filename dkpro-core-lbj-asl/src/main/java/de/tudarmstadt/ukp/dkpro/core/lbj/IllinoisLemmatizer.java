@@ -92,7 +92,7 @@ public class IllinoisLemmatizer
 
         // Run tagger
         try {
-            modelProvider.getResource().addView(document);
+            modelProvider.getResource().getView(document);
         }
         catch (AnnotatorException e) {
             throw new IllegalStateException(e);
