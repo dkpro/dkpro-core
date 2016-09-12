@@ -276,8 +276,8 @@
                 <version>1.9.0-SNAPSHOT</version>
             </dependency>
 			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-                <artifactId>de.tudarmstadt.ukp.dkpro.core.io.lxf-asl</artifactId>
+                <groupId>org.dkpro.core</groupId>
+                <artifactId>dkpro-core-io-lxf-asl</artifactId>
                 <version>1.9.0-SNAPSHOT</version>
             </dependency>
 			<dependency>

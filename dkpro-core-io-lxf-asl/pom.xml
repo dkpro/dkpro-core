@@ -25,7 +25,7 @@
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
   <groupId>org.dkpro.core</groupId>
-  <artifactId>dkpro-core-io-lxf</artifactId>
+  <artifactId>dkpro-core-io-lxf-asl</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <dependencies>
     <dependency>
