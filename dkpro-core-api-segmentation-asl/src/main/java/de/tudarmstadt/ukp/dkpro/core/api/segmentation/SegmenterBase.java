@@ -82,8 +82,6 @@ extends JCasAnnotator_ImplBase
 	@ConfigurationParameter(name=PARAM_WRITE_SENTENCE, mandatory=true, defaultValue="true")
     private boolean writeSentence;
 
-	private int tokenCount;
-
     public boolean isStrictZoning()
 	{
 		return strictZoning;
@@ -108,9 +106,6 @@ extends JCasAnnotator_ImplBase
 	public void process(JCas jcas)
 		throws AnalysisEngineProcessException
     {
-    	//sentenceCount = 0;
-    	tokenCount = 0;
-
 		String text = jcas.getDocumentText();
 
 		String[] zones = getZoneTypes();
@@ -203,8 +198,6 @@ extends JCasAnnotator_ImplBase
 		if (!isEmpty(span[0], span[1]) && isWriteSentence()) {
 			Sentence seg = new Sentence(aJCas, span[0], span[1]);
 			seg.addToIndexes(aJCas);
-			//sentenceCount++;
-			tokenCount = 0;
 			return seg;
 		}
 		else {
@@ -212,29 +205,25 @@ extends JCasAnnotator_ImplBase
 		}
 	}
 
-	protected Token createToken(final JCas aJCas, final int aBegin,
-			final int aEnd)
-	{
-		Token a = createToken(aJCas, aBegin, aEnd, tokenCount);
-		if (a != null) {
-			tokenCount++;
-		}
-		return a;
-	}
+    protected Token createToken(final JCas aJCas, final int aBegin, final int aEnd)
+    {
+        return createToken(aJCas, null, aBegin, aEnd);
+    }
 
-	protected Token createToken(final JCas aJCas, final int aBegin,
-			final int aEnd, final int aIndex)
-	{
-		int[] span = new int[] { aBegin, aEnd };
-		trim(aJCas.getDocumentText(), span);
-		if (!isEmpty(span[0], span[1]) && isWriteToken()) {
-			Token seg = new Token(aJCas, span[0], span[1]);
-			seg.addToIndexes(aJCas);
-			return seg;
-		}
-		else {
-			return null;
-		}
+    protected Token createToken(final JCas aJCas, final String aForm, final int aBegin,
+            final int aEnd)
+    {
+        int[] span = new int[] { aBegin, aEnd };
+        trim(aJCas.getDocumentText(), span);
+        if (!isEmpty(span[0], span[1]) && isWriteToken()) {
+            Token seg = new Token(aJCas, span[0], span[1]);
+            seg.setForm(aForm);
+            seg.addToIndexes(aJCas);
+            return seg;
+        }
+        else {
+            return null;
+        }
 	}
 
 	protected abstract void process(JCas aJCas, String text, int zoneBegin)
