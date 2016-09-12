@@ -1,0 +1,2 @@
+The BinaryWordVectorSerializer has been derived from a draft by Paul Dubs at the time available
+here: https://gist.github.com/treo/f5a346d53f89566b51bf88a9a42c67c7

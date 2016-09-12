@@ -46,6 +46,11 @@
 				<version>1.9.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
+                <groupId>org.dkpro.core</groupId>
+                <artifactId>dkpro-core-api-embeddings-asl</artifactId>
+                <version>1.9.0-SNAPSHOT</version>
+            </dependency>
+			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.featurepath-asl</artifactId>
 				<version>1.9.0-SNAPSHOT</version>
@@ -483,6 +488,7 @@
 		<module>../dkpro-core-api-coref-asl</module>
 		<module>../dkpro-core-api-datasets-asl</module>
 		<module>../dkpro-core-api-discourse-asl</module>
+        <module>../dkpro-core-api-embeddings-asl</module>
 		<module>../dkpro-core-api-featurepath-asl</module>
 		<module>../dkpro-core-api-io-asl</module>
 		<module>../dkpro-core-api-lexmorph-asl</module>
