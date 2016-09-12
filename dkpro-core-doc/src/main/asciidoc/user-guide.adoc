@@ -37,3 +37,7 @@ include::{include-dir}models.adoc[]
 <<<
 
 include::{include-dir}datasets.adoc[]
+
+<<<
+
+include::{include-dir}bibliography.adoc[]

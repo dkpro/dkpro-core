@@ -188,24 +188,6 @@ Hyphenated words cannot be properly processed by NLP tools. The
 <<component-reference.adoc#engine-HyphenationRemover,HyphenationRemover>> component can be used
 to join hypenated words.
 
-=== References
-
-Here are some further references that might be helpful when deciding which tools to use:
-
-* Giesbrecht, Eugenie and Evert, Stefan (2009). Part-of-speech tagging - a
-  solved task? An evaluation of POS taggers for the Web as corpus. In I.
-  Alegria, I. Leturia, and S. Sharoff, editors, Proceedings of the 5th Web as
-  Corpus Workshop (WAC5), San Sebastian, Spain. 
-  link:$$http://purl.org/stefan.evert/PUB/GiesbrechtEvert2009_Tagging.pdf$$[PDF]
-
-* Reut Tsarfaty, Djamé Seddah, Sandra Kübler, and Joakim Nivre. 2013.
-  Parsing morphologically rich languages: Introduction to the special issue.
-  Comput. Linguist. 39, 1 (March 2013), 15-22. link:$$https://aclweb.org/anthology/J/J13/J13-1003.pdf$$[PDF]
-
-* Wolfgang Seeker and Jonas Kuhn. 2013. Morphological and syntactic case in
-  statistical dependency parsing. Comput. Linguist. 39, 1 (March 2013), 23-55.
-  link:$$http://aclweb.org/anthology//J/J13/J13-1004.pdf$$[PDF]
-  
 === Adding components as dependencies (Maven)
 
 In order to start using an integrated tool from DKPro Core, we can add it as a
@@ -249,6 +231,10 @@ version, it is sufficient to change the value of the
 NOTE: If you use a multi-module project, the `properties` and `dependencyManagement` sections should
       go into the parent-pom of your project, while the `dependencies` section should be added to
       the respective module requiring the dependency.
+
+NOTE: If you want to use GPLed components, you have to add an additional dependency declaration
+      in the dependency management section referring to the `de.tudarmstadt.ukp.dkpro.core-gpl`
+      artifact.
 
 === Adding resources as dependencies (Maven)
 
