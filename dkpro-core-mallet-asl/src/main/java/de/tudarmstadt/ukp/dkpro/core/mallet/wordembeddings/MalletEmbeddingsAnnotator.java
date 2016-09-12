@@ -82,13 +82,6 @@ public class MalletEmbeddingsAnnotator
     @ConfigurationParameter(name = PARAM_LOWERCASE, mandatory = true, defaultValue = "false")
     private boolean lowercase;
 
-    /**
-     * If set to true (default: false), the model is expected to be in Word2Vec binary format.
-     * TODO: binary model format is not supported yet.
-     */
-    //    public static final String PARAM_MODEL_IS_BINARY = "modelIsBinary";
-    //    @ConfigurationParameter(name = PARAM_MODEL_IS_BINARY, mandatory = true, defaultValue = "false")
-    //    private boolean modelIsBinary;
     @Override
     public void initialize(UimaContext context)
             throws ResourceInitializationException
