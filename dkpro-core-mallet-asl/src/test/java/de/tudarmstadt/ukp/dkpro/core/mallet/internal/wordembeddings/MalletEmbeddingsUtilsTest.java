@@ -37,7 +37,7 @@ public class MalletEmbeddingsUtilsTest
         int expectedDimensions = 50;
         boolean hasHeader = false;
 
-        Map<String, double[]> embeddings = MalletEmbeddingsUtils
+        Map<String, float[]> embeddings = MalletEmbeddingsUtils
                 .readEmbeddingFileTxt(modelFile, hasHeader);
 
         assertEquals(expectedSize, embeddings.size());
@@ -53,7 +53,7 @@ public class MalletEmbeddingsUtilsTest
         int expectedDimensions = 50;
         boolean hasHeader = true;
 
-        Map<String, double[]> embeddings = MalletEmbeddingsUtils
+        Map<String, float[]> embeddings = MalletEmbeddingsUtils
                 .readEmbeddingFileTxt(modelFile, hasHeader);
 
         assertEquals(expectedSize, embeddings.size());
@@ -69,7 +69,7 @@ public class MalletEmbeddingsUtilsTest
         int expectedDimensions = 50;
         boolean hasHeader = false;
 
-        Map<String, double[]> embeddings = MalletEmbeddingsUtils
+        Map<String, float[]> embeddings = MalletEmbeddingsUtils
                 .readEmbeddingFileTxt(modelFile, hasHeader);
 
         assertEquals(expectedSize, embeddings.size());

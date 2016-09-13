@@ -42,11 +42,11 @@ public class MalletEmbeddingsUtils
      *
      * @param file      the input file
      * @param hasHeader if true, read size and dimensionality from the first line
-     * @return a {@code Map<String, double[]>} mapping each token to a vector.
+     * @return a {@code Map<String, float[]>} mapping each token to a vector.
      * @throws IOException if the input file cannot be read
      * @see #readEmbeddingFileTxt(InputStream, boolean)
      */
-    public static Map<String, double[]> readEmbeddingFileTxt(File file, boolean hasHeader)
+    public static Map<String, float[]> readEmbeddingFileTxt(File file, boolean hasHeader)
             throws IOException
     {
         LOG.info("Reading embeddings from file " + file);
@@ -62,10 +62,10 @@ public class MalletEmbeddingsUtils
      *
      * @param inputStream an {@link InputStream}
      * @param hasHeader   if true, read size and dimensionality from the first line
-     * @return a {@code Map<String, double[]>} mapping each token to a vector.
+     * @return a {@code Map<String, float[]>} mapping each token to a vector.
      * @throws IOException if the input file cannot be read
      */
-    public static Map<String, double[]> readEmbeddingFileTxt(InputStream inputStream,
+    public static Map<String, float[]> readEmbeddingFileTxt(InputStream inputStream,
             boolean hasHeader)
             throws IOException
     {
@@ -85,7 +85,7 @@ public class MalletEmbeddingsUtils
             size = -1;
         }
 
-        Map<String, double[]> embeddings = reader.lines()
+        Map<String, float[]> embeddings = reader.lines()
                 .map(MalletEmbeddingsUtils::lineToEmbedding)
                 .collect(Collectors.toMap(Pair::getKey, Pair::getValue));
         reader.close();
@@ -113,13 +113,29 @@ public class MalletEmbeddingsUtils
      * @param line a line
      * @return a {@link Pair}
      */
-    private static Pair<String, double[]> lineToEmbedding(String line)
+    private static Pair<String, float[]> lineToEmbedding(String line)
     {
         String[] array = line.split(" ");
         int size = array.length;
+
         double[] vector = Arrays.stream(array, 1, size)
-                .mapToDouble(Double::parseDouble)
+                .mapToDouble(Float::parseFloat)
                 .toArray();
-        return Pair.of(array[0], vector);
+        return Pair.of(array[0], doubleToFloatArray(vector));
+    }
+
+    /**
+     * Convert a double array into a float array
+     *
+     * @param doubles a double[]
+     * @return a float[] of the same length as the input with each element casted to a float
+     */
+    private static float[] doubleToFloatArray(double[] doubles)
+    {
+        float[] floats = new float[doubles.length];
+        for (int i = 0; i < doubles.length; i++) {
+            floats[i] = (float) doubles[i];
+        }
+        return floats;
     }
 }

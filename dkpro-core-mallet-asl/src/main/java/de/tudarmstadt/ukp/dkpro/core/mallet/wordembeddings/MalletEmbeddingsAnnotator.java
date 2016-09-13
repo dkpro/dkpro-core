@@ -29,7 +29,7 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.cas.DoubleArray;
+import org.apache.uima.jcas.cas.FloatArray;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import java.io.File;
@@ -57,7 +57,7 @@ public class MalletEmbeddingsAnnotator
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
     private File modelLocation;
     // TODO: optionally read the embeddings from some disk-cache
-    private Map<String, double[]> embeddings;
+    private Map<String, float[]> embeddings;
 
     /**
      * If set to true (default: false), the first line is interpreted as header line containing the number of entries and the dimensionality.
@@ -112,13 +112,13 @@ public class MalletEmbeddingsAnnotator
             text = text.toLowerCase();
         }
         if (embeddings.containsKey(text)) {
-            double[] vector = embeddings.get(text);
+            float[] vector = embeddings.get(text);
             WordEmbedding embedding = new WordEmbedding(aJCas, begin, end);
-            DoubleArray da = new DoubleArray(aJCas, vector.length);
+            FloatArray array = new FloatArray(aJCas, vector.length);
             for (int i = 0; i < vector.length; i++) {
-                da.set(i, vector[i]);
+                array.set(i, vector[i]);
             }
-            embedding.setWordEmbedding(da);
+            embedding.setWordEmbedding(array);
             embedding.addToIndexes(aJCas);
         }
         else {
