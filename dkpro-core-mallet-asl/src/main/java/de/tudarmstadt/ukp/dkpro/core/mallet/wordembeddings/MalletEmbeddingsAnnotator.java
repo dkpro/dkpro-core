@@ -24,6 +24,7 @@ import de.tudarmstadt.ukp.dkpro.core.mallet.type.WordEmbedding;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Type;
+import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.TypeCapability;
@@ -31,6 +32,7 @@ import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FloatArray;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.api.embeddings.BinaryWordVectorSerializer;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,6 +40,7 @@ import java.util.Map;
 
 /**
  * Reads word embeddings from a file and adds {@link WordEmbedding} annotations to tokens/lemmas.
+ *
  * @since 1.9.0
  */
 @TypeCapability(
@@ -56,8 +59,12 @@ public class MalletEmbeddingsAnnotator
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
     private File modelLocation;
-    // TODO: optionally read the embeddings from some disk-cache
     private Map<String, float[]> embeddings;
+
+    public static final String PARAM_MODEL_IS_BINARY = "modelIsBinary";
+    @ConfigurationParameter(name = PARAM_MODEL_IS_BINARY, mandatory = true, defaultValue = "false")
+    private boolean modelIsBinary;
+    private BinaryWordVectorSerializer.BinaryVectorizer vectorizer;
 
     /**
      * If set to true (default: false), the first line is interpreted as header line containing the number of entries and the dimensionality.
@@ -88,7 +95,13 @@ public class MalletEmbeddingsAnnotator
     {
         super.initialize(context);
         try {
-            embeddings = MalletEmbeddingsUtils.readEmbeddingFileTxt(modelLocation, modelHasHeader);
+            if (modelIsBinary) {
+                vectorizer = BinaryWordVectorSerializer.BinaryVectorizer.load(modelLocation);
+            }
+            else {
+                embeddings = MalletEmbeddingsUtils
+                        .readEmbeddingFileTxt(modelLocation, modelHasHeader);
+            }
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);
@@ -101,18 +114,28 @@ public class MalletEmbeddingsAnnotator
     {
         Type type = aJCas.getTypeSystem().getType(tokenFeaturePath);
 
-        CasUtil.select(aJCas.getCas(), type)
-                .forEach(token -> addAnnotation(aJCas,
-                        token.getCoveredText(), token.getBegin(), token.getEnd()));
+        for (AnnotationFS token : CasUtil.select(aJCas.getCas(), type)) {
+            try {
+                addAnnotation(aJCas, token.getCoveredText(), token.getBegin(), token.getEnd());
+            }
+            catch (IOException e) {
+                throw new AnalysisEngineProcessException(e);
+            }
+        }
     }
 
     private void addAnnotation(JCas aJCas, String text, int begin, int end)
+            throws IOException
     {
         if (lowercase) {
             text = text.toLowerCase();
         }
-        if (embeddings.containsKey(text)) {
-            float[] vector = embeddings.get(text);
+        // FIXME: when using a binary model, the UNK embedding is added by default; for text format, none is added. Should be unified
+        float[] vector = modelIsBinary ? vectorizer.vectorize(text) : embeddings.get(text);
+        if (vector == null) {
+            getLogger().debug(text + " not found in embeddings list.");
+        }
+        else {
             WordEmbedding embedding = new WordEmbedding(aJCas, begin, end);
             FloatArray array = new FloatArray(aJCas, vector.length);
             for (int i = 0; i < vector.length; i++) {
@@ -120,9 +143,6 @@ public class MalletEmbeddingsAnnotator
             }
             embedding.setWordEmbedding(array);
             embedding.addToIndexes(aJCas);
-        }
-        else {
-            getLogger().debug(text + " not found in embeddings list.");
         }
     }
 }

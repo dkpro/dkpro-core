@@ -70,6 +70,10 @@
       <version>2.0.2</version>
     </dependency>
     <dependency>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-api-embeddings-asl</artifactId>
+    </dependency>
+    <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
     </dependency>

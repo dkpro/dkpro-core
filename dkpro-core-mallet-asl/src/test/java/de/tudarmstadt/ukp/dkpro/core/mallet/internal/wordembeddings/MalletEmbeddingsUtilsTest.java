@@ -17,17 +17,25 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.mallet.internal.wordembeddings;
 
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import org.junit.Rule;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.Map;
 
+import static org.dkpro.core.api.embeddings.BinaryWordVectorSerializer.BinaryVectorizer;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class MalletEmbeddingsUtilsTest
 {
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
+
     @Test
     public void testReadEmbeddingFileTxt()
             throws IOException, URISyntaxException
@@ -76,4 +84,21 @@ public class MalletEmbeddingsUtilsTest
         embeddings.values().forEach(vector -> assertEquals(expectedDimensions, vector.length));
     }
 
+    @Test
+    public void testConvertMalletEmbeddingsToBinary()
+            throws IOException
+    {
+        File modelFile = new File("src/test/resources/dummy.vec");
+        File targetFile = new File(testContext.getTestOutputFolder(), "binary");
+
+        Map<String, float[]> embeddings = MalletEmbeddingsUtils
+                .readEmbeddingFileTxt(modelFile, false);
+        MalletEmbeddingsUtils.convertMalletEmbeddingsToBinary(modelFile, targetFile);
+        BinaryVectorizer vec = BinaryVectorizer.load(targetFile);
+
+        for (String token : embeddings.keySet()) {
+            assertTrue("Arrays to not match for token " + token,
+                    Arrays.equals(embeddings.get(token), vec.vectorize(token)));
+        }
+    }
 }

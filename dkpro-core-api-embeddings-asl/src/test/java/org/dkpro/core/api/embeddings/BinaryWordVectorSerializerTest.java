@@ -39,7 +39,7 @@ public class BinaryWordVectorSerializerTest
     // TODO: test for very large date (>2GB should be chunked)
 
     @Rule
-    public DkproTestContext context = new DkproTestContext();
+    public DkproTestContext testContext = new DkproTestContext();
     private Map<String, float[]> vectors;
 
     @Before
@@ -76,7 +76,8 @@ public class BinaryWordVectorSerializerTest
 
         float[] unk1 = vec.vectorize("unk1");
         float[] unk2 = vec.vectorize("unk2");
-        assertTrue(Arrays.equals(unk1, unk2));
+        assertTrue("Vectors or unknown words should always be the same.",
+                Arrays.equals(unk1, unk2));
     }
 
     @Test
@@ -85,11 +86,12 @@ public class BinaryWordVectorSerializerTest
     {
         float[] unk1 = makeUnk(3);
         float[] unk2 = makeUnk(3);
-        assertTrue(Arrays.equals(unk1, unk2));
+        assertTrue("Random vector for unknown words should always be the same.",
+                Arrays.equals(unk1, unk2));
     }
 
     /**
-     * Write a binary vectors file to a context-dependent location.
+     * Write a binary vectors file to a testContext-dependent location.
      *
      * @return the binary vectors {@link File}
      * @throws IOException if an I/O error occurs
@@ -97,7 +99,7 @@ public class BinaryWordVectorSerializerTest
     private File writeBinaryFile(Map<String, float[]> vectors)
             throws IOException
     {
-        File binaryTarget = new File(context.getTestOutputFolder(), "binaryTarget");
+        File binaryTarget = new File(testContext.getTestOutputFolder(), "binaryTarget");
         convertWordVectorsToBinary(vectors, binaryTarget);
         return binaryTarget;
     }

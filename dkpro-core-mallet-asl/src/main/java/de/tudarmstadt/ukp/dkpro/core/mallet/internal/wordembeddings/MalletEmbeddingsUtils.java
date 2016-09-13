@@ -21,9 +21,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.dkpro.core.api.embeddings.BinaryWordVectorSerializer;
 
 import java.io.*;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -137,5 +139,38 @@ public class MalletEmbeddingsUtils
             floats[i] = (float) doubles[i];
         }
         return floats;
+    }
+
+    /**
+     * Read a (compressed) Mallet embeddings file (in text format) and convert it into the binary format using
+     * {@link BinaryWordVectorSerializer}.
+     *
+     * @param malletEmbeddings a {@link File} holding embeddings in text format
+     * @param targetFile       the output {@link File}
+     * @throws IOException if an I/O error occurs.
+     */
+    public static void convertMalletEmbeddingsToBinary(File malletEmbeddings, File targetFile)
+            throws IOException
+    {
+        convertMalletEmbeddingsToBinary(malletEmbeddings, false, Locale.US, targetFile);
+    }
+
+    /**
+     * Read a (compressed) Mallet embeddings file (in text format) and convert it into the binary format using
+     * {@link BinaryWordVectorSerializer}.
+     *
+     * @param malletEmbeddings a {@link File} holding embeddings in text format
+     * @param aCaseless        if true, all input tokens are expected to be caseless
+     * @param aLocale          the {@link Locale} to use
+     * @param targetFile       the output {@link File}
+     * @throws IOException if an I/O error occurs.
+     */
+    public static void convertMalletEmbeddingsToBinary(File malletEmbeddings, boolean aCaseless,
+            Locale aLocale, File targetFile)
+            throws IOException
+    {
+        Map<String, float[]> embeddings = readEmbeddingFileTxt(malletEmbeddings, false);
+        BinaryWordVectorSerializer
+                .convertWordVectorsToBinary(embeddings, aCaseless, aLocale, targetFile);
     }
 }

@@ -31,6 +31,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
@@ -42,6 +43,7 @@ import static org.junit.Assert.assertTrue;
 public class MalletEmbeddingsAnnotatorTest
 {
     private File modelFile;
+    private File binaryModelFile;
 
     private static final String TXT_DIR = "src/test/resources/txt";
     private static final String TXT_FILE_PATTERN = "[+]*.txt";
@@ -50,8 +52,8 @@ public class MalletEmbeddingsAnnotatorTest
     public void setUp()
             throws URISyntaxException
     {
-        modelFile = new File(
-                Thread.currentThread().getContextClassLoader().getResource("dummy.vec").toURI());
+        modelFile = new File(getClass().getResource("/dummy.vec").toURI());
+        binaryModelFile = new File(getClass().getResource("/dummy.binary").toURI());
     }
 
     @Test
@@ -82,6 +84,31 @@ public class MalletEmbeddingsAnnotatorTest
                 else {
                     assertTrue(selectCovered(WordEmbedding.class, token).isEmpty());
                 }
+            }
+        }
+    }
+
+    @Test
+    public void testBinary()
+            throws ResourceInitializationException
+    {
+        int expectedEmbeddingsPerToken = 1;
+
+        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
+                TextReader.PARAM_SOURCE_LOCATION, TXT_DIR,
+                TextReader.PARAM_PATTERNS, TXT_FILE_PATTERN,
+                TextReader.PARAM_LANGUAGE, "en");
+        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
+
+        AnalysisEngineDescription inferencer = createEngineDescription(
+                MalletEmbeddingsAnnotator.class,
+                MalletEmbeddingsAnnotator.PARAM_MODEL_LOCATION, binaryModelFile,
+                MalletEmbeddingsAnnotator.PARAM_MODEL_IS_BINARY, true);
+
+        for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter, inferencer)) {
+            for (Token token : select(jcas, Token.class)) {
+                List<WordEmbedding> wordEmbeddings = selectCovered(WordEmbedding.class, token);
+                assertEquals(expectedEmbeddingsPerToken, wordEmbeddings.size());
             }
         }
     }
