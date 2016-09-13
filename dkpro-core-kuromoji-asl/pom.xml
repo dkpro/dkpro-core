@@ -27,7 +27,10 @@
   <groupId>org.dkpro.core</groupId>
   <artifactId>dkpro-core-kuromoji-asl</artifactId>
   <packaging>jar</packaging>
-  <name>DKPro Core ASL - Kuromoji</name>
+  <name>DKPro Core ASL - Kuromoji (v ${kuromoji.version})</name>
+  <properties>
+    <kuromoji.version>0.9.0</kuromoji.version>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>
@@ -40,7 +43,7 @@
     <dependency>
       <groupId>com.atilika.kuromoji</groupId>
       <artifactId>kuromoji-ipadic</artifactId>
-      <version>0.9.0</version>
+      <version>${kuromoji.version}</version>
     </dependency>
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
