@@ -31,13 +31,9 @@ import java.util.Map;
 import static org.dkpro.core.api.embeddings.BinaryWordVectorSerializer.*;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by schnober on 13.09.16.
- */
 public class BinaryWordVectorSerializerTest
 {
     // TODO: test for very large date (>2GB should be chunked)
-
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
     private Map<String, float[]> vectors;

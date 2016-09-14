@@ -15,8 +15,8 @@
  */
 package org.dkpro.core.api.embeddings;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -40,8 +40,9 @@ import java.util.Random;
 public class BinaryWordVectorSerializer
 {
     public static final String UNK = "-=*>UNKNOWN TOKEN<*=-";
-    private static final Logger LOGGER = LoggerFactory.getLogger(BinaryWordVectorSerializer.class);
-    public static final int RANDOM_SEED_UNK = 12345;
+
+    private static final Log LOG = LogFactory.getLog(BinaryWordVectorSerializer.class);
+    private static final int RANDOM_SEED_UNK = 12345;
 
     public static void convertWordVectorsToBinary(Map<String, float[]> vectors, File binaryTarget)
             throws IOException
@@ -50,7 +51,10 @@ public class BinaryWordVectorSerializer
     }
 
     /**
-     * Create a stable random vector for the unknown word.
+     * Create a stable random vector for the unknown word. Values are between -0.5 and 0.5,
+     *
+     * @param aSize the dimensionality of the vector
+     * @return a float[] of the specified size
      */
     protected static float[] makeUnk(int aSize)
     {
@@ -76,7 +80,7 @@ public class BinaryWordVectorSerializer
             throws IOException
     {
         if (vectors.isEmpty()) {
-            LOGGER.warn("Vectors map is empty, doing nothing.");
+            LOG.warn("Vectors map is empty, doing nothing.");
             return;
         }
 
@@ -88,23 +92,23 @@ public class BinaryWordVectorSerializer
                 new BufferedOutputStream(new FileOutputStream(binaryTarget)));
         header.write(output);
 
-        LOGGER.info("Sorting data...");
+        LOG.info("Sorting data...");
         String[] words = vectors.keySet().stream()
                 .sorted()
                 .toArray(String[]::new);
 
-        LOGGER.info("Writing strings...");
+        LOG.info("Writing strings...");
         for (String word : words) {
             output.writeUTF(word);
         }
 
-        LOGGER.info("Writing UNK vector...");
+        LOG.info("Writing UNK vector...");
         {
             float[] vector = makeUnk(header.vectorLength);
             writeVector(output, vector);
         }
 
-        LOGGER.info("Writing vectors...");
+        LOG.info("Writing vectors...");
         for (String word : words) {
             float[] vector = vectors.get(word);
             writeVector(output, vector);
@@ -298,7 +302,7 @@ public class BinaryWordVectorSerializer
             for (int i = 0; i < header.wordCount; i++) {
                 words[i] = file.readUTF();
             }
-            LOGGER.info("Loaded " + words.length + " word embeddings.");
+            LOG.info("Loaded " + words.length + " word embeddings.");
 
             // Load UNK vector
             byte[] buffer = new byte[header.vectorLength * Float.BYTES];
