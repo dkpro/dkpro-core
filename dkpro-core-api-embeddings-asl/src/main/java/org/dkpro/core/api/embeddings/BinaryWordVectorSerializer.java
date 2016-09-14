@@ -15,8 +15,8 @@
  */
 package org.dkpro.core.api.embeddings;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -41,7 +41,7 @@ public class BinaryWordVectorSerializer
 {
     public static final String UNK = "-=*>UNKNOWN TOKEN<*=-";
 
-    private static final Log LOG = LogFactory.getLog(BinaryWordVectorSerializer.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BinaryWordVectorSerializer.class);
     private static final int RANDOM_SEED_UNK = 12345;
 
     public static void convertWordVectorsToBinary(Map<String, float[]> vectors, File binaryTarget)
