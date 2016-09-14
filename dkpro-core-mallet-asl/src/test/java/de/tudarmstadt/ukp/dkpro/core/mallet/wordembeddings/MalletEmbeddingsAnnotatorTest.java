@@ -31,7 +31,6 @@ import org.junit.Test;
 
 import java.io.File;
 import java.net.URISyntaxException;
-import java.util.List;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
@@ -60,9 +59,7 @@ public class MalletEmbeddingsAnnotatorTest
     public void test()
             throws ResourceInitializationException
     {
-        int expectedEmbeddingsPerToken = 1;
         // tag::example[]
-        int minTokenLength = 3; // minimum token length in test vector file
 
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
                 TextReader.PARAM_SOURCE_LOCATION, TXT_DIR,
@@ -74,6 +71,15 @@ public class MalletEmbeddingsAnnotatorTest
                 MalletEmbeddingsAnnotator.class,
                 MalletEmbeddingsAnnotator.PARAM_MODEL_LOCATION, modelFile);
         //end::example[]
+
+        testEmbeddingAnnotations(reader, segmenter, inferencer);
+    }
+
+    private static void testEmbeddingAnnotations(CollectionReaderDescription reader,
+            AnalysisEngineDescription segmenter, AnalysisEngineDescription inferencer)
+    {
+        int expectedEmbeddingsPerToken = 1;
+        int minTokenLength = 3; // minimum token length in test vector file
 
         for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter, inferencer)) {
             for (Token token : select(jcas, Token.class)) {
@@ -92,8 +98,6 @@ public class MalletEmbeddingsAnnotatorTest
     public void testBinary()
             throws ResourceInitializationException
     {
-        int expectedEmbeddingsPerToken = 1;
-
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
                 TextReader.PARAM_SOURCE_LOCATION, TXT_DIR,
                 TextReader.PARAM_PATTERNS, TXT_FILE_PATTERN,
@@ -105,11 +109,6 @@ public class MalletEmbeddingsAnnotatorTest
                 MalletEmbeddingsAnnotator.PARAM_MODEL_LOCATION, binaryModelFile,
                 MalletEmbeddingsAnnotator.PARAM_MODEL_IS_BINARY, true);
 
-        for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter, inferencer)) {
-            for (Token token : select(jcas, Token.class)) {
-                List<WordEmbedding> wordEmbeddings = selectCovered(WordEmbedding.class, token);
-                assertEquals(expectedEmbeddingsPerToken, wordEmbeddings.size());
-            }
-        }
+        testEmbeddingAnnotations(reader, segmenter, inferencer);
     }
 }

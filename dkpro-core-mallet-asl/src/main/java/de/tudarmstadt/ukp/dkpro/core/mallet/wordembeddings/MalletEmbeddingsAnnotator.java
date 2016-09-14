@@ -37,6 +37,7 @@ import org.dkpro.core.api.embeddings.BinaryWordVectorSerializer;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Reads word embeddings from a file and adds {@link WordEmbedding} annotations to tokens/lemmas.
@@ -130,19 +131,25 @@ public class MalletEmbeddingsAnnotator
         if (lowercase) {
             text = text.toLowerCase();
         }
-        // FIXME: when using a binary model, the UNK embedding is added by default; for text format, none is added. Should be unified
-        float[] vector = modelIsBinary ? vectorizer.vectorize(text) : embeddings.get(text);
-        if (vector == null) {
-            getLogger().debug(text + " not found in embeddings list.");
+        Optional<float[]> vector = Optional.empty();
+        if (modelIsBinary && vectorizer.contains(text)) {
+            vector = Optional.of(vectorizer.vectorize(text));
         }
-        else {
+        else if (!modelIsBinary && embeddings.containsKey(text)) {
+            vector = Optional.of(embeddings.get(text));
+        }
+
+        if (vector.isPresent()) {
             WordEmbedding embedding = new WordEmbedding(aJCas, begin, end);
-            FloatArray array = new FloatArray(aJCas, vector.length);
-            for (int i = 0; i < vector.length; i++) {
-                array.set(i, vector[i]);
+            FloatArray array = new FloatArray(aJCas, vector.get().length);
+            for (int i = 0; i < vector.get().length; i++) {
+                array.set(i, vector.get()[i]);
             }
             embedding.setWordEmbedding(array);
             embedding.addToIndexes(aJCas);
+        }
+        else {
+            getLogger().debug(text + " not found in embeddings list.");
         }
     }
 }
