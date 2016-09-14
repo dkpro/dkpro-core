@@ -88,8 +88,6 @@ public class MalletEmbeddingsTrainerTest
                 .map(line -> Arrays.copyOfRange(line, 1, dimensions))
                 /* assert each value can be parsed to double */
                 .forEach(array -> Arrays.stream(array).forEach(Double::parseDouble));
-
-        embeddingsFile.delete();
     }
 
     @Test(timeout = 60000, expected = ResourceInitializationException.class)
@@ -140,8 +138,6 @@ public class MalletEmbeddingsTrainerTest
                 .map(line -> line.split(" "))
                 .map(tokens -> tokens[0])
                 .noneMatch(token -> token.matches(filterRegex)));
-
-        embeddingsFile.delete();
     }
 
     @Test(timeout = 60000)

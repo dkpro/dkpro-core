@@ -33,7 +33,7 @@
         </featureDescription>
         <featureDescription>
           <name>id</name>
-          <description>If this unit had an ID in the source format from which it was imported, it may be stored here. IDs are typically not assiged by DKPro Core components. If an ID is present, it should be respected by writers.</description>
+          <description>If this unit had an ID in the source format from which it was imported, it may be stored here. IDs are typically not assigned by DKPro Core components. If an ID is present, it should be respected by writers.</description>
           <rangeTypeName>uima.cas.String</rangeTypeName>
         </featureDescription>
       </features>
@@ -50,7 +50,7 @@
     <features>
         <featureDescription>
           <name>id</name>
-          <description>If this unit had an ID in the source format from which it was imported, it may be stored here. IDs are typically not assiged by DKPro Core components. If an ID is present, it should be respected by writers.</description>
+          <description>If this unit had an ID in the source format from which it was imported, it may be stored here. IDs are typically not assigned by DKPro Core components. If an ID is present, it should be respected by writers.</description>
           <rangeTypeName>uima.cas.String</rangeTypeName>
         </featureDescription>
       </features>
@@ -121,7 +121,7 @@
         </featureDescription>
       <featureDescription>
           <name>id</name>
-          <description>If this unit had an ID in the source format from which it was imported, it may be stored here. IDs are typically not assiged by DKPro Core components. If an ID is present, it should be respected by writers.</description>
+          <description>If this unit had an ID in the source format from which it was imported, it may be stored here. IDs are typically not assigned by DKPro Core components. If an ID is present, it should be respected by writers.</description>
           <rangeTypeName>uima.cas.String</rangeTypeName>
         </featureDescription>
       <featureDescription>

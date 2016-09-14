@@ -28,68 +28,21 @@
   <artifactId>dkpro-core-api-embeddings-asl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core ASL - Embeddings API (ASL)</name>
-  <properties>
-    <dl4j.version>0.5.0</dl4j.version>
-    <nd4j.version>0.5.0</nd4j.version>
-  </properties>
   <dependencies>
     <dependency>
-      <groupId>org.deeplearning4j</groupId>
-      <artifactId>deeplearning4j-nlp</artifactId>
-      <version>${dl4j.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>io.dropwizard</groupId>
-          <artifactId>dropwizard-assets</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>io.dropwizard</groupId>
-          <artifactId>dropwizard-views-mustache</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>io.dropwizard</groupId>
-          <artifactId>dropwizard-views-freemarker</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.cleartk</groupId>
-          <artifactId>cleartk-snowball</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.cleartk</groupId>
-          <artifactId>cleartk-opennlp-tools</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.lucene</groupId>
-          <artifactId>lucene-analyzers-common</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.lucene</groupId>
-          <artifactId>lucene-core</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.lucene</groupId>
-          <artifactId>lucene-queryparser</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>ch.qos.logback</groupId>
-          <artifactId>logback-classic</artifactId>
-        </exclusion>
-      </exclusions>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.21</version>
     </dependency>
     <dependency>
-      <groupId>org.nd4j</groupId>
-      <artifactId>nd4j-buffer</artifactId>
-      <version>${nd4j.version}</version>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.7.21</version>
     </dependency>
     <dependency>
-      <groupId>org.nd4j</groupId>
-      <artifactId>nd4j-api</artifactId>
-      <version>${nd4j.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.nd4j</groupId>
-      <artifactId>nd4j-common</artifactId>
-      <version>${nd4j.version}</version>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 </project>

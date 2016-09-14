@@ -19,20 +19,21 @@ package de.tudarmstadt.ukp.dkpro.core.mallet.lda.io;
 
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer;
-import de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaTopicModelTrainer;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import static de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaUtil.trainModel;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.junit.Assert.assertEquals;
@@ -43,7 +44,6 @@ import static org.junit.Assert.assertTrue;
  */
 public class MalletLdaTopicsProportionsSortedWriterTest
 {
-    private static final File MODEL_FILE = new File("target/mallet/model");
     private static final String CAS_DIR = "src/test/resources/txt";
     private static final String CAS_FILE_PATTERN = "[+]*.txt";
 
@@ -51,32 +51,16 @@ public class MalletLdaTopicsProportionsSortedWriterTest
     private static final int N_ITERATIONS = 50;
     private static final String LANGUAGE = "en";
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @Before
-    public void setUp()
-            throws Exception
-    { /* Generate model */
-        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR,
-                TextReader.PARAM_PATTERNS, CAS_FILE_PATTERN,
-                TextReader.PARAM_LANGUAGE, LANGUAGE);
-        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
-
-        AnalysisEngineDescription estimator = createEngineDescription(
-                MalletLdaTopicModelTrainer.class,
-                MalletLdaTopicModelTrainer.PARAM_TARGET_LOCATION, MODEL_FILE,
-                MalletLdaTopicModelTrainer.PARAM_N_ITERATIONS, N_ITERATIONS,
-                MalletLdaTopicModelTrainer.PARAM_N_TOPICS, N_TOPICS);
-        SimplePipeline.runPipeline(reader, segmenter, estimator);
-    }
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 
     @Test
     public void test()
             throws UIMAException, IOException
     {
-        File targetFile = new File("target/topics.txt");
+        File targetFile = new File(testContext.getTestOutputFolder(), "topics.txt");
+        File modelFile = new File(testContext.getTestOutputFolder(), "model");
+        trainModel(modelFile);
 
         int expectedLines = 2;
         int nTopicsOutput = 3;
@@ -91,7 +75,7 @@ public class MalletLdaTopicsProportionsSortedWriterTest
 
         AnalysisEngineDescription inferencer = createEngineDescription(
                 MalletLdaTopicModelInferencer.class,
-                MalletLdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
+                MalletLdaTopicModelInferencer.PARAM_MODEL_LOCATION, modelFile);
 
         AnalysisEngineDescription writer = createEngineDescription(
                 MalletLdaTopicsProportionsSortedWriter.class,
@@ -108,6 +92,5 @@ public class MalletLdaTopicsProportionsSortedWriterTest
         lines.stream()
                 .map(line -> line.split("\t"))
                 .forEach(fields -> assertTrue(fields[0].startsWith("dummy")));
-        targetFile.delete();
     }
 }
