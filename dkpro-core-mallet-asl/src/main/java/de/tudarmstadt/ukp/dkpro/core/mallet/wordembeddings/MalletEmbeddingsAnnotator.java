@@ -74,9 +74,9 @@ public class MalletEmbeddingsAnnotator
      * <li>If a float[] is passed, each unknown token is annotated with that vector. The float must have the same length as the vectors in the model file.</li>
      * </ol>
      */
-    public static final String PARAM_UNKNOWN_WORDS_VECTOR = "unknownTokensVector";
-    @ConfigurationParameter(name = PARAM_UNKNOWN_WORDS_VECTOR, mandatory = false)
-    private float[] unknownTokensVector;
+    public static final String PARAM_ANNOTATE_UNKNOWN_TOKENS = "annotateUnknownTokens";
+    @ConfigurationParameter(name = PARAM_ANNOTATE_UNKNOWN_TOKENS, mandatory = true, defaultValue = "false")
+    private boolean annotateUnknownTokens;
 
     /**
      * If set to true (default: false), the first line is interpreted as header line containing the number of entries and the dimensionality.
@@ -160,16 +160,9 @@ public class MalletEmbeddingsAnnotator
     }
 
     /**
-     * Possible scenarios:
-     * <p>
-     * <ol>
-     * <li>token is known: return the corresponding embedding</li>
-     * <li>token is unknown:</li>
-     * <ol>
-     * <li>{@code unknownTokensVector} is null: do not annotate token</li>
-     * <li>{@code unknownTokensVector} is specified: annotated token with this vector</li>
-     * </ol>
-     * </ol>
+     * If {@link #PARAM_ANNOTATE_UNKNOWN_TOKENS} is set to true, always return a vector retrieved
+     * from the vectorizer, which should hold a stable random vector for unknown tokens.
+     * Otherwise, return a vector for known tokens, or none if the token is unknown.
      *
      * @param token a token for which to look up an embedding
      * @return an {@code Optional<float[]>} that holds the token embedding or is empty if no embeddings is available for the token
@@ -178,13 +171,13 @@ public class MalletEmbeddingsAnnotator
     private Optional<float[]> getVector(String token)
             throws IOException
     {
-        // TODO: consider unknown words properly
-        if (vectorizer.contains(token)) {
+        if (annotateUnknownTokens) {
             return Optional.of(vectorizer.vectorize(token));
-        } else if (unknownTokensVector != null) {
-            return Optional.of(unknownTokensVector);
-        } else {
-            return Optional.empty();
+        }
+        else {
+            return vectorizer.contains(token) ?
+                    Optional.of(vectorizer.vectorize(token)) :
+                    Optional.empty();
         }
     }
 }

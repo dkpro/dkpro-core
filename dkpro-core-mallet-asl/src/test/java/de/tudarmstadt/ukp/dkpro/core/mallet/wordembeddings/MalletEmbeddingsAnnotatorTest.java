@@ -111,7 +111,7 @@ public class MalletEmbeddingsAnnotatorTest
         AnalysisEngineDescription inferencer = createEngineDescription(
                 MalletEmbeddingsAnnotator.class,
                 MalletEmbeddingsAnnotator.PARAM_MODEL_LOCATION, modelFile,
-                MalletEmbeddingsAnnotator.PARAM_UNKNOWN_WORDS_VECTOR, unkVector);
+                MalletEmbeddingsAnnotator.PARAM_ANNOTATE_UNKNOWN_TOKENS, true);
 
         for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter, inferencer)) {
             for (Token token : select(jcas, Token.class)) {
@@ -130,7 +130,6 @@ public class MalletEmbeddingsAnnotatorTest
             throws ResourceInitializationException
     {
         int dim = 50;
-        float[] unkVector = new float[0];
         int minTokenLength = 3; // minimum token length in test vector file
 
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
@@ -142,7 +141,7 @@ public class MalletEmbeddingsAnnotatorTest
         AnalysisEngineDescription inferencer = createEngineDescription(
                 MalletEmbeddingsAnnotator.class,
                 MalletEmbeddingsAnnotator.PARAM_MODEL_LOCATION, modelFile,
-                MalletEmbeddingsAnnotator.PARAM_UNKNOWN_WORDS_VECTOR, unkVector);
+                MalletEmbeddingsAnnotator.PARAM_ANNOTATE_UNKNOWN_TOKENS, true);
 
         float[] randomVector = null;
         boolean isFirst = true;
