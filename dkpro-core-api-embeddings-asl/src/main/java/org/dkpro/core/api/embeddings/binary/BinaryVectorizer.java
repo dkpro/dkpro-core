@@ -169,6 +169,11 @@ public class BinaryVectorizer
         return header.getWordCount();
     }
 
+    @Override public boolean isCaseless()
+    {
+        return header.isCaseless();
+    }
+
     static class Header
     {
         private static final String MAGIC = "dl4jw2v";

@@ -22,7 +22,6 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
-import java.nio.file.Path;
 import java.util.Locale;
 import java.util.Map;
 
@@ -39,6 +38,15 @@ public class BinaryWordVectorUtils
 {
     private static final Logger LOG = LoggerFactory.getLogger(BinaryWordVectorUtils.class);
 
+    /**
+     * Write a map of token embeddings into binary format. Uses the default locale {@link Locale#US}
+     * and assume case-sensitivity.
+     *
+     * @param vectors      a {@code Map<String, float[]>} holding all tokens with embeddings
+     * @param binaryTarget the target file {@link File}
+     * @throws IOException
+     * @see #convertWordVectorsToBinary(Map, boolean, Locale, File)
+     */
     public static void convertWordVectorsToBinary(Map<String, float[]> vectors, File binaryTarget)
             throws IOException
     {
@@ -51,7 +59,7 @@ public class BinaryWordVectorUtils
      * @param vectors      a {@code Map<String, float[]>} holding all tokens with embeddings
      * @param aCaseless    if true, tokens are expected to be caseless
      * @param aLocale      the {@link Locale}
-     * @param binaryTarget the target file {@link Path}
+     * @param binaryTarget the target file {@link File}
      * @throws IOException if an I/O error occurs
      */
     public static void convertWordVectorsToBinary(Map<String, float[]> vectors, boolean aCaseless,

@@ -24,9 +24,6 @@ import java.io.IOException;
  */
 public interface Vectorizer
 {
-    // TODO: unify caseless in implementations
-    // TODO: unify unknown words in implementations
-
     /**
      * Get the vector for a token. If the token is unknown, implementing classes should return the
      * {@link #unknownVector()}.
@@ -65,4 +62,6 @@ public interface Vectorizer
      * @return an int
      */
     int size();
+
+    boolean isCaseless();
 }

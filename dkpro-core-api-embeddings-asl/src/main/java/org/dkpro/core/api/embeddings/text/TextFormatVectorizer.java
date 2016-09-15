@@ -35,6 +35,7 @@ public class TextFormatVectorizer
     private Map<String, float[]> embeddings;
     private float[] unknownVector;
     private int dimensions;
+    private boolean caseless;
 
     private TextFormatVectorizer(Map<String, float[]> embeddings)
     {
@@ -42,6 +43,8 @@ public class TextFormatVectorizer
         this.embeddings = embeddings;
         dimensions = embeddings.values().iterator().next().length;
         unknownVector = VectorizerUtils.randomVector(dimensions);
+        caseless = embeddings.keySet().stream()
+                .allMatch(token -> token.equals(token.toLowerCase()));
     }
 
     /**
@@ -74,6 +77,9 @@ public class TextFormatVectorizer
 
     @Override public float[] vectorize(String token)
     {
+        if (caseless) {
+            token = token.toLowerCase();
+        }
         float[] vector = contains(token) ? embeddings.get(token) : unknownVector();
         assert vector.length == dimensions();
         return vector;
@@ -97,5 +103,10 @@ public class TextFormatVectorizer
     @Override public int size()
     {
         return embeddings.size();
+    }
+
+    @Override public boolean isCaseless()
+    {
+        return caseless;
     }
 }

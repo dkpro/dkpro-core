@@ -102,4 +102,6 @@ public class TextFormatEmbeddingsUtilsTest
                     Arrays.equals(embeddings.get(token), vec.vectorize(token)));
         }
     }
+
+    // TODO add tests for caseless
 }
