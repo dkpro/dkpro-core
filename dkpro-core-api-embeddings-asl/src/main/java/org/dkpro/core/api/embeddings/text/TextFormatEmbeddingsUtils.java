@@ -15,13 +15,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.mallet.internal.wordembeddings;
+package org.dkpro.core.api.embeddings.text;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.dkpro.core.api.embeddings.BinaryWordVectorSerializer;
+import org.dkpro.core.api.embeddings.binary.BinaryWordVectorUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.Arrays;
@@ -32,9 +32,9 @@ import java.util.stream.Collectors;
 /**
  * Helper Methods for reading word embeddings.
  */
-public class MalletEmbeddingsUtils
+public class TextFormatEmbeddingsUtils
 {
-    private static final Log LOG = LogFactory.getLog(MalletEmbeddingsUtils.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TextFormatEmbeddingsUtils.class);
 
     /**
      * Read an embeddings file in text format.
@@ -88,7 +88,7 @@ public class MalletEmbeddingsUtils
         }
 
         Map<String, float[]> embeddings = reader.lines()
-                .map(MalletEmbeddingsUtils::lineToEmbedding)
+                .map(TextFormatEmbeddingsUtils::lineToEmbedding)
                 .collect(Collectors.toMap(Pair::getKey, Pair::getValue));
         reader.close();
 
@@ -143,7 +143,7 @@ public class MalletEmbeddingsUtils
 
     /**
      * Read a (compressed) Mallet embeddings file (in text format) and convert it into the binary format using
-     * {@link BinaryWordVectorSerializer}.
+     * {@link BinaryWordVectorUtils}.
      *
      * @param malletEmbeddings a {@link File} holding embeddings in text format
      * @param targetFile       the output {@link File}
@@ -157,7 +157,7 @@ public class MalletEmbeddingsUtils
 
     /**
      * Read a (compressed) Mallet embeddings file (in text format) and convert it into the binary format using
-     * {@link BinaryWordVectorSerializer}.
+     * {@link BinaryWordVectorUtils}.
      *
      * @param malletEmbeddings a {@link File} holding embeddings in text format
      * @param aCaseless        if true, all input tokens are expected to be caseless
@@ -170,7 +170,7 @@ public class MalletEmbeddingsUtils
             throws IOException
     {
         Map<String, float[]> embeddings = readEmbeddingFileTxt(malletEmbeddings, false);
-        BinaryWordVectorSerializer
+        BinaryWordVectorUtils
                 .convertWordVectorsToBinary(embeddings, aCaseless, aLocale, targetFile);
     }
 }

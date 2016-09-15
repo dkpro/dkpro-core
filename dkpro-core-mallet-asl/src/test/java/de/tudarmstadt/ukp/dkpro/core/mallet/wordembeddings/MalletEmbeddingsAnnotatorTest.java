@@ -26,7 +26,7 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.dkpro.core.api.embeddings.BinaryWordVectorSerializer;
+import org.dkpro.core.api.embeddings.VectorizerUtils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -99,7 +99,7 @@ public class MalletEmbeddingsAnnotatorTest
             throws ResourceInitializationException
     {
         int dim = 50;
-        float[] unkVector = BinaryWordVectorSerializer.randomVector(dim);
+        float[] unkVector = VectorizerUtils.randomVector(dim);
         int minTokenLength = 3; // minimum token length in test vector file
 
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,

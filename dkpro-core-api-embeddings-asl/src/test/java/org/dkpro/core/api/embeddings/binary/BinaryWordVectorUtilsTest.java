@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dkpro.core.api.embeddings;
+package org.dkpro.core.api.embeddings.binary;
 
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import org.junit.Before;
@@ -28,10 +28,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.dkpro.core.api.embeddings.BinaryWordVectorSerializer.*;
+import static org.dkpro.core.api.embeddings.binary.BinaryWordVectorUtils.*;
 import static org.junit.Assert.assertTrue;
 
-public class BinaryWordVectorSerializerTest
+public class BinaryWordVectorUtilsTest
 {
     // TODO: test for very large date (>2GB should be chunked)
     @Rule
@@ -76,15 +76,6 @@ public class BinaryWordVectorSerializerTest
                 Arrays.equals(unk1, unk2));
     }
 
-    @Test
-    public void testRandomVectorStable()
-            throws IOException
-    {
-        float[] unk1 = randomVector(3);
-        float[] unk2 = randomVector(3);
-        assertTrue("Random vector for unknown words should always be the same.",
-                Arrays.equals(unk1, unk2));
-    }
 
     /**
      * Write a binary vectors file to a testContext-dependent location.

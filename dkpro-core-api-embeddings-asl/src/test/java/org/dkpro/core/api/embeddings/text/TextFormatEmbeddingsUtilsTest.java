@@ -15,9 +15,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.mallet.internal.wordembeddings;
+package org.dkpro.core.api.embeddings.text;
 
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.api.embeddings.binary.BinaryVectorizer;
+import org.dkpro.core.api.embeddings.text.TextFormatEmbeddingsUtils;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -27,11 +29,10 @@ import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.Map;
 
-import static org.dkpro.core.api.embeddings.BinaryWordVectorSerializer.BinaryVectorizer;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class MalletEmbeddingsUtilsTest
+public class TextFormatEmbeddingsUtilsTest
 {
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
@@ -45,7 +46,7 @@ public class MalletEmbeddingsUtilsTest
         int expectedDimensions = 50;
         boolean hasHeader = false;
 
-        Map<String, float[]> embeddings = MalletEmbeddingsUtils
+        Map<String, float[]> embeddings = TextFormatEmbeddingsUtils
                 .readEmbeddingFileTxt(modelFile, hasHeader);
 
         assertEquals(expectedSize, embeddings.size());
@@ -61,7 +62,7 @@ public class MalletEmbeddingsUtilsTest
         int expectedDimensions = 50;
         boolean hasHeader = true;
 
-        Map<String, float[]> embeddings = MalletEmbeddingsUtils
+        Map<String, float[]> embeddings = TextFormatEmbeddingsUtils
                 .readEmbeddingFileTxt(modelFile, hasHeader);
 
         assertEquals(expectedSize, embeddings.size());
@@ -77,7 +78,7 @@ public class MalletEmbeddingsUtilsTest
         int expectedDimensions = 50;
         boolean hasHeader = false;
 
-        Map<String, float[]> embeddings = MalletEmbeddingsUtils
+        Map<String, float[]> embeddings = TextFormatEmbeddingsUtils
                 .readEmbeddingFileTxt(modelFile, hasHeader);
 
         assertEquals(expectedSize, embeddings.size());
@@ -91,9 +92,9 @@ public class MalletEmbeddingsUtilsTest
         File modelFile = new File("src/test/resources/dummy.vec");
         File targetFile = new File(testContext.getTestOutputFolder(), "binary");
 
-        Map<String, float[]> embeddings = MalletEmbeddingsUtils
+        Map<String, float[]> embeddings = TextFormatEmbeddingsUtils
                 .readEmbeddingFileTxt(modelFile, false);
-        MalletEmbeddingsUtils.convertMalletEmbeddingsToBinary(modelFile, targetFile);
+        TextFormatEmbeddingsUtils.convertMalletEmbeddingsToBinary(modelFile, targetFile);
         BinaryVectorizer vec = BinaryVectorizer.load(targetFile);
 
         for (String token : embeddings.keySet()) {

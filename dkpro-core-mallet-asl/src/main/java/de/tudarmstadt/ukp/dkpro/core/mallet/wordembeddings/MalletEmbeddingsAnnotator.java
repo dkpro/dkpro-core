@@ -19,7 +19,6 @@ package de.tudarmstadt.ukp.dkpro.core.mallet.wordembeddings;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
-import de.tudarmstadt.ukp.dkpro.core.mallet.internal.wordembeddings.MalletEmbeddingsUtils;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.WordEmbedding;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -32,12 +31,12 @@ import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FloatArray;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.dkpro.core.api.embeddings.BinaryWordVectorSerializer;
-import org.dkpro.core.api.embeddings.BinaryWordVectorSerializer.BinaryVectorizer;
+import org.dkpro.core.api.embeddings.Vectorizer;
+import org.dkpro.core.api.embeddings.binary.BinaryVectorizer;
+import org.dkpro.core.api.embeddings.text.TextFormatVectorizer;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -61,12 +60,11 @@ public class MalletEmbeddingsAnnotator
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
     private File modelLocation;
-    private Map<String, float[]> embeddings;
 
     public static final String PARAM_MODEL_IS_BINARY = "modelIsBinary";
     @ConfigurationParameter(name = PARAM_MODEL_IS_BINARY, mandatory = true, defaultValue = "false")
     private boolean modelIsBinary;
-    private BinaryVectorizer vectorizer;
+    private Vectorizer vectorizer;
 
     /**
      * Specify how to handle unknown tokens:
@@ -113,35 +111,13 @@ public class MalletEmbeddingsAnnotator
                     "The parameter PARAM_MODEL_HAS_HEADER is only valid for text-format model files."));
         }
 
-        int vectorSize;
         try {
-            if (modelIsBinary) {
-                vectorizer = BinaryVectorizer.load(modelLocation);
-                vectorSize = vectorizer.getVectorSize();
-            }
-            else {
-                embeddings = MalletEmbeddingsUtils
-                        .readEmbeddingFileTxt(modelLocation, modelHasHeader);
-                if (embeddings.isEmpty()) {
-                    throw new ResourceInitializationException(new IllegalArgumentException(
-                            "No embeddings found in file " + modelLocation));
-                }
-                vectorSize = embeddings.values().iterator().next().length;
-            }
+            vectorizer = modelIsBinary ?
+                    BinaryVectorizer.load(modelLocation) :
+                    TextFormatVectorizer.load(modelLocation);
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);
-        }
-
-        if (unknownTokensVector != null && unknownTokensVector.length == 0) {
-            getLogger().info("Generating random vector for unknown tokens");
-            unknownTokensVector = BinaryWordVectorSerializer
-                    .randomVector(vectorSize, System.currentTimeMillis());
-        }
-        if (unknownTokensVector != null && unknownTokensVector.length != vectorSize) {
-            /* make sure unknown tokens vector has require length */
-            throw new ResourceInitializationException(new IllegalArgumentException(
-                    "Length of unknown vector does not match length of known word vectors."));
         }
     }
 
@@ -202,34 +178,12 @@ public class MalletEmbeddingsAnnotator
     private Optional<float[]> getVector(String token)
             throws IOException
     {
-        return modelIsBinary ? getVectorFromBinary(token) : getVectorFromText(token);
-    }
-
-    private Optional<float[]> getVectorFromBinary(String token)
-            throws IOException
-    {
-        assert vectorizer != null;
+        // TODO: consider unknown words properly
         if (vectorizer.contains(token)) {
             return Optional.of(vectorizer.vectorize(token));
-        }
-        else if (unknownTokensVector != null) {
+        } else if (unknownTokensVector != null) {
             return Optional.of(unknownTokensVector);
-        }
-        else {
-            return Optional.empty();
-        }
-    }
-
-    private Optional<float[]> getVectorFromText(String token)
-    {
-        assert embeddings != null;
-        if (embeddings.containsKey(token)) {
-            return Optional.of(embeddings.get(token));
-        }
-        else if (unknownTokensVector != null) {
-            return Optional.of(unknownTokensVector);
-        }
-        else {
+        } else {
             return Optional.empty();
         }
     }
