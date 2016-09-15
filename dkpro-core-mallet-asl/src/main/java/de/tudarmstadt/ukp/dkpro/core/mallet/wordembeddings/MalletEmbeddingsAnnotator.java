@@ -119,6 +119,11 @@ public class MalletEmbeddingsAnnotator
         catch (IOException e) {
             throw new ResourceInitializationException(e);
         }
+
+        if (lowercase != vectorizer.isCaseless()) {
+            throw new ResourceInitializationException(new IllegalArgumentException(
+                    "If PARAM_LOWERCASE is set, the model should be caseless and vice-versa."));
+        }
     }
 
     @Override

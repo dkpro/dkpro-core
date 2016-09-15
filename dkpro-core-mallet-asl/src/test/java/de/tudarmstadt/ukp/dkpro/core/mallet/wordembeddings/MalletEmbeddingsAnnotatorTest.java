@@ -21,6 +21,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.WordEmbedding;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
+import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
@@ -31,6 +32,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 
@@ -164,6 +166,21 @@ public class MalletEmbeddingsAnnotatorTest
                 }
             }
         }
+    }
+
+    @Test(expected = ResourceInitializationException.class)
+    public void testLowercaseCaseless()
+            throws UIMAException, IOException
+    {
+        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
+                TextReader.PARAM_SOURCE_LOCATION, TXT_DIR,
+                TextReader.PARAM_PATTERNS, TXT_FILE_PATTERN,
+                TextReader.PARAM_LANGUAGE, "en");
+        AnalysisEngineDescription inferencer = createEngineDescription(
+                MalletEmbeddingsAnnotator.class,
+                MalletEmbeddingsAnnotator.PARAM_MODEL_LOCATION, modelFile,
+                MalletEmbeddingsAnnotator.PARAM_LOWERCASE, true);
+        SimplePipeline.runPipeline(reader, inferencer);
     }
 
     private static void testEmbeddingAnnotations(CollectionReaderDescription reader,
