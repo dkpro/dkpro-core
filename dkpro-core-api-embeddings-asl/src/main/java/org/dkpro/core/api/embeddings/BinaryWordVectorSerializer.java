@@ -39,8 +39,6 @@ import java.util.Random;
  */
 public class BinaryWordVectorSerializer
 {
-    public static final String UNK = "-=*>UNKNOWN TOKEN<*=-";
-
     private static final Logger LOG = LoggerFactory.getLogger(BinaryWordVectorSerializer.class);
     private static final int RANDOM_SEED_UNK = 12345;
 
@@ -51,19 +49,33 @@ public class BinaryWordVectorSerializer
     }
 
     /**
-     * Create a stable random vector for the unknown word. Values are between -0.5 and 0.5,
+     * Create a random vector. Values are between -0.5 and 0.5,
      *
      * @param aSize the dimensionality of the vector
+     * @param seed  The random seed
      * @return a float[] of the specified size
      */
-    protected static float[] makeUnk(int aSize)
+    public static float[] randomVector(int aSize, long seed)
     {
-        Random rand = new Random(RANDOM_SEED_UNK);
+        Random rand = new Random(seed);
         float[] unk = new float[aSize];
         for (int i = 0; i < unk.length; i++) {
             unk[i] = (rand.nextFloat() - 0.5f) / aSize;
         }
         return unk;
+    }
+
+    /**
+     * Create a random vector, calling {@link #randomVector(int, long)} with a
+     * stable random seed, i.e. always generating the same output.
+     *
+     * @param aSize the size of the vector
+     * @return a float[] of the specified size.
+     * @see #randomVector(int, long)
+     */
+    public static float[] randomVector(int aSize)
+    {
+        return randomVector(aSize, RANDOM_SEED_UNK);
     }
 
     /**
@@ -104,7 +116,7 @@ public class BinaryWordVectorSerializer
 
         LOG.info("Writing UNK vector...");
         {
-            float[] vector = makeUnk(header.vectorLength);
+            float[] vector = randomVector(header.vectorLength);
             writeVector(output, vector);
         }
 

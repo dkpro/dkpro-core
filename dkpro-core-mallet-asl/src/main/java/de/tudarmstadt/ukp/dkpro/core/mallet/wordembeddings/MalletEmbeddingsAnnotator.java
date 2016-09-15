@@ -33,6 +33,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FloatArray;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.api.embeddings.BinaryWordVectorSerializer;
+import org.dkpro.core.api.embeddings.BinaryWordVectorSerializer.BinaryVectorizer;
 
 import java.io.File;
 import java.io.IOException;
@@ -65,7 +66,19 @@ public class MalletEmbeddingsAnnotator
     public static final String PARAM_MODEL_IS_BINARY = "modelIsBinary";
     @ConfigurationParameter(name = PARAM_MODEL_IS_BINARY, mandatory = true, defaultValue = "false")
     private boolean modelIsBinary;
-    private BinaryWordVectorSerializer.BinaryVectorizer vectorizer;
+    private BinaryVectorizer vectorizer;
+
+    /**
+     * Specify how to handle unknown tokens:
+     * <ol>
+     * <li>If this parameter is not specified, unknown tokens are not annotated.</li>
+     * <li>If an empty float[] is passed, a random vector is generated that is used for each unknown token.</li>
+     * <li>If a float[] is passed, each unknown token is annotated with that vector. The float must have the same length as the vectors in the model file.</li>
+     * </ol>
+     */
+    public static final String PARAM_UNKNOWN_WORDS_VECTOR = "unknownTokensVector";
+    @ConfigurationParameter(name = PARAM_UNKNOWN_WORDS_VECTOR, mandatory = false)
+    private float[] unknownTokensVector;
 
     /**
      * If set to true (default: false), the first line is interpreted as header line containing the number of entries and the dimensionality.
@@ -95,17 +108,40 @@ public class MalletEmbeddingsAnnotator
             throws ResourceInitializationException
     {
         super.initialize(context);
+        if (modelHasHeader && modelIsBinary) {
+            throw new ResourceInitializationException(new IllegalArgumentException(
+                    "The parameter PARAM_MODEL_HAS_HEADER is only valid for text-format model files."));
+        }
+
+        int vectorSize;
         try {
             if (modelIsBinary) {
-                vectorizer = BinaryWordVectorSerializer.BinaryVectorizer.load(modelLocation);
+                vectorizer = BinaryVectorizer.load(modelLocation);
+                vectorSize = vectorizer.getVectorSize();
             }
             else {
                 embeddings = MalletEmbeddingsUtils
                         .readEmbeddingFileTxt(modelLocation, modelHasHeader);
+                if (embeddings.isEmpty()) {
+                    throw new ResourceInitializationException(new IllegalArgumentException(
+                            "No embeddings found in file " + modelLocation));
+                }
+                vectorSize = embeddings.values().iterator().next().length;
             }
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);
+        }
+
+        if (unknownTokensVector != null && unknownTokensVector.length == 0) {
+            getLogger().info("Generating random vector for unknown tokens");
+            unknownTokensVector = BinaryWordVectorSerializer
+                    .randomVector(vectorSize, System.currentTimeMillis());
+        }
+        if (unknownTokensVector != null && unknownTokensVector.length != vectorSize) {
+            /* make sure unknown tokens vector has require length */
+            throw new ResourceInitializationException(new IllegalArgumentException(
+                    "Length of unknown vector does not match length of known word vectors."));
         }
     }
 
@@ -131,13 +167,7 @@ public class MalletEmbeddingsAnnotator
         if (lowercase) {
             text = text.toLowerCase();
         }
-        Optional<float[]> vector = Optional.empty();
-        if (modelIsBinary && vectorizer.contains(text)) {
-            vector = Optional.of(vectorizer.vectorize(text));
-        }
-        else if (!modelIsBinary && embeddings.containsKey(text)) {
-            vector = Optional.of(embeddings.get(text));
-        }
+        Optional<float[]> vector = getVector(text);
 
         if (vector.isPresent()) {
             WordEmbedding embedding = new WordEmbedding(aJCas, begin, end);
@@ -150,6 +180,57 @@ public class MalletEmbeddingsAnnotator
         }
         else {
             getLogger().debug(text + " not found in embeddings list.");
+        }
+    }
+
+    /**
+     * Possible scenarios:
+     * <p>
+     * <ol>
+     * <li>token is known: return the corresponding embedding</li>
+     * <li>token is unknown:</li>
+     * <ol>
+     * <li>{@code unknownTokensVector} is null: do not annotate token</li>
+     * <li>{@code unknownTokensVector} is specified: annotated token with this vector</li>
+     * </ol>
+     * </ol>
+     *
+     * @param token a token for which to look up an embedding
+     * @return an {@code Optional<float[]>} that holds the token embedding or is empty if no embeddings is available for the token
+     * @throws IOException if an I/O error occurs
+     */
+    private Optional<float[]> getVector(String token)
+            throws IOException
+    {
+        return modelIsBinary ? getVectorFromBinary(token) : getVectorFromText(token);
+    }
+
+    private Optional<float[]> getVectorFromBinary(String token)
+            throws IOException
+    {
+        assert vectorizer != null;
+        if (vectorizer.contains(token)) {
+            return Optional.of(vectorizer.vectorize(token));
+        }
+        else if (unknownTokensVector != null) {
+            return Optional.of(unknownTokensVector);
+        }
+        else {
+            return Optional.empty();
+        }
+    }
+
+    private Optional<float[]> getVectorFromText(String token)
+    {
+        assert embeddings != null;
+        if (embeddings.containsKey(token)) {
+            return Optional.of(embeddings.get(token));
+        }
+        else if (unknownTokensVector != null) {
+            return Optional.of(unknownTokensVector);
+        }
+        else {
+            return Optional.empty();
         }
     }
 }

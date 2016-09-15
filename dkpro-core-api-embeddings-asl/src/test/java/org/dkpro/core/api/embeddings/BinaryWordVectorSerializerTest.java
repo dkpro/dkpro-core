@@ -63,7 +63,7 @@ public class BinaryWordVectorSerializerTest
     }
 
     @Test
-    public void testUnk()
+    public void testRandomVector()
             throws IOException
     {
         File binaryTarget = writeBinaryFile(vectors);
@@ -77,11 +77,11 @@ public class BinaryWordVectorSerializerTest
     }
 
     @Test
-    public void testUnkStable()
+    public void testRandomVectorStable()
             throws IOException
     {
-        float[] unk1 = makeUnk(3);
-        float[] unk2 = makeUnk(3);
+        float[] unk1 = randomVector(3);
+        float[] unk2 = randomVector(3);
         assertTrue("Random vector for unknown words should always be the same.",
                 Arrays.equals(unk1, unk2));
     }
