@@ -37,6 +37,7 @@ import static org.dkpro.core.api.embeddings.binary.BinaryVectorizer.Header;
 public class BinaryWordVectorUtils
 {
     private static final Logger LOG = LoggerFactory.getLogger(BinaryWordVectorUtils.class);
+    private static final Locale DEFAULT_LOCALE = Locale.US;
 
     /**
      * Write a map of token embeddings into binary format. Uses the default locale {@link Locale#US}
@@ -44,7 +45,7 @@ public class BinaryWordVectorUtils
      *
      * @param vectors      a {@code Map<String, float[]>} holding all tokens with embeddings
      * @param binaryTarget the target file {@link File}
-     * @throws IOException  if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      * @see #convertWordVectorsToBinary(Map, boolean, Locale, File)
      */
     public static void convertWordVectorsToBinary(Map<String, float[]> vectors, File binaryTarget)
@@ -52,7 +53,7 @@ public class BinaryWordVectorUtils
     {
         boolean caseless = vectors.keySet().stream()
                 .allMatch(token -> token.equals(token.toLowerCase()));
-        convertWordVectorsToBinary(vectors, caseless, Locale.US, binaryTarget);
+        convertWordVectorsToBinary(vectors, caseless, DEFAULT_LOCALE, binaryTarget);
     }
 
     /**
@@ -69,8 +70,7 @@ public class BinaryWordVectorUtils
             throws IOException
     {
         if (vectors.isEmpty()) {
-            LOG.error("Vectors map is empty, doing nothing.");
-            return;
+            throw new IllegalArgumentException("Word embeddings map must not be empty.");
         }
 
         int vectorLength = vectors.values().iterator().next().length;
