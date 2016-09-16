@@ -32,9 +32,9 @@ import java.util.stream.Collectors;
 /**
  * Helper Methods for reading word embeddings.
  */
-public class TextFormatEmbeddingsUtils
+public class TextFormatVectorizerUtils
 {
-    private static final Logger LOG = LoggerFactory.getLogger(TextFormatEmbeddingsUtils.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TextFormatVectorizerUtils.class);
 
     /**
      * Read an embeddings file in text format.
@@ -88,7 +88,7 @@ public class TextFormatEmbeddingsUtils
         }
 
         Map<String, float[]> embeddings = reader.lines()
-                .map(TextFormatEmbeddingsUtils::lineToEmbedding)
+                .map(TextFormatVectorizerUtils::lineToEmbedding)
                 .collect(Collectors.toMap(Pair::getKey, Pair::getValue));
         reader.close();
 

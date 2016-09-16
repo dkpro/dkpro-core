@@ -18,6 +18,7 @@
 package org.dkpro.core.api.embeddings.binary;
 
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import org.dkpro.core.api.embeddings.VectorizerUtils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -28,7 +29,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.dkpro.core.api.embeddings.binary.BinaryWordVectorUtils.*;
+import static org.dkpro.core.api.embeddings.binary.BinaryWordVectorUtils.convertWordVectorsToBinary;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class BinaryWordVectorUtilsTest
@@ -54,6 +57,37 @@ public class BinaryWordVectorUtilsTest
 
         BinaryVectorizer vec = BinaryVectorizer.load(binaryTarget);
 
+        assertTrue(vec.contains("t1"));
+        assertTrue(vec.contains("t2"));
+        assertEquals(3, vec.dimensions());
+        assertEquals(2, vec.size());
+        assertTrue(vec.isCaseless());
+
+        for (String word : vectors.keySet()) {
+            float[] orig = vectors.get(word);
+            float[] conv = vec.vectorize(word);
+
+            assertTrue("Vectors differ for " + word, Arrays.equals(orig, conv));
+        }
+    }
+
+    @Test
+    public void testConvertWordVectorsToBinaryCaseSensitive()
+            throws Exception
+    {
+        vectors.put("T1", new float[] { 0.1f, 0.2f, 0.3f });
+        File binaryTarget = writeBinaryFile(vectors);
+
+        BinaryVectorizer vec = BinaryVectorizer.load(binaryTarget);
+
+        assertTrue(vec.contains("t1"));
+        assertTrue(vec.contains("t2"));
+        assertTrue(vec.contains("T1"));
+        assertFalse(vec.contains("T2"));
+        assertEquals(3, vec.dimensions());
+        assertEquals(3, vec.size());
+        assertFalse(vec.isCaseless());
+
         for (String word : vectors.keySet()) {
             float[] orig = vectors.get(word);
             float[] conv = vec.vectorize(word);
@@ -69,13 +103,15 @@ public class BinaryWordVectorUtilsTest
         File binaryTarget = writeBinaryFile(vectors);
 
         BinaryVectorizer vec = BinaryVectorizer.load(binaryTarget);
+        float[] randVector = VectorizerUtils.randomVector(3);
 
         float[] unk1 = vec.vectorize("unk1");
         float[] unk2 = vec.vectorize("unk2");
+        assertTrue(Arrays.equals(randVector, unk1));
+        assertTrue(Arrays.equals(randVector, unk2));
         assertTrue("Vectors or unknown words should always be the same.",
                 Arrays.equals(unk1, unk2));
     }
-
 
     /**
      * Write a binary vectors file to a testContext-dependent location.

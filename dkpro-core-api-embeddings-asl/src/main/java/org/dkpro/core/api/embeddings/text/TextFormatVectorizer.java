@@ -72,7 +72,7 @@ public class TextFormatVectorizer
             throws IOException
     {
         return new TextFormatVectorizer(
-                TextFormatEmbeddingsUtils.readEmbeddingFileTxt(f, hasHeaderLine));
+                TextFormatVectorizerUtils.readEmbeddingFileTxt(f, hasHeaderLine));
     }
 
     @Override public float[] vectorize(String token)

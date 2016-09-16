@@ -19,7 +19,6 @@ package org.dkpro.core.api.embeddings.text;
 
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import org.dkpro.core.api.embeddings.binary.BinaryVectorizer;
-import org.dkpro.core.api.embeddings.text.TextFormatEmbeddingsUtils;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -32,7 +31,7 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class TextFormatEmbeddingsUtilsTest
+public class TextFormatVectorizerUtilsTest
 {
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
@@ -46,7 +45,7 @@ public class TextFormatEmbeddingsUtilsTest
         int expectedDimensions = 50;
         boolean hasHeader = false;
 
-        Map<String, float[]> embeddings = TextFormatEmbeddingsUtils
+        Map<String, float[]> embeddings = TextFormatVectorizerUtils
                 .readEmbeddingFileTxt(modelFile, hasHeader);
 
         assertEquals(expectedSize, embeddings.size());
@@ -62,7 +61,7 @@ public class TextFormatEmbeddingsUtilsTest
         int expectedDimensions = 50;
         boolean hasHeader = true;
 
-        Map<String, float[]> embeddings = TextFormatEmbeddingsUtils
+        Map<String, float[]> embeddings = TextFormatVectorizerUtils
                 .readEmbeddingFileTxt(modelFile, hasHeader);
 
         assertEquals(expectedSize, embeddings.size());
@@ -78,7 +77,7 @@ public class TextFormatEmbeddingsUtilsTest
         int expectedDimensions = 50;
         boolean hasHeader = false;
 
-        Map<String, float[]> embeddings = TextFormatEmbeddingsUtils
+        Map<String, float[]> embeddings = TextFormatVectorizerUtils
                 .readEmbeddingFileTxt(modelFile, hasHeader);
 
         assertEquals(expectedSize, embeddings.size());
@@ -92,9 +91,9 @@ public class TextFormatEmbeddingsUtilsTest
         File modelFile = new File("src/test/resources/dummy.vec");
         File targetFile = new File(testContext.getTestOutputFolder(), "binary");
 
-        Map<String, float[]> embeddings = TextFormatEmbeddingsUtils
+        Map<String, float[]> embeddings = TextFormatVectorizerUtils
                 .readEmbeddingFileTxt(modelFile, false);
-        TextFormatEmbeddingsUtils.convertMalletEmbeddingsToBinary(modelFile, targetFile);
+        TextFormatVectorizerUtils.convertMalletEmbeddingsToBinary(modelFile, targetFile);
         BinaryVectorizer vec = BinaryVectorizer.load(targetFile);
 
         for (String token : embeddings.keySet()) {

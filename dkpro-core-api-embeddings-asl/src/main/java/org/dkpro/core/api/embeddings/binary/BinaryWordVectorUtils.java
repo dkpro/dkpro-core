@@ -40,17 +40,19 @@ public class BinaryWordVectorUtils
 
     /**
      * Write a map of token embeddings into binary format. Uses the default locale {@link Locale#US}
-     * and assume case-sensitivity.
+     * and assume case-sensitivity iff there is any token containing an uppercase letter.
      *
      * @param vectors      a {@code Map<String, float[]>} holding all tokens with embeddings
      * @param binaryTarget the target file {@link File}
-     * @throws IOException
+     * @throws IOException  if an I/O error occurs
      * @see #convertWordVectorsToBinary(Map, boolean, Locale, File)
      */
     public static void convertWordVectorsToBinary(Map<String, float[]> vectors, File binaryTarget)
             throws IOException
     {
-        convertWordVectorsToBinary(vectors, false, Locale.US, binaryTarget);
+        boolean caseless = vectors.keySet().stream()
+                .allMatch(token -> token.equals(token.toLowerCase()));
+        convertWordVectorsToBinary(vectors, caseless, Locale.US, binaryTarget);
     }
 
     /**
@@ -67,7 +69,7 @@ public class BinaryWordVectorUtils
             throws IOException
     {
         if (vectors.isEmpty()) {
-            LOG.warn("Vectors map is empty, doing nothing.");
+            LOG.error("Vectors map is empty, doing nothing.");
             return;
         }
 
