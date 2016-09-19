@@ -90,48 +90,6 @@
       </features>
     </typeDescription>
     <typeDescription>
-      <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token</name>
-      <description>&lt;p&gt;Token is one of the two types commonly produced by a segmenter (the other being Sentence). A Token usually represents a word, although it may be used to represent multiple tightly connected words (e.g. "New York") or parts of a word (e.g. the possessive "'s"). One may choose to split compound words into multiple tokens, e.g. ("CamelCase" -&amp;gt; "Camel", "Case"; "Zauberstab" -&amp;gt; "Zauber", "stab"). Most processing components operate on Tokens, usually within the limits of the surrounding Sentence. E.g. a part-of-speech tagger analyses each Token in a Sentence and assigns a part-of-speech to each Token.&lt;/p&gt;</description>
-      <supertypeName>uima.tcas.Annotation</supertypeName>
-      <features>
-        <featureDescription>
-          <name>parent</name>
-          <description>the parent of this token. This feature is meant to be used in when the token participates in a constituency parse and then refers to a constituent containing this token. The type of this feature is {@link Annotation} to avoid adding a dependency on the syntax API module.</description>
-          <rangeTypeName>uima.tcas.Annotation</rangeTypeName>
-        </featureDescription>
-        <featureDescription>
-          <name>lemma</name>
-          <description/>
-          <rangeTypeName>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma</rangeTypeName>
-        </featureDescription>
-        <featureDescription>
-          <name>stem</name>
-          <description/>
-          <rangeTypeName>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem</rangeTypeName>
-        </featureDescription>
-        <featureDescription>
-          <name>pos</name>
-          <description/>
-          <rangeTypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</rangeTypeName>
-        </featureDescription>
-      <featureDescription>
-          <name>morph</name>
-          <description>The morphological feature associated with this token.</description>
-          <rangeTypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures</rangeTypeName>
-        </featureDescription>
-      <featureDescription>
-          <name>id</name>
-          <description>If this unit had an ID in the source format from which it was imported, it may be stored here. IDs are typically not assigned by DKPro Core components. If an ID is present, it should be respected by writers.</description>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
-        </featureDescription>
-      <featureDescription>
-          <name>form</name>
-          <description>Potentially normalized form of the token text.</description>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
-        </featureDescription>
-      </features>
-    </typeDescription>
-    <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.StopWord</name>
       <description/>
       <supertypeName>uima.tcas.Annotation</supertypeName>
