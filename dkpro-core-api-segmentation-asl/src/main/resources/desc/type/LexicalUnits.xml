@@ -171,5 +171,17 @@
         </featureDescription>
       </features>
     </typeDescription>
+  <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.TokenForm</name>
+      <description>A alternative token text which should be used instead of the covered text if set on a token.</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>value</name>
+          <description/>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
   </types>
 </typeSystemDescription>

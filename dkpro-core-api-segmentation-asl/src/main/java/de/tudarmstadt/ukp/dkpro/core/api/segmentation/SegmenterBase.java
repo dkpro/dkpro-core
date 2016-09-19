@@ -217,7 +217,7 @@ extends JCasAnnotator_ImplBase
         trim(aJCas.getDocumentText(), span);
         if (!isEmpty(span[0], span[1]) && isWriteToken()) {
             Token seg = new Token(aJCas, span[0], span[1]);
-            seg.setForm(aForm);
+            seg.setText(aForm);
             seg.addToIndexes(aJCas);
             return seg;
         }
