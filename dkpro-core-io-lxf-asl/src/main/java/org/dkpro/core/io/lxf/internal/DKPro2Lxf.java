@@ -97,7 +97,7 @@ public class DKPro2Lxf
                             token.getEnd());
                     aTarget.addRegion(tokenRegion);
                     tokenNode = new LxfNode(LAYER_TOKEN, TOOL_REPP, tokenIndex, 0, tokenRegion);
-                    tokenNode.setFeature(FEAT_LABEL, token.getForm());
+                    tokenNode.setFeature(FEAT_LABEL, token.getText());
                     aTarget.addNode(tokenNode);
                     aTarget.addEdge(new LxfEdge(tokenNode.getOrigin(), tokenIndex, 0, tokenNode,
                             sentenceNode));

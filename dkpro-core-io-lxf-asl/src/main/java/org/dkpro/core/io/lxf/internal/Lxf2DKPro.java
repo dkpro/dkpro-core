@@ -69,7 +69,7 @@ public class Lxf2DKPro
             int[] region = aLxf.getRegion(sn.getLinks().get(0).get(0)).getAnchors();
             Sentence sentence = new Sentence(aJCas, region[0], region[1]);
             // label feature on sentence seems redundant because tokens also have it
-            //token.setForm(s.getFeature(FEAT_LABEL));
+            //sentence.setForm(s.getFeature(FEAT_LABEL));
             sentence.addToIndexes();
         }
         
@@ -80,7 +80,7 @@ public class Lxf2DKPro
         for (LxfNode tn : tokenNodes) {
             int[] region = aLxf.getRegion(tn.getLinks().get(0).get(0)).getAnchors();
             Token token = new Token(aJCas, region[0], region[1]);
-            token.setForm(tn.getFeature(FEAT_LABEL));
+            token.setText(tn.getFeature(FEAT_LABEL));
             token.addToIndexes();
             
             idxToken.put(tn.getId(), token);
