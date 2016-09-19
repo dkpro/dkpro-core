@@ -213,6 +213,8 @@
       "type" : "pos"
     }, {
       "type" : "morph"
+    }, {
+      "type" : "form"
     } ],
     "labels" : [ "Token", "T" ],
     "fgColor" : "black",

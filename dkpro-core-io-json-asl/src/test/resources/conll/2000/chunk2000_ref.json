@@ -11,7 +11,7 @@
       "Sofa" : {
         "_feature_types" : {"sofaArray" : "_ref" } }, 
       "Token" : {
-        "_feature_types" : {"sofa" : "_ref",  "parent" : "_ref",  "lemma" : "_ref",  "stem" : "_ref",  "pos" : "_ref",  "morph" : "_ref" } }, 
+        "_feature_types" : {"sofa" : "_ref",  "parent" : "_ref",  "lemma" : "_ref",  "stem" : "_ref",  "pos" : "_ref",  "morph" : "_ref",  "form" : "_ref" } }, 
       "Annotation" : {
         "_feature_types" : {"sofa" : "_ref" }, 
         "_subtypes" : ["Chunk",  "DocumentAnnotation",  "POS",  "Sentence",  "Token" ] }, 

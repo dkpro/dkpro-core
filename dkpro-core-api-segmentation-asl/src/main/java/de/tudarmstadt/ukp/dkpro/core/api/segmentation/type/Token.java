@@ -312,7 +312,7 @@ public class Token extends Annotation {
    */
   public void setText(String aText) {
       TokenForm form = getForm();
-      if (!getCoveredText().equals(aText)) {
+      if (aText != null && !aText.equals(getCoveredText())) {
           // Create form annotation if none is here yet
           if (form == null) {
               form = new TokenForm(jcasType.jcas, getBegin(), getEnd());
