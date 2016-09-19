@@ -15,8 +15,56 @@
 // limitations under the License.
 
 [[sect_analytics]]
-
 == Analytics
+
+=== Segmentation
+
+==== Tokenization and sentence boundary detection
+
+Tokenization and sentence boundary detection are usually realized in one segmenter component in 
+DKPro Core. The reason is that in some cases, a segmenter needs to run before a tokenizer and in
+other cases it is the other way around. By running always both steps in a single component, the
+user does not have to worry about the order in which the steps are run internally. However, it is
+still possible to configure segmenters such that they produce either only tokens or sentence
+annotations.
+
+DKPro Core assumes that tokens are non-overlapping. Many components additionally assume that
+tokens are located inside sentences and that they do not extend beyond the sentence bounaries.
+
+==== Normalizing tokens
+
+Some tokenizers apply a basic normalization of the token text. UIMA does not allow changing the
+document text. Thus, the `Token` annotation has a feature called  `form` which can be used to store
+the normalized form of the token text. The method `setText` should be used to set the form of a
+token. It internally determines whether a `TokenForm` annotation is necessary (i.e. whether the
+form differs from the covered text of the token) or not. Likewise, the method `getText` should be
+used to retrieve the token text that should be used for further analysis. The method `getText`
+should not be used be writers - they should write the original document text (i.e. `getCoveredText`)
+unless there is a special field in the output for normalized token text.
+
+==== Headings
+
+Headings typically do not end with a sentence end marker (i.e. a full stop `.`). As a consequence
+segmenters are confused and consider a heading and the first sentence of the following paragraph
+to be a single sentence unit. This can be resolved by adding <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div,Div>> annotations to the document
+(and its subtypes) and configuring segmenters to respect these. Such annotations can be obtained
+for example by using:
+
+* a reader component that creates Paragraph and Heading annotations (e.g. the <<format-reference.adoc#format-Pdf, PdfReader>>)
+* an analysis component that detects Paragraph boundaries (e.g. the <<component-reference.adoc#engine-ParagraphSplitter,ParagraphSplitter>>)
+
+Segmenters are by default configured to respect Div-type annotations (the default value for
+`PARAM_ZONE_TYPES` is <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div,Div>>). 
+This means,  segmenters will ensure that sentences and tokens to not overlap with their boundaries. 
+If desired, `PARAM_STRICT_ZONING` can be set to `true` (default `false`) to ensure that tokens and
+sentences are only created within the boundaries of the zone types.
+
+==== Hyphenation
+
+Hyphenated words cannot be properly processed by NLP tools. The 
+<<component-reference.adoc#engine-HyphenationRemover,HyphenationRemover>> component can be used
+to join hypenated words.
+
 
 ////
 EJ: This section would be more helpful if, instead of telling what not to do ('Don't ask
@@ -50,6 +98,30 @@ We recommend that you try various combinations and stick with the one that gives
 best result for __your__ data.
 ////
 
+=== Lemmatizaton
+
+==== Lemmatizing multiwords
+
+If you use lemma information in your pipeline, you should bear in mind that
+multiword expressions, in particular discontinuous multiwords, might not be
+lemmatized as one word (or expression), but rather each multiword part might be
+lemmatized separately. In languages such as German, there are verbs with
+separable particle such as _anfangen_ (_an_ occurs separate from _fangen_ in
+particular sentence constructions). Therefore - depending on your use case - you
+might consider postprocessing the output of the lemmatizer in order to get the
+true lemmas (which you might need, e.g. in order to look up information in a
+lexical resource).
+
+=== Dictionaries and other lexical resources
+
+If you use components in your pipeline that access dictionaries or other
+lexical resources, it might be essential to include a Lemmatizer in your
+pipeline: Many dictionaries and well-known lexical resources such as WordNet
+require at minimum a lemma form as a search word in order to return information
+about that word. For large-scale lexical resources, e.g. for Wiktionary,
+additional information about POS is very helpful in order to reduce the
+ambiguity of a given lemma form.
+
 === Compatibility of Components
 
 When selecting components for your pipeline you should make sure that the
@@ -77,32 +149,7 @@ requires POS-tags from the tagset Y, then the two models are not semantically
 compatible - even though the POS-tagger and dependency-parser components are
 compatible on the level of the type system.
 
-
-=== Dictionaries and other lexical resources
-
-If you use components in your pipeline that access dictionaries or other
-lexical resources, it might be essential to include a Lemmatizer in your
-pipeline: Many dictionaries and well-known lexical resources such as WordNet
-require at minimum a lemma form as a search word in order to return information
-about that word. For large-scale lexical resources, e.g. for Wiktionary,
-additional information about POS is very helpful in order to reduce the
-ambiguity of a given lemma form.
-
-
-=== Lemmatizing multiwords 
-
-If you use lemma information in your pipeline, you should bear in mind that
-multiword expressions, in particular discontinuous multiwords, might not be
-lemmatized as one word (or expression), but rather each multiword part might be
-lemmatized separately. In languages such as German, there are verbs with
-separable particle such as _anfangen_ (_an_ occurs separate from _fangen_ in
-particular sentence constructions). Therefore - depending on your use case - you
-might consider postprocessing the output of the lemmatizer in order to get the
-true lemmas (which you might need, e.g. in order to look up information in a
-lexical resource).
-
-
-=== Morphologically Rich Languages
+==== Morphologically Rich Languages
 
 ////
 EJ: What's the goal of this subsection?  Other sister sections have advice
@@ -143,7 +190,7 @@ non-standard data (scientific abstracts, Twitter data, etc.) without adaptation.
 ////
 
 
-=== Shallow processing and POS tagsets
+==== Shallow processing and POS tagsets
 
 While more advanced semantic processing (e.g. discourse analysis) typically
 depends on the output of a parser component, there might be settings where you
@@ -164,29 +211,6 @@ corresponding original tagset. (Example)
 ////
 EJ: Ok, I want to switch to the original POS tagset.  How do I do this?  Pointers?
 ////
-
-=== Headings
-
-Headings typically do not end with a sentence end marker (i.e. a full stop `.`). As a consequence
-segmenters are confused and consider a heading and the first sentence of the following paragraph
-to be a single sentence unit. This can be resolved by adding <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div,Div>> annotations to the document
-(and its subtypes) and configuring segmenters to respect these. Such annotations can be obtained
-for example by using:
-
-* a reader component that creates Paragraph and Heading annotations (e.g. the <<format-reference.adoc#format-Pdf, PdfReader>>)
-* an analysis component that detects Paragraph boundaries (e.g. the <<component-reference.adoc#engine-ParagraphSplitter,ParagraphSplitter>>)
-
-Segmenters are by default configured to respect Div-type annotations (the default value for
-`PARAM_ZONE_TYPES` is <<typesystem-reference.adoc#type-de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div,Div>>). 
-This means,  segmenters will ensure that sentences and tokens to not overlap with their boundaries. 
-If desired, `PARAM_STRICT_ZONING` can be set to `true` (default `false`) to ensure that tokens and
-sentences are only created within the boundaries of the zone types.
-
-=== Hyphenation
-
-Hyphenated words cannot be properly processed by NLP tools. The 
-<<component-reference.adoc#engine-HyphenationRemover,HyphenationRemover>> component can be used
-to join hypenated words.
 
 === Adding components as dependencies (Maven)
 
