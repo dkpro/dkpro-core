@@ -29,15 +29,15 @@ public class SolrUtilsTest
     {
         String fieldname = "field";
         String value = "value";
-        String idValue = "id";
-        String idFieldname = idValue;
+        String idValue = "1";
+        String idFieldname = "id";
         boolean update = false;
 
         SolrInputDocument document = new SolrInputDocument();
-        document.addField(idFieldname, idFieldname);
+        document.addField(idFieldname, idValue);
         SolrUtils.setField(document, fieldname, value, update);
 
-        assertEquals(idValue, document.getFieldValue(idValue));
+        assertEquals(idValue, document.getFieldValue(idFieldname));
         assertEquals(value, document.getFieldValue(fieldname));
     }
 }
