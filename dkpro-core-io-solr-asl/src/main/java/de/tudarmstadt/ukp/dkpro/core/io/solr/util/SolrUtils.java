@@ -1,5 +1,5 @@
 /*
- * Copyright 2015
+ * Copyright 2016
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -17,55 +17,51 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.solr.util;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.commons.collections4.map.SingletonMap;
 import org.apache.solr.common.SolrInputDocument;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Helper utilities.
- *
- *
  */
 public class SolrUtils
 {
     /**
-     * The modifiers available for Solr atomic updates
+     * The modifiers available for Solr atomic updates: SET, ADD, INC, REMOVE, REMOVEREGEX.
      *
      * @see <a
-     *      href="http://wiki.apache.org/solr/Atomic_Updates">http://wiki.apache.org/solr/Atomic_Updates</a>
+     * href="http://wiki.apache.org/solr/Atomic_Updates">http://wiki.apache.org/solr/Atomic_Updates</a>
      */
     public enum Modifier
     {
-        SET, ADD, INC
-    };
+        SET, ADD, INC, REMOVE, REMOVEREGEX
+    }
 
     private static final Modifier DEFAULT_MODIFIER = Modifier.SET;
     private static final Map<Modifier, String> modifierMap = new HashMap<Modifier, String>()
     {
         private static final long serialVersionUID = 1791784069195163737L;
+
         {
             put(Modifier.SET, "set");
             put(Modifier.ADD, "add");
             put(Modifier.INC, "inc");
+            put(Modifier.REMOVE, "remove");
+            put(Modifier.REMOVEREGEX, "removeregex");
         }
     };
 
     /**
      * Add a field and optionally update if applicable. Updates can be "set", "add", or "inc".
      *
-     * @param document
-     *            the {@link SolrInputDocument} to add/update
-     * @param fieldname
-     *            the field name to add/update
-     * @param value
-     *            the value to insert for the field.
-     * @param update
-     *            if true, use Solr atomic update mechanism; otherwise overwrite
-     * @param modifier
-     *            The {@link Modifier} to use for updating a document (only used if {@code update}
-     *            is true).
+     * @param document  the {@link SolrInputDocument} to add/update
+     * @param fieldname the field name to add/update
+     * @param value     the value to insert for the field.
+     * @param update    if true, use Solr atomic update mechanism; otherwise overwrite
+     * @param modifier  The {@link Modifier} to use for updating a document (only used if {@code update}
+     *                  is true).
      * @see #setField(SolrInputDocument, String, Object, boolean)
      */
     public static void setField(SolrInputDocument document, String fieldname, Object value,
@@ -82,15 +78,11 @@ public class SolrUtils
     /**
      * Add a field and optionally update, using the default atomic update operation ("set").
      *
-     * @param document
-     *            the {@link SolrInputDocument} to add/update
-     * @param fieldname
-     *            the field name to add/update
-     * @param value
-     *            the value to insert for the field.
-     * @param update
-     *            if true, use Solr atomic update mechanism; otherwise overwrite
-     * @see #setField(SolrInputDocument, String, Object, boolean, Modifier)
+     * @param document  the {@link SolrInputDocument} to add/update
+     * @param fieldname the field name to add/update
+     * @param value     the value to insert for the field.
+     * @param update    if true, use Solr atomic update mechanism; otherwise overwrite
+     * @see #setField(SolrInputDocument, String, Object, boolean, Modifier)
      */
     public static void setField(SolrInputDocument document, String fieldname, Object value,
             boolean update)
