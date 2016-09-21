@@ -132,6 +132,8 @@ public class DatasetFactoryTest
             assertNullOrExists(split.getDevelopmentFiles());
         }
         assertNullOrExists(ds.getLicenseFiles());
+        assertNotNull(ds.getDataFiles());
+        assertTrue(ds.getDataFiles().length > 0);
     }
 
     private void assertNullOrExists(File... aFiles)

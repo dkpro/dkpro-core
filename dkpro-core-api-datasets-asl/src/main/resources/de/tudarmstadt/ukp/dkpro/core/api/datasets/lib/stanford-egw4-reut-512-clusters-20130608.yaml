@@ -3,7 +3,7 @@ datasetId: stanford-egw4-reut-512-clusters
 version: 20130608
 language: en
 # mediaType: text/x.org.dkpro.conll-2006
-encoding: ISO-8859-1
+encoding: UTF-8
 
 name: Stanford POS Tagger Distsim Clusters
 url: "http://nlp.stanford.edu/software/pos-tagger-faq.shtml#distsim"

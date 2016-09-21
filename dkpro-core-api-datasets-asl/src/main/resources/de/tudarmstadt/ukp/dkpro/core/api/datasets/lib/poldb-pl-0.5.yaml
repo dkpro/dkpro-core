@@ -21,9 +21,11 @@ artifacts:
     url: https://www.gnu.org/licenses/gpl-3.0.txt
     sha1: 8624bcdae55baeef00cd11d5dfcfa60f68710a02
   poldb-0.5.conll.gz:
-    url: "http://zil.ipipan.waw.pl/Składnica?action=AttachFile&do=view&target=Składnica-zależnościowa-0.5.conll.gz"
-    sha1: 474dd4ce9917820b9495793525bdec5feba28833
+    url: "http://zil.ipipan.waw.pl/Składnica?action=AttachFile&do=get&target=Składnica-zależnościowa-0.5.conll.gz"
+    sha1: 187424608e91b271957dabcf140a7274f1c88d63
 
 roles:
   licenses:
     - LICENSE.txt
+  data:
+    - poldb-0.5.conll.gz

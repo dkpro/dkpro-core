@@ -29,8 +29,6 @@ artifacts:
     actions:
       - action: explode
         configuration: { includes: "*.txt" }
-      - action: split
-        configuration: { includes: "data/*.txt", train: 0.5, test: 0.5 }
 
 roles:
   licenses:

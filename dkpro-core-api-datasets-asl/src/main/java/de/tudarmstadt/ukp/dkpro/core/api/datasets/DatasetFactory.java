@@ -325,9 +325,18 @@ public class DatasetFactory
                             LOG.info("Post-download action [" + action.getAction() + "]");
                             Class<? extends Action_ImplBase> implClass = actionRegistry
                                     .get(action.getAction());
+                            
+                            if (implClass == null) {
+                                throw new IllegalStateException(
+                                        "Unknown or unsupported action [" + action.getAction() + "]");
+                            }
+                            
                             Action_ImplBase impl = implClass.newInstance();
                             impl.apply(action, aDataset, artifact, cachedFile);
                         }
+                    }
+                    catch (IllegalStateException e) {
+                        throw e;
                     }
                     catch (IOException e) {
                         throw e;

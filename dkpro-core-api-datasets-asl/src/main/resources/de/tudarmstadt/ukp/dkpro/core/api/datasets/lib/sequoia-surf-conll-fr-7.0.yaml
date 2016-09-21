@@ -1,11 +1,11 @@
 groupId: org.dkpro.core.datasets.sequoia
-datasetId: sequoia
+datasetId: sequoia-surf
 version: 7.0
 language: fr
 mediaType: text/x.org.dkpro.conll-2006
 encoding: UTF-8
 
-name: Deep Sequoia 
+name: Deep Sequoia (Surface)
 url: https://deep-sequoia.inria.fr
 attribution: |
   Marie Candito, Guy Perrier, Bruno Guillaume, Corentin Ribeyre, Karën Fort, Djamé Seddah and Éric
@@ -36,3 +36,5 @@ artifacts:
 roles:
   licenses:
     - LICENSE.txt
+  data:
+    - sequoia/sequoia-7.0/sequoia.surf.conll

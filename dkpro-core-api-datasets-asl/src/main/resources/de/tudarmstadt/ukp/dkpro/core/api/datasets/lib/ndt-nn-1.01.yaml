@@ -35,4 +35,6 @@ artifacts:
 roles:
   licenses:
     - LICENSE_NDT.txt
+  data:
+    - "20140328_NDT_1-01/nno/conll/*.conll"
     

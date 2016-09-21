@@ -34,3 +34,5 @@ artifacts:
 roles:
   licenses:
     - LICENSE.txt
+  data:
+    - "perseus/v2.1/Greek/texts/*.xml"
