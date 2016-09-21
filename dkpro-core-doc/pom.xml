@@ -99,7 +99,10 @@
             </goals>
             <configuration>
               <scripts>
-                <script>file:///${project.basedir}/src/main/script/generateDocumentation.groovy</script>
+                <script><![CDATA[
+                de.tudarmstadt.ukp.dkpro.core.doc.internal.ContextHolder.setBinding(binding);
+                de.tudarmstadt.ukp.dkpro.core.doc.DocumentationBuilder.main();
+                ]]></script>
               </scripts>
             </configuration>
           </execution>
