@@ -3,6 +3,7 @@ datasetId: agdt
 version: 2.1
 language: la
 # mediaType: unknown
+encoding: UTF-8
 
 name: Ancient Greek and Latin Dependency Treebank (Latin)
 url: https://perseusdl.github.io/treebank_data/ 

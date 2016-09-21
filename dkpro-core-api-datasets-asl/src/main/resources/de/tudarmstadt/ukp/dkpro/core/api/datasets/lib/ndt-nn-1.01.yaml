@@ -3,6 +3,7 @@ datasetId: ndt
 version: 1.01
 language: nn
 mediaType: text/x.org.dkpro.conll-2006
+encoding: UTF-8
 
 name: Norwegian Dependency Treebank (Norwegian Nynorsk)
 url: http://www.nb.no/sprakbanken/show?serial=sbr-10

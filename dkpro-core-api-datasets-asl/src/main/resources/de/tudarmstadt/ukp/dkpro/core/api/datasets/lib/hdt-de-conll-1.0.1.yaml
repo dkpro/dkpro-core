@@ -3,6 +3,7 @@ datasetId: hdt
 version: 1.0.1
 language: de
 mediaType: text/x.org.dkpro.conll-2006
+encoding: UTF-8
 
 name: Hamburg Dependency Treebank
 url: https://corpora.uni-hamburg.de/drupal/de/islandora/object/treebank:hdt

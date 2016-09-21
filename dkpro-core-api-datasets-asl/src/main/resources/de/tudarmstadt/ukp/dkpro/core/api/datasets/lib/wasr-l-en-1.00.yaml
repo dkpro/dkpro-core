@@ -3,6 +3,7 @@ datasetId: wasr-l-en
 version: 1.00
 language: en
 mediaType: text/x.org.dkpro.conll-2009
+encoding: ISO-8859-1
 
 name: English Word Sense and Semantic Role Datasets (WaSR)
 url: https://www.ukp.tu-darmstadt.de/data/semantic-role-resources/knowledge-based-semantic-role-labeling/

@@ -3,6 +3,7 @@ datasetId: finntb
 version: 3.1
 language: nfi
 mediaType: text/x.org.dkpro.conll-2006
+encoding: UTF-8
 
 name: FinnTreeBank
 url: http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/

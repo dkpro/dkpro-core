@@ -3,6 +3,7 @@ datasetId: sdt-conll
 version: 0.1
 language: sl
 mediaType: text/x.org.dkpro.conll-2006
+encoding: UTF-8
 
 name: Slovene Dependency Treebank 0.1
 url: http://nl.ijs.si/sdt/

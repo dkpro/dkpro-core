@@ -3,6 +3,7 @@ datasetId: tut
 version: 20101122
 language: it
 mediaType: text/x.org.dkpro.conll-2006
+encoding: UTF-8
 
 name: Turin University Treebank
 url: http://www.di.unito.it/~tutreeb/treebanks.html

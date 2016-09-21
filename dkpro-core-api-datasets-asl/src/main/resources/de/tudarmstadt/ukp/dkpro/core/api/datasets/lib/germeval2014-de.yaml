@@ -4,6 +4,7 @@ datasetId: germeval2014
 version: 20140911
 language: de
 mediaType: text/x.org.dkpro.germeval-2014
+encoding: UTF-8
 
 name: GermEval 2014 Named Entity Recognition Shared Task
 url: https://sites.google.com/site/germeval2014ner/

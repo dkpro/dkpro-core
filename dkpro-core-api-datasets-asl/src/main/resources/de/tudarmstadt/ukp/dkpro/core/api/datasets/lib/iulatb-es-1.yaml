@@ -3,6 +3,7 @@ datasetId: iulatb
 version: 1
 language: es
 mediaType: text/x.org.dkpro.conll-2006
+encoding: UTF-8
 
 name: IULA Spanish LSP Treebank
 url: https://www.iula.upf.edu/recurs01_tbk_uk.htm

@@ -4,6 +4,7 @@ datasetId: brown-nltk
 version: 20081013 
 language: en
 mediaType: application/tei+xml
+encoding: ISO-8859-1
 
 name: Brown Corpus (TEI XML)
 url: http://www.nltk.org/nltk_data/

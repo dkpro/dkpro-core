@@ -4,6 +4,7 @@ datasetId: conll2002
 version: 20020522
 language: es
 mediaType: text/x.org.dkpro.conll-2002
+encoding: ISO-8859-1
 
 name: CoNLL-2002 NER Shared Task Data (Spanish)
 url: http://www.clips.ua.ac.be/conll2002/ner/

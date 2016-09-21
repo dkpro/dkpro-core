@@ -4,6 +4,7 @@ datasetId: conll2009
 version: 1.1
 language: de
 mediaType: text/x.org.dkpro.conll-2009
+encoding: UTF-8
 
 # Informational metadata
 name: CoNLL-2009 Shared Task (German)

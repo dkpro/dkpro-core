@@ -3,6 +3,7 @@ datasetId: conll2009
 version: 2.1
 language: ca
 mediaType: text/x.org.dkpro.conll-2009
+encoding: UTF-8
 
 name: CoNLL-2009 Shared Task (Catalan)
 url: http://ufal.mff.cuni.cz/conll2009-st/

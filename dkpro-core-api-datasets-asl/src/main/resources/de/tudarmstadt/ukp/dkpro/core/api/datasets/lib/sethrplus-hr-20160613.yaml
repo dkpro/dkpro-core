@@ -3,6 +3,7 @@ datasetId: sethrplus
 version: 20160613
 language: hr
 mediaType: text/x.org.dkpro.conll-u
+encoding: UTF-8
 
 name: SETimes.HR+ Croatian dependency treebank
 url: https://github.com/ffnlp/sethr

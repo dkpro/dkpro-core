@@ -3,7 +3,7 @@ datasetId: masc-conll
 version: 20080522
 language: en
 mediaType: text/x.org.dkpro.conll-2008
-# encoding: unknown
+encoding: ISO-8859-1
 
 name: MASC-CONLL
 url: http://www.anc.org/data/masc/

@@ -3,6 +3,7 @@ datasetId: sethr
 version: 1
 language: hr
 mediaType: text/x.org.dkpro.conll-2006
+encoding: UTF-8
 
 name: SETimes.HR dependency treebank
 url: http://nlp.ffzg.hr/resources/corpora/setimes-hr/

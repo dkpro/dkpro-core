@@ -4,6 +4,7 @@ datasetId: conll2006
 version: 20100302
 language: pt
 mediaType: text/x.org.dkpro.conll-2006
+encoding: UTF-8
 
 name: CoNLL-2006 Shared Task (Portuguese)
 url: http://ilk.uvt.nl/conll/

@@ -3,6 +3,7 @@ datasetId: cdt-conll
 version: 1
 language: da
 mediaType: text/x.org.dkpro.conll-2006
+encoding: UTF-8
 
 name: Copenhagen Dependency Treebank
 url: http://mbkromann.github.io/copenhagen-dependency-treebank

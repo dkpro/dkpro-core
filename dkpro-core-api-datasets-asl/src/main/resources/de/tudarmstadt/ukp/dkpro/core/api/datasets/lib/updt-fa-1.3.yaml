@@ -3,6 +3,7 @@ datasetId: sequoia
 version: 1.3
 language: fa
 mediaType: text/x.org.dkpro.conll-2006
+encoding: UTF-8
 
 name: Uppsala Persian Dependency Treebank
 url: http://stp.lingfil.uu.se/%7Emojgan/UPDT.html

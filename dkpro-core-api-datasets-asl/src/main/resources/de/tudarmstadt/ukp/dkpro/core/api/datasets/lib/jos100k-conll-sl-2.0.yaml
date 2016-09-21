@@ -3,6 +3,7 @@ datasetId: jos100k-conll
 version: 2.0
 language: sl
 mediaType: text/x.org.dkpro.conll-2006
+encoding: UTF-8
 
 name: JOS - jos100k
 url: http://nl.ijs.si/jos/jos100k-en.html

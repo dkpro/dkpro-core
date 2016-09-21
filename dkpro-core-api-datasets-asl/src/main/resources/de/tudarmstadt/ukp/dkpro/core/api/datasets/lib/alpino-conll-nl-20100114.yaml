@@ -3,6 +3,7 @@ datasetId: alpino-alpino2conll
 version: 20100114
 language: nl
 mediaType: text/x.org.dkpro.conll-2006
+encoding: UTF-8
 
 name: Alpino2conll
 url: http://www.let.rug.nl/~bplank/alpino2conll/

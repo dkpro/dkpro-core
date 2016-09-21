@@ -4,6 +4,7 @@ version: 1.0
 # There is no ISO 639-1 language code for Coptic. Have to use ISO 639-3
 language: cop
 mediaType: text/x.org.dkpro.conll-2006
+encoding: UTF-8
 
 name: Coptic Treebank
 url: http://copticscriptorium.org

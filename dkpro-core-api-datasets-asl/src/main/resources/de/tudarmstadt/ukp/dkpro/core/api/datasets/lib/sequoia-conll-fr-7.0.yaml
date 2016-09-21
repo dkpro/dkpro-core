@@ -3,6 +3,7 @@ datasetId: sequoia
 version: 7.0
 language: fr
 mediaType: text/x.org.dkpro.conll-2006
+encoding: UTF-8
 
 name: Deep Sequoia 
 url: https://deep-sequoia.inria.fr

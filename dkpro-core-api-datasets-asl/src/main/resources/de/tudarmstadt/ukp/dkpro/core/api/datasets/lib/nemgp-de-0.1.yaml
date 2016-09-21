@@ -3,6 +3,7 @@ datasetId: nemgp
 version: 0.1
 language: de
 # mediaType: text/x.org.dkpro.opennlp-ne
+encoding: UTF-8
 
 name: Named Entity Model for German, Politics (NEMGP)
 url: http://www.thomas-zastrow.de/nlp/
