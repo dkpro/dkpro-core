@@ -298,6 +298,24 @@ public class CoreNlpParserTest
         AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford341", unmappedDep, jcas);
     }
 
+    // CoreNlpParser PARAM_KEEP_PUNCTUATION has no effect #965
+//    @Ignore("Only supported in CoreNLP 3.6.0")
+//    @Test
+//    public void testEnglishKeepPunctuation()
+//        throws Exception
+//    {
+//        JCas jcas = runTest("en", "rnn", "This is a test .", 
+//                CoreNlpParser.PARAM_KEEP_PUNCTUATION, true);
+//
+//        String[] dependencies = {
+//                "[  0,  4]NSUBJ(nsubj) D[0,4](This) G[10,14](test)",
+//                "[  5,  7]COP(cop) D[5,7](is) G[10,14](test)",
+//                "[  8,  9]DET(det) D[8,9](a) G[10,14](test)",
+//                "[ 10, 14]ROOT(root) D[10,14](test) G[10,14](test)" };
+//
+//        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+//    }
+
     @Test
     public void testEnglishRnn()
         throws Exception
