@@ -86,6 +86,7 @@ import edu.stanford.nlp.trees.TypedDependency;
 import edu.stanford.nlp.trees.UniversalEnglishGrammaticalRelations;
 import edu.stanford.nlp.trees.UniversalEnglishGrammaticalStructureFactory;
 import edu.stanford.nlp.trees.international.pennchinese.ChineseGrammaticalRelations;
+import edu.stanford.nlp.util.Filters;
 
 /**
  * Stanford Parser component.
@@ -314,6 +315,10 @@ public class StanfordParser
     @ConfigurationParameter(name = PARAM_QUOTE_END, mandatory = false)
     private List<String> quoteEnd;
 
+    public static final String PARAM_KEEP_PUNCTUATION = "keepPunctuation";
+    @ConfigurationParameter(name = PARAM_KEEP_PUNCTUATION, mandatory = true, defaultValue = "false")
+    private boolean keepPunctuation;
+
     private CasConfigurableProviderBase<ParserGrammar> modelProvider;
     private MappingProvider posMappingProvider;
     private MappingProvider constituentMappingProvider;
@@ -450,7 +455,8 @@ public class StanfordParser
         GrammaticalStructure gs;
         try {
             TreebankLanguagePack tlp = aParser.getTLPParams().treebankLanguagePack();
-            gs = tlp.grammaticalStructureFactory(tlp.punctuationWordRejectFilter(),
+            gs = tlp.grammaticalStructureFactory(
+                    keepPunctuation ? Filters.acceptFilter() : tlp.punctuationWordRejectFilter(),
                     tlp.typedDependencyHeadFinder()).newGrammaticalStructure(parseTree);
         }
         catch (UnsupportedOperationException e) {

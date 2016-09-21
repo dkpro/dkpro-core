@@ -366,6 +366,23 @@ public class StanfordParserTest
     }
 
     @Test
+    public void testEnglishKeepPunctuation()
+        throws Exception
+    {
+        JCas jcas = runTest("en", "rnn", "This is a test .", 
+                StanfordParser.PARAM_KEEP_PUNCTUATION, true);
+
+        String[] dependencies = {
+                "[  0,  4]NSUBJ(nsubj) D[0,4](This) G[10,14](test)",
+                "[  5,  7]COP(cop) D[5,7](is) G[10,14](test)",
+                "[  8,  9]DET(det) D[8,9](a) G[10,14](test)",
+                "[ 10, 14]ROOT(root) D[10,14](test) G[10,14](test)",
+                "[ 15, 16]PUNCT(punct) D[15,16](.) G[10,14](test)" };
+
+        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+    }
+
+    @Test
     public void testEnglishRnn()
         throws Exception
     {
