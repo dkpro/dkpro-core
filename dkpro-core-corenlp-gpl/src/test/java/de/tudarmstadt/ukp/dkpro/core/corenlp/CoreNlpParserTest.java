@@ -1076,7 +1076,7 @@ public class CoreNlpParserTest
         throws Exception
     {
         AssumeResource.assumeResource(CoreNlpParser.class,
-                "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "parser", aLanguage, "default");
+                "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "parser", aLanguage, aVariant);
         
         AggregateBuilder aggregate = new AggregateBuilder();
 
