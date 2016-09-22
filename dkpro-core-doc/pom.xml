@@ -344,10 +344,7 @@
           <configuration>
             <usedDependencies combine.children="append">
               <!-- Dependencies used in Groovy scripts not detected -->
-              <usedDependency>org.apache.uima:uimafit-core</usedDependency>
-              <usedDependency>commons-configuration:commons-configuration</usedDependency>
               <usedDependency>org.apache.commons:commons-lang3</usedDependency>
-              <usedDependency>org.yaml:snakeyaml</usedDependency>
             </usedDependencies>
           </configuration>
         </plugin>
