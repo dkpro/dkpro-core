@@ -3,6 +3,7 @@ datasetId: aqmar
 version: 1.0
 language: ar
 mediaType: text/x.org.dkpro.conll-2000
+encoding: UTF-8
 
 name: AQMAR Arabic Wikipedia Named Entity Corpus
 url: http://www.cs.cmu.edu/~ark/ArabicNER/

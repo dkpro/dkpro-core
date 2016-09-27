@@ -3,6 +3,7 @@ datasetId: poldb
 version: 0.5
 language: pl
 mediaType: text/x.org.dkpro.conll-2006
+encoding: UTF-8
 
 name: Polish Dependency Bank
 url: http://zil.ipipan.waw.pl/Składnica

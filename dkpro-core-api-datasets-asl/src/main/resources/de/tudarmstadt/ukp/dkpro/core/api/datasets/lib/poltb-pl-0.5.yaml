@@ -3,6 +3,7 @@ datasetId: poltb
 version: 0.5
 language: pl
 mediaType: application/x.org.dkpro.tiger+xml
+encoding: UTF-8
 
 name: Polish Constituency Treebank
 url: http://zil.ipipan.waw.pl/Składnica

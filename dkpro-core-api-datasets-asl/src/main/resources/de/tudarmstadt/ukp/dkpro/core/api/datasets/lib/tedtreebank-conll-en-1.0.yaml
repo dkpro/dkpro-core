@@ -3,7 +3,7 @@ datasetId: tedtreebank-conll
 version: 1.0
 language: en
 mediaType: text/x.org.dkpro.conll-2006
-encoding: ISO-8859-1
+encoding: UTF-8
 
 name: NAIST/NTT TED Treebank
 url: http://ahclab.naist.jp/resource/tedtreebank/
