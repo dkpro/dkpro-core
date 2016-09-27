@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cesDoc>
+  <cesHeader></cesHeader>
+  <text>
+    <body>
+      <p id="p1">
+        <s id="s1">
+          <t id="t1" word="Αυτή" tag="PnDmFe03SgNmXx" lemma="αυτός" />
+          <t id="t2" word="είναι" tag="VbMnIdPr03SgXxIpPvXx" lemma="είμαι" />
+          <t id="t3" word="η" tag="AtDfFeSgNm" lemma="ο" />
+          <t id="t4" word="πρώτη" tag="NmOdFeSgNmAj" lemma="πρώτος" />
+          <t id="t5" word="γραμμή" tag="NoCmFeSgNm" lemma="γραμμή" />
+          <t id="t6" word="." tag="PTERM_P" lemma="." />
+        </s>
+      </p>
+      <p id="p2">
+        <s id="s2">
+          <t id="t7" word="Αυτή" tag="PnDmFe03SgNmXx" lemma="αυτός" />
+          <t id="t8" word="είναι" tag="VbMnIdPr03SgXxIpPvXx" lemma="είμαι" />
+          <t id="t9" word="η" tag="AtDfFeSgNm" lemma="ο" />
+          <t id="t10" word="πρώτη" tag="NmOdFeSgNmAj" lemma="πρώτος" />
+          <t id="t11" word="γραμμή" tag="NoCmFeSgNm" lemma="γραμμή" />
+          <t id="t12" word="." tag="PTERM_P" lemma="." />
+        </s>
+        <s id="s3">
+          <t id="t13" word="Αυτό" tag="PnDmNe03SgNmXx" lemma="αυτός" />
+          <t id="t14" word="είναι" tag="VbMnIdPr03SgXxIpPvXx" lemma="είμαι" />
+          <t id="t15" word="μια" tag="AtIdFeSgNm" lemma="ένας" />
+          <t id="t16" word="άλλη" tag="PnIdFe03SgNmXx" lemma="άλλος" />
+          <t id="t17" word="γραμμή" tag="NoCmFeSgNm" lemma="γραμμή" />
+          <t id="t18" word="." tag="PTERM_P" lemma="." />
+        </s>
+      </p>
+      <p id="p3">
+        <s id="s4">
+          <t id="t19" word="Γίνε" tag="VbMnMpXx02SgXxPePvXx" lemma="γίνομαι" />
+          <t id="t20" word="η" tag="AtDfFeSgNm" lemma="ο" />
+          <t id="t21" word="αλλαγή" tag="NoCmFeSgNm" lemma="αλλαγή" />
+          <t id="t22" word="που" tag="PnReFe03SgNmXx" lemma="που" />
+          <t id="t23" word="θέλεις" tag="VbMnIdPr02SgXxIpAvXx" lemma="θέλω" />
+          <t id="t24" word="να" tag="PtSj" lemma="να" />
+          <t id="t25" word="δεις" tag="VbMnIdXx02SgXxPeAvXx" lemma="βλέπω" />
+          <t id="t26" word="στον" tag="AsPpPaMaSgAc" lemma="στου" />
+          <t id="t27" word="κόσμο" tag="NoCmMaSgAc" lemma="κόσμος" />
+          <t id="t28" word="." tag="PTERM_P" lemma="." />
+        </s>
+      </p>
+    </body>
+  </text>
+</cesDoc>

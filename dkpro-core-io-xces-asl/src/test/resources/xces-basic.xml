@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cesDoc>
+  <cesHeader></cesHeader>
+  <text>
+    <body>
+      <p id="p1">Αυτή είναι η πρώτη γραμμή.</p>
+      <p id="p2">Αυτή είναι η πρώτη γραμμή. Αυτό είναι μια άλλη γραμμή.</p>
+      <p id="p3">Γίνε η αλλαγή που θέλεις να δεις στον κόσμο.</p>
+    </body>
+  </text>
+</cesDoc>
