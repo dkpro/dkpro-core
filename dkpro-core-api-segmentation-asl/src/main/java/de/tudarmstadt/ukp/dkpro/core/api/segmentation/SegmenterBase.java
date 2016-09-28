@@ -33,6 +33,7 @@ import org.apache.uima.jcas.JCas;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.TokenForm;
 
 /**
  */
@@ -74,6 +75,13 @@ extends JCasAnnotator_ImplBase
     public static final String PARAM_WRITE_TOKEN = ComponentParameters.PARAM_WRITE_TOKEN;
 	@ConfigurationParameter(name=PARAM_WRITE_TOKEN, mandatory=true, defaultValue="true")
     private boolean writeToken;
+
+    /**
+     * Create {@link TokenForm} annotations.
+     */
+    public static final String PARAM_WRITE_FORM = ComponentParameters.PARAM_WRITE_FORM;
+    @ConfigurationParameter(name=PARAM_WRITE_FORM, mandatory=true, defaultValue="true")
+    private boolean writeForm;
 
 	/**
 	 * Create {@link Sentence} annotations.
@@ -217,7 +225,9 @@ extends JCasAnnotator_ImplBase
         trim(aJCas.getDocumentText(), span);
         if (!isEmpty(span[0], span[1]) && isWriteToken()) {
             Token seg = new Token(aJCas, span[0], span[1]);
-            seg.setText(aForm);
+            if (aForm != null && writeForm) {
+                seg.setText(aForm);
+            }
             seg.addToIndexes(aJCas);
             return seg;
         }

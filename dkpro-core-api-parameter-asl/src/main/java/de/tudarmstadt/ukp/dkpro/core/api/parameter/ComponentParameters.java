@@ -156,7 +156,9 @@ public final class ComponentParameters
 
 	private static final String SENTENCE = "Sentence";
 
-	private static final String TOKEN = "Token";
+    private static final String FORM = "Form";
+
+    private static final String TOKEN = "Token";
 
 	private static final String LEMMA = "Lemma";
 
@@ -204,6 +206,8 @@ public final class ComponentParameters
 
 	public static final String PARAM_READ_TOKEN = READ + TOKEN;
 
+    public static final String PARAM_READ_FORM = READ + FORM;
+
 	public static final String PARAM_READ_LEMMA = READ + LEMMA;
 
 	public static final String PARAM_READ_POS = READ + POS;
@@ -230,6 +234,8 @@ public final class ComponentParameters
 
 	public static final String PARAM_WRITE_TOKEN = WRITE + TOKEN;
 
+    public static final String PARAM_WRITE_FORM = WRITE + FORM;
+    
 	public static final String PARAM_WRITE_LEMMA = WRITE + LEMMA;
 
 	public static final String PARAM_WRITE_POS = WRITE + POS;
