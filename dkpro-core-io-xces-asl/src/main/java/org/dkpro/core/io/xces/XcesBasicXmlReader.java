@@ -21,7 +21,6 @@ import static org.apache.commons.io.IOUtils.closeQuietly;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collection;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -37,22 +36,13 @@ import javax.xml.stream.events.XMLEvent;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
-import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
-import org.dkpro.core.io.xces.models.XcesBody;
 import org.dkpro.core.io.xces.models.XcesBodyBasic;
-import org.dkpro.core.io.xces.models.XcesPara;
 import org.dkpro.core.io.xces.models.XcesParaBasic;
-import org.dkpro.core.io.xces.models.XcesSentence;
-import org.dkpro.core.io.xces.models.XcesToken;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 @TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph"})
 public class XcesBasicXmlReader

@@ -18,19 +18,9 @@
 package org.dkpro.core.io.xces;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 
-import org.apache.uima.collection.CollectionReader;
-import org.apache.uima.fit.factory.JCasFactory;
-import org.apache.uima.jcas.JCas;
-import org.dkpro.core.io.xces.XcesBasicXmlReader;
-import org.dkpro.core.io.xces.XcesXmlReader;
-import org.junit.Rule;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import junit.framework.Assert;
 
 public class XcesXmlReaderTest
 {
