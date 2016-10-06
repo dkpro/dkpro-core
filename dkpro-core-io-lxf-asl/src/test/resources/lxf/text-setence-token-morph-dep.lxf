@@ -1,0 +1,297 @@
+{
+  "edges" : [ {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-e1@1",
+    "index" : 0,
+    "rank" : 0,
+    "from" : [ "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser", "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n1@1" ],
+    "to" : [ "hunpos", "hunpos-n1@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-e2@1",
+    "index" : 1,
+    "rank" : 0,
+    "from" : [ "hunpos", "hunpos-n4@1" ],
+    "to" : [ "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser", "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n1@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-e3@1",
+    "index" : 2,
+    "rank" : 0,
+    "from" : [ "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser", "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n2@1" ],
+    "to" : [ "hunpos", "hunpos-n2@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-e4@1",
+    "index" : 3,
+    "rank" : 0,
+    "from" : [ "hunpos", "hunpos-n4@1" ],
+    "to" : [ "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser", "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n2@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-e5@1",
+    "index" : 4,
+    "rank" : 0,
+    "from" : [ "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser", "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n3@1" ],
+    "to" : [ "hunpos", "hunpos-n3@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-e6@1",
+    "index" : 5,
+    "rank" : 0,
+    "from" : [ "hunpos", "hunpos-n4@1" ],
+    "to" : [ "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser", "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n3@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-e7@1",
+    "index" : 6,
+    "rank" : 0,
+    "from" : [ "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser", "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n4@1" ],
+    "to" : [ "hunpos", "hunpos-n4@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-e8@1",
+    "index" : 7,
+    "rank" : 0,
+    "from" : [ "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser", "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n5@1" ],
+    "to" : [ "hunpos", "hunpos-n5@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-e9@1",
+    "index" : 8,
+    "rank" : 0,
+    "from" : [ "hunpos", "hunpos-n4@1" ],
+    "to" : [ "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser", "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n5@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-e10@1",
+    "index" : 9,
+    "rank" : 0,
+    "from" : [ "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser", "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n6@1" ],
+    "to" : [ "hunpos", "hunpos-n6@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-e11@1",
+    "index" : 10,
+    "rank" : 0,
+    "from" : [ "hunpos", "hunpos-n10@1" ],
+    "to" : [ "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser", "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n6@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-e12@1",
+    "index" : 11,
+    "rank" : 0,
+    "from" : [ "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser", "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n7@1" ],
+    "to" : [ "hunpos", "hunpos-n7@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-e13@1",
+    "index" : 12,
+    "rank" : 0,
+    "from" : [ "hunpos", "hunpos-n10@1" ],
+    "to" : [ "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser", "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n7@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-e14@1",
+    "index" : 13,
+    "rank" : 0,
+    "from" : [ "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser", "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n8@1" ],
+    "to" : [ "hunpos", "hunpos-n8@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-e15@1",
+    "index" : 14,
+    "rank" : 0,
+    "from" : [ "hunpos", "hunpos-n10@1" ],
+    "to" : [ "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser", "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n8@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-e16@1",
+    "index" : 15,
+    "rank" : 0,
+    "from" : [ "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser", "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n9@1" ],
+    "to" : [ "hunpos", "hunpos-n9@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-e17@1",
+    "index" : 16,
+    "rank" : 0,
+    "from" : [ "hunpos", "hunpos-n10@1" ],
+    "to" : [ "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser", "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n9@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-e18@1",
+    "index" : 17,
+    "rank" : 0,
+    "from" : [ "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser", "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n10@1" ],
+    "to" : [ "hunpos", "hunpos-n10@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-e19@1",
+    "index" : 18,
+    "rank" : 0,
+    "from" : [ "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser", "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n11@1" ],
+    "to" : [ "hunpos", "hunpos-n11@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-e20@1",
+    "index" : 19,
+    "rank" : 0,
+    "from" : [ "hunpos", "hunpos-n10@1" ],
+    "to" : [ "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser", "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n11@1" ]
+  } ],
+  "nodes" : [ {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n1@1",
+    "index" : 0,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser" : {
+        "class" : "dependency",
+        "label" : "nsubj"
+      }
+    }
+  }, {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n2@1",
+    "index" : 1,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser" : {
+        "class" : "dependency",
+        "label" : "cop"
+      }
+    }
+  }, {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n3@1",
+    "index" : 2,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser" : {
+        "class" : "dependency",
+        "label" : "det"
+      }
+    }
+  }, {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n4@1",
+    "index" : 3,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser" : {
+        "class" : "dependency",
+        "label" : "root"
+      }
+    }
+  }, {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n5@1",
+    "index" : 4,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser" : {
+        "class" : "dependency",
+        "label" : "punct"
+      }
+    }
+  }, {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n6@1",
+    "index" : 5,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser" : {
+        "class" : "dependency",
+        "label" : "cc"
+      }
+    }
+  }, {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n7@1",
+    "index" : 6,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser" : {
+        "class" : "dependency",
+        "label" : "nsubj"
+      }
+    }
+  }, {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n8@1",
+    "index" : 7,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser" : {
+        "class" : "dependency",
+        "label" : "cop"
+      }
+    }
+  }, {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n9@1",
+    "index" : 8,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser" : {
+        "class" : "dependency",
+        "label" : "det"
+      }
+    }
+  }, {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n10@1",
+    "index" : 9,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser" : {
+        "class" : "dependency",
+        "label" : "root"
+      }
+    }
+  }, {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser-n11@1",
+    "index" : 10,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser" : {
+        "class" : "dependency",
+        "label" : "punct"
+      }
+    }
+  } ],
+  "regions" : [ ]
+}
