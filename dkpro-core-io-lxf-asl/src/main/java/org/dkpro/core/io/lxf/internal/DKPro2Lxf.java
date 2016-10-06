@@ -166,8 +166,7 @@ public class DKPro2Lxf
                     tokenNode = new LxfNode(LAYER_TOKEN, toolid, toolNodeIndex.index(toolid), 0,
                             tokenRegion);
 
-                    String form = null;
-                    // token.getForm();
+                    String form = token.getFormValue();
                     // TODO : Temporary fix because I do not get form from the token
                     if (form == null)
                         form = token.getCoveredText();
