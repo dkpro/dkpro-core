@@ -1,0 +1,341 @@
+{
+"media": "This is a test. And here is another one.\n",
+  "edges" : [ {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-e1@1",
+    "index" : 0,
+    "rank" : 0,
+    "from" : [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n2@1" ],
+    "to" : [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n1@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-e2@1",
+    "index" : 1,
+    "rank" : 0,
+    "from" : [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n3@1" ],
+    "to" : [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n1@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-e3@1",
+    "index" : 2,
+    "rank" : 0,
+    "from" : [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n4@1" ],
+    "to" : [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n1@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-e4@1",
+    "index" : 3,
+    "rank" : 0,
+    "from" : [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n5@1" ],
+    "to" : [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n1@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-e5@1",
+    "index" : 4,
+    "rank" : 0,
+    "from" : [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n6@1" ],
+    "to" : [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n1@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-e6@1",
+    "index" : 5,
+    "rank" : 0,
+    "from" : [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n8@1" ],
+    "to" : [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n7@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-e7@1",
+    "index" : 6,
+    "rank" : 0,
+    "from" : [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n9@1" ],
+    "to" : [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n7@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-e8@1",
+    "index" : 7,
+    "rank" : 0,
+    "from" : [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n10@1" ],
+    "to" : [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n7@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-e9@1",
+    "index" : 8,
+    "rank" : 0,
+    "from" : [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n11@1" ],
+    "to" : [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n7@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-e10@1",
+    "index" : 9,
+    "rank" : 0,
+    "from" : [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n12@1" ],
+    "to" : [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n7@1" ]
+  }, {
+    "type" : "edge",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-e11@1",
+    "index" : 10,
+    "rank" : 0,
+    "from" : [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n13@1" ],
+    "to" : [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n7@1" ]
+  } ],
+  "nodes" : [ {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n1@1",
+    "index" : 0,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter" : {
+        "class" : "sentence",
+        "label" : "This is a test."
+      }
+    },
+    "links" : [ [ [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r1@1" ] ] ]
+  }, {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n2@1",
+    "index" : 1,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter" : {
+        "class" : "token",
+        "label" : "This"
+      }
+    },
+    "links" : [ [ [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r2@1" ] ] ]
+  }, {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n3@1",
+    "index" : 2,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter" : {
+        "class" : "token",
+        "label" : "is"
+      }
+    },
+    "links" : [ [ [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r3@1" ] ] ]
+  }, {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n4@1",
+    "index" : 3,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter" : {
+        "class" : "token",
+        "label" : "a"
+      }
+    },
+    "links" : [ [ [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r4@1" ] ] ]
+  }, {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n5@1",
+    "index" : 4,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter" : {
+        "class" : "token",
+        "label" : "test"
+      }
+    },
+    "links" : [ [ [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r5@1" ] ] ]
+  }, {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n6@1",
+    "index" : 5,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter" : {
+        "class" : "token",
+        "label" : "."
+      }
+    },
+    "links" : [ [ [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r6@1" ] ] ]
+  }, {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n7@1",
+    "index" : 6,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter" : {
+        "class" : "sentence",
+        "label" : "And here is another one."
+      }
+    },
+    "links" : [ [ [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r7@1" ] ] ]
+  }, {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n8@1",
+    "index" : 7,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter" : {
+        "class" : "token",
+        "label" : "And"
+      }
+    },
+    "links" : [ [ [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r8@1" ] ] ]
+  }, {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n9@1",
+    "index" : 8,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter" : {
+        "class" : "token",
+        "label" : "here"
+      }
+    },
+    "links" : [ [ [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r9@1" ] ] ]
+  }, {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n10@1",
+    "index" : 9,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter" : {
+        "class" : "token",
+        "label" : "is"
+      }
+    },
+    "links" : [ [ [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r10@1" ] ] ]
+  }, {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n11@1",
+    "index" : 10,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter" : {
+        "class" : "token",
+        "label" : "another"
+      }
+    },
+    "links" : [ [ [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r11@1" ] ] ]
+  }, {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n12@1",
+    "index" : 11,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter" : {
+        "class" : "token",
+        "label" : "one"
+      }
+    },
+    "links" : [ [ [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r12@1" ] ] ]
+  }, {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n13@1",
+    "index" : 12,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter" : {
+        "class" : "token",
+        "label" : "."
+      }
+    },
+    "links" : [ [ [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r13@1" ] ] ]
+  } ],
+  "regions" : [ {
+    "type" : "region",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r1@1",
+    "index" : 0,
+    "anchors" : [ 0, 15 ]
+  }, {
+    "type" : "region",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r2@1",
+    "index" : 1,
+    "anchors" : [ 0, 4 ]
+  }, {
+    "type" : "region",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r3@1",
+    "index" : 2,
+    "anchors" : [ 5, 7 ]
+  }, {
+    "type" : "region",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r4@1",
+    "index" : 3,
+    "anchors" : [ 8, 9 ]
+  }, {
+    "type" : "region",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r5@1",
+    "index" : 4,
+    "anchors" : [ 10, 14 ]
+  }, {
+    "type" : "region",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r6@1",
+    "index" : 5,
+    "anchors" : [ 14, 15 ]
+  }, {
+    "type" : "region",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r7@1",
+    "index" : 6,
+    "anchors" : [ 16, 40 ]
+  }, {
+    "type" : "region",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r8@1",
+    "index" : 7,
+    "anchors" : [ 16, 19 ]
+  }, {
+    "type" : "region",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r9@1",
+    "index" : 8,
+    "anchors" : [ 20, 24 ]
+  }, {
+    "type" : "region",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r10@1",
+    "index" : 9,
+    "anchors" : [ 25, 27 ]
+  }, {
+    "type" : "region",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r11@1",
+    "index" : 10,
+    "anchors" : [ 28, 35 ]
+  }, {
+    "type" : "region",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r12@1",
+    "index" : 11,
+    "anchors" : [ 36, 39 ]
+  }, {
+    "type" : "region",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r13@1",
+    "index" : 12,
+    "anchors" : [ 39, 40 ]
+  } ]
+}
