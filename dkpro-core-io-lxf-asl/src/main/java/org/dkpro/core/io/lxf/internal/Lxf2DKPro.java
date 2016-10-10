@@ -66,9 +66,9 @@ public class Lxf2DKPro
         for (LxfNode tn : tokenNodes) {
             int[] region = aLxf.getRegion(tn.getLinks().get(0).get(0)).getAnchors();
             Token token = new Token(aJCas, region[0], region[1]);
+            // TODO : set correctly the token form value
             // token.setForm(tn.getFeature(FEAT_LABEL));
             token.addToIndexes();
-
             idxToken.put(tn.getId(), token);
         }
 
