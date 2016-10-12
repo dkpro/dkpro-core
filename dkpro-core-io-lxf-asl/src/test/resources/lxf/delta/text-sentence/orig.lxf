@@ -1,0 +1,44 @@
+{
+    "media": "This is a test. And here is another one.\n",
+  "edges" : [ ],
+  "nodes" : [ {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n1@1",
+    "index" : 0,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter" : {
+        "class" : "sentence",
+        "label" : "This is a test."
+      }
+    },
+    "links" : [ [ [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r1@1" ] ] ]
+  }, {
+    "type" : "node",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-n2@1",
+    "index" : 6,
+    "rank" : 0,
+    "annotations" : {
+      "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter" : {
+        "class" : "sentence",
+        "label" : "And here is another one."
+      }
+    },
+    "links" : [ [ [ "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r2@1" ] ] ]
+  } ],
+  "regions" : [ {
+    "type" : "region",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r1@1",
+    "index" : 0,
+    "anchors" : [ 0, 15 ]
+  }, {
+    "type" : "region",
+    "origin" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter",
+    "id" : "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter-r2@1",
+    "index" : 6,
+    "anchors" : [ 16, 40 ]
+  }]
+}
