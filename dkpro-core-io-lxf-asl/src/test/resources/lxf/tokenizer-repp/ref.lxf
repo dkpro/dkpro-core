@@ -5,351 +5,351 @@
   },
   "edges" : [ {
     "type" : "edge",
-    "origin" : "repp",
-    "id" : "repp-e1@1",
+    "origin" : "dkpro",
+    "id" : "dkpro-e1@1",
     "index" : 0,
     "rank" : 0,
     "annotations" : null,
-    "from" : [ "repp", "repp-n1@1" ],
-    "to" : [ "tokenizer", "tokenizer-n1@1" ]
+    "from" : [ "dkpro", "dkpro-n2@1" ],
+    "to" : [ "dkpro", "dkpro-n1@1" ]
   }, {
     "type" : "edge",
-    "origin" : "repp",
-    "id" : "repp-e2@1",
+    "origin" : "dkpro",
+    "id" : "dkpro-e2@1",
     "index" : 1,
     "rank" : 0,
     "annotations" : null,
-    "from" : [ "repp", "repp-n2@1" ],
-    "to" : [ "tokenizer", "tokenizer-n1@1" ]
+    "from" : [ "dkpro", "dkpro-n3@1" ],
+    "to" : [ "dkpro", "dkpro-n1@1" ]
   }, {
     "type" : "edge",
-    "origin" : "repp",
-    "id" : "repp-e3@1",
+    "origin" : "dkpro",
+    "id" : "dkpro-e3@1",
     "index" : 2,
     "rank" : 0,
     "annotations" : null,
-    "from" : [ "repp", "repp-n3@1" ],
-    "to" : [ "tokenizer", "tokenizer-n1@1" ]
+    "from" : [ "dkpro", "dkpro-n4@1" ],
+    "to" : [ "dkpro", "dkpro-n1@1" ]
   }, {
     "type" : "edge",
-    "origin" : "repp",
-    "id" : "repp-e4@1",
+    "origin" : "dkpro",
+    "id" : "dkpro-e4@1",
     "index" : 3,
     "rank" : 0,
     "annotations" : null,
-    "from" : [ "repp", "repp-n4@1" ],
-    "to" : [ "tokenizer", "tokenizer-n1@1" ]
+    "from" : [ "dkpro", "dkpro-n5@1" ],
+    "to" : [ "dkpro", "dkpro-n1@1" ]
   }, {
     "type" : "edge",
-    "origin" : "repp",
-    "id" : "repp-e5@1",
+    "origin" : "dkpro",
+    "id" : "dkpro-e5@1",
     "index" : 4,
     "rank" : 0,
     "annotations" : null,
-    "from" : [ "repp", "repp-n5@1" ],
-    "to" : [ "tokenizer", "tokenizer-n1@1" ]
+    "from" : [ "dkpro", "dkpro-n6@1" ],
+    "to" : [ "dkpro", "dkpro-n1@1" ]
   }, {
     "type" : "edge",
-    "origin" : "repp",
-    "id" : "repp-e6@1",
+    "origin" : "dkpro",
+    "id" : "dkpro-e6@1",
     "index" : 5,
     "rank" : 0,
     "annotations" : null,
-    "from" : [ "repp", "repp-n6@1" ],
-    "to" : [ "tokenizer", "tokenizer-n2@1" ]
+    "from" : [ "dkpro", "dkpro-n8@1" ],
+    "to" : [ "dkpro", "dkpro-n7@1" ]
   }, {
     "type" : "edge",
-    "origin" : "repp",
-    "id" : "repp-e7@1",
+    "origin" : "dkpro",
+    "id" : "dkpro-e7@1",
     "index" : 6,
     "rank" : 0,
     "annotations" : null,
-    "from" : [ "repp", "repp-n7@1" ],
-    "to" : [ "tokenizer", "tokenizer-n2@1" ]
+    "from" : [ "dkpro", "dkpro-n9@1" ],
+    "to" : [ "dkpro", "dkpro-n7@1" ]
   }, {
     "type" : "edge",
-    "origin" : "repp",
-    "id" : "repp-e8@1",
+    "origin" : "dkpro",
+    "id" : "dkpro-e8@1",
     "index" : 7,
     "rank" : 0,
     "annotations" : null,
-    "from" : [ "repp", "repp-n8@1" ],
-    "to" : [ "tokenizer", "tokenizer-n2@1" ]
+    "from" : [ "dkpro", "dkpro-n10@1" ],
+    "to" : [ "dkpro", "dkpro-n7@1" ]
   }, {
     "type" : "edge",
-    "origin" : "repp",
-    "id" : "repp-e9@1",
+    "origin" : "dkpro",
+    "id" : "dkpro-e9@1",
     "index" : 8,
     "rank" : 0,
     "annotations" : null,
-    "from" : [ "repp", "repp-n9@1" ],
-    "to" : [ "tokenizer", "tokenizer-n2@1" ]
+    "from" : [ "dkpro", "dkpro-n11@1" ],
+    "to" : [ "dkpro", "dkpro-n7@1" ]
   }, {
     "type" : "edge",
-    "origin" : "repp",
-    "id" : "repp-e10@1",
+    "origin" : "dkpro",
+    "id" : "dkpro-e10@1",
     "index" : 9,
     "rank" : 0,
     "annotations" : null,
-    "from" : [ "repp", "repp-n10@1" ],
-    "to" : [ "tokenizer", "tokenizer-n2@1" ]
+    "from" : [ "dkpro", "dkpro-n12@1" ],
+    "to" : [ "dkpro", "dkpro-n7@1" ]
   }, {
     "type" : "edge",
-    "origin" : "repp",
-    "id" : "repp-e11@1",
+    "origin" : "dkpro",
+    "id" : "dkpro-e11@1",
     "index" : 10,
     "rank" : 0,
     "annotations" : null,
-    "from" : [ "repp", "repp-n11@1" ],
-    "to" : [ "tokenizer", "tokenizer-n2@1" ]
+    "from" : [ "dkpro", "dkpro-n13@1" ],
+    "to" : [ "dkpro", "dkpro-n7@1" ]
   } ],
   "nodes" : [ {
     "type" : "node",
-    "origin" : "tokenizer",
-    "id" : "tokenizer-n1@1",
+    "origin" : "dkpro",
+    "id" : "dkpro-n1@1",
     "index" : 0,
     "rank" : 0,
     "annotations" : {
-      "tokenizer" : {
+      "dkpro" : {
         "class" : "sentence",
         "label" : "This is a test."
       }
     },
-    "links" : [ [ [ "tokenizer", "tokenizer-r1@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r1@1" ] ] ]
   }, {
     "type" : "node",
-    "origin" : "repp",
-    "id" : "repp-n1@1",
-    "index" : 0,
+    "origin" : "dkpro",
+    "id" : "dkpro-n2@1",
+    "index" : 1,
     "rank" : 0,
     "annotations" : {
-      "repp" : {
+      "dkpro" : {
         "class" : "token",
         "label" : "This"
       }
     },
-    "links" : [ [ [ "repp", "repp-r1@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r2@1" ] ] ]
   }, {
     "type" : "node",
-    "origin" : "repp",
-    "id" : "repp-n2@1",
-    "index" : 1,
+    "origin" : "dkpro",
+    "id" : "dkpro-n3@1",
+    "index" : 2,
     "rank" : 0,
     "annotations" : {
-      "repp" : {
+      "dkpro" : {
         "class" : "token",
         "label" : "is"
       }
     },
-    "links" : [ [ [ "repp", "repp-r2@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r3@1" ] ] ]
   }, {
     "type" : "node",
-    "origin" : "repp",
-    "id" : "repp-n3@1",
-    "index" : 2,
+    "origin" : "dkpro",
+    "id" : "dkpro-n4@1",
+    "index" : 3,
     "rank" : 0,
     "annotations" : {
-      "repp" : {
+      "dkpro" : {
         "class" : "token",
         "label" : "a"
       }
     },
-    "links" : [ [ [ "repp", "repp-r3@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r4@1" ] ] ]
   }, {
     "type" : "node",
-    "origin" : "repp",
-    "id" : "repp-n4@1",
-    "index" : 3,
+    "origin" : "dkpro",
+    "id" : "dkpro-n5@1",
+    "index" : 4,
     "rank" : 0,
     "annotations" : {
-      "repp" : {
+      "dkpro" : {
         "class" : "token",
         "label" : "test"
       }
     },
-    "links" : [ [ [ "repp", "repp-r4@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r5@1" ] ] ]
   }, {
     "type" : "node",
-    "origin" : "repp",
-    "id" : "repp-n5@1",
-    "index" : 4,
+    "origin" : "dkpro",
+    "id" : "dkpro-n6@1",
+    "index" : 5,
     "rank" : 0,
     "annotations" : {
-      "repp" : {
+      "dkpro" : {
         "class" : "token",
         "label" : "."
       }
     },
-    "links" : [ [ [ "repp", "repp-r5@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r6@1" ] ] ]
   }, {
     "type" : "node",
-    "origin" : "tokenizer",
-    "id" : "tokenizer-n2@1",
-    "index" : 1,
+    "origin" : "dkpro",
+    "id" : "dkpro-n7@1",
+    "index" : 6,
     "rank" : 0,
     "annotations" : {
-      "tokenizer" : {
+      "dkpro" : {
         "class" : "sentence",
         "label" : "And here is another one."
       }
     },
-    "links" : [ [ [ "tokenizer", "tokenizer-r2@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r7@1" ] ] ]
   }, {
     "type" : "node",
-    "origin" : "repp",
-    "id" : "repp-n6@1",
-    "index" : 5,
+    "origin" : "dkpro",
+    "id" : "dkpro-n8@1",
+    "index" : 7,
     "rank" : 0,
     "annotations" : {
-      "repp" : {
+      "dkpro" : {
         "class" : "token",
         "label" : "And"
       }
     },
-    "links" : [ [ [ "repp", "repp-r6@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r8@1" ] ] ]
   }, {
     "type" : "node",
-    "origin" : "repp",
-    "id" : "repp-n7@1",
-    "index" : 6,
+    "origin" : "dkpro",
+    "id" : "dkpro-n9@1",
+    "index" : 8,
     "rank" : 0,
     "annotations" : {
-      "repp" : {
+      "dkpro" : {
         "class" : "token",
         "label" : "here"
       }
     },
-    "links" : [ [ [ "repp", "repp-r7@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r9@1" ] ] ]
   }, {
     "type" : "node",
-    "origin" : "repp",
-    "id" : "repp-n8@1",
-    "index" : 7,
+    "origin" : "dkpro",
+    "id" : "dkpro-n10@1",
+    "index" : 9,
     "rank" : 0,
     "annotations" : {
-      "repp" : {
+      "dkpro" : {
         "class" : "token",
         "label" : "is"
       }
     },
-    "links" : [ [ [ "repp", "repp-r8@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r10@1" ] ] ]
   }, {
     "type" : "node",
-    "origin" : "repp",
-    "id" : "repp-n9@1",
-    "index" : 8,
+    "origin" : "dkpro",
+    "id" : "dkpro-n11@1",
+    "index" : 10,
     "rank" : 0,
     "annotations" : {
-      "repp" : {
+      "dkpro" : {
         "class" : "token",
         "label" : "another"
       }
     },
-    "links" : [ [ [ "repp", "repp-r9@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r11@1" ] ] ]
   }, {
     "type" : "node",
-    "origin" : "repp",
-    "id" : "repp-n10@1",
-    "index" : 9,
+    "origin" : "dkpro",
+    "id" : "dkpro-n12@1",
+    "index" : 11,
     "rank" : 0,
     "annotations" : {
-      "repp" : {
+      "dkpro" : {
         "class" : "token",
         "label" : "one"
       }
     },
-    "links" : [ [ [ "repp", "repp-r10@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r12@1" ] ] ]
   }, {
     "type" : "node",
-    "origin" : "repp",
-    "id" : "repp-n11@1",
-    "index" : 10,
+    "origin" : "dkpro",
+    "id" : "dkpro-n13@1",
+    "index" : 12,
     "rank" : 0,
     "annotations" : {
-      "repp" : {
+      "dkpro" : {
         "class" : "token",
         "label" : "."
       }
     },
-    "links" : [ [ [ "repp", "repp-r11@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r13@1" ] ] ]
   } ],
   "regions" : [ {
     "type" : "region",
-    "origin" : "tokenizer",
-    "id" : "tokenizer-r1@1",
+    "origin" : "dkpro",
+    "id" : "dkpro-r1@1",
     "index" : 0,
     "anchors" : [ 0, 15 ]
   }, {
     "type" : "region",
-    "origin" : "repp",
-    "id" : "repp-r1@1",
-    "index" : 0,
+    "origin" : "dkpro",
+    "id" : "dkpro-r2@1",
+    "index" : 1,
     "anchors" : [ 0, 4 ]
   }, {
     "type" : "region",
-    "origin" : "repp",
-    "id" : "repp-r2@1",
-    "index" : 1,
+    "origin" : "dkpro",
+    "id" : "dkpro-r3@1",
+    "index" : 2,
     "anchors" : [ 5, 7 ]
   }, {
     "type" : "region",
-    "origin" : "repp",
-    "id" : "repp-r3@1",
-    "index" : 2,
+    "origin" : "dkpro",
+    "id" : "dkpro-r4@1",
+    "index" : 3,
     "anchors" : [ 8, 9 ]
   }, {
     "type" : "region",
-    "origin" : "repp",
-    "id" : "repp-r4@1",
-    "index" : 3,
+    "origin" : "dkpro",
+    "id" : "dkpro-r5@1",
+    "index" : 4,
     "anchors" : [ 10, 14 ]
   }, {
     "type" : "region",
-    "origin" : "repp",
-    "id" : "repp-r5@1",
-    "index" : 4,
+    "origin" : "dkpro",
+    "id" : "dkpro-r6@1",
+    "index" : 5,
     "anchors" : [ 14, 15 ]
   }, {
     "type" : "region",
-    "origin" : "tokenizer",
-    "id" : "tokenizer-r2@1",
-    "index" : 1,
+    "origin" : "dkpro",
+    "id" : "dkpro-r7@1",
+    "index" : 6,
     "anchors" : [ 16, 40 ]
   }, {
     "type" : "region",
-    "origin" : "repp",
-    "id" : "repp-r6@1",
-    "index" : 5,
+    "origin" : "dkpro",
+    "id" : "dkpro-r8@1",
+    "index" : 7,
     "anchors" : [ 16, 19 ]
   }, {
     "type" : "region",
-    "origin" : "repp",
-    "id" : "repp-r7@1",
-    "index" : 6,
+    "origin" : "dkpro",
+    "id" : "dkpro-r9@1",
+    "index" : 8,
     "anchors" : [ 20, 24 ]
   }, {
     "type" : "region",
-    "origin" : "repp",
-    "id" : "repp-r8@1",
-    "index" : 7,
+    "origin" : "dkpro",
+    "id" : "dkpro-r10@1",
+    "index" : 9,
     "anchors" : [ 25, 27 ]
   }, {
     "type" : "region",
-    "origin" : "repp",
-    "id" : "repp-r9@1",
-    "index" : 8,
+    "origin" : "dkpro",
+    "id" : "dkpro-r11@1",
+    "index" : 10,
     "anchors" : [ 28, 35 ]
   }, {
     "type" : "region",
-    "origin" : "repp",
-    "id" : "repp-r10@1",
-    "index" : 9,
+    "origin" : "dkpro",
+    "id" : "dkpro-r12@1",
+    "index" : 11,
     "anchors" : [ 36, 39 ]
   }, {
     "type" : "region",
-    "origin" : "repp",
-    "id" : "repp-r11@1",
-    "index" : 10,
+    "origin" : "dkpro",
+    "id" : "dkpro-r13@1",
+    "index" : 12,
     "anchors" : [ 39, 40 ]
   } ]
 }

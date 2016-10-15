@@ -46,33 +46,19 @@ public class Lxf2DKPro
 {
     public static void convert(LxfGraph aLxf, JCas aJCas)
     {
-        // TODO: REMOVE THE COMMENTED CODE BELOW
-//        // Some edges do not have linkage information. Try to auto-generate it.
-//        // FIXME: change the code to not rely on the linkage information but to look at
-//        // from and to nodes directly. We'll run into an NPE then because the annotation
-//        // map on edges might be null, but that needs to be handled separately then.
-//        for (LxfEdge edge : aLxf.getEdges()) {
-//            if (edge.getAnnotations() == null) {
-//                edge.setFeature(FEAT_CLASS, LAYER_LINKAGE);
-//                edge.setFeature(FEAT_DOMAIN, aLxf.getNode(edge.getFrom()).getLayer());
-//                edge.setFeature(FEAT_RANGE, aLxf.getNode(edge.getTo()).getLayer());
-//            }
-//        }
-        
+
         aJCas.setDocumentText(aLxf.getMedia().getData());
-        
-        
-        // Convert sentences
+
         List<LxfNode> sentenceNodes = aLxf.getNodes().stream()
                 .filter(n -> LAYER_SENTENCE.equals(n.getLayer())).collect(Collectors.toList());
         for (LxfNode sn : sentenceNodes) {
             int[] region = aLxf.getRegion(sn.getLinks().get(0).get(0)).getAnchors();
             Sentence sentence = new Sentence(aJCas, region[0], region[1]);
             // label feature on sentence seems redundant because tokens also have it
-            //sentence.setForm(s.getFeature(FEAT_LABEL));
+            // token.setForm(s.getFeature(FEAT_LABEL));
             sentence.addToIndexes();
         }
-        
+
         // Convert tokens
         Map<String, Token> idxToken = new HashMap<>();
         List<LxfNode> tokenNodes = aLxf.getNodes().stream()
@@ -82,10 +68,9 @@ public class Lxf2DKPro
             Token token = new Token(aJCas, region[0], region[1]);
             token.setText(tn.getFeature(FEAT_LABEL));
             token.addToIndexes();
-            
             idxToken.put(tn.getId(), token);
         }
-        
+
         // Convert morphology (pos, lemma)
         List<LxfNode> posNodes = aLxf.getNodes().stream()
                 .filter(n -> LAYER_MORPHOLOGY.equals(n.getLayer())).collect(Collectors.toList());
@@ -101,7 +86,7 @@ public class Lxf2DKPro
                 pos.addToIndexes();
                 token.setPos(pos);
             }
-            
+
             // Convert Lemma if lemma feature is set
             if (pn.getFeature(FEAT_LEMMA) != null) {
                 Lemma lemma = new Lemma(aJCas, token.getBegin(), token.getEnd());
@@ -110,38 +95,44 @@ public class Lxf2DKPro
                 token.setLemma(lemma);
             }
         }
-        
+
         // Convert dependencies
         List<LxfNode> dependencyNodes = aLxf.getNodes().stream()
                 .filter(n -> LAYER_DEPENDENCY.equals(n.getLayer())).collect(Collectors.toList());
+
         for (LxfNode dn : dependencyNodes) {
             // We assume that if there is a dependency it must be attached to exactly one governor
             // and one dependent
             List<LxfEdge> govEdges = aLxf.getEdges(LAYER_MORPHOLOGY, dn);
             List<LxfEdge> depEdges = aLxf.getEdges(dn, LAYER_MORPHOLOGY);
-            
-            LxfNode govMorphNode = govEdges.isEmpty() ? null : aLxf.getNode(govEdges.get(0).getFrom());
-            LxfNode depMorphNode = depEdges.isEmpty() ? null : aLxf.getNode(depEdges.get(0).getTo());
-            
+
+            LxfNode govMorphNode = govEdges.isEmpty() ? null
+                    : aLxf.getNode(govEdges.get(0).getFrom());
+            LxfNode depMorphNode = depEdges.isEmpty() ? null
+                    : aLxf.getNode(depEdges.get(0).getTo());
+
             // We assume that the gov and dep nodes are attached each to exactly one token
             Token govToken;
             Token depToken;
             try {
                 govToken = govMorphNode != null
-                        ? idxToken.get(aLxf.getEdges(govMorphNode, LAYER_TOKEN).get(0).getTo()[1]) : null;
+                        ? idxToken.get(aLxf.getEdges(govMorphNode, LAYER_TOKEN).get(0).getTo()[1])
+                        : null;
                 depToken = depMorphNode != null
-                        ? idxToken.get(aLxf.getEdges(depMorphNode, LAYER_TOKEN).get(0).getTo()[1]) : null;
+                        ? idxToken.get(aLxf.getEdges(depMorphNode, LAYER_TOKEN).get(0).getTo()[1])
+                        : null;
             }
             catch (IndexOutOfBoundsException e) {
                 // Ok, so looks like somebody forgot to link the POS to the tokens... let's see
                 // if we can recover from that somehow, e.g. by going over the indexes.
                 govToken = govMorphNode != null
-                        ? idxToken.get(String.format("repp-n%d@1", govMorphNode.getIndex()+1)) : null;
+                        ? idxToken.get(String.format("repp-n%d@1", govMorphNode.getIndex() + 1))
+                        : null;
                 depToken = depMorphNode != null
-                        ? idxToken.get(String.format("repp-n%d@1", depMorphNode.getIndex()+1)) : null;
+                        ? idxToken.get(String.format("repp-n%d@1", depMorphNode.getIndex() + 1))
+                        : null;
             }
-            
-            
+
             // Create dependency relation according to DKPro Core conventions
             if (depToken != null && govToken != null) {
                 Dependency dep = new Dependency(aJCas);
@@ -155,7 +146,6 @@ public class Lxf2DKPro
             }
             else if (depToken != null && govToken == null) {
                 Dependency dep = new ROOT(aJCas);
-                // Trying to get the label triggers Exception
                 dep.setDependencyType("ROOT");
                 dep.setFlavor(DependencyFlavor.BASIC);
                 dep.setGovernor(depToken);
@@ -166,7 +156,7 @@ public class Lxf2DKPro
             }
             else {
                 throw new IllegalStateException("Illegal dependency relation.");
-            }                    
-        }        
+            }
+        }
     }
 }
