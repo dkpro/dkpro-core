@@ -117,27 +117,23 @@ public class LxfReaderTest
         String[] tokens = { "This", "is", "a", "test", ".", "And", "here", "is", "another", "one",
                 "." };
 
-        // FIXME Actually there should only be one set of POS here - for some reason the reference
-        // file contains POS from hunpos AND from the bn parser
-        String[] pos = { "DT", "DT", "VBZ", "VBZ", "DT", "DT", "NN", "NN", ".", ".", "CC", "CC",
-                "RB", "RB", "VBZ", "VBZ", "DT", "DT", "NN", "NN", ".", "." };
+        String[] pos = { "DT", "VBZ", "DT", "NN", ".", "CC", "RB", "VBZ", "DT", "NN", "." };
         
         String[] posMapped = { "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS",
-                "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS",
                 "POS" };
 
         String[] dependencies = { 
-                "[  0,  4]Dependency(SBJ) D[0,4](This) G[5,7](is)",
-                "[  5,  7]ROOT(ROOT) D[5,7](is) G[5,7](is)",
-                "[  8,  9]Dependency(NMOD) D[8,9](a) G[10,14](test)",
-                "[ 10, 14]Dependency(OBJ) D[10,14](test) G[5,7](is)",
-                "[ 14, 15]Dependency(P) D[14,15](.) G[5,7](is)",
-                "[ 16, 19]Dependency(DEP) D[16,19](And) G[25,27](is)",
-                "[ 20, 24]Dependency(LOC) D[20,24](here) G[25,27](is)",
-                "[ 25, 27]ROOT(ROOT) D[25,27](is) G[25,27](is)",
-                "[ 28, 35]Dependency(NMOD) D[28,35](another) G[36,39](one)",
-                "[ 36, 39]Dependency(SBJ) D[36,39](one) G[25,27](is)",
-                "[ 39, 40]Dependency(P) D[39,40](.) G[25,27](is)" };
+                "[  0,  4]Dependency(nsubj) D[0,4](This) G[10,14](test)",
+                "[  5,  7]Dependency(cop) D[5,7](is) G[10,14](test)",
+                "[  8,  9]Dependency(det) D[8,9](a) G[10,14](test)",
+                "[ 10, 14]ROOT(ROOT) D[10,14](test) G[10,14](test)",
+                "[ 14, 15]Dependency(punct) D[14,15](.) G[10,14](test)",
+                "[ 16, 19]Dependency(cc) D[16,19](And) G[36,39](one)",
+                "[ 20, 24]Dependency(nsubj) D[20,24](here) G[36,39](one)",
+                "[ 25, 27]Dependency(cop) D[25,27](is) G[36,39](one)",
+                "[ 28, 35]Dependency(det) D[28,35](another) G[36,39](one)",
+                "[ 36, 39]ROOT(ROOT) D[36,39](one) G[36,39](one)",
+                "[ 39, 40]Dependency(punct) D[39,40](.) G[36,39](one)" };
 
         assertSentence(sentences, select(jcas, Sentence.class));
         assertToken(tokens, select(jcas, Token.class));
