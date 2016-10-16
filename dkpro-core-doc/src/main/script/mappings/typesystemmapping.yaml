@@ -179,7 +179,9 @@ de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.X:
 de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS:
   features:
     PosValue:
-      externalReferences: []
+      externalReferences:
+      - {source: NIF, id: 'http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#posTag', rel: similar}
+      - {source: GATE, id: 'Token:pos', rel: similar }
   externalReferences:
   - {source: 'http://universaldependencies.org/u/pos/', id: 'http://universaldependencies.org/u/pos/', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADP:
@@ -225,7 +227,8 @@ de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.NPV:
   externalReferences: []
 de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.URL:
   features: {}
-  externalReferences: []
+  externalReferences:
+  - {source: NERD, id: 'http://nerd.eurecom.fr/ontology#URL', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData:
   features:
     documentTitle:
@@ -265,7 +268,8 @@ de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagsetDescription:
   externalReferences: []
 de.tudarmstadt.ukp.dkpro.core.api.ner.type.Animal:
   features: {}
-  externalReferences: []
+  externalReferences:
+  - {source: NERD, id: 'http://nerd.eurecom.fr/ontology#Animal', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.ner.type.Cardinal:
   features: {}
   externalReferences: []
@@ -283,7 +287,8 @@ de.tudarmstadt.ukp.dkpro.core.api.ner.type.Disease:
   externalReferences: []
 de.tudarmstadt.ukp.dkpro.core.api.ner.type.Event:
   features: {}
-  externalReferences: []
+  externalReferences:
+  - {source: NERD, id: 'http://nerd.eurecom.fr/ontology#Event', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.ner.type.Fac:
   features: {}
   externalReferences: []
@@ -311,6 +316,7 @@ de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location:
   - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Location', rel: similar}
   - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-4339', rel: similar}
   - {source: 'schema.org', id: 'http://schema.org/Location', rel: similar}
+  - {source: NERD, id: 'http://nerd.eurecom.fr/ontology#Location', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.ner.type.Money:
   features: {}
   externalReferences: []
@@ -321,6 +327,7 @@ de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity:
   externalReferences:
   - {source: LAPPS, id: 'http://vocab.lappsgrid.org/NamedEntity', rel: similar}
   - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-2275', rel: similar}
+  - {source: OWL, id: 'http://www.w3.org/2002/07/owl#Thing', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.ner.type.Nationality:
   features: {}
   externalReferences: []
@@ -339,6 +346,7 @@ de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization:
   - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Organization', rel: similar}
   - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-2979', rel: similar}
   - {source: 'schema.org', id: 'http://schema.org/Organization', rel: similar}
+  - {source: NERD, id: 'http://nerd.eurecom.fr/ontology#Organization', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.ner.type.PerDesc:
   features: {}
   externalReferences: []
@@ -351,12 +359,14 @@ de.tudarmstadt.ukp.dkpro.core.api.ner.type.Person:
   - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Person', rel: similar}
   - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-2978', rel: similar}
   - {source: 'schema.org', id: 'http://schema.org/Person', rel: similar}
+  - {source: NERD, id: 'http://nerd.eurecom.fr/ontology#Location', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.ner.type.Plant:
   features: {}
   externalReferences: []
 de.tudarmstadt.ukp.dkpro.core.api.ner.type.Product:
   features: {}
-  externalReferences: []
+  externalReferences:
+  - {source: NERD, id: 'http://nerd.eurecom.fr/ontology#Product', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.ner.type.ProductDesc:
   features: {}
   externalReferences: []
@@ -368,7 +378,8 @@ de.tudarmstadt.ukp.dkpro.core.api.ner.type.Substance:
   externalReferences: []
 de.tudarmstadt.ukp.dkpro.core.api.ner.type.Time:
   features: {}
-  externalReferences: []
+  externalReferences:
+  - {source: NERD, id: 'http://nerd.eurecom.fr/ontology#Time', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.ner.type.WorkOfArt:
   features: {}
   externalReferences: []
@@ -393,17 +404,21 @@ de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div:
       externalReferences: []
     id:
       externalReferences: []
-  externalReferences: []
+  externalReferences:
+  - {source: NIF, id: 'http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#Structure', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Document:
   features: {}
   externalReferences: []
 de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading:
   features: {}
-  externalReferences: []
+  externalReferences:
+  - {source: NIF, id: 'http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#Title', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma:
   features:
     value:
-      externalReferences: []
+      externalReferences:
+      - {source: GATE, id: 'Token:lemma', rel: similar }
+      - {source: NIF, id: 'http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#lemma', rel: similar}
   externalReferences: []
 de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LinkingMorpheme:
   features: {}
@@ -417,6 +432,7 @@ de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph:
   features: {}
   externalReferences:
   - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Paragraph', rel: similar}
+  - {source: NIF, id: 'http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#Paragraph', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence:
   features:
     id:
@@ -425,6 +441,7 @@ de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence:
   - {source: GATE, id: 'Sentence', rel: similar }
   - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Sentence', rel: similar}
   - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-1386', rel: similar}
+  - {source: NIF, id: 'http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#Sentence', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split:
   features:
     splits:
@@ -433,7 +450,9 @@ de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split:
 de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem:
   features:
     value:
-      externalReferences: []
+      externalReferences:
+      - {source: NIF, id: 'http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#stem', rel: similar}
+      - {source: GATE, id: 'Token:stem', rel: similar }
   externalReferences: []
 de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.StopWord:
   features: {}
@@ -443,14 +462,11 @@ de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token:
     parent:
       externalReferences: []
     lemma:
-      externalReferences:
-      - {source: GATE, id: 'Token:lemma', rel: similar }
+      externalReferences: []
     stem:
-      externalReferences:
-      - {source: GATE, id: 'Token:stem', rel: similar }
+      externalReferences: []
     pos:
-      externalReferences:
-      - {source: GATE, id: 'Token:pos', rel: similar }
+      externalReferences: []
     morph:
       externalReferences: []
     id:
@@ -459,6 +475,7 @@ de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token:
   - {source: GATE, id: 'Token', rel: similar }
   - {source: LAPPS, id: 'http://vocab.lappsgrid.org/Token', rel: similar}
   - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-1403', rel: similar}
+  - {source: NIF, id: 'http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#Sentence', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument:
   features:
     role:
