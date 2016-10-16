@@ -326,6 +326,11 @@
 				<version>1.9.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
+                <groupId>org.dkpro.core</groupId>
+                <artifactId>dkpro-core-io-tika-asl</artifactId>
+                <version>1.9.0-SNAPSHOT</version>
+            </dependency>
+			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.tuebadz-asl</artifactId>
 				<version>1.9.0-SNAPSHOT</version>
@@ -545,6 +550,7 @@
 		<module>../dkpro-core-io-tei-asl</module>
 		<module>../dkpro-core-io-text-asl</module>
 		<module>../dkpro-core-io-tiger-asl</module>
+        <module>../dkpro-core-io-tika-asl</module>
 		<module>../dkpro-core-io-tuepp-asl</module>
 		<module>../dkpro-core-io-web1t-asl</module>
 		<module>../dkpro-core-io-xmi-asl</module>
