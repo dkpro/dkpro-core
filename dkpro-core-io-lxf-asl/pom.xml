@@ -27,6 +27,7 @@
   <groupId>org.dkpro.core</groupId>
   <artifactId>dkpro-core-io-lxf-asl</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <name>DKPro Core ASL - IO - LXF</name>
   <dependencies>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
