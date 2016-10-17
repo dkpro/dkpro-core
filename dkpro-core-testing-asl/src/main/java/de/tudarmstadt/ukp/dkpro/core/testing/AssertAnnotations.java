@@ -210,6 +210,10 @@ public class AssertAnnotations
     }
 
     /**
+     * @param aExpected
+     *            expected morph tags
+     * @param aActual
+     *            actual morph tags
      * @deprecated Use {@link #assertMorph(String[], Collection)}
      */
     @Deprecated
@@ -486,6 +490,10 @@ public class AssertAnnotations
     }
 
     /**
+     * @param aExpected
+     *            expected semantic predicates
+     * @param aActual
+     *            actual semantic predicates
      * @deprecated Use {@link #assertSemPred(String[], Collection)}
      */
     @Deprecated

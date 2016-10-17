@@ -44,7 +44,6 @@ import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.common.PDStream;
 import org.apache.pdfbox.pdmodel.interactive.pagenavigation.PDThreadBead;
 import org.apache.pdfbox.util.PDFStreamEngine;
-import org.apache.pdfbox.util.PDFTextStripper;
 import org.apache.pdfbox.util.ResourceLoader;
 import org.apache.pdfbox.util.TextPosition;
 
@@ -53,7 +52,7 @@ import org.apache.pdfbox.util.TextPosition;
  * such. Please note; it is up to clients of this class to verify that a specific user has the
  * correct permissions to extract text from the PDF document.
  * <p>
- * This class is based on the {@link PDFTextStripper} class and was substantially modified and
+ * This class is based on the pdfbox 1.7.0 PDFTextStripper class and was substantially modified and
  * enhanced for basic paragraph and heading detection. Unfortunately it was not possible to add
  * these enhancements through sub-classing, thus the code was copied and adapted.
  */

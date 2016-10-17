@@ -23,6 +23,7 @@ import java.util.Map;
 public interface DatasetDescription
 {
     /**
+     * @return ID.
      * @deprecated to be superseded by groupId/datasetId/version/language/mediaType
      */
     @Deprecated
