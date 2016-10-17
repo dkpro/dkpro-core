@@ -22,23 +22,25 @@ import java.util.List;
 public interface ArtifactDescription
 {
     /**
-     * Artifact name/ID
+     * @return artifact name/ID
      */
     String getName();
     
     /**
      * Instead of downloading the artifact, create a file with the given text as content. If text
-     * is set, all other settings are ignord.
+     * is set, all other settings are ignored.
+     * 
+     * @return text content.
      */
     String getText();
 
     /**
-     * The URL from which to obtain the artifact.
+     * @return URL from which to obtain the artifact.
      */
     String getUrl();
 
     /**
-     * The SHA1 hash of the artifact.
+     * @return SHA1 hash of the artifact.
      */
     String getSha1();
     
@@ -46,11 +48,15 @@ public interface ArtifactDescription
      * Whether this artifact is shared between multiple datasets. If this flag is enabled, the
      * artifact may be stored in a special location within the cache, i.e. not under the dataset
      * folder.
+     * 
+     * @return shared status.
      */
     boolean isShared();
 
     /**
      * Any post-download actions, e.g. to explode the artifact.
+     * 
+     * @return list of actions.
      */
     List<ActionDescription> getActions();
 }

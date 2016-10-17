@@ -28,8 +28,11 @@ public interface Vectorizer
      * Get the vector for a token. If the token is unknown, implementing classes should return the
      * {@link #unknownVector()}.
      *
-     * @param token a token String
+     * @param token
+     *            a token String
      * @return a float array
+     * @throws IOException
+     *             if there was an error accessing the vector file.
      */
     float[] vectorize(String token)
             throws IOException;

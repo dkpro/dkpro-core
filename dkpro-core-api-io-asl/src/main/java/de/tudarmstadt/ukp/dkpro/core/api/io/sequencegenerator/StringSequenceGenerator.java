@@ -28,13 +28,15 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Create String sequences from JCas annotations. Use a {@link PhraseSequenceGenerator.Builder#buildStringSequenceGenerator()} to create class instances.
+ * Create String sequences from JCas annotations. Use a
+ * {@link PhraseSequenceGenerator.Builder#buildStringSequenceGenerator()} to create class instances.
  * <p>
  * Either create a single token sequence from the whole document, or multiple sequences based on
  * covering annotations, e.g. one sequence for each sentence.
  * <p>
- * By default, the sequences are created from {@link Token}s found in the input document. In order to use
- * other annotations, e.g. lemmas, specify the feature path in {@link PhraseSequenceGenerator.Builder#featurePath(String)}.
+ * By default, the sequences are created from {@link Token}s found in the input document. In order
+ * to use other annotations, e.g. lemmas, specify the feature path in
+ * {@link PhraseSequenceGenerator.Builder#featurePath(String)}.
  *
  * @since 1.9.0
  */
@@ -51,9 +53,11 @@ public class StringSequenceGenerator
     /**
      * Generate a list of String sequences.
      *
-     * @param aJCas the {@link JCas} to generate sequences from.
+     * @param aJCas
+     *            the {@link JCas} to generate sequences from.
      * @return a list of string arrays.
      * @throws FeaturePathException
+     *             if there was a problem creating the feature path.
      */
     public List<String[]> tokenSequences(JCas aJCas)
             throws FeaturePathException

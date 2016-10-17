@@ -83,9 +83,11 @@ public class PhraseSequenceGenerator
      * extracted from the covering types, e.g. a sentence. If no covering type was defined, the list
      * contains one element representing the whole document.
      *
-     * @param aJCas a {@link JCas}
+     * @param aJCas
+     *            a {@link JCas}
      * @return a list of {@link LexicalPhrase} arrays
      * @throws FeaturePathException
+     *             if there was a problem creating the feature path.
      */
     public List<LexicalPhrase[]> tokenSequences(JCas aJCas)
             throws FeaturePathException
@@ -99,9 +101,11 @@ public class PhraseSequenceGenerator
      * If {@link #coveringTypeName} is set, a dedicated array for each covering annotation is
      * extracted. Otherwise, the result contains only one element.
      *
-     * @param aJCas a {@link JCas}
+     * @param aJCas
+     *            a {@link JCas}
      * @return a list of {@link LexicalPhrase} arrays
      * @throws FeaturePathException
+     *             if there was a problem creating the feature path.
      */
     private List<LexicalPhrase[]> annotationSequences(JCas aJCas)
             throws FeaturePathException
@@ -130,9 +134,11 @@ public class PhraseSequenceGenerator
      * If {@link #coveringTypeName} is set, a dedicated array for each covering annotation is
      * extracted. Otherwise, the result contains only one element.
      *
-     * @param aJCas a {@link JCas}
+     * @param aJCas
+     *            a {@link JCas}
      * @return a list of {@link LexicalPhrase} arrays
      * @throws FeaturePathException
+     *             if there was a problem creating the feature path.
      */
     private List<LexicalPhrase[]> characterSequences(JCas aJCas)
             throws FeaturePathException
@@ -152,16 +158,22 @@ public class PhraseSequenceGenerator
     }
 
     /**
-     * Generate an array of {@link LexicalPhrase}s from features (e.g. tokens or lemmas) covered by an
-     * annotation (e.g. a sentence). If no coveringAnnotation is set, return all features in the CAS.
+     * Generate an array of {@link LexicalPhrase}s from features (e.g. tokens or lemmas) covered by
+     * an annotation (e.g. a sentence). If no coveringAnnotation is set, return all features in the
+     * CAS.
      * <p>
-     * Optionally, the tokens are filtered by stopwords and/or regular expressions. In matching elements,
-     * the phrase texts are replaced according to {@link Builder#stopwordReplacement} and {@link Builder#filterRegexReplacement}.
+     * Optionally, the tokens are filtered by stopwords and/or regular expressions. In matching
+     * elements, the phrase texts are replaced according to {@link Builder#stopwordReplacement} and
+     * {@link Builder#filterRegexReplacement}.
      *
-     * @param aJCas              a {@link JCas}
-     * @param coveringAnnotation an Optional covering annotation from which tokens are selected, e.g. a {@link Sentence}
+     * @param aJCas
+     *            a {@link JCas}
+     * @param coveringAnnotation
+     *            an Optional covering annotation from which tokens are selected, e.g. a
+     *            {@link Sentence}
      * @return an array of {@link LexicalPhrase}s representing all extracted tokens
-     * @throws FeaturePathException if the annotation type specified in PARAM_TOKEN_FEATURE_PATH cannot be extracted.
+     * @throws FeaturePathException
+     *             if the annotation type specified in PARAM_TOKEN_FEATURE_PATH cannot be extracted.
      */
     private LexicalPhrase[] annotationSequence(JCas aJCas,
             Optional<AnnotationFS> coveringAnnotation)
@@ -230,7 +242,7 @@ public class PhraseSequenceGenerator
     /**
      * Builder for {@link PhraseSequenceGenerator}s.
      * <p>
-     * Alternative constucts a {@link StringSequenceGenerator} with {@link #buildStringSequenceGenerator()}
+     * Alternative constructs a {@link StringSequenceGenerator} with {@link #buildStringSequenceGenerator()}
      */
     public static class Builder
     {

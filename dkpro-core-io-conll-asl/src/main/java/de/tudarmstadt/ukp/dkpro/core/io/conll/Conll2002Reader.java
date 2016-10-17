@@ -51,7 +51,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * <p>Reads by default the CoNLL 2002 named entity format.<p>
+ * <p>Reads by default the CoNLL 2002 named entity format.</p>
  * 
  * <p>The reader is also compatible with the CoNLL-based GermEval 2014 named entity format,
  * in which the columns are separated by a tab, and there is an extra column for embedded named entities,

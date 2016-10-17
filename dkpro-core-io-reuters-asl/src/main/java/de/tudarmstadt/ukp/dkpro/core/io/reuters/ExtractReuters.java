@@ -53,9 +53,13 @@ public class ExtractReuters
     /**
      * Read all the SGML file in the given directory.
      *
-     * @param reutersDir the directory that contains the Reuters SGML files.
+     * @param reutersDir
+     *            the directory that contains the Reuters SGML files.
      * @return a list of {@link ReutersDocument}s
-     * @throws IOException if any of the files cannot be read.
+     * @throws IOException
+     *             if any of the files cannot be read.
+     * @throws ParseException
+     *             if there was a problem parsing a date
      */
     public static List<ReutersDocument> extract(Path reutersDir)
             throws IOException, ParseException
@@ -72,9 +76,15 @@ public class ExtractReuters
     /**
      * Read the documents out of a single file. Each file contains approximately 1000 documents.
      *
-     * @param sgmFile an {@link InputStream} of a Reuters SGML file.
-     * @param uri     an {@link URI} pointing to the original SGML file location
+     * @param sgmFile
+     *            an {@link InputStream} of a Reuters SGML file.
+     * @param uri
+     *            an {@link URI} pointing to the original SGML file location
      * @return a list of {@link ReutersDocument}s extracted from the input stream
+     * @throws IOException
+     *             if any of the files cannot be read.
+     * @throws ParseException
+     *             if there was a problem parsing a date
      */
     public static List<ReutersDocument> extractFile(InputStream sgmFile, URI uri)
             throws IOException, ParseException
