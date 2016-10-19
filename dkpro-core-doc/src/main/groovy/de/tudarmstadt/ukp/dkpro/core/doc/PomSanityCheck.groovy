@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.doc
 
 import static groovy.io.FileType.FILES
 
-import de.tudarmstadt.ukp.dkpro.core.doc.internal.ContextHolder
+import org.dkpro.meta.core.maven.ContextHolder;
 
 class PomSanityCheck {
     public void run() {

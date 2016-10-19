@@ -35,6 +35,11 @@
   </properties>
   <dependencies>
     <dependency>
+      <groupId>org.dkpro.meta</groupId>
+      <artifactId>dkpro-meta-core</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
     </dependency>
@@ -108,7 +113,7 @@
             <configuration>
               <scripts>
                 <script><![CDATA[
-                de.tudarmstadt.ukp.dkpro.core.doc.internal.ContextHolder.setBinding(binding);
+                org.dkpro.meta.core.maven.ContextHolder.setBinding(binding);
                 de.tudarmstadt.ukp.dkpro.core.doc.DocumentationBuilder.main();
                 ]]></script>
               </scripts>
@@ -123,7 +128,7 @@
             <configuration>
               <scripts>
                 <script><![CDATA[
-                de.tudarmstadt.ukp.dkpro.core.doc.internal.ContextHolder.setBinding(binding);
+                org.dkpro.meta.core.maven.ContextHolder.setBinding(binding);
                 de.tudarmstadt.ukp.dkpro.core.doc.PomSanityCheck.main();
                 ]]></script>
               </scripts>
