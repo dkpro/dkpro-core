@@ -75,6 +75,17 @@ public class CasAnalysisUtils
     /**
      * Recursively collect referenced FSes and also record for each the last indexed FS that refers
      * the them.
+     * 
+     * @param aFSes
+     *            map in which to collect the feature structures and through which FS they are
+     *            reachable (updated by the method).
+     * @param aIndexed
+     *            set of all indexed feature structures.
+     * @param aFS
+     *            the current feature structure.
+     * @param aLastIndexed
+     *            the last indexed feature structure through which the current feature structure was
+     *            reachable.
      */
     public static void collect(Map<FeatureStructure, FeatureStructure> aFSes,
             Set<FeatureStructure> aIndexed, FeatureStructure aFS, FeatureStructure aLastIndexed)

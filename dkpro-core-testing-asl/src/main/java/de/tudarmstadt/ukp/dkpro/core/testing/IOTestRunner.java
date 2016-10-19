@@ -98,6 +98,17 @@ public class IOTestRunner
     /**
      * One-way test reading a file and writing to the same format but comparing against a reference
      * file instead of the original file.
+     * 
+     * @param aReader
+     *            reader to read the data.
+     * @param aExpectedFile
+     *            expected file.
+     * @param aFile
+     *            input file.
+     * @param aOptions
+     *            test options.
+     * @throws Exception
+     *             if there was an error.
      */
     public static void testOneWay(CollectionReaderDescription aReader, String aExpectedFile,
             String aFile, TestOptions aOptions)

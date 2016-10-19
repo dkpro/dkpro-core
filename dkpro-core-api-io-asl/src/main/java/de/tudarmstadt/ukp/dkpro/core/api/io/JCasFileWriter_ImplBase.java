@@ -48,7 +48,7 @@ public abstract class JCasFileWriter_ImplBase
     protected static final String JAR_PREFIX = "jar:file:";
     
 	/**
-	 * Target location. If this parameter is not yet, data is written to stdout.
+	 * Target location. If this parameter is not set, data is written to stdout.
 	 */
 	public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
 	@ConfigurationParameter(name=PARAM_TARGET_LOCATION, mandatory=false)

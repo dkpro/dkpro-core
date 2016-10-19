@@ -18,7 +18,13 @@
 
 import static org.apache.uima.fit.util.JCasUtil.indexCovered;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.dkpro.core.io.lxf.internal.model.LxfVocabulary.*;
+import static org.dkpro.core.io.lxf.internal.model.LxfVocabulary.FEAT_LABEL;
+import static org.dkpro.core.io.lxf.internal.model.LxfVocabulary.FEAT_LEMMA;
+import static org.dkpro.core.io.lxf.internal.model.LxfVocabulary.FEAT_POS;
+import static org.dkpro.core.io.lxf.internal.model.LxfVocabulary.LAYER_DEPENDENCY;
+import static org.dkpro.core.io.lxf.internal.model.LxfVocabulary.LAYER_MORPHOLOGY;
+import static org.dkpro.core.io.lxf.internal.model.LxfVocabulary.LAYER_SENTENCE;
+import static org.dkpro.core.io.lxf.internal.model.LxfVocabulary.LAYER_TOKEN;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -45,45 +51,95 @@ public class DKPro2Lxf
     {
         convert(aJCas, null, aTarget);
     }
-    
+
+    public static void convert(JCas aJCas, LxfGraph aSource, LxfGraph aTarget)
+    {
+        convert(aJCas, aSource, aTarget, createIdMap("dkpro", aSource));
+    }
+
+    /**
+     * Creates an id map that contains of the correspondence between tools and annotation layer. The
+     * key in the map is the layer and the value is the annotation tool that created ther layer. If
+     * the layer was present in the source than the tool from the source will be used for the layer.
+     * Otherwise the toolName will be used.
+     * 
+     * @param toolName
+     *            - Tool name for new layers
+     * @param aSource
+     *            - original lxf for DKPro
+     * @return
+     */
+    public static Map<String, String> createIdMap(String toolName, LxfGraph aSource)
+    {
+        Map<String, String> ids = new HashMap<>();
+        if (aSource != null) {
+            for (LxfNode n : aSource.getNodes()) {
+                for (String tool : n.getAnnotations().keySet()) {
+                    ids.put(n.getAnnotations().get(tool).get("class"), tool);
+                }
+            }
+        }
+        if (!ids.containsKey(LAYER_DEPENDENCY))
+            ids.put(LAYER_DEPENDENCY, toolName);
+        if (!ids.containsKey(LAYER_MORPHOLOGY))
+            ids.put(LAYER_MORPHOLOGY, toolName);
+        if (!ids.containsKey(LAYER_SENTENCE))
+            ids.put(LAYER_SENTENCE, toolName);
+        if (!ids.containsKey(LAYER_TOKEN))
+            ids.put(LAYER_TOKEN, toolName);
+        return ids;
+    }
+
     /**
      * Convert from CAS to LXF.
      * 
-     * @param aJCas the source CAS.
-     * @param aSource the original LXF. If this is non-null, then delta-mode is enabled.
-     * @param aTarget the target LXF.
+     * @param aJCas
+     *            the source CAS.
+     * @param aSource
+     *            the original LXF. If this is non-null, then delta-mode is enabled.
+     * @param aTarget
+     *            the target LXF.
+     * @param ids
+     *            The ids of the tool responsible for generation of the annotation Layer. The key is
+     *            the annotation layer. The value is the tool that generates the annotation.
      */
-    public static void convert(JCas aJCas, LxfGraph aSource, LxfGraph aTarget)
+    public static void convert(JCas aJCas, LxfGraph aSource, LxfGraph aTarget,
+            Map<String, String> ids)
     {
-        // Add media only when not in delta mode
         if (aSource == null) {
             aTarget.setMedia(new LxfText(aJCas.getDocumentText()));
         }
-        
-        // Indexes counting up across the whole document
-        int sentenceIndex = 0;
-        int tokenIndex = 0;
-        int dependencyNodeIndex = 0;
-        int dependencyEdgeIndex = 0;
-        
-        Map<Sentence, Collection<Token>> idxSentTok = indexCovered(aJCas, Sentence.class, Token.class);
-        Map<Sentence, Collection<Dependency>> idxSentDep = indexCovered(aJCas, Sentence.class, Dependency.class);
+
+        ToolGeneratorIndex toolEdgeIndex = new ToolGeneratorIndex(ids.values());
+        ToolGeneratorIndex toolNodeIndex = new ToolGeneratorIndex(ids.values());
+        ToolGeneratorIndex toolRegionIndex = new ToolGeneratorIndex(ids.values());
+        NodeIterator iter = new NodeIterator(aSource);
+
+        Map<Sentence, Collection<Token>> idxSentTok = indexCovered(aJCas, Sentence.class,
+                Token.class);
+
+        Map<Sentence, Collection<Dependency>> idxSentDep = indexCovered(aJCas, Sentence.class,
+                Dependency.class);
+
         for (Sentence sentence : select(aJCas, Sentence.class)) {
-            // Convert or obtain sentence node
             LxfNode sentenceNode;
+
+            String toolid = ids.get(LAYER_SENTENCE);
+
             if (aSource == null || needsExport(aJCas, sentence)) {
                 // Sentence region
-                LxfRegion sentenceRegion = new LxfRegion(TOOL_TOKENIZER, sentenceIndex,
+                LxfRegion sentenceRegion = new LxfRegion(toolid, toolRegionIndex.nextIndex(toolid),
                         sentence.getBegin(), sentence.getEnd());
                 aTarget.addRegion(sentenceRegion);
-                sentenceNode = new LxfNode(LAYER_SENTENCE, TOOL_TOKENIZER, sentenceIndex, 0,
-                        sentenceRegion);
+                sentenceNode = new LxfNode(LAYER_SENTENCE, toolid, toolNodeIndex.nextIndex(toolid),
+                        0, sentenceRegion);
                 // Setting this to the base text as per discussion
                 sentenceNode.setFeature(FEAT_LABEL, sentence.getCoveredText());
                 aTarget.addNode(sentenceNode);
+
             }
             else {
-                sentenceNode = aSource.getNode(LAYER_SENTENCE, TOOL_TOKENIZER, sentenceIndex, 0);
+                sentenceNode = iter.next(toolid, LAYER_SENTENCE);
             }
 
             // Tokens, POS, lemma
@@ -92,41 +148,50 @@ public class DKPro2Lxf
             for (Token token : tokens) {
                 // Convert or obtain token node
                 LxfNode tokenNode;
+                toolid = ids.get(LAYER_TOKEN);
+
                 if (aSource == null || needsExport(aJCas, token)) {
-                    LxfRegion tokenRegion = new LxfRegion(TOOL_REPP, tokenIndex, token.getBegin(),
-                            token.getEnd());
+                    LxfRegion tokenRegion = new LxfRegion(toolid, toolRegionIndex.nextIndex(toolid),
+                            token.getBegin(), token.getEnd());
                     aTarget.addRegion(tokenRegion);
-                    tokenNode = new LxfNode(LAYER_TOKEN, TOOL_REPP, tokenIndex, 0, tokenRegion);
-                    tokenNode.setFeature(FEAT_LABEL, token.getText());
+                    tokenNode = new LxfNode(LAYER_TOKEN, toolid, toolNodeIndex.nextIndex(toolid), 0,
+                            tokenRegion);
+
+                    String form = token.getText();
+                    tokenNode.setFeature(FEAT_LABEL, form);
                     aTarget.addNode(tokenNode);
-                    aTarget.addEdge(new LxfEdge(tokenNode.getOrigin(), tokenIndex, 0, tokenNode,
+                    int edgeIndex = toolEdgeIndex.nextIndex(toolid);
+                    aTarget.addEdge(new LxfEdge(tokenNode.getOrigin(), edgeIndex, 0, tokenNode,
                             sentenceNode));
                 }
                 else {
-                    tokenNode = aSource.getNode(LAYER_TOKEN, TOOL_REPP, tokenIndex, 0);
+                    tokenNode = iter.next(toolid, LAYER_TOKEN);
                 }
-                
+
+                toolid = ids.get(LAYER_MORPHOLOGY);
+
                 // Convert POS if exists - if we create a node, pass it on to the lemma conversion
                 // as well
                 POS pos = token.getPos();
                 LxfNode morphNode = null;
                 if (pos != null) {
                     if ((aSource == null || needsExport(aJCas, pos))) {
-                        morphNode = new LxfNode(LAYER_MORPHOLOGY, TOOL_HUNPOS, tokenIndex, 0);
+                        morphNode = new LxfNode(LAYER_MORPHOLOGY, toolid,
+                                toolNodeIndex.nextIndex(toolid), 0);
                         morphNode.setFeature(FEAT_POS, token.getPos().getPosValue());
                         aTarget.addNode(morphNode);
-                        aTarget.addEdge(new LxfEdge(morphNode.getOrigin(), tokenIndex, 0, morphNode, tokenNode));
-                        
+                        aTarget.addEdge(new LxfEdge(morphNode.getOrigin(),
+                                toolEdgeIndex.nextIndex(toolid), 0, morphNode, tokenNode));
+
                         // Need to remember this because we may want to connect the dependencies to
                         // this node
                         idxMorph.put(token, morphNode);
                     }
                     else {
-                        // FIXME in delta mode we have to try fishing the appropriate morphology
-                        // node from the source LXF...
+                        morphNode = iter.next(toolid, LAYER_MORPHOLOGY);
+                        idxMorph.put(token, morphNode);
                     }
                 }
-
                 // Convert lemma if exists
                 Lemma lemma = token.getLemma();
                 if (lemma != null && (aSource == null || needsExport(aJCas, lemma))) {
@@ -134,46 +199,48 @@ public class DKPro2Lxf
                     // new node
                     LxfNode lemmaNode = morphNode;
                     if (lemmaNode == null) {
-                        lemmaNode = new LxfNode(LAYER_MORPHOLOGY, TOOL_HUNPOS, tokenIndex, 0);
+                        lemmaNode = new LxfNode(LAYER_MORPHOLOGY, toolid,
+                                toolNodeIndex.nextIndex(toolid), 0);
                         aTarget.addNode(lemmaNode);
-                        aTarget.addEdge(new LxfEdge(lemmaNode.getOrigin(), tokenIndex, 0, lemmaNode,
-                                tokenNode));
+                        aTarget.addEdge(new LxfEdge(lemmaNode.getOrigin(),
+                                toolEdgeIndex.nextIndex(toolid), 0, lemmaNode, tokenNode));
+                        idxMorph.put(token, lemmaNode);
                     }
                     lemmaNode.setFeature(FEAT_LEMMA, token.getPos().getPosValue());
                 }
 
-                tokenIndex++;
             }
+
+            toolid = ids.get(LAYER_DEPENDENCY);
 
             // Dependencies
             Collection<Dependency> deps = idxSentDep.get(sentence);
+
             for (Dependency dep : deps) {
-                LxfNode depNode = new LxfNode(LAYER_DEPENDENCY, TOOL_BN, dependencyNodeIndex, 0);
+
+                if (aSource != null && !needsExport(aJCas, dep))
+                    continue;
+
+                LxfNode depNode = new LxfNode(LAYER_DEPENDENCY, toolid,
+                        toolNodeIndex.nextIndex(toolid), 0);
                 depNode.setFeature(FEAT_LABEL, dep.getDependencyType());
-                // FIXME What is it? depNode.setFeature(FEAT_HEAD, ???);
                 aTarget.addNode(depNode);
-                
+
                 LxfNode govMorphNode = idxMorph.get(dep.getGovernor());
                 LxfNode depMorphNode = idxMorph.get(dep.getDependent());
-                               
-                aTarget.addEdge(new LxfEdge(depNode.getOrigin(), dependencyEdgeIndex, 0,
-                        depMorphNode, depNode));
-                dependencyEdgeIndex++;
-                
-                // FIXME Lap doesn't seem to use self-looping ROOT nodes, so we actually need to
-                // handle this here and unloop the ROOT node
-                aTarget.addEdge(new LxfEdge(depNode.getOrigin(), dependencyEdgeIndex, 0, depNode,
-                        govMorphNode));
-                dependencyEdgeIndex++;
-                        
-                dependencyNodeIndex++;
+
+                aTarget.addEdge(new LxfEdge(depNode.getOrigin(), toolEdgeIndex.nextIndex(toolid), 0,
+                        depNode, depMorphNode));
+
+                if (!govMorphNode.getId().equals(depMorphNode.getId())) {
+                    aTarget.addEdge(new LxfEdge(depNode.getOrigin(),
+                            toolEdgeIndex.nextIndex(toolid), 0, govMorphNode, depNode));
+
+                }
             }
-            
-            
-            sentenceIndex++;
         }
     }
-    
+
     private static boolean needsExport(JCas aCas, FeatureStructure aFS)
     {
         Marker marker = aCas.getCasImpl().getCurrentMark();

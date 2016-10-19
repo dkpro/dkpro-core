@@ -24,7 +24,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.apache.uima.fit.factory.JCasFactory;
@@ -33,10 +35,8 @@ import org.dkpro.core.io.lxf.internal.DKPro2Lxf;
 import org.dkpro.core.io.lxf.internal.Lxf2DKPro;
 import org.dkpro.core.io.lxf.internal.model.LxfGraph;
 import org.dkpro.core.io.lxf.internal.model.LxfObject;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class LxfConverterTest
@@ -45,66 +45,91 @@ public class LxfConverterTest
     public void testText()
         throws Exception
     {
-        test("src/test/resources/lxf/text/orig.lxf", false);
+        Map<String, String> ids = new HashMap<>();
+        test("src/test/resources/lxf/delta/text/orig.lxf", false, ids);
     }
-    
-    @Test
-    public void testTokenizerRepp()
-        throws Exception
-    {
-        test("src/test/resources/lxf/tokenizer-repp/orig.lxf", false);
-    }
-    
-    @Test
-    public void testTokenizerReppHunpos()
-        throws Exception
-    {
-        test("src/test/resources/lxf/tokenizer-repp-hunpos/orig.lxf", false);
-    }
-    
-    @Ignore("Need to fix test data to only contain one morphology layer")
-    @Test
-    public void testTokenizerReppHunposBn()
-        throws Exception
-    {
-        test("src/test/resources/lxf/tokenizer-repp-hunpos-bn/orig.lxf", false);
-    }
-    
+
     @Test
     public void testTextDelta()
         throws Exception
     {
-        test("src/test/resources/lxf/text/orig.lxf", true);
+        test("src/test/resources/lxf/delta/text/orig.lxf", true, null);
     }
-    
+
     @Test
-    public void testTokenizerReppDelta()
+    public void testSentence()
         throws Exception
     {
-        test("src/test/resources/lxf/tokenizer-repp/orig.lxf", true);
+        Map<String, String> ids = new HashMap<>();
+        ids.put("sentence", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter");
+        test("src/test/resources/lxf/delta/text-sentence/orig.lxf", false, ids);
     }
-    
+
     @Test
-    public void testTokenizerReppHunposDelta()
+    public void testSentenceDelta()
         throws Exception
     {
-        test("src/test/resources/lxf/tokenizer-repp-hunpos/orig.lxf", true);
+        test("src/test/resources/lxf/delta/text-sentence/orig.lxf", true, null);
     }
-    
-    @Ignore("Need to fix test data to only contain one morphology layer, then fix code")
+
     @Test
-    public void testTokenizerReppHunposBnDelta()
+    public void testToken()
         throws Exception
     {
-        test("src/test/resources/lxf/tokenizer-repp-hunpos-bn/orig.lxf", true);
+        Map<String, String> ids = new HashMap<>();
+        ids.put("sentence", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter");
+        ids.put("token", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter");
+        test("src/test/resources/lxf/delta/text-sentence-tokens/orig.lxf", false, ids);
     }
-    
-    public void test(String aFile, boolean aDelta)
+
+    @Test
+    public void testTokenDelta()
+        throws Exception
+    {
+        test("src/test/resources/lxf/delta/text-sentence-tokens/orig.lxf", true, null);
+    }
+
+    @Test
+    public void testMorpho()
+        throws Exception
+    {
+        Map<String, String> ids = new HashMap<>();
+        ids.put("sentence", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter");
+        ids.put("token", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter");
+        ids.put("morphology", "hunpos");
+        test("src/test/resources/lxf/delta/text-sentence-tokens-morpho/orig.lxf", false, ids);
+    }
+
+    @Test
+    public void testDepDelta()
+        throws Exception
+    {
+        test("src/test/resources/lxf/delta/text-sentence-tokens-morpho-dep/orig.lxf", true, null);
+    }
+
+    @Test
+    public void testDep()
+        throws Exception
+    {
+        Map<String, String> ids = new HashMap<>();
+        ids.put("sentence", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter");
+        ids.put("token", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter");
+        ids.put("morphology", "hunpos");
+        ids.put("dependency", "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser");
+        test("src/test/resources/lxf/delta/text-sentence-tokens-morpho-dep/orig.lxf", false, ids);
+    }
+
+    @Test
+    public void testMorphoDelta()
+        throws Exception
+    {
+        test("src/test/resources/lxf/delta/text-sentence-tokens-morpho/orig.lxf", true, null);
+    }
+
+    public void test(String aFile, boolean aDelta, Map<String, String> ids)
         throws Exception
     {
         ObjectMapper mapper = new ObjectMapper();
-        // Hack because LXF dumper presently creates invalid JSON
-        mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
 
         // Deserialize LXF
         LxfGraph inLxf;
@@ -118,30 +143,25 @@ public class LxfConverterTest
         if (aDelta) {
             jcas.getCasImpl().createMarker();
         }
-        
+
         // Convert CAS to LXF
         LxfGraph outLxf = new LxfGraph();
         if (aDelta) {
             DKPro2Lxf.convert(jcas, inLxf, outLxf);
-            
-            // Superficial comparison (since we don't add anything new, output has to be empty in
-            // delta mode)
             assertEquals(null, outLxf.getMedia());
             assertEquals(0, outLxf.getNodes().size());
             assertEquals(0, outLxf.getEdges().size());
             assertEquals(0, outLxf.getRegions().size());
         }
         else {
-            DKPro2Lxf.convert(jcas, outLxf);
-            
-            // Superficial comparison
+            DKPro2Lxf.convert(jcas, null, outLxf, ids);
             assertEquals(inLxf.getMedia().getData(), outLxf.getMedia().getData());
             assertEquals(ids(inLxf.getNodes()), ids(outLxf.getNodes()));
             assertEquals(ids(inLxf.getEdges()), ids(outLxf.getEdges()));
             assertEquals(ids(inLxf.getRegions()), ids(outLxf.getRegions()));
         }
     }
-    
+
     private static List<String> ids(Collection<? extends LxfObject> aObjs)
     {
         List<String> result = aObjs.stream().map(obj -> obj.getId())

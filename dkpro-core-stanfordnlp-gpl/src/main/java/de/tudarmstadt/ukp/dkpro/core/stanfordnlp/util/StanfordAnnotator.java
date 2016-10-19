@@ -316,6 +316,7 @@ public class StanfordAnnotator
      *            the governing-word
      * @param aDependent
      *            the dependent-word
+     * @return the newly created dependency annotation.
      */
     public static Dependency createDependencyAnnotation(JCas jCas, GrammaticalRelation aDependencyType,
             Token aGovernor, Token aDependent)

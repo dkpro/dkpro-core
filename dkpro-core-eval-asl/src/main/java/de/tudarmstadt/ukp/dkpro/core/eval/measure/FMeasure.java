@@ -29,6 +29,12 @@ public class FMeasure
 
     /**
      * Assumes that neither expected nor actual units contain any duplicates.
+     * 
+     * @param aExpected
+     *            expected labels.
+     * @param aActual
+     *            actual labels.
+     * @return number of matches.
      */
     public int process(Collection<? extends Object> aExpected, Collection<? extends Object> aActual)
     {
