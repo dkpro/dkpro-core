@@ -466,6 +466,11 @@
 				<version>1.9.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
+				<groupId>org.dkpro.core</groupId>
+				<artifactId>org-dkpro-core-lancaster-asl</artifactId>
+				<version>1.9.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stopwordremover-asl</artifactId>
 				<version>1.9.0-SNAPSHOT</version>
@@ -591,6 +596,7 @@
 		<module>../dkpro-core-readability-asl</module>
 		<module>../dkpro-core-rftagger-asl</module>		
 		<module>../dkpro-core-snowball-asl</module>
+		<module>../dkpro-core-lancaster-asl</module>
 		<module>../dkpro-core-stopwordremover-asl</module>
 		<module>../dkpro-core-testing-asl</module>
 		<module>../dkpro-core-textcat-asl</module>
