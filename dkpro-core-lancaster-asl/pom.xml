@@ -23,7 +23,8 @@
 		<version>1.9.0-SNAPSHOT</version>
 		<relativePath>../dkpro-core-asl</relativePath>
 	</parent>
-	<artifactId>de.tudarmstadt.ukp.dkpro.core.lancaster-asl</artifactId>
+	<groupId>org.dkpro.core</groupId>
+	<artifactId>org-dkpro-core-lancaster-asl</artifactId>
     <packaging>jar</packaging>
 	<name>DKPro Core ASL - Lancaster</name>
 	<description>http://haifengl.github.io/smile</description>
