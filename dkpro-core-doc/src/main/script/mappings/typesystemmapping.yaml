@@ -323,11 +323,16 @@ de.tudarmstadt.ukp.dkpro.core.api.ner.type.Money:
 de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity:
   features:
     value:
-      externalReferences: []
+      externalReferences:
+      - {source: ITS, id: 'http://www.w3.org/2005/11/its/rdf#taClassRef', rel: similar}
+    identifier:
+      externalReferences:
+      - {source: ITS, id: 'http://www.w3.org/2005/11/its/rdf#taIdentRef', rel: similar}
   externalReferences:
   - {source: LAPPS, id: 'http://vocab.lappsgrid.org/NamedEntity', rel: similar}
   - {source: ISOcat, id: 'http://www.isocat.org/datcat/DC-2275', rel: similar}
   - {source: OWL, id: 'http://www.w3.org/2002/07/owl#Thing', rel: similar}
+  - {source: NIF, id: 'http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#EntityOccurrence', rel: similar}
 de.tudarmstadt.ukp.dkpro.core.api.ner.type.Nationality:
   features: {}
   externalReferences: []
