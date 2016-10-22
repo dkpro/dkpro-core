@@ -160,7 +160,7 @@ public class IOTestRunner
 
         testOneWay2(createReaderDescription(aReader, aExtraParams),
                 createEngineDescription(aWriter, aExtraParams), aExpectedFile, name + "."
-                        + extension, aFile, null);
+                        + extension, aFile, aOptions);
     }
 
     public static void testOneWay(CollectionReaderDescription aReader,
@@ -204,7 +204,7 @@ public class IOTestRunner
                 createEngineDescription(aWriter, aExtraParams),
                 aExpectedFile, aOutputFile, aFile, null);
     }
-
+    
     public static void testOneWay2(CollectionReaderDescription aReader,
             AnalysisEngineDescription aWriter, String aExpectedFile, String aOutputFile,
             String aInputFile, TestOptions aOptions)
@@ -246,9 +246,14 @@ public class IOTestRunner
 
         AssertAnnotations.assertValid(Validator.messages);
         
-        String expected = FileUtils.readFileToString(reference, "UTF-8");
-        String actual = FileUtils.readFileToString(new File(output, aOutputFile), "UTF-8");
-        assertEquals(expected.trim(), actual.trim());
+        if (aOptions == null || aOptions.resultAssertor == null) {
+            String expected = FileUtils.readFileToString(reference, "UTF-8");
+            String actual = FileUtils.readFileToString(new File(output, aOutputFile), "UTF-8");
+            assertEquals(expected.trim(), actual.trim());
+        }
+        else {
+            aOptions.resultAssertor.accept(reference, new File(output, aOutputFile));
+        }
     }
     
     public static class Validator

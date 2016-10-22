@@ -1,0 +1,34 @@
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<http://example.org/document0#char=0,86>
+        a               nif:RFC5147String , nif:String , nif:Context ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "86"^^xsd:nonNegativeInteger ;
+        nif:isString    "Japan (Japanese: 日本 Nippon or Nihon) is a stratovolcanic archipelago of 6,852 islands."^^xsd:string ;
+        nif:topic       <http://example.org/document0#annotation0> .
+
+<http://example.org/document0#char=0,5>
+        a                     nif:RFC5147String , nif:String ;
+        nif:anchorOf          "Japan"^^xsd:string ;
+        nif:beginIndex        "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "5"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://example.org/document0#char=0,86> ;
+        itsrdf:taClassRef     <http://example.org/Country> , <http://example.org/StratovolcanicArchipelago> ;
+        itsrdf:taIdentRef     <http://example.org/Japan> .
+
+<http://example.org/document0#char=42,68>
+        a                     nif:RFC5147String , nif:String ;
+        nif:anchorOf          "stratovolcanic archipelago"^^xsd:string ;
+        nif:beginIndex        "42"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "68"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://example.org/document0#char=0,86> ;
+        itsrdf:taClassRef     <http://example.org/Archipelago> , rdfs:Class ;
+        itsrdf:taIdentRef     <http://example.org/StratovolcanicArchipelago> .
+
+<http://example.org/document0#annotation0>
+        a                  nif:Annotation ;
+        itsrdf:taIdentRef  <http://example.org/Geography> .

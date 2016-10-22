@@ -1,0 +1,1852 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix nif: <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779>
+	a nif:String , nif:Context , nif:RFC5147String ;
+	nif:beginIndex "0"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3779"^^xsd:nonNegativeInteger ;
+	nif:isString """David and Victoria named their children Brooklyn, Romeo, Cruz, and Harper Seven.
+David and Victoria added spice to their marriage.
+Tiger was lost in the woods when he got divorced from Elin.
+Tiger lost the US Open.
+Madonna played Eva and was seen with Carlos.
+In this musical, Madonna played the role of the First Lady.
+Angelina, her father Jon, and her partner Brad never played together in the same movie.
+Heidi and her husband Seal live in Vegas.
+Paris and Kim are both wealthy It Girls who had sex tapes on the Internet.
+Justin, Stefani, and Kate are among the most popular people on both MTV and Twitter.
+Dylan performed Hurricane about the black fighter Carter, from his album Desire.
+Desire contains a duet with Harris in the song Joey.
+Three of the greatest guitarists started their career in a single band : Clapton, Beck, and Page.
+Allen founded the EMP in Seattle, which featured exhibitions about Hendrix and Dylan, but also about various science fiction movies.
+Despite featuring some of the most promininent musicians of their decade --- like Sinatra, Dylan, Joel, and Santana --- Columbia was aquired by Sony in the 1980s.
+After unsuccessful years, aging country star Cash made a grandiose comeback with his American Recordings, recorded at his home with the help of Rubin.
+The group formed by Homme, Grohl, and Jones was supposed to be named Caligula, but the name was already taken.
+Jobs and Baez dated in the late 1970s, and she performed at his Stanford memorial.
+The Isle of Wight festival in 1970 was the biggest at its time, surpassing Woodstock with acts like Davis, Chicago, and Mitchell.
+Eric preferred to play Blues instead of Rock, so he joined Mayall 's band.
+After the death of Steve, the former CEO of Apple, his commencement speech at Stanford was watched thousands of times.
+In 1980, Steve dropped out of Stanford to join Microsoft, the company behind the Windows operating system.
+Cairo was the code name for a project at Microsoft from 1991 to 1996. Its charter was to build technologies for a next generation operating system that would fulfill the vision of Bill.
+Steve, Bill, Sergey, and Larry have drawn a great deal of admiration these days for their pioneering successes that changed the world we live in.
+Karl and Theo made their extreme fortunes selling low-price groceries.
+While Apple is an electronics company, Mango is a clothing one and Orange is a communication one.
+Sam, the co-founder of Equity International, was given the nickname of \"the grave dancer\" because of his ability to buy businesses that others thought were dead.
+Pixar produced Cars, and John directed it.
+Mars, Galaxy, and Bounty are all chocolate.
+Bosch and Sharp are both home appliances producing companies.
+City won 3:2 against the Spurs.
+The Gunners now play their home matches at the Emirates.
+Atletico has beaten its archrival Real.
+Müller scored a hattrick against England.
+Thomas and Mario are strikers playing in Munich.
+Haug congratulated Red Bull.
+Völler will never forget the match against Oranje in San Siro.
+Landgraf and Meijer played at the Tivoli.
+Yabo plays for Aachen.
+Hertha won against Dortmund.
+Nixon resigned after Watergate despite his success in the Ping-Pong Diplomacy with China.
+The Sun and The Times reported that Greece will have to leave the Euro soon.
+The Enola Gay bombed Hiroshima at the end of Second World War.
+The RAF was a terrorist group led by Baader and Meinhof that killed Schleyer.
+Onassis married Kennedy on October 20, 1968.
+Armstrong was the first man on the Moon.
+Erich was born in Neunkirchen.
+Macedonia is a province of Greece.
+Obama welcomed Merkel upon her arrival at JFK.
+Kennedy was also an active politician, yet he is most known for his writings, some of which he published under the name of Mark Littleton."""^^xsd:string ;
+	nif:sourceUrl <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,80>
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:beginIndex "0"^^xsd:nonNegativeInteger ;
+	nif:endIndex "80"^^xsd:nonNegativeInteger ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf """David and Victoria named their children Brooklyn, Romeo, Cruz, and Harper Seven."""^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,5>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,80> ;
+	nif:anchorOf "David"^^xsd:string ;
+	nif:beginIndex "0"^^xsd:nonNegativeInteger ;
+	nif:endIndex "5"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/David_Beckham> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=10,18>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,80> ;
+	nif:anchorOf "Victoria"^^xsd:string ;
+	nif:beginIndex "10"^^xsd:nonNegativeInteger ;
+	nif:endIndex "18"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Victoria_Beckham> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=81,130>
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:beginIndex "81"^^xsd:nonNegativeInteger ;
+	nif:endIndex "130"^^xsd:nonNegativeInteger ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "David and Victoria added spice to their marriage."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=81,86>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=81,130> ;
+	nif:anchorOf "David"^^xsd:string ;
+	nif:beginIndex "81"^^xsd:nonNegativeInteger ;
+	nif:endIndex "86"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/David_Beckham> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=91,99>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=81,130> ;
+	nif:anchorOf "Victoria"^^xsd:string ;
+	nif:beginIndex "91"^^xsd:nonNegativeInteger ;
+	nif:endIndex "99"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Victoria_Beckham> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=131,190>
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:beginIndex "131"^^xsd:nonNegativeInteger ;
+	nif:endIndex "190"^^xsd:nonNegativeInteger ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "Tiger was lost in the woods when he got divorced from Elin."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=131,136>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=131,190> ;
+	nif:anchorOf "Tiger"^^xsd:string ;
+	nif:beginIndex "131"^^xsd:nonNegativeInteger ;
+	nif:endIndex "136"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Tiger_Woods> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=185,189>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=131,190> ;
+	nif:anchorOf "Elin"^^xsd:string ;
+	nif:beginIndex "185"^^xsd:nonNegativeInteger ;
+	nif:endIndex "189"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Elin_Nordegren> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=191,214>
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:beginIndex "191"^^xsd:nonNegativeInteger ;
+	nif:endIndex "214"^^xsd:nonNegativeInteger ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "Tiger lost the US Open."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=191,196>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=191,214> ;
+	nif:anchorOf "Tiger"^^xsd:string ;
+	nif:beginIndex "191"^^xsd:nonNegativeInteger ;
+	nif:endIndex "196"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Tiger_Woods> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=206,213>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=191,214> ;
+	nif:anchorOf "US Open"^^xsd:string ;
+	nif:beginIndex "206"^^xsd:nonNegativeInteger ;
+	nif:endIndex "213"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/U.S._Open_(golf)> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=215,259>
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:beginIndex "215"^^xsd:nonNegativeInteger ;
+	nif:endIndex "259"^^xsd:nonNegativeInteger ;
+	nif:anchorOf "Madonna played Eva and was seen with Carlos."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=215,222>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=215,259> ;
+	nif:anchorOf "Madonna"^^xsd:string ;
+	nif:beginIndex "215"^^xsd:nonNegativeInteger ;
+	nif:endIndex "222"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Madonna_(entertainer)> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=230,233>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=215,259> ;
+	nif:anchorOf "Eva"^^xsd:string ;
+	nif:beginIndex "230"^^xsd:nonNegativeInteger ;
+	nif:endIndex "233"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Eva_Perón> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=252,258>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=215,259> ;
+	nif:anchorOf "Carlos"^^xsd:string ;
+	nif:beginIndex "252"^^xsd:nonNegativeInteger ;
+	nif:endIndex "258"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Carlos_Leon> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=260,319>
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:beginIndex "260"^^xsd:nonNegativeInteger ;
+	nif:endIndex "319"^^xsd:nonNegativeInteger ;
+	nif:anchorOf "In this musical, Madonna played the role of the First Lady."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=277,284>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=260,319> ;
+	nif:anchorOf "Madonna"^^xsd:string ;
+	nif:beginIndex "277"^^xsd:nonNegativeInteger ;
+	nif:endIndex "284"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Madonna_(entertainer)> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=308,318>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=260,319> ;
+	nif:anchorOf "First Lady"^^xsd:string ;
+	nif:beginIndex "308"^^xsd:nonNegativeInteger ;
+	nif:endIndex "318"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/First_Lady_of_Argentina> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=320,407>
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:beginIndex "320"^^xsd:nonNegativeInteger ;
+	nif:endIndex "407"^^xsd:nonNegativeInteger ;
+	nif:anchorOf "Angelina, her father Jon, and her partner Brad never played together in the same movie."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=320,328>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=320,407> ;
+	nif:anchorOf "Angelina"^^xsd:string ;
+	nif:beginIndex "320"^^xsd:nonNegativeInteger ;
+	nif:endIndex "328"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Angelina_Jolie> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=341,344>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=320,407> ;
+	nif:anchorOf "Jon"^^xsd:string ;
+	nif:beginIndex "341"^^xsd:nonNegativeInteger ;
+	nif:endIndex "344"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Jon_Voight> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=362,366>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=320,407> ;
+	nif:anchorOf "Brad"^^xsd:string ;
+	nif:beginIndex "362"^^xsd:nonNegativeInteger ;
+	nif:endIndex "366"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Brad_Pitt> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=408,449>
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:beginIndex "408"^^xsd:nonNegativeInteger ;
+	nif:endIndex "449"^^xsd:nonNegativeInteger ;
+	nif:anchorOf "Heidi and her husband Seal live in Vegas."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=408,413>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=408,449> ;
+	nif:anchorOf "Heidi"^^xsd:string ;
+	nif:beginIndex "408"^^xsd:nonNegativeInteger ;
+	nif:endIndex "413"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Heidi_Klum> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=430,434>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=408,449> ;
+	nif:anchorOf "Seal"^^xsd:string ;
+	nif:beginIndex "430"^^xsd:nonNegativeInteger ;
+	nif:endIndex "434"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Seal_(musician)> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=443,448>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=408,449> ;
+	nif:anchorOf "Vegas"^^xsd:string ;
+	nif:beginIndex "443"^^xsd:nonNegativeInteger ;
+	nif:endIndex "448"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Las_Vegas,_Nevada> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=450,524>
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:beginIndex "450"^^xsd:nonNegativeInteger ;
+	nif:endIndex "524"^^xsd:nonNegativeInteger ;
+	nif:anchorOf "Paris and Kim are both wealthy It Girls who had sex tapes on the Internet."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=450,455>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=450,524> ;
+	nif:anchorOf "Paris"^^xsd:string ;
+	nif:beginIndex "450"^^xsd:nonNegativeInteger ;
+	nif:endIndex "455"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Paris_Hilton> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=460,463>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=450,524> ;
+	nif:anchorOf "Kim"^^xsd:string ;
+	nif:beginIndex "460"^^xsd:nonNegativeInteger ;
+	nif:endIndex "463"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Kim_Kardashian> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=525,609>
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:beginIndex "525"^^xsd:nonNegativeInteger ;
+	nif:endIndex "609"^^xsd:nonNegativeInteger ;
+	nif:anchorOf "Justin, Stefani, and Kate are among the most popular people on both MTV and Twitter."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=525,531>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=525,609> ;
+	nif:anchorOf "Justin"^^xsd:string ;
+	nif:beginIndex "525"^^xsd:nonNegativeInteger ;
+	nif:endIndex "531"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Justin_Bieber> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=533,540>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=525,609> ;
+	nif:anchorOf "Stefani"^^xsd:string ;
+	nif:beginIndex "533"^^xsd:nonNegativeInteger ;
+	nif:endIndex "540"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Lady_gaga> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=546,550>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=525,609> ;
+	nif:anchorOf "Kate"^^xsd:string ;
+	nif:beginIndex "546"^^xsd:nonNegativeInteger ;
+	nif:endIndex "550"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Kate_Perry> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=593,596>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=525,609> ;
+	nif:anchorOf "MTV"^^xsd:string ;
+	nif:beginIndex "593"^^xsd:nonNegativeInteger ;
+	nif:endIndex "596"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/MTV> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=601,608>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=525,609> ;
+	nif:anchorOf "Twitter"^^xsd:string ;
+	nif:beginIndex "601"^^xsd:nonNegativeInteger ;
+	nif:endIndex "608"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Twitter> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=610,690>
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:beginIndex "610"^^xsd:nonNegativeInteger ;
+	nif:endIndex "690"^^xsd:nonNegativeInteger ;
+	nif:anchorOf "Dylan performed Hurricane about the black fighter Carter, from his album Desire."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=610,615>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=610,690> ;
+	nif:anchorOf "Dylan"^^xsd:string ;
+	nif:beginIndex "610"^^xsd:nonNegativeInteger ;
+	nif:endIndex "615"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Bob_Dylan> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=626,635>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=610,690> ;
+	nif:anchorOf "Hurricane"^^xsd:string ;
+	nif:beginIndex "626"^^xsd:nonNegativeInteger ;
+	nif:endIndex "635"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Hurricane_(song)> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=660,666>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=610,690> ;
+	nif:anchorOf "Carter"^^xsd:string ;
+	nif:beginIndex "660"^^xsd:nonNegativeInteger ;
+	nif:endIndex "666"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Rubin_Carter> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=683,689>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=610,690> ;
+	nif:anchorOf "Desire"^^xsd:string ;
+	nif:beginIndex "683"^^xsd:nonNegativeInteger ;
+	nif:endIndex "689"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Desire_(Bob_Dylan_album)> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=691,743>
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:beginIndex "691"^^xsd:nonNegativeInteger ;
+	nif:endIndex "743"^^xsd:nonNegativeInteger ;
+	nif:anchorOf "Desire contains a duet with Harris in the song Joey."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=691,697>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=691,743> ;
+	nif:anchorOf "Desire"^^xsd:string ;
+	nif:beginIndex "691"^^xsd:nonNegativeInteger ;
+	nif:endIndex "697"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Desire_(Bob_Dylan_album)> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=719,725>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=691,743> ;
+	nif:anchorOf "Harris"^^xsd:string ;
+	nif:beginIndex "719"^^xsd:nonNegativeInteger ;
+	nif:endIndex "725"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Emmylou_Harris> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=738,742>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=691,743> ;
+	nif:anchorOf "Joey"^^xsd:string ;
+	nif:beginIndex "738"^^xsd:nonNegativeInteger ;
+	nif:endIndex "742"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Joey_(Bob_Dylan_song)> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=744,841>
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:beginIndex "744"^^xsd:nonNegativeInteger ;
+	nif:endIndex "841"^^xsd:nonNegativeInteger ;
+	nif:anchorOf "Three of the greatest guitarists started their career in a single band : Clapton, Beck, and Page."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=817,824>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=744,841> ;
+	nif:anchorOf "Clapton"^^xsd:string ;
+	nif:beginIndex "817"^^xsd:nonNegativeInteger ;
+	nif:endIndex "824"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Eric_Clapton> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=826,830>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=744,841> ;
+	nif:anchorOf "Beck"^^xsd:string ;
+	nif:beginIndex "826"^^xsd:nonNegativeInteger ;
+	nif:endIndex "830"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Jeff_Beck> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=836,840>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=744,841> ;
+	nif:anchorOf "Page"^^xsd:string ;
+	nif:beginIndex "836"^^xsd:nonNegativeInteger ;
+	nif:endIndex "840"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Jimmy_Page> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=842,974>
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:beginIndex "842"^^xsd:nonNegativeInteger ;
+	nif:endIndex "974"^^xsd:nonNegativeInteger ;
+	nif:anchorOf "Allen founded the EMP in Seattle, which featured exhibitions about Hendrix and Dylan, but also about various science fiction movies."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=842,847>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=842,974> ;
+	nif:anchorOf "Allen"^^xsd:string ;
+	nif:beginIndex "842"^^xsd:nonNegativeInteger ;
+	nif:endIndex "847"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Paul_Allen> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=860,863>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=842,974> ;
+	nif:anchorOf "EMP"^^xsd:string ;
+	nif:beginIndex "860"^^xsd:nonNegativeInteger ;
+	nif:endIndex "863"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/EMP_Museum> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=867,874>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=842,974> ;
+	nif:anchorOf "Seattle"^^xsd:string ;
+	nif:beginIndex "867"^^xsd:nonNegativeInteger ;
+	nif:endIndex "874"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Seattle> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=909,916>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=842,974> ;
+	nif:anchorOf "Hendrix"^^xsd:string ;
+	nif:beginIndex "909"^^xsd:nonNegativeInteger ;
+	nif:endIndex "916"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Jimi_Hendrix> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=921,926>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=842,974> ;
+	nif:anchorOf "Dylan"^^xsd:string ;
+	nif:beginIndex "921"^^xsd:nonNegativeInteger ;
+	nif:endIndex "926"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Bob_Dylan> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=975,1137>
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:beginIndex "975"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1137"^^xsd:nonNegativeInteger ;
+	nif:anchorOf "Despite featuring some of the most promininent musicians of their decade --- like Sinatra, Dylan, Joel, and Santana --- Columbia was aquired by Sony in the 1980s."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1057,1064>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=975,1137> ;
+	nif:anchorOf "Sinatra"^^xsd:string ;
+	nif:beginIndex "1057"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1064"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Frank_Sinatra> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1066,1071>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=975,1137> ;
+	nif:anchorOf "Dylan"^^xsd:string ;
+	nif:beginIndex "1066"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1071"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Bob_Dylan> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1073,1077>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "Joel"^^xsd:string ;
+	nif:beginIndex "1073"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1077"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Billy_Joel> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1083,1090>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=975,1137> ;
+	nif:anchorOf "Santana"^^xsd:string ;
+	nif:beginIndex "1083"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1090"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Carlos_Santana> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1095,1103>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=975,1137> ;
+	nif:anchorOf "Columbia"^^xsd:string ;
+	nif:beginIndex "1095"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1103"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Columbia_Records> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1119,1123>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=975,1137> ;
+	nif:anchorOf "Sony"^^xsd:string ;
+	nif:beginIndex "1119"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1123"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Sony_Music_Entertainment> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1138,1288>
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:beginIndex "1138"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1288"^^xsd:nonNegativeInteger ;
+	nif:anchorOf "After unsuccessful years, aging country star Cash made a grandiose comeback with his American Recordings, recorded at his home with the help of Rubin."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1183,1187>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1138,1288> ;
+	nif:anchorOf "Cash"^^xsd:string ;
+	nif:beginIndex "1183"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1187"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Johnny_Cash> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1223,1242>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1138,1288> ;
+	nif:anchorOf "American Recordings"^^xsd:string ;
+	nif:beginIndex "1223"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1242"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/American_Recordings_(album)> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1282,1287>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1138,1288> ;
+	nif:anchorOf "Rubin"^^xsd:string ;
+	nif:beginIndex "1282"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1287"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Rick_Rubin> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1289,1399>
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:beginIndex "1289"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1399"^^xsd:nonNegativeInteger ;
+	nif:anchorOf "The group formed by Homme, Grohl, and Jones was supposed to be named Caligula, but the name was already taken."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1309,1314>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1289,1399> ;
+	nif:anchorOf "Homme"^^xsd:string ;
+	nif:beginIndex "1309"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1314"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Josh_Homme> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1316,1321>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1289,1399> ;
+	nif:anchorOf "Grohl"^^xsd:string ;
+	nif:beginIndex "1316"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1321"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Dave_Grohl> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1327,1332>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1289,1399> ;
+	nif:anchorOf "Jones"^^xsd:string ;
+	nif:beginIndex "1327"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1332"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/John_Paul_Jones_(musician)> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1400,1482>
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:beginIndex "1400"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1482"^^xsd:nonNegativeInteger ;
+	nif:anchorOf "Jobs and Baez dated in the late 1970s, and she performed at his Stanford memorial."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1400,1404>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1400,1482> ;
+	nif:anchorOf "Jobs"^^xsd:string ;
+	nif:beginIndex "1400"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1404"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Steve_Jobs> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1409,1413>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1400,1482> ;
+	nif:anchorOf "Baez"^^xsd:string ;
+	nif:beginIndex "1409"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1413"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Joan_Baez> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1464,1472>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1400,1482> ;
+	nif:anchorOf "Stanford"^^xsd:string ;
+	nif:beginIndex "1464"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1472"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Stanford_University> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1483,1612>
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:beginIndex "1483"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1612"^^xsd:nonNegativeInteger ;
+	nif:anchorOf "The Isle of Wight festival in 1970 was the biggest at its time, surpassing Woodstock with acts like Davis, Chicago, and Mitchell."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1487,1509>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1483,1612> ;
+	nif:anchorOf "Isle of Wight festival"^^xsd:string ;
+	nif:beginIndex "1487"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1509"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Isle_of_wight_festival> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1558,1567>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1483,1612> ;
+	nif:anchorOf "Woodstock"^^xsd:string ;
+	nif:beginIndex "1558"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1567"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Woodstock_Festival> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1583,1588>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1483,1612> ;
+	nif:anchorOf "Davis"^^xsd:string ;
+	nif:beginIndex "1583"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1588"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Miles_davis> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1590,1597>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1483,1612> ;
+	nif:anchorOf "Chicago"^^xsd:string ;
+	nif:beginIndex "1590"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1597"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Chicago_(band)> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1603,1611>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1483,1612> ;
+	nif:anchorOf "Mitchell"^^xsd:string ;
+	nif:beginIndex "1603"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1611"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Joni_Mitchell> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1613,1687>
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:beginIndex "1613"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1687"^^xsd:nonNegativeInteger ;
+	nif:anchorOf "Eric preferred to play Blues instead of Rock, so he joined Mayall 's band."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1613,1617>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1613,1687> ;
+	nif:anchorOf "Eric"^^xsd:string ;
+	nif:beginIndex "1613"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1617"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Eric_Clapton> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1636,1641>
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1613,1687> ;
+	nif:anchorOf "Blues"^^xsd:string ;
+	nif:beginIndex "1636"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1641"^^xsd:nonNegativeInteger ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Blues> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1653,1657>
+	nif:beginIndex "1653"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1657"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1613,1687> ;
+	nif:anchorOf "Rock"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Rock_music> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1672,1678>
+	nif:beginIndex "1672"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1678"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1613,1687> ;
+	nif:anchorOf "Mayall"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/John_Mayall> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1688,1806>
+	nif:beginIndex "1688"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1806"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "After the death of Steve, the former CEO of Apple, his commencement speech at Stanford was watched thousands of times."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1707,1712>
+	nif:beginIndex "1707"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1712"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1688,1806> ;
+	nif:anchorOf "Steve"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Steve_Jobs> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1732,1737>
+	nif:beginIndex "1732"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1737"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1688,1806> ;
+	nif:anchorOf "Apple"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Apple_Inc.> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1766,1774>
+	nif:beginIndex "1766"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1774"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1688,1806> ;
+	nif:anchorOf "Stanford"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Stanford_University> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1807,1913>
+	nif:beginIndex "1807"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1913"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "In 1980, Steve dropped out of Stanford to join Microsoft, the company behind the Windows operating system."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1816,1821>
+	nif:beginIndex "1816"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1821"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1807,1913> ;
+	nif:anchorOf "Steve"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Steve_Ballmer> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1837,1845>
+	nif:beginIndex "1837"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1845"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1807,1913> ;
+	nif:anchorOf "Stanford"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Stanford_University> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1854,1863>
+	nif:beginIndex "1854"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1863"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1807,1913> ;
+	nif:anchorOf "Microsoft"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Microsoft> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1888,1895>
+	nif:beginIndex "1888"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1895"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1807,1913> ;
+	nif:anchorOf "Windows"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Microsoft_Windows> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1914,2099>
+	nif:beginIndex "1914"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2099"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "Cairo was the code name for a project at Microsoft from 1991 to 1996. Its charter was to build technologies for a next generation operating system that would fulfill the vision of Bill."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1914,1919>
+	nif:beginIndex "1914"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1919"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1914,2099> ;
+	nif:anchorOf "Cairo"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Cairo_(operating_system)> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1955,1964>
+	nif:beginIndex "1955"^^xsd:nonNegativeInteger ;
+	nif:endIndex "1964"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1914,2099> ;
+	nif:anchorOf "Microsoft"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Microsoft> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2094,2098>
+	nif:beginIndex "2094"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2098"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=1914,2099> ;
+	nif:anchorOf "Bill"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Bill_Gates> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2100,2245>
+	nif:beginIndex "2100"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2245"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "Steve, Bill, Sergey, and Larry have drawn a great deal of admiration these days for their pioneering successes that changed the world we live in."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2100,2105>
+	nif:beginIndex "2100"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2105"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2100,2245> ;
+	nif:anchorOf "Steve"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Steve_Jobs> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2107,2111>
+	nif:beginIndex "2107"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2111"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2100,2245> ;
+	nif:anchorOf "Bill"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Bill_Gates> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2113,2119>
+	nif:beginIndex "2113"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2119"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2100,2245> ;
+	nif:anchorOf "Sergey"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Sergey_Brin> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2125,2130>
+	nif:beginIndex "2125"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2130"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2100,2245> ;
+	nif:anchorOf "Larry"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Larry_Page> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2246,2316>
+	nif:beginIndex "2246"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2316"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "Karl and Theo made their extreme fortunes selling low-price groceries."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2246,2250>
+	nif:beginIndex "2246"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2250"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2246,2316> ;
+	nif:anchorOf "Karl"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Karl_Albrecht> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2255,2259>
+	nif:beginIndex "2255"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2259"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2246,2316> ;
+	nif:anchorOf "Theo"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Theo_Albrecht> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2317,2414>
+	nif:beginIndex "2317"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2414"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "While Apple is an electronics company, Mango is a clothing one and Orange is a communication one."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2323,2328>
+	nif:beginIndex "2323"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2328"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2317,2414> ;
+	nif:anchorOf "Apple"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Apple_Inc.> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2356,2361>
+	nif:beginIndex "2356"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2361"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2317,2414> ;
+	nif:anchorOf "Mango"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Mango_(clothing)> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2384,2390>
+	nif:beginIndex "2384"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2390"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2317,2414> ;
+	nif:anchorOf "Orange"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Orange_(telecommunications)> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2415,2578>
+	nif:beginIndex "2415"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2578"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "Sam, the co-founder of Equity International, was given the nickname of \"the grave dancer\" because of his ability to buy businesses that others thought were dead."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2415,2418>
+	nif:beginIndex "2415"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2418"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2415,2578> ;
+	nif:anchorOf "Sam"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Sam_Zell> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2438,2458>
+	nif:beginIndex "2438"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2458"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2415,2578> ;
+	nif:anchorOf "Equity International"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Equity_International> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2579,2621>
+	nif:beginIndex "2579"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2621"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "Pixar produced Cars, and John directed it."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2579,2584>
+	nif:beginIndex "2579"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2584"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2579,2621> ;
+	nif:anchorOf "Pixar"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Pixar> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2594,2598>
+	nif:beginIndex "2594"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2598"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2579,2621> ;
+	nif:anchorOf "Cars"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Cars_(film)> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2604,2608>
+	nif:beginIndex "2604"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2608"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2579,2621> ;
+	nif:anchorOf "John"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/John_Lasseter> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2622,2665>
+	nif:beginIndex "2622"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2665"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "Mars, Galaxy, and Bounty are all chocolate."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2622,2626>
+	nif:beginIndex "2622"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2626"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2622,2665> ;
+	nif:anchorOf "Mars"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Mars_bar> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2628,2634>
+	nif:beginIndex "2628"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2634"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2622,2665> ;
+	nif:anchorOf "Galaxy"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Galaxy_(chocolate)> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2640,2646>
+	nif:beginIndex "2640"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2646"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2622,2665> ;
+	nif:anchorOf "Bounty"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Bounty_(chocolate_bar)> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2666,2727>
+	nif:beginIndex "2666"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2727"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "Bosch and Sharp are both home appliances producing companies."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2666,2671>
+	nif:beginIndex "2666"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2671"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2666,2727> ;
+	nif:anchorOf "Bosch"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Robert_Bosch_GmbH> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2676,2681>
+	nif:beginIndex "2676"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2681"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2666,2727> ;
+	nif:anchorOf "Sharp"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Sharp_Corporation> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2728,2759>
+	nif:beginIndex "2728"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2759"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "City won 3:2 against the Spurs."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2728,2732>
+	nif:beginIndex "2728"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2732"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2728,2759> ;
+	nif:anchorOf "City"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Manchester_City_F.C.> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2753,2758>
+	nif:beginIndex "2753"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2758"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2728,2759> ;
+	nif:anchorOf "Spurs"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Tottenham_Hotspur_F.C.> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2760,2816>
+	nif:beginIndex "2760"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2816"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "The Gunners now play their home matches at the Emirates."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2764,2771>
+	nif:beginIndex "2764"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2771"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2760,2816> ;
+	nif:anchorOf "Gunners"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Arsenal_F.C.> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2807,2815>
+	nif:beginIndex "2807"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2815"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2760,2816> ;
+	nif:anchorOf "Emirates"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Emirates_Stadium> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2817,2856>
+	nif:beginIndex "2817"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2856"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "Atletico has beaten its archrival Real."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2817,2825>
+	nif:beginIndex "2817"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2825"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2817,2856> ;
+	nif:anchorOf "Atletico"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/AtlÃ©tico_Madrid> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2851,2855>
+	nif:beginIndex "2851"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2855"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2817,2856> ;
+	nif:anchorOf "Real"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Real_Madrid_C.F.> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2857,2898>
+	nif:beginIndex "2857"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2898"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "Müller scored a hattrick against England."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2857,2863>
+	nif:beginIndex "2857"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2863"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2857,2898> ;
+	nif:anchorOf "Müller"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Thomas_Müller_(footballer)> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2890,2897>
+	nif:beginIndex "2890"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2897"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2857,2898> ;
+	nif:anchorOf "England"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/England_national_football_team> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2899,2947>
+	nif:beginIndex "2899"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2947"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "Thomas and Mario are strikers playing in Munich."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2899,2905>
+	nif:beginIndex "2899"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2905"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2899,2947> ;
+	nif:anchorOf "Thomas"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Thomas_Müller_(footballer)> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2910,2915>
+	nif:beginIndex "2910"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2915"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2899,2947> ;
+	nif:anchorOf "Mario"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Mario_Gomez> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2940,2946>
+	nif:beginIndex "2940"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2946"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2899,2947> ;
+	nif:anchorOf "Munich"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/FC_Bayern_Munich> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2948,2976>
+	nif:beginIndex "2948"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2976"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "Haug congratulated Red Bull."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2948,2952>
+	nif:beginIndex "2948"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2952"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2948,2976> ;
+	nif:anchorOf "Haug"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Norbert_Haug> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2967,2975>
+	nif:beginIndex "2967"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2975"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2948,2976> ;
+	nif:anchorOf "Red Bull"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/FC_Red_Bull_Salzburg> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2977,3039>
+	nif:beginIndex "2977"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3039"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "Völler will never forget the match against Oranje in San Siro."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2977,2983>
+	nif:beginIndex "2977"^^xsd:nonNegativeInteger ;
+	nif:endIndex "2983"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2977,3039> ;
+	nif:anchorOf "Völler"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Rudi_Völler> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3020,3026>
+	nif:beginIndex "3020"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3026"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2977,3039> ;
+	nif:anchorOf "Oranje"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Netherlands_national_football_team> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3030,3038>
+	nif:beginIndex "3030"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3038"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=2977,3039> ;
+	nif:anchorOf "San Siro"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/San_Siro> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3040,3081>
+	nif:beginIndex "3040"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3081"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "Landgraf and Meijer played at the Tivoli."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3040,3048>
+	nif:beginIndex "3040"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3048"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3040,3081> ;
+	nif:anchorOf "Landgraf"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Willi_Landgraf> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3053,3059>
+	nif:beginIndex "3053"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3059"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3040,3081> ;
+	nif:anchorOf "Meijer"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Erik_Meijer_(footballer)> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3074,3080>
+	nif:beginIndex "3074"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3080"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3040,3081> ;
+	nif:anchorOf "Tivoli"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/New_Tivoli> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3082,3104>
+	nif:beginIndex "3082"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3104"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "Yabo plays for Aachen."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3082,3086>
+	nif:beginIndex "3082"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3086"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3082,3104> ;
+	nif:anchorOf "Yabo"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Reinhold_Yabo> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3097,3103>
+	nif:beginIndex "3097"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3103"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3082,3104> ;
+	nif:anchorOf "Aachen"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Alemannia_Aachen> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3105,3133>
+	nif:beginIndex "3105"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3133"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "Hertha won against Dortmund."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3105,3111>
+	nif:beginIndex "3105"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3111"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3105,3133> ;
+	nif:anchorOf "Hertha"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Hertha_BSC> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3124,3132>
+	nif:beginIndex "3124"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3132"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3105,3133> ;
+	nif:anchorOf "Dortmund"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Borussia_Dortmund> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3134,3223>
+	nif:beginIndex "3134"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3223"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "Nixon resigned after Watergate despite his success in the Ping-Pong Diplomacy with China."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3134,3139>
+	nif:beginIndex "3134"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3139"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3134,3223> ;
+	nif:anchorOf "Nixon"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Richard_Nixon> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3155,3164>
+	nif:beginIndex "3155"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3164"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3134,3223> ;
+	nif:anchorOf "Watergate"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Watergate_scandal> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3192,3211>
+	nif:beginIndex "3192"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3211"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3134,3223> ;
+	nif:anchorOf "Ping-Pong Diplomacy"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Ping_Pong_Diplomacy> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3217,3222>
+	nif:beginIndex "3217"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3222"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3134,3223> ;
+	nif:anchorOf "China"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/People's_Republic_of_China> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3224,3300>
+	nif:beginIndex "3224"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3300"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "The Sun and The Times reported that Greece will have to leave the Euro soon."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3224,3231>
+	nif:beginIndex "3224"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3231"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3224,3300> ;
+	nif:anchorOf "The Sun"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/The_Sun_(United_Kingdom)> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3236,3245>
+	nif:beginIndex "3236"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3245"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3224,3300> ;
+	nif:anchorOf "The Times"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/The_Times> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3260,3266>
+	nif:beginIndex "3260"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3266"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3224,3300> ;
+	nif:anchorOf "Greece"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Greece> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3290,3294>
+	nif:beginIndex "3290"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3294"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3224,3300> ;
+	nif:anchorOf "Euro"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Eurozone> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3301,3363>
+	nif:beginIndex "3301"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3363"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "The Enola Gay bombed Hiroshima at the end of Second World War."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3305,3314>
+	nif:beginIndex "3305"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3314"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3301,3363> ;
+	nif:anchorOf "Enola Gay"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Enola_Gay> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3322,3331>
+	nif:beginIndex "3322"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3331"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3301,3363> ;
+	nif:anchorOf "Hiroshima"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Hiroshima> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3346,3362>
+	nif:beginIndex "3346"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3362"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3301,3363> ;
+	nif:anchorOf "Second World War"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/World_War_II> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3364,3441>
+	nif:beginIndex "3364"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3441"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "The RAF was a terrorist group led by Baader and Meinhof that killed Schleyer."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3368,3371>
+	nif:beginIndex "3368"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3371"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3364,3441> ;
+	nif:anchorOf "RAF"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Red_Army_Faction> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3401,3407>
+	nif:beginIndex "3401"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3407"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3364,3441> ;
+	nif:anchorOf "Baader"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Andreas_Baader> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3412,3419>
+	nif:beginIndex "3412"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3419"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3364,3441> ;
+	nif:anchorOf "Meinhof"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Ulrike_Meinhof> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3432,3440>
+	nif:beginIndex "3432"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3440"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3364,3441> ;
+	nif:anchorOf "Schleyer"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Hanns-Martin_Schleyer> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3442,3486>
+	nif:beginIndex "3442"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3486"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "Onassis married Kennedy on October 20, 1968."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3442,3449>
+	nif:beginIndex "3442"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3449"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3442,3486> ;
+	nif:anchorOf "Onassis"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Jacqueline_Kennedy_Onassis> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3458,3465>
+	nif:beginIndex "3458"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3465"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3442,3486> ;
+	nif:anchorOf "Kennedy"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/John_F._Kennedy> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3487,3527>
+	nif:beginIndex "3487"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3527"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "Armstrong was the first man on the Moon."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3487,3496>
+	nif:beginIndex "3487"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3496"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3487,3527> ;
+	nif:anchorOf "Armstrong"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Neil_Armstrong> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3522,3526>
+	nif:beginIndex "3522"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3526"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3487,3527> ;
+	nif:anchorOf "Moon"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Moon> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3528,3558>
+	nif:beginIndex "3528"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3558"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "Erich was born in Neunkirchen."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3528,3533>
+	nif:beginIndex "3528"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3533"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3528,3558> ;
+	nif:anchorOf "Erich"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Erich_Honecker> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3546,3557>
+	nif:beginIndex "3546"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3557"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3528,3558> ;
+	nif:anchorOf "Neunkirchen"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Neunkirchen,_Saarland> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3559,3593>
+	nif:beginIndex "3559"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3593"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "Macedonia is a province of Greece."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3559,3568>
+	nif:beginIndex "3559"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3568"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3559,3593> ;
+	nif:anchorOf "Macedonia"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Macedonia_(Greece)> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3586,3592>
+	nif:beginIndex "3586"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3592"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3559,3593> ;
+	nif:anchorOf "Greece"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Greece> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3594,3640>
+	nif:beginIndex "3594"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3640"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "Obama welcomed Merkel upon her arrival at JFK."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3594,3599>
+	nif:beginIndex "3594"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3599"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3594,3640> ;
+	nif:anchorOf "Obama"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Barack_Obama> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3609,3615>
+	nif:beginIndex "3609"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3615"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3594,3640> ;
+	nif:anchorOf "Merkel"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/Angela_Merkel> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3636,3639>
+	nif:beginIndex "3636"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3639"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3594,3640> ;
+	nif:anchorOf "JFK"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/John_F._Kennedy_International_Airport> .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3641,3779>
+	nif:beginIndex "3641"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3779"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:Sentence , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:anchorOf "Kennedy was also an active politician, yet he is most known for his writings, some of which he published under the name of Mark Littleton."^^xsd:string .
+
+<http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3641,3648>
+	nif:beginIndex "3641"^^xsd:nonNegativeInteger ;
+	nif:endIndex "3648"^^xsd:nonNegativeInteger ;
+	a nif:String , nif:RFC5147String ;
+	nif:referenceContext <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=0,3779> ;
+	nif:sentence <http://www.mpi-inf.mpg.de/yago-naga/aida/download/KORE50.tar.gz/AIDA.tsv#char=3641,3779> ;
+	nif:anchorOf "Kennedy"^^xsd:string ;
+	a nif:Phrase ;
+	itsrdf:taIdentRef  <http://dbpedia.org/resource/John_P._Kennedy> .
+

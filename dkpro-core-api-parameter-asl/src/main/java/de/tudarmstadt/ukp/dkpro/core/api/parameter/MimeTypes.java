@@ -37,14 +37,16 @@ public final class MimeTypes
     public final static String APPLICATION_X_UIMA_JSON = "application/x.org.dkpro.uima+json";
     public final static String APPLICATION_X_UIMA_XMI= "application/x.org.dkpro.uima+xmi";
     public final static String APPLICATION_X_LIF_JSON = "application/x.org.dkpro.lif+json";
+    public final static String APPLICATION_X_LXF_JSON = "application/x.org.dkpro.lxf+json";
     public final static String APPLICATION_X_NEGRA3 = "application/x.org.dkpro.negra3";
     public final static String APPLICATION_X_NEGRA4 = "application/x.org.dkpro.negra4";
+    public final static String APPLICATION_X_NIF_TURTLE = "application/x.org.dkpro.nif+turtle";
     public final static String APPLICATION_X_REUTERS21578_SGML = "application/x.org.dkpro.reuters21578+sgml";
     public final static String APPLICATION_X_TGREP2 = "application/x.org.dkpro.tgrep2";
     public final static String APPLICATION_X_TIGER_XML = "application/x.org.dkpro.tiger+xml";
     public final static String APPLICATION_X_SEMEVAL_2010_XML = "application/x.org.dkpro.semeval-2010+xml";
     public final static String APPLICATION_X_TUEPP_XML = "application/x.org.dkpro.tuepp+xml";
-
+    
     // Standard text types (http://www.iana.org/assignments/media-types/media-types.xhtml)
     public final static String TEXT_CSV = "text/csv";
     public final static String TEXT_HTML = "text/html";
