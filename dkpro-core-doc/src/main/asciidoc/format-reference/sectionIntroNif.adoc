@@ -1,0 +1,7 @@
+The NLP Interchange Format (NIF) provides a way of representing NLP information using semantic web
+technology, specifically RDF and OWL.
+
+.Known corpora in this format
+* link:https://datahub.io/dataset/kore-50-nif-ner-corpus[KORE 50 NIF NER Corpus]
+* link:https://datahub.io/dataset/brown-corpus-in-rdf-nif[Brown Corpus in RDF/NIF]
+* link:https://datahub.io/dataset?q=nif[... more datasets can be found on datahub]
