@@ -20,6 +20,8 @@ import java.io.OutputStream;
 
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.riot.RDFDataMgr;
+import org.apache.jena.riot.RDFLanguages;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
@@ -54,8 +56,10 @@ public class NifWriter
     extends JCasFileWriter_ImplBase
 {
     /**
-     * Specify the suffix of output files. Default value <code>.ttl</code>. If the suffix is not
-     * needed, provide an empty string as value.
+     * Specify the suffix of output files. Default value <code>.ttl</code>. The file format will be
+     * chosen depending on the file suffice. 
+     * 
+     * @see RDFLanguages
      */
     public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".ttl")
@@ -72,7 +76,7 @@ public class NifWriter
         DKPro2Nif.convert(aJCas, model);
         
         try (OutputStream docOS = getOutputStream(aJCas, filenameSuffix)) {
-            model.write(docOS, "TURTLE");
+            RDFDataMgr.write(docOS, model, RDFLanguages.fileExtToLang(filenameSuffix));
         }
         catch (Exception e) {
             throw new AnalysisEngineProcessException(e);

@@ -39,6 +39,26 @@ import org.apache.commons.compress.compressors.xz.XZCompressorOutputStream;
  */
 public class CompressionUtils
 {
+    public static String stripCompressionExtension(String aLocation)
+    {
+        String lcLocation = aLocation.toLowerCase();
+        if (lcLocation.endsWith(GZIP.getExtension())) {
+            return aLocation.substring(0, GZIP.getExtension().length());
+        }
+        else if (lcLocation.endsWith(BZIP2.getExtension()) || lcLocation.endsWith(".bzip2")) {
+            return aLocation.substring(0, BZIP2.getExtension().length());
+        }
+        else if (lcLocation.endsWith(".bzip2")) {
+            return aLocation.substring(0, ".bzip2".length());
+        }
+        else if (lcLocation.endsWith(XZ.getExtension())) {
+            return aLocation.substring(0, XZ.getExtension().length());
+        }
+        else {
+            return aLocation;
+        }
+    }
+    
     /**
      * Get an uncompressed input stream for a given input stream created for a particular location.
      * 

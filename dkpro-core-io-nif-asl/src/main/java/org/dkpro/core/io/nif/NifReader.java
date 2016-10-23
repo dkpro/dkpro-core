@@ -17,7 +17,6 @@
  */
 package org.dkpro.core.io.nif;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -25,6 +24,8 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
+import org.apache.jena.riot.RDFDataMgr;
+import org.apache.jena.riot.RDFLanguages;
 import org.apache.jena.vocabulary.RDF;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -40,11 +41,13 @@ import org.dkpro.core.io.nif.internal.Nif2DKPro;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 
 /**
- * Reader for the NLP Interchange Format (NIF).
+ * Reader for the NLP Interchange Format (NIF). The file format (e.g. TURTLE, etc.) is automatically
+ * chosen depending on the name of the file(s) being read. Compressed files are supported.
  */
 @MimeTypeCapability({MimeTypes.APPLICATION_X_NIF_TURTLE})
 @TypeCapability(
@@ -83,6 +86,7 @@ public class NifReader
     private Resource res;
     private Model model;
     private StmtIterator contextIterator;
+    private int inFileCount;
     
     @Override
     public void initialize(UimaContext aContext)
@@ -114,6 +118,11 @@ public class NifReader
         }
         
         initCas(aJCas, res);
+        
+        // FIXME The reader is already designed in such a way that multiple documents per NIF file
+        // are supported. However, presently adding a qualifier to initCas would generate document
+        // URIs in the NIF with two fragments, e.g. "urn:a01-cooked.ttl#0#offset_0_1234".
+        // initCas(aJCas, res, String.valueOf(inFileCount));
 
         Statement context = contextIterator.next();
 
@@ -121,6 +130,7 @@ public class NifReader
         converter.setPosMappingProvider(posMappingProvider);
         converter.convert(context, aJCas);
         
+        inFileCount++;
         step();
      }
     
@@ -158,9 +168,12 @@ public class NifReader
                 if (getResourceIterator().hasNext()) {
                     // There are still resources left to read
                     res = nextFile();
-                    try (InputStream is = new BufferedInputStream(res.getInputStream())) {
+                    inFileCount = 0;
+                    try (InputStream is = CompressionUtils.getInputStream(res.getLocation(),
+                            res.getInputStream())) {
                         model = ModelFactory.createOntologyModel();
-                        model.read(is, null, "TURTLE");
+                        RDFDataMgr.read(model, is, RDFLanguages.filenameToLang(
+                                CompressionUtils.stripCompressionExtension(res.getLocation())));
                     }
                     contextIterator = model.listStatements(null, RDF.type, 
                             model.createResource(NIF.TYPE_CONTEXT));
