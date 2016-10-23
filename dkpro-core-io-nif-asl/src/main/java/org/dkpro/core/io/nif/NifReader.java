@@ -56,7 +56,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
                 "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem" })
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem",
+                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" })
 public class NifReader
     extends JCasResourceCollectionReader_ImplBase
 {
