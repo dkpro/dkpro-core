@@ -76,8 +76,7 @@
                 <enabled>true</enabled>
             </snapshots>
 		</repository>
-        <!-- For DKPro Parent POM SNAPSHOT -->
-        <!--
+        <!-- For SNAPSHOTs from the DKPro family -->
         <repository>
             <id>ukp-oss-snapshots</id>
             <url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-snapshots</url>
@@ -88,8 +87,6 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-        -->
-        <!-- added this to resolve fangorn artifact -->
     </repositories>
 	<pluginRepositories>
         <!-- For UIMA/uimaFIT RCs -->
