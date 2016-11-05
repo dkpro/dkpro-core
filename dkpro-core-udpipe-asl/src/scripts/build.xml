@@ -32,9 +32,13 @@
 		<antcall target="separate-jars"/>
 	</target>
 	
-	<target name="separate-jars" depends="udpipe"/>
+	<target name="separate-jars" depends="install-executables,en"/>
 
-	<target name="en" depends="download-models">
+    <target name="en">
+        <antcall target="en-ud"/>
+	</target>
+
+	<target name="en-ud" depends="download-models">
         <install-stub-and-upstream-file 
             file="target/download/models/english-ud-1.2-160523.udpipe" 
             md5="ea7c2058ccdc5ea1ba98ebb08cba0b72"
@@ -47,9 +51,27 @@
             variant="ud" 
             extension="udpipe">
             <metadata>
+                <entry key="pos.tagset" value="ptb"/>
             </metadata>
         </install-stub-and-upstream-file>
 	</target>
+	
+    <target name="-check-download-binaries">
+        <available property="download-binaries.DONE" file="target/download/binaries/DONE"/>
+    </target>
+
+    <target name="download-binaries" depends="-check-download-binaries" unless="download-binaries.DONE">
+        <mkdir dir="target/download/binaries"/>
+        <get 
+            src="https://github.com/ufal/udpipe/releases/download/v1.0.0/udpipe-1.0.0-bin.zip"
+            dest="target/download/binaries/udpipe-bin.zip" skipexisting="true"/>
+        <unzip src="target/download/binaries/udpipe-bin.zip" dest="target/download/binaries">
+            <patternset>
+                <exclude name="**/*.jar"/>
+            </patternset>
+        </unzip>
+        <touch file="target/download/binaries/DONE"/>
+    </target>
 	
     <target name="-check-download-models">
         <available property="download-models.DONE" file="target/download/models/DONE"/>
@@ -65,46 +87,93 @@
         <touch file="target/download/models/DONE"/>
     </target>
 
-	<target name="udpipe">
-		<mkdir dir="target/download/binaries"/>
-		<get 
-			src="https://github.com/ufal/udpipe/releases/download/v1.0.0/udpipe-1.0.0-bin.zip"
-			dest="target/download/binaries/udpipe-1.0.0-bin.zip" skipexisting="true"/>
-    	<unzip src="target/download/binaries/udpipe-1.0.0-bin.zip" dest="target/download/binaries">
-            <patternset>
-                <include name="**/*"/>
-                <exclude name="**/*.jar"/>
-            </patternset>
-        </unzip>
+	<fileset id="metaFiles" dir="target/download/binaries//udpipe-1.0.0-bin">
+	    <include name="AUTHORS" />
+	    <include name="CHANGES" />
+	    <include name="LICENSE" />
+        <include name="README" />
+	</fileset>
+	
+    <target name="install-executables" depends="download-binaries">
+        <property name="version.bin" value="20160527.0"/>
 
-		<install-stub-and-upstream-folder
-		    folder="target/download/binaries/udpipe-1.0.0-bin/bin-linux32/java"
-			groupId="org.dkpro.core"
-			artifactIdBase="dkpro-core-udpipe" 
-			metadataversion="0"
-			upstreamversion="20160527"
-			tool="lib"
-			language="bin"
-			variant="bin-linux-x86_32"/>
-		
-		<install-stub-and-upstream-folder
-            folder="target/download/binaries/udpipe-1.0.0-bin/bin-linux64/java"
+        <mkdir dir="target/download"/>
+
+        <copy todir="target/model-staging/org/dkpro/core/udpipe/bin">
+            <fileset refid="metaFiles"/>
+        </copy>     
+    	
+        <!-- Windows 32 bit -->
+        <mkdir dir="target/model-staging/org/dkpro/core/udpipe/bin/windows-x86_32"/>
+        <propertyfile
+            file="target/model-staging/org/dkpro/core/udpipe/bin/windows-x86_32/manifest.properties">
+            <entry  key="udpipe_java.dll" value="library"/>
+        </propertyfile>
+    	<copy 
+    	   file="target/download/binaries/udpipe-1.0.0-bin/bin-win32/java/udpipe_java.dll"
+    	   todir="target/model-staging/org/dkpro/core/udpipe/bin/windows-x86_32"/>
+
+        <!-- Windows 64 bit -->
+        <mkdir dir="target/model-staging/org/dkpro/core/udpipe/bin/windows-x86_64"/>
+        <propertyfile
+            file="target/model-staging/org/dkpro/core/udpipe/bin/windows-x86_64/manifest.properties">
+            <entry  key="udpipe_java.dll" value="library"/>
+        </propertyfile>
+        <copy 
+           file="target/download/binaries/udpipe-1.0.0-bin/bin-win64/java/udpipe_java.dll"
+           todir="target/model-staging/org/dkpro/core/udpipe/bin/windows-x86_64"/>
+
+        <!-- LINUX 32 bit -->
+        <mkdir dir="target/model-staging/org/dkpro/core/udpipe/bin/linux-x86_32"/>
+        <propertyfile
+            file="target/model-staging/org/dkpro/core/udpipe/bin/linux-x86_32/manifest.properties">
+            <entry  key="libudpipe_java.so" value="library"/>
+        </propertyfile>
+        <copy 
+           file="target/download/binaries/udpipe-1.0.0-bin/bin-linux32/java/libudpipe_java.so"
+           todir="target/model-staging/org/dkpro/core/udpipe/bin/linux-x86_32"/>
+
+        <!-- LINUX 64 bit -->
+        <mkdir dir="target/model-staging/org/dkpro/core/udpipe/bin/linux-x86_64"/>
+        <propertyfile
+            file="target/model-staging/org/dkpro/core/udpipe/bin/linux-x86_64/manifest.properties">
+            <entry  key="libudpipe_java.so" value="library"/>
+        </propertyfile>
+        <copy 
+           file="target/download/binaries/udpipe-1.0.0-bin/bin-linux64/java/libudpipe_java.so"
+           todir="target/model-staging/org/dkpro/core/udpipe/bin/linux-x86_64"/>
+
+        <!-- OSX 64 bit -->
+        <mkdir dir="target/model-staging/org/dkpro/core/udpipe/bin/osx-x86_64"/>
+        <propertyfile
+            file="target/model-staging/org/dkpro/core/udpipe/bin/osx-x86_64/manifest.properties">
+            <entry  key="libudpipe_java.dylib" value="library"/>
+        </propertyfile>
+        <copy 
+           file="target/download/binaries/udpipe-1.0.0-bin/bin-osx/java/libudpipe_java.dylib"
+           todir="target/model-staging/org/dkpro/core/udpipe/bin/osx-x86_64"/>
+    	
+        <jar 
+            destfile="target/dkpro-core-udpipe-bin-${version.bin}.jar" 
+            compress="true">
+            <fileset dir="target/model-staging">
+                <include name="META-INF/**/*"/>
+                <include name="**/*"/>
+            </fileset>
+        </jar>
+
+        <generate-pom 
             groupId="org.dkpro.core"
-            artifactIdBase="dkpro-core-udpipe" 
-			metadataversion="0"
-			upstreamversion="20160527"
-			tool="lib"
-			language="bin"
-			variant="bin-linux-x86_64"/>
-			
-		<install-stub-and-upstream-folder
-            folder="target/download/binaries/udpipe-1.0.0-bin/bin-osx/java"
+            artifactId="dkpro-core-udpipe-bin" 
+            version="${version.bin}"/>
+
+        <install-artifact 
+            file="target/dkpro-core-udpipe-bin-bin-${version.bin}.jar"
             groupId="org.dkpro.core"
-            artifactIdBase="dkpro-core-udpipe" 
-			metadataversion="0"
-			upstreamversion="20160527"
-			tool="lib"
-			language="bin"
-			variant="bin-osx-x86_64"/>
-	</target>	
+            artifactId="dkpro-core-udpipe-bin" 
+            version="${version.bin}"/>
+        <clean-pom/>
+        <delete dir="target/model-staging"/>
+    </target>	
+</project>	
 </project>
