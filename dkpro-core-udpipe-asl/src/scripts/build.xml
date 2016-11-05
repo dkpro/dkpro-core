@@ -1,0 +1,110 @@
+<!--
+   Copyright 2012
+   Ubiquitous Knowledge Processing (UKP) Lab
+   Technische Universität Darmstadt
+   
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+   
+     http://www.apache.org/licenses/LICENSE-2.0
+   
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<project basedir="../.." default="separate-jars">
+	<property name="outputPackage" value="org/dkpro/core/udpipe/lib"/>
+	
+	<import>
+		<url url="https://raw.githubusercontent.com/dkpro/resource-packager/0.7.0/ant-macros.xml"/>
+	</import>
+	
+	<target name="local-maven">
+		<property name="install-artifact-enable" value="true"/>
+		<antcall target="separate-jars"/>
+	</target>
+	
+	<target name="remote-maven">
+	    <property name="install-artifact-mode" value="remote"/>
+		<antcall target="separate-jars"/>
+	</target>
+	
+	<target name="separate-jars" depends="udpipe"/>
+
+	<target name="en" depends="download-models">
+        <install-stub-and-upstream-file 
+            file="target/download/models/english-ud-1.2-160523.udpipe" 
+            md5="ea7c2058ccdc5ea1ba98ebb08cba0b72"
+            groupId="org.dkpro.core" 
+            artifactIdBase="dkpro-core-udpipe"
+            upstreamVersion="20160523"
+            metaDataVersion="1"
+            tool="multiple" 
+            language="en" 
+            variant="ud" 
+            extension="udpipe">
+            <metadata>
+            </metadata>
+        </install-stub-and-upstream-file>
+	</target>
+	
+    <target name="-check-download-models">
+        <available property="download-models.DONE" file="target/download/models/DONE"/>
+    </target>
+
+    <target name="download-models" depends="-check-download-models" unless="download-models.DONE">
+        <mkdir dir="target/download/models"/>
+        <get src="https://lindat.mff.cuni.cz/repository/xmlui/bitstream/handle/11234/1-1659/udpipe-ud-1.2-160523.zip?sequence=1&amp;isAllowed=y" 
+            dest="target/download/models/udpipe-ud-1.2-160523.zip" skipexisting="true"/>
+        <unzip src="target/download/models/udpipe-ud-1.2-160523.zip" dest="target/download/models">
+            <mapper type="flatten" />
+    	</unzip>
+        <touch file="target/download/models/DONE"/>
+    </target>
+
+	<target name="udpipe">
+		<mkdir dir="target/download/binaries"/>
+		<get 
+			src="https://github.com/ufal/udpipe/releases/download/v1.0.0/udpipe-1.0.0-bin.zip"
+			dest="target/download/binaries/udpipe-1.0.0-bin.zip" skipexisting="true"/>
+    	<unzip src="target/download/binaries/udpipe-1.0.0-bin.zip" dest="target/download/binaries">
+            <patternset>
+                <include name="**/*"/>
+                <exclude name="**/*.jar"/>
+            </patternset>
+        </unzip>
+
+		<install-stub-and-upstream-folder
+		    folder="target/download/binaries/udpipe-1.0.0-bin/bin-linux32/java"
+			groupId="org.dkpro.core"
+			artifactIdBase="dkpro-core-udpipe" 
+			metadataversion="0"
+			upstreamversion="20160527"
+			tool="lib"
+			language="bin"
+			variant="bin-linux-x86_32"/>
+		
+		<install-stub-and-upstream-folder
+            folder="target/download/binaries/udpipe-1.0.0-bin/bin-linux64/java"
+            groupId="org.dkpro.core"
+            artifactIdBase="dkpro-core-udpipe" 
+			metadataversion="0"
+			upstreamversion="20160527"
+			tool="lib"
+			language="bin"
+			variant="bin-linux-x86_64"/>
+			
+		<install-stub-and-upstream-folder
+            folder="target/download/binaries/udpipe-1.0.0-bin/bin-osx/java"
+            groupId="org.dkpro.core"
+            artifactIdBase="dkpro-core-udpipe" 
+			metadataversion="0"
+			upstreamversion="20160527"
+			tool="lib"
+			language="bin"
+			variant="bin-osx-x86_64"/>
+	</target>	
+</project>
