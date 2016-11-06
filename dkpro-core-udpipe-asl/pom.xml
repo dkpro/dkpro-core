@@ -46,8 +46,24 @@
       <version>${udpipe.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
+    <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.io-asl</artifactId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.syntax-asl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -60,6 +76,7 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <!--  
   <build>
     <pluginManagement>
       <plugins>
@@ -68,7 +85,7 @@
           <artifactId>maven-dependency-plugin</artifactId>
           <configuration>
             <usedDependencies combine.children="append">
-              <!-- Parsers are not detected as a direct dependency due to plugin mechanism -->
+              <!- - Parsers are not detected as a direct dependency due to plugin mechanism - ->
               <usedDependency>org.apache.tika:tika-parsers</usedDependency>
             </usedDependencies>
           </configuration>
@@ -76,4 +93,5 @@
       </plugins>
     </pluginManagement>
   </build>
+  -->
 </project>

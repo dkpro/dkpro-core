@@ -3,7 +3,7 @@ package org.dkpro.core.udpipe;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
 import org.junit.Ignore;

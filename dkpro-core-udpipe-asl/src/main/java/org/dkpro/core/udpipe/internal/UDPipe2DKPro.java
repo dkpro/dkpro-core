@@ -20,10 +20,10 @@ package org.dkpro.core.udpipe.internal;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.JCas;
-import org.codehaus.plexus.util.StringUtils;
 
 import cz.cuni.mff.ufal.udpipe.Sentence;
 import cz.cuni.mff.ufal.udpipe.Word;
