@@ -66,6 +66,11 @@
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-udpipe-bin</artifactId>
+      <version>20160527.0</version>
+    </dependency>
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>test</scope>
@@ -76,7 +81,6 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-  <!--  
   <build>
     <pluginManagement>
       <plugins>
@@ -85,13 +89,12 @@
           <artifactId>maven-dependency-plugin</artifactId>
           <configuration>
             <usedDependencies combine.children="append">
-              <!- - Parsers are not detected as a direct dependency due to plugin mechanism - ->
-              <usedDependency>org.apache.tika:tika-parsers</usedDependency>
+              <!-- Binaries are not detected as a direct dependency due to plugin mechanism -->
+              <usedDependency>org.dkpro.core:dkpro-core-udpipe-bin</usedDependency>
             </usedDependencies>
           </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
   </build>
-  -->
 </project>
