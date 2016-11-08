@@ -54,7 +54,7 @@ public class DependencyRootTypeCheck
             roots.stream()
                     .filter(dep -> !ROOT.class.equals(dep.getClass()))
                     .forEach(dep -> aMessages.add(new Message(this, ERROR,
-                        "Root dependency by of type [%s]: %s", ROOT.class.getName(), dep)));
+                        "Root dependency is not of type [%s]: %s", ROOT.class.getName(), dep)));
         }
         
         return aMessages.stream().anyMatch(m -> m.level == ERROR);
