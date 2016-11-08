@@ -129,6 +129,10 @@
             <unsubscribe>dkpro-core-developers+unsubscribe@googlegroups.com</unsubscribe>
         </mailingList>
     </mailingLists>
+    <ciManagement>
+        <system>Jenkins</system>
+        <url>https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/</url>
+    </ciManagement>
 	<issueManagement>
 		<system>GitHub Issues</system>
 		<url>https://github.com/dkpro/dkpro-core/issues</url>
