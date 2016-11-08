@@ -51,7 +51,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * Dependency parser using UDPipe.
+ * Dependency parser using UDPipe. UDPipe uses Parsito, a greedy transition-based parser
+ * utilizing an artificial neural network.
+ * 
+ * @see <a href="https://github.com/ufal/udpipe/tree/master/src/parsito">Parsito in UDPipe</a>
  */
 @TypeCapability(
         inputs = { 
@@ -87,12 +90,12 @@ public class UDPipeParser
     protected String modelLocation;
 
     /**
-     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
+     * Load the dependency to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
-    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
-    protected String posMappingLocation;
+    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = ComponentParameters.PARAM_DEPENDENCY_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_DEPENDENCY_MAPPING_LOCATION, mandatory = false)
+    protected String dependencyMappingLocation;
 
     /**
      * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
@@ -137,8 +140,8 @@ public class UDPipeParser
             }
         };
         
-        mappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
-                language, modelProvider);
+        mappingProvider = MappingProviderFactory.createDependencyMappingProvider(
+                dependencyMappingLocation, language, modelProvider);
     }
 
     @Override

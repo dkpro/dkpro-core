@@ -23,7 +23,6 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -34,7 +33,6 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class UDPipeParserTest
 {
-    @Ignore("Models not packaged yet")
     @Test
     public void testEnglish()
         throws Exception
@@ -43,34 +41,30 @@ public class UDPipeParserTest
                 + "contains as many constituents and dependencies as possible .");
 
         String[] dependencies = {
-                "[  0,  2]Dependency(nsubj) D[0,2](We) G[3,7](need)",
+                "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
                 "[  3,  7]ROOT(root) D[3,7](need) G[3,7](need)",
-                "[  8,  9]Dependency(det) D[8,9](a) G[35,43](sentence)",
-                "[ 10, 14]Dependency(advmod) D[10,14](very) G[35,43](sentence)",
-                "[ 15, 26]Dependency(amod) D[15,26](complicated) G[35,43](sentence)",
-                "[ 27, 34]Dependency(compound) D[27,34](example) G[35,43](sentence)",
-                "[ 35, 43]Dependency(dobj) D[35,43](sentence) G[3,7](need)",
-                "[ 44, 45]Dependency(punct) D[44,45](,) G[35,43](sentence)",
-                "[ 46, 51]Dependency(nsubj) D[46,51](which) G[52,60](contains)",
-                "[ 52, 60]Dependency(root) D[52,60](contains) G[44,45](,)",
-                "[ 61, 63]Dependency(advmod) D[61,63](as) G[86,98](dependencies)",
-                "[ 64, 68]Dependency(amod) D[64,68](many) G[86,98](dependencies)",
-                "[ 69, 81]Dependency(compound) D[69,81](constituents) G[86,98](dependencies)",
-                "[ 82, 85]Dependency(cc) D[82,85](and) G[86,98](dependencies)",
-                "[ 86, 98]Dependency(dobj) D[86,98](dependencies) G[52,60](contains)",
-                "[ 99,101]Dependency(mark) D[99,101](as) G[102,110](possible)",
-                "[102,110]Dependency(advcl) D[102,110](possible) G[86,98](dependencies)",
-                "[111,112]Dependency(punct) D[111,112](.) G[102,110](possible)" };
+                "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
+                "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
+                "[ 15, 26]AMOD(amod) D[15,26](complicated) G[35,43](sentence)",
+                "[ 27, 34]NN(compound) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]DOBJ(dobj) D[35,43](sentence) G[3,7](need)",
+                "[ 44, 45]PUNCT(punct) D[44,45](,) G[35,43](sentence)",
+                "[ 46, 51]NSUBJ(nsubj) D[46,51](which) G[52,60](contains)",
+                "[ 52, 60]Dependency(acl:relcl) D[52,60](contains) G[35,43](sentence)",
+                "[ 61, 63]ADVMOD(advmod) D[61,63](as) G[64,68](many)",
+                "[ 64, 68]AMOD(amod) D[64,68](many) G[69,81](constituents)",
+                "[ 69, 81]DOBJ(dobj) D[69,81](constituents) G[52,60](contains)",
+                "[ 82, 85]CC(cc) D[82,85](and) G[69,81](constituents)",
+                "[ 86, 98]CONJ(conj) D[86,98](dependencies) G[69,81](constituents)",
+                "[ 99,101]MARK(mark) D[99,101](as) G[102,110](possible)",
+                "[102,110]ADVCL(advcl) D[102,110](possible) G[52,60](contains)",
+                "[111,112]PUNCT(punct) D[111,112](.) G[3,7](need)" };
 
-        String[] unmappedDep = {};
+        //String[] unmappedDep = {};
 
         AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
-//        AssertAnnotations.assertTagset(UDPipePosTagger.class, POS.class, "ptb", PTB_POS_TAGS, jcas);
-//        AssertAnnotations.assertTagset(UDPipeParser.class, POS.class, "ptb", PTB_POS_TAGS,
-//                jcas);
-//        AssertAnnotations.assertTagset(UDPipeParser.class, Dependency.class,
-//                "stanford341", STANFORD_DEPENDENCY_TAGS, jcas);
-//        AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford341", unmappedDep, jcas);
+        //AssertAnnotations.assertTagsetMapping(POS.class, "ud", unmappedDep, jcas);
+        //AssertAnnotations.assertTagsetMapping(Dependency.class, "universal", unmappedDep, jcas);
     }
 
     private JCas runTest(String aLanguage, String aVariant, String aText, Object... aExtraParams)

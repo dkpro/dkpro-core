@@ -51,7 +51,13 @@
             variant="ud" 
             extension="udpipe">
             <metadata>
-                <entry key="pos.tagset" value="ptb"/>
+            	<entry key="DC.title" value="Universal Dependencies 1.2 (160523) Models for UDPipe"/>
+        	    <entry key="DC.creator" value="Milan Straka"/>
+        	    <entry key="DC.identifier" value="http://hdl.handle.net/11234/1-1659#english-ud-1.2-160523.udpipe"/>
+        	    <entry key="DC.rights" value="http://creativecommons.org/licenses/by-nc-sa/4.0/"/>
+        	    <entry key="pos.tagset" value="ptb"/>
+                <entry key="pos.coarse.tagset" value="ud"/>
+                <entry key="dependency.tagset" value="universal"/>
             </metadata>
         </install-stub-and-upstream-file>
 	</target>

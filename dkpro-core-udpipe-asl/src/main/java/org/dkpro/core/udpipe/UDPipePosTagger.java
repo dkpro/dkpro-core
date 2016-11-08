@@ -49,7 +49,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * Part-of-Speech, lemmatizer, and morphological analyzer using UDPipe.
+ * Part-of-Speech, lemmatizer, and morphological analyzer using UDPipe. UDPipe uses MorphoDiTa for
+ * this task, a Morphological Dictionary and Tagger.
+ * 
+ * @see <a href="https://github.com/ufal/udpipe/tree/master/src/morphodita">MorphoDiTa in UDPipe</a>
  */
 @TypeCapability(
         inputs = { 

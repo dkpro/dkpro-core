@@ -80,7 +80,21 @@
       <artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-udpipe-model-multiple-en-ud</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.dkpro.core</groupId>
+        <artifactId>dkpro-core-udpipe-model-multiple-en-ud</artifactId>
+        <version>20160523.1</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <build>
     <pluginManagement>
       <plugins>
@@ -89,8 +103,10 @@
           <artifactId>maven-dependency-plugin</artifactId>
           <configuration>
             <usedDependencies combine.children="append">
-              <!-- Binaries are not detected as a direct dependency due to plugin mechanism -->
+              <!-- Binaries are not detected as a direct dependency -->
               <usedDependency>org.dkpro.core:dkpro-core-udpipe-bin</usedDependency>
+              <!-- Models are not detected as a direct dependency -->
+              <usedDependency>org.dkpro.core:dkpro-core-udpipe-model-multiple-en-ud</usedDependency>
             </usedDependencies>
           </configuration>
         </plugin>

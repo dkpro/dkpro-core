@@ -76,7 +76,7 @@ public class UDPipe2DKPro
 
             if (StringUtils.isNotBlank(w.getForm())) {
                 MorphologicalFeatures morph = new MorphologicalFeatures(aJCas, t.getBegin(), t.getEnd());
-                morph.setValue(w.getLemma());
+                morph.setValue(w.getFeats());
                 morph.addToIndexes();
                 t.setMorph(morph);
             }
@@ -96,8 +96,8 @@ public class UDPipe2DKPro
                 int govId = w.getHead();
 
                 // Model the root as a loop onto itself
-                makeDependency(aJCas, govId, depId, w.getDeprel(), DependencyFlavor.BASIC,
-                        tokens);
+                makeDependency(mappingProvider, aJCas, govId, depId, w.getDeprel(),
+                        DependencyFlavor.BASIC, tokens);
             }
             
             if (StringUtils.isNotBlank(w.getDeps())) {
@@ -109,16 +109,19 @@ public class UDPipe2DKPro
                     int depId = w.getId();
                     int govId = Integer.valueOf(sItem[0]);
 
-                    makeDependency(aJCas, govId, depId, sItem[1], DependencyFlavor.ENHANCED,
-                            tokens);
+                    makeDependency(mappingProvider, aJCas, govId, depId, sItem[1],
+                            DependencyFlavor.ENHANCED, tokens);
                 }
             }
         }
     }
     
-    private static Dependency makeDependency(JCas aJCas, int govId, int depId, String label,
-            String flavor, List<Token> tokens)
+    private static Dependency makeDependency(MappingProvider mappingProvider, JCas aJCas, int govId,
+            int depId, String label, String flavor, List<Token> tokens)
     {
+        // write dependency information as annotation to JCas
+        Type depRel = mappingProvider.getTagType(label);
+        
         Dependency rel;
 
         if (govId == 0) {
@@ -127,7 +130,7 @@ public class UDPipe2DKPro
             rel.setDependent(tokens.get(depId - 1));
         }
         else {
-            rel = new Dependency(aJCas);
+            rel = (Dependency) aJCas.getCas().createFS(depRel);
             rel.setGovernor(tokens.get(govId - 1));
             rel.setDependent(tokens.get(depId - 1));
         }
