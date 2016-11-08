@@ -28,6 +28,7 @@ public class ResourceMetadata
     private static final String DEPENDENCY = "dependency";
     private static final String MORPH = "morph";
     private static final String POS = "pos";
+    private static final String POS_COARSE = "pos.coarse";
     
     private static final String CITE = "cite";
     private static final String BIBTEX = "bibtex";
@@ -43,6 +44,7 @@ public class ResourceMetadata
     public static final String META_DEPENDENCY_TAGSET = DEPENDENCY + SEP + TAGSET;
     public static final String META_MORPH_TAGSET = MORPH + SEP + TAGSET;
     public static final String META_POS_TAGSET = POS + SEP + TAGSET;
+    public static final String META_POS_COARSE_TAGSET = POS_COARSE + SEP + TAGSET;
 
     public static final String META_MODEL_ENCODING = MODEL + SEP + ENCODING;
 
