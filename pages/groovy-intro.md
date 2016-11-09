@@ -14,7 +14,7 @@ These steps install the basis system requirements needed to implement DKPro Core
    * Download and install the Java SE Development Kit 7 from the [Oracle Java Site][1]
    * Windows: download and run the Windows Installer from the [Groovy homepage][2]
    * Linux/OS X: Open a terminal which we will use to install Groovy using [gvm][3]
-      * `curl -s get.gvmtool.net | bash`
+      * `curl -s "https://get.sdkman.io" | bash`
       * Open a new terminal window to activate gvm and in the new window enter
       * `gvm install groovy`
 
