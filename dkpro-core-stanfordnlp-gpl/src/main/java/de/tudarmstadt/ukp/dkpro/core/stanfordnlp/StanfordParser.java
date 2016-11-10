@@ -98,7 +98,8 @@ import edu.stanford.nlp.util.Filters;
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
                 "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" },
         outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent"}
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"}
 )
 public class StanfordParser
     extends JCasAnnotator_ImplBase
