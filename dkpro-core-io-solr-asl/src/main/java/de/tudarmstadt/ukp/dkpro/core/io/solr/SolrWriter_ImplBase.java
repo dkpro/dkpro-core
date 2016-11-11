@@ -204,6 +204,15 @@ public abstract class SolrWriter_ImplBase
         return idField;
     }
 
+    /**
+    *
+    * @return the SolrClient
+    */
+    public SolrClient getSolrClient()
+    {
+        return solrClient;
+    }
+
     abstract protected SolrInputDocument generateSolrDocument(JCas aJCas)
         throws AnalysisEngineProcessException;
 
