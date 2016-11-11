@@ -31,8 +31,9 @@ public class SolrUtils
     /**
      * The modifiers available for Solr atomic updates: SET, ADD, INC, REMOVE, REMOVEREGEX.
      *
+     * @see <a href=https://cwiki.apache.org/confluence/display/solr/Updating+Parts+of+Documents#UpdatingPartsofDocuments-AtomicUpdates>Updating Parts of Documents</a>
      * @see <a
-     * href="http://wiki.apache.org/solr/Atomic_Updates">http://wiki.apache.org/solr/Atomic_Updates</a>
+     * href="http://wiki.apache.org/solr/Atomic_Updates">Atomic Updates </a>
      */
     public enum Modifier
     {
@@ -62,6 +63,7 @@ public class SolrUtils
      * @param update    if true, use Solr atomic update mechanism; otherwise overwrite
      * @param modifier  The {@link Modifier} to use for updating a document (only used if {@code update}
      *                  is true).
+     * @see Modifier
      * @see #setField(SolrInputDocument, String, Object, boolean)
      */
     public static void setField(SolrInputDocument document, String fieldname, Object value,
@@ -83,6 +85,7 @@ public class SolrUtils
      * @param value     the value to insert for the field.
      * @param update    if true, use Solr atomic update mechanism; otherwise overwrite
      * @see #setField(SolrInputDocument, String, Object, boolean, Modifier)
+     * @see Modifier
      */
     public static void setField(SolrInputDocument document, String fieldname, Object value,
             boolean update)
