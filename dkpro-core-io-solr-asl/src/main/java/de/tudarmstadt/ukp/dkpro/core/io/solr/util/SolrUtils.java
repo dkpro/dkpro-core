@@ -33,7 +33,7 @@ public class SolrUtils
      *
      * @see <a href=https://cwiki.apache.org/confluence/display/solr/Updating+Parts+of+Documents#UpdatingPartsofDocuments-AtomicUpdates>Updating Parts of Documents</a>
      * @see <a
-     * href="http://wiki.apache.org/solr/Atomic_Updates">Atomic Updates </a>
+     * href="http://wiki.apache.org/solr/Atomic_Updates">Atomic Updates</a>
      */
     public enum Modifier
     {
