@@ -20,9 +20,6 @@ package de.tudarmstadt.ukp.dkpro.core.io.solr.util;
 import org.apache.commons.collections4.map.SingletonMap;
 import org.apache.solr.common.SolrInputDocument;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Helper utilities.
  */
@@ -41,36 +38,24 @@ public class SolrUtils
     }
 
     private static final Modifier DEFAULT_MODIFIER = Modifier.SET;
-    private static final Map<Modifier, String> modifierMap = new HashMap<Modifier, String>()
-    {
-        private static final long serialVersionUID = 1791784069195163737L;
-
-        {
-            put(Modifier.SET, "set");
-            put(Modifier.ADD, "add");
-            put(Modifier.INC, "inc");
-            put(Modifier.REMOVE, "remove");
-            put(Modifier.REMOVEREGEX, "removeregex");
-        }
-    };
 
     /**
-     * Add a field and optionally update if applicable. Updates can be "set", "add", or "inc".
+     * Add a field and optionally perform a partial update if applicable on an existing document.
      *
      * @param document  the {@link SolrInputDocument} to add/update
      * @param fieldname the field name to add/update
      * @param value     the value to insert for the field.
-     * @param update    if true, use Solr atomic update mechanism; otherwise overwrite
-     * @param modifier  The {@link Modifier} to use for updating a document (only used if {@code update}
-     *                  is true).
-     * @see Modifier
+     * @param update    if true, use Solr atomic update mechanism; otherwise overwrite document
+     * @param modifier  The {@link Modifier} to use when performing an atomic update (i.e. iff {@code update}
+     *                  is set to true).
      * @see #setField(SolrInputDocument, String, Object, boolean)
      */
     public static void setField(SolrInputDocument document, String fieldname, Object value,
             boolean update, Modifier modifier)
     {
         if (update) {
-            document.setField(fieldname, new SingletonMap<>(modifierMap.get(modifier), value));
+            /* perform an atomic update on potentially existing document */
+            document.setField(fieldname, new SingletonMap<>(modifier.name().toLowerCase(), value));
         }
         else {
             document.setField(fieldname, value);
@@ -78,12 +63,12 @@ public class SolrUtils
     }
 
     /**
-     * Add a field and optionally update, using the default atomic update operation ("set").
+     * Add a field and optionally perform a partial update on an existing document, using the default atomic update operation ("set").
      *
      * @param document  the {@link SolrInputDocument} to add/update
      * @param fieldname the field name to add/update
      * @param value     the value to insert for the field.
-     * @param update    if true, use Solr atomic update mechanism; otherwise overwrite
+     * @param update    if true, use Solr atomic update mechanism; otherwise overwrite existing document
      * @see #setField(SolrInputDocument, String, Object, boolean, Modifier)
      * @see Modifier
      */
