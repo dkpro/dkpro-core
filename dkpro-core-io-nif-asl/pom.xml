@@ -26,7 +26,6 @@
   </parent>
   <groupId>org.dkpro.core</groupId>
   <artifactId>dkpro-core-io-nif-asl</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <name>DKPro Core ASL - IO - NIF</name>
   <dependencies>
     <dependency>
