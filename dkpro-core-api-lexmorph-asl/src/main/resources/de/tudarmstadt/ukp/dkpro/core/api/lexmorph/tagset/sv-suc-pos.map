@@ -9,35 +9,57 @@ __META_SOURCE_URL__.1=http://stp.lingfil.uu.se/~nivre/swedish_treebank/pos.html
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # AB	Adverb
+AB=ADV
 # DT	Determiner
+DT=DET
 # HA	WH-adverb
+HA=ADV
 # HD	WH-determiner
+HD=DET
 # HP	WH-pronoun
+HP=PRON
 # HS	WH-possessive
+HS=PRON
 # IE	Infinitival marker
 # IN	Interjection
 IN=INTJ
 # JJ	Adjective
+JJ=ADJ
 # KN	Coordinating conjunction
+KN=CONJ
 # NN	Noun
+NN=NOUN
 # PC	Participle
+PC=VERB
 # PL	Particle
+PL=PART
 # PM	Proper Noun
+PM=PROPN
 # PN	Pronoun
+PN=PRON
 # PP	Preposition
+PP=ADP
 # PS	Possessive pronoun
+PS=PRON
 # RG	Cardinal number
+RG=NUM
 # RO	Ordinal number
+RO=NUM
 # SN	Subordinating conjunction
+SN=SCONJ
 # VB	Verb
+VB=VERB
 # 
 # == Supplementary Tag ==
 # UO	Foreign word
 # 
 # == Delimiters ==
 # MAD	Major delimiter
+MAD=PUNCT
 # MID	Minor delimiter
+MID=PUNCT
 # PAD	Pairwise delimiter
+PAD=PUNCT
 
 # Catch-all rule
 *=X
