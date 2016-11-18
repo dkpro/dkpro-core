@@ -19,11 +19,13 @@ package org.dkpro.core.io.lxf;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
 
+import org.junit.Rule;
 import org.junit.Test;
+
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class LxfReaderWriterTest
 {
-
     @Test
     public void roundTripText()
         throws Exception
@@ -79,4 +81,7 @@ public class LxfReaderWriterTest
                 LxfWriter.class, // the writer
                 "lxf/tokenizer-repp-hunpos-bn/ref.lxf", "lxf/tokenizer-repp-hunpos-bn/orig.lxf");
     }
+
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }
