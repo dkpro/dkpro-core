@@ -26,6 +26,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.LanguageCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -41,6 +42,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 /**
  * Detect grammatical errors in text using CoGrOO.
  */
+@LanguageCapability("pt")
 @TypeCapability(
 	    outputs = {
 		    "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.GrammarAnomaly" })

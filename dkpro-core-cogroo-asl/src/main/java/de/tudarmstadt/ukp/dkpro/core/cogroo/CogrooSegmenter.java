@@ -26,6 +26,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.LanguageCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -44,6 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 /**
  * Tokenizer and sentence splitter using CoGrOO.
  */
+@LanguageCapability("pt")
 @TypeCapability(
 	    outputs = {
 	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
