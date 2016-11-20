@@ -21,12 +21,19 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
+
+import com.ibm.icu.text.BreakIterator;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
@@ -36,7 +43,26 @@ import de.tudarmstadt.ukp.dkpro.core.testing.harness.SegmenterHarness;
 public
 class BreakIteratorSegmenterTest
 {
-	@Test
+    @Ignore("Only needed to get the list of the supported languages for the @LanguageCapability")
+    @Test
+    public void listLocales() throws Exception
+    {
+        List<String> supportedLanguages = Arrays.stream(BreakIterator.getAvailableLocales())
+            .map(l -> l.getLanguage())
+            .distinct()
+            .sorted()
+            .filter(lang -> lang.length() == 2)
+            .collect(Collectors.toList());
+        
+        System.out.printf("[");
+        for (String l : supportedLanguages) {
+            System.out.printf("\"%s\", ", l);
+        }
+        System.out.printf("]");
+    }
+    
+
+    @Test
 	public void run() throws Throwable
 	{
 		AnalysisEngineDescription aed = createEngineDescription(BreakIteratorSegmenter.class);

@@ -21,6 +21,7 @@ import java.text.BreakIterator;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.LanguageCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
@@ -30,6 +31,15 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 /**
  * BreakIterator segmenter.
  */
+@LanguageCapability({ "af", "ak", "am", "ar", "as", "az", "be", "bg", "bm", "bn", "bo", "br", "bs",
+        "ca", "ce", "cs", "cy", "da", "de", "dz", "ee", "el", "en", "eo", "es", "et", "eu", "fa",
+        "ff", "fi", "fo", "fr", "fy", "ga", "gd", "gl", "gu", "gv", "ha", "hi", "hr", "hu", "hy",
+        "ig", "ii", "in", "is", "it", "iw", "ja", "ji", "ka", "ki", "kk", "kl", "km", "kn", "ko",
+        "ks", "kw", "ky", "lb", "lg", "ln", "lo", "lt", "lu", "lv", "mg", "mk", "ml", "mn", "mr",
+        "ms", "mt", "my", "nb", "nd", "ne", "nl", "nn", "om", "or", "os", "pa", "pl", "ps", "pt",
+        "qu", "rm", "rn", "ro", "ru", "rw", "se", "sg", "si", "sk", "sl", "sn", "so", "sq", "sr",
+        "sv", "sw", "ta", "te", "th", "ti", "to", "tr", "ug", "uk", "ur", "uz", "vi", "yo", "zh",
+        "zu" })
 @TypeCapability(
     outputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",

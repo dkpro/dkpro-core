@@ -33,7 +33,7 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
-import com.ibm.icu.util.ULocale;
+import com.ibm.icu.text.BreakIterator;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -47,9 +47,10 @@ public class IcuSegmenterTest
     @Test
     public void listLocales() throws Exception
     {
-        List<String> supportedLanguages = Arrays.stream(ULocale.getAvailableLocales())
+        List<String> supportedLanguages = Arrays.stream(BreakIterator.getAvailableLocales())
             .map(l -> l.getLanguage())
             .distinct()
+            .sorted()
             .filter(lang -> lang.length() == 2)
             .collect(Collectors.toList());
         
