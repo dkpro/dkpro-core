@@ -21,6 +21,7 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
+import java.text.BreakIterator;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,8 +33,6 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-
-import com.ibm.icu.text.BreakIterator;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
