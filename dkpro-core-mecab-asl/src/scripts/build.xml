@@ -54,8 +54,8 @@
 		    folder="target/lib/ipadic"
 			groupId="de.tudarmstadt.ukp.dkpro.core"
 			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.mecab" 
-			metadataversion="0"
-			upstreamversion="20070801"
+			metaDataVersion="0"
+			upstreamVersion="20070801"
 			tool="tagger"
 			language="jp"
 			variant="ipadic"/>
@@ -74,8 +74,8 @@
 		    folder="target/bin/linux-x86_32"
 			groupId="de.tudarmstadt.ukp.dkpro.core"
 			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.mecab" 
-			metadataversion="0"
-			upstreamversion="20140917"
+			metaDataVersion="0"
+			upstreamVersion="20140917"
 			tool="tagger"
 			language="jp"
 			variant="bin-linux-x86_32"/>
@@ -84,8 +84,8 @@
 		    folder="target/bin/linux-x86_64"
 			groupId="de.tudarmstadt.ukp.dkpro.core"
 			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.mecab" 
-			metadataversion="0"
-			upstreamversion="20140917"
+			metaDataVersion="0"
+			upstreamVersion="20140917"
 			tool="tagger"
 			language="jp"
 			variant="bin-linux-x86_64"/>
@@ -94,8 +94,8 @@
 		    folder="target/bin/osx-x86_64"
 			groupId="de.tudarmstadt.ukp.dkpro.core"
 			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.mecab" 
-			metadataversion="0"
-			upstreamversion="20140917"
+			metaDataVersion="0"
+			upstreamVersion="20140917"
 			tool="tagger"
 			language="jp"
 			variant="bin-osx-x86_64"/>

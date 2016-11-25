@@ -86,8 +86,8 @@
             folder="target/download/tmp"
             groupId="de.tudarmstadt.ukp.dkpro.core"
             artifactIdBase="de.tudarmstadt.ukp.dkpro.core.gate" 
-            metadataversion="0"
-            upstreamversion="20160531"
+            metaDataVersion="0"
+            upstreamVersion="20160531"
             tool="tagger"
             language="en"
             variant="annie">
