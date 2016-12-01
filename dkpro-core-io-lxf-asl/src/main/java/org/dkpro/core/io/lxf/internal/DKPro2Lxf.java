@@ -174,6 +174,9 @@ public class DKPro2Lxf
                 // as well
                 POS pos = token.getPos();
                 LxfNode morphNode = null;
+                
+                boolean newMorphNode = false;
+                
                 if (pos != null) {
                     if ((aSource == null || needsExport(aJCas, pos))) {
                         morphNode = new LxfNode(LAYER_MORPHOLOGY, toolid,
@@ -182,7 +185,7 @@ public class DKPro2Lxf
                         aTarget.addNode(morphNode);
                         aTarget.addEdge(new LxfEdge(morphNode.getOrigin(),
                                 toolEdgeIndex.nextIndex(toolid), 0, morphNode, tokenNode));
-
+                        newMorphNode = true;
                         // Need to remember this because we may want to connect the dependencies to
                         // this node
                         idxMorph.put(token, morphNode);
@@ -197,14 +200,14 @@ public class DKPro2Lxf
                 if (lemma != null && (aSource == null || needsExport(aJCas, lemma))) {
                     // If we have created a sharable morphNode, reuse it here, otherwise create a
                     // new node
-                    LxfNode lemmaNode = morphNode;
+                    LxfNode lemmaNode = newMorphNode ? morphNode : null; 
                     if (lemmaNode == null) {
                         lemmaNode = new LxfNode(LAYER_MORPHOLOGY, toolid,
                                 toolNodeIndex.nextIndex(toolid), 0);
                         aTarget.addNode(lemmaNode);
                         aTarget.addEdge(new LxfEdge(lemmaNode.getOrigin(),
                                 toolEdgeIndex.nextIndex(toolid), 0, lemmaNode, tokenNode));
-                        idxMorph.put(token, lemmaNode);
+                        //idxMorph.put(token, lemmaNode);
                     }
                     lemmaNode.setFeature(FEAT_LEMMA, token.getPos().getPosValue());
                 }
