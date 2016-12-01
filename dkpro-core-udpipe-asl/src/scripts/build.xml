@@ -32,7 +32,7 @@
 		<antcall target="separate-jars"/>
 	</target>
 	
-	<target name="separate-jars" depends="install-executables,en"/>
+	<target name="separate-jars" depends="install-executables,en,no"/>
 
     <target name="en">
         <antcall target="en-ud"/>
@@ -61,6 +61,34 @@
             </metadata>
         </install-stub-and-upstream-file>
 	</target>
+
+	<target name="no">
+         <antcall target="no-ud"/>
+	</target>
+
+	<target name="no-ud" depends="download-models">
+	    <install-stub-and-upstream-file 
+	    	file="target/download/models/norwegian-ud-1.2-160523.udpipe" 
+	        md5="e716342ba6b61a0fe832139e690a7452"
+	        groupId="org.dkpro.core" 
+	        artifactIdBase="dkpro-core-udpipe"
+	        upstreamVersion="20160523"
+	        metaDataVersion="1"
+	        tool="multiple" 
+	        language="no" 
+	        variant="ud" 
+	        extension="udpipe">
+	        <metadata>
+	            <entry key="DC.title" value="Universal Dependencies 1.2 (160523) Models for UDPipe"/>
+                <entry key="DC.creator" value="Milan Straka"/>
+                <entry key="DC.identifier" value="http://hdl.handle.net/11234/1-1659#english-ud-1.2-160523.udpipe"/>
+                <entry key="DC.rights" value="http://creativecommons.org/licenses/by-nc-sa/4.0/"/>
+                <entry key="pos.tagset" value="ud"/>
+                <entry key="pos.coarse.tagset" value="ud"/>
+                <entry key="dependency.tagset" value="universal"/>
+            </metadata>
+	    </install-stub-and-upstream-file>
+    </target>
 	
     <target name="-check-download-binaries">
         <available property="download-binaries.DONE" file="target/download/binaries/DONE"/>
