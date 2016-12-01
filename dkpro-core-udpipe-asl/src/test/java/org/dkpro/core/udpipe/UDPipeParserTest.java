@@ -33,6 +33,28 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class UDPipeParserTest
 {
+    
+    @Test
+    public void testNorwegian()
+        throws Exception
+    {
+        JCas jcas = runTest("no", null, "Nichlas Sjøstedt Halvorsen har ikke angret.");
+
+        String[] dependencies = {"[  0,  7]Dependency(nsubj) D[0,7](Nichlas) G[36,43](angret.)",
+                                 "[  8, 16]Dependency(name) D[8,16](Sjøstedt) G[0,7](Nichlas)",
+                                 "[ 17, 26]Dependency(name) D[17,26](Halvorsen) G[0,7](Nichlas)",
+                                 "[ 27, 30]Dependency(aux) D[27,30](har) G[36,43](angret.)",
+                                 "[ 31, 35]Dependency(neg) D[31,35](ikke) G[36,43](angret.)",
+                                 "[ 36, 43]ROOT(advmod) D[36,43](angret.) G[36,43](angret.)"};
+
+        //String[] unmappedDep = {};
+
+        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+        //AssertAnnotations.assertTagsetMapping(POS.class, "ud", unmappedDep, jcas);
+        //AssertAnnotations.assertTagsetMapping(Dependency.class, "universal", unmappedDep, jcas);
+    }
+
+    
     @Test
     public void testEnglish()
         throws Exception
