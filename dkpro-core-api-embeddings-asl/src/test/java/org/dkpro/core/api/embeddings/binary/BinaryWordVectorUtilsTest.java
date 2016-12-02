@@ -36,7 +36,7 @@ import static org.junit.Assert.assertTrue;
 
 public class BinaryWordVectorUtilsTest
 {
-    // TODO: test for very large date (>2GB should be chunked)
+    // TODO: test for very large data (>2GB should be chunked)
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
     private Map<String, float[]> vectors;

@@ -63,16 +63,17 @@ public class TextFormatVectorizer
     /**
      * Load a text-format embeddings file.
      *
-     * @param f             the {@link File} containing the embeddings in text format
-     * @param hasHeaderLine if true, the first line in the file is expected to be a header line
+     * @param embeddingsFile the {@link File} containing the embeddings in text format
+     * @param hasHeaderLine  if true, the first line in the file is expected to be a header line
      * @return a new {@link TextFormatVectorizer}
      * @throws IOException if an I/O error occurs
      */
-    public static Vectorizer load(File f, boolean hasHeaderLine)
+    @SuppressWarnings("WeakerAccess")
+    public static Vectorizer load(File embeddingsFile, boolean hasHeaderLine)
             throws IOException
     {
         return new TextFormatVectorizer(
-                TextFormatVectorizerUtils.readEmbeddingFileTxt(f, hasHeaderLine));
+                TextFormatVectorizerUtils.readEmbeddingFileTxt(embeddingsFile, hasHeaderLine));
     }
 
     @Override public float[] vectorize(String token)

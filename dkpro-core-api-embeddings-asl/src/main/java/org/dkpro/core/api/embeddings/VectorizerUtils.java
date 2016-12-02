@@ -24,6 +24,9 @@ import java.util.Random;
  */
 public class VectorizerUtils
 {
+    /**
+     * This seed determines the outcome of {@link #randomVector(int)}.
+     */
     private static final int RANDOM_SEED = 12345;
 
     /**
@@ -46,6 +49,8 @@ public class VectorizerUtils
     /**
      * Create a random vector, calling {@link #randomVector(int, long)} with a
      * stable random seed, i.e. always generating the same output.
+     * <p>
+     * Use {@link #randomVector(int, long)} to generate varying random vectors.
      *
      * @param aSize the size of the vector
      * @return a float[] of the specified size.

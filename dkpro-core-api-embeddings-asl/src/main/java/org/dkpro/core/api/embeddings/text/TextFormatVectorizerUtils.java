@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * Helper Methods for reading word embeddings.
+ * Helper Methods for reading word embeddings from text format file and converting into binary format.
  */
 public class TextFormatVectorizerUtils
 {

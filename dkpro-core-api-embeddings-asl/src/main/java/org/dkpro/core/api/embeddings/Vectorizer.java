@@ -21,6 +21,9 @@ import java.io.IOException;
 
 /**
  * An interface for vectorizers mapping tokens to embedding vectors.
+ *
+ * @see org.dkpro.core.api.embeddings.binary.BinaryVectorizer
+ * @see org.dkpro.core.api.embeddings.text.TextFormatVectorizer
  */
 public interface Vectorizer
 {

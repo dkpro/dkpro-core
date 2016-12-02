@@ -57,8 +57,7 @@ public class BinaryVectorizer
         // Integers can address up to 2 GB (Integer.MAX_VALUE) - to handle large embeddings
         // files, we partition the file into parts of up to 2 GB each.
         maxVectorsPerPartition = Integer.MAX_VALUE / (header.getVectorLength() * Float.BYTES);
-        int maxPartitionSizeBytes =
-                maxVectorsPerPartition * header.getVectorLength() * Float.BYTES;
+        int maxPartitionSizeBytes = maxVectorsPerPartition * header.getVectorLength() * Float.BYTES;
         int neededPartitions = aWords.length / maxVectorsPerPartition;
         if (aWords.length % maxPartitionSizeBytes > 0) {
             neededPartitions += 1;
@@ -73,8 +72,7 @@ public class BinaryVectorizer
                 length = (aWords.length % maxVectorsPerPartition) * header.getVectorLength()
                         * Float.BYTES;
             }
-            parts[i] = channel.map(FileChannel.MapMode.READ_ONLY, start, length)
-                    .asFloatBuffer();
+            parts[i] = channel.map(FileChannel.MapMode.READ_ONLY, start, length).asFloatBuffer();
         }
     }
 

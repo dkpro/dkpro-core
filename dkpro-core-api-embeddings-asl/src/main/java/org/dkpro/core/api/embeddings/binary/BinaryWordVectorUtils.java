@@ -28,7 +28,10 @@ import java.util.Map;
 import static org.dkpro.core.api.embeddings.binary.BinaryVectorizer.Header;
 
 /**
- * Utility Methods for working with binary dl4j word vector files
+ * Utility Methods for working with binary dl4j word vector files.
+ * <p>
+ * The core of this code has been written in the context of <a href="https://deeplearning4j.org/">dl4j</a>,
+ * but provides a generic solution to efficiently storing and reading word embeddings with a memory-mapped file.
  *
  * @author Paul Dubs
  * @author Richard Eckart de Castilho
