@@ -72,4 +72,6 @@ public class PhraseAnnotatorTest
                     .allMatch(sentence::contains));
         }
     }
+
+    // TODO: implement test for other covering type parameter values
 }

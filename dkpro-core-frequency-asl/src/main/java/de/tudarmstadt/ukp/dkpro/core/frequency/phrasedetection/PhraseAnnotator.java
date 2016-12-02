@@ -61,14 +61,6 @@ public class PhraseAnnotator
     private static final String DEFAULT_FEATURE_PATH = Token.class.getCanonicalName();
 
     /**
-     * The covering type to use for building multiple sequences per document, e.g. sentences.
-     * TODO: implement covering type
-     */
-    //    public static final String PARAM_COVERING_TYPE = "coveringType";
-    //    @ConfigurationParameter(name = PARAM_COVERING_TYPE, mandatory = false)
-    //    private String coveringType;
-
-    /**
      * If true, lowercase everything.
      */
     public static final String PARAM_LOWERCASE = "PARAM_LOWERCASE";
@@ -205,7 +197,7 @@ public class PhraseAnnotator
                             newPhrase = new LexicalPhrase(aJCas, phrase1.getBegin(),
                                     phrase2.getEnd());
                             newPhrase.setText(bigram);
-                            i++;    // skip following token
+                            i++;    // skip succeeding token
                         }
                     }
                 }
