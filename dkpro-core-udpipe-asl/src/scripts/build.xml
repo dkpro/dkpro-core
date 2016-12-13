@@ -23,7 +23,7 @@
 	</import>
 	
 	<target name="local-maven">
-		<property name="install-artifact-enable" value="true"/>
+		<property name="install-artifact-mode" value="local"/>
 		<antcall target="separate-jars"/>
 	</target>
 	
@@ -202,7 +202,7 @@
             version="${version.bin}"/>
 
         <install-artifact 
-            file="target/dkpro-core-udpipe-bin-bin-${version.bin}.jar"
+            file="target/dkpro-core-udpipe-bin-${version.bin}.jar"
             groupId="org.dkpro.core"
             artifactId="dkpro-core-udpipe-bin" 
             version="${version.bin}"/>
