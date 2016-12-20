@@ -36,7 +36,7 @@
 		<antcall target="separate-jars"/>
 	</target>
 
-	<target name="separate-jars" depends="check-license,install-executables,bg,de,en,es,et,fi,fr,gl,it,la,mn,nl,pl,pt,ru,sk,sl,sw,zh,jar-notice"/>
+	<target name="separate-jars" depends="check-license,install-executables,bg,de,en,es,et,fi,fr,gl,it,la,mn,nl,pl,pt,sk,sl,sw,zh,jar-notice"/>
 
 	<target name="bg">
 		<antcall target="bg-tagger-le"/>
@@ -833,13 +833,12 @@
 		  -->
 		<!-- FILE: tree-tagger-MacOSX-3.2-intel.tar.gz - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2010-11-19 | 2012-04-25 | 076c8002337b89a9a8581aae81d5d481
-		  - 2012-04-25 | 2016-11-24 | a47bac91b5f373c5ba8703faa5ec7dd7 : buffer flush after 10 lines with -prob 
-		  - 2016-11-24 | now        | 0b6d122c1b66ecc557cb856f44041368 : The file name is changed from tree-tagger-MacOSX-3.2-intel.tar.gz to tree-tagger-MacOSX-3.2.tar.gz
+		  - 2012-04-25 | now        | a47bac91b5f373c5ba8703faa5ec7dd7 : buffer flush after 10 lines with -prob 
 		  -->
-		<install-executable-file-tar url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-MacOSX-3.2.tar.gz"
-			platform="osx-x86_64" file="tree-tagger" md5="0b6d122c1b66ecc557cb856f44041368"/>
-		<install-executable-file-tar url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-MacOSX-3.2.tar.gz"
-			platform="osx-x86_32" file="tree-tagger" md5="0b6d122c1b66ecc557cb856f44041368"/>
+		<install-executable-file-tar url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-MacOSX-3.2-intel.tar.gz"
+			platform="osx-x86_64" file="tree-tagger" md5="a47bac91b5f373c5ba8703faa5ec7dd7"/>
+		<install-executable-file-tar url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-MacOSX-3.2-intel.tar.gz"
+			platform="osx-x86_32" file="tree-tagger" md5="a47bac91b5f373c5ba8703faa5ec7dd7"/>
 		
 		<!-- FILE: tree-tagger-MacOSX-3.2.tar.gz - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2010-11-19 | now        | 63560dcb3a5932bc5ae0e9aab8f48e42
