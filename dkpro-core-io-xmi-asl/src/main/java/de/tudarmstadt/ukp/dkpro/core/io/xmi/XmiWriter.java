@@ -49,6 +49,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 public class XmiWriter
 	extends JCasFileWriter_ImplBase
 {
+    public static final String PARAM_PRETTY_PRINT = "prettyPrint";
+    @ConfigurationParameter(name = PARAM_PRETTY_PRINT, mandatory = true, defaultValue = "true")
+    private boolean prettyPrint;
+    
 	/**
 	 * Location to write the type system to. If this is not set, a file called typesystem.xml will
 	 * be written to the XMI output path. If this is set, it is expected to be a file relative
@@ -78,7 +82,7 @@ public class XmiWriter
         throws AnalysisEngineProcessException
     {
         try (OutputStream docOS = getOutputStream(aJCas, ".xmi")) {
-            XmiCasSerializer.serialize(aJCas.getCas(), docOS);
+            XmiCasSerializer.serialize(aJCas.getCas(), null, docOS, prettyPrint, null);
 
             if (!typeSystemWritten || typeSystemFile == null) {
                 writeTypeSystem(aJCas);
