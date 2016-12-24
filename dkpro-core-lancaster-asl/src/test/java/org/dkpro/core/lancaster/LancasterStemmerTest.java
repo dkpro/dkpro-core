@@ -48,6 +48,35 @@ public class LancasterStemmerTest
     }
 
     @Test
+    public void testEnglishWithDefaultRulesConfiguration()
+        throws Exception
+    {
+        runTest("en", "proceed",
+                new String[] {"process"}
+        );
+    }
+
+    @Test
+    public void testEnglishWithClassPathRulesConfiguration()
+        throws Exception
+    {
+        runTest("en", "proceed",
+                new String[] {"procee"}, // using default rules the expected would be process
+                LancasterStemmer.PARAM_CUSTOM_RULES, "classpath:Lancaster_test_rules.txt"
+        );
+    }
+
+    @Test
+    public void testEnglishWithFilePathRulesConfiguration()
+        throws Exception
+    {
+        runTest("en", "proceed",
+                new String[] {"procee"}, // using default rules the expected would be process
+                LancasterStemmer.PARAM_CUSTOM_RULES, "file:src/test/resources/Lancaster_test_rules.txt"
+        );
+    }
+
+    @Test
     public void testEnglishCaseInsensitive()
         throws Exception
     {

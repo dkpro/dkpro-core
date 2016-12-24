@@ -33,6 +33,12 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Collections;
 import java.util.Locale;
 import java.util.Set;
@@ -40,8 +46,6 @@ import java.util.Set;
 /**
  * This Paice/Husk Lancaster stemmer implementation only works with the English language so far.
  */
-// TODO: The wrapped Lancaster stemmer of the Smile API should be enhanced to support custom rules
-// files.
 public class LancasterStemmer
     extends FeaturePathAnnotatorBase
 {
@@ -54,6 +58,15 @@ public class LancasterStemmer
     public static final String PARAM_STRIP_PREFIXES = "stripPrefix";
     @ConfigurationParameter(name = PARAM_STRIP_PREFIXES, mandatory = false, defaultValue = "false")
     private boolean stripPrefix;
+
+    /**
+     * Specifies an URI from where to load a custom rules file. This URI can be an URL supported by
+     * the standard JDK URL loader or the "classpath" protocol can be used to specify a resource in
+     * the class path, e.g. "classpath:my/path/to/the/rules".
+     */
+    public static final String PARAM_CUSTOM_RULES = "customRules";
+    @ConfigurationParameter(name = PARAM_CUSTOM_RULES, mandatory = false)
+    private String customRules;
 
     @Override
     protected Set<String> getDefaultPaths()
@@ -82,8 +95,28 @@ public class LancasterStemmer
                     new Object[] { lang });
         }
 
-        smile.nlp.stemmer.LancasterStemmer stemmer = new smile.nlp.stemmer.LancasterStemmer(
-                stripPrefix);
+        smile.nlp.stemmer.LancasterStemmer stemmer;
+        if(customRules != null) {
+            try {
+                URI uri = new URI(customRules);
+                InputStream resourceStream;
+                if("classpath".equals(uri.getScheme())){
+                    resourceStream = Thread.currentThread().getContextClassLoader()
+                            .getResourceAsStream(uri.getSchemeSpecificPart());
+                } else {
+                    resourceStream = uri.toURL().openStream();
+                }
+                stemmer = new smile.nlp.stemmer.LancasterStemmer(resourceStream, stripPrefix);
+            } catch (MalformedURLException e) {
+                throw new AnalysisEngineProcessException(e);
+            } catch (IOException e) {
+                throw new AnalysisEngineProcessException(e);
+            } catch (URISyntaxException e) {
+                throw new AnalysisEngineProcessException(e);
+            }
+        } else {
+            stemmer = new smile.nlp.stemmer.LancasterStemmer(stripPrefix);
+        }
 
         for (String path : paths) {
             // Separate Typename and featurepath
