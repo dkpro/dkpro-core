@@ -213,6 +213,15 @@ extends JCasAnnotator_ImplBase
 		}
 	}
 
+	/**
+	 * @deprecated use {@link #createToken(JCas, int, int)}
+	 */
+	@Deprecated
+    protected Token createToken(final JCas aJCas, final int aBegin, final int aEnd, final int aIndex)
+    {
+        return createToken(aJCas, null, aBegin, aEnd);
+    }
+    
     protected Token createToken(final JCas aJCas, final int aBegin, final int aEnd)
     {
         return createToken(aJCas, null, aBegin, aEnd);

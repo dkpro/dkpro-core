@@ -57,7 +57,7 @@ public class XmiWriterReaderTest
 				TextReader.class,
 				ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "src/test/resources/texts",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String [] {
-					ResourceCollectionReaderBase.INCLUDE_PREFIX+"*.txt"
+					ResourceCollectionReaderBase.INCLUDE_PREFIX + "latin.txt"
 				},
 				ResourceCollectionReaderBase.PARAM_LANGUAGE, "latin");
 
@@ -67,7 +67,7 @@ public class XmiWriterReaderTest
 
 		runPipeline(textReader, xmiWriter);
 
-		assertTrue(new File(testFolder.getRoot(), "example1.txt.xmi").exists());
+		assertTrue(new File(testFolder.getRoot(), "latin.txt.xmi").exists());
 	}
 
 	public void read() throws Exception
@@ -82,7 +82,7 @@ public class XmiWriterReaderTest
 		CAS cas = CasCreationUtils.createCas(createTypeSystemDescription(), null, null);
 		xmiReader.getNext(cas);
 
-		String refText = readFileToString(new File("src/test/resources/texts/example1.txt"));
+		String refText = readFileToString(new File("src/test/resources/texts/latin.txt"));
 		assertEquals(refText, cas.getDocumentText());
 		assertEquals("latin", cas.getDocumentLanguage());
 	}
