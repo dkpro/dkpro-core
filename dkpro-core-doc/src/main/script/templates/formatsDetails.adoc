@@ -101,30 +101,22 @@ out.print escapeJava((paramValues[it.key][0].value != null ?
 <%
 def mimetypes = it.value.readerSpec.collectionReaderMetaData?.capabilities?.collect { 
         it.mimeTypesSupported }.flatten().sort().unique();
-        
-if (mimetypes) {
-%>
-.Media Types
-[options="header", role="small"]
-|====
-|Media type
-<% mimetypes.each { mimetype -> %>
-|${mimetype}
-
-<% } // mimetypes.each { mimetype -> %>
-|====
-<% } // if (mimetypes) %>
-
-
-<%
 def outputs = it.value.readerSpec.collectionReaderMetaData?.capabilities?.collect { 
         it.outputs?.collect { it.name  } }.flatten().sort().unique();
-
-if (outputs) {
 %>
-.Outputs
-[cols="h,v", role="small"]
+
+.Capabilities
+[cols="1h,2v", role="small"]
 |====
+| Media types 
+| <% 
+if (mimetypes) { 
+  mimetypes.each { out.println it };
+} else { 
+  out.println '__none specified__';
+}
+%>
+
 | Outputs
 | <% 
 if (outputs) { 
@@ -134,8 +126,6 @@ if (outputs) {
 }
 %>
 |====
-<% } // outputs %>
-
 <% } // if (it.value.readerSpec) %>
 
 <% if (it.value.writerSpec) { %>
@@ -186,30 +176,22 @@ out.print escapeJava((paramValues[it.key][0].value != null ?
 <%
 def mimetypes = it.value.writerSpec.analysisEngineMetaData?.capabilities?.collect { 
         it.mimeTypesSupported }.flatten().sort().unique();
-
-if (mimetypes) {
-%>
-.Media types
-[options="header", role="small"]
-|====
-|Media type
-<% mimetypes.each { mimetype -> %>
-|${mimetype}
-
-<% } // mimetypes.each { mimetype -> %>
-|====
-<% } // if (mimetypes) %>
-
-<%
 def inputs = it.value.writerSpec.analysisEngineMetaData?.capabilities?.collect { 
         it.inputs?.collect { it.name  } }.flatten().sort().unique();
-
-if (inputs) {
 %>
-.Inputs
-[cols="h,v", role="small"]
+.Capabilities
+[cols="1h,2v", role="small"]
 |====
-| Inputs 
+| Media types 
+| <% 
+if (mimetypes) { 
+  mimetypes.each { out.println it };
+} else { 
+  out.println '__none specified__';
+}
+%>
+
+| Inputs
 | <% 
 if (inputs) { 
   inputs.each { out.println Util.typeLink(it) };
@@ -218,8 +200,6 @@ if (inputs) {
 }
 %>
 |====
-<% } // inputs %>
-
 <% } // if (it.value.writerSpec) %>
 
 <% } // format %>

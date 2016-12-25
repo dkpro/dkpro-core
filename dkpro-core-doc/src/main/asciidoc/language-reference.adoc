@@ -1,4 +1,4 @@
-// Copyright 2015
+// Copyright 2016
 // Ubiquitous Knowledge Processing (UKP) Lab
 // Technische Universität Darmstadt
 // 
@@ -14,29 +14,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
     
-= DKPro Core™ Component Reference
+= DKPro Core™ Language Reference
 :Author: The DKPro Core Team
-:toc-title: Components
+:toc-title: Languages
+:docinfo:
 
-The document provides detailed information about the DKPro Core UIMA components.
+The document provides information about the languages supported directly by components or through
+models.
 
 == Overview
-
-* <<sect_componentsOverview,Components>>
-** <<sect_componentsProducersConsumers,Components by types they produce and consume>>
-
-<<<
-
-[[sect_componentsOverview]]
-== Analytics components
-
-include::{generated-dir}componentsOverview.adoc[]
-
-include::{generated-dir}componentsDetails.adoc[]
-
-<<<
+include::{generated-dir}languagesDetails.adoc[]
 
 == Appendix
+include::{generated-dir}languagesOverview.adoc[]
 
-[[sect_componentsProducersConsumers]]
-include::{generated-dir}componentsProducersConsumers.adoc[]
