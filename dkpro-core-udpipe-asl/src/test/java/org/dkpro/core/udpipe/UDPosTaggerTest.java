@@ -37,10 +37,12 @@ public class UDPosTaggerTest
     public void testNorwegian()
         throws Exception
     {
-        // N.B. This test is incomplete as I am not sure how exactly the POS should be.
-        runTest("no", null, "Magnus Carlsen trengte bare de fire partiene med lynsjakk for å slå utfordreren Sergej Karjakin.",
-                new String[] { "PROPN", "PROPN", "VERB", "ADV", "DET", "NUM", "NOUN", "ADP", "NOUN", "ADP", "PART", "VERB", "NOUN", "PROPN", "PROPN" },
-                new String[] { "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS" });
+        runTest("no", null,
+                "Magnus Carlsen trengte bare de fire partiene med lynsjakk for å slå utfordreren Sergej Karjakin.",
+                new String[] { "PROPN", "PROPN", "VERB", "ADV", "DET", "NUM", "NOUN", "ADP", "NOUN",
+                        "ADP", "PART", "VERB", "NOUN", "PROPN", "PROPN" },
+                new String[] { "PROPN", "PROPN", "VERB", "ADV", "DET", "NUM", "NOUN", "ADP", "NOUN",
+                        "ADP", "PART", "VERB", "NOUN", "PROPN", "PROPN" });
     }
     
     @Test
