@@ -36,14 +36,17 @@ import org.apache.uima.cas.impl.CASMgrSerializer;
 import org.apache.uima.cas.impl.TypeSystemImpl;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.util.CasIOUtils;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 
 /**
  * UIMA Binary CAS formats reader.
  */
+@MimeTypeCapability({ MimeTypes.APPLICATION_X_UIMA_BINARY })
 public class BinaryCasReader
     extends ResourceCollectionReaderBase
 {
