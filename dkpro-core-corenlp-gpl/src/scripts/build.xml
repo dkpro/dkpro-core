@@ -174,7 +174,7 @@
             metaDataVersion="1"
             tool="depparser" 
             language="en" 
-            variant="wsj-sd" 
+            variant="wsj-ud" 
             extension="gz">     
             <metadata>
                 <entry key="pos.tagset" value="ptb"/>

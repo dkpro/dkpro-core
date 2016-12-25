@@ -174,6 +174,53 @@ public class CoreNlpDependencyParserTest
         AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford341", unmappedDep, jcas);
     }
 
+
+    @Test
+    public void testEnglishWsjUd()
+        throws Exception
+    {
+        JCas jcas = runTest("en", "wsj-ud", "We need a very complicated example sentence , which "
+                + "contains as many constituents and dependencies as possible .");
+
+        String[] dependencies = {
+                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(root,basic) D[3,7](need) G[3,7](need)",
+                "[  8,  9]DET(det,basic) D[8,9](a) G[35,43](sentence)",
+                "[ 10, 14]ADVMOD(advmod,basic) D[10,14](very) G[15,26](complicated)",
+                "[ 15, 26]AMOD(amod,basic) D[15,26](complicated) G[35,43](sentence)",
+                "[ 27, 34]NN(compound,basic) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]DOBJ(dobj,basic) D[35,43](sentence) G[3,7](need)",
+                "[ 44, 45]PUNCT(punct,basic) D[44,45](,) G[35,43](sentence)",
+                "[ 46, 51]NSUBJ(nsubj,basic) D[46,51](which) G[52,60](contains)",
+                "[ 52, 60]Dependency(acl:relcl,basic) D[52,60](contains) G[35,43](sentence)",
+                "[ 61, 63]PREP(case,basic) D[61,63](as) G[69,81](constituents)",
+                "[ 64, 68]AMOD(amod,basic) D[64,68](many) G[69,81](constituents)",
+                "[ 69, 81]Dependency(nmod:as,basic) D[69,81](constituents) G[52,60](contains)",
+                "[ 82, 85]CC(cc,basic) D[82,85](and) G[69,81](constituents)",
+                "[ 86, 98]CONJ(conj:and,basic) D[86,98](dependencies) G[69,81](constituents)",
+                "[ 99,101]PREP(case,basic) D[99,101](as) G[102,110](possible)",
+                "[102,110]Dependency(acl,basic) D[102,110](possible) G[69,81](constituents)",
+                "[111,112]PUNCT(punct,basic) D[111,112](.) G[3,7](need)" };
+
+        String[] depTags = { "acl", "acl:relcl", "advcl", "advmod", "amod", "appos", "aux",
+                "auxpass", "case", "cc", "cc:preconj", "ccomp", "compound", "compound:prt", "conj",
+                "cop", "csubj", "csubjpass", "dep", "det", "det:predet", "discourse", "dobj",
+                "expl", "iobj", "mark", "mwe", "neg", "nmod", "nmod:npmod", "nmod:poss",
+                "nmod:tmod", "nsubj", "nsubjpass", "nummod", "parataxis", "punct", "root",
+                "xcomp" };
+        
+        String[] unmappedDep = { "acl:relcl", "cc:preconj", "compound:prt", "det:predet",
+                "nmod:npmod", "nmod:poss", "nmod:tmod" };
+
+        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+        AssertAnnotations.assertTagset(CoreNlpPosTagger.class, POS.class, "ptb", PTB_POS_TAGS, jcas);
+        AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, POS.class, "ptb", PTB_POS_TAGS,
+                jcas);
+        AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, Dependency.class, "universal",
+                depTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Dependency.class, "universal", unmappedDep, jcas);
+    }
+
     @Test
     public void testFrenchUniversalDependencies()
         throws Exception
