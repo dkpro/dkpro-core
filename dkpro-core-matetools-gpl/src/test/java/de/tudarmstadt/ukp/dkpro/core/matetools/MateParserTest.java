@@ -51,21 +51,21 @@ public class MateParserTest
 				+ "möglichst viele Konstituenten und Dependenzen beinhaltet .");
 
         String[] dependencies = {
-                "[  0,  3]Dependency(SB) D[0,3](Wir) G[4,12](brauchen)",
-                "[  4, 12]ROOT(--) D[4,12](brauchen) G[4,12](brauchen)",
-                "[ 13, 16]Dependency(NK) D[13,16](ein) G[36,44](Beispiel)",
-                "[ 17, 21]Dependency(MO) D[17,21](sehr) G[22,35](kompliziertes)",
-                "[ 22, 35]Dependency(NK) D[22,35](kompliziertes) G[36,44](Beispiel)",
-                "[ 36, 44]DOBJ(OA) D[36,44](Beispiel) G[4,12](brauchen)",
-                "[ 45, 46]Dependency(--) D[45,46](,) G[36,44](Beispiel)",
-                "[ 47, 54]Dependency(SB) D[47,54](welches) G[101,111](beinhaltet)",
-                "[ 55, 64]Dependency(MO) D[55,64](möglichst) G[65,70](viele)",
-                "[ 65, 70]Dependency(NK) D[65,70](viele) G[71,84](Konstituenten)",
-                "[ 71, 84]DOBJ(OA) D[71,84](Konstituenten) G[101,111](beinhaltet)",
-                "[ 85, 88]Dependency(CD) D[85,88](und) G[71,84](Konstituenten)",
-                "[ 89,100]CONJ(CJ) D[89,100](Dependenzen) G[85,88](und)",
-                "[101,111]Dependency(RC) D[101,111](beinhaltet) G[36,44](Beispiel)",
-                "[112,113]Dependency(--) D[112,113](.) G[101,111](beinhaltet)" };
+                "[  0,  3]Dependency(SB,basic) D[0,3](Wir) G[4,12](brauchen)",
+                "[  4, 12]ROOT(--,basic) D[4,12](brauchen) G[4,12](brauchen)",
+                "[ 13, 16]Dependency(NK,basic) D[13,16](ein) G[36,44](Beispiel)",
+                "[ 17, 21]Dependency(MO,basic) D[17,21](sehr) G[22,35](kompliziertes)",
+                "[ 22, 35]Dependency(NK,basic) D[22,35](kompliziertes) G[36,44](Beispiel)",
+                "[ 36, 44]DOBJ(OA,basic) D[36,44](Beispiel) G[4,12](brauchen)",
+                "[ 45, 46]Dependency(--,basic) D[45,46](,) G[36,44](Beispiel)",
+                "[ 47, 54]Dependency(SB,basic) D[47,54](welches) G[101,111](beinhaltet)",
+                "[ 55, 64]Dependency(MO,basic) D[55,64](möglichst) G[65,70](viele)",
+                "[ 65, 70]Dependency(NK,basic) D[65,70](viele) G[71,84](Konstituenten)",
+                "[ 71, 84]DOBJ(OA,basic) D[71,84](Konstituenten) G[101,111](beinhaltet)",
+                "[ 85, 88]Dependency(CD,basic) D[85,88](und) G[71,84](Konstituenten)",
+                "[ 89,100]CONJ(CJ,basic) D[89,100](Dependenzen) G[85,88](und)",
+                "[101,111]Dependency(RC,basic) D[101,111](beinhaltet) G[36,44](Beispiel)",
+                "[112,113]Dependency(--,basic) D[112,113](.) G[101,111](beinhaltet)" };
 
         String[] posTags = { "$(", "$,", "$.", "ADJA", "ADJD", "ADV", "APPO", "APPR", "APPRART",
                 "APZR", "ART", "CARD", "END", "FM", "ITJ", "KOKOM", "KON", "KOUI", "KOUS", "MID",
