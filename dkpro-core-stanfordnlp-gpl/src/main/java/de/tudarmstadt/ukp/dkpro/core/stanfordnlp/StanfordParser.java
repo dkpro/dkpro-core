@@ -129,7 +129,7 @@ public class StanfordParser
         COLLAPSED_WITH_EXTRA,   // - none -     - typedDependenciesCollapsed(true)
         /**
          * Produce collapsed dependencies plus extra arcs for control relationships, etc.
-         * In this mode, depencendies are collapsed across coordination. This mode is supposed to
+         * In this mode, dependencies are collapsed across coordination. This mode is supposed to
          * produce the best syntactic and semantic representation of a sentence. The result
          * may not be a tree (may contain cycles), but is a directed graph.<br>
          * Corresponding parser option: {@code CCPropagated}
@@ -151,7 +151,9 @@ public class StanfordParser
          * </ol>
          * Corresponding parser option: {@code tree}
          */
-         TREE                    // tree         - typedDependencies(false) + collapseDependenciesTree(tdl)
+         TREE,                   // tree         - typedDependencies(false) + collapseDependenciesTree(tdl)
+         ENHANCED,               //
+         ENHANCED_PLUS_PLUS      //
     }
     
     /**
@@ -486,9 +488,17 @@ public class StanfordParser
         case CC_PROPAGATED_NO_EXTRA:
             dependencies = gs.typedDependenciesCCprocessed(false);
             break;
+        case ENHANCED:
+            dependencies = gs.typedDependenciesEnhanced();
+            break;
+        case ENHANCED_PLUS_PLUS:
+            dependencies = gs.typedDependenciesEnhancedPlusPlus();
+            break;
         case TREE:
             dependencies = gs.typedDependenciesCollapsedTree();
             break;
+        default:
+            throw new IllegalArgumentException("Unknown mode: [" + mode + "]");
         }
 
         for (TypedDependency currTypedDep : dependencies) {

@@ -44,7 +44,8 @@ public class AssumeResource
 
         // Handle default variants
         if (variant == null) {
-            String defModelsLoc = aPackage + "/lib/" + aTool + "-default-variants.map";
+            String pack = aClass.getPackage().getName().replace('.', '/');
+            String defModelsLoc = pack + "/lib/" + aTool + "-default-variants.map";
             Properties defaultVariants = PropertiesLoaderUtils.loadAllProperties(defModelsLoc);
             variant = defaultVariants.getProperty(aLanguage);
         }

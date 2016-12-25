@@ -92,6 +92,10 @@ public class StanfordPosTaggerTest
         		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
         		new String[] { "PRON",  "VERB",     "DET", "NOUN",   "PUNCT" });
 
+        runTest("de", "ud", "Das ist ein Test .",
+                new String[] { "PRON", "VERB", "DET", "NOUN", "PUNCT" },
+                new String[] { "PRON", "VERB", "DET", "NOUN", "PUNCT" });
+
         runTest("de", "hgc", "Das ist ein Test .",
         		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
         		new String[] { "PRON",  "VERB",     "DET", "NOUN",   "PUNCT" });

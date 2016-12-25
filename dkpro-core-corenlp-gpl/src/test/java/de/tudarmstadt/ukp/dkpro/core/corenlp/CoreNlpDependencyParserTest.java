@@ -70,21 +70,21 @@ public class CoreNlpDependencyParserTest
                 + "contains as many constituents and dependencies as possible .");
 
         String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
-                "[  3,  7]ROOT(root) D[3,7](need) G[3,7](need)",
-                "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
-                "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
-                "[ 15, 26]AMOD(amod) D[15,26](complicated) G[35,43](sentence)",
-                "[ 27, 34]NN(nn) D[27,34](example) G[35,43](sentence)",
-                "[ 35, 43]DOBJ(dobj) D[35,43](sentence) G[3,7](need)",
-                "[ 44, 45]PUNCT(punct) D[44,45](,) G[35,43](sentence)",
-                "[ 46, 51]NSUBJ(nsubj) D[46,51](which) G[52,60](contains)",
-                "[ 52, 60]RCMOD(rcmod) D[52,60](contains) G[35,43](sentence)",
-                "[ 64, 68]AMOD(amod) D[64,68](many) G[69,81](constituents)",
-                "[ 69, 81]PREP(prep_as) D[69,81](constituents) G[52,60](contains)",
-                "[ 86, 98]CONJ(conj_and) D[86,98](dependencies) G[69,81](constituents)",
-                "[102,110]PREP(prep_as) D[102,110](possible) G[69,81](constituents)",
-                "[111,112]PUNCT(punct) D[111,112](.) G[3,7](need)" };
+                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(root,basic) D[3,7](need) G[3,7](need)",
+                "[  8,  9]DET(det,basic) D[8,9](a) G[35,43](sentence)",
+                "[ 10, 14]ADVMOD(advmod,basic) D[10,14](very) G[15,26](complicated)",
+                "[ 15, 26]AMOD(amod,basic) D[15,26](complicated) G[35,43](sentence)",
+                "[ 27, 34]NN(nn,basic) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]DOBJ(dobj,basic) D[35,43](sentence) G[3,7](need)",
+                "[ 44, 45]PUNCT(punct,basic) D[44,45](,) G[35,43](sentence)",
+                "[ 46, 51]NSUBJ(nsubj,basic) D[46,51](which) G[52,60](contains)",
+                "[ 52, 60]RCMOD(rcmod,basic) D[52,60](contains) G[35,43](sentence)",
+                "[ 64, 68]AMOD(amod,basic) D[64,68](many) G[69,81](constituents)",
+                "[ 69, 81]PREP(prep_as,basic) D[69,81](constituents) G[52,60](contains)",
+                "[ 86, 98]CONJ(conj_and,basic) D[86,98](dependencies) G[69,81](constituents)",
+                "[102,110]PREP(prep_as,basic) D[102,110](possible) G[69,81](constituents)",
+                "[111,112]PUNCT(punct,basic) D[111,112](.) G[3,7](need)" };
 
         String[] unmappedDep = {};
 
@@ -105,24 +105,24 @@ public class CoreNlpDependencyParserTest
                 + "contains as many constituents and dependencies as possible .");
 
         String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
-                "[  3,  7]ROOT(root) D[3,7](need) G[3,7](need)",
-                "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
-                "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
-                "[ 15, 26]AMOD(amod) D[15,26](complicated) G[35,43](sentence)",
-                "[ 27, 34]NN(compound) D[27,34](example) G[35,43](sentence)",
-                "[ 35, 43]DOBJ(dobj) D[35,43](sentence) G[3,7](need)",
-                "[ 44, 45]PUNCT(punct) D[44,45](,) G[35,43](sentence)",
-                "[ 46, 51]NSUBJ(nsubj) D[46,51](which) G[52,60](contains)",
-                "[ 52, 60]Dependency(acl:relcl) D[52,60](contains) G[35,43](sentence)",
-                "[ 61, 63]PREP(case) D[61,63](as) G[69,81](constituents)",
-                "[ 64, 68]AMOD(amod) D[64,68](many) G[69,81](constituents)",
-                "[ 69, 81]Dependency(nmod:as) D[69,81](constituents) G[52,60](contains)",
-                "[ 82, 85]CC(cc) D[82,85](and) G[69,81](constituents)",
-                "[ 86, 98]CONJ(conj:and) D[86,98](dependencies) G[69,81](constituents)",
-                "[ 99,101]PREP(case) D[99,101](as) G[102,110](possible)",
-                "[102,110]Dependency(acl:as) D[102,110](possible) G[69,81](constituents)",
-                "[111,112]PUNCT(punct) D[111,112](.) G[3,7](need)" };
+                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(root,basic) D[3,7](need) G[3,7](need)",
+                "[  8,  9]DET(det,basic) D[8,9](a) G[35,43](sentence)",
+                "[ 10, 14]ADVMOD(advmod,basic) D[10,14](very) G[15,26](complicated)",
+                "[ 15, 26]AMOD(amod,basic) D[15,26](complicated) G[35,43](sentence)",
+                "[ 27, 34]NN(compound,basic) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]DOBJ(dobj,basic) D[35,43](sentence) G[3,7](need)",
+                "[ 44, 45]PUNCT(punct,basic) D[44,45](,) G[35,43](sentence)",
+                "[ 46, 51]NSUBJ(nsubj,basic) D[46,51](which) G[52,60](contains)",
+                "[ 52, 60]Dependency(acl:relcl,basic) D[52,60](contains) G[35,43](sentence)",
+                "[ 61, 63]PREP(case,basic) D[61,63](as) G[69,81](constituents)",
+                "[ 64, 68]AMOD(amod,basic) D[64,68](many) G[69,81](constituents)",
+                "[ 69, 81]Dependency(nmod:as,basic) D[69,81](constituents) G[52,60](contains)",
+                "[ 82, 85]CC(cc,basic) D[82,85](and) G[69,81](constituents)",
+                "[ 86, 98]CONJ(conj:and,basic) D[86,98](dependencies) G[69,81](constituents)",
+                "[ 99,101]PREP(case,basic) D[99,101](as) G[102,110](possible)",
+                "[102,110]Dependency(acl,basic) D[102,110](possible) G[69,81](constituents)",
+                "[111,112]PUNCT(punct,basic) D[111,112](.) G[3,7](need)" };
 
         String[] unmappedDep = { "acl:relcl", "cc:preconj", "compound:prt", "det:predet",
                 "nmod:npmod", "nmod:poss", "nmod:tmod" };
@@ -144,24 +144,24 @@ public class CoreNlpDependencyParserTest
                 + "contains as many constituents and dependencies as possible .");
 
         String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
-                "[  3,  7]ROOT(root) D[3,7](need) G[3,7](need)",
-                "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
-                "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
-                "[ 15, 26]AMOD(amod) D[15,26](complicated) G[35,43](sentence)",
-                "[ 27, 34]NN(nn) D[27,34](example) G[35,43](sentence)",
-                "[ 35, 43]DOBJ(dobj) D[35,43](sentence) G[3,7](need)",
-                "[ 44, 45]PUNCT(punct) D[44,45](,) G[35,43](sentence)",
-                "[ 46, 51]NSUBJ(nsubj) D[46,51](which) G[52,60](contains)",
-                "[ 52, 60]RCMOD(rcmod) D[52,60](contains) G[35,43](sentence)",
-                "[ 61, 63]PREP(prep) D[61,63](as) G[52,60](contains)",
-                "[ 64, 68]AMOD(amod) D[64,68](many) G[69,81](constituents)",
-                "[ 69, 81]POBJ(pobj) D[69,81](constituents) G[61,63](as)",
-                "[ 82, 85]CC(cc) D[82,85](and) G[69,81](constituents)",
-                "[ 86, 98]CONJ(conj:and) D[86,98](dependencies) G[69,81](constituents)",
-                "[ 99,101]PREP(prep) D[99,101](as) G[69,81](constituents)",
-                "[102,110]POBJ(pobj) D[102,110](possible) G[99,101](as)",
-                "[111,112]PUNCT(punct) D[111,112](.) G[3,7](need)" };
+                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(root,basic) D[3,7](need) G[3,7](need)",
+                "[  8,  9]DET(det,basic) D[8,9](a) G[35,43](sentence)",
+                "[ 10, 14]ADVMOD(advmod,basic) D[10,14](very) G[15,26](complicated)",
+                "[ 15, 26]AMOD(amod,basic) D[15,26](complicated) G[35,43](sentence)",
+                "[ 27, 34]NN(nn,basic) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]DOBJ(dobj,basic) D[35,43](sentence) G[3,7](need)",
+                "[ 44, 45]PUNCT(punct,basic) D[44,45](,) G[35,43](sentence)",
+                "[ 46, 51]NSUBJ(nsubj,basic) D[46,51](which) G[52,60](contains)",
+                "[ 52, 60]RCMOD(rcmod,basic) D[52,60](contains) G[35,43](sentence)",
+                "[ 61, 63]PREP(prep,basic) D[61,63](as) G[52,60](contains)",
+                "[ 64, 68]AMOD(amod,basic) D[64,68](many) G[69,81](constituents)",
+                "[ 69, 81]POBJ(pobj,basic) D[69,81](constituents) G[61,63](as)",
+                "[ 82, 85]CC(cc,basic) D[82,85](and) G[69,81](constituents)",
+                "[ 86, 98]CONJ(conj:and,basic) D[86,98](dependencies) G[69,81](constituents)",
+                "[ 99,101]PREP(prep,basic) D[99,101](as) G[69,81](constituents)",
+                "[102,110]POBJ(pobj,basic) D[102,110](possible) G[99,101](as)",
+                "[111,112]PUNCT(punct,basic) D[111,112](.) G[3,7](need)" };
 
         String[] unmappedDep = {};
 
@@ -183,29 +183,29 @@ public class CoreNlpDependencyParserTest
                 + "possible .");
 
         String[] dependencies = {
-                "[  0,  4]ROOT(root) D[0,4](Nous) G[0,4](Nous)",
-                "[  5, 10]NN(compound) D[5,10](avons) G[0,4](Nous)",
-                "[ 11, 17]DEP(dep) D[11,17](besoin) G[5,10](avons)",
-                "[ 18, 20]MWE(mwe) D[18,20](d') G[11,17](besoin)",
-                "[ 21, 24]DET(det) D[21,24](une) G[25,31](phrase)",
-                "[ 25, 31]PREP(case) D[25,31](phrase) G[18,20](d')",
-                "[ 32, 35]PREP(case) D[32,35](par) G[25,31](phrase)",
-                "[ 36, 43]PREP(case) D[36,43](exemple) G[32,35](par)",
-                "[ 44, 48]ADVMOD(advmod) D[44,48](très) G[49,58](compliqué)",
-                "[ 49, 58]AMOD(amod) D[49,58](compliqué) G[36,43](exemple)",
-                "[ 59, 60]PUNCT(punct) D[59,60](,) G[49,58](compliqué)",
-                "[ 61, 64]APPOS(appos) D[61,64](qui) G[59,60](,)",
-                "[ 65, 73]APPOS(appos) D[65,73](contient) G[61,64](qui)",
-                "[ 74, 77]DET(det) D[74,77](des) G[78,90](constituants)",
-                "[ 78, 90]Dependency(nmod) D[78,90](constituants) G[65,73](contient)",
-                "[ 91, 94]DEP(dep) D[91,94](que) G[78,90](constituants)",
-                "[ 95, 97]DET(det) D[95,97](de) G[109,120](dépendances)",
-                "[ 98,108]AMOD(amod) D[98,108](nombreuses) G[109,120](dépendances)",
-                "[109,120]Dependency(nmod) D[109,120](dépendances) G[91,94](que)",
-                "[121,123]CC(cc) D[121,123](et) G[109,120](dépendances)",
-                "[124,127]MWE(mwe) D[124,127](que) G[121,123](et)",
-                "[128,136]AMOD(amod) D[128,136](possible) G[124,127](que)",
-                "[137,138]CONJ(conj:et) D[137,138](.) G[109,120](dépendances)" };
+                "[  0,  4]ROOT(root,basic) D[0,4](Nous) G[0,4](Nous)",
+                "[  5, 10]NN(compound,basic) D[5,10](avons) G[0,4](Nous)",
+                "[ 11, 17]DEP(dep,basic) D[11,17](besoin) G[5,10](avons)",
+                "[ 18, 20]MWE(mwe,basic) D[18,20](d') G[11,17](besoin)",
+                "[ 21, 24]DET(det,basic) D[21,24](une) G[25,31](phrase)",
+                "[ 25, 31]PREP(case,basic) D[25,31](phrase) G[18,20](d')",
+                "[ 32, 35]PREP(case,basic) D[32,35](par) G[25,31](phrase)",
+                "[ 36, 43]PREP(case,basic) D[36,43](exemple) G[32,35](par)",
+                "[ 44, 48]ADVMOD(advmod,basic) D[44,48](très) G[49,58](compliqué)",
+                "[ 49, 58]AMOD(amod,basic) D[49,58](compliqué) G[36,43](exemple)",
+                "[ 59, 60]PUNCT(punct,basic) D[59,60](,) G[49,58](compliqué)",
+                "[ 61, 64]APPOS(appos,basic) D[61,64](qui) G[59,60](,)",
+                "[ 65, 73]APPOS(appos,basic) D[65,73](contient) G[61,64](qui)",
+                "[ 74, 77]DET(det,basic) D[74,77](des) G[78,90](constituants)",
+                "[ 78, 90]Dependency(nmod,basic) D[78,90](constituants) G[65,73](contient)",
+                "[ 91, 94]DEP(dep,basic) D[91,94](que) G[78,90](constituants)",
+                "[ 95, 97]DET(det,basic) D[95,97](de) G[109,120](dépendances)",
+                "[ 98,108]AMOD(amod,basic) D[98,108](nombreuses) G[109,120](dépendances)",
+                "[109,120]Dependency(nmod,basic) D[109,120](dépendances) G[91,94](que)",
+                "[121,123]CC(cc,basic) D[121,123](et) G[109,120](dépendances)",
+                "[124,127]MWE(mwe,basic) D[124,127](que) G[121,123](et)",
+                "[128,136]AMOD(amod,basic) D[128,136](possible) G[124,127](que)",
+                "[137,138]CONJ(conj:et,basic) D[137,138](.) G[109,120](dépendances)" };
 
         String[] depTags = { "acl", "acl:relcl", "advcl", "advmod", "amod", "appos", "aux",
                 "auxpass", "case", "cc", "ccomp", "compound", "conj", "cop", "csubj", "dep", "det",
@@ -232,23 +232,23 @@ public class CoreNlpDependencyParserTest
                 "我们 需要 一个 非常 复杂 的 句子 例如 其中 包含 许多 成分 和 尽可能 的 依赖 。");
 
         String[] dependencies = {
-                "[  0,  2]Dependency(SUB) D[0,2](我们) G[3,5](需要)",
-                "[  3,  5]ROOT(root) D[3,5](需要) G[3,5](需要)",
-                "[  6,  8]Dependency(AMOD) D[6,8](一个) G[12,14](复杂)",
-                "[  9, 11]Dependency(AMOD) D[9,11](非常) G[12,14](复杂)",
-                "[ 12, 14]Dependency(DEP) D[12,14](复杂) G[15,16](的)",
-                "[ 15, 16]Dependency(NMOD) D[15,16](的) G[17,19](句子)",
-                "[ 17, 19]Dependency(OBJ) D[17,19](句子) G[3,5](需要)",
-                "[ 20, 22]Dependency(VMOD) D[20,22](例如) G[26,28](包含)",
-                "[ 23, 25]Dependency(SUB) D[23,25](其中) G[26,28](包含)",
-                "[ 26, 28]Dependency(VMOD) D[26,28](包含) G[3,5](需要)",
-                "[ 29, 31]Dependency(NMOD) D[29,31](许多) G[32,34](成分)",
-                "[ 32, 34]Dependency(SUB) D[32,34](成分) G[43,45](依赖)",
-                "[ 35, 36]Dependency(VMOD) D[35,36](和) G[43,45](依赖)",
-                "[ 37, 40]Dependency(DEP) D[37,40](尽可能) G[41,42](的)",
-                "[ 41, 42]Dependency(VMOD) D[41,42](的) G[43,45](依赖)",
-                "[ 43, 45]Dependency(VMOD) D[43,45](依赖) G[26,28](包含)",
-                "[ 46, 47]Dependency(P) D[46,47](。) G[3,5](需要)" };
+                "[  0,  2]Dependency(SUB,basic) D[0,2](我们) G[3,5](需要)",
+                "[  3,  5]ROOT(root,basic) D[3,5](需要) G[3,5](需要)",
+                "[  6,  8]Dependency(AMOD,basic) D[6,8](一个) G[12,14](复杂)",
+                "[  9, 11]Dependency(AMOD,basic) D[9,11](非常) G[12,14](复杂)",
+                "[ 12, 14]Dependency(DEP,basic) D[12,14](复杂) G[15,16](的)",
+                "[ 15, 16]Dependency(NMOD,basic) D[15,16](的) G[17,19](句子)",
+                "[ 17, 19]Dependency(OBJ,basic) D[17,19](句子) G[3,5](需要)",
+                "[ 20, 22]Dependency(VMOD,basic) D[20,22](例如) G[26,28](包含)",
+                "[ 23, 25]Dependency(SUB,basic) D[23,25](其中) G[26,28](包含)",
+                "[ 26, 28]Dependency(VMOD,basic) D[26,28](包含) G[3,5](需要)",
+                "[ 29, 31]Dependency(NMOD,basic) D[29,31](许多) G[32,34](成分)",
+                "[ 32, 34]Dependency(SUB,basic) D[32,34](成分) G[43,45](依赖)",
+                "[ 35, 36]Dependency(VMOD,basic) D[35,36](和) G[43,45](依赖)",
+                "[ 37, 40]Dependency(DEP,basic) D[37,40](尽可能) G[41,42](的)",
+                "[ 41, 42]Dependency(VMOD,basic) D[41,42](的) G[43,45](依赖)",
+                "[ 43, 45]Dependency(VMOD,basic) D[43,45](依赖) G[26,28](包含)",
+                "[ 46, 47]Dependency(P,basic) D[46,47](。) G[3,5](需要)" };
 
         String[] depTags = { "AMOD", "DEP", "NMOD", "OBJ", "P", "PMOD", "PRD", "ROOT", "SBAR",
                 "SUB", "VC", "VMOD" };
@@ -273,6 +273,113 @@ public class CoreNlpDependencyParserTest
     }
 
     @Test
+    public void testChinesePtbConllDependencies()
+        throws Exception
+    {
+        JCas jcas = runTest("zh", "ptb-conll", 
+                "我们 需要 一个 非常 复杂 的 句子 例如 其中 包含 许多 成分 和 尽可能 的 依赖 。");
+
+        // This output is bogus because the tagger we use here produced ctb tags and the model 
+        // expects ptb tags. However, I didn't find any pos tagger model for chinese that produces
+        // the ptb tags...
+        String[] dependencies = {
+                "[  0,  2]ROOT(root,basic) D[0,2](我们) G[0,2](我们)",
+                "[  3,  5]Dependency(COORD,basic) D[3,5](需要) G[0,2](我们)",
+                "[  6,  8]Dependency(COORD,basic) D[6,8](一个) G[3,5](需要)",
+                "[  9, 11]Dependency(COORD,basic) D[9,11](非常) G[6,8](一个)",
+                "[ 12, 14]Dependency(COORD,basic) D[12,14](复杂) G[9,11](非常)",
+                "[ 15, 16]Dependency(COORD,basic) D[15,16](的) G[12,14](复杂)",
+                "[ 17, 19]Dependency(COORD,basic) D[17,19](句子) G[15,16](的)",
+                "[ 20, 22]Dependency(COORD,basic) D[20,22](例如) G[17,19](句子)",
+                "[ 23, 25]Dependency(COORD,basic) D[23,25](其中) G[20,22](例如)",
+                "[ 26, 28]Dependency(COORD,basic) D[26,28](包含) G[23,25](其中)",
+                "[ 29, 31]Dependency(NMOD,basic) D[29,31](许多) G[32,34](成分)",
+                "[ 32, 34]Dependency(VMOD,basic) D[32,34](成分) G[41,42](的)",
+                "[ 35, 36]Dependency(COORD,basic) D[35,36](和) G[32,34](成分)",
+                "[ 37, 40]Dependency(CONJ,basic) D[37,40](尽可能) G[35,36](和)",
+                "[ 41, 42]Dependency(COORD,basic) D[41,42](的) G[26,28](包含)",
+                "[ 43, 45]Dependency(NMOD,basic) D[43,45](依赖) G[46,47](。)",
+                "[ 46, 47]Dependency(VMOD,basic) D[46,47](。) G[41,42](的)" };
+
+        String[] depTags = { "AMOD", "APPO", "CONJ", "COORD", "DEP", "IM", "NAME", "NMOD", "P",
+                "PMOD", "PRN", "PRT", "ROOT", "SUB", "SUFFIX", "VC", "VMOD" };
+        
+        String[] posTags = { "AD", "AS", "BA", "CC", "CD", "CS", "DEC", "DEG", "DER", "DEV", "DT",
+                "ETC", "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "NN", "NR", "NT", "OD", "ON", "P",
+                "PN", "PU", "SB", "SP", "URL", "VA", "VC", "VE", "VV", "X" };
+        
+        String[] unmappedDep = {};
+
+        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+        AssertAnnotations.assertTagset(CoreNlpPosTagger.class, POS.class, "ctb", posTags, jcas);
+        // There are some minor differences between the tags produced by the POS tagger and the
+        // tags expected by the parser model. We need a better test here that makes these differences
+        // more visible and at the same time doesn't fail.
+        //AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, POS.class, "ctb", posTags,
+        //        jcas);
+        AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, Dependency.class, "conll2008",
+                depTags, jcas);
+        AssertAnnotations.assertTagsetMapping(CoreNlpDependencyParser.class, Dependency.class,
+                "conll2008", unmappedDep, jcas);
+    }
+
+    @Test
+    public void testChineseUniversalDependencies()
+        throws Exception
+    {
+        JCas jcas = runTest("zh", "ud", 
+                "我们 需要 一个 非常 复杂 的 句子 例如 其中 包含 许多 成分 和 尽可能 的 依赖 。");
+
+        String[] dependencies = {
+                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](我们) G[3,5](需要)",
+                "[  3,  5]ROOT(root,basic) D[3,5](需要) G[3,5](需要)",
+                "[  6,  8]DEP(dep,basic) D[6,8](一个) G[17,19](句子)",
+                "[  9, 11]ADVMOD(advmod,basic) D[9,11](非常) G[12,14](复杂)",
+                "[ 12, 14]AMOD(amod,basic) D[12,14](复杂) G[17,19](句子)",
+                "[ 15, 16]MARK(mark,basic) D[15,16](的) G[12,14](复杂)",
+                "[ 17, 19]NSUBJ(nsubj,basic) D[17,19](句子) G[26,28](包含)",
+                "[ 20, 22]ADVMOD(advmod,basic) D[20,22](例如) G[26,28](包含)",
+                "[ 23, 25]NSUBJ(nsubj,basic) D[23,25](其中) G[26,28](包含)",
+                "[ 26, 28]CCOMP(ccomp,basic) D[26,28](包含) G[3,5](需要)",
+                "[ 29, 31]DEP(dep,basic) D[29,31](许多) G[32,34](成分)",
+                "[ 32, 34]CONJ(conj:和,basic) D[32,34](成分) G[43,45](依赖)",
+                "[ 35, 36]CC(cc,basic) D[35,36](和) G[43,45](依赖)",
+                "[ 37, 40]ADVMOD(advmod:dvp,basic) D[37,40](尽可能) G[43,45](依赖)",
+                "[ 41, 42]MARK(mark,basic) D[41,42](的) G[37,40](尽可能)",
+                "[ 43, 45]DOBJ(dobj,basic) D[43,45](依赖) G[26,28](包含)",
+                "[ 46, 47]PUNCT(punct,basic) D[46,47](。) G[3,5](需要)" };
+
+        String[] depTags = { "acl", "advcl:loc", "advmod", "advmod:dvp", "advmod:loc",
+                "advmod:rcomp", "amod", "amod:ordmod", "appos", "aux:asp", "aux:ba", "aux:modal",
+                "aux:prtmod", "auxpass", "case", "cc", "ccomp", "compound:nn", "compound:vc",
+                "conj", "cop", "dep", "det", "discourse", "dobj", "erased", "etc", "mark",
+                "mark:clf", "name", "neg", "nmod", "nmod:assmod", "nmod:poss", "nmod:prep",
+                "nmod:range", "nmod:tmod", "nmod:topic", "nsubj", "nsubj:xsubj", "nsubjpass",
+                "nummod", "parataxis:prnmod", "punct", "root", "xcomp" };
+        
+        String[] posTags = { "AD", "AS", "BA", "CC", "CD", "CS", "DEC", "DEG", "DER", "DEV", "DT",
+                "ETC", "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "NN", "NR", "NT", "OD", "ON", "P",
+                "PN", "PU", "SB", "SP", "URL", "VA", "VC", "VE", "VV", "X" };
+        
+        String[] unmappedDep = { "advcl:loc", "advmod:dvp", "advmod:loc", "advmod:rcomp",
+                "amod:ordmod", "aux:asp", "aux:ba", "aux:modal", "aux:prtmod", "compound:nn",
+                "compound:vc", "erased", "etc", "mark:clf", "nmod:assmod", "nmod:poss", "nmod:prep",
+                "nmod:range", "nmod:tmod", "nmod:topic", "nsubj:xsubj", "parataxis:prnmod" };
+
+        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+        AssertAnnotations.assertTagset(CoreNlpPosTagger.class, POS.class, "ctb", posTags, jcas);
+        // There are some minor differences between the tags produced by the POS tagger and the
+        // tags expected by the parser model. We need a better test here that makes these differences
+        // more visible and at the same time doesn't fail.
+        //AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, POS.class, "ctb", posTags,
+        //        jcas);
+        AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, Dependency.class, "universal",
+                depTags, jcas);
+        AssertAnnotations.assertTagsetMapping(CoreNlpDependencyParser.class, Dependency.class,
+                "universal", unmappedDep, jcas);
+    }
+
+    @Test
     public void testEnglishPtbConllDependencies()
         throws Exception
     {
@@ -281,24 +388,24 @@ public class CoreNlpDependencyParserTest
                         + "contains as many constituents and dependencies as possible .");
 
         String[] dependencies = {
-                "[  0,  2]Dependency(VMOD) D[0,2](We) G[3,7](need)",
-                "[  3,  7]ROOT(root) D[3,7](need) G[3,7](need)",
-                "[  8,  9]Dependency(NMOD) D[8,9](a) G[35,43](sentence)",
-                "[ 10, 14]Dependency(AMOD) D[10,14](very) G[15,26](complicated)",
-                "[ 15, 26]Dependency(NMOD) D[15,26](complicated) G[35,43](sentence)",
-                "[ 27, 34]Dependency(NMOD) D[27,34](example) G[35,43](sentence)",
-                "[ 35, 43]Dependency(VMOD) D[35,43](sentence) G[3,7](need)",
-                "[ 44, 45]Dependency(P) D[44,45](,) G[35,43](sentence)",
-                "[ 46, 51]Dependency(VMOD) D[46,51](which) G[52,60](contains)",
-                "[ 52, 60]Dependency(NMOD) D[52,60](contains) G[35,43](sentence)",
-                "[ 61, 63]Dependency(VMOD) D[61,63](as) G[52,60](contains)",
-                "[ 64, 68]Dependency(NMOD) D[64,68](many) G[69,81](constituents)",
-                "[ 69, 81]Dependency(PMOD) D[69,81](constituents) G[61,63](as)",
-                "[ 82, 85]Dependency(COORD) D[82,85](and) G[69,81](constituents)",
-                "[ 86, 98]Dependency(CONJ) D[86,98](dependencies) G[82,85](and)",
-                "[ 99,101]Dependency(NMOD) D[99,101](as) G[69,81](constituents)",
-                "[102,110]Dependency(PMOD) D[102,110](possible) G[99,101](as)",
-                "[111,112]Dependency(P) D[111,112](.) G[3,7](need)" };
+                "[  0,  2]Dependency(VMOD,basic) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(root,basic) D[3,7](need) G[3,7](need)",
+                "[  8,  9]Dependency(NMOD,basic) D[8,9](a) G[35,43](sentence)",
+                "[ 10, 14]Dependency(AMOD,basic) D[10,14](very) G[15,26](complicated)",
+                "[ 15, 26]Dependency(NMOD,basic) D[15,26](complicated) G[35,43](sentence)",
+                "[ 27, 34]Dependency(NMOD,basic) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]Dependency(VMOD,basic) D[35,43](sentence) G[3,7](need)",
+                "[ 44, 45]Dependency(P,basic) D[44,45](,) G[35,43](sentence)",
+                "[ 46, 51]Dependency(VMOD,basic) D[46,51](which) G[52,60](contains)",
+                "[ 52, 60]Dependency(NMOD,basic) D[52,60](contains) G[35,43](sentence)",
+                "[ 61, 63]Dependency(VMOD,basic) D[61,63](as) G[52,60](contains)",
+                "[ 64, 68]Dependency(NMOD,basic) D[64,68](many) G[69,81](constituents)",
+                "[ 69, 81]Dependency(PMOD,basic) D[69,81](constituents) G[61,63](as)",
+                "[ 82, 85]Dependency(COORD,basic) D[82,85](and) G[69,81](constituents)",
+                "[ 86, 98]Dependency(CONJ,basic) D[86,98](dependencies) G[82,85](and)",
+                "[ 99,101]Dependency(NMOD,basic) D[99,101](as) G[69,81](constituents)",
+                "[102,110]Dependency(PMOD,basic) D[102,110](possible) G[99,101](as)",
+                "[111,112]Dependency(P,basic) D[111,112](.) G[3,7](need)" };
 
         String[] depTags = { "AMOD", "APPO", "CONJ", "COORD", "DEP", "IM", "NAME", "NMOD", "P",
                 "PMOD", "PRN", "PRT", "ROOT", "SUB", "SUFFIX", "VC", "VMOD" };
@@ -325,7 +432,7 @@ public class CoreNlpDependencyParserTest
         throws Exception
     {
         AssumeResource.assumeResource(CoreNlpDependencyParser.class, "depparser", aLanguage,
-                "default");
+                aVariant);
         
         AggregateBuilder aggregate = new AggregateBuilder();
         

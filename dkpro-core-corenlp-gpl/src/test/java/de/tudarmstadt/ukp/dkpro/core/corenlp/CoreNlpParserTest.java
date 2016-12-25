@@ -82,16 +82,20 @@ public class CoreNlpParserTest
             "prep", "prt", "punct", "quantmod", "rcmod", "ref", "rel", "sdep", "subj", "tmod",
             "vmod", "xcomp" };
 
-    private static final String[] SPANISH_POS_TAGS = { "359000", "ao0000", "aq0000", "cc", "cs",
-            "da0000", "dd0000", "de0000", "di0000", "dn0000", "dp0000", "dt0000", "f0", "faa",
-            "fat", "fc", "fd", "fe", "fg", "fh", "fia", "fit", "fp", "fpa", "fpt", "fs", "ft", "fx",
-            "fz", "i", "nc00000", "nc0n000", "nc0p000", "nc0s000", "np00000", "p0000000",
-            "pd000000", "pe000000", "pi000000", "pn000000", "pp000000", "pr000000", "pt000000",
-            "px000000", "rg", "rn", "sp000", "vag0000", "vaic000", "vaif000", "vaii000", "vaip000",
-            "vais000", "vam0000", "van0000", "vap0000", "vasi000", "vasp000", "vmg0000", "vmic000",
-            "vmif000", "vmii000", "vmip000", "vmis000", "vmm0000", "vmn0000", "vmp0000", "vmsi000",
-            "vmsp000", "vsg0000", "vsic000", "vsif000", "vsii000", "vsip000", "vsis000", "vsm0000",
-            "vsn0000", "vsp0000", "vssf000", "vssi000", "vssp000", "w", "z0", "zm", "zu" };
+    private static final String[] SPANISH_POS_TAGS = { "359000", "NCMS000", "ac0000", "ao0000",
+            "ap0000", "aq0000", "aqs000", "cc", "cs", "d00000", "da0000", "dd0000", "de0000",
+            "di0000", "dn0000", "do0000", "dp0000", "dt0000", "f0", "faa", "fat", "fc", "fca",
+            "fct", "fd", "fe", "fg", "fh", "fi", "fia", "fit", "fp", "fpa", "fpt", "fra", "frc",
+            "fs", "fsa", "ft", "fx", "fz", "i", "nc00000", "nc0a000", "nc0c000", "nc0n000",
+            "nc0p000", "nc0s000", "np00000", "p0000000", "pd000000", "pe000000", "pi000000",
+            "pn000000", "po000000", "pp000000", "pr000000", "pt000000", "px000000", "rg", "rn",
+            "sc000", "se000", "sp000", "va00000", "vag0000", "vaic000", "vaif000", "vaii000",
+            "vaip000", "vais000", "vam0000", "van0000", "vap0000", "vasi000", "vasp000", "vass000",
+            "vm00000", "vm0p000", "vmg0000", "vmi0000", "vmi2000", "vmic000", "vmif000", "vmii000",
+            "vmim000", "vmip000", "vmis000", "vmm0000", "vmmp000", "vmms000", "vmn0000", "vmp0000",
+            "vms0000", "vmsf000", "vmsi000", "vmsp000", "vq00000", "vs00000", "vsg0000", "vsic000",
+            "vsif000", "vsii000", "vsip000", "vsis000", "vsm0000", "vsmp000", "vsn0000", "vsp0000",
+            "vssf000", "vssi000", "vssp000", "vsss000", "w", "word", "z0", "zd", "zm", "zp", "zu" };
 
     private static final String[] FRENCH_POS_TAGS = { "A", "ADJ", "ADJWH", "ADV", "ADVWH", "C",
             "CC", "CL", "CLO", "CLR", "CLS", "CS", "DET", "DETWH", "ET", "I", "N", "NC", "NPP", "P",
@@ -201,19 +205,19 @@ public class CoreNlpParserTest
                 "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
         String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
-                "[  3,  7]ROOT(root) D[3,7](need) G[3,7](need)",
-                "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
-                "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
-                "[ 15, 26]AMOD(amod) D[15,26](complicated) G[35,43](sentence)",
-                "[ 27, 34]NN(nn) D[27,34](example) G[35,43](sentence)",
-                "[ 35, 43]DOBJ(dobj) D[35,43](sentence) G[3,7](need)",
-                "[ 46, 51]NSUBJ(nsubj) D[46,51](which) G[52,60](contains)",
-                "[ 52, 60]RCMOD(rcmod) D[52,60](contains) G[35,43](sentence)",
-                "[ 64, 68]AMOD(amod) D[64,68](many) G[69,81](constituents)",
-                "[ 69, 81]PREP(prep_as) D[69,81](constituents) G[52,60](contains)",
-                "[ 86, 98]CONJ(conj_and) D[86,98](dependencies) G[69,81](constituents)",
-                "[102,110]PREP(prep_as) D[102,110](possible) G[52,60](contains)" };
+                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(root,basic) D[3,7](need) G[3,7](need)",
+                "[  8,  9]DET(det,basic) D[8,9](a) G[35,43](sentence)",
+                "[ 10, 14]ADVMOD(advmod,basic) D[10,14](very) G[15,26](complicated)",
+                "[ 15, 26]AMOD(amod,basic) D[15,26](complicated) G[35,43](sentence)",
+                "[ 27, 34]NN(nn,basic) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]DOBJ(dobj,basic) D[35,43](sentence) G[3,7](need)",
+                "[ 46, 51]NSUBJ(nsubj,basic) D[46,51](which) G[52,60](contains)",
+                "[ 52, 60]RCMOD(rcmod,basic) D[52,60](contains) G[35,43](sentence)",
+                "[ 64, 68]AMOD(amod,basic) D[64,68](many) G[69,81](constituents)",
+                "[ 69, 81]PREP(prep_as,basic) D[69,81](constituents) G[52,60](contains)",
+                "[ 86, 98]CONJ(conj_and,basic) D[86,98](dependencies) G[69,81](constituents)",
+                "[102,110]PREP(prep_as,basic) D[102,110](possible) G[52,60](contains)" };
 
         String[] posMapped = { "PRON", "VERB", "DET", "ADV", "VERB", "NOUN", "NOUN", "PUNCT", "DET",
                 "VERB", "ADP", "ADJ", "NOUN", "CONJ", "NOUN", "ADP", "ADJ", "PUNCT" };
@@ -257,20 +261,20 @@ public class CoreNlpParserTest
                 "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
         String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
-                "[  3,  7]ROOT(root) D[3,7](need) G[3,7](need)",
-                "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
-                "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
-                "[ 15, 26]AMOD(amod) D[15,26](complicated) G[35,43](sentence)",
-                "[ 27, 34]NN(nn) D[27,34](example) G[35,43](sentence)",
-                "[ 35, 43]DOBJ(dobj) D[35,43](sentence) G[3,7](need)",
-                "[ 46, 51]NSUBJ(nsubj) D[46,51](which) G[52,60](contains)",
-                "[ 52, 60]RCMOD(rcmod) D[52,60](contains) G[35,43](sentence)",
-                "[ 61, 63]ADVMOD(advmod) D[61,63](as) G[64,68](many)",
-                "[ 64, 68]AMOD(amod) D[64,68](many) G[69,81](constituents)",
-                "[ 69, 81]DOBJ(dobj) D[69,81](constituents) G[52,60](contains)",
-                "[ 86, 98]CONJ(conj_and) D[86,98](dependencies) G[69,81](constituents)",
-                "[102,110]PREP(prep_as) D[102,110](possible) G[52,60](contains)" };
+                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(root,basic) D[3,7](need) G[3,7](need)",
+                "[  8,  9]DET(det,basic) D[8,9](a) G[35,43](sentence)",
+                "[ 10, 14]ADVMOD(advmod,basic) D[10,14](very) G[15,26](complicated)",
+                "[ 15, 26]AMOD(amod,basic) D[15,26](complicated) G[35,43](sentence)",
+                "[ 27, 34]NN(nn,basic) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]DOBJ(dobj,basic) D[35,43](sentence) G[3,7](need)",
+                "[ 46, 51]NSUBJ(nsubj,basic) D[46,51](which) G[52,60](contains)",
+                "[ 52, 60]RCMOD(rcmod,basic) D[52,60](contains) G[35,43](sentence)",
+                "[ 61, 63]ADVMOD(advmod,basic) D[61,63](as) G[64,68](many)",
+                "[ 64, 68]AMOD(amod,basic) D[64,68](many) G[69,81](constituents)",
+                "[ 69, 81]DOBJ(dobj,basic) D[69,81](constituents) G[52,60](contains)",
+                "[ 86, 98]CONJ(conj_and,basic) D[86,98](dependencies) G[69,81](constituents)",
+                "[102,110]PREP(prep_as,basic) D[102,110](possible) G[52,60](contains)" };
 
         String[] posMapped = { "PRON", "VERB", "DET", "ADV", "VERB", "NOUN", "NOUN", "PUNCT", "DET",
                 "VERB", "ADV", "ADJ", "NOUN", "CONJ", "NOUN", "ADP", "ADJ", "PUNCT" };
@@ -332,20 +336,20 @@ public class CoreNlpParserTest
                 "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
         String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
-                "[  3,  7]ROOT(root) D[3,7](need) G[3,7](need)",
-                "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
-                "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
-                "[ 15, 26]AMOD(amod) D[15,26](complicated) G[35,43](sentence)",
-                "[ 27, 34]NN(nn) D[27,34](example) G[35,43](sentence)",
-                "[ 35, 43]DOBJ(dobj) D[35,43](sentence) G[3,7](need)",
-                "[ 46, 51]NSUBJ(nsubj) D[46,51](which) G[52,60](contains)",
-                "[ 52, 60]RCMOD(rcmod) D[52,60](contains) G[35,43](sentence)",
-                "[ 61, 63]QUANTMOD(quantmod) D[61,63](as) G[64,68](many)",
-                "[ 64, 68]NUM(num) D[64,68](many) G[69,81](constituents)",
-                "[ 69, 81]DOBJ(dobj) D[69,81](constituents) G[52,60](contains)",
-                "[ 86, 98]CONJ(conj_and) D[86,98](dependencies) G[69,81](constituents)",
-                "[102,110]PREP(prep_as) D[102,110](possible) G[52,60](contains)" };
+                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(root,basic) D[3,7](need) G[3,7](need)",
+                "[  8,  9]DET(det,basic) D[8,9](a) G[35,43](sentence)",
+                "[ 10, 14]ADVMOD(advmod,basic) D[10,14](very) G[15,26](complicated)",
+                "[ 15, 26]AMOD(amod,basic) D[15,26](complicated) G[35,43](sentence)",
+                "[ 27, 34]NN(nn,basic) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]DOBJ(dobj,basic) D[35,43](sentence) G[3,7](need)",
+                "[ 46, 51]NSUBJ(nsubj,basic) D[46,51](which) G[52,60](contains)",
+                "[ 52, 60]RCMOD(rcmod,basic) D[52,60](contains) G[35,43](sentence)",
+                "[ 61, 63]QUANTMOD(quantmod,basic) D[61,63](as) G[64,68](many)",
+                "[ 64, 68]NUM(num,basic) D[64,68](many) G[69,81](constituents)",
+                "[ 69, 81]DOBJ(dobj,basic) D[69,81](constituents) G[52,60](contains)",
+                "[ 86, 98]CONJ(conj_and,basic) D[86,98](dependencies) G[69,81](constituents)",
+                "[102,110]PREP(prep_as,basic) D[102,110](possible) G[52,60](contains)" };
 
         String[] posMapped = { "PRON", "VERB", "DET", "ADV", "VERB", "NOUN", "NOUN", "PUNCT", "DET",
                 "VERB", "ADV", "ADJ", "NOUN", "CONJ", "NOUN", "ADP", "ADJ", "PUNCT" };
@@ -389,19 +393,19 @@ public class CoreNlpParserTest
                 "S 0,112", "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
         String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
-                "[  3,  7]ROOT(root) D[3,7](need) G[3,7](need)",
-                "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
-                "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
-                "[ 15, 26]AMOD(amod) D[15,26](complicated) G[35,43](sentence)",
-                "[ 27, 34]NN(nn) D[27,34](example) G[35,43](sentence)",
-                "[ 35, 43]DOBJ(dobj) D[35,43](sentence) G[3,7](need)",
-                "[ 46, 51]NSUBJ(nsubj) D[46,51](which) G[52,60](contains)",
-                "[ 52, 60]RCMOD(rcmod) D[52,60](contains) G[35,43](sentence)",
-                "[ 64, 68]AMOD(amod) D[64,68](many) G[69,81](constituents)",
-                "[ 69, 81]PREP(prep_as) D[69,81](constituents) G[52,60](contains)",
-                "[ 86, 98]CONJ(conj_and) D[86,98](dependencies) G[69,81](constituents)",
-                "[102,110]PREP(prep_as) D[102,110](possible) G[69,81](constituents)" };
+                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(root,basic) D[3,7](need) G[3,7](need)",
+                "[  8,  9]DET(det,basic) D[8,9](a) G[35,43](sentence)",
+                "[ 10, 14]ADVMOD(advmod,basic) D[10,14](very) G[15,26](complicated)",
+                "[ 15, 26]AMOD(amod,basic) D[15,26](complicated) G[35,43](sentence)",
+                "[ 27, 34]NN(nn,basic) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]DOBJ(dobj,basic) D[35,43](sentence) G[3,7](need)",
+                "[ 46, 51]NSUBJ(nsubj,basic) D[46,51](which) G[52,60](contains)",
+                "[ 52, 60]RCMOD(rcmod,basic) D[52,60](contains) G[35,43](sentence)",
+                "[ 64, 68]AMOD(amod,basic) D[64,68](many) G[69,81](constituents)",
+                "[ 69, 81]PREP(prep_as,basic) D[69,81](constituents) G[52,60](contains)",
+                "[ 86, 98]CONJ(conj_and,basic) D[86,98](dependencies) G[69,81](constituents)",
+                "[102,110]PREP(prep_as,basic) D[102,110](possible) G[69,81](constituents)" };
 
         String[] posMapped = { "PRON", "VERB", "DET", "ADV", "ADJ", "NOUN", "NOUN", "PUNCT", "DET",
                 "VERB", "ADP", "ADJ", "NOUN", "CONJ", "NOUN", "ADP", "ADJ", "PUNCT" };
@@ -451,19 +455,19 @@ public class CoreNlpParserTest
                 "S 0,112", "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
         String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
-                "[  3,  7]ROOT(root) D[3,7](need) G[3,7](need)",
-                "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
-                "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
-                "[ 15, 26]AMOD(amod) D[15,26](complicated) G[35,43](sentence)",
-                "[ 27, 34]NN(nn) D[27,34](example) G[35,43](sentence)",
-                "[ 35, 43]DOBJ(dobj) D[35,43](sentence) G[3,7](need)",
-                "[ 46, 51]NSUBJ(nsubj) D[46,51](which) G[52,60](contains)",
-                "[ 52, 60]RCMOD(rcmod) D[52,60](contains) G[35,43](sentence)",
-                "[ 64, 68]AMOD(amod) D[64,68](many) G[69,81](constituents)",
-                "[ 69, 81]PREP(prep_as) D[69,81](constituents) G[52,60](contains)",
-                "[ 86, 98]CONJ(conj_and) D[86,98](dependencies) G[69,81](constituents)",
-                "[102,110]PREP(prep_as) D[102,110](possible) G[69,81](constituents)"};
+                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(root,basic) D[3,7](need) G[3,7](need)",
+                "[  8,  9]DET(det,basic) D[8,9](a) G[35,43](sentence)",
+                "[ 10, 14]ADVMOD(advmod,basic) D[10,14](very) G[15,26](complicated)",
+                "[ 15, 26]AMOD(amod,basic) D[15,26](complicated) G[35,43](sentence)",
+                "[ 27, 34]NN(nn,basic) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]DOBJ(dobj,basic) D[35,43](sentence) G[3,7](need)",
+                "[ 46, 51]NSUBJ(nsubj,basic) D[46,51](which) G[52,60](contains)",
+                "[ 52, 60]RCMOD(rcmod,basic) D[52,60](contains) G[35,43](sentence)",
+                "[ 64, 68]AMOD(amod,basic) D[64,68](many) G[69,81](constituents)",
+                "[ 69, 81]PREP(prep_as,basic) D[69,81](constituents) G[52,60](contains)",
+                "[ 86, 98]CONJ(conj_and,basic) D[86,98](dependencies) G[69,81](constituents)",
+                "[102,110]PREP(prep_as,basic) D[102,110](possible) G[69,81](constituents)" };
 
         String[] posMapped = { "PRON", "VERB", "DET", "ADV", "ADJ", "NOUN", "NOUN", "PUNCT", "DET",
                 "VERB", "ADP", "ADJ", "NOUN", "CONJ", "NOUN", "ADP", "ADJ", "PUNCT" };
@@ -507,20 +511,20 @@ public class CoreNlpParserTest
                 "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
         String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
-                "[  3,  7]ROOT(root) D[3,7](need) G[3,7](need)",
-                "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
-                "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
-                "[ 15, 26]AMOD(amod) D[15,26](complicated) G[35,43](sentence)",
-                "[ 27, 34]NN(nn) D[27,34](example) G[35,43](sentence)",
-                "[ 35, 43]DOBJ(dobj) D[35,43](sentence) G[3,7](need)",
-                "[ 46, 51]NSUBJ(nsubj) D[46,51](which) G[52,60](contains)",
-                "[ 52, 60]RCMOD(rcmod) D[52,60](contains) G[35,43](sentence)",
-                "[ 61, 63]QUANTMOD(quantmod) D[61,63](as) G[64,68](many)",
-                "[ 64, 68]NUM(num) D[64,68](many) G[69,81](constituents)",
-                "[ 69, 81]DOBJ(dobj) D[69,81](constituents) G[52,60](contains)",
-                "[ 86, 98]CONJ(conj_and) D[86,98](dependencies) G[69,81](constituents)",
-                "[102,110]PREP(prep_as) D[102,110](possible) G[52,60](contains)"};
+                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(root,basic) D[3,7](need) G[3,7](need)",
+                "[  8,  9]DET(det,basic) D[8,9](a) G[35,43](sentence)",
+                "[ 10, 14]ADVMOD(advmod,basic) D[10,14](very) G[15,26](complicated)",
+                "[ 15, 26]AMOD(amod,basic) D[15,26](complicated) G[35,43](sentence)",
+                "[ 27, 34]NN(nn,basic) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]DOBJ(dobj,basic) D[35,43](sentence) G[3,7](need)",
+                "[ 46, 51]NSUBJ(nsubj,basic) D[46,51](which) G[52,60](contains)",
+                "[ 52, 60]RCMOD(rcmod,basic) D[52,60](contains) G[35,43](sentence)",
+                "[ 61, 63]QUANTMOD(quantmod,basic) D[61,63](as) G[64,68](many)",
+                "[ 64, 68]NUM(num,basic) D[64,68](many) G[69,81](constituents)",
+                "[ 69, 81]DOBJ(dobj,basic) D[69,81](constituents) G[52,60](contains)",
+                "[ 86, 98]CONJ(conj_and,basic) D[86,98](dependencies) G[69,81](constituents)",
+                "[102,110]PREP(prep_as,basic) D[102,110](possible) G[52,60](contains)" };
 
         String[] posMapped = { "PRON", "VERB", "DET", "ADV", "VERB", "NOUN", "NOUN", "PUNCT", "DET",
                 "VERB", "ADV", "ADJ", "NOUN", "CONJ", "NOUN", "ADP", "ADJ", "PUNCT" };
@@ -647,15 +651,15 @@ public class CoreNlpParserTest
 
         String[] posTags = SPANISH_POS_TAGS;
 
-        String[] constituentTags = { "ROOT", "S", "conj", "gerundi", "grup.a", "grup.adv",
+        String[] constituentTags = { "ROOT", "S", "conj", "f", "gerundi", "grup.a", "grup.adv",
                 "grup.cc", "grup.cs", "grup.nom", "grup.prep", "grup.pron", "grup.verb", "grup.w",
-                "grup.z", "inc", "infinitiu", "interjeccio", "morfema.pronominal",
-                "morfema.verbal", "neg", "participi", "prep", "relatiu", "s.a", "sadv", "sentence",
-                "sn", "sp", "spec" };
+                "grup.z", "inc", "infinitiu", "interjeccio", "morfema.pronominal", "morfema.verbal",
+                "neg", "participi", "prep", "relatiu", "s.a", "sadv", "sentence", "sn", "sp",
+                "spec" };
 
-        String[] unmappedPos = { "359000" };
+        String[] unmappedPos = { "359000", "NCMS000", "word" };
 
-        String[] unmappedConst = {};
+        String[] unmappedConst = { "f" };
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal,
@@ -824,22 +828,22 @@ public class CoreNlpParserTest
                 "ROOT 0,47", "VP 26,34", "VP 26,45", "VP 3,19", "VP 37,45", "VP 43,45" };
 
         String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj) D[0,2](我们) G[3,5](需要)",
-                "[  3,  5]ROOT(root) D[3,5](需要) G[3,5](需要)",
-                "[  6,  8]Dependency(nummod) D[6,8](一个) G[17,19](句子)",
-                "[  9, 11]ADVMOD(advmod) D[9,11](非常) G[12,14](复杂)",
-                "[ 12, 14]Dependency(assmod) D[12,14](复杂) G[17,19](句子)",
-                "[ 15, 16]Dependency(case) D[15,16](的) G[12,14](复杂)",
-                "[ 17, 19]DOBJ(dobj) D[17,19](句子) G[3,5](需要)",
-                "[ 20, 22]ADVMOD(advmod) D[20,22](例如) G[26,28](包含)",
-                "[ 23, 25]NSUBJ(nsubj) D[23,25](其中) G[26,28](包含)",
-                "[ 26, 28]CONJ(conj) D[26,28](包含) G[3,5](需要)",
-                "[ 29, 31]Dependency(nummod) D[29,31](许多) G[32,34](成分)",
-                "[ 32, 34]DOBJ(dobj) D[32,34](成分) G[26,28](包含)",
-                "[ 35, 36]CC(cc) D[35,36](和) G[26,28](包含)",
-                "[ 37, 40]Dependency(dvpmod) D[37,40](尽可能) G[43,45](依赖)",
-                "[ 41, 42]MARK(mark) D[41,42](的) G[37,40](尽可能)",
-                "[ 43, 45]CONJ(conj) D[43,45](依赖) G[26,28](包含)" };
+                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](我们) G[3,5](需要)",
+                "[  3,  5]ROOT(root,basic) D[3,5](需要) G[3,5](需要)",
+                "[  6,  8]Dependency(nummod,basic) D[6,8](一个) G[17,19](句子)",
+                "[  9, 11]ADVMOD(advmod,basic) D[9,11](非常) G[12,14](复杂)",
+                "[ 12, 14]Dependency(assmod,basic) D[12,14](复杂) G[17,19](句子)",
+                "[ 15, 16]Dependency(assm,basic) D[15,16](的) G[12,14](复杂)",
+                "[ 17, 19]DOBJ(dobj,basic) D[17,19](句子) G[3,5](需要)",
+                "[ 20, 22]ADVMOD(advmod,basic) D[20,22](例如) G[26,28](包含)",
+                "[ 23, 25]NSUBJ(nsubj,basic) D[23,25](其中) G[26,28](包含)",
+                "[ 26, 28]CONJ(conj,basic) D[26,28](包含) G[3,5](需要)",
+                "[ 29, 31]Dependency(nummod,basic) D[29,31](许多) G[32,34](成分)",
+                "[ 32, 34]DOBJ(dobj,basic) D[32,34](成分) G[26,28](包含)",
+                "[ 35, 36]CC(cc,basic) D[35,36](和) G[26,28](包含)",
+                "[ 37, 40]Dependency(dvpmod,basic) D[37,40](尽可能) G[43,45](依赖)",
+                "[ 41, 42]Dependency(dvpm,basic) D[41,42](的) G[37,40](尽可能)",
+                "[ 43, 45]CONJ(conj,basic) D[43,45](依赖) G[26,28](包含)" };
 
         String[] posMapped = { "PRON", "VERB", "NUM", "ADJ", "ADJ", "PART", "NOUN", "ADJ", "NOUN",
                 "VERB", "NUM", "NOUN", "CONJ", "ADJ", "PART", "VERB", "PUNCT" };
@@ -900,22 +904,22 @@ public class CoreNlpParserTest
                 "VP 9,14" };
 
         String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj) D[0,2](我们) G[3,5](需要)",
-                "[  3,  5]ROOT(root) D[3,5](需要) G[3,5](需要)",
-                "[  6,  8]Dependency(nummod) D[6,8](一个) G[43,45](依赖)",
-                "[  9, 11]ADVMOD(advmod) D[9,11](非常) G[12,14](复杂)",
-                "[ 12, 14]Dependency(relcl) D[12,14](复杂) G[17,19](句子)",
-                "[ 15, 16]MARK(mark) D[15,16](的) G[12,14](复杂)",
-                "[ 17, 19]NSUBJ(nsubj) D[17,19](句子) G[26,28](包含)",
-                "[ 20, 22]ADVMOD(advmod) D[20,22](例如) G[26,28](包含)",
-                "[ 23, 25]NSUBJ(nsubj) D[23,25](其中) G[26,28](包含)",
-                "[ 26, 28]Dependency(relcl) D[26,28](包含) G[43,45](依赖)",
-                "[ 29, 31]Dependency(nummod) D[29,31](许多) G[32,34](成分)",
-                "[ 32, 34]DOBJ(dobj) D[32,34](成分) G[26,28](包含)",
-                "[ 35, 36]CC(cc) D[35,36](和) G[26,28](包含)",
-                "[ 37, 40]CONJ(conj) D[37,40](尽可能) G[26,28](包含)",
-                "[ 41, 42]MARK(mark) D[41,42](的) G[26,28](包含)",
-                "[ 43, 45]DOBJ(dobj) D[43,45](依赖) G[3,5](需要)" };
+                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](我们) G[3,5](需要)",
+                "[  3,  5]ROOT(root,basic) D[3,5](需要) G[3,5](需要)",
+                "[  6,  8]Dependency(nummod,basic) D[6,8](一个) G[43,45](依赖)",
+                "[  9, 11]ADVMOD(advmod,basic) D[9,11](非常) G[12,14](复杂)",
+                "[ 12, 14]RCMOD(rcmod,basic) D[12,14](复杂) G[17,19](句子)",
+                "[ 15, 16]Dependency(cpm,basic) D[15,16](的) G[12,14](复杂)",
+                "[ 17, 19]NSUBJ(nsubj,basic) D[17,19](句子) G[26,28](包含)",
+                "[ 20, 22]ADVMOD(advmod,basic) D[20,22](例如) G[26,28](包含)",
+                "[ 23, 25]NSUBJ(nsubj,basic) D[23,25](其中) G[26,28](包含)",
+                "[ 26, 28]RCMOD(rcmod,basic) D[26,28](包含) G[43,45](依赖)",
+                "[ 29, 31]Dependency(nummod,basic) D[29,31](许多) G[32,34](成分)",
+                "[ 32, 34]DOBJ(dobj,basic) D[32,34](成分) G[26,28](包含)",
+                "[ 35, 36]CC(cc,basic) D[35,36](和) G[26,28](包含)",
+                "[ 37, 40]CONJ(conj,basic) D[37,40](尽可能) G[26,28](包含)",
+                "[ 41, 42]Dependency(cpm,basic) D[41,42](的) G[26,28](包含)",
+                "[ 43, 45]DOBJ(dobj,basic) D[43,45](依赖) G[3,5](需要)" };
 
         String[] posMapped = { "PRON", "VERB", "NUM", "ADJ", "VERB", "PART", "NOUN", "ADJ", "NOUN",
                 "VERB", "NUM", "NOUN", "CONJ", "ADJ", "PART", "NOUN", "PUNCT" };
@@ -1053,7 +1057,7 @@ public class CoreNlpParserTest
         throws Exception
     {
         AssumeResource.assumeResource(CoreNlpParser.class,
-                "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "parser", aLanguage, "default");
+                "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "parser", aLanguage, aVariant);
         
         AggregateBuilder aggregate = new AggregateBuilder();
 
@@ -1098,7 +1102,7 @@ public class CoreNlpParserTest
         throws Exception
     {
         AssumeResource.assumeResource(CoreNlpParser.class,
-                "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "parser", aLanguage, "default");
+                "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "parser", aLanguage, aVariant);
 
         // setup English
         AnalysisEngineDescription parser = createEngineDescription(CoreNlpParser.class,

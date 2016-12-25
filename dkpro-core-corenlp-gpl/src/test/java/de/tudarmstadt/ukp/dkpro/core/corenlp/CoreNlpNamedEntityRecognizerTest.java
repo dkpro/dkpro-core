@@ -210,7 +210,7 @@ public class CoreNlpNamedEntityRecognizerTest
         throws Exception
     {
         AssumeResource.assumeResource(CoreNlpNamedEntityRecognizer.class,
-                "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "tagger", language, "default");
+                "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "ner", language, variant);
 
         AnalysisEngine engine = createEngine(CoreNlpNamedEntityRecognizer.class,
                 CoreNlpNamedEntityRecognizer.PARAM_VARIANT, variant,

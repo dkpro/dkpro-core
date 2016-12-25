@@ -86,6 +86,10 @@ public class CoreNlpPosTaggerTest
         		new String[] { "PDS", "VAFIN",  "ART", "NN",   "$."    },
         		new String[] { "PRON",  "VERB", "DET", "NOUN", "PUNCT" });
 
+        runTest("de", "ud", "Das ist ein Test .",
+                new String[] { "PRON",  "VERB", "DET", "NOUN",   "PUNCT" },
+                new String[] { "PRON",  "VERB", "DET", "NOUN",   "PUNCT" });
+        
         runTest("de", "hgc", "Das ist ein Test .",
         		new String[] { "PDS", "VAFIN",  "ART", "NN",   "$."    },
         		new String[] { "PRON",  "VERB", "DET", "NOUN",   "PUNCT" });
@@ -211,7 +215,7 @@ public class CoreNlpPosTaggerTest
         throws Exception
     {
         AssumeResource.assumeResource(CoreNlpPosTagger.class,
-                "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "tagger", language, "default");
+                "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "tagger", language, variant);
         
         JCas aJCas = runTest(language, variant, testDocument);
 
@@ -222,7 +226,7 @@ public class CoreNlpPosTaggerTest
         throws Exception
     {
         AssumeResource.assumeResource(CoreNlpPosTagger.class,
-                "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "tagger", aLanguage, "default");
+                "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "tagger", aLanguage, aVariant);
         
         AnalysisEngine engine = createEngine(CoreNlpPosTagger.class,
                 CoreNlpPosTagger.PARAM_VARIANT, aVariant, 

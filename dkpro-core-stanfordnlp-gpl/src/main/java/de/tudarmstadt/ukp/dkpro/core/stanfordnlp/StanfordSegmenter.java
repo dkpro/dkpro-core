@@ -98,13 +98,12 @@ public class StanfordSegmenter
      * This is a Set of String that are matched with .equals() which are allowed to be tacked onto
      * the end of a sentence after a sentence boundary token, for example ")".
      * 
-     * @see WordToSentenceProcessor#DEFAULT_BOUNDARY_FOLLOWERS
+     * @see WordToSentenceProcessor#DEFAULT_BOUNDARY_FOLLOWERS_REGEX
      */
-    public static final String PARAM_BOUNDARY_FOLLOWERS = "boundaryFollowers";
-    @ConfigurationParameter(name = PARAM_BOUNDARY_FOLLOWERS, mandatory = false, defaultValue = {
-            ")", "]", "}", "\"", "'", "''", "\u2019", "\u201D", "-RRB-", "-RSB-", "-RCB-", ")",
-            "]", "}" })
-    private Set<String> boundaryFollowers;
+    public static final String PARAM_BOUNDARY_FOLLOWERS_REGEX = "boundaryFollowersRegex";
+    @ConfigurationParameter(name = PARAM_BOUNDARY_FOLLOWERS_REGEX, mandatory = false, defaultValue =
+            WordToSentenceProcessor.DEFAULT_BOUNDARY_FOLLOWERS_REGEX)
+    private String boundaryFollowersRegex;
 
     /**
      * These are elements like "p" or "sent", which will be wrapped into regex for approximate XML
@@ -160,6 +159,12 @@ public class StanfordSegmenter
     public static final String PARAM_ALLOW_EMPTY_SENTENCES = "allowEmptySentences";
     @ConfigurationParameter(name = PARAM_ALLOW_EMPTY_SENTENCES, mandatory = true, defaultValue = "false")
     private boolean allowEmptySentences;
+
+    /**
+     * Additional options that should be passed to the tokenizers. The available options depend on
+     * the language-specific tokenizer being used. 
+     */
+    private String[] additionalOptions;
     
     @Override
 	protected void process(JCas aJCas, String aText, int aZoneBegin)
@@ -210,7 +215,7 @@ public class StanfordSegmenter
     
             // Apply the WordToSentenceProcessor to find the sentence boundaries
             WordToSentenceProcessor<CoreLabel> proc = new WordToSentenceProcessor<CoreLabel>(
-                    boundaryTokenRegex, boundaryFollowers, boundariesToDiscard,
+                    boundaryTokenRegex, boundaryFollowersRegex, boundariesToDiscard,
                     xmlBreakElementsToDiscard, regionElementRegex, newlineIsSentenceBreak, null,
                     tokenRegexesToDiscard, isOneSentence, allowEmptySentences);
     		
@@ -263,13 +268,8 @@ public class StanfordSegmenter
     	Tokenizer<?> create(
     			final String s)
     	{
-
-//    		TokenizerFactory<Word> f = PTBTokenizer.factory(false, true, false);
-
-
 //    		TokenizerFactory<CoreLabel> f = PTBTokenizer.factory(new CoreLabelTokenFactory(), "invertible,ptb3Escaping=false");
     		return new PTBTokenizer<CoreLabel>(new StringReader(s),new CoreLabelTokenFactory(),"invertible");
-
     	}
     }
 

@@ -12,17 +12,23 @@ __META_SOURCE_URL__.1=http://www.lrec-conf.org/proceedings/lrec2008/pdf/35_paper
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # adjective
+ac0000=ADJ
 ao0000=ADJ
+ap0000=ADJ
+aq0000=ADJ
+aqs000=ADJ
 aq0000=ADJ
 # conjunction
 cc=CONJ
 cs=CONJ
 # determiner
+d00000=DET
 da0000=DET
 dd0000=DET
 de0000=DET
 di0000=DET
 dn0000=DET
+do0000=DET
 dp0000=DET
 dt0000=DET
 # punctuation
@@ -30,16 +36,22 @@ f0=PUNCT
 faa=PUNCT
 fat=PUNCT
 fc=PUNCT
+fca=PUNCT
+fct=PUNCT
 fd=PUNCT
 fe=PUNCT
 fg=PUNCT
 fh=PUNCT
+fi=PUNCT
 fia=PUNCT
 fit=PUNCT
 fp=PUNCT
 fpa=PUNCT
 fpt=PUNCT
+fra=PUNCT
+frc=PUNCT
 fs=PUNCT
+fsa=PUNCT
 ft=PUNCT
 fx=PUNCT
 fz=PUNCT
@@ -47,6 +59,8 @@ fz=PUNCT
 i=INTJ
 # common noun
 nc00000=NOUN
+nc0a000=NOUN
+nc0c000=NOUN
 nc0n000=NOUN
 nc0p000=NOUN
 nc0s000=NOUN
@@ -58,6 +72,7 @@ pd000000=PRON
 pe000000=PRON
 pi000000=PRON
 pn000000=PRON
+po000000=PRON
 pp000000=PRON
 pr000000=PRON
 pt000000=PRON
@@ -66,8 +81,11 @@ px000000=PRON
 rg=ADV
 rn=ADV
 # preposition
+sc000=ADP
+se000=ADP
 sp000=ADP
 # verb
+va00000=VERB
 vag0000=VERB
 vaic000=VERB
 vaif000=VERB
@@ -79,17 +97,29 @@ van0000=VERB
 vap0000=VERB
 vasi000=VERB
 vasp000=VERB
+vass000=VERB
+vm00000=VERB
+vm0p000=VERB
 vmg0000=VERB
+vmi0000=VERB
+vmi2000=VERB
 vmic000=VERB
 vmif000=VERB
 vmii000=VERB
+vmim000=VERB
 vmip000=VERB
 vmis000=VERB
 vmm0000=VERB
+vmmp000=VERB
+vmms000=VERB
 vmn0000=VERB
 vmp0000=VERB
+vms0000=VERB
+vmsf000=VERB
 vmsi000=VERB
 vmsp000=VERB
+vq00000=VERB
+vs00000=VERB
 vsg0000=VERB
 vsic000=VERB
 vsif000=VERB
@@ -97,17 +127,23 @@ vsii000=VERB
 vsip000=VERB
 vsis000=VERB
 vsm0000=VERB
+vsmp000=VERB
 vsn0000=VERB
 vsp0000=VERB
 vssf000=VERB
 vssi000=VERB
 vssp000=VERB
+vsss000=VERB
 # date
 w=X
 # number
 z0=NUM
+zd=NUM
 # number - currency
 zm=NUM
+zp=NUM
 zu=NUM
+
+
 
 *=POS

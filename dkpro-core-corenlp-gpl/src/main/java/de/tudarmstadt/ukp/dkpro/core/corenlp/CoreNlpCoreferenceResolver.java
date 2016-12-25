@@ -74,7 +74,7 @@ public class CoreNlpCoreferenceResolver
     private boolean score;
 
     /**
-     * DCoRef parameter: Do post processing
+     * DCoRef parameter: Do post-processing
      */
     public static final String PARAM_POSTPROCESSING = "postprocessing";
     @ConfigurationParameter(name = PARAM_POSTPROCESSING, defaultValue = "false", mandatory = true)
@@ -94,7 +94,6 @@ public class CoreNlpCoreferenceResolver
     public static final String PARAM_MAXDIST = "maxDist";
     @ConfigurationParameter(name = PARAM_MAXDIST, defaultValue = "-1", mandatory = true)
     private int maxdist;
-
 
     /**
      * Enable all traditional PTB3 token transforms (like -LRB-, -RRB-).
@@ -224,8 +223,8 @@ public class CoreNlpCoreferenceResolver
             //   new String[]{DefaultPaths.DEFAULT_DCOREF_DICT1, DefaultPaths.DEFAULT_DCOREF_DICT2,
             //   DefaultPaths.DEFAULT_DCOREF_DICT3, DefaultPaths.DEFAULT_DCOREF_DICT4}),
             props.put(Constants.DICT_LIST_PROP, '[' + base + "coref.dict1.tsv" + ',' + base
-                    + "coref.dict1.tsv" + ',' + base + "coref.dict1.tsv" + ',' + base
-                    + "coref.dict1.tsv" + ']');
+                    + "coref.dict2.tsv" + ',' + base + "coref.dict3.tsv" + ',' + base
+                    + "coref.dict4.tsv" + ']');
             // props.getProperty(Constants.DICT_PMI_PROP, DefaultPaths.DEFAULT_DCOREF_DICT1),
             props.put(Constants.DICT_PMI_PROP, base + "coref.dict1.tsv");
             // props.getProperty(Constants.SIGNATURES_PROP, DefaultPaths.DEFAULT_DCOREF_NE_SIGNATURES));
