@@ -156,8 +156,12 @@
               <!-- Binaries are not detected as a direct dependency -->
               <usedDependency>org.dkpro.core:dkpro-core-udpipe-bin</usedDependency>
               <!-- Models are not detected as a direct dependency -->
-              <usedDependency>org.dkpro.core:dkpro-core-udpipe-model-multiple-en-ud</usedDependency>
-              <usedDependency>org.dkpro.core:dkpro-core-udpipe-model-multiple-no-ud</usedDependency>
+              <usedDependency>org.dkpro.core:dkpro-core-udpipe-model-segmenter-en-ud</usedDependency>
+              <usedDependency>org.dkpro.core:dkpro-core-udpipe-model-tagger-en-ud</usedDependency>
+              <usedDependency>org.dkpro.core:dkpro-core-udpipe-model-parser-en-ud</usedDependency>
+              <usedDependency>org.dkpro.core:dkpro-core-udpipe-model-segmenter-no-ud</usedDependency>
+              <usedDependency>org.dkpro.core:dkpro-core-udpipe-model-tagger-no-ud</usedDependency>
+              <usedDependency>org.dkpro.core:dkpro-core-udpipe-model-parser-no-ud</usedDependency>
             </usedDependencies>
           </configuration>
         </plugin>
