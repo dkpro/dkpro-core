@@ -121,7 +121,7 @@ public class UDPipeParser
             {
                 setContextObject(UDPipeParser.this);
                 setDefault(LOCATION, "classpath:/org/dkpro/core/udpipe/lib/" +
-                        "multiple-${language}-${variant}.properties");
+                        "parser-${language}-${variant}.properties");
                 setDefault(VARIANT, "ud");
 
                 setOverride(LOCATION, modelLocation);

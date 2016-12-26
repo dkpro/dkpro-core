@@ -27,10 +27,11 @@ import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
-public class UDPosTaggerTest
+public class UDPipePosTaggerTest
 {
     
     @Test
@@ -62,11 +63,12 @@ public class UDPosTaggerTest
                 new String[] { "PROPN",   "VERB",   "VERB",        "NOUN",     "PUNCT" });
     }
         
-    private JCas runTest(String language, String variant, String testDocument, String[] tags,
+    private JCas runTest(String language, String aVariant, String testDocument, String[] tags,
             String[] tagClasses)
         throws Exception
     {
-        //AssumeResource.assumeResource(UDPosTagger.class, "multiple", language, variant);
+        String variant = aVariant != null ? aVariant : "ud";
+        AssumeResource.assumeResource(UDPipePosTagger.class, "tagger", language, variant);
 
         AnalysisEngine engine = createEngine(UDPipePosTagger.class,
                 UDPipePosTagger.PARAM_VARIANT, variant);

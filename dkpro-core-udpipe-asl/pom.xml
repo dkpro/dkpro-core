@@ -82,31 +82,67 @@
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
-      <artifactId>dkpro-core-udpipe-model-multiple-en-ud</artifactId>
+      <artifactId>dkpro-core-udpipe-model-segmenter-en-ud</artifactId>
       <scope>test</scope>
     </dependency>
-     
     <dependency>
       <groupId>org.dkpro.core</groupId>
-      <artifactId>dkpro-core-udpipe-model-multiple-no-ud</artifactId>
+      <artifactId>dkpro-core-udpipe-model-tagger-en-ud</artifactId>
       <scope>test</scope>
     </dependency>
-    
+    <dependency>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-udpipe-model-parser-en-ud</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-udpipe-model-segmenter-no-ud</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-udpipe-model-tagger-no-ud</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>dkpro-core-udpipe-model-parser-no-ud</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>org.dkpro.core</groupId>
-        <artifactId>dkpro-core-udpipe-model-multiple-en-ud</artifactId>
+        <artifactId>dkpro-core-udpipe-model-segmenter-en-ud</artifactId>
         <version>20160523.1</version>
       </dependency>
-       
       <dependency>
         <groupId>org.dkpro.core</groupId>
-        <artifactId>dkpro-core-udpipe-model-multiple-no-ud</artifactId>
+        <artifactId>dkpro-core-udpipe-model-tagger-en-ud</artifactId>
         <version>20160523.1</version>
       </dependency>
-      
+      <dependency>
+        <groupId>org.dkpro.core</groupId>
+        <artifactId>dkpro-core-udpipe-model-parser-en-ud</artifactId>
+        <version>20160523.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.dkpro.core</groupId>
+        <artifactId>dkpro-core-udpipe-model-segmenter-no-ud</artifactId>
+        <version>20160523.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.dkpro.core</groupId>
+        <artifactId>dkpro-core-udpipe-model-tagger-no-ud</artifactId>
+        <version>20160523.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.dkpro.core</groupId>
+        <artifactId>dkpro-core-udpipe-model-parser-no-ud</artifactId>
+        <version>20160523.1</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <build>

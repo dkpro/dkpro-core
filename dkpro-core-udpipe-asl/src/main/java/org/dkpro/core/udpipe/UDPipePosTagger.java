@@ -118,7 +118,7 @@ public class UDPipePosTagger
             {
                 setContextObject(UDPipePosTagger.this);
                 setDefault(LOCATION, "classpath:/org/dkpro/core/udpipe/lib/" +
-                        "multiple-${language}-${variant}.properties");
+                        "tagger-${language}-${variant}.properties");
                 setDefault(VARIANT, "ud");
 
                 setOverride(LOCATION, modelLocation);
