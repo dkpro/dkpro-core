@@ -123,17 +123,17 @@ public class LxfReaderTest
                 "POS" };
 
         String[] dependencies = { 
-                "[  0,  4]Dependency(nsubj) D[0,4](This) G[10,14](test)",
-                "[  5,  7]Dependency(cop) D[5,7](is) G[10,14](test)",
-                "[  8,  9]Dependency(det) D[8,9](a) G[10,14](test)",
-                "[ 10, 14]ROOT(ROOT) D[10,14](test) G[10,14](test)",
-                "[ 14, 15]Dependency(punct) D[14,15](.) G[10,14](test)",
-                "[ 16, 19]Dependency(cc) D[16,19](And) G[36,39](one)",
-                "[ 20, 24]Dependency(nsubj) D[20,24](here) G[36,39](one)",
-                "[ 25, 27]Dependency(cop) D[25,27](is) G[36,39](one)",
-                "[ 28, 35]Dependency(det) D[28,35](another) G[36,39](one)",
-                "[ 36, 39]ROOT(ROOT) D[36,39](one) G[36,39](one)",
-                "[ 39, 40]Dependency(punct) D[39,40](.) G[36,39](one)" };
+                "[  0,  4]Dependency(nsubj,basic) D[0,4](This) G[10,14](test)",
+                "[  5,  7]Dependency(cop,basic) D[5,7](is) G[10,14](test)",
+                "[  8,  9]Dependency(det,basic) D[8,9](a) G[10,14](test)",
+                "[ 10, 14]ROOT(ROOT,basic) D[10,14](test) G[10,14](test)",
+                "[ 14, 15]Dependency(punct,basic) D[14,15](.) G[10,14](test)",
+                "[ 16, 19]Dependency(cc,basic) D[16,19](And) G[36,39](one)",
+                "[ 20, 24]Dependency(nsubj,basic) D[20,24](here) G[36,39](one)",
+                "[ 25, 27]Dependency(cop,basic) D[25,27](is) G[36,39](one)",
+                "[ 28, 35]Dependency(det,basic) D[28,35](another) G[36,39](one)",
+                "[ 36, 39]ROOT(ROOT,basic) D[36,39](one) G[36,39](one)",
+                "[ 39, 40]Dependency(punct,basic) D[39,40](.) G[36,39](one)" };
 
         assertSentence(sentences, select(jcas, Sentence.class));
         assertToken(tokens, select(jcas, Token.class));

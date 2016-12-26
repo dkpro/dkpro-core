@@ -52,24 +52,24 @@ public class Nlp4JDependencyParserTest
                 + "contains as many constituents and dependencies as possible .");
 
         String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
-                "[  3,  7]ROOT(root) D[3,7](need) G[3,7](need)",
-                "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
-                "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
-                "[ 15, 26]Dependency(nmod) D[15,26](complicated) G[35,43](sentence)",
-                "[ 27, 34]Dependency(compound) D[27,34](example) G[35,43](sentence)",
-                "[ 35, 43]DOBJ(dobj) D[35,43](sentence) G[3,7](need)",
-                "[ 44, 45]PUNCT(punct) D[44,45](,) G[35,43](sentence)",
-                "[ 46, 51]NSUBJ(nsubj) D[46,51](which) G[52,60](contains)",
-                "[ 52, 60]Dependency(relcl) D[52,60](contains) G[35,43](sentence)",
-                "[ 61, 63]PREP(prep) D[61,63](as) G[52,60](contains)",
-                "[ 64, 68]Dependency(nmod) D[64,68](many) G[69,81](constituents)",
-                "[ 69, 81]POBJ(pobj) D[69,81](constituents) G[61,63](as)",
-                "[ 82, 85]CC(cc) D[82,85](and) G[69,81](constituents)",
-                "[ 86, 98]CONJ(conj) D[86,98](dependencies) G[69,81](constituents)",
-                "[ 99,101]PREP(prep) D[99,101](as) G[69,81](constituents)",
-                "[102,110]PCOMP(pcomp) D[102,110](possible) G[99,101](as)",
-                "[111,112]PUNCT(punct) D[111,112](.) G[3,7](need)" };
+                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(root,basic) D[3,7](need) G[3,7](need)",
+                "[  8,  9]DET(det,basic) D[8,9](a) G[35,43](sentence)",
+                "[ 10, 14]ADVMOD(advmod,basic) D[10,14](very) G[15,26](complicated)",
+                "[ 15, 26]Dependency(nmod,basic) D[15,26](complicated) G[35,43](sentence)",
+                "[ 27, 34]Dependency(compound,basic) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]DOBJ(dobj,basic) D[35,43](sentence) G[3,7](need)",
+                "[ 44, 45]PUNCT(punct,basic) D[44,45](,) G[35,43](sentence)",
+                "[ 46, 51]NSUBJ(nsubj,basic) D[46,51](which) G[52,60](contains)",
+                "[ 52, 60]Dependency(relcl,basic) D[52,60](contains) G[35,43](sentence)",
+                "[ 61, 63]PREP(prep,basic) D[61,63](as) G[52,60](contains)",
+                "[ 64, 68]Dependency(nmod,basic) D[64,68](many) G[69,81](constituents)",
+                "[ 69, 81]POBJ(pobj,basic) D[69,81](constituents) G[61,63](as)",
+                "[ 82, 85]CC(cc,basic) D[82,85](and) G[69,81](constituents)",
+                "[ 86, 98]CONJ(conj,basic) D[86,98](dependencies) G[69,81](constituents)",
+                "[ 99,101]PREP(prep,basic) D[99,101](as) G[69,81](constituents)",
+                "[102,110]PCOMP(pcomp,basic) D[102,110](possible) G[99,101](as)",
+                "[111,112]PUNCT(punct,basic) D[111,112](.) G[3,7](need)" };
 
         String[] unmappedDep = {};
 
