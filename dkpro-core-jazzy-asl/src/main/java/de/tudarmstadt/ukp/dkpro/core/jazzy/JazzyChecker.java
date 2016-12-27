@@ -81,7 +81,7 @@ public class JazzyChecker
      * Determines the maximum edit distance (as an int value) that a suggestion for a spelling error may have.
      * E.g. if set to one suggestions are limited to words within edit distance 1 to the original word.
      */
-    public static final String PARAM_SCORE_THRESHOLD = "ScoreThreshold";
+    public static final String PARAM_SCORE_THRESHOLD = "scoreThreshold";
     @ConfigurationParameter(name = PARAM_SCORE_THRESHOLD, mandatory = true, defaultValue = "1")
     private int scoreThreshold;
 
