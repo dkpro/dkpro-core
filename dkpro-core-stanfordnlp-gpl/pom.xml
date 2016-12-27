@@ -33,6 +33,14 @@
   <properties>
     <corenlp.version>3.7.0-beta-1</corenlp.version>
   </properties>
+  <!-- Repository declaration temporarily needed until CoreNLP is available from Maven Central -->  
+  <repositories>
+    <repository>
+      <id>ukp-oss</id>
+      <name>ukp-oss-releases</name>
+      <url>https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-ukp-releases-local</url>
+    </repository>
+  </repositories>
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>
