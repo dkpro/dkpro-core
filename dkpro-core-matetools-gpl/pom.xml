@@ -48,6 +48,20 @@
       <groupId>com.googlecode.mate-tools</groupId>
       <artifactId>srl</artifactId>
       <version>4.31</version>
+      <!-- 
+        Excluding this non-essential dependency as it conflicts with the CoreNLP 3.7.0+ when
+        building the aggregate Javadoc
+      -->
+      <exclusions>
+        <exclusion>
+          <groupId>edu.stanford.nlp</groupId>
+          <artifactId>stanford-parser</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>edu.stanford.nlp</groupId>
+          <artifactId>stanford-corenlp</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
