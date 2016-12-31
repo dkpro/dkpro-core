@@ -289,15 +289,27 @@ public class Conll2006Reader
     {
         List<String[]> words = new ArrayList<String[]>();
         String line;
+        boolean firstLineOfSentence = true;
         while ((line = aReader.readLine()) != null) {
             if (StringUtils.isBlank(line)) {
+                firstLineOfSentence = true;
                 break; // End of sentence
             }
-            if (line.startsWith("<")) {
+            
+            if (firstLineOfSentence && line.startsWith("<")) {
                 // FinnTreeBank uses pseudo-XML to attach extra metadata to sentences.
                 // Currently, we just ignore this.
                 break; // Consider end of sentence
             }
+            
+            if (firstLineOfSentence && line.startsWith("#")) {
+                // GUM uses a comment to attach extra metadata to sentences.
+                // Currently, we just ignore this.
+                break; // Consider end of sentence
+            }
+
+            firstLineOfSentence = false;
+            
             String[] fields = line.split("\t");
             if (fields.length != 10) {
                 throw new IOException(
