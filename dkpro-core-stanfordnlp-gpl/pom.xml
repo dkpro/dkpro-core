@@ -38,7 +38,7 @@
     <repository>
       <id>ukp-oss</id>
       <name>ukp-oss-releases</name>
-      <url>https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-ext-releases-local</url>
+      <url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-releases</url>
     </repository>
   </repositories>
   <dependencies>
