@@ -30,14 +30,6 @@
   <properties>
     <opennlp.version>1.7.0</opennlp.version>
   </properties>
-  <!-- Repository declaration temporarily needed until OpenNLP is available from Maven Central -->  
-  <repositories>
-    <repository>
-      <id>ext-staging</id>
-      <name>OpenNLP 1.7.0 RC1 staging repo</name>
-      <url>https://repository.apache.org/content/repositories/orgapacheopennlp-1006</url>
-    </repository>
-  </repositories>
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>
