@@ -35,14 +35,14 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.datasets.Dataset;
 import de.tudarmstadt.ukp.dkpro.core.api.datasets.DatasetFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.datasets.Split;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.eval.EvalUtil;
 import de.tudarmstadt.ukp.dkpro.core.eval.model.Span;
 import de.tudarmstadt.ukp.dkpro.core.eval.report.Result;
 import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2006Reader;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
-public class OpenNlpPosTaggerTrainerTest
+public class OpenNlpLemmatizerTrainerTest
 {
     @Test
     public void test()
@@ -51,9 +51,6 @@ public class OpenNlpPosTaggerTrainerTest
         File cache = DkproTestContext.getCacheFolder();
         File targetFolder = testContext.getTestOutputFolder();
         
-        // NOTE: This file contains Asciidoc markers for partial inclusion of this file in the 
-        // documentation. Do not remove these tags!
-        // tag::datasets[]
         // Obtain dataset
         DatasetFactory loader = new DatasetFactory(cache);
         Dataset ds = loader.load("gum-en-conll-2.3.2");
@@ -66,13 +63,12 @@ public class OpenNlpPosTaggerTrainerTest
                 Conll2006Reader.PARAM_PATTERNS, split.getTrainingFiles(),
                 Conll2006Reader.PARAM_USE_CPOS_AS_POS, true,
                 Conll2006Reader.PARAM_LANGUAGE, ds.getLanguage());
-        // end::datasets[]
         
         AnalysisEngineDescription trainer = createEngineDescription(
-                OpenNlpPosTaggerTrainer.class,
-                OpenNlpPosTaggerTrainer.PARAM_TARGET_LOCATION, new File(targetFolder, "model.bin"),
-                OpenNlpPosTaggerTrainer.PARAM_LANGUAGE, ds.getLanguage(),
-                OpenNlpPosTaggerTrainer.PARAM_ITERATIONS, 10);
+                OpenNlpLemmatizerTrainer.class,
+                OpenNlpLemmatizerTrainer.PARAM_TARGET_LOCATION, new File(targetFolder, "model.bin"),
+                OpenNlpLemmatizerTrainer.PARAM_LANGUAGE, ds.getLanguage(),
+                OpenNlpLemmatizerTrainer.PARAM_ITERATIONS, 10);
         
         SimplePipeline.runPipeline(trainReader, trainer);
         
@@ -81,33 +77,32 @@ public class OpenNlpPosTaggerTrainerTest
         CollectionReaderDescription testReader = createReaderDescription(
                 Conll2006Reader.class,
                 Conll2006Reader.PARAM_PATTERNS, split.getTestFiles(),
-                Conll2006Reader.PARAM_READ_POS, false,
+                Conll2006Reader.PARAM_READ_LEMMA, false,
                 Conll2006Reader.PARAM_LANGUAGE, ds.getLanguage());
         
-        AnalysisEngineDescription postagger = createEngineDescription(
-                OpenNlpPosTagger.class,
-                OpenNlpPosTagger.PARAM_PRINT_TAGSET, true,
-                OpenNlpPosTagger.PARAM_MODEL_LOCATION, new File(targetFolder, "model.bin"));
+        AnalysisEngineDescription lemmatizer = createEngineDescription(
+                OpenNlpLemmatizer.class,
+                OpenNlpLemmatizer.PARAM_MODEL_LOCATION, new File(targetFolder, "model.bin"));
 
-        List<Span<String>> actual = EvalUtil.loadSamples(iteratePipeline(testReader, postagger),
-                POS.class, pos -> {
-                    return pos.getPosValue();
+        List<Span<String>> actual = EvalUtil.loadSamples(iteratePipeline(testReader, lemmatizer),
+                Lemma.class, lemma -> {
+                    return lemma.getValue();
                 });
         System.out.printf("Actual samples: %d%n", actual.size());
         
         // Read reference data collect labels
         ConfigurationParameterFactory.setParameter(testReader, 
-                Conll2006Reader.PARAM_READ_POS, true);
-        List<Span<String>> expected = EvalUtil.loadSamples(testReader, POS.class, pos -> {
-            return pos.getPosValue();
+                Conll2006Reader.PARAM_READ_LEMMA, true);
+        List<Span<String>> expected = EvalUtil.loadSamples(testReader, Lemma.class, lemma -> {
+            return lemma.getValue();
         });
         System.out.printf("Expected samples: %d%n", expected.size());
 
         Result results = EvalUtil.dumpResults(targetFolder, expected, actual);
         
-        assertEquals(0.646981, results.getFscore(), 0.0001);
-        assertEquals(0.646981, results.getPrecision(), 0.0001);
-        assertEquals(0.646981, results.getRecall(), 0.0001);
+        assertEquals(0.809843, results.getFscore(), 0.0001);
+        assertEquals(0.809843, results.getPrecision(), 0.0001);
+        assertEquals(0.809843, results.getRecall(), 0.0001);
     }
     
     @Rule

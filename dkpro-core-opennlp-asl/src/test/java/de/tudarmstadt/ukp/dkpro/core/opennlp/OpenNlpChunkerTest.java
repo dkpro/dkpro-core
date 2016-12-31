@@ -118,7 +118,9 @@ public class OpenNlpChunkerTest
     private JCas runTest(String aLanguage, String aVariant, String aText)
         throws Exception
     {
-        AssumeResource.assumeResource(OpenNlpChunker.class, "chunker", aLanguage, aVariant);
+        String variant = aVariant != null ? aVariant : "default";
+        
+        AssumeResource.assumeResource(OpenNlpChunker.class, "chunker", aLanguage, variant);
 
         AnalysisEngineDescription segmenter = createEngineDescription(OpenNlpSegmenter.class);
 
