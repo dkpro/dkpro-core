@@ -296,7 +296,7 @@ public class Conll2006Reader
                 break; // End of sentence
             }
             
-            if (firstLineOfSentence && line.startsWith("<")) {
+            if (line.startsWith("<") && line.endsWith(">")) {
                 // FinnTreeBank uses pseudo-XML to attach extra metadata to sentences.
                 // Currently, we just ignore this.
                 break; // Consider end of sentence
