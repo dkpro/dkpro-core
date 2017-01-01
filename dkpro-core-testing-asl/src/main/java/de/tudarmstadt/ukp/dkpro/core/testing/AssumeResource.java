@@ -48,6 +48,9 @@ public class AssumeResource
             String defModelsLoc = pack + "/lib/" + aTool + "-default-variants.map";
             Properties defaultVariants = PropertiesLoaderUtils.loadAllProperties(defModelsLoc);
             variant = defaultVariants.getProperty(aLanguage);
+            if (variant == null) {
+                variant = defaultVariants.getProperty("*");
+            }
         }
 
         // Check if the model exists by checking for it's DKPro Core metadata file
