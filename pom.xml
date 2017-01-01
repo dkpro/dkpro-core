@@ -87,12 +87,6 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-        <!-- Repository declaration temporarily needed until OpenNLP is available from Maven Central -->  
-        <repository>
-            <id>ext-staging</id>
-            <name>OpenNLP 1.7.0 RC1 staging repo</name>
-            <url>https://repository.apache.org/content/repositories/orgapacheopennlp-1007</url>
-        </repository>
     </repositories>
 	<pluginRepositories>
         <!-- For UIMA/uimaFIT RCs -->
