@@ -39,9 +39,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
-import edu.stanford.nlp.dcoref.CorefChain;
-import edu.stanford.nlp.dcoref.CorefCoreAnnotations;
-import edu.stanford.nlp.dcoref.CorefChain.CorefMention;
+import edu.stanford.nlp.coref.CorefCoreAnnotations;
+import edu.stanford.nlp.coref.data.CorefChain;
+import edu.stanford.nlp.coref.data.CorefChain.CorefMention;
 import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetBeginAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetEndAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.LemmaAnnotation;
@@ -125,6 +125,7 @@ public class CoreNlp2DKPro
     {
         for (CoreMap s : document.get(SentencesAnnotation.class)) {
             SemanticGraph graph = s.get(CollapsedDependenciesAnnotation.class);
+            //SemanticGraph graph = s.get(EnhancedDependenciesAnnotation.class);
             
             // If there are no dependencies for this sentence, skip it. Might well mean we
             // skip all sentences because normally either there are dependencies for all or for
@@ -140,6 +141,7 @@ public class CoreNlp2DKPro
                 dep.setGovernor(root.get(TokenKey.class));
                 dep.setBegin(dep.getDependent().getBegin());
                 dep.setEnd(dep.getDependent().getEnd());
+                dep.setFlavor(DependencyFlavor.BASIC);
                 dep.addToIndexes();
             }
             
@@ -269,7 +271,6 @@ public class CoreNlp2DKPro
             pTree.setPennTree(tree.pennString());
             pTree.addToIndexes();
         }
-        
     }
 
     public static void convertCorefChains(JCas aJCas, Annotation aDocument)
@@ -277,33 +278,36 @@ public class CoreNlp2DKPro
         List<CoreMap> sentences = aDocument.get(SentencesAnnotation.class);
         Map<Integer, CorefChain> chains = aDocument
                 .get(CorefCoreAnnotations.CorefChainAnnotation.class);
-        for (CorefChain chain : chains.values()) {
-            CoreferenceLink last = null;
-            for (CorefMention mention : chain.getMentionsInTextualOrder()) {
-                CoreLabel beginLabel = sentences.get(mention.sentNum - 1)
-                        .get(TokensAnnotation.class).get(mention.startIndex - 1);
-                CoreLabel endLabel = sentences.get(mention.sentNum - 1).get(TokensAnnotation.class)
-                        .get(mention.endIndex - 2);
-                CoreferenceLink link = new CoreferenceLink(aJCas, beginLabel.get(TokenKey.class)
-                        .getBegin(), endLabel.get(TokenKey.class).getEnd());
-    
-                if (mention.mentionType != null) {
-                    link.setReferenceType(mention.mentionType.toString());
+        if (chains != null) {
+            for (CorefChain chain : chains.values()) {
+                CoreferenceLink last = null;
+                for (CorefMention mention : chain.getMentionsInTextualOrder()) {
+                    CoreLabel beginLabel = sentences.get(mention.sentNum - 1)
+                            .get(TokensAnnotation.class).get(mention.startIndex - 1);
+                    CoreLabel endLabel = sentences.get(mention.sentNum - 1)
+                            .get(TokensAnnotation.class).get(mention.endIndex - 2);
+                    CoreferenceLink link = new CoreferenceLink(aJCas,
+                            beginLabel.get(TokenKey.class).getBegin(),
+                            endLabel.get(TokenKey.class).getEnd());
+
+                    if (mention.mentionType != null) {
+                        link.setReferenceType(mention.mentionType.toString());
+                    }
+
+                    if (last == null) {
+                        // This is the first mention. Here we'll initialize the chain
+                        CoreferenceChain corefChain = new CoreferenceChain(aJCas);
+                        corefChain.setFirst(link);
+                        corefChain.addToIndexes();
+                    }
+                    else {
+                        // For the other mentions, we'll add them to the chain.
+                        last.setNext(link);
+                    }
+                    last = link;
+
+                    link.addToIndexes();
                 }
-    
-                if (last == null) {
-                    // This is the first mention. Here we'll initialize the chain
-                    CoreferenceChain corefChain = new CoreferenceChain(aJCas);
-                    corefChain.setFirst(link);
-                    corefChain.addToIndexes();
-                }
-                else {
-                    // For the other mentions, we'll add them to the chain.
-                    last.setNext(link);
-                }
-                last = link;
-    
-                link.addToIndexes();
             }
         }
     }

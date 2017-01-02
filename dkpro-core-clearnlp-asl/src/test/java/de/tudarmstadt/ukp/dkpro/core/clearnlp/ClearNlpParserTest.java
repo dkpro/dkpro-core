@@ -23,14 +23,13 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
 
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 import de.tudarmstadt.ukp.dkpro.core.testing.dumper.DependencyDumper;
 
@@ -48,24 +47,24 @@ public class ClearNlpParserTest
 		JCas jcas = runTest("en", null, documentEnglish);
 
 		String[] dependencies = new String[] { 
-		        "[  0,  2]Dependency(nsubj) D[0,2](We) G[3,7](need)",
-		        "[  3,  7]ROOT(ROOT) D[3,7](need) G[3,7](need)",
-		        "[  8,  9]Dependency(det) D[8,9](a) G[35,43](sentence)",
-		        "[ 10, 14]Dependency(advmod) D[10,14](very) G[15,26](complicated)",
-		        "[ 15, 26]Dependency(amod) D[15,26](complicated) G[35,43](sentence)",
-		        "[ 27, 34]Dependency(nn) D[27,34](example) G[35,43](sentence)",
-		        "[ 35, 43]Dependency(dobj) D[35,43](sentence) G[3,7](need)",
-		        "[ 44, 45]Dependency(punct) D[44,45](,) G[35,43](sentence)",
-		        "[ 46, 51]Dependency(nsubj) D[46,51](which) G[52,60](contains)",
-		        "[ 52, 60]Dependency(rcmod) D[52,60](contains) G[35,43](sentence)",
-		        "[ 61, 63]Dependency(prep) D[61,63](as) G[52,60](contains)",
-		        "[ 64, 68]Dependency(amod) D[64,68](many) G[69,81](constituents)",
-		        "[ 69, 81]Dependency(pobj) D[69,81](constituents) G[61,63](as)",
-		        "[ 82, 85]Dependency(cc) D[82,85](and) G[69,81](constituents)",
-		        "[ 86, 98]Dependency(conj) D[86,98](dependencies) G[69,81](constituents)",
-		        "[ 99,101]Dependency(prep) D[99,101](as) G[86,98](dependencies)",
-		        "[102,110]Dependency(amod) D[102,110](possible) G[99,101](as)",
-		        "[111,112]Dependency(punct) D[111,112](.) G[3,7](need)" };
+		        "[  0,  2]Dependency(nsubj,basic) D[0,2](We) G[3,7](need)",
+		        "[  3,  7]ROOT(ROOT,basic) D[3,7](need) G[3,7](need)",
+		        "[  8,  9]Dependency(det,basic) D[8,9](a) G[35,43](sentence)",
+		        "[ 10, 14]Dependency(advmod,basic) D[10,14](very) G[15,26](complicated)",
+		        "[ 15, 26]Dependency(amod,basic) D[15,26](complicated) G[35,43](sentence)",
+		        "[ 27, 34]Dependency(nn,basic) D[27,34](example) G[35,43](sentence)",
+		        "[ 35, 43]Dependency(dobj,basic) D[35,43](sentence) G[3,7](need)",
+		        "[ 44, 45]Dependency(punct,basic) D[44,45](,) G[35,43](sentence)",
+		        "[ 46, 51]Dependency(nsubj,basic) D[46,51](which) G[52,60](contains)",
+		        "[ 52, 60]Dependency(rcmod,basic) D[52,60](contains) G[35,43](sentence)",
+		        "[ 61, 63]Dependency(prep,basic) D[61,63](as) G[52,60](contains)",
+		        "[ 64, 68]Dependency(amod,basic) D[64,68](many) G[69,81](constituents)",
+		        "[ 69, 81]Dependency(pobj,basic) D[69,81](constituents) G[61,63](as)",
+		        "[ 82, 85]Dependency(cc,basic) D[82,85](and) G[69,81](constituents)",
+		        "[ 86, 98]Dependency(conj,basic) D[86,98](dependencies) G[69,81](constituents)",
+		        "[ 99,101]Dependency(prep,basic) D[99,101](as) G[86,98](dependencies)",
+		        "[102,110]Dependency(amod,basic) D[102,110](possible) G[99,101](as)",
+		        "[111,112]Dependency(punct,basic) D[111,112](.) G[3,7](need)" };
 
 		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
 	}
@@ -79,24 +78,24 @@ public class ClearNlpParserTest
 		JCas jcas = runTest("en", "mayo", documentEnglish);
 
 		String[] dependencies = new String[] { 
-		        "[  0,  2]Dependency(nsubj) D[0,2](We) G[3,7](need)",
-		        "[  3,  7]ROOT(ROOT) D[3,7](need) G[3,7](need)",
-		        "[  8,  9]Dependency(det) D[8,9](a) G[35,43](sentence)",
-		        "[ 10, 14]Dependency(advmod) D[10,14](very) G[15,26](complicated)",
-		        "[ 15, 26]Dependency(amod) D[15,26](complicated) G[35,43](sentence)",
-		        "[ 27, 34]Dependency(nn) D[27,34](example) G[35,43](sentence)",
-		        "[ 35, 43]Dependency(dobj) D[35,43](sentence) G[3,7](need)",
-		        "[ 44, 45]Dependency(punct) D[44,45](,) G[35,43](sentence)",
-		        "[ 46, 51]Dependency(nsubj) D[46,51](which) G[52,60](contains)",
-		        "[ 52, 60]Dependency(rcmod) D[52,60](contains) G[35,43](sentence)",
-		        "[ 61, 63]Dependency(prep) D[61,63](as) G[52,60](contains)",
-		        "[ 64, 68]Dependency(amod) D[64,68](many) G[69,81](constituents)",
-		        "[ 69, 81]Dependency(pobj) D[69,81](constituents) G[61,63](as)",
-		        "[ 82, 85]Dependency(cc) D[82,85](and) G[69,81](constituents)",
-		        "[ 86, 98]Dependency(conj) D[86,98](dependencies) G[69,81](constituents)",
-		        "[ 99,101]Dependency(mark) D[99,101](as) G[102,110](possible)",
-		        "[102,110]Dependency(advcl) D[102,110](possible) G[52,60](contains)",
-		        "[111,112]Dependency(punct) D[111,112](.) G[3,7](need)" };
+		        "[  0,  2]Dependency(nsubj,basic) D[0,2](We) G[3,7](need)",
+		        "[  3,  7]ROOT(ROOT,basic) D[3,7](need) G[3,7](need)",
+		        "[  8,  9]Dependency(det,basic) D[8,9](a) G[35,43](sentence)",
+		        "[ 10, 14]Dependency(advmod,basic) D[10,14](very) G[15,26](complicated)",
+		        "[ 15, 26]Dependency(amod,basic) D[15,26](complicated) G[35,43](sentence)",
+		        "[ 27, 34]Dependency(nn,basic) D[27,34](example) G[35,43](sentence)",
+		        "[ 35, 43]Dependency(dobj,basic) D[35,43](sentence) G[3,7](need)",
+		        "[ 44, 45]Dependency(punct,basic) D[44,45](,) G[35,43](sentence)",
+		        "[ 46, 51]Dependency(nsubj,basic) D[46,51](which) G[52,60](contains)",
+		        "[ 52, 60]Dependency(rcmod,basic) D[52,60](contains) G[35,43](sentence)",
+		        "[ 61, 63]Dependency(prep,basic) D[61,63](as) G[52,60](contains)",
+		        "[ 64, 68]Dependency(amod,basic) D[64,68](many) G[69,81](constituents)",
+		        "[ 69, 81]Dependency(pobj,basic) D[69,81](constituents) G[61,63](as)",
+		        "[ 82, 85]Dependency(cc,basic) D[82,85](and) G[69,81](constituents)",
+		        "[ 86, 98]Dependency(conj,basic) D[86,98](dependencies) G[69,81](constituents)",
+		        "[ 99,101]Dependency(mark,basic) D[99,101](as) G[102,110](possible)",
+		        "[102,110]Dependency(advcl,basic) D[102,110](possible) G[52,60](contains)",
+		        "[111,112]Dependency(punct,basic) D[111,112](.) G[3,7](need)" };
 
 		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
 	}
@@ -115,14 +114,6 @@ public class ClearNlpParserTest
 		return TestRunner.runTest(engine, aLanguage, aText);
 	}
 
-	@Rule public TestName testName = new TestName();
-	@Before
-	public void printSeparator()
-	{
-		Runtime.getRuntime().gc();
-		Runtime.getRuntime().gc();
-		Runtime.getRuntime().gc();
-
-		System.out.println("\n=== "+testName.getMethodName()+" =====================");
-	}
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }

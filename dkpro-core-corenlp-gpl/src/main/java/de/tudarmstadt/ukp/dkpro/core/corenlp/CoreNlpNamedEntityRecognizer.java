@@ -170,7 +170,11 @@ public class CoreNlpNamedEntityRecognizer
     public static final String PARAM_USE_SUTIME = "useSUTime";
     @ConfigurationParameter(name = PARAM_USE_SUTIME, mandatory = true, defaultValue="false")
     boolean useSUTime; // = NumberSequenceClassifier.USE_SUTIME_DEFAULT;    
-    
+
+    public static final String PARAM_AUGMENT_REGEX_NER = "augmentRegexNER";
+    @ConfigurationParameter(name = PARAM_AUGMENT_REGEX_NER, mandatory = true, defaultValue="false")
+    boolean augmentRegexNER; // = NERClassifierCombiner.APPLY_GAZETTE_PROPERTY;    
+
     boolean verbose = false;
     
     private ModelProviderBase<NERCombinerAnnotator> annotatorProvider;
@@ -290,7 +294,7 @@ public class CoreNlpNamedEntityRecognizer
             }
 
             NERClassifierCombiner combiner = new NERClassifierCombiner(applyNumericClassifiers,
-                    useSUTime, classifier);
+                    useSUTime, augmentRegexNER, classifier);
             
             NERCombinerAnnotator annotator = new NERCombinerAnnotator(combiner, verbose,
                     numThreads, maxTime, maxSentenceLength);

@@ -19,6 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.ixa.internal;
 
 import static java.util.Collections.singletonMap;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -28,7 +29,6 @@ import org.apache.commons.lang3.reflect.FieldUtils;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.TagsetBase;
 import opennlp.tools.ml.model.AbstractModel;
-import opennlp.tools.ml.model.IndexHashTable;
 import opennlp.tools.ml.model.SequenceClassificationModel;
 
 public class IxaLemmatizerTagsetDescriptionProvider
@@ -60,12 +60,12 @@ public class IxaLemmatizerTagsetDescriptionProvider
     {
         try {
             AbstractModel innerModel = (AbstractModel) FieldUtils.readField(model, "model", true);
-            IndexHashTable pmap = (IndexHashTable) FieldUtils.readField(innerModel, "pmap", true);
-            Object[] keys = (Object[]) FieldUtils.readField(pmap, "keys", true);
+            HashMap<String, Integer> pmap = (HashMap<String, Integer>) FieldUtils
+                    .readField(innerModel, "pmap", true);
             
             Set<String> tagSet = new TreeSet<String>();
             String prefix = feature + separator;
-            for (Object key : keys) {
+            for (Object key : pmap.keySet()) {
                 if (key instanceof String && ((String) key).startsWith(prefix)) {
                     tagSet.add(StringUtils.substringAfter(((String) key), separator));
                 }

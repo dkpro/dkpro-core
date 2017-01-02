@@ -31,20 +31,21 @@
 	<property name="tagger.date" value="2015-12-09"/>
 	
 	<!-- http://nlp.stanford.edu/software/lex-parser.shtml -->
-	<property name="parser.version.real" value="3.6.0"/>
-	<property name="parser.date" value="2015-12-09"/>
+	<property name="parser.version.real" value="3.7.0"/>
+	<property name="parser.date" value="2016-10-31"/>
 	<property name="core.srparser.date" value="2014-10-23"/>
 	
 	<!-- http://nlp.stanford.edu/software/corenlp.shtml -->
-	<property name="core.version.real" value="3.6.0"/>
-	<property name="core.version" value="20151209"/>
-	<property name="core.date" value="2015-12-09"/>
+	<property name="core.version.real" value="3.7.0"/>
+	<property name="core.version" value="20161031"/>
+    <property name="core.date" value="2016-10-31"/>
 	
-    <property name="core.chinese.date" value="2016-01-19"/>
-    <property name="core.english.date" value="2016-01-10"/>
-    <property name="core.french.date" value="2016-01-14"/>
-    <property name="core.german.date" value="2016-01-19"/>
-    <property name="core.spanish.date" value="2015-10-14"/>
+    <property name="core.arabic.date" value="2016-10-31"/>
+    <property name="core.chinese.date" value="2016-10-31"/>
+    <property name="core.english.date" value="2016-10-31"/>
+    <property name="core.french.date" value="2016-10-31"/>
+    <property name="core.german.date" value="2016-10-31"/>
+    <property name="core.spanish.date" value="2016-10-31"/>
 	
 	<!-- 
 	  - Output package configuration
@@ -68,36 +69,23 @@
 	<target name="newmodels">
         <property name="install-artifact-mode" value="remote"/>
 		
-        <!--
-        <antcall target="tagger-en-wsj-0-18-bidirectional-distsim"/>
-        <antcall target="ner-en-conll.4class.caseless.distsim.crf"/>
-		<antcall target="ner-en-all.3class.caseless.distsim.crf"/>
-		<antcall target="ner-en-nowiki.3class.caseless.distsim.crf"/>
-		<antcall target="ner-en-nowiki.3class.nodistsim.crf"/>
-		<antcall target="ner-en-all.3class.nodistsim.crf"/>
-		<antcall target="ner-en-conll.4class.nodistsim.crf"/>
-		<antcall target="ner-en-muc.7class.nodistsim.crf"/>
-        <antcall target="parser-en-pcfg.caseless"/>
-		<antcall target="tagger-es-default"/>
-        <antcall target="parser-fr-sr"/>
-		
-        <antcall target="depparser-de-ud"/>
-        <antcall target="depparser-en-ud"/>
-        <!- - FIXME depparser-en-sd - ->
-        <!- - FIXME depparser-en-wsj-sd - ->
-        <antcall target="depparser-fr-ud"/>
-        -->
+        <antcall target="tagger-de-ud"/>
 
 		<!--
-        <antcall target="ner-en-freme-wikiner"/>
-        <antcall target="ner-es-freme-wikiner"/>
-        <antcall target="ner-fr-freme-wikiner"/>
-        <antcall target="ner-it-freme-wikiner"/>
-        <antcall target="ner-nl-freme-wikiner"/>
-        -->
-        <antcall target="ner-ru-freme-wikiner"/>
+		<antcall target="ner-de-hgc_175m_600.crf"/>
+		<antcall target="depparser-de-ud"/>
+		<antcall target="ner-en-all.3class.distsim.crf"/>
+		<antcall target="ner-en-all.3class.caseless.distsim.crf"/>
+		<antcall target="ner-en-nowiki.3class.caseless.distsim.crf"/>
+		<antcall target="depparser-en-ud"/>
+		<antcall target="tagger-es-default"/>
+		<antcall target="tagger-es-distsim"/>
+		<antcall target="ner-es-ancora.distsim.s512.crf"/>
+		<antcall target="parser-es-pcfg"/>
+		<antcall target="parser-es-sr"/>
+		<antcall target="parser-es-sr-beam"/>
+		<antcall target="depparser-fr-ud"/>
 		
-		<!--
 		<antcall target="coref-en-default"/>
 		-->
 	</target>
@@ -131,7 +119,7 @@
 		</install-stub-and-upstream-file>
 	</target>
 	
-	<target name="parser-ar-factored" depends="download-parser">	
+	<target name="parser-ar-factored" depends="download-ar">	
     	<install-stub-and-upstream-file 
     		file="target/download/parser/arabicFactored.ser.gz" 
     		md5="3d04cbd017e2c7c321e938fb344d91d3"
@@ -206,13 +194,14 @@
           - to repackage them. If upstream at some point provides smaller JARs (best per-model)
           - then we should reconsider referring to them directly instead of re-packaging.
           -->
-		<antcall target="tagger-de-dewac"/>
+		<!-- NOT IN 3.7.0 antcall target="tagger-de-dewac"/ -->
+        <antcall target="tagger-de-ud"/>
 		<antcall target="tagger-de-hgc"/>
 		<antcall target="tagger-de-fast"/>
 		<antcall target="tagger-de-fast-caseless"/>
         <antcall target="ner-de-nemgp"/>
 		<antcall target="ner-de-hgc_175m_600.crf"/>
-		<antcall target="ner-de-dewac_175m_600.crf"/>
+		<!-- NOT IN 3.7.0 antcall target="ner-de-dewac_175m_600.crf"/ -->
 		<antcall target="parser-de-pcfg"/>
 		<antcall target="parser-de-factored"/>
 		<antcall target="parser-de-sr"/>
@@ -244,6 +233,31 @@
         <delete dir="target/download/tmp"/>
 	</target>
 		
+    <target name="tagger-de-ud" depends="download-de">
+        <mkdir dir="target/download/tmp"/>
+        <unzip src="target/download/de/de-models.zip" dest="target/download/tmp">
+            <patternset>
+                <include name="edu/stanford/nlp/models/pos-tagger/german/german-ud.tagger*"/>      
+            </patternset>
+        </unzip>
+        <install-stub-and-upstream-file 
+            file="target/download/tmp/edu/stanford/nlp/models/pos-tagger/german/german-ud.tagger" 
+            md5="bf5af79f6927580168636b8c477432aa"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+            upstreamVersion="20161213"
+            metaDataVersion="1"
+            tool="tagger"
+            language="de"
+            variant="ud"
+            extension="tagger">     
+            <metadata>
+                <entry key="pos.tagset" value="ud"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+        <delete dir="target/download/tmp"/>
+    </target>
+        
 	<target name="tagger-de-hgc" depends="download-de">
         <mkdir dir="target/download/tmp"/>
         <unzip src="target/download/de/de-models.zip" dest="target/download/tmp">
@@ -357,15 +371,15 @@
         <mkdir dir="target/download/tmp"/>
         <unzip src="target/download/de/de-models.zip" dest="target/download/tmp">
             <patternset>
-                <include name="edu/stanford/nlp/models/ner/german.hgc_175m_600.*"/>      
+                <include name="edu/stanford/nlp/models/ner/german.conll.hgc_175m_600.*"/>      
             </patternset>
         </unzip>
 		<install-stub-and-upstream-file 
-			file="target/download/tmp/edu/stanford/nlp/models/ner/german.hgc_175m_600.crf.ser.gz" 
-			md5="1ee4ad7028d28f9e0af20e9cd45432f7"
+			file="target/download/tmp/edu/stanford/nlp/models/ner/german.conll.hgc_175m_600.crf.ser.gz" 
+			md5="596e40c6b5a38a322ae9d66a73396c00"
 			groupId="de.tudarmstadt.ukp.dkpro.core" 
 			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp" 
-    		upstreamVersion="20150130"
+    		upstreamVersion="20161213"
     		metaDataVersion="1"
 			tool="ner" 
 			language="de" 
@@ -484,10 +498,10 @@
         
         <install-stub-and-upstream-file 
             file="target/download/tmp/edu/stanford/nlp/models/parser/nndep/UD_German.gz" 
-            md5="c2cd7c55750e2d4dcdd8a16963430c40"
+            md5="198d61a00efa3b1d2618464273c615b3"
             groupId="de.tudarmstadt.ukp.dkpro.core" 
             artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-            upstreamVersion="20160119"
+            upstreamVersion="20161213"
             metaDataVersion="1"
             tool="depparser" 
             language="de" 
@@ -992,10 +1006,10 @@
             
     	<install-stub-and-upstream-file 
     		file="target/download/tmp/edu/stanford/nlp/models/ner/english.all.3class.distsim.crf.ser.gz" 
-    		md5="7fc85f51bad64ca8c29c6b3012187046"
+    		md5="2a897862e3285b1102f29777b3901848"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20150420" 
+    		upstreamVersion="20161213" 
     		metaDataVersion="1"
     		tool="ner" 
     		language="en" 
@@ -1040,10 +1054,10 @@
             
     	<install-stub-and-upstream-file 
     		file="target/download/tmp/edu/stanford/nlp/models/ner/english.all.3class.caseless.distsim.crf.ser.gz" 
-    		md5="17b11e636d2acf1469f461210c8f7d72"
+    		md5="0f40777412b15d228ffcd3fb1f2dc54b"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-            upstreamVersion="20160110"
+            upstreamVersion="20161213"
     		metaDataVersion="0"
     		tool="ner" 
     		language="en" 
@@ -1064,10 +1078,10 @@
             
     	<install-stub-and-upstream-file 
     		file="target/download/tmp/edu/stanford/nlp/models/ner/english.nowiki.3class.caseless.distsim.crf.ser.gz" 
-    		md5="fa89199f9f1880d97f71bbaab9d3c8c9"
+    		md5="5127d33d91ce67ca61df718303d3479b"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-            upstreamVersion="20160110"
+            upstreamVersion="20161213"
     		metaDataVersion="0"
     		tool="ner" 
     		language="en" 
@@ -1394,10 +1408,10 @@
         
         <install-stub-and-upstream-file 
             file="target/download/tmp/edu/stanford/nlp/models/parser/nndep/english_UD.gz" 
-            md5="1f34d35983a51a95e66895dad273a649"
+            md5="a0e95f9a00fe3cc44c4d9383d3ab0c29"
             groupId="de.tudarmstadt.ukp.dkpro.core" 
             artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-            upstreamVersion="20160110"
+            upstreamVersion="20161213"
             metaDataVersion="1"
             tool="depparser" 
             language="en" 
@@ -1445,13 +1459,13 @@
             
     	<install-stub-and-upstream-file 
     		file="target/download/tmp/edu/stanford/nlp/models/pos-tagger/spanish/spanish.tagger.gz" 
-    		md5="22ff2fb3662f1b6efa8bb28935c0ff73"
+    		md5="950cdc4dfd3744de6ce10c020147acc7"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		tool="tagger" 
     		language="es" 
     		variant="default" 
-    		upstreamVersion="20151014" 
+    		upstreamVersion="20161211" 
     		metaDataVersion="1"
 			extension="ser.gz">		
 			<metadata>
@@ -1475,13 +1489,13 @@
 		
     	<install-stub-and-upstream-file 
     		file="target/download/tmp/edu/stanford/nlp/models/pos-tagger/spanish/spanish-distsim.tagger.gz" 
-    		md5="63b926490030760f28f2ae3f86e60d8c"
+    		md5="ce661191fc8b5d02b0aa4f889b2b1e87"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		tool="tagger" 
     		language="es" 
     		variant="distsim" 
-    		upstreamVersion="20150108" 
+    		upstreamVersion="20161211" 
     		metaDataVersion="1"
 			extension="ser.gz">		
 			<metadata>
@@ -1502,13 +1516,13 @@
 		
     	<install-stub-and-upstream-file 
     		file="target/download/tmp/edu/stanford/nlp/models/ner/spanish.ancora.distsim.s512.crf.ser.gz" 
-    		md5="8437aab854330b083c1881510cdccddc"
+    		md5="23e37ea03ddaaea76c821630fc4249f5"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		tool="ner" 
     		language="es" 
     		variant="ancora.distsim.s512.crf" 
-    		upstreamVersion="20140826" 
+    		upstreamVersion="20161211" 
     		metaDataVersion="1"
 			extension="ser.gz">		
 		</install-stub-and-upstream-file>		
@@ -1556,10 +1570,10 @@
         
     	<install-stub-and-upstream-file 
     		file="target/download/tmp/edu/stanford/nlp/models/lexparser/spanishPCFG.ser.gz" 
-    		md5="28688c20f991b089618493ab6c619ea4"
+    		md5="58e101bb88af8fa3abafd1f320175d44"
     	    groupId="de.tudarmstadt.ukp.dkpro.core" 
     	    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20150108"
+    		upstreamVersion="20161211"
     		metaDataVersion="1"
     		tool="parser" 
     		language="es" 
@@ -1584,10 +1598,10 @@
         
     	<install-stub-and-upstream-file 
     		file="target/download/tmp/edu/stanford/nlp/models/srparser/spanishSR.ser.gz" 
-    		md5="8caf03cca53804712122a95dfe51cbd1"
+    		md5="6fe32a2d525c3fb0646a5cbf10f694cd"
     	    groupId="de.tudarmstadt.ukp.dkpro.core" 
     	    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20141023"
+    		upstreamVersion="20161211"
     		metaDataVersion="1"
     		tool="parser" 
     		language="es" 
@@ -1612,10 +1626,10 @@
         
     	<install-stub-and-upstream-file 
     		file="target/download/tmp/edu/stanford/nlp/models/srparser/spanishSR.beam.ser.gz" 
-    		md5="c0f15fe37b818d820f164fbf9ba080ec"
+    		md5="3398e95da4f9c35d270fc4b107c903bd"
     	    groupId="de.tudarmstadt.ukp.dkpro.core" 
     	    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20141023"
+    		upstreamVersion="20161211"
     		metaDataVersion="1"
     		tool="parser" 
     		language="es" 
@@ -1733,10 +1747,10 @@
         
         <install-stub-and-upstream-file 
             file="target/download/tmp/edu/stanford/nlp/models/parser/nndep/UD_French.gz" 
-            md5="c2cd7c55750e2d4dcdd8a16963430c40"
+            md5="f20a7664ecc0068cd1b315e09e774c09"
             groupId="de.tudarmstadt.ukp.dkpro.core" 
             artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-            upstreamVersion="20160110"
+            upstreamVersion="20161211"
             metaDataVersion="1"
             tool="depparser" 
             language="fr" 
@@ -2379,6 +2393,17 @@
 	  - MODELS
 	  - ============================================================================================
 	  -->
+    <target name="-check-download-ar">
+        <available property="download-ar.DONE" file="target/download/ar/DONE"/>
+    </target>
+
+    <target name="download-ar" depends="-check-download-ar" unless="download-ar.DONE">
+        <mkdir dir="target/download/ar"/>
+        <get src="http://nlp.stanford.edu/software/stanford-arabic-corenlp-${core.arabic.date}-models.jar" 
+            dest="target/download/ar/ar-models.zip" skipexisting="true"/>
+        <touch file="target/download/ar/DONE"/>
+    </target>
+	
     <target name="-check-download-en">
         <available property="download-en.DONE" file="target/download/en/DONE"/>
     </target>
@@ -2396,7 +2421,7 @@
 
     <target name="download-de" depends="-check-download-de" unless="download-de.DONE">
         <mkdir dir="target/download/de"/>
-    	<get src="http://nlp.stanford.edu/software/stanford-german-${core.german.date}-models.jar"
+    	<get src="http://nlp.stanford.edu/software/stanford-german-corenlp-${core.german.date}-models.jar"
             dest="target/download/de/de-models.zip" skipexisting="true"/>
         <touch file="target/download/de/DONE"/>
     </target>

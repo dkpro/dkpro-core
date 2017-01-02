@@ -103,21 +103,16 @@ out.print escapeJava((paramValues[it.key][0].value != null ?
 <% } // if (paramDecls) %>
 
 <%
-def inputs = engine.spec.analysisEngineMetaData?.capabilities?.collect { 
-        it.inputs?.collect { it.name  } }.flatten().sort().unique();
-def outputs = engine.spec.analysisEngineMetaData?.capabilities?.collect { 
-        it.outputs?.collect { it.name  } }.flatten().sort().unique();
-
-if (inputs || outputs) {
+if (engine.inputs || engine.outputs || engine.languages) {
 %>
 
-.Inputs and outputs
-[cols="h,v", role="small"]
+.Capabilities
+[cols="1h,2v", role="small"]
 |====
 | Inputs 
 | <% 
-if (inputs) { 
-  inputs.each { out.println Util.typeLink(it) };
+if (engine.inputs) { 
+  engine.inputs.each { out.println Util.typeLink(it) };
 } else { 
   out.println '__none specified__';
 }
@@ -125,41 +120,33 @@ if (inputs) {
 
 | Outputs
 | <% 
-if (outputs) { 
-  outputs.each { out.println Util.typeLink(it) };
+if (engine.outputs) { 
+  engine.outputs.each { out.println Util.typeLink(it) };
+} else { 
+  out.println '__none specified__';
+}
+%>
+
+| Languages
+d| <% 
+if (engine.languages) { 
+  out.println engine.languages.join(', ');
+} else if (engine.models) { 
+  out.println '__see available models__';
 } else { 
   out.println '__none specified__';
 }
 %>
 |====
-<% } // inputs/outputs %>
+<% } // capabilities %>
 
 <%
-def languages = engine.spec.analysisEngineMetaData?.capabilities?.collect { 
-        it.languagesSupported }.flatten().sort().unique();
-if (languages) {
-%>
-.Languages
-[options="header", role="small"]
-|====
-|Language
-<% languages.each { lang -> %>
-|${lang}
-
-<% } // languages.each { lang -> %>
-|====
-<% } // if (languages) %>
-
-
-<%
-def mods = models.findAll { it.@engine == engine.name };
-
-if (mods) { %>
+if (engine.models) { %>
 .Models
 [options="header", role="small"]
 |====
 |Language|Variant|Version
-<% mods.each { model -> %>
+<% engine.models.each { model -> %>
 |${model.@language}
 |${Util.modelLink(model,model.@variant)}
 |${model.@version}

@@ -35,7 +35,8 @@ public final class MimeTypes
     public final static String APPLICATION_X_GATE_XML = "application/x.org.dkpro.gate+xml";
     public final static String APPLICATION_X_GRAF_XML = "application/x.org.dkpro.graf+xml";
     public final static String APPLICATION_X_UIMA_JSON = "application/x.org.dkpro.uima+json";
-    public final static String APPLICATION_X_UIMA_XMI= "application/x.org.dkpro.uima+xmi";
+    public final static String APPLICATION_X_UIMA_XMI = "application/x.org.dkpro.uima+xmi";
+    public final static String APPLICATION_X_UIMA_BINARY = "application/x.org.dkpro.uima+binary";
     public final static String APPLICATION_X_LIF_JSON = "application/x.org.dkpro.lif+json";
     public final static String APPLICATION_X_LXF_JSON = "application/x.org.dkpro.lxf+json";
     public final static String APPLICATION_X_NEGRA3 = "application/x.org.dkpro.negra3";

@@ -294,6 +294,26 @@
               </attributes>
             </configuration>
           </execution>
+          <execution>
+            <id>language-reference-html</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>process-asciidoc</goal>
+            </goals>
+            <configuration>
+              <backend>html5</backend>
+              <sourceHighlighter>coderay</sourceHighlighter>
+              <sourceDocumentName>language-reference.adoc</sourceDocumentName>
+              <imagesDir>./language-reference/images</imagesDir>
+              <doctype>book</doctype>
+              <attributes>
+                <toc>left</toc>
+                <include-dir>./language-reference/</include-dir>
+                <source-dir>${project.basedir}/../</source-dir>
+                <generated-dir>${project.basedir}/target/generated-adoc/</generated-dir>
+              </attributes>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
     </plugins>

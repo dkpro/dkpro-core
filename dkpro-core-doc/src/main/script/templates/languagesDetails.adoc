@@ -1,0 +1,34 @@
+<%
+import de.tudarmstadt.ukp.dkpro.core.doc.Util;
+
+def languages = engines.collect { k,e -> e.allLanguages }.flatten().unique().sort(); 
+def roles = engines.collect { k,e -> e.role }.flatten().unique().sort { it != 'Other' ? it : 'Z' };
+
+languages.each { lang ->
+    def enginesForLang = engines
+        .collect { it.value }
+        .findAll { lang in it.allLanguages }
+        .sort { it.name };
+%>
+[[language-${lang}]]
+== ${ lang }
+
+.Components for ${lang}
+[options="header",cols="1s,2v"]
+|====
+|Role|Components
+
+<% 
+  roles.each { role ->
+%>
+| ${role}
+| <%
+    enginesForLang.grep { it.role == role }.each { engine ->
+      out.println Util.engineLink(engine)
+    }
+  }
+%>
+|====
+<%
+} 
+%>

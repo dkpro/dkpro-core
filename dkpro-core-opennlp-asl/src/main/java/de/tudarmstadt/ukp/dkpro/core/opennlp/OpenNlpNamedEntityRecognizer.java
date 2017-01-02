@@ -25,11 +25,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import opennlp.tools.namefind.NameFinderME;
-import opennlp.tools.namefind.TokenNameFinder;
-import opennlp.tools.namefind.TokenNameFinderModel;
-import opennlp.tools.util.Span;
-
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -46,7 +41,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableStreamProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionProvider;
+import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpSequenceTagsetDescriptionProvider;
+import opennlp.tools.namefind.NameFinderME;
+import opennlp.tools.namefind.TokenNameFinder;
+import opennlp.tools.namefind.TokenNameFinderModel;
+import opennlp.tools.util.Span;
 
 /**
  * OpenNLP name finder wrapper.
@@ -129,8 +128,8 @@ public class OpenNlpNamedEntityRecognizer
                 TokenNameFinderModel model = new TokenNameFinderModel(aStream);
 
                 if (printTagSet) {
-                    OpenNlpTagsetDescriptionProvider tsdp = new OpenNlpTagsetDescriptionProvider(
-                            null, NamedEntity.class, model.getNameFinderModel());
+                    OpenNlpSequenceTagsetDescriptionProvider tsdp = new OpenNlpSequenceTagsetDescriptionProvider(
+                            null, NamedEntity.class, model.getNameFinderSequenceModel());
                     tsdp.setTagSplitPattern("-(?=[^-]*$)");
                     // FIXME addTagset(tsdp)
                     getContext().getLogger().log(INFO, tsdp.toString());

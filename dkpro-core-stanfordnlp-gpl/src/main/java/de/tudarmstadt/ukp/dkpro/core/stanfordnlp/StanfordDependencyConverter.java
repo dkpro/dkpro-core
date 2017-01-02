@@ -38,6 +38,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.DependenciesMode;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.internal.RootKey;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.internal.TokenKey;
@@ -202,26 +203,34 @@ public class StanfordDependencyConverter
         case CC_PROPAGATED_NO_EXTRA:
             dependencies = gs.typedDependenciesCCprocessed(false);
             break;
+        case ENHANCED:
+            dependencies = gs.typedDependenciesEnhanced();
+            break;
+        case ENHANCED_PLUS_PLUS:
+            dependencies = gs.typedDependenciesEnhancedPlusPlus();
+            break;
         case TREE:
             dependencies = gs.typedDependenciesCollapsedTree();
             break;
+        default:
+            throw new IllegalArgumentException("Unknown mode: [" + mode + "]");
         }
 
         for (TypedDependency currTypedDep : dependencies) {
             int govIndex = currTypedDep.gov().index();
             int depIndex = currTypedDep.dep().index();
+            Dependency dep;
             if (govIndex != 0) {
                 Token govToken = tokens.get(govIndex - 1);
                 Token depToken = tokens.get(depIndex - 1);
 
-                StanfordAnnotator.createDependencyAnnotation(aJCas, currTypedDep.reln(), govToken,
-                        depToken);
+                dep = StanfordAnnotator.createDependencyAnnotation(aJCas, currTypedDep.reln(),
+                        govToken, depToken);
             }
             else {
                 Token depToken = tokens.get(depIndex - 1);
                 
-                Dependency dep = new de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT(
-                        aJCas);
+                dep = new de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT(aJCas);
                 dep.setDependencyType(currTypedDep.reln().toString());
                 dep.setGovernor(depToken);
                 dep.setDependent(depToken);
@@ -229,6 +238,8 @@ public class StanfordDependencyConverter
                 dep.setEnd(dep.getDependent().getEnd());
                 dep.addToIndexes();
             }
+            
+            dep.setFlavor(currTypedDep.extra() ? DependencyFlavor.ENHANCED : DependencyFlavor.BASIC);
         }
     }
 

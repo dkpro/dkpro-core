@@ -55,6 +55,16 @@
       <groupId>uk.ac.gate</groupId>
       <artifactId>gate-core</artifactId>
       <version>${gate.version}</version>
+      <exclusions>
+        <!-- 
+          This is a runtime dependency of GATE - excluding due to potential conflicts with the
+          DKPro Core PDF I/O module
+         -->
+        <exclusion>
+          <groupId>org.apache.tika</groupId>
+          <artifactId>tika-parsers</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>

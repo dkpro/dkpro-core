@@ -68,18 +68,6 @@ public class CoreNlpSegmenter
     private String boundaryMultiTokenRegex;
 
     /**
-     * This is a Set of String that are matched with .equals() which are allowed to be tacked onto
-     * the end of a sentence after a sentence boundary token, for example ")".
-     * 
-     * @see WordToSentenceProcessor#DEFAULT_BOUNDARY_FOLLOWERS
-     */
-    public static final String PARAM_BOUNDARY_FOLLOWERS = "boundaryFollowers";
-    @ConfigurationParameter(name = PARAM_BOUNDARY_FOLLOWERS, mandatory = false, defaultValue = {
-            ")", "]", "}", "\"", "'", "''", "\u2019", "\u201D", "-RRB-", "-RSB-", "-RCB-", ")",
-            "]", "}" })
-    private Set<String> boundaryFollowers;
-
-    /**
      * These are elements like "p" or "sent", which will be wrapped into regex for approximate XML
      * matching. They will be deleted in the output, and will always trigger a sentence boundary.
      */
@@ -96,15 +84,6 @@ public class CoreNlpSegmenter
     @ConfigurationParameter(name = PARAM_BOUNDARIES_TO_DISCARD, mandatory = false, defaultValue = {
             "\n", "*NL*" })
     private Set<String> boundaryToDiscard;
-
-    /**
-     * A regular expression for element names containing a sentence region. Only tokens in such
-     * elements will be included in sentences. The start and end tags themselves are not included in
-     * the sentence.
-     */
-    public static final String PARAM_REGION_ELEMENT_REGEX = "regionElementRegex";
-    @ConfigurationParameter(name = PARAM_REGION_ELEMENT_REGEX, mandatory = false)
-    private String regionElementRegex;
 
     /**
      * Strategy for treating newlines as sentence breaks.

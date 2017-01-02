@@ -41,6 +41,9 @@ public class CoreNlpUtils
         if (aToken.getLemma() != null) {
             t.setLemma(aToken.getLemma().getValue());
         }
+        else {
+            t.setLemma(aToken.getText());
+        }
         
         if (aToken.getPos() != null) {
             t.setTag(aToken.getPos().getPosValue());

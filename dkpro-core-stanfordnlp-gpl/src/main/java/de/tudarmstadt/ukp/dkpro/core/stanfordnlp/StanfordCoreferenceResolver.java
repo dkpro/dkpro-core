@@ -201,8 +201,8 @@ public class StanfordCoreferenceResolver
                 //   new String[]{DefaultPaths.DEFAULT_DCOREF_DICT1, DefaultPaths.DEFAULT_DCOREF_DICT2,
                 //   DefaultPaths.DEFAULT_DCOREF_DICT3, DefaultPaths.DEFAULT_DCOREF_DICT4}),
                 props.put(Constants.DICT_LIST_PROP, '[' + base + "coref.dict1.tsv" + ',' + base
-                        + "coref.dict1.tsv" + ',' + base + "coref.dict1.tsv" + ',' + base
-                        + "coref.dict1.tsv" + ']');
+                        + "coref.dict2.tsv" + ',' + base + "coref.dict3.tsv" + ',' + base
+                        + "coref.dict4.tsv" + ']');
                 // props.getProperty(Constants.DICT_PMI_PROP, DefaultPaths.DEFAULT_DCOREF_DICT1),
                 props.put(Constants.DICT_PMI_PROP, base + "coref.dict1.tsv");
                 // props.getProperty(Constants.SIGNATURES_PROP, DefaultPaths.DEFAULT_DCOREF_NE_SIGNATURES));
@@ -232,13 +232,6 @@ public class StanfordCoreferenceResolver
         List<CoreMap> sentences = new ArrayList<CoreMap>();
         List<List<CoreLabel>> sentenceTokens = new ArrayList<List<CoreLabel>>();
         for (ROOT root : select(aJCas, ROOT.class)) {
-            // Copy all relevant information from the tokens
-            List<CoreLabel> tokens = new ArrayList<CoreLabel>();
-            for (Token token : selectCovered(Token.class, root)) {
-                tokens.add(tokenToWord(token));
-            }
-            sentenceTokens.add(tokens);
-
             // SemanticHeadFinder (nonTerminalInfo) does not know about PRN0, so we have to replace
             // it with PRN to avoid NPEs.
             TreeFactory tFact = new LabeledScoredTreeFactory(CoreLabel.factory())
@@ -255,14 +248,20 @@ public class StanfordCoreferenceResolver
                 }
             };
 
-            // deep copy of the tree. These are modified inside coref!
-            Tree treeCopy = TreeUtils.createStanfordTree(root, tFact).treeSkeletonCopy();
-            treeCopy.indexSpans();
-            trees.add(treeCopy);
+            Tree tree = TreeUtils.createStanfordTree(root, tFact);
+            tree.indexSpans();
+            trees.add(tree);
 
+            // Build the tokens
+            List<CoreLabel> tokens = new ArrayList<CoreLabel>();
+            for (Tree leave : tree.getLeaves()) {
+                tokens.add((CoreLabel) leave.label());
+            }
+            sentenceTokens.add(tokens);
+            
             // Build the sentence
             CoreMap sentence = new CoreLabel();
-            sentence.set(TreeAnnotation.class, treeCopy);
+            sentence.set(TreeAnnotation.class, tree);
             sentence.set(TokensAnnotation.class, tokens);
             sentence.set(RootKey.class, root);
             sentences.add(sentence);
@@ -274,7 +273,7 @@ public class StanfordCoreferenceResolver
             GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory(
                     tlp.punctuationWordRejectFilter(), tlp.typedDependencyHeadFinder());
             ParserAnnotatorUtils.fillInParseAnnotations(false, true, gsf, sentence,
-                    asList(treeCopy), GrammaticalStructure.Extras.NONE);
+                    asList(tree), GrammaticalStructure.Extras.NONE);
             
             // https://github.com/dkpro/dkpro-core/issues/582
             SemanticGraph deps = sentence
@@ -285,13 +284,13 @@ public class StanfordCoreferenceResolver
             
             // These lines are necessary since CoreNLP 3.5.2 - without them the mentions lack
             // dependency information which causes an NPE
-            SemanticGraph dependencies = SemanticGraphFactory.makeFromTree(treeCopy,
-                    Mode.COLLAPSED, Extras.NONE, false, null, true);
+            SemanticGraph dependencies = SemanticGraphFactory.makeFromTree(tree,
+                    Mode.COLLAPSED, Extras.NONE, null, false, true);
             sentence.set(SemanticGraphCoreAnnotations.AlternativeDependenciesAnnotation.class,
                     dependencies);
             
             // merge the new CoreLabels with the tree leaves
-            MentionExtractor.mergeLabels(treeCopy, tokens);
+            MentionExtractor.mergeLabels(tree, tokens);
             MentionExtractor.initializeUtterance(tokens);
         }
 

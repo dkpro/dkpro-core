@@ -18,17 +18,19 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.corenlp.internal;
 
+import static org.apache.uima.fit.util.JCasUtil.selectPreceding;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.fit.util.JCasUtil.selectFollowing;
-import static org.apache.uima.fit.util.JCasUtil.selectPreceding;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.uima.cas.CASException;
@@ -41,6 +43,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetBeginAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetEndAnnotation;
@@ -54,14 +58,19 @@ import edu.stanford.nlp.ling.CoreAnnotations.StemAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.TokensAnnotation;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.ling.HasWord;
+import edu.stanford.nlp.ling.IndexedWord;
 import edu.stanford.nlp.ling.Word;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.process.CoreLabelTokenFactory;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
+import edu.stanford.nlp.semgraph.SemanticGraph;
+import edu.stanford.nlp.semgraph.SemanticGraphCoreAnnotations.EnhancedDependenciesAnnotation;
+import edu.stanford.nlp.trees.GrammaticalRelation;
 import edu.stanford.nlp.trees.LabeledScoredTreeFactory;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TreeCoreAnnotations.TreeAnnotation;
 import edu.stanford.nlp.trees.TreeFactory;
+import edu.stanford.nlp.trees.TypedDependency;
 import edu.stanford.nlp.util.CoreMap;
 
 public class DKPro2CoreNlp
@@ -147,11 +156,12 @@ public class DKPro2CoreNlp
             sentence.set(SentenceIndexAnnotation.class, sentences.size());
             
             // Tokens
+            Map<Token, IndexedWord> idxTokens = new HashMap<>();
             List<CoreLabel> tokens = new ArrayList<>();
             for (Token t : selectCovered(Token.class, s)) {
                 String tokenText = t.getCoveredText();
                 if (encoding != null && !"UTF-8".equals(encoding.name())) {
-                    tokenText = new String(tokenText.getBytes(), encoding);                
+                    tokenText = new String(tokenText.getBytes(StandardCharsets.UTF_8), encoding);                
                 }
                 
                 CoreLabel token = tokenFactory.makeToken(tokenText, t.getBegin(),
@@ -162,6 +172,7 @@ public class DKPro2CoreNlp
                 token.set(SentenceIndexAnnotation.class, sentences.size());
                 token.set(IndexAnnotation.class, tokens.size());
                 token.set(TokenKey.class, t);
+                idxTokens.put(t, new IndexedWord(token));
                 
                 // POS tags
                 if (readPos && t.getPos() != null) {
@@ -193,10 +204,23 @@ public class DKPro2CoreNlp
 
             // Constituents
             for (ROOT r : selectCovered(ROOT.class, s)) {
-                Tree tree = createStanfordTree(r);
+                Tree tree = createStanfordTree(r, idxTokens);
                 tree.indexSpans();
                 sentence.set(TreeAnnotation.class, tree);
             }
+            
+            // Dependencies
+            List<TypedDependency> dependencies = new ArrayList<>();
+            for (Dependency d : selectCovered(Dependency.class, s)) {
+                TypedDependency dep = new TypedDependency(
+                        GrammaticalRelation.valueOf(d.getDependencyType()),
+                        idxTokens.get(d.getGovernor()), idxTokens.get(d.getDependent()));
+                if (DependencyFlavor.ENHANCED.equals(d.getFlavor())) {
+                    dep.setExtra();
+                }
+                dependencies.add(dep);
+            }
+            sentence.set(EnhancedDependenciesAnnotation.class, new SemanticGraph(dependencies));
             
             if (ptb3Escaping) {
                 tokens = applyPtbEscaping(tokens, quoteBegin, quoteEnd);
@@ -210,6 +234,11 @@ public class DKPro2CoreNlp
         return aTarget;
     }
 
+    public static Tree createStanfordTree(ROOT root)
+    {
+        return createStanfordTree(root, new LabeledScoredTreeFactory(CoreLabel.factory()));
+    }
+    
     /**
      * Recursively creates an edu.stanford.nlp.trees.Tree from a ROOT annotation It also saves the
      * whitespaces before and after a token as <code>CoreAnnotation.BeforeAnnotation</code> and
@@ -219,13 +248,20 @@ public class DKPro2CoreNlp
      *            the ROOT annotation
      * @return an {@link Tree} object representing the syntax structure of the sentence
      */
-    public static Tree createStanfordTree(ROOT root)
+    public static Tree createStanfordTree(ROOT root, Map<Token, IndexedWord> aIdxTokens)
     {
-        return createStanfordTree(root, new LabeledScoredTreeFactory(CoreLabel.factory()));
+        return createStanfordTree(root, new LabeledScoredTreeFactory(CoreLabel.factory()),
+                aIdxTokens);
     }
 
     public static Tree createStanfordTree(org.apache.uima.jcas.tcas.Annotation root,
             TreeFactory tFact)
+    {
+        return createStanfordTree(root, tFact, null);
+    }
+    
+    public static Tree createStanfordTree(org.apache.uima.jcas.tcas.Annotation root,
+            TreeFactory tFact, Map<Token, IndexedWord> aIdxTokens)
     {
         JCas aJCas;
         try {
@@ -247,7 +283,7 @@ public class DKPro2CoreNlp
             // get childNodes from child annotations
             FSArray children = node.getChildren();
             for (int i = 0; i < children.size(); i++) {
-                childNodes.add(createStanfordTree(node.getChildren(i), tFact));
+                childNodes.add(createStanfordTree(node.getChildren(i), tFact, aIdxTokens));
             }
 
             // now create the node with its children
@@ -261,9 +297,15 @@ public class DKPro2CoreNlp
             // POS-Annotation on the token
             // because the POS is not directly stored within the treee
             Token wordAnnotation = (Token) root;
-
+            
             // create leaf-node for the tree
-            Tree wordNode = tFact.newLeaf(wordAnnotation.getCoveredText());
+            Tree wordNode;
+            if (aIdxTokens != null) {
+                wordNode = tFact.newLeaf(aIdxTokens.get(wordAnnotation));
+            }
+            else {
+                wordNode = tFact.newLeaf(wordAnnotation.getCoveredText());
+            }
 
             // create information about preceding and trailing whitespaces in the leaf node
             StringBuilder preWhitespaces = new StringBuilder();

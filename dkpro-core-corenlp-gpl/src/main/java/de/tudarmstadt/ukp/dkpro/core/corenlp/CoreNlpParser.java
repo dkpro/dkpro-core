@@ -243,9 +243,9 @@ public class CoreNlpParser
     private boolean originalDependencies;
 
     // CoreNlpParser PARAM_KEEP_PUNCTUATION has no effect #965
-//    public static final String PARAM_KEEP_PUNCTUATION = "keepPunctuation";
-//    @ConfigurationParameter(name = PARAM_KEEP_PUNCTUATION, mandatory = true, defaultValue = "false")
-//    private boolean keepPunctuation;
+    public static final String PARAM_KEEP_PUNCTUATION = "keepPunctuation";
+    @ConfigurationParameter(name = PARAM_KEEP_PUNCTUATION, mandatory = true, defaultValue = "false")
+    private boolean keepPunctuation;
 
     private CasConfigurableProviderBase<ParserAnnotator> annotatorProvider;
     private MappingProvider dependencyMappingProvider;
@@ -360,7 +360,7 @@ public class CoreNlpParser
             coreNlpProps.setProperty("parse.maxlen", Integer.toString(maxSentenceLength));
             coreNlpProps.setProperty("parse.kbest", Integer.toString(3));
             // CoreNlpParser PARAM_KEEP_PUNCTUATION has no effect #965
-//            coreNlpProps.setProperty("parse.keepPunct", Boolean.toString(keepPunctuation));
+            coreNlpProps.setProperty("parse.keepPunct", Boolean.toString(keepPunctuation));
 //          coreNlpProps.setProperty("parse.treemap", ...);
             coreNlpProps.setProperty("parse.maxtime", Integer.toString(maxTime));
             coreNlpProps.setProperty("parse.buildgraphs", Boolean.toString(writeDependency));

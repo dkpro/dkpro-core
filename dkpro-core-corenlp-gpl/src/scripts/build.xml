@@ -20,20 +20,20 @@
 -->
 <project basedir="../.." default="separate-jars">
 	<import>
-		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.7.0/ant-macros.xml"/>
+        <url url="https://raw.githubusercontent.com/dkpro/resource-packager/0.8.0/ant-macros.xml"/>
 	</import>
 	
 	<!-- 
 	  - Upstream versions - meta data versions are maintained per model below 
 	  -->
 	<!-- http://nlp.stanford.edu/software/corenlp.shtml -->
-	<property name="core.date" value="2015-04-20"/>
-    <property name="chinese.date" value="2016-01-19"/>
-    <property name="english.date" value="2016-01-10"/>
-    <property name="french.date" value="2016-01-14"/>
-    <property name="german.date" value="2016-01-19"/>
-    <property name="spanish.date" value="2015-10-14"/>
-	
+	<property name="core.date" value="2016-10-31"/>
+    <property name="arabic.date" value="2016-10-31"/>
+    <property name="chinese.date" value="2016-10-31"/>
+    <property name="english.date" value="2016-10-31"/>
+    <property name="french.date" value="2016-10-31"/>
+    <property name="german.date" value="2016-10-31"/>
+    <property name="spanish.date" value="2016-10-31"/>
 
 	<!-- 
 	  - Output package configuration
@@ -53,6 +53,16 @@
 	<target name="separate-jars" depends="de,en,fr,zh">
 		<antcall target="jar-notice"/>
 	</target>
+
+    <target name="newmodels">
+        <property name="install-artifact-mode" value="remote"/>
+        
+        <antcall target="depparser-en-wsj-ud"/>
+        <antcall target="depparser-en-ud"/>
+        <antcall target="depparser-fr-ud"/>
+        <antcall target="depparser-zh-ptb-conll"/>
+        <antcall target="depparser-zh-ud"/>
+    </target>
 
     <target name="de">
         <!--antcall target="depparser-de-ud"/-->
@@ -92,6 +102,7 @@
 		<antcall target="depparser-en-sd"/>
         <antcall target="depparser-en-ud"/>
         <antcall target="depparser-en-wsj-sd"/>
+        <antcall target="depparser-en-wsj-ud"/>
         <antcall target="depparser-en-ptb-conll"/>
 	</target>
 	
@@ -104,10 +115,10 @@
         </unzip>
     	<install-stub-and-upstream-file 
     		file="target/download/tmp/edu/stanford/nlp/models/parser/nndep/english_UD.gz" 
-    		md5="1f34d35983a51a95e66895dad273a649"
+    		md5="a0e95f9a00fe3cc44c4d9383d3ab0c29"
     	    groupId="de.tudarmstadt.ukp.dkpro.core" 
     	    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.corenlp"
-    		upstreamVersion="20150418"
+    		upstreamVersion="20161213"
     		metaDataVersion="1"
     		tool="depparser" 
     		language="en" 
@@ -142,6 +153,32 @@
             <metadata>
                 <entry key="pos.tagset" value="ptb"/>
                 <entry key="dependency.tagset" value="stanford341"/>
+            </metadata>
+        </install-stub-and-upstream-file>       
+        <deltree dir="target/download/tmp"/>
+    </target>
+        
+    <target name="depparser-en-wsj-ud" depends="download-english">
+        <mkdir dir="target/download/tmp"/>
+        <unzip src="target/download/english/english-models.zip" dest="target/download/tmp">
+            <patternset>
+                <include name="edu/stanford/nlp/models/parser/nndep/english_wsj_UD.gz"/>      
+            </patternset>
+        </unzip>
+        <install-stub-and-upstream-file 
+            file="target/download/tmp/edu/stanford/nlp/models/parser/nndep/english_wsj_UD.gz" 
+            md5="cefb78c5b3e4f60b964feb5cab6f3aec"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.corenlp"
+            upstreamVersion="20161213"
+            metaDataVersion="1"
+            tool="depparser" 
+            language="en" 
+            variant="wsj-ud" 
+            extension="gz">     
+            <metadata>
+                <entry key="pos.tagset" value="ptb"/>
+                <entry key="dependency.tagset" value="universal"/>
             </metadata>
         </install-stub-and-upstream-file>       
         <deltree dir="target/download/tmp"/>
@@ -201,6 +238,8 @@
 
     <target name="zh">
         <antcall target="depparser-zh-ctb-conll"/>
+        <antcall target="depparser-zh-ptb-conll"/>
+        <antcall target="depparser-zh-ud"/>
      </target>
 
     <target name="depparser-zh-ctb-conll" depends="download-chinese">
@@ -229,6 +268,58 @@
         <deltree dir="target/download/tmp"/>
     </target>
         
+    <target name="depparser-zh-ptb-conll" depends="download-chinese">
+        <mkdir dir="target/download/tmp"/>
+        <unzip src="target/download/chinese/chinese-models.zip" dest="target/download/tmp">
+            <patternset>
+                <include name="edu/stanford/nlp/models/parser/nndep/PTB_CoNLL_params.txt.gz"/>      
+            </patternset>
+        </unzip>
+        <install-stub-and-upstream-file 
+            file="target/download/tmp/edu/stanford/nlp/models/parser/nndep/PTB_CoNLL_params.txt.gz" 
+            md5="352f1770f46a4aaeec364aeb0fac3813"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.corenlp"
+            upstreamVersion="20161223"
+            metaDataVersion="1"
+            tool="depparser" 
+            language="zh" 
+            variant="ptb-conll" 
+            extension="gz">     
+            <metadata>
+                <entry key="pos.tagset" value="ptb"/>
+                <entry key="dependency.tagset" value="conll2008"/>
+            </metadata>
+        </install-stub-and-upstream-file>       
+        <deltree dir="target/download/tmp"/>
+    </target>
+        
+    <target name="depparser-zh-ud" depends="download-chinese">
+        <mkdir dir="target/download/tmp"/>
+        <unzip src="target/download/chinese/chinese-models.zip" dest="target/download/tmp">
+            <patternset>
+                <include name="edu/stanford/nlp/models/parser/nndep/UD_Chinese.gz"/>      
+            </patternset>
+        </unzip>
+        <install-stub-and-upstream-file 
+            file="target/download/tmp/edu/stanford/nlp/models/parser/nndep/UD_Chinese.gz" 
+            md5="b742287ed7612d01d4857c719face054"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.corenlp"
+            upstreamVersion="20161223"
+            metaDataVersion="1"
+            tool="depparser" 
+            language="zh" 
+            variant="ud" 
+            extension="gz">     
+            <metadata>
+                <entry key="pos.tagset" value="ctb"/>
+                <entry key="dependency.tagset" value="universal"/>
+            </metadata>
+        </install-stub-and-upstream-file>       
+        <deltree dir="target/download/tmp"/>
+    </target>
+        
     <target name="fr">
         <antcall target="depparser-fr-ud"/>
     </target>
@@ -242,10 +333,10 @@
         </unzip>
         <install-stub-and-upstream-file 
             file="target/download/tmp/edu/stanford/nlp/models/parser/nndep/UD_French.gz" 
-            md5="c2cd7c55750e2d4dcdd8a16963430c40"
+            md5="f20a7664ecc0068cd1b315e09e774c09"
             groupId="de.tudarmstadt.ukp.dkpro.core" 
             artifactIdBase="de.tudarmstadt.ukp.dkpro.core.corenlp"
-            upstreamVersion="20160114"
+            upstreamVersion="20161211"
             metaDataVersion="1"
             tool="depparser" 
             language="fr" 
