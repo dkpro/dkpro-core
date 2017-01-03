@@ -19,9 +19,11 @@ package org.dkpro.core.lancaster;
 
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathAnnotatorBase;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import org.apache.commons.lang.StringUtils;
+import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.FSIterator;
@@ -32,6 +34,7 @@ import org.apache.uima.cas.text.AnnotationIndex;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -60,18 +63,48 @@ public class LancasterStemmer
     private boolean stripPrefix;
 
     /**
-     * Specifies an URI from where to load a custom rules file. This URI can be an URL supported by
-     * the standard JDK URL loader or the "classpath" protocol can be used to specify a resource in
-     * the class path, e.g. "classpath:my/path/to/the/rules".
+     * Specifies an URL that should resolve to a location from where to load custom rules. If the location starts with
+     * {@code classpath:} the location is interpreted as a classpath location, e.g. "classpath:my/path/to/the/rules".
+     * Otherwise it is tried as an URL, file and at last UIMA resource.
+     * @see ResourceUtils
      */
     public static final String PARAM_CUSTOM_RULES = "customRules";
     @ConfigurationParameter(name = PARAM_CUSTOM_RULES, mandatory = false)
     private String customRules;
 
+
+    /**
+     * The stemmer only has to be initialized once since it's used like a pure function with the given
+     * configuration parameters.
+     */
+    private smile.nlp.stemmer.LancasterStemmer stemmer;
+
     @Override
     protected Set<String> getDefaultPaths()
     {
         return Collections.singleton(Token.class.getName());
+    }
+
+
+    @Override
+    public void initialize(UimaContext aContext) throws ResourceInitializationException {
+
+        super.initialize(aContext);
+
+        if(customRules != null) {
+            try {
+
+                URL url = ResourceUtils.resolveLocation(customRules, this, aContext);
+                stemmer = new smile.nlp.stemmer.LancasterStemmer(url.openStream(), stripPrefix);
+            } catch (MalformedURLException e) {
+                throw new ResourceInitializationException(e);
+            } catch (IOException e) {
+                throw new ResourceInitializationException(e);
+            }
+        } else {
+            stemmer = new smile.nlp.stemmer.LancasterStemmer(stripPrefix);
+        }
+
     }
 
     @Override
@@ -95,28 +128,6 @@ public class LancasterStemmer
                     new Object[] { lang });
         }
 
-        smile.nlp.stemmer.LancasterStemmer stemmer;
-        if(customRules != null) {
-            try {
-                URI uri = new URI(customRules);
-                InputStream resourceStream;
-                if("classpath".equals(uri.getScheme())){
-                    resourceStream = Thread.currentThread().getContextClassLoader()
-                            .getResourceAsStream(uri.getSchemeSpecificPart());
-                } else {
-                    resourceStream = uri.toURL().openStream();
-                }
-                stemmer = new smile.nlp.stemmer.LancasterStemmer(resourceStream, stripPrefix);
-            } catch (MalformedURLException e) {
-                throw new AnalysisEngineProcessException(e);
-            } catch (IOException e) {
-                throw new AnalysisEngineProcessException(e);
-            } catch (URISyntaxException e) {
-                throw new AnalysisEngineProcessException(e);
-            }
-        } else {
-            stemmer = new smile.nlp.stemmer.LancasterStemmer(stripPrefix);
-        }
 
         for (String path : paths) {
             // Separate Typename and featurepath
