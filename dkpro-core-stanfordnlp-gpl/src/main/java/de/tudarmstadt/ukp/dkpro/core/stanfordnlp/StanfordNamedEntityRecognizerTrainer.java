@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
@@ -44,9 +43,6 @@ import edu.stanford.nlp.sequences.SeqClassifierFlags;
 public class StanfordNamedEntityRecognizerTrainer
     extends JCasConsumer_ImplBase
 {
-
-    public static final Logger logger = Logger
-            .getLogger(StanfordNamedEntityRecognizerTrainer.class);
 
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
@@ -98,8 +94,7 @@ public class StanfordNamedEntityRecognizerTrainer
             props.load(new FileInputStream(propertiesFile));
         }
         catch (IOException e) {
-
-            logger.error("Failed to load properties file for training.");
+            getLogger().error("Failed to load properties file for training.", e);
         }
 
     }
