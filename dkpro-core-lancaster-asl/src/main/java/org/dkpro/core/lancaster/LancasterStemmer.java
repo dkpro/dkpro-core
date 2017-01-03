@@ -33,6 +33,8 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.cas.text.AnnotationIndex;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.LanguageCapability;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -47,6 +49,10 @@ import java.util.Set;
 /**
  * This Paice/Husk Lancaster stemmer implementation only works with the English language so far.
  */
+@LanguageCapability("en")
+@TypeCapability(
+        inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
+        outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem" })
 public class LancasterStemmer
     extends FeaturePathAnnotatorBase
 {
