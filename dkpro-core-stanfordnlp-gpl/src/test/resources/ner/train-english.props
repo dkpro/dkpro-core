@@ -1,0 +1,71 @@
+# What document reader to use
+readerAndWriter=edu.stanford.nlp.sequences.ColumnDocumentReaderAndWriter
+
+# dan2 better than chris2 on CoNLL data
+wordShape=dan2useLC
+
+# What function to use to map words in the training data to new words
+wordFunction = edu.stanford.nlp.process.AmericanizeFunction
+
+# Type of the classifier, e.g. crf or cmm
+type = crf
+
+# Include a feature for the class (as a class marginal). Puts a prior on the classes which is equivalent to how often the feature appeared in the training data.
+useClassFeature=true
+
+useWord=true
+
+# word character ngrams will be included
+useNGrams=true
+
+# prefixes and suffixes only
+noMidNGrams=true
+
+# ngrams will be included up to length 6
+maxNGramLeng=6
+
+# Gives you feature for (pw,c), and together with other options enables other previous features, such as (pt,c) [with useTags)
+usePrev=true
+
+# Gives you feature for (nw,c), and together with other options enables other next features, such as (nt,c) [with useTags)
+useNext=true
+
+# Use plain higher-order state sequences out to minimum of length or maxLeft
+useLongSequences=true
+
+# Does not use any class combination features if this is false
+useSequences=true
+
+# Does not use any class combination features using previous classes if this is false
+usePrevSequences=true
+
+# Use basic zeroeth order word shape features.
+useTypeSeqs=true
+
+# Add additional first and second order word shape features
+useTypeSeqs2=true
+
+# Some first order word shape patterns.
+useTypeySequences=true
+
+# This is a very engineered feature designed to capture multiple references to names
+useOccurrencePatterns=true
+
+# Iff the prev word is of length 3 or less, add an extra feature that combines the word two back and the current word's shape. Weird!
+useLastRealWord=true
+
+# Iff the next word is of length 3 or less, add an extra feature that combines the word after next and the current word's shape. Weird!
+useNextRealWord=true
+
+# For the CMMClassifier (only) if this is true then the Scorer normalizes scores as probabilities.
+normalize=true
+
+# Include in features giving disjunctions of words anywhere in the left or right disjunctionWidth words (preserving direction but not position)
+useDisjunctive=true
+
+useObservedSequencesOnly=true
+
+# This specifies the order of the CRF: order 1 means that features
+# apply at most to a class pair of previous class and current class
+# or current class and next class.
+maxLeft=1
