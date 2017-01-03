@@ -17,12 +17,13 @@
  */
 package org.dkpro.core.lancaster;
 
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathAnnotatorBase;
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Collections;
+import java.util.Locale;
+import java.util.Set;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -39,12 +40,12 @@ import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Collections;
-import java.util.Locale;
-import java.util.Set;
+import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathAnnotatorBase;
+import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * This Paice/Husk Lancaster stemmer implementation only works with the English language so far.
@@ -67,9 +68,11 @@ public class LancasterStemmer
     private boolean stripPrefix;
 
     /**
-     * Specifies an URL that should resolve to a location from where to load custom rules. If the location starts with
-     * {@code classpath:} the location is interpreted as a classpath location, e.g. "classpath:my/path/to/the/rules".
-     * Otherwise it is tried as an URL, file and at last UIMA resource.
+     * Specifies an URL that should resolve to a location from where to load custom rules. If the
+     * location starts with {@code classpath:} the location is interpreted as a classpath location,
+     * e.g. "classpath:my/path/to/the/rules". Otherwise it is tried as an URL, file and at last UIMA
+     * resource.
+     * 
      * @see ResourceUtils
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -83,7 +86,6 @@ public class LancasterStemmer
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true, defaultValue = "en")
     protected String language;
 
-
     /**
      * The stemmer only has to be initialized once since it's used like a pure function with the given
      * configuration parameters.
@@ -96,15 +98,15 @@ public class LancasterStemmer
         return Collections.singleton(Token.class.getName());
     }
 
-
     @Override
-    public void initialize(UimaContext aContext) throws ResourceInitializationException {
-
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
         super.initialize(aContext);
 
         language = language.toLowerCase();
 
-        if(modelLocation != null) {
+        if (modelLocation != null) {
             try {
 
                 URL url = ResourceUtils.resolveLocation(modelLocation, this, aContext);
@@ -117,7 +119,6 @@ public class LancasterStemmer
         } else {
             stemmer = new smile.nlp.stemmer.LancasterStemmer(stripPrefix);
         }
-
     }
 
     @Override
