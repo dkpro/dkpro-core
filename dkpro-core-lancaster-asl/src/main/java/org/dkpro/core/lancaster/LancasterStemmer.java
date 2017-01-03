@@ -19,6 +19,7 @@ package org.dkpro.core.lancaster;
 
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathAnnotatorBase;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -37,10 +38,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.Locale;
@@ -59,7 +57,7 @@ public class LancasterStemmer
      * pico, pseudo.
      */
     public static final String PARAM_STRIP_PREFIXES = "stripPrefix";
-    @ConfigurationParameter(name = PARAM_STRIP_PREFIXES, mandatory = false, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_STRIP_PREFIXES, mandatory = true, defaultValue = "false")
     private boolean stripPrefix;
 
     /**
@@ -68,9 +66,16 @@ public class LancasterStemmer
      * Otherwise it is tried as an URL, file and at last UIMA resource.
      * @see ResourceUtils
      */
-    public static final String PARAM_CUSTOM_RULES = "customRules";
-    @ConfigurationParameter(name = PARAM_CUSTOM_RULES, mandatory = false)
-    private String customRules;
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    private String modelLocation;
+
+    /**
+     * Specifies the language supported by the stemming model. Default value is "en" (English).
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true, defaultValue = "en")
+    protected String language;
 
 
     /**
@@ -91,10 +96,12 @@ public class LancasterStemmer
 
         super.initialize(aContext);
 
-        if(customRules != null) {
+        language = language.toLowerCase();
+
+        if(modelLocation != null) {
             try {
 
-                URL url = ResourceUtils.resolveLocation(customRules, this, aContext);
+                URL url = ResourceUtils.resolveLocation(modelLocation, this, aContext);
                 stemmer = new smile.nlp.stemmer.LancasterStemmer(url.openStream(), stripPrefix);
             } catch (MalformedURLException e) {
                 throw new ResourceInitializationException(e);
@@ -123,7 +130,7 @@ public class LancasterStemmer
 
         lang = lang.toLowerCase(Locale.US);
 
-        if (!"en".equals(lang)) { // Only english is supported
+        if (!language.equals(lang)) { // Only specified language is supported
             throw new AnalysisEngineProcessException(MESSAGE_DIGEST, "unsupported_language_error",
                     new Object[] { lang });
         }

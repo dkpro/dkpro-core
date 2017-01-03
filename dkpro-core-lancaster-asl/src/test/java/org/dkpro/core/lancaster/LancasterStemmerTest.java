@@ -62,7 +62,7 @@ public class LancasterStemmerTest
     {
         runTest("en", "proceed",
                 new String[] {"procee"}, // using default rules the expected would be process
-                LancasterStemmer.PARAM_CUSTOM_RULES, "classpath:Lancaster_test_rules.txt"
+                LancasterStemmer.PARAM_MODEL_LOCATION, "classpath:Lancaster_test_rules.txt"
         );
     }
 
@@ -72,7 +72,18 @@ public class LancasterStemmerTest
     {
         runTest("en", "proceed",
                 new String[] {"procee"}, // using default rules the expected would be process
-                LancasterStemmer.PARAM_CUSTOM_RULES, "file:src/test/resources/Lancaster_test_rules.txt"
+                LancasterStemmer.PARAM_MODEL_LOCATION, "file:src/test/resources/Lancaster_test_rules.txt"
+        );
+    }
+
+    @Test
+    public void testAlternativeLanguageConfiguration()
+        throws Exception
+    {
+        runTest("dl", "proceed",
+                new String[] {"procee"}, // using default rules the expected would be process
+                LancasterStemmer.PARAM_MODEL_LOCATION, "classpath:Lancaster_test_rules.txt",
+                LancasterStemmer.PARAM_LANGUAGE, "dl"
         );
     }
 
