@@ -73,7 +73,7 @@ ${Util.preparePassthrough(type.description)}
                 it.outputs?.any { it.name == type.name } } };
     if (producers) {            
         producers.each { id, producer -> 
-            if (producer.spec) {
+            if (producer instanceof EngineModel) {
                 out.println Util.engineLink(id);
             }
             else {
@@ -98,7 +98,7 @@ ${Util.preparePassthrough(type.description)}
                 it.inputs?.any { it.name == type.name } } };
     if (consumers) {            
         consumers.each { id, consumer -> 
-            if (consumer.spec) {
+            if (consumer instanceof EngineModel) {
                 out.println Util.engineLink(id);
             }
             else {
