@@ -1,5 +1,7 @@
 <%
 import de.tudarmstadt.ukp.dkpro.core.doc.Util;
+import org.dkpro.meta.core.model.EngineModel;
+import org.dkpro.meta.core.model.FormatModel;
 
 def isElevatedType(type) {
     // Not a top-level type
