@@ -1,6 +1,3 @@
-# What document reader to use
-readerAndWriter=edu.stanford.nlp.sequences.ColumnDocumentReaderAndWriter
-
 # dan2 better than chris2 on CoNLL data
 wordShape=dan2useLC
 
