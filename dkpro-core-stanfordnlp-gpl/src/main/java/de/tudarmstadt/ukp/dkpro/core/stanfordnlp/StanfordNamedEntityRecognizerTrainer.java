@@ -18,102 +18,231 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.Feature;
+import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.io.IobEncoder;
+import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.stanford.nlp.ie.crf.CRFClassifier;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.sequences.SeqClassifierFlags;
 
 /**
- * Train a NER model for Stanford CoreNLP.
+ * Train a NER model for Stanford CoreNLP Named Entity Recognizer.
  */
 public class StanfordNamedEntityRecognizerTrainer
     extends JCasConsumer_ImplBase
 {
 
-    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
-    private String language;
-
+    /**
+     * Location of the target model file.
+     */
     public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
     @ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true)
     private File targetLocation;
 
-    public static final String PARAM_SOURCE_LOCATION = ComponentParameters.PARAM_SOURCE_LOCATION;
-    @ConfigurationParameter(name = PARAM_SOURCE_LOCATION, mandatory = true)
-    private String sourceLocation;
-
+    /**
+     * Training file containing the parameters. The <code>trainFile</code> or
+     * <code>trainFileList</code> and <code>serializeTo</code> parameters in this file are
+     * ignored/overridden.
+     */
     public static final String PARAM_PROPERTIES_LOCATION = "propertiesFile";
     @ConfigurationParameter(name = PARAM_PROPERTIES_LOCATION, mandatory = false)
     private File propertiesFile;
 
-    public static final String PARAM_CLASSIFICATION_ENCODING = "classificationEncoding";
-    @ConfigurationParameter(name = PARAM_CLASSIFICATION_ENCODING, mandatory = true, defaultValue = "IOB2", description = "options: IOB1, IOB2, IOE1, IOE2, SBIEO, IO")
-    private String classificationEncoding;
+    /*
+     * Label set to use for training. Options: IOB1, IOB2, IOE1, IOE2, SBIEO, IO, BIO, BILOU,
+     * noprefix
+     *
+     * Default: noprefix
+     */
+    public static final String PARAM_LABEL_SET = "entitySubClassification";
+    @ConfigurationParameter(name = PARAM_LABEL_SET, mandatory = false, defaultValue = "noprefix")
+    private String entitySubClassification;
 
-    public static final String PARAM_RETAIN_CLASSIFICATION = "retainClassification";
-    @ConfigurationParameter(name = PARAM_RETAIN_CLASSIFICATION, mandatory = true, defaultValue = "true", description = "if false, representation will be mapped back to IOB1 on output")
+    /**
+     * Flag to keep the label set specified by PARAM_LABEL_SET. If set to false, representation is
+     * mapped to IOB1 on output. Default: true
+     */
+    public static final String PARAM_RETAIN_CLASS = "retainClassification";
+    @ConfigurationParameter(name = PARAM_RETAIN_CLASS, mandatory = false, defaultValue = "true")
     private boolean retainClassification;
 
-    private CRFClassifier<CoreLabel> crf;
+    private File tempData;
+    private PrintWriter out;
 
     @Override
-    public void initialize(UimaContext context)
+    public void initialize(UimaContext aContext)
         throws ResourceInitializationException
     {
-        super.initialize(context);
-        Properties props = new Properties();// StringUtils.propFileToProperties(propertiesFile);
-        loadProperties(props);
-        props.setProperty("serializeTo", targetLocation.getAbsolutePath());
-        props.setProperty("trainFile", sourceLocation); // trainFiles,
-                                                        // baseTrainDir,
-                                                        // trainFileList?
-        props.setProperty("entitySubclassification", classificationEncoding);
-        SeqClassifierFlags flags = new SeqClassifierFlags(props);
-        flags.retainEntitySubclassification = retainClassification;
-        crf = new CRFClassifier<>(flags);
-        crf.train();
-    }
-
-    private void loadProperties(Properties props)
-    {
-        try {
-            props.load(new FileInputStream(propertiesFile));
-        }
-        catch (IOException e) {
-            getLogger().error("Failed to load properties file for training.", e);
-        }
-
+        super.initialize(aContext);
     }
 
     @Override
-    public void process(JCas arg0)
+    public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
+        if (tempData == null) {
+            try {
+                tempData = File.createTempFile("dkpro-stanford-ner-trainer", ".tsv");
+                getLogger()
+                        .info(String.format("Created temp file: %s", tempData.getAbsolutePath()));
+                out = new PrintWriter(new OutputStreamWriter(new FileOutputStream(tempData),
+                        StandardCharsets.UTF_8));
+            }
+            catch (IOException e) {
+                throw new AnalysisEngineProcessException(e);
+            }
+        }
+        convert(aJCas, out);
+        getLogger().info("Conversion process complete.");
+    }
+
+    /*
+     * Taken from Conll2003Writer and modified for the task at hand.
+     */
+    private void convert(JCas aJCas, PrintWriter aOut)
+    {
+        // temp variable to limit training file in size for tests
+        int i = 30;
+
+        Type neType = JCasUtil.getType(aJCas, NamedEntity.class);
+        Feature neValue = neType.getFeatureByBaseName("value");
+
+        // Named Entities
+        IobEncoder neEncoder = new IobEncoder(aJCas.getCas(), neType, neValue, false);
+
+        Map<Sentence, Collection<NamedEntity>> idx = JCasUtil.indexCovered(aJCas, Sentence.class,
+                NamedEntity.class);
+
+        Collection<NamedEntity> coveredNEs;
+        for (Sentence sentence : select(aJCas, Sentence.class)) {
+
+            if (i < 0) {
+                break;
+            }
+            coveredNEs = idx.get(sentence);
+
+            /*
+             * don't include sentence in temp file that contains no annotations
+             *
+             * (saves memory for training)
+             */
+            if (coveredNEs.isEmpty()) {
+                continue;
+            }
+
+            HashMap<Token, Row> ctokens = new LinkedHashMap<>();
+            // Tokens
+            List<Token> tokens = selectCovered(Token.class, sentence);
+
+            for (Token token : tokens) {
+                Row row = new Row();
+                row.token = token;
+                row.ne = neEncoder.encode(token);
+                ctokens.put(row.token, row);
+            }
+
+            // Write sentence in column format
+            for (Row row : ctokens.values()) {
+                aOut.printf("%s\t%s%n", row.token.getCoveredText(), row.ne);
+            }
+            aOut.println();
+            i--;
+        }
+    }
+
+    private static final class Row
+    {
+        Token token;
+        String ne;
     }
 
     @Override
     public void collectionProcessComplete()
         throws AnalysisEngineProcessException
     {
-        try {
-            crf.serializeClassifier(new ObjectOutputStream(new FileOutputStream(targetLocation)));
+
+        if (out != null) {
+            IOUtils.closeQuietly(out);
+        }
+
+        // Load user-provided configuration
+        Properties props = new Properties();
+        try (InputStream is = new FileInputStream(propertiesFile)) {
+            props.load(is);
         }
         catch (IOException e) {
             throw new AnalysisEngineProcessException(e);
+        }
+
+        // Add/replace training file information
+        props.setProperty("serializeTo", targetLocation.getAbsolutePath());
+
+        // set training data info
+        props.setProperty("trainFile", tempData.getAbsolutePath());
+        props.setProperty("map", "word=0,answer=1");
+        SeqClassifierFlags flags = new SeqClassifierFlags(props);
+        // label set
+        flags.entitySubclassification = entitySubClassification;
+        // if representation should be kept
+        flags.retainEntitySubclassification = retainClassification;
+        // need to use this reader because the other ones don't recognize the previous settings
+        // about the label set
+        flags.readerAndWriter = "edu.stanford.nlp.sequences.CoNLLDocumentReaderAndWriter";
+
+        // Train
+        CRFClassifier<CoreLabel> crf = new CRFClassifier<>(flags);
+        getLogger().info("Starting to train...");
+        crf.train();
+
+        try {
+            getLogger().info(String.format("Serializing classifier to target location: %s",
+                    targetLocation.getCanonicalPath()));
+            crf.serializeClassifier(targetLocation.getAbsolutePath());
+        }
+        catch (IOException e) {
+            throw new AnalysisEngineProcessException(e);
+        }
+    }
+
+    @Override
+    public void destroy()
+    {
+        super.destroy();
+
+        // Clean up temporary data file
+        if (tempData != null) {
+            tempData.delete();
         }
     }
 }
