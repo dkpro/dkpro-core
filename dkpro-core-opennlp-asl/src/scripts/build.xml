@@ -725,7 +725,6 @@
 	</target>
 
 	<target name="es-tagger-maxent">
-		<property name="install-artifact-mode" value="remote"/>
 		<mkdir dir="target/download"/>
 
 		<!-- FILE: opennlp-es-maxent-pos-es.bin - - - - - - - - - - - - - - - - - - - - - - - - - -
