@@ -132,9 +132,6 @@ public class StanfordNamedEntityRecognizerTrainer
      */
     private void convert(JCas aJCas, PrintWriter aOut)
     {
-        // temp variable to limit training file in size for tests
-        int i = 30;
-
         Type neType = JCasUtil.getType(aJCas, NamedEntity.class);
         Feature neValue = neType.getFeatureByBaseName("value");
 
@@ -147,9 +144,6 @@ public class StanfordNamedEntityRecognizerTrainer
         Collection<NamedEntity> coveredNEs;
         for (Sentence sentence : select(aJCas, Sentence.class)) {
 
-            if (i < 0) {
-                break;
-            }
             coveredNEs = idx.get(sentence);
 
             /*
@@ -177,7 +171,6 @@ public class StanfordNamedEntityRecognizerTrainer
                 aOut.printf("%s\t%s%n", row.token.getCoveredText(), row.ne);
             }
             aOut.println();
-            i--;
         }
     }
 
