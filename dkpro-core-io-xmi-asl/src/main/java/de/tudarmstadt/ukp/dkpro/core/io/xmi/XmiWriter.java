@@ -84,7 +84,7 @@ public class XmiWriter
         try (OutputStream docOS = getOutputStream(aJCas, ".xmi")) {
             XmiCasSerializer.serialize(aJCas.getCas(), null, docOS, prettyPrint, null);
 
-            if (!typeSystemWritten || typeSystemFile == null) {
+            if (!typeSystemWritten && typeSystemFile == null) {
                 writeTypeSystem(aJCas);
                 typeSystemWritten = true;
             }
