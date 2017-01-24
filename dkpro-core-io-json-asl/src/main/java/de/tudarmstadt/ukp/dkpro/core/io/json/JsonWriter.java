@@ -99,7 +99,7 @@ public class JsonWriter
         try (OutputStream docOS = getOutputStream(aJCas, ".json")) {
             jcs.serialize(aJCas.getCas(), docOS);
             
-            if (!typeSystemWritten || typeSystemFile == null) {
+            if (!typeSystemWritten) {
                 writeTypeSystem(aJCas);
                 typeSystemWritten = true;
             }
