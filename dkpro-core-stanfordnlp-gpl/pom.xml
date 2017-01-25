@@ -31,16 +31,8 @@
   <packaging>jar</packaging>
   <name>DKPro Core GPL - Stanford CoreNLP Suite (v ${corenlp.version}) (GPL)</name>
   <properties>
-    <corenlp.version>3.7.0-beta-1</corenlp.version>
+    <corenlp.version>3.7.0</corenlp.version>
   </properties>
-  <!-- Repository declaration temporarily needed until CoreNLP is available from Maven Central -->  
-  <repositories>
-    <repository>
-      <id>ukp-oss</id>
-      <name>ukp-oss-releases</name>
-      <url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-releases</url>
-    </repository>
-  </repositories>
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>
@@ -144,6 +136,11 @@
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.datasets-asl</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.posfilter-asl</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>

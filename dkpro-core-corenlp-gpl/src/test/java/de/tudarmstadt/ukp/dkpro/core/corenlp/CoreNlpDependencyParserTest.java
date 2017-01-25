@@ -36,6 +36,13 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class CoreNlpDependencyParserTest
 {
+    private static final String[] GERMAN_POS_TAGS = { "$,", "$.", "$[", "ADJA", "ADJD", "ADV",
+            "APPO", "APPR", "APPRART", "APZR", "ART", "CARD", "FM", "ITJ", "KOKOM", "KON", "KOUI",
+            "KOUS", "NE", "NN", "PDAT", "PDS", "PIAT", "PIDAT", "PIS", "PPER", "PPOSAT", "PPOSS",
+            "PRELAT", "PRELS", "PRF", "PROAV", "PTKA", "PTKANT", "PTKNEG", "PTKVZ", "PTKZU", "PWAT",
+            "PWAV", "PWS", "TRUNC", "VAFIN", "VAIMP", "VAINF", "VAPP", "VMFIN", "VMINF", "VMPP",
+            "VVFIN", "VVIMP", "VVINF", "VVIZU", "VVPP", "XY" };
+    
     private static final String[] STANFORD_DEPENDENCY_TAGS = { "acomp", "advcl", "advmod", "amod",
             "appos", "aux", "auxpass", "cc", "ccomp", "conj", "cop", "csubj", "csubjpass", "dep",
             "det", "discourse", "dobj", "expl", "iobj", "mark", "mwe", "neg", "nn", "npadvmod",
@@ -271,6 +278,53 @@ public class CoreNlpDependencyParserTest
         AssertAnnotations.assertTagsetMapping(Dependency.class, "universal", unmappedDep, jcas);
     }
 
+    @Test
+    public void testGermanUniversalDependencies()
+        throws Exception
+    {
+        JCas jcas = runTest("de", "ud", "Wir brauchen ein sehr kompliziertes Beispiel , welches "
+                + "möglichst viele Konstituenten und Dependenzen beinhaltet .");
+
+        String[] dependencies = {
+                "[  0,  3]NSUBJ(nsubj,basic) D[0,3](Wir) G[4,12](brauchen)",
+                "[  4, 12]ROOT(root,basic) D[4,12](brauchen) G[4,12](brauchen)",
+                "[ 13, 16]DET(det,basic) D[13,16](ein) G[36,44](Beispiel)",
+                "[ 17, 21]ADVMOD(advmod,basic) D[17,21](sehr) G[22,35](kompliziertes)",
+                "[ 22, 35]AMOD(amod,basic) D[22,35](kompliziertes) G[36,44](Beispiel)",
+                "[ 36, 44]DOBJ(dobj,basic) D[36,44](Beispiel) G[4,12](brauchen)",
+                "[ 45, 46]PUNCT(punct,basic) D[45,46](,) G[4,12](brauchen)",
+                "[ 47, 54]NSUBJ(nsubj,basic) D[47,54](welches) G[101,111](beinhaltet)",
+                "[ 55, 64]ADVMOD(advmod,basic) D[55,64](möglichst) G[65,70](viele)",
+                "[ 65, 70]AMOD(amod,basic) D[65,70](viele) G[71,84](Konstituenten)",
+                "[ 71, 84]DOBJ(dobj,basic) D[71,84](Konstituenten) G[101,111](beinhaltet)",
+                "[ 85, 88]CC(cc,basic) D[85,88](und) G[71,84](Konstituenten)",
+                "[ 89,100]CONJ(conj:und,basic) D[89,100](Dependenzen) G[71,84](Konstituenten)",
+                "[101,111]Dependency(acl,basic) D[101,111](beinhaltet) G[4,12](brauchen)",
+                "[112,113]PUNCT(punct,basic) D[112,113](.) G[4,12](brauchen)" };
+
+        String[] depTags = { "acl", "advcl", "advmod", "amod", "appos", "aux", "auxpass", "case",
+                "cc", "ccomp", "compound", "conj", "cop", "csubj", "csubjpass", "dep", "det",
+                "dobj", "expl", "iobj", "mark", "mwe", "name", "neg", "nmod", "nmod:poss", "nsubj",
+                "nsubjpass", "nummod", "parataxis", "punct", "root", "xcomp" }; 
+        
+        String[] unmappedDep = { "nmod:poss" };
+
+        String[] depParserPosTags = { "$,", "$.", "$[", "ADJA", "ADJD", "ADV", "APPO", "APPR",
+                "APPRART", "APZR", "ART", "CARD", "FM", "ITJ", "KOKOM", "KON", "KOUI", "KOUS", "NE",
+                "NN", "PDAT", "PDS", "PIAT", "PIDAT", "PIS", "PPER", "PPOSAT", "PRELAT", "PRELS",
+                "PRF", "PROAV", "PTKA", "PTKANT", "PTKNEG", "PTKVZ", "PTKZU", "PWAT", "PWAV", "PWS",
+                "TRUNC", "VAFIN", "VAIMP", "VAINF", "VAPP", "VMFIN", "VMINF", "VVFIN", "VVIMP",
+                "VVINF", "VVIZU", "VVPP", "XY" };
+        
+        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+        AssertAnnotations.assertTagset(CoreNlpPosTagger.class, POS.class, "stts", GERMAN_POS_TAGS, jcas);
+        AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, POS.class, "stts", depParserPosTags,
+                jcas);
+        AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, Dependency.class, "universal",
+                depTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Dependency.class, "universal", unmappedDep, jcas);
+    }
+    
     @Test
     public void testChineseCtbConllDependencies()
         throws Exception

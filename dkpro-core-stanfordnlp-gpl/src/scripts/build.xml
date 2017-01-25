@@ -73,18 +73,16 @@
 
 		<!--
 		<antcall target="ner-de-hgc_175m_600.crf"/>
-		<antcall target="depparser-de-ud"/>
+
 		<antcall target="ner-en-all.3class.distsim.crf"/>
 		<antcall target="ner-en-all.3class.caseless.distsim.crf"/>
 		<antcall target="ner-en-nowiki.3class.caseless.distsim.crf"/>
-		<antcall target="depparser-en-ud"/>
 		<antcall target="tagger-es-default"/>
 		<antcall target="tagger-es-distsim"/>
 		<antcall target="ner-es-ancora.distsim.s512.crf"/>
 		<antcall target="parser-es-pcfg"/>
 		<antcall target="parser-es-sr"/>
 		<antcall target="parser-es-sr-beam"/>
-		<antcall target="depparser-fr-ud"/>
 		
 		<antcall target="coref-en-default"/>
 		-->
@@ -205,7 +203,6 @@
 		<antcall target="parser-de-pcfg"/>
 		<antcall target="parser-de-factored"/>
 		<antcall target="parser-de-sr"/>
-        <antcall target="depparser-de-ud"/>
 	</target>
 	
 	<target name="tagger-de-dewac" depends="download-de">
@@ -488,32 +485,6 @@
         <delete dir="target/download/tmp"/>
 	</target>
 
-   <target name="depparser-de-ud" depends="download-de">
-        <mkdir dir="target/download/tmp"/>
-        <unzip src="target/download/de/de-models.zip" dest="target/download/tmp">
-            <patternset>
-                <include name="edu/stanford/nlp/models/parser/nndep/UD_German.gz"/>      
-            </patternset>
-        </unzip>
-        
-        <install-stub-and-upstream-file 
-            file="target/download/tmp/edu/stanford/nlp/models/parser/nndep/UD_German.gz" 
-            md5="198d61a00efa3b1d2618464273c615b3"
-            groupId="de.tudarmstadt.ukp.dkpro.core" 
-            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-            upstreamVersion="20161213"
-            metaDataVersion="1"
-            tool="depparser" 
-            language="de" 
-            variant="ud" 
-            extension="gz">     
-            <metadata>
-                <entry key="dependency.tagset" value="universal"/>
-            </metadata>
-        </install-stub-and-upstream-file>
-        <delete dir="target/download/tmp"/>
-    </target>
-
 	<target name="en">
 		<antcall target="tagger-en-bidirectional-distsim"/>
 		<antcall target="tagger-en-left3words-distsim"/>
@@ -547,7 +518,6 @@
 		<antcall target="parser-en-wsj-factored"/>
 		<antcall target="parser-en-wsj-pcfg"/>
 		<antcall target="parser-en-wsj-rnn"/>
-		<antcall target="depparser-en-ud"/>
 		<antcall target="coref-en-default"/>
 	</target>
 	
@@ -1398,32 +1368,6 @@
         <delete dir="target/download/tmp"/>
 	</target>
 		
-   <target name="depparser-en-ud" depends="download-en">
-        <mkdir dir="target/download/tmp"/>
-        <unzip src="target/download/en/en-models.zip" dest="target/download/tmp">
-            <patternset>
-                <include name="edu/stanford/nlp/models/parser/nndep/english_UD.gz"/>      
-            </patternset>
-        </unzip>
-        
-        <install-stub-and-upstream-file 
-            file="target/download/tmp/edu/stanford/nlp/models/parser/nndep/english_UD.gz" 
-            md5="a0e95f9a00fe3cc44c4d9383d3ab0c29"
-            groupId="de.tudarmstadt.ukp.dkpro.core" 
-            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-            upstreamVersion="20161213"
-            metaDataVersion="1"
-            tool="depparser" 
-            language="en" 
-            variant="ud" 
-            extension="gz">     
-            <metadata>
-                <entry key="dependency.tagset" value="universal"/>
-            </metadata>
-        </install-stub-and-upstream-file>
-        <delete dir="target/download/tmp"/>
-    </target>
-
 	<target name="coref-en-default" depends="download-core">
 		<install-stub-and-upstream-folder 
 			folder="target/download/core/coref-en"
@@ -1648,7 +1592,6 @@
 		<antcall target="parser-fr-factored"/>
         <antcall target="parser-fr-sr"/>
 		<antcall target="parser-fr-sr-beam"/>
-		<antcall target="depparser-fr-ud"/>
 		<antcall target="tagger-fr-default"/>
         <antcall target="ner-fr-freme-wikiner"/>
 	</target>
@@ -1736,33 +1679,6 @@
         
         <delete dir="target/download/tmp"/>
 	</target>
-
-   <target name="depparser-fr-ud" depends="download-fr">
-        <mkdir dir="target/download/tmp"/>
-        <unzip src="target/download/fr/fr-models.zip" dest="target/download/tmp">
-            <patternset>
-                <include name="edu/stanford/nlp/models/parser/nndep/UD_French.gz"/>      
-            </patternset>
-        </unzip>
-        
-        <install-stub-and-upstream-file 
-            file="target/download/tmp/edu/stanford/nlp/models/parser/nndep/UD_French.gz" 
-            md5="f20a7664ecc0068cd1b315e09e774c09"
-            groupId="de.tudarmstadt.ukp.dkpro.core" 
-            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-            upstreamVersion="20161211"
-            metaDataVersion="1"
-            tool="depparser" 
-            language="fr" 
-            variant="ud" 
-            extension="gz">     
-            <metadata>
-                <entry key="dependency.tagset" value="universal"/>
-            </metadata>
-        </install-stub-and-upstream-file>
-    
-        <delete dir="target/download/tmp"/>
-    </target>
 
 	<target name="tagger-fr-default" depends="download-fr">
         <mkdir dir="target/download/tmp"/>
