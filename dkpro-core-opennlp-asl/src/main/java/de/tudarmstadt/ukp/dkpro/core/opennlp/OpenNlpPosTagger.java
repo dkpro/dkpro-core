@@ -48,7 +48,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionProvider;
 import opennlp.tools.postag.POSModel;
-import opennlp.tools.postag.POSTagger;
 import opennlp.tools.postag.POSTaggerME;
 
 /**
@@ -122,7 +121,7 @@ public class OpenNlpPosTagger
 	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
 	protected boolean printTagSet;
 
-	private CasConfigurableProviderBase<POSTagger> modelProvider;
+	private CasConfigurableProviderBase<POSTaggerME> modelProvider;
 	private MappingProvider mappingProvider;
     private Charset encoding;
 
@@ -140,10 +139,10 @@ public class OpenNlpPosTagger
 		// Auto-detection inspects the configuration parameter fields (@ConfigurationParameter)
 		// of the analysis engine class and looks for default parameters such as PARAM_LANGUAGE,
 		// PARAM_VARIANT, and PARAM_MODEL_LOCATION.
-        modelProvider = new ModelProviderBase<POSTagger>(this, "tagger")
+        modelProvider = new ModelProviderBase<POSTaggerME>(this, "tagger")
         {
             @Override
-            protected POSTagger produceResource(InputStream aStream)
+            protected POSTaggerME produceResource(InputStream aStream)
                 throws Exception
             {
                 // Load the POS tagger model from the location the model provider offers
