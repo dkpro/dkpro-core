@@ -120,7 +120,7 @@ public class JsonWriter
     		    typeOS = CompressionUtils.getOutputStream(typeSystemFile);
     		}
     		else {
-    		    typeOS = getOutputStream("typesystem", ".xml");
+    		    typeOS = getOutputStream("TypeSystem", ".xml");
     		}
 
 			TypeSystemUtil.typeSystem2TypeSystemDescription(aJCas.getTypeSystem()).toXML(typeOS);
