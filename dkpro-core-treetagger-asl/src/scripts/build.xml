@@ -17,7 +17,7 @@
 -->
 <project basedir="../.." default="separate-jars">
 	<import>
-		<url url="https://raw.githubusercontent.com/dkpro/resource-packager/0.6.0/ant-macros.xml"/>
+		<url url="https://raw.githubusercontent.com/dkpro/resource-packager/0.8.0/ant-macros.xml"/>
 	</import>
 
 	<!-- 
@@ -34,6 +34,12 @@
 	<target name="remote-maven">
 		<property name="install-artifact-mode" value="remote"/>
 		<antcall target="separate-jars"/>
+	</target>
+	
+	<target name="newmodels">
+        <property name="install-artifact-mode" value="remote"/>
+		<antcall target="en-tagger-le"/>
+		<antcall target="es-tagger-le"/>
 	</target>
 
 	<target name="separate-jars" depends="check-license,install-executables,bg,de,en,es,et,fi,fr,gl,it,la,mn,nl,pl,pt,ru,sk,sl,sw,zh,jar-notice"/>
@@ -147,7 +153,8 @@
 		<!-- FILE: english-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2014-05-20 | 2015-02-09 | db60237f6f42faac4c89e511f33960ec
           - 2015-02-09 | 2015-11-19 | 17d93abadfd8786b9a36dfdfd12f8d98
-          - 2015-11-19 | now        | 441b51369b6888387a17a26a5dc2d146 
+          - 2015-11-19 | 2016-12-21 | 441b51369b6888387a17a26a5dc2d146 
+          - 2016-12-21 | now        | ccf1bac5ff50d0d7bf3423aa82b2e6c1 
 		  -->
     	<get 
     		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-par-linux-3.2-utf8.bin.gz" 
@@ -156,10 +163,10 @@
 		<gunzip src="target/download/english-par-linux-3.2-utf8.bin.gz"/>
     	<install-stub-and-upstream-file 
     		file="target/download/english-par-linux-3.2-utf8.bin" 
-    		md5="441b51369b6888387a17a26a5dc2d146"
+    		md5="ccf1bac5ff50d0d7bf3423aa82b2e6c1"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
-    		upstreamVersion="20151119"
+    		upstreamVersion="20161221"
     		metaDataVersion="1"
     		tool="tagger" 
     		language="en" 
@@ -239,7 +246,8 @@
 		  - 2013-04-03 | 2013-10-07 | 30a9c4deed380e7986a4a76753ecde51
 		  - 2013-10-07 | 2014-05-20 | 8488c4319fac414802637b654a61db37
 		  - 2014-05-20 | 2015-07-24 | 48f14061833274842d6cf5ed3db7b903
-		  - 2015-07-24 | now        | ea8142cb5a0efc59226a0f5d41d690ac
+		  - 2015-07-24 | 2016-12-22 | ea8142cb5a0efc59226a0f5d41d690ac
+          - 2016-12-22 | now        | eb4b3ef771e4ba2e21aa715ca5a08d5f
 		  -->
     	<get 
     		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/spanish-par-linux-3.2-utf8.bin.gz" 
@@ -248,10 +256,10 @@
 		<gunzip src="target/download/spanish-par-linux-3.2-utf8.bin.gz"/>
     	<install-stub-and-upstream-file 
     		file="target/download/spanish-par-linux-3.2-utf8.bin" 
-    		md5="ea8142cb5a0efc59226a0f5d41d690ac"
+    		md5="eb4b3ef771e4ba2e21aa715ca5a08d5f"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
-    		upstreamVersion="20150724"
+    		upstreamVersion="20161222"
     		metaDataVersion="1"
     		tool="tagger" 
     		language="es" 
