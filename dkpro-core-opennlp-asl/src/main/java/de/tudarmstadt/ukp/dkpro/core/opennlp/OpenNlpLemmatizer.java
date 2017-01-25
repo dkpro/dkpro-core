@@ -38,7 +38,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import opennlp.tools.lemmatizer.Lemmatizer;
 import opennlp.tools.lemmatizer.LemmatizerME;
 import opennlp.tools.lemmatizer.LemmatizerModel;
 
@@ -83,7 +82,7 @@ public class OpenNlpLemmatizer
     @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = false)
     private String modelEncoding;
 
-	private CasConfigurableProviderBase<Lemmatizer> modelProvider;
+	private CasConfigurableProviderBase<LemmatizerME> modelProvider;
 
 	@Override
 	public void initialize(UimaContext aContext)
@@ -91,10 +90,10 @@ public class OpenNlpLemmatizer
 	{
 		super.initialize(aContext);
 
-        modelProvider = new ModelProviderBase<Lemmatizer>(this, "lemma")
+        modelProvider = new ModelProviderBase<LemmatizerME>(this, "lemma")
         {
             @Override
-            protected Lemmatizer produceResource(InputStream aStream)
+            protected LemmatizerME produceResource(InputStream aStream)
                 throws Exception
             {
                 // Load the lemmatizer model from the location the model provider offers
@@ -131,7 +130,9 @@ public class OpenNlpLemmatizer
             
             // Fetch the OpenNLP lemmatizer instance configured with the right model and use it to
             // tag the text
-            String[] lemmas = modelProvider.getResource().lemmatize(toks, tags);
+            LemmatizerME lemmatizer = modelProvider.getResource();
+            String[] encodedLemmas = lemmatizer.lemmatize(toks, tags);
+            String[] lemmas = lemmatizer.decodeLemmas(toks, encodedLemmas);
 
             int n = 0;
             for (Token t : tokens) {
