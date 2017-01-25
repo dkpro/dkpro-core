@@ -30,6 +30,8 @@ public abstract class CasSampleStreamBase<T>
 {
     private boolean complete = false;
     private AtomicReference<JCas> jcasReference = new AtomicReference<>();
+    private Thread readingThread;
+    private Thread sendingThread;
     
     public CasSampleStreamBase()
     {
@@ -38,11 +40,19 @@ public abstract class CasSampleStreamBase<T>
     
     public void send(JCas aJCas) {
         jcasReference.set(aJCas);
+        
+        if (readingThread != null) {
+            readingThread.interrupt();
+        }
+        
         while (!complete && jcasReference.get() != null) {
             try {
-                TimeUnit.SECONDS.sleep(1);
+                sendingThread = Thread.currentThread();
+                TimeUnit.MILLISECONDS.sleep(10);
             }
             catch (InterruptedException e) {
+                sendingThread = null;
+                Thread.interrupted();
                 // Ignore
             }
         }
@@ -70,9 +80,12 @@ public abstract class CasSampleStreamBase<T>
             }
             else {
                 try {
-                    TimeUnit.SECONDS.sleep(1);
+                    readingThread = Thread.currentThread();
+                    TimeUnit.MILLISECONDS.sleep(10);
                 }
                 catch (InterruptedException e) {
+                    Thread.interrupted();
+                    readingThread = null;
                     // Ignore
                 }
             }
