@@ -34,6 +34,7 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Assert;
 import org.junit.internal.AssumptionViolatedException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -143,6 +144,13 @@ public final class SegmenterHarness
             String... aIgnoreIds)
                 throws Throwable
     {
+        // No automatic downloading from repository during testing. This makes sure we fail if
+        // models are not properly added as test dependencies.
+        if (offline) {
+            System.setProperty(ResourceObjectProviderBase.PROP_REPO_OFFLINE, "true");
+        }
+        offline = true;
+        
 		AnalysisEngine ae = createEngine(aAed);
 		JCas jCas = ae.newJCas();
 
@@ -218,6 +226,13 @@ public final class SegmenterHarness
     public static void testLaxZoning(Class<? extends SegmenterBase> aSegmenter, String aLanguage)
         throws Exception
     {
+        // No automatic downloading from repository during testing. This makes sure we fail if
+        // models are not properly added as test dependencies.
+        if (offline) {
+            System.setProperty(ResourceObjectProviderBase.PROP_REPO_OFFLINE, "true");
+        }
+        offline = true;
+        
         String[] sentences = { "A a a a .", "A a a a -", "B b b b .", "B b b b -", "C c c c .",
                 "C c c c -" };
         
@@ -247,6 +262,13 @@ public final class SegmenterHarness
             String aLanguage)
         throws Exception
     {
+        // No automatic downloading from repository during testing. This makes sure we fail if
+        // models are not properly added as test dependencies.
+        if (offline) {
+            System.setProperty(ResourceObjectProviderBase.PROP_REPO_OFFLINE, "true");
+        }
+        offline = true;
+        
         //                       1    1    2    2    3    3    4    4    5    5    6
         //             0    5    0    5    0    5    0    5    0    5    0    5    0
         //              ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
@@ -303,6 +325,13 @@ public final class SegmenterHarness
     public static void testStrictZoning(Class<? extends SegmenterBase> aSegmenter, String aLanguage)
         throws Exception
     {
+        // No automatic downloading from repository during testing. This makes sure we fail if
+        // models are not properly added as test dependencies.
+        if (offline) {
+            System.setProperty(ResourceObjectProviderBase.PROP_REPO_OFFLINE, "true");
+        }
+        offline = true;
+        
         String[] sentences = { "A a a a .", "A a a a -", "C c c c .", "C c c c -" };
         
         String[] tokens = { 
@@ -347,4 +376,11 @@ public final class SegmenterHarness
 			tokens = aTokens;
 		}
 	}
+	
+    private static boolean offline = true;
+    
+    public static void autoloadModelsOnNextTestRun()
+    {
+        offline = false;
+    }
 }
