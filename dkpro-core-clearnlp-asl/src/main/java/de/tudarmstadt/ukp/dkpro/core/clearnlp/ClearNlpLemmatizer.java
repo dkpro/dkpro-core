@@ -91,25 +91,23 @@ public class ClearNlpLemmatizer
     {
         super.initialize(aContext);
 
-        modelProvider = new ModelProviderBase<AbstractComponent>(this, "clearnlp", "dictionary")
+        modelProvider = new ModelProviderBase<AbstractComponent>(this, "clearnlp", "lemma")
         {
             @Override
             protected AbstractComponent produceResource(InputStream aStream)
                 throws Exception
             {
-                String language = getAggregatedProperties().getProperty(LANGUAGE);
+                String lang = getAggregatedProperties().getProperty(LANGUAGE);
                 AbstractComponent lemmatizer;
-                if(language.equals("en")){
+                if(lang.equals("en")){
                     lemmatizer = new EnglishMPAnalyzer(aStream);
                 }else{
                     lemmatizer = new DefaultMPAnalyzer();
                 }
                 return lemmatizer;
             }
-
         };
     }
-
 
 	@Override
 	public void process(JCas aJCas)

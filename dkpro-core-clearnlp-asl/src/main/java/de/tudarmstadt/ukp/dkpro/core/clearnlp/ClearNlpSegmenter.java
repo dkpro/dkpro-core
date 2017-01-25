@@ -25,6 +25,7 @@ import java.util.List;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.LanguageCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -40,8 +41,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 
 /**
  * Tokenizer using Clear NLP.
- *
  */
+@LanguageCapability(value = "en")
 @TypeCapability(
 	    outputs = {
 	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -49,13 +50,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 public class ClearNlpSegmenter
 	extends SegmenterBase
 {
-    /**
-     * Use this language instead of the document language to resolve the model.
-     */
-    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false, defaultValue="en")
-    protected String language;
-
     /**
      * Override the default variant used to locate the model.
      */
@@ -78,36 +72,23 @@ public class ClearNlpSegmenter
     {
         super.initialize(aContext);
 
-        modelProvider = new ModelProviderBase<AbstractSegmenter>(this, "clearnlp", "dictionary")
+        modelProvider = new ModelProviderBase<AbstractSegmenter>(this, "segmenter")
         {
-            {
-                setContextObject(ClearNlpSegmenter.this);
-
-                setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-dictionary-${language}-${variant}");
-                setDefault(LOCATION,
-                        "classpath:/${package}/lib/dictionary-${language}-${variant}.properties");
-                setDefault(VARIANT, "default");
-
-                setOverride(LOCATION, modelLocation);
-                setOverride(LANGUAGE, language);
-                setOverride(VARIANT, variant);
-            }
-
             @Override
             protected AbstractSegmenter produceResource(InputStream aStream)
                 throws Exception
             {
-                String language = getAggregatedProperties().getProperty(LANGUAGE);
+                String lang = getAggregatedProperties().getProperty(LANGUAGE);
                 AbstractSegmenter segmenter;
-                if(language.equals("en")){
+                if (lang.equals("en")) {
                     segmenter = new EnglishSegmenter(new EnglishTokenizer(aStream));
-                }else{
-                    throw new ResourceInitializationException(new
-                            Throwable("ClearNLP segmenter supports only English"));
+                }
+                else {
+                    throw new ResourceInitializationException(
+                            new Throwable("ClearNLP segmenter supports only English"));
                 }
                 return segmenter;
             }
-
         };
     }
 

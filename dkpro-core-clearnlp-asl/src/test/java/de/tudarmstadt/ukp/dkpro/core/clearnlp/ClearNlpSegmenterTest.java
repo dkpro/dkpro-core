@@ -42,7 +42,8 @@ public class ClearNlpSegmenterTest
 	public void run() throws Throwable
 	{
 		AnalysisEngineDescription aed = createEngineDescription(ClearNlpSegmenter.class);
-		SegmenterHarness.run(aed, "de.4", "en.1", "en.7", "en.9", "ar.1", "zh.1", "zh.2");
+        SegmenterHarness.run(aed, "de.1", "de.2", "de.3", "de.4", "en.1", "en.7", "en.9", "ar.1",
+                "zh.1", "zh.2");
 	}
 
 	/**

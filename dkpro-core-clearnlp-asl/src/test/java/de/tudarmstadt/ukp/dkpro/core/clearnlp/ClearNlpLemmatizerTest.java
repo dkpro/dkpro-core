@@ -17,20 +17,18 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.clearnlp;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
-import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class ClearNlpLemmatizerTest
 {
@@ -40,12 +38,12 @@ public class ClearNlpLemmatizerTest
     {
         // Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1200000000l);
 
-        JCas jcas = runTest("en", "We need a very complicated example sentence, which "
-                + "contains as many constituents and dependencies as possible.");
+        JCas jcas = runTest("en", "We need a very complicated example sentence , which "
+                + "contains as many constituents and dependencies as possible .");
 
-        String[] lemmas = new String[] { "we", "need", "a", "very", "complicated", "example",
-                "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
-                "dependency", "as", "possible", "." };
+        String[] lemmas = { "we", "need", "a", "very", "complicated", "example", "sentence", ",",
+                "which", "contain", "as", "many", "constituent", "and", "dependency", "as",
+                "possible", "." };
 
         AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
     }
@@ -54,42 +52,24 @@ public class ClearNlpLemmatizerTest
     public void testUnderscore()
         throws Exception
     {
-
         JCas jcas = runTest("en", "foo _ bar");
 
-        String[] lemmas = new String[] { "foo", "_", "bar" };
+        String[] lemmas = { "foo", "_", "bar" };
+        
         AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
-
     }
 
     private JCas runTest(String aLanguage, String aText)
         throws Exception
     {
-        AnalysisEngineDescription seg = createEngineDescription(ClearNlpSegmenter.class);
         AnalysisEngineDescription tagger = createEngineDescription(ClearNlpPosTagger.class);
         AnalysisEngineDescription lemma = createEngineDescription(ClearNlpLemmatizer.class);
 
-        AnalysisEngineDescription aggregate = createEngineDescription(seg, tagger, lemma);
-
-        AnalysisEngine engine = createEngine(aggregate);
-        JCas jcas = engine.newJCas();
-        jcas.setDocumentLanguage(aLanguage);
-        jcas.setDocumentText(aText);
-        engine.process(jcas);
+        JCas jcas = TestRunner.runTest(createEngineDescription(tagger, lemma), aLanguage, aText);
 
         return jcas;
     }
 
     @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        Runtime.getRuntime().gc();
-        Runtime.getRuntime().gc();
-        Runtime.getRuntime().gc();
-
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
-    }
+    public DkproTestContext testContext = new DkproTestContext();
 }
