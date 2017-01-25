@@ -24,6 +24,9 @@ description: |
   
   (This description has been sourced from the dataset website).
   
+  The CPOS column of the files contains an extended POS tagset as it is used by the English 
+  TreeTagger models. The POS column contains the regular PTB tagset.
+  
 licenses:
   - name: CC-BY 2.5
     url: http://creativecommons.org/licenses/by/2.5/
