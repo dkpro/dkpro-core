@@ -30,6 +30,7 @@ import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.output.CloseShieldOutputStream;
+import org.apache.commons.lang.StringUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -235,7 +236,7 @@ public abstract class JCasFileWriter_ImplBase
 		String baseUri = meta.getDocumentBaseUri();
 		String docUri = meta.getDocumentUri();
 
-		if (!useDocumentId && (baseUri != null)) {
+		if (!useDocumentId && (StringUtils.isNotEmpty(baseUri))) {
 	        // In some cases, the baseUri may not end with a slash - if so, we add one
 	        if (baseUri.length() > 0 && !baseUri.endsWith("/")) {
 	            baseUri += '/';
