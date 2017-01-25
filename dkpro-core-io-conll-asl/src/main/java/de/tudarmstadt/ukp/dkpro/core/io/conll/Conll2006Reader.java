@@ -85,6 +85,10 @@ public class Conll2006Reader
     @ConfigurationParameter(name = PARAM_READ_CPOS, mandatory = true, defaultValue = "true")
     private boolean readCPos;
 
+    /**
+     * Enable to use CPOS (column 4) as the part-of-speech tag. Otherwise the POS (column 3) is
+     * used.
+     */
     public static final String PARAM_USE_CPOS_AS_POS = "useCPosAsPos";
     @ConfigurationParameter(name = PARAM_USE_CPOS_AS_POS, mandatory = true, defaultValue = "false")
     private boolean useCPosAsPos;
