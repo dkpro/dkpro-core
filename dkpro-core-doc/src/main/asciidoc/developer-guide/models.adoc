@@ -220,11 +220,13 @@ The following values are commonly used for __tool__:
 
 * `token` - tokenizer 
 * `sentence` - sentence splitter 
-* `lemmatizer` - lemmatizer 
+* `segmenter` - tokenizer & sentence splitter combined
+* `lemma` - lemmatizer (also sometimes `lemmatizer` is used, but should not be used for new models)
 * `tagger` - part-of-speech tagger 
 * `morphtagger` - morphological analyzer 
 * `ner` - named-entity recognizer
-* `parser` - syntactic or dependency parser
+* `parser` - syntactic parser
+* `depparser` - dependency parser (also sometimes `parser` is used, but should not be used for new models)
 * `coref` - coreference resolver
 
 The values for *variant* are very tool-dependent. Typically,
