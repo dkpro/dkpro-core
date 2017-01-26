@@ -184,10 +184,7 @@ public class StanfordNamedEntityRecognizerTrainer
     public void collectionProcessComplete()
         throws AnalysisEngineProcessException
     {
-
-        if (out != null) {
-            IOUtils.closeQuietly(out);
-        }
+        IOUtils.closeQuietly(out);
 
         // Load user-provided configuration
         Properties props = new Properties();

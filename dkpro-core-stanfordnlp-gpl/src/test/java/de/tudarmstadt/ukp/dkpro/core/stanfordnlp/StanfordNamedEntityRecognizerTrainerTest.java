@@ -43,6 +43,7 @@ import de.tudarmstadt.ukp.dkpro.core.eval.EvalUtil;
 import de.tudarmstadt.ukp.dkpro.core.eval.model.Span;
 import de.tudarmstadt.ukp.dkpro.core.eval.report.Result;
 import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2002Reader;
+import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2002Reader.ColumnSeparators;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class StanfordNamedEntityRecognizerTrainerTest
@@ -68,12 +69,12 @@ public class StanfordNamedEntityRecognizerTrainerTest
         }
 
         CollectionReaderDescription trainReader = createReaderDescription(Conll2002Reader.class,
-                Conll2002Reader.PARAM_PATTERNS, split.getTrainingFiles(),
+                Conll2002Reader.PARAM_PATTERNS, split.getDevelopmentFiles(),
                 Conll2002Reader.PARAM_LANGUAGE, ds.getLanguage(),
-                Conll2002Reader.PARAM_COLUMN_SEPARATOR,
-                Conll2002Reader.ColumnSeparators.TAB.getName(),
-                Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true, Conll2002Reader.PARAM_HAS_HEADER,
-                true, Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true);
+                Conll2002Reader.PARAM_COLUMN_SEPARATOR, ColumnSeparators.TAB.getName(),
+                Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true, 
+                Conll2002Reader.PARAM_HAS_HEADER, true, 
+                Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true);
 
         AnalysisEngineDescription trainer = createEngineDescription(
                 StanfordNamedEntityRecognizerTrainer.class,
@@ -88,10 +89,11 @@ public class StanfordNamedEntityRecognizerTrainerTest
         System.out.println("Applying model to test data");
         CollectionReaderDescription testReader = createReaderDescription(Conll2002Reader.class,
                 Conll2002Reader.PARAM_PATTERNS, split.getTestFiles(),
-                Conll2002Reader.PARAM_LANGUAGE, "de", Conll2002Reader.PARAM_COLUMN_SEPARATOR,
-                Conll2002Reader.ColumnSeparators.TAB.getName(),
-                Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true, Conll2002Reader.PARAM_HAS_HEADER,
-                true, Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true,
+                Conll2002Reader.PARAM_LANGUAGE, "de", 
+                Conll2002Reader.PARAM_COLUMN_SEPARATOR, ColumnSeparators.TAB.getName(),
+                Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true, 
+                Conll2002Reader.PARAM_HAS_HEADER, true, 
+                Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true,
                 Conll2002Reader.PARAM_READ_NAMED_ENTITY, true);
 
         AnalysisEngineDescription ner = createEngineDescription(StanfordNamedEntityRecognizer.class,
@@ -114,10 +116,9 @@ public class StanfordNamedEntityRecognizerTrainerTest
 
         Result results = EvalUtil.dumpResults(targetFolder, expected, actual);
 
-        // TODO how to determine the expected results beforehand?
-        assertEquals(0.952440, results.getFscore(), 0.0001);
-        assertEquals(0.909198, results.getPrecision(), 0.0001);
-        assertEquals(1.0, results.getRecall(), 0.0001);
+        assertEquals(0.758316, results.getFscore(), 0.0001);
+        assertEquals(0.610716, results.getPrecision(), 0.0001);
+        assertEquals(1.000000, results.getRecall(), 0.0001);
     }
 
     @Before
