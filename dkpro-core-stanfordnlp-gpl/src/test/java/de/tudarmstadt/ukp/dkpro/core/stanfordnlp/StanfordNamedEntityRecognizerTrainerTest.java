@@ -44,6 +44,7 @@ import de.tudarmstadt.ukp.dkpro.core.eval.model.Span;
 import de.tudarmstadt.ukp.dkpro.core.eval.report.Result;
 import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2002Reader;
 import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2002Reader.ColumnSeparators;
+import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2002Writer;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class StanfordNamedEntityRecognizerTrainerTest
@@ -94,13 +95,18 @@ public class StanfordNamedEntityRecognizerTrainerTest
                 Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true, 
                 Conll2002Reader.PARAM_HAS_HEADER, true, 
                 Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true,
-                Conll2002Reader.PARAM_READ_NAMED_ENTITY, true);
+                Conll2002Reader.PARAM_READ_NAMED_ENTITY, false);
 
         AnalysisEngineDescription ner = createEngineDescription(StanfordNamedEntityRecognizer.class,
                 StanfordNamedEntityRecognizer.PARAM_PRINT_TAGSET, true,
                 StanfordNamedEntityRecognizer.PARAM_MODEL_LOCATION, model);
 
-        List<Span<String>> actual = EvalUtil.loadSamples(iteratePipeline(testReader, ner),
+        AnalysisEngineDescription writer = createEngineDescription(
+                Conll2002Writer.class,
+                Conll2002Writer.PARAM_SINGULAR_TARGET, true,
+                Conll2002Writer.PARAM_TARGET_LOCATION, new File(targetFolder, "output.conll"));
+        
+        List<Span<String>> actual = EvalUtil.loadSamples(iteratePipeline(testReader, ner, writer),
                 NamedEntity.class, ne -> {
                     return ne.getValue();
                 });
@@ -116,9 +122,15 @@ public class StanfordNamedEntityRecognizerTrainerTest
 
         Result results = EvalUtil.dumpResults(targetFolder, expected, actual);
 
-        assertEquals(0.758316, results.getFscore(), 0.0001);
-        assertEquals(0.610716, results.getPrecision(), 0.0001);
-        assertEquals(1.000000, results.getRecall(), 0.0001);
+        // Using split.getTrainingFiles() with 10GB heap takes ~80 minutes to train
+        // F-score     0.692730
+        // Precision   0.765778
+        // Recall      0.632405
+        
+        // 
+        assertEquals(0.497034, results.getFscore(), 0.0001);
+        assertEquals(0.638395, results.getPrecision(), 0.0001);
+        assertEquals(0.406928, results.getRecall(), 0.0001);
     }
 
     @Before
