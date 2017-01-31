@@ -1373,15 +1373,11 @@
 	</target>
 	
 	<target name="pt">
-		<antcall target="pt-chunker-cogroo"/>
-		<antcall target="pt-sentence-cogroo"/>
 		<antcall target="pt-sentence-maxent"/>
-		<antcall target="pt-tagger-cogroo"/>
 		<antcall target="pt-tagger-maxent"/>
 		<antcall target="pt-tagger-mm-maxent"/>
 		<antcall target="pt-tagger-mm-perceptron"/>
 		<antcall target="pt-tagger-perceptron"/>
-		<antcall target="pt-token-cogroo"/>
 		<antcall target="pt-token-maxent"/>
 	</target>
 
@@ -1552,91 +1548,6 @@
 		</install-stub-and-upstream-file>
 	</target>
 
-	<target name="pt-sentence-cogroo">
-		<mkdir dir="target/download"/>
-		<!-- FILE: pt-sent.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-02-05 | now        | 0fd481285c400c7c93c5b625f8844eb3
-		  - Model require classes from Cogroo:
-		  - Unable to find implementation for opennlp.tools.util.BaseToolFactory, the class or 
-		  - service br.ccsl.cogroo.tools.sentdetect.PortuguesSentenceDetectorFactory could not be 
-		  - located!
-		  - Therefore we use the models packaged in the cogroo-res-pt_br Maven artifact, which
-		  - has a dependency on the artifact that contains the PortuguesSentenceDetectorFactory.
-		  -->
-		<install-model-stub
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-			version="20130527.1"
-			tool="sentence"
-			language="pt"
-			variant="cogroo"
-			targetGroupId="org.cogroo.lang.pt_br"
-			targetArtifactId="cogroo-res-pt_br"
-			targetVersion="4.0.0"
-			targetLocation="classpath:/models/pt-sent.model">
-		</install-model-stub>
-	</target>
-
-	<target name="pt-token-cogroo">
-		<mkdir dir="target/download"/>
-		<!-- FILE: pt-tok.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - Model require classes from Cogroo:
-		  - Unable to find implementation for opennlp.tools.util.BaseToolFactory, the class or 
-		  - service br.ccsl.cogroo.tools.tokenizer.PortuguesTokenizerFactory could not be 
-		  - located!
-		  - Therefore we use the models packaged in the cogroo-res-pt_br Maven artifact, which
-		  - has a dependency on the artifact that contains the PortuguesTokenizerFactory.
-		  -->
-		<install-model-stub
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-			version="20130527.1"
-			tool="token"
-			language="pt"
-			variant="cogroo"
-			targetGroupId="org.cogroo.lang.pt_br"
-			targetArtifactId="cogroo-res-pt_br"
-			targetVersion="4.0.0"
-			targetLocation="classpath:/models/pt-tok.model">
-		</install-model-stub>
-	</target>
-
-	<target name="pt-tagger-cogroo">
-		<mkdir dir="target/download"/>
-		<!-- FILE: pt-pos.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  -->
-		<install-model-stub
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-			version="20130527.1"
-			tool="tagger"
-			language="pt"
-			variant="cogroo"
-			targetGroupId="org.cogroo.lang.pt_br"
-			targetArtifactId="cogroo-res-pt_br"
-			targetVersion="4.0.0"
-			targetLocation="classpath:/models/pt-pos.model">
-		</install-model-stub>
-	</target>
-
-	<target name="pt-chunker-cogroo">
-		<mkdir dir="target/download"/>
-		<!-- FILE: pt-chunk.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  -->
-		<install-model-stub
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-			version="20130527.1"
-			tool="chunker"
-			language="pt"
-			variant="cogroo"
-			targetGroupId="org.cogroo.lang.pt_br"
-			targetArtifactId="cogroo-res-pt_br"
-			targetVersion="4.0.0"
-			targetLocation="classpath:/models/pt-chunk.model">
-		</install-model-stub>
-	</target>
-	
 	<target name="sv">
 		<antcall target="sv-sentence-maxent"/>
 		<antcall target="sv-tagger-maxent"/>

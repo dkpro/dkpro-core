@@ -1,0 +1,146 @@
+<!--
+   Copyright 2012
+   Ubiquitous Knowledge Processing (UKP) Lab
+   Technische Universität Darmstadt
+   
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+   
+     http://www.apache.org/licenses/LICENSE-2.0
+   
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<project basedir="../.." default="separate-jars">
+	<import>
+		<url url="https://raw.githubusercontent.com/dkpro/resource-packager/0.8.0/ant-macros.xml"/>
+	</import>
+
+	<!-- 
+	  - Output package configuration
+	  -->
+	<property name="outputPackage" value="de/tudarmstadt/ukp/dkpro/core/cogroo/lib"/>
+
+	<target name="local-maven">
+		<property name="install-artifact-mode" value="local"/>
+		<antcall target="separate-jars"/>
+	</target>
+	
+	<target name="remote-maven">
+		<property name="install-artifact-mode" value="remote"/>
+		<antcall target="separate-jars"/>
+	</target>
+
+	<target name="separate-jars" depends="pt"/>
+
+    <target name="newmodels">
+        <!-- property name="install-artifact-mode" value="remote"/ -->
+        
+        <antcall target="en-lemma-gum3ptb" />
+        <antcall target="en-tagger-gum3ptb" />
+    </target>
+	
+	<target name="pt">
+		<!--
+		<antcall target="pt-chunker-cogroo"/>
+		<antcall target="pt-sentence-cogroo"/>
+        <antcall target="pt-tagger-cogroo"/>
+        <antcall target="pt-token-cogroo"/>
+		-->
+		<antcall target="pt-sentence-maxent"/>
+		<antcall target="pt-tagger-maxent"/>
+		<antcall target="pt-tagger-mm-maxent"/>
+		<antcall target="pt-tagger-mm-perceptron"/>
+		<antcall target="pt-tagger-perceptron"/>
+		<antcall target="pt-token-maxent"/>
+	</target>
+
+	<target name="pt-sentence-cogroo">
+		<mkdir dir="target/download"/>
+		<!-- FILE: pt-sent.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2012-02-05 | now        | 0fd481285c400c7c93c5b625f8844eb3
+		  - Model require classes from Cogroo:
+		  - Unable to find implementation for opennlp.tools.util.BaseToolFactory, the class or 
+		  - service br.ccsl.cogroo.tools.sentdetect.PortuguesSentenceDetectorFactory could not be 
+		  - located!
+		  - Therefore we use the models packaged in the cogroo-res-pt_br Maven artifact, which
+		  - has a dependency on the artifact that contains the PortuguesSentenceDetectorFactory.
+		  -->
+		<install-model-stub
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.cogroo"
+			version="20130527.1"
+			tool="sentence"
+			language="pt"
+			variant="cogroo"
+			targetGroupId="org.cogroo.lang.pt_br"
+			targetArtifactId="cogroo-res-pt_br"
+			targetVersion="4.0.0"
+			targetLocation="classpath:/models/pt-sent.model">
+		</install-model-stub>
+	</target>
+
+	<target name="pt-token-cogroo">
+		<mkdir dir="target/download"/>
+		<!-- FILE: pt-tok.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - Model require classes from Cogroo:
+		  - Unable to find implementation for opennlp.tools.util.BaseToolFactory, the class or 
+		  - service br.ccsl.cogroo.tools.tokenizer.PortuguesTokenizerFactory could not be 
+		  - located!
+		  - Therefore we use the models packaged in the cogroo-res-pt_br Maven artifact, which
+		  - has a dependency on the artifact that contains the PortuguesTokenizerFactory.
+		  -->
+		<install-model-stub
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.cogroo"
+			version="20130527.1"
+			tool="token"
+			language="pt"
+			variant="cogroo"
+			targetGroupId="org.cogroo.lang.pt_br"
+			targetArtifactId="cogroo-res-pt_br"
+			targetVersion="4.0.0"
+			targetLocation="classpath:/models/pt-tok.model">
+		</install-model-stub>
+	</target>
+
+	<target name="pt-tagger-cogroo">
+		<mkdir dir="target/download"/>
+		<!-- FILE: pt-pos.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  -->
+		<install-model-stub
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.cogroo"
+			version="20130527.1"
+			tool="tagger"
+			language="pt"
+			variant="cogroo"
+			targetGroupId="org.cogroo.lang.pt_br"
+			targetArtifactId="cogroo-res-pt_br"
+			targetVersion="4.0.0"
+			targetLocation="classpath:/models/pt-pos.model">
+		</install-model-stub>
+	</target>
+
+	<target name="pt-chunker-cogroo">
+		<mkdir dir="target/download"/>
+		<!-- FILE: pt-chunk.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  -->
+		<install-model-stub
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.cogroo"
+			version="20130527.1"
+			tool="chunker"
+			language="pt"
+			variant="cogroo"
+			targetGroupId="org.cogroo.lang.pt_br"
+			targetArtifactId="cogroo-res-pt_br"
+			targetVersion="4.0.0"
+			targetLocation="classpath:/models/pt-chunk.model">
+		</install-model-stub>
+	</target>
+</project>
