@@ -270,9 +270,11 @@ public class FrequencyDistribution<T>
         
         
     }
-    
+
     public void clear() {
         freqDist.clear();
+        maxFreq=0;
+        maxSample=null;
         n = 0;
     }
     

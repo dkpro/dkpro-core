@@ -17,8 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.api.frequency.util;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.io.File;
 import java.util.Arrays;
@@ -74,6 +73,18 @@ public class FrequencyDistributionTest
         assertEquals(Integer.MIN_VALUE, badKey.hashCode());
         FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
         fd.inc(badKey);
+    }
+    
+    @Test
+    public void clearTest() {
+        List<String> tokens = Arrays
+                .asList("This is a first test that contains a first test example".split(" "));
+
+        FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
+        fd.incAll(tokens);
+        fd.clear();
+        assertEquals(0L,  fd.getMaxFreq());
+        assertNull(fd.getSampleWithMaxFreq());
     }
 
     @Test
