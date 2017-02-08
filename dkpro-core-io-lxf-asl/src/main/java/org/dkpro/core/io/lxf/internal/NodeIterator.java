@@ -49,12 +49,12 @@ public class NodeIterator
 
         if (position.containsKey(key))
             current = position.get(key) + 1;
-
+        
         for (int i = current; i < graph.getNodes().size(); i++) {
             LxfNode node = graph.getNodes().get(i);
-            if (!node.getAnnotations().containsKey(tool))
+            if (!node.getOrigin().equals(tool))
                 continue;
-            if (!node.getAnnotations().get(tool).get("class").equals(level))
+            if (!node.getAnnotation_class().equals(level))
                 continue;
             position.put(key, i);
             return node;

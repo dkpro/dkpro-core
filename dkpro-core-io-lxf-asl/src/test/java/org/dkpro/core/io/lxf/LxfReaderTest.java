@@ -57,7 +57,7 @@ public class LxfReaderTest
     {
         CollectionReaderDescription reader = createReaderDescription(
                 LxfReader.class, 
-                LxfReader.PARAM_SOURCE_LOCATION, "src/test/resources/lxf/tokenizer-repp/orig.lxf");
+                LxfReader.PARAM_SOURCE_LOCATION, "src/test/resources/lxf/repp/orig.lxf");
         
         JCas jcas = new JCasIterable(reader).iterator().next();
     
@@ -78,7 +78,7 @@ public class LxfReaderTest
     {
         CollectionReaderDescription reader = createReaderDescription(
                 LxfReader.class, 
-                LxfReader.PARAM_SOURCE_LOCATION, "src/test/resources/lxf/tokenizer-repp-hunpos/orig.lxf");
+                LxfReader.PARAM_SOURCE_LOCATION, "src/test/resources/lxf/hunpos/orig.lxf");
         
         JCas jcas = new JCasIterable(reader).iterator().next();
     
@@ -106,7 +106,7 @@ public class LxfReaderTest
     {
         CollectionReaderDescription reader = createReaderDescription(
                 LxfReader.class, 
-                LxfReader.PARAM_SOURCE_LOCATION, "src/test/resources/lxf/tokenizer-repp-hunpos-bn/orig.lxf");
+                LxfReader.PARAM_SOURCE_LOCATION, "src/test/resources/lxf/maltparser/orig.lxf");
         
         JCas jcas = new JCasIterable(reader).iterator().next();
     
@@ -129,7 +129,7 @@ public class LxfReaderTest
                 "[ 10, 14]ROOT(ROOT,basic) D[10,14](test) G[10,14](test)",
                 "[ 14, 15]Dependency(punct,basic) D[14,15](.) G[10,14](test)",
                 "[ 16, 19]Dependency(cc,basic) D[16,19](And) G[36,39](one)",
-                "[ 20, 24]Dependency(nsubj,basic) D[20,24](here) G[36,39](one)",
+                "[ 20, 24]Dependency(advmod,basic) D[20,24](here) G[36,39](one)",
                 "[ 25, 27]Dependency(cop,basic) D[25,27](is) G[36,39](one)",
                 "[ 28, 35]Dependency(det,basic) D[28,35](another) G[36,39](one)",
                 "[ 36, 39]ROOT(ROOT,basic) D[36,39](one) G[36,39](one)",

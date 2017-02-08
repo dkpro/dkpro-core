@@ -9,6 +9,7 @@
     "id" : "dkpro-e1@1",
     "index" : 0,
     "rank" : 0,
+    "annotation_class" : null,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n2@1" ],
     "to" : [ "dkpro", "dkpro-n1@1" ]
@@ -18,6 +19,7 @@
     "id" : "dkpro-e2@1",
     "index" : 1,
     "rank" : 0,
+    "annotation_class" : null,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n3@1" ],
     "to" : [ "dkpro", "dkpro-n1@1" ]
@@ -27,6 +29,7 @@
     "id" : "dkpro-e3@1",
     "index" : 2,
     "rank" : 0,
+    "annotation_class" : null,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n4@1" ],
     "to" : [ "dkpro", "dkpro-n1@1" ]
@@ -36,6 +39,7 @@
     "id" : "dkpro-e4@1",
     "index" : 3,
     "rank" : 0,
+    "annotation_class" : null,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n5@1" ],
     "to" : [ "dkpro", "dkpro-n1@1" ]
@@ -45,6 +49,7 @@
     "id" : "dkpro-e5@1",
     "index" : 4,
     "rank" : 0,
+    "annotation_class" : null,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n6@1" ],
     "to" : [ "dkpro", "dkpro-n1@1" ]
@@ -54,6 +59,7 @@
     "id" : "dkpro-e6@1",
     "index" : 5,
     "rank" : 0,
+    "annotation_class" : null,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n8@1" ],
     "to" : [ "dkpro", "dkpro-n7@1" ]
@@ -63,6 +69,7 @@
     "id" : "dkpro-e7@1",
     "index" : 6,
     "rank" : 0,
+    "annotation_class" : null,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n9@1" ],
     "to" : [ "dkpro", "dkpro-n7@1" ]
@@ -72,6 +79,7 @@
     "id" : "dkpro-e8@1",
     "index" : 7,
     "rank" : 0,
+    "annotation_class" : null,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n10@1" ],
     "to" : [ "dkpro", "dkpro-n7@1" ]
@@ -81,6 +89,7 @@
     "id" : "dkpro-e9@1",
     "index" : 8,
     "rank" : 0,
+    "annotation_class" : null,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n11@1" ],
     "to" : [ "dkpro", "dkpro-n7@1" ]
@@ -90,6 +99,7 @@
     "id" : "dkpro-e10@1",
     "index" : 9,
     "rank" : 0,
+    "annotation_class" : null,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n12@1" ],
     "to" : [ "dkpro", "dkpro-n7@1" ]
@@ -99,6 +109,7 @@
     "id" : "dkpro-e11@1",
     "index" : 10,
     "rank" : 0,
+    "annotation_class" : null,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n13@1" ],
     "to" : [ "dkpro", "dkpro-n7@1" ]
@@ -109,11 +120,9 @@
     "id" : "dkpro-n1@1",
     "index" : 0,
     "rank" : 0,
+    "annotation_class" : "sentence",
     "annotations" : {
-      "dkpro" : {
-        "class" : "sentence",
-        "label" : "This is a test."
-      }
+      "label" : "This is a test."
     },
     "links" : [ [ [ "dkpro", "dkpro-r1@1" ] ] ]
   }, {
@@ -122,11 +131,9 @@
     "id" : "dkpro-n2@1",
     "index" : 1,
     "rank" : 0,
+    "annotation_class" : "token",
     "annotations" : {
-      "dkpro" : {
-        "class" : "token",
-        "label" : "This"
-      }
+      "label" : "This"
     },
     "links" : [ [ [ "dkpro", "dkpro-r2@1" ] ] ]
   }, {
@@ -135,11 +142,9 @@
     "id" : "dkpro-n3@1",
     "index" : 2,
     "rank" : 0,
+    "annotation_class" : "token",
     "annotations" : {
-      "dkpro" : {
-        "class" : "token",
-        "label" : "is"
-      }
+      "label" : "is"
     },
     "links" : [ [ [ "dkpro", "dkpro-r3@1" ] ] ]
   }, {
@@ -148,11 +153,9 @@
     "id" : "dkpro-n4@1",
     "index" : 3,
     "rank" : 0,
+    "annotation_class" : "token",
     "annotations" : {
-      "dkpro" : {
-        "class" : "token",
-        "label" : "a"
-      }
+      "label" : "a"
     },
     "links" : [ [ [ "dkpro", "dkpro-r4@1" ] ] ]
   }, {
@@ -161,11 +164,9 @@
     "id" : "dkpro-n5@1",
     "index" : 4,
     "rank" : 0,
+    "annotation_class" : "token",
     "annotations" : {
-      "dkpro" : {
-        "class" : "token",
-        "label" : "test"
-      }
+      "label" : "test"
     },
     "links" : [ [ [ "dkpro", "dkpro-r5@1" ] ] ]
   }, {
@@ -174,11 +175,9 @@
     "id" : "dkpro-n6@1",
     "index" : 5,
     "rank" : 0,
+    "annotation_class" : "token",
     "annotations" : {
-      "dkpro" : {
-        "class" : "token",
-        "label" : "."
-      }
+      "label" : "."
     },
     "links" : [ [ [ "dkpro", "dkpro-r6@1" ] ] ]
   }, {
@@ -187,11 +186,9 @@
     "id" : "dkpro-n7@1",
     "index" : 6,
     "rank" : 0,
+    "annotation_class" : "sentence",
     "annotations" : {
-      "dkpro" : {
-        "class" : "sentence",
-        "label" : "And here is another one."
-      }
+      "label" : "And here is another one."
     },
     "links" : [ [ [ "dkpro", "dkpro-r7@1" ] ] ]
   }, {
@@ -200,11 +197,9 @@
     "id" : "dkpro-n8@1",
     "index" : 7,
     "rank" : 0,
+    "annotation_class" : "token",
     "annotations" : {
-      "dkpro" : {
-        "class" : "token",
-        "label" : "And"
-      }
+      "label" : "And"
     },
     "links" : [ [ [ "dkpro", "dkpro-r8@1" ] ] ]
   }, {
@@ -213,11 +208,9 @@
     "id" : "dkpro-n9@1",
     "index" : 8,
     "rank" : 0,
+    "annotation_class" : "token",
     "annotations" : {
-      "dkpro" : {
-        "class" : "token",
-        "label" : "here"
-      }
+      "label" : "here"
     },
     "links" : [ [ [ "dkpro", "dkpro-r9@1" ] ] ]
   }, {
@@ -226,11 +219,9 @@
     "id" : "dkpro-n10@1",
     "index" : 9,
     "rank" : 0,
+    "annotation_class" : "token",
     "annotations" : {
-      "dkpro" : {
-        "class" : "token",
-        "label" : "is"
-      }
+      "label" : "is"
     },
     "links" : [ [ [ "dkpro", "dkpro-r10@1" ] ] ]
   }, {
@@ -239,11 +230,9 @@
     "id" : "dkpro-n11@1",
     "index" : 10,
     "rank" : 0,
+    "annotation_class" : "token",
     "annotations" : {
-      "dkpro" : {
-        "class" : "token",
-        "label" : "another"
-      }
+      "label" : "another"
     },
     "links" : [ [ [ "dkpro", "dkpro-r11@1" ] ] ]
   }, {
@@ -252,11 +241,9 @@
     "id" : "dkpro-n12@1",
     "index" : 11,
     "rank" : 0,
+    "annotation_class" : "token",
     "annotations" : {
-      "dkpro" : {
-        "class" : "token",
-        "label" : "one"
-      }
+      "label" : "one"
     },
     "links" : [ [ [ "dkpro", "dkpro-r12@1" ] ] ]
   }, {
@@ -265,11 +252,9 @@
     "id" : "dkpro-n13@1",
     "index" : 12,
     "rank" : 0,
+    "annotation_class" : "token",
     "annotations" : {
-      "dkpro" : {
-        "class" : "token",
-        "label" : "."
-      }
+      "label" : "."
     },
     "links" : [ [ [ "dkpro", "dkpro-r13@1" ] ] ]
   } ],

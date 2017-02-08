@@ -17,6 +17,8 @@
  */
 package org.dkpro.core.io.lxf.internal.model;
 
+import java.util.LinkedHashMap;
+
 public class LxfEdge
     extends LxfAnnotatedObject
 {
@@ -37,12 +39,6 @@ public class LxfEdge
         setId(String.format("%s-e%d@%d", getOrigin(), getIndex() + 1, getRank() + 1));
         setFrom(new String[] { aFrom.getOrigin(), aFrom.getId() });
         setTo(new String[] { aTo.getOrigin(), aTo.getId() });
-        
-        // TODO: REMOVE THE COMMENTED CODE BELOW
-        // don't set this - linkage information is database internal
-        // setFeature(FEAT_CLASS, LAYER_LINKAGE);
-        // setFeature(FEAT_DOMAIN, aFrom.getLayer());
-        // setFeature(FEAT_RANGE, aTo.getLayer());
     }
     
     public String[] getFrom()

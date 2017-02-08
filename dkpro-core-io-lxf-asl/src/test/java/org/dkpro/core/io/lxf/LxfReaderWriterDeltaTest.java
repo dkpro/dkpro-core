@@ -41,7 +41,7 @@ public class LxfReaderWriterDeltaTest
         File target = testContext.getTestOutputFolder();
         
         CollectionReaderDescription reader = createReaderDescription(LxfReader.class,
-                LxfReader.PARAM_SOURCE_LOCATION, "src/test/resources/lxf/tokenizer-repp/orig.lxf");
+                LxfReader.PARAM_SOURCE_LOCATION, "src/test/resources/lxf/repp/orig.lxf");
         
         AnalysisEngineDescription tagger = createEngineDescription(OpenNlpPosTagger.class,
                 OpenNlpPosTagger.PARAM_LANGUAGE, "en");

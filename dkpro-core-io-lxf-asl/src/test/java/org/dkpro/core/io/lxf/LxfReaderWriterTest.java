@@ -41,6 +41,21 @@ public class LxfReaderWriterTest
     }
 
     @Test
+    public void roundTripTokenizer()
+        throws Exception
+    {
+        // testRoundTrip(
+        // LxfReader.class, // the reader
+        // LxfWriter.class, // the writer
+        // "lxf/tokenizer-repp/orig.lxf"); // the input also used as output reference
+
+        testOneWay(LxfReader.class, // the reader
+                LxfWriter.class, // the writer
+                "lxf/tokenizer/ref.lxf", "lxf/tokenizer/orig.lxf");
+    }
+    
+    
+    @Test
     public void roundTripTokenizerRepp()
         throws Exception
     {
@@ -51,7 +66,7 @@ public class LxfReaderWriterTest
 
         testOneWay(LxfReader.class, // the reader
                 LxfWriter.class, // the writer
-                "lxf/tokenizer-repp/ref.lxf", "lxf/tokenizer-repp/orig.lxf");
+                "lxf/repp/ref.lxf", "lxf/repp/orig.lxf");
     }
 
     @Test
@@ -65,11 +80,11 @@ public class LxfReaderWriterTest
 
         testOneWay(LxfReader.class, // the reader
                 LxfWriter.class, // the writer
-                "lxf/tokenizer-repp-hunpos/ref.lxf", "lxf/tokenizer-repp-hunpos/orig.lxf");
+                "lxf/hunpos/ref.lxf", "lxf/hunpos/orig.lxf");
     }
 
     @Test
-    public void roundTripTokenizerReppHunposBn()
+    public void roundTripTokenizerReppHunposMaltParser()
         throws Exception
     {
         // testRoundTrip(
@@ -79,7 +94,7 @@ public class LxfReaderWriterTest
 
         testOneWay(LxfReader.class, // the reader
                 LxfWriter.class, // the writer
-                "lxf/tokenizer-repp-hunpos-bn/ref.lxf", "lxf/tokenizer-repp-hunpos-bn/orig.lxf");
+                "lxf/maltparser/ref.lxf", "lxf/maltparser/orig.lxf");
     }
 
     @Rule
