@@ -1,0 +1,1311 @@
+{
+    "edges": [
+        {
+            "annotation_class": "linkage_token_sentence",
+            "from": [
+                "repp",
+                "repp-n1@1"
+            ],
+            "id": "repp-e1@1",
+            "index": 0,
+            "origin": "repp",
+            "rank": 0,
+            "to": [
+                "tokenizer",
+                "tokenizer-n1@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": "linkage_token_sentence",
+            "from": [
+                "repp",
+                "repp-n2@1"
+            ],
+            "id": "repp-e2@1",
+            "index": 1,
+            "origin": "repp",
+            "rank": 0,
+            "to": [
+                "tokenizer",
+                "tokenizer-n1@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": "linkage_token_sentence",
+            "from": [
+                "repp",
+                "repp-n3@1"
+            ],
+            "id": "repp-e3@1",
+            "index": 2,
+            "origin": "repp",
+            "rank": 0,
+            "to": [
+                "tokenizer",
+                "tokenizer-n1@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": "linkage_token_sentence",
+            "from": [
+                "repp",
+                "repp-n4@1"
+            ],
+            "id": "repp-e4@1",
+            "index": 3,
+            "origin": "repp",
+            "rank": 0,
+            "to": [
+                "tokenizer",
+                "tokenizer-n1@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": "linkage_token_sentence",
+            "from": [
+                "repp",
+                "repp-n5@1"
+            ],
+            "id": "repp-e5@1",
+            "index": 4,
+            "origin": "repp",
+            "rank": 0,
+            "to": [
+                "tokenizer",
+                "tokenizer-n1@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": "linkage_token_sentence",
+            "from": [
+                "repp",
+                "repp-n6@1"
+            ],
+            "id": "repp-e6@1",
+            "index": 5,
+            "origin": "repp",
+            "rank": 0,
+            "to": [
+                "tokenizer",
+                "tokenizer-n2@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": "linkage_token_sentence",
+            "from": [
+                "repp",
+                "repp-n7@1"
+            ],
+            "id": "repp-e7@1",
+            "index": 6,
+            "origin": "repp",
+            "rank": 0,
+            "to": [
+                "tokenizer",
+                "tokenizer-n2@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": "linkage_token_sentence",
+            "from": [
+                "repp",
+                "repp-n8@1"
+            ],
+            "id": "repp-e8@1",
+            "index": 7,
+            "origin": "repp",
+            "rank": 0,
+            "to": [
+                "tokenizer",
+                "tokenizer-n2@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": "linkage_token_sentence",
+            "from": [
+                "repp",
+                "repp-n9@1"
+            ],
+            "id": "repp-e9@1",
+            "index": 8,
+            "origin": "repp",
+            "rank": 0,
+            "to": [
+                "tokenizer",
+                "tokenizer-n2@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": "linkage_token_sentence",
+            "from": [
+                "repp",
+                "repp-n10@1"
+            ],
+            "id": "repp-e10@1",
+            "index": 9,
+            "origin": "repp",
+            "rank": 0,
+            "to": [
+                "tokenizer",
+                "tokenizer-n2@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": "linkage_token_sentence",
+            "from": [
+                "repp",
+                "repp-n11@1"
+            ],
+            "id": "repp-e11@1",
+            "index": 10,
+            "origin": "repp",
+            "rank": 0,
+            "to": [
+                "tokenizer",
+                "tokenizer-n2@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "hunpos",
+                "hunpos-n1@1"
+            ],
+            "id": "hunpos-e1@1",
+            "index": 0,
+            "origin": "hunpos",
+            "rank": 0,
+            "to": [
+                "repp",
+                "repp-n1@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "hunpos",
+                "hunpos-n2@1"
+            ],
+            "id": "hunpos-e2@1",
+            "index": 1,
+            "origin": "hunpos",
+            "rank": 0,
+            "to": [
+                "repp",
+                "repp-n2@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "hunpos",
+                "hunpos-n3@1"
+            ],
+            "id": "hunpos-e3@1",
+            "index": 2,
+            "origin": "hunpos",
+            "rank": 0,
+            "to": [
+                "repp",
+                "repp-n3@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "hunpos",
+                "hunpos-n4@1"
+            ],
+            "id": "hunpos-e4@1",
+            "index": 3,
+            "origin": "hunpos",
+            "rank": 0,
+            "to": [
+                "repp",
+                "repp-n4@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "hunpos",
+                "hunpos-n5@1"
+            ],
+            "id": "hunpos-e5@1",
+            "index": 4,
+            "origin": "hunpos",
+            "rank": 0,
+            "to": [
+                "repp",
+                "repp-n5@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "hunpos",
+                "hunpos-n6@1"
+            ],
+            "id": "hunpos-e6@1",
+            "index": 5,
+            "origin": "hunpos",
+            "rank": 0,
+            "to": [
+                "repp",
+                "repp-n6@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "hunpos",
+                "hunpos-n7@1"
+            ],
+            "id": "hunpos-e7@1",
+            "index": 6,
+            "origin": "hunpos",
+            "rank": 0,
+            "to": [
+                "repp",
+                "repp-n7@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "hunpos",
+                "hunpos-n8@1"
+            ],
+            "id": "hunpos-e8@1",
+            "index": 7,
+            "origin": "hunpos",
+            "rank": 0,
+            "to": [
+                "repp",
+                "repp-n8@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "hunpos",
+                "hunpos-n9@1"
+            ],
+            "id": "hunpos-e9@1",
+            "index": 8,
+            "origin": "hunpos",
+            "rank": 0,
+            "to": [
+                "repp",
+                "repp-n9@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "hunpos",
+                "hunpos-n10@1"
+            ],
+            "id": "hunpos-e10@1",
+            "index": 9,
+            "origin": "hunpos",
+            "rank": 0,
+            "to": [
+                "repp",
+                "repp-n10@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "hunpos",
+                "hunpos-n11@1"
+            ],
+            "id": "hunpos-e11@1",
+            "index": 10,
+            "origin": "hunpos",
+            "rank": 0,
+            "to": [
+                "repp",
+                "repp-n11@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "maltparser",
+                "maltparser-n1@1"
+            ],
+            "id": "maltparser-e1@1",
+            "index": 0,
+            "origin": "maltparser",
+            "rank": 0,
+            "to": [
+                "hunpos",
+                "hunpos-n1@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "hunpos",
+                "hunpos-n4@1"
+            ],
+            "id": "maltparser-e2@1",
+            "index": 1,
+            "origin": "maltparser",
+            "rank": 0,
+            "to": [
+                "maltparser",
+                "maltparser-n1@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "maltparser",
+                "maltparser-n2@1"
+            ],
+            "id": "maltparser-e3@1",
+            "index": 2,
+            "origin": "maltparser",
+            "rank": 0,
+            "to": [
+                "hunpos",
+                "hunpos-n2@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "hunpos",
+                "hunpos-n4@1"
+            ],
+            "id": "maltparser-e4@1",
+            "index": 3,
+            "origin": "maltparser",
+            "rank": 0,
+            "to": [
+                "maltparser",
+                "maltparser-n2@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "maltparser",
+                "maltparser-n3@1"
+            ],
+            "id": "maltparser-e5@1",
+            "index": 4,
+            "origin": "maltparser",
+            "rank": 0,
+            "to": [
+                "hunpos",
+                "hunpos-n3@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "hunpos",
+                "hunpos-n4@1"
+            ],
+            "id": "maltparser-e6@1",
+            "index": 5,
+            "origin": "maltparser",
+            "rank": 0,
+            "to": [
+                "maltparser",
+                "maltparser-n3@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "maltparser",
+                "maltparser-n4@1"
+            ],
+            "id": "maltparser-e7@1",
+            "index": 6,
+            "origin": "maltparser",
+            "rank": 0,
+            "to": [
+                "hunpos",
+                "hunpos-n4@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "maltparser",
+                "maltparser-n5@1"
+            ],
+            "id": "maltparser-e8@1",
+            "index": 7,
+            "origin": "maltparser",
+            "rank": 0,
+            "to": [
+                "hunpos",
+                "hunpos-n5@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "hunpos",
+                "hunpos-n4@1"
+            ],
+            "id": "maltparser-e9@1",
+            "index": 8,
+            "origin": "maltparser",
+            "rank": 0,
+            "to": [
+                "maltparser",
+                "maltparser-n5@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "maltparser",
+                "maltparser-n6@1"
+            ],
+            "id": "maltparser-e10@1",
+            "index": 9,
+            "origin": "maltparser",
+            "rank": 0,
+            "to": [
+                "hunpos",
+                "hunpos-n6@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "hunpos",
+                "hunpos-n10@1"
+            ],
+            "id": "maltparser-e11@1",
+            "index": 10,
+            "origin": "maltparser",
+            "rank": 0,
+            "to": [
+                "maltparser",
+                "maltparser-n6@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "maltparser",
+                "maltparser-n7@1"
+            ],
+            "id": "maltparser-e12@1",
+            "index": 11,
+            "origin": "maltparser",
+            "rank": 0,
+            "to": [
+                "hunpos",
+                "hunpos-n7@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "hunpos",
+                "hunpos-n10@1"
+            ],
+            "id": "maltparser-e13@1",
+            "index": 12,
+            "origin": "maltparser",
+            "rank": 0,
+            "to": [
+                "maltparser",
+                "maltparser-n7@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "maltparser",
+                "maltparser-n8@1"
+            ],
+            "id": "maltparser-e14@1",
+            "index": 13,
+            "origin": "maltparser",
+            "rank": 0,
+            "to": [
+                "hunpos",
+                "hunpos-n8@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "hunpos",
+                "hunpos-n10@1"
+            ],
+            "id": "maltparser-e15@1",
+            "index": 14,
+            "origin": "maltparser",
+            "rank": 0,
+            "to": [
+                "maltparser",
+                "maltparser-n8@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "maltparser",
+                "maltparser-n9@1"
+            ],
+            "id": "maltparser-e16@1",
+            "index": 15,
+            "origin": "maltparser",
+            "rank": 0,
+            "to": [
+                "hunpos",
+                "hunpos-n9@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "hunpos",
+                "hunpos-n10@1"
+            ],
+            "id": "maltparser-e17@1",
+            "index": 16,
+            "origin": "maltparser",
+            "rank": 0,
+            "to": [
+                "maltparser",
+                "maltparser-n9@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "maltparser",
+                "maltparser-n10@1"
+            ],
+            "id": "maltparser-e18@1",
+            "index": 17,
+            "origin": "maltparser",
+            "rank": 0,
+            "to": [
+                "hunpos",
+                "hunpos-n10@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "maltparser",
+                "maltparser-n11@1"
+            ],
+            "id": "maltparser-e19@1",
+            "index": 18,
+            "origin": "maltparser",
+            "rank": 0,
+            "to": [
+                "hunpos",
+                "hunpos-n11@1"
+            ],
+            "type": "edge"
+        },
+        {
+            "annotation_class": null,
+            "from": [
+                "hunpos",
+                "hunpos-n10@1"
+            ],
+            "id": "maltparser-e20@1",
+            "index": 19,
+            "origin": "maltparser",
+            "rank": 0,
+            "to": [
+                "maltparser",
+                "maltparser-n11@1"
+            ],
+            "type": "edge"
+        }
+    ],
+    "media": "This is a test. And here is another one.\n",
+    "nodes": [
+        {
+            "annotation_class": "sentence",
+            "annotations": {
+                "label": "This is a test."
+            },
+            "id": "tokenizer-n1@1",
+            "index": 0,
+            "links": [
+                [
+                    [
+                        "tokenizer",
+                        "tokenizer-r1@1"
+                    ]
+                ]
+            ],
+            "origin": "tokenizer",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "sentence",
+            "annotations": {
+                "label": "And here is another one."
+            },
+            "id": "tokenizer-n2@1",
+            "index": 1,
+            "links": [
+                [
+                    [
+                        "tokenizer",
+                        "tokenizer-r2@1"
+                    ]
+                ]
+            ],
+            "origin": "tokenizer",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "token",
+            "annotations": {
+                "label": "This"
+            },
+            "id": "repp-n1@1",
+            "index": 0,
+            "links": [
+                [
+                    [
+                        "repp",
+                        "repp-r1@1"
+                    ]
+                ]
+            ],
+            "origin": "repp",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "token",
+            "annotations": {
+                "label": "is"
+            },
+            "id": "repp-n2@1",
+            "index": 1,
+            "links": [
+                [
+                    [
+                        "repp",
+                        "repp-r2@1"
+                    ]
+                ]
+            ],
+            "origin": "repp",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "token",
+            "annotations": {
+                "label": "a"
+            },
+            "id": "repp-n3@1",
+            "index": 2,
+            "links": [
+                [
+                    [
+                        "repp",
+                        "repp-r3@1"
+                    ]
+                ]
+            ],
+            "origin": "repp",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "token",
+            "annotations": {
+                "label": "test"
+            },
+            "id": "repp-n4@1",
+            "index": 3,
+            "links": [
+                [
+                    [
+                        "repp",
+                        "repp-r4@1"
+                    ]
+                ]
+            ],
+            "origin": "repp",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "token",
+            "annotations": {
+                "label": "."
+            },
+            "id": "repp-n5@1",
+            "index": 4,
+            "links": [
+                [
+                    [
+                        "repp",
+                        "repp-r5@1"
+                    ]
+                ]
+            ],
+            "origin": "repp",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "token",
+            "annotations": {
+                "label": "And"
+            },
+            "id": "repp-n6@1",
+            "index": 5,
+            "links": [
+                [
+                    [
+                        "repp",
+                        "repp-r6@1"
+                    ]
+                ]
+            ],
+            "origin": "repp",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "token",
+            "annotations": {
+                "label": "here"
+            },
+            "id": "repp-n7@1",
+            "index": 6,
+            "links": [
+                [
+                    [
+                        "repp",
+                        "repp-r7@1"
+                    ]
+                ]
+            ],
+            "origin": "repp",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "token",
+            "annotations": {
+                "label": "is"
+            },
+            "id": "repp-n8@1",
+            "index": 7,
+            "links": [
+                [
+                    [
+                        "repp",
+                        "repp-r8@1"
+                    ]
+                ]
+            ],
+            "origin": "repp",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "token",
+            "annotations": {
+                "label": "another"
+            },
+            "id": "repp-n9@1",
+            "index": 8,
+            "links": [
+                [
+                    [
+                        "repp",
+                        "repp-r9@1"
+                    ]
+                ]
+            ],
+            "origin": "repp",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "token",
+            "annotations": {
+                "label": "one"
+            },
+            "id": "repp-n10@1",
+            "index": 9,
+            "links": [
+                [
+                    [
+                        "repp",
+                        "repp-r10@1"
+                    ]
+                ]
+            ],
+            "origin": "repp",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "token",
+            "annotations": {
+                "label": "."
+            },
+            "id": "repp-n11@1",
+            "index": 10,
+            "links": [
+                [
+                    [
+                        "repp",
+                        "repp-r11@1"
+                    ]
+                ]
+            ],
+            "origin": "repp",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "morphology",
+            "annotations": {
+                "pos": "DT"
+            },
+            "id": "hunpos-n1@1",
+            "index": 0,
+            "origin": "hunpos",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "morphology",
+            "annotations": {
+                "pos": "VBZ"
+            },
+            "id": "hunpos-n2@1",
+            "index": 1,
+            "origin": "hunpos",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "morphology",
+            "annotations": {
+                "pos": "DT"
+            },
+            "id": "hunpos-n3@1",
+            "index": 2,
+            "origin": "hunpos",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "morphology",
+            "annotations": {
+                "pos": "NN"
+            },
+            "id": "hunpos-n4@1",
+            "index": 3,
+            "origin": "hunpos",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "morphology",
+            "annotations": {
+                "pos": "."
+            },
+            "id": "hunpos-n5@1",
+            "index": 4,
+            "origin": "hunpos",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "morphology",
+            "annotations": {
+                "pos": "CC"
+            },
+            "id": "hunpos-n6@1",
+            "index": 5,
+            "origin": "hunpos",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "morphology",
+            "annotations": {
+                "pos": "RB"
+            },
+            "id": "hunpos-n7@1",
+            "index": 6,
+            "origin": "hunpos",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "morphology",
+            "annotations": {
+                "pos": "VBZ"
+            },
+            "id": "hunpos-n8@1",
+            "index": 7,
+            "origin": "hunpos",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "morphology",
+            "annotations": {
+                "pos": "DT"
+            },
+            "id": "hunpos-n9@1",
+            "index": 8,
+            "origin": "hunpos",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "morphology",
+            "annotations": {
+                "pos": "NN"
+            },
+            "id": "hunpos-n10@1",
+            "index": 9,
+            "origin": "hunpos",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "morphology",
+            "annotations": {
+                "pos": "."
+            },
+            "id": "hunpos-n11@1",
+            "index": 10,
+            "origin": "hunpos",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "dependency",
+            "annotations": {
+                "head": 4,
+                "label": "nsubj"
+            },
+            "id": "maltparser-n1@1",
+            "index": 0,
+            "origin": "maltparser",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "dependency",
+            "annotations": {
+                "head": 4,
+                "label": "cop"
+            },
+            "id": "maltparser-n2@1",
+            "index": 1,
+            "origin": "maltparser",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "dependency",
+            "annotations": {
+                "head": 4,
+                "label": "det"
+            },
+            "id": "maltparser-n3@1",
+            "index": 2,
+            "origin": "maltparser",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "dependency",
+            "annotations": {
+                "head": 0,
+                "label": "null"
+            },
+            "id": "maltparser-n4@1",
+            "index": 3,
+            "origin": "maltparser",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "dependency",
+            "annotations": {
+                "head": 4,
+                "label": "punct"
+            },
+            "id": "maltparser-n5@1",
+            "index": 4,
+            "origin": "maltparser",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "dependency",
+            "annotations": {
+                "head": 5,
+                "label": "cc"
+            },
+            "id": "maltparser-n6@1",
+            "index": 5,
+            "origin": "maltparser",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "dependency",
+            "annotations": {
+                "head": 5,
+                "label": "advmod"
+            },
+            "id": "maltparser-n7@1",
+            "index": 6,
+            "origin": "maltparser",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "dependency",
+            "annotations": {
+                "head": 5,
+                "label": "cop"
+            },
+            "id": "maltparser-n8@1",
+            "index": 7,
+            "origin": "maltparser",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "dependency",
+            "annotations": {
+                "head": 5,
+                "label": "det"
+            },
+            "id": "maltparser-n9@1",
+            "index": 8,
+            "origin": "maltparser",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "dependency",
+            "annotations": {
+                "head": 0,
+                "label": "null"
+            },
+            "id": "maltparser-n10@1",
+            "index": 9,
+            "origin": "maltparser",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "dependency",
+            "annotations": {
+                "head": 5,
+                "label": "punct"
+            },
+            "id": "maltparser-n11@1",
+            "index": 10,
+            "origin": "maltparser",
+            "rank": 0,
+            "type": "node"
+        }
+    ],
+    "regions": [
+        {
+            "anchors": [
+                0,
+                15
+            ],
+            "id": "tokenizer-r1@1",
+            "index": 0,
+            "origin": "tokenizer",
+            "type": "region"
+        },
+        {
+            "anchors": [
+                16,
+                40
+            ],
+            "id": "tokenizer-r2@1",
+            "index": 1,
+            "origin": "tokenizer",
+            "type": "region"
+        },
+        {
+            "anchors": [
+                0,
+                4
+            ],
+            "id": "repp-r1@1",
+            "index": 0,
+            "origin": "repp",
+            "type": "region"
+        },
+        {
+            "anchors": [
+                5,
+                7
+            ],
+            "id": "repp-r2@1",
+            "index": 1,
+            "origin": "repp",
+            "type": "region"
+        },
+        {
+            "anchors": [
+                8,
+                9
+            ],
+            "id": "repp-r3@1",
+            "index": 2,
+            "origin": "repp",
+            "type": "region"
+        },
+        {
+            "anchors": [
+                10,
+                14
+            ],
+            "id": "repp-r4@1",
+            "index": 3,
+            "origin": "repp",
+            "type": "region"
+        },
+        {
+            "anchors": [
+                14,
+                15
+            ],
+            "id": "repp-r5@1",
+            "index": 4,
+            "origin": "repp",
+            "type": "region"
+        },
+        {
+            "anchors": [
+                16,
+                19
+            ],
+            "id": "repp-r6@1",
+            "index": 5,
+            "origin": "repp",
+            "type": "region"
+        },
+        {
+            "anchors": [
+                20,
+                24
+            ],
+            "id": "repp-r7@1",
+            "index": 6,
+            "origin": "repp",
+            "type": "region"
+        },
+        {
+            "anchors": [
+                25,
+                27
+            ],
+            "id": "repp-r8@1",
+            "index": 7,
+            "origin": "repp",
+            "type": "region"
+        },
+        {
+            "anchors": [
+                28,
+                35
+            ],
+            "id": "repp-r9@1",
+            "index": 8,
+            "origin": "repp",
+            "type": "region"
+        },
+        {
+            "anchors": [
+                36,
+                39
+            ],
+            "id": "repp-r10@1",
+            "index": 9,
+            "origin": "repp",
+            "type": "region"
+        },
+        {
+            "anchors": [
+                39,
+                40
+            ],
+            "id": "repp-r11@1",
+            "index": 10,
+            "origin": "repp",
+            "type": "region"
+        }
+    ]
+}

@@ -25,9 +25,6 @@ public class LxfVocabulary
     public static final String TYPE_REGION = "region";
     public static final String TYPE_TEXT = "text";
     
-    // Generic graph object features
-    public static final String FEAT_CLASS = "class";
-    
     // Tool types
     public static final String TOOL_TOKENIZER = "tokenizer";
     public static final String TOOL_REPP = "repp";

@@ -46,14 +46,14 @@ public class LxfConverterTest
         throws Exception
     {
         Map<String, String> ids = new HashMap<>();
-        test("src/test/resources/lxf/delta/text/orig.lxf", false, ids);
+        test("src/test/resources/lxf/text/orig.lxf", false, ids);
     }
 
     @Test
     public void testTextDelta()
         throws Exception
     {
-        test("src/test/resources/lxf/delta/text/orig.lxf", true, null);
+        test("src/test/resources/lxf/text/orig.lxf", true, null);
     }
 
     @Test
@@ -61,15 +61,15 @@ public class LxfConverterTest
         throws Exception
     {
         Map<String, String> ids = new HashMap<>();
-        ids.put("sentence", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter");
-        test("src/test/resources/lxf/delta/text-sentence/orig.lxf", false, ids);
+        ids.put("sentence", "tokenizer");
+        test("src/test/resources/lxf/tokenizer/orig.lxf", false, ids);
     }
 
     @Test
     public void testSentenceDelta()
         throws Exception
     {
-        test("src/test/resources/lxf/delta/text-sentence/orig.lxf", true, null);
+        test("src/test/resources/lxf/tokenizer/orig.lxf", true, null);
     }
 
     @Test
@@ -77,16 +77,16 @@ public class LxfConverterTest
         throws Exception
     {
         Map<String, String> ids = new HashMap<>();
-        ids.put("sentence", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter");
-        ids.put("token", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter");
-        test("src/test/resources/lxf/delta/text-sentence-tokens/orig.lxf", false, ids);
+        ids.put("sentence", "tokenizer");
+        ids.put("token", "repp");
+        test("src/test/resources/lxf/repp/orig.lxf", false, ids);
     }
 
     @Test
     public void testTokenDelta()
         throws Exception
     {
-        test("src/test/resources/lxf/delta/text-sentence-tokens/orig.lxf", true, null);
+        test("src/test/resources/lxf/repp/orig.lxf", true, null);
     }
 
     @Test
@@ -94,17 +94,17 @@ public class LxfConverterTest
         throws Exception
     {
         Map<String, String> ids = new HashMap<>();
-        ids.put("sentence", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter");
-        ids.put("token", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter");
+        ids.put("sentence", "tokenizer");
+        ids.put("token", "repp");
         ids.put("morphology", "hunpos");
-        test("src/test/resources/lxf/delta/text-sentence-tokens-morpho/orig.lxf", false, ids);
+        test("src/test/resources/lxf/hunpos/orig.lxf", false, ids);
     }
 
     @Test
-    public void testDepDelta()
+    public void testMorphoDelta()
         throws Exception
     {
-        test("src/test/resources/lxf/delta/text-sentence-tokens-morpho-dep/orig.lxf", true, null);
+        test("src/test/resources/lxf/hunpos/orig.lxf", true, null);
     }
 
     @Test
@@ -112,18 +112,19 @@ public class LxfConverterTest
         throws Exception
     {
         Map<String, String> ids = new HashMap<>();
-        ids.put("sentence", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter");
-        ids.put("token", "de_tudarmstadt_ukp_dkpro_core_corenlp_CoreNlpSegmenter");
+        ids.put("sentence", "tokenizer");
+        ids.put("token", "repp");
         ids.put("morphology", "hunpos");
-        ids.put("dependency", "de_tudarmstadt_ukp_dkpro_core_stanfordnlp_StanfordParser");
-        test("src/test/resources/lxf/delta/text-sentence-tokens-morpho-dep/orig.lxf", false, ids);
+        ids.put("dependency", "maltparser");
+        test("src/test/resources/lxf/maltparser/orig.lxf", false, ids);
     }
 
+    
     @Test
-    public void testMorphoDelta()
+    public void testDepDelta()
         throws Exception
     {
-        test("src/test/resources/lxf/delta/text-sentence-tokens-morpho/orig.lxf", true, null);
+        test("src/test/resources/lxf/maltparser/orig.lxf", true, null);
     }
 
     public void test(String aFile, boolean aDelta, Map<String, String> ids)

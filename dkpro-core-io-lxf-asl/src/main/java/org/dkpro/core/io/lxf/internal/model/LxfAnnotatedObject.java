@@ -17,30 +17,43 @@
  */
 package org.dkpro.core.io.lxf.internal.model;
 
-import static java.util.Collections.singletonMap;
-import static org.dkpro.core.io.lxf.internal.model.LxfVocabulary.FEAT_CLASS;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class LxfAnnotatedObject
     extends LxfObject
 {
     private int rank;
-    private Map<String, Map<String, String>> annotations;
+    private String annotationClass;
+    
+    @JsonProperty(value="annotation_class")
+    public String getAnnotationClass()
+    {
+        return annotationClass;
+    }
+
+    @JsonProperty(value="annotation_class")
+    public void setAnnotationClass(String annotationClass)
+    {
+        this.annotationClass = annotationClass;
+    }
+
+    private Map<String, String> annotations;
 
     @JsonIgnore
     public String getLayer()
     {
-        return getAnnotations().get(getOrigin()).get(FEAT_CLASS);
+        return annotationClass;
     }
+   
     
     public String getFeature(String aName)
     {
         if (annotations != null) {             
-            return annotations.get(getOrigin()).get(aName);
+            return annotations.get(aName);
         }
         else {
             return null;
@@ -50,11 +63,9 @@ public class LxfAnnotatedObject
     public void setFeature(String aName, String aValue)
     {
         if (annotations == null) {
-            annotations = singletonMap(getOrigin(), new LinkedHashMap<>());
+            annotations = new LinkedHashMap<>();
         }
-        
-        Map<String, String> annos = annotations.get(getOrigin());
-        annos.put(aName, aValue);
+        annotations.put(aName, aValue);
     }
 
     public int getRank()
@@ -67,12 +78,12 @@ public class LxfAnnotatedObject
         rank = aRank;
     }
 
-    public Map<String, Map<String, String>> getAnnotations()
+    public Map<String, String> getAnnotations()
     {
         return annotations;
     }
 
-    public void setAnnotations(Map<String, Map<String, String>> aAnnotations)
+    public void setAnnotations(Map<String, String> aAnnotations)
     {
         annotations = aAnnotations;
     }

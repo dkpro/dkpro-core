@@ -1,6 +1,6 @@
-{'edges': [],
- 'media': {
-           'data': 'This is a test. And here is another one.\n',
-           'type': 'text'},
- 'nodes': [],
- 'regions': []}
+{
+    "edges": [],
+    "media": "This is a test. And here is another one.\n",
+    "nodes": [],
+    "regions": []
+}

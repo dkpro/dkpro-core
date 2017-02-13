@@ -19,7 +19,6 @@ package org.dkpro.core.io.lxf.internal.model;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
-import static org.dkpro.core.io.lxf.internal.model.LxfVocabulary.FEAT_CLASS;
 
 import java.util.List;
 
@@ -50,7 +49,7 @@ public class LxfNode
             setLinks(asList(singletonList(new String[] { aRegion.getOrigin(), aRegion.getId() })));
         }
         
-        setFeature(FEAT_CLASS, aLayer);
+        setAnnotationClass(aLayer);
     }
     
     public List<List<String[]>> getLinks()

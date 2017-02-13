@@ -1,0 +1,43 @@
+{
+  "media" : {
+    "type" : null,
+    "data" : "This is a test. And here is another one.\n"
+  },
+  "edges" : [ ],
+  "nodes" : [ {
+    "type" : "node",
+    "origin" : "dkpro",
+    "id" : "dkpro-n1@1",
+    "index" : 0,
+    "rank" : 0,
+    "annotations" : {
+      "label" : "This is a test."
+    },
+    "links" : [ [ [ "dkpro", "dkpro-r1@1" ] ] ],
+    "annotation_class" : "sentence"
+  }, {
+    "type" : "node",
+    "origin" : "dkpro",
+    "id" : "dkpro-n2@1",
+    "index" : 1,
+    "rank" : 0,
+    "annotations" : {
+      "label" : "And here is another one."
+    },
+    "links" : [ [ [ "dkpro", "dkpro-r2@1" ] ] ],
+    "annotation_class" : "sentence"
+  } ],
+  "regions" : [ {
+    "type" : "region",
+    "origin" : "dkpro",
+    "id" : "dkpro-r1@1",
+    "index" : 0,
+    "anchors" : [ 0, 15 ]
+  }, {
+    "type" : "region",
+    "origin" : "dkpro",
+    "id" : "dkpro-r2@1",
+    "index" : 1,
+    "anchors" : [ 16, 40 ]
+  } ]
+}

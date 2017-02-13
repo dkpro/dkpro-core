@@ -11,7 +11,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n2@1" ],
-    "to" : [ "dkpro", "dkpro-n1@1" ]
+    "to" : [ "dkpro", "dkpro-n1@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -20,7 +21,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n3@1" ],
-    "to" : [ "dkpro", "dkpro-n2@1" ]
+    "to" : [ "dkpro", "dkpro-n2@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -29,7 +31,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n4@1" ],
-    "to" : [ "dkpro", "dkpro-n1@1" ]
+    "to" : [ "dkpro", "dkpro-n1@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -38,7 +41,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n5@1" ],
-    "to" : [ "dkpro", "dkpro-n4@1" ]
+    "to" : [ "dkpro", "dkpro-n4@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -47,7 +51,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n6@1" ],
-    "to" : [ "dkpro", "dkpro-n1@1" ]
+    "to" : [ "dkpro", "dkpro-n1@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -56,7 +61,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n7@1" ],
-    "to" : [ "dkpro", "dkpro-n6@1" ]
+    "to" : [ "dkpro", "dkpro-n6@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -65,7 +71,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n8@1" ],
-    "to" : [ "dkpro", "dkpro-n1@1" ]
+    "to" : [ "dkpro", "dkpro-n1@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -74,7 +81,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n9@1" ],
-    "to" : [ "dkpro", "dkpro-n8@1" ]
+    "to" : [ "dkpro", "dkpro-n8@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -83,7 +91,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n10@1" ],
-    "to" : [ "dkpro", "dkpro-n1@1" ]
+    "to" : [ "dkpro", "dkpro-n1@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -92,7 +101,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n11@1" ],
-    "to" : [ "dkpro", "dkpro-n10@1" ]
+    "to" : [ "dkpro", "dkpro-n10@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -101,7 +111,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n12@1" ],
-    "to" : [ "dkpro", "dkpro-n3@1" ]
+    "to" : [ "dkpro", "dkpro-n3@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -110,7 +121,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n9@1" ],
-    "to" : [ "dkpro", "dkpro-n12@1" ]
+    "to" : [ "dkpro", "dkpro-n12@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -119,7 +131,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n13@1" ],
-    "to" : [ "dkpro", "dkpro-n5@1" ]
+    "to" : [ "dkpro", "dkpro-n5@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -128,7 +141,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n9@1" ],
-    "to" : [ "dkpro", "dkpro-n13@1" ]
+    "to" : [ "dkpro", "dkpro-n13@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -137,7 +151,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n14@1" ],
-    "to" : [ "dkpro", "dkpro-n7@1" ]
+    "to" : [ "dkpro", "dkpro-n7@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -146,7 +161,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n9@1" ],
-    "to" : [ "dkpro", "dkpro-n14@1" ]
+    "to" : [ "dkpro", "dkpro-n14@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -155,7 +171,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n15@1" ],
-    "to" : [ "dkpro", "dkpro-n9@1" ]
+    "to" : [ "dkpro", "dkpro-n9@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -164,7 +181,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n16@1" ],
-    "to" : [ "dkpro", "dkpro-n11@1" ]
+    "to" : [ "dkpro", "dkpro-n11@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -173,7 +191,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n9@1" ],
-    "to" : [ "dkpro", "dkpro-n16@1" ]
+    "to" : [ "dkpro", "dkpro-n16@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -182,7 +201,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n18@1" ],
-    "to" : [ "dkpro", "dkpro-n17@1" ]
+    "to" : [ "dkpro", "dkpro-n17@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -191,7 +211,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n19@1" ],
-    "to" : [ "dkpro", "dkpro-n18@1" ]
+    "to" : [ "dkpro", "dkpro-n18@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -200,7 +221,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n20@1" ],
-    "to" : [ "dkpro", "dkpro-n17@1" ]
+    "to" : [ "dkpro", "dkpro-n17@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -209,7 +231,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n21@1" ],
-    "to" : [ "dkpro", "dkpro-n20@1" ]
+    "to" : [ "dkpro", "dkpro-n20@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -218,7 +241,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n22@1" ],
-    "to" : [ "dkpro", "dkpro-n17@1" ]
+    "to" : [ "dkpro", "dkpro-n17@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -227,7 +251,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n23@1" ],
-    "to" : [ "dkpro", "dkpro-n22@1" ]
+    "to" : [ "dkpro", "dkpro-n22@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -236,7 +261,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n24@1" ],
-    "to" : [ "dkpro", "dkpro-n17@1" ]
+    "to" : [ "dkpro", "dkpro-n17@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -245,7 +271,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n25@1" ],
-    "to" : [ "dkpro", "dkpro-n24@1" ]
+    "to" : [ "dkpro", "dkpro-n24@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -254,7 +281,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n26@1" ],
-    "to" : [ "dkpro", "dkpro-n17@1" ]
+    "to" : [ "dkpro", "dkpro-n17@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -263,7 +291,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n27@1" ],
-    "to" : [ "dkpro", "dkpro-n26@1" ]
+    "to" : [ "dkpro", "dkpro-n26@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -272,7 +301,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n28@1" ],
-    "to" : [ "dkpro", "dkpro-n17@1" ]
+    "to" : [ "dkpro", "dkpro-n17@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -281,7 +311,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n29@1" ],
-    "to" : [ "dkpro", "dkpro-n28@1" ]
+    "to" : [ "dkpro", "dkpro-n28@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -290,7 +321,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n30@1" ],
-    "to" : [ "dkpro", "dkpro-n19@1" ]
+    "to" : [ "dkpro", "dkpro-n19@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -299,7 +331,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n27@1" ],
-    "to" : [ "dkpro", "dkpro-n30@1" ]
+    "to" : [ "dkpro", "dkpro-n30@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -308,7 +341,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n31@1" ],
-    "to" : [ "dkpro", "dkpro-n21@1" ]
+    "to" : [ "dkpro", "dkpro-n21@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -317,7 +351,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n27@1" ],
-    "to" : [ "dkpro", "dkpro-n31@1" ]
+    "to" : [ "dkpro", "dkpro-n31@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -326,7 +361,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n32@1" ],
-    "to" : [ "dkpro", "dkpro-n23@1" ]
+    "to" : [ "dkpro", "dkpro-n23@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -335,7 +371,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n27@1" ],
-    "to" : [ "dkpro", "dkpro-n32@1" ]
+    "to" : [ "dkpro", "dkpro-n32@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -344,7 +381,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n33@1" ],
-    "to" : [ "dkpro", "dkpro-n25@1" ]
+    "to" : [ "dkpro", "dkpro-n25@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -353,7 +391,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n27@1" ],
-    "to" : [ "dkpro", "dkpro-n33@1" ]
+    "to" : [ "dkpro", "dkpro-n33@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -362,7 +401,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n34@1" ],
-    "to" : [ "dkpro", "dkpro-n27@1" ]
+    "to" : [ "dkpro", "dkpro-n27@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -371,7 +411,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n35@1" ],
-    "to" : [ "dkpro", "dkpro-n29@1" ]
+    "to" : [ "dkpro", "dkpro-n29@1" ],
+    "annotation_class" : null
   }, {
     "type" : "edge",
     "origin" : "dkpro",
@@ -380,7 +421,8 @@
     "rank" : 0,
     "annotations" : null,
     "from" : [ "dkpro", "dkpro-n27@1" ],
-    "to" : [ "dkpro", "dkpro-n35@1" ]
+    "to" : [ "dkpro", "dkpro-n35@1" ],
+    "annotation_class" : null
   } ],
   "nodes" : [ {
     "type" : "node",
@@ -389,12 +431,10 @@
     "index" : 0,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "sentence",
-        "label" : "This is a test."
-      }
+      "label" : "This is a test."
     },
-    "links" : [ [ [ "dkpro", "dkpro-r1@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r1@1" ] ] ],
+    "annotation_class" : "sentence"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -402,12 +442,10 @@
     "index" : 1,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "token",
-        "label" : "This"
-      }
+      "label" : "This"
     },
-    "links" : [ [ [ "dkpro", "dkpro-r2@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r2@1" ] ] ],
+    "annotation_class" : "token"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -415,12 +453,10 @@
     "index" : 2,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "morphology",
-        "pos" : "DT"
-      }
+      "pos" : "DT"
     },
-    "links" : null
+    "links" : null,
+    "annotation_class" : "morphology"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -428,12 +464,10 @@
     "index" : 3,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "token",
-        "label" : "is"
-      }
+      "label" : "is"
     },
-    "links" : [ [ [ "dkpro", "dkpro-r3@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r3@1" ] ] ],
+    "annotation_class" : "token"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -441,12 +475,10 @@
     "index" : 4,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "morphology",
-        "pos" : "VBZ"
-      }
+      "pos" : "VBZ"
     },
-    "links" : null
+    "links" : null,
+    "annotation_class" : "morphology"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -454,12 +486,10 @@
     "index" : 5,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "token",
-        "label" : "a"
-      }
+      "label" : "a"
     },
-    "links" : [ [ [ "dkpro", "dkpro-r4@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r4@1" ] ] ],
+    "annotation_class" : "token"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -467,12 +497,10 @@
     "index" : 6,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "morphology",
-        "pos" : "DT"
-      }
+      "pos" : "DT"
     },
-    "links" : null
+    "links" : null,
+    "annotation_class" : "morphology"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -480,12 +508,10 @@
     "index" : 7,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "token",
-        "label" : "test"
-      }
+      "label" : "test"
     },
-    "links" : [ [ [ "dkpro", "dkpro-r5@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r5@1" ] ] ],
+    "annotation_class" : "token"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -493,12 +519,10 @@
     "index" : 8,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "morphology",
-        "pos" : "NN"
-      }
+      "pos" : "NN"
     },
-    "links" : null
+    "links" : null,
+    "annotation_class" : "morphology"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -506,12 +530,10 @@
     "index" : 9,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "token",
-        "label" : "."
-      }
+      "label" : "."
     },
-    "links" : [ [ [ "dkpro", "dkpro-r6@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r6@1" ] ] ],
+    "annotation_class" : "token"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -519,12 +541,10 @@
     "index" : 10,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "morphology",
-        "pos" : "."
-      }
+      "pos" : "."
     },
-    "links" : null
+    "links" : null,
+    "annotation_class" : "morphology"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -532,12 +552,10 @@
     "index" : 11,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "dependency",
-        "label" : "nsubj"
-      }
+      "label" : "nsubj"
     },
-    "links" : null
+    "links" : null,
+    "annotation_class" : "dependency"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -545,12 +563,10 @@
     "index" : 12,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "dependency",
-        "label" : "cop"
-      }
+      "label" : "cop"
     },
-    "links" : null
+    "links" : null,
+    "annotation_class" : "dependency"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -558,12 +574,10 @@
     "index" : 13,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "dependency",
-        "label" : "det"
-      }
+      "label" : "det"
     },
-    "links" : null
+    "links" : null,
+    "annotation_class" : "dependency"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -571,12 +585,10 @@
     "index" : 14,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "dependency",
-        "label" : "ROOT"
-      }
+      "label" : "ROOT"
     },
-    "links" : null
+    "links" : null,
+    "annotation_class" : "dependency"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -584,12 +596,10 @@
     "index" : 15,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "dependency",
-        "label" : "punct"
-      }
+      "label" : "punct"
     },
-    "links" : null
+    "links" : null,
+    "annotation_class" : "dependency"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -597,12 +607,10 @@
     "index" : 16,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "sentence",
-        "label" : "And here is another one."
-      }
+      "label" : "And here is another one."
     },
-    "links" : [ [ [ "dkpro", "dkpro-r7@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r7@1" ] ] ],
+    "annotation_class" : "sentence"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -610,12 +618,10 @@
     "index" : 17,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "token",
-        "label" : "And"
-      }
+      "label" : "And"
     },
-    "links" : [ [ [ "dkpro", "dkpro-r8@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r8@1" ] ] ],
+    "annotation_class" : "token"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -623,12 +629,10 @@
     "index" : 18,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "morphology",
-        "pos" : "CC"
-      }
+      "pos" : "CC"
     },
-    "links" : null
+    "links" : null,
+    "annotation_class" : "morphology"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -636,12 +640,10 @@
     "index" : 19,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "token",
-        "label" : "here"
-      }
+      "label" : "here"
     },
-    "links" : [ [ [ "dkpro", "dkpro-r9@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r9@1" ] ] ],
+    "annotation_class" : "token"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -649,12 +651,10 @@
     "index" : 20,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "morphology",
-        "pos" : "RB"
-      }
+      "pos" : "RB"
     },
-    "links" : null
+    "links" : null,
+    "annotation_class" : "morphology"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -662,12 +662,10 @@
     "index" : 21,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "token",
-        "label" : "is"
-      }
+      "label" : "is"
     },
-    "links" : [ [ [ "dkpro", "dkpro-r10@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r10@1" ] ] ],
+    "annotation_class" : "token"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -675,12 +673,10 @@
     "index" : 22,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "morphology",
-        "pos" : "VBZ"
-      }
+      "pos" : "VBZ"
     },
-    "links" : null
+    "links" : null,
+    "annotation_class" : "morphology"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -688,12 +684,10 @@
     "index" : 23,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "token",
-        "label" : "another"
-      }
+      "label" : "another"
     },
-    "links" : [ [ [ "dkpro", "dkpro-r11@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r11@1" ] ] ],
+    "annotation_class" : "token"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -701,12 +695,10 @@
     "index" : 24,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "morphology",
-        "pos" : "DT"
-      }
+      "pos" : "DT"
     },
-    "links" : null
+    "links" : null,
+    "annotation_class" : "morphology"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -714,12 +706,10 @@
     "index" : 25,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "token",
-        "label" : "one"
-      }
+      "label" : "one"
     },
-    "links" : [ [ [ "dkpro", "dkpro-r12@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r12@1" ] ] ],
+    "annotation_class" : "token"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -727,12 +717,10 @@
     "index" : 26,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "morphology",
-        "pos" : "NN"
-      }
+      "pos" : "NN"
     },
-    "links" : null
+    "links" : null,
+    "annotation_class" : "morphology"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -740,12 +728,10 @@
     "index" : 27,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "token",
-        "label" : "."
-      }
+      "label" : "."
     },
-    "links" : [ [ [ "dkpro", "dkpro-r13@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r13@1" ] ] ],
+    "annotation_class" : "token"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -753,12 +739,10 @@
     "index" : 28,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "morphology",
-        "pos" : "."
-      }
+      "pos" : "."
     },
-    "links" : null
+    "links" : null,
+    "annotation_class" : "morphology"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -766,12 +750,10 @@
     "index" : 29,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "dependency",
-        "label" : "cc"
-      }
+      "label" : "cc"
     },
-    "links" : null
+    "links" : null,
+    "annotation_class" : "dependency"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -779,12 +761,10 @@
     "index" : 30,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "dependency",
-        "label" : "nsubj"
-      }
+      "label" : "advmod"
     },
-    "links" : null
+    "links" : null,
+    "annotation_class" : "dependency"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -792,12 +772,10 @@
     "index" : 31,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "dependency",
-        "label" : "cop"
-      }
+      "label" : "cop"
     },
-    "links" : null
+    "links" : null,
+    "annotation_class" : "dependency"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -805,12 +783,10 @@
     "index" : 32,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "dependency",
-        "label" : "det"
-      }
+      "label" : "det"
     },
-    "links" : null
+    "links" : null,
+    "annotation_class" : "dependency"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -818,12 +794,10 @@
     "index" : 33,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "dependency",
-        "label" : "ROOT"
-      }
+      "label" : "ROOT"
     },
-    "links" : null
+    "links" : null,
+    "annotation_class" : "dependency"
   }, {
     "type" : "node",
     "origin" : "dkpro",
@@ -831,12 +805,10 @@
     "index" : 34,
     "rank" : 0,
     "annotations" : {
-      "dkpro" : {
-        "class" : "dependency",
-        "label" : "punct"
-      }
+      "label" : "punct"
     },
-    "links" : null
+    "links" : null,
+    "annotation_class" : "dependency"
   } ],
   "regions" : [ {
     "type" : "region",
