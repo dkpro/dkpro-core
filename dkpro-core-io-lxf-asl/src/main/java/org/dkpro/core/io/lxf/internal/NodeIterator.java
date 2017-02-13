@@ -54,7 +54,7 @@ public class NodeIterator
             LxfNode node = graph.getNodes().get(i);
             if (!node.getOrigin().equals(tool))
                 continue;
-            if (!node.getAnnotation_class().equals(level))
+            if (!node.getAnnotationClass().equals(level))
                 continue;
             position.put(key, i);
             return node;

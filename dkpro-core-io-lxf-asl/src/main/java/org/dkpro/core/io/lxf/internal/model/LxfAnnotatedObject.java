@@ -21,22 +21,24 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class LxfAnnotatedObject
     extends LxfObject
 {
     private int rank;
-    private String annotation_class;
+    private String annotationClass;
     
-    public String getAnnotation_class()
+    @JsonProperty(value="annotation_class")
+    public String getAnnotationClass()
     {
-        return annotation_class;
+        return annotationClass;
     }
 
-
-    public void setAnnotation_class(String annotation_class)
+    @JsonProperty(value="annotation_class")
+    public void setAnnotationClass(String annotationClass)
     {
-        this.annotation_class = annotation_class;
+        this.annotationClass = annotationClass;
     }
 
     private Map<String, String> annotations;
@@ -44,7 +46,7 @@ public class LxfAnnotatedObject
     @JsonIgnore
     public String getLayer()
     {
-        return annotation_class;
+        return annotationClass;
     }
    
     

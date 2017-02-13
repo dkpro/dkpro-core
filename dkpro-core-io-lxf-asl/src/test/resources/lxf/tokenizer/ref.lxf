@@ -10,22 +10,22 @@
     "id" : "dkpro-n1@1",
     "index" : 0,
     "rank" : 0,
-    "annotation_class" : "sentence",
     "annotations" : {
       "label" : "This is a test."
     },
-    "links" : [ [ [ "dkpro", "dkpro-r1@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r1@1" ] ] ],
+    "annotation_class" : "sentence"
   }, {
     "type" : "node",
     "origin" : "dkpro",
     "id" : "dkpro-n2@1",
     "index" : 1,
     "rank" : 0,
-    "annotation_class" : "sentence",
     "annotations" : {
       "label" : "And here is another one."
     },
-    "links" : [ [ [ "dkpro", "dkpro-r2@1" ] ] ]
+    "links" : [ [ [ "dkpro", "dkpro-r2@1" ] ] ],
+    "annotation_class" : "sentence"
   } ],
   "regions" : [ {
     "type" : "region",

@@ -1,1 +1,66 @@
-{"regions": [{"origin": "tokenizer", "index": 0, "anchors": [0, 15], "type": "region", "id": "tokenizer-r1@1"}, {"origin": "tokenizer", "index": 1, "anchors": [16, 40], "type": "region", "id": "tokenizer-r2@1"}], "media": "This is a test. And here is another one.\n", "nodes": [{"origin": "tokenizer", "index": 0, "links": [[["tokenizer", "tokenizer-r1@1"]]], "rank": 0, "id": "tokenizer-n1@1", "annotation_class": "sentence", "type": "node", "annotations": {"label": "This is a test."}}, {"origin": "tokenizer", "index": 1, "links": [[["tokenizer", "tokenizer-r2@1"]]], "rank": 0, "id": "tokenizer-n2@1", "annotation_class": "sentence", "type": "node", "annotations": {"label": "And here is another one."}}], "edges": []}
+{
+    "edges": [],
+    "media": "This is a test. And here is another one.\n",
+    "nodes": [
+        {
+            "annotation_class": "sentence",
+            "annotations": {
+                "label": "This is a test."
+            },
+            "id": "tokenizer-n1@1",
+            "index": 0,
+            "links": [
+                [
+                    [
+                        "tokenizer",
+                        "tokenizer-r1@1"
+                    ]
+                ]
+            ],
+            "origin": "tokenizer",
+            "rank": 0,
+            "type": "node"
+        },
+        {
+            "annotation_class": "sentence",
+            "annotations": {
+                "label": "And here is another one."
+            },
+            "id": "tokenizer-n2@1",
+            "index": 1,
+            "links": [
+                [
+                    [
+                        "tokenizer",
+                        "tokenizer-r2@1"
+                    ]
+                ]
+            ],
+            "origin": "tokenizer",
+            "rank": 0,
+            "type": "node"
+        }
+    ],
+    "regions": [
+        {
+            "anchors": [
+                0,
+                15
+            ],
+            "id": "tokenizer-r1@1",
+            "index": 0,
+            "origin": "tokenizer",
+            "type": "region"
+        },
+        {
+            "anchors": [
+                16,
+                40
+            ],
+            "id": "tokenizer-r2@1",
+            "index": 1,
+            "origin": "tokenizer",
+            "type": "region"
+        }
+    ]
+}

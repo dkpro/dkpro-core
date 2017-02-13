@@ -17,8 +17,6 @@
  */
 package org.dkpro.core.io.lxf.internal.model;
 
-import java.util.LinkedHashMap;
-
 public class LxfEdge
     extends LxfAnnotatedObject
 {
