@@ -31,7 +31,8 @@ public class DKPro2UDPipe
             Word w = sentence.addWord(t.getCoveredText());
             if (t.getPos() != null) {
                 w.setXpostag(t.getPosValue());
-                w.setUpostag(t.getPos().getCoarseValue());
+                if (t.getPos().getCoarseValue()!=null)
+                    w.setUpostag(t.getPos().getCoarseValue());
             }
             
             if (t.getLemma() != null) {
