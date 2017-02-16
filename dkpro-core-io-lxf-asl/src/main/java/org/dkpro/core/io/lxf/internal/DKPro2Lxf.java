@@ -87,7 +87,7 @@ public class DKPro2Lxf
             ids.put(LAYER_TOKEN, toolName);
         return ids;
     }
-   
+
     /**
      * Convert from CAS to LXF.
      * 
