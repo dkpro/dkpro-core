@@ -198,14 +198,9 @@ public class DKPro2Lxf
                 // Convert lemma if exists
                 Lemma lemma = token.getLemma();
                 if (lemma != null && (aSource == null || needsExport(aJCas, lemma))) {
-                    // If we have created a sharable morphNode, reuse it here, otherwise create a
-                    // new node
-                    
-                    String lemmatoolId = toolid;
-                    
                     LxfNode lemmaNode = newMorphNode ? morphNode : null; 
                     if (lemmaNode == null) {
-                        lemmaNode = new LxfNode(LAYER_MORPHOLOGY, toolid,
+                        lemmaNode = new LxfNode(LAYER_MORPHOLOGY, toolName,
                                 toolNodeIndex.nextIndex(toolid), 0);
                         aTarget.addNode(lemmaNode);
                         aTarget.addEdge(new LxfEdge(lemmaNode.getOrigin(),
