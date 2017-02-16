@@ -207,7 +207,7 @@ public class DKPro2Lxf
                                 toolEdgeIndex.nextIndex(toolid), 0, lemmaNode, tokenNode));
                         //idxMorph.put(token, lemmaNode);
                     }
-                    lemmaNode.setFeature(FEAT_LEMMA, token.getPos().getPosValue());
+                    lemmaNode.setFeature(FEAT_LEMMA, token.getLemma().getValue());
                 }
 
             }
