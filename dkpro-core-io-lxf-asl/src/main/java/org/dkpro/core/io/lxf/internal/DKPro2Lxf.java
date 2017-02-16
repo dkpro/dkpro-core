@@ -54,7 +54,7 @@ public class DKPro2Lxf
 
     public static void convert(JCas aJCas, LxfGraph aSource, LxfGraph aTarget)
     {
-        convert(aJCas, aSource, aTarget, createIdMap("dkpro", aSource));
+        convert(aJCas, aSource, aTarget, createIdMap("dkpro", aSource), "dkpro");
     }
 
     /**
@@ -87,7 +87,7 @@ public class DKPro2Lxf
             ids.put(LAYER_TOKEN, toolName);
         return ids;
     }
-
+   
     /**
      * Convert from CAS to LXF.
      * 
@@ -97,12 +97,14 @@ public class DKPro2Lxf
      *            the original LXF. If this is non-null, then delta-mode is enabled.
      * @param aTarget
      *            the target LXF.
+     * @param tooName
+     *            the name of the tool generating the new annotation
      * @param ids
      *            The ids of the tool responsible for generation of the annotation Layer. The key is
      *            the annotation layer. The value is the tool that generates the annotation.
      */
     public static void convert(JCas aJCas, LxfGraph aSource, LxfGraph aTarget,
-            Map<String, String> ids)
+            Map<String, String> ids, String toolName)
     {
         if (aSource == null) {
             aTarget.setMedia(new LxfText(aJCas.getDocumentText()));
@@ -198,6 +200,9 @@ public class DKPro2Lxf
                 if (lemma != null && (aSource == null || needsExport(aJCas, lemma))) {
                     // If we have created a sharable morphNode, reuse it here, otherwise create a
                     // new node
+                    
+                    String lemmatoolId = toolid;
+                    
                     LxfNode lemmaNode = newMorphNode ? morphNode : null; 
                     if (lemmaNode == null) {
                         lemmaNode = new LxfNode(LAYER_MORPHOLOGY, toolid,
