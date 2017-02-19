@@ -18,10 +18,10 @@
 package de.tudarmstadt.ukp.dkpro.core.mstparser;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.uima.fit.factory.AggregateBuilder;
-import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
 import org.junit.Ignore;
@@ -40,33 +40,33 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
  */
 public class MstParserTest
 {
-    @Ignore("Takes too long - also needs update")
+    @Ignore("Takes too long")
     @Test
     public void testCroatianMte5Defnpout()
         throws Exception
     {
-        JCas jcas = runTest("hr", "mte5.defnpout", "Moramo vrlo kompliciran primjer rečenicu, "
+        JCas jcas = runTest("hr", "mte5.defnpout", "Moramo vrlo kompliciran primjer rečenicu , "
                 + "koja sadrži što više sastojaka i ovisnosti što je više moguće .");
 
         String[] dependencies = {
-                "[  0,  6]Dependency(Pred) D[0,6](Moramo) G[40,41](,)",
-                "[  7, 11]Dependency(Adv) D[7,11](vrlo) G[12,23](kompliciran)",
-                "[ 12, 23]Dependency(Atr) D[12,23](kompliciran) G[24,31](primjer)",
-                "[ 24, 31]Dependency(Ap) D[24,31](primjer) G[32,40](rečenicu)",
-                "[ 32, 40]Dependency(Sb) D[32,40](rečenicu) G[0,6](Moramo)",
-                "[ 40, 41]Dependency(Punc) D[40,41](,) G[47,53](sadrži)",
-                "[ 42, 46]Dependency(Sb) D[42,46](koja) G[47,53](sadrži)",
-                "[ 47, 53]Dependency(Pred) D[47,53](sadrži) G[47,53](sadrži)",
-                "[ 54, 57]Dependency(Pred) D[54,57](što) G[73,74](i)",
-                "[ 58, 62]Dependency(Oth) D[58,62](više) G[73,74](i)",
-                "[ 63, 72]Dependency(Atr) D[63,72](sastojaka) G[58,62](više)",
-                "[ 73, 74]Dependency(Co) D[73,74](i) G[47,53](sadrži)",
-                "[ 75, 84]Dependency(Pred) D[75,84](ovisnosti) G[73,74](i)",
-                "[ 85, 88]Dependency(Pred) D[85,88](što) G[85,88](što)",
-                "[ 89, 91]Dependency(Pred) D[89,91](je) G[89,91](je)",
-                "[ 92, 96]Dependency(Adv) D[92,96](više) G[97,103](moguće)",
-                "[ 97,103]Dependency(Pnom) D[97,103](moguće) G[89,91](je)",
-                "[103,104]Dependency(Punc) D[103,104](.) G[103,104](.)" };
+                "[  0,  6]Dependency(Pred,basic) D[0,6](Moramo) G[41,42](,)",
+                "[  7, 11]Dependency(Adv,basic) D[7,11](vrlo) G[12,23](kompliciran)",
+                "[ 12, 23]Dependency(Atr,basic) D[12,23](kompliciran) G[24,31](primjer)",
+                "[ 24, 31]Dependency(Ap,basic) D[24,31](primjer) G[32,40](rečenicu)",
+                "[ 32, 40]Dependency(Sb,basic) D[32,40](rečenicu) G[0,6](Moramo)",
+                "[ 41, 42]Dependency(Punc,basic) D[41,42](,) G[48,54](sadrži)",
+                "[ 43, 47]Dependency(Sb,basic) D[43,47](koja) G[48,54](sadrži)",
+                "[ 48, 54]ROOT(Pred,basic) D[48,54](sadrži) G[48,54](sadrži)",
+                "[ 55, 58]Dependency(Pred,basic) D[55,58](što) G[74,75](i)",
+                "[ 59, 63]Dependency(Oth,basic) D[59,63](više) G[74,75](i)",
+                "[ 64, 73]Dependency(Atr,basic) D[64,73](sastojaka) G[59,63](više)",
+                "[ 74, 75]Dependency(Co,basic) D[74,75](i) G[48,54](sadrži)",
+                "[ 76, 85]Dependency(Pred,basic) D[76,85](ovisnosti) G[74,75](i)",
+                "[ 86, 89]ROOT(Pred,basic) D[86,89](što) G[86,89](što)",
+                "[ 90, 92]ROOT(Pred,basic) D[90,92](je) G[90,92](je)",
+                "[ 93, 97]Dependency(Adv,basic) D[93,97](više) G[98,104](moguće)",
+                "[ 98,104]Dependency(Pnom,basic) D[98,104](moguće) G[90,92](je)",
+                "[105,106]ROOT(Punc,basic) D[105,106](.) G[105,106](.)" };
 
         String[] posTags = { "<root-POS>", "Afmnpa-", "Afpfsn-", "Afpmpgy", "Afpmply",
                 "Afpnpgy", "Afpnpn-", "Agcfpn", "Agcfsa", "Agcfsg", "Agcfsi", "Agcfsn", "Agcmpa",
@@ -137,15 +137,23 @@ public class MstParserTest
                 "Yn-sl", "Yn-sn", "Ynfpg", "Ynfsa", "Ynfsd", "Ynfsg", "Ynfsl", "Ynfsn", "Ynmpg",
                 "Ynmpn", "Ynmsa", "Ynmsd", "Ynmsg", "Ynmsi", "Ynmsl", "Ynmsn", "Z" };
 
-        //String[] unmappedPos = { "$", "''", "-LRB-", "-RRB-", "<root-POS>", "``" };
+        //String[] unmappedPosTags = { "$", "''", "-LRB-", "-RRB-", "<root-POS>", "``" };
 
         String[] depTags = { "<no-type>", "Adv", "Ap", "Atr", "Atv", "Aux", "Co",
                 "Elp", "Obj", "Oth", "Pnom", "Pred", "Prep", "Punc", "Sb", "Sub" };
 
-        AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
-        AssertAnnotations.assertTagset(POS.class, "mte5-reduced", posTags, jcas);
-        //AssertAnnotations.assertTagsetMapping(POS.class, "mte5", unmappedPos, jcas);
-        AssertAnnotations.assertTagset(Dependency.class, "setimes.hr", depTags, jcas);
+        String[] posOrig = { "Vmr1p", "Rgp", "Agpmsn", "N-msn", "N-msn", "Z", "Pi-fsn--n-a",
+                "Vmr3s", "Pi3n-a--n-nn", "Sg", "N-mpg", "Cc", "Vmn", "Pi3n-n--n-nn", "Vcr3s", "Rgc",
+                "Agpnsn", "Z" };
+        
+        String[] posMapped = { "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS",
+                "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS" };
+        
+        AssertAnnotations.assertPOS(posMapped, posOrig, select(jcas, POS.class));
+        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+        AssertAnnotations.assertTagset(MstParser.class, POS.class, "mte5-reduced", posTags, jcas);
+        //AssertAnnotations.assertTagsetMapping(POS.class, "mte5", unmappedPosTags, jcas);
+        AssertAnnotations.assertTagset(MstParser.class, Dependency.class, "setimes.hr", depTags, jcas);
     }
 
     /**
@@ -155,46 +163,54 @@ public class MstParserTest
      * @throws Exception
      *             if an error occurs.
      */
-    @Ignore("Takes too long - also needs update")
+    @Ignore("Takes too long")
     @Test
     public void testCroatianMte5Pos()
         throws Exception
     {
-        JCas jcas = runTest("hr", "mte5.pos", "Moramo vrlo kompliciran primjer rečenicu, "
+        JCas jcas = runTest("hr", "mte5.pos", "Moramo vrlo kompliciran primjer rečenicu , "
                 + "koja sadrži što više sastojaka i ovisnosti što je više moguće .");
 
         String[] dependencies = {
-                "[  0,  6]Dependency(Oth) D[0,6](Moramo) G[12,23](kompliciran)",
-                "[  7, 11]Dependency(Oth) D[7,11](vrlo) G[12,23](kompliciran)",
-                "[ 12, 23]Dependency(Oth) D[12,23](kompliciran) G[24,31](primjer)",
-                "[ 24, 31]Dependency(Oth) D[24,31](primjer) G[32,40](rečenicu)",
-                "[ 32, 40]Dependency(Punc) D[32,40](rečenicu) G[40,41](,)",
-                "[ 40, 41]Dependency(Punc) D[40,41](,) G[47,53](sadrži)",
-                "[ 42, 46]Dependency(Oth) D[42,46](koja) G[47,53](sadrži)",
-                "[ 47, 53]Dependency(Oth) D[47,53](sadrži) G[73,74](i)",
-                "[ 54, 57]Dependency(Oth) D[54,57](što) G[73,74](i)",
-                "[ 58, 62]Dependency(Atr) D[58,62](više) G[73,74](i)",
-                "[ 63, 72]Dependency(Oth) D[63,72](sastojaka) G[58,62](više)",
-                "[ 73, 74]Dependency(Co) D[73,74](i) G[73,74](i)",
-                "[ 75, 84]Dependency(Oth) D[75,84](ovisnosti) G[97,103](moguće)",
-                "[ 85, 88]Dependency(Oth) D[85,88](što) G[97,103](moguće)",
-                "[ 89, 91]Dependency(Oth) D[89,91](je) G[97,103](moguće)",
-                "[ 92, 96]Dependency(Oth) D[92,96](više) G[97,103](moguće)",
-                "[ 97,103]Dependency(Punc) D[97,103](moguće) G[103,104](.)",
-                "[103,104]Dependency(Punc) D[103,104](.) G[103,104](.)" };
+                "[  0,  6]Dependency(Oth,basic) D[0,6](Moramo) G[12,23](kompliciran)",
+                "[  7, 11]Dependency(Oth,basic) D[7,11](vrlo) G[12,23](kompliciran)",
+                "[ 12, 23]Dependency(Oth,basic) D[12,23](kompliciran) G[24,31](primjer)",
+                "[ 24, 31]Dependency(Oth,basic) D[24,31](primjer) G[32,40](rečenicu)",
+                "[ 32, 40]Dependency(Punc,basic) D[32,40](rečenicu) G[41,42](,)",
+                "[ 41, 42]Dependency(Punc,basic) D[41,42](,) G[48,54](sadrži)",
+                "[ 43, 47]Dependency(Oth,basic) D[43,47](koja) G[48,54](sadrži)",
+                "[ 48, 54]Dependency(Oth,basic) D[48,54](sadrži) G[74,75](i)",
+                "[ 55, 58]Dependency(Oth,basic) D[55,58](što) G[74,75](i)",
+                "[ 59, 63]Dependency(Atr,basic) D[59,63](više) G[74,75](i)",
+                "[ 64, 73]Dependency(Oth,basic) D[64,73](sastojaka) G[59,63](više)",
+                "[ 74, 75]ROOT(Co,basic) D[74,75](i) G[74,75](i)",
+                "[ 76, 85]Dependency(Oth,basic) D[76,85](ovisnosti) G[98,104](moguće)",
+                "[ 86, 89]Dependency(Oth,basic) D[86,89](što) G[98,104](moguće)",
+                "[ 90, 92]Dependency(Oth,basic) D[90,92](je) G[98,104](moguće)",
+                "[ 93, 97]Dependency(Oth,basic) D[93,97](više) G[98,104](moguće)",
+                "[ 98,104]Dependency(Punc,basic) D[98,104](moguće) G[105,106](.)",
+                "[105,106]ROOT(Punc,basic) D[105,106](.) G[105,106](.)" };
 
         String[] posTags = { "<root-POS>", "A", "C", "M", "N", "P", "Q", "R", "S",
                 "V", "X", "Y", "Z" };
 
-        //String[] unmappedPos = { "$", "''", "-LRB-", "-RRB-", "<root-POS>", "``" };
+        //String[] unmappedPosTags = { "$", "''", "-LRB-", "-RRB-", "<root-POS>", "``" };
 
         String[] depTags = { "<no-type>", "Adv", "Ap", "Atr", "Atv", "Aux", "Co",
                 "Elp", "Obj", "Oth", "Pnom", "Pred", "Prep", "Punc", "Sb", "Sub" };
 
-        AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
-        AssertAnnotations.assertTagset(POS.class, "mte5-pos", posTags, jcas);
-        //AssertAnnotations.assertTagsetMapping(POS.class, "mte5", unmappedPos, jcas);
-        AssertAnnotations.assertTagset(Dependency.class, "setimes.hr", depTags, jcas);
+        String[] posOrig = { "Vmr1p", "Rgp", "Agpmsn", "N-msn", "N-msn", "Z", "Pi-fsn--n-a",
+                "Vmr3s", "Pi3n-a--n-nn", "Sg", "N-mpg", "Cc", "Vmn", "Pi3n-n--n-nn", "Vcr3s", "Rgc",
+                "Agpnsn", "Z" };
+        
+        String[] posMapped = { "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS",
+                "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS" };
+        
+        AssertAnnotations.assertPOS(posMapped, posOrig, select(jcas, POS.class));
+        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+        AssertAnnotations.assertTagset(MstParser.class, POS.class, "mte5-pos", posTags, jcas);
+        //AssertAnnotations.assertTagsetMapping(POS.class, "mte5", unmappedPosTags, jcas);
+        AssertAnnotations.assertTagset(MstParser.class, Dependency.class, "setimes.hr", depTags, jcas);
     }
 
     /**
@@ -250,7 +266,7 @@ public class MstParserTest
 
         String[] unmappedPos = { "<root-POS>"};
 
-        AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
+        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
         AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
         AssertAnnotations.assertTagset(Dependency.class, "stanford", depTags, jcas);
@@ -302,7 +318,7 @@ public class MstParserTest
                 "NAC", "NP", "NP-OBJ", "NP-PRD", "NP-SBJ", "NX", "PP", "PRN", "PRT", "QP", "ROOT",
                 "S", "SBAR", "SINV", "SQ", "UCP", "VP", "WHNP" };
 
-        AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
+        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
         AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
         AssertAnnotations.assertTagset(Dependency.class, "conll2008", depTags, jcas);
