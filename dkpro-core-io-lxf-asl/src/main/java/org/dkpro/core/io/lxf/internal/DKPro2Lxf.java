@@ -74,7 +74,7 @@ public class DKPro2Lxf
         Map<String, String> ids = new HashMap<>();
         if (aSource != null) {
             for (LxfNode n : aSource.getNodes()) {
-                ids.put(n.getAnnotationClass(), n.getOrigin());
+                ids.put(n.getType(), n.getOrigin());
             }
         }
         if (!ids.containsKey(LAYER_DEPENDENCY))

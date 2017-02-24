@@ -49,7 +49,7 @@ public class LxfNode
             setLinks(asList(singletonList(new String[] { aRegion.getOrigin(), aRegion.getId() })));
         }
         
-        setAnnotationClass(aLayer);
+        setType(aLayer);
     }
     
     public List<List<String[]>> getLinks()

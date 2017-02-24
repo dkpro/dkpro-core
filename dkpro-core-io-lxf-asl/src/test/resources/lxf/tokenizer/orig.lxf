@@ -3,10 +3,10 @@
     "media": "This is a test. And here is another one.\n",
     "nodes": [
         {
-            "annotation_class": "sentence",
             "annotations": {
                 "label": "This is a test."
             },
+            "entity": "node",
             "id": "tokenizer-n1@1",
             "index": 0,
             "links": [
@@ -19,13 +19,13 @@
             ],
             "origin": "tokenizer",
             "rank": 0,
-            "type": "node"
+            "type": "sentence"
         },
         {
-            "annotation_class": "sentence",
             "annotations": {
                 "label": "And here is another one."
             },
+            "entity": "node",
             "id": "tokenizer-n2@1",
             "index": 1,
             "links": [
@@ -38,7 +38,7 @@
             ],
             "origin": "tokenizer",
             "rank": 0,
-            "type": "node"
+            "type": "sentence"
         }
     ],
     "regions": [
@@ -47,20 +47,20 @@
                 0,
                 15
             ],
+            "entity": "region",
             "id": "tokenizer-r1@1",
             "index": 0,
-            "origin": "tokenizer",
-            "type": "region"
+            "origin": "tokenizer"
         },
         {
             "anchors": [
                 16,
                 40
             ],
+            "entity": "region",
             "id": "tokenizer-r2@1",
             "index": 1,
-            "origin": "tokenizer",
-            "type": "region"
+            "origin": "tokenizer"
         }
     ]
 }
