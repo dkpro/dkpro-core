@@ -28,7 +28,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** <p>Token is one of the two types commonly produced by a segmenter (the other being Sentence). A Token usually represents a word, although it may be used to represent multiple tightly connected words (e.g. "New York") or parts of a word (e.g. the possessive "'s"). One may choose to split compound words into multiple tokens, e.g. ("CamelCase" -&gt; "Camel", "Case"; "Zauberstab" -&gt; "Zauber", "stab"). Most processing components operate on Tokens, usually within the limits of the surrounding Sentence. E.g. a part-of-speech tagger analyses each Token in a Sentence and assigns a part-of-speech to each Token.</p>
- * Updated by JCasGen Thu Sep 15 23:08:21 EEST 2016
+ * Updated by JCasGen Tue Mar 07 16:08:28 CET 2017
  * @generated */
 public class Token_Type extends Annotation_Type {
   /** @generated */
@@ -206,6 +206,30 @@ public class Token_Type extends Annotation_Type {
     ll_cas.ll_setRefValue(addr, casFeatCode_form, v);}
     
   
+ 
+  /** @generated */
+  final Feature casFeat_syntacticFunction;
+  /** @generated */
+  final int     casFeatCode_syntacticFunction;
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
+  public String getSyntacticFunction(int addr) {
+        if (featOkTst && casFeat_syntacticFunction == null)
+      jcas.throwFeatMissing("syntacticFunction", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
+    return ll_cas.ll_getStringValue(addr, casFeatCode_syntacticFunction);
+  }
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
+  public void setSyntacticFunction(int addr, String v) {
+        if (featOkTst && casFeat_syntacticFunction == null)
+      jcas.throwFeatMissing("syntacticFunction", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
+    ll_cas.ll_setStringValue(addr, casFeatCode_syntacticFunction, v);}
+    
+  
 
 
 
@@ -245,6 +269,10 @@ public class Token_Type extends Annotation_Type {
  
     casFeat_form = jcas.getRequiredFeatureDE(casType, "form", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.TokenForm", featOkTst);
     casFeatCode_form  = (null == casFeat_form) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_form).getCode();
+
+ 
+    casFeat_syntacticFunction = jcas.getRequiredFeatureDE(casType, "syntacticFunction", "uima.cas.String", featOkTst);
+    casFeatCode_syntacticFunction  = (null == casFeat_syntacticFunction) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_syntacticFunction).getCode();
 
   }
 }

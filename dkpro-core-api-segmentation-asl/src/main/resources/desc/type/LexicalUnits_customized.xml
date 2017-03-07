@@ -46,20 +46,25 @@
           <description/>
           <rangeTypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</rangeTypeName>
         </featureDescription>
-      <featureDescription>
+        <featureDescription>
           <name>morph</name>
           <description>The morphological feature associated with this token.</description>
           <rangeTypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures</rangeTypeName>
         </featureDescription>
-      <featureDescription>
+        <featureDescription>
           <name>id</name>
           <description>If this unit had an ID in the source format from which it was imported, it may be stored here. IDs are typically not assigned by DKPro Core components. If an ID is present, it should be respected by writers.</description>
           <rangeTypeName>uima.cas.String</rangeTypeName>
         </featureDescription>
-      <featureDescription>
+        <featureDescription>
           <name>form</name>
           <description>Potentially normalized form of the token text that should be used instead of the covered text if set.</description>
           <rangeTypeName>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.TokenForm</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>syntacticFunction</name>
+          <description/>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
         </featureDescription>
       </features>
     </typeDescription>
