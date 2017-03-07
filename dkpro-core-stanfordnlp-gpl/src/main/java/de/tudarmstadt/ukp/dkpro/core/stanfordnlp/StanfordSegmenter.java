@@ -204,17 +204,20 @@ public class StanfordSegmenter
     		// Prepare the tokens for processing by WordToSentenceProcessor
     		List<CoreLabel> tokensInDocument = new ArrayList<CoreLabel>();
 			Pattern nlPattern = Pattern.compile(".*(\r\n|\n|\r).*");
+			Matcher nlMatcher = nlPattern.matcher("");
 			int lastTokenEnd = 0;
     		for (Token token : casTokens) {
-				// add newline as token for newlineIsSentenceBreak parameter
-				Matcher nlMatcher = nlPattern.matcher(aJCas.getDocumentText().subSequence(lastTokenEnd, token.getBegin()));
-				if (nlMatcher.matches()) {
-					CoreLabel l = new CoreLabel();
-					l.set(CharacterOffsetBeginAnnotation.class, lastTokenEnd + nlMatcher.start(1));
-					l.set(CharacterOffsetEndAnnotation.class, lastTokenEnd + nlMatcher.end(1));
-					l.setWord("\n");
-					tokensInDocument.add(l);
-				}
+    		    if (!NewlineIsSentenceBreak.NEVER.equals(newlineIsSentenceBreak)) {
+    				// add newline as token for newlineIsSentenceBreak parameter
+    		        nlMatcher.reset(aJCas.getDocumentText().subSequence(lastTokenEnd, token.getBegin()));
+    				if (nlMatcher.matches()) {
+    					CoreLabel l = new CoreLabel();
+    					l.set(CharacterOffsetBeginAnnotation.class, lastTokenEnd + nlMatcher.start(1));
+    					l.set(CharacterOffsetEndAnnotation.class, lastTokenEnd + nlMatcher.end(1));
+    					l.setWord("\n");
+    					tokensInDocument.add(l);
+    				}
+    		    }
 				lastTokenEnd = token.getEnd();
 				// add regular token
     			CoreLabel l = new CoreLabel();
