@@ -7,14 +7,14 @@ title: "Setting up Maven repository"
 
 Add the following repository section to your project in order to get access to the models:
 
-~~~
+{% highlight xml %}
 <repositories>
   <repository>
     <id>ukp-oss-model-releases</id>
     <url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-model-releases-local</url>
    </repository>
 </repositories>
-~~~
+{% endhighlight xml %}
 
 If you have a multi-module project, it is sufficient to add this section to the POM of the top-level project.
 
@@ -22,7 +22,7 @@ If you have a multi-module project, it is sufficient to add this section to the 
 
 We have set up a Maven repository which provides third-party libraries that are not available via Maven Central as well as SNAPSHOT versions our open source projects. To use this repository, we suggest you use the [settings.xml](http://maven.apache.org/settings.html) in the hidden subdirectory `.m2` of your home directory and augment it with the following sections:
 
-~~~
+{% highlight xml %}
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 
@@ -81,4 +81,4 @@ We have set up a Maven repository which provides third-party libraries that are 
     <!--activeProfile>ukp-oss-snapshots</activeProfile-->
   </activeProfiles>
 </settings>
-~~~
+{% endhighlight xml %}
