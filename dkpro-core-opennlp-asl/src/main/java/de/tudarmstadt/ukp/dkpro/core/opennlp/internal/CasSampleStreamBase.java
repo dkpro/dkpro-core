@@ -29,6 +29,7 @@ public abstract class CasSampleStreamBase<T>
     implements ObjectStream<T>
 {
     private boolean complete = false;
+    private boolean inProduction = false;
     private AtomicReference<JCas> jcasReference = new AtomicReference<>();
     private Thread readingThread;
     private Thread sendingThread;
@@ -45,7 +46,8 @@ public abstract class CasSampleStreamBase<T>
             readingThread.interrupt();
         }
         
-        while (!complete && jcasReference.get() != null) {
+        // Wait for the CAS to have been processed
+        while (inProduction || (!complete && jcasReference.get() != null)) {
             try {
                 sendingThread = Thread.currentThread();
                 TimeUnit.MILLISECONDS.sleep(10);
@@ -90,8 +92,14 @@ public abstract class CasSampleStreamBase<T>
                 }
             }
         }
-        
-        return produce(jcasReference.get());
+    
+        try {
+            inProduction = true;
+            return produce(jcasReference.get());
+        }
+        finally {
+            inProduction = false;
+        }
     }
     
     public abstract void init(JCas aJCas);
