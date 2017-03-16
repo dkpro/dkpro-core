@@ -209,6 +209,13 @@ public class StanfordNamedEntityRecognizer
                     entityEnd = t.get(CoreAnnotations.CharacterOffsetEndAnnotation.class);
                 }
             }
+            // If the last entity is still open, then close it
+            if (entityType != null) {
+                Type type = mappingProvider.getTagType(entityType);
+                NamedEntity neAnno = (NamedEntity) cas.createAnnotation(type, entityBegin, entityEnd);
+                neAnno.setValue(entityType);
+                neAnno.addToIndexes();
+            }
         }
     }
     
