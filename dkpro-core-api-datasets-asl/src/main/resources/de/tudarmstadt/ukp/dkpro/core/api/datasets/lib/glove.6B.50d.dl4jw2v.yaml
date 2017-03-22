@@ -1,11 +1,11 @@
 groupId: org.dkpro.core.datasets.glove
-datasetId: glove
-version: 1.0.0
+datasetId: glove.6B.50d.dl4jw2v
+version: 2017-03-22
 language: en
 # mediaType: unknown
 encoding: UTF-8
 
-name: GloVe - Global Vectors for Word Representation
+name: GloVe - Global Vectors for Word Representation - 50d
 url: https://nlp.stanford.edu/projects/glove/
 attribution: |
   Pennington, Jeffrey, Socher, Richard, and Manning, Christopher D. (2014) "GloVe - Global Vectors for Word Representation."
@@ -24,12 +24,6 @@ licenses:
 artifacts:
   glove.6B.50d.dl4jw2v:
     url: "https://public.ukp.informatik.tu-darmstadt.de/embeddings/glove.6B.50d.dl4jw2v"
-  glove.6B.100d.dl4jw2v:
-    url: "https://public.ukp.informatik.tu-darmstadt.de/embeddings/glove.6B.100d.dl4jw2v"
-  glove.6B.200d.dl4jw2v:
-    url: "https://public.ukp.informatik.tu-darmstadt.de/embeddings/glove.6B.200d.dl4jw2v"
-  glove.6B.300d.dl4jw2v:
-    url: "https://public.ukp.informatik.tu-darmstadt.de/embeddings/glove.6B.300d.dl4jw2v"
 
 roles:
   data:
