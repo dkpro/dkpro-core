@@ -32,6 +32,7 @@ import java.io.PrintWriter;
 import java.lang.ProcessBuilder.Redirect;
 import java.net.URL;
 import java.util.List;
+import java.util.Locale;
 import java.util.Properties;
 
 import org.apache.uima.UimaContext;
@@ -134,10 +135,18 @@ public class SfstAnnotator
     public static final String PARAM_MORPH_MAPPING_LOCATION = ComponentParameters.PARAM_MORPH_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_MORPH_MAPPING_LOCATION, mandatory = false)
     private String morphMappingLocation;
+    
+    /**
+     * Whether to lookup the first word of a sentence in lowercase, useful if the employed model does not handle lowercasing.
+     */
+    public static final String PARAM_LOWERCASE_FIRST_WORD = "lowercaseFirstWord";
+    @ConfigurationParameter(name = PARAM_LOWERCASE_FIRST_WORD, mandatory = false, defaultValue = "false")
+    private boolean lowercaseFirstWord;
 
     private ModelProviderBase<File> modelProvider;
     private MorphologicalFeaturesParser featuresParser;
     private RuntimeProvider runtimeProvider;
+    private Locale locale;
     
     @Override
     public void initialize(UimaContext aContext)
@@ -213,6 +222,11 @@ public class SfstAnnotator
         modelProvider.configure(cas);
         featuresParser.configure(cas);
 
+        if (lowercaseFirstWord) {
+        	// locale for lowercasing
+            locale = new Locale(PARAM_LANGUAGE != null ? PARAM_LANGUAGE : cas.getDocumentLanguage());
+        }
+        
         String modelEncoding = (String) modelProvider.getResourceMetaData().get("model.encoding");
         if (modelEncoding == null) {
             throw new AnalysisEngineProcessException(
@@ -253,13 +267,23 @@ public class SfstAnnotator
                 }
 
                 // Send full sentence
+                boolean first = true;
                 for (Token token : tokens) {
                     lastOut.append(token.getCoveredText()).append(' ');
                     out.printf("%s%n", token.getCoveredText());
+                    // treat first token differently if parameter is set
+                    if (first && lowercaseFirstWord) {
+                    	String lcToken = token.getCoveredText().toLowerCase(locale);
+                    	if (!lcToken.equals(token.getCoveredText())) {
+                    		out.printf("%s%n", token.getCoveredText().toLowerCase(locale));
+                    	}
+                    	first = false;
+                    }
                     out.printf("%s%n", FLUSH_TOKEN);
                 }
                 out.flush();
 
+                first = true;
                 // Read sentence tags
                 tokenLoop: for (Token token : tokens) {
                     boolean skip = false;
@@ -276,6 +300,13 @@ public class SfstAnnotator
                         }
                         
                         if (lastIn.startsWith("no result for")) {
+                        	// if we're treating sentence-initial tokens specially,
+                            // don't create an empty analysis just yet
+                        	if (first && lowercaseFirstWord) {
+                        		first = false;
+                        		continue analysisLoop;
+                        	}
+                        	
                             // No analysis for this token
                             MorphologicalFeatures morph = new MorphologicalFeatures(aJCas,
                                     token.getBegin(), token.getEnd());
