@@ -2,13 +2,13 @@
    Copyright 2014
    Ubiquitous Knowledge Processing (UKP) Lab
    Technische Universität Darmstadt
-   
+
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
    You may obtain a copy of the License at
-   
+
      http://www.apache.org/licenses/LICENSE-2.0
-   
+
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,22 +20,22 @@
 		<url url="https://raw.githubusercontent.com/dkpro/resource-packager/0.8.0/ant-macros.xml"/>
 	</import>
 
-	<!-- 
+	<!--
 	  - Output package configuration
 	  -->
 	<property name="outputPackage" value="de/tudarmstadt/ukp/dkpro/core/treetagger/lib"/>
 	<property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/treetagger"/>
-	
+
 	<target name="local-maven">
 		<property name="install-artifact-mode" value="local"/>
 		<antcall target="separate-jars"/>
 	</target>
-	
+
 	<target name="remote-maven">
 		<property name="install-artifact-mode" value="remote"/>
 		<antcall target="separate-jars"/>
 	</target>
-	
+
 	<target name="newmodels">
         <property name="install-artifact-mode" value="remote"/>
 		<antcall target="en-tagger-le"/>
@@ -50,26 +50,26 @@
 
 	<target name="bg-tagger-le">
 		<mkdir dir="target/download"/>
-		
+
 		<!-- FILE: bulgarian-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2014-07-02 | now        | ee595fb1643760a94591cee91b556911
 		  - 2016-04-30 | now        | 4cae50b7d8adb8269f583052a69e9184
 		  -->
-    	<get 
-    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/bulgarian-par-linux-3.2-utf8.bin.gz" 
-    		dest="target/download/bulgarian-par-linux-3.2-utf8.bin.gz" 
+    	<get
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/bulgarian-par-linux-3.2-utf8.bin.gz"
+    		dest="target/download/bulgarian-par-linux-3.2-utf8.bin.gz"
     		skipexisting="true"/>
 		<gunzip src="target/download/bulgarian-par-linux-3.2-utf8.bin.gz"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/bulgarian-par-linux-3.2-utf8.bin" 
+    	<install-stub-and-upstream-file
+    		file="target/download/bulgarian-par-linux-3.2-utf8.bin"
     		md5="4cae50b7d8adb8269f583052a69e9184"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		groupId="de.tudarmstadt.ukp.dkpro.core"
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20160430"
     		metaDataVersion="1"
-    		tool="tagger" 
-    		language="bg" 
-    		variant="le" 
+    		tool="tagger"
+    		language="bg"
+    		variant="le"
     		extension="bin">
 			<metadata>
 	    		<entry key="pos.tagset" value="btb"/>
@@ -77,7 +77,7 @@
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
-	
+
 	<target name="de">
 		<antcall target="de-tagger-le"/>
 		<antcall target="de-chunker-le"/>
@@ -91,21 +91,21 @@
 		  - 2012-03-15 | 2012-12-07 | 3a18444accf080f54c5ebf655fedc781
 		  - 2012-12-07 | now        | 54f16f045083ae6ebe8b9d9d4a24484e
 		  -->
-    	<get 
-    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/german-par-linux-3.2-utf8.bin.gz" 
-    		dest="target/download/german-par-linux-3.2-utf8.bin.gz" 
+    	<get
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/german-par-linux-3.2-utf8.bin.gz"
+    		dest="target/download/german-par-linux-3.2-utf8.bin.gz"
     		skipexisting="true"/>
 		<gunzip src="target/download/german-par-linux-3.2-utf8.bin.gz"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/german-par-linux-3.2-utf8.bin" 
+    	<install-stub-and-upstream-file
+    		file="target/download/german-par-linux-3.2-utf8.bin"
     		md5="54f16f045083ae6ebe8b9d9d4a24484e"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		groupId="de.tudarmstadt.ukp.dkpro.core"
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20121207"
     		metaDataVersion="1"
-    		tool="tagger" 
-    		language="de" 
-    		variant="le" 
+    		tool="tagger"
+    		language="de"
+    		variant="le"
     		extension="bin">
 			<metadata>
 	    		<entry key="pos.tagset" value="stts"/>
@@ -118,27 +118,27 @@
 		<!-- FILE: german-chunker-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - -
 		  - 2011-04-29 | now        | 56ea6ac618bc21d28929a85a6964ff65
 		  -->
-    	<get 
-    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/german-chunker-par-linux-3.2-utf8.bin.gz" 
-    		dest="target/download/german-chunker-par-linux-3.2-utf8.bin.gz" 
+    	<get
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/german-chunker-par-linux-3.2-utf8.bin.gz"
+    		dest="target/download/german-chunker-par-linux-3.2-utf8.bin.gz"
     		skipexisting="true"/>
 		<gunzip src="target/download/german-chunker-par-linux-3.2-utf8.bin.gz"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/german-chunker-par-linux-3.2-utf8.bin" 
+    	<install-stub-and-upstream-file
+    		file="target/download/german-chunker-par-linux-3.2-utf8.bin"
     		md5="56ea6ac618bc21d28929a85a6964ff65"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		groupId="de.tudarmstadt.ukp.dkpro.core"
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20110429"
     		metaDataVersion="1"
-    		tool="chunker" 
-    		language="de" 
-    		variant="le" 
+    		tool="chunker"
+    		language="de"
+    		variant="le"
     		extension="bin">
 			<metadata>
 	    		<entry key="chunk.tagset" value="tt"/>
 	    		<entry key="encoding" value="UTF-8"/>
 			</metadata>
-		</install-stub-and-upstream-file>		
+		</install-stub-and-upstream-file>
 	</target>
 
 	<target name="en">
@@ -153,24 +153,24 @@
 		<!-- FILE: english-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2014-05-20 | 2015-02-09 | db60237f6f42faac4c89e511f33960ec
           - 2015-02-09 | 2015-11-19 | 17d93abadfd8786b9a36dfdfd12f8d98
-          - 2015-11-19 | 2016-12-21 | 441b51369b6888387a17a26a5dc2d146 
-          - 2016-12-21 | now        | ccf1bac5ff50d0d7bf3423aa82b2e6c1 
+          - 2015-11-19 | 2016-12-21 | 441b51369b6888387a17a26a5dc2d146
+          - 2016-12-21 | now        | ccf1bac5ff50d0d7bf3423aa82b2e6c1
 		  -->
-    	<get 
-    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-par-linux-3.2-utf8.bin.gz" 
-    		dest="target/download/english-par-linux-3.2-utf8.bin.gz" 
+    	<get
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-par-linux-3.2-utf8.bin.gz"
+    		dest="target/download/english-par-linux-3.2-utf8.bin.gz"
     		skipexisting="true"/>
 		<gunzip src="target/download/english-par-linux-3.2-utf8.bin.gz"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/english-par-linux-3.2-utf8.bin" 
+    	<install-stub-and-upstream-file
+    		file="target/download/english-par-linux-3.2-utf8.bin"
     		md5="ccf1bac5ff50d0d7bf3423aa82b2e6c1"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		groupId="de.tudarmstadt.ukp.dkpro.core"
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20161221"
     		metaDataVersion="1"
-    		tool="tagger" 
-    		language="en" 
-    		variant="le" 
+    		tool="tagger"
+    		language="en"
+    		variant="le"
     		extension="bin">
 			<metadata>
 	    		<entry key="pos.tagset" value="ptb-tt"/>
@@ -183,21 +183,21 @@
 		<!-- FILE: english-chunker-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - -
 		  - 2009-08-24 | now        | 981df5901588a016ade69108d4421531
 		  -->
-    	<get 
-    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-chunker-par-linux-3.2.bin.gz" 
-    		dest="target/download/english-chunker-par-linux-3.2.bin.gz" 
+    	<get
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-chunker-par-linux-3.2.bin.gz"
+    		dest="target/download/english-chunker-par-linux-3.2.bin.gz"
     		skipexisting="true"/>
 		<gunzip src="target/download/english-chunker-par-linux-3.2.bin.gz"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/english-chunker-par-linux-3.2.bin" 
+    	<install-stub-and-upstream-file
+    		file="target/download/english-chunker-par-linux-3.2.bin"
     		md5="981df5901588a016ade69108d4421531"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		groupId="de.tudarmstadt.ukp.dkpro.core"
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20090824"
     		metaDataVersion="1"
-    		tool="chunker" 
-    		language="en" 
-    		variant="iso8859-le" 
+    		tool="chunker"
+    		language="en"
+    		variant="iso8859-le"
     		extension="bin">
 			<metadata>
 	    		<entry key="chunk.tagset" value="tt"/>
@@ -205,26 +205,26 @@
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
-	
+
 	<target name="en-chunker-le">
 		<!-- FILE: english-chunker-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - -
 		  - 2014-05-20 | now        | c179a5ec0b6ae057425ba3469611e907
 		  -->
-    	<get 
-    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-chunker-par-linux-3.2-utf8.bin.gz" 
-    		dest="target/download/english-chunker-par-linux-3.2-utf8.bin.gz" 
+    	<get
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-chunker-par-linux-3.2-utf8.bin.gz"
+    		dest="target/download/english-chunker-par-linux-3.2-utf8.bin.gz"
     		skipexisting="true"/>
 		<gunzip src="target/download/english-chunker-par-linux-3.2-utf8.bin.gz"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/english-chunker-par-linux-3.2-utf8.bin" 
+    	<install-stub-and-upstream-file
+    		file="target/download/english-chunker-par-linux-3.2-utf8.bin"
     		md5="c179a5ec0b6ae057425ba3469611e907"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		groupId="de.tudarmstadt.ukp.dkpro.core"
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20140520"
     		metaDataVersion="1"
-    		tool="chunker" 
-    		language="en" 
-    		variant="le" 
+    		tool="chunker"
+    		language="en"
+    		variant="le"
     		extension="bin">
 			<metadata>
 	    		<entry key="chunk.tagset" value="tt"/>
@@ -239,7 +239,7 @@
 
 	<target name="es-tagger-le">
 		<mkdir dir="target/download"/>
-		
+
 		<!-- FILE: spanish-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2011-11-07 | 2013-02-14 | 9770d507bd3cfb30385e1c2d4ce46f89
 		  - 2013-02-14 | 2013-04-03 | 33359d3deca5f9acab7f3b5b38529e17
@@ -249,21 +249,21 @@
 		  - 2015-07-24 | 2016-12-22 | ea8142cb5a0efc59226a0f5d41d690ac
           - 2016-12-22 | now        | eb4b3ef771e4ba2e21aa715ca5a08d5f
 		  -->
-    	<get 
-    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/spanish-par-linux-3.2-utf8.bin.gz" 
-    		dest="target/download/spanish-par-linux-3.2-utf8.bin.gz" 
+    	<get
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/spanish-par-linux-3.2-utf8.bin.gz"
+    		dest="target/download/spanish-par-linux-3.2-utf8.bin.gz"
     		skipexisting="true"/>
 		<gunzip src="target/download/spanish-par-linux-3.2-utf8.bin.gz"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/spanish-par-linux-3.2-utf8.bin" 
+    	<install-stub-and-upstream-file
+    		file="target/download/spanish-par-linux-3.2-utf8.bin"
     		md5="eb4b3ef771e4ba2e21aa715ca5a08d5f"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		groupId="de.tudarmstadt.ukp.dkpro.core"
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20161222"
     		metaDataVersion="1"
-    		tool="tagger" 
-    		language="es" 
-    		variant="le" 
+    		tool="tagger"
+    		language="es"
+    		variant="le"
     		extension="bin">
 			<metadata>
 	    		<entry key="pos.tagset" value="crater"/>
@@ -278,25 +278,25 @@
 
 	<target name="et-tagger-le">
 		<mkdir dir="target/download"/>
-		
+
 		<!-- FILE: estonian-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2011-01-24 | now        | 4a98b412e36afefbc204fca9e561f5cb
 		  -->
-    	<get 
-    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/estonian-par-linux-3.2-utf8.bin.gz" 
-    		dest="target/download/estonian-par-linux-3.2.bin.gz" 
+    	<get
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/estonian-par-linux-3.2-utf8.bin.gz"
+    		dest="target/download/estonian-par-linux-3.2.bin.gz"
     		skipexisting="true"/>
 		<gunzip src="target/download/estonian-par-linux-3.2.bin.gz"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/estonian-par-linux-3.2.bin" 
+    	<install-stub-and-upstream-file
+    		file="target/download/estonian-par-linux-3.2.bin"
     		md5="4a98b412e36afefbc204fca9e561f5cb"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		groupId="de.tudarmstadt.ukp.dkpro.core"
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20110124"
     		metaDataVersion="1"
-    		tool="tagger" 
-    		language="et" 
-    		variant="le" 
+    		tool="tagger"
+    		language="et"
+    		variant="le"
     		extension="bin">
 			<metadata>
 	    		<entry key="pos.tagset" value="tartu"/>
@@ -311,7 +311,7 @@
 
 	<target name="fi-tagger-le">
 		<mkdir dir="target/download"/>
-		
+
 		<!-- FILE: finnish-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2013-07-16 | 2014-07-04 | 241dbbae52baad70787a952d3a0e71a3
 		  - 2014-07-04 | now        | c0659e3dbbc5d74f15bb3174c0597155
@@ -319,21 +319,21 @@
 		  - Corpus: http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/
 		  - Tagset: http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/sources/FinnTreeBankManual.pdf
 		  -->
-    	<get 
-    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/finnish-par-linux-3.2-utf8.bin.gz" 
-    		dest="target/download/finnish-par-linux-3.2.bin.gz" 
+    	<get
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/finnish-par-linux-3.2-utf8.bin.gz"
+    		dest="target/download/finnish-par-linux-3.2.bin.gz"
     		skipexisting="true"/>
 		<gunzip src="target/download/finnish-par-linux-3.2.bin.gz"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/finnish-par-linux-3.2.bin" 
+    	<install-stub-and-upstream-file
+    		file="target/download/finnish-par-linux-3.2.bin"
     		md5="c0659e3dbbc5d74f15bb3174c0597155"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		groupId="de.tudarmstadt.ukp.dkpro.core"
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20140704"
     		metaDataVersion="1"
-    		tool="tagger" 
-    		language="fi" 
-    		variant="le" 
+    		tool="tagger"
+    		language="fi"
+    		variant="le"
     		extension="bin">
 			<metadata>
 	    		<entry key="pos.tagset" value="ftb-tt"/>
@@ -349,25 +349,25 @@
 
 	<target name="fr-tagger-le">
 		<mkdir dir="target/download"/>
-		
+
 		<!-- FILE: french-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2010-01-11 | now        | 41d978f247b23d6fee733da32a55a775
 		  -->
-    	<get 
-    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/french-par-linux-3.2-utf8.bin.gz" 
-    		dest="target/download/french-par-linux-3.2-utf8.bin.gz" 
+    	<get
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/french-par-linux-3.2-utf8.bin.gz"
+    		dest="target/download/french-par-linux-3.2-utf8.bin.gz"
     		skipexisting="true"/>
 		<gunzip src="target/download/french-par-linux-3.2-utf8.bin.gz"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/french-par-linux-3.2-utf8.bin" 
+    	<install-stub-and-upstream-file
+    		file="target/download/french-par-linux-3.2-utf8.bin"
     		md5="41d978f247b23d6fee733da32a55a775"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		groupId="de.tudarmstadt.ukp.dkpro.core"
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20100111"
     		metaDataVersion="1"
-    		tool="tagger" 
-    		language="fr" 
-    		variant="le" 
+    		tool="tagger"
+    		language="fr"
+    		variant="le"
     		extension="bin">
 			<metadata>
 	    		<entry key="pos.tagset" value="stein"/>
@@ -378,26 +378,26 @@
 
 	<target name="fr-chunker-le">
 		<mkdir dir="target/download"/>
-		
+
 		<!-- FILE: french-chunker-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2008-06-11 | 2014-12-18 | 975e3e306198c9f61f14428621ed87ba
           - 2014-12-18 | now        | 371fbe11e13d169120c9ce04c0d05206
 		  -->
-    	<get 
-    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/french-chunker-par-linux-3.2-utf8.bin.gz" 
-    		dest="target/download/french-chunker-par-linux-3.2-utf8.bin.gz" 
+    	<get
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/french-chunker-par-linux-3.2-utf8.bin.gz"
+    		dest="target/download/french-chunker-par-linux-3.2-utf8.bin.gz"
     		skipexisting="true"/>
 		<gunzip src="target/download/french-chunker-par-linux-3.2-utf8.bin.gz"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/french-chunker-par-linux-3.2-utf8.bin" 
+    	<install-stub-and-upstream-file
+    		file="target/download/french-chunker-par-linux-3.2-utf8.bin"
     		md5="371fbe11e13d169120c9ce04c0d05206"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		groupId="de.tudarmstadt.ukp.dkpro.core"
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20141218"
     		metaDataVersion="2"
-    		tool="chunker" 
-    		language="fr" 
-    		variant="le" 
+    		tool="chunker"
+    		language="fr"
+    		variant="le"
     		extension="bin">
 			<metadata>
 	    		<entry key="chunk.tagset" value="ftb"/>
@@ -414,28 +414,60 @@
 
 	<target name="gl-tagger-le">
 		<mkdir dir="target/download"/>
-		
+
 		<!-- FILE: galician-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2013-05-16 | now        | 85cc88ae110500aa6ba924c10c2dd8bb
 		  -->
-    	<get 
-    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/galician-par-linux-3.2.bin.gz" 
-    		dest="target/download/galician-par-linux-3.2.bin.gz" 
+    	<get
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/galician-par-linux-3.2.bin.gz"
+    		dest="target/download/galician-par-linux-3.2.bin.gz"
     		skipexisting="true"/>
 		<gunzip src="target/download/galician-par-linux-3.2.bin.gz"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/galician-par-linux-3.2.bin" 
+    	<install-stub-and-upstream-file
+    		file="target/download/galician-par-linux-3.2.bin"
     		md5="85cc88ae110500aa6ba924c10c2dd8bb"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		groupId="de.tudarmstadt.ukp.dkpro.core"
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20130516"
     		metaDataVersion="1"
-    		tool="tagger" 
-    		language="gl" 
-    		variant="le" 
+    		tool="tagger"
+    		language="gl"
+    		variant="le"
     		extension="bin">
 			<metadata>
 	    		<entry key="pos.tagset" value="xiada"/>
+	    		<entry key="encoding" value="UTF-8"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>
+
+	<target name="gmh">
+		<antcall target="gmh-tagger-le"/>
+	</target>
+
+	<target name="gmh-tagger-le">
+		<mkdir dir="target/download"/>
+		<!-- FILE: middle-high-german-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2017-04-20 | now        | 7192c51a01a79b56294f5388f9dc38ba
+		  -->
+    	<get
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/middle-high-german-par-linux-3.2-utf8.bin.gz"
+    		dest="target/download/middle-high-german-par-linux-3.2-utf8.bin.gz"
+    		skipexisting="true"/>
+		<gunzip src="target/download/middle-high-german-par-linux-3.2-utf8.bin.gz"/>
+    	<install-stub-and-upstream-file
+    		file="target/download/middle-high-german-par-linux-3.2-utf8.bin"
+    		md5="7192c51a01a79b56294f5388f9dc38ba"
+    		groupId="de.tudarmstadt.ukp.dkpro.core"
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+    		upstreamVersion="20121207"
+    		metaDataVersion="1"
+    		tool="tagger"
+    		language="gmh"
+    		variant="le"
+    		extension="bin">
+			<metadata>
+	    		<entry key="pos.tagset" value="universal"/>
 	    		<entry key="encoding" value="UTF-8"/>
 			</metadata>
 		</install-stub-and-upstream-file>
@@ -447,26 +479,26 @@
 
 	<target name="it-tagger-le">
 		<mkdir dir="target/download"/>
-		
+
 		<!-- FILE: italian-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2009-06-22 | 2014-10-20 | 79c03b4cc14c89d58aa1f97a133d01d7
 		  - 2014-10-20 | now        | d3266e8b3d1860543403342fe0c95fc8
 		  -->
-    	<get 
-    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/italian-par-linux-3.2-utf8.bin.gz" 
-    		dest="target/download/italian-par-linux-3.2-utf8.bin.gz" 
+    	<get
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/italian-par-linux-3.2-utf8.bin.gz"
+    		dest="target/download/italian-par-linux-3.2-utf8.bin.gz"
     		skipexisting="true"/>
 		<gunzip src="target/download/italian-par-linux-3.2-utf8.bin.gz"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/italian-par-linux-3.2-utf8.bin" 
+    	<install-stub-and-upstream-file
+    		file="target/download/italian-par-linux-3.2-utf8.bin"
     		md5="d3266e8b3d1860543403342fe0c95fc8"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		groupId="de.tudarmstadt.ukp.dkpro.core"
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20141020"
     		metaDataVersion="1"
-    		tool="tagger" 
-    		language="it" 
-    		variant="le" 
+    		tool="tagger"
+    		language="it"
+    		variant="le"
     		extension="bin">
 			<metadata>
 	    		<entry key="pos.tagset" value="stein"/>
@@ -481,26 +513,26 @@
 
 	<target name="la-tagger-le">
 		<mkdir dir="target/download"/>
-		
+
 		<!-- FILE: latin-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2011-05-07 | 2011-08-19 | f959f8633ef842f069f0331ad19dc8b4
 		  - 2011-08-19 | now        | bde1f6a63b2c5a658ba25a8eb90832a8
 		  -->
-    	<get 
-    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/latin-par-linux-3.2.bin.gz" 
-    		dest="target/download/latin-par-linux-3.2.bin.gz" 
+    	<get
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/latin-par-linux-3.2.bin.gz"
+    		dest="target/download/latin-par-linux-3.2.bin.gz"
     		skipexisting="true"/>
 		<gunzip src="target/download/latin-par-linux-3.2.bin.gz"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/latin-par-linux-3.2.bin" 
+    	<install-stub-and-upstream-file
+    		file="target/download/latin-par-linux-3.2.bin"
     		md5="bde1f6a63b2c5a658ba25a8eb90832a8"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		groupId="de.tudarmstadt.ukp.dkpro.core"
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20110819"
     		metaDataVersion="1"
-    		tool="tagger" 
-    		language="la" 
-    		variant="le" 
+    		tool="tagger"
+    		language="la"
+    		variant="le"
     		extension="bin">
 			<metadata>
 	    		<entry key="pos.tagset" value="brandolini"/>
@@ -515,27 +547,27 @@
 
 	<target name="nl-tagger-le">
 		<mkdir dir="target/download"/>
-		
+
 		<!-- FILE: dutch-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2008-06-02 | ????-??-?? | 22dd271035795747768ead15b2931c75 (dutch-par-linux-3.1)
 		  - ????-??-?? | 2013-01-07 | 7d533ea8e8b768f87d9c684e47a59872 (dutch-par-linux-3.1)
 		  - 2013-01-07 | now        | 40c82daae0c7063eb3eabf1541303fca
 		  -->
-    	<get 
-    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/dutch-par-linux-3.2-utf8.bin.gz" 
-    		dest="target/download/dutch-par-linux-3.2-utf8.bin.gz" 
+    	<get
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/dutch-par-linux-3.2-utf8.bin.gz"
+    		dest="target/download/dutch-par-linux-3.2-utf8.bin.gz"
     		skipexisting="true"/>
 		<gunzip src="target/download/dutch-par-linux-3.2-utf8.bin.gz"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/dutch-par-linux-3.2-utf8.bin" 
+    	<install-stub-and-upstream-file
+    		file="target/download/dutch-par-linux-3.2-utf8.bin"
     		md5="40c82daae0c7063eb3eabf1541303fca"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		groupId="de.tudarmstadt.ukp.dkpro.core"
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20130107"
     		metaDataVersion="1"
-    		tool="tagger" 
-    		language="nl" 
-    		variant="le" 
+    		tool="tagger"
+    		language="nl"
+    		variant="le"
     		extension="bin">
 			<metadata>
 	    		<entry key="pos.tagset" value="tt"/>
@@ -543,66 +575,66 @@
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
-	
+
 	<target name="mn">
 		<antcall target="mn-tagger-le"/>
 	</target>
 
 	<target name="mn-tagger-le">
 		<mkdir dir="target/download"/>
-		
-		<!-- mongolian-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+		<!-- mongolian-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2012-09-25 | now        | a3b1658180c96ef6412df0c5074ecb42
 		  -->
-    	<get 
-    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/mongolian-par-linux-3.2.bin.gz" 
-    		dest="target/download/mongolian-par-linux-3.2.bin.gz" 
+    	<get
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/mongolian-par-linux-3.2.bin.gz"
+    		dest="target/download/mongolian-par-linux-3.2.bin.gz"
     		skipexisting="true"/>
 		<gunzip src="target/download/mongolian-par-linux-3.2.bin.gz"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/mongolian-par-linux-3.2.bin" 
+    	<install-stub-and-upstream-file
+    		file="target/download/mongolian-par-linux-3.2.bin"
     		md5="a3b1658180c96ef6412df0c5074ecb42"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		groupId="de.tudarmstadt.ukp.dkpro.core"
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20120925"
     		metaDataVersion="1"
-    		tool="tagger" 
-    		language="mn" 
-    		variant="le" 
+    		tool="tagger"
+    		language="mn"
+    		variant="le"
     		extension="bin">
 			<metadata>
 	    		<entry key="pos.tagset" value="tt"/>
 	    		<entry key="encoding" value="UTF-8"/>
 			</metadata>
 		</install-stub-and-upstream-file>
-	</target>	
-	
+	</target>
+
 	<target name="pl">
 		<antcall target="pl-tagger-le"/>
 	</target>
 
 	<target name="pl-tagger-le">
 		<mkdir dir="target/download"/>
-		
+
 		<!-- polish-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2014-06-02 | 2015-05-06 | e7ac63b234ed40f5e850bdac4c883ef1
           - 2015-05-06 | now        | bec86e83c25ff19a7ce23e93f89168ee
 		  -->
-    	<get 
-    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/polish-par-linux-3.2-utf8.bin.gz" 
-    		dest="target/download/polish-par-linux-3.2-utf8.bin.gz" 
+    	<get
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/polish-par-linux-3.2-utf8.bin.gz"
+    		dest="target/download/polish-par-linux-3.2-utf8.bin.gz"
     		skipexisting="true"/>
 		<gunzip src="target/download/polish-par-linux-3.2-utf8.bin.gz"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/polish-par-linux-3.2-utf8.bin" 
+    	<install-stub-and-upstream-file
+    		file="target/download/polish-par-linux-3.2-utf8.bin"
     		md5="bec86e83c25ff19a7ce23e93f89168ee"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		groupId="de.tudarmstadt.ukp.dkpro.core"
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20150506"
     		metaDataVersion="1"
-    		tool="tagger" 
-    		language="pl" 
-    		variant="le" 
+    		tool="tagger"
+    		language="pl"
+    		variant="le"
     		extension="bin">
 			<metadata>
 				<!-- http://nkjp.pl/poliqarp/help/ense2.html -->
@@ -610,39 +642,39 @@
 	    		<entry key="encoding" value="UTF-8"/>
 			</metadata>
 		</install-stub-and-upstream-file>
-	</target>	
-	
+	</target>
+
 	<target name="pt">
 		<antcall target="pt-tagger-le"/>
 	</target>
 
 	<target name="pt-tagger-le">
 		<mkdir dir="target/download"/>
-		
+
 		<!-- FILE: tree-taggerPT-GZ.tar.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2010-11-15 | now        | cf9855b4e215fa7a393700aa135830b0
 		  -->
-    	<get 
-    		src="http://gramatica.usc.es/~gamallo/tagger/tree-taggerPT-GZ.tar.gz" 
-    		dest="target/download/tree-taggerPT-GZ.tar.gz" 
+    	<get
+    		src="http://gramatica.usc.es/~gamallo/tagger/tree-taggerPT-GZ.tar.gz"
+    		dest="target/download/tree-taggerPT-GZ.tar.gz"
     		skipexisting="true"/>
 		<gunzip src="target/download/tree-taggerPT-GZ.tar.gz"/>
     	<untar src="target/download/tree-taggerPT-GZ.tar" dest="target/download">
     		<patternset>
-    			<include name="**/pt.par"/>		
+    			<include name="**/pt.par"/>
 			</patternset>
     		<mapper type="flatten"/>
     	</untar>
-    	<install-stub-and-upstream-file 
-    		file="target/download/pt.par" 
+    	<install-stub-and-upstream-file
+    		file="target/download/pt.par"
     		md5="cf9855b4e215fa7a393700aa135830b0"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		groupId="de.tudarmstadt.ukp.dkpro.core"
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20101115"
     		metaDataVersion="2"
-    		tool="tagger" 
-    		language="pt" 
-    		variant="le" 
+    		tool="tagger"
+    		language="pt"
+    		variant="le"
     		extension="bin">
 			<metadata>
 	    		<entry key="pos.tagset" value="gamallo"/>
@@ -650,65 +682,65 @@
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
-	
+
 	<target name="ru">
 		<antcall target="ru-tagger-le"/>
 	</target>
 
 	<target name="ru-tagger-le">
 		<mkdir dir="target/download"/>
-		
+
 		<!-- russian-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2014-05-05 | now        | 7cc4bbaf7c2ee519e934dc47c34a366b
 		  -->
-    	<get 
-    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/russian-par-linux-3.2-utf8.bin.gz" 
-    		dest="target/download/russian-par-linux-3.2-utf8.bin.gz" 
+    	<get
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/russian-par-linux-3.2-utf8.bin.gz"
+    		dest="target/download/russian-par-linux-3.2-utf8.bin.gz"
     		skipexisting="true"/>
 		<gunzip src="target/download/russian-par-linux-3.2-utf8.bin.gz"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/russian-par-linux-3.2-utf8.bin" 
+    	<install-stub-and-upstream-file
+    		file="target/download/russian-par-linux-3.2-utf8.bin"
     		md5="7cc4bbaf7c2ee519e934dc47c34a366b"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		groupId="de.tudarmstadt.ukp.dkpro.core"
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20140505"
     		metaDataVersion="1"
-    		tool="tagger" 
-    		language="ru" 
-    		variant="le" 
+    		tool="tagger"
+    		language="ru"
+    		variant="le"
     		extension="bin">
 			<metadata>
 	    		<entry key="pos.tagset" value="msd"/>
 	    		<entry key="encoding" value="UTF-8"/>
 			</metadata>
 		</install-stub-and-upstream-file>
-	</target>	
-	
+	</target>
+
 	<target name="sk">
 		<antcall target="sk-tagger-le"/>
 	</target>
 
 	<target name="sk-tagger-le">
 		<mkdir dir="target/download"/>
-		
+
 		<!-- FILE: slovak-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2013-07-25 | now        | b920e2b9e1fdd1173352d7df2bb7fd88
 		  -->
-    	<get 
-    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/slovak-par-linux-3.2-utf8.bin.gz" 
-    		dest="target/download/slovak-par-linux-3.2-utf8.bin.gz" 
+    	<get
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/slovak-par-linux-3.2-utf8.bin.gz"
+    		dest="target/download/slovak-par-linux-3.2-utf8.bin.gz"
     		skipexisting="true"/>
 		<gunzip src="target/download/slovak-par-linux-3.2-utf8.bin.gz"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/slovak-par-linux-3.2-utf8.bin" 
+    	<install-stub-and-upstream-file
+    		file="target/download/slovak-par-linux-3.2-utf8.bin"
     		md5="b920e2b9e1fdd1173352d7df2bb7fd88"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		groupId="de.tudarmstadt.ukp.dkpro.core"
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20130725"
     		metaDataVersion="1"
-    		tool="tagger" 
-    		language="sk" 
-    		variant="le" 
+    		tool="tagger"
+    		language="sk"
+    		variant="le"
     		extension="bin">
 			<metadata>
 	    		<entry key="pos.tagset" value="smt-reduced"/>
@@ -716,33 +748,33 @@
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
-	
+
 	<target name="sl">
 		<antcall target="sl-tagger-le"/>
 	</target>
 
 	<target name="sl-tagger-le">
 		<mkdir dir="target/download"/>
-		
+
 		<!-- FILE: slovenian.par.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2010-07-03 | now        | d6b230483364be5ec0a3054a1b78df2d
-		  - 
+		  -
 		  - Excluded because we do not know the tagset
-    	<get 
-    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/slovenian.par.gz" 
-    		dest="target/download/slovenian.par.gz" 
+    	<get
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/slovenian.par.gz"
+    		dest="target/download/slovenian.par.gz"
     		skipexisting="true"/>
 		<gunzip src="target/download/slovenian.par.gz"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/slovenian.par" 
+    	<install-stub-and-upstream-file
+    		file="target/download/slovenian.par"
     		md5="d6b230483364be5ec0a3054a1b78df2d"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		groupId="de.tudarmstadt.ukp.dkpro.core"
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20100703"
     		metaDataVersion="1"
-    		tool="tagger" 
-    		language="sl" 
-    		variant="le" 
+    		tool="tagger"
+    		language="sl"
+    		variant="le"
     		extension="bin">
 			<metadata>
 	    		<entry key="pos.tagset" value="unknown"/>
@@ -751,33 +783,33 @@
 		</install-stub-and-upstream-file>
 		  -->
 	</target>
-	
+
 	<target name="sw">
 		<antcall target="sw-tagger-le"/>
 	</target>
 
 	<target name="sw-tagger-le">
 		<mkdir dir="target/download"/>
-		
+
 		<!-- FILE: swahili-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2010-03-17 | 2013-07-29 | 0df5f70b0cc81a3b437a46a9e0a3d71b
 		  - 2013-07-29 | now        | 002bebeeca52d1112aa5f31173c5ecec
 		  -->
-    	<get 
-    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/swahili-par-linux-3.2.bin.gz" 
-    		dest="target/download/swahili-par-linux-3.2.bin.gz" 
+    	<get
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/swahili-par-linux-3.2.bin.gz"
+    		dest="target/download/swahili-par-linux-3.2.bin.gz"
     		skipexisting="true"/>
 		<gunzip src="target/download/swahili-par-linux-3.2.bin.gz"/>
-    	<install-stub-and-upstream-file 
-    		file="target/download/swahili-par-linux-3.2.bin" 
+    	<install-stub-and-upstream-file
+    		file="target/download/swahili-par-linux-3.2.bin"
     		md5="002bebeeca52d1112aa5f31173c5ecec"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		groupId="de.tudarmstadt.ukp.dkpro.core"
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20130729"
     		metaDataVersion="1"
-    		tool="tagger" 
-    		language="sw" 
-    		variant="le" 
+    		tool="tagger"
+    		language="sw"
+    		variant="le"
     		extension="bin">
 			<metadata>
 	    		<entry key="pos.tagset" value="swatwol"/>
@@ -792,31 +824,31 @@
 
 	<target name="zh-tagger-le">
 		<mkdir dir="target/download"/>
-		
+
 		<!-- FILE: tt-lcmc.tgz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2010-11-15 | now        | 7392059e61b5555ab984918e3dea9464
 		  -->
-    	<get 
-    		src="http://corpus.leeds.ac.uk/tools/zh/tt-lcmc.tgz" 
-    		dest="target/download/tt-lcmc.tar.gz" 
+    	<get
+    		src="http://corpus.leeds.ac.uk/tools/zh/tt-lcmc.tgz"
+    		dest="target/download/tt-lcmc.tar.gz"
     		skipexisting="true"/>
 		<gunzip src="target/download/tt-lcmc.tar.gz"/>
     	<untar src="target/download/tt-lcmc.tar" dest="target/download">
     		<patternset>
-    			<include name="**/zh.par"/>		
+    			<include name="**/zh.par"/>
 			</patternset>
     		<mapper type="flatten"/>
     	</untar>
-    	<install-stub-and-upstream-file 
-    		file="target/download/zh.par" 
+    	<install-stub-and-upstream-file
+    		file="target/download/zh.par"
     		md5="7392059e61b5555ab984918e3dea9464"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		groupId="de.tudarmstadt.ukp.dkpro.core"
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20101115"
     		metaDataVersion="1"
-    		tool="tagger" 
-    		language="zh" 
-    		variant="le" 
+    		tool="tagger"
+    		language="zh"
+    		variant="le"
     		extension="bin">
 			<metadata>
 	    		<entry key="pos.tagset" value="lcmc"/>
@@ -824,15 +856,15 @@
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
-	
+
 	<target name="install-executables">
 		<property name="version.bin" value="20160430.0"/>
-			
+
 		<fail unless="outputDir">No output directory set.</fail>
 		<mkdir dir="${outputDir}/bin"/>
 		<get src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/Tagger-Licence" dest="${outputDir}/bin/LICENSE.txt"/>
-		
-		<!-- 
+
+		<!--
 		  - Helmut Schmid seems to have a habit of releasing new versions of TreeTagger without
 		  - updating the version number of maintaining any kind of changes file. Thus we record
 		  - here at which dates we notice that files change. We have also observed that treetagger
@@ -847,15 +879,15 @@
 			platform="osx-x86_64" file="tree-tagger" md5="a47bac91b5f373c5ba8703faa5ec7dd7"/>
 		<install-executable-file-tar url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-MacOSX-3.2.tar.gz"
 			platform="osx-x86_32" file="tree-tagger" md5="a47bac91b5f373c5ba8703faa5ec7dd7"/>
-		
+
 		<!-- FILE: tree-tagger-MacOSX-3.2.tar.gz - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2010-11-19 | now        | 63560dcb3a5932bc5ae0e9aab8f48e42
 		<install-executable-file-tar url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-MacOSX-3.2.tar.gz"
 			platform="osx-ppc" file="tree-tagger" md5="63560dcb3a5932bc5ae0e9aab8f48e42"/>
 		  -->
-		
-		<!-- FILE: tree-tagger-linux-3.2-64bit.tar.gz  - - - - - - - - - - - - - - - - - - - - - - - - - - 
-		  - 2012-08-03 | 2012-09-12 | 1bab69906368061d6e7c7466abdeb643 : build can now be 32 bit or 64 bit 
+
+		<!-- FILE: tree-tagger-linux-3.2-64bit.tar.gz  - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2012-08-03 | 2012-09-12 | 1bab69906368061d6e7c7466abdeb643 : build can now be 32 bit or 64 bit
 		  - 2012-09-12 | 2013-02-28 | 4b6459574b6b334a090399b76dbc2cdb
 		  - 2013-02-28 | 2013-05-07 | 3c8433d34cc2430197f8ed7b9e220b9c : only 64 bit build
 		  - 2013-05-07 | 2013-11-18 | 9c015219f8a5c696f03ee43b72e913b0
@@ -866,24 +898,24 @@
 		<install-executable-file-tar url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-linux-3.2.tar.gz"
 			platform="linux-x86_64" file="tree-tagger" md5="16cf3578fafd8c39b5b9df0077297025"/>
 
-		<!-- FILE: tree-tagger-linux-3.2.tar.gz  - - - - - - - - - - - - - - - - - - - - - - - - - - 
+		<!-- FILE: tree-tagger-linux-3.2.tar.gz  - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - xxxx-xx-xx | 2010-11-19 | 293ecb477a9f3993206674d68e81b792 (contains dynamically linked binary)
 		  - 2010-11-19 | 2012-02-06 | 3f1d752b0f8c5ad2667346caafaaa5e7 (statically linked binary again)
 		  - 2012-02-06 | 2012-04-18 | 6599b70197be926a26a4966e34f1cad5 (ELF 32-bit LSB executable, Intel 80386, version 1 (GNU/Linux), statically linked, for GNU/Linux 2.6.32, stripped)
-		  - 2012-04-18 | 2012-08-03 | 45bfecd9daac30a4c05c40d03ed1f6f9 : buffer flush after 10 lines with -prob 
-		  - 2012-08-03 | 2013-02-02 | 33c2b37803114ec68f36733b1f8b1702 : build can now be 32 bit or 64 bit 
-		  - 2013-02-28 | now        | 32-bit version is no longer available! 
+		  - 2012-04-18 | 2012-08-03 | 45bfecd9daac30a4c05c40d03ed1f6f9 : buffer flush after 10 lines with -prob
+		  - 2012-08-03 | 2013-02-02 | 33c2b37803114ec68f36733b1f8b1702 : build can now be 32 bit or 64 bit
+		  - 2013-02-28 | now        | 32-bit version is no longer available!
 		<install-executable-file-tar url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/tree-tagger-linux-3.2.tar.gz"
 			platform="linux-x86_32" file="tree-tagger" md5="33c2b37803114ec68f36733b1f8b1702"/>
 		  -->
-		
-		<!-- FILE: tree-tagger-3.2.tar.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+		<!-- FILE: tree-tagger-3.2.tar.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2010-11-19 | 2012-02-06 | 4a58ee2a4177cc4e9bfaead8cec6430d
 		  - 2012-02-06 | now        | bcebb9b9745e2ac12c5226a032b8bfb4 (ELF 32-bit MSB executable, SPARC, version 1 (SYSV), dynamically linked (uses shared libs), stripped)
 		<install-executable-file-tar url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-3.2.tar.gz"
 			platform="solaris-sparc" file="tree-tagger" md5="bcebb9b9745e2ac12c5226a032b8bfb4"/>
 		  -->
-			
+
 		<!-- FILE: tree-tagger-windows-3.2.zip - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2010-11-19 | 2012-04-25 | 72a5489fe197b0173ea476e2224a6ad6
 		  - 2012-04-25 | 2015-03-25 | c88d7fe1aa63bebaccfa019c222f54ea : buffer flush after 10 lines with -prob
@@ -893,7 +925,7 @@
 			platform="windows-x86_32" file="tree-tagger.exe" md5="e78a1b710d738f9e29d4756ccac4fc3a"/>
 		<install-executable-file-zip url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-windows-3.2.zip"
 			platform="windows-x86_64" file="tree-tagger.exe" md5="e78a1b710d738f9e29d4756ccac4fc3a"/>
-		
+
 		<clean-pom/>
 		<generate-pom groupId="de.tudarmstadt.ukp.dkpro.core"
 			artifactId="de.tudarmstadt.ukp.dkpro.core.treetagger-bin" version="${version.bin}"/>
@@ -903,17 +935,17 @@
 				<include name="**/bin/**/*"/>
 			</fileset>
 		</jar>
-		
+
 		<install-artifact file="target/de.tudarmstadt.ukp.dkpro.core.treetagger-bin-${version.bin}.jar"
 			groupId="de.tudarmstadt.ukp.dkpro.core" artifactId="de.tudarmstadt.ukp.dkpro.core.treetagger-bin"
 			version="${version.bin}"/>
-		
+
 		<clean-pom/>
-	</target>	
-	
+	</target>
+
 	<target name="check-license">
 		<!-- CHECK LICENSE AGREEMENT -->
-			
+
 		<echo>Before I can proceed downloading TreeTagger, you have to read and agree to the</echo>
 		<echo>TreeTagger license agreement. I am trying to download the latest version of the</echo>
 		<echo>agreement from the TreeTagger homepage.</echo>
@@ -972,29 +1004,29 @@
 					</firstmatchmapper>
 	    		</chainedmapper>
 	    	</copy>
-	    	<untar src="${outputDir}/bin/@{platform}/tree-tagger-@{platform}.tar" 
+	    	<untar src="${outputDir}/bin/@{platform}/tree-tagger-@{platform}.tar"
 	    		   dest="${outputDir}/bin/@{platform}">
 	    		<patternset>
-	    			<include name="**/@{file}"/>		
+	    			<include name="**/@{file}"/>
 				</patternset>
 	    		<chainedmapper>
 		    		<mapper type="flatten"/>
 	    		</chainedmapper>
 	    	</untar>
 			<delete file="${outputDir}/bin/@{platform}/tree-tagger-@{platform}.tar"/>
-			
+
 			<checksum file="${outputDir}/bin/@{platform}/@{file}" property="@{md5}" verifyproperty="@{prop.verify.md5}"/>
 			<checksum file="${outputDir}/bin/@{platform}/@{file}" property="@{prop.verify.md5.actual}"/>
 			<condition property="checksum.mismatch">
 				<equals arg1="false" arg2="${@{prop.verify.md5}}"/>
 			</condition>
 			<fail if="checksum.mismatch">
-MD5 checksum mismatch for [@{platform}/@{file}]. 
-Please verify the checksum and if necessary update this script. 
+MD5 checksum mismatch for [@{platform}/@{file}].
+Please verify the checksum and if necessary update this script.
 Expected: @{md5}
 Actual  : ${@{prop.verify.md5.actual}}
 			</fail>
-			
+
 			<generate-executable-properties url="@{url}" platform="@{platform}" file="@{file}"/>
 			<echo>Installed executable for @{platform} systems</echo>
 		</sequential>
@@ -1019,25 +1051,25 @@ Actual  : ${@{prop.verify.md5.actual}}
 					</firstmatchmapper>
 	    		</chainedmapper>
 	    	</copy>
-	    	<unzip src="${outputDir}/bin/@{platform}/tree-tagger-@{platform}.zip" 
+	    	<unzip src="${outputDir}/bin/@{platform}/tree-tagger-@{platform}.zip"
 	    		   dest="${outputDir}/bin/@{platform}">
 	    		<patternset>
-	    			<include name="**/@{file}"/>		
+	    			<include name="**/@{file}"/>
 				</patternset>
 	    		<chainedmapper>
 		    		<mapper type="flatten"/>
 	    		</chainedmapper>
 	    	</unzip>
 			<delete file="${outputDir}/bin/@{platform}/tree-tagger-@{platform}.zip"/>
-			
+
 			<checksum file="${outputDir}/bin/@{platform}/@{file}" property="@{md5}" verifyproperty="@{prop.verify.md5}"/>
 			<checksum file="${outputDir}/bin/@{platform}/@{file}" property="@{prop.verify.md5.actual}"/>
 			<condition property="checksum.mismatch">
 				<equals arg1="false" arg2="${@{prop.verify.md5}}"/>
 			</condition>
 			<fail if="checksum.mismatch">
-MD5 checksum mismatch for [@{platform}/@{file}]. 
-Please verify the checksum and if necessary update this script. 
+MD5 checksum mismatch for [@{platform}/@{file}].
+Please verify the checksum and if necessary update this script.
 Expected: @{md5}
 Actual  : ${@{prop.verify.md5.actual}}
 			</fail>
@@ -1046,7 +1078,7 @@ Actual  : ${@{prop.verify.md5.actual}}
 			<echo>Installed executable for @{platform} systems</echo>
 		</sequential>
 	</macrodef>
-	
+
 	<macrodef name="generate-executable-properties">
 		<attribute name="url"/>
 		<attribute name="platform"/>
