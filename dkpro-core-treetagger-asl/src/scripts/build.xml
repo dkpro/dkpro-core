@@ -89,7 +89,8 @@
 		  -            | 2012-02-13 | acbfeaafdcfcc07cbb1e9c396757934c
 		  - 2012-02-13 | 2012-03-15 | 45afdcdabfffc69995523748cd42bf81
 		  - 2012-03-15 | 2012-12-07 | 3a18444accf080f54c5ebf655fedc781
-		  - 2012-12-07 | now        | 54f16f045083ae6ebe8b9d9d4a24484e
+		  - 2012-12-07 | 2017-03-16 | 54f16f045083ae6ebe8b9d9d4a24484e
+		  - 2017-03-16 | now        | 36183505f5ef1059aac104fb1fe1534d
 		  -->
     	<get 
     		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/german-par-linux-3.2-utf8.bin.gz" 
@@ -98,10 +99,10 @@
 		<gunzip src="target/download/german-par-linux-3.2-utf8.bin.gz"/>
     	<install-stub-and-upstream-file 
     		file="target/download/german-par-linux-3.2-utf8.bin" 
-    		md5="54f16f045083ae6ebe8b9d9d4a24484e"
+    		md5="36183505f5ef1059aac104fb1fe1534d"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
-    		upstreamVersion="20121207"
+    		upstreamVersion="20170316"
     		metaDataVersion="1"
     		tool="tagger" 
     		language="de" 
@@ -154,7 +155,8 @@
 		  - 2014-05-20 | 2015-02-09 | db60237f6f42faac4c89e511f33960ec
           - 2015-02-09 | 2015-11-19 | 17d93abadfd8786b9a36dfdfd12f8d98
           - 2015-11-19 | 2016-12-21 | 441b51369b6888387a17a26a5dc2d146 
-          - 2016-12-21 | now        | ccf1bac5ff50d0d7bf3423aa82b2e6c1 
+          - 2016-12-21 | 2017-02-20 | ccf1bac5ff50d0d7bf3423aa82b2e6c1 
+          - 2017-02-20 | now        | 9a70c2da699c4a57d8cc361039cd0cc7
 		  -->
     	<get 
     		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-par-linux-3.2-utf8.bin.gz" 
@@ -163,10 +165,10 @@
 		<gunzip src="target/download/english-par-linux-3.2-utf8.bin.gz"/>
     	<install-stub-and-upstream-file 
     		file="target/download/english-par-linux-3.2-utf8.bin" 
-    		md5="ccf1bac5ff50d0d7bf3423aa82b2e6c1"
+    		md5="9a70c2da699c4a57d8cc361039cd0cc7"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
-    		upstreamVersion="20161221"
+    		upstreamVersion="20170220"
     		metaDataVersion="1"
     		tool="tagger" 
     		language="en" 
@@ -440,6 +442,39 @@
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
+
+	<target name="gmh">
+		<antcall target="gmh-tagger-le"/>
+	</target>
+
+	<target name="gmh-tagger-le">
+		<mkdir dir="target/download"/>
+		<!-- FILE: middle-high-german-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+			- 2016-11-07 | now        | 7192c51a01a79b56294f5388f9dc38ba
+			-->
+		<get
+			src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/middle-high-german-par-linux-3.2-utf8.bin.gz"
+			dest="target/download/middle-high-german-par-linux-3.2-utf8.bin.gz"
+			skipexisting="true"/>
+		<gunzip src="target/download/middle-high-german-par-linux-3.2-utf8.bin.gz"/>
+		<install-stub-and-upstream-file
+			file="target/download/middle-high-german-par-linux-3.2-utf8.bin"
+			md5="7192c51a01a79b56294f5388f9dc38ba"
+			groupId="de.tudarmstadt.ukp.dkpro.core"
+			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+			upstreamVersion="20161107"
+			metaDataVersion="1"
+			tool="tagger"
+			language="gmh"
+			variant="le"
+			extension="bin">
+			<metadata>
+				<entry key="pos.tagset" value="universal"/>
+				<entry key="encoding" value="UTF-8"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>
+
 
 	<target name="it">
 		<antcall target="it-tagger-le"/>
