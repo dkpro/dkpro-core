@@ -89,7 +89,8 @@
 		  -            | 2012-02-13 | acbfeaafdcfcc07cbb1e9c396757934c
 		  - 2012-02-13 | 2012-03-15 | 45afdcdabfffc69995523748cd42bf81
 		  - 2012-03-15 | 2012-12-07 | 3a18444accf080f54c5ebf655fedc781
-		  - 2012-12-07 | now        | 54f16f045083ae6ebe8b9d9d4a24484e
+		  - 2012-12-07 | 2017-04-20 | 54f16f045083ae6ebe8b9d9d4a24484e
+		  - 2017-04-20 | now        | 36183505f5ef1059aac104fb1fe1534d
 		  -->
     	<get 
     		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/german-par-linux-3.2-utf8.bin.gz" 
@@ -98,7 +99,7 @@
 		<gunzip src="target/download/german-par-linux-3.2-utf8.bin.gz"/>
     	<install-stub-and-upstream-file 
     		file="target/download/german-par-linux-3.2-utf8.bin" 
-    		md5="54f16f045083ae6ebe8b9d9d4a24484e"
+    		md5="36183505f5ef1059aac104fb1fe1534d"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20121207"
@@ -154,7 +155,8 @@
 		  - 2014-05-20 | 2015-02-09 | db60237f6f42faac4c89e511f33960ec
           - 2015-02-09 | 2015-11-19 | 17d93abadfd8786b9a36dfdfd12f8d98
           - 2015-11-19 | 2016-12-21 | 441b51369b6888387a17a26a5dc2d146 
-          - 2016-12-21 | now        | ccf1bac5ff50d0d7bf3423aa82b2e6c1 
+          - 2016-12-21 | 2017-04-20 | ccf1bac5ff50d0d7bf3423aa82b2e6c1 
+          - 2017-04-20 | now        | 9a70c2da699c4a57d8cc361039cd0cc7
 		  -->
     	<get 
     		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-par-linux-3.2-utf8.bin.gz" 
@@ -163,7 +165,7 @@
 		<gunzip src="target/download/english-par-linux-3.2-utf8.bin.gz"/>
     	<install-stub-and-upstream-file 
     		file="target/download/english-par-linux-3.2-utf8.bin" 
-    		md5="ccf1bac5ff50d0d7bf3423aa82b2e6c1"
+    		md5="9a70c2da699c4a57d8cc361039cd0cc7"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20161221"
