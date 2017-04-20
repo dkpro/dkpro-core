@@ -441,6 +441,39 @@
 		</install-stub-and-upstream-file>
 	</target>
 
+	<target name="gmh">
+		<antcall target="gmh-tagger-le"/>
+	</target>
+
+	<target name="gmh-tagger-le">
+		<mkdir dir="target/download"/>
+		<!-- FILE: middle-high-german-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+			- 2017-04-20 | now        | 7192c51a01a79b56294f5388f9dc38ba
+			-->
+		<get
+			src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/middle-high-german-par-linux-3.2-utf8.bin.gz"
+			dest="target/download/middle-high-german-par-linux-3.2-utf8.bin.gz"
+			skipexisting="true"/>
+		<gunzip src="target/download/middle-high-german-par-linux-3.2-utf8.bin.gz"/>
+		<install-stub-and-upstream-file
+			file="target/download/middle-high-german-par-linux-3.2-utf8.bin"
+			md5="7192c51a01a79b56294f5388f9dc38ba"
+			groupId="de.tudarmstadt.ukp.dkpro.core"
+			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+			upstreamVersion="20121207"
+			metaDataVersion="1"
+			tool="tagger"
+			language="gmh"
+			variant="le"
+			extension="bin">
+			<metadata>
+				<entry key="pos.tagset" value="universal"/>
+				<entry key="encoding" value="UTF-8"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>
+
+
 	<target name="it">
 		<antcall target="it-tagger-le"/>
 	</target>
