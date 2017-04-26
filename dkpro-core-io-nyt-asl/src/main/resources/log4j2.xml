@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="console-log" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"/>
+        </Console>        
+    </Appenders>
+    <Loggers>
+        <Logger name="de.tudarmstadt.ukp.argumentext" level="debug" additivity="false">
+            <appender-ref ref="file-log" level="debug"/>
+            
+            <appender-ref ref="console-log" level="debug"/>
+        </Logger>
+        <Root level="error" additivity="false">
+            <AppenderRef ref="console-log"/>
+        </Root>
+    </Loggers>
+</Configuration>
