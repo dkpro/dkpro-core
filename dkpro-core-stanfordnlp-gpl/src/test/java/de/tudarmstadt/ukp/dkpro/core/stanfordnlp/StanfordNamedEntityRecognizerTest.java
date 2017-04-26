@@ -197,6 +197,22 @@ public class StanfordNamedEntityRecognizerTest
        AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
    }
 
+    @Test
+    public void testEnglishWithNEInLastToken()
+            throws Exception
+    {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+
+        JCas jcas = runTest("en", null, "IBM where John works is in Germany");
+
+        String[] ne = {
+                "[  0,  3]Organization(ORGANIZATION) (IBM)",
+                "[ 10, 14]Person(PERSON) (John)",
+                "[ 27, 34]Location(LOCATION) (Germany)" };
+
+        AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
+    }
+
 	@Test
 	public void testGerman()
 		throws Exception

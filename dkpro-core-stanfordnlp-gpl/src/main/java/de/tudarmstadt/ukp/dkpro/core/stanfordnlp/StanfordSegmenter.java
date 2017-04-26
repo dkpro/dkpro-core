@@ -27,6 +27,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -201,7 +203,23 @@ public class StanfordSegmenter
             
     		// Prepare the tokens for processing by WordToSentenceProcessor
     		List<CoreLabel> tokensInDocument = new ArrayList<CoreLabel>();
+			Pattern nlPattern = Pattern.compile(".*(\r\n|\n|\r).*");
+			Matcher nlMatcher = nlPattern.matcher("");
+			int lastTokenEnd = 0;
     		for (Token token : casTokens) {
+    		    if (!NewlineIsSentenceBreak.NEVER.equals(newlineIsSentenceBreak)) {
+    				// add newline as token for newlineIsSentenceBreak parameter
+    		        nlMatcher.reset(aJCas.getDocumentText().subSequence(lastTokenEnd, token.getBegin()));
+    				if (nlMatcher.matches()) {
+    					CoreLabel l = new CoreLabel();
+    					l.set(CharacterOffsetBeginAnnotation.class, lastTokenEnd + nlMatcher.start(1));
+    					l.set(CharacterOffsetEndAnnotation.class, lastTokenEnd + nlMatcher.end(1));
+    					l.setWord("\n");
+    					tokensInDocument.add(l);
+    				}
+    		    }
+				lastTokenEnd = token.getEnd();
+				// add regular token
     			CoreLabel l = new CoreLabel();
     			l.set(CharacterOffsetBeginAnnotation.class, token.getBegin());
     			l.set(CharacterOffsetEndAnnotation.class, token.getEnd());

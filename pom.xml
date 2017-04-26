@@ -54,17 +54,18 @@
             </snapshots>
         </repository>
         <!-- For UIMA/uimaFIT RCs -->
-        <!--
+        <!--  
         <repository>
             <id>ext-staging</id>
             <name>Staging repo</name>
-            <url>https://repository.apache.org/content/repositories/orgapacheuima-1067</url>
+            <url>https://repository.apache.org/content/repositories/orgapacheuima-1134</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
         </repository>
         -->
         <!-- For UIMA/uimaFIT SNAPSHOT -->
+        <!--  
 		<repository>
 			<id>apache.snapshots</id>
 			<name>Apache Snapshot Repository</name>
@@ -76,6 +77,7 @@
                 <enabled>true</enabled>
             </snapshots>
 		</repository>
+        -->
         <!-- For SNAPSHOTs from the DKPro family -->
         <repository>
             <id>ukp-oss-snapshots</id>
@@ -90,16 +92,14 @@
     </repositories>
 	<pluginRepositories>
         <!-- For UIMA/uimaFIT RCs -->
-        <!--
         <pluginRepository>
             <id>ext-staging</id>
             <name>Staging repo</name>
-            <url>https://repository.apache.org/content/repositories/orgapacheuima-1067</url>
+            <url>https://repository.apache.org/content/repositories/orgapacheuima-1134</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
         </pluginRepository>
-        -->
         <!-- For UIMA/uimaFIT SNAPSHOT maven plugin -->
 		<pluginRepository>
 			<id>apache.snapshots</id>
@@ -144,9 +144,9 @@
 	</scm>
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-		<uima.version>2.10.0-SNAPSHOT</uima.version>
-		<uimafit.version>2.3.0-SNAPSHOT</uimafit.version>
-        <uimafit.plugin.version>2.3.0-SNAPSHOT</uimafit.plugin.version>
+		<uima.version>2.9.0</uima.version>
+		<uimafit.version>2.3.0</uimafit.version>
+        <uimafit.plugin.version>2.3.0</uimafit.plugin.version>
 		<lucene.version>4.4.0</lucene.version>
 		<!-- The Spring version should be at least whatever uimaFIT requires -->
 		<spring.version>3.2.16.RELEASE</spring.version>

@@ -7,8 +7,9 @@
 # and matched against the official Ancora documentation. It may be incomplete with regards to the
 # tags actually used in the corpus.
 
-__META_SOURCE_URL__=http://clic.ub.edu/corpus/webfm_send/18
-__META_SOURCE_URL__.1=http://www.lrec-conf.org/proceedings/lrec2008/pdf/35_paper.pdf
+__META_SOURCE_URL__=http://nlp.stanford.edu/software/spanish-faq.shtml#tagset
+__META_SOURCE_URL__.1=http://clic.ub.edu/corpus/webfm_send/18
+__META_SOURCE_URL__.2=http://www.lrec-conf.org/proceedings/lrec2008/pdf/35_paper.pdf
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # adjective

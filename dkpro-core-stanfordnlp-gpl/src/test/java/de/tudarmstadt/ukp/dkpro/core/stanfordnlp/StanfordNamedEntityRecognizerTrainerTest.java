@@ -107,17 +107,13 @@ public class StanfordNamedEntityRecognizerTrainerTest
                 Conll2002Writer.PARAM_TARGET_LOCATION, new File(targetFolder, "output.conll"));
         
         List<Span<String>> actual = EvalUtil.loadSamples(iteratePipeline(testReader, ner, writer),
-                NamedEntity.class, ne -> {
-                    return ne.getValue();
-                });
+                NamedEntity.class, NamedEntity::getValue);
         System.out.printf("Actual samples: %d%n", actual.size());
 
         // Read reference data collect labels
         ConfigurationParameterFactory.setParameter(testReader,
                 Conll2002Reader.PARAM_READ_NAMED_ENTITY, true);
-        List<Span<String>> expected = EvalUtil.loadSamples(testReader, NamedEntity.class, ne -> {
-            return ne.getValue();
-        });
+        List<Span<String>> expected = EvalUtil.loadSamples(testReader, NamedEntity.class, NamedEntity::getValue);
         System.out.printf("Expected samples: %d%n", expected.size());
 
         Result results = EvalUtil.dumpResults(targetFolder, expected, actual);
@@ -128,9 +124,9 @@ public class StanfordNamedEntityRecognizerTrainerTest
         // Recall      0.632405
         
         // 
-        assertEquals(0.497034, results.getFscore(), 0.0001);
-        assertEquals(0.638395, results.getPrecision(), 0.0001);
-        assertEquals(0.406928, results.getRecall(), 0.0001);
+        assertEquals(0.493260, results.getFscore(), 0.0001);
+        assertEquals(0.621921, results.getPrecision(), 0.0001);
+        assertEquals(0.408708, results.getRecall(), 0.0001);
     }
 
     @Before
