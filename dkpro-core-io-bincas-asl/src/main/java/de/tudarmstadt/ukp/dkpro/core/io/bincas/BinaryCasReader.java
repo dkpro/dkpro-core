@@ -31,13 +31,23 @@ import java.util.Collection;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.SerialFormat;
+import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.cas.impl.CASImpl;
 import org.apache.uima.cas.impl.CASMgrSerializer;
+import org.apache.uima.cas.impl.Serialization;
 import org.apache.uima.cas.impl.TypeSystemImpl;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
+import org.apache.uima.resource.metadata.FsIndexDescription;
+import org.apache.uima.resource.metadata.TypePriorities;
+import org.apache.uima.resource.metadata.TypeSystemDescription;
+import org.apache.uima.util.CasCreationUtils;
 import org.apache.uima.util.CasIOUtils;
+import org.apache.uima.util.CasLoadMode;
+import org.apache.uima.util.TypeSystemUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
@@ -66,7 +76,16 @@ public class BinaryCasReader
     public void getNext(CAS aCAS)
         throws IOException, CollectionException
     {
+        // Get type system description of the current CAS
+        TypeSystemDescription tsd1 = 
+        		TypeSystemUtil.typeSystem2TypeSystemDescription(aCAS.getTypeSystem());
+    	
         Resource res = nextFile();
+        
+        // Get type system from input file
+        TypeSystemDescription tsd2;
+        TypeSystemImpl xts = null;
+        byte[] header = new byte[DKPRO_HEADER.length];
         try (InputStream is = CompressionUtils.getInputStream(res.getLocation(),
                 res.getInputStream())) {
             BufferedInputStream bis = new BufferedInputStream(is);
@@ -76,14 +95,12 @@ public class BinaryCasReader
             // Prepare for format detection
             bis.mark(32);
             DataInputStream dis = new DataInputStream(bis);
-            byte[] header = new byte[DKPRO_HEADER.length];
             dis.read(header);
             
             // Use externalized type system
-            TypeSystemImpl ts = null;
             if (typeSystemLocation != null) {
                 // Otherwise try reading an externalized type system
-                ts = readTypeSystem();
+                xts = readTypeSystem();
                 
                 // If we encounter a Java-serialized file with an external TSI, then we
                 // reinitalize the CAS with the external TSI prior to loading the data
@@ -93,35 +110,60 @@ public class BinaryCasReader
                 }
             }
             
-            // BEGIN -- Legacy DKPro file format support
-            // Check if this is original UIMA CAS format or DKPro Core format
-            if (Arrays.equals(header, DKPRO_HEADER)) {
-                // If it is DKPro Core format, read the type system
-                getLogger().debug("Found DKPro-Core-style embedded type system");
-                ObjectInputStream ois = new ObjectInputStream(bis);
-                CASMgrSerializer casMgr = (CASMgrSerializer) ois.readObject();
-                if (ts == null) {
-                    ts = casMgr.getTypeSystem();
-                    ts.commit();
-                }
-            }
-            else {
-                // No embedded TS, reset 
-                bis.reset();
-            }
-            // END -- Legacy DKPro file format support
+            xts = readDKProHeader(bis, header, xts);
             
-            SerialFormat format;
-            if (ts != null) {
-                format = CasIOUtils.load(bis, aCAS, ts);
+            if (xts != null) {
+            	tsd2 = TypeSystemUtil.typeSystem2TypeSystemDescription(xts);
             }
             else {
-                format = CasIOUtils.load(bis, aCAS);
+                CasIOUtils.load(bis, null, aCAS, CasLoadMode.DEFAULT);
+                tsd2 = TypeSystemUtil.typeSystem2TypeSystemDescription(aCAS.getTypeSystem());
             }
-            getLogger().debug("Found format " + format);
-        }            
-        catch (ClassNotFoundException e) {
-            throw new IOException(e);
+        }
+        
+        try {
+	        // Merge the two typesystems
+	        TypeSystemDescription mergedTypeSystem = 
+	        		CasCreationUtils.mergeTypeSystems(Arrays.asList(tsd1, tsd2));
+	
+	        // Create a new CAS based on the merged type system
+	        JCas mergedTypeSystemCas = 
+	        		CasCreationUtils.createCas(mergedTypeSystem, 
+	        								   (TypePriorities) null, 
+	        								   (FsIndexDescription[]) null)
+	        						.getJCas();
+	
+	        // Create a holder for the CAS metadata
+	        CASMgrSerializer casMgrSerializer = 
+	        		Serialization.serializeCASMgr((mergedTypeSystemCas).getCasImpl());
+	        
+	        // Reinitialize CAS with new type system
+	       ((CASImpl)aCAS).setupCasFromCasMgrSerializer(casMgrSerializer);
+	        
+	        // Read file again, this time into a CAS which has been prepared with the merged TS
+	        try (InputStream is = CompressionUtils.getInputStream(res.getLocation(),
+	                res.getInputStream())) {
+	        	
+	        	BufferedInputStream bis = new BufferedInputStream(is);
+	            bis.mark(32);
+	        	DataInputStream dis = new DataInputStream(bis);
+	            dis.read(header);
+	        	xts = readDKProHeader(bis, header, xts);
+	        	
+	            SerialFormat format;
+		        if (xts != null) {
+		        	format = CasIOUtils.load(bis, aCAS, xts);
+	            }
+	            else {
+	            	format = CasIOUtils.load(bis, aCAS);
+	            }
+	            getLogger().debug("Found format " + format);
+	        } catch (IOException e) {
+	            throw new CollectionException(e);
+			}
+        }
+        catch (CASException | ResourceInitializationException e) {
+            throw new CollectionException(e);
         }
         
         // Initialize the JCas sub-system which is the most often used API in DKPro Core components
@@ -131,6 +173,36 @@ public class BinaryCasReader
         catch (CASException e) {
             throw new CollectionException(e);
         }
+    }
+    
+    private TypeSystemImpl readDKProHeader (BufferedInputStream bis, byte[] header, TypeSystemImpl ts) {
+    	// Check if this is original UIMA CAS format or DKPro Core format
+        if (Arrays.equals(header, DKPRO_HEADER)) {
+            // If it is DKPro Core format, read the type system
+            getLogger().debug("Found DKPro-Core-style embedded type system");
+            ObjectInputStream ois;
+			try {
+				ois = new ObjectInputStream(bis);
+				CASMgrSerializer casMgr = (CASMgrSerializer) ois.readObject();
+				if (ts == null) {
+	                ts = casMgr.getTypeSystem();
+	                ts.commit();
+	            }
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+        }
+        else {
+            // No embedded TS, reset 
+            try {
+				bis.reset();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+        }
+        return ts;
     }
     
     /**
