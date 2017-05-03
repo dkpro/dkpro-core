@@ -90,7 +90,8 @@ public class BinaryCasWriterReaderTest
         throws Exception
     {
         write(testFolder.getPath(), SerialFormat.SERIALIZED.toString(), true);
-        read(testFolder.getPath(), NONE, true); // Type system is reinitialized from the persisted type system
+        read(testFolder.getPath(), NONE, true, false); // Type system is reinitialized from the persisted type system
+        read(testFolder.getPath(), NONE, true, true);
     }
 
     @Test
@@ -98,7 +99,8 @@ public class BinaryCasWriterReaderTest
         throws Exception
     {
         write("jar:file:" + testFolder.getPath() + "/archive.zip", "S", true);
-        read("jar:file:" + testFolder.getPath() + "/archive.zip", NONE, true); // Type system is reinitialized from the persisted type system
+        read("jar:file:" + testFolder.getPath() + "/archive.zip", NONE, true, false); // Type system is reinitialized from the persisted type system
+        read("jar:file:" + testFolder.getPath() + "/archive.zip", NONE, true, true);
     }
 
     @Test
@@ -106,7 +108,8 @@ public class BinaryCasWriterReaderTest
         throws Exception
     {
         write(testFolder.getPath(), "S", false);
-        read(testFolder.getPath(), ALL, false);
+        read(testFolder.getPath(), ALL, false, false);
+        read(testFolder.getPath(), ALL, false, true);
     }
 
     @Test
@@ -114,7 +117,8 @@ public class BinaryCasWriterReaderTest
         throws Exception
     {
         write(testFolder.getPath(), "S+", false);
-        read(testFolder.getPath(), NONE, false); // Type system is reinitialized from the persisted CAS
+        read(testFolder.getPath(), NONE, false, false); // Type system is reinitialized from the persisted CAS
+        read(testFolder.getPath(), NONE, false, true);
     }
 
     @Test
@@ -122,7 +126,8 @@ public class BinaryCasWriterReaderTest
         throws Exception
     {
         write(testFolder.getPath(), SerialFormat.BINARY.toString(), false);
-        read(testFolder.getPath(), ALL, false);
+        read(testFolder.getPath(), ALL, false, false);
+        read(testFolder.getPath(), ALL, false, true);    
     }
 
     @Test
@@ -130,7 +135,8 @@ public class BinaryCasWriterReaderTest
         throws Exception
     {
         write(testFolder.getPath(), "4", false);
-        read(testFolder.getPath(), ALL, false);
+        read(testFolder.getPath(), ALL, false, false);
+        read(testFolder.getPath(), ALL, false, true);
     }
     
     /**
@@ -142,7 +148,8 @@ public class BinaryCasWriterReaderTest
         throws Exception
     {
         write(testFolder.getPath(), SerialFormat.COMPRESSED_FILTERED.toString(), true);
-        read(testFolder.getPath(), METADATA, true);
+        read(testFolder.getPath(), METADATA, true, false);
+        read(testFolder.getPath(), METADATA, true, true);
     }
 
     @Test
@@ -150,7 +157,8 @@ public class BinaryCasWriterReaderTest
         throws Exception
     {
         write(testFolder.getPath(), "6", false);
-        read(testFolder.getPath(), ALL, false);
+        read(testFolder.getPath(), ALL, false, false);
+        read(testFolder.getPath(), ALL, false, true);
     }
 
     @Test
@@ -158,7 +166,8 @@ public class BinaryCasWriterReaderTest
         throws Exception
     {
         write(testFolder.getPath(), SerialFormat.COMPRESSED_FILTERED_TSI.toString(), false);
-        read(testFolder.getPath(), ALL, false);
+        read(testFolder.getPath(), ALL, false, false);
+        read(testFolder.getPath(), ALL, false, true);
     }
 
     @Test
@@ -166,7 +175,8 @@ public class BinaryCasWriterReaderTest
         throws Exception
     {
         write(testFolder.getPath(), SerialFormat.COMPRESSED_FILTERED_TSI.toString(), false);
-        read(testFolder.getPath(), METADATA, false);
+    	read(testFolder.getPath(), METADATA, false, false);
+    	read(testFolder.getPath(), METADATA, false, true);
     }
 
     @Test
@@ -174,7 +184,8 @@ public class BinaryCasWriterReaderTest
         throws Exception
     {
         write(testFolder.getPath(), "6+", false);
-        read(testFolder.getPath(), ALL, false);
+        read(testFolder.getPath(), ALL, false, false);
+        read(testFolder.getPath(), ALL, false, true);
     }
 
     @Test
@@ -182,7 +193,8 @@ public class BinaryCasWriterReaderTest
         throws Exception
     {
         write(testFolder.getPath(), "6+", false);
-        read(testFolder.getPath(), METADATA, false);
+        read(testFolder.getPath(), METADATA, false, false);
+        read(testFolder.getPath(), METADATA, false, true);
     }
 
     @Test
@@ -190,7 +202,8 @@ public class BinaryCasWriterReaderTest
         throws Exception
     {
         writeSerialized(testFolder.getPath(), false);
-        read(testFolder.getPath(), NONE, false); // Type system is reinitialized from the persisted CAS
+        read(testFolder.getPath(), NONE, false, false); // Type system is reinitialized from the persisted CAS
+        read(testFolder.getPath(), NONE, false, true); 
     }
 
     @Test
@@ -198,7 +211,8 @@ public class BinaryCasWriterReaderTest
         throws Exception
     {
         writeSerialized(testFolder.getPath(), true);
-        read(testFolder.getPath(), NONE, true); // Type system is reinitialized from the persisted CAS
+        read(testFolder.getPath(), NONE, true, false); // Type system is reinitialized from the persisted CAS
+        read(testFolder.getPath(), NONE, true, true);
     }
 
     @Test
@@ -312,7 +326,7 @@ public class BinaryCasWriterReaderTest
         assertTrue(new File(testFolder, "example1.txt.bin").exists());
     }
 
-    public void read(String aLocation, int aMode, boolean aLoadExternal)
+    public void read(String aLocation, int aMode, boolean aLoadExternal, boolean aMergeTS)
         throws Exception
     {
         TypeSystemDescription tsd;
@@ -346,6 +360,7 @@ public class BinaryCasWriterReaderTest
                     BinaryCasReader.class,
                     BinaryCasReader.PARAM_SOURCE_LOCATION, aLocation,
                     BinaryCasReader.PARAM_PATTERNS, "*.bin",
+                    BinaryCasReader.PARAM_MERGE_TYPE_SYSTEM, aMergeTS,
                     // Allow loading only if TSD is not specified
                     BinaryCasReader.PARAM_TYPE_SYSTEM_LOCATION, 
                             aLoadExternal ? "typesystem.bin" : null);
@@ -353,6 +368,7 @@ public class BinaryCasWriterReaderTest
 
         // Test reading into CAS
         CAS cas = CasCreationUtils.createCas(tsd, null, null);
+        reader.typeSystemInit(cas.getTypeSystem());
         reader.getNext(cas);
         String refText1 = readFileToString(new File("src/test/resources/texts/example1.txt"));
         assertEquals(refText1, cas.getDocumentText());
