@@ -27,18 +27,16 @@ public class LxfAnnotatedObject
     extends LxfObject
 {
     private int rank;
-    private String annotationClass;
+    private String type;
     
-    @JsonProperty(value="annotation_class")
-    public String getAnnotationClass()
+    public String getType()
     {
-        return annotationClass;
+        return type;
     }
 
-    @JsonProperty(value="annotation_class")
-    public void setAnnotationClass(String annotationClass)
+    public void setType(String type)
     {
-        this.annotationClass = annotationClass;
+        this.type = type;
     }
 
     private Map<String, String> annotations;
@@ -46,7 +44,7 @@ public class LxfAnnotatedObject
     @JsonIgnore
     public String getLayer()
     {
-        return annotationClass;
+        return type;
     }
    
     

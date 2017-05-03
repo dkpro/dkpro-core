@@ -54,7 +54,6 @@ public class UDPipeParserTest
         // AssertAnnotations.assertTagsetMapping(Dependency.class, "universal", unmappedDep, jcas);
     }
 
-    @Test
     public void testEnglish()
         throws Exception
     {

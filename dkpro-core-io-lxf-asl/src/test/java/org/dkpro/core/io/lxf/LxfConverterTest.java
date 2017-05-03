@@ -155,7 +155,7 @@ public class LxfConverterTest
             assertEquals(0, outLxf.getRegions().size());
         }
         else {
-            DKPro2Lxf.convert(jcas, null, outLxf, ids);
+            DKPro2Lxf.convert(jcas, null, outLxf, ids,"dkpro");
             assertEquals(inLxf.getMedia().getData(), outLxf.getMedia().getData());
             assertEquals(ids(inLxf.getNodes()), ids(outLxf.getNodes()));
             assertEquals(ids(inLxf.getEdges()), ids(outLxf.getEdges()));

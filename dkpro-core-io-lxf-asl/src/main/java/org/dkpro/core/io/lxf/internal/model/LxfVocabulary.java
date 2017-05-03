@@ -20,9 +20,9 @@ package org.dkpro.core.io.lxf.internal.model;
 public class LxfVocabulary
 {
     // Object types
-    public static final String TYPE_NODE = "node";
-    public static final String TYPE_EDGE = "edge";
-    public static final String TYPE_REGION = "region";
+    public static final String ENTITY_NODE = "node";
+    public static final String ENTITY_EDGE = "edge";
+    public static final String ENTITY_REGION = "region";
     public static final String TYPE_TEXT = "text";
     
     // Tool types
