@@ -5,36 +5,36 @@
   },
   "edges" : [ ],
   "nodes" : [ {
-    "type" : "node",
+    "entity" : "node",
     "origin" : "dkpro",
     "id" : "dkpro-n1@1",
     "index" : 0,
     "rank" : 0,
+    "type" : "sentence",
     "annotations" : {
       "label" : "This is a test."
     },
-    "links" : [ [ [ "dkpro", "dkpro-r1@1" ] ] ],
-    "annotation_class" : "sentence"
+    "links" : [ [ [ "dkpro", "dkpro-r1@1" ] ] ]
   }, {
-    "type" : "node",
+    "entity" : "node",
     "origin" : "dkpro",
     "id" : "dkpro-n2@1",
     "index" : 1,
     "rank" : 0,
+    "type" : "sentence",
     "annotations" : {
       "label" : "And here is another one."
     },
-    "links" : [ [ [ "dkpro", "dkpro-r2@1" ] ] ],
-    "annotation_class" : "sentence"
+    "links" : [ [ [ "dkpro", "dkpro-r2@1" ] ] ]
   } ],
   "regions" : [ {
-    "type" : "region",
+    "entity" : "region",
     "origin" : "dkpro",
     "id" : "dkpro-r1@1",
     "index" : 0,
     "anchors" : [ 0, 15 ]
   }, {
-    "type" : "region",
+    "entity" : "region",
     "origin" : "dkpro",
     "id" : "dkpro-r2@1",
     "index" : 1,

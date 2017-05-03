@@ -18,6 +18,7 @@
 package org.dkpro.core.udpipe;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
