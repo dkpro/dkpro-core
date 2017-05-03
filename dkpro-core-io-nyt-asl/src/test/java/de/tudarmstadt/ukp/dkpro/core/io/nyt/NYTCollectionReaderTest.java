@@ -22,7 +22,7 @@ public class NYTCollectionReaderTest {
 	@Test
 	public void test() {
 		
-		final String DATA_PATH = "[...]/nyt_corpus/data";
+		final String DATA_PATH = "src/test/resources/data";
 		
 		try {
 
@@ -44,7 +44,6 @@ public class NYTCollectionReaderTest {
 			e.printStackTrace();
 			fail();
 		} catch (UIMAException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			fail();
 		}
