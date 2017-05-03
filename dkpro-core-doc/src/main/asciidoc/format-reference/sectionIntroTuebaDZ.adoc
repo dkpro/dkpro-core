@@ -1,0 +1,36 @@
+The TüBa-D/Z treebank is a syntactically annotated German newspaper corpus based on data taken from 
+the daily issues of 'die tageszeitung' (taz). 
+
+Sentences have a header line and are followed by a blank new line.
+
+.Columns
+[cols="1,2,3", options="header"]
+|====
+| Column  | Type/Feature | Description
+
+| FORM    
+| Token 
+| Word form or punctuation symbol.
+
+| POSTAG  
+| POS PosValue 
+| Fine-grained part-of-speech tag, where the tagset depends on the language.
+
+| CHUNK
+| Chunk
+| chunk (BIO encoded) - For named entities, it can also include its type, e.g., B-NX=ORG
+|====
+ 
+.Example
+[source,text]
+----
+%% sent no. 1
+Veruntreute  VVFIN   B-VXFIN
+die          ART     B-NX=ORG
+AWO          NN      I-NX=ORG
+Spendengeld  NN      B-NX
+?   $.  O
+----
+
+.Known corpora in this format
+* link:http://www.sfs.uni-tuebingen.de/en/ascl/resources/corpora/tueba-dz.html[TüBa-D/Z] - German

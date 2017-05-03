@@ -48,6 +48,7 @@ public final class MimeTypes
     public final static String APPLICATION_X_TIGER_XML = "application/x.org.dkpro.tiger+xml";
     public final static String APPLICATION_X_SEMEVAL_2010_XML = "application/x.org.dkpro.semeval-2010+xml";
     public final static String APPLICATION_X_TUEPP_XML = "application/x.org.dkpro.tuepp+xml";
+    public final static String APPLICATION_X_TUEBADZ_CHUNK = "application/x.org.dkpro.tuebadz-chunk";
     
     // Standard text types (http://www.iana.org/assignments/media-types/media-types.xhtml)
     public final static String TEXT_CSV = "text/csv";
