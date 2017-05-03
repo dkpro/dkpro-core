@@ -1,5 +1,5 @@
 /*
-* Copyright 2013
+ * Copyright 2013
  * Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
  * Technische Universität Darmstadt
  *
@@ -32,6 +32,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.util.JCasUtil;
@@ -42,6 +43,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.IobDecoder;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -51,26 +53,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 /**
  * Reads the Tüba-D/Z chunking format.
  * 
- * <pre>
- * %% sent no. 1
- * Veruntreute	VVFIN   B-VXFIN
- * die			ART 	B-NX=ORG
- * AWO 			NN  	I-NX=ORG
- * Spendengeld 	NN  	B-NX
- * ?   $.  O
- * </pre>
- * 
- * <ol>
- * <li>FORM - token</li>
- * <li>POSTAG - part-of-speech tag</li>
- * <li>CHUNK - chunk (BIO encoded) - For named entities, it can also include its type, e.g., B-NX=ORG</li>
- * </ol>
- * 
- * Sentences have a header line and are followed by a blank new line.
- * 
- * @see <a href="http://www.sfs.uni-tuebingen.de/en/ascl/resources/corpora/tueba-dz.html">TüBA-D/Z Web page</a>
+ * @see <a href="http://www.sfs.uni-tuebingen.de/en/ascl/resources/corpora/tueba-dz.html">TüBA-D/Z
+ *      Web page</a>
  */
-@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+@MimeTypeCapability({MimeTypes.APPLICATION_X_TUEBADZ_CHUNK})
+@TypeCapability(outputs = { 
+        "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
         "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk"})

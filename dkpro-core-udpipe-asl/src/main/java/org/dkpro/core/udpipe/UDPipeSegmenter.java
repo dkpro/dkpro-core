@@ -105,24 +105,53 @@ public class UDPipeSegmenter
         throws AnalysisEngineProcessException
     {
         modelProvider.configure(aJCas.getCas());
-
         super.process(aJCas);
     }
 
     @Override
     protected void process(JCas aJCas, String aText, int aZoneBegin)
         throws AnalysisEngineProcessException
-    {
+    {           
         InputFormat inputFormat = modelProvider.getResource().newTokenizer(Model.getDEFAULT());
         inputFormat.setText(aJCas.getDocumentText());
 
         cz.cuni.mff.ufal.udpipe.Sentence sentence = new cz.cuni.mff.ufal.udpipe.Sentence();
+        
+        int fromSentence = 0;
+        
+        String text=aJCas.getDocumentText();
+        
         while (inputFormat.nextSentence(sentence)) {
+            
             Words words = sentence.getWords();
-            for (int i = 0; i < words.size(); i++) {
+            int pos = fromSentence;
+            int sStart =  text.indexOf(words.get(1).getForm(),pos);
+            if (sStart == -1)
+                throw new IllegalStateException("Can not find the sentence  starting with word [" + words.get(1).getForm() + "] in text [" + text.substring(fromSentence)
+                + "]");
+            
+            for (int i = 1; i < words.size(); i++) {
                 Word w = words.get(i);
-                // PROBLEM: words do not contain character offsets!
+                pos = text.indexOf(w.getForm(),pos);
+                if (pos == -1) {
+                    throw new IllegalStateException("Token [" + w.getForm() + "] not found in sentence [" + text.substring(fromSentence)
+                            + "]");
+                }
+                int tStart = pos;
+                int tEnd = pos + w.getForm().length();
+                pos = tEnd;
+                tStart += aZoneBegin;
+                tEnd += aZoneBegin;
+                createToken(aJCas, tStart, tEnd);
             }
+            
+            int sEnd = pos;
+            fromSentence = sEnd;
+            sStart += aZoneBegin;
+            sEnd += aZoneBegin;
+            
+            createSentence(aJCas, sStart, sEnd);            
+            sentence = new cz.cuni.mff.ufal.udpipe.Sentence();
         }
     }
 }

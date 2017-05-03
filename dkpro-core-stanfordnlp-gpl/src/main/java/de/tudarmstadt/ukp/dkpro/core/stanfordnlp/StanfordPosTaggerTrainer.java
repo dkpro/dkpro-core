@@ -44,6 +44,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
@@ -88,11 +89,11 @@ public class StanfordPosTaggerTrainer
         try {
             String p = clusterFile.getAbsolutePath();
             if (p.contains("(") || p.contains(")") || p.contains(",")) {
-                // The Stanford POS tagger trainer does not suppor these characters in the cluster
+                // The Stanford POS tagger trainer does not support these characters in the cluster
                 // files path. If we have those, try to copy the clusters somewhere save before
                 // training. See: https://github.com/stanfordnlp/CoreNLP/issues/255
-                File tempClusterFile = File.createTempFile("dkpro-stanford-pos-trainer",
-                        ".cluster");
+                
+                File tempClusterFile = ResourceUtils.getUrlAsFile(clusterFile.toURI().toURL(), true);
                 FileUtils.copyFile(clusterFile, tempClusterFile);
                 clusterFile = tempClusterFile;
                 clusterFilesTemporary = true;
