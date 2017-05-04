@@ -57,83 +57,86 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
  * UIMA Binary CAS formats reader.
  */
 @MimeTypeCapability({ MimeTypes.APPLICATION_X_UIMA_BINARY })
-public class BinaryCasReader extends ResourceCollectionReaderBase {
-	private static final byte[] DKPRO_HEADER = new byte[] { 'D', 'K', 'P', 'r', 'o', '1' };
-
-	/**
-	 * The location from which to obtain the type system when the CAS is stored
-	 * in form 0.
-	 */
-	public static final String PARAM_TYPE_SYSTEM_LOCATION = "typeSystemLocation";
-	@ConfigurationParameter(name = PARAM_TYPE_SYSTEM_LOCATION, mandatory = false)
-	private String typeSystemLocation;
-
+public class BinaryCasReader
+    extends ResourceCollectionReaderBase
+{
+    private static final byte[] DKPRO_HEADER = new byte[] { 'D', 'K', 'P', 'r', 'o', '1' };
+    
+    /**
+     * The location from which to obtain the type system when the CAS is stored in form 0.
+     */
+    public static final String PARAM_TYPE_SYSTEM_LOCATION = "typeSystemLocation";
+    @ConfigurationParameter(name=PARAM_TYPE_SYSTEM_LOCATION, mandatory=false)
+    private String typeSystemLocation;
+    
 	public static final String PARAM_MERGE_TYPE_SYSTEM = "mergeTypeSystem";
 	@ConfigurationParameter(name = PARAM_MERGE_TYPE_SYSTEM, mandatory = true, defaultValue = "false")
 	private boolean mergeTypeSystem;
 
-	private CASMgrSerializer casMgrSerializer;
-	private TypeSystemImpl typeSystem;
-
-	@Override
-	public void getNext(CAS aCAS) throws IOException, CollectionException {
-		Resource res = nextFile();
-		TypeSystemImpl xts = null;
+    private CASMgrSerializer casMgrSerializer;
+    private TypeSystemImpl typeSystem;
+        
+    @Override
+    public void getNext(CAS aCAS)
+        throws IOException, CollectionException
+    {
+        Resource res = nextFile();
+    	TypeSystemImpl xts = null;
 		byte[] header = new byte[DKPRO_HEADER.length];
 
 		if (this.mergeTypeSystem) {
 			// Get type system from input file
 			TypeSystemDescription tsd2;
 
-			try (InputStream is = CompressionUtils.getInputStream(res.getLocation(),
-					res.getInputStream())) {
-				BufferedInputStream bis = new BufferedInputStream(is);
+        try (InputStream is = CompressionUtils.getInputStream(res.getLocation(),
+                res.getInputStream())) {
+            BufferedInputStream bis = new BufferedInputStream(is);
+            
+            getLogger().debug("Reading CAS from [" + res.getLocation() + "]");
 
-				getLogger().debug("Reading CAS from [" + res.getLocation() + "]");
-
-				// Prepare for format detection
-				bis.mark(32);
-				DataInputStream dis = new DataInputStream(bis);
-				dis.read(header);
-
-				// Use externalized type system
-				if (typeSystemLocation != null) {
-					xts = readTypeSystem(header, aCAS);
-				}
-
-				xts = readDKProHeader(bis, header, xts);
-
-				if (xts != null) {
-					tsd2 = TypeSystemUtil.typeSystem2TypeSystemDescription(xts);
-				} else {
-					CasIOUtils.load(bis, null, aCAS, CasLoadMode.REINIT);
-					tsd2 = TypeSystemUtil.typeSystem2TypeSystemDescription(aCAS.getTypeSystem());
-				}
+            // Prepare for format detection
+            bis.mark(32);
+            DataInputStream dis = new DataInputStream(bis);
+            dis.read(header);
+            
+            // Use externalized type system
+            if (typeSystemLocation != null) {
+                // Otherwise try reading an externalized type system
+            	xts = readTypeSystem(header, aCAS);
+            }
+            
+            xts = readDKProHeader(bis, header, xts);
+            
+            if (xts != null) {
+				tsd2 = TypeSystemUtil.typeSystem2TypeSystemDescription(xts);
+			} else {
+				CasIOUtils.load(bis, null, aCAS, CasLoadMode.REINIT);
+				tsd2 = TypeSystemUtil.typeSystem2TypeSystemDescription(aCAS.getTypeSystem());
 			}
-
-			try {
+        }
+        
+	        try {
 				// Merge the two typesystems
 				TypeSystemDescription mergedTypeSystem = CasCreationUtils.mergeTypeSystems(Arrays
 						.asList(TypeSystemUtil.typeSystem2TypeSystemDescription(typeSystem), tsd2));
-
+	
 				// Create a new CAS based on the merged type system
 				JCas mergedTypeSystemCas = CasCreationUtils.createCas(mergedTypeSystem,
 						(TypePriorities) null, (FsIndexDescription[]) null).getJCas();
-
+	
 				// Create a holder for the CAS metadata
 				CASMgrSerializer casMgrSerializer = Serialization
 						.serializeCASMgr((mergedTypeSystemCas).getCasImpl());
-
+	
 				// Reinitialize CAS with new type system
 				((CASImpl) aCAS).setupCasFromCasMgrSerializer(casMgrSerializer);
-
+	
 			} catch (CASException | ResourceInitializationException e) {
 				throw new CollectionException(e);
 			}
 		}
-
-		// Read file again, this time into a CAS which has been prepared with
-		// the merged TS
+		
+		// Read file again, this time into a CAS which has been prepared with the merged TS
 		try (InputStream is = CompressionUtils.getInputStream(res.getLocation(),
 				res.getInputStream())) {
 			BufferedInputStream bis = new BufferedInputStream(is);
@@ -158,98 +161,99 @@ public class BinaryCasReader extends ResourceCollectionReaderBase {
 		} catch (IOException e) {
 			throw new CollectionException(e);
 		}
-
-		// Initialize the JCas sub-system which is the most often used API in
-		// DKPro Core components
-		try {
-			aCAS.getJCas();
-		} catch (CASException e) {
-			throw new CollectionException(e);
-		}
-	}
-
-	// Legacy DKPro file format support
-	private TypeSystemImpl readDKProHeader(BufferedInputStream bis, byte[] header,
-			TypeSystemImpl ts) {
-		// Check if this is original UIMA CAS format or DKPro Core format
-		if (Arrays.equals(header, DKPRO_HEADER)) {
-			// If it is DKPro Core format, read the type system
-			getLogger().debug("Found DKPro-Core-style embedded type system");
-			ObjectInputStream ois;
-			try {
-				ois = new ObjectInputStream(bis);
-				CASMgrSerializer casMgr = (CASMgrSerializer) ois.readObject();
-				if (ts == null) {
-					ts = casMgr.getTypeSystem();
-					ts.commit();
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-		} else {
-			// No embedded DKPro TS, reset
-			try {
-				bis.reset();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return ts;
-	}
-
+						
+        // Initialize the JCas sub-system which is the most often used API in DKPro Core components
+        try {
+            aCAS.getJCas();
+        }
+        catch (CASException e) {
+            throw new CollectionException(e);
+        }
+    }
+    
+    // Legacy DKPro file format support
+ 	private TypeSystemImpl readDKProHeader(BufferedInputStream bis, byte[] header,
+ 			TypeSystemImpl ts) {
+ 		// Check if this is original UIMA CAS format or DKPro Core format
+ 		if (Arrays.equals(header, DKPRO_HEADER)) {
+ 			// If it is DKPro Core format, read the type system
+ 			getLogger().debug("Found DKPro-Core-style embedded type system");
+ 			ObjectInputStream ois;
+ 			try {
+ 				ois = new ObjectInputStream(bis);
+ 				CASMgrSerializer casMgr = (CASMgrSerializer) ois.readObject();
+ 				if (ts == null) {
+ 					ts = casMgr.getTypeSystem();
+ 					ts.commit();
+ 				}
+ 			} catch (IOException e) {
+ 				e.printStackTrace();
+ 			} catch (ClassNotFoundException e) {
+ 				e.printStackTrace();
+ 			}
+ 		} else {
+ 			// No embedded DKPro TS, reset
+ 			try {
+ 				bis.reset();
+ 			} catch (IOException e) {
+ 				e.printStackTrace();
+ 			}
+ 		}
+ 		return ts;
+ 	}
+ 	
 	@Override
 	public void typeSystemInit(TypeSystem aTypeSystem) throws ResourceInitializationException {
 		if (typeSystemLocation == null) {
 		typeSystem = (TypeSystemImpl) aTypeSystem;
 		}
 	}
+ 	
+    /**
+     * It is possible that the type system overlaps with the scan pattern for files, e.g. because
+     * the type system ends in {@code .ser} and the resources also end in {@code .ser}. If this is
+     * the case, we filter the type system file from the resource files during scanning.
+     */
+    @Override
+    protected Collection<Resource> scan(String aBase, Collection<String> aIncludes,
+            Collection<String> aExcludes)
+        throws IOException
+    {
+        Collection<Resource> resources = super.scan(aBase, aIncludes, aExcludes);
+        if (typeSystemLocation != null) {
+            org.springframework.core.io.Resource r = getTypeSystemResource();
+            resources.remove(new Resource(null, null, r.getURI(), null, null, r));
+        }
+        return resources;
+    }
+    
+    protected org.springframework.core.io.Resource getTypeSystemResource() throws MalformedURLException
+    {
+        org.springframework.core.io.Resource r;
+        // Is absolute?
+        if (typeSystemLocation.indexOf(':') != -1 || typeSystemLocation.startsWith("/")
+                || typeSystemLocation.startsWith(File.separator)) {
+            // If the type system location is absolute, resolve it absolute
+            r = getResolver().getResource(locationToUrl(typeSystemLocation));
+        }
+        else {
+            // If the type system is not absolute, resolve it relative to the base location
+            r = getResolver().getResource(getBase() + typeSystemLocation);
+        }
+        return r;
+    }
+    
+    private TypeSystemImpl readTypeSystem(byte[] header, CAS aCAS) throws IOException {
+        if (typeSystemLocation == null) {
+            return null;
+        }
+        
+        if (typeSystem == null) {
+            CASMgrSerializer casMgr = readCasManager();
+            typeSystem = casMgr.getTypeSystem();
+            typeSystem.commit();
+        }
 
-	/**
-	 * It is possible that the type system overlaps with the scan pattern for
-	 * files, e.g. because the type system ends in {@code .ser} and the
-	 * resources also end in {@code .ser}. If this is the case, we filter the
-	 * type system file from the resource files during scanning.
-	 */
-	@Override
-	protected Collection<Resource> scan(String aBase, Collection<String> aIncludes,
-			Collection<String> aExcludes) throws IOException {
-		Collection<Resource> resources = super.scan(aBase, aIncludes, aExcludes);
-		if (typeSystemLocation != null) {
-			org.springframework.core.io.Resource r = getTypeSystemResource();
-			resources.remove(new Resource(null, null, r.getURI(), null, null, r));
-		}
-		return resources;
-	}
-
-	protected org.springframework.core.io.Resource getTypeSystemResource()
-			throws MalformedURLException {
-		org.springframework.core.io.Resource r;
-		// Is absolute?
-		if (typeSystemLocation.indexOf(':') != -1 || typeSystemLocation.startsWith("/")
-				|| typeSystemLocation.startsWith(File.separator)) {
-			// If the type system location is absolute, resolve it absolute
-			r = getResolver().getResource(locationToUrl(typeSystemLocation));
-		} else {
-			// If the type system is not absolute, resolve it relative to the
-			// base location
-			r = getResolver().getResource(getBase() + typeSystemLocation);
-		}
-		return r;
-	}
-
-	private TypeSystemImpl readTypeSystem(byte[] header, CAS aCAS ) throws IOException {
-		if (typeSystemLocation == null) {
-			return null;
-		}
-
-		if (typeSystem == null) {
-			CASMgrSerializer casMgr = readCasManager();
-			typeSystem = casMgr.getTypeSystem();
-			typeSystem.commit();
-		}
-		
 		// If we encounter a Java-serialized file with an external
 		// TSI, then we reinitalize the CAS with the external TSI
 		// prior to loading the data
@@ -257,34 +261,39 @@ public class BinaryCasReader extends ResourceCollectionReaderBase {
 			CASMgrSerializer casMgr = readCasManager();
 			((CASImpl) aCAS).setupCasFromCasMgrSerializer(casMgr);
 		}
+        
+        return typeSystem;
+    }
+    
+    
+    private CASMgrSerializer readCasManager() throws IOException
+    {
+        if (typeSystemLocation == null) {
+            return null;
+        }
+        
+        // If we already read the type system, return it - do not read it again.
+        if (casMgrSerializer != null) {
+            return casMgrSerializer;
+        }
+        
+        org.springframework.core.io.Resource r = getTypeSystemResource();
+        getLogger().debug("Reading type system from [" + r.getURI() + "]");
 
-		return typeSystem;
-	}
-
-	private CASMgrSerializer readCasManager() throws IOException {
-		if (typeSystemLocation == null) {
-			return null;
-		}
-
-		// If we already read the type system, return it - do not read it again.
-		if (casMgrSerializer != null) {
-			return casMgrSerializer;
-		}
-
-		org.springframework.core.io.Resource r = getTypeSystemResource();
-		getLogger().debug("Reading type system from [" + r.getURI() + "]");
-
-		ObjectInputStream is = null;
-		try {
-			is = new ObjectInputStream(
-					CompressionUtils.getInputStream(typeSystemLocation, r.getInputStream()));
-			casMgrSerializer = (CASMgrSerializer) is.readObject();
-		} catch (ClassNotFoundException e) {
-			throw new IOException(e);
-		} finally {
-			closeQuietly(is);
-		}
-
-		return casMgrSerializer;
-	}
+        ObjectInputStream is = null;
+        try {
+            is = new ObjectInputStream(CompressionUtils.getInputStream(typeSystemLocation, 
+                    r.getInputStream()));
+            casMgrSerializer = (CASMgrSerializer) is.readObject();
+        }
+        catch (ClassNotFoundException e) {
+            throw new IOException(e);
+        }
+        finally {
+            closeQuietly(is);
+        }
+        
+        
+        return casMgrSerializer;
+    }
 }
