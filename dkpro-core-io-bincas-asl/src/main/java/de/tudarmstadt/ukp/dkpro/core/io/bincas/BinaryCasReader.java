@@ -69,11 +69,16 @@ public class BinaryCasReader
     @ConfigurationParameter(name=PARAM_TYPE_SYSTEM_LOCATION, mandatory=false)
     private String typeSystemLocation;
     
+    /**
+     * Determines whether the type system from a currently read file should be merged 
+     * with the current type system 
+     */
 	public static final String PARAM_MERGE_TYPE_SYSTEM = "mergeTypeSystem";
 	@ConfigurationParameter(name = PARAM_MERGE_TYPE_SYSTEM, mandatory = true, defaultValue = "false")
 	private boolean mergeTypeSystem;
 
     private CASMgrSerializer casMgrSerializer;
+    
     private TypeSystemImpl typeSystem;
         
     @Override
@@ -85,8 +90,8 @@ public class BinaryCasReader
 		byte[] header = new byte[DKPRO_HEADER.length];
 
 		if (this.mergeTypeSystem) {
-			// Get type system from input file
-			TypeSystemDescription tsd2;
+			// type system from input file
+			TypeSystemDescription tsd;
 
         try (InputStream is = CompressionUtils.getInputStream(res.getLocation(),
                 res.getInputStream())) {
@@ -99,26 +104,38 @@ public class BinaryCasReader
             DataInputStream dis = new DataInputStream(bis);
             dis.read(header);
             
-            // Use externalized type system
-            if (typeSystemLocation != null) {
-                // Otherwise try reading an externalized type system
-            	xts = readTypeSystem(header, aCAS);
-            }
-            
-            xts = readDKProHeader(bis, header, xts);
+ 			// If it is DKPro Core format, read the type system
+            if (Arrays.equals(header, DKPRO_HEADER)) {
+				xts = readDKProHeader(bis, header, xts);
+	 		} else {
+	 			// No embedded DKPro TS, reset
+	 			try {
+	 				bis.reset();
+	 			} catch (IOException e) {
+	 				throw new IOException(e);
+	 			}
+	 			
+	            // Try reading an externalized type system instead
+	            if (typeSystemLocation != null) {
+	            	xts = readTypeSystem();
+	            	initCasFromEmbeddedTS(header, aCAS);
+	            }
+	 		}
             
             if (xts != null) {
-				tsd2 = TypeSystemUtil.typeSystem2TypeSystemDescription(xts);
+            	// use external type system if specified
+				tsd = TypeSystemUtil.typeSystem2TypeSystemDescription(xts);
 			} else {
+				// else load the CAS from the input file and use its type system
 				CasIOUtils.load(bis, null, aCAS, CasLoadMode.REINIT);
-				tsd2 = TypeSystemUtil.typeSystem2TypeSystemDescription(aCAS.getTypeSystem());
+				tsd = TypeSystemUtil.typeSystem2TypeSystemDescription(aCAS.getTypeSystem());
 			}
         }
         
 	        try {
-				// Merge the two typesystems
+				// Merge the current type system with the one specified by the file being read
 				TypeSystemDescription mergedTypeSystem = CasCreationUtils.mergeTypeSystems(Arrays
-						.asList(TypeSystemUtil.typeSystem2TypeSystemDescription(typeSystem), tsd2));
+						.asList(TypeSystemUtil.typeSystem2TypeSystemDescription(typeSystem), tsd));
 	
 				// Create a new CAS based on the merged type system
 				JCas mergedTypeSystemCas = CasCreationUtils.createCas(mergedTypeSystem,
@@ -128,7 +145,7 @@ public class BinaryCasReader
 				CASMgrSerializer casMgrSerializer = Serialization
 						.serializeCASMgr((mergedTypeSystemCas).getCasImpl());
 	
-				// Reinitialize CAS with new type system
+				// Reinitialize CAS with merged type system
 				((CASImpl) aCAS).setupCasFromCasMgrSerializer(casMgrSerializer);
 	
 			} catch (CASException | ResourceInitializationException e) {
@@ -144,12 +161,24 @@ public class BinaryCasReader
 			DataInputStream dis = new DataInputStream(bis);
 			dis.read(header);
 			
-			// Use externalized type system
-			if (typeSystemLocation != null) {
-				xts = readTypeSystem(header,aCAS);				
-			}
-			
-			xts = readDKProHeader(bis, header, xts);
+ 			// If it is DKPro Core format, read the type system
+			if (Arrays.equals(header, DKPRO_HEADER)) {
+				xts = readDKProHeader(bis, header, xts);
+	 		} else {
+	 			// No embedded DKPro TS, reset
+	 			try {
+	 				bis.reset();
+	 			} catch (IOException e) {
+	 				throw new IOException(e);
+	 			}
+	 			
+				// Try reading an externalized type system instead
+				if (typeSystemLocation != null) {
+					xts = readTypeSystem();
+					initCasFromEmbeddedTS(header, aCAS);
+				}
+				
+	 		}
 			
 			SerialFormat format;
 			if (xts != null) {
@@ -171,12 +200,10 @@ public class BinaryCasReader
         }
     }
     
-    // Legacy DKPro file format support
+    // Check whether this is original UIMA CAS format or DKPro Core Legacy format
  	private TypeSystemImpl readDKProHeader(BufferedInputStream bis, byte[] header,
- 			TypeSystemImpl ts) {
- 		// Check if this is original UIMA CAS format or DKPro Core format
- 		if (Arrays.equals(header, DKPRO_HEADER)) {
- 			// If it is DKPro Core format, read the type system
+ 			TypeSystemImpl ts) throws CollectionException {
+
  			getLogger().debug("Found DKPro-Core-style embedded type system");
  			ObjectInputStream ois;
  			try {
@@ -186,19 +213,9 @@ public class BinaryCasReader
  					ts = casMgr.getTypeSystem();
  					ts.commit();
  				}
- 			} catch (IOException e) {
- 				e.printStackTrace();
- 			} catch (ClassNotFoundException e) {
- 				e.printStackTrace();
+ 			} catch (IOException | ClassNotFoundException e) {
+ 				throw new CollectionException(e);
  			}
- 		} else {
- 			// No embedded DKPro TS, reset
- 			try {
- 				bis.reset();
- 			} catch (IOException e) {
- 				e.printStackTrace();
- 			}
- 		}
  		return ts;
  	}
  	
@@ -243,7 +260,7 @@ public class BinaryCasReader
         return r;
     }
     
-    private TypeSystemImpl readTypeSystem(byte[] header, CAS aCAS) throws IOException {
+    private TypeSystemImpl readTypeSystem() throws IOException {
         if (typeSystemLocation == null) {
             return null;
         }
@@ -254,17 +271,18 @@ public class BinaryCasReader
             typeSystem.commit();
         }
 
-		// If we encounter a Java-serialized file with an external
+        return typeSystem;
+    }
+    
+    private void initCasFromEmbeddedTS (byte[] header, CAS aCAS) throws IOException {
+    	// If we encounter a Java-serialized file with an external
 		// TSI, then we reinitalize the CAS with the external TSI
 		// prior to loading the data
 		if (header[0] == (byte) 0xAC && header[1] == (byte) 0xED) {
 			CASMgrSerializer casMgr = readCasManager();
 			((CASImpl) aCAS).setupCasFromCasMgrSerializer(casMgr);
 		}
-        
-        return typeSystem;
     }
-    
     
     private CASMgrSerializer readCasManager() throws IOException
     {
