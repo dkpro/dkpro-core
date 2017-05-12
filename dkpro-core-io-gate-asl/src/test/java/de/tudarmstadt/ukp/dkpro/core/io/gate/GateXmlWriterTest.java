@@ -18,6 +18,8 @@
 package de.tudarmstadt.ukp.dkpro.core.io.gate;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,10 +33,20 @@ public class GateXmlWriterTest
     public void oneWay()
         throws Exception
     {
-        testOneWay(Conll2000Reader.class, GateXmlWriter.class,
-                "conll/2000/chunk2000_ref.xml", "conll/2000/chunk2000_test.conll");
+        testOneWay(Conll2000Reader.class, GateXmlWriter.class, "conll/2000/chunk2000_ref.xml",
+                "conll/2000/chunk2000_test.conll");
     }
 
+    @Test
+    public void oneWayNamedAnnotationSet()
+        throws Exception
+    {
+        testOneWay(createReaderDescription(Conll2000Reader.class),
+                createEngineDescription(GateXmlWriter.class,
+                        GateXmlWriter.PARAM_ANNOTATION_SET_NAME, "mimir"),
+                "conll/2000/chunk2000_ref_named_as.xml", "conll/2000/chunk2000_test.conll");
+    }
+    
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
 }

@@ -52,6 +52,13 @@ public class GateXmlWriter
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xml")
     private String filenameSuffix;
 
+    /**
+     * Annotation set name
+     */
+    public static final String PARAM_ANNOTATION_SET_NAME = "annotationSetName";
+    @ConfigurationParameter(name = PARAM_ANNOTATION_SET_NAME, mandatory = false)
+    private String annotationSetName;
+
     private DocumentExporter exporter;
     
     private DKPro2Gate converter;
@@ -72,7 +79,12 @@ public class GateXmlWriter
         Document document;
         try {
             document = new DocumentImpl();
-            converter.convert(aJCas, document);
+            if (annotationSetName != null && annotationSetName.length() > 0) {
+                converter.convert(aJCas, document, annotationSetName);
+            }
+            else {
+                converter.convert(aJCas, document);
+            }
         }
         catch (GateException e) {
             throw new AnalysisEngineProcessException(e);
