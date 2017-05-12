@@ -109,12 +109,7 @@ public class BinaryCasReader
 				xts = readDKProHeader(bis, header, xts);
 	 		} else {
 	 			// No embedded DKPro TS, reset
-	 			try {
-	 				bis.reset();
-	 			} catch (IOException e) {
-	 				throw new IOException(e);
-	 			}
-	 			
+	 			bis.reset();
 	            // Try reading an externalized type system instead
 	            if (typeSystemLocation != null) {
 	            	xts = readTypeSystem();
@@ -166,13 +161,8 @@ public class BinaryCasReader
 				xts = readDKProHeader(bis, header, xts);
 	 		} else {
 	 			// No embedded DKPro TS, reset
-	 			try {
-	 				bis.reset();
-	 			} catch (IOException e) {
-	 				throw new IOException(e);
-	 			}
-	 			
-				// Try reading an externalized type system instead
+	 			bis.reset();
+	 			// Try reading an externalized type system instead
 				if (typeSystemLocation != null) {
 					xts = readTypeSystem();
 					initCasFromEmbeddedTS(header, aCAS);
