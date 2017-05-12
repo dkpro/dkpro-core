@@ -20,7 +20,7 @@
 	<repositories>
 		<repository>
 			<id>ltl-models</id>
-			<url>http://basa.ltl.uni-due.de:34000/artifactory/models</url>
+			<url>http://basa.ltl.uni-due.de:34001/artifactory/models</url>
 		</repository>
 	</repositories>
 	<dependencies>
