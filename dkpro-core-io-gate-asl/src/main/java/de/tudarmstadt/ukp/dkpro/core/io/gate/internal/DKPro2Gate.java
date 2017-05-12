@@ -39,15 +39,34 @@ import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 public class DKPro2Gate
 {
+    /*
+     * Converts DKPro to Gate using default unnamed annotation set (kept for backward compatibility
+     */
     public Document convert(JCas aSource, Document aTarget)
+        throws GateException
+    {
+        return convert(aSource, aTarget, null);
+    }
+
+    /*
+     * Converts DKPro to Gate possibly with a named annotation set
+     */
+    public Document convert(JCas aSource, Document aTarget, String annotationSetName)
         throws GateException
     {
         IntOpenHashSet processed = new IntOpenHashSet();
         
         aTarget.setContent(new DocumentContentImpl(aSource.getDocumentText()));
 
-        AnnotationSet as = aTarget.getAnnotations();
-
+        AnnotationSet as;
+        
+        if (annotationSetName == null || annotationSetName.length() == 0) {
+            as = aTarget.getAnnotations();
+        }
+        else {
+            as = aTarget.getAnnotations(annotationSetName);
+        }
+        
         for (TOP fs : selectAll(aSource)) {
             if (processed.contains(fs.getAddress())) {
                 continue;
