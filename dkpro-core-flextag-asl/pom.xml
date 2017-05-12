@@ -94,7 +94,19 @@
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.flextag-model-tagger-de-tiger</artifactId>
         <scope>test</scope>
-      </dependency>  
+      </dependency>
+             <dependency>
+             	<groupId>org.dkpro.tc</groupId>
+             	<artifactId>dkpro-tc-ml-crfsuite</artifactId>
+             </dependency>
+             <dependency>
+             	<groupId>org.dkpro.tc</groupId>
+             	<artifactId>dkpro-tc-ml</artifactId>
+             </dependency>
+             <dependency>
+             	<groupId>org.dkpro.tc</groupId>
+             	<artifactId>dkpro-tc-api</artifactId>
+             </dependency>
 	</dependencies>
   <build>
     <pluginManagement>
