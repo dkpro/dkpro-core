@@ -17,12 +17,6 @@
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.flextag-asl</artifactId>
 	<name>DKPro Core ASL - FlexTag</name>
-	<repositories>
-		<repository>
-			<id>ltl-models</id>
-			<url>http://basa.ltl.uni-due.de:34001/artifactory/models</url>
-		</repository>
-	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
