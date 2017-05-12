@@ -24,104 +24,128 @@
 		</repository>
 	</repositories>
 	<dependencies>
-    <dependency>
-      <groupId>org.apache.uima</groupId>
-      <artifactId>uimaj-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.uima</groupId>
-      <artifactId>uimafit-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.ant</groupId>
-      <artifactId>ant</artifactId>
-    </dependency>
-    <dependency>
-    	<groupId>junit</groupId>
-    	<artifactId>junit</artifactId>
-    	<scope>test</scope>
-    </dependency>
-    <dependency>
-    	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-    	<artifactId>
+		<dependency>
+			<groupId>org.apache.uima</groupId>
+			<artifactId>uimaj-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.uima</groupId>
+			<artifactId>uimafit-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.ant</groupId>
+			<artifactId>ant</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>
     		de.tudarmstadt.ukp.dkpro.core.testing-asl
     	</artifactId>
-    	<scope>test</scope>
-    </dependency>
-             <dependency>
-             	<groupId>org.dkpro.tc</groupId>
-             	<artifactId>dkpro-tc-ml-crfsuite</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.dkpro.tc</groupId>
+			<artifactId>dkpro-tc-ml</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.dkpro.tc</groupId>
+			<artifactId>dkpro-tc-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.unidue.ltl.flextag</groupId>
+			<artifactId>flextag-core</artifactId>
              </dependency>
-             <dependency>
-             	<groupId>org.dkpro.tc</groupId>
-             	<artifactId>dkpro-tc-ml</artifactId>
-             </dependency>
-             <dependency>
-             	<groupId>org.dkpro.tc</groupId>
-             	<artifactId>dkpro-tc-api</artifactId>
-             </dependency>
+		<dependency>
+			<groupId>de.unidue.ltl.flextag</groupId>
+			<artifactId>flextag-features</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.flextag-model-tagger-en-wsj0-18</artifactId>
+			<version>20170512.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.flextag-model-tagger-de-tiger</artifactId>
+			<version>20170512.1</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-dependency-plugin</artifactId>
-          <configuration>
-            <usedDependencies>
-              <!--
-                - Maven doesn't detect the parameters module to be used, be we actually
-                - do require it as a compile dependency and also at runtime, so we
-                - cannot set it to scope provided. Need to tell Maven to ignore it here.
-              -->
-              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDependency>
-              <!-- Dependency not detected as used because only a string constance is required. -->
-              <usedDependency>org.dkpro.tc:dkpro-tc-ml-crfsuite</usedDependency>
-            </usedDependencies>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
-  <dependencyManagement>
-  	<dependencies>
-  		<dependency>
-  			<groupId>de.unidue.ltl.flextag</groupId>
-  			<artifactId>flextag</artifactId>
-  			<version>0.2.0</version>
-  			<type>pom</type>
-  			<scope>import</scope>
-  		</dependency>
-      <dependency>
-        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core.flextag-model-tagger-en-wsj0-18</artifactId>
-        <version>20170512.1</version>
-      </dependency>  		
-      <dependency>
-        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core.flextag-model-tagger-de-tiger</artifactId>
-        <version>20170512.1</version>
-      </dependency>  		      
-  	</dependencies>
-  </dependencyManagement>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<configuration>
+						<usedDependencies>
+							<!-- - Maven doesn't detect the parameters module to be used, be we 
+								actually - do require it as a compile dependency and also at runtime, so 
+								we - cannot set it to scope provided. Need to tell Maven to ignore it here. -->
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDependency>
+
+							<!-- FlexTag is to some extend a wrapper of DKPro TC, the dependency 
+								analysis detects the dependency on TC and marks the FlexTag modules as not 
+								necessary (requiring the TC modules instead). The FlexTag modules includes 
+								various TC machine learning adapter, i.e. crfsuite, weka, liblinear, libsvm 
+								and svmhmm. Furthermore, the FlexTag features module is needed during runtime 
+								of a model when feature extractor are loaded -->
+							<usedDependency>de.unidue.ltl.flextag:flextag-core</usedDependency>
+							<usedDependency>de.unidue.ltl.flextag:flextag-features</usedDependency>
+
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.flextag-model-tagger-en-wsj0-18</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.flextag-model-tagger-de-tiger</usedDependency>
+						</usedDependencies>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>de.unidue.ltl.flextag</groupId>
+				<artifactId>flextag</artifactId>
+				<version>0.2.0</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.flextag-model-tagger-en-wsj0-18</artifactId>
+				<version>20170512.1</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.flextag-model-tagger-de-tiger</artifactId>
+				<version>20170512.1</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>
