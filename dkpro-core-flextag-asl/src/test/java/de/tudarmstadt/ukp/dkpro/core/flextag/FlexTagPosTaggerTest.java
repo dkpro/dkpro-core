@@ -44,15 +44,15 @@ public class FlexTagPosTaggerTest
 
     }
 
-//    @Test
-//    public void testGerman()
-//        throws Exception
-//    {
-//        runTest("de", "tiger", "Das ist ein Test .",
-//                new String[] { "PDS", "VAFIN", "ART", "NN", "$." },
-//                new String[] { "PRON", "VERB", "DET", "NOUN", "PUNCT" });
-//
-//    }
+    @Test
+    public void testGerman()
+        throws Exception
+    {
+        runTest("de", "tiger", "Das ist ein Test .",
+                new String[] { "PDS", "VAFIN", "ART", "NN", "$." },
+                new String[] { "PRON", "VERB", "DET", "NOUN", "PUNCT" });
+
+    }
 
     private void runTest(String language, String variant, String testDocument, String[] tags,
             String[] tagClasses)

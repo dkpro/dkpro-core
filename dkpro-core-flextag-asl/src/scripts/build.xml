@@ -35,7 +35,7 @@
 		<antcall target="separate-jars"/>
 	</target>
 
-	<target name="separate-jars" depends="en"/>
+	<target name="separate-jars" depends="en,de"/>
 	
 	<target name="en">
 		<antcall target="en-wsj0_18"/>
@@ -69,5 +69,38 @@
 					
 				</install-stub-and-upstream-folder>
 			</target>
+	
+	<target name="de">
+			<antcall target="de-tiger"/>
+		</target>
+
+		<target name="de-tiger">
+					<mkdir dir="target/download"/>
+
+					<get 
+			    		src="https://bintray.com/inofficalbinarystore/generic/download_file?file_path=de_tiger.tar.gz" 
+			    		dest="target/download/de_tiger.tar.gz" 
+			    		skipexisting="true"/>
+					<untar 
+						src="target/download/de_tiger.tar.gz" 
+						dest="target/download/" 
+						compression="gzip"/>
+					
+					<install-stub-and-upstream-folder 
+			    		folder="target/download/de_tiger" 
+			    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+			    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.flextag"
+			    		upstreamVersion="20170512"
+			    		metaDataVersion="1"
+			    		tool="tagger"
+			    		language="de"
+						variant="tiger">
+						<metadata>
+				    		<entry key="pos.tagset" value="stts"/>
+							<entry key="model.encoding" value="utf-8"/>
+						</metadata>
+						
+					</install-stub-and-upstream-folder>
+				</target>
 
 </project>
