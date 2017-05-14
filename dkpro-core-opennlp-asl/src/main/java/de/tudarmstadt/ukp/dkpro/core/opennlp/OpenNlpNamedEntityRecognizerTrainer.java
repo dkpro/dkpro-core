@@ -96,7 +96,7 @@ public class OpenNlpNamedEntityRecognizerTrainer
      * @see SimplePerceptronSequenceTrainer#PERCEPTRON_SEQUENCE_VALUE
      */
     public static final String PARAM_ALGORITHM = "algorithm";
-    @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, defaultValue = GISTrainer.MAXENT_VALUE)
+    @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, defaultValue = PerceptronTrainer.PERCEPTRON_VALUE)
     private String algorithm;
     
     public static final String PARAM_TRAINER_TYPE = "trainerType";
@@ -104,11 +104,11 @@ public class OpenNlpNamedEntityRecognizerTrainer
     private String trainerType;
 
     public static final String PARAM_ITERATIONS = "iterations";
-    @ConfigurationParameter(name = PARAM_ITERATIONS, mandatory = true, defaultValue = "100")
+    @ConfigurationParameter(name = PARAM_ITERATIONS, mandatory = true, defaultValue = "300")
     private int iterations;
 
     public static final String PARAM_CUTOFF = "cutoff";
-    @ConfigurationParameter(name = PARAM_CUTOFF, mandatory = true, defaultValue = "5")
+    @ConfigurationParameter(name = PARAM_CUTOFF, mandatory = true, defaultValue = "0")
     private int cutoff;
 
     /**
@@ -136,7 +136,6 @@ public class OpenNlpNamedEntityRecognizerTrainer
         throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
         stream = new CasNameSampleStream();
         
         TrainingParameters params = new TrainingParameters();

@@ -17,13 +17,16 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
+import static org.apache.uima.fit.util.JCasUtil.indexCovered;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.apache.uima.util.Level.INFO;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -40,6 +43,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableStreamProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpSequenceTagsetDescriptionProvider;
 import opennlp.tools.namefind.NameFinderME;
@@ -160,22 +164,25 @@ public class OpenNlpNamedEntityRecognizer
 
         modelProvider.getResource().clearAdaptiveData();
 
-        // get the document text
-        List<Token> tokenList = new ArrayList<Token>(select(aJCas, Token.class));
-        String[] tokens = toText(tokenList).toArray(new String[tokenList.size()]);
-
-        // test the string
-        Span[] namedEntities = modelProvider.getResource().find(tokens);
-
-        // get the named entities and their character offsets
-        for (Span namedEntity : namedEntities) {
-            int begin = tokenList.get(namedEntity.getStart()).getBegin();
-            int end = tokenList.get(namedEntity.getEnd()-1).getEnd();
-
-            Type type = mappingProvider.getTagType(namedEntity.getType());
-            NamedEntity neAnno = (NamedEntity) cas.createAnnotation(type, begin, end);
-            neAnno.setValue(namedEntity.getType());
-            neAnno.addToIndexes();
+        Map<Sentence, Collection<Token>> index = indexCovered(aJCas, Sentence.class, Token.class);
+        for (Sentence sentence : select(aJCas, Sentence.class)) {
+            // get the document text
+            List<Token> tokenList = new ArrayList<>(index.get(sentence));
+            String[] tokens = toText(tokenList).toArray(new String[tokenList.size()]);
+    
+            // test the string
+            Span[] namedEntities = modelProvider.getResource().find(tokens);
+    
+            // get the named entities and their character offsets
+            for (Span namedEntity : namedEntities) {
+                int begin = tokenList.get(namedEntity.getStart()).getBegin();
+                int end = tokenList.get(namedEntity.getEnd()-1).getEnd();
+    
+                Type type = mappingProvider.getTagType(namedEntity.getType());
+                NamedEntity neAnno = (NamedEntity) cas.createAnnotation(type, begin, end);
+                neAnno.setValue(namedEntity.getType());
+                neAnno.addToIndexes();
+            }
         }
     }
 }

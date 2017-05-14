@@ -43,6 +43,7 @@ import de.tudarmstadt.ukp.dkpro.core.eval.model.Span;
 import de.tudarmstadt.ukp.dkpro.core.eval.report.Result;
 import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2002Reader;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import opennlp.tools.ml.maxent.GISTrainer;
 
 public class OpenNlpNamedEntityRecognizerTrainerTest
 {
@@ -71,6 +72,8 @@ public class OpenNlpNamedEntityRecognizerTrainerTest
                 OpenNlpNamedEntityRecognizerTrainer.class,
                 OpenNlpNamedEntityRecognizerTrainer.PARAM_TARGET_LOCATION, model,
                 OpenNlpNamedEntityRecognizerTrainer.PARAM_LANGUAGE, "de",
+                OpenNlpNamedEntityRecognizerTrainer.PARAM_ALGORITHM, GISTrainer.MAXENT_VALUE,
+                OpenNlpNamedEntityRecognizerTrainer.PARAM_CUTOFF, 5,
                 OpenNlpNamedEntityRecognizerTrainer.PARAM_ITERATIONS, 10);
         
         SimplePipeline.runPipeline(trainReader, trainer);
@@ -107,9 +110,9 @@ public class OpenNlpNamedEntityRecognizerTrainerTest
 
         Result results = EvalUtil.dumpResults(targetFolder, expected, actual);
         
-        assertEquals(0.316834, results.getFscore(), 0.0001);
-        assertEquals(0.868650, results.getPrecision(), 0.0001);
-        assertEquals(0.193752, results.getRecall(), 0.0001);
+        assertEquals(0.321976, results.getFscore(), 0.0001);
+        assertEquals(0.874462, results.getPrecision(), 0.0001);
+        assertEquals(0.197313, results.getRecall(), 0.0001);
     }
     
     @Before
