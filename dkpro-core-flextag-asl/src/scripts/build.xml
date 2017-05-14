@@ -62,6 +62,11 @@
 		    		tool="tagger"
 		    		language="en"
 					variant="wsj0-18">
+					<metadata>
+			    		<entry key="pos.tagset" value="ptb"/>
+						<entry key="model.encoding" value="utf-8"/>
+					</metadata>
+					
 				</install-stub-and-upstream-folder>
 			</target>
 
