@@ -83,11 +83,6 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.flextag-model-tagger-en-wsj0-18</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.flextag-model-tagger-de-tiger</artifactId>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
 	<build>
 		<pluginManagement>
@@ -112,7 +107,6 @@
 							<usedDependency>de.unidue.ltl.flextag:flextag-features</usedDependency>
 
 							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.flextag-model-tagger-en-wsj0-18</usedDependency>
-							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.flextag-model-tagger-de-tiger</usedDependency>
 						</usedDependencies>
 					</configuration>
 				</plugin>
