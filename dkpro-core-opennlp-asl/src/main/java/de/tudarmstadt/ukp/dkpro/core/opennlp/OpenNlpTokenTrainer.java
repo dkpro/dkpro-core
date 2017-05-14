@@ -43,6 +43,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.CasTokenSampleStream;
 import opennlp.tools.dictionary.Dictionary;
 import opennlp.tools.ml.EventTrainer;
+import opennlp.tools.ml.maxent.GISTrainer;
 import opennlp.tools.tokenize.TokenizerFactory;
 import opennlp.tools.tokenize.TokenizerME;
 import opennlp.tools.tokenize.TokenizerModel;
@@ -50,7 +51,7 @@ import opennlp.tools.tokenize.lang.Factory;
 import opennlp.tools.util.TrainingParameters;
 
 /**
- * Train a sentence splitter model for OpenNLP.
+ * Train a tokenizer model for OpenNLP.
  */
 public class OpenNlpTokenTrainer
     extends JCasConsumer_ImplBase
@@ -64,7 +65,7 @@ public class OpenNlpTokenTrainer
     private File targetLocation;
 
     public static final String PARAM_ALGORITHM = "algorithm";
-    @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, defaultValue = "MAXENT")
+    @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, defaultValue = GISTrainer.MAXENT_VALUE)
     private String algorithm;
     
     public static final String PARAM_TRAINER_TYPE = "trainerType";

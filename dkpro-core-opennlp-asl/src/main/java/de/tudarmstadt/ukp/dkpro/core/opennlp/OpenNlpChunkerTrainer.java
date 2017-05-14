@@ -18,6 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
 import java.util.concurrent.Callable;
+
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -26,7 +27,9 @@ import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTrainerBase;
 import opennlp.tools.chunker.ChunkerFactory;
 import opennlp.tools.chunker.ChunkerME;
 import opennlp.tools.chunker.ChunkerModel;
+import opennlp.tools.ml.BeamSearch;
 import opennlp.tools.ml.EventTrainer;
+import opennlp.tools.ml.maxent.GISTrainer;
 import opennlp.tools.util.TrainingParameters;
 import opennlp.tools.util.model.BaseModel;
 
@@ -41,7 +44,7 @@ public class OpenNlpChunkerTrainer
     private String language;
 
     public static final String PARAM_ALGORITHM = "algorithm";
-    @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, defaultValue = "MAXENT")
+    @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, defaultValue = GISTrainer.MAXENT_VALUE)
     private String algorithm;
     
     public static final String PARAM_TRAINER_TYPE = "trainerType";
@@ -56,6 +59,13 @@ public class OpenNlpChunkerTrainer
     @ConfigurationParameter(name = PARAM_CUTOFF, mandatory = true, defaultValue = "5")
     private int cutoff;
 
+    /**
+     * @see ChunkerME#DEFAULT_BEAM_SIZE
+     */
+    public static final String PARAM_BEAMSIZE = "beamSize";
+    @ConfigurationParameter(name = PARAM_BEAMSIZE, mandatory = true, defaultValue = "3")
+    private int beamSize;
+    
     @Override
     public CasChunkSampleStream makeSampleStream()
     {
@@ -70,6 +80,7 @@ public class OpenNlpChunkerTrainer
         params.put(TrainingParameters.TRAINER_TYPE_PARAM, trainerType);
         params.put(TrainingParameters.ITERATIONS_PARAM, Integer.toString(iterations));
         params.put(TrainingParameters.CUTOFF_PARAM, Integer.toString(cutoff));
+        params.put(BeamSearch.BEAM_SIZE_PARAMETER, Integer.toString(beamSize));
         
         Callable<ChunkerModel> trainTask = () -> {
             try {

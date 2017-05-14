@@ -18,12 +18,15 @@
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
 import java.util.concurrent.Callable;
+
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.CasPosSampleStream;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTrainerBase;
+import opennlp.tools.ml.BeamSearch;
 import opennlp.tools.ml.EventTrainer;
+import opennlp.tools.ml.maxent.GISTrainer;
 import opennlp.tools.postag.POSModel;
 import opennlp.tools.postag.POSTaggerFactory;
 import opennlp.tools.postag.POSTaggerME;
@@ -41,7 +44,7 @@ public class OpenNlpPosTaggerTrainer
     private String language;
 
     public static final String PARAM_ALGORITHM = "algorithm";
-    @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, defaultValue = "MAXENT")
+    @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, defaultValue = GISTrainer.MAXENT_VALUE)
     private String algorithm;
     
     public static final String PARAM_TRAINER_TYPE = "trainerType";
@@ -56,6 +59,13 @@ public class OpenNlpPosTaggerTrainer
     @ConfigurationParameter(name = PARAM_CUTOFF, mandatory = true, defaultValue = "5")
     private int cutoff;
 
+    /**
+     * @see POSTaggerME#DEFAULT_BEAM_SIZE
+     */
+    public static final String PARAM_BEAMSIZE = "beamSize";
+    @ConfigurationParameter(name = PARAM_BEAMSIZE, mandatory = true, defaultValue = "3")
+    private int beamSize;
+    
     @Override
     public CasPosSampleStream makeSampleStream()
     {
@@ -70,6 +80,7 @@ public class OpenNlpPosTaggerTrainer
         params.put(TrainingParameters.TRAINER_TYPE_PARAM, trainerType);
         params.put(TrainingParameters.ITERATIONS_PARAM, Integer.toString(iterations));
         params.put(TrainingParameters.CUTOFF_PARAM, Integer.toString(cutoff));
+        params.put(BeamSearch.BEAM_SIZE_PARAMETER, Integer.toString(beamSize));
         
         Callable<POSModel> trainTask = () -> {
             try {

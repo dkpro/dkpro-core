@@ -42,7 +42,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.CasNameSampleStream;
 import opennlp.tools.ml.BeamSearch;
 import opennlp.tools.ml.EventTrainer;
-import opennlp.tools.ml.maxent.GIS;
+import opennlp.tools.ml.maxent.GISTrainer;
 import opennlp.tools.ml.maxent.quasinewton.QNTrainer;
 import opennlp.tools.ml.perceptron.PerceptronTrainer;
 import opennlp.tools.ml.perceptron.SimplePerceptronSequenceTrainer;
@@ -55,7 +55,7 @@ import opennlp.tools.util.SequenceCodec;
 import opennlp.tools.util.TrainingParameters;
 
 /**
- * Train a POS tagging model for OpenNLP.
+ * Train a named entity recognizer model for OpenNLP.
  */
 public class OpenNlpNamedEntityRecognizerTrainer
     extends JCasConsumer_ImplBase
@@ -90,13 +90,13 @@ public class OpenNlpNamedEntityRecognizerTrainer
     private File targetLocation;
 
     /**
-     * @see GIS#MAXENT_VALUE
+     * @see GISTrainer#MAXENT_VALUE
      * @see QNTrainer#MAXENT_QN_VALUE
      * @see PerceptronTrainer#PERCEPTRON_VALUE
      * @see SimplePerceptronSequenceTrainer#PERCEPTRON_SEQUENCE_VALUE
      */
     public static final String PARAM_ALGORITHM = "algorithm";
-    @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, defaultValue = GIS.MAXENT_VALUE)
+    @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, defaultValue = GISTrainer.MAXENT_VALUE)
     private String algorithm;
     
     public static final String PARAM_TRAINER_TYPE = "trainerType";
