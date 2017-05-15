@@ -72,6 +72,7 @@ public class OpenNlpPosTaggerTrainerTest
                 OpenNlpPosTaggerTrainer.class,
                 OpenNlpPosTaggerTrainer.PARAM_TARGET_LOCATION, new File(targetFolder, "model.bin"),
                 OpenNlpPosTaggerTrainer.PARAM_LANGUAGE, ds.getLanguage(),
+                OpenNlpPosTaggerTrainer.PARAM_NUM_THREADS, 2,
                 OpenNlpPosTaggerTrainer.PARAM_ITERATIONS, 10);
         
         SimplePipeline.runPipeline(trainReader, trainer);

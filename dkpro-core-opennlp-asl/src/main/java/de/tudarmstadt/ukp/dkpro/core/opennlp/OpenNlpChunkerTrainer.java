@@ -67,7 +67,7 @@ public class OpenNlpChunkerTrainer
     private int beamSize;
     
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
-    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = ComponentParameters.AUTO_NUM_THREADS)
+    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = "1")
     private int numThreads;
     
     @Override
