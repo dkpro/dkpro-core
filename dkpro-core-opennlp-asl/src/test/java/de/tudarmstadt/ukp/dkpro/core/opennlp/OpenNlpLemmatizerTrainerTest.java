@@ -73,6 +73,7 @@ public class OpenNlpLemmatizerTrainerTest
                 OpenNlpLemmatizerTrainer.class,
                 OpenNlpLemmatizerTrainer.PARAM_TARGET_LOCATION, new File(targetFolder, "model.bin"),
                 OpenNlpLemmatizerTrainer.PARAM_LANGUAGE, ds.getLanguage(),
+                OpenNlpLemmatizerTrainer.PARAM_NUM_THREADS, 2,
                 OpenNlpLemmatizerTrainer.PARAM_ITERATIONS, iterations);
 
         AnalysisEngineDescription trainWriter = createEngineDescription(

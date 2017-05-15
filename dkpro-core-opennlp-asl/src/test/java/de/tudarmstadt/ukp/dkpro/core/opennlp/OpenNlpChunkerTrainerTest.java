@@ -68,6 +68,7 @@ public class OpenNlpChunkerTrainerTest
                 OpenNlpChunkerTrainer.PARAM_TARGET_LOCATION, new File(targetFolder, "model.bin"),
 //                OpenNlpChunkerTrainer.PARAM_ALGORITHM, "PERCEPTRON",
 //                OpenNlpChunkerTrainer.PARAM_CUTOFF, 0,
+                OpenNlpChunkerTrainer.PARAM_NUM_THREADS, 2,
                 OpenNlpChunkerTrainer.PARAM_LANGUAGE, ds.getLanguage(),
                 OpenNlpChunkerTrainer.PARAM_ITERATIONS, 10);
         
@@ -102,9 +103,9 @@ public class OpenNlpChunkerTrainerTest
 
         Result results = EvalUtil.dumpResults(targetFolder, expected, actual);
         
-        assertEquals(0.912583, results.getFscore(), 0.0001);
-        assertEquals(0.914813, results.getPrecision(), 0.0001);
-        assertEquals(0.910364, results.getRecall(), 0.0001);
+        assertEquals(0.912441, results.getFscore(), 0.0001);
+        assertEquals(0.914613, results.getPrecision(), 0.0001);
+        assertEquals(0.910280, results.getRecall(), 0.0001);
     }
     
     @Before

@@ -125,7 +125,10 @@ public class OpenNlpNamedEntityRecognizerTrainer
     public static final String PARAM_SEQUENCE_ENCODING = "sequenceEncoding";
     @ConfigurationParameter(name = PARAM_SEQUENCE_ENCODING, mandatory = true, defaultValue="BILOU")
     private SequenceEncoding sequenceEncoding;
-
+    
+    public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
+    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = ComponentParameters.AUTO_NUM_THREADS)
+    private int numThreads;
     
     private CasNameSampleStream stream;
     private ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -144,6 +147,7 @@ public class OpenNlpNamedEntityRecognizerTrainer
 //                TrainerFactory.getTrainerType(params.getSettings()).name());
         params.put(TrainingParameters.ITERATIONS_PARAM, Integer.toString(iterations));
         params.put(TrainingParameters.CUTOFF_PARAM, Integer.toString(cutoff));
+        params.put(TrainingParameters.THREADS_PARAM, Integer.toString(numThreads));
         params.put(BeamSearch.BEAM_SIZE_PARAMETER, Integer.toString(beamSize));
         
         byte featureGenCfg[] = loadFeatureGen(featureGen);

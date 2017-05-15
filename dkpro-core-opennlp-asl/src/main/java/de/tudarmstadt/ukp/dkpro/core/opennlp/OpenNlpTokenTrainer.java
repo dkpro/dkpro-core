@@ -96,6 +96,10 @@ public class OpenNlpTokenTrainer
     @ConfigurationParameter(name = PARAM_ABBREVIATION_DICTIONARY_ENCODING, mandatory = true, defaultValue = "UTF-8")
     private String abbreviationDictionaryEncoding;
 
+    public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
+    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = ComponentParameters.AUTO_NUM_THREADS)
+    private int numThreads;
+    
     private CasTokenSampleStream stream;
     private Dictionary abbreviationDictionary;
     private ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -114,6 +118,7 @@ public class OpenNlpTokenTrainer
         params.put(TrainingParameters.TRAINER_TYPE_PARAM, trainerType);
         params.put(TrainingParameters.ITERATIONS_PARAM, Integer.toString(iterations));
         params.put(TrainingParameters.CUTOFF_PARAM, Integer.toString(cutoff));
+        params.put(TrainingParameters.THREADS_PARAM, Integer.toString(numThreads));
         
         if (abbreviationDictionaryLocation != null) {
             try {

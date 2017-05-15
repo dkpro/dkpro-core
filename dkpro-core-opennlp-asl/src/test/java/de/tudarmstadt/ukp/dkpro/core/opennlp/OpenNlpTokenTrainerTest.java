@@ -69,6 +69,7 @@ public class OpenNlpTokenTrainerTest
         AnalysisEngineDescription trainer = createEngineDescription(
                 OpenNlpTokenTrainer.class,
                 OpenNlpTokenTrainer.PARAM_TARGET_LOCATION, new File(targetFolder, "model.bin"),
+                OpenNlpTokenTrainer.PARAM_NUM_THREADS, 2,
                 OpenNlpTokenTrainer.PARAM_LANGUAGE, ds.getLanguage());
         
         SimplePipeline.runPipeline(trainReader, trainer);

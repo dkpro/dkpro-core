@@ -76,6 +76,7 @@ public class OpenNlpSentenceTrainerTest
                 //OpenNlpSentenceTrainer.PARAM_EOS_CHARACTERS, new char[] { '.', '?' },
                 OpenNlpSentenceTrainer.PARAM_ABBREVIATION_DICTIONARY_LOCATION, 
                         "src/test/resources/dict/abbreviation_de.txt",
+                OpenNlpSentenceTrainer.PARAM_NUM_THREADS, 2,
                 OpenNlpSentenceTrainer.PARAM_LANGUAGE, ds.getLanguage());
         
         SimplePipeline.runPipeline(trainReader, trainer);
