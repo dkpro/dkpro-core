@@ -18,8 +18,10 @@
 package de.tudarmstadt.ukp.dkpro.core.io.text;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -30,6 +32,7 @@ import java.io.PrintStream;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.junit.Rule;
@@ -42,6 +45,48 @@ import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class TextWriterTest
 {
+    @Test
+    public void testWriteWithDocumentUri() throws Exception
+    {
+        File outputPath = testContext.getTestOutputFolder();
+        
+        AnalysisEngineDescription writer = createEngineDescription(TextWriter.class,
+                TextWriter.PARAM_TARGET_LOCATION, outputPath,
+                TextWriter.PARAM_STRIP_EXTENSION, true,
+                TextWriter.PARAM_OVERWRITE, true);
+        
+        JCas jcas = JCasFactory.createJCas();
+        
+        DocumentMetaData dmd = DocumentMetaData.create(jcas);
+        dmd.setDocumentBaseUri("file:/dummy");
+        dmd.setDocumentUri("file:/dummy/text1.txt");
+        
+        runPipeline(jcas, writer);
+        
+        assertTrue(new File(outputPath, "text1.txt").exists());
+    }
+
+    @Test
+    public void testWriteWithDocumentId() throws Exception
+    {
+        File outputPath = testContext.getTestOutputFolder();
+        
+        AnalysisEngineDescription writer = createEngineDescription(TextWriter.class,
+                TextWriter.PARAM_TARGET_LOCATION, outputPath,
+                TextWriter.PARAM_STRIP_EXTENSION, true,
+                TextWriter.PARAM_OVERWRITE, true);
+        
+        JCas jcas = JCasFactory.createJCas();
+        
+        DocumentMetaData dmd = DocumentMetaData.create(jcas);
+        dmd.setCollectionId("dummy");
+        dmd.setDocumentId("text1.txt");
+        
+        runPipeline(jcas, writer);
+        
+        assertTrue(new File(outputPath, "text1.txt").exists());
+    }
+
     @Test
     public void testStdOut()
         throws Exception
