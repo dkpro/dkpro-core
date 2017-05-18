@@ -73,9 +73,7 @@ public class CasLemmaSampleStream
             if (t.getLemma() == null) {
                 throw new IllegalStateException("Token ["+t.getCoveredText()+"] has no lemma");
             }
-            String ses = StringUtil.getShortestEditScript(t.getCoveredText(),
-                    t.getLemma().getValue());
-            lemmas.add(ses);
+            lemmas.add(t.getLemma().getValue());
         }
         
         return new LemmaSample(words, tags, lemmas);

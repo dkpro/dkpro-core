@@ -28,6 +28,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.TagsetBase;
 import opennlp.tools.ml.model.MaxentModel;
 import opennlp.tools.ml.model.SequenceClassificationModel;
 import opennlp.tools.parser.ParserModel;
+import opennlp.tools.util.TokenTag;
 
 public class OpenNlpParserTagsetDescriptionProvider
 extends TagsetBase
@@ -62,7 +63,7 @@ extends TagsetBase
     {
         Set<String> tagSet = new TreeSet<String>();
         
-        SequenceClassificationModel<String> seqModel = model.getParserChunkerModel()
+        SequenceClassificationModel<TokenTag> seqModel = model.getParserChunkerModel()
                 .getChunkerSequenceModel();
         collect(seqModel.getOutcomes(), tagSet);
         
