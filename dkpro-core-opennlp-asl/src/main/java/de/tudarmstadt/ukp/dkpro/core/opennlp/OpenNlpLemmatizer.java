@@ -131,8 +131,7 @@ public class OpenNlpLemmatizer
             // Fetch the OpenNLP lemmatizer instance configured with the right model and use it to
             // tag the text
             LemmatizerME lemmatizer = modelProvider.getResource();
-            String[] encodedLemmas = lemmatizer.lemmatize(toks, tags);
-            String[] lemmas = lemmatizer.decodeLemmas(toks, encodedLemmas);
+            String[] lemmas = lemmatizer.lemmatize(toks, tags);
 
             int n = 0;
             for (Token t : tokens) {

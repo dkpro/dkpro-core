@@ -111,9 +111,9 @@ public class OpenNlpNamedEntityRecognizerTrainerTest
 
         Result results = EvalUtil.dumpResults(targetFolder, expected, actual);
         
-        assertEquals(0.321976, results.getFscore(), 0.0001);
-        assertEquals(0.874462, results.getPrecision(), 0.0001);
-        assertEquals(0.197313, results.getRecall(), 0.0001);
+        assertEquals(0.323254, results.getFscore(), 0.0001);
+        assertEquals(0.877419, results.getPrecision(), 0.0001);
+        assertEquals(0.198122, results.getRecall(), 0.0001);
     }
     
     @Before
