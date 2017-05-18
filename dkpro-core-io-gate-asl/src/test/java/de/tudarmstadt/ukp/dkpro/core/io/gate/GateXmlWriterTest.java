@@ -25,6 +25,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2000Reader;
+import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2002Reader;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class GateXmlWriterTest
@@ -47,6 +48,14 @@ public class GateXmlWriterTest
                 "conll/2000/chunk2000_ref_named_as.xml", "conll/2000/chunk2000_test.conll");
     }
     
+    @Test
+    public void oneWayNamedEntity()
+        throws Exception
+    {
+        testOneWay(Conll2002Reader.class, GateXmlWriter.class, "conll/2002/ner2002_ref.xml",
+                "conll/2002/ner2002_test.conll");
+    }
+
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
 }

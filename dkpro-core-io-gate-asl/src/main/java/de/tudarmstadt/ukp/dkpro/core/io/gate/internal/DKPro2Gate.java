@@ -26,6 +26,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.TOP;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -36,8 +37,9 @@ import gate.corpora.DocumentContentImpl;
 import gate.util.GateException;
 import gate.util.SimpleFeatureMapImpl;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
-
+import org.apache.uima.cas.Type;
 public class DKPro2Gate
+
 {
     /*
      * Converts DKPro to Gate using default unnamed annotation set (kept for backward compatibility
@@ -94,6 +96,25 @@ public class DKPro2Gate
             }
             else if (fs instanceof POS) {
                 // Do nothing - handled as part of Token
+            }
+            else if (fs instanceof NamedEntity) {
+                NamedEntity ne = (NamedEntity) fs;
+                FeatureMap fm = new SimpleFeatureMapImpl();
+                fm.put(TOKEN_LENGTH_FEATURE_NAME, ne.getCoveredText().length());
+                fm.put(TOKEN_STRING_FEATURE_NAME, ne.getCoveredText());
+                String neType = ne.getValue();
+                if (neType.equals("PER")) {
+                    as.add(Long.valueOf(ne.getBegin()), Long.valueOf(ne.getEnd()),
+                            PERSON_ANNOTATION_TYPE, fm);
+                }
+                else if (neType.equals("LOC")) {
+                    as.add(Long.valueOf(ne.getBegin()), Long.valueOf(ne.getEnd()),
+                            LOCATION_ANNOTATION_TYPE, fm);
+                }
+                else if (neType.equals("ORG")) {
+                    as.add(Long.valueOf(ne.getBegin()), Long.valueOf(ne.getEnd()),
+                            ORGANIZATION_ANNOTATION_TYPE, fm);
+                }
             }
             else if (fs instanceof Sentence) {
                 Sentence s = (Sentence) fs;
