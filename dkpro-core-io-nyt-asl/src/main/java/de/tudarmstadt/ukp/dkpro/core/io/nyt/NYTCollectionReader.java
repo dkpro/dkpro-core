@@ -8,8 +8,6 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
@@ -19,6 +17,8 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.StringArray;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.apache.uima.util.Level;
+import org.apache.uima.util.Logger;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 
@@ -29,7 +29,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class NYTCollectionReader extends CasCollectionReader_ImplBase {
 
-	private static final Log LOGGER = LogFactory.getLog(NYTCollectionReader.class);
+	private Logger Logger;
 
 	/**
 	 * Path to the corpus' data directory.
@@ -60,6 +60,7 @@ public class NYTCollectionReader extends CasCollectionReader_ImplBase {
 
 	public void initialize(UimaContext context) throws ResourceInitializationException {
 		super.initialize(context);
+		this.Logger = getUimaContext().getLogger();
 		Path dataPath = Paths.get(this.dataPathString);
 		try {
 			this.corpusIterator = new NYTIterator(dataPath);
@@ -94,7 +95,7 @@ public class NYTCollectionReader extends CasCollectionReader_ImplBase {
 
 		NYTCorpusDocument doc = this.corpusIterator.next();
 		
-		LOGGER.info("Retrieved " + doc.getSourceFile().toString());
+		Logger.log(Level.FINE, "Retrieved " + doc.getSourceFile().toString());
 
 		String body = doc.getBody();
 		if(body != null) {
