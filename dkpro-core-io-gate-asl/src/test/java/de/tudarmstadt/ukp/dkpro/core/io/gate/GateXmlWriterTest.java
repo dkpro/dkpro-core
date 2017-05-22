@@ -47,13 +47,26 @@ public class GateXmlWriterTest
                         GateXmlWriter.PARAM_ANNOTATION_SET_NAME, "mimir"),
                 "conll/2000/chunk2000_ref_named_as.xml", "conll/2000/chunk2000_test.conll");
     }
-    
+
     @Test
-    public void oneWayNamedEntity()
+    public void oneWayNamedEntityGeneric()
         throws Exception
     {
-        testOneWay(Conll2002Reader.class, GateXmlWriter.class, "conll/2002/ner2002_ref.xml",
+        testOneWay(Conll2002Reader.class, GateXmlWriter.class, "conll/2002/ner2002_ref_generic.xml",
                 "conll/2002/ner2002_test.conll");
+    }
+
+    @Test
+    public void oneWayNamedEntitySpecific()
+        throws Exception
+    {
+        testOneWay(
+                createReaderDescription(Conll2002Reader.class, Conll2002Reader.PARAM_LANGUAGE, "en",
+                        Conll2002Reader.PARAM_NAMED_ENTITY_MAPPING_LOCATION,
+                        "src/test/resources/conll/2002/ner2002_conll.map"),
+                createEngineDescription(GateXmlWriter.class), "conll/2002/ner2002_ref_specific.xml",
+                "conll/2002/ner2002_test.conll");
+
     }
 
     @Rule

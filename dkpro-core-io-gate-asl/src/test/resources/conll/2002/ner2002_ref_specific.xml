@@ -11,7 +11,25 @@
 <!-- The default annotation set -->
 
 <AnnotationSet>
-<Annotation Id="0" Type="Person" StartNode="0" EndNode="5">
+<Annotation Id="0" Type="Organization" StartNode="108" EndNode="119">
+<Feature>
+  <Name className="java.lang.String">length</Name>
+  <Value className="java.lang.Integer">11</Value>
+</Feature>
+<Feature>
+  <Name className="java.lang.String">string</Name>
+  <Value className="java.lang.String">Real Madrid</Value>
+</Feature>
+<Feature>
+  <Name className="java.lang.String">value</Name>
+  <Value className="java.lang.String">ORG</Value>
+</Feature>
+<Feature>
+  <Name className="java.lang.String">dkproType</Name>
+  <Value className="java.lang.String">Organization</Value>
+</Feature>
+</Annotation>
+<Annotation Id="1" Type="Person" StartNode="0" EndNode="5">
 <Feature>
   <Name className="java.lang.String">length</Name>
   <Value className="java.lang.Integer">5</Value>
@@ -20,15 +38,13 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">Wolff</Value>
 </Feature>
-</Annotation>
-<Annotation Id="1" Type="Location" StartNode="34" EndNode="43">
 <Feature>
-  <Name className="java.lang.String">length</Name>
-  <Value className="java.lang.Integer">9</Value>
+  <Name className="java.lang.String">value</Name>
+  <Value className="java.lang.String">PER</Value>
 </Feature>
 <Feature>
-  <Name className="java.lang.String">string</Name>
-  <Value className="java.lang.String">Argentina</Value>
+  <Name className="java.lang.String">dkproType</Name>
+  <Value className="java.lang.String">Person</Value>
 </Feature>
 </Annotation>
 <Annotation Id="2" Type="Person" StartNode="58" EndNode="68">
@@ -40,15 +56,31 @@
   <Name className="java.lang.String">string</Name>
   <Value className="java.lang.String">Del Bosque</Value>
 </Feature>
+<Feature>
+  <Name className="java.lang.String">value</Name>
+  <Value className="java.lang.String">PER</Value>
+</Feature>
+<Feature>
+  <Name className="java.lang.String">dkproType</Name>
+  <Value className="java.lang.String">Person</Value>
+</Feature>
 </Annotation>
-<Annotation Id="3" Type="Organization" StartNode="108" EndNode="119">
+<Annotation Id="3" Type="Location" StartNode="34" EndNode="43">
 <Feature>
   <Name className="java.lang.String">length</Name>
-  <Value className="java.lang.Integer">11</Value>
+  <Value className="java.lang.Integer">9</Value>
 </Feature>
 <Feature>
   <Name className="java.lang.String">string</Name>
-  <Value className="java.lang.String">Real Madrid</Value>
+  <Value className="java.lang.String">Argentina</Value>
+</Feature>
+<Feature>
+  <Name className="java.lang.String">value</Name>
+  <Value className="java.lang.String">LOC</Value>
+</Feature>
+<Feature>
+  <Name className="java.lang.String">dkproType</Name>
+  <Value className="java.lang.String">Location</Value>
 </Feature>
 </Annotation>
 <Annotation Id="4" Type="Sentence" StartNode="0" EndNode="121">
