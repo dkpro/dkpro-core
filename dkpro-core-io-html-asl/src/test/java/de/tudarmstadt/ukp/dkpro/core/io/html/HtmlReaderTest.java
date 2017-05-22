@@ -17,6 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.html;
 
+import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.CasUtil.select;
 import static org.junit.Assert.assertEquals;
@@ -27,13 +28,14 @@ import java.net.URL;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
+import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class HtmlReaderTest
 {
-
     @Test
     public void wwwReaderTest()
         throws Exception
@@ -50,7 +52,18 @@ public class HtmlReaderTest
             assertTrue(jcas.getDocumentText().startsWith("Google"));
         }
     }
-
+    
+    @Test
+    public void testReadFile()
+        throws Exception
+    {
+        testOneWay(
+                createReaderDescription(HtmlReader.class,
+                        HtmlReader.PARAM_LANGUAGE, "en"), 
+                "html/test.html.dump", 
+                "html/test.html");
+    }
+    
     private void dumpMetaData(final DocumentMetaData aMetaData)
     {
         System.out.println("Collection ID: "+aMetaData.getCollectionId());
@@ -58,4 +71,7 @@ public class HtmlReaderTest
         System.out.println("Base URI     : "+aMetaData.getDocumentBaseUri());
         System.out.println("URI          : "+aMetaData.getDocumentUri());
     }
+
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }
