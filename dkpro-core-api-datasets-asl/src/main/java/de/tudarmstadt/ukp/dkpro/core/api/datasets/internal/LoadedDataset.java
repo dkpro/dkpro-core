@@ -115,6 +115,13 @@ public class LoadedDataset
         return defaultSplit;
     }
 
+    @Override
+    public File getFile(String aPath)
+    {
+        Path baseDir = factory.resolve(description);
+        return new File(baseDir.toFile(), aPath);
+    }
+    
     private File[] getFiles(String aRole)
     {
         List<File> files = new ArrayList<>();

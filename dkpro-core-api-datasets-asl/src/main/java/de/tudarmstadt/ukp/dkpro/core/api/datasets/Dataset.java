@@ -39,6 +39,8 @@ public interface Dataset
     File[] getLicenseFiles();  
     
     Split getDefaultSplit();
+    
+    File getFile(String aPath);
 
     default Split getSplit(double aTrainRatio)
     {

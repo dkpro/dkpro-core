@@ -91,4 +91,10 @@ public class UDDataset
     {
         return defaultSplit;
     }
+    
+    @Override
+    public File getFile(String aPath)
+    {
+        throw new UnsupportedOperationException();
+    }
 }
