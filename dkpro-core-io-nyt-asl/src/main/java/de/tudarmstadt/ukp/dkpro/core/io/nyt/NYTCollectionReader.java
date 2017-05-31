@@ -24,7 +24,7 @@ import org.apache.uima.util.ProgressImpl;
 
 import com.nytlabs.corpus.NYTCorpusDocument;
 
-import de.tudarmstadt.ukp.argumentext.demonstrator.metadata.NYTArticleMetaData;
+import de.tudarmstadt.ukp.dkpro.io.nyt.metadata.NYTArticleMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class NYTCollectionReader extends CasCollectionReader_ImplBase {
