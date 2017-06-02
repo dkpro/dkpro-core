@@ -16,6 +16,10 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.io-asl</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>edu.jhu.hlt</groupId>
 			<artifactId>annotated-nyt</artifactId>
 			<version>1.1.4</version>
