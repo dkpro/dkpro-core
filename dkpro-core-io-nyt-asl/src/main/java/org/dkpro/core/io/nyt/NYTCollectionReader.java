@@ -1,4 +1,4 @@
-package de.tudarmstadt.ukp.dkpro.core.io.nyt;
+package org.dkpro.core.io.nyt;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,10 +21,10 @@ import org.apache.uima.util.Level;
 import org.apache.uima.util.Logger;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
+import org.dkpro.core.io.nyt.metadata.NYTArticleMetaData;
 
 import com.nytlabs.corpus.NYTCorpusDocument;
 
-import de.tudarmstadt.ukp.dkpro.io.nyt.metadata.NYTArticleMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class NYTCollectionReader extends CasCollectionReader_ImplBase {

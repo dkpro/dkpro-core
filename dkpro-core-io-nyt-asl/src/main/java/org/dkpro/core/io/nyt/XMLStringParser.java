@@ -1,4 +1,4 @@
-package de.tudarmstadt.ukp.dkpro.core.io.nyt;
+package org.dkpro.core.io.nyt;
 
 import java.io.IOException;
 import java.io.StringReader;

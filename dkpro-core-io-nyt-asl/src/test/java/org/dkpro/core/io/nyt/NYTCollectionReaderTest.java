@@ -1,4 +1,4 @@
-package de.tudarmstadt.ukp.dkpro.core.io.nyt;
+package org.dkpro.core.io.nyt;
 
 import static org.junit.Assert.fail;
 
@@ -14,6 +14,7 @@ import org.apache.uima.fit.factory.TypeSystemDescriptionFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.metadata.TypeSystemDescription;
+import org.dkpro.core.io.nyt.NYTCollectionReader;
 import org.junit.Test;
 
 
