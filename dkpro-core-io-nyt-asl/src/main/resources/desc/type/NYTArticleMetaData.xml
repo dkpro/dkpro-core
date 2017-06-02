@@ -6,7 +6,7 @@
 	<vendor />
 	<types>
 		<typeDescription>
-			<name>de.tudarmstadt.ukp.dkpro.io.nyt.metadata.NYTArticleMetaData
+			<name>org.dkpro.core.io.nyt.metadata.NYTArticleMetaData
 			</name>
 			<description>A document annotation that describes the metadata of a
 				newspaper article.
