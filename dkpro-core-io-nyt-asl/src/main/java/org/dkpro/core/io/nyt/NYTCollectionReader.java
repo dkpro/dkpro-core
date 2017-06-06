@@ -2,121 +2,72 @@ package org.dkpro.core.io.nyt;
 
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.apache.uima.UimaContext;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.StringArray;
-import org.apache.uima.resource.ResourceInitializationException;
-import org.apache.uima.util.Level;
-import org.apache.uima.util.Logger;
-import org.apache.uima.util.Progress;
-import org.apache.uima.util.ProgressImpl;
 import org.dkpro.core.io.nyt.metadata.NYTArticleMetaData;
 
 import com.nytlabs.corpus.NYTCorpusDocument;
+import com.nytlabs.corpus.NYTCorpusDocumentParser;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class NYTCollectionReader extends JCasResourceCollectionReader_ImplBase {
 
-	private Logger Logger;
-
 	/**
-	 * Path to the corpus' data directory.
-	 */
-	public static final String PARAM_DATA_PATH = "dataPath";
-	@ConfigurationParameter(name = PARAM_DATA_PATH, mandatory = true)
-	private String dataPathString;
-
-	/**
-	 * The number of documents which will be skipped at the beginning.
+	 * A number of documents which will be skipped at the beginning.
 	 */
 	public static final String PARAM_OFFSET = "offset";
 	@ConfigurationParameter(name = PARAM_OFFSET, mandatory = false)
 	private int offset = 0;
 
+	/**
+	 * Counting variable to keep track of the already skipped documents.
+	 */
 	private int skipped = 0;
 
-	/**
-	 * The total number of documents which will be read.
-	 */
-	public static final String PARAM_LIMIT = "limit";
-	@ConfigurationParameter(name = PARAM_LIMIT, mandatory = false)
-	private int limit = -1;
+	private NYTCorpusDocumentParser nytParser = new NYTCorpusDocumentParser();
 
-	private int completed = 0;
-
-	private NYTIterator corpusIterator;
-
-	public void initialize(UimaContext context) throws ResourceInitializationException {
-		super.initialize(context);
-		this.Logger = getUimaContext().getLogger();
-		Path dataPath = Paths.get(this.dataPathString);
-		try {
-			this.corpusIterator = new NYTIterator(dataPath);
-		} catch (IOException | ParserConfigurationException e) {
-			throw new ResourceInitializationException(e);
+	private void setDocumenText(JCas aJCas, String documentBody) {
+		if (documentBody != null) {
+			aJCas.setDocumentText(documentBody);
+		} else {
+			aJCas.setDocumentText("");
 		}
-	}
-
-	private DocumentMetaData createDocumentMetaData(JCas aJCas, NYTCorpusDocument doc) {
-		DocumentMetaData metadata = DocumentMetaData.create(aJCas);
-		metadata.setLanguage(java.util.Locale.US.toString());
-		metadata.setDocumentTitle(doc.getHeadline());
-		metadata.setDocumentId(Integer.toString(doc.getGuid()));
-		metadata.setDocumentUri(doc.getSourceFile().getPath());
-		metadata.setCollectionId("NYT_CORPUS");
-		return metadata;
 	}
 
 	@Override
 	public void getNext(JCas aJCas) throws IOException, CollectionException {
 
 		while (isBelowOffset()) {
-			this.corpusIterator.next();
+			nextFile();
 			skipped++;
 		}
 
-		NYTCorpusDocument doc = this.corpusIterator.next();
-		
-		Logger.log(Level.FINE, "Retrieved " + doc.getSourceFile().toString());
-
-		String body = doc.getBody();
-		if(body != null) {
-			aJCas.setDocumentText(body);
-		} else {
-			aJCas.setDocumentText("");
-		}
-
-		createDocumentMetaData(aJCas, doc);
-
-		NYTArticleMetaData articleMetaData = createNYTArticleMetaData(aJCas, doc);
+		Resource xmlFile = nextFile();
+		initCas(aJCas, xmlFile);
+		NYTCorpusDocument nytDocument = nytParser.parseNYTCorpusDocumentFromFile(xmlFile.getInputStream(), false);
+		setDocumenText(aJCas, nytDocument.getBody());
+		NYTArticleMetaData articleMetaData = createNYTArticleMetaData(aJCas, nytDocument);
 		articleMetaData.addToIndexes();
-
-		completed++;
 	}
 
 	private boolean isBelowOffset() {
-		return skipped < offset && this.corpusIterator.hasNext();
+		return skipped < offset && getResourceIterator().hasNext();
 	}
 
-	private static StringArray toStringArray(List<String> stringList, JCas jcas) {
+	private static StringArray toStringArray(List<String> stringList, JCas aJCas) {
 		if (!stringList.isEmpty()) {
 			String[] strings = stringList.toArray(new String[0]);
 			int length = strings.length;
-			StringArray stringArray = new StringArray(jcas, length);
+			StringArray stringArray = new StringArray(aJCas, length);
 			stringArray.copyFromArray(strings, 0, 0, length);
 			return stringArray;
 		} else {
-			return new StringArray(jcas, 0);
+			return new StringArray(aJCas, 0);
 		}
 	}
 
@@ -146,19 +97,4 @@ public class NYTCollectionReader extends JCasResourceCollectionReader_ImplBase {
 		articleMetaData.setTypesOfMaterial(toStringArray(doc.getTypesOfMaterial(), aJCas));
 		return articleMetaData;
 	}
-
-	private boolean isBelowLimit() {
-		return this.limit == -1 || this.completed < this.limit;
-	}
-
-	@Override
-	public boolean hasNext() {
-		return this.corpusIterator.hasNext() && isBelowLimit();
-	}
-
-	@Override
-	public Progress[] getProgress() {
-		return new Progress[] { new ProgressImpl(this.completed, -1, Progress.ENTITIES) };
-	}
-
 }

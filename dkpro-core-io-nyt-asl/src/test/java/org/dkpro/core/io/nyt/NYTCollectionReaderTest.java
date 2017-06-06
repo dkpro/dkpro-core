@@ -23,8 +23,9 @@ public class NYTCollectionReaderTest {
 	@Test
 	public void test() {
 		
-		final String DATA_PATH = "src/test/resources/data";
-		
+		final String DATA_PATH = "src/test/resources/data/";
+		//final String DATA_PATH = "/home/matthias/Entwicklung/UKP/corpora/nyt_corpus/data/";
+
 		try {
 
 			final TypeSystemDescription typeSystemDescription = TypeSystemDescriptionFactory
@@ -32,9 +33,10 @@ public class NYTCollectionReaderTest {
 
 			CollectionReader articleReader = CollectionReaderFactory.createReader(NYTCollectionReader.class,
 					typeSystemDescription, 
-					NYTCollectionReader.PARAM_DATA_PATH, DATA_PATH,
-					NYTCollectionReader.PARAM_OFFSET, 0,
-					NYTCollectionReader.PARAM_LIMIT, 2);
+					NYTCollectionReader.PARAM_SOURCE_LOCATION, DATA_PATH,
+					NYTCollectionReader.PARAM_PATTERNS, "[+]/**/*.xml",
+					NYTCollectionReader.PARAM_LANGUAGE, java.util.Locale.US.toString(),
+					NYTCollectionReader.PARAM_OFFSET, 0);
 
 			AnalysisEngine extractor = AnalysisEngineFactory.createEngine(CasDumpWriter.class,
 					CasDumpWriter.PARAM_OUTPUT_FILE, "-");
