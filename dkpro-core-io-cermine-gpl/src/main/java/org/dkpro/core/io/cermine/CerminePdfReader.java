@@ -14,7 +14,7 @@
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with CERMINE. If not, see <http://www.gnu.org/licenses/>.
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 package org.dkpro.core.io.cermine;
 
@@ -209,8 +209,9 @@ public class CerminePdfReader
                 {
                     makeParagraph();
 
-                    if (element.getName().equals("title"))
+                    if (element.getName().equals("title")) {
                         title = element.getValue();
+                    }
                     makeAnnotationFromElement(element, headingType);
                 }
                 else
@@ -276,8 +277,9 @@ public class CerminePdfReader
 
         private void parseText(Element root)
         {
-            if (root.getChildren().isEmpty())
+            if (root.getChildren().isEmpty()) {
                 sb.append(DELIMITER).append(root.getValue());
+            }
             else
             {
                 for (Object node : root.getChildren())
