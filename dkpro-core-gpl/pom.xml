@@ -96,6 +96,7 @@
 		<module>../dkpro-core-stanfordnlp-gpl</module>
 		<module>../dkpro-core-sfst-gpl</module>
 		<module>../dkpro-core-io-tgrep-gpl</module>
+		<module>../dkpro-core-io-cermine-gpl</module>
 	</modules>
 	<build>
 		<plugins>
