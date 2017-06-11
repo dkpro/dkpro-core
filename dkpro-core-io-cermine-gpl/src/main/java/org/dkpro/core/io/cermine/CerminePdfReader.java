@@ -69,7 +69,6 @@ public class CerminePdfReader
     @ConfigurationParameter(name = PARAM_PARAGRAPH_TYPE, mandatory = false, defaultValue = BUILT_IN)
     private String paragraphType;
 
-    private ContentExtractor extractor;
     private NlmHandler nlmHandler;
 
     @Override
@@ -86,14 +85,6 @@ public class CerminePdfReader
             paragraphType = Paragraph.class.getName();
         }
 
-        //Create PDF extractor
-        try
-        {
-            extractor = new ContentExtractor();
-        } catch (AnalysisException e)
-        {
-            throw new ResourceInitializationException(e);
-        }
         nlmHandler = new NlmHandler()
                 .withHeadingAnnotation(headingType)
                 .withParagraphAnnotation(paragraphType);
@@ -112,6 +103,7 @@ public class CerminePdfReader
             is = res.getInputStream();
 
             // Process PDF
+            ContentExtractor extractor = new ContentExtractor();
             extractor.setPDF(is);
             Element result = extractor.getContentAsNLM();
             nlmHandler.process(result, aCAS);
@@ -157,7 +149,8 @@ public class CerminePdfReader
         public void process(Element root, CAS aCas)
         {
             sb = new StringBuilder();
-            title = "";
+            title = "UNKNOWN";
+            beginIndex = 0;
             cas = aCas;
 
             parse(root);
