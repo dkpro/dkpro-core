@@ -43,7 +43,7 @@ public class CerminePdfReaderTest
         File outputFile = new File(testContext.getTestOutputFolder(), "dump-output.txt");
 
         CollectionReader reader = createReader(CerminePdfReader.class,
-                CerminePdfReader.PARAM_SOURCE_LOCATION, "dkpro-core-io-cermine-gpl/src/test/resources/data",
+                CerminePdfReader.PARAM_SOURCE_LOCATION, "src/test/resources/data",
                 CerminePdfReader.PARAM_PATTERNS, "[+]*.pdf");
 
         AnalysisEngine writer = createEngine(CasDumpWriter.class,
@@ -51,7 +51,7 @@ public class CerminePdfReaderTest
 
         SimplePipeline.runPipeline(reader, writer);
 
-        String reference = readFileToString(new File("dkpro-core-io-cermine-gpl/src/test/resources/reference/test.dump"),
+        String reference = readFileToString(new File("src/test/resources/reference/test.dump"),
                 "UTF-8").trim();
         String actual = readFileToString(outputFile, "UTF-8").trim();
 
