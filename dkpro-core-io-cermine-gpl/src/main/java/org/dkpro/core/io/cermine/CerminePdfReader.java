@@ -234,7 +234,7 @@ public class CerminePdfReader
 
         private void parseBody(Element root)
         {
-            if (root.getChildren().isEmpty())
+            if (root.getChildren().isEmpty() && !root.getValue().isEmpty())
             {
                 sb.append(DELIMITER).append(root.getValue());
                 return;
@@ -276,7 +276,7 @@ public class CerminePdfReader
 
         private void parseText(Element root)
         {
-            if (root.getChildren().isEmpty()) {
+            if (root.getChildren().isEmpty() && !root.getValue().isEmpty()) {
                 sb.append(DELIMITER).append(root.getValue());
             }
             else
