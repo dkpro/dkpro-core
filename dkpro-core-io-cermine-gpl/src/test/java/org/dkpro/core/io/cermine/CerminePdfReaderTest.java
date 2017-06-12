@@ -18,19 +18,25 @@
 */
 package org.dkpro.core.io.cermine;
 
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.dumper.CasDumpWriter;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
+import org.apache.uima.jcas.JCas;
 import org.junit.Rule;
 import org.junit.Test;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.junit.Assert.*;
 
 
@@ -44,7 +50,7 @@ public class CerminePdfReaderTest
 
         CollectionReader reader = createReader(CerminePdfReader.class,
                 CerminePdfReader.PARAM_SOURCE_LOCATION, "src/test/resources/data",
-                CerminePdfReader.PARAM_PATTERNS, "[+]*.pdf");
+                CerminePdfReader.PARAM_PATTERNS, "[+]**/*.pdf");
 
         AnalysisEngine writer = createEngine(CasDumpWriter.class,
                 CasDumpWriter.PARAM_TARGET_LOCATION, outputFile);
@@ -56,6 +62,31 @@ public class CerminePdfReaderTest
         String actual = readFileToString(outputFile, "UTF-8").trim();
 
         assertEquals(reference, actual);
+    }
+
+    @Test
+    public void testMetadata()
+            throws Exception
+    {
+        List<String> expectedTitles = new ArrayList<>();
+        expectedTitles.add("Out-of-domain FrameNet Semantic Role Labeling");
+
+        CollectionReaderDescription reader = createReaderDescription(CerminePdfReader.class,
+                CerminePdfReader.PARAM_SOURCE_LOCATION, "src/test/resources/data",
+                CerminePdfReader.PARAM_PATTERNS, "[+]**/*.pdf");
+
+        List<String> actualTitles = new ArrayList<>();
+        for (JCas jcas : SimplePipeline.iteratePipeline(reader))
+        {
+            DocumentMetaData metadata = DocumentMetaData.get(jcas);
+            actualTitles.add(metadata.getDocumentTitle());
+        }
+
+        for (String expectedTitle : expectedTitles)
+        {
+            assertTrue(actualTitles.contains(expectedTitle));
+            actualTitles.remove(expectedTitle);
+        }
     }
 
     @Rule

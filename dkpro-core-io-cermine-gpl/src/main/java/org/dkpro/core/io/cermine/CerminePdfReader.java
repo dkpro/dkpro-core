@@ -189,7 +189,7 @@ public class CerminePdfReader
 
         private void parseHeader(Element root)
         {
-            if (root.getChildren().isEmpty())
+            if (root.getChildren().isEmpty() && !root.getValue().isEmpty())
             {
                 sb.append(DELIMITER).append(root.getValue());
                 return;
@@ -198,11 +198,13 @@ public class CerminePdfReader
             {
                 Element element = (Element) node;
                 if (element.getName().equals("title") || element.getName().equals("subtitle") ||
-                        element.getName().equals("trans-title-group") || element.getName().equals("alt-title"))
+                        element.getName().equals("trans-title-group") || element.getName().equals("alt-title") ||
+                        element.getName().equals("article-title"))
                 {
                     makeParagraph();
 
-                    if (element.getName().equals("title")) {
+                    if (element.getName().equals("title") || element.getName().equals("article-title"))
+                    {
                         title = element.getValue();
                     }
                     makeAnnotationFromElement(element, headingType);
