@@ -42,7 +42,7 @@ import java.io.InputStream;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 
 /**
- * Collection reader for PDF files using Cermine <a href="https://github.com/CeON/CERMINE">https://github.com/CeON/CERMINE</a>.
+ * Collection reader for PDF files using CERMINE <a href="https://github.com/CeON/CERMINE">https://github.com/CeON/CERMINE</a>.
  */
 @MimeTypeCapability({MimeTypes.APPLICATION_PDF})
 @TypeCapability(
@@ -122,6 +122,10 @@ public class CerminePdfReader
         }
     }
 
+    /**
+     * A handler for JATZ-NLM format
+     * <a href="https://jats.nlm.nih.gov/archiving/tag-library/1.1/index.html">https://jats.nlm.nih.gov/archiving/tag-library/1.1/index.html</a>
+     */
     private class NlmHandler
     {
         private static final String DELIMITER = " ";
