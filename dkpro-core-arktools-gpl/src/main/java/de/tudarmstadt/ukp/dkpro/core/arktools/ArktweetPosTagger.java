@@ -1,7 +1,7 @@
 package de.tudarmstadt.ukp.dkpro.core.arktools;
 
 /**
- * Copyright 2007-2014
+ * Copyright 2007-2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
