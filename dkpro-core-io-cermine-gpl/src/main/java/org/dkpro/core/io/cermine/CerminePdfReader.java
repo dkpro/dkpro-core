@@ -1,5 +1,5 @@
-/*
- * Copyright 2017
+/**
+ * Copyright 2007-2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,8 +14,8 @@
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
-*/
+ * along with this program. If not, see http://www.gnu.org/licenses/ .
+ */
 package org.dkpro.core.io.cermine;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
