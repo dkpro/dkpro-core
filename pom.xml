@@ -35,6 +35,16 @@
     	<url>https://www.ukp.tu-darmstadt.de/</url>
 	</organization>
 	<inceptionYear>2007</inceptionYear>
+    <properties>
+        <currentYear>2017</currentYear>
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+        <uima.version>2.10.0</uima.version>
+        <uimafit.version>2.3.0</uimafit.version>
+        <uimafit.plugin.version>2.3.0</uimafit.plugin.version>
+        <lucene.version>4.4.0</lucene.version>
+        <!-- The Spring version should be at least whatever uimaFIT requires -->
+        <spring.version>3.2.16.RELEASE</spring.version>
+    </properties>
 	<prerequisites>
 		<maven>3.0.4</maven>
 	</prerequisites>
@@ -148,15 +158,6 @@
 		<developerConnection>scm:git:git@github.com:dkpro/dkpro-core.git</developerConnection>
 		<url>https://github.com/dkpro/dkpro-core</url>
 	</scm>
-	<properties>
-		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-		<uima.version>2.10.0</uima.version>
-		<uimafit.version>2.3.0</uimafit.version>
-        <uimafit.plugin.version>2.3.0</uimafit.plugin.version>
-		<lucene.version>4.4.0</lucene.version>
-		<!-- The Spring version should be at least whatever uimaFIT requires -->
-		<spring.version>3.2.16.RELEASE</spring.version>
-	</properties>
 	<modules>
 		<module>dkpro-core-asl</module>
 		<module>dkpro-core-gpl</module>
@@ -481,7 +482,7 @@
                     <configuration>
                         <componentVendor>DKPro Core Project</componentVendor>
                         <componentCopyright>
-                            Copyright 2010-2015
+                            Copyright ${project.inceptionYear}-${currentYear}
                             Ubiquitous Knowledge Processing (UKP) Lab
                             Technische Universität Darmstadt
                         </componentCopyright>
