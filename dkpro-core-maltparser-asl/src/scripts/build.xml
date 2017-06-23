@@ -309,8 +309,8 @@
 				<entry key="DC.creator" value="Universitat Pompeu Fabra. Institut Universitari de Lingüística Aplicada (IULA)"/>
 				<entry key="DC.identifier" value="http://hdl.handle.net/10230/20407"/>
 				<entry key="DC.rights" value="http://creativecommons.org/licenses/by/3.0/"/>
-	    		<entry key="pos.tagset" value="freeling"/>
-				<entry key="dependency.tagset" value="iula"/>
+	    		<entry key="pos.tagset" value="ancora"/>
+			<entry key="dependency.tagset" value="iula"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
