@@ -39,6 +39,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -55,8 +56,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * Sfst morphological analyzer.
+ * SFST morphological analyzer.
  */
+@ResourceMetaData(name="SFST Morphological Analyzer")
 @TypeCapability(
     inputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",

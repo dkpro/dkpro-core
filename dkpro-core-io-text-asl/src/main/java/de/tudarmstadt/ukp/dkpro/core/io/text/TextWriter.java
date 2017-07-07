@@ -25,6 +25,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
@@ -35,6 +36,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 /**
  * UIMA CAS consumer writing the CAS document text as plain text file.
  */
+@ResourceMetaData(name="Text Writer")
 @MimeTypeCapability({MimeTypes.TEXT_PLAIN})
 @TypeCapability(
         inputs={

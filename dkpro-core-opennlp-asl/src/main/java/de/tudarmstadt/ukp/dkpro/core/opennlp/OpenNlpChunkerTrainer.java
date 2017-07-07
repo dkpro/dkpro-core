@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.opennlp;
 import java.util.concurrent.Callable;
 
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.CasChunkSampleStream;
@@ -36,6 +37,7 @@ import opennlp.tools.util.model.BaseModel;
 /**
  * Train a chunker model for OpenNLP.
  */
+@ResourceMetaData(name="OpenNLP Chunker Trainer")
 public class OpenNlpChunkerTrainer
     extends OpenNlpTrainerBase<CasChunkSampleStream>
 {

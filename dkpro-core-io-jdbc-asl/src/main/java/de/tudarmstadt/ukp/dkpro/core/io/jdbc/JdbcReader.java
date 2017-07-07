@@ -25,6 +25,7 @@ import org.apache.uima.cas.CASException;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.component.CasCollectionReader_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
@@ -49,7 +50,7 @@ import static java.util.Arrays.asList;
  * will create a CAS for each record, write the content of "text" column into CAS document text and
  * that of "title" column into the document title field of the {@link DocumentMetaData} annotation.
  */
-
+@ResourceMetaData(name="JDBC-based Database Reader")
 @TypeCapability(
         outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })

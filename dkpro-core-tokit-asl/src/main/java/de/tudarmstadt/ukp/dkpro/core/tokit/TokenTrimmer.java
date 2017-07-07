@@ -26,6 +26,7 @@ import java.util.Collection;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
@@ -33,8 +34,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * Remove prefixes and suffixes from tokens.
- *
  */
+@ResourceMetaData(name="Token Trimmer")
 @TypeCapability(
         inputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},

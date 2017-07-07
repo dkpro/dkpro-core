@@ -27,6 +27,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 
@@ -39,6 +40,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
  * (This was previously called TokenFilter).
  *
  */
+@ResourceMetaData(name="Annotation-By-Length Filter")
 public class AnnotationByLengthFilter
 	extends JCasAnnotator_ImplBase
 {

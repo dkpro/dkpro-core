@@ -38,6 +38,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
@@ -63,6 +64,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
 /**
  * Writer for the CoNLL-2012 format.
  */
+@ResourceMetaData(name="CoNLL 2012 Writer")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2012})
 @TypeCapability(
         inputs = { 

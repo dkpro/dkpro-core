@@ -21,6 +21,7 @@ import org.apache.commons.codec.EncoderException;
 import org.apache.commons.codec.StringEncoder;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
@@ -30,10 +31,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * Base class for all kinds of phonetic transcriptors based on Apache Commons Codec.
- *
- *
  */
-
+@ResourceMetaData(name="Phonetic Transcription Annotator")
 @TypeCapability(
         inputs={"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
         outputs={"de.tudarmstadt.ukp.dkpro.core.api.phonetics.type.PhoneticTranscription"})

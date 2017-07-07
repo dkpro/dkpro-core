@@ -32,6 +32,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ExternalResource;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
@@ -47,8 +48,8 @@ import de.tudarmstadt.ukp.dkpro.core.ngrams.util.NGramStringIterable;
 /**
  * This component assumes that some spell checker has already been applied upstream (e.g. Jazzy).
  * It then uses ngram frequencies from a frequency provider in order to rank the provided corrections. 
- * 
  */
+@ResourceMetaData(name="Corrections Contextualizer")
 public class CorrectionsContextualizer
     extends JCasAnnotator_ImplBase
 {

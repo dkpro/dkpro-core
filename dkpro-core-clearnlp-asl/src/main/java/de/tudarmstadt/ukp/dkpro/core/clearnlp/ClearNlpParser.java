@@ -39,6 +39,7 @@ import org.apache.uima.analysis_component.AnalysisComponent;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -62,6 +63,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 /**
  * CLEAR parser annotator.
  */
+@ResourceMetaData(name="ClearNLP Parser")
 @TypeCapability(
     inputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",

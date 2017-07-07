@@ -40,6 +40,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
@@ -78,6 +79,7 @@ import eu.clarin.weblicht.wlfxb.xb.WLData;
 /**
  * Writer for the WebLicht TCF format.
  */
+@ResourceMetaData(name="CLARIN-DE WebLicht TCF Writer")
 @MimeTypeCapability({MimeTypes.TEXT_TCF})
 @TypeCapability(
         inputs = { 

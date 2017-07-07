@@ -42,6 +42,7 @@ import org.apache.uima.cas.CASException;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -64,6 +65,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field;
  * <p>
  * If your expression evaluates to leaf nodes, empty CASes will be created.
  */
+@ResourceMetaData(name="XPath-based XML Reader")
 @MimeTypeCapability({MimeTypes.APPLICATION_XML, MimeTypes.TEXT_XML})
 @TypeCapability(
         outputs = { 

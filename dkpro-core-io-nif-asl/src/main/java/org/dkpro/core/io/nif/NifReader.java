@@ -32,6 +32,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -49,6 +50,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
  * Reader for the NLP Interchange Format (NIF). The file format (e.g. TURTLE, etc.) is automatically
  * chosen depending on the name of the file(s) being read. Compressed files are supported.
  */
+@ResourceMetaData(name="NLP Interchange Format (NIF) Reader")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_NIF_TURTLE})
 @TypeCapability(
         outputs = { 

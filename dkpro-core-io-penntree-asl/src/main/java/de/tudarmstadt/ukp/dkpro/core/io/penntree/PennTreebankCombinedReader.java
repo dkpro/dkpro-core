@@ -28,6 +28,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -43,6 +44,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 /**
  * Penn Treebank combined format reader.
  */
+@ResourceMetaData(name="Penn Treebank Combined Format Reader")
 @MimeTypeCapability({MimeTypes.TEXT_X_PTB_COMBINED})
 @TypeCapability(
         outputs = { 

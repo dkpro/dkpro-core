@@ -25,6 +25,7 @@ import java.util.List;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
@@ -35,13 +36,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * Split up existing tokens again if they are camel-case text.
  *
  */
-
+@ResourceMetaData(name="CamelCase Token Segmenter")
 @TypeCapability(
         inputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
         outputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"})
-
 public class CamelCaseTokenSegmenter
 	extends JCasAnnotator_ImplBase
 {

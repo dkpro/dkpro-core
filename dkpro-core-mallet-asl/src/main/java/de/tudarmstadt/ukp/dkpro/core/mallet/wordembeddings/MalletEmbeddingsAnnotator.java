@@ -26,6 +26,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
@@ -44,6 +45,7 @@ import java.util.Optional;
  *
  * @since 1.9.0
  */
+@ResourceMetaData(name="Mallet Embeddings Annotator")
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
         outputs = { "de.tudarmstadt.ukp.dkpro.core.mallet.type.WordEmbedding" }

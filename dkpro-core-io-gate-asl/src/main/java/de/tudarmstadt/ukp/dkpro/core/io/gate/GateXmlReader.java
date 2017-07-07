@@ -22,6 +22,7 @@ import java.io.IOException;
 import org.apache.uima.UimaContext;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -31,6 +32,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import gate.Gate;
 import gate.util.GateException;
 
+@ResourceMetaData(name="GATE XML Reader")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_GATE_XML})
 @TypeCapability(
         outputs = {

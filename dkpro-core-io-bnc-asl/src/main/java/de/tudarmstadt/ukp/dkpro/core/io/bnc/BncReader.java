@@ -25,6 +25,7 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -45,6 +46,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.xml.XmlTextReader;
 /**
  * Reader for the British National Corpus (XML version).
  */
+@ResourceMetaData(name="British National Corpus (BNC) XML Reader")
 @MimeTypeCapability(MimeTypes.APPLICATION_XML)
 @TypeCapability(
 		outputs = {

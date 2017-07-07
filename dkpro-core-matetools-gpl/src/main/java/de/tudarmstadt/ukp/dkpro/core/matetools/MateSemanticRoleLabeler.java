@@ -36,8 +36,9 @@ import java.util.zip.ZipFile;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.fit.component.JCasConsumer_ImplBase;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.fit.util.JCasUtil;
@@ -73,6 +74,7 @@ import se.lth.cs.srl.pipeline.Pipeline;
  * pages 43--48, Boulder, June 4--5 2009. 
  * </p>
  */
+@ResourceMetaData(name="Mate Tools Dependency Parser")
 @TypeCapability(
 	inputs = {
     	"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -83,7 +85,9 @@ import se.lth.cs.srl.pipeline.Pipeline;
 	outputs = {
 		"de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred",
 		"de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg" })
-public class MateSemanticRoleLabeler extends JCasConsumer_ImplBase {
+public class MateSemanticRoleLabeler
+    extends JCasAnnotator_ImplBase
+{
 	/**
 	 * Use this language instead of the document language to resolve the model.
 	 */

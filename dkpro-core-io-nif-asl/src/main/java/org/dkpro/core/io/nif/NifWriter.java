@@ -25,6 +25,7 @@ import org.apache.jena.riot.RDFLanguages;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.io.nif.internal.DKPro2Nif;
@@ -40,6 +41,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
  * 
  * @see <a href="http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core/nif-core.html">NIF 2.0 Core Ontology</a>
  */
+@ResourceMetaData(name="NLP Interchange Format (NIF) Writer")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_NIF_TURTLE})
 @TypeCapability(
         inputs = { 

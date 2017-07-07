@@ -39,6 +39,7 @@ import org.apache.uima.cas.impl.TypeSystemImpl;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.metadata.FsIndexDescription;
@@ -56,6 +57,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 /**
  * UIMA Binary CAS formats reader.
  */
+@ResourceMetaData(name="UIMA Binary CAS Reader")
 @MimeTypeCapability({ MimeTypes.APPLICATION_X_UIMA_BINARY })
 public class BinaryCasReader
     extends ResourceCollectionReaderBase

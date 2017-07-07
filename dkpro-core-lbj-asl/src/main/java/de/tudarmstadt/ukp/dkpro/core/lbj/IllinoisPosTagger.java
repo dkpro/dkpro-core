@@ -31,6 +31,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -56,6 +57,7 @@ import edu.illinois.cs.cogcomp.pos.lbjava.POSTaggerUnknown;
 /**
  * Wrapper for the Illinois POS-tagger from the Cognitive Computation Group (CCG).
  */
+@ResourceMetaData(name="Illinois CCG POS-Tagger")
 @TypeCapability(
         inputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",

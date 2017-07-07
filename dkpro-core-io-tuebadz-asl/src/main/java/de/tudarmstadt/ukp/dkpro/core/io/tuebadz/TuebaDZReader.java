@@ -33,6 +33,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.util.JCasUtil;
@@ -56,6 +57,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
  * @see <a href="http://www.sfs.uni-tuebingen.de/en/ascl/resources/corpora/tueba-dz.html">TüBA-D/Z
  *      Web page</a>
  */
+@ResourceMetaData(name="Tüba-D/Z Chunking Format Reader")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_TUEBADZ_CHUNK})
 @TypeCapability(outputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",

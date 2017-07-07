@@ -27,6 +27,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ExternalResource;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
@@ -47,11 +48,15 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.SplitterAlgorithm;
 /**
  * Annotates compound parts and linking morphemes.
  */
-@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, outputs = {
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.CompoundPart",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LinkingMorpheme" })
+@ResourceMetaData(name="Compound Annotator")
+@TypeCapability(
+        inputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 
+        outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.CompoundPart",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LinkingMorpheme" })
 public class CompoundAnnotator
     extends JCasAnnotator_ImplBase
 {

@@ -45,6 +45,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.util.FSUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -82,6 +83,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TypeMapping;
  * @see <a href="http://brat.nlplab.org/standoff.html">brat standoff format</a>
  * @see <a href="http://brat.nlplab.org/configuration.html">brat configuration format</a>
  */
+@ResourceMetaData(name="Brat Writer")
 public class BratWriter extends JCasFileWriter_ImplBase
 {
     /**

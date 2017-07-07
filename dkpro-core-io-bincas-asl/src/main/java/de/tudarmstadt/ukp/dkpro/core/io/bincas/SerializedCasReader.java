@@ -31,6 +31,7 @@ import org.apache.uima.cas.impl.CASMgrSerializer;
 import org.apache.uima.cas.impl.CASSerializer;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
@@ -38,6 +39,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 /**
  * @deprecated use {@code BinaryCasReader} instead.
  */
+@ResourceMetaData(name="UIMA Serialized CAS Reader")
 @Deprecated
 public class SerializedCasReader
 	extends ResourceCollectionReaderBase

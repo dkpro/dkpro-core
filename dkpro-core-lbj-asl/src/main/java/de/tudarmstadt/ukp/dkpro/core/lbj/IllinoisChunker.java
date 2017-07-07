@@ -29,6 +29,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -51,6 +52,7 @@ import edu.illinois.cs.cogcomp.core.datastructures.textannotation.TextAnnotation
 /**
  * Wrapper for the Illinois chunker from the Cognitive Computation Group (CCG).
  */
+@ResourceMetaData(name="Illinois CCG Chunker")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",

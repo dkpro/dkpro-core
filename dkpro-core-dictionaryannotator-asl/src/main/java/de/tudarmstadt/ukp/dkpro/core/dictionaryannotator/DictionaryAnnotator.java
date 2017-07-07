@@ -35,6 +35,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -57,8 +58,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * this is a phrase
  * another phrase
  * </pre>
- *
  */
+@ResourceMetaData(name="Dictionary Annotator")
 @TypeCapability(
 	    inputs = {
 	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",

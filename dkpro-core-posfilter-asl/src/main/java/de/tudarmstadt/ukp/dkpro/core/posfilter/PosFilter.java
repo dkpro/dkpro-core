@@ -27,6 +27,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
@@ -60,7 +61,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * given parts of speech.
  *
  */
-
+@ResourceMetaData(name="POS Filter")
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class PosFilter
     extends JCasAnnotator_ImplBase

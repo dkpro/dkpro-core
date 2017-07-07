@@ -40,6 +40,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.OperationalProperties;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
@@ -71,6 +72,7 @@ import edu.berkeley.nlp.util.Numberer;
  *
  * @see CoarseToFineMaxRuleParser
  */
+@ResourceMetaData(name="Berkeley Parser")
 @OperationalProperties(multipleDeploymentAllowed = false)
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = {

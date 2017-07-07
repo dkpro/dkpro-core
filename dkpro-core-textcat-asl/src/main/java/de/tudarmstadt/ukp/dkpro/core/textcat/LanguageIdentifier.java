@@ -22,6 +22,7 @@ import java.util.Map;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.knallgrau.utils.textcat.TextCategorizer;
 
@@ -35,6 +36,7 @@ import org.knallgrau.utils.textcat.TextCategorizer;
  * In Proceedings of Third Annual Symposium on Document Analysis and Information Retrieval, 
  * Las Vegas, NV, UNLV Publications/Reprographics, pp. 161-175, 11-13 April 1994.</li></ul>
  */
+@ResourceMetaData(name="TextCat Language Identifier (Character N-Gram-based)")
 public class LanguageIdentifier
 	extends JCasAnnotator_ImplBase
 {

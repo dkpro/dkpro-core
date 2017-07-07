@@ -38,6 +38,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
@@ -55,14 +56,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * This Consumer outputs the content of all CASes into the relAnnis file format. The produced files
  * can be fed into Annis2 (http://www.sfb632.uni-potsdam.de/d1/annis/) to visualize the data. e.g.
  * constituent and dependency structure.
- *
  */
-@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency",
-        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent" })
+@ResourceMetaData(name="RelANNIS Writer")
+@TypeCapability(
+        inputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency",
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent" })
 public class RelAnnisWriter
     extends JCasConsumer_ImplBase
 {

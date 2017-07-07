@@ -30,6 +30,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ExternalResource;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -41,9 +42,8 @@ import de.tudarmstadt.ukp.dkpro.core.ngrams.util.NGramStringIterable;
 
 /**
  * Language detector based on n-gram frequency counts, e.g. as provided by Web1T
- * 
- *
  */
+@ResourceMetaData(name="Simple Language Identifier (Token N-Gram-based)")
 public class LanguageDetectorWeb1T
     extends JCasAnnotator_ImplBase
 {

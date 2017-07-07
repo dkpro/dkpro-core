@@ -55,6 +55,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
@@ -73,6 +74,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 /**
  * UIMA CAS consumer writing the CAS document text in TEI format.
  */
+@ResourceMetaData(name="TEI XML Writer")
 @MimeTypeCapability({MimeTypes.APPLICATION_TEI_XML})
 @TypeCapability(
         inputs = {

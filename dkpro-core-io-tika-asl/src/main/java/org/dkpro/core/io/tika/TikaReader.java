@@ -26,6 +26,7 @@ import org.apache.tika.parser.AutoDetectParser;
 import org.apache.tika.sax.BodyContentHandler;
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.xml.sax.SAXException;
 
@@ -34,6 +35,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 /**
  * Reader for many file formats based on Apache Tika.
  */
+@ResourceMetaData(name="Tika Multi-Format Reader")
 public class TikaReader
     extends ResourceCollectionReaderBase
 {

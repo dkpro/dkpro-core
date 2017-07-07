@@ -34,6 +34,7 @@ import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.component.CasCollectionReader_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -51,6 +52,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field;
 /**
  * Reader for XML files.
  */
+@ResourceMetaData(name="XML Reader")
 @MimeTypeCapability({MimeTypes.APPLICATION_XML, MimeTypes.TEXT_XML})
 @TypeCapability(
         outputs={

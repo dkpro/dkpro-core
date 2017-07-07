@@ -27,6 +27,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.TOP;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -49,6 +50,7 @@ import static org.apache.uima.fit.util.JCasUtil.select;
  * multiple times, each time taking the results of the previous run as input. From the second run on, set phrases
  * in the feature path parameter {@link #PARAM_FEATURE_PATH}.
  */
+@ResourceMetaData(name="Phrase Annotator")
 public class PhraseAnnotator
         extends JCasAnnotator_ImplBase
 {

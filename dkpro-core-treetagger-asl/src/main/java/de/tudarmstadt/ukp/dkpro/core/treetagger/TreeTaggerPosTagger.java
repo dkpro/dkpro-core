@@ -39,6 +39,7 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -58,6 +59,7 @@ import de.tudarmstadt.ukp.dkpro.core.treetagger.internal.DKProExecutableResolver
 /**
  * Part-of-Speech and lemmatizer annotator using TreeTagger.
  */
+@ResourceMetaData(name="TreeTagger POS-Tagger")
 @TypeCapability(
 	    inputs = {
 	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },

@@ -27,6 +27,7 @@ import org.apache.uima.cas.impl.XmiCasDeserializer;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.xml.sax.SAXException;
 
@@ -37,6 +38,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 /**
  * Reader for UIMA XMI files.
  */
+@ResourceMetaData(name="UIMA XMI CAS Reader")
 @MimeTypeCapability({MimeTypes.APPLICATION_VND_XMI_XML, MimeTypes.APPLICATION_X_UIMA_XMI})
 @TypeCapability(
         outputs={

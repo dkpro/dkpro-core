@@ -19,6 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.io.solr;
 
 import org.apache.solr.common.SolrInputDocument;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
@@ -26,8 +27,8 @@ import de.tudarmstadt.ukp.dkpro.core.io.solr.util.SolrUtils;
 
 /**
  * A simple implementation of {@link SolrWriter_ImplBase}
- *
  */
+@ResourceMetaData(name="Solr Index Writer")
 public class SolrWriter
     extends SolrWriter_ImplBase
 {

@@ -27,6 +27,7 @@ import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ExternalResource;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.fit.util.JCasUtil;
@@ -49,6 +50,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField;
  * This could be a lexical resource such as WordNet or a simple key-value map.
  * The annotation is stored in the SemanticField annotation type.
  */
+@ResourceMetaData(name="Semantic Field Annotator")
 public class SemanticFieldAnnotator
     extends JCasAnnotator_ImplBase
 {

@@ -33,6 +33,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.jcas.JCas;
@@ -61,6 +62,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
  * 
  * @see <a href="http://universaldependencies.github.io/docs/format.html">CoNLL-U Format</a>
  */
+@ResourceMetaData(name="CoNLL-U Reader")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_U})
 @TypeCapability(
         outputs = { 

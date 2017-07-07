@@ -32,6 +32,7 @@ import java.util.stream.Collectors;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
@@ -57,6 +58,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor
  * @see <a href="http://www.aclweb.org/anthology/W08-2121">The CoNLL-2008 Shared Task on
  *      Joint Parsing of Syntactic and Semantic Dependencies</a>
  */
+@ResourceMetaData(name="CoNLL 2008 Writer")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2008})
 @TypeCapability(
         inputs = { 

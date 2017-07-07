@@ -31,6 +31,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -49,6 +50,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 /**
  * Fangorn index writer.
  */
+@ResourceMetaData(name="Fangorn Index Writer")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_FANGORN})
 @TypeCapability(
         inputs = {

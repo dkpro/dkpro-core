@@ -25,6 +25,7 @@ import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
@@ -42,9 +43,8 @@ import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 /**
  * Write the topic proportions according to an LDA topic model to an output file. The proportions
  * need to be inferred in a previous step using {@link MalletLdaTopicModelInferencer}.
- *
- *
  */
+@ResourceMetaData(name="Mallet LDA Sorted Topic Proportions Writer")
 public class MalletLdaTopicsProportionsSortedWriter
     extends JCasFileWriter_ImplBase
 {

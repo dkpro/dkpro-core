@@ -39,6 +39,7 @@ import org.apache.uima.cas.StringArrayFS;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.fit.util.FSUtil;
@@ -62,6 +63,7 @@ import gate.util.SimpleFeatureMapImpl;
 import it.unimi.dsi.fastutil.ints.Int2IntMap;
 import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
 
+@ResourceMetaData(name="GATE XML Writer (generic)")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_GATE_XML})
 @TypeCapability(
         inputs = {

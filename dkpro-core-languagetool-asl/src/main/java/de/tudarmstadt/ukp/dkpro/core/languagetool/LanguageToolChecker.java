@@ -27,6 +27,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.LanguageCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -44,6 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
  * Detect grammatical errors in text using LanguageTool a rule based grammar checker.
  *
  */
+@ResourceMetaData(name="LanguageTool Grammar Checker")
 @LanguageCapability({ "en", "fa", "fr", "de", "pl", "ca", "it", "br", "nl", "pt", "ru", "be", "zh",
     "da", "eo", "gl", "el", "is", "ja", "km", "lt", "ml", "ro", "sk", "sl", "es", "sv", "ta",
     "tl", "uk" })

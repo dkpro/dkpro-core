@@ -30,6 +30,7 @@ import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.jdom.Element;
@@ -44,6 +45,7 @@ import static org.apache.commons.io.IOUtils.closeQuietly;
 /**
  * Collection reader for PDF files using CERMINE <a href="https://github.com/CeON/CERMINE">https://github.com/CeON/CERMINE</a>.
  */
+@ResourceMetaData(name="CERMINE PDF Reader")
 @MimeTypeCapability({MimeTypes.APPLICATION_PDF})
 @TypeCapability(
         outputs = {

@@ -42,6 +42,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.internal.ExtendedLogger;
 import org.apache.uima.jcas.JCas;
@@ -65,6 +66,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * Read AnCora XML format.
  */
+@ResourceMetaData(name="AnCora XML Reader")
 @MimeTypeCapability({MimeTypes.APPLICATION_XML, MimeTypes.APPLICATION_X_ANCORA_XML})
 @TypeCapability(
         outputs = {

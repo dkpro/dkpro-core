@@ -28,6 +28,7 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 
 import com.ibm.icu.text.CharsetDetector;
@@ -42,6 +43,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
  * <p>The reader tries to strip out hyphenation and replace problematic characters to produce a
  * cleaned text. Otherwise, it is a plain text reader.</p>
  */
+@ResourceMetaData(name="ACL Anthology Corpus Reader")
 @MimeTypeCapability(MimeTypes.TEXT_PLAIN)
 @TypeCapability(
         outputs={

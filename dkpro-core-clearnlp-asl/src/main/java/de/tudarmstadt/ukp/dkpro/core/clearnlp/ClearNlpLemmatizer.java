@@ -27,6 +27,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -48,15 +49,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * Lemmatizer using Clear NLP.
  *
  */
+@ResourceMetaData(name="ClearNLP Lemmatizer")
 @TypeCapability(
 		inputs = {
 				"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
 				"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-				"de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
-		},
+				"de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" },
 		outputs = {
-				"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"
-		}
+				"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" }
 )
 public class ClearNlpLemmatizer
 	extends JCasAnnotator_ImplBase

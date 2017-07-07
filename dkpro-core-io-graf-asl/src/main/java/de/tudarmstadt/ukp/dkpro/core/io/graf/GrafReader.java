@@ -27,6 +27,7 @@ import org.apache.uima.cas.impl.CASImpl;
 import org.apache.uima.cas.impl.Serialization;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.FsIndexFactory;
 import org.apache.uima.fit.factory.TypePrioritiesFactory;
@@ -48,6 +49,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 /**
  * ISO GrAF reader.
  */
+@ResourceMetaData(name="ISO GrAF Reader")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_GRAF_XML})
 @TypeCapability(
         outputs = {

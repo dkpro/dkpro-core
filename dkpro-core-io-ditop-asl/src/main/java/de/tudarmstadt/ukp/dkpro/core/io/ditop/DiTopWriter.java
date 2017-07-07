@@ -39,6 +39,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.DoubleArray;
@@ -58,6 +59,7 @@ import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
  * href="https://ditop.hs8.de/">DiTop</a>. It requires JCas input annotated by
  * {@link de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer} using the same model.
  */
+@ResourceMetaData(name="DiTop Writer")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_DITOP})
 @TypeCapability(
         inputs = { 

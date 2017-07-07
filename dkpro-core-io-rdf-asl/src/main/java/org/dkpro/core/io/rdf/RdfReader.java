@@ -33,6 +33,7 @@ import org.apache.uima.cas.CASException;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.io.rdf.internal.Rdf2Uima;
@@ -48,6 +49,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 /**
  * Reads a CAS serialized as RDF.
  */
+@ResourceMetaData(name="UIMA CAS RDF Reader")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_UIMA_RDF})
 public class RdfReader
     extends JCasResourceCollectionReader_ImplBase

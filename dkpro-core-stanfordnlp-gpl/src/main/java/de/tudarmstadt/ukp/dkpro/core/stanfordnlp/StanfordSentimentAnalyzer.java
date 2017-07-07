@@ -30,6 +30,7 @@ import edu.stanford.nlp.util.CoreMap;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
@@ -42,8 +43,8 @@ import java.util.Properties;
  * Experimental wrapper for {@link edu.stanford.nlp.pipeline.SentimentAnnotator} which assigns
  * 5 scores to each sentence. NOTE: Is very slow in the current state as it runs full Stanford
  * pipeline and does not take into account any existing DKPro annotations.
- *
  */
+@ResourceMetaData(name="CoreNLP Sentiment Analyzer")
 @TypeCapability(
 		inputs = {
 				"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",

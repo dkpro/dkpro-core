@@ -30,6 +30,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.internal.util.IntListIterator;
 import org.apache.uima.internal.util.PositiveIntSet;
 import org.apache.uima.internal.util.PositiveIntSet_impl;
@@ -49,9 +50,9 @@ import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentStorage
  *
  * @see ApplyChangesAnnotator
  */
-public
-class Backmapper
-extends JCasAnnotator_ImplBase
+@ResourceMetaData(name="CAS Transformation - Map back")
+public class Backmapper
+    extends JCasAnnotator_ImplBase
 {
 	/**
 	 * Chain of views for backmapping. This should be the reverse of the chain of views that the

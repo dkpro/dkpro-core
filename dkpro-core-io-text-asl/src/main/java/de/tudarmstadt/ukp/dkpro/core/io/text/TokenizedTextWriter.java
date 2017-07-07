@@ -28,6 +28,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -40,6 +41,7 @@ import java.io.OutputStream;
  * per line and tokens split by whitespaces. Optionally, annotations other than tokens (e.g. lemmas)
  * are written as specified by {@link #PARAM_FEATURE_PATH}.
  */
+@ResourceMetaData(name="Tokenized Text Writer")
 @MimeTypeCapability({MimeTypes.TEXT_PLAIN})
 @TypeCapability(
         inputs={

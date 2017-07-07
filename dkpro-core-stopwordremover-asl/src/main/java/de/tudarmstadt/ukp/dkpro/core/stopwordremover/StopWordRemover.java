@@ -43,6 +43,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
@@ -60,6 +61,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * Remove all of the specified types from the CAS if their covered text is in the stop word
  * dictionary. Also remove any other of the specified types that is covered by a matching instance.
  */
+@ResourceMetaData(name="Stop Word Remover")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.StopWord" })

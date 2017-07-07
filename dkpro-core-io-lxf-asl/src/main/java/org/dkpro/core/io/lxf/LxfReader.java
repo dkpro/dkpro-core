@@ -24,6 +24,7 @@ import java.io.InputStream;
 import org.apache.uima.UimaContext;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -36,6 +37,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 
+@ResourceMetaData(name="CLARINO LAP LXF Reader")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_LXF_JSON})
 @TypeCapability(
         outputs = { 

@@ -43,6 +43,7 @@ import org.apache.uima.cas.impl.CASMgrSerializer;
 import org.apache.uima.cas.impl.CASSerializer;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -150,6 +151,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
  * @see <a href="http://uima.apache.org/d/uimaj-2.9.0/references.html#ugr.ref.compress">Compressed
  *      Binary CASes</a>
  */
+@ResourceMetaData(name="UIMA Binary CAS Writer")
 @MimeTypeCapability({ MimeTypes.APPLICATION_X_UIMA_BINARY })
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class BinaryCasWriter

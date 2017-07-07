@@ -26,6 +26,7 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
@@ -47,6 +48,7 @@ import java.util.Map;
  * @see <a href="http://lucene.apache.org/core/5_3_1/benchmark/org/apache/lucene/benchmark/utils/ExtractReuters.html">ExtractReuters</a>
  * @see <a href="https://github.com/apache/mahout/blob/master/examples/bin/cluster-reuters.sh">cluster-reuters.sh</a>
  */
+@ResourceMetaData(name="Reuters-21578 Corpus Text Reader")
 @MimeTypeCapability({MimeTypes.TEXT_X_REUTERS21578})
 @TypeCapability(
         outputs = { 

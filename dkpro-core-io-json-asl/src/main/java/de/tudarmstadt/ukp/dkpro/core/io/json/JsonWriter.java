@@ -28,6 +28,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CASRuntimeException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.json.JsonCasSerializer;
@@ -43,6 +44,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 /**
  * UIMA JSON format writer.
  */
+@ResourceMetaData(name="UIMA JSON CAS Writer")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_UIMA_JSON})
 @TypeCapability(
         inputs={

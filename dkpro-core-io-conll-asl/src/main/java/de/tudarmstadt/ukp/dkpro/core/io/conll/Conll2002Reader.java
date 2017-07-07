@@ -34,6 +34,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.util.JCasUtil;
@@ -109,6 +110,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * @see <a href="http://www.clips.ua.ac.be/conll2002/ner/">CoNLL 2002 shared task</a>
  * @see <a href="https://sites.google.com/site/germeval2014ner/data">GermEval 2014 NER task</a> 
  */
+@ResourceMetaData(name="CoNLL 2002 Reader")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2002, MimeTypes.TEXT_X_GERMEVAL_2014})
 @TypeCapability(
         outputs = { 

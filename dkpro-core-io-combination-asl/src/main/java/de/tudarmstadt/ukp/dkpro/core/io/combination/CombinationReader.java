@@ -31,6 +31,7 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.component.CasCollectionReader_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
@@ -38,8 +39,8 @@ import org.xml.sax.SAXException;
 
 /**
  * Combines multiple readers into a single reader.
- *
  */
+@ResourceMetaData(name="Combining Meta-Reader")
 public class CombinationReader
     extends CasCollectionReader_ImplBase
 {

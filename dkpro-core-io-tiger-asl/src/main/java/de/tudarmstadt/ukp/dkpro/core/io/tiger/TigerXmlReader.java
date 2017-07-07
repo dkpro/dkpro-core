@@ -47,6 +47,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.util.FSCollectionFactory;
@@ -93,6 +94,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerTerminal;
  * UIMA collection reader for TIGER-XML files. Also supports the augmented format used in the
  * Semeval 2010 task which includes semantic role data.
  */
+@ResourceMetaData(name="TIGER-XML Reader")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_TIGER_XML, MimeTypes.APPLICATION_X_SEMEVAL_2010_XML})
 @TypeCapability(
         outputs = { 

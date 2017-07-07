@@ -24,6 +24,7 @@ import de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 
 import java.io.IOException;
@@ -39,6 +40,7 @@ import static org.apache.uima.fit.util.JCasUtil.select;
  * {@link MalletLdaTopicModelInferencer} before.
  * </p>
  */
+@ResourceMetaData(name="Mallet LDA Topic Proportions Writer")
 public class MalletLdaTopicProportionsWriter
         extends JCasFileWriter_ImplBase
 {

@@ -33,6 +33,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.util.JCasUtil;
@@ -56,6 +57,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
  * 
  * @see <a href="http://www.cnts.ua.ac.be/conll2000/chunking/">CoNLL 2000 shared task</a>
  */
+@ResourceMetaData(name="CoNLL 2000 Reader")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2000})
 @TypeCapability(
         outputs = { 

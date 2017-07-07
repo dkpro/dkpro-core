@@ -34,6 +34,7 @@ import javax.xml.stream.XMLOutputFactory;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
@@ -44,6 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import javanet.staxutils.IndentingXMLEventWriter;
 
+@ResourceMetaData(name="XCES Basic XML Writer")
 @TypeCapability(
         inputs = {            
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph" })

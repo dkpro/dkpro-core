@@ -22,6 +22,7 @@ import cc.mallet.types.Instance;
 import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,7 +35,7 @@ import java.io.IOException;
  * <p>
  * Set {@link #PARAM_COVERING_ANNOTATION_TYPE} to define what is considered a document (sentences, paragraphs, etc.).
  */
-
+@ResourceMetaData(name="Mallet LDA Topic Model Trainer")
 public class MalletLdaTopicModelTrainer
         extends MalletModelTrainer
 {

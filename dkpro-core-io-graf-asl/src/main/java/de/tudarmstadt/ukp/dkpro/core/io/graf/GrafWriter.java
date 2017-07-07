@@ -21,6 +21,7 @@ import java.io.OutputStream;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.xces.graf.api.IGraph;
@@ -34,6 +35,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 /**
  * ISO GrAF writer.
  */
+@ResourceMetaData(name="ISO GrAF Writer")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_GRAF_XML})
 @TypeCapability(
         inputs={

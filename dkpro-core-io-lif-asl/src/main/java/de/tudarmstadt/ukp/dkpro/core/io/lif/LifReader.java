@@ -23,6 +23,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.lappsgrid.serialization.Serializer;
@@ -33,8 +34,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.io.lif.internal.Lif2DKPro;
 
 /**
- * Writer for the LIF format.
+ * Reader for the LIF format.
  */
+@ResourceMetaData(name="LAPPS Grid LIF Reader")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_LIF_JSON})
 @TypeCapability(
         outputs={

@@ -28,6 +28,7 @@ import org.apache.commons.collections4.bag.HashBag;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
@@ -39,6 +40,7 @@ import java.util.stream.Stream;
 /**
  * Count unigrams and bigrams in a collection.
  */
+@ResourceMetaData(name="Frequency Count Writer")
 public class FrequencyCounter
         extends JCasFileWriter_ImplBase
 {

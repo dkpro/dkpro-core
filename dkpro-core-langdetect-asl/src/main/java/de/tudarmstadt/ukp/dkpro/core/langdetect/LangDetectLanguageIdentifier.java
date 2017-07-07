@@ -25,6 +25,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
@@ -40,6 +41,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 /**
  * Langdetect language identifier based on character n-grams.
  */
+@ResourceMetaData(name="Simple Language Identifier (Token N-Gram-based)")
 public class LangDetectLanguageIdentifier
     extends JCasAnnotator_ImplBase
 {

@@ -30,6 +30,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
@@ -48,6 +49,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 /**
  * Penn Treebank chunked format reader.
  */
+@ResourceMetaData(name="Penn Treebank Chunked Format Reader")
 @MimeTypeCapability({MimeTypes.TEXT_X_PTB_CHUNKED})
 @TypeCapability(
         outputs = { 

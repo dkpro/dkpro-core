@@ -42,6 +42,7 @@ import org.apache.uima.cas.FSIterator;
 import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
@@ -90,8 +91,8 @@ import edu.stanford.nlp.util.Filters;
 
 /**
  * Stanford Parser component.
- *
  */
+@ResourceMetaData(name="CoreNLP Parser (old API)")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",

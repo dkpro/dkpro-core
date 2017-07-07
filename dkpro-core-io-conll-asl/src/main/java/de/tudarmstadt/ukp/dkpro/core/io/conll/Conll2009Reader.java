@@ -35,6 +35,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.util.FSCollectionFactory;
@@ -69,6 +70,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
  * @see <a href="http://www.aclweb.org/anthology/W08-2121.pdf">The CoNLL-2008 Shared Task on Joint
  *      Parsing of Syntactic and Semantic Dependencies</a>
  */
+@ResourceMetaData(name="CoNLL 2009 Reader")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2009})
 @TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",

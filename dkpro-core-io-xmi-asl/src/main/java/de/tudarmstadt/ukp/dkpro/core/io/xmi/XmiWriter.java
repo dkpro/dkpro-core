@@ -29,6 +29,7 @@ import org.apache.uima.cas.CASRuntimeException;
 import org.apache.uima.cas.impl.XmiCasSerializer;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -42,6 +43,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 /**
  * UIMA XMI format writer.
  */
+@ResourceMetaData(name="UIMA XMI CAS Writer")
 @MimeTypeCapability({MimeTypes.APPLICATION_VND_XMI_XML, MimeTypes.APPLICATION_X_UIMA_XMI})
 @TypeCapability(
         inputs={

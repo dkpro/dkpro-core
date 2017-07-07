@@ -30,6 +30,7 @@ import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.internal.util.XMLUtils;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -53,6 +54,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.imscwb.util.TextIterable;
 /**
  * Reads a tab-separated format including pseudo-XML tags.
  */
+@ResourceMetaData(name="IMS CWB Reader")
 @MimeTypeCapability({MimeTypes.TEXT_X_IMSCWB})
 @TypeCapability(
         outputs = { 

@@ -36,6 +36,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.DoubleArray;
@@ -52,6 +53,7 @@ import java.util.List;
 /**
  * Infers the topic distribution over documents using a Mallet {@link ParallelTopicModel}.
  */
+@ResourceMetaData(name="Mallet LDA Topic Model Inferencer")
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
         outputs = { "de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution" }

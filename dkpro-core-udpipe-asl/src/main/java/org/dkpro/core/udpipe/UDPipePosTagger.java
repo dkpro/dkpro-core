@@ -31,6 +31,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -54,6 +55,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * 
  * @see <a href="https://github.com/ufal/udpipe/tree/master/src/morphodita">MorphoDiTa in UDPipe</a>
  */
+@ResourceMetaData(name="UDPipe MorphoDiTa Morphological Analyzer")
 @TypeCapability(
         inputs = { 
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",

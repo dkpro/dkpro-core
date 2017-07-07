@@ -26,6 +26,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -41,6 +42,7 @@ import edu.emory.mathcs.nlp.component.morph.english.EnglishMorphAnalyzer;
 /**
  * Emory NLP4J lemmatizer. This is a lower-casing lemmatizer.
  */
+@ResourceMetaData(name="NLP4J Lemmatizer")
 @TypeCapability(
 	    inputs = {
 	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",

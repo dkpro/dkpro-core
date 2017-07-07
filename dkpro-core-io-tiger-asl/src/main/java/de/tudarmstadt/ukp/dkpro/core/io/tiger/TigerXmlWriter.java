@@ -41,6 +41,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
@@ -61,6 +62,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerTerminal;
 /**
  * UIMA CAS consumer writing the CAS document text in the TIGER-XML format.
  */
+@ResourceMetaData(name="TIGER-XML Writer")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_TIGER_XML})
 @TypeCapability(
         inputs = {

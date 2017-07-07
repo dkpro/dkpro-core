@@ -32,6 +32,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
@@ -51,6 +52,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
  *
  * @see <a href="http://www.cnts.ua.ac.be/conll2003/ner/">CoNLL 2003 shared task</a>
  */
+@ResourceMetaData(name="CoNLL 2003 Writer")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2003})
 @TypeCapability(
         inputs = { 

@@ -24,6 +24,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,6 +40,7 @@ import java.io.PrintWriter;
  *
  * @since 1.9.0
  */
+@ResourceMetaData(name="Mallet Embeddings Trainer")
 public class MalletEmbeddingsTrainer
         extends MalletModelTrainer
 {

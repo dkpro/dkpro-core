@@ -31,6 +31,7 @@ import org.apache.uima.cas.impl.CASCompleteSerializer;
 import org.apache.uima.cas.impl.CASMgrSerializer;
 import org.apache.uima.cas.impl.CASSerializer;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
@@ -41,6 +42,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 /**
  * @deprecated use {@code BinaryCasWriter} with format S instead.
  */
+@ResourceMetaData(name="UIMA Serialized CAS Writer")
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 @Deprecated
 public class SerializedCasWriter

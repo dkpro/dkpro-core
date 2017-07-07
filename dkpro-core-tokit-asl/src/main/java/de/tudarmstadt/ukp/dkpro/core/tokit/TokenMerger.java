@@ -34,6 +34,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
@@ -49,9 +50,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * Merges any Tokens that are covered by a given annotation type. E.g. this component can be used
  * to create a single tokens from all tokens that constitute a multi-token named entity.
- *
  */
-
+@ResourceMetaData(name="Token Merger")
 @TypeCapability(
         inputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -59,7 +59,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"},
         outputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"})
-
 public class TokenMerger
 	extends JCasAnnotator_ImplBase
 {

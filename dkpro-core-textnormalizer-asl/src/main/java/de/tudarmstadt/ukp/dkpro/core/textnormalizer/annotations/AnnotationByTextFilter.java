@@ -30,6 +30,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
@@ -40,9 +41,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 /**
  * Reads a list of words from a text file (one token per line) and retains only tokens or other
  * annotations that match any of these words.
- *
- *
  */
+@ResourceMetaData(name="Annotation-By-Text Filter")
 public class AnnotationByTextFilter
     extends JCasAnnotator_ImplBase
 {

@@ -34,6 +34,7 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -59,6 +60,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
  * Reads the contents of a given URL and strips the HTML. Returns the textual contents. Also 
  * recognizes headings and paragraphs.
  */
+@ResourceMetaData(name="HTML Reader")
 @MimeTypeCapability({MimeTypes.APPLICATION_XHTML, MimeTypes.TEXT_HTML})
 @TypeCapability(
 		outputs = {

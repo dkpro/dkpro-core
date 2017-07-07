@@ -35,6 +35,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.jcas.JCas;
@@ -60,6 +61,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
  * 
  * @see <a href="https://web.archive.org/web/20131216222420/http://ilk.uvt.nl/conll/">CoNLL-X Shared Task: Multi-lingual Dependency Parsing</a>
  */
+@ResourceMetaData(name="CoNLL 2006 Reader")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2006})
 @TypeCapability(
         outputs = { 

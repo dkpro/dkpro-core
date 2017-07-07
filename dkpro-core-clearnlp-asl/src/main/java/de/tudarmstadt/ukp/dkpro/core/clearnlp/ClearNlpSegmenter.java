@@ -26,6 +26,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.LanguageCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -42,6 +43,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 /**
  * Tokenizer using Clear NLP.
  */
+@ResourceMetaData(name="ClearNLP Segmenter")
 @LanguageCapability(value = "en")
 @TypeCapability(
 	    outputs = {

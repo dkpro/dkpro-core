@@ -37,6 +37,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.util.FSCollectionFactory;
@@ -70,6 +71,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
  * @see <a href="http://conll.cemantix.org/2012/data.html">CoNLL 2012 Shared Task:
  *      Modeling Multilingual Unrestricted Coreference in OntoNotes</a>
  */
+@ResourceMetaData(name="CoNLL 2012 Reader")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2012})
 @TypeCapability(
         outputs = { 

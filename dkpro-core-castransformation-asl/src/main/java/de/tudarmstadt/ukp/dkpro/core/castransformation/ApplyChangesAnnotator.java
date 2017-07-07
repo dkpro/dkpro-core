@@ -26,6 +26,7 @@ import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.FSIndex;
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
@@ -41,6 +42,7 @@ import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentStorage
  * @since 1.1.0
  * @see Backmapper
  */
+@ResourceMetaData(name="CAS Transformation - Apply")
 @TypeCapability(
         inputs={
             "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",

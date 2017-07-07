@@ -27,6 +27,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.dkpro.core.io.rdf.internal.Uima2Rdf;
 
@@ -37,6 +38,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 /**
  * Writes the CAS out as RDF.
  */
+@ResourceMetaData(name="UIMA CAS RDF Writer")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_UIMA_RDF})
 public class RdfWriter
     extends JCasFileWriter_ImplBase

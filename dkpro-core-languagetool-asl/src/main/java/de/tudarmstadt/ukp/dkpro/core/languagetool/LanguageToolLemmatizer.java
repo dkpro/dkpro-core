@@ -29,6 +29,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.LanguageCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -51,6 +52,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * lemma from those readings. If no readings could be found, the original text is assigned as
  * lemma.
  */
+@ResourceMetaData(name="LanguageTool Lemmatizer")
 @LanguageCapability({ "en", "fa", "fr", "de", "pl", "ca", "it", "br", "nl", "pt", "ru", "be", "zh",
         "da", "eo", "gl", "el", "is", "ja", "km", "lt", "ml", "ro", "sk", "sl", "es", "sv", "ta",
         "tl", "uk" })

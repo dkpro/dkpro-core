@@ -31,6 +31,7 @@ import java.util.TreeMap;
 
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
@@ -61,6 +62,7 @@ import eu.clarin.weblicht.wlfxb.xb.WLData;
  * tokens and stored in a map (token_id, token(CAS object)) where later we get can get the offset
  * from the token
  */
+@ResourceMetaData(name="CLARIN-DE WebLicht TCF Reader")
 @MimeTypeCapability({MimeTypes.TEXT_TCF})
 @TypeCapability(outputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
