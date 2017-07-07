@@ -23,6 +23,7 @@ import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -35,9 +36,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 /**
  * Creates {@link SofaChangeAnnotation}s containing corrections for previously identified spelling
  * errors.
- *
  */
-
+@ResourceMetaData(name="Simple Spelling Corrector")
 @TypeCapability(
         inputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},

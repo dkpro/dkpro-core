@@ -18,15 +18,16 @@
 package de.tudarmstadt.ukp.dkpro.core.commonscodec;
 
 import org.apache.commons.codec.language.Soundex;
+import org.apache.uima.fit.descriptor.LanguageCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 
 /**
  * Soundex phonetic transcription based on Apache Commons Codec.
  * Works for English.
- *
- *
  */
-
+@ResourceMetaData(name="Commons Codec Soundex Phonetic Transcriptor")
+@LanguageCapability("en")
 @TypeCapability(
         inputs={"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
         outputs={"de.tudarmstadt.ukp.dkpro.core.api.phonetics.type.PhoneticTranscription"})
@@ -34,7 +35,6 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 public class SoundexPhoneticTranscriptor
     extends PhoneticTranscriptor_ImplBase
 {
-
     public SoundexPhoneticTranscriptor()
     {
         this.encoder = new Soundex();

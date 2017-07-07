@@ -28,6 +28,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ExternalResource;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
@@ -38,6 +39,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_Im
 /**
  * Takes a text and shortens extra long words
  */
+@ResourceMetaData(name="Expressive Lengthening Normalizer")
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class ExpressiveLengtheningNormalizer
@@ -65,7 +67,7 @@ public class ExpressiveLengtheningNormalizer
                     replacement = getBestReplacement(tokenText);
                     if (replacement.equals("No Candidate has a score higher than 0"))
                         replacement = tokenText;
-                }
+                    }
                 catch (IOException e) {
                     getLogger().error(
                             "Unable to determine the best replacement, using original. Error: "

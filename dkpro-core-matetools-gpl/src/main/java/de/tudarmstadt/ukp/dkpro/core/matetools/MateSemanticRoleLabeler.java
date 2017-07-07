@@ -74,7 +74,7 @@ import se.lth.cs.srl.pipeline.Pipeline;
  * pages 43--48, Boulder, June 4--5 2009. 
  * </p>
  */
-@ResourceMetaData(name="Mate Tools Dependency Parser")
+@ResourceMetaData(name="Mate Tools Semantic Role Labeler")
 @TypeCapability(
 	inputs = {
     	"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",

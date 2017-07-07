@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.languagetool;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.LanguageCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 
 import cn.com.cjf.CJFBeanFactory;
@@ -28,6 +29,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformer_ImplBase;
 /**
  * Converts traditional Chinese to simplified Chinese or vice-versa.
  */
+@ResourceMetaData(name="Chinese Traditional/Simplified Converter")
 @LanguageCapability("zh")
 public class CjfNormalizer
     extends JCasTransformer_ImplBase

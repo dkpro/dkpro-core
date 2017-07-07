@@ -17,11 +17,14 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.ixa;
 
+import org.apache.uima.fit.descriptor.ResourceMetaData;
+
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 
 /**
  * Part-of-Speech annotator using OpenNLP with IXA extensions.
  */
+@ResourceMetaData(name="IXA POS-Tagger")
 public class IxaPosTagger
 	extends OpenNlpPosTagger
 {

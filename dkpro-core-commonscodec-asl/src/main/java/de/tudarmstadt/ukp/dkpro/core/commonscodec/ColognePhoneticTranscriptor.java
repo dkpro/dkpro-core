@@ -18,15 +18,16 @@
 package de.tudarmstadt.ukp.dkpro.core.commonscodec;
 
 import org.apache.commons.codec.language.ColognePhonetic;
+import org.apache.uima.fit.descriptor.LanguageCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 
 /**
  * Cologne phonetic (Kölner Phonetik) transcription based on Apache Commons Codec.
  * Works for German.
- *
- *
  */
-
+@ResourceMetaData(name="Commons Codec Cologne Phonetic Transcriptor")
+@LanguageCapability("de")
 @TypeCapability(
         inputs={"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
         outputs={"de.tudarmstadt.ukp.dkpro.core.api.phonetics.type.PhoneticTranscription"})

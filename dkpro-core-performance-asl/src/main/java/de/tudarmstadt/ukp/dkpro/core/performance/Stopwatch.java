@@ -33,6 +33,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
@@ -44,7 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.performance.type.TimerAnnotation;
  * Can be used to measure how long the processing between two points in a pipeline takes.
  * For that purpose, the AE needs to be added two times, before and after the part of the pipeline that should be measured.
  */
-
+@ResourceMetaData(name="Stopwatch")
 @TypeCapability(
         inputs={
                 "de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation"},

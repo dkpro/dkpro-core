@@ -21,6 +21,7 @@ import java.util.List;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.LanguageCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
@@ -35,6 +36,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 /**
  * Segmenter for Japanese using <a href="https://github.com/atilika/kuromoji">Kuromojo</a>. 
  */
+@ResourceMetaData(name="Kuromoji Segmenter")
 @LanguageCapability("ja")
 @TypeCapability(
         outputs = { 

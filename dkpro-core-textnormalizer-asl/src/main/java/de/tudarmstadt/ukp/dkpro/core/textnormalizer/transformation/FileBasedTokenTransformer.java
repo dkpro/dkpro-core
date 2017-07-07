@@ -24,6 +24,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_Im
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
@@ -38,9 +39,8 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 /**
  * Replaces all tokens that are listed in the file in {@link #PARAM_MODEL_LOCATION} by the string
  * specified in {@link #PARAM_REPLACEMENT}.
- * 
- *
  */
+@ResourceMetaData(name="File-based Token Transformer")
 public class FileBasedTokenTransformer
     extends JCasTransformerChangeBased_ImplBase
 {

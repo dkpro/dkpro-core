@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.textnormalizer;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
@@ -29,7 +30,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_Im
 /**
  * Converts annotations of the type SpellingAnomaly into a SofaChangeAnnoatation.
  */
-@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly" })
+@ResourceMetaData(name="Spelling Normalizer")
+@TypeCapability(
+        inputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly" })
 public class SpellingNormalizer
     extends JCasTransformerChangeBased_ImplBase
 {

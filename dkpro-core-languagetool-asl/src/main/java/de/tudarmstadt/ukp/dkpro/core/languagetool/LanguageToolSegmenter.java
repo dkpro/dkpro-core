@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.LanguageCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.languagetool.Language;
@@ -33,6 +34,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
  * Segmenter using LanguageTool to do the heavy lifting. LanguageTool internally uses different
  * strategies for tokenization.
  */
+@ResourceMetaData(name="LanguageTool Segmenter")
 @LanguageCapability({ "en", "fa", "fr", "de", "pl", "ca", "it", "br", "nl", "pt", "ru", "be", "zh",
     "da", "eo", "gl", "el", "is", "ja", "km", "lt", "ml", "ro", "sk", "sl", "es", "sv", "ta",
     "tl", "uk" })

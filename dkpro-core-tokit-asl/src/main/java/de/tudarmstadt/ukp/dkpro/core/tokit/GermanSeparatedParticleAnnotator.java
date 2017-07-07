@@ -21,6 +21,8 @@ import java.util.List;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.LanguageCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
@@ -30,18 +32,19 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * Annotator to be used for post-processing of German corpora that have been lemmatized and POS-tagged with the
- * TreeTagger, based on the STTS tagset.
+ * Annotator to be used for post-processing of German corpora that have been lemmatized and
+ * POS-tagged with the TreeTagger, based on the STTS tagset.
  *
- * This Annotator deals with German particle verbs. Particle verbs consist of a particle and a stem, e.g. anfangen = an+fangen
- * There are many usages of German particle verbs where the stem and the particle are separated, e.g., Wir fangen gleich an.
- * The TreeTagger lemmatizes the verb stem as "fangen" and the separated particle as "an",
- * the proper verblemma "anfangen" is thus not available as an annotation.
- * The GermanSeparatedParticleAnnotator replaces the lemma of the stem of particle-verbs (e.g., fangen) by the proper verb lemma
- * (e.g. anfangen) and leaves the lemma of the separated particle unchanged.
- *
- *
+ * This Annotator deals with German particle verbs. Particle verbs consist of a particle and a stem,
+ * e.g. anfangen = an+fangen There are many usages of German particle verbs where the stem and the
+ * particle are separated, e.g., Wir fangen gleich an. The TreeTagger lemmatizes the verb stem as
+ * "fangen" and the separated particle as "an", the proper verblemma "anfangen" is thus not
+ * available as an annotation. The GermanSeparatedParticleAnnotator replaces the lemma of the stem
+ * of particle-verbs (e.g., fangen) by the proper verb lemma (e.g. anfangen) and leaves the lemma of
+ * the separated particle unchanged.
  */
+@ResourceMetaData(name="German Separated Particle Annotator")
+@LanguageCapability("de")
 @TypeCapability(
         inputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",

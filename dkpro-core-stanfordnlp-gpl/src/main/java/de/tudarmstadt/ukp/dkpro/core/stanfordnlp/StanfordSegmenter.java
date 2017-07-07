@@ -33,6 +33,7 @@ import java.util.regex.Pattern;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.LanguageCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.Messages;
@@ -54,6 +55,7 @@ import edu.stanford.nlp.process.WordToSentenceProcessor.NewlineIsSentenceBreak;
 /**
  * Stanford sentence splitter and tokenizer.
  */
+@ResourceMetaData(name="CoreNLP Segmenter (old API)")
 @LanguageCapability({"en", "es", "fr"})
 public class StanfordSegmenter
     extends SegmenterBase

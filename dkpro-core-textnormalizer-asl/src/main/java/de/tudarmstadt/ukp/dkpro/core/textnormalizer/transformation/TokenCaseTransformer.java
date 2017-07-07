@@ -24,6 +24,7 @@ import java.util.Locale;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -33,9 +34,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_Im
  * Change tokens to follow a specific casing: all upper case, all lower case, or 'normal case':
  * lowercase everything but the first character of a token and the characters immediately following
  * a hyphen.
- *
- *
  */
+@ResourceMetaData(name="Token Case Transformer")
 public class TokenCaseTransformer
     extends JCasTransformerChangeBased_ImplBase
 {

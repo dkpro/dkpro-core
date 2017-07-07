@@ -20,12 +20,16 @@ package de.tudarmstadt.ukp.dkpro.core.textnormalizer.frequency;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.uima.fit.descriptor.LanguageCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 
 /**
  * Takes a text and checks for umlauts written as "ae", "oe", or "ue" and normalizes them if they
  * really are umlauts depending on a frequency model.
  */
+@ResourceMetaData(name="Umlaut Normalizer")
+@LanguageCapability("de")
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class UmlautNormalizer

@@ -19,6 +19,7 @@
 package de.tudarmstadt.ukp.dkpro.core.tokit;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
@@ -30,6 +31,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
  * 
  * @deprecated Use {@link RegexSegmenter}
  */
+@ResourceMetaData(name="Line-based Sentence Segmenter")
 @TypeCapability(
         outputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"})

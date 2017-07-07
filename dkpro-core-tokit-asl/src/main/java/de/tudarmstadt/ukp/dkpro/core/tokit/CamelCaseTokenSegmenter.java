@@ -34,7 +34,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * Split up existing tokens again if they are camel-case text.
- *
  */
 @ResourceMetaData(name="CamelCase Token Segmenter")
 @TypeCapability(

@@ -21,6 +21,7 @@ package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 import java.io.StringReader;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_ImplBase;
@@ -33,6 +34,7 @@ import edu.stanford.nlp.process.Tokenizer;
  * Uses the normalizing tokenizer of the Stanford CoreNLP tools to escape the text PTB-style. This
  * component operates directly on the text and does not require prior segmentation.
  */
+@ResourceMetaData(name="Stanford Penn Treebank Normalizer")
 public class StanfordPtbTransformer
     extends JCasTransformerChangeBased_ImplBase
 {

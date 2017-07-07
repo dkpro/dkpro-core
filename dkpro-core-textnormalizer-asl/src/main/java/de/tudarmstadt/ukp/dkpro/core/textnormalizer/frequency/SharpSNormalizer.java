@@ -20,9 +20,14 @@ package de.tudarmstadt.ukp.dkpro.core.textnormalizer.frequency;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.uima.fit.descriptor.LanguageCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
+
 /**
  * Takes a text and replaces sharp s
  */
+@ResourceMetaData(name="Sharp S (ß) Normalizer")
+@LanguageCapability("de")
 public class SharpSNormalizer
     extends ReplacementFrequencyNormalizer_ImplBase
 {

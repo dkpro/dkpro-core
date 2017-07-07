@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.icu;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.LanguageCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
@@ -31,6 +32,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 /**
  * ICU segmenter.
  */
+@ResourceMetaData(name="ICU Segmenter")
 @LanguageCapability({ "af", "ak", "am", "ar", "as", "az", "be", "bg", "bm", "bn", "bo", "br", "bs",
         "ca", "ce", "cs", "cy", "da", "de", "dz", "ee", "el", "en", "eo", "es", "et", "eu", "fa",
         "ff", "fi", "fo", "fr", "fy", "ga", "gd", "gl", "gu", "gv", "ha", "hi", "hr", "hu", "hy",

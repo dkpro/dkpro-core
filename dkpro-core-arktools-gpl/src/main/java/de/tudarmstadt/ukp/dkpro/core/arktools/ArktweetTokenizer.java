@@ -26,6 +26,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.CasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 
 import cmu.arktweetnlp.Twokenize;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -34,10 +35,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * ArkTweet tokenizer.
  */
+@ResourceMetaData(name="ArkTweet Tokenizer")
 public class ArktweetTokenizer
     extends CasAnnotator_ImplBase
 {
-
     private Type tokenType;
     private Type sentenceType;
 

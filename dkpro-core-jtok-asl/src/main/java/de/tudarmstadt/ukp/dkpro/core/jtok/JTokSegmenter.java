@@ -27,6 +27,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.LanguageCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
@@ -45,6 +46,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 /**
  * JTok segmenter.
  */
+@ResourceMetaData(name="JTok Segmenter")
 @LanguageCapability({"en", "de", "it"})
 @TypeCapability(outputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph",
@@ -59,6 +61,10 @@ public class JTokSegmenter
     public static final String PARAM_WRITE_PARAGRAPH = ComponentParameters.PARAM_WRITE_PARAGRAPH;
     @ConfigurationParameter(name=PARAM_WRITE_PARAGRAPH, mandatory=true, defaultValue="true")
     private boolean writeParagraph;
+    
+    public static final String PARAM_PTB_ESCAPING = "ptbEscaping";
+    @ConfigurationParameter(name=PARAM_PTB_ESCAPING, mandatory=true, defaultValue="false")
+    private boolean ptbEscaping;
     
     private JTok tokenizer;
     
@@ -101,7 +107,12 @@ public class JTokSegmenter
                 
                 for (Token t : tu.getTokens()) {
                     if (isWriteToken()) {
-                        createToken(aJCas, t.getStartIndex(), t.getEndIndex());
+                        if (ptbEscaping) {
+                            createToken(aJCas, t.getPtbImage(), t.getStartIndex(), t.getEndIndex());
+                        }
+                        else {
+                            createToken(aJCas, t.getImage(), t.getStartIndex(), t.getEndIndex());
+                        }
                     }
                 }
             }
