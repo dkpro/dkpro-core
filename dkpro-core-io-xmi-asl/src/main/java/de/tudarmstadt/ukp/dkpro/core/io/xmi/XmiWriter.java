@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CASRuntimeException;
@@ -66,6 +67,14 @@ public class XmiWriter
 	@ConfigurationParameter(name=PARAM_TYPE_SYSTEM_FILE, mandatory=false)
 	private File typeSystemFile;
 
+	/**
+	 * Specify the suffix of output files. Default value <code>.xmi</code>. If the suffix is not
+	 * needed, provide an empty string as value.
+	 */
+	public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
+	@ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xmi")
+	private String filenameSuffix;
+
 	private boolean typeSystemWritten;
 
 	@Override
@@ -81,7 +90,7 @@ public class XmiWriter
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
-        try (OutputStream docOS = getOutputStream(aJCas, ".xmi")) {
+        try (OutputStream docOS = getOutputStream(aJCas, filenameSuffix)) {
             XmiCasSerializer.serialize(aJCas.getCas(), null, docOS, prettyPrint, null);
 
             if (!typeSystemWritten) {
