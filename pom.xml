@@ -592,5 +592,39 @@
 				</plugins>
 			</build>
 		</profile>
+        <profile>
+            <id>run-omtd-plugin</id>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>omtd.snapshots</id>
+                    <name>OpenMinTeD SNAPSHOTs</name>
+                    <url>https://repo.openminted.eu/content/repositories/snapshots</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>eu.openminted.share.annotations</groupId>
+                        <artifactId>omtd-share-annotations-maven-plugin</artifactId>
+                        <version>0.0.1-SNAPSHOT</version>
+                        <executions>
+                            <execution>
+                                <id>default</id>
+                                <phase>process-classes</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                      </plugin>
+                </plugins>
+            </build>
+        </profile>
 	</profiles>
 </project>
