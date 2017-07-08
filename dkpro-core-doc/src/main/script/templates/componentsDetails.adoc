@@ -33,10 +33,11 @@ include::{include-dir}sectionIntro${fileSuffix}.adoc[]
 <% group.value.each { 
 def engine = it.value; %>
 [[engine-${ it.key }]]
-==== ${it.key}
+==== ${it.value.spec.metaData.name}
 
 ****
 [horizontal, role="small"]
+Short name::       ${engine.name}
 Category::         ${engine.role}
 Group{nbsp}ID::    ${engine.groupId}
 Artifact{nbsp}ID:: ${engine.artifactId}
