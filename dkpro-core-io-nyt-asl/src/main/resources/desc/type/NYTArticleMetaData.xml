@@ -2,8 +2,8 @@
 <typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
 	<name>NYTArticleMetaData</name>
 	<description/>
-	<version>1.0</version>
-	<vendor/>
+  <version>${version}</version>
+  <vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
 	<types>
 		<typeDescription>
 			<name>org.dkpro.core.io.nyt.metadata.NYTArticleMetaData</name>

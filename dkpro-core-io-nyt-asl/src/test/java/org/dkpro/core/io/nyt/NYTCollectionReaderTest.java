@@ -22,9 +22,7 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.component.CasDumpWriter;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
-import org.apache.uima.fit.factory.TypeSystemDescriptionFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
-import org.apache.uima.resource.metadata.TypeSystemDescription;
 import org.dkpro.core.io.nyt.NYTCollectionReader;
 import org.junit.Test;
 
@@ -35,14 +33,11 @@ public class NYTCollectionReaderTest
     {
         final String DATA_PATH = "src/test/resources/data/";
 
-        final TypeSystemDescription typeSystemDescription = TypeSystemDescriptionFactory
-                .createTypeSystemDescription("desc.type.NYTArticleMetaData");
-
         CollectionReader articleReader = CollectionReaderFactory.createReader(
-                NYTCollectionReader.class, typeSystemDescription,
+                NYTCollectionReader.class,
                 NYTCollectionReader.PARAM_SOURCE_LOCATION, DATA_PATH,
                 NYTCollectionReader.PARAM_PATTERNS, "[+]/**/*.xml",
-                NYTCollectionReader.PARAM_LANGUAGE, java.util.Locale.US.toString(),
+                NYTCollectionReader.PARAM_LANGUAGE, "en",
                 NYTCollectionReader.PARAM_OFFSET, 0);
 
         AnalysisEngine extractor = AnalysisEngineFactory.createEngine(CasDumpWriter.class,

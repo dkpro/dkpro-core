@@ -32,87 +32,98 @@ import com.nytlabs.corpus.NYTCorpusDocumentParser;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 
-public class NYTCollectionReader extends JCasResourceCollectionReader_ImplBase {
+public class NYTCollectionReader
+    extends JCasResourceCollectionReader_ImplBase
+{
 
-	/**
-	 * A number of documents which will be skipped at the beginning.
-	 */
-	public static final String PARAM_OFFSET = "offset";
-	@ConfigurationParameter(name = PARAM_OFFSET, mandatory = false)
-	private int offset = 0;
+    /**
+     * A number of documents which will be skipped at the beginning.
+     */
+    public static final String PARAM_OFFSET = "offset";
+    @ConfigurationParameter(name = PARAM_OFFSET, mandatory = false)
+    private int offset = 0;
 
-	/**
-	 * Counting variable to keep track of the already skipped documents.
-	 */
-	private int skipped = 0;
+    /**
+     * Counting variable to keep track of the already skipped documents.
+     */
+    private int skipped = 0;
 
-	private NYTCorpusDocumentParser nytParser = new NYTCorpusDocumentParser();
+    private NYTCorpusDocumentParser nytParser = new NYTCorpusDocumentParser();
 
-	private void setDocumenText(JCas aJCas, String documentBody) {
-		if (documentBody != null) {
-			aJCas.setDocumentText(documentBody);
-		} else {
-			aJCas.setDocumentText("");
-		}
-	}
+    private void setDocumenText(JCas aJCas, String documentBody)
+    {
+        if (documentBody != null) {
+            aJCas.setDocumentText(documentBody);
+        }
+        else {
+            aJCas.setDocumentText("");
+        }
+    }
 
-	@Override
-	public void getNext(JCas aJCas) throws IOException, CollectionException {
+    @Override
+    public void getNext(JCas aJCas) throws IOException, CollectionException
+    {
 
-		while (isBelowOffset()) {
-			nextFile();
-			skipped++;
-		}
+        while (isBelowOffset()) {
+            nextFile();
+            skipped++;
+        }
 
-		Resource xmlFile = nextFile();
-		initCas(aJCas, xmlFile);
-		NYTCorpusDocument nytDocument = nytParser.parseNYTCorpusDocumentFromFile(xmlFile.getInputStream(), false);
-		setDocumenText(aJCas, nytDocument.getBody());
-		NYTArticleMetaData articleMetaData = createNYTArticleMetaData(aJCas, nytDocument);
-		articleMetaData.addToIndexes();
-	}
+        Resource xmlFile = nextFile();
+        initCas(aJCas, xmlFile);
+        NYTCorpusDocument nytDocument = nytParser
+                .parseNYTCorpusDocumentFromFile(xmlFile.getInputStream(), false);
+        setDocumenText(aJCas, nytDocument.getBody());
+        NYTArticleMetaData articleMetaData = createNYTArticleMetaData(aJCas, nytDocument);
+        articleMetaData.addToIndexes();
+    }
 
-	private boolean isBelowOffset() {
-		return skipped < offset && getResourceIterator().hasNext();
-	}
+    private boolean isBelowOffset()
+    {
+        return skipped < offset && getResourceIterator().hasNext();
+    }
 
-	private static StringArray toStringArray(List<String> stringList, JCas aJCas) {
-		if (!stringList.isEmpty()) {
-			String[] strings = stringList.toArray(new String[0]);
-			int length = strings.length;
-			StringArray stringArray = new StringArray(aJCas, length);
-			stringArray.copyFromArray(strings, 0, 0, length);
-			return stringArray;
-		} else {
-			return new StringArray(aJCas, 0);
-		}
-	}
+    private static StringArray toStringArray(List<String> stringList, JCas aJCas)
+    {
+        if (!stringList.isEmpty()) {
+            String[] strings = stringList.toArray(new String[0]);
+            int length = strings.length;
+            StringArray stringArray = new StringArray(aJCas, length);
+            stringArray.copyFromArray(strings, 0, 0, length);
+            return stringArray;
+        }
+        else {
+            return new StringArray(aJCas, 0);
+        }
+    }
 
-	private NYTArticleMetaData createNYTArticleMetaData(JCas aJCas, NYTCorpusDocument doc) {
-		NYTArticleMetaData articleMetaData = new NYTArticleMetaData(aJCas);
-		articleMetaData.setGuid(doc.getGuid());
+    private NYTArticleMetaData createNYTArticleMetaData(JCas aJCas, NYTCorpusDocument doc)
+    {
+        NYTArticleMetaData articleMetaData = new NYTArticleMetaData(aJCas);
+        articleMetaData.setGuid(doc.getGuid());
 
-		URL alternateUrl = doc.getAlternateURL();
-		if (alternateUrl != null) {
+        URL alternateUrl = doc.getAlternateURL();
+        if (alternateUrl != null) {
             articleMetaData.setAlternateUrl(alternateUrl.toString());
         }
 
-		URL url = doc.getUrl();
-		if (url != null) {
+        URL url = doc.getUrl();
+        if (url != null) {
             articleMetaData.setAlternateUrl(url.toString());
         }
 
-		articleMetaData.setAuthor(doc.getNormalizedByline());
-		articleMetaData.setColumnName(doc.getColumnName());
-		articleMetaData.setDescriptors(toStringArray(doc.getDescriptors(), aJCas));
-		articleMetaData.setHeadline(doc.getHeadline());
-		articleMetaData.setOnlineDescriptors(toStringArray(doc.getOnlineDescriptors(), aJCas));
-		articleMetaData.setOnlineHeadline(doc.getOnlineHeadline());
-		articleMetaData.setOnlineSection(doc.getOnlineSection());
-		articleMetaData.setPublicationDate(doc.getPublicationDate().toString());
-		articleMetaData.setSection(doc.getSection());
-		articleMetaData.setTaxonomicClassifiers(toStringArray(doc.getTaxonomicClassifiers(), aJCas));
-		articleMetaData.setTypesOfMaterial(toStringArray(doc.getTypesOfMaterial(), aJCas));
-		return articleMetaData;
-	}
+        articleMetaData.setAuthor(doc.getNormalizedByline());
+        articleMetaData.setColumnName(doc.getColumnName());
+        articleMetaData.setDescriptors(toStringArray(doc.getDescriptors(), aJCas));
+        articleMetaData.setHeadline(doc.getHeadline());
+        articleMetaData.setOnlineDescriptors(toStringArray(doc.getOnlineDescriptors(), aJCas));
+        articleMetaData.setOnlineHeadline(doc.getOnlineHeadline());
+        articleMetaData.setOnlineSection(doc.getOnlineSection());
+        articleMetaData.setPublicationDate(doc.getPublicationDate().toString());
+        articleMetaData.setSection(doc.getSection());
+        articleMetaData
+                .setTaxonomicClassifiers(toStringArray(doc.getTaxonomicClassifiers(), aJCas));
+        articleMetaData.setTypesOfMaterial(toStringArray(doc.getTypesOfMaterial(), aJCas));
+        return articleMetaData;
+    }
 }
