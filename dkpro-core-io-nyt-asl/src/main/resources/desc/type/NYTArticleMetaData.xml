@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
 	<name>NYTArticleMetaData</name>
-	<description />
+	<description/>
 	<version>1.0</version>
-	<vendor />
+	<vendor/>
 	<types>
 		<typeDescription>
-			<name>org.dkpro.core.io.nyt.metadata.NYTArticleMetaData
-			</name>
+			<name>org.dkpro.core.io.nyt.metadata.NYTArticleMetaData</name>
 			<description>A document annotation that describes the metadata of a
-				newspaper article.
-			</description>
-			<supertypeName>uima.tcas.DocumentAnnotation</supertypeName>
+				newspaper article.</description>
+			<supertypeName>uima.cas.AnnotationBase</supertypeName>
 			<features>
 				<featureDescription>
 					<name>Guid</name>
 					<description>The GUID field specifies a (4-byte) integer that is
 						guaranteed
 						to be unique for every document
-						in the corpus.
-					</description>
+						in the corpus.</description>
 					<rangeTypeName>uima.cas.Integer</rangeTypeName>
 				</featureDescription>
 				<featureDescription>
@@ -28,8 +25,7 @@
 						the article. When present, this URL is preferred to the URL field
 						on articles published on or after April 02,
 						2006, as the linked
-						page will have richer content.
-					</description>
+						page will have richer content.</description>
 					<rangeTypeName>uima.cas.String</rangeTypeName>
 				</featureDescription>
 				<featureDescription>
@@ -40,8 +36,7 @@
 						on articles published on or after
 						April 02, 2006, as the
 						linked page
-						will have richer content.
-					</description>
+						will have richer content.</description>
 					<rangeTypeName>uima.cas.String</rangeTypeName>
 				</featureDescription>
 				<featureDescription>
@@ -65,14 +60,12 @@
 						and SS are not defined for this
 						corpus, that is to day
 						HH,MM, and SS
-						are always defined to be ‘00’.
-					</description>
+						are always defined to be ‘00’.</description>
 					<rangeTypeName>uima.cas.String</rangeTypeName>
 				</featureDescription>
 				<featureDescription>
 					<name>typesOfMaterial</name>
-					<description>
-						This field specifies a normalized list of terms
+					<description>This field specifies a normalized list of terms
 						describing the general editorial category of the article.
 						These
 						tags are algorithmically assigned and
@@ -81,59 +74,49 @@
 						Examples Include:
 						• REVIEW
 						• OBITUARY
-						• ANALYSIS
-					</description>
+						• ANALYSIS</description>
 					<rangeTypeName>uima.cas.StringArray</rangeTypeName>
 				</featureDescription>
 				<featureDescription>
 					<name>headline</name>
-					<description>
-						This field specifies the headline of the article as it
+					<description>This field specifies the headline of the article as it
 						appeared in the
 						print edition of the New York
-						Times.
-					</description>
+						Times.</description>
 					<rangeTypeName>uima.cas.String</rangeTypeName>
 				</featureDescription>
 				<featureDescription>
 					<name>onlineHeadline</name>
-					<description>
-						This field specifies the headline displayed with the
+					<description>This field specifies the headline displayed with the
 						article on
 						nytimes.com. Often
 						this differs from the headline used in
-						print.
-					</description>
+						print.</description>
 					<rangeTypeName>uima.cas.String</rangeTypeName>
 				</featureDescription>
 				<featureDescription>
 					<name>columnName</name>
-					<description>
-						If the article is part of a regular column, this field
+					<description>If the article is part of a regular column, this field
 						specifies the
 						name of that column.
 						Sample Column Names:
 						1. World News
 						Briefs
 						2. WEDDINGS
-						3. The Accessories Channel
-					</description>
+						3. The Accessories Channel</description>
 					<rangeTypeName>uima.cas.String</rangeTypeName>
 				</featureDescription>
 				<featureDescription>
 					<name>author</name>
-					<description>
-						This field is based on the normalized byline in the
+					<description>This field is based on the normalized byline in the
 						original corpus data: "The Normalized Byline field is the byline
 						normalized to the form (last name, first
-						name)".
-					</description>
+						name)".</description>
 					<rangeTypeName>uima.cas.String</rangeTypeName>
 				</featureDescription>
 				<featureDescription>
 					<name>descriptors</name>
-					<description>
-						The ‘descriptors’ field specifies a list of
+					<description>The ‘descriptors’ field specifies a list of
 						descriptive terms drawn
 						from a normalized controlled
 						vocabulary
@@ -147,14 +130,12 @@
 						• ECONOMIC CONDITIONS
 						AND TRENDS
 						• AIRPLANES
-						• VIOLINS
-					</description>
+						• VIOLINS</description>
 					<rangeTypeName>uima.cas.StringArray</rangeTypeName>
 				</featureDescription>
 				<featureDescription>
 					<name>onlineDescriptors</name>
-					<description>
-						This field specifies a list of descriptors from a
+					<description>This field specifies a list of descriptors from a
 						normalized
 						controlled
 						vocabulary that
@@ -168,14 +149,12 @@
 						Examples Include:
 						• Marriages
 						• Parks and Other Recreation Areas
-						• Cooking and Cookbooks
-					</description>
+						• Cooking and Cookbooks</description>
 					<rangeTypeName>uima.cas.StringArray</rangeTypeName>
 				</featureDescription>
 				<featureDescription>
 					<name>generalOnlineDescriptors</name>
-					<description>
-						The ‘general online descriptors’ field specifies a
+					<description>The ‘general online descriptors’ field specifies a
 						list of descriptors that are at a higher level of
 						generality than
 						the other tags associated with the article. These tags are
@@ -185,39 +164,33 @@
 						Examples Include:
 						• Surfing
 						• Venice Biennale
-						• Ranches
-					</description>
+						• Ranches</description>
 					<rangeTypeName>uima.cas.String</rangeTypeName>
 				</featureDescription>
 				<featureDescription>
 					<name>onlineSection</name>
-					<description>
-						This field specifies the section(s) on nytimes.com in
+					<description>This field specifies the section(s) on nytimes.com in
 						which the
 						article is placed. If
 						the article is placed in multiple
 						sections, this field will be
 						specified as a ‘;’ delineated
-						list.
-					</description>
+						list.</description>
 					<rangeTypeName>uima.cas.String</rangeTypeName>
 				</featureDescription>
 				<featureDescription>
 					<name>section</name>
-					<description>
-						This field specifies the section of the paper in which
+					<description>This field specifies the section of the paper in which
 						the article
 						appears. This is not
 						the name of the section, but rather
 						a letter or number that indicates
-						the section.
-					</description>
+						the section.</description>
 					<rangeTypeName>uima.cas.String</rangeTypeName>
 				</featureDescription>
 				<featureDescription>
 					<name>taxonomicClassifiers</name>
-					<description>
-						This field specifies a list of taxonomic classifiers
+					<description>This field specifies a list of taxonomic classifiers
 						that place this
 						article into a
 						hierarchy of articles. The individual
@@ -229,8 +202,7 @@
 						Examples Include:
 						• Top/Features/Travel/Guides/Destinations/North America/United States/Arizona
 						• Top/News/U.S./Rockies
-						• Top/Opinion
-					</description>
+						• Top/Opinion</description>
 					<rangeTypeName>uima.cas.StringArray</rangeTypeName>
 				</featureDescription>
 			</features>
