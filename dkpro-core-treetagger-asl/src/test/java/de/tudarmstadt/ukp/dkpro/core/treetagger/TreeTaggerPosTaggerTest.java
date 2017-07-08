@@ -19,15 +19,24 @@ package de.tudarmstadt.ukp.dkpro.core.treetagger;
 
 import static org.apache.commons.lang.StringUtils.repeat;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.annolab.tt4j.TreeTaggerWrapper;
+import org.apache.commons.compress.compressors.CompressorStreamFactory;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.testing.util.HideOutput;
 import org.apache.uima.jcas.JCas;
@@ -52,6 +61,35 @@ class TreeTaggerPosTaggerTest
 		// TreeTaggerWrapper.TRACE = true;
 	}
 
+	@Test
+	public void testEnglishAutoDownload()
+        throws Exception
+	{
+        URL aUrl = new URL("http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-par-linux-3.2-utf8.bin.gz");
+        File targetFile = File.createTempFile("model", ".bin");
+        
+	    try (
+            InputStream input = new CompressorStreamFactory()
+                    .createCompressorInputStream(new BufferedInputStream(aUrl.openStream()));
+            OutputStream target = new FileOutputStream(targetFile);        
+        ) {
+	        IOUtils.copy(input, target);
+	    }
+        
+        AnalysisEngineDescription engine = createEngineDescription(TreeTaggerPosTagger.class,
+                TreeTaggerPosTagger.PARAM_MODEL_LOCATION, targetFile,
+                TreeTaggerPosTagger.PARAM_MODEL_ENCODING, "utf-8");
+        
+        JCas jcas = TestRunner.runTest(engine, "en", "This is a test .");
+        
+        String[] lemmas = { "this", "be", "a", "test", "." };
+        String[] tags = { "DT", "VBZ", "DT", "NN", "SENT" };
+        String[] tagClasses = { "DET", "VERB", "DET", "NOUN", "PUNCT" };
+        
+        AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
+        AssertAnnotations.assertPOS(tagClasses, tags, select(jcas, POS.class));
+	}
+	
 	@Test
 	public void testEnglish()
 		throws Exception
@@ -137,12 +175,12 @@ class TreeTaggerPosTaggerTest
         runTest("nl", "tt", tagset, "Dit is een test .",
         		new String[] { "dit",      "zijn",       "een",      "test",   "."    },
         		new String[] { "prondemo", "verbpressg", "det__art", "nounsg", "$."   },
-        		new String[] { "POS",      "POS",        "POS",      "POS",    "POS" });
+            new String[] { "PRON",     "VERB",       "DET",      "NOUN",   "PUNCT" });
 
         runTest("nl", "tt", tagset, "10 minuten op de microfoon en vrij podium .",
         		new String[] { "@card@",   "minuut", "op",   "de",       "microfoon", "en",        "vrij", "podium", "."   },
         		new String[] { "num__ord", "nounpl", "prep", "det__art", "nounsg",    "conjcoord", "adj",  "nounsg", "$."  },
-        		new String[] { "POS",      "POS",    "POS",  "POS",      "POS",       "POS",       "POS",  "POS",    "POS" });
+            new String[] { "NUM", "NOUN", "ADP", "DET", "NOUN", "CONJ", "ADJ", "NOUN", "PUNCT" });
     }
 	
     @Test
@@ -836,24 +874,24 @@ class TreeTaggerPosTaggerTest
                 "nt", "nx", "nz", "o", "p", "q", "r", "rg", "s", "t", "tg", "u", "v", "vd", "vg",
                 "vn", "w", "wp", "ws", "x", "y", "z" };
         
-    	// The rudder often in the wake of the wind round the back of the area.
+    	    // The rudder often in the wake of the wind round the back of the area.
         runTest("zh", "lcmc", tagset, "尾 舵 常 处于 风轮 后面 的 尾流 区里 。",
         		new String[] { "_",  "_",  "_",   "_", "风轮", "_", "_", "_",  "_",  "_"    },
         		new String[] { "ng", "n",  "d",   "v", "n",   "f", "u", "n",  "nl", "ew"   },
-        		new String[] { "X",  "NOUN", "ADV", "VERB", "NOUN",  "X", "X", "NOUN", "X",  "PUNCT" } );
+            new String[] { "NOUN", "NOUN", "ADV", "VERB", "NOUN", "X", "AUX", "NOUN", "X", "PUNCT" });
 
         // The service sector has become an important engine of Guangdong's economic transformation
         // and upgrading.
         runTest("zh", "lcmc", tagset, "服务业 成为 广东 经济 转型 升级 的 重要 引擎 。",
         		new String[] { "_",  "_", "_",  "_",  "_", "_", "_", "_", "_",  "_"     },
         		new String[] { "n",  "v", "ns", "n",  "v", "v", "u", "a", "n",  "ew"    },
-        		new String[] { "NOUN", "VERB", "X",  "NOUN", "VERB", "VERB", "X", "X", "NOUN", "PUNCT"  } );
+            new String[] { "NOUN", "VERB", "PROPN", "NOUN", "VERB", "VERB", "AUX", "ADJ", "NOUN", "PUNCT" });
 
         // How far is China from the world brand?
         runTest("zh", "lcmc", tagset, "中国 离 世界 技术 品牌 有 多远 ？",
         		new String[] { "_",  "_", "_",  "_",  "_",  "_", "多远", "_"  },
         		new String[] { "ns", "v", "n",  "n",  "n",  "v", "n",   "ew" },
-        		new String[] { "X",  "VERB", "NOUN", "NOUN", "NOUN", "VERB", "NOUN",  "PUNCT" } );
+            new String[] { "PROPN", "VERB", "NOUN", "NOUN", "NOUN", "VERB", "NOUN", "PUNCT" });
     }
 
 	@Test
@@ -864,7 +902,7 @@ class TreeTaggerPosTaggerTest
         runTest("en", null, null, "² § ¶ § °",
         		new String[] { "²",  "§",    "¶",  "§",    "°"   },
         		new String[] { "NN", "SYM",  "NN", "SYM",  "SYM" },
-        		new String[] { "NOUN", "PUNCT", "NOUN", "PUNCT", "PUNCT"   });
+            new String[] { "NOUN", "SYM", "NOUN", "SYM", "SYM" });
     }
 
 	/**
@@ -890,7 +928,7 @@ class TreeTaggerPosTaggerTest
         String testString = repeat(text, " ", reps);
 
         JCas jcas = runTest("en", null, null, testString, null, null, null);
-    	List<POS> actualTags = new ArrayList<POS>(select(jcas, POS.class));
+    	    List<POS> actualTags = new ArrayList<POS>(select(jcas, POS.class));
         assertEquals(reps * 5, actualTags.size());
 
         // test POS annotations
@@ -907,14 +945,13 @@ class TreeTaggerPosTaggerTest
         		" characters");
     }
 
-	/**
-	 * Test using the same AnalysisEngine multiple times.
-	 */
-	@Test
-	public void multiDocumentTest()
-		throws Exception
-	{
-    	checkModelsAndBinary("en");
+    /**
+     * Test using the same AnalysisEngine multiple times.
+     */
+    @Test
+    public void multiDocumentTest() throws Exception
+    {
+        checkModelsAndBinary("en");
 
 		String testDocument = "This is a test .";
         String[] lemmas = { "this", "be", "a", "test", "." };

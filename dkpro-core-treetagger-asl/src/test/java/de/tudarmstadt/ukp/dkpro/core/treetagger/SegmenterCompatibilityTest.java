@@ -43,14 +43,14 @@ class SegmenterCompatibilityTest
 		// TreeTaggerWrapper.TRACE = true;
 	}
 
-	@Test
-	public void segmenterCompatibilityTest() throws Exception {
-    	checkModelsAndBinary("en");
+    @Test
+    public void segmenterCompatibilityTest() throws Exception
+    {
+        checkModelsAndBinary("en");
 
-	    AnalysisEngineDescription desc = createEngineDescription(
+        AnalysisEngineDescription desc = createEngineDescription(
                 createEngineDescription(BreakIteratorSegmenter.class),
-                createEngineDescription(TreeTaggerPosTagger.class)
-        );
+                createEngineDescription(TreeTaggerPosTagger.class));
         AnalysisEngine engine = createEngine(desc);
 
         JCas aJCas = engine.newJCas();
@@ -58,7 +58,7 @@ class SegmenterCompatibilityTest
         aJCas.setDocumentText("Two cats sat on two mats.");
         engine.process(aJCas);
 
-        checkLemma(new String[] { "Two", "cat", "sit", "on", "two", "mat", "." },
+        checkLemma(new String[] { "two", "cat", "sit", "on", "two", "mat", "." },
                 select(aJCas, Lemma.class));
     }
 
