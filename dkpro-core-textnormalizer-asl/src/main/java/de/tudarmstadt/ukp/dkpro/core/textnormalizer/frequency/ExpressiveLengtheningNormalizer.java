@@ -65,9 +65,10 @@ public class ExpressiveLengtheningNormalizer
                 String replacement;
                 try {
                     replacement = getBestReplacement(tokenText);
-                    if (replacement.equals("No Candidate has a score higher than 0"))
+                    if (replacement.equals("No Candidate has a score higher than 0")) {
                         replacement = tokenText;
                     }
+                }
                 catch (IOException e) {
                     getLogger().error(
                             "Unable to determine the best replacement, using original. Error: "
@@ -87,8 +88,9 @@ public class ExpressiveLengtheningNormalizer
         Matcher matcher = pattern.matcher(token);
 
         // In case there are no abnormalities
-        if (!matcher.find())
+        if (!matcher.find()) {
             return token;
+        }
 
         // Collecting the start points of all abnormal parts
         List<Integer> abnormalities = new ArrayList<Integer>();
