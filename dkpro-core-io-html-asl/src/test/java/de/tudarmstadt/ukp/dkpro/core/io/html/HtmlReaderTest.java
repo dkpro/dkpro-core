@@ -18,13 +18,16 @@
 package de.tudarmstadt.ukp.dkpro.core.io.html;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.CasUtil.select;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.net.URL;
 
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
@@ -33,6 +36,7 @@ import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import de.tudarmstadt.ukp.dkpro.core.testing.dumper.CasDumpWriter;
 
 public class HtmlReaderTest
 {
@@ -40,12 +44,17 @@ public class HtmlReaderTest
     public void wwwReaderTest()
         throws Exception
     {
+        File targetDir = testContext.getTestOutputFolder();
+        
         CollectionReaderDescription reader = createReaderDescription(
                 HtmlReader.class,
                 HtmlReader.PARAM_SOURCE_LOCATION, new URL("http://www.google.de")
         );
+        
+        AnalysisEngineDescription dumpWriter = createEngineDescription(CasDumpWriter.class, 
+                CasDumpWriter.PARAM_TARGET_LOCATION, new File(targetDir, "google.html.dump"));
 
-        for (JCas jcas : new JCasIterable(reader)) {
+        for (JCas jcas : new JCasIterable(reader, dumpWriter)) {
             dumpMetaData(DocumentMetaData.get(jcas));
             assertEquals(1, select(jcas.getCas(), jcas.getDocumentAnnotationFs().getType()).size());
 
