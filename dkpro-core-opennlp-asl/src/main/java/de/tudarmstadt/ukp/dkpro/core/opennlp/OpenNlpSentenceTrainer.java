@@ -38,6 +38,7 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.descriptors.ModelTrainerCapability;;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.CasSentenceSampleStream;
@@ -52,6 +53,10 @@ import opennlp.tools.util.TrainingParameters;
 /**
  * Train a sentence splitter model for OpenNLP.
  */
+@ModelTrainerCapability(
+        jCasAnnotator = OpenNlpSegmenter.class,
+        annotatorParamModelLocationName = OpenNlpSegmenter.PARAM_SEGMENTATION_MODEL_LOCATION,
+        type = "sent")
 @ResourceMetaData(name="OpenNLP Sentence Splitter Trainer")
 public class OpenNlpSentenceTrainer
     extends JCasConsumer_ImplBase
@@ -67,7 +72,7 @@ public class OpenNlpSentenceTrainer
     public static final String PARAM_ALGORITHM = "algorithm";
     @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, defaultValue = GISTrainer.MAXENT_VALUE)
     private String algorithm;
-    
+
     public static final String PARAM_TRAINER_TYPE = "trainerType";
     @ConfigurationParameter(name = PARAM_TRAINER_TYPE, mandatory = true, defaultValue = EventTrainer.EVENT_VALUE)
     private String trainerType;
@@ -87,7 +92,7 @@ public class OpenNlpSentenceTrainer
     public static final String PARAM_ABBREVIATION_DICTIONARY_LOCATION = "abbreviationDictionaryLocation";
     @ConfigurationParameter(name = PARAM_ABBREVIATION_DICTIONARY_LOCATION, mandatory = false)
     private String abbreviationDictionaryLocation;
-    
+
     public static final String PARAM_ABBREVIATION_DICTIONARY_ENCODING = "abbreviationDictionaryEncoding";
     @ConfigurationParameter(name = PARAM_ABBREVIATION_DICTIONARY_ENCODING, mandatory = true, defaultValue = "UTF-8")
     private String abbreviationDictionaryEncoding;
@@ -95,27 +100,27 @@ public class OpenNlpSentenceTrainer
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
     @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue =  "1")
     private int numThreads;
-    
+
     private CasSentenceSampleStream stream;
     private Dictionary abbreviationDictionary;
     private ExecutorService executor = Executors.newSingleThreadExecutor();
     private Future<SentenceModel> future;
-    
+
     @Override
     public void initialize(UimaContext aContext)
         throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
+
         stream = new CasSentenceSampleStream();
-        
+
         TrainingParameters params = new TrainingParameters();
         params.put(TrainingParameters.ALGORITHM_PARAM, algorithm);
         params.put(TrainingParameters.TRAINER_TYPE_PARAM, trainerType);
         params.put(TrainingParameters.ITERATIONS_PARAM, Integer.toString(iterations));
         params.put(TrainingParameters.CUTOFF_PARAM, Integer.toString(cutoff));
         params.put(TrainingParameters.THREADS_PARAM, Integer.toString(numThreads));
-        
+
         if (abbreviationDictionaryLocation != null) {
             try {
                 URL abbrevUrl = ResourceUtils.resolveLocation(abbreviationDictionaryLocation,
@@ -132,7 +137,7 @@ public class OpenNlpSentenceTrainer
         else {
             abbreviationDictionary = null;
         }
-        
+
         Callable<SentenceModel> trainTask = () -> {
             try {
                 SentenceDetectorFactory factory = new SentenceDetectorFactory(language, true,
@@ -144,10 +149,10 @@ public class OpenNlpSentenceTrainer
                 throw e;
             }
         };
-        
+
         future = executor.submit(trainTask);
     }
-    
+
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
@@ -156,7 +161,7 @@ public class OpenNlpSentenceTrainer
             stream.send(aJCas);
         }
     }
-    
+
     @Override
     public void collectionProcessComplete()
         throws AnalysisEngineProcessException
@@ -167,7 +172,7 @@ public class OpenNlpSentenceTrainer
         catch (IOException e) {
             throw new AnalysisEngineProcessException(e);
         }
-        
+
         SentenceModel model;
         try {
             model = future.get();
@@ -175,7 +180,7 @@ public class OpenNlpSentenceTrainer
         catch (InterruptedException | ExecutionException e) {
             throw new AnalysisEngineProcessException(e);
         }
-        
+
         try (OutputStream out = new FileOutputStream(targetLocation)) {
             model.serialize(out);
         }

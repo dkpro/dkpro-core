@@ -22,6 +22,7 @@ import java.util.concurrent.Callable;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 
+import de.tudarmstadt.ukp.dkpro.core.api.descriptors.ModelTrainerCapability;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.CasLemmaSampleStream;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTrainerBase;
@@ -36,6 +37,7 @@ import opennlp.tools.util.TrainingParameters;
 /**
  * Train a lemmatizer model for OpenNLP.
  */
+@ModelTrainerCapability(jCasAnnotator = OpenNlpLemmatizer.class, type = "lemmatizer")
 @ResourceMetaData(name="OpenNLP Lemmatizer Trainer")
 public class OpenNlpLemmatizerTrainer
     extends OpenNlpTrainerBase<CasLemmaSampleStream>
@@ -47,7 +49,7 @@ public class OpenNlpLemmatizerTrainer
     public static final String PARAM_ALGORITHM = "algorithm";
     @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, defaultValue = GISTrainer.MAXENT_VALUE)
     private String algorithm;
-    
+
     public static final String PARAM_TRAINER_TYPE = "trainerType";
     @ConfigurationParameter(name = PARAM_TRAINER_TYPE, mandatory = true, defaultValue = EventTrainer.EVENT_VALUE)
     private String trainerType;
@@ -63,20 +65,20 @@ public class OpenNlpLemmatizerTrainer
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
     @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue =  "1")
     private int numThreads;
-    
+
     /**
      * @see LemmatizerME#DEFAULT_BEAM_SIZE
      */
     public static final String PARAM_BEAMSIZE = "beamSize";
     @ConfigurationParameter(name = PARAM_BEAMSIZE, mandatory = true, defaultValue = "3")
     private int beamSize;
-    
+
     @Override
     public CasLemmaSampleStream makeSampleStream()
     {
         return new CasLemmaSampleStream();
     }
-    
+
     @Override
     public Callable<? extends LemmatizerModel> makeTrainer()
     {
@@ -87,7 +89,7 @@ public class OpenNlpLemmatizerTrainer
         params.put(TrainingParameters.CUTOFF_PARAM, Integer.toString(cutoff));
         params.put(TrainingParameters.THREADS_PARAM, Integer.toString(numThreads));
         params.put(BeamSearch.BEAM_SIZE_PARAMETER, Integer.toString(beamSize));
-        
+
         Callable<LemmatizerModel> trainTask = () -> {
             try {
                 return LemmatizerME.train(language, getStream(), params, new LemmatizerFactory());
@@ -97,7 +99,7 @@ public class OpenNlpLemmatizerTrainer
                 throw e;
             }
         };
-        
+
         return trainTask;
     }
 }

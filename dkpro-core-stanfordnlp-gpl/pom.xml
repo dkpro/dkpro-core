@@ -1,6 +1,6 @@
 <!--
 
-    Copyright 2007-2017    
+    Copyright 2007-2017
     Ubiquitous Knowledge Processing (UKP) Lab
     Technische Universität Darmstadt
 
@@ -68,6 +68,10 @@
       <classifier>models</classifier>
       </dependency>
     -->
+      <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.api.descriptors-asl</artifactId>
+      </dependency>
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.io-asl</artifactId>
@@ -182,6 +186,10 @@
       <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-bidirectional-distsim</artifactId>
       <scope>test</scope>
     </dependency>
+      <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.api.descriptors-asl</artifactId>
+      </dependency>
   </dependencies>
   <dependencyManagement>
     <dependencies>

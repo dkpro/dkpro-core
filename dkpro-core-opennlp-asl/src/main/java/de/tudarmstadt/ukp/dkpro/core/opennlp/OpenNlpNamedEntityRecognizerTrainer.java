@@ -39,6 +39,7 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.descriptors.ModelTrainerCapability;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.CasNameSampleStream;
 import opennlp.tools.ml.BeamSearch;
@@ -58,20 +59,21 @@ import opennlp.tools.util.TrainingParameters;
 /**
  * Train a named entity recognizer model for OpenNLP.
  */
+@ModelTrainerCapability(jCasAnnotator = OpenNlpNamedEntityRecognizer.class, type = "ner")
 @ResourceMetaData(name="OpenNLP Named Entity Recognizer Trainer")
 public class OpenNlpNamedEntityRecognizerTrainer
     extends JCasConsumer_ImplBase
 {
     public static enum SequenceEncoding {
         BIO(BioCodec.class), BILOU(BilouCodec.class);
-        
+
         private Class<? extends SequenceCodec<String>> codec;
-        
+
         SequenceEncoding(Class<? extends SequenceCodec<String>> aCodec)
         {
             codec = aCodec;
         }
-        
+
         private SequenceCodec<String> getCodec()
         {
             try {
@@ -82,7 +84,7 @@ public class OpenNlpNamedEntityRecognizerTrainer
             }
         }
     }
-    
+
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
     private String language;
@@ -100,7 +102,7 @@ public class OpenNlpNamedEntityRecognizerTrainer
     public static final String PARAM_ALGORITHM = "algorithm";
     @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, defaultValue = PerceptronTrainer.PERCEPTRON_VALUE)
     private String algorithm;
-    
+
     public static final String PARAM_TRAINER_TYPE = "trainerType";
     @ConfigurationParameter(name = PARAM_TRAINER_TYPE, mandatory = true, defaultValue = EventTrainer.EVENT_VALUE)
     private String trainerType;
@@ -127,22 +129,22 @@ public class OpenNlpNamedEntityRecognizerTrainer
     public static final String PARAM_SEQUENCE_ENCODING = "sequenceEncoding";
     @ConfigurationParameter(name = PARAM_SEQUENCE_ENCODING, mandatory = true, defaultValue="BILOU")
     private SequenceEncoding sequenceEncoding;
-    
+
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
     @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue =  "1")
     private int numThreads;
-    
+
     private CasNameSampleStream stream;
     private ExecutorService executor = Executors.newSingleThreadExecutor();
     private Future<TokenNameFinderModel> future;
-    
+
     @Override
     public void initialize(UimaContext aContext)
         throws ResourceInitializationException
     {
         super.initialize(aContext);
         stream = new CasNameSampleStream();
-        
+
         TrainingParameters params = new TrainingParameters();
         params.put(TrainingParameters.ALGORITHM_PARAM, algorithm);
 //        params.put(TrainingParameters.TRAINER_TYPE_PARAM,
@@ -151,9 +153,9 @@ public class OpenNlpNamedEntityRecognizerTrainer
         params.put(TrainingParameters.CUTOFF_PARAM, Integer.toString(cutoff));
         params.put(TrainingParameters.THREADS_PARAM, Integer.toString(numThreads));
         params.put(BeamSearch.BEAM_SIZE_PARAMETER, Integer.toString(beamSize));
-        
+
         byte featureGenCfg[] = loadFeatureGen(featureGen);
-        
+
         Callable<TokenNameFinderModel> trainTask = () -> {
             try {
                 return NameFinderME.train(language, null, stream, params,
@@ -166,10 +168,10 @@ public class OpenNlpNamedEntityRecognizerTrainer
                 throw e;
             }
         };
-        
+
         future = executor.submit(trainTask);
     }
-    
+
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
@@ -178,7 +180,7 @@ public class OpenNlpNamedEntityRecognizerTrainer
             stream.send(aJCas);
         }
     }
-    
+
     @Override
     public void collectionProcessComplete()
         throws AnalysisEngineProcessException
@@ -189,7 +191,7 @@ public class OpenNlpNamedEntityRecognizerTrainer
         catch (IOException e) {
             throw new AnalysisEngineProcessException(e);
         }
-        
+
         TokenNameFinderModel model;
         try {
             model = future.get();
@@ -197,7 +199,7 @@ public class OpenNlpNamedEntityRecognizerTrainer
         catch (InterruptedException | ExecutionException e) {
             throw new AnalysisEngineProcessException(e);
         }
-        
+
         try (OutputStream out = new FileOutputStream(targetLocation)) {
             model.serialize(out);
         }

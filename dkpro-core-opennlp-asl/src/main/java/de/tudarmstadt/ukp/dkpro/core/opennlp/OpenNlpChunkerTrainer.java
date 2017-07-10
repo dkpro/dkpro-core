@@ -22,6 +22,7 @@ import java.util.concurrent.Callable;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 
+import de.tudarmstadt.ukp.dkpro.core.api.descriptors.ModelTrainerCapability;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.CasChunkSampleStream;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTrainerBase;
@@ -37,6 +38,7 @@ import opennlp.tools.util.model.BaseModel;
 /**
  * Train a chunker model for OpenNLP.
  */
+@ModelTrainerCapability(jCasAnnotator = OpenNlpChunker.class, type = "chunker")
 @ResourceMetaData(name="OpenNLP Chunker Trainer")
 public class OpenNlpChunkerTrainer
     extends OpenNlpTrainerBase<CasChunkSampleStream>
@@ -48,7 +50,7 @@ public class OpenNlpChunkerTrainer
     public static final String PARAM_ALGORITHM = "algorithm";
     @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, defaultValue = GISTrainer.MAXENT_VALUE)
     private String algorithm;
-    
+
     public static final String PARAM_TRAINER_TYPE = "trainerType";
     @ConfigurationParameter(name = PARAM_TRAINER_TYPE, mandatory = true, defaultValue = EventTrainer.EVENT_VALUE)
     private String trainerType;
@@ -67,17 +69,17 @@ public class OpenNlpChunkerTrainer
     public static final String PARAM_BEAMSIZE = "beamSize";
     @ConfigurationParameter(name = PARAM_BEAMSIZE, mandatory = true, defaultValue = "3")
     private int beamSize;
-    
+
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
     @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = "1")
     private int numThreads;
-    
+
     @Override
     public CasChunkSampleStream makeSampleStream()
     {
         return new CasChunkSampleStream();
     }
-    
+
     @Override
     public Callable<? extends BaseModel> makeTrainer()
     {
@@ -88,7 +90,7 @@ public class OpenNlpChunkerTrainer
         params.put(TrainingParameters.CUTOFF_PARAM, Integer.toString(cutoff));
         params.put(TrainingParameters.THREADS_PARAM, Integer.toString(numThreads));
         params.put(BeamSearch.BEAM_SIZE_PARAMETER, Integer.toString(beamSize));
-        
+
         Callable<ChunkerModel> trainTask = () -> {
             try {
                 return ChunkerME.train(language, getStream(), params, new ChunkerFactory());
@@ -98,7 +100,7 @@ public class OpenNlpChunkerTrainer
                 throw e;
             }
         };
-        
+
         return trainTask;
     }
 }

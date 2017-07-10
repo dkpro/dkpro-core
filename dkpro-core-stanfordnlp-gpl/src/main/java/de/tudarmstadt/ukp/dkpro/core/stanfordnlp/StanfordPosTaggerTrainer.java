@@ -44,6 +44,7 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.descriptors.ModelTrainerCapability;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -52,6 +53,7 @@ import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 /**
  * Train a POS tagging model for the Stanford POS tagger.
  */
+@ModelTrainerCapability(jCasAnnotator = StanfordPosTagger.class, type = "pos")
 @ResourceMetaData(name="CoreNLP POS-Tagger Trainer")
 public class StanfordPosTaggerTrainer
     extends JCasConsumer_ImplBase
@@ -80,13 +82,13 @@ public class StanfordPosTaggerTrainer
     private boolean clusterFilesTemporary;
     private File tempData;
     private PrintWriter out;
-    
+
     @Override
     public void initialize(UimaContext aContext)
         throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
+
         try {
             String p = clusterFile.getAbsolutePath();
             if (p.contains("(") || p.contains(")") || p.contains(",")) {
@@ -107,7 +109,7 @@ public class StanfordPosTaggerTrainer
             throw new ResourceInitializationException(e);
         }
     }
-    
+
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
@@ -122,7 +124,7 @@ public class StanfordPosTaggerTrainer
                 throw new AnalysisEngineProcessException(e);
             }
         }
-        
+
         Map<Sentence, Collection<Token>> index = indexCovered(aJCas, Sentence.class, Token.class);
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             Collection<Token> tokens = index.get(sentence);
@@ -132,7 +134,7 @@ public class StanfordPosTaggerTrainer
             out.println();
         }
     }
-    
+
     @Override
     public void collectionProcessComplete()
         throws AnalysisEngineProcessException
@@ -140,7 +142,7 @@ public class StanfordPosTaggerTrainer
         if (out != null) {
             IOUtils.closeQuietly(out);
         }
-        
+
         // Load user-provided configuration
         Properties props = new Properties();
         try (InputStream is = new FileInputStream(parameterFile)) {
@@ -149,7 +151,7 @@ public class StanfordPosTaggerTrainer
         catch (IOException e) {
             throw new AnalysisEngineProcessException(e);
         }
-        
+
         // Add/replace training file information
         props.setProperty("trainFile",
                 "format=TSV,wordColumn=0,tagColumn=1," + tempData.getAbsolutePath());
@@ -168,7 +170,7 @@ public class StanfordPosTaggerTrainer
             try (OutputStream os = new FileOutputStream(tempConfig)) {
                 props.store(os, null);
             }
-            
+
             // Train
             MaxentTagger.main(new String[] {"-props", tempConfig.getAbsolutePath()});
         }
@@ -182,20 +184,20 @@ public class StanfordPosTaggerTrainer
             }
         }
     }
-    
+
     @Override
     public void destroy()
     {
         super.destroy();
-        
+
         // Clean up temporary data file
         if (tempData != null) {
             tempData.delete();
         }
-        
+
         if (clusterFilesTemporary) {
             clusterFile.delete();
         }
     }
-    
+
 }

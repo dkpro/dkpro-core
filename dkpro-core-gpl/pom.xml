@@ -1,6 +1,6 @@
 <!--
 
-    Copyright 2007-2017    
+    Copyright 2007-2017
     Ubiquitous Knowledge Processing (UKP) Lab
     Technische Universität Darmstadt
 
@@ -45,6 +45,11 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+            <dependency>
+                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                <artifactId>de.tudarmstadt.ukp.dkpro.core.api.descriptors-asl</artifactId>
+                <version>1.9.0-SNAPSHOT</version>
+            </dependency>
             <dependency>
                 <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
                 <artifactId>de.tudarmstadt.ukp.dkpro.core.arktools-gpl</artifactId>

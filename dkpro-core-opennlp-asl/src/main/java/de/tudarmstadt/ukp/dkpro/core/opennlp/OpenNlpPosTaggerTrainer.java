@@ -22,6 +22,7 @@ import java.util.concurrent.Callable;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 
+import de.tudarmstadt.ukp.dkpro.core.api.descriptors.ModelTrainerCapability;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.CasPosSampleStream;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTrainerBase;
@@ -37,6 +38,7 @@ import opennlp.tools.util.model.BaseModel;
 /**
  * Train a POS tagging model for OpenNLP.
  */
+@ModelTrainerCapability(jCasAnnotator = OpenNlpPosTagger.class, type = "pos")
 @ResourceMetaData(name="OpenNLP POS-Tagger Trainer")
 public class OpenNlpPosTaggerTrainer
     extends OpenNlpTrainerBase<CasPosSampleStream>
@@ -48,7 +50,7 @@ public class OpenNlpPosTaggerTrainer
     public static final String PARAM_ALGORITHM = "algorithm";
     @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, defaultValue = GISTrainer.MAXENT_VALUE)
     private String algorithm;
-    
+
     public static final String PARAM_TRAINER_TYPE = "trainerType";
     @ConfigurationParameter(name = PARAM_TRAINER_TYPE, mandatory = true, defaultValue = EventTrainer.EVENT_VALUE)
     private String trainerType;
@@ -67,17 +69,17 @@ public class OpenNlpPosTaggerTrainer
     public static final String PARAM_BEAMSIZE = "beamSize";
     @ConfigurationParameter(name = PARAM_BEAMSIZE, mandatory = true, defaultValue = "3")
     private int beamSize;
-    
+
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
     @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue =  "1")
     private int numThreads;
-    
+
     @Override
     public CasPosSampleStream makeSampleStream()
     {
         return new CasPosSampleStream();
     }
-    
+
     @Override
     public Callable<? extends BaseModel> makeTrainer()
     {
@@ -88,7 +90,7 @@ public class OpenNlpPosTaggerTrainer
         params.put(TrainingParameters.CUTOFF_PARAM, Integer.toString(cutoff));
         params.put(TrainingParameters.THREADS_PARAM, Integer.toString(numThreads));
         params.put(BeamSearch.BEAM_SIZE_PARAMETER, Integer.toString(beamSize));
-        
+
         Callable<POSModel> trainTask = () -> {
             try {
                 return POSTaggerME.train(language, getStream(), params,
@@ -99,7 +101,7 @@ public class OpenNlpPosTaggerTrainer
                 throw e;
             }
         };
-        
+
         return trainTask;
     }
 }
