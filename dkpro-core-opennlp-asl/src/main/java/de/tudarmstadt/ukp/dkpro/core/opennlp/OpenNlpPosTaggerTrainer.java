@@ -50,7 +50,7 @@ public class OpenNlpPosTaggerTrainer
     public static final String PARAM_ALGORITHM = "algorithm";
     @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, defaultValue = GISTrainer.MAXENT_VALUE)
     private String algorithm;
-
+    
     public static final String PARAM_TRAINER_TYPE = "trainerType";
     @ConfigurationParameter(name = PARAM_TRAINER_TYPE, mandatory = true, defaultValue = EventTrainer.EVENT_VALUE)
     private String trainerType;
@@ -69,17 +69,17 @@ public class OpenNlpPosTaggerTrainer
     public static final String PARAM_BEAMSIZE = "beamSize";
     @ConfigurationParameter(name = PARAM_BEAMSIZE, mandatory = true, defaultValue = "3")
     private int beamSize;
-
+    
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
     @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue =  "1")
     private int numThreads;
-
+    
     @Override
     public CasPosSampleStream makeSampleStream()
     {
         return new CasPosSampleStream();
     }
-
+    
     @Override
     public Callable<? extends BaseModel> makeTrainer()
     {
@@ -90,7 +90,7 @@ public class OpenNlpPosTaggerTrainer
         params.put(TrainingParameters.CUTOFF_PARAM, Integer.toString(cutoff));
         params.put(TrainingParameters.THREADS_PARAM, Integer.toString(numThreads));
         params.put(BeamSearch.BEAM_SIZE_PARAMETER, Integer.toString(beamSize));
-
+        
         Callable<POSModel> trainTask = () -> {
             try {
                 return POSTaggerME.train(language, getStream(), params,
@@ -101,7 +101,7 @@ public class OpenNlpPosTaggerTrainer
                 throw e;
             }
         };
-
+        
         return trainTask;
     }
 }

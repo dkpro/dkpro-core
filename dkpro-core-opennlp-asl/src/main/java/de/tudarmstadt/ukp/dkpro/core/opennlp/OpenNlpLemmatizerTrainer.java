@@ -49,7 +49,7 @@ public class OpenNlpLemmatizerTrainer
     public static final String PARAM_ALGORITHM = "algorithm";
     @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, defaultValue = GISTrainer.MAXENT_VALUE)
     private String algorithm;
-
+    
     public static final String PARAM_TRAINER_TYPE = "trainerType";
     @ConfigurationParameter(name = PARAM_TRAINER_TYPE, mandatory = true, defaultValue = EventTrainer.EVENT_VALUE)
     private String trainerType;
@@ -65,20 +65,20 @@ public class OpenNlpLemmatizerTrainer
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
     @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue =  "1")
     private int numThreads;
-
+    
     /**
      * @see LemmatizerME#DEFAULT_BEAM_SIZE
      */
     public static final String PARAM_BEAMSIZE = "beamSize";
     @ConfigurationParameter(name = PARAM_BEAMSIZE, mandatory = true, defaultValue = "3")
     private int beamSize;
-
+    
     @Override
     public CasLemmaSampleStream makeSampleStream()
     {
         return new CasLemmaSampleStream();
     }
-
+    
     @Override
     public Callable<? extends LemmatizerModel> makeTrainer()
     {
@@ -89,7 +89,7 @@ public class OpenNlpLemmatizerTrainer
         params.put(TrainingParameters.CUTOFF_PARAM, Integer.toString(cutoff));
         params.put(TrainingParameters.THREADS_PARAM, Integer.toString(numThreads));
         params.put(BeamSearch.BEAM_SIZE_PARAMETER, Integer.toString(beamSize));
-
+        
         Callable<LemmatizerModel> trainTask = () -> {
             try {
                 return LemmatizerME.train(language, getStream(), params, new LemmatizerFactory());
@@ -99,7 +99,7 @@ public class OpenNlpLemmatizerTrainer
                 throw e;
             }
         };
-
+        
         return trainTask;
     }
 }
