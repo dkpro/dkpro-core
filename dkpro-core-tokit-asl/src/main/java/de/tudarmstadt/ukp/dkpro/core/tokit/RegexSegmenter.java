@@ -89,11 +89,15 @@ public class RegexSegmenter
         /* append trailing linebreak if necessary */
         text = text.endsWith("\n") ? text : text + "\n";
 
-        if (isWriteSentence()) {
-            createSentences(aJCas, text);
+        if ("".equals(text.trim())) {
+            return;
         }
 
-        createTokens(aJCas, text);
+        if (isWriteSentence()) {
+            createSentences(aJCas, text, zoneBegin);
+        }
+
+        createTokens(aJCas, text, zoneBegin);
     }
 
     /**
@@ -103,14 +107,15 @@ public class RegexSegmenter
      *            the {@link JCas}
      * @param text
      *            the text.
+     * @param zoneBegin
      */
-    private void createSentences(JCas aJCas, String text)
+    private void createSentences(JCas aJCas, String text, int zoneBegin)
     {
         Matcher sentenceBoundaryMatcher = sentenceBoundaryPattern.matcher(text);
         int previousStart = 0;
         while (sentenceBoundaryMatcher.find()) {
             int end = sentenceBoundaryMatcher.start();
-            Sentence sentence = new Sentence(aJCas, previousStart, end);
+            Sentence sentence = new Sentence(aJCas, zoneBegin + previousStart, zoneBegin + end);
             sentence.addToIndexes(aJCas);
             previousStart = sentenceBoundaryMatcher.end();
         }
@@ -123,14 +128,15 @@ public class RegexSegmenter
      *            the {@link JCas}
      * @param text
      *            the text
+     * @param zoneBegin
      */
-    private void createTokens(JCas aJCas, String text)
+    private void createTokens(JCas aJCas, String text, int zoneBegin)
     {
         Matcher tokenBoundaryMatcher = tokenBoundaryPattern.matcher(text);
         int previousStart = 0;
         while (tokenBoundaryMatcher.find()) {
             int end = tokenBoundaryMatcher.start();
-            Token token = new Token(aJCas, previousStart, end);
+            Token token = new Token(aJCas, zoneBegin + previousStart, zoneBegin + end);
             token.addToIndexes(aJCas);
             previousStart = tokenBoundaryMatcher.end();
         }
