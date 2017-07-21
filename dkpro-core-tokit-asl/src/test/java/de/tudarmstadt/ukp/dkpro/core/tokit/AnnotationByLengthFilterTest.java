@@ -22,7 +22,7 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.junit.Assert.assertEquals;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.fit.testing.factory.TokenBuilder;
 import org.apache.uima.fit.util.JCasUtil;

@@ -215,7 +215,6 @@ public class RegexSegmenterTest
             }
             System.out.println();
         }
-        // end::example[]
 
         assertToken(
                 new String[] { "This", "is", "sentence", "1", ".", "This", "is", "number", "2", "." },

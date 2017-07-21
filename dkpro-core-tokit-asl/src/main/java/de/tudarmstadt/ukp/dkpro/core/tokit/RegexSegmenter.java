@@ -18,6 +18,8 @@
 
 package de.tudarmstadt.ukp.dkpro.core.tokit;
 
+import static org.apache.commons.lang3.StringUtils.isBlank;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -89,7 +91,7 @@ public class RegexSegmenter
         /* append trailing linebreak if necessary */
         text = text.endsWith("\n") ? text : text + "\n";
 
-        if ("".equals(text.trim())) {
+        if (isBlank(text)) {
             return;
         }
 
