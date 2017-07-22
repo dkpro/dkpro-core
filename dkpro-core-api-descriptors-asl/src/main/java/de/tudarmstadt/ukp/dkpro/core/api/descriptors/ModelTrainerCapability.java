@@ -34,21 +34,14 @@ import java.lang.annotation.Target;
 public @interface ModelTrainerCapability {
 
     /**
-     * The annotator class which can use the model of the corresponding trainer.
+     * E.g. {@code "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"}
      *
      * @return
      */
-    Class jCasAnnotator();
+    String output();
 
     /**
-     * For example: {@code ner}, {@code pos}, or {@code sent}.
-     *
-     * @return
-     */
-    String type();
-
-    /**
-     * The parameter name of the model, created through the trainer, used by the {@link #jCasAnnotator() annotator class}.
+     * The parameter name of the model, created through the trainer, used by the annotator class.
      *
      * @return
      */

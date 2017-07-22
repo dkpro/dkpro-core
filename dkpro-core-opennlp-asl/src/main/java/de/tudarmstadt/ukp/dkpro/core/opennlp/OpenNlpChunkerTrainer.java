@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.opennlp;
 import java.util.concurrent.Callable;
 
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 
 import de.tudarmstadt.ukp.dkpro.core.api.descriptors.ModelTrainerCapability;
@@ -38,7 +39,8 @@ import opennlp.tools.util.model.BaseModel;
 /**
  * Train a chunker model for OpenNLP.
  */
-@ModelTrainerCapability(jCasAnnotator = OpenNlpChunker.class, type = "chunker")
+@MimeTypeCapability("opennlp/de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk")
+@ModelTrainerCapability(output = "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk")
 @ResourceMetaData(name="OpenNLP Chunker Trainer")
 public class OpenNlpChunkerTrainer
     extends OpenNlpTrainerBase<CasChunkSampleStream>

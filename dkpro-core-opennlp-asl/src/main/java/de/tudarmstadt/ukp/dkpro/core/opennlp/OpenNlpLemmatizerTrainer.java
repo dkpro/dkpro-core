@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.opennlp;
 import java.util.concurrent.Callable;
 
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 
 import de.tudarmstadt.ukp.dkpro.core.api.descriptors.ModelTrainerCapability;
@@ -37,7 +38,8 @@ import opennlp.tools.util.TrainingParameters;
 /**
  * Train a lemmatizer model for OpenNLP.
  */
-@ModelTrainerCapability(jCasAnnotator = OpenNlpLemmatizer.class, type = "lemmatizer")
+@MimeTypeCapability("opennlp/de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma")
+@ModelTrainerCapability(output = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma")
 @ResourceMetaData(name="OpenNLP Lemmatizer Trainer")
 public class OpenNlpLemmatizerTrainer
     extends OpenNlpTrainerBase<CasLemmaSampleStream>

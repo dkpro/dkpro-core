@@ -35,6 +35,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
@@ -55,6 +56,7 @@ import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpChunkerTagsetDescri
 /**
  * Chunk annotator using OpenNLP.
  */
+@MimeTypeCapability("opennlp/de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk")
 @ResourceMetaData(name="OpenNLP Chunker")
 @TypeCapability(
 	    inputs = {

@@ -34,6 +34,7 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
@@ -54,6 +55,7 @@ import opennlp.tools.postag.POSTaggerME;
 /**
  * Part-of-Speech annotator using OpenNLP.
  */
+@MimeTypeCapability("opennlp/de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS")
 @ResourceMetaData(name="OpenNLP POS-Tagger")
 //NOTE: This file contains Asciidoc markers for partial inclusion of this file in the documentation
 //Do not remove these tags!

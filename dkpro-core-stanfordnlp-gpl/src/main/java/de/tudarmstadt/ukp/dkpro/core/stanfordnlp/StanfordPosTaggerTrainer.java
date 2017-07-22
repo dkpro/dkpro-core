@@ -40,6 +40,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -53,7 +54,8 @@ import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 /**
  * Train a POS tagging model for the Stanford POS tagger.
  */
-@ModelTrainerCapability(jCasAnnotator = StanfordPosTagger.class, type = "pos")
+@MimeTypeCapability("stanfordnlp/de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS")
+@ModelTrainerCapability(output = "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS")
 @ResourceMetaData(name="CoreNLP POS-Tagger Trainer")
 public class StanfordPosTaggerTrainer
     extends JCasConsumer_ImplBase
