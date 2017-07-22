@@ -45,7 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 /**
  * Tokenizer and sentence splitter using OpenNLP.
  */
-@ResourceMetaData(name="NLP4J Segmenter")
+@ResourceMetaData(name="OpenNLP Segmenter")
 @TypeCapability(
 	    outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
