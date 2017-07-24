@@ -42,6 +42,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableStreamProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
@@ -56,7 +57,7 @@ import opennlp.tools.util.Span;
 /**
  * OpenNLP name finder wrapper.
  */
-@MimeTypeCapability("opennlp/de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity")
+@MimeTypeCapability(MimeTypes.APPLICATION_X_OPENNLP_NER)
 @ResourceMetaData(name="OpenNLP Named Entity Recognizer")
 @TypeCapability(
         inputs = {

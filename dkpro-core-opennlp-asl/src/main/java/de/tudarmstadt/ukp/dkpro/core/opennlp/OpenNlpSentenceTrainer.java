@@ -41,6 +41,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.descriptors.ModelTrainerCapability;;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.CasSentenceSampleStream;
 import opennlp.tools.dictionary.Dictionary;
@@ -54,7 +55,7 @@ import opennlp.tools.util.TrainingParameters;
 /**
  * Train a sentence splitter model for OpenNLP.
  */
-@MimeTypeCapability("opennlp/de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence")
+@MimeTypeCapability(MimeTypes.APPLICATION_X_OPENNLP_SENT)
 @ModelTrainerCapability(
         annotatorParamModelLocationName = OpenNlpSegmenter.PARAM_SEGMENTATION_MODEL_LOCATION,
         output = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence")

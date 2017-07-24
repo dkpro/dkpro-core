@@ -27,4 +27,11 @@
     <artifactId>de.tudarmstadt.ukp.dkpro.core.api.descriptors-asl</artifactId>
     <packaging>jar</packaging>
     <name>DKPro Core ASL - Descriptors API</name>
+    
+    <dependencies>
+        <dependency>
+            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+            <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
+        </dependency>
+    </dependencies>
 </project>

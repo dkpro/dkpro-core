@@ -46,6 +46,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -61,7 +62,7 @@ import edu.stanford.nlp.util.CoreMap;
 /**
  * Stanford Named Entity Recognizer component.
  */
-@MimeTypeCapability("stanfordnlp/de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity")
+@MimeTypeCapability(MimeTypes.APPLICATION_X_STANFORDNLP_NER)
 @ResourceMetaData(name="CoreNLP Named Entity Recogizer (old API)")
 @TypeCapability(
         inputs = {

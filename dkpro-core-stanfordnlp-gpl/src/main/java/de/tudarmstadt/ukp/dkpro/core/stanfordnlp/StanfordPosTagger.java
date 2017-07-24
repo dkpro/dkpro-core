@@ -42,6 +42,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
@@ -59,7 +60,7 @@ import edu.stanford.nlp.util.StringUtils;
 /**
  * Stanford Part-of-Speech tagger component.
  */
-@MimeTypeCapability("stanfordnlp/de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS")
+@MimeTypeCapability(MimeTypes.APPLICATION_X_STANFORDNLP_TAGGER)
 @ResourceMetaData(name="CoreNLP POS-Tagger (old API)")
 @TypeCapability(
 		inputs = {

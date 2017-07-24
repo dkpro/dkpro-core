@@ -35,6 +35,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -46,7 +47,7 @@ import opennlp.tools.lemmatizer.LemmatizerModel;
 /**
  * Lemmatizer using OpenNLP.
  */
-@MimeTypeCapability("opennlp/de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma")
+@MimeTypeCapability(MimeTypes.APPLICATION_X_OPENNLP_LEMMA)
 @ResourceMetaData(name="OpenNLP Lemmatizer")
 @TypeCapability(
         inputs = { 

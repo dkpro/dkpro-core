@@ -25,6 +25,7 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 
 import de.tudarmstadt.ukp.dkpro.core.api.descriptors.ModelTrainerCapability;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.CasLemmaSampleStream;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTrainerBase;
 import opennlp.tools.lemmatizer.LemmatizerFactory;
@@ -38,7 +39,7 @@ import opennlp.tools.util.TrainingParameters;
 /**
  * Train a lemmatizer model for OpenNLP.
  */
-@MimeTypeCapability("opennlp/de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma")
+@MimeTypeCapability(MimeTypes.APPLICATION_X_OPENNLP_LEMMA)
 @ModelTrainerCapability(output = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma")
 @ResourceMetaData(name="OpenNLP Lemmatizer Trainer")
 public class OpenNlpLemmatizerTrainer

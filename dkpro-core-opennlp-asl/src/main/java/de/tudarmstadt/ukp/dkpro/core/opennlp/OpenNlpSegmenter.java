@@ -38,6 +38,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableStreamProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
@@ -46,7 +47,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 /**
  * Tokenizer and sentence splitter using OpenNLP.
  */
-@MimeTypeCapability("opennlp/de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token+de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence")
+@MimeTypeCapability({MimeTypes.APPLICATION_X_OPENNLP_SENT, MimeTypes.APPLICATION_X_OPENNLP_TOKEN})
 @ResourceMetaData(name="OpenNLP Segmenter")
 @TypeCapability(
 	    outputs = {

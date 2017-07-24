@@ -47,6 +47,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.descriptors.ModelTrainerCapability;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
@@ -54,7 +55,7 @@ import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 /**
  * Train a POS tagging model for the Stanford POS tagger.
  */
-@MimeTypeCapability("stanfordnlp/de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS")
+@MimeTypeCapability(MimeTypes.APPLICATION_X_STANFORDNLP_TAGGER)
 @ModelTrainerCapability(output = "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS")
 @ResourceMetaData(name="CoreNLP POS-Tagger Trainer")
 public class StanfordPosTaggerTrainer

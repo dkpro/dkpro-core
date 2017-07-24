@@ -42,6 +42,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
@@ -55,7 +56,7 @@ import opennlp.tools.postag.POSTaggerME;
 /**
  * Part-of-Speech annotator using OpenNLP.
  */
-@MimeTypeCapability("opennlp/de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS")
+@MimeTypeCapability(MimeTypes.APPLICATION_X_OPENNLP_TAGGER)
 @ResourceMetaData(name="OpenNLP POS-Tagger")
 //NOTE: This file contains Asciidoc markers for partial inclusion of this file in the documentation
 //Do not remove these tags!
