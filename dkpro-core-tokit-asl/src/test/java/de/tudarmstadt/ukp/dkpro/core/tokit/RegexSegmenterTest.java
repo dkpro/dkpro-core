@@ -26,6 +26,7 @@ import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.JCasFactory;
@@ -189,5 +190,39 @@ public class RegexSegmenterTest
             assertSentence(expectedSentences, select(jcas, Sentence.class));
             assertToken(expectedTokens, select(jcas, Token.class));
         }
-    }    
+    }
+
+    @Test
+    public void simpleExampleWithDivs()
+            throws Exception
+    {
+        JCas jcas = JCasFactory.createText("This is sentence 1 .\nThis is number 2 .", "en");
+        Div d = new Div(jcas, 0, 20);
+        d.addToIndexes();
+        d = new Div(jcas, 21, 39);
+        d.addToIndexes();
+
+        runPipeline(jcas,
+                createEngineDescription(RegexSegmenter.class,
+                        // Treat each line as a sentence
+                        RegexSegmenter.PARAM_SENTENCE_BOUNDARY_REGEX, "\n",
+                        // Use whitespace to detect tokens
+                        RegexSegmenter.PARAM_TOKEN_BOUNDARY_REGEX, "\\s+"));
+
+        for (Sentence s : select(jcas, Sentence.class)) {
+            for (Token t : selectCovered(Token.class, s)) {
+                System.out.printf("[%s] ", t.getCoveredText());
+            }
+            System.out.println();
+        }
+
+        assertToken(
+                new String[] { "This", "is", "sentence", "1", ".", "This", "is", "number", "2", "." },
+                select(jcas, Token.class));
+        assertSentence(
+                new String[] {
+                        "This is sentence 1 .",
+                        "This is number 2 ." },
+                select(jcas, Sentence.class));
+    }
 }
