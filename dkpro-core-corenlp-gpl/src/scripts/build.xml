@@ -27,12 +27,12 @@
 	  - Upstream versions - meta data versions are maintained per model below 
 	  -->
 	<!-- http://nlp.stanford.edu/software/corenlp.shtml -->
-    <property name="core.arabic.date" value="2016-10-31"/>
-    <property name="core.chinese.date" value="2016-10-31"/>
-    <property name="core.english.date" value="2016-10-31"/>
-    <property name="core.french.date" value="2016-10-31"/>
-    <property name="core.german.date" value="2016-10-31"/>
-    <property name="core.spanish.date" value="2016-10-31"/>
+    <property name="core.arabic.date" value="2017-06-09"/>
+    <property name="core.chinese.date" value="2017-06-09"/>
+    <property name="core.english.date" value="2017-06-09"/>
+    <property name="core.french.date" value="2017-06-09"/>
+    <property name="core.german.date" value="2017-06-09"/>
+    <property name="core.spanish.date" value="2017-06-09"/>
 
 	<!-- 
 	  - Output package configuration

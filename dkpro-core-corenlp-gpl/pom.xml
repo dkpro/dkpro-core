@@ -31,7 +31,7 @@
   <packaging>jar</packaging>
   <name>DKPro Core GPL - Stanford CoreNLP Suite (v ${corenlp.version}) (GPL)</name>
   <properties>
-    <corenlp.version>3.7.0</corenlp.version>
+    <corenlp.version>3.8.0</corenlp.version>
   </properties>
   <dependencies>
     <dependency>
