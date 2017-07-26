@@ -1,6 +1,6 @@
 package de.tudarmstadt.ukp.dkpro.core.decompounding.web1t;
 /*
- * Copyright 2010
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
