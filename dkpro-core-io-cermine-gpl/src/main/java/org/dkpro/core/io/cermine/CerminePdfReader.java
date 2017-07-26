@@ -70,6 +70,14 @@ public class CerminePdfReader
     public static final String PARAM_PARAGRAPH_TYPE = "paragraphType";
     @ConfigurationParameter(name = PARAM_PARAGRAPH_TYPE, mandatory = false, defaultValue = BUILT_IN)
     private String paragraphType;
+    
+    /**
+     * If set to true the converter will normalize all whitespaces (e.g. tab, newline) to a single
+     * whitespace
+     */
+    public static final String PARAM_NORMALIZE_TEXT = "normalizeText";
+    @ConfigurationParameter(name = PARAM_NORMALIZE_TEXT, mandatory = false, defaultValue = "false")
+    private boolean normalizeText;
 
     private NlmHandler nlmHandler;
 
@@ -89,7 +97,8 @@ public class CerminePdfReader
 
         nlmHandler = new NlmHandler()
                 .withHeadingAnnotation(headingType)
-                .withParagraphAnnotation(paragraphType);
+                .withParagraphAnnotation(paragraphType)
+                .withNormalizeText(normalizeText);
     }
 
     @Override
@@ -137,6 +146,7 @@ public class CerminePdfReader
 
         private String paragraphType;
         private String headingType;
+        private boolean normalizeText;
 
         private int beginIndex;
 
@@ -149,6 +159,12 @@ public class CerminePdfReader
         public NlmHandler withHeadingAnnotation(String headingAnnotation)
         {
             headingType = headingAnnotation;
+            return this;
+        }
+        
+        public NlmHandler withNormalizeText(boolean isNormalizeText)
+        {
+            normalizeText = isNormalizeText;
             return this;
         }
 
@@ -197,7 +213,7 @@ public class CerminePdfReader
         {
             if (root.getChildren().isEmpty() && !root.getValue().isEmpty())
             {
-                sb.append(DELIMITER).append(root.getValue());
+                sb.append(DELIMITER).append(normalizeString(root.getValue()));
                 return;
             }
             for (Object node : root.getChildren())
@@ -238,7 +254,7 @@ public class CerminePdfReader
         {
             if (root.getChildren().isEmpty() && !root.getValue().isEmpty())
             {
-                sb.append(DELIMITER).append(root.getValue());
+                sb.append(DELIMITER).append(normalizeString(root.getValue()));
                 return;
             }
 
@@ -279,7 +295,7 @@ public class CerminePdfReader
         private void parseText(Element root)
         {
             if (root.getChildren().isEmpty() && !root.getValue().isEmpty()) {
-                sb.append(DELIMITER).append(root.getValue());
+                sb.append(DELIMITER).append(normalizeString(root.getValue()));
             }
             else
             {
@@ -294,6 +310,14 @@ public class CerminePdfReader
         private void parseBack(Element root)
         {
             parseText(root);
+        }
+        
+        protected String normalizeString(String input)
+        {
+            if (normalizeText)
+                return input.replaceAll("\\s+", " ");
+            else
+                return input;
         }
     }
 }
