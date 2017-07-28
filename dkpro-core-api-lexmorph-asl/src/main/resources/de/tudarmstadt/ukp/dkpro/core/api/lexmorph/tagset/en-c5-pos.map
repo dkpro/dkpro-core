@@ -6,250 +6,250 @@ __META_SOURCE_URL__=http://www.natcorp.ox.ac.uk/docs/gramtag.html
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # Default mapping
-*=X
+*=POS_X
 
 # AJ0	Adjective (general or positive) (e.g. good, old, beautiful)
-AJ0=ADJ
-AJ0-AV0=ADJ
-AJ0-VVG=ADJ
-AJ0-VVN=ADJ
-AJ0-VVD=ADJ
-AJ0-NN1=ADJ
+AJ0=POS_ADJ
+AJ0-AV0=POS_ADJ
+AJ0-VVG=POS_ADJ
+AJ0-VVN=POS_ADJ
+AJ0-VVD=POS_ADJ
+AJ0-NN1=POS_ADJ
 
 # AJC	Comparative adjective (e.g. better, older)
-AJC=ADJ
+AJC=POS_ADJ
 
 # AJS	Superlative adjective (e.g. best, oldest)
-AJS=ADJ
+AJS=POS_ADJ
 
 # AT0	Article (e.g. the, a, an, no) [N.B. no is included among articles, which are defined here as
 #       determiner words which typically begin a noun phrase, but which cannot occur as the head of
 #       a noun phrase.]
-AT0=DET
+AT0=POS_DET
 
 # AV0	General adverb: an adverb not subclassified as AVP or AVQ (see below) (e.g. often, well, 
 #       longer (adv.), furthest. [Note that adverbs, unlike adjectives, are not tagged as positive, 
 #       comparative, or superlative.This is because of the relative rarity of comparative and
 #       superlative adverbs.]
-AV0=ADV
-AV0-AJ0=ADV
+AV0=POS_ADV
+AV0-AJ0=POS_ADV
 
 # AVP	Adverb particle (e.g. up, off, out) [N.B. AVP is used for such "prepositional adverbs", 
 #       whether or not they are used idiomatically in a phrasal verb: e.g. in 'Come out here' and 
 #       'I can't hold out any longer', the same AVP tag is used for out.
-AVP-PRP=ADP
+AVP-PRP=POS_ADP
 
 # AVQ	Wh-adverb (e.g. when, where, how, why, wherever) [The same tag is used, whether the word
 # occurs in interrogative or relative use.]
-AVQ-CJS=ADV
+AVQ-CJS=POS_ADV
 
 # CJC	Coordinating conjunction (e.g. and, or, but)
-CJC=CONJ
+CJC=POS_CONJ
 
 # CJS	Subordinating conjunction (e.g. although, when)
-CJS=SCONJ
-CJS-AVQ=SCONJ
-CJS-PRP=SCONJ
+CJS=POS_SCONJ
+CJS-AVQ=POS_SCONJ
+CJS-PRP=POS_SCONJ
 
 
 # CJT	The subordinating conjunction that [N.B. that is tagged CJT when it introduces not only a 
 #       nominal clause, but also a relative clause, as in 'the day that follows Christmas'. Some 
 #       theories treat that here as a relative pronoun, whereas others treat it as a conjunction. We
 #       have adopted the latter analysis.]
-CJT=SCONJ
-CJT-DT0=SCONJ
+CJT=POS_SCONJ
+CJT-DT0=POS_SCONJ
 
 # CRD	Cardinal number (e.g. one, 3, fifty-five, 3609)
-CRD=NUM
-CRD-PNI=NUM
+CRD=POS_NUM
+CRD-PNI=POS_NUM
 
 # DPS	Possessive determiner (e.g. your, their, his)
-DPS=DET
+DPS=POS_DET
 
 # DT0	General determiner: i.e. a determiner which is not a DTQ. [Here a determiner is defined as a
 #       word which typically occurs either as the first word in a noun phrase, or as the head of a
 #       noun phrase. E.g. This is tagged DT0 both in 'This is my house' and in 'This house is 
 #       mine'.]
-DT0=DET
-DT0-CJT=DET
+DT0=POS_DET
+DT0-CJT=POS_DET
 
 
 # DTQ	Wh-determiner (e.g. which, what, whose, whichever) [The category of determiner here is 
 #       defined as for DT0 above. These words are tagged as wh-determiners whether they occur in 
 #       interrogative use or in relative use.]
-DTQ=DET
+DTQ=POS_DET
 
 # EX0	Existential there, i.e. there occurring in the there is ... or there are ... construction
 
 # ITJ	Interjection or other isolate (e.g. oh, yes, mhm, wow)
-ITJ=INTJ
+ITJ=POS_INTJ
 
 # NN0	Common noun, neutral for number (e.g. aircraft, data, committee) [N.B. Singular collective
 #       nouns such as committee and team are tagged NN0, on the grounds that they are capable of
 #       taking singular or plural agreement with the following verb: e.g. 'The committee disagrees/
 #       disagree'.]
-NN0=NOUN
+NN0=POS_NOUN
 
 # NN1	Singular common noun (e.g. pencil, goose, time, revelation)
-NN1=NOUN
-NN1-VVG=NOUN
-NN1-VVB=NOUN
-NN1-AJ0=NOUN
-NN1-NP0=NOUN
+NN1=POS_NOUN
+NN1-VVG=POS_NOUN
+NN1-VVB=POS_NOUN
+NN1-AJ0=POS_NOUN
+NN1-NP0=POS_NOUN
 
 
 # NN2	Plural common noun (e.g. pencils, geese, times, revelations)
-NN2=NOUN
-NN2-VVZ=NOUN
+NN2=POS_NOUN
+NN2-VVZ=POS_NOUN
 
 # NP0	Proper noun (e.g. London, Michael, Mars, IBM) [N.B. the distinction between singular and 
 #       plural proper nouns is not indicated in the tagset, plural proper nouns being a comparative
 #       rarity.]
-NP0=PROPN
-NP0-NN1=PROPN
+NP0=POS_PROPN
+NP0-NN1=POS_PROPN
 
 # ORD	Ordinal numeral (e.g. first, sixth, 77th, last) . [N.B. The ORD tag is used whether these
 #       words are used in a nominal or in an adverbial role. Next and last, as "general ordinals",
 #       are also assigned to this category.]
-ORD=NUM
+ORD=POS_NUM
 
 # PNI	Indefinite pronoun (e.g. none, everything, one [as pronoun], nobody) [N.B. This tag applies
 #       to words which always function as [heads of] noun phrases. Words like some and these, which
 #       can also occur before a noun head in an article-like function, are tagged as determiners
 #       (see DT0 and AT0 above).]
-PNI=PRON
-PNI-CRD=PRON
+PNI=POS_PRON
+PNI-CRD=POS_PRON
 
 # PNP	Personal pronoun (e.g. I, you, them, ours) [Note that possessive pronouns like ours and 
 #       theirs are tagged as personal pronouns.]
-PNP=PRON
+PNP=POS_PRON
 
 # PNQ	Wh-pronoun (e.g. who, whoever, whom) [N.B. These words are tagged as wh-pronouns whether 
 #       they occur in interrogative or in relative use.]
-PNQ=PRON
+PNQ=POS_PRON
 
 # PNX	Reflexive pronoun (e.g. myself, yourself, itself, ourselves)
-PNN=PRON
+PNN=POS_PRON
 
 # POS	The possessive or genitive marker 's or ' (e.g. for 'Peter's or somebody else's', the 
 #       sequence of tags is: NP0 POS CJC PNI AV0 POS)
 
 # PRF	The preposition of. Because of its frequency and its almost exclusively postnominal 
 #       function, of is assigned a special tag of its own.
-PRF=ADP
+PRF=POS_ADP
 
 # PRP	Preposition (except for of) (e.g. about, at, in, on, on behalf of, with)
-PRP=ADP
-PRP-AVP=ADP
-PRP-CJS=ADP
+PRP=POS_ADP
+PRP-AVP=POS_ADP
+PRP-CJS=POS_ADP
 
 # PUL	Punctuation: left bracket - i.e. ( or [
-PUL=PUNCT
+PUL=POS_PUNCT
 
 # PUN	Punctuation: general separating mark - i.e. . , ! , : ; - or ?
-PUN=PUNCT
+PUN=POS_PUNCT
 
 # PUQ	Punctuation: quotation mark - i.e. ' or "
-PUQ=PUNCT
+PUQ=POS_PUNCT
 
 # PUR	Punctuation: right bracket - i.e. ) or ]
-PUR=PUNCT
+PUR=POS_PUNCT
 
 # TO0	Infinitive marker to
 
 # UNC	Unclassified items which are not appropriately classified as items of the English lexicon. 
 #       [Items tagged UNC include foreign (non-English) words, special typographical symbols, 
 #       formulae, and (in spoken language) hesitation fillers such as er and erm.]
-UNC=X
+UNC=POS_X
 
 # VBB	The present tense forms of the verb BE, except for is, 's: i.e. am, are, 'm, 're and be 
 #       [subjunctive or imperative]
-VBB=VERB
+VBB=POS_VERB
 
 # VBD	The past tense forms of the verb BE: was and were
-VBD=VERB
+VBD=POS_VERB
 
 # VBG	The -ing form of the verb BE: being
-VBG=VERB
+VBG=POS_VERB
 
 # VBI	The infinitive form of the verb BE: be
-VBI=VERB
+VBI=POS_VERB
 
 # VBN	The past participle form of the verb BE: been
-VBN=VERB
+VBN=POS_VERB
 
 # VBZ	The -s form of the verb BE: is, 's
-VBZ=VERB
+VBZ=POS_VERB
 
 # VDB	The finite base form of the verb BE: do
-VDB=VERB
+VDB=POS_VERB
 
 # VDD	The past tense form of the verb DO: did
-VDD=VERB
+VDD=POS_VERB
 
 # VDG	The -ing form of the verb DO: doing
-VDG=VERB
+VDG=POS_VERB
 
 # VDI	The infinitive form of the verb DO: do
-VDI=VERB
+VDI=POS_VERB
 
 # VDN	The past participle form of the verb DO: done
-VDN=VERB
+VDN=POS_VERB
 
 # VDZ	The -s form of the verb DO: does, 's
-VDZ=VERB
+VDZ=POS_VERB
 
 # VHB	The finite base form of the verb HAVE: have, 've
-VHB=VERB
+VHB=POS_VERB
 
 # VHD	 The past tense form of the verb HAVE: had, 'd
-VHD=VERB
+VHD=POS_VERB
 
 # VHG	The -ing form of the verb HAVE: having
-VHG=VERB
+VHG=POS_VERB
 
 # VHI	The infinitive form of the verb HAVE: have
-VHI=VERB
+VHI=POS_VERB
 
 # VHN	The past participle form of the verb HAVE: had
-VHN=VERB
+VHN=POS_VERB
 
 # VHZ	The -s form of the verb HAVE: has, 's
-VHZ=VERB
+VHZ=POS_VERB
 
 # VM0	Modal auxiliary verb (e.g. will, would, can, could, 'll, 'd)
-VM0=AUX
+VM0=POS_AUX
 
 # VVB	The finite base form of lexical verbs (e.g. forget, send, live, return) [Including the 
 #       imperative and present subjunctive]
-VVB=VERB
-VVB-NN1=VERB
+VVB=POS_VERB
+VVB-NN1=POS_VERB
 
 # VVD	The past tense form of lexical verbs (e.g. forgot, sent, lived, returned)
-VVD=VERB
-VVD-VVN=VERB
-VVD-AJ0=VERB
+VVD=POS_VERB
+VVD-VVN=POS_VERB
+VVD-AJ0=POS_VERB
 
 # VVG	The -ing form of lexical verbs (e.g. forgetting, sending, living, returning)
-VVG=VERB
-VVG-NN1=VERB
-VVG-AJ0=VERB
+VVG=POS_VERB
+VVG-NN1=POS_VERB
+VVG-AJ0=POS_VERB
 
 # VVI	The infinitive form of lexical verbs (e.g. forget, send, live, return)
-VVI=VERB
+VVI=POS_VERB
 
 # VVN	The past participle form of lexical verbs (e.g. forgotten, sent, lived, returned)
-VVN=VERB
-VVN-AJ0=VERB
-VVN-VVD=VERB
+VVN=POS_VERB
+VVN-AJ0=POS_VERB
+VVN-VVD=POS_VERB
 
 # VVZ	The -s form of lexical verbs (e.g. forgets, sends, lives, returns)
-VVZ=VERB
-VVZ-NN2=VERB
+VVZ=POS_VERB
+VVZ-NN2=POS_VERB
 
 
 # XX0	The negative particle not or n't
-XX0=PART
+XX0=POS_PART
 
 # ZZ0	Alphabetical symbols (e.g. A, a, B, b, c, d)
-ZZ0=X
+ZZ0=POS_X

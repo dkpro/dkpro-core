@@ -9,57 +9,57 @@ __META_SOURCE_URL__.1=http://stp.lingfil.uu.se/~nivre/swedish_treebank/pos.html
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # AB	Adverb
-AB=ADV
+AB=POS_ADV
 # DT	Determiner
-DT=DET
+DT=POS_DET
 # HA	WH-adverb
-HA=ADV
+HA=POS_ADV
 # HD	WH-determiner
-HD=DET
+HD=POS_DET
 # HP	WH-pronoun
-HP=PRON
+HP=POS_PRON
 # HS	WH-possessive
-HS=PRON
+HS=POS_PRON
 # IE	Infinitival marker
 # IN	Interjection
-IN=INTJ
+IN=POS_INTJ
 # JJ	Adjective
-JJ=ADJ
+JJ=POS_ADJ
 # KN	Coordinating conjunction
-KN=CONJ
+KN=POS_CONJ
 # NN	Noun
-NN=NOUN
+NN=POS_NOUN
 # PC	Participle
-PC=VERB
+PC=POS_VERB
 # PL	Particle
-PL=PART
+PL=POS_PART
 # PM	Proper Noun
-PM=PROPN
+PM=POS_PROPN
 # PN	Pronoun
-PN=PRON
+PN=POS_PRON
 # PP	Preposition
-PP=ADP
+PP=POS_ADP
 # PS	Possessive pronoun
-PS=PRON
+PS=POS_PRON
 # RG	Cardinal number
-RG=NUM
+RG=POS_NUM
 # RO	Ordinal number
-RO=NUM
+RO=POS_NUM
 # SN	Subordinating conjunction
-SN=SCONJ
+SN=POS_SCONJ
 # VB	Verb
-VB=VERB
+VB=POS_VERB
 # 
 # == Supplementary Tag ==
 # UO	Foreign word
 # 
 # == Delimiters ==
 # MAD	Major delimiter
-MAD=PUNCT
+MAD=POS_PUNCT
 # MID	Minor delimiter
-MID=PUNCT
+MID=POS_PUNCT
 # PAD	Pairwise delimiter
-PAD=PUNCT
+PAD=POS_PUNCT
 
 # Catch-all rule
-*=X
+*=POS_X

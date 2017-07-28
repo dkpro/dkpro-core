@@ -4,185 +4,185 @@ __META_SOURCE_URL__=http://clu.uni.no/icame/brown/bcm.html#bc6
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # sentence closer (. ; ? !)
-.=PUNCT
+.=POS_PUNCT
 # left paren
-(=X
+(=POS_X
 # right paren
-)=X
+)=POS_X
 # not, n't
-#*=X
+#*=POS_X
 # dash
--=X
+-=POS_X
 # comma
-,=X
+,=POS_X
 # colon
-\:=X
+\:=POS_X
 # pre-qualifier (quite, rather)
-ABL=ADV
+ABL=POS_ADV
 # pre-quantifier (half, all)
-ABN=ADV
+ABN=POS_ADV
 # pre-quantifier (both)
-ABX=ADV
+ABX=POS_ADV
 # post-determiner (many, several, next)
-AP=DET
+AP=POS_DET
 # article (a, the, no)
-AT=DET
+AT=POS_DET
 # be
-BE=VERB
+BE=POS_VERB
 # were
-BED=VERB
+BED=POS_VERB
 # was
-BEDZ=VERB
+BEDZ=POS_VERB
 # being
-BEG=VERB
+BEG=POS_VERB
 # am
-BEM=VERB
+BEM=POS_VERB
 # been
-BEN=VERB
+BEN=POS_VERB
 # are, art
-BER=VERB
+BER=POS_VERB
 # is
-BEZ=VERB
+BEZ=POS_VERB
 # coordinating conjunction (and, or)
-CC=CONJ
+CC=POS_CONJ
 # cardinal numeral (one, two, 2, etc.)
-CD=NUM
+CD=POS_NUM
 # subordinating conjunction (if, although)
-CS=SCONJ
+CS=POS_SCONJ
 # do
-DO=VERB
+DO=POS_VERB
 # did
-DOD=VERB
+DOD=POS_VERB
 # does
-DOZ=VERB
+DOZ=POS_VERB
 # singular determiner (this, that)
-DT=DET
+DT=POS_DET
 # singular or plural determiner/quantifier (some, any)
-DTI=DET
+DTI=POS_DET
 # plural determiner (these, those)
-DTS=DET
+DTS=POS_DET
 # determiner/double conjunction (either)
-DTX=DET
+DTX=POS_DET
 # existentil there
-EX=ADV
+EX=POS_ADV
 # foreign word (hyphenated before regular tag)
-FW=X
+FW=POS_X
 # word occurring in headline (hyphenated after regular tag)
-HL=X
+HL=POS_X
 # have
-HV=VERB
+HV=POS_VERB
 # had (past tense)
-HVD=VERB
+HVD=POS_VERB
 # having
-HVG=VERB
+HVG=POS_VERB
 # had (past participle)
-HVN=VERB
+HVN=POS_VERB
 # has
-HVZ=VERB
+HVZ=POS_VERB
 # preposition
-IN=ADP
+IN=POS_ADP
 # adjective
-JJ=ADJ
+JJ=POS_ADJ
 # comparative adjective
-JJR=ADJ
+JJR=POS_ADJ
 # semantically superlative adjective (chief, top)
-JJS=ADJ
+JJS=POS_ADJ
 # morphologically superlative adjective (biggest)
-JJT=ADJ
+JJT=POS_ADJ
 # modal auxiliary (can, should, will)
-MD=AUX
+MD=POS_AUX
 # cited word (hyphenated after regular tag)
-NC=X
+NC=POS_X
 # singular or mass noun
-NN=NOUN
+NN=POS_NOUN
 # possessive singular noun
-NN$=NOUN
+NN$=POS_NOUN
 # plural noun
-NNS=NOUN
+NNS=POS_NOUN
 # possessive plural noun
-NNS$=NOUN
+NNS$=POS_NOUN
 # proper noun or part of name phrase     
-NP=PROPN
+NP=POS_PROPN
 # possessive proper noun
-NP$=PROPN
+NP$=POS_PROPN
 # plural proper noun
-NPS=PROPN
+NPS=POS_PROPN
 # possessive plural proper noun
-NPS$=PROPN
+NPS$=POS_PROPN
 # adverbial noun (home, today, west)
-NR=ADV
+NR=POS_ADV
 # plural adverbial noun
-NRS=NOUN
+NRS=POS_NOUN
 # ordinal numeral (first, 2nd)
-OD=NUM
+OD=POS_NUM
 # nominal pronoun (everybody, nothing)
-PN=PRON
+PN=POS_PRON
 # possessive nominal pronoun
-PN$=PRON
+PN$=POS_PRON
 # possessive personal pronoun (my, our)
-PP$=PRON
+PP$=POS_PRON
 # second (nominal) possessive pronoun (mine, ours)
-PP$$=PRON
+PP$$=POS_PRON
 # singular reflexive/intensive personal pronoun (myself)
-PPL=PRON
+PPL=POS_PRON
 # plural reflexive/intensive personal pronoun (ourselves)
-PPLS=PRON
+PPLS=POS_PRON
 # objective personal pronoun (me, him, it, them)
-PPO=PRON
+PPO=POS_PRON
 # 3rd. singular nominative pronoun (he, she, it, one)
-PPS=PRON
+PPS=POS_PRON
 # other nominative personal pronoun (I, we, they, you)
-PPSS=PRON
+PPSS=POS_PRON
 # qualifier (very, fairly)
-QL=ADV
+QL=POS_ADV
 # post-qualifier (enough, indeed)
-QLP=ADV
+QLP=POS_ADV
 # adverb
-RB=ADV
+RB=POS_ADV
 # comparative adverb
-RBR=ADV
+RBR=POS_ADV
 # superlative adverb
-RBT=ADV
+RBT=POS_ADV
 # nominal adverb (here then, indoors)
-RN=ADV
+RN=POS_ADV
 # adverb/particle (about, off, up)
-RP=ADV
+RP=POS_ADV
 # word occurring in title (hyphenated after regular tag)
-TL=X
+TL=POS_X
 # infinitive marker to
-TO=ADP
+TO=POS_ADP
 # interjection, exclamation
-UH=INTJ
+UH=POS_INTJ
 # verb, base form
-VB=VERB
+VB=POS_VERB
 # verb, past tense
-VBD=VERB
+VBD=POS_VERB
 # verb, present participle/gerund
-VBG=VERB
+VBG=POS_VERB
 # verb, past participle
-VBN=VERB
+VBN=POS_VERB
 # verb, 3rd. singular present
-VBZ=VERB
+VBZ=POS_VERB
 # wh- determiner (what, which)
-WDT=DET
+WDT=POS_DET
 # possessive wh- pronoun (whose)
-WP$=PRON
+WP$=POS_PRON
 # objective wh- pronoun (whom, which, that)
-WPO=PRON
+WPO=POS_PRON
 # nominative wh- pronoun (who, which, that)
-WPS=PRON
+WPS=POS_PRON
 # wh- qualifier (how)
-WQL=ADV
+WQL=POS_ADV
 # wh- adverb (how, where, when)
-WRB=ADV
+WRB=POS_ADV
 
 # The following tags appear in the NLTK Brown Corpus (?) but are not part of the 
 # regular Brown corpus tagset (http://clu.uni.no/icame/brown/bcm.html#bc6)
-pct=PUNCT
-RB$=ADV
-CD$=NUM
-NEG=ADV
-NNSG=NOUN
-NR$=NOUN
+pct=POS_PUNCT
+RB$=POS_ADV
+CD$=POS_NUM
+NEG=POS_ADV
+NNSG=POS_NOUN
+NR$=POS_NOUN
 
-*=X
+*=POS_X

@@ -7,70 +7,70 @@
 __META_SOURCE_URL__=http://www.ims.uni-stuttgart.de/~schmid/french-tagset.html
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
-*=X
+*=POS_X
 # ABR	abreviation
-ABR=X
+ABR=POS_X
 # ADJ	adjective
-ADJ=ADJ
+ADJ=POS_ADJ
 # ADV	adverb
-ADV=ADV
+ADV=POS_ADV
 # DET:ART	article
-DET\:ART=DET
+DET\:ART=POS_DET
 # DET:POS	possessive pronoun (ma, ta, ...)
-DET\:POS=PRON
+DET\:POS=POS_PRON
 # INT	interjection
-INT=INTJ
+INT=POS_INTJ
 # KON	conjunction
-KON=CONJ
+KON=POS_CONJ
 # NAM	proper name
-NAM=PROPN
+NAM=POS_PROPN
 # NOM	noun
-NOM=NOUN
+NOM=POS_NOUN
 # NUM	numeral
-NUM=NUM
+NUM=POS_NUM
 # PRO	pronoun
-PRO=PRON
+PRO=POS_PRON
 # PRO:DEM	demonstrative pronoun
-PRO\:DEM=PRON
+PRO\:DEM=POS_PRON
 # PRO:IND	indefinite pronoun
-PRO\:IND=PRON
+PRO\:IND=POS_PRON
 # PRO:PER	personal pronoun
-PRO\:PER=PRON
+PRO\:PER=POS_PRON
 # PRO:POS	possessive pronoun (mien, tien, ...)
-PRO\:POS=PRON
+PRO\:POS=POS_PRON
 # PRO:REL	relative pronoun
-PRO\:REL=PRON
+PRO\:REL=POS_PRON
 # PRP	preposition
-PRP=ADP
+PRP=POS_ADP
 # PRP:det	preposition plus article (au,du,aux,des)
-PRP\:det=ADP
+PRP\:det=POS_ADP
 # PUN	punctuation
-PUN=PUNCT
+PUN=POS_PUNCT
 # PUN:cit	punctuation citation
-PUN\:cit=PUNCT
+PUN\:cit=POS_PUNCT
 # SENT	sentence tag
-SENT=PUNCT
+SENT=POS_PUNCT
 # SYM	symbol
-SYM=SYM
+SYM=POS_SYM
 # VER:cond	verb conditional
-VER\:cond=VERB
+VER\:cond=POS_VERB
 # VER:futu	verb futur
-VER\:futu=VERB
+VER\:futu=POS_VERB
 # VER:impe	verb imperative
-VER\:impe=VERB
+VER\:impe=POS_VERB
 # VER:impf	verb imperfect
-VER\:impf=VERB
+VER\:impf=POS_VERB
 # VER:infi	verb infinitive
-VER\:infi=VERB
+VER\:infi=POS_VERB
 # VER:pper	verb past participle
-VER\:pper=VERB
+VER\:pper=POS_VERB
 # VER:ppre	verb present participle
-VER\:ppre=VERB
+VER\:ppre=POS_VERB
 # VER:pres	verb present
-VER\:pres=VERB
+VER\:pres=POS_VERB
 # VER:simp	verb simple past
-VER\:simp=VERB
+VER\:simp=POS_VERB
 # VER:subi	verb subjunctive imperfect
-VER\:subi=VERB
+VER\:subi=POS_VERB
 # VER:subp	verb subjunctive present
-VER\:subp=VERB
+VER\:subp=POS_VERB

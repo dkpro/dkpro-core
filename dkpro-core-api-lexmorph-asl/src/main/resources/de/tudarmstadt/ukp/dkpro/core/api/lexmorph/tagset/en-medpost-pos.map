@@ -4,124 +4,124 @@ __META_SOURCE_URL__=http://www.ncbi.nlm.nih.gov/staff/lsmith/papers/smith04a.pdf
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # CC coordinating conjunction 
-CC=CONJ
+CC=POS_CONJ
 # CS subordinating conjunction 
-CS=SCONJ
+CS=POS_SCONJ
 # CSN comparative conjunction (than) 
-CSN=CONJ
+CSN=POS_CONJ
 # CST complementizer (that) 
-CST=CONJ
+CST=POS_CONJ
 # DB predeterminer 
-DB=DET
+DB=POS_DET
 # DD determiner 
-DD=DET
+DD=POS_DET
 # EX existential there 
-EX=DET
+EX=POS_DET
 # GE genitive marker ’s 
-GE=X
+GE=POS_X
 # II preposition 
-II=ADP
+II=POS_ADP
 # JJ adjective 
-JJ=ADJ
+JJ=POS_ADJ
 # JJR comparative adjective 
-JJR=ADJ
+JJR=POS_ADJ
 # JJT superlative adjective 
-JJT=ADJ
+JJT=POS_ADJ
 # MC number or numeric 
-MC=NUM
+MC=POS_NUM
 # NN noun 
-NN=NOUN
+NN=POS_NOUN
 # NNP proper noun 
-NNP=PROPN
+NNP=POS_PROPN
 # NNS plural noun 
-NNS=NOUN
+NNS=POS_NOUN
 # PN pronoun 
-PN=PRON
+PN=POS_PRON
 # PND determiner as pronoun 
-PND=PRON
+PND=POS_PRON
 # PNG genitive pronoun 
-PNG=PRON
+PNG=POS_PRON
 # PNR relative pronoun 
-PNR=PRON
+PNR=POS_PRON
 # RR adverb 
-RR=ADV
+RR=POS_ADV
 # RRR comparative adverb 
-RRR=ADV
+RRR=POS_ADV
 # RRT superlative adverb 
-RRT=ADV
+RRT=POS_ADV
 # SYM symbol 
-SYM=SYM
+SYM=POS_SYM
 # TO infinitive marker to 
-TO=ADP
+TO=POS_ADP
 # VM modal 
-VM=VERB
+VM=POS_VERB
 # VBB base be, am, are 
-VBB=VERB
+VBB=POS_VERB
 # VBD past was, were 
-VBD=VERB
+VBD=POS_VERB
 # VBG participle being 
-VBG=VERB
+VBG=POS_VERB
 # VBI infinitive be 
-VBI=VERB
+VBI=POS_VERB
 # VBN participle been 
-VBN=VERB
+VBN=POS_VERB
 # VBZ 3rd pers. sing. is 
-VBZ=VERB
+VBZ=POS_VERB
 # VDB base do 
-VDB=VERB
+VDB=POS_VERB
 # VDD past did 
-VDD=VERB
+VDD=POS_VERB
 # VDG participle doing 
-VDG=VERB
+VDG=POS_VERB
 # VDI infinite do 
-VDI=VERB
+VDI=POS_VERB
 # VDN participle done 
-VDN=VERB
+VDN=POS_VERB
 # VDZ participle done 
-VDZ=VERB
+VDZ=POS_VERB
 # VHB participle done 
-VHB=VERB
+VHB=POS_VERB
 # VHD past had 
-VHD=VERB
+VHD=POS_VERB
 # VHG participle having 
-VHG=VERB
+VHG=POS_VERB
 # VHI infinitive have 
-VHI=VERB
+VHI=POS_VERB
 # VHN participle had 
-VHN=VERB
+VHN=POS_VERB
 # VHZ 3rd pers. sing. has 
-VHZ=VERB
+VHZ=POS_VERB
 # VVB base form lexical verb  
-VVB=VERB
+VVB=POS_VERB
 # VVD past tense 
-VVD=VERB
+VVD=POS_VERB
 # VVG present part. 
-VVG=VERB
+VVG=POS_VERB
 # VVI infinitive lexical verb  
-VVI=VERB
+VVI=POS_VERB
 # VVN past part. 
-VVN=VERB
+VVN=POS_VERB
 # VVZ 3rd pers. sing. 
-VVZ=VERB
+VVZ=POS_VERB
 # VVNJ prenominal past part.  
-VVNJ=VERB
+VVNJ=POS_VERB
 # VVGJ prenominal present part.  
-VVGJ=VERB
+VVGJ=POS_VERB
 # VVGN nominal gerund 
-VVGN=VERB
+VVGN=POS_VERB
 # ( left parenthesis 
-(=X
+(=POS_X
 # ) right parenthesis 
-)=X
+)=POS_X
 # , comma 
-,=PUNCT
+,=POS_PUNCT
 # . end-of-sentence period 
-.=PUNCT
+.=POS_PUNCT
 # : dashes, colons 
-\:=PUNCT
+\:=POS_PUNCT
 # “ left quote 
-``=PUNCT
+``=POS_PUNCT
 # ” right quote 
-''=PUNCT
+''=POS_PUNCT
 
-*=X
+*=POS_X

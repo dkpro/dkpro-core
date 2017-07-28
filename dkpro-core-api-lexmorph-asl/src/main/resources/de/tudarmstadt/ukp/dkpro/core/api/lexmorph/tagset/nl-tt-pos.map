@@ -7,84 +7,84 @@ __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 *=POS
 # $.		sentence-final punctuation
-$.=PUNCT
+$.=POS_PUNCT
 # adj		adjective
-adj=ADJ
+adj=POS_ADJ
 # adj*kop		truncated adjective
-adj*kop=ADJ
+adj*kop=POS_ADJ
 # adjabbr		abbreviated adjective
-adjabbr=ADJ
+adjabbr=POS_ADJ
 # adv		adverb
-adv=ADV
+adv=POS_ADV
 # advabbr		abbreviated adverb
-advabbr=ADV
+advabbr=POS_ADV
 # conjcoord	coordinating conjunction
-conjcoord=CONJ
+conjcoord=POS_CONJ
 # conjsubo	subordinating conjunction
-conjsubo=SCONJ
+conjsubo=POS_SCONJ
 # det__art	article
-det__art=DET
+det__art=POS_DET
 # det__demo	attributively used demonstrative pronoun
-det__demo=PRON
+det__demo=POS_PRON
 # det__indef	attributively used indefinite pronoun
-det__indef=PRON
+det__indef=POS_PRON
 # det__poss	attributively used possessive pronoun
-det__poss=PRON
+det__poss=POS_PRON
 # det__quest	attributively used question pronoun
-det__quest=PRON
+det__quest=POS_PRON
 # det__rel	attributively used relative pronoun
-det__rel=PRON
+det__rel=POS_PRON
 # int		interjection
-int=INTJ
+int=POS_INTJ
 # noun*kop	truncated noun
-noun*kop=NOUN
+noun*kop=POS_NOUN
 # nounabbr	abbreviated noun
-nounabbr=NOUN
+nounabbr=POS_NOUN
 # nounpl		plural noun
-nounpl=NOUN
+nounpl=POS_NOUN
 # nounprop	proper name
-nounprop=PROPN
+nounprop=POS_PROPN
 # nounsg		singular noun
-nounsg=NOUN
+nounsg=POS_NOUN
 # num__card	cardinal number
-num__card=NUM
+num__card=POS_NUM
 # num__ord	ordinal number
-num__ord=NUM
+num__ord=POS_NUM
 # partte		particle "te"
-partte=PART
+partte=POS_PART
 # prep		preposition
-prep=ADP
+prep=POS_ADP
 # prepabbr	abbreviated preposition
-prepabbr=ADP
+prepabbr=POS_ADP
 # pronadv		pronomial adverb
-pronadv=ADV
+pronadv=POS_ADV
 # prondemo	demonstrative pronoun (used substitutively)
-prondemo=PRON
+prondemo=POS_PRON
 # pronindef	indefined pronoun
-pronindef=PRON
+pronindef=POS_PRON
 # pronpers	personal pronoun
-pronpers=PRON
+pronpers=POS_PRON
 # pronposs	possessive pronoun
-pronposs=PRON
+pronposs=POS_PRON
 # pronquest	question pronoun
-pronquest=PRON
+pronquest=POS_PRON
 # pronrefl	reflexive pronoun
-pronrefl=PRON
+pronrefl=POS_PRON
 # pronrel		relative pronoun
-pronrel=PRON
+pronrel=POS_PRON
 # punc		(non-sentential) punctuation
-punc=SYM
+punc=POS_SYM
 # verbinf		infinitival verb
-verbinf=VERB
+verbinf=POS_VERB
 # verbpapa	past participle verb
-verbpapa=VERB
+verbpapa=POS_VERB
 # verbpastpl	plural past tense verb
-verbpastpl=VERB
+verbpastpl=POS_VERB
 # verbpastsg	singular past tense verb
-verbpastsg=VERB
+verbpastsg=POS_VERB
 # verbpresp	present participle verb
-verbpresp=VERB
+verbpresp=POS_VERB
 # verbprespl	plural present tense verb
-verbprespl=VERB
+verbprespl=POS_VERB
 # verbpressg	singular present tense verb
-verbpressg=VERB
+verbpressg=POS_VERB

@@ -29,31 +29,31 @@ import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.apache.commons.lang.ArrayUtils;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADP;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.AUX;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.DET;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.INTJ;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NOUN;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NUM;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PART;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRON;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PROPN;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNCT;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.SCONJ;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.SYM;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.VERB;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.X;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_ADJ;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_ADP;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_ADV;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_AUX;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_CONJ;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_DET;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_INTJ;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_NOUN;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_NUM;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_PART;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_PRON;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_PROPN;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_PUNCT;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_SCONJ;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_SYM;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_VERB;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_X;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 
 public class MappingsTest
 {
-    private static Class<?>[] POS_TAGS = { POS.class, ADJ.class, ADP.class, ADV.class, AUX.class,
-            CONJ.class, DET.class, INTJ.class, NOUN.class, NUM.class, PART.class, PRON.class,
-            PROPN.class, PUNCT.class, SCONJ.class, SYM.class, VERB.class, X.class };
+    private static Class<?>[] POS_TAGS = { POS.class, POS_ADJ.class, POS_ADP.class, POS_ADV.class, POS_AUX.class,
+            POS_CONJ.class, POS_DET.class, POS_INTJ.class, POS_NOUN.class, POS_NUM.class, POS_PART.class, POS_PRON.class,
+            POS_PROPN.class, POS_PUNCT.class, POS_SCONJ.class, POS_SYM.class, POS_VERB.class, POS_X.class };
     
     @Test
     public void testMappings() throws Exception

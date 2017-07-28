@@ -6,73 +6,73 @@ __META_SOURCE_URL__=https://catalog.ldc.upenn.edu/docs/LDC2003T06/arabic-POStags
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # CC - coordinating conjunction
-CC=CONJ
+CC=POS_CONJ
 # CD - cardinal number
-CD=NUM
+CD=POS_NUM
 # DT - determiner/demonstrative pronoun
-DT=DET
+DT=POS_DET
 # FW - foreign word
-FW=X
+FW=POS_X
 # IN - subordinating conjunction (FUNC_WORD) or preposition (PREP)
-IN=ADP
+IN=POS_ADP
 # JJ - adjective
-JJ=ADJ
+JJ=POS_ADJ
 # NN - common noun, singular
-NN=NOUN
+NN=POS_NOUN
 # NNP - proper noun, singular
-NNP=PROPN
+NNP=POS_PROPN
 # NNPS - proper noun, plural or dual
-NNPS=PROPN
+NNPS=POS_PROPN
 # NNS - common noun, plural or dual
-NNS=NOUN
+NNS=POS_NOUN
 # PRP - personal pronoun
-PRP=PRON
+PRP=POS_PRON
 # PRP$ - possessive personal pronoun
-PRP=PRON
+PRP=POS_PRON
 # RB - adverb
-RB=ADV
+RB=POS_ADV
 # RP - particle
-RP=PART
+RP=POS_PART
 # UH - interjection
-UH=INTJ
+UH=POS_INTJ
 # VBD - perfect verb (***nb: perfect rather than past tense)
-VBD=VERB
+VBD=POS_VERB
 # VBN - passive verb (***nb: passive rather than past participle)
-VBN=VERB
+VBN=POS_VERB
 # VBP - imperfect verb (***nb: imperfect rather than present tense)
-VBP=VERB
+VBP=POS_VERB
 # WP - relative pronoun
-WP=PRON
+WP=POS_PRON
 # WRB - wh-adverb
-WRB=ADV
+WRB=POS_ADV
 
 # Additional tags used by Stanford and Berkeley tools, so description source so far
 #
 # ADJ
-ADJ=ADJ
+ADJ=POS_ADJ
 # DTJJ
-DTJJ=ADJ
+DTJJ=POS_ADJ
 # DTJJR
-DTJJR=ADJ
+DTJJR=POS_ADJ
 # DTNN
-DTNN=NOUN
+DTNN=POS_NOUN
 # DTNNP
-DTNNP=PROPN
+DTNNP=POS_PROPN
 # DTNNPS
-DTNNPS=PROPN
+DTNNPS=POS_PROPN
 # DTNNS
-DTNNS=NOUN
+DTNNS=POS_NOUN
 # JJR
-JJR=ADJ
+JJR=POS_ADJ
 # NOUN
-NOUN=NOUN
+NOUN=POS_NOUN
 # PUNC
-PUNC=PUNCT
+PUNC=POS_PUNCT
 # VB
-VB=VERB
+VB=POS_VERB
 # VBG
-VBG=VERB
+VBG=POS_VERB
 # VN
-VN=VERB
+VN=POS_VERB
 
 *=POS

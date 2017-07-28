@@ -16,79 +16,79 @@ __META_SOURCE_URL__=http://opus.lingfil.uu.se/tools/public/tagger/melt-0.6/READM
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # ADJ 	   adjective
-ADJ=ADJ
+ADJ=POS_ADJ
 # ADJWH	   interrogative adjective
-ADJWH=ADJ
+ADJWH=POS_ADJ
 # ADV	   adverb
-ADV=ADV
+ADV=POS_ADV
 # ADVWH	   interrogative adverb
-ADVWH=ADV
+ADVWH=POS_ADV
 # CC	   coordination conjunction
-CC=CONJ
+CC=POS_CONJ
 # CLO	   object clitic pronoun
-CLO=PRON
+CLO=POS_PRON
 # CLR	   reflexive clitic pronoun
-CLR=PRON
+CLR=POS_PRON
 # CLS	   subject clitic pronoun
-CLS=PRON
+CLS=POS_PRON
 # CS	   subordination conjunction
-CS=CONJ
+CS=POS_CONJ
 # DET	   determiner
-DET=DET
+DET=POS_DET
 # DETWH	   interrogative determiner
-DETWH=DET
+DETWH=POS_DET
 # ET	   foreign word
-ET=X
+ET=POS_X
 # I	       interjection
-I=INTJ
+I=POS_INTJ
 # NC	   common noun
-NC=NOUN
+NC=POS_NOUN
 # NPP	   proper noun
-NPP=PROPN
+NPP=POS_PROPN
 # P	       preposition
-P=ADP
+P=POS_ADP
 # PREF	   prefix
-PREF=PART
+PREF=POS_PART
 # PRO	   full pronoun
-PRO=PRON
+PRO=POS_PRON
 # PROREL   relative pronoun
-PROREL=PRON
+PROREL=POS_PRON
 # PROWH	   interrogative pronoun
-PROWH=PRON
+PROWH=POS_PRON
 # V	       indicative or conditional verb form
-V=VERB
+V=POS_VERB
 # VIMP	   imperative verb form
-VIMP=VERB
+VIMP=POS_VERB
 # VINF	   infinitive verb form
-VINF=VERB
+VINF=POS_VERB
 # VPP	   past participle
-VPP=VERB
+VPP=POS_VERB
 # VPR	   present participle
-VPR=VERB
+VPR=POS_VERB
 # VS	   subjunctive verb form
-VS=VERB
+VS=POS_VERB
 
 #
 # DIFFERENCES IN CORENLP 3.4 models
 #
 # CoreNLP:  PUNC	   punctuation mark
 # Original: PONCT	   punctuation mark
-PUNC=PUNCT
+PUNC=POS_PUNCT
 # CoreNLP:  A		   general category for adjectives
-A=ADJ
+A=POS_ADJ
 # CoreNLP:  C          general category cor conjunctions
-C=CONJ
+C=POS_CONJ
 # CoreNLP:  CL         general category for clitic pronouns
-CL=PRON
+CL=POS_PRON
 # CoreNLP:  M          general category for nouns
-N=NOUN
+N=POS_NOUN
 
 #
 # NOT USED IN CORENLP 3.4 models
 #
 # P+D	   preposition+determiner amalgam
-# P+D=ADP
+# P+D=POS_ADP
 # P+PRO	   prepositon+pronoun amalgam
-# P+PRO=ADP
+# P+PRO=POS_ADP
 
 *=POS
