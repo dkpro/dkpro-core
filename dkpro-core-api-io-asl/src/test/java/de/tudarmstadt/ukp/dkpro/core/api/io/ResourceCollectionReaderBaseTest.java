@@ -25,6 +25,8 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Paths;
 
 import org.apache.uima.cas.CAS;
 import org.apache.uima.collection.CollectionException;
@@ -106,7 +108,8 @@ public class ResourceCollectionReaderBaseTest
     public void testZip4()
         throws Exception
     {
-        String path = "jar:file:" + new File("src/test/resources/testfiles.zip").getAbsolutePath();
+        URL url = new File("src/test/resources/testfiles.zip").toURI().toURL();
+        String path = "jar:" + url.toString();
         CollectionReader reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, path,
                 ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
