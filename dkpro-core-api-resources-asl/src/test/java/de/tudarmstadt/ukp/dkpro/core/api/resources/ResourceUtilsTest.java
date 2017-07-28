@@ -26,6 +26,8 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -57,25 +59,24 @@ public class ResourceUtilsTest
     public void testClasspathAsFolder()
         throws Exception
     {
-        File file = ResourceUtils.getClasspathAsFolder(
-                "classpath:/de/tudarmstadt/ukp/dkpro/core/api", true);
+        File file = ResourceUtils
+                .getClasspathAsFolder("classpath:/de/tudarmstadt/ukp/dkpro/core/api", true);
 
-        List<String> files = new ArrayList<String>();
+        List<Path> paths = new ArrayList<Path>();
         for (File f : FileUtils.listFiles(file, null, true)) {
-            files.add(f.getAbsolutePath().substring(file.getAbsolutePath().length()));
+            paths.add(Paths.get(f.getAbsolutePath().substring(file.getAbsolutePath().length())));
         }
-        Collections.sort(files);
-        assertEquals(
-                asList("/resources/CompressionUtilsTest.class",
-                        "/resources/MappingProviderTest$1.class",
-                        "/resources/MappingProviderTest$2.class",
-                        "/resources/MappingProviderTest.class",
-                        "/resources/ResourceObjectProviderTest$1.class",
-                        "/resources/ResourceObjectProviderTest$2.class",
-                        "/resources/ResourceObjectProviderTest$3.class",
-                        "/resources/ResourceObjectProviderTest$SharableObjectProvider.class", 
-                        "/resources/ResourceObjectProviderTest.class",
-                        "/resources/ResourceUtilsTest.class"), files);
+        Collections.sort(paths);
+        assertEquals(asList(Paths.get("/resources/CompressionUtilsTest.class"),
+                Paths.get("/resources/MappingProviderTest$1.class"),
+                Paths.get("/resources/MappingProviderTest$2.class"),
+                Paths.get("/resources/MappingProviderTest.class"),
+                Paths.get("/resources/ResourceObjectProviderTest$1.class"),
+                Paths.get("/resources/ResourceObjectProviderTest$2.class"),
+                Paths.get("/resources/ResourceObjectProviderTest$3.class"),
+                Paths.get("/resources/ResourceObjectProviderTest$SharableObjectProvider.class"),
+                Paths.get("/resources/ResourceObjectProviderTest.class"),
+                Paths.get("/resources/ResourceUtilsTest.class")), paths);
     }
 
     @Test
