@@ -4,39 +4,39 @@ __META_SOURCE_URL__=http://stp.lingfil.uu.se/~mojgan/Manual.pdf
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # ADJ - Adjective
-ADJ=ADJ
+ADJ=POS_ADJ
 # ADV - Adverb
-ADV=ADV
+ADV=POS_ADV
 # CLITIC - Accusative marker
-CLITIC=X
+CLITIC=POS_X
 # CON - Conjunction
-CON=CONJ
+CON=POS_CONJ
 # DELM - Delimiter
-DELM=PUNCT
+DELM=POS_PUNCT
 # DET - Determiner
-DET=DET
+DET=POS_DET
 # ???
-END=X
+END=POS_X
 # FW - Foreign Word
-FW=X
+FW=POS_X
 # INT - Interjection
-INT=INTJ
+INT=POS_INTJ
 # ???
-MID=X
+MID=POS_X
 # N - Noun
-N=NOUN
+N=POS_NOUN
 # NUM - Numeral
-NUM=NUM
+NUM=POS_NUM
 # P - Preposition
-P=ADP
+P=POS_ADP
 # PREV - Preverbal particle
-PREV=X
+PREV=POS_X
 # PRO - Pronoun
-PRO=PRON
+PRO=POS_PRON
 # ???
-STPOS=X
+STPOS=POS_X
 # ???
-STR=X
+STR=POS_X
 # V - Verb
-V=VERB
-*=X
+V=POS_VERB
+*=POS_X

@@ -4,35 +4,35 @@ __META_SOURCE_URL__=http://www.llf.cnrs.fr/Gens/Abeille/guide-morpho-synt.02.pdf
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # A - Adjective
-A=ADJ
+A=POS_ADJ
 # ADV - Adverb
-ADV=ADV
+ADV=POS_ADV
 # C - Conjunction
-C=CONJ
+C=POS_CONJ
 # CL
-CL=PRON
+CL=POS_PRON
 # D - Determiner
-D=DET
+D=POS_DET
 # ET
-ET=X
+ET=POS_X
 # I
-I=X
+I=POS_X
 # N
-N=NOUN
+N=POS_NOUN
 # P - Preposition
-P=ADP
+P=POS_ADP
 # PREF
-PREF=X
+PREF=POS_X
 # PRO
-PRO=PRON
+PRO=POS_PRON
 # PUNC - Punctuation
-PUNC=PUNCT
+PUNC=POS_PUNCT
 # . - Punctuation (Berkeley Parser)
-.=PUNCT
+.=POS_PUNCT
 # , - Punctuation (Berkeley Parser)
-,=PUNCT
+,=POS_PUNCT
 # : - Punctuation (Berkeley Parser)
-\:=PUNCT
+\:=POS_PUNCT
 # V
-V=VERB
-*=X
+V=POS_VERB
+*=POS_X

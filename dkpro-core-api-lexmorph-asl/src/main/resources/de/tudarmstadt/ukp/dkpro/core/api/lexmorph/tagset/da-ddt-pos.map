@@ -5,66 +5,66 @@ __META_SOURCE_URL__=http://www.buch-kromann.dk/matthias/treebank/theory.html\
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # A     adjectives
-A=ADJ
+A=POS_ADJ
 # AN    normal adjective
-AN=ADJ
+AN=POS_ADJ
 # AC    cardinals
-AC=NUM
+AC=POS_NUM
 # AO    ordinals
-AO=NUM
+AO=POS_NUM
 # C     conjunction
-C=CONJ
+C=POS_CONJ
 # CC    coordinating conjunction
-CC=CONJ
+CC=POS_CONJ
 # CS    subordinating conjunction
-CS=SCONJ
+CS=POS_SCONJ
 # I     interjection
-I=INTJ
+I=POS_INTJ
 # N     noun
-N=NOUN
+N=POS_NOUN
 # NP    proper noun
-N=PROPN
+N=POS_PROPN
 # NC    common noun
-NC=NOUN
+NC=POS_NOUN
 # P     pronoun
-P=PRON
+P=POS_PRON
 # PP    personal pronoun
-PP=PRON
+PP=POS_PRON
 # PD    demonstrative pronoun
-PD=PRON
+PD=POS_PRON
 # PI    indefinite pronoun
-PI=PRON
+PI=POS_PRON
 # PT    interrogative/relative pronoun
-PT=PRON
+PT=POS_PRON
 # PC    reciprocal pronoun
-PC=PRON
+PC=POS_PRON
 # PO    possessive pronoun
-PO=PRON
+PO=POS_PRON
 # RG    adverb
-RG=ADV
+RG=POS_ADV
 # SP    preposition
-SP=ADP
+SP=POS_ADP
 # U     unique
-U=X
+U=POS_X
 # V     verb
-V=VERB
+V=POS_VERB
 # VA    main verb
-VA=VERB
+VA=POS_VERB
 # VE    medial verb
-VE=VERB
+VE=POS_VERB
 # X     extra-linguistic units
-X=X
+X=POS_X
 # XA    abbreviation
-XA=X
+XA=POS_X
 # XF    foreign word
-XF=X
+XF=POS_X
 # XP    punctuation
-XP=PUNCT
+XP=POS_PUNCT
 # XR    formulae
-XR=X
+XR=POS_X
 # XS    symbol
-XS=SYM
+XS=POS_SYM
 # XX    other
-XX=X
+XX=POS_X
 # Catch-all
 *=POS

@@ -7,72 +7,72 @@ __META_SOURCE_URL__=http://www.cs.brandeis.edu/~clp/ctb/posguide.3rd.ch.pdf
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # AD - adverb
-AD=ADJ
+AD=POS_ADJ
 # AS - aspect marker
-AS=PART
+AS=POS_PART
 # BA - XX in ba-construction
-BA=X
+BA=POS_X
 # CC - coordinating conjunction
-CC=CONJ
+CC=POS_CONJ
 # CD - cardinal number
-CD=NUM
+CD=POS_NUM
 # CS - subordinating conjunction
-CS=CONJ
+CS=POS_CONJ
 # DEC - XX in a relative clause
-DEC=PART
+DEC=POS_PART
 # DEG - associative XX
-DEG=PART
+DEG=POS_PART
 # DER - XX in V-de const. and V-de-R
-DER=PART
+DER=POS_PART
 # DEV - XX bevore VP
-DEV=PART
+DEV=POS_PART
 # DT - determiner
-DT=DET
+DT=POS_DET
 # ETC - for words XX, XX XX
-ETC=PART
+ETC=POS_PART
 # FW - foreign words
-FW=X
+FW=POS_X
 # IJ - interjection
-IJ=INTJ
+IJ=POS_INTJ
 # JJ - other noun-modifier
-JJ=ADJ
+JJ=POS_ADJ
 # LB - X in long bei-const
-LB=X
+LB=POS_X
 # LC - localizer
-LC=PART
+LC=POS_PART
 # M - measure word
-M=NUM
+M=POS_NUM
 # MSP - other particle
-MSP=PART
+MSP=POS_PART
 # NN - common noun
-NN=NOUN
+NN=POS_NOUN
 # NR - proper noun
-NR=PROPN
+NR=POS_PROPN
 # NT - temporal noun
-NT=NOUN
+NT=POS_NOUN
 # OD - ordinal number
-OD=NUM
+OD=POS_NUM
 # ON - onomatopoeia
-ON=X
+ON=POS_X
 # P - preposition excl. XX and XX
-P=ADP
+P=POS_ADP
 # PN - pronoun
-PN=PRON
+PN=POS_PRON
 # PU - punctuation
-PU=PUNCT
+PU=POS_PUNCT
 # SB - XX in short bei-const
-SB=X
+SB=POS_X
 # SP - sentence final particle
-SP=PART
+SP=POS_PART
 # VA - predicative adjective
-VA=VERB
+VA=POS_VERB
 # VC - XX
-VC=VERB
+VC=POS_VERB
 # VE - XX as the main verb
-VE=VERB
+VE=POS_VERB
 # VV - other verb
-VV=VERB
+VV=POS_VERB
 # X
-X=X
+X=POS_X
 
-*=X
+*=POS_X

@@ -4,68 +4,68 @@ __META_SOURCE_URL__=http://stp.lingfil.uu.se/~mojgan/Manual.pdf
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # ADJ_CMPR - Comparative adjective
-ADJ_CMPR=ADJ
+ADJ_CMPR=POS_ADJ
 # ADJ_INO - Participle adjective
-ADJ_INO=ADJ
+ADJ_INO=POS_ADJ
 # ADJ - Adjective
-ADJ=ADJ
+ADJ=POS_ADJ
 # ADJ_SUP - Superlative adjective
-ADJ_SUP=ADJ
+ADJ_SUP=POS_ADJ
 # ADJ_VOC - Vocative adjective
-ADJ_VOC=ADJ
+ADJ_VOC=POS_ADJ
 # ADV_COMP - Adverb of comparison
-ADV_COMP=ADV
+ADV_COMP=POS_ADV
 # ADV_I - Adverb of interrogation
-ADV_I=ADV
+ADV_I=POS_ADV
 # ADV_LOC - Adverb of location
-ADV_LOC=ADV
+ADV_LOC=POS_ADV
 # ADV_NEG - Adverb of negation
-ADV_NEG=ADV
+ADV_NEG=POS_ADV
 # ADV - Adverb
-ADV=ADV
+ADV=POS_ADV
 # ADV_TIME - Adverb of time
-ADV_TIME=ADV
+ADV_TIME=POS_ADV
 # CLITIC - Accusative marker
-CLITIC=X
+CLITIC=POS_X
 # CON - Conjunction
-CON=CONJ
+CON=POS_CONJ
 # DELM - Delimiter
-DELM=PUNCT
+DELM=POS_PUNCT
 # DET - Determiner
-DET=DET
+DET=POS_DET
 # FW - Foreign Word
-FW=X
+FW=POS_X
 # INT - Interjection
-INT=INTJ
+INT=POS_INTJ
 # SYM - Symbol
-SYM=SYM
+SYM=POS_SYM
 # N_PL - Plural noun
-N_PL=NOUN
+N_PL=POS_NOUN
 # N_SING - Singular noun
-N_SING=NOUN
+N_SING=POS_NOUN
 # N_VOC - Vocative noun
-N_VOC=NOUN
+N_VOC=POS_NOUN
 # NUM - Numeral
-NUM=NUM
+NUM=POS_NUM
 # P - Preposition
-P=ADP
+P=POS_ADP
 # PREV - Preverbal particle
-PREV=X
+PREV=POS_X
 # PRO - Pronoun
-PRO=PRON
+PRO=POS_PRON
 # V_AUX - Auxiliary verb
-V_AUX=AUX
+V_AUX=POS_AUX
 # V_IMP - Imperative verb
-V_IMP=VERB
+V_IMP=POS_VERB
 # V_PA - Past tense verb
-V_PA=VERB
+V_PA=POS_VERB
 # V_PP - Past participle verb
-V_PP=VERB
+V_PP=POS_VERB
 # V_COP - Verb copula
-V_COP=VERB
+V_COP=POS_VERB
 # V_PRS - Present tense verb
-V_PRS=VERB
+V_PRS=POS_VERB
 # V_SUB - Subjunctive verb
-V_SUB=VERB
-*=X
+V_SUB=POS_VERB
+*=POS_X
 

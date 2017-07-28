@@ -7,121 +7,121 @@
 
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
-*=X
+*=POS_X
 # punctuation mark, comma
-,=PUNCT
--=PUNCT
+,=POS_PUNCT
+-=POS_PUNCT
 # punctuation mark, sentence closer
-.=PUNCT
-;=PUNCT
-?=PUNCT
-\!=PUNCT
-``=PUNCT
-''=PUNCT
--LRB-=PUNCT
--RRB-=PUNCT
+.=POS_PUNCT
+;=POS_PUNCT
+?=POS_PUNCT
+\!=POS_PUNCT
+``=POS_PUNCT
+''=POS_PUNCT
+-LRB-=POS_PUNCT
+-RRB-=POS_PUNCT
 # punctuation mark, colon
-\:=PUNCT
+\:=POS_PUNCT
 # contextual separator, left paren
-(=PUNCT
+(=POS_PUNCT
 # contextual separator, right paren
-)=PUNCT
-\#=PUNCT
+)=POS_PUNCT
+\#=POS_PUNCT
 # 1.	CC	Coordinating conjunction
-CC=CONJ
+CC=POS_CONJ
 # 2.	CD	Cardinal number
-CD=NUM
+CD=POS_NUM
 # 3.	DT	Determiner
-DT=DET
+DT=POS_DET
 # 4.	EX	Existential there
-EX=DET
+EX=POS_DET
 # 5.	FW	Foreign word
-FW=X
+FW=POS_X
 # 6.	IN	Preposition or subordinating conjunction
-IN=ADP
+IN=POS_ADP
 # 7.	JJ	Adjective
-JJ=ADJ
+JJ=POS_ADJ
 # 8.	JJR	Adjective, comparative
-JJR=ADJ
+JJR=POS_ADJ
 # 9.	JJS	Adjective, superlative
-JJS=ADJ
+JJS=POS_ADJ
 # 10.	LS	List item marker
-LS=X
+LS=POS_X
 # 11.	MD	Modal
-MD=VERB
+MD=POS_VERB
 # 12.	NN	Noun, singular or mass
-NN=NOUN
+NN=POS_NOUN
 # 13.	NNS	Noun, plural
-NNS=NOUN
+NNS=POS_NOUN
 # 14.	NP	Proper noun, singular (PTB 1)
-NP=PROPN
+NP=POS_PROPN
 # 14.	NP	Proper noun, singular (PTB 2)
-NNP=PROPN
+NNP=POS_PROPN
 # 15.	NPS	Proper noun, plural (PTB 1)
-NPS=PROPN
+NPS=POS_PROPN
 # 15.	NPS	Proper noun, plural (PTB 2)
-NNPS=PROPN
+NNPS=POS_PROPN
 # 16.	PDT	Predeterminer
-PDT=DET
+PDT=POS_DET
 # 17.	POS	Possessive ending
-POS=X
+POS=POS_X
 # 18.	PP	Personal pronoun
-PP=PRON
-PRP=PRON
+PP=POS_PRON
+PRP=POS_PRON
 # 19.	PP$	Possessive pronoun
-PP$=PRON
-PRP$=PRON
+PP$=POS_PRON
+PRP$=POS_PRON
 # 20.	RB	Adverb
-RB=ADV
+RB=POS_ADV
 # 21.	RBR	Adverb, comparative	
-RBR=ADV
+RBR=POS_ADV
 # 22.	RBS	Adverb, superlative
-RBS=ADV
+RBS=POS_ADV
 # 23.	RP	Particle
-RP=ADP
-SENT=PUNCT
+RP=POS_ADP
+SENT=POS_PUNCT
 # 24.	SYM	Symbol
-SYM=SYM
+SYM=POS_SYM
 # 25.	TO	to
-TO=ADP
+TO=POS_ADP
 # 26.	UH	Interjection
-UH=INTJ
+UH=POS_INTJ
 # 27.	VB	Verb, base form
-VB=VERB
+VB=POS_VERB
 # 28.	VBD	Verb, past tense
-VBD=VERB
+VBD=POS_VERB
 # 29.	VBG	Verb, gerund or present participle
-VBG=VERB
+VBG=POS_VERB
 # 30.	VBN	Verb, past participle
-VBN=VERB
+VBN=POS_VERB
 # 31.	VBP	Verb, non-3rd person singular present
-VBP=VERB
+VBP=POS_VERB
 # 32.	VBZ	Verb, 3rd person singular present
-VBZ=VERB
+VBZ=POS_VERB
 # 33.	WDT	Wh-determiner
-WDT=DET
+WDT=POS_DET
 # 34.	WP	Wh-pronoun
-WP=PRON
+WP=POS_PRON
 # 35.	WP$	Possessive wh-pronoun
-WP$=PRON
+WP$=POS_PRON
 # 36.	WRB	Wh-adverb
-WRB=ADV
+WRB=POS_ADV
 
 # Additional tags in ClearNLP / EmoryNLP models
 # HYPH - unbound hyphen (Warner et al., 2004)
-HYPH=PUNCT
+HYPH=POS_PUNCT
 # AFX - unbound affix (Warner et al., 2004)
-AFX=X
+AFX=POS_X
 # GW - mistranscription (Taylor, 1996)
-GW=X
+GW=POS_X
 # XX - uninterpretable material (Mott et al., 2009)
-XX=X
+XX=POS_X
 
 # Additional tags in EmoryNLP models
 # ADD - Email
-ADD=X
+ADD=POS_X
 # NFP - Superfluous punctuation
-NFP=PUNCT
+NFP=POS_PUNCT
 # $ - Dollar
-$=PUNCT
+$=POS_PUNCT
 

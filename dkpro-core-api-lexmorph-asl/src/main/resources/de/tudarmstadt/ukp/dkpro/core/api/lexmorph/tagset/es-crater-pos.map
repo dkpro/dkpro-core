@@ -11,31 +11,31 @@ __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # ACRNM	acronym (ISO, CEI)
 # ADJ	Adjectives (mayores, mayor)
-ADJ=ADJ
+ADJ=POS_ADJ
 # ADV	Adverbs (muy, demasiado, cómo)
 # ALFP	Plural letter of the alphabet (As/Aes, bes)
 # ALFS	Singular letter of the alphabet (A, b)
 # ART	Articles (un, las, la, unas)
-ART=DET
+ART=POS_DET
 # BACKSLASH backslash (\)	
 # CARD	Cardinals
-CARD=NUM
+CARD=POS_NUM
 # CC	Coordinating conjunction (y, o)
-CC=CONJ
+CC=POS_CONJ
 # CCAD	Adversative coordinating conjunction (pero)
-CCAD=CONJ
+CCAD=POS_CONJ
 # CCNEG	Negative coordinating conjunction (ni)
-CCNEG=CONJ
+CCNEG=POS_CONJ
 # CM	comma (,)
 # CODE	Alphanumeric code
 # COLON	colon (:)
 # CQUE	que (as conjunction)
 # CSUBF	Subordinating conjunction that introduces finite clauses (apenas)
-CSUBF=SCONJ
+CSUBF=POS_SCONJ
 # CSUBI	Subordinating conjunction that introduces infinite clauses (al)
-CSUBI=SCONJ
+CSUBI=POS_SCONJ
 # CSUBX	Subordinating conjunction underspecified for subord-type (aunque)
-CSUBX=SCONJ
+CSUBX=POS_SCONJ
 # DASH	dash (-)
 # DM	Demonstrative pronouns (ésas, ése, esta)
 # DOTS	POS tag for "..."
@@ -43,22 +43,22 @@ CSUBX=SCONJ
 # FS	Full stop punctuation marks
 # INT	Interrogative pronouns (quiénes, cuántas, cuánto)
 # ITJN	Interjection (oh, ja)
-ITJN=INTJ
+ITJN=POS_INTJ
 # LP	left parenthesis ("(", "[")
 # NC	Common nouns (mesas, mesa, libro, ordenador)
 # NEG	Negation
 # NMEA	measure noun (metros, litros)
 # NMON	month name
 # NP	Proper nouns
-NP=PROPN
+NP=POS_PROPN
 # ORD	Ordinals (primer, primeras, primera)
-ORD=NUM
+ORD=POS_NUM
 # PAL	Portmanteau word formed by a and el
 # PDEL	Portmanteau word formed by de and el
 # PE	Foreign word
 # PERCT	percent sign (%)
 # PNC	Unclassified word
-PNC=X
+PNC=POS_X
 # PPC	Clitic personal pronoun (le, les)
 # PPO	Possessive pronouns (mi, su, sus)
 # PPX	Clitics and personal pronouns (nos, me, nosotras, te, sí)
@@ -73,7 +73,7 @@ PNC=X
 # SEMICOLON	semicolon (;)
 # SLASH	slash (/)
 # SYM	Symbols
-SYM=SYM
+SYM=POS_SYM
 # UMMX	measure unit (MHz, km, mA)
 # VCLIger clitic gerund verb
 # VCLIinf clitic infinitive verb

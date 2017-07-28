@@ -10,48 +10,48 @@ __META_SOURCE_URL__.1=http://code.google.com/p/universal-pos-tags/source/browse/
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # ?	.
-?=PUNCT
+?=POS_PUNCT
 # adj	ADJ
-adj=ADJ
+adj=POS_ADJ
 # adv	ADV
-adv=ADV
+adv=POS_ADV
 # art	DET
-art=DET
+art=POS_DET
 # conj-c	CONJ
-conj-c=CONJ
+conj-c=POS_CONJ
 # conj-s	CONJ
-conj-s=CONJ
+conj-s=POS_CONJ
 # ec	X
-ec=X
+ec=POS_X
 # in	X
-in=X
+in=POS_X
 # n	NOUN
-n=NOUN
+n=POS_NOUN
 # num	NUM
-num=NUM
+num=POS_NUM
 # pp	NOUN
-pp=NOUN
+pp=POS_NOUN
 # pron-det	PRON
-pron-det=PRON
+pron-det=POS_PRON
 # pron-indp	PRON
-pron-indp=PRON
+pron-indp=POS_PRON
 # pron-pers	PRON
-pron-pers=PRON
+pron-pers=POS_PRON
 # prop	NOUN
-prop=PROPN
+prop=POS_PROPN
 # prp	ADP
-prp=ADP
+prp=POS_ADP
 # punc	.
-punc=PUNCT
+punc=POS_PUNCT
 # v-fin	VERB
-v-fin=VERB
+v-fin=POS_VERB
 # v-ger	VERB
-v-ger=VERB
+v-ger=POS_VERB
 # v-inf	VERB
-v-inf=VERB
+v-inf=POS_VERB
 # v-pcp	VERB
-v-pcp=VERB
+v-pcp=POS_VERB
 # vp	VERB
-vp=VERB
+vp=POS_VERB
 
 *=POS

@@ -6,32 +6,32 @@ __META_SOURCE_URL__=http://www.lancs.ac.uk/fass/projects/corpus/LCMC/lcmc/lcmc_t
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # Catch-all rule
-*=X
+*=POS_X
 
 # a          adjective
-a=ADJ
+a=POS_ADJ
 # ad        adjective as adverbial
-ad=ADJ
+ad=POS_ADJ
 # ag        adjective morpheme
-a=ADJ
+a=POS_ADJ
 # an        adjective with nominal function
-a=ADJ
+a=POS_ADJ
 # b          non-predicate adjective
-b=ADJ
+b=POS_ADJ
 # bg        non-predicate adjective morpheme
-bg=ADJ
+bg=POS_ADJ
 # c           conjunction
-c=CONJ
+c=POS_CONJ
 # cg         conjunction morpheme
-cg=CONJ
+cg=POS_CONJ
 # d           adverb
-d=ADV
+d=POS_ADV
 # dg         adverb morpheme
-dg=ADV
+dg=POS_ADV
 # e           interjection
-e=INTJ
+e=POS_INTJ
 # ew        sentential punctuation
-ew=PUNCT
+ew=POS_PUNCT
 # f            directional locality
 # fg          locality morpheme
 # g           morpheme
@@ -41,53 +41,53 @@ ew=PUNCT
 # k           suffix
 # l            fixed expressions
 # m         numeral
-m=NUM
+m=POS_NUM
 # mg       numeric morpheme
-mg=NUM
+mg=POS_NUM
 # n           common noun
-n=NOUN
+n=POS_NOUN
 # ng         noun morpheme
-ng=NOUN
+ng=POS_NOUN
 # nr          personal name
-nr=PROPN
+nr=POS_PROPN
 # ns         place name
-ns=PROPN
+ns=POS_PROPN
 # nt          organization name
-nt=PROPN
+nt=POS_PROPN
 # nx         nominal character string
-nx=PROPN
+nx=POS_PROPN
 # nz         other proper noun
-nz=PROPN
+nz=POS_PROPN
 # o           onomatopoeia
 # p           preposition
-p=ADP
+p=POS_ADP
 # pg         preposition morpheme
-pg=ADP
+pg=POS_ADP
 # q           classifier
 # qg         classifier morpheme
 # r            pronoun
-r=PRON
+r=POS_PRON
 # rg          pronoun morpheme
-rg=PRON
+rg=POS_PRON
 # s           space word
 # t            time word
 # tg          time word morpheme
 # u           auxiliary
-u=AUX
+u=POS_AUX
 # v           verb
-v=VERB
+v=POS_VERB
 # vd         verb as adverbial
-v=VERB
+v=POS_VERB
 # vg         verb morpheme
-v=VERB
+v=POS_VERB
 # vn         verb with nominal function
-v=VERB
+v=POS_VERB
 # w          symbol and non-sentential punctuation
-w=SYM
+w=POS_SYM
 # x           unclassified items
 # y           modal particle
-y=PART
+y=POS_PART
 # yg         modal particle morpheme
-yg=PART
+yg=POS_PART
 # z           descriptive
 # zg         descriptive morpheme
