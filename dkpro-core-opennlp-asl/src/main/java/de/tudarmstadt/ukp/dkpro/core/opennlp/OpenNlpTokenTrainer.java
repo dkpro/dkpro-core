@@ -40,7 +40,6 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.descriptors.ModelTrainerCapability;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
@@ -58,9 +57,6 @@ import opennlp.tools.util.TrainingParameters;
  * Train a tokenizer model for OpenNLP.
  */
 @MimeTypeCapability(MimeTypes.APPLICATION_X_OPENNLP_TOKEN)
-@ModelTrainerCapability(
-        annotatorParamModelLocationName = OpenNlpSegmenter.PARAM_TOKENIZATION_MODEL_LOCATION,
-        output = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
 @ResourceMetaData(name="OpenNLP Tokenizer Trainer")
 public class OpenNlpTokenTrainer
     extends JCasConsumer_ImplBase

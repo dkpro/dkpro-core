@@ -39,7 +39,6 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.descriptors.ModelTrainerCapability;;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
@@ -56,9 +55,6 @@ import opennlp.tools.util.TrainingParameters;
  * Train a sentence splitter model for OpenNLP.
  */
 @MimeTypeCapability(MimeTypes.APPLICATION_X_OPENNLP_SENT)
-@ModelTrainerCapability(
-        annotatorParamModelLocationName = OpenNlpSegmenter.PARAM_SEGMENTATION_MODEL_LOCATION,
-        output = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence")
 @ResourceMetaData(name="OpenNLP Sentence Splitter Trainer")
 public class OpenNlpSentenceTrainer
     extends JCasConsumer_ImplBase

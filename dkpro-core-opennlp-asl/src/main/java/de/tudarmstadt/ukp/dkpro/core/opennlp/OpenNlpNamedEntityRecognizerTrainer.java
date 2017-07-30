@@ -40,7 +40,6 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.descriptors.ModelTrainerCapability;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.CasNameSampleStream;
@@ -62,7 +61,6 @@ import opennlp.tools.util.TrainingParameters;
  * Train a named entity recognizer model for OpenNLP.
  */
 @MimeTypeCapability(MimeTypes.APPLICATION_X_OPENNLP_NER)
-@ModelTrainerCapability(output = "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity")
 @ResourceMetaData(name="OpenNLP Named Entity Recognizer Trainer")
 public class OpenNlpNamedEntityRecognizerTrainer
     extends JCasConsumer_ImplBase

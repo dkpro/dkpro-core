@@ -82,11 +82,6 @@
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
 				<version>1.9.0-SNAPSHOT</version>
 			</dependency>
-            <dependency>
-                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-                <artifactId>de.tudarmstadt.ukp.dkpro.core.api.descriptors-asl</artifactId>
-                <version>1.9.0-SNAPSHOT</version>
-            </dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.phonetics-asl</artifactId>
@@ -519,7 +514,6 @@
 		<module>../dkpro-core-api-anomaly-asl</module>
 		<module>../dkpro-core-api-coref-asl</module>
 		<module>../dkpro-core-api-datasets-asl</module>
-		<module>../dkpro-core-api-descriptors-asl</module>
 		<module>../dkpro-core-api-discourse-asl</module>
 		<module>../dkpro-core-api-embeddings-asl</module>
 		<module>../dkpro-core-api-featurepath-asl</module>
