@@ -45,12 +45,12 @@ Constituent
    children: FSArray
    syntacticFunction: "--"
 [A]
-X
+POS_X
    sofa: _InitialView
    begin: 0
    end: 1
    PosValue: "P1"
-   coarseValue: "X"
+   coarseValue: "POS_X"
 [A]
 Lemma
    sofa: _InitialView
@@ -87,12 +87,12 @@ Token
       begin: 0
       end: 1
       value: "A"
-   pos: X
+   pos: POS_X
       sofa: _InitialView
       begin: 0
       end: 1
       PosValue: "P1"
-      coarseValue: "X"
+      coarseValue: "POS_X"
 [A]
 Constituent
    sofa: _InitialView
@@ -115,12 +115,12 @@ Constituent
    children: FSArray
    syntacticFunction: "-"
 [B]
-X
+POS_X
    sofa: _InitialView
    begin: 2
    end: 3
    PosValue: "P2"
-   coarseValue: "X"
+   coarseValue: "POS_X"
 [B]
 Lemma
    sofa: _InitialView
@@ -150,19 +150,19 @@ Token
       begin: 2
       end: 3
       value: "B"
-   pos: X
+   pos: POS_X
       sofa: _InitialView
       begin: 2
       end: 3
       PosValue: "P2"
-      coarseValue: "X"
+      coarseValue: "POS_X"
 [C]
-X
+POS_X
    sofa: _InitialView
    begin: 4
    end: 5
    PosValue: "P3"
-   coarseValue: "X"
+   coarseValue: "POS_X"
 [C]
 Lemma
    sofa: _InitialView
@@ -185,12 +185,12 @@ Token
       begin: 4
       end: 5
       value: "C"
-   pos: X
+   pos: POS_X
       sofa: _InitialView
       begin: 4
       end: 5
       PosValue: "P3"
-      coarseValue: "X"
+      coarseValue: "POS_X"
 [D E F 20]
 Constituent
    sofa: _InitialView
@@ -206,12 +206,12 @@ Constituent
    children: FSArray
    syntacticFunction: "--"
 [D]
-X
+POS_X
    sofa: _InitialView
    begin: 6
    end: 7
    PosValue: "P4"
-   coarseValue: "X"
+   coarseValue: "POS_X"
 [D]
 Lemma
    sofa: _InitialView
@@ -248,12 +248,12 @@ Token
       begin: 6
       end: 7
       value: "D"
-   pos: X
+   pos: POS_X
       sofa: _InitialView
       begin: 6
       end: 7
       PosValue: "P4"
-      coarseValue: "X"
+      coarseValue: "POS_X"
 [D]
 Constituent
    sofa: _InitialView
@@ -276,12 +276,12 @@ Constituent
    children: FSArray
    syntacticFunction: "HD"
 [E]
-X
+POS_X
    sofa: _InitialView
    begin: 8
    end: 9
    PosValue: "P5"
-   coarseValue: "X"
+   coarseValue: "POS_X"
 [E]
 Lemma
    sofa: _InitialView
@@ -304,12 +304,12 @@ Token
       begin: 8
       end: 9
       value: "E"
-   pos: X
+   pos: POS_X
       sofa: _InitialView
       begin: 8
       end: 9
       PosValue: "P5"
-      coarseValue: "X"
+      coarseValue: "POS_X"
 [F 20]
 Constituent
    sofa: _InitialView
@@ -332,12 +332,12 @@ Constituent
    children: FSArray
    syntacticFunction: "-"
 [F]
-X
+POS_X
    sofa: _InitialView
    begin: 10
    end: 11
    PosValue: "P6"
-   coarseValue: "X"
+   coarseValue: "POS_X"
 [F]
 Lemma
    sofa: _InitialView
@@ -381,12 +381,12 @@ Token
       begin: 10
       end: 11
       value: "F"
-   pos: X
+   pos: POS_X
       sofa: _InitialView
       begin: 10
       end: 11
       PosValue: "P6"
-      coarseValue: "X"
+      coarseValue: "POS_X"
 [F]
 Constituent
    sofa: _InitialView
@@ -416,12 +416,12 @@ Constituent
    children: FSArray
    syntacticFunction: "HD"
 [20]
-NUM
+POS_NUM
    sofa: _InitialView
    begin: 12
    end: 14
    PosValue: "CARD"
-   coarseValue: "NUM"
+   coarseValue: "POS_NUM"
 [20]
 Lemma
    sofa: _InitialView
@@ -465,12 +465,12 @@ Token
       begin: 12
       end: 14
       value: "20"
-   pos: NUM
+   pos: POS_NUM
       sofa: _InitialView
       begin: 12
       end: 14
       PosValue: "CARD"
-      coarseValue: "NUM"
+      coarseValue: "POS_NUM"
 [20]
 Constituent
    sofa: _InitialView
