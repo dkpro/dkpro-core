@@ -47,15 +47,15 @@ public class StanfordPosTaggerTest
 	{
         runTest("en", "This is a test . \n",
 				new String[] { "DT",  "VBZ", "DT",  "NN", "." },
-				new String[] { "DET", "VERB",   "DET", "NOUN", "PUNCT" });
+				new String[] { "POS_DET", "POS_VERB",   "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", "A neural net . \n",
         		new String[] { "DT",  "JJ",  "NN", "." },
-        		new String[] { "DET", "ADJ", "NOUN", "PUNCT" });
+        		new String[] { "POS_DET", "POS_ADJ", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", "John is purchasing oranges . \n",
         		new String[] { "NNP", "VBZ", "VBG", "NNS", "." },
-        		new String[] { "PROPN",  "VERB",   "VERB",   "NOUN",  "PUNCT" });
+        		new String[] { "POS_PROPN",  "POS_VERB",   "POS_VERB",   "POS_NOUN",  "POS_PUNCT" });
 	}
 
     @Test
@@ -64,23 +64,23 @@ public class StanfordPosTaggerTest
     {
         runTest("en", "fast.41", "This is a test . \n",
                 new String[] { "DT",  "VBZ", "DT",  "NN", "." },
-                new String[] { "DET", "VERB",   "DET", "NOUN", "PUNCT" });
+                new String[] { "POS_DET", "POS_VERB",   "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", "twitter", "A neural net . \n",
                 new String[] { "DT",  "JJ",  "NN", "." },
-                new String[] { "DET", "ADJ", "NOUN", "PUNCT" });
+                new String[] { "POS_DET", "POS_ADJ", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", "twitter-fast", "John is purchasing oranges . \n",
                 new String[] { "NNP", "VBZ", "VBG", "NNS", "." },
-                new String[] { "PROPN",  "VERB",   "VERB",   "NOUN",  "PUNCT" });
+                new String[] { "POS_PROPN",  "POS_VERB",   "POS_VERB",   "POS_NOUN",  "POS_PUNCT" });
 
         runTest("en", "caseless-left3words-distsim", "john is purchasing oranges . \n",
                 new String[] { "NNP", "VBZ", "VBG", "NNS", "." },
-                new String[] { "PROPN",  "VERB",   "VERB",   "NOUN",  "PUNCT" });
+                new String[] { "POS_PROPN",  "POS_VERB",   "POS_VERB",   "POS_NOUN",  "POS_PUNCT" });
 
         runTest("en", "wsj-0-18-caseless-left3words-distsim", "john is purchasing oranges . \n",
                 new String[] { "NNP", "VBZ", "VBG", "NNS", "." },
-                new String[] { "PROPN",  "VERB",   "VERB",   "NOUN",  "PUNCT" });
+                new String[] { "POS_PROPN",  "POS_VERB",   "POS_VERB",   "POS_NOUN",  "POS_PUNCT" });
 
     }
 
@@ -90,27 +90,27 @@ public class StanfordPosTaggerTest
     {
         runTest("de", "Das ist ein Test .",
         		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
-        		new String[] { "PRON",  "VERB",     "DET", "NOUN",   "PUNCT" });
+        		new String[] { "POS_PRON",  "POS_VERB",     "POS_DET", "POS_NOUN",   "POS_PUNCT" });
 
         runTest("de", "ud", "Das ist ein Test .",
                 new String[] { "PRON", "VERB", "DET", "NOUN", "PUNCT" },
-                new String[] { "PRON", "VERB", "DET", "NOUN", "PUNCT" });
+                new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
         runTest("de", "hgc", "Das ist ein Test .",
         		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
-        		new String[] { "PRON",  "VERB",     "DET", "NOUN",   "PUNCT" });
+        		new String[] { "POS_PRON",  "POS_VERB",     "POS_DET", "POS_NOUN",   "POS_PUNCT" });
 
         runTest("de", "dewac", "Das ist ein Test .",
         		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
-        		new String[] { "PRON",  "VERB",     "DET", "NOUN",   "PUNCT" });
+        		new String[] { "POS_PRON",  "POS_VERB",     "POS_DET", "POS_NOUN",   "POS_PUNCT" });
 
         runTest("de", "fast-caseless", "das ist ein test .",
                 new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
-                new String[] { "PRON",  "VERB",     "DET", "NOUN",   "PUNCT" });
+                new String[] { "POS_PRON",  "POS_VERB",     "POS_DET", "POS_NOUN",   "POS_PUNCT" });
 
         runTest("de", "fast-caseless", "Das ist ein test .",
                 new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
-                new String[] { "PRON",  "VERB",     "DET", "NOUN",   "PUNCT" });
+                new String[] { "POS_PRON",  "POS_VERB",     "POS_DET", "POS_NOUN",   "POS_PUNCT" });
 
     }
 
@@ -126,9 +126,9 @@ public class StanfordPosTaggerTest
                 "très", "compliqué", ",", "qui", "contient", "des", "constituants", "que", "de",
                 "nombreuses", "dépendances", "et", "que", "possible", "." };
         
-        String[] posMapped = { "PRON", "VERB", "NOUN", "ADP", "DET", "NOUN", "ADP", "NOUN", "ADV",
-                "ADJ", "PUNCT", "PRON", "VERB", "DET", "NOUN", "CONJ", "DET", "ADJ", "NOUN", "CONJ",
-                "CONJ", "ADJ", "PUNCT" };
+        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_NOUN", "POS_ADP", "POS_DET", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_ADV",
+                "POS_ADJ", "POS_PUNCT", "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_CONJ", "POS_DET", "POS_ADJ", "POS_NOUN", "POS_CONJ",
+                "POS_CONJ", "POS_ADJ", "POS_PUNCT" };
 
         String[] posOriginal = { "CLS", "V", "NC", "P", "DET", "NC", "P", "N", "ADV", "ADJ", "PUNC",
                 "PROREL", "V", "DET", "NC", "CS", "DET", "ADJ", "NC", "CC", "CS", "ADJ", "PUNC" };
@@ -151,8 +151,8 @@ public class StanfordPosTaggerTest
     {
         JCas jcas = runTest("fr", null, "La traduction d'un texte du français vers l'anglais.");
 
-        String[] posMapped = { "DET", "NOUN", "ADP", "DET", "NOUN", "ADP", "NOUN", "ADP", "DET",
-                "NOUN", "PUNCT" };
+        String[] posMapped = { "POS_DET", "POS_NOUN", "POS_ADP", "POS_DET", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_ADP", "POS_DET",
+                "POS_NOUN", "POS_PUNCT" };
 
         String[] posOriginal = { "DET", "NC", "P", "DET", "NC", "P", "NC", "P", "DET", "NC",
                 "PUNC" };
@@ -181,20 +181,20 @@ public class StanfordPosTaggerTest
     	// The rudder often in the wake of the wind round the back of the area.
         runTest("zh", "尾 舵 常 处于 风轮 后面 的 尾流 区里 。",
         		new String[] { "NN", "NN", "AD",  "VV", "NN", "NN", "DEG", "NN", "NN", "PU"   },
-                new String[] { "NOUN", "NOUN", "ADJ", "VERB", "NOUN", "NOUN", "PART", "NOUN",
-                        "NOUN", "PUNCT" });
+                new String[] { "POS_NOUN", "POS_NOUN", "POS_ADJ", "POS_VERB", "POS_NOUN", "POS_NOUN", "POS_PART", "POS_NOUN",
+                        "POS_NOUN", "POS_PUNCT" });
 
         // The service sector has become an important engine of Guangdong's economic transformation
         // and upgrading.
         runTest("zh", "服务业 成为 广东 经济 转型 升级 的 重要 引擎 。",
         		new String[] { "NN", "VV", "NR", "NN", "VV", "VV", "DEC", "JJ",  "NN", "PU"    },
-                new String[] { "NOUN", "VERB", "PROPN", "NOUN", "VERB", "VERB", "PART", "ADJ",
-                        "NOUN", "PUNCT" });
+                new String[] { "POS_NOUN", "POS_VERB", "POS_PROPN", "POS_NOUN", "POS_VERB", "POS_VERB", "POS_PART", "POS_ADJ",
+                        "POS_NOUN", "POS_PUNCT" });
 
         // How far is China from the world brand?
         runTest("zh", "中国 离 世界 技术 品牌 有 多远 ？",
         		new String[] { "NR", "P",  "NN", "NN", "NN", "VE", "VV", "PU"   } ,
-        		new String[] { "PROPN", "ADP", "NOUN", "NOUN", "NOUN", "VERB",  "VERB",  "PUNCT" } );
+        		new String[] { "POS_PROPN", "POS_ADP", "POS_NOUN", "POS_NOUN", "POS_NOUN", "POS_VERB",  "POS_VERB",  "POS_PUNCT" } );
     }
 
     @Test
@@ -204,7 +204,7 @@ public class StanfordPosTaggerTest
     	// Covering the following sub-Saharan countries with vast areas very
         runTest("ar", "تغطي الصحراء الكبرى الدول التالية بمساحات شاسعة جدا",
         		new String[] { "VBP", "DTNN", "DTJJR", "DTNN", "DTJJ", "NNS", "JJ",  "NN"  },
-                new String[] { "VERB", "NOUN", "ADJ", "NOUN", "ADJ", "NOUN", "ADJ", "NOUN" });
+                new String[] { "POS_VERB", "POS_NOUN", "POS_ADJ", "POS_NOUN", "POS_ADJ", "POS_NOUN", "POS_ADJ", "POS_NOUN" });
     }
 
     @Test
@@ -213,7 +213,7 @@ public class StanfordPosTaggerTest
     {
         runTest("es", "Esta es una prueba .",
                 new String[] { "pd000000", "vsip000", "di0000", "nc0s000", "fp" },
-                new String[] { "PRON", "VERB", "DET", "NOUN", "PUNCT" });
+                new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
     }
 
     @Test
@@ -221,7 +221,7 @@ public class StanfordPosTaggerTest
     {
         runTest("en", "This is a ( small ) test . \n",
                 new String[] { "DT", "VBZ", "DT",  "-LRB-", "JJ",  "-RRB-", "NN", "." },
-                new String[] { "DET", "VERB", "DET", "PUNCT", "ADJ", "PUNCT", "NOUN", "PUNCT" });
+                new String[] { "POS_DET", "POS_VERB", "POS_DET", "POS_PUNCT", "POS_ADJ", "POS_PUNCT", "POS_NOUN", "POS_PUNCT" });
     }
 
     /**

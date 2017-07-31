@@ -67,8 +67,8 @@ public class BerkeleyParserTest
                 + "(NN تحتوي) (NN على) (NN أكبر) (NN قدر) (NN ممكن) (NN من) (NN العناصر) (NN و) (NN الروابط) "
                 + "(PUNC .))))";
 
-        String[] posMapped = { "PUNCT", "PUNCT", "NOUN", "NOUN", "NOUN", "NOUN", "NOUN", "NOUN",
-                "NOUN", "NOUN", "NOUN", "NOUN", "NOUN", "NOUN", "NOUN", "PUNCT" };
+        String[] posMapped = { "POS_PUNCT", "POS_PUNCT", "POS_NOUN", "POS_NOUN", "POS_NOUN", "POS_NOUN", "POS_NOUN", "POS_NOUN",
+                "POS_NOUN", "POS_NOUN", "POS_NOUN", "POS_NOUN", "POS_NOUN", "POS_NOUN", "POS_NOUN", "POS_PUNCT" };
 
         String[] posOriginal = { "PUNC", "PUNC", "NN", "NN", "NN", "NN", "NN", "NN", "NN", "NN",
                 "NN", "NN", "NN", "NN", "NN", "PUNC" };
@@ -190,8 +190,8 @@ public class BerkeleyParserTest
                 "NP 32,34", "NP 37,40", "NP 37,45", "NP 43,45", "NP 6,34", "NP 6,45", "NP 6,8",
                 "PRN 20,34", "QP 29,31", "ROOT 0,47", "VP 12,14", "VP 26,28", "VP 3,45", "VP 9,14" };
 
-        String[] posMapped = { "PRON", "VERB", "NOUN", "ADJ", "VERB", "PART", "NOUN", "ADJ", "NOUN",
-                "VERB", "NUM", "NOUN", "CONJ", "NOUN", "PART", "NOUN", "PUNCT" };
+        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_NOUN", "POS_ADJ", "POS_VERB", "POS_PART", "POS_NOUN", "POS_ADJ", "POS_NOUN",
+                "POS_VERB", "POS_NUM", "POS_NOUN", "POS_CONJ", "POS_NOUN", "POS_PART", "POS_NOUN", "POS_PUNCT" };
 
         String[] posOriginal = { "PN", "VV", "NN", "AD", "VA", "DEC", "NN", "AD", "NN", "VV", "CD",
                 "NN", "CC", "NN", "DEG", "NN", "PU" };
@@ -236,8 +236,8 @@ public class BerkeleyParserTest
                 "NP 61,98", "NP 8,110", "NP 8,43", "PP 99,110", "ROOT 0,112", "S 0,112",
                 "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
-        String[] posMapped = { "PRON", "VERB", "DET", "ADV", "ADJ", "NOUN", "NOUN", "PUNCT", "DET",
-                "VERB", "ADP", "ADJ", "NOUN", "CONJ", "NOUN", "ADP", "ADJ", "PUNCT" };
+        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_DET", "POS_ADV", "POS_ADJ", "POS_NOUN", "POS_NOUN", "POS_PUNCT", "POS_DET",
+                "POS_VERB", "POS_ADP", "POS_ADJ", "POS_NOUN", "POS_CONJ", "POS_NOUN", "POS_ADP", "POS_ADJ", "POS_PUNCT" };
 
 		String[] posOriginal = { "PRP", "VBP", "DT", "RB", "JJ", "NN", "NN", ",",
 				"WDT", "VBZ", "IN", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
@@ -283,8 +283,8 @@ public class BerkeleyParserTest
                 "NP 64,98", "NP 8,110", "NP 8,43", "PP 61,110", "PP 99,110", "ROOT 0,112",
                 "S 0,112", "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
-        String[] posMapped = { "PRON", "VERB", "DET", "ADV", "ADJ", "NOUN", "NOUN", "PUNCT", "DET",
-                "VERB", "ADP", "ADJ", "NOUN", "CONJ", "NOUN", "ADP", "ADJ", "PUNCT" };
+        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_DET", "POS_ADV", "POS_ADJ", "POS_NOUN", "POS_NOUN", "POS_PUNCT", "POS_DET",
+                "POS_VERB", "POS_ADP", "POS_ADJ", "POS_NOUN", "POS_CONJ", "POS_NOUN", "POS_ADP", "POS_ADJ", "POS_PUNCT" };
 
         String[] posOriginal = { "PRP", "VBP", "DT", "RB", "JJ", "NN", "NN", ",", "WDT", "VBZ",
                 "IN", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
@@ -335,8 +335,8 @@ public class BerkeleyParserTest
         String[] posOriginal = { "PPER", "VVFIN", "ART", "ADV", "ADJA", "NN", "$,", "PRELS", "ADV",
                 "PIDAT", "NN", "KON", "NN", "VVFIN", "$." };
 
-        String[] posMapped = { "PRON", "VERB", "DET", "ADV", "ADJ", "NOUN", "PUNCT", "PRON", "ADV",
-                "PRON", "NOUN", "CONJ", "NOUN", "VERB", "PUNCT" };
+        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_DET", "POS_ADV", "POS_ADJ", "POS_NOUN", "POS_PUNCT", "POS_PRON", "POS_ADV",
+                "POS_PRON", "POS_NOUN", "POS_CONJ", "POS_NOUN", "POS_VERB", "POS_PUNCT" };
 
 		String pennTree = "(ROOT (PSEUDO (S (PPER Wir) (VVFIN brauchen) (NP (ART ein) (AP " +
 				"(ADV sehr) (ADJA kompliziertes)) (NN Beispiel) ($, ,) (S (PRELS welches) (NP " +
@@ -385,9 +385,9 @@ public class BerkeleyParserTest
                 "NP 74,90", "NP 95,120", "PP 18,90", "PP 32,43", "ROOT 0,138", "SENT 0,138",
                 "Srel 61,90", "Ssub 124,136", "Ssub 91,120", "VN 0,17", "VN 65,73" };
 
-        String[] posMapped = { "PRON", "VERB", "VERB", "ADP", "DET", "NOUN", "ADP", "NOUN", "ADV",
-                "ADJ", "PUNCT", "PRON", "VERB", "DET", "NOUN", "CONJ", "DET", "ADJ", "NOUN", "CONJ",
-                "CONJ", "ADJ", "PUNCT" };
+        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_VERB", "POS_ADP", "POS_DET", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_ADV",
+                "POS_ADJ", "POS_PUNCT", "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_CONJ", "POS_DET", "POS_ADJ", "POS_NOUN", "POS_CONJ",
+                "POS_CONJ", "POS_ADJ", "POS_PUNCT" };
 
         String[] posOriginal = { "CL", "V", "V", "P", "D", "N", "P", "N", "ADV", "A",
                 ",", "PRO", "V", "D", "N", "C", "D", "A", "N", "C", "C", "A", "." };
