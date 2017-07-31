@@ -249,6 +249,8 @@ public class IOTestRunner
         if (aOptions == null || aOptions.resultAssertor == null) {
             String expected = FileUtils.readFileToString(reference, "UTF-8");
             String actual = FileUtils.readFileToString(new File(output, aOutputFile), "UTF-8");
+            expected = EOLUtils.normalizeLineEndings(expected);
+            actual = EOLUtils.normalizeLineEndings(actual);
             assertEquals(expected.trim(), actual.trim());
         }
         else {
