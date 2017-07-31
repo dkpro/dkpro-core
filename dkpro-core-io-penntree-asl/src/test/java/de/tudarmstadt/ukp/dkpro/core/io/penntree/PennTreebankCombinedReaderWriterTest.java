@@ -127,7 +127,16 @@ public class PennTreebankCombinedReaderWriterTest
         String expected = FileUtils.readFileToString(reference, "UTF-8");
         String actual = FileUtils.readFileToString(
                 new File(output, FilenameUtils.getBaseName(input.toString()) + ".mrg"), "UTF-8");
+        expected = normalizeLineEndings(expected);
+        actual = normalizeLineEndings(actual);
         assertEquals(expected.trim(), actual.trim());
+    }
+
+    private String normalizeLineEndings(String text)
+    {
+        String result = text.replaceAll("\\r\\n", "\n");
+        result = result.replaceAll("\\r", "\n");
+        return result;
     }
 
     public void testRoundTrip(String aFile, Object... aExtraParams)
