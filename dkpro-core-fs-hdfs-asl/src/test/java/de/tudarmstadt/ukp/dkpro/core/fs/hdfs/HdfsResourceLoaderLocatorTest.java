@@ -77,6 +77,7 @@ public class HdfsResourceLoaderLocatorTest
     }
     
     @Test
+    @Ignore
     public void testExternalLoaderLocator()
         throws Exception
     {
