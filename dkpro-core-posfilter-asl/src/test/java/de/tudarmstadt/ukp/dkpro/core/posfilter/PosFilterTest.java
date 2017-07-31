@@ -101,7 +101,7 @@ public class PosFilterTest
         
         String[] originalPos = { "VBZ", "JJ", "NN", "NN" };
         
-        String[] mappedPos = { "VERB", "ADJ", "NOUN", "NOUN" };
+        String[] mappedPos = { "POS_VERB", "POS_ADJ", "POS_NOUN", "POS_NOUN" };
 
         runTest("en", testDocument, tokens, null, null, originalPos, mappedPos,
                 PosFilter.PARAM_TYPE_TO_REMOVE, POS.class.getName(), PosFilter.PARAM_ADJ, true,

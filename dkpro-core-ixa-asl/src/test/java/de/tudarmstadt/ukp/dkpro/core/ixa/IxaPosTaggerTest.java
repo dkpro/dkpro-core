@@ -88,7 +88,7 @@ public class IxaPosTaggerTest
     {
         JCas jcas = runTest("en", null, "This is a test .",
                 new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
-                new String[] { "DET",  "VERB",   "DET", "NOUN",   "PUNCT" });
+                new String[] { "POS_DET",  "POS_VERB",   "POS_DET", "POS_NOUN",   "POS_PUNCT" });
 
         String[] posTags = { "#", "$", "''", "(", ")", ",", ".", ":", "CC", "CD", "DT", "EX", "FW",
                 "HYPH", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NIL", "NN", "NNP", "NNPS", "NNS",
@@ -103,16 +103,16 @@ public class IxaPosTaggerTest
         
         runTest("en", null, "A neural net .",
                 new String[] { "DT",  "JJ",     "NN",  "." },
-                new String[] { "DET", "ADJ",    "NOUN",  "PUNCT" });
+                new String[] { "POS_DET", "POS_ADJ",    "POS_NOUN",  "POS_PUNCT" });
 
         runTest("en", null, "John is purchasing oranges .",
                 new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
-                new String[] { "PROPN",   "VERB",   "VERB",        "NOUN",     "PUNCT" });
+                new String[] { "POS_PROPN",   "POS_VERB",   "POS_VERB",        "POS_NOUN",     "POS_PUNCT" });
         
         runTest("en", null, "The quick brown fox jumps over the lazy dog . \n",
                 new String[] { "DT", "JJ", "JJ", "NN", "VBZ", "IN", "DT", "JJ", "NN", "." },
-                new String[] { "DET", "ADJ", "ADJ", "NOUN", "VERB", "ADP", "DET", "ADJ", "NOUN",
-                        "PUNCT" });
+                new String[] { "POS_DET", "POS_ADJ", "POS_ADJ", "POS_NOUN", "POS_VERB", "POS_ADP", "POS_DET", "POS_ADJ", "POS_NOUN",
+                        "POS_PUNCT" });
     }
     
     @Test
@@ -121,7 +121,7 @@ public class IxaPosTaggerTest
     {
         JCas jcas = runTest("fr", null, "C'est un test .",
                 new String[] { "V", "DET", "NC", "PONCT" },
-                new String[] { "VERB", "DET", "NOUN", "PUNCT" });
+                new String[] { "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
         
         String[] posTags = { "ADJ", "ADJWH", "ADV", "ADVWH", "CC", "CLO", "CLR", "CLS", "CS", "DET",
                 "DETWH", "ET", "I", "NC", "NPP", "P", "P+D", "P+PRO", "PONCT", "PREF", "PRO",
@@ -177,7 +177,7 @@ public class IxaPosTaggerTest
     {
         JCas jcas = runTest("de", null, "Dies ist ein Test .",
                 new String[] { "PDS", "VAFIN", "ART", "NN", "$." },
-                new String[] { "PRON", "VERB", "DET", "NOUN", "PUNCT" });
+                new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
         String[] posTags = { "$(", "$,", "$.", "--", "ADJA", "ADJD", "ADV", "APPO", "APPR",
                 "APPRART", "APZR", "ART", "CARD", "FM", "ITJ", "KOKOM", "KON", "KOUI", "KOUS", "NE",
@@ -198,7 +198,7 @@ public class IxaPosTaggerTest
     {
         JCas jcas = runTest("it", null, "Questa è una prova .",
                 new String[] { "PRON", "VERB", "DET", "NOUN", "PUNCT"},
-                new String[] { "PRON", "VERB", "DET", "NOUN", "PUNCT" });
+                new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
         String[] posTags = { "ADJ", "ADP", "ADV", "AUX", "CONJ", "DET", "INTJ", "NOUN", "NUM",
                 "PART", "PRON", "PROPN", "PUNCT", "SCONJ", "SYM", "VERB", "X" };
@@ -216,7 +216,7 @@ public class IxaPosTaggerTest
         { 
             JCas jcas = runTest("en", "maxent-100-c5-baseline-autodict01-conll09", "This is a test .",
                     new String[] { "DT", "VBZ", "DT", "NN", "." },
-                    new String[] { "DET", "VERB", "DET", "NOUN", "PUNCT" });
+                    new String[] { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
             String[] posTags = { "#", "$", "''", "(", ")", ",", ".", ":", "CC", "CD", "DT", "EX",
                     "FW", "HYPH", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NIL", "NN", "NNP", "NNPS",
@@ -233,7 +233,7 @@ public class IxaPosTaggerTest
         { 
             JCas jcas = runTest("en", "perceptron-autodict01-ud", "This is a test .",
                     new String[] { "PRON", "VERB", "DET", "NOUN", "PUNCT" },
-                    new String[] { "PRON", "VERB", "DET", "NOUN", "PUNCT" });
+                    new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
             String[] posTags = { "ADJ", "ADP", "ADV", "AUX", "CONJ", "DET", "INTJ", "NOUN", "NUM",
                     "PART", "PRON", "PROPN", "PUNCT", "SCONJ", "SYM", "VERB", "X" };
@@ -247,7 +247,7 @@ public class IxaPosTaggerTest
         { 
             JCas jcas = runTest("en", "xpos-perceptron-autodict01-ud", "This is a test .",
                     new String[] { "DT", "VBZ", "DT", "NN", "." },
-                    new String[] { "DET", "VERB", "DET", "NOUN", "PUNCT" });
+                    new String[] { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
             String[] posTags = { "$", "''", ",", "-LRB-", "-RRB-", ".", ":", "ADD", "AFX", "CC",
                     "CD", "DT", "EX", "FW", "GW", "HYPH", "IN", "JJ", "JJR", "JJS", "LS", "MD",
@@ -268,7 +268,7 @@ public class IxaPosTaggerTest
     {
         JCas jcas = runTest("es", null, "Esta es una prueba .",
                 new String[] { "PD0FS000", "VSIP3S0", "DI0FS0", "NCFS000", "Fp"   },
-                new String[] { "PRON", "VERB", "DET", "NOUN", "PUNCT" });
+                new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
         
         String[] posTags = { "A00000", "AO0FP0", "AO0FS0", "AO0MP0", "AO0MS0", "AQ0000", "AQ000P",
                 "AQ0CC0", "AQ0CP0", "AQ0CS0", "AQ0FP0", "AQ0FPP", "AQ0FS0", "AQ0FSP", "AQ0MP0",
