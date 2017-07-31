@@ -36,6 +36,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.negra.NegraExportReader;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.snowball.SnowballStemmer;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import de.tudarmstadt.ukp.dkpro.core.testing.EOLUtils;
 
 /**
  *
@@ -76,6 +77,8 @@ public class ImsCwbWriterTest
 				new File("src/test/resources/tuebadz/corpus-sample-ref.txt"), "UTF-8");
 		String actual = FileUtils.readFileToString(
 				output, "UTF-8");
+		reference = EOLUtils.normalizeLineEndings(reference);
+		actual = EOLUtils.normalizeLineEndings(actual);
 		assertEquals(reference, actual);
 	}
 	
@@ -112,6 +115,8 @@ public class ImsCwbWriterTest
                 new File("src/test/resources/tuebadz/corpus-sample-addfeat-ref.txt"), "UTF-8");
         String actual = FileUtils.readFileToString(
                 new File(outputFile), "UTF-8");
+        reference = EOLUtils.normalizeLineEndings(reference);
+        actual = EOLUtils.normalizeLineEndings(actual);
         assertEquals(reference, actual);
     }
 	@Ignore("FX8 is a file from the BNC. While available online for download, we currently do not "
