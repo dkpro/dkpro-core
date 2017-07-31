@@ -137,8 +137,8 @@ public class TeiWriter
         try (OutputStream docOS = getOutputStream(aJCas, filenameSuffix)) {
             XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
             xmlOutputFactory.setProperty(XMLOutputFactory.IS_REPAIRING_NAMESPACES, true);
-
-            XMLEventWriter xmlEventWriter = xmlOutputFactory.createXMLEventWriter(docOS);
+            
+            XMLEventWriter xmlEventWriter = xmlOutputFactory.createXMLEventWriter(docOS, "UTF-8");
             if (indent) {
                 xmlEventWriter = new IndentingXMLEventWriter(xmlEventWriter);
             }
