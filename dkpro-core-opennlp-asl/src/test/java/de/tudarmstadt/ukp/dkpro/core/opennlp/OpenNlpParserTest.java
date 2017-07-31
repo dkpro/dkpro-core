@@ -50,8 +50,8 @@ public class OpenNlpParserTest
                 "NP 64,98", "NP 8,110", "NP 8,43", "PP 61,110", "PP 99,110", "ROOT 0,112",
                 "S 0,112", "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
-        String[] posMapped = { "PRON", "VERB", "DET", "ADV", "VERB", "NOUN", "NOUN", "PUNCT", "DET",
-                "VERB", "ADP", "ADJ", "NOUN", "CONJ", "NOUN", "ADP", "ADJ", "PUNCT" };
+        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_DET", "POS_ADV", "POS_VERB", "POS_NOUN", "POS_NOUN", "POS_PUNCT", "POS_DET",
+                "POS_VERB", "POS_ADP", "POS_ADJ", "POS_NOUN", "POS_CONJ", "POS_NOUN", "POS_ADP", "POS_ADJ", "POS_PUNCT" };
 
         String[] posOriginal = { "PRP", "VBP", "DT", "RB", "VBN", "NN", "NN", ",", "WDT", "VBZ",
                 "IN", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
