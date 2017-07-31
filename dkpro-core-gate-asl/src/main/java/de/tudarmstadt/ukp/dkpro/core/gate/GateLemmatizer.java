@@ -17,9 +17,6 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.gate;
 
-import gate.creole.ResourceInstantiationException;
-import gate.creole.morph.Interpret;
-
 import java.io.IOException;
 import java.net.URL;
 
@@ -33,14 +30,16 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NOUN;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRON;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.VERB;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_NOUN;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_PRON;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_VERB;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import gate.creole.ResourceInstantiationException;
+import gate.creole.morph.Interpret;
 
 /**
  * Wrapper for the GATE rule based lemmatizer.
@@ -131,13 +130,13 @@ public class GateLemmatizer
 			POS pos = token.getPos();
 
 			if (pos != null) {
-				if (pos.getClass().equals(VERB.class)) {
+				if (pos.getClass().equals(POS_VERB.class)) {
 					category = GATE_LEMMATIZER_VERB_CATEGORY_STRING;
 				}
-				else if (pos.getClass().equals(NOUN.class)) {
+				else if (pos.getClass().equals(POS_NOUN.class)) {
 					category = GATE_LEMMATIZER_NOUN_CATEGORY_STRING;
 				}
-				else if (pos.getClass().equals(PRON.class)) {
+				else if (pos.getClass().equals(POS_PRON.class)) {
 					category = GATE_LEMMATIZER_NOUN_CATEGORY_STRING;
 				}
 				else {

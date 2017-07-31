@@ -37,15 +37,15 @@ public class HepplePosTaggerTest
 	{
         runTest("en", null, "This is a test . \n",
 				new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
-				new String[] { "DET", "VERB", "DET", "NOUN", "PUNCT" });
+				new String[] { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", null, "A neural net . \n",
         		new String[] { "DT",  "NN", "JJ",  "." },
-        		new String[] { "DET", "NOUN", "ADJ", "PUNCT" });
+        		new String[] { "POS_DET", "POS_NOUN", "POS_ADJ", "POS_PUNCT" });
 
         runTest("en", null, "John is purchasing oranges . \n",
         		new String[] { "NNP",  "VBZ",  "VBG",  "NNS",  "." },
-        		new String[] { "PROPN", "VERB", "VERB", "NOUN", "PUNCT" });
+        		new String[] { "POS_PROPN", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_PUNCT" });
     }
 
 	private void runTest(String language, String variant, String testDocument, String[] tags,
