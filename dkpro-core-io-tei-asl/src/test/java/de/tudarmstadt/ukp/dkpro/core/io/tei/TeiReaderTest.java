@@ -42,6 +42,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextWriter;
+import de.tudarmstadt.ukp.dkpro.core.testing.EOLUtils;
 
 public class TeiReaderTest
 {
@@ -128,8 +129,8 @@ public class TeiReaderTest
     public void brownReaderTest2()
         throws Exception
     {
-    	File reference = new File("src/test/resources/brown_ims.txt");
-    	File output = new File("target/test-output/brown_ims.txt");
+    	File referenceFile = new File("src/test/resources/brown_ims.txt");
+    	File outputFile = new File("target/test-output/brown_ims.txt");
 
         CollectionReaderDescription reader = createReaderDescription(
                 TeiReader.class,
@@ -138,23 +139,25 @@ public class TeiReaderTest
                 TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml" });
 
         AnalysisEngineDescription writer = createEngineDescription(ImsCwbWriter.class,
-        		ImsCwbWriter.PARAM_TARGET_LOCATION, output,
+        		ImsCwbWriter.PARAM_TARGET_LOCATION, outputFile,
         		ImsCwbWriter.PARAM_WRITE_CPOS, true,
         		ImsCwbWriter.PARAM_SENTENCE_TAG, "sentence");
 
         SimplePipeline.runPipeline(reader, writer);
 
-        assertEquals(
-        		FileUtils.readFileToString(reference, "UTF-8"),
-        		FileUtils.readFileToString(output, "UTF-8"));
+        String reference = FileUtils.readFileToString(referenceFile, "UTF-8");
+        String output = FileUtils.readFileToString(outputFile, "UTF-8");
+        reference = EOLUtils.normalizeLineEndings(reference);
+        output = EOLUtils.normalizeLineEndings(output);
+        assertEquals(reference, output);
     }
 
     @Test
     public void brownReaderTest3()
         throws Exception
     {
-        File reference = new File("src/test/resources/brown_ims.gz.txt");
-        File output = new File("target/test-output/brown_ims.gz.txt");
+        File referenceFile = new File("src/test/resources/brown_ims.gz.txt");
+        File outputFile = new File("target/test-output/brown_ims.gz.txt");
 
         CollectionReaderDescription reader = createReaderDescription(
                 TeiReader.class,
@@ -163,16 +166,19 @@ public class TeiReaderTest
                 TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml.gz" });
 
         AnalysisEngineDescription writer = createEngineDescription(ImsCwbWriter.class,
-                ImsCwbWriter.PARAM_TARGET_LOCATION, output,
+                ImsCwbWriter.PARAM_TARGET_LOCATION, outputFile,
                 ImsCwbWriter.PARAM_WRITE_CPOS, true,
                 ImsCwbWriter.PARAM_SENTENCE_TAG, "sentence");
 
         SimplePipeline.runPipeline(reader, writer);
 
-        assertEquals(
-                FileUtils.readFileToString(reference, "UTF-8"),
-                FileUtils.readFileToString(output, "UTF-8"));
+        String reference = FileUtils.readFileToString(referenceFile, "UTF-8");
+        String output = FileUtils.readFileToString(outputFile, "UTF-8");
+        reference = EOLUtils.normalizeLineEndings(reference);
+        output = EOLUtils.normalizeLineEndings(output);
+        assertEquals(reference, output);
     }
+    
 
     @Test
     public void brownReaderTest_noSentences()
