@@ -42,7 +42,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 public class ParagraphSplitter
 	extends JCasAnnotator_ImplBase
 {
-	public static final String SINGLE_LINE_BREAKS_PATTERN = "((\n\r\n)+(\r\n)*)|((\n)+(\n)*)";
+	public static final String SINGLE_LINE_BREAKS_PATTERN = "((\r\n)+(\r\n)*)|((\n)+(\n)*)";
 	public static final String DOUBLE_LINE_BREAKS_PATTERN = "((\r\n\r\n)+(\r\n)*)|((\n\n)+(\n)*)";
 
 	/**
