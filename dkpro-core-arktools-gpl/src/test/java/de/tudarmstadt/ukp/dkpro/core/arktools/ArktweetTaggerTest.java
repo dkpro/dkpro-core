@@ -43,16 +43,16 @@ public class ArktweetTaggerTest
                         "say", "redistricting", "?" },
                 new String[] { "@", "^", "V", "V", "A", "R", "^", "V", "D", "A", "N", "P", "^", ",",
                         "V", "O", "V", "V", "," },
-                new String[] { "AT", "PROPN", "VERB", "VERB", "ADJ", "ADV", "PROPN", "VERB", "DET",
-                        "ADJ", "NOUN", "ADP", "PROPN", "PUNCT", "VERB", "PRON", "VERB", "VERB",
-                        "PUNCT" }
+                new String[] { "POS_AT", "POS_PROPN", "POS_VERB", "POS_VERB", "POS_ADJ", "POS_ADV", "POS_PROPN", "POS_VERB", "POS_DET",
+                        "POS_ADJ", "POS_NOUN", "POS_ADP", "POS_PROPN", "POS_PUNCT", "POS_VERB", "POS_PRON", "POS_VERB", "POS_VERB",
+                        "POS_PUNCT" }
         );
 
         runTest("en",
                 "Spending the day withhh mommma !",
                 new String[] { "Spending", "the", "day", "withhh", "mommma", "!" },
                 new String[] { "V", "D", "N", "P", "N", "," },
-                new String[] { "VERB", "DET", "NOUN", "ADP", "NOUN", "PUNCT" }
+                new String[] { "POS_VERB", "POS_DET", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_PUNCT" }
         );
 
         runTest("en",
@@ -62,10 +62,10 @@ public class ArktweetTaggerTest
                         "dru", "boo", "to", "jail", ".", "Thank", "u", "God", ".", "#amen" },
                 new String[] { "!", ",", "V", "P", "D", "A", "N", "A", "N", "P", "$", "R", "V", "D",
                         "N", "&", "$", "R", "V", "N", "N", "P", "N", ",", "V", "O", "^", ",", "#" },
-                new String[] { "INT", "PUNCT", "VERB", "ADP", "DET", "ADJ", "NOUN", "ADJ", "NOUN",
-                        "ADP", "NUM", "ADV", "VERB", "DET", "NOUN", "CONJ", "NUM", "ADV", "VERB",
-                        "NOUN", "NOUN", "ADP", "NOUN", "PUNCT", "VERB", "PRON", "PROPN", "PUNCT",
-                        "HASH" }
+                new String[] { "POS_INT", "POS_PUNCT", "POS_VERB", "POS_ADP", "POS_DET", "POS_ADJ", "POS_NOUN", "POS_ADJ", "POS_NOUN",
+                        "POS_ADP", "POS_NUM", "POS_ADV", "POS_VERB", "POS_DET", "POS_NOUN", "POS_CONJ", "POS_NUM", "POS_ADV", "POS_VERB",
+                        "POS_NOUN", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_PUNCT", "POS_VERB", "POS_PRON", "POS_PROPN", "POS_PUNCT",
+                        "POS_HASH" }
         );
 
         runTest("en",
@@ -73,7 +73,7 @@ public class ArktweetTaggerTest
                 new String[] { "Different", "smiley", "styles", ":)", ":-)", "(^_^)", "^o",
                         "#smiley" },
                 new String[] { "A", "A", "N", "E", "E", "E", "E", "#" },
-                new String[] { "ADJ", "ADJ", "NOUN", "EMO", "EMO", "EMO", "EMO", "HASH" }
+                new String[] { "POS_ADJ", "POS_ADJ", "POS_NOUN", "POS_EMO", "POS_EMO", "POS_EMO", "POS_EMO", "POS_HASH" }
         );
     }
 

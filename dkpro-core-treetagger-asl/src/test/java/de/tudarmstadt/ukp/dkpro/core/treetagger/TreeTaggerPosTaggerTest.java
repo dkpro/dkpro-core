@@ -84,7 +84,7 @@ class TreeTaggerPosTaggerTest
         
         String[] lemmas = { "this", "be", "a", "test", "." };
         String[] tags = { "DT", "VBZ", "DT", "NN", "SENT" };
-        String[] tagClasses = { "DET", "VERB", "DET", "NOUN", "PUNCT" };
+        String[] tagClasses = { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" };
         
         AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
         AssertAnnotations.assertPOS(tagClasses, tags, select(jcas, POS.class));
@@ -103,23 +103,23 @@ class TreeTaggerPosTaggerTest
         runTest("en", "ptb-tt", tagset, "This is a test .",
 				new String[] { "this", "be",  "a",   "test", "."    },
 				new String[] { "DT",   "VBZ", "DT",  "NN",   "SENT" },
-				new String[] { "DET",  "VERB",   "DET", "NOUN",   "PUNCT" });
+				new String[] { "POS_DET",  "POS_VERB",   "POS_DET", "POS_NOUN",   "POS_PUNCT" });
 
         runTest("en", "ptb-tt", tagset, "A neural net .",
         		new String[] { "a",   "neural", "net", "."    },
         		new String[] { "DT",  "JJ",     "NN",  "SENT" },
-        		new String[] { "DET", "ADJ",    "NOUN",  "PUNCT" });
+        		new String[] { "POS_DET", "POS_ADJ",    "POS_NOUN",  "POS_PUNCT" });
 
         runTest("en", "ptb-tt", tagset, "John is purchasing oranges .",
         		new String[] { "John", "be",  "purchase", "orange", "."    },
         		new String[] { "NP",   "VBZ", "VVG",      "NNS",    "SENT" },
-        		new String[] { "PROPN",   "VERB",   "VERB",        "NOUN",     "PUNCT" });
+        		new String[] { "POS_PROPN",   "POS_VERB",   "POS_VERB",        "POS_NOUN",     "POS_PUNCT" });
 
         // TT4J per default runs TreeTagger with the -sgml option, so XML tags are not tagged
         runTest("en", "ptb-tt", tagset, "My homepage is <url> http://null.dummy </url> .",
         		new String[] { "my", "homepage", "be", "http://null.dummy", "." },
         		new String[] { "PP$", "NN", "VBZ", "JJ",  "SENT" },
-        		new String[] { "PRON",  "NOUN", "VERB",   "ADJ", "PUNCT" });
+        		new String[] { "POS_PRON",  "POS_NOUN", "POS_VERB",   "POS_ADJ", "POS_PUNCT" });
 	}
 	
     @Test
@@ -135,7 +135,7 @@ class TreeTaggerPosTaggerTest
         runTest("fr", "stein", tagset, "Ceci est un test .",
                 new String[] { "ceci", "être", "un", "test", "."   },
                 new String[] { "PRO:DEM", "VER:pres", "DET:ART", "NOM", "SENT"   },
-                new String[] { "PRON", "VERB", "DET", "NOUN", "PUNCT" });
+                new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
     }
 
 	@Test
@@ -152,12 +152,12 @@ class TreeTaggerPosTaggerTest
         runTest("de", "stts", tagset, "10 Minuten sind das Mikro an und die Bühne frei .",
         		new String[] { "10", "Minute", "sein", "die", "Mikro", "an", "und", "die", "Bühne", "frei", "."  },
         		new String[] { "CARD", "NN", "VAFIN", "ART", "NN", "PTKVZ", "KON",  "ART", "NN", "PTKVZ", "$."   },
-        		new String[] { "NUM", "NOUN", "VERB",  "DET", "NOUN", "VERB", "CONJ", "DET", "NOUN", "VERB", "PUNCT" });
+        		new String[] { "POS_NUM", "POS_NOUN", "POS_VERB",  "POS_DET", "POS_NOUN", "POS_VERB", "POS_CONJ", "POS_DET", "POS_NOUN", "POS_VERB", "POS_PUNCT" });
 
         runTest("de", "stts", tagset, "Das ist ein Test .",
         		new String[] { "die", "sein",  "eine", "Test", "."   },
         		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."   },
-        		new String[] { "PRON",  "VERB",     "DET", "NOUN",   "PUNCT" });
+        		new String[] { "POS_PRON",  "POS_VERB",     "POS_DET", "POS_NOUN",   "POS_PUNCT" });
     }
 
 	@Test
@@ -175,12 +175,12 @@ class TreeTaggerPosTaggerTest
         runTest("nl", "tt", tagset, "Dit is een test .",
         		new String[] { "dit",      "zijn",       "een",      "test",   "."    },
         		new String[] { "prondemo", "verbpressg", "det__art", "nounsg", "$."   },
-            new String[] { "PRON",     "VERB",       "DET",      "NOUN",   "PUNCT" });
+            new String[] { "POS_PRON",     "POS_VERB",       "POS_DET",      "POS_NOUN",   "POS_PUNCT" });
 
         runTest("nl", "tt", tagset, "10 minuten op de microfoon en vrij podium .",
         		new String[] { "@card@",   "minuut", "op",   "de",       "microfoon", "en",        "vrij", "podium", "."   },
         		new String[] { "num__ord", "nounpl", "prep", "det__art", "nounsg",    "conjcoord", "adj",  "nounsg", "$."  },
-            new String[] { "NUM", "NOUN", "ADP", "DET", "NOUN", "CONJ", "ADJ", "NOUN", "PUNCT" });
+            new String[] { "POS_NUM", "POS_NOUN", "POS_ADP", "POS_DET", "POS_NOUN", "POS_CONJ", "POS_ADJ", "POS_NOUN", "POS_PUNCT" });
     }
 	
     @Test
@@ -322,7 +322,7 @@ class TreeTaggerPosTaggerTest
         runTest("gl", "xiada", tagset, "Este é un exame .",
                 new String[] { "este", "ser",    "un",   "exame", "." },
                 new String[] { "Enms", "Vpi30s", "Dims", "Scms",  "Q." },
-                new String[] { "PRON",   "VERB",      "DET",  "NOUN",    "PUNCT" });
+                new String[] { "POS_PRON",   "POS_VERB",      "POS_DET",  "POS_NOUN",    "POS_PUNCT" });
     }
 	
     @Test
@@ -659,7 +659,7 @@ class TreeTaggerPosTaggerTest
         runTest("pl", "ncp", tagset, "To badanie .",
                 new String[] { "ten",              "badanie",        "."   },
                 new String[] { "adj:sg:acc:n:pos", "subst:sg:acc:n", "SENT"   },
-                new String[] { "ADJ",              "NOUN",              "PUNCT" });
+                new String[] { "POS_ADJ",              "POS_NOUN",              "POS_PUNCT" });
     }	
 
     @Test
@@ -826,7 +826,7 @@ class TreeTaggerPosTaggerTest
         runTest("ru", "msd", tagset, "Это тест .",
                 new String[] { "это",     "тест",   "."   },
                 new String[] { "P--nsnn", "Ncmsnn", "SENT"   },
-                new String[] { "PRON",      "NOUN",      "PUNCT" });
+                new String[] { "POS_PRON",      "POS_NOUN",      "POS_PUNCT" });
     }   
 
 	@Test
@@ -861,7 +861,7 @@ class TreeTaggerPosTaggerTest
         runTest("sk",  "smt-reduced", tagset, "To je test .",
                 new String[] { "to", "byť", "test", "." },
                 new String[] { "Ps", "VKsc", "Ss", "." },
-                new String[] { "PRON", "VERB", "NOUN", "PUNCT" });
+                new String[] { "POS_PRON", "POS_VERB", "POS_NOUN", "POS_PUNCT" });
     }
 
     @Test
@@ -878,20 +878,20 @@ class TreeTaggerPosTaggerTest
         runTest("zh", "lcmc", tagset, "尾 舵 常 处于 风轮 后面 的 尾流 区里 。",
         		new String[] { "_",  "_",  "_",   "_", "风轮", "_", "_", "_",  "_",  "_"    },
         		new String[] { "ng", "n",  "d",   "v", "n",   "f", "u", "n",  "nl", "ew"   },
-            new String[] { "NOUN", "NOUN", "ADV", "VERB", "NOUN", "X", "AUX", "NOUN", "X", "PUNCT" });
+            new String[] { "POS_NOUN", "POS_NOUN", "POS_ADV", "POS_VERB", "POS_NOUN", "POS_X", "POS_AUX", "POS_NOUN", "POS_X", "POS_PUNCT" });
 
         // The service sector has become an important engine of Guangdong's economic transformation
         // and upgrading.
         runTest("zh", "lcmc", tagset, "服务业 成为 广东 经济 转型 升级 的 重要 引擎 。",
         		new String[] { "_",  "_", "_",  "_",  "_", "_", "_", "_", "_",  "_"     },
         		new String[] { "n",  "v", "ns", "n",  "v", "v", "u", "a", "n",  "ew"    },
-            new String[] { "NOUN", "VERB", "PROPN", "NOUN", "VERB", "VERB", "AUX", "ADJ", "NOUN", "PUNCT" });
+            new String[] { "POS_NOUN", "POS_VERB", "POS_PROPN", "POS_NOUN", "POS_VERB", "POS_VERB", "POS_AUX", "POS_ADJ", "POS_NOUN", "POS_PUNCT" });
 
         // How far is China from the world brand?
         runTest("zh", "lcmc", tagset, "中国 离 世界 技术 品牌 有 多远 ？",
         		new String[] { "_",  "_", "_",  "_",  "_",  "_", "多远", "_"  },
         		new String[] { "ns", "v", "n",  "n",  "n",  "v", "n",   "ew" },
-            new String[] { "PROPN", "VERB", "NOUN", "NOUN", "NOUN", "VERB", "NOUN", "PUNCT" });
+            new String[] { "POS_PROPN", "POS_VERB", "POS_NOUN", "POS_NOUN", "POS_NOUN", "POS_VERB", "POS_NOUN", "POS_PUNCT" });
     }
 
 	@Test
@@ -902,7 +902,7 @@ class TreeTaggerPosTaggerTest
         runTest("en", null, null, "² § ¶ § °",
         		new String[] { "²",  "§",    "¶",  "§",    "°"   },
         		new String[] { "NN", "SYM",  "NN", "SYM",  "SYM" },
-            new String[] { "NOUN", "SYM", "NOUN", "SYM", "SYM" });
+            new String[] { "POS_NOUN", "POS_SYM", "POS_NOUN", "POS_SYM", "POS_SYM" });
     }
 
 	/**
@@ -933,7 +933,7 @@ class TreeTaggerPosTaggerTest
 
         // test POS annotations
 		String[] expectedTags = new String[] { "DT",   "VBZ", "DT",  "NN",   "SENT" };
-		String[] expectedTagClasses = new String[] { "ART",  "V",   "ART", "NN",   "PUNC" };
+		String[] expectedTagClasses = new String[] { "POS_ART",  "POS_V",   "POS_ART", "POS_NN",   "POS_PUNC" };
 
 		for (int i = 0; i < actualTags.size(); i++) {
             POS posAnnotation = actualTags.get(i);
@@ -956,7 +956,7 @@ class TreeTaggerPosTaggerTest
 		String testDocument = "This is a test .";
         String[] lemmas = { "this", "be", "a", "test", "." };
         String[] tags = { "DT", "VBZ", "DT", "NN", "SENT" };
-        String[] tagClasses = { "DET", "VERB", "DET", "NOUN", "PUNCT" };
+        String[] tagClasses = { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" };
 
         AnalysisEngine engine = createEngine(TreeTaggerPosTagger.class);
 

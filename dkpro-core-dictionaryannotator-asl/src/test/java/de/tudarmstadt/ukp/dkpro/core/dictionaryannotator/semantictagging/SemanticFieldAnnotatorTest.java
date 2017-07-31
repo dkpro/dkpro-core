@@ -88,7 +88,7 @@ public class SemanticFieldAnnotatorTest {
         for (Token token : JCasUtil.select(aJCas, Token.class)) {
 
             if (documentPosTags[offset].matches("NN")) {
-                NN nn = new NN(aJCas, token.getBegin(), token.getEnd());
+                POS_NN nn = new POS_NN(aJCas, token.getBegin(), token.getEnd());
                 nn.setPosValue(documentPosTags[offset]);
                 nn.addToIndexes();
                 token.setPos(nn);
