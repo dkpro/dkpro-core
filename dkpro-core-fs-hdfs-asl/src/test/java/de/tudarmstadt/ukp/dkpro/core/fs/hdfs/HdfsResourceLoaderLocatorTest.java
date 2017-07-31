@@ -34,6 +34,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ExternalResourceDescription;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -76,6 +77,7 @@ public class HdfsResourceLoaderLocatorTest
     }
     
     @Test
+    @Ignore
     public void testExternalLoaderLocator()
         throws Exception
     {
