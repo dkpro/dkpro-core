@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.output.FileWriterWithEncoding;
 import org.apache.uima.UIMAException;
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
@@ -137,7 +138,7 @@ public class CombinationReader
     		throws IOException, SAXException 
     {
     	File tempFile = File.createTempFile("combReader", "desc");
-    	FileWriter writer = new FileWriter(tempFile);
+    	FileWriterWithEncoding writer = new FileWriterWithEncoding(tempFile, "UTF-8");
     	desc.toXML(writer);
 
     	return tempFile;
