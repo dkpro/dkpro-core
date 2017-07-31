@@ -35,23 +35,23 @@ import org.apache.uima.util.Level;
 
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADP;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.AUX;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.DET;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.INTJ;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NOUN;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NUM;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PART;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRON;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PROPN;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNCT;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.SCONJ;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.SYM;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.VERB;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_ADJ;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_ADP;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_ADV;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_AUX;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_CONJ;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_DET;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_INTJ;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_NOUN;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_NUM;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_PART;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_PRON;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_PROPN;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_PUNCT;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_SCONJ;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_SYM;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_VERB;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -226,67 +226,67 @@ public class PosFilter
                 }
 
                 String posString = pos.getType().getShortName();
-                if (posString.equals(ADJ.class.getSimpleName()) && !adj) {
+                if (posString.equals(POS_ADJ.class.getSimpleName()) && !adj) {
                     toRemove.add(annotation);
                     continue;
                 }
-                if (posString.equals(ADP.class.getSimpleName()) && !adp) {
+                if (posString.equals(POS_ADP.class.getSimpleName()) && !adp) {
                     toRemove.add(annotation);
                     continue;
                 }
-                if (posString.equals(ADV.class.getSimpleName()) && !adv) {
+                if (posString.equals(POS_ADV.class.getSimpleName()) && !adv) {
                     toRemove.add(annotation);
                     continue;
                 }
-                if (posString.equals(AUX.class.getSimpleName()) && !aux) {
+                if (posString.equals(POS_AUX.class.getSimpleName()) && !aux) {
                     toRemove.add(annotation);
                     continue;
                 }
-                if (posString.equals(CONJ.class.getSimpleName()) && !conj) {
+                if (posString.equals(POS_CONJ.class.getSimpleName()) && !conj) {
                     toRemove.add(annotation);
                     continue;
                 }
-                if (posString.equals(DET.class.getSimpleName()) && !det) {
+                if (posString.equals(POS_DET.class.getSimpleName()) && !det) {
                     toRemove.add(annotation);
                     continue;
                 }
-                if (posString.equals(INTJ.class.getSimpleName()) && !intj) {
+                if (posString.equals(POS_INTJ.class.getSimpleName()) && !intj) {
                     toRemove.add(annotation);
                     continue;
                 }
-                if (posString.equals(NOUN.class.getSimpleName()) && !noun) {
+                if (posString.equals(POS_NOUN.class.getSimpleName()) && !noun) {
                     toRemove.add(annotation);
                     continue;
                 }
-                if (posString.equals(NUM.class.getSimpleName()) && !num) {
+                if (posString.equals(POS_NUM.class.getSimpleName()) && !num) {
                     toRemove.add(annotation);
                     continue;
                 }
-                if (posString.equals(PART.class.getSimpleName()) && !part) {
+                if (posString.equals(POS_PART.class.getSimpleName()) && !part) {
                     toRemove.add(annotation);
                     continue;
                 }
-                if (posString.equals(PRON.class.getSimpleName()) && !pron) {
+                if (posString.equals(POS_PRON.class.getSimpleName()) && !pron) {
                     toRemove.add(annotation);
                     continue;
                 }
-                if (posString.equals(PROPN.class.getSimpleName()) && !propn) {
+                if (posString.equals(POS_PROPN.class.getSimpleName()) && !propn) {
                     toRemove.add(annotation);
                     continue;
                 }
-                if (posString.equals(PUNCT.class.getSimpleName()) && !punct) {
+                if (posString.equals(POS_PUNCT.class.getSimpleName()) && !punct) {
                     toRemove.add(annotation);
                     continue;
                 }
-                if (posString.equals(SCONJ.class.getSimpleName()) && !sconj) {
+                if (posString.equals(POS_SCONJ.class.getSimpleName()) && !sconj) {
                     toRemove.add(annotation);
                     continue;
                 }
-                if (posString.equals(SYM.class.getSimpleName()) && !sym) {
+                if (posString.equals(POS_SYM.class.getSimpleName()) && !sym) {
                     toRemove.add(annotation);
                     continue;
                 }
-                if (posString.equals(VERB.class.getSimpleName()) && !verb) {
+                if (posString.equals(POS_VERB.class.getSimpleName()) && !verb) {
                     toRemove.add(annotation);
                     continue;
                 }
