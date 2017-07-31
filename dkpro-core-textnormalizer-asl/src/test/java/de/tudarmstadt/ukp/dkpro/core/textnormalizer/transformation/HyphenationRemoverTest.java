@@ -36,6 +36,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TokenizedTextWriter;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import de.tudarmstadt.ukp.dkpro.core.testing.EOLUtils;
 
 public class HyphenationRemoverTest
 {
@@ -88,7 +89,9 @@ public class HyphenationRemoverTest
 
         SimplePipeline.runPipeline(reader, hyphenationRemover, segmenter, writer);
 
-        assertEquals(expected, readFileToString(new File(outputPath, "test3.txt"), "UTF-8"));
+        String actual = readFileToString(new File(outputPath, "test3.txt"), "UTF-8");
+        actual = EOLUtils.normalizeLineEndings(actual);
+        assertEquals(expected, actual);
     }
 
     @Rule
