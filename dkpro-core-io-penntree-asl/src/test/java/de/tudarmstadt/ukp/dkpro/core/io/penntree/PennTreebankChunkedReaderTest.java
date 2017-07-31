@@ -56,10 +56,10 @@ public class PennTreebankChunkedReaderTest
                 "VBD", "PRP", "VBZ", "VBN", "DT", "$", "CD", "CD", "NN", "NN", "IN", "JJS", "IN",
                 "NNP", "NNP", "NNP", "POS", "NN", "CC", "NN", "NNS", "." };
 
-        String[] posMapped = { "DET", "NOUN", "ADP", "ADJ", "NOUN", "VERB", "ADP", "PROPN", "PROPN",
-                "PROPN", "VERB", "PRON", "VERB", "VERB", "DET", "PUNCT", "NUM", "NUM", "NOUN",
-                "NOUN", "ADP", "ADJ", "ADP", "PROPN", "PROPN", "PROPN", "X", "NOUN", "CONJ", "NOUN",
-                "NOUN", "PUNCT" };
+        String[] posMapped = { "POS_DET", "POS_NOUN", "POS_ADP", "POS_ADJ", "POS_NOUN", "POS_VERB", "POS_ADP", "POS_PROPN", "POS_PROPN",
+                "POS_PROPN", "POS_VERB", "POS_PRON", "POS_VERB", "POS_VERB", "POS_DET", "POS_PUNCT", "POS_NUM", "POS_NUM", "POS_NOUN",
+                "POS_NOUN", "POS_ADP", "POS_ADJ", "POS_ADP", "POS_PROPN", "POS_PROPN", "POS_PROPN", "POS_X", "POS_NOUN", "POS_CONJ", "POS_NOUN",
+                "POS_NOUN", "POS_PUNCT" };
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jCas, POS.class));
     }
@@ -86,7 +86,7 @@ public class PennTreebankChunkedReaderTest
 
         String[] posOriginal = { "DT", "NNS", "NNS" };
 
-        String[] posMapped = { "DET", "NOUN", "NOUN" };
+        String[] posMapped = { "POS_DET", "POS_NOUN", "POS_NOUN" };
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
     }
@@ -119,7 +119,7 @@ public class PennTreebankChunkedReaderTest
 
         String[] posOriginal = { "VBG", "NN" };
 
-        String[] posMapped = { "VERB", "NOUN" };
+        String[] posMapped = { "POS_VERB", "POS_NOUN" };
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
     }
