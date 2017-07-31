@@ -98,9 +98,9 @@ public class BinaryCasWriterReaderTest
     public void testSReinitializeInZIP()
         throws Exception
     {
-        write("jar:file:" + testFolder.getPath() + "/archive.zip", "S", true);
-        read("jar:file:" + testFolder.getPath() + "/archive.zip", NONE, true, false); // Type system is reinitialized from the persisted type system
-        read("jar:file:" + testFolder.getPath() + "/archive.zip", NONE, true, true);
+        write("jar:" + testFolder.toURI().toURL() + "/archive.zip", "S", true);
+        read("jar:" + testFolder.toURI().toURL() + "/archive.zip", NONE, true, false); // Type system is reinitialized from the persisted type system
+        read("jar:" + testFolder.toURI().toURL() + "/archive.zip", NONE, true, true);
     }
 
     @Test
