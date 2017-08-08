@@ -37,7 +37,6 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
@@ -63,7 +62,6 @@ import edu.stanford.nlp.util.CoreMap;
 /**
  * Stanford Named Entity Recognizer component.
  */
-@MimeTypeCapability(MimeTypes.APPLICATION_X_STANFORDNLP_NER)
 @ResourceMetaData(name="CoreNLP Named Entity Recogizer (old API)")
 @TypeCapability(
         inputs = {

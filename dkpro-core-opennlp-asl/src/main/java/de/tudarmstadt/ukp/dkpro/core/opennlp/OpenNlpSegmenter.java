@@ -31,7 +31,6 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
@@ -48,7 +47,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 /**
  * Tokenizer and sentence splitter using OpenNLP.
  */
-@MimeTypeCapability({MimeTypes.APPLICATION_X_OPENNLP_SENT, MimeTypes.APPLICATION_X_OPENNLP_TOKEN})
 @ResourceMetaData(name="OpenNLP Segmenter")
 @TypeCapability(
 	    outputs = {

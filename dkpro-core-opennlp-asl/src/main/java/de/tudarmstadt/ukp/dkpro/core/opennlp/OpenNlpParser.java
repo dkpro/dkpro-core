@@ -39,7 +39,6 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.FSCollectionFactory;
@@ -67,7 +66,6 @@ import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionPr
  * OpenNLP parser. The parser ignores existing POS tags and internally creates new ones. However,
  * these tags are only added as annotation if explicitly requested via {@link #PARAM_WRITE_POS}.
  */
-@MimeTypeCapability(MimeTypes.APPLICATION_X_OPENNLP_PARSER)
 @ResourceMetaData(name="OpenNLP Parser")
 @TypeCapability(
 	    inputs = {

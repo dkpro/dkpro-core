@@ -30,10 +30,5 @@ public @interface ResourceParameter {
      *
      * @return the supported MIME types
      */
-    String[] value() default NO_DEFAULT_VALUE;
-
-    /**
-     * Provides the default value that tells the ResourceParameter that no value has been provided.
-     */
-    public static final String NO_DEFAULT_VALUE = "org.apache.uima.fit.descriptor.MimeTypeCapability.NO_DEFAULT_VALUE";
+    String[] value() default {};
 }

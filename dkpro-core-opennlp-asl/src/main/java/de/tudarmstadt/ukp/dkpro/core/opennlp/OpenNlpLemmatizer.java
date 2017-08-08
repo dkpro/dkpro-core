@@ -28,7 +28,6 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
@@ -48,7 +47,6 @@ import opennlp.tools.lemmatizer.LemmatizerModel;
 /**
  * Lemmatizer using OpenNLP.
  */
-@MimeTypeCapability(MimeTypes.APPLICATION_X_OPENNLP_LEMMA)
 @ResourceMetaData(name="OpenNLP Lemmatizer")
 @TypeCapability(
         inputs = { 

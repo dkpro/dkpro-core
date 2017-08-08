@@ -34,7 +34,6 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
@@ -58,7 +57,6 @@ import opennlp.tools.util.Span;
 /**
  * OpenNLP name finder wrapper.
  */
-@MimeTypeCapability(MimeTypes.APPLICATION_X_OPENNLP_NER)
 @ResourceMetaData(name="OpenNLP Named Entity Recognizer")
 @TypeCapability(
         inputs = {
