@@ -77,6 +77,19 @@ public final class MimeTypes
     public final static String TEXT_X_PTB_COMBINED = "text/x.org.dkpro.ptb-combined";
     public final static String TEXT_X_REUTERS21578 = "text/x.org.dkpro.reuters21578";
 
+    // OpenNLP model types
+    public final static String APPLICATION_X_OPENNLP_CHUNK = "application/x.org.dkpro.core.opennlp.chunk";
+    public final static String APPLICATION_X_OPENNLP_LEMMA = "application/x.org.dkpro.core.opennlp.lemma";
+    public final static String APPLICATION_X_OPENNLP_NER = "application/x.org.dkpro.core.opennlp.ner";
+    public final static String APPLICATION_X_OPENNLP_PARSER = "application/x.org.dkpro.core.opennlp.parser";
+    public final static String APPLICATION_X_OPENNLP_TAGGER = "application/x.org.dkpro.core.opennlp.tagger";
+    public final static String APPLICATION_X_OPENNLP_SENT = "application/x.org.dkpro.core.opennlp.sent";
+    public final static String APPLICATION_X_OPENNLP_TOKEN = "application/x.org.dkpro.core.opennlp.token";
+
+    // StanfordNLP model types
+    public final static String APPLICATION_X_STANFORDNLP_NER = "application/x.org.dkpro.core.stanfordnlp.ner";
+    public final static String APPLICATION_X_STANFORDNLP_TAGGER = "application/x.org.dkpro.core.stanfordnlp.tagger";
+
     private MimeTypes()
     {
         // No instances

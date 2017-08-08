@@ -43,6 +43,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
@@ -51,6 +52,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.io.IobEncoder;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.stanford.nlp.ie.crf.CRFClassifier;
@@ -60,6 +62,7 @@ import edu.stanford.nlp.sequences.SeqClassifierFlags;
 /**
  * Train a NER model for Stanford CoreNLP Named Entity Recognizer.
  */
+@MimeTypeCapability(MimeTypes.APPLICATION_X_STANFORDNLP_NER)
 @ResourceMetaData(name="CoreNLP Named Entity Recognizer Trainer")
 public class StanfordNamedEntityRecognizerTrainer
     extends JCasConsumer_ImplBase

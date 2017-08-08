@@ -20,9 +20,11 @@ package de.tudarmstadt.ukp.dkpro.core.opennlp;
 import java.util.concurrent.Callable;
 
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.CasPosSampleStream;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTrainerBase;
 import opennlp.tools.ml.BeamSearch;
@@ -37,6 +39,7 @@ import opennlp.tools.util.model.BaseModel;
 /**
  * Train a POS tagging model for OpenNLP.
  */
+@MimeTypeCapability(MimeTypes.APPLICATION_X_OPENNLP_TAGGER)
 @ResourceMetaData(name="OpenNLP POS-Tagger Trainer")
 public class OpenNlpPosTaggerTrainer
     extends OpenNlpTrainerBase<CasPosSampleStream>

@@ -37,6 +37,8 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ResourceParameter;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableStreamProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
@@ -72,6 +74,7 @@ public class OpenNlpSegmenter
 	 */
 	public static final String PARAM_SEGMENTATION_MODEL_LOCATION = ComponentParameters.PARAM_SEGMENTATION_MODEL_LOCATION;
 	@ConfigurationParameter(name = PARAM_SEGMENTATION_MODEL_LOCATION, mandatory = false)
+	@ResourceParameter(MimeTypes.APPLICATION_X_OPENNLP_SENT)
 	protected String segmentationModelLocation;
 	
 	/**
@@ -79,6 +82,7 @@ public class OpenNlpSegmenter
      */
     public static final String PARAM_TOKENIZATION_MODEL_LOCATION = ComponentParameters.PARAM_TOKENIZATION_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_TOKENIZATION_MODEL_LOCATION, mandatory = false)
+	@ResourceParameter(MimeTypes.APPLICATION_X_OPENNLP_TOKEN)
     protected String tokenizationModelLocation;
 
 	private CasConfigurableProviderBase<SentenceDetectorME> sentenceModelProvider;
