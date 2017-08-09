@@ -41,15 +41,15 @@ public class ClearNlpPosTaggerTest
 
         runTest("en", null, "This is a test . \n",
                 new String[] { "DT",  "VBZ",  "DT",  "NN",   "." },
-                new String[] { "DET", "VERB", "DET", "NOUN", "PUNCT" });
+                new String[] { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", null, "A neural net . \n",
                 new String[] { "DT",  "JJ",  "NN",   "." },
-                new String[] { "DET", "ADJ", "NOUN", "PUNCT" });
+                new String[] { "POS_DET", "POS_ADJ", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", null, "John is purchasing oranges . \n",
                 new String[] { "NNP",  "VBZ",  "VBG",  "NNS",  "." },
-                new String[] { "PROPN","VERB", "VERB", "NOUN", "PUNCT" });
+                new String[] { "POS_PROPN", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_PUNCT" });
     }
 
 	@Test
@@ -58,15 +58,15 @@ public class ClearNlpPosTaggerTest
 	{
         runTest("en", "mayo", "This is a test . \n",
 				new String[] { "DT",  "VBZ",  "DT",  "NN",   "." },
-				new String[] { "DET", "VERB", "DET", "NOUN", "PUNCT" });
+				new String[] { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", "mayo", "A neural net . \n",
         		new String[] { "DT",  "JJ",  "NN",   "." },
-        		new String[] { "DET", "ADJ", "NOUN", "PUNCT" });
+        		new String[] { "POS_DET", "POS_ADJ", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", "mayo", "John is purchasing oranges . \n",
         		new String[] { "NNP",  "VBZ",  "VBG",  "NNS",  "." },
-        		new String[] { "PROPN","VERB", "VERB", "NOUN", "PUNCT" });
+        		new String[] { "POS_PROPN", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_PUNCT" });
     }
 
 	private void runTest(String language, String variant, String testDocument, String[] tags,

@@ -58,8 +58,8 @@ public class RfTaggerTest
         
         String[] posOrig = { "V", "P", "N", "J", "V", "P", "R", "A", "N", "Z" };
         
-        String[] posMapped = { "VERB", "PRON", "NOUN", "CONJ", "VERB", "PRON", "ADP", "ADJ", "NOUN",
-                "PUNCT" };
+        String[] posMapped = { "POS_VERB", "POS_PRON", "POS_NOUN", "POS_CONJ", "POS_VERB",
+                "POS_PRON", "POS_ADP", "POS_ADJ", "POS_NOUN", "POS_PUNCT" };
         
         String[] morph = {
                 "[  0,  4]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - Vzal (V.p.Y.S.-.-.-.X.R.-.A.A.-.-.-)",
@@ -723,8 +723,8 @@ public class RfTaggerTest
         
         String[] posOrig = { "PRO", "VFIN", "PRO", "N", "CONJ", "VFIN", "PRO", "ART", "N", "APPRART", "N", "SYM" };
         
-        String[] posMapped = { "PRON", "VERB", "PRON", "NOUN", "CONJ", "VERB", "PRON", "DET",
-                "NOUN", "ADP", "NOUN", "PUNCT" };
+        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_PRON", "POS_NOUN", "POS_CONJ",
+                "POS_VERB", "POS_PRON", "POS_DET", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_PUNCT" };
         
         String[] morph = {
                 "[  0,  2]     -     -  Nom    -    -  Masc    -    -  Sing      -  3    -  Prs    -     -      -     - Er (PRO.Pers.Subst.3.Nom.Sg.Masc)",

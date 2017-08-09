@@ -34,12 +34,12 @@ ROOT
    constituentType: "VROOT"
    children: FSArray
 [``]
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 0
    end: 2
    PosValue: "$("
-   coarseValue: "PUNCT"
+   coarseValue: "POS_PUNCT"
 [``]
 Lemma
    sofa: _InitialView
@@ -62,12 +62,12 @@ Token
       begin: 0
       end: 2
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 0
       end: 2
       PosValue: "$("
-      coarseValue: "PUNCT"
+      coarseValue: "POS_PUNCT"
    id: "s1_1"
 [Ross Perot wäre vielleicht ein prächtiger Diktator]
 Constituent
@@ -103,12 +103,12 @@ Constituent
    children: FSArray
    syntacticFunction: "SB"
 [Ross]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 3
    end: 7
    PosValue: "NE"
-   coarseValue: "PROPN"
+   coarseValue: "POS_PROPN"
 [Ross]
 Lemma
    sofa: _InitialView
@@ -144,20 +144,20 @@ Token
       begin: 3
       end: 7
       value: "Ross"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 3
       end: 7
       PosValue: "NE"
-      coarseValue: "PROPN"
+      coarseValue: "POS_PROPN"
    id: "s1_2"
 [Perot]
-PROPN
+POS_PROPN
    sofa: _InitialView
    begin: 8
    end: 13
    PosValue: "NE"
-   coarseValue: "PROPN"
+   coarseValue: "POS_PROPN"
 [Perot]
 Lemma
    sofa: _InitialView
@@ -193,20 +193,20 @@ Token
       begin: 8
       end: 13
       value: "Perot"
-   pos: PROPN
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 8
       end: 13
       PosValue: "NE"
-      coarseValue: "PROPN"
+      coarseValue: "POS_PROPN"
    id: "s1_3"
 [wäre]
-VERB
+POS_VERB
    sofa: _InitialView
    begin: 14
    end: 18
    PosValue: "VAFIN"
-   coarseValue: "VERB"
+   coarseValue: "POS_VERB"
 [wäre]
 Lemma
    sofa: _InitialView
@@ -235,20 +235,20 @@ Token
       begin: 14
       end: 18
       value: "sein"
-   pos: VERB
+   pos: POS_VERB
       sofa: _InitialView
       begin: 14
       end: 18
       PosValue: "VAFIN"
-      coarseValue: "VERB"
+      coarseValue: "POS_VERB"
    id: "s1_4"
 [vielleicht]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 19
    end: 29
    PosValue: "ADV"
-   coarseValue: "ADV"
+   coarseValue: "POS_ADV"
 [vielleicht]
 Lemma
    sofa: _InitialView
@@ -277,12 +277,12 @@ Token
       begin: 19
       end: 29
       value: "vielleicht"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 19
       end: 29
       PosValue: "ADV"
-      coarseValue: "ADV"
+      coarseValue: "POS_ADV"
    id: "s1_5"
 [ein prächtiger Diktator]
 Constituent
@@ -305,12 +305,12 @@ Constituent
    children: FSArray
    syntacticFunction: "PD"
 [ein]
-DET
+POS_DET
    sofa: _InitialView
    begin: 30
    end: 33
    PosValue: "ART"
-   coarseValue: "DET"
+   coarseValue: "POS_DET"
 [ein]
 Lemma
    sofa: _InitialView
@@ -346,20 +346,20 @@ Token
       begin: 30
       end: 33
       value: "ein"
-   pos: DET
+   pos: POS_DET
       sofa: _InitialView
       begin: 30
       end: 33
       PosValue: "ART"
-      coarseValue: "DET"
+      coarseValue: "POS_DET"
    id: "s1_6"
 [prächtiger]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 34
    end: 44
    PosValue: "ADJA"
-   coarseValue: "ADJ"
+   coarseValue: "POS_ADJ"
 [prächtiger]
 Lemma
    sofa: _InitialView
@@ -395,20 +395,20 @@ Token
       begin: 34
       end: 44
       value: "prächtig"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 34
       end: 44
       PosValue: "ADJA"
-      coarseValue: "ADJ"
+      coarseValue: "POS_ADJ"
    id: "s1_7"
 [Diktator]
-NOUN
+POS_NOUN
    sofa: _InitialView
    begin: 45
    end: 53
    PosValue: "NN"
-   coarseValue: "NOUN"
+   coarseValue: "POS_NOUN"
 [Diktator]
 Lemma
    sofa: _InitialView
@@ -444,20 +444,20 @@ Token
       begin: 45
       end: 53
       value: "Diktator"
-   pos: NOUN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 45
       end: 53
       PosValue: "NN"
-      coarseValue: "NOUN"
+      coarseValue: "POS_NOUN"
    id: "s1_8"
 ['']
-PUNCT
+POS_PUNCT
    sofa: _InitialView
    begin: 54
    end: 56
    PosValue: "$("
-   coarseValue: "PUNCT"
+   coarseValue: "POS_PUNCT"
 ['']
 Lemma
    sofa: _InitialView
@@ -480,12 +480,12 @@ Token
       begin: 54
       end: 56
       value: "--"
-   pos: PUNCT
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 54
       end: 56
       PosValue: "$("
-      coarseValue: "PUNCT"
+      coarseValue: "POS_PUNCT"
    id: "s1_9"
 -------- View _InitialView end ----------------------------------
 
