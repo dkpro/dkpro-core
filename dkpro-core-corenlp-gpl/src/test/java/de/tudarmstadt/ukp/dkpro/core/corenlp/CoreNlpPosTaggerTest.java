@@ -57,24 +57,24 @@ public class CoreNlpPosTaggerTest
         throws Exception
     {
         runTest("en", "fast.41", "This is a test . \n",
-                new String[] { "DT",  "VBZ", "DT",  "NN", "." },
-                new String[] { "POS_DET", "POS_VERB",   "POS_DET", "POS_NOUN", "POS_PUNCT" });
+                new String[] { "DT", "VBZ", "DT", "NN", "." },
+                new String[] { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", "twitter", "A neural net . \n",
-                new String[] { "DT",  "JJ",  "NN", "." },
+                new String[] { "DT", "JJ", "NN", "." },
                 new String[] { "POS_DET", "POS_ADJ", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", "twitter-fast", "John is purchasing oranges . \n",
                 new String[] { "NNP", "VBZ", "VBG", "NNS", "." },
-                new String[] { "POS_PROPN",  "POS_VERB",   "POS_VERB",   "POS_NOUN",  "POS_PUNCT" });
+                new String[] { "POS_PROPN", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", "caseless-left3words-distsim", "john is purchasing oranges . \n",
                 new String[] { "NNP", "VBZ", "VBG", "NNS", "." },
-                new String[] { "POS_PROPN",  "POS_VERB",   "POS_VERB",   "POS_NOUN",  "POS_PUNCT" });
+                new String[] { "POS_PROPN", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", "wsj-0-18-caseless-left3words-distsim", "john is purchasing oranges . \n",
                 new String[] { "NNP", "VBZ", "VBG", "NNS", "." },
-                new String[] { "PROPN",  "VERB",   "VERB",   "NOUN",  "PUNCT" });
+                new String[] { "POS_PROPN", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_PUNCT" });
 
     }
 
