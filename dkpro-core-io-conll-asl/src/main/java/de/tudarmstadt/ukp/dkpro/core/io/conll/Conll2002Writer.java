@@ -101,14 +101,14 @@ public class Conll2002Writer
         Type neType = JCasUtil.getType(aJCas, NamedEntity.class);
         Feature neValue = neType.getFeatureByBaseName("value");
 
+        // Named Entities
+        IobEncoder encoder = new IobEncoder(aJCas.getCas(), neType, neValue);
+
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             HashMap<Token, Row> ctokens = new LinkedHashMap<Token, Row>();
 
             // Tokens
             List<Token> tokens = selectCovered(Token.class, sentence);
-
-            // Named Entities
-            IobEncoder encoder = new IobEncoder(aJCas.getCas(), neType, neValue);
 
             for (Token token:tokens) {
                 Row row = new Row();

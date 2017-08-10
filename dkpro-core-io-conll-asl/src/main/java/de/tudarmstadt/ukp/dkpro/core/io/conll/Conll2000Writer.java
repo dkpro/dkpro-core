@@ -104,14 +104,14 @@ public class Conll2000Writer
         Type chunkType = JCasUtil.getType(aJCas, Chunk.class);
         Feature chunkValue = chunkType.getFeatureByBaseName("chunkValue");
 
+        // Chunks
+        IobEncoder encoder = new IobEncoder(aJCas.getCas(), chunkType, chunkValue);
+
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             HashMap<Token, Row> ctokens = new LinkedHashMap<Token, Row>();
 
             // Tokens
             List<Token> tokens = selectCovered(Token.class, sentence);
-
-            // Chunks
-            IobEncoder encoder = new IobEncoder(aJCas.getCas(), chunkType, chunkValue);
 
             for (Token token:tokens) {
                 Row row = new Row();
