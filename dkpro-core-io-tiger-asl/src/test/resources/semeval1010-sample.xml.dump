@@ -52,7 +52,7 @@ POS_VERB
    begin: 0
    end: 4
    PosValue: "VB"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [Save]
 Lemma
    sofa: _InitialView
@@ -86,7 +86,7 @@ Token
       begin: 0
       end: 4
       PosValue: "VB"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
    id: "s115_0"
 [for this one excursion ,]
 Constituent
@@ -113,7 +113,7 @@ POS_ADP
    begin: 5
    end: 8
    PosValue: "IN"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [for]
 Lemma
    sofa: _InitialView
@@ -153,7 +153,7 @@ Token
       begin: 5
       end: 8
       PosValue: "IN"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
    id: "s115_1"
 [this one excursion ,]
 SemArg
@@ -191,7 +191,7 @@ POS_DET
    begin: 9
    end: 13
    PosValue: "DT"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [this]
 Lemma
    sofa: _InitialView
@@ -237,7 +237,7 @@ Token
       begin: 9
       end: 13
       PosValue: "DT"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
    id: "s115_2"
 [one]
 POS_NUM
@@ -245,7 +245,7 @@ POS_NUM
    begin: 14
    end: 17
    PosValue: "CD"
-   coarseValue: "POS_NUM"
+   coarseValue: "NUM"
 [one]
 Lemma
    sofa: _InitialView
@@ -291,7 +291,7 @@ Token
       begin: 14
       end: 17
       PosValue: "CD"
-      coarseValue: "POS_NUM"
+      coarseValue: "NUM"
    id: "s115_3"
 [excursion]
 POS_NOUN
@@ -299,7 +299,7 @@ POS_NOUN
    begin: 18
    end: 27
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [excursion]
 Lemma
    sofa: _InitialView
@@ -345,7 +345,7 @@ Token
       begin: 18
       end: 27
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
    id: "s115_4"
 [excursion]
 SemPred
@@ -419,7 +419,7 @@ POS_PRON
    begin: 30
    end: 32
    PosValue: "PRP"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [he]
 Lemma
    sofa: _InitialView
@@ -447,7 +447,7 @@ Token
       begin: 30
       end: 32
       PosValue: "PRP"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
    id: "s115_6"
 [he]
 SemArg
@@ -505,7 +505,7 @@ POS_VERB
    begin: 33
    end: 38
    PosValue: "VBD"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [spent]
 Lemma
    sofa: _InitialView
@@ -539,7 +539,7 @@ Token
       begin: 33
       end: 38
       PosValue: "VBD"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
    id: "s115_7"
 [his days]
 Constituent
@@ -566,7 +566,7 @@ POS_PRON
    begin: 39
    end: 42
    PosValue: "PRP$"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [his]
 Lemma
    sofa: _InitialView
@@ -606,7 +606,7 @@ Token
       begin: 39
       end: 42
       PosValue: "PRP$"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
    id: "s115_8"
 [his]
 SemArg
@@ -626,7 +626,7 @@ POS_NOUN
    begin: 43
    end: 47
    PosValue: "NNS"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [days]
 Lemma
    sofa: _InitialView
@@ -666,7 +666,7 @@ Token
       begin: 43
       end: 47
       PosValue: "NNS"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
    id: "s115_9"
 [days]
 SemArg
@@ -730,7 +730,7 @@ POS_ADP
    begin: 48
    end: 50
    PosValue: "IN"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [in]
 Lemma
    sofa: _InitialView
@@ -776,7 +776,7 @@ Token
       begin: 48
       end: 50
       PosValue: "IN"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
    id: "s115_10"
 [long and often solitary walks ,]
 Constituent
@@ -852,7 +852,7 @@ POS_ADJ
    begin: 51
    end: 55
    PosValue: "JJ"
-   coarseValue: "POS_ADJ"
+   coarseValue: "ADJ"
 [long]
 Lemma
    sofa: _InitialView
@@ -910,7 +910,7 @@ Token
       begin: 51
       end: 55
       PosValue: "JJ"
-      coarseValue: "POS_ADJ"
+      coarseValue: "ADJ"
    id: "s115_11"
 [long]
 SemPred
@@ -925,7 +925,7 @@ POS_CONJ
    begin: 56
    end: 59
    PosValue: "CC"
-   coarseValue: "POS_CONJ"
+   coarseValue: "CONJ"
 [and]
 Lemma
    sofa: _InitialView
@@ -983,7 +983,7 @@ Token
       begin: 56
       end: 59
       PosValue: "CC"
-      coarseValue: "POS_CONJ"
+      coarseValue: "CONJ"
    id: "s115_12"
 [often solitary]
 SemArg
@@ -1039,7 +1039,7 @@ POS_ADV
    begin: 60
    end: 65
    PosValue: "RB"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [often]
 Lemma
    sofa: _InitialView
@@ -1103,7 +1103,7 @@ Token
       begin: 60
       end: 65
       PosValue: "RB"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
    id: "s115_13"
 [solitary]
 POS_ADJ
@@ -1111,7 +1111,7 @@ POS_ADJ
    begin: 66
    end: 74
    PosValue: "JJ"
-   coarseValue: "POS_ADJ"
+   coarseValue: "ADJ"
 [solitary]
 Lemma
    sofa: _InitialView
@@ -1175,7 +1175,7 @@ Token
       begin: 66
       end: 74
       PosValue: "JJ"
-      coarseValue: "POS_ADJ"
+      coarseValue: "ADJ"
    id: "s115_14"
 [walks]
 POS_VERB
@@ -1183,7 +1183,7 @@ POS_VERB
    begin: 75
    end: 80
    PosValue: "VBZ"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [walks]
 Lemma
    sofa: _InitialView
@@ -1235,7 +1235,7 @@ Token
       begin: 75
       end: 80
       PosValue: "VBZ"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
    id: "s115_15"
 [walks]
 SemArg
@@ -1313,7 +1313,7 @@ POS_CONJ
    begin: 83
    end: 85
    PosValue: "CC"
-   coarseValue: "POS_CONJ"
+   coarseValue: "CONJ"
 [or]
 Lemma
    sofa: _InitialView
@@ -1353,7 +1353,7 @@ Token
       begin: 83
       end: 85
       PosValue: "CC"
-      coarseValue: "POS_CONJ"
+      coarseValue: "CONJ"
    id: "s115_17"
 [in chatting with a number of village gossips whose acquaintance he had cultivated .]
 Constituent
@@ -1386,7 +1386,7 @@ POS_ADP
    begin: 86
    end: 88
    PosValue: "IN"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [in]
 Lemma
    sofa: _InitialView
@@ -1432,7 +1432,7 @@ Token
       begin: 86
       end: 88
       PosValue: "IN"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
    id: "s115_18"
 [chatting with a number of village gossips whose acquaintance he had cultivated .]
 Constituent
@@ -1471,7 +1471,7 @@ POS_VERB
    begin: 89
    end: 97
    PosValue: "VBG"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [chatting]
 Lemma
    sofa: _InitialView
@@ -1523,7 +1523,7 @@ Token
       begin: 89
       end: 97
       PosValue: "VBG"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
    id: "s115_19"
 [chatting]
 SemPred
@@ -1580,7 +1580,7 @@ POS_ADP
    begin: 98
    end: 102
    PosValue: "IN"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [with]
 Lemma
    sofa: _InitialView
@@ -1638,7 +1638,7 @@ Token
       begin: 98
       end: 102
       PosValue: "IN"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
    id: "s115_20"
 [a number of village gossips whose acquaintance he had cultivated .]
 Constituent
@@ -1738,7 +1738,7 @@ POS_DET
    begin: 103
    end: 104
    PosValue: "DT"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [a]
 Lemma
    sofa: _InitialView
@@ -1808,7 +1808,7 @@ Token
       begin: 103
       end: 104
       PosValue: "DT"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
    id: "s115_21"
 [number]
 POS_NOUN
@@ -1816,7 +1816,7 @@ POS_NOUN
    begin: 105
    end: 111
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [number]
 Lemma
    sofa: _InitialView
@@ -1886,7 +1886,7 @@ Token
       begin: 105
       end: 111
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
    id: "s115_22"
 [number]
 SemArg
@@ -1960,7 +1960,7 @@ POS_ADP
    begin: 112
    end: 114
    PosValue: "IN"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [of]
 Lemma
    sofa: _InitialView
@@ -2030,7 +2030,7 @@ Token
       begin: 112
       end: 114
       PosValue: "IN"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
    id: "s115_23"
 [village gossips whose acquaintance he had cultivated .]
 Constituent
@@ -2154,7 +2154,7 @@ POS_NOUN
    begin: 115
    end: 122
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [village]
 Lemma
    sofa: _InitialView
@@ -2236,7 +2236,7 @@ Token
       begin: 115
       end: 122
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
    id: "s115_24"
 [gossips]
 POS_NOUN
@@ -2244,7 +2244,7 @@ POS_NOUN
    begin: 123
    end: 130
    PosValue: "NNS"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [gossips]
 Lemma
    sofa: _InitialView
@@ -2326,7 +2326,7 @@ Token
       begin: 123
       end: 130
       PosValue: "NNS"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
    id: "s115_25"
 [whose acquaintance he had cultivated .]
 Constituent
@@ -2462,7 +2462,7 @@ POS_PRON
    begin: 131
    end: 136
    PosValue: "WP$"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [whose]
 Lemma
    sofa: _InitialView
@@ -2550,7 +2550,7 @@ Token
       begin: 131
       end: 136
       PosValue: "WP$"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
    id: "s115_26"
 [acquaintance]
 POS_NOUN
@@ -2558,7 +2558,7 @@ POS_NOUN
    begin: 137
    end: 149
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [acquaintance]
 Lemma
    sofa: _InitialView
@@ -2646,7 +2646,7 @@ Token
       begin: 137
       end: 149
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
    id: "s115_27"
 [he had cultivated .]
 Constituent
@@ -2721,7 +2721,7 @@ POS_PRON
    begin: 150
    end: 152
    PosValue: "PRP"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [he]
 Lemma
    sofa: _InitialView
@@ -2809,7 +2809,7 @@ Token
       begin: 150
       end: 152
       PosValue: "PRP"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
    id: "s115_28"
 [he]
 SemArg
@@ -2902,7 +2902,7 @@ POS_VERB
    begin: 153
    end: 156
    PosValue: "VBD"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [had]
 Lemma
    sofa: _InitialView
@@ -2996,7 +2996,7 @@ Token
       begin: 153
       end: 156
       PosValue: "VBD"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
    id: "s115_29"
 [cultivated .]
 Constituent
@@ -3083,7 +3083,7 @@ POS_VERB
    begin: 157
    end: 167
    PosValue: "VBN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [cultivated]
 Lemma
    sofa: _InitialView
@@ -3183,7 +3183,7 @@ Token
       begin: 157
       end: 167
       PosValue: "VBN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
    id: "s115_30"
 [cultivated]
 SemArg

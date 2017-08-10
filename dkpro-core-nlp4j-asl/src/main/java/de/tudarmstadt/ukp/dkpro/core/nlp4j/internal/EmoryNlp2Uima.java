@@ -25,6 +25,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.BilouDecoder;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
@@ -50,8 +51,7 @@ public class EmoryNlp2Uima
             POS posAnno = (POS) aCas.createAnnotation(posTag, t.getBegin(), t.getEnd());
             // To save memory, we typically intern() tag strings
             posAnno.setPosValue(internStrings ? tag.intern() : tag);
-            posAnno.setCoarseValue(posAnno.getClass().equals(POS.class) ? null
-                    : posTag.getShortName().intern());
+            POSUtils.assignCoarseValue(posAnno);
             posAnno.addToIndexes();
             
             // Connect the POS annotation to the respective token annotation

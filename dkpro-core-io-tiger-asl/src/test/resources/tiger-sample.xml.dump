@@ -39,7 +39,7 @@ POS_PUNCT
    begin: 0
    end: 2
    PosValue: "$("
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [``]
 Lemma
    sofa: _InitialView
@@ -67,7 +67,7 @@ Token
       begin: 0
       end: 2
       PosValue: "$("
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
    id: "s1_1"
 [Ross Perot wäre vielleicht ein prächtiger Diktator]
 Constituent
@@ -108,7 +108,7 @@ POS_PROPN
    begin: 3
    end: 7
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Ross]
 Lemma
    sofa: _InitialView
@@ -149,7 +149,7 @@ Token
       begin: 3
       end: 7
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
    id: "s1_2"
 [Perot]
 POS_PROPN
@@ -157,7 +157,7 @@ POS_PROPN
    begin: 8
    end: 13
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Perot]
 Lemma
    sofa: _InitialView
@@ -198,7 +198,7 @@ Token
       begin: 8
       end: 13
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
    id: "s1_3"
 [wäre]
 POS_VERB
@@ -206,7 +206,7 @@ POS_VERB
    begin: 14
    end: 18
    PosValue: "VAFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [wäre]
 Lemma
    sofa: _InitialView
@@ -240,7 +240,7 @@ Token
       begin: 14
       end: 18
       PosValue: "VAFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
    id: "s1_4"
 [vielleicht]
 POS_ADV
@@ -248,7 +248,7 @@ POS_ADV
    begin: 19
    end: 29
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [vielleicht]
 Lemma
    sofa: _InitialView
@@ -282,7 +282,7 @@ Token
       begin: 19
       end: 29
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
    id: "s1_5"
 [ein prächtiger Diktator]
 Constituent
@@ -310,7 +310,7 @@ POS_DET
    begin: 30
    end: 33
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [ein]
 Lemma
    sofa: _InitialView
@@ -351,7 +351,7 @@ Token
       begin: 30
       end: 33
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
    id: "s1_6"
 [prächtiger]
 POS_ADJ
@@ -359,7 +359,7 @@ POS_ADJ
    begin: 34
    end: 44
    PosValue: "ADJA"
-   coarseValue: "POS_ADJ"
+   coarseValue: "ADJ"
 [prächtiger]
 Lemma
    sofa: _InitialView
@@ -400,7 +400,7 @@ Token
       begin: 34
       end: 44
       PosValue: "ADJA"
-      coarseValue: "POS_ADJ"
+      coarseValue: "ADJ"
    id: "s1_7"
 [Diktator]
 POS_NOUN
@@ -408,7 +408,7 @@ POS_NOUN
    begin: 45
    end: 53
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Diktator]
 Lemma
    sofa: _InitialView
@@ -449,7 +449,7 @@ Token
       begin: 45
       end: 53
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
    id: "s1_8"
 ['']
 POS_PUNCT
@@ -457,7 +457,7 @@ POS_PUNCT
    begin: 54
    end: 56
    PosValue: "$("
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 ['']
 Lemma
    sofa: _InitialView
@@ -485,7 +485,7 @@ Token
       begin: 54
       end: 56
       PosValue: "$("
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
    id: "s1_9"
 -------- View _InitialView end ----------------------------------
 

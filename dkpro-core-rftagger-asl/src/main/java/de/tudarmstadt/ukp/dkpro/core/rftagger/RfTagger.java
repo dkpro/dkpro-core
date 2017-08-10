@@ -45,6 +45,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.morph.MorphologicalFeaturesParser;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
@@ -297,8 +298,7 @@ public class RfTagger
             Type posTag = mappingProvider.getTagType(tag);
             POS posAnno = (POS) aJCas.getCas().createAnnotation(posTag, begin, end);
             posAnno.setPosValue(tag);
-            posAnno.setCoarseValue(posAnno.getClass().equals(POS.class) ? null
-                    : posTag.getShortName().intern());
+            POSUtils.assignCoarseValue(posAnno);
             posAnno.addToIndexes();
             tokens.get(i).setPos(posAnno);
 

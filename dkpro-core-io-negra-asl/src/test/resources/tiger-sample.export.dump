@@ -36,7 +36,7 @@ POS_PUNCT
    begin: 0
    end: 2
    PosValue: "$("
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [``]
 Lemma
    sofa: _InitialView
@@ -64,7 +64,7 @@ Token
       begin: 0
       end: 2
       PosValue: "$("
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [Ross Perot wäre vielleicht ein prächtiger Diktator]
 Constituent
    sofa: _InitialView
@@ -106,7 +106,7 @@ POS_PROPN
    begin: 3
    end: 7
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Ross]
 Lemma
    sofa: _InitialView
@@ -148,14 +148,14 @@ Token
       begin: 3
       end: 7
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [Perot]
 POS_PROPN
    sofa: _InitialView
    begin: 8
    end: 13
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Perot]
 Lemma
    sofa: _InitialView
@@ -197,14 +197,14 @@ Token
       begin: 8
       end: 13
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [wäre]
 POS_VERB
    sofa: _InitialView
    begin: 14
    end: 18
    PosValue: "VAFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [wäre]
 Lemma
    sofa: _InitialView
@@ -239,14 +239,14 @@ Token
       begin: 14
       end: 18
       PosValue: "VAFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [vielleicht]
 POS_ADV
    sofa: _InitialView
    begin: 19
    end: 29
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [vielleicht]
 Lemma
    sofa: _InitialView
@@ -281,7 +281,7 @@ Token
       begin: 19
       end: 29
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [ein prächtiger Diktator]
 Constituent
    sofa: _InitialView
@@ -309,7 +309,7 @@ POS_DET
    begin: 30
    end: 33
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [ein]
 Lemma
    sofa: _InitialView
@@ -351,14 +351,14 @@ Token
       begin: 30
       end: 33
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [prächtiger]
 POS_ADJ
    sofa: _InitialView
    begin: 34
    end: 44
    PosValue: "ADJA"
-   coarseValue: "POS_ADJ"
+   coarseValue: "ADJ"
 [prächtiger]
 Lemma
    sofa: _InitialView
@@ -400,14 +400,14 @@ Token
       begin: 34
       end: 44
       PosValue: "ADJA"
-      coarseValue: "POS_ADJ"
+      coarseValue: "ADJ"
 [Diktator]
 POS_NOUN
    sofa: _InitialView
    begin: 45
    end: 53
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Diktator]
 Lemma
    sofa: _InitialView
@@ -449,14 +449,14 @@ Token
       begin: 45
       end: 53
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 ['']
 POS_PUNCT
    sofa: _InitialView
    begin: 54
    end: 56
    PosValue: "$("
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 ['']
 Lemma
    sofa: _InitialView
@@ -484,7 +484,7 @@ Token
       begin: 54
       end: 56
       PosValue: "$("
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [Konzernchefs lehnen den Milliardär als US-Präsidenten ab /]
 Sentence
    sofa: _InitialView
@@ -523,7 +523,7 @@ POS_NOUN
    begin: 57
    end: 69
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Konzernchefs]
 Lemma
    sofa: _InitialView
@@ -558,14 +558,14 @@ Token
       begin: 57
       end: 69
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [lehnen]
 POS_VERB
    sofa: _InitialView
    begin: 70
    end: 76
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [lehnen]
 Lemma
    sofa: _InitialView
@@ -600,7 +600,7 @@ Token
       begin: 70
       end: 76
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [den Milliardär]
 Constituent
    sofa: _InitialView
@@ -628,7 +628,7 @@ POS_DET
    begin: 77
    end: 80
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [den]
 Lemma
    sofa: _InitialView
@@ -670,14 +670,14 @@ Token
       begin: 77
       end: 80
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [Milliardär]
 POS_NOUN
    sofa: _InitialView
    begin: 81
    end: 91
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Milliardär]
 Lemma
    sofa: _InitialView
@@ -719,7 +719,7 @@ Token
       begin: 81
       end: 91
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [als US-Präsidenten]
 Constituent
    sofa: _InitialView
@@ -747,7 +747,7 @@ POS_ADP
    begin: 92
    end: 95
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [als]
 Lemma
    sofa: _InitialView
@@ -789,14 +789,14 @@ Token
       begin: 92
       end: 95
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [US-Präsidenten]
 POS_NOUN
    sofa: _InitialView
    begin: 96
    end: 110
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [US-Präsidenten]
 Lemma
    sofa: _InitialView
@@ -838,14 +838,14 @@ Token
       begin: 96
       end: 110
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [ab]
 POS_VERB
    sofa: _InitialView
    begin: 111
    end: 113
    PosValue: "PTKVZ"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [ab]
 Lemma
    sofa: _InitialView
@@ -880,14 +880,14 @@ Token
       begin: 111
       end: 113
       PosValue: "PTKVZ"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [/]
 POS_PUNCT
    sofa: _InitialView
    begin: 114
    end: 115
    PosValue: "$("
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [/]
 Lemma
    sofa: _InitialView
@@ -915,7 +915,7 @@ Token
       begin: 114
       end: 115
       PosValue: "$("
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [Texaner gibt nur vage Auskunft über seine Wirtschaftspolitik]
 Sentence
    sofa: _InitialView
@@ -954,7 +954,7 @@ POS_NOUN
    begin: 116
    end: 123
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Texaner]
 Lemma
    sofa: _InitialView
@@ -989,14 +989,14 @@ Token
       begin: 116
       end: 123
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [gibt]
 POS_VERB
    sofa: _InitialView
    begin: 124
    end: 128
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [gibt]
 Lemma
    sofa: _InitialView
@@ -1031,7 +1031,7 @@ Token
       begin: 124
       end: 128
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [nur vage Auskunft über seine Wirtschaftspolitik]
 Constituent
    sofa: _InitialView
@@ -1087,7 +1087,7 @@ POS_ADV
    begin: 129
    end: 132
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [nur]
 Lemma
    sofa: _InitialView
@@ -1136,14 +1136,14 @@ Token
       begin: 129
       end: 132
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [vage]
 POS_ADJ
    sofa: _InitialView
    begin: 133
    end: 137
    PosValue: "ADJA"
-   coarseValue: "POS_ADJ"
+   coarseValue: "ADJ"
 [vage]
 Lemma
    sofa: _InitialView
@@ -1192,14 +1192,14 @@ Token
       begin: 133
       end: 137
       PosValue: "ADJA"
-      coarseValue: "POS_ADJ"
+      coarseValue: "ADJ"
 [Auskunft]
 POS_NOUN
    sofa: _InitialView
    begin: 138
    end: 146
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Auskunft]
 Lemma
    sofa: _InitialView
@@ -1241,7 +1241,7 @@ Token
       begin: 138
       end: 146
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [über seine Wirtschaftspolitik]
 Constituent
    sofa: _InitialView
@@ -1276,7 +1276,7 @@ POS_ADP
    begin: 147
    end: 151
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [über]
 Lemma
    sofa: _InitialView
@@ -1325,14 +1325,14 @@ Token
       begin: 147
       end: 151
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [seine]
 POS_PRON
    sofa: _InitialView
    begin: 152
    end: 157
    PosValue: "PPOSAT"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [seine]
 Lemma
    sofa: _InitialView
@@ -1381,14 +1381,14 @@ Token
       begin: 152
       end: 157
       PosValue: "PPOSAT"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [Wirtschaftspolitik]
 POS_NOUN
    sofa: _InitialView
    begin: 158
    end: 176
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Wirtschaftspolitik]
 Lemma
    sofa: _InitialView
@@ -1437,7 +1437,7 @@ Token
       begin: 158
       end: 176
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [Der texanische Milliardär Ross Perot hat das politische Establishment in Washington aufgeschreckt .]
 Sentence
    sofa: _InitialView
@@ -1497,7 +1497,7 @@ POS_DET
    begin: 177
    end: 180
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [Der]
 Lemma
    sofa: _InitialView
@@ -1539,14 +1539,14 @@ Token
       begin: 177
       end: 180
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [texanische]
 POS_ADJ
    sofa: _InitialView
    begin: 181
    end: 191
    PosValue: "ADJA"
-   coarseValue: "POS_ADJ"
+   coarseValue: "ADJ"
 [texanische]
 Lemma
    sofa: _InitialView
@@ -1588,14 +1588,14 @@ Token
       begin: 181
       end: 191
       PosValue: "ADJA"
-      coarseValue: "POS_ADJ"
+      coarseValue: "ADJ"
 [Milliardär]
 POS_NOUN
    sofa: _InitialView
    begin: 192
    end: 202
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Milliardär]
 Lemma
    sofa: _InitialView
@@ -1637,7 +1637,7 @@ Token
       begin: 192
       end: 202
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [Ross Perot]
 Constituent
    sofa: _InitialView
@@ -1672,7 +1672,7 @@ POS_PROPN
    begin: 203
    end: 207
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Ross]
 Lemma
    sofa: _InitialView
@@ -1721,14 +1721,14 @@ Token
       begin: 203
       end: 207
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [Perot]
 POS_PROPN
    sofa: _InitialView
    begin: 208
    end: 213
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Perot]
 Lemma
    sofa: _InitialView
@@ -1777,14 +1777,14 @@ Token
       begin: 208
       end: 213
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [hat]
 POS_VERB
    sofa: _InitialView
    begin: 214
    end: 217
    PosValue: "VAFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [hat]
 Lemma
    sofa: _InitialView
@@ -1819,7 +1819,7 @@ Token
       begin: 214
       end: 217
       PosValue: "VAFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [das politische Establishment in Washington aufgeschreckt]
 Constituent
    sofa: _InitialView
@@ -1875,7 +1875,7 @@ POS_DET
    begin: 218
    end: 221
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [das]
 Lemma
    sofa: _InitialView
@@ -1924,14 +1924,14 @@ Token
       begin: 218
       end: 221
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [politische]
 POS_ADJ
    sofa: _InitialView
    begin: 222
    end: 232
    PosValue: "ADJA"
-   coarseValue: "POS_ADJ"
+   coarseValue: "ADJ"
 [politische]
 Lemma
    sofa: _InitialView
@@ -1980,14 +1980,14 @@ Token
       begin: 222
       end: 232
       PosValue: "ADJA"
-      coarseValue: "POS_ADJ"
+      coarseValue: "ADJ"
 [Establishment]
 POS_NOUN
    sofa: _InitialView
    begin: 233
    end: 246
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Establishment]
 Lemma
    sofa: _InitialView
@@ -2036,7 +2036,7 @@ Token
       begin: 233
       end: 246
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [in Washington]
 Constituent
    sofa: _InitialView
@@ -2078,7 +2078,7 @@ POS_ADP
    begin: 247
    end: 249
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [in]
 Lemma
    sofa: _InitialView
@@ -2134,14 +2134,14 @@ Token
       begin: 247
       end: 249
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [Washington]
 POS_PROPN
    sofa: _InitialView
    begin: 250
    end: 260
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Washington]
 Lemma
    sofa: _InitialView
@@ -2197,14 +2197,14 @@ Token
       begin: 250
       end: 260
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [aufgeschreckt]
 POS_VERB
    sofa: _InitialView
    begin: 261
    end: 274
    PosValue: "VVPP"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [aufgeschreckt]
 Lemma
    sofa: _InitialView
@@ -2246,14 +2246,14 @@ Token
       begin: 261
       end: 274
       PosValue: "VVPP"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [.]
 POS_PUNCT
    sofa: _InitialView
    begin: 275
    end: 276
    PosValue: "$."
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [.]
 Lemma
    sofa: _InitialView
@@ -2281,7 +2281,7 @@ Token
       begin: 275
       end: 276
       PosValue: "$."
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [Nach Meinungsumfragen liegt der parteilose Self-mademan gut im Rennen um den Chefsessel im Weißen Haus mit dem amtierenden Präsidenten George Bush und dem Demokraten Bill Clinton .]
 Sentence
    sofa: _InitialView
@@ -2341,7 +2341,7 @@ POS_ADP
    begin: 277
    end: 281
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [Nach]
 Lemma
    sofa: _InitialView
@@ -2383,14 +2383,14 @@ Token
       begin: 277
       end: 281
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [Meinungsumfragen]
 POS_NOUN
    sofa: _InitialView
    begin: 282
    end: 298
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Meinungsumfragen]
 Lemma
    sofa: _InitialView
@@ -2432,14 +2432,14 @@ Token
       begin: 282
       end: 298
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [liegt]
 POS_VERB
    sofa: _InitialView
    begin: 299
    end: 304
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [liegt]
 Lemma
    sofa: _InitialView
@@ -2474,7 +2474,7 @@ Token
       begin: 299
       end: 304
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [der parteilose Self-mademan]
 Constituent
    sofa: _InitialView
@@ -2502,7 +2502,7 @@ POS_DET
    begin: 305
    end: 308
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [der]
 Lemma
    sofa: _InitialView
@@ -2544,14 +2544,14 @@ Token
       begin: 305
       end: 308
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [parteilose]
 POS_ADJ
    sofa: _InitialView
    begin: 309
    end: 319
    PosValue: "ADJA"
-   coarseValue: "POS_ADJ"
+   coarseValue: "ADJ"
 [parteilose]
 Lemma
    sofa: _InitialView
@@ -2593,14 +2593,14 @@ Token
       begin: 309
       end: 319
       PosValue: "ADJA"
-      coarseValue: "POS_ADJ"
+      coarseValue: "ADJ"
 [Self-mademan]
 POS_X
    sofa: _InitialView
    begin: 320
    end: 332
    PosValue: "FM"
-   coarseValue: "POS_X"
+   coarseValue: "X"
 [Self-mademan]
 Lemma
    sofa: _InitialView
@@ -2642,14 +2642,14 @@ Token
       begin: 320
       end: 332
       PosValue: "FM"
-      coarseValue: "POS_X"
+      coarseValue: "X"
 [gut]
 POS_ADJ
    sofa: _InitialView
    begin: 333
    end: 336
    PosValue: "ADJD"
-   coarseValue: "POS_ADJ"
+   coarseValue: "ADJ"
 [gut]
 Lemma
    sofa: _InitialView
@@ -2684,7 +2684,7 @@ Token
       begin: 333
       end: 336
       PosValue: "ADJD"
-      coarseValue: "POS_ADJ"
+      coarseValue: "ADJ"
 [im Rennen um den Chefsessel im Weißen Haus mit dem amtierenden Präsidenten George Bush und dem Demokraten Bill Clinton]
 Constituent
    sofa: _InitialView
@@ -2712,7 +2712,7 @@ POS_ADP
    begin: 337
    end: 339
    PosValue: "APPRART"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [im]
 Lemma
    sofa: _InitialView
@@ -2754,14 +2754,14 @@ Token
       begin: 337
       end: 339
       PosValue: "APPRART"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [Rennen]
 POS_NOUN
    sofa: _InitialView
    begin: 340
    end: 346
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Rennen]
 Lemma
    sofa: _InitialView
@@ -2803,7 +2803,7 @@ Token
       begin: 340
       end: 346
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [um den Chefsessel im Weißen Haus]
 Constituent
    sofa: _InitialView
@@ -2838,7 +2838,7 @@ POS_ADP
    begin: 347
    end: 349
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [um]
 Lemma
    sofa: _InitialView
@@ -2887,14 +2887,14 @@ Token
       begin: 347
       end: 349
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [den]
 POS_DET
    sofa: _InitialView
    begin: 350
    end: 353
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [den]
 Lemma
    sofa: _InitialView
@@ -2943,14 +2943,14 @@ Token
       begin: 350
       end: 353
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [Chefsessel]
 POS_NOUN
    sofa: _InitialView
    begin: 354
    end: 364
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Chefsessel]
 Lemma
    sofa: _InitialView
@@ -2999,7 +2999,7 @@ Token
       begin: 354
       end: 364
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [im Weißen Haus]
 Constituent
    sofa: _InitialView
@@ -3041,7 +3041,7 @@ POS_ADP
    begin: 365
    end: 367
    PosValue: "APPRART"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [im]
 Lemma
    sofa: _InitialView
@@ -3097,7 +3097,7 @@ Token
       begin: 365
       end: 367
       PosValue: "APPRART"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [Weißen Haus]
 Constituent
    sofa: _InitialView
@@ -3195,7 +3195,7 @@ POS_ADJ
    begin: 368
    end: 374
    PosValue: "ADJA"
-   coarseValue: "POS_ADJ"
+   coarseValue: "ADJ"
 [Weißen]
 Lemma
    sofa: _InitialView
@@ -3265,14 +3265,14 @@ Token
       begin: 368
       end: 374
       PosValue: "ADJA"
-      coarseValue: "POS_ADJ"
+      coarseValue: "ADJ"
 [Haus]
 POS_NOUN
    sofa: _InitialView
    begin: 375
    end: 379
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Haus]
 Lemma
    sofa: _InitialView
@@ -3342,7 +3342,7 @@ Token
       begin: 375
       end: 379
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [mit dem amtierenden Präsidenten George Bush und dem Demokraten Bill Clinton]
 Constituent
    sofa: _InitialView
@@ -3377,7 +3377,7 @@ POS_ADP
    begin: 380
    end: 383
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [mit]
 Lemma
    sofa: _InitialView
@@ -3426,7 +3426,7 @@ Token
       begin: 380
       end: 383
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [dem amtierenden Präsidenten George Bush und dem Demokraten Bill Clinton]
 Constituent
    sofa: _InitialView
@@ -3510,7 +3510,7 @@ POS_DET
    begin: 384
    end: 387
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [dem]
 Lemma
    sofa: _InitialView
@@ -3573,14 +3573,14 @@ Token
       begin: 384
       end: 387
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [amtierenden]
 POS_ADJ
    sofa: _InitialView
    begin: 388
    end: 399
    PosValue: "ADJA"
-   coarseValue: "POS_ADJ"
+   coarseValue: "ADJ"
 [amtierenden]
 Lemma
    sofa: _InitialView
@@ -3643,14 +3643,14 @@ Token
       begin: 388
       end: 399
       PosValue: "ADJA"
-      coarseValue: "POS_ADJ"
+      coarseValue: "ADJ"
 [Präsidenten]
 POS_NOUN
    sofa: _InitialView
    begin: 400
    end: 411
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Präsidenten]
 Lemma
    sofa: _InitialView
@@ -3713,7 +3713,7 @@ Token
       begin: 400
       end: 411
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [George Bush]
 Constituent
    sofa: _InitialView
@@ -3769,7 +3769,7 @@ POS_PROPN
    begin: 412
    end: 418
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [George]
 Lemma
    sofa: _InitialView
@@ -3839,14 +3839,14 @@ Token
       begin: 412
       end: 418
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [Bush]
 POS_PROPN
    sofa: _InitialView
    begin: 419
    end: 423
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Bush]
 Lemma
    sofa: _InitialView
@@ -3916,14 +3916,14 @@ Token
       begin: 419
       end: 423
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [und]
 POS_CONJ
    sofa: _InitialView
    begin: 424
    end: 427
    PosValue: "KON"
-   coarseValue: "POS_CONJ"
+   coarseValue: "CONJ"
 [und]
 Lemma
    sofa: _InitialView
@@ -3979,7 +3979,7 @@ Token
       begin: 424
       end: 427
       PosValue: "KON"
-      coarseValue: "POS_CONJ"
+      coarseValue: "CONJ"
 [dem Demokraten Bill Clinton]
 Constituent
    sofa: _InitialView
@@ -4028,7 +4028,7 @@ POS_DET
    begin: 428
    end: 431
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [dem]
 Lemma
    sofa: _InitialView
@@ -4091,14 +4091,14 @@ Token
       begin: 428
       end: 431
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [Demokraten]
 POS_NOUN
    sofa: _InitialView
    begin: 432
    end: 442
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Demokraten]
 Lemma
    sofa: _InitialView
@@ -4161,7 +4161,7 @@ Token
       begin: 432
       end: 442
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [Bill Clinton]
 Constituent
    sofa: _InitialView
@@ -4217,7 +4217,7 @@ POS_PROPN
    begin: 443
    end: 447
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Bill]
 Lemma
    sofa: _InitialView
@@ -4287,14 +4287,14 @@ Token
       begin: 443
       end: 447
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [Clinton]
 POS_PROPN
    sofa: _InitialView
    begin: 448
    end: 455
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Clinton]
 Lemma
    sofa: _InitialView
@@ -4364,14 +4364,14 @@ Token
       begin: 448
       end: 455
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [.]
 POS_PUNCT
    sofa: _InitialView
    begin: 456
    end: 457
    PosValue: "$."
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [.]
 Lemma
    sofa: _InitialView
@@ -4399,7 +4399,7 @@ Token
       begin: 456
       end: 457
       PosValue: "$."
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [Daß Perot ein Unternehmen erfolgreich leiten kann , davon sind selbst seine Kritiker überzeugt .]
 Sentence
    sofa: _InitialView
@@ -4522,7 +4522,7 @@ POS_CONJ
    begin: 458
    end: 461
    PosValue: "KOUS"
-   coarseValue: "POS_CONJ"
+   coarseValue: "CONJ"
 [Daß]
 Lemma
    sofa: _InitialView
@@ -4578,14 +4578,14 @@ Token
       begin: 458
       end: 461
       PosValue: "KOUS"
-      coarseValue: "POS_CONJ"
+      coarseValue: "CONJ"
 [Perot]
 POS_PROPN
    sofa: _InitialView
    begin: 462
    end: 467
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Perot]
 Lemma
    sofa: _InitialView
@@ -4641,7 +4641,7 @@ Token
       begin: 462
       end: 467
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [ein Unternehmen erfolgreich leiten]
 Constituent
    sofa: _InitialView
@@ -4739,7 +4739,7 @@ POS_DET
    begin: 468
    end: 471
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [ein]
 Lemma
    sofa: _InitialView
@@ -4809,14 +4809,14 @@ Token
       begin: 468
       end: 471
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [Unternehmen]
 POS_NOUN
    sofa: _InitialView
    begin: 472
    end: 483
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Unternehmen]
 Lemma
    sofa: _InitialView
@@ -4886,14 +4886,14 @@ Token
       begin: 472
       end: 483
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [erfolgreich]
 POS_ADJ
    sofa: _InitialView
    begin: 484
    end: 495
    PosValue: "ADJD"
-   coarseValue: "POS_ADJ"
+   coarseValue: "ADJ"
 [erfolgreich]
 Lemma
    sofa: _InitialView
@@ -4956,14 +4956,14 @@ Token
       begin: 484
       end: 495
       PosValue: "ADJD"
-      coarseValue: "POS_ADJ"
+      coarseValue: "ADJ"
 [leiten]
 POS_VERB
    sofa: _InitialView
    begin: 496
    end: 502
    PosValue: "VVINF"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [leiten]
 Lemma
    sofa: _InitialView
@@ -5026,14 +5026,14 @@ Token
       begin: 496
       end: 502
       PosValue: "VVINF"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [kann]
 POS_VERB
    sofa: _InitialView
    begin: 503
    end: 507
    PosValue: "VMFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [kann]
 Lemma
    sofa: _InitialView
@@ -5089,14 +5089,14 @@ Token
       begin: 503
       end: 507
       PosValue: "VMFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [,]
 POS_PUNCT
    sofa: _InitialView
    begin: 508
    end: 509
    PosValue: "$,"
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [,]
 Lemma
    sofa: _InitialView
@@ -5124,14 +5124,14 @@ Token
       begin: 508
       end: 509
       PosValue: "$,"
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [davon]
 POS_ADV
    sofa: _InitialView
    begin: 510
    end: 515
    PosValue: "PROAV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [davon]
 Lemma
    sofa: _InitialView
@@ -5180,14 +5180,14 @@ Token
       begin: 510
       end: 515
       PosValue: "PROAV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [sind]
 POS_VERB
    sofa: _InitialView
    begin: 516
    end: 520
    PosValue: "VAFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [sind]
 Lemma
    sofa: _InitialView
@@ -5222,7 +5222,7 @@ Token
       begin: 516
       end: 520
       PosValue: "VAFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [selbst seine Kritiker]
 Constituent
    sofa: _InitialView
@@ -5250,7 +5250,7 @@ POS_ADV
    begin: 521
    end: 527
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [selbst]
 Lemma
    sofa: _InitialView
@@ -5292,14 +5292,14 @@ Token
       begin: 521
       end: 527
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [seine]
 POS_PRON
    sofa: _InitialView
    begin: 528
    end: 533
    PosValue: "PPOSAT"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [seine]
 Lemma
    sofa: _InitialView
@@ -5341,14 +5341,14 @@ Token
       begin: 528
       end: 533
       PosValue: "PPOSAT"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [Kritiker]
 POS_NOUN
    sofa: _InitialView
    begin: 534
    end: 542
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Kritiker]
 Lemma
    sofa: _InitialView
@@ -5390,14 +5390,14 @@ Token
       begin: 534
       end: 542
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [überzeugt]
 POS_VERB
    sofa: _InitialView
    begin: 543
    end: 552
    PosValue: "VVPP"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [überzeugt]
 Lemma
    sofa: _InitialView
@@ -5439,14 +5439,14 @@ Token
       begin: 543
       end: 552
       PosValue: "VVPP"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [.]
 POS_PUNCT
    sofa: _InitialView
    begin: 553
    end: 554
    PosValue: "$."
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [.]
 Lemma
    sofa: _InitialView
@@ -5474,7 +5474,7 @@ Token
       begin: 553
       end: 554
       PosValue: "$."
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [Ob diese Fähigkeiten aber ausreichen , um die größte Volkswirtschaft der Welt aus ihrer Krise zu führen , bezweifeln viele Ökonomen .]
 Sentence
    sofa: _InitialView
@@ -5534,7 +5534,7 @@ POS_CONJ
    begin: 555
    end: 557
    PosValue: "KOUS"
-   coarseValue: "POS_CONJ"
+   coarseValue: "CONJ"
 [Ob]
 Lemma
    sofa: _InitialView
@@ -5576,7 +5576,7 @@ Token
       begin: 555
       end: 557
       PosValue: "KOUS"
-      coarseValue: "POS_CONJ"
+      coarseValue: "CONJ"
 [diese Fähigkeiten]
 Constituent
    sofa: _InitialView
@@ -5611,7 +5611,7 @@ POS_PRON
    begin: 558
    end: 563
    PosValue: "PDAT"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [diese]
 Lemma
    sofa: _InitialView
@@ -5660,14 +5660,14 @@ Token
       begin: 558
       end: 563
       PosValue: "PDAT"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [Fähigkeiten]
 POS_NOUN
    sofa: _InitialView
    begin: 564
    end: 575
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Fähigkeiten]
 Lemma
    sofa: _InitialView
@@ -5716,14 +5716,14 @@ Token
       begin: 564
       end: 575
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [aber]
 POS_ADV
    sofa: _InitialView
    begin: 576
    end: 580
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [aber]
 Lemma
    sofa: _InitialView
@@ -5765,14 +5765,14 @@ Token
       begin: 576
       end: 580
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [ausreichen]
 POS_VERB
    sofa: _InitialView
    begin: 581
    end: 591
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [ausreichen]
 Lemma
    sofa: _InitialView
@@ -5814,14 +5814,14 @@ Token
       begin: 581
       end: 591
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [,]
 POS_PUNCT
    sofa: _InitialView
    begin: 592
    end: 593
    PosValue: "$,"
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [,]
 Lemma
    sofa: _InitialView
@@ -5849,7 +5849,7 @@ Token
       begin: 592
       end: 593
       PosValue: "$,"
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [um die größte Volkswirtschaft der Welt aus ihrer Krise zu führen]
 Constituent
    sofa: _InitialView
@@ -5884,7 +5884,7 @@ POS_CONJ
    begin: 594
    end: 596
    PosValue: "KOUI"
-   coarseValue: "POS_CONJ"
+   coarseValue: "CONJ"
 [um]
 Lemma
    sofa: _InitialView
@@ -5933,7 +5933,7 @@ Token
       begin: 594
       end: 596
       PosValue: "KOUI"
-      coarseValue: "POS_CONJ"
+      coarseValue: "CONJ"
 [die größte Volkswirtschaft der Welt]
 Constituent
    sofa: _InitialView
@@ -5975,7 +5975,7 @@ POS_DET
    begin: 597
    end: 600
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [die]
 Lemma
    sofa: _InitialView
@@ -6031,14 +6031,14 @@ Token
       begin: 597
       end: 600
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [größte]
 POS_ADJ
    sofa: _InitialView
    begin: 601
    end: 607
    PosValue: "ADJA"
-   coarseValue: "POS_ADJ"
+   coarseValue: "ADJ"
 [größte]
 Lemma
    sofa: _InitialView
@@ -6094,14 +6094,14 @@ Token
       begin: 601
       end: 607
       PosValue: "ADJA"
-      coarseValue: "POS_ADJ"
+      coarseValue: "ADJ"
 [Volkswirtschaft]
 POS_NOUN
    sofa: _InitialView
    begin: 608
    end: 623
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Volkswirtschaft]
 Lemma
    sofa: _InitialView
@@ -6157,7 +6157,7 @@ Token
       begin: 608
       end: 623
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [der Welt]
 Constituent
    sofa: _InitialView
@@ -6206,7 +6206,7 @@ POS_DET
    begin: 624
    end: 627
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [der]
 Lemma
    sofa: _InitialView
@@ -6269,14 +6269,14 @@ Token
       begin: 624
       end: 627
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [Welt]
 POS_NOUN
    sofa: _InitialView
    begin: 628
    end: 632
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Welt]
 Lemma
    sofa: _InitialView
@@ -6339,7 +6339,7 @@ Token
       begin: 628
       end: 632
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [aus ihrer Krise]
 Constituent
    sofa: _InitialView
@@ -6381,7 +6381,7 @@ POS_ADP
    begin: 633
    end: 636
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [aus]
 Lemma
    sofa: _InitialView
@@ -6437,14 +6437,14 @@ Token
       begin: 633
       end: 636
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [ihrer]
 POS_PRON
    sofa: _InitialView
    begin: 637
    end: 642
    PosValue: "PPOSAT"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [ihrer]
 Lemma
    sofa: _InitialView
@@ -6500,14 +6500,14 @@ Token
       begin: 637
       end: 642
       PosValue: "PPOSAT"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [Krise]
 POS_NOUN
    sofa: _InitialView
    begin: 643
    end: 648
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Krise]
 Lemma
    sofa: _InitialView
@@ -6563,7 +6563,7 @@ Token
       begin: 643
       end: 648
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [zu führen]
 Constituent
    sofa: _InitialView
@@ -6605,7 +6605,7 @@ POS_X
    begin: 649
    end: 651
    PosValue: "PTKZU"
-   coarseValue: "POS_X"
+   coarseValue: "X"
 [zu]
 Lemma
    sofa: _InitialView
@@ -6661,14 +6661,14 @@ Token
       begin: 649
       end: 651
       PosValue: "PTKZU"
-      coarseValue: "POS_X"
+      coarseValue: "X"
 [führen]
 POS_VERB
    sofa: _InitialView
    begin: 652
    end: 658
    PosValue: "VVINF"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [führen]
 Lemma
    sofa: _InitialView
@@ -6724,14 +6724,14 @@ Token
       begin: 652
       end: 658
       PosValue: "VVINF"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [,]
 POS_PUNCT
    sofa: _InitialView
    begin: 659
    end: 660
    PosValue: "$,"
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [,]
 Lemma
    sofa: _InitialView
@@ -6759,14 +6759,14 @@ Token
       begin: 659
       end: 660
       PosValue: "$,"
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [bezweifeln]
 POS_VERB
    sofa: _InitialView
    begin: 661
    end: 671
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [bezweifeln]
 Lemma
    sofa: _InitialView
@@ -6801,7 +6801,7 @@ Token
       begin: 661
       end: 671
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [viele Ökonomen]
 Constituent
    sofa: _InitialView
@@ -6829,7 +6829,7 @@ POS_PRON
    begin: 672
    end: 677
    PosValue: "PIAT"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [viele]
 Lemma
    sofa: _InitialView
@@ -6871,14 +6871,14 @@ Token
       begin: 672
       end: 677
       PosValue: "PIAT"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [Ökonomen]
 POS_NOUN
    sofa: _InitialView
    begin: 678
    end: 686
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Ökonomen]
 Lemma
    sofa: _InitialView
@@ -6920,14 +6920,14 @@ Token
       begin: 678
       end: 686
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [.]
 POS_PUNCT
    sofa: _InitialView
    begin: 687
    end: 688
    PosValue: "$."
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [.]
 Lemma
    sofa: _InitialView
@@ -6955,7 +6955,7 @@ Token
       begin: 687
       end: 688
       PosValue: "$."
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [Und auch die Konzernchefs in den USA halten nicht viel von dem 62jährigen .]
 Sentence
    sofa: _InitialView
@@ -6994,7 +6994,7 @@ POS_CONJ
    begin: 689
    end: 692
    PosValue: "KON"
-   coarseValue: "POS_CONJ"
+   coarseValue: "CONJ"
 [Und]
 Lemma
    sofa: _InitialView
@@ -7029,7 +7029,7 @@ Token
       begin: 689
       end: 692
       PosValue: "KON"
-      coarseValue: "POS_CONJ"
+      coarseValue: "CONJ"
 [auch die Konzernchefs in den USA]
 Constituent
    sofa: _InitialView
@@ -7057,7 +7057,7 @@ POS_ADV
    begin: 693
    end: 697
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [auch]
 Lemma
    sofa: _InitialView
@@ -7099,14 +7099,14 @@ Token
       begin: 693
       end: 697
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [die]
 POS_DET
    sofa: _InitialView
    begin: 698
    end: 701
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [die]
 Lemma
    sofa: _InitialView
@@ -7148,14 +7148,14 @@ Token
       begin: 698
       end: 701
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [Konzernchefs]
 POS_NOUN
    sofa: _InitialView
    begin: 702
    end: 714
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Konzernchefs]
 Lemma
    sofa: _InitialView
@@ -7197,7 +7197,7 @@ Token
       begin: 702
       end: 714
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [in den USA]
 Constituent
    sofa: _InitialView
@@ -7232,7 +7232,7 @@ POS_ADP
    begin: 715
    end: 717
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [in]
 Lemma
    sofa: _InitialView
@@ -7281,14 +7281,14 @@ Token
       begin: 715
       end: 717
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [den]
 POS_DET
    sofa: _InitialView
    begin: 718
    end: 721
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [den]
 Lemma
    sofa: _InitialView
@@ -7337,14 +7337,14 @@ Token
       begin: 718
       end: 721
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [USA]
 POS_PROPN
    sofa: _InitialView
    begin: 722
    end: 725
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [USA]
 Lemma
    sofa: _InitialView
@@ -7393,14 +7393,14 @@ Token
       begin: 722
       end: 725
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [halten]
 POS_VERB
    sofa: _InitialView
    begin: 726
    end: 732
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [halten]
 Lemma
    sofa: _InitialView
@@ -7435,7 +7435,7 @@ Token
       begin: 726
       end: 732
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [nicht viel]
 Constituent
    sofa: _InitialView
@@ -7463,7 +7463,7 @@ POS_X
    begin: 733
    end: 738
    PosValue: "PTKNEG"
-   coarseValue: "POS_X"
+   coarseValue: "X"
 [nicht]
 Lemma
    sofa: _InitialView
@@ -7505,14 +7505,14 @@ Token
       begin: 733
       end: 738
       PosValue: "PTKNEG"
-      coarseValue: "POS_X"
+      coarseValue: "X"
 [viel]
 POS_PRON
    sofa: _InitialView
    begin: 739
    end: 743
    PosValue: "PIS"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [viel]
 Lemma
    sofa: _InitialView
@@ -7554,7 +7554,7 @@ Token
       begin: 739
       end: 743
       PosValue: "PIS"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [von dem 62jährigen]
 Constituent
    sofa: _InitialView
@@ -7582,7 +7582,7 @@ POS_ADP
    begin: 744
    end: 747
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [von]
 Lemma
    sofa: _InitialView
@@ -7624,14 +7624,14 @@ Token
       begin: 744
       end: 747
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [dem]
 POS_DET
    sofa: _InitialView
    begin: 748
    end: 751
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [dem]
 Lemma
    sofa: _InitialView
@@ -7673,14 +7673,14 @@ Token
       begin: 748
       end: 751
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [62jährigen]
 POS_NOUN
    sofa: _InitialView
    begin: 752
    end: 762
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [62jährigen]
 Lemma
    sofa: _InitialView
@@ -7722,14 +7722,14 @@ Token
       begin: 752
       end: 762
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [.]
 POS_PUNCT
    sofa: _InitialView
    begin: 763
    end: 764
    PosValue: "$."
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [.]
 Lemma
    sofa: _InitialView
@@ -7757,7 +7757,7 @@ Token
       begin: 763
       end: 764
       PosValue: "$."
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [Zwar können sich die meisten Topmanager durchaus einen Unternehmer als Präsidenten vorstellen - nur nicht ausgerechnet Perot .]
 Sentence
    sofa: _InitialView
@@ -7817,7 +7817,7 @@ POS_ADV
    begin: 765
    end: 769
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [Zwar]
 Lemma
    sofa: _InitialView
@@ -7859,14 +7859,14 @@ Token
       begin: 765
       end: 769
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [können]
 POS_VERB
    sofa: _InitialView
    begin: 770
    end: 776
    PosValue: "VMFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [können]
 Lemma
    sofa: _InitialView
@@ -7908,7 +7908,7 @@ Token
       begin: 770
       end: 776
       PosValue: "VMFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [sich die meisten Topmanager durchaus einen Unternehmer als Präsidenten vorstellen]
 Constituent
    sofa: _InitialView
@@ -7943,7 +7943,7 @@ POS_PRON
    begin: 777
    end: 781
    PosValue: "PRF"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [sich]
 Lemma
    sofa: _InitialView
@@ -7992,7 +7992,7 @@ Token
       begin: 777
       end: 781
       PosValue: "PRF"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [die meisten Topmanager]
 Constituent
    sofa: _InitialView
@@ -8027,7 +8027,7 @@ POS_DET
    begin: 782
    end: 785
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [die]
 Lemma
    sofa: _InitialView
@@ -8076,14 +8076,14 @@ Token
       begin: 782
       end: 785
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [meisten]
 POS_PRON
    sofa: _InitialView
    begin: 786
    end: 793
    PosValue: "PIAT"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [meisten]
 Lemma
    sofa: _InitialView
@@ -8132,14 +8132,14 @@ Token
       begin: 786
       end: 793
       PosValue: "PIAT"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [Topmanager]
 POS_NOUN
    sofa: _InitialView
    begin: 794
    end: 804
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Topmanager]
 Lemma
    sofa: _InitialView
@@ -8188,14 +8188,14 @@ Token
       begin: 794
       end: 804
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [durchaus]
 POS_ADV
    sofa: _InitialView
    begin: 805
    end: 813
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [durchaus]
 Lemma
    sofa: _InitialView
@@ -8237,7 +8237,7 @@ Token
       begin: 805
       end: 813
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [einen Unternehmer]
 Constituent
    sofa: _InitialView
@@ -8279,7 +8279,7 @@ POS_DET
    begin: 814
    end: 819
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [einen]
 Lemma
    sofa: _InitialView
@@ -8335,14 +8335,14 @@ Token
       begin: 814
       end: 819
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [Unternehmer]
 POS_NOUN
    sofa: _InitialView
    begin: 820
    end: 831
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Unternehmer]
 Lemma
    sofa: _InitialView
@@ -8398,7 +8398,7 @@ Token
       begin: 820
       end: 831
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [als Präsidenten]
 Constituent
    sofa: _InitialView
@@ -8440,7 +8440,7 @@ POS_ADP
    begin: 832
    end: 835
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [als]
 Lemma
    sofa: _InitialView
@@ -8496,14 +8496,14 @@ Token
       begin: 832
       end: 835
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [Präsidenten]
 POS_NOUN
    sofa: _InitialView
    begin: 836
    end: 847
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Präsidenten]
 Lemma
    sofa: _InitialView
@@ -8559,14 +8559,14 @@ Token
       begin: 836
       end: 847
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [vorstellen]
 POS_VERB
    sofa: _InitialView
    begin: 848
    end: 858
    PosValue: "VVINF"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [vorstellen]
 Lemma
    sofa: _InitialView
@@ -8615,14 +8615,14 @@ Token
       begin: 848
       end: 858
       PosValue: "VVINF"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [-]
 POS_PUNCT
    sofa: _InitialView
    begin: 859
    end: 860
    PosValue: "$("
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [-]
 Lemma
    sofa: _InitialView
@@ -8650,7 +8650,7 @@ Token
       begin: 859
       end: 860
       PosValue: "$("
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [nur nicht ausgerechnet Perot]
 Constituent
    sofa: _InitialView
@@ -8678,7 +8678,7 @@ POS_ADV
    begin: 861
    end: 864
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [nur]
 Lemma
    sofa: _InitialView
@@ -8720,14 +8720,14 @@ Token
       begin: 861
       end: 864
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [nicht]
 POS_X
    sofa: _InitialView
    begin: 865
    end: 870
    PosValue: "PTKNEG"
-   coarseValue: "POS_X"
+   coarseValue: "X"
 [nicht]
 Lemma
    sofa: _InitialView
@@ -8769,7 +8769,7 @@ Token
       begin: 865
       end: 870
       PosValue: "PTKNEG"
-      coarseValue: "POS_X"
+      coarseValue: "X"
 [ausgerechnet Perot]
 Constituent
    sofa: _InitialView
@@ -8839,7 +8839,7 @@ POS_ADV
    begin: 871
    end: 883
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [ausgerechnet]
 Lemma
    sofa: _InitialView
@@ -8895,14 +8895,14 @@ Token
       begin: 871
       end: 883
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [Perot]
 POS_PROPN
    sofa: _InitialView
    begin: 884
    end: 889
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Perot]
 Lemma
    sofa: _InitialView
@@ -8958,14 +8958,14 @@ Token
       begin: 884
       end: 889
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [.]
 POS_PUNCT
    sofa: _InitialView
    begin: 890
    end: 891
    PosValue: "$."
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [.]
 Lemma
    sofa: _InitialView
@@ -8993,7 +8993,7 @@ Token
       begin: 890
       end: 891
       PosValue: "$."
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [Nach einer Umfrage des Wirtschaftsmagazins Fortune unter den Bossen von 500 Großunternehmen wünschten im Mai nur elf Prozent `` Ross for President '' , während 78 Prozent sich für Bush und vier Prozent für Clinton aussprachen .]
 Sentence
    sofa: _InitialView
@@ -9053,7 +9053,7 @@ POS_ADP
    begin: 892
    end: 896
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [Nach]
 Lemma
    sofa: _InitialView
@@ -9095,14 +9095,14 @@ Token
       begin: 892
       end: 896
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [einer]
 POS_DET
    sofa: _InitialView
    begin: 897
    end: 902
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [einer]
 Lemma
    sofa: _InitialView
@@ -9144,14 +9144,14 @@ Token
       begin: 897
       end: 902
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [Umfrage]
 POS_NOUN
    sofa: _InitialView
    begin: 903
    end: 910
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Umfrage]
 Lemma
    sofa: _InitialView
@@ -9193,7 +9193,7 @@ Token
       begin: 903
       end: 910
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [des Wirtschaftsmagazins Fortune]
 Constituent
    sofa: _InitialView
@@ -9228,7 +9228,7 @@ POS_DET
    begin: 911
    end: 914
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [des]
 Lemma
    sofa: _InitialView
@@ -9277,14 +9277,14 @@ Token
       begin: 911
       end: 914
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [Wirtschaftsmagazins]
 POS_NOUN
    sofa: _InitialView
    begin: 915
    end: 934
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Wirtschaftsmagazins]
 Lemma
    sofa: _InitialView
@@ -9333,14 +9333,14 @@ Token
       begin: 915
       end: 934
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [Fortune]
 POS_PROPN
    sofa: _InitialView
    begin: 935
    end: 942
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Fortune]
 Lemma
    sofa: _InitialView
@@ -9389,7 +9389,7 @@ Token
       begin: 935
       end: 942
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [unter den Bossen von 500 Großunternehmen]
 Constituent
    sofa: _InitialView
@@ -9424,7 +9424,7 @@ POS_ADP
    begin: 943
    end: 948
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [unter]
 Lemma
    sofa: _InitialView
@@ -9473,14 +9473,14 @@ Token
       begin: 943
       end: 948
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [den]
 POS_DET
    sofa: _InitialView
    begin: 949
    end: 952
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [den]
 Lemma
    sofa: _InitialView
@@ -9529,14 +9529,14 @@ Token
       begin: 949
       end: 952
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [Bossen]
 POS_NOUN
    sofa: _InitialView
    begin: 953
    end: 959
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Bossen]
 Lemma
    sofa: _InitialView
@@ -9585,7 +9585,7 @@ Token
       begin: 953
       end: 959
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [von 500 Großunternehmen]
 Constituent
    sofa: _InitialView
@@ -9627,7 +9627,7 @@ POS_ADP
    begin: 960
    end: 963
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [von]
 Lemma
    sofa: _InitialView
@@ -9683,14 +9683,14 @@ Token
       begin: 960
       end: 963
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [500]
 POS_NUM
    sofa: _InitialView
    begin: 964
    end: 967
    PosValue: "CARD"
-   coarseValue: "POS_NUM"
+   coarseValue: "NUM"
 [500]
 Lemma
    sofa: _InitialView
@@ -9746,14 +9746,14 @@ Token
       begin: 964
       end: 967
       PosValue: "CARD"
-      coarseValue: "POS_NUM"
+      coarseValue: "NUM"
 [Großunternehmen]
 POS_NOUN
    sofa: _InitialView
    begin: 968
    end: 983
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Großunternehmen]
 Lemma
    sofa: _InitialView
@@ -9809,14 +9809,14 @@ Token
       begin: 968
       end: 983
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [wünschten]
 POS_VERB
    sofa: _InitialView
    begin: 984
    end: 993
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [wünschten]
 Lemma
    sofa: _InitialView
@@ -9851,7 +9851,7 @@ Token
       begin: 984
       end: 993
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [im Mai]
 Constituent
    sofa: _InitialView
@@ -9879,7 +9879,7 @@ POS_ADP
    begin: 994
    end: 996
    PosValue: "APPRART"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [im]
 Lemma
    sofa: _InitialView
@@ -9921,14 +9921,14 @@ Token
       begin: 994
       end: 996
       PosValue: "APPRART"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [Mai]
 POS_NOUN
    sofa: _InitialView
    begin: 997
    end: 1000
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Mai]
 Lemma
    sofa: _InitialView
@@ -9970,7 +9970,7 @@ Token
       begin: 997
       end: 1000
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [nur elf Prozent]
 Constituent
    sofa: _InitialView
@@ -10026,7 +10026,7 @@ POS_ADV
    begin: 1001
    end: 1004
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [nur]
 Lemma
    sofa: _InitialView
@@ -10075,14 +10075,14 @@ Token
       begin: 1001
       end: 1004
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [elf]
 POS_NUM
    sofa: _InitialView
    begin: 1005
    end: 1008
    PosValue: "CARD"
-   coarseValue: "POS_NUM"
+   coarseValue: "NUM"
 [elf]
 Lemma
    sofa: _InitialView
@@ -10131,14 +10131,14 @@ Token
       begin: 1005
       end: 1008
       PosValue: "CARD"
-      coarseValue: "POS_NUM"
+      coarseValue: "NUM"
 [Prozent]
 POS_NOUN
    sofa: _InitialView
    begin: 1009
    end: 1016
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Prozent]
 Lemma
    sofa: _InitialView
@@ -10180,14 +10180,14 @@ Token
       begin: 1009
       end: 1016
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [``]
 POS_PUNCT
    sofa: _InitialView
    begin: 1017
    end: 1019
    PosValue: "$("
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [``]
 Lemma
    sofa: _InitialView
@@ -10215,14 +10215,14 @@ Token
       begin: 1017
       end: 1019
       PosValue: "$("
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [Ross]
 POS_PROPN
    sofa: _InitialView
    begin: 1020
    end: 1024
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Ross]
 Lemma
    sofa: _InitialView
@@ -10257,7 +10257,7 @@ Token
       begin: 1020
       end: 1024
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [for President]
 Constituent
    sofa: _InitialView
@@ -10285,7 +10285,7 @@ POS_X
    begin: 1025
    end: 1028
    PosValue: "FM"
-   coarseValue: "POS_X"
+   coarseValue: "X"
 [for]
 Lemma
    sofa: _InitialView
@@ -10327,14 +10327,14 @@ Token
       begin: 1025
       end: 1028
       PosValue: "FM"
-      coarseValue: "POS_X"
+      coarseValue: "X"
 [President]
 POS_X
    sofa: _InitialView
    begin: 1029
    end: 1038
    PosValue: "FM"
-   coarseValue: "POS_X"
+   coarseValue: "X"
 [President]
 Lemma
    sofa: _InitialView
@@ -10376,14 +10376,14 @@ Token
       begin: 1029
       end: 1038
       PosValue: "FM"
-      coarseValue: "POS_X"
+      coarseValue: "X"
 ['']
 POS_PUNCT
    sofa: _InitialView
    begin: 1039
    end: 1041
    PosValue: "$("
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 ['']
 Lemma
    sofa: _InitialView
@@ -10411,14 +10411,14 @@ Token
       begin: 1039
       end: 1041
       PosValue: "$("
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [,]
 POS_PUNCT
    sofa: _InitialView
    begin: 1042
    end: 1043
    PosValue: "$,"
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [,]
 Lemma
    sofa: _InitialView
@@ -10446,7 +10446,7 @@ Token
       begin: 1042
       end: 1043
       PosValue: "$,"
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [während 78 Prozent sich für Bush und vier Prozent für Clinton aussprachen]
 Constituent
    sofa: _InitialView
@@ -10502,7 +10502,7 @@ POS_CONJ
    begin: 1044
    end: 1051
    PosValue: "KOUS"
-   coarseValue: "POS_CONJ"
+   coarseValue: "CONJ"
 [während]
 Lemma
    sofa: _InitialView
@@ -10551,7 +10551,7 @@ Token
       begin: 1044
       end: 1051
       PosValue: "KOUS"
-      coarseValue: "POS_CONJ"
+      coarseValue: "CONJ"
 [78 Prozent]
 Constituent
    sofa: _InitialView
@@ -10593,7 +10593,7 @@ POS_NUM
    begin: 1052
    end: 1054
    PosValue: "CARD"
-   coarseValue: "POS_NUM"
+   coarseValue: "NUM"
 [78]
 Lemma
    sofa: _InitialView
@@ -10649,14 +10649,14 @@ Token
       begin: 1052
       end: 1054
       PosValue: "CARD"
-      coarseValue: "POS_NUM"
+      coarseValue: "NUM"
 [Prozent]
 POS_NOUN
    sofa: _InitialView
    begin: 1055
    end: 1062
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Prozent]
 Lemma
    sofa: _InitialView
@@ -10712,14 +10712,14 @@ Token
       begin: 1055
       end: 1062
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [sich]
 POS_PRON
    sofa: _InitialView
    begin: 1063
    end: 1067
    PosValue: "PRF"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [sich]
 Lemma
    sofa: _InitialView
@@ -10768,7 +10768,7 @@ Token
       begin: 1063
       end: 1067
       PosValue: "PRF"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [für Bush]
 Constituent
    sofa: _InitialView
@@ -10810,7 +10810,7 @@ POS_ADP
    begin: 1068
    end: 1071
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [für]
 Lemma
    sofa: _InitialView
@@ -10866,14 +10866,14 @@ Token
       begin: 1068
       end: 1071
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [Bush]
 POS_PROPN
    sofa: _InitialView
    begin: 1072
    end: 1076
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Bush]
 Lemma
    sofa: _InitialView
@@ -10929,14 +10929,14 @@ Token
       begin: 1072
       end: 1076
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [und]
 POS_CONJ
    sofa: _InitialView
    begin: 1077
    end: 1080
    PosValue: "KON"
-   coarseValue: "POS_CONJ"
+   coarseValue: "CONJ"
 [und]
 Lemma
    sofa: _InitialView
@@ -10978,7 +10978,7 @@ Token
       begin: 1077
       end: 1080
       PosValue: "KON"
-      coarseValue: "POS_CONJ"
+      coarseValue: "CONJ"
 [vier Prozent für Clinton aussprachen]
 Constituent
    sofa: _InitialView
@@ -11048,7 +11048,7 @@ POS_NUM
    begin: 1081
    end: 1085
    PosValue: "CARD"
-   coarseValue: "POS_NUM"
+   coarseValue: "NUM"
 [vier]
 Lemma
    sofa: _InitialView
@@ -11104,14 +11104,14 @@ Token
       begin: 1081
       end: 1085
       PosValue: "CARD"
-      coarseValue: "POS_NUM"
+      coarseValue: "NUM"
 [Prozent]
 POS_NOUN
    sofa: _InitialView
    begin: 1086
    end: 1093
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Prozent]
 Lemma
    sofa: _InitialView
@@ -11167,7 +11167,7 @@ Token
       begin: 1086
       end: 1093
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [für Clinton]
 Constituent
    sofa: _InitialView
@@ -11209,7 +11209,7 @@ POS_ADP
    begin: 1094
    end: 1097
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [für]
 Lemma
    sofa: _InitialView
@@ -11265,14 +11265,14 @@ Token
       begin: 1094
       end: 1097
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [Clinton]
 POS_PROPN
    sofa: _InitialView
    begin: 1098
    end: 1105
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Clinton]
 Lemma
    sofa: _InitialView
@@ -11328,14 +11328,14 @@ Token
       begin: 1098
       end: 1105
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [aussprachen]
 POS_VERB
    sofa: _InitialView
    begin: 1106
    end: 1117
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [aussprachen]
 Lemma
    sofa: _InitialView
@@ -11384,14 +11384,14 @@ Token
       begin: 1106
       end: 1117
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [.]
 POS_PUNCT
    sofa: _InitialView
    begin: 1118
    end: 1119
    PosValue: "$."
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [.]
 Lemma
    sofa: _InitialView
@@ -11419,7 +11419,7 @@ Token
       begin: 1118
       end: 1119
       PosValue: "$."
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [Allerdings glaubt fast die Hälfte der Chief Executives , daß Perot durchaus Chancen habe , die Wahl im November zu gewinnen , wenn er denn kandidiert .]
 Sentence
    sofa: _InitialView
@@ -11458,7 +11458,7 @@ POS_ADV
    begin: 1120
    end: 1130
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [Allerdings]
 Lemma
    sofa: _InitialView
@@ -11493,14 +11493,14 @@ Token
       begin: 1120
       end: 1130
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [glaubt]
 POS_VERB
    sofa: _InitialView
    begin: 1131
    end: 1137
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [glaubt]
 Lemma
    sofa: _InitialView
@@ -11535,7 +11535,7 @@ Token
       begin: 1131
       end: 1137
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [fast die Hälfte der Chief Executives]
 Constituent
    sofa: _InitialView
@@ -11563,7 +11563,7 @@ POS_ADV
    begin: 1138
    end: 1142
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [fast]
 Lemma
    sofa: _InitialView
@@ -11605,14 +11605,14 @@ Token
       begin: 1138
       end: 1142
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [die]
 POS_DET
    sofa: _InitialView
    begin: 1143
    end: 1146
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [die]
 Lemma
    sofa: _InitialView
@@ -11654,14 +11654,14 @@ Token
       begin: 1143
       end: 1146
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [Hälfte]
 POS_NOUN
    sofa: _InitialView
    begin: 1147
    end: 1153
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Hälfte]
 Lemma
    sofa: _InitialView
@@ -11703,7 +11703,7 @@ Token
       begin: 1147
       end: 1153
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [der Chief Executives]
 Constituent
    sofa: _InitialView
@@ -11738,7 +11738,7 @@ POS_DET
    begin: 1154
    end: 1157
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [der]
 Lemma
    sofa: _InitialView
@@ -11787,14 +11787,14 @@ Token
       begin: 1154
       end: 1157
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [Chief]
 POS_X
    sofa: _InitialView
    begin: 1158
    end: 1163
    PosValue: "FM"
-   coarseValue: "POS_X"
+   coarseValue: "X"
 [Chief]
 Lemma
    sofa: _InitialView
@@ -11843,14 +11843,14 @@ Token
       begin: 1158
       end: 1163
       PosValue: "FM"
-      coarseValue: "POS_X"
+      coarseValue: "X"
 [Executives]
 POS_X
    sofa: _InitialView
    begin: 1164
    end: 1174
    PosValue: "FM"
-   coarseValue: "POS_X"
+   coarseValue: "X"
 [Executives]
 Lemma
    sofa: _InitialView
@@ -11899,14 +11899,14 @@ Token
       begin: 1164
       end: 1174
       PosValue: "FM"
-      coarseValue: "POS_X"
+      coarseValue: "X"
 [,]
 POS_PUNCT
    sofa: _InitialView
    begin: 1175
    end: 1176
    PosValue: "$,"
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [,]
 Lemma
    sofa: _InitialView
@@ -11934,7 +11934,7 @@ Token
       begin: 1175
       end: 1176
       PosValue: "$,"
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [daß Perot durchaus Chancen habe , die Wahl im November zu gewinnen , wenn er denn kandidiert]
 Constituent
    sofa: _InitialView
@@ -11962,7 +11962,7 @@ POS_CONJ
    begin: 1177
    end: 1180
    PosValue: "KOUS"
-   coarseValue: "POS_CONJ"
+   coarseValue: "CONJ"
 [daß]
 Lemma
    sofa: _InitialView
@@ -12004,14 +12004,14 @@ Token
       begin: 1177
       end: 1180
       PosValue: "KOUS"
-      coarseValue: "POS_CONJ"
+      coarseValue: "CONJ"
 [Perot]
 POS_PROPN
    sofa: _InitialView
    begin: 1181
    end: 1186
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Perot]
 Lemma
    sofa: _InitialView
@@ -12053,14 +12053,14 @@ Token
       begin: 1181
       end: 1186
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [durchaus]
 POS_ADV
    sofa: _InitialView
    begin: 1187
    end: 1195
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [durchaus]
 Lemma
    sofa: _InitialView
@@ -12102,7 +12102,7 @@ Token
       begin: 1187
       end: 1195
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [Chancen habe , die Wahl im November zu gewinnen]
 Constituent
    sofa: _InitialView
@@ -12137,7 +12137,7 @@ POS_NOUN
    begin: 1196
    end: 1203
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Chancen]
 Lemma
    sofa: _InitialView
@@ -12186,14 +12186,14 @@ Token
       begin: 1196
       end: 1203
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [habe]
 POS_VERB
    sofa: _InitialView
    begin: 1204
    end: 1208
    PosValue: "VAFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [habe]
 Lemma
    sofa: _InitialView
@@ -12235,14 +12235,14 @@ Token
       begin: 1204
       end: 1208
       PosValue: "VAFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [,]
 POS_PUNCT
    sofa: _InitialView
    begin: 1209
    end: 1210
    PosValue: "$,"
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [,]
 Lemma
    sofa: _InitialView
@@ -12270,7 +12270,7 @@ Token
       begin: 1209
       end: 1210
       PosValue: "$,"
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [die Wahl im November zu gewinnen]
 Constituent
    sofa: _InitialView
@@ -12354,7 +12354,7 @@ POS_DET
    begin: 1211
    end: 1214
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [die]
 Lemma
    sofa: _InitialView
@@ -12417,14 +12417,14 @@ Token
       begin: 1211
       end: 1214
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [Wahl]
 POS_NOUN
    sofa: _InitialView
    begin: 1215
    end: 1219
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Wahl]
 Lemma
    sofa: _InitialView
@@ -12487,7 +12487,7 @@ Token
       begin: 1215
       end: 1219
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [im November]
 Constituent
    sofa: _InitialView
@@ -12543,7 +12543,7 @@ POS_ADP
    begin: 1220
    end: 1222
    PosValue: "APPRART"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [im]
 Lemma
    sofa: _InitialView
@@ -12613,14 +12613,14 @@ Token
       begin: 1220
       end: 1222
       PosValue: "APPRART"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [November]
 POS_NOUN
    sofa: _InitialView
    begin: 1223
    end: 1231
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [November]
 Lemma
    sofa: _InitialView
@@ -12690,7 +12690,7 @@ Token
       begin: 1223
       end: 1231
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [zu gewinnen]
 Constituent
    sofa: _InitialView
@@ -12739,7 +12739,7 @@ POS_X
    begin: 1232
    end: 1234
    PosValue: "PTKZU"
-   coarseValue: "POS_X"
+   coarseValue: "X"
 [zu]
 Lemma
    sofa: _InitialView
@@ -12802,14 +12802,14 @@ Token
       begin: 1232
       end: 1234
       PosValue: "PTKZU"
-      coarseValue: "POS_X"
+      coarseValue: "X"
 [gewinnen]
 POS_VERB
    sofa: _InitialView
    begin: 1235
    end: 1243
    PosValue: "VVINF"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [gewinnen]
 Lemma
    sofa: _InitialView
@@ -12872,14 +12872,14 @@ Token
       begin: 1235
       end: 1243
       PosValue: "VVINF"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [,]
 POS_PUNCT
    sofa: _InitialView
    begin: 1244
    end: 1245
    PosValue: "$,"
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [,]
 Lemma
    sofa: _InitialView
@@ -12907,7 +12907,7 @@ Token
       begin: 1244
       end: 1245
       PosValue: "$,"
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [wenn er denn kandidiert]
 Constituent
    sofa: _InitialView
@@ -12942,7 +12942,7 @@ POS_CONJ
    begin: 1246
    end: 1250
    PosValue: "KOUS"
-   coarseValue: "POS_CONJ"
+   coarseValue: "CONJ"
 [wenn]
 Lemma
    sofa: _InitialView
@@ -12991,14 +12991,14 @@ Token
       begin: 1246
       end: 1250
       PosValue: "KOUS"
-      coarseValue: "POS_CONJ"
+      coarseValue: "CONJ"
 [er]
 POS_PRON
    sofa: _InitialView
    begin: 1251
    end: 1253
    PosValue: "PPER"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [er]
 Lemma
    sofa: _InitialView
@@ -13047,14 +13047,14 @@ Token
       begin: 1251
       end: 1253
       PosValue: "PPER"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [denn]
 POS_ADV
    sofa: _InitialView
    begin: 1254
    end: 1258
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [denn]
 Lemma
    sofa: _InitialView
@@ -13103,14 +13103,14 @@ Token
       begin: 1254
       end: 1258
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [kandidiert]
 POS_VERB
    sofa: _InitialView
    begin: 1259
    end: 1269
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [kandidiert]
 Lemma
    sofa: _InitialView
@@ -13159,14 +13159,14 @@ Token
       begin: 1259
       end: 1269
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [.]
 POS_PUNCT
    sofa: _InitialView
    begin: 1270
    end: 1271
    PosValue: "$."
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [.]
 Lemma
    sofa: _InitialView
@@ -13194,7 +13194,7 @@ Token
       begin: 1270
       end: 1271
       PosValue: "$."
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [Als größte Schwäche des Texaners nennen die Befragten seinen Mangel an Erfahrung auf dem politischen Parkett .]
 Sentence
    sofa: _InitialView
@@ -13254,7 +13254,7 @@ POS_ADP
    begin: 1272
    end: 1275
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [Als]
 Lemma
    sofa: _InitialView
@@ -13296,14 +13296,14 @@ Token
       begin: 1272
       end: 1275
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [größte]
 POS_ADJ
    sofa: _InitialView
    begin: 1276
    end: 1282
    PosValue: "ADJA"
-   coarseValue: "POS_ADJ"
+   coarseValue: "ADJ"
 [größte]
 Lemma
    sofa: _InitialView
@@ -13345,14 +13345,14 @@ Token
       begin: 1276
       end: 1282
       PosValue: "ADJA"
-      coarseValue: "POS_ADJ"
+      coarseValue: "ADJ"
 [Schwäche]
 POS_NOUN
    sofa: _InitialView
    begin: 1283
    end: 1291
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Schwäche]
 Lemma
    sofa: _InitialView
@@ -13394,7 +13394,7 @@ Token
       begin: 1283
       end: 1291
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [des Texaners]
 Constituent
    sofa: _InitialView
@@ -13429,7 +13429,7 @@ POS_DET
    begin: 1292
    end: 1295
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [des]
 Lemma
    sofa: _InitialView
@@ -13478,14 +13478,14 @@ Token
       begin: 1292
       end: 1295
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [Texaners]
 POS_NOUN
    sofa: _InitialView
    begin: 1296
    end: 1304
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Texaners]
 Lemma
    sofa: _InitialView
@@ -13534,14 +13534,14 @@ Token
       begin: 1296
       end: 1304
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [nennen]
 POS_VERB
    sofa: _InitialView
    begin: 1305
    end: 1311
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [nennen]
 Lemma
    sofa: _InitialView
@@ -13576,7 +13576,7 @@ Token
       begin: 1305
       end: 1311
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [die Befragten]
 Constituent
    sofa: _InitialView
@@ -13604,7 +13604,7 @@ POS_DET
    begin: 1312
    end: 1315
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [die]
 Lemma
    sofa: _InitialView
@@ -13646,14 +13646,14 @@ Token
       begin: 1312
       end: 1315
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [Befragten]
 POS_NOUN
    sofa: _InitialView
    begin: 1316
    end: 1325
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Befragten]
 Lemma
    sofa: _InitialView
@@ -13695,7 +13695,7 @@ Token
       begin: 1316
       end: 1325
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [seinen Mangel an Erfahrung auf dem politischen Parkett]
 Constituent
    sofa: _InitialView
@@ -13723,7 +13723,7 @@ POS_PRON
    begin: 1326
    end: 1332
    PosValue: "PPOSAT"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [seinen]
 Lemma
    sofa: _InitialView
@@ -13765,14 +13765,14 @@ Token
       begin: 1326
       end: 1332
       PosValue: "PPOSAT"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [Mangel]
 POS_NOUN
    sofa: _InitialView
    begin: 1333
    end: 1339
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Mangel]
 Lemma
    sofa: _InitialView
@@ -13814,7 +13814,7 @@ Token
       begin: 1333
       end: 1339
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [an Erfahrung auf dem politischen Parkett]
 Constituent
    sofa: _InitialView
@@ -13849,7 +13849,7 @@ POS_ADP
    begin: 1340
    end: 1342
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [an]
 Lemma
    sofa: _InitialView
@@ -13898,14 +13898,14 @@ Token
       begin: 1340
       end: 1342
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [Erfahrung]
 POS_NOUN
    sofa: _InitialView
    begin: 1343
    end: 1352
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Erfahrung]
 Lemma
    sofa: _InitialView
@@ -13954,7 +13954,7 @@ Token
       begin: 1343
       end: 1352
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [auf dem politischen Parkett]
 Constituent
    sofa: _InitialView
@@ -13996,7 +13996,7 @@ POS_ADP
    begin: 1353
    end: 1356
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [auf]
 Lemma
    sofa: _InitialView
@@ -14052,14 +14052,14 @@ Token
       begin: 1353
       end: 1356
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [dem]
 POS_DET
    sofa: _InitialView
    begin: 1357
    end: 1360
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [dem]
 Lemma
    sofa: _InitialView
@@ -14115,14 +14115,14 @@ Token
       begin: 1357
       end: 1360
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [politischen]
 POS_ADJ
    sofa: _InitialView
    begin: 1361
    end: 1372
    PosValue: "ADJA"
-   coarseValue: "POS_ADJ"
+   coarseValue: "ADJ"
 [politischen]
 Lemma
    sofa: _InitialView
@@ -14178,14 +14178,14 @@ Token
       begin: 1361
       end: 1372
       PosValue: "ADJA"
-      coarseValue: "POS_ADJ"
+      coarseValue: "ADJ"
 [Parkett]
 POS_NOUN
    sofa: _InitialView
    begin: 1373
    end: 1380
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Parkett]
 Lemma
    sofa: _InitialView
@@ -14241,14 +14241,14 @@ Token
       begin: 1373
       end: 1380
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [.]
 POS_PUNCT
    sofa: _InitialView
    begin: 1381
    end: 1382
    PosValue: "$."
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [.]
 Lemma
    sofa: _InitialView
@@ -14276,7 +14276,7 @@ Token
       begin: 1381
       end: 1382
       PosValue: "$."
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [Viele meinen , daß Perot mit seinem Befehlston auf dem Capitol gegen eine Wand laufen würde .]
 Sentence
    sofa: _InitialView
@@ -14315,7 +14315,7 @@ POS_PRON
    begin: 1383
    end: 1388
    PosValue: "PIS"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [Viele]
 Lemma
    sofa: _InitialView
@@ -14350,14 +14350,14 @@ Token
       begin: 1383
       end: 1388
       PosValue: "PIS"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [meinen]
 POS_VERB
    sofa: _InitialView
    begin: 1389
    end: 1395
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [meinen]
 Lemma
    sofa: _InitialView
@@ -14392,14 +14392,14 @@ Token
       begin: 1389
       end: 1395
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [,]
 POS_PUNCT
    sofa: _InitialView
    begin: 1396
    end: 1397
    PosValue: "$,"
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [,]
 Lemma
    sofa: _InitialView
@@ -14427,7 +14427,7 @@ Token
       begin: 1396
       end: 1397
       PosValue: "$,"
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [daß Perot mit seinem Befehlston auf dem Capitol gegen eine Wand laufen würde]
 Constituent
    sofa: _InitialView
@@ -14455,7 +14455,7 @@ POS_CONJ
    begin: 1398
    end: 1401
    PosValue: "KOUS"
-   coarseValue: "POS_CONJ"
+   coarseValue: "CONJ"
 [daß]
 Lemma
    sofa: _InitialView
@@ -14497,14 +14497,14 @@ Token
       begin: 1398
       end: 1401
       PosValue: "KOUS"
-      coarseValue: "POS_CONJ"
+      coarseValue: "CONJ"
 [Perot]
 POS_PROPN
    sofa: _InitialView
    begin: 1402
    end: 1407
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Perot]
 Lemma
    sofa: _InitialView
@@ -14546,7 +14546,7 @@ Token
       begin: 1402
       end: 1407
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [mit seinem Befehlston auf dem Capitol gegen eine Wand laufen]
 Constituent
    sofa: _InitialView
@@ -14616,7 +14616,7 @@ POS_ADP
    begin: 1408
    end: 1411
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [mit]
 Lemma
    sofa: _InitialView
@@ -14672,14 +14672,14 @@ Token
       begin: 1408
       end: 1411
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [seinem]
 POS_PRON
    sofa: _InitialView
    begin: 1412
    end: 1418
    PosValue: "PPOSAT"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [seinem]
 Lemma
    sofa: _InitialView
@@ -14735,14 +14735,14 @@ Token
       begin: 1412
       end: 1418
       PosValue: "PPOSAT"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [Befehlston]
 POS_NOUN
    sofa: _InitialView
    begin: 1419
    end: 1429
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Befehlston]
 Lemma
    sofa: _InitialView
@@ -14798,7 +14798,7 @@ Token
       begin: 1419
       end: 1429
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [auf dem Capitol]
 Constituent
    sofa: _InitialView
@@ -14840,7 +14840,7 @@ POS_ADP
    begin: 1430
    end: 1433
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [auf]
 Lemma
    sofa: _InitialView
@@ -14896,14 +14896,14 @@ Token
       begin: 1430
       end: 1433
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [dem]
 POS_DET
    sofa: _InitialView
    begin: 1434
    end: 1437
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [dem]
 Lemma
    sofa: _InitialView
@@ -14959,14 +14959,14 @@ Token
       begin: 1434
       end: 1437
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [Capitol]
 POS_PROPN
    sofa: _InitialView
    begin: 1438
    end: 1445
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Capitol]
 Lemma
    sofa: _InitialView
@@ -15022,7 +15022,7 @@ Token
       begin: 1438
       end: 1445
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [gegen eine Wand]
 Constituent
    sofa: _InitialView
@@ -15064,7 +15064,7 @@ POS_ADP
    begin: 1446
    end: 1451
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [gegen]
 Lemma
    sofa: _InitialView
@@ -15120,14 +15120,14 @@ Token
       begin: 1446
       end: 1451
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [eine]
 POS_DET
    sofa: _InitialView
    begin: 1452
    end: 1456
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [eine]
 Lemma
    sofa: _InitialView
@@ -15183,14 +15183,14 @@ Token
       begin: 1452
       end: 1456
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [Wand]
 POS_NOUN
    sofa: _InitialView
    begin: 1457
    end: 1461
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Wand]
 Lemma
    sofa: _InitialView
@@ -15246,14 +15246,14 @@ Token
       begin: 1457
       end: 1461
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [laufen]
 POS_VERB
    sofa: _InitialView
    begin: 1462
    end: 1468
    PosValue: "VVINF"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [laufen]
 Lemma
    sofa: _InitialView
@@ -15302,14 +15302,14 @@ Token
       begin: 1462
       end: 1468
       PosValue: "VVINF"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [würde]
 POS_VERB
    sofa: _InitialView
    begin: 1469
    end: 1474
    PosValue: "VAFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [würde]
 Lemma
    sofa: _InitialView
@@ -15351,14 +15351,14 @@ Token
       begin: 1469
       end: 1474
       PosValue: "VAFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [.]
 POS_PUNCT
    sofa: _InitialView
    begin: 1475
    end: 1476
    PosValue: "$."
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [.]
 Lemma
    sofa: _InitialView
@@ -15386,7 +15386,7 @@ Token
       begin: 1475
       end: 1476
       PosValue: "$."
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [So erklärt etwa Edward Brandon von dem Unternehmen National City in Ohio :]
 Sentence
    sofa: _InitialView
@@ -15425,7 +15425,7 @@ POS_ADV
    begin: 1477
    end: 1479
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [So]
 Lemma
    sofa: _InitialView
@@ -15460,14 +15460,14 @@ Token
       begin: 1477
       end: 1479
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [erklärt]
 POS_VERB
    sofa: _InitialView
    begin: 1480
    end: 1487
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [erklärt]
 Lemma
    sofa: _InitialView
@@ -15502,7 +15502,7 @@ Token
       begin: 1480
       end: 1487
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [etwa Edward Brandon von dem Unternehmen National City in Ohio]
 Constituent
    sofa: _InitialView
@@ -15530,7 +15530,7 @@ POS_ADV
    begin: 1488
    end: 1492
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [etwa]
 Lemma
    sofa: _InitialView
@@ -15572,7 +15572,7 @@ Token
       begin: 1488
       end: 1492
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [Edward Brandon]
 Constituent
    sofa: _InitialView
@@ -15607,7 +15607,7 @@ POS_PROPN
    begin: 1493
    end: 1499
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Edward]
 Lemma
    sofa: _InitialView
@@ -15656,14 +15656,14 @@ Token
       begin: 1493
       end: 1499
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [Brandon]
 POS_PROPN
    sofa: _InitialView
    begin: 1500
    end: 1507
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Brandon]
 Lemma
    sofa: _InitialView
@@ -15712,7 +15712,7 @@ Token
       begin: 1500
       end: 1507
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [von dem Unternehmen National City in Ohio]
 Constituent
    sofa: _InitialView
@@ -15747,7 +15747,7 @@ POS_ADP
    begin: 1508
    end: 1511
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [von]
 Lemma
    sofa: _InitialView
@@ -15796,14 +15796,14 @@ Token
       begin: 1508
       end: 1511
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [dem]
 POS_DET
    sofa: _InitialView
    begin: 1512
    end: 1515
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [dem]
 Lemma
    sofa: _InitialView
@@ -15852,14 +15852,14 @@ Token
       begin: 1512
       end: 1515
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [Unternehmen]
 POS_NOUN
    sofa: _InitialView
    begin: 1516
    end: 1527
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Unternehmen]
 Lemma
    sofa: _InitialView
@@ -15908,7 +15908,7 @@ Token
       begin: 1516
       end: 1527
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [National City]
 Constituent
    sofa: _InitialView
@@ -15950,7 +15950,7 @@ POS_PROPN
    begin: 1528
    end: 1536
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [National]
 Lemma
    sofa: _InitialView
@@ -16006,14 +16006,14 @@ Token
       begin: 1528
       end: 1536
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [City]
 POS_PROPN
    sofa: _InitialView
    begin: 1537
    end: 1541
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [City]
 Lemma
    sofa: _InitialView
@@ -16069,7 +16069,7 @@ Token
       begin: 1537
       end: 1541
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [in Ohio]
 Constituent
    sofa: _InitialView
@@ -16111,7 +16111,7 @@ POS_ADP
    begin: 1542
    end: 1544
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [in]
 Lemma
    sofa: _InitialView
@@ -16167,14 +16167,14 @@ Token
       begin: 1542
       end: 1544
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [Ohio]
 POS_PROPN
    sofa: _InitialView
    begin: 1545
    end: 1549
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Ohio]
 Lemma
    sofa: _InitialView
@@ -16230,14 +16230,14 @@ Token
       begin: 1545
       end: 1549
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [:]
 POS_PUNCT
    sofa: _InitialView
    begin: 1550
    end: 1551
    PosValue: "$."
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [:]
 Lemma
    sofa: _InitialView
@@ -16265,7 +16265,7 @@ Token
       begin: 1550
       end: 1551
       PosValue: "$."
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [`` Ich glaube kaum , daß mit seinem , naja , etwas undiplomatischen Stil im Weißen Haus dem Land ein Gefallen getan wäre .]
 Sentence
    sofa: _InitialView
@@ -16290,7 +16290,7 @@ POS_PUNCT
    begin: 1552
    end: 1554
    PosValue: "$("
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [``]
 Lemma
    sofa: _InitialView
@@ -16318,7 +16318,7 @@ Token
       begin: 1552
       end: 1554
       PosValue: "$("
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [Ich glaube kaum , daß mit seinem , naja , etwas undiplomatischen Stil im Weißen Haus dem Land ein Gefallen getan wäre]
 Constituent
    sofa: _InitialView
@@ -16339,7 +16339,7 @@ POS_PRON
    begin: 1555
    end: 1558
    PosValue: "PPER"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [Ich]
 Lemma
    sofa: _InitialView
@@ -16374,14 +16374,14 @@ Token
       begin: 1555
       end: 1558
       PosValue: "PPER"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [glaube]
 POS_VERB
    sofa: _InitialView
    begin: 1559
    end: 1565
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [glaube]
 Lemma
    sofa: _InitialView
@@ -16416,14 +16416,14 @@ Token
       begin: 1559
       end: 1565
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [kaum]
 POS_ADV
    sofa: _InitialView
    begin: 1566
    end: 1570
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [kaum]
 Lemma
    sofa: _InitialView
@@ -16458,14 +16458,14 @@ Token
       begin: 1566
       end: 1570
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [,]
 POS_PUNCT
    sofa: _InitialView
    begin: 1571
    end: 1572
    PosValue: "$,"
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [,]
 Lemma
    sofa: _InitialView
@@ -16493,7 +16493,7 @@ Token
       begin: 1571
       end: 1572
       PosValue: "$,"
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [daß mit seinem , naja , etwas undiplomatischen Stil im Weißen Haus dem Land ein Gefallen getan wäre]
 Constituent
    sofa: _InitialView
@@ -16521,7 +16521,7 @@ POS_CONJ
    begin: 1573
    end: 1576
    PosValue: "KOUS"
-   coarseValue: "POS_CONJ"
+   coarseValue: "CONJ"
 [daß]
 Lemma
    sofa: _InitialView
@@ -16563,7 +16563,7 @@ Token
       begin: 1573
       end: 1576
       PosValue: "KOUS"
-      coarseValue: "POS_CONJ"
+      coarseValue: "CONJ"
 [mit seinem , naja , etwas undiplomatischen Stil im Weißen Haus dem Land ein Gefallen getan]
 Constituent
    sofa: _InitialView
@@ -16633,7 +16633,7 @@ POS_ADP
    begin: 1577
    end: 1580
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [mit]
 Lemma
    sofa: _InitialView
@@ -16689,14 +16689,14 @@ Token
       begin: 1577
       end: 1580
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [seinem]
 POS_PRON
    sofa: _InitialView
    begin: 1581
    end: 1587
    PosValue: "PPOSAT"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [seinem]
 Lemma
    sofa: _InitialView
@@ -16752,14 +16752,14 @@ Token
       begin: 1581
       end: 1587
       PosValue: "PPOSAT"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [,]
 POS_PUNCT
    sofa: _InitialView
    begin: 1588
    end: 1589
    PosValue: "$,"
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [,]
 Lemma
    sofa: _InitialView
@@ -16787,7 +16787,7 @@ Token
       begin: 1588
       end: 1589
       PosValue: "$,"
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [naja , etwas undiplomatischen]
 Constituent
    sofa: _InitialView
@@ -16836,7 +16836,7 @@ POS_X
    begin: 1590
    end: 1594
    PosValue: "ITJ"
-   coarseValue: "POS_X"
+   coarseValue: "X"
 [naja]
 Lemma
    sofa: _InitialView
@@ -16899,14 +16899,14 @@ Token
       begin: 1590
       end: 1594
       PosValue: "ITJ"
-      coarseValue: "POS_X"
+      coarseValue: "X"
 [,]
 POS_PUNCT
    sofa: _InitialView
    begin: 1595
    end: 1596
    PosValue: "$,"
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [,]
 Lemma
    sofa: _InitialView
@@ -16934,14 +16934,14 @@ Token
       begin: 1595
       end: 1596
       PosValue: "$,"
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [etwas]
 POS_ADV
    sofa: _InitialView
    begin: 1597
    end: 1602
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [etwas]
 Lemma
    sofa: _InitialView
@@ -17004,14 +17004,14 @@ Token
       begin: 1597
       end: 1602
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [undiplomatischen]
 POS_ADJ
    sofa: _InitialView
    begin: 1603
    end: 1619
    PosValue: "ADJA"
-   coarseValue: "POS_ADJ"
+   coarseValue: "ADJ"
 [undiplomatischen]
 Lemma
    sofa: _InitialView
@@ -17074,14 +17074,14 @@ Token
       begin: 1603
       end: 1619
       PosValue: "ADJA"
-      coarseValue: "POS_ADJ"
+      coarseValue: "ADJ"
 [Stil]
 POS_NOUN
    sofa: _InitialView
    begin: 1620
    end: 1624
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Stil]
 Lemma
    sofa: _InitialView
@@ -17137,7 +17137,7 @@ Token
       begin: 1620
       end: 1624
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [im Weißen Haus]
 Constituent
    sofa: _InitialView
@@ -17186,7 +17186,7 @@ POS_ADP
    begin: 1625
    end: 1627
    PosValue: "APPRART"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [im]
 Lemma
    sofa: _InitialView
@@ -17249,7 +17249,7 @@ Token
       begin: 1625
       end: 1627
       PosValue: "APPRART"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [Weißen Haus]
 Constituent
    sofa: _InitialView
@@ -17361,7 +17361,7 @@ POS_ADJ
    begin: 1628
    end: 1634
    PosValue: "ADJA"
-   coarseValue: "POS_ADJ"
+   coarseValue: "ADJ"
 [Weißen]
 Lemma
    sofa: _InitialView
@@ -17438,14 +17438,14 @@ Token
       begin: 1628
       end: 1634
       PosValue: "ADJA"
-      coarseValue: "POS_ADJ"
+      coarseValue: "ADJ"
 [Haus]
 POS_NOUN
    sofa: _InitialView
    begin: 1635
    end: 1639
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Haus]
 Lemma
    sofa: _InitialView
@@ -17522,7 +17522,7 @@ Token
       begin: 1635
       end: 1639
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [dem Land]
 Constituent
    sofa: _InitialView
@@ -17564,7 +17564,7 @@ POS_DET
    begin: 1640
    end: 1643
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [dem]
 Lemma
    sofa: _InitialView
@@ -17620,14 +17620,14 @@ Token
       begin: 1640
       end: 1643
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [Land]
 POS_NOUN
    sofa: _InitialView
    begin: 1644
    end: 1648
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Land]
 Lemma
    sofa: _InitialView
@@ -17683,7 +17683,7 @@ Token
       begin: 1644
       end: 1648
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [ein Gefallen]
 Constituent
    sofa: _InitialView
@@ -17718,7 +17718,7 @@ POS_DET
    begin: 1649
    end: 1652
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [ein]
 Lemma
    sofa: _InitialView
@@ -17767,14 +17767,14 @@ Token
       begin: 1649
       end: 1652
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [Gefallen]
 POS_NOUN
    sofa: _InitialView
    begin: 1653
    end: 1661
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Gefallen]
 Lemma
    sofa: _InitialView
@@ -17823,14 +17823,14 @@ Token
       begin: 1653
       end: 1661
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [getan]
 POS_VERB
    sofa: _InitialView
    begin: 1662
    end: 1667
    PosValue: "VVPP"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [getan]
 Lemma
    sofa: _InitialView
@@ -17879,14 +17879,14 @@ Token
       begin: 1662
       end: 1667
       PosValue: "VVPP"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [wäre]
 POS_VERB
    sofa: _InitialView
    begin: 1668
    end: 1672
    PosValue: "VAFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [wäre]
 Lemma
    sofa: _InitialView
@@ -17928,14 +17928,14 @@ Token
       begin: 1668
       end: 1672
       PosValue: "VAFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [.]
 POS_PUNCT
    sofa: _InitialView
    begin: 1673
    end: 1674
    PosValue: "$."
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [.]
 Lemma
    sofa: _InitialView
@@ -17963,7 +17963,7 @@ Token
       begin: 1673
       end: 1674
       PosValue: "$."
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [Er wäre vielleicht ein prächtiger Diktator - aber das ist nicht unser System . '']
 Sentence
    sofa: _InitialView
@@ -18023,7 +18023,7 @@ POS_PRON
    begin: 1675
    end: 1677
    PosValue: "PPER"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [Er]
 Lemma
    sofa: _InitialView
@@ -18065,14 +18065,14 @@ Token
       begin: 1675
       end: 1677
       PosValue: "PPER"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [wäre]
 POS_VERB
    sofa: _InitialView
    begin: 1678
    end: 1682
    PosValue: "VAFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [wäre]
 Lemma
    sofa: _InitialView
@@ -18114,14 +18114,14 @@ Token
       begin: 1678
       end: 1682
       PosValue: "VAFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [vielleicht]
 POS_ADV
    sofa: _InitialView
    begin: 1683
    end: 1693
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [vielleicht]
 Lemma
    sofa: _InitialView
@@ -18163,7 +18163,7 @@ Token
       begin: 1683
       end: 1693
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [ein prächtiger Diktator]
 Constituent
    sofa: _InitialView
@@ -18198,7 +18198,7 @@ POS_DET
    begin: 1694
    end: 1697
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [ein]
 Lemma
    sofa: _InitialView
@@ -18247,14 +18247,14 @@ Token
       begin: 1694
       end: 1697
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [prächtiger]
 POS_ADJ
    sofa: _InitialView
    begin: 1698
    end: 1708
    PosValue: "ADJA"
-   coarseValue: "POS_ADJ"
+   coarseValue: "ADJ"
 [prächtiger]
 Lemma
    sofa: _InitialView
@@ -18303,14 +18303,14 @@ Token
       begin: 1698
       end: 1708
       PosValue: "ADJA"
-      coarseValue: "POS_ADJ"
+      coarseValue: "ADJ"
 [Diktator]
 POS_NOUN
    sofa: _InitialView
    begin: 1709
    end: 1717
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Diktator]
 Lemma
    sofa: _InitialView
@@ -18359,14 +18359,14 @@ Token
       begin: 1709
       end: 1717
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [-]
 POS_PUNCT
    sofa: _InitialView
    begin: 1718
    end: 1719
    PosValue: "$("
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [-]
 Lemma
    sofa: _InitialView
@@ -18394,14 +18394,14 @@ Token
       begin: 1718
       end: 1719
       PosValue: "$("
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [aber]
 POS_CONJ
    sofa: _InitialView
    begin: 1720
    end: 1724
    PosValue: "KON"
-   coarseValue: "POS_CONJ"
+   coarseValue: "CONJ"
 [aber]
 Lemma
    sofa: _InitialView
@@ -18436,7 +18436,7 @@ Token
       begin: 1720
       end: 1724
       PosValue: "KON"
-      coarseValue: "POS_CONJ"
+      coarseValue: "CONJ"
 [das ist nicht unser System]
 Constituent
    sofa: _InitialView
@@ -18464,7 +18464,7 @@ POS_PRON
    begin: 1725
    end: 1728
    PosValue: "PDS"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [das]
 Lemma
    sofa: _InitialView
@@ -18506,14 +18506,14 @@ Token
       begin: 1725
       end: 1728
       PosValue: "PDS"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [ist]
 POS_VERB
    sofa: _InitialView
    begin: 1729
    end: 1732
    PosValue: "VAFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [ist]
 Lemma
    sofa: _InitialView
@@ -18555,14 +18555,14 @@ Token
       begin: 1729
       end: 1732
       PosValue: "VAFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [nicht]
 POS_X
    sofa: _InitialView
    begin: 1733
    end: 1738
    PosValue: "PTKNEG"
-   coarseValue: "POS_X"
+   coarseValue: "X"
 [nicht]
 Lemma
    sofa: _InitialView
@@ -18604,7 +18604,7 @@ Token
       begin: 1733
       end: 1738
       PosValue: "PTKNEG"
-      coarseValue: "POS_X"
+      coarseValue: "X"
 [unser System]
 Constituent
    sofa: _InitialView
@@ -18639,7 +18639,7 @@ POS_PRON
    begin: 1739
    end: 1744
    PosValue: "PPOSAT"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [unser]
 Lemma
    sofa: _InitialView
@@ -18688,14 +18688,14 @@ Token
       begin: 1739
       end: 1744
       PosValue: "PPOSAT"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [System]
 POS_NOUN
    sofa: _InitialView
    begin: 1745
    end: 1751
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [System]
 Lemma
    sofa: _InitialView
@@ -18744,14 +18744,14 @@ Token
       begin: 1745
       end: 1751
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [.]
 POS_PUNCT
    sofa: _InitialView
    begin: 1752
    end: 1753
    PosValue: "$."
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [.]
 Lemma
    sofa: _InitialView
@@ -18779,14 +18779,14 @@ Token
       begin: 1752
       end: 1753
       PosValue: "$."
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 ['']
 POS_PUNCT
    sofa: _InitialView
    begin: 1754
    end: 1756
    PosValue: "$("
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 ['']
 Lemma
    sofa: _InitialView
@@ -18814,7 +18814,7 @@ Token
       begin: 1754
       end: 1756
       PosValue: "$("
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [Und ein anderer Manager vermutet , daß sich `` ein Dogmatiker wie Perot in Washington schwer tun würde , es sei denn er schafft den Kongreß ab '' .]
 Sentence
    sofa: _InitialView
@@ -18853,7 +18853,7 @@ POS_CONJ
    begin: 1757
    end: 1760
    PosValue: "KON"
-   coarseValue: "POS_CONJ"
+   coarseValue: "CONJ"
 [Und]
 Lemma
    sofa: _InitialView
@@ -18888,7 +18888,7 @@ Token
       begin: 1757
       end: 1760
       PosValue: "KON"
-      coarseValue: "POS_CONJ"
+      coarseValue: "CONJ"
 [ein anderer Manager]
 Constituent
    sofa: _InitialView
@@ -18916,7 +18916,7 @@ POS_DET
    begin: 1761
    end: 1764
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [ein]
 Lemma
    sofa: _InitialView
@@ -18958,14 +18958,14 @@ Token
       begin: 1761
       end: 1764
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [anderer]
 POS_ADJ
    sofa: _InitialView
    begin: 1765
    end: 1772
    PosValue: "ADJA"
-   coarseValue: "POS_ADJ"
+   coarseValue: "ADJ"
 [anderer]
 Lemma
    sofa: _InitialView
@@ -19007,14 +19007,14 @@ Token
       begin: 1765
       end: 1772
       PosValue: "ADJA"
-      coarseValue: "POS_ADJ"
+      coarseValue: "ADJ"
 [Manager]
 POS_NOUN
    sofa: _InitialView
    begin: 1773
    end: 1780
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Manager]
 Lemma
    sofa: _InitialView
@@ -19056,14 +19056,14 @@ Token
       begin: 1773
       end: 1780
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [vermutet]
 POS_VERB
    sofa: _InitialView
    begin: 1781
    end: 1789
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [vermutet]
 Lemma
    sofa: _InitialView
@@ -19098,14 +19098,14 @@ Token
       begin: 1781
       end: 1789
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [,]
 POS_PUNCT
    sofa: _InitialView
    begin: 1790
    end: 1791
    PosValue: "$,"
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [,]
 Lemma
    sofa: _InitialView
@@ -19133,7 +19133,7 @@ Token
       begin: 1790
       end: 1791
       PosValue: "$,"
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [daß sich `` ein Dogmatiker wie Perot in Washington schwer tun würde , es sei denn er schafft den Kongreß ab]
 Constituent
    sofa: _InitialView
@@ -19161,7 +19161,7 @@ POS_CONJ
    begin: 1792
    end: 1795
    PosValue: "KOUS"
-   coarseValue: "POS_CONJ"
+   coarseValue: "CONJ"
 [daß]
 Lemma
    sofa: _InitialView
@@ -19203,7 +19203,7 @@ Token
       begin: 1792
       end: 1795
       PosValue: "KOUS"
-      coarseValue: "POS_CONJ"
+      coarseValue: "CONJ"
 [sich `` ein Dogmatiker wie Perot in Washington schwer tun würde , es sei denn er schafft den Kongreß ab]
 Constituent
    sofa: _InitialView
@@ -19238,7 +19238,7 @@ POS_PRON
    begin: 1796
    end: 1800
    PosValue: "PRF"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [sich]
 Lemma
    sofa: _InitialView
@@ -19287,14 +19287,14 @@ Token
       begin: 1796
       end: 1800
       PosValue: "PRF"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [``]
 POS_PUNCT
    sofa: _InitialView
    begin: 1801
    end: 1803
    PosValue: "$("
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [``]
 Lemma
    sofa: _InitialView
@@ -19322,7 +19322,7 @@ Token
       begin: 1801
       end: 1803
       PosValue: "$("
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [ein Dogmatiker wie Perot]
 Constituent
    sofa: _InitialView
@@ -19357,7 +19357,7 @@ POS_DET
    begin: 1804
    end: 1807
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [ein]
 Lemma
    sofa: _InitialView
@@ -19406,14 +19406,14 @@ Token
       begin: 1804
       end: 1807
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [Dogmatiker]
 POS_NOUN
    sofa: _InitialView
    begin: 1808
    end: 1818
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Dogmatiker]
 Lemma
    sofa: _InitialView
@@ -19462,7 +19462,7 @@ Token
       begin: 1808
       end: 1818
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [wie Perot]
 Constituent
    sofa: _InitialView
@@ -19504,7 +19504,7 @@ POS_CONJ
    begin: 1819
    end: 1822
    PosValue: "KOKOM"
-   coarseValue: "POS_CONJ"
+   coarseValue: "CONJ"
 [wie]
 Lemma
    sofa: _InitialView
@@ -19560,14 +19560,14 @@ Token
       begin: 1819
       end: 1822
       PosValue: "KOKOM"
-      coarseValue: "POS_CONJ"
+      coarseValue: "CONJ"
 [Perot]
 POS_PROPN
    sofa: _InitialView
    begin: 1823
    end: 1828
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Perot]
 Lemma
    sofa: _InitialView
@@ -19623,7 +19623,7 @@ Token
       begin: 1823
       end: 1828
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [in Washington]
 Constituent
    sofa: _InitialView
@@ -19665,7 +19665,7 @@ POS_ADP
    begin: 1829
    end: 1831
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [in]
 Lemma
    sofa: _InitialView
@@ -19721,14 +19721,14 @@ Token
       begin: 1829
       end: 1831
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [Washington]
 POS_PROPN
    sofa: _InitialView
    begin: 1832
    end: 1842
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Washington]
 Lemma
    sofa: _InitialView
@@ -19784,14 +19784,14 @@ Token
       begin: 1832
       end: 1842
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [schwer]
 POS_ADJ
    sofa: _InitialView
    begin: 1843
    end: 1849
    PosValue: "ADJD"
-   coarseValue: "POS_ADJ"
+   coarseValue: "ADJ"
 [schwer]
 Lemma
    sofa: _InitialView
@@ -19840,14 +19840,14 @@ Token
       begin: 1843
       end: 1849
       PosValue: "ADJD"
-      coarseValue: "POS_ADJ"
+      coarseValue: "ADJ"
 [tun]
 POS_VERB
    sofa: _InitialView
    begin: 1850
    end: 1853
    PosValue: "VVINF"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [tun]
 Lemma
    sofa: _InitialView
@@ -19896,14 +19896,14 @@ Token
       begin: 1850
       end: 1853
       PosValue: "VVINF"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [würde]
 POS_VERB
    sofa: _InitialView
    begin: 1854
    end: 1859
    PosValue: "VAFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [würde]
 Lemma
    sofa: _InitialView
@@ -19945,14 +19945,14 @@ Token
       begin: 1854
       end: 1859
       PosValue: "VAFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [,]
 POS_PUNCT
    sofa: _InitialView
    begin: 1860
    end: 1861
    PosValue: "$,"
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [,]
 Lemma
    sofa: _InitialView
@@ -19980,7 +19980,7 @@ Token
       begin: 1860
       end: 1861
       PosValue: "$,"
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [es sei denn er schafft den Kongreß ab]
 Constituent
    sofa: _InitialView
@@ -20022,7 +20022,7 @@ POS_PRON
    begin: 1862
    end: 1864
    PosValue: "PPER"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [es]
 Lemma
    sofa: _InitialView
@@ -20078,14 +20078,14 @@ Token
       begin: 1862
       end: 1864
       PosValue: "PPER"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [sei]
 POS_VERB
    sofa: _InitialView
    begin: 1865
    end: 1868
    PosValue: "VAFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [sei]
 Lemma
    sofa: _InitialView
@@ -20141,14 +20141,14 @@ Token
       begin: 1865
       end: 1868
       PosValue: "VAFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [denn]
 POS_ADV
    sofa: _InitialView
    begin: 1869
    end: 1873
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [denn]
 Lemma
    sofa: _InitialView
@@ -20204,7 +20204,7 @@ Token
       begin: 1869
       end: 1873
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [er schafft den Kongreß ab]
 Constituent
    sofa: _InitialView
@@ -20253,7 +20253,7 @@ POS_PRON
    begin: 1874
    end: 1876
    PosValue: "PPER"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [er]
 Lemma
    sofa: _InitialView
@@ -20316,14 +20316,14 @@ Token
       begin: 1874
       end: 1876
       PosValue: "PPER"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [schafft]
 POS_VERB
    sofa: _InitialView
    begin: 1877
    end: 1884
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [schafft]
 Lemma
    sofa: _InitialView
@@ -20386,7 +20386,7 @@ Token
       begin: 1877
       end: 1884
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [den Kongreß]
 Constituent
    sofa: _InitialView
@@ -20442,7 +20442,7 @@ POS_DET
    begin: 1885
    end: 1888
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [den]
 Lemma
    sofa: _InitialView
@@ -20512,14 +20512,14 @@ Token
       begin: 1885
       end: 1888
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [Kongreß]
 POS_NOUN
    sofa: _InitialView
    begin: 1889
    end: 1896
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Kongreß]
 Lemma
    sofa: _InitialView
@@ -20589,14 +20589,14 @@ Token
       begin: 1889
       end: 1896
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [ab]
 POS_VERB
    sofa: _InitialView
    begin: 1897
    end: 1899
    PosValue: "PTKVZ"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [ab]
 Lemma
    sofa: _InitialView
@@ -20659,14 +20659,14 @@ Token
       begin: 1897
       end: 1899
       PosValue: "PTKVZ"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 ['']
 POS_PUNCT
    sofa: _InitialView
    begin: 1900
    end: 1902
    PosValue: "$("
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 ['']
 Lemma
    sofa: _InitialView
@@ -20694,14 +20694,14 @@ Token
       begin: 1900
       end: 1902
       PosValue: "$("
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [.]
 POS_PUNCT
    sofa: _InitialView
    begin: 1903
    end: 1904
    PosValue: "$."
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [.]
 Lemma
    sofa: _InitialView
@@ -20729,7 +20729,7 @@ Token
       begin: 1903
       end: 1904
       PosValue: "$."
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [Ein ehemaliger Geschäftsführer , der heute in fünf Konzernen im Aufsichtsgremium sitzt , `` kennt niemanden , der nicht glaubt , daß Perot als Präsident eine absolute Katastrophe wäre '' .]
 Sentence
    sofa: _InitialView
@@ -20789,7 +20789,7 @@ POS_DET
    begin: 1905
    end: 1908
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [Ein]
 Lemma
    sofa: _InitialView
@@ -20831,14 +20831,14 @@ Token
       begin: 1905
       end: 1908
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [ehemaliger]
 POS_ADJ
    sofa: _InitialView
    begin: 1909
    end: 1919
    PosValue: "ADJA"
-   coarseValue: "POS_ADJ"
+   coarseValue: "ADJ"
 [ehemaliger]
 Lemma
    sofa: _InitialView
@@ -20880,14 +20880,14 @@ Token
       begin: 1909
       end: 1919
       PosValue: "ADJA"
-      coarseValue: "POS_ADJ"
+      coarseValue: "ADJ"
 [Geschäftsführer]
 POS_NOUN
    sofa: _InitialView
    begin: 1920
    end: 1935
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Geschäftsführer]
 Lemma
    sofa: _InitialView
@@ -20929,14 +20929,14 @@ Token
       begin: 1920
       end: 1935
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [,]
 POS_PUNCT
    sofa: _InitialView
    begin: 1936
    end: 1937
    PosValue: "$,"
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [,]
 Lemma
    sofa: _InitialView
@@ -20964,7 +20964,7 @@ Token
       begin: 1936
       end: 1937
       PosValue: "$,"
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [der heute in fünf Konzernen im Aufsichtsgremium sitzt]
 Constituent
    sofa: _InitialView
@@ -20999,7 +20999,7 @@ POS_PRON
    begin: 1938
    end: 1941
    PosValue: "PRELS"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [der]
 Lemma
    sofa: _InitialView
@@ -21048,14 +21048,14 @@ Token
       begin: 1938
       end: 1941
       PosValue: "PRELS"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [heute]
 POS_ADV
    sofa: _InitialView
    begin: 1942
    end: 1947
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [heute]
 Lemma
    sofa: _InitialView
@@ -21104,7 +21104,7 @@ Token
       begin: 1942
       end: 1947
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [in fünf Konzernen]
 Constituent
    sofa: _InitialView
@@ -21146,7 +21146,7 @@ POS_ADP
    begin: 1948
    end: 1950
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [in]
 Lemma
    sofa: _InitialView
@@ -21202,14 +21202,14 @@ Token
       begin: 1948
       end: 1950
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [fünf]
 POS_NUM
    sofa: _InitialView
    begin: 1951
    end: 1955
    PosValue: "CARD"
-   coarseValue: "POS_NUM"
+   coarseValue: "NUM"
 [fünf]
 Lemma
    sofa: _InitialView
@@ -21265,14 +21265,14 @@ Token
       begin: 1951
       end: 1955
       PosValue: "CARD"
-      coarseValue: "POS_NUM"
+      coarseValue: "NUM"
 [Konzernen]
 POS_NOUN
    sofa: _InitialView
    begin: 1956
    end: 1965
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Konzernen]
 Lemma
    sofa: _InitialView
@@ -21328,7 +21328,7 @@ Token
       begin: 1956
       end: 1965
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [im Aufsichtsgremium]
 Constituent
    sofa: _InitialView
@@ -21370,7 +21370,7 @@ POS_ADP
    begin: 1966
    end: 1968
    PosValue: "APPRART"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [im]
 Lemma
    sofa: _InitialView
@@ -21426,14 +21426,14 @@ Token
       begin: 1966
       end: 1968
       PosValue: "APPRART"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [Aufsichtsgremium]
 POS_NOUN
    sofa: _InitialView
    begin: 1969
    end: 1985
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Aufsichtsgremium]
 Lemma
    sofa: _InitialView
@@ -21489,14 +21489,14 @@ Token
       begin: 1969
       end: 1985
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [sitzt]
 POS_VERB
    sofa: _InitialView
    begin: 1986
    end: 1991
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [sitzt]
 Lemma
    sofa: _InitialView
@@ -21545,14 +21545,14 @@ Token
       begin: 1986
       end: 1991
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [,]
 POS_PUNCT
    sofa: _InitialView
    begin: 1992
    end: 1993
    PosValue: "$,"
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [,]
 Lemma
    sofa: _InitialView
@@ -21580,14 +21580,14 @@ Token
       begin: 1992
       end: 1993
       PosValue: "$,"
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [``]
 POS_PUNCT
    sofa: _InitialView
    begin: 1994
    end: 1996
    PosValue: "$("
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [``]
 Lemma
    sofa: _InitialView
@@ -21615,14 +21615,14 @@ Token
       begin: 1994
       end: 1996
       PosValue: "$("
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [kennt]
 POS_VERB
    sofa: _InitialView
    begin: 1997
    end: 2002
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [kennt]
 Lemma
    sofa: _InitialView
@@ -21657,7 +21657,7 @@ Token
       begin: 1997
       end: 2002
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [niemanden , der nicht glaubt , daß Perot als Präsident eine absolute Katastrophe wäre]
 Constituent
    sofa: _InitialView
@@ -21685,7 +21685,7 @@ POS_PRON
    begin: 2003
    end: 2012
    PosValue: "PIS"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [niemanden]
 Lemma
    sofa: _InitialView
@@ -21727,14 +21727,14 @@ Token
       begin: 2003
       end: 2012
       PosValue: "PIS"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [,]
 POS_PUNCT
    sofa: _InitialView
    begin: 2013
    end: 2014
    PosValue: "$,"
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [,]
 Lemma
    sofa: _InitialView
@@ -21762,7 +21762,7 @@ Token
       begin: 2013
       end: 2014
       PosValue: "$,"
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [der nicht glaubt , daß Perot als Präsident eine absolute Katastrophe wäre]
 Constituent
    sofa: _InitialView
@@ -21797,7 +21797,7 @@ POS_PRON
    begin: 2015
    end: 2018
    PosValue: "PRELS"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [der]
 Lemma
    sofa: _InitialView
@@ -21846,14 +21846,14 @@ Token
       begin: 2015
       end: 2018
       PosValue: "PRELS"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [nicht]
 POS_X
    sofa: _InitialView
    begin: 2019
    end: 2024
    PosValue: "PTKNEG"
-   coarseValue: "POS_X"
+   coarseValue: "X"
 [nicht]
 Lemma
    sofa: _InitialView
@@ -21902,14 +21902,14 @@ Token
       begin: 2019
       end: 2024
       PosValue: "PTKNEG"
-      coarseValue: "POS_X"
+      coarseValue: "X"
 [glaubt]
 POS_VERB
    sofa: _InitialView
    begin: 2025
    end: 2031
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [glaubt]
 Lemma
    sofa: _InitialView
@@ -21958,14 +21958,14 @@ Token
       begin: 2025
       end: 2031
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [,]
 POS_PUNCT
    sofa: _InitialView
    begin: 2032
    end: 2033
    PosValue: "$,"
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [,]
 Lemma
    sofa: _InitialView
@@ -21993,7 +21993,7 @@ Token
       begin: 2032
       end: 2033
       PosValue: "$,"
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [daß Perot als Präsident eine absolute Katastrophe wäre]
 Constituent
    sofa: _InitialView
@@ -22035,7 +22035,7 @@ POS_CONJ
    begin: 2034
    end: 2037
    PosValue: "KOUS"
-   coarseValue: "POS_CONJ"
+   coarseValue: "CONJ"
 [daß]
 Lemma
    sofa: _InitialView
@@ -22091,14 +22091,14 @@ Token
       begin: 2034
       end: 2037
       PosValue: "KOUS"
-      coarseValue: "POS_CONJ"
+      coarseValue: "CONJ"
 [Perot]
 POS_PROPN
    sofa: _InitialView
    begin: 2038
    end: 2043
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Perot]
 Lemma
    sofa: _InitialView
@@ -22154,7 +22154,7 @@ Token
       begin: 2038
       end: 2043
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [als Präsident]
 Constituent
    sofa: _InitialView
@@ -22203,7 +22203,7 @@ POS_ADP
    begin: 2044
    end: 2047
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [als]
 Lemma
    sofa: _InitialView
@@ -22266,14 +22266,14 @@ Token
       begin: 2044
       end: 2047
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [Präsident]
 POS_NOUN
    sofa: _InitialView
    begin: 2048
    end: 2057
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Präsident]
 Lemma
    sofa: _InitialView
@@ -22336,7 +22336,7 @@ Token
       begin: 2048
       end: 2057
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [eine absolute Katastrophe]
 Constituent
    sofa: _InitialView
@@ -22385,7 +22385,7 @@ POS_DET
    begin: 2058
    end: 2062
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [eine]
 Lemma
    sofa: _InitialView
@@ -22448,14 +22448,14 @@ Token
       begin: 2058
       end: 2062
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [absolute]
 POS_ADJ
    sofa: _InitialView
    begin: 2063
    end: 2071
    PosValue: "ADJA"
-   coarseValue: "POS_ADJ"
+   coarseValue: "ADJ"
 [absolute]
 Lemma
    sofa: _InitialView
@@ -22518,14 +22518,14 @@ Token
       begin: 2063
       end: 2071
       PosValue: "ADJA"
-      coarseValue: "POS_ADJ"
+      coarseValue: "ADJ"
 [Katastrophe]
 POS_NOUN
    sofa: _InitialView
    begin: 2072
    end: 2083
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Katastrophe]
 Lemma
    sofa: _InitialView
@@ -22588,14 +22588,14 @@ Token
       begin: 2072
       end: 2083
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [wäre]
 POS_VERB
    sofa: _InitialView
    begin: 2084
    end: 2088
    PosValue: "VAFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [wäre]
 Lemma
    sofa: _InitialView
@@ -22651,14 +22651,14 @@ Token
       begin: 2084
       end: 2088
       PosValue: "VAFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 ['']
 POS_PUNCT
    sofa: _InitialView
    begin: 2089
    end: 2091
    PosValue: "$("
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 ['']
 Lemma
    sofa: _InitialView
@@ -22686,14 +22686,14 @@ Token
       begin: 2089
       end: 2091
       PosValue: "$("
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [.]
 POS_PUNCT
    sofa: _InitialView
    begin: 2092
    end: 2093
    PosValue: "$."
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [.]
 Lemma
    sofa: _InitialView
@@ -22721,7 +22721,7 @@ Token
       begin: 2092
       end: 2093
       PosValue: "$."
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [Allerdings gibt es dem Magazin zufolge in kleinen und mittleren Firmen viele Unternehmer , die meinen , Perot sei einer von ihnen , und die den Texaner unterstützen .]
 Sentence
    sofa: _InitialView
@@ -22760,7 +22760,7 @@ POS_ADV
    begin: 2094
    end: 2104
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [Allerdings]
 Lemma
    sofa: _InitialView
@@ -22795,14 +22795,14 @@ Token
       begin: 2094
       end: 2104
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [gibt]
 POS_VERB
    sofa: _InitialView
    begin: 2105
    end: 2109
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [gibt]
 Lemma
    sofa: _InitialView
@@ -22837,14 +22837,14 @@ Token
       begin: 2105
       end: 2109
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [es]
 POS_PRON
    sofa: _InitialView
    begin: 2110
    end: 2112
    PosValue: "PPER"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [es]
 Lemma
    sofa: _InitialView
@@ -22879,7 +22879,7 @@ Token
       begin: 2110
       end: 2112
       PosValue: "PPER"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [dem Magazin zufolge]
 Constituent
    sofa: _InitialView
@@ -22907,7 +22907,7 @@ POS_DET
    begin: 2113
    end: 2116
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [dem]
 Lemma
    sofa: _InitialView
@@ -22949,14 +22949,14 @@ Token
       begin: 2113
       end: 2116
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [Magazin]
 POS_NOUN
    sofa: _InitialView
    begin: 2117
    end: 2124
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Magazin]
 Lemma
    sofa: _InitialView
@@ -22998,14 +22998,14 @@ Token
       begin: 2117
       end: 2124
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [zufolge]
 POS_ADP
    sofa: _InitialView
    begin: 2125
    end: 2132
    PosValue: "APPO"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [zufolge]
 Lemma
    sofa: _InitialView
@@ -23047,7 +23047,7 @@ Token
       begin: 2125
       end: 2132
       PosValue: "APPO"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [in kleinen und mittleren Firmen]
 Constituent
    sofa: _InitialView
@@ -23075,7 +23075,7 @@ POS_ADP
    begin: 2133
    end: 2135
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [in]
 Lemma
    sofa: _InitialView
@@ -23117,7 +23117,7 @@ Token
       begin: 2133
       end: 2135
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [kleinen und mittleren]
 Constituent
    sofa: _InitialView
@@ -23152,7 +23152,7 @@ POS_ADJ
    begin: 2136
    end: 2143
    PosValue: "ADJA"
-   coarseValue: "POS_ADJ"
+   coarseValue: "ADJ"
 [kleinen]
 Lemma
    sofa: _InitialView
@@ -23201,14 +23201,14 @@ Token
       begin: 2136
       end: 2143
       PosValue: "ADJA"
-      coarseValue: "POS_ADJ"
+      coarseValue: "ADJ"
 [und]
 POS_CONJ
    sofa: _InitialView
    begin: 2144
    end: 2147
    PosValue: "KON"
-   coarseValue: "POS_CONJ"
+   coarseValue: "CONJ"
 [und]
 Lemma
    sofa: _InitialView
@@ -23257,14 +23257,14 @@ Token
       begin: 2144
       end: 2147
       PosValue: "KON"
-      coarseValue: "POS_CONJ"
+      coarseValue: "CONJ"
 [mittleren]
 POS_ADJ
    sofa: _InitialView
    begin: 2148
    end: 2157
    PosValue: "ADJA"
-   coarseValue: "POS_ADJ"
+   coarseValue: "ADJ"
 [mittleren]
 Lemma
    sofa: _InitialView
@@ -23313,14 +23313,14 @@ Token
       begin: 2148
       end: 2157
       PosValue: "ADJA"
-      coarseValue: "POS_ADJ"
+      coarseValue: "ADJ"
 [Firmen]
 POS_NOUN
    sofa: _InitialView
    begin: 2158
    end: 2164
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Firmen]
 Lemma
    sofa: _InitialView
@@ -23362,7 +23362,7 @@ Token
       begin: 2158
       end: 2164
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [viele Unternehmer , die meinen , Perot sei einer von ihnen , und die den Texaner unterstützen]
 Constituent
    sofa: _InitialView
@@ -23390,7 +23390,7 @@ POS_PRON
    begin: 2165
    end: 2170
    PosValue: "PIAT"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [viele]
 Lemma
    sofa: _InitialView
@@ -23432,14 +23432,14 @@ Token
       begin: 2165
       end: 2170
       PosValue: "PIAT"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [Unternehmer]
 POS_NOUN
    sofa: _InitialView
    begin: 2171
    end: 2182
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Unternehmer]
 Lemma
    sofa: _InitialView
@@ -23481,14 +23481,14 @@ Token
       begin: 2171
       end: 2182
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [,]
 POS_PUNCT
    sofa: _InitialView
    begin: 2183
    end: 2184
    PosValue: "$,"
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [,]
 Lemma
    sofa: _InitialView
@@ -23516,7 +23516,7 @@ Token
       begin: 2183
       end: 2184
       PosValue: "$,"
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [die meinen , Perot sei einer von ihnen , und die den Texaner unterstützen]
 Constituent
    sofa: _InitialView
@@ -23586,7 +23586,7 @@ POS_PRON
    begin: 2185
    end: 2188
    PosValue: "PRELS"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [die]
 Lemma
    sofa: _InitialView
@@ -23642,14 +23642,14 @@ Token
       begin: 2185
       end: 2188
       PosValue: "PRELS"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [meinen]
 POS_VERB
    sofa: _InitialView
    begin: 2189
    end: 2195
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [meinen]
 Lemma
    sofa: _InitialView
@@ -23705,14 +23705,14 @@ Token
       begin: 2189
       end: 2195
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [,]
 POS_PUNCT
    sofa: _InitialView
    begin: 2196
    end: 2197
    PosValue: "$,"
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [,]
 Lemma
    sofa: _InitialView
@@ -23740,7 +23740,7 @@ Token
       begin: 2196
       end: 2197
       PosValue: "$,"
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [Perot sei einer von ihnen]
 Constituent
    sofa: _InitialView
@@ -23789,7 +23789,7 @@ POS_PROPN
    begin: 2198
    end: 2203
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Perot]
 Lemma
    sofa: _InitialView
@@ -23852,14 +23852,14 @@ Token
       begin: 2198
       end: 2203
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [sei]
 POS_VERB
    sofa: _InitialView
    begin: 2204
    end: 2207
    PosValue: "VAFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [sei]
 Lemma
    sofa: _InitialView
@@ -23922,7 +23922,7 @@ Token
       begin: 2204
       end: 2207
       PosValue: "VAFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [einer von ihnen]
 Constituent
    sofa: _InitialView
@@ -23978,7 +23978,7 @@ POS_PRON
    begin: 2208
    end: 2213
    PosValue: "PIS"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [einer]
 Lemma
    sofa: _InitialView
@@ -24048,7 +24048,7 @@ Token
       begin: 2208
       end: 2213
       PosValue: "PIS"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [von ihnen]
 Constituent
    sofa: _InitialView
@@ -24111,7 +24111,7 @@ POS_ADP
    begin: 2214
    end: 2217
    PosValue: "APPR"
-   coarseValue: "POS_ADP"
+   coarseValue: "ADP"
 [von]
 Lemma
    sofa: _InitialView
@@ -24188,14 +24188,14 @@ Token
       begin: 2214
       end: 2217
       PosValue: "APPR"
-      coarseValue: "POS_ADP"
+      coarseValue: "ADP"
 [ihnen]
 POS_PRON
    sofa: _InitialView
    begin: 2218
    end: 2223
    PosValue: "PPER"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [ihnen]
 Lemma
    sofa: _InitialView
@@ -24272,14 +24272,14 @@ Token
       begin: 2218
       end: 2223
       PosValue: "PPER"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [,]
 POS_PUNCT
    sofa: _InitialView
    begin: 2224
    end: 2225
    PosValue: "$,"
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [,]
 Lemma
    sofa: _InitialView
@@ -24307,14 +24307,14 @@ Token
       begin: 2224
       end: 2225
       PosValue: "$,"
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [und]
 POS_CONJ
    sofa: _InitialView
    begin: 2226
    end: 2229
    PosValue: "KON"
-   coarseValue: "POS_CONJ"
+   coarseValue: "CONJ"
 [und]
 Lemma
    sofa: _InitialView
@@ -24363,7 +24363,7 @@ Token
       begin: 2226
       end: 2229
       PosValue: "KON"
-      coarseValue: "POS_CONJ"
+      coarseValue: "CONJ"
 [die den Texaner unterstützen]
 Constituent
    sofa: _InitialView
@@ -24405,7 +24405,7 @@ POS_PRON
    begin: 2230
    end: 2233
    PosValue: "PRELS"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [die]
 Lemma
    sofa: _InitialView
@@ -24461,7 +24461,7 @@ Token
       begin: 2230
       end: 2233
       PosValue: "PRELS"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [den Texaner]
 Constituent
    sofa: _InitialView
@@ -24510,7 +24510,7 @@ POS_DET
    begin: 2234
    end: 2237
    PosValue: "ART"
-   coarseValue: "POS_DET"
+   coarseValue: "DET"
 [den]
 Lemma
    sofa: _InitialView
@@ -24573,14 +24573,14 @@ Token
       begin: 2234
       end: 2237
       PosValue: "ART"
-      coarseValue: "POS_DET"
+      coarseValue: "DET"
 [Texaner]
 POS_NOUN
    sofa: _InitialView
    begin: 2238
    end: 2245
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Texaner]
 Lemma
    sofa: _InitialView
@@ -24643,14 +24643,14 @@ Token
       begin: 2238
       end: 2245
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [unterstützen]
 POS_VERB
    sofa: _InitialView
    begin: 2246
    end: 2258
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [unterstützen]
 Lemma
    sofa: _InitialView
@@ -24706,14 +24706,14 @@ Token
       begin: 2246
       end: 2258
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [.]
 POS_PUNCT
    sofa: _InitialView
    begin: 2259
    end: 2260
    PosValue: "$."
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [.]
 Lemma
    sofa: _InitialView
@@ -24741,7 +24741,7 @@ Token
       begin: 2259
       end: 2260
       PosValue: "$."
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [Zwei Themen , die Perot immer wieder anspricht , Rezession und Bürokratie , machen ihnen besonders zu schaffen .]
 Sentence
    sofa: _InitialView
@@ -24801,7 +24801,7 @@ POS_NUM
    begin: 2261
    end: 2265
    PosValue: "CARD"
-   coarseValue: "POS_NUM"
+   coarseValue: "NUM"
 [Zwei]
 Lemma
    sofa: _InitialView
@@ -24843,14 +24843,14 @@ Token
       begin: 2261
       end: 2265
       PosValue: "CARD"
-      coarseValue: "POS_NUM"
+      coarseValue: "NUM"
 [Themen]
 POS_NOUN
    sofa: _InitialView
    begin: 2266
    end: 2272
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Themen]
 Lemma
    sofa: _InitialView
@@ -24892,14 +24892,14 @@ Token
       begin: 2266
       end: 2272
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [,]
 POS_PUNCT
    sofa: _InitialView
    begin: 2273
    end: 2274
    PosValue: "$,"
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [,]
 Lemma
    sofa: _InitialView
@@ -24927,7 +24927,7 @@ Token
       begin: 2273
       end: 2274
       PosValue: "$,"
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [die Perot immer wieder anspricht]
 Constituent
    sofa: _InitialView
@@ -24962,7 +24962,7 @@ POS_PRON
    begin: 2275
    end: 2278
    PosValue: "PRELS"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [die]
 Lemma
    sofa: _InitialView
@@ -25011,14 +25011,14 @@ Token
       begin: 2275
       end: 2278
       PosValue: "PRELS"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [Perot]
 POS_PROPN
    sofa: _InitialView
    begin: 2279
    end: 2284
    PosValue: "NE"
-   coarseValue: "POS_PROPN"
+   coarseValue: "PROPN"
 [Perot]
 Lemma
    sofa: _InitialView
@@ -25067,7 +25067,7 @@ Token
       begin: 2279
       end: 2284
       PosValue: "NE"
-      coarseValue: "POS_PROPN"
+      coarseValue: "PROPN"
 [immer wieder]
 Constituent
    sofa: _InitialView
@@ -25109,7 +25109,7 @@ POS_ADV
    begin: 2285
    end: 2290
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [immer]
 Lemma
    sofa: _InitialView
@@ -25165,14 +25165,14 @@ Token
       begin: 2285
       end: 2290
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [wieder]
 POS_ADV
    sofa: _InitialView
    begin: 2291
    end: 2297
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [wieder]
 Lemma
    sofa: _InitialView
@@ -25228,14 +25228,14 @@ Token
       begin: 2291
       end: 2297
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [anspricht]
 POS_VERB
    sofa: _InitialView
    begin: 2298
    end: 2307
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [anspricht]
 Lemma
    sofa: _InitialView
@@ -25284,14 +25284,14 @@ Token
       begin: 2298
       end: 2307
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [,]
 POS_PUNCT
    sofa: _InitialView
    begin: 2308
    end: 2309
    PosValue: "$,"
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [,]
 Lemma
    sofa: _InitialView
@@ -25319,7 +25319,7 @@ Token
       begin: 2308
       end: 2309
       PosValue: "$,"
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [Rezession und Bürokratie]
 Constituent
    sofa: _InitialView
@@ -25354,7 +25354,7 @@ POS_NOUN
    begin: 2310
    end: 2319
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Rezession]
 Lemma
    sofa: _InitialView
@@ -25403,14 +25403,14 @@ Token
       begin: 2310
       end: 2319
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [und]
 POS_CONJ
    sofa: _InitialView
    begin: 2320
    end: 2323
    PosValue: "KON"
-   coarseValue: "POS_CONJ"
+   coarseValue: "CONJ"
 [und]
 Lemma
    sofa: _InitialView
@@ -25459,14 +25459,14 @@ Token
       begin: 2320
       end: 2323
       PosValue: "KON"
-      coarseValue: "POS_CONJ"
+      coarseValue: "CONJ"
 [Bürokratie]
 POS_NOUN
    sofa: _InitialView
    begin: 2324
    end: 2334
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Bürokratie]
 Lemma
    sofa: _InitialView
@@ -25515,14 +25515,14 @@ Token
       begin: 2324
       end: 2334
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [,]
 POS_PUNCT
    sofa: _InitialView
    begin: 2335
    end: 2336
    PosValue: "$,"
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [,]
 Lemma
    sofa: _InitialView
@@ -25550,14 +25550,14 @@ Token
       begin: 2335
       end: 2336
       PosValue: "$,"
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [machen]
 POS_VERB
    sofa: _InitialView
    begin: 2337
    end: 2343
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [machen]
 Lemma
    sofa: _InitialView
@@ -25592,7 +25592,7 @@ Token
       begin: 2337
       end: 2343
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [ihnen besonders zu schaffen]
 Constituent
    sofa: _InitialView
@@ -25620,7 +25620,7 @@ POS_PRON
    begin: 2344
    end: 2349
    PosValue: "PPER"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [ihnen]
 Lemma
    sofa: _InitialView
@@ -25662,14 +25662,14 @@ Token
       begin: 2344
       end: 2349
       PosValue: "PPER"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [besonders]
 POS_ADV
    sofa: _InitialView
    begin: 2350
    end: 2359
    PosValue: "ADV"
-   coarseValue: "POS_ADV"
+   coarseValue: "ADV"
 [besonders]
 Lemma
    sofa: _InitialView
@@ -25711,7 +25711,7 @@ Token
       begin: 2350
       end: 2359
       PosValue: "ADV"
-      coarseValue: "POS_ADV"
+      coarseValue: "ADV"
 [zu schaffen]
 Constituent
    sofa: _InitialView
@@ -25746,7 +25746,7 @@ POS_X
    begin: 2360
    end: 2362
    PosValue: "PTKZU"
-   coarseValue: "POS_X"
+   coarseValue: "X"
 [zu]
 Lemma
    sofa: _InitialView
@@ -25795,14 +25795,14 @@ Token
       begin: 2360
       end: 2362
       PosValue: "PTKZU"
-      coarseValue: "POS_X"
+      coarseValue: "X"
 [schaffen]
 POS_VERB
    sofa: _InitialView
    begin: 2363
    end: 2371
    PosValue: "VVINF"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [schaffen]
 Lemma
    sofa: _InitialView
@@ -25851,14 +25851,14 @@ Token
       begin: 2363
       end: 2371
       PosValue: "VVINF"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [.]
 POS_PUNCT
    sofa: _InitialView
    begin: 2372
    end: 2373
    PosValue: "$."
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [.]
 Lemma
    sofa: _InitialView
@@ -25886,7 +25886,7 @@ Token
       begin: 2372
       end: 2373
       PosValue: "$."
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================

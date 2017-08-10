@@ -44,6 +44,7 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -261,8 +262,7 @@ public class TreeTaggerPosTagger
                             POS posAnno = (POS) cas.createAnnotation(posTag, aToken.getBegin(),
                                     aToken.getEnd());
                             posAnno.setPosValue(internTags ? aPos.intern() : aPos);
-                            posAnno.setCoarseValue(posAnno.getClass().equals(POS.class) ? null
-                                    : posAnno.getType().getShortName().intern());
+                            POSUtils.assignCoarseValue(posAnno);
                             aToken.setPos(posAnno);
                             pos[count.get()] = posAnno;
                         }

@@ -35,6 +35,7 @@ import org.apache.uima.util.Level;
 import org.apache.uima.util.Logger;
 import org.chasen.mecab.Tagger;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.PlatformDetector;
@@ -409,8 +410,7 @@ public class MeCabTagger
 			POS curPOS = new POS(aJCas, begin + curSenBegin + curMorphBegin, begin + curSenBegin
 					+ curMorphBegin + curMorph.length());
 			curPOS.setPosValue(curPOSList.get(j));
-			curPOS.setCoarseValue(curPOS.getClass().equals(POS.class) ? null
-	                : curPOS.getType().getShortName().intern());
+			POSUtils.assignCoarseValue(curPOS);
 			curPOS.addToIndexes();
 			String lemmaString = curBaseFormList.get(j);
 			if (lemmaString == null) {

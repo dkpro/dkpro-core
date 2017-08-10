@@ -47,6 +47,7 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Rule;
 import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_N;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_PR;
@@ -144,8 +145,7 @@ public class TokenMergerTest
 		POS pos = (POS) cas.createAnnotation(CasUtil.getType(cas, aPosType), aToken.getBegin(),
 				aToken.getEnd());
 		pos.setPosValue(aPosValue);
-		pos.setCoarseValue(pos.getClass().equals(POS.class) ? null
-                : pos.getType().getShortName().intern());
+		POSUtils.assignCoarseValue(pos);
 		aToken.setPos(pos);
 
 		Lemma lemma = new Lemma(aToken.getCAS().getJCas(), aToken.getBegin(), aToken.getEnd());

@@ -33,6 +33,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -286,8 +287,7 @@ public class PennTreeToJCasConverter
         }
         posAnno.setPosValue(internTags ? aPreterminal.getLabel().intern() : aPreterminal
                 .getLabel());
-        posAnno.setCoarseValue(posAnno.getClass().equals(POS.class) ? null
-                : posAnno.getType().getShortName().intern());
+        POSUtils.assignCoarseValue(posAnno);
         posAnno.addToIndexes();
         return posAnno;
     }

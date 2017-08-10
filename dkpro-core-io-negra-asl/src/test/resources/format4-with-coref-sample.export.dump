@@ -50,7 +50,7 @@ POS_X
    begin: 0
    end: 1
    PosValue: "P1"
-   coarseValue: "POS_X"
+   coarseValue: "X"
 [A]
 Lemma
    sofa: _InitialView
@@ -92,7 +92,7 @@ Token
       begin: 0
       end: 1
       PosValue: "P1"
-      coarseValue: "POS_X"
+      coarseValue: "X"
 [A]
 Constituent
    sofa: _InitialView
@@ -120,7 +120,7 @@ POS_X
    begin: 2
    end: 3
    PosValue: "P2"
-   coarseValue: "POS_X"
+   coarseValue: "X"
 [B]
 Lemma
    sofa: _InitialView
@@ -155,14 +155,14 @@ Token
       begin: 2
       end: 3
       PosValue: "P2"
-      coarseValue: "POS_X"
+      coarseValue: "X"
 [C]
 POS_X
    sofa: _InitialView
    begin: 4
    end: 5
    PosValue: "P3"
-   coarseValue: "POS_X"
+   coarseValue: "X"
 [C]
 Lemma
    sofa: _InitialView
@@ -190,7 +190,7 @@ Token
       begin: 4
       end: 5
       PosValue: "P3"
-      coarseValue: "POS_X"
+      coarseValue: "X"
 [D E F 20]
 Constituent
    sofa: _InitialView
@@ -211,7 +211,7 @@ POS_X
    begin: 6
    end: 7
    PosValue: "P4"
-   coarseValue: "POS_X"
+   coarseValue: "X"
 [D]
 Lemma
    sofa: _InitialView
@@ -253,7 +253,7 @@ Token
       begin: 6
       end: 7
       PosValue: "P4"
-      coarseValue: "POS_X"
+      coarseValue: "X"
 [D]
 Constituent
    sofa: _InitialView
@@ -281,7 +281,7 @@ POS_X
    begin: 8
    end: 9
    PosValue: "P5"
-   coarseValue: "POS_X"
+   coarseValue: "X"
 [E]
 Lemma
    sofa: _InitialView
@@ -309,7 +309,7 @@ Token
       begin: 8
       end: 9
       PosValue: "P5"
-      coarseValue: "POS_X"
+      coarseValue: "X"
 [F 20]
 Constituent
    sofa: _InitialView
@@ -337,7 +337,7 @@ POS_X
    begin: 10
    end: 11
    PosValue: "P6"
-   coarseValue: "POS_X"
+   coarseValue: "X"
 [F]
 Lemma
    sofa: _InitialView
@@ -386,7 +386,7 @@ Token
       begin: 10
       end: 11
       PosValue: "P6"
-      coarseValue: "POS_X"
+      coarseValue: "X"
 [F]
 Constituent
    sofa: _InitialView
@@ -421,7 +421,7 @@ POS_NUM
    begin: 12
    end: 14
    PosValue: "CARD"
-   coarseValue: "POS_NUM"
+   coarseValue: "NUM"
 [20]
 Lemma
    sofa: _InitialView
@@ -470,7 +470,7 @@ Token
       begin: 12
       end: 14
       PosValue: "CARD"
-      coarseValue: "POS_NUM"
+      coarseValue: "NUM"
 [20]
 Constituent
    sofa: _InitialView

@@ -33,6 +33,8 @@ import org.apache.uima.fit.component.CasDumpWriter;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.testing.EOLUtils;
+
 /**
  * Test cases for {@link RTFReader}.
  *
@@ -63,7 +65,11 @@ public class RTFReaderTest
                 CasDumpWriter.PARAM_OUTPUT_FILE, output);
 
         SimplePipeline.runPipeline(reader, writer);
-        assertEquals(FileUtils.readFileToString(testDump), FileUtils.readFileToString(output));
+        String reference = FileUtils.readFileToString(testDump, "UTF-8").trim();
+        String actual = FileUtils.readFileToString(output, "UTF-8").trim();
+        reference = EOLUtils.normalizeLineEndings(reference);
+        actual = EOLUtils.normalizeLineEndings(actual);
+        assertEquals(reference, actual);
     }
 
     /**
@@ -89,7 +95,11 @@ public class RTFReaderTest
                 CasDumpWriter.PARAM_OUTPUT_FILE, output);
 
         SimplePipeline.runPipeline(reader, writer);
-        assertEquals(FileUtils.readFileToString(testDump), FileUtils.readFileToString(output));
-
+        
+        String reference = FileUtils.readFileToString(testDump, "UTF-8").trim();
+        String actual = FileUtils.readFileToString(output, "UTF-8").trim();
+        reference = EOLUtils.normalizeLineEndings(reference);
+        actual = EOLUtils.normalizeLineEndings(actual);
+        assertEquals(reference, actual);
     }
 }

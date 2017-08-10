@@ -41,6 +41,7 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
@@ -233,8 +234,7 @@ public class HunPosTagger
                     Type posTag = posMappingProvider.getTagType(tags[i]);
                     POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
                     posAnno.setPosValue(internTags ? tags[i].intern() : tags[i]);
-                    posAnno.setCoarseValue(posAnno.getClass().equals(POS.class) ? null
-                            : posAnno.getType().getShortName().intern());
+                    POSUtils.assignCoarseValue(posAnno);
                     posAnno.addToIndexes();
                     t.setPos(posAnno);
                     i++;

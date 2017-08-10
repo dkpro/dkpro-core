@@ -47,6 +47,7 @@ import org.cogroo.text.impl.DocumentImpl;
 import org.cogroo.text.impl.SentenceImpl;
 import org.cogroo.text.impl.TokenImpl;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
@@ -183,8 +184,7 @@ public class CogrooPosTagger
                 POS posAnno = (POS) cas.createAnnotation(posTag, cSent.getStart() + cTok.getStart(),
                         cSent.getStart() + cTok.getEnd());
                 posAnno.setPosValue(internTags ? cTok.getPOSTag().intern() : cTok.getPOSTag());
-                posAnno.setCoarseValue(posAnno.getClass().equals(POS.class) ? null
-                        : posAnno.getType().getShortName().intern());
+                POSUtils.assignCoarseValue(posAnno);
                 posAnno.addToIndexes();
                 dTok.setPos(posAnno);
             }

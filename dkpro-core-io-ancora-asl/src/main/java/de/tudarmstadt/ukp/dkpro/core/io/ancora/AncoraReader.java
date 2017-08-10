@@ -53,6 +53,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
@@ -302,8 +303,7 @@ public class AncoraReader
                 Type posTagType = posMappingProvider.getTagType(aPos);
                 POS pos = (POS) getJCas().getCas().createAnnotation(posTagType, start, end);
                 pos.setPosValue(aPos.intern());
-                pos.setCoarseValue(pos.getClass().equals(POS.class) ? null
-                        : posTagType.getShortName().intern());
+                POSUtils.assignCoarseValue(pos);
                 pos.addToIndexes();
                 if (token != null) {
                     token.setPos(pos);

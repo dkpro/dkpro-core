@@ -47,6 +47,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
@@ -293,8 +294,7 @@ public class Conll2012Reader
                     POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
                     pos.setPosValue(word[POS].intern());
-                    pos.setCoarseValue(pos.getClass().equals(POS.class) ? null
-                            : posTag.getShortName().intern());
+                    POSUtils.assignCoarseValue(pos);
                     pos.addToIndexes();
                     token.setPos(pos);
                 }

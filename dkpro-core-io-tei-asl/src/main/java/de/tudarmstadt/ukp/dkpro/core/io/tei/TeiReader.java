@@ -75,6 +75,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
@@ -546,8 +547,7 @@ public class TeiReader
 						POS pos = (POS) getJCas().getCas().createAnnotation(posTagType,
 								token.getBegin(), token.getEnd());
 						pos.setPosValue(posTag);
-                        pos.setCoarseValue(pos.getClass().equals(POS.class) ? null
-                                : pos.getType().getShortName().intern());
+						POSUtils.assignCoarseValue(pos);
 						pos.addToIndexes();
 						token.setPos(pos);
 					}

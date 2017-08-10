@@ -36,6 +36,7 @@ import org.junit.Test;
 import org.xml.sax.InputSource;
 
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import de.tudarmstadt.ukp.dkpro.core.testing.EOLUtils;
 import eu.clarin.weblicht.wlfxb.io.WLDObjector;
 import eu.clarin.weblicht.wlfxb.tc.api.TextCorpus;
 import eu.clarin.weblicht.wlfxb.tc.api.TextCorpusLayer;
@@ -136,6 +137,8 @@ public class TcfReaderWriterTest
                 new File("src/test/resources/wlfxb.xml"), "UTF-8");
         String actual = FileUtils.readFileToString(
                 new File("target/test-output/roundtrip/wlfxb.xml"), "UTF-8");
+        reference = EOLUtils.normalizeLineEndings(reference);
+        actual = EOLUtils.normalizeLineEndings(actual);
         assertEquals(reference, actual);
     }
 

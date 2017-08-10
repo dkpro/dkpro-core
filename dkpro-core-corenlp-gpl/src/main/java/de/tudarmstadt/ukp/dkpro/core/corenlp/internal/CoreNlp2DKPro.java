@@ -29,6 +29,7 @@ import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
@@ -76,8 +77,7 @@ public class CoreNlp2DKPro
                 POS anno = (POS) aJCas.getCas().createAnnotation(tagType, token.getBegin(),
                         token.getEnd());
                 anno.setPosValue(internStrings ? tag.intern() : tag);
-                anno.setCoarseValue(anno.getClass().equals(POS.class) ? null
-                        : anno.getType().getShortName().intern());
+                POSUtils.assignCoarseValue(anno);
                 anno.addToIndexes();
                 token.setPos(anno);
             }

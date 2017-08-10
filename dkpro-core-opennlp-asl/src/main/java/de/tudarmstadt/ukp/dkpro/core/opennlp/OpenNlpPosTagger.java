@@ -39,6 +39,7 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
@@ -233,8 +234,7 @@ public class OpenNlpPosTagger
                 POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
                 // To save memory, we typically intern() tag strings
                 posAnno.setPosValue(internTags ? tag.intern() : tag);
-                posAnno.setCoarseValue(posAnno.getClass().equals(POS.class) ? null
-                        : posAnno.getType().getShortName().intern());
+                POSUtils.assignCoarseValue(posAnno);
                 posAnno.addToIndexes();
 // end::mapping-provider-use-2[]
                 

@@ -71,7 +71,7 @@ POS_PRON
    begin: 0
    end: 3
    PosValue: "PPER"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [Sie]
 Token
    sofa: _InitialView
@@ -102,14 +102,14 @@ Token
       begin: 0
       end: 3
       PosValue: "PPER"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [gehen]
 POS_VERB
    sofa: _InitialView
    begin: 4
    end: 9
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [gehen]
 Token
    sofa: _InitialView
@@ -140,7 +140,7 @@ Token
       begin: 4
       end: 9
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [gewagte Verbindungen und Risiken]
 Constituent
    sofa: _InitialView
@@ -210,7 +210,7 @@ POS_ADJ
    begin: 10
    end: 17
    PosValue: "ADJA"
-   coarseValue: "POS_ADJ"
+   coarseValue: "ADJ"
 [gewagte]
 Token
    sofa: _InitialView
@@ -255,14 +255,14 @@ Token
       begin: 10
       end: 17
       PosValue: "ADJA"
-      coarseValue: "POS_ADJ"
+      coarseValue: "ADJ"
 [Verbindungen]
 POS_NOUN
    sofa: _InitialView
    begin: 18
    end: 30
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Verbindungen]
 Token
    sofa: _InitialView
@@ -307,14 +307,14 @@ Token
       begin: 18
       end: 30
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [und]
 POS_CONJ
    sofa: _InitialView
    begin: 31
    end: 34
    PosValue: "KON"
-   coarseValue: "POS_CONJ"
+   coarseValue: "CONJ"
 [und]
 Token
    sofa: _InitialView
@@ -352,14 +352,14 @@ Token
       begin: 31
       end: 34
       PosValue: "KON"
-      coarseValue: "POS_CONJ"
+      coarseValue: "CONJ"
 [Risiken]
 POS_NOUN
    sofa: _InitialView
    begin: 35
    end: 42
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Risiken]
 Token
    sofa: _InitialView
@@ -397,14 +397,14 @@ Token
       begin: 35
       end: 42
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [ein]
 POS_VERB
    sofa: _InitialView
    begin: 43
    end: 46
    PosValue: "PTKVZ"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [ein]
 Token
    sofa: _InitialView
@@ -435,14 +435,14 @@ Token
       begin: 43
       end: 46
       PosValue: "PTKVZ"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [,]
 POS_PUNCT
    sofa: _InitialView
    begin: 47
    end: 48
    PosValue: "$,"
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [,]
 Token
    sofa: _InitialView
@@ -459,7 +459,7 @@ Token
       begin: 47
       end: 48
       PosValue: "$,"
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 [versuchen ihre Möglichkeiten auszureizen]
 Constituent
    sofa: _InitialView
@@ -487,7 +487,7 @@ POS_VERB
    begin: 49
    end: 58
    PosValue: "VVFIN"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [versuchen]
 Token
    sofa: _InitialView
@@ -518,7 +518,7 @@ Token
       begin: 49
       end: 58
       PosValue: "VVFIN"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [ihre Möglichkeiten auszureizen]
 Constituent
    sofa: _InitialView
@@ -588,7 +588,7 @@ POS_PRON
    begin: 59
    end: 63
    PosValue: "PPOSAT"
-   coarseValue: "POS_PRON"
+   coarseValue: "PRON"
 [ihre]
 Token
    sofa: _InitialView
@@ -633,14 +633,14 @@ Token
       begin: 59
       end: 63
       PosValue: "PPOSAT"
-      coarseValue: "POS_PRON"
+      coarseValue: "PRON"
 [Möglichkeiten]
 POS_NOUN
    sofa: _InitialView
    begin: 64
    end: 77
    PosValue: "NN"
-   coarseValue: "POS_NOUN"
+   coarseValue: "NOUN"
 [Möglichkeiten]
 Token
    sofa: _InitialView
@@ -685,14 +685,14 @@ Token
       begin: 64
       end: 77
       PosValue: "NN"
-      coarseValue: "POS_NOUN"
+      coarseValue: "NOUN"
 [auszureizen]
 POS_VERB
    sofa: _InitialView
    begin: 78
    end: 89
    PosValue: "VVIZU"
-   coarseValue: "POS_VERB"
+   coarseValue: "VERB"
 [auszureizen]
 Token
    sofa: _InitialView
@@ -730,14 +730,14 @@ Token
       begin: 78
       end: 89
       PosValue: "VVIZU"
-      coarseValue: "POS_VERB"
+      coarseValue: "VERB"
 [.]
 POS_PUNCT
    sofa: _InitialView
    begin: 90
    end: 91
    PosValue: "$."
-   coarseValue: "POS_PUNCT"
+   coarseValue: "PUNCT"
 [.]
 Token
    sofa: _InitialView
@@ -754,7 +754,7 @@ Token
       begin: 90
       end: 91
       PosValue: "$."
-      coarseValue: "POS_PUNCT"
+      coarseValue: "PUNCT"
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================

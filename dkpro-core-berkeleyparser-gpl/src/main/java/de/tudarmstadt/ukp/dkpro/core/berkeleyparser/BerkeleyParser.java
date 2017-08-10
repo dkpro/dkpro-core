@@ -48,6 +48,7 @@ import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -319,8 +320,7 @@ public class BerkeleyParser
                 POS posAnno = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                         token.getEnd());
                 posAnno.setPosValue(internTags ? typeName.intern() : typeName);
-                posAnno.setCoarseValue(posAnno.getClass().equals(POS.class) ? null
-                        : posAnno.getType().getShortName().intern());
+                POSUtils.assignCoarseValue(posAnno);
                 posAnno.addToIndexes();
                 token.setPos(posAnno);
             }
