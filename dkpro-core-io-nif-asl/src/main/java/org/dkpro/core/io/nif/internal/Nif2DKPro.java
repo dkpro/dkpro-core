@@ -32,6 +32,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
@@ -157,8 +158,7 @@ public class Nif2DKPro
                 POS uimaPos = (POS) aJCas.getCas().createAnnotation(posTag, uimaToken.getBegin(),
                         uimaToken.getEnd());
                 uimaPos.setPosValue(tag.intern());
-                uimaPos.setCoarseValue(uimaPos.getClass().equals(POS.class) ? null
-                        : uimaPos.getType().getShortName().intern());
+                POSUtils.assignCoarseValue(uimaPos);
                 uimaPos.addToIndexes();
                 uimaToken.setPos(uimaPos);
             }

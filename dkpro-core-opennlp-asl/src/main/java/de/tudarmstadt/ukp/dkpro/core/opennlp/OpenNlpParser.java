@@ -47,6 +47,7 @@ import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
@@ -236,8 +237,7 @@ public class OpenNlpParser
 				Type posTag = posMappingProvider.getTagType(aNode.getType());
 				POS posAnno = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(), token.getEnd());
 				posAnno.setPosValue(internTags ? aNode.getType().intern() : aNode.getType());
-	            posAnno.setCoarseValue(posAnno.getClass().equals(POS.class) ? null
-	                    : posAnno.getType().getShortName().intern());
+				POSUtils.assignCoarseValue(posAnno);
 				posAnno.addToIndexes();
 				token.setPos(posAnno);
 			}

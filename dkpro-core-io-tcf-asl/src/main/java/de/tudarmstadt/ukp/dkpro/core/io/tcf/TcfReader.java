@@ -37,6 +37,7 @@ import org.apache.uima.jcas.JCas;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
@@ -202,8 +203,7 @@ public class TcfReader
             outPos.setBegin(aTokens.get(posTokens[0].getID()).getBegin());
             outPos.setEnd(aTokens.get(posTokens[0].getID()).getEnd());
             outPos.setPosValue(value);
-            outPos.setCoarseValue(outPos.getClass().equals(POS.class) ? null
-                    : outPos.getType().getShortName().intern());
+            POSUtils.assignCoarseValue(outPos);
             outPos.addToIndexes();
 
             // Set the POS to the token

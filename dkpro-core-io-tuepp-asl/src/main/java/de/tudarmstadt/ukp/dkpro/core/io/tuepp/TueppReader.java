@@ -43,6 +43,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -373,8 +374,7 @@ public class TueppReader
             POS posAnno = (POS) aBuilder.getJCas().getCas()
                     .createAnnotation(posType, token.getBegin(), token.getEnd());
             posAnno.setPosValue(pos.tag.intern());
-            posAnno.setCoarseValue(posAnno.getClass().equals(POS.class) ? null
-                    : posAnno.getType().getShortName().intern());
+            POSUtils.assignCoarseValue(posAnno);
             posAnno.addToIndexes();
             token.setPos(posAnno);
             

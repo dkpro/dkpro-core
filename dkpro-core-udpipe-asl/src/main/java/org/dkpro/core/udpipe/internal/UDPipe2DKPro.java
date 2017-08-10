@@ -27,6 +27,7 @@ import org.apache.uima.jcas.JCas;
 
 import cz.cuni.mff.ufal.udpipe.Sentence;
 import cz.cuni.mff.ufal.udpipe.Word;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
@@ -61,8 +62,7 @@ public class UDPipe2DKPro
             // To save memory, we typically intern() tag strings
             posAnno.setPosValue(internTags ? xtag.intern() : xtag);
             if (utag == null) {
-                posAnno.setCoarseValue(posAnno.getClass().equals(POS.class) ? null
-                        : posAnno.getType().getShortName().intern());
+                POSUtils.assignCoarseValue(posAnno);
             }
             else {
                 posAnno.setCoarseValue(internTags ? utag.intern() : utag);

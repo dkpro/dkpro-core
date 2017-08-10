@@ -51,6 +51,7 @@ import org.apache.uima.util.Level;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -583,8 +584,7 @@ public class NegraExportReader
                 POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                         token.getEnd());
                 pos.setPosValue(parts[TOKEN_POS_TAG].intern());
-                pos.setCoarseValue(pos.getClass().equals(POS.class) ? null
-                        : pos.getType().getShortName().intern());
+                POSUtils.assignCoarseValue(pos);
                 pos.addToIndexes();
                 token.setPos(pos);
             }

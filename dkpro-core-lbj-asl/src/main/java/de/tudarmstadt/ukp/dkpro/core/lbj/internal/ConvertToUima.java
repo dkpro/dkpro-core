@@ -23,6 +23,7 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.JCas;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
@@ -50,8 +51,7 @@ public class ConvertToUima
             POS posAnno = (POS) cas.createAnnotation(posTag, p.getStartCharOffset(),
                     p.getEndCharOffset());
             posAnno.setPosValue(internStrings ? tag.intern() : tag);
-            posAnno.setCoarseValue(posAnno.getClass().equals(POS.class) ? null
-                    : posAnno.getType().getShortName().intern());
+            POSUtils.assignCoarseValue(posAnno);
             posAnno.addToIndexes();
             casTokens.get(i).setPos(posAnno);
             i++;

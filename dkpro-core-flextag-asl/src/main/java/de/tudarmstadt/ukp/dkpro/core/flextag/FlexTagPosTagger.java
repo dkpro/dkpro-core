@@ -37,6 +37,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.tc.api.type.TextClassificationOutcome;
 import org.dkpro.tc.ml.uima.TcAnnotator;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
@@ -123,8 +124,7 @@ public class FlexTagPosTagger
         Type posTag = mappingProvider.getTagType(aOutcome);
         POS posAnno = (POS) aJCas.getCas().createAnnotation(posTag, begin, end);
         posAnno.setPosValue(aOutcome);
-        posAnno.setCoarseValue(posAnno.getClass().equals(POS.class) ? null
-                : posAnno.getType().getShortName().intern());
+        POSUtils.assignCoarseValue(posAnno);
         posAnno.addToIndexes();
         
         return posAnno;

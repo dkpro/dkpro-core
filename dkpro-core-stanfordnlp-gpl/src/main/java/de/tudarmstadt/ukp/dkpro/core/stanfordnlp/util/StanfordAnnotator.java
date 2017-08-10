@@ -32,6 +32,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.tcas.Annotation;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -293,8 +294,7 @@ public class StanfordAnnotator
 
         // save original (unmapped) postype in feature
         anno.setPosValue(aPosType);
-        anno.setCoarseValue(anno.getClass().equals(POS.class) ? null
-                : anno.getType().getShortName().intern());
+        POSUtils.assignCoarseValue(anno);
 
         return anno;
     }

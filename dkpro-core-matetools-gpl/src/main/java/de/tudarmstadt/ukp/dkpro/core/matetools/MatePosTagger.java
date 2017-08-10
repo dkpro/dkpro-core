@@ -44,6 +44,7 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -183,8 +184,7 @@ public class MatePosTagger
                 Type posType = posMappingProvider.getTagType(posTags[i]);
                 POS posTag = (POS) cas.createAnnotation(posType, token.getBegin(), token.getEnd());
                 posTag.setPosValue(posTags[i].intern());
-                posTag.setCoarseValue(posTag.getClass().equals(POS.class) ? null
-                        : posTag.getType().getShortName().intern());
+                POSUtils.assignCoarseValue(posTag);
                 posTag.addToIndexes();
                 token.setPos(posTag);
             }

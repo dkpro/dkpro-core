@@ -37,6 +37,7 @@ import org.lappsgrid.serialization.lif.Container;
 import org.lappsgrid.serialization.lif.View;
 import org.lappsgrid.vocabulary.Features;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -92,8 +93,7 @@ public class Lif2DKPro
                             POS posAnno = new POS(aJCas, tokenAnno.getBegin(), tokenAnno
                                     .getEnd());
                             posAnno.setPosValue(pos.intern());
-                            posAnno.setCoarseValue(posAnno.getClass().equals(POS.class) ? null
-                                    : posAnno.getType().getShortName().intern());
+                            POSUtils.assignCoarseValue(posAnno);
                             posAnno.addToIndexes();
                             tokenAnno.setPos(posAnno);
                         }

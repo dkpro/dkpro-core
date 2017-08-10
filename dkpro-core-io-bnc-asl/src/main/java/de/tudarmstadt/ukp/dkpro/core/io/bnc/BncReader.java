@@ -32,6 +32,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -207,8 +208,7 @@ public class BncReader
 						POS pos = (POS) getJCas().getCas().createAnnotation(posTag,
 								token.getBegin(), token.getEnd());
 						pos.setPosValue(c5Tag.intern());
-						pos.setCoarseValue(pos.getClass().equals(POS.class) ? null
-			                    : pos.getType().getShortName().intern());
+						POSUtils.assignCoarseValue(pos);
 						pos.addToIndexes();
 						token.setPos(pos);
 					}

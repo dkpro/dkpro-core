@@ -54,6 +54,7 @@ import com.clearnlp.component.pos.EnglishPOSTagger;
 import com.clearnlp.dependency.DEPTree;
 import com.clearnlp.nlp.NLPGetter;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -259,8 +260,7 @@ public class ClearNlpPosTagger
                 Type posTag = posMappingProvider.getTagType(tag);
                 POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
                 posAnno.setPosValue(tag);
-                posAnno.setCoarseValue(posAnno.getClass().equals(POS.class) ? null
-                        : posAnno.getType().getShortName().intern());
+                POSUtils.assignCoarseValue(posAnno);
                 posAnno.addToIndexes();
                 t.setPos(posAnno);
                 i++;

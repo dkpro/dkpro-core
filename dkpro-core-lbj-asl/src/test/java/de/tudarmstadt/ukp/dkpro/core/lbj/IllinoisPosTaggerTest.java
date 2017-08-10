@@ -54,11 +54,11 @@ public class IllinoisPosTaggerTest
 
         runTest("en", null, "A neural net . \n",
                 new String[] { "DT",  "NN",     "NN",  "." },
-                new String[] { "DET", "NOUN",    "NOUN",  "PUNCT" });
+                new String[] { "POS_DET", "POS_NOUN",    "POS_NOUN",  "POS_PUNCT" });
 
         JCas jcas = runTest("en", null, "John is purchasing oranges . \n",
                 new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
-                new String[] { "PROPN",   "VERB",   "VERB",        "NOUN",     "PUNCT" });
+                new String[] { "POS_PROPN",   "POS_VERB",   "POS_VERB",        "POS_NOUN",     "POS_PUNCT" });
         
         String[] posTags = { "#", "$", "''", ",", "-LRB-", "-RRB-", ".", ":", "CC", "CD", "DT",
                 "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNP", "NNPS", "NNS", "PDT",

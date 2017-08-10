@@ -30,6 +30,7 @@ import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.junit.Rule;
 import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import de.tudarmstadt.ukp.dkpro.core.testing.EOLUtils;
 import de.tudarmstadt.ukp.dkpro.core.testing.dumper.CasDumpWriter;
 
 public class PdfReaderTest
@@ -53,6 +54,9 @@ public class PdfReaderTest
                 "UTF-8").trim();
         String actual = readFileToString(outputFile, "UTF-8").trim();
 
+        actual = EOLUtils.normalizeLineEndings(actual);
+        reference = EOLUtils.normalizeLineEndings(reference);
+        
         assertEquals(reference, actual);
     }
 

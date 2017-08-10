@@ -36,6 +36,7 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -123,8 +124,7 @@ public class PosMapper
 
 					POS newPos = (POS) cas.createAnnotation(type, begin, end);
 					newPos.setPosValue(newTag);
-					newPos.setCoarseValue(newPos.getClass().equals(POS.class) ? null
-	                        : newPos.getType().getShortName().intern());
+					POSUtils.assignCoarseValue(newPos);
 
 					oldPos.removeFromIndexes();
 					newPos.addToIndexes();
