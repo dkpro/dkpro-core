@@ -24,6 +24,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.net.URLEncoder;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -163,7 +164,14 @@ public abstract class JCasFileWriter_ImplBase
         }
         else if (targetLocation.startsWith(JAR_PREFIX)) {
             if (zipOutputStream == null) {
-                zipPath = targetLocation.substring(JAR_PREFIX.length());
+                try {
+                    // Try handling URL-encoded location
+                    zipPath = URI.create(URI.create(targetLocation).getRawSchemeSpecificPart())
+                            .getSchemeSpecificPart();
+                } catch (IllegalArgumentException e) {
+                    // If the location is not properly URL-encoded, just strip the prefix.
+                    zipPath = targetLocation.substring(JAR_PREFIX.length());
+                }
                 zipEntryPrefix = "";
                 int sep = zipPath.indexOf('!');
                 if (sep > -1) {
