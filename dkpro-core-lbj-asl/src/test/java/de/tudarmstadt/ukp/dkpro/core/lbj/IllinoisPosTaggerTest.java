@@ -50,7 +50,7 @@ public class IllinoisPosTaggerTest
     {
         runTest("en", null, "This is a test . \n",
                 new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
-                new String[] { "DET", "VERB", "DET", "NOUN", "PUNCT" });
+                new String[] { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", null, "A neural net . \n",
                 new String[] { "DT",  "NN",     "NN",  "." },

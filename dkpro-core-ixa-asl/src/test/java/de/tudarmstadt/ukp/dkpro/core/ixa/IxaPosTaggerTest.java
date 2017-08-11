@@ -39,7 +39,7 @@ public class IxaPosTaggerTest
     {
         JCas jcas = runTest("eu", null, "Hau froga bat da .",
                 new String[] { "DET", "NOUN", "NUM", "VERB", "PUNCT" },
-                new String[] { "DET", "NOUN", "NUM", "VERB", "PUNCT" });
+                new String[] { "POS_DET", "POS_NOUN", "POS_NUM", "POS_VERB", "POS_PUNCT" });
 
         String[] posTags = { "ADJ", "ADP", "ADV", "AUX", "CONJ", "DET", "INTJ", "NOUN", "NUM",
                 "PART", "PRON", "PROPN", "PUNCT", "SYM", "VERB", "X" };
@@ -57,7 +57,7 @@ public class IxaPosTaggerTest
         {
             JCas jcas = runTest("nl", null, "Dit is een test .",
                     new String[] { "Pron", "V", "Art", "N", "Punc" },
-                    new String[] { "PRON", "VERB", "DET", "NOUN", "PUNCT" });
+                    new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
             String[] posTags = { "Adj", "Adv", "Art", "Conj", "Int", "MWU", "Misc", "N", "Num",
                     "Prep", "Pron", "Punc", "V" };
@@ -70,7 +70,7 @@ public class IxaPosTaggerTest
         {
             JCas jcas = runTest("nl", "maxent-100-c5-autodict01-alpino", "Dit is een test .",
                     new String[] { "Pron", "V", "Art", "N", "Punc" },
-                    new String[] { "PRON", "VERB", "DET", "NOUN", "PUNCT" });
+                    new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
             String[] posTags = { "Adj", "Adv", "Art", "Conj", "Int", "MWU", "Misc", "N", "Num",
                     "Prep", "Pron", "Punc", "V" };
@@ -107,12 +107,12 @@ public class IxaPosTaggerTest
 
         runTest("en", null, "John is purchasing oranges .",
                 new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
-                new String[] { "POS_PROPN",   "POS_VERB",   "POS_VERB",        "POS_NOUN",     "POS_PUNCT" });
+                new String[] { "POS_PROPN", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_PUNCT" });
         
         runTest("en", null, "The quick brown fox jumps over the lazy dog . \n",
                 new String[] { "DT", "JJ", "JJ", "NN", "VBZ", "IN", "DT", "JJ", "NN", "." },
-                new String[] { "POS_DET", "POS_ADJ", "POS_ADJ", "POS_NOUN", "POS_VERB", "POS_ADP", "POS_DET", "POS_ADJ", "POS_NOUN",
-                        "POS_PUNCT" });
+                new String[] { "POS_DET", "POS_ADJ", "POS_ADJ", "POS_NOUN", "POS_VERB", "POS_ADP",
+                        "POS_DET", "POS_ADJ", "POS_NOUN", "POS_PUNCT" });
     }
     
     @Test
