@@ -40,7 +40,7 @@ public class FlexTagPosTaggerTest
     {
         runTest("en", "wsj0-18", "This is a test . \n",
                 new String[] { "DT", "VBZ", "DT", "NN", "." },
-                new String[] { "DET", "VERB", "DET", "NOUN", "PUNCT" });
+                new String[] { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
     }
 
@@ -50,7 +50,7 @@ public class FlexTagPosTaggerTest
     {
         runTest("de", "tiger", "Das ist ein Test .",
                 new String[] { "PDS", "VAFIN", "ART", "NN", "$." },
-                new String[] { "PRON", "VERB", "DET", "NOUN", "PUNCT" });
+                new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
     }
 

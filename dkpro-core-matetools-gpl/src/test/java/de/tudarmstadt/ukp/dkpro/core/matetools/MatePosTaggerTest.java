@@ -91,9 +91,10 @@ public class MatePosTaggerTest
                 + "compliqué, qui contient des constituants que de nombreuses dépendances et que "
                 + "possible .");
 
-        String[] posMapped = { "PRON", "VERB", "NOUN", "ADP", "NOUN", "ADP", "NOUN", "ADV", "ADJ",
-                "PRON", "VERB", "DET", "NOUN", "CONJ", "DET", "ADJ", "NOUN", "CONJ", "CONJ", "ADJ",
-                "PUNCT" };
+        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_ADP",
+                "POS_NOUN", "POS_ADV", "POS_ADJ", "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN",
+                "POS_CONJ", "POS_DET", "POS_ADJ", "POS_NOUN", "POS_CONJ", "POS_CONJ", "POS_ADJ",
+                "POS_PUNCT" };
 
         String[] posOriginal = { "CLS", "V", "NC", "P", "NC", "P", "NC", "ADV", "ADJ", "PROREL",
                 "V", "DET", "NC", "CS", "DET", "ADJ", "NC", "CC", "CS", "ADJ", "PONCT" };
