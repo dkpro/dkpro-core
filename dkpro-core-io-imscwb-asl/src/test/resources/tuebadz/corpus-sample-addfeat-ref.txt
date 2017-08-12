@@ -1,41 +1,41 @@
 <text id="T990507.2">
 <s>
-Seine	PPOSAT	POS_PRON	-	Sein
-Position	NN	POS_NOUN	-	Position
-bei	APPR	POS_ADP	-	bei
-der	ART	POS_DET	-	der
-Prüfgesellschaft	NN	POS_NOUN	-	Prufgesellschaft
-mußte	VVFIN	POS_VERB	-	musst
-er	PPER	POS_PRON	-	er
-damals	ADV	POS_ADV	-	damal
-niederlegen	VVPP	POS_VERB	-	niederleg
-,	$,	POS_PUNCT	-	,
-den	ART	POS_DET	-	den
-AWO-Posten	NN	POS_NOUN	-	AWO-Post
-nicht	PTKNEG	POS_X	-	nicht
-.	$.	POS_PUNCT	-	.
+Seine	PPOSAT	PRON	-	Sein
+Position	NN	NOUN	-	Position
+bei	APPR	ADP	-	bei
+der	ART	DET	-	der
+Prüfgesellschaft	NN	NOUN	-	Prufgesellschaft
+mußte	VVFIN	VERB	-	musst
+er	PPER	PRON	-	er
+damals	ADV	ADV	-	damal
+niederlegen	VVPP	VERB	-	niederleg
+,	$,	PUNCT	-	,
+den	ART	DET	-	den
+AWO-Posten	NN	NOUN	-	AWO-Post
+nicht	PTKNEG	X	-	nicht
+.	$.	PUNCT	-	.
 </s>
 <s>
-K.	NE	POS_PROPN	-	K.
-W.	NE	POS_PROPN	-	W.
+K.	NE	PROPN	-	K.
+W.	NE	PROPN	-	W.
 </s>
 </text>
 <text id="T990507.3">
 <s>
-SPD	NE	POS_PROPN	-	SPD
-/	$(	POS_PUNCT	-	/
-CDU	NE	POS_PROPN	-	CDu
-/	$(	POS_PUNCT	-	/
-AfB	NE	POS_PROPN	-	AfB
-für	$(	POS_PUNCT	-	fur
-Daewoo-Millionen	NN	POS_NOUN	-	Daewoo-Million
+SPD	NE	PROPN	-	SPD
+/	$(	PUNCT	-	/
+CDU	NE	PROPN	-	CDu
+/	$(	PUNCT	-	/
+AfB	NE	PROPN	-	AfB
+für	$(	PUNCT	-	fur
+Daewoo-Millionen	NN	NOUN	-	Daewoo-Million
 </s>
 <s>
-Aber	KON	POS_CONJ	-	Aber
-Bremerhavens	NE	POS_PROPN	-	Bremerhav
-AfB	NE	POS_PROPN	-	AfB
-fordert	VVFIN	POS_VERB	-	fordert
-jetzt	ADV	POS_ADV	-	jetzt
-Untersuchungsausschuß	NN	POS_NOUN	-	untersuchungsausschuss
+Aber	KON	CONJ	-	Aber
+Bremerhavens	NE	PROPN	-	Bremerhav
+AfB	NE	PROPN	-	AfB
+fordert	VVFIN	VERB	-	fordert
+jetzt	ADV	ADV	-	jetzt
+Untersuchungsausschuß	NN	NOUN	-	untersuchungsausschuss
 </s>
 </text>
