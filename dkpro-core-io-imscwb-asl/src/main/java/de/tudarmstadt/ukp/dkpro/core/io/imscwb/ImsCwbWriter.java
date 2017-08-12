@@ -21,7 +21,9 @@ import static org.apache.commons.io.FileUtils.deleteQuietly;
 import static org.apache.commons.io.FileUtils.forceMkdir;
 import static org.apache.commons.io.FileUtils.listFiles;
 import static org.apache.commons.io.FilenameUtils.removeExtension;
-import static org.apache.commons.lang3.StringUtils.*;
+import static org.apache.commons.lang3.StringUtils.defaultString;
+import static org.apache.commons.lang3.StringUtils.join;
+import static org.apache.commons.lang3.StringUtils.substringAfterLast;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
@@ -38,7 +40,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Feature;
@@ -432,7 +433,7 @@ public class ImsCwbWriter
 					}
 					String typeName = segments[0];
 					String featureName = segments.length > 1 ? segments[1] : "";
-					String name = (StringUtils.substringAfterLast(typeName, ".") + "_" + featureName)
+					String name = (substringAfterLast(typeName, ".") + "_" + featureName)
 					        .toLowerCase();
 					cmd.add("-P");
 					cmd.add(name);
