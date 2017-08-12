@@ -21,7 +21,7 @@ import static org.apache.commons.io.FileUtils.deleteQuietly;
 import static org.apache.commons.io.FileUtils.forceMkdir;
 import static org.apache.commons.io.FileUtils.listFiles;
 import static org.apache.commons.io.FilenameUtils.removeExtension;
-import static org.apache.commons.lang.StringUtils.join;
+import static org.apache.commons.lang3.StringUtils.*;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
@@ -281,18 +281,17 @@ public class ImsCwbWriter
 
 					// write pos tag
 					if (writePOS) {
-						field(token.getPos() != null ? token.getPos().getPosValue() : "-");
+						field(defaultString(token.getPosValue(), "-"));
 					}
 
 					// write coarse grained pos tag
 					if (writeCPOS) {
-						field(token.getPos() != null ? token.getPos().getType().getShortName()
-						        : "-");
+                        field(token.getPos() != null ? defaultString(token.getPos().getCoarseValue(), "-") : "-");
 					}
 
 					// write lemma
 					if (writeLemma) {
-						field(token.getLemma() != null ? token.getLemma().getValue() : "-");
+						field(defaultString(token.getLemmaValue(), "-"));
 					}
 
 					// write doc-id
