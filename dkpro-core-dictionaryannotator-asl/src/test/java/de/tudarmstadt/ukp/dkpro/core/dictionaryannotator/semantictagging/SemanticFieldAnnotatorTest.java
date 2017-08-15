@@ -31,7 +31,7 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_NN;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_NOUN;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -88,7 +88,7 @@ public class SemanticFieldAnnotatorTest {
         for (Token token : JCasUtil.select(aJCas, Token.class)) {
 
             if (documentPosTags[offset].matches("NN")) {
-                POS_NN nn = new POS_NN(aJCas, token.getBegin(), token.getEnd());
+                POS_NOUN nn = new POS_NOUN(aJCas, token.getBegin(), token.getEnd());
                 nn.setPosValue(documentPosTags[offset]);
                 nn.addToIndexes();
                 token.setPos(nn);

@@ -49,10 +49,10 @@ import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_N;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_PR;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_PUNC;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_V;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_NOUN;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_PRON;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_PUNCT;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_VERB;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -121,16 +121,16 @@ public class TokenMergerTest
 		JCas jcas = JCasFactory.createJCas();
 
 		JCasBuilder builder = new JCasBuilder(jcas);
-		setLemmaPos(builder.add("I", Token.class), POS_PR.class, "PR", "I");
+		setLemmaPos(builder.add("I", Token.class), POS_PRON.class, "PRON", "I");
 		builder.add(" ");
-		setLemmaPos(builder.add("love", Token.class), POS_V.class, "V", "love");
+		setLemmaPos(builder.add("love", Token.class), POS_VERB.class, "VERB", "love");
 		builder.add(" ");
-		int m = setLemmaPos(builder.add("New", Token.class), POS_N.class, "N", "new").getBegin();
+		int m = setLemmaPos(builder.add("New", Token.class), POS_NOUN.class, "NOUN", "new").getBegin();
 		builder.add(" ");
-		setLemmaPos(builder.add("York", Token.class), POS_N.class, "N", "york");
+		setLemmaPos(builder.add("York", Token.class), POS_NOUN.class, "NOUN", "york");
 		NamedEntity city = builder.add(m, NamedEntity.class);
 		city.setValue("LOCATION");
-		setLemmaPos(builder.add(".", Token.class), POS_PUNC.class, "PUNT", ".");
+		setLemmaPos(builder.add(".", Token.class), POS_PUNCT.class, "PUNCT", ".");
 		builder.close();
 
 		return builder.getJCas();

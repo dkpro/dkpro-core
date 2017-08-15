@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <name>Morphology</name>
+  <description/>
+  <version>${version}</version>
+  <vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
+  <imports>
+    <import name="desc.type.POS"/>
+  </imports>
+  <types>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ</name>
+      <description>Adjective
+
+@deprecated Use POS_ADJ instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADP</name>
+      <description>Adposition
+
+@deprecated Use POS_ADP instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV</name>
+      <description>Adverb
+
+@deprecated Use POS_ADV instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.AUX</name>
+      <description>Auxiliary verb
+
+@deprecated Use POS_AUX instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ</name>
+      <description>Conjunction
+
+@deprecated Use POS_CONJ instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.DET</name>
+      <description>Determiner
+
+@deprecated Use POS_DET instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.INTJ</name>
+      <description>Interjection
+
+@deprecated Use POS_INTJ instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NOUN</name>
+      <description>Noun
+
+@deprecated Use POS_NOUN instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NUM</name>
+      <description>Numeral
+
+@deprecated Use POS_NUM instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PART</name>
+      <description>Particle
+
+@deprecated Use POS_PART instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRON</name>
+      <description>Pronoun
+
+@deprecated Use POS_PRON instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PROPN</name>
+      <description>Proper noun
+
+@deprecated Use POS_PROPN instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNCT</name>
+      <description>Punctuation
+
+@deprecated Use POS_PUNCT instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.SCONJ</name>
+      <description>Subordinating conjunction
+
+@deprecated Use POS_SCONJ instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.SYM</name>
+      <description>Symbol
+
+@deprecated Use POS_SYM instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.VERB</name>
+      <description>Verb
+
+@deprecated Use POS_VERB instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.X</name>
+      <description>Other
+
+@deprecated Use POS_X instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART</name>
+      <description>Determiners and articles.
+
+@deprecated Use POS_DET instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD</name>
+      <description>Numerals
+
+@deprecated Use POS_NUM instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N</name>
+      <description>Nouns
+
+@deprecated Use POS_NOUN instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN</name>
+      <description>Common noun
+
+@deprecated Use POS_NOUN instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP</name>
+      <description>Proper noun
+
+@deprecated Use POS_PROPN instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O</name>
+      <description>Catch-all for other categories such as abbreviations or foreign words
+
+@deprecated Use POS_X instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP</name>
+      <description>Prepositions and postpositions
+
+@deprecated Use POS_ADP instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR</name>
+      <description>Pronoun
+
+@deprecated Use POS_PRON instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRT</name>
+      <description>Particles
+
+@deprecated Use POS_PART instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC</name>
+      <description>Punctuation marks
+
+@deprecated Use POS_PUNCT instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V</name>
+      <description>Verbs
+
+@deprecated Use POS_VERB instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.HASH</name>
+      <description>Hashtag (indicates topic/category for tweet)
+
+@deprecated Use POS_HASH instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.AT</name>
+      <description>at-mention (indicates another user as a recipient of a tweet)
+
+@deprecated Use POS_AT instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.EMO</name>
+      <description>emoticon
+
+@deprecated Use POS_EMO instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.DM</name>
+      <description>discourse marker, indications of continuation of a message across multiple tweets
+
+@deprecated Use POS_DM instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.URL</name>
+      <description>URL or email address
+
+@deprecated Use POS_URL instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.NNV</name>
+      <description>nominal + verbal
+
+@deprecated Use POS_NNV instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.NPV</name>
+      <description>proper noun + verbal
+
+@deprecated Use POS_NPV instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.INT</name>
+      <description>proper noun + verbal
+
+@deprecated Use POS_INT instead</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O</supertypeName>
+    </typeDescription>
+  </types>
+</typeSystemDescription>
