@@ -651,7 +651,7 @@
 				</repository>
 				<repository>
 					<id>cogcomp.cs.uiuc.edu-releases</id>
-					<url>http://cogcomp.cs.uiuc.edu/m2repo</url>
+					<url>http://cogcomp.org/m2repo/</url>
           <releases>
             <enabled>true</enabled>
           </releases>
