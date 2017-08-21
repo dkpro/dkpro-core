@@ -31,7 +31,7 @@
 				<featureDescription>
 					<name>url</name>
 					<description>This field specifies the location on nytimes.com of
-						the article. The ‘Alternative Url’
+						the article. The 'Alternative Url'
 						field is preferred to this field
 						on articles published on or after
 						April 02, 2006, as the
@@ -41,10 +41,10 @@
 				</featureDescription>
 				<featureDescription>
 					<name>publicationDate</name>
-					<description>This field specifies the date of the article’s
+					<description>This field specifies the date of the article's
 						publication. This field is specified in the
 						format
-						YYYYMMDD’T’HHMMSS where:
+						YYYYMMDD'T'HHMMSS where:
 						1. YYYY is the four-digit year.
 						2. MM is
 						the two-digit month [01-12].
@@ -60,7 +60,7 @@
 						and SS are not defined for this
 						corpus, that is to day
 						HH,MM, and SS
-						are always defined to be ‘00’.</description>
+						are always defined to be '00'.</description>
 					<rangeTypeName>uima.cas.String</rangeTypeName>
 				</featureDescription>
 				<featureDescription>
@@ -72,9 +72,9 @@
 						manually verified by
 						nytimes.com production staff.
 						Examples Include:
-						• REVIEW
-						• OBITUARY
-						• ANALYSIS</description>
+						* REVIEW
+						* OBITUARY
+						* ANALYSIS</description>
 					<rangeTypeName>uima.cas.StringArray</rangeTypeName>
 				</featureDescription>
 				<featureDescription>
@@ -116,7 +116,7 @@
 				</featureDescription>
 				<featureDescription>
 					<name>descriptors</name>
-					<description>The ‘descriptors’ field specifies a list of
+					<description>The 'descriptors' field specifies a list of
 						descriptive terms drawn
 						from a normalized controlled
 						vocabulary
@@ -127,10 +127,10 @@
 						York Times Indexing
 						service.
 						Examples Include:
-						• ECONOMIC CONDITIONS
+						* ECONOMIC CONDITIONS
 						AND TRENDS
-						• AIRPLANES
-						• VIOLINS</description>
+						* AIRPLANES
+						* VIOLINS</description>
 					<rangeTypeName>uima.cas.StringArray</rangeTypeName>
 				</featureDescription>
 				<featureDescription>
@@ -147,14 +147,14 @@
 						verified by
 						nytimes.com production staff.
 						Examples Include:
-						• Marriages
-						• Parks and Other Recreation Areas
-						• Cooking and Cookbooks</description>
+						* Marriages
+						* Parks and Other Recreation Areas
+						* Cooking and Cookbooks</description>
 					<rangeTypeName>uima.cas.StringArray</rangeTypeName>
 				</featureDescription>
 				<featureDescription>
 					<name>generalOnlineDescriptors</name>
-					<description>The ‘general online descriptors’ field specifies a
+					<description>The 'general online descriptors' field specifies a
 						list of descriptors that are at a higher level of
 						generality than
 						the other tags associated with the article. These tags are
@@ -162,9 +162,9 @@
 						assigned and manually verified by nytimes.com
 						production staff.
 						Examples Include:
-						• Surfing
-						• Venice Biennale
-						• Ranches</description>
+						* Surfing
+						* Venice Biennale
+						* Ranches</description>
 					<rangeTypeName>uima.cas.String</rangeTypeName>
 				</featureDescription>
 				<featureDescription>
@@ -174,7 +174,7 @@
 						article is placed. If
 						the article is placed in multiple
 						sections, this field will be
-						specified as a ‘;’ delineated
+						specified as a ';' delineated
 						list.</description>
 					<rangeTypeName>uima.cas.String</rangeTypeName>
 				</featureDescription>
@@ -200,9 +200,9 @@
 						verified
 						by nytimes.com production staff.
 						Examples Include:
-						• Top/Features/Travel/Guides/Destinations/North America/United States/Arizona
-						• Top/News/U.S./Rockies
-						• Top/Opinion</description>
+						* Top/Features/Travel/Guides/Destinations/North America/United States/Arizona
+						* Top/News/U.S./Rockies
+						* Top/Opinion</description>
 					<rangeTypeName>uima.cas.StringArray</rangeTypeName>
 				</featureDescription>
 			</features>
