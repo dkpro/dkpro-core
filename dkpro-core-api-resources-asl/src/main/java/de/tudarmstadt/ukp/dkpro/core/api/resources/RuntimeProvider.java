@@ -31,27 +31,32 @@ import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.core.io.UrlResource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 /**
  * Provides temporary installation of binaries from the classpath to the local file system.
- * 
  */
 public class RuntimeProvider
 {
+    private Log log = LogFactory.getLog(getClass());
+    
 	public static final String MODE_EXECUTABLE = "executable";
 	
 	private boolean installed;
 	private File workspace;
 
 	private String baseLocation;
-	private String platform;
+	private PlatformDetector platformDetector;
+	private String platformId;
+	private Properties manifest;
 	
 	public RuntimeProvider(String aBaseLocation)
 	{
 		setBaseLocation(aBaseLocation);
-		platform = new PlatformDetector().getPlatformId();
+		platformDetector = new PlatformDetector();
 	}
 	
 	public void setBaseLocation(String aBaseLocation)
@@ -59,15 +64,57 @@ public class RuntimeProvider
 		baseLocation = aBaseLocation;
 	}
 	
-	public Properties getManifest() throws IOException
-	{
-		String mfl = baseLocation;
-		if (!mfl.endsWith("/")) {
-			mfl += "/";
-		}
-		URL manifestUrl = resolveLocation(baseLocation + platform + "/manifest.properties", this, null);
-		return PropertiesLoaderUtils.loadProperties(new UrlResource(manifestUrl));
-	}
+    public Properties getManifest() throws IOException
+    {
+        if (manifest == null) {
+            String mfl = baseLocation;
+            if (!mfl.endsWith("/")) {
+                mfl += "/";
+            }
+            
+            boolean fallbackTo32Tried = false;
+            URL manifestUrl = null;
+            try {
+                manifestUrl = resolveLocation(
+                        baseLocation + platformDetector.getPlatformId() + "/manifest.properties",
+                        this, null);
+                platformId = platformDetector.getPlatformId();
+            }
+            catch (FileNotFoundException e) {
+                // Ok, maybe we try a 32-bit fallback
+            }
+            
+            if (manifestUrl == null
+                    && PlatformDetector.ARCH_X86_64.equals(platformDetector.getArch())) {
+                fallbackTo32Tried = true;
+                try {
+                    manifestUrl = resolveLocation(baseLocation + platformDetector.getOs() + "-"
+                            + PlatformDetector.ARCH_X86_32 + "/manifest.properties", this, null);
+                    platformId = platformDetector.getOs() + "-" + PlatformDetector.ARCH_X86_32;
+                }
+                catch (FileNotFoundException e) {
+                    // Ok, well, then we will generate an error next.
+                }
+            }
+            
+            if (manifestUrl == null) {
+                StringBuilder sb = new StringBuilder();
+                sb.append("No files found for [").append(platformDetector.getPlatformId())
+                        .append("]");
+                if (fallbackTo32Tried) {
+                    sb.append(" Also no files for 32bit.");
+                }
+                throw new FileNotFoundException(sb.toString());
+            }
+            else if (log.isWarnEnabled()) {
+                log.warn("No binaries found for [" + platformDetector.getPlatformId() + "], using ["
+                        + platformId + "] instead");
+            }
+            
+            manifest = PropertiesLoaderUtils.loadProperties(new UrlResource(manifestUrl));
+        }
+        return manifest;
+    }
 	
 	public boolean isInstalled()
 	{
@@ -103,7 +150,7 @@ public class RuntimeProvider
 		
 		Properties manifest = getManifest();
 		for (String filename : manifest.stringPropertyNames()) {
-			URL source = resolveLocation(baseLocation+platform + "/" + filename, this, null);
+            URL source = resolveLocation(baseLocation + platformId + "/" + filename, this, null);
 			File target = new File(getWorkspace(), filename);
 			InputStream is = null;
 			OutputStream os = null;
