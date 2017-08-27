@@ -536,7 +536,7 @@
   </target>
 
   <target name="install-executables">
-    <property name="version.bin" value="20130507.1"/>
+    <property name="version.bin" value="20130507.2"/>
 
     <mkdir dir="target/download"/>
     <mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/linux-x86_32"/>
@@ -566,10 +566,14 @@
       <entry  key="hunpos-tag" value="executable"/>
       <entry  key="hunpos-train" value="executable"/>
     </propertyfile>
-    <!--copydir 
+  	
+  	  <!--
+    <copydir 
       src="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/linux-x86_32" 
-      dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/linux-x86_64"/-->
+      dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/linux-x86_64"/>
+    -->
     
+  	  <!--
     <get 
         src="https://bintray.com/artifact/download/inofficalbinarystore/generic/hunpos-linux-64bit-kernel3.tar.gz" 
         dest="target/download/hunpos-1.0-linux-64bit-kernel3.tar.gz" 
@@ -590,6 +594,7 @@
       <entry  key="hunpos-tag" value="executable"/>
       <entry  key="hunpos-train" value="executable"/>
     </propertyfile>
+    -->
 
     <get 
       src="https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/hunpos/hunpos-1.0-win.zip" 
@@ -615,9 +620,12 @@
       <entry  key="hunpos-train" value="executable"/>
       <entry  key="cygwin1.dll" value="library"/>
     </propertyfile>
+  	
+    <!--
     <copydir 
       src="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/windows-x86_32" 
       dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/windows-x86_64"/>
+    -->
 
     <get 
         src="https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/hunpos/hunpos-1.0-macosx.tgz" 
@@ -639,9 +647,12 @@
       <entry  key="hunpos-tag" value="executable"/>
       <entry  key="hunpos-train" value="executable"/>
     </propertyfile>
+  	
+  	  <!--
     <copydir 
       src="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/osx-x86_32" 
       dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/osx-x86_64"/>
+    -->
 
     <jar 
       destfile="target/de.tudarmstadt.ukp.dkpro.core.hunpos-bin-${version.bin}.jar" 
