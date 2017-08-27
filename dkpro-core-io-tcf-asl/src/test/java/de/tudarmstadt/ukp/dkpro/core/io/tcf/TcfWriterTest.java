@@ -64,7 +64,8 @@ public class TcfWriterTest
 
         // Write as TCF
         AnalysisEngineDescription writer = createEngineDescription(TcfWriter.class,
-                TcfWriter.PARAM_TARGET_LOCATION, targetFolder);
+                TcfWriter.PARAM_TARGET_LOCATION, targetFolder,
+                TcfWriter.PARAM_OVERWRITE, true);
         SimplePipeline.runPipeline(jcas, writer);
         
         // Read again as TCF
