@@ -52,7 +52,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import gate.Annotation;
 import gate.AnnotationSet;
-import gate.Document;
 import gate.DocumentExporter;
 import gate.FeatureMap;
 import gate.corpora.DocumentContentImpl;
@@ -79,6 +78,13 @@ public class GateXmlWriter2
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xml")
     private String filenameSuffix;
 
+    /**
+     * Character encoding used by the output files.
+     */
+    public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
+    @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
+    private String encoding;
+    
     private DocumentExporter exporter;
 
     @Override
@@ -93,7 +99,7 @@ public class GateXmlWriter2
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
-        Document document = new DocumentImpl();
+        DocumentImpl document = new DocumentImpl();
         document.setContent(new DocumentContentImpl(aJCas.getDocumentText()));
 
         AnnotationSet as = document.getAnnotations();
@@ -112,6 +118,10 @@ public class GateXmlWriter2
         }
 
         try (OutputStream docOS = getOutputStream(aJCas, filenameSuffix)) {
+            if (encoding != null) {
+                document.setEncoding(encoding);
+            }
+            
             exporter.export(document, docOS);
         }
         catch (Exception e) {

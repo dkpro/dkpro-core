@@ -32,7 +32,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.io.gate.internal.DKPro2Gate;
-import gate.Document;
 import gate.DocumentExporter;
 import gate.corpora.DocumentImpl;
 import gate.corpora.export.GateXMLExporter;
@@ -60,6 +59,13 @@ public class GateXmlWriter
     public static final String PARAM_ANNOTATION_SET_NAME = "annotationSetName";
     @ConfigurationParameter(name = PARAM_ANNOTATION_SET_NAME, mandatory = false)
     private String annotationSetName;
+    
+    /**
+     * Character encoding used by the output files.
+     */
+    public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
+    @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
+    private String encoding;
 
     private DocumentExporter exporter;
     
@@ -78,7 +84,7 @@ public class GateXmlWriter
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
-        Document document;
+        DocumentImpl document;
         try {
             document = new DocumentImpl();
             if (annotationSetName != null && annotationSetName.length() > 0) {
@@ -93,6 +99,10 @@ public class GateXmlWriter
         }
         
         try (OutputStream docOS = getOutputStream(aJCas, filenameSuffix)) {
+            if (encoding != null) {
+                document.setEncoding(encoding);
+            }
+            
             exporter.export(document, docOS);
         }
         catch (Exception e) {
