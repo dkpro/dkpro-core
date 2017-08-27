@@ -21,6 +21,7 @@ import java.io.File;
 import java.nio.file.Path;
 import java.util.List;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.filefilter.AbstractFileFilter;
 import org.springframework.util.AntPathMatcher;
 
@@ -64,11 +65,18 @@ public class AntFileFilter extends AbstractFileFilter
     {
         boolean ok = true;
         
+        // Ant matcher uses slashes as separator by default and that is also what we do in the YAML files.
+        // Thus we need to transform system paths to UNIX-style if necessary.
+        String path = aPath;
+        if (File.separatorChar == '\\') {
+            path = FilenameUtils.separatorsToUnix(path);
+        }
+        
         // If includes are set, we only consider stuff that is included
         if (includes != null) {
             ok = false;
             for (String include : includes) {
-                if (matcher.match(include, aPath)) {
+                if (matcher.match(include, path)) {
                     ok = true;
                     break;
                 }
@@ -78,7 +86,7 @@ public class AntFileFilter extends AbstractFileFilter
         // If excludes are set, they are applied after any includes
         if (ok && excludes != null) {
             for (String exclude : excludes) {
-                if (matcher.match(exclude, aPath)) {
+                if (matcher.match(exclude, path)) {
                     ok = false;
                     break;
                 }
