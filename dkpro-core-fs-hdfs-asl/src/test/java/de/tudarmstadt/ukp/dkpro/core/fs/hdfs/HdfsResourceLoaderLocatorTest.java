@@ -23,6 +23,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.OutputStreamWriter;
+import java.util.Locale;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileUtil;
@@ -33,8 +34,8 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ExternalResourceDescription;
 import org.junit.After;
+import org.junit.Assume;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -57,6 +58,9 @@ public class HdfsResourceLoaderLocatorTest
     public void startCluster()
         throws Exception
     {
+        Assume.assumeFalse("HDFS on Windows would require native libs which we do not supply.",
+                System.getProperty("os.name").toLowerCase(Locale.US).contains("win"));
+        
         // Start dummy HDFS
         File target = folder.newFolder("hdfs");
         hadoopTmp = folder.newFolder("hadoop");
@@ -73,7 +77,9 @@ public class HdfsResourceLoaderLocatorTest
     @After
     public void shutdownCluster()
     {
-        hdfsCluster.shutdown();
+        if (hdfsCluster != null) {
+            hdfsCluster.shutdown();
+        }
     }
     
     @Test
