@@ -59,7 +59,7 @@ public class TokenizedTextWriterTest
                 TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
                 TokenizedTextWriter.PARAM_OVERWRITE, true);
         TestRunner.runTest("id", writer, "en", text);
-        assertTrue(FileUtils.contentEquals(tokenized, targetFile));
+        assertTrue(FileUtils.contentEqualsIgnoreEOL(tokenized, targetFile, "UTF-8"));
     }
 
     @Test
@@ -78,7 +78,7 @@ public class TokenizedTextWriterTest
         TestRunner.runTest("id", writer, "en", text);
         assertTrue(targetDir.isDirectory());
         assertTrue(targetFile.exists());
-        assertTrue(FileUtils.contentEquals(tokenized, targetFile));
+        assertTrue(FileUtils.contentEqualsIgnoreEOL(tokenized, targetFile, "UTF-8"));
     }
 
     @Test
@@ -96,7 +96,7 @@ public class TokenizedTextWriterTest
                 TokenizedTextWriter.PARAM_FEATURE_PATH, typeName,
                 TokenizedTextWriter.PARAM_SINGULAR_TARGET, true);
         TestRunner.runTest("id", writer, "en", text);
-        assertTrue(FileUtils.contentEquals(tokenized, targetFile));
+        assertTrue(FileUtils.contentEqualsIgnoreEOL(tokenized, targetFile, "UTF-8"));
     }
 
     @Test
@@ -162,7 +162,7 @@ public class TokenizedTextWriterTest
                 TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
                 TokenizedTextWriter.PARAM_OVERWRITE, true);
         TestRunner.runTest("id", writer, "en", text);
-        assertTrue(FileUtils.contentEquals(tokenized, targetFile));
+        assertTrue(FileUtils.contentEqualsIgnoreEOL(tokenized, targetFile, "UTF-8"));
     }
 
     @Test
@@ -181,7 +181,7 @@ public class TokenizedTextWriterTest
                 TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
                 TokenizedTextWriter.PARAM_OVERWRITE, true);
         TestRunner.runTest("id", writer, "en", text);
-        assertTrue(FileUtils.contentEquals(tokenized, targetFile));
+        assertTrue(FileUtils.contentEqualsIgnoreEOL(tokenized, targetFile, "UTF-8"));
     }
 
     @Test
@@ -199,6 +199,6 @@ public class TokenizedTextWriterTest
                 TokenizedTextWriter.PARAM_OVERWRITE, true,
                 TokenizedTextWriter.PARAM_COVERING_TYPE, null);
         TestRunner.runTest("id", writer, "en", text);
-        assertTrue(FileUtils.contentEquals(tokenized, targetFile));
+        assertTrue(FileUtils.contentEqualsIgnoreEOL(tokenized, targetFile, "UTF-8"));
     }
 }
