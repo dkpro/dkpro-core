@@ -248,42 +248,42 @@ extends JCasAnnotator_ImplBase
 	protected abstract void process(JCas aJCas, String text, int zoneBegin)
 		throws AnalysisEngineProcessException;
 
-	/**
-	 * Remove trailing or leading whitespace from the annotation.
-	 * @param aText the text.
-	 * @param aSpan the offsets.
-	 */
-	public void trim(String aText, int[] aSpan)
-	{
-		int begin = aSpan[0];
-		int end = aSpan[1]-1;
+    /**
+     * Remove trailing or leading whitespace from the annotation.
+     * 
+     * @param aText
+     *            the text.
+     * @param aSpan
+     *            the offsets.
+     */
+    public static void trim(String aText, int[] aSpan)
+    {
+        String data = aText;
 
-		String data = aText;
-		while (
-				(begin < (data.length()-1))
-				&& trimChar(data.charAt(begin))
-		) {
-			begin ++;
-		}
-		while (
-				(end > 0)
-				&& trimChar(data.charAt(end))
-		) {
-			end --;
-		}
+        int begin = aSpan[0];
+        int end = aSpan[1] - 1;
 
-		end++;
+        // Remove whitespace at end
+        while ((end > 0) && trimChar(data.charAt(end))) {
+            end--;
+        }
+        end++;
 
-		aSpan[0] = begin;
-		aSpan[1] = end;
-	}
+        // Remove whitespace at start
+        while ((begin < end) && trimChar(data.charAt(begin))) {
+            begin++;
+        }
+
+        aSpan[0] = begin;
+        aSpan[1] = end;
+    }
 
 	public boolean isEmpty(int aBegin, int aEnd)
 	{
 		return aBegin >= aEnd;
 	}
 
-	public boolean trimChar(final char aChar)
+	public static boolean trimChar(final char aChar)
 	{
 		switch (aChar) {
 		case '\n':     return true; // Line break
