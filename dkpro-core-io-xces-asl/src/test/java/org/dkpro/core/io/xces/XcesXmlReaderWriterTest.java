@@ -21,19 +21,16 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.custommonkey.xmlunit.XMLAssert;
-import org.dkpro.core.io.xces.XcesBasicXmlReader;
-import org.dkpro.core.io.xces.XcesBasicXmlWriter;
-import org.dkpro.core.io.xces.XcesXmlReader;
-import org.dkpro.core.io.xces.XcesXmlWriter;
 import org.junit.Rule;
 import org.junit.Test;
-import org.xml.sax.InputSource;
-
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class XcesXmlReaderWriterTest
@@ -54,10 +51,16 @@ public class XcesXmlReaderWriterTest
         
         SimplePipeline.runPipeline(reader, writer);
         
-        XMLAssert.assertXMLEqual(
-                new InputSource("src/test/resources/xces-complex.xml"),
-                new InputSource(new File(targetFolder, "xces-complex.xml").getPath()));
+        try (
+                Reader expected = new InputStreamReader(new FileInputStream(
+                        "src/test/resources/xces-complex.xml"), "UTF-8");
+                Reader actual = new InputStreamReader(new FileInputStream(
+                        new File(targetFolder, "xces-complex.xml")), "UTF-8");
+        ) {
+            XMLAssert.assertXMLEqual(expected, actual);
+        }
     }
+    
     @Test
     public void testBasicReaderWriter() throws Exception
     {
@@ -74,9 +77,14 @@ public class XcesXmlReaderWriterTest
         
         SimplePipeline.runPipeline(reader, writer);
         
-        XMLAssert.assertXMLEqual(
-                new InputSource("src/test/resources/xces-basic.xml"),
-                new InputSource(new File(targetFolder, "xces-basic.xml").getPath()));
+        try (
+                Reader expected = new InputStreamReader(new FileInputStream(
+                        "src/test/resources/xces-basic.xml"), "UTF-8");
+                Reader actual = new InputStreamReader(new FileInputStream(
+                        new File(targetFolder, "xces-basic.xml")), "UTF-8");
+        ) {
+            XMLAssert.assertXMLEqual(expected, actual);
+        }
     }
 
     @Rule
