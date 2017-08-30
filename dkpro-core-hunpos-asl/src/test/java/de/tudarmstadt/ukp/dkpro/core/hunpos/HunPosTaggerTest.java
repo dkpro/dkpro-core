@@ -25,6 +25,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -43,6 +44,13 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class HunPosTaggerTest
 {
+    @Before
+    public void startCluster()
+    {
+        Assume.assumeFalse("HunPos currently hangs indefinitely on Windows: Issue #1099",
+                System.getProperty("os.name").toLowerCase(Locale.US).contains("win"));
+    }
+    
 //    @Test
 //    public void testCatalan()
 //        throws Exception
