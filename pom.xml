@@ -38,7 +38,7 @@
     <properties>
         <currentYear>2017</currentYear>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-        <uima.version>2.10.0</uima.version>
+        <uima.version>2.10.1</uima.version>
         <uimafit.version>2.3.0</uimafit.version>
         <uimafit.plugin.version>2.3.0</uimafit.plugin.version>
         <lucene.version>4.4.0</lucene.version>
