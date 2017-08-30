@@ -22,6 +22,7 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.util.JCasUtil;
@@ -727,6 +728,8 @@ public class MaltParserTest
                     OpenNlpPosTagger.PARAM_LANGUAGE, "en"));
         }
         else if ("fa".equals(aLanguage) || "sv".equals(aLanguage)) {
+            Assume.assumeFalse("HunPos currently hangs indefinitely on Windows: Issue #1099",
+                    System.getProperty("os.name").toLowerCase(Locale.US).contains("win"));
             engines.add(createEngineDescription(HunPosTagger.class));
         }
         else {

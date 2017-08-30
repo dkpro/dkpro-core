@@ -20,6 +20,8 @@ package de.tudarmstadt.ukp.dkpro.core.mstparser;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
+import java.util.Locale;
+
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
@@ -331,6 +333,9 @@ public class MstParserTest
         
         AggregateBuilder aggregate = new AggregateBuilder();
         
+        Assume.assumeFalse("HunPos currently hangs indefinitely on Windows: Issue #1099",
+                System.getProperty("os.name").toLowerCase(Locale.US).contains("win"));
+
         aggregate.add(createEngineDescription(HunPosTagger.class));
         Object[] params = new Object[] {
                 MstParser.PARAM_VARIANT, aVariant,

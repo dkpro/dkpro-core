@@ -45,7 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 public class HunPosTaggerTest
 {
     @Before
-    public void startCluster()
+    public void prepare()
     {
         Assume.assumeFalse("HunPos currently hangs indefinitely on Windows: Issue #1099",
                 System.getProperty("os.name").toLowerCase(Locale.US).contains("win"));
