@@ -17,10 +17,10 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.annis;
 
-import static org.apache.commons.io.FileUtils.readFileToString;
+import static org.apache.commons.io.FileUtils.*;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.File;
 
@@ -69,9 +69,8 @@ public class RelAnnisWriterTest
 
 		// Check if the output matches the reference output
 		for (File f : workspace.getRoot().listFiles()) {
-			assertEquals(
-					readFileToString(new File("src/test/resources/tueba/reference", f.getName()), "UTF-8"),
-					readFileToString(f, "UTF-8"));
+            assertTrue(contentEqualsIgnoreEOL(
+                    new File("src/test/resources/tueba/reference", f.getName()), f, "UTF-8"));
 		}
 	}
 }
