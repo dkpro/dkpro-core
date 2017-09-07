@@ -223,28 +223,21 @@ public class CerminePdfReader
 
         private void parseHeader(Element root)
         {
-            if (root.getChildren().isEmpty() && !root.getValue().isEmpty()) {
-                if (!ignoreCitations || !isCitationElement(root)) {
-                    sb.append(DELIMITER).append(normalizeString(root.getValue()));
-                }
+            if (isWriteableLeafNode(root)) {
+                writeLeafNode(root);
                 return;
             }
             for (Object node : root.getContent()) {
-                if (node instanceof Text) {
-                    Text text = (Text) node;
-                    sb.append(DELIMITER).append(normalizeString(text.getValue()));
+                if (isTextNode(node)) {
+                    writeTextNode(node);
                 }
-                else if (node instanceof Element) {
+                else if (isElementNode(node)) {
                     Element element = (Element) node;
-                    if (element.getName().equals("title") || element.getName().equals("subtitle")
-                            || element.getName().equals("trans-title-group")
-                            || element.getName().equals("alt-title")
-                            || element.getName().equals("article-title")) {
+                    if (isArticleTitleElement(element)) {
                         // close the previous open paragraph, if any
                         makeAnnotation(paragraphType);
 
-                        if (element.getName().equals("title")
-                                || element.getName().equals("article-title")) {
+                        if (isArticleMainTitleElement(element)) {
                             title = element.getValue();
                         }
                         makeAnnotationFromElement(element, headingType);
@@ -254,6 +247,19 @@ public class CerminePdfReader
                     }
                 }                
             }
+        }
+
+        private boolean isArticleMainTitleElement(Element element)
+        {
+            return element.getName().equals("title")
+                    || element.getName().equals("article-title");
+        }
+
+        private boolean isArticleTitleElement(Element element)
+        {
+            return isArticleMainTitleElement(element) || element.getName().equals("subtitle")
+                    || element.getName().equals("trans-title-group")
+                    || element.getName().equals("alt-title");
         }
 
         private void makeAnnotationFromElement(Element element, String annotation)
@@ -266,25 +272,22 @@ public class CerminePdfReader
 
         private void parseBody(Element root)
         {
-            if (root.getChildren().isEmpty() && !root.getValue().isEmpty()) {
-                if (!ignoreCitations || !isCitationElement(root)) {
-                    sb.append(DELIMITER).append(normalizeString(root.getValue()));
-                }
+            if (isWriteableLeafNode(root)) {
+                writeLeafNode(root);
                 return;
             }
 
             for (Object node : root.getContent()) {
-                if (node instanceof Text) {
-                    Text text = (Text) node;
-                    sb.append(DELIMITER).append(normalizeString(text.getValue()));
+                if (isTextNode(node)) {
+                    writeTextNode(node);
                 }
-                else if (node instanceof Element) {
+                else if (isElementNode(node)) {
                     Element element = (Element) node;
-                    if (element.getName().equals("title") || element.getName().equals("p")) {
+                    if (isTitleElement(element) || isParagraphElement(element)) {
                         // close the previous open paragraph, if any
                         makeAnnotation(paragraphType);
 
-                        String annotation = element.getName().equals("title") ? headingType
+                        String annotation = isTitleElement(element) ? headingType
                                 : paragraphType;
                         makeAnnotationFromElement(element, annotation);
                     }
@@ -292,6 +295,44 @@ public class CerminePdfReader
                         parseBody(element);
                     }
                 }                
+            }
+        }
+
+        private boolean isParagraphElement(Element element)
+        {
+            return element.getName().equals("p");
+        }
+
+        private boolean isTitleElement(Element element)
+        {
+            return element.getName().equals("title");
+        }
+
+        private void writeTextNode(Object node)
+        {
+            Text text = (Text) node;
+            sb.append(DELIMITER).append(normalizeString(text.getValue()));
+        }
+
+        private boolean isElementNode(Object node)
+        {
+            return node instanceof Element;
+        }
+
+        private boolean isTextNode(Object node)
+        {
+            return node instanceof Text;
+        }
+
+        private boolean isWriteableLeafNode(Element node)
+        {
+            return node.getChildren().isEmpty() && !node.getValue().isEmpty();
+        }
+
+        private void writeLeafNode(Element node)
+        {
+            if (!ignoreCitations || !isCitationElement(node)) {
+                sb.append(DELIMITER).append(normalizeString(node.getValue()));
             }
         }
 
@@ -320,18 +361,15 @@ public class CerminePdfReader
 
         private void parseText(Element root)
         {
-            if (root.getChildren().isEmpty() && !root.getValue().isEmpty()) {
-                if (!ignoreCitations || !isCitationElement(root)) {
-                    sb.append(DELIMITER).append(normalizeString(root.getValue()));
-                }
+            if (isWriteableLeafNode(root)) {
+                writeLeafNode(root);
             }
             else {
                 for (Object node : root.getContent()) {
-                    if (node instanceof Text) {
-                        Text text = (Text) node;
-                        sb.append(DELIMITER).append(normalizeString(text.getValue()));
+                    if (isTextNode(node)) {
+                        writeTextNode(node);
                     }
-                    else if (node instanceof Element) {
+                    else if (isElementNode(node)) {
                         Element element = (Element) node;
                         parseText(element);
                     }
