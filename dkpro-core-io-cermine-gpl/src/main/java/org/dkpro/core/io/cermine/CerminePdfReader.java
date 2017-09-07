@@ -34,6 +34,8 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.jdom.Element;
+import org.jdom.Text;
+
 import pl.edu.icm.cermine.ContentExtractor;
 import pl.edu.icm.cermine.exception.AnalysisException;
 
@@ -312,9 +314,15 @@ public class CerminePdfReader
                 }
             }
             else {
-                for (Object node : root.getChildren()) {
-                    Element element = (Element) node;
-                    parseText(element);
+                for (Object node : root.getContent()) {
+                    if (node instanceof Text) {
+                        Text text = (Text) node;
+                        sb.append(DELIMITER).append(normalizeString(text.getValue()));
+                    }
+                    else if (node instanceof Element) {
+                        Element element = (Element) node;
+                        parseText(element);
+                    }
                 }
             }
         }
