@@ -81,9 +81,9 @@ public class CerminePdfReader
     /**
      * If set to true the converter will discard all of the detected citations
      */
-    public static final String PARAM_OMMIT_CITATIONS = "ommitCitations";
-    @ConfigurationParameter(name = PARAM_OMMIT_CITATIONS, mandatory = false, defaultValue = "false")
-    private boolean ommitCitations;
+    public static final String PARAM_IGNORE_CITATIONS = "ignoreCitations";
+    @ConfigurationParameter(name = PARAM_IGNORE_CITATIONS, mandatory = false, defaultValue = "false")
+    private boolean ignoreCitations;
 
     private NlmHandler nlmHandler;
 
@@ -104,7 +104,7 @@ public class CerminePdfReader
                 .withHeadingAnnotation(headingType)
                 .withParagraphAnnotation(paragraphType)
                 .withNormalizeText(normalizeText)
-                .withOmmitCitations(ommitCitations);
+                .withIgnoreCitations(ignoreCitations);
     }
 
     @Override
@@ -151,7 +151,7 @@ public class CerminePdfReader
         private String paragraphType;
         private String headingType;
         private boolean normalizeText;
-        private boolean ommitCitations;
+        private boolean ignoreCitations;
 
         private int beginIndex;
 
@@ -173,9 +173,9 @@ public class CerminePdfReader
             return this;
         }
 
-        public NlmHandler withOmmitCitations(boolean isOmmitCitations)
+        public NlmHandler withIgnoreCitations(boolean isIgnoreCitations)
         {
-            ommitCitations = isOmmitCitations;
+            ignoreCitations = isIgnoreCitations;
             return this;
         }
 
@@ -222,7 +222,7 @@ public class CerminePdfReader
         private void parseHeader(Element root)
         {
             if (root.getChildren().isEmpty() && !root.getValue().isEmpty()) {
-                if (!ommitCitations || !isCitationElement(root)) {
+                if (!ignoreCitations || !isCitationElement(root)) {
                     sb.append(DELIMITER).append(normalizeString(root.getValue()));
                 }
                 return;
@@ -259,7 +259,7 @@ public class CerminePdfReader
         private void parseBody(Element root)
         {
             if (root.getChildren().isEmpty() && !root.getValue().isEmpty()) {
-                if (!ommitCitations || !isCitationElement(root)) {
+                if (!ignoreCitations || !isCitationElement(root)) {
                     sb.append(DELIMITER).append(normalizeString(root.getValue()));
                 }
                 return;
@@ -307,7 +307,7 @@ public class CerminePdfReader
         private void parseText(Element root)
         {
             if (root.getChildren().isEmpty() && !root.getValue().isEmpty()) {
-                if (!ommitCitations || !isCitationElement(root)) {
+                if (!ignoreCitations || !isCitationElement(root)) {
                     sb.append(DELIMITER).append(normalizeString(root.getValue()));
                 }
             }

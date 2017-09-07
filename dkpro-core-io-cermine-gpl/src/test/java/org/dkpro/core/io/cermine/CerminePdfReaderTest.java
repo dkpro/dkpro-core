@@ -108,14 +108,14 @@ public class CerminePdfReaderTest
     }
     
     @Test
-    public void testOmmitCitations() throws Exception
+    public void testIgnoreCitations() throws Exception
     {
         File outputFile = new File(testContext.getTestOutputFolder(), "dump-output.txt");
 
         CollectionReader reader = createReader(CerminePdfReader.class,
                 CerminePdfReader.PARAM_SOURCE_LOCATION, "src/test/resources/data",
                 CerminePdfReader.PARAM_PATTERNS, "[+]**/*.pdf",
-                CerminePdfReader.PARAM_NORMALIZE_TEXT, true, CerminePdfReader.PARAM_OMMIT_CITATIONS,
+                CerminePdfReader.PARAM_NORMALIZE_TEXT, true, CerminePdfReader.PARAM_IGNORE_CITATIONS,
                 true);
 
         AnalysisEngine writer = createEngine(CasDumpWriter.class,
