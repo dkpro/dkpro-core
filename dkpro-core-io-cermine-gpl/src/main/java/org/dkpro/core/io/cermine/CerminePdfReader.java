@@ -78,6 +78,10 @@ public class CerminePdfReader
     public static final String PARAM_NORMALIZE_TEXT = "normalizeText";
     @ConfigurationParameter(name = PARAM_NORMALIZE_TEXT, mandatory = false, defaultValue = "false")
     private boolean normalizeText;
+    
+    public static final String PARAM_OMMIT_CITATIONS = "ommitCitations";
+    @ConfigurationParameter(name = PARAM_OMMIT_CITATIONS, mandatory = false, defaultValue = "false")
+    private boolean ommitCitations;
 
     private NlmHandler nlmHandler;
 
@@ -98,7 +102,8 @@ public class CerminePdfReader
         nlmHandler = new NlmHandler()
                 .withHeadingAnnotation(headingType)
                 .withParagraphAnnotation(paragraphType)
-                .withNormalizeText(normalizeText);
+                .withNormalizeText(normalizeText)
+                .withOmmitCitations(ommitCitations);
     }
 
     @Override
@@ -147,6 +152,7 @@ public class CerminePdfReader
         private String paragraphType;
         private String headingType;
         private boolean normalizeText;
+        private boolean ommitCitations;
 
         private int beginIndex;
 
@@ -165,6 +171,12 @@ public class CerminePdfReader
         public NlmHandler withNormalizeText(boolean isNormalizeText)
         {
             normalizeText = isNormalizeText;
+            return this;
+        }
+
+        public NlmHandler withOmmitCitations(boolean isOmmitCitations)
+        {
+            ommitCitations = isOmmitCitations;
             return this;
         }
 
@@ -192,19 +204,22 @@ public class CerminePdfReader
                 {
                     parseHeader(element);
 
-                    makeParagraph();
+                    //close the previous open paragraph, if any
+                    makeAnnotation(paragraphType);
                 }
                 else if (element.getName().equals("body"))
                 {
                     parseBody(element);
 
-                    makeParagraph();
+                    //close the previous open paragraph, if any
+                    makeAnnotation(paragraphType);
                 }
                 else if (element.getName().equals("back"))
                 {
                     parseBack(element);
-
-                    makeParagraph();
+                    
+                    //close the previous open paragraph, if any
+                    makeAnnotation(paragraphType);
                 }
             }
         }
@@ -213,7 +228,8 @@ public class CerminePdfReader
         {
             if (root.getChildren().isEmpty() && !root.getValue().isEmpty())
             {
-                sb.append(DELIMITER).append(normalizeString(root.getValue()));
+                if (!ommitCitations || !isCitationElement(root))
+                    sb.append(DELIMITER).append(normalizeString(root.getValue()));
                 return;
             }
             for (Object node : root.getChildren())
@@ -223,7 +239,8 @@ public class CerminePdfReader
                         element.getName().equals("trans-title-group") || element.getName().equals("alt-title") ||
                         element.getName().equals("article-title"))
                 {
-                    makeParagraph();
+                    //close the previous open paragraph, if any
+                    makeAnnotation(paragraphType);
 
                     if (element.getName().equals("title") || element.getName().equals("article-title"))
                     {
@@ -240,13 +257,9 @@ public class CerminePdfReader
 
         private void makeAnnotationFromElement(Element element, String annotation)
         {
-            int begin = sb.length();
+            beginIndex = sb.length();
             parseText(element);
-            int end = sb.length();
-            Type t = cas.getTypeSystem().getType(annotation);
-            AnnotationFS a = cas.createAnnotation(t, begin, end);
-            cas.addFsToIndexes(a);
-
+            makeAnnotation(annotation);
             updateCursor();
         }
 
@@ -254,7 +267,8 @@ public class CerminePdfReader
         {
             if (root.getChildren().isEmpty() && !root.getValue().isEmpty())
             {
-                sb.append(DELIMITER).append(normalizeString(root.getValue()));
+                if (!ommitCitations || !isCitationElement(root))
+                    sb.append(DELIMITER).append(normalizeString(root.getValue()));
                 return;
             }
 
@@ -264,7 +278,7 @@ public class CerminePdfReader
                 if (element.getName().equals("title") || element.getName().equals("p"))
                 {
                     //close the previous open paragraph, if any
-                    makeParagraph();
+                    makeAnnotation(paragraphType);
 
                     String annotation = element.getName().equals("title") ? headingType : paragraphType;
                     makeAnnotationFromElement(element, annotation);
@@ -276,16 +290,24 @@ public class CerminePdfReader
             }
         }
 
+        private boolean isCitationElement(Element root)
+        {
+            String name = root.getName();
+            return name.equals("element-citation") || name.equals("mixed-citation")
+                    || name.equals("nlm-citation") || name.equals("citation-alternatives")
+                    || name.equals("xref");
+        }
+
         private void updateCursor()
         {
             beginIndex = sb.length();
         }
 
-        private void makeParagraph()
+        private void makeAnnotation(String annotationType)
         {
             if (beginIndex < sb.length())
             {
-                Type t = cas.getTypeSystem().getType(paragraphType);
+                Type t = cas.getTypeSystem().getType(annotationType);
                 AnnotationFS a = cas.createAnnotation(t, beginIndex, sb.length());
                 cas.addFsToIndexes(a);
                 updateCursor();
@@ -295,7 +317,8 @@ public class CerminePdfReader
         private void parseText(Element root)
         {
             if (root.getChildren().isEmpty() && !root.getValue().isEmpty()) {
-                sb.append(DELIMITER).append(normalizeString(root.getValue()));
+                if (!ommitCitations || !isCitationElement(root))
+                    sb.append(DELIMITER).append(normalizeString(root.getValue()));
             }
             else
             {

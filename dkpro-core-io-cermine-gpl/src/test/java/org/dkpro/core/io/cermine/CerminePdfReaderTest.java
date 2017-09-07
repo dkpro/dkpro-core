@@ -110,6 +110,29 @@ public class CerminePdfReaderTest
 
         assertEquals(reference, actual);
     }
+    
+    @Test
+    public void testOmmitCitations() throws Exception
+    {
+        File outputFile = new File(testContext.getTestOutputFolder(), "dump-output.txt");
+
+        CollectionReader reader = createReader(CerminePdfReader.class,
+                CerminePdfReader.PARAM_SOURCE_LOCATION, "src/test/resources/data",
+                CerminePdfReader.PARAM_PATTERNS, "[+]**/*.pdf",
+                CerminePdfReader.PARAM_NORMALIZE_TEXT, true,
+                CerminePdfReader.PARAM_OMMIT_CITATIONS, true);
+
+        AnalysisEngine writer = createEngine(CasDumpWriter.class,
+                CasDumpWriter.PARAM_TARGET_LOCATION, outputFile);
+
+        SimplePipeline.runPipeline(reader, writer);
+
+        String reference = readFileToString(
+                new File("src/test/resources/reference/test-normalized-nocitations.dump"), "UTF-8").trim();
+        String actual = readFileToString(outputFile, "UTF-8").trim();
+
+        assertEquals(reference, actual);
+    }
 
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
