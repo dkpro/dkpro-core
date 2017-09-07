@@ -198,7 +198,7 @@ public class CerminePdfReader
         private void parse(Element root)
         {
             beginIndex = 0;
-            for (Object node : root.getChildren()) {
+            for (Object node : root.getContent()) {
                 Element element = (Element) node;
                 if (element.getName().equals("front")) {
                     parseHeader(element);
@@ -229,24 +229,30 @@ public class CerminePdfReader
                 }
                 return;
             }
-            for (Object node : root.getChildren()) {
-                Element element = (Element) node;
-                if (element.getName().equals("title") || element.getName().equals("subtitle")
-                        || element.getName().equals("trans-title-group")
-                        || element.getName().equals("alt-title")
-                        || element.getName().equals("article-title")) {
-                    // close the previous open paragraph, if any
-                    makeAnnotation(paragraphType);
-
-                    if (element.getName().equals("title")
+            for (Object node : root.getContent()) {
+                if (node instanceof Text) {
+                    Text text = (Text) node;
+                    sb.append(DELIMITER).append(normalizeString(text.getValue()));
+                }
+                else if (node instanceof Element) {
+                    Element element = (Element) node;
+                    if (element.getName().equals("title") || element.getName().equals("subtitle")
+                            || element.getName().equals("trans-title-group")
+                            || element.getName().equals("alt-title")
                             || element.getName().equals("article-title")) {
-                        title = element.getValue();
+                        // close the previous open paragraph, if any
+                        makeAnnotation(paragraphType);
+
+                        if (element.getName().equals("title")
+                                || element.getName().equals("article-title")) {
+                            title = element.getValue();
+                        }
+                        makeAnnotationFromElement(element, headingType);
                     }
-                    makeAnnotationFromElement(element, headingType);
-                }
-                else {
-                    parseHeader(element);
-                }
+                    else {
+                        parseHeader(element);
+                    }
+                }                
             }
         }
 
@@ -267,19 +273,25 @@ public class CerminePdfReader
                 return;
             }
 
-            for (Object node : root.getChildren()) {
-                Element element = (Element) node;
-                if (element.getName().equals("title") || element.getName().equals("p")) {
-                    // close the previous open paragraph, if any
-                    makeAnnotation(paragraphType);
+            for (Object node : root.getContent()) {
+                if (node instanceof Text) {
+                    Text text = (Text) node;
+                    sb.append(DELIMITER).append(normalizeString(text.getValue()));
+                }
+                else if (node instanceof Element) {
+                    Element element = (Element) node;
+                    if (element.getName().equals("title") || element.getName().equals("p")) {
+                        // close the previous open paragraph, if any
+                        makeAnnotation(paragraphType);
 
-                    String annotation = element.getName().equals("title") ? headingType
-                            : paragraphType;
-                    makeAnnotationFromElement(element, annotation);
-                }
-                else {
-                    parseBody(element);
-                }
+                        String annotation = element.getName().equals("title") ? headingType
+                                : paragraphType;
+                        makeAnnotationFromElement(element, annotation);
+                    }
+                    else {
+                        parseBody(element);
+                    }
+                }                
             }
         }
 
