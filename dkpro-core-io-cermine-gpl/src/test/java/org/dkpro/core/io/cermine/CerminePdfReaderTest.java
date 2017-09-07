@@ -43,8 +43,7 @@ import static org.junit.Assert.*;
 public class CerminePdfReaderTest
 {
     @Test
-    public void test()
-            throws Exception
+    public void test() throws Exception
     {
         File outputFile = new File(testContext.getTestOutputFolder(), "dump-output.txt");
 
@@ -65,8 +64,7 @@ public class CerminePdfReaderTest
     }
 
     @Test
-    public void testMetadata()
-            throws Exception
+    public void testMetadata() throws Exception
     {
         List<String> expectedTitles = new ArrayList<>();
         expectedTitles.add("Out-of-domain FrameNet Semantic Role Labeling");
@@ -76,14 +74,12 @@ public class CerminePdfReaderTest
                 CerminePdfReader.PARAM_PATTERNS, "[+]**/*.pdf");
 
         List<String> actualTitles = new ArrayList<>();
-        for (JCas jcas : SimplePipeline.iteratePipeline(reader))
-        {
+        for (JCas jcas : SimplePipeline.iteratePipeline(reader)) {
             DocumentMetaData metadata = DocumentMetaData.get(jcas);
             actualTitles.add(metadata.getDocumentTitle());
         }
 
-        for (String expectedTitle : expectedTitles)
-        {
+        for (String expectedTitle : expectedTitles) {
             assertTrue(actualTitles.contains(expectedTitle));
             actualTitles.remove(expectedTitle);
         }
@@ -119,8 +115,8 @@ public class CerminePdfReaderTest
         CollectionReader reader = createReader(CerminePdfReader.class,
                 CerminePdfReader.PARAM_SOURCE_LOCATION, "src/test/resources/data",
                 CerminePdfReader.PARAM_PATTERNS, "[+]**/*.pdf",
-                CerminePdfReader.PARAM_NORMALIZE_TEXT, true,
-                CerminePdfReader.PARAM_OMMIT_CITATIONS, true);
+                CerminePdfReader.PARAM_NORMALIZE_TEXT, true, CerminePdfReader.PARAM_OMMIT_CITATIONS,
+                true);
 
         AnalysisEngine writer = createEngine(CasDumpWriter.class,
                 CasDumpWriter.PARAM_TARGET_LOCATION, outputFile);
@@ -128,7 +124,8 @@ public class CerminePdfReaderTest
         SimplePipeline.runPipeline(reader, writer);
 
         String reference = readFileToString(
-                new File("src/test/resources/reference/test-normalized-nocitations.dump"), "UTF-8").trim();
+                new File("src/test/resources/reference/test-normalized-nocitations.dump"), "UTF-8")
+                        .trim();
         String actual = readFileToString(outputFile, "UTF-8").trim();
 
         assertEquals(reference, actual);
