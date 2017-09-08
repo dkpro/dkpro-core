@@ -73,19 +73,17 @@
             </releases>
         </repository>
         <!-- For UIMA/uimaFIT SNAPSHOT -->
-        <!--  
-		<repository>
-			<id>apache.snapshots</id>
-			<name>Apache Snapshot Repository</name>
-			<url>http://repository.apache.org/snapshots</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-		</repository>
-        -->
+        <repository>
+          <id>apache.snapshots</id>
+          <name>Apache Snapshot Repository</name>
+          <url>http://repository.apache.org/snapshots</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
         <!-- For SNAPSHOTs from the DKPro family -->
         <!--  
         <repository>
@@ -100,7 +98,7 @@
         </repository>
         -->
     </repositories>
-	<pluginRepositories>
+    <pluginRepositories>
         <!-- For UIMA/uimaFIT RCs -->
         <pluginRepository>
             <id>ext-staging</id>
@@ -111,20 +109,18 @@
             </releases>
         </pluginRepository>
         <!-- For UIMA/uimaFIT SNAPSHOT maven plugin -->
-        <!--  
-		<pluginRepository>
-			<id>apache.snapshots</id>
-			<name>Apache Snapshot Repository</name>
-			<url>http://repository.apache.org/snapshots</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-		</pluginRepository>
-        -->
-	</pluginRepositories>
+        <pluginRepository>
+          <id>apache.snapshots</id>
+          <name>Apache Snapshot Repository</name>
+          <url>http://repository.apache.org/snapshots</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
     <mailingLists>
         <mailingList>
             <name>DKPro Core user mailing list</name>
