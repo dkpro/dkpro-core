@@ -1,58 +1,75 @@
-/*
- * Copyright 2017
- * Ubiquitous Knowledge Processing (UKP) Lab
- * Technische Universität Darmstadt
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *   http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-/* First created by JCasGen Sun Nov 20 19:27:55 CET 2011 */
+
+
+   
+/* Apache UIMA v3 - First created by JCasGen Fri Sep 08 09:57:05 EEST 2017 */
+
 package de.tudarmstadt.ukp.dkpro.core.api.coref.type;
 
+import org.apache.uima.cas.impl.CASImpl;
+import org.apache.uima.cas.impl.TypeImpl;
+import org.apache.uima.cas.impl.TypeSystemImpl;
 import org.apache.uima.jcas.JCas; 
 import org.apache.uima.jcas.JCasRegistry;
-import org.apache.uima.jcas.cas.TOP_Type;
+
 
 import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** A link in the coreference chain.
- * Updated by JCasGen Fri Oct 31 23:38:08 CET 2014
- * XML source: /Users/bluefire/UKP/Workspaces/dkpro-juno/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.coref-asl/src/main/resources/desc/type/coref.xml
+ * Updated by JCasGen Fri Sep 08 09:57:05 EEST 2017
+ * XML source: /Users/bluefire/git/dkpro-core/dkpro-core-api-coref-asl/target/jcasgen/typesystem.xml
  * @generated */
 public class CoreferenceLink extends Annotation {
+ 
   /** @generated
    * @ordered 
    */
+  @SuppressWarnings ("hiding")
+  public final static String _TypeName = "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink";
+  
+  /** @generated
+   * @ordered 
+   */
+  @SuppressWarnings ("hiding")
   public final static int typeIndexID = JCasRegistry.register(CoreferenceLink.class);
   /** @generated
    * @ordered 
    */
+  @SuppressWarnings ("hiding")
   public final static int type = typeIndexID;
-  /** @generated  */
+  /** @generated
+   * @return index of the type  
+   */
   @Override
-public              int getTypeIndexID() {return typeIndexID;}
+  public              int getTypeIndexID() {return typeIndexID;}
  
+ 
+  /* *******************
+   *   Feature Offsets *
+   * *******************/ 
+   
+  public final static String _FeatName_next = "next";
+  public final static String _FeatName_referenceType = "referenceType";
+  public final static String _FeatName_referenceRelation = "referenceRelation";
+
+
+  /* Feature Adjusted Offsets */
+  public final static int _FI_next = TypeSystemImpl.getAdjustedFeatureOffset("next");
+  public final static int _FI_referenceType = TypeSystemImpl.getAdjustedFeatureOffset("referenceType");
+  public final static int _FI_referenceRelation = TypeSystemImpl.getAdjustedFeatureOffset("referenceRelation");
+
+   
   /** Never called.  Disable default constructor
    * @generated */
   protected CoreferenceLink() {/* intentionally empty block */}
     
   /** Internal - constructor used by generator 
    * @generated
-   * @param addr low level Feature Structure reference
+   * @param casImpl the CAS this Feature Structure belongs to
    * @param type the type of this Feature Structure 
    */
-  public CoreferenceLink(int addr, TOP_Type type) {
-    super(addr, type);
+  public CoreferenceLink(TypeImpl type, CASImpl casImpl) {
+    super(type, casImpl);
     readObject();
   }
   
@@ -63,6 +80,7 @@ public              int getTypeIndexID() {return typeIndexID;}
     super(jcas);
     readObject();   
   } 
+
 
   /** @generated
    * @param jcas JCas to which this Feature Structure belongs
@@ -78,12 +96,12 @@ public              int getTypeIndexID() {return typeIndexID;}
 
   /** 
    * <!-- begin-user-doc -->
-    * Write your own initialization here
-    * <!-- end-user-doc -->
-  *
+   * Write your own initialization here
+   * <!-- end-user-doc -->
+   *
    * @generated modifiable 
    */
-  private void readObject() {}
+  private void readObject() {/*default - does nothing empty block */}
      
  
     
@@ -94,19 +112,16 @@ public              int getTypeIndexID() {return typeIndexID;}
    * @generated
    * @return value of the feature 
    */
-  public CoreferenceLink getNext() {
-    if (CoreferenceLink_Type.featOkTst && ((CoreferenceLink_Type)jcasType).casFeat_next == null)
-      jcasType.jcas.throwFeatMissing("next", "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink");
-    return (CoreferenceLink)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((CoreferenceLink_Type)jcasType).casFeatCode_next)));}
+  public CoreferenceLink getNext() { return (CoreferenceLink)(_getFeatureValueNc(_FI_next));}
     
   /** setter for next - sets If there is one, it is the next coreference link to the current coreference link 
    * @generated
    * @param v value to set into the feature 
    */
   public void setNext(CoreferenceLink v) {
-    if (CoreferenceLink_Type.featOkTst && ((CoreferenceLink_Type)jcasType).casFeat_next == null)
-      jcasType.jcas.throwFeatMissing("next", "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink");
-    jcasType.ll_cas.ll_setRefValue(addr, ((CoreferenceLink_Type)jcasType).casFeatCode_next, jcasType.ll_cas.ll_getFSRef(v));}    
+    _setFeatureValueNcWj(_FI_next, v);
+  }    
+    
    
     
   //*--------------*
@@ -116,19 +131,16 @@ public              int getTypeIndexID() {return typeIndexID;}
    * @generated
    * @return value of the feature 
    */
-  public String getReferenceType() {
-    if (CoreferenceLink_Type.featOkTst && ((CoreferenceLink_Type)jcasType).casFeat_referenceType == null)
-      jcasType.jcas.throwFeatMissing("referenceType", "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((CoreferenceLink_Type)jcasType).casFeatCode_referenceType);}
+  public String getReferenceType() { return _getStringValueNc(_FI_referenceType);}
     
   /** setter for referenceType - sets The role or type which the covered text has in the coreference chain. 
    * @generated
    * @param v value to set into the feature 
    */
   public void setReferenceType(String v) {
-    if (CoreferenceLink_Type.featOkTst && ((CoreferenceLink_Type)jcasType).casFeat_referenceType == null)
-      jcasType.jcas.throwFeatMissing("referenceType", "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink");
-    jcasType.ll_cas.ll_setStringValue(addr, ((CoreferenceLink_Type)jcasType).casFeatCode_referenceType, v);}    
+    _setStringValueNfc(_FI_referenceType, v);
+  }    
+    
    
     
   //*--------------*
@@ -138,19 +150,16 @@ public              int getTypeIndexID() {return typeIndexID;}
    * @generated
    * @return value of the feature 
    */
-  public String getReferenceRelation() {
-    if (CoreferenceLink_Type.featOkTst && ((CoreferenceLink_Type)jcasType).casFeat_referenceRelation == null)
-      jcasType.jcas.throwFeatMissing("referenceRelation", "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((CoreferenceLink_Type)jcasType).casFeatCode_referenceRelation);}
+  public String getReferenceRelation() { return _getStringValueNc(_FI_referenceRelation);}
     
   /** setter for referenceRelation - sets The type of relation between this link and the next link in the chain. 
    * @generated
    * @param v value to set into the feature 
    */
   public void setReferenceRelation(String v) {
-    if (CoreferenceLink_Type.featOkTst && ((CoreferenceLink_Type)jcasType).casFeat_referenceRelation == null)
-      jcasType.jcas.throwFeatMissing("referenceRelation", "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink");
-    jcasType.ll_cas.ll_setStringValue(addr, ((CoreferenceLink_Type)jcasType).casFeatCode_referenceRelation, v);}    
+    _setStringValueNfc(_FI_referenceRelation, v);
+  }    
+    
   }
 
     
