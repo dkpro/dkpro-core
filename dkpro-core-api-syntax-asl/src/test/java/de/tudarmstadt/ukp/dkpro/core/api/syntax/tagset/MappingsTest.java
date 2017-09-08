@@ -55,10 +55,11 @@ public class MappingsTest
             for (String tag : mappingProvider.getTags()) {
                 String typeName = mappingProvider.getTagTypeName(tag);
                 try {
-                    Class.forName(typeName);
+                    // See https://issues.apache.org/jira/browse/UIMA-5553
+                    Class.forName(typeName, false, MappingsTest.class.getClassLoader());
                 }
                 catch (Throwable e) {
-                    System.out.printf("%s FAILED: %s %n", tag, e.getMessage());
+                    System.out.printf("%s FAILED: %s%n", tag, e.getMessage());
                     failure = true;
                 }
             }
