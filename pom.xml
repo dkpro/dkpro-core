@@ -39,8 +39,8 @@
         <currentYear>2017</currentYear>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
         <uima.version>3.0.0-beta</uima.version>
-        <uimafit.version>2.3.0</uimafit.version>
-        <uimafit.plugin.version>2.3.0</uimafit.plugin.version>
+        <uimafit.version>3.0.0-SNAPSHOT</uimafit.version>
+        <uimafit.plugin.version>3.0.0-SNAPSHOT</uimafit.plugin.version>
         <lucene.version>4.4.0</lucene.version>
         <!-- The Spring version should be at least whatever uimaFIT requires -->
         <spring.version>3.2.16.RELEASE</spring.version>
