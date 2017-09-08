@@ -143,7 +143,7 @@ public class BinaryCasReader
 						.serializeCASMgr((mergedTypeSystemCas).getCasImpl());
 	
 				// Reinitialize CAS with merged type system
-				((CASImpl) aCAS).setupCasFromCasMgrSerializer(casMgrSerializer);
+				((CASImpl) aCAS).getBinaryCasSerDes().setupCasFromCasMgrSerializer(casMgrSerializer);
 	
 			} catch (CASException | ResourceInitializationException e) {
 				throw new CollectionException(e);
@@ -272,7 +272,7 @@ public class BinaryCasReader
 		// prior to loading the data
 		if (header[0] == (byte) 0xAC && header[1] == (byte) 0xED) {
 			CASMgrSerializer casMgr = readCasManager();
-			((CASImpl) aCAS).setupCasFromCasMgrSerializer(casMgr);
+			((CASImpl) aCAS).getBinaryCasSerDes().setupCasFromCasMgrSerializer(casMgr);
 		}
     }
     
