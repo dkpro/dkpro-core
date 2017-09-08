@@ -38,7 +38,7 @@
     <properties>
         <currentYear>2017</currentYear>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-        <uima.version>2.10.1</uima.version>
+        <uima.version>3.0.0-beta</uima.version>
         <uimafit.version>2.3.0</uimafit.version>
         <uimafit.plugin.version>2.3.0</uimafit.plugin.version>
         <lucene.version>4.4.0</lucene.version>
@@ -64,16 +64,14 @@
             </snapshots>
         </repository>
         <!-- For UIMA/uimaFIT RCs -->
-        <!--  
         <repository>
             <id>ext-staging</id>
             <name>Staging repo</name>
-            <url>https://oss.sonatype.org/content/repositories/orgdkpro-1027</url>
+            <url>https://repository.apache.org/content/repositories/orgapacheuima-1154</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
         </repository>
-        -->
         <!-- For UIMA/uimaFIT SNAPSHOT -->
         <!--  
 		<repository>
@@ -104,16 +102,14 @@
     </repositories>
 	<pluginRepositories>
         <!-- For UIMA/uimaFIT RCs -->
-        <!--  
         <pluginRepository>
             <id>ext-staging</id>
             <name>Staging repo</name>
-            <url>https://repository.apache.org/content/repositories/orgapacheuima-1134</url>
+            <url>https://repository.apache.org/content/repositories/orgapacheuima-1154</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
         </pluginRepository>
-        -->
         <!-- For UIMA/uimaFIT SNAPSHOT maven plugin -->
         <!--  
 		<pluginRepository>
