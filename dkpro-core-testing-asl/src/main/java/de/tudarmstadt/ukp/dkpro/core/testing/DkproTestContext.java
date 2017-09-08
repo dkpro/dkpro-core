@@ -46,8 +46,8 @@ public class DkproTestContext extends TestWatcher
         methodName = aDescription.getMethodName();
         System.out.println("\n=== " + methodName + " =====================");
         
-        // Route logging through log4j
-        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
+        // Route logging through SLF4J
+        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Slf4jLogger_impl");
         
         // Enable extra check for illegal updates to indexed features (effective with UIMA 2.7.0
         // and higher)
