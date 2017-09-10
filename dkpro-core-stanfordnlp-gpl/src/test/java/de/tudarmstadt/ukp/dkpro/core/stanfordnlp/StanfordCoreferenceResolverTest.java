@@ -42,8 +42,6 @@ import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import edu.stanford.nlp.dcoref.Constants;
 
-/**
- */
 public class StanfordCoreferenceResolverTest
 {
 	@Test
@@ -53,7 +51,7 @@ public class StanfordCoreferenceResolverTest
 	    JCas jcas = runTest("en", "John bought a car. He is very happy with it.");
 
 		String[][] ref = { 
-		        { "John", "He" }, 
+                { "John", "He" },
 		        { "a car", "it" } };
 		
         AssertAnnotations.assertCoreference(ref, select(jcas, CoreferenceChain.class));
@@ -89,13 +87,13 @@ public class StanfordCoreferenceResolverTest
                             + "organisers told Jiji news agency .");
 
             String[][] ref = { 
-                    { "Jiji" }, 
+                    { "Jiji news agency" }, 
                     { "We" },
-                    { "this war" },
-                    { "Miyako Fuji , 20 , one of the rally 's organisers" },
-                    { "Miyako Fuji" }, 
+                    { "Miyako Fuji" },
                     { "one of the rally 's organisers" },
-                    { "Jiji news agency" } };
+                    { "Jiji" }, 
+                    { "Miyako Fuji , 20 , one of the rally 's organisers" },
+                    { "this war" } };
 
             for (LogRecord r : records) {
                 assertFalse(r.getMessage().contains("Cannot find node in dependency for word"));
@@ -118,10 +116,10 @@ public class StanfordCoreferenceResolverTest
         JCas jcas = runTest("en", "John joined Google in 2012. He is doing research for the company.",
                 Constants.SIEVEPASSES + ",CorefDictionaryMatch");
 
-        String[][] ref = new String[][] { 
+        String[][] ref = { 
                 { "John", "He" }, 
-                { "Google", "the company" },
-                { "2012" } };
+                { "2012" },
+                { "Google", "the company" } };
         
         AssertAnnotations.assertCoreference(ref, select(jcas, CoreferenceChain.class));
     }

@@ -42,8 +42,8 @@ public class CoreNlpCoreferenceResolverTest
 	    JCas jcas = runTest("en", "John bought a car. He is very happy with it.");
 
 		String[][] ref = { 
-		        { "John", "He" }, 
-		        { "a car", "it" } };
+		        { "a car", "it" },
+		        { "John", "He" } };
 		
         AssertAnnotations.assertCoreference(ref, select(jcas, CoreferenceChain.class));
 	}
@@ -55,9 +55,9 @@ public class CoreNlpCoreferenceResolverTest
         JCas jcas = runTest("en", "John joined Google in 2012. He is doing research for the company.",
                 Constants.SIEVEPASSES + ",CorefDictionaryMatch");
 
-        String[][] ref = new String[][] { 
-                { "John", "He" }, 
+        String[][] ref = { 
                 { "Google", "the company" },
+                { "John", "He" }, 
                 { "2012" } };
         
         AssertAnnotations.assertCoreference(ref, select(jcas, CoreferenceChain.class));
@@ -71,9 +71,9 @@ public class CoreNlpCoreferenceResolverTest
 
         String[][] ref = {
                 { "'Let's go" },
-                { "'Let's" },
+                { "the Don'", "he" },
                 { "I" },
-                { "the Don'", "he" } };
+                { "'Let's" } };
 
         String[] pennTree = { 
                 "(ROOT (FRAG (NP (NP ('' ') (NNP Let) (POS 's)) (NN go)) (. !)))", 

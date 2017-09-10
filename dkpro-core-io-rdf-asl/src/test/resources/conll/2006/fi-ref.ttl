@@ -9,8 +9,8 @@
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix semantics: <uima:de.tudarmstadt.ukp.dkpro.core.api.semantics.type.> .
-@prefix lexmorph-pos.tweet: <uima:de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.> .
 @prefix syntax-constituent: <uima:de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.> .
+@prefix lexmorph-pos.tweet: <uima:de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.tweet.> .
 @prefix cas:   <uima:uima.cas.> .
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix tcas:  <uima:uima.tcas.> .
@@ -19,1742 +19,1742 @@
 @prefix segmentation: <uima:de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.> .
 @prefix ner:   <uima:de.tudarmstadt.ukp.dkpro.core.api.ner.type.> .
 
-<urn:fi-orig.conll#441>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "V" ;
-        lexmorph-pos:POS-coarseValue  "V" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "95"^^xsd:int ;
-        tcas:Annotation-end           "100"^^xsd:int .
-
-<urn:fi-orig.conll#796>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "huomio" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "154"^^xsd:int ;
-        tcas:Annotation-end       "162"^^xsd:int .
-
-<urn:fi-orig.conll#1635>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#1647> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#1658> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#1652> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "270"^^xsd:int ;
-        tcas:Annotation-end       "274"^^xsd:int .
-
-<urn:fi-orig.conll#391>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "joka" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "90"^^xsd:int ;
-        tcas:Annotation-end       "94"^^xsd:int .
-
-<urn:fi-orig.conll#1251>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "Adv" ;
-        lexmorph-pos:POS-coarseValue  "Adv" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "246"^^xsd:int ;
-        tcas:Annotation-end           "257"^^xsd:int .
-
-<urn:fi-orig.conll#199>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#211> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#222> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#216> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "49"^^xsd:int ;
-        tcas:Annotation-end       "57"^^xsd:int .
-
-<urn:fi-orig.conll#1372>
-        a                        syntax-dependency:ROOT , rdfcas:FeatureStructure ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "main" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#289> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#289> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "79"^^xsd:int ;
-        tcas:Annotation-end      "87"^^xsd:int .
-
-<urn:fi-orig.conll#762>
+<urn:fi-orig.conll#62>
         a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "V Prs Act Sg3" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "148"^^xsd:int ;
-        tcas:Annotation-end      "153"^^xsd:int .
-
-<urn:fi-orig.conll#357>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
         lexmorph-morph:MorphologicalFeatures-value
                 "Punct" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "88"^^xsd:int ;
-        tcas:Annotation-end      "89"^^xsd:int .
-
-<urn:fi-orig.conll#1380>
-        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "subj" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#379> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#424> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "90"^^xsd:int ;
-        tcas:Annotation-end      "94"^^xsd:int .
-
-<urn:fi-orig.conll#841>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "komissio" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "163"^^xsd:int ;
-        tcas:Annotation-end       "172"^^xsd:int .
-
-<urn:fi-orig.conll#1167>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "N Gen Sg" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "215"^^xsd:int ;
-        tcas:Annotation-end      "232"^^xsd:int .
-
-<urn:fi-orig.conll#649>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#661> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#672> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#666> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "143"^^xsd:int ;
-        tcas:Annotation-end       "144"^^xsd:int .
-
-<urn:fi-orig.conll#36>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "N" ;
-        lexmorph-pos:POS-coarseValue  "N" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "0"^^xsd:int ;
-        tcas:Annotation-end           "8"^^xsd:int .
-
-<urn:fi-orig.conll#436>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "ottaa" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "95"^^xsd:int ;
-        tcas:Annotation-end       "100"^^xsd:int .
-
-<urn:fi-orig.conll#244>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#256> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#267> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#261> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "58"^^xsd:int ;
-        tcas:Annotation-end       "78"^^xsd:int .
-
-<urn:fi-orig.conll#1246>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "seuraava" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "246"^^xsd:int ;
-        tcas:Annotation-end       "257"^^xsd:int .
-
-<urn:fi-orig.conll#1054>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#1066> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#1077> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#1071> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "199"^^xsd:int ;
-        tcas:Annotation-end       "204"^^xsd:int .
-
-<urn:fi-orig.conll#891>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "N" ;
-        lexmorph-pos:POS-coarseValue  "N" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "173"^^xsd:int ;
-        tcas:Annotation-end           "183"^^xsd:int .
-
-<urn:fi-orig.conll#1388>
-        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "mod" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#424> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#289> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "95"^^xsd:int ;
-        tcas:Annotation-end      "100"^^xsd:int .
-
-<urn:fi-orig.conll#486>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "N" ;
-        lexmorph-pos:POS-coarseValue  "N" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "101"^^xsd:int ;
-        tcas:Annotation-end           "109"^^xsd:int .
-
-<urn:fi-orig.conll#807>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "N Ill Sg" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "154"^^xsd:int ;
-        tcas:Annotation-end      "162"^^xsd:int .
-
-<urn:fi-orig.conll#1680>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#1692> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#1703> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#1697> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "275"^^xsd:int ;
-        tcas:Annotation-end       "277"^^xsd:int .
-
-<urn:fi-orig.conll#1296>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "Punct" ;
-        lexmorph-pos:POS-coarseValue  "Punct" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "258"^^xsd:int ;
-        tcas:Annotation-end           "259"^^xsd:int .
-
-<urn:fi-orig.conll#402>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "Pron Rel Nom Sg" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "90"^^xsd:int ;
-        tcas:Annotation-end      "94"^^xsd:int .
-
-<urn:fi-orig.conll#1404>
-        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "attr" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#514> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#604> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "110"^^xsd:int ;
-        tcas:Annotation-end      "130"^^xsd:int .
-
-<urn:fi-orig.conll#1212>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "N Gen Sg" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "233"^^xsd:int ;
-        tcas:Annotation-end      "245"^^xsd:int .
-
-<urn:fi-orig.conll#1396>
-        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "phrv" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#469> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#424> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "101"^^xsd:int ;
-        tcas:Annotation-end      "109"^^xsd:int .
-
-<urn:fi-orig.conll#31>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "neuvosto" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "0"^^xsd:int ;
-        tcas:Annotation-end       "8"^^xsd:int .
-
-<urn:fi-orig.conll#936>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "Punct" ;
-        lexmorph-pos:POS-coarseValue  "Punct" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "184"^^xsd:int ;
-        tcas:Annotation-end           "185"^^xsd:int .
-
-<urn:fi-orig.conll#1412>
-        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "attr" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#559> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#604> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "131"^^xsd:int ;
-        tcas:Annotation-end      "133"^^xsd:int .
-
-<urn:fi-orig.conll#531>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "N" ;
-        lexmorph-pos:POS-coarseValue  "N" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "110"^^xsd:int ;
-        tcas:Annotation-end           "130"^^xsd:int .
-
-<urn:fi-orig.conll#886>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "ehdotus" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "173"^^xsd:int ;
-        tcas:Annotation-end       "183"^^xsd:int .
-
-<urn:fi-orig.conll#694>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#706> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#717> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#711> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "145"^^xsd:int ;
-        tcas:Annotation-end       "147"^^xsd:int .
-
-<urn:fi-orig.conll#81>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "N" ;
-        lexmorph-pos:POS-coarseValue  "N" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "9"^^xsd:int ;
-        tcas:Annotation-end           "18"^^xsd:int .
-
-<urn:fi-orig.conll#1725>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#1737> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#1748> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#1742> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "278"^^xsd:int ;
-        tcas:Annotation-end       "287"^^xsd:int .
-
-<urn:fi-orig.conll#126>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "N" ;
-        lexmorph-pos:POS-coarseValue  "N" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "19"^^xsd:int ;
-        tcas:Annotation-end           "36"^^xsd:int .
-
-<urn:fi-orig.conll#481>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "huomio" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "101"^^xsd:int ;
-        tcas:Annotation-end       "109"^^xsd:int .
-
-<urn:fi-orig.conll#289>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#301> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#312> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#306> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "79"^^xsd:int ;
-        tcas:Annotation-end       "87"^^xsd:int .
-
-<urn:fi-orig.conll#1291>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  ":" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "258"^^xsd:int ;
-        tcas:Annotation-end       "259"^^xsd:int .
-
-<urn:fi-orig.conll#1099>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#1111> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#1122> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#1116> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "205"^^xsd:int ;
-        tcas:Annotation-end       "214"^^xsd:int .
-
-<urn:fi-orig.conll#1420>
-        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "obj" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#604> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#424> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "134"^^xsd:int ;
-        tcas:Annotation-end      "142"^^xsd:int .
-
-<urn:fi-orig.conll#1562>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "Num" ;
-        lexmorph-pos:POS-coarseValue  "Num" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "260"^^xsd:int ;
-        tcas:Annotation-end           "261"^^xsd:int .
-
-<urn:fi-orig.conll#852>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "N Gen Sg" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "163"^^xsd:int ;
-        tcas:Annotation-end      "172"^^xsd:int .
-
-<urn:fi-orig.conll#447>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "V Prs Act Sg3" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "95"^^xsd:int ;
-        tcas:Annotation-end      "100"^^xsd:int .
-
-<urn:fi-orig.conll#931>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "," ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "184"^^xsd:int ;
-        tcas:Annotation-end       "185"^^xsd:int .
-
-<urn:fi-orig.conll#1257>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "Adv Pos Man" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "246"^^xsd:int ;
-        tcas:Annotation-end      "257"^^xsd:int .
-
-<urn:fi-orig.conll#739>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#751> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#762> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#756> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "148"^^xsd:int ;
-        tcas:Annotation-end       "153"^^xsd:int .
-
-<urn:fi-orig.conll#1428>
-        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "phrm" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#649> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#739> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
         tcas:Annotation-begin    "143"^^xsd:int ;
         tcas:Annotation-end      "144"^^xsd:int .
 
-<urn:fi-orig.conll#526>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "perustamis#sopimus" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "110"^^xsd:int ;
-        tcas:Annotation-end       "130"^^xsd:int .
-
-<urn:fi-orig.conll#334>
+<urn:fi-orig.conll#107>
         a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#346> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#357> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#351> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "88"^^xsd:int ;
-        tcas:Annotation-end       "89"^^xsd:int .
-
-<urn:fi-orig.conll#76>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "Euratom" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "9"^^xsd:int ;
-        tcas:Annotation-end       "18"^^xsd:int .
-
-<urn:fi-orig.conll#121>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "hankinta#keskus" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "19"^^xsd:int ;
-        tcas:Annotation-end       "36"^^xsd:int .
-
-<urn:fi-orig.conll#1144>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#1156> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#1167> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#1161> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "215"^^xsd:int ;
-        tcas:Annotation-end       "232"^^xsd:int .
-
-<urn:fi-orig.conll#981>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "V" ;
-        lexmorph-pos:POS-coarseValue  "V" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "186"^^xsd:int ;
-        tcas:Annotation-end           "188"^^xsd:int .
-
-<urn:fi-orig.conll#576>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "Num" ;
-        lexmorph-pos:POS-coarseValue  "Num" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "131"^^xsd:int ;
-        tcas:Annotation-end           "133"^^xsd:int .
-
-<urn:fi-orig.conll#1436>
-        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "phrm" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#694> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#739> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "145"^^xsd:int ;
-        tcas:Annotation-end      "147"^^xsd:int .
-
-<urn:fi-orig.conll#1607>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "N" ;
-        lexmorph-pos:POS-coarseValue  "N" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "262"^^xsd:int ;
-        tcas:Annotation-end           "269"^^xsd:int .
-
-<urn:fi-orig.conll#1770>
-        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "attr" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#1545> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#1590> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "260"^^xsd:int ;
-        tcas:Annotation-end      "261"^^xsd:int .
-
-<urn:fi-orig.conll#171>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "N" ;
-        lexmorph-pos:POS-coarseValue  "N" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "37"^^xsd:int ;
-        tcas:Annotation-end           "48"^^xsd:int .
-
-<urn:fi-orig.conll#1557>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "1" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "260"^^xsd:int ;
-        tcas:Annotation-end       "261"^^xsd:int .
-
-<urn:fi-orig.conll#42>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "N Nom Sg" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "0"^^xsd:int ;
-        tcas:Annotation-end      "8"^^xsd:int .
-
-<urn:fi-orig.conll#1302>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "Punct" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "258"^^xsd:int ;
-        tcas:Annotation-end      "259"^^xsd:int .
-
-<urn:fi-orig.conll#1444>
-        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "conjunct" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#739> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#424> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "148"^^xsd:int ;
-        tcas:Annotation-end      "153"^^xsd:int .
-
-<urn:fi-orig.conll#1778>
-        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "attr" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#1590> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#1635> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "262"^^xsd:int ;
-        tcas:Annotation-end      "269"^^xsd:int .
-
-<urn:fi-orig.conll#897>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "N Gen Sg" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "173"^^xsd:int ;
-        tcas:Annotation-end      "183"^^xsd:int .
-
-<urn:fi-orig.conll#492>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "N Ill Sg" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "101"^^xsd:int ;
-        tcas:Annotation-end      "109"^^xsd:int .
-
-<urn:fi-orig.conll#621>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "N" ;
-        lexmorph-pos:POS-coarseValue  "N" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "134"^^xsd:int ;
-        tcas:Annotation-end           "142"^^xsd:int .
-
-<urn:fi-orig.conll#976>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "olla" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "186"^^xsd:int ;
-        tcas:Annotation-end       "188"^^xsd:int .
-
-<urn:fi-orig.conll#784>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#796> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#807> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#801> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "154"^^xsd:int ;
-        tcas:Annotation-end       "162"^^xsd:int .
-
-<urn:fi-orig.conll#216>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "N" ;
-        lexmorph-pos:POS-coarseValue  "N" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "49"^^xsd:int ;
-        tcas:Annotation-end           "57"^^xsd:int .
-
-<urn:fi-orig.conll#1452>
-        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "phrv" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#784> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#739> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "154"^^xsd:int ;
-        tcas:Annotation-end      "162"^^xsd:int .
-
-<urn:fi-orig.conll#571>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "54" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "131"^^xsd:int ;
-        tcas:Annotation-end       "133"^^xsd:int .
-
-<urn:fi-orig.conll#379>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#391> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#402> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#396> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "90"^^xsd:int ;
-        tcas:Annotation-end       "94"^^xsd:int .
-
-<urn:fi-orig.conll#1602>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "artikla" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "262"^^xsd:int ;
-        tcas:Annotation-end       "269"^^xsd:int .
-
-<urn:fi-orig.conll#1786>
-        a                        rdfcas:FeatureStructure , syntax-dependency:ROOT ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "main" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#1635> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#1635> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "270"^^xsd:int ;
-        tcas:Annotation-end      "274"^^xsd:int .
-
-<urn:fi-orig.conll#166>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "perus#sääntö" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "37"^^xsd:int ;
-        tcas:Annotation-end       "48"^^xsd:int .
-
-<urn:fi-orig.conll#1026>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "PrfPrc" ;
-        lexmorph-pos:POS-coarseValue  "PrfPrc" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "189"^^xsd:int ;
-        tcas:Annotation-end           "198"^^xsd:int .
-
-<urn:fi-orig.conll#1189>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#1201> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#1212> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#1206> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#108> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#110> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#109> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
         tcas:Annotation-begin     "233"^^xsd:int ;
         tcas:Annotation-end       "245"^^xsd:int .
 
-<urn:fi-orig.conll#1652>
+<urn:fi-orig.conll#41>
         a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "N" ;
-        lexmorph-pos:POS-coarseValue  "N" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "270"^^xsd:int ;
-        tcas:Annotation-end           "274"^^xsd:int .
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "V" ;
+        lexmorph-pos:POS-coarseValue  "V" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "95"^^xsd:int ;
+        tcas:Annotation-end           "100"^^xsd:int .
 
-<urn:fi-orig.conll#942>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "Punct" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "184"^^xsd:int ;
-        tcas:Annotation-end      "185"^^xsd:int .
-
-<urn:fi-orig.conll#1460>
-        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "subj" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#829> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#874> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "163"^^xsd:int ;
-        tcas:Annotation-end      "172"^^xsd:int .
-
-<urn:fi-orig.conll#1802>
-        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "conjunct" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#1725> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#1635> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "278"^^xsd:int ;
-        tcas:Annotation-end      "287"^^xsd:int .
-
-<urn:fi-orig.conll#1794>
-        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "phrm" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#1680> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#1725> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "275"^^xsd:int ;
-        tcas:Annotation-end      "277"^^xsd:int .
-
-<urn:fi-orig.conll#537>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "N Gen Sg" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "110"^^xsd:int ;
-        tcas:Annotation-end      "130"^^xsd:int .
-
-<urn:fi-orig.conll#87>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "N Prop Gen Sg" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "9"^^xsd:int ;
-        tcas:Annotation-end      "18"^^xsd:int .
-
-<urn:fi-orig.conll#132>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "N Gen Sg" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "19"^^xsd:int ;
-        tcas:Annotation-end      "36"^^xsd:int .
-
-<urn:fi-orig.conll#829>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#841> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#852> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#846> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "163"^^xsd:int ;
-        tcas:Annotation-end       "172"^^xsd:int .
-
-<urn:fi-orig.conll#616>
+<urn:fi-orig.conll#20>
         a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "artikla" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "134"^^xsd:int ;
-        tcas:Annotation-end       "142"^^xsd:int .
-
-<urn:fi-orig.conll#424>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#436> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#447> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#441> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "95"^^xsd:int ;
-        tcas:Annotation-end       "100"^^xsd:int .
-
-<urn:fi-orig.conll#1468>
-        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "obj" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#874> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#739> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "173"^^xsd:int ;
-        tcas:Annotation-end      "183"^^xsd:int .
-
-<urn:fi-orig.conll#1810>
-        a                        rdfcas:FeatureStructure , segmentation:Sentence ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "260"^^xsd:int ;
-        tcas:Annotation-end      "287"^^xsd:int .
-
-<urn:fi-orig.conll#211>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
         segmentation:Lemma-value  "Eurooppa" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
         tcas:Annotation-begin     "49"^^xsd:int ;
         tcas:Annotation-end       "57"^^xsd:int .
 
-<urn:fi-orig.conll#1234>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#1246> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#1257> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#1251> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "246"^^xsd:int ;
-        tcas:Annotation-end       "257"^^xsd:int .
-
-<urn:fi-orig.conll#1021>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "päättää" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "189"^^xsd:int ;
-        tcas:Annotation-end       "198"^^xsd:int .
-
-<urn:fi-orig.conll#1568>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "Num Digit Nom Sg" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "260"^^xsd:int ;
-        tcas:Annotation-end      "261"^^xsd:int .
-
-<urn:fi-orig.conll#666>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "Punct" ;
-        lexmorph-pos:POS-coarseValue  "Punct" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "143"^^xsd:int ;
-        tcas:Annotation-end           "144"^^xsd:int .
-
-<urn:fi-orig.conll#261>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "N" ;
-        lexmorph-pos:POS-coarseValue  "N" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "58"^^xsd:int ;
-        tcas:Annotation-end           "78"^^xsd:int .
-
-<urn:fi-orig.conll#1476>
-        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "phrm" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#919> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#1009> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "184"^^xsd:int ;
-        tcas:Annotation-end      "185"^^xsd:int .
-
-<urn:fi-orig.conll#1647>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "nimi" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "270"^^xsd:int ;
-        tcas:Annotation-end       "274"^^xsd:int .
-
-<urn:fi-orig.conll#1071>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "V" ;
-        lexmorph-pos:POS-coarseValue  "V" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "199"^^xsd:int ;
-        tcas:Annotation-end           "204"^^xsd:int .
-
-<urn:fi-orig.conll#1697>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "CC" ;
-        lexmorph-pos:POS-coarseValue  "CC" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "275"^^xsd:int ;
-        tcas:Annotation-end           "277"^^xsd:int .
-
-<urn:fi-orig.conll#987>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "V Prs Act Sg3" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "186"^^xsd:int ;
-        tcas:Annotation-end      "188"^^xsd:int .
-
-<urn:fi-orig.conll#19>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#31> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#42> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#36> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "0"^^xsd:int ;
-        tcas:Annotation-end       "8"^^xsd:int .
-
-<urn:fi-orig.conll#1>
-        a                        rdfcas:FeatureStructure , metadata:DocumentMetaData ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        metadata:DocumentMetaData-documentId
-                "fi-orig.conll" ;
-        metadata:DocumentMetaData-documentTitle
-                "fi-orig.conll" ;
-        metadata:DocumentMetaData-isLastSegment
-                false ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "0"^^xsd:int ;
-        tcas:Annotation-end      "288"^^xsd:int ;
-        tcas:DocumentAnnotation-language
-                "x-unspecified" .
-
-<urn:fi-orig.conll#1484>
-        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "aux" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#964> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#1009> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "186"^^xsd:int ;
-        tcas:Annotation-end      "188"^^xsd:int .
-
-<urn:fi-orig.conll#582>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "Num Digit Nom Sg" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "131"^^xsd:int ;
-        tcas:Annotation-end      "133"^^xsd:int .
-
-<urn:fi-orig.conll#1613>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "N Nom Sg" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "262"^^xsd:int ;
-        tcas:Annotation-end      "269"^^xsd:int .
-
-<urn:fi-orig.conll#711>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "CC" ;
-        lexmorph-pos:POS-coarseValue  "CC" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "145"^^xsd:int ;
-        tcas:Annotation-end           "147"^^xsd:int .
-
-<urn:fi-orig.conll#177>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "N Nom Sg" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "37"^^xsd:int ;
-        tcas:Annotation-end      "48"^^xsd:int .
-
-<urn:fi-orig.conll#874>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#886> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#897> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#891> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "173"^^xsd:int ;
-        tcas:Annotation-end       "183"^^xsd:int .
-
-<urn:fi-orig.conll#306>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "N" ;
-        lexmorph-pos:POS-coarseValue  "N" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "79"^^xsd:int ;
-        tcas:Annotation-end           "87"^^xsd:int .
-
-<urn:fi-orig.conll#661>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "," ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "143"^^xsd:int ;
-        tcas:Annotation-end       "144"^^xsd:int .
-
-<urn:fi-orig.conll#469>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#481> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#492> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#486> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "101"^^xsd:int ;
-        tcas:Annotation-end       "109"^^xsd:int .
-
-<urn:fi-orig.conll#1500>
-        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "obj" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#1054> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#1009> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "199"^^xsd:int ;
-        tcas:Annotation-end      "204"^^xsd:int .
-
-<urn:fi-orig.conll#1492>
-        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "conjunct" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#1009> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#739> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "189"^^xsd:int ;
-        tcas:Annotation-end      "198"^^xsd:int .
-
-<urn:fi-orig.conll#256>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "atomi#energia#yhteisö" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "58"^^xsd:int ;
-        tcas:Annotation-end       "78"^^xsd:int .
-
-<urn:fi-orig.conll#1116>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "N" ;
-        lexmorph-pos:POS-coarseValue  "N" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "205"^^xsd:int ;
-        tcas:Annotation-end           "214"^^xsd:int .
-
-<urn:fi-orig.conll#1279>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#1291> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#1302> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#1296> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "258"^^xsd:int ;
-        tcas:Annotation-end       "259"^^xsd:int .
-
-<urn:fi-orig.conll#1066>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "antaa" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "199"^^xsd:int ;
-        tcas:Annotation-end       "204"^^xsd:int .
-
-<urn:fi-orig.conll#1742>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "N" ;
-        lexmorph-pos:POS-coarseValue  "N" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "278"^^xsd:int ;
-        tcas:Annotation-end           "287"^^xsd:int .
-
-<urn:fi-orig.conll#1692>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "ja" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "275"^^xsd:int ;
-        tcas:Annotation-end       "277"^^xsd:int .
-
-<urn:fi-orig.conll#1508>
-        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "attr" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#1099> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#1144> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "205"^^xsd:int ;
-        tcas:Annotation-end      "214"^^xsd:int .
-
-<urn:fi-orig.conll#627>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "N Gen Sg" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "134"^^xsd:int ;
-        tcas:Annotation-end      "142"^^xsd:int .
-
-<urn:fi-orig.conll#222>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "N Prop Gen Sg" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "49"^^xsd:int ;
-        tcas:Annotation-end      "57"^^xsd:int .
-
-<urn:fi-orig.conll#919>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#931> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#942> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#936> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "184"^^xsd:int ;
-        tcas:Annotation-end       "185"^^xsd:int .
-
-<urn:fi-orig.conll#706>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "ja" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "145"^^xsd:int ;
-        tcas:Annotation-end       "147"^^xsd:int .
-
-<urn:fi-orig.conll#1032>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "PrfPrc Act Pos Nom Sg" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "189"^^xsd:int ;
-        tcas:Annotation-end      "198"^^xsd:int .
-
-<urn:fi-orig.conll#514>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#526> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#537> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#531> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "110"^^xsd:int ;
-        tcas:Annotation-end       "130"^^xsd:int .
-
-<urn:fi-orig.conll#301>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "neuvosto" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "79"^^xsd:int ;
-        tcas:Annotation-end       "87"^^xsd:int .
-
-<urn:fi-orig.conll#64>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#76> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#87> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#81> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "9"^^xsd:int ;
-        tcas:Annotation-end       "18"^^xsd:int .
-
-<urn:fi-orig.conll#109>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#121> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#132> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#126> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "19"^^xsd:int ;
-        tcas:Annotation-end       "36"^^xsd:int .
-
-<urn:fi-orig.conll#1516>
-        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "attr" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#1144> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#1189> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "215"^^xsd:int ;
-        tcas:Annotation-end      "232"^^xsd:int .
-
-<urn:fi-orig.conll#1324>
-        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "attr" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#19> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#64> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "0"^^xsd:int ;
-        tcas:Annotation-end      "8"^^xsd:int .
-
-<urn:fi-orig.conll#1658>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "N Nom Sg" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "270"^^xsd:int ;
-        tcas:Annotation-end      "274"^^xsd:int .
-
-<urn:fi-orig.conll#1111>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "Euratom" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "205"^^xsd:int ;
-        tcas:Annotation-end       "214"^^xsd:int .
-
-<urn:fi-orig.conll#756>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "V" ;
-        lexmorph-pos:POS-coarseValue  "V" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "148"^^xsd:int ;
-        tcas:Annotation-end           "153"^^xsd:int .
-
-<urn:fi-orig.conll#351>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "Punct" ;
-        lexmorph-pos:POS-coarseValue  "Punct" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "88"^^xsd:int ;
-        tcas:Annotation-end           "89"^^xsd:int .
-
-<urn:fi-orig.conll#1737>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "tarkoitus" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "278"^^xsd:int ;
-        tcas:Annotation-end       "287"^^xsd:int .
-
-<urn:fi-orig.conll#1545>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#1557> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#1568> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#1562> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "260"^^xsd:int ;
-        tcas:Annotation-end       "261"^^xsd:int .
-
-<urn:fi-orig.conll#1524>
-        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "obj" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#1189> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#1054> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "233"^^xsd:int ;
-        tcas:Annotation-end      "245"^^xsd:int .
-
-<urn:fi-orig.conll#1161>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "N" ;
-        lexmorph-pos:POS-coarseValue  "N" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "215"^^xsd:int ;
-        tcas:Annotation-end           "232"^^xsd:int .
-
-<urn:fi-orig.conll#1332>
-        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "attr" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#64> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#109> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "9"^^xsd:int ;
-        tcas:Annotation-end      "18"^^xsd:int .
-
-<urn:fi-orig.conll#672>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "Punct" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "143"^^xsd:int ;
-        tcas:Annotation-end      "144"^^xsd:int .
-
-<urn:fi-orig.conll#1532>
-        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "advl" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#1234> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#1054> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "246"^^xsd:int ;
-        tcas:Annotation-end      "257"^^xsd:int .
-
-<urn:fi-orig.conll#1703>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "CC" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "275"^^xsd:int ;
-        tcas:Annotation-end      "277"^^xsd:int .
-
-<urn:fi-orig.conll#1340>
-        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "attr" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#109> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#154> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "19"^^xsd:int ;
-        tcas:Annotation-end      "36"^^xsd:int .
-
-<urn:fi-orig.conll#801>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "N" ;
-        lexmorph-pos:POS-coarseValue  "N" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "154"^^xsd:int ;
-        tcas:Annotation-end           "162"^^xsd:int .
-
-<urn:fi-orig.conll#267>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "N Gen Sg" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "58"^^xsd:int ;
-        tcas:Annotation-end      "78"^^xsd:int .
-
-<urn:fi-orig.conll#964>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#976> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#987> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#981> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "186"^^xsd:int ;
-        tcas:Annotation-end       "188"^^xsd:int .
-
-<urn:fi-orig.conll#751>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "ottaa" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "148"^^xsd:int ;
-        tcas:Annotation-end       "153"^^xsd:int .
-
-<urn:fi-orig.conll#1077>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "V Inf1 Lat" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "199"^^xsd:int ;
-        tcas:Annotation-end      "204"^^xsd:int .
-
-<urn:fi-orig.conll#559>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#571> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#582> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#576> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "131"^^xsd:int ;
-        tcas:Annotation-end       "133"^^xsd:int .
-
-<urn:fi-orig.conll#346>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "," ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "88"^^xsd:int ;
-        tcas:Annotation-end       "89"^^xsd:int .
-
-<urn:fi-orig.conll#1206>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "N" ;
-        lexmorph-pos:POS-coarseValue  "N" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "233"^^xsd:int ;
-        tcas:Annotation-end           "245"^^xsd:int .
-
-<urn:fi-orig.conll#154>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#166> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#177> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#171> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "37"^^xsd:int ;
-        tcas:Annotation-end       "48"^^xsd:int .
-
-<urn:fi-orig.conll#1540>
-        a                        rdfcas:FeatureStructure , segmentation:Sentence ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "0"^^xsd:int ;
-        tcas:Annotation-end      "259"^^xsd:int .
-
-<urn:fi-orig.conll#1348>
-        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "attr" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#154> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#289> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "37"^^xsd:int ;
-        tcas:Annotation-end      "48"^^xsd:int .
-
-<urn:fi-orig.conll#1156>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "hankinta#keskus" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "215"^^xsd:int ;
-        tcas:Annotation-end       "232"^^xsd:int .
-
-<urn:fi-orig.conll#396>
-        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
-        lexmorph-pos:POS-PosValue     "Pron" ;
-        lexmorph-pos:POS-coarseValue  "Pron" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin         "90"^^xsd:int ;
-        tcas:Annotation-end           "94"^^xsd:int .
-
-<urn:fi-orig.conll#717>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "CC" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "145"^^xsd:int ;
-        tcas:Annotation-end      "147"^^xsd:int .
-
-<urn:fi-orig.conll#1590>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#1602> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#1613> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#1607> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "262"^^xsd:int ;
-        tcas:Annotation-end       "269"^^xsd:int .
-
-<urn:fi-orig.conll#312>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "N Nom Sg" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "79"^^xsd:int ;
-        tcas:Annotation-end      "87"^^xsd:int .
-
-<urn:fi-orig.conll#1356>
-        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "attr" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#199> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#244> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "49"^^xsd:int ;
-        tcas:Annotation-end      "57"^^xsd:int .
-
-<urn:fi-orig.conll#1122>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "N Prop Gen Sg" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "205"^^xsd:int ;
-        tcas:Annotation-end      "214"^^xsd:int .
-
-<urn:fi-orig.conll#12>
+<urn:fi-orig.conll#2>
         a                    cas:Sofa , rdfcas:View ;
         cas:Sofa-mimeType    "text" ;
         cas:Sofa-sofaID      "_InitialView" ;
         cas:Sofa-sofaNum     "1"^^xsd:int ;
         cas:Sofa-sofaString  "NEUVOSTO EURATOMIN HANKINTAKESKUKSEN PERUSSÄÄNTÖ EUROOPAN ATOMIENERGIAYHTEISÖN NEUVOSTO , joka ottaa huomioon perustamissopimuksen 54 artiklan , ja ottaa huomioon komission ehdotuksen , ON PÄÄTTÄNYT antaa Euratomin hankintakeskuksen perussäännön seuraavasti :\n1 artikla Nimi ja tarkoitus\n" .
 
-<urn:fi-orig.conll#604>
+<urn:fi-orig.conll#157>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "N" ;
+        lexmorph-pos:POS-coarseValue  "N" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "270"^^xsd:int ;
+        tcas:Annotation-end           "274"^^xsd:int .
+
+<urn:fi-orig.conll#91>
         a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#616> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#627> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#621> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "134"^^xsd:int ;
-        tcas:Annotation-end       "142"^^xsd:int .
-
-<urn:fi-orig.conll#1748>
-        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        lexmorph-morph:MorphologicalFeatures-value
-                "N Nom Sg" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "278"^^xsd:int ;
-        tcas:Annotation-end      "287"^^xsd:int .
-
-<urn:fi-orig.conll#1201>
-        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Lemma-value  "perus#sääntö" ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin     "233"^^xsd:int ;
-        tcas:Annotation-end       "245"^^xsd:int .
-
-<urn:fi-orig.conll#1364>
-        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
-        rdfcas:indexedIn         <urn:fi-orig.conll#12> ;
-        syntax-dependency:Dependency-DependencyType
-                "attr" ;
-        syntax-dependency:Dependency-Dependent
-                <urn:fi-orig.conll#244> ;
-        syntax-dependency:Dependency-Governor
-                <urn:fi-orig.conll#289> ;
-        syntax-dependency:Dependency-flavor
-                "basic" ;
-        cas:AnnotationBase-sofa  <urn:fi-orig.conll#12> ;
-        tcas:Annotation-begin    "58"^^xsd:int ;
-        tcas:Annotation-end      "78"^^xsd:int .
-
-<urn:fi-orig.conll#1009>
-        a                         rdfcas:FeatureStructure , segmentation:Token ;
-        rdfcas:indexedIn          <urn:fi-orig.conll#12> ;
-        segmentation:Token-lemma  <urn:fi-orig.conll#1021> ;
-        segmentation:Token-morph  <urn:fi-orig.conll#1032> ;
-        segmentation:Token-pos    <urn:fi-orig.conll#1026> ;
-        cas:AnnotationBase-sofa   <urn:fi-orig.conll#12> ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#92> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#94> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#93> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
         tcas:Annotation-begin     "189"^^xsd:int ;
         tcas:Annotation-end       "198"^^xsd:int .
 
-<urn:fi-orig.conll#846>
+<urn:fi-orig.conll#136>
+        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "subj" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#75> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#79> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "163"^^xsd:int ;
+        tcas:Annotation-end      "172"^^xsd:int .
+
+<urn:fi-orig.conll#70>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "V Prs Act Sg3" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "148"^^xsd:int ;
+        tcas:Annotation-end      "153"^^xsd:int .
+
+<urn:fi-orig.conll#115>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#116> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#118> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#117> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "258"^^xsd:int ;
+        tcas:Annotation-end       "259"^^xsd:int .
+
+<urn:fi-orig.conll#49>
         a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
-        rdfcas:indexedIn              <urn:fi-orig.conll#12> ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
         lexmorph-pos:POS-PosValue     "N" ;
         lexmorph-pos:POS-coarseValue  "N" ;
-        cas:AnnotationBase-sofa       <urn:fi-orig.conll#12> ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "110"^^xsd:int ;
+        tcas:Annotation-end           "130"^^xsd:int .
+
+<urn:fi-orig.conll#28>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "neuvosto" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "79"^^xsd:int ;
+        tcas:Annotation-end       "87"^^xsd:int .
+
+<urn:fi-orig.conll#165>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "N" ;
+        lexmorph-pos:POS-coarseValue  "N" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "278"^^xsd:int ;
+        tcas:Annotation-end           "287"^^xsd:int .
+
+<urn:fi-orig.conll#99>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#100> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#102> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#101> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "205"^^xsd:int ;
+        tcas:Annotation-end       "214"^^xsd:int .
+
+<urn:fi-orig.conll#144>
+        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "obj" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#107> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#95> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "233"^^xsd:int ;
+        tcas:Annotation-end      "245"^^xsd:int .
+
+<urn:fi-orig.conll#78>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "N Gen Sg" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "163"^^xsd:int ;
+        tcas:Annotation-end      "172"^^xsd:int .
+
+<urn:fi-orig.conll#123>
+        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "attr" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#19> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#23> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "49"^^xsd:int ;
+        tcas:Annotation-end      "57"^^xsd:int .
+
+<urn:fi-orig.conll#57>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "N" ;
+        lexmorph-pos:POS-coarseValue  "N" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "134"^^xsd:int ;
+        tcas:Annotation-end           "142"^^xsd:int .
+
+<urn:fi-orig.conll#102>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "N Prop Gen Sg" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "205"^^xsd:int ;
+        tcas:Annotation-end      "214"^^xsd:int .
+
+<urn:fi-orig.conll#36>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "joka" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "90"^^xsd:int ;
+        tcas:Annotation-end       "94"^^xsd:int .
+
+<urn:fi-orig.conll#15>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#16> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#18> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#17> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "37"^^xsd:int ;
+        tcas:Annotation-end       "48"^^xsd:int .
+
+<urn:fi-orig.conll#152>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "artikla" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "262"^^xsd:int ;
+        tcas:Annotation-end       "269"^^xsd:int .
+
+<urn:fi-orig.conll#86>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "Punct" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "184"^^xsd:int ;
+        tcas:Annotation-end      "185"^^xsd:int .
+
+<urn:fi-orig.conll#131>
+        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "obj" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#55> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#39> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "134"^^xsd:int ;
+        tcas:Annotation-end      "142"^^xsd:int .
+
+<urn:fi-orig.conll#65>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "CC" ;
+        lexmorph-pos:POS-coarseValue  "CC" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "145"^^xsd:int ;
+        tcas:Annotation-end           "147"^^xsd:int .
+
+<urn:fi-orig.conll#110>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "N Gen Sg" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "233"^^xsd:int ;
+        tcas:Annotation-end      "245"^^xsd:int .
+
+<urn:fi-orig.conll#44>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "huomio" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "101"^^xsd:int ;
+        tcas:Annotation-end       "109"^^xsd:int .
+
+<urn:fi-orig.conll#23>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#24> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#26> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#25> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "58"^^xsd:int ;
+        tcas:Annotation-end       "78"^^xsd:int .
+
+<urn:fi-orig.conll#5>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "N" ;
+        lexmorph-pos:POS-coarseValue  "N" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "0"^^xsd:int ;
+        tcas:Annotation-end           "8"^^xsd:int .
+
+<urn:fi-orig.conll#160>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "ja" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "275"^^xsd:int ;
+        tcas:Annotation-end       "277"^^xsd:int .
+
+<urn:fi-orig.conll#94>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "PrfPrc Act Pos Nom Sg" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "189"^^xsd:int ;
+        tcas:Annotation-end      "198"^^xsd:int .
+
+<urn:fi-orig.conll#139>
+        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "aux" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#87> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#91> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "186"^^xsd:int ;
+        tcas:Annotation-end      "188"^^xsd:int .
+
+<urn:fi-orig.conll#73>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "N" ;
+        lexmorph-pos:POS-coarseValue  "N" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "154"^^xsd:int ;
+        tcas:Annotation-end           "162"^^xsd:int .
+
+<urn:fi-orig.conll#118>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "Punct" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "258"^^xsd:int ;
+        tcas:Annotation-end      "259"^^xsd:int .
+
+<urn:fi-orig.conll#52>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "54" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "131"^^xsd:int ;
+        tcas:Annotation-end       "133"^^xsd:int .
+
+<urn:fi-orig.conll#31>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#32> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#34> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#33> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "88"^^xsd:int ;
+        tcas:Annotation-end       "89"^^xsd:int .
+
+<urn:fi-orig.conll#10>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "N Prop Gen Sg" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "9"^^xsd:int ;
+        tcas:Annotation-end      "18"^^xsd:int .
+
+<urn:fi-orig.conll#168>
+        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "attr" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#151> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#155> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "262"^^xsd:int ;
+        tcas:Annotation-end      "269"^^xsd:int .
+
+<urn:fi-orig.conll#147>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#148> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#150> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#149> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "260"^^xsd:int ;
+        tcas:Annotation-end       "261"^^xsd:int .
+
+<urn:fi-orig.conll#81>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "N" ;
+        lexmorph-pos:POS-coarseValue  "N" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "173"^^xsd:int ;
+        tcas:Annotation-end           "183"^^xsd:int .
+
+<urn:fi-orig.conll#126>
+        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "subj" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#35> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#39> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "90"^^xsd:int ;
+        tcas:Annotation-end      "94"^^xsd:int .
+
+<urn:fi-orig.conll#60>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "," ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "143"^^xsd:int ;
+        tcas:Annotation-end       "144"^^xsd:int .
+
+<urn:fi-orig.conll#105>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "N" ;
+        lexmorph-pos:POS-coarseValue  "N" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "215"^^xsd:int ;
+        tcas:Annotation-end           "232"^^xsd:int .
+
+<urn:fi-orig.conll#39>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#40> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#42> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#41> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "95"^^xsd:int ;
+        tcas:Annotation-end       "100"^^xsd:int .
+
+<urn:fi-orig.conll#18>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "N Nom Sg" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "37"^^xsd:int ;
+        tcas:Annotation-end      "48"^^xsd:int .
+
+<urn:fi-orig.conll#155>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#156> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#158> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#157> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "270"^^xsd:int ;
+        tcas:Annotation-end       "274"^^xsd:int .
+
+<urn:fi-orig.conll#89>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "V" ;
+        lexmorph-pos:POS-coarseValue  "V" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "186"^^xsd:int ;
+        tcas:Annotation-end           "188"^^xsd:int .
+
+<urn:fi-orig.conll#134>
+        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "conjunct" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#67> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#39> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "148"^^xsd:int ;
+        tcas:Annotation-end      "153"^^xsd:int .
+
+<urn:fi-orig.conll#68>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "ottaa" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "148"^^xsd:int ;
+        tcas:Annotation-end       "153"^^xsd:int .
+
+<urn:fi-orig.conll#113>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "Adv" ;
+        lexmorph-pos:POS-coarseValue  "Adv" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "246"^^xsd:int ;
+        tcas:Annotation-end           "257"^^xsd:int .
+
+<urn:fi-orig.conll#47>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#48> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#50> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#49> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "110"^^xsd:int ;
+        tcas:Annotation-end       "130"^^xsd:int .
+
+<urn:fi-orig.conll#26>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "N Gen Sg" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "58"^^xsd:int ;
+        tcas:Annotation-end      "78"^^xsd:int .
+
+<urn:fi-orig.conll#8>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "Euratom" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "9"^^xsd:int ;
+        tcas:Annotation-end       "18"^^xsd:int .
+
+<urn:fi-orig.conll#163>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#164> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#166> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#165> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "278"^^xsd:int ;
+        tcas:Annotation-end       "287"^^xsd:int .
+
+<urn:fi-orig.conll#97>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "V" ;
+        lexmorph-pos:POS-coarseValue  "V" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "199"^^xsd:int ;
+        tcas:Annotation-end           "204"^^xsd:int .
+
+<urn:fi-orig.conll#142>
+        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "attr" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#99> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#103> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "205"^^xsd:int ;
+        tcas:Annotation-end      "214"^^xsd:int .
+
+<urn:fi-orig.conll#76>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "komissio" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "163"^^xsd:int ;
+        tcas:Annotation-end       "172"^^xsd:int .
+
+<urn:fi-orig.conll#121>
+        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "attr" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#11> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#15> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "19"^^xsd:int ;
+        tcas:Annotation-end      "36"^^xsd:int .
+
+<urn:fi-orig.conll#55>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#56> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#58> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#57> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "134"^^xsd:int ;
+        tcas:Annotation-end       "142"^^xsd:int .
+
+<urn:fi-orig.conll#100>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "Euratom" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "205"^^xsd:int ;
+        tcas:Annotation-end       "214"^^xsd:int .
+
+<urn:fi-orig.conll#34>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "Punct" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "88"^^xsd:int ;
+        tcas:Annotation-end      "89"^^xsd:int .
+
+<urn:fi-orig.conll#13>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "N" ;
+        lexmorph-pos:POS-coarseValue  "N" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "19"^^xsd:int ;
+        tcas:Annotation-end           "36"^^xsd:int .
+
+<urn:fi-orig.conll#171>
+        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "conjunct" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#163> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#155> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "278"^^xsd:int ;
+        tcas:Annotation-end      "287"^^xsd:int .
+
+<urn:fi-orig.conll#150>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "Num Digit Nom Sg" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "260"^^xsd:int ;
+        tcas:Annotation-end      "261"^^xsd:int .
+
+<urn:fi-orig.conll#84>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "," ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "184"^^xsd:int ;
+        tcas:Annotation-end       "185"^^xsd:int .
+
+<urn:fi-orig.conll#129>
+        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "attr" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#47> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#55> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "110"^^xsd:int ;
+        tcas:Annotation-end      "130"^^xsd:int .
+
+<urn:fi-orig.conll#63>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#64> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#66> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#65> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "145"^^xsd:int ;
+        tcas:Annotation-end       "147"^^xsd:int .
+
+<urn:fi-orig.conll#108>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "perus#sääntö" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "233"^^xsd:int ;
+        tcas:Annotation-end       "245"^^xsd:int .
+
+<urn:fi-orig.conll#42>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "V Prs Act Sg3" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "95"^^xsd:int ;
+        tcas:Annotation-end      "100"^^xsd:int .
+
+<urn:fi-orig.conll#21>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "N" ;
+        lexmorph-pos:POS-coarseValue  "N" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "49"^^xsd:int ;
+        tcas:Annotation-end           "57"^^xsd:int .
+
+<urn:fi-orig.conll#3>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#4> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#6> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#5> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "0"^^xsd:int ;
+        tcas:Annotation-end       "8"^^xsd:int .
+
+<urn:fi-orig.conll#158>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "N Nom Sg" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "270"^^xsd:int ;
+        tcas:Annotation-end      "274"^^xsd:int .
+
+<urn:fi-orig.conll#92>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "päättää" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "189"^^xsd:int ;
+        tcas:Annotation-end       "198"^^xsd:int .
+
+<urn:fi-orig.conll#137>
+        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "obj" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#79> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#67> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "173"^^xsd:int ;
+        tcas:Annotation-end      "183"^^xsd:int .
+
+<urn:fi-orig.conll#71>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#72> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#74> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#73> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "154"^^xsd:int ;
+        tcas:Annotation-end       "162"^^xsd:int .
+
+<urn:fi-orig.conll#116>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  ":" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "258"^^xsd:int ;
+        tcas:Annotation-end       "259"^^xsd:int .
+
+<urn:fi-orig.conll#50>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "N Gen Sg" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "110"^^xsd:int ;
+        tcas:Annotation-end      "130"^^xsd:int .
+
+<urn:fi-orig.conll#29>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "N" ;
+        lexmorph-pos:POS-coarseValue  "N" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "79"^^xsd:int ;
+        tcas:Annotation-end           "87"^^xsd:int .
+
+<urn:fi-orig.conll#166>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "N Nom Sg" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "278"^^xsd:int ;
+        tcas:Annotation-end      "287"^^xsd:int .
+
+<urn:fi-orig.conll#145>
+        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "advl" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#111> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#95> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "246"^^xsd:int ;
+        tcas:Annotation-end      "257"^^xsd:int .
+
+<urn:fi-orig.conll#79>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#80> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#82> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#81> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "173"^^xsd:int ;
+        tcas:Annotation-end       "183"^^xsd:int .
+
+<urn:fi-orig.conll#124>
+        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "attr" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#23> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#27> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "58"^^xsd:int ;
+        tcas:Annotation-end      "78"^^xsd:int .
+
+<urn:fi-orig.conll#58>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "N Gen Sg" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "134"^^xsd:int ;
+        tcas:Annotation-end      "142"^^xsd:int .
+
+<urn:fi-orig.conll#103>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#104> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#106> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#105> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "215"^^xsd:int ;
+        tcas:Annotation-end       "232"^^xsd:int .
+
+<urn:fi-orig.conll#37>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "Pron" ;
+        lexmorph-pos:POS-coarseValue  "Pron" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "90"^^xsd:int ;
+        tcas:Annotation-end           "94"^^xsd:int .
+
+<urn:fi-orig.conll#16>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "perus#sääntö" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "37"^^xsd:int ;
+        tcas:Annotation-end       "48"^^xsd:int .
+
+<urn:fi-orig.conll#153>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "N" ;
+        lexmorph-pos:POS-coarseValue  "N" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "262"^^xsd:int ;
+        tcas:Annotation-end           "269"^^xsd:int .
+
+<urn:fi-orig.conll#87>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#88> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#90> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#89> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "186"^^xsd:int ;
+        tcas:Annotation-end       "188"^^xsd:int .
+
+<urn:fi-orig.conll#132>
+        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "phrm" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#59> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#67> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "143"^^xsd:int ;
+        tcas:Annotation-end      "144"^^xsd:int .
+
+<urn:fi-orig.conll#66>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "CC" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "145"^^xsd:int ;
+        tcas:Annotation-end      "147"^^xsd:int .
+
+<urn:fi-orig.conll#111>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#112> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#114> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#113> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "246"^^xsd:int ;
+        tcas:Annotation-end       "257"^^xsd:int .
+
+<urn:fi-orig.conll#45>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "N" ;
+        lexmorph-pos:POS-coarseValue  "N" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "101"^^xsd:int ;
+        tcas:Annotation-end           "109"^^xsd:int .
+
+<urn:fi-orig.conll#24>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "atomi#energia#yhteisö" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "58"^^xsd:int ;
+        tcas:Annotation-end       "78"^^xsd:int .
+
+<urn:fi-orig.conll#6>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "N Nom Sg" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "0"^^xsd:int ;
+        tcas:Annotation-end      "8"^^xsd:int .
+
+<urn:fi-orig.conll#161>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "CC" ;
+        lexmorph-pos:POS-coarseValue  "CC" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "275"^^xsd:int ;
+        tcas:Annotation-end           "277"^^xsd:int .
+
+<urn:fi-orig.conll#95>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#96> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#98> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#97> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "199"^^xsd:int ;
+        tcas:Annotation-end       "204"^^xsd:int .
+
+<urn:fi-orig.conll#140>
+        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "conjunct" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#91> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#67> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "189"^^xsd:int ;
+        tcas:Annotation-end      "198"^^xsd:int .
+
+<urn:fi-orig.conll#74>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "N Ill Sg" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "154"^^xsd:int ;
+        tcas:Annotation-end      "162"^^xsd:int .
+
+<urn:fi-orig.conll#119>
+        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "attr" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#3> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#7> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "0"^^xsd:int ;
+        tcas:Annotation-end      "8"^^xsd:int .
+
+<urn:fi-orig.conll#53>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "Num" ;
+        lexmorph-pos:POS-coarseValue  "Num" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "131"^^xsd:int ;
+        tcas:Annotation-end           "133"^^xsd:int .
+
+<urn:fi-orig.conll#32>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "," ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "88"^^xsd:int ;
+        tcas:Annotation-end       "89"^^xsd:int .
+
+<urn:fi-orig.conll#11>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#12> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#14> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#13> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "19"^^xsd:int ;
+        tcas:Annotation-end       "36"^^xsd:int .
+
+<urn:fi-orig.conll#169>
+        a                        syntax-dependency:ROOT , rdfcas:FeatureStructure ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "main" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#155> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#155> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "270"^^xsd:int ;
+        tcas:Annotation-end      "274"^^xsd:int .
+
+<urn:fi-orig.conll#148>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "1" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "260"^^xsd:int ;
+        tcas:Annotation-end       "261"^^xsd:int .
+
+<urn:fi-orig.conll#82>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "N Gen Sg" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "173"^^xsd:int ;
+        tcas:Annotation-end      "183"^^xsd:int .
+
+<urn:fi-orig.conll#127>
+        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "mod" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#39> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#27> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "95"^^xsd:int ;
+        tcas:Annotation-end      "100"^^xsd:int .
+
+<urn:fi-orig.conll#61>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "Punct" ;
+        lexmorph-pos:POS-coarseValue  "Punct" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "143"^^xsd:int ;
+        tcas:Annotation-end           "144"^^xsd:int .
+
+<urn:fi-orig.conll#106>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "N Gen Sg" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "215"^^xsd:int ;
+        tcas:Annotation-end      "232"^^xsd:int .
+
+<urn:fi-orig.conll#40>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "ottaa" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "95"^^xsd:int ;
+        tcas:Annotation-end       "100"^^xsd:int .
+
+<urn:fi-orig.conll#19>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#20> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#22> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#21> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "49"^^xsd:int ;
+        tcas:Annotation-end       "57"^^xsd:int .
+
+<urn:fi-orig.conll#1>
+        a                        rdfcas:FeatureStructure , metadata:DocumentMetaData ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        metadata:DocumentMetaData-documentId
+                "fi-orig.conll" ;
+        metadata:DocumentMetaData-documentTitle
+                "fi-orig.conll" ;
+        metadata:DocumentMetaData-isLastSegment
+                false ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "0"^^xsd:int ;
+        tcas:Annotation-end      "288"^^xsd:int ;
+        tcas:DocumentAnnotation-language
+                "x-unspecified" .
+
+<urn:fi-orig.conll#156>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "nimi" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "270"^^xsd:int ;
+        tcas:Annotation-end       "274"^^xsd:int .
+
+<urn:fi-orig.conll#90>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "V Prs Act Sg3" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "186"^^xsd:int ;
+        tcas:Annotation-end      "188"^^xsd:int .
+
+<urn:fi-orig.conll#135>
+        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "phrv" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#71> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#67> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "154"^^xsd:int ;
+        tcas:Annotation-end      "162"^^xsd:int .
+
+<urn:fi-orig.conll#69>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "V" ;
+        lexmorph-pos:POS-coarseValue  "V" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "148"^^xsd:int ;
+        tcas:Annotation-end           "153"^^xsd:int .
+
+<urn:fi-orig.conll#114>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "Adv Pos Man" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "246"^^xsd:int ;
+        tcas:Annotation-end      "257"^^xsd:int .
+
+<urn:fi-orig.conll#48>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "perustamis#sopimus" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "110"^^xsd:int ;
+        tcas:Annotation-end       "130"^^xsd:int .
+
+<urn:fi-orig.conll#27>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#28> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#30> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#29> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "79"^^xsd:int ;
+        tcas:Annotation-end       "87"^^xsd:int .
+
+<urn:fi-orig.conll#9>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "N" ;
+        lexmorph-pos:POS-coarseValue  "N" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "9"^^xsd:int ;
+        tcas:Annotation-end           "18"^^xsd:int .
+
+<urn:fi-orig.conll#164>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "tarkoitus" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "278"^^xsd:int ;
+        tcas:Annotation-end       "287"^^xsd:int .
+
+<urn:fi-orig.conll#98>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "V Inf1 Lat" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "199"^^xsd:int ;
+        tcas:Annotation-end      "204"^^xsd:int .
+
+<urn:fi-orig.conll#143>
+        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "attr" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#103> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#107> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "215"^^xsd:int ;
+        tcas:Annotation-end      "232"^^xsd:int .
+
+<urn:fi-orig.conll#77>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "N" ;
+        lexmorph-pos:POS-coarseValue  "N" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
         tcas:Annotation-begin         "163"^^xsd:int ;
         tcas:Annotation-end           "172"^^xsd:int .
+
+<urn:fi-orig.conll#122>
+        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "attr" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#15> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#27> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "37"^^xsd:int ;
+        tcas:Annotation-end      "48"^^xsd:int .
+
+<urn:fi-orig.conll#56>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "artikla" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "134"^^xsd:int ;
+        tcas:Annotation-end       "142"^^xsd:int .
+
+<urn:fi-orig.conll#101>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "N" ;
+        lexmorph-pos:POS-coarseValue  "N" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "205"^^xsd:int ;
+        tcas:Annotation-end           "214"^^xsd:int .
+
+<urn:fi-orig.conll#35>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#36> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#38> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#37> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "90"^^xsd:int ;
+        tcas:Annotation-end       "94"^^xsd:int .
+
+<urn:fi-orig.conll#14>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "N Gen Sg" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "19"^^xsd:int ;
+        tcas:Annotation-end      "36"^^xsd:int .
+
+<urn:fi-orig.conll#172>
+        a                        rdfcas:FeatureStructure , segmentation:Sentence ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "260"^^xsd:int ;
+        tcas:Annotation-end      "287"^^xsd:int .
+
+<urn:fi-orig.conll#151>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#152> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#154> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#153> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "262"^^xsd:int ;
+        tcas:Annotation-end       "269"^^xsd:int .
+
+<urn:fi-orig.conll#85>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "Punct" ;
+        lexmorph-pos:POS-coarseValue  "Punct" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "184"^^xsd:int ;
+        tcas:Annotation-end           "185"^^xsd:int .
+
+<urn:fi-orig.conll#130>
+        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "attr" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#51> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#55> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "131"^^xsd:int ;
+        tcas:Annotation-end      "133"^^xsd:int .
+
+<urn:fi-orig.conll#64>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "ja" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "145"^^xsd:int ;
+        tcas:Annotation-end       "147"^^xsd:int .
+
+<urn:fi-orig.conll#109>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "N" ;
+        lexmorph-pos:POS-coarseValue  "N" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "233"^^xsd:int ;
+        tcas:Annotation-end           "245"^^xsd:int .
+
+<urn:fi-orig.conll#43>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#44> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#46> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#45> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "101"^^xsd:int ;
+        tcas:Annotation-end       "109"^^xsd:int .
+
+<urn:fi-orig.conll#22>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "N Prop Gen Sg" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "49"^^xsd:int ;
+        tcas:Annotation-end      "57"^^xsd:int .
+
+<urn:fi-orig.conll#4>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "neuvosto" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "0"^^xsd:int ;
+        tcas:Annotation-end       "8"^^xsd:int .
+
+<urn:fi-orig.conll#159>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#160> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#162> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#161> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "275"^^xsd:int ;
+        tcas:Annotation-end       "277"^^xsd:int .
+
+<urn:fi-orig.conll#93>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "PrfPrc" ;
+        lexmorph-pos:POS-coarseValue  "PrfPrc" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "189"^^xsd:int ;
+        tcas:Annotation-end           "198"^^xsd:int .
+
+<urn:fi-orig.conll#138>
+        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "phrm" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#83> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#91> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "184"^^xsd:int ;
+        tcas:Annotation-end      "185"^^xsd:int .
+
+<urn:fi-orig.conll#72>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "huomio" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "154"^^xsd:int ;
+        tcas:Annotation-end       "162"^^xsd:int .
+
+<urn:fi-orig.conll#117>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "Punct" ;
+        lexmorph-pos:POS-coarseValue  "Punct" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "258"^^xsd:int ;
+        tcas:Annotation-end           "259"^^xsd:int .
+
+<urn:fi-orig.conll#51>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#52> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#54> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#53> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "131"^^xsd:int ;
+        tcas:Annotation-end       "133"^^xsd:int .
+
+<urn:fi-orig.conll#30>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "N Nom Sg" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "79"^^xsd:int ;
+        tcas:Annotation-end      "87"^^xsd:int .
+
+<urn:fi-orig.conll#167>
+        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "attr" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#147> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#151> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "260"^^xsd:int ;
+        tcas:Annotation-end      "261"^^xsd:int .
+
+<urn:fi-orig.conll#146>
+        a                        rdfcas:FeatureStructure , segmentation:Sentence ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "0"^^xsd:int ;
+        tcas:Annotation-end      "259"^^xsd:int .
+
+<urn:fi-orig.conll#80>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "ehdotus" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "173"^^xsd:int ;
+        tcas:Annotation-end       "183"^^xsd:int .
+
+<urn:fi-orig.conll#125>
+        a                        syntax-dependency:ROOT , rdfcas:FeatureStructure ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "main" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#27> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#27> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "79"^^xsd:int ;
+        tcas:Annotation-end      "87"^^xsd:int .
+
+<urn:fi-orig.conll#59>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#60> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#62> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#61> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "143"^^xsd:int ;
+        tcas:Annotation-end       "144"^^xsd:int .
+
+<urn:fi-orig.conll#104>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "hankinta#keskus" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "215"^^xsd:int ;
+        tcas:Annotation-end       "232"^^xsd:int .
+
+<urn:fi-orig.conll#38>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "Pron Rel Nom Sg" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "90"^^xsd:int ;
+        tcas:Annotation-end      "94"^^xsd:int .
+
+<urn:fi-orig.conll#17>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "N" ;
+        lexmorph-pos:POS-coarseValue  "N" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "37"^^xsd:int ;
+        tcas:Annotation-end           "48"^^xsd:int .
+
+<urn:fi-orig.conll#154>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "N Nom Sg" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "262"^^xsd:int ;
+        tcas:Annotation-end      "269"^^xsd:int .
+
+<urn:fi-orig.conll#88>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "olla" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "186"^^xsd:int ;
+        tcas:Annotation-end       "188"^^xsd:int .
+
+<urn:fi-orig.conll#133>
+        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "phrm" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#63> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#67> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "145"^^xsd:int ;
+        tcas:Annotation-end      "147"^^xsd:int .
+
+<urn:fi-orig.conll#67>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#68> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#70> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#69> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "148"^^xsd:int ;
+        tcas:Annotation-end       "153"^^xsd:int .
+
+<urn:fi-orig.conll#112>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "seuraava" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "246"^^xsd:int ;
+        tcas:Annotation-end       "257"^^xsd:int .
+
+<urn:fi-orig.conll#46>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "N Ill Sg" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "101"^^xsd:int ;
+        tcas:Annotation-end      "109"^^xsd:int .
+
+<urn:fi-orig.conll#25>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "N" ;
+        lexmorph-pos:POS-coarseValue  "N" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "58"^^xsd:int ;
+        tcas:Annotation-end           "78"^^xsd:int .
+
+<urn:fi-orig.conll#7>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#8> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#10> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#9> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "9"^^xsd:int ;
+        tcas:Annotation-end       "18"^^xsd:int .
+
+<urn:fi-orig.conll#162>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "CC" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "275"^^xsd:int ;
+        tcas:Annotation-end      "277"^^xsd:int .
+
+<urn:fi-orig.conll#96>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "antaa" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "199"^^xsd:int ;
+        tcas:Annotation-end       "204"^^xsd:int .
+
+<urn:fi-orig.conll#141>
+        a                        rdfcas:FeatureStructure , syntax-dependency:Dependency ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "obj" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#95> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#91> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "199"^^xsd:int ;
+        tcas:Annotation-end      "204"^^xsd:int .
+
+<urn:fi-orig.conll#75>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#76> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#78> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#77> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "163"^^xsd:int ;
+        tcas:Annotation-end       "172"^^xsd:int .
+
+<urn:fi-orig.conll#120>
+        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "attr" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#7> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#11> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "9"^^xsd:int ;
+        tcas:Annotation-end      "18"^^xsd:int .
+
+<urn:fi-orig.conll#54>
+        a                        rdfcas:FeatureStructure , lexmorph-morph:MorphologicalFeatures ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        lexmorph-morph:MorphologicalFeatures-value
+                "Num Digit Nom Sg" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "131"^^xsd:int ;
+        tcas:Annotation-end      "133"^^xsd:int .
+
+<urn:fi-orig.conll#33>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "Punct" ;
+        lexmorph-pos:POS-coarseValue  "Punct" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "88"^^xsd:int ;
+        tcas:Annotation-end           "89"^^xsd:int .
+
+<urn:fi-orig.conll#12>
+        a                         rdfcas:FeatureStructure , segmentation:Lemma ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Lemma-value  "hankinta#keskus" ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "19"^^xsd:int ;
+        tcas:Annotation-end       "36"^^xsd:int .
+
+<urn:fi-orig.conll#170>
+        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "phrm" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#159> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#163> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "275"^^xsd:int ;
+        tcas:Annotation-end      "277"^^xsd:int .
+
+<urn:fi-orig.conll#149>
+        a                             rdfcas:FeatureStructure , lexmorph-pos:POS ;
+        rdfcas:indexedIn              <urn:fi-orig.conll#2> ;
+        lexmorph-pos:POS-PosValue     "Num" ;
+        lexmorph-pos:POS-coarseValue  "Num" ;
+        cas:AnnotationBase-sofa       <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin         "260"^^xsd:int ;
+        tcas:Annotation-end           "261"^^xsd:int .
+
+<urn:fi-orig.conll#83>
+        a                         rdfcas:FeatureStructure , segmentation:Token ;
+        rdfcas:indexedIn          <urn:fi-orig.conll#2> ;
+        segmentation:Token-lemma  <urn:fi-orig.conll#84> ;
+        segmentation:Token-morph  <urn:fi-orig.conll#86> ;
+        segmentation:Token-pos    <urn:fi-orig.conll#85> ;
+        cas:AnnotationBase-sofa   <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin     "184"^^xsd:int ;
+        tcas:Annotation-end       "185"^^xsd:int .
+
+<urn:fi-orig.conll#128>
+        a                        syntax-dependency:Dependency , rdfcas:FeatureStructure ;
+        rdfcas:indexedIn         <urn:fi-orig.conll#2> ;
+        syntax-dependency:Dependency-DependencyType
+                "phrv" ;
+        syntax-dependency:Dependency-Dependent
+                <urn:fi-orig.conll#43> ;
+        syntax-dependency:Dependency-Governor
+                <urn:fi-orig.conll#39> ;
+        syntax-dependency:Dependency-flavor
+                "basic" ;
+        cas:AnnotationBase-sofa  <urn:fi-orig.conll#2> ;
+        tcas:Annotation-begin    "101"^^xsd:int ;
+        tcas:Annotation-end      "109"^^xsd:int .
