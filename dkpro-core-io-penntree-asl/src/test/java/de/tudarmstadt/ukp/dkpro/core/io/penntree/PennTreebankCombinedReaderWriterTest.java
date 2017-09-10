@@ -33,12 +33,11 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
 
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.EOLUtils;
 
 public class PennTreebankCombinedReaderWriterTest
@@ -100,7 +99,7 @@ public class PennTreebankCombinedReaderWriterTest
     {
         File reference = new File("src/test/resources/stanfordPennTrees/" + aExpectedFile);
         File input = new File("src/test/resources/stanfordPennTrees/" + aFile);
-        File output = new File("target/test-output/" + name.getMethodName());
+        File output = testContext.getTestOutputFolder();
 
         List<Object> extraReaderParams = new ArrayList<>();
         extraReaderParams.add(PennTreebankCombinedReader.PARAM_SOURCE_LOCATION);
@@ -143,17 +142,5 @@ public class PennTreebankCombinedReaderWriterTest
     }
 
     @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
-    }
-    
-    @Before
-    public void setupLogging()
-    {
-        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
-    }
+    public DkproTestContext testContext = new DkproTestContext();
 }
