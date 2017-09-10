@@ -2,11 +2,9 @@
 
 -------- View _InitialView begin ----------------------------------
 
-DocumentMetaData
-   sofa: _InitialView
-   begin: 0
-   end: 159
-   language: "en"
+#0 DocumentMetaData:1
+   sofa: sofa id: _InitialView
+   begin: 0   end: 159   language: "en"
    documentTitle: "testfile.rtf"
    documentId: "testfile.rtf"
    isLastSegment: false
@@ -23,5 +21,3 @@ And another paragraph.
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================
-
-

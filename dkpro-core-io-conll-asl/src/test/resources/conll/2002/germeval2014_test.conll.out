@@ -2,11 +2,9 @@
 
 -------- View _InitialView begin ----------------------------------
 
-DocumentMetaData
-   sofa: _InitialView
-   begin: 0
-   end: 185
-   language: "de"
+#0 DocumentMetaData:3
+   sofa: sofa id: _InitialView
+   begin: 0   end: 185   language: "de"
    documentTitle: "germeval2014_test.conll"
    documentId: "germeval2014_test.conll"
    isLastSegment: false
@@ -15,175 +13,137 @@ CAS-Text:
 Aufgrund seiner Initiative fand 2001/2002 in Stuttgart , Braunschweig und Bonn eine große und publizistisch vielbeachtete Troia-Ausstellung statt , „ Troia - Traum und Wirklichkeit “ .
 
 [Aufgrund seiner Initiative fand 2001/2002 in Stuttgart , Braunschweig und Bonn eine große und publizistisch vielbeachtete Troia-Ausstellung statt , „ Troia - Traum und Wirklichkeit “ .]
-Sentence
-   sofa: _InitialView
-   begin: 0
-   end: 184
+#0 Sentence:36
+   sofa: sofa id: _InitialView
+   begin: 0   end: 184   id: <null>
 [Aufgrund]
-Token
-   sofa: _InitialView
-   begin: 0
-   end: 8
+#0 Token:4
+   sofa: sofa id: _InitialView
+   begin: 0   end: 8   parent: <null>
 [seiner]
-Token
-   sofa: _InitialView
-   begin: 9
-   end: 15
+#0 Token:5
+   sofa: sofa id: _InitialView
+   begin: 9   end: 15   parent: <null>
 [Initiative]
-Token
-   sofa: _InitialView
-   begin: 16
-   end: 26
+#0 Token:6
+   sofa: sofa id: _InitialView
+   begin: 16   end: 26   parent: <null>
 [fand]
-Token
-   sofa: _InitialView
-   begin: 27
-   end: 31
+#0 Token:7
+   sofa: sofa id: _InitialView
+   begin: 27   end: 31   parent: <null>
 [2001/2002]
-Token
-   sofa: _InitialView
-   begin: 32
-   end: 41
+#0 Token:8
+   sofa: sofa id: _InitialView
+   begin: 32   end: 41   parent: <null>
 [in]
-Token
-   sofa: _InitialView
-   begin: 42
-   end: 44
+#0 Token:9
+   sofa: sofa id: _InitialView
+   begin: 42   end: 44   parent: <null>
 [Stuttgart]
-NamedEntity
-   sofa: _InitialView
-   begin: 45
-   end: 54
-   value: "LOC"
+#0 NamedEntity:31
+   sofa: sofa id: _InitialView
+   begin: 45   end: 54   value: "LOC"
 [Stuttgart]
-Token
-   sofa: _InitialView
-   begin: 45
-   end: 54
+#0 Token:10
+   sofa: sofa id: _InitialView
+   begin: 45   end: 54   parent: <null>
 [,]
-Token
-   sofa: _InitialView
-   begin: 55
-   end: 56
+#0 Token:11
+   sofa: sofa id: _InitialView
+   begin: 55   end: 56   parent: <null>
 [Braunschweig]
-NamedEntity
-   sofa: _InitialView
-   begin: 57
-   end: 69
-   value: "LOC"
+#0 NamedEntity:32
+   sofa: sofa id: _InitialView
+   begin: 57   end: 69   value: "LOC"
 [Braunschweig]
-Token
-   sofa: _InitialView
-   begin: 57
-   end: 69
+#0 Token:12
+   sofa: sofa id: _InitialView
+   begin: 57   end: 69   parent: <null>
 [und]
-Token
-   sofa: _InitialView
-   begin: 70
-   end: 73
+#0 Token:13
+   sofa: sofa id: _InitialView
+   begin: 70   end: 73   parent: <null>
 [Bonn]
-NamedEntity
-   sofa: _InitialView
-   begin: 74
-   end: 78
-   value: "LOC"
+#0 NamedEntity:33
+   sofa: sofa id: _InitialView
+   begin: 74   end: 78   value: "LOC"
 [Bonn]
-Token
-   sofa: _InitialView
-   begin: 74
-   end: 78
+#0 Token:14
+   sofa: sofa id: _InitialView
+   begin: 74   end: 78   parent: <null>
 [eine]
-Token
-   sofa: _InitialView
-   begin: 79
-   end: 83
+#0 Token:15
+   sofa: sofa id: _InitialView
+   begin: 79   end: 83   parent: <null>
 [große]
-Token
-   sofa: _InitialView
-   begin: 84
-   end: 89
+#0 Token:16
+   sofa: sofa id: _InitialView
+   begin: 84   end: 89   parent: <null>
 [und]
-Token
-   sofa: _InitialView
-   begin: 90
-   end: 93
+#0 Token:17
+   sofa: sofa id: _InitialView
+   begin: 90   end: 93   parent: <null>
 [publizistisch]
-Token
-   sofa: _InitialView
-   begin: 94
-   end: 107
+#0 Token:18
+   sofa: sofa id: _InitialView
+   begin: 94   end: 107   parent: <null>
 [vielbeachtete]
-Token
-   sofa: _InitialView
-   begin: 108
-   end: 121
+#0 Token:19
+   sofa: sofa id: _InitialView
+   begin: 108   end: 121   parent: <null>
 [Troia-Ausstellung]
-NamedEntity
-   sofa: _InitialView
-   begin: 122
-   end: 139
-   value: "LOCpart"
+#0 NamedEntity:34
+   sofa: sofa id: _InitialView
+   begin: 122   end: 139   value: "LOCpart"
 [Troia-Ausstellung]
-Token
-   sofa: _InitialView
-   begin: 122
-   end: 139
+#0 Token:20
+   sofa: sofa id: _InitialView
+   begin: 122   end: 139   parent: <null>
 [statt]
-Token
-   sofa: _InitialView
-   begin: 140
-   end: 145
+#0 Token:21
+   sofa: sofa id: _InitialView
+   begin: 140   end: 145   parent: <null>
 [,]
-Token
-   sofa: _InitialView
-   begin: 146
-   end: 147
+#0 Token:22
+   sofa: sofa id: _InitialView
+   begin: 146   end: 147   parent: <null>
 [„]
-Token
-   sofa: _InitialView
-   begin: 148
-   end: 149
+#0 Token:23
+   sofa: sofa id: _InitialView
+   begin: 148   end: 149   parent: <null>
 [Troia - Traum und Wirklichkeit]
-NamedEntity
-   sofa: _InitialView
-   begin: 150
-   end: 180
-   value: "OTH"
+#0 NamedEntity:35
+   sofa: sofa id: _InitialView
+   begin: 150   end: 180   value: "OTH"
 [Troia]
-Token
-   sofa: _InitialView
-   begin: 150
-   end: 155
+#0 Token:24
+   sofa: sofa id: _InitialView
+   begin: 150   end: 155   parent: <null>
 [-]
-Token
-   sofa: _InitialView
-   begin: 156
-   end: 157
+#0 Token:25
+   sofa: sofa id: _InitialView
+   begin: 156   end: 157   parent: <null>
 [Traum]
-Token
-   sofa: _InitialView
-   begin: 158
-   end: 163
+#0 Token:26
+   sofa: sofa id: _InitialView
+   begin: 158   end: 163   parent: <null>
 [und]
-Token
-   sofa: _InitialView
-   begin: 164
-   end: 167
+#0 Token:27
+   sofa: sofa id: _InitialView
+   begin: 164   end: 167   parent: <null>
 [Wirklichkeit]
-Token
-   sofa: _InitialView
-   begin: 168
-   end: 180
+#0 Token:28
+   sofa: sofa id: _InitialView
+   begin: 168   end: 180   parent: <null>
 [“]
-Token
-   sofa: _InitialView
-   begin: 181
-   end: 182
+#0 Token:29
+   sofa: sofa id: _InitialView
+   begin: 181   end: 182   parent: <null>
 [.]
-Token
-   sofa: _InitialView
-   begin: 183
-   end: 184
+#0 Token:30
+   sofa: sofa id: _InitialView
+   begin: 183   end: 184   parent: <null>
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================

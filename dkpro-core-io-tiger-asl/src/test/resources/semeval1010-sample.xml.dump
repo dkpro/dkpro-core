@@ -2,11 +2,9 @@
 
 -------- View _InitialView begin ----------------------------------
 
-DocumentMetaData
-   sofa: _InitialView
-   begin: 0
-   end: 171
-   language: "en"
+#0 DocumentMetaData:1
+   sofa: sofa id: _InitialView
+   begin: 0   end: 171   language: "en"
    documentTitle: "semeval1010-en-sample.xml"
    documentId: "semeval1010-en-sample.xml"
    isLastSegment: false
@@ -15,3286 +13,3401 @@ CAS-Text:
 Save for this one excursion , he spent his days in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated . 
 
 [Save for this one excursion , he spent his days in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated .]
-Sentence
-   sofa: _InitialView
-   begin: 0
-   end: 169
-   id: "s115"
+#0 Sentence:99
+   sofa: sofa id: _InitialView
+   begin: 0   end: 169   id: "s115"
 [Save for this one excursion , he spent his days in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated .]
-PennTree
-   sofa: _InitialView
-   begin: 0
-   end: 169
-   PennTree: "(S (PRP he) (VP (VBD spent) (PP (PP (IN in) (NPB (ADJP (JJ long) (CC and) (ADJP (RB often) (JJ solitary))) (VBZ walks) (PUNC, ,))) (CC or) (PP (IN in) (VP (VBG chatting) (PP (IN with) (NP (NPB (DT a) (NN number)) (PP (IN of) (NP (NPB (NN village) (NNS gossips)) (SBAR (WHNP (WP$ whose) (NN acquaintance)) (S (PRP he) (VP (VBD had) (VP (VBN cultivated) (PUNC. .)))))))))))) (NPB (PRP$ his) (NNS days))) (VP (VB Save) (PP (IN for) (NPB (DT this) (CD one) (NN excursion) (PUNC, ,)))))"
+#0 PennTree:200
+   sofa: sofa id: _InitialView
+   begin: 0   end: 169   PennTree: "(S (PRP he) (VP (VBD spent) (PP (PP (IN in) (NPB (ADJP (JJ long) (CC and) (ADJP ..."
 [Save for this one excursion , he spent his days in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated .]
-ROOT
-   sofa: _InitialView
-   begin: 0
-   end: 169
-   constituentType: "S"
-   children: FSArray
+#1 ROOT:100
+   sofa: sofa id: _InitialView
+   begin: 0   end: 169   constituentType: "S"
+   children: #25 FSArray:147
+      Array length: 3
+      Array elements: ["#26 Token:21
+   sofa: sofa id: _InitialView
+   beg...", "#2 Constituent:101
+   sofa: sofa id: _InitialView
+...", "#22 Constituent:141
+   sofa: sofa id: _InitialView..."]
+
 [Save for this one excursion ,]
-Constituent
-   sofa: _InitialView
-   begin: 0
-   end: 29
-   constituentType: "VP"
-   parent: ROOT
-      sofa: _InitialView
-      begin: 0
-      end: 169
-      constituentType: "S"
-      children: FSArray
-   children: FSArray
+#22 Constituent:141
+   sofa: sofa id: _InitialView
+   begin: 0   end: 29   constituentType: "VP"
+   parent: #1 ROOT:100
+      sofa: sofa id: _InitialView
+      begin: 0      end: 169      constituentType: "S"
+      children: #25 FSArray:147
+         Array length: 3
+         Array elements: ["#26 Token:21
+   sofa: sofa id: _InitialView
+   beg...", "#2 Constituent:101
+   sofa: sofa id: _InitialView
+...", "#22 "]
+
+
+   children: #124 FSArray:146
+      Array length: 2
+      Array elements: ["#125 Token:3
+   sofa: sofa id: _InitialView
+   beg...", "#23 Constituent:142
+   sofa: sofa id: _InitialView..."]
+
 [Save]
-POS_VERB
-   sofa: _InitialView
-   begin: 0
-   end: 4
-   PosValue: "VB"
+#0 POS_VERB:5
+   sofa: sofa id: _InitialView
+   begin: 0   end: 4   PosValue: "VB"
    coarseValue: "VERB"
 [Save]
-Lemma
-   sofa: _InitialView
-   begin: 0
-   end: 4
-   value: "save"
+#0 Lemma:4
+   sofa: sofa id: _InitialView
+   begin: 0   end: 4   value: "save"
 [Save]
-Token
-   sofa: _InitialView
-   begin: 0
-   end: 4
-   parent: Constituent
-      sofa: _InitialView
-      begin: 0
-      end: 29
-      constituentType: "VP"
-      parent: ROOT
-         sofa: _InitialView
-         begin: 0
-         end: 169
-         constituentType: "S"
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 0
-      end: 4
-      value: "save"
-   pos: POS_VERB
-      sofa: _InitialView
-      begin: 0
-      end: 4
-      PosValue: "VB"
+#23 Token:3
+   sofa: sofa id: _InitialView
+   begin: 0   end: 4   parent: #22 Constituent:141
+      sofa: sofa id: _InitialView
+      begin: 0      end: 29      constituentType: "VP"
+      parent: #1 ROOT:100
+         sofa: sofa id: _InitialView
+         begin: 0         end: 169         constituentType: "S"
+         children: #26 FSArray:147
+            Array length: 3
+            Array elements: ["#27 Token:21
+   sofa: sofa id: _InitialView
+   beg...", "#2 Constituent:101
+   sofa: sofa id: _InitialView
+...", "#22 "]
+
+
+      children: #125 FSArray:146
+         Array length: 2
+         Array elements: ["#23 ", "#24 Constituent:142
+   sofa: sofa id: _InitialView..."]
+
+
+   lemma: #143 Lemma:4
+      sofa: sofa id: _InitialView
+      begin: 0      end: 4      value: "save"
+
+   pos: #144 POS_VERB:5
+      sofa: sofa id: _InitialView
+      begin: 0      end: 4      PosValue: "VB"
       coarseValue: "VERB"
+
    id: "s115_0"
 [for this one excursion ,]
-Constituent
-   sofa: _InitialView
-   begin: 5
-   end: 29
-   constituentType: "PP"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 0
-      end: 29
-      constituentType: "VP"
-      parent: ROOT
-         sofa: _InitialView
-         begin: 0
-         end: 169
-         constituentType: "S"
-         children: FSArray
-      children: FSArray
-   children: FSArray
+#23 Constituent:142
+   sofa: sofa id: _InitialView
+   begin: 5   end: 29   constituentType: "PP"
+   parent: #22 Constituent:141
+      sofa: sofa id: _InitialView
+      begin: 0      end: 29      constituentType: "VP"
+      parent: #1 ROOT:100
+         sofa: sofa id: _InitialView
+         begin: 0         end: 169         constituentType: "S"
+         children: #25 FSArray:147
+            Array length: 3
+            Array elements: ["#26 Token:21
+   sofa: sofa id: _InitialView
+   beg...", "#2 Constituent:101
+   sofa: sofa id: _InitialView
+...", "#22 "]
+
+
+      children: #124 FSArray:146
+         Array length: 2
+         Array elements: ["#125 Token:3
+   sofa: sofa id: _InitialView
+   beg...", "#23 "]
+
+
+   children: #128 FSArray:145
+      Array length: 2
+      Array elements: ["#129 Token:6
+   sofa: sofa id: _InitialView
+   beg...", "#24 Constituent:143
+   sofa: sofa id: _InitialView..."]
+
 [for]
-POS_ADP
-   sofa: _InitialView
-   begin: 5
-   end: 8
-   PosValue: "IN"
+#0 POS_ADP:8
+   sofa: sofa id: _InitialView
+   begin: 5   end: 8   PosValue: "IN"
    coarseValue: "ADP"
 [for]
-Lemma
-   sofa: _InitialView
-   begin: 5
-   end: 8
-   value: "for"
+#0 Lemma:7
+   sofa: sofa id: _InitialView
+   begin: 5   end: 8   value: "for"
 [for]
-Token
-   sofa: _InitialView
-   begin: 5
-   end: 8
-   parent: Constituent
-      sofa: _InitialView
-      begin: 5
-      end: 29
-      constituentType: "PP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 0
-         end: 29
-         constituentType: "VP"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 169
-            constituentType: "S"
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 5
-      end: 8
-      value: "for"
-   pos: POS_ADP
-      sofa: _InitialView
-      begin: 5
-      end: 8
-      PosValue: "IN"
+#24 Token:6
+   sofa: sofa id: _InitialView
+   begin: 5   end: 8   parent: #23 Constituent:142
+      sofa: sofa id: _InitialView
+      begin: 5      end: 29      constituentType: "PP"
+      parent: #22 Constituent:141
+         sofa: sofa id: _InitialView
+         begin: 0         end: 29         constituentType: "VP"
+         parent: #1 ROOT:100
+            sofa: sofa id: _InitialView
+            begin: 0            end: 169            constituentType: "S"
+            children: #26 FSArray:147
+               Array length: 3
+               Array elements: ["#27 Token:21
+   sofa: sofa id: _InitialView
+   beg...", "#2 Constituent:101
+   sofa: sofa id: _InitialView
+...", "#22 "]
+
+
+         children: #125 FSArray:146
+            Array length: 2
+            Array elements: ["#126 Token:3
+   sofa: sofa id: _InitialView
+   beg...", "#23 "]
+
+
+      children: #129 FSArray:145
+         Array length: 2
+         Array elements: ["#24 ", "#25 Constituent:143
+   sofa: sofa id: _InitialView..."]
+
+
+   lemma: #143 Lemma:7
+      sofa: sofa id: _InitialView
+      begin: 5      end: 8      value: "for"
+
+   pos: #144 POS_ADP:8
+      sofa: sofa id: _InitialView
+      begin: 5      end: 8      PosValue: "IN"
       coarseValue: "ADP"
+
    id: "s115_1"
 [this one excursion ,]
-SemArg
-   sofa: _InitialView
-   begin: 9
-   end: 29
+#0 SemArg:195
+   sofa: sofa id: _InitialView
+   begin: 9   end: 29
 [this one excursion ,]
-Constituent
-   sofa: _InitialView
-   begin: 9
-   end: 29
-   constituentType: "NPB"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 5
-      end: 29
-      constituentType: "PP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 0
-         end: 29
-         constituentType: "VP"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 169
-            constituentType: "S"
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   children: FSArray
+#24 Constituent:143
+   sofa: sofa id: _InitialView
+   begin: 9   end: 29   constituentType: "NPB"
+   parent: #23 Constituent:142
+      sofa: sofa id: _InitialView
+      begin: 5      end: 29      constituentType: "PP"
+      parent: #22 Constituent:141
+         sofa: sofa id: _InitialView
+         begin: 0         end: 29         constituentType: "VP"
+         parent: #1 ROOT:100
+            sofa: sofa id: _InitialView
+            begin: 0            end: 169            constituentType: "S"
+            children: #25 FSArray:147
+               Array length: 3
+               Array elements: ["#26 Token:21
+   sofa: sofa id: _InitialView
+   beg...", "#2 Constituent:101
+   sofa: sofa id: _InitialView
+...", "#22 "]
+
+
+         children: #124 FSArray:146
+            Array length: 2
+            Array elements: ["#125 Token:3
+   sofa: sofa id: _InitialView
+   beg...", "#23 "]
+
+
+      children: #128 FSArray:145
+         Array length: 2
+         Array elements: ["#129 Token:6
+   sofa: sofa id: _InitialView
+   beg...", "#24 "]
+
+
+   children: #132 FSArray:144
+      Array length: 4
+      Array elements: ["#133 Token:9
+   sofa: sofa id: _InitialView
+   beg...", "#136 Token:12
+   sofa: sofa id: _InitialView
+   be...", "#139 Token:15
+   sofa: sofa id: _InitialView
+   be...", "#142 Token:18
+   sofa: sofa id: _InitialView
+   be..."]
+
 [this]
-POS_DET
-   sofa: _InitialView
-   begin: 9
-   end: 13
-   PosValue: "DT"
+#0 POS_DET:11
+   sofa: sofa id: _InitialView
+   begin: 9   end: 13   PosValue: "DT"
    coarseValue: "DET"
 [this]
-Lemma
-   sofa: _InitialView
-   begin: 9
-   end: 13
-   value: "this"
+#0 Lemma:10
+   sofa: sofa id: _InitialView
+   begin: 9   end: 13   value: "this"
 [this]
-Token
-   sofa: _InitialView
-   begin: 9
-   end: 13
-   parent: Constituent
-      sofa: _InitialView
-      begin: 9
-      end: 29
-      constituentType: "NPB"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 5
-         end: 29
-         constituentType: "PP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 0
-            end: 29
-            constituentType: "VP"
-            parent: ROOT
-               sofa: _InitialView
-               begin: 0
-               end: 169
-               constituentType: "S"
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 9
-      end: 13
-      value: "this"
-   pos: POS_DET
-      sofa: _InitialView
-      begin: 9
-      end: 13
-      PosValue: "DT"
+#25 Token:9
+   sofa: sofa id: _InitialView
+   begin: 9   end: 13   parent: #24 Constituent:143
+      sofa: sofa id: _InitialView
+      begin: 9      end: 29      constituentType: "NPB"
+      parent: #23 Constituent:142
+         sofa: sofa id: _InitialView
+         begin: 5         end: 29         constituentType: "PP"
+         parent: #22 Constituent:141
+            sofa: sofa id: _InitialView
+            begin: 0            end: 29            constituentType: "VP"
+            parent: #1 ROOT:100
+               sofa: sofa id: _InitialView
+               begin: 0               end: 169               constituentType: "S"
+               children: #26 FSArray:147
+                  Array length: 3
+                  Array elements: ["#27 Token:21
+   sofa: sofa id: _InitialView
+   beg...", "#2 Constituent:101
+   sofa: sofa id: _InitialView
+...", "#22 "]
+
+
+            children: #125 FSArray:146
+               Array length: 2
+               Array elements: ["#126 Token:3
+   sofa: sofa id: _InitialView
+   beg...", "#23 "]
+
+
+         children: #129 FSArray:145
+            Array length: 2
+            Array elements: ["#130 Token:6
+   sofa: sofa id: _InitialView
+   beg...", "#24 "]
+
+
+      children: #133 FSArray:144
+         Array length: 4
+         Array elements: ["#25 ", "#134 Token:12
+   sofa: sofa id: _InitialView
+   be...", "#137 Token:15
+   sofa: sofa id: _InitialView
+   be...", "#140 Token:18
+   sofa: sofa id: _InitialView
+   be..."]
+
+
+   lemma: #143 Lemma:10
+      sofa: sofa id: _InitialView
+      begin: 9      end: 13      value: "this"
+
+   pos: #144 POS_DET:11
+      sofa: sofa id: _InitialView
+      begin: 9      end: 13      PosValue: "DT"
       coarseValue: "DET"
+
    id: "s115_2"
 [one]
-POS_NUM
-   sofa: _InitialView
-   begin: 14
-   end: 17
-   PosValue: "CD"
+#0 POS_NUM:14
+   sofa: sofa id: _InitialView
+   begin: 14   end: 17   PosValue: "CD"
    coarseValue: "NUM"
 [one]
-Lemma
-   sofa: _InitialView
-   begin: 14
-   end: 17
-   value: "one"
+#0 Lemma:13
+   sofa: sofa id: _InitialView
+   begin: 14   end: 17   value: "one"
 [one]
-Token
-   sofa: _InitialView
-   begin: 14
-   end: 17
-   parent: Constituent
-      sofa: _InitialView
-      begin: 9
-      end: 29
-      constituentType: "NPB"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 5
-         end: 29
-         constituentType: "PP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 0
-            end: 29
-            constituentType: "VP"
-            parent: ROOT
-               sofa: _InitialView
-               begin: 0
-               end: 169
-               constituentType: "S"
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 14
-      end: 17
-      value: "one"
-   pos: POS_NUM
-      sofa: _InitialView
-      begin: 14
-      end: 17
-      PosValue: "CD"
+#25 Token:12
+   sofa: sofa id: _InitialView
+   begin: 14   end: 17   parent: #24 Constituent:143
+      sofa: sofa id: _InitialView
+      begin: 9      end: 29      constituentType: "NPB"
+      parent: #23 Constituent:142
+         sofa: sofa id: _InitialView
+         begin: 5         end: 29         constituentType: "PP"
+         parent: #22 Constituent:141
+            sofa: sofa id: _InitialView
+            begin: 0            end: 29            constituentType: "VP"
+            parent: #1 ROOT:100
+               sofa: sofa id: _InitialView
+               begin: 0               end: 169               constituentType: "S"
+               children: #26 FSArray:147
+                  Array length: 3
+                  Array elements: ["#27 Token:21
+   sofa: sofa id: _InitialView
+   beg...", "#2 Constituent:101
+   sofa: sofa id: _InitialView
+...", "#22 "]
+
+
+            children: #125 FSArray:146
+               Array length: 2
+               Array elements: ["#126 Token:3
+   sofa: sofa id: _InitialView
+   beg...", "#23 "]
+
+
+         children: #129 FSArray:145
+            Array length: 2
+            Array elements: ["#130 Token:6
+   sofa: sofa id: _InitialView
+   beg...", "#24 "]
+
+
+      children: #133 FSArray:144
+         Array length: 4
+         Array elements: ["#134 Token:9
+   sofa: sofa id: _InitialView
+   beg...", "#25 ", "#137 Token:15
+   sofa: sofa id: _InitialView
+   be...", "#140 Token:18
+   sofa: sofa id: _InitialView
+   be..."]
+
+
+   lemma: #143 Lemma:13
+      sofa: sofa id: _InitialView
+      begin: 14      end: 17      value: "one"
+
+   pos: #144 POS_NUM:14
+      sofa: sofa id: _InitialView
+      begin: 14      end: 17      PosValue: "CD"
       coarseValue: "NUM"
+
    id: "s115_3"
 [excursion]
-POS_NOUN
-   sofa: _InitialView
-   begin: 18
-   end: 27
-   PosValue: "NN"
+#0 POS_NOUN:17
+   sofa: sofa id: _InitialView
+   begin: 18   end: 27   PosValue: "NN"
    coarseValue: "NOUN"
 [excursion]
-Lemma
-   sofa: _InitialView
-   begin: 18
-   end: 27
-   value: "excursion"
+#0 Lemma:16
+   sofa: sofa id: _InitialView
+   begin: 18   end: 27   value: "excursion"
 [excursion]
-Token
-   sofa: _InitialView
-   begin: 18
-   end: 27
-   parent: Constituent
-      sofa: _InitialView
-      begin: 9
-      end: 29
-      constituentType: "NPB"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 5
-         end: 29
-         constituentType: "PP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 0
-            end: 29
-            constituentType: "VP"
-            parent: ROOT
-               sofa: _InitialView
-               begin: 0
-               end: 169
-               constituentType: "S"
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 18
-      end: 27
-      value: "excursion"
-   pos: POS_NOUN
-      sofa: _InitialView
-      begin: 18
-      end: 27
-      PosValue: "NN"
+#25 Token:15
+   sofa: sofa id: _InitialView
+   begin: 18   end: 27   parent: #24 Constituent:143
+      sofa: sofa id: _InitialView
+      begin: 9      end: 29      constituentType: "NPB"
+      parent: #23 Constituent:142
+         sofa: sofa id: _InitialView
+         begin: 5         end: 29         constituentType: "PP"
+         parent: #22 Constituent:141
+            sofa: sofa id: _InitialView
+            begin: 0            end: 29            constituentType: "VP"
+            parent: #1 ROOT:100
+               sofa: sofa id: _InitialView
+               begin: 0               end: 169               constituentType: "S"
+               children: #26 FSArray:147
+                  Array length: 3
+                  Array elements: ["#27 Token:21
+   sofa: sofa id: _InitialView
+   beg...", "#2 Constituent:101
+   sofa: sofa id: _InitialView
+...", "#22 "]
+
+
+            children: #125 FSArray:146
+               Array length: 2
+               Array elements: ["#126 Token:3
+   sofa: sofa id: _InitialView
+   beg...", "#23 "]
+
+
+         children: #129 FSArray:145
+            Array length: 2
+            Array elements: ["#130 Token:6
+   sofa: sofa id: _InitialView
+   beg...", "#24 "]
+
+
+      children: #133 FSArray:144
+         Array length: 4
+         Array elements: ["#134 Token:9
+   sofa: sofa id: _InitialView
+   beg...", "#137 Token:12
+   sofa: sofa id: _InitialView
+   be...", "#25 ", "#140 Token:18
+   sofa: sofa id: _InitialView
+   be..."]
+
+
+   lemma: #143 Lemma:16
+      sofa: sofa id: _InitialView
+      begin: 18      end: 27      value: "excursion"
+
+   pos: #144 POS_NOUN:17
+      sofa: sofa id: _InitialView
+      begin: 18      end: 27      PosValue: "NN"
       coarseValue: "NOUN"
+
    id: "s115_4"
 [excursion]
-SemPred
-   sofa: _InitialView
-   begin: 18
-   end: 27
-   arguments: FSArray
+#1 SemPred:158
+   sofa: sofa id: _InitialView
+   begin: 18   end: 27   arguments: #2 FSArray:161
+      Array length: 1
+      Array elements: ["#3 SemArgLink:160
+   role: "Traveler"
+   target: #..."]
+
    category: "Travel"
 [excursion]
-SemPred
-   sofa: _InitialView
-   begin: 18
-   end: 27
-   arguments: FSArray
+#1 SemPred:194
+   sofa: sofa id: _InitialView
+   begin: 18   end: 27   arguments: #2 FSArray:199
+      Array length: 2
+      Array elements: ["#3 SemArgLink:196
+   role: "Current"
+   target: #4...", "#5 SemArgLink:198
+   role: "Current"
+   target: #6..."]
+
    category: "Coreference"
 [,]
-POS
-   sofa: _InitialView
-   begin: 28
-   end: 29
-   PosValue: "PUNC,"
+#0 POS:20
+   sofa: sofa id: _InitialView
+   begin: 28   end: 29   PosValue: "PUNC,"
 [,]
-Lemma
-   sofa: _InitialView
-   begin: 28
-   end: 29
-   value: ","
+#0 Lemma:19
+   sofa: sofa id: _InitialView
+   begin: 28   end: 29   value: ","
 [,]
-Token
-   sofa: _InitialView
-   begin: 28
-   end: 29
-   parent: Constituent
-      sofa: _InitialView
-      begin: 9
-      end: 29
-      constituentType: "NPB"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 5
-         end: 29
-         constituentType: "PP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 0
-            end: 29
-            constituentType: "VP"
-            parent: ROOT
-               sofa: _InitialView
-               begin: 0
-               end: 169
-               constituentType: "S"
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 28
-      end: 29
-      value: ","
-   pos: POS
-      sofa: _InitialView
-      begin: 28
-      end: 29
-      PosValue: "PUNC,"
+#25 Token:18
+   sofa: sofa id: _InitialView
+   begin: 28   end: 29   parent: #24 Constituent:143
+      sofa: sofa id: _InitialView
+      begin: 9      end: 29      constituentType: "NPB"
+      parent: #23 Constituent:142
+         sofa: sofa id: _InitialView
+         begin: 5         end: 29         constituentType: "PP"
+         parent: #22 Constituent:141
+            sofa: sofa id: _InitialView
+            begin: 0            end: 29            constituentType: "VP"
+            parent: #1 ROOT:100
+               sofa: sofa id: _InitialView
+               begin: 0               end: 169               constituentType: "S"
+               children: #26 FSArray:147
+                  Array length: 3
+                  Array elements: ["#27 Token:21
+   sofa: sofa id: _InitialView
+   beg...", "#2 Constituent:101
+   sofa: sofa id: _InitialView
+...", "#22 "]
+
+
+            children: #125 FSArray:146
+               Array length: 2
+               Array elements: ["#126 Token:3
+   sofa: sofa id: _InitialView
+   beg...", "#23 "]
+
+
+         children: #129 FSArray:145
+            Array length: 2
+            Array elements: ["#130 Token:6
+   sofa: sofa id: _InitialView
+   beg...", "#24 "]
+
+
+      children: #133 FSArray:144
+         Array length: 4
+         Array elements: ["#134 Token:9
+   sofa: sofa id: _InitialView
+   beg...", "#137 Token:12
+   sofa: sofa id: _InitialView
+   be...", "#140 Token:15
+   sofa: sofa id: _InitialView
+   be...", "#25 "]
+
+
+   lemma: #143 Lemma:19
+      sofa: sofa id: _InitialView
+      begin: 28      end: 29      value: ","
+
+   pos: #144 POS:20
+      sofa: sofa id: _InitialView
+      begin: 28      end: 29      PosValue: "PUNC,"
+
    id: "s115_5"
 [he]
-POS_PRON
-   sofa: _InitialView
-   begin: 30
-   end: 32
-   PosValue: "PRP"
+#0 POS_PRON:23
+   sofa: sofa id: _InitialView
+   begin: 30   end: 32   PosValue: "PRP"
    coarseValue: "PRON"
 [he]
-Lemma
-   sofa: _InitialView
-   begin: 30
-   end: 32
-   value: "he"
+#0 Lemma:22
+   sofa: sofa id: _InitialView
+   begin: 30   end: 32   value: "he"
 [he]
-Token
-   sofa: _InitialView
-   begin: 30
-   end: 32
-   parent: ROOT
-      sofa: _InitialView
-      begin: 0
-      end: 169
-      constituentType: "S"
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 30
-      end: 32
-      value: "he"
-   pos: POS_PRON
-      sofa: _InitialView
-      begin: 30
-      end: 32
-      PosValue: "PRP"
+#1 Token:21
+   sofa: sofa id: _InitialView
+   begin: 30   end: 32   parent: #2 ROOT:100
+      sofa: sofa id: _InitialView
+      begin: 0      end: 169      constituentType: "S"
+      children: #26 FSArray:147
+         Array length: 3
+         Array elements: ["#1 ", "#3 Constituent:101
+   sofa: sofa id: _InitialView
+...", "#23 Constituent:141
+   sofa: sofa id: _InitialView..."]
+
+
+   lemma: #143 Lemma:22
+      sofa: sofa id: _InitialView
+      begin: 30      end: 32      value: "he"
+
+   pos: #144 POS_PRON:23
+      sofa: sofa id: _InitialView
+      begin: 30      end: 32      PosValue: "PRP"
       coarseValue: "PRON"
+
    id: "s115_6"
 [he]
-SemArg
-   sofa: _InitialView
-   begin: 30
-   end: 32
+#0 SemArg:149
+   sofa: sofa id: _InitialView
+   begin: 30   end: 32
 [he]
-SemArg
-   sofa: _InitialView
-   begin: 30
-   end: 32
+#0 SemArg:159
+   sofa: sofa id: _InitialView
+   begin: 30   end: 32
 [he]
-SemArg
-   sofa: _InitialView
-   begin: 30
-   end: 32
+#0 SemArg:169
+   sofa: sofa id: _InitialView
+   begin: 30   end: 32
 [he]
-SemArg
-   sofa: _InitialView
-   begin: 30
-   end: 32
+#0 SemArg:179
+   sofa: sofa id: _InitialView
+   begin: 30   end: 32
 [he]
-SemArg
-   sofa: _InitialView
-   begin: 30
-   end: 32
+#0 SemArg:185
+   sofa: sofa id: _InitialView
+   begin: 30   end: 32
 [he]
-SemArg
-   sofa: _InitialView
-   begin: 30
-   end: 32
+#0 SemArg:191
+   sofa: sofa id: _InitialView
+   begin: 30   end: 32
 [he]
-SemPred
-   sofa: _InitialView
-   begin: 30
-   end: 32
-   arguments: FSArray
+#1 SemPred:190
+   sofa: sofa id: _InitialView
+   begin: 30   end: 32   arguments: #2 FSArray:193
+      Array length: 1
+      Array elements: ["#3 SemArgLink:192
+   role: "Current"
+   target: #4..."]
+
    category: "Coreference"
 [spent his days in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated .]
-Constituent
-   sofa: _InitialView
-   begin: 33
-   end: 169
-   constituentType: "VP"
-   parent: ROOT
-      sofa: _InitialView
-      begin: 0
-      end: 169
-      constituentType: "S"
-      children: FSArray
-   children: FSArray
+#2 Constituent:101
+   sofa: sofa id: _InitialView
+   begin: 33   end: 169   constituentType: "VP"
+   parent: #1 ROOT:100
+      sofa: sofa id: _InitialView
+      begin: 0      end: 169      constituentType: "S"
+      children: #25 FSArray:147
+         Array length: 3
+         Array elements: ["#26 Token:21
+   sofa: sofa id: _InitialView
+   beg...", "#2 ", "#3 Constituent:141
+   sofa: sofa id: _InitialView
+..."]
+
+
+   children: #50 FSArray:140
+      Array length: 3
+      Array elements: ["#51 Token:24
+   sofa: sofa id: _InitialView
+   beg...", "#6 Constituent:102
+   sofa: sofa id: _InitialView
+...", "#24 Constituent:138
+   sofa: sofa id: _InitialView..."]
+
 [spent]
-POS_VERB
-   sofa: _InitialView
-   begin: 33
-   end: 38
-   PosValue: "VBD"
+#0 POS_VERB:26
+   sofa: sofa id: _InitialView
+   begin: 33   end: 38   PosValue: "VBD"
    coarseValue: "VERB"
 [spent]
-Lemma
-   sofa: _InitialView
-   begin: 33
-   end: 38
-   value: "spend"
+#0 Lemma:25
+   sofa: sofa id: _InitialView
+   begin: 33   end: 38   value: "spend"
 [spent]
-Token
-   sofa: _InitialView
-   begin: 33
-   end: 38
-   parent: Constituent
-      sofa: _InitialView
-      begin: 33
-      end: 169
-      constituentType: "VP"
-      parent: ROOT
-         sofa: _InitialView
-         begin: 0
-         end: 169
-         constituentType: "S"
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 33
-      end: 38
-      value: "spend"
-   pos: POS_VERB
-      sofa: _InitialView
-      begin: 33
-      end: 38
-      PosValue: "VBD"
+#6 Token:24
+   sofa: sofa id: _InitialView
+   begin: 33   end: 38   parent: #2 Constituent:101
+      sofa: sofa id: _InitialView
+      begin: 33      end: 169      constituentType: "VP"
+      parent: #1 ROOT:100
+         sofa: sofa id: _InitialView
+         begin: 0         end: 169         constituentType: "S"
+         children: #26 FSArray:147
+            Array length: 3
+            Array elements: ["#27 Token:21
+   sofa: sofa id: _InitialView
+   beg...", "#2 ", "#3 Constituent:141
+   sofa: sofa id: _InitialView
+..."]
+
+
+      children: #51 FSArray:140
+         Array length: 3
+         Array elements: ["#6 ", "#7 Constituent:102
+   sofa: sofa id: _InitialView
+...", "#25 Constituent:138
+   sofa: sofa id: _InitialView..."]
+
+
+   lemma: #143 Lemma:25
+      sofa: sofa id: _InitialView
+      begin: 33      end: 38      value: "spend"
+
+   pos: #144 POS_VERB:26
+      sofa: sofa id: _InitialView
+      begin: 33      end: 38      PosValue: "VBD"
       coarseValue: "VERB"
+
    id: "s115_7"
 [his days]
-Constituent
-   sofa: _InitialView
-   begin: 39
-   end: 47
-   constituentType: "NPB"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 33
-      end: 169
-      constituentType: "VP"
-      parent: ROOT
-         sofa: _InitialView
-         begin: 0
-         end: 169
-         constituentType: "S"
-         children: FSArray
-      children: FSArray
-   children: FSArray
+#24 Constituent:138
+   sofa: sofa id: _InitialView
+   begin: 39   end: 47   constituentType: "NPB"
+   parent: #2 Constituent:101
+      sofa: sofa id: _InitialView
+      begin: 33      end: 169      constituentType: "VP"
+      parent: #1 ROOT:100
+         sofa: sofa id: _InitialView
+         begin: 0         end: 169         constituentType: "S"
+         children: #25 FSArray:147
+            Array length: 3
+            Array elements: ["#26 Token:21
+   sofa: sofa id: _InitialView
+   beg...", "#2 ", "#3 Constituent:141
+   sofa: sofa id: _InitialView
+..."]
+
+
+      children: #50 FSArray:140
+         Array length: 3
+         Array elements: ["#51 Token:24
+   sofa: sofa id: _InitialView
+   beg...", "#6 Constituent:102
+   sofa: sofa id: _InitialView
+...", "#24 "]
+
+
+   children: #138 FSArray:139
+      Array length: 2
+      Array elements: ["#139 Token:27
+   sofa: sofa id: _InitialView
+   be...", "#142 Token:30
+   sofa: sofa id: _InitialView
+   be..."]
+
 [his]
-POS_PRON
-   sofa: _InitialView
-   begin: 39
-   end: 42
-   PosValue: "PRP$"
+#0 POS_PRON:29
+   sofa: sofa id: _InitialView
+   begin: 39   end: 42   PosValue: "PRP$"
    coarseValue: "PRON"
 [his]
-Lemma
-   sofa: _InitialView
-   begin: 39
-   end: 42
-   value: "his"
+#0 Lemma:28
+   sofa: sofa id: _InitialView
+   begin: 39   end: 42   value: "his"
 [his]
-Token
-   sofa: _InitialView
-   begin: 39
-   end: 42
-   parent: Constituent
-      sofa: _InitialView
-      begin: 39
-      end: 47
-      constituentType: "NPB"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 33
-         end: 169
-         constituentType: "VP"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 169
-            constituentType: "S"
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 39
-      end: 42
-      value: "his"
-   pos: POS_PRON
-      sofa: _InitialView
-      begin: 39
-      end: 42
-      PosValue: "PRP$"
+#25 Token:27
+   sofa: sofa id: _InitialView
+   begin: 39   end: 42   parent: #24 Constituent:138
+      sofa: sofa id: _InitialView
+      begin: 39      end: 47      constituentType: "NPB"
+      parent: #2 Constituent:101
+         sofa: sofa id: _InitialView
+         begin: 33         end: 169         constituentType: "VP"
+         parent: #1 ROOT:100
+            sofa: sofa id: _InitialView
+            begin: 0            end: 169            constituentType: "S"
+            children: #26 FSArray:147
+               Array length: 3
+               Array elements: ["#27 Token:21
+   sofa: sofa id: _InitialView
+   beg...", "#2 ", "#3 Constituent:141
+   sofa: sofa id: _InitialView
+..."]
+
+
+         children: #51 FSArray:140
+            Array length: 3
+            Array elements: ["#52 Token:24
+   sofa: sofa id: _InitialView
+   beg...", "#6 Constituent:102
+   sofa: sofa id: _InitialView
+...", "#24 "]
+
+
+      children: #139 FSArray:139
+         Array length: 2
+         Array elements: ["#25 ", "#140 Token:30
+   sofa: sofa id: _InitialView
+   be..."]
+
+
+   lemma: #143 Lemma:28
+      sofa: sofa id: _InitialView
+      begin: 39      end: 42      value: "his"
+
+   pos: #144 POS_PRON:29
+      sofa: sofa id: _InitialView
+      begin: 39      end: 42      PosValue: "PRP$"
       coarseValue: "PRON"
+
    id: "s115_8"
 [his]
-SemArg
-   sofa: _InitialView
-   begin: 39
-   end: 42
+#0 SemArg:181
+   sofa: sofa id: _InitialView
+   begin: 39   end: 42
 [his]
-SemPred
-   sofa: _InitialView
-   begin: 39
-   end: 42
-   arguments: FSArray
+#1 SemPred:178
+   sofa: sofa id: _InitialView
+   begin: 39   end: 42   arguments: #2 FSArray:183
+      Array length: 2
+      Array elements: ["#3 SemArgLink:180
+   role: "Coreferent"
+   target:...", "#5 SemArgLink:182
+   role: "Current"
+   target: #6..."]
+
    category: "Coreference"
 [days]
-POS_NOUN
-   sofa: _InitialView
-   begin: 43
-   end: 47
-   PosValue: "NNS"
+#0 POS_NOUN:32
+   sofa: sofa id: _InitialView
+   begin: 43   end: 47   PosValue: "NNS"
    coarseValue: "NOUN"
 [days]
-Lemma
-   sofa: _InitialView
-   begin: 43
-   end: 47
-   value: "day"
+#0 Lemma:31
+   sofa: sofa id: _InitialView
+   begin: 43   end: 47   value: "day"
 [days]
-Token
-   sofa: _InitialView
-   begin: 43
-   end: 47
-   parent: Constituent
-      sofa: _InitialView
-      begin: 39
-      end: 47
-      constituentType: "NPB"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 33
-         end: 169
-         constituentType: "VP"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 169
-            constituentType: "S"
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 43
-      end: 47
-      value: "day"
-   pos: POS_NOUN
-      sofa: _InitialView
-      begin: 43
-      end: 47
-      PosValue: "NNS"
+#25 Token:30
+   sofa: sofa id: _InitialView
+   begin: 43   end: 47   parent: #24 Constituent:138
+      sofa: sofa id: _InitialView
+      begin: 39      end: 47      constituentType: "NPB"
+      parent: #2 Constituent:101
+         sofa: sofa id: _InitialView
+         begin: 33         end: 169         constituentType: "VP"
+         parent: #1 ROOT:100
+            sofa: sofa id: _InitialView
+            begin: 0            end: 169            constituentType: "S"
+            children: #26 FSArray:147
+               Array length: 3
+               Array elements: ["#27 Token:21
+   sofa: sofa id: _InitialView
+   beg...", "#2 ", "#3 Constituent:141
+   sofa: sofa id: _InitialView
+..."]
+
+
+         children: #51 FSArray:140
+            Array length: 3
+            Array elements: ["#52 Token:24
+   sofa: sofa id: _InitialView
+   beg...", "#6 Constituent:102
+   sofa: sofa id: _InitialView
+...", "#24 "]
+
+
+      children: #139 FSArray:139
+         Array length: 2
+         Array elements: ["#140 Token:27
+   sofa: sofa id: _InitialView
+   be...", "#25 "]
+
+
+   lemma: #143 Lemma:31
+      sofa: sofa id: _InitialView
+      begin: 43      end: 47      value: "day"
+
+   pos: #144 POS_NOUN:32
+      sofa: sofa id: _InitialView
+      begin: 43      end: 47      PosValue: "NNS"
       coarseValue: "NOUN"
+
    id: "s115_9"
 [days]
-SemArg
-   sofa: _InitialView
-   begin: 43
-   end: 47
+#0 SemArg:155
+   sofa: sofa id: _InitialView
+   begin: 43   end: 47
 [days]
-SemPred
-   sofa: _InitialView
-   begin: 43
-   end: 47
-   arguments: FSArray
+#1 SemPred:154
+   sofa: sofa id: _InitialView
+   begin: 43   end: 47   arguments: #2 FSArray:157
+      Array length: 1
+      Array elements: ["#3 SemArgLink:156
+   role: "Unit"
+   target: #4 Se..."]
+
    category: "Calendric_unit"
 [in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated .]
-Constituent
-   sofa: _InitialView
-   begin: 48
-   end: 169
-   constituentType: "PP"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 33
-      end: 169
-      constituentType: "VP"
-      parent: ROOT
-         sofa: _InitialView
-         begin: 0
-         end: 169
-         constituentType: "S"
-         children: FSArray
-      children: FSArray
-   children: FSArray
+#6 Constituent:102
+   sofa: sofa id: _InitialView
+   begin: 48   end: 169   constituentType: "PP"
+   parent: #2 Constituent:101
+      sofa: sofa id: _InitialView
+      begin: 33      end: 169      constituentType: "VP"
+      parent: #1 ROOT:100
+         sofa: sofa id: _InitialView
+         begin: 0         end: 169         constituentType: "S"
+         children: #25 FSArray:147
+            Array length: 3
+            Array elements: ["#26 Token:21
+   sofa: sofa id: _InitialView
+   beg...", "#2 ", "#3 Constituent:141
+   sofa: sofa id: _InitialView
+..."]
+
+
+      children: #50 FSArray:140
+         Array length: 3
+         Array elements: ["#51 Token:24
+   sofa: sofa id: _InitialView
+   beg...", "#6 ", "#7 Constituent:138
+   sofa: sofa id: _InitialView
+..."]
+
+
+   children: #61 FSArray:137
+      Array length: 3
+      Array elements: ["#8 Constituent:103
+   sofa: sofa id: _InitialView
+...", "#87 Token:54
+   sofa: sofa id: _InitialView
+   beg...", "#12 Constituent:111
+   sofa: sofa id: _InitialView..."]
+
 [in long and often solitary walks ,]
-Constituent
-   sofa: _InitialView
-   begin: 48
-   end: 82
-   constituentType: "PP"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 48
-      end: 169
-      constituentType: "PP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 33
-         end: 169
-         constituentType: "VP"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 169
-            constituentType: "S"
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   children: FSArray
+#8 Constituent:103
+   sofa: sofa id: _InitialView
+   begin: 48   end: 82   constituentType: "PP"
+   parent: #6 Constituent:102
+      sofa: sofa id: _InitialView
+      begin: 48      end: 169      constituentType: "PP"
+      parent: #2 Constituent:101
+         sofa: sofa id: _InitialView
+         begin: 33         end: 169         constituentType: "VP"
+         parent: #1 ROOT:100
+            sofa: sofa id: _InitialView
+            begin: 0            end: 169            constituentType: "S"
+            children: #25 FSArray:147
+               Array length: 3
+               Array elements: ["#26 Token:21
+   sofa: sofa id: _InitialView
+   beg...", "#2 ", "#3 Constituent:141
+   sofa: sofa id: _InitialView
+..."]
+
+
+         children: #50 FSArray:140
+            Array length: 3
+            Array elements: ["#51 Token:24
+   sofa: sofa id: _InitialView
+   beg...", "#6 ", "#7 Constituent:138
+   sofa: sofa id: _InitialView
+..."]
+
+
+      children: #61 FSArray:137
+         Array length: 3
+         Array elements: ["#8 ", "#62 Token:54
+   sofa: sofa id: _InitialView
+   beg...", "#9 Constituent:111
+   sofa: sofa id: _InitialView
+..."]
+
+
+   children: #120 FSArray:110
+      Array length: 2
+      Array elements: ["#121 Token:33
+   sofa: sofa id: _InitialView
+   be...", "#22 Constituent:104
+   sofa: sofa id: _InitialView..."]
+
 [in]
-POS_ADP
-   sofa: _InitialView
-   begin: 48
-   end: 50
-   PosValue: "IN"
+#0 POS_ADP:35
+   sofa: sofa id: _InitialView
+   begin: 48   end: 50   PosValue: "IN"
    coarseValue: "ADP"
 [in]
-Lemma
-   sofa: _InitialView
-   begin: 48
-   end: 50
-   value: "in"
+#0 Lemma:34
+   sofa: sofa id: _InitialView
+   begin: 48   end: 50   value: "in"
 [in]
-Token
-   sofa: _InitialView
-   begin: 48
-   end: 50
-   parent: Constituent
-      sofa: _InitialView
-      begin: 48
-      end: 82
-      constituentType: "PP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 48
-         end: 169
-         constituentType: "PP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 33
-            end: 169
-            constituentType: "VP"
-            parent: ROOT
-               sofa: _InitialView
-               begin: 0
-               end: 169
-               constituentType: "S"
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 48
-      end: 50
-      value: "in"
-   pos: POS_ADP
-      sofa: _InitialView
-      begin: 48
-      end: 50
-      PosValue: "IN"
+#22 Token:33
+   sofa: sofa id: _InitialView
+   begin: 48   end: 50   parent: #8 Constituent:103
+      sofa: sofa id: _InitialView
+      begin: 48      end: 82      constituentType: "PP"
+      parent: #6 Constituent:102
+         sofa: sofa id: _InitialView
+         begin: 48         end: 169         constituentType: "PP"
+         parent: #2 Constituent:101
+            sofa: sofa id: _InitialView
+            begin: 33            end: 169            constituentType: "VP"
+            parent: #1 ROOT:100
+               sofa: sofa id: _InitialView
+               begin: 0               end: 169               constituentType: "S"
+               children: #26 FSArray:147
+                  Array length: 3
+                  Array elements: ["#27 Token:21
+   sofa: sofa id: _InitialView
+   beg...", "#2 ", "#3 Constituent:141
+   sofa: sofa id: _InitialView
+..."]
+
+
+            children: #51 FSArray:140
+               Array length: 3
+               Array elements: ["#52 Token:24
+   sofa: sofa id: _InitialView
+   beg...", "#6 ", "#7 Constituent:138
+   sofa: sofa id: _InitialView
+..."]
+
+
+         children: #62 FSArray:137
+            Array length: 3
+            Array elements: ["#8 ", "#63 Token:54
+   sofa: sofa id: _InitialView
+   beg...", "#9 Constituent:111
+   sofa: sofa id: _InitialView
+..."]
+
+
+      children: #121 FSArray:110
+         Array length: 2
+         Array elements: ["#22 ", "#23 Constituent:104
+   sofa: sofa id: _InitialView..."]
+
+
+   lemma: #143 Lemma:34
+      sofa: sofa id: _InitialView
+      begin: 48      end: 50      value: "in"
+
+   pos: #144 POS_ADP:35
+      sofa: sofa id: _InitialView
+      begin: 48      end: 50      PosValue: "IN"
       coarseValue: "ADP"
+
    id: "s115_10"
 [long and often solitary walks ,]
-Constituent
-   sofa: _InitialView
-   begin: 51
-   end: 82
-   constituentType: "NPB"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 48
-      end: 82
-      constituentType: "PP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 48
-         end: 169
-         constituentType: "PP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 33
-            end: 169
-            constituentType: "VP"
-            parent: ROOT
-               sofa: _InitialView
-               begin: 0
-               end: 169
-               constituentType: "S"
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   children: FSArray
+#22 Constituent:104
+   sofa: sofa id: _InitialView
+   begin: 51   end: 82   constituentType: "NPB"
+   parent: #8 Constituent:103
+      sofa: sofa id: _InitialView
+      begin: 48      end: 82      constituentType: "PP"
+      parent: #6 Constituent:102
+         sofa: sofa id: _InitialView
+         begin: 48         end: 169         constituentType: "PP"
+         parent: #2 Constituent:101
+            sofa: sofa id: _InitialView
+            begin: 33            end: 169            constituentType: "VP"
+            parent: #1 ROOT:100
+               sofa: sofa id: _InitialView
+               begin: 0               end: 169               constituentType: "S"
+               children: #25 FSArray:147
+                  Array length: 3
+                  Array elements: ["#26 Token:21
+   sofa: sofa id: _InitialView
+   beg...", "#2 ", "#3 Constituent:141
+   sofa: sofa id: _InitialView
+..."]
+
+
+            children: #50 FSArray:140
+               Array length: 3
+               Array elements: ["#51 Token:24
+   sofa: sofa id: _InitialView
+   beg...", "#6 ", "#7 Constituent:138
+   sofa: sofa id: _InitialView
+..."]
+
+
+         children: #61 FSArray:137
+            Array length: 3
+            Array elements: ["#8 ", "#62 Token:54
+   sofa: sofa id: _InitialView
+   beg...", "#9 Constituent:111
+   sofa: sofa id: _InitialView
+..."]
+
+
+      children: #120 FSArray:110
+         Array length: 2
+         Array elements: ["#121 Token:33
+   sofa: sofa id: _InitialView
+   be...", "#22 "]
+
+
+   children: #124 FSArray:109
+      Array length: 3
+      Array elements: ["#23 Constituent:105
+   sofa: sofa id: _InitialView...", "#139 Token:48
+   sofa: sofa id: _InitialView
+   be...", "#142 Token:51
+   sofa: sofa id: _InitialView
+   be..."]
+
 [long and often solitary]
-Constituent
-   sofa: _InitialView
-   begin: 51
-   end: 74
-   constituentType: "ADJP"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 51
-      end: 82
-      constituentType: "NPB"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 48
-         end: 82
-         constituentType: "PP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 48
-            end: 169
-            constituentType: "PP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 33
-               end: 169
-               constituentType: "VP"
-               parent: ROOT
-                  sofa: _InitialView
-                  begin: 0
-                  end: 169
-                  constituentType: "S"
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   children: FSArray
+#23 Constituent:105
+   sofa: sofa id: _InitialView
+   begin: 51   end: 74   constituentType: "ADJP"
+   parent: #22 Constituent:104
+      sofa: sofa id: _InitialView
+      begin: 51      end: 82      constituentType: "NPB"
+      parent: #8 Constituent:103
+         sofa: sofa id: _InitialView
+         begin: 48         end: 82         constituentType: "PP"
+         parent: #6 Constituent:102
+            sofa: sofa id: _InitialView
+            begin: 48            end: 169            constituentType: "PP"
+            parent: #2 Constituent:101
+               sofa: sofa id: _InitialView
+               begin: 33               end: 169               constituentType: "VP"
+               parent: #1 ROOT:100
+                  sofa: sofa id: _InitialView
+                  begin: 0                  end: 169                  constituentType: "S"
+                  children:  ... past indent 20 ... 
+
+               children: #25 FSArray:140
+                  Array length: 3
+                  Array elements: ["#26 Token:24
+   sofa: sofa id: _InitialView
+   beg...", "#6 ", "#7 Constituent:138
+   sofa: sofa id: _InitialView
+..."]
+
+
+            children: #36 FSArray:137
+               Array length: 3
+               Array elements: ["#8 ", "#37 Token:54
+   sofa: sofa id: _InitialView
+   beg...", "#9 Constituent:111
+   sofa: sofa id: _InitialView
+..."]
+
+
+         children: #95 FSArray:110
+            Array length: 2
+            Array elements: ["#96 Token:33
+   sofa: sofa id: _InitialView
+   beg...", "#22 "]
+
+
+      children: #99 FSArray:109
+         Array length: 3
+         Array elements: ["#23 ", "#100 Token:48
+   sofa: sofa id: _InitialView
+   be...", "#103 Token:51
+   sofa: sofa id: _InitialView
+   be..."]
+
+
+   children: #106 FSArray:108
+      Array length: 3
+      Array elements: ["#107 Token:36
+   sofa: sofa id: _InitialView
+   be...", "#110 Token:39
+   sofa: sofa id: _InitialView
+   be...", "#24 Constituent:106
+   sofa: sofa id: _InitialView..."]
+
 [long]
-POS_ADJ
-   sofa: _InitialView
-   begin: 51
-   end: 55
-   PosValue: "JJ"
+#0 POS_ADJ:38
+   sofa: sofa id: _InitialView
+   begin: 51   end: 55   PosValue: "JJ"
    coarseValue: "ADJ"
 [long]
-Lemma
-   sofa: _InitialView
-   begin: 51
-   end: 55
-   value: "long"
+#0 Lemma:37
+   sofa: sofa id: _InitialView
+   begin: 51   end: 55   value: "long"
 [long]
-Token
-   sofa: _InitialView
-   begin: 51
-   end: 55
-   parent: Constituent
-      sofa: _InitialView
-      begin: 51
-      end: 74
-      constituentType: "ADJP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 51
-         end: 82
-         constituentType: "NPB"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 48
-            end: 82
-            constituentType: "PP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 48
-               end: 169
-               constituentType: "PP"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 33
-                  end: 169
-                  constituentType: "VP"
-                  parent: ROOT
-                     sofa: _InitialView
-                     begin: 0
-                     end: 169
-                     constituentType: "S"
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 51
-      end: 55
-      value: "long"
-   pos: POS_ADJ
-      sofa: _InitialView
-      begin: 51
-      end: 55
-      PosValue: "JJ"
+#24 Token:36
+   sofa: sofa id: _InitialView
+   begin: 51   end: 55   parent: #23 Constituent:105
+      sofa: sofa id: _InitialView
+      begin: 51      end: 74      constituentType: "ADJP"
+      parent: #22 Constituent:104
+         sofa: sofa id: _InitialView
+         begin: 51         end: 82         constituentType: "NPB"
+         parent: #8 Constituent:103
+            sofa: sofa id: _InitialView
+            begin: 48            end: 82            constituentType: "PP"
+            parent: #6 Constituent:102
+               sofa: sofa id: _InitialView
+               begin: 48               end: 169               constituentType: "PP"
+               parent: #2 Constituent:101
+                  sofa: sofa id: _InitialView
+                  begin: 33                  end: 169                  constituentType: "VP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #26 FSArray:137
+                  Array length: 3
+                  Array elements: ["#8 ", "#27 Token:54
+   sofa: sofa id: _InitialView
+   beg...", "#9 Constituent:111
+   sofa: sofa id: _InitialView
+..."]
+
+
+            children: #85 FSArray:110
+               Array length: 2
+               Array elements: ["#86 Token:33
+   sofa: sofa id: _InitialView
+   beg...", "#22 "]
+
+
+         children: #89 FSArray:109
+            Array length: 3
+            Array elements: ["#23 ", "#90 Token:48
+   sofa: sofa id: _InitialView
+   beg...", "#93 Token:51
+   sofa: sofa id: _InitialView
+   beg..."]
+
+
+      children: #96 FSArray:108
+         Array length: 3
+         Array elements: ["#24 ", "#97 Token:39
+   sofa: sofa id: _InitialView
+   beg...", "#25 Constituent:106
+   sofa: sofa id: _InitialView..."]
+
+
+   lemma: #107 Lemma:37
+      sofa: sofa id: _InitialView
+      begin: 51      end: 55      value: "long"
+
+   pos: #108 POS_ADJ:38
+      sofa: sofa id: _InitialView
+      begin: 51      end: 55      PosValue: "JJ"
       coarseValue: "ADJ"
+
    id: "s115_11"
 [long]
-SemPred
-   sofa: _InitialView
-   begin: 51
-   end: 55
-   arguments: FSArray
+#1 SemPred:174
+   sofa: sofa id: _InitialView
+   begin: 51   end: 55   arguments: #2 FSArray:177
+      Array length: 1
+      Array elements: ["#3 SemArgLink:176
+   role: "Eventuality"
+   target..."]
+
    category: "Duration"
 [and]
-POS_CONJ
-   sofa: _InitialView
-   begin: 56
-   end: 59
-   PosValue: "CC"
+#0 POS_CONJ:41
+   sofa: sofa id: _InitialView
+   begin: 56   end: 59   PosValue: "CC"
    coarseValue: "CONJ"
 [and]
-Lemma
-   sofa: _InitialView
-   begin: 56
-   end: 59
-   value: "and"
+#0 Lemma:40
+   sofa: sofa id: _InitialView
+   begin: 56   end: 59   value: "and"
 [and]
-Token
-   sofa: _InitialView
-   begin: 56
-   end: 59
-   parent: Constituent
-      sofa: _InitialView
-      begin: 51
-      end: 74
-      constituentType: "ADJP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 51
-         end: 82
-         constituentType: "NPB"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 48
-            end: 82
-            constituentType: "PP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 48
-               end: 169
-               constituentType: "PP"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 33
-                  end: 169
-                  constituentType: "VP"
-                  parent: ROOT
-                     sofa: _InitialView
-                     begin: 0
-                     end: 169
-                     constituentType: "S"
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 56
-      end: 59
-      value: "and"
-   pos: POS_CONJ
-      sofa: _InitialView
-      begin: 56
-      end: 59
-      PosValue: "CC"
+#24 Token:39
+   sofa: sofa id: _InitialView
+   begin: 56   end: 59   parent: #23 Constituent:105
+      sofa: sofa id: _InitialView
+      begin: 51      end: 74      constituentType: "ADJP"
+      parent: #22 Constituent:104
+         sofa: sofa id: _InitialView
+         begin: 51         end: 82         constituentType: "NPB"
+         parent: #8 Constituent:103
+            sofa: sofa id: _InitialView
+            begin: 48            end: 82            constituentType: "PP"
+            parent: #6 Constituent:102
+               sofa: sofa id: _InitialView
+               begin: 48               end: 169               constituentType: "PP"
+               parent: #2 Constituent:101
+                  sofa: sofa id: _InitialView
+                  begin: 33                  end: 169                  constituentType: "VP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #26 FSArray:137
+                  Array length: 3
+                  Array elements: ["#8 ", "#27 Token:54
+   sofa: sofa id: _InitialView
+   beg...", "#9 Constituent:111
+   sofa: sofa id: _InitialView
+..."]
+
+
+            children: #85 FSArray:110
+               Array length: 2
+               Array elements: ["#86 Token:33
+   sofa: sofa id: _InitialView
+   beg...", "#22 "]
+
+
+         children: #89 FSArray:109
+            Array length: 3
+            Array elements: ["#23 ", "#90 Token:48
+   sofa: sofa id: _InitialView
+   beg...", "#93 Token:51
+   sofa: sofa id: _InitialView
+   beg..."]
+
+
+      children: #96 FSArray:108
+         Array length: 3
+         Array elements: ["#97 Token:36
+   sofa: sofa id: _InitialView
+   beg...", "#24 ", "#25 Constituent:106
+   sofa: sofa id: _InitialView..."]
+
+
+   lemma: #107 Lemma:40
+      sofa: sofa id: _InitialView
+      begin: 56      end: 59      value: "and"
+
+   pos: #108 POS_CONJ:41
+      sofa: sofa id: _InitialView
+      begin: 56      end: 59      PosValue: "CC"
       coarseValue: "CONJ"
+
    id: "s115_12"
 [often solitary]
-SemArg
-   sofa: _InitialView
-   begin: 60
-   end: 74
+#0 SemArg:171
+   sofa: sofa id: _InitialView
+   begin: 60   end: 74
 [often solitary]
-Constituent
-   sofa: _InitialView
-   begin: 60
-   end: 74
-   constituentType: "ADJP"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 51
-      end: 74
-      constituentType: "ADJP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 51
-         end: 82
-         constituentType: "NPB"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 48
-            end: 82
-            constituentType: "PP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 48
-               end: 169
-               constituentType: "PP"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 33
-                  end: 169
-                  constituentType: "VP"
-                  parent: ROOT
-                     sofa: _InitialView
-                     begin: 0
-                     end: 169
-                     constituentType: "S"
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   children: FSArray
+#24 Constituent:106
+   sofa: sofa id: _InitialView
+   begin: 60   end: 74   constituentType: "ADJP"
+   parent: #23 Constituent:105
+      sofa: sofa id: _InitialView
+      begin: 51      end: 74      constituentType: "ADJP"
+      parent: #22 Constituent:104
+         sofa: sofa id: _InitialView
+         begin: 51         end: 82         constituentType: "NPB"
+         parent: #8 Constituent:103
+            sofa: sofa id: _InitialView
+            begin: 48            end: 82            constituentType: "PP"
+            parent: #6 Constituent:102
+               sofa: sofa id: _InitialView
+               begin: 48               end: 169               constituentType: "PP"
+               parent: #2 Constituent:101
+                  sofa: sofa id: _InitialView
+                  begin: 33                  end: 169                  constituentType: "VP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #25 FSArray:137
+                  Array length: 3
+                  Array elements: ["#8 ", "#26 Token:54
+   sofa: sofa id: _InitialView
+   beg...", "#9 Constituent:111
+   sofa: sofa id: _InitialView
+..."]
+
+
+            children: #84 FSArray:110
+               Array length: 2
+               Array elements: ["#85 Token:33
+   sofa: sofa id: _InitialView
+   beg...", "#22 "]
+
+
+         children: #88 FSArray:109
+            Array length: 3
+            Array elements: ["#23 ", "#89 Token:48
+   sofa: sofa id: _InitialView
+   beg...", "#92 Token:51
+   sofa: sofa id: _InitialView
+   beg..."]
+
+
+      children: #95 FSArray:108
+         Array length: 3
+         Array elements: ["#96 Token:36
+   sofa: sofa id: _InitialView
+   beg...", "#99 Token:39
+   sofa: sofa id: _InitialView
+   beg...", "#24 "]
+
+
+   children: #102 FSArray:107
+      Array length: 2
+      Array elements: ["#103 Token:42
+   sofa: sofa id: _InitialView
+   be...", "#106 Token:45
+   sofa: sofa id: _InitialView
+   be..."]
+
 [often]
-POS_ADV
-   sofa: _InitialView
-   begin: 60
-   end: 65
-   PosValue: "RB"
+#0 POS_ADV:44
+   sofa: sofa id: _InitialView
+   begin: 60   end: 65   PosValue: "RB"
    coarseValue: "ADV"
 [often]
-Lemma
-   sofa: _InitialView
-   begin: 60
-   end: 65
-   value: "often"
+#0 Lemma:43
+   sofa: sofa id: _InitialView
+   begin: 60   end: 65   value: "often"
 [often]
-Token
-   sofa: _InitialView
-   begin: 60
-   end: 65
-   parent: Constituent
-      sofa: _InitialView
-      begin: 60
-      end: 74
-      constituentType: "ADJP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 51
-         end: 74
-         constituentType: "ADJP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 51
-            end: 82
-            constituentType: "NPB"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 48
-               end: 82
-               constituentType: "PP"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 48
-                  end: 169
-                  constituentType: "PP"
-                  parent: Constituent
-                     sofa: _InitialView
-                     begin: 33
-                     end: 169
-                     constituentType: "VP"
-                     parent: ROOT
-                        sofa: _InitialView
-                        begin: 0
-                        end: 169
-                        constituentType: "S"
-                        children: FSArray
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 60
-      end: 65
-      value: "often"
-   pos: POS_ADV
-      sofa: _InitialView
-      begin: 60
-      end: 65
-      PosValue: "RB"
+#25 Token:42
+   sofa: sofa id: _InitialView
+   begin: 60   end: 65   parent: #24 Constituent:106
+      sofa: sofa id: _InitialView
+      begin: 60      end: 74      constituentType: "ADJP"
+      parent: #23 Constituent:105
+         sofa: sofa id: _InitialView
+         begin: 51         end: 74         constituentType: "ADJP"
+         parent: #22 Constituent:104
+            sofa: sofa id: _InitialView
+            begin: 51            end: 82            constituentType: "NPB"
+            parent: #8 Constituent:103
+               sofa: sofa id: _InitialView
+               begin: 48               end: 82               constituentType: "PP"
+               parent: #6 Constituent:102
+                  sofa: sofa id: _InitialView
+                  begin: 48                  end: 169                  constituentType: "PP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #26 FSArray:110
+                  Array length: 2
+                  Array elements: ["#27 Token:33
+   sofa: sofa id: _InitialView
+   beg...", "#22 "]
+
+
+            children: #30 FSArray:109
+               Array length: 3
+               Array elements: ["#23 ", "#31 Token:48
+   sofa: sofa id: _InitialView
+   beg...", "#34 Token:51
+   sofa: sofa id: _InitialView
+   beg..."]
+
+
+         children: #37 FSArray:108
+            Array length: 3
+            Array elements: ["#38 Token:36
+   sofa: sofa id: _InitialView
+   beg...", "#41 Token:39
+   sofa: sofa id: _InitialView
+   beg...", "#24 "]
+
+
+      children: #44 FSArray:107
+         Array length: 2
+         Array elements: ["#25 ", "#45 Token:45
+   sofa: sofa id: _InitialView
+   beg..."]
+
+
+   lemma: #48 Lemma:43
+      sofa: sofa id: _InitialView
+      begin: 60      end: 65      value: "often"
+
+   pos: #49 POS_ADV:44
+      sofa: sofa id: _InitialView
+      begin: 60      end: 65      PosValue: "RB"
       coarseValue: "ADV"
+
    id: "s115_13"
 [solitary]
-POS_ADJ
-   sofa: _InitialView
-   begin: 66
-   end: 74
-   PosValue: "JJ"
+#0 POS_ADJ:47
+   sofa: sofa id: _InitialView
+   begin: 66   end: 74   PosValue: "JJ"
    coarseValue: "ADJ"
 [solitary]
-Lemma
-   sofa: _InitialView
-   begin: 66
-   end: 74
-   value: "solitary"
+#0 Lemma:46
+   sofa: sofa id: _InitialView
+   begin: 66   end: 74   value: "solitary"
 [solitary]
-Token
-   sofa: _InitialView
-   begin: 66
-   end: 74
-   parent: Constituent
-      sofa: _InitialView
-      begin: 60
-      end: 74
-      constituentType: "ADJP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 51
-         end: 74
-         constituentType: "ADJP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 51
-            end: 82
-            constituentType: "NPB"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 48
-               end: 82
-               constituentType: "PP"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 48
-                  end: 169
-                  constituentType: "PP"
-                  parent: Constituent
-                     sofa: _InitialView
-                     begin: 33
-                     end: 169
-                     constituentType: "VP"
-                     parent: ROOT
-                        sofa: _InitialView
-                        begin: 0
-                        end: 169
-                        constituentType: "S"
-                        children: FSArray
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 66
-      end: 74
-      value: "solitary"
-   pos: POS_ADJ
-      sofa: _InitialView
-      begin: 66
-      end: 74
-      PosValue: "JJ"
+#25 Token:45
+   sofa: sofa id: _InitialView
+   begin: 66   end: 74   parent: #24 Constituent:106
+      sofa: sofa id: _InitialView
+      begin: 60      end: 74      constituentType: "ADJP"
+      parent: #23 Constituent:105
+         sofa: sofa id: _InitialView
+         begin: 51         end: 74         constituentType: "ADJP"
+         parent: #22 Constituent:104
+            sofa: sofa id: _InitialView
+            begin: 51            end: 82            constituentType: "NPB"
+            parent: #8 Constituent:103
+               sofa: sofa id: _InitialView
+               begin: 48               end: 82               constituentType: "PP"
+               parent: #6 Constituent:102
+                  sofa: sofa id: _InitialView
+                  begin: 48                  end: 169                  constituentType: "PP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #26 FSArray:110
+                  Array length: 2
+                  Array elements: ["#27 Token:33
+   sofa: sofa id: _InitialView
+   beg...", "#22 "]
+
+
+            children: #30 FSArray:109
+               Array length: 3
+               Array elements: ["#23 ", "#31 Token:48
+   sofa: sofa id: _InitialView
+   beg...", "#34 Token:51
+   sofa: sofa id: _InitialView
+   beg..."]
+
+
+         children: #37 FSArray:108
+            Array length: 3
+            Array elements: ["#38 Token:36
+   sofa: sofa id: _InitialView
+   beg...", "#41 Token:39
+   sofa: sofa id: _InitialView
+   beg...", "#24 "]
+
+
+      children: #44 FSArray:107
+         Array length: 2
+         Array elements: ["#45 Token:42
+   sofa: sofa id: _InitialView
+   beg...", "#25 "]
+
+
+   lemma: #48 Lemma:46
+      sofa: sofa id: _InitialView
+      begin: 66      end: 74      value: "solitary"
+
+   pos: #49 POS_ADJ:47
+      sofa: sofa id: _InitialView
+      begin: 66      end: 74      PosValue: "JJ"
       coarseValue: "ADJ"
+
    id: "s115_14"
 [walks]
-POS_VERB
-   sofa: _InitialView
-   begin: 75
-   end: 80
-   PosValue: "VBZ"
+#0 POS_VERB:50
+   sofa: sofa id: _InitialView
+   begin: 75   end: 80   PosValue: "VBZ"
    coarseValue: "VERB"
 [walks]
-Lemma
-   sofa: _InitialView
-   begin: 75
-   end: 80
-   value: "walk"
+#0 Lemma:49
+   sofa: sofa id: _InitialView
+   begin: 75   end: 80   value: "walk"
 [walks]
-Token
-   sofa: _InitialView
-   begin: 75
-   end: 80
-   parent: Constituent
-      sofa: _InitialView
-      begin: 51
-      end: 82
-      constituentType: "NPB"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 48
-         end: 82
-         constituentType: "PP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 48
-            end: 169
-            constituentType: "PP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 33
-               end: 169
-               constituentType: "VP"
-               parent: ROOT
-                  sofa: _InitialView
-                  begin: 0
-                  end: 169
-                  constituentType: "S"
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 75
-      end: 80
-      value: "walk"
-   pos: POS_VERB
-      sofa: _InitialView
-      begin: 75
-      end: 80
-      PosValue: "VBZ"
+#25 Token:48
+   sofa: sofa id: _InitialView
+   begin: 75   end: 80   parent: #22 Constituent:104
+      sofa: sofa id: _InitialView
+      begin: 51      end: 82      constituentType: "NPB"
+      parent: #8 Constituent:103
+         sofa: sofa id: _InitialView
+         begin: 48         end: 82         constituentType: "PP"
+         parent: #6 Constituent:102
+            sofa: sofa id: _InitialView
+            begin: 48            end: 169            constituentType: "PP"
+            parent: #2 Constituent:101
+               sofa: sofa id: _InitialView
+               begin: 33               end: 169               constituentType: "VP"
+               parent: #1 ROOT:100
+                  sofa: sofa id: _InitialView
+                  begin: 0                  end: 169                  constituentType: "S"
+                  children:  ... past indent 20 ... 
+
+               children: #26 FSArray:140
+                  Array length: 3
+                  Array elements: ["#27 Token:24
+   sofa: sofa id: _InitialView
+   beg...", "#6 ", "#7 Constituent:138
+   sofa: sofa id: _InitialView
+..."]
+
+
+            children: #37 FSArray:137
+               Array length: 3
+               Array elements: ["#8 ", "#38 Token:54
+   sofa: sofa id: _InitialView
+   beg...", "#9 Constituent:111
+   sofa: sofa id: _InitialView
+..."]
+
+
+         children: #96 FSArray:110
+            Array length: 2
+            Array elements: ["#97 Token:33
+   sofa: sofa id: _InitialView
+   beg...", "#22 "]
+
+
+      children: #100 FSArray:109
+         Array length: 3
+         Array elements: ["#23 Constituent:105
+   sofa: sofa id: _InitialView...", "#25 ", "#115 Token:51
+   sofa: sofa id: _InitialView
+   be..."]
+
+
+   lemma: #118 Lemma:49
+      sofa: sofa id: _InitialView
+      begin: 75      end: 80      value: "walk"
+
+   pos: #119 POS_VERB:50
+      sofa: sofa id: _InitialView
+      begin: 75      end: 80      PosValue: "VBZ"
       coarseValue: "VERB"
+
    id: "s115_15"
 [walks]
-SemArg
-   sofa: _InitialView
-   begin: 75
-   end: 80
+#0 SemArg:175
+   sofa: sofa id: _InitialView
+   begin: 75   end: 80
 [walks]
-SemPred
-   sofa: _InitialView
-   begin: 75
-   end: 80
-   arguments: FSArray
+#1 SemPred:168
+   sofa: sofa id: _InitialView
+   begin: 75   end: 80   arguments: #2 FSArray:173
+      Array length: 2
+      Array elements: ["#3 SemArgLink:170
+   role: "Self_mover"
+   target:...", "#5 SemArgLink:172
+   role: "Depictive"
+   target: ..."]
+
    category: "Self_motion"
 [,]
-POS
-   sofa: _InitialView
-   begin: 81
-   end: 82
-   PosValue: "PUNC,"
+#0 POS:53
+   sofa: sofa id: _InitialView
+   begin: 81   end: 82   PosValue: "PUNC,"
 [,]
-Lemma
-   sofa: _InitialView
-   begin: 81
-   end: 82
-   value: ","
+#0 Lemma:52
+   sofa: sofa id: _InitialView
+   begin: 81   end: 82   value: ","
 [,]
-Token
-   sofa: _InitialView
-   begin: 81
-   end: 82
-   parent: Constituent
-      sofa: _InitialView
-      begin: 51
-      end: 82
-      constituentType: "NPB"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 48
-         end: 82
-         constituentType: "PP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 48
-            end: 169
-            constituentType: "PP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 33
-               end: 169
-               constituentType: "VP"
-               parent: ROOT
-                  sofa: _InitialView
-                  begin: 0
-                  end: 169
-                  constituentType: "S"
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 81
-      end: 82
-      value: ","
-   pos: POS
-      sofa: _InitialView
-      begin: 81
-      end: 82
-      PosValue: "PUNC,"
+#25 Token:51
+   sofa: sofa id: _InitialView
+   begin: 81   end: 82   parent: #22 Constituent:104
+      sofa: sofa id: _InitialView
+      begin: 51      end: 82      constituentType: "NPB"
+      parent: #8 Constituent:103
+         sofa: sofa id: _InitialView
+         begin: 48         end: 82         constituentType: "PP"
+         parent: #6 Constituent:102
+            sofa: sofa id: _InitialView
+            begin: 48            end: 169            constituentType: "PP"
+            parent: #2 Constituent:101
+               sofa: sofa id: _InitialView
+               begin: 33               end: 169               constituentType: "VP"
+               parent: #1 ROOT:100
+                  sofa: sofa id: _InitialView
+                  begin: 0                  end: 169                  constituentType: "S"
+                  children:  ... past indent 20 ... 
+
+               children: #26 FSArray:140
+                  Array length: 3
+                  Array elements: ["#27 Token:24
+   sofa: sofa id: _InitialView
+   beg...", "#6 ", "#7 Constituent:138
+   sofa: sofa id: _InitialView
+..."]
+
+
+            children: #37 FSArray:137
+               Array length: 3
+               Array elements: ["#8 ", "#38 Token:54
+   sofa: sofa id: _InitialView
+   beg...", "#9 Constituent:111
+   sofa: sofa id: _InitialView
+..."]
+
+
+         children: #96 FSArray:110
+            Array length: 2
+            Array elements: ["#97 Token:33
+   sofa: sofa id: _InitialView
+   beg...", "#22 "]
+
+
+      children: #100 FSArray:109
+         Array length: 3
+         Array elements: ["#23 Constituent:105
+   sofa: sofa id: _InitialView...", "#115 Token:48
+   sofa: sofa id: _InitialView
+   be...", "#25 "]
+
+
+   lemma: #118 Lemma:52
+      sofa: sofa id: _InitialView
+      begin: 81      end: 82      value: ","
+
+   pos: #119 POS:53
+      sofa: sofa id: _InitialView
+      begin: 81      end: 82      PosValue: "PUNC,"
+
    id: "s115_16"
 [or]
-POS_CONJ
-   sofa: _InitialView
-   begin: 83
-   end: 85
-   PosValue: "CC"
+#0 POS_CONJ:56
+   sofa: sofa id: _InitialView
+   begin: 83   end: 85   PosValue: "CC"
    coarseValue: "CONJ"
 [or]
-Lemma
-   sofa: _InitialView
-   begin: 83
-   end: 85
-   value: "or"
+#0 Lemma:55
+   sofa: sofa id: _InitialView
+   begin: 83   end: 85   value: "or"
 [or]
-Token
-   sofa: _InitialView
-   begin: 83
-   end: 85
-   parent: Constituent
-      sofa: _InitialView
-      begin: 48
-      end: 169
-      constituentType: "PP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 33
-         end: 169
-         constituentType: "VP"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 169
-            constituentType: "S"
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 83
-      end: 85
-      value: "or"
-   pos: POS_CONJ
-      sofa: _InitialView
-      begin: 83
-      end: 85
-      PosValue: "CC"
+#12 Token:54
+   sofa: sofa id: _InitialView
+   begin: 83   end: 85   parent: #6 Constituent:102
+      sofa: sofa id: _InitialView
+      begin: 48      end: 169      constituentType: "PP"
+      parent: #2 Constituent:101
+         sofa: sofa id: _InitialView
+         begin: 33         end: 169         constituentType: "VP"
+         parent: #1 ROOT:100
+            sofa: sofa id: _InitialView
+            begin: 0            end: 169            constituentType: "S"
+            children: #26 FSArray:147
+               Array length: 3
+               Array elements: ["#27 Token:21
+   sofa: sofa id: _InitialView
+   beg...", "#2 ", "#3 Constituent:141
+   sofa: sofa id: _InitialView
+..."]
+
+
+         children: #51 FSArray:140
+            Array length: 3
+            Array elements: ["#52 Token:24
+   sofa: sofa id: _InitialView
+   beg...", "#6 ", "#7 Constituent:138
+   sofa: sofa id: _InitialView
+..."]
+
+
+      children: #62 FSArray:137
+         Array length: 3
+         Array elements: ["#8 Constituent:103
+   sofa: sofa id: _InitialView
+...", "#12 ", "#13 Constituent:111
+   sofa: sofa id: _InitialView..."]
+
+
+   lemma: #143 Lemma:55
+      sofa: sofa id: _InitialView
+      begin: 83      end: 85      value: "or"
+
+   pos: #144 POS_CONJ:56
+      sofa: sofa id: _InitialView
+      begin: 83      end: 85      PosValue: "CC"
       coarseValue: "CONJ"
+
    id: "s115_17"
 [in chatting with a number of village gossips whose acquaintance he had cultivated .]
-Constituent
-   sofa: _InitialView
-   begin: 86
-   end: 169
-   constituentType: "PP"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 48
-      end: 169
-      constituentType: "PP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 33
-         end: 169
-         constituentType: "VP"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 169
-            constituentType: "S"
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   children: FSArray
+#12 Constituent:111
+   sofa: sofa id: _InitialView
+   begin: 86   end: 169   constituentType: "PP"
+   parent: #6 Constituent:102
+      sofa: sofa id: _InitialView
+      begin: 48      end: 169      constituentType: "PP"
+      parent: #2 Constituent:101
+         sofa: sofa id: _InitialView
+         begin: 33         end: 169         constituentType: "VP"
+         parent: #1 ROOT:100
+            sofa: sofa id: _InitialView
+            begin: 0            end: 169            constituentType: "S"
+            children: #25 FSArray:147
+               Array length: 3
+               Array elements: ["#26 Token:21
+   sofa: sofa id: _InitialView
+   beg...", "#2 ", "#3 Constituent:141
+   sofa: sofa id: _InitialView
+..."]
+
+
+         children: #50 FSArray:140
+            Array length: 3
+            Array elements: ["#51 Token:24
+   sofa: sofa id: _InitialView
+   beg...", "#6 ", "#7 Constituent:138
+   sofa: sofa id: _InitialView
+..."]
+
+
+      children: #61 FSArray:137
+         Array length: 3
+         Array elements: ["#8 Constituent:103
+   sofa: sofa id: _InitialView
+...", "#87 Token:54
+   sofa: sofa id: _InitialView
+   beg...", "#12 "]
+
+
+   children: #90 FSArray:136
+      Array length: 2
+      Array elements: ["#91 Token:57
+   sofa: sofa id: _InitialView
+   beg...", "#13 Constituent:112
+   sofa: sofa id: _InitialView..."]
+
 [in]
-POS_ADP
-   sofa: _InitialView
-   begin: 86
-   end: 88
-   PosValue: "IN"
+#0 POS_ADP:59
+   sofa: sofa id: _InitialView
+   begin: 86   end: 88   PosValue: "IN"
    coarseValue: "ADP"
 [in]
-Lemma
-   sofa: _InitialView
-   begin: 86
-   end: 88
-   value: "in"
+#0 Lemma:58
+   sofa: sofa id: _InitialView
+   begin: 86   end: 88   value: "in"
 [in]
-Token
-   sofa: _InitialView
-   begin: 86
-   end: 88
-   parent: Constituent
-      sofa: _InitialView
-      begin: 86
-      end: 169
-      constituentType: "PP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 48
-         end: 169
-         constituentType: "PP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 33
-            end: 169
-            constituentType: "VP"
-            parent: ROOT
-               sofa: _InitialView
-               begin: 0
-               end: 169
-               constituentType: "S"
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 86
-      end: 88
-      value: "in"
-   pos: POS_ADP
-      sofa: _InitialView
-      begin: 86
-      end: 88
-      PosValue: "IN"
+#13 Token:57
+   sofa: sofa id: _InitialView
+   begin: 86   end: 88   parent: #12 Constituent:111
+      sofa: sofa id: _InitialView
+      begin: 86      end: 169      constituentType: "PP"
+      parent: #6 Constituent:102
+         sofa: sofa id: _InitialView
+         begin: 48         end: 169         constituentType: "PP"
+         parent: #2 Constituent:101
+            sofa: sofa id: _InitialView
+            begin: 33            end: 169            constituentType: "VP"
+            parent: #1 ROOT:100
+               sofa: sofa id: _InitialView
+               begin: 0               end: 169               constituentType: "S"
+               children: #26 FSArray:147
+                  Array length: 3
+                  Array elements: ["#27 Token:21
+   sofa: sofa id: _InitialView
+   beg...", "#2 ", "#3 Constituent:141
+   sofa: sofa id: _InitialView
+..."]
+
+
+            children: #51 FSArray:140
+               Array length: 3
+               Array elements: ["#52 Token:24
+   sofa: sofa id: _InitialView
+   beg...", "#6 ", "#7 Constituent:138
+   sofa: sofa id: _InitialView
+..."]
+
+
+         children: #62 FSArray:137
+            Array length: 3
+            Array elements: ["#8 Constituent:103
+   sofa: sofa id: _InitialView
+...", "#88 Token:54
+   sofa: sofa id: _InitialView
+   beg...", "#12 "]
+
+
+      children: #91 FSArray:136
+         Array length: 2
+         Array elements: ["#13 ", "#14 Constituent:112
+   sofa: sofa id: _InitialView..."]
+
+
+   lemma: #143 Lemma:58
+      sofa: sofa id: _InitialView
+      begin: 86      end: 88      value: "in"
+
+   pos: #144 POS_ADP:59
+      sofa: sofa id: _InitialView
+      begin: 86      end: 88      PosValue: "IN"
       coarseValue: "ADP"
+
    id: "s115_18"
 [chatting with a number of village gossips whose acquaintance he had cultivated .]
-Constituent
-   sofa: _InitialView
-   begin: 89
-   end: 169
-   constituentType: "VP"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 86
-      end: 169
-      constituentType: "PP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 48
-         end: 169
-         constituentType: "PP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 33
-            end: 169
-            constituentType: "VP"
-            parent: ROOT
-               sofa: _InitialView
-               begin: 0
-               end: 169
-               constituentType: "S"
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   children: FSArray
+#13 Constituent:112
+   sofa: sofa id: _InitialView
+   begin: 89   end: 169   constituentType: "VP"
+   parent: #12 Constituent:111
+      sofa: sofa id: _InitialView
+      begin: 86      end: 169      constituentType: "PP"
+      parent: #6 Constituent:102
+         sofa: sofa id: _InitialView
+         begin: 48         end: 169         constituentType: "PP"
+         parent: #2 Constituent:101
+            sofa: sofa id: _InitialView
+            begin: 33            end: 169            constituentType: "VP"
+            parent: #1 ROOT:100
+               sofa: sofa id: _InitialView
+               begin: 0               end: 169               constituentType: "S"
+               children: #25 FSArray:147
+                  Array length: 3
+                  Array elements: ["#26 Token:21
+   sofa: sofa id: _InitialView
+   beg...", "#2 ", "#3 Constituent:141
+   sofa: sofa id: _InitialView
+..."]
+
+
+            children: #50 FSArray:140
+               Array length: 3
+               Array elements: ["#51 Token:24
+   sofa: sofa id: _InitialView
+   beg...", "#6 ", "#7 Constituent:138
+   sofa: sofa id: _InitialView
+..."]
+
+
+         children: #61 FSArray:137
+            Array length: 3
+            Array elements: ["#8 Constituent:103
+   sofa: sofa id: _InitialView
+...", "#87 Token:54
+   sofa: sofa id: _InitialView
+   beg...", "#12 "]
+
+
+      children: #90 FSArray:136
+         Array length: 2
+         Array elements: ["#91 Token:57
+   sofa: sofa id: _InitialView
+   beg...", "#13 "]
+
+
+   children: #94 FSArray:135
+      Array length: 2
+      Array elements: ["#95 Token:60
+   sofa: sofa id: _InitialView
+   beg...", "#14 Constituent:113
+   sofa: sofa id: _InitialView..."]
+
 [chatting]
-POS_VERB
-   sofa: _InitialView
-   begin: 89
-   end: 97
-   PosValue: "VBG"
+#0 POS_VERB:62
+   sofa: sofa id: _InitialView
+   begin: 89   end: 97   PosValue: "VBG"
    coarseValue: "VERB"
 [chatting]
-Lemma
-   sofa: _InitialView
-   begin: 89
-   end: 97
-   value: "chat"
+#0 Lemma:61
+   sofa: sofa id: _InitialView
+   begin: 89   end: 97   value: "chat"
 [chatting]
-Token
-   sofa: _InitialView
-   begin: 89
-   end: 97
-   parent: Constituent
-      sofa: _InitialView
-      begin: 89
-      end: 169
-      constituentType: "VP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 86
-         end: 169
-         constituentType: "PP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 48
-            end: 169
-            constituentType: "PP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 33
-               end: 169
-               constituentType: "VP"
-               parent: ROOT
-                  sofa: _InitialView
-                  begin: 0
-                  end: 169
-                  constituentType: "S"
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 89
-      end: 97
-      value: "chat"
-   pos: POS_VERB
-      sofa: _InitialView
-      begin: 89
-      end: 97
-      PosValue: "VBG"
+#14 Token:60
+   sofa: sofa id: _InitialView
+   begin: 89   end: 97   parent: #13 Constituent:112
+      sofa: sofa id: _InitialView
+      begin: 89      end: 169      constituentType: "VP"
+      parent: #12 Constituent:111
+         sofa: sofa id: _InitialView
+         begin: 86         end: 169         constituentType: "PP"
+         parent: #6 Constituent:102
+            sofa: sofa id: _InitialView
+            begin: 48            end: 169            constituentType: "PP"
+            parent: #2 Constituent:101
+               sofa: sofa id: _InitialView
+               begin: 33               end: 169               constituentType: "VP"
+               parent: #1 ROOT:100
+                  sofa: sofa id: _InitialView
+                  begin: 0                  end: 169                  constituentType: "S"
+                  children:  ... past indent 20 ... 
+
+               children: #26 FSArray:140
+                  Array length: 3
+                  Array elements: ["#27 Token:24
+   sofa: sofa id: _InitialView
+   beg...", "#6 ", "#7 Constituent:138
+   sofa: sofa id: _InitialView
+..."]
+
+
+            children: #37 FSArray:137
+               Array length: 3
+               Array elements: ["#8 Constituent:103
+   sofa: sofa id: _InitialView
+...", "#63 Token:54
+   sofa: sofa id: _InitialView
+   beg...", "#12 "]
+
+
+         children: #66 FSArray:136
+            Array length: 2
+            Array elements: ["#67 Token:57
+   sofa: sofa id: _InitialView
+   beg...", "#13 "]
+
+
+      children: #70 FSArray:135
+         Array length: 2
+         Array elements: ["#14 ", "#15 Constituent:113
+   sofa: sofa id: _InitialView..."]
+
+
+   lemma: #118 Lemma:61
+      sofa: sofa id: _InitialView
+      begin: 89      end: 97      value: "chat"
+
+   pos: #119 POS_VERB:62
+      sofa: sofa id: _InitialView
+      begin: 89      end: 97      PosValue: "VBG"
       coarseValue: "VERB"
+
    id: "s115_19"
 [chatting]
-SemPred
-   sofa: _InitialView
-   begin: 89
-   end: 97
-   arguments: FSArray
+#1 SemPred:148
+   sofa: sofa id: _InitialView
+   begin: 89   end: 97   arguments: #2 FSArray:153
+      Array length: 2
+      Array elements: ["#3 SemArgLink:150
+   role: "Interlocutor_1"
+   tar...", "#5 SemArgLink:152
+   role: "Interlocutor_2"
+   tar..."]
+
    category: "Chatting"
 [with a number of village gossips whose acquaintance he had cultivated .]
-SemArg
-   sofa: _InitialView
-   begin: 98
-   end: 169
+#0 SemArg:151
+   sofa: sofa id: _InitialView
+   begin: 98   end: 169
 [with a number of village gossips whose acquaintance he had cultivated .]
-Constituent
-   sofa: _InitialView
-   begin: 98
-   end: 169
-   constituentType: "PP"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 89
-      end: 169
-      constituentType: "VP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 86
-         end: 169
-         constituentType: "PP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 48
-            end: 169
-            constituentType: "PP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 33
-               end: 169
-               constituentType: "VP"
-               parent: ROOT
-                  sofa: _InitialView
-                  begin: 0
-                  end: 169
-                  constituentType: "S"
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   children: FSArray
+#14 Constituent:113
+   sofa: sofa id: _InitialView
+   begin: 98   end: 169   constituentType: "PP"
+   parent: #13 Constituent:112
+      sofa: sofa id: _InitialView
+      begin: 89      end: 169      constituentType: "VP"
+      parent: #12 Constituent:111
+         sofa: sofa id: _InitialView
+         begin: 86         end: 169         constituentType: "PP"
+         parent: #6 Constituent:102
+            sofa: sofa id: _InitialView
+            begin: 48            end: 169            constituentType: "PP"
+            parent: #2 Constituent:101
+               sofa: sofa id: _InitialView
+               begin: 33               end: 169               constituentType: "VP"
+               parent: #1 ROOT:100
+                  sofa: sofa id: _InitialView
+                  begin: 0                  end: 169                  constituentType: "S"
+                  children:  ... past indent 20 ... 
+
+               children: #25 FSArray:140
+                  Array length: 3
+                  Array elements: ["#26 Token:24
+   sofa: sofa id: _InitialView
+   beg...", "#6 ", "#7 Constituent:138
+   sofa: sofa id: _InitialView
+..."]
+
+
+            children: #36 FSArray:137
+               Array length: 3
+               Array elements: ["#8 Constituent:103
+   sofa: sofa id: _InitialView
+...", "#62 Token:54
+   sofa: sofa id: _InitialView
+   beg...", "#12 "]
+
+
+         children: #65 FSArray:136
+            Array length: 2
+            Array elements: ["#66 Token:57
+   sofa: sofa id: _InitialView
+   beg...", "#13 "]
+
+
+      children: #69 FSArray:135
+         Array length: 2
+         Array elements: ["#70 Token:60
+   sofa: sofa id: _InitialView
+   beg...", "#14 "]
+
+
+   children: #73 FSArray:134
+      Array length: 2
+      Array elements: ["#74 Token:63
+   sofa: sofa id: _InitialView
+   beg...", "#15 Constituent:114
+   sofa: sofa id: _InitialView..."]
+
 [with]
-POS_ADP
-   sofa: _InitialView
-   begin: 98
-   end: 102
-   PosValue: "IN"
+#0 POS_ADP:65
+   sofa: sofa id: _InitialView
+   begin: 98   end: 102   PosValue: "IN"
    coarseValue: "ADP"
 [with]
-Lemma
-   sofa: _InitialView
-   begin: 98
-   end: 102
-   value: "with"
+#0 Lemma:64
+   sofa: sofa id: _InitialView
+   begin: 98   end: 102   value: "with"
 [with]
-Token
-   sofa: _InitialView
-   begin: 98
-   end: 102
-   parent: Constituent
-      sofa: _InitialView
-      begin: 98
-      end: 169
-      constituentType: "PP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 89
-         end: 169
-         constituentType: "VP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 86
-            end: 169
-            constituentType: "PP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 48
-               end: 169
-               constituentType: "PP"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 33
-                  end: 169
-                  constituentType: "VP"
-                  parent: ROOT
-                     sofa: _InitialView
-                     begin: 0
-                     end: 169
-                     constituentType: "S"
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 98
-      end: 102
-      value: "with"
-   pos: POS_ADP
-      sofa: _InitialView
-      begin: 98
-      end: 102
-      PosValue: "IN"
+#15 Token:63
+   sofa: sofa id: _InitialView
+   begin: 98   end: 102   parent: #14 Constituent:113
+      sofa: sofa id: _InitialView
+      begin: 98      end: 169      constituentType: "PP"
+      parent: #13 Constituent:112
+         sofa: sofa id: _InitialView
+         begin: 89         end: 169         constituentType: "VP"
+         parent: #12 Constituent:111
+            sofa: sofa id: _InitialView
+            begin: 86            end: 169            constituentType: "PP"
+            parent: #6 Constituent:102
+               sofa: sofa id: _InitialView
+               begin: 48               end: 169               constituentType: "PP"
+               parent: #2 Constituent:101
+                  sofa: sofa id: _InitialView
+                  begin: 33                  end: 169                  constituentType: "VP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #26 FSArray:137
+                  Array length: 3
+                  Array elements: ["#8 Constituent:103
+   sofa: sofa id: _InitialView
+...", "#52 Token:54
+   sofa: sofa id: _InitialView
+   beg...", "#12 "]
+
+
+            children: #55 FSArray:136
+               Array length: 2
+               Array elements: ["#56 Token:57
+   sofa: sofa id: _InitialView
+   beg...", "#13 "]
+
+
+         children: #59 FSArray:135
+            Array length: 2
+            Array elements: ["#60 Token:60
+   sofa: sofa id: _InitialView
+   beg...", "#14 "]
+
+
+      children: #63 FSArray:134
+         Array length: 2
+         Array elements: ["#15 ", "#16 Constituent:114
+   sofa: sofa id: _InitialView..."]
+
+
+   lemma: #107 Lemma:64
+      sofa: sofa id: _InitialView
+      begin: 98      end: 102      value: "with"
+
+   pos: #108 POS_ADP:65
+      sofa: sofa id: _InitialView
+      begin: 98      end: 102      PosValue: "IN"
       coarseValue: "ADP"
+
    id: "s115_20"
 [a number of village gossips whose acquaintance he had cultivated .]
-Constituent
-   sofa: _InitialView
-   begin: 103
-   end: 169
-   constituentType: "NP"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 98
-      end: 169
-      constituentType: "PP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 89
-         end: 169
-         constituentType: "VP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 86
-            end: 169
-            constituentType: "PP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 48
-               end: 169
-               constituentType: "PP"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 33
-                  end: 169
-                  constituentType: "VP"
-                  parent: ROOT
-                     sofa: _InitialView
-                     begin: 0
-                     end: 169
-                     constituentType: "S"
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   children: FSArray
+#15 Constituent:114
+   sofa: sofa id: _InitialView
+   begin: 103   end: 169   constituentType: "NP"
+   parent: #14 Constituent:113
+      sofa: sofa id: _InitialView
+      begin: 98      end: 169      constituentType: "PP"
+      parent: #13 Constituent:112
+         sofa: sofa id: _InitialView
+         begin: 89         end: 169         constituentType: "VP"
+         parent: #12 Constituent:111
+            sofa: sofa id: _InitialView
+            begin: 86            end: 169            constituentType: "PP"
+            parent: #6 Constituent:102
+               sofa: sofa id: _InitialView
+               begin: 48               end: 169               constituentType: "PP"
+               parent: #2 Constituent:101
+                  sofa: sofa id: _InitialView
+                  begin: 33                  end: 169                  constituentType: "VP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #25 FSArray:137
+                  Array length: 3
+                  Array elements: ["#8 Constituent:103
+   sofa: sofa id: _InitialView
+...", "#51 Token:54
+   sofa: sofa id: _InitialView
+   beg...", "#12 "]
+
+
+            children: #54 FSArray:136
+               Array length: 2
+               Array elements: ["#55 Token:57
+   sofa: sofa id: _InitialView
+   beg...", "#13 "]
+
+
+         children: #58 FSArray:135
+            Array length: 2
+            Array elements: ["#59 Token:60
+   sofa: sofa id: _InitialView
+   beg...", "#14 "]
+
+
+      children: #62 FSArray:134
+         Array length: 2
+         Array elements: ["#63 Token:63
+   sofa: sofa id: _InitialView
+   beg...", "#15 "]
+
+
+   children: #66 FSArray:133
+      Array length: 2
+      Array elements: ["#16 Constituent:115
+   sofa: sofa id: _InitialView...", "#17 Constituent:117
+   sofa: sofa id: _InitialView..."]
+
 [a number]
-Constituent
-   sofa: _InitialView
-   begin: 103
-   end: 111
-   constituentType: "NPB"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 103
-      end: 169
-      constituentType: "NP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 98
-         end: 169
-         constituentType: "PP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 89
-            end: 169
-            constituentType: "VP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 86
-               end: 169
-               constituentType: "PP"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 48
-                  end: 169
-                  constituentType: "PP"
-                  parent: Constituent
-                     sofa: _InitialView
-                     begin: 33
-                     end: 169
-                     constituentType: "VP"
-                     parent: ROOT
-                        sofa: _InitialView
-                        begin: 0
-                        end: 169
-                        constituentType: "S"
-                        children: FSArray
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   children: FSArray
+#16 Constituent:115
+   sofa: sofa id: _InitialView
+   begin: 103   end: 111   constituentType: "NPB"
+   parent: #15 Constituent:114
+      sofa: sofa id: _InitialView
+      begin: 103      end: 169      constituentType: "NP"
+      parent: #14 Constituent:113
+         sofa: sofa id: _InitialView
+         begin: 98         end: 169         constituentType: "PP"
+         parent: #13 Constituent:112
+            sofa: sofa id: _InitialView
+            begin: 89            end: 169            constituentType: "VP"
+            parent: #12 Constituent:111
+               sofa: sofa id: _InitialView
+               begin: 86               end: 169               constituentType: "PP"
+               parent: #6 Constituent:102
+                  sofa: sofa id: _InitialView
+                  begin: 48                  end: 169                  constituentType: "PP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #25 FSArray:136
+                  Array length: 2
+                  Array elements: ["#26 Token:57
+   sofa: sofa id: _InitialView
+   beg...", "#13 "]
+
+
+            children: #29 FSArray:135
+               Array length: 2
+               Array elements: ["#30 Token:60
+   sofa: sofa id: _InitialView
+   beg...", "#14 "]
+
+
+         children: #33 FSArray:134
+            Array length: 2
+            Array elements: ["#34 Token:63
+   sofa: sofa id: _InitialView
+   beg...", "#15 "]
+
+
+      children: #37 FSArray:133
+         Array length: 2
+         Array elements: ["#16 ", "#17 Constituent:117
+   sofa: sofa id: _InitialView..."]
+
+
+   children: #73 FSArray:116
+      Array length: 2
+      Array elements: ["#74 Token:66
+   sofa: sofa id: _InitialView
+   beg...", "#77 Token:69
+   sofa: sofa id: _InitialView
+   beg..."]
+
 [a]
-POS_DET
-   sofa: _InitialView
-   begin: 103
-   end: 104
-   PosValue: "DT"
+#0 POS_DET:68
+   sofa: sofa id: _InitialView
+   begin: 103   end: 104   PosValue: "DT"
    coarseValue: "DET"
 [a]
-Lemma
-   sofa: _InitialView
-   begin: 103
-   end: 104
-   value: "a"
+#0 Lemma:67
+   sofa: sofa id: _InitialView
+   begin: 103   end: 104   value: "a"
 [a]
-Token
-   sofa: _InitialView
-   begin: 103
-   end: 104
-   parent: Constituent
-      sofa: _InitialView
-      begin: 103
-      end: 111
-      constituentType: "NPB"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 103
-         end: 169
-         constituentType: "NP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 98
-            end: 169
-            constituentType: "PP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 89
-               end: 169
-               constituentType: "VP"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 86
-                  end: 169
-                  constituentType: "PP"
-                  parent: Constituent
-                     sofa: _InitialView
-                     begin: 48
-                     end: 169
-                     constituentType: "PP"
-                     parent: Constituent
-                        sofa: _InitialView
-                        begin: 33
-                        end: 169
-                        constituentType: "VP"
-                        parent: ROOT
-                           sofa: _InitialView
-                           begin: 0
-                           end: 169
-                           constituentType: "S"
-                           children: FSArray
-                        children: FSArray
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 103
-      end: 104
-      value: "a"
-   pos: POS_DET
-      sofa: _InitialView
-      begin: 103
-      end: 104
-      PosValue: "DT"
+#25 Token:66
+   sofa: sofa id: _InitialView
+   begin: 103   end: 104   parent: #16 Constituent:115
+      sofa: sofa id: _InitialView
+      begin: 103      end: 111      constituentType: "NPB"
+      parent: #15 Constituent:114
+         sofa: sofa id: _InitialView
+         begin: 103         end: 169         constituentType: "NP"
+         parent: #14 Constituent:113
+            sofa: sofa id: _InitialView
+            begin: 98            end: 169            constituentType: "PP"
+            parent: #13 Constituent:112
+               sofa: sofa id: _InitialView
+               begin: 89               end: 169               constituentType: "VP"
+               parent: #12 Constituent:111
+                  sofa: sofa id: _InitialView
+                  begin: 86                  end: 169                  constituentType: "PP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #26 FSArray:135
+                  Array length: 2
+                  Array elements: ["#27 Token:60
+   sofa: sofa id: _InitialView
+   beg...", "#14 "]
+
+
+            children: #30 FSArray:134
+               Array length: 2
+               Array elements: ["#31 Token:63
+   sofa: sofa id: _InitialView
+   beg...", "#15 "]
+
+
+         children: #34 FSArray:133
+            Array length: 2
+            Array elements: ["#16 ", "#17 Constituent:117
+   sofa: sofa id: _InitialView..."]
+
+
+      children: #70 FSArray:116
+         Array length: 2
+         Array elements: ["#25 ", "#71 Token:69
+   sofa: sofa id: _InitialView
+   beg..."]
+
+
+   lemma: #74 Lemma:67
+      sofa: sofa id: _InitialView
+      begin: 103      end: 104      value: "a"
+
+   pos: #75 POS_DET:68
+      sofa: sofa id: _InitialView
+      begin: 103      end: 104      PosValue: "DT"
       coarseValue: "DET"
+
    id: "s115_21"
 [number]
-POS_NOUN
-   sofa: _InitialView
-   begin: 105
-   end: 111
-   PosValue: "NN"
+#0 POS_NOUN:71
+   sofa: sofa id: _InitialView
+   begin: 105   end: 111   PosValue: "NN"
    coarseValue: "NOUN"
 [number]
-Lemma
-   sofa: _InitialView
-   begin: 105
-   end: 111
-   value: "number"
+#0 Lemma:70
+   sofa: sofa id: _InitialView
+   begin: 105   end: 111   value: "number"
 [number]
-Token
-   sofa: _InitialView
-   begin: 105
-   end: 111
-   parent: Constituent
-      sofa: _InitialView
-      begin: 103
-      end: 111
-      constituentType: "NPB"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 103
-         end: 169
-         constituentType: "NP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 98
-            end: 169
-            constituentType: "PP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 89
-               end: 169
-               constituentType: "VP"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 86
-                  end: 169
-                  constituentType: "PP"
-                  parent: Constituent
-                     sofa: _InitialView
-                     begin: 48
-                     end: 169
-                     constituentType: "PP"
-                     parent: Constituent
-                        sofa: _InitialView
-                        begin: 33
-                        end: 169
-                        constituentType: "VP"
-                        parent: ROOT
-                           sofa: _InitialView
-                           begin: 0
-                           end: 169
-                           constituentType: "S"
-                           children: FSArray
-                        children: FSArray
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 105
-      end: 111
-      value: "number"
-   pos: POS_NOUN
-      sofa: _InitialView
-      begin: 105
-      end: 111
-      PosValue: "NN"
+#25 Token:69
+   sofa: sofa id: _InitialView
+   begin: 105   end: 111   parent: #16 Constituent:115
+      sofa: sofa id: _InitialView
+      begin: 103      end: 111      constituentType: "NPB"
+      parent: #15 Constituent:114
+         sofa: sofa id: _InitialView
+         begin: 103         end: 169         constituentType: "NP"
+         parent: #14 Constituent:113
+            sofa: sofa id: _InitialView
+            begin: 98            end: 169            constituentType: "PP"
+            parent: #13 Constituent:112
+               sofa: sofa id: _InitialView
+               begin: 89               end: 169               constituentType: "VP"
+               parent: #12 Constituent:111
+                  sofa: sofa id: _InitialView
+                  begin: 86                  end: 169                  constituentType: "PP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #26 FSArray:135
+                  Array length: 2
+                  Array elements: ["#27 Token:60
+   sofa: sofa id: _InitialView
+   beg...", "#14 "]
+
+
+            children: #30 FSArray:134
+               Array length: 2
+               Array elements: ["#31 Token:63
+   sofa: sofa id: _InitialView
+   beg...", "#15 "]
+
+
+         children: #34 FSArray:133
+            Array length: 2
+            Array elements: ["#16 ", "#17 Constituent:117
+   sofa: sofa id: _InitialView..."]
+
+
+      children: #70 FSArray:116
+         Array length: 2
+         Array elements: ["#71 Token:66
+   sofa: sofa id: _InitialView
+   beg...", "#25 "]
+
+
+   lemma: #74 Lemma:70
+      sofa: sofa id: _InitialView
+      begin: 105      end: 111      value: "number"
+
+   pos: #75 POS_NOUN:71
+      sofa: sofa id: _InitialView
+      begin: 105      end: 111      PosValue: "NN"
       coarseValue: "NOUN"
+
    id: "s115_22"
 [number]
-SemArg
-   sofa: _InitialView
-   begin: 105
-   end: 111
+#0 SemArg:163
+   sofa: sofa id: _InitialView
+   begin: 105   end: 111
 [number]
-SemPred
-   sofa: _InitialView
-   begin: 105
-   end: 111
-   arguments: FSArray
+#1 SemPred:162
+   sofa: sofa id: _InitialView
+   begin: 105   end: 111   arguments: #2 FSArray:167
+      Array length: 2
+      Array elements: ["#3 SemArgLink:164
+   role: "Quantity"
+   target: #...", "#5 SemArgLink:166
+   role: "Individuals"
+   target..."]
+
    category: "Quantity"
 [of village gossips whose acquaintance he had cultivated .]
-SemArg
-   sofa: _InitialView
-   begin: 112
-   end: 169
+#0 SemArg:165
+   sofa: sofa id: _InitialView
+   begin: 112   end: 169
 [of village gossips whose acquaintance he had cultivated .]
-Constituent
-   sofa: _InitialView
-   begin: 112
-   end: 169
-   constituentType: "PP"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 103
-      end: 169
-      constituentType: "NP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 98
-         end: 169
-         constituentType: "PP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 89
-            end: 169
-            constituentType: "VP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 86
-               end: 169
-               constituentType: "PP"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 48
-                  end: 169
-                  constituentType: "PP"
-                  parent: Constituent
-                     sofa: _InitialView
-                     begin: 33
-                     end: 169
-                     constituentType: "VP"
-                     parent: ROOT
-                        sofa: _InitialView
-                        begin: 0
-                        end: 169
-                        constituentType: "S"
-                        children: FSArray
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   children: FSArray
+#17 Constituent:117
+   sofa: sofa id: _InitialView
+   begin: 112   end: 169   constituentType: "PP"
+   parent: #15 Constituent:114
+      sofa: sofa id: _InitialView
+      begin: 103      end: 169      constituentType: "NP"
+      parent: #14 Constituent:113
+         sofa: sofa id: _InitialView
+         begin: 98         end: 169         constituentType: "PP"
+         parent: #13 Constituent:112
+            sofa: sofa id: _InitialView
+            begin: 89            end: 169            constituentType: "VP"
+            parent: #12 Constituent:111
+               sofa: sofa id: _InitialView
+               begin: 86               end: 169               constituentType: "PP"
+               parent: #6 Constituent:102
+                  sofa: sofa id: _InitialView
+                  begin: 48                  end: 169                  constituentType: "PP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #25 FSArray:136
+                  Array length: 2
+                  Array elements: ["#26 Token:57
+   sofa: sofa id: _InitialView
+   beg...", "#13 "]
+
+
+            children: #29 FSArray:135
+               Array length: 2
+               Array elements: ["#30 Token:60
+   sofa: sofa id: _InitialView
+   beg...", "#14 "]
+
+
+         children: #33 FSArray:134
+            Array length: 2
+            Array elements: ["#34 Token:63
+   sofa: sofa id: _InitialView
+   beg...", "#15 "]
+
+
+      children: #37 FSArray:133
+         Array length: 2
+         Array elements: ["#16 Constituent:115
+   sofa: sofa id: _InitialView...", "#17 "]
+
+
+   children: #45 FSArray:132
+      Array length: 2
+      Array elements: ["#46 Token:72
+   sofa: sofa id: _InitialView
+   beg...", "#18 Constituent:118
+   sofa: sofa id: _InitialView..."]
+
 [of]
-POS_ADP
-   sofa: _InitialView
-   begin: 112
-   end: 114
-   PosValue: "IN"
+#0 POS_ADP:74
+   sofa: sofa id: _InitialView
+   begin: 112   end: 114   PosValue: "IN"
    coarseValue: "ADP"
 [of]
-Lemma
-   sofa: _InitialView
-   begin: 112
-   end: 114
-   value: "of"
+#0 Lemma:73
+   sofa: sofa id: _InitialView
+   begin: 112   end: 114   value: "of"
 [of]
-Token
-   sofa: _InitialView
-   begin: 112
-   end: 114
-   parent: Constituent
-      sofa: _InitialView
-      begin: 112
-      end: 169
-      constituentType: "PP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 103
-         end: 169
-         constituentType: "NP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 98
-            end: 169
-            constituentType: "PP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 89
-               end: 169
-               constituentType: "VP"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 86
-                  end: 169
-                  constituentType: "PP"
-                  parent: Constituent
-                     sofa: _InitialView
-                     begin: 48
-                     end: 169
-                     constituentType: "PP"
-                     parent: Constituent
-                        sofa: _InitialView
-                        begin: 33
-                        end: 169
-                        constituentType: "VP"
-                        parent: ROOT
-                           sofa: _InitialView
-                           begin: 0
-                           end: 169
-                           constituentType: "S"
-                           children: FSArray
-                        children: FSArray
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 112
-      end: 114
-      value: "of"
-   pos: POS_ADP
-      sofa: _InitialView
-      begin: 112
-      end: 114
-      PosValue: "IN"
+#18 Token:72
+   sofa: sofa id: _InitialView
+   begin: 112   end: 114   parent: #17 Constituent:117
+      sofa: sofa id: _InitialView
+      begin: 112      end: 169      constituentType: "PP"
+      parent: #15 Constituent:114
+         sofa: sofa id: _InitialView
+         begin: 103         end: 169         constituentType: "NP"
+         parent: #14 Constituent:113
+            sofa: sofa id: _InitialView
+            begin: 98            end: 169            constituentType: "PP"
+            parent: #13 Constituent:112
+               sofa: sofa id: _InitialView
+               begin: 89               end: 169               constituentType: "VP"
+               parent: #12 Constituent:111
+                  sofa: sofa id: _InitialView
+                  begin: 86                  end: 169                  constituentType: "PP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #26 FSArray:135
+                  Array length: 2
+                  Array elements: ["#27 Token:60
+   sofa: sofa id: _InitialView
+   beg...", "#14 "]
+
+
+            children: #30 FSArray:134
+               Array length: 2
+               Array elements: ["#31 Token:63
+   sofa: sofa id: _InitialView
+   beg...", "#15 "]
+
+
+         children: #34 FSArray:133
+            Array length: 2
+            Array elements: ["#16 Constituent:115
+   sofa: sofa id: _InitialView...", "#17 "]
+
+
+      children: #42 FSArray:132
+         Array length: 2
+         Array elements: ["#18 ", "#19 Constituent:118
+   sofa: sofa id: _InitialView..."]
+
+
+   lemma: #74 Lemma:73
+      sofa: sofa id: _InitialView
+      begin: 112      end: 114      value: "of"
+
+   pos: #75 POS_ADP:74
+      sofa: sofa id: _InitialView
+      begin: 112      end: 114      PosValue: "IN"
       coarseValue: "ADP"
+
    id: "s115_23"
 [village gossips whose acquaintance he had cultivated .]
-Constituent
-   sofa: _InitialView
-   begin: 115
-   end: 169
-   constituentType: "NP"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 112
-      end: 169
-      constituentType: "PP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 103
-         end: 169
-         constituentType: "NP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 98
-            end: 169
-            constituentType: "PP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 89
-               end: 169
-               constituentType: "VP"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 86
-                  end: 169
-                  constituentType: "PP"
-                  parent: Constituent
-                     sofa: _InitialView
-                     begin: 48
-                     end: 169
-                     constituentType: "PP"
-                     parent: Constituent
-                        sofa: _InitialView
-                        begin: 33
-                        end: 169
-                        constituentType: "VP"
-                        parent: ROOT
-                           sofa: _InitialView
-                           begin: 0
-                           end: 169
-                           constituentType: "S"
-                           children: FSArray
-                        children: FSArray
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   children: FSArray
+#18 Constituent:118
+   sofa: sofa id: _InitialView
+   begin: 115   end: 169   constituentType: "NP"
+   parent: #17 Constituent:117
+      sofa: sofa id: _InitialView
+      begin: 112      end: 169      constituentType: "PP"
+      parent: #15 Constituent:114
+         sofa: sofa id: _InitialView
+         begin: 103         end: 169         constituentType: "NP"
+         parent: #14 Constituent:113
+            sofa: sofa id: _InitialView
+            begin: 98            end: 169            constituentType: "PP"
+            parent: #13 Constituent:112
+               sofa: sofa id: _InitialView
+               begin: 89               end: 169               constituentType: "VP"
+               parent: #12 Constituent:111
+                  sofa: sofa id: _InitialView
+                  begin: 86                  end: 169                  constituentType: "PP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #25 FSArray:135
+                  Array length: 2
+                  Array elements: ["#26 Token:60
+   sofa: sofa id: _InitialView
+   beg...", "#14 "]
+
+
+            children: #29 FSArray:134
+               Array length: 2
+               Array elements: ["#30 Token:63
+   sofa: sofa id: _InitialView
+   beg...", "#15 "]
+
+
+         children: #33 FSArray:133
+            Array length: 2
+            Array elements: ["#16 Constituent:115
+   sofa: sofa id: _InitialView...", "#17 "]
+
+
+      children: #41 FSArray:132
+         Array length: 2
+         Array elements: ["#42 Token:72
+   sofa: sofa id: _InitialView
+   beg...", "#18 "]
+
+
+   children: #45 FSArray:131
+      Array length: 2
+      Array elements: ["#19 Constituent:119
+   sofa: sofa id: _InitialView...", "#20 Constituent:121
+   sofa: sofa id: _InitialView..."]
+
 [village gossips]
-Constituent
-   sofa: _InitialView
-   begin: 115
-   end: 130
-   constituentType: "NPB"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 115
-      end: 169
-      constituentType: "NP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 112
-         end: 169
-         constituentType: "PP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 103
-            end: 169
-            constituentType: "NP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 98
-               end: 169
-               constituentType: "PP"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 89
-                  end: 169
-                  constituentType: "VP"
-                  parent: Constituent
-                     sofa: _InitialView
-                     begin: 86
-                     end: 169
-                     constituentType: "PP"
-                     parent: Constituent
-                        sofa: _InitialView
-                        begin: 48
-                        end: 169
-                        constituentType: "PP"
-                        parent: Constituent
-                           sofa: _InitialView
-                           begin: 33
-                           end: 169
-                           constituentType: "VP"
-                           parent: ROOT
-                              sofa: _InitialView
-                              begin: 0
-                              end: 169
-                              constituentType: "S"
-                              children: FSArray
-                           children: FSArray
-                        children: FSArray
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   children: FSArray
+#19 Constituent:119
+   sofa: sofa id: _InitialView
+   begin: 115   end: 130   constituentType: "NPB"
+   parent: #18 Constituent:118
+      sofa: sofa id: _InitialView
+      begin: 115      end: 169      constituentType: "NP"
+      parent: #17 Constituent:117
+         sofa: sofa id: _InitialView
+         begin: 112         end: 169         constituentType: "PP"
+         parent: #15 Constituent:114
+            sofa: sofa id: _InitialView
+            begin: 103            end: 169            constituentType: "NP"
+            parent: #14 Constituent:113
+               sofa: sofa id: _InitialView
+               begin: 98               end: 169               constituentType: "PP"
+               parent: #13 Constituent:112
+                  sofa: sofa id: _InitialView
+                  begin: 89                  end: 169                  constituentType: "VP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #25 FSArray:134
+                  Array length: 2
+                  Array elements: ["#26 Token:63
+   sofa: sofa id: _InitialView
+   beg...", "#15 "]
+
+
+            children: #29 FSArray:133
+               Array length: 2
+               Array elements: ["#16 Constituent:115
+   sofa: sofa id: _InitialView...", "#17 "]
+
+
+         children: #37 FSArray:132
+            Array length: 2
+            Array elements: ["#38 Token:72
+   sofa: sofa id: _InitialView
+   beg...", "#18 "]
+
+
+      children: #41 FSArray:131
+         Array length: 2
+         Array elements: ["#19 ", "#20 Constituent:121
+   sofa: sofa id: _InitialView..."]
+
+
+   children: #65 FSArray:120
+      Array length: 2
+      Array elements: ["#66 Token:75
+   sofa: sofa id: _InitialView
+   beg...", "#69 Token:78
+   sofa: sofa id: _InitialView
+   beg..."]
+
 [village]
-POS_NOUN
-   sofa: _InitialView
-   begin: 115
-   end: 122
-   PosValue: "NN"
+#0 POS_NOUN:77
+   sofa: sofa id: _InitialView
+   begin: 115   end: 122   PosValue: "NN"
    coarseValue: "NOUN"
 [village]
-Lemma
-   sofa: _InitialView
-   begin: 115
-   end: 122
-   value: "village"
+#0 Lemma:76
+   sofa: sofa id: _InitialView
+   begin: 115   end: 122   value: "village"
 [village]
-Token
-   sofa: _InitialView
-   begin: 115
-   end: 122
-   parent: Constituent
-      sofa: _InitialView
-      begin: 115
-      end: 130
-      constituentType: "NPB"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 115
-         end: 169
-         constituentType: "NP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 112
-            end: 169
-            constituentType: "PP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 103
-               end: 169
-               constituentType: "NP"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 98
-                  end: 169
-                  constituentType: "PP"
-                  parent: Constituent
-                     sofa: _InitialView
-                     begin: 89
-                     end: 169
-                     constituentType: "VP"
-                     parent: Constituent
-                        sofa: _InitialView
-                        begin: 86
-                        end: 169
-                        constituentType: "PP"
-                        parent: Constituent
-                           sofa: _InitialView
-                           begin: 48
-                           end: 169
-                           constituentType: "PP"
-                           parent: Constituent
-                              sofa: _InitialView
-                              begin: 33
-                              end: 169
-                              constituentType: "VP"
-                              parent: ROOT
-                                 sofa: _InitialView
-                                 begin: 0
-                                 end: 169
-                                 constituentType: "S"
-                                 children: FSArray
-                              children: FSArray
-                           children: FSArray
-                        children: FSArray
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 115
-      end: 122
-      value: "village"
-   pos: POS_NOUN
-      sofa: _InitialView
-      begin: 115
-      end: 122
-      PosValue: "NN"
+#25 Token:75
+   sofa: sofa id: _InitialView
+   begin: 115   end: 122   parent: #19 Constituent:119
+      sofa: sofa id: _InitialView
+      begin: 115      end: 130      constituentType: "NPB"
+      parent: #18 Constituent:118
+         sofa: sofa id: _InitialView
+         begin: 115         end: 169         constituentType: "NP"
+         parent: #17 Constituent:117
+            sofa: sofa id: _InitialView
+            begin: 112            end: 169            constituentType: "PP"
+            parent: #15 Constituent:114
+               sofa: sofa id: _InitialView
+               begin: 103               end: 169               constituentType: "NP"
+               parent: #14 Constituent:113
+                  sofa: sofa id: _InitialView
+                  begin: 98                  end: 169                  constituentType: "PP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #26 FSArray:133
+                  Array length: 2
+                  Array elements: ["#16 Constituent:115
+   sofa: sofa id: _InitialView...", "#17 "]
+
+
+            children: #34 FSArray:132
+               Array length: 2
+               Array elements: ["#35 Token:72
+   sofa: sofa id: _InitialView
+   beg...", "#18 "]
+
+
+         children: #38 FSArray:131
+            Array length: 2
+            Array elements: ["#19 ", "#20 Constituent:121
+   sofa: sofa id: _InitialView..."]
+
+
+      children: #62 FSArray:120
+         Array length: 2
+         Array elements: ["#25 ", "#63 Token:78
+   sofa: sofa id: _InitialView
+   beg..."]
+
+
+   lemma: #66 Lemma:76
+      sofa: sofa id: _InitialView
+      begin: 115      end: 122      value: "village"
+
+   pos: #67 POS_NOUN:77
+      sofa: sofa id: _InitialView
+      begin: 115      end: 122      PosValue: "NN"
       coarseValue: "NOUN"
+
    id: "s115_24"
 [gossips]
-POS_NOUN
-   sofa: _InitialView
-   begin: 123
-   end: 130
-   PosValue: "NNS"
+#0 POS_NOUN:80
+   sofa: sofa id: _InitialView
+   begin: 123   end: 130   PosValue: "NNS"
    coarseValue: "NOUN"
 [gossips]
-Lemma
-   sofa: _InitialView
-   begin: 123
-   end: 130
-   value: "gossip"
+#0 Lemma:79
+   sofa: sofa id: _InitialView
+   begin: 123   end: 130   value: "gossip"
 [gossips]
-Token
-   sofa: _InitialView
-   begin: 123
-   end: 130
-   parent: Constituent
-      sofa: _InitialView
-      begin: 115
-      end: 130
-      constituentType: "NPB"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 115
-         end: 169
-         constituentType: "NP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 112
-            end: 169
-            constituentType: "PP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 103
-               end: 169
-               constituentType: "NP"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 98
-                  end: 169
-                  constituentType: "PP"
-                  parent: Constituent
-                     sofa: _InitialView
-                     begin: 89
-                     end: 169
-                     constituentType: "VP"
-                     parent: Constituent
-                        sofa: _InitialView
-                        begin: 86
-                        end: 169
-                        constituentType: "PP"
-                        parent: Constituent
-                           sofa: _InitialView
-                           begin: 48
-                           end: 169
-                           constituentType: "PP"
-                           parent: Constituent
-                              sofa: _InitialView
-                              begin: 33
-                              end: 169
-                              constituentType: "VP"
-                              parent: ROOT
-                                 sofa: _InitialView
-                                 begin: 0
-                                 end: 169
-                                 constituentType: "S"
-                                 children: FSArray
-                              children: FSArray
-                           children: FSArray
-                        children: FSArray
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 123
-      end: 130
-      value: "gossip"
-   pos: POS_NOUN
-      sofa: _InitialView
-      begin: 123
-      end: 130
-      PosValue: "NNS"
+#25 Token:78
+   sofa: sofa id: _InitialView
+   begin: 123   end: 130   parent: #19 Constituent:119
+      sofa: sofa id: _InitialView
+      begin: 115      end: 130      constituentType: "NPB"
+      parent: #18 Constituent:118
+         sofa: sofa id: _InitialView
+         begin: 115         end: 169         constituentType: "NP"
+         parent: #17 Constituent:117
+            sofa: sofa id: _InitialView
+            begin: 112            end: 169            constituentType: "PP"
+            parent: #15 Constituent:114
+               sofa: sofa id: _InitialView
+               begin: 103               end: 169               constituentType: "NP"
+               parent: #14 Constituent:113
+                  sofa: sofa id: _InitialView
+                  begin: 98                  end: 169                  constituentType: "PP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #26 FSArray:133
+                  Array length: 2
+                  Array elements: ["#16 Constituent:115
+   sofa: sofa id: _InitialView...", "#17 "]
+
+
+            children: #34 FSArray:132
+               Array length: 2
+               Array elements: ["#35 Token:72
+   sofa: sofa id: _InitialView
+   beg...", "#18 "]
+
+
+         children: #38 FSArray:131
+            Array length: 2
+            Array elements: ["#19 ", "#20 Constituent:121
+   sofa: sofa id: _InitialView..."]
+
+
+      children: #62 FSArray:120
+         Array length: 2
+         Array elements: ["#63 Token:75
+   sofa: sofa id: _InitialView
+   beg...", "#25 "]
+
+
+   lemma: #66 Lemma:79
+      sofa: sofa id: _InitialView
+      begin: 123      end: 130      value: "gossip"
+
+   pos: #67 POS_NOUN:80
+      sofa: sofa id: _InitialView
+      begin: 123      end: 130      PosValue: "NNS"
       coarseValue: "NOUN"
+
    id: "s115_25"
 [whose acquaintance he had cultivated .]
-Constituent
-   sofa: _InitialView
-   begin: 131
-   end: 169
-   constituentType: "SBAR"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 115
-      end: 169
-      constituentType: "NP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 112
-         end: 169
-         constituentType: "PP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 103
-            end: 169
-            constituentType: "NP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 98
-               end: 169
-               constituentType: "PP"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 89
-                  end: 169
-                  constituentType: "VP"
-                  parent: Constituent
-                     sofa: _InitialView
-                     begin: 86
-                     end: 169
-                     constituentType: "PP"
-                     parent: Constituent
-                        sofa: _InitialView
-                        begin: 48
-                        end: 169
-                        constituentType: "PP"
-                        parent: Constituent
-                           sofa: _InitialView
-                           begin: 33
-                           end: 169
-                           constituentType: "VP"
-                           parent: ROOT
-                              sofa: _InitialView
-                              begin: 0
-                              end: 169
-                              constituentType: "S"
-                              children: FSArray
-                           children: FSArray
-                        children: FSArray
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   children: FSArray
+#20 Constituent:121
+   sofa: sofa id: _InitialView
+   begin: 131   end: 169   constituentType: "SBAR"
+   parent: #18 Constituent:118
+      sofa: sofa id: _InitialView
+      begin: 115      end: 169      constituentType: "NP"
+      parent: #17 Constituent:117
+         sofa: sofa id: _InitialView
+         begin: 112         end: 169         constituentType: "PP"
+         parent: #15 Constituent:114
+            sofa: sofa id: _InitialView
+            begin: 103            end: 169            constituentType: "NP"
+            parent: #14 Constituent:113
+               sofa: sofa id: _InitialView
+               begin: 98               end: 169               constituentType: "PP"
+               parent: #13 Constituent:112
+                  sofa: sofa id: _InitialView
+                  begin: 89                  end: 169                  constituentType: "VP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #25 FSArray:134
+                  Array length: 2
+                  Array elements: ["#26 Token:63
+   sofa: sofa id: _InitialView
+   beg...", "#15 "]
+
+
+            children: #29 FSArray:133
+               Array length: 2
+               Array elements: ["#16 Constituent:115
+   sofa: sofa id: _InitialView...", "#17 "]
+
+
+         children: #37 FSArray:132
+            Array length: 2
+            Array elements: ["#38 Token:72
+   sofa: sofa id: _InitialView
+   beg...", "#18 "]
+
+
+      children: #41 FSArray:131
+         Array length: 2
+         Array elements: ["#19 Constituent:119
+   sofa: sofa id: _InitialView...", "#20 "]
+
+
+   children: #49 FSArray:130
+      Array length: 2
+      Array elements: ["#21 Constituent:122
+   sofa: sofa id: _InitialView...", "#22 Constituent:124
+   sofa: sofa id: _InitialView..."]
+
 [whose acquaintance]
-Constituent
-   sofa: _InitialView
-   begin: 131
-   end: 149
-   constituentType: "WHNP"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 131
-      end: 169
-      constituentType: "SBAR"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 115
-         end: 169
-         constituentType: "NP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 112
-            end: 169
-            constituentType: "PP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 103
-               end: 169
-               constituentType: "NP"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 98
-                  end: 169
-                  constituentType: "PP"
-                  parent: Constituent
-                     sofa: _InitialView
-                     begin: 89
-                     end: 169
-                     constituentType: "VP"
-                     parent: Constituent
-                        sofa: _InitialView
-                        begin: 86
-                        end: 169
-                        constituentType: "PP"
-                        parent: Constituent
-                           sofa: _InitialView
-                           begin: 48
-                           end: 169
-                           constituentType: "PP"
-                           parent: Constituent
-                              sofa: _InitialView
-                              begin: 33
-                              end: 169
-                              constituentType: "VP"
-                              parent: ROOT
-                                 sofa: _InitialView
-                                 begin: 0
-                                 end: 169
-                                 constituentType: "S"
-                                 children: FSArray
-                              children: FSArray
-                           children: FSArray
-                        children: FSArray
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   children: FSArray
+#21 Constituent:122
+   sofa: sofa id: _InitialView
+   begin: 131   end: 149   constituentType: "WHNP"
+   parent: #20 Constituent:121
+      sofa: sofa id: _InitialView
+      begin: 131      end: 169      constituentType: "SBAR"
+      parent: #18 Constituent:118
+         sofa: sofa id: _InitialView
+         begin: 115         end: 169         constituentType: "NP"
+         parent: #17 Constituent:117
+            sofa: sofa id: _InitialView
+            begin: 112            end: 169            constituentType: "PP"
+            parent: #15 Constituent:114
+               sofa: sofa id: _InitialView
+               begin: 103               end: 169               constituentType: "NP"
+               parent: #14 Constituent:113
+                  sofa: sofa id: _InitialView
+                  begin: 98                  end: 169                  constituentType: "PP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #25 FSArray:133
+                  Array length: 2
+                  Array elements: ["#16 Constituent:115
+   sofa: sofa id: _InitialView...", "#17 "]
+
+
+            children: #33 FSArray:132
+               Array length: 2
+               Array elements: ["#34 Token:72
+   sofa: sofa id: _InitialView
+   beg...", "#18 "]
+
+
+         children: #37 FSArray:131
+            Array length: 2
+            Array elements: ["#19 Constituent:119
+   sofa: sofa id: _InitialView...", "#20 "]
+
+
+      children: #45 FSArray:130
+         Array length: 2
+         Array elements: ["#21 ", "#22 Constituent:124
+   sofa: sofa id: _InitialView..."]
+
+
+   children: #61 FSArray:123
+      Array length: 2
+      Array elements: ["#62 Token:81
+   sofa: sofa id: _InitialView
+   beg...", "#65 Token:84
+   sofa: sofa id: _InitialView
+   beg..."]
+
 [whose]
-POS_PRON
-   sofa: _InitialView
-   begin: 131
-   end: 136
-   PosValue: "WP$"
+#0 POS_PRON:83
+   sofa: sofa id: _InitialView
+   begin: 131   end: 136   PosValue: "WP$"
    coarseValue: "PRON"
 [whose]
-Lemma
-   sofa: _InitialView
-   begin: 131
-   end: 136
-   value: "whose"
+#0 Lemma:82
+   sofa: sofa id: _InitialView
+   begin: 131   end: 136   value: "whose"
 [whose]
-Token
-   sofa: _InitialView
-   begin: 131
-   end: 136
-   parent: Constituent
-      sofa: _InitialView
-      begin: 131
-      end: 149
-      constituentType: "WHNP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 131
-         end: 169
-         constituentType: "SBAR"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 115
-            end: 169
-            constituentType: "NP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 112
-               end: 169
-               constituentType: "PP"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 103
-                  end: 169
-                  constituentType: "NP"
-                  parent: Constituent
-                     sofa: _InitialView
-                     begin: 98
-                     end: 169
-                     constituentType: "PP"
-                     parent: Constituent
-                        sofa: _InitialView
-                        begin: 89
-                        end: 169
-                        constituentType: "VP"
-                        parent: Constituent
-                           sofa: _InitialView
-                           begin: 86
-                           end: 169
-                           constituentType: "PP"
-                           parent: Constituent
-                              sofa: _InitialView
-                              begin: 48
-                              end: 169
-                              constituentType: "PP"
-                              parent: Constituent
-                                 sofa: _InitialView
-                                 begin: 33
-                                 end: 169
-                                 constituentType: "VP"
-                                 parent: ROOT
-                                    sofa: _InitialView
-                                    begin: 0
-                                    end: 169
-                                    constituentType: "S"
-                                    children: FSArray
-                                 children: FSArray
-                              children: FSArray
-                           children: FSArray
-                        children: FSArray
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 131
-      end: 136
-      value: "whose"
-   pos: POS_PRON
-      sofa: _InitialView
-      begin: 131
-      end: 136
-      PosValue: "WP$"
+#25 Token:81
+   sofa: sofa id: _InitialView
+   begin: 131   end: 136   parent: #21 Constituent:122
+      sofa: sofa id: _InitialView
+      begin: 131      end: 149      constituentType: "WHNP"
+      parent: #20 Constituent:121
+         sofa: sofa id: _InitialView
+         begin: 131         end: 169         constituentType: "SBAR"
+         parent: #18 Constituent:118
+            sofa: sofa id: _InitialView
+            begin: 115            end: 169            constituentType: "NP"
+            parent: #17 Constituent:117
+               sofa: sofa id: _InitialView
+               begin: 112               end: 169               constituentType: "PP"
+               parent: #15 Constituent:114
+                  sofa: sofa id: _InitialView
+                  begin: 103                  end: 169                  constituentType: "NP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #26 FSArray:132
+                  Array length: 2
+                  Array elements: ["#27 Token:72
+   sofa: sofa id: _InitialView
+   beg...", "#18 "]
+
+
+            children: #30 FSArray:131
+               Array length: 2
+               Array elements: ["#19 Constituent:119
+   sofa: sofa id: _InitialView...", "#20 "]
+
+
+         children: #38 FSArray:130
+            Array length: 2
+            Array elements: ["#21 ", "#22 Constituent:124
+   sofa: sofa id: _InitialView..."]
+
+
+      children: #54 FSArray:123
+         Array length: 2
+         Array elements: ["#25 ", "#55 Token:84
+   sofa: sofa id: _InitialView
+   beg..."]
+
+
+   lemma: #58 Lemma:82
+      sofa: sofa id: _InitialView
+      begin: 131      end: 136      value: "whose"
+
+   pos: #59 POS_PRON:83
+      sofa: sofa id: _InitialView
+      begin: 131      end: 136      PosValue: "WP$"
       coarseValue: "PRON"
+
    id: "s115_26"
 [acquaintance]
-POS_NOUN
-   sofa: _InitialView
-   begin: 137
-   end: 149
-   PosValue: "NN"
+#0 POS_NOUN:86
+   sofa: sofa id: _InitialView
+   begin: 137   end: 149   PosValue: "NN"
    coarseValue: "NOUN"
 [acquaintance]
-Lemma
-   sofa: _InitialView
-   begin: 137
-   end: 149
-   value: "acquaintance"
+#0 Lemma:85
+   sofa: sofa id: _InitialView
+   begin: 137   end: 149   value: "acquaintance"
 [acquaintance]
-Token
-   sofa: _InitialView
-   begin: 137
-   end: 149
-   parent: Constituent
-      sofa: _InitialView
-      begin: 131
-      end: 149
-      constituentType: "WHNP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 131
-         end: 169
-         constituentType: "SBAR"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 115
-            end: 169
-            constituentType: "NP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 112
-               end: 169
-               constituentType: "PP"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 103
-                  end: 169
-                  constituentType: "NP"
-                  parent: Constituent
-                     sofa: _InitialView
-                     begin: 98
-                     end: 169
-                     constituentType: "PP"
-                     parent: Constituent
-                        sofa: _InitialView
-                        begin: 89
-                        end: 169
-                        constituentType: "VP"
-                        parent: Constituent
-                           sofa: _InitialView
-                           begin: 86
-                           end: 169
-                           constituentType: "PP"
-                           parent: Constituent
-                              sofa: _InitialView
-                              begin: 48
-                              end: 169
-                              constituentType: "PP"
-                              parent: Constituent
-                                 sofa: _InitialView
-                                 begin: 33
-                                 end: 169
-                                 constituentType: "VP"
-                                 parent: ROOT
-                                    sofa: _InitialView
-                                    begin: 0
-                                    end: 169
-                                    constituentType: "S"
-                                    children: FSArray
-                                 children: FSArray
-                              children: FSArray
-                           children: FSArray
-                        children: FSArray
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 137
-      end: 149
-      value: "acquaintance"
-   pos: POS_NOUN
-      sofa: _InitialView
-      begin: 137
-      end: 149
-      PosValue: "NN"
+#25 Token:84
+   sofa: sofa id: _InitialView
+   begin: 137   end: 149   parent: #21 Constituent:122
+      sofa: sofa id: _InitialView
+      begin: 131      end: 149      constituentType: "WHNP"
+      parent: #20 Constituent:121
+         sofa: sofa id: _InitialView
+         begin: 131         end: 169         constituentType: "SBAR"
+         parent: #18 Constituent:118
+            sofa: sofa id: _InitialView
+            begin: 115            end: 169            constituentType: "NP"
+            parent: #17 Constituent:117
+               sofa: sofa id: _InitialView
+               begin: 112               end: 169               constituentType: "PP"
+               parent: #15 Constituent:114
+                  sofa: sofa id: _InitialView
+                  begin: 103                  end: 169                  constituentType: "NP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #26 FSArray:132
+                  Array length: 2
+                  Array elements: ["#27 Token:72
+   sofa: sofa id: _InitialView
+   beg...", "#18 "]
+
+
+            children: #30 FSArray:131
+               Array length: 2
+               Array elements: ["#19 Constituent:119
+   sofa: sofa id: _InitialView...", "#20 "]
+
+
+         children: #38 FSArray:130
+            Array length: 2
+            Array elements: ["#21 ", "#22 Constituent:124
+   sofa: sofa id: _InitialView..."]
+
+
+      children: #54 FSArray:123
+         Array length: 2
+         Array elements: ["#55 Token:81
+   sofa: sofa id: _InitialView
+   beg...", "#25 "]
+
+
+   lemma: #58 Lemma:85
+      sofa: sofa id: _InitialView
+      begin: 137      end: 149      value: "acquaintance"
+
+   pos: #59 POS_NOUN:86
+      sofa: sofa id: _InitialView
+      begin: 137      end: 149      PosValue: "NN"
       coarseValue: "NOUN"
+
    id: "s115_27"
 [he had cultivated .]
-Constituent
-   sofa: _InitialView
-   begin: 150
-   end: 169
-   constituentType: "S"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 131
-      end: 169
-      constituentType: "SBAR"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 115
-         end: 169
-         constituentType: "NP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 112
-            end: 169
-            constituentType: "PP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 103
-               end: 169
-               constituentType: "NP"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 98
-                  end: 169
-                  constituentType: "PP"
-                  parent: Constituent
-                     sofa: _InitialView
-                     begin: 89
-                     end: 169
-                     constituentType: "VP"
-                     parent: Constituent
-                        sofa: _InitialView
-                        begin: 86
-                        end: 169
-                        constituentType: "PP"
-                        parent: Constituent
-                           sofa: _InitialView
-                           begin: 48
-                           end: 169
-                           constituentType: "PP"
-                           parent: Constituent
-                              sofa: _InitialView
-                              begin: 33
-                              end: 169
-                              constituentType: "VP"
-                              parent: ROOT
-                                 sofa: _InitialView
-                                 begin: 0
-                                 end: 169
-                                 constituentType: "S"
-                                 children: FSArray
-                              children: FSArray
-                           children: FSArray
-                        children: FSArray
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   children: FSArray
+#22 Constituent:124
+   sofa: sofa id: _InitialView
+   begin: 150   end: 169   constituentType: "S"
+   parent: #20 Constituent:121
+      sofa: sofa id: _InitialView
+      begin: 131      end: 169      constituentType: "SBAR"
+      parent: #18 Constituent:118
+         sofa: sofa id: _InitialView
+         begin: 115         end: 169         constituentType: "NP"
+         parent: #17 Constituent:117
+            sofa: sofa id: _InitialView
+            begin: 112            end: 169            constituentType: "PP"
+            parent: #15 Constituent:114
+               sofa: sofa id: _InitialView
+               begin: 103               end: 169               constituentType: "NP"
+               parent: #14 Constituent:113
+                  sofa: sofa id: _InitialView
+                  begin: 98                  end: 169                  constituentType: "PP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #25 FSArray:133
+                  Array length: 2
+                  Array elements: ["#16 Constituent:115
+   sofa: sofa id: _InitialView...", "#17 "]
+
+
+            children: #33 FSArray:132
+               Array length: 2
+               Array elements: ["#34 Token:72
+   sofa: sofa id: _InitialView
+   beg...", "#18 "]
+
+
+         children: #37 FSArray:131
+            Array length: 2
+            Array elements: ["#19 Constituent:119
+   sofa: sofa id: _InitialView...", "#20 "]
+
+
+      children: #45 FSArray:130
+         Array length: 2
+         Array elements: ["#21 Constituent:122
+   sofa: sofa id: _InitialView...", "#22 "]
+
+
+   children: #53 FSArray:129
+      Array length: 2
+      Array elements: ["#54 Token:87
+   sofa: sofa id: _InitialView
+   beg...", "#23 Constituent:125
+   sofa: sofa id: _InitialView..."]
+
 [he]
-POS_PRON
-   sofa: _InitialView
-   begin: 150
-   end: 152
-   PosValue: "PRP"
+#0 POS_PRON:89
+   sofa: sofa id: _InitialView
+   begin: 150   end: 152   PosValue: "PRP"
    coarseValue: "PRON"
 [he]
-Lemma
-   sofa: _InitialView
-   begin: 150
-   end: 152
-   value: "he"
+#0 Lemma:88
+   sofa: sofa id: _InitialView
+   begin: 150   end: 152   value: "he"
 [he]
-Token
-   sofa: _InitialView
-   begin: 150
-   end: 152
-   parent: Constituent
-      sofa: _InitialView
-      begin: 150
-      end: 169
-      constituentType: "S"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 131
-         end: 169
-         constituentType: "SBAR"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 115
-            end: 169
-            constituentType: "NP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 112
-               end: 169
-               constituentType: "PP"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 103
-                  end: 169
-                  constituentType: "NP"
-                  parent: Constituent
-                     sofa: _InitialView
-                     begin: 98
-                     end: 169
-                     constituentType: "PP"
-                     parent: Constituent
-                        sofa: _InitialView
-                        begin: 89
-                        end: 169
-                        constituentType: "VP"
-                        parent: Constituent
-                           sofa: _InitialView
-                           begin: 86
-                           end: 169
-                           constituentType: "PP"
-                           parent: Constituent
-                              sofa: _InitialView
-                              begin: 48
-                              end: 169
-                              constituentType: "PP"
-                              parent: Constituent
-                                 sofa: _InitialView
-                                 begin: 33
-                                 end: 169
-                                 constituentType: "VP"
-                                 parent: ROOT
-                                    sofa: _InitialView
-                                    begin: 0
-                                    end: 169
-                                    constituentType: "S"
-                                    children: FSArray
-                                 children: FSArray
-                              children: FSArray
-                           children: FSArray
-                        children: FSArray
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 150
-      end: 152
-      value: "he"
-   pos: POS_PRON
-      sofa: _InitialView
-      begin: 150
-      end: 152
-      PosValue: "PRP"
+#23 Token:87
+   sofa: sofa id: _InitialView
+   begin: 150   end: 152   parent: #22 Constituent:124
+      sofa: sofa id: _InitialView
+      begin: 150      end: 169      constituentType: "S"
+      parent: #20 Constituent:121
+         sofa: sofa id: _InitialView
+         begin: 131         end: 169         constituentType: "SBAR"
+         parent: #18 Constituent:118
+            sofa: sofa id: _InitialView
+            begin: 115            end: 169            constituentType: "NP"
+            parent: #17 Constituent:117
+               sofa: sofa id: _InitialView
+               begin: 112               end: 169               constituentType: "PP"
+               parent: #15 Constituent:114
+                  sofa: sofa id: _InitialView
+                  begin: 103                  end: 169                  constituentType: "NP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #26 FSArray:132
+                  Array length: 2
+                  Array elements: ["#27 Token:72
+   sofa: sofa id: _InitialView
+   beg...", "#18 "]
+
+
+            children: #30 FSArray:131
+               Array length: 2
+               Array elements: ["#19 Constituent:119
+   sofa: sofa id: _InitialView...", "#20 "]
+
+
+         children: #38 FSArray:130
+            Array length: 2
+            Array elements: ["#21 Constituent:122
+   sofa: sofa id: _InitialView...", "#22 "]
+
+
+      children: #46 FSArray:129
+         Array length: 2
+         Array elements: ["#23 ", "#24 Constituent:125
+   sofa: sofa id: _InitialView..."]
+
+
+   lemma: #58 Lemma:88
+      sofa: sofa id: _InitialView
+      begin: 150      end: 152      value: "he"
+
+   pos: #59 POS_PRON:89
+      sofa: sofa id: _InitialView
+      begin: 150      end: 152      PosValue: "PRP"
       coarseValue: "PRON"
+
    id: "s115_28"
 [he]
-SemArg
-   sofa: _InitialView
-   begin: 150
-   end: 152
+#0 SemArg:187
+   sofa: sofa id: _InitialView
+   begin: 150   end: 152
 [he]
-SemPred
-   sofa: _InitialView
-   begin: 150
-   end: 152
-   arguments: FSArray
+#1 SemPred:184
+   sofa: sofa id: _InitialView
+   begin: 150   end: 152   arguments: #2 FSArray:189
+      Array length: 2
+      Array elements: ["#3 SemArgLink:186
+   role: "Coreferent"
+   target:...", "#5 SemArgLink:188
+   role: "Current"
+   target: #6..."]
+
    category: "Coreference"
 [had cultivated .]
-Constituent
-   sofa: _InitialView
-   begin: 153
-   end: 169
-   constituentType: "VP"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 150
-      end: 169
-      constituentType: "S"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 131
-         end: 169
-         constituentType: "SBAR"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 115
-            end: 169
-            constituentType: "NP"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 112
-               end: 169
-               constituentType: "PP"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 103
-                  end: 169
-                  constituentType: "NP"
-                  parent: Constituent
-                     sofa: _InitialView
-                     begin: 98
-                     end: 169
-                     constituentType: "PP"
-                     parent: Constituent
-                        sofa: _InitialView
-                        begin: 89
-                        end: 169
-                        constituentType: "VP"
-                        parent: Constituent
-                           sofa: _InitialView
-                           begin: 86
-                           end: 169
-                           constituentType: "PP"
-                           parent: Constituent
-                              sofa: _InitialView
-                              begin: 48
-                              end: 169
-                              constituentType: "PP"
-                              parent: Constituent
-                                 sofa: _InitialView
-                                 begin: 33
-                                 end: 169
-                                 constituentType: "VP"
-                                 parent: ROOT
-                                    sofa: _InitialView
-                                    begin: 0
-                                    end: 169
-                                    constituentType: "S"
-                                    children: FSArray
-                                 children: FSArray
-                              children: FSArray
-                           children: FSArray
-                        children: FSArray
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   children: FSArray
+#23 Constituent:125
+   sofa: sofa id: _InitialView
+   begin: 153   end: 169   constituentType: "VP"
+   parent: #22 Constituent:124
+      sofa: sofa id: _InitialView
+      begin: 150      end: 169      constituentType: "S"
+      parent: #20 Constituent:121
+         sofa: sofa id: _InitialView
+         begin: 131         end: 169         constituentType: "SBAR"
+         parent: #18 Constituent:118
+            sofa: sofa id: _InitialView
+            begin: 115            end: 169            constituentType: "NP"
+            parent: #17 Constituent:117
+               sofa: sofa id: _InitialView
+               begin: 112               end: 169               constituentType: "PP"
+               parent: #15 Constituent:114
+                  sofa: sofa id: _InitialView
+                  begin: 103                  end: 169                  constituentType: "NP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #25 FSArray:132
+                  Array length: 2
+                  Array elements: ["#26 Token:72
+   sofa: sofa id: _InitialView
+   beg...", "#18 "]
+
+
+            children: #29 FSArray:131
+               Array length: 2
+               Array elements: ["#19 Constituent:119
+   sofa: sofa id: _InitialView...", "#20 "]
+
+
+         children: #37 FSArray:130
+            Array length: 2
+            Array elements: ["#21 Constituent:122
+   sofa: sofa id: _InitialView...", "#22 "]
+
+
+      children: #45 FSArray:129
+         Array length: 2
+         Array elements: ["#46 Token:87
+   sofa: sofa id: _InitialView
+   beg...", "#23 "]
+
+
+   children: #49 FSArray:128
+      Array length: 2
+      Array elements: ["#50 Token:90
+   sofa: sofa id: _InitialView
+   beg...", "#24 Constituent:126
+   sofa: sofa id: _InitialView..."]
+
 [had]
-POS_VERB
-   sofa: _InitialView
-   begin: 153
-   end: 156
-   PosValue: "VBD"
+#0 POS_VERB:92
+   sofa: sofa id: _InitialView
+   begin: 153   end: 156   PosValue: "VBD"
    coarseValue: "VERB"
 [had]
-Lemma
-   sofa: _InitialView
-   begin: 153
-   end: 156
-   value: "have"
+#0 Lemma:91
+   sofa: sofa id: _InitialView
+   begin: 153   end: 156   value: "have"
 [had]
-Token
-   sofa: _InitialView
-   begin: 153
-   end: 156
-   parent: Constituent
-      sofa: _InitialView
-      begin: 153
-      end: 169
-      constituentType: "VP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 150
-         end: 169
-         constituentType: "S"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 131
-            end: 169
-            constituentType: "SBAR"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 115
-               end: 169
-               constituentType: "NP"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 112
-                  end: 169
-                  constituentType: "PP"
-                  parent: Constituent
-                     sofa: _InitialView
-                     begin: 103
-                     end: 169
-                     constituentType: "NP"
-                     parent: Constituent
-                        sofa: _InitialView
-                        begin: 98
-                        end: 169
-                        constituentType: "PP"
-                        parent: Constituent
-                           sofa: _InitialView
-                           begin: 89
-                           end: 169
-                           constituentType: "VP"
-                           parent: Constituent
-                              sofa: _InitialView
-                              begin: 86
-                              end: 169
-                              constituentType: "PP"
-                              parent: Constituent
-                                 sofa: _InitialView
-                                 begin: 48
-                                 end: 169
-                                 constituentType: "PP"
-                                 parent: Constituent
-                                    sofa: _InitialView
-                                    begin: 33
-                                    end: 169
-                                    constituentType: "VP"
-                                    parent: ROOT
-                                       sofa: _InitialView
-                                       begin: 0
-                                       end: 169
-                                       constituentType: "S"
-                                       children: FSArray
-                                    children: FSArray
-                                 children: FSArray
-                              children: FSArray
-                           children: FSArray
-                        children: FSArray
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 153
-      end: 156
-      value: "have"
-   pos: POS_VERB
-      sofa: _InitialView
-      begin: 153
-      end: 156
-      PosValue: "VBD"
+#24 Token:90
+   sofa: sofa id: _InitialView
+   begin: 153   end: 156   parent: #23 Constituent:125
+      sofa: sofa id: _InitialView
+      begin: 153      end: 169      constituentType: "VP"
+      parent: #22 Constituent:124
+         sofa: sofa id: _InitialView
+         begin: 150         end: 169         constituentType: "S"
+         parent: #20 Constituent:121
+            sofa: sofa id: _InitialView
+            begin: 131            end: 169            constituentType: "SBAR"
+            parent: #18 Constituent:118
+               sofa: sofa id: _InitialView
+               begin: 115               end: 169               constituentType: "NP"
+               parent: #17 Constituent:117
+                  sofa: sofa id: _InitialView
+                  begin: 112                  end: 169                  constituentType: "PP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #26 FSArray:131
+                  Array length: 2
+                  Array elements: ["#19 Constituent:119
+   sofa: sofa id: _InitialView...", "#20 "]
+
+
+            children: #34 FSArray:130
+               Array length: 2
+               Array elements: ["#21 Constituent:122
+   sofa: sofa id: _InitialView...", "#22 "]
+
+
+         children: #42 FSArray:129
+            Array length: 2
+            Array elements: ["#43 Token:87
+   sofa: sofa id: _InitialView
+   beg...", "#23 "]
+
+
+      children: #46 FSArray:128
+         Array length: 2
+         Array elements: ["#24 ", "#25 Constituent:126
+   sofa: sofa id: _InitialView..."]
+
+
+   lemma: #54 Lemma:91
+      sofa: sofa id: _InitialView
+      begin: 153      end: 156      value: "have"
+
+   pos: #55 POS_VERB:92
+      sofa: sofa id: _InitialView
+      begin: 153      end: 156      PosValue: "VBD"
       coarseValue: "VERB"
+
    id: "s115_29"
 [cultivated .]
-Constituent
-   sofa: _InitialView
-   begin: 157
-   end: 169
-   constituentType: "VP"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 153
-      end: 169
-      constituentType: "VP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 150
-         end: 169
-         constituentType: "S"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 131
-            end: 169
-            constituentType: "SBAR"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 115
-               end: 169
-               constituentType: "NP"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 112
-                  end: 169
-                  constituentType: "PP"
-                  parent: Constituent
-                     sofa: _InitialView
-                     begin: 103
-                     end: 169
-                     constituentType: "NP"
-                     parent: Constituent
-                        sofa: _InitialView
-                        begin: 98
-                        end: 169
-                        constituentType: "PP"
-                        parent: Constituent
-                           sofa: _InitialView
-                           begin: 89
-                           end: 169
-                           constituentType: "VP"
-                           parent: Constituent
-                              sofa: _InitialView
-                              begin: 86
-                              end: 169
-                              constituentType: "PP"
-                              parent: Constituent
-                                 sofa: _InitialView
-                                 begin: 48
-                                 end: 169
-                                 constituentType: "PP"
-                                 parent: Constituent
-                                    sofa: _InitialView
-                                    begin: 33
-                                    end: 169
-                                    constituentType: "VP"
-                                    parent: ROOT
-                                       sofa: _InitialView
-                                       begin: 0
-                                       end: 169
-                                       constituentType: "S"
-                                       children: FSArray
-                                    children: FSArray
-                                 children: FSArray
-                              children: FSArray
-                           children: FSArray
-                        children: FSArray
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   children: FSArray
+#24 Constituent:126
+   sofa: sofa id: _InitialView
+   begin: 157   end: 169   constituentType: "VP"
+   parent: #23 Constituent:125
+      sofa: sofa id: _InitialView
+      begin: 153      end: 169      constituentType: "VP"
+      parent: #22 Constituent:124
+         sofa: sofa id: _InitialView
+         begin: 150         end: 169         constituentType: "S"
+         parent: #20 Constituent:121
+            sofa: sofa id: _InitialView
+            begin: 131            end: 169            constituentType: "SBAR"
+            parent: #18 Constituent:118
+               sofa: sofa id: _InitialView
+               begin: 115               end: 169               constituentType: "NP"
+               parent: #17 Constituent:117
+                  sofa: sofa id: _InitialView
+                  begin: 112                  end: 169                  constituentType: "PP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #25 FSArray:131
+                  Array length: 2
+                  Array elements: ["#19 Constituent:119
+   sofa: sofa id: _InitialView...", "#20 "]
+
+
+            children: #33 FSArray:130
+               Array length: 2
+               Array elements: ["#21 Constituent:122
+   sofa: sofa id: _InitialView...", "#22 "]
+
+
+         children: #41 FSArray:129
+            Array length: 2
+            Array elements: ["#42 Token:87
+   sofa: sofa id: _InitialView
+   beg...", "#23 "]
+
+
+      children: #45 FSArray:128
+         Array length: 2
+         Array elements: ["#46 Token:90
+   sofa: sofa id: _InitialView
+   beg...", "#24 "]
+
+
+   children: #49 FSArray:127
+      Array length: 2
+      Array elements: ["#50 Token:93
+   sofa: sofa id: _InitialView
+   beg...", "#53 Token:96
+   sofa: sofa id: _InitialView
+   beg..."]
+
 [cultivated]
-POS_VERB
-   sofa: _InitialView
-   begin: 157
-   end: 167
-   PosValue: "VBN"
+#0 POS_VERB:95
+   sofa: sofa id: _InitialView
+   begin: 157   end: 167   PosValue: "VBN"
    coarseValue: "VERB"
 [cultivated]
-Lemma
-   sofa: _InitialView
-   begin: 157
-   end: 167
-   value: "cultivate"
+#0 Lemma:94
+   sofa: sofa id: _InitialView
+   begin: 157   end: 167   value: "cultivate"
 [cultivated]
-Token
-   sofa: _InitialView
-   begin: 157
-   end: 167
-   parent: Constituent
-      sofa: _InitialView
-      begin: 157
-      end: 169
-      constituentType: "VP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 153
-         end: 169
-         constituentType: "VP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 150
-            end: 169
-            constituentType: "S"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 131
-               end: 169
-               constituentType: "SBAR"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 115
-                  end: 169
-                  constituentType: "NP"
-                  parent: Constituent
-                     sofa: _InitialView
-                     begin: 112
-                     end: 169
-                     constituentType: "PP"
-                     parent: Constituent
-                        sofa: _InitialView
-                        begin: 103
-                        end: 169
-                        constituentType: "NP"
-                        parent: Constituent
-                           sofa: _InitialView
-                           begin: 98
-                           end: 169
-                           constituentType: "PP"
-                           parent: Constituent
-                              sofa: _InitialView
-                              begin: 89
-                              end: 169
-                              constituentType: "VP"
-                              parent: Constituent
-                                 sofa: _InitialView
-                                 begin: 86
-                                 end: 169
-                                 constituentType: "PP"
-                                 parent: Constituent
-                                    sofa: _InitialView
-                                    begin: 48
-                                    end: 169
-                                    constituentType: "PP"
-                                    parent: Constituent
-                                       sofa: _InitialView
-                                       begin: 33
-                                       end: 169
-                                       constituentType: "VP"
-                                       parent: ROOT
-                                          sofa: _InitialView
-                                          begin: 0
-                                          end: 169
-                                          constituentType: "S"
-                                          children: FSArray
-                                       children: FSArray
-                                    children: FSArray
-                                 children: FSArray
-                              children: FSArray
-                           children: FSArray
-                        children: FSArray
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 157
-      end: 167
-      value: "cultivate"
-   pos: POS_VERB
-      sofa: _InitialView
-      begin: 157
-      end: 167
-      PosValue: "VBN"
+#25 Token:93
+   sofa: sofa id: _InitialView
+   begin: 157   end: 167   parent: #24 Constituent:126
+      sofa: sofa id: _InitialView
+      begin: 157      end: 169      constituentType: "VP"
+      parent: #23 Constituent:125
+         sofa: sofa id: _InitialView
+         begin: 153         end: 169         constituentType: "VP"
+         parent: #22 Constituent:124
+            sofa: sofa id: _InitialView
+            begin: 150            end: 169            constituentType: "S"
+            parent: #20 Constituent:121
+               sofa: sofa id: _InitialView
+               begin: 131               end: 169               constituentType: "SBAR"
+               parent: #18 Constituent:118
+                  sofa: sofa id: _InitialView
+                  begin: 115                  end: 169                  constituentType: "NP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #26 FSArray:130
+                  Array length: 2
+                  Array elements: ["#21 Constituent:122
+   sofa: sofa id: _InitialView...", "#22 "]
+
+
+            children: #34 FSArray:129
+               Array length: 2
+               Array elements: ["#35 Token:87
+   sofa: sofa id: _InitialView
+   beg...", "#23 "]
+
+
+         children: #38 FSArray:128
+            Array length: 2
+            Array elements: ["#39 Token:90
+   sofa: sofa id: _InitialView
+   beg...", "#24 "]
+
+
+      children: #42 FSArray:127
+         Array length: 2
+         Array elements: ["#25 ", "#43 Token:96
+   sofa: sofa id: _InitialView
+   beg..."]
+
+
+   lemma: #46 Lemma:94
+      sofa: sofa id: _InitialView
+      begin: 157      end: 167      value: "cultivate"
+
+   pos: #47 POS_VERB:95
+      sofa: sofa id: _InitialView
+      begin: 157      end: 167      PosValue: "VBN"
       coarseValue: "VERB"
+
    id: "s115_30"
 [cultivated]
-SemArg
-   sofa: _InitialView
-   begin: 157
-   end: 167
+#0 SemArg:197
+   sofa: sofa id: _InitialView
+   begin: 157   end: 167
 [.]
-POS
-   sofa: _InitialView
-   begin: 168
-   end: 169
-   PosValue: "PUNC."
+#0 POS:98
+   sofa: sofa id: _InitialView
+   begin: 168   end: 169   PosValue: "PUNC."
 [.]
-Lemma
-   sofa: _InitialView
-   begin: 168
-   end: 169
-   value: "."
+#0 Lemma:97
+   sofa: sofa id: _InitialView
+   begin: 168   end: 169   value: "."
 [.]
-Token
-   sofa: _InitialView
-   begin: 168
-   end: 169
-   parent: Constituent
-      sofa: _InitialView
-      begin: 157
-      end: 169
-      constituentType: "VP"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 153
-         end: 169
-         constituentType: "VP"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 150
-            end: 169
-            constituentType: "S"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 131
-               end: 169
-               constituentType: "SBAR"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 115
-                  end: 169
-                  constituentType: "NP"
-                  parent: Constituent
-                     sofa: _InitialView
-                     begin: 112
-                     end: 169
-                     constituentType: "PP"
-                     parent: Constituent
-                        sofa: _InitialView
-                        begin: 103
-                        end: 169
-                        constituentType: "NP"
-                        parent: Constituent
-                           sofa: _InitialView
-                           begin: 98
-                           end: 169
-                           constituentType: "PP"
-                           parent: Constituent
-                              sofa: _InitialView
-                              begin: 89
-                              end: 169
-                              constituentType: "VP"
-                              parent: Constituent
-                                 sofa: _InitialView
-                                 begin: 86
-                                 end: 169
-                                 constituentType: "PP"
-                                 parent: Constituent
-                                    sofa: _InitialView
-                                    begin: 48
-                                    end: 169
-                                    constituentType: "PP"
-                                    parent: Constituent
-                                       sofa: _InitialView
-                                       begin: 33
-                                       end: 169
-                                       constituentType: "VP"
-                                       parent: ROOT
-                                          sofa: _InitialView
-                                          begin: 0
-                                          end: 169
-                                          constituentType: "S"
-                                          children: FSArray
-                                       children: FSArray
-                                    children: FSArray
-                                 children: FSArray
-                              children: FSArray
-                           children: FSArray
-                        children: FSArray
-                     children: FSArray
-                  children: FSArray
-               children: FSArray
-            children: FSArray
-         children: FSArray
-      children: FSArray
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 168
-      end: 169
-      value: "."
-   pos: POS
-      sofa: _InitialView
-      begin: 168
-      end: 169
-      PosValue: "PUNC."
+#25 Token:96
+   sofa: sofa id: _InitialView
+   begin: 168   end: 169   parent: #24 Constituent:126
+      sofa: sofa id: _InitialView
+      begin: 157      end: 169      constituentType: "VP"
+      parent: #23 Constituent:125
+         sofa: sofa id: _InitialView
+         begin: 153         end: 169         constituentType: "VP"
+         parent: #22 Constituent:124
+            sofa: sofa id: _InitialView
+            begin: 150            end: 169            constituentType: "S"
+            parent: #20 Constituent:121
+               sofa: sofa id: _InitialView
+               begin: 131               end: 169               constituentType: "SBAR"
+               parent: #18 Constituent:118
+                  sofa: sofa id: _InitialView
+                  begin: 115                  end: 169                  constituentType: "NP"
+                  parent:  ... past indent 20 ... 
+                  children:  ... past indent 20 ... 
+
+               children: #26 FSArray:130
+                  Array length: 2
+                  Array elements: ["#21 Constituent:122
+   sofa: sofa id: _InitialView...", "#22 "]
+
+
+            children: #34 FSArray:129
+               Array length: 2
+               Array elements: ["#35 Token:87
+   sofa: sofa id: _InitialView
+   beg...", "#23 "]
+
+
+         children: #38 FSArray:128
+            Array length: 2
+            Array elements: ["#39 Token:90
+   sofa: sofa id: _InitialView
+   beg...", "#24 "]
+
+
+      children: #42 FSArray:127
+         Array length: 2
+         Array elements: ["#43 Token:93
+   sofa: sofa id: _InitialView
+   beg...", "#25 "]
+
+
+   lemma: #46 Lemma:97
+      sofa: sofa id: _InitialView
+      begin: 168      end: 169      value: "."
+
+   pos: #47 POS:98
+      sofa: sofa id: _InitialView
+      begin: 168      end: 169      PosValue: "PUNC."
+
    id: "s115_31"
 -------- View _InitialView end ----------------------------------
 
