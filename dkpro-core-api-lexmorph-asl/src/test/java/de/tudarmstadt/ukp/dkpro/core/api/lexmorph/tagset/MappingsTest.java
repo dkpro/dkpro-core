@@ -79,7 +79,8 @@ public class MappingsTest
             for (String tag : mappingProvider.getTags()) {
                 String typeName = mappingProvider.getTagTypeName(tag);
                 try {
-                    Class<?> clazz = Class.forName(typeName);
+                    // See https://issues.apache.org/jira/browse/UIMA-5553
+                    Class<?> clazz = Class.forName(typeName, false, MappingsTest.class.getClassLoader());
                     if (!ArrayUtils.contains(POS_TAGS, clazz) && !typeName.contains(".tweet.")) {
                         System.out.printf("%s Using deprecated type: %s %n", tag, typeName);
                         failure = true;
