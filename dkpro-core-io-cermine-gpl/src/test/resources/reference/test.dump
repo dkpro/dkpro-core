@@ -2,11 +2,9 @@
 
 -------- View _InitialView begin ----------------------------------
 
-DocumentMetaData
-   sofa: _InitialView
-   begin: 0
-   end: 50111
-   language: "x-unspecified"
+#0 DocumentMetaData:1
+   sofa: sofa id: _InitialView
+   begin: 0   end: 50111   language: "x-unspecified"
    documentTitle: "Out-of-domain FrameNet Semantic Role Labeling"
    documentId: "Out-of-domain FrameNet Semantic Role Labeling"
    isLastSegment: false
@@ -767,21 +765,18 @@ regarding WebAnno, as well as Dr. Judith Eckle-Kohler
 and the anonymous reviewers for their comments
 on earlier versions of this paper.  Eneko   Agirre  , Oier Lo´pez de Lacalle, Christiane Fellbaum,   Shu-Kai   Hsieh  , Maurizio Tesconi, Monica Monachini, Piek Vossen, and   Roxanne   Segers  .  2010 . SemEval-2010  Task   17 :  All-Words Word Sense   Disambiguation on a Specific Domain .  InProceedings of the 5th International Workshop on Semantic Evaluation , pages   75 - 80 . Association for Computational Linguistics.  Collin   Baker  ,   Michael   Ellsworth  , and   Katrin   Erk  .  2007 . SemEval-2007  Task   19 :  Frame Semantic Structure Extraction .  In Proceedings of the Fourth International Workshop on Semantic Evaluations (SemEval2007) , pages   99 - 104 , Prague, Czech Republic, June. Association for Computational Linguistics.  Jonathan   Berant  , Vivek Srikumar,   Pei-Chun   Chen  , Abby Vander Linden, Brittany Harding, Brad Huang,   Peter   Clark  , and   Christopher D.   Manning  .  2014 .  Modeling Biological Processes for Reading Comprehension .  In Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP) , pages   1499 - 1510 , Doha, Qatar. Association for Computational Linguistics. John Blitzer ,   Ryan McDonald ,  and Fernando    Pereira .  2006 .  Domain adaptation with structural correspondence learning .  In Proceedings of the 2006 Conference on Empirical Methods in Natural Language Processing , pages   120 - 128 , Sydney, Australia, July. Association for Computational Linguistics.  Xavier   Carreras   and Llu´ıs Ma`rquez.  2005 .  Introduction to the CoNLL-2005 shared task: Semantic role labeling .  In Proceedings of the Ninth Conference on Computational Natural Language Learning (CoNLL-2005) , pages   152 - 164 , Ann Arbor, Michigan, June. Association for Computational Linguistics.  Danilo   Croce  , Cristina Giannone, Paolo Annesi, and   Roberto   Basili  .  2010 .  Towards open-domain semantic role labeling .  In Proceedings of the 48th Annual Meeting of the Association for Computational Linguistics , pages   237 - 246 , Uppsala, Sweden, July. Association for Computational Linguistics.  Dipanjan Das  and  Noah A.    Smith .  2011 .  SemiSupervised Frame-Semantic Parsing for Unknown Predicates .  In Proc. of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies , pages   1435 - 1444 , Portland, Oregon, USA. Dipanjan Das ,   Desai Chen , Andre´ F.  T.     Martins ,  Nathan    Schneider , and   Noah   A.    Smith .  2014 .  Frame-semantic parsing .  Computational Linguistics ,  40 ( 1 ):  9 - 56 .  Hal   Daume  ´III.  2007 .  Frustratingly easy domain adaptation .  In Proceedings of the 45th Annual Meeting of the Association of Computational Linguistics , pages   256 - 263 , Prague, Czech Republic, June. Association for Computational Linguistics.  Katrin   Erk   and Sebastian Pado´.  2006 .  SHALMANESER - A Toolchain For Shallow Semantic Parsing .  In Proceedings of the 5th International Conference on Language Resources and Evaluation (LREC   2006 ), volume  6 , pages   527 - 532 , Genoa, Italy. ELRA. Charles J. Fillmore ,  Christopher R. Johnson , and   Miriam   R.L.    Petruck .  2003 . Background to FrameNet.  International journal of lexicography ,  16 ( 3 ):  235 - 250 .  Nicholas   FitzGerald  , Oscar Ta¨ckstro¨m, Kuzman Ganchev, and  Dipanjan Das .  2015 .  Semantic role labeling with neural network factors .  In Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing , pages   960 - 970 , Lisbon, Portugal, September. Association for Computational Linguistics.  Jan   Hajicˇ  , Massimiliano Ciaramita, Richard Johansson, Daisuke Kawahara, Maria Anto`nia Mart´ı, Llu´ıs Ma`rquez, Adam Meyers, Joakim Nivre, Sebastian Pado´, Jan Sˇ teˇpa´nek, Pavel Stranˇa´k, Mihai Surdeanu, Nianwen Xue,   and Yi   Zhang  .  2009 .  The conll2009 shared task: Syntactic and semantic dependencies in multiple languages .  In Proceedings of the Thirteenth Conference on Computational Natural Language Learning (CoNLL   2009 ): Shared Task, pages   1 - 18 , Boulder, Colorado, June. Association for Computational Linguistics.  Karl Moritz   Hermann  ,  Dipanjan Das ,   Jason Weston , and  Kuzman    Ganchev .  2014 .  Semantic frame identification with distributed word representations .  In Proceedings of the 52nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) , pages   1448 - 1458 , Baltimore, Maryland, June. Association for Computational Linguistics.  Fei   Huang   and   Alexander   Yates  .  2010 .  Open-domain semantic role labeling by modeling word spans .  In Proceedings of the 48th Annual Meeting of the Association for Computational Linguistics , pages   968 -  978 , Uppsala, Sweden, July. Association for Computational Linguistics.  Ignacio   Iacobacci  , Mohammad Taher Pilehvar, and   Roberto   Navigli  .  2016 .  Embeddings for Word Sense Disambiguation: An Evaluation Study .  In Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) , pages   897 - 907 , Berlin, Germany, August. Association for Computational Linguistics.  Anders   Johannsen  ,  He´ctor Mart´ınez Alonso, and    Anders   Søgaard  .  2015 .  Any-language frame-semantic parsing .  In Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing , pages   2062 - 2066 , Lisbon, Portugal, September. Association for Computational Linguistics.  Richard   Johansson   and   Pierre   Nugues  .  2008 .  The effect of syntactic representation on semantic role labeling .  In Proceedings of the 22nd International Conference on Computational Linguistics (Coling   2008 ), pages   393 - 400 , Manchester,  UK ,  August . Coling 2008   Organizing   Committee  .  Meghana   Kshirsagar  , Sam Thomson, Nathan Schneider, Jaime Carbonell, Noah A.   Smith ,  and Chris    Dyer .  2015 .  Frame-semantic role labeling with heterogeneous annotations .  In Proceedings of the 53rd Annual Meeting of the Association for Computational Linguistics and the 7th International Joint Conference on Natural Language Processing (Volume 2: Short Papers) , pages   218 - 224 , Beijing, China, July. Association for Computational Linguistics.  Maciej   Kula  .  2015 .  Metadata embeddings for user and item cold-start recommendations .  In Toine Bogers and Marijn Koolen , editors,  Proceedings of the 2nd Workshop on New Trends on Content-Based Recommender Systems co-located with 9th ACM Conference on Recommender Systems (RecSys   2015 ), volume  1448   of CEUR Workshop Proceedings , pages   14 - 21 , Vienna, Austria, September.  CEUR-WS.org.  Omer   Levy   and   Yoav   Goldberg  .  2014 .  Dependencybased word embeddings .  In Proceedings of the 52nd Annual Meeting of the Association for Computational Linguistics ,  ACL   2014 , June 22-27,  2014 , Baltimore,  MD , USA, Volume  2 :   Short   Papers  , pages   302 - 308 . The Association for Computer Linguistics.  Oren   Melamud  ,   Jacob   Goldberger  , and   Ido   Dagan  .  2016 .  context2vec: Learning generic context embedding with bidirectional LSTM .  In Proceedings of the 20th SIGNLL Conference on Computational Natural Language Learning ,  CoNLL 2016 , Berlin, Germany,  August 11-12 ,  2016 , pages   51 - 61 .  Tomas   Mikolov  , Ilya Sutskever, Kai Chen, Greg Corrado, and   Jeffrey   Dean  .  2013 .  Distributed Representations of Words and Phrases and Their Compositionality .  In Proceedings of the 26th International Conference on Neural Information Processing Systems (NIPS '13) , pages   3111 - 3119 ,   Lake   Tahoe  , Nevada, USA.  Alexis   Palmer   and   Caroline   Sporleder  .  2010 .  Evaluating FrameNet-style semantic parsing: the role of coverage gaps in FrameNet .  In Proceedings of the 23rd International Conference on Computational Linguistics: Posters , pages   928 - 936 , Beijing, China,  August .  Rebecca J. Passonneau ,  Collin F.     Baker , Christiane Fellbaum, and  Nancy    Ide .  2012 .  The MASC Word Sense Corpus .  In Proceedings of the Eight International Conference on Language Resources and Evaluation (LREC'12) , pages   3025 - 3030 , Istanbul, Turkey.  Jeffrey   Pennington  , Richard Socher, and   Christopher   Manning  .  2014 .  Glove: Global vectors for word representation .  In Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP) , pages   1532 -  1543 , Doha, Qatar, October. Association for Computational Linguistics.  Michael   Roth   and   Mirella   Lapata  .  2015 .  Contextaware frame-semantic role labeling .  Transactions of the Association for Computational Linguistics ,  3 :  449 - 460 .  Josef   Ruppenhofer  , Michael Ellsworth,  Miriam R. L. Petruck ,   Christopher R. Johnson , and  Jan    Scheffczyk .  2010 .  FrameNet II: Extended Theory and Practice .  Technical report , ICSI, University of California, Berkeley.  Anders   Søgaard  , Barbara Plank, and H e´ctor Mart´ınez Alonso.  2015 .  Using Frame Semantics for Knowledge Extraction from Twitter .  In Proceedings of the Twenty-Ninth AAAI Conference on Artificial Intelligence  , pages   2447 - 2452 , Austin, Texas, USA.  Anders   Søgaard  .  2013 .  Semi-supervised learning and domain adaptation in natural language processing .  Synthesis Lectures on Human Language Technologies ,  6 ( 2 ):  1 - 103 .  Mihai   Surdeanu  , Richard Johansson, Adam Meyers, Llu´ıs Ma`rquez, and   Joakim   Nivre  .  2008 .  The conll 2008 shared task on joint parsing of syntactic and semantic dependencies .  In CoNLL 2008: Proceedings of the Twelfth Conference on Computational Natural Language Learning , pages   159 - 177 , Manchester, England,  August.   Coling 2008 Organizing Committee .  Mihai   Surdeanu  , Massimiliano Ciaramita, and   Hugo   Zaragoza  .  2011 .  Learning to rank answers to nonfactoid questions from web collections .  Computational Linguistics ,  37 ( 2 ):  351 - 383 .  Kaveh   Taghipour   and Hwee Tou Ng.  2015 .  SemiSupervised Word Sense Disambiguation Using Word Embeddings in General and Specific Domains .  In Proceedings of the 2015 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies , pages   314 - 323 , Denver, Colorado, May-June.  Association for Computational Linguistics .  Jason   Weston  , Samy Bengio, and   Nicolas   Usunier  .  2011 .  WSABIE: Scaling Up to Large Vocabulary Image Annotation .  In Proceedings of the Twenty-Second International Joint Conference on Artificial Intelligence -  Volume Volume Three ,  IJCAI'11 , pages   2764 - 2770 , Barcelona, Catalonia, Spain. AAAI Press.  Haitong   Yang  ,   Tao   Zhuang  , and   Chengqing   Zong  .  2015 .  Domain adaptation for syntactic and semantic dependency parsing using deep belief networks .  Transactions of the Association for Computational Linguistics ,  3 :  271 - 282 .  Seid   Muhie    Yimam , Richard Eckart de Castilho, Iryna Gurevych, and   Chris   Biemann  .  2014 .  Automatic Annotation Suggestions and Custom Annotation Layers in WebAnno . In Kalina Bontcheva and Zhu Jingbo, editors,  Proceedings of the 52nd Annual Meeting of the Association for Computational Linguistics. System Demonstrations , pages   91 - 96 , Stroudsburg, PA  18360 , USA. Association for Computational Linguistics.
 [ Out-of-domain FrameNet Semantic Role Labeling]
-Heading
-   sofa: _InitialView
-   begin: 0
-   end: 46
+#0 Heading:3
+   sofa: sofa id: _InitialView
+   begin: 0   end: 46   divType: <null>
 [ Silvana Hartmann 0 Ilia Kuznetsov 0 Teresa Martin 0 Iryna Gurevych 0 Research Training Group AIPHES 0 Ubiquitous Knowledge Processing (UKP) Lab 0 0 Department of Computer Science, Technische Universita ̈t Darmstadt 2017 1 471 482 Domain dependence of NLP systems is one of the major obstacles to their application in large-scale text analysis, also restricting the applicability of FrameNet semantic role labeling (SRL) systems. Yet, current FrameNet SRL systems are still only evaluated on a single in-domain test set. For the first time, we study the domain dependence of FrameNet SRL on a wide range of benchmark sets. We create a novel test set for FrameNet SRL based on user-generated web text and find that the major bottleneck for out-of-domain FrameNet SRL is the frame identification step. To address this problem, we develop a simple, yet efficient system based on distributed word representations. Our system closely approaches the state-of-the-art in-domain while outperforming the best available frame identification system out-of-domain. We publish our system and test data for research purposes.1]
-Paragraph
-   sofa: _InitialView
-   begin: 46
-   end: 1158
+#0 Paragraph:4
+   sofa: sofa id: _InitialView
+   begin: 46   end: 1158   divType: <null>
 [ -
 ]
-Heading
-   sofa: _InitialView
-   begin: 1158
-   end: 1161
+#0 Heading:5
+   sofa: sofa id: _InitialView
+   begin: 1158   end: 1161   divType: <null>
 [ Domain dependence is a major problem for
 supervised NLP tasks such as FrameNet semantic role
 labeling (SRL): systems generally exhibit a strong
@@ -789,38 +784,33 @@ performance drop when applied to test data from
 a different distribution than the training data. This
 prohibits their large-scale use in language
 technology applications.]
-Paragraph
-   sofa: _InitialView
-   begin: 1161
-   end: 1476
+#0 Paragraph:6
+   sofa: sofa id: _InitialView
+   begin: 1161   end: 1476   divType: <null>
 [ The same problems are expected for FrameNet
 SRL, but due to a lack of datasets,
 state-of-theart FrameNet SRL is only evaluated on a single
 in-domain test set, see e.g. Das et al. (2014) and
 FitzGerald et al. (2015).]
-Paragraph
-   sofa: _InitialView
-   begin: 1476
-   end: 1692
+#0 Paragraph:7
+   sofa: sofa id: _InitialView
+   begin: 1476   end: 1692   divType: <null>
 [ In this work, we present the first comprehensive
 study of the domain dependence of FrameNet SRL]
-Paragraph
-   sofa: _InitialView
-   begin: 1692
-   end: 1788
+#0 Paragraph:8
+   sofa: sofa id: _InitialView
+   begin: 1692   end: 1788   divType: <null>
 [ 1www.ukp.tu-darmstadt.de/ood-fn-srl
 ]
-Heading
-   sofa: _InitialView
-   begin: 1788
-   end: 1825
+#0 Heading:9
+   sofa: sofa id: _InitialView
+   begin: 1788   end: 1825   divType: <null>
 [ on a range of benchmark datasets. This is crucial as
 the demand for semantic textual analysis of
 largescale web data keeps growing.]
-Paragraph
-   sofa: _InitialView
-   begin: 1825
-   end: 1957
+#0 Paragraph:10
+   sofa: sofa id: _InitialView
+   begin: 1825   end: 1957   divType: <null>
 [ Based on FrameNet  (Fillmore et al., 2003) ,
 FrameNet SRL extracts frame-semantic structures
 on the sentence level that describe a specific
@@ -836,10 +826,9 @@ an example of the Grinding frame and its roles:
 malt]P atient [to grist]Result.
 grindsGrinding
 [the]
-Paragraph
-   sofa: _InitialView
-   begin: 1957
-   end: 2567
+#0 Paragraph:11
+   sofa: sofa id: _InitialView
+   begin: 1957   end: 2567   divType: <null>
 [ FrameNet SRL consists of two steps, frame
 identification (frameId), assigning a frame to the current
 predicate, and role labeling (roleId), identifying the
@@ -855,19 +844,17 @@ is that it results in a more fine-grained and rich
 interpretation of the input sentences which is
 crucial for many applications, e.g. reasoning in online
 debates  (Berant et al., 2014) .]
-Paragraph
-   sofa: _InitialView
-   begin: 2567
-   end: 3303
+#0 Paragraph:12
+   sofa: sofa id: _InitialView
+   begin: 2567   end: 3303   divType: <null>
 [ Domain dependence is a well-studied topic for
 PropBank SRL. However, to the best of our
 knowledge, there exists no analysis of the performance
 of modern FrameNet SRL systems when applied
 to data from new domains.]
-Paragraph
-   sofa: _InitialView
-   begin: 3303
-   end: 3516
+#0 Paragraph:13
+   sofa: sofa id: _InitialView
+   begin: 3303   end: 3516   divType: <null>
 [ In this work, we address this problem as
 follows: we introduce a new benchmark dataset YAGS
 (Yahoo! Answers Gold Standard), which is based
@@ -888,10 +875,9 @@ generalization. Our system’s performance matches the
 state-of-the-art in-domain  (Hermann et al., 2014) ,
 despite using a simpler model, and improves on the
 out-of-domain performance of Semafor.]
-Paragraph
-   sofa: _InitialView
-   begin: 3516
-   end: 4491
+#0 Paragraph:14
+   sofa: sofa id: _InitialView
+   begin: 3516   end: 4491   divType: <null>
 [ The contributions of the present work are
 twofold: 1) we perform the first comprehensive study
 of the domain generalization capabilities of
@@ -905,16 +891,14 @@ FrameNet SRL; we publish the annotations for the
 YAGS benchmark set and our frame identification
 system for research purposes.
 2]
-Paragraph
-   sofa: _InitialView
-   begin: 4491
-   end: 5060
+#0 Paragraph:15
+   sofa: sofa id: _InitialView
+   begin: 4491   end: 5060   divType: <null>
 [ Related work
 ]
-Heading
-   sofa: _InitialView
-   begin: 5060
-   end: 5074
+#0 Heading:16
+   sofa: sofa id: _InitialView
+   begin: 5060   end: 5074   divType: <null>
 [ The domain dependence of FrameNet SRL
 systems has been only studied sparsely, however, there
 exists a large body of work on out-of-domain
@@ -923,10 +907,9 @@ methods for NLP. This section briefly introduces
 some of the relevant approaches in these areas, and
 then summarizes the state-of-the-art in FrameNet
 frame identification.]
-Paragraph
-   sofa: _InitialView
-   begin: 5074
-   end: 5438
+#0 Paragraph:17
+   sofa: sofa id: _InitialView
+   begin: 5074   end: 5438   divType: <null>
 [ Domain adaptation in NLP Low
 out-ofdomain performance is a problem common to
 many supervised machine learning tasks. The
@@ -947,10 +930,9 @@ Brown Corpus. Most of the participants in the
 shared tasks do not consider domain adaptation
 and report systematically lower scores for the
 out-of-domain data (Hajicˇ et al., 2009).]
-Paragraph
-   sofa: _InitialView
-   begin: 5438
-   end: 6369
+#0 Paragraph:18
+   sofa: sofa id: _InitialView
+   begin: 5438   end: 6369   divType: <null>
 [ Representation learning has been successfully
 used to improve on the CoNLL shared task
 results  (Huang and Yates, 2010; FitzGerald et al.,
@@ -961,16 +943,14 @@ data, leading to the best results to date on the
 CoNLL 2009 out-of-domain test. Their system
 learns common representations for in-domain and
 out-of-domain data based on deep belief networks.]
-Paragraph
-   sofa: _InitialView
-   begin: 6369
-   end: 6848
+#0 Paragraph:19
+   sofa: sofa id: _InitialView
+   begin: 6369   end: 6848   divType: <null>
 [ Domain dependence of FrameNet SRL The
 ]
-Heading
-   sofa: _InitialView
-   begin: 6848
-   end: 6887
+#0 Heading:20
+   sofa: sofa id: _InitialView
+   begin: 6848   end: 6887   divType: <null>
 [ FrameNet 1.5 fulltext corpus, used as a standard
 dataset for training and evaluating FrameNet SRL
 systems, contains texts from several domains
@@ -985,10 +965,9 @@ post-edited and linguistically well-formed. The
 FrameNet test setup thus cannot provide
 information on SRL performance on less edited
 out-ofdomain data, e.g. user-generated web data.]
-Paragraph
-   sofa: _InitialView
-   begin: 6887
-   end: 7570
+#0 Paragraph:21
+   sofa: sofa id: _InitialView
+   begin: 6887   end: 7570   divType: <null>
 [ There are few studies related to the
 out-ofdomain generalization of FrameNet SRL.
 Johansson and Nugues (2008) evaluate the impact of
@@ -1011,10 +990,9 @@ It is not transparent how their results would transfer
 to the current state-of-the-art SRL systems that
 already integrate methods to improve generalization,
 for instance using distributed representations.]
-Paragraph
-   sofa: _InitialView
-   begin: 7570
-   end: 8649
+#0 Paragraph:22
+   sofa: sofa id: _InitialView
+   begin: 7570   end: 8649   divType: <null>
 [ Palmer and Sporleder (2010) analyze the
 FrameNet 1.3 training data coverage and the
 performance of the Shalmaneser SRL system  (Erk
@@ -1030,10 +1008,9 @@ to new domains. Our observations support their
 findings and show that the problem still persists
 even when modern SRL methods and the extended
 FrameNet 1.5 lexicon are used.]
-Paragraph
-   sofa: _InitialView
-   begin: 8649
-   end: 9351
+#0 Paragraph:23
+   sofa: sofa id: _InitialView
+   begin: 8649   end: 9351   divType: <null>
 [ Søgaard et al. (2015) annotate 236 tweets with
 FrameNet labels to apply SRL to knowledge
 extraction from Twitter. They report that the frameId
@@ -1045,10 +1022,9 @@ reaches only 25.96% on the Twitter set compared
 to the 46.5% reported by Das et al. (2010) on the
 indomain set. These results show that there is ample
 room for improvement for SRL on Twitter data.]
-Paragraph
-   sofa: _InitialView
-   begin: 9351
-   end: 9895
+#0 Paragraph:24
+   sofa: sofa id: _InitialView
+   begin: 9351   end: 9895   divType: <null>
 [ Recent FrameNet SRL systems are not
 evaluated in the context of their domain dependence:
 Kshirsagar et al. (2015) use the domain adaptation
@@ -1069,10 +1045,9 @@ frame identification is the approach by Hermann
 et al. (2014), further referred to as Hermann-14,
 followed by the previous state-of-the art model
 Semafor  (Das et al., 2014) .]
-Paragraph
-   sofa: _InitialView
-   begin: 9895
-   end: 10848
+#0 Paragraph:25
+   sofa: sofa id: _InitialView
+   begin: 9895   end: 10848   divType: <null>
 [ The frame identification system of Semafor
 relies on an elaborate feature set based on
 syntactic and lexical features, using the WordNet
@@ -1084,10 +1059,9 @@ coverage is limited, and the quality of syntactic parsing
 might drop when the system is applied to
 out-ofdomain data, especially in case of non-standard
 user-generated texts.]
-Paragraph
-   sofa: _InitialView
-   begin: 10848
-   end: 11358
+#0 Paragraph:26
+   sofa: sofa id: _InitialView
+   begin: 10848   end: 11358   divType: <null>
 [ Hermann-14 uses distributed word
 representations augmented by syntactic information.
 Generalpurpose distributed word representations (such as
@@ -1120,16 +1094,14 @@ similar frames. This system is the current
 state-ofthe-art for in-domain frame identification, but has
 not been applied in an out-of-domain setting.
 3]
-Paragraph
-   sofa: _InitialView
-   begin: 11358
-   end: 12898
+#0 Paragraph:27
+   sofa: sofa id: _InitialView
+   begin: 11358   end: 12898   divType: <null>
 [ Out-of-domain FrameNet test data
 ]
-Heading
-   sofa: _InitialView
-   begin: 12898
-   end: 12932
+#0 Heading:28
+   sofa: sofa id: _InitialView
+   begin: 12898   end: 12932   divType: <null>
 [ This section describes available in-domain and
 outof-domain FrameNet test sets and the creation of
 YAGS, a new out-of-domain FrameNet test set.
@@ -1141,10 +1113,9 @@ corpus. While the FrameNet fulltext corpus contains
 data from various sources, we consider das-test an
 in-domain test set: all data sources of the test set
 are also represented in the training set.]
-Paragraph
-   sofa: _InitialView
-   begin: 12932
-   end: 13466
+#0 Paragraph:29
+   sofa: sofa id: _InitialView
+   begin: 12932   end: 13466   divType: <null>
 [ There are two additional datasets from other
 domains that we use in our study on domain
 generalization: The MASC word sense sentences
@@ -1159,10 +1130,9 @@ the annotator TW3 annotated only 82% of the
 number of roles annotated by TW1, see Table 1. Like
 Søgaard et al. (2015), we report SRL results as
 averages over the three annotations (TW-av).]
-Paragraph
-   sofa: _InitialView
-   begin: 13466
-   end: 14139
+#0 Paragraph:30
+   sofa: sofa id: _InitialView
+   begin: 13466   end: 14139   divType: <null>
 [ Table 1 shows statistics on these datasets. For
 TW, it displays the statistics for each annotator.
 The TW datasets are fairly small, containing only
@@ -1177,16 +1147,14 @@ existing out-of-domain test sets for FrameNet SRL
 are insufficient, in particular for increasingly
 important domains like user-generated text, because
 available datasets are either small or of low quality.]
-Paragraph
-   sofa: _InitialView
-   begin: 14139
-   end: 14854
+#0 Paragraph:31
+   sofa: sofa id: _InitialView
+   begin: 14139   end: 14854   divType: <null>
 [ YAGS: a new FrameNet test set based on user
 ]
-Heading
-   sofa: _InitialView
-   begin: 14854
-   end: 14899
+#0 Heading:32
+   sofa: sofa id: _InitialView
+   begin: 14854   end: 14899   divType: <null>
 [ generated text To address the need for new
 outof-domain test datasets, we created YAGS, a new
 FrameNet-annotated evaluation dataset based on
@@ -1198,10 +1166,9 @@ the YA Manner Questions dataset used by
 Surdeanu et al. (2011) and published as part of the
 Yahoo! Webscope program (https://webscope.
 sandbox.yahoo.com/).]
-Paragraph
-   sofa: _InitialView
-   begin: 14899
-   end: 15385
+#0 Paragraph:33
+   sofa: sofa id: _InitialView
+   begin: 14899   end: 15385   divType: <null>
 [ YAGS contains 1,415 sentences, 3,091 frame
 annotations, and 6,081 role annotations. Figure 1
 shows a sentence from YAGS that demonstrates
@@ -1209,10 +1176,9 @@ some non-standard properties of the user-generated
 question-answer data, such as typos (mortal instead
 of mortar). We publish the annotations as stand-off
 annotations to the original dataset.]
-Paragraph
-   sofa: _InitialView
-   begin: 15385
-   end: 15715
+#0 Paragraph:34
+   sofa: sofa id: _InitialView
+   begin: 15385   end: 15715   divType: <null>
 [ Annotation study Each document was
 annotated by a two linguistically trained annotators
 provided with detailed guidelines and then curated by
@@ -1229,10 +1195,9 @@ label them with the appropriate role. For reference,
 annotators accessed the FrameNet 1.5 definitions
 and examples with the FrameNet Explorer tool
 (www.clres.com/FNExplorer.html).]
-Paragraph
-   sofa: _InitialView
-   begin: 15715
-   end: 16466
+#0 Paragraph:35
+   sofa: sofa id: _InitialView
+   begin: 15715   end: 16466   divType: <null>
 [ Inter-rater agreement for frame labels is
 Krippendorff’s α=0.76; agreement for role labels given
 matching spans is α=0.62, and Krippendorff’s α
@@ -1243,16 +1208,14 @@ labels is high at 0.96, higher than the 0.84 reported
 by Søgaard et al. (2015) for the TW sets. Our high
 frame agreement is a result of annotator experience
 and our elaborate annotation setup.]
-Paragraph
-   sofa: _InitialView
-   begin: 16466
-   end: 16951
+#0 Paragraph:36
+   sofa: sofa id: _InitialView
+   begin: 16466   end: 16951   divType: <null>
 [ YAGS statistics and properties Table 1 presents
 ]
-Heading
-   sofa: _InitialView
-   begin: 16951
-   end: 17000
+#0 Heading:37
+   sofa: sofa id: _InitialView
+   begin: 16951   end: 17000   divType: <null>
 [ dataset statistics for YAGS and the other test sets.
 Due to the predicate selection, YAGS contains a
 larger proportion of verbal predicates than the other
@@ -1270,33 +1233,29 @@ n
 v
 compared to das-test. This goes along with a larger
 variance of roles in YAGS.]
-Paragraph
-   sofa: _InitialView
-   begin: 17000
-   end: 17544
+#0 Paragraph:38
+   sofa: sofa id: _InitialView
+   begin: 17000   end: 17544   divType: <null>
 [ The user-generated aspect of YAGS manifests in
 spelling errors, and in the lack of punctuation and
 structure of the texts. The language is informal, but
 there are only few emoticons or other special words
 such as the hashtags typically found in tweets.]
-Paragraph
-   sofa: _InitialView
-   begin: 17544
-   end: 17797
+#0 Paragraph:39
+   sofa: sofa id: _InitialView
+   begin: 17544   end: 17797   divType: <null>
 [ In the next section, we use the test sets from
 Table 1 to analyze the domain generalization
 capabilities of an open-source FrameNet SRL system.
 4]
-Paragraph
-   sofa: _InitialView
-   begin: 17797
-   end: 17943
+#0 Paragraph:40
+   sofa: sofa id: _InitialView
+   begin: 17797   end: 17943   divType: <null>
 [ Domain generalization capabilities of open-source FrameNet SRL
 ]
-Heading
-   sofa: _InitialView
-   begin: 17943
-   end: 18007
+#0 Heading:41
+   sofa: sofa id: _InitialView
+   begin: 17943   end: 18007   divType: <null>
 [ To analyze the domain generalization capabilities
 of contemporary open-source SRL, we ran the
 frame identification from Semafor  (Das et al.,
@@ -1306,25 +1265,22 @@ das-train set, on the four test sets das-test, YAGS,
 TW, and MASC. The systems receive text
 annotated with predicate spans as input, which has
 become the standard in recent evaluations.]
-Paragraph
-   sofa: _InitialView
-   begin: 18007
-   end: 18434
+#0 Paragraph:42
+   sofa: sofa id: _InitialView
+   begin: 18007   end: 18434   divType: <null>
 [ Evaluation script The Semafor evaluation
 ]
-Heading
-   sofa: _InitialView
-   begin: 18434
-   end: 18476
+#0 Heading:43
+   sofa: sofa id: _InitialView
+   begin: 18434   end: 18476   divType: <null>
 [ script  (Das et al., 2014)  provides precision P, recall
 R, and F1 scores for full SRL (SRL), and accuracy
 A for frame identification (frameId). Full SRL
 evaluation can be performed with and without using
 gold frames instead of predicted (auto) frames.]
-Paragraph
-   sofa: _InitialView
-   begin: 18476
-   end: 18729
+#0 Paragraph:44
+   sofa: sofa id: _InitialView
+   begin: 18476   end: 18729   divType: <null>
 [ The script does not provide results on the
 role labeling (argument identification and labeling,
 roleId) alone: the scoring mechanism for SRL/gold
@@ -1351,10 +1307,9 @@ Moreover, there are two evaluation settings for frameId:
 exact frame match and partial frame match. We use
 the exact match setting that does not credit related
 frames and roles.]
-Paragraph
-   sofa: _InitialView
-   begin: 18729
-   end: 19664
+#0 Paragraph:45
+   sofa: sofa id: _InitialView
+   begin: 18729   end: 19664   divType: <null>
 [ Results Table 2 presents scores for exact match
 frameId and for SRL and roleId with automatic
 frames (auto) and with gold frames (gold). For TW,
@@ -1370,10 +1325,9 @@ This negatively affects roleId for the out-of-domain
 test sets (see column roleId/auto). RoleId/auto
 scores are also low on das-test, but higher than
 for the other sets.]
-Paragraph
-   sofa: _InitialView
-   begin: 19664
-   end: 20375
+#0 Paragraph:46
+   sofa: sofa id: _InitialView
+   begin: 19664   end: 20375   divType: <null>
 [ When using gold frame labels, roleId and SRL
 performance improve for all test sets. As shown in
 columns roleId/gold and SRL/gold, the difference
@@ -1381,27 +1335,24 @@ between in-domain and out-of-domain evaluation
 vanishes. Only MASC scores are still two points
 lower for full SRL than those for das-test. TW-av
 scores even surpass the in-domain scores.2]
-Paragraph
-   sofa: _InitialView
-   begin: 20375
-   end: 20708
+#0 Paragraph:47
+   sofa: sofa id: _InitialView
+   begin: 20375   end: 20708   divType: <null>
 [ This shows how much FrameNet role labels are
 dependent on correct frame labels. Thus, it is
 crucial to improve the out-of-domain performance of
 frameId systems.]
-Paragraph
-   sofa: _InitialView
-   begin: 20708
-   end: 20869
+#0 Paragraph:48
+   sofa: sofa id: _InitialView
+   begin: 20708   end: 20869   divType: <null>
 [ Domain dependence appears to be less of a
 problem for the role labeling step. The MASC dataset
 is the most difficult for both frameId and roleId.
 This is mostly a consequence of the lower training
 data coverage of MASC, as discussed below.]
-Paragraph
-   sofa: _InitialView
-   begin: 20869
-   end: 21109
+#0 Paragraph:49
+   sofa: sofa id: _InitialView
+   begin: 20869   end: 21109   divType: <null>
 [ 2Our TW-av results are not comparable to those from
 Søgaard et al. (2015) because their test setup includes
 predicate target identification and uses different evaluation metrics.
@@ -1417,10 +1368,9 @@ identification step in SRL. The lower scores for the
 out-ofdomain test sets can be a result of different
 domainspecific predicate-frame distributions, or a lack of
 coverage of the domain in the training data.]
-Paragraph
-   sofa: _InitialView
-   begin: 21109
-   end: 21614
+#0 Paragraph:50
+   sofa: sofa id: _InitialView
+   begin: 21109   end: 21614   divType: <null>
 [ To get a better understanding of these
 phenomena, we compared detailed statistics of the different
 test sets, cf. Table 3. Das-test has the largest
@@ -1430,10 +1380,9 @@ The occurrence of fewer monosemous predicates is
 expected for the lexical sample dataset MASC, but
 might indicate a domain preference for polysemous
 predicates in the YAGS and TW datasets.]
-Paragraph
-   sofa: _InitialView
-   begin: 21614
-   end: 22053
+#0 Paragraph:51
+   sofa: sofa id: _InitialView
+   begin: 21614   end: 22053   divType: <null>
 [ The percentage of unseen predicates (lemmas ∈/
 das-train) is slightly higher for the user-generated
 test sets than for das-test, and much higher for
@@ -1443,10 +1392,9 @@ sets, and the slightly higher performance of TW-av
 and YAGS. Not all errors can be explained by
 insufficient training data coverage, which indicates that
 domain effects occur for the out-of-domain sets.]
-Paragraph
-   sofa: _InitialView
-   begin: 22053
-   end: 22497
+#0 Paragraph:52
+   sofa: sofa id: _InitialView
+   begin: 22053   end: 22497   divType: <null>
 [ To support this assumption, we performed a
 detailed error analysis on the misclassified instances
 for all test sets. We compute the proportion of
@@ -1467,23 +1415,20 @@ for YAGS and TW-av. Manual analysis
 furthermore shows that there are differences in frequently
 confused frames between the in-domain das-test
 and out-of-domain YAGS and TW-av.]
-Paragraph
-   sofa: _InitialView
-   begin: 22497
-   end: 23475
+#0 Paragraph:53
+   sofa: sofa id: _InitialView
+   begin: 22497   end: 23475   divType: <null>
 [ In the next section, we study new methods to
 improve out-of-domain frame identification.
 5]
-Paragraph
-   sofa: _InitialView
-   begin: 23475
-   end: 23566
+#0 Paragraph:54
+   sofa: sofa id: _InitialView
+   begin: 23475   end: 23566   divType: <null>
 [ Frame identification with distributed word representations
 ]
-Heading
-   sofa: _InitialView
-   begin: 23566
-   end: 23626
+#0 Heading:55
+   sofa: sofa id: _InitialView
+   begin: 23566   end: 23626   divType: <null>
 [ Given a predicate and a set of frames associated
 with this predicate, a frame identification system
 has to choose the correct frame based on the
@@ -1509,10 +1454,9 @@ dependency parses, which might decline in quality when
 applied to a new domain. We demonstrate that our
 simple system achieves competitive in-domain and
 out-of-domain performance.]
-Paragraph
-   sofa: _InitialView
-   begin: 23626
-   end: 24819
+#0 Paragraph:56
+   sofa: sofa id: _InitialView
+   begin: 23626   end: 24819   divType: <null>
 [ Our system, called SimpleFrameId, is specified
 as follows: given the lexicon L, the vector space
 vsm and the training data, our goal is to predict the
@@ -1526,10 +1470,9 @@ provides a pre-defined dense vector representation
 vsm(w) for each word w. In our case vsm is a
 simple word lookup function, since we do not modify
 our word representations during training.]
-Paragraph
-   sofa: _InitialView
-   begin: 24819
-   end: 25463
+#0 Paragraph:57
+   sofa: sofa id: _InitialView
+   begin: 24819   end: 25463   divType: <null>
 [ From the sentence we extract the context
 representation, xc = Pw∈C|Cv|sm(w) . We experiment
 with two kinds of contexts: SentBOW includes all
@@ -1568,23 +1511,20 @@ setting, and we encourage the no-lexicon
 performance to be additionally reported in the future,
 since it better reflects the frame identification
 quality and smoothens the effect of lexicon coverage.]
-Paragraph
-   sofa: _InitialView
-   begin: 25463
-   end: 27002
+#0 Paragraph:58
+   sofa: sofa id: _InitialView
+   begin: 25463   end: 27002   divType: <null>
 [ Lexicon-based filtering In the testing stage,
 ]
-Heading
-   sofa: _InitialView
-   begin: 27002
-   end: 27049
+#0 Heading:59
+   sofa: sofa id: _InitialView
+   begin: 27002   end: 27049   divType: <null>
 [ the classifier outputs weights for all the frames
 available in the lexicon, and the best-scoring
 frame is selected, f ← argmaxf∈LD(xc, xp, f ).]
-Paragraph
-   sofa: _InitialView
-   begin: 27049
-   end: 27193
+#0 Paragraph:60
+   sofa: sofa id: _InitialView
+   begin: 27049   end: 27193   divType: <null>
 [ Since the lexicon specifies available frames for
 each lexical unit (i.e. lemma and POS),
 additional filtering can be performed, which
@@ -1594,10 +1534,9 @@ is unknown to the lexicon, p ∈/ L, the overall
 bestscoring frame is chosen. If the target has only one
 entry in the lexicon, it’s declared unambiguous and
 the frame is assigned directly.]
-Paragraph
-   sofa: _InitialView
-   begin: 27193
-   end: 27610
+#0 Paragraph:61
+   sofa: sofa id: _InitialView
+   begin: 27193   end: 27610   divType: <null>
 [ Despite being common, this setup has several
 flaws that can obscure the differences between sys- Experiments In our experiments, we generate
 tems in the testing stage. As we showed in Section the lexicon L in the same way as in Hermann-14,
@@ -1627,32 +1566,28 @@ predicate, selects the overall most frequent frame among
 the ones available for this predicate. We expect this
 baseline to better handle the cases when limited
 data is available for a given predicate sense.]
-Paragraph
-   sofa: _InitialView
-   begin: 27610
-   end: 29423
+#0 Paragraph:62
+   sofa: sofa id: _InitialView
+   begin: 27610   end: 29423   divType: <null>
 [ 3In our implementation, we use the LightFM package
  (Kula, 2015)  with the WARP option for hybrid matrix
 factorization.]
-Paragraph
-   sofa: _InitialView
-   begin: 29423
-   end: 29543
+#0 Paragraph:63
+   sofa: sofa id: _InitialView
+   begin: 29423   end: 29543   divType: <null>
 [ 4A justification for this can also be found in Hermann
 et al. (2014): the difference in Hermann-14 accuracy
 when switching from the Semafor lexicon to the full
 lexicon is comparable to the difference between Semafor and
 Hermann-14 when evaluated on the same lexicon.]
-Paragraph
-   sofa: _InitialView
-   begin: 29543
-   end: 29810
+#0 Paragraph:64
+   sofa: sofa id: _InitialView
+   begin: 29543   end: 29810   divType: <null>
 [ 5Based on the errata version of Hermann et al.
 (2014) in http://www.aclweb.org/anthology/P/]
-Paragraph
-   sofa: _InitialView
-   begin: 29810
-   end: 29902
+#0 Paragraph:65
+   sofa: sofa id: _InitialView
+   begin: 29810   end: 29902   divType: <null>
 [ P14/P14-1136v2.pdf
 DataBaseline
 LexiconBaseline
@@ -1674,16 +1609,14 @@ lemmatization, POS-tagging, and dependency parsing. We
 attribute this effect to the fact that SentBOW
 provides more context information than the sparse,
 dependency-filteredDepBOW.]
-Paragraph
-   sofa: _InitialView
-   begin: 29902
-   end: 30743
+#0 Paragraph:66
+   sofa: sofa id: _InitialView
+   begin: 29902   end: 30743   divType: <null>
 [ Out-of-domain performance We also investi
 ]
-Heading
-   sofa: _InitialView
-   begin: 30743
-   end: 30786
+#0 Heading:67
+   sofa: sofa id: _InitialView
+   begin: 30743   end: 30786   divType: <null>
 [ gate how well the systems perform in the
 out-ofdomain setting. Table 5 summarizes the results.
 Each of the systems was trained on das-train and
@@ -1693,10 +1626,9 @@ YAGS dataset is the only dataset on which we do
 not strongly outperform Semafor. We attribute
 this to the complexity of the YAGS dataset that
 contains a high proportion of verbs.]
-Paragraph
-   sofa: _InitialView
-   begin: 30786
-   end: 31211
+#0 Paragraph:68
+   sofa: sofa id: _InitialView
+   begin: 30786   end: 31211   divType: <null>
 [ Overall out-of-domain performance stays behind
 the F1-agreement observed for the human
 annotators for TW and YAGS, which shows that there is
@@ -1706,10 +1638,9 @@ Error analysis To further investigate the
 performance of our system in the out-of-domain setup we
 analyse statistics on the errors made by the system
 variant NN+SentBOW.]
-Paragraph
-   sofa: _InitialView
-   begin: 31211
-   end: 31613
+#0 Paragraph:69
+   sofa: sofa id: _InitialView
+   begin: 31211   end: 31613   divType: <null>
 [ The system’s wrong predictions are affected by
 the lexicon in two ways. First, if the predicate is
 not listed in the lexicon (unknown), the system has
@@ -1723,10 +1654,9 @@ of errors as unlinked. For unlinked predicates, the
 system is restricted to the set of frames provided by
 the lexicon, and by design has no means to select
 the right frame for a given predicate occurrence.]
-Paragraph
-   sofa: _InitialView
-   begin: 31613
-   end: 32268
+#0 Paragraph:70
+   sofa: sofa id: _InitialView
+   begin: 31613   end: 32268   divType: <null>
 [ The unlinked-predicate issue points to a
 major design flaw in the standard frameId
 architecture. Although choosing among frames defined in
@@ -1744,10 +1674,9 @@ the missing linking information is available in the
 lexicon. However, if the correct frame is not listed
 among the frames available for the predicate, the
 misclassification is inevitable.]
-Paragraph
-   sofa: _InitialView
-   begin: 32268
-   end: 33093
+#0 Paragraph:71
+   sofa: sofa id: _InitialView
+   begin: 32268   end: 33093   divType: <null>
 [ A more detailed analysis of the errors made
 by the system shows that the majority of false
 predictions for known and linked predicates are
@@ -1758,19 +1687,17 @@ the correct frame Time period of action in the
 following sentence:
 “No effect of anesthetic protocol on IOP during a
 12 minute measurement [window].”]
-Paragraph
-   sofa: _InitialView
-   begin: 33093
-   end: 33519
+#0 Paragraph:72
+   sofa: sofa id: _InitialView
+   begin: 33093   end: 33519   divType: <null>
 [ This problem is also relevant in generic WSD
  (Agirre et al., 2010)  and benefits from the same
 solutions, for instance adapting embeddings to a
 particular domain  (Taghipour and Ng, 2015)  and
 efficient use of embeddings  (Iacobacci et al., 2016) .]
-Paragraph
-   sofa: _InitialView
-   begin: 33519
-   end: 33769
+#0 Paragraph:73
+   sofa: sofa id: _InitialView
+   begin: 33519   end: 33769   divType: <null>
 [ Another major source of errors are subtle
 syntactic and semantic differences between frames
 which are hard to resolve on the sentence level
@@ -1783,10 +1710,9 @@ unk
 biguation model, which has been proposed in
 recent work in FrameNet SRL, see e.g. Hermann et
 al. (2014) and Roth and Lapata (2015).]
-Paragraph
-   sofa: _InitialView
-   begin: 33769
-   end: 34246
+#0 Paragraph:74
+   sofa: sofa id: _InitialView
+   begin: 33769   end: 34246   divType: <null>
 [ To further explore the impact of user-generated
 text, we applied word-processor spelling correction
 to YAGS and tested our systems on the corrected
@@ -1796,16 +1722,14 @@ provide enough information to classify also noisy
 usergenerated text, and b) frameId errors cannot be
 attributed to preprocessing problems at large scale.
 6]
-Paragraph
-   sofa: _InitialView
-   begin: 34246
-   end: 34653
+#0 Paragraph:75
+   sofa: sofa id: _InitialView
+   begin: 34246   end: 34653   divType: <null>
 [ Discussion and outlook
 ]
-Heading
-   sofa: _InitialView
-   begin: 34653
-   end: 34677
+#0 Heading:76
+   sofa: sofa id: _InitialView
+   begin: 34653   end: 34677   divType: <null>
 [ Our analysis in Section 4 shows that domain
 adaptation is mainly required for the frameId step
 of FrameNet SRL. Unlike in PropBank SRL, in
@@ -1814,10 +1738,9 @@ drop for roleId once correct frames are available.
 The number of available roles given the correct
 frame is lower, on average 10, which reduces the
 complexity of the roleId task.]
-Paragraph
-   sofa: _InitialView
-   begin: 34677
-   end: 35044
+#0 Paragraph:77
+   sofa: sofa id: _InitialView
+   begin: 34677   end: 35044   divType: <null>
 [ In Section 5 we introduced a simple, yet
 efficient frame identification method and evaluated
 it on in-domain and out-of-domain data. The
@@ -1827,10 +1750,9 @@ system in out-of-domain accuracy. We also observe
 that our system performs well in the newly
 introduced no-lexicon evaluation setting, where no
 lexicon-based filtering is applied.]
-Paragraph
-   sofa: _InitialView
-   begin: 35044
-   end: 35455
+#0 Paragraph:78
+   sofa: sofa id: _InitialView
+   begin: 35044   end: 35455   divType: <null>
 [ We identified a major issue in the standard
 frameId architecture: shifting to a new domain
 might render the predicate-frame associations in
@@ -1844,10 +1766,9 @@ Manually or automatically increasing both
 predicate and predicate-frame association coverage of
 the FrameNet lexicon could help, and we suggest
 investigating this line of research in future work.]
-Paragraph
-   sofa: _InitialView
-   begin: 35455
-   end: 36095
+#0 Paragraph:79
+   sofa: sofa id: _InitialView
+   begin: 35455   end: 36095   divType: <null>
 [ While our method achieves state-of-the-art
 results on out-of-domain data, overall results are still
 significantly lower than the human performance
@@ -1860,10 +1781,9 @@ representations, e.g. context2vec  (Melamud et al.,
 the model. The out-of-domain performance could
 be further improved by adapting word
 representations to a new domain.]
-Paragraph
-   sofa: _InitialView
-   begin: 36095
-   end: 36659
+#0 Paragraph:80
+   sofa: sofa id: _InitialView
+   begin: 36095   end: 36659   divType: <null>
 [ A direct comparison to the Hermann-14
 system in the out-of-domain setup would shed some
 more light on the properties of the task affecting
@@ -1876,25 +1796,22 @@ classification might smoothen this effect. We make our
 dataset publicly available to enable comparison to
 related work.6
 7]
-Paragraph
-   sofa: _InitialView
-   begin: 36659
-   end: 37154
+#0 Paragraph:81
+   sofa: sofa id: _InitialView
+   begin: 36659   end: 37154   divType: <null>
 [ Conclusion
 ]
-Heading
-   sofa: _InitialView
-   begin: 37154
-   end: 37166
+#0 Heading:82
+   sofa: sofa id: _InitialView
+   begin: 37154   end: 37166   divType: <null>
 [ Domain dependence is a well-known issue for
 supervised NLP tasks such as FrameNet SRL. To the
 best of our knowledge, there is no recent study of
 the domain dependence of FrameNet SRL, also
 prohibited by a lack of appropriate datasets.]
-Paragraph
-   sofa: _InitialView
-   begin: 37166
-   end: 37401
+#0 Paragraph:83
+   sofa: sofa id: _InitialView
+   begin: 37166   end: 37401   divType: <null>
 [ To address this problem, we 1) present the first
 comprehensive study of the domain generalization
 performance of the open-source Semafor system
@@ -1913,22 +1830,19 @@ systems and approaches state-of-the-art results
 indomain. To support reproducibility of our results,
 we publish the YAGS test set annotations and our
 frame identification system for research purposes.]
-Paragraph
-   sofa: _InitialView
-   begin: 37401
-   end: 38290
+#0 Paragraph:84
+   sofa: sofa id: _InitialView
+   begin: 37401   end: 38290   divType: <null>
 [ 6www.ukp.tu-darmstadt.de/ood-fn-srl
 ]
-Heading
-   sofa: _InitialView
-   begin: 38290
-   end: 38327
+#0 Heading:85
+   sofa: sofa id: _InitialView
+   begin: 38290   end: 38327   divType: <null>
 [ Acknowledgements
 ]
-Heading
-   sofa: _InitialView
-   begin: 38327
-   end: 38345
+#0 Heading:86
+   sofa: sofa id: _InitialView
+   begin: 38327   end: 38345   divType: <null>
 [ This work was supported by FAZIT-Stiftung and by
 the German Research Foundation (DFG) through
 grant GU 798/18-1 (QAEduInf) and the research
@@ -1940,17 +1854,13 @@ Dr. Richard Eckart de Castilho for support
 regarding WebAnno, as well as Dr. Judith Eckle-Kohler
 and the anonymous reviewers for their comments
 on earlier versions of this paper.]
-Paragraph
-   sofa: _InitialView
-   begin: 38345
-   end: 38859
+#0 Paragraph:87
+   sofa: sofa id: _InitialView
+   begin: 38345   end: 38859   divType: <null>
 [  Eneko   Agirre  , Oier Lo´pez de Lacalle, Christiane Fellbaum,   Shu-Kai   Hsieh  , Maurizio Tesconi, Monica Monachini, Piek Vossen, and   Roxanne   Segers  .  2010 . SemEval-2010  Task   17 :  All-Words Word Sense   Disambiguation on a Specific Domain .  InProceedings of the 5th International Workshop on Semantic Evaluation , pages   75 - 80 . Association for Computational Linguistics.  Collin   Baker  ,   Michael   Ellsworth  , and   Katrin   Erk  .  2007 . SemEval-2007  Task   19 :  Frame Semantic Structure Extraction .  In Proceedings of the Fourth International Workshop on Semantic Evaluations (SemEval2007) , pages   99 - 104 , Prague, Czech Republic, June. Association for Computational Linguistics.  Jonathan   Berant  , Vivek Srikumar,   Pei-Chun   Chen  , Abby Vander Linden, Brittany Harding, Brad Huang,   Peter   Clark  , and   Christopher D.   Manning  .  2014 .  Modeling Biological Processes for Reading Comprehension .  In Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP) , pages   1499 - 1510 , Doha, Qatar. Association for Computational Linguistics. John Blitzer ,   Ryan McDonald ,  and Fernando    Pereira .  2006 .  Domain adaptation with structural correspondence learning .  In Proceedings of the 2006 Conference on Empirical Methods in Natural Language Processing , pages   120 - 128 , Sydney, Australia, July. Association for Computational Linguistics.  Xavier   Carreras   and Llu´ıs Ma`rquez.  2005 .  Introduction to the CoNLL-2005 shared task: Semantic role labeling .  In Proceedings of the Ninth Conference on Computational Natural Language Learning (CoNLL-2005) , pages   152 - 164 , Ann Arbor, Michigan, June. Association for Computational Linguistics.  Danilo   Croce  , Cristina Giannone, Paolo Annesi, and   Roberto   Basili  .  2010 .  Towards open-domain semantic role labeling .  In Proceedings of the 48th Annual Meeting of the Association for Computational Linguistics , pages   237 - 246 , Uppsala, Sweden, July. Association for Computational Linguistics.  Dipanjan Das  and  Noah A.    Smith .  2011 .  SemiSupervised Frame-Semantic Parsing for Unknown Predicates .  In Proc. of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies , pages   1435 - 1444 , Portland, Oregon, USA. Dipanjan Das ,   Desai Chen , Andre´ F.  T.     Martins ,  Nathan    Schneider , and   Noah   A.    Smith .  2014 .  Frame-semantic parsing .  Computational Linguistics ,  40 ( 1 ):  9 - 56 .  Hal   Daume  ´III.  2007 .  Frustratingly easy domain adaptation .  In Proceedings of the 45th Annual Meeting of the Association of Computational Linguistics , pages   256 - 263 , Prague, Czech Republic, June. Association for Computational Linguistics.  Katrin   Erk   and Sebastian Pado´.  2006 .  SHALMANESER - A Toolchain For Shallow Semantic Parsing .  In Proceedings of the 5th International Conference on Language Resources and Evaluation (LREC   2006 ), volume  6 , pages   527 - 532 , Genoa, Italy. ELRA. Charles J. Fillmore ,  Christopher R. Johnson , and   Miriam   R.L.    Petruck .  2003 . Background to FrameNet.  International journal of lexicography ,  16 ( 3 ):  235 - 250 .  Nicholas   FitzGerald  , Oscar Ta¨ckstro¨m, Kuzman Ganchev, and  Dipanjan Das .  2015 .  Semantic role labeling with neural network factors .  In Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing , pages   960 - 970 , Lisbon, Portugal, September. Association for Computational Linguistics.  Jan   Hajicˇ  , Massimiliano Ciaramita, Richard Johansson, Daisuke Kawahara, Maria Anto`nia Mart´ı, Llu´ıs Ma`rquez, Adam Meyers, Joakim Nivre, Sebastian Pado´, Jan Sˇ teˇpa´nek, Pavel Stranˇa´k, Mihai Surdeanu, Nianwen Xue,   and Yi   Zhang  .  2009 .  The conll2009 shared task: Syntactic and semantic dependencies in multiple languages .  In Proceedings of the Thirteenth Conference on Computational Natural Language Learning (CoNLL   2009 ): Shared Task, pages   1 - 18 , Boulder, Colorado, June. Association for Computational Linguistics.  Karl Moritz   Hermann  ,  Dipanjan Das ,   Jason Weston , and  Kuzman    Ganchev .  2014 .  Semantic frame identification with distributed word representations .  In Proceedings of the 52nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) , pages   1448 - 1458 , Baltimore, Maryland, June. Association for Computational Linguistics.  Fei   Huang   and   Alexander   Yates  .  2010 .  Open-domain semantic role labeling by modeling word spans .  In Proceedings of the 48th Annual Meeting of the Association for Computational Linguistics , pages   968 -  978 , Uppsala, Sweden, July. Association for Computational Linguistics.  Ignacio   Iacobacci  , Mohammad Taher Pilehvar, and   Roberto   Navigli  .  2016 .  Embeddings for Word Sense Disambiguation: An Evaluation Study .  In Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) , pages   897 - 907 , Berlin, Germany, August. Association for Computational Linguistics.  Anders   Johannsen  ,  He´ctor Mart´ınez Alonso, and    Anders   Søgaard  .  2015 .  Any-language frame-semantic parsing .  In Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing , pages   2062 - 2066 , Lisbon, Portugal, September. Association for Computational Linguistics.  Richard   Johansson   and   Pierre   Nugues  .  2008 .  The effect of syntactic representation on semantic role labeling .  In Proceedings of the 22nd International Conference on Computational Linguistics (Coling   2008 ), pages   393 - 400 , Manchester,  UK ,  August . Coling 2008   Organizing   Committee  .  Meghana   Kshirsagar  , Sam Thomson, Nathan Schneider, Jaime Carbonell, Noah A.   Smith ,  and Chris    Dyer .  2015 .  Frame-semantic role labeling with heterogeneous annotations .  In Proceedings of the 53rd Annual Meeting of the Association for Computational Linguistics and the 7th International Joint Conference on Natural Language Processing (Volume 2: Short Papers) , pages   218 - 224 , Beijing, China, July. Association for Computational Linguistics.  Maciej   Kula  .  2015 .  Metadata embeddings for user and item cold-start recommendations .  In Toine Bogers and Marijn Koolen , editors,  Proceedings of the 2nd Workshop on New Trends on Content-Based Recommender Systems co-located with 9th ACM Conference on Recommender Systems (RecSys   2015 ), volume  1448   of CEUR Workshop Proceedings , pages   14 - 21 , Vienna, Austria, September.  CEUR-WS.org.  Omer   Levy   and   Yoav   Goldberg  .  2014 .  Dependencybased word embeddings .  In Proceedings of the 52nd Annual Meeting of the Association for Computational Linguistics ,  ACL   2014 , June 22-27,  2014 , Baltimore,  MD , USA, Volume  2 :   Short   Papers  , pages   302 - 308 . The Association for Computer Linguistics.  Oren   Melamud  ,   Jacob   Goldberger  , and   Ido   Dagan  .  2016 .  context2vec: Learning generic context embedding with bidirectional LSTM .  In Proceedings of the 20th SIGNLL Conference on Computational Natural Language Learning ,  CoNLL 2016 , Berlin, Germany,  August 11-12 ,  2016 , pages   51 - 61 .  Tomas   Mikolov  , Ilya Sutskever, Kai Chen, Greg Corrado, and   Jeffrey   Dean  .  2013 .  Distributed Representations of Words and Phrases and Their Compositionality .  In Proceedings of the 26th International Conference on Neural Information Processing Systems (NIPS '13) , pages   3111 - 3119 ,   Lake   Tahoe  , Nevada, USA.  Alexis   Palmer   and   Caroline   Sporleder  .  2010 .  Evaluating FrameNet-style semantic parsing: the role of coverage gaps in FrameNet .  In Proceedings of the 23rd International Conference on Computational Linguistics: Posters , pages   928 - 936 , Beijing, China,  August .  Rebecca J. Passonneau ,  Collin F.     Baker , Christiane Fellbaum, and  Nancy    Ide .  2012 .  The MASC Word Sense Corpus .  In Proceedings of the Eight International Conference on Language Resources and Evaluation (LREC'12) , pages   3025 - 3030 , Istanbul, Turkey.  Jeffrey   Pennington  , Richard Socher, and   Christopher   Manning  .  2014 .  Glove: Global vectors for word representation .  In Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP) , pages   1532 -  1543 , Doha, Qatar, October. Association for Computational Linguistics.  Michael   Roth   and   Mirella   Lapata  .  2015 .  Contextaware frame-semantic role labeling .  Transactions of the Association for Computational Linguistics ,  3 :  449 - 460 .  Josef   Ruppenhofer  , Michael Ellsworth,  Miriam R. L. Petruck ,   Christopher R. Johnson , and  Jan    Scheffczyk .  2010 .  FrameNet II: Extended Theory and Practice .  Technical report , ICSI, University of California, Berkeley.  Anders   Søgaard  , Barbara Plank, and H e´ctor Mart´ınez Alonso.  2015 .  Using Frame Semantics for Knowledge Extraction from Twitter .  In Proceedings of the Twenty-Ninth AAAI Conference on Artificial Intelligence  , pages   2447 - 2452 , Austin, Texas, USA.  Anders   Søgaard  .  2013 .  Semi-supervised learning and domain adaptation in natural language processing .  Synthesis Lectures on Human Language Technologies ,  6 ( 2 ):  1 - 103 .  Mihai   Surdeanu  , Richard Johansson, Adam Meyers, Llu´ıs Ma`rquez, and   Joakim   Nivre  .  2008 .  The conll 2008 shared task on joint parsing of syntactic and semantic dependencies .  In CoNLL 2008: Proceedings of the Twelfth Conference on Computational Natural Language Learning , pages   159 - 177 , Manchester, England,  August.   Coling 2008 Organizing Committee .  Mihai   Surdeanu  , Massimiliano Ciaramita, and   Hugo   Zaragoza  .  2011 .  Learning to rank answers to nonfactoid questions from web collections .  Computational Linguistics ,  37 ( 2 ):  351 - 383 .  Kaveh   Taghipour   and Hwee Tou Ng.  2015 .  SemiSupervised Word Sense Disambiguation Using Word Embeddings in General and Specific Domains .  In Proceedings of the 2015 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies , pages   314 - 323 , Denver, Colorado, May-June.  Association for Computational Linguistics .  Jason   Weston  , Samy Bengio, and   Nicolas   Usunier  .  2011 .  WSABIE: Scaling Up to Large Vocabulary Image Annotation .  In Proceedings of the Twenty-Second International Joint Conference on Artificial Intelligence -  Volume Volume Three ,  IJCAI'11 , pages   2764 - 2770 , Barcelona, Catalonia, Spain. AAAI Press.  Haitong   Yang  ,   Tao   Zhuang  , and   Chengqing   Zong  .  2015 .  Domain adaptation for syntactic and semantic dependency parsing using deep belief networks .  Transactions of the Association for Computational Linguistics ,  3 :  271 - 282 .  Seid   Muhie    Yimam , Richard Eckart de Castilho, Iryna Gurevych, and   Chris   Biemann  .  2014 .  Automatic Annotation Suggestions and Custom Annotation Layers in WebAnno . In Kalina Bontcheva and Zhu Jingbo, editors,  Proceedings of the 52nd Annual Meeting of the Association for Computational Linguistics. System Demonstrations , pages   91 - 96 , Stroudsburg, PA  18360 , USA. Association for Computational Linguistics.]
-Paragraph
-   sofa: _InitialView
-   begin: 38859
-   end: 50111
+#0 Paragraph:88
+   sofa: sofa id: _InitialView
+   begin: 38859   end: 50111   divType: <null>
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================
-
-
