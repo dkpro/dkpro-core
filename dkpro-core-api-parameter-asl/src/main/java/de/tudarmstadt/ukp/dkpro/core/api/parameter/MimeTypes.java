@@ -90,6 +90,9 @@ public final class MimeTypes
     public final static String APPLICATION_X_STANFORDNLP_NER = "application/x.org.dkpro.core.stanfordnlp.ner";
     public final static String APPLICATION_X_STANFORDNLP_TAGGER = "application/x.org.dkpro.core.stanfordnlp.tagger";
 
+    // LingPipe model types
+    public final static String APPLICATION_X_LINGPIPE_NER = "application/x.org.dkpro.core.lingpipe.ner";
+
     private MimeTypes()
     {
         // No instances
