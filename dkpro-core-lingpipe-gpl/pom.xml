@@ -43,6 +43,10 @@
       <artifactId>uimafit-core</artifactId>
     </dependency>
     <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+    </dependency>
+    <dependency>
       <groupId>commons-lang</groupId>
       <artifactId>commons-lang</artifactId>
     </dependency>
@@ -158,12 +162,6 @@
           <artifactId>maven-dependency-plugin</artifactId>
           <configuration>
             <usedDependencies>
-              <!--
-                - Maven doesn't detect the parameters module to be used, be we actually
-                - do require it as a compile dependency and also at runtime, so we
-                - cannot set it to scope provided. Need to tell Maven to ignore it here.
-              -->
-              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDependency>
               <!-- Models not detected by byte-code analysis -->
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.lingpipe-model-tagger-en-bio-genia</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.lingpipe-model-tagger-en-bio-medpost</usedDependency>

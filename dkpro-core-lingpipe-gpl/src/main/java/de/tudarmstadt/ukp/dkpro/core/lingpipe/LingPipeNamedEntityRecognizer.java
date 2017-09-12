@@ -29,6 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ResourceParameter;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.reflect.FieldUtils;
 import org.apache.uima.UimaContext;
@@ -97,6 +99,7 @@ public class LingPipeNamedEntityRecognizer
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    @ResourceParameter(MimeTypes.APPLICATION_X_LINGPIPE_NER)
     protected String modelLocation;
 
     /**
