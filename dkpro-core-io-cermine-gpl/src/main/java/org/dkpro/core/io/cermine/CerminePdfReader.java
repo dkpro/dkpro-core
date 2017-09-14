@@ -73,7 +73,7 @@ public class CerminePdfReader
     private String paragraphType;
     
     /**
-     * If set to true the converter will normalize all whitespaces (e.g. tab, newline) to a single
+     * If set to true the reader will normalize all whitespaces (e.g. tab, newline) to a single
      * whitespace
      */
     public static final String PARAM_NORMALIZE_TEXT = "normalizeText";
@@ -81,12 +81,15 @@ public class CerminePdfReader
     private boolean normalizeText;
     
     /**
-     * If set to true the converter will discard all of the detected citations
+     * If set to true the reader will discard all of the detected citations
      */
     public static final String PARAM_IGNORE_CITATIONS = "ignoreCitations";
     @ConfigurationParameter(name = PARAM_IGNORE_CITATIONS, mandatory = false, defaultValue = "false")
     private boolean ignoreCitations;
     
+    /**
+     * If set to true the reader will discard all of the detected text in the references section
+     */
     public static final String PARAM_IGNORE_REFERENCES_SECTION = "ignoreReferencesSection";
     @ConfigurationParameter(name = PARAM_IGNORE_REFERENCES_SECTION, mandatory = false, defaultValue = "false")
     private boolean ignoreReferencesSection;
