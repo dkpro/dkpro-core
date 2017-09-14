@@ -49,7 +49,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * <p>UIMA wrapper for the Snowball stemmer. Annotation types to be stemmed can reconfigured by a
+ * <p>UIMA wrapper for the Snowball stemmer. Annotation types to be stemmed can be configured by a
  * {@link FeaturePath}.</p>
  * <p>If you use this component in a pipeline which uses stop word removal, make sure that it
  * runs after the stop word removal step, so only words that are no stop words are stemmed.</p>
