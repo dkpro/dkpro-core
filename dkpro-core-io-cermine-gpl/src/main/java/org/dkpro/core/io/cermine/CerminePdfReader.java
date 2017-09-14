@@ -86,6 +86,10 @@ public class CerminePdfReader
     public static final String PARAM_IGNORE_CITATIONS = "ignoreCitations";
     @ConfigurationParameter(name = PARAM_IGNORE_CITATIONS, mandatory = false, defaultValue = "false")
     private boolean ignoreCitations;
+    
+    public static final String PARAM_IGNORE_REFERENCES_SECTION = "ignoreReferencesSection";
+    @ConfigurationParameter(name = PARAM_IGNORE_REFERENCES_SECTION, mandatory = false, defaultValue = "false")
+    private boolean ignoreReferencesSection;
 
     private NlmHandler nlmHandler;
 
@@ -106,7 +110,8 @@ public class CerminePdfReader
                 .withHeadingAnnotation(headingType)
                 .withParagraphAnnotation(paragraphType)
                 .withNormalizeText(normalizeText)
-                .withIgnoreCitations(ignoreCitations);
+                .withIgnoreCitations(ignoreCitations)
+                .withIgnoreReferencesSection(ignoreReferencesSection);
     }
 
     @Override
@@ -154,12 +159,19 @@ public class CerminePdfReader
         private String headingType;
         private boolean normalizeText;
         private boolean ignoreCitations;
+        private boolean ignoreReferencesSection;
 
         private int beginIndex;
 
         public NlmHandler withParagraphAnnotation(String paragraphAnnotation)
         {
             paragraphType = paragraphAnnotation;
+            return this;
+        }
+
+        public NlmHandler withIgnoreReferencesSection(boolean aIgnoreReferencesSection)
+        {
+            ignoreReferencesSection = aIgnoreReferencesSection;
             return this;
         }
 
@@ -202,21 +214,20 @@ public class CerminePdfReader
                 Element element = (Element) node;
                 if (element.getName().equals("front")) {
                     parseHeader(element);
-
                     // close the previous open paragraph, if any
                     makeAnnotation(paragraphType);
                 }
                 else if (element.getName().equals("body")) {
                     parseBody(element);
-
                     // close the previous open paragraph, if any
                     makeAnnotation(paragraphType);
                 }
                 else if (element.getName().equals("back")) {
-                    parseBack(element);
-
-                    // close the previous open paragraph, if any
-                    makeAnnotation(paragraphType);
+                    if (!ignoreReferencesSection) {
+                        parseBack(element);
+                        // close the previous open paragraph, if any
+                        makeAnnotation(paragraphType);
+                    }
                 }
             }
         }
