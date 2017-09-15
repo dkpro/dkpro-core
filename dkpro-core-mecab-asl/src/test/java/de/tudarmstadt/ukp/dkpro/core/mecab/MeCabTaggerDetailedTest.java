@@ -24,6 +24,7 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -32,6 +33,8 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
+import org.junit.Assume;
+import org.junit.Before;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -42,7 +45,13 @@ import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.mecab.type.JapaneseToken;
 
 public class MeCabTaggerDetailedTest {
-
+    @Before
+    public void prepare()
+    {
+        Assume.assumeFalse("No Mecab binaries for Windows: Issue #1122",
+                System.getProperty("os.name").toLowerCase(Locale.US).contains("win"));
+    }
+    
     @Test
     public void testMeCabTagger() throws UIMAException, IOException {
         CollectionReaderDescription reader = createReaderDescription(
