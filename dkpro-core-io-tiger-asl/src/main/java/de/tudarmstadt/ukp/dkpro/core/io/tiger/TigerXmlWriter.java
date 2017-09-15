@@ -36,6 +36,7 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamException;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.FeatureStructure;
@@ -87,11 +88,12 @@ public class TigerXmlWriter extends JCasFileWriter_ImplBase
         throws AnalysisEngineProcessException
     {
         OutputStream docOS = null;
+        XMLEventWriter xmlEventWriter = null;
         try {
             docOS = getOutputStream(aJCas, filenameSuffix);
 
             XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
-            XMLEventWriter xmlEventWriter = new IndentingXMLEventWriter(
+            xmlEventWriter = new IndentingXMLEventWriter(
                     xmlOutputFactory.createXMLEventWriter(docOS));
             
             JAXBContext context = JAXBContext.newInstance(TigerSentence.class);
@@ -122,6 +124,15 @@ public class TigerXmlWriter extends JCasFileWriter_ImplBase
             throw new AnalysisEngineProcessException(e);
         }
         finally {
+            if (xmlEventWriter != null) {
+                try {
+                    xmlEventWriter.close();
+                }
+                catch (XMLStreamException e) {
+                    getLogger().warn("Error closing the XML event writer", e);
+                }
+            }
+            
             closeQuietly(docOS);
         }
     }
