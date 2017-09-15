@@ -193,11 +193,12 @@ public class StanfordNamedEntityRecognizerTrainer
 
         // Load user-provided configuration
         Properties props = new Properties();
-        try (InputStream is = new FileInputStream(propertiesFile)) {
-            props.load(is);
-        }
-        catch (IOException e) {
-            throw new AnalysisEngineProcessException(e);
+        if (propertiesFile != null) {
+            try (InputStream is = new FileInputStream(propertiesFile)) {
+                props.load(is);
+            } catch (IOException e) {
+                throw new AnalysisEngineProcessException(e);
+            }
         }
 
         // Add/replace training file information
