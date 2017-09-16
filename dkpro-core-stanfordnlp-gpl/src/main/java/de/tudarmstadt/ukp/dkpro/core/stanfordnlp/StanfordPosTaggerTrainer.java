@@ -33,6 +33,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Properties;
+import java.util.regex.Matcher;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -163,7 +164,8 @@ public class StanfordPosTaggerTrainer
 
         if (clusterFile != null) {
             String arch = props.getProperty("arch");
-            arch = arch.replaceAll("\\$\\{distsimCluster\\}", clusterFile.getAbsolutePath());
+            arch = arch.replaceAll("\\$\\{distsimCluster\\}",
+                    Matcher.quoteReplacement(clusterFile.getAbsolutePath()));
             props.setProperty("arch", arch);
         } else {
             // default value from documentation: https://nlp.stanford.edu/software/pos-tagger-faq.shtml#train
