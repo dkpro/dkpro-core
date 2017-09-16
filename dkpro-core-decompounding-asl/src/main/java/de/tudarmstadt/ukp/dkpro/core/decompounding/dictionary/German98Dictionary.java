@@ -20,8 +20,8 @@ package de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -46,33 +46,37 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.igerman98.Affix;
 public class German98Dictionary
 	extends SimpleDictionary
 {
-
 	private static final String PREFIX_KEY = "PFX";
 	private static final String SUFFIX_KEY = "SFX";
 
 	private Map<Character, List<Affix>> affixes = new HashMap<Character, List<Affix>>();
 
-	public German98Dictionary(File aDict, File aAffix)
+	public German98Dictionary(File aDict, File aAffix, String aEncoding)
+	    throws IOException
 	{
-		try {
-			readAffixFile(new BufferedReader(new FileReader(aAffix)));
-			setWords(readFileToSet(new BufferedReader(new FileReader(aDict))));
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
+	    try (
+                BufferedReader dis = new BufferedReader(
+                        new InputStreamReader(new FileInputStream(aDict), aEncoding));
+                BufferedReader ais = new BufferedReader(
+                        new InputStreamReader(new FileInputStream(aAffix), aEncoding));
+	    ) {
+	        readAffixFile(ais);
+	        setWords(readFileToSet(dis));
+	    }
 	}
 
-	public German98Dictionary(InputStream aDictStream, InputStream aAffixStream)
+	public German98Dictionary(InputStream aDictStream, InputStream aAffixStream, String aEncoding)
+	        throws IOException
 	{
-		try {
-			readAffixFile(new BufferedReader(new InputStreamReader(aAffixStream)));
-			setWords(readFileToSet(new BufferedReader(new InputStreamReader(aDictStream))));
-		}
-		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        try (
+                BufferedReader dis = new BufferedReader(
+                        new InputStreamReader(aDictStream, aEncoding));
+                BufferedReader ais = new BufferedReader(
+                        new InputStreamReader(aAffixStream, aEncoding));
+        ) {
+            readAffixFile(ais);
+            setWords(readFileToSet(dis));
+        }
 	}
 
 	@Override

@@ -61,6 +61,13 @@ public class SharedDictionary
     protected String modelLocation;
 
     /**
+     * The character encoding used by the model.
+     */
+    public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
+    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    private String modelEncoding;
+    
+    /**
      * Load the model from this location instead of locating the model automatically.
      */
     public static final String PARAM_AFFIX_MODEL_LOCATION = "affixModelLocation";
@@ -130,7 +137,8 @@ public class SharedDictionary
             protected Dictionary produceResource(InputStream aStream)
                 throws Exception
             {
-                return new German98Dictionary(aStream, affixModelProvider.getResource());
+                return new German98Dictionary(aStream, affixModelProvider.getResource(),
+                        modelEncoding);
             }
         };
 
