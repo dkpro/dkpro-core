@@ -45,6 +45,7 @@ import org.dkpro.core.io.xces.models.XcesSentence;
 import org.dkpro.core.io.xces.models.XcesToken;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -65,6 +66,13 @@ public class XcesXmlWriter
     @ConfigurationParameter(name = PARAM_FILENAME_SUFFIX, mandatory = true, defaultValue = ".xml")
     private String filenameSuffix;
 
+    /**
+     * Character encoding of the output data.
+     */
+    public static final String PARAM_TARGET_ENCODING = "targetEncoding";
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    private String targetEncoding;
+
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
@@ -75,7 +83,7 @@ public class XcesXmlWriter
             docOS = getOutputStream(aJCas, filenameSuffix);
             XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
             xmlEventWriter = new IndentingXMLEventWriter(
-                    xmlOutputFactory.createXMLEventWriter(docOS));
+                    xmlOutputFactory.createXMLEventWriter(docOS, targetEncoding));
             JAXBContext context = JAXBContext.newInstance(XcesBody.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
