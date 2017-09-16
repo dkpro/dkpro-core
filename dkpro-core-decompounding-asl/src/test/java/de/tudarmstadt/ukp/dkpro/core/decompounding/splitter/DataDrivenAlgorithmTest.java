@@ -19,13 +19,12 @@
 package de.tudarmstadt.ukp.dkpro.core.decompounding.splitter;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
-import junit.framework.Assert;
 
 import org.junit.Test;
 
@@ -47,9 +46,9 @@ public class DataDrivenAlgorithmTest
         DataDrivenSplitterAlgorithm algo = new DataDrivenSplitterAlgorithm(dict, morphemes);
         List<DecompoundedWord> result = algo.split("friedenspolitik").getAllSplits();
 
-        Assert.assertEquals(2, result.size());
-        Assert.assertEquals("friedenspolitik", result.get(0).toString());
-        Assert.assertEquals("friedens+politik", result.get(1).toString());
+        assertEquals(2, result.size());
+        assertEquals("friedenspolitik", result.get(0).toString());
+        assertEquals("friedens+politik", result.get(1).toString());
     }
 
     @Test
@@ -59,7 +58,7 @@ public class DataDrivenAlgorithmTest
 
         final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
         		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"), false);
-        SimpleDictionary dict = new SimpleDictionary(dictFile);
+        SimpleDictionary dict = new SimpleDictionary(dictFile, "UTF-8");
         final File morphemesFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
         		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-linking.linking"), false);
         LinkingMorphemes morphemes = new LinkingMorphemes(morphemesFile);

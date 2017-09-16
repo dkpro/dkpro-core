@@ -18,13 +18,12 @@
 package de.tudarmstadt.ukp.dkpro.core.decompounding.splitter;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
-import junit.framework.Assert;
 
 import org.junit.Test;
 
@@ -41,9 +40,9 @@ public class JWordSplitterTest
     {
         JWordSplitterAlgorithm splitter = new JWordSplitterAlgorithm();
         List<DecompoundedWord> result = splitter.split("Aktionsplan").getAllSplits();
-        Assert.assertEquals(2, result.size());
-        Assert.assertEquals("Aktionsplan", result.get(0).toString());
-        Assert.assertEquals("Aktion(s)+plan", result.get(1).toString());
+        assertEquals(2, result.size());
+        assertEquals("Aktionsplan", result.get(0).toString());
+        assertEquals("Aktion(s)+plan", result.get(1).toString());
     }
 
     @Test
@@ -52,7 +51,7 @@ public class JWordSplitterTest
         final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
         		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"), false);;
 
-	    Dictionary dict = new SimpleDictionary(dictFile);
+	    Dictionary dict = new SimpleDictionary(dictFile, "UTF-8");
 	    splitter.setDictionary(dict);
 	    List<DecompoundedWord> result = splitter.split("geräteelektronik").getAllSplits();
 	    assertThat(result.size(),is(1));
@@ -64,7 +63,7 @@ public class JWordSplitterTest
         final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
                 "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"), false);;
 
-        Dictionary dict = new SimpleDictionary(dictFile);
+        Dictionary dict = new SimpleDictionary(dictFile, "UTF-8");
         splitter.setDictionary(dict);
         List<DecompoundedWord> result = splitter.split("Schwerwiegend").getAllSplits();
         assertThat(result.size(),is(1));

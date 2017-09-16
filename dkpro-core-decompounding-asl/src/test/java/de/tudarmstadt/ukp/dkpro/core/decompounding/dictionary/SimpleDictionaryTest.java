@@ -42,7 +42,7 @@ public class SimpleDictionaryTest
 
         final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
         		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"), false);
-	    dict = new SimpleDictionary(dictFile);
+	    dict = new SimpleDictionary(dictFile, "UTF-8");
 	}
 
 	@Test

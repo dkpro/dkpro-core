@@ -18,13 +18,12 @@
 package de.tudarmstadt.ukp.dkpro.core.decompounding.splitter;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
-import junit.framework.Assert;
 
 import org.junit.Test;
 
@@ -42,9 +41,9 @@ public class BananaSplitterTest
         splitter.setDictionary(new SimpleDictionary("Garage", "einfahrt"));
 
         List<DecompoundedWord> result = splitter.split("Garageneinfahrt").getAllSplits();
-        Assert.assertEquals(2, result.size());
-        Assert.assertEquals("Garageneinfahrt", result.get(0).toString());
-        Assert.assertEquals("garage(n)+einfahrt", result.get(1).toString());
+        assertEquals(2, result.size());
+        assertEquals("Garageneinfahrt", result.get(0).toString());
+        assertEquals("garage(n)+einfahrt", result.get(1).toString());
     }
 
     @Test
@@ -53,7 +52,7 @@ public class BananaSplitterTest
     {
         final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
         		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"), false);
-        Dictionary dict = new SimpleDictionary(dictFile);
+        Dictionary dict = new SimpleDictionary(dictFile, "UTF-8");
         BananaSplitterAlgorithm splitter = new BananaSplitterAlgorithm();
         splitter.setDictionary(dict);
         List<DecompoundedWord> result = splitter.split("geräteelektronik").getAllSplits();

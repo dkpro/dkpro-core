@@ -15,19 +15,17 @@ package de.tudarmstadt.ukp.dkpro.core.decompounding.web1t;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- **/
+ */
 
+import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.util.List;
-
-import junit.framework.Assert;
 
 import org.junit.Test;
 
 public class FinderTest
 {
-
 	File source = new File("src/test/resources/n-grams");
 	File index = new File("src/test/resources/LuceneIndexer");
 	File jWeb1T = new File("src/test/resources/web1t/de");
@@ -44,22 +42,22 @@ public class FinderTest
 		Finder f = new Finder(index, jWeb1T);
 		// Search and check if data is correct
 		List<NGramModel> result = f.find("couch");
-		Assert.assertEquals(1, result.size());
-		Assert.assertEquals("relax on the couch", result.get(0).getGram());
-		Assert.assertEquals(4, result.get(0).getN());
-		Assert.assertEquals(100, result.get(0).getFreq());
+		assertEquals(1, result.size());
+		assertEquals("relax on the couch", result.get(0).getGram());
+		assertEquals(4, result.get(0).getN());
+		assertEquals(100, result.get(0).getFreq());
 
 		result = f.find("relax couch");
-		Assert.assertEquals(1, result.size());
-		Assert.assertEquals("relax on the couch", result.get(0).getGram());
-		Assert.assertEquals(4, result.get(0).getN());
-		Assert.assertEquals(100, result.get(0).getFreq());
+		assertEquals(1, result.size());
+		assertEquals("relax on the couch", result.get(0).getGram());
+		assertEquals(4, result.get(0).getN());
+		assertEquals(100, result.get(0).getFreq());
 
 		result = f.find("relax");
-		Assert.assertEquals(3, result.size());
+		assertEquals(3, result.size());
 
 		result = f.find("relax");
-		Assert.assertEquals(3, result.size());
+		assertEquals(3, result.size());
 
 		// Delete index again
 		for (File file : index.listFiles()) {
@@ -85,22 +83,22 @@ public class FinderTest
 		Finder f = new Finder(index, jWeb1T);
 		// Search and check if data is correct
 		List<NGramModel> result = f.find("couch");
-		Assert.assertEquals(1, result.size());
-		Assert.assertEquals("relax on the couch", result.get(0).getGram());
-		Assert.assertEquals(4, result.get(0).getN());
-		Assert.assertEquals(100, result.get(0).getFreq());
+		assertEquals(1, result.size());
+		assertEquals("relax on the couch", result.get(0).getGram());
+		assertEquals(4, result.get(0).getN());
+		assertEquals(100, result.get(0).getFreq());
 
 		result = f.find("relax couch");
-		Assert.assertEquals(1, result.size());
-		Assert.assertEquals("relax on the couch", result.get(0).getGram());
-		Assert.assertEquals(4, result.get(0).getN());
-		Assert.assertEquals(100, result.get(0).getFreq());
+		assertEquals(1, result.size());
+		assertEquals("relax on the couch", result.get(0).getGram());
+		assertEquals(4, result.get(0).getN());
+		assertEquals(100, result.get(0).getFreq());
 
 		result = f.find("relax");
-		Assert.assertEquals(3, result.size());
+		assertEquals(3, result.size());
 
 		result = f.find("relax");
-		Assert.assertEquals(3, result.size());
+		assertEquals(3, result.size());
 
 		// Delete index again
 		for (File file : index.listFiles()) {

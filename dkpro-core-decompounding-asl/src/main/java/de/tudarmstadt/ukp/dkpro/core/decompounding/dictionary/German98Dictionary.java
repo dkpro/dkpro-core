@@ -79,7 +79,6 @@ public class German98Dictionary
         }
 	}
 
-	@Override
 	protected Set<String> readFileToSet(BufferedReader aReader)
 		throws IOException
 	{
