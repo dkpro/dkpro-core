@@ -1,4 +1,3 @@
-package de.tudarmstadt.ukp.dkpro.core.decompounding.web1t;
 /*
  * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
@@ -16,98 +15,105 @@ package de.tudarmstadt.ukp.dkpro.core.decompounding.web1t;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package de.tudarmstadt.ukp.dkpro.core.decompounding.web1t;
 
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.util.List;
 
+import org.junit.Rule;
 import org.junit.Test;
+
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class FinderTest
 {
-	File source = new File("src/test/resources/n-grams");
-	File index = new File("src/test/resources/LuceneIndexer");
-	File jWeb1T = new File("src/test/resources/web1t/de");
+    private File source = new File("src/test/resources/n-grams");
+    private File jWeb1T = new File("src/test/resources/web1t/de");
 
-	@Test
-	public void testFinder1()
-		throws Exception
-	{
-		index.mkdirs();
+    @Test
+    public void testFinder1() throws Exception
+    {
+        File index = testContext.getTestOutputFolder();
 
-		// Create index
-		LuceneIndexer indexer = new LuceneIndexer(source, index);
-		indexer.index();
-		Finder f = new Finder(index, jWeb1T);
-		// Search and check if data is correct
-		List<NGramModel> result = f.find("couch");
-		assertEquals(1, result.size());
-		assertEquals("relax on the couch", result.get(0).getGram());
-		assertEquals(4, result.get(0).getN());
-		assertEquals(100, result.get(0).getFreq());
+        // Create index
+        LuceneIndexer indexer = new LuceneIndexer(source, index);
+        indexer.index();
 
-		result = f.find("relax couch");
-		assertEquals(1, result.size());
-		assertEquals("relax on the couch", result.get(0).getGram());
-		assertEquals(4, result.get(0).getN());
-		assertEquals(100, result.get(0).getFreq());
+        try (Finder f = new Finder(index, jWeb1T)) {
+            // Search and check if data is correct
+            List<NGramModel> result = f.find("couch");
+            assertEquals(1, result.size());
+            assertEquals("relax on the couch", result.get(0).getGram());
+            assertEquals(4, result.get(0).getN());
+            assertEquals(100, result.get(0).getFreq());
 
-		result = f.find("relax");
-		assertEquals(3, result.size());
+            result = f.find("relax couch");
+            assertEquals(1, result.size());
+            assertEquals("relax on the couch", result.get(0).getGram());
+            assertEquals(4, result.get(0).getN());
+            assertEquals(100, result.get(0).getFreq());
 
-		result = f.find("relax");
-		assertEquals(3, result.size());
+            result = f.find("relax");
+            assertEquals(3, result.size());
 
-		// Delete index again
-		for (File file : index.listFiles()) {
-			for (File _f : file.listFiles()) {
-				_f.delete();
-			}
-			file.delete();
-		}
+            result = f.find("relax");
+            assertEquals(3, result.size());
+        }
 
-		index.delete();
+        // Delete index again
+        for (File file : index.listFiles()) {
+            for (File _f : file.listFiles()) {
+                _f.delete();
+            }
+            file.delete();
+        }
+
+        index.delete();
+    }
+
+    @Test
+    public void testFinder2() throws Exception
+    {
+        File index = testContext.getTestOutputFolder();
+
+        // Create index
+        LuceneIndexer indexer = new LuceneIndexer(source, index, 2);
+        indexer.index();
+
+        try (Finder f = new Finder(index, jWeb1T)) {
+            // Search and check if data is correct
+            List<NGramModel> result = f.find("couch");
+            assertEquals(1, result.size());
+            assertEquals("relax on the couch", result.get(0).getGram());
+            assertEquals(4, result.get(0).getN());
+            assertEquals(100, result.get(0).getFreq());
+
+            result = f.find("relax couch");
+            assertEquals(1, result.size());
+            assertEquals("relax on the couch", result.get(0).getGram());
+            assertEquals(4, result.get(0).getN());
+            assertEquals(100, result.get(0).getFreq());
+
+            result = f.find("relax");
+            assertEquals(3, result.size());
+
+            result = f.find("relax");
+            assertEquals(3, result.size());
+        }
+
+        // Delete index again
+        for (File file : index.listFiles()) {
+            for (File _f : file.listFiles()) {
+                _f.delete();
+            }
+            file.delete();
+        }
+
+        index.delete();
 	}
-
-	@Test
-	public void testFinder2()
-		throws Exception
-	{
-		index.mkdirs();
-
-		// Create index
-		LuceneIndexer indexer = new LuceneIndexer(source, index, 2);
-		indexer.index();
-
-		Finder f = new Finder(index, jWeb1T);
-		// Search and check if data is correct
-		List<NGramModel> result = f.find("couch");
-		assertEquals(1, result.size());
-		assertEquals("relax on the couch", result.get(0).getGram());
-		assertEquals(4, result.get(0).getN());
-		assertEquals(100, result.get(0).getFreq());
-
-		result = f.find("relax couch");
-		assertEquals(1, result.size());
-		assertEquals("relax on the couch", result.get(0).getGram());
-		assertEquals(4, result.get(0).getN());
-		assertEquals(100, result.get(0).getFreq());
-
-		result = f.find("relax");
-		assertEquals(3, result.size());
-
-		result = f.find("relax");
-		assertEquals(3, result.size());
-
-		// Delete index again
-		for (File file : index.listFiles()) {
-			for (File _f : file.listFiles()) {
-				_f.delete();
-			}
-			file.delete();
-		}
-
-		index.delete();
-	}
+    
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }
