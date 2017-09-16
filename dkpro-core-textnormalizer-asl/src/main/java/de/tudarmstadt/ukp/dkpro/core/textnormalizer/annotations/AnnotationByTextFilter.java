@@ -59,8 +59,8 @@ public class AnnotationByTextFilter
     @ConfigurationParameter(name = PARAM_IGNORE_CASE, mandatory = true, defaultValue = "true")
     private boolean ignoreCase;
 
-    public static final String PARAM_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
-    @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
+    public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
+    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String modelEncoding;
 
     /**

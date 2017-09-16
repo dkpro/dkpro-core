@@ -85,9 +85,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 public class Conll2009Reader
     extends JCasResourceCollectionReader_ImplBase
 {
-    public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
-    private String encoding;
+    public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    private String sourceEncoding;
 
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
@@ -166,7 +166,7 @@ public class Conll2009Reader
         try {
             reader = new BufferedReader(new InputStreamReader(
                     CompressionUtils.getInputStream(res.getLocation(), res.getInputStream()),
-                    encoding));
+                    sourceEncoding));
             convert(aJCas, reader);
         }
         finally {

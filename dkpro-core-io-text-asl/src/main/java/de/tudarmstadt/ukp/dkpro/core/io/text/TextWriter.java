@@ -17,8 +17,6 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.text;
 
-import static org.apache.commons.io.IOUtils.closeQuietly;
-
 import java.io.OutputStream;
 
 import org.apache.commons.io.IOUtils;
@@ -52,21 +50,22 @@ public class TextWriter
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".txt")
     private String filenameSuffix;
 
+    /**
+     * Character encoding of the output data.
+     */
+    public static final String PARAM_TARGET_ENCODING = "targetEncoding";
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    private String targetEncoding;
+    
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
-        OutputStream docOS = null;
-        try {
-            docOS = getOutputStream(aJCas, filenameSuffix);
-
-            IOUtils.write(aJCas.getDocumentText(), docOS);
+        try (OutputStream docOS = getOutputStream(aJCas, filenameSuffix)) {
+            IOUtils.write(aJCas.getDocumentText(), docOS, targetEncoding);
         }
         catch (Exception e) {
             throw new AnalysisEngineProcessException(e);
-        }
-        finally {
-            closeQuietly(docOS);
         }
     }
 }

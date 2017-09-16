@@ -73,9 +73,6 @@ public class ImsCwbReader
     @ConfigurationParameter(name=PARAM_SOURCE_ENCODING, mandatory=true, defaultValue="UTF-8")
     private String encoding;
 
-    @Deprecated
-    public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-
 	/**
 	 * Location of the mapping file for part-of-speech tags to UIMA types.
 	 */

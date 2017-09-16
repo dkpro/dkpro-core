@@ -20,6 +20,9 @@ package de.tudarmstadt.ukp.dkpro.core.api.parameter;
 
 public final class ComponentParameters
 {
+    public static final String DEFAULT_ENCODING = "UTF-8";
+    
+    
 	/**
 	 * For analysis engines: Use this language instead of the document language to resolve the model
 	 * and tag set mapping.
