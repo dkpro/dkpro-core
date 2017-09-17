@@ -65,6 +65,10 @@ class TreeTaggerPosTaggerTest
 	public void testEnglishAutoDownload()
         throws Exception
 	{
+        Assume.assumeTrue(getClass().getResource(
+                "/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null ||
+                System.getProperty("treetagger.home") != null);
+	    
         URL aUrl = new URL("http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-par-linux-3.2-utf8.bin.gz");
         File targetFile = File.createTempFile("model", ".bin");
         
@@ -997,7 +1001,8 @@ class TreeTaggerPosTaggerTest
                 "/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-" + lang + "-le.bin") != null);
 
 		Assume.assumeTrue(getClass().getResource(
-				"/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null);
+				"/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null ||
+				System.getProperty("treetagger.home") != null);
 	}
 
     private JCas runTest(String language, String tagsetName, String[] tagset, String testDocument,
