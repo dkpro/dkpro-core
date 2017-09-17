@@ -26,20 +26,19 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 /**
  * Takes a text and replaces sharp s
  */
-@ResourceMetaData(name="Sharp S (ß) Normalizer")
+@ResourceMetaData(name = "Sharp S (ß) Normalizer")
 @LanguageCapability("de")
 public class SharpSNormalizer
     extends ReplacementFrequencyNormalizer_ImplBase
 {
-
     @Override
     public Map<String, String> getReplacementMap()
     {
-        Map<String,String> replacementMap = new HashMap<String,String>();
-        
-        replacementMap.put("ss", "ß");
-        replacementMap.put("ß", "ss");
+        Map<String, String> map = new HashMap<String, String>();
 
-        return replacementMap;
+        map.put("ss", "ß");
+        map.put("ß", "ss");
+
+        return map;
     }
 }
