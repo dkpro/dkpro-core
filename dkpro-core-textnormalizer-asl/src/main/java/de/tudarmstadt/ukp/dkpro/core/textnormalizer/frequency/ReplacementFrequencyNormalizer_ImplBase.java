@@ -42,11 +42,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_Im
 public abstract class ReplacementFrequencyNormalizer_ImplBase
     extends JCasTransformerChangeBased_ImplBase
 {
-    public static final String FREQUENCY_PROVIDER = "FrequencyProvider";
+    public static final String FREQUENCY_PROVIDER = "frequencyProvider";
     @ExternalResource(key = FREQUENCY_PROVIDER, mandatory = true)
     protected FrequencyCountProvider frequencyProvider;
     
-    public static final String PARAM_MIN_FREQUENCY_THRESHOLD = "MinFrequencyThreshold";
+    public static final String PARAM_MIN_FREQUENCY_THRESHOLD = "minFrequencyThreshold";
     @ConfigurationParameter(name = PARAM_MIN_FREQUENCY_THRESHOLD, mandatory = true, defaultValue = "100")
     private int minFrequencyThreshold;
 
@@ -87,8 +87,8 @@ public abstract class ReplacementFrequencyNormalizer_ImplBase
                         long freqOrigToken = frequencyProvider.getFrequency(tokenString);
                         long freqChangedToken = frequencyProvider.getFrequency(changedToken);
 
-                        System.out.println(tokenString + " - " + freqOrigToken);
-                        System.out.println(changedToken + " - " + freqChangedToken);
+//                        System.out.println(tokenString + " - " + freqOrigToken);
+//                        System.out.println(changedToken + " - " + freqChangedToken);
 
                         // if absolute counts of replacement are too low or zero, do not change
                         if (freqChangedToken == 0 || freqChangedToken < minFrequencyThreshold) {
