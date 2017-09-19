@@ -57,6 +57,9 @@ public class BratAnnotationDocument
             case 'R':
                 doc.addAnnotation(BratRelationAnnotation.parse(line));
                 break;
+            case '#':
+                doc.addAnnotation(BratNoteAnnotation.parse(line));
+                break;
             case 'E': {
                 BratEventAnnotation e = BratEventAnnotation.parse(line);
                 events.add(e);

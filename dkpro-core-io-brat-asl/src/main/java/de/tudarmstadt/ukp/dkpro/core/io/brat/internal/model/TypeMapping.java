@@ -53,30 +53,34 @@ public class TypeMapping
         }
         return type;
     }
-    
+
     public Type getUimaType(TypeSystem aTs, BratAnnotation aAnno)
     {
-        Type t = brat2UimaMappingCache.get(aAnno.getType());
+        return getUimaType(aTs, aAnno.getType());
+    }
+
+    public Type getUimaType(TypeSystem aTs, String aType)
+    {
+        Type t = brat2UimaMappingCache.get(aType);
         
         if (t == null) {
-            // brat doesn't like dots in name names, so we had replaced them with dashes.
-            // Now revert.
-            String type = apply(aAnno.getType().replace("-", "."));
+            // brat doesn't like dots in name names, so we had replaced them with dashes. Now revert.
+            String type = apply(aType.replace("-", "."));
             t = aTs.getType(type);
             
             // if the lookup didn't work with replacing the dashes, try without, e.g. because the
             // brat name *really* contains dashes and we only resolve them through mapping
             if (t == null) {
-                type = apply(aAnno.getType());
+                type = apply(aType);
                 t = aTs.getType(type);
             }
             
-            brat2UimaMappingCache.put(aAnno.getType(), t);
+            brat2UimaMappingCache.put(aType, t);
         }
 
         if (t == null) {
             throw new IllegalStateException("Unable to find appropriate UIMA type for brat type ["
-                    + aAnno.getType() + "]");
+                    + aType + "]");
         }
 
         return t;

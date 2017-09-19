@@ -163,8 +163,13 @@ public class BratReaderWriterTest
                                 "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
                                 "MERGE-ORG -> de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg"),
                         BratReader.PARAM_RELATION_TYPES, asList(
-                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
+                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value"),
+                        BratReader.PARAM_NOTE_MAPPINGS, asList(
+                                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization:value",
+                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:comment",
+                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg:comment")), 
                 createEngineDescription(BratWriter.class,
+                        BratWriter.PARAM_WRITE_RELATION_ATTRIBUTES, true,
                         BratWriter.PARAM_RELATION_TYPES, asList(
                                 "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
                 "brat/document1-ref.ann", 

@@ -17,6 +17,8 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.brat;
 
+import static java.util.Arrays.asList;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -57,8 +59,10 @@ import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratAnnotationDocume
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratAttribute;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratEventAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratEventArgument;
+import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratNoteAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratRelationAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratTextAnnotation;
+import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.NoteMappingParam;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.RelationParam;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TextAnnotationParam;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TypeMapping;
@@ -116,7 +120,12 @@ public class BratReader
     private String[] typeMappings;
     private TypeMapping typeMapping;
     
-    private Map<String, AnnotationFS> spanIdMap;
+    public static final String PARAM_NOTE_MAPPINGS = "noteMappings";
+    @ConfigurationParameter(name = PARAM_NOTE_MAPPINGS, mandatory = true, defaultValue = {})
+    private Set<String> noteMappings;
+    private Map<String, NoteMappingParam> parsedNoteMappings;    
+    
+    private Map<String, FeatureStructure> id2fs;
     
     private Set<String> warnings;
     
@@ -133,9 +142,15 @@ public class BratReader
         }
 
         parsedTextAnnotationTypes = new HashMap<>();
-        for (String rel : textAnnotationTypes) {
-            TextAnnotationParam p = TextAnnotationParam.parse(rel);
+        for (String ann : textAnnotationTypes) {
+            TextAnnotationParam p = TextAnnotationParam.parse(ann);
             parsedTextAnnotationTypes.put(p.getType(), p);
+        }
+
+        parsedNoteMappings = new HashMap<>();
+        for (String note : noteMappings) {
+            NoteMappingParam p = NoteMappingParam.parse(note);
+            parsedNoteMappings.put(p.getType(), p);
         }
 
         typeMapping = new TypeMapping(typeMappings);
@@ -158,7 +173,7 @@ public class BratReader
     public void getNext(JCas aJCas)
         throws IOException, CollectionException
     {
-        spanIdMap = new HashMap<>();
+        id2fs = new HashMap<>();
         
         Resource res = nextFile();
         initCas(aJCas, res);
@@ -180,15 +195,20 @@ public class BratReader
         
         List<BratRelationAnnotation> relations = new ArrayList<>();
         List<BratEventAnnotation> events = new ArrayList<>();
+        List<BratNoteAnnotation> notes = new ArrayList<>();
         for (BratAnnotation anno : doc.getAnnotations()) {
-            Type type = typeMapping.getUimaType(ts, anno);
             if (anno instanceof BratTextAnnotation) {
+                Type type = typeMapping.getUimaType(ts, anno);
                 create(cas, type, (BratTextAnnotation) anno);
             }
             else if (anno instanceof BratRelationAnnotation) {
                 relations.add((BratRelationAnnotation) anno);
             }
+            else if (anno instanceof BratNoteAnnotation) {
+                notes.add((BratNoteAnnotation) anno);
+            }
             else if (anno instanceof BratEventAnnotation) {
+                Type type = typeMapping.getUimaType(ts, anno);
                 create(cas, type, (BratEventAnnotation) anno);
                 events.add((BratEventAnnotation) anno);
             }
@@ -208,6 +228,24 @@ public class BratReader
         for (BratEventAnnotation e : events) {
             Type type = typeMapping.getUimaType(ts, e);
             fillSlots(cas, type, doc, e);
+        }
+        
+        // Finally go through the notes and map them to features (if configured to do so)
+        for (BratNoteAnnotation n : notes) {
+            String bratType = doc.getAnnotation(n.getTarget()).getType();
+            Type type = typeMapping.getUimaType(ts, bratType);
+            NoteMappingParam map = parsedNoteMappings.get(type.getName());
+
+            if (map == null) {
+                warnings.add("No notes mapping defined for note type [" + n.getType()
+                        + "] on annotation type [" + type.getName() + "]");
+                continue;
+            }
+            
+            FeatureStructure anno = id2fs.get(n.getTarget());
+            BratAttribute noteAttr = new BratAttribute(-1, map.getFeature(), n.getTarget(),
+                    n.getNote());
+            fillAttributes(anno, asList(noteAttr));
         }
     }
 
@@ -234,7 +272,7 @@ public class BratReader
         
         fillAttributes(anno, aAnno.getAttributes());
         aCAS.addFsToIndexes(anno);
-        spanIdMap.put(aAnno.getId(), anno);
+        id2fs.put(aAnno.getId(), anno);
     }
 
     private void create(CAS aCAS, Type aType, BratEventAnnotation aAnno)
@@ -253,15 +291,15 @@ public class BratReader
         // created yet.
         
         aCAS.addFsToIndexes(anno);
-        spanIdMap.put(aAnno.getId(), anno);
+        id2fs.put(aAnno.getId(), anno);
     }
     
     private void create(CAS aCAS, Type aType, BratRelationAnnotation aAnno)
     {
         RelationParam param = parsedRelationTypes.get(aType.getName());
         
-        AnnotationFS arg1 = spanIdMap.get(aAnno.getArg1Target());
-        AnnotationFS arg2 = spanIdMap.get(aAnno.getArg2Target());
+        FeatureStructure arg1 = id2fs.get(aAnno.getArg1Target());
+        FeatureStructure arg2 = id2fs.get(aAnno.getArg2Target());
         
         FeatureStructure anno = aCAS.createFS(aType);
         
@@ -274,10 +312,10 @@ public class BratReader
             throw new IllegalStateException("Only one argument can be the anchor.");
         }
         else if (param.getFlags1().contains(RelationParam.FLAG_ANCHOR)) {
-            anchor = arg1;
+            anchor = (AnnotationFS) arg1;
         }
         else if (param.getFlags2().contains(RelationParam.FLAG_ANCHOR)) {
-            anchor = arg2;
+            anchor = (AnnotationFS) arg2;
         }
         
         if (param.getSubcat() != null) {
@@ -301,6 +339,7 @@ public class BratReader
         fillAttributes(anno, aAnno.getAttributes());
         
         aCAS.addFsToIndexes(anno);
+        id2fs.put(aAnno.getId(), anno);
     }
 
     private void fillAttributes(FeatureStructure aAnno, Collection<BratAttribute> aAttributes)
@@ -342,7 +381,7 @@ public class BratReader
     private void fillSlots(CAS aCas, Type aType, BratAnnotationDocument aDoc,
             BratEventAnnotation aE)
     {
-        AnnotationFS event = spanIdMap.get(aE.getId());
+        FeatureStructure event = id2fs.get(aE.getId());
         Map<String, List<BratEventArgument>> groupedArgs = aE.getGroupedArguments();
         
         for (Entry<String, List<BratEventArgument>> slot : groupedArgs.entrySet()) {
@@ -353,7 +392,7 @@ public class BratReader
             if (FSUtil.hasFeature(event, slot.getKey())
                     && FSUtil.isMultiValuedFeature(event, slot.getKey())) {
                 for (BratEventArgument arg : slot.getValue()) {
-                    FeatureStructure target = spanIdMap.get(arg.getTarget());
+                    FeatureStructure target = id2fs.get(arg.getTarget());
                     if (target == null) {
                         throw new IllegalStateException("Unable to resolve id [" + arg.getTarget()
                                 + "]");
@@ -387,7 +426,7 @@ public class BratReader
             // Lets see if there is a single-valued feature by the name of the slot
             else if (FSUtil.hasFeature(event, slot.getKey())) {
                 for (BratEventArgument arg : slot.getValue()) {
-                    AnnotationFS target = spanIdMap.get(arg.getTarget());
+                    FeatureStructure target = id2fs.get(arg.getTarget());
                     if (target == null) {
                         throw new IllegalStateException("Unable to resolve id [" + arg.getTarget()
                                 + "]");
@@ -399,13 +438,13 @@ public class BratReader
                     }
                     else {
                         throw new IllegalStateException("Type [" + event.getType().getName()
-                                + "] has no feature naemd [" + fname + "]");
+                                + "] has no feature named [" + fname + "]");
                     }
                 }
             }
             else {
                 throw new IllegalStateException("Type [" + event.getType().getName()
-                        + "] has no feature naemd [" + slot.getKey() + "]");
+                        + "] has no feature named [" + slot.getKey() + "]");
             }
         }
     }
