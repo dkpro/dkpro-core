@@ -28,23 +28,22 @@ import org.apache.uima.fit.descriptor.TypeCapability;
  * Takes a text and checks for umlauts written as "ae", "oe", or "ue" and normalizes them if they
  * really are umlauts depending on a frequency model.
  */
-@ResourceMetaData(name="Umlaut Normalizer")
+@ResourceMetaData(name = "Umlaut Normalizer")
 @LanguageCapability("de")
-@TypeCapability(
-        inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class UmlautNormalizer
     extends ReplacementFrequencyNormalizer_ImplBase
 {
     @Override
     public Map<String, String> getReplacementMap()
     {
-        Map<String, String> replacementMap = new HashMap<String, String>();
-        replacementMap.put("ae", "ä");
-        replacementMap.put("oe", "ö");
-        replacementMap.put("ue", "ü");
-        replacementMap.put("Ae", "Ä");
-        replacementMap.put("Oe", "Ö");
-        replacementMap.put("Ue", "Ü");
-        return replacementMap;
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("ae", "ä");
+        map.put("oe", "ö");
+        map.put("ue", "ü");
+        map.put("Ae", "Ä");
+        map.put("Oe", "Ö");
+        map.put("Ue", "Ü");
+        return map;
     }
 }

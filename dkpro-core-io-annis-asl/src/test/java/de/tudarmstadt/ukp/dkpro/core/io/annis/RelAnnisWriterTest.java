@@ -47,7 +47,7 @@ public class RelAnnisWriterTest
 				NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/tueba/input/tueba-sample.export",
 				NegraExportReader.PARAM_LANGUAGE, "de",
 //				NegraExportReader.PARAM_READ_PENN_TREE, false,
-				NegraExportReader.PARAM_ENCODING, "UTF-8");
+				NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8");
 
 		AnalysisEngineDescription writer = createEngineDescription(RelAnnisWriter.class,
 				RelAnnisWriter.PARAM_PATH, workspace.getRoot().getPath());

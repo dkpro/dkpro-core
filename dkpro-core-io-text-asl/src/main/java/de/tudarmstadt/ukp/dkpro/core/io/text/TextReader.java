@@ -56,9 +56,9 @@ public class TextReader
 	/**
 	 * Name of configuration parameter that contains the character encoding used by the input files.
 	 */
-	public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-	@ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
-	private String encoding;
+	public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
+	@ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+	private String sourceEncoding;
 
 	@Override
 	public void getNext(CAS aJCas)
@@ -71,12 +71,12 @@ public class TextReader
                 CompressionUtils.getInputStream(res.getLocation(), res.getInputStream()))) {
             String text;
 
-            if (ENCODING_AUTO.equals(encoding)) {
+            if (ENCODING_AUTO.equals(sourceEncoding)) {
                 CharsetDetector detector = new CharsetDetector();
                 text = IOUtils.toString(detector.getReader(is, null));
             }
             else {
-                text = IOUtils.toString(is, encoding);
+                text = IOUtils.toString(is, sourceEncoding);
             }
             
             aJCas.setDocumentText(text);		

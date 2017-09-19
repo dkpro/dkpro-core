@@ -86,8 +86,8 @@ import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
 public class Conll2012Reader
     extends JCasResourceCollectionReader_ImplBase
 {
-    public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
+    public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String encoding;
 
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;

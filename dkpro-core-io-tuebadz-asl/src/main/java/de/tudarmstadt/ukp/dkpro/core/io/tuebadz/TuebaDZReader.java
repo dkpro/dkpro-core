@@ -79,9 +79,9 @@ public class TuebaDZReader
     /**
      * Character encoding of the input data.
      */
-    public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
-    private String encoding;
+    public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    private String sourceEncoding;
 
     /**
      * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
@@ -190,7 +190,7 @@ public class TuebaDZReader
         initCas(aJCas, res);
         BufferedReader reader = null;
         try {
-            reader = new BufferedReader(new InputStreamReader(res.getInputStream(), encoding));
+            reader = new BufferedReader(new InputStreamReader(res.getInputStream(), sourceEncoding));
             convert(aJCas, reader);
         }
         finally {

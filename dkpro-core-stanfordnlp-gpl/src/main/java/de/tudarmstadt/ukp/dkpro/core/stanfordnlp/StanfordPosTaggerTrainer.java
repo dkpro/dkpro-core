@@ -33,6 +33,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Properties;
+import java.util.regex.Matcher;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -70,7 +71,7 @@ public class StanfordPosTaggerTrainer
      * files if {@link #PARAM_CLUSTER_FILE} is specified.
      */
     public static final String PARAM_PARAMETER_FILE = "trainFile";
-    @ConfigurationParameter(name = PARAM_PARAMETER_FILE, mandatory = true)
+    @ConfigurationParameter(name = PARAM_PARAMETER_FILE, mandatory = false)
     private File parameterFile;
 
     /**
@@ -91,19 +92,20 @@ public class StanfordPosTaggerTrainer
         super.initialize(aContext);
         
         try {
-            String p = clusterFile.getAbsolutePath();
-            if (p.contains("(") || p.contains(")") || p.contains(",")) {
-                // The Stanford POS tagger trainer does not suppor these characters in the cluster
-                // files path. If we have those, try to copy the clusters somewhere save before
-                // training. See: https://github.com/stanfordnlp/CoreNLP/issues/255
-                File tempClusterFile = File.createTempFile("dkpro-stanford-pos-trainer",
-                        ".cluster");
-                FileUtils.copyFile(clusterFile, tempClusterFile);
-                clusterFile = tempClusterFile;
-                clusterFilesTemporary = true;
-            }
-            else {
-                clusterFilesTemporary = false;
+            clusterFilesTemporary = false;
+
+            if (clusterFile != null) {
+                String p = clusterFile.getAbsolutePath();
+                if (p.contains("(") || p.contains(")") || p.contains(",")) {
+                    // The Stanford POS tagger trainer does not support these characters in the cluster
+                    // files path. If we have those, try to copy the clusters somewhere save before
+                    // training. See: https://github.com/stanfordnlp/CoreNLP/issues/255
+                    File tempClusterFile = File.createTempFile("dkpro-stanford-pos-trainer",
+                            ".cluster");
+                    FileUtils.copyFile(clusterFile, tempClusterFile);
+                    clusterFile = tempClusterFile;
+                    clusterFilesTemporary = true;
+                }
             }
         }
         catch (IOException e) {
@@ -146,11 +148,12 @@ public class StanfordPosTaggerTrainer
         
         // Load user-provided configuration
         Properties props = new Properties();
-        try (InputStream is = new FileInputStream(parameterFile)) {
-            props.load(is);
-        }
-        catch (IOException e) {
-            throw new AnalysisEngineProcessException(e);
+        if (parameterFile != null) {
+            try (InputStream is = new FileInputStream(parameterFile)) {
+                props.load(is);
+            } catch (IOException e) {
+                throw new AnalysisEngineProcessException(e);
+            }
         }
         
         // Add/replace training file information
@@ -158,10 +161,15 @@ public class StanfordPosTaggerTrainer
                 "format=TSV,wordColumn=0,tagColumn=1," + tempData.getAbsolutePath());
         props.setProperty("model", targetLocation.getAbsolutePath());
         props.setProperty("encoding", "UTF-8");
+
         if (clusterFile != null) {
             String arch = props.getProperty("arch");
-            arch = arch.replaceAll("\\$\\{distsimCluster\\}", clusterFile.getAbsolutePath());
+            arch = arch.replaceAll("\\$\\{distsimCluster\\}",
+                    Matcher.quoteReplacement(clusterFile.getAbsolutePath()));
             props.setProperty("arch", arch);
+        } else {
+            // default value from documentation: https://nlp.stanford.edu/software/pos-tagger-faq.shtml#train
+            props.setProperty("arch", "words(-1,1),unicodeshapes(-1,1),order(2),suffix(4)");
         }
 
         File tempConfig = null;

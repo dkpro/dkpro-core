@@ -106,7 +106,7 @@ public class RuntimeProvider
                 }
                 throw new FileNotFoundException(sb.toString());
             }
-            else if (log.isWarnEnabled()) {
+            else if (fallbackTo32Tried && log.isWarnEnabled()) {
                 log.warn("No binaries found for [" + platformDetector.getPlatformId() + "], using ["
                         + platformId + "] instead");
             }

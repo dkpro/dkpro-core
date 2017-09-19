@@ -79,11 +79,11 @@ public class GateXmlWriter2
     private String filenameSuffix;
 
     /**
-     * Character encoding used by the output files.
+     * Character encoding of the output data.
      */
-    public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
-    private String encoding;
+    public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    private String targetEncoding;
     
     private DocumentExporter exporter;
 
@@ -118,8 +118,8 @@ public class GateXmlWriter2
         }
 
         try (OutputStream docOS = getOutputStream(aJCas, filenameSuffix)) {
-            if (encoding != null) {
-                document.setEncoding(encoding);
+            if (targetEncoding != null) {
+                document.setEncoding(targetEncoding);
             }
             
             exporter.export(document, docOS);

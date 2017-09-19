@@ -106,9 +106,9 @@ public class NegraExportReader
     /**
      * Character encoding of the input data.
      */
-    public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
-    private String encoding;
+    public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    private String sourceEncoding;
 
     /**
      * Write part-of-speech information.
@@ -243,7 +243,7 @@ public class NegraExportReader
             InputStream resolvedStream = CompressionUtils.getInputStream(inputFile.getName(),
                     fileStream);
 
-            br = new BufferedReader(new InputStreamReader(resolvedStream, encoding));
+            br = new BufferedReader(new InputStreamReader(resolvedStream, sourceEncoding));
 
             readHeaders();
 

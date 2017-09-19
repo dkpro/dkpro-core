@@ -59,11 +59,11 @@ public class PennTreebankCombinedWriter
     private String filenameSuffix;
 
     /**
-     * Name of configuration parameter that contains the character encoding used by the input files.
+     * Character encoding of the output data.
      */
-    public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
-    private String encoding;
+    public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    private String targetEncoding;
     
     public static final String PARAM_EMPTY_ROOT_LABEL = "emptyRootLabel";
     @ConfigurationParameter(name = PARAM_EMPTY_ROOT_LABEL, mandatory = true, defaultValue = "false")
@@ -77,7 +77,7 @@ public class PennTreebankCombinedWriter
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
-        try (Writer docOS = new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix), encoding)) {
+        try (Writer docOS = new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix), targetEncoding)) {
             for (ROOT root : select(aJCas, ROOT.class)) {
                 PennTreeNode tree = PennTreeUtils.convertPennTree(root);
                 

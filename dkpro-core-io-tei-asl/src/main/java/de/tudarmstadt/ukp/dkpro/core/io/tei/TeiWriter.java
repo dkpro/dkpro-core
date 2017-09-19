@@ -34,6 +34,7 @@ import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_RS;
 import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_SUNIT;
 import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_WORD;
 import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TEI_NS;
+import static org.apache.commons.io.IOUtils.closeQuietly;
 
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -49,6 +50,7 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Attribute;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -134,11 +136,15 @@ public class TeiWriter
     {
         String text = aJCas.getDocumentText();
 
-        try (OutputStream docOS = getOutputStream(aJCas, filenameSuffix)) {
+        OutputStream docOS = null;
+        XMLEventWriter xmlEventWriter = null;
+        try {
+            docOS = getOutputStream(aJCas, filenameSuffix);
+            
             XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
             xmlOutputFactory.setProperty(XMLOutputFactory.IS_REPAIRING_NAMESPACES, true);
             
-            XMLEventWriter xmlEventWriter = xmlOutputFactory.createXMLEventWriter(docOS, "UTF-8");
+            xmlEventWriter = xmlOutputFactory.createXMLEventWriter(docOS, "UTF-8");
             if (indent) {
                 xmlEventWriter = new IndentingXMLEventWriter(xmlEventWriter);
             }
@@ -239,6 +245,18 @@ public class TeiWriter
         }
         catch (Exception e) {
             throw new AnalysisEngineProcessException(e);
+        }
+        finally {
+            if (xmlEventWriter != null) {
+                try {
+                    xmlEventWriter.close();
+                }
+                catch (XMLStreamException e) {
+                    getLogger().warn("Error closing the XML event writer", e);
+                }
+            }
+            
+            closeQuietly(docOS);
         }
     }
 

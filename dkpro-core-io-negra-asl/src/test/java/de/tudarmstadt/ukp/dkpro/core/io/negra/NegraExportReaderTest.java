@@ -40,7 +40,7 @@ public class NegraExportReaderTest
         testOneWay(
                 createReaderDescription(NegraExportReader.class,
                         NegraExportReader.PARAM_LANGUAGE, "de",
-                        NegraExportReader.PARAM_ENCODING, "UTF-8",
+                        NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8",
                         NegraExportReader.PARAM_READ_PENN_TREE, true), 
                 "sentence.export.dump", 
                 "sentence.export");
@@ -53,7 +53,7 @@ public class NegraExportReaderTest
         testOneWay(
                 createReaderDescription(NegraExportReader.class,
                         NegraExportReader.PARAM_LANGUAGE, "de",
-                        NegraExportReader.PARAM_ENCODING, "ISO-8859-15",
+                        NegraExportReader.PARAM_SOURCE_ENCODING, "ISO-8859-15",
                         NegraExportReader.PARAM_READ_PENN_TREE, true), 
                 "tiger-sample.export.dump", 
                 "tiger-sample.export");
@@ -66,7 +66,7 @@ public class NegraExportReaderTest
         testOneWay(
                 createReaderDescription(NegraExportReader.class,
                         NegraExportReader.PARAM_LANGUAGE, "de",
-                        NegraExportReader.PARAM_ENCODING, "UTF-8",
+                        NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8",
                         NegraExportReader.PARAM_READ_PENN_TREE, true), 
                 "tueba-sample.export.dump", 
                 "tueba-sample.export");
@@ -79,7 +79,7 @@ public class NegraExportReaderTest
         testOneWay(
                 createReaderDescription(NegraExportReader.class,
                         NegraExportReader.PARAM_LANGUAGE, "de",
-                        NegraExportReader.PARAM_ENCODING, "UTF-8",
+                        NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8",
                         NegraExportReader.PARAM_READ_PENN_TREE, true), 
                 "format4-with-coref-sample.export.dump", 
                 "format4-with-coref-sample.export");

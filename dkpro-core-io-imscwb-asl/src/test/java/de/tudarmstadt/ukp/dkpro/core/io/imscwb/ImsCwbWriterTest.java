@@ -57,7 +57,7 @@ public class ImsCwbWriterTest
 				NegraExportReader.class,
 				NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/tuebadz/corpus-sample.export",
 				NegraExportReader.PARAM_LANGUAGE, "de",
-				NegraExportReader.PARAM_ENCODING, "UTF-8");
+				NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8");
 
 		AnalysisEngineDescription tag = createEngineDescription(
 				OpenNlpPosTagger.class);
@@ -90,7 +90,7 @@ public class ImsCwbWriterTest
                 NegraExportReader.class,
                 NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/tuebadz/corpus-sample.export",
                 NegraExportReader.PARAM_LANGUAGE, "de",
-                NegraExportReader.PARAM_ENCODING, "UTF-8");
+                NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8");
 
         AnalysisEngineDescription tag = createEngineDescription(
                 OpenNlpPosTagger.class);
@@ -158,7 +158,7 @@ public class ImsCwbWriterTest
 				NegraExportReader.class,
 				NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/corpus-sample.export",
 				NegraExportReader.PARAM_LANGUAGE, "de",
-				NegraExportReader.PARAM_ENCODING, "UTF-8");
+				NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8");
 
 		AnalysisEngineDescription tag = createEngineDescription(
 				OpenNlpPosTagger.class);

@@ -45,7 +45,7 @@ public class TuebadzToImsCwbPipeline
 				NegraExportReader.class,
 				NegraExportReader.PARAM_SOURCE_LOCATION, inputFile,
 				NegraExportReader.PARAM_LANGUAGE, "de",
-				NegraExportReader.PARAM_ENCODING, "ISO-8859-1");
+				NegraExportReader.PARAM_SOURCE_ENCODING, "ISO-8859-1");
 
 		AnalysisEngineDescription tag = createEngineDescription(
 				OpenNlpPosTagger.class);

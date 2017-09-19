@@ -19,13 +19,12 @@
 package de.tudarmstadt.ukp.dkpro.core.decompounding.splitter;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
-import junit.framework.Assert;
 
 import org.junit.Test;
 
@@ -47,13 +46,13 @@ public class LeftToRightSplitAlgorithmTest
 				morphemes);
 
 		List<DecompoundedWord> result = algo.split("Aktionsplan").getAllSplits();
-		Assert.assertEquals(6, result.size());
-		Assert.assertEquals("aktionsplan", result.get(0).toString());
-		Assert.assertEquals("akt+ionsplan", result.get(1).toString());
-		Assert.assertEquals("akt+ion+splan", result.get(2).toString());
-		Assert.assertEquals("akt+ion(s)+plan", result.get(3).toString());
-		Assert.assertEquals("aktion+splan", result.get(4).toString());
-		Assert.assertEquals("aktion(s)+plan", result.get(5).toString());
+		assertEquals(6, result.size());
+		assertEquals("aktionsplan", result.get(0).toString());
+		assertEquals("akt+ionsplan", result.get(1).toString());
+		assertEquals("akt+ion+splan", result.get(2).toString());
+		assertEquals("akt+ion(s)+plan", result.get(3).toString());
+		assertEquals("aktion+splan", result.get(4).toString());
+		assertEquals("aktion(s)+plan", result.get(5).toString());
 	}
 
 	@Test
@@ -66,7 +65,7 @@ public class LeftToRightSplitAlgorithmTest
 				morphemes);
 
 		List<DecompoundedWord> result = algo.split("Donaudampfschifffahrt").getAllSplits();
-		Assert.assertEquals(6, result.size());
+		assertEquals(6, result.size());
 	}
 
 	@Test
@@ -80,7 +79,7 @@ public class LeftToRightSplitAlgorithmTest
 
 		List<DecompoundedWord> result = algo.split("Supermannanzug").getAllSplits();
 		// Super+mann+anzug, Supermann+anzug
-		Assert.assertEquals(4, result.size());
+		assertEquals(4, result.size());
 	}
 
 	@Test
@@ -93,10 +92,10 @@ public class LeftToRightSplitAlgorithmTest
 
 		List<DecompoundedWord> result = algo.split("alarmreaktionen").getAllSplits();
 		// Super+mann+anzug, Supermann+anzug
-		Assert.assertEquals(3, result.size());
-		Assert.assertEquals("alarmreaktionen", result.get(0).toString());
-		Assert.assertEquals("alarm+reaktionen", result.get(1).toString());
-		Assert.assertEquals("alarm+reaktion(en)", result.get(2).toString());
+		assertEquals(3, result.size());
+		assertEquals("alarmreaktionen", result.get(0).toString());
+		assertEquals("alarm+reaktionen", result.get(1).toString());
+		assertEquals("alarm+reaktion(en)", result.get(2).toString());
 	}
 
 	@Test
@@ -107,7 +106,7 @@ public class LeftToRightSplitAlgorithmTest
         final File morphemesFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
         		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-linking.linking"), false);
 
-	    Dictionary dict = new SimpleDictionary(dictFile);
+	    Dictionary dict = new SimpleDictionary(dictFile, "UTF-8");
 	    LinkingMorphemes morphemes = new LinkingMorphemes(morphemesFile);
 
 	    LeftToRightSplitterAlgorithm splitter = new LeftToRightSplitterAlgorithm(dict,morphemes);

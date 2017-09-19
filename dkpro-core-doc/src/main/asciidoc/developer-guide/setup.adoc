@@ -14,8 +14,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-[[sect_components]]
+[[sect_setup]]
 = Setup
+
+This section explains the setup for developers. Please also refer to the **Setup** section in the
+User's Guide as it may contain additional information necessary to run DKPro Core components
+(e.g. special libraries that need to be installed depending on your operating system).
 
 == GIT
 

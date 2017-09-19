@@ -18,10 +18,10 @@
 
 package de.tudarmstadt.ukp.dkpro.core.decompounding.trie;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 import java.io.IOException;
-
-import junit.framework.Assert;
 
 import org.junit.Test;
 
@@ -37,22 +37,22 @@ public class TrieTest
 		TrieStructure t = new TrieStructure();
 
 		t.addWord("abc");
-		Assert.assertEquals(new Integer(1), t.findWord("a").getValue());
-		Assert.assertEquals(new Integer(1), t.findWord("ab").getValue());
-		Assert.assertEquals(new Integer(0), t.findWord("abc").getValue());
+		assertEquals(new Integer(1), t.findWord("a").getValue());
+		assertEquals(new Integer(1), t.findWord("ab").getValue());
+		assertEquals(new Integer(0), t.findWord("abc").getValue());
 
 		t.addWord("abcde");
-		Assert.assertEquals(new Integer(2), t.findWord("a").getValue());
-		Assert.assertEquals(new Integer(2), t.findWord("ab").getValue());
-		Assert.assertEquals(new Integer(1), t.findWord("abc").getValue());
-		Assert.assertEquals(new Integer(1), t.findWord("abcd").getValue());
-		Assert.assertEquals(new Integer(0), t.findWord("abcde").getValue());
+		assertEquals(new Integer(2), t.findWord("a").getValue());
+		assertEquals(new Integer(2), t.findWord("ab").getValue());
+		assertEquals(new Integer(1), t.findWord("abc").getValue());
+		assertEquals(new Integer(1), t.findWord("abcd").getValue());
+		assertEquals(new Integer(0), t.findWord("abcde").getValue());
 
 		t.addWord("abde");
-		Assert.assertEquals(new Integer(3), t.findWord("a").getValue());
-		Assert.assertEquals(new Integer(3), t.findWord("ab").getValue());
-		Assert.assertEquals(new Integer(1), t.findWord("abd").getValue());
-		Assert.assertEquals(new Integer(0), t.findWord("abde").getValue());
+		assertEquals(new Integer(3), t.findWord("a").getValue());
+		assertEquals(new Integer(3), t.findWord("ab").getValue());
+		assertEquals(new Integer(1), t.findWord("abd").getValue());
+		assertEquals(new Integer(0), t.findWord("abde").getValue());
 	}
 
 	@Test
@@ -61,22 +61,22 @@ public class TrieTest
 		TrieStructure t = new TrieStructure();
 
 		t.addWord("abde");
-		Assert.assertEquals(new Integer(1), t.findWord("a").getValue());
-		Assert.assertEquals(new Integer(1), t.findWord("ab").getValue());
-		Assert.assertEquals(new Integer(1), t.findWord("abd").getValue());
-		Assert.assertEquals(new Integer(0), t.findWord("abde").getValue());
+		assertEquals(new Integer(1), t.findWord("a").getValue());
+		assertEquals(new Integer(1), t.findWord("ab").getValue());
+		assertEquals(new Integer(1), t.findWord("abd").getValue());
+		assertEquals(new Integer(0), t.findWord("abde").getValue());
 
 		t.addWord("abc");
-		Assert.assertEquals(new Integer(2), t.findWord("a").getValue());
-		Assert.assertEquals(new Integer(2), t.findWord("ab").getValue());
-		Assert.assertEquals(new Integer(0), t.findWord("abc").getValue());
+		assertEquals(new Integer(2), t.findWord("a").getValue());
+		assertEquals(new Integer(2), t.findWord("ab").getValue());
+		assertEquals(new Integer(0), t.findWord("abc").getValue());
 
 		t.addWord("abcde");
-		Assert.assertEquals(new Integer(3), t.findWord("a").getValue());
-		Assert.assertEquals(new Integer(3), t.findWord("ab").getValue());
-		Assert.assertEquals(new Integer(1), t.findWord("abc").getValue());
-		Assert.assertEquals(new Integer(1), t.findWord("abcd").getValue());
-		Assert.assertEquals(new Integer(0), t.findWord("abcde").getValue());
+		assertEquals(new Integer(3), t.findWord("a").getValue());
+		assertEquals(new Integer(3), t.findWord("ab").getValue());
+		assertEquals(new Integer(1), t.findWord("abc").getValue());
+		assertEquals(new Integer(1), t.findWord("abcd").getValue());
+		assertEquals(new Integer(0), t.findWord("abcde").getValue());
 	}
 
 	@Test
@@ -86,21 +86,21 @@ public class TrieTest
         		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-affix.aff"), false);
         final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
         		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"), false);
-		final German98Dictionary dict = new German98Dictionary(dictFile, affixFile);
+		final German98Dictionary dict = new German98Dictionary(dictFile, affixFile, "UTF-8");
 		TrieStructure t = TrieStructure.createForDict(dict);
 
-		Assert.assertEquals(new Integer(14963), t.findWord("h").getValue());
-		Assert.assertEquals(new Integer(257), t.findWord("hel").getValue());
-		Assert.assertEquals(new Integer(0), t.findWord("hallo").getValue());
+		assertEquals(new Integer(14963), t.findWord("h").getValue());
+		assertEquals(new Integer(257), t.findWord("hel").getValue());
+		assertEquals(new Integer(0), t.findWord("hallo").getValue());
 
-		Assert.assertEquals(new Integer(8033), t.findWord("t").getValue());
-		Assert.assertEquals(new Integer(2714), t.findWord("tr").getValue());
-		Assert.assertEquals(new Integer(996), t.findWord("tra").getValue());
-		Assert.assertEquals(new Integer(38), t.findWord("tram").getValue());
+		assertEquals(new Integer(8033), t.findWord("t").getValue());
+		assertEquals(new Integer(2714), t.findWord("tr").getValue());
+		assertEquals(new Integer(996), t.findWord("tra").getValue());
+		assertEquals(new Integer(38), t.findWord("tram").getValue());
 
-		Assert.assertEquals(new Integer(11138), t.findWord("w").getValue());
-		Assert.assertEquals(new Integer(178), t.findWord("wor").getValue());
-		Assert.assertEquals(new Integer(160), t.findWord("wort").getValue());
+		assertEquals(new Integer(11138), t.findWord("w").getValue());
+		assertEquals(new Integer(178), t.findWord("wor").getValue());
+		assertEquals(new Integer(160), t.findWord("wort").getValue());
 
 	}
 
@@ -111,13 +111,13 @@ public class TrieTest
         		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-affix.aff"), false);
         final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
         		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"), false);
-		final German98Dictionary dict = new German98Dictionary(dictFile, affixFile);
+		final German98Dictionary dict = new German98Dictionary(dictFile, affixFile, "UTF-8");
 		TrieStructure t = TrieStructure.createForDict(dict);
-		Assert.assertEquals(new Integer(11121), t.findWord("d").getValue());
-		Assert.assertEquals(new Integer(2494), t.findWord("de").getValue());
-		Assert.assertEquals(new Integer(69), t.findWord("dei").getValue());
+		assertEquals(new Integer(11121), t.findWord("d").getValue());
+		assertEquals(new Integer(2494), t.findWord("de").getValue());
+		assertEquals(new Integer(69), t.findWord("dei").getValue());
 
-		Assert.assertEquals(new Integer(13809), t.findWord("k").getValue());
-		Assert.assertEquals(new Integer(2101), t.findWord("o").getValue());
+		assertEquals(new Integer(13809), t.findWord("k").getValue());
+		assertEquals(new Integer(2101), t.findWord("o").getValue());
 	}
 }

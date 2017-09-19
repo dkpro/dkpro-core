@@ -59,9 +59,9 @@ public class PennTreebankCombinedReader
     /**
      * Name of configuration parameter that contains the character encoding used by the input files.
      */
-    public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
-    private String encoding;
+    public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    private String sourceEncoding;
 
     /**
      * Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
@@ -171,7 +171,7 @@ public class PennTreebankCombinedReader
         
         try (InputStream is = res.getInputStream()) {
             lineNumber = 0;
-            LineIterator li = IOUtils.lineIterator(is, encoding);
+            LineIterator li = IOUtils.lineIterator(is, sourceEncoding);
             
             while (li.hasNext()) {
                 PennTreeNode tree = readTree(li);

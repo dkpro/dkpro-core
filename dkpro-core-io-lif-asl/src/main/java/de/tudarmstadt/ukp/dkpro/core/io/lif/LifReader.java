@@ -53,9 +53,9 @@ public class LifReader
     /**
      * Name of configuration parameter that contains the character encoding used by the input files.
      */
-    public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
-    private String encoding;
+    public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    private String sourceEncoding;
     
     @Override
     public void getNext(JCas aJCas)
@@ -66,7 +66,7 @@ public class LifReader
 
         Container container;
         try (InputStream is = res.getInputStream()) {
-            String json = IOUtils.toString(res.getInputStream(), encoding);
+            String json = IOUtils.toString(res.getInputStream(), sourceEncoding);
             container = Serializer.parse(json, Container.class);
         }
         

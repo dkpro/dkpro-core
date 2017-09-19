@@ -265,5 +265,4 @@ public class LuceneIndexer
     {
         dictionary = aDictionary;
     }
-
 }

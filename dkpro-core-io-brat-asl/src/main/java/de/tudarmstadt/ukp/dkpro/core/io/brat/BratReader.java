@@ -74,9 +74,9 @@ public class BratReader
     /**
      * Name of configuration parameter that contains the character encoding used by the input files.
      */
-    public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
-    private String encoding;
+    public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    private String sourceEncoding;
     
     /**
      * Types that are relations. It is mandatory to provide the type name followed by two feature
@@ -166,7 +166,7 @@ public class BratReader
         throws IOException
     {
         BratAnnotationDocument doc;
-        try (Reader r = new InputStreamReader(aRes.getInputStream(), encoding)) {
+        try (Reader r = new InputStreamReader(aRes.getInputStream(), sourceEncoding)) {
             doc = BratAnnotationDocument.read(r);
         }
         
@@ -213,7 +213,7 @@ public class BratReader
         String textUrl = FilenameUtils.removeExtension(annUrl) + ".txt";
 
         try (InputStream is = new BufferedInputStream(new URL(textUrl).openStream())) {
-            aJCas.setDocumentText(IOUtils.toString(is, encoding));
+            aJCas.setDocumentText(IOUtils.toString(is, sourceEncoding));
         }
     }
     

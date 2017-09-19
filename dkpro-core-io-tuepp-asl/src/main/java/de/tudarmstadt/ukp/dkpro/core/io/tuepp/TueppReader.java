@@ -190,9 +190,9 @@ public class TueppReader
     /**
      * Character encoding of the input data.
      */
-    public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
-    private String encoding;
+    public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    private String sourceEncoding;
 
     private MappingProvider posMappingProvider;
 
@@ -273,7 +273,7 @@ public class TueppReader
                         // There are still resources left to read
                         res = nextFile();
                         is = CompressionUtils.getInputStream(res.getLocation(), res.getInputStream());
-                        xmlEventReader = xmlInputFactory.createXMLEventReader(is, encoding);
+                        xmlEventReader = xmlInputFactory.createXMLEventReader(is, sourceEncoding);
                     }
                     else {
                         // No more files to read

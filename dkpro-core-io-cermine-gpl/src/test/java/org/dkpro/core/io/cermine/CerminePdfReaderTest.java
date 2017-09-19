@@ -18,9 +18,16 @@
  */
 package org.dkpro.core.io.cermine;
 
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import de.tudarmstadt.ukp.dkpro.core.testing.dumper.CasDumpWriter;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.collection.CollectionReaderDescription;
@@ -29,15 +36,9 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.apache.commons.io.FileUtils.readFileToString;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.*;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import de.tudarmstadt.ukp.dkpro.core.testing.dumper.CasDumpWriter;
 
 
 public class CerminePdfReaderTest
@@ -56,11 +57,10 @@ public class CerminePdfReaderTest
 
         SimplePipeline.runPipeline(reader, writer);
 
-        String reference = readFileToString(new File("src/test/resources/reference/test.dump"),
-                "UTF-8").trim();
-        String actual = readFileToString(outputFile, "UTF-8").trim();
-
-        assertEquals(reference, actual);
+        assertTrue(FileUtils.contentEqualsIgnoreEOL(
+                new File("src/test/resources/reference/test.dump"),
+                outputFile, 
+                "UTF-8"));
     }
 
     @Test
@@ -100,11 +100,10 @@ public class CerminePdfReaderTest
 
         SimplePipeline.runPipeline(reader, writer);
 
-        String reference = readFileToString(
-                new File("src/test/resources/reference/test-normalized.dump"), "UTF-8").trim();
-        String actual = readFileToString(outputFile, "UTF-8").trim();
-
-        assertEquals(reference, actual);
+        assertTrue(FileUtils.contentEqualsIgnoreEOL(
+                new File("src/test/resources/reference/test-normalized.dump"),
+                outputFile, 
+                "UTF-8"));
     }
     
     @Test
@@ -123,12 +122,33 @@ public class CerminePdfReaderTest
 
         SimplePipeline.runPipeline(reader, writer);
 
-        String reference = readFileToString(
-                new File("src/test/resources/reference/test-normalized-nocitations.dump"), "UTF-8")
-                        .trim();
-        String actual = readFileToString(outputFile, "UTF-8").trim();
+        assertTrue(FileUtils.contentEqualsIgnoreEOL(
+                new File("src/test/resources/reference/test-normalized-nocitations.dump"),
+                outputFile, 
+                "UTF-8"));
+    }
+    
+    @Test
+    public void testIgnoreReferencesSection() throws Exception
+    {
+        File outputFile = new File(testContext.getTestOutputFolder(), "dump-output.txt");
 
-        assertEquals(reference, actual);
+        CollectionReader reader = createReader(CerminePdfReader.class,
+                CerminePdfReader.PARAM_SOURCE_LOCATION, "src/test/resources/data",
+                CerminePdfReader.PARAM_PATTERNS, "[+]**/*.pdf",
+                CerminePdfReader.PARAM_NORMALIZE_TEXT, true,
+                CerminePdfReader.PARAM_IGNORE_CITATIONS, true,
+                CerminePdfReader.PARAM_IGNORE_REFERENCES_SECTION, true);
+
+        AnalysisEngine writer = createEngine(CasDumpWriter.class,
+                CasDumpWriter.PARAM_TARGET_LOCATION, outputFile);
+
+        SimplePipeline.runPipeline(reader, writer);
+
+        assertTrue(FileUtils.contentEqualsIgnoreEOL(
+                new File("src/test/resources/reference/test-normalized-nocitations-noRefSection.dump"),
+                outputFile, 
+                "UTF-8"));
     }
 
     @Rule
