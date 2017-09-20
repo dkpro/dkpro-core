@@ -55,7 +55,7 @@ import edu.stanford.nlp.trees.GrammaticalStructure;
 /**
  * Dependency parser from CoreNLP.
  */
-@ResourceMetaData(name="CoreNLP Coreference Resolver")
+@ResourceMetaData(name="CoreNLP Dependency Parser")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
