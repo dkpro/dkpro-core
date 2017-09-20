@@ -15,11 +15,11 @@
 // limitations under the License.
 
 [[sect_analytics]]
-== Analytics
+= Analytics
 
-=== Segmentation
+== Segmentation
 
-==== Tokenization and sentence boundary detection
+=== Tokenization and sentence boundary detection
 
 Tokenization and sentence boundary detection are usually realized in one segmenter component in 
 DKPro Core. The reason is that in some cases, a segmenter needs to run before a tokenizer and in
@@ -31,7 +31,7 @@ annotations.
 DKPro Core assumes that tokens are non-overlapping. Many components additionally assume that
 tokens are located inside sentences and that they do not extend beyond the sentence bounaries.
 
-==== Normalizing tokens
+=== Normalizing tokens
 
 Some tokenizers apply a basic normalization of the token text. UIMA does not allow changing the
 document text. Thus, the `Token` annotation has a feature called  `form` which can be used to store
@@ -42,7 +42,7 @@ used to retrieve the token text that should be used for further analysis. The me
 should not be used be writers - they should write the original document text (i.e. `getCoveredText`)
 unless there is a special field in the output for normalized token text.
 
-==== Headings
+=== Headings
 
 Headings typically do not end with a sentence end marker (i.e. a full stop `.`). As a consequence
 segmenters are confused and consider a heading and the first sentence of the following paragraph
@@ -59,7 +59,7 @@ This means,  segmenters will ensure that sentences and tokens to not overlap wit
 If desired, `PARAM_STRICT_ZONING` can be set to `true` (default `false`) to ensure that tokens and
 sentences are only created within the boundaries of the zone types.
 
-==== Hyphenation
+=== Hyphenation
 
 Hyphenated words cannot be properly processed by NLP tools. The 
 <<component-reference.adoc#engine-HyphenationRemover,HyphenationRemover>> component can be used
@@ -98,9 +98,9 @@ We recommend that you try various combinations and stick with the one that gives
 best result for __your__ data.
 ////
 
-=== Lemmatizaton
+== Lemmatizaton
 
-==== Lemmatizing multiwords
+=== Lemmatizing multiwords
 
 If you use lemma information in your pipeline, you should bear in mind that
 multiword expressions, in particular discontinuous multiwords, might not be
@@ -112,7 +112,7 @@ might consider postprocessing the output of the lemmatizer in order to get the
 true lemmas (which you might need, e.g. in order to look up information in a
 lexical resource).
 
-=== Dictionaries and other lexical resources
+== Dictionaries and other lexical resources
 
 If you use components in your pipeline that access dictionaries or other
 lexical resources, it might be essential to include a Lemmatizer in your
@@ -122,7 +122,7 @@ about that word. For large-scale lexical resources, e.g. for Wiktionary,
 additional information about POS is very helpful in order to reduce the
 ambiguity of a given lemma form.
 
-=== Compatibility of Components
+== Compatibility of Components
 
 When selecting components for your pipeline you should make sure that the
 components are compatible regarding the annotation types they expect or
@@ -149,7 +149,7 @@ requires POS-tags from the tagset Y, then the two models are not semantically
 compatible - even though the POS-tagger and dependency-parser components are
 compatible on the level of the type system.
 
-==== Morphologically Rich Languages
+=== Morphologically Rich Languages
 
 ////
 EJ: What's the goal of this subsection?  Other sister sections have advice
@@ -171,7 +171,7 @@ for how to construct a different pipeline, but this section just says,
   pipeline component (Seeker and Kuhn 2013).
 
 
-==== Domain-specific and other non-standard data
+=== Domain-specific and other non-standard data
 
 Most components (sentence splitters, POS taggers, parsers ...) are trained on
 (standard) newspaper text. As a consequence, you might encounter a significant
@@ -190,7 +190,7 @@ non-standard data (scientific abstracts, Twitter data, etc.) without adaptation.
 ////
 
 
-==== Shallow processing and POS tagsets
+=== Shallow processing and POS tagsets
 
 While more advanced semantic processing (e.g. discourse analysis) typically
 depends on the output of a parser component, there might be settings where you
@@ -212,7 +212,7 @@ corresponding original tagset. (Example)
 EJ: Ok, I want to switch to the original POS tagset.  How do I do this?  Pointers?
 ////
 
-=== Adding components as dependencies (Maven)
+== Adding components as dependencies (Maven)
 
 In order to start using an integrated tool from DKPro Core, we can add it as a
 Maven dependency to our experiment.
@@ -260,7 +260,7 @@ NOTE: If you want to use GPLed components, you have to add an additional depende
       in the dependency management section referring to the `de.tudarmstadt.ukp.dkpro.core-gpl`
       artifact.
 
-=== Adding resources as dependencies (Maven)
+== Adding resources as dependencies (Maven)
 
 Most components (i.e., tools such as OpenNlpPosTagger) require resources such as models 
 (such as opennlp-model-tagger-en-maxent) in order to operate. Since components
