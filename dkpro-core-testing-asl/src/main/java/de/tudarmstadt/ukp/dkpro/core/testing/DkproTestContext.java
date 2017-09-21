@@ -17,10 +17,12 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.testing;
 
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+import static org.apache.commons.lang3.StringUtils.substringAfterLast;
+
 import java.io.File;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 
@@ -42,7 +44,7 @@ public class DkproTestContext extends TestWatcher
     {
         super.starting(aDescription);
         
-        className = StringUtils.substringAfterLast(aDescription.getClassName(), ".");
+        className = substringAfterLast(aDescription.getClassName(), ".");
         methodName = aDescription.getMethodName();
         System.out.println("\n=== " + methodName + " =====================");
         
@@ -73,7 +75,13 @@ public class DkproTestContext extends TestWatcher
 
     public static File getCacheFolder()
     {
-        File folder = new File("../cache");
+        File folder;
+        if (isNotEmpty(System.getProperty("dkpro.core.testCachePath"))) {
+            folder = new File(System.getProperty("dkpro.core.testCachePath"));
+        }
+        else {
+            folder = new File("../cache");
+        }
         folder.mkdirs();
         return folder;
     }
