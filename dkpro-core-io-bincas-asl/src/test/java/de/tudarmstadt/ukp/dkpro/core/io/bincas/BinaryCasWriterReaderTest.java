@@ -26,6 +26,7 @@ import static org.apache.uima.cas.impl.Serialization.deserializeCASComplete;
 import static org.apache.uima.cas.impl.Serialization.serializeCASComplete;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
@@ -58,7 +59,9 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.fit.factory.JCasFactory;
+import org.apache.uima.fit.util.FSUtil;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.cas.TOP;
 import org.apache.uima.resource.metadata.TypeSystemDescription;
 import org.apache.uima.util.CasCreationUtils;
 import org.junit.Before;
@@ -250,6 +253,113 @@ public class BinaryCasWriterReaderTest
         assertEquals(out.getDocumentText(), in.getDocumentText());
         assertEquals(DocumentMetaData.get(out).getDocumentId(), DocumentMetaData.get(in).getDocumentId());
     }
+    
+    @Test
+    public void testReadingFileWithDocumentMetaData() throws Exception {
+        JCas prep = JCasFactory.createText("This is a test.", "en");
+        DocumentMetaData origDmd = DocumentMetaData.create(prep);
+        origDmd.setDocumentId("data.txt");
+        origDmd.setDocumentTitle("data.txt");
+        AnalysisEngine writer = createEngine(
+                BinaryCasWriter.class,
+                BinaryCasWriter.PARAM_TARGET_LOCATION, new File(testFolder, "out.bin"),
+                BinaryCasWriter.PARAM_SINGULAR_TARGET, true);
+        writer.process(prep);
+        
+        CollectionReader reader = createReader(
+                BinaryCasReader.class,
+                BinaryCasReader.PARAM_SOURCE_LOCATION, testFolder,
+                BinaryCasReader.PARAM_PATTERNS, "out.bin");
+        
+        JCas doc = JCasFactory.createJCas();
+        reader.getNext(doc.getCas());
+        
+        // System.out.println(doc.getDocumentAnnotationFs());
+        
+        TOP dmd = doc.getDocumentAnnotationFs();
+        assertEquals((Integer) 0, FSUtil.getFeature(dmd, "begin", Integer.class));
+        assertEquals((Integer) 15, FSUtil.getFeature(dmd, "end", Integer.class));
+        assertEquals("en", FSUtil.getFeature(dmd, "language", String.class));
+        assertEquals("data.txt", FSUtil.getFeature(dmd, "documentTitle", String.class));
+        assertEquals("data.txt", FSUtil.getFeature(dmd, "documentId", String.class));
+        assertEquals(null, FSUtil.getFeature(dmd, "documentUri", String.class));
+        assertEquals(null, FSUtil.getFeature(dmd, "collectionId", String.class));
+        assertEquals(null, FSUtil.getFeature(dmd, "documentBaseUri", String.class));
+        assertEquals(false, FSUtil.getFeature(dmd, "isLastSegment", Boolean.class));
+    }
+    
+    @Test
+    public void testReadingFileWithoutDocumentMetaData() throws Exception {
+        JCas prep = JCasFactory.createText("This is a test.");
+        AnalysisEngine writer = createEngine(
+                BinaryCasWriter.class,
+                BinaryCasWriter.PARAM_TARGET_LOCATION, new File(testFolder, "out.bin"),
+                BinaryCasWriter.PARAM_SINGULAR_TARGET, true);
+        writer.process(prep);
+        
+        CollectionReader reader = createReader(
+                BinaryCasReader.class,
+                BinaryCasReader.PARAM_SOURCE_LOCATION, testFolder,
+                BinaryCasReader.PARAM_PATTERNS, "out.bin");
+                
+        JCas doc = JCasFactory.createJCas();
+        reader.getNext(doc.getCas());
+        
+        // System.out.println(doc.getDocumentAnnotationFs());
+        
+        TOP dmd = doc.getDocumentAnnotationFs();
+        assertEquals((Integer) 0, FSUtil.getFeature(dmd, "begin", Integer.class));
+        assertEquals((Integer) 15, FSUtil.getFeature(dmd, "end", Integer.class));
+        assertEquals("x-unspecified", FSUtil.getFeature(dmd, "language", String.class));
+        assertEquals("out.bin", FSUtil.getFeature(dmd, "documentTitle", String.class));
+        assertEquals("out.bin", FSUtil.getFeature(dmd, "documentId", String.class));
+        assertTrue(FSUtil.getFeature(dmd, "documentUri", String.class)
+                .endsWith("/target/test-output/BinaryCasWriterReaderTest-testReadingFileWithoutDocumentMetaData/out.bin"));
+        assertTrue(FSUtil.getFeature(dmd, "collectionId", String.class)
+                .endsWith("/target/test-output/BinaryCasWriterReaderTest-testReadingFileWithoutDocumentMetaData/"));
+        assertTrue(FSUtil.getFeature(dmd, "documentBaseUri", String.class)
+                .endsWith("/target/test-output/BinaryCasWriterReaderTest-testReadingFileWithoutDocumentMetaData/"));
+        assertEquals(false, FSUtil.getFeature(dmd, "isLastSegment", Boolean.class));
+    }
+    
+    @Test
+    public void testReadingFileOverridingDocumentMetaData() throws Exception {
+        JCas prep = JCasFactory.createText("This is a test.", "en");
+        DocumentMetaData origDmd = DocumentMetaData.create(prep);
+        origDmd.setDocumentId("data.txt");
+        origDmd.setDocumentTitle("data.txt");
+        AnalysisEngine writer = createEngine(
+                BinaryCasWriter.class,
+                BinaryCasWriter.PARAM_TARGET_LOCATION, new File(testFolder, "out.bin"),
+                BinaryCasWriter.PARAM_SINGULAR_TARGET, true);
+        writer.process(prep);
+        
+        CollectionReader reader = createReader(
+                BinaryCasReader.class,
+                BinaryCasReader.PARAM_SOURCE_LOCATION, testFolder,
+                BinaryCasReader.PARAM_PATTERNS, "out.bin",
+                BinaryCasReader.PARAM_OVERRIDE_DOCUMENT_METADATA, true);
+        
+        JCas doc = JCasFactory.createJCas();
+        reader.getNext(doc.getCas());
+        
+        // System.out.println(doc.getDocumentAnnotationFs());
+        
+        TOP dmd = doc.getDocumentAnnotationFs();
+        assertEquals((Integer) 0, FSUtil.getFeature(dmd, "begin", Integer.class));
+        assertEquals((Integer) 15, FSUtil.getFeature(dmd, "end", Integer.class));
+        assertEquals("en", FSUtil.getFeature(dmd, "language", String.class));
+        assertEquals("out.bin", FSUtil.getFeature(dmd, "documentTitle", String.class));
+        assertEquals("out.bin", FSUtil.getFeature(dmd, "documentId", String.class));
+        assertTrue(FSUtil.getFeature(dmd, "documentUri", String.class)
+                .endsWith("/target/test-output/BinaryCasWriterReaderTest-testReadingFileOverridingDocumentMetaData/out.bin"));
+        assertTrue(FSUtil.getFeature(dmd, "collectionId", String.class)
+                .endsWith("/target/test-output/BinaryCasWriterReaderTest-testReadingFileOverridingDocumentMetaData/"));
+        assertTrue(FSUtil.getFeature(dmd, "documentBaseUri", String.class)
+                .endsWith("/target/test-output/BinaryCasWriterReaderTest-testReadingFileOverridingDocumentMetaData/"));
+        assertEquals(false, FSUtil.getFeature(dmd, "isLastSegment", Boolean.class));
+    }
+
     
     public void write(String aLocation, String aFormat, boolean aWriteTypeSystem)
         throws Exception

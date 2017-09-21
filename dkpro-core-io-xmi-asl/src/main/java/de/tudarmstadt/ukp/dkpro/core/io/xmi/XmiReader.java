@@ -17,13 +17,11 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.xmi;
 
-import static org.apache.commons.io.IOUtils.closeQuietly;
-
 import java.io.IOException;
 import java.io.InputStream;
-
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.impl.XmiCasDeserializer;
+import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
@@ -32,6 +30,7 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.xml.sax.SAXException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 
@@ -53,28 +52,55 @@ public class XmiReader
     @ConfigurationParameter(name=PARAM_LENIENT, mandatory=true, defaultValue="false")
     private boolean lenient;
     
+    /**
+     * Add DKPro Core metadata if it is not already present in the document. 
+     */
+    public static final String PARAM_ADD_DOCUMENT_METADATA = "addDocumentMetadata";
+    @ConfigurationParameter(name=PARAM_ADD_DOCUMENT_METADATA, mandatory=true, defaultValue="true")
+    private boolean addDocumentMetadata;
+    
+    /**
+     * Generate new DKPro Core document metadata (i.e. title, ID, URI) for the document instead
+     * of retaining what is already present in the XMI file.
+     */
+    public static final String PARAM_OVERRIDE_DOCUMENT_METADATA = "overrideDocumentMetadata";
+    @ConfigurationParameter(name=PARAM_OVERRIDE_DOCUMENT_METADATA, mandatory=true, defaultValue="false")
+    private boolean overrideDocumentMetadata;
+    
 	@Override
 	public void getNext(CAS aCAS)
 		throws IOException, CollectionException
 	{
-		Resource res = nextFile();
-		initCas(aCAS, res);
+        Resource res = nextFile();
 
-		InputStream is = null;
-        try {
-            is = CompressionUtils.getInputStream(res.getLocation(), res.getInputStream());
-			XmiCasDeserializer.deserialize(is, aCAS, lenient);
-			
-			// Override language using PARAM_LANG if that is set
-			if (getLanguage() != null) {
-			    aCAS.setDocumentLanguage(getLanguage());
-			}
-		}
-		catch (SAXException e) {
-			throw new IOException(e);
-		}
-        finally {
-            closeQuietly(is);
+        // Read XMI file
+        try (InputStream is = CompressionUtils.getInputStream(res.getLocation(),
+                res.getInputStream())) {
+            XmiCasDeserializer.deserialize(is, aCAS, lenient);
+        }
+        catch (SAXException e) {
+            throw new IOException(e);
+        }
+        
+        // Handle DKPro Core DocumentMetaData
+        AnnotationFS docAnno = aCAS.getDocumentAnnotation();
+        if (docAnno.getType().getName().equals(DocumentMetaData.class.getName())) {
+            if (overrideDocumentMetadata) {
+                // Unless the language is explicity set on the reader, try to retain the language
+                // already present in the XMI file.
+                String language = getLanguage();
+                if (language == null) {
+                    language = aCAS.getDocumentLanguage();
+                }
+                aCAS.removeFsFromIndexes(docAnno);
+
+                initCas(aCAS, res);
+
+                aCAS.setDocumentLanguage(language);
+            }
+        }
+        else if (addDocumentMetadata) {
+            initCas(aCAS, res);
         }
 	}
 }
