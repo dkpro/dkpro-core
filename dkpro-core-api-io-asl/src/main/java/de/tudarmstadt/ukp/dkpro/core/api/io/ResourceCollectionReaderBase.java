@@ -617,9 +617,7 @@ public abstract class ResourceCollectionReaderBase
             }
 
             // Set the UIMA document metadata
-            if (language != null) {
-                aCas.setDocumentLanguage(language);
-            }
+            aCas.setDocumentLanguage(language);
         }
         catch (CASException e) {
             // This should not happen.
