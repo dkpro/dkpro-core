@@ -31,7 +31,7 @@ consider setting this as a global (add `--global`) or even as a system (`--syste
 .Configure git line ending treatment
 [source,text]
 ----
-C:\> git config --global core.autocrlf true
+C:\> git config --global core.autocrlf input
 ----
 
 After changing this setting, best do a fresh clone and check-out of DKPro Core.

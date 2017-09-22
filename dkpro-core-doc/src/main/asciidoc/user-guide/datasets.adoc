@@ -15,14 +15,14 @@
 // limitations under the License.
 
 [[sect_datasets]]
-== Datasets
+= Datasets
 
 Datasets are an important assert in NLP, e.g. to train models or to evaluate models in a meaningful
 and comparable way. The `DatasetFactory` of DKPro Core provides a convenient way of obtaining and
 using standard datasets. This section explains how to use it and how to describe datasets such that
 they can be obtained through the `DatasetFactory`.
 
-=== Usage
+== Usage
 
 The DatasetFactory class provides uniform access to datasets that are automatically downloaded from
 their providers websites, verified, and cached locally. This facilitates the use of datasets e.g.
@@ -34,12 +34,12 @@ for training models or to evaluate models.
 include::{source-dir}dkpro-core-opennlp-asl/src/test/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTaggerTrainerTest.java[tags=datasets]
 ----
 
-=== Integrated Datasets
+== Integrated Datasets
 
 An overview of the datasets already integrated with DKPro Core can be found in the 
 <<dataset-reference.adoc#,Dataset Reference>>.
 
-=== Describing Datasets
+== Describing Datasets
 
 Datasets are described by a YAML 1.1 file. YAML is a very human-readable and allows us to embed
 markup in asciidoc format without any trouble.
@@ -142,13 +142,13 @@ include::{source-dir}dkpro-core-api-datasets-asl/src/main/resources/de/tudarmsta
 ----
 
 [[sect_datasets_actions]]
-=== Artifact Actions
+== Artifact Actions
 
 Some artifacts need to be post-processed after downloading. E.g. if an artifact is an archive, it
 typically needs to be extracted to disk so that the data files can be conveniently accessed.
 Such post-processing can be declared via the **actions** section of an artifact description.
 
-==== explode
+=== explode
 
 This action extracts an archive. The archive format is automatically detected (ensure that
 the artifact name extension is retained if you assign an alternative name for an archive).
@@ -196,7 +196,7 @@ artifacts:
 ----
 
 [sect_datasets_sharing]
-=== Sharing artifacts
+== Sharing artifacts
 
 If an artifact contains multiple datasets, it can be **shared** to avoid downloading and caching
 it redundantly. A typical example is a dataset that comes in multiple languages, because we require
@@ -240,7 +240,7 @@ declare.
     LICENSE.txt                                 <=- unshared artifact
 ---- 
 
-=== Registering Datasets
+== Registering Datasets
 
 In order to obtain a dataset through the `DatasetFactory`, the dataset must be made discoverable.
 This is a two-step process:

@@ -148,7 +148,12 @@ public abstract class JCasFileWriter_ImplBase
         if (targetLocation == null) {
             return new NamedOutputStream(null, new CloseShieldOutputStream(System.out));
         }
-        return getOutputStream(getRelativePath(aJCas), aExtension);
+        else if (singularTarget) {
+            return getOutputStream((String) null, aExtension);
+        }
+        else {
+            return getOutputStream(getRelativePath(aJCas), aExtension);
+        }
     }
 
     protected String getTargetLocation()

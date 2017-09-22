@@ -606,7 +606,7 @@ public abstract class ResourceCollectionReaderBase
     {
         String qualifier = aQualifier != null ? "#" + aQualifier : "";
         try {
-            // Set the document metadata
+            // Set the DKPro Core document metadata
             DocumentMetaData docMetaData = DocumentMetaData.create(aCas);
             docMetaData.setDocumentTitle(new File(aResource.getPath()).getName());
             docMetaData.setDocumentUri(aResource.getResolvedUri().toString() + qualifier);
@@ -616,8 +616,10 @@ public abstract class ResourceCollectionReaderBase
                 docMetaData.setCollectionId(aResource.getResolvedBase());
             }
 
-            // Set the document language
-            aCas.setDocumentLanguage(language);
+            // Set the UIMA document metadata
+            if (language != null) {
+                aCas.setDocumentLanguage(language);
+            }
         }
         catch (CASException e) {
             // This should not happen.

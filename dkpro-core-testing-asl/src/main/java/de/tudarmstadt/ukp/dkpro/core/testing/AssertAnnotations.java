@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.testing;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.validation.Message.Level.ERROR;
 import static java.util.Arrays.asList;
-import static org.apache.commons.lang.StringUtils.normalizeSpace;
+import static org.apache.commons.lang3.StringUtils.normalizeSpace;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -40,8 +40,8 @@ import java.util.stream.Collectors;
 
 import junit.framework.Assert;
 
-import org.apache.commons.lang.ObjectUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UIMAException;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
