@@ -22,6 +22,8 @@ import static de.tudarmstadt.ukp.dkpro.core.performance.PerformanceTestUtil.meas
 import static de.tudarmstadt.ukp.dkpro.core.performance.PerformanceTestUtil.measureWritePerformance;
 import static de.tudarmstadt.ukp.dkpro.core.performance.PerformanceTestUtil.repeat;
 import static org.apache.commons.io.FileUtils.readFileToString;
+import static org.apache.commons.io.FilenameUtils.separatorsToUnix;
+import static org.apache.uima.cas.SerialFormat.COMPRESSED_FILTERED;
 import static org.apache.uima.cas.impl.Serialization.deserializeCASComplete;
 import static org.apache.uima.cas.impl.Serialization.serializeCASComplete;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
@@ -30,10 +32,13 @@ import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
+import static org.apache.uima.fit.util.FSUtil.getFeature;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -59,15 +64,16 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.fit.factory.JCasFactory;
-import org.apache.uima.fit.util.FSUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.TOP;
 import org.apache.uima.resource.metadata.TypeSystemDescription;
 import org.apache.uima.util.CasCreationUtils;
+import org.apache.uima.util.CasIOUtils;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod;
@@ -153,6 +159,39 @@ public class BinaryCasWriterReaderTest
         write(testFolder.getPath(), SerialFormat.COMPRESSED_FILTERED.toString(), true);
         read(testFolder.getPath(), METADATA, true, false);
         read(testFolder.getPath(), METADATA, true, true);
+    }
+    
+    @Test
+    public void test6LenientPlainUima() throws Exception
+    {
+//        TypeSystemDescription tsd = new TypeSystemDescription_impl();
+//        TypeDescription td = tsd.addType("DocumentMetaData", "", CAS.TYPE_NAME_DOCUMENT_ANNOTATION);
+//        td.addFeature("feat", "", CAS.TYPE_NAME_STRING);
+//        
+//        CAS source = CasCreationUtils.createCas(tsd, null, null, null);
+//        CAS target = CasCreationUtils.createCas(tsd, null, null, null);
+//      source.getJCas();
+//      target.getJCas();
+//
+//        AnnotationFS dmd = source
+//                .createAnnotation(source.getTypeSystem().getType("DocumentMetaData"), 0, 0);
+//        source.addFsToIndexes(dmd);
+//        assertEquals("DocumentMetaData", source.getDocumentAnnotation().getType().getName());
+        
+        CAS source = JCasFactory.createJCas().getCas();
+        CAS target = JCasFactory.createJCas().getCas();
+
+        new DocumentMetaData(source.getJCas(), 0, 0).addToIndexes();
+
+//        source.setDocumentText("This is a test.");
+//        source.setDocumentLanguage("en");
+        
+        @SuppressWarnings("resource")
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        CasIOUtils.save(source, bos, COMPRESSED_FILTERED);
+        bos.close();
+        
+        CasIOUtils.load(new ByteArrayInputStream(bos.toByteArray()), target);
     }
 
     @Test
@@ -277,15 +316,15 @@ public class BinaryCasWriterReaderTest
         // System.out.println(doc.getDocumentAnnotationFs());
         
         TOP dmd = doc.getDocumentAnnotationFs();
-        assertEquals((Integer) 0, FSUtil.getFeature(dmd, "begin", Integer.class));
-        assertEquals((Integer) 15, FSUtil.getFeature(dmd, "end", Integer.class));
-        assertEquals("en", FSUtil.getFeature(dmd, "language", String.class));
-        assertEquals("data.txt", FSUtil.getFeature(dmd, "documentTitle", String.class));
-        assertEquals("data.txt", FSUtil.getFeature(dmd, "documentId", String.class));
-        assertEquals(null, FSUtil.getFeature(dmd, "documentUri", String.class));
-        assertEquals(null, FSUtil.getFeature(dmd, "collectionId", String.class));
-        assertEquals(null, FSUtil.getFeature(dmd, "documentBaseUri", String.class));
-        assertEquals(false, FSUtil.getFeature(dmd, "isLastSegment", Boolean.class));
+        assertEquals((Integer) 0, getFeature(dmd, "begin", Integer.class));
+        assertEquals((Integer) 15, getFeature(dmd, "end", Integer.class));
+        assertEquals("en", getFeature(dmd, "language", String.class));
+        assertEquals("data.txt", getFeature(dmd, "documentTitle", String.class));
+        assertEquals("data.txt", getFeature(dmd, "documentId", String.class));
+        assertEquals(null, getFeature(dmd, "documentUri", String.class));
+        assertEquals(null, getFeature(dmd, "collectionId", String.class));
+        assertEquals(null, getFeature(dmd, "documentBaseUri", String.class));
+        assertEquals(false, getFeature(dmd, "isLastSegment", Boolean.class));
     }
     
     @Test
@@ -308,18 +347,18 @@ public class BinaryCasWriterReaderTest
         // System.out.println(doc.getDocumentAnnotationFs());
         
         TOP dmd = doc.getDocumentAnnotationFs();
-        assertEquals((Integer) 0, FSUtil.getFeature(dmd, "begin", Integer.class));
-        assertEquals((Integer) 15, FSUtil.getFeature(dmd, "end", Integer.class));
-        assertEquals("x-unspecified", FSUtil.getFeature(dmd, "language", String.class));
-        assertEquals("out.bin", FSUtil.getFeature(dmd, "documentTitle", String.class));
-        assertEquals("out.bin", FSUtil.getFeature(dmd, "documentId", String.class));
-        assertTrue(FSUtil.getFeature(dmd, "documentUri", String.class)
+        assertEquals((Integer) 0, getFeature(dmd, "begin", Integer.class));
+        assertEquals((Integer) 15, getFeature(dmd, "end", Integer.class));
+        assertEquals("x-unspecified", getFeature(dmd, "language", String.class));
+        assertEquals("out.bin", getFeature(dmd, "documentTitle", String.class));
+        assertEquals("out.bin", getFeature(dmd, "documentId", String.class));
+        assertTrue(separatorsToUnix(getFeature(dmd, "documentUri", String.class))
                 .endsWith("/target/test-output/BinaryCasWriterReaderTest-testReadingFileWithoutDocumentMetaData/out.bin"));
-        assertTrue(FSUtil.getFeature(dmd, "collectionId", String.class)
+        assertTrue(separatorsToUnix(getFeature(dmd, "collectionId", String.class))
                 .endsWith("/target/test-output/BinaryCasWriterReaderTest-testReadingFileWithoutDocumentMetaData/"));
-        assertTrue(FSUtil.getFeature(dmd, "documentBaseUri", String.class)
+        assertTrue(separatorsToUnix(getFeature(dmd, "documentBaseUri", String.class))
                 .endsWith("/target/test-output/BinaryCasWriterReaderTest-testReadingFileWithoutDocumentMetaData/"));
-        assertEquals(false, FSUtil.getFeature(dmd, "isLastSegment", Boolean.class));
+        assertEquals(false, getFeature(dmd, "isLastSegment", Boolean.class));
     }
     
     @Test
@@ -346,18 +385,18 @@ public class BinaryCasWriterReaderTest
         // System.out.println(doc.getDocumentAnnotationFs());
         
         TOP dmd = doc.getDocumentAnnotationFs();
-        assertEquals((Integer) 0, FSUtil.getFeature(dmd, "begin", Integer.class));
-        assertEquals((Integer) 15, FSUtil.getFeature(dmd, "end", Integer.class));
-        assertEquals("en", FSUtil.getFeature(dmd, "language", String.class));
-        assertEquals("out.bin", FSUtil.getFeature(dmd, "documentTitle", String.class));
-        assertEquals("out.bin", FSUtil.getFeature(dmd, "documentId", String.class));
-        assertTrue(FSUtil.getFeature(dmd, "documentUri", String.class)
+        assertEquals((Integer) 0, getFeature(dmd, "begin", Integer.class));
+        assertEquals((Integer) 15, getFeature(dmd, "end", Integer.class));
+        assertEquals("en", getFeature(dmd, "language", String.class));
+        assertEquals("out.bin", getFeature(dmd, "documentTitle", String.class));
+        assertEquals("out.bin", getFeature(dmd, "documentId", String.class));
+        assertTrue(separatorsToUnix(getFeature(dmd, "documentUri", String.class))
                 .endsWith("/target/test-output/BinaryCasWriterReaderTest-testReadingFileOverridingDocumentMetaData/out.bin"));
-        assertTrue(FSUtil.getFeature(dmd, "collectionId", String.class)
+        assertTrue(separatorsToUnix(getFeature(dmd, "collectionId", String.class))
                 .endsWith("/target/test-output/BinaryCasWriterReaderTest-testReadingFileOverridingDocumentMetaData/"));
-        assertTrue(FSUtil.getFeature(dmd, "documentBaseUri", String.class)
+        assertTrue(separatorsToUnix(getFeature(dmd, "documentBaseUri", String.class))
                 .endsWith("/target/test-output/BinaryCasWriterReaderTest-testReadingFileOverridingDocumentMetaData/"));
-        assertEquals(false, FSUtil.getFeature(dmd, "isLastSegment", Boolean.class));
+        assertEquals(false, getFeature(dmd, "isLastSegment", Boolean.class));
     }
 
     
