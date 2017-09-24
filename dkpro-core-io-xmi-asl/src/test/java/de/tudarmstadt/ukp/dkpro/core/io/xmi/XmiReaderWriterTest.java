@@ -86,11 +86,11 @@ public class XmiReaderWriterTest
         assertEquals("english2.xmi", getFeature(dmd, "documentTitle", String.class));
         assertEquals("english2.xmi", getFeature(dmd, "documentId", String.class));
         assertTrue(separatorsToUnix(getFeature(dmd, "documentUri", String.class))
-                .endsWith("dkpro-core/dkpro-core-io-xmi-asl/src/test/resources/xmi/english2.xmi"));
+                .endsWith("/dkpro-core-io-xmi-asl/src/test/resources/xmi/english2.xmi"));
         assertTrue(separatorsToUnix(getFeature(dmd, "collectionId", String.class))
-                .endsWith("dkpro-core/dkpro-core-io-xmi-asl/src/test/resources/xmi/"));
+                .endsWith("/dkpro-core-io-xmi-asl/src/test/resources/xmi/"));
         assertTrue(separatorsToUnix(getFeature(dmd, "documentBaseUri", String.class))
-                .endsWith("dkpro-core/dkpro-core-io-xmi-asl/src/test/resources/xmi/"));
+                .endsWith("/dkpro-core-io-xmi-asl/src/test/resources/xmi/"));
         assertEquals(false, getFeature(dmd, "isLastSegment", Boolean.class));
     }
     
@@ -114,11 +114,11 @@ public class XmiReaderWriterTest
         assertEquals("english.xmi", getFeature(dmd, "documentTitle", String.class));
         assertEquals("english.xmi", getFeature(dmd, "documentId", String.class));
         assertTrue(separatorsToUnix(getFeature(dmd, "documentUri", String.class))
-                .endsWith("dkpro-core/dkpro-core-io-xmi-asl/src/test/resources/xmi/english.xmi"));
+                .endsWith("/dkpro-core-io-xmi-asl/src/test/resources/xmi/english.xmi"));
         assertTrue(separatorsToUnix(getFeature(dmd, "collectionId", String.class))
-                .endsWith("dkpro-core/dkpro-core-io-xmi-asl/src/test/resources/xmi/"));
+                .endsWith("/dkpro-core-io-xmi-asl/src/test/resources/xmi/"));
         assertTrue(separatorsToUnix(getFeature(dmd, "documentBaseUri", String.class))
-                .endsWith("dkpro-core/dkpro-core-io-xmi-asl/src/test/resources/xmi/"));
+                .endsWith("/dkpro-core-io-xmi-asl/src/test/resources/xmi/"));
         assertEquals(false, getFeature(dmd, "isLastSegment", Boolean.class));
     }
 
