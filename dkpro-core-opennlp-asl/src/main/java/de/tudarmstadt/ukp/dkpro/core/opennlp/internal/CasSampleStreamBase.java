@@ -31,8 +31,8 @@ public abstract class CasSampleStreamBase<T>
     private boolean complete = false;
     private boolean inProduction = false;
     private AtomicReference<JCas> jcasReference = new AtomicReference<>();
-    private Thread readingThread;
-    private Thread sendingThread;
+//    private Thread readingThread;
+//    private Thread sendingThread;
     
     public CasSampleStreamBase()
     {
@@ -42,18 +42,18 @@ public abstract class CasSampleStreamBase<T>
     public void send(JCas aJCas) {
         jcasReference.set(aJCas);
         
-        if (readingThread != null) {
-            readingThread.interrupt();
-        }
+//        if (readingThread != null) {
+//            readingThread.interrupt();
+//        }
         
         // Wait for the CAS to have been processed
         while (inProduction || (!complete && jcasReference.get() != null)) {
             try {
-                sendingThread = Thread.currentThread();
+//                sendingThread = Thread.currentThread();
                 TimeUnit.MILLISECONDS.sleep(10);
             }
             catch (InterruptedException e) {
-                sendingThread = null;
+//                sendingThread = null;
                 Thread.interrupted();
                 // Ignore
             }
@@ -82,12 +82,12 @@ public abstract class CasSampleStreamBase<T>
             }
             else {
                 try {
-                    readingThread = Thread.currentThread();
+//                    readingThread = Thread.currentThread();
                     TimeUnit.MILLISECONDS.sleep(10);
                 }
                 catch (InterruptedException e) {
                     Thread.interrupted();
-                    readingThread = null;
+//                    readingThread = null;
                     // Ignore
                 }
             }
