@@ -18,13 +18,14 @@
 package de.tudarmstadt.ukp.dkpro.core.io.xmi;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testRoundTrip;
+import static org.apache.commons.io.FilenameUtils.separatorsToUnix;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
+import static org.apache.uima.fit.util.FSUtil.getFeature;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.factory.JCasFactory;
-import org.apache.uima.fit.util.FSUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.TOP;
 import org.junit.Rule;
@@ -55,15 +56,15 @@ public class XmiReaderWriterTest
         // System.out.println(doc.getDocumentAnnotationFs());
         
         TOP dmd = doc.getDocumentAnnotationFs();
-        assertEquals((Integer) 0, FSUtil.getFeature(dmd, "begin", Integer.class));
-        assertEquals((Integer) 230, FSUtil.getFeature(dmd, "end", Integer.class));
-        assertEquals("en", FSUtil.getFeature(dmd, "language", String.class));
-        assertEquals("english.txt", FSUtil.getFeature(dmd, "documentTitle", String.class));
-        assertEquals("english.txt", FSUtil.getFeature(dmd, "documentId", String.class));
-        assertEquals(null, FSUtil.getFeature(dmd, "documentUri", String.class));
-        assertEquals(null, FSUtil.getFeature(dmd, "collectionId", String.class));
-        assertEquals(null, FSUtil.getFeature(dmd, "documentBaseUri", String.class));
-        assertEquals(false, FSUtil.getFeature(dmd, "isLastSegment", Boolean.class));
+        assertEquals((Integer) 0, getFeature(dmd, "begin", Integer.class));
+        assertEquals((Integer) 230, getFeature(dmd, "end", Integer.class));
+        assertEquals("en", getFeature(dmd, "language", String.class));
+        assertEquals("english.txt", getFeature(dmd, "documentTitle", String.class));
+        assertEquals("english.txt", getFeature(dmd, "documentId", String.class));
+        assertEquals(null, getFeature(dmd, "documentUri", String.class));
+        assertEquals(null, getFeature(dmd, "collectionId", String.class));
+        assertEquals(null, getFeature(dmd, "documentBaseUri", String.class));
+        assertEquals(false, getFeature(dmd, "isLastSegment", Boolean.class));
     }
     
     @Test
@@ -79,18 +80,18 @@ public class XmiReaderWriterTest
         // System.out.println(doc.getDocumentAnnotationFs());
         
         TOP dmd = doc.getDocumentAnnotationFs();
-        assertEquals((Integer) 0, FSUtil.getFeature(dmd, "begin", Integer.class));
-        assertEquals((Integer) 230, FSUtil.getFeature(dmd, "end", Integer.class));
-        assertEquals("x-unspecified", FSUtil.getFeature(dmd, "language", String.class));
-        assertEquals("english2.xmi", FSUtil.getFeature(dmd, "documentTitle", String.class));
-        assertEquals("english2.xmi", FSUtil.getFeature(dmd, "documentId", String.class));
-        assertTrue(FSUtil.getFeature(dmd, "documentUri", String.class)
-                .endsWith("dkpro-core/dkpro-core-io-xmi-asl/src/test/resources/xmi/english2.xmi"));
-        assertTrue(FSUtil.getFeature(dmd, "collectionId", String.class)
-                .endsWith("dkpro-core/dkpro-core-io-xmi-asl/src/test/resources/xmi/"));
-        assertTrue(FSUtil.getFeature(dmd, "documentBaseUri", String.class)
-                .endsWith("dkpro-core/dkpro-core-io-xmi-asl/src/test/resources/xmi/"));
-        assertEquals(false, FSUtil.getFeature(dmd, "isLastSegment", Boolean.class));
+        assertEquals((Integer) 0, getFeature(dmd, "begin", Integer.class));
+        assertEquals((Integer) 230, getFeature(dmd, "end", Integer.class));
+        assertEquals("x-unspecified", getFeature(dmd, "language", String.class));
+        assertEquals("english2.xmi", getFeature(dmd, "documentTitle", String.class));
+        assertEquals("english2.xmi", getFeature(dmd, "documentId", String.class));
+        assertTrue(separatorsToUnix(getFeature(dmd, "documentUri", String.class))
+                .endsWith("/dkpro-core-io-xmi-asl/src/test/resources/xmi/english2.xmi"));
+        assertTrue(separatorsToUnix(getFeature(dmd, "collectionId", String.class))
+                .endsWith("/dkpro-core-io-xmi-asl/src/test/resources/xmi/"));
+        assertTrue(separatorsToUnix(getFeature(dmd, "documentBaseUri", String.class))
+                .endsWith("/dkpro-core-io-xmi-asl/src/test/resources/xmi/"));
+        assertEquals(false, getFeature(dmd, "isLastSegment", Boolean.class));
     }
     
     @Test
@@ -107,18 +108,18 @@ public class XmiReaderWriterTest
         // System.out.println(doc.getDocumentAnnotationFs());
         
         TOP dmd = doc.getDocumentAnnotationFs();
-        assertEquals((Integer) 0, FSUtil.getFeature(dmd, "begin", Integer.class));
-        assertEquals((Integer) 230, FSUtil.getFeature(dmd, "end", Integer.class));
-        assertEquals("en", FSUtil.getFeature(dmd, "language", String.class));
-        assertEquals("english.xmi", FSUtil.getFeature(dmd, "documentTitle", String.class));
-        assertEquals("english.xmi", FSUtil.getFeature(dmd, "documentId", String.class));
-        assertTrue(FSUtil.getFeature(dmd, "documentUri", String.class)
-                .endsWith("dkpro-core/dkpro-core-io-xmi-asl/src/test/resources/xmi/english.xmi"));
-        assertTrue(FSUtil.getFeature(dmd, "collectionId", String.class)
-                .endsWith("dkpro-core/dkpro-core-io-xmi-asl/src/test/resources/xmi/"));
-        assertTrue(FSUtil.getFeature(dmd, "documentBaseUri", String.class)
-                .endsWith("dkpro-core/dkpro-core-io-xmi-asl/src/test/resources/xmi/"));
-        assertEquals(false, FSUtil.getFeature(dmd, "isLastSegment", Boolean.class));
+        assertEquals((Integer) 0, getFeature(dmd, "begin", Integer.class));
+        assertEquals((Integer) 230, getFeature(dmd, "end", Integer.class));
+        assertEquals("en", getFeature(dmd, "language", String.class));
+        assertEquals("english.xmi", getFeature(dmd, "documentTitle", String.class));
+        assertEquals("english.xmi", getFeature(dmd, "documentId", String.class));
+        assertTrue(separatorsToUnix(getFeature(dmd, "documentUri", String.class))
+                .endsWith("/dkpro-core-io-xmi-asl/src/test/resources/xmi/english.xmi"));
+        assertTrue(separatorsToUnix(getFeature(dmd, "collectionId", String.class))
+                .endsWith("/dkpro-core-io-xmi-asl/src/test/resources/xmi/"));
+        assertTrue(separatorsToUnix(getFeature(dmd, "documentBaseUri", String.class))
+                .endsWith("/dkpro-core-io-xmi-asl/src/test/resources/xmi/"));
+        assertEquals(false, getFeature(dmd, "isLastSegment", Boolean.class));
     }
 
 //    @Test

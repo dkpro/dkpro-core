@@ -94,8 +94,7 @@ public class OpenNlpPosTaggerTrainer
         
         Callable<POSModel> trainTask = () -> {
             try {
-                return POSTaggerME.train(language, getStream(), params,
-                        new POSTaggerFactory(null, null));
+                return POSTaggerME.train(language, getStream(), params, new POSTaggerFactory());
             }
             catch (Throwable e) {
                 getStream().close();
