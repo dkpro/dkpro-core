@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package de.tudarmstadt.ukp.dkpro.core.textnormalizer.casfilter;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -39,38 +38,33 @@ import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.io.text.StringReader;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.dumper.CasDumpWriter;
 
 public class CasFilter_ImplBaseTest
 {
-    private static File tmpFile;
-
-    @Before
-    public void setUp()
-    {
-        tmpFile = new File("target/filteroutput.txt");
-        tmpFile.getParentFile().mkdirs();
-        //tmpFile.deleteOnExit();
-    }
-
     @Test
     public void testAnnotationFilterPass()
         throws UIMAException, IOException
     {
+        File tmpFile = new File(testContext.getTestOutputFolder(), "output.dump");
+        
         String input = "test";
         String expectedFirstLine = "======== CAS 0 begin ==================================";
 
-        CollectionReaderDescription reader = createReaderDescription(StringReader.class,
+        CollectionReaderDescription reader = createReaderDescription(
+                StringReader.class,
                 StringReader.PARAM_DOCUMENT_TEXT, input,
                 StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription filter = createEngineDescription(AnnotationBasedFilter.class);
         AnalysisEngineDescription annotator = createEngineDescription(TestAnnotator.class);
-        AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
+        AnalysisEngineDescription writer = createEngineDescription(
+                CasDumpWriter.class,
                 CasDumpWriter.PARAM_TARGET_LOCATION, tmpFile);
         AnalysisEngineDescription aggregator = CasFilter_ImplBase
                 .createAggregateBuilderDescription(filter, writer);
@@ -87,6 +81,8 @@ public class CasFilter_ImplBaseTest
     public void testAnnotationFilterRemove()
         throws UIMAException, IOException
     {
+        File tmpFile = new File(testContext.getTestOutputFolder(), "output.dump");
+        
         String input = "";
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
@@ -107,6 +103,8 @@ public class CasFilter_ImplBaseTest
     public void testEmptyDocumentFilterRemove()
         throws UIMAException, IOException
     {
+        File tmpFile = new File(testContext.getTestOutputFolder(), "output.dump");
+        
         String input = "";
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
@@ -126,6 +124,8 @@ public class CasFilter_ImplBaseTest
     public void testEmptyDocumentFilterPass()
         throws UIMAException, IOException
     {
+        File tmpFile = new File(testContext.getTestOutputFolder(), "output.dump");
+
         String input = "test";
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
@@ -145,6 +145,8 @@ public class CasFilter_ImplBaseTest
     public void testLanguageFilterPass()
         throws UIMAException, IOException
     {
+        File tmpFile = new File(testContext.getTestOutputFolder(), "output.dump");
+        
         String input = "test";
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
@@ -165,6 +167,8 @@ public class CasFilter_ImplBaseTest
     public void testLanguageFilterRemove()
         throws UIMAException, IOException
     {
+        File tmpFile = new File(testContext.getTestOutputFolder(), "output.dump");
+        
         String input = "test";
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
@@ -207,7 +211,6 @@ public class CasFilter_ImplBaseTest
     public static class AnnotationBasedFilter
         extends CasFilter_ImplBase
     {
-
         /**
          * filter out documents that do not contain any sentence annotation.
          */
@@ -221,7 +224,6 @@ public class CasFilter_ImplBaseTest
     public static class EmptyDocumentFilter
         extends CasFilter_ImplBase
     {
-
         @Override
         protected boolean pass(JCas aJCas)
         {
@@ -241,6 +243,8 @@ public class CasFilter_ImplBaseTest
         {
             return requiredLanguages.contains(aJCas.getDocumentLanguage());
         }
-
     }
+    
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }
