@@ -83,7 +83,7 @@ public class LanguageToolChecker
 		        throws IOException
 		    {
                 Properties props = getAggregatedProperties();
-		        Language lang = Languages.getLanguageForShortName(props.getProperty(LANGUAGE));
+		        Language lang = Languages.getLanguageForShortCode(props.getProperty(LANGUAGE));
 		        
 		        if (lang == null) {
 		            throw new IOException("The language code '"
@@ -94,7 +94,7 @@ public class LanguageToolChecker
                 if (defaultVariant != null) {
                     getLogger().info(
                             "Using default variant ["
-                                    + defaultVariant.getShortNameWithCountryAndVariant()
+                                    + defaultVariant.getShortCodeWithCountryAndVariant()
                                     + "] for language [" + props.getProperty(LANGUAGE) + "]");
                    lang = defaultVariant;
                 }

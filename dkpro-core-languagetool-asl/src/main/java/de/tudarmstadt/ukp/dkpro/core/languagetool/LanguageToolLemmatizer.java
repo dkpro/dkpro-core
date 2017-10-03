@@ -97,12 +97,12 @@ public class LanguageToolLemmatizer
 	    mappingProvider.configure(aJCas.getCas());
 	    
 		try {
-			Language lang = Languages.getLanguageForShortName(aJCas.getDocumentLanguage());
+			Language lang = Languages.getLanguageForShortCode(aJCas.getDocumentLanguage());
             Language defaultVariant = lang.getDefaultLanguageVariant();
             if (defaultVariant != null) {
                 getLogger().info(
                         "Using default variant ["
-                                + defaultVariant.getShortNameWithCountryAndVariant()
+                                + defaultVariant.getShortCodeWithCountryAndVariant()
                                 + "] for language [" + aJCas.getDocumentLanguage() + "]");
                 lang = defaultVariant;
             }
