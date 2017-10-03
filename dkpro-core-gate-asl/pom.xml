@@ -56,10 +56,10 @@
       <artifactId>gate-core</artifactId>
       <version>${gate.version}</version>
       <exclusions>
-        <!-- 
+        <!--
           This is a runtime dependency of GATE - excluding due to potential conflicts with the
           DKPro Core PDF I/O module
-         -->
+        -->
         <exclusion>
           <groupId>org.apache.tika</groupId>
           <artifactId>tika-parsers</artifactId>
@@ -120,12 +120,6 @@
           <artifactId>maven-dependency-plugin</artifactId>
           <configuration>
             <usedDependencies>
-              <!--
-                - Maven doesn't detect the parameters module to be used, be we actually
-                - do require it as a compile dependency and also at runtime, so we
-                - cannot set it to scope provided. Need to tell Maven to ignore it here.
-              -->
-              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDependency>
               <!-- Models not detected by byte-code analysis -->
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.gate-model-lemmatizer-en-default</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.gate-model-tagger-en-annie</usedDependency>

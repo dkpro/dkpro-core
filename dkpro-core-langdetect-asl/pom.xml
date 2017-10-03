@@ -28,6 +28,9 @@
   <artifactId>de.tudarmstadt.ukp.dkpro.core.langdetect-asl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core ASL - langdetect (v ${langdetect.version})</name>
+  <properties>
+    <langdetect.version>1.1-20120112</langdetect.version>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>
@@ -93,12 +96,6 @@
           <artifactId>maven-dependency-plugin</artifactId>
           <configuration>
             <usedDependencies>
-              <!--
-                - Maven doesn't detect the parameters module to be used, be we actually
-                - do require it as a compile dependency and also at runtime, so we
-                - cannot set it to scope provided. Need to tell Maven to ignore it here.
-              -->
-              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDependency>
               <!-- Models not detected by byte-code analysis -->
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.langdetect-model-languageidentifier-any-wikipedia</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.langdetect-model-languageidentifier-any-socialmedia</usedDependency>
@@ -108,7 +105,4 @@
       </plugins>
     </pluginManagement>
   </build>
-  <properties>
-    <langdetect.version>1.1-20120112</langdetect.version>
-  </properties>
 </project>

@@ -119,17 +119,11 @@
                 - depend on log4j, so we depend on it here.
               -->
               <usedDependency>log4j:log4j</usedDependency>
-              <!-- 
+              <!--
                 - Also a default testing dependency to avoid warnings on all libraries that use
                 - SLF4J
-                -->
-              <usedDependency>org.slf4j:slf4j-log4j12</usedDependency>
-              <!--
-                - Maven doesn't detect the parameters module to be used, be we actually
-                - do require it as a compile dependency and also at runtime, so we
-                - cannot set it to scope provided. Need to tell Maven to ignore it here.
               -->
-              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDependency>
+              <usedDependency>org.slf4j:slf4j-log4j12</usedDependency>
             </usedDependencies>
           </configuration>
         </plugin>

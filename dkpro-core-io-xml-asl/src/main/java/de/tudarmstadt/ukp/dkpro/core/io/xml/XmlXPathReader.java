@@ -35,6 +35,7 @@ import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.tools.ant.types.Resource;
 import org.apache.tools.ant.types.resources.FileResource;
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
@@ -131,7 +132,7 @@ public class XmlXPathReader
     @ConfigurationParameter(name = PARAM_DOC_ID_TAG, mandatory = false)
     private String docIdTag;
 
-    private Iterator<FileResource> fileIterator;
+    private Iterator<Resource> fileIterator;
     private FileResource currentFileResource;
 
     private XPathExpression compiledRootXPath;
@@ -203,7 +204,7 @@ public class XmlXPathReader
     private void processNextFile()
     {
         if (fileIterator.hasNext()) {
-            currentFileResource = fileIterator.next();
+            currentFileResource = (FileResource) fileIterator.next();
             File currentFile = currentFileResource.getFile();
 
             FileInputStream inputStream = null;

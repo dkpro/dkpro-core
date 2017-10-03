@@ -79,6 +79,16 @@
       <version>2.3.0</version>
     </dependency>
     <dependency>
+      <groupId>org.lappsgrid</groupId>
+      <artifactId>discriminator</artifactId>
+      <version>2.2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-all</artifactId>
+      <version>2.4.7</version>
+    </dependency>
+    <dependency>
       <groupId>it.unimi.dsi</groupId>
       <artifactId>fastutil</artifactId>
     </dependency>
@@ -106,18 +116,11 @@
           <artifactId>maven-dependency-plugin</artifactId>
           <configuration>
             <usedDependencies>
-              <!--
-                - Maven doesn't detect the parameters module to be used, be we actually
-                - do require it as a compile dependency and also at runtime, so we
-                - cannot set it to scope provided. Need to tell Maven to ignore it here.
+              <!-- 
+                - Because we need to fix the groovy-all version to the same one used by
+                - gmavenplus.
               -->
-              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDependency>
-              <!--
-                - Maven doesn't detect the vocabulary module to be used, be we actually
-                - do require it as a compile dependency and also at runtime, so we
-                - cannot set it to scope provided. Need to tell Maven to ignore it here.
-              -->
-              <usedDependency>org.lappsgrid:vocabulary</usedDependency>
+              <usedDependency>org.codehaus.groovy:groovy-all</usedDependency>
             </usedDependencies>
           </configuration>
         </plugin>

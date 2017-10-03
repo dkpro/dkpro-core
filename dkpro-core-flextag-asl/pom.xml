@@ -98,11 +98,6 @@
           <configuration>
             <usedDependencies>
               <!--
-                - Maven doesn't detect the parameters module to be used, be we actually
-                - do require it as a compile dependency and also at runtime, so we
-                - cannot set it to scope provided. Need to tell Maven to ignore it here. -->
-              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDependency>
-              <!--
                 - FlexTag is to some extend a wrapper of DKPro TC, the dependency
                 - analysis detects the dependency on TC and marks the FlexTag modules as not
                 - necessary (requiring the TC modules instead). The FlexTag modules includes

@@ -28,7 +28,7 @@
   <packaging>jar</packaging>
   <name>DKPro Core ASL - MaltParser (v ${maltparser.version})</name>
   <properties>
-    <maltparser.version>1.9.0</maltparser.version>
+    <maltparser.version>1.9.1</maltparser.version>
   </properties>
   <dependencies>
     <dependency>
@@ -231,12 +231,6 @@
           <artifactId>maven-dependency-plugin</artifactId>
           <configuration>
             <usedDependencies>
-              <!--
-                - Maven doesn't detect the parameters module to be used, be we actually
-                - do require it as a compile dependency and also at runtime, so we
-                - cannot set it to scope provided. Need to tell Maven to ignore it here.
-              -->
-              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDependency>
               <!-- Models not detected by byte-code analysis -->
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.hunpos-model-tagger-fa-upc</usedDependency>
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.hunpos-model-tagger-sv-suctags</usedDependency>

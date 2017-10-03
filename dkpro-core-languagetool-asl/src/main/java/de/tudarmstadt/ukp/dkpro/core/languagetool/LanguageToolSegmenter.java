@@ -48,11 +48,11 @@ public class LanguageToolSegmenter extends SegmenterBase
 	protected void process(JCas aJCas, String aText, int aZoneBegin)
 		throws AnalysisEngineProcessException
 	{
-		Language lang = Languages.getLanguageForShortName(getLanguage(aJCas));
+		Language lang = Languages.getLanguageForShortCode(getLanguage(aJCas));
         Language defaultVariant = lang.getDefaultLanguageVariant();
         if (defaultVariant != null) {
             getLogger().debug(
-                    "Using default variant [" + defaultVariant.getShortNameWithCountryAndVariant()
+                    "Using default variant [" + defaultVariant.getShortCodeWithCountryAndVariant()
                             + "] for language [" + getLanguage(aJCas) + "]");
             lang = defaultVariant;
         }
