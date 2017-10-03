@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.tools.ant.DirectoryScanner;
+import org.apache.tools.ant.types.Resource;
 import org.apache.tools.ant.types.resources.FileResource;
 import org.apache.tools.ant.types.resources.FileResourceIterator;
 import org.apache.uima.UimaContext;
@@ -110,7 +111,7 @@ public abstract class FileSetCollectionReaderBase
 
 	private DirectoryScanner directoryScanner;
 	private int completed;
-	private Iterator<FileResource> fileSetIterator;
+	private Iterator<Resource> fileSetIterator;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -195,7 +196,7 @@ public abstract class FileSetCollectionReaderBase
 		return directoryScanner.getIncludedFilesCount();
 
 	}
-	protected Iterator<FileResource> getFileSetIterator()
+	protected Iterator<Resource> getFileSetIterator()
 	{
 		return fileSetIterator;
 	}
@@ -203,7 +204,7 @@ public abstract class FileSetCollectionReaderBase
 	protected FileResource nextFile()
 	{
 		try {
-			return fileSetIterator.next();
+			return (FileResource) fileSetIterator.next();
 		}
 		finally {
 			completed++;
