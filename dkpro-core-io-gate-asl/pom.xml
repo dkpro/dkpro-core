@@ -44,10 +44,10 @@
       <artifactId>gate-core</artifactId>
       <version>${gate.version}</version>
       <exclusions>
-        <!-- 
+        <!--
           This is a runtime dependency of GATE - excluding due to potential conflicts with the
           DKPro Core PDF I/O module
-         -->
+        -->
         <exclusion>
           <groupId>org.apache.tika</groupId>
           <artifactId>tika-parsers</artifactId>
@@ -94,24 +94,4 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-dependency-plugin</artifactId>
-          <configuration>
-            <usedDependencies>
-              <!--
-                - Maven doesn't detect the parameters module to be used, be we actually
-                - do require it as a compile dependency and also at runtime, so we
-                - cannot set it to scope provided. Need to tell Maven to ignore it here.
-              -->
-              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDependency>
-            </usedDependencies>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
 </project>
