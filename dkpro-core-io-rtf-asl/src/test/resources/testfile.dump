@@ -2,9 +2,11 @@
 
 -------- View _InitialView begin ----------------------------------
 
-#0 DocumentMetaData:1
-   sofa: sofa id: _InitialView
-   begin: 0   end: 159   language: "en"
+DocumentMetaData:1
+   sofa: _InitialView
+   begin: 0
+   end: 159
+   language: "en"
    documentTitle: "testfile.rtf"
    documentId: "testfile.rtf"
    isLastSegment: false
@@ -13,7 +15,7 @@ CAS-Text:
 Title of the RTF file
 This is the RTF file's first paragraph.
 The second paragraph contains bold text and italic text.
-	Now a heading
+  Now a heading
 And another paragraph.
 
 

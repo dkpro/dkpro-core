@@ -2,9 +2,11 @@
 
 -------- View _InitialView begin ----------------------------------
 
-#0 DocumentMetaData:1
-   sofa: sofa id: _InitialView
-   begin: 0   end: 109   language: "x-unspecified"
+DocumentMetaData:1
+   sofa: _InitialView
+   begin: 0
+   end: 109
+   language: "x-unspecified"
    documentTitle: "test.pdf"
    documentId: "test.pdf"
    isLastSegment: false
@@ -20,18 +22,21 @@ Word with Umlauts (äöü) may require the substitution table.
 [This is a test.
 Dies ist ein Test.
 ]
-#0 Paragraph:3
-   sofa: sofa id: _InitialView
-   begin: 0   end: 35   divType: <null>
+Paragraph:3
+   sofa: _InitialView
+   begin: 0
+   end: 35
 [Überschrift
 ]
-#0 Heading:4
-   sofa: sofa id: _InitialView
-   begin: 36   end: 48   divType: <null>
+Heading:4
+   sofa: _InitialView
+   begin: 36
+   end: 48
 [Word with Umlauts (äöü) may require the substitution table.]
-#0 Paragraph:5
-   sofa: sofa id: _InitialView
-   begin: 49   end: 108   divType: <null>
+Paragraph:5
+   sofa: _InitialView
+   begin: 49
+   end: 108
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================

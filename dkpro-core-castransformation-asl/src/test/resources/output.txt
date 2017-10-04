@@ -2,7 +2,7 @@
 
 -------- View _InitialView begin ----------------------------------
 
-DocumentMetaData
+DocumentMetaData:1
    sofa: _InitialView
    begin: 0
    end: 141
@@ -16,134 +16,134 @@ Lumbo labi bumbo nabi noo. Labibi humba doopi jamba Too. Mekoman jalla hembembel
 lembi nabi. Humba jumbaba tumba Jalla Jamba.
 
 [Lumbo labi bumbo nabi noo.]
-SofaChangeAnnotation
+SofaChangeAnnotation:3
    sofa: _InitialView
    begin: 0
    end: 26
    operation: "delete"
 [Labibi humba doopi jamba Too.]
-Sentence
+Sentence:31
    sofa: _InitialView
    begin: 27
    end: 56
 [Labibi]
-Token
+Token:35
    sofa: _InitialView
    begin: 27
    end: 33
 [humba]
-Token
+Token:36
    sofa: _InitialView
    begin: 34
    end: 39
 [doopi]
-Token
+Token:37
    sofa: _InitialView
    begin: 40
    end: 45
 [jamba]
-Token
+Token:38
    sofa: _InitialView
    begin: 46
    end: 51
 [Too]
-Token
+Token:39
    sofa: _InitialView
    begin: 52
    end: 55
 [.]
-Token
+Token:40
    sofa: _InitialView
    begin: 55
    end: 56
 [Mekoman jalla hembembel!]
-Sentence
+Sentence:32
    sofa: _InitialView
    begin: 57
    end: 81
 [Mekoman]
-Token
+Token:41
    sofa: _InitialView
    begin: 57
    end: 64
 [jalla]
-Token
+Token:42
    sofa: _InitialView
    begin: 65
    end: 70
 [hembembel]
-Token
+Token:43
    sofa: _InitialView
    begin: 71
    end: 80
 [!]
-Token
+Token:44
    sofa: _InitialView
    begin: 80
    end: 81
 [Labumbu jakka
 lembi nabi.]
-Sentence
+Sentence:33
    sofa: _InitialView
    begin: 82
    end: 107
 [Labumbu]
-Token
+Token:45
    sofa: _InitialView
    begin: 82
    end: 89
 [jakka]
-Token
+Token:46
    sofa: _InitialView
    begin: 90
    end: 95
 [lembi]
-Token
+Token:47
    sofa: _InitialView
    begin: 96
    end: 101
 [nabi]
-Token
+Token:48
    sofa: _InitialView
    begin: 102
    end: 106
 [.]
-Token
+Token:49
    sofa: _InitialView
    begin: 106
    end: 107
 [Humba jumbaba tumba Jalla Jamba.]
-Sentence
+Sentence:34
    sofa: _InitialView
    begin: 108
    end: 140
 [Humba]
-Token
+Token:50
    sofa: _InitialView
    begin: 108
    end: 113
 [jumbaba]
-Token
+Token:51
    sofa: _InitialView
    begin: 114
    end: 121
 [tumba]
-Token
+Token:52
    sofa: _InitialView
    begin: 122
    end: 127
 [Jalla]
-Token
+Token:53
    sofa: _InitialView
    begin: 128
    end: 133
 [Jamba]
-Token
+Token:54
    sofa: _InitialView
    begin: 134
    end: 139
 [.]
-Token
+Token:55
    sofa: _InitialView
    begin: 139
    end: 140
@@ -151,7 +151,7 @@ Token
 
 -------- View TargetView begin ----------------------------------
 
-DocumentMetaData
+DocumentMetaData:5
    sofa: TargetView
    begin: 0
    end: 115
@@ -165,128 +165,128 @@ CAS-Text:
 lembi nabi. Humba jumbaba tumba Jalla Jamba.
 
 [Labibi humba doopi jamba Too.]
-Sentence
+Sentence:6
    sofa: TargetView
    begin: 1
    end: 30
 [Labibi]
-Token
+Token:7
    sofa: TargetView
    begin: 1
    end: 7
 [humba]
-Token
+Token:8
    sofa: TargetView
    begin: 8
    end: 13
 [doopi]
-Token
+Token:9
    sofa: TargetView
    begin: 14
    end: 19
 [jamba]
-Token
+Token:10
    sofa: TargetView
    begin: 20
    end: 25
 [Too]
-Token
+Token:11
    sofa: TargetView
    begin: 26
    end: 29
 [.]
-Token
+Token:12
    sofa: TargetView
    begin: 29
    end: 30
 [Mekoman jalla hembembel!]
-Sentence
+Sentence:13
    sofa: TargetView
    begin: 31
    end: 55
 [Mekoman]
-Token
+Token:14
    sofa: TargetView
    begin: 31
    end: 38
 [jalla]
-Token
+Token:15
    sofa: TargetView
    begin: 39
    end: 44
 [hembembel]
-Token
+Token:16
    sofa: TargetView
    begin: 45
    end: 54
 [!]
-Token
+Token:17
    sofa: TargetView
    begin: 54
    end: 55
 [Labumbu jakka
 lembi nabi.]
-Sentence
+Sentence:18
    sofa: TargetView
    begin: 56
    end: 81
 [Labumbu]
-Token
+Token:19
    sofa: TargetView
    begin: 56
    end: 63
 [jakka]
-Token
+Token:20
    sofa: TargetView
    begin: 64
    end: 69
 [lembi]
-Token
+Token:21
    sofa: TargetView
    begin: 70
    end: 75
 [nabi]
-Token
+Token:22
    sofa: TargetView
    begin: 76
    end: 80
 [.]
-Token
+Token:23
    sofa: TargetView
    begin: 80
    end: 81
 [Humba jumbaba tumba Jalla Jamba.]
-Sentence
+Sentence:24
    sofa: TargetView
    begin: 82
    end: 114
 [Humba]
-Token
+Token:25
    sofa: TargetView
    begin: 82
    end: 87
 [jumbaba]
-Token
+Token:26
    sofa: TargetView
    begin: 88
    end: 95
 [tumba]
-Token
+Token:27
    sofa: TargetView
    begin: 96
    end: 101
 [Jalla]
-Token
+Token:28
    sofa: TargetView
    begin: 102
    end: 107
 [Jamba]
-Token
+Token:29
    sofa: TargetView
    begin: 108
    end: 113
 [.]
-Token
+Token:30
    sofa: TargetView
    begin: 113
    end: 114
