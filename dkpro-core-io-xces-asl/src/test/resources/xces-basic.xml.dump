@@ -2,9 +2,11 @@
 
 -------- View _InitialView begin ----------------------------------
 
-#0 DocumentMetaData:1
-   sofa: sofa id: _InitialView
-   begin: 0   end: 130   language: "el"
+DocumentMetaData:1
+   sofa: _InitialView
+   begin: 0
+   end: 130
+   language: "el"
    documentTitle: "xces-basic.xml"
    documentId: "xces-basic.xml"
    isLastSegment: false
@@ -18,19 +20,20 @@ CAS-Text:
 
 
 [Αυτή είναι η πρώτη γραμμή.]
-#0 Paragraph:3
-   sofa: sofa id: _InitialView
-   begin: 0   end: 26   divType: <null>
+Paragraph:3
+   sofa: _InitialView
+   begin: 0
+   end: 26
 [Αυτή είναι η πρώτη γραμμή. Αυτό είναι μια άλλη γραμμή.]
-#0 Paragraph:4
-   sofa: sofa id: _InitialView
-   begin: 28   end: 82   divType: <null>
+Paragraph:4
+   sofa: _InitialView
+   begin: 28
+   end: 82
 [Γίνε η αλλαγή που θέλεις να δεις στον κόσμο.]
-#0 Paragraph:5
-   sofa: sofa id: _InitialView
-   begin: 84   end: 128   divType: <null>
+Paragraph:5
+   sofa: _InitialView
+   begin: 84
+   end: 128
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================
-
-
