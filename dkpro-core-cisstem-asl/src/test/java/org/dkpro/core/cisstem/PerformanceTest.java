@@ -15,15 +15,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.cisstem;
+package org.dkpro.core.cisstem;
 
 import java.io.File;
 
 import org.apache.commons.io.FileUtils;
+import org.dkpro.core.cisstem.util.CisStem;
 import org.junit.Ignore;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.cisstem.util.CisStem;
 
 public class PerformanceTest {
 
