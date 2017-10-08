@@ -24,12 +24,10 @@
     <version>1.9.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
+  <groupId>org.dkpro.core</groupId>
   <artifactId>dkpro-core-io-xces-asl</artifactId>
   <packaging>jar</packaging>
-
   <name>DKPro Core ASL - IO - XCES-XML</name>
-
-
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>
@@ -119,5 +117,4 @@
       </plugins>
     </pluginManagement>
   </build>
-  <groupId>org.dkpro.core</groupId>
 </project>
