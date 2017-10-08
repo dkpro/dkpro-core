@@ -1,0 +1,373 @@
+// Copyright 2017
+// Ubiquitous Knowledge Processing (UKP) Lab
+// Technische Universität Darmstadt
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+// http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+[[sect_modules]]
+= Adding Modules
+
+== Module Naming Scheme
+
+The name is the first thing to consider when creating a new module.
+
+DKPro Core consists of a number of Maven modules. The actual components (readers, writers) as
+well as the DKPro Core types and APIs reside within these modules. Although the modules are
+technically all the same, in the naming scheme, we discern between the following types of
+modules:
+
+* API modules (`dkpro-core-api-NAME-asl`) - these modules contain common base classes, utility
+  classes, type system definitions and JCas classes. Since API modules are used in many places,
+  they must be licensed under the Apache License.
+* IO modules (`dkpro-core-io-NAME-LIC`) - these modules contain reader and writer components. They
+  are usually named after the file format (e.g. `lif`) or family of file formats they support
+  (e.g. `conll`).
+* FS modules (`dkpro-core-fs-NAME-LIC`) - these modules contain support for specific file systems.
+  They are usually named after the file system type they support (e.g. `hdfs`).
+* Component modules (`dkpro-core-NAME-LIC`) - these modules contain processing components. 
+  They are usually named after the tool or library that is wrapped (e.g. `treetagger` or `corenlp`).
+
+In addition to the four categories, there are a view unique modules which do not fall into any
+of these categories, e.g. `de.tudarmstadt.ukp.dkpro.core.testing-asl` or 
+`de.tudarmstadt.ukp.dkpro.core.doc-asl`.
+
+NOTE: DKPro Core is in a transition phase from the traditional but deprecated naming scheme
+      (`de.tudarmstadt.ukp.dkpro.core...`) to the new naming scheme (`org.dkpro.core...`). Many modules
+      still make use of the old naming scheme.
+
+The naming scheme applies in several occasions:
+
+* module folder - the sub-folder within the DKPro Core project which contains the module
+* artifactId - the Maven artifactId as recorded in the `pom.xml` file. The groupId should always
+  be `org.dkpro.core`.
+* Java packages - the module name translates roughly into the Java package names, e.g. the root
+  Java package in the module `dkpro-core-io-lif-asl` is `org.dkpro.core.io.lif`. 
+
+== Module Hierarchy
+
+Once you have decided on a name for the new module, you proceed by creating a new module folder.
+Module folders are created directly under the root of the DKPro Core source tree.
+
+Although the folder structure of DKPro Core appears as if there would be a flat list of modules,
+there is actually a shallow hierarchy of modules (i.e. the folder hierarchy does not correspond
+to the Maven module hierarchy).
+
+The *DKPro Core Parent POM* is at the root of the module and of the folder hierarchy. Its parent
+is the *DKPro Parent POM* which is maintained in a separate source tree and which follows its own
+release cycle. The *DKPro Parent POM* defines a set of default settings, profiles, and managed
+dependencies useful for all DKPro projects. The *DKPro Core Parent POM* defines settings specific
+to DKPro Core.
+
+```
+DKPro Parent POM
+  DKPro Core Parent POM
+    DKPro Core ASL Parent POM
+      ... DKPro Core ASL modules ...
+    DKPro Core GPL Parent POM
+      ... DKPro Core GPL modules ...
+    DKPro Core Documentation
+```
+
+New modules are added either in the `<modules>` section of the *DKPro Core ASL Parent POM* or of the
+*DKPro Core GPL Parent POM* depending on whether the new module can be licensed under the Apache License
+or whether it has to be licensed under the GPL due to a GPL dependency. The these two parent POMs
+configure different sets of license checkers. For ASL modules, the link:http://creadur.apache.org/rat/apache-rat-plugin/[Apache RAT Maven Plugin] is used; for the GPL modules, the link:http://code.mycila.com/license-maven-plugin/[License Maven Plugin] is used.
+
+Note that the `<modules>` section in these POMs points to the folders which contain the respective
+modules. Since the folder hierarchy is flat (unlike the module hierarchy), the module names here
+need to be prefixed with `../`.
+
+.Excerpt from the DKPro Core ASL Parent POM modules section
+[source,xml,indent=0]
+----
+  <modules>
+    <!-- API modules -->
+    <module>../dkpro-core-api-anomaly-asl</module>
+    <module>../dkpro-core-api-coref-asl</module>
+    ...
+    <!-- FS modules -->
+    <module>../dkpro-core-fs-hdfs-asl</module>
+    <!-- IO modules -->
+    <module>../dkpro-core-io-aclanthology-asl</module>
+    <module>../dkpro-core-io-ancora-asl</module>
+    ...
+    <!-- Processing modules -->
+    <module>../dkpro-core-castransformation-asl</module>
+    <module>../dkpro-core-cisstem-asl</module>
+    ...
+  </modules>
+----
+
+In addition to adding a new module to the `<modules>` section of the respective parent POM, it 
+also needs to be added to the `<dependencyManagement>` section with this POM:
+
+.Excerpt from the DKPro Core ASL Parent POM dependency management section
+[source,xml,indent=0,subs="+attributes"]
+----
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.dkpro.core</groupId>
+        <artifactId>dkpro-core-foo-asl</artifactId>
+        <version>{revnumber}</version>
+      </dependency>
+      ...
+    </dependencies>
+  </dependencyManagement>
+----
+
+NOTE: If you create a GPLed module, copy the `.license-header.txt` file from another GPLed module
+      to your new module in order to properly configure the license checker. Mind that the GPL license
+      text in XML files must be indented by *4 spaces* and will not be recognized otherwise. You may
+      have to adjust the text, depending on whether the module can be licensed under GPLv3 or has to
+      be licensed under GPLv2.
+
+NOTE: If not all of the dependencies of your new module are available from Maven Central or
+      JCenter, then add the module within the `<modules>` and `<dependencyManagemen>` sections located
+      under the `deps-not-on-maven-central` profile within the respective parent POM. Also add the
+      required third-party repositories there if necessary.
+
+== Basic POM
+
+Next, you create a basic POM inside your new module folder. Below is an example of a minimal
+POM for a new Apache-licensed component module. If you create a GPL-licensed module instead,
+replace the `-asl` suffixes with `-gpl` and copy the license header from another GPLed module.
+
+.Minimal sample POM for a new Apache-licensed component module
+[source,xml,indent=0,subs="+attributes"]
+----
+<!--
+  Licensed to the Technische Universität Darmstadt under one
+  or more contributor license agreements. See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership. The Technische Universität Darmstadt
+  licenses this file to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+    <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
+    <version>{revnumber}</version>
+    <relativePath>../dkpro-core-asl</relativePath>
+  </parent>
+  <groupId>org.dkpro.core</groupId>
+  <artifactId>dkpro-core-foo-asl</artifactId>
+  <packaging>jar</packaging>
+  <name>DKPro Core ASL - Foo NLP Suite (v ${foo.version})</name>
+  <properties>
+    <foo.version>1.8.2</foo.version>
+  </properties>
+  <dependencies>
+  </dependencies>
+</project>
+----
+
+== Library Dependencies
+
+In order to avoid unpleasant surprises, DKPro Core uses the Maven Dependency Plugin to check if
+all dependencies used directly within the code of a module are also explicitly declared in the
+module POM. If this is not the case, the automated builds fail (they run with `-DfailOnWarning`).
+This means, you have to declare dependencies for all libraries that you are using directly 
+from your code in the `<dependencies>` section. If a dependency is only required during testing,
+it must be marked with `<scope>test</scope>`. Below, you find a few typical libraries used in many
+modules. Note that there is no version defined for these dependencies. The versions for many
+libraries used by multiple modules in DKPro Core are defined in the *DKPro Core Parent POM*.
+Only libraries that are specific to a particular module, e.g. the specific NLP library wrapped,
+should have their versions defined within the module POM.
+
+.Typical dependencies section
+[source,xml,indent=0,subs="+attributes"]
+----
+    <dependency>
+      <groupId>org.apache.uima</groupId>
+      <artifactId>uimaj-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.uima</groupId>
+      <artifactId>uimafit-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
+      <scope>test</scope>
+    </dependency>
+----
+
+You may notice the `foo.version` property in the minimal POM example above. This property should
+be used to set the version of wrapped NLP library. It should appear in the name of the module
+as well as in the specific dependency for the wrapped library.
+
+.Typical dependencies section
+[source,xml,indent=0,subs="+attributes"]
+----
+    <dependency>
+      <groupId>org.foo.nlp</groupId>
+      <artifactId>foo-nlp-suite</artifactId>
+      <version>${foo.version}</version>
+    </dependency>
+----
+
+== Model Dependencies
+
+When you package models for your new component, they need a special treatment in the POM. First, 
+while it is a good idea to create unit tests based on the models, but normally, you do not want
+to download all models and run all unit tests during a normal developer build (some models are
+very large any may quickly fill up your hard disk). Second, the Maven Dependency Plugin is unable
+to detect that your code or tests make use of the models and it needs to be configured in a 
+special way to allow the build to pass even though it considers the model dependencies as
+unnecessary.
+
+So assuming you have a model for your component, then first add it to the `<dependencyManagemen>`
+section of the POM - here you specify the version but not the scope. All models you have get
+added to this section, irrespective of whether you want to use them for testing or not.
+
+[source,xml,indent=0,subs="+attributes"]
+----
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent</artifactId>
+        <version>20120616.1</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>      
+----
+
+If you also want to use the model for testing, then you add it also to the `<dependencies>` section
+of the POM. Here you specify the scope but not the version. Then you also have to configure the
+Maven Dependency Plugin to accept the presence of the dependency.
+
+[source,xml,indent=0,subs="+attributes"]
+----
+  <dependencies>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent</artifactId>
+      <scope>test</scope>
+    </dependency>
+  <dependencies>    
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <configuration>
+            <usedDependencies>
+              <!-- Models not detected by byte-code analysis -->
+              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent</usedDependency>
+            </usedDependencies>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+----
+
+As said before, if you have many models for your component, it is a good idea to use only a small
+set for regular testing. If you want to create tests for additional models or even for all of
+your models, then it is best to add the dependencies for these under a profile called `use-full-resources`.
+This profile is enabled for automated builds or can be enabled on demand by developers who wish
+to run all tests. In the example below, we add an additional test dependency on a German model
+if the profile `use-full-resources` is enabled. Note that the Maven Dependency Plugin is also again
+configured within the profile and that the `combine.children="append"` parameter is used to merge
+the configuration with the one already present for the default build.
+
+[source,xml,indent=0,subs="+attributes"]
+----
+  <profiles>
+    <profile>
+      <id>use-full-resources</id>
+      <dependencies>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-maxent</artifactId>
+          <scope>test</scope>
+        </dependency>
+      </dependencies>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-dependency-plugin</artifactId>
+              <configuration>
+                <usedDependencies combine.children="append">
+                  <!-- Models not detected by byte-code analysis -->
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-maxent</usedDependency>
+                </usedDependencies>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
+  </profiles>
+----
+
+To conditionally run a test only if the required model is enabled, you can use the `AssumeResource`
+class from the DKPro Core testing module.
+
+[source,java,indent=0]
+----
+AssumeResource.assumeResource(OpenNlpPosTagger.class, "tagger", language, variant);
+----
+
+== LICENSE.txt
+
+Every module must contain a file called `LICENSE.txt` at its root which contains the license text.
+Copy this file from another Apache-licensed or GPL-licensed module (again check if you need to
+use GPLv2 or v3). If this file is not present, the build will fail.
+
+== NOTICE.txt
+
+If the module contains code or resources from a third party (e.g. a source or test file which you
+copied from some other code repository or obtained from some website), then you need to add a
+file called `NOTICE.txt` next to the `LICENSE.txt` file. For every third-party file (or set of files
+if mutiple files were obtained from the same source under the same conditions), the `NOTICE.txt`
+must contain a statement which allows to identify the files, identify from where these files were
+obtained, and contain a copyright and license statement. Check the license of the original files
+for whether you have to include the full license text and potentially some specific attribution
+(possibly from an upstream `NOTICE` file).
+
+
