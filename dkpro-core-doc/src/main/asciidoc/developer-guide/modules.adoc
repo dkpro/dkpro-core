@@ -17,14 +17,15 @@
 [[sect_modules]]
 = Adding Modules
 
+DKPro Core consists of a number of Maven modules. The actual components (readers, writers) as
+well as the DKPro Core types and APIs reside within these modules. 
+
 == Module Naming Scheme
 
 The name is the first thing to consider when creating a new module.
 
-DKPro Core consists of a number of Maven modules. The actual components (readers, writers) as
-well as the DKPro Core types and APIs reside within these modules. Although the modules are
-technically all the same, in the naming scheme, we discern between the following types of
-modules:
+Although the modules are technically all the same, in the naming scheme, we discern between the
+following types of modules:
 
 * API modules (`dkpro-core-api-NAME-asl`) - these modules contain common base classes, utility
   classes, type system definitions and JCas classes. Since API modules are used in many places,
