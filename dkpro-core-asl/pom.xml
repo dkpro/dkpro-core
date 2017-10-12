@@ -595,7 +595,10 @@
     <module>../dkpro-core-decompounding-asl</module>
     <module>../dkpro-core-dictionaryannotator-asl</module>
     <module>../dkpro-core-eval-asl</module>
+    <!-- 
+      - Depends on a UIMAv2 version of DKPro TC   
     <module>../dkpro-core-flextag-asl</module>
+    -->
     <module>../dkpro-core-frequency-asl</module>
     <module>../dkpro-core-gate-asl</module>
     <module>../dkpro-core-gosen-asl</module>
@@ -684,7 +687,11 @@
       <modules>
         <!-- IO modules -->
         <module>../dkpro-core-io-fangorn-asl</module>
+        <!--
+          - This module is having serious problems with UIMAv3 - features are not serialized
+          - adequately.  
         <module>../dkpro-core-io-graf-asl</module>
+        -->
         <!-- Processing modules -->
         <module>../dkpro-core-lbj-asl</module>
         <module>../dkpro-core-udpipe-asl</module>
@@ -696,11 +703,15 @@
             <artifactId>de.tudarmstadt.ukp.dkpro.core.io.fangorn-asl</artifactId>
             <version>1.9.0-SNAPSHOT</version>
           </dependency>
+          <!--
+            - This module is having serious problems with UIMAv3 - features are not serialized
+            - adequately.  
           <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.io.graf-asl</artifactId>
             <version>1.9.0-SNAPSHOT</version>
           </dependency>
+          -->
           <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.lbj-asl</artifactId>

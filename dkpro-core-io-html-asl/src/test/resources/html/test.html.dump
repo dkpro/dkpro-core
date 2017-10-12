@@ -2,7 +2,7 @@
 
 -------- View _InitialView begin ----------------------------------
 
-DocumentMetaData
+DocumentMetaData:1
    sofa: _InitialView
    begin: 0
    end: 68
@@ -14,19 +14,19 @@ DocumentMetaData
 CAS-Text:
  Heading This is the first paragraph. This is the second paragraph. 
 [Heading]
-Heading
+Heading:3
    sofa: _InitialView
    begin: 1
    end: 8
    divType: "h1"
 [This is the first paragraph.]
-Paragraph
+Paragraph:4
    sofa: _InitialView
    begin: 9
    end: 37
    divType: "p"
 [This is the second paragraph.]
-Paragraph
+Paragraph:5
    sofa: _InitialView
    begin: 38
    end: 67
