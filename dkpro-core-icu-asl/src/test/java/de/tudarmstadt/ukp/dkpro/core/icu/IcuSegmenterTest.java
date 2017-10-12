@@ -69,8 +69,8 @@ public class IcuSegmenterTest
         AnalysisEngine aed = createEngine(IcuSegmenter.class);
         aed.process(jcas);
         
-        String[] tokens = { "滧", "の", "べ", "滦", "榥", "榜", "ぶ", "廤", "ま", "楺", "獣", "お", "䨣", "み",
-                "ゅ", "騪" };
+        String[] tokens = { "滧", "の", "べ", "滦", "榥", "榜", "ぶ", "廤", "ま", "楺", "獣", "お", 
+                "䨣", "み", "ゅ", "騪" };
         
         AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
     }
