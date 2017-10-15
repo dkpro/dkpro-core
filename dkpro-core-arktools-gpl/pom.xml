@@ -118,6 +118,8 @@
             <usedDependencies>
               <!-- Models not detected by byte-code analysis -->
               <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.arktools-model-tagger-en-default</usedDependency>
+              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.arktools-model-tagger-en-irc</usedDependency>
+              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.arktools-model-tagger-en-ritter</usedDependency>
             </usedDependencies>
           </configuration>
         </plugin>
