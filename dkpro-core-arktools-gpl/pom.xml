@@ -78,6 +78,16 @@
       <artifactId>de.tudarmstadt.ukp.dkpro.core.arktools-model-tagger-en-default</artifactId>
       <scope>test</scope>
     </dependency>
+	<dependency>
+		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+		<artifactId>de.tudarmstadt.ukp.dkpro.core.arktools-model-tagger-en-irc</artifactId>
+		<scope>test</scope>
+	</dependency>
+	<dependency>
+		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+		<artifactId>de.tudarmstadt.ukp.dkpro.core.arktools-model-tagger-en-ritter</artifactId>
+		<scope>test</scope>
+	</dependency>     
   </dependencies>
   <dependencyManagement>
     <dependencies>
@@ -86,6 +96,16 @@
         <artifactId>de.tudarmstadt.ukp.dkpro.core.arktools-model-tagger-en-default</artifactId>
         <version>20120919.1</version>
       </dependency>
+	<dependency>
+		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+		<artifactId>de.tudarmstadt.ukp.dkpro.core.arktools-model-tagger-en-irc</artifactId>
+		<version>20121211.1</version>
+	</dependency>
+	<dependency>
+		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+		<artifactId>de.tudarmstadt.ukp.dkpro.core.arktools-model-tagger-en-ritter</artifactId>
+		<version>20130723.1</version>
+	</dependency>       
     </dependencies>
   </dependencyManagement>
   <build>
