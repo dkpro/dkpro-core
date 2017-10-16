@@ -191,6 +191,7 @@ public class BinaryCasReader
 			
 			SerialFormat format;
 			if (xts != null) {
+			    boolean lala = ((TypeSystemImpl) aCAS.getTypeSystem()).isCommitted();
 				format = CasIOUtils.load(bis, aCAS, xts);
 			} else {
  				format = CasIOUtils.load(bis, aCAS);
@@ -241,7 +242,7 @@ public class BinaryCasReader
  				CASMgrSerializer casMgr = (CASMgrSerializer) ois.readObject();
  				if (ts == null) {
  					ts = casMgr.getTypeSystem();
- 					ts.commit();
+ 					ts = ts.commit();
  				}
  			} catch (IOException | ClassNotFoundException e) {
  				throw new CollectionException(e);
@@ -298,7 +299,7 @@ public class BinaryCasReader
         if (typeSystem == null) {
             CASMgrSerializer casMgr = readCasManager();
             typeSystem = casMgr.getTypeSystem();
-            typeSystem.commit();
+            typeSystem = typeSystem.commit();
         }
 
         return typeSystem;
