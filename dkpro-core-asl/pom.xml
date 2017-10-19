@@ -342,6 +342,11 @@
         <version>1.10.0-SNAPSHOT</version>
       </dependency>
       <dependency>
+        <groupId>org.dkpro.core</groupId>
+        <artifactId>dkpro-core-io-webanno-asl</artifactId>
+        <version>1.10.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.io.tuebadz-asl</artifactId>
         <version>1.10.0-SNAPSHOT</version>
@@ -566,6 +571,7 @@
     <module>../dkpro-core-io-tuepp-asl</module>
     <module>../dkpro-core-io-tuebadz-asl</module>
     <module>../dkpro-core-io-web1t-asl</module>
+    <module>../dkpro-core-io-webanno-asl</module>
     <module>../dkpro-core-io-xmi-asl</module>
     <module>../dkpro-core-io-xml-asl</module>
     <module>../dkpro-core-io-xces-asl</module>
