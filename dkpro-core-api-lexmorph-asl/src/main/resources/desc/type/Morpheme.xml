@@ -19,7 +19,9 @@
     </typeDescription>
   <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures</name>
-      <description>Morphological categories that can be attached to tokens.</description>
+      <description>Morphological categories that can be attached to tokens.
+
+The features are supposed to match the Universal Dependency v1 features.</description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
@@ -110,6 +112,14 @@
         <featureDescription>
           <name>reflex</name>
           <description/>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>transitivity</name>
+          <description>Verbs: transitive/intransitive
+
+@deprecated 
+</description>
           <rangeTypeName>uima.cas.String</rangeTypeName>
         </featureDescription>
       </features>
