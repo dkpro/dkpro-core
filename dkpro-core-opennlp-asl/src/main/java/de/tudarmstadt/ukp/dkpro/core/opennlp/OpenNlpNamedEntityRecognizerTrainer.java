@@ -29,6 +29,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.UimaContext;
@@ -95,6 +96,14 @@ public class OpenNlpNamedEntityRecognizerTrainer
     private File targetLocation;
 
     /**
+     * Regex to filter the {@link de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity#getValue() named entity} by
+     * type.
+     */
+    public static final String PARAM_ACCEPTED_TAGS_REGEX = ComponentParameters.PARAM_ACCEPTED_TAGS_REGEX;
+    @ConfigurationParameter(name = PARAM_ACCEPTED_TAGS_REGEX, mandatory = false)
+    protected String acceptedTagsRegex;
+
+    /**
      * @see GISTrainer#MAXENT_VALUE
      * @see QNTrainer#MAXENT_QN_VALUE
      * @see PerceptronTrainer#PERCEPTRON_VALUE
@@ -145,6 +154,11 @@ public class OpenNlpNamedEntityRecognizerTrainer
     {
         super.initialize(aContext);
         stream = new CasNameSampleStream();
+
+        if (acceptedTagsRegex != null) {
+            Pattern filterPattern = Pattern.compile(acceptedTagsRegex);
+            stream.setNamedEntityFilter(namedEntity -> filterPattern.matcher(namedEntity.getValue()).matches());
+        }
         
         TrainingParameters params = new TrainingParameters();
         params.put(TrainingParameters.ALGORITHM_PARAM, algorithm);
