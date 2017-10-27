@@ -109,11 +109,13 @@ public class FlexTagPosTagger
 
         for (int i = 0; i < tokens.size(); i++) {
             Token token = tokens.get(i);
-            String outcome = outcomes.get(i).getOutcome();
+            TextClassificationOutcome outcome = outcomes.get(i);
+            String posTag = outcome.getOutcome();
 
             POS p = createPartOfSpeechAnnotationFromOutcome(aJCas, token.getBegin(),
-                    token.getEnd(), outcome);
+                    token.getEnd(), posTag);
             token.setPos(p);
+            outcome.removeFromIndexes(aJCas);
         }
 
     }
