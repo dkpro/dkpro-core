@@ -34,6 +34,8 @@ import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.CasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.resource.ResourceInitializationException;
 
@@ -56,9 +58,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * As described in: Olutobi Owoputi, Brendan O’Connor, Chris Dyer, Kevin Gimpel, Nathan Schneider
  * and Noah A. Smith. Improved Part-of-Speech Tagging for Online Conversational Text with Word
  * Clusters In Proceedings of NAACL 2013.
- *
- *
  */
+@ResourceMetaData(name="ArkTweet POS-Tagger")
+@TypeCapability(
+      inputs = { 
+          "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 
+      outputs = { 
+          "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class ArktweetPosTagger
     extends CasAnnotator_ImplBase
 {

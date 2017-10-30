@@ -24,6 +24,7 @@ import java.net.URL;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -41,6 +42,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
  * Tokenizer and sentence splitter using OpenNLP.
  *
  */
+@ResourceMetaData(name="UDPipe Segmenter")
 @TypeCapability(
         outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -126,9 +128,10 @@ public class UDPipeSegmenter
             Words words = sentence.getWords();
             int pos = fromSentence;
             int sStart =  text.indexOf(words.get(1).getForm(),pos);
-            if (sStart == -1)
+            if (sStart == -1) {
                 throw new IllegalStateException("Can not find the sentence  starting with word [" + words.get(1).getForm() + "] in text [" + text.substring(fromSentence)
                 + "]");
+            }
             
             for (int i = 1; i < words.size(); i++) {
                 Word w = words.get(i);
