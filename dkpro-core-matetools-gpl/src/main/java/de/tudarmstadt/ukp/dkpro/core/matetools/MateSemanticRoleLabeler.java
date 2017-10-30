@@ -256,7 +256,7 @@ public class MateSemanticRoleLabeler
 		for (Row row : ctokens.values()) {
 			int id = row.id;
 
-			String form = row.token.getCoveredText();
+			String form = row.token.getText();
 
 			String lemma = UNUSED;
 			if (row.token.getLemma() != null) {

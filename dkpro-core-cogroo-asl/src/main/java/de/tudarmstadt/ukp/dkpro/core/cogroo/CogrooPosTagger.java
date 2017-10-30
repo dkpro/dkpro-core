@@ -160,7 +160,7 @@ public class CogrooPosTagger
             List<Token> dTokens = selectCovered(Token.class, sentence);
             for (Token dTok : dTokens) {
                 TokenImpl cTok = new TokenImpl(dTok.getBegin() - sentence.getBegin(),
-                        dTok.getEnd() - sentence.getBegin(), dTok.getCoveredText());
+                        dTok.getEnd() - sentence.getBegin(), dTok.getText());
                 cTokens.add(cTok);
             }
             cSent.setTokens(cTokens);

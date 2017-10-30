@@ -83,7 +83,7 @@ public class CasNameSampleStream
                 idxTokenOffset.put(t.getEnd() - 1, t);
             }
             idxToken.put(t, idx);
-            words[idx] = t.getCoveredText();
+            words[idx] = t.getText();
             idx++;
         }
                 

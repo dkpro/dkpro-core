@@ -145,7 +145,7 @@ public class IxaLemmatizer
             for (Token t : tokens) {
                 String lemmaString = lemmas[i];
                 if (lemmaString == null) {
-                    lemmaString = t.getCoveredText();
+                    lemmaString = t.getText();
                 }
                 Lemma l = new Lemma(aJCas, t.getBegin(), t.getEnd());
                 l.setValue(lemmaString);

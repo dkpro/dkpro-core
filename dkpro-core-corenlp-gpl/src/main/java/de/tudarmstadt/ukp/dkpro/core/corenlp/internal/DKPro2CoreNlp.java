@@ -159,7 +159,7 @@ public class DKPro2CoreNlp
             Map<Token, IndexedWord> idxTokens = new HashMap<>();
             List<CoreLabel> tokens = new ArrayList<>();
             for (Token t : selectCovered(Token.class, s)) {
-                String tokenText = t.getCoveredText();
+                String tokenText = t.getText();
                 if (encoding != null && !"UTF-8".equals(encoding.name())) {
                     tokenText = new String(tokenText.getBytes(StandardCharsets.UTF_8), encoding);                
                 }
@@ -304,7 +304,7 @@ public class DKPro2CoreNlp
                 wordNode = tFact.newLeaf(aIdxTokens.get(wordAnnotation));
             }
             else {
-                wordNode = tFact.newLeaf(wordAnnotation.getCoveredText());
+                wordNode = tFact.newLeaf(wordAnnotation.getText());
             }
 
             // create information about preceding and trailing whitespaces in the leaf node

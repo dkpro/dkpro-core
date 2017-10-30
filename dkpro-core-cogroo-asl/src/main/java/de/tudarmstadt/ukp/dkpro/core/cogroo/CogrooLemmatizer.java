@@ -138,7 +138,7 @@ public class CogrooLemmatizer
             List<Token> dTokens = selectCovered(Token.class, sentence);
             for (Token dTok : dTokens) {
                 TokenImpl cTok = new TokenImpl(dTok.getBegin() - sentence.getBegin(),
-                        dTok.getEnd() - sentence.getBegin(), dTok.getCoveredText());
+                        dTok.getEnd() - sentence.getBegin(), dTok.getText());
                 cTok.setPOSTag(dTok.getPos().getPosValue());
                 cTokens.add(cTok);
             }
@@ -163,7 +163,7 @@ public class CogrooLemmatizer
                 if (lemmas != null && lemmas.length > 0) {
                     String lemmaString = lemmas[0];
                     if (lemmaString == null) {
-                        lemmaString = dTok.getCoveredText();
+                        lemmaString = dTok.getText();
                     }
                     l.setValue(lemmaString);
                 }

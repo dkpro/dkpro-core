@@ -54,7 +54,7 @@ public class ConvertToIllinois
         for (Sentence s : select(aJCas, Sentence.class)) {
             for (Token t : selectCovered(Token.class, s)) {
                 tokens[it] = new IntPair(t.getBegin(), t.getEnd());
-                sTokens[it] = t.getCoveredText();
+                sTokens[it] = t.getText();
                 it++;
             }
             sentences[is] = it;

@@ -306,7 +306,7 @@ public class ClearNlpSemanticRoleLabeler
 			// - lemma
 			for (int i = 0; i < tokens.size(); i++) {
 				Token t = tokens.get(i);
-				DEPNode node = new DEPNode(i + 1, tokens.get(i).getCoveredText());
+				DEPNode node = new DEPNode(i + 1, tokens.get(i).getText());
 				node.pos = t.getPos().getPosValue();
 				node.lemma = t.getLemma().getValue();
 				tree.add(node);

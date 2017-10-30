@@ -28,6 +28,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * BreakIterator segmenter.
@@ -90,10 +91,10 @@ public class BreakIteratorSegmenter
         int cur = bi.next();
         while (cur != BreakIterator.DONE) {
             cur += zoneBegin;
-            Annotation token = createToken(aJCas, last, cur);
+            Token token = createToken(aJCas, last, cur);
             if (token != null) {
                 if (splitAtApostrophe) {
-                    int i = token.getCoveredText().indexOf("'");
+                    int i = token.getText().indexOf("'");
                     if (i > 0) {
                         i += token.getBegin();
                         createToken(aJCas, i, token.getEnd());
