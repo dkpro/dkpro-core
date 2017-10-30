@@ -126,7 +126,7 @@ public class ClearNlpLemmatizer
 			// Generate input format required by analyzer
 			for (int i = 0; i < tokens.size(); i++) {
 				Token t = tokens.get(i);
-				DEPNode node = new DEPNode(i+1, tokens.get(i).getCoveredText());
+				DEPNode node = new DEPNode(i+1, tokens.get(i).getText());
 				node.pos = t.getPos().getPosValue();
 				tree.add(node);
 			}
@@ -138,7 +138,7 @@ public class ClearNlpLemmatizer
 				DEPNode node = tree.get(i+1);
                 String lemmaString = node.lemma;
                 if (lemmaString == null) {
-                    lemmaString = t.getCoveredText();
+                    lemmaString = t.getText();
                 }
 				Lemma l = new Lemma(aJCas, t.getBegin(), t.getEnd());
 				l.setValue(lemmaString);

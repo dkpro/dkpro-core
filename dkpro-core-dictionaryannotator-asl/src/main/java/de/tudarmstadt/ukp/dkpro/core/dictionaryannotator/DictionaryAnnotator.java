@@ -157,7 +157,7 @@ public class DictionaryAnnotator
 				String[] sentenceToEnd = new String[tokens.size()];
 
 				for (int j = 0; j < tokensToSentenceEnd.size(); j++) {
-					sentenceToEnd[j] = tokensToSentenceEnd.get(j).getCoveredText();
+					sentenceToEnd[j] = tokensToSentenceEnd.get(j).getText();
 				}
 
 				String[] longestMatch = phrases.getLongestMatch(sentenceToEnd);

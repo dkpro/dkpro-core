@@ -147,7 +147,7 @@ public class GateLemmatizer
 				category = GATE_LEMMATIZER_ALL_CATEGORIES_STRING;
 			}
 
-			String tokenString = token.getCoveredText();
+			String tokenString = token.getText();
 			String lemmaString = modelProvider.getResource().runMorpher(tokenString, category);
             if (lemmaString == null) {
                 lemmaString = tokenString;

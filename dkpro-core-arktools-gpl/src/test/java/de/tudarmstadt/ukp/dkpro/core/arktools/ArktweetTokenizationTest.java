@@ -64,7 +64,7 @@ public class ArktweetTokenizationTest
     private void assertTokenizationBoundaries(String[] expected, List<Token> tokens)
     {
         for (int i = 0; i < expected.length; i++) {
-            assertEquals(expected[i], tokens.get(i).getCoveredText());
+            assertEquals(expected[i], tokens.get(i).getText());
         }
     }
 
@@ -163,7 +163,7 @@ public class ArktweetTokenizationTest
         List<Token> tokens = getTokens(text);
 
         for (Token t : tokens) {
-            System.out.println(t.getCoveredText());
+            System.out.println(t.getText());
         }
 
         String[] expectedToken = new String[] { "god", "&", "amp", ";", "100", "days", ":", "&",

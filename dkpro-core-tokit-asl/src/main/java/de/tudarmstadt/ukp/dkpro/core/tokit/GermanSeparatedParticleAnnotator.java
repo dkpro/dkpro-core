@@ -66,7 +66,7 @@ public class GermanSeparatedParticleAnnotator extends JCasAnnotator_ImplBase {
 				if (token.getPos() != null) {
 					if (token.getPos().getPosValue().matches("PTKVZ.*")) {
 					// go back and find the next finite verb
-						String particle = token.getCoveredText();
+						String particle = token.getText();
 						String verblemma = "";
 
 						int j = i-1;
