@@ -28,7 +28,7 @@
   <packaging>jar</packaging>
   <name>DKPro Core ASL - OpenNLP (v ${opennlp.version}) (ASL)</name>
   <properties>
-    <opennlp.version>1.8.2</opennlp.version>
+    <opennlp.version>1.8.3</opennlp.version>
   </properties>
   <dependencies>
     <dependency>
