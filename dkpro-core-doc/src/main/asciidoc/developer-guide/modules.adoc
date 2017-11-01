@@ -250,7 +250,7 @@ as well as in the specific dependency for the wrapped library.
 == Model Dependencies
 
 When you package models for your new component, they need a special treatment in the POM. First, 
-while it is a good idea to create unit tests based on the models, but normally, you do not want
+although it is a good idea to create unit tests based on the models, most often you do not want
 to download all models and run all unit tests during a normal developer build (some models are
 very large any may quickly fill up your hard disk). Second, the Maven Dependency Plugin is unable
 to detect that your code or tests make use of the models and it needs to be configured in a 
