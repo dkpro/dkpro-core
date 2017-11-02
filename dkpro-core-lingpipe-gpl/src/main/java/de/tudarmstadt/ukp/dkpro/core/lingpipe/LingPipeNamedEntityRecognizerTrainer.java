@@ -53,7 +53,10 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import static org.apache.uima.fit.util.JCasUtil.indexCovered;
 import static org.apache.uima.fit.util.JCasUtil.indexCovering;
@@ -69,6 +72,14 @@ public class LingPipeNamedEntityRecognizerTrainer extends JCasConsumer_ImplBase 
     public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
     @ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true)
     private File targetLocation;
+
+    /**
+     * Regex to filter the {@link de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity#getValue() named entity} by
+     * type.
+     */
+    public static final String PARAM_ACCEPTED_TAGS_REGEX = ComponentParameters.PARAM_ACCEPTED_TAGS_REGEX;
+    @ConfigurationParameter(name = PARAM_ACCEPTED_TAGS_REGEX, mandatory = false)
+    protected String acceptedTagsRegex;
 
     private static final int NUM_CHUNKINGS_RESCORED = 64;
 
@@ -92,7 +103,7 @@ public class LingPipeNamedEntityRecognizerTrainer extends JCasConsumer_ImplBase 
         }
 
         Map<Sentence, Collection<Token>> index = indexCovered(aJCas, Sentence.class, Token.class);
-        Map<Token, Collection<NamedEntity>> neIndex = indexCovering(aJCas, Token.class, NamedEntity.class);
+        Map<Token, Collection<NamedEntity>> neIndex = getNamedEntityIndex(aJCas);
 
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             Collection<Token> tokens = index.get(sentence);
@@ -101,8 +112,9 @@ public class LingPipeNamedEntityRecognizerTrainer extends JCasConsumer_ImplBase 
             for (Token token : tokens) {
                 out.print(token.getCoveredText());
 
-                if (neIndex.containsKey(token)) {
-                    NamedEntity next = neIndex.get(token).iterator().next();
+                Collection<NamedEntity> coveredNEs = neIndex.get(token);
+                if (coveredNEs != null && !coveredNEs.isEmpty()) {
+                    NamedEntity next = coveredNEs.iterator().next();
                     if (next != ne) {
                         out.print(" B");
                     } else {
@@ -121,6 +133,31 @@ public class LingPipeNamedEntityRecognizerTrainer extends JCasConsumer_ImplBase 
 
             out.println();
         }
+    }
+
+    private Map<Token, Collection<NamedEntity>> getNamedEntityIndex(JCas aJCas) {
+        Map<Token, Collection<NamedEntity>> idx = indexCovered(aJCas, Token.class, NamedEntity.class);
+
+        if (acceptedTagsRegex != null) {
+            Pattern pattern = Pattern.compile(acceptedTagsRegex);
+
+            Map<Token, Collection<NamedEntity>> filteredIdx = new HashMap<>();
+            for (Token token : idx.keySet()) {
+                Collection<NamedEntity> nes = new ArrayList<>();
+
+                for (NamedEntity ne : idx.get(token)) {
+                    if (pattern.matcher(ne.getValue()).matches()) {
+                        nes.add(ne);
+                    }
+                }
+
+                filteredIdx.put(token, nes);
+            }
+
+            return filteredIdx;
+        }
+
+        return idx;
     }
 
     @Override
