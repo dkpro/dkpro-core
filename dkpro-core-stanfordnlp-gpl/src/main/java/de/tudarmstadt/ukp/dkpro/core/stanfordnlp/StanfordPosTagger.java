@@ -210,7 +210,7 @@ public class StanfordPosTagger
 
 			List<HasWord> words = new ArrayList<HasWord>(tokens.size());
 			for (Token t : tokens) {
-				words.add(new TaggedWord(t.getCoveredText()));
+				words.add(new TaggedWord(t.getText()));
 			}
 			
             if (ptb3Escaping) {

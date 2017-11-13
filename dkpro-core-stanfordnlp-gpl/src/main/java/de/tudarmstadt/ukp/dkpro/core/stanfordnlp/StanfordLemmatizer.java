@@ -132,7 +132,7 @@ public class StanfordLemmatizer
             
             List<CoreLabel> tokens = new ArrayList<>();
             for (Token t : selectCovered(Token.class, s)) {
-                CoreLabel token = tokenFactory.makeToken(t.getCoveredText(), t.getBegin(),
+                CoreLabel token = tokenFactory.makeToken(t.getText(), t.getBegin(),
                         t.getEnd() - t.getBegin());
                 // First add token so that tokens.size() returns a 1-based counting as required
                 // by IndexAnnotation
