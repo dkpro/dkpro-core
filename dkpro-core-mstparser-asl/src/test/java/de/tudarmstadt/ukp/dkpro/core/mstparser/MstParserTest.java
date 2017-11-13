@@ -22,7 +22,7 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.util.Locale;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;

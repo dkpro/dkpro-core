@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.io.penntree;
 
 import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.trim;
 import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.unescapeToken;
-import static org.apache.commons.lang.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.uima.fit.util.FSCollectionFactory.createFSArray;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 

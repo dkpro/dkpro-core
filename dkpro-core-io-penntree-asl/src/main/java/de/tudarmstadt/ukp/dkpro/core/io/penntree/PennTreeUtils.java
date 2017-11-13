@@ -28,8 +28,8 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.mutable.MutableInt;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.mutable.MutableInt;
 import org.apache.uima.cas.FeatureStructure;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;

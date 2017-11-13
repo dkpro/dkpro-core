@@ -30,7 +30,7 @@ import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
 import org.junit.Rule;
