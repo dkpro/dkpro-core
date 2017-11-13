@@ -44,6 +44,12 @@ public final class ComponentParameters
 	public static final String PARAM_VARIANT = "modelVariant";
 
 	/**
+	 * Regex to filter tags, e. g. named entities. Used by, e. g, named entity, trainers to train a model for just one
+	 * model variant.
+	 */
+	public static final String PARAM_ACCEPTED_TAGS_REGEX = "acceptedTagsRegex";
+
+	/**
 	 * Location from which the model is read.
 	 */
 	public static final String PARAM_MODEL_LOCATION = "modelLocation";
