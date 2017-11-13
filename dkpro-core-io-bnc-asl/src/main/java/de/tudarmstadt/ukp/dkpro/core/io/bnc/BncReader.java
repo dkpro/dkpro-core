@@ -17,7 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.bnc;
 
-import static org.apache.commons.lang.StringUtils.isNotBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;

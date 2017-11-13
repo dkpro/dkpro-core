@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import java.io.*;

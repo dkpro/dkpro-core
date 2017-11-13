@@ -17,8 +17,8 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.lif.internal;
 
-import static org.apache.commons.lang.StringUtils.isEmpty;
-import static org.apache.commons.lang.StringUtils.isNotEmpty;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.util.ArrayList;

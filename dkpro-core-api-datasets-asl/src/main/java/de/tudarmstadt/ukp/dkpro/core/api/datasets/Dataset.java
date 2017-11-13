@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.api.datasets;
 import java.io.File;
 import java.util.Arrays;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

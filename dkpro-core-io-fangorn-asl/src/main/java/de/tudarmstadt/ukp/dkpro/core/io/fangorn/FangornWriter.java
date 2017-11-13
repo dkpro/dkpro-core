@@ -22,7 +22,7 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.index.IndexWriter;

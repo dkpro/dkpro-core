@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.io.jwpl;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
@@ -31,10 +31,7 @@ import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.Revision;
 
 /**
  * Reads Wikipedia page revisions.
- *
- *
  */
-
 @TypeCapability(
     outputs={
             "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig",
@@ -78,7 +75,7 @@ public class WikipediaRevisionReader extends WikipediaRevisionReaderBase
             String text = "";
             if (outputPlainText) {
                 text = WikiUtils.cleanText(
-                        StringEscapeUtils.unescapeHtml(revision.getRevisionText())
+                        StringEscapeUtils.unescapeHtml4(revision.getRevisionText())
                 );
             }
             else {
