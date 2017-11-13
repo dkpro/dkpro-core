@@ -23,6 +23,8 @@ import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
+
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
@@ -42,7 +44,13 @@ public class CasNameSampleStream
     private Iterator<Sentence> sentences;
 
     private boolean clearAdaptiveData;
-    
+
+    private Predicate<NamedEntity> namedEntityFilter;
+
+    public void setNamedEntityFilter(Predicate<NamedEntity> namedEntityFilter) {
+        this.namedEntityFilter = namedEntityFilter;
+    }
+
     @Override
     public void init(JCas aJCas)
     {
@@ -81,6 +89,11 @@ public class CasNameSampleStream
                 
         List<Span> names = new ArrayList<>();
         for (NamedEntity ne : selectCovered(NamedEntity.class, sentence)) {
+
+            if (namedEntityFilter != null && !namedEntityFilter.test(ne)) {
+                continue;
+            }
+
             int begin = idxToken.get(idxTokenOffset.get(ne.getBegin()));
             int end = begin;
             if (ne.getEnd() > ne.getBegin()) {
