@@ -93,7 +93,8 @@ public class StanfordCoreferenceResolverTest
                     { "We" },
                     { "this war" },
                     { "Miyako Fuji , 20 , one of the rally 's organisers" },
-                    { "Miyako Fuji" }, 
+                    { "Miyako Fuji , 20" }, 
+                    { "Miyako Fuji", "20" }, 
                     { "one of the rally 's organisers" },
                     { "Jiji news agency" } };
 
@@ -133,12 +134,11 @@ public class StanfordCoreferenceResolverTest
         JCas jcas = runTest("en", "'Let's go! I want to see the Don', he said.");
 
         String[][] ref = {
-                { "'", "'s" },
-                { "I" },
+                { "'s", "I" },
                 { "the Don'", "he" } };
 
         String[] pennTree = { 
-                "(ROOT (S (NP (POS ')) (VP (VBD Let) (NP (PRP 's)) (VP (VB go))) (. !)))", 
+                "(ROOT (S (`` ') (VP (VB Let) (S (NP (PRP 's)) (VP (VB go)))) (. !)))", 
                 "(ROOT (S (S (NP (PRP I)) (VP (VBP want) (S (VP (TO to) (VP (VB see) (NP (DT the) "
                 + "(NNPS Don) (POS '))))))) (, ,) (NP (PRP he)) (VP (VBD said)) (. .)))"
         };
