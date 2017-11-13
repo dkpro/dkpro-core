@@ -225,12 +225,12 @@ public class StanfordSegmenter
     					tokensInDocument.add(l);
     				}
     		    }
-				lastTokenEnd = token.getEnd();
-				// add regular token
+			lastTokenEnd = token.getEnd();
+			// add regular token
     			CoreLabel l = new CoreLabel();
     			l.set(CharacterOffsetBeginAnnotation.class, token.getBegin());
     			l.set(CharacterOffsetEndAnnotation.class, token.getEnd());
-    			l.setWord(token.getCoveredText());
+    			l.setWord(token.getText());
     			tokensInDocument.add(l);
     		}
 

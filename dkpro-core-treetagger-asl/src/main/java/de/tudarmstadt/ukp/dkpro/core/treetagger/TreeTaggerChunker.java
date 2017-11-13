@@ -48,7 +48,6 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
@@ -57,6 +56,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 import de.tudarmstadt.ukp.dkpro.core.treetagger.internal.DKProExecutableResolver;
 
@@ -146,7 +146,7 @@ public class TreeTaggerChunker
     @ConfigurationParameter(name = PARAM_FLUSH_SEQUENCE, mandatory = false)
     private String flushSequence;
     
-	private CasConfigurableProviderBase<TreeTaggerWrapper<POS>> modelProvider;
+	private CasConfigurableProviderBase<TreeTaggerWrapper<Token>> modelProvider;
 	private MappingProvider mappingProvider;
 
 	@Override
@@ -155,8 +155,8 @@ public class TreeTaggerChunker
 	{
 		super.initialize(aContext);
 
-		modelProvider = new ModelProviderBase<TreeTaggerWrapper<POS>>() {
-		    private TreeTaggerWrapper<POS> treetagger;
+		modelProvider = new ModelProviderBase<TreeTaggerWrapper<Token>>() {
+		    private TreeTaggerWrapper<Token> treetagger;
 		    
 			{
                 setContextObject(TreeTaggerChunker.this);
@@ -170,7 +170,7 @@ public class TreeTaggerChunker
 				setOverride(LANGUAGE, language);
 				setOverride(VARIANT, variant);
 				
-				treetagger = new TreeTaggerWrapper<POS>();
+				treetagger = new TreeTaggerWrapper<Token>();
 	            treetagger.setPerformanceMode(performanceMode);
 		        treetagger.setEpsilon(0.00000001);
 		        treetagger.setHyphenHeuristics(true);
@@ -180,7 +180,7 @@ public class TreeTaggerChunker
 			}
 
 			@Override
-			protected TreeTaggerWrapper<POS> produceResource(URL aUrl)
+			protected TreeTaggerWrapper<Token> produceResource(URL aUrl)
 			    throws IOException
 			{
 			    Properties meta = getResourceMetaData();
@@ -234,14 +234,14 @@ public class TreeTaggerChunker
 		mappingProvider.configure(cas);
 
         // Set the handler creating new UIMA annotations from the analyzed tokens
-        final TokenHandler<POS> handler = new TokenHandler<POS>()
+        final TokenHandler<Token> handler = new TokenHandler<Token>()
         {
             private String openChunk;
             private int start;
             private int end;
 
             @Override
-            public void token(POS aPOS, String aChunk, String aDummy)
+            public void token(Token aToken, String aChunk, String aDummy)
             {
                 synchronized (cas) {
                     if (aChunk == null) {
@@ -264,11 +264,11 @@ public class TreeTaggerChunker
                         }
 
                         openChunk = chunk;
-                        start = aPOS.getBegin();
+                        start = aToken.getBegin();
                     }
 
                     // Record how much of the chunk we have seen so far
-                    end = aPOS.getEnd();
+                    end = aToken.getEnd();
                 }
             }
 
@@ -285,13 +285,13 @@ public class TreeTaggerChunker
         };
 
         try {
-            TreeTaggerWrapper<POS> treetagger = modelProvider.getResource();
+            TreeTaggerWrapper<Token> treetagger = modelProvider.getResource();
             treetagger.setHandler(handler);
             
             // Issue #636 - process each sentence individually to ensure that sentence boundaries
             // are respected
             for (Sentence sentence : select(aJCas, Sentence.class)) {
-                List<POS> posTags = new ArrayList<POS>(selectCovered(POS.class, sentence));
+                List<Token> posTags = new ArrayList<Token>(selectCovered(Token.class, sentence));
                 treetagger.process(posTags);
                 
                 // Commit the final chunk
@@ -306,7 +306,7 @@ public class TreeTaggerChunker
         }		
 	}
 	
-	private static class MappingTokenAdapter implements TokenAdapter<POS>
+	private static class MappingTokenAdapter implements TokenAdapter<Token>
 	{
 	    private Map<String, String> mapping;
 
@@ -325,15 +325,15 @@ public class TreeTaggerChunker
 	    }
 	    
         @Override
-        public String getText(POS aPos)
+        public String getText(Token aToken)
         {
-            synchronized (aPos.getCAS()) {
-                String pos = mapping.get(aPos.getPosValue());
+            synchronized (aToken.getCAS()) {
+                String pos = mapping.get(aToken.getPosValue());
                 if (pos == null) {
-                    pos = aPos.getPosValue();
+                    pos = aToken.getPosValue();
                 }
                 
-                return aPos.getCoveredText() + "-" + pos;
+                return aToken.getText() + "-" + pos;
             }
         }
 	}
