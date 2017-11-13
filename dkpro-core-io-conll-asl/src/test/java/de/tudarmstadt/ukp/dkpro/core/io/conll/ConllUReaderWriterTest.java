@@ -18,6 +18,8 @@
 package de.tudarmstadt.ukp.dkpro.core.io.conll;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.*;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,6 +33,67 @@ public class ConllUReaderWriterTest
         throws Exception
     {
         testRoundTrip(ConllUReader.class, ConllUWriter.class, "conll/u/conllu-en-orig.conll");
+    }
+
+    @Test
+    public void roundTripV2EmptyNodes()
+        throws Exception
+    {
+        testRoundTrip(ConllUReader.class, ConllUWriter.class, "conll/u_v2/conllu-empty_nodes.conll");
+    }
+
+    @Test
+    public void roundTripV2MorphologicalAnnotation()
+        throws Exception
+    {
+        testRoundTrip(ConllUReader.class, ConllUWriter.class, "conll/u_v2/conllu-morphological_annotation.conll");
+    }
+
+    @Test
+    public void roundTripV2ParagraphAndDocumentBoundaries()
+        throws Exception
+    {
+        testRoundTrip(
+                createReaderDescription(ConllUReader.class),
+                createEngineDescription(ConllUWriter.class,
+                        ConllUWriter.PARAM_WRITE_TEXT_HEADER, true),
+                "conll/u_v2/conllu-paragraph_and_document_boundaries.conll");
+    }
+
+    @Test
+    public void roundTripV2SentenceBoundariesAndComments()
+        throws Exception
+    {
+        testRoundTrip(
+                createReaderDescription(ConllUReader.class),
+                createEngineDescription(ConllUWriter.class,
+                        ConllUWriter.PARAM_WRITE_TEXT_HEADER, true),
+                "conll/u_v2/conllu-sentence_bounaries_and_comments.conll");
+    }
+
+    @Test
+    public void roundTripV2SyntacticAnnotation()
+        throws Exception
+    {
+        testRoundTrip(ConllUReader.class, ConllUWriter.class, "conll/u_v2/conllu-syntactic_annotation.conll");
+    }
+
+    @Test
+    public void roundTripV2UntokenizedText()
+        throws Exception
+    {
+        testRoundTrip(
+                createReaderDescription(ConllUReader.class),
+                createEngineDescription(ConllUWriter.class,
+                        ConllUWriter.PARAM_WRITE_TEXT_HEADER, true),
+                "conll/u_v2/conllu-untokenized_text.conll");
+    }
+
+    @Test
+    public void roundTripV2WordsAndTokens()
+        throws Exception
+    {
+        testRoundTrip(ConllUReader.class, ConllUWriter.class, "conll/u_v2/conllu-words_and_tokens.conll");
     }
 
     @Test

@@ -103,7 +103,11 @@ public class ConllUWriter
     public static final String PARAM_WRITE_DEPENDENCY = ComponentParameters.PARAM_WRITE_DEPENDENCY;
     @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")
     private boolean writeDependency;
-    
+
+    public static final String PARAM_WRITE_TEXT_HEADER = "writeTextHeader";
+    @ConfigurationParameter(name = PARAM_WRITE_TEXT_HEADER, mandatory = true, defaultValue = "false")
+    private boolean writeTextHeader;
+
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
@@ -135,6 +139,14 @@ public class ConllUWriter
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             HashMap<Token, Row> ctokens = new LinkedHashMap<Token, Row>();
 
+            // Header
+            if (sentence.getId() != null) {
+                aOut.printf("# sent_id = %s\n", sentence.getId());
+            }
+            if (writeTextHeader) {
+                aOut.printf("# text = %s\n", sentence.getCoveredText());
+            }
+            
             // Tokens
             List<Token> tokens = selectCovered(Token.class, sentence);
             
@@ -164,7 +176,8 @@ public class ConllUWriter
                 }
 
                 String pos = UNUSED;
-                if (writePos && (row.token.getPos() != null)) {
+                if (writePos && (row.token.getPos() != null)
+                    && row.token.getPos().getPosValue() != null) {
                     POS posAnno = row.token.getPos();
                     pos = posAnno.getPosValue();
                 }
