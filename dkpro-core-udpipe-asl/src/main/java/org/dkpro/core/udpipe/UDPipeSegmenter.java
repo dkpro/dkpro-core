@@ -28,6 +28,7 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.udpipe.internal.UDPipeUtils;
 
 import cz.cuni.mff.ufal.udpipe.InputFormat;
 import cz.cuni.mff.ufal.udpipe.Model;
@@ -96,6 +97,8 @@ public class UDPipeSegmenter
             protected Model produceResource(URL aUrl)
                 throws IOException
             {
+                UDPipeUtils.init();
+                
                 File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
                 return Model.load(modelFile.getAbsolutePath());
             }
@@ -113,47 +116,24 @@ public class UDPipeSegmenter
     @Override
     protected void process(JCas aJCas, String aText, int aZoneBegin)
         throws AnalysisEngineProcessException
-    {           
-        InputFormat inputFormat = modelProvider.getResource().newTokenizer(Model.getDEFAULT());
+    {
+        InputFormat inputFormat = modelProvider.getResource()
+                .newTokenizer(Model.getDEFAULT() + ";ranges");
         inputFormat.setText(aJCas.getDocumentText());
 
         cz.cuni.mff.ufal.udpipe.Sentence sentence = new cz.cuni.mff.ufal.udpipe.Sentence();
-        
-        int fromSentence = 0;
-        
-        String text=aJCas.getDocumentText();
-        
+
         while (inputFormat.nextSentence(sentence)) {
-            
             Words words = sentence.getWords();
-            int pos = fromSentence;
-            int sStart =  text.indexOf(words.get(1).getForm(),pos);
-            if (sStart == -1) {
-                throw new IllegalStateException("Can not find the sentence  starting with word [" + words.get(1).getForm() + "] in text [" + text.substring(fromSentence)
-                + "]");
-            }
-            
             for (int i = 1; i < words.size(); i++) {
                 Word w = words.get(i);
-                pos = text.indexOf(w.getForm(),pos);
-                if (pos == -1) {
-                    throw new IllegalStateException("Token [" + w.getForm() + "] not found in sentence [" + text.substring(fromSentence)
-                            + "]");
-                }
-                int tStart = pos;
-                int tEnd = pos + w.getForm().length();
-                pos = tEnd;
-                tStart += aZoneBegin;
-                tEnd += aZoneBegin;
-                createToken(aJCas, tStart, tEnd);
+                createToken(aJCas, (int) w.getTokenRangeStart() + aZoneBegin,
+                        (int) w.getTokenRangeEnd() + aZoneBegin);
             }
-            
-            int sEnd = pos;
-            fromSentence = sEnd;
-            sStart += aZoneBegin;
-            sEnd += aZoneBegin;
-            
-            createSentence(aJCas, sStart, sEnd);            
+
+            createSentence(aJCas, 
+                    (int) words.get(1).getTokenRangeStart() + aZoneBegin,
+                    (int) words.get((int) words.size() - 1).getTokenRangeEnd() + aZoneBegin);
             sentence = new cz.cuni.mff.ufal.udpipe.Sentence();
         }
     }
