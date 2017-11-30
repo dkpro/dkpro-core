@@ -22,8 +22,11 @@ import static org.junit.Assert.assertEquals;
 
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
+
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 
 public class LccReaderTest
 {
@@ -37,7 +40,9 @@ public class LccReaderTest
         
         int i=0;
         for (JCas jcas : new JCasIterable(reader)) {
-//        	System.out.println(jcas.getDocumentText().length());
+        	if (i==0) {
+        		assertEquals(3904, jcas.getDocumentText().length());
+        	}
         	i++;
         };
     
@@ -55,7 +60,9 @@ public class LccReaderTest
         
         int i=0;
         for (JCas jcas : new JCasIterable(reader)) {
-//        	System.out.println(jcas.getDocumentText().length());
+        	if (i==0) {
+        		assertEquals(91, jcas.getDocumentText().length());
+        	}
         	i++;
         };
     
@@ -73,11 +80,36 @@ public class LccReaderTest
         
         int i=0;
         for (JCas jcas : new JCasIterable(reader)) {
-//        	System.out.println(jcas.getDocumentText().length());
-//        	System.out.println(jcas.getDocumentText());
+        	if (i==0) {
+        		assertEquals(10579, jcas.getDocumentText().length());
+        	}
         	i++;
         };
     
         assertEquals(1, i);
+    }
+    
+    @Test
+    public void testSentenceWriting()
+        throws Exception
+    {
+        CollectionReaderDescription reader = createReaderDescription(
+                LccReader.class, 
+                LccReader.PARAM_SOURCE_LOCATION, "src/test/resources/text/sample.txt",
+                LccReader.PARAM_SENTENCES_PER_CAS, 100,
+                LccReader.PARAM_WRITE_SENTENCES, true);
+        
+        int i=0;
+        for (JCas jcas : new JCasIterable(reader)) {
+        	if (i==2) {
+            	assertEquals(39, JCasUtil.select(jcas, Sentence.class).size());     		
+        	}
+        	else {
+            	assertEquals(100, JCasUtil.select(jcas, Sentence.class).size());     		        		
+        	}
+        	i++;
+        };
+    
+        assertEquals(3, i);
     }
 }
