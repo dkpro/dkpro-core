@@ -25,7 +25,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -36,10 +35,12 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
+
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 
 
 /**
@@ -59,6 +60,13 @@ public class LccReader
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
     @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
+    
+    /**
+     * Whether sentences should be written by the reader or not.
+     */
+    public static final String PARAM_WRITE_SENTENCES = "writeSentences";
+    @ConfigurationParameter(name = PARAM_WRITE_SENTENCES, mandatory = true, defaultValue = "false")
+    private boolean writeSentences;
     
 	/**
 	 * How many input sentences should be merged into one CAS.
@@ -102,7 +110,21 @@ public class LccReader
 	@Override
 	public void getNext(JCas aJCas) throws IOException, CollectionException {
 	    initCas(aJCas, res, String.valueOf(casOffset));
-	    aJCas.setDocumentText(StringUtils.join(sentenceBuffer, "\n"));
+	    
+	    StringBuilder sb = new StringBuilder();
+	    int offset = 0;
+	    for (String sentence : sentenceBuffer) {
+	    	if (writeSentences) {
+	    		Sentence sAnno = new Sentence(aJCas, offset, offset + sentence.length());
+	    		sAnno.addToIndexes();
+	    	}
+	    	sb.append(sentence);
+	    	offset += sentence.length();
+	    	sb.append("\n");
+	    	offset++;
+	    }
+	    aJCas.setDocumentText(sb.toString());
+	    
 		sentenceBuffer.clear();
 		casOffset++;
         step();
