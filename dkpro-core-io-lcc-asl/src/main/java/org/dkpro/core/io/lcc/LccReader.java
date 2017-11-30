@@ -17,14 +17,11 @@
  */
 package org.dkpro.core.io.lcc;
 
+import static org.apache.commons.io.IOUtils.closeQuietly;
+
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,31 +36,29 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
-
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 
 
 /**
  * Reader for sentence-based Leipzig Corpora Collection files.
  */
 @ResourceMetaData(name="Leipzig Corpora Collection Reader")
-@MimeTypeCapability({MimeTypes.TEXT_PLAIN})
+@MimeTypeCapability({MimeTypes.TEXT_X_LCC})
 @TypeCapability(
         outputs = { 
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class LccReader
     extends JCasResourceCollectionReader_ImplBase
 {
-	
     /**
-     * Location from which the input is read.
+     * Name of configuration parameter that contains the character encoding used by the input files.
      */
-    public static final String PARAM_SOURCE_LOCATION = ComponentParameters.PARAM_SOURCE_LOCATION;
-    @ConfigurationParameter(name = PARAM_SOURCE_LOCATION, mandatory = true)
-    private File inputFile;
+    public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    private String sourceEncoding;
     
 	/**
 	 * How many input sentences should be merged into one CAS.
@@ -72,7 +67,8 @@ public class LccReader
 	@ConfigurationParameter(name = PARAM_SENTENCES_PER_CAS, mandatory = true, defaultValue = "100")
 	private int sentencesPerCAS;
 	
-	private Integer casOffset;
+    private Resource res;
+	private int casOffset;
 	private BufferedReader br;
 	private List<String> sentenceBuffer;
 
@@ -83,37 +79,33 @@ public class LccReader
         super.initialize(context);
         
         casOffset = 0;
-        sentenceBuffer = new ArrayList<String>();
+        sentenceBuffer = new ArrayList<>();
         
-        InputStream fileStream;
-		try {
-			fileStream = new FileInputStream(inputFile);
-	        br = new BufferedReader(new InputStreamReader(fileStream, "UTF-8"));
-		} catch (FileNotFoundException | UnsupportedEncodingException e) {
-			throw new ResourceInitializationException(e);
-		}
+        // Seek first article
+        try {
+            step();
+        }
+        catch (IOException e) {
+            throw new ResourceInitializationException(e);
+        }
+    }
+
+    @Override
+    public boolean hasNext()
+        throws IOException, CollectionException
+    {
+        // If there is still a buffer, then there is still data. This requires that we call
+        // step() already during initialization.
+        return !sentenceBuffer.isEmpty();
     }
 
 	@Override
-	public boolean hasNext() throws IOException, CollectionException {
-		fillSentenceBuffer();
-		
-		return sentenceBuffer.size() != 0;
-	}
-
-	@Override
-	public void getNext(JCas jcas) throws IOException, CollectionException {
-		jcas.setDocumentText(StringUtils.join(sentenceBuffer, "\n"));
-		
-		DocumentMetaData dmd = DocumentMetaData.create(jcas);
-		dmd.setDocumentId(casOffset.toString());
-		dmd.setDocumentTitle(casOffset.toString());
-		dmd.setDocumentTitle(casOffset.toString());
-		dmd.addToIndexes();
-		
+	public void getNext(JCas aJCas) throws IOException, CollectionException {
+	    initCas(aJCas, res, String.valueOf(casOffset));
+	    aJCas.setDocumentText(StringUtils.join(sentenceBuffer, "\n"));
 		sentenceBuffer.clear();
-		
 		casOffset++;
+        step();
 	}
 	
 	// TODO find some way to properly estimate progress
@@ -122,18 +114,61 @@ public class LccReader
         return new Progress[] { new ProgressImpl(casOffset, casOffset, "document") };
 	}
 	
-	private void fillSentenceBuffer() 
-		throws IOException
-	{
-		String line;
-        while (sentenceBuffer.size() < sentencesPerCAS && (line = br.readLine()) != null) {
-        	String[] parts = line.split("\t");
-			
-        	if (parts.length != 2) {
-				throw new IOException("File not in LCC format: " + line);
-			}
-        	
-        	sentenceBuffer.add(parts[1]);
+    @Override
+    public void destroy()
+    {
+        closeAll();
+        super.destroy();
+    }
+	
+    private void closeAll()
+    {
+        res = null;
+        closeQuietly(br);
+        br = null;
+    }
+	
+    /**
+     * Seek article in file. Stop once article element has been found without reading it.
+     */
+    private void step() throws IOException
+    {
+        // Open next file
+        while (true) {
+            if (res == null) {
+                // Call to super here because we want to know about the resources, not the articles
+                if (getResourceIterator().hasNext()) {
+                    // There are still resources left to read
+                    res = nextFile();
+                    br = new BufferedReader(new InputStreamReader(CompressionUtils.getInputStream(
+                            res.getLocation(), res.getInputStream()), sourceEncoding));
+                }
+                else {
+                    // No more files to read
+                    return;
+                }
+            }
+            
+            // Fill buffer
+            String line;
+            while (sentenceBuffer.size() < sentencesPerCAS && (line = br.readLine()) != null) {
+                String[] parts = line.split("\t");
+                
+                if (parts.length != 2) {
+                    throw new IOException("File not in LCC format: " + line);
+                }
+                
+                sentenceBuffer.add(parts[1]);
+            }
+            
+            // If buffer could be filled, return
+            if (!sentenceBuffer.isEmpty()) {
+                return;
+            }
+            
+            // End of file reached
+            closeAll();
         }
-	}
+    }
+
 }
