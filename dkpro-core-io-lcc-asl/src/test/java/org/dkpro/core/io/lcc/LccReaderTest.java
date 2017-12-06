@@ -97,7 +97,7 @@ public class LccReaderTest
                 LccReader.class, 
                 LccReader.PARAM_SOURCE_LOCATION, "src/test/resources/text/sample.txt",
                 LccReader.PARAM_SENTENCES_PER_CAS, 100,
-                LccReader.PARAM_WRITE_SENTENCES, true);
+                LccReader.PARAM_WRITE_SENTENCE, true);
         
         int i=0;
         for (JCas jcas : new JCasIterable(reader)) {
