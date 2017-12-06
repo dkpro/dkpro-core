@@ -41,7 +41,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 /**
  * Langdetect language identifier based on character n-grams.
  */
-@ResourceMetaData(name="Simple Language Identifier (Token N-Gram-based)")
+@ResourceMetaData(name="LangDetect")
 public class LangDetectLanguageIdentifier
     extends JCasAnnotator_ImplBase
 {

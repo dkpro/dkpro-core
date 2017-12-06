@@ -34,6 +34,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.LanguageCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.Messages;
@@ -57,6 +58,10 @@ import edu.stanford.nlp.process.WordToSentenceProcessor.NewlineIsSentenceBreak;
  */
 @ResourceMetaData(name="CoreNLP Segmenter (old API)")
 @LanguageCapability({"en", "es", "fr"})
+@TypeCapability(
+        outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
 public class StanfordSegmenter
     extends SegmenterBase
 {
