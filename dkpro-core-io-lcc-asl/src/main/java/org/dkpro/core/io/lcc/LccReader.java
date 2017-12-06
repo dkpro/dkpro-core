@@ -64,9 +64,9 @@ public class LccReader
     /**
      * Whether sentences should be written by the reader or not.
      */
-    public static final String PARAM_WRITE_SENTENCES = "writeSentences";
-    @ConfigurationParameter(name = PARAM_WRITE_SENTENCES, mandatory = true, defaultValue = "false")
-    private boolean writeSentences;
+    public static final String PARAM_WRITE_SENTENCE = ComponentParameters.PARAM_WRITE_SENTENCE;
+    @ConfigurationParameter(name = PARAM_WRITE_SENTENCE, mandatory = true, defaultValue = "false")
+    private boolean writeSentence;
     
 	/**
 	 * How many input sentences should be merged into one CAS.
@@ -114,7 +114,7 @@ public class LccReader
 	    StringBuilder sb = new StringBuilder();
 	    int offset = 0;
 	    for (String sentence : sentenceBuffer) {
-	    	if (writeSentences) {
+	    	if (writeSentence) {
 	    		Sentence sAnno = new Sentence(aJCas, offset, offset + sentence.length());
 	    		sAnno.addToIndexes();
 	    	}
