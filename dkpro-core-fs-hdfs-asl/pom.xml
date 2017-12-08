@@ -103,11 +103,12 @@
             <usedDependencies>
               <!-- 
                - These are not detected by the dependency:analyze but certainly needed
-               - by Hadoopy and ClassNotFoundExceptions will be thrown if they are
+               - by Hadoop and ClassNotFoundExceptions will be thrown if they are
                - missing!
                -->
               <usedDependency>log4j:log4j</usedDependency>
               <usedDependency>org.apache.hadoop:hadoop-common</usedDependency>
+              <usedDependency>org.apache.hadoop:hadoop-hdfs</usedDependency>
             </usedDependencies>
           </configuration>
         </plugin>
