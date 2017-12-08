@@ -28,7 +28,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGene
 import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
 import org.apache.commons.lang3.ArrayUtils;
@@ -69,7 +68,8 @@ public class MalletLdaTopicModelInferencer
     private File modelLocation;
 
     /**
-     * The annotation type to use as tokens. Default: {@link Token}
+     * The annotation type to use as tokens. Default: 
+     * {@link de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token}
      */
     public final static String PARAM_TYPE_NAME = "typeName";
     @ConfigurationParameter(name = PARAM_TYPE_NAME, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
