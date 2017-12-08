@@ -446,7 +446,7 @@
                         </group>
                         <group>
                             <title>Types</title>
-                            <packages>de.tudarmstadt.ukp.dkpro.core.api.coref.type*:de.tudarmstadt.ukp.dkpro.core.api.anomaly.type*:de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.type*:de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type*:de.tudarmstadt.ukp.dkpro.core.api.metadata.type*:de.tudarmstadt.ukp.dkpro.core.api.ner.type*:de.tudarmstadt.ukp.dkpro.core.api.phonetics.type*:de.tudarmstadt.ukp.dkpro.core.api.segmentation.type*:de.tudarmstadt.ukp.dkpro.core.api.semantics.type*:de.tudarmstadt.ukp.dkpro.core.sentiment.type*:de.tudarmstadt.ukp.dkpro.core.api.structure.type*:de.tudarmstadt.ukp.dkpro.core.api.syntax.type*:de.tudarmstadt.ukp.dkpro.core.api.transform.type</packages>
+                            <packages>de.tudarmstadt.ukp.dkpro.core.api.coref.type*:de.tudarmstadt.ukp.dkpro.core.api.anomaly.type*:de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.type*:de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type*:de.tudarmstadt.ukp.dkpro.core.api.metadata.type*:de.tudarmstadt.ukp.dkpro.core.api.ner.type*:de.tudarmstadt.ukp.dkpro.core.api.phonetics.type*:de.tudarmstadt.ukp.dkpro.core.api.segmentation.type*:de.tudarmstadt.ukp.dkpro.core.api.semantics.type*:de.tudarmstadt.ukp.dkpro.core.api.structure.type*:de.tudarmstadt.ukp.dkpro.core.api.syntax.type*:de.tudarmstadt.ukp.dkpro.core.api.transform.type</packages>
                         </group>
                         <group>
                             <title>Testing</title>
