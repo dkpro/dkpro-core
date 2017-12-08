@@ -146,10 +146,6 @@
               <!-- Dependency on older Trove version required by Mallet 2.0.8-->
               <ignoredUnusedDeclaredDependency>net.sf.trove4j:trove4j</ignoredUnusedDeclaredDependency>
             </ignoredUnusedDeclaredDependencies>
-            <usedDependencies>
-              <!-- This should be a dependency because the type is usually needed, but there is no hard reference -->
-              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</usedDependency>
-            </usedDependencies>
           </configuration>
         </plugin>
       </plugins>
