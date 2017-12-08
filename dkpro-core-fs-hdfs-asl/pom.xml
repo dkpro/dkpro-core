@@ -108,7 +108,6 @@
                -->
               <usedDependency>log4j:log4j</usedDependency>
               <usedDependency>org.apache.hadoop:hadoop-common</usedDependency>
-              <usedDependency>org.apache.hadoop:hadoop-hdfs</usedDependency>
             </usedDependencies>
           </configuration>
         </plugin>
