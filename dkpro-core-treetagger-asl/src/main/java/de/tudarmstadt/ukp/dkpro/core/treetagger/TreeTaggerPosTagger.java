@@ -194,7 +194,7 @@ public class TreeTaggerPosTagger
                     public String getText(Token aObject)
                     {
                         synchronized (aObject.getCAS()) {
-                            return aObject.getCoveredText();
+                            return aObject.getText();
                         }
                     }
                 });

@@ -110,7 +110,7 @@ public class LingPipeNamedEntityRecognizerTrainer extends JCasConsumer_ImplBase 
 
             NamedEntity ne = null;
             for (Token token : tokens) {
-                out.print(token.getCoveredText());
+                out.print(token.getText());
 
                 Collection<NamedEntity> coveredNEs = neIndex.get(token);
                 if (coveredNEs != null && !coveredNEs.isEmpty()) {

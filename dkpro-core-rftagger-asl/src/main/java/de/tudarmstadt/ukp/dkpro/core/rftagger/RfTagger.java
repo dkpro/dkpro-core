@@ -259,7 +259,7 @@ public class RfTagger
                 List<Token> tokens = JCasUtil.selectCovered(aJCas, Token.class,
                         sentence.getBegin(), sentence.getEnd());
                 for (Token token : tokens) {
-                    sb.append(token.getCoveredText() + "\n");
+                    sb.append(token.getText() + "\n");
                 }
 
                 writeInput(sb);

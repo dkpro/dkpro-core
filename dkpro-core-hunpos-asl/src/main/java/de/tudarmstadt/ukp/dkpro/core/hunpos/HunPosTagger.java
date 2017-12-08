@@ -215,8 +215,8 @@ public class HunPosTagger
 
                 // Send full sentence
                 for (Token token : tokens) {
-                    lastOut.append(token.getCoveredText()).append(' ');
-                    out.printf("%s%n", token.getCoveredText());
+                    lastOut.append(token.getText()).append(' ');
+                    out.printf("%s%n", token.getText());
                 }
                 out.printf("%n");
                 out.flush();

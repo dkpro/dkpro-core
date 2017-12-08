@@ -128,7 +128,7 @@ public class OpenNlpLemmatizer
 
             int i = 0;
             for (Token t : tokens) {
-                toks[i] = t.getCoveredText();
+                toks[i] = t.getText();
                 tags[i] = t.getPosValue();
                 i++;
             }

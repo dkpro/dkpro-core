@@ -318,7 +318,7 @@ public class MaltParser
 				Token t = tokens.get(i);
 				
 				int id = i + 1;
-				String form = t.getCoveredText();
+				String form = t.getText();
 				String lemma = UNUSED;
 				String cpostag = UNUSED;
 				String postag = UNUSED;

@@ -112,9 +112,9 @@ public class TreeUtils
             Token wordAnnotation = (Token) root;
 
             // create leaf-node for the tree
-            Tree wordNode = tFact.newLeaf(wordAnnotation.getCoveredText());
+            Tree wordNode = tFact.newLeaf(wordAnnotation.getText());
             ((CoreLabel) wordNode.label()).set(TokenKey.class, wordAnnotation);
-            ((CoreLabel) wordNode.label()).set(TextAnnotation.class, wordAnnotation.getCoveredText());
+            ((CoreLabel) wordNode.label()).set(TextAnnotation.class, wordAnnotation.getText());
 
             // create information about preceding and trailing whitespaces in the leaf node
             StringBuilder preWhitespaces = new StringBuilder();

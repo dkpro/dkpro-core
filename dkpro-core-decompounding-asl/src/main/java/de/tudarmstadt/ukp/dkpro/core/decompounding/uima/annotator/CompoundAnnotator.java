@@ -92,7 +92,7 @@ public class CompoundAnnotator
         throws AnalysisEngineProcessException
     {
         for (Token token : select(aJCas, Token.class)) {
-            final String coveredText = token.getCoveredText();
+            final String coveredText = token.getText();
             DecompoundedWord result;
             result = ranker.highestRank(splitter.split(coveredText));
             if (!result.isCompound()) {

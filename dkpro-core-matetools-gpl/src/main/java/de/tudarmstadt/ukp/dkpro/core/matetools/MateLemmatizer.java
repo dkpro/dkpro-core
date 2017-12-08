@@ -132,7 +132,7 @@ public class MateLemmatizer
             for (int i = 0; i < lemmas.length; i++) {
                 Token token = tokens.get(i);
                 if (lemmas[i] == null) {
-                    lemmas[i] = token.getCoveredText();
+                    lemmas[i] = token.getText();
                 }
                 Lemma lemma = new Lemma(jcas, token.getBegin(), token.getEnd());
                 lemma.setValue(lemmas[i]);

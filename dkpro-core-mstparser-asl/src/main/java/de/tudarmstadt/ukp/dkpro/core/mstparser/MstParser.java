@@ -335,7 +335,7 @@ public class MstParser
 
             List<Token> tokens = selectCovered(jcas, Token.class, sentence);
             for (Token token : tokens) {
-                out.write(token.getCoveredText() + "\t");
+                out.write(token.getText() + "\t");
                 tokencount++;
             }
             out.write("\n");

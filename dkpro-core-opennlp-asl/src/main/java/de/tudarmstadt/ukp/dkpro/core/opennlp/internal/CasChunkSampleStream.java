@@ -75,9 +75,9 @@ public class CasChunkSampleStream
         List<String> preds = new ArrayList<>();
         
         for (Token t : selectCovered(Token.class, sentence)) {
-            words.add(t.getCoveredText());
+            words.add(t.getText());
             if (t.getPos() == null) {
-                throw new IllegalStateException("Token ["+t.getCoveredText()+"] has no POS");
+                throw new IllegalStateException("Token ["+t.getText()+"] has no POS");
             }
             tags.add(t.getPos().getPosValue());
             preds.add(chunkEncoder.encode(t));

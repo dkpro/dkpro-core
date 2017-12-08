@@ -106,7 +106,7 @@ public class Nlp4JLemmatizer
 	        }
 	        
 	        Lemma lemma = new Lemma(aJCas, t.getBegin(), t.getEnd());
-            lemma.setValue(lemmatizer.lemmatize(StringUtils.toSimplifiedForm(t.getCoveredText()),
+            lemma.setValue(lemmatizer.lemmatize(StringUtils.toSimplifiedForm(t.getText()),
                     pos));
             lemma.addToIndexes();
             
