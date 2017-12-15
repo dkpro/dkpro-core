@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -219,7 +220,7 @@ public class BratWriter extends JCasFileWriter_ImplBase
     private int nextAttributeId;
     private int nextPaletteIndex;
     private Map<FeatureStructure, String> spanIdMap;
-    private Map<String,String> spanTypes;
+    private Map<String,LinkedList<String>> spanTypes;
     private BratConfiguration conf;
     
     private Set<String> warnings;
@@ -235,11 +236,18 @@ public class BratWriter extends JCasFileWriter_ImplBase
         spanTypes= new HashMap<>();
         for (String s: spanTypesVals){
         	String[] parts=s.split(":");
-        	if (parts.length>1){
-        		spanTypes.put(parts[0],parts[1]);
+        	LinkedList<String>list;
+        	if (spanTypes.containsKey(parts[0])){
+        		list=spanTypes.get(parts[0]);
         	} else {
-        		spanTypes.put(parts[0],"");
+        		list=new LinkedList<>();
         	}
+        	if (parts.length>1){
+    			list.add(parts[1]);
+    		} else {
+    			list.add("");
+    		}
+        	spanTypes.put(parts[0], list);
         }
         parsedRelationTypes = new HashMap<>();
         for (String rel : relationTypes) {
@@ -328,10 +336,8 @@ public class BratWriter extends JCasFileWriter_ImplBase
 
         // Go through all the annotations but only handle the ones that have no references to
         // other annotations.
-        for (String s: spanTypesVals){
-        	String[] parts=s.split(":");
-            String currentType=parts[0];
-            for (FeatureStructure fs : selectAll(aJCas)) {
+        for (String currentType: spanTypes.keySet()){
+             for (FeatureStructure fs : selectAll(aJCas)) {
                 String typeName=fs.getType().getName();
                 String superType = fs.getCAS().getTypeSystem().getParent(fs.getType()).getName();
                 if (currentType.equalsIgnoreCase(typeName) || currentType.equalsIgnoreCase(superType)) {
@@ -653,53 +659,56 @@ public class BratWriter extends JCasFileWriter_ImplBase
         String type = getBratType(aFS.getType());
         // check if the type has  a value to display, replace the the type by the value
         // do it similar as with declarations that looks for the value
-        String spanData="";
+        LinkedList<String> spanDatas=null;
         String value=type;
         if (spanTypes.containsKey(aFS.getType().getName())) {
-        	spanData=spanTypes.get(aFS.getType().getName());
+        	spanDatas=spanTypes.get(aFS.getType().getName());
         } else  if (spanTypes.containsKey(aFS.getCAS().getTypeSystem().getParent(aFS.getType()).getName() ))  {
-        	spanData=spanTypes.get(aFS.getCAS().getTypeSystem().getParent(aFS.getType()).getName() );
+        	spanDatas=spanTypes.get(aFS.getCAS().getTypeSystem().getParent(aFS.getType()).getName() );
         }
-        try {
-        if (!spanData.equalsIgnoreCase("")){
-        	String [] splits=spanData.split("\\|");
-        	if (splits.length>1){
-        	FeatureStructure currentAnnot = aFS.getFeatureValue(aFS.getType().getFeatureByBaseName(splits[0]));
-        	for (int f=1;f<splits.length-1;f++){     		
-        		currentAnnot = currentAnnot.getFeatureValue(currentAnnot.getType().getFeatureByBaseName(splits[f]));
-        	}
-        	value= currentAnnot.getFeatureValueAsString(currentAnnot.getType().getFeatureByBaseName(splits[splits.length-1]));
-        }  	else {
-        	value=aFS.getFeatureValueAsString(aFS.getType().getFeatureByBaseName(splits[0]));
-        	}
-        } 
-        } catch (Exception E){
-        	System.out.println("failed to get "+ spanData +"from "+ type);
-        	E.printStackTrace();
-        }
-        BratTextAnnotation anno = new BratTextAnnotation(nextTextAnnotationId, value,
-                aFS.getBegin(), aFS.getEnd(), aFS.getCoveredText());
-        nextTextAnnotationId++;
+        for (String spanData : spanDatas){	
+	       try {
+	        	if (!spanData.equalsIgnoreCase("")){
+	        		String [] splits=spanData.split("\\|");
+	        		if (splits.length>1){
+	        			FeatureStructure currentAnnot = aFS.getFeatureValue(aFS.getType().getFeatureByBaseName(splits[0]));
+	        			for (int f=1;f<splits.length-1;f++){     		
+		        		currentAnnot = currentAnnot.getFeatureValue(currentAnnot.getType().getFeatureByBaseName(splits[f]));
+		        	}
+		        	value= currentAnnot.getFeatureValueAsString(currentAnnot.getType().getFeatureByBaseName(splits[splits.length-1]));
+		        }  	else {
+		        	value=aFS.getFeatureValueAsString(aFS.getType().getFeatureByBaseName(splits[0]));
+		        	}
+		        }
+	        } catch (Exception E){
+	        	System.out.println("failed to get "+ spanData +"from "+ type);
+	        	E.printStackTrace();
+	        }  
+ 
+		    BratTextAnnotation anno = new BratTextAnnotation(nextTextAnnotationId, value,
+		            aFS.getBegin(), aFS.getEnd(), aFS.getCoveredText());
+		    nextTextAnnotationId++;
+		
+		    conf.addEntityDecl(superType, value);
+		    if (enableTypeMappings){
+		//       	 conf.addLabelDecl(type,type,type.substring(0, 2),type.substring(0, 1));
+		   	    conf.addLabelDecl(value,value);
+		    }else {
+		     conf.addLabelDecl(anno.getType(), aFS.getType().getShortName(), aFS.getType()
+		            .getShortName().substring(0, 1));
+		    }
+		    if (!conf.hasDrawingDecl(anno.getType())) {
+		        conf.addDrawingDecl(new BratTextAnnotationDrawingDecl(anno.getType(), "black",
+		                palette[nextPaletteIndex % palette.length]));
+		        nextPaletteIndex++;
+		    }
+		    
+		    aDoc.addAnnotation(anno);
 
-        conf.addEntityDecl(superType, value);
-        if (enableTypeMappings){
-//       	 conf.addLabelDecl(type,type,type.substring(0, 2),type.substring(0, 1));
-       	    conf.addLabelDecl(value,value);
-        }else {
-         conf.addLabelDecl(anno.getType(), aFS.getType().getShortName(), aFS.getType()
-                .getShortName().substring(0, 1));
+	        // writeAttributes(anno, aFS);
+	        
+	        spanIdMap.put(aFS, anno.getId());
         }
-        if (!conf.hasDrawingDecl(anno.getType())) {
-            conf.addDrawingDecl(new BratTextAnnotationDrawingDecl(anno.getType(), "black",
-                    palette[nextPaletteIndex % palette.length]));
-            nextPaletteIndex++;
-        }
-        
-        aDoc.addAnnotation(anno);
-        
-        // writeAttributes(anno, aFS);
-        
-        spanIdMap.put(aFS, anno.getId());
     }
 
     private boolean isInternalFeature(Feature aFeature)
