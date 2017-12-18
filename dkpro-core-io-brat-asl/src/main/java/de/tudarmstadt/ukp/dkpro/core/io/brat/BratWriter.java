@@ -19,7 +19,10 @@ package de.tudarmstadt.ukp.dkpro.core.io.brat;
 
 import static org.apache.uima.fit.util.JCasUtil.selectAll;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
@@ -28,6 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -46,7 +50,9 @@ import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.fit.util.FSUtil;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
@@ -103,6 +109,14 @@ public class BratWriter extends JCasFileWriter_ImplBase
     private String filenameSuffix;
     
     /**
+     * Specify the suffix of output files. Default value <code>.ann</code>. If the suffix is not
+     * needed, provide an empty string as value.
+     */
+    public static final String PARAM_HTML_TEMPLANTE = "htmlTemplate";
+    @ConfigurationParameter(name = PARAM_HTML_TEMPLANTE , mandatory = false, defaultValue = "template.html")
+    private String htmlTemplate;
+
+    /**
      * Types that will not be written to the exported file.
      */
     public static final String PARAM_EXCLUDE_TYPES = "excludeTypes";
@@ -111,12 +125,13 @@ public class BratWriter extends JCasFileWriter_ImplBase
     private Set<String> excludeTypes;
 
     /**
-     * Types that are text annotations (aka entities or spans).
+     * Types that are text annotations (aka entities or spans). Each of them includes a 
+     * type (or parent type) after it ":" and element to extract  use pipes to make a chain of elements.
      */
-    public static final String PARAM_TEXT_ANNOTATION_TYPES = "spanTypes";
+    public static final String PARAM_TEXT_ANNOTATION_TYPES = "spanTypesVals";
     @ConfigurationParameter(name = PARAM_TEXT_ANNOTATION_TYPES, mandatory = true, defaultValue = { 
 //            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-//            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+//           "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token:Lemma|Value",
 //            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
 //            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
 //            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem",
@@ -125,7 +140,7 @@ public class BratWriter extends JCasFileWriter_ImplBase
 //            "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg", 
 //            "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred" 
             })
-    private Set<String> spanTypes;
+    private String[] spanTypesVals;
 
     /**
      * Types that are relations. It is mandatory to provide the type name followed by two feature
@@ -205,7 +220,7 @@ public class BratWriter extends JCasFileWriter_ImplBase
     private int nextAttributeId;
     private int nextPaletteIndex;
     private Map<FeatureStructure, String> spanIdMap;
-    
+    private Map<String,LinkedList<String>> spanTypes;
     private BratConfiguration conf;
     
     private Set<String> warnings;
@@ -218,7 +233,22 @@ public class BratWriter extends JCasFileWriter_ImplBase
         conf = new BratConfiguration();
         
         warnings = new LinkedHashSet<String>();
-        
+        spanTypes= new HashMap<>();
+        for (String s: spanTypesVals){
+        	String[] parts=s.split(":");
+        	LinkedList<String>list;
+        	if (spanTypes.containsKey(parts[0])){
+        		list=spanTypes.get(parts[0]);
+        	} else {
+        		list=new LinkedList<>();
+        	}
+        	if (parts.length>1){
+    			list.add(parts[1]);
+    		} else {
+    			list.add("");
+    		}
+        	spanTypes.put(parts[0], list);
+        }
         parsedRelationTypes = new HashMap<>();
         for (String rel : relationTypes) {
             RelationParam p = RelationParam.parse(rel);
@@ -306,32 +336,42 @@ public class BratWriter extends JCasFileWriter_ImplBase
 
         // Go through all the annotations but only handle the ones that have no references to
         // other annotations.
+        for (String currentType: spanTypes.keySet()){
+             for (FeatureStructure fs : selectAll(aJCas)) {
+                String typeName=fs.getType().getName();
+                String superType = fs.getCAS().getTypeSystem().getParent(fs.getType()).getName();
+                if (currentType.equalsIgnoreCase(typeName) || currentType.equalsIgnoreCase(superType)) {
+                    writeTextAnnotation(doc, (AnnotationFS) fs);
+                }          
+        	}
+        }
         for (FeatureStructure fs : selectAll(aJCas)) {
             // Skip document annotation
             if (fs == aJCas.getDocumentAnnotationFs()) {
                 continue;
             }
-            
+            String typeName=fs.getType().getName();
+            String superType = fs.getCAS().getTypeSystem().getParent(fs.getType()).getName();
             // Skip excluded types
-            if (excludeTypes.contains(fs.getType().getName())) {
+            if (excludeTypes.contains(typeName) || excludeTypes.contains(superType) ) {
                 getLogger().debug("Excluding [" + fs.getType().getName() + "]");
                 continue;
             }
             
-            if (spanTypes.contains(fs.getType().getName())) {
-                writeTextAnnotation(doc, (AnnotationFS) fs);
+            if (spanTypes.containsKey(typeName) || spanTypes.containsKey(superType)) {
+               // writeTextAnnotation(doc, (AnnotationFS) fs);
             }
-            else if (parsedRelationTypes.containsKey(fs.getType().getName())) {
+            else if (parsedRelationTypes.containsKey(typeName)|| parsedRelationTypes.containsKey(superType)) {
                 relationFS.add(fs);
             }
-            else if (hasNonPrimitiveFeatures(fs) && (fs instanceof AnnotationFS)) {
+//            else if (hasNonPrimitiveFeatures(fs) && (fs instanceof AnnotationFS)) {
 //            else if (parsedEventTypes.containsKey(fs.getType().getName())) {
-                BratEventAnnotation event = writeEventAnnotation(doc, (AnnotationFS) fs);
-                eventFS.put(event, fs);
-            }
+//                BratEventAnnotation event = writeEventAnnotation(doc, (AnnotationFS) fs);
+//                eventFS.put(event, fs);
+//            }
             else if (fs instanceof AnnotationFS) {
                 warnings.add("Assuming annotation type ["+fs.getType().getName()+"] is span");
-                writeTextAnnotation(doc, (AnnotationFS) fs);
+             // NO    writeTextAnnotation(doc, (AnnotationFS) fs);
             }
             else {
                 warnings.add("Skipping annotation with type ["+fs.getType().getName()+"]");
@@ -358,7 +398,8 @@ public class BratWriter extends JCasFileWriter_ImplBase
         case ".json":
             String template ;
             if (filenameSuffix.equals(".html")) {
-                template = IOUtils.toString(getClass().getResource("html/template.html"));
+            	InputStream it=new FileInputStream(htmlTemplate)  ; 
+                template = IOUtils.toString(it,"UTF-8");
             }
             else {
                 template = "{ \"collData\" : ##COLL-DATA## , \"docData\" : ##DOC-DATA## }";
@@ -562,7 +603,9 @@ public class BratWriter extends JCasFileWriter_ImplBase
     private void writeRelationAnnotation(BratAnnotationDocument aDoc, FeatureStructure aFS)
     {
         RelationParam rel = parsedRelationTypes.get(aFS.getType().getName());
-        
+        if (rel== null ) {// then is the parent type
+        	rel=parsedRelationTypes.get(aFS.getCAS().getTypeSystem().getParent(aFS.getType()).getName());
+        }
         FeatureStructure arg1 = aFS.getFeatureValue(aFS.getType().getFeatureByBaseName(
                 rel.getArg1()));
         FeatureStructure arg2 = aFS.getFeatureValue(aFS.getType().getFeatureByBaseName(
@@ -581,15 +624,25 @@ public class BratWriter extends JCasFileWriter_ImplBase
 
         String superType = getBratType(aFS.getCAS().getTypeSystem().getParent(aFS.getType()));
         String type = getBratType(aFS.getType());
-        
-        BratRelationAnnotation anno = new BratRelationAnnotation(nextRelationAnnotationId,
-                type, rel.getArg1(), arg1Id, rel.getArg2(), arg2Id);
+        String value=type;
+       if (rel.getSubcat()!=""){
+    	   value=aFS.getFeatureValueAsString(aFS.getType().getFeatureByBaseName(rel.getSubcat()));
+   	    }
+       
+       BratRelationAnnotation anno = new BratRelationAnnotation(nextRelationAnnotationId,
+                value, rel.getArg1(), arg1Id, rel.getArg2(), arg2Id);
         nextRelationAnnotationId++;
         
-        conf.addRelationDecl(superType, type, rel.getArg1(), rel.getArg2());
-        
+        conf.addRelationDecl(superType, value, rel.getArg1(), rel.getArg2());
+
+        if (enableTypeMappings){
+//      	 conf.addLabelDecl(type,type,type.substring(0, 2),type.substring(0, 1));
+      	    conf.addLabelDecl(value,value);
+       }else {        
         conf.addLabelDecl(anno.getType(), aFS.getType().getShortName(), aFS.getType()
                 .getShortName().substring(0, 1));
+       }
+     
         
         aDoc.addAnnotation(anno);
         
@@ -604,27 +657,58 @@ public class BratWriter extends JCasFileWriter_ImplBase
     {
         String superType = getBratType(aFS.getCAS().getTypeSystem().getParent(aFS.getType()));
         String type = getBratType(aFS.getType());
-        
-        BratTextAnnotation anno = new BratTextAnnotation(nextTextAnnotationId, type,
-                aFS.getBegin(), aFS.getEnd(), aFS.getCoveredText());
-        nextTextAnnotationId++;
-
-        conf.addEntityDecl(superType, type);
-        
-        conf.addLabelDecl(anno.getType(), aFS.getType().getShortName(), aFS.getType()
-                .getShortName().substring(0, 1));
-
-        if (!conf.hasDrawingDecl(anno.getType())) {
-            conf.addDrawingDecl(new BratTextAnnotationDrawingDecl(anno.getType(), "black",
-                    palette[nextPaletteIndex % palette.length]));
-            nextPaletteIndex++;
+        // check if the type has  a value to display, replace the the type by the value
+        // do it similar as with declarations that looks for the value
+        LinkedList<String> spanDatas=null;
+        String value=type;
+        if (spanTypes.containsKey(aFS.getType().getName())) {
+        	spanDatas=spanTypes.get(aFS.getType().getName());
+        } else  if (spanTypes.containsKey(aFS.getCAS().getTypeSystem().getParent(aFS.getType()).getName() ))  {
+        	spanDatas=spanTypes.get(aFS.getCAS().getTypeSystem().getParent(aFS.getType()).getName() );
         }
-        
-        aDoc.addAnnotation(anno);
-        
-        writeAttributes(anno, aFS);
-        
-        spanIdMap.put(aFS, anno.getId());
+        for (String spanData : spanDatas){	
+	       try {
+	        	if (!spanData.equalsIgnoreCase("")){
+	        		String [] splits=spanData.split("\\|");
+	        		if (splits.length>1){
+	        			FeatureStructure currentAnnot = aFS.getFeatureValue(aFS.getType().getFeatureByBaseName(splits[0]));
+	        			for (int f=1;f<splits.length-1;f++){     		
+		        		currentAnnot = currentAnnot.getFeatureValue(currentAnnot.getType().getFeatureByBaseName(splits[f]));
+		        	}
+		        	value= currentAnnot.getFeatureValueAsString(currentAnnot.getType().getFeatureByBaseName(splits[splits.length-1]));
+		        }  	else {
+		        	value=aFS.getFeatureValueAsString(aFS.getType().getFeatureByBaseName(splits[0]));
+		        	}
+		        }
+	        } catch (Exception E){
+	        	System.out.println("failed to get "+ spanData +"from "+ type);
+	        	E.printStackTrace();
+	        }  
+ 
+		    BratTextAnnotation anno = new BratTextAnnotation(nextTextAnnotationId, value,
+		            aFS.getBegin(), aFS.getEnd(), aFS.getCoveredText());
+		    nextTextAnnotationId++;
+		
+		    conf.addEntityDecl(superType, value);
+		    if (enableTypeMappings){
+		//       	 conf.addLabelDecl(type,type,type.substring(0, 2),type.substring(0, 1));
+		   	    conf.addLabelDecl(value,value);
+		    }else {
+		     conf.addLabelDecl(anno.getType(), aFS.getType().getShortName(), aFS.getType()
+		            .getShortName().substring(0, 1));
+		    }
+		    if (!conf.hasDrawingDecl(anno.getType())) {
+		        conf.addDrawingDecl(new BratTextAnnotationDrawingDecl(anno.getType(), "black",
+		                palette[nextPaletteIndex % palette.length]));
+		        nextPaletteIndex++;
+		    }
+		    
+		    aDoc.addAnnotation(anno);
+
+	        // writeAttributes(anno, aFS);
+	        
+	        spanIdMap.put(aFS, anno.getId());
+        }
     }
 
     private boolean isInternalFeature(Feature aFeature)

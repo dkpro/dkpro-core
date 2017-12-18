@@ -87,7 +87,6 @@
         </repository>
         -->
         <!-- For SNAPSHOTs from the DKPro family -->
-        <!--
         <repository>
             <id>ukp-oss-snapshots</id>
             <url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-snapshots</url>
@@ -98,7 +97,6 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-        -->
     </repositories>
 	<pluginRepositories>
         <!-- For UIMA/uimaFIT RCs -->

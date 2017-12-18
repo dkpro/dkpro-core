@@ -44,11 +44,11 @@ public class BratTextAnnotation
     private final String text;
 
     public BratTextAnnotation(int aId, String aType, int aBegin, int aEnd, String aText)
-    {
-        this("T" + aId, aType, aBegin, aEnd, aText);
+    {    	
+        this("T" + String.format("%04d", aId), aType, aBegin, aEnd, aText);
     }
 
-    public BratTextAnnotation(String aId, String aType, int aBegin, int aEnd, String aText)
+    private BratTextAnnotation(String aId, String aType, int aBegin, int aEnd, String aText)
     {
         super(aId, aType);
         begin = aBegin;
