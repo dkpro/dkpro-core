@@ -28,9 +28,9 @@ licenses:
     url: http://creativecommons.org/licenses/by/4.0/
 
 artifacts:
-  LICENSE.txt:
-    url: "https://creativecommons.org/licenses/by/4.0/legalcode.txt"
-    sha1: 1167f0e28fe2db01e38e883aaf1e749fb09f9ceb
+#  LICENSE.txt:
+#    url: "https://creativecommons.org/licenses/by/4.0/legalcode.txt"
+#    sha1: 1167f0e28fe2db01e38e883aaf1e749fb09f9ceb
   NER-de-dev.tsv:
     url: "https://sites.google.com/site/germeval2014ner/data/NER-de-dev.tsv?attredirects=0&d=1"
     sha1: 70aba5d247f51ec22e0bcc671c7fb325e4ff4277
@@ -48,6 +48,6 @@ roles:
     - NER-de-test.tsv
   development:
     - NER-de-dev.tsv
-  licenses: 
-    - LICENSE.txt
+#  licenses: 
+#    - LICENSE.txt
     
