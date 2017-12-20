@@ -24,9 +24,9 @@ licenses:
     url: http://creativecommons.org/licenses/by-nc/3.0/
     
 artifacts:
-  LICENSE.txt:
-    url: http://creativecommons.org/licenses/by-nc/3.0/legalcode.txt
-    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+#  LICENSE.txt:
+#    url: http://creativecommons.org/licenses/by-nc/3.0/legalcode.txt
+#    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
   data.zip:
     url: http://nl.ijs.si/jos/download/jos100kv2_0.zip
     sha1: 9f330ffd102cc5d5734fdaecbbf67751c84a1339
@@ -36,7 +36,7 @@ artifacts:
       
 roles:
   licenses:
-    - LICENSE.txt
+#    - LICENSE.txt
     - data/00README.txt
   data:
     - data/jos100kv2_0-sl.conll

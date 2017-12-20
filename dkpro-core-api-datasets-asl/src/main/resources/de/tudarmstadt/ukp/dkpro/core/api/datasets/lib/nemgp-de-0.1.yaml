@@ -19,9 +19,9 @@ licenses:
     url: https://creativecommons.org/licenses/by-sa/3.0/
 
 artifacts:
-  LICENSE.txt:
-    url: https://creativecommons.org/licenses/by-sa/3.0/legalcode.txt
-    sha1: fb41626a3005c2b6e14b8b3f5d9d0b19b5faaa51
+#  LICENSE.txt:
+#    url: https://creativecommons.org/licenses/by-sa/3.0/legalcode.txt
+#    sha1: fb41626a3005c2b6e14b8b3f5d9d0b19b5faaa51
   data.zip:
     url: "http://www.thomas-zastrow.de/nlp/nemgp_trainingdata_01.txt.zip"
     sha1: f2a1fd54df9232741a3a1892d1ffb0a4d7205991
@@ -29,7 +29,7 @@ artifacts:
       - action: explode
 
 roles:
-  licenses:
-    - LICENSE.txt
+#  licenses:
+#    - LICENSE.txt
   training:
     - data/nemgp_trainingdata_01.txt

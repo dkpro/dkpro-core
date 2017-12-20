@@ -23,16 +23,16 @@ licenses:
     url: http://creativecommons.org/licenses/by/3.0/
 
 artifacts:
-  LICENSE.txt:
-    url: http://creativecommons.org/licenses/by/3.0/legalcode.txt
-    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+#  LICENSE.txt:
+#    url: http://creativecommons.org/licenses/by/3.0/legalcode.txt
+#    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
   ftb3.1.conllx.gz:
     url: http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/sources/ftb3.1.conllx.gz
     sha1: 7c58064bf9995980cea08e84035c0414adc54f06
 
 roles:
-  licenses:
-    - LICENSE.txt
+#  licenses:
+#    - LICENSE.txt
   data:
     - ftb3.1.conllx.gz
     

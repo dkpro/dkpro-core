@@ -29,9 +29,9 @@ description: |
         it is the version 3.0 which is also used for the TED talks themselves.
 
 artifacts:
-  LICENSE.txt:
-    url: http://creativecommons.org/licenses/by-nc-sa/3.0/legalcode.txt
-    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+#  LICENSE.txt:
+#    url: http://creativecommons.org/licenses/by-nc-sa/3.0/legalcode.txt
+#    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
   data.tar.gz:
     url: http://ahclab.naist.jp/resource/tedtreebank/naist-ntt-ted-treebank-v1.tar.gz
     sha1: 89c6495bd64c4b3e699b4c478b47a0c827ea46ea
@@ -40,8 +40,8 @@ artifacts:
         configuration: { strip: 1, includes: [ "README.md", "en-dep/*.dep" ] } 
           
 roles:
-  licenses:
-    - LICENSE.txt
-    - data/README.md
+#  licenses:
+#    - LICENSE.txt
+#    - data/README.md
   data:
     - "data/en-dep/*.dep"
