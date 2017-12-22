@@ -17,15 +17,15 @@ licenses:
     url: http://creativecommons.org/licenses/by-sa/3.0/
 
 artifacts:
-#  LICENSE.txt:
-#    url: http://creativecommons.org/licenses/by-sa/3.0/legalcode.txt
-#    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+  LICENSE.txt:
+    url: http://creativecommons.org/licenses/by-sa/3.0/legalcode.txt
+    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
   setimes.hr.v1.conllx.gz:
     url: http://nlp.ffzg.hr/data/corpora/setimes.hr.v1.conllx.gz
     sha1: 0faebfe55136692f83dcddd4cf659a8b59655d62
 
 roles:
-#  licenses:
-#    - LICENSE.txt
+  licenses:
+    - LICENSE.txt
   data:
     - setimes.hr.v1.conllx.gz

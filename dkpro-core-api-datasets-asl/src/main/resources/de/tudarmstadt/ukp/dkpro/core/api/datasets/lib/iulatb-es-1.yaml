@@ -29,9 +29,9 @@ licenses:
     url: http://creativecommons.org/licenses/by/3.0/
 
 artifacts:
-#  LICENSE.txt:
-#    url: http://creativecommons.org/licenses/by/3.0/legalcode.txt
-#    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+  LICENSE.txt:
+    url: http://creativecommons.org/licenses/by/3.0/legalcode.txt
+    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
   data.rar:
     url: http://repositori.upf.edu/bitstream/handle/10230/20048/IULA_Spanish_LSP_Treebank.rar?sequence=1
     sha1: 67e2ce3327501605b7c9f0844cc4982070612222
@@ -41,7 +41,7 @@ artifacts:
         configuration: { file: "data/resource_IULA Spanish LSP Treebank.conll.zip" } 
 
 roles:
-#  licenses:
-#    - LICENSE.txt
+  licenses:
+    - LICENSE.txt
   data:
     - "resource_IULA Spanish LSP Treebank/IULA_Spanish_LSP_Treebank.conll"

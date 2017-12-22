@@ -26,12 +26,12 @@ licenses:
     comment: web.hr.conll and news.hr.conll datasets
 
 artifacts:
-#  LICENSE-CC-BY.txt:
-#    url: "https://creativecommons.org/licenses/by/4.0/legalcode.txt"
-#    sha1: 1167f0e28fe2db01e38e883aaf1e749fb09f9ceb
-#  LICENSE-CC-BY-NC-SA.txt:
-#    url: "https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.txt"
-#    sha1: 5d572362228001e9dbc0c8802f49121ceb78ace2
+  LICENSE-CC-BY.txt:
+    url: "https://creativecommons.org/licenses/by/4.0/legalcode.txt"
+    sha1: 1167f0e28fe2db01e38e883aaf1e749fb09f9ceb
+  LICENSE-CC-BY-NC-SA.txt:
+    url: "https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.txt"
+    sha1: 5d572362228001e9dbc0c8802f49121ceb78ace2
   data.zip:
     url: https://github.com/ffnlp/sethr/archive/c50697a81ee588b70328952dd56175da4c298c7c.zip
     sha1: a52d13cfa91589c0d93fe0a90333a4f0e997b7cf
@@ -40,9 +40,9 @@ artifacts:
         configuration: { strip: 1, includes: [ "LICENSE.md", "README.md", "*.hr*.conll" ] }
 
 roles:
-#  licenses:
-#    - LICENSE-CC-BY.txt
-#    - LICENSE-CC-BY-NC-SA.txt
+  licenses:
+    - LICENSE-CC-BY.txt
+    - LICENSE-CC-BY-NC-SA.txt
   training:
     - "data/*.hr.conll"
   testing:
