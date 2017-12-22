@@ -65,6 +65,13 @@ public class LangDetectLanguageIdentifier
     protected String modelLocation;
     private CasConfigurableProviderBase<File> modelProvider;
 
+    /**
+     * The random seed.
+     */
+    public static final String PARAM_SEED = "seed";
+    @ConfigurationParameter(name = PARAM_SEED, mandatory = false)
+    private Long seed;
+    
     @Override
     public void initialize(UimaContext context)
         throws ResourceInitializationException
@@ -92,6 +99,9 @@ public class LangDetectLanguageIdentifier
             {
                 try {
                     DetectorFactory.clear();
+                    if (seed != null) {
+                        DetectorFactory.setSeed(seed);
+                    }
                     File profileFolder = ResourceUtils.getClasspathAsFolder(aUrl.toString(), true);
                     DetectorFactory.loadProfile(profileFolder);
                     return profileFolder;
