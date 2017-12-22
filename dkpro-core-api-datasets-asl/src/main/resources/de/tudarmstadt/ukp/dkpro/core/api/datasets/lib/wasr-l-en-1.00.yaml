@@ -22,9 +22,9 @@ licenses:
     url: https://creativecommons.org/licenses/by-nc-nd/3.0/
 
 artifacts:
-#  LICENSE.txt:
-#    url: http://creativecommons.org/licenses/by-nc-nd/3.0/legalcode.txt
-#    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+  LICENSE.txt:
+    url: http://creativecommons.org/licenses/by-nc-nd/3.0/legalcode.txt
+    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
   part1.tar.bz2:
     url: "https://www.ukp.tu-darmstadt.de/fileadmin/user_upload/Group_UKP/data/semantic_role_resources/WaSR-en_v1_part1.tar.bz2"
     sha1: ef7ccf5cb23da63003bdb19d99b15b0ea2821e55
@@ -36,7 +36,7 @@ artifacts:
       configuration: { file: "part1/WaSR_L_all.7z" } 
 
 roles:
-#  licenses:
-#    - LICENSE.txt
+  licenses:
+    - LICENSE.txt
   data:
     - "WaSR_L_all/WaSR_L_all.tsv"

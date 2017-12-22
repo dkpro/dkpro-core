@@ -19,9 +19,9 @@ licenses:
     url: http://creativecommons.org/licenses/by/3.0/
 
 artifacts:
-#  LICENSE.txt:
-#    url: http://creativecommons.org/licenses/by/3.0/legalcode.txt
-#    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+  LICENSE.txt:
+    url: http://creativecommons.org/licenses/by/3.0/legalcode.txt
+    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
   train-conll.tar.gz:
     url: "http://stp.lingfil.uu.se/~mojgan/train.conll.tar.gz"
     sha1: 6ace1d1132b121b09d0b88f53749d28a59843cd5
@@ -39,8 +39,8 @@ artifacts:
       - action: explode
 
 roles:
-#  licenses:
-#    - LICENSE.txt
+  licenses:
+    - LICENSE.txt
   training:
     - train-conll/train.conll
   testing:

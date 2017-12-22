@@ -20,9 +20,9 @@ licenses:
     comment: Text
 
 artifacts:
-#  LICENSE-CC-BY-SA.txt:
-#    url: https://creativecommons.org/licenses/by-sa/4.0/legalcode.txt
-#    sha1: 8f551a766d1f4556d1a2596365c0fc2191366efa
+  LICENSE-CC-BY-SA.txt:
+    url: https://creativecommons.org/licenses/by-sa/4.0/legalcode.txt
+    sha1: 8f551a766d1f4556d1a2596365c0fc2191366efa
   LICENSE-HZSK-ACA.txt:
     text: |
       HZSK-ACA language resources can be accessed only for research purposes by ACAdemic
@@ -38,7 +38,7 @@ artifacts:
 
 roles:
   licenses:
-#    - LICENSE-CC-BY-SA.txt
+    - LICENSE-CC-BY-SA.txt
     - LICENSE-HZSK-ACA.txt
     - hamburgDepTreebank/README
   data:
