@@ -40,6 +40,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 
 /**
  * Langdetect language identifier based on character n-grams.
+ * 
+ * Due to the way LangDetect is implemented, this component does <b>not</b> support being
+ * instantiated multiple times with different model locations. Only a single model location
+ * can be active at a time over <b>all</b> instances of this component. 
  */
 @ResourceMetaData(name="LangDetect")
 public class LangDetectLanguageIdentifier
@@ -88,7 +92,7 @@ public class LangDetectLanguageIdentifier
             {
                 try {
                     DetectorFactory.clear();
-                    File profileFolder = ResourceUtils.getClasspathAsFolder(aUrl.toString(), false);
+                    File profileFolder = ResourceUtils.getClasspathAsFolder(aUrl.toString(), true);
                     DetectorFactory.loadProfile(profileFolder);
                     return profileFolder;
                 }
