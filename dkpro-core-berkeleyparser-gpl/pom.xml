@@ -23,7 +23,7 @@
   <parent>
     <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
     <artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
-    <version>1.9.0</version>
+    <version>1.9.1-SNAPSHOT</version>
     <relativePath>../dkpro-core-gpl</relativePath>
   </parent>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.berkeleyparser-gpl</artifactId>
@@ -161,7 +161,7 @@
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
-        <version>1.9.0</version>
+        <version>1.9.1-SNAPSHOT</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
