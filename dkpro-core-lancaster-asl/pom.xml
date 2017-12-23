@@ -20,7 +20,7 @@
   <parent>
     <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
     <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-    <version>1.9.1-SNAPSHOT</version>
+    <version>1.9.0</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
   <groupId>org.dkpro.core</groupId>
@@ -92,7 +92,7 @@
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
-        <version>1.9.1-SNAPSHOT</version>
+        <version>1.9.0</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
