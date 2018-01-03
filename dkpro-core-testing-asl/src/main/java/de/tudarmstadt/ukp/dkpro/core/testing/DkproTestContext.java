@@ -23,6 +23,8 @@ import static org.apache.commons.lang3.StringUtils.substringAfterLast;
 import java.io.File;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.uima.cas.impl.CASImpl;
+import org.apache.uima.cas.impl.FeatureStructureImplC;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 
@@ -48,12 +50,15 @@ public class DkproTestContext extends TestWatcher
         methodName = aDescription.getMethodName();
         System.out.println("\n=== " + methodName + " =====================");
         
+        // V2 FS toString needed for CasDumpWriter
+        System.setProperty(FeatureStructureImplC.V2_PRETTY_PRINT, "true");
+        
         // Route logging through SLF4J
         System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Slf4jLogger_impl");
         
         // Enable extra check for illegal updates to indexed features (effective with UIMA 2.7.0
         // and higher)
-        System.setProperty("uima.exception_when_fs_update_corrupts_index", "true");
+        System.setProperty(CASImpl.THROW_EXCEPTION_FS_UPDATES_CORRUPTS, "true");
         
         context.set(this);
     }

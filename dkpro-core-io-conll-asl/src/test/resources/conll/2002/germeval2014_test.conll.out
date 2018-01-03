@@ -2,7 +2,7 @@
 
 -------- View _InitialView begin ----------------------------------
 
-DocumentMetaData:3
+DocumentMetaData
    sofa: _InitialView
    begin: 0
    end: 185
@@ -15,172 +15,172 @@ CAS-Text:
 Aufgrund seiner Initiative fand 2001/2002 in Stuttgart , Braunschweig und Bonn eine große und publizistisch vielbeachtete Troia-Ausstellung statt , „ Troia - Traum und Wirklichkeit “ .
 
 [Aufgrund seiner Initiative fand 2001/2002 in Stuttgart , Braunschweig und Bonn eine große und publizistisch vielbeachtete Troia-Ausstellung statt , „ Troia - Traum und Wirklichkeit “ .]
-Sentence:36
+Sentence
    sofa: _InitialView
    begin: 0
    end: 184
 [Aufgrund]
-Token:4
+Token
    sofa: _InitialView
    begin: 0
    end: 8
 [seiner]
-Token:5
+Token
    sofa: _InitialView
    begin: 9
    end: 15
 [Initiative]
-Token:6
+Token
    sofa: _InitialView
    begin: 16
    end: 26
 [fand]
-Token:7
+Token
    sofa: _InitialView
    begin: 27
    end: 31
 [2001/2002]
-Token:8
+Token
    sofa: _InitialView
    begin: 32
    end: 41
 [in]
-Token:9
+Token
    sofa: _InitialView
    begin: 42
    end: 44
 [Stuttgart]
-NamedEntity:31
+NamedEntity
    sofa: _InitialView
    begin: 45
    end: 54
    value: "LOC"
 [Stuttgart]
-Token:10
+Token
    sofa: _InitialView
    begin: 45
    end: 54
 [,]
-Token:11
+Token
    sofa: _InitialView
    begin: 55
    end: 56
 [Braunschweig]
-NamedEntity:32
+NamedEntity
    sofa: _InitialView
    begin: 57
    end: 69
    value: "LOC"
 [Braunschweig]
-Token:12
+Token
    sofa: _InitialView
    begin: 57
    end: 69
 [und]
-Token:13
+Token
    sofa: _InitialView
    begin: 70
    end: 73
 [Bonn]
-NamedEntity:33
+NamedEntity
    sofa: _InitialView
    begin: 74
    end: 78
    value: "LOC"
 [Bonn]
-Token:14
+Token
    sofa: _InitialView
    begin: 74
    end: 78
 [eine]
-Token:15
+Token
    sofa: _InitialView
    begin: 79
    end: 83
 [große]
-Token:16
+Token
    sofa: _InitialView
    begin: 84
    end: 89
 [und]
-Token:17
+Token
    sofa: _InitialView
    begin: 90
    end: 93
 [publizistisch]
-Token:18
+Token
    sofa: _InitialView
    begin: 94
    end: 107
 [vielbeachtete]
-Token:19
+Token
    sofa: _InitialView
    begin: 108
    end: 121
 [Troia-Ausstellung]
-NamedEntity:34
+NamedEntity
    sofa: _InitialView
    begin: 122
    end: 139
    value: "LOCpart"
 [Troia-Ausstellung]
-Token:20
+Token
    sofa: _InitialView
    begin: 122
    end: 139
 [statt]
-Token:21
+Token
    sofa: _InitialView
    begin: 140
    end: 145
 [,]
-Token:22
+Token
    sofa: _InitialView
    begin: 146
    end: 147
 [„]
-Token:23
+Token
    sofa: _InitialView
    begin: 148
    end: 149
 [Troia - Traum und Wirklichkeit]
-NamedEntity:35
+NamedEntity
    sofa: _InitialView
    begin: 150
    end: 180
    value: "OTH"
 [Troia]
-Token:24
+Token
    sofa: _InitialView
    begin: 150
    end: 155
 [-]
-Token:25
+Token
    sofa: _InitialView
    begin: 156
    end: 157
 [Traum]
-Token:26
+Token
    sofa: _InitialView
    begin: 158
    end: 163
 [und]
-Token:27
+Token
    sofa: _InitialView
    begin: 164
    end: 167
 [Wirklichkeit]
-Token:28
+Token
    sofa: _InitialView
    begin: 168
    end: 180
 [“]
-Token:29
+Token
    sofa: _InitialView
    begin: 181
    end: 182
 [.]
-Token:30
+Token
    sofa: _InitialView
    begin: 183
    end: 184
