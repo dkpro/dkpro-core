@@ -1,4 +1,4 @@
-- version: 1.9.0-SNAPSHOT
+- version: 1.10.0-SNAPSHOT
   status: unstable
   doclinks:
   - title: "User Guide and Reference"
@@ -17,6 +17,31 @@
     url: "https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20(GitHub)/de.tudarmstadt.ukp.dkpro.core$de.tudarmstadt.ukp.dkpro.core.doc-asl/doclinks/8/"
   - title: "Tagset Mapping Reference"
     url: "https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20(GitHub)/de.tudarmstadt.ukp.dkpro.core$de.tudarmstadt.ukp.dkpro.core.doc-asl/doclinks/7/"
+
+- version: 1.9.0
+  date: 2017-12-23
+  status: stable
+  groupId: de.tudarmstadt.ukp.dkpro.core
+  artifactId: de.tudarmstadt.ukp.dkpro.core-asl
+  doclinks:
+  - title: "User Guide and Reference"
+    url: "docs/user-guide.html"
+  - title: "Developer Guide"
+    url: "docs/developer-guide.html"
+  - title: "Component Reference"
+    url: "docs/component-reference.html"
+  - title: "Dataset Reference"
+    url: "docs/dataset-reference.html"
+  - title: "Typesystem Reference"
+    url: "docs/typesystem-reference.html"
+  - title: "Model Reference"
+    url: "docs/model-reference.html"
+  - title: "Format Reference"
+    url: "docs/format-reference.html"
+  - title: "Tagset Reference"
+    url: "docs/tagset-reference.html"
+  - title: "API Documentation"
+    url: "apidocs"
 
 - version: 1.8.0
   date: 2016-06-24

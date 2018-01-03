@@ -1,0 +1,111 @@
+{
+    "name": "NEGRA",
+    "description": "NEGRA phrasal categories\n\nReferences:\n* http://www.coli.uni-saarland.de/projects/sfb378/negra-corpus/knoten.html\n",
+    "language": "de",
+    "tags": [
+        {
+            "tag_name": "AA",
+            "tag_description": "superlative phrase with \"am\""
+        },
+        {
+            "tag_name": "AP",
+            "tag_description": "adjektive phrase"
+        },
+        {
+            "tag_name": "AVP",
+            "tag_description": "adverbial phrase"
+        },
+        {
+            "tag_name": "CAC",
+            "tag_description": "coordinated adposition"
+        },
+        {
+            "tag_name": "CAP",
+            "tag_description": "coordinated adjektive phrase"
+        },
+        {
+            "tag_name": "CAVP",
+            "tag_description": "coordinated adverbial phrase"
+        },
+        {
+            "tag_name": "CCP",
+            "tag_description": "coordinated complementiser"
+        },
+        {
+            "tag_name": "CH",
+            "tag_description": "chunk"
+        },
+        {
+            "tag_name": "CNP",
+            "tag_description": "coordinated noun phrase"
+        },
+        {
+            "tag_name": "CO",
+            "tag_description": "coordination"
+        },
+        {
+            "tag_name": "CPP",
+            "tag_description": "coordinated adpositional phrase"
+        },
+        {
+            "tag_name": "CS",
+            "tag_description": "coordinated sentence"
+        },
+        {
+            "tag_name": "CVP",
+            "tag_description": "coordinated verb phrase (non-finite)"
+        },
+        {
+            "tag_name": "CVZ",
+            "tag_description": "coordinated zu-marked infinitive"
+        },
+        {
+            "tag_name": "DL",
+            "tag_description": "discourse level constituent"
+        },
+        {
+            "tag_name": "ISU",
+            "tag_description": "idiosyncratis unit"
+        },
+        {
+            "tag_name": "MPN",
+            "tag_description": "multi-word proper noun"
+        },
+        {
+            "tag_name": "MTA",
+            "tag_description": "multi-token adjective"
+        },
+        {
+            "tag_name": "NM",
+            "tag_description": "multi-token number"
+        },
+        {
+            "tag_name": "NP",
+            "tag_description": "noun phrase"
+        },
+        {
+            "tag_name": "PP",
+            "tag_description": "adpositional phrase"
+        },
+        {
+            "tag_name": "QL",
+            "tag_description": "quasi-language"
+        },
+        {
+            "tag_name": "ROOT",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S",
+            "tag_description": "sentence"
+        },
+        {
+            "tag_name": "VP",
+            "tag_description": "verb phrase (non-finite)"
+        },
+        {
+            "tag_name": "VZ",
+            "tag_description": "zu-marked infinitive"
+        }
+    ]
+}

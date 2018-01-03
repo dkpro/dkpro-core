@@ -1,0 +1,63 @@
+{
+    "name": "CRATER (TreeTagger)",
+    "description": "Spanish TreeTagger Part-of-Speech Tags\n\nThis looks like a simpified version of the CRATER tagset for Spanish.\nSee: http://arxiv.org/pdf/cmp-lg/9406023.pdf\n\nReferences:\n* http://arxiv.org/pdf/cmp-lg/9406023v1.pdf\n* ftp://ftp.ims.uni-stuttgart.de/pub/corpora/spanish-tagset.txt\n",
+    "language": "es",
+    "tags": [
+        {
+            "tag_name": "ADJ",
+            "tag_description": "Adjectives (mayores, mayor)"
+        },
+        {
+            "tag_name": "ART",
+            "tag_description": "Articles (un, las, la, unas)"
+        },
+        {
+            "tag_name": "CARD",
+            "tag_description": "Cardinals"
+        },
+        {
+            "tag_name": "CC",
+            "tag_description": "Coordinating conjunction (y, o)"
+        },
+        {
+            "tag_name": "CCAD",
+            "tag_description": "Adversative coordinating conjunction (pero)"
+        },
+        {
+            "tag_name": "CCNEG",
+            "tag_description": "Negative coordinating conjunction (ni)"
+        },
+        {
+            "tag_name": "CSUBF",
+            "tag_description": "Subordinating conjunction that introduces finite clauses (apenas)"
+        },
+        {
+            "tag_name": "CSUBI",
+            "tag_description": "Subordinating conjunction that introduces infinite clauses (al)"
+        },
+        {
+            "tag_name": "CSUBX",
+            "tag_description": "Subordinating conjunction underspecified for subord-type (aunque)"
+        },
+        {
+            "tag_name": "ITJN",
+            "tag_description": "Interjection (oh, ja)"
+        },
+        {
+            "tag_name": "NP",
+            "tag_description": "Proper nouns"
+        },
+        {
+            "tag_name": "ORD",
+            "tag_description": "Ordinals (primer, primeras, primera)"
+        },
+        {
+            "tag_name": "PNC",
+            "tag_description": "Unclassified word"
+        },
+        {
+            "tag_name": "SYM",
+            "tag_description": "Symbols"
+        }
+    ]
+}
