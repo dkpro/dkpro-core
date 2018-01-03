@@ -87,13 +87,14 @@ public class StanfordCoreferenceResolverTest
                             + "organisers told Jiji news agency .");
 
             String[][] ref = { 
-                    { "Jiji news agency" }, 
-                    { "We" },
-                    { "Miyako Fuji" },
+                    { "Miyako Fuji , 20" },
                     { "one of the rally 's organisers" },
+                    { "this war" },
+                    { "Miyako Fuji , 20 , one of the rally 's organisers" }, 
+                    { "We" }, 
+                    { "Miyako Fuji", "20" },
                     { "Jiji" }, 
-                    { "Miyako Fuji , 20 , one of the rally 's organisers" },
-                    { "this war" } };
+                    { "Jiji news agency" } };
 
             for (LogRecord r : records) {
                 assertFalse(r.getMessage().contains("Cannot find node in dependency for word"));
@@ -131,12 +132,11 @@ public class StanfordCoreferenceResolverTest
         JCas jcas = runTest("en", "'Let's go! I want to see the Don', he said.");
 
         String[][] ref = {
-                { "'", "'s" },
-                { "I" },
+                { "'s", "I" },
                 { "the Don'", "he" } };
 
         String[] pennTree = { 
-                "(ROOT (S (NP (POS ')) (VP (VBD Let) (NP (PRP 's)) (VP (VB go))) (. !)))", 
+                "(ROOT (S (`` ') (VP (VB Let) (S (NP (PRP 's)) (VP (VB go)))) (. !)))", 
                 "(ROOT (S (S (NP (PRP I)) (VP (VBP want) (S (VP (TO to) (VP (VB see) (NP (DT the) "
                 + "(NNPS Don) (POS '))))))) (, ,) (NP (PRP he)) (VP (VBD said)) (. .)))"
         };

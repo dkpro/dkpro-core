@@ -21,14 +21,14 @@
   <parent>
     <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
     <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-    <version>1.9.0-SNAPSHOT</version>
+    <version>1.9.1-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core ASL - OpenNLP (v ${opennlp.version}) (ASL)</name>
   <properties>
-    <opennlp.version>1.8.2</opennlp.version>
+    <opennlp.version>1.8.4</opennlp.version>
   </properties>
   <dependencies>
     <dependency>

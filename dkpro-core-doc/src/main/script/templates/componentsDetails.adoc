@@ -3,9 +3,9 @@ import de.tudarmstadt.ukp.dkpro.core.doc.Util;
 import static groovy.json.StringEscapeUtils.escapeJava;
 
 engines
-    .sort { it.key }
+    .sort { it.value.spec?.metaData?.name ?: it.key }
     .groupBy {it.value.role }
-    .sort { it.key != 'Other' ? it.key : 'Z' }
+    .sort { it.key != 'Other' ? (it.value.spec?.metaData?.name ?: it.key) : 'Z' }
     .each { group -> 
 %>
 === ${group.key}
@@ -33,7 +33,7 @@ include::{include-dir}sectionIntro${fileSuffix}.adoc[]
 <% group.value.each { 
 def engine = it.value; %>
 [[engine-${ it.key }]]
-==== ${it.value.spec.metaData.name}
+==== ${it.value.spec?.metaData?.name ?: it.key}
 
 ****
 [horizontal, role="small"]

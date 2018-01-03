@@ -41,6 +41,7 @@ def renderModel(model) {
 
 ****
 [horizontal, role="small"]
+Group{nbsp}ID::    ${model.@groupId}
 Artifact{nbsp}ID:: ${model.@artifactId}
 Version::          ${model.@version}
 Engine::           ${getEngineLink(model)}

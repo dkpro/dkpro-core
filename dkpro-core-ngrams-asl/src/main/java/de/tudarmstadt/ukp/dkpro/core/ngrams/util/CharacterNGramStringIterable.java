@@ -21,12 +21,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Creates a character NGram iterable from a list of tokens.
- * 
- *
  */
 public class CharacterNGramStringIterable
     implements Iterable<String>

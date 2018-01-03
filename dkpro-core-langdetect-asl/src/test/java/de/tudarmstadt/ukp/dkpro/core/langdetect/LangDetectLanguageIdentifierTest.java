@@ -61,7 +61,8 @@ public class LangDetectLanguageIdentifierTest
     private JCas runTest(String text)
         throws Exception
     {
-        AnalysisEngine engine = createEngine(LangDetectLanguageIdentifier.class);
+        AnalysisEngine engine = createEngine(LangDetectLanguageIdentifier.class,
+                LangDetectLanguageIdentifier.PARAM_SEED, 1234l);
 
         JCas aJCas = TestRunner.runTest(engine, "en", text);
 

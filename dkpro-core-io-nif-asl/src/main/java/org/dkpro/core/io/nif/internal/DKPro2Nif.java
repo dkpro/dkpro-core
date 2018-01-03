@@ -140,7 +140,7 @@ public class DKPro2Nif
                         uimaToken.getEnd());
                 Individual nifWord = m.createIndividual(wordUri, tWord);
                 nifWord.addProperty(pReferenceContext, context);
-                nifWord.addLiteral(pAnchorOf, uimaToken.getCoveredText());
+                nifWord.addLiteral(pAnchorOf, uimaToken.getText());
                 nifWord.addLiteral(pBeginIndex, 
                         m.createTypedLiteral(uimaToken.getBegin(), XSDnonNegativeInteger));
                 nifWord.addLiteral(pEndIndex,

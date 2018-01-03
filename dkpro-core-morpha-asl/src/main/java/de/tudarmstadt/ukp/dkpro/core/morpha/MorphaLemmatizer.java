@@ -79,14 +79,14 @@ public class MorphaLemmatizer
                 String lemmaString;
                 if (readPos && (t.getPos() != null)) {
                     lemmaString = edu.washington.cs.knowitall.morpha.MorphaStemmer.stemToken(
-                            t.getCoveredText(), t.getPos().getPosValue());
+                            t.getText(), t.getPos().getPosValue());
                 }
                 else {
-                    lemmaString = edu.washington.cs.knowitall.morpha.MorphaStemmer.stemToken(t
-                            .getCoveredText());
+                    lemmaString = edu.washington.cs.knowitall.morpha.MorphaStemmer
+                            .stemToken(t.getText());
                 }
                 if (lemmaString == null) {
-                    lemmaString = t.getCoveredText();
+                    lemmaString = t.getText();
                 }
                 l.setValue(lemmaString);
 

@@ -17,7 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.hunpos;
 
-import static org.apache.commons.lang.StringUtils.repeat;
+import static org.apache.commons.lang3.StringUtils.repeat;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;

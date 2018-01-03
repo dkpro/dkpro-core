@@ -118,7 +118,7 @@ public class JazzyChecker
     			SpellingAnomaly.class, SuggestedAction.class);
 
 		for (Token t : select(jcas, Token.class)) {
-			String tokenText = t.getCoveredText();
+			String tokenText = t.getText();
 			if (tokenText.matches("[\\.\\?\\!]")) {
 				continue;
 			}

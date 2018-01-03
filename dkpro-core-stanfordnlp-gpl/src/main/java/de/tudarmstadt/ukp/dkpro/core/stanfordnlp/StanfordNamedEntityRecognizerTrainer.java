@@ -18,24 +18,15 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
-import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.apache.uima.fit.util.JCasUtil.selectCovered;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-
+import de.tudarmstadt.ukp.dkpro.core.api.io.IobEncoder;
+import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import edu.stanford.nlp.ie.crf.CRFClassifier;
+import edu.stanford.nlp.ling.CoreLabel;
+import edu.stanford.nlp.sequences.SeqClassifierFlags;
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -49,24 +40,34 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.IobEncoder;
-import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import edu.stanford.nlp.ie.crf.CRFClassifier;
-import edu.stanford.nlp.ling.CoreLabel;
-import edu.stanford.nlp.sequences.SeqClassifierFlags;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.regex.Pattern;
+
+import static org.apache.uima.fit.util.JCasUtil.indexCovered;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 /**
  * Train a NER model for Stanford CoreNLP Named Entity Recognizer.
  */
 @MimeTypeCapability(MimeTypes.APPLICATION_X_STANFORDNLP_NER)
-@ResourceMetaData(name="CoreNLP Named Entity Recognizer Trainer")
+@ResourceMetaData(name = "CoreNLP Named Entity Recognizer Trainer")
 public class StanfordNamedEntityRecognizerTrainer
-    extends JCasConsumer_ImplBase
-{
+        extends JCasConsumer_ImplBase {
 
     /**
      * Location of the target model file.
@@ -83,6 +84,14 @@ public class StanfordNamedEntityRecognizerTrainer
     public static final String PARAM_PROPERTIES_LOCATION = "propertiesFile";
     @ConfigurationParameter(name = PARAM_PROPERTIES_LOCATION, mandatory = false)
     private File propertiesFile;
+
+    /**
+     * Regex to filter the {@link de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity#getValue() named entity} by
+     * type.
+     */
+    public static final String PARAM_ACCEPTED_TAGS_REGEX = ComponentParameters.PARAM_ACCEPTED_TAGS_REGEX;
+    @ConfigurationParameter(name = PARAM_ACCEPTED_TAGS_REGEX, mandatory = false)
+    protected String acceptedTagsRegex;
 
     /*
      * Label set to use for training. Options: IOB1, IOB2, IOE1, IOE2, SBIEO, IO, BIO, BILOU,
@@ -107,15 +116,13 @@ public class StanfordNamedEntityRecognizerTrainer
 
     @Override
     public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
-    {
+            throws ResourceInitializationException {
         super.initialize(aContext);
     }
 
     @Override
     public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
-    {
+            throws AnalysisEngineProcessException {
         if (tempData == null) {
             try {
                 tempData = File.createTempFile("dkpro-stanford-ner-trainer", ".tsv");
@@ -123,8 +130,7 @@ public class StanfordNamedEntityRecognizerTrainer
                         .info(String.format("Created temp file: %s", tempData.getAbsolutePath()));
                 out = new PrintWriter(new OutputStreamWriter(new FileOutputStream(tempData),
                         StandardCharsets.UTF_8));
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 throw new AnalysisEngineProcessException(e);
             }
         }
@@ -135,16 +141,14 @@ public class StanfordNamedEntityRecognizerTrainer
     /*
      * Taken from Conll2003Writer and modified for the task at hand.
      */
-    private void convert(JCas aJCas, PrintWriter aOut)
-    {
+    private void convert(JCas aJCas, PrintWriter aOut) {
         Type neType = JCasUtil.getType(aJCas, NamedEntity.class);
         Feature neValue = neType.getFeatureByBaseName("value");
 
         // Named Entities
         IobEncoder neEncoder = new IobEncoder(aJCas.getCas(), neType, neValue, false);
 
-        Map<Sentence, Collection<NamedEntity>> idx = JCasUtil.indexCovered(aJCas, Sentence.class,
-                NamedEntity.class);
+        Map<Sentence, Collection<NamedEntity>> idx = getNamedEntityIndex(aJCas);
 
         Collection<NamedEntity> coveredNEs;
         for (Sentence sentence : select(aJCas, Sentence.class)) {
@@ -179,16 +183,39 @@ public class StanfordNamedEntityRecognizerTrainer
         }
     }
 
-    private static final class Row
-    {
+    private Map<Sentence, Collection<NamedEntity>> getNamedEntityIndex(JCas aJCas) {
+        Map<Sentence, Collection<NamedEntity>> idx = indexCovered(aJCas, Sentence.class, NamedEntity.class);
+
+        if (acceptedTagsRegex != null) {
+            Pattern pattern = Pattern.compile(acceptedTagsRegex);
+
+            Map<Sentence, Collection<NamedEntity>> filteredIdx = new HashMap<>();
+            for (Sentence sentence : select(aJCas, Sentence.class)) {
+                Collection<NamedEntity> nes = new ArrayList<>();
+
+                for (NamedEntity ne : idx.get(sentence)) {
+                    if (pattern.matcher(ne.getValue()).matches()) {
+                        nes.add(ne);
+                    }
+                }
+
+                filteredIdx.put(sentence, nes);
+            }
+
+            return filteredIdx;
+        }
+
+        return idx;
+    }
+
+    private static final class Row {
         Token token;
         String ne;
     }
 
     @Override
     public void collectionProcessComplete()
-        throws AnalysisEngineProcessException
-    {
+            throws AnalysisEngineProcessException {
         IOUtils.closeQuietly(out);
 
         // Load user-provided configuration
@@ -225,15 +252,13 @@ public class StanfordNamedEntityRecognizerTrainer
             getLogger().info(String.format("Serializing classifier to target location: %s",
                     targetLocation.getCanonicalPath()));
             crf.serializeClassifier(targetLocation.getAbsolutePath());
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new AnalysisEngineProcessException(e);
         }
     }
 
     @Override
-    public void destroy()
-    {
+    public void destroy() {
         super.destroy();
 
         // Clean up temporary data file

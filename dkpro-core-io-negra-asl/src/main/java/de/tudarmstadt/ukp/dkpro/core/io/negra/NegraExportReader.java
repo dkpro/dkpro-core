@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.io.negra;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
-import static org.apache.commons.lang.StringUtils.startsWith;
+import static org.apache.commons.lang3.StringUtils.startsWith;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import java.io.BufferedReader;
 import java.io.File;
@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Type;

@@ -21,7 +21,6 @@ package de.tudarmstadt.ukp.dkpro.core.berkeleyparser;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
-import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.apache.uima.util.Level.INFO;
 
 import java.io.IOException;
@@ -30,9 +29,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
 import java.util.zip.GZIPInputStream;
 
-import org.apache.commons.lang.mutable.MutableInt;
+import org.apache.commons.lang3.mutable.MutableInt;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -260,7 +260,7 @@ public class BerkeleyParser
 
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
-            List<String> tokenText = toText(tokens);
+            List<String> tokenText = tokens.stream().map(t -> t.getText()).collect(Collectors.toList());
             
             List<String> posTags = null;
             if (readPos) {

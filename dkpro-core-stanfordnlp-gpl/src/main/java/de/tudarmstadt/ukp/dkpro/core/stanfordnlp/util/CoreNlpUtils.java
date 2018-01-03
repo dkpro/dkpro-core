@@ -34,7 +34,7 @@ public class CoreNlpUtils
         CoreLabel t = new CoreLabel();
         
         t.setOriginalText(aToken.getCoveredText());
-        t.setWord(aToken.getCoveredText());
+        t.setWord(aToken.getText());
         t.setBeginPosition(aToken.getBegin());
         t.setEndPosition(aToken.getEnd());
         

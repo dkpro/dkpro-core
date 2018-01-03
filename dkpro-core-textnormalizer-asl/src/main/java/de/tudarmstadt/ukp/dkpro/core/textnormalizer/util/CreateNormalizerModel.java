@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.textnormalizer.util;
 import java.io.File;
 import java.util.Iterator;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;

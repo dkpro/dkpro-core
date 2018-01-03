@@ -26,7 +26,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Properties;
 
-import org.apache.commons.lang.reflect.FieldUtils;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -350,7 +350,7 @@ public class CoreNlpParser
             // Loading gzipped files from URL is broken in CoreNLP
             // https://github.com/stanfordnlp/CoreNLP/issues/94
             if (modelFile.startsWith("jar:") && modelFile.endsWith(".gz")) {
-                modelFile = org.apache.commons.lang.StringUtils.substringAfter(modelFile, "!/");
+                modelFile = org.apache.commons.lang3.StringUtils.substringAfter(modelFile, "!/");
             }
             
             Properties coreNlpProps = new Properties();

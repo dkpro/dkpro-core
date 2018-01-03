@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
@@ -43,11 +43,10 @@ import de.tudarmstadt.ukp.dkpro.core.ngrams.util.NGramStringIterable;
 /**
  * Language detector based on n-gram frequency counts, e.g. as provided by Web1T
  */
-@ResourceMetaData(name="Simple Language Identifier (Token N-Gram-based)")
+@ResourceMetaData(name="Web1T Language Detector")
 public class LanguageDetectorWeb1T
     extends JCasAnnotator_ImplBase
 {
-
     /**
      * An array of external resources of frequency providers (one for each language that should be detected). 
      */

@@ -19,6 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.lbj;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -32,6 +33,7 @@ import edu.illinois.cs.cogcomp.nlp.tokenizer.Tokenizer.Tokenization;
 /**
  * Illinois segmenter.
  */
+@ResourceMetaData(name="Illinois CCG Segmenter")
 @TypeCapability(outputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })

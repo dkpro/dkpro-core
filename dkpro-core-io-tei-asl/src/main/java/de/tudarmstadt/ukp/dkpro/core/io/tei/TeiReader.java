@@ -34,7 +34,7 @@ import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_U;
 import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_WORD;
 import static java.util.Arrays.asList;
 import static org.apache.commons.io.IOUtils.closeQuietly;
-import static org.apache.commons.lang.StringUtils.isNotBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,7 +45,7 @@ import java.util.Stack;
 import java.util.zip.GZIPInputStream;
 
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;

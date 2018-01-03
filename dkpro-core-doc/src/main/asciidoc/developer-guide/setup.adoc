@@ -65,7 +65,7 @@ C:/Program Files/Java/jdk1.8.0_144/jre/bin/server/jvm.dll
 * *Groovy:* Find the applicable update site here: `https://github.com/groovy/groovy-eclipse/wiki`
 ** Make sure to install at least the Groovy Eclipse Feature, the Groovy Compiler (2.4), and the
    Groovy M2E Integration.
-* *Checkstyle Eclipse plugin:* Update site: `http://eclipse-cs.sourceforge.net`
+* *Checkstyle Eclipse plugin:* Update site: `http://eclipse-cs.sf.net/update`
 * *Checkstyle configuration plugin for M2Eclipse:* Update site: 
   `http://m2e-code-quality.github.com/m2e-code-quality/site/latest/`
 

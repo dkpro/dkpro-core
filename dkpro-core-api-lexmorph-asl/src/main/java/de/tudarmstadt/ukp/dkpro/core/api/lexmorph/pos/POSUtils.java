@@ -17,13 +17,12 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 
 public final class POSUtils
 {
-    
     public static final String POS_TYPE_PREFIX = "POS_";
     
     private POSUtils() {

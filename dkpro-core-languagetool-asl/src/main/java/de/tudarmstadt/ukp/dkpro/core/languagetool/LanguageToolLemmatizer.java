@@ -135,11 +135,11 @@ public class LanguageToolLemmatizer
 					
 					// Sanitize if we have a lemma by now
 					if (sanitize && l != null) {
-					    l = sanitizeLemma(token.getCoveredText(), l);
+					    l = sanitizeLemma(token.getText(), l);
 					}
 					
 					if (l == null) {
-					    l = token.getCoveredText();
+					    l = token.getText();
 					}
 
 					// Create the annotation

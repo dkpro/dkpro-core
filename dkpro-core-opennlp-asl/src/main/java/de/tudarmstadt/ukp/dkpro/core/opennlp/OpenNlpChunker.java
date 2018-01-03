@@ -170,12 +170,11 @@ public class OpenNlpChunker
 			String[] tokenTags = new String[tokens.size()];
 			int i = 0;
 			for (Token t : tokens) {
-			    tokenTexts[i] = t.getCoveredText();
+			    tokenTexts[i] = t.getText();
                 if (t.getPos() == null || t.getPos().getPosValue() == null) {
                     throw new IllegalStateException("Every token must have a POS tag.");
                 }
 			    tokenTags[i] = t.getPos().getPosValue();
-                //System.out.printf("%s %s %n", t.getCoveredText(), t.getPos().getPosValue());
 			    i++;
 			}
 

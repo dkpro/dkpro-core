@@ -28,7 +28,6 @@ import org.apache.uima.jcas.JCas;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import opennlp.tools.lemmatizer.LemmaSample;
-import opennlp.tools.util.StringUtil;
 
 public class CasLemmaSampleStream
     extends CasSampleStreamBase<LemmaSample>
@@ -63,15 +62,15 @@ public class CasLemmaSampleStream
         List<String> lemmas = new ArrayList<>();
         
         for (Token t : selectCovered(Token.class, sentence)) {
-            words.add(t.getCoveredText());
+            words.add(t.getText());
             
             if (t.getPos() == null) {
-                throw new IllegalStateException("Token ["+t.getCoveredText()+"] has no POS");
+                throw new IllegalStateException("Token ["+t.getText()+"] has no POS");
             }
             tags.add(t.getPos().getPosValue());
             
             if (t.getLemma() == null) {
-                throw new IllegalStateException("Token ["+t.getCoveredText()+"] has no lemma");
+                throw new IllegalStateException("Token ["+t.getText()+"] has no lemma");
             }
             lemmas.add(t.getLemma().getValue());
         }

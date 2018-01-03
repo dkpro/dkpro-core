@@ -132,7 +132,7 @@ public class StanfordPosTaggerTrainer
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             Collection<Token> tokens = index.get(sentence);
             for (Token token : tokens) {
-                out.printf("%s\t%s%n", token.getCoveredText(), token.getPos().getPosValue());
+                out.printf("%s\t%s%n", token.getText(), token.getPos().getPosValue());
             }
             out.println();
         }

@@ -41,7 +41,7 @@ import mstparser.DependencyPipe2O;
 import mstparser.ParserOptions;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -335,7 +335,7 @@ public class MstParser
 
             List<Token> tokens = selectCovered(jcas, Token.class, sentence);
             for (Token token : tokens) {
-                out.write(token.getCoveredText() + "\t");
+                out.write(token.getText() + "\t");
                 tokencount++;
             }
             out.write("\n");

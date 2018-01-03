@@ -21,7 +21,7 @@
   <parent>
     <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
     <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-    <version>1.9.0-SNAPSHOT</version>
+    <version>1.9.1-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.io.annis-asl</artifactId>
@@ -41,8 +41,8 @@
       <artifactId>commons-io</artifactId>
     </dependency>
     <dependency>
-      <groupId>commons-lang</groupId>
-      <artifactId>commons-lang</artifactId>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
     </dependency>
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
