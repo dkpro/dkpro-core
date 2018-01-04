@@ -2,7 +2,7 @@
 
 -------- View _InitialView begin ----------------------------------
 
-DocumentMetaData:1
+DocumentMetaData
    sofa: _InitialView
    begin: 0
    end: 635
@@ -29,4223 +29,4223 @@ Yeah.
 erm, first  twelve weeks pregnant so should I mark at the bottom when she types .
 Erm  this one.
 [Ah there we are,.]
-Sentence:19
+Sentence
    sofa: _InitialView
    begin: 1
    end: 18
 [Ah]
-POS_INTJ:4
+POS_INTJ
    sofa: _InitialView
    begin: 1
    end: 3
    PosValue: "ITJ"
    coarseValue: "INTJ"
 [Ah]
-Lemma:5
+Lemma
    sofa: _InitialView
    begin: 1
    end: 3
    value: "ah"
 [Ah]
-Token:3
+Token
    sofa: _InitialView
    begin: 1
    end: 3
-   lemma: Lemma:5
+   lemma: Lemma
       sofa: _InitialView
       begin: 1
       end: 3
       value: "ah"
-   pos: POS_INTJ:4
+   pos: POS_INTJ
       sofa: _InitialView
       begin: 1
       end: 3
       PosValue: "ITJ"
       coarseValue: "INTJ"
 [there]
-POS_ADV:7
+POS_ADV
    sofa: _InitialView
    begin: 4
    end: 9
    PosValue: "AV0"
    coarseValue: "ADV"
 [there]
-Lemma:8
+Lemma
    sofa: _InitialView
    begin: 4
    end: 9
    value: "there"
 [there]
-Token:6
+Token
    sofa: _InitialView
    begin: 4
    end: 9
-   lemma: Lemma:8
+   lemma: Lemma
       sofa: _InitialView
       begin: 4
       end: 9
       value: "there"
-   pos: POS_ADV:7
+   pos: POS_ADV
       sofa: _InitialView
       begin: 4
       end: 9
       PosValue: "AV0"
       coarseValue: "ADV"
 [we]
-POS_PRON:10
+POS_PRON
    sofa: _InitialView
    begin: 10
    end: 12
    PosValue: "PNP"
    coarseValue: "PRON"
 [we]
-Lemma:11
+Lemma
    sofa: _InitialView
    begin: 10
    end: 12
    value: "we"
 [we]
-Token:9
+Token
    sofa: _InitialView
    begin: 10
    end: 12
-   lemma: Lemma:11
+   lemma: Lemma
       sofa: _InitialView
       begin: 10
       end: 12
       value: "we"
-   pos: POS_PRON:10
+   pos: POS_PRON
       sofa: _InitialView
       begin: 10
       end: 12
       PosValue: "PNP"
       coarseValue: "PRON"
 [are]
-POS_VERB:13
+POS_VERB
    sofa: _InitialView
    begin: 13
    end: 16
    PosValue: "VBB"
    coarseValue: "VERB"
 [are]
-Lemma:14
+Lemma
    sofa: _InitialView
    begin: 13
    end: 16
    value: "be"
 [are]
-Token:12
+Token
    sofa: _InitialView
    begin: 13
    end: 16
-   lemma: Lemma:14
+   lemma: Lemma
       sofa: _InitialView
       begin: 13
       end: 16
       value: "be"
-   pos: POS_VERB:13
+   pos: POS_VERB
       sofa: _InitialView
       begin: 13
       end: 16
       PosValue: "VBB"
       coarseValue: "VERB"
 [,]
-POS_PUNCT:16
+POS_PUNCT
    sofa: _InitialView
    begin: 16
    end: 17
    PosValue: "PUN"
    coarseValue: "PUNCT"
 [,]
-Token:15
+Token
    sofa: _InitialView
    begin: 16
    end: 17
-   pos: POS_PUNCT:16
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 16
       end: 17
       PosValue: "PUN"
       coarseValue: "PUNCT"
 [.]
-POS_PUNCT:18
+POS_PUNCT
    sofa: _InitialView
    begin: 17
    end: 18
    PosValue: "PUN"
    coarseValue: "PUNCT"
 [.]
-Token:17
+Token
    sofa: _InitialView
    begin: 17
    end: 18
-   pos: POS_PUNCT:18
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 17
       end: 18
       PosValue: "PUN"
       coarseValue: "PUNCT"
 [Right  abdominal wound, she's a wee bit  confused.]
-Sentence:51
+Sentence
    sofa: _InitialView
    begin: 19
    end: 69
 [Right]
-POS_ADV:21
+POS_ADV
    sofa: _InitialView
    begin: 19
    end: 24
    PosValue: "AV0"
    coarseValue: "ADV"
 [Right]
-Lemma:22
+Lemma
    sofa: _InitialView
    begin: 19
    end: 24
    value: "right"
 [Right]
-Token:20
+Token
    sofa: _InitialView
    begin: 19
    end: 24
-   lemma: Lemma:22
+   lemma: Lemma
       sofa: _InitialView
       begin: 19
       end: 24
       value: "right"
-   pos: POS_ADV:21
+   pos: POS_ADV
       sofa: _InitialView
       begin: 19
       end: 24
       PosValue: "AV0"
       coarseValue: "ADV"
 [abdominal]
-POS_ADJ:24
+POS_ADJ
    sofa: _InitialView
    begin: 26
    end: 35
    PosValue: "AJ0"
    coarseValue: "ADJ"
 [abdominal]
-Lemma:25
+Lemma
    sofa: _InitialView
    begin: 26
    end: 35
    value: "abdominal"
 [abdominal]
-Token:23
+Token
    sofa: _InitialView
    begin: 26
    end: 35
-   lemma: Lemma:25
+   lemma: Lemma
       sofa: _InitialView
       begin: 26
       end: 35
       value: "abdominal"
-   pos: POS_ADJ:24
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 26
       end: 35
       PosValue: "AJ0"
       coarseValue: "ADJ"
 [wound]
-POS_NOUN:27
+POS_NOUN
    sofa: _InitialView
    begin: 36
    end: 41
    PosValue: "NN1"
    coarseValue: "NOUN"
 [wound]
-Lemma:28
+Lemma
    sofa: _InitialView
    begin: 36
    end: 41
    value: "wound"
 [wound]
-Token:26
+Token
    sofa: _InitialView
    begin: 36
    end: 41
-   lemma: Lemma:28
+   lemma: Lemma
       sofa: _InitialView
       begin: 36
       end: 41
       value: "wound"
-   pos: POS_NOUN:27
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 36
       end: 41
       PosValue: "NN1"
       coarseValue: "NOUN"
 [,]
-POS_PUNCT:30
+POS_PUNCT
    sofa: _InitialView
    begin: 41
    end: 42
    PosValue: "PUN"
    coarseValue: "PUNCT"
 [,]
-Token:29
+Token
    sofa: _InitialView
    begin: 41
    end: 42
-   pos: POS_PUNCT:30
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 41
       end: 42
       PosValue: "PUN"
       coarseValue: "PUNCT"
 [she]
-POS_PRON:32
+POS_PRON
    sofa: _InitialView
    begin: 43
    end: 46
    PosValue: "PNP"
    coarseValue: "PRON"
 [she]
-Lemma:33
+Lemma
    sofa: _InitialView
    begin: 43
    end: 46
    value: "she"
 [she]
-Token:31
+Token
    sofa: _InitialView
    begin: 43
    end: 46
-   lemma: Lemma:33
+   lemma: Lemma
       sofa: _InitialView
       begin: 43
       end: 46
       value: "she"
-   pos: POS_PRON:32
+   pos: POS_PRON
       sofa: _InitialView
       begin: 43
       end: 46
       PosValue: "PNP"
       coarseValue: "PRON"
 ['s]
-POS_VERB:35
+POS_VERB
    sofa: _InitialView
    begin: 46
    end: 48
    PosValue: "VBZ"
    coarseValue: "VERB"
 ['s]
-Lemma:36
+Lemma
    sofa: _InitialView
    begin: 46
    end: 48
    value: "be"
 ['s]
-Token:34
+Token
    sofa: _InitialView
    begin: 46
    end: 48
-   lemma: Lemma:36
+   lemma: Lemma
       sofa: _InitialView
       begin: 46
       end: 48
       value: "be"
-   pos: POS_VERB:35
+   pos: POS_VERB
       sofa: _InitialView
       begin: 46
       end: 48
       PosValue: "VBZ"
       coarseValue: "VERB"
 [a]
-POS_DET:38
+POS_DET
    sofa: _InitialView
    begin: 49
    end: 50
    PosValue: "AT0"
    coarseValue: "DET"
 [a]
-Lemma:39
+Lemma
    sofa: _InitialView
    begin: 49
    end: 50
    value: "a"
 [a]
-Token:37
+Token
    sofa: _InitialView
    begin: 49
    end: 50
-   lemma: Lemma:39
+   lemma: Lemma
       sofa: _InitialView
       begin: 49
       end: 50
       value: "a"
-   pos: POS_DET:38
+   pos: POS_DET
       sofa: _InitialView
       begin: 49
       end: 50
       PosValue: "AT0"
       coarseValue: "DET"
 [wee]
-POS_ADJ:41
+POS_ADJ
    sofa: _InitialView
    begin: 51
    end: 54
    PosValue: "AJ0-NN1"
    coarseValue: "ADJ"
 [wee]
-Lemma:42
+Lemma
    sofa: _InitialView
    begin: 51
    end: 54
    value: "wee"
 [wee]
-Token:40
+Token
    sofa: _InitialView
    begin: 51
    end: 54
-   lemma: Lemma:42
+   lemma: Lemma
       sofa: _InitialView
       begin: 51
       end: 54
       value: "wee"
-   pos: POS_ADJ:41
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 51
       end: 54
       PosValue: "AJ0-NN1"
       coarseValue: "ADJ"
 [bit]
-POS_NOUN:44
+POS_NOUN
    sofa: _InitialView
    begin: 55
    end: 58
    PosValue: "NN1"
    coarseValue: "NOUN"
 [bit]
-Lemma:45
+Lemma
    sofa: _InitialView
    begin: 55
    end: 58
    value: "bit"
 [bit]
-Token:43
+Token
    sofa: _InitialView
    begin: 55
    end: 58
-   lemma: Lemma:45
+   lemma: Lemma
       sofa: _InitialView
       begin: 55
       end: 58
       value: "bit"
-   pos: POS_NOUN:44
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 55
       end: 58
       PosValue: "NN1"
       coarseValue: "NOUN"
 [confused]
-POS_VERB:47
+POS_VERB
    sofa: _InitialView
    begin: 60
    end: 68
    PosValue: "VVN-AJ0"
    coarseValue: "VERB"
 [confused]
-Lemma:48
+Lemma
    sofa: _InitialView
    begin: 60
    end: 68
    value: "confuse"
 [confused]
-Token:46
+Token
    sofa: _InitialView
    begin: 60
    end: 68
-   lemma: Lemma:48
+   lemma: Lemma
       sofa: _InitialView
       begin: 60
       end: 68
       value: "confuse"
-   pos: POS_VERB:47
+   pos: POS_VERB
       sofa: _InitialView
       begin: 60
       end: 68
       PosValue: "VVN-AJ0"
       coarseValue: "VERB"
 [.]
-POS_PUNCT:50
+POS_PUNCT
    sofa: _InitialView
    begin: 68
    end: 69
    PosValue: "PUN"
    coarseValue: "PUNCT"
 [.]
-Token:49
+Token
    sofa: _InitialView
    begin: 68
    end: 69
-   pos: POS_PUNCT:50
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 68
       end: 69
       PosValue: "PUN"
       coarseValue: "PUNCT"
 [She didn't bother to tell me that she'd only got  to call you, right?]
-Sentence:104
+Sentence
    sofa: _InitialView
    begin: 70
    end: 139
 [She]
-POS_PRON:53
+POS_PRON
    sofa: _InitialView
    begin: 70
    end: 73
    PosValue: "PNP"
    coarseValue: "PRON"
 [She]
-Lemma:54
+Lemma
    sofa: _InitialView
    begin: 70
    end: 73
    value: "she"
 [She]
-Token:52
+Token
    sofa: _InitialView
    begin: 70
    end: 73
-   lemma: Lemma:54
+   lemma: Lemma
       sofa: _InitialView
       begin: 70
       end: 73
       value: "she"
-   pos: POS_PRON:53
+   pos: POS_PRON
       sofa: _InitialView
       begin: 70
       end: 73
       PosValue: "PNP"
       coarseValue: "PRON"
 [did]
-POS_VERB:56
+POS_VERB
    sofa: _InitialView
    begin: 74
    end: 77
    PosValue: "VDD"
    coarseValue: "VERB"
 [did]
-Lemma:57
+Lemma
    sofa: _InitialView
    begin: 74
    end: 77
    value: "do"
 [did]
-Token:55
+Token
    sofa: _InitialView
    begin: 74
    end: 77
-   lemma: Lemma:57
+   lemma: Lemma
       sofa: _InitialView
       begin: 74
       end: 77
       value: "do"
-   pos: POS_VERB:56
+   pos: POS_VERB
       sofa: _InitialView
       begin: 74
       end: 77
       PosValue: "VDD"
       coarseValue: "VERB"
 [n't]
-POS_PART:59
+POS_PART
    sofa: _InitialView
    begin: 77
    end: 80
    PosValue: "XX0"
    coarseValue: "PART"
 [n't]
-Lemma:60
+Lemma
    sofa: _InitialView
    begin: 77
    end: 80
    value: "not"
 [n't]
-Token:58
+Token
    sofa: _InitialView
    begin: 77
    end: 80
-   lemma: Lemma:60
+   lemma: Lemma
       sofa: _InitialView
       begin: 77
       end: 80
       value: "not"
-   pos: POS_PART:59
+   pos: POS_PART
       sofa: _InitialView
       begin: 77
       end: 80
       PosValue: "XX0"
       coarseValue: "PART"
 [bother]
-POS_VERB:62
+POS_VERB
    sofa: _InitialView
    begin: 81
    end: 87
    PosValue: "VVI"
    coarseValue: "VERB"
 [bother]
-Lemma:63
+Lemma
    sofa: _InitialView
    begin: 81
    end: 87
    value: "bother"
 [bother]
-Token:61
+Token
    sofa: _InitialView
    begin: 81
    end: 87
-   lemma: Lemma:63
+   lemma: Lemma
       sofa: _InitialView
       begin: 81
       end: 87
       value: "bother"
-   pos: POS_VERB:62
+   pos: POS_VERB
       sofa: _InitialView
       begin: 81
       end: 87
       PosValue: "VVI"
       coarseValue: "VERB"
 [to]
-POS_X:65
+POS_X
    sofa: _InitialView
    begin: 88
    end: 90
    PosValue: "TO0"
    coarseValue: "X"
 [to]
-Lemma:66
+Lemma
    sofa: _InitialView
    begin: 88
    end: 90
    value: "to"
 [to]
-Token:64
+Token
    sofa: _InitialView
    begin: 88
    end: 90
-   lemma: Lemma:66
+   lemma: Lemma
       sofa: _InitialView
       begin: 88
       end: 90
       value: "to"
-   pos: POS_X:65
+   pos: POS_X
       sofa: _InitialView
       begin: 88
       end: 90
       PosValue: "TO0"
       coarseValue: "X"
 [tell]
-POS_VERB:68
+POS_VERB
    sofa: _InitialView
    begin: 91
    end: 95
    PosValue: "VVI"
    coarseValue: "VERB"
 [tell]
-Lemma:69
+Lemma
    sofa: _InitialView
    begin: 91
    end: 95
    value: "tell"
 [tell]
-Token:67
+Token
    sofa: _InitialView
    begin: 91
    end: 95
-   lemma: Lemma:69
+   lemma: Lemma
       sofa: _InitialView
       begin: 91
       end: 95
       value: "tell"
-   pos: POS_VERB:68
+   pos: POS_VERB
       sofa: _InitialView
       begin: 91
       end: 95
       PosValue: "VVI"
       coarseValue: "VERB"
 [me]
-POS_PRON:71
+POS_PRON
    sofa: _InitialView
    begin: 96
    end: 98
    PosValue: "PNP"
    coarseValue: "PRON"
 [me]
-Lemma:72
+Lemma
    sofa: _InitialView
    begin: 96
    end: 98
    value: "i"
 [me]
-Token:70
+Token
    sofa: _InitialView
    begin: 96
    end: 98
-   lemma: Lemma:72
+   lemma: Lemma
       sofa: _InitialView
       begin: 96
       end: 98
       value: "i"
-   pos: POS_PRON:71
+   pos: POS_PRON
       sofa: _InitialView
       begin: 96
       end: 98
       PosValue: "PNP"
       coarseValue: "PRON"
 [that]
-POS_SCONJ:74
+POS_SCONJ
    sofa: _InitialView
    begin: 99
    end: 103
    PosValue: "CJT"
    coarseValue: "SCONJ"
 [that]
-Lemma:75
+Lemma
    sofa: _InitialView
    begin: 99
    end: 103
    value: "that"
 [that]
-Token:73
+Token
    sofa: _InitialView
    begin: 99
    end: 103
-   lemma: Lemma:75
+   lemma: Lemma
       sofa: _InitialView
       begin: 99
       end: 103
       value: "that"
-   pos: POS_SCONJ:74
+   pos: POS_SCONJ
       sofa: _InitialView
       begin: 99
       end: 103
       PosValue: "CJT"
       coarseValue: "SCONJ"
 [she]
-POS_PRON:77
+POS_PRON
    sofa: _InitialView
    begin: 104
    end: 107
    PosValue: "PNP"
    coarseValue: "PRON"
 [she]
-Lemma:78
+Lemma
    sofa: _InitialView
    begin: 104
    end: 107
    value: "she"
 [she]
-Token:76
+Token
    sofa: _InitialView
    begin: 104
    end: 107
-   lemma: Lemma:78
+   lemma: Lemma
       sofa: _InitialView
       begin: 104
       end: 107
       value: "she"
-   pos: POS_PRON:77
+   pos: POS_PRON
       sofa: _InitialView
       begin: 104
       end: 107
       PosValue: "PNP"
       coarseValue: "PRON"
 ['d]
-POS_VERB:80
+POS_VERB
    sofa: _InitialView
    begin: 107
    end: 109
    PosValue: "VHD"
    coarseValue: "VERB"
 ['d]
-Lemma:81
+Lemma
    sofa: _InitialView
    begin: 107
    end: 109
    value: "have"
 ['d]
-Token:79
+Token
    sofa: _InitialView
    begin: 107
    end: 109
-   lemma: Lemma:81
+   lemma: Lemma
       sofa: _InitialView
       begin: 107
       end: 109
       value: "have"
-   pos: POS_VERB:80
+   pos: POS_VERB
       sofa: _InitialView
       begin: 107
       end: 109
       PosValue: "VHD"
       coarseValue: "VERB"
 [only]
-POS_ADV:83
+POS_ADV
    sofa: _InitialView
    begin: 110
    end: 114
    PosValue: "AV0"
    coarseValue: "ADV"
 [only]
-Lemma:84
+Lemma
    sofa: _InitialView
    begin: 110
    end: 114
    value: "only"
 [only]
-Token:82
+Token
    sofa: _InitialView
    begin: 110
    end: 114
-   lemma: Lemma:84
+   lemma: Lemma
       sofa: _InitialView
       begin: 110
       end: 114
       value: "only"
-   pos: POS_ADV:83
+   pos: POS_ADV
       sofa: _InitialView
       begin: 110
       end: 114
       PosValue: "AV0"
       coarseValue: "ADV"
 [got]
-POS_VERB:86
+POS_VERB
    sofa: _InitialView
    begin: 115
    end: 118
    PosValue: "VVN"
    coarseValue: "VERB"
 [got]
-Lemma:87
+Lemma
    sofa: _InitialView
    begin: 115
    end: 118
    value: "get"
 [got]
-Token:85
+Token
    sofa: _InitialView
    begin: 115
    end: 118
-   lemma: Lemma:87
+   lemma: Lemma
       sofa: _InitialView
       begin: 115
       end: 118
       value: "get"
-   pos: POS_VERB:86
+   pos: POS_VERB
       sofa: _InitialView
       begin: 115
       end: 118
       PosValue: "VVN"
       coarseValue: "VERB"
 [to]
-POS_X:89
+POS_X
    sofa: _InitialView
    begin: 120
    end: 122
    PosValue: "TO0"
    coarseValue: "X"
 [to]
-Lemma:90
+Lemma
    sofa: _InitialView
    begin: 120
    end: 122
    value: "to"
 [to]
-Token:88
+Token
    sofa: _InitialView
    begin: 120
    end: 122
-   lemma: Lemma:90
+   lemma: Lemma
       sofa: _InitialView
       begin: 120
       end: 122
       value: "to"
-   pos: POS_X:89
+   pos: POS_X
       sofa: _InitialView
       begin: 120
       end: 122
       PosValue: "TO0"
       coarseValue: "X"
 [call]
-POS_VERB:92
+POS_VERB
    sofa: _InitialView
    begin: 123
    end: 127
    PosValue: "VVI"
    coarseValue: "VERB"
 [call]
-Lemma:93
+Lemma
    sofa: _InitialView
    begin: 123
    end: 127
    value: "call"
 [call]
-Token:91
+Token
    sofa: _InitialView
    begin: 123
    end: 127
-   lemma: Lemma:93
+   lemma: Lemma
       sofa: _InitialView
       begin: 123
       end: 127
       value: "call"
-   pos: POS_VERB:92
+   pos: POS_VERB
       sofa: _InitialView
       begin: 123
       end: 127
       PosValue: "VVI"
       coarseValue: "VERB"
 [you]
-POS_PRON:95
+POS_PRON
    sofa: _InitialView
    begin: 128
    end: 131
    PosValue: "PNP"
    coarseValue: "PRON"
 [you]
-Lemma:96
+Lemma
    sofa: _InitialView
    begin: 128
    end: 131
    value: "you"
 [you]
-Token:94
+Token
    sofa: _InitialView
    begin: 128
    end: 131
-   lemma: Lemma:96
+   lemma: Lemma
       sofa: _InitialView
       begin: 128
       end: 131
       value: "you"
-   pos: POS_PRON:95
+   pos: POS_PRON
       sofa: _InitialView
       begin: 128
       end: 131
       PosValue: "PNP"
       coarseValue: "PRON"
 [,]
-POS_PUNCT:98
+POS_PUNCT
    sofa: _InitialView
    begin: 131
    end: 132
    PosValue: "PUN"
    coarseValue: "PUNCT"
 [,]
-Token:97
+Token
    sofa: _InitialView
    begin: 131
    end: 132
-   pos: POS_PUNCT:98
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 131
       end: 132
       PosValue: "PUN"
       coarseValue: "PUNCT"
 [right]
-POS_ADV:100
+POS_ADV
    sofa: _InitialView
    begin: 133
    end: 138
    PosValue: "AV0"
    coarseValue: "ADV"
 [right]
-Lemma:101
+Lemma
    sofa: _InitialView
    begin: 133
    end: 138
    value: "right"
 [right]
-Token:99
+Token
    sofa: _InitialView
    begin: 133
    end: 138
-   lemma: Lemma:101
+   lemma: Lemma
       sofa: _InitialView
       begin: 133
       end: 138
       value: "right"
-   pos: POS_ADV:100
+   pos: POS_ADV
       sofa: _InitialView
       begin: 133
       end: 138
       PosValue: "AV0"
       coarseValue: "ADV"
 [?]
-POS_PUNCT:103
+POS_PUNCT
    sofa: _InitialView
    begin: 138
    end: 139
    PosValue: "PUN"
    coarseValue: "PUNCT"
 [?]
-Token:102
+Token
    sofa: _InitialView
    begin: 138
    end: 139
-   pos: POS_PUNCT:103
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 138
       end: 139
       PosValue: "PUN"
       coarseValue: "PUNCT"
 [Erm she wasn't in her nightdress but she only dressed herself, she said  ]
-Sentence:149
+Sentence
    sofa: _InitialView
    begin: 140
    end: 213
 [Erm]
-POS_X:106
+POS_X
    sofa: _InitialView
    begin: 140
    end: 143
    PosValue: "UNC"
    coarseValue: "X"
 [Erm]
-Lemma:107
+Lemma
    sofa: _InitialView
    begin: 140
    end: 143
    value: "erm"
 [Erm]
-Token:105
+Token
    sofa: _InitialView
    begin: 140
    end: 143
-   lemma: Lemma:107
+   lemma: Lemma
       sofa: _InitialView
       begin: 140
       end: 143
       value: "erm"
-   pos: POS_X:106
+   pos: POS_X
       sofa: _InitialView
       begin: 140
       end: 143
       PosValue: "UNC"
       coarseValue: "X"
 [she]
-POS_PRON:109
+POS_PRON
    sofa: _InitialView
    begin: 144
    end: 147
    PosValue: "PNP"
    coarseValue: "PRON"
 [she]
-Lemma:110
+Lemma
    sofa: _InitialView
    begin: 144
    end: 147
    value: "she"
 [she]
-Token:108
+Token
    sofa: _InitialView
    begin: 144
    end: 147
-   lemma: Lemma:110
+   lemma: Lemma
       sofa: _InitialView
       begin: 144
       end: 147
       value: "she"
-   pos: POS_PRON:109
+   pos: POS_PRON
       sofa: _InitialView
       begin: 144
       end: 147
       PosValue: "PNP"
       coarseValue: "PRON"
 [was]
-POS_VERB:112
+POS_VERB
    sofa: _InitialView
    begin: 148
    end: 151
    PosValue: "VBD"
    coarseValue: "VERB"
 [was]
-Lemma:113
+Lemma
    sofa: _InitialView
    begin: 148
    end: 151
    value: "be"
 [was]
-Token:111
+Token
    sofa: _InitialView
    begin: 148
    end: 151
-   lemma: Lemma:113
+   lemma: Lemma
       sofa: _InitialView
       begin: 148
       end: 151
       value: "be"
-   pos: POS_VERB:112
+   pos: POS_VERB
       sofa: _InitialView
       begin: 148
       end: 151
       PosValue: "VBD"
       coarseValue: "VERB"
 [n't]
-POS_PART:115
+POS_PART
    sofa: _InitialView
    begin: 151
    end: 154
    PosValue: "XX0"
    coarseValue: "PART"
 [n't]
-Lemma:116
+Lemma
    sofa: _InitialView
    begin: 151
    end: 154
    value: "not"
 [n't]
-Token:114
+Token
    sofa: _InitialView
    begin: 151
    end: 154
-   lemma: Lemma:116
+   lemma: Lemma
       sofa: _InitialView
       begin: 151
       end: 154
       value: "not"
-   pos: POS_PART:115
+   pos: POS_PART
       sofa: _InitialView
       begin: 151
       end: 154
       PosValue: "XX0"
       coarseValue: "PART"
 [in]
-POS_ADP:118
+POS_ADP
    sofa: _InitialView
    begin: 155
    end: 157
    PosValue: "PRP"
    coarseValue: "ADP"
 [in]
-Lemma:119
+Lemma
    sofa: _InitialView
    begin: 155
    end: 157
    value: "in"
 [in]
-Token:117
+Token
    sofa: _InitialView
    begin: 155
    end: 157
-   lemma: Lemma:119
+   lemma: Lemma
       sofa: _InitialView
       begin: 155
       end: 157
       value: "in"
-   pos: POS_ADP:118
+   pos: POS_ADP
       sofa: _InitialView
       begin: 155
       end: 157
       PosValue: "PRP"
       coarseValue: "ADP"
 [her]
-POS_DET:121
+POS_DET
    sofa: _InitialView
    begin: 158
    end: 161
    PosValue: "DPS"
    coarseValue: "DET"
 [her]
-Lemma:122
+Lemma
    sofa: _InitialView
    begin: 158
    end: 161
    value: "she"
 [her]
-Token:120
+Token
    sofa: _InitialView
    begin: 158
    end: 161
-   lemma: Lemma:122
+   lemma: Lemma
       sofa: _InitialView
       begin: 158
       end: 161
       value: "she"
-   pos: POS_DET:121
+   pos: POS_DET
       sofa: _InitialView
       begin: 158
       end: 161
       PosValue: "DPS"
       coarseValue: "DET"
 [nightdress]
-POS_NOUN:124
+POS_NOUN
    sofa: _InitialView
    begin: 162
    end: 172
    PosValue: "NN1"
    coarseValue: "NOUN"
 [nightdress]
-Lemma:125
+Lemma
    sofa: _InitialView
    begin: 162
    end: 172
    value: "nightdress"
 [nightdress]
-Token:123
+Token
    sofa: _InitialView
    begin: 162
    end: 172
-   lemma: Lemma:125
+   lemma: Lemma
       sofa: _InitialView
       begin: 162
       end: 172
       value: "nightdress"
-   pos: POS_NOUN:124
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 162
       end: 172
       PosValue: "NN1"
       coarseValue: "NOUN"
 [but]
-POS_CONJ:127
+POS_CONJ
    sofa: _InitialView
    begin: 173
    end: 176
    PosValue: "CJC"
    coarseValue: "CONJ"
 [but]
-Lemma:128
+Lemma
    sofa: _InitialView
    begin: 173
    end: 176
    value: "but"
 [but]
-Token:126
+Token
    sofa: _InitialView
    begin: 173
    end: 176
-   lemma: Lemma:128
+   lemma: Lemma
       sofa: _InitialView
       begin: 173
       end: 176
       value: "but"
-   pos: POS_CONJ:127
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 173
       end: 176
       PosValue: "CJC"
       coarseValue: "CONJ"
 [she]
-POS_PRON:130
+POS_PRON
    sofa: _InitialView
    begin: 177
    end: 180
    PosValue: "PNP"
    coarseValue: "PRON"
 [she]
-Lemma:131
+Lemma
    sofa: _InitialView
    begin: 177
    end: 180
    value: "she"
 [she]
-Token:129
+Token
    sofa: _InitialView
    begin: 177
    end: 180
-   lemma: Lemma:131
+   lemma: Lemma
       sofa: _InitialView
       begin: 177
       end: 180
       value: "she"
-   pos: POS_PRON:130
+   pos: POS_PRON
       sofa: _InitialView
       begin: 177
       end: 180
       PosValue: "PNP"
       coarseValue: "PRON"
 [only]
-POS_ADV:133
+POS_ADV
    sofa: _InitialView
    begin: 181
    end: 185
    PosValue: "AV0"
    coarseValue: "ADV"
 [only]
-Lemma:134
+Lemma
    sofa: _InitialView
    begin: 181
    end: 185
    value: "only"
 [only]
-Token:132
+Token
    sofa: _InitialView
    begin: 181
    end: 185
-   lemma: Lemma:134
+   lemma: Lemma
       sofa: _InitialView
       begin: 181
       end: 185
       value: "only"
-   pos: POS_ADV:133
+   pos: POS_ADV
       sofa: _InitialView
       begin: 181
       end: 185
       PosValue: "AV0"
       coarseValue: "ADV"
 [dressed]
-POS_VERB:136
+POS_VERB
    sofa: _InitialView
    begin: 186
    end: 193
    PosValue: "VVD"
    coarseValue: "VERB"
 [dressed]
-Lemma:137
+Lemma
    sofa: _InitialView
    begin: 186
    end: 193
    value: "dress"
 [dressed]
-Token:135
+Token
    sofa: _InitialView
    begin: 186
    end: 193
-   lemma: Lemma:137
+   lemma: Lemma
       sofa: _InitialView
       begin: 186
       end: 193
       value: "dress"
-   pos: POS_VERB:136
+   pos: POS_VERB
       sofa: _InitialView
       begin: 186
       end: 193
       PosValue: "VVD"
       coarseValue: "VERB"
 [herself]
-POS_X:139
+POS_X
    sofa: _InitialView
    begin: 194
    end: 201
    PosValue: "PNX"
    coarseValue: "X"
 [herself]
-Lemma:140
+Lemma
    sofa: _InitialView
    begin: 194
    end: 201
    value: "herself"
 [herself]
-Token:138
+Token
    sofa: _InitialView
    begin: 194
    end: 201
-   lemma: Lemma:140
+   lemma: Lemma
       sofa: _InitialView
       begin: 194
       end: 201
       value: "herself"
-   pos: POS_X:139
+   pos: POS_X
       sofa: _InitialView
       begin: 194
       end: 201
       PosValue: "PNX"
       coarseValue: "X"
 [,]
-POS_PUNCT:142
+POS_PUNCT
    sofa: _InitialView
    begin: 201
    end: 202
    PosValue: "PUN"
    coarseValue: "PUNCT"
 [,]
-Token:141
+Token
    sofa: _InitialView
    begin: 201
    end: 202
-   pos: POS_PUNCT:142
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 201
       end: 202
       PosValue: "PUN"
       coarseValue: "PUNCT"
 [she]
-POS_PRON:144
+POS_PRON
    sofa: _InitialView
    begin: 203
    end: 206
    PosValue: "PNP"
    coarseValue: "PRON"
 [she]
-Lemma:145
+Lemma
    sofa: _InitialView
    begin: 203
    end: 206
    value: "she"
 [she]
-Token:143
+Token
    sofa: _InitialView
    begin: 203
    end: 206
-   lemma: Lemma:145
+   lemma: Lemma
       sofa: _InitialView
       begin: 203
       end: 206
       value: "she"
-   pos: POS_PRON:144
+   pos: POS_PRON
       sofa: _InitialView
       begin: 203
       end: 206
       PosValue: "PNP"
       coarseValue: "PRON"
 [said]
-POS_VERB:147
+POS_VERB
    sofa: _InitialView
    begin: 207
    end: 211
    PosValue: "VVD"
    coarseValue: "VERB"
 [said]
-Lemma:148
+Lemma
    sofa: _InitialView
    begin: 207
    end: 211
    value: "say"
 [said]
-Token:146
+Token
    sofa: _InitialView
    begin: 207
    end: 211
-   lemma: Lemma:148
+   lemma: Lemma
       sofa: _InitialView
       begin: 207
       end: 211
       value: "say"
-   pos: POS_VERB:147
+   pos: POS_VERB
       sofa: _InitialView
       begin: 207
       end: 211
       PosValue: "VVD"
       coarseValue: "VERB"
 [And you  ]
-Sentence:156
+Sentence
    sofa: _InitialView
    begin: 214
    end: 223
 [And]
-POS_CONJ:151
+POS_CONJ
    sofa: _InitialView
    begin: 214
    end: 217
    PosValue: "CJC"
    coarseValue: "CONJ"
 [And]
-Lemma:152
+Lemma
    sofa: _InitialView
    begin: 214
    end: 217
    value: "and"
 [And]
-Token:150
+Token
    sofa: _InitialView
    begin: 214
    end: 217
-   lemma: Lemma:152
+   lemma: Lemma
       sofa: _InitialView
       begin: 214
       end: 217
       value: "and"
-   pos: POS_CONJ:151
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 214
       end: 217
       PosValue: "CJC"
       coarseValue: "CONJ"
 [you]
-POS_PRON:154
+POS_PRON
    sofa: _InitialView
    begin: 218
    end: 221
    PosValue: "PNP"
    coarseValue: "PRON"
 [you]
-Lemma:155
+Lemma
    sofa: _InitialView
    begin: 218
    end: 221
    value: "you"
 [you]
-Token:153
+Token
    sofa: _InitialView
    begin: 218
    end: 221
-   lemma: Lemma:155
+   lemma: Lemma
       sofa: _InitialView
       begin: 218
       end: 221
       value: "you"
-   pos: POS_PRON:154
+   pos: POS_PRON
       sofa: _InitialView
       begin: 218
       end: 221
       PosValue: "PNP"
       coarseValue: "PRON"
 [She said she went to buy something  herself, she phoned the clinic and the clinic .]
-Sentence:206
+Sentence
    sofa: _InitialView
    begin: 224
    end: 307
 [She]
-POS_PRON:158
+POS_PRON
    sofa: _InitialView
    begin: 224
    end: 227
    PosValue: "PNP"
    coarseValue: "PRON"
 [She]
-Lemma:159
+Lemma
    sofa: _InitialView
    begin: 224
    end: 227
    value: "she"
 [She]
-Token:157
+Token
    sofa: _InitialView
    begin: 224
    end: 227
-   lemma: Lemma:159
+   lemma: Lemma
       sofa: _InitialView
       begin: 224
       end: 227
       value: "she"
-   pos: POS_PRON:158
+   pos: POS_PRON
       sofa: _InitialView
       begin: 224
       end: 227
       PosValue: "PNP"
       coarseValue: "PRON"
 [said]
-POS_VERB:161
+POS_VERB
    sofa: _InitialView
    begin: 228
    end: 232
    PosValue: "VVD"
    coarseValue: "VERB"
 [said]
-Lemma:162
+Lemma
    sofa: _InitialView
    begin: 228
    end: 232
    value: "say"
 [said]
-Token:160
+Token
    sofa: _InitialView
    begin: 228
    end: 232
-   lemma: Lemma:162
+   lemma: Lemma
       sofa: _InitialView
       begin: 228
       end: 232
       value: "say"
-   pos: POS_VERB:161
+   pos: POS_VERB
       sofa: _InitialView
       begin: 228
       end: 232
       PosValue: "VVD"
       coarseValue: "VERB"
 [she]
-POS_PRON:164
+POS_PRON
    sofa: _InitialView
    begin: 233
    end: 236
    PosValue: "PNP"
    coarseValue: "PRON"
 [she]
-Lemma:165
+Lemma
    sofa: _InitialView
    begin: 233
    end: 236
    value: "she"
 [she]
-Token:163
+Token
    sofa: _InitialView
    begin: 233
    end: 236
-   lemma: Lemma:165
+   lemma: Lemma
       sofa: _InitialView
       begin: 233
       end: 236
       value: "she"
-   pos: POS_PRON:164
+   pos: POS_PRON
       sofa: _InitialView
       begin: 233
       end: 236
       PosValue: "PNP"
       coarseValue: "PRON"
 [went]
-POS_VERB:167
+POS_VERB
    sofa: _InitialView
    begin: 237
    end: 241
    PosValue: "VVD"
    coarseValue: "VERB"
 [went]
-Lemma:168
+Lemma
    sofa: _InitialView
    begin: 237
    end: 241
    value: "go"
 [went]
-Token:166
+Token
    sofa: _InitialView
    begin: 237
    end: 241
-   lemma: Lemma:168
+   lemma: Lemma
       sofa: _InitialView
       begin: 237
       end: 241
       value: "go"
-   pos: POS_VERB:167
+   pos: POS_VERB
       sofa: _InitialView
       begin: 237
       end: 241
       PosValue: "VVD"
       coarseValue: "VERB"
 [to]
-POS_X:170
+POS_X
    sofa: _InitialView
    begin: 242
    end: 244
    PosValue: "TO0"
    coarseValue: "X"
 [to]
-Lemma:171
+Lemma
    sofa: _InitialView
    begin: 242
    end: 244
    value: "to"
 [to]
-Token:169
+Token
    sofa: _InitialView
    begin: 242
    end: 244
-   lemma: Lemma:171
+   lemma: Lemma
       sofa: _InitialView
       begin: 242
       end: 244
       value: "to"
-   pos: POS_X:170
+   pos: POS_X
       sofa: _InitialView
       begin: 242
       end: 244
       PosValue: "TO0"
       coarseValue: "X"
 [buy]
-POS_VERB:173
+POS_VERB
    sofa: _InitialView
    begin: 245
    end: 248
    PosValue: "VVI"
    coarseValue: "VERB"
 [buy]
-Lemma:174
+Lemma
    sofa: _InitialView
    begin: 245
    end: 248
    value: "buy"
 [buy]
-Token:172
+Token
    sofa: _InitialView
    begin: 245
    end: 248
-   lemma: Lemma:174
+   lemma: Lemma
       sofa: _InitialView
       begin: 245
       end: 248
       value: "buy"
-   pos: POS_VERB:173
+   pos: POS_VERB
       sofa: _InitialView
       begin: 245
       end: 248
       PosValue: "VVI"
       coarseValue: "VERB"
 [something]
-POS_PRON:176
+POS_PRON
    sofa: _InitialView
    begin: 249
    end: 258
    PosValue: "PNI"
    coarseValue: "PRON"
 [something]
-Lemma:177
+Lemma
    sofa: _InitialView
    begin: 249
    end: 258
    value: "something"
 [something]
-Token:175
+Token
    sofa: _InitialView
    begin: 249
    end: 258
-   lemma: Lemma:177
+   lemma: Lemma
       sofa: _InitialView
       begin: 249
       end: 258
       value: "something"
-   pos: POS_PRON:176
+   pos: POS_PRON
       sofa: _InitialView
       begin: 249
       end: 258
       PosValue: "PNI"
       coarseValue: "PRON"
 [herself]
-POS_X:179
+POS_X
    sofa: _InitialView
    begin: 260
    end: 267
    PosValue: "PNX"
    coarseValue: "X"
 [herself]
-Lemma:180
+Lemma
    sofa: _InitialView
    begin: 260
    end: 267
    value: "herself"
 [herself]
-Token:178
+Token
    sofa: _InitialView
    begin: 260
    end: 267
-   lemma: Lemma:180
+   lemma: Lemma
       sofa: _InitialView
       begin: 260
       end: 267
       value: "herself"
-   pos: POS_X:179
+   pos: POS_X
       sofa: _InitialView
       begin: 260
       end: 267
       PosValue: "PNX"
       coarseValue: "X"
 [,]
-POS_PUNCT:182
+POS_PUNCT
    sofa: _InitialView
    begin: 267
    end: 268
    PosValue: "PUN"
    coarseValue: "PUNCT"
 [,]
-Token:181
+Token
    sofa: _InitialView
    begin: 267
    end: 268
-   pos: POS_PUNCT:182
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 267
       end: 268
       PosValue: "PUN"
       coarseValue: "PUNCT"
 [she]
-POS_PRON:184
+POS_PRON
    sofa: _InitialView
    begin: 269
    end: 272
    PosValue: "PNP"
    coarseValue: "PRON"
 [she]
-Lemma:185
+Lemma
    sofa: _InitialView
    begin: 269
    end: 272
    value: "she"
 [she]
-Token:183
+Token
    sofa: _InitialView
    begin: 269
    end: 272
-   lemma: Lemma:185
+   lemma: Lemma
       sofa: _InitialView
       begin: 269
       end: 272
       value: "she"
-   pos: POS_PRON:184
+   pos: POS_PRON
       sofa: _InitialView
       begin: 269
       end: 272
       PosValue: "PNP"
       coarseValue: "PRON"
 [phoned]
-POS_VERB:187
+POS_VERB
    sofa: _InitialView
    begin: 273
    end: 279
    PosValue: "VVD"
    coarseValue: "VERB"
 [phoned]
-Lemma:188
+Lemma
    sofa: _InitialView
    begin: 273
    end: 279
    value: "phone"
 [phoned]
-Token:186
+Token
    sofa: _InitialView
    begin: 273
    end: 279
-   lemma: Lemma:188
+   lemma: Lemma
       sofa: _InitialView
       begin: 273
       end: 279
       value: "phone"
-   pos: POS_VERB:187
+   pos: POS_VERB
       sofa: _InitialView
       begin: 273
       end: 279
       PosValue: "VVD"
       coarseValue: "VERB"
 [the]
-POS_DET:190
+POS_DET
    sofa: _InitialView
    begin: 280
    end: 283
    PosValue: "AT0"
    coarseValue: "DET"
 [the]
-Lemma:191
+Lemma
    sofa: _InitialView
    begin: 280
    end: 283
    value: "the"
 [the]
-Token:189
+Token
    sofa: _InitialView
    begin: 280
    end: 283
-   lemma: Lemma:191
+   lemma: Lemma
       sofa: _InitialView
       begin: 280
       end: 283
       value: "the"
-   pos: POS_DET:190
+   pos: POS_DET
       sofa: _InitialView
       begin: 280
       end: 283
       PosValue: "AT0"
       coarseValue: "DET"
 [clinic]
-POS_NOUN:193
+POS_NOUN
    sofa: _InitialView
    begin: 284
    end: 290
    PosValue: "NN1"
    coarseValue: "NOUN"
 [clinic]
-Lemma:194
+Lemma
    sofa: _InitialView
    begin: 284
    end: 290
    value: "clinic"
 [clinic]
-Token:192
+Token
    sofa: _InitialView
    begin: 284
    end: 290
-   lemma: Lemma:194
+   lemma: Lemma
       sofa: _InitialView
       begin: 284
       end: 290
       value: "clinic"
-   pos: POS_NOUN:193
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 284
       end: 290
       PosValue: "NN1"
       coarseValue: "NOUN"
 [and]
-POS_CONJ:196
+POS_CONJ
    sofa: _InitialView
    begin: 291
    end: 294
    PosValue: "CJC"
    coarseValue: "CONJ"
 [and]
-Lemma:197
+Lemma
    sofa: _InitialView
    begin: 291
    end: 294
    value: "and"
 [and]
-Token:195
+Token
    sofa: _InitialView
    begin: 291
    end: 294
-   lemma: Lemma:197
+   lemma: Lemma
       sofa: _InitialView
       begin: 291
       end: 294
       value: "and"
-   pos: POS_CONJ:196
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 291
       end: 294
       PosValue: "CJC"
       coarseValue: "CONJ"
 [the]
-POS_DET:199
+POS_DET
    sofa: _InitialView
    begin: 295
    end: 298
    PosValue: "AT0"
    coarseValue: "DET"
 [the]
-Lemma:200
+Lemma
    sofa: _InitialView
    begin: 295
    end: 298
    value: "the"
 [the]
-Token:198
+Token
    sofa: _InitialView
    begin: 295
    end: 298
-   lemma: Lemma:200
+   lemma: Lemma
       sofa: _InitialView
       begin: 295
       end: 298
       value: "the"
-   pos: POS_DET:199
+   pos: POS_DET
       sofa: _InitialView
       begin: 295
       end: 298
       PosValue: "AT0"
       coarseValue: "DET"
 [clinic]
-POS_NOUN:202
+POS_NOUN
    sofa: _InitialView
    begin: 299
    end: 305
    PosValue: "NN1"
    coarseValue: "NOUN"
 [clinic]
-Lemma:203
+Lemma
    sofa: _InitialView
    begin: 299
    end: 305
    value: "clinic"
 [clinic]
-Token:201
+Token
    sofa: _InitialView
    begin: 299
    end: 305
-   lemma: Lemma:203
+   lemma: Lemma
       sofa: _InitialView
       begin: 299
       end: 305
       value: "clinic"
-   pos: POS_NOUN:202
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 299
       end: 305
       PosValue: "NN1"
       coarseValue: "NOUN"
 [.]
-POS_PUNCT:205
+POS_PUNCT
    sofa: _InitialView
    begin: 306
    end: 307
    PosValue: "PUN"
    coarseValue: "PUNCT"
 [.]
-Token:204
+Token
    sofa: _InitialView
    begin: 306
    end: 307
-   pos: POS_PUNCT:205
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 306
       end: 307
       PosValue: "PUN"
       coarseValue: "PUNCT"
 [She's  here and  says she should be  fortnightly .]
-Sentence:236
+Sentence
    sofa: _InitialView
    begin: 308
    end: 358
 [She]
-POS_PRON:208
+POS_PRON
    sofa: _InitialView
    begin: 308
    end: 311
    PosValue: "PNP"
    coarseValue: "PRON"
 [She]
-Lemma:209
+Lemma
    sofa: _InitialView
    begin: 308
    end: 311
    value: "she"
 [She]
-Token:207
+Token
    sofa: _InitialView
    begin: 308
    end: 311
-   lemma: Lemma:209
+   lemma: Lemma
       sofa: _InitialView
       begin: 308
       end: 311
       value: "she"
-   pos: POS_PRON:208
+   pos: POS_PRON
       sofa: _InitialView
       begin: 308
       end: 311
       PosValue: "PNP"
       coarseValue: "PRON"
 ['s]
-POS_VERB:211
+POS_VERB
    sofa: _InitialView
    begin: 311
    end: 313
    PosValue: "VBZ"
    coarseValue: "VERB"
 ['s]
-Lemma:212
+Lemma
    sofa: _InitialView
    begin: 311
    end: 313
    value: "be"
 ['s]
-Token:210
+Token
    sofa: _InitialView
    begin: 311
    end: 313
-   lemma: Lemma:212
+   lemma: Lemma
       sofa: _InitialView
       begin: 311
       end: 313
       value: "be"
-   pos: POS_VERB:211
+   pos: POS_VERB
       sofa: _InitialView
       begin: 311
       end: 313
       PosValue: "VBZ"
       coarseValue: "VERB"
 [here]
-POS_ADV:214
+POS_ADV
    sofa: _InitialView
    begin: 315
    end: 319
    PosValue: "AV0"
    coarseValue: "ADV"
 [here]
-Lemma:215
+Lemma
    sofa: _InitialView
    begin: 315
    end: 319
    value: "here"
 [here]
-Token:213
+Token
    sofa: _InitialView
    begin: 315
    end: 319
-   lemma: Lemma:215
+   lemma: Lemma
       sofa: _InitialView
       begin: 315
       end: 319
       value: "here"
-   pos: POS_ADV:214
+   pos: POS_ADV
       sofa: _InitialView
       begin: 315
       end: 319
       PosValue: "AV0"
       coarseValue: "ADV"
 [and]
-POS_CONJ:217
+POS_CONJ
    sofa: _InitialView
    begin: 320
    end: 323
    PosValue: "CJC"
    coarseValue: "CONJ"
 [and]
-Lemma:218
+Lemma
    sofa: _InitialView
    begin: 320
    end: 323
    value: "and"
 [and]
-Token:216
+Token
    sofa: _InitialView
    begin: 320
    end: 323
-   lemma: Lemma:218
+   lemma: Lemma
       sofa: _InitialView
       begin: 320
       end: 323
       value: "and"
-   pos: POS_CONJ:217
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 320
       end: 323
       PosValue: "CJC"
       coarseValue: "CONJ"
 [says]
-POS_VERB:220
+POS_VERB
    sofa: _InitialView
    begin: 325
    end: 329
    PosValue: "VVZ"
    coarseValue: "VERB"
 [says]
-Lemma:221
+Lemma
    sofa: _InitialView
    begin: 325
    end: 329
    value: "say"
 [says]
-Token:219
+Token
    sofa: _InitialView
    begin: 325
    end: 329
-   lemma: Lemma:221
+   lemma: Lemma
       sofa: _InitialView
       begin: 325
       end: 329
       value: "say"
-   pos: POS_VERB:220
+   pos: POS_VERB
       sofa: _InitialView
       begin: 325
       end: 329
       PosValue: "VVZ"
       coarseValue: "VERB"
 [she]
-POS_PRON:223
+POS_PRON
    sofa: _InitialView
    begin: 330
    end: 333
    PosValue: "PNP"
    coarseValue: "PRON"
 [she]
-Lemma:224
+Lemma
    sofa: _InitialView
    begin: 330
    end: 333
    value: "she"
 [she]
-Token:222
+Token
    sofa: _InitialView
    begin: 330
    end: 333
-   lemma: Lemma:224
+   lemma: Lemma
       sofa: _InitialView
       begin: 330
       end: 333
       value: "she"
-   pos: POS_PRON:223
+   pos: POS_PRON
       sofa: _InitialView
       begin: 330
       end: 333
       PosValue: "PNP"
       coarseValue: "PRON"
 [should]
-POS_AUX:226
+POS_AUX
    sofa: _InitialView
    begin: 334
    end: 340
    PosValue: "VM0"
    coarseValue: "AUX"
 [should]
-Lemma:227
+Lemma
    sofa: _InitialView
    begin: 334
    end: 340
    value: "should"
 [should]
-Token:225
+Token
    sofa: _InitialView
    begin: 334
    end: 340
-   lemma: Lemma:227
+   lemma: Lemma
       sofa: _InitialView
       begin: 334
       end: 340
       value: "should"
-   pos: POS_AUX:226
+   pos: POS_AUX
       sofa: _InitialView
       begin: 334
       end: 340
       PosValue: "VM0"
       coarseValue: "AUX"
 [be]
-POS_VERB:229
+POS_VERB
    sofa: _InitialView
    begin: 341
    end: 343
    PosValue: "VBI"
    coarseValue: "VERB"
 [be]
-Lemma:230
+Lemma
    sofa: _InitialView
    begin: 341
    end: 343
    value: "be"
 [be]
-Token:228
+Token
    sofa: _InitialView
    begin: 341
    end: 343
-   lemma: Lemma:230
+   lemma: Lemma
       sofa: _InitialView
       begin: 341
       end: 343
       value: "be"
-   pos: POS_VERB:229
+   pos: POS_VERB
       sofa: _InitialView
       begin: 341
       end: 343
       PosValue: "VBI"
       coarseValue: "VERB"
 [fortnightly]
-POS_ADV:232
+POS_ADV
    sofa: _InitialView
    begin: 345
    end: 356
    PosValue: "AV0"
    coarseValue: "ADV"
 [fortnightly]
-Lemma:233
+Lemma
    sofa: _InitialView
    begin: 345
    end: 356
    value: "fortnightly"
 [fortnightly]
-Token:231
+Token
    sofa: _InitialView
    begin: 345
    end: 356
-   lemma: Lemma:233
+   lemma: Lemma
       sofa: _InitialView
       begin: 345
       end: 356
       value: "fortnightly"
-   pos: POS_ADV:232
+   pos: POS_ADV
       sofa: _InitialView
       begin: 345
       end: 356
       PosValue: "AV0"
       coarseValue: "ADV"
 [.]
-POS_PUNCT:235
+POS_PUNCT
    sofa: _InitialView
    begin: 357
    end: 358
    PosValue: "PUN"
    coarseValue: "PUNCT"
 [.]
-Token:234
+Token
    sofa: _InitialView
    begin: 357
    end: 358
-   pos: POS_PUNCT:235
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 357
       end: 358
       PosValue: "PUN"
       coarseValue: "PUNCT"
 [So I don't know whether you want to go and see her rather than, I could get a doctor to go and see her and phone,.]
-Sentence:324
+Sentence
    sofa: _InitialView
    begin: 359
    end: 473
 [So]
-POS_ADV:238
+POS_ADV
    sofa: _InitialView
    begin: 359
    end: 361
    PosValue: "AV0"
    coarseValue: "ADV"
 [So]
-Lemma:239
+Lemma
    sofa: _InitialView
    begin: 359
    end: 361
    value: "so"
 [So]
-Token:237
+Token
    sofa: _InitialView
    begin: 359
    end: 361
-   lemma: Lemma:239
+   lemma: Lemma
       sofa: _InitialView
       begin: 359
       end: 361
       value: "so"
-   pos: POS_ADV:238
+   pos: POS_ADV
       sofa: _InitialView
       begin: 359
       end: 361
       PosValue: "AV0"
       coarseValue: "ADV"
 [I]
-POS_PRON:241
+POS_PRON
    sofa: _InitialView
    begin: 362
    end: 363
    PosValue: "PNP"
    coarseValue: "PRON"
 [I]
-Lemma:242
+Lemma
    sofa: _InitialView
    begin: 362
    end: 363
    value: "i"
 [I]
-Token:240
+Token
    sofa: _InitialView
    begin: 362
    end: 363
-   lemma: Lemma:242
+   lemma: Lemma
       sofa: _InitialView
       begin: 362
       end: 363
       value: "i"
-   pos: POS_PRON:241
+   pos: POS_PRON
       sofa: _InitialView
       begin: 362
       end: 363
       PosValue: "PNP"
       coarseValue: "PRON"
 [do]
-POS_VERB:244
+POS_VERB
    sofa: _InitialView
    begin: 364
    end: 366
    PosValue: "VDB"
    coarseValue: "VERB"
 [do]
-Lemma:245
+Lemma
    sofa: _InitialView
    begin: 364
    end: 366
    value: "do"
 [do]
-Token:243
+Token
    sofa: _InitialView
    begin: 364
    end: 366
-   lemma: Lemma:245
+   lemma: Lemma
       sofa: _InitialView
       begin: 364
       end: 366
       value: "do"
-   pos: POS_VERB:244
+   pos: POS_VERB
       sofa: _InitialView
       begin: 364
       end: 366
       PosValue: "VDB"
       coarseValue: "VERB"
 [n't]
-POS_PART:247
+POS_PART
    sofa: _InitialView
    begin: 366
    end: 369
    PosValue: "XX0"
    coarseValue: "PART"
 [n't]
-Lemma:248
+Lemma
    sofa: _InitialView
    begin: 366
    end: 369
    value: "not"
 [n't]
-Token:246
+Token
    sofa: _InitialView
    begin: 366
    end: 369
-   lemma: Lemma:248
+   lemma: Lemma
       sofa: _InitialView
       begin: 366
       end: 369
       value: "not"
-   pos: POS_PART:247
+   pos: POS_PART
       sofa: _InitialView
       begin: 366
       end: 369
       PosValue: "XX0"
       coarseValue: "PART"
 [know]
-POS_VERB:250
+POS_VERB
    sofa: _InitialView
    begin: 370
    end: 374
    PosValue: "VVI"
    coarseValue: "VERB"
 [know]
-Lemma:251
+Lemma
    sofa: _InitialView
    begin: 370
    end: 374
    value: "know"
 [know]
-Token:249
+Token
    sofa: _InitialView
    begin: 370
    end: 374
-   lemma: Lemma:251
+   lemma: Lemma
       sofa: _InitialView
       begin: 370
       end: 374
       value: "know"
-   pos: POS_VERB:250
+   pos: POS_VERB
       sofa: _InitialView
       begin: 370
       end: 374
       PosValue: "VVI"
       coarseValue: "VERB"
 [whether]
-POS_SCONJ:253
+POS_SCONJ
    sofa: _InitialView
    begin: 375
    end: 382
    PosValue: "CJS"
    coarseValue: "SCONJ"
 [whether]
-Lemma:254
+Lemma
    sofa: _InitialView
    begin: 375
    end: 382
    value: "whether"
 [whether]
-Token:252
+Token
    sofa: _InitialView
    begin: 375
    end: 382
-   lemma: Lemma:254
+   lemma: Lemma
       sofa: _InitialView
       begin: 375
       end: 382
       value: "whether"
-   pos: POS_SCONJ:253
+   pos: POS_SCONJ
       sofa: _InitialView
       begin: 375
       end: 382
       PosValue: "CJS"
       coarseValue: "SCONJ"
 [you]
-POS_PRON:256
+POS_PRON
    sofa: _InitialView
    begin: 383
    end: 386
    PosValue: "PNP"
    coarseValue: "PRON"
 [you]
-Lemma:257
+Lemma
    sofa: _InitialView
    begin: 383
    end: 386
    value: "you"
 [you]
-Token:255
+Token
    sofa: _InitialView
    begin: 383
    end: 386
-   lemma: Lemma:257
+   lemma: Lemma
       sofa: _InitialView
       begin: 383
       end: 386
       value: "you"
-   pos: POS_PRON:256
+   pos: POS_PRON
       sofa: _InitialView
       begin: 383
       end: 386
       PosValue: "PNP"
       coarseValue: "PRON"
 [want]
-POS_VERB:259
+POS_VERB
    sofa: _InitialView
    begin: 387
    end: 391
    PosValue: "VVB"
    coarseValue: "VERB"
 [want]
-Lemma:260
+Lemma
    sofa: _InitialView
    begin: 387
    end: 391
    value: "want"
 [want]
-Token:258
+Token
    sofa: _InitialView
    begin: 387
    end: 391
-   lemma: Lemma:260
+   lemma: Lemma
       sofa: _InitialView
       begin: 387
       end: 391
       value: "want"
-   pos: POS_VERB:259
+   pos: POS_VERB
       sofa: _InitialView
       begin: 387
       end: 391
       PosValue: "VVB"
       coarseValue: "VERB"
 [to]
-POS_X:262
+POS_X
    sofa: _InitialView
    begin: 392
    end: 394
    PosValue: "TO0"
    coarseValue: "X"
 [to]
-Lemma:263
+Lemma
    sofa: _InitialView
    begin: 392
    end: 394
    value: "to"
 [to]
-Token:261
+Token
    sofa: _InitialView
    begin: 392
    end: 394
-   lemma: Lemma:263
+   lemma: Lemma
       sofa: _InitialView
       begin: 392
       end: 394
       value: "to"
-   pos: POS_X:262
+   pos: POS_X
       sofa: _InitialView
       begin: 392
       end: 394
       PosValue: "TO0"
       coarseValue: "X"
 [go]
-POS_VERB:265
+POS_VERB
    sofa: _InitialView
    begin: 395
    end: 397
    PosValue: "VVI"
    coarseValue: "VERB"
 [go]
-Lemma:266
+Lemma
    sofa: _InitialView
    begin: 395
    end: 397
    value: "go"
 [go]
-Token:264
+Token
    sofa: _InitialView
    begin: 395
    end: 397
-   lemma: Lemma:266
+   lemma: Lemma
       sofa: _InitialView
       begin: 395
       end: 397
       value: "go"
-   pos: POS_VERB:265
+   pos: POS_VERB
       sofa: _InitialView
       begin: 395
       end: 397
       PosValue: "VVI"
       coarseValue: "VERB"
 [and]
-POS_CONJ:268
+POS_CONJ
    sofa: _InitialView
    begin: 398
    end: 401
    PosValue: "CJC"
    coarseValue: "CONJ"
 [and]
-Lemma:269
+Lemma
    sofa: _InitialView
    begin: 398
    end: 401
    value: "and"
 [and]
-Token:267
+Token
    sofa: _InitialView
    begin: 398
    end: 401
-   lemma: Lemma:269
+   lemma: Lemma
       sofa: _InitialView
       begin: 398
       end: 401
       value: "and"
-   pos: POS_CONJ:268
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 398
       end: 401
       PosValue: "CJC"
       coarseValue: "CONJ"
 [see]
-POS_VERB:271
+POS_VERB
    sofa: _InitialView
    begin: 402
    end: 405
    PosValue: "VVI"
    coarseValue: "VERB"
 [see]
-Lemma:272
+Lemma
    sofa: _InitialView
    begin: 402
    end: 405
    value: "see"
 [see]
-Token:270
+Token
    sofa: _InitialView
    begin: 402
    end: 405
-   lemma: Lemma:272
+   lemma: Lemma
       sofa: _InitialView
       begin: 402
       end: 405
       value: "see"
-   pos: POS_VERB:271
+   pos: POS_VERB
       sofa: _InitialView
       begin: 402
       end: 405
       PosValue: "VVI"
       coarseValue: "VERB"
 [her]
-POS_PRON:274
+POS_PRON
    sofa: _InitialView
    begin: 406
    end: 409
    PosValue: "PNP"
    coarseValue: "PRON"
 [her]
-Lemma:275
+Lemma
    sofa: _InitialView
    begin: 406
    end: 409
    value: "she"
 [her]
-Token:273
+Token
    sofa: _InitialView
    begin: 406
    end: 409
-   lemma: Lemma:275
+   lemma: Lemma
       sofa: _InitialView
       begin: 406
       end: 409
       value: "she"
-   pos: POS_PRON:274
+   pos: POS_PRON
       sofa: _InitialView
       begin: 406
       end: 409
       PosValue: "PNP"
       coarseValue: "PRON"
 [rather]
-POS_ADV:277
+POS_ADV
    sofa: _InitialView
    begin: 410
    end: 416
    PosValue: "AV0"
    coarseValue: "ADV"
 [rather]
-Lemma:278
+Lemma
    sofa: _InitialView
    begin: 410
    end: 416
    value: "rather"
 [rather]
-Token:276
+Token
    sofa: _InitialView
    begin: 410
    end: 416
-   lemma: Lemma:278
+   lemma: Lemma
       sofa: _InitialView
       begin: 410
       end: 416
       value: "rather"
-   pos: POS_ADV:277
+   pos: POS_ADV
       sofa: _InitialView
       begin: 410
       end: 416
       PosValue: "AV0"
       coarseValue: "ADV"
 [than]
-POS_SCONJ:280
+POS_SCONJ
    sofa: _InitialView
    begin: 417
    end: 421
    PosValue: "CJS"
    coarseValue: "SCONJ"
 [than]
-Lemma:281
+Lemma
    sofa: _InitialView
    begin: 417
    end: 421
    value: "than"
 [than]
-Token:279
+Token
    sofa: _InitialView
    begin: 417
    end: 421
-   lemma: Lemma:281
+   lemma: Lemma
       sofa: _InitialView
       begin: 417
       end: 421
       value: "than"
-   pos: POS_SCONJ:280
+   pos: POS_SCONJ
       sofa: _InitialView
       begin: 417
       end: 421
       PosValue: "CJS"
       coarseValue: "SCONJ"
 [,]
-POS_PUNCT:283
+POS_PUNCT
    sofa: _InitialView
    begin: 421
    end: 422
    PosValue: "PUN"
    coarseValue: "PUNCT"
 [,]
-Token:282
+Token
    sofa: _InitialView
    begin: 421
    end: 422
-   pos: POS_PUNCT:283
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 421
       end: 422
       PosValue: "PUN"
       coarseValue: "PUNCT"
 [I]
-POS_PRON:285
+POS_PRON
    sofa: _InitialView
    begin: 423
    end: 424
    PosValue: "PNP"
    coarseValue: "PRON"
 [I]
-Lemma:286
+Lemma
    sofa: _InitialView
    begin: 423
    end: 424
    value: "i"
 [I]
-Token:284
+Token
    sofa: _InitialView
    begin: 423
    end: 424
-   lemma: Lemma:286
+   lemma: Lemma
       sofa: _InitialView
       begin: 423
       end: 424
       value: "i"
-   pos: POS_PRON:285
+   pos: POS_PRON
       sofa: _InitialView
       begin: 423
       end: 424
       PosValue: "PNP"
       coarseValue: "PRON"
 [could]
-POS_AUX:288
+POS_AUX
    sofa: _InitialView
    begin: 425
    end: 430
    PosValue: "VM0"
    coarseValue: "AUX"
 [could]
-Lemma:289
+Lemma
    sofa: _InitialView
    begin: 425
    end: 430
    value: "could"
 [could]
-Token:287
+Token
    sofa: _InitialView
    begin: 425
    end: 430
-   lemma: Lemma:289
+   lemma: Lemma
       sofa: _InitialView
       begin: 425
       end: 430
       value: "could"
-   pos: POS_AUX:288
+   pos: POS_AUX
       sofa: _InitialView
       begin: 425
       end: 430
       PosValue: "VM0"
       coarseValue: "AUX"
 [get]
-POS_VERB:291
+POS_VERB
    sofa: _InitialView
    begin: 431
    end: 434
    PosValue: "VVI"
    coarseValue: "VERB"
 [get]
-Lemma:292
+Lemma
    sofa: _InitialView
    begin: 431
    end: 434
    value: "get"
 [get]
-Token:290
+Token
    sofa: _InitialView
    begin: 431
    end: 434
-   lemma: Lemma:292
+   lemma: Lemma
       sofa: _InitialView
       begin: 431
       end: 434
       value: "get"
-   pos: POS_VERB:291
+   pos: POS_VERB
       sofa: _InitialView
       begin: 431
       end: 434
       PosValue: "VVI"
       coarseValue: "VERB"
 [a]
-POS_DET:294
+POS_DET
    sofa: _InitialView
    begin: 435
    end: 436
    PosValue: "AT0"
    coarseValue: "DET"
 [a]
-Lemma:295
+Lemma
    sofa: _InitialView
    begin: 435
    end: 436
    value: "a"
 [a]
-Token:293
+Token
    sofa: _InitialView
    begin: 435
    end: 436
-   lemma: Lemma:295
+   lemma: Lemma
       sofa: _InitialView
       begin: 435
       end: 436
       value: "a"
-   pos: POS_DET:294
+   pos: POS_DET
       sofa: _InitialView
       begin: 435
       end: 436
       PosValue: "AT0"
       coarseValue: "DET"
 [doctor]
-POS_NOUN:297
+POS_NOUN
    sofa: _InitialView
    begin: 437
    end: 443
    PosValue: "NN1"
    coarseValue: "NOUN"
 [doctor]
-Lemma:298
+Lemma
    sofa: _InitialView
    begin: 437
    end: 443
    value: "doctor"
 [doctor]
-Token:296
+Token
    sofa: _InitialView
    begin: 437
    end: 443
-   lemma: Lemma:298
+   lemma: Lemma
       sofa: _InitialView
       begin: 437
       end: 443
       value: "doctor"
-   pos: POS_NOUN:297
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 437
       end: 443
       PosValue: "NN1"
       coarseValue: "NOUN"
 [to]
-POS_X:300
+POS_X
    sofa: _InitialView
    begin: 444
    end: 446
    PosValue: "TO0"
    coarseValue: "X"
 [to]
-Lemma:301
+Lemma
    sofa: _InitialView
    begin: 444
    end: 446
    value: "to"
 [to]
-Token:299
+Token
    sofa: _InitialView
    begin: 444
    end: 446
-   lemma: Lemma:301
+   lemma: Lemma
       sofa: _InitialView
       begin: 444
       end: 446
       value: "to"
-   pos: POS_X:300
+   pos: POS_X
       sofa: _InitialView
       begin: 444
       end: 446
       PosValue: "TO0"
       coarseValue: "X"
 [go]
-POS_VERB:303
+POS_VERB
    sofa: _InitialView
    begin: 447
    end: 449
    PosValue: "VVI"
    coarseValue: "VERB"
 [go]
-Lemma:304
+Lemma
    sofa: _InitialView
    begin: 447
    end: 449
    value: "go"
 [go]
-Token:302
+Token
    sofa: _InitialView
    begin: 447
    end: 449
-   lemma: Lemma:304
+   lemma: Lemma
       sofa: _InitialView
       begin: 447
       end: 449
       value: "go"
-   pos: POS_VERB:303
+   pos: POS_VERB
       sofa: _InitialView
       begin: 447
       end: 449
       PosValue: "VVI"
       coarseValue: "VERB"
 [and]
-POS_CONJ:306
+POS_CONJ
    sofa: _InitialView
    begin: 450
    end: 453
    PosValue: "CJC"
    coarseValue: "CONJ"
 [and]
-Lemma:307
+Lemma
    sofa: _InitialView
    begin: 450
    end: 453
    value: "and"
 [and]
-Token:305
+Token
    sofa: _InitialView
    begin: 450
    end: 453
-   lemma: Lemma:307
+   lemma: Lemma
       sofa: _InitialView
       begin: 450
       end: 453
       value: "and"
-   pos: POS_CONJ:306
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 450
       end: 453
       PosValue: "CJC"
       coarseValue: "CONJ"
 [see]
-POS_VERB:309
+POS_VERB
    sofa: _InitialView
    begin: 454
    end: 457
    PosValue: "VVI"
    coarseValue: "VERB"
 [see]
-Lemma:310
+Lemma
    sofa: _InitialView
    begin: 454
    end: 457
    value: "see"
 [see]
-Token:308
+Token
    sofa: _InitialView
    begin: 454
    end: 457
-   lemma: Lemma:310
+   lemma: Lemma
       sofa: _InitialView
       begin: 454
       end: 457
       value: "see"
-   pos: POS_VERB:309
+   pos: POS_VERB
       sofa: _InitialView
       begin: 454
       end: 457
       PosValue: "VVI"
       coarseValue: "VERB"
 [her]
-POS_PRON:312
+POS_PRON
    sofa: _InitialView
    begin: 458
    end: 461
    PosValue: "PNP"
    coarseValue: "PRON"
 [her]
-Lemma:313
+Lemma
    sofa: _InitialView
    begin: 458
    end: 461
    value: "she"
 [her]
-Token:311
+Token
    sofa: _InitialView
    begin: 458
    end: 461
-   lemma: Lemma:313
+   lemma: Lemma
       sofa: _InitialView
       begin: 458
       end: 461
       value: "she"
-   pos: POS_PRON:312
+   pos: POS_PRON
       sofa: _InitialView
       begin: 458
       end: 461
       PosValue: "PNP"
       coarseValue: "PRON"
 [and]
-POS_CONJ:315
+POS_CONJ
    sofa: _InitialView
    begin: 462
    end: 465
    PosValue: "CJC"
    coarseValue: "CONJ"
 [and]
-Lemma:316
+Lemma
    sofa: _InitialView
    begin: 462
    end: 465
    value: "and"
 [and]
-Token:314
+Token
    sofa: _InitialView
    begin: 462
    end: 465
-   lemma: Lemma:316
+   lemma: Lemma
       sofa: _InitialView
       begin: 462
       end: 465
       value: "and"
-   pos: POS_CONJ:315
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 462
       end: 465
       PosValue: "CJC"
       coarseValue: "CONJ"
 [phone]
-POS_NOUN:318
+POS_NOUN
    sofa: _InitialView
    begin: 466
    end: 471
    PosValue: "NN1-VVB"
    coarseValue: "NOUN"
 [phone]
-Lemma:319
+Lemma
    sofa: _InitialView
    begin: 466
    end: 471
    value: "phone"
 [phone]
-Token:317
+Token
    sofa: _InitialView
    begin: 466
    end: 471
-   lemma: Lemma:319
+   lemma: Lemma
       sofa: _InitialView
       begin: 466
       end: 471
       value: "phone"
-   pos: POS_NOUN:318
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 466
       end: 471
       PosValue: "NN1-VVB"
       coarseValue: "NOUN"
 [,]
-POS_PUNCT:321
+POS_PUNCT
    sofa: _InitialView
    begin: 471
    end: 472
    PosValue: "PUN"
    coarseValue: "PUNCT"
 [,]
-Token:320
+Token
    sofa: _InitialView
    begin: 471
    end: 472
-   pos: POS_PUNCT:321
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 471
       end: 472
       PosValue: "PUN"
       coarseValue: "PUNCT"
 [.]
-POS_PUNCT:323
+POS_PUNCT
    sofa: _InitialView
    begin: 472
    end: 473
    PosValue: "PUN"
    coarseValue: "PUNCT"
 [.]
-Token:322
+Token
    sofa: _InitialView
    begin: 472
    end: 473
-   pos: POS_PUNCT:323
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 472
       end: 473
       PosValue: "PUN"
       coarseValue: "PUNCT"
 [it's just that I'm never gonna get to up to.]
-Sentence:366
+Sentence
    sofa: _InitialView
    begin: 474
    end: 518
 [it]
-POS_PRON:326
+POS_PRON
    sofa: _InitialView
    begin: 474
    end: 476
    PosValue: "PNP"
    coarseValue: "PRON"
 [it]
-Lemma:327
+Lemma
    sofa: _InitialView
    begin: 474
    end: 476
    value: "it"
 [it]
-Token:325
+Token
    sofa: _InitialView
    begin: 474
    end: 476
-   lemma: Lemma:327
+   lemma: Lemma
       sofa: _InitialView
       begin: 474
       end: 476
       value: "it"
-   pos: POS_PRON:326
+   pos: POS_PRON
       sofa: _InitialView
       begin: 474
       end: 476
       PosValue: "PNP"
       coarseValue: "PRON"
 ['s]
-POS_VERB:329
+POS_VERB
    sofa: _InitialView
    begin: 476
    end: 478
    PosValue: "VBZ"
    coarseValue: "VERB"
 ['s]
-Lemma:330
+Lemma
    sofa: _InitialView
    begin: 476
    end: 478
    value: "be"
 ['s]
-Token:328
+Token
    sofa: _InitialView
    begin: 476
    end: 478
-   lemma: Lemma:330
+   lemma: Lemma
       sofa: _InitialView
       begin: 476
       end: 478
       value: "be"
-   pos: POS_VERB:329
+   pos: POS_VERB
       sofa: _InitialView
       begin: 476
       end: 478
       PosValue: "VBZ"
       coarseValue: "VERB"
 [just]
-POS_ADV:332
+POS_ADV
    sofa: _InitialView
    begin: 479
    end: 483
    PosValue: "AV0"
    coarseValue: "ADV"
 [just]
-Lemma:333
+Lemma
    sofa: _InitialView
    begin: 479
    end: 483
    value: "just"
 [just]
-Token:331
+Token
    sofa: _InitialView
    begin: 479
    end: 483
-   lemma: Lemma:333
+   lemma: Lemma
       sofa: _InitialView
       begin: 479
       end: 483
       value: "just"
-   pos: POS_ADV:332
+   pos: POS_ADV
       sofa: _InitialView
       begin: 479
       end: 483
       PosValue: "AV0"
       coarseValue: "ADV"
 [that]
-POS_SCONJ:335
+POS_SCONJ
    sofa: _InitialView
    begin: 484
    end: 488
    PosValue: "CJT"
    coarseValue: "SCONJ"
 [that]
-Lemma:336
+Lemma
    sofa: _InitialView
    begin: 484
    end: 488
    value: "that"
 [that]
-Token:334
+Token
    sofa: _InitialView
    begin: 484
    end: 488
-   lemma: Lemma:336
+   lemma: Lemma
       sofa: _InitialView
       begin: 484
       end: 488
       value: "that"
-   pos: POS_SCONJ:335
+   pos: POS_SCONJ
       sofa: _InitialView
       begin: 484
       end: 488
       PosValue: "CJT"
       coarseValue: "SCONJ"
 [I]
-POS_PRON:338
+POS_PRON
    sofa: _InitialView
    begin: 489
    end: 490
    PosValue: "PNP"
    coarseValue: "PRON"
 [I]
-Lemma:339
+Lemma
    sofa: _InitialView
    begin: 489
    end: 490
    value: "i"
 [I]
-Token:337
+Token
    sofa: _InitialView
    begin: 489
    end: 490
-   lemma: Lemma:339
+   lemma: Lemma
       sofa: _InitialView
       begin: 489
       end: 490
       value: "i"
-   pos: POS_PRON:338
+   pos: POS_PRON
       sofa: _InitialView
       begin: 489
       end: 490
       PosValue: "PNP"
       coarseValue: "PRON"
 ['m]
-POS_VERB:341
+POS_VERB
    sofa: _InitialView
    begin: 490
    end: 492
    PosValue: "VBB"
    coarseValue: "VERB"
 ['m]
-Lemma:342
+Lemma
    sofa: _InitialView
    begin: 490
    end: 492
    value: "be"
 ['m]
-Token:340
+Token
    sofa: _InitialView
    begin: 490
    end: 492
-   lemma: Lemma:342
+   lemma: Lemma
       sofa: _InitialView
       begin: 490
       end: 492
       value: "be"
-   pos: POS_VERB:341
+   pos: POS_VERB
       sofa: _InitialView
       begin: 490
       end: 492
       PosValue: "VBB"
       coarseValue: "VERB"
 [never]
-POS_ADV:344
+POS_ADV
    sofa: _InitialView
    begin: 493
    end: 498
    PosValue: "AV0"
    coarseValue: "ADV"
 [never]
-Lemma:345
+Lemma
    sofa: _InitialView
    begin: 493
    end: 498
    value: "never"
 [never]
-Token:343
+Token
    sofa: _InitialView
    begin: 493
    end: 498
-   lemma: Lemma:345
+   lemma: Lemma
       sofa: _InitialView
       begin: 493
       end: 498
       value: "never"
-   pos: POS_ADV:344
+   pos: POS_ADV
       sofa: _InitialView
       begin: 493
       end: 498
       PosValue: "AV0"
       coarseValue: "ADV"
 [gon]
-POS_VERB:347
+POS_VERB
    sofa: _InitialView
    begin: 499
    end: 502
    PosValue: "VVG"
    coarseValue: "VERB"
 [gon]
-Lemma:348
+Lemma
    sofa: _InitialView
    begin: 499
    end: 502
    value: "gon"
 [gon]
-Token:346
+Token
    sofa: _InitialView
    begin: 499
    end: 502
-   lemma: Lemma:348
+   lemma: Lemma
       sofa: _InitialView
       begin: 499
       end: 502
       value: "gon"
-   pos: POS_VERB:347
+   pos: POS_VERB
       sofa: _InitialView
       begin: 499
       end: 502
       PosValue: "VVG"
       coarseValue: "VERB"
 [na]
-POS_X:350
+POS_X
    sofa: _InitialView
    begin: 502
    end: 504
    PosValue: "TO0"
    coarseValue: "X"
 [na]
-Lemma:351
+Lemma
    sofa: _InitialView
    begin: 502
    end: 504
    value: "na"
 [na]
-Token:349
+Token
    sofa: _InitialView
    begin: 502
    end: 504
-   lemma: Lemma:351
+   lemma: Lemma
       sofa: _InitialView
       begin: 502
       end: 504
       value: "na"
-   pos: POS_X:350
+   pos: POS_X
       sofa: _InitialView
       begin: 502
       end: 504
       PosValue: "TO0"
       coarseValue: "X"
 [get]
-POS_VERB:353
+POS_VERB
    sofa: _InitialView
    begin: 505
    end: 508
    PosValue: "VVI"
    coarseValue: "VERB"
 [get]
-Lemma:354
+Lemma
    sofa: _InitialView
    begin: 505
    end: 508
    value: "get"
 [get]
-Token:352
+Token
    sofa: _InitialView
    begin: 505
    end: 508
-   lemma: Lemma:354
+   lemma: Lemma
       sofa: _InitialView
       begin: 505
       end: 508
       value: "get"
-   pos: POS_VERB:353
+   pos: POS_VERB
       sofa: _InitialView
       begin: 505
       end: 508
       PosValue: "VVI"
       coarseValue: "VERB"
 [to]
-POS_ADP:356
+POS_ADP
    sofa: _InitialView
    begin: 509
    end: 511
    PosValue: "PRP"
    coarseValue: "ADP"
 [to]
-Lemma:357
+Lemma
    sofa: _InitialView
    begin: 509
    end: 511
    value: "to"
 [to]
-Token:355
+Token
    sofa: _InitialView
    begin: 509
    end: 511
-   lemma: Lemma:357
+   lemma: Lemma
       sofa: _InitialView
       begin: 509
       end: 511
       value: "to"
-   pos: POS_ADP:356
+   pos: POS_ADP
       sofa: _InitialView
       begin: 509
       end: 511
       PosValue: "PRP"
       coarseValue: "ADP"
 [up]
-POS_X:359
+POS_X
    sofa: _InitialView
    begin: 512
    end: 514
    PosValue: "AVP"
    coarseValue: "X"
 [up]
-Lemma:360
+Lemma
    sofa: _InitialView
    begin: 512
    end: 514
    value: "up"
 [up]
-Token:358
+Token
    sofa: _InitialView
    begin: 512
    end: 514
-   lemma: Lemma:360
+   lemma: Lemma
       sofa: _InitialView
       begin: 512
       end: 514
       value: "up"
-   pos: POS_X:359
+   pos: POS_X
       sofa: _InitialView
       begin: 512
       end: 514
       PosValue: "AVP"
       coarseValue: "X"
 [to]
-POS_ADP:362
+POS_ADP
    sofa: _InitialView
    begin: 515
    end: 517
    PosValue: "PRP"
    coarseValue: "ADP"
 [to]
-Lemma:363
+Lemma
    sofa: _InitialView
    begin: 515
    end: 517
    value: "to"
 [to]
-Token:361
+Token
    sofa: _InitialView
    begin: 515
    end: 517
-   lemma: Lemma:363
+   lemma: Lemma
       sofa: _InitialView
       begin: 515
       end: 517
       value: "to"
-   pos: POS_ADP:362
+   pos: POS_ADP
       sofa: _InitialView
       begin: 515
       end: 517
       PosValue: "PRP"
       coarseValue: "ADP"
 [.]
-POS_PUNCT:365
+POS_PUNCT
    sofa: _InitialView
    begin: 517
    end: 518
    PosValue: "PUN"
    coarseValue: "PUNCT"
 [.]
-Token:364
+Token
    sofa: _InitialView
    begin: 517
    end: 518
-   pos: POS_PUNCT:365
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 517
       end: 518
       PosValue: "PUN"
       coarseValue: "PUNCT"
 [?]
-POS_PUNCT:368
+POS_PUNCT
    sofa: _InitialView
    begin: 519
    end: 520
    PosValue: "PUN"
    coarseValue: "PUNCT"
 [?]
-Sentence:369
+Sentence
    sofa: _InitialView
    begin: 519
    end: 520
 [?]
-Token:367
+Token
    sofa: _InitialView
    begin: 519
    end: 520
-   pos: POS_PUNCT:368
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 519
       end: 520
       PosValue: "PUN"
       coarseValue: "PUNCT"
 [Yeah.]
-Sentence:375
+Sentence
    sofa: _InitialView
    begin: 521
    end: 526
 [Yeah]
-POS_INTJ:371
+POS_INTJ
    sofa: _InitialView
    begin: 521
    end: 525
    PosValue: "ITJ"
    coarseValue: "INTJ"
 [Yeah]
-Lemma:372
+Lemma
    sofa: _InitialView
    begin: 521
    end: 525
    value: "yeah"
 [Yeah]
-Token:370
+Token
    sofa: _InitialView
    begin: 521
    end: 525
-   lemma: Lemma:372
+   lemma: Lemma
       sofa: _InitialView
       begin: 521
       end: 525
       value: "yeah"
-   pos: POS_INTJ:371
+   pos: POS_INTJ
       sofa: _InitialView
       begin: 521
       end: 525
       PosValue: "ITJ"
       coarseValue: "INTJ"
 [.]
-POS_PUNCT:374
+POS_PUNCT
    sofa: _InitialView
    begin: 525
    end: 526
    PosValue: "PUN"
    coarseValue: "PUNCT"
 [.]
-Token:373
+Token
    sofa: _InitialView
    begin: 525
    end: 526
-   pos: POS_PUNCT:374
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 525
       end: 526
       PosValue: "PUN"
       coarseValue: "PUNCT"
 [Okay.]
-Sentence:381
+Sentence
    sofa: _InitialView
    begin: 527
    end: 532
 [Okay]
-POS_ADV:377
+POS_ADV
    sofa: _InitialView
    begin: 527
    end: 531
    PosValue: "AV0"
    coarseValue: "ADV"
 [Okay]
-Lemma:378
+Lemma
    sofa: _InitialView
    begin: 527
    end: 531
    value: "okay"
 [Okay]
-Token:376
+Token
    sofa: _InitialView
    begin: 527
    end: 531
-   lemma: Lemma:378
+   lemma: Lemma
       sofa: _InitialView
       begin: 527
       end: 531
       value: "okay"
-   pos: POS_ADV:377
+   pos: POS_ADV
       sofa: _InitialView
       begin: 527
       end: 531
       PosValue: "AV0"
       coarseValue: "ADV"
 [.]
-POS_PUNCT:380
+POS_PUNCT
    sofa: _InitialView
    begin: 531
    end: 532
    PosValue: "PUN"
    coarseValue: "PUNCT"
 [.]
-Token:379
+Token
    sofa: _InitialView
    begin: 531
    end: 532
-   pos: POS_PUNCT:380
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 531
       end: 532
       PosValue: "PUN"
       coarseValue: "PUNCT"
 [Yeah.]
-Sentence:387
+Sentence
    sofa: _InitialView
    begin: 533
    end: 538
 [Yeah]
-POS_INTJ:383
+POS_INTJ
    sofa: _InitialView
    begin: 533
    end: 537
    PosValue: "ITJ"
    coarseValue: "INTJ"
 [Yeah]
-Lemma:384
+Lemma
    sofa: _InitialView
    begin: 533
    end: 537
    value: "yeah"
 [Yeah]
-Token:382
+Token
    sofa: _InitialView
    begin: 533
    end: 537
-   lemma: Lemma:384
+   lemma: Lemma
       sofa: _InitialView
       begin: 533
       end: 537
       value: "yeah"
-   pos: POS_INTJ:383
+   pos: POS_INTJ
       sofa: _InitialView
       begin: 533
       end: 537
       PosValue: "ITJ"
       coarseValue: "INTJ"
 [.]
-POS_PUNCT:386
+POS_PUNCT
    sofa: _InitialView
    begin: 537
    end: 538
    PosValue: "PUN"
    coarseValue: "PUNCT"
 [.]
-Token:385
+Token
    sofa: _InitialView
    begin: 537
    end: 538
-   pos: POS_PUNCT:386
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 537
       end: 538
       PosValue: "PUN"
       coarseValue: "PUNCT"
 [erm, first  twelve weeks pregnant so should I mark at the bottom when she types .]
-Sentence:437
+Sentence
    sofa: _InitialView
    begin: 539
    end: 620
 [erm]
-POS_X:389
+POS_X
    sofa: _InitialView
    begin: 539
    end: 542
    PosValue: "UNC"
    coarseValue: "X"
 [erm]
-Lemma:390
+Lemma
    sofa: _InitialView
    begin: 539
    end: 542
    value: "erm"
 [erm]
-Token:388
+Token
    sofa: _InitialView
    begin: 539
    end: 542
-   lemma: Lemma:390
+   lemma: Lemma
       sofa: _InitialView
       begin: 539
       end: 542
       value: "erm"
-   pos: POS_X:389
+   pos: POS_X
       sofa: _InitialView
       begin: 539
       end: 542
       PosValue: "UNC"
       coarseValue: "X"
 [,]
-POS_PUNCT:392
+POS_PUNCT
    sofa: _InitialView
    begin: 542
    end: 543
    PosValue: "PUN"
    coarseValue: "PUNCT"
 [,]
-Token:391
+Token
    sofa: _InitialView
    begin: 542
    end: 543
-   pos: POS_PUNCT:392
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 542
       end: 543
       PosValue: "PUN"
       coarseValue: "PUNCT"
 [first]
-POS_NUM:394
+POS_NUM
    sofa: _InitialView
    begin: 544
    end: 549
    PosValue: "ORD"
    coarseValue: "NUM"
 [first]
-Lemma:395
+Lemma
    sofa: _InitialView
    begin: 544
    end: 549
    value: "first"
 [first]
-Token:393
+Token
    sofa: _InitialView
    begin: 544
    end: 549
-   lemma: Lemma:395
+   lemma: Lemma
       sofa: _InitialView
       begin: 544
       end: 549
       value: "first"
-   pos: POS_NUM:394
+   pos: POS_NUM
       sofa: _InitialView
       begin: 544
       end: 549
       PosValue: "ORD"
       coarseValue: "NUM"
 [twelve]
-POS_NUM:397
+POS_NUM
    sofa: _InitialView
    begin: 551
    end: 557
    PosValue: "CRD"
    coarseValue: "NUM"
 [twelve]
-Lemma:398
+Lemma
    sofa: _InitialView
    begin: 551
    end: 557
    value: "twelve"
 [twelve]
-Token:396
+Token
    sofa: _InitialView
    begin: 551
    end: 557
-   lemma: Lemma:398
+   lemma: Lemma
       sofa: _InitialView
       begin: 551
       end: 557
       value: "twelve"
-   pos: POS_NUM:397
+   pos: POS_NUM
       sofa: _InitialView
       begin: 551
       end: 557
       PosValue: "CRD"
       coarseValue: "NUM"
 [weeks]
-POS_NOUN:400
+POS_NOUN
    sofa: _InitialView
    begin: 558
    end: 563
    PosValue: "NN2"
    coarseValue: "NOUN"
 [weeks]
-Lemma:401
+Lemma
    sofa: _InitialView
    begin: 558
    end: 563
    value: "week"
 [weeks]
-Token:399
+Token
    sofa: _InitialView
    begin: 558
    end: 563
-   lemma: Lemma:401
+   lemma: Lemma
       sofa: _InitialView
       begin: 558
       end: 563
       value: "week"
-   pos: POS_NOUN:400
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 558
       end: 563
       PosValue: "NN2"
       coarseValue: "NOUN"
 [pregnant]
-POS_ADJ:403
+POS_ADJ
    sofa: _InitialView
    begin: 564
    end: 572
    PosValue: "AJ0"
    coarseValue: "ADJ"
 [pregnant]
-Lemma:404
+Lemma
    sofa: _InitialView
    begin: 564
    end: 572
    value: "pregnant"
 [pregnant]
-Token:402
+Token
    sofa: _InitialView
    begin: 564
    end: 572
-   lemma: Lemma:404
+   lemma: Lemma
       sofa: _InitialView
       begin: 564
       end: 572
       value: "pregnant"
-   pos: POS_ADJ:403
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 564
       end: 572
       PosValue: "AJ0"
       coarseValue: "ADJ"
 [so]
-POS_ADV:406
+POS_ADV
    sofa: _InitialView
    begin: 573
    end: 575
    PosValue: "AV0"
    coarseValue: "ADV"
 [so]
-Lemma:407
+Lemma
    sofa: _InitialView
    begin: 573
    end: 575
    value: "so"
 [so]
-Token:405
+Token
    sofa: _InitialView
    begin: 573
    end: 575
-   lemma: Lemma:407
+   lemma: Lemma
       sofa: _InitialView
       begin: 573
       end: 575
       value: "so"
-   pos: POS_ADV:406
+   pos: POS_ADV
       sofa: _InitialView
       begin: 573
       end: 575
       PosValue: "AV0"
       coarseValue: "ADV"
 [should]
-POS_AUX:409
+POS_AUX
    sofa: _InitialView
    begin: 576
    end: 582
    PosValue: "VM0"
    coarseValue: "AUX"
 [should]
-Lemma:410
+Lemma
    sofa: _InitialView
    begin: 576
    end: 582
    value: "should"
 [should]
-Token:408
+Token
    sofa: _InitialView
    begin: 576
    end: 582
-   lemma: Lemma:410
+   lemma: Lemma
       sofa: _InitialView
       begin: 576
       end: 582
       value: "should"
-   pos: POS_AUX:409
+   pos: POS_AUX
       sofa: _InitialView
       begin: 576
       end: 582
       PosValue: "VM0"
       coarseValue: "AUX"
 [I]
-POS_PRON:412
+POS_PRON
    sofa: _InitialView
    begin: 583
    end: 584
    PosValue: "PNP"
    coarseValue: "PRON"
 [I]
-Lemma:413
+Lemma
    sofa: _InitialView
    begin: 583
    end: 584
    value: "i"
 [I]
-Token:411
+Token
    sofa: _InitialView
    begin: 583
    end: 584
-   lemma: Lemma:413
+   lemma: Lemma
       sofa: _InitialView
       begin: 583
       end: 584
       value: "i"
-   pos: POS_PRON:412
+   pos: POS_PRON
       sofa: _InitialView
       begin: 583
       end: 584
       PosValue: "PNP"
       coarseValue: "PRON"
 [mark]
-POS_VERB:415
+POS_VERB
    sofa: _InitialView
    begin: 585
    end: 589
    PosValue: "VVI"
    coarseValue: "VERB"
 [mark]
-Lemma:416
+Lemma
    sofa: _InitialView
    begin: 585
    end: 589
    value: "mark"
 [mark]
-Token:414
+Token
    sofa: _InitialView
    begin: 585
    end: 589
-   lemma: Lemma:416
+   lemma: Lemma
       sofa: _InitialView
       begin: 585
       end: 589
       value: "mark"
-   pos: POS_VERB:415
+   pos: POS_VERB
       sofa: _InitialView
       begin: 585
       end: 589
       PosValue: "VVI"
       coarseValue: "VERB"
 [at]
-POS_ADP:418
+POS_ADP
    sofa: _InitialView
    begin: 590
    end: 592
    PosValue: "PRP"
    coarseValue: "ADP"
 [at]
-Lemma:419
+Lemma
    sofa: _InitialView
    begin: 590
    end: 592
    value: "at"
 [at]
-Token:417
+Token
    sofa: _InitialView
    begin: 590
    end: 592
-   lemma: Lemma:419
+   lemma: Lemma
       sofa: _InitialView
       begin: 590
       end: 592
       value: "at"
-   pos: POS_ADP:418
+   pos: POS_ADP
       sofa: _InitialView
       begin: 590
       end: 592
       PosValue: "PRP"
       coarseValue: "ADP"
 [the]
-POS_DET:421
+POS_DET
    sofa: _InitialView
    begin: 593
    end: 596
    PosValue: "AT0"
    coarseValue: "DET"
 [the]
-Lemma:422
+Lemma
    sofa: _InitialView
    begin: 593
    end: 596
    value: "the"
 [the]
-Token:420
+Token
    sofa: _InitialView
    begin: 593
    end: 596
-   lemma: Lemma:422
+   lemma: Lemma
       sofa: _InitialView
       begin: 593
       end: 596
       value: "the"
-   pos: POS_DET:421
+   pos: POS_DET
       sofa: _InitialView
       begin: 593
       end: 596
       PosValue: "AT0"
       coarseValue: "DET"
 [bottom]
-POS_NOUN:424
+POS_NOUN
    sofa: _InitialView
    begin: 597
    end: 603
    PosValue: "NN1-AJ0"
    coarseValue: "NOUN"
 [bottom]
-Lemma:425
+Lemma
    sofa: _InitialView
    begin: 597
    end: 603
    value: "bottom"
 [bottom]
-Token:423
+Token
    sofa: _InitialView
    begin: 597
    end: 603
-   lemma: Lemma:425
+   lemma: Lemma
       sofa: _InitialView
       begin: 597
       end: 603
       value: "bottom"
-   pos: POS_NOUN:424
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 597
       end: 603
       PosValue: "NN1-AJ0"
       coarseValue: "NOUN"
 [when]
-POS_SCONJ:427
+POS_SCONJ
    sofa: _InitialView
    begin: 604
    end: 608
    PosValue: "CJS"
    coarseValue: "SCONJ"
 [when]
-Lemma:428
+Lemma
    sofa: _InitialView
    begin: 604
    end: 608
    value: "when"
 [when]
-Token:426
+Token
    sofa: _InitialView
    begin: 604
    end: 608
-   lemma: Lemma:428
+   lemma: Lemma
       sofa: _InitialView
       begin: 604
       end: 608
       value: "when"
-   pos: POS_SCONJ:427
+   pos: POS_SCONJ
       sofa: _InitialView
       begin: 604
       end: 608
       PosValue: "CJS"
       coarseValue: "SCONJ"
 [she]
-POS_PRON:430
+POS_PRON
    sofa: _InitialView
    begin: 609
    end: 612
    PosValue: "PNP"
    coarseValue: "PRON"
 [she]
-Lemma:431
+Lemma
    sofa: _InitialView
    begin: 609
    end: 612
    value: "she"
 [she]
-Token:429
+Token
    sofa: _InitialView
    begin: 609
    end: 612
-   lemma: Lemma:431
+   lemma: Lemma
       sofa: _InitialView
       begin: 609
       end: 612
       value: "she"
-   pos: POS_PRON:430
+   pos: POS_PRON
       sofa: _InitialView
       begin: 609
       end: 612
       PosValue: "PNP"
       coarseValue: "PRON"
 [types]
-POS_VERB:433
+POS_VERB
    sofa: _InitialView
    begin: 613
    end: 618
    PosValue: "VVZ"
    coarseValue: "VERB"
 [types]
-Lemma:434
+Lemma
    sofa: _InitialView
    begin: 613
    end: 618
    value: "type"
 [types]
-Token:432
+Token
    sofa: _InitialView
    begin: 613
    end: 618
-   lemma: Lemma:434
+   lemma: Lemma
       sofa: _InitialView
       begin: 613
       end: 618
       value: "type"
-   pos: POS_VERB:433
+   pos: POS_VERB
       sofa: _InitialView
       begin: 613
       end: 618
       PosValue: "VVZ"
       coarseValue: "VERB"
 [.]
-POS_PUNCT:436
+POS_PUNCT
    sofa: _InitialView
    begin: 619
    end: 620
    PosValue: "PUN"
    coarseValue: "PUNCT"
 [.]
-Token:435
+Token
    sofa: _InitialView
    begin: 619
    end: 620
-   pos: POS_PUNCT:436
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 619
       end: 620
       PosValue: "PUN"
       coarseValue: "PUNCT"
 [Erm  this one.]
-Sentence:449
+Sentence
    sofa: _InitialView
    begin: 621
    end: 635
 [Erm]
-POS_X:439
+POS_X
    sofa: _InitialView
    begin: 621
    end: 624
    PosValue: "UNC"
    coarseValue: "X"
 [Erm]
-Lemma:440
+Lemma
    sofa: _InitialView
    begin: 621
    end: 624
    value: "erm"
 [Erm]
-Token:438
+Token
    sofa: _InitialView
    begin: 621
    end: 624
-   lemma: Lemma:440
+   lemma: Lemma
       sofa: _InitialView
       begin: 621
       end: 624
       value: "erm"
-   pos: POS_X:439
+   pos: POS_X
       sofa: _InitialView
       begin: 621
       end: 624
       PosValue: "UNC"
       coarseValue: "X"
 [this]
-POS_DET:442
+POS_DET
    sofa: _InitialView
    begin: 626
    end: 630
    PosValue: "DT0"
    coarseValue: "DET"
 [this]
-Lemma:443
+Lemma
    sofa: _InitialView
    begin: 626
    end: 630
    value: "this"
 [this]
-Token:441
+Token
    sofa: _InitialView
    begin: 626
    end: 630
-   lemma: Lemma:443
+   lemma: Lemma
       sofa: _InitialView
       begin: 626
       end: 630
       value: "this"
-   pos: POS_DET:442
+   pos: POS_DET
       sofa: _InitialView
       begin: 626
       end: 630
       PosValue: "DT0"
       coarseValue: "DET"
 [one]
-POS_PRON:445
+POS_PRON
    sofa: _InitialView
    begin: 631
    end: 634
    PosValue: "PNI"
    coarseValue: "PRON"
 [one]
-Lemma:446
+Lemma
    sofa: _InitialView
    begin: 631
    end: 634
    value: "one"
 [one]
-Token:444
+Token
    sofa: _InitialView
    begin: 631
    end: 634
-   lemma: Lemma:446
+   lemma: Lemma
       sofa: _InitialView
       begin: 631
       end: 634
       value: "one"
-   pos: POS_PRON:445
+   pos: POS_PRON
       sofa: _InitialView
       begin: 631
       end: 634
       PosValue: "PNI"
       coarseValue: "PRON"
 [.]
-POS_PUNCT:448
+POS_PUNCT
    sofa: _InitialView
    begin: 634
    end: 635
    PosValue: "PUN"
    coarseValue: "PUNCT"
 [.]
-Token:447
+Token
    sofa: _InitialView
    begin: 634
    end: 635
-   pos: POS_PUNCT:448
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 634
       end: 635

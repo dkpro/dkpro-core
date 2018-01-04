@@ -2,7 +2,7 @@
 
 -------- View _InitialView begin ----------------------------------
 
-DocumentMetaData:1
+DocumentMetaData
    sofa: _InitialView
    begin: 0
    end: 109
@@ -22,18 +22,18 @@ Word with Umlauts (äöü) may require the substitution table.
 [This is a test.
 Dies ist ein Test.
 ]
-Paragraph:3
+Paragraph
    sofa: _InitialView
    begin: 0
    end: 35
 [Überschrift
 ]
-Heading:4
+Heading
    sofa: _InitialView
    begin: 36
    end: 48
 [Word with Umlauts (äöü) may require the substitution table.]
-Paragraph:5
+Paragraph
    sofa: _InitialView
    begin: 49
    end: 108
