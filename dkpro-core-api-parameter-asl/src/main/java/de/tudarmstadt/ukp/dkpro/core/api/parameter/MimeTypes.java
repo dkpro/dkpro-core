@@ -72,6 +72,7 @@ public final class MimeTypes
     public final static String TEXT_X_CONLL_U = "text/x.org.dkpro.conll-u";
     public final static String TEXT_X_IMSCWB = "text/x.org.dkpro.imscwb";
     public final static String TEXT_X_GERMEVAL_2014 = "text/x.org.dkpro.germeval-2014";
+    public final static String TEXT_X_LCC = "text/x.org.dkpro.lcc";
     public final static String TEXT_X_NGRAM = "text/x.org.dkpro.ngram";
     public final static String TEXT_X_PTB_CHUNKED = "text/x.org.dkpro.ptb-chunked";
     public final static String TEXT_X_PTB_COMBINED = "text/x.org.dkpro.ptb-combined";
