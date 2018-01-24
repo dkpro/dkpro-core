@@ -104,11 +104,11 @@ public class CamelCaseTokenSegmenter
 				toRemove.add(t);
 			}
 
-            if(markupType != null) {
-              CAS cas = aJCas.getCas();
-              AnnotationFS annotation = cas.createAnnotation(CasUtil.getType(cas, markupType), t.getBegin(), t.getEnd());
-              cas.addFsToIndexes(annotation);
-            }
+			if(markupType != null) {
+				CAS cas = aJCas.getCas();
+				AnnotationFS annotation = cas.createAnnotation(CasUtil.getType(cas, markupType), t.getBegin(), t.getEnd());
+				cas.addFsToIndexes(annotation);
+			}
 		}
 
 		for (Token t : toAdd) {

@@ -17,24 +17,20 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.tokit;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.jcas.JCas;
+import org.junit.Test;
+
+import java.util.Collection;
+import java.util.List;
+
 import static java.util.Arrays.asList;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.junit.Assert.assertEquals;
-
-import java.util.Collection;
-import java.util.List;
-
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split;
-import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.fit.util.JCasUtil;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.tcas.Annotation;
-import org.junit.Assert;
-import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class CamelCaseSegmenterTest
 {
@@ -118,15 +114,15 @@ public class CamelCaseSegmenterTest
 		seg.process(cas);
 
 		Collection<Split> markups = select(cas, Split.class);
-		Assert.assertEquals(1, markups.size());
+		assertEquals(1, markups.size());
 		Split markup = markups.stream().findFirst().get();
-		Assert.assertEquals(4, markup.getBegin());
-		Assert.assertEquals(27, markup.getEnd());
-		Assert.assertEquals("getFileUploadURLRequest", markup.getCoveredText());
-        List<String> ref = asList("Try", "get", "File", "Upload", "URL", "Request", "Now");
-        List<String> tokens = toText(select(cas, Token.class));
-        System.out.println(tokens);
-        assertEquals(ref, tokens);
+		assertEquals(4, markup.getBegin());
+		assertEquals(27, markup.getEnd());
+		assertEquals("getFileUploadURLRequest", markup.getCoveredText());
+		List<String> ref = asList("Try", "get", "File", "Upload", "URL", "Request", "Now");
+		List<String> tokens = toText(select(cas, Token.class));
+		System.out.println(tokens);
+		assertEquals(ref, tokens);
 
 	}
 }
