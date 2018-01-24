@@ -17,25 +17,23 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.tokit;
 
-import static org.apache.uima.fit.util.JCasUtil.select;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.uima.UimaContext;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.CAS;
+import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
+import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
-
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import org.apache.uima.jcas.tcas.Annotation;
-import org.apache.uima.resource.ResourceInitializationException;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 /**
  * Split up existing tokens again if they are camel-case text.
@@ -50,7 +48,7 @@ public class CamelCaseTokenSegmenter
 	extends JCasAnnotator_ImplBase
 {
 	/**
-	 * Wether to remove the original token.
+	 * Whether to remove the original token.
 	 *
 	 * Default: {@code true}
 	 */
@@ -59,41 +57,12 @@ public class CamelCaseTokenSegmenter
 	private boolean deleteCover;
 
 	/**
-	 * Optional annotation type to markup the original covered token area with when specified. This type must be a
-	 * subtype of {@link Annotation} with a constructor that takes a {@link JCas} as argument.
+	 * Optional annotation type to markup the original covered token area when specified. This type must be a subtype of
+	 * {@link Annotation}.
 	 */
 	public static final String PARAM_MARKUP_TYPE = "markupType";
 	@ConfigurationParameter(name = PARAM_MARKUP_TYPE, mandatory = false)
-	private Class markupType;
-
-	// Caching the constructor for optimized access later
-	private Constructor markupConstructor;
-
-	@Override
-	public void initialize(UimaContext context) throws ResourceInitializationException {
-		super.initialize(context);
-
-		if(markupType != null) {
-			try {
-				markupConstructor = markupType.getConstructor(JCas.class);
-			} catch (NoSuchMethodException e) {
-				throw new ResourceInitializationException(e);
-			}
-		}
-	}
-
-	private void markup(JCas aJCas, Token t) throws AnalysisEngineProcessException {
-		if(markupConstructor != null) {
-			try {
-				Annotation markup = (Annotation) markupConstructor.newInstance(aJCas);
-				markup.setBegin(t.getBegin());
-				markup.setEnd(t.getEnd());
-				markup.addToIndexes();
-			} catch (Exception e) {
-				throw new AnalysisEngineProcessException(e);
-			}
-		}
-	}
+	private String markupType;
 
 	@Override
 	public void process(JCas aJCas)
@@ -136,7 +105,11 @@ public class CamelCaseTokenSegmenter
 				toRemove.add(t);
 			}
 
-			markup(aJCas, t);
+            if(markupType != null) {
+              CAS cas = aJCas.getCas();
+              AnnotationFS annotation = cas.createAnnotation(CasUtil.getType(cas, markupType), t.getBegin(), t.getEnd());
+              cas.addFsToIndexes(annotation);
+          	}
 		}
 
 		for (Token t : toAdd) {
