@@ -111,7 +111,9 @@ public class CamelCaseSegmenterTest
 		String content = "Try getFileUploadURLRequest Now";
 		JCas cas = seg.newJCas();
 		cas.setDocumentText(content);
+		new Token(cas, 0, 3).addToIndexes();
 		new Token(cas, 4, 27).addToIndexes();
+		new Token(cas, 28, 31).addToIndexes();
 
 		seg.process(cas);
 
