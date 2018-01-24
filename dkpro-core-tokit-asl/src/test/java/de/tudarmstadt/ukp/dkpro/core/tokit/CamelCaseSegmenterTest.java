@@ -117,11 +117,16 @@ public class CamelCaseSegmenterTest
 
 		seg.process(cas);
 
-		Collection<Split> markups = JCasUtil.select(cas, Split.class);
+		Collection<Split> markups = select(cas, Split.class);
 		Assert.assertEquals(1, markups.size());
 		Split markup = markups.stream().findFirst().get();
 		Assert.assertEquals(4, markup.getBegin());
 		Assert.assertEquals(27, markup.getEnd());
 		Assert.assertEquals("getFileUploadURLRequest", markup.getCoveredText());
+        List<String> ref = asList("Try", "get", "File", "Upload", "URL", "Request", "Now");
+        List<String> tokens = toText(select(cas, Token.class));
+        System.out.println(tokens);
+        assertEquals(ref, tokens);
+
 	}
 }
