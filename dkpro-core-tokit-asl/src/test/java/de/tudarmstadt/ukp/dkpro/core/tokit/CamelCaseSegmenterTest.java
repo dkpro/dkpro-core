@@ -23,10 +23,15 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.junit.Assert.assertEquals;
 
+import java.util.Collection;
 import java.util.List;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split;
 import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.tcas.Annotation;
+import org.junit.Assert;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -90,5 +95,31 @@ public class CamelCaseSegmenterTest
 		List<String> tokens = toText(select(cas, Token.class));
 		System.out.println(tokens);
 		assertEquals(ref, tokens);
+	}
+
+	@Test
+	public void testProcess4() throws Exception
+	{
+		// Verifying that the camel case token is marked up correctly when the optional markup type is specified
+		AnalysisEngine seg = createEngine(
+				CamelCaseTokenSegmenter.class,
+				CamelCaseTokenSegmenter.PARAM_MARKUP_TYPE,
+				Split.class // Just reusing the Split annotation type for this test
+		);
+
+		//                01234567890123456789012
+		String content = "Try getFileUploadURLRequest Now";
+		JCas cas = seg.newJCas();
+		cas.setDocumentText(content);
+		new Token(cas, 4, 27).addToIndexes();
+
+		seg.process(cas);
+
+		Collection<Split> markups = JCasUtil.select(cas, Split.class);
+		Assert.assertEquals(1, markups.size());
+		Split markup = markups.stream().findFirst().get();
+		Assert.assertEquals(4, markup.getBegin());
+		Assert.assertEquals(27, markup.getEnd());
+		Assert.assertEquals("getFileUploadURLRequest", markup.getCoveredText());
 	}
 }
