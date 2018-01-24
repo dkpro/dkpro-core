@@ -70,7 +70,6 @@ public class CamelCaseTokenSegmenter
 	{
 		List<Token> toAdd = new ArrayList<Token>();
 		List<Token> toRemove = new ArrayList<Token>();
-		List<Token> toMarkup = new ArrayList<Token>();
 
 		for (Token t : select(aJCas, Token.class)) {
 			if ((t.getEnd() - t.getBegin()) < 2) {
@@ -109,7 +108,7 @@ public class CamelCaseTokenSegmenter
               CAS cas = aJCas.getCas();
               AnnotationFS annotation = cas.createAnnotation(CasUtil.getType(cas, markupType), t.getBegin(), t.getEnd());
               cas.addFsToIndexes(annotation);
-          	}
+            }
 		}
 
 		for (Token t : toAdd) {
