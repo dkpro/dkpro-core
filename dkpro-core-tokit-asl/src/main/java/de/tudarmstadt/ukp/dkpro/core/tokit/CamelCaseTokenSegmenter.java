@@ -17,20 +17,23 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.tokit;
 
-import static org.apache.uima.fit.util.JCasUtil.select;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.CAS;
+import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
+import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.tcas.Annotation;
 
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 /**
  * Split up existing tokens again if they are camel-case text.
@@ -45,13 +48,21 @@ public class CamelCaseTokenSegmenter
 	extends JCasAnnotator_ImplBase
 {
 	/**
-	 * Wether to remove the original token.
+	 * Whether to remove the original token.
 	 *
 	 * Default: {@code true}
 	 */
 	public static final String PARAM_DELETE_COVER = ComponentParameters.PARAM_DELETE_COVER;
 	@ConfigurationParameter(name = PARAM_DELETE_COVER, mandatory = true, defaultValue = "true")
 	private boolean deleteCover;
+
+	/**
+	 * Optional annotation type to markup the original covered token area when specified. This type must be a subtype of
+	 * {@link Annotation}.
+	 */
+	public static final String PARAM_MARKUP_TYPE = "markupType";
+	@ConfigurationParameter(name = PARAM_MARKUP_TYPE, mandatory = false)
+	private String markupType;
 
 	@Override
 	public void process(JCas aJCas)
@@ -91,6 +102,12 @@ public class CamelCaseTokenSegmenter
 
 			if (deleteCover) {
 				toRemove.add(t);
+			}
+
+			if(markupType != null) {
+				CAS cas = aJCas.getCas();
+				AnnotationFS annotation = cas.createAnnotation(CasUtil.getType(cas, markupType), t.getBegin(), t.getEnd());
+				cas.addFsToIndexes(annotation);
 			}
 		}
 
