@@ -1,26 +1,26 @@
 
 
    
-/* Apache UIMA v3 - First created by JCasGen Fri Sep 08 09:57:05 EEST 2017 */
+/* Apache UIMA v3 - First created by JCasGen Sun Jan 28 11:36:00 CET 2018 */
 
 package de.tudarmstadt.ukp.dkpro.core.api.coref.type;
 
+import java.lang.invoke.CallSite;
+import java.lang.invoke.MethodHandle;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.uima.cas.impl.CASImpl;
 import org.apache.uima.cas.impl.TypeImpl;
 import org.apache.uima.cas.impl.TypeSystemImpl;
-import org.apache.uima.jcas.JCas; 
+import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
-
-
 import org.apache.uima.jcas.cas.AnnotationBase;
 
 
 /** Marks the beginning of a chain.
- * Updated by JCasGen Fri Sep 08 09:57:05 EEST 2017
- * XML source: /Users/bluefire/git/dkpro-core/dkpro-core-api-coref-asl/target/jcasgen/typesystem.xml
+ * Updated by JCasGen Sun Jan 28 11:36:00 CET 2018
+ * XML source: /Users/bluefire/git/dkpro-core/dkpro-core-api-coref-asl/src/main/resources/desc/type/coref.xml
  * @generated */
 public class CoreferenceChain extends AnnotationBase {
  
@@ -55,7 +55,8 @@ public class CoreferenceChain extends AnnotationBase {
 
 
   /* Feature Adjusted Offsets */
-  public final static int _FI_first = TypeSystemImpl.getAdjustedFeatureOffset("first");
+  private final static CallSite _FC_first = TypeSystemImpl.createCallSite(CoreferenceChain.class, "first");
+  private final static MethodHandle _FH_first = _FC_first.dynamicInvoker();
 
    
   /** Never called.  Disable default constructor
@@ -99,16 +100,16 @@ public class CoreferenceChain extends AnnotationBase {
    * @generated
    * @return value of the feature 
    */
-  public CoreferenceLink getFirst() { return (CoreferenceLink)(_getFeatureValueNc(_FI_first));}
+  public CoreferenceLink getFirst() { return (CoreferenceLink)(_getFeatureValueNc(wrapGetIntCatchException(_FH_first)));}
     
   /** setter for first - sets This is the first corefernce link in coreference chain 
    * @generated
    * @param v value to set into the feature 
    */
   public void setFirst(CoreferenceLink v) {
-    _setFeatureValueNcWj(_FI_first, v);
+    _setFeatureValueNcWj(wrapGetIntCatchException(_FH_first), v);
   }    
-    
+
   public List<CoreferenceLink> links() {
     List<CoreferenceLink> links = new ArrayList<CoreferenceLink>();  
     CoreferenceLink l = getFirst();
