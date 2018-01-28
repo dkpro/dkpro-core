@@ -1,10 +1,12 @@
 
 
    
-/* Apache UIMA v3 - First created by JCasGen Fri Sep 08 10:00:52 EEST 2017 */
+/* Apache UIMA v3 - First created by JCasGen Sun Jan 28 11:38:37 CET 2018 */
 
 package de.tudarmstadt.ukp.dkpro.core.api.segmentation.type;
 
+import java.lang.invoke.CallSite;
+import java.lang.invoke.MethodHandle;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -13,17 +15,15 @@ import org.apache.uima.cas.impl.CASImpl;
 import org.apache.uima.cas.impl.TypeImpl;
 import org.apache.uima.cas.impl.TypeSystemImpl;
 import org.apache.uima.fit.util.FSCollectionFactory;
-import org.apache.uima.jcas.JCas; 
+import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
-
-
 import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** This type represents a decompounding word, i.e.: flowerpot. Each Compound one have at least two Splits.
- * Updated by JCasGen Fri Sep 08 10:00:52 EEST 2017
- * XML source: /Users/bluefire/git/dkpro-core/dkpro-core-api-segmentation-asl/target/jcasgen/typesystem.xml
+ * Updated by JCasGen Sun Jan 28 11:38:37 CET 2018
+ * XML source: /Users/bluefire/git/dkpro-core/dkpro-core-api-segmentation-asl/src/main/resources/desc/type/LexicalUnits_customized.xml
  * @generated */
 public class Compound extends Annotation {
  
@@ -58,7 +58,8 @@ public class Compound extends Annotation {
 
 
   /* Feature Adjusted Offsets */
-  public final static int _FI_splits = TypeSystemImpl.getAdjustedFeatureOffset("splits");
+  private final static CallSite _FC_splits = TypeSystemImpl.createCallSite(Compound.class, "splits");
+  private final static MethodHandle _FH_splits = _FC_splits.dynamicInvoker();
 
    
   /** Never called.  Disable default constructor
@@ -114,14 +115,14 @@ public class Compound extends Annotation {
    * @generated
    * @return value of the feature 
    */
-  public FSArray getSplits() { return (FSArray)(_getFeatureValueNc(_FI_splits));}
+  public FSArray getSplits() { return (FSArray)(_getFeatureValueNc(wrapGetIntCatchException(_FH_splits)));}
     
   /** setter for splits - sets A word that can be decomposed into different parts. 
    * @generated
    * @param v value to set into the feature 
    */
   public void setSplits(FSArray v) {
-    _setFeatureValueNcWj(_FI_splits, v);
+    _setFeatureValueNcWj(wrapGetIntCatchException(_FH_splits), v);
   }    
     
     
@@ -131,7 +132,7 @@ public class Compound extends Annotation {
    * @return value of the element at index i 
    */
   public Split getSplits(int i) {
-     return (Split)(((FSArray)(_getFeatureValueNc(_FI_splits))).get(i));} 
+     return (Split)(((FSArray)(_getFeatureValueNc(wrapGetIntCatchException(_FH_splits)))).get(i));} 
 
   /** indexed setter for splits - sets an indexed value - A word that can be decomposed into different parts.
    * @generated
@@ -139,8 +140,9 @@ public class Compound extends Annotation {
    * @param v value to set into the array 
    */
   public void setSplits(int i, Split v) {
-    ((FSArray)(_getFeatureValueNc(_FI_splits))).set(i, v);
+    ((FSArray)(_getFeatureValueNc(wrapGetIntCatchException(_FH_splits)))).set(i, v);
   }  
+
 
   /**
    * Enum for all possible split levels for decompounding
@@ -252,5 +254,3 @@ public class Compound extends Annotation {
       return splitsCollection.toArray(new Split[splitsCollection.size()]);
   }
 }
-
-    

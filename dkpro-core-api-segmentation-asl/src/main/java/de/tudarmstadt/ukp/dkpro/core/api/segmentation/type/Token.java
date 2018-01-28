@@ -1,26 +1,28 @@
 
 
    
-/* Apache UIMA v3 - First created by JCasGen Fri Sep 08 10:00:52 EEST 2017 */
+/* Apache UIMA v3 - First created by JCasGen Sun Jan 28 11:38:37 CET 2018 */
 
 package de.tudarmstadt.ukp.dkpro.core.api.segmentation.type;
+
+import java.lang.invoke.CallSite;
+import java.lang.invoke.MethodHandle;
 
 import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.impl.CASImpl;
 import org.apache.uima.cas.impl.TypeImpl;
 import org.apache.uima.cas.impl.TypeSystemImpl;
-import org.apache.uima.jcas.JCas; 
+import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
-
+import org.apache.uima.jcas.tcas.Annotation;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** <p>Token is one of the two types commonly produced by a segmenter (the other being Sentence). A Token usually represents a word, although it may be used to represent multiple tightly connected words (e.g. "New York") or parts of a word (e.g. the possessive "'s"). One may choose to split compound words into multiple tokens, e.g. ("CamelCase" -&gt; "Camel", "Case"; "Zauberstab" -&gt; "Zauber", "stab"). Most processing components operate on Tokens, usually within the limits of the surrounding Sentence. E.g. a part-of-speech tagger analyses each Token in a Sentence and assigns a part-of-speech to each Token.</p>
- * Updated by JCasGen Fri Sep 08 10:00:52 EEST 2017
- * XML source: /Users/bluefire/git/dkpro-core/dkpro-core-api-segmentation-asl/target/jcasgen/typesystem.xml
+ * Updated by JCasGen Sun Jan 28 11:38:37 CET 2018
+ * XML source: /Users/bluefire/git/dkpro-core/dkpro-core-api-segmentation-asl/src/main/resources/desc/type/LexicalUnits_customized.xml
  * @generated */
 public class Token extends Annotation {
  
@@ -62,14 +64,22 @@ public class Token extends Annotation {
 
 
   /* Feature Adjusted Offsets */
-  public final static int _FI_parent = TypeSystemImpl.getAdjustedFeatureOffset("parent");
-  public final static int _FI_lemma = TypeSystemImpl.getAdjustedFeatureOffset("lemma");
-  public final static int _FI_stem = TypeSystemImpl.getAdjustedFeatureOffset("stem");
-  public final static int _FI_pos = TypeSystemImpl.getAdjustedFeatureOffset("pos");
-  public final static int _FI_morph = TypeSystemImpl.getAdjustedFeatureOffset("morph");
-  public final static int _FI_id = TypeSystemImpl.getAdjustedFeatureOffset("id");
-  public final static int _FI_form = TypeSystemImpl.getAdjustedFeatureOffset("form");
-  public final static int _FI_syntacticFunction = TypeSystemImpl.getAdjustedFeatureOffset("syntacticFunction");
+  private final static CallSite _FC_parent = TypeSystemImpl.createCallSite(Token.class, "parent");
+  private final static MethodHandle _FH_parent = _FC_parent.dynamicInvoker();
+  private final static CallSite _FC_lemma = TypeSystemImpl.createCallSite(Token.class, "lemma");
+  private final static MethodHandle _FH_lemma = _FC_lemma.dynamicInvoker();
+  private final static CallSite _FC_stem = TypeSystemImpl.createCallSite(Token.class, "stem");
+  private final static MethodHandle _FH_stem = _FC_stem.dynamicInvoker();
+  private final static CallSite _FC_pos = TypeSystemImpl.createCallSite(Token.class, "pos");
+  private final static MethodHandle _FH_pos = _FC_pos.dynamicInvoker();
+  private final static CallSite _FC_morph = TypeSystemImpl.createCallSite(Token.class, "morph");
+  private final static MethodHandle _FH_morph = _FC_morph.dynamicInvoker();
+  private final static CallSite _FC_id = TypeSystemImpl.createCallSite(Token.class, "id");
+  private final static MethodHandle _FH_id = _FC_id.dynamicInvoker();
+  private final static CallSite _FC_form = TypeSystemImpl.createCallSite(Token.class, "form");
+  private final static MethodHandle _FH_form = _FC_form.dynamicInvoker();
+  private final static CallSite _FC_syntacticFunction = TypeSystemImpl.createCallSite(Token.class, "syntacticFunction");
+  private final static MethodHandle _FH_syntacticFunction = _FC_syntacticFunction.dynamicInvoker();
 
    
   /** Never called.  Disable default constructor
@@ -125,14 +135,14 @@ public class Token extends Annotation {
    * @generated
    * @return value of the feature 
    */
-  public Annotation getParent() { return (Annotation)(_getFeatureValueNc(_FI_parent));}
+  public Annotation getParent() { return (Annotation)(_getFeatureValueNc(wrapGetIntCatchException(_FH_parent)));}
     
   /** setter for parent - sets the parent of this token. This feature is meant to be used in when the token participates in a constituency parse and then refers to a constituent containing this token. The type of this feature is {@link Annotation} to avoid adding a dependency on the syntax API module. 
    * @generated
    * @param v value to set into the feature 
    */
   public void setParent(Annotation v) {
-    _setFeatureValueNcWj(_FI_parent, v);
+    _setFeatureValueNcWj(wrapGetIntCatchException(_FH_parent), v);
   }    
     
    
@@ -144,14 +154,14 @@ public class Token extends Annotation {
    * @generated
    * @return value of the feature 
    */
-  public Lemma getLemma() { return (Lemma)(_getFeatureValueNc(_FI_lemma));}
+  public Lemma getLemma() { return (Lemma)(_getFeatureValueNc(wrapGetIntCatchException(_FH_lemma)));}
     
   /** setter for lemma - sets  
    * @generated
    * @param v value to set into the feature 
    */
   public void setLemma(Lemma v) {
-    _setFeatureValueNcWj(_FI_lemma, v);
+    _setFeatureValueNcWj(wrapGetIntCatchException(_FH_lemma), v);
   }    
     
    
@@ -163,14 +173,14 @@ public class Token extends Annotation {
    * @generated
    * @return value of the feature 
    */
-  public Stem getStem() { return (Stem)(_getFeatureValueNc(_FI_stem));}
+  public Stem getStem() { return (Stem)(_getFeatureValueNc(wrapGetIntCatchException(_FH_stem)));}
     
   /** setter for stem - sets  
    * @generated
    * @param v value to set into the feature 
    */
   public void setStem(Stem v) {
-    _setFeatureValueNcWj(_FI_stem, v);
+    _setFeatureValueNcWj(wrapGetIntCatchException(_FH_stem), v);
   }    
     
    
@@ -182,14 +192,14 @@ public class Token extends Annotation {
    * @generated
    * @return value of the feature 
    */
-  public POS getPos() { return (POS)(_getFeatureValueNc(_FI_pos));}
+  public POS getPos() { return (POS)(_getFeatureValueNc(wrapGetIntCatchException(_FH_pos)));}
     
   /** setter for pos - sets  
    * @generated
    * @param v value to set into the feature 
    */
   public void setPos(POS v) {
-    _setFeatureValueNcWj(_FI_pos, v);
+    _setFeatureValueNcWj(wrapGetIntCatchException(_FH_pos), v);
   }    
     
    
@@ -201,14 +211,14 @@ public class Token extends Annotation {
    * @generated
    * @return value of the feature 
    */
-  public MorphologicalFeatures getMorph() { return (MorphologicalFeatures)(_getFeatureValueNc(_FI_morph));}
+  public MorphologicalFeatures getMorph() { return (MorphologicalFeatures)(_getFeatureValueNc(wrapGetIntCatchException(_FH_morph)));}
     
   /** setter for morph - sets The morphological feature associated with this token. 
    * @generated
    * @param v value to set into the feature 
    */
   public void setMorph(MorphologicalFeatures v) {
-    _setFeatureValueNcWj(_FI_morph, v);
+    _setFeatureValueNcWj(wrapGetIntCatchException(_FH_morph), v);
   }    
     
    
@@ -220,14 +230,14 @@ public class Token extends Annotation {
    * @generated
    * @return value of the feature 
    */
-  public String getId() { return _getStringValueNc(_FI_id);}
+  public String getId() { return _getStringValueNc(wrapGetIntCatchException(_FH_id));}
     
   /** setter for id - sets If this unit had an ID in the source format from which it was imported, it may be stored here. IDs are typically not assigned by DKPro Core components. If an ID is present, it should be respected by writers. 
    * @generated
    * @param v value to set into the feature 
    */
   public void setId(String v) {
-    _setStringValueNfc(_FI_id, v);
+    _setStringValueNfc(wrapGetIntCatchException(_FH_id), v);
   }    
     
    
@@ -239,14 +249,14 @@ public class Token extends Annotation {
    * @generated
    * @return value of the feature 
    */
-  public TokenForm getForm() { return (TokenForm)(_getFeatureValueNc(_FI_form));}
+  public TokenForm getForm() { return (TokenForm)(_getFeatureValueNc(wrapGetIntCatchException(_FH_form)));}
     
   /** setter for form - sets Potentially normalized form of the token text that should be used instead of the covered text if set. 
    * @generated
    * @param v value to set into the feature 
    */
   public void setForm(TokenForm v) {
-    _setFeatureValueNcWj(_FI_form, v);
+    _setFeatureValueNcWj(wrapGetIntCatchException(_FH_form), v);
   }    
     
    
@@ -258,16 +268,16 @@ public class Token extends Annotation {
    * @generated
    * @return value of the feature 
    */
-  public String getSyntacticFunction() { return _getStringValueNc(_FI_syntacticFunction);}
+  public String getSyntacticFunction() { return _getStringValueNc(wrapGetIntCatchException(_FH_syntacticFunction));}
     
   /** setter for syntacticFunction - sets  
    * @generated
    * @param v value to set into the feature 
    */
   public void setSyntacticFunction(String v) {
-    _setStringValueNfc(_FI_syntacticFunction, v);
+    _setStringValueNfc(wrapGetIntCatchException(_FH_syntacticFunction), v);
   }    
-    
+
   /**
    * @return the POS value if there is a {@link POS} annotation linked to this token.
    */
@@ -343,5 +353,3 @@ public class Token extends Annotation {
       }
   }
 }
-
-    
