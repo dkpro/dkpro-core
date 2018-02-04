@@ -1,9 +1,12 @@
 
 
    
-/* Apache UIMA v3 - First created by JCasGen Fri Sep 08 09:57:05 EEST 2017 */
+/* Apache UIMA v3 - First created by JCasGen Sun Jan 28 11:36:00 CET 2018 */
 
 package de.tudarmstadt.ukp.dkpro.core.api.coref.type;
+
+import java.lang.invoke.CallSite;
+import java.lang.invoke.MethodHandle;
 
 import org.apache.uima.cas.impl.CASImpl;
 import org.apache.uima.cas.impl.TypeImpl;
@@ -16,8 +19,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** A link in the coreference chain.
- * Updated by JCasGen Fri Sep 08 09:57:05 EEST 2017
- * XML source: /Users/bluefire/git/dkpro-core/dkpro-core-api-coref-asl/target/jcasgen/typesystem.xml
+ * Updated by JCasGen Sun Jan 28 11:36:00 CET 2018
+ * XML source: /Users/bluefire/git/dkpro-core/dkpro-core-api-coref-asl/src/main/resources/desc/type/coref.xml
  * @generated */
 public class CoreferenceLink extends Annotation {
  
@@ -54,9 +57,12 @@ public class CoreferenceLink extends Annotation {
 
 
   /* Feature Adjusted Offsets */
-  public final static int _FI_next = TypeSystemImpl.getAdjustedFeatureOffset("next");
-  public final static int _FI_referenceType = TypeSystemImpl.getAdjustedFeatureOffset("referenceType");
-  public final static int _FI_referenceRelation = TypeSystemImpl.getAdjustedFeatureOffset("referenceRelation");
+  private final static CallSite _FC_next = TypeSystemImpl.createCallSite(CoreferenceLink.class, "next");
+  private final static MethodHandle _FH_next = _FC_next.dynamicInvoker();
+  private final static CallSite _FC_referenceType = TypeSystemImpl.createCallSite(CoreferenceLink.class, "referenceType");
+  private final static MethodHandle _FH_referenceType = _FC_referenceType.dynamicInvoker();
+  private final static CallSite _FC_referenceRelation = TypeSystemImpl.createCallSite(CoreferenceLink.class, "referenceRelation");
+  private final static MethodHandle _FH_referenceRelation = _FC_referenceRelation.dynamicInvoker();
 
    
   /** Never called.  Disable default constructor
@@ -112,14 +118,14 @@ public class CoreferenceLink extends Annotation {
    * @generated
    * @return value of the feature 
    */
-  public CoreferenceLink getNext() { return (CoreferenceLink)(_getFeatureValueNc(_FI_next));}
+  public CoreferenceLink getNext() { return (CoreferenceLink)(_getFeatureValueNc(wrapGetIntCatchException(_FH_next)));}
     
   /** setter for next - sets If there is one, it is the next coreference link to the current coreference link 
    * @generated
    * @param v value to set into the feature 
    */
   public void setNext(CoreferenceLink v) {
-    _setFeatureValueNcWj(_FI_next, v);
+    _setFeatureValueNcWj(wrapGetIntCatchException(_FH_next), v);
   }    
     
    
@@ -131,14 +137,14 @@ public class CoreferenceLink extends Annotation {
    * @generated
    * @return value of the feature 
    */
-  public String getReferenceType() { return _getStringValueNc(_FI_referenceType);}
+  public String getReferenceType() { return _getStringValueNc(wrapGetIntCatchException(_FH_referenceType));}
     
   /** setter for referenceType - sets The role or type which the covered text has in the coreference chain. 
    * @generated
    * @param v value to set into the feature 
    */
   public void setReferenceType(String v) {
-    _setStringValueNfc(_FI_referenceType, v);
+    _setStringValueNfc(wrapGetIntCatchException(_FH_referenceType), v);
   }    
     
    
@@ -150,14 +156,14 @@ public class CoreferenceLink extends Annotation {
    * @generated
    * @return value of the feature 
    */
-  public String getReferenceRelation() { return _getStringValueNc(_FI_referenceRelation);}
+  public String getReferenceRelation() { return _getStringValueNc(wrapGetIntCatchException(_FH_referenceRelation));}
     
   /** setter for referenceRelation - sets The type of relation between this link and the next link in the chain. 
    * @generated
    * @param v value to set into the feature 
    */
   public void setReferenceRelation(String v) {
-    _setStringValueNfc(_FI_referenceRelation, v);
+    _setStringValueNfc(wrapGetIntCatchException(_FH_referenceRelation), v);
   }    
     
   }

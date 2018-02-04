@@ -19,6 +19,9 @@
 
 package de.tudarmstadt.ukp.dkpro.core.api.metadata.type;
 
+import java.lang.invoke.CallSite;
+import java.lang.invoke.MethodHandle;
+
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.FSIterator;
@@ -30,6 +33,8 @@ import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
 import org.apache.uima.jcas.tcas.DocumentAnnotation;
+
+
 
 
 /** <p>The DocumentMetaData annotation stores information about a single processed
@@ -104,12 +109,18 @@ public class DocumentMetaData extends DocumentAnnotation {
 
 
   /* Feature Adjusted Offsets */
-  public final static int _FI_documentTitle = TypeSystemImpl.getAdjustedFeatureOffset("documentTitle");
-  public final static int _FI_documentId = TypeSystemImpl.getAdjustedFeatureOffset("documentId");
-  public final static int _FI_documentUri = TypeSystemImpl.getAdjustedFeatureOffset("documentUri");
-  public final static int _FI_collectionId = TypeSystemImpl.getAdjustedFeatureOffset("collectionId");
-  public final static int _FI_documentBaseUri = TypeSystemImpl.getAdjustedFeatureOffset("documentBaseUri");
-  public final static int _FI_isLastSegment = TypeSystemImpl.getAdjustedFeatureOffset("isLastSegment");
+  private final static CallSite _FC_documentTitle = TypeSystemImpl.createCallSite(DocumentMetaData.class, "documentTitle");
+  private final static MethodHandle _FH_documentTitle = _FC_documentTitle.dynamicInvoker();
+  private final static CallSite _FC_documentId = TypeSystemImpl.createCallSite(DocumentMetaData.class, "documentId");
+  private final static MethodHandle _FH_documentId = _FC_documentId.dynamicInvoker();
+  private final static CallSite _FC_documentUri = TypeSystemImpl.createCallSite(DocumentMetaData.class, "documentUri");
+  private final static MethodHandle _FH_documentUri = _FC_documentUri.dynamicInvoker();
+  private final static CallSite _FC_collectionId = TypeSystemImpl.createCallSite(DocumentMetaData.class, "collectionId");
+  private final static MethodHandle _FH_collectionId = _FC_collectionId.dynamicInvoker();
+  private final static CallSite _FC_documentBaseUri = TypeSystemImpl.createCallSite(DocumentMetaData.class, "documentBaseUri");
+  private final static MethodHandle _FH_documentBaseUri = _FC_documentBaseUri.dynamicInvoker();
+  private final static CallSite _FC_isLastSegment = TypeSystemImpl.createCallSite(DocumentMetaData.class, "isLastSegment");
+  private final static MethodHandle _FH_isLastSegment = _FC_isLastSegment.dynamicInvoker();
 
    
   /** Never called.  Disable default constructor
@@ -165,14 +176,14 @@ public class DocumentMetaData extends DocumentAnnotation {
    * @generated
    * @return value of the feature 
    */
-  public String getDocumentTitle() { return _getStringValueNc(_FI_documentTitle);}
+  public String getDocumentTitle() { return _getStringValueNc(wrapGetIntCatchException(_FH_documentTitle));}
     
   /** setter for documentTitle - sets The human readable title of the document. 
    * @generated
    * @param v value to set into the feature 
    */
   public void setDocumentTitle(String v) {
-    _setStringValueNfc(_FI_documentTitle, v);
+    _setStringValueNfc(wrapGetIntCatchException(_FH_documentTitle), v);
   }    
     
    
@@ -184,14 +195,14 @@ public class DocumentMetaData extends DocumentAnnotation {
    * @generated
    * @return value of the feature 
    */
-  public String getDocumentId() { return _getStringValueNc(_FI_documentId);}
+  public String getDocumentId() { return _getStringValueNc(wrapGetIntCatchException(_FH_documentId));}
     
   /** setter for documentId - sets The id of the document. 
    * @generated
    * @param v value to set into the feature 
    */
   public void setDocumentId(String v) {
-    _setStringValueNfc(_FI_documentId, v);
+    _setStringValueNfc(wrapGetIntCatchException(_FH_documentId), v);
   }    
     
    
@@ -203,14 +214,14 @@ public class DocumentMetaData extends DocumentAnnotation {
    * @generated
    * @return value of the feature 
    */
-  public String getDocumentUri() { return _getStringValueNc(_FI_documentUri);}
+  public String getDocumentUri() { return _getStringValueNc(wrapGetIntCatchException(_FH_documentUri));}
     
   /** setter for documentUri - sets The URI of the document. 
    * @generated
    * @param v value to set into the feature 
    */
   public void setDocumentUri(String v) {
-    _setStringValueNfc(_FI_documentUri, v);
+    _setStringValueNfc(wrapGetIntCatchException(_FH_documentUri), v);
   }    
     
    
@@ -222,14 +233,14 @@ public class DocumentMetaData extends DocumentAnnotation {
    * @generated
    * @return value of the feature 
    */
-  public String getCollectionId() { return _getStringValueNc(_FI_collectionId);}
+  public String getCollectionId() { return _getStringValueNc(wrapGetIntCatchException(_FH_collectionId));}
     
   /** setter for collectionId - sets The ID of the whole document collection. 
    * @generated
    * @param v value to set into the feature 
    */
   public void setCollectionId(String v) {
-    _setStringValueNfc(_FI_collectionId, v);
+    _setStringValueNfc(wrapGetIntCatchException(_FH_collectionId), v);
   }    
     
    
@@ -241,14 +252,14 @@ public class DocumentMetaData extends DocumentAnnotation {
    * @generated
    * @return value of the feature 
    */
-  public String getDocumentBaseUri() { return _getStringValueNc(_FI_documentBaseUri);}
+  public String getDocumentBaseUri() { return _getStringValueNc(wrapGetIntCatchException(_FH_documentBaseUri));}
     
   /** setter for documentBaseUri - sets Base URI of the document. 
    * @generated
    * @param v value to set into the feature 
    */
   public void setDocumentBaseUri(String v) {
-    _setStringValueNfc(_FI_documentBaseUri, v);
+    _setStringValueNfc(wrapGetIntCatchException(_FH_documentBaseUri), v);
   }    
     
    
@@ -263,7 +274,7 @@ public class DocumentMetaData extends DocumentAnnotation {
    * @generated
    * @return value of the feature 
    */
-  public boolean getIsLastSegment() { return _getBooleanValueNc(_FI_isLastSegment);}
+  public boolean getIsLastSegment() { return _getBooleanValueNc(wrapGetIntCatchException(_FH_isLastSegment));}
     
   /** setter for isLastSegment - sets CAS de-multipliers need to know whether a CAS is the
             last multiplied segment.
@@ -273,7 +284,7 @@ public class DocumentMetaData extends DocumentAnnotation {
    * @param v value to set into the feature 
    */
   public void setIsLastSegment(boolean v) {
-    _setBooleanValueNfc(_FI_isLastSegment, v);
+    _setBooleanValueNfc(wrapGetIntCatchException(_FH_isLastSegment), v);
   }    
         	
     /**
