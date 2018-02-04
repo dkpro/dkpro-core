@@ -17,19 +17,20 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.tokit;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.jcas.JCas;
+import org.junit.Test;
+
+import java.util.Collection;
+import java.util.List;
+
 import static java.util.Arrays.asList;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.junit.Assert.assertEquals;
-
-import java.util.List;
-
-import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.jcas.JCas;
-import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class CamelCaseSegmenterTest
 {
@@ -90,5 +91,38 @@ public class CamelCaseSegmenterTest
 		List<String> tokens = toText(select(cas, Token.class));
 		System.out.println(tokens);
 		assertEquals(ref, tokens);
+	}
+
+	@Test
+	public void testProcess4() throws Exception
+	{
+		// Verifying that the camel case token is marked up correctly when the optional markup type is specified
+		AnalysisEngine seg = createEngine(
+				CamelCaseTokenSegmenter.class,
+				CamelCaseTokenSegmenter.PARAM_MARKUP_TYPE,
+				Split.class // Just reusing the Split annotation type for this test
+		);
+
+		//                01234567890123456789012
+		String content = "Try getFileUploadURLRequest Now";
+		JCas cas = seg.newJCas();
+		cas.setDocumentText(content);
+		new Token(cas, 0, 3).addToIndexes();
+		new Token(cas, 4, 27).addToIndexes();
+		new Token(cas, 28, 31).addToIndexes();
+
+		seg.process(cas);
+
+		Collection<Split> markups = select(cas, Split.class);
+		assertEquals(1, markups.size());
+		Split markup = markups.stream().findFirst().get();
+		assertEquals(4, markup.getBegin());
+		assertEquals(27, markup.getEnd());
+		assertEquals("getFileUploadURLRequest", markup.getCoveredText());
+		List<String> ref = asList("Try", "get", "File", "Upload", "URL", "Request", "Now");
+		List<String> tokens = toText(select(cas, Token.class));
+		System.out.println(tokens);
+		assertEquals(ref, tokens);
+
 	}
 }

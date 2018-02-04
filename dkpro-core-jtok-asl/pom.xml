@@ -28,7 +28,7 @@
   <name>DKPro Core ASL - JTok (v ${jtok.version}) (LGPL)</name>
   <description>http://jazzy.sourceforge.net/</description>
   <properties>
-    <jtok.version>2.1.17</jtok.version>
+    <jtok.version>2.1.18</jtok.version>
   </properties>
   <dependencies>
     <dependency>
