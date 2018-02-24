@@ -55,7 +55,7 @@ public class BratEventAnnotation
             "(?<ID>E[0-9]+)[\\t]" + 
             "(?<TYPE>[a-zA-Z_][a-zA-Z0-9_-]+):" +
             "(?<TRIGGER>[ET][0-9]+)" + 
-            "(?<ARGS>( [a-zA-Z_][a-zA-Z0-9_-]+:[ET][0-9]+)*)");
+            "(?<ARGS>( [a-zA-Z_][a-zA-Z0-9_-]+:[ET][0-9]+)*)[ ]*");
     
     private static final String ID = "ID";
     private static final String TYPE = "TYPE";
