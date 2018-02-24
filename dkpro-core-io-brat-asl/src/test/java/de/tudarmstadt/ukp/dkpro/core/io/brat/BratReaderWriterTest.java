@@ -171,6 +171,28 @@ public class BratReaderWriterTest
                 "brat/document1.ann");
     }
 
+    @Test
+    public void testTextAnnotationWithSubcategorization()
+        throws Exception
+    {
+        testOneWay(
+                createReaderDescription(BratReader.class,
+                        BratReader.PARAM_TEXT_ANNOTATION_TYPES, 
+                                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity:value",
+                        BratReader.PARAM_TYPE_MAPPINGS, asList(
+                                "Origin -> de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation",
+                                "Country -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
+                                "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
+                                "MERGE-ORG -> de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg"),
+                        BratReader.PARAM_RELATION_TYPES, asList(
+                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")), 
+                createEngineDescription(BratWriter.class,
+                        BratWriter.PARAM_RELATION_TYPES, asList(
+                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")), 
+                "brat/document1-ref-sub.ann", 
+                "brat/document1.ann");
+    }
+
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
 }

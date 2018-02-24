@@ -92,10 +92,9 @@ public class BratReader
     private Map<String, RelationParam> parsedRelationTypes;    
 
     /**
-     * Types that are text annotations. It is mandatory to provide the type name which can
-     * optionally be followed by a subcategorization feature. Using this parameter is
-     * only necessary to specify a subcategorization feature. Otherwise, text annotation types are
-     * automatically detected.
+     * Using this parameter is only necessary to specify a subcategorization feature for text and
+     * event annotation types. It is mandatory to provide the type name which can optionally be
+     * followed by a subcategorization feature.
      */
     public static final String PARAM_TEXT_ANNOTATION_TYPES = "textAnnotationTypes";
     @ConfigurationParameter(name = PARAM_TEXT_ANNOTATION_TYPES, mandatory = true, defaultValue = {})
@@ -234,9 +233,15 @@ public class BratReader
 
     private void create(CAS aCAS, Type aType, BratEventAnnotation aAnno)
     {
+        TextAnnotationParam param = parsedTextAnnotationTypes.get(aType.getName());
+        
         AnnotationFS anno = aCAS.createAnnotation(aType, 
                 aAnno.getTriggerAnnotation().getBegin(), aAnno.getTriggerAnnotation().getEnd());
         fillAttributes(anno, aAnno.getAttributes());
+        
+        if (param != null && param.getSubcat() != null) {
+            anno.setStringValue(getFeature(anno, param.getSubcat()), aAnno.getType());
+        }
         
         // Slots cannot be handled yet because they might point to events that have not been 
         // created yet.
