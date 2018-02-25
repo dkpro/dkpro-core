@@ -159,6 +159,7 @@
     <tag>HEAD</tag>
   </scm>
   <modules>
+    <module>dkpro-core-build</module>
     <module>dkpro-core-asl</module>
     <module>dkpro-core-gpl</module>
     <!-- Documentation and examples modules -->
@@ -632,6 +633,65 @@
             </executions>
           </plugin>
         </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>checkstyle</id>
+      <activation>
+        <file>
+          <exists>src</exists>
+        </file>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-checkstyle-plugin</artifactId>
+          </plugin>
+        </plugins>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-checkstyle-plugin</artifactId>
+              <version>2.17</version>
+              <inherited>true</inherited>
+              <dependencies>
+                <dependency>
+                  <groupId>org.dkpro.core</groupId>
+                  <artifactId>dkpro-core-build</artifactId>
+                  <version>${project.version}</version>
+                </dependency>
+                <dependency>
+                  <groupId>com.puppycrawl.tools</groupId>
+                  <artifactId>checkstyle</artifactId>
+                  <version>8.8</version>
+                </dependency>
+              </dependencies>
+              <configuration>
+                <configLocation>dkpro-core/checkstyle.xml</configLocation>
+                <propertyExpansion>basedir=${project.basedir}</propertyExpansion>
+                <consoleOutput>true</consoleOutput>
+                <failOnViolation>true</failOnViolation>
+                <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                <includeResources>false</includeResources>
+                <includeTestResources>false</includeTestResources>
+                <logViolationsToConsole>true</logViolationsToConsole>
+                <maxAllowedViolations>0</maxAllowedViolations>
+                <violationSeverity>error</violationSeverity>
+              </configuration>
+              <executions>
+                <execution>
+                  <id>checkstyle-check</id>
+                  <phase>verify</phase>
+                  <goals>
+                    <goal>check</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+          </plugins>
+        </pluginManagement>
       </build>
     </profile>
   </profiles>
