@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2007-2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -66,11 +66,11 @@ import edu.stanford.nlp.trees.Tree;
 public class StanfordParserTest
 {
     private static final String[] GERMAN_POS_TAGS = { "$,", "$.", "$[", ".$$.", "ADJA", "ADJD",
-        "ADV", "APPO", "APPR", "APPRART", "APZR", "ART", "CARD", "FM", "ITJ", "KOKOM", "KON",
-        "KOUI", "KOUS", "NE", "NN", "PDAT", "PDS", "PIAT", "PIDAT", "PIS", "PPER", "PPOSAT",
-        "PPOSS", "PRELAT", "PRELS", "PRF", "PROAV", "PTKA", "PTKANT", "PTKNEG", "PTKVZ",
-        "PTKZU", "PWAT", "PWAV", "PWS", "TRUNC", "VAFIN", "VAIMP", "VAINF", "VAPP", "VMFIN",
-        "VMINF", "VMPP", "VVFIN", "VVIMP", "VVINF", "VVIZU", "VVPP", "XY" };
+            "ADV", "APPO", "APPR", "APPRART", "APZR", "ART", "CARD", "FM", "ITJ", "KOKOM", "KON",
+            "KOUI", "KOUS", "NE", "NN", "PDAT", "PDS", "PIAT", "PIDAT", "PIS", "PPER", "PPOSAT",
+            "PPOSS", "PRELAT", "PRELS", "PRF", "PROAV", "PTKA", "PTKANT", "PTKNEG", "PTKVZ",
+            "PTKZU", "PWAT", "PWAV", "PWS", "TRUNC", "VAFIN", "VAIMP", "VAINF", "VAPP", "VMFIN",
+            "VMINF", "VMPP", "VVFIN", "VVIMP", "VVINF", "VVIZU", "VVPP", "XY" };
 
     private static final String[] GERMAN_CONSTITUENT_TAGS = { "AA", "AP", "AVP", "CAC", "CAP",
             "CAVP", "CCP", "CH", "CNP", "CO", "CPP", "CS", "CVP", "CVZ", "DL", "ISU", "MPN", "MTA",
