@@ -114,8 +114,8 @@ public class CerminePdfReaderTest
         CollectionReader reader = createReader(CerminePdfReader.class,
                 CerminePdfReader.PARAM_SOURCE_LOCATION, "src/test/resources/data",
                 CerminePdfReader.PARAM_PATTERNS, "[+]**/*.pdf",
-                CerminePdfReader.PARAM_NORMALIZE_TEXT, true, CerminePdfReader.PARAM_IGNORE_CITATIONS,
-                true);
+                CerminePdfReader.PARAM_NORMALIZE_TEXT, true, 
+                CerminePdfReader.PARAM_IGNORE_CITATIONS, true);
 
         AnalysisEngine writer = createEngine(CasDumpWriter.class,
                 CasDumpWriter.PARAM_TARGET_LOCATION, outputFile);

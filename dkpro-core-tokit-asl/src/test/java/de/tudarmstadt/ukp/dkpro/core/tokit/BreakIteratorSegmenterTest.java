@@ -39,8 +39,7 @@ import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.harness.SegmenterHarness;
 
-public
-class BreakIteratorSegmenterTest
+public class BreakIteratorSegmenterTest
 {
     @Ignore("Only needed to get the list of the supported languages for the @LanguageCapability")
     @Test
@@ -60,16 +59,15 @@ class BreakIteratorSegmenterTest
         System.out.printf("]");
     }
     
-
     @Test
-	public void run() throws Throwable
-	{
-		AnalysisEngineDescription aed = createEngineDescription(BreakIteratorSegmenter.class);
+    public void run() throws Throwable
+    {
+        AnalysisEngineDescription aed = createEngineDescription(BreakIteratorSegmenter.class);
 
-		SegmenterHarness.run(aed, "de.1", "de.4", "en.1", "en.2", "en.3", "en.6", "en.7", "en.9",
-				"ar.1", "zh.1", "zh.2");
-	}
-	
+        SegmenterHarness.run(aed, "de.1", "de.4", "en.1", "en.2", "en.3", "en.6", "en.7", "en.9",
+                "ar.1", "zh.1", "zh.2");
+    }
+
     @Test
     public void testJapanese() throws Exception
     {
@@ -82,7 +80,7 @@ class BreakIteratorSegmenterTest
         
         AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
     }
-	
+
     @Test
     public void testZoning() throws Exception
     {

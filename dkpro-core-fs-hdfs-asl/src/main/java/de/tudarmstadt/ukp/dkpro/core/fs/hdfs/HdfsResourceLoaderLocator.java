@@ -51,7 +51,8 @@ public class HdfsResourceLoaderLocator
             }
             else {
                 resolverInstance = new HdfsResourceLoader(new Configuration(), new URI(fileSystem));
-                resolverInstance.setResourcePatternResolver(new PathMatchingResourcePatternResolver());
+                resolverInstance
+                        .setResourcePatternResolver(new PathMatchingResourcePatternResolver());
             }
         }
         catch (URISyntaxException e) {

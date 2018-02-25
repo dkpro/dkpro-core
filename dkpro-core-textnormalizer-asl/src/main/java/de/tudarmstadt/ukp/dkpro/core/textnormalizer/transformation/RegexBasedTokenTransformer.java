@@ -39,7 +39,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_Im
  * The parameters {@link #PARAM_REGEX} defines the regular expression to be searcher,
  * {@link #PARAM_REPLACEMENT} defines the string with which matching patterns are replaces.
  */
-@ResourceMetaData(name="Regex-based Token Transformer")
+@ResourceMetaData(name = "Regex-based Token Transformer")
 public class RegexBasedTokenTransformer
     extends JCasTransformerChangeBased_ImplBase
 {

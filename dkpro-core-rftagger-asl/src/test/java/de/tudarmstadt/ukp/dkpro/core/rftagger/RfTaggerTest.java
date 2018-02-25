@@ -71,7 +71,8 @@ public class RfTaggerTest
                 "[ 30, 32]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - na (R.R.-.-.6.-.-.-.-.-.-.-.-.-.-)",
                 "[ 33, 40]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - medvěda (A.A.F.S.6.-.-.-.-.1.A.-.-.-.-)",
                 "[ 41, 46]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - tváři (N.N.F.S.6.-.-.-.-.-.A.-.-.-.-)",
-                "[ 47, 48]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (Z.:.-.-.-.-.-.-.-.-.-.-.-.-.-)" };               
+                "[ 47, 48]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (Z.:.-.-.-.-.-.-.-.-.-.-.-.-.-)"
+        };
         
         String[] morphTags = { "A.2.-.-.-.-.-.-.-.-.A.-.-.-.-", "A.A.F.D.7.-.-.-.-.1.A.-.-.-.-",
                 "A.A.F.P.1.-.-.-.-.1.A.-.-.-.-", "A.A.F.P.1.-.-.-.-.1.A.-.-.-.6",
@@ -721,7 +722,8 @@ public class RfTaggerTest
         String[] tokens = { "Er", "nahm", "meine", "Fackel", "und", "schlug", "sie", "dem", "Bär",
                 "ins", "Gesicht", "." };
         
-        String[] posOrig = { "PRO", "VFIN", "PRO", "N", "CONJ", "VFIN", "PRO", "ART", "N", "APPRART", "N", "SYM" };
+        String[] posOrig = { "PRO", "VFIN", "PRO", "N", "CONJ", "VFIN", "PRO", "ART", "N",
+                "APPRART", "N", "SYM" };
         
         String[] posMapped = { "POS_PRON", "POS_VERB", "POS_PRON", "POS_NOUN", "POS_CONJ",
                 "POS_VERB", "POS_PRON", "POS_DET", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_PUNCT" };
@@ -738,7 +740,8 @@ public class RfTaggerTest
                 "[ 40, 43]     -     -  Dat    -    -  Masc    -    -  Sing      -  -    -    -    -     -      -     - Bär (N.Reg.Dat.Sg.Masc)",
                 "[ 44, 47]     -     -  Acc    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - ins (APPRART.Acc.Sg.Neut)",
                 "[ 48, 55]     -     -  Acc    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Gesicht (N.Reg.Acc.Sg.Neut)",
-                "[ 56, 57]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (SYM.Pun.Sent)" };               
+                "[ 56, 57]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (SYM.Pun.Sent)"
+        };
         
         String[] morphTags = { "ADJA.Comp.*.Pl.Fem", "ADJA.Comp.*.Sg.Fem", "ADJA.Comp.Acc.Pl.*",
                 "ADJA.Comp.Acc.Pl.Fem", "ADJA.Comp.Acc.Pl.Masc", "ADJA.Comp.Acc.Pl.Neut",
@@ -1128,7 +1131,8 @@ public class RfTaggerTest
                 "[ 43, 44]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - a (T.f)",
                 "[ 45, 50]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - medve (N.c.s.n)",
                 "[ 51, 57]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - arcára (N.c.s.s)",
-                "[ 58, 59]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (IP.sent.period)" };               
+                "[ 58, 59]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (IP.sent.period)"
+        };
         
         String[] morphTags = { "A.f.c.p.2", "A.f.c.p.3", "A.f.c.p.a", "A.f.c.p.b", "A.f.c.p.c",
                 "A.f.c.p.d", "A.f.c.p.g", "A.f.c.p.i", "A.f.c.p.n", "A.f.c.p.s", "A.f.c.p.t",
@@ -1302,7 +1306,8 @@ public class RfTaggerTest
                 "[ 31, 32]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - в (S.p.-.a)",
                 "[ 33, 37]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - лицо (N.c.n.s.a.n.-)",
                 "[ 38, 45]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - медведя (N.c.m.s.g.y.-)",
-                "[ 46, 47]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (SENT)" };               
+                "[ 46, 47]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (SENT)"
+        };
         
         String[] morphTags = { ",", "-", "A.f.c.m.s.n.f", "A.f.p.f.p.g.f", "A.f.p.f.s.a.f",
                 "A.f.p.f.s.a.s", "A.f.p.f.s.d.f", "A.f.p.f.s.g.f", "A.f.p.f.s.i.f",
@@ -1600,7 +1605,8 @@ public class RfTaggerTest
 
         String[] posOrig = { "V", "P", "N", "C", "P", "V", "S", "N", "N", "Z" };
 
-        String[] posMapped = { "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS" };
+        String[] posMapped = { "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS",
+                "POS" };
 
         String[] morph = {
                 "[  0,  4]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - Vzel (V.m.e.p.-.s.m)",
@@ -1612,7 +1618,8 @@ public class RfTaggerTest
                 "[ 31, 33]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - na (S.l)",
                 "[ 34, 40]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - obrazu (N.c.m.s.l)",
                 "[ 41, 48]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - medveda (N.c.m.s.g)",
-                "[ 49, 50]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (Z.p.-)" };               
+                "[ 49, 50]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (Z.p.-)"
+        };
         
         String[] morphTags = { "A.g.c.f.d.a", "A.g.c.f.d.i", "A.g.c.f.d.n", "A.g.c.f.p.a",
                 "A.g.c.f.p.d", "A.g.c.f.p.g", "A.g.c.f.p.i", "A.g.c.f.p.l", "A.g.c.f.p.n",
@@ -1865,7 +1872,8 @@ public class RfTaggerTest
 
         String[] posOrig = { "VL", "PP", "SS", "O", "VI", "PF", "E", "SS", "VK", "Z" };
 
-        String[] posMapped = { "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS" };
+        String[] posMapped = { "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS",
+                "POS" };
 
         String[] morph = {
                 "[  0,  4]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - Vzal (VL.d.s.c.m.+.:-)",
@@ -1877,7 +1885,8 @@ public class RfTaggerTest
                 "[ 31, 33]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - na (E.u.4.-.:-)",
                 "[ 34, 41]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - medveďa (SS.m.s.4.-.:-)",
                 "[ 42, 47]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - tvári (VK.e.s.c.+.:-)",
-                "[ 48, 49]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (Z.:-)" };               
+                "[ 48, 49]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (Z.:-)"
+        };
         
         String[] morphTags = { "#", "%.:-", "%.:r", "0.:-", "0.:q", "AA.f.p.1.x.:-", "AA.f.p.1.x.:q",
                 "AA.f.p.1.x.:r", "AA.f.p.1.x.:rq", "AA.f.p.1.y.:-", "AA.f.p.1.z.:-",

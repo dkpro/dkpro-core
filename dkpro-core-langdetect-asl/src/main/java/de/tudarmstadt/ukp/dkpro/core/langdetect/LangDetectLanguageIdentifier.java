@@ -45,7 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
  * instantiated multiple times with different model locations. Only a single model location
  * can be active at a time over <b>all</b> instances of this component. 
  */
-@ResourceMetaData(name="LangDetect")
+@ResourceMetaData(name = "LangDetect")
 public class LangDetectLanguageIdentifier
     extends JCasAnnotator_ImplBase
 {

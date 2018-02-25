@@ -29,42 +29,41 @@ import de.tudarmstadt.ukp.dkpro.core.frequency.BerkeleyLmProvider;
 
 /**
  * External resource wrapper for the Berkeley LM frequency count provider.
- *
- *
  */
 public final class BerkeleyLmFrequencyCountProvider
-	extends FrequencyCountResourceBase
-	implements FrequencyCountProvider
+    extends FrequencyCountResourceBase
+    implements FrequencyCountProvider
 {
 
-	public static final String PARAM_BINARY = "BinaryFile";
-	@ConfigurationParameter(name = PARAM_BINARY, mandatory = true)
-	protected String file;
+    public static final String PARAM_BINARY = "BinaryFile";
+    @ConfigurationParameter(name = PARAM_BINARY, mandatory = true)
+    protected String file;
 
-	public static final String PARAM_PROVIDER_LANGUAGE = "ProviderLanguage";
-	@ConfigurationParameter(name = PARAM_PROVIDER_LANGUAGE, mandatory = true)
-	protected String language;
+    public static final String PARAM_PROVIDER_LANGUAGE = "ProviderLanguage";
+    @ConfigurationParameter(name = PARAM_PROVIDER_LANGUAGE, mandatory = true)
+    protected String language;
 
-	@Override
-	public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
-		throws ResourceInitializationException
-	{
-		if (!super.initialize(aSpecifier, aAdditionalParams)) {
-			return false;
-		}
+    @Override
+    public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
+        throws ResourceInitializationException
+    {
+        if (!super.initialize(aSpecifier, aAdditionalParams)) {
+            return false;
+        }
 
-		try {
-			initializeProvider();
-		}
-		catch (Exception e) {
-			throw new ResourceInitializationException(e);
-		}
+        try {
+            initializeProvider();
+        }
+        catch (Exception e) {
+            throw new ResourceInitializationException(e);
+        }
 
-		return true;
-	}
-	
-	protected void initializeProvider() throws Exception{
-	    provider = new BerkeleyLmProvider(file, language);
-	}
-	
+        return true;
+    }
+    
+    @Override
+    protected void initializeProvider() throws Exception
+    {
+        provider = new BerkeleyLmProvider(file, language);
+    }
 }

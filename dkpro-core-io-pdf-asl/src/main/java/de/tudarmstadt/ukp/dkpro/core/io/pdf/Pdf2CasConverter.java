@@ -31,7 +31,6 @@ import org.apache.uima.cas.text.AnnotationFS;
 
 /**
  * Converts a PDF to a CAS. Uses a substitution table.
- * 
  */
 public class Pdf2CasConverter
     extends PdfLayoutEventStripper
@@ -296,7 +295,8 @@ public class Pdf2CasConverter
                 if (aContent.charAt(i) == '\n') {
                     lastBreak = i;
                 }
-                else if (Character.isWhitespace(aContent.codePointAt(i)) && (i > (lastBreak + 79))) {
+                else if (Character.isWhitespace(aContent.codePointAt(i))
+                        && (i > (lastBreak + 79))) {
                     lastBreak = i;
                     aContent.replace(i, i + 1, "\n");
                 }

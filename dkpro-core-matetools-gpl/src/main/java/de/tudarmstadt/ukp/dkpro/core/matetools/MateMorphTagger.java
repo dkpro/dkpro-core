@@ -18,10 +18,6 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.matetools;
 
-import is2.data.SentenceData09;
-import is2.io.CONLLReader09;
-import is2.mtag.Tagger;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -47,11 +43,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import is2.data.SentenceData09;
+import is2.io.CONLLReader09;
+import is2.mtag.Tagger;
 
 /**
  * DKPro Annotator for the MateToolsMorphTagger.
  */
-@ResourceMetaData(name="Mate Tools Morphological Analyzer")
+@ResourceMetaData(name = "Mate Tools Morphological Analyzer")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -140,7 +139,7 @@ public class MateMorphTagger
                 String[] morphTags = modelProvider.getResource().apply(sd).pfeats;
                 
                 for (int i = 1; i < morphTags.length; i++) {
-                    Token token = tokens.get(i-1);
+                    Token token = tokens.get(i - 1);
                     MorphologicalFeatures analysis = featuresParser
                             .parse(jcas, token, morphTags[i]);
                     token.setMorph(analysis);

@@ -183,17 +183,8 @@
                   <goal>check</goal>
                 </goals>
                 <configuration>
-                  <excludes>
-                    <!-- release generated artifact -->
-                    <exclude>release.properties</exclude>
-                    <exclude>CHANGES</exclude>
-                    <exclude>NOTICE</exclude>
-                    <exclude>README</exclude>
-                    <exclude>src/main/resources/**/*</exclude>
+                  <excludes combine.children="append">
                     <exclude>src/main/java/de/tudarmstadt/ukp/dkpro/core/io/web1t/util/ExternalSort.java</exclude>
-                    <exclude>src/test/resources/**/*</exclude>
-                    <!-- generated JCas wrappers -->
-                    <exclude>src/main/java/**/type/**/*</exclude>
                   </excludes>
                 </configuration>
               </execution>

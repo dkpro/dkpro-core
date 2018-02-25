@@ -20,10 +20,6 @@ package de.tudarmstadt.ukp.dkpro.core.matetools;
 
 import static java.util.Arrays.asList;
 import static org.apache.uima.util.Level.INFO;
-import is2.data.SentenceData09;
-import is2.io.CONLLReader09;
-import is2.tag.Options;
-import is2.tag.Tagger;
 
 import java.io.File;
 import java.io.IOException;
@@ -55,11 +51,15 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import is2.data.SentenceData09;
+import is2.io.CONLLReader09;
+import is2.tag.Options;
+import is2.tag.Tagger;
 
 /**
  * DKPro Annotator for the MateToolsPosTagger
  */
-@ResourceMetaData(name="Mate Tools POS-Tagger")
+@ResourceMetaData(name = "Mate Tools POS-Tagger")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -94,7 +94,8 @@ public class MatePosTagger
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
      * mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
@@ -180,7 +181,7 @@ public class MatePosTagger
             String[] posTags = modelProvider.getResource().apply(sd).ppos;
 
             for (int i = 1; i < posTags.length; i++) {
-                Token token = tokens.get(i-1);
+                Token token = tokens.get(i - 1);
                 Type posType = posMappingProvider.getTagType(posTags[i]);
                 POS posTag = (POS) cas.createAnnotation(posType, token.getBegin(), token.getEnd());
                 posTag.setPosValue(posTags[i].intern());

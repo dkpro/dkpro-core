@@ -23,6 +23,7 @@ public class TigerEdge
 {
     @XmlAttribute
     public String idref;
+    
     @XmlAttribute
     public String label;
 }

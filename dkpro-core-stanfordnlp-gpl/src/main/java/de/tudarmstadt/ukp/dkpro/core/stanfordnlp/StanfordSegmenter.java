@@ -56,7 +56,7 @@ import edu.stanford.nlp.process.WordToSentenceProcessor.NewlineIsSentenceBreak;
 /**
  * Stanford sentence splitter and tokenizer.
  */
-@ResourceMetaData(name="CoreNLP Segmenter (old API)")
+@ResourceMetaData(name = "CoreNLP Segmenter (old API)")
 @LanguageCapability({"en", "es", "fr"})
 @TypeCapability(
         outputs = {
@@ -69,21 +69,21 @@ public class StanfordSegmenter
 //    private static final Map<String, TreebankLanguagePack> languagePacks;
 
     static {
-    	tokenizerFactories = new HashMap<String, InternalTokenizerFactory>();
+        tokenizerFactories = new HashMap<String, InternalTokenizerFactory>();
 //        tokenizerFactories.put("ar", new InternalArabicTokenizerFactory());
-    	tokenizerFactories.put("en", new InternalPTBTokenizerFactory());
+        tokenizerFactories.put("en", new InternalPTBTokenizerFactory());
         tokenizerFactories.put("es", new InternalSpanishTokenizerFactory());
         tokenizerFactories.put("fr", new InternalFrenchTokenizerFactory());
-    	// The Negra tokenizer is not really a full tokenizer.
-//    	tokenizerFactories.put("de", new InternalNegraPennTokenizerFactory());
-    	// Not sure if those really work - don't know how to test
-//    	tokenizerFactories.put("zh", new InternalCHTBTokenizerFactory());
+        // The Negra tokenizer is not really a full tokenizer.
+//        tokenizerFactories.put("de", new InternalNegraPennTokenizerFactory());
+        // Not sure if those really work - don't know how to test
+//        tokenizerFactories.put("zh", new InternalCHTBTokenizerFactory());
 
-//    	languagePacks = new HashMap<String, TreebankLanguagePack>();
-//    	languagePacks.put("en", new PennTreebankLanguagePack());
-//    	languagePacks.put("zh", new ChineseTreebankLanguagePack());
-//    	languagePacks.put("en", new ArabicTreebankLanguagePack());
-//    	languagePacks.put("de", new NegraPennLanguagePack());
+//        languagePacks = new HashMap<String, TreebankLanguagePack>();
+//        languagePacks.put("en", new PennTreebankLanguagePack());
+//        languagePacks.put("zh", new ChineseTreebankLanguagePack());
+//        languagePacks.put("en", new ArabicTreebankLanguagePack());
+//        languagePacks.put("de", new NegraPennLanguagePack());
     }
 
     /**
@@ -100,7 +100,8 @@ public class StanfordSegmenter
      * @see WordToSentenceProcessor#WordToSentenceProcessor
      */
     public static final String PARAM_BOUNDARY_TOKEN_REGEX = "boundaryTokenRegex";
-    @ConfigurationParameter(name = PARAM_BOUNDARY_TOKEN_REGEX, mandatory = false, defaultValue = WordToSentenceProcessor.DEFAULT_BOUNDARY_REGEX)
+    @ConfigurationParameter(name = PARAM_BOUNDARY_TOKEN_REGEX, mandatory = false, 
+            defaultValue = WordToSentenceProcessor.DEFAULT_BOUNDARY_REGEX)
     private String boundaryTokenRegex;
 
     /**
@@ -152,7 +153,8 @@ public class StanfordSegmenter
      * The set of regex for sentence boundary tokens that should be discarded.
      */
     public static final String PARAM_TOKEN_REGEXES_TO_DISCARD = "tokenRegexesToDiscard";
-    @ConfigurationParameter(name = PARAM_TOKEN_REGEXES_TO_DISCARD, mandatory = false, defaultValue = {})
+    @ConfigurationParameter(name = PARAM_TOKEN_REGEXES_TO_DISCARD, mandatory = false, 
+            defaultValue = {})
     private Set<String> tokenRegexesToDiscard;
 
     /**
@@ -176,8 +178,8 @@ public class StanfordSegmenter
     private String[] additionalOptions;
     
     @Override
-	protected void process(JCas aJCas, String aText, int aZoneBegin)
-		throws AnalysisEngineProcessException
+    protected void process(JCas aJCas, String aText, int aZoneBegin)
+        throws AnalysisEngineProcessException
     {
         List<Token> casTokens = null;
         
@@ -208,56 +210,56 @@ public class StanfordSegmenter
                         aZoneBegin + aText.length());
             }
             
-    		// Prepare the tokens for processing by WordToSentenceProcessor
-    		List<CoreLabel> tokensInDocument = new ArrayList<CoreLabel>();
-			Pattern nlPattern = Pattern.compile(".*(\r\n|\n|\r).*");
-			Matcher nlMatcher = nlPattern.matcher("");
-			int lastTokenEnd = 0;
-    		for (Token token : casTokens) {
-    		    if (!NewlineIsSentenceBreak.NEVER.equals(newlineIsSentenceBreak)) {
-    				// add newline as token for newlineIsSentenceBreak parameter
-    		        nlMatcher.reset(aJCas.getDocumentText().subSequence(lastTokenEnd, token.getBegin()));
-    				if (nlMatcher.matches()) {
-    					CoreLabel l = new CoreLabel();
-    					l.set(CharacterOffsetBeginAnnotation.class, lastTokenEnd + nlMatcher.start(1));
-    					l.set(CharacterOffsetEndAnnotation.class, lastTokenEnd + nlMatcher.end(1));
-    					l.setWord("\n");
-    					tokensInDocument.add(l);
-    				}
-    		    }
-			lastTokenEnd = token.getEnd();
-			// add regular token
-    			CoreLabel l = new CoreLabel();
-    			l.set(CharacterOffsetBeginAnnotation.class, token.getBegin());
-    			l.set(CharacterOffsetEndAnnotation.class, token.getEnd());
-    			l.setWord(token.getText());
-    			tokensInDocument.add(l);
-    		}
+            // Prepare the tokens for processing by WordToSentenceProcessor
+            List<CoreLabel> tokensInDocument = new ArrayList<CoreLabel>();
+            Pattern nlPattern = Pattern.compile(".*(\r\n|\n|\r).*");
+            Matcher nlMatcher = nlPattern.matcher("");
+            int lastTokenEnd = 0;
+            for (Token token : casTokens) {
+                if (!NewlineIsSentenceBreak.NEVER.equals(newlineIsSentenceBreak)) {
+                    // add newline as token for newlineIsSentenceBreak parameter
+                    nlMatcher.reset(
+                            aJCas.getDocumentText().subSequence(lastTokenEnd, token.getBegin()));
+                    if (nlMatcher.matches()) {
+                        CoreLabel l = new CoreLabel();
+                        l.set(CharacterOffsetBeginAnnotation.class,
+                                lastTokenEnd + nlMatcher.start(1));
+                        l.set(CharacterOffsetEndAnnotation.class, lastTokenEnd + nlMatcher.end(1));
+                        l.setWord("\n");
+                        tokensInDocument.add(l);
+                    }
+                }
+                lastTokenEnd = token.getEnd();
+                // add regular token
+                CoreLabel l = new CoreLabel();
+                l.set(CharacterOffsetBeginAnnotation.class, token.getBegin());
+                l.set(CharacterOffsetEndAnnotation.class, token.getEnd());
+                l.setWord(token.getText());
+                tokensInDocument.add(l);
+            }
 
-    		// The sentence splitter (probably) requires the escaped text, so we prepare it here
-    		PTBEscapingProcessor escaper = new PTBEscapingProcessor();
-    		escaper.apply(tokensInDocument);
+            // The sentence splitter (probably) requires the escaped text, so we prepare it here
+            PTBEscapingProcessor escaper = new PTBEscapingProcessor();
+            escaper.apply(tokensInDocument);
     
             // Apply the WordToSentenceProcessor to find the sentence boundaries
             WordToSentenceProcessor<CoreLabel> proc = new WordToSentenceProcessor<CoreLabel>(
                     boundaryTokenRegex, boundaryFollowersRegex, boundariesToDiscard,
                     xmlBreakElementsToDiscard, regionElementRegex, newlineIsSentenceBreak, null,
                     tokenRegexesToDiscard, isOneSentence, allowEmptySentences);
-    		
-    		List<List<CoreLabel>> sentencesInDocument = proc.process(tokensInDocument);
-    		for (List<CoreLabel> sentence : sentencesInDocument) {
-    			int begin = sentence.get(0).get(CharacterOffsetBeginAnnotation.class);
-    			int end = sentence.get(sentence.size()-1).get(CharacterOffsetEndAnnotation.class);
+            
+            List<List<CoreLabel>> sentencesInDocument = proc.process(tokensInDocument);
+            for (List<CoreLabel> sentence : sentencesInDocument) {
+                int begin = sentence.get(0).get(CharacterOffsetBeginAnnotation.class);
+                int end = sentence.get(sentence.size() - 1).get(CharacterOffsetEndAnnotation.class);
     
-    			createSentence(aJCas, begin, end);
-    		}
-		}
+                createSentence(aJCas, begin, end);
+            }
+        }
     }
 
-	private
-    Tokenizer getTokenizer(
-    		final String aLanguage,
-    		final String aText) throws AnalysisEngineProcessException
+    private Tokenizer getTokenizer(final String aLanguage, final String aText)
+        throws AnalysisEngineProcessException
     {
         InternalTokenizerFactory tk = tokenizerFactories.get(aLanguage);
         if (tk == null) {
@@ -275,81 +277,68 @@ public class StanfordSegmenter
         }
         
         
-    	return tk.create(aText);
+        return tk.create(aText);
     }
 
-    private static
-    interface InternalTokenizerFactory
+    private static interface InternalTokenizerFactory
     {
-    	Tokenizer<?> create(String s);
+        Tokenizer<?> create(String s);
     }
 
-    private static
-    class InternalPTBTokenizerFactory
-    implements InternalTokenizerFactory
+    private static class InternalPTBTokenizerFactory
+        implements InternalTokenizerFactory
     {
-    	@Override
-    	public
-    	Tokenizer<?> create(
-    			final String s)
-    	{
-//    		TokenizerFactory<CoreLabel> f = PTBTokenizer.factory(new CoreLabelTokenFactory(), "invertible,ptb3Escaping=false");
-    		return new PTBTokenizer<CoreLabel>(new StringReader(s),new CoreLabelTokenFactory(),"invertible");
-    	}
+        @Override
+        public Tokenizer<?> create(final String s)
+        {
+//            TokenizerFactory<CoreLabel> f = PTBTokenizer.factory(new CoreLabelTokenFactory(), "invertible,ptb3Escaping=false");
+            return new PTBTokenizer<CoreLabel>(new StringReader(s),new CoreLabelTokenFactory(),"invertible");
+        }
     }
 
-	// The InternalNegraPennTokenizer is not meant for German text. It
-	// is for parsing a particular corpus format.
+    // The InternalNegraPennTokenizer is not meant for German text. It
+    // is for parsing a particular corpus format.
 //    private static
 //    class InternalNegraPennTokenizerFactory
 //    implements InternalTokenizerFactory
 //    {
-//    	@Override
-//    	public
-//    	Tokenizer<?> create(
-//    			final String s)
-//    	{
-//    		return new NegraPennTokenizer(new StringReader(s));
-//    	}
+//        @Override
+//        public
+//        Tokenizer<?> create(
+//                final String s)
+//        {
+//            return new NegraPennTokenizer(new StringReader(s));
+//        }
 //    }
 
-    private static
-    class InternalArabicTokenizerFactory
-    implements InternalTokenizerFactory
-    {
-    	@Override
-    	public
-    	Tokenizer<?> create(
-    			final String s)
-    	{
-    		return ArabicTokenizer.newArabicTokenizer(new StringReader(s), new Properties());
-    	}
-    }
-
-    private static
-    class InternalFrenchTokenizerFactory
-    implements InternalTokenizerFactory
+    private static class InternalArabicTokenizerFactory
+        implements InternalTokenizerFactory
     {
         @Override
-        public
-        Tokenizer<?> create(
-                final String s)
+        public Tokenizer<?> create(final String s)
+        {
+            return ArabicTokenizer.newArabicTokenizer(new StringReader(s), new Properties());
+        }
+    }
+
+    private static class InternalFrenchTokenizerFactory
+        implements InternalTokenizerFactory
+    {
+        @Override
+        public Tokenizer<?> create(final String s)
         {
             return FrenchTokenizer.factory().getTokenizer(new StringReader(s), "tokenizeNLs=false");
         }
     }
 
-    private static
-    class InternalSpanishTokenizerFactory
-    implements InternalTokenizerFactory
+    private static class InternalSpanishTokenizerFactory
+        implements InternalTokenizerFactory
     {
         @Override
-        public
-        Tokenizer<?> create(
-                final String s)
+        public Tokenizer<?> create(final String s)
         {
-            return SpanishTokenizer.factory(new CoreLabelTokenFactory(), null).getTokenizer(
-                    new StringReader(s));
+            return SpanishTokenizer.factory(new CoreLabelTokenFactory(), null)
+                    .getTokenizer(new StringReader(s));
         }
     }
 
@@ -361,12 +350,12 @@ public class StanfordSegmenter
 //    class InternalCHTBTokenizerFactory
 //    implements InternalTokenizerFactory
 //    {
-//    	@Override
-//    	public
-//    	Tokenizer<?> create(
-//    			final String s)
-//    	{
-//    		return new CHTBTokenizer(new StringReader(s));
-//    	}
+//        @Override
+//        public
+//        Tokenizer<?> create(
+//                final String s)
+//        {
+//            return new CHTBTokenizer(new StringReader(s));
+//        }
 //    }
 }

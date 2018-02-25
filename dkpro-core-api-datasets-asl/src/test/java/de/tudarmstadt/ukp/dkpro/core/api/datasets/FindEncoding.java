@@ -22,11 +22,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Collection;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.filefilter.DirectoryFileFilter;
-import org.apache.commons.io.filefilter.RegexFileFilter;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
@@ -34,25 +30,21 @@ import org.junit.Test;
 import com.ibm.icu.text.CharsetDetector;
 import com.ibm.icu.text.CharsetMatch;
 
-import de.tudarmstadt.ukp.dkpro.core.api.datasets.Dataset;
-import de.tudarmstadt.ukp.dkpro.core.api.datasets.DatasetFactory;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 @Ignore("Normally we do not run this")
 public class FindEncoding
 {
-     @Ignore("Used at times for offline testing / development")
+    @Ignore("Used at times for offline testing / development")
     @Test
-    public void getEncoding()
-        throws IOException
+    public void getEncoding() throws IOException
     {
         String dsName = "ndt-nn-1.01";
         findEncoding(dsName);
     }
 
     @Ignore("Used at times for offline testing / development")
-    public void findEncoding(String eName)
-        throws IOException
+    public void findEncoding(String eName) throws IOException
     {
         Path cache = testContext.getCacheFolder().toPath();
         DatasetFactory df = new DatasetFactory(cache);
@@ -70,10 +62,8 @@ public class FindEncoding
                 System.out.println(e.getMessage());
             }
         }
-
     }
 
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
-
 }

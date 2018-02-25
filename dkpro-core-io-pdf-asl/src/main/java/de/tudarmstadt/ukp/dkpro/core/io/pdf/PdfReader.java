@@ -41,7 +41,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 /**
  * Collection reader for PDF files. Uses simple heuristics to detect headings and paragraphs.
  */
-@ResourceMetaData(name="PDFBox PDF Reader")
+@ResourceMetaData(name = "PDFBox PDF Reader")
 @MimeTypeCapability({MimeTypes.APPLICATION_PDF})
 @TypeCapability(
         outputs = { 
@@ -59,7 +59,8 @@ public class PdfReader
      * e.g. to convert ligatures to separate characters.
      */
     public static final String PARAM_SUBSTITUTION_TABLE_LOCATION = "substitutionTableLocation";
-    @ConfigurationParameter(name = PARAM_SUBSTITUTION_TABLE_LOCATION, mandatory = false, defaultValue = BUILT_IN)
+    @ConfigurationParameter(name = PARAM_SUBSTITUTION_TABLE_LOCATION, mandatory = false, 
+            defaultValue = BUILT_IN)
     private String substitutionTableLocation;
 
     /**
@@ -80,7 +81,8 @@ public class PdfReader
      * The first page to be extracted from the PDF.
      */
     public static final String PARAM_START_PAGE = "startPage";
-    @ConfigurationParameter(name = PARAM_START_PAGE, mandatory = false, defaultValue = NOT_RESTRICTED)
+    @ConfigurationParameter(name = PARAM_START_PAGE, mandatory = false, 
+            defaultValue = NOT_RESTRICTED)
     private int startPage;
 
     /**

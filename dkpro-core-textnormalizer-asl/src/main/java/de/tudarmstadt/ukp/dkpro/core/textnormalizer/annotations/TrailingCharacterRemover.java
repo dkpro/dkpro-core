@@ -38,7 +38,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * Removing trailing character (sequences) from tokens, e.g. punctuation.
  */
-@ResourceMetaData(name="Trailing Character Remover")
+@ResourceMetaData(name = "Trailing Character Remover")
 public class TrailingCharacterRemover
     extends JCasAnnotator_ImplBase
 {

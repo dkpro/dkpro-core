@@ -37,14 +37,15 @@ public class AsvToolboxSplitterResource
 {
 
     /**
-    *
-    * This external resource wraps the patricia trie which shall be used by the ASV Toolbox splitter.
-    *
-    * */
+     *
+     * This external resource wraps the patricia trie which shall be used by the ASV Toolbox
+     * splitter.
+     *
+     */
 
-   public static final String PARAM_PATRICIA_TRIES_RESOURCE = "patriciaTriesResource";
-   @ExternalResource(key = PARAM_PATRICIA_TRIES_RESOURCE)
-   private SharedPatriciaTries patriciaTriesResource;
+    public static final String PARAM_PATRICIA_TRIES_RESOURCE = "patriciaTriesResource";
+    @ExternalResource(key = PARAM_PATRICIA_TRIES_RESOURCE)
+    private SharedPatriciaTries patriciaTriesResource;
 
     @Override
     public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
@@ -57,7 +58,8 @@ public class AsvToolboxSplitterResource
     }
 
     @Override
-    public void afterResourcesInitialized() throws RuntimeException {
+    public void afterResourcesInitialized() throws RuntimeException
+    {
         try {
             splitter = patriciaTriesResource.getSplitter();
         }
@@ -68,7 +70,8 @@ public class AsvToolboxSplitterResource
             throw new RuntimeException(e);
         }
         catch (ResourceInitializationException e) {
-            getLogger().log(SEVERE, "RuntimeException caught when getting the patrica trie resource");
+            getLogger().log(SEVERE,
+                    "RuntimeException caught when getting the patrica trie resource");
             getLogger().log(SEVERE, e.getLocalizedMessage());
             getLogger().log(SEVERE, e.getMessage());
             throw new RuntimeException(e);

@@ -18,8 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.api.featurepath;
 
 public class FeaturePathException
-	extends Exception
+    extends Exception
 {
-	private static final long serialVersionUID = 1L;
-
+    private static final long serialVersionUID = 1L;
 }

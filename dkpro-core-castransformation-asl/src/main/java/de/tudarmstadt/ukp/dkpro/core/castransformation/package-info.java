@@ -17,9 +17,9 @@
  */
 
 /**
- * Components for working with texts that require to be corrected or otherwise changed in order to be
- * analyzed further. Modifications are tracked and analysises on the modified text can be related to
- * the original texts.
+ * Components for working with texts that require to be corrected or otherwise changed in order to
+ * be analyzed further. Modifications are tracked and analyses on the modified text can be related
+ * to the original texts.
  *
  * @since 1.1.0
  */

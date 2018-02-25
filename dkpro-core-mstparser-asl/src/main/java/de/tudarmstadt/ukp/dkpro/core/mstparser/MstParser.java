@@ -34,12 +34,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import mstparser.DependencyInstance;
-import mstparser.DependencyParser;
-import mstparser.DependencyPipe;
-import mstparser.DependencyPipe2O;
-import mstparser.ParserOptions;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
@@ -65,6 +59,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
+import mstparser.DependencyInstance;
+import mstparser.DependencyParser;
+import mstparser.DependencyPipe;
+import mstparser.DependencyPipe2O;
+import mstparser.ParserOptions;
 
 /**
  * Dependency parsing using MSTParser.
@@ -85,7 +84,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
  * {@link mstparser.DependencyInstance DependencyInstance}).
  * </p>
  */
-@ResourceMetaData(name="MSTParser Dependency Parser")
+@ResourceMetaData(name = "MSTParser Dependency Parser")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -130,7 +129,8 @@ public class MstParser
      * Load the dependency to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = ComponentParameters.PARAM_DEPENDENCY_MAPPING_LOCATION;
+    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_DEPENDENCY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_DEPENDENCY_MAPPING_LOCATION, mandatory = false)
     protected String dependencyMappingLocation;
     

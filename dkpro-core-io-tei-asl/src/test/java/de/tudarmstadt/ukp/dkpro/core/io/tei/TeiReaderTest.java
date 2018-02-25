@@ -58,18 +58,18 @@ public class TeiReaderTest
                 TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml" });
 
         AnalysisEngine writer = createEngine(TextWriter.class,
-        		TextWriter.PARAM_USE_DOCUMENT_ID, true,
-        		TextWriter.PARAM_OVERWRITE, true,
-        		TextWriter.PARAM_TARGET_LOCATION, "target/digibibTest/");
+                TextWriter.PARAM_USE_DOCUMENT_ID, true,
+                TextWriter.PARAM_OVERWRITE, true,
+                TextWriter.PARAM_TARGET_LOCATION, "target/digibibTest/");
 
         Map<String, Integer> actualSizes = new LinkedHashMap<String, Integer>();
         for (JCas jcas : new JCasIterable(reader)) {
-        	DocumentMetaData meta = DocumentMetaData.get(jcas);
-        	String text = jcas.getDocumentText();
-        	// System.out.printf("%s - %d%n", meta.getDocumentId(), text.length());
-			actualSizes.put(meta.getDocumentId(), text.length());
+            DocumentMetaData meta = DocumentMetaData.get(jcas);
+            String text = jcas.getDocumentText();
+            // System.out.printf("%s - %d%n", meta.getDocumentId(), text.length());
+            actualSizes.put(meta.getDocumentId(), text.length());
 
-			writer.process(jcas);
+            writer.process(jcas);
         }
 
         Map<String, Integer> expectedSizes = new LinkedHashMap<String, Integer>();
@@ -108,16 +108,17 @@ public class TeiReaderTest
 
         int i = 0;
         for (JCas jcas : new JCasIterable(reader)) {
-        	DocumentMetaData meta = DocumentMetaData.get(jcas);
-        	String text = jcas.getDocumentText();
-        	// System.out.printf("%s - %d%n", meta.getDocumentId(), text.length());
+            DocumentMetaData meta = DocumentMetaData.get(jcas);
+            String text = jcas.getDocumentText();
+            // System.out.printf("%s - %d%n", meta.getDocumentId(), text.length());
 
             if (i == 0) {
                 assertEquals(2242, JCasUtil.select(jcas, Token.class).size());
                 assertEquals(2242, JCasUtil.select(jcas, POS.class).size());
                 assertEquals(98, JCasUtil.select(jcas, Sentence.class).size());
 
-                assertEquals(firstSentence, JCasUtil.select(jcas, Sentence.class).iterator().next().getCoveredText());
+                assertEquals(firstSentence,
+                        JCasUtil.select(jcas, Sentence.class).iterator().next().getCoveredText());
             }
             i++;
         }
@@ -129,8 +130,8 @@ public class TeiReaderTest
     public void brownReaderTest2()
         throws Exception
     {
-    	File referenceFile = new File("src/test/resources/brown_ims.txt");
-    	File outputFile = new File("target/test-output/brown_ims.txt");
+        File referenceFile = new File("src/test/resources/brown_ims.txt");
+        File outputFile = new File("target/test-output/brown_ims.txt");
 
         CollectionReaderDescription reader = createReaderDescription(
                 TeiReader.class,
@@ -139,9 +140,9 @@ public class TeiReaderTest
                 TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml" });
 
         AnalysisEngineDescription writer = createEngineDescription(ImsCwbWriter.class,
-        		ImsCwbWriter.PARAM_TARGET_LOCATION, outputFile,
-        		ImsCwbWriter.PARAM_WRITE_CPOS, true,
-        		ImsCwbWriter.PARAM_SENTENCE_TAG, "sentence");
+                ImsCwbWriter.PARAM_TARGET_LOCATION, outputFile,
+                ImsCwbWriter.PARAM_WRITE_CPOS, true,
+                ImsCwbWriter.PARAM_SENTENCE_TAG, "sentence");
 
         SimplePipeline.runPipeline(reader, writer);
 
@@ -185,17 +186,17 @@ public class TeiReaderTest
         throws Exception
     {
         CollectionReaderDescription reader = createReaderDescription(
-        		TeiReader.class,
-        		TeiReader.PARAM_LANGUAGE, "en",
-        		TeiReader.PARAM_SOURCE_LOCATION, "classpath:/brown_tei/",
-        		TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml" },
+                TeiReader.class,
+                TeiReader.PARAM_LANGUAGE, "en",
+                TeiReader.PARAM_SOURCE_LOCATION, "classpath:/brown_tei/",
+                TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml" },
                 TeiReader.PARAM_READ_SENTENCE, false);
 
         int i = 0;
         for (JCas jcas : new JCasIterable(reader)) {
-        	DocumentMetaData meta = DocumentMetaData.get(jcas);
-        	String text = jcas.getDocumentText();
-        	// System.out.printf("%s - %d%n", meta.getDocumentId(), text.length());
+            DocumentMetaData meta = DocumentMetaData.get(jcas);
+            String text = jcas.getDocumentText();
+            // System.out.printf("%s - %d%n", meta.getDocumentId(), text.length());
 
             if (i == 0) {
                 assertEquals(2242, JCasUtil.select(jcas, Token.class).size());
@@ -213,19 +214,19 @@ public class TeiReaderTest
         throws Exception
     {
         CollectionReaderDescription reader = createReaderDescription(
-        		TeiReader.class,
-        		TeiReader.PARAM_LANGUAGE, "en",
-        		TeiReader.PARAM_SOURCE_LOCATION, "classpath:/brown_tei/",
-        		TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml" },
+                TeiReader.class,
+                TeiReader.PARAM_LANGUAGE, "en",
+                TeiReader.PARAM_SOURCE_LOCATION, "classpath:/brown_tei/",
+                TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml" },
                 TeiReader.PARAM_READ_TOKEN, false,
                 TeiReader.PARAM_READ_POS, false
         );
 
         int i = 0;
         for (JCas jcas : new JCasIterable(reader)) {
-        	DocumentMetaData meta = DocumentMetaData.get(jcas);
-        	String text = jcas.getDocumentText();
-        	// System.out.printf("%s - %d%n", meta.getDocumentId(), text.length());
+            DocumentMetaData meta = DocumentMetaData.get(jcas);
+            String text = jcas.getDocumentText();
+            // System.out.printf("%s - %d%n", meta.getDocumentId(), text.length());
 
             if (i == 0) {
                 assertEquals(0, JCasUtil.select(jcas, Token.class).size());
@@ -238,15 +239,15 @@ public class TeiReaderTest
         assertEquals(3, i);
     }
 
-    @Test(expected=IllegalStateException.class)
+    @Test(expected = IllegalStateException.class)
     public void brownReaderTest_expectedException()
         throws Exception
     {
         CollectionReaderDescription reader = createReaderDescription(
-        		TeiReader.class,
-        		TeiReader.PARAM_LANGUAGE, "en",
-        		TeiReader.PARAM_SOURCE_LOCATION, "classpath:/brown_tei/",
-        		TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml" },
+                TeiReader.class,
+                TeiReader.PARAM_LANGUAGE, "en",
+                TeiReader.PARAM_SOURCE_LOCATION, "classpath:/brown_tei/",
+                TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml" },
                 TeiReader.PARAM_READ_POS, true,
                 TeiReader.PARAM_READ_TOKEN, false);
 

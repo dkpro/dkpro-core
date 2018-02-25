@@ -25,18 +25,18 @@ import org.apache.uima.jcas.tcas.Annotation;
 import edu.stanford.nlp.ling.CoreAnnotation;
 
 /**
- * Annotations of the type "UIMAAnnotations" should contain a Collection
- * of org.apache.uima.jcas.tcas.Annotation objects.
+ * Annotations of the type "UIMAAnnotations" should contain a Collection of
+ * org.apache.uima.jcas.tcas.Annotation objects.
  *
  */
 @SuppressWarnings("rawtypes")
 public class UIMAAnnotations
-	implements CoreAnnotation<Collection<Annotation>>
+    implements CoreAnnotation<Collection<Annotation>>
 {
-	@SuppressWarnings("unchecked")
-	@Override
-	public Class<Collection<Annotation>> getType()
-	{
-		return (Class<Collection<Annotation>>) (Class) Collection.class;
-	}
+    @SuppressWarnings("unchecked")
+    @Override
+    public Class<Collection<Annotation>> getType()
+    {
+        return (Class<Collection<Annotation>>) (Class) Collection.class;
+    }
 }

@@ -21,13 +21,12 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlValue;
 
-
 public class XcesParaBasic
-{ 
-    
+{
     @XmlID
     @XmlAttribute
-    public String id; 
+    public String id;
+
     @XmlValue
-    public String s;             
+    public String s;
 }

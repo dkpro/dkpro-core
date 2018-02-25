@@ -56,8 +56,8 @@ public class MappingProviderFactory
         return p;
     }
     
-    public static MappingProvider createChunkMappingProvider(String aMappingLocation, String aTagset,
-            String aLanguage)
+    public static MappingProvider createChunkMappingProvider(String aMappingLocation,
+            String aTagset, String aLanguage)
     {
         MappingProvider chunkMappingProvider = new MappingProvider();
         chunkMappingProvider = new MappingProvider();

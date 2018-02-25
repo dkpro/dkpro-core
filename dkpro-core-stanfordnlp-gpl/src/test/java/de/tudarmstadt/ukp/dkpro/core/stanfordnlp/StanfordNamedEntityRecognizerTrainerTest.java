@@ -113,7 +113,8 @@ public class StanfordNamedEntityRecognizerTrainerTest
         // Read reference data collect labels
         ConfigurationParameterFactory.setParameter(testReader,
                 Conll2002Reader.PARAM_READ_NAMED_ENTITY, true);
-        List<Span<String>> expected = EvalUtil.loadSamples(testReader, NamedEntity.class, NamedEntity::getValue);
+        List<Span<String>> expected = EvalUtil.loadSamples(testReader, NamedEntity.class,
+                NamedEntity::getValue);
         System.out.printf("Expected samples: %d%n", expected.size());
 
         Result results = EvalUtil.dumpResults(targetFolder, expected, actual);

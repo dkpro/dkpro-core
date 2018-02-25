@@ -35,8 +35,8 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.Messages;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.CoreNlp2DKPro;
+import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.MorphaAnnotator;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
@@ -44,7 +44,7 @@ import edu.stanford.nlp.process.PTBEscapingProcessor;
 /**
  * Lemmatizer from CoreNLP.
  */
-@ResourceMetaData(name="CoreNLP Lemmatizer")
+@ResourceMetaData(name = "CoreNLP Lemmatizer")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -110,7 +110,8 @@ public class CoreNlpLemmatizer
     {
         if (!"en".equals(aJCas.getDocumentLanguage())) {
             throw new AnalysisEngineProcessException(Messages.BUNDLE,
-                    Messages.ERR_UNSUPPORTED_LANGUAGE, new String[] { aJCas.getDocumentLanguage() });
+                    Messages.ERR_UNSUPPORTED_LANGUAGE,
+                    new String[] { aJCas.getDocumentLanguage() });
         }
         
         CAS cas = aJCas.getCas();

@@ -18,10 +18,10 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.corenlp.internal;
 
-import static org.apache.uima.fit.util.JCasUtil.selectPreceding;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.fit.util.JCasUtil.selectFollowing;
+import static org.apache.uima.fit.util.JCasUtil.selectPreceding;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -161,7 +161,7 @@ public class DKPro2CoreNlp
             for (Token t : selectCovered(Token.class, s)) {
                 String tokenText = t.getText();
                 if (encoding != null && !"UTF-8".equals(encoding.name())) {
-                    tokenText = new String(tokenText.getBytes(StandardCharsets.UTF_8), encoding);                
+                    tokenText = new String(tokenText.getBytes(StandardCharsets.UTF_8), encoding);
                 }
                 
                 CoreLabel token = tokenFactory.makeToken(tokenText, t.getBegin(),

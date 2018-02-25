@@ -24,9 +24,9 @@ import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 /**
  * Part-of-Speech annotator using OpenNLP with IXA extensions.
  */
-@ResourceMetaData(name="IXA POS-Tagger")
+@ResourceMetaData(name = "IXA POS-Tagger")
 public class IxaPosTagger
-	extends OpenNlpPosTagger
+    extends OpenNlpPosTagger
 {
     // The IXA POS tagger models make use of IXA classes. But they do so from within OpenNLP.
     // From the outside, it looks and works exactly like an OpenNLP POS tagger. So we just

@@ -26,12 +26,11 @@ import org.apache.uima.fit.descriptor.TypeCapability;
  * Soundex phonetic transcription based on Apache Commons Codec.
  * Works for English.
  */
-@ResourceMetaData(name="Commons Codec Soundex Phonetic Transcriptor")
+@ResourceMetaData(name = "Commons Codec Soundex Phonetic Transcriptor")
 @LanguageCapability("en")
 @TypeCapability(
-        inputs={"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
-        outputs={"de.tudarmstadt.ukp.dkpro.core.api.phonetics.type.PhoneticTranscription"})
-
+        inputs = {"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
+        outputs = {"de.tudarmstadt.ukp.dkpro.core.api.phonetics.type.PhoneticTranscription"})
 public class SoundexPhoneticTranscriptor
     extends PhoneticTranscriptor_ImplBase
 {

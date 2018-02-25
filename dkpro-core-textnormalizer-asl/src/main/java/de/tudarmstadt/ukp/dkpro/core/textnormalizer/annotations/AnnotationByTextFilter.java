@@ -42,7 +42,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  * Reads a list of words from a text file (one token per line) and retains only tokens or other
  * annotations that match any of these words.
  */
-@ResourceMetaData(name="Annotation-By-Text Filter")
+@ResourceMetaData(name = "Annotation-By-Text Filter")
 public class AnnotationByTextFilter
     extends JCasAnnotator_ImplBase
 {
@@ -60,7 +60,8 @@ public class AnnotationByTextFilter
     private boolean ignoreCase;
 
     public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
-    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String modelEncoding;
 
     /**

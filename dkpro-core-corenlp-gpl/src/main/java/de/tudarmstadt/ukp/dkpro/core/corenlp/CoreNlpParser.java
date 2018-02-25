@@ -46,8 +46,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
-import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.CoreNlp2DKPro;
+import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 import edu.stanford.nlp.parser.common.ParserGrammar;
 import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
 import edu.stanford.nlp.parser.lexparser.Lexicon;
@@ -70,7 +70,7 @@ import edu.stanford.nlp.trees.international.pennchinese.ChineseGrammaticalRelati
 /**
  * Parser from CoreNLP.
  */
-@ResourceMetaData(name="CoreNLP Parser")
+@ResourceMetaData(name = "CoreNLP Parser")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -88,7 +88,7 @@ public class CoreNlpParser
      * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
     private boolean printTagSet;
 
     /**
@@ -123,21 +123,24 @@ public class CoreNlpParser
     /**
      * Location of the mapping file for dependency tags to UIMA types.
      */
-    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = ComponentParameters.PARAM_DEPENDENCY_MAPPING_LOCATION;
+    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_DEPENDENCY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_DEPENDENCY_MAPPING_LOCATION, mandatory = false)
     private String dependencyMappingLocation;
     
     /**
      * Location of the mapping file for dependency tags to UIMA types.
      */
-    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
+    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CONSTITUENT_MAPPING_LOCATION, mandatory = false)
     private String constituentMappingLocation;
     
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     private String posMappingLocation;
     
@@ -151,12 +154,15 @@ public class CoreNlpParser
     @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
     private boolean internStrings;
 
-    public static final String PARAM_MAX_SENTENCE_LENGTH = ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
+    public static final String PARAM_MAX_SENTENCE_LENGTH = 
+            ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
     @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = true, defaultValue = "2147483647")
     private int maxSentenceLength;
     
-    public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
-    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = ComponentParameters.AUTO_NUM_THREADS)
+    public static final String PARAM_NUM_THREADS = 
+            ComponentParameters.PARAM_NUM_THREADS;
+    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, 
+            defaultValue = ComponentParameters.AUTO_NUM_THREADS)
     private int numThreads;
 
     public static final String PARAM_MAX_TIME = "maxTime";
@@ -189,7 +195,7 @@ public class CoreNlpParser
     private List<String> quoteEnd;
     
     public static final String PARAM_EXTRA_DEPENDENCIES = "extraDependencies";
-    @ConfigurationParameter(name = PARAM_EXTRA_DEPENDENCIES, mandatory = true, defaultValue="NONE")
+    @ConfigurationParameter(name = PARAM_EXTRA_DEPENDENCIES, mandatory = true, defaultValue = "NONE")
     GrammaticalStructure.Extras extraDependencies;
     
     /**
@@ -198,7 +204,8 @@ public class CoreNlpParser
      * <p>
      * Default: {@code true}
      */
-    public static final String PARAM_WRITE_CONSTITUENT = ComponentParameters.PARAM_WRITE_CONSTITUENT;
+    public static final String PARAM_WRITE_CONSTITUENT = 
+            ComponentParameters.PARAM_WRITE_CONSTITUENT;
     @ConfigurationParameter(name = PARAM_WRITE_CONSTITUENT, mandatory = true, defaultValue = "true")
     private boolean writeConstituent;
 
@@ -309,8 +316,8 @@ public class CoreNlpParser
         
         // Transfer back into the CAS
         if (writePos) {
-           posMappingProvider.configure(cas);
-           CoreNlp2DKPro.convertPOSs(aJCas, document, posMappingProvider, internStrings);
+            posMappingProvider.configure(cas);
+            CoreNlp2DKPro.convertPOSs(aJCas, document, posMappingProvider, internStrings);
         }
         
         if (writeConstituent) {
@@ -366,7 +373,8 @@ public class CoreNlpParser
 //          coreNlpProps.setProperty("parse.treemap", ...);
             coreNlpProps.setProperty("parse.maxtime", Integer.toString(maxTime));
             coreNlpProps.setProperty("parse.buildgraphs", Boolean.toString(writeDependency));
-            coreNlpProps.setProperty("parse.originalDependencies", Boolean.toString(originalDependencies));
+            coreNlpProps.setProperty("parse.originalDependencies",
+                    Boolean.toString(originalDependencies));
             coreNlpProps.setProperty("parse.nthreads", Integer.toString(numThreads));
 //          coreNlpProps.setProperty("parse.binaryTrees", ...);
 //          coreNlpProps.setProperty("parse.nosquash", ...);
@@ -496,7 +504,8 @@ public class CoreNlpParser
                     addTagset(depTags, writeDependency);
                 }
             }
-            else if (gsf != null && UniversalEnglishGrammaticalStructureFactory.class.equals(gsf.getClass())) {
+            else if (gsf != null
+                    && UniversalEnglishGrammaticalStructureFactory.class.equals(gsf.getClass())) {
                 SingletonTagset depTags = new SingletonTagset(Dependency.class, "universal");
                 for (GrammaticalRelation r : UniversalEnglishGrammaticalRelations.values()) {
                     depTags.add(r.getShortName());

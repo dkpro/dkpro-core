@@ -32,7 +32,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import gate.Gate;
 import gate.util.GateException;
 
-@ResourceMetaData(name="GATE XML Reader")
+@ResourceMetaData(name = "GATE XML Reader")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_GATE_XML})
 @TypeCapability(
         outputs = {

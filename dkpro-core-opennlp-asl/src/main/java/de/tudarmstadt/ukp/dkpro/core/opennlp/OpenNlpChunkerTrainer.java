@@ -40,7 +40,7 @@ import opennlp.tools.util.model.BaseModel;
  * Train a chunker model for OpenNLP.
  */
 @MimeTypeCapability(MimeTypes.APPLICATION_X_OPENNLP_CHUNK)
-@ResourceMetaData(name="OpenNLP Chunker Trainer")
+@ResourceMetaData(name = "OpenNLP Chunker Trainer")
 public class OpenNlpChunkerTrainer
     extends OpenNlpTrainerBase<CasChunkSampleStream>
 {
@@ -49,11 +49,13 @@ public class OpenNlpChunkerTrainer
     private String language;
 
     public static final String PARAM_ALGORITHM = "algorithm";
-    @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, defaultValue = GISTrainer.MAXENT_VALUE)
+    @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, 
+            defaultValue = GISTrainer.MAXENT_VALUE)
     private String algorithm;
     
     public static final String PARAM_TRAINER_TYPE = "trainerType";
-    @ConfigurationParameter(name = PARAM_TRAINER_TYPE, mandatory = true, defaultValue = EventTrainer.EVENT_VALUE)
+    @ConfigurationParameter(name = PARAM_TRAINER_TYPE, mandatory = true, 
+            defaultValue = EventTrainer.EVENT_VALUE)
     private String trainerType;
 
     public static final String PARAM_ITERATIONS = "iterations";

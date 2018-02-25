@@ -55,7 +55,7 @@ import edu.emory.mathcs.nlp.component.template.node.NLPNode;
 /**
  * Emory NLP4J name finder wrapper.
  */
-@ResourceMetaData(name="NLP4J Named Entity Recognizer")
+@ResourceMetaData(name = "NLP4J Named Entity Recognizer")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -99,7 +99,8 @@ public class Nlp4JNamedEntityRecognizer
     /**
      * Location of the mapping file for named entity tags to UIMA types.
      */
-    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
+    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
     protected String mappingLocation;
 

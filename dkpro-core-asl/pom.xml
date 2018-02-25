@@ -745,6 +745,8 @@
                   <excludes>
                     <exclude>.activate-run-jcasgen</exclude>
                     <exclude>.gitignore</exclude>
+                    <exclude>.checkstyle</exclude>
+                    <exclude>suppressions.xml</exclude>
                     <!-- maven config files -->
                     <exclude>src/filter/**/*</exclude>
                     <!-- release generated artifact -->

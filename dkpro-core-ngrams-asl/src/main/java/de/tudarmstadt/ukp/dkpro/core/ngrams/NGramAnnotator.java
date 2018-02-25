@@ -34,31 +34,31 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * N-gram annotator.
  */
-@ResourceMetaData(name="N-Gram Annotator")
+@ResourceMetaData(name = "N-Gram Annotator")
 @TypeCapability(
-    inputs={
+    inputs = {
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
-    outputs={
+    outputs = {
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NGram"})
 public class NGramAnnotator
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
-	/**
-	 * The length of the n-grams to generate (the "n" in n-gram).
-	 */
-	public static final String PARAM_N = "N";
-	@ConfigurationParameter(name = PARAM_N, mandatory = true, defaultValue = "3")
-	private int n;
+    /**
+     * The length of the n-grams to generate (the "n" in n-gram).
+     */
+    public static final String PARAM_N = "N";
+    @ConfigurationParameter(name = PARAM_N, mandatory = true, defaultValue = "3")
+    private int n;
 
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
-		for (Sentence s : select(aJCas, Sentence.class)) {
-			for (NGram ngram : NGramIterable.create(selectCovered(Token.class, s), n)) {
-				ngram.addToIndexes();
-			}
-		}
-	}
+    @Override
+    public void process(JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
+        for (Sentence s : select(aJCas, Sentence.class)) {
+            for (NGram ngram : NGramIterable.create(selectCovered(Token.class, s), n)) {
+                ngram.addToIndexes();
+            }
+        }
+    }
 }

@@ -35,7 +35,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * ArkTweet tokenizer.
  */
-@ResourceMetaData(name="ArkTweet Tokenizer")
+@ResourceMetaData(name = "ArkTweet Tokenizer")
 public class ArktweetTokenizer
     extends CasAnnotator_ImplBase
 {

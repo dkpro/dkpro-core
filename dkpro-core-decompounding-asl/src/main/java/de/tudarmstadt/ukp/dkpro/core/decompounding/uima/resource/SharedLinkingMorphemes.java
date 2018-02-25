@@ -34,7 +34,6 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.LinkingMorphemes;
 public class SharedLinkingMorphemes
     extends Resource_ImplBase
 {
-
     /**
      * Use this language instead of the default language.
      */
@@ -100,11 +99,10 @@ public class SharedLinkingMorphemes
 
     public LinkingMorphemes getLinkingMorphemes() throws IOException
     {
-        if(morphemes == null){
+        if (morphemes == null) {
             modelProvider.configure();
             morphemes = modelProvider.getResource();
         }
         return morphemes;
     }
-
 }

@@ -17,22 +17,25 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator;
 
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LexicalPhrase;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import org.apache.uima.UIMAException;
-import org.apache.uima.jcas.JCas;
-import org.junit.Assert;
-import org.junit.Test;
+import static de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGeneratorTest.jCasWithLemmas;
+import static de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGeneratorTest.jCasWithSentence;
+import static de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGeneratorTest.jCasWithTokens;
+import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGeneratorTest.*;
-import static org.junit.Assert.assertEquals;
+import org.apache.uima.UIMAException;
+import org.apache.uima.jcas.JCas;
+import org.junit.Assert;
+import org.junit.Test;
+
+import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LexicalPhrase;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class PhraseSequenceGeneratorTest
 {

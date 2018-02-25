@@ -101,9 +101,9 @@ public class EmoryNlp2Uima
         Type neType = aCas.getTypeSystem().getType(NamedEntity.class.getName());
         Feature valueFeat = neType.getFeatureByBaseName("value");
 
-        String[] neTags = new String[aNodes.length-1];
+        String[] neTags = new String[aNodes.length - 1];
         for (int i = 1; i < aNodes.length; i++) {
-            neTags[i-1] = aNodes[i].getNamedEntityTag();
+            neTags[i - 1] = aNodes[i].getNamedEntityTag();
         }
         
         BilouDecoder decoder = new BilouDecoder(aCas, valueFeat, aMappingProvider);

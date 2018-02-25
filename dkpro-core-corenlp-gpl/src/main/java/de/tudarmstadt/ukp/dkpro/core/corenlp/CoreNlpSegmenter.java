@@ -46,7 +46,7 @@ import edu.stanford.nlp.util.CoreMap;
 /**
  * Tokenizer and sentence splitter using from CoreNLP.
  */
-@ResourceMetaData(name="CoreNLP Segmenter")
+@ResourceMetaData(name = "CoreNLP Segmenter")
 @TypeCapability(
         outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -62,7 +62,8 @@ public class CoreNlpSegmenter
      * @see WordToSentenceProcessor#WordToSentenceProcessor
      */
     public static final String PARAM_BOUNDARY_TOKEN_REGEX = "boundaryTokenRegex";
-    @ConfigurationParameter(name = PARAM_BOUNDARY_TOKEN_REGEX, mandatory = false, defaultValue = WordToSentenceProcessor.DEFAULT_BOUNDARY_REGEX)
+    @ConfigurationParameter(name = PARAM_BOUNDARY_TOKEN_REGEX, mandatory = false, 
+            defaultValue = WordToSentenceProcessor.DEFAULT_BOUNDARY_REGEX)
     private String boundaryTokenRegex;
 
     public static final String PARAM_BOUNDARY_MULTI_TOKEN_REGEX = "boundaryMultiTokenRegex";
@@ -98,7 +99,8 @@ public class CoreNlpSegmenter
      * The set of regex for sentence boundary tokens that should be discarded.
      */
     public static final String PARAM_TOKEN_REGEXES_TO_DISCARD = "tokenRegexesToDiscard";
-    @ConfigurationParameter(name = PARAM_TOKEN_REGEXES_TO_DISCARD, mandatory = false, defaultValue = {})
+    @ConfigurationParameter(name = PARAM_TOKEN_REGEXES_TO_DISCARD, mandatory = false, 
+            defaultValue = {})
     private Set<String> tokenRegexesToDiscard;
     
     private ModelProviderBase<WordsToSentencesAnnotator> sentenceAnnotator;

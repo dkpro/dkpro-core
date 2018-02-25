@@ -34,10 +34,13 @@ public class ConditionalFrequencyDistributionTest
         String condition1 = "text1";
         String condition2 = "text2";
         
-        List<String> tokens1 = Arrays.asList("This is a first test that contains a first test example".split(" "));
-        List<String> tokens2 = Arrays.asList("This second example contains other example tokens".split(" "));
+        List<String> tokens1 = Arrays.asList(
+                "This is a first test that contains a first test example".split(" "));
+        List<String> tokens2 = Arrays.asList(
+                "This second example contains other example tokens".split(" "));
         
-        ConditionalFrequencyDistribution<String, String> cfd = new ConditionalFrequencyDistribution<String, String>();
+        ConditionalFrequencyDistribution<String, String> cfd = 
+                new ConditionalFrequencyDistribution<String, String>();
         cfd.incAll(condition1, tokens1);
         cfd.incAll(condition2, tokens2);
         
@@ -60,7 +63,8 @@ public class ConditionalFrequencyDistributionTest
     @Test
     public void addSampleTest() {
                 
-        ConditionalFrequencyDistribution<String, String> cfd = new ConditionalFrequencyDistribution<String, String>();
+        ConditionalFrequencyDistribution<String, String> cfd = 
+                new ConditionalFrequencyDistribution<String, String>();
         cfd.addSample("condition", "key", 10);
                 
         assertEquals(1, cfd.getConditions().size());

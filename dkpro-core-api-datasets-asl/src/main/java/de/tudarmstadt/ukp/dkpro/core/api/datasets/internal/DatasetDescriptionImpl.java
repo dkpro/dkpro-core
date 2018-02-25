@@ -17,7 +17,8 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.api.datasets.internal;
 
-import static java.util.Collections.*;
+import static java.util.Collections.emptyMap;
+import static java.util.Collections.unmodifiableMap;
 
 import java.util.List;
 import java.util.Map;
@@ -208,6 +209,7 @@ public class DatasetDescriptionImpl
         licenses = aLicenses;
     }
 
+    @Override
     public String getEncoding()
     {
         return encoding;

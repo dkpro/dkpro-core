@@ -22,6 +22,7 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertFalse;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.ConsoleHandler;
@@ -35,6 +36,7 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
@@ -46,24 +48,24 @@ import edu.stanford.nlp.dcoref.Constants;
  */
 public class StanfordCoreferenceResolverTest
 {
-	@Test
-	public void test()
-		throws Exception
-	{
-	    JCas jcas = runTest("en", "John bought a car. He is very happy with it.");
+    @Test
+    public void test()
+        throws Exception
+    {
+        JCas jcas = runTest("en", "John bought a car. He is very happy with it.");
 
-		String[][] ref = { 
-		        { "John", "He" }, 
-		        { "a car", "it" } };
-		
+        String[][] ref = { 
+                { "John", "He" }, 
+                { "a car", "it" } };
+        
         AssertAnnotations.assertCoreference(ref, select(jcas, CoreferenceChain.class));
-	}
+    }
 
-	// https://github.com/dkpro/dkpro-core/issues/582
-    //	Jan 22, 2015 5:11:54 PM edu.stanford.nlp.dcoref.Document findSpeaker
-    //	WARNING: Cannot find node in dependency for word rally
-    //	Jan 22, 2015 5:11:54 PM edu.stanford.nlp.dcoref.Document findSpeaker
-    //	WARNING: Cannot find node in dependency for word told
+    // https://github.com/dkpro/dkpro-core/issues/582
+    //    Jan 22, 2015 5:11:54 PM edu.stanford.nlp.dcoref.Document findSpeaker
+    //    WARNING: Cannot find node in dependency for word rally
+    //    Jan 22, 2015 5:11:54 PM edu.stanford.nlp.dcoref.Document findSpeaker
+    //    WARNING: Cannot find node in dependency for word told
     @Test
     public void test2()
         throws Exception
@@ -153,16 +155,19 @@ public class StanfordCoreferenceResolverTest
         throws Exception
     {
         JCas jcas = runTest("en", 
-                "Other major domestic initiatives in his presidency include the Patient Protection and " + 
-                "Affordable Care Act, often referred to as \"Obamacare\"; the Dodd–Frank Wall Street Reform and " + 
-                "Consumer Protection Act; the Don't Ask, Don't Tell Repeal Act of 2010; the Budget Control " + 
-                "Act of 2011; and the American Taxpayer Relief Act of 2012.");
+                "Other major domestic initiatives in his presidency include the Patient " + 
+                "Protection and Affordable Care Act, often referred to as \"Obamacare\"; the " + 
+                "Dodd–Frank Wall Street Reform and Consumer Protection Act; the Don't Ask, " + 
+                "Don't Tell Repeal Act of 2010; the Budget Control Act of 2011; and the " +
+                "American Taxpayer Relief Act of 2012.");
 
         String[][] ref = {
                 { "Other major domestic initiatives in his presidency" },
                 { "his presidency" },
                 { "his" },
-                { "the Patient Protection and Affordable Care Act, often referred to as \"Obamacare\"; the Dodd–Frank Wall Street Reform and Consumer Protection Act; the Don't Ask" },
+                { "the Patient Protection and Affordable Care Act, often referred to as "
+                        + "\"Obamacare\"; the Dodd–Frank Wall Street Reform and Consumer "
+                        + "Protection Act; the Don't Ask" },
                 { "the Patient Protection and Affordable Care Act" },
                 { "the Patient Protection" },
                 { "Affordable Care Act" },
@@ -171,27 +176,27 @@ public class StanfordCoreferenceResolverTest
                 { "Frank Wall Street Reform and Consumer Protection Act" },
                 { "Frank Wall Street Reform" },
                 { "Consumer Protection Act" },
-                { "Repeal Act of 2010; the Budget Control Act of 2011; and the American Taxpayer Relief Act of 2012" },
+                { "Repeal Act of 2010; the Budget Control Act of 2011; and the American "
+                        + "Taxpayer Relief Act of 2012" },
                 { "2010" },
                 { "the Budget Control Act of 2011" },
                 { "the American Taxpayer Relief Act of 2012" },
                 { "2011" },
                 { "2012" } };
 
-        String[] pennTree = { 
-            "(ROOT (S (NP (NP (JJ Other) (JJ major) (JJ domestic) (NNS initiatives)) (PP (IN in) "
-            + "(NP (PRP$ his) (NN presidency)))) (VP (VBP include) (SBAR (S (NP (NP (DT the) "
-            + "(NNP Patient) (NNP Protection) (CC and) (NNP Affordable) (NNP Care) (NNP Act)) "
-            + "(, ,) (VP (ADVP (RB often)) (VBN referred) (PP (TO to) (SBAR (IN as) (S (NP "
-            + "(`` \") (NP (NNP Obamacare)) ('' \") (PRN (: ;) (S (NP (DT the) (NNP Dodd)) (VP "
-            + "(VBP –) (NP (NP (NNP Frank) (NNP Wall) (NNP Street) (NNP Reform)) (CC and) (NP "
-            + "(NNP Consumer) (NNP Protection) (NNP Act))))) (: ;))) (DT the) (VP (VBP Do) "
-            + "(RB n't) (VP (VB Ask))))))) (, ,)) (VP (VBP Do) (RB n't) (VP (VB Tell) (NP (NP "
-            + "(NP (NN Repeal) (NNP Act)) (PP (IN of) (NP (CD 2010)))) (: ;) (NP (NP (DT the) "
-            + "(NNP Budget) (NNP Control) (NNP Act)) (PP (IN of) (NP (CD 2011)))) (: ;) "
-            + "(CC and) (NP (NP (DT the) (NNP American) (NNP Taxpayer) (NNP Relief) (NNP Act)) "
-            + "(PP (IN of) (NP (CD 2012)))))))))) (. .)))"
-        };
+        String[] pennTree = {
+                "(ROOT (S (NP (NP (JJ Other) (JJ major) (JJ domestic) (NNS initiatives)) (PP (IN in) "
+                + "(NP (PRP$ his) (NN presidency)))) (VP (VBP include) (SBAR (S (NP (NP (DT the) "
+                + "(NNP Patient) (NNP Protection) (CC and) (NNP Affordable) (NNP Care) (NNP Act)) "
+                + "(, ,) (VP (ADVP (RB often)) (VBN referred) (PP (TO to) (SBAR (IN as) (S (NP "
+                + "(`` \") (NP (NNP Obamacare)) ('' \") (PRN (: ;) (S (NP (DT the) (NNP Dodd)) (VP "
+                + "(VBP –) (NP (NP (NNP Frank) (NNP Wall) (NNP Street) (NNP Reform)) (CC and) (NP "
+                + "(NNP Consumer) (NNP Protection) (NNP Act))))) (: ;))) (DT the) (VP (VBP Do) "
+                + "(RB n't) (VP (VB Ask))))))) (, ,)) (VP (VBP Do) (RB n't) (VP (VB Tell) (NP (NP "
+                + "(NP (NN Repeal) (NNP Act)) (PP (IN of) (NP (CD 2010)))) (: ;) (NP (NP (DT the) "
+                + "(NNP Budget) (NNP Control) (NNP Act)) (PP (IN of) (NP (CD 2011)))) (: ;) "
+                + "(CC and) (NP (NP (DT the) (NNP American) (NNP Taxpayer) (NNP Relief) (NNP Act)) "
+                + "(PP (IN of) (NP (CD 2012)))))))))) (. .)))" };
 
         AssertAnnotations.assertPennTree(pennTree, select(jcas, PennTree.class));
         AssertAnnotations.assertCoreference(ref, select(jcas, CoreferenceChain.class));

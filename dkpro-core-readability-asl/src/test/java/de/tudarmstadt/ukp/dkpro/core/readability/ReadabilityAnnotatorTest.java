@@ -41,18 +41,18 @@ public class ReadabilityAnnotatorTest
 {
     private final static double EPSILON = 0.1; 
     
-	static HashMap<String, Double>  correctResult = new HashMap<String, Double>();
-	static
-	{
-		correctResult.put("kincaid", 7.6);
-		correctResult.put("ari",  9.1);
-		correctResult.put("coleman_liau", 11.6);
-		correctResult.put("flesch", 70.6);
-		correctResult.put("lix", 5.0);
-		correctResult.put("smog", 9.9);
-		correctResult.put("fog", 10.6);
-	}
-	
+    static HashMap<String, Double>  correctResult = new HashMap<String, Double>();
+    static
+    {
+        correctResult.put("kincaid", 7.6);
+        correctResult.put("ari",  9.1);
+        correctResult.put("coleman_liau", 11.6);
+        correctResult.put("flesch", 70.6);
+        correctResult.put("lix", 5.0);
+        correctResult.put("smog", 9.9);
+        correctResult.put("fog", 10.6);
+    }
+    
     @Test
     public void readabilityAnnotatorTest()
         throws Exception
@@ -61,24 +61,14 @@ public class ReadabilityAnnotatorTest
                 new File("src/test/resources/readability/test_document_en.txt")
           );
         
-        Map<String, Boolean> measureMap = new HashMap<String,Boolean>();
-          for (Measures measure : Measures.values()) {
-        	  measureMap.put(measure.name(), true);
-          }
-        
-
-        AnalysisEngineDescription segmenter = createEngineDescription(
-                BreakIteratorSegmenter.class
-        );
-
-        AnalysisEngineDescription readability = createEngineDescription(
-                ReadabilityAnnotator.class
-        );
+        Map<String, Boolean> measureMap = new HashMap<String, Boolean>();
+        for (Measures measure : Measures.values()) {
+            measureMap.put(measure.name(), true);
+        }
 
         AnalysisEngineDescription aggregate = createEngineDescription(
-                segmenter,
-                readability
-        );
+                createEngineDescription(BreakIteratorSegmenter.class),
+                createEngineDescription(ReadabilityAnnotator.class));
         
         AnalysisEngine ae = createEngine(aggregate); 
         JCas jcas = ae.newJCas();
@@ -88,11 +78,11 @@ public class ReadabilityAnnotatorTest
 
         int i = 0;
         for (ReadabilityScore score : JCasUtil.select(jcas, ReadabilityScore.class)) {
-        	String strMeasureName = score.getMeasureName();
-        	double dScore = score.getScore();
-        	System.out.println(strMeasureName + " : " + score.getScore());
-        	assertTrue(measureMap.containsKey(strMeasureName));
-        	assertEquals(correctResult.get(strMeasureName), dScore, EPSILON);
+            String strMeasureName = score.getMeasureName();
+            double dScore = score.getScore();
+            System.out.println(strMeasureName + " : " + score.getScore());
+            assertTrue(measureMap.containsKey(strMeasureName));
+            assertEquals(correctResult.get(strMeasureName), dScore, EPSILON);
             i++;
         }
         assertEquals(7, i);

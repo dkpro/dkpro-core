@@ -18,6 +18,9 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.corenlp;
 
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertDependencies;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagset;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagsetMapping;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
@@ -29,7 +32,6 @@ import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
@@ -95,13 +97,12 @@ public class CoreNlpDependencyParserTest
 
         String[] unmappedDep = {};
 
-        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
-        AssertAnnotations.assertTagset(CoreNlpPosTagger.class, POS.class, "ptb", PTB_POS_TAGS, jcas);
-        AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, POS.class, "ptb", PTB_POS_TAGS,
-                jcas);
-        AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, Dependency.class,
-                "stanford341", STANFORD_DEPENDENCY_TAGS, jcas);
-        AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford341", unmappedDep, jcas);
+        assertDependencies(dependencies, select(jcas, Dependency.class));
+        assertTagset(CoreNlpPosTagger.class, POS.class, "ptb", PTB_POS_TAGS, jcas);
+        assertTagset(CoreNlpDependencyParser.class, POS.class, "ptb", PTB_POS_TAGS, jcas);
+        assertTagset(CoreNlpDependencyParser.class, Dependency.class, "stanford341",
+                STANFORD_DEPENDENCY_TAGS, jcas);
+        assertTagsetMapping(Dependency.class, "stanford341", unmappedDep, jcas);
     }
 
     @Test
@@ -134,13 +135,12 @@ public class CoreNlpDependencyParserTest
         String[] unmappedDep = { "acl:relcl", "cc:preconj", "compound:prt", "det:predet",
                 "nmod:npmod", "nmod:poss", "nmod:tmod" };
 
-        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
-        AssertAnnotations.assertTagset(CoreNlpPosTagger.class, POS.class, "ptb", PTB_POS_TAGS, jcas);
-        AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, POS.class, "ptb", PTB_POS_TAGS,
-                jcas);
-        AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, Dependency.class, "universal",
+        assertDependencies(dependencies, select(jcas, Dependency.class));
+        assertTagset(CoreNlpPosTagger.class, POS.class, "ptb", PTB_POS_TAGS, jcas);
+        assertTagset(CoreNlpDependencyParser.class, POS.class, "ptb", PTB_POS_TAGS, jcas);
+        assertTagset(CoreNlpDependencyParser.class, Dependency.class, "universal",
                 UNIVERSAL_DEPENDENCY_TAGS, jcas);
-        AssertAnnotations.assertTagsetMapping(Dependency.class, "universal", unmappedDep, jcas);
+        assertTagsetMapping(Dependency.class, "universal", unmappedDep, jcas);
     }
 
     @Test
@@ -172,13 +172,12 @@ public class CoreNlpDependencyParserTest
 
         String[] unmappedDep = {};
 
-        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
-        AssertAnnotations.assertTagset(CoreNlpPosTagger.class, POS.class, "ptb", PTB_POS_TAGS, jcas);
-        AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, POS.class, "ptb", PTB_POS_TAGS,
-                jcas);
-        AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, Dependency.class,
-                "stanford341", STANFORD_DEPENDENCY_TAGS, jcas);
-        AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford341", unmappedDep, jcas);
+        assertDependencies(dependencies, select(jcas, Dependency.class));
+        assertTagset(CoreNlpPosTagger.class, POS.class, "ptb", PTB_POS_TAGS, jcas);
+        assertTagset(CoreNlpDependencyParser.class, POS.class, "ptb", PTB_POS_TAGS, jcas);
+        assertTagset(CoreNlpDependencyParser.class, Dependency.class, "stanford341",
+                STANFORD_DEPENDENCY_TAGS, jcas);
+        assertTagsetMapping(Dependency.class, "stanford341", unmappedDep, jcas);
     }
 
 
@@ -219,13 +218,11 @@ public class CoreNlpDependencyParserTest
         String[] unmappedDep = { "acl:relcl", "cc:preconj", "compound:prt", "det:predet",
                 "nmod:npmod", "nmod:poss", "nmod:tmod" };
 
-        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
-        AssertAnnotations.assertTagset(CoreNlpPosTagger.class, POS.class, "ptb", PTB_POS_TAGS, jcas);
-        AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, POS.class, "ptb", PTB_POS_TAGS,
-                jcas);
-        AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, Dependency.class, "universal",
-                depTags, jcas);
-        AssertAnnotations.assertTagsetMapping(Dependency.class, "universal", unmappedDep, jcas);
+        assertDependencies(dependencies, select(jcas, Dependency.class));
+        assertTagset(CoreNlpPosTagger.class, POS.class, "ptb", PTB_POS_TAGS, jcas);
+        assertTagset(CoreNlpDependencyParser.class, POS.class, "ptb", PTB_POS_TAGS, jcas);
+        assertTagset(CoreNlpDependencyParser.class, Dependency.class, "universal", depTags, jcas);
+        assertTagsetMapping(Dependency.class, "universal", unmappedDep, jcas);
     }
 
     @Test
@@ -269,13 +266,12 @@ public class CoreNlpDependencyParserTest
         
         String[] unmappedDep = { "acl:relcl", "nmod:poss" };
 
-        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
-        AssertAnnotations.assertTagset(CoreNlpPosTagger.class, POS.class, "corenlp34", CORENLP34_POS_TAGS, jcas);
-        AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, POS.class, "universal", UNIVERSAL_POS_TAGS,
+        assertDependencies(dependencies, select(jcas, Dependency.class));
+        assertTagset(CoreNlpPosTagger.class, POS.class, "corenlp34", CORENLP34_POS_TAGS, jcas);
+        assertTagset(CoreNlpDependencyParser.class, POS.class, "universal", UNIVERSAL_POS_TAGS,
                 jcas);
-        AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, Dependency.class, "universal",
-                depTags, jcas);
-        AssertAnnotations.assertTagsetMapping(Dependency.class, "universal", unmappedDep, jcas);
+        assertTagset(CoreNlpDependencyParser.class, Dependency.class, "universal", depTags, jcas);
+        assertTagsetMapping(Dependency.class, "universal", unmappedDep, jcas);
     }
 
     @Test
@@ -316,13 +312,11 @@ public class CoreNlpDependencyParserTest
                 "TRUNC", "VAFIN", "VAIMP", "VAINF", "VAPP", "VMFIN", "VMINF", "VVFIN", "VVIMP",
                 "VVINF", "VVIZU", "VVPP", "XY" };
         
-        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
-        AssertAnnotations.assertTagset(CoreNlpPosTagger.class, POS.class, "stts", GERMAN_POS_TAGS, jcas);
-        AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, POS.class, "stts", depParserPosTags,
-                jcas);
-        AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, Dependency.class, "universal",
-                depTags, jcas);
-        AssertAnnotations.assertTagsetMapping(Dependency.class, "universal", unmappedDep, jcas);
+        assertDependencies(dependencies, select(jcas, Dependency.class));
+        assertTagset(CoreNlpPosTagger.class, POS.class, "stts", GERMAN_POS_TAGS, jcas);
+        assertTagset(CoreNlpDependencyParser.class, POS.class, "stts", depParserPosTags, jcas);
+        assertTagset(CoreNlpDependencyParser.class, Dependency.class, "universal", depTags, jcas);
+        assertTagsetMapping(Dependency.class, "universal", unmappedDep, jcas);
     }
     
     @Test
@@ -360,17 +354,17 @@ public class CoreNlpDependencyParserTest
         
         String[] unmappedDep = {};
 
-        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
-        AssertAnnotations.assertTagset(CoreNlpPosTagger.class, POS.class, "ctb", posTags, jcas);
+        assertDependencies(dependencies, select(jcas, Dependency.class));
+        assertTagset(CoreNlpPosTagger.class, POS.class, "ctb", posTags, jcas);
         // There are some minor differences between the tags produced by the POS tagger and the
-        // tags expected by the parser model. We need a better test here that makes these differences
+        // tags expected by the parser model. We need a better test here that makes these
+        // differences
         // more visible and at the same time doesn't fail.
-        //AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, POS.class, "ctb", posTags,
-        //        jcas);
-        AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, Dependency.class, "conll",
-                depTags, jcas);
-        AssertAnnotations.assertTagsetMapping(CoreNlpDependencyParser.class, Dependency.class,
-                "conll", unmappedDep, jcas);
+        // AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, POS.class, "ctb", posTags,
+        // jcas);
+        assertTagset(CoreNlpDependencyParser.class, Dependency.class, "conll", depTags, jcas);
+        assertTagsetMapping(CoreNlpDependencyParser.class, Dependency.class, "conll", unmappedDep,
+                jcas);
     }
 
     @Test
@@ -411,17 +405,17 @@ public class CoreNlpDependencyParserTest
         
         String[] unmappedDep = {};
 
-        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
-        AssertAnnotations.assertTagset(CoreNlpPosTagger.class, POS.class, "ctb", posTags, jcas);
+        assertDependencies(dependencies, select(jcas, Dependency.class));
+        assertTagset(CoreNlpPosTagger.class, POS.class, "ctb", posTags, jcas);
         // There are some minor differences between the tags produced by the POS tagger and the
-        // tags expected by the parser model. We need a better test here that makes these differences
+        // tags expected by the parser model. We need a better test here that makes these
+        // differences
         // more visible and at the same time doesn't fail.
-        //AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, POS.class, "ctb", posTags,
-        //        jcas);
-        AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, Dependency.class, "conll2008",
-                depTags, jcas);
-        AssertAnnotations.assertTagsetMapping(CoreNlpDependencyParser.class, Dependency.class,
-                "conll2008", unmappedDep, jcas);
+        // AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, POS.class, "ctb", posTags,
+        // jcas);
+        assertTagset(CoreNlpDependencyParser.class, Dependency.class, "conll2008", depTags, jcas);
+        assertTagsetMapping(CoreNlpDependencyParser.class, Dependency.class, "conll2008",
+                unmappedDep, jcas);
     }
 
     @Test
@@ -467,17 +461,17 @@ public class CoreNlpDependencyParserTest
                 "compound:vc", "erased", "etc", "mark:clf", "nmod:assmod", "nmod:poss", "nmod:prep",
                 "nmod:range", "nmod:tmod", "nmod:topic", "nsubj:xsubj", "parataxis:prnmod" };
 
-        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
-        AssertAnnotations.assertTagset(CoreNlpPosTagger.class, POS.class, "ctb", posTags, jcas);
+        assertDependencies(dependencies, select(jcas, Dependency.class));
+        assertTagset(CoreNlpPosTagger.class, POS.class, "ctb", posTags, jcas);
         // There are some minor differences between the tags produced by the POS tagger and the
-        // tags expected by the parser model. We need a better test here that makes these differences
+        // tags expected by the parser model. We need a better test here that makes these
+        // differences
         // more visible and at the same time doesn't fail.
-        //AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, POS.class, "ctb", posTags,
-        //        jcas);
-        AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, Dependency.class, "universal",
-                depTags, jcas);
-        AssertAnnotations.assertTagsetMapping(CoreNlpDependencyParser.class, Dependency.class,
-                "universal", unmappedDep, jcas);
+        // AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, POS.class, "ctb", posTags,
+        // jcas);
+        assertTagset(CoreNlpDependencyParser.class, Dependency.class, "universal", depTags, jcas);
+        assertTagsetMapping(CoreNlpDependencyParser.class, Dependency.class, "universal",
+                unmappedDep, jcas);
     }
 
     @Test
@@ -518,15 +512,16 @@ public class CoreNlpDependencyParserTest
                 "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "SYM", "TO", "UH", "VB", "VBD", "VBG",
                 "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB", "``" };
 
-        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+        assertDependencies(dependencies, select(jcas, Dependency.class));
         // There are some minor differences between the tags produced by the POS tagger and the
-        // tags expected by the parser model. We need a better test here that makes these differences
+        // tags expected by the parser model. We need a better test here that makes these
+        // differences
         // more visible and at the same time doesn't fail.
-        //AssertAnnotations.assertTagset(CoreNlpPosTagger.class, POS.class, "ptb", PTB_POS_TAGS, jcas);
-        AssertAnnotations.assertTagset(CoreNlpDependencyParser.class, POS.class, "ptb", posTags,
-                jcas);
-        AssertAnnotations.assertTagset(Dependency.class, "conll", depTags, jcas);
-        AssertAnnotations.assertTagsetMapping(Dependency.class, "conll", unmappedDep, jcas);
+        // AssertAnnotations.assertTagset(CoreNlpPosTagger.class, POS.class, "ptb", PTB_POS_TAGS,
+        // jcas);
+        assertTagset(CoreNlpDependencyParser.class, POS.class, "ptb", posTags, jcas);
+        assertTagset(Dependency.class, "conll", depTags, jcas);
+        assertTagsetMapping(Dependency.class, "conll", unmappedDep, jcas);
     }
     
     private JCas runTest(String aLanguage, String aVariant, String aText, Object... aExtraParams)

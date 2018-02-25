@@ -32,36 +32,36 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class InlineXmlWriterTest
 {
-	@Rule
-	public TemporaryFolder workspace = new TemporaryFolder();
+    @Rule
+    public TemporaryFolder workspace = new TemporaryFolder();
 
-	@Test
-	public void testInlineXmlCasConsumer()
-		throws Exception
-	{
-		String testDocument = "This is a test.";
+    @Test
+    public void testInlineXmlCasConsumer()
+        throws Exception
+    {
+        String testDocument = "This is a test.";
 
-		AnalysisEngine consumer = createEngine(InlineXmlWriter.class,
-				InlineXmlWriter.PARAM_TARGET_LOCATION, workspace.getRoot().getPath(),
-				InlineXmlWriter.PARAM_STRIP_EXTENSION, true);
+        AnalysisEngine consumer = createEngine(InlineXmlWriter.class,
+                InlineXmlWriter.PARAM_TARGET_LOCATION, workspace.getRoot().getPath(),
+                InlineXmlWriter.PARAM_STRIP_EXTENSION, true);
 
-		JCas jcas = consumer.newJCas();
-		jcas.setDocumentText(testDocument);
+        JCas jcas = consumer.newJCas();
+        jcas.setDocumentText(testDocument);
 
-		DocumentMetaData meta = DocumentMetaData.create(jcas);
-		meta.setDocumentId("testId");
-		meta.setDocumentTitle("title");
-		meta.setDocumentBaseUri(workspace.getRoot().toURI().toString());
-		meta.setDocumentUri(new File(workspace.getRoot(), "test.txt").toURI().toString());
+        DocumentMetaData meta = DocumentMetaData.create(jcas);
+        meta.setDocumentId("testId");
+        meta.setDocumentTitle("title");
+        meta.setDocumentBaseUri(workspace.getRoot().toURI().toString());
+        meta.setDocumentUri(new File(workspace.getRoot(), "test.txt").toURI().toString());
 
-		JCas view = jcas.createView("plainTextDocument");
-		view.setDocumentText(testDocument);
+        JCas view = jcas.createView("plainTextDocument");
+        view.setDocumentText(testDocument);
 
-		consumer.process(jcas);
+        consumer.process(jcas);
 
-		File writtenFile = new File(workspace.getRoot(), "test.xml");
-		if (!writtenFile.exists()) {
-			fail("File not correctly written.");
-		}
-	}
+        File writtenFile = new File(workspace.getRoot(), "test.xml");
+        if (!writtenFile.exists()) {
+            fail("File not correctly written.");
+        }
+    }
 }

@@ -56,7 +56,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
  * 
  * @see <a href="http://universaldependencies.github.io/docs/format.html">CoNLL-U Format</a>
  */
-@ResourceMetaData(name="CoNLL-U Writer")
+@ResourceMetaData(name = "CoNLL-U Writer")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_U})
 @TypeCapability(
         inputs = { 
@@ -77,10 +77,12 @@ public class ConllUWriter
      * Character encoding of the output data.
      */
     public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
-    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
 
-    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".conll")
     private String filenameSuffix;
 
@@ -140,15 +142,17 @@ public class ConllUWriter
             
             for (int i = 0; i < tokens.size(); i++) {
                 Row row = new Row();
-                row.id = i+1;
+                row.id = i + 1;
                 row.token = tokens.get(i);
-                row.noSpaceAfter = (i+1 < tokens.size()) && row.token.getEnd() == tokens.get(i+1).getBegin();
+                row.noSpaceAfter = (i + 1 < tokens.size())
+                        && row.token.getEnd() == tokens.get(i + 1).getBegin();
                 ctokens.put(row.token, row);
             }
 
             // Dependencies
             for (Dependency rel : selectCovered(Dependency.class, sentence)) {
-                if (StringUtils.isBlank(rel.getFlavor()) || DependencyFlavor.BASIC.equals(rel.getFlavor())) {
+                if (StringUtils.isBlank(rel.getFlavor())
+                        || DependencyFlavor.BASIC.equals(rel.getFlavor())) {
                     ctokens.get(rel.getDependent()).deprel = rel;
                 }
                 else {
@@ -228,7 +232,7 @@ public class ConllUWriter
                     @SuppressWarnings({ "unchecked", "rawtypes" })
                     List<Token> covered = (List) surfaceIdx.get(sf);
                     int id1 = ctokens.get(covered.get(0)).id;
-                    int id2 = ctokens.get(covered.get(covered.size()-1)).id;
+                    int id2 = ctokens.get(covered.get(covered.size() - 1)).id;
                     aOut.printf("%d-%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", id1, id2,
                             sf.getValue(), UNUSED, UNUSED, UNUSED, UNUSED, UNUSED, UNUSED, UNUSED,
                             UNUSED);

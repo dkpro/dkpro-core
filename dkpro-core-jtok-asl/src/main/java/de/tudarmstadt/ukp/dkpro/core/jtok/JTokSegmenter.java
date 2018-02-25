@@ -46,7 +46,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 /**
  * JTok segmenter.
  */
-@ResourceMetaData(name="JTok Segmenter")
+@ResourceMetaData(name = "JTok Segmenter")
 @LanguageCapability({"en", "de", "it"})
 @TypeCapability(outputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph",
@@ -59,11 +59,11 @@ public class JTokSegmenter
      * Create {@link Paragraph} annotations.
      */
     public static final String PARAM_WRITE_PARAGRAPH = ComponentParameters.PARAM_WRITE_PARAGRAPH;
-    @ConfigurationParameter(name=PARAM_WRITE_PARAGRAPH, mandatory=true, defaultValue="true")
+    @ConfigurationParameter(name = PARAM_WRITE_PARAGRAPH, mandatory = true, defaultValue = "true")
     private boolean writeParagraph;
-    
+
     public static final String PARAM_PTB_ESCAPING = "ptbEscaping";
-    @ConfigurationParameter(name=PARAM_PTB_ESCAPING, mandatory=true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_PTB_ESCAPING, mandatory = true, defaultValue = "false")
     private boolean ptbEscaping;
     
     private JTok tokenizer;

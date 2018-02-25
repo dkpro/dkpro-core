@@ -59,7 +59,8 @@ public class MateMorphTaggerTest
                 "[ 85, 88]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - und (_)",
                 "[ 89,100]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - Dependenzen (case=acc|number=pl|gender=fem)",
                 "[101,111]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - beinhaltet (number=sg|person=3|tense=pres|mood=ind)",
-                "[112,113]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (_)" };
+                "[112,113]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (_)"
+        };
 
         AssertAnnotations.assertMorph(morphTagsExpected, select(jcas, MorphologicalFeatures.class));
     }
@@ -95,7 +96,8 @@ public class MateMorphTaggerTest
                 "[119,121]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - et (s=c)",
                 "[122,125]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - que (s=s)",
                 "[126,134]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - possible (g=m|n=s|s=qual)",
-                "[135,136]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (s=s)" };
+                "[135,136]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (s=s)"
+        };
 
         AssertAnnotations.assertMorph(morphTagsExpected, select(jcas, MorphologicalFeatures.class));
     }
@@ -130,7 +132,8 @@ public class MateMorphTaggerTest
                 "[113,117]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - como (postype=subordinating)",
                 "[118,121]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - sea (postype=semiauxiliary|gen=c|num=s|person=3|mood=subjunctive|tense=present)",
                 "[122,129]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - posible (postype=qualificative|gen=c|num=s)",
-                "[130,131]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (punct=period)"};
+                "[130,131]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (punct=period)"
+        };
 
         AssertAnnotations.assertMorph(morphTagsExpected, select(jcas, MorphologicalFeatures.class));
     }

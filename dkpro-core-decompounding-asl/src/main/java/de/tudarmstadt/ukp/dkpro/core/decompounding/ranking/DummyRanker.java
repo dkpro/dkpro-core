@@ -23,7 +23,8 @@ import java.util.List;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundedWord;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.trie.ValueNode;
 
-public class DummyRanker extends AbstractRanker
+public class DummyRanker
+    extends AbstractRanker
 {
 
     @Override
@@ -39,7 +40,6 @@ public class DummyRanker extends AbstractRanker
             return aParent.getValue();
         }
 
-        return children.get(children.size()-1);
+        return children.get(children.size() - 1);
     }
-
 }

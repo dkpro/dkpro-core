@@ -33,7 +33,7 @@ import edu.illinois.cs.cogcomp.nlp.tokenizer.Tokenizer.Tokenization;
 /**
  * Illinois segmenter.
  */
-@ResourceMetaData(name="Illinois CCG Segmenter")
+@ResourceMetaData(name = "Illinois CCG Segmenter")
 @TypeCapability(outputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
@@ -64,7 +64,8 @@ public class IllinoisSegmenter
 
         int lastBegin = 0;
         for (int i : tokens.getSentenceEndTokenIndexes()) {
-            createSentence(aJCas, ts[lastBegin].getFirst() + zoneBegin, ts[i-1].getSecond() + zoneBegin);
+            createSentence(aJCas, ts[lastBegin].getFirst() + zoneBegin,
+                    ts[i - 1].getSecond() + zoneBegin);
             lastBegin = i;
         }
         

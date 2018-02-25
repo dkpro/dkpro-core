@@ -38,7 +38,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 /**
  * Penn Treebank combined format writer.
  */
-@ResourceMetaData(name="Penn Treebank Combined Format Writer")
+@ResourceMetaData(name = "Penn Treebank Combined Format Writer")
 @MimeTypeCapability({MimeTypes.TEXT_X_PTB_COMBINED})
 @TypeCapability(
         inputs = { 
@@ -54,15 +54,18 @@ public class PennTreebankCombinedWriter
      * Specify the suffix of output files. Default value <code>.mrg</code>. If the suffix is not
      * needed, provide an empty string as value.
      */
-    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".mrg")
     private String filenameSuffix;
 
     /**
      * Character encoding of the output data.
      */
-    public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
-    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    public static final String PARAM_TARGET_ENCODING = 
+            ComponentParameters.PARAM_TARGET_ENCODING;
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
     
     public static final String PARAM_EMPTY_ROOT_LABEL = "emptyRootLabel";
@@ -77,7 +80,8 @@ public class PennTreebankCombinedWriter
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
-        try (Writer docOS = new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix), targetEncoding)) {
+        try (Writer docOS = new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix),
+                targetEncoding)) {
             for (ROOT root : select(aJCas, ROOT.class)) {
                 PennTreeNode tree = PennTreeUtils.convertPennTree(root);
                 
@@ -87,7 +91,8 @@ public class PennTreebankCombinedWriter
                 
                 if (noRootLabel) {
                     if (tree.getChildren().size() > 1) {
-                        throw new IllegalStateException("Cannot remove ROOT not that has more than one child: " + tree);
+                        throw new IllegalStateException(
+                                "Cannot remove ROOT not that has more than one child: " + tree);
                     }
                     if (tree.getChildren().isEmpty()) {
                         continue;

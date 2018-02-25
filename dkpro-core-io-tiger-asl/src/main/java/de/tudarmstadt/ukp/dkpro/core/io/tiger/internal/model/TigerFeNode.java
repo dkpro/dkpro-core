@@ -23,6 +23,7 @@ public class TigerFeNode
 {
     @XmlAttribute
     public String idref;
+    
     @XmlAttribute
     public Boolean is_split;
 }

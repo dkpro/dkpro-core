@@ -30,26 +30,26 @@ import edu.berkeley.nlp.lm.io.LmReaders;
  * nGram index files are looked up in DKPRO_HOME directory.
  */
 public class BerkeleyLmProvider
-	implements FrequencyCountProvider
+    implements FrequencyCountProvider
 {
 
     private final NgramLanguageModel<String> lm;
     private String language;
     
-	public BerkeleyLmProvider(String binaryFile, String language)
-	    throws Exception
-	{
-	    lm = LmReaders.readLmBinary(binaryFile);
-	    this.language = language;
-	}
+    public BerkeleyLmProvider(String binaryFile, String language)
+        throws Exception
+    {
+        lm = LmReaders.readLmBinary(binaryFile);
+        this.language = language;
+    }
 
-	// FIXME how to obtain phrase count from logProb
+    // FIXME how to obtain phrase count from logProb
     @Override
     public long getFrequency(String phrase)
-	{
+    {
         throw new UnsupportedOperationException("Not implemented yet.");
 //        return getProbnew Float(Math.exp(logProb)).longValue();
-	}
+    }
 
     @Override
     public double getProbability(String phrase)

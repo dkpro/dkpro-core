@@ -28,7 +28,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.solr.util.SolrUtils;
 /**
  * A simple implementation of {@link SolrWriter_ImplBase}
  */
-@ResourceMetaData(name="Solr Index Writer")
+@ResourceMetaData(name = "Solr Index Writer")
 public class SolrWriter
     extends SolrWriter_ImplBase
 {

@@ -52,8 +52,9 @@ public class UDPipe2DKPro
             
             // For Norwegian xtag is not provided. It is a blank string.
             // So the value of Utag is used as an replacement. 
-            if (xtag.length() == 0 && utag.length() > 0)
+            if (xtag.length() == 0 && utag.length() > 0) {
                 xtag = utag;
+            }
             
             // Convert the tag produced by the tagger to an UIMA type, create an annotation
             // of this type, and add it to the document.
@@ -80,7 +81,8 @@ public class UDPipe2DKPro
             }
 
             if (StringUtils.isNotBlank(w.getForm())) {
-                MorphologicalFeatures morph = new MorphologicalFeatures(aJCas, t.getBegin(), t.getEnd());
+                MorphologicalFeatures morph = new MorphologicalFeatures(aJCas, t.getBegin(),
+                        t.getEnd());
                 morph.setValue(w.getFeats());
                 morph.addToIndexes();
                 t.setMorph(morph);

@@ -17,9 +17,6 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.bliki;
 
-import info.bliki.api.Page;
-import info.bliki.api.User;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
@@ -48,6 +45,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.wikipedia.api.WikiConstants;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
 import de.tudarmstadt.ukp.wikipedia.api.sweble.PlainTextConverter;
+import info.bliki.api.Page;
+import info.bliki.api.User;
 
 /**
  * Bliki-based Wikipedia reader.

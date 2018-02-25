@@ -23,9 +23,10 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlID;
 
 public class XcesPara
-{    
+{
     @XmlID
     @XmlAttribute
-    public String id;    
-    public List<XcesSentence> s;             
+    public String id;
+    
+    public List<XcesSentence> s;
 }

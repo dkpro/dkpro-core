@@ -51,7 +51,8 @@ public class CreateNormalizerModel
             }
         }
 
-        ConditionalFrequencyDistribution<Integer, String> cfd = new ConditionalFrequencyDistribution<Integer, String>();
+        ConditionalFrequencyDistribution<Integer, String> cfd = 
+                new ConditionalFrequencyDistribution<Integer, String>();
         cfd.setFrequencyDistribution(1, freqDist);
 
         Web1TConverter converter = new Web1TConverter("target/model");

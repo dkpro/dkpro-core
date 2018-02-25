@@ -40,10 +40,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 
 /**
- * Tokenizer and sentence splitter using OpenNLP.
- *
+ * Tokenizer and sentence splitter using UDPipe.
  */
-@ResourceMetaData(name="UDPipe Segmenter")
+@ResourceMetaData(name = "UDPipe Segmenter")
 @TypeCapability(
         outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",

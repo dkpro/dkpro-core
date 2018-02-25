@@ -364,7 +364,8 @@ public class Trie<V>
      * @param vals
      *            the found key values.
      */
-    private void keys(final Character c, final Node n, final StringBuilder b, final Set<String> vals)
+    private void keys(final Character c, final Node n, final StringBuilder b,
+            final Set<String> vals)
     {
         b.append(c);
 

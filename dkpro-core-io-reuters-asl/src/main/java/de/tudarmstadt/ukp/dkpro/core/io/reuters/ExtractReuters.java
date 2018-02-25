@@ -25,7 +25,11 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.ParseException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -146,11 +150,15 @@ public class ExtractReuters
     }
 
     /**
-     * Find the {@code <D>} tags that are nested within another tag and add them to the given {@link ReutersDocument}.
+     * Find the {@code <D>} tags that are nested within another tag and add them to the given
+     * {@link ReutersDocument}.
      *
-     * @param doc  the current document represented as a {@link ReutersDocument}.
-     * @param tag  the outer tag, e.g. {@code <TOPICS>}
-     * @param text the value of the outer tag from which nested tags are extracted
+     * @param doc
+     *            the current document represented as a {@link ReutersDocument}.
+     * @param tag
+     *            the outer tag, e.g. {@code <TOPICS>}
+     * @param text
+     *            the value of the outer tag from which nested tags are extracted
      */
     private static void extractNested(ReutersDocument doc, String tag, String text)
             throws ParseException

@@ -19,6 +19,31 @@
 
 package de.tudarmstadt.ukp.dkpro.core.lingpipe;
 
+import static org.apache.uima.fit.util.JCasUtil.indexCovered;
+import static org.apache.uima.fit.util.JCasUtil.select;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Pattern;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.component.JCasConsumer_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.apache.uima.jcas.JCas;
+import org.xml.sax.InputSource;
+
 import com.aliasi.chunk.BioTagChunkCodec;
 import com.aliasi.chunk.CharLmRescoringChunker;
 import com.aliasi.chunk.Chunking;
@@ -31,36 +56,12 @@ import com.aliasi.tag.Tagging;
 import com.aliasi.tokenizer.IndoEuropeanTokenizerFactory;
 import com.aliasi.tokenizer.TokenizerFactory;
 import com.aliasi.util.AbstractExternalizable;
+
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import org.apache.commons.io.IOUtils;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.fit.component.JCasConsumer_ImplBase;
-import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.fit.descriptor.MimeTypeCapability;
-import org.apache.uima.fit.descriptor.ResourceMetaData;
-import org.apache.uima.jcas.JCas;
-import org.xml.sax.InputSource;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
-import java.util.Collection;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.regex.Pattern;
-
-import static org.apache.uima.fit.util.JCasUtil.indexCovered;
-import static org.apache.uima.fit.util.JCasUtil.indexCovering;
-import static org.apache.uima.fit.util.JCasUtil.select;
 
 /**
  * LingPipe named entity recognizer trainer.
@@ -74,10 +75,11 @@ public class LingPipeNamedEntityRecognizerTrainer extends JCasConsumer_ImplBase 
     private File targetLocation;
 
     /**
-     * Regex to filter the {@link de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity#getValue() named entity} by
-     * type.
+     * Regex to filter the {@link de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity#getValue()
+     * named entity} by type.
      */
-    public static final String PARAM_ACCEPTED_TAGS_REGEX = ComponentParameters.PARAM_ACCEPTED_TAGS_REGEX;
+    public static final String PARAM_ACCEPTED_TAGS_REGEX = 
+            ComponentParameters.PARAM_ACCEPTED_TAGS_REGEX;
     @ConfigurationParameter(name = PARAM_ACCEPTED_TAGS_REGEX, mandatory = false)
     protected String acceptedTagsRegex;
 
@@ -95,8 +97,8 @@ public class LingPipeNamedEntityRecognizerTrainer extends JCasConsumer_ImplBase 
         if (tempData == null) {
             try {
                 tempData = File.createTempFile("dkpro-lingpipe-ner-trainer", ".tsv");
-                out = new PrintWriter(
-                        new OutputStreamWriter(new FileOutputStream(tempData), StandardCharsets.UTF_8));
+                out = new PrintWriter(new OutputStreamWriter(new FileOutputStream(tempData),
+                        StandardCharsets.UTF_8));
             } catch (IOException e) {
                 throw new AnalysisEngineProcessException(e);
             }
@@ -136,7 +138,8 @@ public class LingPipeNamedEntityRecognizerTrainer extends JCasConsumer_ImplBase 
     }
 
     private Map<Token, Collection<NamedEntity>> getNamedEntityIndex(JCas aJCas) {
-        Map<Token, Collection<NamedEntity>> idx = indexCovered(aJCas, Token.class, NamedEntity.class);
+        Map<Token, Collection<NamedEntity>> idx = indexCovered(aJCas, Token.class,
+                NamedEntity.class);
 
         if (acceptedTagsRegex != null) {
             Pattern pattern = Pattern.compile(acceptedTagsRegex);

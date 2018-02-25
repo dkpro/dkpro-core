@@ -134,7 +134,7 @@ public class BratReaderWriterTest
                         BratReader.PARAM_TYPE_MAPPINGS, asList(
                                 "Token -> de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
                                 "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
-                                "Location -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location")), 
+                                "Location -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location")),
                 createEngineDescription(BratWriter.class,
                         BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true), 
                 "brat/document0a.ann");
@@ -163,10 +163,10 @@ public class BratReaderWriterTest
                                 "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
                                 "MERGE-ORG -> de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg"),
                         BratReader.PARAM_RELATION_TYPES, asList(
-                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")), 
+                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
                 createEngineDescription(BratWriter.class,
                         BratWriter.PARAM_RELATION_TYPES, asList(
-                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")), 
+                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
                 "brat/document1-ref.ann", 
                 "brat/document1.ann");
     }
@@ -185,10 +185,10 @@ public class BratReaderWriterTest
                                 "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
                                 "MERGE-ORG -> de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg"),
                         BratReader.PARAM_RELATION_TYPES, asList(
-                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")), 
+                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
                 createEngineDescription(BratWriter.class,
                         BratWriter.PARAM_RELATION_TYPES, asList(
-                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")), 
+                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
                 "brat/document1-ref-sub.ann", 
                 "brat/document1.ann");
     }

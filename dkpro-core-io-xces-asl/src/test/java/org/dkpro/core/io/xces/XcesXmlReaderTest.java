@@ -24,14 +24,13 @@ import org.junit.Test;
 
 public class XcesXmlReaderTest
 {
-    
     @Test
     public void xcesOneWayBasicTest()
         throws Exception
     {
         testOneWay(
                 createReaderDescription(XcesBasicXmlReader.class,
-                        XcesBasicXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",                        
+                        XcesBasicXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
                         XcesBasicXmlReader.PARAM_LANGUAGE, "el"),
                 "xces-basic.xml.dump", "xces-basic.xml");
     }
@@ -42,9 +41,8 @@ public class XcesXmlReaderTest
     {
         testOneWay(
                 createReaderDescription(XcesXmlReader.class,
-                        XcesXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",                        
+                        XcesXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
                         XcesXmlReader.PARAM_LANGUAGE, "el"),
                 "xces-complex.xml.dump", "xces-complex.xml");
     }
-
 }

@@ -58,156 +58,156 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * @see FeaturePathAnnotatorBase
  * @since 1.1.0
  */
-@ResourceMetaData(name="Snowball Stemmer")
+@ResourceMetaData(name = "Snowball Stemmer")
 @LanguageCapability({ "da", "nl", "en", "fi", "fr", "de", "hu", "it", "no", "pt", "ro", "ru", "es",
         "sv", "tr" })
 @TypeCapability(
-        outputs={
+        outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem"})
 public class SnowballStemmer
-	extends FeaturePathAnnotatorBase
+    extends FeaturePathAnnotatorBase
 {
-	private static final String MESSAGE_DIGEST = SnowballStemmer.class.getName()+"_Messages";
-	private static final String SNOWBALL_PACKAGE = "org.tartarus.snowball.ext.";
+    private static final String MESSAGE_DIGEST = SnowballStemmer.class.getName() + "_Messages";
+    private static final String SNOWBALL_PACKAGE = "org.tartarus.snowball.ext.";
 
-	/**
-	 * Use this language instead of the document language to resolve the model.
-	 */
-	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-	protected String language;
+    /**
+     * Use this language instead of the document language to resolve the model.
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    protected String language;
 
-	/**
-	 * Per default the stemmer runs in case-sensitive mode. If this parameter is enabled, tokens
-	 * are lower-cased before being passed to the stemmer.
-	 *
-	 * <table border="1" cellspacing="0">
-	 * <caption>Examples</caption>
-	 * <tr><th></th><th>false (default)</th><th>true</th></tr>
-	 * <tr><td>EDUCATIONAL</td><td>EDUCATIONAL</td><td>educ</td></tr>
-	 * <tr><td>Educational</td><td>Educat</td><td>educ</td></tr>
-	 * <tr><td>educational</td><td>educ</td><td>educ</td></tr>
-	 * </table>
-	 */
-	public static final String PARAM_LOWER_CASE = "lowerCase";
-	@ConfigurationParameter(name = PARAM_LOWER_CASE, mandatory = false, defaultValue="false")
-	protected boolean lowerCase;
+    /**
+     * Per default the stemmer runs in case-sensitive mode. If this parameter is enabled, tokens
+     * are lower-cased before being passed to the stemmer.
+     *
+     * <table border="1" cellspacing="0">
+     * <caption>Examples</caption>
+     * <tr><th></th><th>false (default)</th><th>true</th></tr>
+     * <tr><td>EDUCATIONAL</td><td>EDUCATIONAL</td><td>educ</td></tr>
+     * <tr><td>Educational</td><td>Educat</td><td>educ</td></tr>
+     * <tr><td>educational</td><td>educ</td><td>educ</td></tr>
+     * </table>
+     */
+    public static final String PARAM_LOWER_CASE = "lowerCase";
+    @ConfigurationParameter(name = PARAM_LOWER_CASE, mandatory = false, defaultValue = "false")
+    protected boolean lowerCase;
 
-	public static final Map<String, String> languages = new HashMap<String, String>();
-	static {
-		languages.put("da", "Danish");
-		languages.put("nl", "Dutch");
-		languages.put("en", "English");
-		languages.put("fi", "Finnish");
-		languages.put("fr", "French");
-		languages.put("de", "German");
-		languages.put("hu", "Hungarian");
-		languages.put("it", "Italian");
-		languages.put("no", "Norwegian");
-		languages.put("pt", "Portuguese");
-		languages.put("ro", "Romanian");
-		languages.put("ru", "Russian");
-		languages.put("es", "Spanish");
-		languages.put("sv", "Swedish");
-		languages.put("tr", "Turkish");
-	}
+    public static final Map<String, String> languages = new HashMap<String, String>();
+    static {
+        languages.put("da", "Danish");
+        languages.put("nl", "Dutch");
+        languages.put("en", "English");
+        languages.put("fi", "Finnish");
+        languages.put("fr", "French");
+        languages.put("de", "German");
+        languages.put("hu", "Hungarian");
+        languages.put("it", "Italian");
+        languages.put("no", "Norwegian");
+        languages.put("pt", "Portuguese");
+        languages.put("ro", "Romanian");
+        languages.put("ru", "Russian");
+        languages.put("es", "Spanish");
+        languages.put("sv", "Swedish");
+        languages.put("tr", "Turkish");
+    }
 
-	private SnowballProgram snowballProgram;
-	private String snowballProgramLanguage;
+    private SnowballProgram snowballProgram;
+    private String snowballProgramLanguage;
 
-	@Override
-	protected Set<String> getDefaultPaths()
-	{
-		return Collections.singleton(Token.class.getName());
-	}
+    @Override
+    protected Set<String> getDefaultPaths()
+    {
+        return Collections.singleton(Token.class.getName());
+    }
 
-	@Override
-	protected void generateAnnotations(JCas jcas)
-		throws AnalysisEngineProcessException, FeaturePathException
-	{
-		// CAS is necessary to retrieve values
-		CAS currCAS = jcas.getCas();
+    @Override
+    protected void generateAnnotations(JCas jcas)
+        throws AnalysisEngineProcessException, FeaturePathException
+    {
+        // CAS is necessary to retrieve values
+        CAS currCAS = jcas.getCas();
 
-		for (String path : paths) {
+        for (String path : paths) {
 
-			// Separate Typename and featurepath
-			String[] segments = path.split("/", 2);
-			String typeName = segments[0];
+            // Separate Typename and featurepath
+            String[] segments = path.split("/", 2);
+            String typeName = segments[0];
 
-			// Try to get the type from the typesystem of the CAS
-			Type t = currCAS.getTypeSystem().getType(typeName);
-			if (t == null) {
-				throw new IllegalStateException("Type [" + typeName + "] not found in type system");
-			}
+            // Try to get the type from the typesystem of the CAS
+            Type t = currCAS.getTypeSystem().getType(typeName);
+            if (t == null) {
+                throw new IllegalStateException("Type [" + typeName + "] not found in type system");
+            }
 
-			// get an fpi object and initialize it
-			// initialize the FeaturePathInfo with the corresponding part
-			initializeFeaturePathInfoFrom(fp, segments);
+            // get an fpi object and initialize it
+            // initialize the FeaturePathInfo with the corresponding part
+            initializeFeaturePathInfoFrom(fp, segments);
 
-			// get the annotations
-			AnnotationIndex<?> idx = currCAS.getAnnotationIndex(t);
-			FSIterator<?> iterator = idx.iterator();
+            // get the annotations
+            AnnotationIndex<?> idx = currCAS.getAnnotationIndex(t);
+            FSIterator<?> iterator = idx.iterator();
 
-			while (iterator.hasNext()) {
-				AnnotationFS fs = (AnnotationFS) iterator.next();
+            while (iterator.hasNext()) {
+                AnnotationFS fs = (AnnotationFS) iterator.next();
 
-				try {
-					if (this.filterFeaturePath != null) {
-						// check annotation filter condition
-						if (this.filterFeaturePathInfo.match(fs, this.filterCondition)) {
-							createStemAnnotation(jcas, fs);
-						}
-					}
-					else { // no annotation filter specified
-						createStemAnnotation(jcas, fs);
-					}
-				}
-				catch (AnalysisEngineProcessException e) {
-					// TODO Auto-generated catch block
-					throw new IllegalStateException(
-							"error occured while creating a stem annotation", e);
-				}
-			}
-		}
-	}
+                try {
+                    if (this.filterFeaturePath != null) {
+                        // check annotation filter condition
+                        if (this.filterFeaturePathInfo.match(fs, this.filterCondition)) {
+                            createStemAnnotation(jcas, fs);
+                        }
+                    }
+                    else { // no annotation filter specified
+                        createStemAnnotation(jcas, fs);
+                    }
+                }
+                catch (AnalysisEngineProcessException e) {
+                    // TODO Auto-generated catch block
+                    throw new IllegalStateException(
+                            "error occured while creating a stem annotation", e);
+                }
+            }
+        }
+    }
 
-	private SnowballProgram getSnowballProgram(JCas aCas)
-		throws AnalysisEngineProcessException
-	{
-		// Try language set on analysis engine
-		String lang = language;
-		if (isBlank(lang)) {
-			lang = aCas.getDocumentLanguage();
-		}
+    private SnowballProgram getSnowballProgram(JCas aCas)
+        throws AnalysisEngineProcessException
+    {
+        // Try language set on analysis engine
+        String lang = language;
+        if (isBlank(lang)) {
+            lang = aCas.getDocumentLanguage();
+        }
 
-		// Try language set in CAS.
-		if (isBlank(lang)) {
-			throw new AnalysisEngineProcessException(MESSAGE_DIGEST, "no_language_error", null);
-		}
+        // Try language set in CAS.
+        if (isBlank(lang)) {
+            throw new AnalysisEngineProcessException(MESSAGE_DIGEST, "no_language_error", null);
+        }
 
-		lang = lang.toLowerCase(Locale.US);
+        lang = lang.toLowerCase(Locale.US);
 
-		if (!lang.equals(snowballProgramLanguage)) {
-			try {
-				String langPart = languages.get(lang);
-				if (langPart == null) {
-					throw new AnalysisEngineProcessException(MESSAGE_DIGEST,
-							"unsupported_language_error", new Object[] { lang });
-				}
-				String snowballStemmerClass = SNOWBALL_PACKAGE + languages.get(lang) + "Stemmer";
-				@SuppressWarnings("unchecked")
-				Class<SnowballProgram> stemClass = (Class<SnowballProgram>) Class
-						.forName(snowballStemmerClass);
-				snowballProgram = stemClass.newInstance();
-				snowballProgramLanguage = lang;
-			}
-			catch (Exception e) {
-				throw new AnalysisEngineProcessException(e);
-			}
-		}
+        if (!lang.equals(snowballProgramLanguage)) {
+            try {
+                String langPart = languages.get(lang);
+                if (langPart == null) {
+                    throw new AnalysisEngineProcessException(MESSAGE_DIGEST,
+                            "unsupported_language_error", new Object[] { lang });
+                }
+                String snowballStemmerClass = SNOWBALL_PACKAGE + languages.get(lang) + "Stemmer";
+                @SuppressWarnings("unchecked")
+                Class<SnowballProgram> stemClass = (Class<SnowballProgram>) Class
+                        .forName(snowballStemmerClass);
+                snowballProgram = stemClass.newInstance();
+                snowballProgramLanguage = lang;
+            }
+            catch (Exception e) {
+                throw new AnalysisEngineProcessException(e);
+            }
+        }
 
-		return snowballProgram;
-	}
+        return snowballProgram;
+    }
 
     /**
      * Creates a Stem annotation with same begin and end as the AnnotationFS fs, the value is the
@@ -220,41 +220,41 @@ public class SnowballStemmer
      * @throws AnalysisEngineProcessException
      *             if the {@code stem} method from the snowball stemmer cannot be invoked.
      */
-	private void createStemAnnotation(JCas jcas, AnnotationFS fs)
-		throws AnalysisEngineProcessException
-	{
-		// Check for blank text, it makes no sense to add a stem then (and raised an exception)
-		String value = fp.getValue(fs);
-		if (!StringUtils.isBlank(value)) {
-			if (lowerCase) {
-				// Fixme - should use locale/language defined in CAS.
-				value = value.toLowerCase(Locale.US);
-			}
+    private void createStemAnnotation(JCas jcas, AnnotationFS fs)
+        throws AnalysisEngineProcessException
+    {
+        // Check for blank text, it makes no sense to add a stem then (and raised an exception)
+        String value = fp.getValue(fs);
+        if (!StringUtils.isBlank(value)) {
+            if (lowerCase) {
+                // Fixme - should use locale/language defined in CAS.
+                value = value.toLowerCase(Locale.US);
+            }
 
-			Stem stemAnnot = new Stem(jcas, fs.getBegin(), fs.getEnd());
-			SnowballProgram programm = getSnowballProgram(jcas);
-			programm.setCurrent(value);
+            Stem stemAnnot = new Stem(jcas, fs.getBegin(), fs.getEnd());
+            SnowballProgram programm = getSnowballProgram(jcas);
+            programm.setCurrent(value);
 
-			try {
-				// The patched snowball from Lucene has this as a method on SnowballProgram
-				// but if we have some other snowball also in the classpath, Java might
-				// choose to use the other. So to be safe, we use a reflection here.
-				// -- REC, 2011-04-17
-				MethodUtils.invokeMethod(programm, "stem", null);
-			}
-			catch (Exception e) {
-				throw new AnalysisEngineProcessException(e);
-			}
+            try {
+                // The patched snowball from Lucene has this as a method on SnowballProgram
+                // but if we have some other snowball also in the classpath, Java might
+                // choose to use the other. So to be safe, we use a reflection here.
+                // -- REC, 2011-04-17
+                MethodUtils.invokeMethod(programm, "stem", null);
+            }
+            catch (Exception e) {
+                throw new AnalysisEngineProcessException(e);
+            }
 
-			stemAnnot.setValue(programm.getCurrent());
-			stemAnnot.addToIndexes(jcas);
+            stemAnnot.setValue(programm.getCurrent());
+            stemAnnot.addToIndexes(jcas);
 
-			// Try setting the "stem" feature on Tokens.
-			Feature feat = fs.getType().getFeatureByBaseName("stem");
-			if (feat != null && feat.getRange() != null
-					&& jcas.getTypeSystem().subsumes(feat.getRange(), stemAnnot.getType())) {
-				fs.setFeatureValue(feat, stemAnnot);
-			}
-		}
-	}
+            // Try setting the "stem" feature on Tokens.
+            Feature feat = fs.getType().getFeatureByBaseName("stem");
+            if (feat != null && feat.getRange() != null
+                    && jcas.getTypeSystem().subsumes(feat.getRange(), stemAnnot.getType())) {
+                fs.setFeatureValue(feat, stemAnnot);
+            }
+        }
+    }
 }

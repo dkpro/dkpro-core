@@ -18,8 +18,8 @@
 package de.tudarmstadt.ukp.dkpro.core.testing.validation.checks;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.validation.Message.Level.ERROR;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 

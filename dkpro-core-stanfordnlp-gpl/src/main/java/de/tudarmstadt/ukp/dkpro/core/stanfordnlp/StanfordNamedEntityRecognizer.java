@@ -62,7 +62,7 @@ import edu.stanford.nlp.util.CoreMap;
 /**
  * Stanford Named Entity Recognizer component.
  */
-@ResourceMetaData(name="CoreNLP Named Entity Recogizer (old API)")
+@ResourceMetaData(name = "CoreNLP Named Entity Recogizer (old API)")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -105,7 +105,8 @@ public class StanfordNamedEntityRecognizer
     /**
      * Location of the mapping file for named entity tags to UIMA types.
      */
-    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
+    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
     protected String mappingLocation;
 
@@ -191,7 +192,8 @@ public class StanfordNamedEntityRecognizer
                 if ("O".equals(tokenType) || !tokenType.equals(entityType)) {
                     if (entityType != null) {
                         Type type = mappingProvider.getTagType(entityType);
-                        NamedEntity neAnno = (NamedEntity) cas.createAnnotation(type, entityBegin, entityEnd);
+                        NamedEntity neAnno = (NamedEntity) cas.createAnnotation(type, entityBegin,
+                                entityEnd);
                         neAnno.setValue(entityType);
                         neAnno.addToIndexes();
                         entityType = null;
@@ -210,7 +212,8 @@ public class StanfordNamedEntityRecognizer
             // If the last entity is still open, then close it
             if (entityType != null) {
                 Type type = mappingProvider.getTagType(entityType);
-                NamedEntity neAnno = (NamedEntity) cas.createAnnotation(type, entityBegin, entityEnd);
+                NamedEntity neAnno = (NamedEntity) cas.createAnnotation(type, entityBegin,
+                        entityEnd);
                 neAnno.setValue(entityType);
                 neAnno.addToIndexes();
             }
@@ -242,8 +245,8 @@ public class StanfordNamedEntityRecognizer
                     is = new GZIPInputStream(is);
                 }
 
-                AbstractSequenceClassifier<CoreMap> classifier = (AbstractSequenceClassifier<CoreMap>) 
-                        CRFClassifier.getClassifier(is);
+                AbstractSequenceClassifier<CoreMap> classifier = 
+                        (AbstractSequenceClassifier<CoreMap>) CRFClassifier.getClassifier(is);
 
                 String tagsetName = metadata.getProperty("ner.tagset");
                 if (tagsetName == null) {
@@ -252,7 +255,7 @@ public class StanfordNamedEntityRecognizer
                 
                 SingletonTagset tsdp = new SingletonTagset(NamedEntity.class, tagsetName);
                 for (String tag : classifier.classIndex) {
-                    String mapped = metadata.getProperty("ner.tag.map."+tag);
+                    String mapped = metadata.getProperty("ner.tag.map." + tag);
                     String finalTag = mapped != null ? mapped : tag;
                     
                     // "O" has a special meaning in the CRF-NER: not a named entity

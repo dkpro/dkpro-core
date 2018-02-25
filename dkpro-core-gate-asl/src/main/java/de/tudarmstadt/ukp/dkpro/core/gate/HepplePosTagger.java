@@ -21,8 +21,6 @@ import static java.util.Collections.singletonList;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.fit.util.JCasUtil.toText;
-import hepple.postag.InvalidRuleException;
-import hepple.postag.POSTagger;
 
 import java.io.IOException;
 import java.net.URL;
@@ -47,11 +45,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import hepple.postag.InvalidRuleException;
+import hepple.postag.POSTagger;
 
 /**
  * GATE Hepple part-of-speech tagger.
  */
-@ResourceMetaData(name="GATE Hepple POS-Tagger")
+@ResourceMetaData(name = "GATE Hepple POS-Tagger")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -93,7 +93,8 @@ public class HepplePosTagger
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
@@ -113,7 +114,7 @@ public class HepplePosTagger
      * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
     protected boolean printTagSet;
 
     private CasConfigurableProviderBase<URL> ruleProvider;

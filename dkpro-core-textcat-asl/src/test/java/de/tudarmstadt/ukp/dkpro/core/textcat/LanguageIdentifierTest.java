@@ -25,30 +25,25 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
 
-public
-class LanguageIdentifierTest
+public class LanguageIdentifierTest
 {
-	@Test
-	public
-	void testEnglish()
-	throws Exception
-	{
-		AnalysisEngine ae = createEngine(LanguageIdentifier.class, createTypeSystemDescription());
-		JCas aJCas = ae.newJCas();
-		aJCas.setDocumentText("This is an english file.");
-		ae.process(aJCas);
-		assertEquals("en", aJCas.getDocumentLanguage());
-	}
+    @Test
+    public void testEnglish() throws Exception
+    {
+        AnalysisEngine ae = createEngine(LanguageIdentifier.class, createTypeSystemDescription());
+        JCas aJCas = ae.newJCas();
+        aJCas.setDocumentText("This is an english file.");
+        ae.process(aJCas);
+        assertEquals("en", aJCas.getDocumentLanguage());
+    }
 
-	@Test
-	public
-	void testGerman()
-	throws Exception
-	{
-		AnalysisEngine ae = createEngine(LanguageIdentifier.class, createTypeSystemDescription());
-		JCas aJCas = ae.newJCas();
-		aJCas.setDocumentText("Das ist ein deutsches Dokument.");
-		ae.process(aJCas);
-		assertEquals("de", aJCas.getDocumentLanguage());
-	}
+    @Test
+    public void testGerman() throws Exception
+    {
+        AnalysisEngine ae = createEngine(LanguageIdentifier.class, createTypeSystemDescription());
+        JCas aJCas = ae.newJCas();
+        aJCas.setDocumentText("Das ist ein deutsches Dokument.");
+        ae.process(aJCas);
+        assertEquals("de", aJCas.getDocumentLanguage());
+    }
 }

@@ -25,18 +25,18 @@ import javax.xml.bind.annotation.XmlElement;
 
 public class TueppPos
 {
-    @XmlAttribute(name="t")
+    @XmlAttribute(name = "t")
     public String tag;
 
-    @XmlAttribute(name="r")
+    @XmlAttribute(name = "r")
     public int rank;
 
-    @XmlAttribute(name="c")
+    @XmlAttribute(name = "c")
     public float certainty;
-    
+
     @XmlElement(name = "b")
     public List<TueppBaseform> baseforms = new ArrayList<TueppBaseform>();
-    
+
     /**
      * A part-of-speech tag can have multiple baseforms. This method returns the first baseform.
      */

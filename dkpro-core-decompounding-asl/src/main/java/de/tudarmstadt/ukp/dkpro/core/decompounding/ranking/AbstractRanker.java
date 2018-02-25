@@ -38,27 +38,26 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.NGramModel;
  */
 public abstract class AbstractRanker implements Ranker
 {
+    private Finder finder;
 
-	private Finder finder;
+    /**
+     * Empty constructor
+     *
+     * Use setFinder before using this class
+     */
+    public AbstractRanker() {
 
-	/**
-	 * Empty constructor
-	 *
-	 * Use setFinder before using this class
-	 */
-	public AbstractRanker() {
+    }
 
-	}
+    public AbstractRanker(Finder aFinder)
+    {
+        finder = aFinder;
+    }
 
-	public AbstractRanker(Finder aFinder)
-	{
-		finder = aFinder;
-	}
-
-	public Finder getFinder()
-	{
-		return finder;
-	}
+    public Finder getFinder()
+    {
+        return finder;
+    }
 
     /**
      * Gets the frequency of a Split Element
@@ -67,10 +66,10 @@ public abstract class AbstractRanker implements Ranker
      *            a fragment.
      * @return the frequency.
      */
-	protected BigInteger freq(Fragment aWord)
-	{
-		return finder.freq(aWord.getWord());
-	}
+    protected BigInteger freq(Fragment aWord)
+    {
+        return finder.freq(aWord.getWord());
+    }
 
     /**
      * Returns the frequency of n-grams that contain both split elements
@@ -81,10 +80,10 @@ public abstract class AbstractRanker implements Ranker
      *            another fragment.
      * @return the n-gram frequency.
      */
-	protected BigInteger freq(Fragment aWord1, Fragment aWord2)
-	{
-		return freq(new String[] { aWord1.getWord(), aWord2.getWord() });
-	}
+    protected BigInteger freq(Fragment aWord1, Fragment aWord2)
+    {
+        return freq(new String[] { aWord1.getWord(), aWord2.getWord() });
+    }
 
     /**
      * Returns the frequency for a array of words
@@ -93,39 +92,39 @@ public abstract class AbstractRanker implements Ranker
      *            the words.
      * @return the frequency.
      */
-	protected BigInteger freq(String[] aWords)
-	{
-		BigInteger total = BigInteger.valueOf(0l);
+    protected BigInteger freq(String[] aWords)
+    {
+        BigInteger total = BigInteger.valueOf(0l);
 
-		for (NGramModel gram : finder.find(aWords)) {
-			total = total.add(BigInteger.valueOf(gram.getFreq()));
-		}
+        for (NGramModel gram : finder.find(aWords)) {
+            total = total.add(BigInteger.valueOf(gram.getFreq()));
+        }
 
-		return total;
-	}
+        return total;
+    }
 
-	public final static String INDEX_OPTION = "luceneIndex";
-	public final static String LIMIT_OPTION = "limit";
+    public final static String INDEX_OPTION = "luceneIndex";
+    public final static String LIMIT_OPTION = "limit";
 
-	public static int getLimitOption(CommandLine aCmd)
-	{
-		int i = Integer.MAX_VALUE;
-		if (aCmd.hasOption(LIMIT_OPTION)) {
-			i = Integer.valueOf(aCmd.getOptionValue(LIMIT_OPTION));
-		}
+    public static int getLimitOption(CommandLine aCmd)
+    {
+        int i = Integer.MAX_VALUE;
+        if (aCmd.hasOption(LIMIT_OPTION)) {
+            i = Integer.valueOf(aCmd.getOptionValue(LIMIT_OPTION));
+        }
 
-		return i;
-	}
+        return i;
+    }
 
-	public static String getIndexPathOption(CommandLine aCmd)
-	{
-		return aCmd.getOptionValue(INDEX_OPTION);
-	}
+    public static String getIndexPathOption(CommandLine aCmd)
+    {
+        return aCmd.getOptionValue(INDEX_OPTION);
+    }
 
-	@Override
-	public void setFinder(Finder aFinder) {
-		finder = aFinder;
-	}
+    @Override
+    public void setFinder(Finder aFinder) {
+        finder = aFinder;
+    }
 
     /**
      * Expects that the splits list contains at least one element and that this is the unsplit word.
@@ -134,29 +133,28 @@ public abstract class AbstractRanker implements Ranker
      *            the splits.
      * @return the filtered splits.
      */
-	public static List<DecompoundedWord> filterAndSort(List<DecompoundedWord> aSplits) {
-		List<DecompoundedWord> filtered = new ArrayList<DecompoundedWord>();
-		for (DecompoundedWord s : aSplits) {
-			if (!Double.isInfinite(s.getWeight()) && !Double.isInfinite(s.getWeight())
-					&& (s.getWeight() > 0.0)) {
-				filtered.add(s);
-			}
-		}
-		Collections.sort(filtered);
+    public static List<DecompoundedWord> filterAndSort(List<DecompoundedWord> aSplits) {
+        List<DecompoundedWord> filtered = new ArrayList<DecompoundedWord>();
+        for (DecompoundedWord s : aSplits) {
+            if (!Double.isInfinite(s.getWeight()) && !Double.isInfinite(s.getWeight())
+                    && (s.getWeight() > 0.0)) {
+                filtered.add(s);
+            }
+        }
+        Collections.sort(filtered);
 
-		if (filtered.isEmpty()) {
-			filtered.add(aSplits.get(0));
-		}
+        if (filtered.isEmpty()) {
+            filtered.add(aSplits.get(0));
+        }
 
-		return filtered;
-	}
+        return filtered;
+    }
 
     @Override
-    public DecompoundedWord highestRank(DecompoundingTree aTree){
+    public DecompoundedWord highestRank(DecompoundingTree aTree) {
         return highestRank(aTree.getRoot(), null);
     }
 
     public abstract DecompoundedWord highestRank(ValueNode<DecompoundedWord> aParent,
             List<DecompoundedWord> aPath);
-
 }

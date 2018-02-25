@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.junit.Test;
 
@@ -32,7 +33,8 @@ public class StanfordPtbTransformerTest
         String expected = "``Hey you!'', John said.";
         String input = "\"Hey you!\", John said.";
 
-        AnalysisEngineDescription normalizer = createEngineDescription(StanfordPtbTransformer.class);
+        AnalysisEngineDescription normalizer = createEngineDescription(
+                StanfordPtbTransformer.class);
 
         assertTransformedText(expected, input, "en", normalizer);
     }

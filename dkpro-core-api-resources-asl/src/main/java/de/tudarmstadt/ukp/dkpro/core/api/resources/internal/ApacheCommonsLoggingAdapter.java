@@ -30,7 +30,7 @@ public class ApacheCommonsLoggingAdapter
     {
         logger = aLogger;
     }
-    
+
     @Override
     public void log(String msg, int level)
     {
@@ -88,7 +88,7 @@ public class ApacheCommonsLoggingAdapter
     @Override
     public void warn(String msg)
     {
-        if(logger.isWarnEnabled()){
+        if (logger.isWarnEnabled()) {
             logger.warn(msg);
         }
     }
@@ -96,7 +96,7 @@ public class ApacheCommonsLoggingAdapter
     @Override
     public void error(String msg)
     {
-        if(logger.isErrorEnabled()){
+        if (logger.isErrorEnabled()) {
             logger.error(msg);
         }
     }

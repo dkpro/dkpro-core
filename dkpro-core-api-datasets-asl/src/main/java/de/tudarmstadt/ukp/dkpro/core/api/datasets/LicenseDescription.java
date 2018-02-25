@@ -19,7 +19,6 @@ package de.tudarmstadt.ukp.dkpro.core.api.datasets;
 
 public interface LicenseDescription
 {
-
     String getName();
 
     String getUrl();

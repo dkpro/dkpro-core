@@ -59,7 +59,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * and Noah A. Smith. Improved Part-of-Speech Tagging for Online Conversational Text with Word
  * Clusters In Proceedings of NAACL 2013.
  */
-@ResourceMetaData(name="ArkTweet POS-Tagger")
+@ResourceMetaData(name = "ArkTweet POS-Tagger")
 @TypeCapability(
       inputs = { 
           "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 
@@ -94,7 +94,8 @@ public class ArktweetPosTagger
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 

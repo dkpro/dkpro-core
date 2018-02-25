@@ -57,7 +57,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * 
  * @see <a href="https://github.com/ufal/udpipe/tree/master/src/parsito">Parsito in UDPipe</a>
  */
-@ResourceMetaData(name="UDPipe Parsito Dependency Parser")
+@ResourceMetaData(name = "UDPipe Parsito Dependency Parser")
 @TypeCapability(
         inputs = { 
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -95,7 +95,8 @@ public class UDPipeParser
      * Load the dependency to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = ComponentParameters.PARAM_DEPENDENCY_MAPPING_LOCATION;
+    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_DEPENDENCY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_DEPENDENCY_MAPPING_LOCATION, mandatory = false)
     protected String dependencyMappingLocation;
 

@@ -17,10 +17,8 @@
  */
 package org.dkpro.core.api.embeddings.text;
 
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import org.dkpro.core.api.embeddings.binary.BinaryVectorizer;
-import org.junit.Rule;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,8 +26,11 @@ import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.dkpro.core.api.embeddings.binary.BinaryVectorizer;
+import org.junit.Rule;
+import org.junit.Test;
+
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class TextFormatVectorizerUtilsTest
 {

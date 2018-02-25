@@ -17,6 +17,11 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertConstituents;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertPOS;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertPennTree;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagset;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagsetMapping;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
@@ -25,22 +30,22 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class OpenNlpParserTest
 {
-	@Test
-	public void testEnglish()
-		throws Exception
-	{
-		JCas jcas = runTest("en", "chunking", "We need a very complicated example sentence , "
-		        + "which contains as many constituents and dependencies as possible .");
+    @Test
+    public void testEnglish()
+        throws Exception
+    {
+        JCas jcas = runTest("en", "chunking", "We need a very complicated example sentence , "
+                + "which contains as many constituents and dependencies as possible .");
 
         String[] constituentMapped = { "ADJP 10,26", "ADJP 102,110", "NP 0,2", "NP 64,110",
                 "NP 64,98", "NP 8,110", "NP 8,43", "PP 61,110", "PP 99,110", "ROOT 0,112",
@@ -50,8 +55,9 @@ public class OpenNlpParserTest
                 "NP 64,98", "NP 8,110", "NP 8,43", "PP 61,110", "PP 99,110", "ROOT 0,112",
                 "S 0,112", "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
-        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_DET", "POS_ADV", "POS_VERB", "POS_NOUN", "POS_NOUN", "POS_PUNCT", "POS_DET",
-                "POS_VERB", "POS_ADP", "POS_ADJ", "POS_NOUN", "POS_CONJ", "POS_NOUN", "POS_ADP", "POS_ADJ", "POS_PUNCT" };
+        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_DET", "POS_ADV", "POS_VERB", "POS_NOUN",
+                "POS_NOUN", "POS_PUNCT", "POS_DET", "POS_VERB", "POS_ADP", "POS_ADJ", "POS_NOUN",
+                "POS_CONJ", "POS_NOUN", "POS_ADP", "POS_ADJ", "POS_PUNCT" };
 
         String[] posOriginal = { "PRP", "VBP", "DT", "RB", "VBN", "NN", "NN", ",", "WDT", "VBZ",
                 "IN", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
@@ -75,14 +81,14 @@ public class OpenNlpParserTest
 
         String[] unmappedConst = { "ADV", "AUX", "EDITED", "NEG", "O", "TOP", "TYPO", "UH" };
         
-		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
-		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
-        AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
-        AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
-        AssertAnnotations.assertTagset(Constituent.class, "ptb", constituentTags, jcas);
-        AssertAnnotations.assertTagsetMapping(Constituent.class, "ptb", unmappedConst, jcas);
-	}
+        assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+        assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+        assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+        assertTagset(POS.class, "ptb", posTags, jcas);
+        assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
+        assertTagset(Constituent.class, "ptb", constituentTags, jcas);
+        assertTagsetMapping(Constituent.class, "ptb", unmappedConst, jcas);
+    }
 
     @Test
     public void testEnglishIxa()
@@ -125,13 +131,13 @@ public class OpenNlpParserTest
 
         String[] unmappedConst = { "ADV", "AUX", "EDITED", "NEG", "O", "TOP", "TYPO", "UH" };
         
-        AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
-        AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-        AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
-        AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
-        AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
-        AssertAnnotations.assertTagset(Constituent.class, "ptb", constituentTags, jcas);
-        AssertAnnotations.assertTagsetMapping(Constituent.class, "ptb", unmappedConst, jcas);
+        assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+        assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+        assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+        assertTagset(POS.class, "ptb", posTags, jcas);
+        assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
+        assertTagset(Constituent.class, "ptb", constituentTags, jcas);
+        assertTagsetMapping(Constituent.class, "ptb", unmappedConst, jcas);
     }
 
     @Test
@@ -238,32 +244,32 @@ public class OpenNlpParserTest
 
         String[] unmappedConst = { "O", "TOP" };
         
-        AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
-        AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-        AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
-        AssertAnnotations.assertTagset(POS.class, "ancora-ixa", posTags, jcas);
-        AssertAnnotations.assertTagsetMapping(POS.class, "ancora-ixa", unmappedPos, jcas);
-        AssertAnnotations.assertTagset(Constituent.class, "ancora", constituentTags, jcas);
-        AssertAnnotations.assertTagsetMapping(Constituent.class, "ancora", unmappedConst, jcas);
+        assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+        assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+        assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+        assertTagset(POS.class, "ancora-ixa", posTags, jcas);
+        assertTagsetMapping(POS.class, "ancora-ixa", unmappedPos, jcas);
+        assertTagset(Constituent.class, "ancora", constituentTags, jcas);
+        assertTagsetMapping(Constituent.class, "ancora", unmappedConst, jcas);
     }
 
     /**
      * Setup CAS to test parser for the English language (is only called once if an English test is
      * run)
      */
-	private JCas runTest(String aLanguage, String aVariant, String aDocument)
-		throws Exception
-	{
+    private JCas runTest(String aLanguage, String aVariant, String aDocument)
+        throws Exception
+    {
         AssumeResource.assumeResource(OpenNlpParser.class, "parser", aLanguage, aVariant);
-	    
-		AnalysisEngineDescription parser = createEngineDescription(OpenNlpParser.class,
-				OpenNlpParser.PARAM_VARIANT, aVariant,
-				OpenNlpParser.PARAM_PRINT_TAGSET, true,
-				OpenNlpParser.PARAM_WRITE_POS, true,
-				OpenNlpParser.PARAM_WRITE_PENN_TREE, true);
+        
+        AnalysisEngineDescription parser = createEngineDescription(OpenNlpParser.class,
+                OpenNlpParser.PARAM_VARIANT, aVariant,
+                OpenNlpParser.PARAM_PRINT_TAGSET, true,
+                OpenNlpParser.PARAM_WRITE_POS, true,
+                OpenNlpParser.PARAM_WRITE_PENN_TREE, true);
 
-		return TestRunner.runTest(parser, aLanguage, aDocument);
-	}
+        return TestRunner.runTest(parser, aLanguage, aDocument);
+    }
 
     @Rule
     public DkproTestContext testContext = new DkproTestContext();

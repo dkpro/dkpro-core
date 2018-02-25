@@ -17,12 +17,8 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.text;
 
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
-import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGenerator;
-import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import java.io.IOException;
+import java.io.OutputStream;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -33,18 +29,22 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import java.io.IOException;
-import java.io.OutputStream;
+import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
+import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGenerator;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 
 /**
  * This class writes a set of pre-processed documents into a large text file containing one sentence
  * per line and tokens split by whitespaces. Optionally, annotations other than tokens (e.g. lemmas)
  * are written as specified by {@link #PARAM_FEATURE_PATH}.
  */
-@ResourceMetaData(name="Tokenized Text Writer")
+@ResourceMetaData(name = "Tokenized Text Writer")
 @MimeTypeCapability({MimeTypes.TEXT_PLAIN})
 @TypeCapability(
-        inputs={
+        inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
 public class TokenizedTextWriter
         extends JCasFileWriter_ImplBase
@@ -63,8 +63,9 @@ public class TokenizedTextWriter
 
     /**
      * The feature path, e.g.
-     * {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value} for lemmas. Default:
-     * {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token} (i.e. token texts).
+     * {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value} for lemmas.
+     * Default: {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token} (i.e. token
+     * texts).
      */
     public static final String PARAM_FEATURE_PATH = "featurePath";
     /**
@@ -101,13 +102,15 @@ public class TokenizedTextWriter
     private String extension = ".txt";
 
     /**
-     * In the output file, each unit of the covering type is written into a separate line. The default
-     * (set in {@link #DEFAULT_COVERING_TYPE}), is sentences so that each sentence is written to a line.
+     * In the output file, each unit of the covering type is written into a separate line. The
+     * default (set in {@link #DEFAULT_COVERING_TYPE}), is sentences so that each sentence is
+     * written to a line.
      * <p>
      * If no linebreaks within a document is desired, set this value to {@code null}.
      */
     public static final String PARAM_COVERING_TYPE = "coveringType";
-    @ConfigurationParameter(name = PARAM_COVERING_TYPE, mandatory = true, defaultValue = DEFAULT_COVERING_TYPE)
+    @ConfigurationParameter(name = PARAM_COVERING_TYPE, mandatory = true, 
+            defaultValue = DEFAULT_COVERING_TYPE)
     private String coveringType;
 
     private StringSequenceGenerator sequenceGenerator;

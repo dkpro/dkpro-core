@@ -19,9 +19,11 @@ package de.tudarmstadt.ukp.dkpro.core.io.lif.internal;
 
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.TreeSet;
+
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.TOP;
 import org.lappsgrid.discriminator.Discriminators;
@@ -29,6 +31,7 @@ import org.lappsgrid.serialization.lif.Annotation;
 import org.lappsgrid.serialization.lif.Container;
 import org.lappsgrid.serialization.lif.View;
 import org.lappsgrid.vocabulary.Features;
+
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -135,7 +138,8 @@ public class DKPro2Lif
             aConstituents.add(constituent.getId());
             
             for (org.apache.uima.jcas.tcas.Annotation child : select(
-                    ((Constituent) aNode).getChildren(), org.apache.uima.jcas.tcas.Annotation.class)) {
+                    ((Constituent) aNode).getChildren(),
+                    org.apache.uima.jcas.tcas.Annotation.class)) {
                 convertConstituent(aView, child, aConstituents);
             }
         }

@@ -17,20 +17,10 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.mallet.wordembeddings;
 
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
-import org.apache.uima.UIMAException;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.collection.CollectionReaderDescription;
-import org.apache.uima.fit.pipeline.SimplePipeline;
-import org.apache.uima.resource.ResourceInitializationException;
-import org.junit.Rule;
-import org.junit.Test;
+import static junit.framework.TestCase.assertEquals;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.junit.Assert.assertTrue;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -40,10 +30,21 @@ import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
 
-import static junit.framework.TestCase.assertEquals;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertTrue;
+import org.apache.uima.UIMAException;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.collection.CollectionReaderDescription;
+import org.apache.uima.fit.pipeline.SimplePipeline;
+import org.apache.uima.resource.ResourceInitializationException;
+import org.junit.Rule;
+import org.junit.Test;
+
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 public class MalletEmbeddingsTrainerTest
 {
@@ -250,5 +251,4 @@ public class MalletEmbeddingsTrainerTest
                 .map(line -> Arrays.copyOfRange(line, 1, dimensions))
                 .forEach(array -> Arrays.stream(array).forEach(Double::parseDouble));
     }
-
 }

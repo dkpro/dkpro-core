@@ -48,7 +48,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.datasets.internal.ud.UDDataset;
 public class DatasetLoader
 {
     private final Log LOG = LogFactory.getLog(getClass());
-    
+
     private File cacheRoot;
 
     public DatasetLoader()
@@ -70,19 +70,18 @@ public class DatasetLoader
         return cacheRoot;
     }
 
-    public List<Dataset> loadUniversalDependencyTreebankV1_3()
-        throws IOException
+    public List<Dataset> loadUniversalDependencyTreebankV1_3() throws IOException
     {
         File dataDir = new File(cacheRoot, "ud-treebanks-v1.3");
 
         DataPackage data = new DataPackage.Builder()
                 .url("https://lindat.mff.cuni.cz/repository/xmlui/bitstream/handle/11234/"
                         + "1-1699/ud-treebanks-v1.3.tgz?sequence=1&isAllowed=y")
-                .sha1("44367112880cf0af3f293cb3f0cc6ce50c0e65c0")
-                .target("ud-treebanks-v1.3.tgz")
-                .postAction((d) -> { untgz(new File(dataDir, d.getTarget()), dataDir); })
-                .build();
-        
+                .sha1("44367112880cf0af3f293cb3f0cc6ce50c0e65c0").target("ud-treebanks-v1.3.tgz")
+                .postAction((d) -> {
+                    untgz(new File(dataDir, d.getTarget()), dataDir);
+                }).build();
+
         fetch(dataDir, data);
 
         List<Dataset> sets = new ArrayList<>();
@@ -91,9 +90,8 @@ public class DatasetLoader
         }
         return sets;
     }
-    
-    private void fetch(File aTarget, DataPackage... aPackages)
-        throws IOException
+
+    private void fetch(File aTarget, DataPackage... aPackages) throws IOException
     {
         // First validate if local copies are still up-to-date
         boolean reload = false;
@@ -102,7 +100,7 @@ public class DatasetLoader
             if (!cachedFile.exists()) {
                 continue;
             }
-            
+
             if (pack.getSha1() != null) {
                 String actual = getDigest(cachedFile, "SHA1");
                 if (!pack.getSha1().equals(actual)) {
@@ -115,7 +113,7 @@ public class DatasetLoader
                     LOG.info("Local SHA1 hash verified on [" + cachedFile + "] - [" + actual + "]");
                 }
             }
-            
+
             if (pack.getMd5() != null) {
                 String actual = getDigest(cachedFile, "MD5");
                 if (!pack.getMd5().equals(actual)) {
@@ -128,23 +126,22 @@ public class DatasetLoader
                     LOG.info("Local MD5 hash verified on [" + cachedFile + "] - [" + actual + "]");
                 }
             }
-            
+
         }
-        
+
         // If any of the packages are outdated, clear the cache and download again
         if (reload) {
             LOG.info("Clearing local cache for [" + aTarget + "]");
             FileUtils.deleteQuietly(aTarget);
         }
-        
+
         for (DataPackage pack : aPackages) {
             File cachedFile = new File(aTarget, pack.getTarget());
-            
+
             if (cachedFile.exists()) {
                 continue;
             }
 
-            
             MessageDigest md5;
             try {
                 md5 = MessageDigest.getInstance("MD5");
@@ -165,10 +162,10 @@ public class DatasetLoader
             URL source = new URL(pack.getUrl());
 
             LOG.info("Fetching [" + cachedFile + "]");
-            
+
             URLConnection connection = source.openConnection();
             connection.setRequestProperty("User-Agent", "Java");
-            
+
             try (InputStream is = connection.getInputStream()) {
                 DigestInputStream md5Filter = new DigestInputStream(is, md5);
                 DigestInputStream sha1Filter = new DigestInputStream(md5Filter, sha1);
@@ -184,7 +181,7 @@ public class DatasetLoader
                         throw new IOException(message);
                     }
                 }
-                
+
                 if (pack.getSha1() != null) {
                     String sha1Hex = new String(
                             Hex.encodeHex(sha1Filter.getMessageDigest().digest()));
@@ -197,11 +194,11 @@ public class DatasetLoader
                 }
             }
         }
-                 
+
         // Perform a post-fetch action such as unpacking
         for (DataPackage pack : aPackages) {
             File cachedFile = new File(aTarget, pack.getTarget());
-            File postActionCompleteMarker = new File(cachedFile.getPath()+".postComplete");
+            File postActionCompleteMarker = new File(cachedFile.getPath() + ".postComplete");
             if (pack.getPostAction() != null && !postActionCompleteMarker.exists()) {
                 try {
                     pack.getPostAction().run(pack);
@@ -211,12 +208,12 @@ public class DatasetLoader
                     throw e;
                 }
                 catch (Exception e) {
-                   throw new IllegalStateException(e);
+                    throw new IllegalStateException(e);
                 }
             }
         }
     }
-    
+
     private String getDigest(File aFile, String aDigest) throws IOException
     {
         MessageDigest digest;
@@ -232,28 +229,27 @@ public class DatasetLoader
             return new String(Hex.encodeHex(digestFilter.getMessageDigest().digest()));
         }
     }
-    
-    private void untgz(File aArchive, File aTarget)
-        throws IOException
+
+    private void untgz(File aArchive, File aTarget) throws IOException
     {
         try (ArchiveInputStream archive = new TarArchiveInputStream(new GzipCompressorInputStream(
                 new BufferedInputStream(new FileInputStream(aArchive))))) {
             extract(aArchive, archive, aTarget);
         }
     }
-    
+
     private void extract(File aArchive, ArchiveInputStream aArchiveStream, File aTarget)
         throws IOException
     {
         ArchiveEntry entry = null;
         while ((entry = aArchiveStream.getNextEntry()) != null) {
             String name = entry.getName();
-            
+
             // Ensure that the filename will not break the manifest
             if (name.contains("\n")) {
                 throw new IllegalStateException("Filename must not contain line break");
             }
-            
+
             File out = new File(aTarget, name);
             if (entry.isDirectory()) {
                 FileUtils.forceMkdir(out);
