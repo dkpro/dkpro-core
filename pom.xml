@@ -63,6 +63,7 @@
         </snapshots>
       </repository>
       <!-- For UIMA/uimaFIT RCs -->
+      <!--
       <repository>
         <id>ext-staging</id>
         <name>Staging repo</name>
@@ -71,8 +72,8 @@
             <enabled>true</enabled>
         </releases>
       </repository>
+      -->
       <!-- For UIMA/uimaFIT SNAPSHOT -->
-      <!--
       <repository>
         <id>apache.snapshots</id>
         <name>Apache Snapshot Repository</name>
@@ -84,7 +85,6 @@
           <enabled>true</enabled>
         </snapshots>
       </repository>
-      -->
       <!-- For SNAPSHOTs from the DKPro family -->
       <!--
       <repository>
@@ -101,6 +101,7 @@
   </repositories>
   <pluginRepositories>
     <!-- For UIMA/uimaFIT RCs -->
+    <!--
     <pluginRepository>
         <id>ext-staging</id>
         <name>Staging repo</name>
@@ -109,8 +110,8 @@
             <enabled>true</enabled>
         </releases>
     </pluginRepository>
+    -->
     <!-- For UIMA/uimaFIT SNAPSHOT maven plugin -->
-    <!--  
     <pluginRepository>
       <id>apache.snapshots</id>
       <name>Apache Snapshot Repository</name>
@@ -122,7 +123,6 @@
                 <enabled>true</enabled>
             </snapshots>
     </pluginRepository>
-    -->
   </pluginRepositories>
   <mailingLists>
     <mailingList>
