@@ -17,8 +17,8 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.penntree;
 
+import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
-import static org.apache.uima.fit.util.JCasUtil.*;
 
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.factory.CollectionReaderFactory;

@@ -88,7 +88,7 @@ public class BratEventArgument
         Matcher m = PATTERN.matcher(aLine);
         
         if (!m.matches()) {
-            throw new IllegalArgumentException("Illegal event argument format ["+aLine+"]");
+            throw new IllegalArgumentException("Illegal event argument format [" + aLine + "]");
         }
 
         int index = 0;

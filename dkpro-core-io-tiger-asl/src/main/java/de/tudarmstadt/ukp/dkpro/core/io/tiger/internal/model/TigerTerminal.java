@@ -24,24 +24,34 @@ public class TigerTerminal
 {
     @XmlAttribute
     public String word;
+    
     @XmlAttribute
     public String lemma;
+    
     @XmlAttribute
     public String pos;
+
     @XmlAttribute
     public String morph;
+    
     @XmlAttribute(name = "case")
     public String casus;
+    
     @XmlAttribute
     public String number;
+    
     @XmlAttribute
     public String gender;
+    
     @XmlAttribute
     public String person;
+    
     @XmlAttribute
     public String degree;
+    
     @XmlAttribute
     public String tense;
+    
     @XmlAttribute
     public String mood;
 }

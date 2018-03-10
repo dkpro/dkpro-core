@@ -19,8 +19,8 @@
 /**
  * This package contains all classes that are needed access the Google web1T data set.
  * 
- * The {@link de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.LuceneIndexer} creates a Lucence index from the
- * data set and the {@link de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.Finder} can be used to search on the
- * Lucence index.
+ * The {@link de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.LuceneIndexer} creates a Lucence
+ * index from the data set and the {@link de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.Finder}
+ * can be used to search on the Lucence index.
  */
 package de.tudarmstadt.ukp.dkpro.core.decompounding.web1t;

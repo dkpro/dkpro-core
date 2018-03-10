@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2007-2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -81,7 +81,7 @@ import edu.stanford.nlp.util.CoreMap;
 
 /**
  */
-@ResourceMetaData(name="CoreNLP Coreference Resolver (old API)")
+@ResourceMetaData(name = "CoreNLP Coreference Resolver (old API)")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
@@ -100,7 +100,8 @@ public class StanfordCoreferenceResolver
      * DCoRef parameter: Sieve passes - each class is defined in dcoref/sievepasses/.
      */
     public static final String PARAM_SIEVES = "sieves";
-    @ConfigurationParameter(name = PARAM_SIEVES, defaultValue = Constants.SIEVEPASSES, mandatory = true)
+    @ConfigurationParameter(name = PARAM_SIEVES, defaultValue = Constants.SIEVEPASSES, 
+            mandatory = true)
     private String sieves;
 
     /**
@@ -157,7 +158,7 @@ public class StanfordCoreferenceResolver
             protected Coreferencer produceResource(URL aUrl)
                 throws IOException
             {
-                String base = FilenameUtils.getFullPathNoEndSeparator(aUrl.toString())+"/";
+                String base = FilenameUtils.getFullPathNoEndSeparator(aUrl.toString()) + "/";
 
                 Properties props = new Properties();
                 props.setProperty(Constants.SIEVES_PROP, sieves);
@@ -176,7 +177,8 @@ public class StanfordCoreferenceResolver
                 props.setProperty(Constants.DEMONYM_PROP, base + "demonyms.txt");
                 // props.getProperty(Constants.ANIMATE_PROP, DefaultPaths.DEFAULT_DCOREF_ANIMATE),
                 props.setProperty(Constants.ANIMATE_PROP, base + "animate.unigrams.txt");
-                // props.getProperty(Constants.INANIMATE_PROP, DefaultPaths.DEFAULT_DCOREF_INANIMATE),
+                // props.getProperty(Constants.INANIMATE_PROP, 
+                //     DefaultPaths.DEFAULT_DCOREF_INANIMATE),
                 props.setProperty(Constants.INANIMATE_PROP, base + "inanimate.unigrams.txt");
                 // props.getProperty(Constants.MALE_PROP),
                 props.setProperty(Constants.MALE_PROP, base + "male.unigrams.txt");
@@ -190,24 +192,29 @@ public class StanfordCoreferenceResolver
                 props.setProperty(Constants.SINGULAR_PROP, base + "singular.unigrams.txt");
                 // props.getProperty(Constants.STATES_PROP, DefaultPaths.DEFAULT_DCOREF_STATES),
                 props.setProperty(Constants.STATES_PROP, base + "state-abbreviations.txt");
-                //props.getProperty(Constants.GENDER_NUMBER_PROP, DefaultPaths.DEFAULT_DCOREF_GENDER_NUMBER);
+                // props.getProperty(Constants.GENDER_NUMBER_PROP, 
+                //     DefaultPaths.DEFAULT_DCOREF_GENDER_NUMBER);
                 props.setProperty(Constants.GENDER_NUMBER_PROP, base + "gender.map.ser.gz");
-                // props.getProperty(Constants.COUNTRIES_PROP, DefaultPaths.DEFAULT_DCOREF_COUNTRIES),
+                // props.getProperty(Constants.COUNTRIES_PROP, 
+                //     DefaultPaths.DEFAULT_DCOREF_COUNTRIES),
                 props.setProperty(Constants.COUNTRIES_PROP, base + "countries");
-                // props.getProperty(Constants.STATES_PROVINCES_PROP, DefaultPaths.DEFAULT_DCOREF_STATES_AND_PROVINCES),
+                // props.getProperty(Constants.STATES_PROVINCES_PROP, 
+                //     DefaultPaths.DEFAULT_DCOREF_STATES_AND_PROVINCES),
                 props.setProperty(Constants.STATES_PROVINCES_PROP, base + "statesandprovinces");
         
                 // The following properties are only relevant if the "CorefDictionaryMatch" sieve
                 // is enabled.
                 // PropertiesUtils.getStringArray(props, Constants.DICT_LIST_PROP,
-                //   new String[]{DefaultPaths.DEFAULT_DCOREF_DICT1, DefaultPaths.DEFAULT_DCOREF_DICT2,
+                //   new String[]{DefaultPaths.DEFAULT_DCOREF_DICT1, 
+                //     DefaultPaths.DEFAULT_DCOREF_DICT2,
                 //   DefaultPaths.DEFAULT_DCOREF_DICT3, DefaultPaths.DEFAULT_DCOREF_DICT4}),
                 props.put(Constants.DICT_LIST_PROP, '[' + base + "coref.dict1.tsv" + ',' + base
                         + "coref.dict2.tsv" + ',' + base + "coref.dict3.tsv" + ',' + base
                         + "coref.dict4.tsv" + ']');
                 // props.getProperty(Constants.DICT_PMI_PROP, DefaultPaths.DEFAULT_DCOREF_DICT1),
                 props.put(Constants.DICT_PMI_PROP, base + "coref.dict1.tsv");
-                // props.getProperty(Constants.SIGNATURES_PROP, DefaultPaths.DEFAULT_DCOREF_NE_SIGNATURES));
+                // props.getProperty(Constants.SIGNATURES_PROP, 
+                //     DefaultPaths.DEFAULT_DCOREF_NE_SIGNATURES));
                 props.put(Constants.SIGNATURES_PROP, base + "ne.signatures.txt");
 
                 try {
@@ -281,7 +288,7 @@ public class StanfordCoreferenceResolver
             SemanticGraph deps = sentence
                     .get(SemanticGraphCoreAnnotations.CollapsedDependenciesAnnotation.class);
             for (IndexedWord vertex : deps.vertexSet()) {
-                 vertex.setWord(vertex.value());
+                vertex.setWord(vertex.value());
             }
             
             // These lines are necessary since CoreNLP 3.5.2 - without them the mentions lack

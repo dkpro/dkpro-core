@@ -33,8 +33,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvid
 
 public class TestFrequencyCountResourceTest
 {
-    public static class Annotator extends JCasAnnotator_ImplBase {
-        final static String FREQUENCY_COUNT_RESOURCE= "FrequencyCountResource";
+    public static class Annotator
+        extends JCasAnnotator_ImplBase
+    {
+        final static String FREQUENCY_COUNT_RESOURCE = "FrequencyCountResource";
         @ExternalResource(key = FREQUENCY_COUNT_RESOURCE)
         private FrequencyCountProvider provider;
 
@@ -53,10 +55,11 @@ public class TestFrequencyCountResourceTest
     }
 
     @Test
-    public void configureAggregatedExample() throws Exception {
+    public void configureAggregatedExample() throws Exception
+    {
         AnalysisEngineDescription desc = createEngineDescription(Annotator.class,
-        		Annotator.FREQUENCY_COUNT_RESOURCE, createExternalResourceDescription(
-        				TestFrequencyCountResource.class,
+                Annotator.FREQUENCY_COUNT_RESOURCE,
+                createExternalResourceDescription(TestFrequencyCountResource.class,
                         TestFrequencyCountResource.PARAM_SCALE_DOWN_FACTOR, "10"));
 
         // Check the external resource was injected

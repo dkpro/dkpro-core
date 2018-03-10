@@ -51,9 +51,9 @@ public class SnowballStemmerTest
         
         runTest("en", "We need a very complicated example sentence , which " +
                 "contains as many constituents and dependencies as possible .",
-                new String[] { "We", "need", "a", "veri", "complic", "exampl", "sentenc", ",", 
-                "which", "contain", "as", "mani", "constitu", "and", "depend", "as", "possibl", 
-                "." });
+                new String[] { "We", "need", "a", "veri", "complic", "exampl", "sentenc", ",",
+                        "which", "contain", "as", "mani", "constitu", "and", "depend", "as",
+                        "possibl", "." });
     }
 
     @Test

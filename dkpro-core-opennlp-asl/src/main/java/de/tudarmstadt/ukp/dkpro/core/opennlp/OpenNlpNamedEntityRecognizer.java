@@ -57,7 +57,7 @@ import opennlp.tools.util.Span;
 /**
  * OpenNLP name finder wrapper.
  */
-@ResourceMetaData(name="OpenNLP Named Entity Recognizer")
+@ResourceMetaData(name = "OpenNLP Named Entity Recognizer")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
@@ -85,7 +85,7 @@ public class OpenNlpNamedEntityRecognizer
      * for one language.
      */
     public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = true, defaultValue="person")
+    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = true, defaultValue = "person")
     protected String variant;
 
     /**
@@ -99,7 +99,8 @@ public class OpenNlpNamedEntityRecognizer
     /**
      * Location of the mapping file for named entity tags to UIMA types.
      */
-    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
+    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
     protected String mappingLocation;
 
@@ -137,8 +138,9 @@ public class OpenNlpNamedEntityRecognizer
                 TokenNameFinderModel model = new TokenNameFinderModel(aStream);
 
                 if (printTagSet) {
-                    OpenNlpSequenceTagsetDescriptionProvider tsdp = new OpenNlpSequenceTagsetDescriptionProvider(
-                            null, NamedEntity.class, model.getNameFinderSequenceModel());
+                    OpenNlpSequenceTagsetDescriptionProvider tsdp = 
+                            new OpenNlpSequenceTagsetDescriptionProvider(
+                                    null, NamedEntity.class, model.getNameFinderSequenceModel());
                     tsdp.setTagSplitPattern("-(?=[^-]*$)");
                     // FIXME addTagset(tsdp)
                     getContext().getLogger().log(INFO, tsdp.toString());
@@ -181,7 +183,7 @@ public class OpenNlpNamedEntityRecognizer
             // get the named entities and their character offsets
             for (Span namedEntity : namedEntities) {
                 int begin = tokenList.get(namedEntity.getStart()).getBegin();
-                int end = tokenList.get(namedEntity.getEnd()-1).getEnd();
+                int end = tokenList.get(namedEntity.getEnd() - 1).getEnd();
     
                 Type type = mappingProvider.getTagType(namedEntity.getType());
                 NamedEntity neAnno = (NamedEntity) cas.createAnnotation(type, begin, end);

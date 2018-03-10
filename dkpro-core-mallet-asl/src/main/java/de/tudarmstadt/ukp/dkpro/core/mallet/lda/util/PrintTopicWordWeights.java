@@ -17,10 +17,6 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.mallet.lda.util;
 
-import cc.mallet.topics.ParallelTopicModel;
-import cc.mallet.types.Alphabet;
-import cc.mallet.types.IDSorter;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -30,6 +26,10 @@ import java.util.TreeSet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import cc.mallet.topics.ParallelTopicModel;
+import cc.mallet.types.Alphabet;
+import cc.mallet.types.IDSorter;
 
 /**
  * Extract the n most important words for each topic in the given {@link ParallelTopicModel} files

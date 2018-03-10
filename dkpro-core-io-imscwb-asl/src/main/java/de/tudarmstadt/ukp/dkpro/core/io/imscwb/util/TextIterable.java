@@ -82,7 +82,8 @@ public class TextIterable
     }
 
     @Override
-    public CorpusText next(){
+    public CorpusText next()
+    {
         return texts.poll();
     }
 
@@ -133,14 +134,20 @@ public class TextIterable
             if (insideSentence && currentSentence != null) {
                 TabTokenizer tokenizer = new TabTokenizer(line);
 
-                for (int i=0; i<3; i++) {
+                for (int i = 0; i < 3; i++) {
                     if (!tokenizer.hasNext()) {
                         throw new IOException("Ill-formed line: " + line);
                     }
                     switch (i) {
-                        case 0 : currentSentence.addToken(tokenizer.next()); break;
-                        case 1 : currentSentence.addPOS(tokenizer.next()); break;
-                        case 2 : currentSentence.addLemma(tokenizer.next()); break;
+                    case 0:
+                        currentSentence.addToken(tokenizer.next());
+                        break;
+                    case 1:
+                        currentSentence.addPOS(tokenizer.next());
+                        break;
+                    case 2:
+                        currentSentence.addLemma(tokenizer.next());
+                        break;
                     }
                 }
             }

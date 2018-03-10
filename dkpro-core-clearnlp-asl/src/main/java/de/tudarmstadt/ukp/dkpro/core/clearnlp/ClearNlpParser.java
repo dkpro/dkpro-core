@@ -63,7 +63,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 /**
  * CLEAR parser annotator.
  */
-@ResourceMetaData(name="ClearNLP Parser")
+@ResourceMetaData(name = "ClearNLP Parser")
 @TypeCapability(
     inputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",

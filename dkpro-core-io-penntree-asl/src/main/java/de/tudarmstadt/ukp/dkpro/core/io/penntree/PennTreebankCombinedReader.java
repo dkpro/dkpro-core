@@ -44,7 +44,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 /**
  * Penn Treebank combined format reader.
  */
-@ResourceMetaData(name="Penn Treebank Combined Format Reader")
+@ResourceMetaData(name = "Penn Treebank Combined Format Reader")
 @MimeTypeCapability({MimeTypes.TEXT_X_PTB_COMBINED})
 @TypeCapability(
         outputs = { 
@@ -60,7 +60,8 @@ public class PennTreebankCombinedReader
      * Name of configuration parameter that contains the character encoding used by the input files.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
 
     /**
@@ -76,7 +77,8 @@ public class PennTreebankCombinedReader
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
@@ -95,7 +97,8 @@ public class PennTreebankCombinedReader
      * tag set defined as part of the model meta data. This can be useful if a custom model is
      * specified which does not have such meta data, or it can be used in readers.
      */
-    public static final String PARAM_CONSTITUENT_TAG_SET = ComponentParameters.PARAM_CONSTITUENT_TAG_SET;
+    public static final String PARAM_CONSTITUENT_TAG_SET = 
+            ComponentParameters.PARAM_CONSTITUENT_TAG_SET;
     @ConfigurationParameter(name = PARAM_CONSTITUENT_TAG_SET, mandatory = false)
     protected String constituentTagset;
     
@@ -103,7 +106,8 @@ public class PennTreebankCombinedReader
      * Load the constituent tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
+    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CONSTITUENT_MAPPING_LOCATION, mandatory = false)
     protected String constituentMappingLocation;
 

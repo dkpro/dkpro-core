@@ -17,7 +17,8 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.conll;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.*;
+import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
+import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testRoundTrip;
 
 import org.junit.Rule;
 import org.junit.Test;

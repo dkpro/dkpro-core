@@ -46,14 +46,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.ngrams.util.NGramStringIterable;
 
 /**
- * This component assumes that some spell checker has already been applied upstream (e.g. Jazzy).
- * It then uses ngram frequencies from a frequency provider in order to rank the provided corrections. 
+ * This component assumes that some spell checker has already been applied upstream (e.g. Jazzy). It
+ * then uses ngram frequencies from a frequency provider in order to rank the provided corrections.
  */
-@ResourceMetaData(name="Corrections Contextualizer")
+@ResourceMetaData(name = "Corrections Contextualizer")
 public class CorrectionsContextualizer
     extends JCasAnnotator_ImplBase
 {
-    private static final String BOS ="<S>";
+    private static final String BOS = "<S>";
     
     public final static String FREQUENCY_PROVIDER_RESOURCE = "FrequencyProvider";
     @ExternalResource(key = FREQUENCY_PROVIDER_RESOURCE)
@@ -76,15 +76,17 @@ public class CorrectionsContextualizer
         for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
             List<Token> tokens = JCasUtil.selectCovered(jcas, Token.class, sentence);
             List<String> tokenStrings = JCasUtil.toText(tokens);
-            for (SpellingAnomaly anomaly : JCasUtil.selectCovered(jcas, SpellingAnomaly.class, sentence)) {                
+            for (SpellingAnomaly anomaly : JCasUtil.selectCovered(jcas, SpellingAnomaly.class,
+                    sentence)) {
                 
                 FSArray suggestedActions = anomaly.getSuggestions();
                 int n = suggestedActions.size();
                 FSArray newActions = new FSArray(jcas, n + 1);
-                for (int i=0; i<n; i++) {
+                for (int i = 0; i < n; i++) {
                     SuggestedAction action = (SuggestedAction) suggestedActions.get(i);
 
-                    List<String> changedWords = getChangedWords(action.getReplacement(), tokenStrings, getCandidatePosition(anomaly, tokens));
+                    List<String> changedWords = getChangedWords(action.getReplacement(),
+                            tokenStrings, getCandidatePosition(anomaly, tokens));
                     
                     double probability = getSentenceProbability(changedWords);
                     
@@ -105,7 +107,9 @@ public class CorrectionsContextualizer
         }
     }
     
-    protected double getSentenceProbability(List<String> words) throws AnalysisEngineProcessException  {
+    protected double getSentenceProbability(List<String> words)
+        throws AnalysisEngineProcessException
+    {
         double sentenceProbability = 0.0;
         
         if (words.size() < 1) {

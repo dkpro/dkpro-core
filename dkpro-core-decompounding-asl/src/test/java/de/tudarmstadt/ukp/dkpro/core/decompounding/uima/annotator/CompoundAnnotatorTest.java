@@ -146,7 +146,8 @@ public class CompoundAnnotatorTest
 
     private void runAnnotator(AnalysisEngineDescription aed, String[] splits,
             String[] compoundsParts)
-        throws CASException, UIMAException{
+        throws CASException, UIMAException
+    {
         // Create Analysis Engine
         AnalysisEngine ae = AnalysisEngineFactory.createEngine(aed);
 

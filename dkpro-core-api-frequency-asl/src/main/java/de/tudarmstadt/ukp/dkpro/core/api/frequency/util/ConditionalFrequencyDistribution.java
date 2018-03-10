@@ -27,8 +27,8 @@ import java.util.Set;
  * Inspired by nltk.probability.ConditionalFreqDist Maps a condition to a
  * {@link FrequencyDistribution}.
  * 
- * <p>This class could be used to learn how frequently a word collocates with another word. Suppose we
- * want to know how frequently the word "of" appears after the word "because", then
+ * <p>This class could be used to learn how frequently a word collocates with another word. 
+ * Suppose we want to know how frequently the word "of" appears after the word "because", then
  * {@link ConditionalFrequencyDistribution} can be used as follows:</p>
  * 
  * <blockquote><pre>
@@ -249,11 +249,12 @@ public class ConditionalFrequencyDistribution<C, V>
      * @param condition
      *            the condition to be removed
      */
-    public void removeCondition(C condition) {
-    	if (cfd.containsKey(condition)) {
-        	cfd.put(condition, null);
-        	cfd.remove(condition);	
-    	}
+    public void removeCondition(C condition)
+    {
+        if (cfd.containsKey(condition)) {
+            cfd.put(condition, null);
+            cfd.remove(condition);
+        }
     }
     
     @Override

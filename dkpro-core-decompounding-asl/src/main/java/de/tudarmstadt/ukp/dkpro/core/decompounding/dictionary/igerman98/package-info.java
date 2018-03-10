@@ -19,5 +19,4 @@
 /**
  * This package contains the Affix models used by the dictionary classes.
  */
-
 package de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.igerman98;

@@ -24,16 +24,16 @@ import org.dkpro.core.cisstem.util.CisStem;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class PerformanceTest {
-
-	@Ignore
+public class PerformanceTest
+{
+    @Ignore
     @Test
-    public void testGerman()
-        throws Exception
+    public void testGerman() throws Exception
     {
-    	long startTime = System.currentTimeMillis();
-        for (String line : FileUtils.readLines(new File("src/test/resources/wordlist/wortliste-deutsch.txt"), "UTF-8")) {
-        	CisStem.stem(line);
+        long startTime = System.currentTimeMillis();
+        for (String line : FileUtils.readLines(
+                new File("src/test/resources/wordlist/wortliste-deutsch.txt"), "UTF-8")) {
+            CisStem.stem(line);
         }
         long endTime = System.currentTimeMillis();
 

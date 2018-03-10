@@ -97,7 +97,7 @@ public class CasNameSampleStream
             int begin = idxToken.get(idxTokenOffset.get(ne.getBegin()));
             int end = begin;
             if (ne.getEnd() > ne.getBegin()) {
-                end = idxToken.get(idxTokenOffset.get(ne.getEnd()-1));
+                end = idxToken.get(idxTokenOffset.get(ne.getEnd() - 1));
             }
             names.add(new Span(begin, end + 1, ne.getValue()));
         }

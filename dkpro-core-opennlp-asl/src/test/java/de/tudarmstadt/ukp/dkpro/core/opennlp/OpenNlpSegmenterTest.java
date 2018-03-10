@@ -27,6 +27,7 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
@@ -67,10 +68,8 @@ public class OpenNlpSegmenterTest
         AnalysisEngineDescription aed = createEngineDescription(OpenNlpSegmenter.class);
 
         SegmenterHarness.run(aed, (language, variant) -> {
-                    AssumeResource.assumeResource(OpenNlpSegmenter.class, "sentence", language, 
-                            "maxent");
-                },
-                "de.1", "en.7", "en.9", "ar.1", "zh.1", "zh.2");
+            AssumeResource.assumeResource(OpenNlpSegmenter.class, "sentence", language, "maxent");
+        }, "de.1", "en.7", "en.9", "ar.1", "zh.1", "zh.2");
     }
 
     private JCas runTest(String aLanguage, String aVariant, String aDocument, String[] sentences,

@@ -23,6 +23,7 @@ import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -65,12 +66,12 @@ public class CasLemmaSampleStream
             words.add(t.getText());
             
             if (t.getPos() == null) {
-                throw new IllegalStateException("Token ["+t.getText()+"] has no POS");
+                throw new IllegalStateException("Token [" + t.getText() + "] has no POS");
             }
             tags.add(t.getPos().getPosValue());
-            
+
             if (t.getLemma() == null) {
-                throw new IllegalStateException("Token ["+t.getText()+"] has no lemma");
+                throw new IllegalStateException("Token [" + t.getText() + "] has no lemma");
             }
             lemmas.add(t.getLemma().getValue());
         }

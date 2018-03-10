@@ -38,9 +38,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * 
  * @deprecated Use {@link RegexSegmenter}
  */
-@ResourceMetaData(name="Whitespace Segmenter")
+@ResourceMetaData(name = "Whitespace Segmenter")
 @TypeCapability(
-        outputs={
+        outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
 @Deprecated

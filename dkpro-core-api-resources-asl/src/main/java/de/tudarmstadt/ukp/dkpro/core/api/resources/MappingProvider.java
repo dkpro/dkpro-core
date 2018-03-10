@@ -39,21 +39,19 @@ import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 public class MappingProvider extends CasConfigurableProviderBase<Map<String, String>>
 {
-	// private final Log log = LogFactory.getLog(getClass());
-
     public static final String BASE_TYPE = "baseType";
 
-	private TypeSystem typeSystem;
-	private boolean notFound = false;
-	
-	private Map<String, String> tagMappings;
+    private TypeSystem typeSystem;
+    private boolean notFound = false;
+
+    private Map<String, String> tagMappings;
 
     private Map<String, HasResourceMetadata> tagMappingImports = new HashMap<>();
 
-	@Override
-	public void configure(CAS aCas) throws AnalysisEngineProcessException
-	{
-		typeSystem = aCas.getTypeSystem();
+    @Override
+    public void configure(CAS aCas) throws AnalysisEngineProcessException
+    {
+        typeSystem = aCas.getTypeSystem();
 
         // Tag mappings can exist independently from the type mappings because tag mappings
         // are configured in the model metadata
@@ -71,20 +69,20 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
         }
 
         // Try loading the type mappings
-		try {
-			notFound = false;
-			super.configure(aCas);
-		}
-		catch (AnalysisEngineProcessException e) {
-		    if(getOverride(LOCATION)!=null){
-		        throw e;
-		    }
-			notFound = true;
-		}
-	}
+        try {
+            notFound = false;
+            super.configure(aCas);
+        }
+        catch (AnalysisEngineProcessException e) {
+            if (getOverride(LOCATION) != null) {
+                throw e;
+            }
+            notFound = true;
+        }
+    }
 
-	public String getTag(String aTag)
-	{
+    public String getTag(String aTag)
+    {
         String tag = aTag;
         
         // Apply tag mapping if configured
@@ -96,35 +94,39 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
         }
         
         return tag;
-	}
-	
-	/**
-	 * Get the type for the given tag.
-	 * 
-	 * @param aTag a tag.
-	 * @return the type
-	 * @throws IllegalStateException if the type could not be located
-	 */
-	public Type getTagType(String aTag)
-	{
-		String type = getTagTypeName(aTag);
+    }
+
+    /**
+     * Get the type for the given tag.
+     * 
+     * @param aTag
+     *            a tag.
+     * @return the type
+     * @throws IllegalStateException
+     *             if the type could not be located
+     */
+    public Type getTagType(String aTag)
+    {
+        String type = getTagTypeName(aTag);
 
         Type uimaType = typeSystem.getType(type);
-		
+
         if (uimaType == null) {
-			throw new IllegalStateException("Type [" + type + "] mapped to tag [" + aTag
-					+ "] is not defined in type system");
+            throw new IllegalStateException("Type [" + type + "] mapped to tag [" + aTag
+                    + "] is not defined in type system");
         }
 
         return uimaType;
     }
-	
-	   /**
+
+    /**
      * Get the type for the given tag.
      * 
-     * @param aTag a tag.
+     * @param aTag
+     *            a tag.
      * @return the type
-     * @throws IllegalStateException if the type could not be located
+     * @throws IllegalStateException
+     *             if the type could not be located
      */
     public String getTagTypeName(String aTag)
     {
@@ -137,7 +139,7 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
         }
         else {
             String tag = getTag(aTag);
-            
+
             type = getResource().get(tag);
             if (type == null) {
                 type = getResource().get("*");
@@ -145,7 +147,7 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
             if (type == null) {
                 throw new IllegalStateException("No fallback (*) mapping defined!");
             }
-            
+
             String basePackage = getResource().get(META_TYPE_BASE);
             if (basePackage != null) {
                 type = basePackage + type;
@@ -154,28 +156,28 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
 
         return type;
     }
-    
+
     public Set<String> getTags()
     {
         return MappingUtils.stripMetadata(getResource().keySet());
     }
 
-	@Override
+    @Override
     protected Map<String, String> produceResource(URL aUrl) throws IOException
     {
-		if (aUrl != null) {
-	    	Map<String, String> mapping = new HashMap<String, String>();
-			Properties props = PropertiesLoaderUtils.loadProperties(new UrlResource(aUrl));
-	    	for (String key : props.stringPropertyNames()) {
-				mapping.put(key.trim(), props.getProperty(key).trim());
-			}
-	    	return mapping;
-		}
-		else {
-			return null;
-		}
+        if (aUrl != null) {
+            Map<String, String> mapping = new HashMap<String, String>();
+            Properties props = PropertiesLoaderUtils.loadProperties(new UrlResource(aUrl));
+            for (String key : props.stringPropertyNames()) {
+                mapping.put(key.trim(), props.getProperty(key).trim());
+            }
+            return mapping;
+        }
+        else {
+            return null;
+        }
     }
-	
+
     @Override
     protected URL followRedirects(URL aUrl) throws IOException
     {
@@ -191,7 +193,7 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
             Properties overrides = new Properties();
             for (String key : tmpResourceMetaData.stringPropertyNames()) {
                 if (key.startsWith(META_OVERRIDE)) {
-                    overrides.put(key.substring(META_OVERRIDE.length()+1), 
+                    overrides.put(key.substring(META_OVERRIDE.length() + 1),
                             tmpResourceMetaData.getProperty(key));
                 }
             }

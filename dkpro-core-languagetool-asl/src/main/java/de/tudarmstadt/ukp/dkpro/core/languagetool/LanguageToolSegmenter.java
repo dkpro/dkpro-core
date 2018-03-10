@@ -34,21 +34,21 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
  * Segmenter using LanguageTool to do the heavy lifting. LanguageTool internally uses different
  * strategies for tokenization.
  */
-@ResourceMetaData(name="LanguageTool Segmenter")
+@ResourceMetaData(name = "LanguageTool Segmenter")
 @LanguageCapability({ "en", "fa", "fr", "de", "pl", "ca", "it", "br", "nl", "pt", "ru", "be", "zh",
     "da", "eo", "gl", "el", "is", "ja", "km", "lt", "ml", "ro", "sk", "sl", "es", "sv", "ta",
     "tl", "uk" })
 @TypeCapability(
-	    outputs = {
-	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
+        outputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
 public class LanguageToolSegmenter extends SegmenterBase
 {
-	@Override
-	protected void process(JCas aJCas, String aText, int aZoneBegin)
-		throws AnalysisEngineProcessException
-	{
-		Language lang = Languages.getLanguageForShortCode(getLanguage(aJCas));
+    @Override
+    protected void process(JCas aJCas, String aText, int aZoneBegin)
+        throws AnalysisEngineProcessException
+    {
+        Language lang = Languages.getLanguageForShortCode(getLanguage(aJCas));
         Language defaultVariant = lang.getDefaultLanguageVariant();
         if (defaultVariant != null) {
             getLogger().debug(
@@ -57,54 +57,54 @@ public class LanguageToolSegmenter extends SegmenterBase
             lang = defaultVariant;
         }
 
-		List<String> sentences = lang.getSentenceTokenizer().tokenize(aText);
+        List<String> sentences = lang.getSentenceTokenizer().tokenize(aText);
 
-		int lastSStart = 0;
-		for (String s : sentences) {
-			int sStart = aText.indexOf(s, lastSStart);
-			int sEnd = sStart + s.length();
-			lastSStart = sEnd;
+        int lastSStart = 0;
+        for (String s : sentences) {
+            int sStart = aText.indexOf(s, lastSStart);
+            int sEnd = sStart + s.length();
+            lastSStart = sEnd;
 
-			sStart += aZoneBegin;
-			sEnd += aZoneBegin;
+            sStart += aZoneBegin;
+            sEnd += aZoneBegin;
 
-			createSentence(aJCas, sStart, sEnd);
+            createSentence(aJCas, sStart, sEnd);
 
-			List<String> tokens = lang.getWordTokenizer().tokenize(s);
-			int lastTStart = 0;
-			for (String t : tokens) {
-				int tStart = s.indexOf(t, lastTStart);
+            List<String> tokens = lang.getWordTokenizer().tokenize(s);
+            int lastTStart = 0;
+            for (String t : tokens) {
+                int tStart = s.indexOf(t, lastTStart);
 
                 // The Chinese tokenizer adds some /xxx suffixes, try to remove that
-				if ("zh".equals(getLanguage(aJCas)) && tStart == -1) {
-					int suffix = t.indexOf('/');
-					if (suffix != -1) {
-						t = t.substring(0,  suffix);
-					}
-					tStart = s.indexOf(t, lastTStart);
-					
-				}
-				
+                if ("zh".equals(getLanguage(aJCas)) && tStart == -1) {
+                    int suffix = t.indexOf('/');
+                    if (suffix != -1) {
+                        t = t.substring(0,  suffix);
+                    }
+                    tStart = s.indexOf(t, lastTStart);
+                    
+                }
+                
                 // The Chinese tokenizer normalizes from traditional to simplified Chinese.
                 // Maybe we have to undo this transformation.
-				if ("zh".equals(getLanguage(aJCas)) && tStart == -1) {
-				    String trad = CJFBeanFactory.getChineseJF().chineseJan2Fan(t);
-				    tStart = s.indexOf(trad, lastTStart);
-				}
+                if ("zh".equals(getLanguage(aJCas)) && tStart == -1) {
+                    String trad = CJFBeanFactory.getChineseJF().chineseJan2Fan(t);
+                    tStart = s.indexOf(trad, lastTStart);
+                }
 
-				if (tStart == -1) {
-					throw new IllegalStateException("Token [" + t + "] not found in sentence [" + s
-							+ "]");
-				}
+                if (tStart == -1) {
+                    throw new IllegalStateException("Token [" + t + "] not found in sentence [" + s
+                            + "]");
+                }
 
-				int tEnd = tStart + t.length();
-				lastTStart = tEnd;
+                int tEnd = tStart + t.length();
+                lastTStart = tEnd;
 
-				tStart += sStart;
-				tEnd += sStart;
+                tStart += sStart;
+                tEnd += sStart;
 
-				createToken(aJCas, tStart, tEnd);
-			}
-		}
-	}
+                createToken(aJCas, tStart, tEnd);
+            }
+        }
+    }
 }

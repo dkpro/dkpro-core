@@ -30,7 +30,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_Im
 /**
  * Converts annotations of the type SpellingAnomaly into a SofaChangeAnnoatation.
  */
-@ResourceMetaData(name="Spelling Normalizer")
+@ResourceMetaData(name = "Spelling Normalizer")
 @TypeCapability(
         inputs = { 
                 "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly" })

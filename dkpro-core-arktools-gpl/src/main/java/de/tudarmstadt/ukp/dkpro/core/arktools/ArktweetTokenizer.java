@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2007-2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -35,7 +35,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * ArkTweet tokenizer.
  */
-@ResourceMetaData(name="ArkTweet Tokenizer")
+@ResourceMetaData(name = "ArkTweet Tokenizer")
 public class ArktweetTokenizer
     extends CasAnnotator_ImplBase
 {

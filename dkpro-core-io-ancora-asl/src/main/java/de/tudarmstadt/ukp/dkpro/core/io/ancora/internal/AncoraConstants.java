@@ -31,4 +31,5 @@ public final class AncoraConstants
     public static final String ATTR_ELLIPTIC = "elliptic";
     public static final String ATTR_PUNCT = "punct";
     public static final String ATTR_GENDER = "gen";
-    public static final String ATTR_NUMBER = "num";}
+    public static final String ATTR_NUMBER = "num";
+}

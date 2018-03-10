@@ -18,63 +18,59 @@
 
 package de.tudarmstadt.ukp.dkpro.core.decompounding.splitter;
 
-import org.junit.Assert;
-
 import org.hamcrest.CoreMatchers;
+import org.junit.Assert;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.Fragment;
 
 public class FragmentTest
 {
 
-	@Test
-	public void testCreate()
-	{
-		Fragment e = Fragment.createFromString("aktion(s)");
+    @Test
+    public void testCreate()
+    {
+        Fragment e = Fragment.createFromString("aktion(s)");
 
-		Assert.assertEquals("aktion", e.getWord());
-		Assert.assertEquals("s", e.getMorpheme());
+        Assert.assertEquals("aktion", e.getWord());
+        Assert.assertEquals("s", e.getMorpheme());
 
-		e = Fragment.createFromString("plan");
-		Assert.assertEquals("plan", e.getWord());
-		Assert.assertEquals(null, e.getMorpheme());
-	}
+        e = Fragment.createFromString("plan");
+        Assert.assertEquals("plan", e.getWord());
+        Assert.assertEquals(null, e.getMorpheme());
+    }
 
-	@Test
-	public void testToString()
-	{
-		Fragment e = new Fragment();
-		e.setWord("aktion");
-		e.setMorpheme("s");
-		Assert.assertEquals("aktion(s)", e.toString());
+    @Test
+    public void testToString()
+    {
+        Fragment e = new Fragment();
+        e.setWord("aktion");
+        e.setMorpheme("s");
+        Assert.assertEquals("aktion(s)", e.toString());
 
-		e.setMorpheme(null);
-		Assert.assertEquals("aktion", e.toString());
-	}
+        e.setMorpheme(null);
+        Assert.assertEquals("aktion", e.toString());
+    }
 
-	@Test
-	public void testEquals()
-	{
-		Fragment e1 = new Fragment();
-		e1.setWord("aktion");
-		e1.setMorpheme("s");
+    @Test
+    public void testEquals()
+    {
+        Fragment e1 = new Fragment();
+        e1.setWord("aktion");
+        e1.setMorpheme("s");
 
-		Fragment e2 = new Fragment();
-		e2.setWord("aktion");
-		e2.setMorpheme("s");
+        Fragment e2 = new Fragment();
+        e2.setWord("aktion");
+        e2.setMorpheme("s");
 
-		Assert.assertTrue(e1.equals(e1));
+        Assert.assertTrue(e1.equals(e1));
 
-		e2.setMorpheme(null);
-		Assert.assertFalse(e1.equals(e2));
-	}
+        e2.setMorpheme(null);
+        Assert.assertFalse(e1.equals(e2));
+    }
 
-	   @Test
-	    public void testCreateFromString()
-	    {
-	        Fragment fragm = Fragment.createFromString("(");
-	        Assert.assertThat(fragm.getWord(),CoreMatchers.is("("));
-	    }
-
+    @Test
+    public void testCreateFromString()
+    {
+        Fragment fragm = Fragment.createFromString("(");
+        Assert.assertThat(fragm.getWord(), CoreMatchers.is("("));
+    }
 }

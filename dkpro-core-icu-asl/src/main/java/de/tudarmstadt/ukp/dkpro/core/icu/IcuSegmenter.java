@@ -33,7 +33,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * ICU segmenter.
  */
-@ResourceMetaData(name="ICU Segmenter")
+@ResourceMetaData(name = "ICU Segmenter")
 @LanguageCapability({ "af", "ak", "am", "ar", "as", "az", "be", "bg", "bm", "bn", "bo", "br", "bs",
         "ca", "ce", "cs", "cy", "da", "de", "dz", "ee", "el", "en", "eo", "es", "et", "eu", "fa",
         "ff", "fi", "fo", "fr", "fy", "ga", "gd", "gl", "gu", "gv", "ha", "hi", "hr", "hu", "hy",
@@ -78,7 +78,8 @@ public class IcuSegmenter
             else {
                 int[] span = new int[] { last, cur };
                 trim(aJCas.getDocumentText(), span);
-                processSentence(aJCas, aJCas.getDocumentText().substring(span[0], span[1]), span[0]);
+                processSentence(aJCas, aJCas.getDocumentText().substring(span[0], span[1]),
+                        span[0]);
             }
             last = cur;
             cur = bi.next();

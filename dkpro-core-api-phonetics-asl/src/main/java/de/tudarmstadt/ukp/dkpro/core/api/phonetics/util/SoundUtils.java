@@ -23,8 +23,8 @@ import java.util.Map;
 
 public class SoundUtils
 {
-	public static int differenceEncoded(String es1, String es2) {
-
+    public static int differenceEncoded(String es1, String es2)
+    {
         if (es1 == null || es2 == null) {
             return 0;
         }
@@ -38,85 +38,86 @@ public class SoundUtils
         return diff;
     }
 
-	/**
-	 * Converts an Arpabet phonemic transcription to an IPA phonemic
-	 * transcription. Note that, somewhat unusually, the stress symbol will
-	 * precede the vowel rather than the syllable. This is because Arpabet does
-	 * not mark syllable boundaries.
-	 *
-	 * @param s
-	 *            The Darpabet phonemic transcription to convert.
-	 * @return The IPA equivalent of s.
-	 * @throws IllegalArgumentException if a phoneme is unknown.
-	 */
-    public static String arpabetToIPA(String s) throws IllegalArgumentException {
-    	String[] arpaPhonemes = s.trim().split("[ \\t]+");
-    	StringBuffer ipaPhonemes = new StringBuffer(s.length());
+    /**
+     * Converts an Arpabet phonemic transcription to an IPA phonemic transcription. Note that,
+     * somewhat unusually, the stress symbol will precede the vowel rather than the syllable. This
+     * is because Arpabet does not mark syllable boundaries.
+     *
+     * @param s
+     *            The Darpabet phonemic transcription to convert.
+     * @return The IPA equivalent of s.
+     * @throws IllegalArgumentException
+     *             if a phoneme is unknown.
+     */
+    public static String arpabetToIPA(String s) throws IllegalArgumentException
+    {
+        String[] arpaPhonemes = s.trim().split("[ \\t]+");
+        StringBuffer ipaPhonemes = new StringBuffer(s.length());
 
-    	for (String arpaPhoneme : arpaPhonemes) {
-    		char stressChar = arpaPhoneme.charAt(arpaPhoneme.length() - 1);
-    		if (stressChar == '0' || stressChar == '1' || stressChar == '2') {
-    			arpaPhoneme = arpaPhoneme.substring(0, arpaPhoneme.length() - 1);
-    			ipaPhonemes.append(arpabetMap.get(Character.toString(stressChar)));
-    		}
+        for (String arpaPhoneme : arpaPhonemes) {
+            char stressChar = arpaPhoneme.charAt(arpaPhoneme.length() - 1);
+            if (stressChar == '0' || stressChar == '1' || stressChar == '2') {
+                arpaPhoneme = arpaPhoneme.substring(0, arpaPhoneme.length() - 1);
+                ipaPhonemes.append(arpabetMap.get(Character.toString(stressChar)));
+            }
 
-    		String ipaPhoneme = arpabetMap.get(arpaPhoneme);
-    		if (ipaPhoneme == null) {
-    			throw new IllegalArgumentException();
-    		}
-    		ipaPhonemes.append(ipaPhoneme);
-    	}
+            String ipaPhoneme = arpabetMap.get(arpaPhoneme);
+            if (ipaPhoneme == null) {
+                throw new IllegalArgumentException();
+            }
+            ipaPhonemes.append(ipaPhoneme);
+        }
 
-    	return ipaPhonemes.toString();
+        return ipaPhonemes.toString();
     }
 
     private static final Map<String, String> arpabetMap;
     static {
-    	Map<String, String> aMap = new HashMap<String, String>();
-    	aMap.put("0", "");
-    	aMap.put("1", "ˈ");
-    	aMap.put("2", "ˌ");
-    	aMap.put("AA", "ɑ");
-    	aMap.put("AE", "æ");
-    	aMap.put("AH", "ʌ");
-    	aMap.put("AO", "ɔ");
-    	aMap.put("AW", "aʊ");
-    	aMap.put("AX", "ə");
-    	aMap.put("AY", "aɪ");
-    	aMap.put("B", "b");
-    	aMap.put("CH", "tʃ");
-    	aMap.put("D", "d");
-    	aMap.put("DH", "ð");
-    	aMap.put("DX", "?");
-    	aMap.put("EH", "ɛ");
-    	aMap.put("ER", "ɚ");
-    	aMap.put("EY", "eɪ");
-    	aMap.put("F", "f");
-    	aMap.put("G", "?");
-    	aMap.put("HH", "h");
-    	aMap.put("IH", "ɪ");
-    	aMap.put("IY", "i");
-    	aMap.put("JH", "dʒ");
-    	aMap.put("K", "k");
-    	aMap.put("L", "l");
-    	aMap.put("M", "m");
-    	aMap.put("NG", "ŋ");
-    	aMap.put("N", "n");
-    	aMap.put("OW", "oʊ");
-    	aMap.put("OY", "ɔɪ");
-    	aMap.put("P", "p");
-    	aMap.put("R", "ɹ");
-    	aMap.put("SH", "ʃ");
-    	aMap.put("S", "s");
-    	aMap.put("TH", "θ");
-    	aMap.put("T", "t");
-    	aMap.put("UH", "ʊ");
-    	aMap.put("UW", "u");
-    	aMap.put("V", "v");
-    	aMap.put("W", "w");
-    	aMap.put("Y", "j");
-    	aMap.put("ZH", "ʒ");
-    	aMap.put("Z", "z");
-    	arpabetMap = Collections.unmodifiableMap(aMap);
+        Map<String, String> aMap = new HashMap<String, String>();
+        aMap.put("0", "");
+        aMap.put("1", "ˈ");
+        aMap.put("2", "ˌ");
+        aMap.put("AA", "ɑ");
+        aMap.put("AE", "æ");
+        aMap.put("AH", "ʌ");
+        aMap.put("AO", "ɔ");
+        aMap.put("AW", "aʊ");
+        aMap.put("AX", "ə");
+        aMap.put("AY", "aɪ");
+        aMap.put("B", "b");
+        aMap.put("CH", "tʃ");
+        aMap.put("D", "d");
+        aMap.put("DH", "ð");
+        aMap.put("DX", "?");
+        aMap.put("EH", "ɛ");
+        aMap.put("ER", "ɚ");
+        aMap.put("EY", "eɪ");
+        aMap.put("F", "f");
+        aMap.put("G", "?");
+        aMap.put("HH", "h");
+        aMap.put("IH", "ɪ");
+        aMap.put("IY", "i");
+        aMap.put("JH", "dʒ");
+        aMap.put("K", "k");
+        aMap.put("L", "l");
+        aMap.put("M", "m");
+        aMap.put("NG", "ŋ");
+        aMap.put("N", "n");
+        aMap.put("OW", "oʊ");
+        aMap.put("OY", "ɔɪ");
+        aMap.put("P", "p");
+        aMap.put("R", "ɹ");
+        aMap.put("SH", "ʃ");
+        aMap.put("S", "s");
+        aMap.put("TH", "θ");
+        aMap.put("T", "t");
+        aMap.put("UH", "ʊ");
+        aMap.put("UW", "u");
+        aMap.put("V", "v");
+        aMap.put("W", "w");
+        aMap.put("Y", "j");
+        aMap.put("ZH", "ʒ");
+        aMap.put("Z", "z");
+        arpabetMap = Collections.unmodifiableMap(aMap);
     }
 }

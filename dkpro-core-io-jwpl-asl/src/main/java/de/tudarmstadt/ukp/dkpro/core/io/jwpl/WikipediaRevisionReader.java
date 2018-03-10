@@ -33,10 +33,10 @@ import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.Revision;
  * Reads Wikipedia page revisions.
  */
 @TypeCapability(
-    outputs={
-            "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig",
-            "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-            "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision"})
+        outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig",
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision"})
 
 public class WikipediaRevisionReader extends WikipediaRevisionReaderBase
 {
@@ -45,31 +45,36 @@ public class WikipediaRevisionReader extends WikipediaRevisionReaderBase
     public void getNext(JCas jcas)
         throws IOException, CollectionException
     {
-    	super.getNext(jcas);
+        super.getNext(jcas);
 
         try {
-        	Revision revision = null;
-        	if(!revisionIds.isEmpty()){
-                //in case we iterate over a given list of revisions
-        		String nextId = revIdIterator.next();
-        		try{
-        			revision = this.revisionApi.getRevision(Integer.parseInt(nextId));
-        		}catch(Exception e){
-            		//in case of lost connection
-            		//TODO should be handled in RevisionAPI
-        			revisionApi.reconnect();
-        			revision = this.revisionApi.getRevision(Integer.parseInt(nextId));
-        		}
-            }else{
+            Revision revision = null;
+            if (!revisionIds.isEmpty()) {
+                // in case we iterate over a given list of revisions
+                String nextId = revIdIterator.next();
+                try {
+                    revision = this.revisionApi.getRevision(Integer.parseInt(nextId));
+                }
+                catch (Exception e) {
+                    // in case of lost connection
+                    // TODO should be handled in RevisionAPI
+                    revisionApi.reconnect();
+                    revision = this.revisionApi.getRevision(Integer.parseInt(nextId));
+                }
+            }
+            else {
                 //in case we iterate over ALL revisions
-            	try{
-                	revision = this.revisionApi.getRevision(currentArticle.getPageId(), timestampIter.next());
-            	}catch(Exception e){
-            		//in case of lost connection
-            		//TODO should be handled in RevisionAPI
-            		revisionApi.reconnect();
-            		revision = this.revisionApi.getRevision(currentArticle.getPageId(), timestampIter.next());
-            	}
+                try {
+                    revision = this.revisionApi.getRevision(currentArticle.getPageId(),
+                            timestampIter.next());
+                }
+                catch (Exception e) {
+                    //in case of lost connection
+                    //TODO should be handled in RevisionAPI
+                    revisionApi.reconnect();
+                    revision = this.revisionApi.getRevision(currentArticle.getPageId(),
+                            timestampIter.next());
+                }
             }
 
             String text = "";

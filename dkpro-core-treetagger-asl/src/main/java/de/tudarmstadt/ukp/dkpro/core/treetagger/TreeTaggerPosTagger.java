@@ -60,29 +60,29 @@ import de.tudarmstadt.ukp.dkpro.core.treetagger.internal.DKProExecutableResolver
 /**
  * Part-of-Speech and lemmatizer annotator using TreeTagger.
  */
-@ResourceMetaData(name="TreeTagger POS-Tagger")
+@ResourceMetaData(name = "TreeTagger POS-Tagger")
 @TypeCapability(
-	    inputs = {
-	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
-		outputs = {
-		    "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        inputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
+        outputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
 public class TreeTaggerPosTagger
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
-	/**
-	 * Use this language instead of the document language to resolve the model.
-	 */
-	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-	protected String language;
+    /**
+     * Use this language instead of the document language to resolve the model.
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    protected String language;
 
-	/**
-	 * Override the default variant used to locate the model.
-	 */
-	public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
-	protected String variant;
+    /**
+     * Override the default variant used to locate the model.
+     */
+    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+    protected String variant;
 
     /**
      * Use this TreeTagger executable instead of trying to locate the executable automatically.
@@ -91,12 +91,12 @@ public class TreeTaggerPosTagger
     @ConfigurationParameter(name = PARAM_EXECUTABLE_PATH, mandatory = false)
     private File executablePath;
     
-	/**
-	 * Load the model from this location instead of locating the model automatically.
-	 */
-	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
-	protected String modelLocation;
+    /**
+     * Load the model from this location instead of locating the model automatically.
+     */
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    protected String modelLocation;
 
     /**
      * The character encoding used by the model.
@@ -105,32 +105,33 @@ public class TreeTaggerPosTagger
     @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = false)
     protected String modelEncoding;
 
-	/**
-	 * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
-	 * the mapping automatically.
-	 */
-	public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
-	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
-	protected String posMappingLocation;
+    /**
+     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
+     * the mapping automatically.
+     */
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+    protected String posMappingLocation;
 
-	/**
-	 * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-	 * spaming the heap with thousands of strings representing only a few different tags.
-	 *
-	 * Default: {@code true}
-	 */
-	public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-	@ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-	private boolean internTags;
+    /**
+     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
+     * spaming the heap with thousands of strings representing only a few different tags.
+     *
+     * Default: {@code true}
+     */
+    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
+    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
+    private boolean internTags;
 
-	/**
-	 * Log the tag set(s) when a model is loaded.
-	 *
-	 * Default: {@code false}
-	 */
-	public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
-	protected boolean printTagSet;
+    /**
+     * Log the tag set(s) when a model is loaded.
+     *
+     * Default: {@code false}
+     */
+    public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
+    protected boolean printTagSet;
 
     /**
      * TT4J setting: Disable some sanity checks, e.g. whether tokens contain line breaks (which is
@@ -147,7 +148,7 @@ public class TreeTaggerPosTagger
      * Default: {@code true}
      */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
-    @ConfigurationParameter(name=PARAM_WRITE_POS, mandatory=true, defaultValue="true")
+    @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
     private boolean writePos;
 
     /**
@@ -156,38 +157,39 @@ public class TreeTaggerPosTagger
      * Default: {@code true}
      */
     public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
-    @ConfigurationParameter(name=PARAM_WRITE_LEMMA, mandatory=true, defaultValue="true")
+    @ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = true, defaultValue = "true")
     private boolean writeLemma;
-	
-	private CasConfigurableProviderBase<TreeTaggerWrapper<Token>> modelProvider;
-	private MappingProvider posMappingProvider;
+    
+    private CasConfigurableProviderBase<TreeTaggerWrapper<Token>> modelProvider;
+    private MappingProvider posMappingProvider;
 
-	@Override
-	public void initialize(UimaContext aContext)
-		throws ResourceInitializationException
-	{
-		super.initialize(aContext);
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
 
-		modelProvider = new ModelProviderBase<TreeTaggerWrapper<Token>>() {
-		    private TreeTaggerWrapper<Token> treetagger;
-		    
-			{
+        modelProvider = new ModelProviderBase<TreeTaggerWrapper<Token>>() {
+            private TreeTaggerWrapper<Token> treetagger;
+            
+            {
                 setContextObject(TreeTaggerPosTagger.this);
 
                 setDefault(ARTIFACT_ID, "${groupId}.treetagger-model-tagger-${language}-${variant}");
-				setDefault(LOCATION, "classpath:/${package}/lib/tagger-${language}-${variant}.properties");
+                setDefault(LOCATION, "classpath:/${package}/lib/tagger-${language}-${variant}.properties");
                 //setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-default-variants.map");
-				setDefault(VARIANT, "le"); // le = little-endian
+                setDefault(VARIANT, "le"); // le = little-endian
 
-				setOverride(LOCATION, modelLocation);
-				setOverride(LANGUAGE, language);
-				setOverride(VARIANT, variant);
-				
-				treetagger = new TreeTaggerWrapper<Token>();
-	            treetagger.setPerformanceMode(performanceMode);
-	            DKProExecutableResolver executableProvider = new DKProExecutableResolver(treetagger);
-	            executableProvider.setExecutablePath(executablePath);
-	            treetagger.setExecutableProvider(executableProvider);
+                setOverride(LOCATION, modelLocation);
+                setOverride(LANGUAGE, language);
+                setOverride(VARIANT, variant);
+                
+                treetagger = new TreeTaggerWrapper<Token>();
+                treetagger.setPerformanceMode(performanceMode);
+                DKProExecutableResolver executableProvider = new DKProExecutableResolver(
+                        treetagger);
+                executableProvider.setExecutablePath(executablePath);
+                treetagger.setExecutableProvider(executableProvider);
                 treetagger.setAdapter(new TokenAdapter<Token>()
                 {
                     @Override
@@ -198,19 +200,19 @@ public class TreeTaggerPosTagger
                         }
                     }
                 });
-			}
+            }
 
-			@Override
-			protected TreeTaggerWrapper<Token> produceResource(URL aUrl)
-			    throws IOException
-			{
-			    Properties meta = getResourceMetaData();
+            @Override
+            protected TreeTaggerWrapper<Token> produceResource(URL aUrl)
+                throws IOException
+            {
+                Properties meta = getResourceMetaData();
                 String encoding = modelEncoding != null ? modelEncoding : meta
                         .getProperty("encoding");
-			    String tagset = meta.getProperty("pos.tagset");
-			    
-			    File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
-			    
+                String tagset = meta.getProperty("pos.tagset");
+                
+                File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
+                
                 // Reconfigure tagger
                 treetagger.setModel(modelFile.getPath() + ":" + encoding);
                 
@@ -225,28 +227,28 @@ public class TreeTaggerPosTagger
                 }
 
                 return treetagger;
-			}
-		};
+            }
+        };
 
         posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
                 language, modelProvider);
-	}
+    }
 
-	@Override
-	public void process(final JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
-		final CAS cas = aJCas.getCas();
+    @Override
+    public void process(final JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
+        final CAS cas = aJCas.getCas();
 
-		modelProvider.configure(cas);
-		posMappingProvider.configure(cas);
-		
-		TreeTaggerWrapper<Token> treetagger = modelProvider.getResource();
+        modelProvider.configure(cas);
+        posMappingProvider.configure(cas);
+        
+        TreeTaggerWrapper<Token> treetagger = modelProvider.getResource();
 
         try {
             List<Token> tokens = new ArrayList<Token>(select(aJCas, Token.class));
-            final POS pos[] = new POS[tokens.size()];
-            final Lemma lemma[] = new Lemma[tokens.size()];
+            final POS[] pos = new POS[tokens.size()];
+            final Lemma[] lemma = new Lemma[tokens.size()];
 
             // Set the handler creating new UIMA annotations from the analyzed
             // tokens
@@ -297,6 +299,6 @@ public class TreeTaggerPosTagger
         }
         catch (IOException e) {
             throw new AnalysisEngineProcessException(e);
-        }		
-	}
+        }
+    }
 }

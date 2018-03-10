@@ -41,7 +41,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 
-@ResourceMetaData(name="CLARINO LAP LXF Writer")
+@ResourceMetaData(name = "CLARINO LAP LXF Writer")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_LXF_JSON})
 @TypeCapability(
         inputs = { 
@@ -58,7 +58,8 @@ public class LxfWriter
      * Specify the suffix of output files. Default value <code>.lxf</code>. If the suffix is not
      * needed, provide an empty string as value.
      */
-    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".lxf")
     private String filenameSuffix;
 
@@ -87,7 +88,8 @@ public class LxfWriter
         
         if (delta) {
             DocumentMetaData dmd = DocumentMetaData.get(aJCas);
-            try (InputStream is = new BufferedInputStream(new URL(dmd.getDocumentUri()).openStream())) {
+            try (InputStream is = new BufferedInputStream(
+                    new URL(dmd.getDocumentUri()).openStream())) {
                 LxfGraph reference = mapper.readValue(is, LxfGraph.class);
                 DKPro2Lxf.convert(aJCas, reference, lxf);
             }

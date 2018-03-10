@@ -25,6 +25,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -62,7 +63,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
  * 
  * @see <a href="http://universaldependencies.github.io/docs/format.html">CoNLL-U Format</a>
  */
-@ResourceMetaData(name="CoNLL-U Reader")
+@ResourceMetaData(name = "CoNLL-U Reader")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_U})
 @TypeCapability(
         outputs = { 
@@ -77,7 +78,8 @@ public class ConllUReader
     extends JCasResourceCollectionReader_ImplBase
 {
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
 
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
@@ -105,7 +107,8 @@ public class ConllUReader
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
     
@@ -168,10 +171,10 @@ public class ConllUReader
         throws IOException
     {
         if (readPos) {
-            try{
+            try {
                 posMappingProvider.configure(aJCas.getCas());
             }
-            catch(AnalysisEngineProcessException e){
+            catch (AnalysisEngineProcessException e) {
                 throw new IOException(e);
             }
         }

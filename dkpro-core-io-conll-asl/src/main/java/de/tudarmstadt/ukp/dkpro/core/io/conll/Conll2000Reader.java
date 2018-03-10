@@ -58,7 +58,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
  * 
  * @see <a href="http://www.cnts.ua.ac.be/conll2000/chunking/">CoNLL 2000 shared task</a>
  */
-@ResourceMetaData(name="CoNLL 2000 Reader")
+@ResourceMetaData(name = "CoNLL 2000 Reader")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2000})
 @TypeCapability(
         outputs = { 
@@ -77,7 +77,8 @@ public class Conll2000Reader
      * Character encoding of the input data.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
 
     /**
@@ -112,7 +113,8 @@ public class Conll2000Reader
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
@@ -138,7 +140,8 @@ public class Conll2000Reader
      * Load the chunk tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_CHUNK_MAPPING_LOCATION = ComponentParameters.PARAM_CHUNK_MAPPING_LOCATION;
+    public static final String PARAM_CHUNK_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_CHUNK_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CHUNK_MAPPING_LOCATION, mandatory = false)
     protected String chunkMappingLocation;
     
@@ -154,8 +157,8 @@ public class Conll2000Reader
         posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
                 posTagset, getLanguage());
 
-        chunkMappingProvider = MappingProviderFactory.createChunkMappingProvider(chunkMappingLocation,
-                chunkTagset, getLanguage());
+        chunkMappingProvider = MappingProviderFactory
+                .createChunkMappingProvider(chunkMappingLocation, chunkTagset, getLanguage());
     }
     
     @Override

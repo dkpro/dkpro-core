@@ -67,7 +67,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * Read AnCora XML format.
  */
-@ResourceMetaData(name="AnCora XML Reader")
+@ResourceMetaData(name = "AnCora XML Reader")
 @MimeTypeCapability({MimeTypes.APPLICATION_XML, MimeTypes.APPLICATION_X_ANCORA_XML})
 @TypeCapability(
         outputs = {
@@ -110,7 +110,8 @@ public class AncoraReader
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String mappingPosLocation;
 
@@ -124,11 +125,13 @@ public class AncoraReader
     protected String posTagset;
     
     public static final String PARAM_SPLIT_MULTI_WORD_TOKENS = "splitMultiWordTokens";
-    @ConfigurationParameter(name = PARAM_SPLIT_MULTI_WORD_TOKENS, mandatory = true, defaultValue="true")
+    @ConfigurationParameter(name = PARAM_SPLIT_MULTI_WORD_TOKENS, mandatory = true, 
+            defaultValue = "true")
     protected boolean splitMultiWordTokens;
 
     public static final String PARAM_DROP_SENTENCES_WITH_MISSING_POS = "dropSentencesMissingPosTags";
-    @ConfigurationParameter(name = PARAM_DROP_SENTENCES_WITH_MISSING_POS, mandatory = true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_DROP_SENTENCES_WITH_MISSING_POS, mandatory = true, 
+            defaultValue = "false")
     protected boolean dropSentencesMissingPosTags;
     
     private MappingProvider posMappingProvider;
@@ -335,7 +338,7 @@ public class AncoraReader
                 sentenceStart = getBuffer().length();
             }
             else if (wd != null && sentenceStart == -1) {
-                getLogger().info("Ignoring token outside sentence boundaries: ["+wd+"]");
+                getLogger().info("Ignoring token outside sentence boundaries: [" + wd + "]");
             }
             else if (wd != null && sentenceStart != -1) {
                 String posTag = aAttributes.getValue(ATTR_POS);

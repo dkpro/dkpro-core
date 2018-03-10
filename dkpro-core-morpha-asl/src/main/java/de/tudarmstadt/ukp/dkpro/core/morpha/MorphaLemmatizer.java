@@ -45,7 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * processing of English, Natural Language Engineering, 7(3). 207-223.</li>
  * </ul>
  */
-@ResourceMetaData(name="Morpha Lemmatizer")
+@ResourceMetaData(name = "Morpha Lemmatizer")
 @LanguageCapability("en")
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -62,7 +62,7 @@ public class MorphaLemmatizer
      * so this is disabled by default.
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
-    @ConfigurationParameter(name=PARAM_READ_POS, mandatory=true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "false")
     private boolean readPos;
 
     @Override

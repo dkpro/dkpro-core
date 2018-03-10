@@ -48,7 +48,7 @@ public class HdfsResourceLoaderLocatorTest
     // Need to use this for a proper temporary folder because otherwise we get an error if
     // the tests runs within some folder that has percentage signs in its path...
     @Rule
-    public TemporaryFolder folder= new TemporaryFolder();
+    public TemporaryFolder folder = new TemporaryFolder();
     
     private MiniDFSCluster hdfsCluster;
     

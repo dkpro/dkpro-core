@@ -51,7 +51,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * This Paice/Husk Lancaster stemmer implementation only works with the English language so far.
  */
-@ResourceMetaData(name="Lancaster Stemmer")
+@ResourceMetaData(name = "Lancaster Stemmer")
 @LanguageCapability("en")
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
@@ -89,8 +89,8 @@ public class LancasterStemmer
     protected String language;
 
     /**
-     * The stemmer only has to be initialized once since it's used like a pure function with the given
-     * configuration parameters.
+     * The stemmer only has to be initialized once since it's used like a pure function with the
+     * given configuration parameters.
      */
     private smile.nlp.stemmer.LancasterStemmer stemmer;
 

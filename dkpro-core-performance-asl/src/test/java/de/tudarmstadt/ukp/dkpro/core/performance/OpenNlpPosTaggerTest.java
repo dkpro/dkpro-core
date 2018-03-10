@@ -29,38 +29,31 @@ import de.tudarmstadt.ukp.dkpro.core.io.tei.TeiReader;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
-/**
- *
- */
 public class OpenNlpPosTaggerTest
 {
-	@Ignore
+    @Ignore
     @Test
-    public void performanceTest()
-        throws Exception
+    public void performanceTest() throws Exception
     {
-    	SimplePipeline.runPipeline(
-			createReader(
-	                TeiReader.class,
-	                TeiReader.PARAM_LANGUAGE, "en",
-	                TeiReader.PARAM_SOURCE_LOCATION, "src/test/resources/corpus/",
-	                TeiReader.PARAM_PATTERNS, new String[] {INCLUDE_PREFIX + "*.xml"}
-	        ),
-	        createEngineDescription(
-	        		createEngineDescription(
-	                        Stopwatch.class,
-	                        Stopwatch.PARAM_TIMER_NAME, "testTimer"
-	                ),
-	                createEngineDescription(
-	                        BreakIteratorSegmenter.class),
-	                createEngineDescription(
-	                        OpenNlpPosTagger.class),
-	                createEngineDescription(
-	                        Stopwatch.class,
-	                        Stopwatch.PARAM_TIMER_NAME, "testTimer",
-	                        Stopwatch.PARAM_OUTPUT_FILE, "target/result.txt"
-	                )
-	        )
+        SimplePipeline.runPipeline(
+            createReader(
+                    TeiReader.class,
+                    TeiReader.PARAM_LANGUAGE, "en",
+                    TeiReader.PARAM_SOURCE_LOCATION, "src/test/resources/corpus/",
+                    TeiReader.PARAM_PATTERNS, new String[] {INCLUDE_PREFIX + "*.xml"}),
+            createEngineDescription(
+                    createEngineDescription(
+                            Stopwatch.class,
+                            Stopwatch.PARAM_TIMER_NAME, "testTimer"),
+                    createEngineDescription(
+                            BreakIteratorSegmenter.class),
+                    createEngineDescription(
+                            OpenNlpPosTagger.class),
+                    createEngineDescription(
+                            Stopwatch.class,
+                            Stopwatch.PARAM_TIMER_NAME, "testTimer",
+                            Stopwatch.PARAM_OUTPUT_FILE, "target/result.txt")
+            )
         );
     }
 }

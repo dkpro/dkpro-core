@@ -18,13 +18,14 @@
 package org.dkpro.core.udpipe.internal;
 
 import java.io.IOException;
+
 import cz.cuni.mff.ufal.udpipe.udpipe_java;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.RuntimeProvider;
 
 public class UDPipeUtils
 {
     private static boolean initialized = false;
-    
+
     public static void init() throws IOException
     {
         if (initialized) {

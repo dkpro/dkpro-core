@@ -18,9 +18,9 @@
 
 package de.tudarmstadt.ukp.dkpro.core.decompounding.ranking;
 
-import java.io.IOException;
+import static org.junit.Assert.assertEquals;
 
-import junit.framework.Assert;
+import java.io.IOException;
 
 import org.junit.Test;
 
@@ -32,8 +32,7 @@ public class DummyRankerTest
 {
 
     @Test
-    public void testRankTree()
-        throws IOException
+    public void testRankTree() throws IOException
     {
         DummyRanker ranker = new DummyRanker();
 
@@ -46,7 +45,6 @@ public class DummyRankerTest
         tree.getRoot().addChild(new ValueNode<DecompoundedWord>(s3));
 
         DecompoundedWord result = ranker.highestRank(tree);
-        Assert.assertEquals(s3, result);
+        assertEquals(s3, result);
     }
-
 }

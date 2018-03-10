@@ -85,7 +85,8 @@ public class BratConfiguration
     }
     
     private void write(Writer aWriter, int aDepth, BratAnnotationDecl aDecl,
-            Map<String, ? extends BratAnnotationDecl> aAll, Collection<BratAnnotationDecl> aRendered)
+            Map<String, ? extends BratAnnotationDecl> aAll,
+            Collection<BratAnnotationDecl> aRendered)
         throws IOException
     {
         // Avoid rendering the same declaration multiple times

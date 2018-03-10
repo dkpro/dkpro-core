@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2007-2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -18,27 +18,9 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.IobEncoder;
-import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import edu.stanford.nlp.ie.crf.CRFClassifier;
-import edu.stanford.nlp.ling.CoreLabel;
-import edu.stanford.nlp.sequences.SeqClassifierFlags;
-import org.apache.commons.io.IOUtils;
-import org.apache.uima.UimaContext;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.Feature;
-import org.apache.uima.cas.Type;
-import org.apache.uima.fit.component.JCasConsumer_ImplBase;
-import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.fit.descriptor.MimeTypeCapability;
-import org.apache.uima.fit.descriptor.ResourceMetaData;
-import org.apache.uima.fit.util.JCasUtil;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ResourceInitializationException;
+import static org.apache.uima.fit.util.JCasUtil.indexCovered;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -57,9 +39,28 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.regex.Pattern;
 
-import static org.apache.uima.fit.util.JCasUtil.indexCovered;
-import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+import org.apache.commons.io.IOUtils;
+import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.Feature;
+import org.apache.uima.cas.Type;
+import org.apache.uima.fit.component.JCasConsumer_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.apache.uima.fit.util.JCasUtil;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
+
+import de.tudarmstadt.ukp.dkpro.core.api.io.IobEncoder;
+import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import edu.stanford.nlp.ie.crf.CRFClassifier;
+import edu.stanford.nlp.ling.CoreLabel;
+import edu.stanford.nlp.sequences.SeqClassifierFlags;
 
 /**
  * Train a NER model for Stanford CoreNLP Named Entity Recognizer.
@@ -86,10 +87,11 @@ public class StanfordNamedEntityRecognizerTrainer
     private File propertiesFile;
 
     /**
-     * Regex to filter the {@link de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity#getValue() named entity} by
-     * type.
+     * Regex to filter the {@link de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity#getValue()
+     * named entity} by type.
      */
-    public static final String PARAM_ACCEPTED_TAGS_REGEX = ComponentParameters.PARAM_ACCEPTED_TAGS_REGEX;
+    public static final String PARAM_ACCEPTED_TAGS_REGEX = 
+            ComponentParameters.PARAM_ACCEPTED_TAGS_REGEX;
     @ConfigurationParameter(name = PARAM_ACCEPTED_TAGS_REGEX, mandatory = false)
     protected String acceptedTagsRegex;
 
@@ -184,7 +186,8 @@ public class StanfordNamedEntityRecognizerTrainer
     }
 
     private Map<Sentence, Collection<NamedEntity>> getNamedEntityIndex(JCas aJCas) {
-        Map<Sentence, Collection<NamedEntity>> idx = indexCovered(aJCas, Sentence.class, NamedEntity.class);
+        Map<Sentence, Collection<NamedEntity>> idx = indexCovered(aJCas, Sentence.class,
+                NamedEntity.class);
 
         if (acceptedTagsRegex != null) {
             Pattern pattern = Pattern.compile(acceptedTagsRegex);

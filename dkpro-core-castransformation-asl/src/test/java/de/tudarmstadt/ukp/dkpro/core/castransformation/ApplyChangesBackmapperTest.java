@@ -17,13 +17,13 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.castransformation;
 
-import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
-import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
-import de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiWriter;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import de.tudarmstadt.ukp.dkpro.core.testing.EOLUtils;
-import de.tudarmstadt.ukp.dkpro.core.testing.dumper.CasDumpWriter;
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.junit.Assert.assertEquals;
+
+import java.io.File;
+import java.io.FileWriter;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -39,12 +39,13 @@ import org.apache.uima.jcas.cas.AnnotationBase;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.io.File;
-import java.io.FileWriter;
-
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertEquals;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
+import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
+import de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiWriter;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import de.tudarmstadt.ukp.dkpro.core.testing.EOLUtils;
+import de.tudarmstadt.ukp.dkpro.core.testing.dumper.CasDumpWriter;
+import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 public class ApplyChangesBackmapperTest
 {

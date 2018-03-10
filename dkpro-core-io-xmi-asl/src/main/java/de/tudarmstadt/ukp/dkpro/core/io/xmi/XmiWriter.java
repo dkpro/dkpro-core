@@ -23,7 +23,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CASRuntimeException;
@@ -38,55 +37,57 @@ import org.apache.uima.util.TypeSystemUtil;
 import org.xml.sax.SAXException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 
 /**
  * UIMA XMI format writer.
  */
-@ResourceMetaData(name="UIMA XMI CAS Writer")
+@ResourceMetaData(name = "UIMA XMI CAS Writer")
 @MimeTypeCapability({MimeTypes.APPLICATION_VND_XMI_XML, MimeTypes.APPLICATION_X_UIMA_XMI})
 @TypeCapability(
-        inputs={
+        inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
 public class XmiWriter
-	extends JCasFileWriter_ImplBase
+    extends JCasFileWriter_ImplBase
 {
     public static final String PARAM_PRETTY_PRINT = "prettyPrint";
     @ConfigurationParameter(name = PARAM_PRETTY_PRINT, mandatory = true, defaultValue = "true")
     private boolean prettyPrint;
     
-	/**
-	 * Location to write the type system to. If this is not set, a file called typesystem.xml will
-	 * be written to the XMI output path. If this is set, it is expected to be a file relative
-	 * to the current work directory or an absolute file.
-	 * <br>
-	 * If this parameter is set, the {@link #PARAM_COMPRESSION} parameter has no effect on the
-	 * type system. Instead, if the file name ends in ".gz", the file will be compressed,
-	 * otherwise not.
-	 */
-	public static final String PARAM_TYPE_SYSTEM_FILE = "typeSystemFile";
-	@ConfigurationParameter(name=PARAM_TYPE_SYSTEM_FILE, mandatory=false)
-	private File typeSystemFile;
+    /**
+     * Location to write the type system to. If this is not set, a file called typesystem.xml will
+     * be written to the XMI output path. If this is set, it is expected to be a file relative
+     * to the current work directory or an absolute file.
+     * <br>
+     * If this parameter is set, the {@link #PARAM_COMPRESSION} parameter has no effect on the
+     * type system. Instead, if the file name ends in ".gz", the file will be compressed,
+     * otherwise not.
+     */
+    public static final String PARAM_TYPE_SYSTEM_FILE = "typeSystemFile";
+    @ConfigurationParameter(name = PARAM_TYPE_SYSTEM_FILE, mandatory = false)
+    private File typeSystemFile;
 
-	/**
-	 * Specify the suffix of output files. Default value <code>.xmi</code>. If the suffix is not
-	 * needed, provide an empty string as value.
-	 */
-	public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
-	@ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xmi")
-	private String filenameSuffix;
+    /**
+     * Specify the suffix of output files. Default value <code>.xmi</code>. If the suffix is not
+     * needed, provide an empty string as value.
+     */
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
+    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xmi")
+    private String filenameSuffix;
 
-	private boolean typeSystemWritten;
+    private boolean typeSystemWritten;
 
-	@Override
-	public void initialize(UimaContext aContext)
-		throws ResourceInitializationException
-	{
-		super.initialize(aContext);
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
 
-		typeSystemWritten = false;
-	}
+        typeSystemWritten = false;
+    }
 
     @Override
     public void process(JCas aJCas)
@@ -108,21 +109,21 @@ public class XmiWriter
     private void writeTypeSystem(JCas aJCas)
         throws IOException, CASRuntimeException, SAXException
     {
-		@SuppressWarnings("resource")
+        @SuppressWarnings("resource")
         OutputStream typeOS = null;
-		
+        
         try {
-    		if (typeSystemFile != null) {
-    		    typeOS = CompressionUtils.getOutputStream(typeSystemFile);
-    		}
-    		else {
-    		    typeOS = getOutputStream("TypeSystem", ".xml");
-    		}
+            if (typeSystemFile != null) {
+                typeOS = CompressionUtils.getOutputStream(typeSystemFile);
+            }
+            else {
+                typeOS = getOutputStream("TypeSystem", ".xml");
+            }
 
-			TypeSystemUtil.typeSystem2TypeSystemDescription(aJCas.getTypeSystem()).toXML(typeOS);
-		}
-		finally {
-			closeQuietly(typeOS);
-		}
-	}
+            TypeSystemUtil.typeSystem2TypeSystemDescription(aJCas.getTypeSystem()).toXML(typeOS);
+        }
+        finally {
+            closeQuietly(typeOS);
+        }
+    }
 }

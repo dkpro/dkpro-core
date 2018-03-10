@@ -112,7 +112,7 @@ public class FinderTest
         }
 
         index.delete();
-	}
+    }
     
     @Rule
     public DkproTestContext testContext = new DkproTestContext();

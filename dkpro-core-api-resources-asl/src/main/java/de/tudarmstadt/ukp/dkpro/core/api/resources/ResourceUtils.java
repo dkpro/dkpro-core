@@ -40,6 +40,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.resource.ResourceAccessException;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 
 /**
  * @since 1.1.0
@@ -93,7 +94,7 @@ public class ResourceUtils
         synchronized (classpathFolderCache) {
             File folder = classpathFolderCache.get(aClasspathBase);
 
-            PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+            ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
             if (!aCache || (folder == null) || !folder.exists()) {
                 folder = File.createTempFile("dkpro-package", "");

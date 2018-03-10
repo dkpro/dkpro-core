@@ -1,6 +1,4 @@
-package de.tudarmstadt.ukp.dkpro.core.arktools;
-
-/**
+/*
  * Copyright 2007-2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -18,6 +16,7 @@ package de.tudarmstadt.ukp.dkpro.core.arktools;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
+package de.tudarmstadt.ukp.dkpro.core.arktools;
 
 import java.io.IOException;
 import java.net.URL;
@@ -59,7 +58,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * and Noah A. Smith. Improved Part-of-Speech Tagging for Online Conversational Text with Word
  * Clusters In Proceedings of NAACL 2013.
  */
-@ResourceMetaData(name="ArkTweet POS-Tagger")
+@ResourceMetaData(name = "ArkTweet POS-Tagger")
 @TypeCapability(
       inputs = { 
           "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 
@@ -94,7 +93,8 @@ public class ArktweetPosTagger
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 

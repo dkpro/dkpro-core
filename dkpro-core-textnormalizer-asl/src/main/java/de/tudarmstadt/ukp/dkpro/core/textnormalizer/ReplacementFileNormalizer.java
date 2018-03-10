@@ -46,7 +46,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
  * Takes a text and replaces desired expressions. This class should not work on tokens as some
  * expressions might span several tokens.
  */
-@ResourceMetaData(name="Replacement File Normalizer")
+@ResourceMetaData(name = "Replacement File Normalizer")
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 
         outputs = { "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" })

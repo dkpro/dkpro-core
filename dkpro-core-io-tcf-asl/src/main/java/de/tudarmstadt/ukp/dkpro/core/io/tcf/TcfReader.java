@@ -34,6 +34,7 @@ import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
+
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
@@ -63,7 +64,7 @@ import eu.clarin.weblicht.wlfxb.xb.WLData;
  * tokens and stored in a map (token_id, token(CAS object)) where later we get can get the offset
  * from the token
  */
-@ResourceMetaData(name="CLARIN-DE WebLicht TCF Reader")
+@ResourceMetaData(name = "CLARIN-DE WebLicht TCF Reader")
 @MimeTypeCapability({MimeTypes.TEXT_TCF})
 @TypeCapability(outputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
@@ -367,11 +368,14 @@ public class TcfReader
     /**
      * Correferences in CAS should be represented {@link CoreferenceChain} and
      * {@link CoreferenceLink}. The TCF representation Uses <b> rel </b> and <b>target </b> to build
-     * chains. Example: </br><i>
-     * {@literal  <entity><reference ID="rc_0" tokenIDs="t_0" mintokIDs="t_0" type="nam"/> } </br>
-     * {@literal <reference ID="rc_1" tokenIDs="t_6" mintokIDs="t_6" type="pro.per3" rel="anaphoric" target="rc_0"/></entity>
-     * }</i> </br> The first phase of conversion is getting all <b>references</b> and
-     * <b>targets</b> alongside the <b>type</b> and <b>relations in different maps</b> <br>
+     * chains. Example: </br>
+     * <i> {@literal  <entity><reference ID="rc_0" tokenIDs="t_0" mintokIDs="t_0" type="nam"/> }
+     * </br>
+     * {@literal <reference ID="rc_1" tokenIDs="t_6" mintokIDs="t_6" type="pro.per3" rel=
+     * "anaphoric" target="rc_0"/></entity>
+     * }</i> </br>
+     * The first phase of conversion is getting all <b>references</b> and <b>targets</b> alongside
+     * the <b>type</b> and <b>relations in different maps</b> <br>
      * Second, an iteration is made through all the maps and the {@link CoreferenceChain} and
      * {@link CoreferenceLink} annotations are constructed.
      * 
@@ -407,7 +411,8 @@ public class TcfReader
                 else {
                     link.setNext(referencesMap.get(address));
                     if (link.getReferenceRelation() == null) {
-                        link.setReferenceRelation(referencesMap.get(address).getReferenceRelation());
+                        link.setReferenceRelation(
+                                referencesMap.get(address).getReferenceRelation());
                     }
                     link = link.getNext();
                     link.addToIndexes();

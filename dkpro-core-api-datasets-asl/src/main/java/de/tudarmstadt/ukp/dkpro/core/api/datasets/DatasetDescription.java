@@ -30,7 +30,7 @@ public interface DatasetDescription
     String getId();
 
     String getLanguage();
-    
+
     String getEncoding();
 
     Map<String, List<String>> getRoles();

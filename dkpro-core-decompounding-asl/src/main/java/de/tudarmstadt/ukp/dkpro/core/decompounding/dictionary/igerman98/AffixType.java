@@ -23,5 +23,5 @@ package de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.igerman98;
  */
 public enum AffixType
 {
-	PREFIX, SUFFIX
+    PREFIX, SUFFIX
 }

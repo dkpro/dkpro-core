@@ -91,9 +91,7 @@ public class OpenNlpPosTaggerTrainerTest
                 OpenNlpPosTagger.PARAM_MODEL_LOCATION, new File(targetFolder, "model.bin"));
 
         List<Span<String>> actual = EvalUtil.loadSamples(iteratePipeline(testReader, postagger),
-                POS.class, pos -> {
-                    return pos.getPosValue();
-                });
+                POS.class, pos -> pos.getPosValue());
         System.out.printf("Actual samples: %d%n", actual.size());
         
         // Read reference data collect labels

@@ -23,15 +23,10 @@ import org.junit.Test;
 
 public class Web1TInMemoryFrequencyProviderTest
 {
-
     @Test
     public void web1tTestInMemoryTest() throws Exception
     {
-        Web1TProviderBase web1t = new Web1TInMemoryProvider(
-        		"en",
-                "src/test/resources/web1t/",
-                2
-        );
+        Web1TProviderBase web1t = new Web1TInMemoryProvider("en", "src/test/resources/web1t/", 2);
 
         assertEquals(2147436244l, web1t.getFrequency("!"));
         assertEquals(528,         web1t.getFrequency("Nilmeier"));

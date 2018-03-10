@@ -117,7 +117,7 @@ public class BratAttribute
         Matcher m = PATTERN.matcher(aLine);
         
         if (!m.matches()) {
-            throw new IllegalArgumentException("Illegal attribute format ["+aLine+"]");
+            throw new IllegalArgumentException("Illegal attribute format [" + aLine + "]");
         }
 
         String values = m.group(VALUES);

@@ -37,7 +37,7 @@ import de.tudarmstadt.ukp.dkpro.core.type.ReadabilityScore;
 /**
  * Assign a set of popular readability scores to the text.
  */
-@ResourceMetaData(name="Readability Annotator")
+@ResourceMetaData(name = "Readability Annotator")
 public class ReadabilityAnnotator 
     extends JCasAnnotator_ImplBase
 {

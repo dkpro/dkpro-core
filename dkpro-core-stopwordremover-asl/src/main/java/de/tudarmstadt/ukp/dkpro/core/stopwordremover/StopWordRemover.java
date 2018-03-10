@@ -61,26 +61,26 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * Remove all of the specified types from the CAS if their covered text is in the stop word
  * dictionary. Also remove any other of the specified types that is covered by a matching instance.
  */
-@ResourceMetaData(name="Stop Word Remover")
+@ResourceMetaData(name = "Stop Word Remover")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.StopWord" })
 public class StopWordRemover
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
-	// VIEW NAMES
-	private static final String TOPIC_VIEW = "topic";
-	private static final String DOC_VIEW = "doc";
+    // VIEW NAMES
+    private static final String TOPIC_VIEW = "topic";
+    private static final String DOC_VIEW = "doc";
 
-	/**
-	 * A list of URLs from which to load the stop word lists. If an URL is prefixed with a language
-	 * code in square brackets, the stop word list is only used for documents in that language.
-	 * Using no prefix or the prefix "[*]" causes the list to be used for every document.
-	 * Example: "[de]classpath:/stopwords/en_articles.txt"
-	 */
-	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
-	private Set<String> swFileNames;
+    /**
+     * A list of URLs from which to load the stop word lists. If an URL is prefixed with a language
+     * code in square brackets, the stop word list is only used for documents in that language.
+     * Using no prefix or the prefix "[*]" causes the list to be used for every document.
+     * Example: "[de]classpath:/stopwords/en_articles.txt"
+     */
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
+    private Set<String> swFileNames;
 
     /**
      * The character encoding used by the model.
@@ -89,233 +89,233 @@ public class StopWordRemover
     @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue = "UTF-8")
     private String modelEncoding;
 
-	/**
-	 * Feature paths for annotations that should be matched/removed. The default is
-	 *
-	 * <pre>
-	 * StopWord.class.getName()
-	 * Token.class.getName()
-	 * Lemma.class.getName()+"/value"
-	 * </pre>
-	 */
-	public static final String PARAM_PATHS = "Paths";
-	@ConfigurationParameter(name = PARAM_PATHS, mandatory = false)
-	private Set<String> paths;
+    /**
+     * Feature paths for annotations that should be matched/removed. The default is
+     *
+     * <pre>
+     * StopWord.class.getName()
+     * Token.class.getName()
+     * Lemma.class.getName()+"/value"
+     * </pre>
+     */
+    public static final String PARAM_PATHS = "Paths";
+    @ConfigurationParameter(name = PARAM_PATHS, mandatory = false)
+    private Set<String> paths;
 
-	/**
-	 * Anything annotated with this type will be removed even if it does not match any word in the
-	 * lists.
-	 */
-	public static final String PARAM_STOP_WORD_TYPE = "StopWordType";
-	@ConfigurationParameter(name = PARAM_STOP_WORD_TYPE, mandatory = false)
-	private String stopWordType;
+    /**
+     * Anything annotated with this type will be removed even if it does not match any word in the
+     * lists.
+     */
+    public static final String PARAM_STOP_WORD_TYPE = "StopWordType";
+    @ConfigurationParameter(name = PARAM_STOP_WORD_TYPE, mandatory = false)
+    private String stopWordType;
 
-	private Map<String, StopWordSet> stopWordSets;
+    private Map<String, StopWordSet> stopWordSets;
 
-	@Override
-	public void initialize(UimaContext context)
-		throws ResourceInitializationException
-	{
-		super.initialize(context);
+    @Override
+    public void initialize(UimaContext context)
+        throws ResourceInitializationException
+    {
+        super.initialize(context);
 
-		// Set default paths. This cannot be done in the annotation because we cannot call
-		// methods there.
-		if (paths == null || paths.size() == 0) {
-			paths = new HashSet<String>();
-			paths.add(StopWord.class.getName());
-			paths.add(Token.class.getName());
-			paths.add(Lemma.class.getName()+"/value");
-		}
+        // Set default paths. This cannot be done in the annotation because we cannot call
+        // methods there.
+        if (paths == null || paths.size() == 0) {
+            paths = new HashSet<String>();
+            paths.add(StopWord.class.getName());
+            paths.add(Token.class.getName());
+            paths.add(Lemma.class.getName() + "/value");
+        }
 
-		// Set default stop word type. This cannot be done in the annotation because we cannot call
-		// methods there.
-		if (stopWordType == null) {
-			stopWordType = StopWord.class.getName();
-		}
+        // Set default stop word type. This cannot be done in the annotation because we cannot call
+        // methods there.
+        if (stopWordType == null) {
+            stopWordType = StopWord.class.getName();
+        }
 
-		try {
-			stopWordSets = new HashMap<String, StopWordSet>();
-			for (String swFileName : swFileNames) {
-				String fileLocale = "*";
-				// Check if a locale is defined for the file
-				if (swFileName.startsWith("[")) {
-					fileLocale = swFileName.substring(1, swFileName.indexOf(']'));
-					swFileName = swFileName.substring(swFileName.indexOf(']')+1);
-				}
+        try {
+            stopWordSets = new HashMap<String, StopWordSet>();
+            for (String swFileName : swFileNames) {
+                String fileLocale = "*";
+                // Check if a locale is defined for the file
+                if (swFileName.startsWith("[")) {
+                    fileLocale = swFileName.substring(1, swFileName.indexOf(']'));
+                    swFileName = swFileName.substring(swFileName.indexOf(']') + 1);
+                }
 
-				// Fetch the set for the specified locale
-				StopWordSet set = stopWordSets.get(fileLocale);
-				if (set == null) {
-					set = new StopWordSet();
-					stopWordSets.put(fileLocale, set);
-				}
+                // Fetch the set for the specified locale
+                StopWordSet set = stopWordSets.get(fileLocale);
+                if (set == null) {
+                    set = new StopWordSet();
+                    stopWordSets.put(fileLocale, set);
+                }
 
-				// Load the set
-				URL source = resolveLocation(swFileName, this, context);
-				InputStream is = null;
-				try {
-				    is = source.openStream();
-				    set.load(is, modelEncoding);
-				}
-				finally {
-				    closeQuietly(is);
-				}
+                // Load the set
+                URL source = resolveLocation(swFileName, this, context);
+                InputStream is = null;
+                try {
+                    is = source.openStream();
+                    set.load(is, modelEncoding);
+                }
+                finally {
+                    closeQuietly(is);
+                }
 
                 getLogger().info(
                         "Loaded stopwords for locale [" + fileLocale + "] from [" + source + "]");
-			}
-		}
-		catch (IOException e1) {
-			throw new ResourceInitializationException(e1);
-		}
-	}
+            }
+        }
+        catch (IOException e1) {
+            throw new ResourceInitializationException(e1);
+        }
+    }
 
-	@Override
-	public void process(JCas jcas)
-		throws AnalysisEngineProcessException
-	{
-		JCas doc = getView(jcas, DOC_VIEW, null);
-		JCas topic = getView(jcas, TOPIC_VIEW, null);
+    @Override
+    public void process(JCas jcas)
+        throws AnalysisEngineProcessException
+    {
+        JCas doc = getView(jcas, DOC_VIEW, null);
+        JCas topic = getView(jcas, TOPIC_VIEW, null);
 
-		try {
-			if (doc != null) {
-				check(doc);
-			}
+        try {
+            if (doc != null) {
+                check(doc);
+            }
 
-			if (topic != null) {
-				check(topic);
-			}
+            if (topic != null) {
+                check(topic);
+            }
 
-			if (topic == null && doc == null) {
-				check(jcas);
-			}
-		}
-		catch (FeaturePathException e) {
-			throw new AnalysisEngineProcessException(e);
-		}
-	}
+            if (topic == null && doc == null) {
+                check(jcas);
+            }
+        }
+        catch (FeaturePathException e) {
+            throw new AnalysisEngineProcessException(e);
+        }
+    }
 
-	private void check(JCas aJCas)
-		throws FeaturePathException
-	{
-		Logger log = getContext().getLogger();
+    private void check(JCas aJCas)
+        throws FeaturePathException
+    {
+        Logger log = getContext().getLogger();
 
-		Locale casLocale = new Locale(aJCas.getDocumentLanguage());
-		StopWordSet anyLocaleSet = stopWordSets.get("*");
-		StopWordSet casLocaleSet = stopWordSets.get(aJCas.getDocumentLanguage());
+        Locale casLocale = new Locale(aJCas.getDocumentLanguage());
+        StopWordSet anyLocaleSet = stopWordSets.get("*");
+        StopWordSet casLocaleSet = stopWordSets.get(aJCas.getDocumentLanguage());
 
-		// Now really to the removal part
-		FeaturePathInfo fp = new FeaturePathInfo();
-		for (String path : paths) {
-			// Create a sorted list of annotations that we can quickly search on
-			AnnotationFS[] candidates = getCandidates(aJCas);
+        // Now really to the removal part
+        FeaturePathInfo fp = new FeaturePathInfo();
+        for (String path : paths) {
+            // Create a sorted list of annotations that we can quickly search on
+            AnnotationFS[] candidates = getCandidates(aJCas);
 
-			// Initialize list of annotations to remove
-			List<AnnotationFS> toRemove = new ArrayList<AnnotationFS>();
+            // Initialize list of annotations to remove
+            List<AnnotationFS> toRemove = new ArrayList<AnnotationFS>();
 
-			// Separate Typename and featurepath
-			String[] segments = path.split("/", 2);
+            // Separate Typename and featurepath
+            String[] segments = path.split("/", 2);
 
-			String typeName = segments[0];
-			boolean isStopWordType = stopWordType.equals(typeName);
-			Type t = aJCas.getTypeSystem().getType(typeName);
-			if (t == null) {
-				throw new IllegalStateException("Type [" + typeName + "] not found in type system");
-			}
+            String typeName = segments[0];
+            boolean isStopWordType = stopWordType.equals(typeName);
+            Type t = aJCas.getTypeSystem().getType(typeName);
+            if (t == null) {
+                throw new IllegalStateException("Type [" + typeName + "] not found in type system");
+            }
 
-			// initialize the FeaturePathInfo with the corresponding part
-			if (segments.length > 1) {
-				fp.initialize(segments[1]);
-			}
-			else {
-				fp.initialize("");
-			}
+            // initialize the FeaturePathInfo with the corresponding part
+            if (segments.length > 1) {
+                fp.initialize(segments[1]);
+            }
+            else {
+                fp.initialize("");
+            }
 
-			int safeStart = 0;
-			Iterator<Annotation> i = aJCas.getAnnotationIndex(t).iterator();
-			while (i.hasNext()) {
-				Annotation anno = i.next();
+            int safeStart = 0;
+            Iterator<Annotation> i = aJCas.getAnnotationIndex(t).iterator();
+            while (i.hasNext()) {
+                Annotation anno = i.next();
 
-				// Move the start of the containment scanning range ahead if possible
-				while ((safeStart + 1) < candidates.length
-						&& candidates[safeStart + 1].getEnd() < anno.getBegin()) {
-					safeStart++;
-				}
+                // Move the start of the containment scanning range ahead if possible
+                while ((safeStart + 1) < candidates.length
+                        && candidates[safeStart + 1].getEnd() < anno.getBegin()) {
+                    safeStart++;
+                }
 
-				String candidate = fp.getValue(anno).toLowerCase(casLocale);
-				if (isStopWordType || ((anyLocaleSet != null) && anyLocaleSet.contains(candidate))
-						|| ((casLocaleSet != null) && casLocaleSet.contains(candidate))) {
-					// Remove the annotation that matched the stop word
-					toRemove.add(anno);
-					if (log.isLoggable(FINE)) {
-						log.log(FINE, "Removing ["
-								+ typeName.substring(typeName.lastIndexOf('.') + 1)
-								+ "] annotated as stop word [" + anno.getCoveredText() + "]@"
-								+ anno.getBegin() + ".." + anno.getEnd());
-					}
+                String candidate = fp.getValue(anno).toLowerCase(casLocale);
+                if (isStopWordType || ((anyLocaleSet != null) && anyLocaleSet.contains(candidate))
+                        || ((casLocaleSet != null) && casLocaleSet.contains(candidate))) {
+                    // Remove the annotation that matched the stop word
+                    toRemove.add(anno);
+                    if (log.isLoggable(FINE)) {
+                        log.log(FINE, "Removing ["
+                                + typeName.substring(typeName.lastIndexOf('.') + 1)
+                                + "] annotated as stop word [" + anno.getCoveredText() + "]@"
+                                + anno.getBegin() + ".." + anno.getEnd());
+                    }
 
-					// Scan all potential annotations that may be covered the current
-					// annotation and remove them as well
-					int n = safeStart;
-					while (n < candidates.length && candidates[n].getBegin() < anno.getEnd()) {
-						if ((anno.getBegin() <= candidates[n].getBegin())
-								&& (candidates[n].getEnd() <= anno.getEnd())) {
-							if (log.isLoggable(FINE)) {
-								log.log(FINE, "Removing as well ["
-										+ candidates[n].getClass().getSimpleName()
-										+ "] annotated as stop word ["
-										+ candidates[n].getCoveredText() + "]@"
-										+ candidates[n].getBegin() + ".." + candidates[n].getEnd());
-							}
-							toRemove.add(candidates[n]);
-						}
-						n++;
-					}
-				}
-			}
+                    // Scan all potential annotations that may be covered the current
+                    // annotation and remove them as well
+                    int n = safeStart;
+                    while (n < candidates.length && candidates[n].getBegin() < anno.getEnd()) {
+                        if ((anno.getBegin() <= candidates[n].getBegin())
+                                && (candidates[n].getEnd() <= anno.getEnd())) {
+                            if (log.isLoggable(FINE)) {
+                                log.log(FINE, "Removing as well ["
+                                        + candidates[n].getClass().getSimpleName()
+                                        + "] annotated as stop word ["
+                                        + candidates[n].getCoveredText() + "]@"
+                                        + candidates[n].getBegin() + ".." + candidates[n].getEnd());
+                            }
+                            toRemove.add(candidates[n]);
+                        }
+                        n++;
+                    }
+                }
+            }
 
-			// Remove from the CAS
-			for (AnnotationFS anno : toRemove) {
-				aJCas.removeFsFromIndexes(anno);
-			}
-		}
-	}
+            // Remove from the CAS
+            for (AnnotationFS anno : toRemove) {
+                aJCas.removeFsFromIndexes(anno);
+            }
+        }
+    }
 
-	private AnnotationFS[] getCandidates(JCas aJCas)
-	{
-		// Make a list of all the annotations that can be matched by the given paths. If any one
-		// of the paths match, we want to remove instances of all others being covered by the
-		// match as well.
-		List<AnnotationFS> candidateList = new ArrayList<AnnotationFS>();
-		for (String path : paths) {
-			String[] segments = path.split("/", 2);
-			String typeName = segments[0];
-			Type t = aJCas.getTypeSystem().getType(typeName);
-			if (t == null) {
-				throw new IllegalStateException("Type [" + typeName + "] not found in type system");
-			}
+    private AnnotationFS[] getCandidates(JCas aJCas)
+    {
+        // Make a list of all the annotations that can be matched by the given paths. If any one
+        // of the paths match, we want to remove instances of all others being covered by the
+        // match as well.
+        List<AnnotationFS> candidateList = new ArrayList<AnnotationFS>();
+        for (String path : paths) {
+            String[] segments = path.split("/", 2);
+            String typeName = segments[0];
+            Type t = aJCas.getTypeSystem().getType(typeName);
+            if (t == null) {
+                throw new IllegalStateException("Type [" + typeName + "] not found in type system");
+            }
 
-			for (AnnotationFS fs : select(aJCas.getCas(), t)) {
-				candidateList.add(fs);
-			}
-		}
-		AnnotationFS[] candidates = candidateList.toArray(new AnnotationFS[candidateList.size()]);
-		Arrays.sort(candidates, new BeginEndComparator());
-		return candidates;
+            for (AnnotationFS fs : select(aJCas.getCas(), t)) {
+                candidateList.add(fs);
+            }
+        }
+        AnnotationFS[] candidates = candidateList.toArray(new AnnotationFS[candidateList.size()]);
+        Arrays.sort(candidates, new BeginEndComparator());
+        return candidates;
 
-	}
+    }
 
-	static class BeginEndComparator implements Comparator<AnnotationFS>
-	{
-		@Override
-		public int compare(AnnotationFS aO1, AnnotationFS aO2)
-		{
-			if (aO1.getBegin() == aO2.getBegin()) {
-				return aO1.getEnd() - aO2.getEnd();
-			}
-			else {
-				return aO1.getBegin() - aO2.getBegin();
-			}
-		}
-	}
+    static class BeginEndComparator implements Comparator<AnnotationFS>
+    {
+        @Override
+        public int compare(AnnotationFS aO1, AnnotationFS aO2)
+        {
+            if (aO1.getBegin() == aO2.getBegin()) {
+                return aO1.getEnd() - aO2.getEnd();
+            }
+            else {
+                return aO1.getBegin() - aO2.getBegin();
+            }
+        }
+    }
 }

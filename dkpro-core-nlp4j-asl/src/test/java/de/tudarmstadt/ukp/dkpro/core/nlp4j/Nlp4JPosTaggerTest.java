@@ -57,16 +57,16 @@ public class Nlp4JPosTaggerTest
         throws Exception
     {
         runTest("en", null, "This is a test .",
-                new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
-                new String[] { "POS_DET",  "POS_VERB",   "POS_DET", "POS_NOUN",   "POS_PUNCT" });
+                new String[] { "DT", "VBZ", "DT", "NN", "." },
+                new String[] { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", null, "A neural net .",
-                new String[] { "DT",  "JJ",     "NN",  "." },
-                new String[] { "POS_DET", "POS_ADJ",    "POS_NOUN",  "POS_PUNCT" });
+                new String[] { "DT", "JJ", "NN", "." },
+                new String[] { "POS_DET", "POS_ADJ", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", null, "John is purchasing oranges .",
-                new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
-                new String[] { "POS_PROPN",   "POS_VERB",   "POS_VERB",        "POS_NOUN",     "POS_PUNCT" });
+                new String[] { "NNP", "VBZ", "VBG", "NNS", "." },
+                new String[] { "POS_PROPN", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_PUNCT" });
     }
     
     private JCas runTest(String language, String variant, String testDocument, String[] tags,

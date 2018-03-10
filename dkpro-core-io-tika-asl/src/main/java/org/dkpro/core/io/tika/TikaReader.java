@@ -20,6 +20,7 @@ package org.dkpro.core.io.tika;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.parser.AutoDetectParser;
@@ -35,7 +36,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 /**
  * Reader for many file formats based on Apache Tika.
  */
-@ResourceMetaData(name="Tika Multi-Format Reader")
+@ResourceMetaData(name = "Tika Multi-Format Reader")
 public class TikaReader
     extends ResourceCollectionReaderBase
 {

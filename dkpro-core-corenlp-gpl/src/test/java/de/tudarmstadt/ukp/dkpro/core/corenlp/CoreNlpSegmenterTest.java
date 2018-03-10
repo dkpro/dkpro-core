@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2007-2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -36,14 +36,14 @@ import de.tudarmstadt.ukp.dkpro.core.testing.harness.SegmenterHarness;
 
 public class CoreNlpSegmenterTest
 {
-	@Test
-	public void run() throws Throwable
-	{
-		AnalysisEngineDescription aed = createEngineDescription(CoreNlpSegmenter.class);
+    @Test
+    public void run() throws Throwable
+    {
+        AnalysisEngineDescription aed = createEngineDescription(CoreNlpSegmenter.class);
 
         SegmenterHarness.run(aed, "de.4", "en.9", "ar.1", "zh.1", "zh.2");
-	}
-	
+    }
+    
     @Test
     public void testEnglishSpeech() throws Exception
     {

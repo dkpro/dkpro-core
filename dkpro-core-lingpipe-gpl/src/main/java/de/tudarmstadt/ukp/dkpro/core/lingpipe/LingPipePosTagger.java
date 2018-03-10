@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2007-2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -58,7 +58,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * LingPipe part-of-speech tagger.
  */
-@ResourceMetaData(name="LingPipe POS-Tagger")
+@ResourceMetaData(name = "LingPipe POS-Tagger")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -93,7 +93,8 @@ public class LingPipePosTagger
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
@@ -113,14 +114,14 @@ public class LingPipePosTagger
      * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
     protected boolean printTagSet;
 
     /**
      * Lingpipe models tend to be trained on lower-case tags, but our POS mappings use uppercase.
      */
     public static final String PARAM_UPPERCASE_TAGS = "uppercaseTags";
-    @ConfigurationParameter(name = PARAM_UPPERCASE_TAGS, mandatory = true, defaultValue="true")
+    @ConfigurationParameter(name = PARAM_UPPERCASE_TAGS, mandatory = true, defaultValue = "true")
     protected boolean uppercaseTags;
     
     private CasConfigurableProviderBase<HmmDecoder> modelProvider;
@@ -176,7 +177,7 @@ public class LingPipePosTagger
             List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
             String[] tokenTexts = toText(tokens).toArray(new String[tokens.size()]);
 
-            Tagging<String> tagging = modelProvider.getResource().tag(asList(tokenTexts));            
+            Tagging<String> tagging = modelProvider.getResource().tag(asList(tokenTexts));
 
             for (int n = 0; n < tagging.size(); n++) {
                 Token t = tokens.get(n);

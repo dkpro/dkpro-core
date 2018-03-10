@@ -52,7 +52,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
  *
  * @see <a href="http://www.cnts.ua.ac.be/conll2003/ner/">CoNLL 2003 shared task</a>
  */
-@ResourceMetaData(name="CoNLL 2003 Writer")
+@ResourceMetaData(name = "CoNLL 2003 Writer")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2003})
 @TypeCapability(
         inputs = { 
@@ -70,10 +70,12 @@ public class Conll2003Writer
      * Character encoding of the output data.
      */
     public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
-    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
 
-    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".conll")
     private String filenameSuffix;
 
@@ -85,7 +87,8 @@ public class Conll2003Writer
     @ConfigurationParameter(name = PARAM_WRITE_CHUNK, mandatory = true, defaultValue = "true")
     private boolean writeChunk;
 
-    public static final String PARAM_WRITE_NAMED_ENTITY = ComponentParameters.PARAM_WRITE_NAMED_ENTITY;
+    public static final String PARAM_WRITE_NAMED_ENTITY = 
+            ComponentParameters.PARAM_WRITE_NAMED_ENTITY;
     @ConfigurationParameter(name = PARAM_WRITE_NAMED_ENTITY, mandatory = true, defaultValue = "true")
     private boolean writeNamedEntity;
 

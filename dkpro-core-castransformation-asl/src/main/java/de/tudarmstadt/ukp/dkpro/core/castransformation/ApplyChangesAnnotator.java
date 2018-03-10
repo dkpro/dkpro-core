@@ -42,121 +42,121 @@ import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentStorage
  * @since 1.1.0
  * @see Backmapper
  */
-@ResourceMetaData(name="CAS Transformation - Apply")
+@ResourceMetaData(name = "CAS Transformation - Apply")
 @TypeCapability(
-        inputs={
+        inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
             "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation"},
-        outputs={
+        outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
             "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation"})
 
 public class ApplyChangesAnnotator
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
     public static final String VIEW_SOURCE = "source";
     public static final String VIEW_TARGET = "target";
     
-	public static final String OP_INSERT = "insert";
-	public static final String OP_REPLACE = "replace";
-	public static final String OP_DELETE = "delete";
+    public static final String OP_INSERT = "insert";
+    public static final String OP_REPLACE = "replace";
+    public static final String OP_DELETE = "delete";
 
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
-		try {
-			JCas sourceView = aJCas.getView(VIEW_SOURCE);
-			JCas targetView = aJCas.createView(VIEW_TARGET);
-			DocumentMetaData.copy(sourceView, targetView);
-			applyChanges(sourceView, targetView);
-		}
-		catch (CASException e) {
-			throw new AnalysisEngineProcessException(e);
-		}
-	}
+    @Override
+    public void process(JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
+        try {
+            JCas sourceView = aJCas.getView(VIEW_SOURCE);
+            JCas targetView = aJCas.createView(VIEW_TARGET);
+            DocumentMetaData.copy(sourceView, targetView);
+            applyChanges(sourceView, targetView);
+        }
+        catch (CASException e) {
+            throw new AnalysisEngineProcessException(e);
+        }
+    }
 
-	protected void applyChanges(JCas aSourceView, JCas aTargetView)
-	{
-		FSIndex<Annotation> idx = aSourceView.getAnnotationIndex(SofaChangeAnnotation.type);
+    protected void applyChanges(JCas aSourceView, JCas aTargetView)
+    {
+        FSIndex<Annotation> idx = aSourceView.getAnnotationIndex(SofaChangeAnnotation.type);
 
-		getLogger().info("Found " + idx.size() + " changes");
+        getLogger().info("Found " + idx.size() + " changes");
 
-		// Apply all the changes
-		AlignedString as = new AlignedString(aSourceView.getDocumentText());
+        // Apply all the changes
+        AlignedString as = new AlignedString(aSourceView.getDocumentText());
 
-		// Collect all those edits that are going to be executed.
-		//
-		// | A | C1 C2 R
-		// BBBBBB + - -
-		// BBBBBBBBBB + + +
-		// BBBBBBBBBBBBBBBBB + + +
-		// BBBBBBB - + -
-		// BBBBBBBBBBBBB - + -
-		// BBBBBBBB - + -
-		//
-		if (idx.size() > 0) {
-			List<SofaChangeAnnotation> edits = new ArrayList<SofaChangeAnnotation>();
-			{
-				// Get an iterator over all the change annotations. Per UIMA default
-				// this iterator is sorted first by begin and then by end offsets.
-				// We will make use of this fact here to skip change annotations that
-				// are covered by others. The earliest longest change wins - this means
-				// the one with the smallest begin offset and the largest end offset.
-				FSIterator<Annotation> it = idx.iterator();
+        // Collect all those edits that are going to be executed.
+        //
+        // | A | C1 C2 R
+        // BBBBBB + - -
+        // BBBBBBBBBB + + +
+        // BBBBBBBBBBBBBBBBB + + +
+        // BBBBBBB - + -
+        // BBBBBBBBBBBBB - + -
+        // BBBBBBBB - + -
+        //
+        if (idx.size() > 0) {
+            List<SofaChangeAnnotation> edits = new ArrayList<SofaChangeAnnotation>();
+            {
+                // Get an iterator over all the change annotations. Per UIMA default
+                // this iterator is sorted first by begin and then by end offsets.
+                // We will make use of this fact here to skip change annotations that
+                // are covered by others. The earliest longest change wins - this means
+                // the one with the smallest begin offset and the largest end offset.
+                FSIterator<Annotation> it = idx.iterator();
 
-				SofaChangeAnnotation top = (SofaChangeAnnotation) it.get();
-				edits.add(top);
-				it.moveToNext();
-				while (it.isValid()) {
-					SofaChangeAnnotation b = (SofaChangeAnnotation) it.get();
-					if (((top.getBegin() <= b.getBegin()) && // C1
-							(top.getEnd() > b.getBegin()) // C2
-							)
-							|| ((top.getBegin() == b.getBegin()) && (top.getEnd() == b.getEnd()))) {
-						// Found annotation covering current annotation. Skipping
-						// current annotation.
-					}
-					else {
-						top = b;
-						edits.add(top);
-					}
-					it.moveToNext();
-				}
-			}
+                SofaChangeAnnotation top = (SofaChangeAnnotation) it.get();
+                edits.add(top);
+                it.moveToNext();
+                while (it.isValid()) {
+                    SofaChangeAnnotation b = (SofaChangeAnnotation) it.get();
+                    if (((top.getBegin() <= b.getBegin()) && // C1
+                            (top.getEnd() > b.getBegin()) // C2
+                            )
+                            || ((top.getBegin() == b.getBegin()) && (top.getEnd() == b.getEnd()))) {
+                        // Found annotation covering current annotation. Skipping
+                        // current annotation.
+                    }
+                    else {
+                        top = b;
+                        edits.add(top);
+                    }
+                    it.moveToNext();
+                }
+            }
 
             // If we remove or add stuff all offsets right of the change location
             // will change and thus the offsets in the change annotation are no
             // longer valid. If we move from right to left it works better because
             // the left offsets remain stable.
-			Collections.reverse(edits);
-			for (SofaChangeAnnotation a : edits) {
-				if (OP_INSERT.equals(a.getOperation())) {
+            Collections.reverse(edits);
+            for (SofaChangeAnnotation a : edits) {
+                if (OP_INSERT.equals(a.getOperation())) {
 //                    getLogger().debug("Performing insert[" + a.getBegin() + "-" + a.getEnd() + "]: ["
 //                                    + a.getCoveredText() + "]");
-					as.insert(a.getBegin(), a.getValue());
-				}
-				if (OP_DELETE.equals(a.getOperation())) {
+                    as.insert(a.getBegin(), a.getValue());
+                }
+                if (OP_DELETE.equals(a.getOperation())) {
 //                    getLogger().debug("Performing delete[" + a.getBegin() + "-" + a.getEnd() + "]: ["
 //                            + a.getCoveredText() + "]");
-					as.delete(a.getBegin(), a.getEnd());
-				}
-				if (OP_REPLACE.equals(a.getOperation())) {
+                    as.delete(a.getBegin(), a.getEnd());
+                }
+                if (OP_REPLACE.equals(a.getOperation())) {
 //                    getLogger().debug("Performing replace[" + a.getBegin() + "-" + a.getEnd() + "]: ["
 //                            + a.getCoveredText() + "]");
-					as.replace(a.getBegin(), a.getEnd(), a.getValue());
-				}
-			}
-		}
+                    as.replace(a.getBegin(), a.getEnd(), a.getValue());
+                }
+            }
+        }
 
-		// Set the text of the new Sofa
-		aTargetView.setDocumentText(as.get());
+        // Set the text of the new Sofa
+        aTargetView.setDocumentText(as.get());
 
-		// Set document language
-		aTargetView.setDocumentLanguage(aSourceView.getDocumentLanguage());
+        // Set document language
+        aTargetView.setDocumentLanguage(aSourceView.getDocumentLanguage());
 
-		// Optionally we may want to remember the AlignedString for the backmapper.
-		AlignmentStorage.getInstance().put(aSourceView.getCasImpl().getBaseCAS(),
-				aSourceView.getViewName(), aTargetView.getViewName(), as);
-	}
+        // Optionally we may want to remember the AlignedString for the backmapper.
+        AlignmentStorage.getInstance().put(aSourceView.getCasImpl().getBaseCAS(),
+                aSourceView.getViewName(), aTargetView.getViewName(), as);
+    }
 }

@@ -50,7 +50,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor
  * 
  * @see <a href="https://web.archive.org/web/20131216222420/http://ilk.uvt.nl/conll/">CoNLL-X Shared Task: Multi-lingual Dependency Parsing</a>
  */
-@ResourceMetaData(name="CoNLL 2006 Writer")
+@ResourceMetaData(name = "CoNLL 2006 Writer")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2006})
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -69,10 +69,12 @@ public class Conll2006Writer
      * Character encoding of the output data.
      */
     public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
-    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
 
-    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".conll")
     private String filenameSuffix;
 
@@ -123,12 +125,13 @@ public class Conll2006Writer
             List<Token> tokens = selectCovered(Token.class, sentence);
             
             // Check if we should try to include the FEATS in output
-            List<MorphologicalFeatures> morphology = selectCovered(MorphologicalFeatures.class, sentence);
+            List<MorphologicalFeatures> morphology = selectCovered(MorphologicalFeatures.class,
+                    sentence);
             boolean useFeats = tokens.size() == morphology.size();
             
             for (int i = 0; i < tokens.size(); i++) {
                 Row row = new Row();
-                row.id = i+1;
+                row.id = i + 1;
                 row.token = tokens.get(i);
                 if (useFeats) {
                     row.feats = morphology.get(i);
@@ -138,7 +141,8 @@ public class Conll2006Writer
 
             // Dependencies
             List<Dependency> basicDeps = selectCovered(Dependency.class, sentence).stream()
-                    .filter(dep -> dep.getFlavor() == null || DependencyFlavor.BASIC.equals(dep.getFlavor()))
+                    .filter(dep -> dep.getFlavor() == null || 
+                            DependencyFlavor.BASIC.equals(dep.getFlavor()))
                     .collect(Collectors.toList());
             for (Dependency rel : basicDeps) {
                 Row row =  ctokens.get(rel.getDependent());

@@ -17,11 +17,11 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.reuters;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import java.text.ParseException;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 public class ReutersDocumentTests
 {

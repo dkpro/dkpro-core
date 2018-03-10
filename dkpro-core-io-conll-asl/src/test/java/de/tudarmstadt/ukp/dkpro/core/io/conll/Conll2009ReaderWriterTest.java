@@ -21,6 +21,7 @@ import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
 
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class Conll2009ReaderWriterTest

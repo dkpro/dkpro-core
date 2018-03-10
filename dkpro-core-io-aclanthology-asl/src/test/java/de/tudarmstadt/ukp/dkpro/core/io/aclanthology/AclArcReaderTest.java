@@ -39,7 +39,7 @@ public class AclArcReaderTest
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "src/test/resources/acl/",
                 ResourceCollectionReaderBase.PARAM_PATTERNS, "[+]**/*.txt" );
 
-        int i=0;
+        int i = 0;
         for (JCas jcas : new JCasIterable(reader)) {
             DocumentMetaData md = DocumentMetaData.get(jcas);
             System.out.println(md.getDocumentUri());

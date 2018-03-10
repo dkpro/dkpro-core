@@ -25,7 +25,8 @@ import opennlp.tools.ml.model.MaxentModel;
 public class OpenNlpChunkerTagsetDescriptionProvider
     extends OpenNlpTagsetDescriptionProvider
 {
-    public OpenNlpChunkerTagsetDescriptionProvider(String aName, Class<?> aLayer, MaxentModel aModel)
+    public OpenNlpChunkerTagsetDescriptionProvider(String aName, Class<?> aLayer,
+            MaxentModel aModel)
     {
         super(aName, aLayer, aModel);
     }

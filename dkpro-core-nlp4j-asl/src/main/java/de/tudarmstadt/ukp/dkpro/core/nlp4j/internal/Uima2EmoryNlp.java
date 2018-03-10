@@ -26,7 +26,7 @@ public class Uima2EmoryNlp
 {
     public static NLPNode[] convertSentence(List<Token> aTokens)
     {
-        NLPNode[] nodes = new NLPNode[aTokens.size()+1];
+        NLPNode[] nodes = new NLPNode[aTokens.size() + 1];
         
         nodes[0] = new NLPNode();
         nodes[0].toRoot();

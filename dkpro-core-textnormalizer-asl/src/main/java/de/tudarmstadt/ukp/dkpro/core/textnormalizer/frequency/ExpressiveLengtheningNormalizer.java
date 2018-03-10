@@ -39,7 +39,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_Im
 /**
  * Takes a text and shortens extra long words
  */
-@ResourceMetaData(name="Expressive Lengthening Normalizer")
+@ResourceMetaData(name = "Expressive Lengthening Normalizer")
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class ExpressiveLengtheningNormalizer

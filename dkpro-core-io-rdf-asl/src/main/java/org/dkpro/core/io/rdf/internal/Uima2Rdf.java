@@ -97,7 +97,8 @@ public class Uima2Rdf
         reachable.add(aJCas.getSofa());
         
         // Set up the view itself
-        String viewUri = String.format("%s#%d", docuri, aJCas.getLowLevelCas().ll_getFSRef(aJCas.getSofa()));
+        String viewUri = String.format("%s#%d", docuri,
+                aJCas.getLowLevelCas().ll_getFSRef(aJCas.getSofa()));
         Individual rdfView = m.createIndividual(viewUri, tView);
         
         for (FeatureStructure uimaFS : reachable) {

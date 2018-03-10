@@ -38,96 +38,94 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 /**
  * Simple reader that generates a CAS from a String. This can be useful in situations where a reader
  * is preferred over manually crafting a CAS using {@link JCasFactory#createJCas()}.
- *
  */
 @MimeTypeCapability({MimeTypes.TEXT_PLAIN})
 @TypeCapability(
-        outputs={
+        outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
-
 public class StringReader
-	extends JCasCollectionReader_ImplBase
+    extends JCasCollectionReader_ImplBase
 {
-	/**
-	 * Set this as the language of the produced documents.
-	 */
-	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
-	private String language;
+    /**
+     * Set this as the language of the produced documents.
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
+    private String language;
 
-	/**
-	 * The document text.
-	 */
-	public static final String PARAM_DOCUMENT_TEXT = "documentText";
-	@ConfigurationParameter(name = PARAM_DOCUMENT_TEXT, mandatory = true)
-	private String documentText;
+    /**
+     * The document text.
+     */
+    public static final String PARAM_DOCUMENT_TEXT = "documentText";
+    @ConfigurationParameter(name = PARAM_DOCUMENT_TEXT, mandatory = true)
+    private String documentText;
 
-	/**
-	 * The collection ID to set in the {@link DocumentMetaData}.
-	 */
-	public static final String PARAM_COLLECTION_ID = "collectionId";
-	@ConfigurationParameter(name = PARAM_COLLECTION_ID, mandatory = true,
-			defaultValue = "COLLECTION_ID")
-	private String collectionId;
+    /**
+     * The collection ID to set in the {@link DocumentMetaData}.
+     */
+    public static final String PARAM_COLLECTION_ID = "collectionId";
+    @ConfigurationParameter(name = PARAM_COLLECTION_ID, mandatory = true,
+            defaultValue = "COLLECTION_ID")
+    private String collectionId;
 
-	/**
-	 * The document ID to set in the {@link DocumentMetaData}.
-	 */
-	public static final String PARAM_DOCUMENT_ID = "documentId";
-	@ConfigurationParameter(name = PARAM_DOCUMENT_ID, mandatory = true,
-			defaultValue = "DOCUMENT_ID")
-	private String documentId;
+    /**
+     * The document ID to set in the {@link DocumentMetaData}.
+     */
+    public static final String PARAM_DOCUMENT_ID = "documentId";
+    @ConfigurationParameter(name = PARAM_DOCUMENT_ID, mandatory = true,
+            defaultValue = "DOCUMENT_ID")
+    private String documentId;
 
-	/**
-	 * The document base URI to set in the {@link DocumentMetaData}.
-	 */
-	public static final String PARAM_DOCUMENT_BASE_URI = "documentBaseUri";
-	@ConfigurationParameter(name = PARAM_DOCUMENT_BASE_URI, mandatory = false)
-	private String documentBaseUri;
+    /**
+     * The document base URI to set in the {@link DocumentMetaData}.
+     */
+    public static final String PARAM_DOCUMENT_BASE_URI = "documentBaseUri";
+    @ConfigurationParameter(name = PARAM_DOCUMENT_BASE_URI, mandatory = false)
+    private String documentBaseUri;
 
-	/**
-	 * The document URI to set in the {@link DocumentMetaData}.
-	 */
-	public static final String PARAM_DOCUMENT_URI = "documentUri";
-	@ConfigurationParameter(name = PARAM_DOCUMENT_URI, mandatory = true, defaultValue = "STRING")
-	private String documentUri;
+    /**
+     * The document URI to set in the {@link DocumentMetaData}.
+     */
+    public static final String PARAM_DOCUMENT_URI = "documentUri";
+    @ConfigurationParameter(name = PARAM_DOCUMENT_URI, mandatory = true, defaultValue = "STRING")
+    private String documentUri;
 
-	private boolean isDone = false;
+    private boolean isDone = false;
 
-	@Override
-	public void initialize(UimaContext aContext)
-		throws ResourceInitializationException
-	{
-		super.initialize(aContext);
-		isDone = false;
-	}
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
+        isDone = false;
+    }
 
-	@Override
-	public void getNext(JCas sJCas)
-		throws IOException
-	{
-		isDone = true;
+    @Override
+    public void getNext(JCas sJCas)
+        throws IOException
+    {
+        isDone = true;
 
-		DocumentMetaData meta = DocumentMetaData.create(sJCas);
-		meta.setCollectionId(collectionId);
-		meta.setDocumentUri(documentUri);
-		meta.setDocumentId(documentId);
-		meta.setDocumentBaseUri(documentBaseUri);
+        DocumentMetaData meta = DocumentMetaData.create(sJCas);
+        meta.setCollectionId(collectionId);
+        meta.setDocumentUri(documentUri);
+        meta.setDocumentId(documentId);
+        meta.setDocumentBaseUri(documentBaseUri);
 
-		sJCas.setDocumentLanguage(language);
-		sJCas.setDocumentText(documentText);
-	}
+        sJCas.setDocumentLanguage(language);
+        sJCas.setDocumentText(documentText);
+    }
 
-	@Override
-	public boolean hasNext()
-		throws IOException, CollectionException
-	{
-		return !isDone;
-	}
+    @Override
+    public boolean hasNext()
+        throws IOException, CollectionException
+    {
+        return !isDone;
+    }
 
-	@Override
-	public Progress[] getProgress()
-	{
-		return new Progress[] { new ProgressImpl(isDone ? 0 : 1, 1, Progress.ENTITIES) };
-	}
+    @Override
+    public Progress[] getProgress()
+    {
+        return new Progress[] { new ProgressImpl(isDone ? 0 : 1, 1, Progress.ENTITIES) };
+    }
 }

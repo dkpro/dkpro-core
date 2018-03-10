@@ -37,7 +37,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_Im
 /**
  * Takes a text and replaces wrong capitalization
  */
-@ResourceMetaData(name="Capitalization Normalizer")
+@ResourceMetaData(name = "Capitalization Normalizer")
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class CapitalizationNormalizer

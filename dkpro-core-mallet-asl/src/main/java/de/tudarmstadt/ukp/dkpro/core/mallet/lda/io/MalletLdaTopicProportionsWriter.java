@@ -17,30 +17,32 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.mallet.lda.io;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer;
-import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.fit.descriptor.ResourceMetaData;
-import org.apache.uima.jcas.JCas;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Locale;
 
-import static org.apache.uima.fit.util.JCasUtil.select;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.apache.uima.jcas.JCas;
+
+import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer;
+import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
 
 /**
- * Write topic proportions to a file in the shape {@code [<docId>\t]<topic_1>\t<topic_2>\t...<topic_n>}
+ * Write topic proportions to a file in the shape
+ * {@code [<docId>\t]<topic_1>\t<topic_2>\t...<topic_n>}
  * <p>
  * This writer depends on the {@link TopicDistribution} annotation which needs to be created by
  * {@link MalletLdaTopicModelInferencer} before.
  * </p>
  */
-@ResourceMetaData(name="Mallet LDA Topic Proportions Writer")
+@ResourceMetaData(name = "Mallet LDA Topic Proportions Writer")
 public class MalletLdaTopicProportionsWriter
         extends JCasFileWriter_ImplBase
 {
@@ -55,10 +57,11 @@ public class MalletLdaTopicProportionsWriter
     private boolean writeDocid;
 
     /**
-     * If {@link #PARAM_SINGULAR_TARGET} is set to false (default), this extension will be appended to the output
-     * files. Default: {@code .topics}.
+     * If {@link #PARAM_SINGULAR_TARGET} is set to false (default), this extension will be appended
+     * to the output files. Default: {@code .topics}.
      */
-    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".topics")
     private String filenameExtension;
 

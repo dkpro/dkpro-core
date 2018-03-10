@@ -32,16 +32,20 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class PhoneticTranscriptorTestUtil
 {
-    public static void runTest(AnalysisEngineDescription desc, String text, String ... goldTranscriptions) throws Exception {
-
+    public static void runTest(AnalysisEngineDescription desc, String text,
+            String... goldTranscriptions)
+        throws Exception
+    {
         AnalysisEngine engine = createEngine(desc);
         JCas jcas = engine.newJCas();
-        TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class, Sentence.class);
+        TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class,
+                Sentence.class);
         tb.buildTokens(jcas, text);
         engine.process(jcas);
 
-        int i=0;
-        for (PhoneticTranscription transcription : JCasUtil.select(jcas, PhoneticTranscription.class)) {
+        int i = 0;
+        for (PhoneticTranscription transcription : JCasUtil.select(jcas,
+                PhoneticTranscription.class)) {
             assertEquals(goldTranscriptions[i], transcription.getTranscription());
             i++;
         }

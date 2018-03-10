@@ -31,7 +31,7 @@ import opennlp.tools.parser.ParserModel;
 import opennlp.tools.util.TokenTag;
 
 public class OpenNlpParserTagsetDescriptionProvider
-extends TagsetBase
+    extends TagsetBase
 {
     private String name;
     private String layer;

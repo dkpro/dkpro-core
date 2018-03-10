@@ -40,7 +40,7 @@ import opennlp.tools.util.model.BaseModel;
  * Train a POS tagging model for OpenNLP.
  */
 @MimeTypeCapability(MimeTypes.APPLICATION_X_OPENNLP_TAGGER)
-@ResourceMetaData(name="OpenNLP POS-Tagger Trainer")
+@ResourceMetaData(name = "OpenNLP POS-Tagger Trainer")
 public class OpenNlpPosTaggerTrainer
     extends OpenNlpTrainerBase<CasPosSampleStream>
 {
@@ -49,11 +49,13 @@ public class OpenNlpPosTaggerTrainer
     private String language;
 
     public static final String PARAM_ALGORITHM = "algorithm";
-    @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, defaultValue = GISTrainer.MAXENT_VALUE)
+    @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, 
+            defaultValue = GISTrainer.MAXENT_VALUE)
     private String algorithm;
     
     public static final String PARAM_TRAINER_TYPE = "trainerType";
-    @ConfigurationParameter(name = PARAM_TRAINER_TYPE, mandatory = true, defaultValue = EventTrainer.EVENT_VALUE)
+    @ConfigurationParameter(name = PARAM_TRAINER_TYPE, mandatory = true, 
+            defaultValue = EventTrainer.EVENT_VALUE)
     private String trainerType;
 
     public static final String PARAM_ITERATIONS = "iterations";

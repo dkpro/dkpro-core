@@ -17,8 +17,8 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.tokit;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.UIMAException;
@@ -40,70 +40,67 @@ import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 
 public class GermanSeparatedParticleAnnotatorTest
 {
-	@Test
-	public void testGermanSeparatedParticles()
-		throws Exception
-	{
+    @Test
+    public void testGermanSeparatedParticles() throws Exception
+    {
         runTest("de", "Wir schlagen ein Treffen vor .",
-        		new String[] { "wir", "schlagen", "eine", "Treffen", "vor", "."    },
-                new String[] { "PPER", "VVFIN", "ART", "NN", "PTKVZ", "$."    },
-        		new String[] { "PPER", "VVFIN", "ART", "NN", "PTKVZ", "$."    },
-        		new String[] { "wir", "vorschlagen", "eine", "Treffen", "vor", "."    });
-
+                new String[] { "wir", "schlagen", "eine", "Treffen", "vor", "." },
+                new String[] { "PPER", "VVFIN", "ART", "NN", "PTKVZ", "$." },
+                new String[] { "PPER", "VVFIN", "ART", "NN", "PTKVZ", "$." },
+                new String[] { "wir", "vorschlagen", "eine", "Treffen", "vor", "." });
 
         runTest("de", "Fangen wir jetzt an ?",
-        		new String[] { "fangen", "wir", "jetzt", "an", "?"    },
-                new String[] { "VVFIN", "PPER", "ADV", "PTKVZ", "$."    },
-				new String[] { "VVFIN", "PPER", "ADV", "PTKVZ", "$."    },
-				new String[] { "anfangen", "wir", "jetzt", "an", "?"    });
-	}
+                new String[] { "fangen", "wir", "jetzt", "an", "?" },
+                new String[] { "VVFIN", "PPER", "ADV", "PTKVZ", "$." },
+                new String[] { "VVFIN", "PPER", "ADV", "PTKVZ", "$." },
+                new String[] { "anfangen", "wir", "jetzt", "an", "?" });
+    }
 
     private void runTest(String language, String testDocument, String[] documentTreeTaggerLemmas,
             String[] documentCPosTags, String[] documentPosTags, String[] lemmatizedDocument)
-                throws UIMAException
+        throws UIMAException
     {
 
-		AnalysisEngineDescription processor = createEngineDescription(
+        AnalysisEngineDescription processor = createEngineDescription(
 
-				createEngineDescription(GermanSeparatedParticleAnnotator.class)
-		);
+                createEngineDescription(GermanSeparatedParticleAnnotator.class));
 
-		AnalysisEngine engine = createEngine(processor);
-		JCas aJCas = engine.newJCas();
-		aJCas.setDocumentLanguage(language);
+        AnalysisEngine engine = createEngine(processor);
+        JCas aJCas = engine.newJCas();
+        aJCas.setDocumentLanguage(language);
 
-		TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class,
-				Sentence.class);
-		tb.buildTokens(aJCas, testDocument);
+        TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class,
+                Sentence.class);
+        tb.buildTokens(aJCas, testDocument);
 
-		int offset = 0;
-		for (Token token : JCasUtil.select(aJCas, Token.class)) {
-			POS pos = new POS(aJCas, token.getBegin(), token.getEnd());
-			pos.setPosValue(documentPosTags[offset]);
+        int offset = 0;
+        for (Token token : JCasUtil.select(aJCas, Token.class)) {
+            POS pos = new POS(aJCas, token.getBegin(), token.getEnd());
+            pos.setPosValue(documentPosTags[offset]);
             pos.setCoarseValue(documentCPosTags[offset]);
-			pos.addToIndexes();
+            pos.addToIndexes();
 
-			token.setPos(pos);
+            token.setPos(pos);
 
-			Lemma lemma = new Lemma(aJCas, token.getBegin(), token.getEnd());
-			lemma.setValue(documentTreeTaggerLemmas[offset]);
-			lemma.addToIndexes();
+            Lemma lemma = new Lemma(aJCas, token.getBegin(), token.getEnd());
+            lemma.setValue(documentTreeTaggerLemmas[offset]);
+            lemma.addToIndexes();
 
-			token.setLemma(lemma);
+            token.setLemma(lemma);
 
-			offset++;
-		}
-		engine.process(aJCas);
+            offset++;
+        }
+        engine.process(aJCas);
 
-		AssertAnnotations.assertLemma(lemmatizedDocument, select(aJCas, Lemma.class));
-	}
+        AssertAnnotations.assertLemma(lemmatizedDocument, select(aJCas, Lemma.class));
+    }
 
-	@Rule
-	public TestName name = new TestName();
+    @Rule
+    public TestName name = new TestName();
 
-	@Before
-	public void printSeparator()
-	{
-		System.out.println("\n=== " + name.getMethodName() + " =====================");
-	}
+    @Before
+    public void printSeparator()
+    {
+        System.out.println("\n=== " + name.getMethodName() + " =====================");
+    }
 }

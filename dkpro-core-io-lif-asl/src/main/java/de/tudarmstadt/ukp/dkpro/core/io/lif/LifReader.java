@@ -19,6 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.io.lif;
 
 import java.io.IOException;
 import java.io.InputStream;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -28,6 +29,7 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.lappsgrid.serialization.Serializer;
 import org.lappsgrid.serialization.lif.Container;
+
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
@@ -36,10 +38,10 @@ import de.tudarmstadt.ukp.dkpro.core.io.lif.internal.Lif2DKPro;
 /**
  * Reader for the LIF format.
  */
-@ResourceMetaData(name="LAPPS Grid LIF Reader")
+@ResourceMetaData(name = "LAPPS Grid LIF Reader")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_LIF_JSON})
 @TypeCapability(
-        outputs={
+        outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
                 "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph",
@@ -54,7 +56,8 @@ public class LifReader
      * Name of configuration parameter that contains the character encoding used by the input files.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
     
     @Override

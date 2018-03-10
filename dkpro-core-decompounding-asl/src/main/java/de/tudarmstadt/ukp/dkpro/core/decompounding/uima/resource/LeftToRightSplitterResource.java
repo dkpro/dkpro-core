@@ -28,45 +28,45 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundingTree;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.LeftToRightSplitterAlgorithm;
 
 public class LeftToRightSplitterResource
-	extends SplitterResource
+    extends SplitterResource
 {
 
-	@SuppressWarnings({ "rawtypes" })
-	@Override
-	public boolean initialize(ResourceSpecifier aSpecifier,
-			Map aAdditionalParams)
-		throws ResourceInitializationException
-	{
-		if (!super.initialize(aSpecifier, aAdditionalParams)) {
-			return false;
-		}
+    @SuppressWarnings({ "rawtypes" })
+    @Override
+    public boolean initialize(ResourceSpecifier aSpecifier,
+            Map aAdditionalParams)
+        throws ResourceInitializationException
+    {
+        if (!super.initialize(aSpecifier, aAdditionalParams)) {
+            return false;
+        }
 
-		splitter = new LeftToRightSplitterAlgorithm();
+        splitter = new LeftToRightSplitterAlgorithm();
 
-		return true;
-	}
+        return true;
+    }
 
-	@Override
-	public DecompoundingTree split(String aWord)
-	{
-		return splitter.split(aWord);
-	}
+    @Override
+    public DecompoundingTree split(String aWord)
+    {
+        return splitter.split(aWord);
+    }
 
-	@Override
-	public void setDictionary(Dictionary aDict)
-	{
-		splitter.setDictionary(aDict);
-	}
+    @Override
+    public void setDictionary(Dictionary aDict)
+    {
+        splitter.setDictionary(aDict);
+    }
 
-	@Override
-	public void setMaximalTreeDepth(int aDepth)
-	{
-		splitter.setMaximalTreeDepth(aDepth);
-	}
+    @Override
+    public void setMaximalTreeDepth(int aDepth)
+    {
+        splitter.setMaximalTreeDepth(aDepth);
+    }
 
-	@Override
-	public void setLinkingMorphemes(LinkingMorphemes aMorphemes)
-	{
-		splitter.setLinkingMorphemes(aMorphemes);
-	}
+    @Override
+    public void setLinkingMorphemes(LinkingMorphemes aMorphemes)
+    {
+        splitter.setLinkingMorphemes(aMorphemes);
+    }
 }

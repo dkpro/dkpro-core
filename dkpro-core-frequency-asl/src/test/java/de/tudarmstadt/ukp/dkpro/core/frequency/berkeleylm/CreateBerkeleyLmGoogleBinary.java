@@ -26,8 +26,6 @@ import edu.berkeley.nlp.lm.util.Logger;
 
 public class CreateBerkeleyLmGoogleBinary
 {
-
-    
     public static void main(String[] args) throws IOException
     {
         String path = DkproContext.getContext().getWorkspace("berkeley_lm").getAbsolutePath();    

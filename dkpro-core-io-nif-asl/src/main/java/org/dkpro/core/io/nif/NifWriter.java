@@ -41,7 +41,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
  * 
  * @see <a href="http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core/nif-core.html">NIF 2.0 Core Ontology</a>
  */
-@ResourceMetaData(name="NLP Interchange Format (NIF) Writer")
+@ResourceMetaData(name = "NLP Interchange Format (NIF) Writer")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_NIF_TURTLE})
 @TypeCapability(
         inputs = { 
@@ -63,7 +63,8 @@ public class NifWriter
      * 
      * @see RDFLanguages
      */
-    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".ttl")
     private String filenameSuffix;
 

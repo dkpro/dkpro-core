@@ -38,27 +38,27 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 
+public class SemanticFieldAnnotatorTest
+{
 
-
-/**
- *
- */
-public class SemanticFieldAnnotatorTest {
-
-	@Test
-	public void test()
-		throws Exception
-	{
+    @Test
+    public void test()
+        throws Exception
+    {
         runTest("en", "Vanilla in the sky prefers braveness over jumpiness .",
-        		new String[] { "vanilla", "in", "the", "sky", "prefer", "braveness", "over", "jumpiness", "."    },
-        		new String[] { "NN", "NOT_RELEVANT", "NOT_RELEVANT", "NN", "NOT_RELEVANT", "NN", "NOT_RELEVANT", "NN", "$."    },
-        		new String[] { "plant", "object", "attribute", "feeling"  });
+                new String[] { "vanilla", "in", "the", "sky", "prefer", "braveness", "over",
+                        "jumpiness", "." },
+                new String[] { "NN", "NOT_RELEVANT", "NOT_RELEVANT", "NN", "NOT_RELEVANT", "NN",
+                        "NOT_RELEVANT", "NN", "$." },
+                new String[] { "plant", "object", "attribute", "feeling" });
 
         runTest("en", "Vanilla in the distantGalaxyBehindJupiter prefers braveness over jumpiness .",
-        		new String[] { "vanilla", "in", "the", "distantGalaxyBehindJupiter", "prefer", "braveness", "over", "jumpiness", "."    },
-        		new String[] { "NN", "NOT_RELEVANT", "NOT_RELEVANT", "NN", "NOT_RELEVANT", "NN", "NOT_RELEVANT", "NN", "$."    },
-         		new String[] { "plant", "UNKNOWN", "attribute", "feeling"  });       
-	}
+                new String[] { "vanilla", "in", "the", "distantGalaxyBehindJupiter", "prefer",
+                        "braveness", "over", "jumpiness", "." },
+                new String[] { "NN", "NOT_RELEVANT", "NOT_RELEVANT", "NN", "NOT_RELEVANT", "NN",
+                        "NOT_RELEVANT", "NN", "$." },
+                new String[] { "plant", "UNKNOWN", "attribute", "feeling" });
+    }
 
     private void runTest(String language, String testDocument, String[] documentLemmas,
             String[] documentPosTags, String[] documentNounSemanticFields)
@@ -66,15 +66,14 @@ public class SemanticFieldAnnotatorTest {
     {
 
         AnalysisEngineDescription processor = createEngineDescription(
-
-        createEngineDescription(
-                SemanticFieldAnnotator.class,
-                SemanticFieldAnnotator.PARAM_ANNOTATION_TYPE, Token.class,
-                SemanticFieldAnnotator.PARAM_CONSTRAINT, ".[pos/posValue = 'NN']",
-                SemanticFieldAnnotator.PARAM_SEMANTIC_FIELD_RESOURCE,
-                createExternalResourceDescription(SemanticTagResource.class,
-                        SemanticTagResource.PARAM_RESOURCE_PATH,
-                        "src/test/resources/nounSemanticFieldMapTest.txt")));
+                createEngineDescription(
+                        SemanticFieldAnnotator.class,
+                        SemanticFieldAnnotator.PARAM_ANNOTATION_TYPE, Token.class,
+                        SemanticFieldAnnotator.PARAM_CONSTRAINT, ".[pos/posValue = 'NN']",
+                        SemanticFieldAnnotator.PARAM_SEMANTIC_FIELD_RESOURCE,
+                        createExternalResourceDescription(SemanticTagResource.class,
+                                SemanticTagResource.PARAM_RESOURCE_PATH,
+                                "src/test/resources/nounSemanticFieldMapTest.txt")));
 
         AnalysisEngine engine = createEngine(processor);
         JCas aJCas = engine.newJCas();

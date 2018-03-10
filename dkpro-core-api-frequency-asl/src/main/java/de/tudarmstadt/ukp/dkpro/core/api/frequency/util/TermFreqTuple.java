@@ -34,14 +34,17 @@ public class TermFreqTuple<T>
     {
         return key;
     }
+
     public void setKey(T key)
     {
         this.key = key;
     }
+
     public long getFreq()
     {
         return freq;
     }
+
     public void setFreq(long freq)
     {
         this.freq = freq;

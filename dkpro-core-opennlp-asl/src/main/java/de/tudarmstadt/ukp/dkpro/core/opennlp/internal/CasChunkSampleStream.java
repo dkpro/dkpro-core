@@ -77,7 +77,7 @@ public class CasChunkSampleStream
         for (Token t : selectCovered(Token.class, sentence)) {
             words.add(t.getText());
             if (t.getPos() == null) {
-                throw new IllegalStateException("Token ["+t.getText()+"] has no POS");
+                throw new IllegalStateException("Token [" + t.getText() + "] has no POS");
             }
             tags.add(t.getPos().getPosValue());
             preds.add(chunkEncoder.encode(t));

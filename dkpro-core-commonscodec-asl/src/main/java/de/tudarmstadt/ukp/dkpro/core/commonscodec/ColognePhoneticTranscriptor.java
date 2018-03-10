@@ -23,19 +23,19 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 
 /**
- * Cologne phonetic (Kölner Phonetik) transcription based on Apache Commons Codec.
- * Works for German.
+ * Cologne phonetic (Kölner Phonetik) transcription based on Apache Commons Codec. Works for German.
  */
-@ResourceMetaData(name="Commons Codec Cologne Phonetic Transcriptor")
+@ResourceMetaData(name = "Commons Codec Cologne Phonetic Transcriptor")
 @LanguageCapability("de")
 @TypeCapability(
-        inputs={"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
-        outputs={"de.tudarmstadt.ukp.dkpro.core.api.phonetics.type.PhoneticTranscription"})
+        inputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
+        outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.phonetics.type.PhoneticTranscription" })
 
 public class ColognePhoneticTranscriptor
     extends PhoneticTranscriptor_ImplBase
 {
-
     public ColognePhoneticTranscriptor()
     {
         this.encoder = new ColognePhonetic();
