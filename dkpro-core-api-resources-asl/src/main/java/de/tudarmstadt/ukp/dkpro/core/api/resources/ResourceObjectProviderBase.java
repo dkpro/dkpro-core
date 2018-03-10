@@ -69,6 +69,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.util.PropertyPlaceholderHelper;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.internal.ApacheCommonsLoggingAdapter;
@@ -306,7 +307,7 @@ public abstract class ResourceObjectProviderBase<M>
         // finds the already-loaded model and simply reuses it. Sharing models can also lead to
         // unexpected results or crashes in multi-threaded environments.
         // Allowed values: "true" and "false"
-        String key = "dkpro.core.resourceprovider.sharable."+aObject.getClass().getName();
+        String key = "dkpro.core.resourceprovider.sharable." + aObject.getClass().getName();
         if (System.getProperty(key) != null) {
             setDefault(SHARABLE, System.getProperty(key));
         }
@@ -419,7 +420,7 @@ public abstract class ResourceObjectProviderBase<M>
             String moduleArtifactId = modelArtifact.split("-")[0];
             String pomPattern = base + "META-INF/maven/" + modelGroup + "/" + moduleArtifactId +
                     "*/pom.xml";
-            PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+            ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
             Resource[] resources = resolver.getResources(pomPattern);
 
             // Bail out if no POM was found
@@ -428,13 +429,12 @@ public abstract class ResourceObjectProviderBase<M>
                         + extraNotFoundInfo);
             }
 
-            for(Resource resource : resources){
-                urls.add(resource.getURL());
+            for (Resource r : resources) {
+                urls.add(r.getURL());
             }
-
         }
 
-        for(URL pomUrl : urls){
+        for (URL pomUrl : urls) {
             // Parser the POM
             Model model;
             try {
@@ -570,8 +570,8 @@ public abstract class ResourceObjectProviderBase<M>
                         log.info("Producing resource from " + resourceUrl);
                     }
                     else {
-                        log.info("Producing resource from [" + resourceUrl + "] redirected from [" + initialResourceUrl
-                                + "]");
+                        log.info("Producing resource from [" + resourceUrl + "] redirected from ["
+                                + initialResourceUrl + "]");
                     }
                     loadResource(props);
                 }
@@ -896,7 +896,7 @@ public abstract class ResourceObjectProviderBase<M>
                 sb.append("</dependency>\n");
                 sb.append('\n');
                 sb.append("Please consider that the model you are trying to use may not be publicly\n");
-                sb.append("distributable. Please refer to the DKPro Core User Guide for instructions\n"); 
+                sb.append("distributable. Please refer to the DKPro Core User Guide for instructions\n");
                 sb.append("on how to package non-redistributable models.");
             }
             else {

@@ -48,7 +48,7 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.SplitterAlgorithm;
 /**
  * Annotates compound parts and linking morphemes.
  */
-@ResourceMetaData(name="Compound Annotator")
+@ResourceMetaData(name = "Compound Annotator")
 @TypeCapability(
         inputs = { 
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 

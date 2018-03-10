@@ -35,7 +35,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_Im
  * lowercase everything but the first character of a token and the characters immediately following
  * a hyphen.
  */
-@ResourceMetaData(name="Token Case Transformer")
+@ResourceMetaData(name = "Token Case Transformer")
 public class TokenCaseTransformer
     extends JCasTransformerChangeBased_ImplBase
 {
@@ -51,7 +51,8 @@ public class TokenCaseTransformer
      * <ul>
      * <li>UPPERCASE: uppercase everything.</li>
      * <li>LOWERCASE: lowercase everything.</li>
-     * <li>NORMALCASE: retain first letter in word and after hyphens, lowercase everything else.</li>
+     * <li>NORMALCASE: retain first letter in word and after hyphens, lowercase everything
+     * else.</li>
      * </ul>
      */
     public static final String PARAM_CASE = "tokenCase";

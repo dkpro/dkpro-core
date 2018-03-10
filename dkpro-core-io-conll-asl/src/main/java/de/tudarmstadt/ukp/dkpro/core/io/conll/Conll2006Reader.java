@@ -61,7 +61,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
  * 
  * @see <a href="https://web.archive.org/web/20131216222420/http://ilk.uvt.nl/conll/">CoNLL-X Shared Task: Multi-lingual Dependency Parsing</a>
  */
-@ResourceMetaData(name="CoNLL 2006 Reader")
+@ResourceMetaData(name = "CoNLL 2006 Reader")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2006})
 @TypeCapability(
         outputs = { 
@@ -76,7 +76,8 @@ public class Conll2006Reader
     extends JCasResourceCollectionReader_ImplBase
 {
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
 
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
@@ -108,7 +109,8 @@ public class Conll2006Reader
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
     
@@ -171,10 +173,10 @@ public class Conll2006Reader
         throws IOException
     {
         if (readPos) {
-            try{
+            try {
                 posMappingProvider.configure(aJCas.getCas());
             }
-            catch(AnalysisEngineProcessException e){
+            catch (AnalysisEngineProcessException e) {
                 throw new IOException(e);
             }
         }

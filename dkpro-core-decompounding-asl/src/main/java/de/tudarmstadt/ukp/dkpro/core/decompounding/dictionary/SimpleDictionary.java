@@ -36,9 +36,9 @@ import java.util.Set;
  * 
  */
 public class SimpleDictionary
-	implements Dictionary
+    implements Dictionary
 {
-	private Set<String> words;
+    private Set<String> words;
 
     /**
      * Constructor for a simple dictionary

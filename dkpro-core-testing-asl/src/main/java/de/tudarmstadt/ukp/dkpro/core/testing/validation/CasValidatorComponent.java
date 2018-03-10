@@ -17,12 +17,12 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.testing.validation;
 
+import java.util.List;
+
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
-
-import java.util.List;
 
 public class CasValidatorComponent
     extends JCasConsumer_ImplBase

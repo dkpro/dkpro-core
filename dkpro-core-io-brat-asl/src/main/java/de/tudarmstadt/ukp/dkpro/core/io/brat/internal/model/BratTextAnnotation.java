@@ -102,7 +102,7 @@ public class BratTextAnnotation
         Matcher m = PATTERN.matcher(aLine);
         
         if (!m.matches()) {
-            throw new IllegalArgumentException("Illegal text annotation format ["+aLine+"]");
+            throw new IllegalArgumentException("Illegal text annotation format [" + aLine + "]");
         }
 
         return new BratTextAnnotation(m.group(ID), m.group(TYPE), Integer.valueOf(m.group(BEGIN)),

@@ -42,16 +42,16 @@ import edu.emory.mathcs.nlp.component.morph.english.EnglishMorphAnalyzer;
 /**
  * Emory NLP4J lemmatizer. This is a lower-casing lemmatizer.
  */
-@ResourceMetaData(name="NLP4J Lemmatizer")
+@ResourceMetaData(name = "NLP4J Lemmatizer")
 @TypeCapability(
-	    inputs = {
-	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-	        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"},
-	    outputs = {
-		    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
+        inputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"},
+        outputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
 public class Nlp4JLemmatizer
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
     /**
      * Use this language instead of the document language to resolve the model.
@@ -91,26 +91,26 @@ public class Nlp4JLemmatizer
         };
     }
     
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
-	    modelProvider.configure(aJCas.getCas());
-	    
-	    MorphAnalyzer lemmatizer = modelProvider.getResource();
-	    
-	    for (Token t : select(aJCas, Token.class)) {
-	        String pos = null;
-	        if (t.getPos() != null) {
-	            pos = t.getPos().getPosValue();
-	        }
-	        
-	        Lemma lemma = new Lemma(aJCas, t.getBegin(), t.getEnd());
+    @Override
+    public void process(JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
+        modelProvider.configure(aJCas.getCas());
+        
+        MorphAnalyzer lemmatizer = modelProvider.getResource();
+        
+        for (Token t : select(aJCas, Token.class)) {
+            String pos = null;
+            if (t.getPos() != null) {
+                pos = t.getPos().getPosValue();
+            }
+            
+            Lemma lemma = new Lemma(aJCas, t.getBegin(), t.getEnd());
             lemma.setValue(lemmatizer.lemmatize(StringUtils.toSimplifiedForm(t.getText()),
                     pos));
             lemma.addToIndexes();
             
             t.setLemma(lemma);
-	    }
-	}
+        }
+    }
 }

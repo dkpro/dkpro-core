@@ -91,9 +91,9 @@ public abstract class PdfLayoutEventStripper
      * 
      * Most PDFs won't have any beads, so charactersByArticle will contain a single entry.
      */
-    protected Vector<List<TextPosition>> charactersByArticle = new Vector<List<TextPosition>>();
+    protected Vector<List<TextPosition>> charactersByArticle = new Vector<>();
 
-    private final Map<String, List<TextPosition>> characterListMapping = new HashMap<String, List<TextPosition>>();
+    private final Map<String, List<TextPosition>> characterListMapping = new HashMap<>();
 
     /**
      * Instantiate a new PDFTextStripper object. This object will load properties from
@@ -102,11 +102,10 @@ public abstract class PdfLayoutEventStripper
      * @throws IOException
      *             If there is an error loading the properties.
      */
-    public PdfLayoutEventStripper()
-        throws IOException
+    public PdfLayoutEventStripper() throws IOException
     {
-        super(ResourceLoader.loadProperties(
-                "org/apache/pdfbox/resources/PDFTextStripper.properties", true));
+        super(ResourceLoader
+                .loadProperties("org/apache/pdfbox/resources/PDFTextStripper.properties", true));
     }
 
     /**
@@ -119,8 +118,7 @@ public abstract class PdfLayoutEventStripper
      * @throws IOException
      *             If there is an error reading the properties.
      */
-    public PdfLayoutEventStripper(final Properties props)
-        throws IOException
+    public PdfLayoutEventStripper(final Properties props) throws IOException
     {
         super(props);
     }
@@ -134,8 +132,7 @@ public abstract class PdfLayoutEventStripper
      * @throws IOException
      *             If the doc is in an invalid state.
      */
-    public void writeText(final PDDocument doc)
-        throws IOException
+    public void writeText(final PDDocument doc) throws IOException
     {
         resetEngine();
 
@@ -174,8 +171,7 @@ public abstract class PdfLayoutEventStripper
      * @throws IOException
      *             If there is an error parsing the text.
      */
-    protected void processPages(List<PDPage> pages)
-        throws IOException
+    protected void processPages(List<PDPage> pages) throws IOException
     {
         maxPage = pages.size();
 
@@ -200,8 +196,7 @@ public abstract class PdfLayoutEventStripper
      * @throws IOException
      *             If there is an error processing the page.
      */
-    protected void processPage(final PDPage page, final COSStream content)
-        throws IOException
+    protected void processPage(final PDPage page, final COSStream content) throws IOException
     {
         if ((currentPageNo >= startPage) && (currentPageNo <= endPage)) {
             startPage(startPage, Math.min(maxPage, endPage), currentPageNo, page);
@@ -244,8 +239,7 @@ public abstract class PdfLayoutEventStripper
      * @throws IOException
      *             if there is an error writing to the stream.
      */
-    protected void processArticle(final List<TextPosition> textList)
-        throws IOException
+    protected void processArticle(final List<TextPosition> textList) throws IOException
     {
         // Nothing to do in this article?
         if (textList.size() == 0) {
@@ -300,8 +294,8 @@ public abstract class PdfLayoutEventStripper
                 final boolean leftIndented = isLeftIndented(textList.get(cur), pred);
                 final boolean leftOutdented = isLeftOutdented(textList.get(cur), pred);
                 // boolean fontSwitch = (fontSize[cur] != fontSize[cur-1]);
-                final boolean vAdjacent = isVerticallyAdjacent(textList.get(cur).getY(), textList
-                        .get(cur - 1).getY(), block.linespacing);
+                final boolean vAdjacent = isVerticallyAdjacent(textList.get(cur).getY(),
+                        textList.get(cur - 1).getY(), block.linespacing);
 
                 if (!columnSwitch && !leftIndented && !leftOutdented &&
                 /* !fontSwitch && */vAdjacent) {
@@ -522,8 +516,10 @@ public abstract class PdfLayoutEventStripper
      * Detects whether text in two positions is on the same line. This method is a bit fuzzy so we
      * also get potential superscripts and subscripts.
      * 
-     * @param cur current position.
-     * @param prev previous position.
+     * @param cur
+     *            current position.
+     * @param prev
+     *            previous position.
      * @return if both are in the same line.
      */
     private static boolean isSameLine(final TextPosition cur, final TextPosition prev)
@@ -714,7 +710,8 @@ public abstract class PdfLayoutEventStripper
         }
 
         // if (_log.isTraceEnabled()) {
-        // _log.trace("Left:  size:"+left_buckets.getBest().size()+" - lines:"+lines2.size()+" - depth:"+depth);
+        // _log.trace("Left: size:"+left_buckets.getBest().size()+" - lines:"+lines2.size()+" -
+        // depth:"+depth);
         // }
 
         lb = new LineBlock(lines2);
@@ -749,8 +746,7 @@ public abstract class PdfLayoutEventStripper
      * @throws IOException
      *             If an IO error occurs.
      */
-    protected abstract void startDocument(PDDocument pdf)
-        throws IOException;
+    protected abstract void startDocument(PDDocument pdf) throws IOException;
 
     /**
      * This method is available for subclasses of this class. It will be called after processing of
@@ -761,8 +757,7 @@ public abstract class PdfLayoutEventStripper
      * @throws IOException
      *             If an IO error occurs.
      */
-    protected abstract void endDocument(PDDocument pdf)
-        throws IOException;
+    protected abstract void endDocument(PDDocument pdf) throws IOException;
 
     /**
      * Start a new region.
@@ -772,8 +767,7 @@ public abstract class PdfLayoutEventStripper
      * @throws IOException
      *             If there is any error writing to the stream.
      */
-   protected abstract void startRegion(Style style)
-        throws IOException;
+    protected abstract void startRegion(Style style) throws IOException;
 
     /**
      * End a region.
@@ -783,8 +777,7 @@ public abstract class PdfLayoutEventStripper
      * @throws IOException
      *             If there is any error writing to the stream.
      */
-    protected abstract void endRegion(Style style)
-        throws IOException;
+    protected abstract void endRegion(Style style) throws IOException;
 
     /**
      * Start a new page.
@@ -822,11 +815,9 @@ public abstract class PdfLayoutEventStripper
     protected abstract void endPage(int firstPage, int lastPage, int currentPage, PDPage page)
         throws IOException;
 
-    protected abstract void processLineSeparator()
-        throws IOException;
+    protected abstract void processLineSeparator() throws IOException;
 
-    protected abstract void processWordSeparator()
-        throws IOException;
+    protected abstract void processWordSeparator() throws IOException;
 
     /**
      * Write the string to the output stream.
@@ -836,8 +827,7 @@ public abstract class PdfLayoutEventStripper
      * @throws IOException
      *             If there is an error when writing the text.
      */
-    protected abstract void writeCharacters(TextPosition text)
-        throws IOException;
+    protected abstract void writeCharacters(TextPosition text) throws IOException;
 
     /**
      * This is the page that the text extraction will start on. The pages start at page 1. For

@@ -74,4 +74,5 @@ public class Nlp4JNamedEntityRecognizerTest
     }
 
     @Rule
-    public DkproTestContext testContext = new DkproTestContext();}
+    public DkproTestContext testContext = new DkproTestContext();
+}

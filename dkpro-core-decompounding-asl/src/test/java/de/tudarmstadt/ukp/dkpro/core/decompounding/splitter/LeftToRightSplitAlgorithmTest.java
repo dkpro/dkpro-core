@@ -35,86 +35,85 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.SimpleDictionary;
 
 public class LeftToRightSplitAlgorithmTest
 {
+    @Test
+    public void testSplit1()
+    {
+        Dictionary dict = new SimpleDictionary("Akt", "ion", "plan", "Aktion",
+                "Aktionsplan");
+        LinkingMorphemes morphemes = new LinkingMorphemes("s");
+        LeftToRightSplitterAlgorithm algo = new LeftToRightSplitterAlgorithm(dict,
+                morphemes);
 
-	@Test
-	public void testSplit1()
-	{
-		Dictionary dict = new SimpleDictionary("Akt", "ion", "plan", "Aktion",
-				"Aktionsplan");
-		LinkingMorphemes morphemes = new LinkingMorphemes("s");
-		LeftToRightSplitterAlgorithm algo = new LeftToRightSplitterAlgorithm(dict,
-				morphemes);
+        List<DecompoundedWord> result = algo.split("Aktionsplan").getAllSplits();
+        assertEquals(6, result.size());
+        assertEquals("aktionsplan", result.get(0).toString());
+        assertEquals("akt+ionsplan", result.get(1).toString());
+        assertEquals("akt+ion+splan", result.get(2).toString());
+        assertEquals("akt+ion(s)+plan", result.get(3).toString());
+        assertEquals("aktion+splan", result.get(4).toString());
+        assertEquals("aktion(s)+plan", result.get(5).toString());
+    }
 
-		List<DecompoundedWord> result = algo.split("Aktionsplan").getAllSplits();
-		assertEquals(6, result.size());
-		assertEquals("aktionsplan", result.get(0).toString());
-		assertEquals("akt+ionsplan", result.get(1).toString());
-		assertEquals("akt+ion+splan", result.get(2).toString());
-		assertEquals("akt+ion(s)+plan", result.get(3).toString());
-		assertEquals("aktion+splan", result.get(4).toString());
-		assertEquals("aktion(s)+plan", result.get(5).toString());
-	}
+    @Test
+    public void testSplit2()
+    {
+        Dictionary dict = new SimpleDictionary("Donau", "dampf", "schiff",
+                "fahrt", "dampfschiff", "schifffahrt");
+        LinkingMorphemes morphemes = new LinkingMorphemes("s");
+        LeftToRightSplitterAlgorithm algo = new LeftToRightSplitterAlgorithm(dict,
+                morphemes);
 
-	@Test
-	public void testSplit2()
-	{
-		Dictionary dict = new SimpleDictionary("Donau", "dampf", "schiff",
-				"fahrt", "dampfschiff", "schifffahrt");
-		LinkingMorphemes morphemes = new LinkingMorphemes("s");
-		LeftToRightSplitterAlgorithm algo = new LeftToRightSplitterAlgorithm(dict,
-				morphemes);
+        List<DecompoundedWord> result = algo.split("Donaudampfschifffahrt").getAllSplits();
+        assertEquals(6, result.size());
+    }
 
-		List<DecompoundedWord> result = algo.split("Donaudampfschifffahrt").getAllSplits();
-		assertEquals(6, result.size());
-	}
+    @Test
+    public void testSplit3()
+    {
+        Dictionary dict = new SimpleDictionary("Super", "mann", "anzug",
+                "Supermann", "anzug");
+        LinkingMorphemes morphemes = new LinkingMorphemes("s");
+        LeftToRightSplitterAlgorithm algo = new LeftToRightSplitterAlgorithm(dict,
+                morphemes);
 
-	@Test
-	public void testSplit3()
-	{
-		Dictionary dict = new SimpleDictionary("Super", "mann", "anzug",
-				"Supermann", "anzug");
-		LinkingMorphemes morphemes = new LinkingMorphemes("s");
-		LeftToRightSplitterAlgorithm algo = new LeftToRightSplitterAlgorithm(dict,
-				morphemes);
+        List<DecompoundedWord> result = algo.split("Supermannanzug").getAllSplits();
+        // Super+mann+anzug, Supermann+anzug
+        assertEquals(4, result.size());
+    }
 
-		List<DecompoundedWord> result = algo.split("Supermannanzug").getAllSplits();
-		// Super+mann+anzug, Supermann+anzug
-		assertEquals(4, result.size());
-	}
+    @Test
+    public void testMorphemes1()
+    {
+        Dictionary dict = new SimpleDictionary("alarm", "reaktion");
+        LinkingMorphemes morphemes = new LinkingMorphemes("en");
+        LeftToRightSplitterAlgorithm algo = new LeftToRightSplitterAlgorithm(dict,
+                morphemes);
 
-	@Test
-	public void testMorphemes1()
-	{
-		Dictionary dict = new SimpleDictionary("alarm", "reaktion");
-		LinkingMorphemes morphemes = new LinkingMorphemes("en");
-		LeftToRightSplitterAlgorithm algo = new LeftToRightSplitterAlgorithm(dict,
-				morphemes);
+        List<DecompoundedWord> result = algo.split("alarmreaktionen").getAllSplits();
+        // Super+mann+anzug, Supermann+anzug
+        assertEquals(3, result.size());
+        assertEquals("alarmreaktionen", result.get(0).toString());
+        assertEquals("alarm+reaktionen", result.get(1).toString());
+        assertEquals("alarm+reaktion(en)", result.get(2).toString());
+    }
 
-		List<DecompoundedWord> result = algo.split("alarmreaktionen").getAllSplits();
-		// Super+mann+anzug, Supermann+anzug
-		assertEquals(3, result.size());
-		assertEquals("alarmreaktionen", result.get(0).toString());
-		assertEquals("alarm+reaktionen", result.get(1).toString());
-		assertEquals("alarm+reaktion(en)", result.get(2).toString());
-	}
+    @Test
+    public void testSplit4() throws IOException
+    {
+        final File dictFile = ResourceUtils.getUrlAsFile(getClass().getResource(
+                "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"),
+                false);
+        final File morphemesFile = ResourceUtils.getUrlAsFile(getClass().getResource(
+                "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-linking.linking"),
+                false);
 
-	@Test
-	public void testSplit4() throws IOException{
+        Dictionary dict = new SimpleDictionary(dictFile, "UTF-8");
+        LinkingMorphemes morphemes = new LinkingMorphemes(morphemesFile);
 
-        final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
-        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"), false);
-        final File morphemesFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
-        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-linking.linking"), false);
+        LeftToRightSplitterAlgorithm splitter = new LeftToRightSplitterAlgorithm(dict,morphemes);
 
-	    Dictionary dict = new SimpleDictionary(dictFile, "UTF-8");
-	    LinkingMorphemes morphemes = new LinkingMorphemes(morphemesFile);
+        List<DecompoundedWord> result = splitter.split("geräteelektronik").getAllSplits();
 
-	    LeftToRightSplitterAlgorithm splitter = new LeftToRightSplitterAlgorithm(dict,morphemes);
-
-	    List<DecompoundedWord> result = splitter.split("geräteelektronik").getAllSplits();
-
-	    assertThat(result.size(),is(1));
-
-	}
-
+        assertThat(result.size(),is(1));
+    }
 }

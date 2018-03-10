@@ -39,11 +39,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * This segmenter splits sentences and tokens based on regular expressions that define the sentence
  * and token boundaries.
  * <p>
- * The default behaviour is to split sentences by a line break and tokens by whitespace.
+ * The default behavior is to split sentences by a line break and tokens by whitespace.
  */
-@ResourceMetaData(name="Regex Segmenter")
+@ResourceMetaData(name = "Regex Segmenter")
 @TypeCapability(
-        outputs={
+        outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
 public class RegexSegmenter
@@ -63,7 +63,8 @@ public class RegexSegmenter
      * 
      */
     public static final String PARAM_TOKEN_BOUNDARY_REGEX = "tokenBoundaryRegex";
-    @ConfigurationParameter(name = PARAM_TOKEN_BOUNDARY_REGEX, mandatory = true, defaultValue = WHITESPACE_PATTERN)
+    @ConfigurationParameter(name = PARAM_TOKEN_BOUNDARY_REGEX, mandatory = true, 
+            defaultValue = WHITESPACE_PATTERN)
     private String tokenBoundaryRegex;
     private Pattern tokenBoundaryPattern;
 
@@ -71,7 +72,8 @@ public class RegexSegmenter
      * Define the sentence boundary. Default: {@code \n} (assume one sentence per line).
      */
     public static final String PARAM_SENTENCE_BOUNDARY_REGEX = "sentenceBoundaryRegex";
-    @ConfigurationParameter(name = PARAM_SENTENCE_BOUNDARY_REGEX, mandatory = true, defaultValue = LINEBREAK_PATTERN)
+    @ConfigurationParameter(name = PARAM_SENTENCE_BOUNDARY_REGEX, mandatory = true, 
+            defaultValue = LINEBREAK_PATTERN)
     private String sentenceBoundaryRegex;
     private Pattern sentenceBoundaryPattern;
 

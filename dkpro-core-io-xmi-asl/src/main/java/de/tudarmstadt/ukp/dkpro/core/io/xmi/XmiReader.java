@@ -53,13 +53,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 /**
  * Reader for UIMA XMI files.
  */
-@ResourceMetaData(name="UIMA XMI CAS Reader")
+@ResourceMetaData(name = "UIMA XMI CAS Reader")
 @MimeTypeCapability({MimeTypes.APPLICATION_VND_XMI_XML, MimeTypes.APPLICATION_X_UIMA_XMI})
 @TypeCapability(
-        outputs={
+        outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
 public class XmiReader
-	extends ResourceCollectionReaderBase
+    extends ResourceCollectionReaderBase
 {
     /**
      * In lenient mode, unknown types are ignored and do not cause an exception to be thrown.
@@ -72,7 +72,7 @@ public class XmiReader
      * Add DKPro Core metadata if it is not already present in the document. 
      */
     public static final String PARAM_ADD_DOCUMENT_METADATA = "addDocumentMetadata";
-    @ConfigurationParameter(name=PARAM_ADD_DOCUMENT_METADATA, mandatory=true, defaultValue="true")
+    @ConfigurationParameter(name = PARAM_ADD_DOCUMENT_METADATA, mandatory = true, defaultValue = "true")
     private boolean addDocumentMetadata;
     
     /**
@@ -80,7 +80,7 @@ public class XmiReader
      * of retaining what is already present in the XMI file.
      */
     public static final String PARAM_OVERRIDE_DOCUMENT_METADATA = "overrideDocumentMetadata";
-    @ConfigurationParameter(name=PARAM_OVERRIDE_DOCUMENT_METADATA, mandatory=true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_OVERRIDE_DOCUMENT_METADATA, mandatory = true, defaultValue = "false")
     private boolean overrideDocumentMetadata;
     
     /**
@@ -100,10 +100,10 @@ public class XmiReader
     @ConfigurationParameter(name = PARAM_TYPE_SYSTEM_FILE, mandatory = false)
     private File typeSystemFile;
     
-	@Override
-	public void getNext(CAS aCAS)
-		throws IOException, CollectionException
-	{
+    @Override
+    public void getNext(CAS aCAS)
+        throws IOException, CollectionException
+    {
         if (nonNull(typeSystemFile)) {
             try {
                 List<TypeSystemDescription> tsds = new ArrayList<>();
@@ -128,7 +128,7 @@ public class XmiReader
                 throw new IOException(e);
             }
         }
-	    
+        
         Resource res = nextFile();
 
         // Read XMI file
@@ -160,5 +160,5 @@ public class XmiReader
         else if (addDocumentMetadata) {
             initCas(aCAS, res);
         }
-	}
+    }
 }

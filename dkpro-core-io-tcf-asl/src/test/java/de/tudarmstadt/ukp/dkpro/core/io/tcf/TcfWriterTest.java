@@ -54,7 +54,8 @@ public class TcfWriterTest
         // Generate a fake metadata that points to a non-TCF file
         DocumentMetaData meta = DocumentMetaData.create(jcas);
         meta.setDocumentBaseUri(new File("src/test/resources").toURI().toURL().toString());
-        meta.setDocumentUri(new File("src/test/resources/not-a-tcf-file.txt").toURI().toURL().toString());
+        meta.setDocumentUri(
+                new File("src/test/resources/not-a-tcf-file.txt").toURI().toURL().toString());
 
         // Add some content
         jcas.setDocumentText("okeydokey");

@@ -180,8 +180,9 @@ public abstract class ResourceCollectionReaderBase
                     // If there is a separator before the asterisk use it to separate into
                     // base and pattern. This is meant to catch cases such as "dir/foo*.txt" of
                     // file:foo*.txt
-                    patterns = new String[] { INCLUDE_PREFIX + sourceLocation.substring(separator+1) };
-                    sourceLocation = sourceLocation.substring(0, separator+1);
+                    patterns = new String[] {
+                            INCLUDE_PREFIX + sourceLocation.substring(separator + 1) };
+                    sourceLocation = sourceLocation.substring(0, separator + 1);
                 }
                 else {
                     patterns = new String[] { INCLUDE_PREFIX + sourceLocation };
@@ -408,7 +409,7 @@ public abstract class ResourceCollectionReaderBase
         boolean singleLocation = isSingleLocation();
         String base = getBase(aBase);
 
-        getLogger().info("Scanning [" +base + "]");
+        getLogger().info("Scanning [" + base + "]");
         
         Collection<String> includes;
         Collection<String> excludes;

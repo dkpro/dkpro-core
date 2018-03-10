@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2007-2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -77,7 +77,8 @@ public class CasCopier
     private final LowLevelCAS mLowLevelDestCas;
     private final Feature mDestSofaFeature;
 
-    private final Map<FeatureStructure, FeatureStructure> mFsMap = new HashMap<FeatureStructure, FeatureStructure>();
+    private final Map<FeatureStructure, FeatureStructure> mFsMap = 
+            new HashMap<FeatureStructure, FeatureStructure>();
 
     private List<Annotation> batchCopyAnnoList = null;
 
@@ -319,8 +320,8 @@ public class CasCopier
             // enumerate all possible primitive types. Maybe LowLevel CAS API
             // could help?
             if (srcFeat.getRange().isPrimitive()) {
-
-                aDestFS.setFeatureValueFromString(destFeat, aSrcFS.getFeatureValueAsString(srcFeat));
+                aDestFS.setFeatureValueFromString(destFeat,
+                        aSrcFS.getFeatureValueAsString(srcFeat));
             }
             else {
                 // recursive copy

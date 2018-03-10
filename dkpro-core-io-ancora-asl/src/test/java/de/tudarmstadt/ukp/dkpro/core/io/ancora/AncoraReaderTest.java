@@ -23,6 +23,7 @@ import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDe
 
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2006Writer;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 

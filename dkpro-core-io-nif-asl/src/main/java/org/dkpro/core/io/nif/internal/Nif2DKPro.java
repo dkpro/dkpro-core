@@ -229,5 +229,5 @@ public class Nif2DKPro
         assert aUima.getEnd() >= 0 && aUima.getEnd() <= docLength;
         
         return true;
-   }
+    }
 }

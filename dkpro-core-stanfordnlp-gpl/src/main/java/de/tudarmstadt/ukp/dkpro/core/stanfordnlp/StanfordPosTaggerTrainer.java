@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2007-2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -56,7 +56,7 @@ import edu.stanford.nlp.tagger.maxent.MaxentTagger;
  * Train a POS tagging model for the Stanford POS tagger.
  */
 @MimeTypeCapability(MimeTypes.APPLICATION_X_STANFORDNLP_TAGGER)
-@ResourceMetaData(name="CoreNLP POS-Tagger Trainer")
+@ResourceMetaData(name = "CoreNLP POS-Tagger Trainer")
 public class StanfordPosTaggerTrainer
     extends JCasConsumer_ImplBase
 {
@@ -66,9 +66,9 @@ public class StanfordPosTaggerTrainer
 
     /**
      * Training file containing the parameters. The <code>trainFile</code>, <code>model</code> and
-     * <code>encoding</code> parameters in this file are ignored/overwritten. In the <code>arch</code>
-     * parameter, the string <code>${distsimCluster}</code> is replaced with the path to the cluster
-     * files if {@link #PARAM_CLUSTER_FILE} is specified.
+     * <code>encoding</code> parameters in this file are ignored/overwritten. In the
+     * <code>arch</code> parameter, the string <code>${distsimCluster}</code> is replaced with the
+     * path to the cluster files if {@link #PARAM_CLUSTER_FILE} is specified.
      */
     public static final String PARAM_PARAMETER_FILE = "trainFile";
     @ConfigurationParameter(name = PARAM_PARAMETER_FILE, mandatory = false)
@@ -97,9 +97,10 @@ public class StanfordPosTaggerTrainer
             if (clusterFile != null) {
                 String p = clusterFile.getAbsolutePath();
                 if (p.contains("(") || p.contains(")") || p.contains(",")) {
-                    // The Stanford POS tagger trainer does not support these characters in the cluster
-                    // files path. If we have those, try to copy the clusters somewhere save before
-                    // training. See: https://github.com/stanfordnlp/CoreNLP/issues/255
+                    // The Stanford POS tagger trainer does not support these characters in the
+                    // cluster files path. If we have those, try to copy the clusters somewhere
+                    // save before training. 
+                    // See: https://github.com/stanfordnlp/CoreNLP/issues/255
                     File tempClusterFile = File.createTempFile("dkpro-stanford-pos-trainer",
                             ".cluster");
                     FileUtils.copyFile(clusterFile, tempClusterFile);
@@ -120,8 +121,8 @@ public class StanfordPosTaggerTrainer
         if (tempData == null) {
             try {
                 tempData = File.createTempFile("dkpro-stanford-pos-trainer", ".tsv");
-                out = new PrintWriter(
-                        new OutputStreamWriter(new FileOutputStream(tempData), StandardCharsets.UTF_8));
+                out = new PrintWriter(new OutputStreamWriter(new FileOutputStream(tempData),
+                        StandardCharsets.UTF_8));
             }
             catch (IOException e) {
                 throw new AnalysisEngineProcessException(e);

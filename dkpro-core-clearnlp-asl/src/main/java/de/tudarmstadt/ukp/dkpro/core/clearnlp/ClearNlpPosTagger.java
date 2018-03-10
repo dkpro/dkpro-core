@@ -70,7 +70,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * Part-of-Speech annotator using Clear NLP. Requires {@link Sentence}s to be annotated before.
  *
  */
-@ResourceMetaData(name="ClearNLP POS-Tagger")
+@ResourceMetaData(name = "ClearNLP POS-Tagger")
 @TypeCapability(
     inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
@@ -118,7 +118,8 @@ public class ClearNlpPosTagger
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
      * mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
@@ -198,9 +199,10 @@ public class ClearNlpPosTagger
 
                     String language = getAggregatedProperties().getProperty(LANGUAGE);
                     AbstractPOSTagger tagger;
-                    if(language.equals("en")){
+                    if (language.equals("en")) {
                         tagger = new DkproPosTagger(ois);
-                    }else{
+                    }
+                    else {
                         tagger = new DefaultPOSTagger(ois);
                     }
 
@@ -268,8 +270,9 @@ public class ClearNlpPosTagger
         }
     }
 
-    private class DkproPosTagger extends EnglishPOSTagger{
-
+    private class DkproPosTagger
+        extends EnglishPOSTagger
+    {
         public DkproPosTagger(ObjectInputStream in)
         {
             super(in);
@@ -280,6 +283,5 @@ public class ClearNlpPosTagger
         {
             mp_analyzer = new EnglishMPAnalyzer(dictModelProvider.getResource());
         }
-
     }
 }

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2007-2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -34,7 +34,7 @@ import edu.stanford.nlp.process.Tokenizer;
  * Uses the normalizing tokenizer of the Stanford CoreNLP tools to escape the text PTB-style. This
  * component operates directly on the text and does not require prior segmentation.
  */
-@ResourceMetaData(name="Stanford Penn Treebank Normalizer")
+@ResourceMetaData(name = "Stanford Penn Treebank Normalizer")
 public class StanfordPtbTransformer
     extends JCasTransformerChangeBased_ImplBase
 {

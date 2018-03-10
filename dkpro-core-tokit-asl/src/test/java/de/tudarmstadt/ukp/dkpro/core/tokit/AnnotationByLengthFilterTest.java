@@ -49,7 +49,8 @@ public class AnnotationByLengthFilterTest
 
         JCas jcas = filter.newJCas();
 
-        TokenBuilder<Token, Annotation> tb = new TokenBuilder<Token, Annotation>(Token.class, Annotation.class);
+        TokenBuilder<Token, Annotation> tb = new TokenBuilder<Token, Annotation>(Token.class,
+                Annotation.class);
         tb.buildTokens(jcas, content);
         filter.process(jcas);
 
@@ -57,22 +58,23 @@ public class AnnotationByLengthFilterTest
     }
 
     @Test
-	public void testMax()
-		throws Exception
-	{
-		AnalysisEngine filter = createEngine(
-		        AnnotationByLengthFilter.class,
-                AnnotationByLengthFilter.PARAM_FILTER_ANNOTATION_TYPES, new String[] {Token.class.getName()},
-				AnnotationByLengthFilter.PARAM_MAX_LENGTH, 5);
+    public void testMax()
+        throws Exception
+    {
+        AnalysisEngine filter = createEngine(
+                AnnotationByLengthFilter.class,
+                AnnotationByLengthFilter.PARAM_FILTER_ANNOTATION_TYPES, Token.class,
+                AnnotationByLengthFilter.PARAM_MAX_LENGTH, 5);
 
-		JCas jcas = filter.newJCas();
+        JCas jcas = filter.newJCas();
 
-        TokenBuilder<Token, Annotation> tb = new TokenBuilder<Token, Annotation>(Token.class, Annotation.class);
+        TokenBuilder<Token, Annotation> tb = new TokenBuilder<Token, Annotation>(Token.class,
+                Annotation.class);
         tb.buildTokens(jcas, content);
-		filter.process(jcas);
+        filter.process(jcas);
 
-		assertEquals("1 22 333 4444 55555", StringUtils.join(toText(select(jcas, Token.class)), " "));
-	}
+        assertEquals("1 22 333 4444 55555", StringUtils.join(toText(select(jcas, Token.class)), " "));
+    }
 
     @Test
     public void testMinMax()
@@ -80,13 +82,14 @@ public class AnnotationByLengthFilterTest
     {
         AnalysisEngine filter = createEngine(
                 AnnotationByLengthFilter.class,
-                AnnotationByLengthFilter.PARAM_FILTER_ANNOTATION_TYPES, new String[] {Token.class.getName()},
+                AnnotationByLengthFilter.PARAM_FILTER_ANNOTATION_TYPES, Token.class,
                 AnnotationByLengthFilter.PARAM_MIN_LENGTH, 3,
                 AnnotationByLengthFilter.PARAM_MAX_LENGTH, 5);
 
         JCas jcas = filter.newJCas();
 
-        TokenBuilder<Token, Annotation> tb = new TokenBuilder<Token, Annotation>(Token.class, Annotation.class);
+        TokenBuilder<Token, Annotation> tb = new TokenBuilder<Token, Annotation>(Token.class,
+                Annotation.class);
         tb.buildTokens(jcas, content);
         filter.process(jcas);
 
@@ -99,13 +102,15 @@ public class AnnotationByLengthFilterTest
     {
         AnalysisEngine filter = createEngine(
                 AnnotationByLengthFilter.class,
-                AnnotationByLengthFilter.PARAM_FILTER_ANNOTATION_TYPES, new String[] {Token.class.getName(), Stem.class.getName()},
+                AnnotationByLengthFilter.PARAM_FILTER_ANNOTATION_TYPES, new String[] {
+                        Token.class.getName(), Stem.class.getName()},
                 AnnotationByLengthFilter.PARAM_MIN_LENGTH, 3,
                 AnnotationByLengthFilter.PARAM_MAX_LENGTH, 5);
 
         JCas jcas = filter.newJCas();
 
-        TokenBuilder<Token, Annotation> tb = new TokenBuilder<Token, Annotation>(Token.class, Annotation.class);
+        TokenBuilder<Token, Annotation> tb = new TokenBuilder<Token, Annotation>(Token.class,
+                Annotation.class);
         tb.buildTokens(jcas, content);
 
         for (Token token : JCasUtil.select(jcas, Token.class)) {

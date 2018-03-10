@@ -37,16 +37,11 @@ import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.RevisionApi;
 
 /**
  * Reads all general article infos without retrieving the whole Page objects
- *
- *
  */
-
 @TypeCapability(
-        outputs={
+        outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
                 "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.ArticleInfo"})
-
-
 public class WikipediaArticleInfoReader extends WikipediaReaderBase
 {
     protected long currentArticleIndex;
@@ -57,63 +52,64 @@ public class WikipediaArticleInfoReader extends WikipediaReaderBase
 
     @Override
     public void initialize(UimaContext context)
-        throws ResourceInitializationException{
+        throws ResourceInitializationException {
         super.initialize(context);
 
         MetaData md = wiki.getMetaData();
-	    this.nrOfArticles = md.getNumberOfPages() - md.getNumberOfDisambiguationPages() - md.getNumberOfRedirectPages();
-	    this.currentArticleIndex = 0;
+        this.nrOfArticles = md.getNumberOfPages() - md.getNumberOfDisambiguationPages()
+                - md.getNumberOfRedirectPages();
+        this.currentArticleIndex = 0;
 
-		RevisionAPIConfiguration revConfig = new RevisionAPIConfiguration(dbconfig);
+        RevisionAPIConfiguration revConfig = new RevisionAPIConfiguration(dbconfig);
 
-		try {
-			revApi = new RevisionApi(revConfig);
-		}
-		catch (WikiApiException e) {
-			throw new ResourceInitializationException(e);
-		}
+        try {
+            revApi = new RevisionApi(revConfig);
+        }
+        catch (WikiApiException e) {
+            throw new ResourceInitializationException(e);
+        }
 
-	    idIter = wiki.getPageIds().iterator();
+        idIter = wiki.getPageIds().iterator();
     }
 
 
-	@Override
-	public boolean hasNext()
-		throws IOException, CollectionException
-	{
-		return idIter.hasNext();
-	}
+    @Override
+    public boolean hasNext()
+        throws IOException, CollectionException
+    {
+        return idIter.hasNext();
+    }
 
 
-	@Override
-	public void getNext(JCas aJCas)
-		throws IOException, CollectionException
-	{
-    	super.getNext(aJCas);
+    @Override
+    public void getNext(JCas aJCas)
+        throws IOException, CollectionException
+    {
+        super.getNext(aJCas);
 
-		int id = idIter.next();
+        int id = idIter.next();
         currentArticleIndex++;
 
         try
         {
-			addDocumentMetaData(aJCas, id);
+            addDocumentMetaData(aJCas, id);
 
-			ArticleInfo info = new ArticleInfo(aJCas);
-			info.setAuthors(revApi.getNumberOfUniqueContributors(id));
-			info.setRevisions(revApi.getNumberOfRevisions(id));
-			info.setFirstAppearance(revApi.getFirstDateOfAppearance(id).getTime());
-			info.setLastAppearance(revApi.getLastDateOfAppearance(id).getTime());
-			info.addToIndexes();
-		}
-		catch (WikiApiException e) {
-	        //could e.g. happen if no revision is available for this page
-			getLogger().warn("Unable to fetch next article", e);
-		}
-	}
+            ArticleInfo info = new ArticleInfo(aJCas);
+            info.setAuthors(revApi.getNumberOfUniqueContributors(id));
+            info.setRevisions(revApi.getNumberOfRevisions(id));
+            info.setFirstAppearance(revApi.getFirstDateOfAppearance(id).getTime());
+            info.setLastAppearance(revApi.getLastDateOfAppearance(id).getTime());
+            info.addToIndexes();
+        }
+        catch (WikiApiException e) {
+            //could e.g. happen if no revision is available for this page
+            getLogger().warn("Unable to fetch next article", e);
+        }
+    }
 
 
     @Override
-	public Progress[] getProgress()
+    public Progress[] getProgress()
     {
         return new Progress[] {
                 new ProgressImpl(

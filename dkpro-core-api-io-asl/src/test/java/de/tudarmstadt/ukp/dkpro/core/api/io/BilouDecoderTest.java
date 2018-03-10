@@ -41,9 +41,8 @@ public class BilouDecoderTest
     public void bilouEncoderTest() 
         throws Exception
     {
-        String[] input = new String[] {
-                "O","O","O","B-NP","I-NP","I-NP","L-NP","O","O","O","O","O","U-NP","O","U-NP","O","O","O"
-        };
+        String[] input = new String[] { "O", "O", "O", "B-NP", "I-NP", "I-NP", "L-NP", "O", "O",
+                "O", "O", "O", "U-NP", "O", "U-NP", "O", "O", "O" };
         
         String[] chunks = new String[] {
                 "[ 10, 43]Chunk(NP) (very complicated example sentence)",

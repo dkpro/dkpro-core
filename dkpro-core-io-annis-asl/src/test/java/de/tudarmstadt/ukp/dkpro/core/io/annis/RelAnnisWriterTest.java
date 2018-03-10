@@ -17,10 +17,11 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.annis;
 
-import static org.apache.commons.io.FileUtils.*;
+import static org.apache.commons.io.FileUtils.contentEqualsIgnoreEOL;
+import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
@@ -35,31 +36,30 @@ import de.tudarmstadt.ukp.dkpro.core.io.negra.NegraExportReader;
 
 public class RelAnnisWriterTest
 {
-	@Rule
-	public TemporaryFolder workspace = new TemporaryFolder();
+    @Rule
+    public TemporaryFolder workspace = new TemporaryFolder();
 
-	@Test
-	public void tuebaTest()
-		throws Exception
-	{
-		// create NegraExportReader output
-		CollectionReaderDescription reader = createReaderDescription(NegraExportReader.class,
-				NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/tueba/input/tueba-sample.export",
-				NegraExportReader.PARAM_LANGUAGE, "de",
-//				NegraExportReader.PARAM_READ_PENN_TREE, false,
-				NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8");
+    @Test
+    public void tuebaTest()
+        throws Exception
+    {
+        // create NegraExportReader output
+        CollectionReaderDescription reader = createReaderDescription(NegraExportReader.class,
+                NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/tueba/input/tueba-sample.export",
+                NegraExportReader.PARAM_LANGUAGE, "de",
+//                NegraExportReader.PARAM_READ_PENN_TREE, false,
+                NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8");
 
-		AnalysisEngineDescription writer = createEngineDescription(RelAnnisWriter.class,
-				RelAnnisWriter.PARAM_PATH, workspace.getRoot().getPath());
+        AnalysisEngineDescription writer = createEngineDescription(RelAnnisWriter.class,
+                RelAnnisWriter.PARAM_PATH, workspace.getRoot().getPath());
 
-		SimplePipeline.runPipeline(reader, writer);
+        SimplePipeline.runPipeline(reader, writer);
 
-	      // Check if the output matches the reference output
+        // Check if the output matches the reference output
         for (File f : workspace.getRoot().listFiles()) {
-            System.out.print("Checking ["+f.getName()+"]... ");
-            if(
-                    readFileToString(new File("src/test/resources/tueba/reference", f.getName()), "UTF-8").equals(
-                    readFileToString(f, "UTF-8"))) {
+            System.out.print("Checking [" + f.getName() + "]... ");
+            if (readFileToString(new File("src/test/resources/tueba/reference", f.getName()),
+                    "UTF-8").equals(readFileToString(f, "UTF-8"))) {
                 System.out.println("ok.");
             }
             else {
@@ -67,10 +67,10 @@ public class RelAnnisWriterTest
             }
         }
 
-		// Check if the output matches the reference output
-		for (File f : workspace.getRoot().listFiles()) {
+        // Check if the output matches the reference output
+        for (File f : workspace.getRoot().listFiles()) {
             assertTrue(contentEqualsIgnoreEOL(
                     new File("src/test/resources/tueba/reference", f.getName()), f, "UTF-8"));
-		}
-	}
+        }
+    }
 }

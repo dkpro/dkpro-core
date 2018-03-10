@@ -51,7 +51,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import javanet.staxutils.IndentingXMLEventWriter;
 
-@ResourceMetaData(name="XCES XML Writer")
+@ResourceMetaData(name = "XCES XML Writer")
 @TypeCapability(
         inputs = {            
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -70,7 +70,8 @@ public class XcesXmlWriter
      * Character encoding of the output data.
      */
     public static final String PARAM_TARGET_ENCODING = "targetEncoding";
-    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
 
     @Override

@@ -29,7 +29,8 @@ import edu.emory.mathcs.nlp.component.template.node.AbstractNLPNode;
 import edu.emory.mathcs.nlp.component.template.state.NLPState;
 import edu.emory.mathcs.nlp.learning.optimization.OnlineOptimizer;
 
-public class OnlineComponentTagsetDescriptionProvider<N extends AbstractNLPNode<N>, S extends NLPState<N>>
+public class OnlineComponentTagsetDescriptionProvider
+    <N extends AbstractNLPNode<N>, S extends NLPState<N>>
     extends TagsetBase
 {
     private String name;

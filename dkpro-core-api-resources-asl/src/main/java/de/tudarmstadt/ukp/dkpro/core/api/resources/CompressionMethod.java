@@ -19,24 +19,20 @@ package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
 /**
  * Compression methods.
- * 
  */
 public enum CompressionMethod
 {
-	NONE(""),
-	GZIP(".gz"),
-	BZIP2(".bz2"),
-	XZ(".xz");
-	
-	private String extension;
-	
-	private CompressionMethod(String aExtension)
-	{
-		extension = aExtension;
-	}
-	
-	public String getExtension()
-	{
-		return extension;
-	}
+    NONE(""), GZIP(".gz"), BZIP2(".bz2"), XZ(".xz");
+
+    private String extension;
+
+    private CompressionMethod(String aExtension)
+    {
+        extension = aExtension;
+    }
+
+    public String getExtension()
+    {
+        return extension;
+    }
 }

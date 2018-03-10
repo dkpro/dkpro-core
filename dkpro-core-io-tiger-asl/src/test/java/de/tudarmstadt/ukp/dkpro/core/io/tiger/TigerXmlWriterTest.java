@@ -29,6 +29,7 @@ import org.apache.uima.jcas.JCas;
 import org.custommonkey.xmlunit.XMLAssert;
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpParser;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;

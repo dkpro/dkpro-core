@@ -21,9 +21,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.Tagset;
 
 /**
  * Interface for objects that provide tagsets.
- * 
  */
 public interface HasTagsets
 {
-	Tagset getTagset();
+    Tagset getTagset();
 }

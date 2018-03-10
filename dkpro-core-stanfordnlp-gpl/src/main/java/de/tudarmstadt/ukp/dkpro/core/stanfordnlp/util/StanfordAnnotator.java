@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2007-2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -266,11 +266,12 @@ public class StanfordAnnotator
         // create the necessary objects and methods
         Type constType = constituentMappingProvider.getTagType(aConstituentType);
 
-        Constituent constAnno = (Constituent) jCas.getCas().createAnnotation(constType, aBegin, aEnd);
+        Constituent constAnno = (Constituent) jCas.getCas().createAnnotation(constType, aBegin,
+                aEnd);
         constAnno.setConstituentType(aConstituentType);
-		constAnno.setSyntacticFunction(aSyntacticFunction);
-		return constAnno;
-	}
+        constAnno.setSyntacticFunction(aSyntacticFunction);
+        return constAnno;
+    }
 
     /**
      * Creates a new Constituent annotation. Links to parent- and child-annotations are not yet
@@ -318,8 +319,8 @@ public class StanfordAnnotator
      *            the dependent-word
      * @return the newly created dependency annotation.
      */
-    public static Dependency createDependencyAnnotation(JCas jCas, GrammaticalRelation aDependencyType,
-            Token aGovernor, Token aDependent)
+    public static Dependency createDependencyAnnotation(JCas jCas,
+            GrammaticalRelation aDependencyType, Token aGovernor, Token aDependent)
     {
         // create the necessary objects and methods
         String dependencyTypeName = DEPPACKAGE + aDependencyType.getShortName().toUpperCase();

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2007-2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -42,8 +42,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.CoreNlp2DKPro;
+import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 import edu.stanford.nlp.ie.AbstractSequenceClassifier;
 import edu.stanford.nlp.ie.NERClassifierCombiner;
 import edu.stanford.nlp.ie.crf.CRFClassifier;
@@ -58,7 +58,7 @@ import edu.stanford.nlp.util.StringUtils;
 /**
  * Named entity recognizer from CoreNLP.
  */
-@ResourceMetaData(name="CoreNLP Named Entity Recognizer")
+@ResourceMetaData(name = "CoreNLP Named Entity Recognizer")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -74,7 +74,7 @@ public class CoreNlpNamedEntityRecognizer
      * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
     protected boolean printTagSet;
 
     /**
@@ -109,7 +109,8 @@ public class CoreNlpNamedEntityRecognizer
     /**
      * Location of the mapping file for named entity tags to UIMA types.
      */
-    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
+    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
     private String mappingLocation;
     
@@ -123,7 +124,8 @@ public class CoreNlpNamedEntityRecognizer
     @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
     private boolean internStrings;
 
-    public static final String PARAM_MAX_SENTENCE_LENGTH = ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
+    public static final String PARAM_MAX_SENTENCE_LENGTH = 
+            ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
     @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = true, defaultValue = "2147483647")
     private int maxSentenceLength;
 
@@ -132,7 +134,8 @@ public class CoreNlpNamedEntityRecognizer
     private int maxTime;
 
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
-    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = ComponentParameters.AUTO_NUM_THREADS)
+    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, 
+            defaultValue = ComponentParameters.AUTO_NUM_THREADS)
     private int numThreads;
 
     /**
@@ -164,18 +167,18 @@ public class CoreNlpNamedEntityRecognizer
      * @see NERClassifierCombiner#APPLY_NUMERIC_CLASSIFIERS_DEFAULT
      */
     public static final String PARAM_APPLY_NUMERIC_CLASSIFIERS = "applyNumericClassifiers";
-    @ConfigurationParameter(name = PARAM_APPLY_NUMERIC_CLASSIFIERS, mandatory = true, defaultValue="true")
+    @ConfigurationParameter(name = PARAM_APPLY_NUMERIC_CLASSIFIERS, mandatory = true, defaultValue = "true")
     boolean applyNumericClassifiers;
 
     // FIXME Using USE_SUTIME_DEFAULT autodetects presence of SUTime. Need three values here:
     // on, off, auto
     public static final String PARAM_USE_SUTIME = "useSUTime";
-    @ConfigurationParameter(name = PARAM_USE_SUTIME, mandatory = true, defaultValue="false")
-    boolean useSUTime; // = NumberSequenceClassifier.USE_SUTIME_DEFAULT;    
+    @ConfigurationParameter(name = PARAM_USE_SUTIME, mandatory = true, defaultValue = "false")
+    boolean useSUTime; // = NumberSequenceClassifier.USE_SUTIME_DEFAULT;
 
     public static final String PARAM_AUGMENT_REGEX_NER = "augmentRegexNER";
-    @ConfigurationParameter(name = PARAM_AUGMENT_REGEX_NER, mandatory = true, defaultValue="false")
-    boolean augmentRegexNER; // = NERClassifierCombiner.APPLY_GAZETTE_PROPERTY;    
+    @ConfigurationParameter(name = PARAM_AUGMENT_REGEX_NER, mandatory = true, defaultValue = "false")
+    boolean augmentRegexNER; // = NERClassifierCombiner.APPLY_GAZETTE_PROPERTY;
 
     boolean verbose = false;
     
@@ -230,7 +233,7 @@ public class CoreNlpNamedEntityRecognizer
     }
 
     private class CoreNlpNamedEntityRecognizerModelProvider
-    extends ModelProviderBase<NERCombinerAnnotator>
+        extends ModelProviderBase<NERCombinerAnnotator>
     {
         public CoreNlpNamedEntityRecognizerModelProvider(Object aObject)
         {

@@ -47,7 +47,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import javanet.staxutils.IndentingXMLEventWriter;
 
-@ResourceMetaData(name="XCES Basic XML Writer")
+@ResourceMetaData(name = "XCES Basic XML Writer")
 @TypeCapability(
         inputs = {            
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph" })
@@ -62,7 +62,8 @@ public class XcesBasicXmlWriter extends JCasFileWriter_ImplBase
      * Character encoding of the output data.
      */
     public static final String PARAM_TARGET_ENCODING = "targetEncoding";
-    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
 
     @Override
@@ -94,7 +95,8 @@ public class XcesBasicXmlWriter extends JCasFileWriter_ImplBase
             // Begin body of all the paragraphs            
             Collection<Paragraph> parasInCas = JCasUtil.select(aJCas, Paragraph.class);
             XcesBodyBasic xb = convertToXcesBasicPara(parasInCas);
-            marshaller.marshal(new JAXBElement<XcesBodyBasic>(new QName("body"), XcesBodyBasic.class, xb),
+            marshaller.marshal(
+                    new JAXBElement<XcesBodyBasic>(new QName("body"), XcesBodyBasic.class, xb),
                     xmlEventWriter);
             // End body of all the paragraphs
             // xmlEventWriter.add(xmlef.createEndElement("", "", "body"));
@@ -127,7 +129,7 @@ public class XcesBasicXmlWriter extends JCasFileWriter_ImplBase
         for (Paragraph p : parasInCas) {
             XcesParaBasic para = new XcesParaBasic();
             para.s = p.getCoveredText();
-            para.id= "p"+Integer.toString(paraNo);
+            para.id = "p" + Integer.toString(paraNo);
             paraList.add(para);
             paraNo++;
         }

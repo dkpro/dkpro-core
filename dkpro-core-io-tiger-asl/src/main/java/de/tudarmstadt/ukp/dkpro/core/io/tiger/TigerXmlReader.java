@@ -95,7 +95,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerTerminal;
  * UIMA collection reader for TIGER-XML files. Also supports the augmented format used in the
  * Semeval 2010 task which includes semantic role data.
  */
-@ResourceMetaData(name="TIGER-XML Reader")
+@ResourceMetaData(name = "TIGER-XML Reader")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_TIGER_XML, MimeTypes.APPLICATION_X_SEMEVAL_2010_XML})
 @TypeCapability(
         outputs = { 
@@ -113,7 +113,8 @@ public class TigerXmlReader
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String mappingPosLocation;
 
@@ -288,13 +289,15 @@ public class TigerXmlReader
         if (aSentence.sem != null) {
             if (aSentence.sem.splitwords != null) {
                 // read splitwords as terminals/tokens
-                readSplit(aBuilder.getJCas(), terminals, aSentence.sem.splitwords, tokenIdToTextMap);
+                readSplit(aBuilder.getJCas(), terminals, aSentence.sem.splitwords,
+                        tokenIdToTextMap);
             }
             readSem(aBuilder.getJCas(), terminals, nonterminals, aSentence.sem, tokenIdToTextMap);
         }
     }
 
-    private void readSplit(JCas jCas, Map<String, Token> terminals, List<TigerSplitword> splitwords, Map<String, String> tokenIdToTextMap)
+    private void readSplit(JCas jCas, Map<String, Token> terminals, List<TigerSplitword> splitwords,
+            Map<String, String> tokenIdToTextMap)
     {
         for (TigerSplitword split : splitwords) {
             Token orig = terminals.get(split.idref);
@@ -312,7 +315,8 @@ public class TigerXmlReader
     }
 
     private void readSem(JCas jCas, Map<String, Token> terminals,
-            Map<String, Constituent> nonterminals, TigerSem sem, Map<String, String> tokenIdToTextMap)
+            Map<String, Constituent> nonterminals, TigerSem sem,
+            Map<String, String> tokenIdToTextMap)
     {
         if (sem.frames != null) {
             for (TigerFrame frame : sem.frames) {
@@ -457,9 +461,9 @@ public class TigerXmlReader
             String completeFrameTarget = "";
             for (String word : tokenList) {
                 String textRepresentation = tokenIdToTextMap.get(word);
-                if(textRepresentation == null){
+                if (textRepresentation == null) {
                     textRepresentation = "";
-                    for(String part:word.split(" ")) {
+                    for (String part : word.split(" ")) {
                         textRepresentation += tokenIdToTextMap.get(part) + " ";
                     }
                     textRepresentation = textRepresentation.trim();

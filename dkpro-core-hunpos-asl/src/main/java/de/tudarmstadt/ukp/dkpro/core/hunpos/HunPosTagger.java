@@ -65,7 +65,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * <a href="http://aclweb.org/anthology/P/P07/P07-2053.bib">(bibtex)</a></li>
  * </ul>
  */
-@ResourceMetaData(name="HunPos POS-Tagger")
+@ResourceMetaData(name = "HunPos POS-Tagger")
 @TypeCapability(
         inputs = { 
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -100,7 +100,8 @@ public class HunPosTagger
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
      * mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 

@@ -50,7 +50,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField;
  * This could be a lexical resource such as WordNet or a simple key-value map.
  * The annotation is stored in the SemanticField annotation type.
  */
-@ResourceMetaData(name="Semantic Field Annotator")
+@ResourceMetaData(name = "Semantic Field Annotator")
 public class SemanticFieldAnnotator
     extends JCasAnnotator_ImplBase
 {
@@ -70,8 +70,8 @@ public class SemanticFieldAnnotator
     /**
      * A constraint on the annotations that should be considered in form of a JXPath statement.
      * Example: set {@link #PARAM_ANNOTATION_TYPE} to a {@code NamedEntity} type and set the
-     * {@link #PARAM_CONSTRAINT} to {@code ".[value = 'LOCATION']"} to annotate only tokens with semantic fields that are
-     * part of a location named entity.
+     * {@link #PARAM_CONSTRAINT} to {@code ".[value = 'LOCATION']"} to annotate only tokens with
+     * semantic fields that are part of a location named entity.
      */
     public static final String PARAM_CONSTRAINT = "constraint";
     @ConfigurationParameter(name = PARAM_CONSTRAINT, mandatory = false)

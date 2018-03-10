@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2007-2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -44,12 +44,12 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class MateParserTest
 {
-	@Test
-	public void testGerman()
-		throws Exception
-	{
-		JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel , welches "
-				+ "möglichst viele Konstituenten und Dependenzen beinhaltet .");
+    @Test
+    public void testGerman()
+        throws Exception
+    {
+        JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel , welches "
+                + "möglichst viele Konstituenten und Dependenzen beinhaltet .");
 
         String[] dependencies = {
                 "[  0,  3]Dependency(SB,basic) D[0,3](Wir) G[4,12](brauchen)",
@@ -80,10 +80,10 @@ public class MateParserTest
                 "OA", "OA2", "OC", "OG", "OP", "PAR", "PD", "PG", "PH", "PM", "PNC", "RC", "RE",
                 "RS", "SB", "SBP", "SP", "SVP", "UC", "VO" };
 
-		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "stts", posTags, jcas);
         AssertAnnotations.assertTagset(Dependency.class, "negra", dependencyTags, jcas);
-	}
+    }
 
     @Test
     public void testEnglish()
@@ -304,19 +304,19 @@ public class MateParserTest
                 .toArray(new AnalysisEngineDescription[engines.size()]));
     }
     
-	private JCas runTest(String aLanguage, String aText)
-		throws Exception
-	{
+    private JCas runTest(String aLanguage, String aText)
+        throws Exception
+    {
         Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 2000000000);
 
         AssumeResource.assumeResource(MateSemanticRoleLabeler.class, "parser", aLanguage, null);
         
-		AnalysisEngineDescription aggregate = createEngineDescription(
-				createEngineDescription(MatePosTagger.class),
-				createEngineDescription(MateParser.class));
+        AnalysisEngineDescription aggregate = createEngineDescription(
+                createEngineDescription(MatePosTagger.class),
+                createEngineDescription(MateParser.class));
 
         return TestRunner.runTest(aggregate, aLanguage, aText);
-	}
+    }
 
     @Rule
     public DkproTestContext testContext = new DkproTestContext();

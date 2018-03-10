@@ -46,9 +46,9 @@ public class IllinoisLemmatizerTest
         AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
     }
     
-	private JCas runTest(String aLanguage, String aText)
-		throws Exception
-	{
+    private JCas runTest(String aLanguage, String aText)
+        throws Exception
+    {
         AnalysisEngineDescription engine;
         
         engine = createEngineDescription(
@@ -56,8 +56,8 @@ public class IllinoisLemmatizerTest
                 createEngineDescription(IllinoisLemmatizer.class));
 
         return TestRunner.runTest(engine, aLanguage, aText);
-	}
-	
-	@Rule
-	public DkproTestContext testContext = new DkproTestContext();
+    }
+    
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }

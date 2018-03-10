@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2007-2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -73,7 +73,7 @@ import edu.berkeley.nlp.util.Numberer;
  *
  * @see CoarseToFineMaxRuleParser
  */
-@ResourceMetaData(name="Berkeley Parser")
+@ResourceMetaData(name = "Berkeley Parser")
 @OperationalProperties(multipleDeploymentAllowed = false)
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = {
@@ -106,14 +106,16 @@ public class BerkeleyParser
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
     /**
      * Location of the mapping file for constituent tags to UIMA types.
      */
-    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
+    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CONSTITUENT_MAPPING_LOCATION, mandatory = false)
     protected String constituentMappingLocation;
 
@@ -260,7 +262,8 @@ public class BerkeleyParser
 
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
-            List<String> tokenText = tokens.stream().map(t -> t.getText()).collect(Collectors.toList());
+            List<String> tokenText = tokens.stream().map(t -> 
+                    t.getText()).collect(Collectors.toList());
             
             List<String> posTags = null;
             if (readPos) {
@@ -283,7 +286,8 @@ public class BerkeleyParser
                 parseOutput = TreeAnnotations.unAnnotateTree(parseOutput, keepFunctionLabels);
             }
 
-            createConstituentAnnotationFromTree(aJCas, parseOutput, null, tokens, new MutableInt(0));
+            createConstituentAnnotationFromTree(aJCas, parseOutput, null, tokens,
+                    new MutableInt(0));
 
             if (writePennTree) {
                 PennTree pTree = new PennTree(aJCas, sentence.getBegin(), sentence.getEnd());

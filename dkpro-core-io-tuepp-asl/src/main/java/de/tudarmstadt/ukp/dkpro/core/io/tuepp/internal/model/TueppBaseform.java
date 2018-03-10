@@ -21,6 +21,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 
 public class TueppBaseform
 {
-    @XmlAttribute(name="f")
+    @XmlAttribute(name = "f")
     public String form;
 }

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2007-2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -17,10 +17,6 @@
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.matetools;
-
-import is2.data.SentenceData09;
-import is2.io.CONLLReader09;
-import is2.lemmatizer.Lemmatizer;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,11 +42,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import is2.data.SentenceData09;
+import is2.io.CONLLReader09;
+import is2.lemmatizer.Lemmatizer;
 
 /**
  * DKPro Annotator for the MateToolsLemmatizer.
  */
-@ResourceMetaData(name="Mate Tools Lemmatizer")
+@ResourceMetaData(name = "Mate Tools Lemmatizer")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -86,7 +85,7 @@ public class MateLemmatizer
      * English creates odd results.
      */
     public static final String PARAM_UPPERCASE = "uppercase";
-    @ConfigurationParameter(name = PARAM_UPPERCASE, mandatory = true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_UPPERCASE, mandatory = true, defaultValue = "false")
     private boolean uppercase;
     
     private CasConfigurableProviderBase<Lemmatizer> modelProvider;

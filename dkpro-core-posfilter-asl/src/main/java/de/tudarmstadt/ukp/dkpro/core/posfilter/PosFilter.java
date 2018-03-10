@@ -61,7 +61,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * given parts of speech.
  *
  */
-@ResourceMetaData(name="POS Filter")
+@ResourceMetaData(name = "POS Filter")
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class PosFilter
     extends JCasAnnotator_ImplBase

@@ -75,10 +75,10 @@ public class HtmlReaderTest
     
     private void dumpMetaData(final DocumentMetaData aMetaData)
     {
-        System.out.println("Collection ID: "+aMetaData.getCollectionId());
-        System.out.println("ID           : "+aMetaData.getDocumentId());
-        System.out.println("Base URI     : "+aMetaData.getDocumentBaseUri());
-        System.out.println("URI          : "+aMetaData.getDocumentUri());
+        System.out.println("Collection ID: " + aMetaData.getCollectionId());
+        System.out.println("ID           : " + aMetaData.getDocumentId());
+        System.out.println("Base URI     : " + aMetaData.getDocumentBaseUri());
+        System.out.println("URI          : " + aMetaData.getDocumentUri());
     }
 
     @Rule

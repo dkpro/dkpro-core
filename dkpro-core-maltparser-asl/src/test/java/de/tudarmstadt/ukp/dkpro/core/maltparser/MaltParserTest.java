@@ -17,7 +17,9 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.maltparser;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.*;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertDependencies;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagset;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagsetMapping;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
 import java.util.ArrayList;
@@ -40,8 +42,6 @@ import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
-/**
- */
 public class MaltParserTest
 {
     // /**
@@ -288,8 +288,8 @@ public class MaltParserTest
 
         assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
         // There are some minor differences between the tags produced by the POS tagger and the
-        // tags expected by the parser model. We need a better test here that makes these differences
-        // more visible and at the same time doesn't fail.
+        // tags expected by the parser model. We need a better test here that makes these 
+        // differences more visible and at the same time doesn't fail.
         //assertTagset(OpenNlpPosTagger.class, POS.class, "ptb", posTags, jcas);
         assertTagset(MaltParser.class, POS.class, "ptb", posTags, jcas);
         assertTagsetMapping(MaltParser.class, POS.class, "ptb", unmappedPos, jcas);
@@ -736,8 +736,11 @@ public class MaltParserTest
             engines.add(createEngineDescription(OpenNlpPosTagger.class));
         }
 
-        engines.add(createEngineDescription(MaltParser.class, MaltParser.PARAM_VARIANT, aVariant,
-                MaltParser.PARAM_PRINT_TAGSET, true, MaltParser.PARAM_IGNORE_MISSING_FEATURES, true));
+        engines.add(createEngineDescription(
+                MaltParser.class, 
+                MaltParser.PARAM_VARIANT, aVariant,
+                MaltParser.PARAM_PRINT_TAGSET, true, 
+                MaltParser.PARAM_IGNORE_MISSING_FEATURES, true));
 
         return createEngineDescription(engines
                 .toArray(new AnalysisEngineDescription[engines.size()]));

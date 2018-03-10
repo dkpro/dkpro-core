@@ -26,8 +26,10 @@ public class FeatureDecl
 {
     @XmlAttribute
     public String name;
+    
     @XmlAttribute
     public String domain;
+    
     @XmlElement(name = "value")
     public List<ValueDecl> values;
 }

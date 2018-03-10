@@ -43,12 +43,13 @@ import de.tudarmstadt.ukp.dkpro.core.ngrams.util.NGramStringIterable;
 /**
  * Language detector based on n-gram frequency counts, e.g. as provided by Web1T
  */
-@ResourceMetaData(name="Web1T Language Detector")
+@ResourceMetaData(name = "Web1T Language Detector")
 public class LanguageDetectorWeb1T
     extends JCasAnnotator_ImplBase
 {
     /**
-     * An array of external resources of frequency providers (one for each language that should be detected). 
+     * An array of external resources of frequency providers (one for each language that should be
+     * detected).
      */
     public static final String PARAM_FREQUENCY_PROVIDER_RESOURCES = "frequencyProviders";
     @ExternalResource(key = PARAM_FREQUENCY_PROVIDER_RESOURCES, mandatory = true)

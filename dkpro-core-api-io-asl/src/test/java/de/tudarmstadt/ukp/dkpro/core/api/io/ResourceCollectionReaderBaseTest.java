@@ -26,7 +26,6 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Paths;
 
 import org.apache.uima.cas.CAS;
 import org.apache.uima.collection.CollectionException;
@@ -246,7 +245,8 @@ public class ResourceCollectionReaderBaseTest
     public void testExternalLoaderLocator()
         throws Exception
     {
-        ExternalResourceDescription locator = createExternalResourceDescription(ResourceLoaderLocator.class);
+        ExternalResourceDescription locator = createExternalResourceDescription(
+                ResourceLoaderLocator.class);
         CollectionReader reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
                 "file:src/main/java/de/tudarmstadt/ukp/",

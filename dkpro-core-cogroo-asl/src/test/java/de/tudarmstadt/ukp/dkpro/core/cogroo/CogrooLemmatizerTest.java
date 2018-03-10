@@ -33,38 +33,34 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class CogrooLemmatizerTest
 {
-	@Test
-	public void testPortuguese()
-		throws Exception
-	{
-        runTest("pt", "Este é um teste . ",
-                 new String[] { "este", "ser", "um", "teste", "." });
+    @Test
+    public void testPortuguese() throws Exception
+    {
+        runTest("pt", "Este é um teste . ", new String[] { "este", "ser", "um", "teste", "." });
 
-        runTest("pt", "Uma rede neural .",
-        		new String[] { "um", "rede", "neural", "." });
+        runTest("pt", "Uma rede neural .", new String[] { "um", "rede", "neural", "." });
 
         runTest("pt", "John está comprando laranjas .",
-        		new String[] { "John", "estar", "comprar", "laranja", "." });
+                new String[] { "John", "estar", "comprar", "laranja", "." });
     }
 
-	private void runTest(String language, String testDocument, String[] aLemma)
-		throws Exception
-	{
-		AnalysisEngineDescription engine = createEngineDescription(
-		        createEngineDescription(CogrooPosTagger.class),
-		        createEngineDescription(CogrooLemmatizer.class));
+    private void runTest(String language, String testDocument, String[] aLemma) throws Exception
+    {
+        AnalysisEngineDescription engine = createEngineDescription(
+                createEngineDescription(CogrooPosTagger.class),
+                createEngineDescription(CogrooLemmatizer.class));
 
-		JCas jcas = TestRunner.runTest(engine, language, testDocument);
+        JCas jcas = TestRunner.runTest(engine, language, testDocument);
 
-		AssertAnnotations.assertLemma(aLemma, select(jcas, Lemma.class));
-	}
+        AssertAnnotations.assertLemma(aLemma, select(jcas, Lemma.class));
+    }
 
-	@Rule
-	public TestName name = new TestName();
+    @Rule
+    public TestName name = new TestName();
 
-	@Before
-	public void printSeparator()
-	{
-		System.out.println("\n=== " + name.getMethodName() + " =====================");
-	}
+    @Before
+    public void printSeparator()
+    {
+        System.out.println("\n=== " + name.getMethodName() + " =====================");
+    }
 }

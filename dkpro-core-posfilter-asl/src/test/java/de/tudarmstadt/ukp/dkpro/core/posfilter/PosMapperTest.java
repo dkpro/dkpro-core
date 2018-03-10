@@ -38,60 +38,62 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class PosMapperTest
 {
-	private final File testBase = new File("src/test/resources/de/tudarmstadt/ukp/dkpro/core/posfilter");
-	private final String testDocument1 = "This sentence consists of fourtynine characters .";
+    private final File testBase = new File("src/test/resources/de/tudarmstadt/ukp/dkpro/core/posfilter");
+    private final String testDocument1 = "This sentence consists of fourtynine characters .";
 
-	@Test
-	public void testEnglishOriginal()
-		throws Exception
-	{
-		String testDocument = testDocument1;
+    @Test
+    public void testEnglishOriginal()
+        throws Exception
+    {
+        String testDocument = testDocument1;
 
-		String[] posOriginal = { "DT", "NN", "VBZ", "IN", "CD", "NNS", "." };
-        String[] posOriginalDkpro = { "POS_DET", "POS_NOUN", "POS_VERB", "POS_ADP", "POS_NUM", "POS_NOUN", "POS_PUNCT" };
+        String[] posOriginal = { "DT", "NN", "VBZ", "IN", "CD", "NNS", "." };
+        String[] posOriginalDkpro = { "POS_DET", "POS_NOUN", "POS_VERB", "POS_ADP", "POS_NUM",
+                "POS_NOUN", "POS_PUNCT" };
 
-		runTest("en", testDocument, posOriginal, posOriginalDkpro, false);
-	}
+        runTest("en", testDocument, posOriginal, posOriginalDkpro, false);
+    }
 
-	@Test
-	public void testEnglishMapped()
-		throws Exception
-	{
-		String testDocument = testDocument1;
+    @Test
+    public void testEnglishMapped()
+        throws Exception
+    {
+        String testDocument = testDocument1;
 
-		String[] posMapped = { "DET", "N", "V", "IN", "MADE_UP_POS", "N", "." };
-        String[] posMappedDkpro = { "POS_DET", "POS_NOUN", "POS_VERB", "POS_ADP", "POS_X", "POS_NOUN", "POS_PUNCT" };
+        String[] posMapped = { "DET", "N", "V", "IN", "MADE_UP_POS", "N", "." };
+        String[] posMappedDkpro = { "POS_DET", "POS_NOUN", "POS_VERB", "POS_ADP", "POS_X",
+                "POS_NOUN", "POS_PUNCT" };
 
-		runTest("en", testDocument, posMapped, posMappedDkpro, true);
-	}
+        runTest("en", testDocument, posMapped, posMappedDkpro, true);
+    }
 
-	private void runTest(String language, String testDocument, String[] aPosOriginal,
-			String[] aPosDkpro, boolean mapToDifferentTagset)
-		throws Exception
-	{
-		List<AnalysisEngineDescription> descs = new ArrayList<AnalysisEngineDescription>();
-		descs.add(createEngineDescription(OpenNlpPosTagger.class,
-				OpenNlpPosTagger.PARAM_LANGUAGE, "en"));
+    private void runTest(String language, String testDocument, String[] aPosOriginal,
+            String[] aPosDkpro, boolean mapToDifferentTagset)
+        throws Exception
+    {
+        List<AnalysisEngineDescription> descs = new ArrayList<AnalysisEngineDescription>();
+        descs.add(createEngineDescription(OpenNlpPosTagger.class,
+                OpenNlpPosTagger.PARAM_LANGUAGE, "en"));
 
-		if (mapToDifferentTagset) {
-			descs.add(createEngineDescription(PosMapper.class, PosMapper.PARAM_MAPPING_FILE,
-					new File(testBase, "ptb-to-dummy.map"), PosMapper.PARAM_DKPRO_MAPPING_LOCATION,
-					new File(testBase, "dummy-to-dkpro.map")));
-		}
+        if (mapToDifferentTagset) {
+            descs.add(createEngineDescription(PosMapper.class, PosMapper.PARAM_MAPPING_FILE,
+                    new File(testBase, "ptb-to-dummy.map"), PosMapper.PARAM_DKPRO_MAPPING_LOCATION,
+                    new File(testBase, "dummy-to-dkpro.map")));
+        }
 
-		AnalysisEngineDescription aggregate = createEngineDescription(descs
-				.toArray(new AnalysisEngineDescription[0]));
-		JCas jcas = TestRunner.runTest(aggregate, language, testDocument);
+        AnalysisEngineDescription aggregate = createEngineDescription(descs
+                .toArray(new AnalysisEngineDescription[0]));
+        JCas jcas = TestRunner.runTest(aggregate, language, testDocument);
 
-		AssertAnnotations.assertPOS(aPosDkpro, aPosOriginal, select(jcas, POS.class));
-	}
+        AssertAnnotations.assertPOS(aPosDkpro, aPosOriginal, select(jcas, POS.class));
+    }
 
-	@Rule
-	public TestName name = new TestName();
+    @Rule
+    public TestName name = new TestName();
 
-	@Before
-	public void printSeparator()
-	{
-		System.out.println("\n=== " + name.getMethodName() + " =====================");
-	}
+    @Before
+    public void printSeparator()
+    {
+        System.out.println("\n=== " + name.getMethodName() + " =====================");
+    }
 }

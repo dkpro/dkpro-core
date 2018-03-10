@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2007-2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -18,7 +18,9 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.sfst;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.*;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertMorph;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagset;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagsetParser;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
@@ -52,7 +54,8 @@ public class SfstAnnotatorTest
                 "[ 15, 20]     -     -    -    -    -     -    -    -  Plur      -  3    -    -    -     -      -     - çalış (çal<v><D_yIS><n><3p>)",
                 "[ 15, 20]     -     -    -    -    -     -    -    -  Plur      -  3    -    -    -     -      -     - çalış (çalış<v><t_imp><3p>)",
                 "[ 15, 20]     -     -    -    -    -     -    -    -  Sing      -  2    -    -    -     -      -     - çalış (çalış<v><t_imp><2s>)",
-                "[ 21, 22]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (.<pnct>)" };
+                "[ 21, 22]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (.<pnct>)"
+        };
         
         String[] tags = { "<1p>", "<1s>", "<2p>", "<2s>", "<3p>", "<3s>", "<D_AcIK>", "<D_CA>",
                 "<D_CAK>", "<D_CAgIz>", "<D_CI>", "<D_CIK>", "<D_IcIK>", "<D_IncI>", "<D_ca>",
@@ -133,7 +136,8 @@ public class SfstAnnotatorTest
                 "[ 21, 32]     -     -  Nom    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (krank<ADJ><NN><SUFF>Haus<+NN><Neut><Nom><Sg>)",
                 "[ 21, 32]     -     -  Dat    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (krank<ADJ><NN><SUFF>Haus<+NN><Neut><Dat><Sg>)",
                 "[ 21, 32]     -     -  Acc    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (krank<ADJ><NN><SUFF>Haus<+NN><Neut><Akk><Sg>)",
-                "[ 33, 34]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (.<+IP><Norm>)" };
+                "[ 33, 34]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (.<+IP><Norm>)"
+        };
 
         String[] tags = { "<+ADJ>", "<+ADV>", "<+ART>", "<+CARD>", "<+CHAR>", "<+CIRCP>", "<+DEM>",
                 "<+DEMPRO>", "<+INDEF>", "<+INTJ>", "<+IP>", "<+KONJ>", "<+NE>", "<+NN>", "<+ORD>",
@@ -192,7 +196,8 @@ public class SfstAnnotatorTest
                 "[ 21, 32]     -     -  Nom    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (Krankenhaus<+NN><Neut><Nom><Sg>)",
                 "[ 21, 32]     -     -  Dat    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (Krankenhaus<+NN><Neut><Dat><Sg>)",
                 "[ 21, 32]     -     -  Acc    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (Krankenhaus<+NN><Neut><Acc><Sg>)",
-                "[ 33, 34]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (.<+PUNCT><Norm>)" };
+                "[ 33, 34]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (.<+PUNCT><Norm>)"
+        };
 
         String[] tags = { "<+ADJ>", "<+ADV>", "<+ART>", "<+CARD>", "<+CIRCP>", "<+CONJ>", "<+DEM>",
                 "<+INDEF>", "<+INTJ>", "<+NN>", "<+NPROP>", "<+ORD>", "<+POSS>", "<+POSTP>",
@@ -255,7 +260,8 @@ public class SfstAnnotatorTest
                 "[ 33, 34]     -     -  Dat    -    -   Fem    -    -  Sing      -  -    -    -    -     -      -     - . (.<^ABBR><+NN><Fem><Dat><Sg>)",
                 "[ 33, 34]     -     -  Gen    -    -   Fem    -    -  Sing      -  -    -    -    -     -      -     - . (.<^ABBR><+NN><Fem><Gen><Sg>)",
                 "[ 33, 34]     -     -  Nom    -    -   Fem    -    -  Sing      -  -    -    -    -     -      -     - . (.<^ABBR><+NN><Fem><Nom><Sg>)",
-                "[ 33, 34]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (.<+PUNCT><Norm>)" };
+                "[ 33, 34]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (.<+PUNCT><Norm>)"
+        };
 
         String[] tags = { "<+ADJ>", "<+ADV>", "<+ART>", "<+CARD>", "<+CONJ>", "<+DEM>", "<+INDEF>",
                 "<+INTJ>", "<+NN>", "<+NPROP>", "<+ORD>", "<+POSS>", "<+POSTP>", "<+PPRO>",
@@ -317,7 +323,8 @@ public class SfstAnnotatorTest
                 "[ 33, 34]     -     -  Dat    -    -   Fem    -    -  Sing      -  -    -    -    -     -      -     - . (.<+NN><Fem><Dat><Sg>)",
                 "[ 33, 34]     -     -  Gen    -    -   Fem    -    -  Sing      -  -    -    -    -     -      -     - . (.<+NN><Fem><Gen><Sg>)",
                 "[ 33, 34]     -     -  Nom    -    -   Fem    -    -  Sing      -  -    -    -    -     -      -     - . (.<+NN><Fem><Nom><Sg>)",
-                "[ 33, 34]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (.<+PUNCT><Norm>)" };
+                "[ 33, 34]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (.<+PUNCT><Norm>)"
+        };
 
         String[] tags = { "<#>", "<+ADJ>", "<+ADV>", "<+ART>", "<+CARD>", "<+CONJ>", "<+DEM>",
                 "<+INDEF>", "<+INTJ>", "<+NN>", "<+NPROP>", "<+ORD>", "<+POSS>", "<+POSTP>",
@@ -359,7 +366,8 @@ public class SfstAnnotatorTest
                 "[ 14, 20]     -     -    -    -    -     -  Ind    -  Sing      -  3    -    -    -  Pres      -     - lavora (lavorare<VER><ind><pres><3><s>)",
                 "[ 21, 23]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - in (in<PRE>)",
                 "[ 24, 32]     -     -    -    -    -     -    -    -  Sing      -  -    -    -    -     -      -     - ospedale (ospedale<NOUN><M><s>)",
-                "[ 33, 34]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (.<SENT>)" };
+                "[ 33, 34]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (.<SENT>)"
+        };
 
         String[] tags = { "<1>", "<2>", "<3>", "<ABL>", "<ADJ>", "<ADV>", "<ART>", "<ARTPRE>",
                 "<ASP>", "<AUX>", "<CARD>", "<CAU>", "<CE>", "<CHE>", "<CI>", "<CLI>", "<COM>",

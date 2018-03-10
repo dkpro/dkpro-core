@@ -31,35 +31,34 @@ import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 
-
 public class SimpleDictionaryTest
 {
+    private SimpleDictionary dict;
 
-	private SimpleDictionary dict;
+    @Before
+    public void setUp() throws IOException
+    {
+        final File dictFile = ResourceUtils.getUrlAsFile(getClass().getResource(
+                "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"),
+                false);
+        dict = new SimpleDictionary(dictFile, "UTF-8");
+    }
 
-	@Before
-	public void setUp() throws IOException{
+    @Test
+    public void testContains()
+    {
+        Assert.assertEquals(72508, dict.getAll().size());
 
-        final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
-        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"), false);
-	    dict = new SimpleDictionary(dictFile, "UTF-8");
-	}
+        Assert.assertTrue(dict.contains("worauf"));
+        Assert.assertTrue(dict.contains("woraufhin"));
+        Assert.assertTrue(dict.contains("woraus"));
+    }
 
-	@Test
-	public void testContains()
-	{
-		Assert.assertEquals(72508, dict.getAll().size());
-
-		Assert.assertTrue(dict.contains("worauf"));
-		Assert.assertTrue(dict.contains("woraufhin"));
-		Assert.assertTrue(dict.contains("woraus"));
-	}
-
-	@Test
-	public void testDictionary(){
-
-	    assertThat(dict.getAll().size(), not(0));
-	    assertThat(dict.contains("zu"),is(true));
-	}
+    @Test
+    public void testDictionary()
+    {
+        assertThat(dict.getAll().size(), not(0));
+        assertThat(dict.contains("zu"), is(true));
+    }
 
 }

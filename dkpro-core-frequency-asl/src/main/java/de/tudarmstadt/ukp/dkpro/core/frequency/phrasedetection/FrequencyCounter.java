@@ -17,12 +17,11 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.frequency.phrasedetection;
 
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
-import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGenerator;
-import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.stream.Stream;
+
 import org.apache.commons.collections4.Bag;
 import org.apache.commons.collections4.bag.HashBag;
 import org.apache.uima.UimaContext;
@@ -32,15 +31,17 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.stream.Stream;
+import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
+import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGenerator;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * Count unigrams and bigrams in a collection.
  */
-@ResourceMetaData(name="Frequency Count Writer")
+@ResourceMetaData(name = "Frequency Count Writer")
 public class FrequencyCounter
         extends JCasFileWriter_ImplBase
 {
@@ -72,7 +73,8 @@ public class FrequencyCounter
     private static final String DEFAULT_FEATURE_PATH = Token.class.getCanonicalName();
 
     /**
-     * Set this parameter if bigrams should only be counted when occurring within a covering type, e.g. sentences.
+     * Set this parameter if bigrams should only be counted when occurring within a covering type,
+     * e.g. sentences.
      */
     public static final String PARAM_COVERING_TYPE = "coveringType";
     @ConfigurationParameter(name = PARAM_COVERING_TYPE, mandatory = false)

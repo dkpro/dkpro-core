@@ -17,6 +17,25 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.mallet.lda;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.apache.uima.fit.descriptor.TypeCapability;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.cas.DoubleArray;
+import org.apache.uima.jcas.cas.IntegerArray;
+import org.apache.uima.resource.ResourceInitializationException;
+
 import cc.mallet.pipe.Pipe;
 import cc.mallet.pipe.TokenSequence2FeatureSequence;
 import cc.mallet.topics.ParallelTopicModel;
@@ -30,29 +49,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.uima.UimaContext;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
-import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.fit.descriptor.ResourceMetaData;
-import org.apache.uima.fit.descriptor.TypeCapability;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.cas.DoubleArray;
-import org.apache.uima.jcas.cas.IntegerArray;
-import org.apache.uima.resource.ResourceInitializationException;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Infers the topic distribution over documents using a Mallet {@link ParallelTopicModel}.
  */
-@ResourceMetaData(name="Mallet LDA Topic Model Inferencer")
+@ResourceMetaData(name = "Mallet LDA Topic Model Inferencer")
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
         outputs = { "de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution" }
@@ -109,11 +110,14 @@ public class MalletLdaTopicModelInferencer
     private int maxTopicAssignments;
 
     /**
-     * The annotation type to use for the model. Default: {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token}.
-     * For lemmas, use {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value}
+     * The annotation type to use for the model. Default:
+     * {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token}. For lemmas, use
+     * {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value}
      */
-    public static final String PARAM_TOKEN_FEATURE_PATH = MalletModelTrainer.PARAM_TOKEN_FEATURE_PATH;
-    @ConfigurationParameter(name = PARAM_TOKEN_FEATURE_PATH, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
+    public static final String PARAM_TOKEN_FEATURE_PATH = 
+            MalletModelTrainer.PARAM_TOKEN_FEATURE_PATH;
+    @ConfigurationParameter(name = PARAM_TOKEN_FEATURE_PATH, mandatory = true, 
+            defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
     private String tokenFeaturePath;
     /**
      * Ignore tokens (or lemmas, respectively) that are shorter than the given value. Default: 3.
@@ -254,8 +258,8 @@ public class MalletLdaTopicModelInferencer
         if (indexes.size() > maxTopicAssignments) {
 
             /* sort index list by corresponding values */
-            Collections.sort(indexes,
-                    (aO1, aO2) -> Double.compare(topicDistribution[aO1], topicDistribution[aO2]));
+            Collections.sort(indexes, (aO1, aO2) -> 
+                    Double.compare(topicDistribution[aO1], topicDistribution[aO2]));
 
             while (indexes.size() > maxTopicAssignments) {
                 indexes.remove(0);

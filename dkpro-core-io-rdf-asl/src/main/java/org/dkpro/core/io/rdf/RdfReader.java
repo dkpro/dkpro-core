@@ -49,7 +49,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 /**
  * Reads a CAS serialized as RDF.
  */
-@ResourceMetaData(name="UIMA CAS RDF Reader")
+@ResourceMetaData(name = "UIMA CAS RDF Reader")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_UIMA_RDF})
 public class RdfReader
     extends JCasResourceCollectionReader_ImplBase
@@ -67,7 +67,8 @@ public class RdfReader
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     private String posMappingLocation;
     
@@ -100,10 +101,10 @@ public class RdfReader
     public void getNext(JCas aJCas)
         throws IOException, CollectionException
     {
-        try{
+        try {
             posMappingProvider.configure(aJCas.getCas());
         }
-        catch(AnalysisEngineProcessException e){
+        catch (AnalysisEngineProcessException e) {
             throw new IOException(e);
         }
         
@@ -119,7 +120,7 @@ public class RdfReader
         
         // inFileCount++;
         step();
-     }
+    }
     
     private void closeAll()
     {

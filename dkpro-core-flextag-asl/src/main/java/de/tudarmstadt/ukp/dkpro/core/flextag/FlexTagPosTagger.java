@@ -50,7 +50,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * Flexible part-of-speech tagger.
  */
-@ResourceMetaData(name="FlexTag POS-Tagger")
+@ResourceMetaData(name = "FlexTag POS-Tagger")
 public class FlexTagPosTagger
     extends JCasAnnotator_ImplBase
 {
@@ -66,14 +66,14 @@ public class FlexTagPosTagger
     @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
     private String variant;
     
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     private String posMappingLocation;
-    
 
     private AnalysisEngine flexTagEngine = null;
     private ModelProviderBase<File> modelProvider = null;
-    private MappingProvider mappingProvider=null;
+    private MappingProvider mappingProvider = null;
 
     @Override
     public void initialize(final UimaContext context)

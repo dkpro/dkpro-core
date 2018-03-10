@@ -66,7 +66,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field;
  * <p>
  * If your expression evaluates to leaf nodes, empty CASes will be created.
  */
-@ResourceMetaData(name="XPath-based XML Reader")
+@ResourceMetaData(name = "XPath-based XML Reader")
 @MimeTypeCapability({MimeTypes.APPLICATION_XML, MimeTypes.TEXT_XML})
 @TypeCapability(
         outputs = { 

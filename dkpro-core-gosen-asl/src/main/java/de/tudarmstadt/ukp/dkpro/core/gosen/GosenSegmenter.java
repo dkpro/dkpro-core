@@ -26,6 +26,7 @@ import org.apache.uima.fit.descriptor.LanguageCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
+
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.Messages;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 import net.java.sen.SenFactory;
@@ -35,7 +36,7 @@ import net.java.sen.dictionary.Token;
 /**
  * Segmenter for Japanese text based on GoSen.
  */
-@ResourceMetaData(name="Gosen Segmenter")
+@ResourceMetaData(name = "Gosen Segmenter")
 @LanguageCapability("ja")
 @TypeCapability(
         outputs = { 

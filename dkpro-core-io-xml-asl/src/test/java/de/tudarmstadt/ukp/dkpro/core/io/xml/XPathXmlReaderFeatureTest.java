@@ -31,134 +31,135 @@ import org.junit.Test;
 
 public class XPathXmlReaderFeatureTest
 {
-	private static final String VALID_DOCS_ROOT = "src/test/resources/input/valid_docs";
+    private static final String VALID_DOCS_ROOT = "src/test/resources/input/valid_docs";
 
-	@Test
-	public void abbreviatedFormatTest() throws UIMAException, IOException
-	{
-		CollectionReader reader = createReader(
-				XmlXPathReader.class,
-				XmlXPathReader.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
-				XmlXPathReader.PARAM_PATTERNS, new String[] { "[+]abbr*.xml" },
-		        XmlXPathReader.PARAM_XPATH_EXPRESSION, "/topics/top",
-		        XmlXPathReader.PARAM_LANGUAGE, "en"
-		);
+    @Test
+    public void abbreviatedFormatTest() throws UIMAException, IOException
+    {
+        CollectionReader reader = createReader(
+                XmlXPathReader.class,
+                XmlXPathReader.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
+                XmlXPathReader.PARAM_PATTERNS, new String[] { "[+]abbr*.xml" },
+                XmlXPathReader.PARAM_XPATH_EXPRESSION, "/topics/top",
+                XmlXPathReader.PARAM_LANGUAGE, "en"
+        );
 
-		// Should find one file
-		AnalysisEngineDescription writer = createEngineDescription(
-				CasDumpWriter.class,
-		        CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/abbr_format_reading.txt"
-		);
+        // Should find one file
+        AnalysisEngineDescription writer = createEngineDescription(
+                CasDumpWriter.class,
+                CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/abbr_format_reading.txt"
+        );
 
-		runPipeline(reader, writer);
-	}
-
-
-	@Test
-	public void fullFormatTest() throws UIMAException, IOException
-	{
-		CollectionReader reader = createReader(
-				XmlXPathReader.class,
-				XmlXPathReader.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
-				XmlXPathReader.PARAM_PATTERNS, new String[] { "[+]full*.xml" },
-		        XmlXPathReader.PARAM_XPATH_EXPRESSION, "/topics/topic",
-		        XmlXPathReader.PARAM_LANGUAGE, "en"
-		);
-
-		// Should find one file
-		AnalysisEngineDescription writer = createEngineDescription(
-				CasDumpWriter.class,
-		        CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/full_format_reading.txt"
-		);
-
-		runPipeline(reader, writer);
-	}
+        runPipeline(reader, writer);
+    }
 
 
-	@Test
-	public void heteroFormatsTest() throws UIMAException, IOException
-	{
-		CollectionReader reader = createReader(
-				XmlXPathReader.class,
-				XmlXPathReader.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
-				XmlXPathReader.PARAM_PATTERNS, new String[] { "[+]full*.xml", "[+]abbr*.xml" },
-		        XmlXPathReader.PARAM_XPATH_EXPRESSION, "/topics/topic | /topics/top",
-		        XmlXPathReader.PARAM_LANGUAGE, "en"
-		);
+    @Test
+    public void fullFormatTest() throws UIMAException, IOException
+    {
+        CollectionReader reader = createReader(
+                XmlXPathReader.class,
+                XmlXPathReader.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
+                XmlXPathReader.PARAM_PATTERNS, new String[] { "[+]full*.xml" },
+                XmlXPathReader.PARAM_XPATH_EXPRESSION, "/topics/topic",
+                XmlXPathReader.PARAM_LANGUAGE, "en"
+        );
 
-		// Should find one file
-		AnalysisEngineDescription writer = createEngineDescription(
-				CasDumpWriter.class,
-		        CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/hetero_formats_reading.txt"
-		);
+        // Should find one file
+        AnalysisEngineDescription writer = createEngineDescription(
+                CasDumpWriter.class,
+                CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/full_format_reading.txt"
+        );
 
-		runPipeline(reader, writer);
-	}
-
-
-	@Test
-	public void recursiveReadingTest() throws UIMAException, IOException
-	{
-		CollectionReader reader = createReader(
-				XmlXPathReader.class,
-				XmlXPathReader.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
-				XmlXPathReader.PARAM_PATTERNS, new String[] { "[+]**/abbr*.xml" },
-		        XmlXPathReader.PARAM_XPATH_EXPRESSION, "/topics/top",
-		        XmlXPathReader.PARAM_LANGUAGE, "en"
-		);
-
-		// Should find two files
-		AnalysisEngineDescription writer = createEngineDescription(
-				CasDumpWriter.class,
-				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/recursive_reading.txt"
-		);
-
-		runPipeline(reader, writer);
-	}
+        runPipeline(reader, writer);
+    }
 
 
-	@Test
-	public void tagFilteringTest() throws UIMAException, IOException
-	{
-		CollectionReader reader = createReader(
-				XmlXPathReader.class,
-				XmlXPathReader.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
-				XmlXPathReader.PARAM_PATTERNS, new String[] { "[+]abbr*.*" },
-		        XmlXPathReader.PARAM_XPATH_EXPRESSION, "/topics/top",
-		        // read only num and EN-title tags
-		        XmlXPathReader.PARAM_INCLUDE_TAGS, new String[] { "EN-title", "num" }, 
-		        XmlXPathReader.PARAM_LANGUAGE, "en"
-		);
+    @Test
+    public void heteroFormatsTest() throws UIMAException, IOException
+    {
+        CollectionReader reader = createReader(
+                XmlXPathReader.class,
+                XmlXPathReader.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
+                XmlXPathReader.PARAM_PATTERNS, new String[] { "[+]full*.xml", "[+]abbr*.xml" },
+                XmlXPathReader.PARAM_XPATH_EXPRESSION, "/topics/topic | /topics/top",
+                XmlXPathReader.PARAM_LANGUAGE, "en"
+        );
 
-		AnalysisEngineDescription writer = createEngineDescription(
-				CasDumpWriter.class,
-				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/tag_filtering.txt"
-		);
+        // Should find one file
+        AnalysisEngineDescription writer = createEngineDescription(
+                CasDumpWriter.class,
+                CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/hetero_formats_reading.txt"
+        );
 
-		runPipeline(reader, writer);
-	}
+        runPipeline(reader, writer);
+    }
 
 
-	@Test
-	public void substitutionTest() throws UIMAException, IOException
-	{
-		CollectionReader reader = createReader(
-				XmlXPathReader.class,
-				XmlXPathReader.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
-				XmlXPathReader.PARAM_PATTERNS, new String[] { "[+]abbr*.*" },
-		        XmlXPathReader.PARAM_XPATH_EXPRESSION, "/topics/top",
-		        // Subtitute "EN-title" tag with "title" and "EN-narr" with "narration"
-		        XmlXPathReader.PARAM_SUBSTITUTE_TAGS, new String[] { "EN-title", "title", "EN-narr", "narration" },
-		        XmlXPathReader.PARAM_LANGUAGE, "en"
-		);
+    @Test
+    public void recursiveReadingTest() throws UIMAException, IOException
+    {
+        CollectionReader reader = createReader(
+                XmlXPathReader.class,
+                XmlXPathReader.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
+                XmlXPathReader.PARAM_PATTERNS, new String[] { "[+]**/abbr*.xml" },
+                XmlXPathReader.PARAM_XPATH_EXPRESSION, "/topics/top",
+                XmlXPathReader.PARAM_LANGUAGE, "en"
+        );
 
-		AnalysisEngineDescription writer = createEngineDescription(
-				CasDumpWriter.class,
-				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/substitution.txt"
-		);
+        // Should find two files
+        AnalysisEngineDescription writer = createEngineDescription(
+                CasDumpWriter.class,
+                CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/recursive_reading.txt"
+        );
 
-		runPipeline(reader, writer);
-	}
+        runPipeline(reader, writer);
+    }
+
+
+    @Test
+    public void tagFilteringTest() throws UIMAException, IOException
+    {
+        CollectionReader reader = createReader(
+                XmlXPathReader.class,
+                XmlXPathReader.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
+                XmlXPathReader.PARAM_PATTERNS, new String[] { "[+]abbr*.*" },
+                XmlXPathReader.PARAM_XPATH_EXPRESSION, "/topics/top",
+                // read only num and EN-title tags
+                XmlXPathReader.PARAM_INCLUDE_TAGS, new String[] { "EN-title", "num" }, 
+                XmlXPathReader.PARAM_LANGUAGE, "en"
+        );
+
+        AnalysisEngineDescription writer = createEngineDescription(
+                CasDumpWriter.class,
+                CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/tag_filtering.txt"
+        );
+
+        runPipeline(reader, writer);
+    }
+
+
+    @Test
+    public void substitutionTest() throws UIMAException, IOException
+    {
+        CollectionReader reader = createReader(
+                XmlXPathReader.class,
+                XmlXPathReader.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
+                XmlXPathReader.PARAM_PATTERNS, new String[] { "[+]abbr*.*" },
+                XmlXPathReader.PARAM_XPATH_EXPRESSION, "/topics/top",
+                // Subtitute "EN-title" tag with "title" and "EN-narr" with "narration"
+                XmlXPathReader.PARAM_SUBSTITUTE_TAGS, new String[] { 
+                        "EN-title", "title", "EN-narr", "narration" },
+                XmlXPathReader.PARAM_LANGUAGE, "en"
+        );
+
+        AnalysisEngineDescription writer = createEngineDescription(
+                CasDumpWriter.class,
+                CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/substitution.txt"
+        );
+
+        runPipeline(reader, writer);
+    }
 
 
 }

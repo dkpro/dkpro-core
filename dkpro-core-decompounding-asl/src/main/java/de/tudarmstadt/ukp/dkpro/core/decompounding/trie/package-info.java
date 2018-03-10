@@ -17,6 +17,6 @@
  **/
 
 /**
- * Some base classes for trees and a simple Trie implementation 
+ * Some base classes for trees and a simple Trie implementation
  */
 package de.tudarmstadt.ukp.dkpro.core.decompounding.trie;

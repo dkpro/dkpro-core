@@ -107,8 +107,8 @@ public class PennTreebankCombinedReaderWriterTest
         extraReaderParams.add(input);
         extraReaderParams.addAll(asList(aExtraParams));
 
-        CollectionReaderDescription reader = createReaderDescription(PennTreebankCombinedReader.class,
-                extraReaderParams.toArray());
+        CollectionReaderDescription reader = createReaderDescription(
+                PennTreebankCombinedReader.class, extraReaderParams.toArray());
 
         List<Object> extraWriterParams = new ArrayList<>();
         extraWriterParams.add(PennTreebankCombinedWriter.PARAM_TARGET_LOCATION);

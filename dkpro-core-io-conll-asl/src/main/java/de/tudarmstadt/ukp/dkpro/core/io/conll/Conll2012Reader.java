@@ -72,7 +72,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
  * @see <a href="http://conll.cemantix.org/2012/data.html">CoNLL 2012 Shared Task:
  *      Modeling Multilingual Unrestricted Coreference in OntoNotes</a>
  */
-@ResourceMetaData(name="CoNLL 2012 Reader")
+@ResourceMetaData(name = "CoNLL 2012 Reader")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2012})
 @TypeCapability(
         outputs = { 
@@ -87,7 +87,8 @@ public class Conll2012Reader
     extends JCasResourceCollectionReader_ImplBase
 {
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String encoding;
 
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
@@ -107,7 +108,8 @@ public class Conll2012Reader
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
     
@@ -135,7 +137,8 @@ public class Conll2012Reader
     @ConfigurationParameter(name = PARAM_READ_COREFERENCE, mandatory = true, defaultValue = "true")
     private boolean readCoreference;
 
-    public static final String PARAM_READ_NAMED_ENTITY = ComponentParameters.PARAM_READ_NAMED_ENTITY;
+    public static final String PARAM_READ_NAMED_ENTITY = 
+            ComponentParameters.PARAM_READ_NAMED_ENTITY;
     @ConfigurationParameter(name = PARAM_READ_NAMED_ENTITY, mandatory = true, defaultValue = "true")
     private boolean readNamedEntity;
 
@@ -144,7 +147,8 @@ public class Conll2012Reader
      * tag set defined as part of the model meta data. This can be useful if a custom model is
      * specified which does not have such meta data, or it can be used in readers.
      */
-    public static final String PARAM_CONSTITUENT_TAG_SET = ComponentParameters.PARAM_CONSTITUENT_TAG_SET;
+    public static final String PARAM_CONSTITUENT_TAG_SET = 
+            ComponentParameters.PARAM_CONSTITUENT_TAG_SET;
     @ConfigurationParameter(name = PARAM_CONSTITUENT_TAG_SET, mandatory = false)
     protected String constituentTagset;
     
@@ -152,7 +156,8 @@ public class Conll2012Reader
      * Load the constituent tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
+    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CONSTITUENT_MAPPING_LOCATION, mandatory = false)
     protected String constituentMappingLocation;
 
@@ -307,7 +312,8 @@ public class Conll2012Reader
                 }
 
                 if (!UNUSED.equals(word[PARSE]) && readConstituent) {
-                    String fixed = word[PARSE].replace("*", "(" + word[POS] + " " + word[FORM] + ")"); 
+                    String fixed = word[PARSE].replace("*",
+                            "(" + word[POS] + " " + word[FORM] + ")");
                     parse.append(fixed);
                 }
                 
@@ -317,14 +323,14 @@ public class Conll2012Reader
                     wordSense.addToIndexes();
                 }
 
-                if (!UNUSED.equals(word[word.length-1]) && readCoreference) {
-                    String[] chainFragments = word[word.length-1].split("\\|");
+                if (!UNUSED.equals(word[word.length - 1]) && readCoreference) {
+                    String[] chainFragments = word[word.length - 1].split("\\|");
                     for (String chainFragment : chainFragments) {
                         boolean beginning = chainFragment.startsWith("(");
                         boolean ending = chainFragment.endsWith(")");
                         
                         String chainId = chainFragment.substring(beginning ? 1 : 0,
-                                ending ? chainFragment.length() -1 : chainFragment.length());                        
+                                ending ? chainFragment.length() - 1 : chainFragment.length());
                         
                         CoreferenceLink link = chains.get(chainId);
                         if (beginning) {
@@ -366,13 +372,14 @@ public class Conll2012Reader
     
                     // When a NE is beginning, we remember what the NE is and where it began
                     if (beginning) {
-                        // The NE is beginning with "(" and either ending with "(" or "*", so we trim
-                        // the first and last character
-                        currentNeType = ne.substring(1, ne.length()-1);
+                        // The NE is beginning with "(" and either ending with "(" or "*", so we
+                        // trim the first and last character
+                        currentNeType = ne.substring(1, ne.length() - 1);
                         currentNeBegin = i;
                     }
                     
-                    // We need to create an annotation if the current token is the end of an annotation
+                    // We need to create an annotation if the current token is the end of an
+                    // annotation
                     if (ending) {
                         // Determine begin and end of named entity
                         int begin = tokenById.get(currentNeBegin).getBegin();
@@ -408,7 +415,7 @@ public class Conll2012Reader
                         if (beginning) {
                             // The arg is beginning with "(" and either ending with "(" or "*", so
                             // we trim the first and last character
-                            currentArgType = ne.substring(1, ne.length()-1);
+                            currentArgType = ne.substring(1, ne.length() - 1);
                             currentArgBegin = i;
                         }
                         
@@ -474,7 +481,7 @@ public class Conll2012Reader
                     Matcher matcher = pattern.matcher(line);
                     if (matcher.matches()) {
                         DocumentMetaData meta = DocumentMetaData.get(aJCas);
-                        meta.setDocumentId(matcher.group(1)+'#'+matcher.group(2));
+                        meta.setDocumentId(matcher.group(1) + '#' + matcher.group(2));
                     }
                 }
                 

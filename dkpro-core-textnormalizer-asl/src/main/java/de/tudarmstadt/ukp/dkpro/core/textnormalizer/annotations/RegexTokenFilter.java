@@ -37,7 +37,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * Remove every token that does or does not match a given regular expression.
  */
-@ResourceMetaData(name="Regex Token Filter")
+@ResourceMetaData(name = "Regex Token Filter")
 public class RegexTokenFilter
     extends JCasAnnotator_ImplBase
 {

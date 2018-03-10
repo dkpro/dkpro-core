@@ -56,43 +56,43 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * Lemmatizer using CoGrOO.
  */
-@ResourceMetaData(name="CoGrOO Lemmatizer")
+@ResourceMetaData(name = "CoGrOO Lemmatizer")
 @LanguageCapability("pt")
 @TypeCapability(
-	    inputs = {
-	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        inputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
             "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" },
         outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
 
 public class CogrooLemmatizer
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
-	/**
-	 * Use this language instead of the document language to resolve the model.
-	 */
-	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-	protected String language;
+    /**
+     * Use this language instead of the document language to resolve the model.
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    protected String language;
 
-	private CasConfigurableProviderBase<Analyzer> modelProvider;
+    private CasConfigurableProviderBase<Analyzer> modelProvider;
 
-	@Override
-	public void initialize(UimaContext aContext)
-		throws ResourceInitializationException
-	{
-		super.initialize(aContext);
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
 
-		modelProvider = new ModelProviderBase<Analyzer>() {
-			{
-			    setContextObject(CogrooLemmatizer.this);
+        modelProvider = new ModelProviderBase<Analyzer>() {
+            {
+                setContextObject(CogrooLemmatizer.this);
 
-				setDefault(LOCATION, NOT_REQUIRED);
-				setOverride(LANGUAGE, language);
-			}
+                setDefault(LOCATION, NOT_REQUIRED);
+                setOverride(LANGUAGE, language);
+            }
 
-			@Override
+            @Override
             protected Analyzer produceResource(URL aUrl)
                 throws IOException
             {
@@ -109,19 +109,19 @@ public class CogrooLemmatizer
 
                 return factory.createLemmatizer();
             }
-		};
-	}
+        };
+    }
 
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
-		CAS cas = aJCas.getCas();
-		modelProvider.configure(cas);
+    @Override
+    public void process(JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
+        CAS cas = aJCas.getCas();
+        modelProvider.configure(cas);
 
         // This is actually quite some overhead, because internally Cogroo is just using a
         // Morphlogik dictionary which simply takes a token and pos tag and returnes a list of
-		// lemmata. It would be much more efficient to use the dictionary directly.
+        // lemmata. It would be much more efficient to use the dictionary directly.
 
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             // We set up one CoGrOO document for each sentence. That makes it easier to maintain
@@ -133,7 +133,8 @@ public class CogrooLemmatizer
             doc.setText(aJCas.getDocumentText());
 
             // Extract the sentence and its tokens
-            org.cogroo.text.Sentence cSent = new SentenceImpl(sentence.getBegin(), sentence.getEnd(), doc);
+            org.cogroo.text.Sentence cSent = new SentenceImpl(sentence.getBegin(),
+                    sentence.getEnd(), doc);
             List<org.cogroo.text.Token> cTokens = new ArrayList<org.cogroo.text.Token>();
             List<Token> dTokens = selectCovered(Token.class, sentence);
             for (Token dTok : dTokens) {
@@ -159,7 +160,8 @@ public class CogrooLemmatizer
                 // reason.
                 Token dTok = dTokIt.next();
                 String[] lemmas = cTok.getLemmas();
-                Lemma l = new Lemma(aJCas, cSent.getStart() + cTok.getStart(), cSent.getStart() + cTok.getEnd());
+                Lemma l = new Lemma(aJCas, cSent.getStart() + cTok.getStart(),
+                        cSent.getStart() + cTok.getEnd());
                 if (lemmas != null && lemmas.length > 0) {
                     String lemmaString = lemmas[0];
                     if (lemmaString == null) {
@@ -174,5 +176,5 @@ public class CogrooLemmatizer
                 dTok.setLemma(l);
             }
         }
-	}
+    }
 }

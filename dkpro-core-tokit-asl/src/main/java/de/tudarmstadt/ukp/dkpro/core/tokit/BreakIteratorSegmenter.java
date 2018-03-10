@@ -33,7 +33,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * BreakIterator segmenter.
  */
-@ResourceMetaData(name="Java BreakIterator Segmenter")
+@ResourceMetaData(name = "Java BreakIterator Segmenter")
 @LanguageCapability({ "ar", "be", "bg", "ca", "cs", "da", "de", "el", "en", "es", "et", "fi", "fr",
         "ga", "hi", "hr", "hu", "in", "is", "it", "iw", "ja", "ko", "lt", "lv", "mk", "ms", "mt",
         "nl", "no", "pl", "pt", "ro", "ru", "sk", "sl", "sq", "sr", "sv", "th", "tr", "uk", "vi",
@@ -73,7 +73,8 @@ public class BreakIteratorSegmenter
             else {
                 int[] span = new int[] { last, cur };
                 trim(aJCas.getDocumentText(), span);
-                processSentence(aJCas, aJCas.getDocumentText().substring(span[0], span[1]), span[0]);
+                processSentence(aJCas, aJCas.getDocumentText().substring(span[0], span[1]),
+                        span[0]);
             }
             last = cur;
             cur = bi.next();

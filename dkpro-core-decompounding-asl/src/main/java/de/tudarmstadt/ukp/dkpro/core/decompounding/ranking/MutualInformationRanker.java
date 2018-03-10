@@ -27,154 +27,128 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.trie.ValueNode;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.Finder;
 
 /**
- * Mutual informationen based ranking algorithm. See doc folder for more
- * information
- *
+ * Mutual informationen based ranking algorithm.
  */
 public class MutualInformationRanker
-	extends AbstractRanker
-	implements RankerList
+    extends AbstractRanker
+    implements RankerList
 {
-	/**
-	 * Empty constructor
-	 *
-	 * Use {@link #setFinder(Finder)} before using this class
-	 */
-	public MutualInformationRanker() {
-	}
+    /**
+     * Empty constructor
+     *
+     * Use {@link #setFinder(Finder)} before using this class
+     */
+    public MutualInformationRanker() {
+    }
 
-	public MutualInformationRanker(Finder aFinder)
-	{
-		super(aFinder);
-	}
+    public MutualInformationRanker(Finder aFinder)
+    {
+        super(aFinder);
+    }
 
-	@Override
+    @Override
     public DecompoundedWord highestRank(List<DecompoundedWord> aSplits)
-	{
-		return rank(aSplits).get(0);
-	}
+    {
+        return rank(aSplits).get(0);
+    }
 
-	@Override
-	public List<DecompoundedWord> rank(List<DecompoundedWord> aSplits)
-	{
-		for (DecompoundedWord split : aSplits) {
-			double weight = calcRank(split);
-			if (Double.isInfinite(split.getWeight()) || Double.isNaN(split.getWeight())) {
-				weight = 0.0;
-			}
-			split.setWeight(weight);
-		}
+    @Override
+    public List<DecompoundedWord> rank(List<DecompoundedWord> aSplits)
+    {
+        for (DecompoundedWord split : aSplits) {
+            double weight = calcRank(split);
+            if (Double.isInfinite(split.getWeight()) || Double.isNaN(split.getWeight())) {
+                weight = 0.0;
+            }
+            split.setWeight(weight);
+        }
 
-		return filterAndSort(aSplits);
-	}
+        return filterAndSort(aSplits);
+    }
 
-	/**
-	 * Calculates the weight for a split
-	 */
-	private float calcRank(DecompoundedWord aSplit)
-	{
-		double total = 0;
-		double count = 0;
+    /**
+     * Calculates the weight for a split
+     */
+    private float calcRank(DecompoundedWord aSplit)
+    {
+        double total = 0;
+        double count = 0;
 
-		BigInteger unigramCount = getFinder().getUnigramCount();
+        BigInteger unigramCount = getFinder().getUnigramCount();
 
-		if (aSplit.getSplits().size() == 1) {
-			// Entropy for single words
-			Fragment w = aSplit.getSplits().get(0);
-			double p = freq(w).doubleValue() / unigramCount.doubleValue();
+        if (aSplit.getSplits().size() == 1) {
+            // Entropy for single words
+            Fragment w = aSplit.getSplits().get(0);
+            double p = freq(w).doubleValue() / unigramCount.doubleValue();
 
-			return (float) ((-1) * p * Math.log(p));
-		}
+            return (float) ((-1) * p * Math.log(p));
+        }
 
-		// Mutual Information for splits.
-		for (int i = 1; i < aSplit.getSplits().size(); i++) {
-			count++;
+        // Mutual Information for splits.
+        for (int i = 1; i < aSplit.getSplits().size(); i++) {
+            count++;
 
-			Fragment w1 = aSplit.getSplits().get(i - 1);
-			Fragment w2 = aSplit.getSplits().get(i);
-			// Look up unigram frequencies first - this is fast and allows us to bail out early
-			BigInteger w1f = freq(w1);
-			if (w1f.equals(BigInteger.ZERO)) {
-				continue;
-			}
+            Fragment w1 = aSplit.getSplits().get(i - 1);
+            Fragment w2 = aSplit.getSplits().get(i);
+            // Look up unigram frequencies first - this is fast and allows us to bail out early
+            BigInteger w1f = freq(w1);
+            if (w1f.equals(BigInteger.ZERO)) {
+                continue;
+            }
 
-			BigInteger w2f = freq(w2);
-			if (w2f.equals(BigInteger.ZERO)) {
-				continue;
-			}
+            BigInteger w2f = freq(w2);
+            if (w2f.equals(BigInteger.ZERO)) {
+                continue;
+            }
 
-			// This is a slow lookup that we only do if the unigram frequencies are greate than 0
-			double a = freq(w1, w2).multiply(unigramCount).doubleValue();
-			if (a == 0d) {
-				continue;
-			}
+            // This is a slow lookup that we only do if the unigram frequencies are greate than 0
+            double a = freq(w1, w2).multiply(unigramCount).doubleValue();
+            if (a == 0d) {
+                continue;
+            }
 
-			// Finally calculate
-			double b = w1f.multiply(w2f).doubleValue();
-			total += Math.log(a / b);
-		}
+            // Finally calculate
+            double b = w1f.multiply(w2f).doubleValue();
+            total += Math.log(a / b);
+        }
 
-		return (float) (total / count);
-	}
+        return (float) (total / count);
+    }
 
 
-	/**
-	 * Searches a a path throw the tree
-	 */
-	@Override
+    /**
+     * Searches a a path throw the tree
+     */
+    @Override
     public DecompoundedWord highestRank(ValueNode<DecompoundedWord> aParent,
-	        List<DecompoundedWord> aPath)
-	{
-		if (aPath != null) {
-			aPath.add(aParent.getValue());
-		}
+            List<DecompoundedWord> aPath)
+    {
+        if (aPath != null) {
+            aPath.add(aParent.getValue());
+        }
 
-		List<DecompoundedWord> children = aParent.getChildrenValues();
-		if (children.size() == 0) {
-			return aParent.getValue();
-		}
+        List<DecompoundedWord> children = aParent.getChildrenValues();
+        if (children.size() == 0) {
+            return aParent.getValue();
+        }
 
-		children.add(aParent.getValue());
-		List<DecompoundedWord> result = rank(children);
-		DecompoundedWord best = result.get(0);
+        children.add(aParent.getValue());
+        List<DecompoundedWord> result = rank(children);
+        DecompoundedWord best = result.get(0);
 
-		if (best.equals(aParent.getValue())) {
-			// None of the childs get a better score than the parent
-			return aParent.getValue();
-		}
-		else {
-			// Find the child node that ranked best and recurse
-			for (ValueNode<DecompoundedWord> split : aParent.getChildren()) {
-				if (best.equals(split.getValue())) {
-					return highestRank(split, aPath);
-				}
-			}
-		}
+        if (best.equals(aParent.getValue())) {
+            // None of the childs get a better score than the parent
+            return aParent.getValue();
+        }
+        else {
+            // Find the child node that ranked best and recurse
+            for (ValueNode<DecompoundedWord> split : aParent.getChildren()) {
+                if (best.equals(split.getValue())) {
+                    return highestRank(split, aPath);
+                }
+            }
+        }
 
-		return null;
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return null;
+    }
 }

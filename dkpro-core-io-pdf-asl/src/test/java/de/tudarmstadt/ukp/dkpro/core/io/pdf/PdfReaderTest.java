@@ -29,6 +29,7 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.EOLUtils;
 import de.tudarmstadt.ukp.dkpro.core.testing.dumper.CasDumpWriter;

@@ -17,8 +17,8 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.treetagger;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
 
@@ -34,14 +34,13 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
-public
-class SegmenterCompatibilityTest
+public class SegmenterCompatibilityTest
 {
-	@Before
-	public void initTrace()
-	{
-		// TreeTaggerWrapper.TRACE = true;
-	}
+    @Before
+    public void initTrace()
+    {
+        // TreeTaggerWrapper.TRACE = true;
+    }
 
     @Test
     public void segmenterCompatibilityTest() throws Exception
@@ -62,19 +61,20 @@ class SegmenterCompatibilityTest
                 select(aJCas, Lemma.class));
     }
 
-	private void checkLemma(String[] expected, Collection<Lemma> actual)
-	{
+    private void checkLemma(String[] expected, Collection<Lemma> actual)
+    {
         int i = 0;
         for (Lemma lemmaAnnotation : actual) {
-            assertEquals("In position "+i, expected[i], lemmaAnnotation.getValue());
+            assertEquals("In position " + i, expected[i], lemmaAnnotation.getValue());
             i++;
         }
-	}
+    }
 
     private void checkModelsAndBinary(String lang)
     {
-        Assume.assumeTrue(getClass().getResource(
-                "/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-" + lang + "-le.bin") != null);
+        Assume.assumeTrue(
+                getClass().getResource("/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-"
+                        + lang + "-le.bin") != null);
 
         Assume.assumeTrue(getClass().getResource(
                 "/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null);

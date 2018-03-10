@@ -67,8 +67,8 @@ public class ModelProviderBase<M>
         setDefault(ARTIFACT_ID, "${groupId}." + aShortName + "-model-" + aType
                 + "-${language}-${variant}");
         setDefault(LOCATION,
-                "classpath:/${package}/lib/"+aType+"-${language}-${variant}.properties");
-        setDefaultVariantsLocation("${package}/lib/"+aType+"-default-variants.map");
+                "classpath:/${package}/lib/" + aType + "-${language}-${variant}.properties");
+        setDefaultVariantsLocation("${package}/lib/" + aType + "-default-variants.map");
         setDefault(VARIANT, "default");
 
         addAutoOverride(ComponentParameters.PARAM_MODEL_LOCATION, LOCATION);

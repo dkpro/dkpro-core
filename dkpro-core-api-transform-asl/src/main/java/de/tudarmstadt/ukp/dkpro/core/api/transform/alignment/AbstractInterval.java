@@ -66,7 +66,7 @@ public abstract class AbstractInterval
 
         return (((i.getStart() <= getStart()) && (getStart() < i.getEnd())) || // Case 1-3
                 ((i.getStart() < getEnd()) && (getEnd() <= i.getEnd())) || // Case 1-3
-        ((getStart() <= i.getStart()) && (i.getEnd() <= getEnd()))); // Case 4
+                ((getStart() <= i.getStart()) && (i.getEnd() <= getEnd()))); // Case 4
     }
 
     @Override

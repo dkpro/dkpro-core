@@ -37,82 +37,82 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class DictionaryAnnotatorTest
 {
-	@Test
-	public void test() throws Exception
-	{
-		AnalysisEngine ae = createEngine(DictionaryAnnotator.class,
-				DictionaryAnnotator.PARAM_ANNOTATION_TYPE, NamedEntity.class,
-				DictionaryAnnotator.PARAM_MODEL_LOCATION, "src/test/resources/persons.txt");
+    @Test
+    public void test() throws Exception
+    {
+        AnalysisEngine ae = createEngine(DictionaryAnnotator.class,
+                DictionaryAnnotator.PARAM_ANNOTATION_TYPE, NamedEntity.class,
+                DictionaryAnnotator.PARAM_MODEL_LOCATION, "src/test/resources/persons.txt");
 
-		JCas jcas = JCasFactory.createJCas();
-		TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class, Sentence.class);
-		tb.buildTokens(jcas, "I am John Silver 's ghost .");
+        JCas jcas = JCasFactory.createJCas();
+        TokenBuilder<Token, Sentence> tb = new TokenBuilder<>(Token.class, Sentence.class);
+        tb.buildTokens(jcas, "I am John Silver 's ghost .");
 
-		ae.process(jcas);
+        ae.process(jcas);
 
-		NamedEntity ne = selectSingle(jcas, NamedEntity.class);
-		assertEquals("John Silver", ne.getCoveredText());
-	}
+        NamedEntity ne = selectSingle(jcas, NamedEntity.class);
+        assertEquals("John Silver", ne.getCoveredText());
+    }
 
-	@Test
-	public void testWithValue() throws Exception
-	{
-		AnalysisEngine ae = createEngine(DictionaryAnnotator.class,
-				DictionaryAnnotator.PARAM_ANNOTATION_TYPE, NamedEntity.class,
-				DictionaryAnnotator.PARAM_VALUE, "PERSON",
-				DictionaryAnnotator.PARAM_MODEL_LOCATION, "src/test/resources/persons.txt");
+    @Test
+    public void testWithValue() throws Exception
+    {
+        AnalysisEngine ae = createEngine(DictionaryAnnotator.class,
+                DictionaryAnnotator.PARAM_ANNOTATION_TYPE, NamedEntity.class,
+                DictionaryAnnotator.PARAM_VALUE, "PERSON",
+                DictionaryAnnotator.PARAM_MODEL_LOCATION, "src/test/resources/persons.txt");
 
-		JCas jcas = JCasFactory.createJCas();
-		TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class, Sentence.class);
-		tb.buildTokens(jcas, "I am John Silver 's ghost .");
+        JCas jcas = JCasFactory.createJCas();
+        TokenBuilder<Token, Sentence> tb = new TokenBuilder<>(Token.class, Sentence.class);
+        tb.buildTokens(jcas, "I am John Silver 's ghost .");
 
-		ae.process(jcas);
+        ae.process(jcas);
 
-		NamedEntity ne = selectSingle(jcas, NamedEntity.class);
-		assertEquals("PERSON", ne.getValue());
-		assertEquals("John Silver", ne.getCoveredText());
-	}
+        NamedEntity ne = selectSingle(jcas, NamedEntity.class);
+        assertEquals("PERSON", ne.getValue());
+        assertEquals("John Silver", ne.getCoveredText());
+    }
 
-	@Test
-	public void testWithWrongType() throws Exception
-	{
-		try {
-			AnalysisEngine ae = createEngine(DictionaryAnnotator.class,
-					DictionaryAnnotator.PARAM_ANNOTATION_TYPE, "lala",
-					DictionaryAnnotator.PARAM_VALUE, "PERSON",
-					DictionaryAnnotator.PARAM_MODEL_LOCATION, "src/test/resources/persons.txt");
+    @Test
+    public void testWithWrongType() throws Exception
+    {
+        try {
+            AnalysisEngine ae = createEngine(DictionaryAnnotator.class,
+                    DictionaryAnnotator.PARAM_ANNOTATION_TYPE, "lala",
+                    DictionaryAnnotator.PARAM_VALUE, "PERSON",
+                    DictionaryAnnotator.PARAM_MODEL_LOCATION, "src/test/resources/persons.txt");
 
-			JCas jcas = JCasFactory.createJCas();
-			TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class, Sentence.class);
-			tb.buildTokens(jcas, "I am John Silver 's ghost .");
+            JCas jcas = JCasFactory.createJCas();
+            TokenBuilder<Token, Sentence> tb = new TokenBuilder<>(Token.class, Sentence.class);
+            tb.buildTokens(jcas, "I am John Silver 's ghost .");
 
-			ae.process(jcas);
-			fail("An exception for an undeclared type should have been thrown");
-		}
-		catch (AnalysisEngineProcessException e) {
-			assertTrue(ExceptionUtils.getRootCauseMessage(e).contains("Undeclared type"));
-		}
-	}
+            ae.process(jcas);
+            fail("An exception for an undeclared type should have been thrown");
+        }
+        catch (AnalysisEngineProcessException e) {
+            assertTrue(ExceptionUtils.getRootCauseMessage(e).contains("Undeclared type"));
+        }
+    }
 
-	@Test
-	public void testWithWrongValueFeature() throws Exception
-	{
-		try {
-			AnalysisEngine ae = createEngine(DictionaryAnnotator.class,
-					DictionaryAnnotator.PARAM_ANNOTATION_TYPE, NamedEntity.class,
-					DictionaryAnnotator.PARAM_VALUE_FEATURE, "lala",
-					DictionaryAnnotator.PARAM_VALUE, "PERSON",
-					DictionaryAnnotator.PARAM_MODEL_LOCATION, "src/test/resources/persons.txt");
+    @Test
+    public void testWithWrongValueFeature() throws Exception
+    {
+        try {
+            AnalysisEngine ae = createEngine(DictionaryAnnotator.class,
+                    DictionaryAnnotator.PARAM_ANNOTATION_TYPE, NamedEntity.class,
+                    DictionaryAnnotator.PARAM_VALUE_FEATURE, "lala",
+                    DictionaryAnnotator.PARAM_VALUE, "PERSON",
+                    DictionaryAnnotator.PARAM_MODEL_LOCATION, "src/test/resources/persons.txt");
 
-			JCas jcas = JCasFactory.createJCas();
-			TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class, Sentence.class);
-			tb.buildTokens(jcas, "I am John Silver 's ghost .");
+            JCas jcas = JCasFactory.createJCas();
+            TokenBuilder<Token, Sentence> tb = new TokenBuilder<>(Token.class, Sentence.class);
+            tb.buildTokens(jcas, "I am John Silver 's ghost .");
 
-			ae.process(jcas);
-			fail("An exception for an undeclared type should have been thrown");
-		}
-		catch (AnalysisEngineProcessException e) {
-			assertTrue(ExceptionUtils.getRootCauseMessage(e).contains("Undeclared feature"));
-		}
-	}
+            ae.process(jcas);
+            fail("An exception for an undeclared type should have been thrown");
+        }
+        catch (AnalysisEngineProcessException e) {
+            assertTrue(ExceptionUtils.getRootCauseMessage(e).contains("Undeclared feature"));
+        }
+    }
 }

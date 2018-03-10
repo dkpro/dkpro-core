@@ -23,7 +23,6 @@ import org.apache.uima.fit.component.CasDumpWriter;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
-import org.dkpro.core.io.nyt.NYTCollectionReader;
 import org.junit.Test;
 
 public class NYTCollectionReaderTest

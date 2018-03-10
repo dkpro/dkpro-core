@@ -24,25 +24,27 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 public final class POSUtils
 {
     public static final String POS_TYPE_PREFIX = "POS_";
-    
-    private POSUtils() {
+
+    private POSUtils()
+    {
         // nothing here
     }
-    
-    public static void assignCoarseValue(POS pos) {
-        
-        if(pos == null) {
+
+    public static void assignCoarseValue(POS pos)
+    {
+        if (pos == null) {
             return;
         }
-        
+
         String shortName = pos.getType().getShortName();
-        if(!StringUtils.equals(pos.getType().getName(), POS.class.getName())) {
-        
-            if(!shortName.startsWith(POS_TYPE_PREFIX)){
-                throw new IllegalArgumentException("The type " +shortName+ "of the given POS annotation does not fulfill the convention of starting with prefix '"+POS_TYPE_PREFIX+"'");
+        if (!StringUtils.equals(pos.getType().getName(), POS.class.getName())) {
+
+            if (!shortName.startsWith(POS_TYPE_PREFIX)) {
+                throw new IllegalArgumentException("The type " + shortName
+                        + "of the given POS annotation does not fulfill the convention of starting with prefix '"
+                        + POS_TYPE_PREFIX + "'");
             }
             pos.setCoarseValue(shortName.substring(POS_TYPE_PREFIX.length()).intern());
         }
     }
-    
 }

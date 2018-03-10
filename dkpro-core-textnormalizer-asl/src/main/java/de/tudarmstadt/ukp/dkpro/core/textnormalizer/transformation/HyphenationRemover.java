@@ -41,7 +41,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_Im
 /**
  * Simple dictionary-based hyphenation remover. 
  */
-@ResourceMetaData(name="Hyphenation Remover")
+@ResourceMetaData(name = "Hyphenation Remover")
 public class HyphenationRemover
     extends JCasTransformerChangeBased_ImplBase
 {

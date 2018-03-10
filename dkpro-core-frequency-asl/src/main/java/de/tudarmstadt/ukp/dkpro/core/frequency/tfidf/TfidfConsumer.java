@@ -35,7 +35,7 @@ import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util.TfidfUtils;
  * This consumer builds a {@link DfModel}. It collects the df (document frequency) counts for the
  * processed collection. The counts are serialized as a {@link DfModel}-object.
  */
-@ResourceMetaData(name="TF/IDF Model Writer")
+@ResourceMetaData(name = "TF/IDF Model Writer")
 public class TfidfConsumer
     extends JCasAnnotator_ImplBase
 {

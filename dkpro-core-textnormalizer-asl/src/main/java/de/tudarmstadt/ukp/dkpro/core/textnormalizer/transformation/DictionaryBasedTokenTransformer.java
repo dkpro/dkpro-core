@@ -44,7 +44,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_Im
  * Reads a tab-separated file containing mappings from one token to another. All tokens that match
  * an entry in the first column are changed to the corresponding token in the second column.
  */
-@ResourceMetaData(name="Dictionary-based Token Transformer")
+@ResourceMetaData(name = "Dictionary-based Token Transformer")
 public class DictionaryBasedTokenTransformer
     extends JCasTransformerChangeBased_ImplBase
 {

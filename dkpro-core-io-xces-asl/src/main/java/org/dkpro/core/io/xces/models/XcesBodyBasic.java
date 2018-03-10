@@ -24,7 +24,5 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class XcesBodyBasic
 {
-    
     public List<XcesParaBasic> p;
-
 }

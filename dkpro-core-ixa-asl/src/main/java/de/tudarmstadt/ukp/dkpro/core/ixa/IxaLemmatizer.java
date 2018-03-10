@@ -49,7 +49,7 @@ import eus.ixa.ixa.pipe.lemma.LemmatizerModel;
 /**
  * Lemmatizer using the OpenNLP-based Ixa implementation.
  */
-@ResourceMetaData(name="IXA Lemmatizer")
+@ResourceMetaData(name = "IXA Lemmatizer")
 @TypeCapability(
         inputs = { 
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -87,7 +87,7 @@ public class IxaLemmatizer
      * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
     protected boolean printTagSet;
 
     private CasConfigurableProviderBase<LemmatizerME> modelProvider;
@@ -107,9 +107,10 @@ public class IxaLemmatizer
                 LemmatizerModel model = new LemmatizerModel(aStream);
 
                 // Extract tagset information from the model
-                IxaLemmatizerTagsetDescriptionProvider tsdp = new IxaLemmatizerTagsetDescriptionProvider(
-                        getResourceMetaData().getProperty("pos.tagset"), POS.class,
-                        model.getLemmatizerSequenceModel(), "t0");
+                IxaLemmatizerTagsetDescriptionProvider tsdp = 
+                        new IxaLemmatizerTagsetDescriptionProvider(
+                                getResourceMetaData().getProperty("pos.tagset"), POS.class,
+                                model.getLemmatizerSequenceModel(), "t0");
                 addTagset(tsdp, false);
 
                 if (printTagSet) {

@@ -49,7 +49,7 @@ public class BratRelationAnnotation
     public BratRelationAnnotation(int aId, String aType, String aArg1Label, String aArg1Target,
             String aArg2Label, String aArg2Target)
     {
-        this("R"+aId, aType, aArg1Label, aArg1Target, aArg2Label, aArg2Target);
+        this("R" + aId, aType, aArg1Label, aArg1Target, aArg2Label, aArg2Target);
     }
     
     public BratRelationAnnotation(String aId, String aType, String aArg1Label, String aArg1Target,
@@ -117,7 +117,8 @@ public class BratRelationAnnotation
         Matcher m = PATTERN.matcher(aLine);
         
         if (!m.matches()) {
-            throw new IllegalArgumentException("Illegal relation annotation format ["+aLine+"]");
+            throw new IllegalArgumentException(
+                    "Illegal relation annotation format [" + aLine + "]");
         }
 
         return new BratRelationAnnotation(m.group(ID), m.group(TYPE), m.group(ARG1_LABEL),

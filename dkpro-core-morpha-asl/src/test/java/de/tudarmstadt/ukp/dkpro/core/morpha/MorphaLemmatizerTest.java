@@ -33,20 +33,20 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class MorphaLemmatizerTest
 {
-	@Test
-	public void testEnglishNoPos()
-		throws Exception
-	{
-		JCas jcas = runTest("en", false, "We need a very complicated example sentence , which " +
-			"contains as many constituents and dependencies as possible .");
+    @Test
+    public void testEnglishNoPos()
+        throws Exception
+    {
+        JCas jcas = runTest("en", false, "We need a very complicated example sentence , which " +
+            "contains as many constituents and dependencies as possible .");
 
         String[] lemmas = { "We", "need", "a", "very", "complicate", "example", "sentence", ",",
                 "which", "contain", "as", "many", "constituent", "and", "dependency", "as",
                 "possible", "." };
 
-		AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
-	}
-	
+        AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
+    }
+    
     @Test
     public void testEnglishWithPos()
         throws Exception
@@ -61,9 +61,9 @@ public class MorphaLemmatizerTest
         AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
     }
     
-	private JCas runTest(String aLanguage, boolean aUsePosTags, String aText)
-		throws Exception
-	{
+    private JCas runTest(String aLanguage, boolean aUsePosTags, String aText)
+        throws Exception
+    {
         AnalysisEngineDescription engine;
         
         if (aUsePosTags) {
@@ -78,8 +78,8 @@ public class MorphaLemmatizerTest
         }
 
         return TestRunner.runTest(engine, aLanguage, aText);
-	}
-	
-	@Rule
-	public DkproTestContext testContext = new DkproTestContext();
+    }
+    
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }

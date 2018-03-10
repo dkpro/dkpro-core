@@ -40,7 +40,7 @@ import edu.emory.mathcs.nlp.component.tokenizer.token.Token;
 /**
  * Segmenter using Emory NLP4J.
  */
-@ResourceMetaData(name="NLP4J Segmenter")
+@ResourceMetaData(name = "NLP4J Segmenter")
 @TypeCapability(
         outputs = { 
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",

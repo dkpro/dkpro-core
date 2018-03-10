@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2007-2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -71,9 +71,9 @@ public class LingPipePosTaggerTest
 
         
         jcas = runTest("en", "bio-genia", "The quick brown fox jumps over the lazy dog . \n",
-                new String[] { "DT", "RB", "VBN", "NN", "NNS", "IN", "DT", "NN", "NN", "." },                
-                new String[] { "POS_DET", "POS_ADV", "POS_VERB", "POS_NOUN", "POS_NOUN", "POS_ADP", "POS_DET", "POS_NOUN", "POS_NOUN",
-                        "POS_PUNCT" });
+                new String[] { "DT", "RB", "VBN", "NN", "NNS", "IN", "DT", "NN", "NN", "." },
+                new String[] { "POS_DET", "POS_ADV", "POS_VERB", "POS_NOUN", "POS_NOUN", "POS_ADP",
+                        "POS_DET", "POS_NOUN", "POS_NOUN", "POS_PUNCT" });
 
         String[] ptbTags = { "", "''", "(", ")", ",", "-", ".", ":", "CC", "CD", "CT", "DT", "EX",
                 "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "N", "NN", "NNP", "NNPS", "NNS", "PDT",
@@ -87,9 +87,9 @@ public class LingPipePosTaggerTest
 
         
         jcas = runTest("en", "bio-medpost", "The quick brown fox jumps over the lazy dog . \n",
-                new String[] { "DD", "NN", "JJ", "NN", "NNS", "II", "DD", "NN", "NN", "." },                
-                new String[] { "POS_DET", "POS_NOUN", "POS_ADJ", "POS_NOUN", "POS_NOUN", "POS_ADP", "POS_DET", "POS_NOUN", "POS_NOUN",
-                        "POS_PUNCT" });
+                new String[] { "DD", "NN", "JJ", "NN", "NNS", "II", "DD", "NN", "NN", "." },
+                new String[] { "POS_DET", "POS_NOUN", "POS_ADJ", "POS_NOUN", "POS_NOUN", "POS_ADP",
+                        "POS_DET", "POS_NOUN", "POS_NOUN", "POS_PUNCT" });
         
         String[] medpostTags = { "''", "(", ")", ",", ".", ":", "CC", "CC+", "CS", "CS+", "CSN",
                 "CST", "DB", "DD", "EX", "GE", "II", "II+", "JJ", "JJ+", "JJR", "JJT", "MC", "NN",

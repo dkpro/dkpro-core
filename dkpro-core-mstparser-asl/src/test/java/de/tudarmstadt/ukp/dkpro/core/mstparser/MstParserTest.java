@@ -17,6 +17,10 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.mstparser;
 
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertDependencies;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertPOS;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagset;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagsetMapping;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
@@ -33,7 +37,6 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.hunpos.HunPosTagger;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
@@ -151,11 +154,11 @@ public class MstParserTest
         String[] posMapped = { "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS",
                 "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS" };
         
-        AssertAnnotations.assertPOS(posMapped, posOrig, select(jcas, POS.class));
-        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
-        AssertAnnotations.assertTagset(MstParser.class, POS.class, "mte5-reduced", posTags, jcas);
-        //AssertAnnotations.assertTagsetMapping(POS.class, "mte5", unmappedPosTags, jcas);
-        AssertAnnotations.assertTagset(MstParser.class, Dependency.class, "setimes.hr", depTags, jcas);
+        assertPOS(posMapped, posOrig, select(jcas, POS.class));
+        assertDependencies(dependencies, select(jcas, Dependency.class));
+        assertTagset(MstParser.class, POS.class, "mte5-reduced", posTags, jcas);
+        //assertTagsetMapping(POS.class, "mte5", unmappedPosTags, jcas);
+        assertTagset(MstParser.class, Dependency.class, "setimes.hr", depTags, jcas);
     }
 
     /**
@@ -208,30 +211,30 @@ public class MstParserTest
         String[] posMapped = { "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS",
                 "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS" };
         
-        AssertAnnotations.assertPOS(posMapped, posOrig, select(jcas, POS.class));
-        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
-        AssertAnnotations.assertTagset(MstParser.class, POS.class, "mte5-pos", posTags, jcas);
-        //AssertAnnotations.assertTagsetMapping(POS.class, "mte5", unmappedPosTags, jcas);
-        AssertAnnotations.assertTagset(MstParser.class, Dependency.class, "setimes.hr", depTags, jcas);
+        assertPOS(posMapped, posOrig, select(jcas, POS.class));
+        assertDependencies(dependencies, select(jcas, Dependency.class));
+        assertTagset(MstParser.class, POS.class, "mte5-pos", posTags, jcas);
+        //assertTagsetMapping(POS.class, "mte5", unmappedPosTags, jcas);
+        assertTagset(MstParser.class, Dependency.class, "setimes.hr", depTags, jcas);
     }
 
     /**
-	 * This method runs the MSTParser for an example sentence and checks if it returns the correct
-	 * annotations. An annotation consists of: dependency type, begin of dependency, end of
-	 * dependency, begin of the head, end of the head
+     * This method runs the MSTParser for an example sentence and checks if it returns the correct
+     * annotations. An annotation consists of: dependency type, begin of dependency, end of
+     * dependency, begin of the head, end of the head
      * 
      * @throws Exception
      *             if an error occurs.
-	 */
-	@Test
-	public void testEnglishDefault()
-		throws Exception
-	{
-	    System.out.printf("Maximum memory: %d%n", Runtime.getRuntime().maxMemory());
+     */
+    @Test
+    public void testEnglishDefault()
+        throws Exception
+    {
+        System.out.printf("Maximum memory: %d%n", Runtime.getRuntime().maxMemory());
         Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 3000000000l);
         
-		JCas jcas = runTest("en", null, "We need a very complicated example sentence , which " +
-	            "contains as many constituents and dependencies as possible .");
+        JCas jcas = runTest("en", null, "We need a very complicated example sentence , which " +
+                "contains as many constituents and dependencies as possible .");
 
         String[] dependencies = {
                 "[  0,  2]Dependency(nsubj,basic) D[0,2](We) G[3,7](need)",
@@ -268,11 +271,11 @@ public class MstParserTest
 
         String[] unmappedPos = { "<root-POS>"};
 
-        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
-        AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
-        AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
-        AssertAnnotations.assertTagset(Dependency.class, "stanford", depTags, jcas);
-	}
+        assertDependencies(dependencies, select(jcas, Dependency.class));
+        assertTagset(POS.class, "ptb", posTags, jcas);
+        assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
+        assertTagset(Dependency.class, "stanford", depTags, jcas);
+    }
 
     /**
      * This method runs the MSTParser for an example sentence and checks if it returns the correct
@@ -320,10 +323,10 @@ public class MstParserTest
                 "NAC", "NP", "NP-OBJ", "NP-PRD", "NP-SBJ", "NX", "PP", "PRN", "PRT", "QP", "ROOT",
                 "S", "SBAR", "SINV", "SQ", "UCP", "VP", "WHNP" };
 
-        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
-        AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
-        AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
-        AssertAnnotations.assertTagset(Dependency.class, "conll2008", depTags, jcas);
+        assertDependencies(dependencies, select(jcas, Dependency.class));
+        assertTagset(POS.class, "ptb", posTags, jcas);
+        assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
+        assertTagset(Dependency.class, "conll2008", depTags, jcas);
     }
 
     private JCas runTest(String aLanguage, String aVariant, String aText, Object... aExtraParams)

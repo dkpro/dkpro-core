@@ -31,6 +31,7 @@ import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.custommonkey.xmlunit.XMLAssert;
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class TigerXmlReaderWriterTest

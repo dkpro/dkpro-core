@@ -28,9 +28,10 @@ public class SolrUtils
     /**
      * The modifiers available for Solr atomic updates: SET, ADD, INC, REMOVE, REMOVEREGEX.
      *
-     * @see <a href=https://cwiki.apache.org/confluence/display/solr/Updating+Parts+of+Documents#UpdatingPartsofDocuments-AtomicUpdates>Updating Parts of Documents</a>
      * @see <a
-     * href="http://wiki.apache.org/solr/Atomic_Updates">Atomic Updates</a>
+     *      href=https://cwiki.apache.org/confluence/display/solr/Updating+Parts+of+Documents#UpdatingPartsofDocuments-AtomicUpdates>Updating
+     *      Parts of Documents</a>
+     * @see <a href="http://wiki.apache.org/solr/Atomic_Updates">Atomic Updates</a>
      */
     public enum Modifier
     {
@@ -42,12 +43,17 @@ public class SolrUtils
     /**
      * Add a field and optionally perform a partial update if applicable on an existing document.
      *
-     * @param document  the {@link SolrInputDocument} to add/update
-     * @param fieldname the field name to add/update
-     * @param value     the value to insert for the field.
-     * @param update    if true, use Solr atomic update mechanism; otherwise overwrite document
-     * @param modifier  The {@link Modifier} to use when performing an atomic update (i.e. iff {@code update}
-     *                  is set to true).
+     * @param document
+     *            the {@link SolrInputDocument} to add/update
+     * @param fieldname
+     *            the field name to add/update
+     * @param value
+     *            the value to insert for the field.
+     * @param update
+     *            if true, use Solr atomic update mechanism; otherwise overwrite document
+     * @param modifier
+     *            The {@link Modifier} to use when performing an atomic update (i.e. iff
+     *            {@code update} is set to true).
      * @see #setField(SolrInputDocument, String, Object, boolean)
      */
     public static void setField(SolrInputDocument document, String fieldname, Object value,
@@ -63,12 +69,17 @@ public class SolrUtils
     }
 
     /**
-     * Add a field and optionally perform a partial update on an existing document, using the default atomic update operation ("set").
+     * Add a field and optionally perform a partial update on an existing document, using the
+     * default atomic update operation ("set").
      *
-     * @param document  the {@link SolrInputDocument} to add/update
-     * @param fieldname the field name to add/update
-     * @param value     the value to insert for the field.
-     * @param update    if true, use Solr atomic update mechanism; otherwise overwrite existing document
+     * @param document
+     *            the {@link SolrInputDocument} to add/update
+     * @param fieldname
+     *            the field name to add/update
+     * @param value
+     *            the value to insert for the field.
+     * @param update
+     *            if true, use Solr atomic update mechanism; otherwise overwrite existing document
      * @see #setField(SolrInputDocument, String, Object, boolean, Modifier)
      * @see Modifier
      */

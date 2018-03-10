@@ -25,22 +25,22 @@ import javax.xml.bind.annotation.XmlElement;
 
 public class TueppToken
 {
-    @XmlAttribute(name="f")
+    @XmlAttribute(name = "f")
     public String form;
-    
+
     @XmlElement(name = "P")
     public List<TueppPos> posTags = new ArrayList<TueppPos>();
-    
+
     public TueppPos getPrimaryTag()
     {
         TueppPos tag = null;
-        
+
         for (TueppPos t : posTags) {
             if (tag == null || tag.rank > t.rank) {
                 tag = t;
             }
         }
-        
+
         return tag;
     }
 }

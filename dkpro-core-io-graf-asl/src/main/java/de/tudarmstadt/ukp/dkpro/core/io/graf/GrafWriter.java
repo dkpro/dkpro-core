@@ -35,35 +35,35 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 /**
  * ISO GrAF writer.
  */
-@ResourceMetaData(name="ISO GrAF Writer")
+@ResourceMetaData(name = "ISO GrAF Writer")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_GRAF_XML})
 @TypeCapability(
-        inputs={
+        inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
 public class GrafWriter
-extends JCasFileWriter_ImplBase
+    extends JCasFileWriter_ImplBase
 {
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
-		IRenderer renderer = null;
-		try (OutputStream docOS = getOutputStream(aJCas, ".xml");) {
-			// Convert CAS
-			GraphFactory grafFactory = new GraphFactory();
-			IGraph graph = grafFactory.createGraph(aJCas.getCas());
+    @Override
+    public void process(JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
+        IRenderer renderer = null;
+        try (OutputStream docOS = getOutputStream(aJCas, ".xml");) {
+            // Convert CAS
+            GraphFactory grafFactory = new GraphFactory();
+            IGraph graph = grafFactory.createGraph(aJCas.getCas());
 
-			// Write CAS
-			renderer = new GrafRenderer(docOS);
-			renderer.render(graph);
-		}
-		catch (Exception e) {
-			throw new AnalysisEngineProcessException(e);
-		}
-		finally {
-			if (renderer != null) {
-				renderer.close();
-			}
-		}
-	}
+            // Write CAS
+            renderer = new GrafRenderer(docOS);
+            renderer.render(graph);
+        }
+        catch (Exception e) {
+            throw new AnalysisEngineProcessException(e);
+        }
+        finally {
+            if (renderer != null) {
+                renderer.close();
+            }
+        }
+    }
 }

@@ -212,7 +212,8 @@ public class IxaLemmatizerTest
                 "VSSI3S0", "VSSP1S0", "VSSP2S0", "VSSP3P0", "VSSP3S0", "W", "Z", "Zm", "Zp", "_" };
         
         AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
-        // AssertAnnotations.assertTagset(IxaPosTagger.class, POS.class, "ancora-ixa", posTags, jcas);
+        // AssertAnnotations.assertTagset(IxaPosTagger.class, POS.class, "ancora-ixa", 
+        //     posTags, jcas);
         AssertAnnotations.assertTagset(IxaLemmatizer.class, POS.class, "ancora-ixa", posTags, jcas);
     }
 

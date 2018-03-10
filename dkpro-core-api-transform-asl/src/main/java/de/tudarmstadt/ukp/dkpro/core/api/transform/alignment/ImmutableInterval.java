@@ -18,51 +18,46 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.api.transform.alignment;
 
-public
-class ImmutableInterval
-extends AbstractInterval
+public class ImmutableInterval
+    extends AbstractInterval
 {
-    private final int	start;
-    private final int	end;
+    private final int start;
+    private final int end;
 
     /**
      * Copy constructor.
      *
-     * @param interval the original interval.
+     * @param interval
+     *            the original interval.
      */
-    public
-    ImmutableInterval(
-    		final Interval interval)
+    public ImmutableInterval(final Interval interval)
     {
-    	this(interval.getStart(), interval.getEnd());
+        this(interval.getStart(), interval.getEnd());
     }
 
     /**
      * Constructor.
      *
-     * @param s start offset.
-     * @param e end offset.
+     * @param s
+     *            start offset.
+     * @param e
+     *            end offset.
      */
-    public
-    ImmutableInterval(
-    		final int s,
-    		final int e)
+    public ImmutableInterval(final int s, final int e)
     {
-		start = Math.min(s, e);
-		end = Math.max(s, e);
-	}
+        start = Math.min(s, e);
+        end = Math.max(s, e);
+    }
 
-	@Override
-	public
-    int getStart()
-	{
-		return start;
-	}
+    @Override
+    public int getStart()
+    {
+        return start;
+    }
 
-	@Override
-	public
-    int getEnd()
-	{
-		return end;
-	}
+    @Override
+    public int getEnd()
+    {
+        return end;
+    }
 }

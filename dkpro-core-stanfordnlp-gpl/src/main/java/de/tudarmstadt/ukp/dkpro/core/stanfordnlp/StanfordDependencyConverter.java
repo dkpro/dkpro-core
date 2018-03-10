@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2007-2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -62,7 +62,7 @@ import edu.stanford.nlp.util.CoreMap;
 /**
  * Converts a constituency structure into a dependency structure.
  */
-@ResourceMetaData(name="CoreNLP Dependency Converter")
+@ResourceMetaData(name = "CoreNLP Dependency Converter")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -241,7 +241,8 @@ public class StanfordDependencyConverter
                 dep.addToIndexes();
             }
             
-            dep.setFlavor(currTypedDep.extra() ? DependencyFlavor.ENHANCED : DependencyFlavor.BASIC);
+            dep.setFlavor(
+                    currTypedDep.extra() ? DependencyFlavor.ENHANCED : DependencyFlavor.BASIC);
         }
     }
 

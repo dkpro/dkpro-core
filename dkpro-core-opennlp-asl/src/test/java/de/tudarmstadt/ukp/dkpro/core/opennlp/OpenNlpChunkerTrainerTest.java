@@ -88,9 +88,7 @@ public class OpenNlpChunkerTrainerTest
                 OpenNlpChunker.PARAM_MODEL_LOCATION, new File(targetFolder, "model.bin"));
 
         List<Span<String>> actual = EvalUtil.loadSamples(iteratePipeline(testReader, ner),
-                Chunk.class, chunk -> {
-                    return chunk.getChunkValue();
-                });
+                Chunk.class, chunk -> chunk.getChunkValue());
         System.out.printf("Actual samples: %d%n", actual.size());
         
         // Read reference data collect labels

@@ -21,12 +21,6 @@ import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 import java.io.InputStream;
 
-import opennlp.tools.sentdetect.SentenceDetectorME;
-import opennlp.tools.sentdetect.SentenceModel;
-import opennlp.tools.tokenize.TokenizerME;
-import opennlp.tools.tokenize.TokenizerModel;
-import opennlp.tools.util.Span;
-
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -43,146 +37,154 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableStreamProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import opennlp.tools.sentdetect.SentenceDetectorME;
+import opennlp.tools.sentdetect.SentenceModel;
+import opennlp.tools.tokenize.TokenizerME;
+import opennlp.tools.tokenize.TokenizerModel;
+import opennlp.tools.util.Span;
 
 /**
  * Tokenizer and sentence splitter using OpenNLP.
  */
-@ResourceMetaData(name="OpenNLP Segmenter")
+@ResourceMetaData(name = "OpenNLP Segmenter")
 @TypeCapability(
-	    outputs = {
+        outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
 public class OpenNlpSegmenter
-	extends SegmenterBase
+    extends SegmenterBase
 {
-	/**
-	 * Use this language instead of the document language to resolve the model.
-	 */
-	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-	protected String language;
+    /**
+     * Use this language instead of the document language to resolve the model.
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    protected String language;
 
-	/**
-	 * Override the default variant used to locate the model.
-	 */
-	public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
-	protected String variant;
+    /**
+     * Override the default variant used to locate the model.
+     */
+    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+    protected String variant;
 
-	/**
-	 * Load the segmentation model from this location instead of locating the model automatically.
-	 */
-	public static final String PARAM_SEGMENTATION_MODEL_LOCATION = ComponentParameters.PARAM_SEGMENTATION_MODEL_LOCATION;
-	@ConfigurationParameter(name = PARAM_SEGMENTATION_MODEL_LOCATION, mandatory = false)
-	@ResourceParameter(MimeTypes.APPLICATION_X_OPENNLP_SENT)
-	protected String segmentationModelLocation;
-	
-	/**
+    /**
+     * Load the segmentation model from this location instead of locating the model automatically.
+     */
+    public static final String PARAM_SEGMENTATION_MODEL_LOCATION = 
+            ComponentParameters.PARAM_SEGMENTATION_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_SEGMENTATION_MODEL_LOCATION, mandatory = false)
+    @ResourceParameter(MimeTypes.APPLICATION_X_OPENNLP_SENT)
+    protected String segmentationModelLocation;
+    
+    /**
      * Load the tokenization model from this location instead of locating the model automatically.
      */
-    public static final String PARAM_TOKENIZATION_MODEL_LOCATION = ComponentParameters.PARAM_TOKENIZATION_MODEL_LOCATION;
+    public static final String PARAM_TOKENIZATION_MODEL_LOCATION = 
+            ComponentParameters.PARAM_TOKENIZATION_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_TOKENIZATION_MODEL_LOCATION, mandatory = false)
-	@ResourceParameter(MimeTypes.APPLICATION_X_OPENNLP_TOKEN)
+    @ResourceParameter(MimeTypes.APPLICATION_X_OPENNLP_TOKEN)
     protected String tokenizationModelLocation;
 
-	private CasConfigurableProviderBase<SentenceDetectorME> sentenceModelProvider;
-	private CasConfigurableProviderBase<TokenizerME> tokenModelProvider;
+    private CasConfigurableProviderBase<SentenceDetectorME> sentenceModelProvider;
+    private CasConfigurableProviderBase<TokenizerME> tokenModelProvider;
 
-	@Override
-	public void initialize(UimaContext aContext)
-		throws ResourceInitializationException
-	{
-		super.initialize(aContext);
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
 
-		sentenceModelProvider = new CasConfigurableStreamProviderBase<SentenceDetectorME>() {
-			{
-			    setContextObject(OpenNlpSegmenter.this);
-
-				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
-				setDefault(ARTIFACT_ID,
-						"de.tudarmstadt.ukp.dkpro.core.opennlp-model-sentence-${language}-${variant}");
-
-				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/" +
-						"sentence-${language}-${variant}.properties");
-				setDefault(VARIANT, "maxent");
-
-				setOverride(LOCATION, segmentationModelLocation);
-				setOverride(LANGUAGE, language);
-				setOverride(VARIANT, variant);
-			}
-
-			@Override
-			protected SentenceDetectorME produceResource(InputStream aStream)
-			    throws Exception
-			{
-				SentenceModel model = new SentenceModel(aStream);
-				return new SentenceDetectorME(model);
-			}
-		};
-
-		tokenModelProvider = new CasConfigurableStreamProviderBase<TokenizerME>() {
-			{
+        sentenceModelProvider = new CasConfigurableStreamProviderBase<SentenceDetectorME>() {
+            {
                 setContextObject(OpenNlpSegmenter.this);
 
-				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
-				setDefault(ARTIFACT_ID,
-						"de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-${language}-${variant}");
+                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+                setDefault(ARTIFACT_ID,
+                        "de.tudarmstadt.ukp.dkpro.core.opennlp-model-sentence-${language}-${variant}");
 
-				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/" +
-						"token-${language}-${variant}.properties");
-				setDefault(VARIANT, "maxent");
+                setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/" +
+                        "sentence-${language}-${variant}.properties");
+                setDefault(VARIANT, "maxent");
 
-				setOverride(LOCATION, tokenizationModelLocation);
-				setOverride(LANGUAGE, language);
-				setOverride(VARIANT, variant);
-			}
+                setOverride(LOCATION, segmentationModelLocation);
+                setOverride(LANGUAGE, language);
+                setOverride(VARIANT, variant);
+            }
 
-			@Override
-			protected TokenizerME produceResource(InputStream aStream)
-			    throws Exception
-			{
-				TokenizerModel model = new TokenizerModel(aStream);
-				return new TokenizerME(model);
-			}
-		};
-	}
+            @Override
+            protected SentenceDetectorME produceResource(InputStream aStream)
+                throws Exception
+            {
+                SentenceModel model = new SentenceModel(aStream);
+                return new SentenceDetectorME(model);
+            }
+        };
 
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
-		CAS cas = aJCas.getCas();
-		
-		if (isWriteSentence()) {
-		    sentenceModelProvider.configure(cas);
-		}
-		
-		if (isWriteToken()) {
-		    tokenModelProvider.configure(cas);
-		}
+        tokenModelProvider = new CasConfigurableStreamProviderBase<TokenizerME>() {
+            {
+                setContextObject(OpenNlpSegmenter.this);
 
-		super.process(aJCas);
-	}
+                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+                setDefault(ARTIFACT_ID,
+                        "de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-${language}-${variant}");
 
-	@Override
-	protected void process(JCas aJCas, String aText, int aZoneBegin)
-		throws AnalysisEngineProcessException
-	{
-	    if (isWriteSentence()) {
-    	    Span[] sentences = sentenceModelProvider.getResource().sentPosDetect(aText);
-    		for (Span sSpan : sentences) {
-    			createSentence(aJCas, sSpan.getStart() + aZoneBegin, sSpan.getEnd() + aZoneBegin);
-    		}
-	    }
-		
-	    if (isWriteToken()) {
-    		for (Sentence sent : selectCovered(aJCas, Sentence.class, aZoneBegin, aZoneBegin + aText.length())) {
-    	        Span[] tokens = tokenModelProvider.getResource().tokenizePos(sent.getCoveredText());
-    	        for (Span tSpan : tokens) {
+                setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/" +
+                        "token-${language}-${variant}.properties");
+                setDefault(VARIANT, "maxent");
+
+                setOverride(LOCATION, tokenizationModelLocation);
+                setOverride(LANGUAGE, language);
+                setOverride(VARIANT, variant);
+            }
+
+            @Override
+            protected TokenizerME produceResource(InputStream aStream)
+                throws Exception
+            {
+                TokenizerModel model = new TokenizerModel(aStream);
+                return new TokenizerME(model);
+            }
+        };
+    }
+
+    @Override
+    public void process(JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
+        CAS cas = aJCas.getCas();
+        
+        if (isWriteSentence()) {
+            sentenceModelProvider.configure(cas);
+        }
+        
+        if (isWriteToken()) {
+            tokenModelProvider.configure(cas);
+        }
+
+        super.process(aJCas);
+    }
+
+    @Override
+    protected void process(JCas aJCas, String aText, int aZoneBegin)
+        throws AnalysisEngineProcessException
+    {
+        if (isWriteSentence()) {
+            Span[] sentences = sentenceModelProvider.getResource().sentPosDetect(aText);
+            for (Span sSpan : sentences) {
+                createSentence(aJCas, sSpan.getStart() + aZoneBegin, sSpan.getEnd() + aZoneBegin);
+            }
+        }
+        
+        if (isWriteToken()) {
+            for (Sentence sent : selectCovered(aJCas, Sentence.class, aZoneBegin,
+                    aZoneBegin + aText.length())) {
+                Span[] tokens = tokenModelProvider.getResource().tokenizePos(sent.getCoveredText());
+                for (Span tSpan : tokens) {
                     createToken(aJCas, tSpan.getStart() + sent.getBegin(),
                             tSpan.getEnd() + sent.getBegin());
-    	        }
-    		}
-	    }
-	}
+                }
+            }
+        }
+    }
 }

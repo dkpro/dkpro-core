@@ -49,9 +49,9 @@ public class BerkeleyLmFrequencyCountProviderTest
     @Test
     public void configureAggregatedExample() throws Exception {
         AnalysisEngineDescription desc = createEngineDescription(Annotator.class,
-        		Annotator.MODEL_KEY, createExternalResourceDescription(
-        				BerkeleyLmFrequencyCountProvider.class,
-        				BerkeleyLmFrequencyCountProvider.PARAM_PROVIDER_LANGUAGE, "en",
+                Annotator.MODEL_KEY, createExternalResourceDescription(
+                        BerkeleyLmFrequencyCountProvider.class,
+                        BerkeleyLmFrequencyCountProvider.PARAM_PROVIDER_LANGUAGE, "en",
                         BerkeleyLmFrequencyCountProvider.PARAM_BINARY, "src/test/resources/test.ser"));
 
         // Check the external resource was injected

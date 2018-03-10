@@ -167,7 +167,11 @@ public class DiTopWriterTest
         throws UIMAException, IOException
     {
         int expectedNDocuments = 0;
-        String[] collectionValues = new String[] { "file:/home/schnober/workspace/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.io.ditop/src/test/resources/" };
+        // FIXME I'm pretty sure this absolute path should not be here - check and relativize
+        // if possible.
+        String[] collectionValues = {
+                "file:/home/schnober/workspace/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.io.ditop/src/test/resources/"
+        };
         boolean exactMatch = true;
 
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,

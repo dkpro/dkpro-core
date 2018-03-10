@@ -29,20 +29,19 @@ import de.tudarmstadt.ukp.wikipedia.parser.ParsedPage;
 /**
  * Reads all Wikipedia pages in the database (articles, discussions, etc).
  *
- * A parameter controls whether the full article or only the first paragraph is set as the document text.
+ * A parameter controls whether the full article or only the first paragraph is set as the document
+ * text.
  *
  * No Redirects or disambiguation pages are regarded, however.
  */
 @TypeCapability(
-        outputs={
+        outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig"})
-
 public class WikipediaPageReader extends WikipediaStandardReaderBase
 {
-
     /** If set to true, only the first paragraph instead of the whole article is used. */
     public static final String PARAM_ONLY_FIRST_PARAGRAPH = "OnlyFirstParagraph";
-    @ConfigurationParameter(name = PARAM_ONLY_FIRST_PARAGRAPH, mandatory=true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_ONLY_FIRST_PARAGRAPH, mandatory = true, defaultValue = "false")
     private boolean onlyFirstParagraph;
 
     @Override

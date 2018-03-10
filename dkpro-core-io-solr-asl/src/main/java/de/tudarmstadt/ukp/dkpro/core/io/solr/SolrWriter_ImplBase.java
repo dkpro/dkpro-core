@@ -17,7 +17,8 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.solr;
 
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import java.io.IOException;
+
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.ConcurrentUpdateSolrClient;
@@ -30,7 +31,7 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import java.io.IOException;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
 /**
  * This class implements a basic SolrWriter. Specific writers should define a subclass that

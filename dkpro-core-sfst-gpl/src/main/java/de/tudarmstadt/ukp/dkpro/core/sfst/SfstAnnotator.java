@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2007-2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -58,7 +58,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * SFST morphological analyzer.
  */
-@ResourceMetaData(name="SFST Morphological Analyzer")
+@ResourceMetaData(name = "SFST Morphological Analyzer")
 @TypeCapability(
     inputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -82,7 +82,7 @@ public class SfstAnnotator
      * Default: {@code true}
      */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
-    @ConfigurationParameter(name=PARAM_WRITE_POS, mandatory=true, defaultValue="true")
+    @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
     private boolean writePos;
 
     /**
@@ -91,7 +91,7 @@ public class SfstAnnotator
      * Default: {@code true}
      */
     public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
-    @ConfigurationParameter(name=PARAM_WRITE_LEMMA, mandatory=true, defaultValue="true")
+    @ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = true, defaultValue = "true")
     private boolean writeLemma;
 
     /**
@@ -126,14 +126,15 @@ public class SfstAnnotator
      * Specifies the model encoding.
      */
     public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
-    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue="UTF-8")
+    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue = "UTF-8")
     private String modelEncoding;
     
     public static final String PARAM_MODE = "mode";
-    @ConfigurationParameter(name = PARAM_MODE, mandatory = true, defaultValue="FIRST")
+    @ConfigurationParameter(name = PARAM_MODE, mandatory = true, defaultValue = "FIRST")
     private Mode mode;
     
-    public static final String PARAM_MORPH_MAPPING_LOCATION = ComponentParameters.PARAM_MORPH_MAPPING_LOCATION;
+    public static final String PARAM_MORPH_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_MORPH_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_MORPH_MAPPING_LOCATION, mandatory = false)
     private String morphMappingLocation;
 

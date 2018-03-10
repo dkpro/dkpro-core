@@ -25,8 +25,6 @@ import edu.berkeley.nlp.lm.util.Logger;
 
 public class CreateBerkelelyLmTestBinary
 {
-
-    
     public static void main(String[] args) throws IOException
     {
         run("src/test/resources/googledir/", "target/test.ser");

@@ -38,7 +38,6 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.German98Dictionary
 public class SharedDictionary
     extends Resource_ImplBase
 {
-
     /**
      * Use this language instead of the default language.
      */
@@ -64,7 +63,8 @@ public class SharedDictionary
      * The character encoding used by the model.
      */
     public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
-    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String modelEncoding;
     
     /**
@@ -149,12 +149,11 @@ public class SharedDictionary
 
     public Dictionary getDictionary() throws IOException
     {
-        if(this.dict == null){
+        if (this.dict == null) {
             affixModelProvider.configure();
             modelProvider.configure();
             this.dict = modelProvider.getResource();
         }
         return this.dict;
     }
-
 }

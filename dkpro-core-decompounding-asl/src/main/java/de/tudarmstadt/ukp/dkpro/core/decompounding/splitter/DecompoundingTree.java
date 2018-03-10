@@ -30,45 +30,43 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.trie.ValueNode;
 /**
  * A split tree. Holds all splits in a tree structure. This can help to see the
  * how the split algorithm works
- * 
  */
 public class DecompoundingTree
 {
+    private ValueNode<DecompoundedWord> root;
 
-	private ValueNode<DecompoundedWord> root;
+    public DecompoundingTree(String aWord)
+    {
+        root = new ValueNode<DecompoundedWord>(DecompoundedWord.createFromString(aWord));
+    }
 
-	public DecompoundingTree(String aWord)
-	{
-		root = new ValueNode<DecompoundedWord>(DecompoundedWord.createFromString(aWord));
-	}
+    public DecompoundingTree(DecompoundedWord aSplit)
+    {
+        root = new ValueNode<DecompoundedWord>(aSplit);
+    }
 
-	public DecompoundingTree(DecompoundedWord aSplit)
-	{
-		root = new ValueNode<DecompoundedWord>(aSplit);
-	}
+    public ValueNode<DecompoundedWord> getRoot()
+    {
+        return root;
+    }
 
-	public ValueNode<DecompoundedWord> getRoot()
-	{
-		return root;
-	}
-
-	public void setRoot(ValueNode<DecompoundedWord> aRoot)
-	{
-		root = aRoot;
-	}
+    public void setRoot(ValueNode<DecompoundedWord> aRoot)
+    {
+        root = aRoot;
+    }
 
     /**
      * Converts the tree to a list.
      * 
      * @return the splits.
      */
-	public List<DecompoundedWord> getAllSplits()
-	{
-		Set<DecompoundedWord> splits = new LinkedHashSet<DecompoundedWord>();
-		getAllSplitsRecursive(splits, getRoot(), true);
-		
-		return new ArrayList<DecompoundedWord>(splits);
-	}
+    public List<DecompoundedWord> getAllSplits()
+    {
+        Set<DecompoundedWord> splits = new LinkedHashSet<DecompoundedWord>();
+        getAllSplitsRecursive(splits, getRoot(), true);
+        
+        return new ArrayList<DecompoundedWord>(splits);
+    }
 
     /**
      * Converts the tree to a list. If there are splits, then the root node, which contains the
@@ -76,29 +74,29 @@ public class DecompoundingTree
      * 
      * @return the splits.
      */
-	public List<DecompoundedWord> getSplits()
-	{
-		Set<DecompoundedWord> splits = new LinkedHashSet<DecompoundedWord>();
-		getAllSplitsRecursive(splits, getRoot(), false);
-		
-		if (!splits.isEmpty()) {
-			return new ArrayList<DecompoundedWord>(splits);
-		}
-		else {
-			return asList(getRoot().getValue());
-		}
-	}
+    public List<DecompoundedWord> getSplits()
+    {
+        Set<DecompoundedWord> splits = new LinkedHashSet<DecompoundedWord>();
+        getAllSplitsRecursive(splits, getRoot(), false);
+        
+        if (!splits.isEmpty()) {
+            return new ArrayList<DecompoundedWord>(splits);
+        }
+        else {
+            return asList(getRoot().getValue());
+        }
+    }
 
-	protected void getAllSplitsRecursive(Set<DecompoundedWord> aSplits,
-			ValueNode<DecompoundedWord> aNode, boolean aAddNode)
-	{
-		if (aAddNode) {
-			aSplits.add(aNode.getValue());
-		}
-		if (aNode.hasChildren()) {
-			for (ValueNode<DecompoundedWord> child : aNode.getChildren()) {
-				getAllSplitsRecursive(aSplits, child, true);
-			}
-		}
-	}
+    protected void getAllSplitsRecursive(Set<DecompoundedWord> aSplits,
+            ValueNode<DecompoundedWord> aNode, boolean aAddNode)
+    {
+        if (aAddNode) {
+            aSplits.add(aNode.getValue());
+        }
+        if (aNode.hasChildren()) {
+            for (ValueNode<DecompoundedWord> child : aNode.getChildren()) {
+                getAllSplitsRecursive(aSplits, child, true);
+            }
+        }
+    }
 }

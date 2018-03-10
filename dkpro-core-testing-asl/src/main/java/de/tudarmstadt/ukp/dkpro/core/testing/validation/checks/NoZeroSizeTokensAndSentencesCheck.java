@@ -18,13 +18,11 @@
 package de.tudarmstadt.ukp.dkpro.core.testing.validation.checks;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.validation.Message.Level.ERROR;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
-import org.apache.uima.cas.CASException;
 import org.apache.uima.jcas.JCas;
-import static org.apache.uima.fit.util.JCasUtil.*;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;

@@ -35,16 +35,16 @@ import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 public class LuceneIndexerTest
 {
     private File testOutput;
-	private File source;
-	private File index;
-	private File targetIndex0;
-	private File targetIndex1;
-	private File jWeb1T;
+    private File source;
+    private File index;
+    private File targetIndex0;
+    private File targetIndex1;
+    private File jWeb1T;
 
-	@Before
-	public void setUp()
-		throws Exception
-	{
+    @Before
+    public void setUp()
+        throws Exception
+    {
         source = new File("src/test/resources/n-grams");
         jWeb1T = new File("src/test/resources/web1t/de");
         
@@ -59,7 +59,7 @@ public class LuceneIndexerTest
         // Create index
         LuceneIndexer indexer = new LuceneIndexer(source, index, 2);
         indexer.index();
-	}
+    }
 
     @Test
     public void testSearch() throws Exception
@@ -95,21 +95,21 @@ public class LuceneIndexerTest
         }
     }
 
-	@After
-	public void tearDown()
-		throws Exception
-	{
-		// Delete index again
-		for (File f : index.listFiles()) {
-			for (File _f : f.listFiles()) {
-				_f.delete();
-			}
-			f.delete();
-		}
+    @After
+    public void tearDown()
+        throws Exception
+    {
+        // Delete index again
+        for (File f : index.listFiles()) {
+            for (File _f : f.listFiles()) {
+                _f.delete();
+            }
+            f.delete();
+        }
 
-		index.delete();
-	}
-	
+        index.delete();
+    }
+    
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
 }

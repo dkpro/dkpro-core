@@ -17,10 +17,6 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.api.frequency.util;
 
-import it.unimi.dsi.fastutil.longs.LongIterator;
-import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
-import it.unimi.dsi.fastutil.objects.ObjectSet;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -36,11 +32,14 @@ import java.util.Set;
 
 import com.google.common.collect.MinMaxPriorityQueue;
 
+import it.unimi.dsi.fastutil.longs.LongIterator;
+import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
+
 /**
  * It is basically a mapping from samples (keys) to long values (counts).
  * 
- * <p>Suppose we want to record the number of occurrences of each word in a sentence, then this class
- * can be used as follows:</p>
+ * <p>Suppose we want to record the number of occurrences of each word in a sentence, 
+ * then this class can be used as follows:</p>
  * 
  * <blockquote><pre>
  * FrequencyDistribution&lt;String&gt; fd = new FrequencyDistribution&lt;String&gt;();
@@ -260,21 +259,20 @@ public class FrequencyDistribution<T>
         n = samples;
         
         // determine max sample
-         for(T key : freqDist.keySet()){
+        for (T key : freqDist.keySet()) {
             Long freq = freqDist.get(key);
             if (freq > maxFreq) {
                 maxFreq = freq;
                 maxSample = key;
             }
         }
-        
-        
     }
 
-    public void clear() {
+    public void clear()
+    {
         freqDist.clear();
-        maxFreq=0;
-        maxSample=null;
+        maxFreq = 0;
+        maxSample = null;
         n = 0;
     }
     

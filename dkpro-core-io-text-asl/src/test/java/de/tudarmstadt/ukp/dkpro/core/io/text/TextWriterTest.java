@@ -132,7 +132,8 @@ public class TextWriterTest
         runPipeline(jcas, writer);
         
         File input = new File(outputPath, "dummy.txt.gz");
-        InputStream is = CompressionUtils.getInputStream(input.getPath(), new FileInputStream(input));
+        InputStream is = CompressionUtils.getInputStream(input.getPath(),
+                new FileInputStream(input));
         assertEquals(text, IOUtils.toString(is));
     }
 

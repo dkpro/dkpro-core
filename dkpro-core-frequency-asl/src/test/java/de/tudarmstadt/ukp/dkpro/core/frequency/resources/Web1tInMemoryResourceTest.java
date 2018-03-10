@@ -49,8 +49,8 @@ public class Web1tInMemoryResourceTest
     @Test
     public void configureAggregatedExample() throws Exception {
         AnalysisEngineDescription desc = createEngineDescription(Annotator.class,
-        		Annotator.MODEL_KEY, createExternalResourceDescription(
-        				Web1TInMemoryFrequencyCountResource.class,
+                Annotator.MODEL_KEY, createExternalResourceDescription(
+                        Web1TInMemoryFrequencyCountResource.class,
                         Web1TInMemoryFrequencyCountResource.PARAM_MODEL_LOCATION, "src/test/resources/web1t/",
                         Web1TInMemoryFrequencyCountResource.PARAM_LANGUAGE, "en",
                         Web1TInMemoryFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "2"));

@@ -26,7 +26,6 @@ import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.JCasFactory;
@@ -35,6 +34,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.io.text.StringReader;
@@ -66,7 +66,8 @@ public class RegexSegmenterTest
         // end::example[]
         
         assertToken(
-                new String[] { "This", "is", "sentence", "1", ".", "This", "is", "number", "2", "." },
+                new String[] { "This", "is", "sentence", "1", ".", "This", "is", "number", "2",
+                        "." },
                 select(jcas, Token.class));
         assertSentence(
                 new String[] { 
@@ -217,7 +218,8 @@ public class RegexSegmenterTest
         }
 
         assertToken(
-                new String[] { "This", "is", "sentence", "1", ".", "This", "is", "number", "2", "." },
+                new String[] { "This", "is", "sentence", "1", ".", "This", "is", "number", "2",
+                        "." },
                 select(jcas, Token.class));
         assertSentence(
                 new String[] {

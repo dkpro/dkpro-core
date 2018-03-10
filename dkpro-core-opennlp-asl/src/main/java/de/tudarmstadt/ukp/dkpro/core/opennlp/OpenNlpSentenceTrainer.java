@@ -55,7 +55,7 @@ import opennlp.tools.util.TrainingParameters;
  * Train a sentence splitter model for OpenNLP.
  */
 @MimeTypeCapability(MimeTypes.APPLICATION_X_OPENNLP_SENT)
-@ResourceMetaData(name="OpenNLP Sentence Splitter Trainer")
+@ResourceMetaData(name = "OpenNLP Sentence Splitter Trainer")
 public class OpenNlpSentenceTrainer
     extends JCasConsumer_ImplBase
 {
@@ -68,11 +68,13 @@ public class OpenNlpSentenceTrainer
     private File targetLocation;
 
     public static final String PARAM_ALGORITHM = "algorithm";
-    @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, defaultValue = GISTrainer.MAXENT_VALUE)
+    @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, 
+            defaultValue = GISTrainer.MAXENT_VALUE)
     private String algorithm;
     
     public static final String PARAM_TRAINER_TYPE = "trainerType";
-    @ConfigurationParameter(name = PARAM_TRAINER_TYPE, mandatory = true, defaultValue = EventTrainer.EVENT_VALUE)
+    @ConfigurationParameter(name = PARAM_TRAINER_TYPE, mandatory = true, 
+            defaultValue = EventTrainer.EVENT_VALUE)
     private String trainerType;
 
     public static final String PARAM_ITERATIONS = "iterations";

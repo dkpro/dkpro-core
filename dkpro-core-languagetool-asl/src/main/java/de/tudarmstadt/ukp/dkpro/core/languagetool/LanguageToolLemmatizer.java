@@ -52,21 +52,21 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * lemma from those readings. If no readings could be found, the original text is assigned as
  * lemma.
  */
-@ResourceMetaData(name="LanguageTool Lemmatizer")
+@ResourceMetaData(name = "LanguageTool Lemmatizer")
 @LanguageCapability({ "en", "fa", "fr", "de", "pl", "ca", "it", "br", "nl", "pt", "ru", "be", "zh",
         "da", "eo", "gl", "el", "is", "ja", "km", "lt", "ml", "ro", "sk", "sl", "es", "sv", "ta",
         "tl", "uk" })
 @TypeCapability(
-	    inputs = {
-	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
-	    outputs = {
-		    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
+        inputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
+        outputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
 public class LanguageToolLemmatizer
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
     public static final String PARAM_SANITIZE = "sanitize";
-    @ConfigurationParameter(name=PARAM_SANITIZE, mandatory=true, defaultValue="true")
+    @ConfigurationParameter(name = PARAM_SANITIZE, mandatory = true, defaultValue = "true")
     private boolean sanitize;
     
     public static final String PARAM_SANTIZE_CHARS = "sanitizeChars";
@@ -90,14 +90,14 @@ public class LanguageToolLemmatizer
                 "classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/${language}-${variant}.map");
     }
     
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
-	    mappingProvider.configure(aJCas.getCas());
-	    
-		try {
-			Language lang = Languages.getLanguageForShortCode(aJCas.getDocumentLanguage());
+    @Override
+    public void process(JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
+        mappingProvider.configure(aJCas.getCas());
+        
+        try {
+            Language lang = Languages.getLanguageForShortCode(aJCas.getDocumentLanguage());
             Language defaultVariant = lang.getDefaultLanguageVariant();
             if (defaultVariant != null) {
                 getLogger().info(
@@ -107,53 +107,53 @@ public class LanguageToolLemmatizer
                 lang = defaultVariant;
             }
 
-			for (Sentence s : select(aJCas, Sentence.class)) {
-				// Get the tokens from the sentence
-				List<Token> tokens = selectCovered(Token.class, s);
-				List<String> tokenText = toText(tokens);
+            for (Sentence s : select(aJCas, Sentence.class)) {
+                // Get the tokens from the sentence
+                List<Token> tokens = selectCovered(Token.class, s);
+                List<String> tokenText = toText(tokens);
 
-				// Let LanguageTool analyze the tokens
-				List<AnalyzedTokenReadings> rawTaggedTokens = lang.getTagger().tag(tokenText);
-				AnalyzedSentence as = new AnalyzedSentence(
-						rawTaggedTokens.toArray(new AnalyzedTokenReadings[rawTaggedTokens.size()]));
-				as = lang.getDisambiguator().disambiguate(as);
+                // Let LanguageTool analyze the tokens
+                List<AnalyzedTokenReadings> rawTaggedTokens = lang.getTagger().tag(tokenText);
+                AnalyzedSentence as = new AnalyzedSentence(
+                        rawTaggedTokens.toArray(new AnalyzedTokenReadings[rawTaggedTokens.size()]));
+                as = lang.getDisambiguator().disambiguate(as);
 
-				for (int i = 0; i < tokens.size(); i++) {
-					Token token = tokens.get(i);
+                for (int i = 0; i < tokens.size(); i++) {
+                    Token token = tokens.get(i);
 
-					String l = null;
-					
-					// Try using the POS to disambiguate the lemma
-					if (token.getPos() != null) {
-					    l = getByPos(token.getPos(), as.getTokens()[i]);
-					}
-					
-					// Get the most frequent lemma
-					if (l == null) {
-					    l = getMostFrequentLemma(as.getTokens()[i]);
-					}
-					
-					// Sanitize if we have a lemma by now
-					if (sanitize && l != null) {
-					    l = sanitizeLemma(token.getText(), l);
-					}
-					
-					if (l == null) {
-					    l = token.getText();
-					}
+                    String l = null;
+                    
+                    // Try using the POS to disambiguate the lemma
+                    if (token.getPos() != null) {
+                        l = getByPos(token.getPos(), as.getTokens()[i]);
+                    }
+                    
+                    // Get the most frequent lemma
+                    if (l == null) {
+                        l = getMostFrequentLemma(as.getTokens()[i]);
+                    }
+                    
+                    // Sanitize if we have a lemma by now
+                    if (sanitize && l != null) {
+                        l = sanitizeLemma(token.getText(), l);
+                    }
+                    
+                    if (l == null) {
+                        l = token.getText();
+                    }
 
-					// Create the annotation
-					Lemma lemma = new Lemma(aJCas, token.getBegin(), token.getEnd());
-					lemma.setValue(l);
-					lemma.addToIndexes();
-					token.setLemma(lemma);
-				}
-			}
-		}
-		catch (IOException e) {
-			throw new AnalysisEngineProcessException(e);
-		}
-	}
+                    // Create the annotation
+                    Lemma lemma = new Lemma(aJCas, token.getBegin(), token.getEnd());
+                    lemma.setValue(l);
+                    lemma.addToIndexes();
+                    token.setLemma(lemma);
+                }
+            }
+        }
+        catch (IOException e) {
+            throw new AnalysisEngineProcessException(e);
+        }
+    }
 
     private String getByPos(POS aPos, AnalyzedTokenReadings aReadings)
     {
@@ -199,37 +199,37 @@ public class LanguageToolLemmatizer
         //System.out.printf("- no reading matches%n");
         return null;
     }
-	
-	private String getMostFrequentLemma(AnalyzedTokenReadings aReadings)
-	{
-		FrequencyDistribution<String> freq = new FrequencyDistribution<String>();
-		for (AnalyzedToken t : aReadings.getReadings()) {
-			if (t.getLemma() != null) {
-				freq.inc(t.getLemma());
-			}
-		}
+    
+    private String getMostFrequentLemma(AnalyzedTokenReadings aReadings)
+    {
+        FrequencyDistribution<String> freq = new FrequencyDistribution<String>();
+        for (AnalyzedToken t : aReadings.getReadings()) {
+            if (t.getLemma() != null) {
+                freq.inc(t.getLemma());
+            }
+        }
 
-		String best = null;
-		for (String l : freq.getKeys()) {
-			if (best == null) {
-				best = l;
-			}
-			else if (freq.getCount(best) < freq.getCount(l)) {
-				best = l;
-			}
-		}
+        String best = null;
+        for (String l : freq.getKeys()) {
+            if (best == null) {
+                best = l;
+            }
+            else if (freq.getCount(best) < freq.getCount(l)) {
+                best = l;
+            }
+        }
 
-		return best;
-	}
-	
-	private String sanitizeLemma(String aWordForm, String aLemma)
-	{
-	    String sanitized = aLemma;
-	    for (String c : sanitizeChars) {
-	        if (!aWordForm.contains(c)) {
-	            sanitized = sanitized.replace(c, "");
-	        }
-	    }
-	    return sanitized;
-	}
+        return best;
+    }
+    
+    private String sanitizeLemma(String aWordForm, String aLemma)
+    {
+        String sanitized = aLemma;
+        for (String c : sanitizeChars) {
+            if (!aWordForm.contains(c)) {
+                sanitized = sanitized.replace(c, "");
+            }
+        }
+        return sanitized;
+    }
 }
