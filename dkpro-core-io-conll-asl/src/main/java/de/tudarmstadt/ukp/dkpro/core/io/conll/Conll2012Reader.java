@@ -445,7 +445,9 @@ public class Conll2012Reader
             Sentence sentence = new Sentence(aJCas, sentenceBegin, sentenceEnd);
             sentence.addToIndexes();
             
-            converter.convertPennTree(sentence, PennTreeUtils.parsePennTree(parse.toString()));
+            if (readConstituent) {
+                converter.convertPennTree(sentence, PennTreeUtils.parsePennTree(parse.toString()));
+            }
 
             // Once sentence per line.
             doc.add("\n");
