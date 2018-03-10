@@ -76,6 +76,11 @@
         <version>1.9.1-SNAPSHOT</version>
       </dependency>
       <dependency>
+        <groupId>org.dkpro.core</groupId>
+        <artifactId>dkpro-core-maui-gpl</artifactId>
+        <version>1.9.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-gpl</artifactId>
         <version>1.9.1-SNAPSHOT</version>
@@ -95,9 +100,10 @@
   <modules>
     <module>../dkpro-core-arktools-gpl</module>
     <module>../dkpro-core-berkeleyparser-gpl</module>
-        <module>../dkpro-core-corenlp-gpl</module>
-        <module>../dkpro-core-lingpipe-gpl</module>
+    <module>../dkpro-core-corenlp-gpl</module>
+    <module>../dkpro-core-lingpipe-gpl</module>
     <module>../dkpro-core-matetools-gpl</module>
+    <module>../dkpro-core-maui-gpl</module>
     <module>../dkpro-core-stanfordnlp-gpl</module>
     <module>../dkpro-core-sfst-gpl</module>
     <module>../dkpro-core-io-tgrep-gpl</module>
