@@ -228,11 +228,12 @@ public class BratReader
         
         AnnotationFS anno = aCAS.createAnnotation(aType, aAnno.getBegin(), aAnno.getEnd());
         
+        fillAttributes(anno, aAnno.getAttributes());
+        
         if (param != null && param.getSubcat() != null) {
             anno.setStringValue(getFeature(anno, param.getSubcat()), aAnno.getType());
         }
         
-        fillAttributes(anno, aAnno.getAttributes());
         aCAS.addFsToIndexes(anno);
         spanIdMap.put(aAnno.getId(), anno);
     }
@@ -243,6 +244,7 @@ public class BratReader
         
         AnnotationFS anno = aCAS.createAnnotation(aType, 
                 aAnno.getTriggerAnnotation().getBegin(), aAnno.getTriggerAnnotation().getEnd());
+
         fillAttributes(anno, aAnno.getAttributes());
 
         if (param != null && param.getSubcat() != null) {
@@ -280,6 +282,8 @@ public class BratReader
             anchor = arg2;
         }
         
+        fillAttributes(anno, aAnno.getAttributes());
+        
         if (param.getSubcat() != null) {
             anno.setStringValue(getFeature(anno, param.getSubcat()), aAnno.getType());
         }
@@ -297,8 +301,6 @@ public class BratReader
                         + "] has offsets but no anchor is specified.");
             }
         }
-        
-        fillAttributes(anno, aAnno.getAttributes());
         
         aCAS.addFsToIndexes(anno);
     }
