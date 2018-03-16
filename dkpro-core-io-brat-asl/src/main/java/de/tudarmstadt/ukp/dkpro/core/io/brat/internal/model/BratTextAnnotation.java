@@ -28,7 +28,7 @@ public class BratTextAnnotation
 {
     private static final Pattern PATTERN = Pattern.compile(
             "(?<ID>T[0-9]+)\\t" + 
-            "(?<TYPE>[a-zA-Z_][a-zA-Z0-9_\\-]+) " +
+            "(?<TYPE>[a-zA-Z0-9_][a-zA-Z0-9_\\-]+) " +
             "(?<BEGIN>[0-9]+) " +
             "(?<END>[0-9]+)\\t" +
             "(?<TEXT>.*)");

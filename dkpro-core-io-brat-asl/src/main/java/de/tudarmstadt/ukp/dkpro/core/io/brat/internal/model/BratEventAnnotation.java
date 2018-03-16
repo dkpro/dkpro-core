@@ -53,7 +53,7 @@ public class BratEventAnnotation
     
     private static final Pattern PATTERN = Pattern.compile(
             "(?<ID>E[0-9]+)[\\t]" + 
-            "(?<TYPE>[a-zA-Z_][a-zA-Z0-9_-]+):" +
+            "(?<TYPE>[a-zA-Z0-9_][a-zA-Z0-9_-]+):" +
             "(?<TRIGGER>[ET][0-9]+)" + 
             "(?<ARGS>( [a-zA-Z_][a-zA-Z0-9_-]+:[ET][0-9]+)*)[ ]*");
     
