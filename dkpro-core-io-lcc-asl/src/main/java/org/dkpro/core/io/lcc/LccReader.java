@@ -46,7 +46,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 /**
  * Reader for sentence-based Leipzig Corpora Collection files.
  */
-@ResourceMetaData(name="Leipzig Corpora Collection Reader")
+@ResourceMetaData(name = "Leipzig Corpora Collection Reader")
 @MimeTypeCapability({MimeTypes.TEXT_X_LCC})
 @TypeCapability(
         outputs = { 
@@ -58,7 +58,8 @@ public class LccReader
      * Name of configuration parameter that contains the character encoding used by the input files.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
     
     /**
@@ -68,17 +69,17 @@ public class LccReader
     @ConfigurationParameter(name = PARAM_WRITE_SENTENCE, mandatory = true, defaultValue = "false")
     private boolean writeSentence;
     
-	/**
-	 * How many input sentences should be merged into one CAS.
-	 */
-	public static final String PARAM_SENTENCES_PER_CAS = "sentencesPerCAS";
-	@ConfigurationParameter(name = PARAM_SENTENCES_PER_CAS, mandatory = true, defaultValue = "100")
-	private int sentencesPerCAS;
-	
+    /**
+     * How many input sentences should be merged into one CAS.
+     */
+    public static final String PARAM_SENTENCES_PER_CAS = "sentencesPerCAS";
+    @ConfigurationParameter(name = PARAM_SENTENCES_PER_CAS, mandatory = true, defaultValue = "100")
+    private int sentencesPerCAS;
+    
     private Resource res;
-	private int casOffset;
-	private BufferedReader br;
-	private List<String> sentenceBuffer;
+    private int casOffset;
+    private BufferedReader br;
+    private List<String> sentenceBuffer;
 
     @Override
     public void initialize(UimaContext context)
@@ -107,49 +108,49 @@ public class LccReader
         return !sentenceBuffer.isEmpty();
     }
 
-	@Override
-	public void getNext(JCas aJCas) throws IOException, CollectionException {
-	    initCas(aJCas, res, String.valueOf(casOffset));
-	    
-	    StringBuilder sb = new StringBuilder();
-	    int offset = 0;
-	    for (String sentence : sentenceBuffer) {
-	    	if (writeSentence) {
-	    		Sentence sAnno = new Sentence(aJCas, offset, offset + sentence.length());
-	    		sAnno.addToIndexes();
-	    	}
-	    	sb.append(sentence);
-	    	offset += sentence.length();
-	    	sb.append("\n");
-	    	offset++;
-	    }
-	    aJCas.setDocumentText(sb.toString());
-	    
-		sentenceBuffer.clear();
-		casOffset++;
+    @Override
+    public void getNext(JCas aJCas) throws IOException, CollectionException {
+        initCas(aJCas, res, String.valueOf(casOffset));
+        
+        StringBuilder sb = new StringBuilder();
+        int offset = 0;
+        for (String sentence : sentenceBuffer) {
+            if (writeSentence) {
+                Sentence sAnno = new Sentence(aJCas, offset, offset + sentence.length());
+                sAnno.addToIndexes();
+            }
+            sb.append(sentence);
+            offset += sentence.length();
+            sb.append("\n");
+            offset++;
+        }
+        aJCas.setDocumentText(sb.toString());
+        
+        sentenceBuffer.clear();
+        casOffset++;
         step();
-	}
-	
-	// TODO find some way to properly estimate progress
-	@Override
-	public Progress[] getProgress() {
+    }
+    
+    // TODO find some way to properly estimate progress
+    @Override
+    public Progress[] getProgress() {
         return new Progress[] { new ProgressImpl(casOffset, casOffset, "document") };
-	}
-	
+    }
+    
     @Override
     public void destroy()
     {
         closeAll();
         super.destroy();
     }
-	
+    
     private void closeAll()
     {
         res = null;
         closeQuietly(br);
         br = null;
     }
-	
+    
     /**
      * Seek article in file. Stop once article element has been found without reading it.
      */
