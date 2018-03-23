@@ -21,8 +21,8 @@ pipeline, we add the following dependency to our POM file:
 <dependencyManagement>
   <dependencies>
     <dependency>
-      <artifact>de.tudarmstadt.ukp.dkpro.core</artifact>
-      <group>de.tudarmstadt.ukp.dkpro.core-asl</group>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
       <version>${dkpro.core.version}</version>
       <type>pom</type>
       <scope>import</scope>
