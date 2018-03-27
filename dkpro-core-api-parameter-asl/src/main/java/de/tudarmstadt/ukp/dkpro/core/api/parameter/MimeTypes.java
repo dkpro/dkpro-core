@@ -98,6 +98,9 @@ public final class MimeTypes
     // LingPipe model types
     public final static String APPLICATION_X_LINGPIPE_NER = "application/x.org.dkpro.core.lingpipe.ner";
 
+    // ArkTweet model types
+    public final static String APPLICATION_X_ARKTWEET_TAGGER = "application/x.org.dkpro.core.arktweet.tagger";
+
     private MimeTypes()
     {
         // No instances
