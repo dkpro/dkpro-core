@@ -29,6 +29,7 @@
   <artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
   <packaging>pom</packaging>
   <name>DKPro Core GPL</name>
+  <url>https://dkpro.github.io/dkpro-core/</url>
   <licenses>
     <license>
       <name>GNU General Public License Version 3.0</name>
@@ -45,26 +46,26 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-            <dependency>
-                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-                <artifactId>de.tudarmstadt.ukp.dkpro.core.arktools-gpl</artifactId>
-                <version>1.9.1-SNAPSHOT</version>
-            </dependency>
+      <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.arktools-gpl</artifactId>
+          <version>1.9.1-SNAPSHOT</version>
+      </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.berkeleyparser-gpl</artifactId>
         <version>1.9.1-SNAPSHOT</version>
       </dependency>
-            <dependency>
-                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-                <artifactId>de.tudarmstadt.ukp.dkpro.core.corenlp-gpl</artifactId>
-                <version>1.9.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-                <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-gpl</artifactId>
-                <version>1.9.1-SNAPSHOT</version>
-            </dependency>
+      <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.corenlp-gpl</artifactId>
+          <version>1.9.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.lingpipe-gpl</artifactId>
+          <version>1.9.1-SNAPSHOT</version>
+      </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.io.tgrep-gpl</artifactId>
@@ -95,8 +96,8 @@
   <modules>
     <module>../dkpro-core-arktools-gpl</module>
     <module>../dkpro-core-berkeleyparser-gpl</module>
-        <module>../dkpro-core-corenlp-gpl</module>
-        <module>../dkpro-core-lingpipe-gpl</module>
+    <module>../dkpro-core-corenlp-gpl</module>
+    <module>../dkpro-core-lingpipe-gpl</module>
     <module>../dkpro-core-matetools-gpl</module>
     <module>../dkpro-core-stanfordnlp-gpl</module>
     <module>../dkpro-core-sfst-gpl</module>

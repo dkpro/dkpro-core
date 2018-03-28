@@ -18,7 +18,9 @@
     along with this program.  If not, see http://www.gnu.org/licenses/.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -29,6 +31,7 @@
   <artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-gpl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core GPL - Mate-Tools</name>
+  <url>https://dkpro.github.io/dkpro-core/</url>
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>
@@ -47,7 +50,7 @@
       <groupId>com.googlecode.mate-tools</groupId>
       <artifactId>srl</artifactId>
       <version>4.31</version>
-      <!-- 
+      <!--
         Excluding this non-essential dependency as it conflicts with the CoreNLP 3.7.0+ when
         building the aggregate Javadoc
       -->
@@ -377,5 +380,5 @@
         </pluginManagement>
       </build>
     </profile>
-  </profiles>  
+  </profiles>
 </project>
