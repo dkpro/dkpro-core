@@ -35,9 +35,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  */
 @ResourceMetaData(name = "Java BreakIterator Segmenter")
 @LanguageCapability({ "ar", "be", "bg", "ca", "cs", "da", "de", "el", "en", "es", "et", "fi", "fr",
-        "ga", "hi", "hr", "hu", "in", "is", "it", "iw", "ja", "ko", "lt", "lv", "mk", "ms", "mt",
-        "nl", "no", "pl", "pt", "ro", "ru", "sk", "sl", "sq", "sr", "sv", "th", "tr", "uk", "vi",
-        "zh" })
+        "ga", "hi", "hr", "hu", "is", "it", "ja", "ko", "lt", "lv", "mk", "ms", "mt", "nl", "no",
+        "pl", "pt", "ro", "ru", "sk", "sl", "sq", "sr", "sv", "th", "tr", "uk", "vi", "zh" })
 @TypeCapability(
     outputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
