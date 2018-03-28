@@ -255,7 +255,7 @@
       <dependency>
         <groupId>com.ibm.icu</groupId>
         <artifactId>icu4j</artifactId>
-        <version>60.2</version>
+        <version>61.1</version>
       </dependency>
       <dependency>
         <groupId>commons-logging</groupId>
