@@ -32,8 +32,6 @@
   <properties>
     <maven.deploy.skip>true</maven.deploy.skip>
     <groovy.version>2.4.15</groovy.version>
-    <asciidoctor.version>1.5.4.1</asciidoctor.version>
-    <asciidoctor.pdf.version>1.5.0-alpha.11</asciidoctor.pdf.version>
   </properties>
   <dependencies>
     <dependency>
@@ -324,7 +322,6 @@
         <plugin>
           <groupId>org.asciidoctor</groupId>
           <artifactId>asciidoctor-maven-plugin</artifactId>
-          <version>1.5.3</version>
           <configuration>
             <attributes>
               <toclevels>8</toclevels>
@@ -335,18 +332,6 @@
               <icons>font</icons>
             </attributes>
           </configuration>
-          <dependencies>
-            <dependency>
-              <groupId>org.asciidoctor</groupId>
-              <artifactId>asciidoctorj</artifactId>
-              <version>${asciidoctor.version}</version>
-            </dependency>
-            <dependency>
-              <groupId>org.asciidoctor</groupId>
-              <artifactId>asciidoctorj-pdf</artifactId>
-              <version>${asciidoctor.pdf.version}</version>
-            </dependency>
-          </dependencies>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
