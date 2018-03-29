@@ -43,10 +43,13 @@ import edu.illinois.cs.cogcomp.core.datastructures.ViewNames;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.TextAnnotation;
 import edu.illinois.cs.cogcomp.core.utilities.configuration.ResourceManager;
 import edu.illinois.cs.cogcomp.ner.NERAnnotator;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Wrapper for the Illinois named entity recognizer from the Cognitive Computation Group (CCG).
  */
+@Component(OperationType.NAMED_ENTITITY_RECOGNIZER)
 @ResourceMetaData(name = "Illinois CCG Named Entity Recognizer")
 @TypeCapability(
         inputs = {

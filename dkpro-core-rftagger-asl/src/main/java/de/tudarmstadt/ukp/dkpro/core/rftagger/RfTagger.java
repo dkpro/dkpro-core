@@ -59,10 +59,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.RuntimeProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Rftagger morphological analyzer.
  */
+@Component(OperationType.MORPHOLOGICAL_TAGGER)
 @ResourceMetaData(name = "RFTagger Morphological Analyzer")
 @TypeCapability(
     inputs = { 

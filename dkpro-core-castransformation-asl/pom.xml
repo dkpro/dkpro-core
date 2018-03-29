@@ -26,6 +26,7 @@
   <artifactId>de.tudarmstadt.ukp.dkpro.core.castransformation-asl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core ASL - CAS Transformation (ASL)</name>
+  <url>https://dkpro.github.io/dkpro-core/</url>
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>

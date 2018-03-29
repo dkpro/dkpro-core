@@ -54,10 +54,13 @@ import edu.stanford.nlp.pipeline.NERCombinerAnnotator;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.util.ErasureUtils;
 import edu.stanford.nlp.util.StringUtils;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Named entity recognizer from CoreNLP.
  */
+@Component(OperationType.NAMED_ENTITITY_RECOGNIZER)
 @ResourceMetaData(name = "CoreNLP Named Entity Recognizer")
 @TypeCapability(
         inputs = {

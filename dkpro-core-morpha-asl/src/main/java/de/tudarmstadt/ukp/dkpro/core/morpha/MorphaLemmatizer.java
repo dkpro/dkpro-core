@@ -34,6 +34,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Lemmatize based on a finite-state machine. Uses the <a href="https://github.com/knowitall/morpha">
@@ -45,6 +47,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * processing of English, Natural Language Engineering, 7(3). 207-223.</li>
  * </ul>
  */
+@Component(OperationType.LEMMATIZER)
 @ResourceMetaData(name = "Morpha Lemmatizer")
 @LanguageCapability("en")
 @TypeCapability(

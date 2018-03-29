@@ -33,18 +33,19 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Removes annotations that do not conform to minimum or maximum length constraints.
  *
  * (This was previously called TokenFilter).
- *
  */
+@Component(OperationType.NORMALIZER)
 @ResourceMetaData(name = "Annotation-By-Length Filter")
 public class AnnotationByLengthFilter
     extends JCasAnnotator_ImplBase
 {
-
     /**
      * A set of annotation types that should be filtered.
      */

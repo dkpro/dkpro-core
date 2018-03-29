@@ -44,10 +44,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.mecab.type.JapaneseToken;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Annotator for the MeCab Japanese POS Tagger.
  */
+@Component(OperationType.PART_OF_SPEECH_TAGGER)
 @ResourceMetaData(name = "MeCab POS-Tagger")
 @LanguageCapability("ja")
 @TypeCapability(

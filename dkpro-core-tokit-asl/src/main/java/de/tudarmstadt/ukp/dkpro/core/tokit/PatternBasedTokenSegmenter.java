@@ -35,6 +35,8 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Split up existing tokens again at particular split-chars.
@@ -42,6 +44,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * If the {@link #INCLUDE_PREFIX} precedes the split pattern, the pattern is included.
  * Consequently, patterns following the {@link #EXCLUDE_PREFIX}, will not be added as a Token.
  */
+@Component(OperationType.SEGMENTER)
 @ResourceMetaData(name = "Pattern-based Token Segmenter")
 @TypeCapability(
         inputs = {

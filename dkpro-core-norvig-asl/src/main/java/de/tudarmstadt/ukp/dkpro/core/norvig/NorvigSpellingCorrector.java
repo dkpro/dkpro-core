@@ -32,11 +32,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Creates {@link SofaChangeAnnotation}s containing corrections for previously identified spelling
  * errors.
  */
+@Component(OperationType.SPELLING_CHECKER)
 @ResourceMetaData(name = "Simple Spelling Corrector")
 @TypeCapability(
         inputs = {

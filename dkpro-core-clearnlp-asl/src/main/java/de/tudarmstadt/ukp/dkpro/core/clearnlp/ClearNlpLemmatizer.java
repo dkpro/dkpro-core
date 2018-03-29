@@ -44,11 +44,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Lemmatizer using Clear NLP.
- *
  */
+@Component(OperationType.LEMMATIZER)
 @ResourceMetaData(name = "ClearNLP Lemmatizer")
 @TypeCapability(
         inputs = {

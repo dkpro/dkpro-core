@@ -37,11 +37,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 @LanguageCapability({ "af", "ak", "am", "ar", "as", "az", "be", "bg", "bm", "bn", "bo", "br", "bs",
         "ca", "ce", "cs", "cy", "da", "de", "dz", "ee", "el", "en", "eo", "es", "et", "eu", "fa",
         "ff", "fi", "fo", "fr", "fy", "ga", "gd", "gl", "gu", "gv", "ha", "hi", "hr", "hu", "hy",
-        "ig", "ii", "in", "is", "it", "iw", "ja", "ji", "ka", "ki", "kk", "kl", "km", "kn", "ko",
-        "ks", "kw", "ky", "lb", "lg", "ln", "lo", "lt", "lu", "lv", "mg", "mk", "ml", "mn", "mr",
-        "ms", "mt", "my", "nb", "nd", "ne", "nl", "nn", "om", "or", "os", "pa", "pl", "ps", "pt",
-        "qu", "rm", "rn", "ro", "ru", "rw", "se", "sg", "si", "sk", "sl", "sn", "so", "sq", "sr",
-        "sv", "sw", "ta", "te", "th", "ti", "to", "tr", "ug", "uk", "ur", "uz", "vi", "yo", "zh",
+        "ig", "ii", "is", "it", "ja", "ka", "ki", "kk", "kl", "km", "kn", "ko", "ks", "kw", "ky",
+        "lb", "lg", "ln", "lo", "lt", "lu", "lv", "mg", "mk", "ml", "mn", "mr", "ms", "mt", "my",
+        "nb", "nd", "ne", "nl", "nn", "om", "or", "os", "pa", "pl", "ps", "pt", "qu", "rm", "rn",
+        "ro", "ru", "rw", "se", "sg", "si", "sk", "sl", "sn", "so", "sq", "sr", "sv", "sw", "ta",
+        "te", "tg", "th", "ti", "to", "tr", "tt", "ug", "uk", "ur", "uz", "vi", "wo", "yo", "zh",
         "zu" })
 @TypeCapability(
     outputs = { 

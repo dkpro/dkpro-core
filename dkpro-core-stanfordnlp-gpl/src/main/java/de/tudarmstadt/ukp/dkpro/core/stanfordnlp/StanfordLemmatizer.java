@@ -55,6 +55,8 @@ import edu.stanford.nlp.pipeline.MorphaAnnotator;
 import edu.stanford.nlp.process.CoreLabelTokenFactory;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.util.CoreMap;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Stanford Lemmatizer component. The Stanford Morphology-class computes the base form of English
@@ -66,6 +68,7 @@ import edu.stanford.nlp.util.CoreMap;
  * 
  * <p>This only works for ENGLISH.</p>
  */
+@Component(OperationType.LEMMATIZER)
 @ResourceMetaData(name = "CoreNLP Lemmatizer (old API)")
 @LanguageCapability("en")
 @TypeCapability(

@@ -33,10 +33,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.readability.measure.ReadabilityMeasures;
 import de.tudarmstadt.ukp.dkpro.core.readability.measure.ReadabilityMeasures.Measures;
 import de.tudarmstadt.ukp.dkpro.core.type.ReadabilityScore;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Assign a set of popular readability scores to the text.
  */
+@Component(OperationType.READABILITY_ANNOTATOR)
 @ResourceMetaData(name = "Readability Annotator")
 public class ReadabilityAnnotator 
     extends JCasAnnotator_ImplBase

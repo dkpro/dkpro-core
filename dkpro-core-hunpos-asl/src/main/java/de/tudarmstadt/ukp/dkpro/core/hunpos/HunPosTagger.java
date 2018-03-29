@@ -51,6 +51,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.RuntimeProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Part-of-Speech annotator using HunPos. Requires {@link Sentence}s to be annotated
@@ -65,6 +67,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * <a href="http://aclweb.org/anthology/P/P07/P07-2053.bib">(bibtex)</a></li>
  * </ul>
  */
+@Component(OperationType.PART_OF_SPEECH_TAGGER)
 @ResourceMetaData(name = "HunPos POS-Tagger")
 @TypeCapability(
         inputs = { 

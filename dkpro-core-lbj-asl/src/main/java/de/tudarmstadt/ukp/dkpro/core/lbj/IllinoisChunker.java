@@ -49,10 +49,13 @@ import edu.illinois.cs.cogcomp.annotation.AnnotatorException;
 import edu.illinois.cs.cogcomp.chunker.main.ChunkerAnnotator;
 import edu.illinois.cs.cogcomp.chunker.main.lbjava.Chunker;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.TextAnnotation;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Wrapper for the Illinois chunker from the Cognitive Computation Group (CCG).
  */
+@Component(OperationType.CHUNKER)
 @ResourceMetaData(name = "Illinois CCG Chunker")
 @TypeCapability(
         inputs = {

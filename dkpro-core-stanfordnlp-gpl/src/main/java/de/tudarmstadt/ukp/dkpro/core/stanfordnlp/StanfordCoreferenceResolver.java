@@ -78,9 +78,12 @@ import edu.stanford.nlp.trees.TreeCoreAnnotations.TreeAnnotation;
 import edu.stanford.nlp.trees.TreeFactory;
 import edu.stanford.nlp.trees.TreebankLanguagePack;
 import edu.stanford.nlp.util.CoreMap;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  */
+@Component(OperationType.CO_REFERENCE_ANNOTATOR)
 @ResourceMetaData(name = "CoreNLP Coreference Resolver (old API)")
 @TypeCapability(
         inputs = {

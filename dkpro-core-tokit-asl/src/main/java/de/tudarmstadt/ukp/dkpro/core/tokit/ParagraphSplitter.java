@@ -28,17 +28,19 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * This class creates paragraph annotations for the given input document. It searches for the
  * occurrence of two or more line-breaks (Unix and Windows) and regards this as the boundary between
  * paragraphs.
  */
+@Component(OperationType.SEGMENTER)
 @ResourceMetaData(name = "Paragraph Splitter")
 @TypeCapability(
         outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph"})
-
 public class ParagraphSplitter
     extends JCasAnnotator_ImplBase
 {

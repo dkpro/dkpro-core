@@ -49,6 +49,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpSequenceTagsetDescriptionProvider;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 import opennlp.tools.namefind.NameFinderME;
 import opennlp.tools.namefind.TokenNameFinder;
 import opennlp.tools.namefind.TokenNameFinderModel;
@@ -57,6 +59,7 @@ import opennlp.tools.util.Span;
 /**
  * OpenNLP name finder wrapper.
  */
+@Component(OperationType.NAMED_ENTITITY_RECOGNIZER)
 @ResourceMetaData(name = "OpenNLP Named Entity Recognizer")
 @TypeCapability(
         inputs = {

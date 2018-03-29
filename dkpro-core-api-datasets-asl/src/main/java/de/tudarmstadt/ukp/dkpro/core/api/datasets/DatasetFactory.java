@@ -109,15 +109,21 @@ public class DatasetFactory
     {
         return registry().get(aId);
     }
-    
+
     public Dataset load(String aId)
+        throws IOException
+    {
+        return load(aId, DatasetValidationPolicy.STRICT);
+    }
+    
+    public Dataset load(String aId, DatasetValidationPolicy aPolicy)
         throws IOException
     {
         DatasetDescription desc = getDescription(aId);
         if (desc == null) {
             throw new IllegalArgumentException("Unknown dataset [" + aId + "]");
         }
-        materialize(desc);
+        materialize(desc, aPolicy);
         return new LoadedDataset(this, desc);
     }
 
@@ -225,7 +231,7 @@ public class DatasetFactory
     /**
      * Verify/download/update artifact in cache. Execute post-download actions.
      */
-    private void materialize(DatasetDescription aDataset)
+    private void materialize(DatasetDescription aDataset, DatasetValidationPolicy aPolicy)
         throws IOException
     {
         Path root = resolve(aDataset);
@@ -255,8 +261,13 @@ public class DatasetFactory
         
         // If any of the packages are outdated, clear the cache and download again
         if (reload) {
-            LOG.info("Clearing local cache for [" + root + "]");
-            FileUtils.deleteQuietly(root.toFile());
+            if (!DatasetValidationPolicy.DESPERATE.equals(aPolicy)) {
+                LOG.info("Clearing local cache for [" + root + "]");
+                FileUtils.deleteQuietly(root.toFile());
+            }
+            else {
+                LOG.info("DESPERATE policy in effect. Not clearing local cache for [" + root + "]");
+            }
         }
         
         for (ArtifactDescription artifact : artifacts) {
@@ -266,7 +277,6 @@ public class DatasetFactory
                 continue;
             }
 
-            
             if (artifact.getText() != null) {
                 Files.createDirectories(cachedFile.getParent());
                 
@@ -304,8 +314,19 @@ public class DatasetFactory
                         if (!artifact.getSha1().equals(sha1Hex)) {
                             String message = "SHA1 mismatch. Expected [" + artifact.getSha1()
                                     + "] but got [" + sha1Hex + "].";
-                            LOG.error(message);
-                            throw new IOException(message);
+                            switch (aPolicy) {
+                            case STRICT:
+                                LOG.error(message + " STRICT policy in effect. Bailing out.");
+                                throw new IOException(message);
+                            case CONTINUE:
+                                LOG.warn(message + " CONTINUE policy in effect. Ignoring mismatch.");
+                                break;
+                            case DESPERATE:
+                                LOG.warn(message + " DESPERATE policy in effect. Ignoring mismatch.");
+                                break;
+                            default:
+                                throw new IllegalArgumentException("Unknown policy: " + aPolicy);
+                            }
                         }
                     }
                 }

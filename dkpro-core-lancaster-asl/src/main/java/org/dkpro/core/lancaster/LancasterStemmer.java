@@ -47,10 +47,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * This Paice/Husk Lancaster stemmer implementation only works with the English language so far.
  */
+@Component(OperationType.STEMMER)
 @ResourceMetaData(name = "Lancaster Stemmer")
 @LanguageCapability("en")
 @TypeCapability(

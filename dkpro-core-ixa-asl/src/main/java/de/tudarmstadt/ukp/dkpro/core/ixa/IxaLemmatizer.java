@@ -43,12 +43,15 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.ixa.internal.IxaLemmatizerTagsetDescriptionProvider;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 import eus.ixa.ixa.pipe.lemma.LemmatizerME;
 import eus.ixa.ixa.pipe.lemma.LemmatizerModel;
 
 /**
  * Lemmatizer using the OpenNLP-based Ixa implementation.
  */
+@Component(OperationType.LEMMATIZER)
 @ResourceMetaData(name = "IXA Lemmatizer")
 @TypeCapability(
         inputs = { 

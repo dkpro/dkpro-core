@@ -28,6 +28,7 @@
   <artifactId>dkpro-core-io-lcc-asl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core ASL - IO - Leipzig Corpora Collection (LCC)</name>
+  <url>https://dkpro.github.io/dkpro-core/</url>
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>

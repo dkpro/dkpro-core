@@ -16,7 +16,9 @@
   limitations under the License.
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -27,6 +29,7 @@
   <artifactId>de.tudarmstadt.ukp.dkpro.core.langdetect-asl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core ASL - langdetect (v ${langdetect.version})</name>
+  <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
     <langdetect.version>1.1-20120112</langdetect.version>
   </properties>
@@ -51,6 +54,10 @@
       <groupId>com.cybozu.labs</groupId>
       <artifactId>langdetect</artifactId>
       <version>${langdetect.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>eu.openminted.share.annotations</groupId>
+      <artifactId>omtd-share-annotations-api</artifactId>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

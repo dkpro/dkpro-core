@@ -49,6 +49,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpChunkerTagsetDescriptionProvider;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 import opennlp.tools.chunker.Chunker;
 import opennlp.tools.chunker.ChunkerME;
 import opennlp.tools.chunker.ChunkerModel;
@@ -56,6 +58,7 @@ import opennlp.tools.chunker.ChunkerModel;
 /**
  * Chunk annotator using OpenNLP.
  */
+@Component(OperationType.CHUNKER)
 @ResourceMetaData(name = "OpenNLP Chunker")
 @TypeCapability(
         inputs = {

@@ -36,6 +36,8 @@ import org.apache.uima.resource.ResourceAccessException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 @TypeCapability(
     inputs = { 
@@ -50,6 +52,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField;
  * This could be a lexical resource such as WordNet or a simple key-value map.
  * The annotation is stored in the SemanticField annotation type.
  */
+@Component(OperationType.MATCHER)
 @ResourceMetaData(name = "Semantic Field Annotator")
 public class SemanticFieldAnnotator
     extends JCasAnnotator_ImplBase

@@ -35,10 +35,13 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Split up existing tokens again if they are camel-case text.
  */
+@Component(OperationType.SEGMENTER)
 @ResourceMetaData(name = "CamelCase Token Segmenter")
 @TypeCapability(inputs = {
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, outputs = {

@@ -58,6 +58,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArgLink;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 import se.lth.cs.srl.SemanticRoleLabeler;
 import se.lth.cs.srl.corpus.Predicate;
 import se.lth.cs.srl.corpus.Word;
@@ -74,6 +76,7 @@ import se.lth.cs.srl.pipeline.Pipeline;
  * 4--5 2009.
  * </p>
  */
+@Component(OperationType.ANNOTATOR_OF_SEMANTIC_ROLE_LABELS)
 @ResourceMetaData(name = "Mate Tools Semantic Role Labeler")
 @TypeCapability(
     inputs = {

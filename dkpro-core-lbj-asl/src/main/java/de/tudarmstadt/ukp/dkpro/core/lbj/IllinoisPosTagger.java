@@ -53,10 +53,13 @@ import edu.illinois.cs.cogcomp.pos.POSAnnotator;
 import edu.illinois.cs.cogcomp.pos.lbjava.POSTagger;
 import edu.illinois.cs.cogcomp.pos.lbjava.POSTaggerKnown;
 import edu.illinois.cs.cogcomp.pos.lbjava.POSTaggerUnknown;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Wrapper for the Illinois POS-tagger from the Cognitive Computation Group (CCG).
  */
+@Component(OperationType.PART_OF_SPEECH_TAGGER)
 @ResourceMetaData(name = "Illinois CCG POS-Tagger")
 @TypeCapability(
         inputs = {

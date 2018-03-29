@@ -49,16 +49,18 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Infers the topic distribution over documents using a Mallet {@link ParallelTopicModel}.
  */
+@Component(OperationType.TOPIC_EXTRACTOR)
 @ResourceMetaData(name = "Mallet LDA Topic Model Inferencer")
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
         outputs = { "de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution" }
 )
-
 public class MalletLdaTopicModelInferencer
         extends JCasAnnotator_ImplBase
 {

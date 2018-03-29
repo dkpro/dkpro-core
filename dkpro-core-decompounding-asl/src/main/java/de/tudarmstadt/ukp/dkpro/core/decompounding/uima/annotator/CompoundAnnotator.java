@@ -44,10 +44,13 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.ranking.Ranker;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundedWord;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.Fragment;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.SplitterAlgorithm;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Annotates compound parts and linking morphemes.
  */
+@Component(OperationType.ANNOTATION_OF_COMPOUNDING_FEATURES)
 @ResourceMetaData(name = "Compound Annotator")
 @TypeCapability(
         inputs = { 

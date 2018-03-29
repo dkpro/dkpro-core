@@ -51,10 +51,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Train a POS tagging model for the Stanford POS tagger.
  */
+@Component(OperationType.TRAINER_OF_MACHINE_LEARNING_MODELS)
 @MimeTypeCapability(MimeTypes.APPLICATION_X_STANFORDNLP_TAGGER)
 @ResourceMetaData(name = "CoreNLP POS-Tagger Trainer")
 public class StanfordPosTaggerTrainer
