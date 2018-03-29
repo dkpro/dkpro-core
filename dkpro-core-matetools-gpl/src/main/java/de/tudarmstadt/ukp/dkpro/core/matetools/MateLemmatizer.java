@@ -42,13 +42,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 import is2.data.SentenceData09;
 import is2.io.CONLLReader09;
 import is2.lemmatizer.Lemmatizer;
 
 /**
- * DKPro Annotator for the MateToolsLemmatizer.
+ * DKPro Core Annotator for the MateToolsLemmatizer.
  */
+@Component(OperationType.LEMMATIZER)
 @ResourceMetaData(name = "Mate Tools Lemmatizer")
 @TypeCapability(
         inputs = {

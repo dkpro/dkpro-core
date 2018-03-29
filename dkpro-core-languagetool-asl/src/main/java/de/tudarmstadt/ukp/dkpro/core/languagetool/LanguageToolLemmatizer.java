@@ -45,6 +45,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Naive lexicon-based lemmatizer. The words are looked up using the wordform lexicons of
@@ -52,6 +54,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * lemma from those readings. If no readings could be found, the original text is assigned as
  * lemma.
  */
+@Component(OperationType.LEMMATIZER)
 @ResourceMetaData(name = "LanguageTool Lemmatizer")
 @LanguageCapability({ "en", "fa", "fr", "de", "pl", "ca", "it", "br", "nl", "pt", "ru", "be", "zh",
         "da", "eo", "gl", "el", "is", "ja", "km", "lt", "ml", "ro", "sk", "sl", "es", "sv", "ta",

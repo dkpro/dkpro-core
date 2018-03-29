@@ -24,10 +24,14 @@ import org.apache.uima.fit.descriptor.LanguageCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
+
 /**
  * Takes a text and checks for umlauts written as "ae", "oe", or "ue" and normalizes them if they
  * really are umlauts depending on a frequency model.
  */
+@Component(OperationType.NORMALIZER)
 @ResourceMetaData(name = "Umlaut Normalizer")
 @LanguageCapability("de")
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })

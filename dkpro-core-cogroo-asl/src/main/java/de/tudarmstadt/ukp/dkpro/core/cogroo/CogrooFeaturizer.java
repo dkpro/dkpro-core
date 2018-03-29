@@ -52,10 +52,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Morphological analyzer using CoGrOO.
  */
+@Component(OperationType.MORPHOLOGICAL_TAGGER)
 @ResourceMetaData(name = "CoGrOO Morphological Analyzer")
 @LanguageCapability("pt")
 @TypeCapability(

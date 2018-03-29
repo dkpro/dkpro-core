@@ -29,11 +29,14 @@ import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.process.CoreLabelTokenFactory;
 import edu.stanford.nlp.process.PTBTokenizer;
 import edu.stanford.nlp.process.Tokenizer;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Uses the normalizing tokenizer of the Stanford CoreNLP tools to escape the text PTB-style. This
  * component operates directly on the text and does not require prior segmentation.
  */
+@Component(OperationType.NORMALIZER)
 @ResourceMetaData(name = "Stanford Penn Treebank Normalizer")
 public class StanfordPtbTransformer
     extends JCasTransformerChangeBased_ImplBase

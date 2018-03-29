@@ -50,6 +50,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Wrapper for Twitter Tokenizer and POS Tagger.
@@ -58,6 +60,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * and Noah A. Smith. Improved Part-of-Speech Tagging for Online Conversational Text with Word
  * Clusters In Proceedings of NAACL 2013.
  */
+@Component(OperationType.POS_TAGGING)
 @ResourceMetaData(name = "ArkTweet POS-Tagger")
 @TypeCapability(
       inputs = { 

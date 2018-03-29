@@ -42,10 +42,13 @@ import edu.stanford.nlp.dcoref.Constants;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.DeterministicCorefAnnotator;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Deterministic coreference annotator from CoreNLP.
  */
+@Component(OperationType.CO_REFERENCE_ANNOTATOR)
 @ResourceMetaData(name = "CoreNLP Coreference Resolver")
 @TypeCapability(
         inputs = {

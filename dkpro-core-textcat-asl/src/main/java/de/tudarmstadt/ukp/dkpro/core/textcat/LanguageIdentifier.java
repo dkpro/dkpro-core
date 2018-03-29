@@ -26,6 +26,9 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.knallgrau.utils.textcat.TextCategorizer;
 
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
+
 /**
  * <p>Detection based on character n-grams. Uses the <a href="http://textcat.sourceforge.net">Java
  * Text Categorizing Library</a> based on a technique by Cavnar and Trenkle.</p>
@@ -36,6 +39,7 @@ import org.knallgrau.utils.textcat.TextCategorizer;
  * In Proceedings of Third Annual Symposium on Document Analysis and Information Retrieval, 
  * Las Vegas, NV, UNLV Publications/Reprographics, pp. 161-175, 11-13 April 1994.</li></ul>
  */
+@Component(OperationType.LANGUAGE_IDENTIFIER)
 @ResourceMetaData(name = "TextCat Language Identifier (Character N-Gram-based)")
 public class LanguageIdentifier
     extends JCasAnnotator_ImplBase

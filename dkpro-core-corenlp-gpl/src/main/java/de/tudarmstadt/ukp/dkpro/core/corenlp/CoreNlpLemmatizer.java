@@ -40,10 +40,13 @@ import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.MorphaAnnotator;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Lemmatizer from CoreNLP.
  */
+@Component(OperationType.LEMMATIZER)
 @ResourceMetaData(name = "CoreNLP Lemmatizer")
 @TypeCapability(
         inputs = {

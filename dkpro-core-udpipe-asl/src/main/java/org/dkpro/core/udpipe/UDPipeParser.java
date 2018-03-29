@@ -50,6 +50,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Dependency parser using UDPipe. UDPipe uses Parsito, a greedy transition-based parser
@@ -57,6 +59,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * 
  * @see <a href="https://github.com/ufal/udpipe/tree/master/src/parsito">Parsito in UDPipe</a>
  */
+@Component(OperationType.DEPENDENCY_PARSER)
 @ResourceMetaData(name = "UDPipe Parsito Dependency Parser")
 @TypeCapability(
         inputs = { 

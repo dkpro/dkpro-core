@@ -51,6 +51,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 import is2.data.SentenceData09;
 import is2.io.CONLLReader09;
 import is2.tag.Options;
@@ -59,6 +61,7 @@ import is2.tag.Tagger;
 /**
  * DKPro Annotator for the MateToolsPosTagger
  */
+@Component(OperationType.PART_OF_SPEECH_TAGGER)
 @ResourceMetaData(name = "Mate Tools POS-Tagger")
 @TypeCapability(
         inputs = {

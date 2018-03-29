@@ -59,6 +59,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 import mstparser.DependencyInstance;
 import mstparser.DependencyParser;
 import mstparser.DependencyPipe;
@@ -84,6 +86,7 @@ import mstparser.ParserOptions;
  * {@link mstparser.DependencyInstance DependencyInstance}).
  * </p>
  */
+@Component(OperationType.DEPENDENCY_PARSER)
 @ResourceMetaData(name = "MSTParser Dependency Parser")
 @TypeCapability(
         inputs = {

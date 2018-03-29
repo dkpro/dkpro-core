@@ -66,10 +66,13 @@ import edu.stanford.nlp.trees.TreebankLanguagePack;
 import edu.stanford.nlp.trees.UniversalEnglishGrammaticalRelations;
 import edu.stanford.nlp.trees.UniversalEnglishGrammaticalStructureFactory;
 import edu.stanford.nlp.trees.international.pennchinese.ChineseGrammaticalRelations;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Parser from CoreNLP.
  */
+@Component(OperationType.CONSTITUENCY_PARSER)
 @ResourceMetaData(name = "CoreNLP Parser")
 @TypeCapability(
         inputs = {

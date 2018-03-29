@@ -55,6 +55,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpParserTagsetDescriptionProvider;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionProvider;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 import opennlp.tools.parser.AbstractBottomUpParser;
 import opennlp.tools.parser.Parse;
 import opennlp.tools.parser.Parser;
@@ -66,6 +68,7 @@ import opennlp.tools.util.Span;
  * OpenNLP parser. The parser ignores existing POS tags and internally creates new ones. However,
  * these tags are only added as annotation if explicitly requested via {@link #PARAM_WRITE_POS}.
  */
+@Component(OperationType.CONSTITUENCY_PARSER)
 @ResourceMetaData(name = "OpenNLP Parser")
 @TypeCapability(
         inputs = {

@@ -27,6 +27,8 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import cc.mallet.topics.ParallelTopicModel;
 import cc.mallet.types.Instance;
 import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Estimate an LDA topic model using Mallet and write it to a file. It stores all incoming CAS' to
@@ -38,6 +40,7 @@ import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
  * Set {@link #PARAM_COVERING_ANNOTATION_TYPE} to define what is considered a document (sentences,
  * paragraphs, etc.).
  */
+@Component(OperationType.TRAINER_OF_MACHINE_LEARNING_MODELS)
 @ResourceMetaData(name = "Mallet LDA Topic Model Trainer")
 public class MalletLdaTopicModelTrainer
         extends MalletModelTrainer

@@ -23,9 +23,13 @@ import java.util.Map;
 import org.apache.uima.fit.descriptor.LanguageCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
+
 /**
  * Takes a text and replaces sharp s
  */
+@Component(OperationType.NORMALIZER)
 @ResourceMetaData(name = "Sharp S (ß) Normalizer")
 @LanguageCapability("de")
 public class SharpSNormalizer

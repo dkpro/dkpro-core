@@ -39,10 +39,13 @@ import org.cogroo.entities.Mistake;
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.GrammarAnomaly;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Detect grammatical errors in text using CoGrOO.
  */
+@Component(OperationType.GRAMMAR_CHECKER)
 @ResourceMetaData(name = "CoGrOO Grammar Checker")
 @LanguageCapability("pt")
 @TypeCapability(

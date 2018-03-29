@@ -47,6 +47,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * <p>UIMA wrapper for the Snowball stemmer. Annotation types to be stemmed can be configured by a
@@ -58,6 +60,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * @see FeaturePathAnnotatorBase
  * @since 1.1.0
  */
+@Component(OperationType.STEMMER)
 @ResourceMetaData(name = "Snowball Stemmer")
 @LanguageCapability({ "da", "nl", "en", "fi", "fr", "de", "hu", "it", "no", "pt", "ro", "ru", "es",
         "sv", "tr" })

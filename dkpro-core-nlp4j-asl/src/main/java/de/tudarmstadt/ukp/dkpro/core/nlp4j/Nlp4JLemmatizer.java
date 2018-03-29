@@ -38,10 +38,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.emory.mathcs.nlp.common.util.StringUtils;
 import edu.emory.mathcs.nlp.component.morph.MorphAnalyzer;
 import edu.emory.mathcs.nlp.component.morph.english.EnglishMorphAnalyzer;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Emory NLP4J lemmatizer. This is a lower-casing lemmatizer.
  */
+@Component(OperationType.LEMMATIZER)
 @ResourceMetaData(name = "NLP4J Lemmatizer")
 @TypeCapability(
         inputs = {

@@ -42,6 +42,7 @@
     <uima.version>2.10.2</uima.version>
     <uimafit.version>2.4.0</uimafit.version>
     <uimafit.plugin.version>2.4.0</uimafit.plugin.version>
+    <omtd.version>3.0.2.1-SNAPSHOT</omtd.version>
     <lucene.version>4.4.0</lucene.version>
     <!-- The Spring version should be at least whatever uimaFIT requires -->
     <spring.version>3.2.16.RELEASE</spring.version>
@@ -55,51 +56,63 @@
         <enabled>false</enabled>
       </snapshots>
     </repository>
-      <repository>
-        <id>jcenter</id>
-        <url>http://jcenter.bintray.com</url>
-        <snapshots>
-          <enabled>false</enabled>
-        </snapshots>
-      </repository>
-      <!-- For UIMA/uimaFIT RCs -->
-      <!--  
-      <repository>
-        <id>ext-staging</id>
-        <name>Staging repo</name>
-        <url>https://oss.sonatype.org/content/repositories/orgdkpro-1027</url>
-        <releases>
-            <enabled>true</enabled>
-        </releases>
-      </repository>
-      -->
-      <!-- For UIMA/uimaFIT SNAPSHOT -->
-      <!--
-      <repository>
-        <id>apache.snapshots</id>
-        <name>Apache Snapshot Repository</name>
-        <url>http://repository.apache.org/snapshots</url>
-        <releases>
-          <enabled>false</enabled>
-        </releases>
-        <snapshots>
+    <repository>
+      <id>jcenter</id>
+      <url>http://jcenter.bintray.com</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <!-- For UIMA/uimaFIT RCs -->
+    <!--  
+    <repository>
+      <id>ext-staging</id>
+      <name>Staging repo</name>
+      <url>https://oss.sonatype.org/content/repositories/orgdkpro-1027</url>
+      <releases>
           <enabled>true</enabled>
-        </snapshots>
-      </repository>
-      -->
-      <!-- For SNAPSHOTs from the DKPro family -->
-      <!--
-      <repository>
-        <id>ukp-oss-snapshots</id>
-        <url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-snapshots</url>
-        <releases>
-          <enabled>false</enabled>
-        </releases>
-        <snapshots>
-          <enabled>true</enabled>
-        </snapshots>
-      </repository>
-      -->
+      </releases>
+    </repository>
+    -->
+    <!-- For UIMA/uimaFIT SNAPSHOT -->
+    <!--
+    <repository>
+      <id>apache.snapshots</id>
+      <name>Apache Snapshot Repository</name>
+      <url>http://repository.apache.org/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+    -->
+    <!-- For SNAPSHOTs from the DKPro family -->
+    <!--
+    <repository>
+      <id>ukp-oss-snapshots</id>
+      <url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+    -->
+    <!-- For SNAPSHOTs from OpenMinTeD -->
+    <repository>
+      <id>omtd-snapshots</id>
+      <layout>default</layout>
+      <url>https://repo.openminted.eu/content/repositories/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
   </repositories>
   <pluginRepositories>
     <!-- For UIMA/uimaFIT RCs -->
@@ -127,6 +140,18 @@
             </snapshots>
     </pluginRepository>
     -->
+    <!-- For SNAPSHOTs from OpenMinTeD -->
+    <pluginRepository>
+      <id>omtd-snapshots</id>
+      <layout>default</layout>
+      <url>https://repo.openminted.eu/content/repositories/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </pluginRepository>
   </pluginRepositories>
     <mailingLists>
       <mailingList>
@@ -421,6 +446,11 @@
         <artifactId>ivy</artifactId>
         <version>2.4.0</version>
       </dependency>
+      <dependency>
+        <groupId>eu.openminted.share.annotations</groupId>
+        <artifactId>omtd-share-annotations-api</artifactId>
+        <version>${omtd.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <build>
@@ -529,7 +559,7 @@
         <plugin>
           <groupId>eu.openminted.share.annotations</groupId>
           <artifactId>omtd-share-annotations-maven-plugin</artifactId>
-          <version>3.0.2.0</version>
+          <version>${omtd.version}</version>
         </plugin>
       </plugins>
     </pluginManagement>

@@ -53,10 +53,13 @@ import edu.emory.mathcs.nlp.common.util.NLPUtils;
 import edu.emory.mathcs.nlp.component.dep.DEPState;
 import edu.emory.mathcs.nlp.component.template.OnlineComponent;
 import edu.emory.mathcs.nlp.component.template.node.NLPNode;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Emory NLP4J dependency parser.
  */
+@Component(OperationType.DEPENDENCY_PARSER)
 @ResourceMetaData(name = "NLP4J Dependency Parser")
 @TypeCapability(
         inputs = {

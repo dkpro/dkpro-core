@@ -37,6 +37,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Langdetect language identifier based on character n-grams.
@@ -45,6 +47,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
  * instantiated multiple times with different model locations. Only a single model location
  * can be active at a time over <b>all</b> instances of this component. 
  */
+@Component(OperationType.LANGUAGE_IDENTIFIER)
 @ResourceMetaData(name = "LangDetect")
 public class LangDetectLanguageIdentifier
     extends JCasAnnotator_ImplBase

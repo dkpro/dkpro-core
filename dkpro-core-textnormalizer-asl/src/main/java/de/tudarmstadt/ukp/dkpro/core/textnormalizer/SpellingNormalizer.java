@@ -26,10 +26,13 @@ import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_ImplBase;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Converts annotations of the type SpellingAnomaly into a SofaChangeAnnoatation.
  */
+@Component(OperationType.NORMALIZER)
 @ResourceMetaData(name = "Spelling Normalizer")
 @TypeCapability(
         inputs = { 
