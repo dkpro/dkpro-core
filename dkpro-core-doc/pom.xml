@@ -31,7 +31,7 @@
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
     <maven.deploy.skip>true</maven.deploy.skip>
-    <groovy.version>2.4.7</groovy.version>
+    <groovy.version>2.4.15</groovy.version>
     <asciidoctor.version>1.5.4.1</asciidoctor.version>
     <asciidoctor.pdf.version>1.5.0-alpha.11</asciidoctor.pdf.version>
   </properties>
