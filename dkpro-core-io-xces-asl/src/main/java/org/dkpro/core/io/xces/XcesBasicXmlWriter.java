@@ -35,6 +35,7 @@ import javax.xml.stream.XMLStreamException;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
@@ -44,10 +45,12 @@ import org.dkpro.core.io.xces.models.XcesParaBasic;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import javanet.staxutils.IndentingXMLEventWriter;
 
 @ResourceMetaData(name = "XCES Basic XML Writer")
+@MimeTypeCapability({MimeTypes.APPLICATION_X_XCES_BASIC})
 @TypeCapability(
         inputs = {            
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph" })

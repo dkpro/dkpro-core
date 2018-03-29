@@ -45,7 +45,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
         "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" }, 
     outputs = { 
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NamedEntity" })
+        "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" })
 /**
  * This Analysis Engine annotates
  * English single words with semantic field information retrieved from an ExternalResource.

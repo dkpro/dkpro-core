@@ -30,6 +30,8 @@ public final class MimeTypes
     
     // DKPro application types
     public final static String APPLICATION_X_ANCORA_XML = "application/x.org.dkpro.ancora+xml";
+    public final static String APPLICATION_X_BNC = "application/x.org.dkpro.bnc+xml";
+    public final static String APPLICATION_X_BRAT = "application/x.org.dkpro.brat";
     public final static String APPLICATION_X_DITOP = "application/x.org.dkpro.ditop";
     public final static String APPLICATION_X_FANGORN = "application/x.org.dkpro.fangorn";
     public final static String APPLICATION_X_GATE_XML = "application/x.org.dkpro.gate+xml";
@@ -49,6 +51,8 @@ public final class MimeTypes
     public final static String APPLICATION_X_SEMEVAL_2010_XML = "application/x.org.dkpro.semeval-2010+xml";
     public final static String APPLICATION_X_TUEPP_XML = "application/x.org.dkpro.tuepp+xml";
     public final static String APPLICATION_X_TUEBADZ_CHUNK = "application/x.org.dkpro.tuebadz-chunk";
+    public final static String APPLICATION_X_XCES = "application/x.org.dkpro.xces+xml";
+    public final static String APPLICATION_X_XCES_BASIC = "application/x.org.dkpro.xces-basic+xml";
     
     // Standard text types (http://www.iana.org/assignments/media-types/media-types.xhtml)
     public final static String TEXT_CSV = "text/csv";

@@ -48,7 +48,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.xml.XmlTextReader;
  * Reader for the British National Corpus (XML version).
  */
 @ResourceMetaData(name = "British National Corpus (BNC) XML Reader")
-@MimeTypeCapability(MimeTypes.APPLICATION_XML)
+@MimeTypeCapability(MimeTypes.APPLICATION_X_BNC)
 @TypeCapability(
         outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",

@@ -35,6 +35,7 @@ import javax.xml.stream.XMLStreamException;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
@@ -46,6 +47,7 @@ import org.dkpro.core.io.xces.models.XcesToken;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -59,6 +61,7 @@ import javanet.staxutils.IndentingXMLEventWriter;
             "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph" })
+@MimeTypeCapability({MimeTypes.APPLICATION_X_XCES})
 public class XcesXmlWriter
     extends JCasFileWriter_ImplBase
 {
