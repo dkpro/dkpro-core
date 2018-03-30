@@ -65,9 +65,10 @@ import javanet.staxutils.IndentingXMLEventWriter;
 public class XcesXmlWriter
     extends JCasFileWriter_ImplBase
 {
-    public static final String PARAM_FILENAME_SUFFIX = "filenameSuffix";
-    @ConfigurationParameter(name = PARAM_FILENAME_SUFFIX, mandatory = true, defaultValue = ".xml")
-    private String filenameSuffix;
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
+    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xml")
+    private String filenameExtension;
 
     /**
      * Character encoding of the output data.
@@ -84,7 +85,7 @@ public class XcesXmlWriter
         OutputStream docOS = null;
         XMLEventWriter xmlEventWriter = null;
         try {
-            docOS = getOutputStream(aJCas, filenameSuffix);
+            docOS = getOutputStream(aJCas, filenameExtension);
             XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
             xmlEventWriter = new IndentingXMLEventWriter(
                     xmlOutputFactory.createXMLEventWriter(docOS, targetEncoding));

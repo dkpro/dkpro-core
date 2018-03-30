@@ -54,17 +54,18 @@ import javanet.staxutils.IndentingXMLEventWriter;
 @TypeCapability(
         inputs = {            
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph" })
-public class XcesBasicXmlWriter extends JCasFileWriter_ImplBase
+public class XcesBasicXmlWriter
+    extends JCasFileWriter_ImplBase
 {
-
-    public static final String PARAM_FILENAME_SUFFIX = "filenameSuffix";
-    @ConfigurationParameter(name = PARAM_FILENAME_SUFFIX, mandatory = true, defaultValue = ".xml")
-    private String filenameSuffix;
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
+    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xml")
+    private String filenameExtension;
 
     /**
      * Character encoding of the output data.
      */
-    public static final String PARAM_TARGET_ENCODING = "targetEncoding";
+    public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
     @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, 
             defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
@@ -76,7 +77,7 @@ public class XcesBasicXmlWriter extends JCasFileWriter_ImplBase
         OutputStream docOS = null;
         XMLEventWriter xmlEventWriter = null;
         try {
-            docOS = getOutputStream(aJCas, filenameSuffix);
+            docOS = getOutputStream(aJCas, filenameExtension);
             XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
             xmlEventWriter = new IndentingXMLEventWriter(
                     xmlOutputFactory.createXMLEventWriter(docOS, targetEncoding));
