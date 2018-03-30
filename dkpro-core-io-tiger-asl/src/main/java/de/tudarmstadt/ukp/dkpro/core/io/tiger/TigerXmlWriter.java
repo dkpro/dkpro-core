@@ -83,6 +83,14 @@ public class TigerXmlWriter extends JCasFileWriter_ImplBase
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xml")
     private String filenameSuffix;
 
+    /**
+     * Character encoding of the output data.
+     */
+    public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    private String targetEncoding;
+
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
@@ -94,7 +102,7 @@ public class TigerXmlWriter extends JCasFileWriter_ImplBase
 
             XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
             xmlEventWriter = new IndentingXMLEventWriter(
-                    xmlOutputFactory.createXMLEventWriter(docOS));
+                    xmlOutputFactory.createXMLEventWriter(docOS, targetEncoding));
             
             JAXBContext context = JAXBContext.newInstance(TigerSentence.class);
             Marshaller marshaller = context.createMarshaller();
