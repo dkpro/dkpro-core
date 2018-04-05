@@ -42,7 +42,7 @@
     <uima.version>2.10.2</uima.version>
     <uimafit.version>2.4.0</uimafit.version>
     <uimafit.plugin.version>2.4.0</uimafit.plugin.version>
-    <omtd.version>3.0.2.2-SNAPSHOT</omtd.version>
+    <omtd.version>3.0.2.2</omtd.version>
     <lucene.version>4.4.0</lucene.version>
     <!-- The Spring version should be at least whatever uimaFIT requires -->
     <spring.version>3.2.16.RELEASE</spring.version>
@@ -70,7 +70,7 @@
       <name>Staging repo</name>
       <url>https://oss.sonatype.org/content/repositories/orgdkpro-1027</url>
       <releases>
-          <enabled>true</enabled>
+        <enabled>true</enabled>
       </releases>
     </repository>
     -->
@@ -102,6 +102,7 @@
     </repository>
     -->
     <!-- For SNAPSHOTs from OpenMinTeD -->
+    <!--
     <repository>
       <id>omtd-snapshots</id>
       <layout>default</layout>
@@ -113,17 +114,18 @@
         <enabled>true</enabled>
       </snapshots>
     </repository>
+    -->
   </repositories>
   <pluginRepositories>
     <!-- For UIMA/uimaFIT RCs -->
     <!--  
     <pluginRepository>
-        <id>ext-staging</id>
-        <name>Staging repo</name>
-        <url>https://repository.apache.org/content/repositories/orgapacheuima-1134</url>
-        <releases>
-            <enabled>true</enabled>
-        </releases>
+      <id>ext-staging</id>
+      <name>Staging repo</name>
+      <url>https://repository.apache.org/content/repositories/orgapacheuima-1134</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
     </pluginRepository>
     -->
     <!-- For UIMA/uimaFIT SNAPSHOT maven plugin -->
@@ -135,12 +137,13 @@
       <releases>
         <enabled>false</enabled>
       </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
     </pluginRepository>
     -->
     <!-- For SNAPSHOTs from OpenMinTeD -->
+    <!--  
     <pluginRepository>
       <id>omtd-snapshots</id>
       <layout>default</layout>
@@ -152,6 +155,7 @@
         <enabled>true</enabled>
       </snapshots>
     </pluginRepository>
+    -->
   </pluginRepositories>
     <mailingLists>
       <mailingList>
