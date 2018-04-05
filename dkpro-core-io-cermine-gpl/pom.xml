@@ -23,12 +23,11 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
-    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+    <groupId>org.dkpro.core</groupId>
     <version>1.10.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-gpl</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.dkpro.core</groupId>
   <artifactId>dkpro-core-io-cermine-gpl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core GPL - IO - CERMINE</name>
@@ -54,19 +53,19 @@
       <artifactId>commons-io</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.io-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
     </dependency>
 
@@ -84,7 +83,7 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
       <scope>test</scope>
     </dependency>

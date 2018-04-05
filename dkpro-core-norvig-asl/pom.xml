@@ -21,7 +21,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
-    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+    <groupId>org.dkpro.core</groupId>
     <version>1.10.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
@@ -39,19 +39,19 @@
       <artifactId>uimafit-core</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.anomaly-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.transform-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
     </dependency>
     <dependency>

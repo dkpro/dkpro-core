@@ -21,7 +21,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
-    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+    <groupId>org.dkpro.core</groupId>
     <version>1.10.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
@@ -51,19 +51,19 @@
       <artifactId>commons-io</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.frequency-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.ngrams-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.featurepath-asl</artifactId>
     </dependency>
     <dependency>
@@ -71,7 +71,7 @@
       <artifactId>com.googlecode.jweb1t</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
     </dependency>
     <dependency>
@@ -80,37 +80,37 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.frequency-asl</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.io.tei-asl</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.io.text-asl</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.tokit-asl</artifactId>
       <scope>test</scope>
     </dependency>
@@ -120,7 +120,7 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-asl</artifactId>
       <scope>test</scope>
     </dependency>
@@ -133,14 +133,14 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <groupId>org.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-asl</artifactId>
         <version>1.10.0-SNAPSHOT</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
-        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <groupId>org.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
         <version>1.10.0-SNAPSHOT</version>
         <type>pom</type>

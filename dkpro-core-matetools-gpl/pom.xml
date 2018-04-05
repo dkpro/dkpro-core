@@ -23,7 +23,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+    <groupId>org.dkpro.core</groupId>
     <artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
     <version>1.10.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-gpl</relativePath>
@@ -66,31 +66,31 @@
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.syntax-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.semantics-asl</artifactId>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
     </dependency>
     <dependency>
@@ -103,12 +103,12 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.hunpos-asl</artifactId>
       <scope>test</scope>
     </dependency>
@@ -141,7 +141,7 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <groupId>org.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.hunpos-asl</artifactId>
         <version>1.10.0-SNAPSHOT</version>
         <scope>import</scope>
