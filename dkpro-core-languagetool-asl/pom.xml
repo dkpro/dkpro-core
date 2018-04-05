@@ -75,6 +75,12 @@
       <groupId>org.languagetool</groupId>
       <artifactId>languagetool-core</artifactId>
       <version>${languagetool.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>ch.qos.logback</groupId>
+          <artifactId>logback-classic</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.languagetool</groupId>
