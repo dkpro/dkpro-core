@@ -1,0 +1,8 @@
+{
+    "name": "T\u00fcBa Verseley",
+    "description": "Dependency tags extracted from the T\u00fcBa D/Z converted to the MALT parser training format using\nYannick Verseley's conversion skript.\nSource: r5r6_101024.malt.tab\n\nReferences:\n* http://www.versley.de/versley_tlt05.pdf\n",
+    "language": "de",
+    "tags": [
+        
+    ]
+}

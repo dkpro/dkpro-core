@@ -1,0 +1,143 @@
+{
+    "name": "Chinese Treebank",
+    "description": "Chinese Treebank tagset\nMapped according to universal-pos-tags 1.03 zh-ctb6.map\n\nReferences:\n* http://www.cs.brandeis.edu/~clp/ctb/posguide.3rd.ch.pdf\n",
+    "language": "zh",
+    "tags": [
+        {
+            "tag_name": "AD",
+            "tag_description": "adverb"
+        },
+        {
+            "tag_name": "AS",
+            "tag_description": "aspect marker"
+        },
+        {
+            "tag_name": "BA",
+            "tag_description": "XX in ba-construction"
+        },
+        {
+            "tag_name": "CC",
+            "tag_description": "coordinating conjunction"
+        },
+        {
+            "tag_name": "CD",
+            "tag_description": "cardinal number"
+        },
+        {
+            "tag_name": "CS",
+            "tag_description": "subordinating conjunction"
+        },
+        {
+            "tag_name": "DEC",
+            "tag_description": "XX in a relative clause"
+        },
+        {
+            "tag_name": "DEG",
+            "tag_description": "associative XX"
+        },
+        {
+            "tag_name": "DER",
+            "tag_description": "XX in V-de const. and V-de-R"
+        },
+        {
+            "tag_name": "DEV",
+            "tag_description": "XX bevore VP"
+        },
+        {
+            "tag_name": "DT",
+            "tag_description": "determiner"
+        },
+        {
+            "tag_name": "ETC",
+            "tag_description": "for words XX, XX XX"
+        },
+        {
+            "tag_name": "FW",
+            "tag_description": "foreign words"
+        },
+        {
+            "tag_name": "IJ",
+            "tag_description": "interjection"
+        },
+        {
+            "tag_name": "JJ",
+            "tag_description": "other noun-modifier"
+        },
+        {
+            "tag_name": "LB",
+            "tag_description": "X in long bei-const"
+        },
+        {
+            "tag_name": "LC",
+            "tag_description": "localizer"
+        },
+        {
+            "tag_name": "M",
+            "tag_description": "measure word"
+        },
+        {
+            "tag_name": "MSP",
+            "tag_description": "other particle"
+        },
+        {
+            "tag_name": "NN",
+            "tag_description": "common noun"
+        },
+        {
+            "tag_name": "NR",
+            "tag_description": "proper noun"
+        },
+        {
+            "tag_name": "NT",
+            "tag_description": "temporal noun"
+        },
+        {
+            "tag_name": "OD",
+            "tag_description": "ordinal number"
+        },
+        {
+            "tag_name": "ON",
+            "tag_description": "onomatopoeia"
+        },
+        {
+            "tag_name": "P",
+            "tag_description": "preposition excl. XX and XX"
+        },
+        {
+            "tag_name": "PN",
+            "tag_description": "pronoun"
+        },
+        {
+            "tag_name": "PU",
+            "tag_description": "punctuation"
+        },
+        {
+            "tag_name": "SB",
+            "tag_description": "XX in short bei-const"
+        },
+        {
+            "tag_name": "SP",
+            "tag_description": "sentence final particle"
+        },
+        {
+            "tag_name": "VA",
+            "tag_description": "predicative adjective"
+        },
+        {
+            "tag_name": "VC",
+            "tag_description": "XX"
+        },
+        {
+            "tag_name": "VE",
+            "tag_description": "XX as the main verb"
+        },
+        {
+            "tag_name": "VV",
+            "tag_description": "other verb"
+        },
+        {
+            "tag_name": "X",
+            "tag_description": "No description."
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+{
+    "name": "IULA",
+    "description": "IULA Treebank  dependencies\n\nReferences:\n* http://repositori.upf.edu/handle/10230/20407\n",
+    "language": "es",
+    "tags": [
+        {
+            "tag_name": "CONJ",
+            "tag_description": "Conjunction"
+        },
+        {
+            "tag_name": "DO",
+            "tag_description": "Direct Object"
+        },
+        {
+            "tag_name": "NEG",
+            "tag_description": "Negation"
+        }
+    ]
+}
