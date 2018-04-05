@@ -24,7 +24,7 @@
   </parent>
     <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
   <artifactId>de.tudarmstadt.ukp.dkpro.core</artifactId>
-  <version>1.9.1</version>
+  <version>1.9.2-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>DKPro Core</name>
   <!-- The description tag must be present for antrun to work!! -->
@@ -184,7 +184,7 @@
     <connection>scm:git:git://github.com/dkpro/dkpro-core</connection>
     <developerConnection>scm:git:git@github.com:dkpro/dkpro-core.git</developerConnection>
     <url>https://github.com/dkpro/dkpro-core</url>
-    <tag>de.tudarmstadt.ukp.dkpro.core-1.9.1</tag>
+    <tag>HEAD</tag>
   </scm>
   <modules>
     <module>dkpro-core-build</module>
