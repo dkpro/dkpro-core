@@ -68,7 +68,7 @@
                 - Maven doesn't detect the parameters module to be used because we
                 - only use the XML type descriptors from it, not any actual Java code.
               -->
-              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</usedDependency>
+              <usedDependency>org.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</usedDependency>
               <!--
                 - Maven doesn't detect uimaj as being required, probably because we
                 - only need it for the generated classes.
