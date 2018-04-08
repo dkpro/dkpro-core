@@ -17,6 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.ditop;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.io.BufferedWriter;
@@ -344,7 +345,7 @@ public class DiTopWriter
     {
         Map<String, Set<Integer>> entries = new HashMap<>();
 
-        for (String line : FileUtils.readLines(configFile)) {
+        for (String line : FileUtils.readLines(configFile, UTF_8)) {
             String[] fields = line.split(FIELDSEPARATOR_CONFIGFILE);
             if (fields.length < 2) {
                 throw new IllegalStateException(String.format(
