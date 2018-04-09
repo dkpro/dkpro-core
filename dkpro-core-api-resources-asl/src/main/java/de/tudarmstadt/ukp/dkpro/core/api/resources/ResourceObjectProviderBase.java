@@ -740,10 +740,7 @@ public abstract class ResourceObjectProviderBase<M>
             try {
                 version = getModelVersionFromMavenPom();
             }
-            catch (IOException e) {
-                // Ignore - this will be tried and reported again later by handleResolvingError
-            }
-            catch (IllegalStateException e) {
+            catch (IOException | IllegalStateException e) {
                 // Ignore - this will be tried and reported again later by handleResolvingError
             }
 
