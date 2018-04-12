@@ -253,7 +253,7 @@ google_analytics_tracking_id: UA-20506675-4
 #
 # used in _includes/sidebar.html
 
-openhub_id: dkpro-core
+# openhub_id: dkpro-core
 
 
 #      ______      ____          __  _           

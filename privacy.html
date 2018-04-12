@@ -7,10 +7,13 @@ title: "Privacy Policy"
 
 <p>You can refuse the use of Google Analytics by clicking on the following link. An opt-out cookie will be set on the computer, which prevents the future collection of your data when visiting this website:</p>
 
-<p>
-<div id="optinoutButton" style="text-align: center;"></div>
+<p>In any case, this site will store a cookie indicating whether you have given consent to tracking or not. This cookie is retained for a period of 12 months after which you will be asked again to provide consent.</p>
+
+<div style="text-align: center;">
+  <button id="optinButton" onclick='optin()'>Enable Google Analytics</button>
+  <button id="optoutButton" onclick='optout()'>Disable Google Analytics</button>
+</div>
 <div id="optinoutStatus" style="text-align: center;"></div>
-</p>
 
 <script src="{{ site.url }}/assets/js/javascript.min.js"></script>
 <script src="{{ site.url }}/assets/js/js.cookie.js"></script>
@@ -25,21 +28,19 @@ title: "Privacy Policy"
   }
 
   function optin() {
-	Cookies.remove(disableStr);
-    window[disableStr] = false;
+    gaOptin();
     renderOptInOutButton();
   }
 
   function renderOptInOutButton()
   {
-  	if (document.cookie.indexOf(disableStr + '=true') > -1) {
-  	  $("#optinoutButton").html("<button onclick='optin()'>Enable Google Analytics</button>");
-  	  $("#optinoutStatus").html("<b>Current status: tracking disabled (cookie value = '" + Cookies.get(disableStr) + "')</b>" );
-  	}
-  	else {
-  	  $("#optinoutButton").html("<button onclick='optout()'>Disable Google Analytics</button>");
-  	  $("#optinoutStatus").html("<b>Current status: tracking enabled (cookie value = '" + Cookies.get(disableStr) + "')</b>" );
-  	}
+    var optedIn = document.cookie.indexOf(disableStr + '=false') > -1;
+    var optedOut = document.cookie.indexOf(disableStr + '=true') > -1;
+    var trackingActive = !(Cookies.get(disableStr) != 'false');
+    
+	  $("#optinButton").css('display', optedIn ? 'none' : 'inline');
+    $("#optoutButton").css('display', optedOut ? 'none' : 'inline');
+    $("#optinoutStatus").html("<b>Tracking enabled: " + trackingActive + "</b>" );
   }
 
   $(document).ready(renderOptInOutButton);

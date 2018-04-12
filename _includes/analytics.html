@@ -1,17 +1,65 @@
 {% if site.google_analytics_tracking_id %}
+<div id="cookieConsentDialog" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5);">
+  <div style="width: 50%; max-height: 700%; position: fixed; left: 25%; top: 25%; background: white; display: flex; flex-flow: column; padding: 1em;">
+    <div style="text-align: center;">
+      <h1>🙏Please share your activity on this site!💖</h1>
+    </div>
+    <div style="display: flex; flex: 1; overflow: auto; min-height: 3em;">
+      <p>
+        Please support our project by allowing us to track your activity on this site using cookies. 
+        Doing so allows us to get an idea of how interesting our project is to the community. To
+        learn more about how our site makes use of cookies and uses your activity data, please refer
+        to our <a href="{{ site.url }}/privacy/">privacy policy</a>. You can also always revise
+        the choice you make here by visiting out <a href="{{ site.url }}/privacy/">privacy policy page</a>.
+      </p>
+    </div>
+    <div style="text-align: center;">
+      <p style="font-size: 130%; font-weight: bold;">
+        Do you allow tracking your activity on this site using cookies?
+      </p>
+    </div>
+    <div style="text-align: center;">
+      <button onclick="javascript:gaOptin();" style="font-size: 300%;">✅ Yes, I agree to cookies.</button>
+    </div>
+    <div style="text-align: center;">
+      <button onclick="javascript:gaOptout();" style="font-size: 300%;">🚫 No, do not track me.</button>
+    </div>
+  </div>
+</div>
 <script>
   var gaProperty = '{{ site.google_analytics_tracking_id }}';
 
-  /* Disable tracking if the opt-out cookie exists. */
   var disableStr = 'ga-disable-' + gaProperty;
-  if (document.cookie.indexOf(disableStr + '=true') > -1) {
+  
+  /* Check if we need to ask the user for consent; except when we are on the privacy page */
+  if (
+      document.cookie.indexOf(disableStr+'=') == -1 && 
+      window.location.href.indexOf("/privacy/") == -1
+  ) {
+    $("#cookieConsentDialog").css('display', 'block');
+  }
+  
+  /* Disable tracking if the opt-in/out cookie is not set to false (false = opt-in). */
+  if (document.cookie.indexOf(disableStr + '=false') == -1) {
     window[disableStr] = true;
+  }
+
+  /* Opt-in function */
+  function gaOptin() {
+    var expiry = new Date();
+    expiry.setDate(expiry.getDate() + 360); // Ask again after a bit less than 12 months
+    document.cookie = disableStr + '=false; expires='+ expiry.toUTCString() + '; path=/';
+    window[disableStr] = false;
+    $("#cookieConsentDialog").css('display', 'none');
   }
 
   /* Opt-out function */
   function gaOptout() {
-    document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+    var expiry = new Date();
+    expiry.setDate(expiry.getDate() + 360); // Ask again after a bit less than 12 months
+    document.cookie = disableStr + '=true; expires='+ expiry.toUTCString() + '; path=/';
     window[disableStr] = true;
+    $("#cookieConsentDialog").css('display', 'none');
   }
 
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
