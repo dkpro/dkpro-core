@@ -4,7 +4,7 @@ title: "Releases"
 permalink: "/releases/"
 ---
 
-{% assign stable-releases = (site.data.releases | where:"status", "stable") %}
+{% assign stable-releases = site.data.releases | where:"status", "stable" %}
 {% for release in stable-releases %}
 ## DKPro Core {{ release.version }}
 

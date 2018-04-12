@@ -51,27 +51,27 @@ A comprehensive (but probably not complete) list of scientific publications citi
 [GSCL_2007_pdf]: https://www.ukp.tu-darmstadt.de/fileadmin/user_upload/Group_UKP/publikationen/2007/gldv-uima-ukp.pdf
 [GSCL_2007_bib]: https://www.ukp.tu-darmstadt.de/publications/details/?no_cache=1&tx_bibtex_pi1%5Bpub_id%5D=GurevychEtal2007dkpro0#
 
-#### Acknowledgements
+#### Acknowledgments
 
 <fieldset class="row t20 b20" style="padding: 1em;">
   <legend>The development of DKPro Core was partially supported by:</legend>
-  <div class="medium-4 columns"><img src="{{ site.urlimg }}/logos/bmbf.jpg"/></div>
-  <div class="medium-4 columns"><img style="height: 64px" src="{{ site.urlimg }}/logos/dfg_logo_blau.jpg"/></div>
-  <div class="medium-4 columns"><img style="height: 96px" src="{{ site.urlimg }}/logos/LOEWE.png"/></div>
-  <div class="medium-4 columns"><img style="height: 96px" src="{{ site.urlimg }}/logos/LOGO CE_Vertical_EN_quadri_LR.png"/></div>
-  <div class="medium-4 columns t20"><img src="{{ site.urlimg }}/logos/VWST_rgb_150.gif"/></div>
+  <div class="medium-4 columns"><img src="{{ site.urlimg }}/logos/bmbf.jpg"/></div>
+  <div class="medium-4 columns"><img style="height: 64px" src="{{ site.urlimg }}/logos/dfg_logo_blau.jpg"/></div>
+  <div class="medium-4 columns"><img style="height: 96px" src="{{ site.urlimg }}/logos/LOEWE.png"/></div>
+  <div class="medium-4 columns"><img style="height: 96px" src="{{ site.urlimg }}/logos/LOGO CE_Vertical_EN_quadri_LR.png"/></div>
+  <div class="medium-4 columns t20"><img src="{{ site.urlimg }}/logos/VWST_rgb_150.gif"/></div>
 </fieldset>
 
 <fieldset class="row t20 b20" style="padding: 1em;">
 <legend>Additionally, the development of DKPro Core is supported by:</legend>
 <div class="row">
   <div class="medium-6 columns">Prof. Iryna Gurevych,<br/><i>Technische Universität Darmstadt</i></div>
-  <div class="medium-3 columns"><img style="height: 64px" src="{{ site.urlimg }}/logos/tud_logo.gif"/></div>
-  <div class="medium-3 columns"><img style="height: 64px" src="{{ site.urlimg }}/logos/ukp-lab.png"/></div>
+  <div class="medium-3 columns"><img style="height: 64px" src="{{ site.urlimg }}/logos/tud_logo.gif"/></div>
+  <div class="medium-3 columns"><img style="height: 64px" src="{{ site.urlimg }}/logos/ukp-lab.png"/></div>
 </div>
 
 <div class="row t20">
   <div class="medium-6 columns">Prof. Torsten Zesch,<br/><i>Universität Duisburg-Essen</i></div>
-  <div class="medium-6 columns"><img style="height: 64px" src="{{ site.urlimg }}/logos/logo_claim_en_rgb_72dpi.png"/></div>
+  <div class="medium-6 columns"><img style="height: 64px" src="{{ site.urlimg }}/logos/logo_claim_en_rgb_72dpi.png"/></div>
 </div>
 </fieldset>

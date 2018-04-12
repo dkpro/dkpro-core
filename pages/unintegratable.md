@@ -15,7 +15,7 @@ This page provides an overview over software that we will most likely not integr
 
 | *Software* | *Reason* | *Comment* |
 |---+---+---|
-| [Enju parser](http://www.nactem.ac.uk/enju/) | [Not redistributable](http://www.nactem.ac.uk/tsujii//downloads/files/enju/COPYING.txt) | |
+| [Enju parser](http://www.nactem.ac.uk/enju/) | [Not redistributable](http://www.nactem.ac.uk/tsujii//downloads/files/enju/COPYING.txt) | |
 | [magyarlanc](http://www.inf.u-szeged.hu/rgai/nlp?lang=en&page=magyarlanc) | [Not redistributable](http://www.inf.u-szeged.hu/rgai/magyarlanc_license) | |
 | [MXPOST](https://sites.google.com/site/adwaitratnaparkhi/publications) | [Not redistributable](http://morphix-nlp.berlios.de/manual/node43.html) | |
 | [TreeTagger](http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/) | [Not redistributable](http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/Tagger-Licence) | DKPro Core supports TreeTagger, but users have to download binaries and models themselves. DKPro Core runs TreeTagger in a separate process, thus there are no compile-time dependencies on any part of TreeTagger. |

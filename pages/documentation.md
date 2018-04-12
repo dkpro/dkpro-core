@@ -19,7 +19,7 @@ permalink: "/documentation/"
 * [Groovy recipes]({{ site.url }}/groovy/recipes/)
 * [Jython recipes]({{ site.url }}/jython/recipes/)
 
-{% assign stable = (site.data.releases | where:"status", "stable" | first) %}
+{% assign stable = site.data.releases | where: "status", "stable" | first %}
 ### DKPro Core {{ stable.version }}
 _latest release_
 
