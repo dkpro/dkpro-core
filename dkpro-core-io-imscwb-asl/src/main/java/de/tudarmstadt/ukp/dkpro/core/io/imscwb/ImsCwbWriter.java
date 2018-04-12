@@ -109,7 +109,7 @@ public class ImsCwbWriter
 
     /**
      * Write the document ID for each token. It is usually a better idea to generate a
-     * {@link #PARAM_WRITE_DOCUMENT_TAG document tag} or a {@link #PARAM_WRITE_TEXT_TAG text tag}
+     * {@link #PARAM_WRITE_DOCUMENT_TAG document tag} or a {@link #PARAM_WRITE_TEXT_TAG text tag}
      * which also contain the document ID that can be queried in CQP.
      */
     public static final String PARAM_WRITE_DOC_ID = "writeDocId";
