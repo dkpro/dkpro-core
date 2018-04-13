@@ -1,6 +1,7 @@
 {% if site.google_analytics_tracking_id %}
-<div id="cookieConsentDialog" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5);">
-  <div style="width: 50%; max-height: 700%; position: fixed; left: 25%; top: 25%; background: white; display: flex; flex-flow: column; padding: 1em;">
+<div id="cookieConsentDialog" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 9999">
+  <div style="align-self: flex-start;"></div>
+  <div style="width: 50%; max-height: 80%; background: white; display: flex; flex-flow: column; padding: 1em;">
     <div style="text-align: center;">
       <h1>Support DKPro Core by allowing the use of cookies</h1>
     </div>
@@ -21,12 +22,13 @@
       </p>
     </div>
     <div style="text-align: center;">
-      <button onclick="javascript:gaOptin();" style="font-size: 300%;">✅ Yes, I agree.</button>
+      <button onclick="javascript:gaOptin();" style="font-size: 300%;">Yes, I agree.</button>
     </div>
     <div style="text-align: center;">
-      <button onclick="javascript:gaOptout();" style="font-size: 300%;">🚫 No, do not track me.</button>
+      <button onclick="javascript:gaOptout();" style="font-size: 300%;">No, do not track me.</button>
     </div>
   </div>
+  <div style="align-self: flex-end;"></div>
 </div>
 <script>
   var gaProperty = '{{ site.google_analytics_tracking_id }}';
@@ -38,7 +40,7 @@
       document.cookie.indexOf(disableStr+'=') == -1 && 
       window.location.href.indexOf("/privacy/") == -1
   ) {
-    $("#cookieConsentDialog").css('display', 'block');
+    $("#cookieConsentDialog").css('display', 'flex');
   }
   
   /* Disable tracking if the opt-in/out cookie is not set to false (false = opt-in). */
