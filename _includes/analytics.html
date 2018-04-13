@@ -55,11 +55,33 @@
     expiry.setDate(expiry.getDate() + 360);
     document.cookie = disableStr + '=false; expires='+ expiry.toUTCString() + '; path=/';
     window[disableStr] = false;
+    /* Trigger creation of ID cookie so we can include the ID in the consent event */
+    ga('create', '{{ site.google_analytics_tracking_id }}', 'auto');
+    ga('set', 'anonymizeIp', true);
+    /* GA cookie not created until we send an event, so send an exception now */
+    ga('send', 'exception', { 'exDescription': 'cookie generation', 'exFatal': false});
+    /* Log the user giving consent */
+    ga('send', {
+      hitType: 'event',
+      eventCategory: 'TrackingConsent',
+      eventAction: 'consent-granted',
+      eventLabel: Cookies.get('_ga')
+    });
     $("#cookieConsentDialog").css('display', 'none');
   }
 
   /* Opt-out function */
   function gaOptout() {
+    // If consent was previously granted as detected, then we log the revoking
+    if (document.cookie.indexOf(disableStr + '=false') > -1) {
+      /* Log the user revoking consent */
+      ga('send', {
+        hitType: 'event',
+        eventCategory: 'TrackingConsent',
+        eventAction: 'consent-revoked',
+        eventLabel: Cookies.get('_ga')
+      });
+    }
     var expiry = new Date();
     /* Ask again after a bit less than 12 months */
     expiry.setDate(expiry.getDate() + 360);
