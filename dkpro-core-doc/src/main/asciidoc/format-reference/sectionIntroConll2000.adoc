@@ -9,11 +9,11 @@ Sentences are separated by a blank new line.
 | Token        
 | token
 
-| POSTAG 
+| POSTAG 
 | POS          
 | part-of-speech tag
 
-| CHUNK  
+| CHUNK  
 | Chunk
 | chunk (IOB1 encoded)
 |====
