@@ -21,9 +21,9 @@ import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTran
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.dkpro.core.jazzy.JazzyChecker;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.jazzy.JazzyChecker;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 public class SpellingNormalizerTest
@@ -44,7 +44,8 @@ public class SpellingNormalizerTest
     {
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
-        AnalysisEngineDescription spellchecker = createEngineDescription(JazzyChecker.class,
+        AnalysisEngineDescription spellchecker = createEngineDescription(
+                JazzyChecker.class,
                 JazzyChecker.PARAM_MODEL_LOCATION, "src/test/resources/dictionary/ngerman");
 
         AnalysisEngineDescription normalizer = createEngineDescription(SpellingNormalizer.class);
