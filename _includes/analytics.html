@@ -72,7 +72,7 @@
 
   /* Opt-out function */
   function gaOptout() {
-    // If consent was previously granted as detected, then we log the revoking
+    /* If consent was previously granted as detected, then we log the revoking */
     if (document.cookie.indexOf(disableStr + '=false') > -1) {
       /* Log the user revoking consent */
       ga('send', {
