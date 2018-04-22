@@ -92,6 +92,15 @@ public class OpenNlpNamedEntityRecognizer
     protected String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Location from which the model is read.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -129,6 +138,7 @@ public class OpenNlpNamedEntityRecognizer
                 setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/"
                         + "ner-${language}-${variant}.bin");
 
+                setOverride(ARTIFACT_URI, modelArtifactUri);
                 setOverride(LOCATION, modelLocation);
                 setOverride(LANGUAGE, language);
                 setOverride(VARIANT, variant);
