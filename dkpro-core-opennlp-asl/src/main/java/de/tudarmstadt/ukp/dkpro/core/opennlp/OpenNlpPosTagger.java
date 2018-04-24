@@ -74,6 +74,7 @@ public class OpenNlpPosTagger
     extends JCasAnnotator_ImplBase
 {
 // end::capabilities[]
+    
     /**
      * Use this language instead of the document language to resolve the model.
      */
@@ -88,6 +89,15 @@ public class OpenNlpPosTagger
     @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
     protected String variant;
 
+    /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
     /**
      * Load the model from this location instead of locating the model automatically.
      */

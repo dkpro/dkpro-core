@@ -73,6 +73,15 @@ public class LancasterStemmer
     private boolean stripPrefix;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Specifies an URL that should resolve to a location from where to load custom rules. If the
      * location starts with {@code classpath:} the location is interpreted as a classpath location,
      * e.g. "classpath:my/path/to/the/rules". Otherwise it is tried as an URL, file and at last UIMA
