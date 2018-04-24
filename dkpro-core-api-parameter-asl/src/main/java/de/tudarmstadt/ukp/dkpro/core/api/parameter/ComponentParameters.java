@@ -48,7 +48,14 @@ public final class ComponentParameters
     public static final String PARAM_ACCEPTED_TAGS_REGEX = "acceptedTagsRegex";
 
     /**
-     * Location from which the model is read.
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = "modelArtifactUri";
+    
+    /**
+     * Location from which the model is read. This is either a local path or a classpath location.
+     * In the latter case, the model artifact (if any) is searched as well.
      */
     public static final String PARAM_MODEL_LOCATION = "modelLocation";
 

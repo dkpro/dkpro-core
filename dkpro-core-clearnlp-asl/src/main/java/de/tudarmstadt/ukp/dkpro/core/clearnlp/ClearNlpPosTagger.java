@@ -110,6 +110,15 @@ public class ClearNlpPosTagger
     protected String posVariant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Load the model from this location instead of locating the pos-tagging model automatically.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -161,6 +170,7 @@ public class ClearNlpPosTagger
                 setDefaultVariantsLocation("${package}/lib/dictionary-default-variants.map");
                 setDefault(VARIANT, "default");
                 
+                setOverride(ARTIFACT_URI, modelArtifactUri);
                 setOverride(LOCATION, dictLocation);
                 setOverride(LANGUAGE, language);
                 setOverride(VARIANT, dictVariant);
