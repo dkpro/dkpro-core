@@ -239,7 +239,7 @@ public class ConllUWriter
                 }
                 
                 aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", row.id,
-                        row.token.getCoveredText(), lemma, cpos, pos, feats, head, deprel, deps,
+                        row.token.getText(), lemma, cpos, pos, feats, head, deprel, deps,
                         misc);
             }
 

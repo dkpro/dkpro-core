@@ -135,7 +135,7 @@ public class Conll2000Writer
                     chunk = row.chunk;
                 }
 
-                aOut.printf("%s %s %s\n", row.token.getCoveredText(), pos, chunk);
+                aOut.printf("%s %s %s\n", row.token.getText(), pos, chunk);
             }
 
             aOut.println();

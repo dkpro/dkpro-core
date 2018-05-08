@@ -148,7 +148,7 @@ public class Conll2006Writer
                 Row row =  ctokens.get(rel.getDependent());
                 if (row.deprel != null) {
                     throw new IllegalStateException("Illegal basic dependency structure - token ["
-                            + row.token.getCoveredText()
+                            + row.token.getText()
                             + "] is dependent of more than one dependency.");
                 }
                 row.deprel = rel;
@@ -199,7 +199,7 @@ public class Conll2006Writer
                 String pdeprel = UNUSED;
 
                 aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", row.id,
-                        row.token.getCoveredText(), lemma, cpos, pos, feats, head, deprel, phead,
+                        row.token.getText(), lemma, cpos, pos, feats, head, deprel, phead,
                         pdeprel);
             }
 

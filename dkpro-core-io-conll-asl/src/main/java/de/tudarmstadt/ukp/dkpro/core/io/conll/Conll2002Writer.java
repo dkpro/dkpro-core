@@ -127,7 +127,7 @@ public class Conll2002Writer
                     namedEntity = row.ne;
                 }
 
-                aOut.printf("%s %s\n", row.token.getCoveredText(), namedEntity);
+                aOut.printf("%s %s\n", row.token.getText(), namedEntity);
             }
 
             aOut.println();

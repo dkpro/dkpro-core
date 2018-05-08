@@ -197,7 +197,7 @@ public class Conll2009Writer
             for (Row row : ctokens.values()) {
                 int id = row.id;
                 
-                String form = row.token.getCoveredText();
+                String form = row.token.getText();
                 
                 String lemma = UNUSED;
                 if (writeLemma && (row.token.getLemma() != null)) {

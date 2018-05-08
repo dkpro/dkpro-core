@@ -174,7 +174,7 @@ public class Conll2008Writer
                 Row row =  ctokens.get(rel.getDependent());
                 if (row.deprel != null) {
                     throw new IllegalStateException("Illegal basic dependency structure - token ["
-                            + row.token.getCoveredText()
+                            + row.token.getText()
                             + "] is dependent of more than one dependency.");
                 }
                 row.deprel = rel;
@@ -195,7 +195,7 @@ public class Conll2008Writer
             for (Row row : ctokens.values()) {
                 int id = row.id;
                 
-                String form = row.token.getCoveredText();
+                String form = row.token.getText();
                 
                 String lemma = UNUSED;
                 if (writeLemma && (row.token.getLemma() != null)) {
