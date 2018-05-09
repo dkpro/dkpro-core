@@ -48,6 +48,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Part-of-Speech, lemmatizer, and morphological analyzer using UDPipe. UDPipe uses MorphoDiTa for
@@ -55,7 +57,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * 
  * @see <a href="https://github.com/ufal/udpipe/tree/master/src/morphodita">MorphoDiTa in UDPipe</a>
  */
-@ResourceMetaData(name="UDPipe MorphoDiTa Morphological Analyzer")
+@Component(OperationType.PART_OF_SPEECH_TAGGER)
+@ResourceMetaData(name = "UDPipe MorphoDiTa Morphological Analyzer")
 @TypeCapability(
         inputs = { 
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -82,6 +85,15 @@ public class UDPipePosTagger
     protected String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Load the model from this location instead of locating the model automatically.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -92,7 +104,8 @@ public class UDPipePosTagger
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 

@@ -17,9 +17,16 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.gate.internal;
 
-import static gate.creole.ANNIEConstants.*;
 import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateAnnieConstants.FEAT_LEMMA;
 import static de.tudarmstadt.ukp.dkpro.core.io.gate.internal.GateAnnieConstants.FEAT_STEM;
+import static gate.creole.ANNIEConstants.LOCATION_ANNOTATION_TYPE;
+import static gate.creole.ANNIEConstants.ORGANIZATION_ANNOTATION_TYPE;
+import static gate.creole.ANNIEConstants.PERSON_ANNOTATION_TYPE;
+import static gate.creole.ANNIEConstants.SENTENCE_ANNOTATION_TYPE;
+import static gate.creole.ANNIEConstants.TOKEN_ANNOTATION_TYPE;
+import static gate.creole.ANNIEConstants.TOKEN_CATEGORY_FEATURE_NAME;
+import static gate.creole.ANNIEConstants.TOKEN_LENGTH_FEATURE_NAME;
+import static gate.creole.ANNIEConstants.TOKEN_STRING_FEATURE_NAME;
 import static org.apache.uima.fit.util.JCasUtil.selectAll;
 
 import org.apache.uima.jcas.JCas;
@@ -40,7 +47,6 @@ import gate.corpora.DocumentContentImpl;
 import gate.util.GateException;
 import gate.util.SimpleFeatureMapImpl;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
-import org.apache.uima.cas.Type;
 public class DKPro2Gate
 
 {

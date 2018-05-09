@@ -34,11 +34,14 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Removing trailing character (sequences) from tokens, e.g. punctuation.
  */
-@ResourceMetaData(name="Trailing Character Remover")
+@Component(OperationType.NORMALIZER)
+@ResourceMetaData(name = "Trailing Character Remover")
 public class TrailingCharacterRemover
     extends JCasAnnotator_ImplBase
 {

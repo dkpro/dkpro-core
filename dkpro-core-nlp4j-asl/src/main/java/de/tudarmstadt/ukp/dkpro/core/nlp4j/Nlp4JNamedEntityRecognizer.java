@@ -51,11 +51,14 @@ import edu.emory.mathcs.nlp.common.util.NLPUtils;
 import edu.emory.mathcs.nlp.component.ner.NERState;
 import edu.emory.mathcs.nlp.component.template.OnlineComponent;
 import edu.emory.mathcs.nlp.component.template.node.NLPNode;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Emory NLP4J name finder wrapper.
  */
-@ResourceMetaData(name="NLP4J Named Entity Recognizer")
+@Component(OperationType.NAMED_ENTITITY_RECOGNIZER)
+@ResourceMetaData(name = "NLP4J Named Entity Recognizer")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -90,6 +93,15 @@ public class Nlp4JNamedEntityRecognizer
     protected String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Location from which the model is read.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -99,7 +111,8 @@ public class Nlp4JNamedEntityRecognizer
     /**
      * Location of the mapping file for named entity tags to UIMA types.
      */
-    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
+    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
     protected String mappingLocation;
 

@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2017
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
@@ -34,8 +34,8 @@ import java.util.List;
 import java.util.Properties;
 import java.util.zip.GZIPInputStream;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.reflect.FieldUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.FSIterator;
@@ -88,11 +88,14 @@ import edu.stanford.nlp.trees.UniversalEnglishGrammaticalRelations;
 import edu.stanford.nlp.trees.UniversalEnglishGrammaticalStructureFactory;
 import edu.stanford.nlp.trees.international.pennchinese.ChineseGrammaticalRelations;
 import edu.stanford.nlp.util.Filters;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Stanford Parser component.
  */
-@ResourceMetaData(name="CoreNLP Parser (old API)")
+@Component(OperationType.CONSTITUENCY_PARSER)
+@ResourceMetaData(name = "CoreNLP Parser (old API)")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -152,7 +155,7 @@ public class StanfordParser
          * </ol>
          * Corresponding parser option: {@code tree}
          */
-         TREE,                   // tree         - typedDependencies(false) + collapseDependenciesTree(tdl)
+         TREE,                   // tree - typedDependencies(false) + collapseDependenciesTree(tdl)
          ENHANCED,               //
          ENHANCED_PLUS_PLUS      //
     }
@@ -180,6 +183,15 @@ public class StanfordParser
     protected String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Location from which the model is read.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -189,14 +201,16 @@ public class StanfordParser
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
     /**
      * Location of the mapping file for constituent tags to UIMA types.
      */
-    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
+    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CONSTITUENT_MAPPING_LOCATION, mandatory = false)
     protected String constituentMappingLocation;
     
@@ -225,7 +239,8 @@ public class StanfordParser
      * <p>
      * Default: {@code true}
      */
-    public static final String PARAM_WRITE_CONSTITUENT = ComponentParameters.PARAM_WRITE_CONSTITUENT;
+    public static final String PARAM_WRITE_CONSTITUENT = 
+            ComponentParameters.PARAM_WRITE_CONSTITUENT;
     @ConfigurationParameter(name = PARAM_WRITE_CONSTITUENT, mandatory = true, defaultValue = "true")
     private boolean writeConstituent;
 
@@ -278,7 +293,8 @@ public class StanfordParser
      * 
      * @see TestOptions#maxLength
      */
-    public static final String PARAM_MAX_SENTENCE_LENGTH = ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
+    public static final String PARAM_MAX_SENTENCE_LENGTH = 
+            ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
     @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = true, defaultValue = "130")
     private int maxTokens;
 
@@ -355,13 +371,6 @@ public class StanfordParser
                 constituentMappingLocation, language, modelProvider);
     }
 
-    /**
-     * Processes the given text using the StanfordParser.
-     *
-     * @param aJCas
-     *            the {@link JCas} to process
-     * @see org.apache.uima.analysis_component.JCasAnnotator_ImplBase#process(org.apache.uima.jcas.JCas)
-     */
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
@@ -453,8 +462,8 @@ public class StanfordParser
         }
     }
 
-    protected void doCreateDependencyTags(ParserGrammar aParser, StanfordAnnotator sfAnnotator, Tree parseTree,
-            List<Token> tokens)
+    protected void doCreateDependencyTags(ParserGrammar aParser, StanfordAnnotator sfAnnotator,
+            Tree parseTree, List<Token> tokens)
     {
         GrammaticalStructure gs;
         try {
@@ -512,7 +521,8 @@ public class StanfordParser
                 Token govToken = tokens.get(govIndex - 1);
                 Token depToken = tokens.get(depIndex - 1);
 
-                dep = sfAnnotator.createDependencyAnnotation(currTypedDep.reln(), govToken, depToken);
+                dep = sfAnnotator.createDependencyAnnotation(currTypedDep.reln(), govToken,
+                        depToken);
             }
             else {
                 Token depToken = tokens.get(depIndex - 1);
@@ -526,7 +536,8 @@ public class StanfordParser
                 dep.addToIndexes();
             }
             
-            dep.setFlavor(currTypedDep.extra() ? DependencyFlavor.ENHANCED : DependencyFlavor.BASIC);
+            dep.setFlavor(
+                    currTypedDep.extra() ? DependencyFlavor.ENHANCED : DependencyFlavor.BASIC);
         }
     }
 
@@ -671,7 +682,8 @@ public class StanfordParser
                             "Current model does not seem to support " + "dependencies.");
                 }
                 
-                if (gsf != null && EnglishGrammaticalStructureFactory.class.equals(gsf.getClass())) {
+                if (gsf != null
+                        && EnglishGrammaticalStructureFactory.class.equals(gsf.getClass())) {
                     SingletonTagset depTags = new SingletonTagset(Dependency.class, "stanford341");
                     for (GrammaticalRelation r : EnglishGrammaticalRelations.values()) {
                         depTags.add(r.getShortName());
@@ -680,7 +692,8 @@ public class StanfordParser
                         addTagset(depTags);
                     }
                 }
-                else if (gsf != null && UniversalEnglishGrammaticalStructureFactory.class.equals(gsf.getClass())) {
+                else if (gsf != null && UniversalEnglishGrammaticalStructureFactory.class
+                        .equals(gsf.getClass())) {
                     SingletonTagset depTags = new SingletonTagset(Dependency.class, "universal");
                     for (GrammaticalRelation r : UniversalEnglishGrammaticalRelations.values()) {
                         depTags.add(r.getShortName());

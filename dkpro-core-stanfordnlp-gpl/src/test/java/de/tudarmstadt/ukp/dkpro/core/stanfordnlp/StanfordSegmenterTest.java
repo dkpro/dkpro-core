@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2017
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
@@ -52,17 +52,16 @@ import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.sequences.SeqClassifierFlags;
 import edu.stanford.nlp.util.CoreMap;
 
-public
-class StanfordSegmenterTest
+public class StanfordSegmenterTest
 {
-	@Test
-	public void run() throws Throwable
-	{
-		AnalysisEngineDescription aed = createEngineDescription(StanfordSegmenter.class);
+    @Test
+    public void run() throws Throwable
+    {
+        AnalysisEngineDescription aed = createEngineDescription(StanfordSegmenter.class);
 
-		SegmenterHarness.run(aed, "de.1", "de.2", "de.3", "de.4", "en.9", "ar.1", "zh.1", "zh.2");
-	}
-	
+        SegmenterHarness.run(aed, "de.1", "de.2", "de.3", "de.4", "en.9", "ar.1", "zh.1", "zh.2");
+    }
+    
     @Test
     public void testEnglishSpeech() throws Exception
     {
@@ -110,19 +109,19 @@ class StanfordSegmenterTest
         
         AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
     }
-	
-	@Test
-	public void testUnwrapped() throws Exception
-	{
-	    String text = "\"Hey you!\", John said.";
-	    
+    
+    @Test
+    public void testUnwrapped() throws Exception
+    {
+        String text = "\"Hey you!\", John said.";
+        
         String[] expectedSentences = { "0 10 \"Hey you!\"", "10 22 , John said." };
         String[] expectedTokens = { "0 1 `` \"", "1 4 Hey Hey", "5 8 you you", "8 9 ! !",
                 "9 10 '' \"", "10 11 , ,", "12 16 John John", "17 21 said said", "21 22 . ." };
 
-	    List<String> sentences = new ArrayList<String>();
-	    List<String> tokens = new ArrayList<String>();
-	    
+        List<String> sentences = new ArrayList<String>();
+        List<String> tokens = new ArrayList<String>();
+        
         Properties props = new Properties();
         props.setProperty("annotators", "tokenize, ssplit");
         StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
@@ -146,42 +145,42 @@ class StanfordSegmenterTest
         
         assertEquals(asList(expectedSentences), sentences);
         assertEquals(asList(expectedTokens), tokens);
-	}
-	
-	@Ignore("This is completely incomplete so far")
-	@Test
-	public void testChinese() throws Exception
-	{
-	    Properties props = new Properties();
-	    props.setProperty("sighanCorporaDict", "target/download/segmenter/stanford-segmenter-2014-01-04/data");
+    }
+    
+    @Ignore("This is completely incomplete so far")
+    @Test
+    public void testChinese() throws Exception
+    {
+        Properties props = new Properties();
+        props.setProperty("sighanCorporaDict", "target/download/segmenter/stanford-segmenter-2014-01-04/data");
         props.setProperty("sighanPostProcessing", "true");
         props.setProperty("loadClassifier", "target/download/segmenter/stanford-segmenter-2014-01-04/data/ctb.gz");
         props.setProperty("serDictionary", "target/download/segmenter/stanford-segmenter-2014-01-04/data/dict-chris6.ser.gz");
-	    
-	    SeqClassifierFlags flags = new SeqClassifierFlags();
-	    flags.setProperties(props, false);
-	    CRFClassifier<CoreLabel> crf = new CRFClassifier<CoreLabel>(flags);
-	    crf.loadClassifierNoExceptions(flags.loadClassifier, props);
-	    crf.loadTagIndex();
-	    
-	    String sentence = "我们需要一个非常复杂的句子例如其中包含许多成分和尽可能的依赖。";
-	    
-	    System.out.println(crf.segmentString(sentence));
+        
+        SeqClassifierFlags flags = new SeqClassifierFlags();
+        flags.setProperties(props, false);
+        CRFClassifier<CoreLabel> crf = new CRFClassifier<CoreLabel>(flags);
+        crf.loadClassifierNoExceptions(flags.loadClassifier, props);
+        crf.loadTagIndex();
+        
+        String sentence = "我们需要一个非常复杂的句子例如其中包含许多成分和尽可能的依赖。";
+        
+        System.out.println(crf.segmentString(sentence));
 
-	    ObjectBank<List<CoreLabel>> docs = crf.makeObjectBankFromString(sentence,
+        ObjectBank<List<CoreLabel>> docs = crf.makeObjectBankFromString(sentence,
                 crf.defaultReaderAndWriter());
 
         StringWriter stringWriter = new StringWriter();
         PrintWriter stringPrintWriter = new PrintWriter(stringWriter);
         for (List<CoreLabel> doc : docs) {
             crf.classify(doc);
-//            for (CoreLabel w : doc) {
-//                System.out.printf("%s %s %s %s%n",
-//                        String.valueOf(w.get(CoreAnnotations.PositionAnnotation.class)),
-//                        String.valueOf(w.get(CoreAnnotations.CharacterOffsetBeginAnnotation.class)),
-//                        String.valueOf(w.get(CoreAnnotations.CharacterOffsetEndAnnotation.class)),
-//                        String.valueOf(w.get(CoreAnnotations.AnswerAnnotation.class)));
-//            }
+//          for (CoreLabel w : doc) {
+//              System.out.printf("%s %s %s %s%n",
+//                      String.valueOf(w.get(CoreAnnotations.PositionAnnotation.class)),
+//                      String.valueOf(w.get(CoreAnnotations.CharacterOffsetBeginAnnotation.class)),
+//                      String.valueOf(w.get(CoreAnnotations.CharacterOffsetEndAnnotation.class)),
+//                      String.valueOf(w.get(CoreAnnotations.AnswerAnnotation.class)));
+//          }
             crf.defaultReaderAndWriter().printAnswers(doc, stringPrintWriter);
             stringPrintWriter.println();
         }
@@ -189,7 +188,7 @@ class StanfordSegmenterTest
         String segmented = stringWriter.toString();
         
         System.out.println(Arrays.asList(segmented.split("\\s")));
-	}
+    }
 
     @Test
     public void testZoning() throws Exception

@@ -56,7 +56,8 @@ public class IOTestRunner
             Class<? extends AnalysisComponent> aWriter, String aFile)
         throws Exception
     {
-        testOneWay(createReaderDescription(aReader), createEngineDescription(aWriter), aFile, aFile);
+        testOneWay(createReaderDescription(aReader), createEngineDescription(aWriter), aFile,
+                aFile);
     }
 
     public static void testRoundTrip(Class<? extends CollectionReader> aReader,
@@ -171,7 +172,8 @@ public class IOTestRunner
     }
 
     public static void testOneWay(CollectionReaderDescription aReader,
-            AnalysisEngineDescription aWriter, String aExpectedFile, String aFile, TestOptions aOptions)
+            AnalysisEngineDescription aWriter, String aExpectedFile, String aFile,
+            TestOptions aOptions)
         throws Exception
     {
         Class<?> dkproReaderBase = Class.forName(RESOURCE_COLLECTION_READER_BASE);
@@ -181,7 +183,8 @@ public class IOTestRunner
         }
 
         Class<?> dkproWriterBase = Class.forName(JCAS_FILE_WRITER_IMPL_BASE);
-        if (!dkproWriterBase.isAssignableFrom(Class.forName(aWriter.getAnnotatorImplementationName()))) {
+        if (!dkproWriterBase
+                .isAssignableFrom(Class.forName(aWriter.getAnnotatorImplementationName()))) {
             throw new IllegalArgumentException("writer must be a subclass of ["
                     + JCAS_FILE_WRITER_IMPL_BASE + "]");
         }

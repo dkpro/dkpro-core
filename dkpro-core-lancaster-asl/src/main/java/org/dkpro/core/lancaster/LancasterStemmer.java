@@ -24,7 +24,7 @@ import java.util.Collections;
 import java.util.Locale;
 import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -47,11 +47,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * This Paice/Husk Lancaster stemmer implementation only works with the English language so far.
  */
-@ResourceMetaData(name="Lancaster Stemmer")
+@Component(OperationType.STEMMER)
+@ResourceMetaData(name = "Lancaster Stemmer")
 @LanguageCapability("en")
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
@@ -69,6 +72,15 @@ public class LancasterStemmer
     @ConfigurationParameter(name = PARAM_STRIP_PREFIXES, mandatory = true, defaultValue = "false")
     private boolean stripPrefix;
 
+    /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
     /**
      * Specifies an URL that should resolve to a location from where to load custom rules. If the
      * location starts with {@code classpath:} the location is interpreted as a classpath location,
@@ -89,8 +101,8 @@ public class LancasterStemmer
     protected String language;
 
     /**
-     * The stemmer only has to be initialized once since it's used like a pure function with the given
-     * configuration parameters.
+     * The stemmer only has to be initialized once since it's used like a pure function with the
+     * given configuration parameters.
      */
     private smile.nlp.stemmer.LancasterStemmer stemmer;
 

@@ -1,7 +1,5 @@
-package de.tudarmstadt.ukp.dkpro.core.arktools;
-
-/**
- * Copyright 2007-2017
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -16,8 +14,9 @@ package de.tudarmstadt.ukp.dkpro.core.arktools;
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
+package de.tudarmstadt.ukp.dkpro.core.arktools;
 
 import java.io.IOException;
 import java.net.URL;
@@ -51,6 +50,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Wrapper for Twitter Tokenizer and POS Tagger.
@@ -59,7 +60,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * and Noah A. Smith. Improved Part-of-Speech Tagging for Online Conversational Text with Word
  * Clusters In Proceedings of NAACL 2013.
  */
-@ResourceMetaData(name="ArkTweet POS-Tagger")
+@Component(OperationType.POS_TAGGING)
+@ResourceMetaData(name = "ArkTweet POS-Tagger")
 @TypeCapability(
       inputs = { 
           "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 
@@ -85,6 +87,15 @@ public class ArktweetPosTagger
     protected String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Location from which the model is read.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -94,7 +105,8 @@ public class ArktweetPosTagger
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 

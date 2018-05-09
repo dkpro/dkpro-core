@@ -108,9 +108,9 @@ public class CasDumpWriter
      */
     public static final String PARAM_FEATURE_PATTERNS = "featurePatterns";
     @ConfigurationParameter(name = PARAM_FEATURE_PATTERNS, mandatory = true, defaultValue = {
-            INCLUDE_PREFIX+PATTERN_ANY, EXCLUDE_PREFIX+PATTERN_DOCUMENT_URI, 
-            EXCLUDE_PREFIX+PATTERN_COLLECTION_ID, EXCLUDE_PREFIX+PATTERN_DOCUMENT_BASE_URI, 
-            EXCLUDE_PREFIX+PATTERN_NULL_VALUE })
+            INCLUDE_PREFIX + PATTERN_ANY, EXCLUDE_PREFIX + PATTERN_DOCUMENT_URI,
+            EXCLUDE_PREFIX + PATTERN_COLLECTION_ID, EXCLUDE_PREFIX + PATTERN_DOCUMENT_BASE_URI,
+            EXCLUDE_PREFIX + PATTERN_NULL_VALUE })
     private String[] featurePatterns;
 
     private InExPattern[] cookedFeaturePatterns;
@@ -247,7 +247,8 @@ public class CasDumpWriter
                     }
                     
                     // Last resort: try the address.
-                    if (aO1 instanceof FeatureStructureImpl && aO2 instanceof FeatureStructureImpl) {
+                    if (aO1 instanceof FeatureStructureImpl
+                            && aO2 instanceof FeatureStructureImpl) {
                         return ((FeatureStructureImpl) aO1).getAddress()
                                 - ((FeatureStructureImpl) aO2).getAddress();
                     }
@@ -348,7 +349,8 @@ public class CasDumpWriter
         InExPattern[] patterns = new InExPattern[aPatterns.length];
         for (int i = 0; i < aPatterns.length; i++) {
             if (aPatterns[i].startsWith(INCLUDE_PREFIX)) {
-                patterns[i] = new InExPattern(aPatterns[i].substring(INCLUDE_PREFIX.length()), true);
+                patterns[i] = new InExPattern(aPatterns[i].substring(INCLUDE_PREFIX.length()),
+                        true);
             }
             else if (aPatterns[i].startsWith(EXCLUDE_PREFIX)) {
                 patterns[i] = new InExPattern(aPatterns[i].substring(EXCLUDE_PREFIX.length()),

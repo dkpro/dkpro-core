@@ -65,12 +65,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Part-of-Speech annotator using Clear NLP. Requires {@link Sentence}s to be annotated before.
- *
  */
-@ResourceMetaData(name="ClearNLP POS-Tagger")
+@Component(OperationType.PART_OF_SPEECH_TAGGER)
+@ResourceMetaData(name = "ClearNLP POS-Tagger")
 @TypeCapability(
     inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
@@ -108,6 +110,15 @@ public class ClearNlpPosTagger
     protected String posVariant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Load the model from this location instead of locating the pos-tagging model automatically.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -118,7 +129,8 @@ public class ClearNlpPosTagger
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
      * mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
@@ -158,6 +170,7 @@ public class ClearNlpPosTagger
                 setDefaultVariantsLocation("${package}/lib/dictionary-default-variants.map");
                 setDefault(VARIANT, "default");
                 
+                setOverride(ARTIFACT_URI, modelArtifactUri);
                 setOverride(LOCATION, dictLocation);
                 setOverride(LANGUAGE, language);
                 setOverride(VARIANT, dictVariant);
@@ -198,9 +211,10 @@ public class ClearNlpPosTagger
 
                     String language = getAggregatedProperties().getProperty(LANGUAGE);
                     AbstractPOSTagger tagger;
-                    if(language.equals("en")){
+                    if (language.equals("en")) {
                         tagger = new DkproPosTagger(ois);
-                    }else{
+                    }
+                    else {
                         tagger = new DefaultPOSTagger(ois);
                     }
 
@@ -268,8 +282,9 @@ public class ClearNlpPosTagger
         }
     }
 
-    private class DkproPosTagger extends EnglishPOSTagger{
-
+    private class DkproPosTagger
+        extends EnglishPOSTagger
+    {
         public DkproPosTagger(ObjectInputStream in)
         {
             super(in);
@@ -280,6 +295,5 @@ public class ClearNlpPosTagger
         {
             mp_analyzer = new EnglishMPAnalyzer(dictModelProvider.getResource());
         }
-
     }
 }

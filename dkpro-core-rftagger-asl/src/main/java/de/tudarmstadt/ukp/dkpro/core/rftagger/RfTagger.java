@@ -59,11 +59,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.RuntimeProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Rftagger morphological analyzer.
  */
-@ResourceMetaData(name="RFTagger Morphological Analyzer")
+@Component(OperationType.MORPHOLOGICAL_TAGGER)
+@ResourceMetaData(name = "RFTagger Morphological Analyzer")
 @TypeCapability(
     inputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -89,6 +92,15 @@ public class RfTagger
     protected String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Load the model from this location instead of locating the model automatically.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -106,11 +118,13 @@ public class RfTagger
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
      * mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
-    public static final String PARAM_MORPH_MAPPING_LOCATION = ComponentParameters.PARAM_MORPH_MAPPING_LOCATION;
+    public static final String PARAM_MORPH_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_MORPH_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_MORPH_MAPPING_LOCATION, mandatory = false)
     private String morphMappingLocation;
 
@@ -259,7 +273,7 @@ public class RfTagger
                 List<Token> tokens = JCasUtil.selectCovered(aJCas, Token.class,
                         sentence.getBegin(), sentence.getEnd());
                 for (Token token : tokens) {
-                    sb.append(token.getCoveredText() + "\n");
+                    sb.append(token.getText() + "\n");
                 }
 
                 writeInput(sb);

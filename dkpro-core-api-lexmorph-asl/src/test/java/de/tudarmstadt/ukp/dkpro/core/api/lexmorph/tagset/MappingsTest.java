@@ -26,7 +26,7 @@ import java.util.Collection;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -51,9 +51,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 
 public class MappingsTest
 {
-    private static Class<?>[] POS_TAGS = { POS.class, POS_ADJ.class, POS_ADP.class, POS_ADV.class, POS_AUX.class,
-            POS_CONJ.class, POS_DET.class, POS_INTJ.class, POS_NOUN.class, POS_NUM.class, POS_PART.class, POS_PRON.class,
-            POS_PROPN.class, POS_PUNCT.class, POS_SCONJ.class, POS_SYM.class, POS_VERB.class, POS_X.class };
+    private static Class<?>[] POS_TAGS = { POS.class, POS_ADJ.class, POS_ADP.class, POS_ADV.class,
+            POS_AUX.class, POS_CONJ.class, POS_DET.class, POS_INTJ.class, POS_NOUN.class,
+            POS_NUM.class, POS_PART.class, POS_PRON.class, POS_PROPN.class, POS_PUNCT.class,
+            POS_SCONJ.class, POS_SYM.class, POS_VERB.class, POS_X.class };
     
     @Test
     public void testMappings() throws Exception

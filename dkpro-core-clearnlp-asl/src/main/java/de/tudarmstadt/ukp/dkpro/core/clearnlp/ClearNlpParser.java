@@ -59,11 +59,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * CLEAR parser annotator.
  */
-@ResourceMetaData(name="ClearNLP Parser")
+@Component(OperationType.DEPENDENCY_PARSER)
+@ResourceMetaData(name = "ClearNLP Parser")
 @TypeCapability(
     inputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -97,6 +100,15 @@ public class ClearNlpParser
     @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
     protected String variant;
 
+    /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
     /**
      * Location from which the model is read.
      */
@@ -203,7 +215,7 @@ public class ClearNlpParser
             // Generate input format required by parser
             for (int i = 0; i < tokens.size(); i++) {
                 Token t = tokens.get(i);
-                DEPNode node = new DEPNode(i + 1, tokens.get(i).getCoveredText());
+                DEPNode node = new DEPNode(i + 1, tokens.get(i).getText());
                 node.pos = t.getPos().getPosValue();
                 if (t.getLemma() != null) {
                     node.lemma = t.getLemma().getValue();

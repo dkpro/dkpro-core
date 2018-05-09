@@ -51,13 +51,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionProvider;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 import opennlp.tools.postag.POSModel;
 import opennlp.tools.postag.POSTaggerME;
 
 /**
  * Part-of-Speech annotator using OpenNLP.
  */
-@ResourceMetaData(name="OpenNLP POS-Tagger")
+@Component(OperationType.PART_OF_SPEECH_TAGGER)
+@ResourceMetaData(name = "OpenNLP POS-Tagger")
 //NOTE: This file contains Asciidoc markers for partial inclusion of this file in the documentation
 //Do not remove these tags!
 // tag::capabilities[]
@@ -68,30 +71,40 @@ import opennlp.tools.postag.POSTaggerME;
         outputs = { 
             "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class OpenNlpPosTagger
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
 // end::capabilities[]
-	/**
-	 * Use this language instead of the document language to resolve the model.
-	 */
-	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-	protected String language;
+    
+    /**
+     * Use this language instead of the document language to resolve the model.
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    protected String language;
 
-	/**
-	 * Override the default variant used to locate the model.
-	 */
-	public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
-	protected String variant;
+    /**
+     * Override the default variant used to locate the model.
+     */
+    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+    protected String variant;
 
-	/**
-	 * Load the model from this location instead of locating the model automatically.
-	 */
-	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
+     * Load the model from this location instead of locating the model automatically.
+     */
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
     @ResourceParameter(MimeTypes.APPLICATION_X_OPENNLP_TAGGER)
-	protected String modelLocation;
+    protected String modelLocation;
 
     /**
      * The character encoding used by the model.
@@ -100,51 +113,52 @@ public class OpenNlpPosTagger
     @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = false)
     private String modelEncoding;
 
-	/**
-	 * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
-	 * the mapping automatically.
-	 */
-	public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
-	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
-	protected String posMappingLocation;
+    /**
+     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
+     * the mapping automatically.
+     */
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+    protected String posMappingLocation;
 
-	/**
-	 * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-	 * spaming the heap with thousands of strings representing only a few different tags.
-	 *
-	 * Default: {@code true}
-	 */
-	public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-	@ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-	private boolean internTags;
+    /**
+     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
+     * spaming the heap with thousands of strings representing only a few different tags.
+     *
+     * Default: {@code true}
+     */
+    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
+    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
+    private boolean internTags;
 
-	/**
-	 * Log the tag set(s) when a model is loaded.
-	 *
-	 * Default: {@code false}
-	 */
-	public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
-	protected boolean printTagSet;
+    /**
+     * Log the tag set(s) when a model is loaded.
+     *
+     * Default: {@code false}
+     */
+    public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
+    protected boolean printTagSet;
 
-	private CasConfigurableProviderBase<POSTaggerME> modelProvider;
-	private MappingProvider mappingProvider;
+    private CasConfigurableProviderBase<POSTaggerME> modelProvider;
+    private MappingProvider mappingProvider;
     private Charset encoding;
 
-	@Override
-	public void initialize(UimaContext aContext)
-		throws ResourceInitializationException
-	{
-		super.initialize(aContext);
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
 
         encoding = modelEncoding != null ? Charset.forName(modelEncoding) : null;
-		
+        
 // tag::model-provider-decl[]
-		// Use ModelProviderBase convenience constructor to set up a model provider that
-		// auto-detects most of its settings and is configured to use default variants.
-		// Auto-detection inspects the configuration parameter fields (@ConfigurationParameter)
-		// of the analysis engine class and looks for default parameters such as PARAM_LANGUAGE,
-		// PARAM_VARIANT, and PARAM_MODEL_LOCATION.
+        // Use ModelProviderBase convenience constructor to set up a model provider that
+        // auto-detects most of its settings and is configured to use default variants.
+        // Auto-detection inspects the configuration parameter fields (@ConfigurationParameter)
+        // of the analysis engine class and looks for default parameters such as PARAM_LANGUAGE,
+        // PARAM_VARIANT, and PARAM_MODEL_LOCATION.
         modelProvider = new ModelProviderBase<POSTaggerME>(this, "tagger")
         {
             @Override
@@ -181,7 +195,7 @@ public class OpenNlpPosTagger
         mappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
                 language, modelProvider);
 // end::mapping-provider-decl[]
-	}
+    }
 
     @Override
     public void process(JCas aJCas)

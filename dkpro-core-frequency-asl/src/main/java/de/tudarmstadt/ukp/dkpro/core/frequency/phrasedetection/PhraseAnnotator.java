@@ -17,20 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.frequency.phrasedetection;
 
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
-import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGenerator;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LexicalPhrase;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import org.apache.uima.UimaContext;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
-import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.fit.descriptor.ResourceMetaData;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.cas.TOP;
-import org.apache.uima.resource.ResourceInitializationException;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -40,17 +27,31 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.apache.uima.fit.util.JCasUtil.select;
+import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.cas.TOP;
+import org.apache.uima.resource.ResourceInitializationException;
+
+import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGenerator;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LexicalPhrase;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * Annotate phrases in a sentence. Depending on the provided unigrams and the threshold, these
  * comprise either one or two annotations (tokens, lemmas, ...).
  * <p>
- * In order to identify longer phrases, run the {@link FrequencyCounter} and this annotator
- * multiple times, each time taking the results of the previous run as input. From the second run on, set phrases
- * in the feature path parameter {@link #PARAM_FEATURE_PATH}.
+ * In order to identify longer phrases, run the {@link FrequencyCounter} and this annotator multiple
+ * times, each time taking the results of the previous run as input. From the second run on, set
+ * phrases in the feature path parameter {@link #PARAM_FEATURE_PATH}.
  */
-@ResourceMetaData(name="Phrase Annotator")
+@ResourceMetaData(name = "Phrase Annotator")
 public class PhraseAnnotator
         extends JCasAnnotator_ImplBase
 {
@@ -77,17 +78,17 @@ public class PhraseAnnotator
     private String modelLocation;
 
     /**
-     * The discount in order to prevent too many phrases consisting of very infrequent words to be formed.
-     * A typical value is the minimum count set during model creation ({@link FrequencyCounter#PARAM_MIN_COUNT}),
-     * which is by default set to 5.
+     * The discount in order to prevent too many phrases consisting of very infrequent words to be
+     * formed. A typical value is the minimum count set during model creation
+     * ({@link FrequencyCounter#PARAM_MIN_COUNT}), which is by default set to 5.
      */
     public static final String PARAM_DISCOUNT = "discount";
     @ConfigurationParameter(name = PARAM_DISCOUNT, mandatory = true, defaultValue = "5")
     private int discount;
 
     /**
-     * The threshold score for phrase construction. Default is 100. Lower values result in fewer phrases.
-     * The value strongly depends on the size of the corpus and the token unigrams.
+     * The threshold score for phrase construction. Default is 100. Lower values result in fewer
+     * phrases. The value strongly depends on the size of the corpus and the token unigrams.
      */
     public static final String PARAM_THRESHOLD = "threshold";
     @ConfigurationParameter(name = PARAM_THRESHOLD, mandatory = true, defaultValue = "100")
@@ -110,7 +111,8 @@ public class PhraseAnnotator
     private String regexReplacement;
 
     /**
-     * Set this parameter if bigrams should only be counted when occurring within a covering type, e.g. sentences.
+     * Set this parameter if bigrams should only be counted when occurring within a covering type,
+     * e.g. sentences.
      */
     public static final String PARAM_COVERING_TYPE = "coveringType";
     @ConfigurationParameter(name = PARAM_COVERING_TYPE, mandatory = false)

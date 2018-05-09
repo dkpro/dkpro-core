@@ -25,6 +25,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class XcesBody
 {     
-    @XmlElement(name="p",type=XcesPara.class)
+    @XmlElement(name = "p", type = XcesPara.class)
     public List<XcesPara> p;      
 }

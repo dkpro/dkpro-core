@@ -57,7 +57,8 @@ public final class JSoupUtil
      * org.jsoup.nodes.Element.preserveWhitespace(Node)
      */
     public static boolean preserveWhitespace(Node node) {
-        // looks only at this element and one level up, to prevent recursion & needless stack searches
+        // looks only at this element and one level up, to prevent recursion & needless stack
+        // searches
         if (node != null && node instanceof Element) {
             Element element = (Element) node;
             return element.tag().preserveWhitespace() ||

@@ -41,9 +41,8 @@ public class IobDecoderTest
     public void iobEncoderTest() 
         throws Exception
     {
-        String[] input = new String[] {
-                "O","O","O","B-NP","I-NP","I-NP","I-NP","O","O","O","O","O","B-NP","O","B-NP","O","O","O"
-        };
+        String[] input = new String[] { "O", "O", "O", "B-NP", "I-NP", "I-NP", "I-NP", "O", "O",
+                "O", "O", "O", "B-NP", "O", "B-NP", "O", "O", "O" };
         
         String[] chunks = new String[] {
                 "[ 10, 43]Chunk(NP) (very complicated example sentence)",

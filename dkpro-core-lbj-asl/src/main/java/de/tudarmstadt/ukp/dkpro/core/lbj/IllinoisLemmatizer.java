@@ -19,6 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.lbj;
 
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -40,11 +41,14 @@ import de.tudarmstadt.ukp.dkpro.core.lbj.internal.ConvertToUima;
 import edu.illinois.cs.cogcomp.annotation.Annotator;
 import edu.illinois.cs.cogcomp.annotation.AnnotatorException;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.TextAnnotation;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Lemmatizer from the Cognitive Computation Group at University of Illinois at Urbana-Champaign.  
  */
-@ResourceMetaData(name="Illinois CCG Lemmatizer")
+@Component(OperationType.LEMMATIZER)
+@ResourceMetaData(name = "Illinois CCG Lemmatizer")
 @TypeCapability(
         inputs = { 
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -75,7 +79,8 @@ public class IllinoisLemmatizer
                     throw new IllegalArgumentException("Only language [en] is supported");
                 }
 
-                Annotator annotator = new edu.illinois.cs.cogcomp.nlp.lemmatizer.IllinoisLemmatizer();
+                Annotator annotator = 
+                        new edu.illinois.cs.cogcomp.nlp.lemmatizer.IllinoisLemmatizer();
 
                 return annotator;
             }

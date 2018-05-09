@@ -39,9 +39,9 @@ import edu.emory.mathcs.nlp.common.util.IOUtils;
 import edu.emory.mathcs.nlp.component.template.OnlineComponent;
 import edu.emory.mathcs.nlp.component.template.feature.FeatureItem;
 import edu.emory.mathcs.nlp.component.template.feature.Field;
-import edu.emory.mathcs.nlp.component.template.node.NLPNode;
 import edu.emory.mathcs.nlp.component.template.lexicon.GlobalLexica;
-import edu.emory.mathcs.nlp.component.template.lexicon.GlobalLexicon;;
+import edu.emory.mathcs.nlp.component.template.lexicon.GlobalLexicon;
+import edu.emory.mathcs.nlp.component.template.node.NLPNode;
 
 public class EmoryNlpUtils
 {

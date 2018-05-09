@@ -6,7 +6,7 @@ mediaType: text/x.org.dkpro.conll-2006
 encoding: UTF-8
 
 name: IULA Spanish LSP Treebank
-url: https://www.iula.upf.edu/recurs01_tbk_uk.htm
+url: http://www.iula.upf.edu/recurs01_tbk_uk.htm
 attribution: |
   Marimon, Montserrat; Fisas, Beatriz; Bel, Núria; Arias, Blanca; Vázquez, Silvia; Vivaldi, Jorge; 
   Torner, Sergi; Villegas, Marta; Lorente, Mercè (2012). "The IULA Treebank" in Proceedings of the

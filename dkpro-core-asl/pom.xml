@@ -15,8 +15,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -27,6 +26,7 @@
   <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
   <packaging>pom</packaging>
   <name>DKPro Core ASL</name>
+  <url>https://dkpro.github.io/dkpro-core/</url>
   <licenses>
     <license>
       <name>Apache License Version 2.0</name>
@@ -148,11 +148,6 @@
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core.cogroo-asl</artifactId>
-        <version>1.10.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.commonscodec-asl</artifactId>
         <version>1.10.0-SNAPSHOT</version>
       </dependency>
@@ -218,11 +213,6 @@
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core.io.annis-asl</artifactId>
-        <version>1.10.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.io.bincas-asl</artifactId>
         <version>1.10.0-SNAPSHOT</version>
       </dependency>
@@ -258,11 +248,6 @@
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core.io.gate-asl</artifactId>
-        <version>1.10.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.io.imscwb-asl</artifactId>
         <version>1.10.0-SNAPSHOT</version>
       </dependency>
@@ -279,6 +264,11 @@
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl</artifactId>
+        <version>1.10.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.io.lcc-asl</artifactId>
         <version>1.10.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -314,11 +304,6 @@
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.io.penntree-asl</artifactId>
-        <version>1.10.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core.io.rdf-asl</artifactId>
         <version>1.10.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -401,12 +386,7 @@
         <artifactId>de.tudarmstadt.ukp.dkpro.core.jtok-asl</artifactId>
         <version>1.10.0-SNAPSHOT</version>
       </dependency>
-      <dependency>
-        <groupId>org.dkpro.core</groupId>
-        <artifactId>dkpro-core-kuromoji-asl</artifactId>
-        <version>1.10.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
+     <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.languagetool-asl</artifactId>
         <version>1.10.0-SNAPSHOT</version>
@@ -555,7 +535,6 @@
     <!-- IO modules -->
     <module>../dkpro-core-io-aclanthology-asl</module>
     <module>../dkpro-core-io-ancora-asl</module>
-    <module>../dkpro-core-io-annis-asl</module>
     <module>../dkpro-core-io-bincas-asl</module>
     <module>../dkpro-core-io-bliki-asl</module>
     <module>../dkpro-core-io-bnc-asl</module>
@@ -563,12 +542,12 @@
     <module>../dkpro-core-io-combination-asl</module>
     <module>../dkpro-core-io-conll-asl</module>
     <module>../dkpro-core-io-ditop-asl</module>
-    <module>../dkpro-core-io-gate-asl</module>
     <module>../dkpro-core-io-imscwb-asl</module>
     <module>../dkpro-core-io-html-asl</module>
     <module>../dkpro-core-io-json-asl</module>
     <module>../dkpro-core-io-jdbc-asl</module>
     <module>../dkpro-core-io-jwpl-asl</module>
+    <module>../dkpro-core-io-lcc-asl</module>
     <module>../dkpro-core-io-lif-asl</module>
     <module>../dkpro-core-io-lxf-asl</module>
     <module>../dkpro-core-io-negra-asl</module>
@@ -577,7 +556,6 @@
     <module>../dkpro-core-io-pdf-asl</module>
     <module>../dkpro-core-io-penntree-asl</module>
     <module>../dkpro-core-io-reuters-asl</module>
-    <module>../dkpro-core-io-rdf-asl</module>
     <module>../dkpro-core-io-rtf-asl</module>
     <module>../dkpro-core-io-solr-asl</module>
     <module>../dkpro-core-io-tcf-asl</module>
@@ -595,7 +573,6 @@
     <module>../dkpro-core-castransformation-asl</module>
     <module>../dkpro-core-cisstem-asl</module>
     <module>../dkpro-core-clearnlp-asl</module>
-    <module>../dkpro-core-cogroo-asl</module>
     <module>../dkpro-core-commonscodec-asl</module>
     <module>../dkpro-core-decompounding-asl</module>
     <module>../dkpro-core-dictionaryannotator-asl</module>
@@ -609,7 +586,6 @@
     <module>../dkpro-core-ixa-asl</module>
     <module>../dkpro-core-jazzy-asl</module>
     <module>../dkpro-core-jtok-asl</module>
-    <module>../dkpro-core-kuromoji-asl</module>
     <module>../dkpro-core-languagetool-asl</module>
     <module>../dkpro-core-langdetect-asl</module>
     <module>../dkpro-core-ldweb1t-asl</module>
@@ -636,6 +612,46 @@
     <module>../dkpro-core-textnormalizer-asl</module>
   </modules>
   <profiles>
+    <!-- Modules from this profile are not included in the release and in default builds -->
+    <profile>
+      <id>experimental</id>
+      <modules>
+        <module>../dkpro-core-cogroo-asl</module>
+        <module>../dkpro-core-kuromoji-asl</module>
+        <module>../dkpro-core-io-annis-asl</module>
+        <module>../dkpro-core-io-rdf-asl</module>
+        <module>../dkpro-core-io-gate-asl</module>
+      </modules>
+      <dependencyManagement>
+        <dependencies>
+          <dependency>
+            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+            <artifactId>de.tudarmstadt.ukp.dkpro.core.io.annis-asl</artifactId>
+            <version>1.10.0-SNAPSHOT</version>
+          </dependency>
+          <dependency>
+            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+            <artifactId>de.tudarmstadt.ukp.dkpro.core.io.rdf-asl</artifactId>
+            <version>1.10.0-SNAPSHOT</version>
+          </dependency>
+          <dependency>
+            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+            <artifactId>de.tudarmstadt.ukp.dkpro.core.cogroo-asl</artifactId>
+            <version>1.10.0-SNAPSHOT</version>
+          </dependency>
+          <dependency>
+            <groupId>org.dkpro.core</groupId>
+            <artifactId>dkpro-core-kuromoji-asl</artifactId>
+            <version>1.10.0-SNAPSHOT</version>
+          </dependency>
+          <dependency>
+            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+            <artifactId>de.tudarmstadt.ukp.dkpro.core.io.gate-asl</artifactId>
+            <version>1.10.0-SNAPSHOT</version>
+          </dependency>
+        </dependencies>
+      </dependencyManagement>
+    </profile>
     <profile>
       <!-- Profile for modules with dependencies that are not on Maven Central -->
       <id>deps-not-on-maven-central</id>
@@ -742,6 +758,8 @@
                   <excludes>
                     <exclude>.activate-run-jcasgen</exclude>
                     <exclude>.gitignore</exclude>
+                    <exclude>.checkstyle</exclude>
+                    <exclude>suppressions.xml</exclude>
                     <!-- maven config files -->
                     <exclude>src/filter/**/*</exclude>
                     <!-- release generated artifact -->

@@ -18,15 +18,20 @@
 
 package de.tudarmstadt.ukp.dkpro.core.mallet.lda;
 
-import cc.mallet.topics.ParallelTopicModel;
-import cc.mallet.types.Alphabet;
-import cc.mallet.types.IDSorter;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeSet;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
+import cc.mallet.topics.ParallelTopicModel;
+import cc.mallet.types.Alphabet;
+import cc.mallet.types.IDSorter;
 
 public class MalletLdaTopicModelUtils
 {
@@ -62,13 +67,14 @@ public class MalletLdaTopicModelUtils
 
         List<Map<String, Double>> topics = new ArrayList<>(model.getNumTopics());
 
-        /* iterate over topics */
+        // iterate over topics
         for (TreeSet<IDSorter> topic : model.getSortedWords()) {
             Map<String, Double> topicWords = new HashMap<>(nWords);
 
-            /* iterate over word IDs in topic (sorted by weight) */
+            // iterate over word IDs in topic (sorted by weight)
             for (IDSorter id : topic) {
-                double weight = normalize ? id.getWeight() / alphabet.size() : id.getWeight(); // normalize
+                // normalize
+                double weight = normalize ? id.getWeight() / alphabet.size() : id.getWeight(); 
                 String word = (String) alphabet.lookupObject(id.getID());
 
                 topicWords.put(word, weight);

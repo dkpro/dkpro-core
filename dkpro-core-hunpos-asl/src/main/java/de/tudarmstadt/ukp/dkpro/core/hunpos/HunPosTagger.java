@@ -51,6 +51,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.RuntimeProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Part-of-Speech annotator using HunPos. Requires {@link Sentence}s to be annotated
@@ -65,7 +67,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * <a href="http://aclweb.org/anthology/P/P07/P07-2053.bib">(bibtex)</a></li>
  * </ul>
  */
-@ResourceMetaData(name="HunPos POS-Tagger")
+@Component(OperationType.PART_OF_SPEECH_TAGGER)
+@ResourceMetaData(name = "HunPos POS-Tagger")
 @TypeCapability(
         inputs = { 
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -90,6 +93,15 @@ public class HunPosTagger
     protected String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Load the model from this location instead of locating the model automatically.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -100,7 +112,8 @@ public class HunPosTagger
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
      * mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
@@ -215,8 +228,8 @@ public class HunPosTagger
 
                 // Send full sentence
                 for (Token token : tokens) {
-                    lastOut.append(token.getCoveredText()).append(' ');
-                    out.printf("%s%n", token.getCoveredText());
+                    lastOut.append(token.getText()).append(' ');
+                    out.printf("%s%n", token.getText());
                 }
                 out.printf("%n");
                 out.flush();

@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.textnormalizer.util;
 import java.io.File;
 import java.util.Iterator;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
@@ -51,7 +51,8 @@ public class CreateNormalizerModel
             }
         }
 
-        ConditionalFrequencyDistribution<Integer, String> cfd = new ConditionalFrequencyDistribution<Integer, String>();
+        ConditionalFrequencyDistribution<Integer, String> cfd = 
+                new ConditionalFrequencyDistribution<Integer, String>();
         cfd.setFrequencyDistribution(1, freqDist);
 
         Web1TConverter converter = new Web1TConverter("target/model");

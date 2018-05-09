@@ -27,6 +27,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.CasPosSampleStream;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTrainerBase;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 import opennlp.tools.ml.BeamSearch;
 import opennlp.tools.ml.EventTrainer;
 import opennlp.tools.ml.maxent.GISTrainer;
@@ -39,8 +41,9 @@ import opennlp.tools.util.model.BaseModel;
 /**
  * Train a POS tagging model for OpenNLP.
  */
+@Component(OperationType.TRAINER_OF_MACHINE_LEARNING_MODELS)
 @MimeTypeCapability(MimeTypes.APPLICATION_X_OPENNLP_TAGGER)
-@ResourceMetaData(name="OpenNLP POS-Tagger Trainer")
+@ResourceMetaData(name = "OpenNLP POS-Tagger Trainer")
 public class OpenNlpPosTaggerTrainer
     extends OpenNlpTrainerBase<CasPosSampleStream>
 {
@@ -49,11 +52,13 @@ public class OpenNlpPosTaggerTrainer
     private String language;
 
     public static final String PARAM_ALGORITHM = "algorithm";
-    @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, defaultValue = GISTrainer.MAXENT_VALUE)
+    @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, 
+            defaultValue = GISTrainer.MAXENT_VALUE)
     private String algorithm;
     
     public static final String PARAM_TRAINER_TYPE = "trainerType";
-    @ConfigurationParameter(name = PARAM_TRAINER_TYPE, mandatory = true, defaultValue = EventTrainer.EVENT_VALUE)
+    @ConfigurationParameter(name = PARAM_TRAINER_TYPE, mandatory = true, 
+            defaultValue = EventTrainer.EVENT_VALUE)
     private String trainerType;
 
     public static final String PARAM_ITERATIONS = "iterations";

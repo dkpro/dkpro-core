@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.clearnlp;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,18 +38,18 @@ import de.tudarmstadt.ukp.dkpro.core.testing.harness.SegmenterHarness;
 
 public class ClearNlpSegmenterTest
 {
-	@Test
-	public void run() throws Throwable
-	{
-		AnalysisEngineDescription aed = createEngineDescription(ClearNlpSegmenter.class);
+    @Test
+    public void run() throws Throwable
+    {
+        AnalysisEngineDescription aed = createEngineDescription(ClearNlpSegmenter.class);
         SegmenterHarness.run(aed, "de.1", "de.2", "de.3", "de.4", "en.1", "en.7", "en.9", "ar.1",
                 "zh.1", "zh.2");
-	}
+    }
 
-	/**
-	 * We had a bug where the token offsets were assigned wrong when one word was a suffix of the
-	 * previous word.
-	 */
+    /**
+     * We had a bug where the token offsets were assigned wrong when one word was a suffix of the
+     * previous word.
+     */
     @Test
     public void testSuffix() throws Exception
     {

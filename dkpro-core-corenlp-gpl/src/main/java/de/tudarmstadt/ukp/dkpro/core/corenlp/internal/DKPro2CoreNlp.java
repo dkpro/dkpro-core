@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2017
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,14 +14,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.corenlp.internal;
 
-import static org.apache.uima.fit.util.JCasUtil.selectPreceding;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.fit.util.JCasUtil.selectFollowing;
+import static org.apache.uima.fit.util.JCasUtil.selectPreceding;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -32,7 +32,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
@@ -159,9 +159,9 @@ public class DKPro2CoreNlp
             Map<Token, IndexedWord> idxTokens = new HashMap<>();
             List<CoreLabel> tokens = new ArrayList<>();
             for (Token t : selectCovered(Token.class, s)) {
-                String tokenText = t.getCoveredText();
+                String tokenText = t.getText();
                 if (encoding != null && !"UTF-8".equals(encoding.name())) {
-                    tokenText = new String(tokenText.getBytes(StandardCharsets.UTF_8), encoding);                
+                    tokenText = new String(tokenText.getBytes(StandardCharsets.UTF_8), encoding);
                 }
                 
                 CoreLabel token = tokenFactory.makeToken(tokenText, t.getBegin(),
@@ -304,7 +304,7 @@ public class DKPro2CoreNlp
                 wordNode = tFact.newLeaf(aIdxTokens.get(wordAnnotation));
             }
             else {
-                wordNode = tFact.newLeaf(wordAnnotation.getCoveredText());
+                wordNode = tFact.newLeaf(wordAnnotation.getText());
             }
 
             // create information about preceding and trailing whitespaces in the leaf node

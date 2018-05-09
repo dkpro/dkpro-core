@@ -38,65 +38,65 @@ public class ReplacementFileNormalizerTest
     @Test
     public void testReplacementNormalizer() throws Exception
     {
-    	testEmoticonReplacement(":-):-("," lächeln  traurig ");
-    //	testInternetslangReplacement("AKA hdl AKA.", "Also known as Hab' dich lieb Also known as.");
+        testEmoticonReplacement(":-):-(", " lächeln  traurig ");
+        //    testInternetslangReplacement("AKA hdl AKA.", "Also known as Hab' dich lieb Also known as.");
     }
 
     public void testEmoticonReplacement(String input, String output) throws Exception 
     {
-    	AnalysisEngineDescription replace = createEngineDescription(
-    		ReplacementFileNormalizer.class,
-    		ReplacementFileNormalizer.PARAM_MODEL_LOCATION, "src/main/resources/replaceLists/emoticons_de.txt",
-    		ReplacementFileNormalizer.PARAM_TARGET_SURROUNDINGS, TargetSurroundings.WHITESPACE);
+        AnalysisEngineDescription replace = createEngineDescription(
+            ReplacementFileNormalizer.class,
+            ReplacementFileNormalizer.PARAM_MODEL_LOCATION, "src/main/resources/replaceLists/emoticons_de.txt",
+            ReplacementFileNormalizer.PARAM_TARGET_SURROUNDINGS, TargetSurroundings.WHITESPACE);
     
-    	AggregateBuilder ab = new AggregateBuilder();
-    	ab.add(replace);
-    	ab.add(createEngineDescription(ApplyChangesAnnotator.class),
-    	        ApplyChangesAnnotator.VIEW_SOURCE, CAS.NAME_DEFAULT_SOFA, 
-    	        ApplyChangesAnnotator.VIEW_TARGET, "view1");
+        AggregateBuilder ab = new AggregateBuilder();
+        ab.add(replace);
+        ab.add(createEngineDescription(ApplyChangesAnnotator.class),
+                ApplyChangesAnnotator.VIEW_SOURCE, CAS.NAME_DEFAULT_SOFA, 
+                ApplyChangesAnnotator.VIEW_TARGET, "view1");
     
-    	AnalysisEngine engine = ab.createAggregate();
-    	JCas jcas = engine.newJCas();
-    	jcas.setDocumentText(input);	
-    	DocumentMetaData.create(jcas);
-    	engine.process(jcas);
+        AnalysisEngine engine = ab.createAggregate();
+        JCas jcas = engine.newJCas();
+        jcas.setDocumentText(input);    
+        DocumentMetaData.create(jcas);
+        engine.process(jcas);
     
-    	JCas view0 = jcas.getView(CAS.NAME_DEFAULT_SOFA);
-    	JCas view1 = jcas.getView("view1");
+        JCas view0 = jcas.getView(CAS.NAME_DEFAULT_SOFA);
+        JCas view1 = jcas.getView("view1");
     
-    	System.out.println(view0.getDocumentText());
-    	System.out.println(view1.getDocumentText());
+        System.out.println(view0.getDocumentText());
+        System.out.println(view1.getDocumentText());
     
-    	assertEquals(output, view1.getDocumentText());
+        assertEquals(output, view1.getDocumentText());
     }
 
     public void testInternetslangReplacement(String input, String output) throws Exception
     {
-    	AnalysisEngineDescription replace = createEngineDescription(
-    		ReplacementFileNormalizer.class,
-    		ReplacementFileNormalizer.PARAM_MODEL_LOCATION, "src/main/resources/replaceLists/internetslang.txt",
-    		ReplacementFileNormalizer.PARAM_SRC_SURROUNDINGS, SrcSurroundings.ONLY_ALPHANIMERIC);
+        AnalysisEngineDescription replace = createEngineDescription(
+            ReplacementFileNormalizer.class,
+            ReplacementFileNormalizer.PARAM_MODEL_LOCATION, "src/main/resources/replaceLists/internetslang.txt",
+            ReplacementFileNormalizer.PARAM_SRC_SURROUNDINGS, SrcSurroundings.ONLY_ALPHANIMERIC);
     
-    	AggregateBuilder ab = new AggregateBuilder();
-    	ab.add(createEngineDescription(BreakIteratorSegmenter.class), 
-    	        CAS.NAME_DEFAULT_SOFA, CAS.NAME_DEFAULT_SOFA);
-    	ab.add(replace);
-    	ab.add(createEngineDescription(	ApplyChangesAnnotator.class), 
-    		ApplyChangesAnnotator.VIEW_SOURCE, CAS.NAME_DEFAULT_SOFA, 
-    		ApplyChangesAnnotator.VIEW_TARGET, "view1");
+        AggregateBuilder ab = new AggregateBuilder();
+        ab.add(createEngineDescription(BreakIteratorSegmenter.class), 
+                CAS.NAME_DEFAULT_SOFA, CAS.NAME_DEFAULT_SOFA);
+        ab.add(replace);
+        ab.add(createEngineDescription(    ApplyChangesAnnotator.class), 
+            ApplyChangesAnnotator.VIEW_SOURCE, CAS.NAME_DEFAULT_SOFA, 
+            ApplyChangesAnnotator.VIEW_TARGET, "view1");
     
-    	AnalysisEngine engine = ab.createAggregate();
-    	JCas jcas = engine.newJCas();
-    	jcas.setDocumentText(input);	
-    	DocumentMetaData.create(jcas);
-    	engine.process(jcas);
+        AnalysisEngine engine = ab.createAggregate();
+        JCas jcas = engine.newJCas();
+        jcas.setDocumentText(input);    
+        DocumentMetaData.create(jcas);
+        engine.process(jcas);
     
-    	JCas view0 = jcas.getView(CAS.NAME_DEFAULT_SOFA);
-    	JCas view1 = jcas.getView("view1");
+        JCas view0 = jcas.getView(CAS.NAME_DEFAULT_SOFA);
+        JCas view1 = jcas.getView("view1");
     
-    	System.out.println(view0.getDocumentText());
-    	System.out.println(view1.getDocumentText());
+        System.out.println(view0.getDocumentText());
+        System.out.println(view1.getDocumentText());
     
-    	assertEquals(output, view1.getDocumentText());
+        assertEquals(output, view1.getDocumentText());
     }
 }

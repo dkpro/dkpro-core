@@ -42,6 +42,7 @@ import de.tudarmstadt.ukp.dkpro.core.eval.EvalUtil;
 import de.tudarmstadt.ukp.dkpro.core.eval.model.Span;
 import de.tudarmstadt.ukp.dkpro.core.eval.report.Result;
 import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2002Reader;
+import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2002Reader.ColumnSeparators;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import opennlp.tools.ml.maxent.GISTrainer;
 
@@ -63,7 +64,7 @@ public class OpenNlpNamedEntityRecognizerTrainerTest
                 Conll2002Reader.class,
                 Conll2002Reader.PARAM_PATTERNS, split.getTrainingFiles(),
                 Conll2002Reader.PARAM_LANGUAGE, ds.getLanguage(),
-                Conll2002Reader.PARAM_COLUMN_SEPARATOR, Conll2002Reader.ColumnSeparators.TAB.getName(),
+                Conll2002Reader.PARAM_COLUMN_SEPARATOR, ColumnSeparators.TAB.getName(),
                 Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true,
                 Conll2002Reader.PARAM_HAS_HEADER, true,
                 Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true);
@@ -85,7 +86,7 @@ public class OpenNlpNamedEntityRecognizerTrainerTest
                 Conll2002Reader.class,
                 Conll2002Reader.PARAM_PATTERNS, split.getTestFiles(),
                 Conll2002Reader.PARAM_LANGUAGE, "de",
-                Conll2002Reader.PARAM_COLUMN_SEPARATOR, Conll2002Reader.ColumnSeparators.TAB.getName(),
+                Conll2002Reader.PARAM_COLUMN_SEPARATOR, ColumnSeparators.TAB.getName(),
                 Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true,
                 Conll2002Reader.PARAM_HAS_HEADER, true,
                 Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true,
@@ -97,16 +98,14 @@ public class OpenNlpNamedEntityRecognizerTrainerTest
                 OpenNlpNamedEntityRecognizer.PARAM_MODEL_LOCATION, model);
 
         List<Span<String>> actual = EvalUtil.loadSamples(iteratePipeline(testReader, ner),
-                NamedEntity.class, ne -> {
-                    return ne.getValue();
-                });
+                NamedEntity.class, ne -> ne.getValue());
         System.out.printf("Actual samples: %d%n", actual.size());
         
         // Read reference data collect labels
         ConfigurationParameterFactory.setParameter(testReader, 
                 Conll2002Reader.PARAM_READ_NAMED_ENTITY, true);
-        List<Span<String>> expected = EvalUtil.loadSamples(testReader, NamedEntity.class,  
-                ne -> { return ne.getValue(); });
+        List<Span<String>> expected = EvalUtil.loadSamples(testReader, NamedEntity.class, ne -> 
+                ne.getValue());
         System.out.printf("Expected samples: %d%n", expected.size());
 
         Result results = EvalUtil.dumpResults(targetFolder, expected, actual);

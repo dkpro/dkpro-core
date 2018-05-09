@@ -56,31 +56,35 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * POS-tagger using CoGrOO.
  */
-@ResourceMetaData(name="CoGrOO POS-Tagger")
+@Component(OperationType.PART_OF_SPEECH_TAGGER)
+@ResourceMetaData(name = "CoGrOO POS-Tagger")
 @LanguageCapability("pt")
 @TypeCapability(
-	    inputs = {
-	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
+        inputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
 public class CogrooPosTagger
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
-	/**
-	 * Use this language instead of the document language to resolve the model.
-	 */
-	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-	protected String language;
+    /**
+     * Use this language instead of the document language to resolve the model.
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    protected String language;
 
     /**
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
@@ -94,24 +98,24 @@ public class CogrooPosTagger
     @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
     private boolean internTags;
 
-	private CasConfigurableProviderBase<Analyzer> modelProvider;
+    private CasConfigurableProviderBase<Analyzer> modelProvider;
     private MappingProvider mappingProvider;
 
-	@Override
-	public void initialize(UimaContext aContext)
-		throws ResourceInitializationException
-	{
-		super.initialize(aContext);
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
 
-		modelProvider = new ModelProviderBase<Analyzer>() {
-			{
-			    setContextObject(CogrooPosTagger.this);
+        modelProvider = new ModelProviderBase<Analyzer>() {
+            {
+                setContextObject(CogrooPosTagger.this);
 
-				setDefault(LOCATION, NOT_REQUIRED);
-				setOverride(LANGUAGE, language);
-			}
+                setDefault(LOCATION, NOT_REQUIRED);
+                setOverride(LANGUAGE, language);
+            }
 
-			@Override
+            @Override
             protected Analyzer produceResource(URL aUrl)
                 throws IOException
             {
@@ -127,16 +131,16 @@ public class CogrooPosTagger
                 ComponentFactory factory = ComponentFactory.create(new Locale("pt", "BR"));
                 return factory.createPOSTagger();
             }
-		};
+        };
 
         mappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
                 "bosque", language);
-	}
+    }
 
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
+    @Override
+    public void process(JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
         CAS cas = aJCas.getCas();
         modelProvider.configure(cas);
         mappingProvider.configure(cas);
@@ -155,12 +159,13 @@ public class CogrooPosTagger
             doc.setText(aJCas.getDocumentText());
 
             // Extract the sentence and its tokens
-            org.cogroo.text.Sentence cSent = new SentenceImpl(sentence.getBegin(), sentence.getEnd(), doc);
+            org.cogroo.text.Sentence cSent = new SentenceImpl(sentence.getBegin(),
+                    sentence.getEnd(), doc);
             List<org.cogroo.text.Token> cTokens = new ArrayList<org.cogroo.text.Token>();
             List<Token> dTokens = selectCovered(Token.class, sentence);
             for (Token dTok : dTokens) {
                 TokenImpl cTok = new TokenImpl(dTok.getBegin() - sentence.getBegin(),
-                        dTok.getEnd() - sentence.getBegin(), dTok.getCoveredText());
+                        dTok.getEnd() - sentence.getBegin(), dTok.getText());
                 cTokens.add(cTok);
             }
             cSent.setTokens(cTokens);
@@ -189,5 +194,5 @@ public class CogrooPosTagger
                 dTok.setPos(posAnno);
             }
         }
-	}
+    }
 }

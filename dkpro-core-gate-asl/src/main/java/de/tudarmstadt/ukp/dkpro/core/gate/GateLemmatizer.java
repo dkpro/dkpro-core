@@ -38,6 +38,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 import gate.creole.ResourceInstantiationException;
 import gate.creole.morph.Interpret;
 
@@ -48,14 +50,15 @@ import gate.creole.morph.Interpret;
  *
  * @since 1.4.0
  */
-@ResourceMetaData(name="GATE Lemmatizer")
+@Component(OperationType.LEMMATIZER)
+@ResourceMetaData(name = "GATE Lemmatizer")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
         outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
 public class GateLemmatizer
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
     /**
      * Use this language instead of the document language to resolve the model.
@@ -72,26 +75,35 @@ public class GateLemmatizer
     protected String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Load the model from this location instead of locating the model automatically.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
     protected String modelLocation;
 
-	// constants
-	public static final String GATE_LEMMATIZER_VERB_CATEGORY_STRING = "VB";
-	public static final String GATE_LEMMATIZER_NOUN_CATEGORY_STRING = "NN";
-	public static final String GATE_LEMMATIZER_ALL_CATEGORIES_STRING = "*";
+    // constants
+    public static final String GATE_LEMMATIZER_VERB_CATEGORY_STRING = "VB";
+    public static final String GATE_LEMMATIZER_NOUN_CATEGORY_STRING = "NN";
+    public static final String GATE_LEMMATIZER_ALL_CATEGORIES_STRING = "*";
 
     private CasConfigurableProviderBase<Interpret> modelProvider;
 
-	@Override
-	public void initialize(UimaContext context)
-		throws ResourceInitializationException
-	{
-		super.initialize(context);
+    @Override
+    public void initialize(UimaContext context)
+        throws ResourceInitializationException
+    {
+        super.initialize(context);
 
-		modelProvider = new CasConfigurableProviderBase<Interpret>() {
+        modelProvider = new CasConfigurableProviderBase<Interpret>() {
             {
                 setContextObject(GateLemmatizer.this);
 
@@ -117,53 +129,53 @@ public class GateLemmatizer
                 }
             }
         };
-	}
+    }
 
-	@Override
-	public void process(JCas jcas)
-		throws AnalysisEngineProcessException
-	{
-	    modelProvider.configure(jcas.getCas());
+    @Override
+    public void process(JCas jcas)
+        throws AnalysisEngineProcessException
+    {
+        modelProvider.configure(jcas.getCas());
 
-		String category = null;
-		for (Token token : JCasUtil.select(jcas, Token.class)) {
-			POS pos = token.getPos();
+        String category = null;
+        for (Token token : JCasUtil.select(jcas, Token.class)) {
+            POS pos = token.getPos();
 
-			if (pos != null) {
-				if (pos.getClass().equals(POS_VERB.class)) {
-					category = GATE_LEMMATIZER_VERB_CATEGORY_STRING;
-				}
-				else if (pos.getClass().equals(POS_NOUN.class)) {
-					category = GATE_LEMMATIZER_NOUN_CATEGORY_STRING;
-				}
-				else if (pos.getClass().equals(POS_PRON.class)) {
-					category = GATE_LEMMATIZER_NOUN_CATEGORY_STRING;
-				}
-				else {
-					category = GATE_LEMMATIZER_ALL_CATEGORIES_STRING;
-				}
-			}
-			else {
-				category = GATE_LEMMATIZER_ALL_CATEGORIES_STRING;
-			}
+            if (pos != null) {
+                if (pos.getClass().equals(POS_VERB.class)) {
+                    category = GATE_LEMMATIZER_VERB_CATEGORY_STRING;
+                }
+                else if (pos.getClass().equals(POS_NOUN.class)) {
+                    category = GATE_LEMMATIZER_NOUN_CATEGORY_STRING;
+                }
+                else if (pos.getClass().equals(POS_PRON.class)) {
+                    category = GATE_LEMMATIZER_NOUN_CATEGORY_STRING;
+                }
+                else {
+                    category = GATE_LEMMATIZER_ALL_CATEGORIES_STRING;
+                }
+            }
+            else {
+                category = GATE_LEMMATIZER_ALL_CATEGORIES_STRING;
+            }
 
-			String tokenString = token.getCoveredText();
-			String lemmaString = modelProvider.getResource().runMorpher(tokenString, category);
+            String tokenString = token.getText();
+            String lemmaString = modelProvider.getResource().runMorpher(tokenString, category);
             if (lemmaString == null) {
                 lemmaString = tokenString;
             }
 
-			Lemma lemma = new Lemma(jcas, token.getBegin(), token.getEnd());
-			lemma.setValue(lemmaString);
-			lemma.addToIndexes();
+            Lemma lemma = new Lemma(jcas, token.getBegin(), token.getEnd());
+            lemma.setValue(lemmaString);
+            lemma.addToIndexes();
 
-			// remove (a potentially existing) old lemma before adding a new one
-			if (token.getLemma() != null) {
-				Lemma oldLemma = token.getLemma();
-				oldLemma.removeFromIndexes();
-			}
+            // remove (a potentially existing) old lemma before adding a new one
+            if (token.getLemma() != null) {
+                Lemma oldLemma = token.getLemma();
+                oldLemma.removeFromIndexes();
+            }
 
-			token.setLemma(lemma);
-		}
-	}
+            token.setLemma(lemma);
+        }
+    }
 }

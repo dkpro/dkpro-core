@@ -45,6 +45,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NGram;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Takes a plain text file with phrases as input and annotates the phrases in the CAS file. The
@@ -59,123 +61,124 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * another phrase
  * </pre>
  */
-@ResourceMetaData(name="Dictionary Annotator")
+@Component(OperationType.GAZETEER_BASED_MATCHER)
+@ResourceMetaData(name = "Dictionary Annotator")
 @TypeCapability(
-	    inputs = {
-	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
+        inputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
 public class DictionaryAnnotator
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
-	/**
-	 * The file must contain one phrase per line - phrases will be split at " "
-	 */
-	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
-	private String phraseFile;
+    /**
+     * The file must contain one phrase per line - phrases will be split at " "
+     */
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
+    private String phraseFile;
 
-	/**
-	 * The character encoding used by the model.
-	 */
-	public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
-	@ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue="UTF-8")
-	private String modelEncoding;
+    /**
+     * The character encoding used by the model.
+     */
+    public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
+    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue = "UTF-8")
+    private String modelEncoding;
 
-	/**
-	 * The annotation to create on matching phases. If nothing is specified, this defaults to
-	 * {@link NGram}.
-	 */
-	public static final String PARAM_ANNOTATION_TYPE = "annotationType";
-	@ConfigurationParameter(name = PARAM_ANNOTATION_TYPE, mandatory = false)
-	private String annotationType;
+    /**
+     * The annotation to create on matching phases. If nothing is specified, this defaults to
+     * {@link NGram}.
+     */
+    public static final String PARAM_ANNOTATION_TYPE = "annotationType";
+    @ConfigurationParameter(name = PARAM_ANNOTATION_TYPE, mandatory = false)
+    private String annotationType;
 
-	/**
-	 * Set this feature on the created annotations.
-	 */
-	public static final String PARAM_VALUE_FEATURE = "valueFeature";
-	@ConfigurationParameter(name = PARAM_VALUE_FEATURE, mandatory = false, defaultValue = "value")
-	private String valueFeature;
+    /**
+     * Set this feature on the created annotations.
+     */
+    public static final String PARAM_VALUE_FEATURE = "valueFeature";
+    @ConfigurationParameter(name = PARAM_VALUE_FEATURE, mandatory = false, defaultValue = "value")
+    private String valueFeature;
 
-	/**
-	 * The value to set the feature configured in {@link #PARAM_VALUE_FEATURE} to.
-	 */
-	public static final String PARAM_VALUE = "value";
-	@ConfigurationParameter(name = PARAM_VALUE, mandatory = false)
-	private String value;
+    /**
+     * The value to set the feature configured in {@link #PARAM_VALUE_FEATURE} to.
+     */
+    public static final String PARAM_VALUE = "value";
+    @ConfigurationParameter(name = PARAM_VALUE, mandatory = false)
+    private String value;
 
-	private PhraseTree phrases;
+    private PhraseTree phrases;
 
-	@Override
-	public void initialize(UimaContext aContext)
-		throws ResourceInitializationException
-	{
-		super.initialize(aContext);
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
 
-		if (annotationType == null) {
-			annotationType = NGram.class.getName();
-		}
+        if (annotationType == null) {
+            annotationType = NGram.class.getName();
+        }
 
-		phrases = new PhraseTree();
+        phrases = new PhraseTree();
 
-		InputStream is = null;
-		try {
-			URL phraseFileUrl = ResourceUtils.resolveLocation(phraseFile, aContext);
-			is = phraseFileUrl.openStream();
-			for (String inputLine : IOUtils.readLines(is, modelEncoding)) {
-				String[] phraseSplit = inputLine.split(" ");
-				phrases.addPhrase(phraseSplit);
-			}
-		}
-		catch (IOException e) {
-			throw new ResourceInitializationException(e);
-		}
-		finally {
-			IOUtils.closeQuietly(is);
-		}
-	}
+        InputStream is = null;
+        try {
+            URL phraseFileUrl = ResourceUtils.resolveLocation(phraseFile, aContext);
+            is = phraseFileUrl.openStream();
+            for (String inputLine : IOUtils.readLines(is, modelEncoding)) {
+                String[] phraseSplit = inputLine.split(" ");
+                phrases.addPhrase(phraseSplit);
+            }
+        }
+        catch (IOException e) {
+            throw new ResourceInitializationException(e);
+        }
+        finally {
+            IOUtils.closeQuietly(is);
+        }
+    }
 
-	@Override
-	public void process(JCas jcas)
-		throws AnalysisEngineProcessException
-	{
-		Type type = getType(jcas.getCas(), annotationType);
+    @Override
+    public void process(JCas jcas)
+        throws AnalysisEngineProcessException
+    {
+        Type type = getType(jcas.getCas(), annotationType);
 
-		Feature f = null;
-		if ((valueFeature != null) && (value != null)) {
-			f = type.getFeatureByBaseName(valueFeature);
-			if (f == null) {
-				throw new IllegalArgumentException("Undeclared feature [" + valueFeature
-						+ "] in type [" + annotationType + "]");
-			}
-		}
+        Feature f = null;
+        if ((valueFeature != null) && (value != null)) {
+            f = type.getFeatureByBaseName(valueFeature);
+            if (f == null) {
+                throw new IllegalArgumentException("Undeclared feature [" + valueFeature
+                        + "] in type [" + annotationType + "]");
+            }
+        }
 
-		for (Sentence currSentence : select(jcas, Sentence.class)) {
-			ArrayList<Token> tokens = new ArrayList<Token>(selectCovered(Token.class, currSentence));
+        for (Sentence currSentence : select(jcas, Sentence.class)) {
+            List<Token> tokens = new ArrayList<>(selectCovered(Token.class, currSentence));
 
-			for (int i = 0; i < tokens.size(); i++) {
-				List<Token> tokensToSentenceEnd = tokens.subList(i, tokens.size() - 1);
-				String[] sentenceToEnd = new String[tokens.size()];
+            for (int i = 0; i < tokens.size(); i++) {
+                List<Token> tokensToSentenceEnd = tokens.subList(i, tokens.size() - 1);
+                String[] sentenceToEnd = new String[tokens.size()];
 
-				for (int j = 0; j < tokensToSentenceEnd.size(); j++) {
-					sentenceToEnd[j] = tokensToSentenceEnd.get(j).getCoveredText();
-				}
+                for (int j = 0; j < tokensToSentenceEnd.size(); j++) {
+                    sentenceToEnd[j] = tokensToSentenceEnd.get(j).getText();
+                }
 
-				String[] longestMatch = phrases.getLongestMatch(sentenceToEnd);
+                String[] longestMatch = phrases.getLongestMatch(sentenceToEnd);
 
-				if (longestMatch != null) {
-					Token beginToken = tokens.get(i);
-					Token endToken = tokens.get(i + longestMatch.length - 1);
+                if (longestMatch != null) {
+                    Token beginToken = tokens.get(i);
+                    Token endToken = tokens.get(i + longestMatch.length - 1);
 
-					AnnotationFS newFound = jcas.getCas().createAnnotation(type,
-							beginToken.getBegin(), endToken.getEnd());
+                    AnnotationFS newFound = jcas.getCas().createAnnotation(type,
+                            beginToken.getBegin(), endToken.getEnd());
 
-					if (f != null) {
-						newFound.setFeatureValueFromString(f, value);
-					}
+                    if (f != null) {
+                        newFound.setFeatureValueFromString(f, value);
+                    }
 
-					jcas.getCas().addFsToIndexes(newFound);
-				}
-			}
-		}
-	}
+                    jcas.getCas().addFsToIndexes(newFound);
+                }
+            }
+        }
+    }
 }

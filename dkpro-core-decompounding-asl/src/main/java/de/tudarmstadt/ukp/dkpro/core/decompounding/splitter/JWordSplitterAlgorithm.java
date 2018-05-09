@@ -32,101 +32,102 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.trie.ValueNode;
  *
  */
 public class JWordSplitterAlgorithm
-	implements SplitterAlgorithm
+    implements SplitterAlgorithm
 {
-	private AbstractWordSplitter splitterHiddenLinking;
-	private AbstractWordSplitter splitter;
-	private Dictionary dict;
+    private AbstractWordSplitter splitterHiddenLinking;
+    private AbstractWordSplitter splitter;
+    private Dictionary dict;
 
-	@Override
-	public DecompoundingTree split(String aWord)
-	{
-		if (splitter == null) {
-			try {
-				splitterHiddenLinking = new InternalGermanWordSplitter(true);
-				splitter = new InternalGermanWordSplitter(false);
-			}
-			catch (IOException e) {
-				throw new IllegalStateException("Unable to access dictionary", e);
-			}
-		}
+    @Override
+    public DecompoundingTree split(String aWord)
+    {
+        if (splitter == null) {
+            try {
+                splitterHiddenLinking = new InternalGermanWordSplitter(true);
+                splitter = new InternalGermanWordSplitter(false);
+            }
+            catch (IOException e) {
+                throw new IllegalStateException("Unable to access dictionary", e);
+            }
+        }
 
-		DecompoundingTree t = new DecompoundingTree(aWord);
+        DecompoundingTree t = new DecompoundingTree(aWord);
 
-		// Just append on child to the tree
-		String[] splits = splitter.splitWord(aWord).toArray(new String[0]);
-		String[] splitsNoLink = splitterHiddenLinking.splitWord(aWord).toArray(new String[0]);
+        // Just append on child to the tree
+        String[] splits = splitter.splitWord(aWord).toArray(new String[0]);
+        String[] splitsNoLink = splitterHiddenLinking.splitWord(aWord).toArray(new String[0]);
 
-		if (splits.length != splitsNoLink.length) {
-			throw new IllegalStateException(
-					"Something is fishy - more must have happened than just hiding the links");
-		}
+        if (splits.length != splitsNoLink.length) {
+            throw new IllegalStateException(
+                    "Something is fishy - more must have happened than just hiding the links");
+        }
 
-		if (splits.length > 1) {
-			StringBuilder splitStringMorph = new StringBuilder();
-			for (int i = 0; i < splits.length; i++) {
-				String base = splitsNoLink[i];
-				String full = splits[i];
+        if (splits.length > 1) {
+            StringBuilder splitStringMorph = new StringBuilder();
+            for (int i = 0; i < splits.length; i++) {
+                String base = splitsNoLink[i];
+                String full = splits[i];
 
-				if (!full.startsWith(base)) {
-					throw new IllegalStateException(
-							"Something is fishy - links should be at the end");
-				}
-				String link = full.substring(base.length());
+                if (!full.startsWith(base)) {
+                    throw new IllegalStateException(
+                            "Something is fishy - links should be at the end");
+                }
+                String link = full.substring(base.length());
 
-				// Split with linking morphemes
-				splitStringMorph.append(base);
-				if (link.length() > 0) {
-					splitStringMorph.append("(").append(link).append(")");
-				}
-				splitStringMorph.append("+");
-			}
+                // Split with linking morphemes
+                splitStringMorph.append(base);
+                if (link.length() > 0) {
+                    splitStringMorph.append("(").append(link).append(")");
+                }
+                splitStringMorph.append("+");
+            }
 
-			String splitStringMorphStr = splitStringMorph.toString();
-			t.getRoot().addChild(new ValueNode<DecompoundedWord>(DecompoundedWord.createFromString(splitStringMorphStr)));
-		}
+            String splitStringMorphStr = splitStringMorph.toString();
+            t.getRoot().addChild(new ValueNode<DecompoundedWord>(
+                    DecompoundedWord.createFromString(splitStringMorphStr)));
+        }
 
-		return t;
-	}
+        return t;
+    }
 
-	@Override
-	public void setDictionary(Dictionary aDict)
-	{
-		dict = aDict;
-		splitter = null;
-		splitterHiddenLinking = null;
-	}
+    @Override
+    public void setDictionary(Dictionary aDict)
+    {
+        dict = aDict;
+        splitter = null;
+        splitterHiddenLinking = null;
+    }
 
-	@Override
-	public void setLinkingMorphemes(LinkingMorphemes aMorphemes)
-	{
-		// Not needed for this algorithm
-	}
+    @Override
+    public void setLinkingMorphemes(LinkingMorphemes aMorphemes)
+    {
+        // Not needed for this algorithm
+    }
 
-	@Override
-	public void setMaximalTreeDepth(int aDepth)
-	{
-		// Not needed for this algorithm
-	}
+    @Override
+    public void setMaximalTreeDepth(int aDepth)
+    {
+        // Not needed for this algorithm
+    }
 
-	private class InternalGermanWordSplitter extends GermanWordSplitter
-	{
-		public InternalGermanWordSplitter(boolean aHideConnectingCharacters)
-			throws IOException
-		{
-			super(aHideConnectingCharacters);
-		}
+    private class InternalGermanWordSplitter extends GermanWordSplitter
+    {
+        public InternalGermanWordSplitter(boolean aHideConnectingCharacters)
+            throws IOException
+        {
+            super(aHideConnectingCharacters);
+        }
 
-		@Override
-		protected Set<String> getWordList()
-			throws IOException
-		{
-			if (dict == null) {
-				return super.getWordList();
-			}
-			else {
-				return new HashSet<String>(dict.getAll());
-			}
-		}
-	}
+        @Override
+        protected Set<String> getWordList()
+            throws IOException
+        {
+            if (dict == null) {
+                return super.getWordList();
+            }
+            else {
+                return new HashSet<String>(dict.getAll());
+            }
+        }
+    }
 }

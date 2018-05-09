@@ -50,6 +50,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Dependency parser using UDPipe. UDPipe uses Parsito, a greedy transition-based parser
@@ -57,7 +59,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * 
  * @see <a href="https://github.com/ufal/udpipe/tree/master/src/parsito">Parsito in UDPipe</a>
  */
-@ResourceMetaData(name="UDPipe Parsito Dependency Parser")
+@Component(OperationType.DEPENDENCY_PARSER)
+@ResourceMetaData(name = "UDPipe Parsito Dependency Parser")
 @TypeCapability(
         inputs = { 
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -85,6 +88,15 @@ public class UDPipeParser
     protected String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Load the model from this location instead of locating the model automatically.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -95,7 +107,8 @@ public class UDPipeParser
      * Load the dependency to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = ComponentParameters.PARAM_DEPENDENCY_MAPPING_LOCATION;
+    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_DEPENDENCY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_DEPENDENCY_MAPPING_LOCATION, mandatory = false)
     protected String dependencyMappingLocation;
 

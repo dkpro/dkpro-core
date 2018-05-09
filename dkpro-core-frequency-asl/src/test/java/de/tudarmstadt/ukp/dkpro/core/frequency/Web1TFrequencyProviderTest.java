@@ -30,11 +30,8 @@ public class Web1TFrequencyProviderTest
     @Test
     public void web1tTest_indexFiles() throws Exception
     {
-        Web1TProviderBase web1t = new Web1TFileAccessProvider(
-        		"en",
-                "src/test/resources/web1t/index-1gms",
-                "src/test/resources/web1t/index-2gms"
-        );
+        Web1TProviderBase web1t = new Web1TFileAccessProvider("en",
+                "src/test/resources/web1t/index-1gms", "src/test/resources/web1t/index-2gms");
 
         test(web1t);
     }
@@ -42,12 +39,8 @@ public class Web1TFrequencyProviderTest
     @Test
     public void web1tTest_path() throws Exception
     {
-        Web1TProviderBase web1t = new Web1TFileAccessProvider(
-        		"en",
-                new File("src/test/resources/web1t/"),
-                1,
-                2
-        );
+        Web1TProviderBase web1t = new Web1TFileAccessProvider("en",
+                new File("src/test/resources/web1t/"), 1, 2);
 
         test(web1t);
     }
@@ -55,14 +48,10 @@ public class Web1TFrequencyProviderTest
     @Test
     public void web1tNgramIteratorTest() throws Exception
     {
-        Web1TProviderBase web1t = new Web1TFileAccessProvider(
-        		"en",
-                new File("src/test/resources/web1t/"),
-                1,
-                2
-        );
+        Web1TProviderBase web1t = new Web1TFileAccessProvider("en",
+                new File("src/test/resources/web1t/"), 1, 2);
 
-        int i=0;
+        int i = 0;
         Iterator<String> ngramIterator = web1t.getNgramIterator(1);
         while (ngramIterator.hasNext()) {
             ngramIterator.next();

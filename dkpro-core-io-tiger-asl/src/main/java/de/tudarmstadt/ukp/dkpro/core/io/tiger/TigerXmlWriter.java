@@ -27,8 +27,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javanet.staxutils.IndentingXMLEventWriter;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Marshaller;
@@ -59,11 +57,12 @@ import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerNode;
 import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerNonTerminal;
 import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerSentence;
 import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerTerminal;
+import javanet.staxutils.IndentingXMLEventWriter;
 
 /**
  * UIMA CAS consumer writing the CAS document text in the TIGER-XML format.
  */
-@ResourceMetaData(name="TIGER-XML Writer")
+@ResourceMetaData(name = "TIGER-XML Writer")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_TIGER_XML})
 @TypeCapability(
         inputs = {
@@ -79,9 +78,18 @@ public class TigerXmlWriter extends JCasFileWriter_ImplBase
      * Specify the suffix of output files. Default value <code>.xml</code>. If the suffix is not
      * needed, provide an empty string as value.
      */
-    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xml")
     private String filenameSuffix;
+
+    /**
+     * Character encoding of the output data.
+     */
+    public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    private String targetEncoding;
 
     @Override
     public void process(JCas aJCas)
@@ -94,7 +102,7 @@ public class TigerXmlWriter extends JCasFileWriter_ImplBase
 
             XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
             xmlEventWriter = new IndentingXMLEventWriter(
-                    xmlOutputFactory.createXMLEventWriter(docOS));
+                    xmlOutputFactory.createXMLEventWriter(docOS, targetEncoding));
             
             JAXBContext context = JAXBContext.newInstance(TigerSentence.class);
             Marshaller marshaller = context.createMarshaller();

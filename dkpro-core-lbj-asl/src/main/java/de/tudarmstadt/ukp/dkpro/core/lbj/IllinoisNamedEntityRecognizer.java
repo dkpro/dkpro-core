@@ -43,11 +43,14 @@ import edu.illinois.cs.cogcomp.core.datastructures.ViewNames;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.TextAnnotation;
 import edu.illinois.cs.cogcomp.core.utilities.configuration.ResourceManager;
 import edu.illinois.cs.cogcomp.ner.NERAnnotator;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Wrapper for the Illinois named entity recognizer from the Cognitive Computation Group (CCG).
  */
-@ResourceMetaData(name="Illinois CCG Named Entity Recognizer")
+@Component(OperationType.NAMED_ENTITITY_RECOGNIZER)
+@ResourceMetaData(name = "Illinois CCG Named Entity Recognizer")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
@@ -98,7 +101,8 @@ public class IllinoisNamedEntityRecognizer
 //    /**
 //     * Location of the mapping file for named entity tags to UIMA types.
 //     */
-//    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
+//    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = 
+//        ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
 //    @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
     protected String mappingLocation;
 

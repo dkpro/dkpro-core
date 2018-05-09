@@ -28,55 +28,56 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * This class creates paragraph annotations for the given input document. It searches for the
  * occurrence of two or more line-breaks (Unix and Windows) and regards this as the boundary between
  * paragraphs.
  */
-@ResourceMetaData(name="Paragraph Splitter")
+@Component(OperationType.SEGMENTER)
+@ResourceMetaData(name = "Paragraph Splitter")
 @TypeCapability(
-        outputs={
+        outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph"})
-
 public class ParagraphSplitter
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
-	public static final String SINGLE_LINE_BREAKS_PATTERN = "((\r\n)+(\r\n)*)|((\n)+(\n)*)";
-	public static final String DOUBLE_LINE_BREAKS_PATTERN = "((\r\n\r\n)+(\r\n)*)|((\n\n)+(\n)*)";
+    public static final String SINGLE_LINE_BREAKS_PATTERN = "((\r\n)+(\r\n)*)|((\n)+(\n)*)";
+    public static final String DOUBLE_LINE_BREAKS_PATTERN = "((\r\n\r\n)+(\r\n)*)|((\n\n)+(\n)*)";
 
-	/**
-	 * A regular expression used to detect paragraph splits.
-	 *
-	 * Default: {@link #DOUBLE_LINE_BREAKS_PATTERN} (split on two consecutive line breaks)
-	 */
-	public static final String PARAM_SPLIT_PATTERN = "splitPattern";
-	@ConfigurationParameter(name = PARAM_SPLIT_PATTERN, defaultValue = DOUBLE_LINE_BREAKS_PATTERN)
-	private Pattern splitPattern;
+    /**
+     * A regular expression used to detect paragraph splits.
+     *
+     * Default: {@link #DOUBLE_LINE_BREAKS_PATTERN} (split on two consecutive line breaks)
+     */
+    public static final String PARAM_SPLIT_PATTERN = "splitPattern";
+    @ConfigurationParameter(name = PARAM_SPLIT_PATTERN, defaultValue = DOUBLE_LINE_BREAKS_PATTERN)
+    private Pattern splitPattern;
 
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
-		String input = aJCas.getDocumentText();
+    @Override
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
+    {
+        String input = aJCas.getDocumentText();
 
-		if (input.length() < 1) {
-			throw new AnalysisEngineProcessException(new Throwable("Document text is empty."));
-		}
+        if (input.length() < 1) {
+            throw new AnalysisEngineProcessException(new Throwable("Document text is empty."));
+        }
 
-		Pattern ParagraphPattern = splitPattern;
-		Matcher matcher = ParagraphPattern.matcher(input);
-		int pos = 0;
-		int nextBeginning = 0;
-		while (matcher.find(pos)) {
-			Paragraph paragraph = new Paragraph(aJCas, nextBeginning, matcher.start());
-			paragraph.addToIndexes();
-			nextBeginning = matcher.end();
-			pos = matcher.end();
-		}
-		if (pos < input.length()) {
-			Paragraph paragraph = new Paragraph(aJCas, nextBeginning, input.length());
-			paragraph.addToIndexes();
-		}
-	}
+        Pattern ParagraphPattern = splitPattern;
+        Matcher matcher = ParagraphPattern.matcher(input);
+        int pos = 0;
+        int nextBeginning = 0;
+        while (matcher.find(pos)) {
+            Paragraph paragraph = new Paragraph(aJCas, nextBeginning, matcher.start());
+            paragraph.addToIndexes();
+            nextBeginning = matcher.end();
+            pos = matcher.end();
+        }
+        if (pos < input.length()) {
+            Paragraph paragraph = new Paragraph(aJCas, nextBeginning, input.length());
+            paragraph.addToIndexes();
+        }
+    }
 }

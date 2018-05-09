@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2017
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,18 +14,20 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.arktools;
 
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertPOS;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertToken;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.*;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
@@ -52,8 +54,8 @@ public class ArktweetTaggerTest
                 "Spending the day withhh mommma !",
                 new String[] { "Spending", "the", "day", "withhh", "mommma", "!" },
                 new String[] { "V", "D", "N", "P", "N", "," },
-                new String[] { "POS_VERB", "POS_DET", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_PUNCT" }
-        );
+                new String[] { "POS_VERB", "POS_DET", "POS_NOUN", "POS_ADP", "POS_NOUN",
+                        "POS_PUNCT" });
 
         runTest("en", "default",
                 "lmao ... s/o to the cool ass asian officer 4 #1 not runnin my license and #2 not takin dru boo to jail . Thank u God . #amen",
@@ -65,24 +67,23 @@ public class ArktweetTaggerTest
                 new String[] { "POS_INT", "POS_PUNCT", "POS_VERB", "POS_ADP", "POS_DET", "POS_ADJ", "POS_NOUN", "POS_ADJ", "POS_NOUN",
                         "POS_ADP", "POS_NUM", "POS_ADV", "POS_VERB", "POS_DET", "POS_NOUN", "POS_CONJ", "POS_NUM", "POS_ADV", "POS_VERB",
                         "POS_NOUN", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_PUNCT", "POS_VERB", "POS_PRON", "POS_PROPN", "POS_PUNCT",
-                        "POS_HASH" }
-        );
+                        "POS_HASH" });
 
         runTest("en", "default",
                 "Different smiley styles :) :-) (^_^) ^o #smiley",
                 new String[] { "Different", "smiley", "styles", ":)", ":-)", "(^_^)", "^o",
                         "#smiley" },
                 new String[] { "A", "A", "N", "E", "E", "E", "E", "#" },
-                new String[] { "POS_ADJ", "POS_ADJ", "POS_NOUN", "POS_EMO", "POS_EMO", "POS_EMO", "POS_EMO", "POS_HASH" }
-        );
+                new String[] { "POS_ADJ", "POS_ADJ", "POS_NOUN", "POS_EMO", "POS_EMO", "POS_EMO",
+                        "POS_EMO", "POS_HASH" });
         
         runTest("en", "irc",
                 "Different smiley styles :) :-) (^_^) ^o #smiley",
                 new String[] { "Different", "smiley", "styles", ":)", ":-)", "(^_^)", "^o",
                         "#smiley" },
                 new String[] { "JJ", "JJ", "NNS", "UH", "UH", "UH", "UH", "UH" },
-                new String[] { "POS_ADJ", "POS_ADJ", "POS_NOUN", "POS_INTJ", "POS_INTJ", "POS_INTJ", "POS_INTJ", "POS_INTJ" }
-        );  
+                new String[] { "POS_ADJ", "POS_ADJ", "POS_NOUN", "POS_INTJ", "POS_INTJ", "POS_INTJ",
+                        "POS_INTJ", "POS_INTJ" });  
         
         runTest("en", "irc",
                 "@Gunservatively obozo will go nuts when PA elects a Republican Governor next Tue. Can you say redistricting?",
@@ -101,9 +102,9 @@ public class ArktweetTaggerTest
                 new String[] { "Different", "smiley", "styles", ":)", ":-)", "(^_^)", "^o",
                         "#smiley" },
                 new String[] { "JJ", "JJ", "NNS", "UH", "UH", "UH", "UH", "HT" },
-                new String[] { "POS_ADJ", "POS_ADJ", "POS_NOUN", "POS_INTJ", "POS_INTJ", "POS_INTJ", "POS_INTJ", "POS" }
-        );      
-    	
+                new String[] { "POS_ADJ", "POS_ADJ", "POS_NOUN", "POS_INTJ", "POS_INTJ", "POS_INTJ",
+                        "POS_INTJ", "POS" });
+
         runTest("en", "ritter",
                 "@Gunservatively obozo will go nuts when PA elects a Republican Governor next Tue. Can you say redistricting?",
                 new String[] { "@Gunservatively", "obozo", "will", "go", "nuts", "when", "PA",
@@ -114,7 +115,7 @@ public class ArktweetTaggerTest
                 new String[] { "POS", "POS_PROPN", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_ADV", "POS_PROPN", "POS_VERB", "POS_DET",
                         "POS_PROPN", "POS_PROPN", "POS_ADJ", "POS_PROPN", "POS_PUNCT", "POS_VERB", "POS_PRON", "POS_VERB", "POS_NOUN",
                         "POS_PUNCT" }
-        );     	
+        );
     }
 
 //    // Test for issue 335
@@ -127,10 +128,10 @@ public class ArktweetTaggerTest
 //                new String[] { "NN",             "NN" }
 //        );
 //    }
-    
-    private JCas runTest(String language, String variant, String testDocument, String[] tokens, String[] tags,
-            String[] tagClasses)
-                throws Exception
+
+    private JCas runTest(String language, String variant, String testDocument, String[] tokens,
+            String[] tags, String[] tagClasses)
+        throws Exception
     {
         AnalysisEngine tokenizer = createEngine(
                 ArktweetTokenizer.class

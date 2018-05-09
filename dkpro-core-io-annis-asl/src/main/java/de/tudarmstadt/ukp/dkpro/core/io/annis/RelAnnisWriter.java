@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
@@ -57,7 +57,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * can be fed into Annis2 (http://www.sfb632.uni-potsdam.de/d1/annis/) to visualize the data. e.g.
  * constituent and dependency structure.
  */
-@ResourceMetaData(name="RelANNIS Writer")
+@ResourceMetaData(name = "RelANNIS Writer")
 @TypeCapability(
         inputs = { 
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
@@ -99,7 +99,8 @@ public class RelAnnisWriter
      *
      * Default: {@code true}
      */
-    public static final String PARAM_WRITE_CONSTITUENT = ComponentParameters.PARAM_WRITE_CONSTITUENT;
+    public static final String PARAM_WRITE_CONSTITUENT = 
+            ComponentParameters.PARAM_WRITE_CONSTITUENT;
     @ConfigurationParameter(name = PARAM_WRITE_CONSTITUENT, mandatory = true, defaultValue = "true")
     private boolean writeConstituents;
 

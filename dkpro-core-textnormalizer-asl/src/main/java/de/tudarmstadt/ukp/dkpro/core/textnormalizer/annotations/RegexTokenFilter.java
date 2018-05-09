@@ -33,11 +33,14 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Remove every token that does or does not match a given regular expression.
  */
-@ResourceMetaData(name="Regex Token Filter")
+@Component(OperationType.NORMALIZER)
+@ResourceMetaData(name = "Regex Token Filter")
 public class RegexTokenFilter
     extends JCasAnnotator_ImplBase
 {

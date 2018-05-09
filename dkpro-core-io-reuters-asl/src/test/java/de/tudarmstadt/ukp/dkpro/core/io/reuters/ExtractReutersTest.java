@@ -17,14 +17,19 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.reuters;
 
-import org.junit.Assert;
-import org.junit.Test;
-
-import java.io.File;
-import java.util.*;
-
 import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 public class ExtractReutersTest
 {

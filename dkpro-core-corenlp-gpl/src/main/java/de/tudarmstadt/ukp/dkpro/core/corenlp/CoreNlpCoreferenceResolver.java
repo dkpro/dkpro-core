@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2017
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.corenlp;
 
@@ -36,17 +36,20 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.CoreNlp2DKPro;
+import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 import edu.stanford.nlp.dcoref.Constants;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.DeterministicCorefAnnotator;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Deterministic coreference annotator from CoreNLP.
  */
-@ResourceMetaData(name="CoreNLP Coreference Resolver")
+@Component(OperationType.CO_REFERENCE_ANNOTATOR)
+@ResourceMetaData(name = "CoreNLP Coreference Resolver")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
@@ -65,7 +68,8 @@ public class CoreNlpCoreferenceResolver
      * DCoRef parameter: Sieve passes - each class is defined in dcoref/sievepasses/.
      */
     public static final String PARAM_SIEVES = "sieves";
-    @ConfigurationParameter(name = PARAM_SIEVES, defaultValue = Constants.SIEVEPASSES, mandatory = true)
+    @ConfigurationParameter(name = PARAM_SIEVES, defaultValue = Constants.SIEVEPASSES, 
+            mandatory = true)
     private String sieves;
 
     /**
@@ -172,12 +176,12 @@ public class CoreNlpCoreferenceResolver
         @Override
         protected DeterministicCorefAnnotator produceResource(URL aUrl) throws IOException
         {
-            String base = FilenameUtils.getFullPathNoEndSeparator(aUrl.toString())+"/";
+            String base = FilenameUtils.getFullPathNoEndSeparator(aUrl.toString()) + "/";
 
             // Loading gzipped files from URL is broken in CoreNLP
             // https://github.com/stanfordnlp/CoreNLP/issues/94
             String logicalBase = getModelLocation(getAggregatedProperties());
-            logicalBase = FilenameUtils.getFullPathNoEndSeparator(logicalBase)+"/";
+            logicalBase = FilenameUtils.getFullPathNoEndSeparator(logicalBase) + "/";
             logicalBase = logicalBase.substring("classpath:/".length());
 
             Properties props = new Properties();
@@ -212,11 +216,13 @@ public class CoreNlpCoreferenceResolver
             props.setProperty(Constants.SINGULAR_PROP, base + "singular.unigrams.txt");
             // props.getProperty(Constants.STATES_PROP, DefaultPaths.DEFAULT_DCOREF_STATES),
             props.setProperty(Constants.STATES_PROP, base + "state-abbreviations.txt");
-            //props.getProperty(Constants.GENDER_NUMBER_PROP, DefaultPaths.DEFAULT_DCOREF_GENDER_NUMBER);
+            // props.getProperty(Constants.GENDER_NUMBER_PROP, 
+            //     DefaultPaths.DEFAULT_DCOREF_GENDER_NUMBER);
             props.setProperty(Constants.GENDER_NUMBER_PROP, logicalBase + "gender.map.ser.gz");
             // props.getProperty(Constants.COUNTRIES_PROP, DefaultPaths.DEFAULT_DCOREF_COUNTRIES),
             props.setProperty(Constants.COUNTRIES_PROP, base + "countries");
-            // props.getProperty(Constants.STATES_PROVINCES_PROP, DefaultPaths.DEFAULT_DCOREF_STATES_AND_PROVINCES),
+            // props.getProperty(Constants.STATES_PROVINCES_PROP, 
+            //     DefaultPaths.DEFAULT_DCOREF_STATES_AND_PROVINCES),
             props.setProperty(Constants.STATES_PROVINCES_PROP, base + "statesandprovinces");
     
             // The following properties are only relevant if the "CorefDictionaryMatch" sieve
@@ -229,7 +235,8 @@ public class CoreNlpCoreferenceResolver
                     + "coref.dict4.tsv" + ']');
             // props.getProperty(Constants.DICT_PMI_PROP, DefaultPaths.DEFAULT_DCOREF_DICT1),
             props.put(Constants.DICT_PMI_PROP, base + "coref.dict1.tsv");
-            // props.getProperty(Constants.SIGNATURES_PROP, DefaultPaths.DEFAULT_DCOREF_NE_SIGNATURES));
+            // props.getProperty(Constants.SIGNATURES_PROP, 
+            //     DefaultPaths.DEFAULT_DCOREF_NE_SIGNATURES));
             props.put(Constants.SIGNATURES_PROP, base + "ne.signatures.txt");
 
             DeterministicCorefAnnotator annotator = new DeterministicCorefAnnotator(props);

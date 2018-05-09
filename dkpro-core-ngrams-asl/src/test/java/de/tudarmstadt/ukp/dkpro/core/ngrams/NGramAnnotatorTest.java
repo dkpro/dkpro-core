@@ -30,15 +30,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NGram;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
-public
-class NGramAnnotatorTest
+public class NGramAnnotatorTest
 {
     @Test
-    public
-    void ngramAnnotatorTest()
-    throws Exception
+    public void ngramAnnotatorTest() throws Exception
     {
-		AnalysisEngine ae = createEngine(NGramAnnotator.class);
+        AnalysisEngine ae = createEngine(NGramAnnotator.class);
         JCas jcas = ae.newJCas();
 
         JCasBuilder jb = new JCasBuilder(jcas);
@@ -64,15 +61,15 @@ class NGramAnnotatorTest
 
         int i = 0;
         for (NGram ngram : select(jcas, NGram.class)) {
-        	assertTrue(i != 0 || "example sentence funny".equals(ngram.getText()));
-        	assertTrue(i != 1 || "example sentence".equals(ngram.getText()));
-        	assertTrue(i != 2 || "example".equals(ngram.getText()));
-        	assertTrue(i != 3 || "sentence funny".equals(ngram.getText()));
-        	assertTrue(i != 4 || "sentence".equals(ngram.getText()));
-        	assertTrue(i != 5 || "funny".equals(ngram.getText()));
-        	assertTrue(i != 6 || "second example".equals(ngram.getText()));
-        	assertTrue(i != 7 || "second".equals(ngram.getText()));
-        	assertTrue(i != 8 || "example".equals(ngram.getText()));
+            assertTrue(i != 0 || "example sentence funny".equals(ngram.getText()));
+            assertTrue(i != 1 || "example sentence".equals(ngram.getText()));
+            assertTrue(i != 2 || "example".equals(ngram.getText()));
+            assertTrue(i != 3 || "sentence funny".equals(ngram.getText()));
+            assertTrue(i != 4 || "sentence".equals(ngram.getText()));
+            assertTrue(i != 5 || "funny".equals(ngram.getText()));
+            assertTrue(i != 6 || "second example".equals(ngram.getText()));
+            assertTrue(i != 7 || "second".equals(ngram.getText()));
+            assertTrue(i != 8 || "example".equals(ngram.getText()));
             i++;
         }
     }

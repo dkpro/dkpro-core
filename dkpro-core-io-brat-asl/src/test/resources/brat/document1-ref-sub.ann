@@ -1,0 +1,9 @@
+T1	de-tudarmstadt-ukp-dkpro-core-api-ner-type-NamedEntity 0 4	Sony
+A1	de-tudarmstadt-ukp-dkpro-core-api-ner-type-NamedEntity_value T1 Organization
+T2	de-tudarmstadt-ukp-dkpro-core-api-ner-type-NamedEntity 33 41	Ericsson
+A2	de-tudarmstadt-ukp-dkpro-core-api-ner-type-NamedEntity_value T2 Organization
+T3	de-tudarmstadt-ukp-dkpro-core-api-ner-type-NamedEntity 75 81	Sweden
+A3	de-tudarmstadt-ukp-dkpro-core-api-ner-type-NamedEntity_value T3 Country
+T4	de-tudarmstadt-ukp-dkpro-core-io-brat-type-MergeOrg 14 27	joint venture
+E1	de-tudarmstadt-ukp-dkpro-core-io-brat-type-MergeOrg:T4 Org:T1 Org1:T2
+R1	de-tudarmstadt-ukp-dkpro-core-io-brat-type-AnnotationRelation source:T2 target:T3

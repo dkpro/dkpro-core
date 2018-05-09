@@ -28,19 +28,20 @@ import org.apache.uima.jcas.tcas.Annotation;
 import com.ibm.icu.text.BreakIterator;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * ICU segmenter.
  */
-@ResourceMetaData(name="ICU Segmenter")
+@ResourceMetaData(name = "ICU Segmenter")
 @LanguageCapability({ "af", "ak", "am", "ar", "as", "az", "be", "bg", "bm", "bn", "bo", "br", "bs",
         "ca", "ce", "cs", "cy", "da", "de", "dz", "ee", "el", "en", "eo", "es", "et", "eu", "fa",
         "ff", "fi", "fo", "fr", "fy", "ga", "gd", "gl", "gu", "gv", "ha", "hi", "hr", "hu", "hy",
-        "ig", "ii", "in", "is", "it", "iw", "ja", "ji", "ka", "ki", "kk", "kl", "km", "kn", "ko",
-        "ks", "kw", "ky", "lb", "lg", "ln", "lo", "lt", "lu", "lv", "mg", "mk", "ml", "mn", "mr",
-        "ms", "mt", "my", "nb", "nd", "ne", "nl", "nn", "om", "or", "os", "pa", "pl", "ps", "pt",
-        "qu", "rm", "rn", "ro", "ru", "rw", "se", "sg", "si", "sk", "sl", "sn", "so", "sq", "sr",
-        "sv", "sw", "ta", "te", "th", "ti", "to", "tr", "ug", "uk", "ur", "uz", "vi", "yo", "zh",
+        "ig", "ii", "is", "it", "ja", "ka", "ki", "kk", "kl", "km", "kn", "ko", "ks", "kw", "ky",
+        "lb", "lg", "ln", "lo", "lt", "lu", "lv", "mg", "mk", "ml", "mn", "mr", "ms", "mt", "my",
+        "nb", "nd", "ne", "nl", "nn", "om", "or", "os", "pa", "pl", "ps", "pt", "qu", "rm", "rn",
+        "ro", "ru", "rw", "se", "sg", "si", "sk", "sl", "sn", "so", "sq", "sr", "sv", "sw", "ta",
+        "te", "tg", "th", "ti", "to", "tr", "tt", "ug", "uk", "ur", "uz", "vi", "wo", "yo", "zh",
         "zu" })
 @TypeCapability(
     outputs = { 
@@ -77,7 +78,8 @@ public class IcuSegmenter
             else {
                 int[] span = new int[] { last, cur };
                 trim(aJCas.getDocumentText(), span);
-                processSentence(aJCas, aJCas.getDocumentText().substring(span[0], span[1]), span[0]);
+                processSentence(aJCas, aJCas.getDocumentText().substring(span[0], span[1]),
+                        span[0]);
             }
             last = cur;
             cur = bi.next();
@@ -95,10 +97,10 @@ public class IcuSegmenter
         int cur = bi.next();
         while (cur != BreakIterator.DONE) {
             cur += zoneBegin;
-            Annotation token = createToken(aJCas, last, cur);
+            Token token = createToken(aJCas, last, cur);
             if (token != null) {
                 if (splitAtApostrophe) {
-                    int i = token.getCoveredText().indexOf("'");
+                    int i = token.getText().indexOf("'");
                     if (i > 0) {
                         i += token.getBegin();
                         createToken(aJCas, i, token.getEnd());

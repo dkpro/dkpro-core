@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.io.penntree;
 
 import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.trim;
 import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.unescapeToken;
-import static org.apache.commons.lang.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.uima.fit.util.FSCollectionFactory.createFSArray;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
@@ -260,7 +260,7 @@ public class PennTreeToJCasConverter
         }
 
         constituent.setBegin(children.get(0).getBegin());
-        constituent.setEnd(children.get(children.size()-1).getEnd());
+        constituent.setEnd(children.get(children.size() - 1).getEnd());
         constituent.setChildren(createFSArray(aJCas, children));
         constituent.setParent(parent);
         constituent.addToIndexes();
@@ -302,8 +302,8 @@ public class PennTreeToJCasConverter
         Constituent constituentAnno;
         if (constituentMappingProvider != null) {
             Type constituentTag = constituentMappingProvider.getTagType(label[0]);
-            // We just set a dummy value for the offsets here. These need to be fixed when we know the
-            // children and before addToIndexes() is called.
+            // We just set a dummy value for the offsets here. These need to be fixed when we
+            // know the children and before addToIndexes() is called.
             constituentAnno = (Constituent) aJCas.getCas().createAnnotation(constituentTag, 0, 0);
         }
         else {

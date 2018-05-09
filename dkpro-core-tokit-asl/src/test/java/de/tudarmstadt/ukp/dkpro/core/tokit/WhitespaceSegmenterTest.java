@@ -61,7 +61,8 @@ public class WhitespaceSegmenterTest
         // end::example[]
         
         assertToken(
-                new String[] { "This", "is", "sentence", "1", ".", "This", "is", "number", "2", "." },
+                new String[] { "This", "is", "sentence", "1", ".", "This", "is", "number", "2",
+                        "." },
                 select(jcas, Token.class));
         assertSentence(
                 new String[] { 

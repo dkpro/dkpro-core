@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2017
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
@@ -24,7 +24,6 @@ import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
@@ -35,13 +34,13 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.Messages;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.internal.TokenKey;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.CoreNlpUtils;
-import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetBeginAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetEndAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.IndexAnnotation;
@@ -50,11 +49,14 @@ import edu.stanford.nlp.ling.CoreAnnotations.PartOfSpeechAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.SentenceIndexAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.TokensAnnotation;
+import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.MorphaAnnotator;
 import edu.stanford.nlp.process.CoreLabelTokenFactory;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.util.CoreMap;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Stanford Lemmatizer component. The Stanford Morphology-class computes the base form of English
@@ -66,7 +68,8 @@ import edu.stanford.nlp.util.CoreMap;
  * 
  * <p>This only works for ENGLISH.</p>
  */
-@ResourceMetaData(name="CoreNLP Lemmatizer (old API)")
+@Component(OperationType.LEMMATIZER)
+@ResourceMetaData(name = "CoreNLP Lemmatizer (old API)")
 @LanguageCapability("en")
 @TypeCapability(
         inputs = {
@@ -119,7 +122,8 @@ public class StanfordLemmatizer
     {
         if (!"en".equals(aJCas.getDocumentLanguage())) {
             throw new AnalysisEngineProcessException(Messages.BUNDLE,
-                    Messages.ERR_UNSUPPORTED_LANGUAGE, new String[] { aJCas.getDocumentLanguage() });
+                    Messages.ERR_UNSUPPORTED_LANGUAGE,
+                    new String[] { aJCas.getDocumentLanguage() });
         }
         
         Annotation document = new Annotation(aJCas.getDocumentText());
@@ -132,7 +136,7 @@ public class StanfordLemmatizer
             
             List<CoreLabel> tokens = new ArrayList<>();
             for (Token t : selectCovered(Token.class, s)) {
-                CoreLabel token = tokenFactory.makeToken(t.getCoveredText(), t.getBegin(),
+                CoreLabel token = tokenFactory.makeToken(t.getText(), t.getBegin(),
                         t.getEnd() - t.getBegin());
                 // First add token so that tokens.size() returns a 1-based counting as required
                 // by IndexAnnotation

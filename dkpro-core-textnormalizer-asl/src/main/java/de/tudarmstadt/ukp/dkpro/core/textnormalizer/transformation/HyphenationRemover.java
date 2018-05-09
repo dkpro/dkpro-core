@@ -37,11 +37,14 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_ImplBase;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Simple dictionary-based hyphenation remover. 
  */
-@ResourceMetaData(name="Hyphenation Remover")
+@Component(OperationType.NORMALIZER)
+@ResourceMetaData(name = "Hyphenation Remover")
 public class HyphenationRemover
     extends JCasTransformerChangeBased_ImplBase
 {

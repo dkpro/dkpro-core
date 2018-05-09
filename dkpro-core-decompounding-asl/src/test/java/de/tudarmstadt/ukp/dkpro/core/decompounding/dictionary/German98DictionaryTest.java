@@ -33,10 +33,13 @@ public class German98DictionaryTest
     @Test
     public void testContains() throws IOException
     {
-        final File affixFile = ResourceUtils.getUrlAsFile(getClass().getResource(
-        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-affix.aff"), false);
-        final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
-        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"), false);
+        final File affixFile = ResourceUtils.getUrlAsFile(
+                getClass().getResource(
+                        "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-affix.aff"),
+                false);
+        final File dictFile = ResourceUtils.getUrlAsFile(getClass().getResource(
+                "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"),
+                false);
         final German98Dictionary dict = new German98Dictionary(dictFile, affixFile, "UTF-8");
         assertEquals(298506, dict.getAll().size());
 
@@ -44,5 +47,5 @@ public class German98DictionaryTest
         assertTrue(dict.contains("versuchen"));
         assertTrue(dict.contains("arbeiten"));
         assertTrue(dict.contains("arbeit"));
-	}
+    }
 }

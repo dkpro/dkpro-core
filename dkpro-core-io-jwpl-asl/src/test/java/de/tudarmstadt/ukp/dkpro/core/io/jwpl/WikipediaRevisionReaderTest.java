@@ -33,24 +33,24 @@ public class WikipediaRevisionReaderTest
 {
     // FIXME currently there is no test database to test revisions
     @Test
-	public void wikipediaRevisionReaderTest()
-		throws Exception
-	{
+    public void wikipediaRevisionReaderTest()
+        throws Exception
+    {
         CollectionReaderDescription reader = createReaderDescription(
-		        WikipediaRevisionReader.class,
-				WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
-				WikipediaReaderBase.PARAM_DB,       "wikiapi_simple_20090119",
-				WikipediaReaderBase.PARAM_USER,     "student",
-				WikipediaReaderBase.PARAM_PASSWORD, "student",
-				WikipediaReaderBase.PARAM_LANGUAGE, Language.simple_english);
+                WikipediaRevisionReader.class,
+                WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
+                WikipediaReaderBase.PARAM_DB,       "wikiapi_simple_20090119",
+                WikipediaReaderBase.PARAM_USER,     "student",
+                WikipediaReaderBase.PARAM_PASSWORD, "student",
+                WikipediaReaderBase.PARAM_LANGUAGE, Language.simple_english);
 
-		int i = 0;
-		for (JCas jcas : new JCasIterable(reader)) {
-			assertNotNull(jcas);
-			i++;
-			if (i > 1000) {
-			    break;
-			}
-		}
-	}
+        int i = 0;
+        for (JCas jcas : new JCasIterable(reader)) {
+            assertNotNull(jcas);
+            i++;
+            if (i > 1000) {
+                break;
+            }
+        }
+    }
 }

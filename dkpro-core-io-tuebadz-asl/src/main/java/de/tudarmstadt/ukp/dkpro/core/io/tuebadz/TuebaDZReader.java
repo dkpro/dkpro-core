@@ -25,7 +25,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Feature;
@@ -57,13 +57,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
  * @see <a href="http://www.sfs.uni-tuebingen.de/en/ascl/resources/corpora/tueba-dz.html">TüBA-D/Z
  *      Web page</a>
  */
-@ResourceMetaData(name="Tüba-D/Z Chunking Format Reader")
-@MimeTypeCapability({MimeTypes.APPLICATION_X_TUEBADZ_CHUNK})
-@TypeCapability(outputs = { 
-        "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+@ResourceMetaData(name = "Tüba-D/Z Chunking Format Reader")
+@MimeTypeCapability({ MimeTypes.APPLICATION_X_TUEBADZ_CHUNK })
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk"})
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk" })
 public class TuebaDZReader
     extends JCasResourceCollectionReader_ImplBase
 {
@@ -80,12 +79,13 @@ public class TuebaDZReader
      * Character encoding of the input data.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
 
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spamming the heap with thousands of strings representing only a few different tags.
+     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid spamming
+     * the heap with thousands of strings representing only a few different tags.
      *
      * Default: {@code true}
      */
@@ -112,10 +112,11 @@ public class TuebaDZReader
     protected String posTagset;
 
     /**
-     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
-     * the mapping automatically.
+     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
+     * mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
@@ -133,46 +134,46 @@ public class TuebaDZReader
      *
      * Default: {@code false}
      */
-    public static final String PARAM_READ_NAMED_ENTITY = ComponentParameters.PARAM_READ_NAMED_ENTITY;
+    public static final String PARAM_READ_NAMED_ENTITY = 
+            ComponentParameters.PARAM_READ_NAMED_ENTITY;
     @ConfigurationParameter(name = PARAM_READ_NAMED_ENTITY, mandatory = true, defaultValue = "false")
     private boolean namedEntityEnabled;
 
     /**
-     * Use this chunk tag set to use to resolve the tag set mapping instead of using the
-     * tag set defined as part of the model meta data. This can be useful if a custom model is
-     * specified which does not have such meta data, or it can be used in readers.
+     * Use this chunk tag set to use to resolve the tag set mapping instead of using the tag set
+     * defined as part of the model meta data. This can be useful if a custom model is specified
+     * which does not have such meta data, or it can be used in readers.
      */
     public static final String PARAM_CHUNK_TAG_SET = ComponentParameters.PARAM_CHUNK_TAG_SET;
     @ConfigurationParameter(name = PARAM_CHUNK_TAG_SET, mandatory = false)
     protected String chunkTagset;
-    
+
     /**
-     * Load the chunk tag to UIMA type mapping from this location instead of locating
-     * the mapping automatically.
+     * Load the chunk tag to UIMA type mapping from this location instead of locating the mapping
+     * automatically.
      */
-    public static final String PARAM_CHUNK_MAPPING_LOCATION = ComponentParameters.PARAM_CHUNK_MAPPING_LOCATION;
+    public static final String PARAM_CHUNK_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_CHUNK_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CHUNK_MAPPING_LOCATION, mandatory = false)
     protected String chunkMappingLocation;
-    
+
     private MappingProvider posMappingProvider;
     private MappingProvider chunkMappingProvider;
 
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
+
         posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
                 posTagset, getLanguage());
 
-        chunkMappingProvider = MappingProviderFactory.createChunkMappingProvider(chunkMappingLocation,
-                chunkTagset, getLanguage());
+        chunkMappingProvider = MappingProviderFactory
+                .createChunkMappingProvider(chunkMappingLocation, chunkTagset, getLanguage());
     }
-    
+
     @Override
-    public void getNext(JCas aJCas)
-        throws IOException, CollectionException
+    public void getNext(JCas aJCas) throws IOException, CollectionException
     {
         try {
             if (posEnabled) {
@@ -185,12 +186,13 @@ public class TuebaDZReader
         catch (AnalysisEngineProcessException e) {
             throw new IOException(e);
         }
-        
+
         Resource res = nextFile();
         initCas(aJCas, res);
         BufferedReader reader = null;
         try {
-            reader = new BufferedReader(new InputStreamReader(res.getInputStream(), sourceEncoding));
+            reader = new BufferedReader(
+                    new InputStreamReader(res.getInputStream(), sourceEncoding));
             convert(aJCas, reader);
         }
         finally {
@@ -198,8 +200,7 @@ public class TuebaDZReader
         }
     }
 
-    private void convert(JCas aJCas, BufferedReader aReader)
-        throws IOException
+    private void convert(JCas aJCas, BufferedReader aReader) throws IOException
     {
         JCasBuilder doc = new JCasBuilder(aJCas);
 
@@ -207,7 +208,7 @@ public class TuebaDZReader
         Feature chunkValue = chunkType.getFeatureByBaseName("chunkValue");
         IobDecoder decoder = new IobDecoder(aJCas.getCas(), chunkValue, chunkMappingProvider);
         decoder.setInternTags(internTags);
-        
+
         List<String[]> words;
         while ((words = readSentence(aReader)) != null) {
             if (words.isEmpty()) {
@@ -219,7 +220,7 @@ public class TuebaDZReader
 
             List<Token> tokens = new ArrayList<Token>();
             String[] chunkTags = new String[words.size()];
-            
+
             // Tokens, POS
             int i = 0;
             for (String[] word : words) {
@@ -227,7 +228,7 @@ public class TuebaDZReader
                 Token token = doc.add(word[FORM], Token.class);
                 sentenceEnd = token.getEnd();
                 doc.add(" ");
-                
+
                 if (posEnabled) {
                     Type posTag = posMappingProvider.getTagType(word[POSTAG]);
                     POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
@@ -236,17 +237,19 @@ public class TuebaDZReader
                     pos.addToIndexes();
                     token.setPos(pos);
                 }
-                
+
                 tokens.add(token);
-                
-                // Chunk tag may be simple (B-PX, I-PX) or compound, like B-NX=ORG or I-NX=PER for named entities 
-                // Currently, the reader uses only the chunk part. In the future, it might also use the 
+
+                // Chunk tag may be simple (B-PX, I-PX) or compound, like B-NX=ORG or I-NX=PER for
+                // named entities
+                // Currently, the reader uses only the chunk part. In the future, it might also use
+                // the
                 // name entity information.
                 String[] chunkTag = word[IOB].split(EQUAL_SIGN);
                 chunkTags[i] = chunkTag[0];
                 i++;
             }
-            
+
             if (chunkEnabled) {
                 decoder.decode(tokens, chunkTags);
             }
@@ -265,8 +268,7 @@ public class TuebaDZReader
     /**
      * Read a single sentence.
      */
-    private static List<String[]> readSentence(BufferedReader aReader)
-        throws IOException
+    private static List<String[]> readSentence(BufferedReader aReader) throws IOException
     {
         List<String[]> words = new ArrayList<String[]>();
         String line;

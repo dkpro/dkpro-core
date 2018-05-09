@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2017
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,14 +14,13 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.berkeleyparser;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
-import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.apache.uima.util.Level.INFO;
 
 import java.io.IOException;
@@ -30,9 +29,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
 import java.util.zip.GZIPInputStream;
 
-import org.apache.commons.lang.mutable.MutableInt;
+import org.apache.commons.lang3.mutable.MutableInt;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -67,13 +67,16 @@ import edu.berkeley.nlp.PCFGLA.ParserData;
 import edu.berkeley.nlp.PCFGLA.TreeAnnotations;
 import edu.berkeley.nlp.syntax.Tree;
 import edu.berkeley.nlp.util.Numberer;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Berkeley Parser annotator . Requires {@link Sentence}s to be annotated before.
  *
  * @see CoarseToFineMaxRuleParser
  */
-@ResourceMetaData(name="Berkeley Parser")
+@Component(OperationType.CONSTITUENCY_PARSER)
+@ResourceMetaData(name = "Berkeley Parser")
 @OperationalProperties(multipleDeploymentAllowed = false)
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = {
@@ -97,6 +100,15 @@ public class BerkeleyParser
     protected String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Load the model from this location instead of locating the model automatically.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -106,14 +118,16 @@ public class BerkeleyParser
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
     /**
      * Location of the mapping file for constituent tags to UIMA types.
      */
-    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
+    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CONSTITUENT_MAPPING_LOCATION, mandatory = false)
     protected String constituentMappingLocation;
 
@@ -260,7 +274,8 @@ public class BerkeleyParser
 
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
-            List<String> tokenText = toText(tokens);
+            List<String> tokenText = tokens.stream().map(t -> 
+                    t.getText()).collect(Collectors.toList());
             
             List<String> posTags = null;
             if (readPos) {
@@ -283,7 +298,8 @@ public class BerkeleyParser
                 parseOutput = TreeAnnotations.unAnnotateTree(parseOutput, keepFunctionLabels);
             }
 
-            createConstituentAnnotationFromTree(aJCas, parseOutput, null, tokens, new MutableInt(0));
+            createConstituentAnnotationFromTree(aJCas, parseOutput, null, tokens,
+                    new MutableInt(0));
 
             if (writePennTree) {
                 PennTree pTree = new PennTree(aJCas, sentence.getBegin(), sentence.getEnd());

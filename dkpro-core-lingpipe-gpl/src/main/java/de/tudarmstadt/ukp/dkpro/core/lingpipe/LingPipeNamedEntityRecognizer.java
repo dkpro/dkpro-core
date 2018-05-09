@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2017
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.lingpipe;
 
@@ -29,10 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ResourceParameter;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.reflect.FieldUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -56,14 +54,19 @@ import com.aliasi.symbol.SymbolTable;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ResourceParameter;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * LingPipe named entity recognizer.
  */
-@ResourceMetaData(name="LingPipe Named Entity Recognizer")
+@Component(OperationType.NAMED_ENTITITY_RECOGNIZER)
+@ResourceMetaData(name = "LingPipe Named Entity Recognizer")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
@@ -95,6 +98,15 @@ public class LingPipeNamedEntityRecognizer
     protected String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Location from which the model is read.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -105,7 +117,8 @@ public class LingPipeNamedEntityRecognizer
     /**
      * Location of the mapping file for named entity tags to UIMA types.
      */
-    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
+    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
     protected String mappingLocation;
 

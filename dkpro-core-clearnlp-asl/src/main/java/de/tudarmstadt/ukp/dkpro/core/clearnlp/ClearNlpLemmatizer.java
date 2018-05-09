@@ -44,29 +44,31 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Lemmatizer using Clear NLP.
- *
  */
-@ResourceMetaData(name="ClearNLP Lemmatizer")
+@Component(OperationType.LEMMATIZER)
+@ResourceMetaData(name = "ClearNLP Lemmatizer")
 @TypeCapability(
-		inputs = {
-				"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-				"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-				"de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" },
-		outputs = {
-				"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" }
+        inputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" },
+        outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" }
 )
 public class ClearNlpLemmatizer
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
 
     /**
      * Use this language instead of the document language to resolve the model.
      */
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false, defaultValue="en")
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false, defaultValue = "en")
     protected String language;
 
     /**
@@ -76,6 +78,15 @@ public class ClearNlpLemmatizer
     @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
     protected String variant;
 
+    /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
     /**
      * Load the model from this location instead of locating the model automatically.
      */
@@ -99,9 +110,10 @@ public class ClearNlpLemmatizer
             {
                 String lang = getAggregatedProperties().getProperty(LANGUAGE);
                 AbstractComponent lemmatizer;
-                if(lang.equals("en")){
+                if (lang.equals("en")) {
                     lemmatizer = new EnglishMPAnalyzer(aStream);
-                }else{
+                }
+                else {
                     lemmatizer = new DefaultMPAnalyzer();
                 }
                 return lemmatizer;
@@ -109,44 +121,44 @@ public class ClearNlpLemmatizer
         };
     }
 
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
+    @Override
+    public void process(JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
 
-	    modelProvider.configure(aJCas.getCas());
-		AbstractComponent analyzer = modelProvider.getResource();
+        modelProvider.configure(aJCas.getCas());
+        AbstractComponent analyzer = modelProvider.getResource();
 
-		// Iterate over all sentences
-		for (Sentence sentence : select(aJCas, Sentence.class)) {
-			List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
+        // Iterate over all sentences
+        for (Sentence sentence : select(aJCas, Sentence.class)) {
+            List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
 
-			DEPTree tree = new DEPTree();
+            DEPTree tree = new DEPTree();
 
-			// Generate input format required by analyzer
-			for (int i = 0; i < tokens.size(); i++) {
-				Token t = tokens.get(i);
-				DEPNode node = new DEPNode(i+1, tokens.get(i).getCoveredText());
-				node.pos = t.getPos().getPosValue();
-				tree.add(node);
-			}
+            // Generate input format required by analyzer
+            for (int i = 0; i < tokens.size(); i++) {
+                Token t = tokens.get(i);
+                DEPNode node = new DEPNode(i + 1, tokens.get(i).getText());
+                node.pos = t.getPos().getPosValue();
+                tree.add(node);
+            }
 
-			analyzer.process(tree);
+            analyzer.process(tree);
 
-			int i = 0;
-			for (Token t : tokens) {
-				DEPNode node = tree.get(i+1);
+            int i = 0;
+            for (Token t : tokens) {
+                DEPNode node = tree.get(i + 1);
                 String lemmaString = node.lemma;
                 if (lemmaString == null) {
-                    lemmaString = t.getCoveredText();
+                    lemmaString = t.getText();
                 }
-				Lemma l = new Lemma(aJCas, t.getBegin(), t.getEnd());
-				l.setValue(lemmaString);
-				l.addToIndexes();
+                Lemma l = new Lemma(aJCas, t.getBegin(), t.getEnd());
+                l.setValue(lemmaString);
+                l.addToIndexes();
 
-				t.setLemma(l);
-				i++;
-			}
-		}
-	}
+                t.setLemma(l);
+                i++;
+            }
+        }
+    }
 }

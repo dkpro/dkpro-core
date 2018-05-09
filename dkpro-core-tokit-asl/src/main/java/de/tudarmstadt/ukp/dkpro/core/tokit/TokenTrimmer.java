@@ -26,67 +26,66 @@ import java.util.Collection;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Remove prefixes and suffixes from tokens.
  */
-@ResourceMetaData(name="Token Trimmer")
+@Component(OperationType.NORMALIZER)
 @TypeCapability(
-        inputs={
+        inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
-        outputs={
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"})
-
+        outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class TokenTrimmer
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
-	/**
-	 * List of prefixes to remove.
-	 */
-	public static final String PARAM_PREFIXES = "prefixes";
-	@ConfigurationParameter(name=PARAM_PREFIXES, mandatory=true)
-	private String[] prefixes;
+    /**
+     * List of prefixes to remove.
+     */
+    public static final String PARAM_PREFIXES = "prefixes";
+    @ConfigurationParameter(name = PARAM_PREFIXES, mandatory = true)
+    private String[] prefixes;
 
-	/**
-	 * List of suffixes to remove.
-	 */
-	public static final String PARAM_SUFFIXES = "suffixes";
-	@ConfigurationParameter(name=PARAM_SUFFIXES, mandatory=true)
-	private String[] suffixes;
+    /**
+     * List of suffixes to remove.
+     */
+    public static final String PARAM_SUFFIXES = "suffixes";
+    @ConfigurationParameter(name = PARAM_SUFFIXES, mandatory = true)
+    private String[] suffixes;
 
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
-		Collection<Token> toRemove = new ArrayList<Token>();
-		for (Token t : select(aJCas, Token.class)) {
-			String text = t.getCoveredText();
-			for (String prefix : prefixes) {
-				if (text.startsWith(prefix)) {
-					t.setBegin(t.getBegin()+prefix.length());
-					break;
-				}
-			}
+    @Override
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
+    {
+        Collection<Token> toRemove = new ArrayList<Token>();
+        for (Token t : select(aJCas, Token.class)) {
+            String text = t.getCoveredText();
+            for (String prefix : prefixes) {
+                if (text.startsWith(prefix)) {
+                    t.setBegin(t.getBegin() + prefix.length());
+                    break;
+                }
+            }
 
-			text = t.getCoveredText();
-			for (String suffix : suffixes) {
-				if (text.endsWith(suffix)) {
-					t.setEnd(t.getEnd()-suffix.length());
-					break;
-				}
-			}
+            text = t.getCoveredText();
+            for (String suffix : suffixes) {
+                if (text.endsWith(suffix)) {
+                    t.setEnd(t.getEnd() - suffix.length());
+                    break;
+                }
+            }
 
-			if (t.getCoveredText().length() == 0) {
-				toRemove.add(t);
-			}
-		}
-		for (Token t : toRemove) {
-			t.removeFromIndexes();
-		}
-	}
+            if (t.getCoveredText().length() == 0) {
+                toRemove.add(t);
+            }
+        }
+        for (Token t : toRemove) {
+            t.removeFromIndexes();
+        }
+    }
 }

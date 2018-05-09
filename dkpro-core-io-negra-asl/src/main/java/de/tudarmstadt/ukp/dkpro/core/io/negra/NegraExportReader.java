@@ -18,8 +18,9 @@
 package de.tudarmstadt.ukp.dkpro.core.io.negra;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
-import static org.apache.commons.lang.StringUtils.startsWith;
+import static org.apache.commons.lang3.StringUtils.startsWith;
 import static org.apache.uima.fit.util.JCasUtil.select;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,7 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Type;
@@ -107,7 +108,8 @@ public class NegraExportReader
      * Character encoding of the input data.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
 
     /**
@@ -142,7 +144,8 @@ public class NegraExportReader
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String mappingPosLocation;
 
@@ -546,7 +549,7 @@ public class NegraExportReader
         constituents.put("0", root);
 
         // Initialize dependency relations
-        Map<Constituent, List<Annotation>> relations = new LinkedHashMap<Constituent, List<Annotation>>();
+        Map<Constituent, List<Annotation>> relations = new LinkedHashMap<>();
 
         // handle tokens
         String line;
@@ -559,7 +562,7 @@ public class NegraExportReader
             Token token = aBuilder.add(parts[TOKEN_TEXT], Token.class);
             sentEnd = token.getEnd();
             aBuilder.add(" ");
-            aIdMap.put(aSentenceId+":"+id, token);
+            aIdMap.put(aSentenceId + ":" + id, token);
 
             // get/create parent
             Constituent parent = constituents.get(parts[TOKEN_PARENT_ID]);
@@ -648,7 +651,7 @@ public class NegraExportReader
         // add constituents at the end of the sentence
         for (Entry<String, Constituent> e : constituents.entrySet()) {
             e.getValue().addToIndexes(aJCas);
-            aIdMap.put(aSentenceId+":"+e.getKey(), e.getValue());
+            aIdMap.put(aSentenceId + ":" + e.getKey(), e.getValue());
         }
     }
 

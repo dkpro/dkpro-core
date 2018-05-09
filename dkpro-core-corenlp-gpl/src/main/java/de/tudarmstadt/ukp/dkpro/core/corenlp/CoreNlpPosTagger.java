@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2017
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.corenlp;
 
@@ -41,19 +41,22 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.CoreNlp2DKPro;
+import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 import edu.stanford.nlp.parser.lexparser.Lexicon;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.POSTaggerAnnotator;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 import edu.stanford.nlp.util.StringUtils;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Part-of-speech tagger from CoreNLP.
  */
-@ResourceMetaData(name="CoreNLP POS-Tagger")
+@Component(OperationType.PART_OF_SPEECH_TAGGER)
+@ResourceMetaData(name = "CoreNLP POS-Tagger")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -69,7 +72,7 @@ public class CoreNlpPosTagger
      * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
     private boolean printTagSet;
 
     /**
@@ -88,6 +91,15 @@ public class CoreNlpPosTagger
     private String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Location from which the model is read.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -104,7 +116,8 @@ public class CoreNlpPosTagger
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     private String posMappingLocation;
     
@@ -118,12 +131,15 @@ public class CoreNlpPosTagger
     @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
     private boolean internStrings;
 
-    public static final String PARAM_MAX_SENTENCE_LENGTH = ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
+    public static final String PARAM_MAX_SENTENCE_LENGTH = 
+            ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
     @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = true, defaultValue = "2147483647")
     private int maxSentenceLength;
     
-    public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
-    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = ComponentParameters.AUTO_NUM_THREADS)
+    public static final String PARAM_NUM_THREADS = 
+            ComponentParameters.PARAM_NUM_THREADS;
+    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, 
+            defaultValue = ComponentParameters.AUTO_NUM_THREADS)
     private int numThreads;
 
     /**
@@ -213,7 +229,7 @@ public class CoreNlpPosTagger
             // Loading gzipped files from URL is broken in CoreNLP
             // https://github.com/stanfordnlp/CoreNLP/issues/94
             if (modelFile.startsWith("jar:") && modelFile.endsWith(".gz")) {
-                modelFile = org.apache.commons.lang.StringUtils.substringAfter(modelFile, "!/");
+                modelFile = org.apache.commons.lang3.StringUtils.substringAfter(modelFile, "!/");
             }
             
             MaxentTagger tagger = new MaxentTagger(modelFile,

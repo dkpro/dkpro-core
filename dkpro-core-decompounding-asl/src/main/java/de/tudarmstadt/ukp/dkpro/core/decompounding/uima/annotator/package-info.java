@@ -19,7 +19,6 @@
 /**
  * This package contains UIMA annotation classes.
  *
- * The annotators iterate over all token in a CAS and
- * try to split them.
+ * The annotators iterate over all token in a CAS and try to split them.
  */
 package de.tudarmstadt.ukp.dkpro.core.decompounding.uima.annotator;

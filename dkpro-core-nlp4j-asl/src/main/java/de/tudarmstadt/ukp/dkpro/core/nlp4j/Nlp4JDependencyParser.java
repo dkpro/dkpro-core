@@ -53,11 +53,14 @@ import edu.emory.mathcs.nlp.common.util.NLPUtils;
 import edu.emory.mathcs.nlp.component.dep.DEPState;
 import edu.emory.mathcs.nlp.component.template.OnlineComponent;
 import edu.emory.mathcs.nlp.component.template.node.NLPNode;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Emory NLP4J dependency parser.
  */
-@ResourceMetaData(name="NLP4J Dependency Parser")
+@Component(OperationType.DEPENDENCY_PARSER)
+@ResourceMetaData(name = "NLP4J Dependency Parser")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -74,7 +77,7 @@ public class Nlp4JDependencyParser
      * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
     private boolean printTagSet;
 
     /**
@@ -93,6 +96,15 @@ public class Nlp4JDependencyParser
     private String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Location from which the model is read.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -102,7 +114,8 @@ public class Nlp4JDependencyParser
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = ComponentParameters.PARAM_DEPENDENCY_MAPPING_LOCATION;
+    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION =
+            ComponentParameters.PARAM_DEPENDENCY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_DEPENDENCY_MAPPING_LOCATION, mandatory = false)
     private String dependencyMappingLocation;
     

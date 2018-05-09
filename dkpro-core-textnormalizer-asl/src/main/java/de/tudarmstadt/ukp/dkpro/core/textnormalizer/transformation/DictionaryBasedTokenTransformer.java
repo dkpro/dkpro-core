@@ -39,12 +39,15 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_ImplBase;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Reads a tab-separated file containing mappings from one token to another. All tokens that match
  * an entry in the first column are changed to the corresponding token in the second column.
  */
-@ResourceMetaData(name="Dictionary-based Token Transformer")
+@Component(OperationType.NORMALIZER)
+@ResourceMetaData(name = "Dictionary-based Token Transformer")
 public class DictionaryBasedTokenTransformer
     extends JCasTransformerChangeBased_ImplBase
 {

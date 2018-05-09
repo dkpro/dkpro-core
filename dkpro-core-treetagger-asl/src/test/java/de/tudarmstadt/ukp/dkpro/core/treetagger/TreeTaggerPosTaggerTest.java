@@ -17,7 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.treetagger;
 
-import static org.apache.commons.lang.StringUtils.repeat;
+import static org.apache.commons.lang3.StringUtils.repeat;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -31,10 +31,11 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.annolab.tt4j.TreeTaggerWrapper;
 import org.apache.commons.compress.compressors.CompressorStreamFactory;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.JCasBuilder;
@@ -45,6 +46,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -52,34 +54,30 @@ import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
-public
-class TreeTaggerPosTaggerTest
+public class TreeTaggerPosTaggerTest
 {
-	@Before
-	public void initTrace()
-	{
-		// TreeTaggerWrapper.TRACE = true;
-	}
+    @Before
+    public void initTrace()
+    {
+        // TreeTaggerWrapper.TRACE = true;
+    }
 
-	@Test
-	public void testEnglishAutoDownload()
-        throws Exception
-	{
+    @Test
+    public void testEnglishAutoDownload() throws Exception
+    {
         Assume.assumeTrue(getClass().getResource(
                 "/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null ||
                 System.getProperty("treetagger.home") != null);
-	    
+
         URL aUrl = new URL("http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-par-linux-3.2-utf8.bin.gz");
         File targetFile = File.createTempFile("model", ".bin");
         
-	    try (
-            InputStream input = new CompressorStreamFactory()
-                    .createCompressorInputStream(new BufferedInputStream(aUrl.openStream()));
-            OutputStream target = new FileOutputStream(targetFile);        
-        ) {
-	        IOUtils.copy(input, target);
-	    }
-        
+        try (InputStream input = new CompressorStreamFactory()
+                .createCompressorInputStream(new BufferedInputStream(aUrl.openStream()));
+                OutputStream target = new FileOutputStream(targetFile);) {
+            IOUtils.copy(input, target);
+        }
+
         AnalysisEngineDescription engine = createEngineDescription(TreeTaggerPosTagger.class,
                 TreeTaggerPosTagger.PARAM_MODEL_LOCATION, targetFile,
                 TreeTaggerPosTagger.PARAM_MODEL_ENCODING, "utf-8");
@@ -92,40 +90,39 @@ class TreeTaggerPosTaggerTest
         
         AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
         AssertAnnotations.assertPOS(tagClasses, tags, select(jcas, POS.class));
-	}
-	
-	@Test
-	public void testEnglish()
-		throws Exception
-	{
+    }
+
+    @Test
+    public void testEnglish() throws Exception
+    {
         String[] tagset = { "#", "$", "''", "(", ")", ",", ":", "CC", "CD", "DT", "EX", "FW", "IN",
                 "IN/that", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNS", "NP", "NPS", "PDT", "POS",
                 "PP", "PP$", "RB", "RBR", "RBS", "RP", "SENT", "SYM", "TO", "UH", "VB", "VBD",
                 "VBG", "VBN", "VBP", "VBZ", "VH", "VHD", "VHG", "VHN", "VHP", "VHZ", "VV", "VVD",
                 "VVG", "VVN", "VVP", "VVZ", "WDT", "WP", "WP$", "WRB", "``" };
-	    
+
         runTest("en", "ptb-tt", tagset, "This is a test .",
-				new String[] { "this", "be",  "a",   "test", "."    },
-				new String[] { "DT",   "VBZ", "DT",  "NN",   "SENT" },
-				new String[] { "POS_DET",  "POS_VERB",   "POS_DET", "POS_NOUN",   "POS_PUNCT" });
+                new String[] { "this", "be",  "a",   "test", "."    },
+                new String[] { "DT",   "VBZ", "DT",  "NN",   "SENT" },
+                new String[] { "POS_DET",  "POS_VERB",   "POS_DET", "POS_NOUN",   "POS_PUNCT" });
 
         runTest("en", "ptb-tt", tagset, "A neural net .",
-        		new String[] { "a",   "neural", "net", "."    },
-        		new String[] { "DT",  "JJ",     "NN",  "SENT" },
-        		new String[] { "POS_DET", "POS_ADJ",    "POS_NOUN",  "POS_PUNCT" });
+                new String[] { "a",   "neural", "net", "."    },
+                new String[] { "DT",  "JJ",     "NN",  "SENT" },
+                new String[] { "POS_DET", "POS_ADJ",    "POS_NOUN",  "POS_PUNCT" });
 
         runTest("en", "ptb-tt", tagset, "John is purchasing oranges .",
-        		new String[] { "John", "be",  "purchase", "orange", "."    },
-        		new String[] { "NP",   "VBZ", "VVG",      "NNS",    "SENT" },
-        		new String[] { "POS_PROPN",   "POS_VERB",   "POS_VERB",        "POS_NOUN",     "POS_PUNCT" });
+                new String[] { "John", "be",  "purchase", "orange", "."    },
+                new String[] { "NP",   "VBZ", "VVG",      "NNS",    "SENT" },
+                new String[] { "POS_PROPN", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_PUNCT" });
 
         // TT4J per default runs TreeTagger with the -sgml option, so XML tags are not tagged
         runTest("en", "ptb-tt", tagset, "My homepage is <url> http://null.dummy </url> .",
-        		new String[] { "my", "homepage", "be", "http://null.dummy", "." },
-        		new String[] { "PP$", "NN", "VBZ", "JJ",  "SENT" },
-        		new String[] { "POS_PRON",  "POS_NOUN", "POS_VERB",   "POS_ADJ", "POS_PUNCT" });
-	}
-	
+                new String[] { "my", "homepage", "be", "http://null.dummy", "." },
+                new String[] { "PP$", "NN", "VBZ", "JJ",  "SENT" },
+                new String[] { "POS_PRON",  "POS_NOUN", "POS_VERB",   "POS_ADJ", "POS_PUNCT" });
+    }
+    
     @Test
     public void testFrench()
         throws Exception
@@ -142,9 +139,9 @@ class TreeTaggerPosTaggerTest
                 new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
     }
 
-	@Test
-	public void testGerman()
-		throws Exception
+    @Test
+    public void testGerman()
+        throws Exception
     {
         String[] tagset = { "$(", "$,", "$.", "ADJ", "ADJA", "ADJD", "ADV", "APPO", "APPR",
                 "APPRART", "APZR", "ART", "CARD", "FM", "ITJ", "KOKOM", "KON", "KOUI", "KOUS",
@@ -152,21 +149,24 @@ class TreeTaggerPosTaggerTest
                 "PRELAT", "PRELS", "PRF", "PTKA", "PTKANT", "PTKNEG", "PTKVZ", "PTKZU", "PWAT",
                 "PWAV", "PWS", "TRUNC", "VAFIN", "VAIMP", "VAINF", "VAPP", "VMFIN", "VMINF",
                 "VMPP", "VVFIN", "VVIMP", "VVINF", "VVIZU", "VVPP", "XY" };
-	    
+        
         runTest("de", "stts", tagset, "10 Minuten sind das Mikro an und die Bühne frei .",
-        		new String[] { "10", "Minute", "sein", "die", "Mikro", "an", "und", "die", "Bühne", "frei", "."  },
-        		new String[] { "CARD", "NN", "VAFIN", "ART", "NN", "PTKVZ", "KON",  "ART", "NN", "PTKVZ", "$."   },
-        		new String[] { "POS_NUM", "POS_NOUN", "POS_VERB",  "POS_DET", "POS_NOUN", "POS_VERB", "POS_CONJ", "POS_DET", "POS_NOUN", "POS_VERB", "POS_PUNCT" });
+                new String[] { "10", "Minute", "sein", "die", "Mikro", "an", "und", "die", "Bühne",
+                        "frei", "." },
+                new String[] { "CARD", "NN", "VAFIN", "ART", "NN", "PTKVZ", "KON", "ART", "NN",
+                        "PTKVZ", "$." },
+                new String[] { "POS_NUM", "POS_NOUN", "POS_VERB", "POS_DET", "POS_NOUN", "POS_VERB",
+                        "POS_CONJ", "POS_DET", "POS_NOUN", "POS_VERB", "POS_PUNCT" });
 
         runTest("de", "stts", tagset, "Das ist ein Test .",
-        		new String[] { "die", "sein",  "eine", "Test", "."   },
-        		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."   },
-        		new String[] { "POS_PRON",  "POS_VERB",     "POS_DET", "POS_NOUN",   "POS_PUNCT" });
+                new String[] { "die", "sein",  "eine", "Test", "."   },
+                new String[] { "PDS", "VAFIN", "ART", "NN",   "$."   },
+                new String[] { "POS_PRON",  "POS_VERB",     "POS_DET", "POS_NOUN",   "POS_PUNCT" });
     }
 
-	@Test
-	public void testDutch()
-		throws Exception
+    @Test
+    public void testDutch()
+        throws Exception
     {
         String[] tagset = { "$.", "adj", "adj*kop", "adjabbr", "adv", "advabbr", "conjcoord",
                 "conjsubo", "det__art", "det__demo", "det__excl", "det__indef", "det__poss",
@@ -175,18 +175,21 @@ class TreeTaggerPosTaggerTest
                 "prondemo", "pronindef", "pronpers", "pronposs", "pronquest", "pronrefl",
                 "pronrel", "punc", "verbinf", "verbpapa", "verbpastpl", "verbpastsg", "verbpresp",
                 "verbprespl", "verbpressg" };
-	    
+        
         runTest("nl", "tt", tagset, "Dit is een test .",
-        		new String[] { "dit",      "zijn",       "een",      "test",   "."    },
-        		new String[] { "prondemo", "verbpressg", "det__art", "nounsg", "$."   },
-            new String[] { "POS_PRON",     "POS_VERB",       "POS_DET",      "POS_NOUN",   "POS_PUNCT" });
+                new String[] { "dit", "zijn", "een", "test", "." },
+                new String[] { "prondemo", "verbpressg", "det__art", "nounsg", "$." },
+                new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
         runTest("nl", "tt", tagset, "10 minuten op de microfoon en vrij podium .",
-        		new String[] { "@card@",   "minuut", "op",   "de",       "microfoon", "en",        "vrij", "podium", "."   },
-        		new String[] { "num__ord", "nounpl", "prep", "det__art", "nounsg",    "conjcoord", "adj",  "nounsg", "$."  },
-            new String[] { "POS_NUM", "POS_NOUN", "POS_ADP", "POS_DET", "POS_NOUN", "POS_CONJ", "POS_ADJ", "POS_NOUN", "POS_PUNCT" });
+                new String[] { "@card@", "minuut", "op", "de", "microfoon", "en", "vrij", "podium",
+                        "." },
+                new String[] { "num__ord", "nounpl", "prep", "det__art", "nounsg", "conjcoord",
+                        "adj", "nounsg", "$." },
+                new String[] { "POS_NUM", "POS_NOUN", "POS_ADP", "POS_DET", "POS_NOUN", "POS_CONJ",
+                        "POS_ADJ", "POS_NOUN", "POS_PUNCT" });
     }
-	
+    
     @Test
     public void testMongolian()
         throws Exception
@@ -324,11 +327,11 @@ class TreeTaggerPosTaggerTest
                 "Zs00+Ncnmp", "Zs00+Ncnms" };
         
         runTest("gl", "xiada", tagset, "Este é un exame .",
-                new String[] { "este", "ser",    "un",   "exame", "." },
-                new String[] { "Enms", "Vpi30s", "Dims", "Scms",  "Q." },
-                new String[] { "POS_PRON",   "POS_VERB",      "POS_DET",  "POS_NOUN",    "POS_PUNCT" });
+                new String[] { "este", "ser", "un", "exame", "." },
+                new String[] { "Enms", "Vpi30s", "Dims", "Scms", "Q." },
+                new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
     }
-	
+    
     @Test
     public void testPolish()
         throws Exception
@@ -664,7 +667,7 @@ class TreeTaggerPosTaggerTest
                 new String[] { "ten",              "badanie",        "."   },
                 new String[] { "adj:sg:acc:n:pos", "subst:sg:acc:n", "SENT"   },
                 new String[] { "POS_ADJ",              "POS_NOUN",              "POS_PUNCT" });
-    }	
+    }    
 
     @Test
     public void testRussian()
@@ -833,22 +836,22 @@ class TreeTaggerPosTaggerTest
                 new String[] { "POS_PRON",      "POS_NOUN",      "POS_PUNCT" });
     }   
 
-	@Test
-	@Ignore("Slovene model currently not in Artifactory because we do not know tagset yet")
-	public void testSlovene()
-		throws Exception
+    @Test
+    @Ignore("Slovene model currently not in Artifactory because we do not know tagset yet")
+    public void testSlovene()
+        throws Exception
     {
         String[] tagset = { };
         
         runTest("sl",  null, tagset, "To je test .",
-        		new String[] { "ta",          "biti",      "test",  "." },
-        		new String[] { "zk-sei----s", "gvpste--n", "somei", "SENT" },
-        		new String[] { "POS",         "POS",       "POS",   "POS" });
+                new String[] { "ta",          "biti",      "test",  "." },
+                new String[] { "zk-sei----s", "gvpste--n", "somei", "SENT" },
+                new String[] { "POS",         "POS",       "POS",   "POS" });
 
         runTest("sl",  null, tagset, "Gremo na Češko za kosilo .",
-        		new String[] { "iti",             "na",   "Češko", "za",   "kosilo", "." },
-        		new String[] { "gppspm--n-----d", "dpet", "slmei", "dpet", "soset",  "SENT" },
-        		new String[] { "POS",             "POS",  "POS",   "POS",  "POS",    "POS" });
+                new String[] { "iti",             "na",   "Češko", "za",   "kosilo", "." },
+                new String[] { "gppspm--n-----d", "dpet", "slmei", "dpet", "soset",  "SENT" },
+                new String[] { "POS",             "POS",  "POS",   "POS",  "POS",    "POS" });
     }
 
     @Test
@@ -861,7 +864,7 @@ class TreeTaggerPosTaggerTest
                 "Sp", "Ss", "T", "TY", "VBpa", "VBpb", "VBpc", "VBsa", "VBsb", "VBsc", "VH", "VI",
                 "VKpa", "VKpb", "VKpc", "VKsa", "VKsb", "VKsc", "VLpa", "VLpb", "VLpc", "VLsa",
                 "VLsb", "VLsc", "VMpa", "VMpb", "VMsb", "W", "Y", "Z", "par" };
-	        
+            
         runTest("sk",  "smt-reduced", tagset, "To je test .",
                 new String[] { "to", "byť", "test", "." },
                 new String[] { "Ps", "VKsc", "Ss", "." },
@@ -869,84 +872,86 @@ class TreeTaggerPosTaggerTest
     }
 
     @Test
-    public
-    void testChinese()
-    	throws Exception
+    public void testChinese() throws Exception
     {
         String[] tagset = { "a", "ad", "ag", "an", "b", "bg", "c", "d", "dg", "e", "ew", "f", "g",
                 "h", "i", "j", "k", "l", "m", "mg", "n", "nd", "ng", "nh", "ni", "nl", "nr", "ns",
                 "nt", "nx", "nz", "o", "p", "q", "r", "rg", "s", "t", "tg", "u", "v", "vd", "vg",
                 "vn", "w", "wp", "ws", "x", "y", "z" };
         
-    	    // The rudder often in the wake of the wind round the back of the area.
+            // The rudder often in the wake of the wind round the back of the area.
         runTest("zh", "lcmc", tagset, "尾 舵 常 处于 风轮 后面 的 尾流 区里 。",
-        		new String[] { "_",  "_",  "_",   "_", "风轮", "_", "_", "_",  "_",  "_"    },
-        		new String[] { "ng", "n",  "d",   "v", "n",   "f", "u", "n",  "nl", "ew"   },
-            new String[] { "POS_NOUN", "POS_NOUN", "POS_ADV", "POS_VERB", "POS_NOUN", "POS_X", "POS_AUX", "POS_NOUN", "POS_X", "POS_PUNCT" });
+                new String[] { "_",  "_",  "_",   "_", "风轮", "_", "_", "_",  "_",  "_"    },
+                new String[] { "ng", "n",  "d",   "v", "n",   "f", "u", "n",  "nl", "ew"   },
+                new String[] { "POS_NOUN", "POS_NOUN", "POS_ADV", "POS_VERB", "POS_NOUN", "POS_X", 
+                        "POS_AUX", "POS_NOUN", "POS_X", "POS_PUNCT" });
 
         // The service sector has become an important engine of Guangdong's economic transformation
         // and upgrading.
         runTest("zh", "lcmc", tagset, "服务业 成为 广东 经济 转型 升级 的 重要 引擎 。",
-        		new String[] { "_",  "_", "_",  "_",  "_", "_", "_", "_", "_",  "_"     },
-        		new String[] { "n",  "v", "ns", "n",  "v", "v", "u", "a", "n",  "ew"    },
-            new String[] { "POS_NOUN", "POS_VERB", "POS_PROPN", "POS_NOUN", "POS_VERB", "POS_VERB", "POS_AUX", "POS_ADJ", "POS_NOUN", "POS_PUNCT" });
+                new String[] { "_",  "_", "_",  "_",  "_", "_", "_", "_", "_",  "_"     },
+                new String[] { "n",  "v", "ns", "n",  "v", "v", "u", "a", "n",  "ew"    },
+            new String[] { "POS_NOUN", "POS_VERB", "POS_PROPN", "POS_NOUN", "POS_VERB", "POS_VERB", 
+                    "POS_AUX", "POS_ADJ", "POS_NOUN", "POS_PUNCT" });
 
         // How far is China from the world brand?
         runTest("zh", "lcmc", tagset, "中国 离 世界 技术 品牌 有 多远 ？",
-        		new String[] { "_",  "_", "_",  "_",  "_",  "_", "多远", "_"  },
-        		new String[] { "ns", "v", "n",  "n",  "n",  "v", "n",   "ew" },
-            new String[] { "POS_PROPN", "POS_VERB", "POS_NOUN", "POS_NOUN", "POS_NOUN", "POS_VERB", "POS_NOUN", "POS_PUNCT" });
+                new String[] { "_",  "_", "_",  "_",  "_",  "_", "多远", "_"  },
+                new String[] { "ns", "v", "n",  "n",  "n",  "v", "n",   "ew" },
+            new String[] { "POS_PROPN", "POS_VERB", "POS_NOUN", "POS_NOUN", "POS_NOUN", "POS_VERB", 
+                    "POS_NOUN", "POS_PUNCT" });
     }
 
-	@Test
-//	@Ignore("Platform specific")
-	public void testOddCharacters()
-		throws Exception
+    @Test
+//    @Ignore("Platform specific")
+    public void testOddCharacters()
+        throws Exception
     {
         runTest("en", null, null, "² § ¶ § °",
-        		new String[] { "²",  "§",    "¶",  "§",    "°"   },
-        		new String[] { "NN", "SYM",  "NN", "SYM",  "SYM" },
+                new String[] { "²",  "§",    "¶",  "§",    "°"   },
+                new String[] { "NN", "SYM",  "NN", "SYM",  "SYM" },
             new String[] { "POS_NOUN", "POS_SYM", "POS_NOUN", "POS_SYM", "POS_SYM" });
     }
 
-	/**
-	 * Generate a very large document and test it.
-	 */
-	@Test
-	@Ignore("Ignoring test to avoid memory errors (see issue #850 in GitHub")
-	public void hugeDocumentTest()
-		throws Exception
-	{
-		// Start Java with -Xmx512m
-		boolean run = Runtime.getRuntime().maxMemory() > (500000000);
-		if (!run) {
-			System.out.println("Test requires more heap than available, skipping");
-		}
-		Assume.assumeTrue(run);
+    /**
+     * Generate a very large document and test it.
+     */
+    @Test
+    @Ignore("Ignoring test to avoid memory errors (see issue #850 in GitHub")
+    public void hugeDocumentTest()
+        throws Exception
+    {
+        // Start Java with -Xmx512m
+        boolean run = Runtime.getRuntime().maxMemory() > (500000000);
+        if (!run) {
+            System.out.println("Test requires more heap than available, skipping");
+        }
+        Assume.assumeTrue(run);
 
-		// Disable trace as this significantly slows down the test
-		TreeTaggerWrapper.TRACE = false;
+        // Disable trace as this significantly slows down the test
+        TreeTaggerWrapper.TRACE = false;
 
-		String text = "This is a test .";
-		int reps = 4000000 / text.length();
+        String text = "This is a test .";
+        int reps = 4000000 / text.length();
         String testString = repeat(text, " ", reps);
 
         JCas jcas = runTest("en", null, null, testString, null, null, null);
-    	    List<POS> actualTags = new ArrayList<POS>(select(jcas, POS.class));
+        List<POS> actualTags = new ArrayList<POS>(select(jcas, POS.class));
         assertEquals(reps * 5, actualTags.size());
 
         // test POS annotations
-		String[] expectedTags = new String[] { "DT",   "VBZ", "DT",  "NN",   "SENT" };
-		String[] expectedTagClasses = new String[] { "POS_ART",  "POS_V",   "POS_ART", "POS_NN",   "POS_PUNC" };
+        String[] expectedTags = { "DT", "VBZ", "DT", "NN", "SENT" };
+        String[] expectedTagClasses = { "POS_ART", "POS_V", "POS_ART", "POS_NN", "POS_PUNC" };
 
-		for (int i = 0; i < actualTags.size(); i++) {
+        for (int i = 0; i < actualTags.size(); i++) {
             POS posAnnotation = actualTags.get(i);
-            assertEquals("In position "+i, expectedTagClasses[i%5], posAnnotation.getType().getShortName());
-            assertEquals("In position "+i, expectedTags[i%5], posAnnotation.getPosValue());
-		}
+            assertEquals("In position " + i, expectedTagClasses[i % 5],
+                    posAnnotation.getType().getShortName());
+            assertEquals("In position " + i, expectedTags[i % 5], posAnnotation.getPosValue());
+        }
 
         System.out.println("Successfully tagged document with " + testString.length() +
-        		" characters");
+                " characters");
     }
 
     /**
@@ -957,7 +962,7 @@ class TreeTaggerPosTaggerTest
     {
         checkModelsAndBinary("en");
 
-		String testDocument = "This is a test .";
+        String testDocument = "This is a test .";
         String[] lemmas = { "this", "be", "a", "test", "." };
         String[] tags = { "DT", "VBZ", "DT", "NN", "SENT" };
         String[] tagClasses = { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" };
@@ -965,51 +970,52 @@ class TreeTaggerPosTaggerTest
         AnalysisEngine engine = createEngine(TreeTaggerPosTagger.class);
 
         HideOutput hideOut = new HideOutput();
-		try {
+        try {
 
-			for (int n = 0; n < 100; n++) {
-		        JCas aJCas = TestRunner.runTest(engine, "en", testDocument);
+            for (int n = 0; n < 100; n++) {
+                JCas aJCas = TestRunner.runTest(engine, "en", testDocument);
 
-		        AssertAnnotations.assertPOS(tagClasses, tags, select(aJCas, POS.class));
-		        AssertAnnotations.assertLemma(lemmas, select(aJCas, Lemma.class));
-			}
-		}
-		finally {
-			engine.destroy();
-			hideOut.restoreOutput();
-		}
+                AssertAnnotations.assertPOS(tagClasses, tags, select(aJCas, POS.class));
+                AssertAnnotations.assertLemma(lemmas, select(aJCas, Lemma.class));
+            }
+        }
+        finally {
+            engine.destroy();
+            hideOut.restoreOutput();
+        }
     }
 
     /**
      * Run the {@link #hugeDocumentTest()} 100 times.
      */
     @Test
-    @Ignore("This test takes a very long time. Only include it if you need to "+
-    		"test the stability of the annotator")
-	public void loadTest()
-		throws Exception
-	{
-		for (int i = 0; i < 100; i++) {
-			System.out.println("Load test iteration " + i);
-			hugeDocumentTest();
-		}
-	}
+    @Ignore("This test takes a very long time. Only include it if you need to "
+            + "test the stability of the annotator")
+    public void loadTest()
+        throws Exception
+    {
+        for (int i = 0; i < 100; i++) {
+            System.out.println("Load test iteration " + i);
+            hugeDocumentTest();
+        }
+    }
 
-	private void checkModelsAndBinary(String lang)
-	{
-		Assume.assumeTrue(getClass().getResource(
-                "/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-" + lang + "-le.bin") != null);
+    private void checkModelsAndBinary(String lang)
+    {
+        Assume.assumeTrue(
+                getClass().getResource("/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-"
+                        + lang + "-le.bin") != null);
 
-		Assume.assumeTrue(getClass().getResource(
-				"/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null ||
-				System.getProperty("treetagger.home") != null);
-	}
+        Assume.assumeTrue(getClass().getResource(
+                "/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null ||
+                System.getProperty("treetagger.home") != null);
+    }
 
     private JCas runTest(String language, String tagsetName, String[] tagset, String testDocument,
             String[] lemmas, String[] tags, String[] tagClasses)
-		throws Exception
-	{
-		checkModelsAndBinary(language);
+        throws Exception
+    {
+        checkModelsAndBinary(language);
 
         AnalysisEngine engine = createEngine(TreeTaggerPosTagger.class,
                 TreeTaggerPosTagger.PARAM_PRINT_TAGSET, true);
@@ -1025,43 +1031,43 @@ class TreeTaggerPosTaggerTest
         return aJCas;
     }
 
-	/**
-	 * Test using the same AnalysisEngine multiple times.
-	 */
-	@Test
-	public void longTokenTest()
-		throws Exception
-	{
-    	checkModelsAndBinary("en");
+    /**
+     * Test using the same AnalysisEngine multiple times.
+     */
+    @Test
+    public void longTokenTest()
+        throws Exception
+    {
+        checkModelsAndBinary("en");
 
         AnalysisEngine engine = createEngine(TreeTaggerPosTagger.class);
         JCas jcas = engine.newJCas();
 
-		try {
-			for (int n = 99990; n < 100000; n ++) {
-				System.out.println(n);
-		        jcas.setDocumentLanguage("en");
-		        JCasBuilder builder = new JCasBuilder(jcas);
-		        builder.add("Start", Token.class);
-		        builder.add("with", Token.class);
-		        builder.add("good", Token.class);
-		        builder.add("tokens", Token.class);
-		        builder.add(".", Token.class);
-		        builder.add(StringUtils.repeat("b", n), Token.class);
-		        builder.add("End", Token.class);
-		        builder.add("with", Token.class);
-		        builder.add("some", Token.class);
-		        builder.add("good", Token.class);
-		        builder.add("tokens", Token.class);
-		        builder.add(".", Token.class);
-		        builder.close();
-		        engine.process(jcas);
-		        jcas.reset();
-			}
-		}
-		finally {
-			engine.destroy();
-		}
+        try {
+            for (int n = 99990; n < 100000; n ++) {
+                System.out.println(n);
+                jcas.setDocumentLanguage("en");
+                JCasBuilder builder = new JCasBuilder(jcas);
+                builder.add("Start", Token.class);
+                builder.add("with", Token.class);
+                builder.add("good", Token.class);
+                builder.add("tokens", Token.class);
+                builder.add(".", Token.class);
+                builder.add(StringUtils.repeat("b", n), Token.class);
+                builder.add("End", Token.class);
+                builder.add("with", Token.class);
+                builder.add("some", Token.class);
+                builder.add("good", Token.class);
+                builder.add("tokens", Token.class);
+                builder.add(".", Token.class);
+                builder.close();
+                engine.process(jcas);
+                jcas.reset();
+            }
+        }
+        finally {
+            engine.destroy();
+        }
     }
 
     /**
@@ -1076,48 +1082,48 @@ class TreeTaggerPosTaggerTest
 //    void testStrangeDocument()
 //    throws Exception
 //    {
-//		CollectionReader reader = createReader(
-//				FileSystemReader.class,
-//				createTypeSystemDescription(),
-//				FileSystemReader.PARAM_INPUTDIR, getTestResource(
-//						"test_files/annotator/TreeTaggerPosLemmaTT4J/strange"));
+//        CollectionReader reader = createReader(
+//                FileSystemReader.class,
+//                createTypeSystemDescription(),
+//                FileSystemReader.PARAM_INPUTDIR, getTestResource(
+//                        "test_files/annotator/TreeTaggerPosLemmaTT4J/strange"));
 //
-//		AnalysisEngine sentenceSplitter = createEngine(
-//				BreakIteratorSegmenter.class,
-//				tsd);
+//        AnalysisEngine sentenceSplitter = createEngine(
+//                BreakIteratorSegmenter.class,
+//                tsd);
 //
-//		AnalysisEngine tt = createEngine(TreeTaggerPosLemmaTT4J.class, tsd,
-//				TreeTaggerTT4JBase.PARAM_LANGUAGE_CODE, "en");
+//        AnalysisEngine tt = createEngine(TreeTaggerPosLemmaTT4J.class, tsd,
+//                TreeTaggerTT4JBase.PARAM_LANGUAGE_CODE, "en");
 //
-//		runPipeline(reader, sentenceSplitter, tt);
+//        runPipeline(reader, sentenceSplitter, tt);
 //    }
 
 //    @Test
 //    @Ignore("This test should fail, however - due to fixes in the Tokenizer, " +
-//    		"we can currently not provokate a failure with the given 'strange' " +
-//    		"document.")
+//            "we can currently not provokate a failure with the given 'strange' " +
+//            "document.")
 //    public
 //    void testStrangeDocumentFail()
 //    throws Exception
 //    {
-//		CollectionReader reader = createReader(
-//				FileSystemReader.class,
-//				createTypeSystemDescription(),
-//				FileSystemReader.PARAM_INPUTDIR, getTestResource(
-//						"test_files/annotator/TreeTaggerPosLemmaTT4J/strange"));
+//        CollectionReader reader = createReader(
+//                FileSystemReader.class,
+//                createTypeSystemDescription(),
+//                FileSystemReader.PARAM_INPUTDIR, getTestResource(
+//                        "test_files/annotator/TreeTaggerPosLemmaTT4J/strange"));
 //
-//		AnalysisEngine sentenceSplitter = createEngine(
-//				BreakIteratorSegmenter.class,
-//				tsd);
+//        AnalysisEngine sentenceSplitter = createEngine(
+//                BreakIteratorSegmenter.class,
+//                tsd);
 //
-//		AnalysisEngine tt = createEngine(TreeTaggerPosLemmaTT4J.class, tsd,
-//				TreeTaggerTT4JBase.PARAM_LANGUAGE_CODE, "en",
-//				TreeTaggerTT4JBase.PARAM_PERFORMANCE_MODE, true);
+//        AnalysisEngine tt = createEngine(TreeTaggerPosLemmaTT4J.class, tsd,
+//                TreeTaggerTT4JBase.PARAM_LANGUAGE_CODE, "en",
+//                TreeTaggerTT4JBase.PARAM_PERFORMANCE_MODE, true);
 //
-//		runPipeline(
-//				reader,
-//				sentenceSplitter,
-//				tt);
+//        runPipeline(
+//                reader,
+//                sentenceSplitter,
+//                tt);
 //    }
 
     /**
@@ -1131,23 +1137,23 @@ class TreeTaggerPosTaggerTest
 //    void testRealMultiDocument()
 //    throws Exception
 //    {
-//		CollectionReader reader = createReader(
-//				FileSystemReader.class,
-//				createTypeSystemDescription(),
-//				FileSystemReader.PARAM_INPUTDIR, getTestResource(
-//						"test_files/annotator/TreeTaggerPosLemmaTT4J/multiDoc"));
+//        CollectionReader reader = createReader(
+//                FileSystemReader.class,
+//                createTypeSystemDescription(),
+//                FileSystemReader.PARAM_INPUTDIR, getTestResource(
+//                        "test_files/annotator/TreeTaggerPosLemmaTT4J/multiDoc"));
 //
-//		AnalysisEngine sentenceSplitter = createEngine(
-//				BreakIteratorSegmenter.class,
-//				tsd);
+//        AnalysisEngine sentenceSplitter = createEngine(
+//                BreakIteratorSegmenter.class,
+//                tsd);
 //
-//		AnalysisEngine tt = createEngine(TreeTaggerPosLemmaTT4J.class, tsd,
-//				TreeTaggerTT4JBase.PARAM_LANGUAGE_CODE, "en");
+//        AnalysisEngine tt = createEngine(TreeTaggerPosLemmaTT4J.class, tsd,
+//                TreeTaggerTT4JBase.PARAM_LANGUAGE_CODE, "en");
 //
-//		runPipeline(
-//				reader,
-//				sentenceSplitter,
-//				tt);
+//        runPipeline(
+//                reader,
+//                sentenceSplitter,
+//                tt);
 //    }
 
     /*

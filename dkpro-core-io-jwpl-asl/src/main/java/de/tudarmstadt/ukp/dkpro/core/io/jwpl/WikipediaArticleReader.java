@@ -23,15 +23,14 @@ import de.tudarmstadt.ukp.wikipedia.api.exception.WikiTitleParsingException;
 /**
  * Reads all article pages.
  *
- * A parameter controls whether the full article or only the first paragraph is set as the document text.
+ * A parameter controls whether the full article or only the first paragraph is set as the document
+ * text.
  * 
  * No Redirects, disambiguation pages, or discussion pages are regarded, however.
- *
- *
  */
-public class WikipediaArticleReader extends WikipediaPageReader
+public class WikipediaArticleReader
+    extends WikipediaPageReader
 {
-
     @Override
     protected boolean isValidPage(Page page) throws WikiTitleParsingException
     {

@@ -44,11 +44,14 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.ranking.Ranker;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundedWord;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.Fragment;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.SplitterAlgorithm;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Annotates compound parts and linking morphemes.
  */
-@ResourceMetaData(name="Compound Annotator")
+@Component(OperationType.ANNOTATION_OF_COMPOUNDING_FEATURES)
+@ResourceMetaData(name = "Compound Annotator")
 @TypeCapability(
         inputs = { 
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 
@@ -92,7 +95,7 @@ public class CompoundAnnotator
         throws AnalysisEngineProcessException
     {
         for (Token token : select(aJCas, Token.class)) {
-            final String coveredText = token.getCoveredText();
+            final String coveredText = token.getText();
             DecompoundedWord result;
             result = ranker.highestRank(splitter.split(coveredText));
             if (!result.isCompound()) {

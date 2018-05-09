@@ -15,7 +15,8 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
@@ -27,6 +28,7 @@
   <artifactId>de.tudarmstadt.ukp.dkpro.core.io.web1t-asl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core ASL - IO - Web1T n-grams</name>
+  <url>https://dkpro.github.io/dkpro-core/</url>
   <dependencies>
     <dependency>
       <groupId>commons-logging</groupId>
@@ -41,8 +43,8 @@
       <artifactId>uimafit-core</artifactId>
     </dependency>
     <dependency>
-      <groupId>commons-lang</groupId>
-      <artifactId>commons-lang</artifactId>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
     </dependency>
     <dependency>
       <groupId>commons-io</groupId>
@@ -184,17 +186,8 @@
                   <goal>check</goal>
                 </goals>
                 <configuration>
-                  <excludes>
-                    <!-- release generated artifact -->
-                    <exclude>release.properties</exclude>
-                    <exclude>CHANGES</exclude>
-                    <exclude>NOTICE</exclude>
-                    <exclude>README</exclude>
-                    <exclude>src/main/resources/**/*</exclude>
+                  <excludes combine.children="append">
                     <exclude>src/main/java/de/tudarmstadt/ukp/dkpro/core/io/web1t/util/ExternalSort.java</exclude>
-                    <exclude>src/test/resources/**/*</exclude>
-                    <!-- generated JCas wrappers -->
-                    <exclude>src/main/java/**/type/**/*</exclude>
                   </excludes>
                 </configuration>
               </execution>

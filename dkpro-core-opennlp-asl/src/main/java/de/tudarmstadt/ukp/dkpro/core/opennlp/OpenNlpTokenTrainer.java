@@ -44,6 +44,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.CasTokenSampleStream;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 import opennlp.tools.dictionary.Dictionary;
 import opennlp.tools.ml.EventTrainer;
 import opennlp.tools.ml.maxent.GISTrainer;
@@ -56,8 +58,9 @@ import opennlp.tools.util.TrainingParameters;
 /**
  * Train a tokenizer model for OpenNLP.
  */
+@Component(OperationType.TRAINER_OF_MACHINE_LEARNING_MODELS)
 @MimeTypeCapability(MimeTypes.APPLICATION_X_OPENNLP_TOKEN)
-@ResourceMetaData(name="OpenNLP Tokenizer Trainer")
+@ResourceMetaData(name = "OpenNLP Tokenizer Trainer")
 public class OpenNlpTokenTrainer
     extends JCasConsumer_ImplBase
 {
@@ -70,11 +73,13 @@ public class OpenNlpTokenTrainer
     private File targetLocation;
 
     public static final String PARAM_ALGORITHM = "algorithm";
-    @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, defaultValue = GISTrainer.MAXENT_VALUE)
+    @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, 
+            defaultValue = GISTrainer.MAXENT_VALUE)
     private String algorithm;
     
     public static final String PARAM_TRAINER_TYPE = "trainerType";
-    @ConfigurationParameter(name = PARAM_TRAINER_TYPE, mandatory = true, defaultValue = EventTrainer.EVENT_VALUE)
+    @ConfigurationParameter(name = PARAM_TRAINER_TYPE, mandatory = true, 
+            defaultValue = EventTrainer.EVENT_VALUE)
     private String trainerType;
 
     public static final String PARAM_ITERATIONS = "iterations";
@@ -90,7 +95,8 @@ public class OpenNlpTokenTrainer
     private boolean useAlphaNumericOptimization;
 
     public static final String PARAM_ALPHA_NUMERIC_PATTERN = "alphaNumericPattern";
-    @ConfigurationParameter(name = PARAM_ALPHA_NUMERIC_PATTERN, mandatory = false, defaultValue = Factory.DEFAULT_ALPHANUMERIC)
+    @ConfigurationParameter(name = PARAM_ALPHA_NUMERIC_PATTERN, mandatory = false, 
+            defaultValue = Factory.DEFAULT_ALPHANUMERIC)
     private Pattern alphaNumericPattern;
 
     public static final String PARAM_ABBREVIATION_DICTIONARY_LOCATION = "abbreviationDictionaryLocation";

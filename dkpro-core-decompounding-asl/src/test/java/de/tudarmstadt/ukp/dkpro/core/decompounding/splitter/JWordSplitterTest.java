@@ -33,7 +33,6 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.SimpleDictionary;
 
 public class JWordSplitterTest
 {
-
     @Test
     public void testSplitter()
         throws IOException
@@ -46,27 +45,30 @@ public class JWordSplitterTest
     }
 
     @Test
-	public void testSplliter2() throws IOException {
-	    JWordSplitterAlgorithm splitter = new JWordSplitterAlgorithm();
-        final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
-        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"), false);;
+    public void testSplliter2() throws IOException {
+        JWordSplitterAlgorithm splitter = new JWordSplitterAlgorithm();
+        final File dictFile = ResourceUtils.getUrlAsFile(getClass().getResource(
+                "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"),
+                false);
+        ;
 
-	    Dictionary dict = new SimpleDictionary(dictFile, "UTF-8");
-	    splitter.setDictionary(dict);
-	    List<DecompoundedWord> result = splitter.split("geräteelektronik").getAllSplits();
-	    assertThat(result.size(),is(1));
-	}
+        Dictionary dict = new SimpleDictionary(dictFile, "UTF-8");
+        splitter.setDictionary(dict);
+        List<DecompoundedWord> result = splitter.split("geräteelektronik").getAllSplits();
+        assertThat(result.size(),is(1));
+    }
 
     @Test
     public void testSplliter3() throws IOException {
         JWordSplitterAlgorithm splitter = new JWordSplitterAlgorithm();
-        final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
-                "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"), false);;
+        final File dictFile = ResourceUtils.getUrlAsFile(getClass().getResource(
+                "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"),
+                false);
+        ;
 
         Dictionary dict = new SimpleDictionary(dictFile, "UTF-8");
         splitter.setDictionary(dict);
         List<DecompoundedWord> result = splitter.split("Schwerwiegend").getAllSplits();
         assertThat(result.size(),is(1));
     }
-
 }

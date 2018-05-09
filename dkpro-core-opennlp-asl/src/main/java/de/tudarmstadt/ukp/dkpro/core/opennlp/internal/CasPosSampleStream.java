@@ -23,6 +23,7 @@ import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -61,9 +62,9 @@ public class CasPosSampleStream
         List<String> tags = new ArrayList<>();
         
         for (Token t : selectCovered(Token.class, sentence)) {
-            words.add(t.getCoveredText());
+            words.add(t.getText());
             if (t.getPos() == null) {
-                throw new IllegalStateException("Token ["+t.getCoveredText()+"] has no POS");
+                throw new IllegalStateException("Token [" + t.getText() + "] has no POS");
             }
             tags.add(t.getPos().getPosValue());
         }

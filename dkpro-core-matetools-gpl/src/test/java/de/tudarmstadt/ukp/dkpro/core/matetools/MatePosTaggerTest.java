@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2017
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.matetools;
 
@@ -26,6 +26,7 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
@@ -70,8 +71,9 @@ public class MatePosTaggerTest
         String[] posOriginal = { "PRP", "VBP", "DT", "RB", "JJ", "NN", "NN", ",", "WDT", "VBZ",
                 "IN", "DT", "NNS", "CC", "NNS", "IN", "JJ", "." };
 
-        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_DET", "POS_ADV", "POS_ADJ", "POS_NOUN", "POS_NOUN", "POS_PUNCT", "POS_DET",
-                "POS_VERB", "POS_ADP", "POS_DET", "POS_NOUN", "POS_CONJ", "POS_NOUN", "POS_ADP", "POS_ADJ", "POS_PUNCT" };
+        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_DET", "POS_ADV", "POS_ADJ", "POS_NOUN",
+                "POS_NOUN", "POS_PUNCT", "POS_DET", "POS_VERB", "POS_ADP", "POS_DET", "POS_NOUN",
+                "POS_CONJ", "POS_NOUN", "POS_ADP", "POS_ADJ", "POS_PUNCT" };
 
         String[] posTags = { "#", "$", "''", "(", ")", ",", ".", ":", "CC", "CD", "DT", "END",
                 "EX", "FW", "HYPH", "IN", "JJ", "JJR", "JJS", "LS", "MD", "MID", "NIL", "NN",

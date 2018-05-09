@@ -43,27 +43,27 @@ public class RuntimeProvider
 {
     private Log log = LogFactory.getLog(getClass());
     
-	public static final String MODE_EXECUTABLE = "executable";
-	
-	private boolean installed;
-	private File workspace;
+    public static final String MODE_EXECUTABLE = "executable";
 
-	private String baseLocation;
-	private PlatformDetector platformDetector;
-	private String platformId;
-	private Properties manifest;
-	
-	public RuntimeProvider(String aBaseLocation)
-	{
-		setBaseLocation(aBaseLocation);
-		platformDetector = new PlatformDetector();
-	}
-	
-	public void setBaseLocation(String aBaseLocation)
-	{
-		baseLocation = aBaseLocation;
-	}
-	
+    private boolean installed;
+    private File workspace;
+
+    private String baseLocation;
+    private PlatformDetector platformDetector;
+    private String platformId;
+    private Properties manifest;
+
+    public RuntimeProvider(String aBaseLocation)
+    {
+        setBaseLocation(aBaseLocation);
+        platformDetector = new PlatformDetector();
+    }
+
+    public void setBaseLocation(String aBaseLocation)
+    {
+        baseLocation = aBaseLocation;
+    }
+
     public Properties getManifest() throws IOException
     {
         if (manifest == null) {
@@ -115,78 +115,77 @@ public class RuntimeProvider
         }
         return manifest;
     }
-	
-	public boolean isInstalled()
-	{
-		return installed;
-	}
-	
-	public File getFile(String aFilename) throws IOException
-	{
-		install();
-		File file = new File(getWorkspace(), aFilename);
-		if (!file.exists()) {
-			throw new FileNotFoundException("File not found in workspace: ["+aFilename+"]");
-		}
-		return file;
-	}
-	
-	public File getWorkspace() throws IOException
-	{
-		if (workspace == null) {
-			workspace = File.createTempFile("dkpro", "runtime");
-			FileUtils.forceDelete(workspace);
-			FileUtils.forceMkdir(workspace);
-			workspace.deleteOnExit();
-		}
-		return workspace;
-	}
-	
-	public void install() throws IOException
-	{
-		if (installed) {
-			return;
-		}
-		
-		Properties manifest = getManifest();
-		for (String filename : manifest.stringPropertyNames()) {
+
+    public boolean isInstalled()
+    {
+        return installed;
+    }
+
+    public File getFile(String aFilename) throws IOException
+    {
+        install();
+        File file = new File(getWorkspace(), aFilename);
+        if (!file.exists()) {
+            throw new FileNotFoundException("File not found in workspace: [" + aFilename + "]");
+        }
+        return file;
+    }
+
+    public File getWorkspace() throws IOException
+    {
+        if (workspace == null) {
+            workspace = File.createTempFile("dkpro", "runtime");
+            FileUtils.forceDelete(workspace);
+            FileUtils.forceMkdir(workspace);
+            workspace.deleteOnExit();
+        }
+        return workspace;
+    }
+
+    public void install() throws IOException
+    {
+        if (installed) {
+            return;
+        }
+
+        Properties manifest = getManifest();
+        for (String filename : manifest.stringPropertyNames()) {
             URL source = resolveLocation(baseLocation + platformId + "/" + filename, this, null);
-			File target = new File(getWorkspace(), filename);
-			InputStream is = null;
-			OutputStream os = null;
-			try {
-				is = source.openStream();
-				os = new FileOutputStream(target);
-				IOUtils.copyLarge(is, os);
-			}
-			finally {
-				closeQuietly(is);
-				closeQuietly(os);
-			}
-			
-			if (MODE_EXECUTABLE.equals(manifest.getProperty(filename))) {
-				target.setExecutable(true);
-			}
-			
-			target.deleteOnExit();
-		}
-		
-		installed = true;
-	}
-	
-	public void uninstall()
-	{
-		if (workspace != null) {
-			FileUtils.deleteQuietly(workspace);
-			workspace = null;
-			installed = false;
-		}
-	}
-	
-	@Override
-	protected void finalize()
-		throws Throwable
-	{
-		uninstall();
-	}
+            File target = new File(getWorkspace(), filename);
+            InputStream is = null;
+            OutputStream os = null;
+            try {
+                is = source.openStream();
+                os = new FileOutputStream(target);
+                IOUtils.copyLarge(is, os);
+            }
+            finally {
+                closeQuietly(is);
+                closeQuietly(os);
+            }
+
+            if (MODE_EXECUTABLE.equals(manifest.getProperty(filename))) {
+                target.setExecutable(true);
+            }
+
+            target.deleteOnExit();
+        }
+
+        installed = true;
+    }
+
+    public void uninstall()
+    {
+        if (workspace != null) {
+            FileUtils.deleteQuietly(workspace);
+            workspace = null;
+            installed = false;
+        }
+    }
+
+    @Override
+    protected void finalize() throws Throwable
+    {
+        uninstall();
+    }
 }

@@ -125,5 +125,4 @@ public interface FrequencyCountProvider
      * @return the ID.
      */
     public String getID();
-
 }

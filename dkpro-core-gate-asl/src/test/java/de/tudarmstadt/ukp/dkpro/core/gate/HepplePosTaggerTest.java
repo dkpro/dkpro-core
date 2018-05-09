@@ -24,6 +24,7 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
@@ -31,35 +32,35 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class HepplePosTaggerTest
 {
-	@Test
-	public void testEnglish()
-		throws Exception
-	{
+    @Test
+    public void testEnglish()
+        throws Exception
+    {
         runTest("en", null, "This is a test . \n",
-				new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
-				new String[] { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
+                new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
+                new String[] { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", null, "A neural net . \n",
-        		new String[] { "DT",  "NN", "JJ",  "." },
-        		new String[] { "POS_DET", "POS_NOUN", "POS_ADJ", "POS_PUNCT" });
+                new String[] { "DT",  "NN", "JJ",  "." },
+                new String[] { "POS_DET", "POS_NOUN", "POS_ADJ", "POS_PUNCT" });
 
         runTest("en", null, "John is purchasing oranges . \n",
-        		new String[] { "NNP",  "VBZ",  "VBG",  "NNS",  "." },
-        		new String[] { "POS_PROPN", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_PUNCT" });
+                new String[] { "NNP",  "VBZ",  "VBG",  "NNS",  "." },
+                new String[] { "POS_PROPN", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_PUNCT" });
     }
 
-	private void runTest(String language, String variant, String testDocument, String[] tags,
-			String[] tagClasses)
-		throws Exception
-	{
-		AnalysisEngine engine = createEngine(HepplePosTagger.class,
-		        HepplePosTagger.PARAM_VARIANT, variant,
-		        HepplePosTagger.PARAM_PRINT_TAGSET, true);
+    private void runTest(String language, String variant, String testDocument, String[] tags,
+            String[] tagClasses)
+        throws Exception
+    {
+        AnalysisEngine engine = createEngine(HepplePosTagger.class,
+                HepplePosTagger.PARAM_VARIANT, variant,
+                HepplePosTagger.PARAM_PRINT_TAGSET, true);
 
-		JCas jcas = TestRunner.runTest(engine, language, testDocument);
+        JCas jcas = TestRunner.runTest(engine, language, testDocument);
 
-		AssertAnnotations.assertPOS(tagClasses, tags, select(jcas, POS.class));
-	}
+        AssertAnnotations.assertPOS(tagClasses, tags, select(jcas, POS.class));
+    }
 
     @Rule
     public DkproTestContext testContext = new DkproTestContext();

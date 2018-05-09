@@ -33,11 +33,14 @@ import org.apache.uima.jcas.JCas;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_ImplBase;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Takes a text and replaces wrong capitalization
  */
-@ResourceMetaData(name="Capitalization Normalizer")
+@Component(OperationType.NORMALIZER)
+@ResourceMetaData(name = "Capitalization Normalizer")
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class CapitalizationNormalizer

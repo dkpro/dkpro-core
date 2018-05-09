@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2017
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.lingpipe;
 
@@ -36,7 +36,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 /**
  * LingPipe segmenter.
  */
-@ResourceMetaData(name="LingPipe Segmenter")
+@ResourceMetaData(name = "LingPipe Segmenter")
 @TypeCapability(
         outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -73,7 +73,7 @@ public class LingPipeSegmenter
         int[] sentenceBoundaries = sentenceModel.boundaryIndices(toks.tokens(), toks.whitespaces());
         if (sentenceBoundaries.length == 0) {
             if (toks.numTokens() > 0) {
-                createSentence(aJCas, toks.tokenStart(0), toks.tokenEnd(toks.numTokens()-1));
+                createSentence(aJCas, toks.tokenStart(0), toks.tokenEnd(toks.numTokens() - 1));
             }
         }
         else {

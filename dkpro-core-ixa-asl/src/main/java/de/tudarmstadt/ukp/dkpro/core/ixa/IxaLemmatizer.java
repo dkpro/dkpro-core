@@ -43,13 +43,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.ixa.internal.IxaLemmatizerTagsetDescriptionProvider;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 import eus.ixa.ixa.pipe.lemma.LemmatizerME;
 import eus.ixa.ixa.pipe.lemma.LemmatizerModel;
 
 /**
  * Lemmatizer using the OpenNLP-based Ixa implementation.
  */
-@ResourceMetaData(name="IXA Lemmatizer")
+@Component(OperationType.LEMMATIZER)
+@ResourceMetaData(name = "IXA Lemmatizer")
 @TypeCapability(
         inputs = { 
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -75,6 +78,15 @@ public class IxaLemmatizer
     protected String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Load the model from this location instead of locating the model automatically.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -87,7 +99,7 @@ public class IxaLemmatizer
      * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
     protected boolean printTagSet;
 
     private CasConfigurableProviderBase<LemmatizerME> modelProvider;
@@ -107,9 +119,10 @@ public class IxaLemmatizer
                 LemmatizerModel model = new LemmatizerModel(aStream);
 
                 // Extract tagset information from the model
-                IxaLemmatizerTagsetDescriptionProvider tsdp = new IxaLemmatizerTagsetDescriptionProvider(
-                        getResourceMetaData().getProperty("pos.tagset"), POS.class,
-                        model.getLemmatizerSequenceModel(), "t0");
+                IxaLemmatizerTagsetDescriptionProvider tsdp = 
+                        new IxaLemmatizerTagsetDescriptionProvider(
+                                getResourceMetaData().getProperty("pos.tagset"), POS.class,
+                                model.getLemmatizerSequenceModel(), "t0");
                 addTagset(tsdp, false);
 
                 if (printTagSet) {
@@ -145,7 +158,7 @@ public class IxaLemmatizer
             for (Token t : tokens) {
                 String lemmaString = lemmas[i];
                 if (lemmaString == null) {
-                    lemmaString = t.getCoveredText();
+                    lemmaString = t.getText();
                 }
                 Lemma l = new Lemma(aJCas, t.getBegin(), t.getEnd());
                 l.setValue(lemmaString);

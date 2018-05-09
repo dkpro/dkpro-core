@@ -31,13 +31,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
  * 
  * @deprecated Use {@link RegexSegmenter}
  */
-@ResourceMetaData(name="Line-based Sentence Segmenter")
-@TypeCapability(
-        outputs={
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"})
+@ResourceMetaData(name = "Line-based Sentence Segmenter")
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
 @Deprecated
 public class LineBasedSentenceSegmenter
-	extends SegmenterBase
+    extends SegmenterBase
 {
     @Override
     protected void process(JCas aJCas, String aText, int aZoneBegin)
@@ -52,12 +50,12 @@ public class LineBasedSentenceSegmenter
                 createSentence(aJCas, aZoneBegin + begin, aZoneBegin + cursor);
                 begin = cursor + 1;
             }
-            
+
             // Stop at end of text
             if (cursor >= aText.length()) {
                 break;
             }
-            
+
             cursor++;
         }
     }

@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2017
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
@@ -29,12 +29,15 @@ import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.process.CoreLabelTokenFactory;
 import edu.stanford.nlp.process.PTBTokenizer;
 import edu.stanford.nlp.process.Tokenizer;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Uses the normalizing tokenizer of the Stanford CoreNLP tools to escape the text PTB-style. This
  * component operates directly on the text and does not require prior segmentation.
  */
-@ResourceMetaData(name="Stanford Penn Treebank Normalizer")
+@Component(OperationType.NORMALIZER)
+@ResourceMetaData(name = "Stanford Penn Treebank Normalizer")
 public class StanfordPtbTransformer
     extends JCasTransformerChangeBased_ImplBase
 {

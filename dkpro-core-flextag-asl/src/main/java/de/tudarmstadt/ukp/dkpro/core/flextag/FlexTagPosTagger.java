@@ -1,5 +1,5 @@
 /**
- * Copyright 2007-2017
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -46,14 +46,26 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Flexible part-of-speech tagger.
  */
-@ResourceMetaData(name="FlexTag POS-Tagger")
+@Component(OperationType.PART_OF_SPEECH_TAGGER)
+@ResourceMetaData(name = "FlexTag POS-Tagger")
 public class FlexTagPosTagger
     extends JCasAnnotator_ImplBase
 {
+    /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
     private String modelLocation;
@@ -66,14 +78,14 @@ public class FlexTagPosTagger
     @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
     private String variant;
     
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     private String posMappingLocation;
-    
 
     private AnalysisEngine flexTagEngine = null;
     private ModelProviderBase<File> modelProvider = null;
-    private MappingProvider mappingProvider=null;
+    private MappingProvider mappingProvider = null;
 
     @Override
     public void initialize(final UimaContext context)

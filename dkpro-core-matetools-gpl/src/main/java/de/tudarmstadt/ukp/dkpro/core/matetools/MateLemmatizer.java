@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2017
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,13 +14,9 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.matetools;
-
-import is2.data.SentenceData09;
-import is2.io.CONLLReader09;
-import is2.lemmatizer.Lemmatizer;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,11 +42,17 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
+import is2.data.SentenceData09;
+import is2.io.CONLLReader09;
+import is2.lemmatizer.Lemmatizer;
 
 /**
- * DKPro Annotator for the MateToolsLemmatizer.
+ * DKPro Core Annotator for the MateToolsLemmatizer.
  */
-@ResourceMetaData(name="Mate Tools Lemmatizer")
+@Component(OperationType.LEMMATIZER)
+@ResourceMetaData(name = "Mate Tools Lemmatizer")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -75,6 +77,15 @@ public class MateLemmatizer
     private String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Load the model from this location instead of locating the model automatically.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -86,7 +97,7 @@ public class MateLemmatizer
      * English creates odd results.
      */
     public static final String PARAM_UPPERCASE = "uppercase";
-    @ConfigurationParameter(name = PARAM_UPPERCASE, mandatory = true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_UPPERCASE, mandatory = true, defaultValue = "false")
     private boolean uppercase;
     
     private CasConfigurableProviderBase<Lemmatizer> modelProvider;
@@ -132,7 +143,7 @@ public class MateLemmatizer
             for (int i = 0; i < lemmas.length; i++) {
                 Token token = tokens.get(i);
                 if (lemmas[i] == null) {
-                    lemmas[i] = token.getCoveredText();
+                    lemmas[i] = token.getText();
                 }
                 Lemma lemma = new Lemma(jcas, token.getBegin(), token.getEnd());
                 lemma.setValue(lemmas[i]);

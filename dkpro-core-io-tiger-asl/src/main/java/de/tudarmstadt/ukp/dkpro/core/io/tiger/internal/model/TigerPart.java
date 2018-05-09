@@ -23,6 +23,7 @@ public class TigerPart
 {
     @XmlAttribute
     public String id;
+
     @XmlAttribute
     public String word;
 }

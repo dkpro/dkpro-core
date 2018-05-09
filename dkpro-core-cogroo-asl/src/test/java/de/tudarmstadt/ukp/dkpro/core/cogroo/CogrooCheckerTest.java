@@ -17,9 +17,9 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.cogroo;
 
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertAnomaly;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.*;
 
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -39,10 +39,11 @@ public class CogrooCheckerTest
                 "Fomos levados à crer que os menino são burro de doer. As menina chegaram.");
         
         String[] anomalies = {
-                    "[ 14, 15] GrammarAnomaly (Não acontece crase antes de verbo.)",
-                    "[ 25, 34] GrammarAnomaly (Os artigos concordam com o substantivo a que se referem.)",
-                    "[ 54, 63] GrammarAnomaly (Os artigos concordam com o substantivo a que se referem.)",
-                    "[ 64, 72] GrammarAnomaly (Verificou-se erro de concordância entre o sujeito e o verbo.)" };
+            "[ 14, 15] GrammarAnomaly (Não acontece crase antes de verbo.)",
+            "[ 25, 34] GrammarAnomaly (Os artigos concordam com o substantivo a que se referem.)",
+            "[ 54, 63] GrammarAnomaly (Os artigos concordam com o substantivo a que se referem.)",
+            "[ 64, 72] GrammarAnomaly (Verificou-se erro de concordância entre o sujeito e o verbo.)"
+        };
         
         assertAnomaly(anomalies, select(jcas, GrammarAnomaly.class));
     }

@@ -25,17 +25,12 @@ import de.tudarmstadt.ukp.wikipedia.parser.ParsedPage;
 
 /**
  * Reads all discussion pages.
- *
- *
  */
-
 @TypeCapability(
-        outputs={
+        outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig"})
-
 public class WikipediaDiscussionReader extends WikipediaStandardReaderBase
 {
-
     //TODO Use SWEBLE
     @Override
     protected String getPlainDocumentText(Page page)

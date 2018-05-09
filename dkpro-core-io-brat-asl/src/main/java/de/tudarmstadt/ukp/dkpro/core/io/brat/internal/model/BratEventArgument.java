@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 
@@ -88,7 +88,7 @@ public class BratEventArgument
         Matcher m = PATTERN.matcher(aLine);
         
         if (!m.matches()) {
-            throw new IllegalArgumentException("Illegal event argument format ["+aLine+"]");
+            throw new IllegalArgumentException("Illegal event argument format [" + aLine + "]");
         }
 
         int index = 0;

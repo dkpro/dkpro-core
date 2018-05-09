@@ -17,6 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.ditop;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.io.BufferedWriter;
@@ -55,11 +56,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
 
 /**
- * This annotator (consumer) writes output files as required by <a
- * href="https://ditop.hs8.de/">DiTop</a>. It requires JCas input annotated by
- * {@link de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer} using the same model.
+ * This annotator (consumer) writes output files as required by
+ * <a href="https://ditop.hs8.de/">DiTop</a>. It requires JCas input annotated by
+ * {@link de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer} using the same
+ * model.
  */
-@ResourceMetaData(name="DiTop Writer")
+@ResourceMetaData(name = "DiTop Writer")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_DITOP})
 @TypeCapability(
         inputs = { 
@@ -156,8 +158,8 @@ public class DiTopWriter
             throw new ResourceInitializationException(e);
         }
 
-        collectionValuesSet = collectionValues == null ?
-                Collections.<String> emptySet() : new HashSet<>(Arrays.asList(collectionValues));
+        collectionValuesSet = collectionValues == null ? Collections.<String>emptySet()
+                : new HashSet<>(Arrays.asList(collectionValues));
         collectionCounter = new HashBag<>();
     }
 
@@ -184,7 +186,8 @@ public class DiTopWriter
         }
     }
 
-    protected void writeDocTopic(TopicDistribution distribution, String docName, String collectionId)
+    protected void writeDocTopic(TopicDistribution distribution, String docName,
+            String collectionId)
         throws IOException
     {
         /* filter by collection id if PARAM_COLLECTION_VALUES is set */
@@ -342,7 +345,7 @@ public class DiTopWriter
     {
         Map<String, Set<Integer>> entries = new HashMap<>();
 
-        for (String line : FileUtils.readLines(configFile)) {
+        for (String line : FileUtils.readLines(configFile, UTF_8)) {
             String[] fields = line.split(FIELDSEPARATOR_CONFIGFILE);
             if (fields.length < 2) {
                 throw new IllegalStateException(String.format(

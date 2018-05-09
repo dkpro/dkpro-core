@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2017
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -18,11 +18,9 @@
  */
 package org.dkpro.core.io.cermine;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
+import java.io.IOException;
+import java.io.InputStream;
+
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
@@ -36,13 +34,13 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.jdom.Element;
 import org.jdom.Text;
 
+import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import pl.edu.icm.cermine.ContentExtractor;
 import pl.edu.icm.cermine.exception.AnalysisException;
-
-import java.io.IOException;
-import java.io.InputStream;
-
-import static org.apache.commons.io.IOUtils.closeQuietly;
 
 /**
  * Collection reader for PDF files using CERMINE
@@ -123,17 +121,15 @@ public class CerminePdfReader
         Resource res = nextFile();
         initCas(aCAS, res);
 
-        InputStream is = null;
-
-        try {
-            is = res.getInputStream();
-
+        try (InputStream is = res.getInputStream()) {
             // Process PDF
             ContentExtractor extractor = new ContentExtractor();
             extractor.setPDF(is);
             Element result = extractor.getContentAsNLM();
             nlmHandler.process(result, aCAS);
 
+            // FIXME Setting the language below should not be needed- initCas() should already
+            // be taking care of this. Double-check and remove if not necessary.
             // Set up language
             if (getConfigParameterValue(PARAM_LANGUAGE) != null) {
                 aCAS.setDocumentLanguage((String) getConfigParameterValue(PARAM_LANGUAGE));
@@ -141,9 +137,6 @@ public class CerminePdfReader
         }
         catch (AnalysisException e) {
             throw new IOException("An exception occurred while processing the PDF document.", e);
-        }
-        finally {
-            closeQuietly(is);
         }
     }
 
@@ -398,10 +391,12 @@ public class CerminePdfReader
 
         protected String normalizeString(String input)
         {
-            if (normalizeText)
+            if (normalizeText) {
                 return input.replaceAll("\\s+", " ");
-            else
+            }
+            else {
                 return input;
+            }
         }
     }
 }

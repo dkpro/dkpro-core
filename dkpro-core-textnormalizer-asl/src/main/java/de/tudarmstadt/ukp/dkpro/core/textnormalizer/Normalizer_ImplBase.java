@@ -37,9 +37,9 @@ import de.tudarmstadt.ukp.dkpro.core.textnormalizer.util.NormalizationUtils;
  *
  */
 @TypeCapability(
-        inputs={
+        inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
-        outputs={
+        outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation"})
 @Deprecated
 public abstract class Normalizer_ImplBase

@@ -39,58 +39,58 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 /**
  * @deprecated use {@code BinaryCasReader} instead.
  */
-@ResourceMetaData(name="UIMA Serialized CAS Reader")
+@ResourceMetaData(name = "UIMA Serialized CAS Reader")
 @Deprecated
 public class SerializedCasReader
-	extends ResourceCollectionReaderBase
+    extends ResourceCollectionReaderBase
 {
     /**
      * The file from which to obtain the type system if it is not embedded in the serialized CAS.
      */
     public static final String PARAM_TYPE_SYSTEM_LOCATION = "typeSystemLocation";
-    @ConfigurationParameter(name=PARAM_TYPE_SYSTEM_LOCATION, mandatory=false)
+    @ConfigurationParameter(name = PARAM_TYPE_SYSTEM_LOCATION, mandatory = false)
     private String typeSystemLocation;
     
     private CASMgrSerializer casMgrSerializer;
     
-	@Override
-	public void getNext(CAS aCAS)
-		throws IOException, CollectionException
-	{
-		Resource res = nextFile();
-		ObjectInputStream is = null;
-		try {
-			is = new ObjectInputStream(CompressionUtils.getInputStream(res.getLocation(),
-					res.getInputStream()));
-			
-			Object object = is.readObject();
-			if (object instanceof CASCompleteSerializer) {
+    @Override
+    public void getNext(CAS aCAS)
+        throws IOException, CollectionException
+    {
+        Resource res = nextFile();
+        ObjectInputStream is = null;
+        try {
+            is = new ObjectInputStream(CompressionUtils.getInputStream(res.getLocation(),
+                    res.getInputStream()));
+            
+            Object object = is.readObject();
+            if (object instanceof CASCompleteSerializer) {
                 // Annotations and CAS metadata saved together
                 getLogger().debug("Reading CAS and type system from [" + res.getLocation() + "]");
-    			CASCompleteSerializer serializer = (CASCompleteSerializer) object;
-    			deserializeCASComplete(serializer, (CASImpl) aCAS);
-			}
-			else if (object instanceof CASSerializer) {
-			    // Annotations and CAS metadata saved separately
-			    CASCompleteSerializer serializer = new CASCompleteSerializer();
-			    serializer.setCasMgrSerializer(readCasManager());
-			    serializer.setCasSerializer((CASSerializer) object);
+                CASCompleteSerializer serializer = (CASCompleteSerializer) object;
+                deserializeCASComplete(serializer, (CASImpl) aCAS);
+            }
+            else if (object instanceof CASSerializer) {
+                // Annotations and CAS metadata saved separately
+                CASCompleteSerializer serializer = new CASCompleteSerializer();
+                serializer.setCasMgrSerializer(readCasManager());
+                serializer.setCasSerializer((CASSerializer) object);
                 getLogger().debug("Reading CAS from [" + res.getLocation() + "]");
                 deserializeCASComplete(serializer, (CASImpl) aCAS);
-			}
-			else {
+            }
+            else {
                 throw new IOException("Unknown serialized object found with type ["
                         + object.getClass().getName() + "]");
-			}
-		}
-		catch (ClassNotFoundException e) {
-			throw new IOException(e);
-		}
-		finally {
-			closeQuietly(is);
-		}
-	}
-	
+            }
+        }
+        catch (ClassNotFoundException e) {
+            throw new IOException(e);
+        }
+        finally {
+            closeQuietly(is);
+        }
+    }
+    
     private CASMgrSerializer readCasManager() throws IOException
     {
         // If we already read the type system, return it - do not read it again.

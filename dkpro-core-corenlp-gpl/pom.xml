@@ -1,6 +1,6 @@
 <!--
 
-    Copyright 2007-2017    
+    Copyright 2007-2018    
     Ubiquitous Knowledge Processing (UKP) Lab
     Technische Universität Darmstadt
 
@@ -15,11 +15,10 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with this program.  If not, see http://www.gnu.org/licenses/.
+    along with this program. If not, see http://www.gnu.org/licenses/.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
@@ -30,6 +29,7 @@
   <artifactId>de.tudarmstadt.ukp.dkpro.core.corenlp-gpl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core GPL - Stanford CoreNLP Suite (v ${corenlp.version}) (GPL)</name>
+  <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
     <corenlp.version>3.8.0</corenlp.version>
   </properties>
@@ -47,8 +47,8 @@
       <artifactId>commons-io</artifactId>
     </dependency>
     <dependency>
-      <groupId>commons-lang</groupId>
-      <artifactId>commons-lang</artifactId>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
     </dependency>
     <dependency>
       <groupId>edu.stanford.nlp</groupId>
@@ -124,6 +124,10 @@
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>eu.openminted.share.annotations</groupId>
+      <artifactId>omtd-share-annotations-api</artifactId>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

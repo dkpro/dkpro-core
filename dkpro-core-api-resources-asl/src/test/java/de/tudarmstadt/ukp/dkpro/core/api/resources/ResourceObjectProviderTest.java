@@ -36,7 +36,7 @@ public class ResourceObjectProviderTest
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();
     
-    @Test(expected=IOException.class)
+    @Test(expected = IOException.class)
     public void testIOException() throws Exception
     {
         ResourceObjectProviderBase<String> provider = new ResourceObjectProviderBase<String>()
@@ -62,7 +62,7 @@ public class ResourceObjectProviderTest
         provider.configure();
     }
 
-    @Test(expected=RuntimeException.class)
+    @Test(expected = RuntimeException.class)
     public void testIORuntime() throws Exception
     {
         ResourceObjectProviderBase<String> provider = new ResourceObjectProviderBase<String>()

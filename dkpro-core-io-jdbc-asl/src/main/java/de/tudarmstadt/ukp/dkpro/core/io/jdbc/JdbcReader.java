@@ -17,7 +17,18 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.jdbc;
 
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import static java.util.Arrays.asList;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
@@ -31,12 +42,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 
-import java.io.IOException;
-import java.sql.*;
-import java.util.HashSet;
-import java.util.Set;
-
-import static java.util.Arrays.asList;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 /**
  * Collection reader for JDBC database.The obtained data will be written into CAS DocumentText as
@@ -50,7 +56,7 @@ import static java.util.Arrays.asList;
  * will create a CAS for each record, write the content of "text" column into CAS document text and
  * that of "title" column into the document title field of the {@link DocumentMetaData} annotation.
  */
-@ResourceMetaData(name="JDBC-based Database Reader")
+@ResourceMetaData(name = "JDBC-based Database Reader")
 @TypeCapability(
         outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
@@ -74,8 +80,8 @@ public class JdbcReader
     /**
      * Specify the class name of the JDBC driver.
      * <p>
-     * If used with uimaFIT and the value is not given, <code>com.mysql.cj.jdbc.Driver</code> will be
-     * taken.
+     * If used with uimaFIT and the value is not given, <code>com.mysql.cj.jdbc.Driver</code> will
+     * be taken.
      */
     public static final String PARAM_DRIVER = "driver";
     @ConfigurationParameter(name = PARAM_DRIVER, mandatory = true, defaultValue = "com.mysql.cj.jdbc.Driver")
@@ -87,15 +93,16 @@ public class JdbcReader
      * If used with uimaFIT and the value is not given, <code>jdbc:mysql://127.0.0.1/</code> will be
      * taken.
      * <p>
-     * Do not use this parameter to add additional parameters, but use {@link #PARAM_CONNECTION_PARAMS}
-     * instead.
+     * Do not use this parameter to add additional parameters, but use
+     * {@link #PARAM_CONNECTION_PARAMS} instead.
      */
     public static final String PARAM_CONNECTION = "connection";
     @ConfigurationParameter(name = PARAM_CONNECTION, mandatory = true, defaultValue = "jdbc:mysql://127.0.0.1/")
     private String connection;
 
     /**
-     * Add additional parameters for the connection URL here in a single string: {@code [&propertyName1=propertyValue1[&propertyName2=propertyValue2]...]}.
+     * Add additional parameters for the connection URL here in a single string:
+     * {@code [&propertyName1=propertyValue1[&propertyName2=propertyValue2]...]}.
      */
     public static final String PARAM_CONNECTION_PARAMS = "connectionParams";
     @ConfigurationParameter(name = PARAM_CONNECTION_PARAMS, mandatory = true, defaultValue = "")

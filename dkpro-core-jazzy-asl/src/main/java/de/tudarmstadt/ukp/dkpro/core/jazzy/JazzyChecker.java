@@ -48,39 +48,43 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.AnnotationChecker;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * This annotator uses Jazzy for the decision whether a word is spelled correctly or not.
  */
-@ResourceMetaData(name="Jazzy Spellchecker")
+@Component(OperationType.SPELLING_CHECKER)
+@ResourceMetaData(name = "Jazzy Spellchecker")
 @TypeCapability(
-        inputs={
+        inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
-        outputs={
+        outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly",
                 "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SuggestedAction"})
 
 public class JazzyChecker
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
-	/**
-	 * Location from which the model is read. The model file is a simple word-list with one word
-	 * per line.
-	 */
-	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
-	private String dictPath;
-
-	/**
-	 * The character encoding used by the model.
-	 */
-	public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
-	@ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue = "UTF-8")
-	private String dictEncoding;
+    /**
+     * Location from which the model is read. The model file is a simple word-list with one word
+     * per line.
+     */
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
+    private String dictPath;
 
     /**
-     * Determines the maximum edit distance (as an int value) that a suggestion for a spelling error may have.
-     * E.g. if set to one suggestions are limited to words within edit distance 1 to the original word.
+     * The character encoding used by the model.
+     */
+    public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
+    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue = "UTF-8")
+    private String dictEncoding;
+
+    /**
+     * Determines the maximum edit distance (as an int value) that a suggestion for a spelling error
+     * may have. E.g. if set to one suggestions are limited to words within edit distance 1 to the
+     * original word.
      */
     public static final String PARAM_SCORE_THRESHOLD = "scoreThreshold";
     @ConfigurationParameter(name = PARAM_SCORE_THRESHOLD, mandatory = true, defaultValue = "1")
@@ -88,111 +92,111 @@ public class JazzyChecker
 
     private SpellDictionary dict;
 
-	@Override
-	public void initialize(final UimaContext context)
-		throws ResourceInitializationException
-	{
-		super.initialize(context);
-		InputStream is = null;
-		try {
-			URL url = ResourceUtils.resolveLocation(dictPath, this, context);
-			this.getLogger().debug("Loading dictionary from " + url);
-			is = url.openStream();
-			dict = new SpellDictionaryHashMap(new InputStreamReader(is, dictEncoding));
-		}
-		catch (IOException e) {
-			throw new ResourceInitializationException(e);
-		}
-		finally {
-			closeQuietly(is);
-		}
-	}
+    @Override
+    public void initialize(final UimaContext context)
+        throws ResourceInitializationException
+    {
+        super.initialize(context);
+        InputStream is = null;
+        try {
+            URL url = ResourceUtils.resolveLocation(dictPath, this, context);
+            this.getLogger().debug("Loading dictionary from " + url);
+            is = url.openStream();
+            dict = new SpellDictionaryHashMap(new InputStreamReader(is, dictEncoding));
+        }
+        catch (IOException e) {
+            throw new ResourceInitializationException(e);
+        }
+        finally {
+            closeQuietly(is);
+        }
+    }
 
-	@Override
-	public void process(final JCas jcas)
-		throws AnalysisEngineProcessException
-	{
-		
-    	AnnotationChecker.requireExists(this, jcas, this.getLogger(), Token.class);
-    	AnnotationChecker.requireNotExists(this, jcas, this.getLogger(),
-    			SpellingAnomaly.class, SuggestedAction.class);
+    @Override
+    public void process(final JCas jcas)
+        throws AnalysisEngineProcessException
+    {
+        
+        AnnotationChecker.requireExists(this, jcas, this.getLogger(), Token.class);
+        AnnotationChecker.requireNotExists(this, jcas, this.getLogger(),
+                SpellingAnomaly.class, SuggestedAction.class);
 
-		for (Token t : select(jcas, Token.class)) {
-			String tokenText = t.getCoveredText();
-			if (tokenText.matches("[\\.\\?\\!]")) {
-				continue;
-			}
-			if (!dict.isCorrect(tokenText)) {
-				SpellingAnomaly anomaly = new SpellingAnomaly(jcas, t.getBegin(), t.getEnd());
+        for (Token t : select(jcas, Token.class)) {
+            String tokenText = t.getText();
+            if (tokenText.matches("[\\.\\?\\!]")) {
+                continue;
+            }
+            if (!dict.isCorrect(tokenText)) {
+                SpellingAnomaly anomaly = new SpellingAnomaly(jcas, t.getBegin(), t.getEnd());
 
-				// only try to correct single character tokens if they are letters
-				if (tokenText.length() == 1 && !Character.isLetter(tokenText.charAt(0))) {
-				    continue;
-				}
+                // only try to correct single character tokens if they are letters
+                if (tokenText.length() == 1 && !Character.isLetter(tokenText.charAt(0))) {
+                    continue;
+                }
 
-				@SuppressWarnings("unchecked")
-				List<Word> suggestions = dict.getSuggestions(tokenText, scoreThreshold);
+                @SuppressWarnings("unchecked")
+                List<Word> suggestions = dict.getSuggestions(tokenText, scoreThreshold);
 
-				SuggestionCostTuples tuples = new SuggestionCostTuples();
-				for (Word suggestion : suggestions) {
-				    String suggestionString = suggestion.getWord();
-				    int cost = suggestion.getCost();
+                SuggestionCostTuples tuples = new SuggestionCostTuples();
+                for (Word suggestion : suggestions) {
+                    String suggestionString = suggestion.getWord();
+                    int cost = suggestion.getCost();
 
-				    if (suggestionString != null) {
-	                    tuples.addTuple(suggestionString, cost);
-				    }
-				}
+                    if (suggestionString != null) {
+                        tuples.addTuple(suggestionString, cost);
+                    }
+                }
 
-				if (tuples.size() > 0) {
-    				FSArray actions = new FSArray(jcas, tuples.size());
-    				int i=0;
-    				for (SuggestionCostTuple tuple : tuples) {
+                if (tuples.size() > 0) {
+                    FSArray actions = new FSArray(jcas, tuples.size());
+                    int i = 0;
+                    for (SuggestionCostTuple tuple : tuples) {
                         SuggestedAction action = new SuggestedAction(jcas);
                         action.setReplacement(tuple.getSuggestion());
                         action.setCertainty(tuple.getNormalizedCost(tuples.getMaxCost()));
 
                         actions.set(i, action);
                         i++;
-    				}
-    			    anomaly.setSuggestions(actions);
+                    }
+                    anomaly.setSuggestions(actions);
                     anomaly.addToIndexes();
-				}
-			}
-		}
-	}
+                }
+            }
+        }
+    }
 
     class SuggestionCostTuples implements Iterable<SuggestionCostTuple> {
-	    private final List<SuggestionCostTuple> tuples;
-	    private int maxCost;
+        private final List<SuggestionCostTuple> tuples;
+        private int maxCost;
 
-	    public SuggestionCostTuples()
+        public SuggestionCostTuples()
         {
-	        tuples = new ArrayList<SuggestionCostTuple>();
-	        maxCost = 0;
+            tuples = new ArrayList<SuggestionCostTuple>();
+            maxCost = 0;
         }
 
-	    public void addTuple(String suggestion, int cost) {
-	        tuples.add(new SuggestionCostTuple(suggestion, cost));
+        public void addTuple(String suggestion, int cost) {
+            tuples.add(new SuggestionCostTuple(suggestion, cost));
 
-	        if (cost > maxCost) {
-	            maxCost = cost;
-	        }
-	    }
+            if (cost > maxCost) {
+                maxCost = cost;
+            }
+        }
 
-	    public int getMaxCost() {
-	        return maxCost;
-	    }
+        public int getMaxCost() {
+            return maxCost;
+        }
 
-	    public int size() {
-	        return tuples.size();
-	    }
+        public int size() {
+            return tuples.size();
+        }
 
         @Override
         public Iterator<SuggestionCostTuple> iterator()
         {
             return tuples.iterator();
         }
-	}
+    }
 
     class SuggestionCostTuple {
         private final String suggestion;

@@ -17,25 +17,31 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.mallet.lda;
 
-import cc.mallet.topics.ParallelTopicModel;
-import cc.mallet.types.Instance;
-import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
+import java.io.File;
+import java.io.IOException;
+
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 
-import java.io.File;
-import java.io.IOException;
+import cc.mallet.topics.ParallelTopicModel;
+import cc.mallet.types.Instance;
+import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Estimate an LDA topic model using Mallet and write it to a file. It stores all incoming CAS' to
  * Mallet {@link Instance}s before estimating the model, using a {@link ParallelTopicModel}.
  * <p>
- * Set {@link #PARAM_TOKEN_FEATURE_PATH} to define what is considered as a token (Tokens, Lemmas, etc.).
+ * Set {@link #PARAM_TOKEN_FEATURE_PATH} to define what is considered as a token (Tokens, Lemmas,
+ * etc.).
  * <p>
- * Set {@link #PARAM_COVERING_ANNOTATION_TYPE} to define what is considered a document (sentences, paragraphs, etc.).
+ * Set {@link #PARAM_COVERING_ANNOTATION_TYPE} to define what is considered a document (sentences,
+ * paragraphs, etc.).
  */
-@ResourceMetaData(name="Mallet LDA Topic Model Trainer")
+@Component(OperationType.TRAINER_OF_MACHINE_LEARNING_MODELS)
+@ResourceMetaData(name = "Mallet LDA Topic Model Trainer")
 public class MalletLdaTopicModelTrainer
         extends MalletModelTrainer
 {
@@ -75,8 +81,8 @@ public class MalletLdaTopicModelTrainer
     private int randomSeed;
 
     /**
-     * Define how frequently a serialized model is saved to disk during estimation. Default: 0 (only save when
-     * estimation is done).
+     * Define how frequently a serialized model is saved to disk during estimation. Default: 0 (only
+     * save when estimation is done).
      */
     public static final String PARAM_SAVE_INTERVAL = "saveInterval";
     @ConfigurationParameter(name = PARAM_SAVE_INTERVAL, mandatory = true, defaultValue = "0")

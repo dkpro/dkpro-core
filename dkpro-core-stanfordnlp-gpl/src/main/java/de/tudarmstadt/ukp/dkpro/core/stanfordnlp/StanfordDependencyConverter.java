@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2017
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
@@ -58,11 +58,14 @@ import edu.stanford.nlp.trees.TreebankLanguagePack;
 import edu.stanford.nlp.trees.Trees;
 import edu.stanford.nlp.trees.TypedDependency;
 import edu.stanford.nlp.util.CoreMap;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Converts a constituency structure into a dependency structure.
  */
-@ResourceMetaData(name="CoreNLP Dependency Converter")
+@Component(OperationType.DEPENDENCY_CONVERTER)
+@ResourceMetaData(name = "CoreNLP Dependency Converter")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -241,7 +244,8 @@ public class StanfordDependencyConverter
                 dep.addToIndexes();
             }
             
-            dep.setFlavor(currTypedDep.extra() ? DependencyFlavor.ENHANCED : DependencyFlavor.BASIC);
+            dep.setFlavor(
+                    currTypedDep.extra() ? DependencyFlavor.ENHANCED : DependencyFlavor.BASIC);
         }
     }
 

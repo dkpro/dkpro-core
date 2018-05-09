@@ -18,6 +18,7 @@
 package org.dkpro.core.io.lxf.internal.model;
 
 import static java.util.Arrays.asList;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

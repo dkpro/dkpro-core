@@ -31,7 +31,7 @@ public class ContextualizerUtils
     {
         int position = -1;
         
-        for (int i=0; i<tokens.size(); i++) {
+        for (int i = 0; i < tokens.size(); i++) {
             if (tokens.get(i).getBegin() == candidate.getBegin() &&
                 tokens.get(i).getEnd()   == candidate.getEnd())
             {
@@ -49,7 +49,8 @@ public class ContextualizerUtils
         return changedWords;
     }
 
-    public static List<String> limitToContextWindow(List<String> words, int offset, int windowSize) {
+    public static List<String> limitToContextWindow(List<String> words, int offset, int windowSize)
+    {
         int minOffset = offset - windowSize;
         if (minOffset < 0) {
             minOffset = 0;
@@ -57,10 +58,10 @@ public class ContextualizerUtils
         
         int maxOffset = offset + windowSize;
         if (maxOffset >= words.size()) {
-            maxOffset = words.size()-1;
+            maxOffset = words.size() - 1;
         }
         
-        List<String> changedWords = words.subList(minOffset, maxOffset+1);
+        List<String> changedWords = words.subList(minOffset, maxOffset + 1);
             
         return changedWords;
     }

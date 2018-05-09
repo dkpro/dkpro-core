@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.io.jwpl;
 import java.io.IOException;
 import java.sql.Timestamp;
 
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.collection.CollectionException;
@@ -172,7 +172,7 @@ public class WikipediaRevisionPairReader
         String text = rev.getRevisionText();
 
         if (outputPlainText) {
-            text = StringEscapeUtils.unescapeHtml(text);
+            text = StringEscapeUtils.unescapeHtml4(text);
 
             ParsedPage pp = parser.parse(text);
 

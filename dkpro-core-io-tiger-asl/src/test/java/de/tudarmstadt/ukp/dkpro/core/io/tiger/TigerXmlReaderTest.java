@@ -17,15 +17,15 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.tiger;
 
+import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.*;
-import static org.apache.uima.fit.pipeline.SimplePipeline.*;
-import static org.apache.uima.fit.util.JCasUtil.selectSingle;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.apache.uima.fit.pipeline.SimplePipeline.iteratePipeline;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 import static org.junit.Assert.assertEquals;
-
-import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.*;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
@@ -34,6 +34,7 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
@@ -63,7 +64,7 @@ public class TigerXmlReaderTest
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
     }
 
-    @Test(expected=IllegalStateException.class)
+    @Test(expected = IllegalStateException.class)
     public void test2()
         throws Exception
     {
@@ -125,15 +126,17 @@ public class TigerXmlReaderTest
                 TigerXmlReader.PARAM_LANGUAGE, "de",
                 TigerXmlReader.PARAM_READ_PENN_TREE, true);
 
-        int[][] frameRanges = new int[][] {{4, 11}, {33, 47}, {71, 74}, {112, 138}, {143, 147}, {246, 255}};
+        int[][] frameRanges = new int[][] { { 4, 11 }, { 33, 47 }, { 71, 74 }, { 112, 138 },
+                { 143, 147 }, { 246, 255 } };
 
         for (JCas cas : iteratePipeline(reader, new AnalysisEngineDescription[] {})) {
-            for (Sentence sentence : select(cas, Sentence.class)){
-                for(SemPred frame: selectCovered(SemPred.class, sentence)){
-                    System.out.println("frame boundary " + frame.getBegin() + " : " + frame.getEnd());
+            for (Sentence sentence : select(cas, Sentence.class)) {
+                for (SemPred frame : selectCovered(SemPred.class, sentence)) {
+                    System.out
+                            .println("frame boundary " + frame.getBegin() + " : " + frame.getEnd());
                     boolean found = false;
-                    for(int[] element:frameRanges){
-                        if(element[0] == frame.getBegin() && element[1] == frame.getEnd()){
+                    for (int[] element : frameRanges) {
+                        if (element[0] == frame.getBegin() && element[1] == frame.getEnd()) {
                             found = true;
                             break;
                         }
@@ -154,7 +157,8 @@ public class TigerXmlReaderTest
                 TigerXmlReader.PARAM_LANGUAGE, "de",
                 TigerXmlReader.PARAM_READ_PENN_TREE, true);
 
-        int[][] frameRanges = new int[][] {{26, 41}, {54, 61}, {64, 85}, {97, 104}, {120, 130}, {135, 151}, {152, 169}};
+        int[][] frameRanges = new int[][] { { 26, 41 }, { 54, 61 }, { 64, 85 }, { 97, 104 },
+                { 120, 130 }, { 135, 151 }, { 152, 169 } };
         /* Frame targets:
          * Glaubwürdigkeit
          * wichtig
@@ -166,12 +170,13 @@ public class TigerXmlReaderTest
          * **/
 
         for (JCas cas : iteratePipeline(reader, new AnalysisEngineDescription[] {})) {
-            for (Sentence sentence : select(cas, Sentence.class)){
-                for(SemPred frame: selectCovered(SemPred.class, sentence)){
-                    System.out.println("frame target text [" +frame.getCoveredText() + "], frame boundary " + frame.getBegin() + " : " + frame.getEnd());
+            for (Sentence sentence : select(cas, Sentence.class)) {
+                for (SemPred frame : selectCovered(SemPred.class, sentence)) {
+                    System.out.println("frame target text [" + frame.getCoveredText()
+                            + "], frame boundary " + frame.getBegin() + " : " + frame.getEnd());
                     boolean found = false;
-                    for(int[] element:frameRanges){
-                        if(element[0] == frame.getBegin() && element[1] == frame.getEnd()){
+                    for (int[] element : frameRanges) {
+                        if (element[0] == frame.getBegin() && element[1] == frame.getEnd()) {
                             found = true;
                             break;
                         }
@@ -198,15 +203,17 @@ public class TigerXmlReaderTest
          * it spans over 2 tokens "schlage" and "mit", so the boundary should be
          * schlage.begin and mit.end ==> (4, 15)
          */
-        int[][] frameRanges = new int[][] {{4, 15}, {33, 47}, {71, 74}, {112, 138}, {143, 147}, {246, 255}};
+        int[][] frameRanges = new int[][] { { 4, 15 }, { 33, 47 }, { 71, 74 }, { 112, 138 },
+                { 143, 147 }, { 246, 255 } };
 
         for (JCas cas : iteratePipeline(reader, new AnalysisEngineDescription[] {})) {
-            for (Sentence sentence : select(cas, Sentence.class)){
-                for(SemPred frame: selectCovered(SemPred.class, sentence)){
-                    System.out.println("frame boundary " + frame.getBegin() + " : " + frame.getEnd());
+            for (Sentence sentence : select(cas, Sentence.class)) {
+                for (SemPred frame : selectCovered(SemPred.class, sentence)) {
+                    System.out
+                            .println("frame boundary " + frame.getBegin() + " : " + frame.getEnd());
                     boolean found = false;
-                    for(int[] element:frameRanges){
-                        if(element[0] == frame.getBegin() && element[1] == frame.getEnd()){
+                    for (int[] element : frameRanges) {
+                        if (element[0] == frame.getBegin() && element[1] == frame.getEnd()) {
                             found = true;
                             break;
                         }

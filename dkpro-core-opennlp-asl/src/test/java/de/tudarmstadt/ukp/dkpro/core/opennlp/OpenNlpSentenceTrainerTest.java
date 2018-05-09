@@ -45,6 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.eval.EvalUtil;
 import de.tudarmstadt.ukp.dkpro.core.eval.model.Span;
 import de.tudarmstadt.ukp.dkpro.core.eval.report.Result;
 import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2002Reader;
+import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2002Reader.ColumnSeparators;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class OpenNlpSentenceTrainerTest
@@ -65,7 +66,7 @@ public class OpenNlpSentenceTrainerTest
                 Conll2002Reader.class,
                 Conll2002Reader.PARAM_PATTERNS, split.getTrainingFiles(),
                 Conll2002Reader.PARAM_LANGUAGE, ds.getLanguage(),
-                Conll2002Reader.PARAM_COLUMN_SEPARATOR, Conll2002Reader.ColumnSeparators.TAB.getName(),
+                Conll2002Reader.PARAM_COLUMN_SEPARATOR, ColumnSeparators.TAB.getName(),
                 Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true,
                 Conll2002Reader.PARAM_HAS_HEADER, true,
                 Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true);
@@ -87,7 +88,7 @@ public class OpenNlpSentenceTrainerTest
                 Conll2002Reader.class,
                 Conll2002Reader.PARAM_PATTERNS, split.getTestFiles(),
                 Conll2002Reader.PARAM_LANGUAGE, ds.getLanguage(),
-                Conll2002Reader.PARAM_COLUMN_SEPARATOR, Conll2002Reader.ColumnSeparators.TAB.getName(),
+                Conll2002Reader.PARAM_COLUMN_SEPARATOR, ColumnSeparators.TAB.getName(),
                 Conll2002Reader.PARAM_HAS_TOKEN_NUMBER, true,
                 Conll2002Reader.PARAM_HAS_HEADER, true,
                 Conll2002Reader.PARAM_HAS_EMBEDDED_NAMED_ENTITY, true);

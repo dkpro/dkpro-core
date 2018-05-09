@@ -28,6 +28,7 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
+
 import com.ibm.icu.text.CharsetDetector;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
@@ -38,34 +39,35 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 /**
  * UIMA collection reader for plain text files.
  */
-@ResourceMetaData(name="Text Reader")
+@ResourceMetaData(name = "Text Reader")
 @MimeTypeCapability(MimeTypes.TEXT_PLAIN)
 @TypeCapability(
-        outputs={
+        outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
 public class TextReader
-	extends ResourceCollectionReaderBase
+    extends ResourceCollectionReaderBase
 {
-	/**
-	 * Automatically detect encoding.
-	 *
-	 * @see CharsetDetector
-	 */
-	public static final String ENCODING_AUTO = "auto";
+    /**
+     * Automatically detect encoding.
+     *
+     * @see CharsetDetector
+     */
+    public static final String ENCODING_AUTO = "auto";
 
-	/**
-	 * Name of configuration parameter that contains the character encoding used by the input files.
-	 */
-	public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-	@ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
-	private String sourceEncoding;
+    /**
+     * Name of configuration parameter that contains the character encoding used by the input files.
+     */
+    public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    private String sourceEncoding;
 
-	@Override
-	public void getNext(CAS aJCas)
-		throws IOException, CollectionException
-	{
-		Resource res = nextFile();
-		initCas(aJCas, res);
+    @Override
+    public void getNext(CAS aJCas)
+        throws IOException, CollectionException
+    {
+        Resource res = nextFile();
+        initCas(aJCas, res);
 
         try (InputStream is = new BufferedInputStream(
                 CompressionUtils.getInputStream(res.getLocation(), res.getInputStream()))) {
@@ -79,7 +81,7 @@ public class TextReader
                 text = IOUtils.toString(is, sourceEncoding);
             }
             
-            aJCas.setDocumentText(text);		
+            aJCas.setDocumentText(text);        
         }
-	}
+    }
 }

@@ -43,14 +43,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 /**
  * Tokenizer using Clear NLP.
  */
-@ResourceMetaData(name="ClearNLP Segmenter")
+@ResourceMetaData(name = "ClearNLP Segmenter")
 @LanguageCapability(value = "en")
 @TypeCapability(
-	    outputs = {
-	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
+        outputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
 public class ClearNlpSegmenter
-	extends SegmenterBase
+    extends SegmenterBase
 {
     /**
      * Override the default variant used to locate the model.
@@ -59,6 +59,15 @@ public class ClearNlpSegmenter
     @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
     protected String variant;
 
+    /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
     /**
      * Load the model from this location instead of locating the model automatically.
      */
@@ -94,36 +103,37 @@ public class ClearNlpSegmenter
         };
     }
 
-	@Override
-	protected void process(JCas aJCas, String aText, int aZoneBegin)
-		throws AnalysisEngineProcessException
-	{
-	    modelProvider.configure(aJCas.getCas());
-	    AbstractSegmenter segmenter = modelProvider.getResource();
+    @Override
+    protected void process(JCas aJCas, String aText, int aZoneBegin)
+        throws AnalysisEngineProcessException
+    {
+        modelProvider.configure(aJCas.getCas());
+        AbstractSegmenter segmenter = modelProvider.getResource();
 
-		List<List<String>> sentences = segmenter.getSentences(new BufferedReader(new StringReader(aText)));
+        List<List<String>> sentences = segmenter
+                .getSentences(new BufferedReader(new StringReader(aText)));
 
-		int sBegin = 0;
-		int sEnd = 0;
-		int tBegin = 0;
-		int tEnd = 0;
+        int sBegin = 0;
+        int sEnd = 0;
+        int tBegin = 0;
+        int tEnd = 0;
 
-		for (List<String> sentence : sentences) {
-			sBegin = -1;
+        for (List<String> sentence : sentences) {
+            sBegin = -1;
 
-			for (String token : sentence) {
-				tBegin = aText.indexOf(token, tEnd);
-				tEnd = tBegin + token.length();
+            for (String token : sentence) {
+                tBegin = aText.indexOf(token, tEnd);
+                tEnd = tBegin + token.length();
 
-				if (sBegin == -1) {
-					sBegin = tBegin;
-				}
+                if (sBegin == -1) {
+                    sBegin = tBegin;
+                }
 
-				createToken(aJCas, aZoneBegin + tBegin, aZoneBegin + tEnd);
-			}
-			sEnd = tEnd;
+                createToken(aJCas, aZoneBegin + tBegin, aZoneBegin + tEnd);
+            }
+            sEnd = tEnd;
 
-			createSentence(aJCas, aZoneBegin + sBegin, aZoneBegin + sEnd);
-		}
-	}
+            createSentence(aJCas, aZoneBegin + sBegin, aZoneBegin + sEnd);
+        }
+    }
 }

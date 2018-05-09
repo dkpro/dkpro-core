@@ -38,8 +38,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import junit.framework.Assert;
-
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UIMAException;
@@ -89,6 +87,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.testing.validation.CasValidator;
 import de.tudarmstadt.ukp.dkpro.core.testing.validation.Message;
 import de.tudarmstadt.ukp.dkpro.core.testing.validation.checks.Check;
+import junit.framework.Assert;
 
 public class AssertAnnotations
 {
@@ -470,7 +469,8 @@ public class AssertAnnotations
         assertEquals(expected, actual);
     }
 
-    public static void assertPennTree(String aExpected[], Collection<PennTree> aActual) {
+    public static void assertPennTree(String[] aExpected, Collection<PennTree> aActual)
+    {
         List<PennTree> actual = new ArrayList<PennTree>(aActual);
         assertEquals(aExpected.length, aActual.size());
         for (int i = 0; i < aExpected.length; i++) {
@@ -541,8 +541,8 @@ public class AssertAnnotations
             args.sort(byRole);
             
             for (SemArgLink a : args) {
-                sb.append('(').append(a.getRole()).append(':').append(a.getTarget().getCoveredText())
-                        .append(')');
+                sb.append('(').append(a.getRole()).append(':')
+                        .append(a.getTarget().getCoveredText()).append(')');
             }
             sb.append(']');
             actual.add(sb.toString());
@@ -642,8 +642,10 @@ public class AssertAnnotations
                 System.out.printf("%-20s           : %s%n", "Layer", tsd.getLayer());
                 System.out.printf("%-20s           : %s%n", "Tagset", tsd.getName());
                 System.out.printf("%-20s           : %s%n", "Component", tsd.getComponentName());
-                System.out.printf("%-20s           : %s%n", "Model location", tsd.getModelLocation());
-                System.out.printf("%-20s           : %s%n", "Model language", tsd.getModelLanguage());
+                System.out.printf(
+                        "%-20s           : %s%n", "Model location", tsd.getModelLocation());
+                System.out.printf(
+                        "%-20s           : %s%n", "Model language", tsd.getModelLanguage());
                 System.out.printf("%-20s           : %s%n", "Model variant", tsd.getModelVariant());
                 System.out.printf("%-20s           : %s%n", "Model version", tsd.getModelVersion());
                 System.out.printf("%-20s           : %b%n", "Input", tsd.getInput());
@@ -758,8 +760,10 @@ public class AssertAnnotations
                 System.out.printf("%-20s           : %s%n", "Layer", tsd.getLayer());
                 System.out.printf("%-20s           : %s%n", "Tagset", tsd.getName());
                 System.out.printf("%-20s           : %s%n", "Component", tsd.getComponentName());
-                System.out.printf("%-20s           : %s%n", "Model location", tsd.getModelLocation());
-                System.out.printf("%-20s           : %s%n", "Model language", tsd.getModelLanguage());
+                System.out.printf("%-20s           : %s%n", 
+                        "Model location", tsd.getModelLocation());
+                System.out.printf("%-20s           : %s%n", 
+                        "Model language", tsd.getModelLanguage());
                 System.out.printf("%-20s           : %s%n", "Model variant", tsd.getModelVariant());
                 System.out.printf("%-20s           : %s%n", "Model version", tsd.getModelVersion());
                 System.out.printf("%-20s           : %b%n", "Input", tsd.getInput());

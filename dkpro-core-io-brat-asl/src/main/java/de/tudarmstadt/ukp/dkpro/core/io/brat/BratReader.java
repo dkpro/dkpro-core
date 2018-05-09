@@ -43,6 +43,7 @@ import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.util.FSUtil;
 import org.apache.uima.jcas.JCas;
@@ -50,6 +51,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratAnnotationDocument;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratAttribute;
@@ -67,7 +69,8 @@ import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TypeMapping;
  * @see <a href="http://brat.nlplab.org/standoff.html">brat standoff format</a>
  * @see <a href="http://brat.nlplab.org/configuration.html">brat configuration format</a>
  */
-@ResourceMetaData(name="Brat Reader")
+@ResourceMetaData(name = "Brat Reader")
+@MimeTypeCapability({MimeTypes.APPLICATION_X_BRAT})
 public class BratReader
     extends JCasResourceCollectionReader_ImplBase
 {
@@ -75,13 +78,16 @@ public class BratReader
      * Name of configuration parameter that contains the character encoding used by the input files.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
     
     /**
      * Types that are relations. It is mandatory to provide the type name followed by two feature
      * names that represent Arg1 and Arg2 separated by colons, e.g. 
-     * <code>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent{A}</code>.
+     * <code>
+     * de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent{A}
+     * </code>.
      * Additionally, a subcategorization feature may be specified.
      */
     public static final String PARAM_RELATION_TYPES = "relationTypes";
@@ -92,25 +98,25 @@ public class BratReader
     private Map<String, RelationParam> parsedRelationTypes;    
 
     /**
-     * Types that are text annotations. It is mandatory to provide the type name which can
-     * optionally be followed by a subcategorization feature. Using this parameter is
-     * only necessary to specify a subcategorization feature. Otherwise, text annotation types are
-     * automatically detected.
+     * Using this parameter is only necessary to specify a subcategorization feature for text and
+     * event annotation types. It is mandatory to provide the type name which can optionally be
+     * followed by a subcategorization feature.
      */
     public static final String PARAM_TEXT_ANNOTATION_TYPES = "textAnnotationTypes";
     @ConfigurationParameter(name = PARAM_TEXT_ANNOTATION_TYPES, mandatory = true, defaultValue = {})
     private Set<String> textAnnotationTypes;
     private Map<String, TextAnnotationParam> parsedTextAnnotationTypes;    
 
-    public static final String PARAM_TYPE_MAPPINGS = "typeMappings";
-    @ConfigurationParameter(name = PARAM_TYPE_MAPPINGS, mandatory = false, defaultValue = {
-//            "Token -> de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-//            "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
-//            "Location -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location"
-            })
-    private String[] typeMappings;
-    private TypeMapping typeMapping;
-    
+    public static final String PARAM_TEXT_ANNOTATION_TYPE_MAPPINGS = "textAnnotationTypeMappings";
+    @ConfigurationParameter(name = PARAM_TEXT_ANNOTATION_TYPE_MAPPINGS, mandatory = false)
+    private String[] textAnnotationTypeMappings;
+    private TypeMapping textAnnotationTypeMapping;
+
+    public static final String PARAM_RELATION_TYPE_MAPPINGS = "relationTypeMappings";
+    @ConfigurationParameter(name = PARAM_RELATION_TYPE_MAPPINGS, mandatory = false)
+    private String[] relationTypeMappings;
+    private TypeMapping relationTypeMapping;
+
     private Map<String, AnnotationFS> spanIdMap;
     
     private Set<String> warnings;
@@ -133,7 +139,8 @@ public class BratReader
             parsedTextAnnotationTypes.put(p.getType(), p);
         }
 
-        typeMapping = new TypeMapping(typeMappings);
+        textAnnotationTypeMapping = new TypeMapping(textAnnotationTypeMappings);
+        relationTypeMapping = new TypeMapping(relationTypeMappings);
 
         warnings = new LinkedHashSet<String>();
     }
@@ -176,14 +183,15 @@ public class BratReader
         List<BratRelationAnnotation> relations = new ArrayList<>();
         List<BratEventAnnotation> events = new ArrayList<>();
         for (BratAnnotation anno : doc.getAnnotations()) {
-            Type type = typeMapping.getUimaType(ts, anno);
             if (anno instanceof BratTextAnnotation) {
+                Type type = textAnnotationTypeMapping.getUimaType(ts, anno);
                 create(cas, type, (BratTextAnnotation) anno);
             }
             else if (anno instanceof BratRelationAnnotation) {
                 relations.add((BratRelationAnnotation) anno);
             }
             else if (anno instanceof BratEventAnnotation) {
+                Type type = textAnnotationTypeMapping.getUimaType(ts, anno);
                 create(cas, type, (BratEventAnnotation) anno);
                 events.add((BratEventAnnotation) anno);
             }
@@ -195,13 +203,13 @@ public class BratReader
         
         // Go through the relations now
         for (BratRelationAnnotation rel : relations) {
-            Type type = typeMapping.getUimaType(ts, rel);
+            Type type = relationTypeMapping.getUimaType(ts, rel);
             create(cas, type, rel);
         }
         
         // Go through the events again and handle the slots
         for (BratEventAnnotation e : events) {
-            Type type = typeMapping.getUimaType(ts, e);
+            Type type = textAnnotationTypeMapping.getUimaType(ts, e);
             fillSlots(cas, type, doc, e);
         }
     }
@@ -223,20 +231,28 @@ public class BratReader
         
         AnnotationFS anno = aCAS.createAnnotation(aType, aAnno.getBegin(), aAnno.getEnd());
         
+        fillAttributes(anno, aAnno.getAttributes());
+        
         if (param != null && param.getSubcat() != null) {
             anno.setStringValue(getFeature(anno, param.getSubcat()), aAnno.getType());
         }
         
-        fillAttributes(anno, aAnno.getAttributes());
         aCAS.addFsToIndexes(anno);
         spanIdMap.put(aAnno.getId(), anno);
     }
 
     private void create(CAS aCAS, Type aType, BratEventAnnotation aAnno)
     {
+        TextAnnotationParam param = parsedTextAnnotationTypes.get(aType.getName());
+        
         AnnotationFS anno = aCAS.createAnnotation(aType, 
                 aAnno.getTriggerAnnotation().getBegin(), aAnno.getTriggerAnnotation().getEnd());
+
         fillAttributes(anno, aAnno.getAttributes());
+
+        if (param != null && param.getSubcat() != null) {
+            anno.setStringValue(getFeature(anno, param.getSubcat()), aAnno.getType());
+        }
         
         // Slots cannot be handled yet because they might point to events that have not been 
         // created yet.
@@ -269,6 +285,8 @@ public class BratReader
             anchor = arg2;
         }
         
+        fillAttributes(anno, aAnno.getAttributes());
+        
         if (param.getSubcat() != null) {
             anno.setStringValue(getFeature(anno, param.getSubcat()), aAnno.getType());
         }
@@ -286,8 +304,6 @@ public class BratReader
                         + "] has offsets but no anchor is specified.");
             }
         }
-        
-        fillAttributes(anno, aAnno.getAttributes());
         
         aCAS.addFsToIndexes(anno);
     }
@@ -328,7 +344,8 @@ public class BratReader
         }
     }
     
-    private void fillSlots(CAS aCas, Type aType, BratAnnotationDocument aDoc, BratEventAnnotation aE)
+    private void fillSlots(CAS aCas, Type aType, BratAnnotationDocument aDoc,
+            BratEventAnnotation aE)
     {
         AnnotationFS event = spanIdMap.get(aE.getId());
         Map<String, List<BratEventArgument>> groupedArgs = aE.getGroupedArguments();

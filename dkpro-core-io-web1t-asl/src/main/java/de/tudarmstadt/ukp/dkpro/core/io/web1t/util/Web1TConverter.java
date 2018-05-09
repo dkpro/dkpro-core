@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
@@ -80,15 +80,16 @@ public class Web1TConverter
     }
 
     public Web1TConverter(String outputPath, int aMinNGramLength, int aMaxNGramLength)
-            throws IOException
-        {
-            super();
-            this.minNgramLength = aMinNGramLength;
-            this.maxNgramLength = aMaxNGramLength;
-            init(outputPath);
-        }
+        throws IOException
+    {
+        super();
+        this.minNgramLength = aMinNGramLength;
+        this.maxNgramLength = aMaxNGramLength;
+        init(outputPath);
+    }
 
-    private void init(String aOutputPath) throws IOException{
+    private void init(String aOutputPath) throws IOException
+    {
         this.outputPath = aOutputPath;
 
         ngramWriters = initializeWriters(minNgramLength, maxNgramLength);
@@ -102,7 +103,8 @@ public class Web1TConverter
     public void add(JCas jcas, Set<String> inputPaths, Type sentenceType)
         throws IOException
     {
-        ConditionalFrequencyDistribution<Integer, String> cfd = new ConditionalFrequencyDistribution<Integer, String>();
+        ConditionalFrequencyDistribution<Integer, String> cfd = 
+                new ConditionalFrequencyDistribution<Integer, String>();
 
         CAS cas = jcas.getCas();
 
@@ -125,9 +127,9 @@ public class Web1TConverter
                     throw new IOException(e);
                 }
 
-                for (int ngramLength = minNgramLength; ngramLength <= maxNgramLength; ngramLength++) {
-                    cfd.incAll(ngramLength, new NGramStringIterable(tokenStrings, ngramLength,
-                            ngramLength));
+                for (int ngramLen = minNgramLength; ngramLen <= maxNgramLength; ngramLen++) {
+                    cfd.incAll(ngramLen,
+                            new NGramStringIterable(tokenStrings, ngramLen, ngramLen));
                 }
             }
         }
@@ -410,8 +412,7 @@ public class Web1TConverter
 
     private Map<Integer, FrequencyDistribution<String>> initializeLetterFDs(int min, int max)
     {
-
-        Map<Integer, FrequencyDistribution<String>> fdistMap = new HashMap<Integer, FrequencyDistribution<String>>();
+        Map<Integer, FrequencyDistribution<String>> fdistMap = new HashMap<>();
 
         for (int i = min; i <= max; i++) {
             FrequencyDistribution<String> fdist = new FrequencyDistribution<String>();
@@ -424,7 +425,7 @@ public class Web1TConverter
     private Map<Integer, BufferedWriter> initializeWriters(int min, int max)
         throws IOException
     {
-        Map<Integer, BufferedWriter> writers = new HashMap<Integer, BufferedWriter>();
+        Map<Integer, BufferedWriter> writers = new HashMap<>();
         for (int level = min; level <= max; level++) {
             File outputFile = new File(outputPath, level + ".txt");
 
@@ -520,5 +521,4 @@ public class Web1TConverter
     {
         this.toLowercase = toLowercase;
     }
-
 }

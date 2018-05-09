@@ -17,9 +17,15 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.frequency.phrasedetection;
 
-import de.tudarmstadt.ukp.dkpro.core.io.text.StringReader;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
@@ -28,14 +34,9 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertTrue;
+import de.tudarmstadt.ukp.dkpro.core.io.text.StringReader;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 public class FrequencyCounterTest
 {

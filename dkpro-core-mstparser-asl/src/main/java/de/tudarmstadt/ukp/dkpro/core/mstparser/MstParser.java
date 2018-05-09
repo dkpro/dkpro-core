@@ -34,14 +34,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import mstparser.DependencyInstance;
-import mstparser.DependencyParser;
-import mstparser.DependencyPipe;
-import mstparser.DependencyPipe2O;
-import mstparser.ParserOptions;
-
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -65,6 +59,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
+import mstparser.DependencyInstance;
+import mstparser.DependencyParser;
+import mstparser.DependencyPipe;
+import mstparser.DependencyPipe2O;
+import mstparser.ParserOptions;
 
 /**
  * Dependency parsing using MSTParser.
@@ -85,7 +86,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
  * {@link mstparser.DependencyInstance DependencyInstance}).
  * </p>
  */
-@ResourceMetaData(name="MSTParser Dependency Parser")
+@Component(OperationType.DEPENDENCY_PARSER)
+@ResourceMetaData(name = "MSTParser Dependency Parser")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -111,6 +113,15 @@ public class MstParser
     protected String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Load the model from this location instead of locating the model automatically.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -130,7 +141,8 @@ public class MstParser
      * Load the dependency to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = ComponentParameters.PARAM_DEPENDENCY_MAPPING_LOCATION;
+    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_DEPENDENCY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_DEPENDENCY_MAPPING_LOCATION, mandatory = false)
     protected String dependencyMappingLocation;
     
@@ -335,7 +347,7 @@ public class MstParser
 
             List<Token> tokens = selectCovered(jcas, Token.class, sentence);
             for (Token token : tokens) {
-                out.write(token.getCoveredText() + "\t");
+                out.write(token.getText() + "\t");
                 tokencount++;
             }
             out.write("\n");

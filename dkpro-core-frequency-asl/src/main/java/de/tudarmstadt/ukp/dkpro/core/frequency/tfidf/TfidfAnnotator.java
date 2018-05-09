@@ -47,7 +47,7 @@ import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util.TfidfUtils;
  * annotation type and string representation. It uses a pre-serialized {@link DfStore}, which can be
  * created using the {@link TfidfConsumer}.
  */
-@ResourceMetaData(name="TF/IDF Annotator")
+@ResourceMetaData(name = "TF/IDF Annotator")
 @TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.type.Tfidf" })
 public class TfidfAnnotator
     extends JCasAnnotator_ImplBase

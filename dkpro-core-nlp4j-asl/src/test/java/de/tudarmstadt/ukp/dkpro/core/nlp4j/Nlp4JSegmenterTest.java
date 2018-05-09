@@ -18,6 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.nlp4j;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.junit.Rule;
 import org.junit.Test;
