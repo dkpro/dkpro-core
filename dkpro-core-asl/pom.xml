@@ -307,6 +307,11 @@
         <version>1.10.0-SNAPSHOT</version>
       </dependency>
       <dependency>
+        <groupId>org.dkpro.core</groupId>
+        <artifactId>dkpro-core-io-pubannotation-asl</artifactId>
+        <version>1.10.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.io.rtf-asl</artifactId>
         <version>1.10.0-SNAPSHOT</version>
@@ -555,6 +560,7 @@
     <module>../dkpro-core-io-nyt-asl</module>
     <module>../dkpro-core-io-pdf-asl</module>
     <module>../dkpro-core-io-penntree-asl</module>
+    <module>../dkpro-core-io-pubannotation-asl</module>
     <module>../dkpro-core-io-reuters-asl</module>
     <module>../dkpro-core-io-rtf-asl</module>
     <module>../dkpro-core-io-solr-asl</module>

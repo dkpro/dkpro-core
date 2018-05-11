@@ -41,6 +41,7 @@ public final class MimeTypes
     public final static String APPLICATION_X_UIMA_BINARY = "application/x.org.dkpro.uima+binary";
     public final static String APPLICATION_X_LIF_JSON = "application/x.org.dkpro.lif+json";
     public final static String APPLICATION_X_LXF_JSON = "application/x.org.dkpro.lxf+json";
+    public final static String APPLICATION_X_PUB_ANNOTATION_JSON = "application/x.org.dkpro.pubannotation+json";
     public final static String APPLICATION_X_NEGRA3 = "application/x.org.dkpro.negra3";
     public final static String APPLICATION_X_NEGRA4 = "application/x.org.dkpro.negra4";
     public final static String APPLICATION_X_NIF_TURTLE = "application/x.org.dkpro.nif+turtle";
