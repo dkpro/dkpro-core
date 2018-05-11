@@ -36,8 +36,29 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 
+/**
+ * Reader for the PubAnnotation format.
+ * 
+ * Since the PubAnnotation format only associates spans/relations with simple values and since
+ * annotations are not typed, it is necessary to define target types and features via
+ * {@link #PARAM_SPAN_TYPE} and {@link #PARAM_SPAN_LABEL_FEATURE}. In PubAnnotation, every
+ * annotation has an ID. If the target type has a suitable feature to retain the ID, it can be
+ * configured via {@link #PARAM_SPAN_ID_FEATURE}.
+ * 
+ * The {@code sourcedb} and {@code sourceid} from the PubAnnotation document are imported as
+ * {@link DocumentMetaData#setCollectionId(String) collectionId} and
+ * {@link DocumentMetaData#setDocumentId(String) documentId} respectively. If present, also the
+ * {@code target} is imported as {@link DocumentMetaData#setDocumentUri(String) documentUri}. The
+ * {@link DocumentMetaData#setDocumentBaseUri(String) documentBaseUri} is cleared in this case.
+ * 
+ * Currently supports only span annotations, i.e. no relations or modifications. Discontinuous
+ * segments are also not supported.
+ * 
+ * @see <a href="http://www.pubannotation.org/docs/annotation-format/">PubAnnotation format</a>
+ */
 @ResourceMetaData(name = "PubAnnotation Reader")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_PUB_ANNOTATION_JSON})
 @TypeCapability(
