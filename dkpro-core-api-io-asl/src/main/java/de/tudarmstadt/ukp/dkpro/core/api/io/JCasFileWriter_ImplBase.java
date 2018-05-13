@@ -45,7 +45,9 @@ import eu.openminted.share.annotations.api.Parameters;
 
 @Parameters(
         exclude = { 
-                JCasFileWriter_ImplBase.PARAM_TARGET_LOCATION  })
+                JCasFileWriter_ImplBase.PARAM_TARGET_LOCATION,
+                JCasFileWriter_ImplBase.PARAM_SINGULAR_TARGET,
+                JCasFileWriter_ImplBase.PARAM_OVERWRITE })
 public abstract class JCasFileWriter_ImplBase
     extends JCasConsumer_ImplBase
 {

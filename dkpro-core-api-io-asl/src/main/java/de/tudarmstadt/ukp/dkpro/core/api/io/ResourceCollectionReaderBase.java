@@ -77,7 +77,10 @@ import eu.openminted.share.annotations.api.Parameters;
  */
 @Parameters(
         exclude = { 
-                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION  })
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
+                ResourceCollectionReaderBase.PARAM_INCLUDE_HIDDEN,
+                ResourceCollectionReaderBase.PARAM_USE_DEFAULT_EXCLUDES,
+                ResourceCollectionReaderBase.PARAM_LOG_FREQ })
 public abstract class ResourceCollectionReaderBase
     extends CasCollectionReader_ImplBase
 {
