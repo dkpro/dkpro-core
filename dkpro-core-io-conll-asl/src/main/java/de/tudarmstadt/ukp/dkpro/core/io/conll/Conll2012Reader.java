@@ -65,6 +65,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.WordSense;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeToJCasConverter;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reads a file in the CoNLL-2012 format.
@@ -73,6 +74,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
  *      Modeling Multilingual Unrestricted Coreference in OntoNotes</a>
  */
 @ResourceMetaData(name = "CoNLL 2012 Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2012})
 @TypeCapability(
         outputs = { 

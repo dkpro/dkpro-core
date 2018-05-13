@@ -56,11 +56,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * UIMA Binary CAS formats reader.
  */
 @ResourceMetaData(name = "UIMA Binary CAS Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({ MimeTypes.APPLICATION_X_UIMA_BINARY })
 public class BinaryCasReader
     extends ResourceCollectionReaderBase

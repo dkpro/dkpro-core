@@ -33,11 +33,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.io.lif.internal.DKPro2Lif;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Writer for the LIF format.
  */
 @ResourceMetaData(name = "LAPPS Grid LIF Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_LIF_JSON})
 @TypeCapability(
         inputs = {

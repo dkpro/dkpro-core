@@ -51,6 +51,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * This Consumer outputs the content of all CASes into the relAnnis file format. The produced files
@@ -58,6 +59,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * constituent and dependency structure.
  */
 @ResourceMetaData(name = "RelANNIS Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @TypeCapability(
         inputs = { 
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",

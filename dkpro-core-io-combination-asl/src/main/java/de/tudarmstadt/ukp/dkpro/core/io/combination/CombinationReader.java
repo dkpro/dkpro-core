@@ -37,10 +37,13 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 import org.xml.sax.SAXException;
 
+import eu.openminted.share.annotations.api.DocumentationResource;
+
 /**
  * Combines multiple readers into a single reader.
  */
 @ResourceMetaData(name = "Combining Meta-Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 public class CombinationReader
     extends CasCollectionReader_ImplBase
 {

@@ -36,6 +36,7 @@ import com.ibm.icu.text.CharsetDetector;
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * <p>Reads the ACL anthology corpus and outputs CASes with plain text documents.</p>
@@ -44,6 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
  * cleaned text. Otherwise, it is a plain text reader.</p>
  */
 @ResourceMetaData(name = "ACL Anthology Corpus Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability(MimeTypes.TEXT_PLAIN)
 @TypeCapability(
         outputs = {

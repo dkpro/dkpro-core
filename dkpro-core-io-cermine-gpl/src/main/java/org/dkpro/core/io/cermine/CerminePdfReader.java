@@ -39,6 +39,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import pl.edu.icm.cermine.ContentExtractor;
 import pl.edu.icm.cermine.exception.AnalysisException;
 
@@ -47,6 +48,7 @@ import pl.edu.icm.cermine.exception.AnalysisException;
  * <a href="https://github.com/CeON/CERMINE">https://github.com/CeON/CERMINE</a>.
  */
 @ResourceMetaData(name = "CERMINE PDF Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({ MimeTypes.APPLICATION_PDF })
 @TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading",

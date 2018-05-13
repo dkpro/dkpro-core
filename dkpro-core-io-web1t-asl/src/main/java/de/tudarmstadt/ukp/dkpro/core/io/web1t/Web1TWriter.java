@@ -33,11 +33,13 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.io.web1t.util.Web1TConverter;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Web1T n-gram index format writer.
  */
 @ResourceMetaData(name = "Web1T N-Gram Index Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_NGRAM})
 @TypeCapability(
         inputs = {

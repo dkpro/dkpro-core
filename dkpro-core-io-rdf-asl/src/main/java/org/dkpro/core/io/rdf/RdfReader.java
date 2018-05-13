@@ -45,11 +45,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reads a CAS serialized as RDF.
  */
 @ResourceMetaData(name = "UIMA CAS RDF Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_UIMA_RDF})
 public class RdfReader
     extends JCasResourceCollectionReader_ImplBase
