@@ -57,4 +57,20 @@
       <artifactId>omtd-share-annotations-api</artifactId>
     </dependency>
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>eu.openminted.share.annotations</groupId>
+        <artifactId>omtd-share-annotations-maven-plugin</artifactId>
+        <configuration>
+          <!-- 
+            There is no way to specify models for the NorvigSpellingCorrector on OpenMinTeD.
+           -->
+          <uimaDescriptorExcludes>
+            <exclude>**/NorvigSpellingCorrector.xml</exclude>
+          </uimaDescriptorExcludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

@@ -40,11 +40,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * Count unigrams and bigrams in a collection.
+ * Count uni-grams and bi-grams in a collection.
  */
-@ResourceMetaData(name = "Frequency Count Writer")
+@ResourceMetaData(name = "Frequency Writer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
-public class FrequencyCounter
+public class FrequencyWriter
         extends JCasFileWriter_ImplBase
 {
     /**

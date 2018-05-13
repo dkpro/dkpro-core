@@ -40,9 +40,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  * The class initializes a SolrServer instance, and calls {@code generateSolrDocument()} for each
  * incoming CAS, and adds the result to the Solr server. A commit is executed when all documents are
  * processed.
- *
- *
- *
  */
 public abstract class SolrWriter_ImplBase
     extends JCasConsumer_ImplBase

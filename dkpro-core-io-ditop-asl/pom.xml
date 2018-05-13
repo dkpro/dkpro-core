@@ -86,4 +86,21 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>eu.openminted.share.annotations</groupId>
+        <artifactId>omtd-share-annotations-maven-plugin</artifactId>
+        <configuration>
+          <!-- 
+            DiTopWriter requires a Mallet model file which cannot be provided on the OpenMinTeD
+            platform.
+           -->
+          <uimaDescriptorExcludes>
+            <exclude>**/DiTopWriter.xml</exclude>
+          </uimaDescriptorExcludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

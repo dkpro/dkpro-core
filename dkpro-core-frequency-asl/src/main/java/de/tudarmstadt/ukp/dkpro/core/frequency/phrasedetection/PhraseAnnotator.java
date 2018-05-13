@@ -45,10 +45,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * Annotate phrases in a sentence. Depending on the provided unigrams and the threshold, these
+ * Annotate phrases in a sentence. Depending on the provided n-grams and the threshold, these
  * comprise either one or two annotations (tokens, lemmas, ...).
  * <p>
- * In order to identify longer phrases, run the {@link FrequencyCounter} and this annotator multiple
+ * In order to identify longer phrases, run the {@link FrequencyWriter} and this annotator multiple
  * times, each time taking the results of the previous run as input. From the second run on, set
  * phrases in the feature path parameter {@link #PARAM_FEATURE_PATH}.
  */
@@ -73,7 +73,7 @@ public class PhraseAnnotator
     private boolean lowercase;
 
     /**
-     * The file providing the unigram and bigram unigrams to use.
+     * The file providing the uni-grams and bi-grams to use.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
@@ -82,7 +82,7 @@ public class PhraseAnnotator
     /**
      * The discount in order to prevent too many phrases consisting of very infrequent words to be
      * formed. A typical value is the minimum count set during model creation
-     * ({@link FrequencyCounter#PARAM_MIN_COUNT}), which is by default set to 5.
+     * ({@link FrequencyWriter#PARAM_MIN_COUNT}), which is by default set to 5.
      */
     public static final String PARAM_DISCOUNT = "discount";
     @ConfigurationParameter(name = PARAM_DISCOUNT, mandatory = true, defaultValue = "5")
@@ -186,7 +186,7 @@ public class PhraseAnnotator
                     /* do not look for bigram on last token */
                     LexicalPhrase phrase2 = sequence[i + 1];
                     String token2 = phrase2.getText();
-                    String bigram = token1 + FrequencyCounter.BIGRAM_SEPARATOR + token2;
+                    String bigram = token1 + FrequencyWriter.BIGRAM_SEPARATOR + token2;
 
                     if (bigrams.containsKey(bigram)) {
                         assert unigrams.containsKey(token1);
@@ -231,7 +231,7 @@ public class PhraseAnnotator
 
         String line;
         while ((line = reader.readLine()) != null) {
-            if (line.equals(FrequencyCounter.NGRAM_SEPARATOR_LINE)) {
+            if (line.equals(FrequencyWriter.NGRAM_SEPARATOR_LINE)) {
                 /* this should only happen once per file */
                 if (!countingUnigrams) {
                     throw new IllegalStateException(
@@ -240,7 +240,7 @@ public class PhraseAnnotator
                 countingUnigrams = false;
             }
             else {
-                String[] columns = line.split(FrequencyCounter.COLUMN_SEPARATOR);
+                String[] columns = line.split(FrequencyWriter.COLUMN_SEPARATOR);
                 if (columns.length != 2) {
                     throw new IllegalStateException("Invalid line in input file:\n" + line);
                 }

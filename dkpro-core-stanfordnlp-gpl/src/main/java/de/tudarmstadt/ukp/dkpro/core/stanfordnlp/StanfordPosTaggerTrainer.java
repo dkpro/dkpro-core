@@ -54,6 +54,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.Parameters;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -61,6 +62,9 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.TRAINER_OF_MACHINE_LEARNING_MODELS)
 @MimeTypeCapability(MimeTypes.APPLICATION_X_STANFORDNLP_TAGGER)
+@Parameters(
+        exclude = { 
+                StanfordPosTaggerTrainer.PARAM_TARGET_LOCATION  })
 @ResourceMetaData(name = "CoreNLP POS-Tagger Trainer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(

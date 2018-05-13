@@ -37,6 +37,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
@@ -48,11 +49,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.RuntimeProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
+import eu.openminted.share.annotations.api.Parameters;
 
 /**
  * TGrep2 corpus file writer. Requires {@link PennTree}s to be annotated before.
  */
+@ResourceMetaData(name = "TGrep2 Writer")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_TGREP2})
+@Parameters(
+        exclude = { 
+                TGrepWriter.PARAM_TARGET_LOCATION  })
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree"})

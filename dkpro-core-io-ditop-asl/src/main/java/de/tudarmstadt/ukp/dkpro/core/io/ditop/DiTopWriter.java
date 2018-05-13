@@ -54,6 +54,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
 import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.Parameters;
 
 /**
  * This annotator (consumer) writes output files as required by
@@ -63,6 +64,9 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  */
 @ResourceMetaData(name = "DiTop Writer")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@Parameters(
+        exclude = { 
+                DiTopWriter.PARAM_TARGET_LOCATION  })
 @MimeTypeCapability({MimeTypes.APPLICATION_X_DITOP})
 @TypeCapability(
         inputs = { 

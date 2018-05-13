@@ -46,6 +46,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.CasSentenceSampleStream;
 import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.Parameters;
 import eu.openminted.share.annotations.api.constants.OperationType;
 import opennlp.tools.dictionary.Dictionary;
 import opennlp.tools.ml.EventTrainer;
@@ -60,6 +61,9 @@ import opennlp.tools.util.TrainingParameters;
  */
 @Component(OperationType.TRAINER_OF_MACHINE_LEARNING_MODELS)
 @MimeTypeCapability(MimeTypes.APPLICATION_X_OPENNLP_SENT)
+@Parameters(
+        exclude = { 
+                OpenNlpSentenceTrainer.PARAM_TARGET_LOCATION  })
 @ResourceMetaData(name = "OpenNLP Sentence Splitter Trainer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(

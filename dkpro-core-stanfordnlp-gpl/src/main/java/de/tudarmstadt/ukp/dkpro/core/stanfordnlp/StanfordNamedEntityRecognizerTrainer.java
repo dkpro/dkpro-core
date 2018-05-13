@@ -64,6 +64,7 @@ import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.sequences.SeqClassifierFlags;
 import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.Parameters;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -71,6 +72,9 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.TRAINER_OF_MACHINE_LEARNING_MODELS)
 @MimeTypeCapability(MimeTypes.APPLICATION_X_STANFORDNLP_NER)
+@Parameters(
+        exclude = { 
+                StanfordNamedEntityRecognizerTrainer.PARAM_TARGET_LOCATION  })
 @ResourceMetaData(name = "CoreNLP Named Entity Recognizer Trainer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(

@@ -47,6 +47,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.CasNameSampleStream;
 import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.Parameters;
 import eu.openminted.share.annotations.api.constants.OperationType;
 import opennlp.tools.ml.BeamSearch;
 import opennlp.tools.ml.EventTrainer;
@@ -67,6 +68,9 @@ import opennlp.tools.util.TrainingParameters;
  */
 @Component(OperationType.TRAINER_OF_MACHINE_LEARNING_MODELS)
 @MimeTypeCapability(MimeTypes.APPLICATION_X_OPENNLP_NER)
+@Parameters(
+        exclude = { 
+                OpenNlpNamedEntityRecognizerTrainer.PARAM_TARGET_LOCATION  })
 @ResourceMetaData(name = "OpenNLP Named Entity Recognizer Trainer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(

@@ -41,7 +41,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
+import eu.openminted.share.annotations.api.Parameters;
 
+@Parameters(
+        exclude = { 
+                JCasFileWriter_ImplBase.PARAM_TARGET_LOCATION  })
 public abstract class JCasFileWriter_ImplBase
     extends JCasConsumer_ImplBase
 {

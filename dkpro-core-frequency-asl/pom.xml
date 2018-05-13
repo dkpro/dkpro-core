@@ -124,5 +124,21 @@
         </includes>
       </resource>
     </resources>
+    <plugins>
+      <plugin>
+        <groupId>eu.openminted.share.annotations</groupId>
+        <artifactId>omtd-share-annotations-maven-plugin</artifactId>
+        <configuration>
+          <!-- 
+            The components in this module do not make sense on the OpenMinTeD platform. Either
+            they write models which cannot be used on the platform, or they require models which
+            cannot be provided via the platform.
+           -->
+          <uimaDescriptorExcludes>
+            <exclude>**/*.xml</exclude>
+          </uimaDescriptorExcludes>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>
