@@ -46,11 +46,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
+import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.Parameters;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Fangorn index writer.
  */
+@Component(OperationType.WRITER)
 @ResourceMetaData(name = "Fangorn Index Writer")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_FANGORN})
 @Parameters(

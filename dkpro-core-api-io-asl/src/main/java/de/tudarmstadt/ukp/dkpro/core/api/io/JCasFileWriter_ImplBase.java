@@ -41,8 +41,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
+import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.Parameters;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
+@Component(OperationType.WRITER)
 @Parameters(
         exclude = { 
                 JCasFileWriter_ImplBase.PARAM_TARGET_LOCATION,
