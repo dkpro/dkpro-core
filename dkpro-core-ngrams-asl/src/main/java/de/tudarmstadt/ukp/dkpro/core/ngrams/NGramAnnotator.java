@@ -30,11 +30,13 @@ import org.apache.uima.jcas.JCas;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NGram;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * N-gram annotator.
  */
 @ResourceMetaData(name = "N-Gram Annotator")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
     inputs = {
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",

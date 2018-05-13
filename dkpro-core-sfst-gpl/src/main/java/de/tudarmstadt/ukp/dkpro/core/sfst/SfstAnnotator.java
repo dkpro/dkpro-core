@@ -55,6 +55,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.RuntimeProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -62,6 +63,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.MORPHOLOGICAL_TAGGER)
 @ResourceMetaData(name = "SFST Morphological Analyzer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
     inputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",

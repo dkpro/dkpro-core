@@ -50,6 +50,7 @@ import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 import edu.stanford.nlp.util.StringUtils;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -57,6 +58,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.PART_OF_SPEECH_TAGGER)
 @ResourceMetaData(name = "CoreNLP POS-Tagger")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",

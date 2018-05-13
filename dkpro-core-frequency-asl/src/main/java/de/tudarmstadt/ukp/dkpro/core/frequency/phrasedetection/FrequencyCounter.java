@@ -37,11 +37,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGene
 import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Count unigrams and bigrams in a collection.
  */
 @ResourceMetaData(name = "Frequency Count Writer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class FrequencyCounter
         extends JCasFileWriter_ImplBase
 {

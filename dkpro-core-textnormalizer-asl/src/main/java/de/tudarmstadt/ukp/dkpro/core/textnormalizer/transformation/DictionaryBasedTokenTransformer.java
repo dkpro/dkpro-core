@@ -40,6 +40,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_ImplBase;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -48,6 +49,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.NORMALIZER)
 @ResourceMetaData(name = "Dictionary-based Token Transformer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class DictionaryBasedTokenTransformer
     extends JCasTransformerChangeBased_ImplBase
 {

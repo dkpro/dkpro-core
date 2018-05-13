@@ -30,6 +30,7 @@ import edu.stanford.nlp.process.CoreLabelTokenFactory;
 import edu.stanford.nlp.process.PTBTokenizer;
 import edu.stanford.nlp.process.Tokenizer;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -38,6 +39,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.NORMALIZER)
 @ResourceMetaData(name = "Stanford Penn Treebank Normalizer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class StanfordPtbTransformer
     extends JCasTransformerChangeBased_ImplBase
 {

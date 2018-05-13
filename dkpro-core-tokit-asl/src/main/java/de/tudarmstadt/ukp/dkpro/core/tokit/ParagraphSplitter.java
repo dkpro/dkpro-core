@@ -29,6 +29,7 @@ import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -38,6 +39,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.SEGMENTER)
 @ResourceMetaData(name = "Paragraph Splitter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph"})

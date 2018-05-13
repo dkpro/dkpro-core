@@ -67,6 +67,7 @@ import edu.stanford.nlp.trees.UniversalEnglishGrammaticalRelations;
 import edu.stanford.nlp.trees.UniversalEnglishGrammaticalStructureFactory;
 import edu.stanford.nlp.trees.international.pennchinese.ChineseGrammaticalRelations;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -74,6 +75,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.CONSTITUENCY_PARSER)
 @ResourceMetaData(name = "CoreNLP Parser")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",

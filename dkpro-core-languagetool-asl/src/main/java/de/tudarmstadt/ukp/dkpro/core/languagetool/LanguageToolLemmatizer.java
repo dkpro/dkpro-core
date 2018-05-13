@@ -46,6 +46,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -56,6 +57,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.LEMMATIZER)
 @ResourceMetaData(name = "LanguageTool Lemmatizer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability({ "en", "fa", "fr", "de", "pl", "ca", "it", "br", "nl", "pt", "ru", "be", "zh",
         "da", "eo", "gl", "el", "is", "ja", "km", "lt", "ml", "ro", "sk", "sl", "es", "sv", "ta",
         "tl", "uk" })

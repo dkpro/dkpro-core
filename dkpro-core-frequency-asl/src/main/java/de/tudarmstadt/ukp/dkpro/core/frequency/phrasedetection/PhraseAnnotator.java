@@ -42,6 +42,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LexicalPhrase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Annotate phrases in a sentence. Depending on the provided unigrams and the threshold, these
@@ -52,6 +53,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * phrases in the feature path parameter {@link #PARAM_FEATURE_PATH}.
  */
 @ResourceMetaData(name = "Phrase Annotator")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class PhraseAnnotator
         extends JCasAnnotator_ImplBase
 {

@@ -56,6 +56,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpParserTagsetDescriptionProvider;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionProvider;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 import opennlp.tools.parser.AbstractBottomUpParser;
 import opennlp.tools.parser.Parse;
@@ -70,6 +71,7 @@ import opennlp.tools.util.Span;
  */
 @Component(OperationType.CONSTITUENCY_PARSER)
 @ResourceMetaData(name = "OpenNLP Parser")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",

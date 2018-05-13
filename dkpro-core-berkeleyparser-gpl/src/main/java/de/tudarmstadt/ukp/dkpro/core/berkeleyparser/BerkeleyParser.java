@@ -68,6 +68,7 @@ import edu.berkeley.nlp.PCFGLA.TreeAnnotations;
 import edu.berkeley.nlp.syntax.Tree;
 import edu.berkeley.nlp.util.Numberer;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -77,6 +78,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.CONSTITUENCY_PARSER)
 @ResourceMetaData(name = "Berkeley Parser")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @OperationalProperties(multipleDeploymentAllowed = false)
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = {

@@ -47,6 +47,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -54,6 +55,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.PART_OF_SPEECH_TAGGER)
 @ResourceMetaData(name = "FlexTag POS-Tagger")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class FlexTagPosTagger
     extends JCasAnnotator_ImplBase
 {

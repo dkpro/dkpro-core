@@ -55,6 +55,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 import is2.data.SentenceData09;
 import is2.io.CONLLReader09;
@@ -73,6 +74,7 @@ import is2.parser.Parser;
  */
 @Component(OperationType.DEPENDENCY_PARSER)
 @ResourceMetaData(name = "Mate Tools Dependency Parser")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",

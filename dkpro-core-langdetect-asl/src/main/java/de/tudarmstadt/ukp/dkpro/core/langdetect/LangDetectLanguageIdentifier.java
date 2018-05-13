@@ -38,6 +38,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -49,6 +50,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.LANGUAGE_IDENTIFIER)
 @ResourceMetaData(name = "LangDetect")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class LangDetectLanguageIdentifier
     extends JCasAnnotator_ImplBase
 {

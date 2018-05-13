@@ -44,6 +44,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 import is2.data.SentenceData09;
 import is2.io.CONLLReader09;
@@ -54,6 +55,7 @@ import is2.mtag.Tagger;
  */
 @Component(OperationType.MORPHOLOGICAL_TAGGER)
 @ResourceMetaData(name = "Mate Tools Morphological Analyzer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",

@@ -30,12 +30,14 @@ import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.model.DfModel;
 import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.model.DfStore;
 import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util.TermIterator;
 import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util.TfidfUtils;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * This consumer builds a {@link DfModel}. It collects the df (document frequency) counts for the
  * processed collection. The counts are serialized as a {@link DfModel}-object.
  */
 @ResourceMetaData(name = "TF/IDF Model Writer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class TfidfConsumer
     extends JCasAnnotator_ImplBase
 {
