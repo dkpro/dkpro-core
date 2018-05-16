@@ -50,12 +50,20 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.Parameters;
 
 /**
  * Reader for UIMA XMI files.
  */
 @ResourceMetaData(name = "UIMA XMI CAS Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@Parameters(
+        exclude = { 
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
+                ResourceCollectionReaderBase.PARAM_INCLUDE_HIDDEN,
+                ResourceCollectionReaderBase.PARAM_USE_DEFAULT_EXCLUDES,
+                ResourceCollectionReaderBase.PARAM_LOG_FREQ,
+                XmiReader.PARAM_TYPE_SYSTEM_FILE })
 @MimeTypeCapability({MimeTypes.APPLICATION_VND_XMI_XML, MimeTypes.APPLICATION_X_UIMA_XMI})
 @TypeCapability(
         outputs = {
