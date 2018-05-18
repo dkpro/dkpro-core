@@ -49,7 +49,7 @@ before, this action is not logged.</p>
   var disableStr = 'ga-disable-' + gaProperty;
 
   function optout() {
-  	gaOptout();
+    gaOptout();
     renderOptInOutButton();
   }
 
@@ -64,7 +64,7 @@ before, this action is not logged.</p>
     var optedOut = document.cookie.indexOf(disableStr + '=true') > -1;
     var trackingActive = !(Cookies.get(disableStr) != 'false');
     
-	  $("#optinButton").css('display', optedIn ? 'none' : 'inline');
+    $("#optinButton").css('display', optedIn ? 'none' : 'inline');
     $("#optoutButton").css('display', optedOut ? 'none' : 'inline');
     $("#optinoutStatus").html("<b>Tracking enabled: " + trackingActive + "</b>" );
   }
