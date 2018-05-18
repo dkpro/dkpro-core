@@ -1,6 +1,6 @@
 ---
 layout: page-fullwidth
-title: "Setting up Maven and Eclipse for DKPro Core development"
+title: "Setting up Maven and Eclipse"
 ---
 
 ## System Requirements

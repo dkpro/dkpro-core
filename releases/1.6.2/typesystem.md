@@ -1,6 +1,6 @@
 ---
 layout: page-fullwidth
-title: "DKPro Core 1.6.2 Type System"
+title: "Type System (1.6.2)"
 ---
 
 This graphics gives an overview of the most important types in the DKPro Core type system. All types shown here inherit from the UIMA `Annotation` type which provides `start` and `end` offsets.

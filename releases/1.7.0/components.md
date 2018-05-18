@@ -1,6 +1,6 @@
 ---
 layout: page-fullwidth
-title: "List of components contained in DKPro Core 1.7.0 (ASL/GPL)"
+title: "Components (1.7.0)"
 
 docs-gpl: "/apidocs/index.html?de/tudarmstadt/ukp/dkpro/core/"
 docs-asl: "/apidocs/index.html?de/tudarmstadt/ukp/dkpro/core/"

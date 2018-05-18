@@ -1,6 +1,6 @@
 ---
 layout: page-fullwidth
-title: "DKPro Core 1.7.0 Data Formats"
+title: "Data Formats (1.7.0)"
 
 docs-gpl: "apidocs/index.html?de/tudarmstadt/ukp/dkpro/core/"
 docs-asl: "apidocs/index.html?de/tudarmstadt/ukp/dkpro/core/"
