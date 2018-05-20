@@ -38,6 +38,7 @@ import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
@@ -45,6 +46,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.CasNameSampleStream;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.Parameters;
 import eu.openminted.share.annotations.api.constants.OperationType;
 import opennlp.tools.ml.BeamSearch;
 import opennlp.tools.ml.EventTrainer;
@@ -65,7 +68,16 @@ import opennlp.tools.util.TrainingParameters;
  */
 @Component(OperationType.TRAINER_OF_MACHINE_LEARNING_MODELS)
 @MimeTypeCapability(MimeTypes.APPLICATION_X_OPENNLP_NER)
+@Parameters(
+        exclude = { 
+                OpenNlpNamedEntityRecognizerTrainer.PARAM_TARGET_LOCATION  })
 @ResourceMetaData(name = "OpenNLP Named Entity Recognizer Trainer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
+@TypeCapability(
+        inputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" })
 public class OpenNlpNamedEntityRecognizerTrainer
     extends JCasConsumer_ImplBase
 {

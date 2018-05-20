@@ -50,6 +50,7 @@ import org.springframework.util.AntPathMatcher;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import eu.openminted.share.annotations.api.Parameters;
 
 /**
  * Base class for collection readers that plan to access resources on the file system or in the
@@ -74,6 +75,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  * 
  * @since 1.0.6
  */
+@Parameters(
+        exclude = { 
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
+                ResourceCollectionReaderBase.PARAM_INCLUDE_HIDDEN,
+                ResourceCollectionReaderBase.PARAM_USE_DEFAULT_EXCLUDES,
+                ResourceCollectionReaderBase.PARAM_LOG_FREQ })
 public abstract class ResourceCollectionReaderBase
     extends CasCollectionReader_ImplBase
 {

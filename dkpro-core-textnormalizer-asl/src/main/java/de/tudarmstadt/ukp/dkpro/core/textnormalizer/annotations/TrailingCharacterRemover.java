@@ -30,11 +30,13 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -42,6 +44,12 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.NORMALIZER)
 @ResourceMetaData(name = "Trailing Character Remover")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
+@TypeCapability(
+        inputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
+        outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" } )
 public class TrailingCharacterRemover
     extends JCasAnnotator_ImplBase
 {

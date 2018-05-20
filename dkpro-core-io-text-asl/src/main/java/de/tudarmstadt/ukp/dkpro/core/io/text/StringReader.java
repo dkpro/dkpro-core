@@ -24,6 +24,7 @@ import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.component.JCasCollectionReader_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
@@ -34,11 +35,14 @@ import org.apache.uima.util.ProgressImpl;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Simple reader that generates a CAS from a String. This can be useful in situations where a reader
  * is preferred over manually crafting a CAS using {@link JCasFactory#createJCas()}.
  */
+@ResourceMetaData(name = "String Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_PLAIN})
 @TypeCapability(
         outputs = {

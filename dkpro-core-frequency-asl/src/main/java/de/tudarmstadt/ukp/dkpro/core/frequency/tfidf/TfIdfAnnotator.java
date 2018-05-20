@@ -40,16 +40,18 @@ import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.model.SharedDfModel;
 import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util.FreqDist;
 import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util.TermIterator;
 import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util.TfidfUtils;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * This component adds {@link Tfidf} annotations consisting of a term and a tfidf weight. <br>
  * The annotator is type agnostic concerning the input annotation, so you have to specify the
  * annotation type and string representation. It uses a pre-serialized {@link DfStore}, which can be
- * created using the {@link TfidfConsumer}.
+ * created using the {@link TfIdfWriter}.
  */
 @ResourceMetaData(name = "TF/IDF Annotator")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.type.Tfidf" })
-public class TfidfAnnotator
+public class TfIdfAnnotator
     extends JCasAnnotator_ImplBase
 {
 

@@ -42,11 +42,11 @@ import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 /**
- * Unit test of {@link TfidfConsumer} and {@link TfidfAnnotator}.
+ * Unit test of {@link TfIdfWriter} and {@link TfIdfAnnotator}.
  * 
  * 
  */
-public class TfidfConsumerTest
+public class TfIdfWriterTest
 {
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();
@@ -63,9 +63,9 @@ public class TfidfConsumerTest
 
         AnalysisEngineDescription aggregate = createEngineDescription(
                 createEngineDescription(BreakIteratorSegmenter.class),
-                createEngineDescription(TfidfConsumer.class, 
-                        TfidfConsumer.PARAM_FEATURE_PATH, Token.class.getName(),
-                        TfidfConsumer.PARAM_TARGET_LOCATION, target));
+                createEngineDescription(TfIdfWriter.class, 
+                        TfIdfWriter.PARAM_FEATURE_PATH, Token.class.getName(),
+                        TfIdfWriter.PARAM_TARGET_LOCATION, target));
 
         // now create the tf and df files
         SimplePipeline.runPipeline(reader, aggregate);

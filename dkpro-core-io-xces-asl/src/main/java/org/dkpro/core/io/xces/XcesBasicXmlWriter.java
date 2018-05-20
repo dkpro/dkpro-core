@@ -47,9 +47,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import javanet.staxutils.IndentingXMLEventWriter;
 
 @ResourceMetaData(name = "XCES Basic XML Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_XCES_BASIC})
 @TypeCapability(
         inputs = {            

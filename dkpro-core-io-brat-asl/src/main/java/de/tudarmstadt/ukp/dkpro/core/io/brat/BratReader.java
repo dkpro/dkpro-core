@@ -62,6 +62,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratTextAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.RelationParam;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TextAnnotationParam;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TypeMapping;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reader for the brat format.
@@ -70,6 +71,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TypeMapping;
  * @see <a href="http://brat.nlplab.org/configuration.html">brat configuration format</a>
  */
 @ResourceMetaData(name = "Brat Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_BRAT})
 public class BratReader
     extends JCasResourceCollectionReader_ImplBase

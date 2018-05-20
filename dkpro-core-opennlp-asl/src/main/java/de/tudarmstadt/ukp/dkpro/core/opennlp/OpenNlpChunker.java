@@ -50,6 +50,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpChunkerTagsetDescriptionProvider;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 import opennlp.tools.chunker.Chunker;
 import opennlp.tools.chunker.ChunkerME;
@@ -60,6 +61,7 @@ import opennlp.tools.chunker.ChunkerModel;
  */
 @Component(OperationType.CHUNKER)
 @ResourceMetaData(name = "OpenNLP Chunker")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",

@@ -69,12 +69,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * ClearNLP semantic role labeller.
  */
 @Component(OperationType.ANNOTATOR_OF_SEMANTIC_ROLE_LABELS)
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @ResourceMetaData(name = "ClearNLP Semantic Role Labeler")
 @TypeCapability(
     inputs = {

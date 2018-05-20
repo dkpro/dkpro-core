@@ -50,11 +50,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.io.imscwb.util.CorpusSentence;
 import de.tudarmstadt.ukp.dkpro.core.io.imscwb.util.CorpusText;
 import de.tudarmstadt.ukp.dkpro.core.io.imscwb.util.TextIterable;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reads a tab-separated format including pseudo-XML tags.
  */
 @ResourceMetaData(name = "IMS CWB Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_IMSCWB})
 @TypeCapability(
         outputs = { 

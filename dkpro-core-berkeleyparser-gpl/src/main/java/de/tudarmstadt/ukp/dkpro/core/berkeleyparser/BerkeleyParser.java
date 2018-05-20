@@ -68,20 +68,25 @@ import edu.berkeley.nlp.PCFGLA.TreeAnnotations;
 import edu.berkeley.nlp.syntax.Tree;
 import edu.berkeley.nlp.util.Numberer;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
- * Berkeley Parser annotator . Requires {@link Sentence}s to be annotated before.
+ * Berkeley Parser annotator. Requires {@link Sentence}s to be annotated before.
  *
  * @see CoarseToFineMaxRuleParser
  */
 @Component(OperationType.CONSTITUENCY_PARSER)
 @ResourceMetaData(name = "Berkeley Parser")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @OperationalProperties(multipleDeploymentAllowed = false)
-@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = {
-        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
-        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree" })
+@TypeCapability(
+        inputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, 
+        outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree" })
 public class BerkeleyParser
     extends JCasAnnotator_ImplBase
 {

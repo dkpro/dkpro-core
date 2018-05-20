@@ -53,6 +53,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * <p>
@@ -152,6 +153,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
  *      Binary CASes</a>
  */
 @ResourceMetaData(name = "UIMA Binary CAS Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({ MimeTypes.APPLICATION_X_UIMA_BINARY })
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class BinaryCasWriter

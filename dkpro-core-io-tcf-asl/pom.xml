@@ -82,6 +82,10 @@
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.io-asl</artifactId>
     </dependency>
     <dependency>
+      <groupId>eu.openminted.share.annotations</groupId>
+      <artifactId>omtd-share-annotations-api</artifactId>
+    </dependency>
+    <dependency>
       <groupId>xmlunit</groupId>
       <artifactId>xmlunit</artifactId>
       <scope>test</scope>

@@ -28,6 +28,7 @@ import cc.mallet.topics.ParallelTopicModel;
 import cc.mallet.types.Instance;
 import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -42,6 +43,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.TRAINER_OF_MACHINE_LEARNING_MODELS)
 @ResourceMetaData(name = "Mallet LDA Topic Model Trainer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class MalletLdaTopicModelTrainer
         extends MalletModelTrainer
 {

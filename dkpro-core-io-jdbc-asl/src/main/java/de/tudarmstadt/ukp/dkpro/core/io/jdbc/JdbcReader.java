@@ -43,6 +43,7 @@ import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Collection reader for JDBC database.The obtained data will be written into CAS DocumentText as
@@ -57,6 +58,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
  * that of "title" column into the document title field of the {@link DocumentMetaData} annotation.
  */
 @ResourceMetaData(name = "JDBC-based Database Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @TypeCapability(
         outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })

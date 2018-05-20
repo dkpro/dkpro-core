@@ -40,6 +40,7 @@ import org.dkpro.core.api.embeddings.text.TextFormatVectorizer;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.WordEmbedding;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reads word embeddings from a file and adds {@link WordEmbedding} annotations to tokens/lemmas.
@@ -47,6 +48,7 @@ import de.tudarmstadt.ukp.dkpro.core.mallet.type.WordEmbedding;
  * @since 1.9.0
  */
 @ResourceMetaData(name = "Mallet Embeddings Annotator")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
         outputs = { "de.tudarmstadt.ukp.dkpro.core.mallet.type.WordEmbedding" }

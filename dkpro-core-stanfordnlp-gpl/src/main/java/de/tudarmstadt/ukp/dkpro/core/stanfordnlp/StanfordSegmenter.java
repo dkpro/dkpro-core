@@ -52,11 +52,13 @@ import edu.stanford.nlp.process.PTBTokenizer;
 import edu.stanford.nlp.process.Tokenizer;
 import edu.stanford.nlp.process.WordToSentenceProcessor;
 import edu.stanford.nlp.process.WordToSentenceProcessor.NewlineIsSentenceBreak;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Stanford sentence splitter and tokenizer.
  */
 @ResourceMetaData(name = "CoreNLP Segmenter (old API)")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability({"en", "es", "fr"})
 @TypeCapability(
         outputs = {

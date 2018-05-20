@@ -60,6 +60,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 import de.tudarmstadt.ukp.dkpro.core.treetagger.internal.DKProExecutableResolver;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -67,6 +68,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.CHUNKER)
 @ResourceMetaData(name = "TreeTagger Chunker")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" },

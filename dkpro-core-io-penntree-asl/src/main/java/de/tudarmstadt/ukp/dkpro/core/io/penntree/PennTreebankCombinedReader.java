@@ -40,11 +40,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Penn Treebank combined format reader.
  */
 @ResourceMetaData(name = "Penn Treebank Combined Format Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_PTB_COMBINED})
 @TypeCapability(
         outputs = { 
