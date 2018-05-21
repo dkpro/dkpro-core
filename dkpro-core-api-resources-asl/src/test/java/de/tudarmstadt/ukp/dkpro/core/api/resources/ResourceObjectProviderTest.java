@@ -146,13 +146,13 @@ public class ResourceObjectProviderTest
                 + "de.tudarmstadt.ukp.dkpro.core.corenlp-gpl/1.9.1/"
                 + "de.tudarmstadt.ukp.dkpro.core.corenlp-gpl-1.9.1.jar!/";
 
-        Pattern pattern = Pattern.compile(".*/(?<VID>([a-zA-Z0-9-_]+\\.)*[a-zA-Z0-9-_]+)-([0-9]+\\.)*[0-9]+(-[a-zA-Z]+)?\\.jar!/.*");
+        Pattern pattern = Pattern.compile(".*/(?<ID>([a-zA-Z0-9-_]+\\.)*[a-zA-Z0-9-_]+)-([0-9]+\\.)*[0-9]+(-[a-zA-Z]+)?\\.jar!/.*");
         
         Matcher matcher = pattern.matcher(location);
         
         assertTrue(matcher.matches());
         
-        assertEquals("de.tudarmstadt.ukp.dkpro.core.corenlp-gpl", matcher.group("VID"));
+        assertEquals("de.tudarmstadt.ukp.dkpro.core.corenlp-gpl", matcher.group("ID"));
     }
     
     private static class SharableObjectProvider extends ResourceObjectProviderBase<Object>

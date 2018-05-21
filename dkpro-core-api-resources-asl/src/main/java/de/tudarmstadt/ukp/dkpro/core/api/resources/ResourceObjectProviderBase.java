@@ -414,10 +414,10 @@ public abstract class ResourceObjectProviderBase<M>
         // POM location from the JAR file name.
         if (urls.isEmpty()) {
             Pattern pattern = Pattern.compile(
-                    ".*/(?<VID>([a-zA-Z0-9-_]+\\.)*[a-zA-Z0-9-_]+)-([0-9]+\\.)*[0-9]+(-[a-zA-Z]+)?\\.jar!/.*");
+                    ".*/(?<ID>([a-zA-Z0-9-_]+\\.)*[a-zA-Z0-9-_]+)-([0-9]+\\.)*[0-9]+(-[a-zA-Z]+)?\\.jar!/.*");
             Matcher matcher = pattern.matcher(base);
             if (matcher.matches()) {
-                String artifactIdAndVersion = matcher.group("VID");
+                String artifactIdAndVersion = matcher.group("ID");
                 String pomPattern = base + "META-INF/maven/" + aModelGroup + "/"
                         + artifactIdAndVersion + "/pom.xml";
                 lookupPatterns.add(pomPattern);
