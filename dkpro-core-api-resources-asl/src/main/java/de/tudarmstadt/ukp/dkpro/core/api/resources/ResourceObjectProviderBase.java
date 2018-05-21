@@ -413,7 +413,8 @@ public abstract class ResourceObjectProviderBase<M>
         // If the class is in a JAR (that should be the normal case), try deriving the 
         // POM location from the JAR file name.
         if (urls.isEmpty()) {
-            Pattern pattern = Pattern.compile(".*/(?<VID>([a-zA-Z0-9-_]+\\.)*[a-zA-Z0-9-_]+).jar!/.*");
+            Pattern pattern = Pattern.compile(
+                    ".*/(?<VID>([a-zA-Z0-9-_]+\\.)*[a-zA-Z0-9-_]+)-([0-9]+\\.)*[0-9]+(-[a-zA-Z]+)?\\.jar!/.*");
             Matcher matcher = pattern.matcher(base);
             if (matcher.matches()) {
                 String artifactIdAndVersion = matcher.group("VID");
@@ -774,15 +775,15 @@ public abstract class ResourceObjectProviderBase<M>
                 resolved.getProperty(ARTIFACT_URI, "").contains("${" + VERSION + "}") && 
                 isNull(resolved.getProperty(VERSION))
         ) {
+            String groupId = pph.replacePlaceholders(aProps.getProperty(GROUP_ID), resolved);
+            String artifactId = pph.replacePlaceholders(aProps.getProperty(ARTIFACT_ID), resolved);
             try {
                 // If the version is to be auto-detected, then we must have a groupId and artifactId
-                String groupId = pph.replacePlaceholders(aProps.getProperty(GROUP_ID), resolved);
-                String artifactId = pph.replacePlaceholders(aProps.getProperty(ARTIFACT_ID),
-                        resolved);
                 resolved.put(VERSION,
                         getModelVersionFromMavenPom(groupId, artifactId, contextClass));
             }
             catch (Throwable e) {
+                log.error("Unable to obtain version from POM", e);
                 // Ignore - this will be tried and reported again later by handleResolvingError
             }
         }

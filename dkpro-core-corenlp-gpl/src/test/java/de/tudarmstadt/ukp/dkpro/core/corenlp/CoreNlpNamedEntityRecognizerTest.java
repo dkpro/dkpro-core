@@ -30,6 +30,7 @@ import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
@@ -41,9 +42,6 @@ public class CoreNlpNamedEntityRecognizerTest
     public void testEnglish()
         throws Exception
     {
-        TestRunner.autoloadModelsOnNextTestRun();
-        
-        
         Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
 
         JCas jcas = runTest("en", null, "IBM where John works is in Germany .");
@@ -209,8 +207,8 @@ public class CoreNlpNamedEntityRecognizerTest
     private JCas runTest(String language, String variant, String testDocument)
         throws Exception
     {
-//        AssumeResource.assumeResource(CoreNlpNamedEntityRecognizer.class,
-//                "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "ner", language, variant);
+        AssumeResource.assumeResource(CoreNlpNamedEntityRecognizer.class,
+                "de/tudarmstadt/ukp/dkpro/core/stanfordnlp", "ner", language, variant);
 
         AnalysisEngine engine = createEngine(CoreNlpNamedEntityRecognizer.class,
                 CoreNlpNamedEntityRecognizer.PARAM_VARIANT, variant,
