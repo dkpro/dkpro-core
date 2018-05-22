@@ -43,7 +43,9 @@ import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Collection reader for JDBC database.The obtained data will be written into CAS DocumentText as
@@ -57,6 +59,7 @@ import eu.openminted.share.annotations.api.DocumentationResource;
  * will create a CAS for each record, write the content of "text" column into CAS document text and
  * that of "title" column into the document title field of the {@link DocumentMetaData} annotation.
  */
+@Component(value = OperationType.READER)
 @ResourceMetaData(name = "JDBC-based Database Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @TypeCapability(
