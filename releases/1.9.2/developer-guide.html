@@ -1,0 +1,2836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.6.1">
+<meta name="author" content="The DKPro Core Team">
+<title>DKPro Core™ Developer Guide</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
+/* Remove comment around @import statement below when using as a custom stylesheet */
+/*@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";*/
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}
+audio,canvas,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+[hidden],template{display:none}
+script{display:none!important}
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
+a{background:transparent}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+abbr[title]{border-bottom:1px dotted}
+b,strong{font-weight:bold}
+dfn{font-style:italic}
+hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}
+input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}
+input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;font-weight:400;font-style:normal;line-height:1;position:relative;cursor:auto;tab-size:4;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.center{margin-left:auto;margin-right:auto}
+.spread{width:100%}
+p.lead,.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{font-size:1.21875em;line-height:1.6}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0;direction:ltr}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:none}
+p{font-family:inherit;font-weight:400;font-size:1em;line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #ddddd8;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em;height:0}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{font-size:1em;line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0;font-size:1em}
+ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
+ul.square{list-style-type:square}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+abbr,acronym{text-transform:uppercase;font-size:90%;color:rgba(0,0,0,.8);border-bottom:1px dotted #ddd;cursor:help}
+abbr{text-transform:none}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote cite{display:block;font-size:.9375em;color:rgba(0,0,0,.6)}
+blockquote cite:before{content:"\2014 \0020"}
+blockquote cite a,blockquote cite a:visited{color:rgba(0,0,0,.6)}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media only screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:solid 1px #dedede}
+table thead,table tfoot{background:#f7f8f7;font-weight:bold}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt,table tr:nth-of-type(even){background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{display:table-cell;line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.clearfix:before,.clearfix:after,.float-group:before,.float-group:after{content:" ";display:table}
+.clearfix:after,.float-group:after{clear:both}
+*:not(pre)>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background-color:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed;word-wrap:break-word}
+*:not(pre)>code.nobreak{word-wrap:normal}
+*:not(pre)>code.nowrap{white-space:nowrap}
+pre,pre>code{line-height:1.45;color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;text-rendering:optimizeSpeed}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background-color:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button:before,b.button:after{position:relative;top:-1px;font-weight:400}
+b.button:before{content:"[";padding:0 3px 0 2px}
+b.button:after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin-left:auto;margin-right:auto;margin-top:0;margin-bottom:0;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header:before,#header:after,#content:before,#content:after,#footnotes:before,#footnotes:after,#footer:before,#footer:after{content:" ";display:table}
+#header:after,#content:after,#footnotes:after,#footer:after{clear:both}
+#content{margin-top:1.25em}
+#content:before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #ddddd8}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #ddddd8;padding-bottom:8px}
+#header .details{border-bottom:1px solid #ddddd8;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:-ms-flexbox;display:-webkit-flex;display:flex;-ms-flex-flow:row wrap;-webkit-flex-flow:row wrap;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span:before{content:"\00a0\2013\00a0"}
+#header .details br+span.author:before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark:before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber:after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #ddddd8;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #efefed;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media only screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background-color:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #efefed;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #efefed;left:auto;right:0}}
+@media only screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:100%;background-color:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:rgba(255,255,255,.8);line-height:1.44}
+.sect1{padding-bottom:.625em}
+@media only screen and (min-width:768px){.sect1{padding-bottom:1.25em}}
+.sect1+.sect1{border-top:1px solid #efefed}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor:before,h2>a.anchor:before,h3>a.anchor:before,#toctitle>a.anchor:before,.sidebarblock>.content>.title>a.anchor:before,h4>a.anchor:before,h5>a.anchor:before,h6>a.anchor:before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock>caption.title{white-space:nowrap;overflow:visible;max-width:0}
+.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{color:rgba(0,0,0,.85)}
+table.tableblock #preamble>.sectionbody>.paragraph:first-of-type p{font-size:inherit}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:initial}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #ddddd8;color:rgba(0,0,0,.6)}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border-style:solid;border-width:1px;border-color:#e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;-webkit-border-radius:4px;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
+.sidebarblock{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock pre:not(.highlight),.listingblock pre[class="highlight"],.listingblock pre[class^="highlight "],.listingblock pre.CodeRay,.listingblock pre.prettyprint{background:#f7f7f8}
+.sidebarblock .literalblock pre,.sidebarblock .listingblock pre:not(.highlight),.sidebarblock .listingblock pre[class="highlight"],.sidebarblock .listingblock pre[class^="highlight "],.sidebarblock .listingblock pre.CodeRay,.sidebarblock .listingblock pre.prettyprint{background:#f2f1f1}
+.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{-webkit-border-radius:4px;border-radius:4px;word-wrap:break-word;padding:1em;font-size:.8125em}
+.literalblock pre.nowrap,.literalblock pre[class].nowrap,.listingblock pre.nowrap,.listingblock pre[class].nowrap{overflow-x:auto;white-space:pre;word-wrap:normal}
+@media only screen and (min-width:768px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:.90625em}}
+@media only screen and (min-width:1280px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:1em}}
+.literalblock.output pre{color:#f7f7f8;background-color:rgba(0,0,0,.9)}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;-webkit-border-radius:4px;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]:before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:#999}
+.listingblock:hover code[data-lang]:before{display:block}
+.listingblock.terminal pre .command:before{content:attr(data-prompt);padding-right:.5em;color:#999}
+.listingblock.terminal pre .command:not([data-prompt]):before{content:"$"}
+table.pyhltable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.pyhltable td{vertical-align:top;padding-top:0;padding-bottom:0;line-height:1.45}
+table.pyhltable td.code{padding-left:.75em;padding-right:0}
+pre.pygments .lineno,table.pyhltable td:not(.code){color:#999;padding-left:0;padding-right:.5em;border-right:1px solid #ddddd8}
+pre.pygments .lineno{display:inline-block;margin-right:.25em}
+table.pyhltable .linenodiv{background:none!important;padding-right:0!important}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock blockquote p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote:before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.5em;margin-right:.5ex;text-align:right}
+.quoteblock .quoteblock{margin-left:0;margin-right:0;padding:.5em 0;border-left:3px solid rgba(0,0,0,.6)}
+.quoteblock .quoteblock blockquote{padding:0 0 0 .75em}
+.quoteblock .quoteblock blockquote:before{display:none}
+.verseblock{margin:0 1em 1.25em 1em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract{margin:0 0 1.25em 0;display:block}
+.quoteblock.abstract blockquote,.quoteblock.abstract blockquote p{text-align:left;word-spacing:0}
+.quoteblock.abstract blockquote:before,.quoteblock.abstract blockquote p:first-of-type:before{display:none}
+table.tableblock{max-width:100%;border-collapse:separate}
+table.tableblock td>.paragraph:last-child p>p:last-child,table.tableblock th>p:last-child,table.tableblock td>p:last-child{margin-bottom:0}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>thead>tr>.tableblock,table.grid-all>tbody>tr>.tableblock{border-width:0 1px 1px 0}
+table.grid-all>tfoot>tr>.tableblock{border-width:1px 1px 0 0}
+table.grid-cols>*>tr>.tableblock{border-width:0 1px 0 0}
+table.grid-rows>thead>tr>.tableblock,table.grid-rows>tbody>tr>.tableblock{border-width:0 0 1px 0}
+table.grid-rows>tfoot>tr>.tableblock{border-width:1px 0 0 0}
+table.grid-all>*>tr>.tableblock:last-child,table.grid-cols>*>tr>.tableblock:last-child{border-right-width:0}
+table.grid-all>tbody>tr:last-child>.tableblock,table.grid-all>thead:last-child>tr>.tableblock,table.grid-rows>tbody>tr:last-child>.tableblock,table.grid-rows>thead:last-child>tr>.tableblock{border-bottom-width:0}
+table.frame-all{border-width:1px}
+table.frame-sides{border-width:0 1px}
+table.frame-topbot{border-width:1px 0}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{display:table-cell;line-height:1.6;background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+td>div.verse{white-space:pre}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+ol>li p,ul>li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+ul.checklist{margin-left:.625em}
+ul.checklist li>p:first-child>.fa-square-o:first-child,ul.checklist li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist li>p:first-child>input[type="checkbox"]:first-child{margin-right:.25em}
+ul.inline{margin:0 auto .625em auto;margin-left:-1.375em;margin-right:0;padding:0;list-style:none;overflow:hidden}
+ul.inline>li{list-style:none;float:left;margin-left:1.375em;display:block}
+ul.inline>li>*{display:block}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist>table tr>td:first-of-type{padding:.4em .75em 0 .75em;line-height:1;vertical-align:top}
+.colist>table tr>td:first-of-type img{max-width:initial}
+.colist>table tr>td:last-of-type{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:solid 4px #fff;-webkit-box-shadow:0 0 0 1px #ddd;box-shadow:0 0 0 1px #ddd}
+.imageblock.left,.imageblock[style*="float: left"]{margin:.25em .625em 1.25em 0}
+.imageblock.right,.imageblock[style*="float: right"]{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em 0;border-width:1px 0 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;text-indent:-1.05em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+.gist .file-data>table{border:0;background:#fff;width:100%;margin-bottom:0}
+.gist .file-data>table td.line-data{width:99%}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background-color:#00fafa}
+.black{color:#000}
+.black-background{background-color:#000}
+.blue{color:#0000bf}
+.blue-background{background-color:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background-color:#fa00fa}
+.gray{color:#606060}
+.gray-background{background-color:#7d7d7d}
+.green{color:#006000}
+.green-background{background-color:#007d00}
+.lime{color:#00bf00}
+.lime-background{background-color:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background-color:#7d0000}
+.navy{color:#000060}
+.navy-background{background-color:#00007d}
+.olive{color:#606000}
+.olive-background{background-color:#7d7d00}
+.purple{color:#600060}
+.purple-background{background-color:#7d007d}
+.red{color:#bf0000}
+.red-background{background-color:#fa0000}
+.silver{color:#909090}
+.silver-background{background-color:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background-color:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background-color:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background-color:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note:before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip:before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning:before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution:before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important:before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background-color:rgba(0,0,0,.8);-webkit-border-radius:100px;border-radius:100px;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]:after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background-color:#fffef7;border-color:#e0e0dc;-webkit-box-shadow:0 1px 4px #e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@media print{@page{margin:1.25cm .75cm}
+*{-webkit-box-shadow:none!important;box-shadow:none!important;text-shadow:none!important}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare):after,a[href^="https:"]:not(.bare):after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]:after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #ddddd8!important;padding-bottom:0!important}
+.sect1{padding-bottom:0!important}
+.sect1+.sect1{border:0!important}
+#header>h1:first-child{margin-top:1.25rem}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em 0}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span:before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]:before{display:block}
+#footer{background:none!important;padding:0 .9375em}
+#footer-text{color:rgba(0,0,0,.6)!important;font-size:.9em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<style>
+/* Stylesheet for CodeRay to match GitHub theme | MIT License | http://foundation.zurb.com */
+/*pre.CodeRay {background-color:#f7f7f8;}*/
+.CodeRay .line-numbers{border-right:1px solid #d8d8d8;padding:0 0.5em 0 .25em}
+.CodeRay span.line-numbers{display:inline-block;margin-right:.5em;color:rgba(0,0,0,.3)}
+.CodeRay .line-numbers strong{color:rgba(0,0,0,.4)}
+table.CodeRay{border-collapse:separate;border-spacing:0;margin-bottom:0;border:0;background:none}
+table.CodeRay td{vertical-align: top;line-height:1.45}
+table.CodeRay td.line-numbers{text-align:right}
+table.CodeRay td.line-numbers>pre{padding:0;color:rgba(0,0,0,.3)}
+table.CodeRay td.code{padding:0 0 0 .5em}
+table.CodeRay td.code>pre{padding:0}
+.CodeRay .debug{color:#fff !important;background:#000080 !important}
+.CodeRay .annotation{color:#007}
+.CodeRay .attribute-name{color:#000080}
+.CodeRay .attribute-value{color:#700}
+.CodeRay .binary{color:#509}
+.CodeRay .comment{color:#998;font-style:italic}
+.CodeRay .char{color:#04d}
+.CodeRay .char .content{color:#04d}
+.CodeRay .char .delimiter{color:#039}
+.CodeRay .class{color:#458;font-weight:bold}
+.CodeRay .complex{color:#a08}
+.CodeRay .constant,.CodeRay .predefined-constant{color:#008080}
+.CodeRay .color{color:#099}
+.CodeRay .class-variable{color:#369}
+.CodeRay .decorator{color:#b0b}
+.CodeRay .definition{color:#099}
+.CodeRay .delimiter{color:#000}
+.CodeRay .doc{color:#970}
+.CodeRay .doctype{color:#34b}
+.CodeRay .doc-string{color:#d42}
+.CodeRay .escape{color:#666}
+.CodeRay .entity{color:#800}
+.CodeRay .error{color:#808}
+.CodeRay .exception{color:inherit}
+.CodeRay .filename{color:#099}
+.CodeRay .function{color:#900;font-weight:bold}
+.CodeRay .global-variable{color:#008080}
+.CodeRay .hex{color:#058}
+.CodeRay .integer,.CodeRay .float{color:#099}
+.CodeRay .include{color:#555}
+.CodeRay .inline{color:#000}
+.CodeRay .inline .inline{background:#ccc}
+.CodeRay .inline .inline .inline{background:#bbb}
+.CodeRay .inline .inline-delimiter{color:#d14}
+.CodeRay .inline-delimiter{color:#d14}
+.CodeRay .important{color:#555;font-weight:bold}
+.CodeRay .interpreted{color:#b2b}
+.CodeRay .instance-variable{color:#008080}
+.CodeRay .label{color:#970}
+.CodeRay .local-variable{color:#963}
+.CodeRay .octal{color:#40e}
+.CodeRay .predefined{color:#369}
+.CodeRay .preprocessor{color:#579}
+.CodeRay .pseudo-class{color:#555}
+.CodeRay .directive{font-weight:bold}
+.CodeRay .type{font-weight:bold}
+.CodeRay .predefined-type{color:inherit}
+.CodeRay .reserved,.CodeRay .keyword {color:#000;font-weight:bold}
+.CodeRay .key{color:#808}
+.CodeRay .key .delimiter{color:#606}
+.CodeRay .key .char{color:#80f}
+.CodeRay .value{color:#088}
+.CodeRay .regexp .delimiter{color:#808}
+.CodeRay .regexp .content{color:#808}
+.CodeRay .regexp .modifier{color:#808}
+.CodeRay .regexp .char{color:#d14}
+.CodeRay .regexp .function{color:#404;font-weight:bold}
+.CodeRay .string{color:#d20}
+.CodeRay .string .string .string{background:#ffd0d0}
+.CodeRay .string .content{color:#d14}
+.CodeRay .string .char{color:#d14}
+.CodeRay .string .delimiter{color:#d14}
+.CodeRay .shell{color:#d14}
+.CodeRay .shell .delimiter{color:#d14}
+.CodeRay .symbol{color:#990073}
+.CodeRay .symbol .content{color:#a60}
+.CodeRay .symbol .delimiter{color:#630}
+.CodeRay .tag{color:#008080}
+.CodeRay .tag-special{color:#d70}
+.CodeRay .variable{color:#036}
+.CodeRay .insert{background:#afa}
+.CodeRay .delete{background:#faa}
+.CodeRay .change{color:#aaf;background:#007}
+.CodeRay .head{color:#f8f;background:#505}
+.CodeRay .insert .insert{color:#080}
+.CodeRay .delete .delete{color:#800}
+.CodeRay .change .change{color:#66f}
+.CodeRay .head .head{color:#f4f}
+</style>
+<!-- Generate cross-document links to the other documentation files -->
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<script>
+$( document ).ready(function() {
+    $( "#toc" ).prepend( "\
+    		<ul style='margin-bottom: 1.5em;'>\
+    		  <li><a href='user-guide.html'>User Guide</a>\
+              <li><a href='developer-guide.html'>Developer Guide</a>\
+              <li><a href='component-reference.html'>Component Reference</a>\
+              <li><a href='format-reference.html'>Format Reference</a>\
+              <li><a href='dataset-reference.html'>Dataset Reference</a>\
+              <li><a href='typesystem-reference.html'>Typesystem Reference</a>\
+              <li><a href='model-reference.html'>Model Reference</a>\
+              <li><a href='language-reference.html'>Language Reference</a>\
+              <li><a href='tagset-reference.html'>Tagset Reference</a>\
+    		</ul>\
+	" );
+})
+</script>
+
+<!-- Generate a nice TOC -->
+<!-- script src="https://code.jquery.com/jquery-1.11.3.min.js"></script -->
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+<!-- We do not need the tocify CSS because the asciidoc CSS already provides most of what we neeed -->
+
+<style>
+.tocify-header {
+    font-style: italic;
+}
+
+.tocify-subheader {
+    font-style: normal;
+    font-size: 90%;
+}
+
+.tocify ul {
+    margin: 0;
+ }
+
+.tocify-focus {
+    color: #7a2518;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.tocify-focus > a {
+    color: #7a2518;
+}
+
+td.hdlist1,td.hdlist2,td.hdlist2 p {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+p {
+    font-size: inherit;
+}
+</style>
+<script type="text/javascript">
+    $(function () {
+    	// Add a new container for the tocify toc into the existing toc so we can re-use its
+    	// styling
+   	    $("#toc").append("<div id='generated-toc'></div>");
+        $("#generated-toc").tocify({
+            extendPage: true,
+            context: "#content",
+            highlightOnScroll: true,
+            hideEffect: "slideUp",
+            // Use the IDs that asciidoc already provides so that TOC links and intra-document
+            // links are the same. Anything else might confuse users when they create bookmarks.
+            hashGenerator: function(text, element) {
+            	return $(element).attr("id");
+            },
+            // Smooth scrolling doesn't work properly if we use the asciidoc IDs
+            smoothScroll: false,
+            // Set to 'none' to use the tocify classes
+            theme: "none",
+            // Handle book (may contain h1) and article (only h2 deeper)
+            selectors: $( "#content" ).has( "h1" ).size() > 0 ? "h1,h2,h3,h4,h5" : "h2,h3,h4,h5",
+            ignoreSelector: ".discrete"
+        });
+
+        // Switch between static asciidoc toc and dynamic tocify toc based on browser size
+        // This is set to match the media selectors in the asciidoc CSS
+        // Without this, we keep the dynamic toc even if it is moved from the side to preamble
+        // position which will cause odd scrolling behavior
+        var handleTocOnResize = function() {
+        	if ($(document).width() < 768) {
+                $("#generated-toc").hide();
+		        $(".sectlevel0").show();
+		        $(".sectlevel1").show();
+        	}
+        	else {
+                $("#generated-toc").show();
+		        $(".sectlevel0").hide();
+		        $(".sectlevel1").hide();
+        	}
+        }
+
+        $(window).resize(handleTocOnResize);
+        handleTocOnResize();
+    });
+</script>
+</head>
+<body class="book toc2 toc-left">
+<div id="header">
+<h1>DKPro Core™ Developer Guide</h1>
+<div class="details">
+<span id="author" class="author">The DKPro Core Team</span><br>
+<span id="revnumber">version 1.9.2</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Developer Guide</div>
+<ul class="sectlevel0">
+<li><a href="#sect_setup">Setup</a>
+<ul class="sectlevel1">
+<li><a href="#_git">1. GIT</a></li>
+<li><a href="#_eclipse">2. Eclipse</a>
+<ul class="sectlevel2">
+<li><a href="#_use_a_jdk">2.1. Use a JDK</a></li>
+<li><a href="#_required_plugins">2.2. Required Plugins</a></li>
+<li><a href="#_workspace_preferences">2.3. Workspace Preferences</a></li>
+<li><a href="#_import">2.4. Import</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sect_modules">Adding Modules</a>
+<ul class="sectlevel1">
+<li><a href="#_module_naming_scheme">3. Module Naming Scheme</a></li>
+<li><a href="#_module_hierarchy">4. Module Hierarchy</a></li>
+<li><a href="#_basic_pom">5. Basic POM</a></li>
+<li><a href="#_library_dependencies">6. Library Dependencies</a></li>
+<li><a href="#_model_dependencies">7. Model Dependencies</a></li>
+<li><a href="#_license_txt">8. LICENSE.txt</a></li>
+<li><a href="#_notice_txt">9. NOTICE.txt</a></li>
+</ul>
+</li>
+<li><a href="#sect_components">Implementing Components</a>
+<ul class="sectlevel1">
+<li><a href="#_general">10. General</a>
+<ul class="sectlevel2">
+<li><a href="#_capabilities">10.1. Capabilities</a></li>
+</ul>
+</li>
+<li><a href="#_analysis_components">11. Analysis components</a>
+<ul class="sectlevel2">
+<li><a href="#_base_classes">11.1. Base classes</a></li>
+<li><a href="#_models">11.2. Models</a></li>
+<li><a href="#_type_mappings">11.3. Type mappings</a></li>
+<li><a href="#_default_variants">11.4. Default variants</a></li>
+</ul>
+</li>
+<li><a href="#_i_o_components">12. I/O components</a>
+<ul class="sectlevel2">
+<li><a href="#_base_classes_2">12.1. Base classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sect_testing">Testing</a>
+<ul class="sectlevel1">
+<li><a href="#_basic_test_setup">13. Basic test setup</a></li>
+<li><a href="#_unit_test_example">14. Unit test example</a></li>
+<li><a href="#_assertannotations">15. AssertAnnotations</a></li>
+<li><a href="#_testing_i_o_componets">16. Testing I/O componets</a></li>
+</ul>
+</li>
+<li><a href="#sect_typesystem">Type System</a>
+<ul class="sectlevel1">
+<li><a href="#_types">17. Types</a></li>
+<li><a href="#_type_descriptors">18. Type descriptors</a></li>
+<li><a href="#_documentation">19. Documentation</a>
+<ul class="sectlevel2">
+<li><a href="#_type_descriptors_2">19.1. Type descriptors</a></li>
+<li><a href="#_types_2">19.2. Types</a></li>
+</ul>
+</li>
+<li><a href="#_jcas_classes">20. JCas classes</a></li>
+<li><a href="#_compliance_validation">21. Compliance validation</a></li>
+</ul>
+</li>
+<li><a href="#sect_models">Models and Resources</a>
+<ul class="sectlevel1">
+<li><a href="#_architecture">22. Architecture</a>
+<ul class="sectlevel2">
+<li><a href="#_versioning_scheme">22.1. Versioning scheme</a></li>
+</ul>
+</li>
+<li><a href="#_packaging_resources">23. Packaging resources</a>
+<ul class="sectlevel2">
+<li><a href="#_installing_ant_in_eclipse">23.1. Installing Ant in Eclipse</a></li>
+<li><a href="#_implementing_a_build_xml_script">23.2. Implementing a build.xml script</a></li>
+<li><a href="#_running_the_build_xml_script">23.3. Running the build.xml script</a></li>
+<li><a href="#_example_how_to_package_treetagger_binaries_and_models">23.4. Example: how to package TreeTagger binaries and models</a></li>
+</ul>
+</li>
+<li><a href="#_updating_a_model">24. Updating a model</a>
+<ul class="sectlevel2">
+<li><a href="#_md5_checksum_check_fails">24.1. MD5 checksum check fails</a></li>
+</ul>
+</li>
+<li><a href="#_metadata">25. Metadata</a>
+<ul class="sectlevel2">
+<li><a href="#_low_level_tagset_mapping">25.1. Low-level tagset mapping</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This document is targets developers of DKPro Core components.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<h1 id="sect_setup" class="sect0"><a class="anchor" href="#sect_setup"></a>Setup</h1>
+<div class="openblock partintro">
+<div class="content">
+This section explains the setup for developers. Please also refer to the <strong>Setup</strong> section in the
+User&#8217;s Guide as it may contain additional information necessary to run DKPro Core components
+(e.g. special libraries that need to be installed depending on your operating system).
+</div>
+</div>
+<div class="sect1">
+<h2 id="_git"><a class="anchor" href="#_git"></a>1. GIT</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>All DKPro Core files are stored using UNIX line endings. If you develop on Windows, you have to
+set the <code>core.autocrlf</code> configuration setting to <code>input</code> to avoid accidentally submitting Windows
+line endings to the repository. Using <code>input</code> is a good strategy in most cases, thus you should
+consider setting this as a global (add <code>--global</code>) or even as a system (<code>--system</code>) setting.</p>
+</div>
+<div class="listingblock">
+<div class="title">Configure git line ending treatment</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">C:\&gt; git config --global core.autocrlf input</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After changing this setting, best do a fresh clone and check-out of DKPro Core.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_eclipse"><a class="anchor" href="#_eclipse"></a>2. Eclipse</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_use_a_jdk"><a class="anchor" href="#_use_a_jdk"></a>2.1. Use a JDK</h3>
+<div class="paragraph">
+<p>On Linux or OS X, the following setting is not necessary. Having a full JDK installed on your
+system is generally sufficient. You can skip on to the next section.</p>
+</div>
+<div class="paragraph">
+<p>On Windows, you need to edit the <code>eclipse.ini</code> file and directly before the <code>-vmargs</code> line, you
+have to add the following two lines. Mind to replace <code>C:/Program Files/Java/jdk1.8.0_144</code> with the actual
+location of the JDK on your system. Without this, Eclipse will complain that the
+<code>jdk.tools:jdk.tools</code> artifact would be missing.</p>
+</div>
+<div class="listingblock">
+<div class="title">Force Eclipse to run on a JDK</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">-vm
+C:/Program Files/Java/jdk1.8.0_144/jre/bin/server/jvm.dll</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_required_plugins"><a class="anchor" href="#_required_plugins"></a>2.2. Required Plugins</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Maven Integration:</strong> m2e , already comes pre-installed with the Eclipse IDE for Java Developers.
+If you use another edition of Eclipse which does not have m2e pre-installed, go to
+<strong>Help&#8594;Install New Software</strong>, select <strong>--All available sites--</strong> and choose
+<strong>Collaboration &#8594; m2e - Maven Integration for Eclipse</strong></p>
+</li>
+<li>
+<p><strong>Apache UIMA tools:</strong> Update site: <code><a href="http://www.apache.org/dist/uima/eclipse-update-site/" class="bare">http://www.apache.org/dist/uima/eclipse-update-site/</a></code></p>
+</li>
+<li>
+<p><strong>Groovy:</strong> Find the applicable update site here: <code><a href="https://github.com/groovy/groovy-eclipse/wiki" class="bare">https://github.com/groovy/groovy-eclipse/wiki</a></code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Make sure to install at least the Groovy Eclipse Feature, the Groovy Compiler (2.4), and the
+Groovy M2E Integration.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Checkstyle Eclipse plugin:</strong> Update site: <code><a href="http://eclipse-cs.sf.net/update" class="bare">http://eclipse-cs.sf.net/update</a></code></p>
+</li>
+<li>
+<p><strong>Checkstyle configuration plugin for M2Eclipse:</strong> Update site:
+<code><a href="http://m2e-code-quality.github.com/m2e-code-quality/site/latest/" class="bare">http://m2e-code-quality.github.com/m2e-code-quality/site/latest/</a></code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_workspace_preferences"><a class="anchor" href="#_workspace_preferences"></a>2.3. Workspace Preferences</h3>
+<div class="paragraph">
+<p>The following settings are recommended for the <strong>Eclipse Workspace Preferences</strong>:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Setting</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">General &#8594; Workspace &#8594; Text file encoding</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UTF-8</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">General &#8594; Workspace &#8594; New text file line delimiter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unix</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">General &#8594; Editors &#8594; Text Editors &#8594; Displayed tab width</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">General &#8594; Editors &#8594; Text Editors &#8594; Insert spaces for tabs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">General &#8594; Editors &#8594; Text Editors &#8594; Show print margin</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">General &#8594; Editors &#8594; Text Editors &#8594; Print margin column</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">100</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XML &#8594; XML Files &#8594; Editor &#8594; Line width</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">100</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XML &#8594; XML Files &#8594; Editor &#8594; Format comments</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XML &#8594; XML Files &#8594; Editor &#8594; Indent using spaces</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">selected</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XML &#8594; XML Files &#8594; Editor &#8594; Indentation size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_import"><a class="anchor" href="#_import"></a>2.4. Import</h3>
+<div class="paragraph">
+<p>In Eclipse, go to <strong>File &#8594; Import</strong>, choose <strong>Existing Maven projects</strong>, and select the folder to
+which you have cloned DKPro Core. Eclipse should automatically detect all modules. Mind that
+DKPro Core is a large project and it takes significant time until all dependencies have been
+downloaded and until the first build is complete.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<h1 id="sect_modules" class="sect0"><a class="anchor" href="#sect_modules"></a>Adding Modules</h1>
+<div class="openblock partintro">
+<div class="content">
+DKPro Core consists of a number of Maven modules. The actual components (readers, writers) as
+well as the DKPro Core types and APIs reside within these modules.
+</div>
+</div>
+<div class="sect1">
+<h2 id="_module_naming_scheme"><a class="anchor" href="#_module_naming_scheme"></a>3. Module Naming Scheme</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The name is the first thing to consider when creating a new module.</p>
+</div>
+<div class="paragraph">
+<p>Although the modules are technically all the same, in the naming scheme, we discern between the
+following types of modules:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>API modules (<code>dkpro-core-api-NAME-asl</code>) - these modules contain common base classes, utility
+classes, type system definitions and JCas classes. Since API modules are used in many places,
+they must be licensed under the Apache License.</p>
+</li>
+<li>
+<p>IO modules (<code>dkpro-core-io-NAME-LIC</code>) - these modules contain reader and writer components. They
+are usually named after the file format (e.g. <code>lif</code>) or family of file formats they support
+(e.g. <code>conll</code>).</p>
+</li>
+<li>
+<p>FS modules (<code>dkpro-core-fs-NAME-LIC</code>) - these modules contain support for specific file systems.
+They are usually named after the file system type they support (e.g. <code>hdfs</code>).</p>
+</li>
+<li>
+<p>Component modules (<code>dkpro-core-NAME-LIC</code>) - these modules contain processing components.
+They are usually named after the tool or library that is wrapped (e.g. <code>treetagger</code> or <code>corenlp</code>).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In addition to the four categories, there are a view unique modules which do not fall into any
+of these categories, e.g. <code>de.tudarmstadt.ukp.dkpro.core.testing-asl</code> or
+<code>de.tudarmstadt.ukp.dkpro.core.doc-asl</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+DKPro Core is in a transition phase from the traditional but deprecated naming scheme
+      (<code>de.tudarmstadt.ukp.dkpro.core&#8230;&#8203;</code>) to the new naming scheme (<code>org.dkpro.core&#8230;&#8203;</code>). Many modules
+      still make use of the old naming scheme.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The naming scheme applies in several occasions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>module folder - the sub-folder within the DKPro Core project which contains the module</p>
+</li>
+<li>
+<p>artifactId - the Maven artifactId as recorded in the <code>pom.xml</code> file. The groupId should always
+be <code>org.dkpro.core</code>.</p>
+</li>
+<li>
+<p>Java packages - the module name translates roughly into the Java package names, e.g. the root
+Java package in the module <code>dkpro-core-io-lif-asl</code> is <code>org.dkpro.core.io.lif</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_module_hierarchy"><a class="anchor" href="#_module_hierarchy"></a>4. Module Hierarchy</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Once you have decided on a name for the new module, you proceed by creating a new module folder.
+Module folders are created directly under the root of the DKPro Core source tree.</p>
+</div>
+<div class="paragraph">
+<p>Although the folder structure of DKPro Core appears as if there would be a flat list of modules,
+there is actually a shallow hierarchy of modules (i.e. the folder hierarchy does not correspond
+to the Maven module hierarchy).</p>
+</div>
+<div class="paragraph">
+<p>The <strong>DKPro Core Parent POM</strong> is at the root of the module and of the folder hierarchy. Its parent
+is the <strong>DKPro Parent POM</strong> which is maintained in a separate source tree and which follows its own
+release cycle. The <strong>DKPro Parent POM</strong> defines a set of default settings, profiles, and managed
+dependencies useful for all DKPro projects. The <strong>DKPro Core Parent POM</strong> defines settings specific
+to DKPro Core.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>DKPro Parent POM
+  DKPro Core Parent POM
+    DKPro Core ASL Parent POM
+      ... DKPro Core ASL modules ...
+    DKPro Core GPL Parent POM
+      ... DKPro Core GPL modules ...
+    DKPro Core Documentation</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>New modules are added either in the <code>&lt;modules&gt;</code> section of the <strong>DKPro Core ASL Parent POM</strong> or of the
+<strong>DKPro Core GPL Parent POM</strong> depending on whether the new module can be licensed under the Apache License
+or whether it has to be licensed under the GPL due to a GPL dependency. The these two parent POMs
+configure different sets of license checkers. For ASL modules, the <a href="http://creadur.apache.org/rat/apache-rat-plugin/">Apache RAT Maven Plugin</a> is used; for the GPL modules, the <a href="http://code.mycila.com/license-maven-plugin/">License Maven Plugin</a> is used.</p>
+</div>
+<div class="paragraph">
+<p>Note that the <code>&lt;modules&gt;</code> section in these POMs points to the folders which contain the respective
+modules. Since the folder hierarchy is flat (unlike the module hierarchy), the module names here
+need to be prefixed with <code>../</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Excerpt from the DKPro Core ASL Parent POM modules section</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;modules&gt;</span>
+  <span class="comment">&lt;!-- API modules --&gt;</span>
+  <span class="tag">&lt;module&gt;</span>../dkpro-core-api-anomaly-asl<span class="tag">&lt;/module&gt;</span>
+  <span class="tag">&lt;module&gt;</span>../dkpro-core-api-coref-asl<span class="tag">&lt;/module&gt;</span>
+  ...
+  <span class="comment">&lt;!-- FS modules --&gt;</span>
+  <span class="tag">&lt;module&gt;</span>../dkpro-core-fs-hdfs-asl<span class="tag">&lt;/module&gt;</span>
+  <span class="comment">&lt;!-- IO modules --&gt;</span>
+  <span class="tag">&lt;module&gt;</span>../dkpro-core-io-aclanthology-asl<span class="tag">&lt;/module&gt;</span>
+  <span class="tag">&lt;module&gt;</span>../dkpro-core-io-ancora-asl<span class="tag">&lt;/module&gt;</span>
+  ...
+  <span class="comment">&lt;!-- Processing modules --&gt;</span>
+  <span class="tag">&lt;module&gt;</span>../dkpro-core-castransformation-asl<span class="tag">&lt;/module&gt;</span>
+  <span class="tag">&lt;module&gt;</span>../dkpro-core-cisstem-asl<span class="tag">&lt;/module&gt;</span>
+  ...
+<span class="tag">&lt;/modules&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In addition to adding a new module to the <code>&lt;modules&gt;</code> section of the respective parent POM, it
+also needs to be added to the <code>&lt;dependencyManagement&gt;</code> section with this POM:</p>
+</div>
+<div class="listingblock">
+<div class="title">Excerpt from the DKPro Core ASL Parent POM dependency management section</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependencyManagement&gt;</span>
+  <span class="tag">&lt;dependencies&gt;</span>
+    <span class="tag">&lt;dependency&gt;</span>
+      <span class="tag">&lt;groupId&gt;</span>org.dkpro.core<span class="tag">&lt;/groupId&gt;</span>
+      <span class="tag">&lt;artifactId&gt;</span>dkpro-core-foo-asl<span class="tag">&lt;/artifactId&gt;</span>
+      <span class="tag">&lt;version&gt;</span>1.9.2<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;/dependency&gt;</span>
+    ...
+  <span class="tag">&lt;/dependencies&gt;</span>
+<span class="tag">&lt;/dependencyManagement&gt;</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you create a GPLed module, copy the <code>.license-header.txt</code> file from another GPLed module
+      to your new module in order to properly configure the license checker. Mind that the GPL license
+      text in XML files must be indented by <strong>4 spaces</strong> and will not be recognized otherwise. You may
+      have to adjust the text, depending on whether the module can be licensed under GPLv3 or has to
+      be licensed under GPLv2.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If not all of the dependencies of your new module are available from Maven Central or
+      JCenter, then add the module within the <code>&lt;modules&gt;</code> and <code>&lt;dependencyManagemen&gt;</code> sections located
+      under the <code>deps-not-on-maven-central</code> profile within the respective parent POM. Also add the
+      required third-party repositories there if necessary.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_basic_pom"><a class="anchor" href="#_basic_pom"></a>5. Basic POM</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Next, you create a basic POM inside your new module folder. Below is an example of a minimal
+POM for a new Apache-licensed component module. If you create a GPL-licensed module instead,
+replace the <code>-asl</code> suffixes with <code>-gpl</code> and copy the license header from another GPLed module.</p>
+</div>
+<div class="listingblock">
+<div class="title">Minimal sample POM for a new Apache-licensed component module</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="comment">&lt;!--
+  Licensed to the Technische Universität Darmstadt under one
+  or more contributor license agreements. See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership. The Technische Universität Darmstadt
+  licenses this file to you under the Apache License, Version 2.0 (the
+  &quot;License&quot;); you may not use this file except in compliance
+  with the License.
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--&gt;</span>
+<span class="tag">&lt;project</span> <span class="attribute-name">xmlns</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://maven.apache.org/POM/4.0.0</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">xmlns:xsi</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.w3.org/2001/XMLSchema-instance</span><span class="delimiter">&quot;</span></span>
+  <span class="attribute-name">xsi:schemaLocation</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+  <span class="tag">&lt;modelVersion&gt;</span>4.0.0<span class="tag">&lt;/modelVersion&gt;</span>
+  <span class="tag">&lt;parent&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>de.tudarmstadt.ukp.dkpro.core<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>de.tudarmstadt.ukp.dkpro.core-asl<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>1.9.2<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;relativePath&gt;</span>../dkpro-core-asl<span class="tag">&lt;/relativePath&gt;</span>
+  <span class="tag">&lt;/parent&gt;</span>
+  <span class="tag">&lt;groupId&gt;</span>org.dkpro.core<span class="tag">&lt;/groupId&gt;</span>
+  <span class="tag">&lt;artifactId&gt;</span>dkpro-core-foo-asl<span class="tag">&lt;/artifactId&gt;</span>
+  <span class="tag">&lt;packaging&gt;</span>jar<span class="tag">&lt;/packaging&gt;</span>
+  <span class="tag">&lt;name&gt;</span>DKPro Core ASL - Foo NLP Suite (v ${foo.version})<span class="tag">&lt;/name&gt;</span>
+  <span class="tag">&lt;properties&gt;</span>
+    <span class="tag">&lt;foo.version&gt;</span>1.8.2<span class="tag">&lt;/foo.version&gt;</span>
+  <span class="tag">&lt;/properties&gt;</span>
+  <span class="tag">&lt;dependencies&gt;</span>
+  <span class="tag">&lt;/dependencies&gt;</span>
+<span class="tag">&lt;/project&gt;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_library_dependencies"><a class="anchor" href="#_library_dependencies"></a>6. Library Dependencies</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In order to avoid unpleasant surprises, DKPro Core uses the Maven Dependency Plugin to check if
+all dependencies used directly within the code of a module are also explicitly declared in the
+module POM. If this is not the case, the automated builds fail (they run with <code>-DfailOnWarning</code>).
+This means, you have to declare dependencies for all libraries that you are using directly
+from your code in the <code>&lt;dependencies&gt;</code> section. If a dependency is only required during testing,
+it must be marked with <code>&lt;scope&gt;test&lt;/scope&gt;</code>. Below, you find a few typical libraries used in many
+modules. Note that there is no version defined for these dependencies. The versions for many
+libraries used by multiple modules in DKPro Core are defined in the <strong>DKPro Core Parent POM</strong>.
+Only libraries that are specific to a particular module, e.g. the specific NLP library wrapped,
+should have their versions defined within the module POM.</p>
+</div>
+<div class="listingblock">
+<div class="title">Typical dependencies section</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+  <span class="tag">&lt;groupId&gt;</span>org.apache.uima<span class="tag">&lt;/groupId&gt;</span>
+  <span class="tag">&lt;artifactId&gt;</span>uimaj-core<span class="tag">&lt;/artifactId&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span>
+<span class="tag">&lt;dependency&gt;</span>
+  <span class="tag">&lt;groupId&gt;</span>org.apache.uima<span class="tag">&lt;/groupId&gt;</span>
+  <span class="tag">&lt;artifactId&gt;</span>uimafit-core<span class="tag">&lt;/artifactId&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span>
+<span class="tag">&lt;dependency&gt;</span>
+  <span class="tag">&lt;groupId&gt;</span>org.apache.commons<span class="tag">&lt;/groupId&gt;</span>
+  <span class="tag">&lt;artifactId&gt;</span>commons-lang3<span class="tag">&lt;/artifactId&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span>
+<span class="tag">&lt;dependency&gt;</span>
+  <span class="tag">&lt;groupId&gt;</span>commons-io<span class="tag">&lt;/groupId&gt;</span>
+  <span class="tag">&lt;artifactId&gt;</span>commons-io<span class="tag">&lt;/artifactId&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span>
+<span class="tag">&lt;dependency&gt;</span>
+  <span class="tag">&lt;groupId&gt;</span>de.tudarmstadt.ukp.dkpro.core<span class="tag">&lt;/groupId&gt;</span>
+  <span class="tag">&lt;artifactId&gt;</span>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl<span class="tag">&lt;/artifactId&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span>
+<span class="tag">&lt;dependency&gt;</span>
+  <span class="tag">&lt;groupId&gt;</span>junit<span class="tag">&lt;/groupId&gt;</span>
+  <span class="tag">&lt;artifactId&gt;</span>junit<span class="tag">&lt;/artifactId&gt;</span>
+  <span class="tag">&lt;scope&gt;</span>test<span class="tag">&lt;/scope&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span>
+<span class="tag">&lt;dependency&gt;</span>
+  <span class="tag">&lt;groupId&gt;</span>de.tudarmstadt.ukp.dkpro.core<span class="tag">&lt;/groupId&gt;</span>
+  <span class="tag">&lt;artifactId&gt;</span>de.tudarmstadt.ukp.dkpro.core.testing-asl<span class="tag">&lt;/artifactId&gt;</span>
+  <span class="tag">&lt;scope&gt;</span>test<span class="tag">&lt;/scope&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You may notice the <code>foo.version</code> property in the minimal POM example above. This property should
+be used to set the version of wrapped NLP library. It should appear in the name of the module
+as well as in the specific dependency for the wrapped library.</p>
+</div>
+<div class="listingblock">
+<div class="title">Typical dependencies section</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+  <span class="tag">&lt;groupId&gt;</span>org.foo.nlp<span class="tag">&lt;/groupId&gt;</span>
+  <span class="tag">&lt;artifactId&gt;</span>foo-nlp-suite<span class="tag">&lt;/artifactId&gt;</span>
+  <span class="tag">&lt;version&gt;</span>${foo.version}<span class="tag">&lt;/version&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_model_dependencies"><a class="anchor" href="#_model_dependencies"></a>7. Model Dependencies</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When you package models for your new component, they need a special treatment in the POM. First,
+although it is a good idea to create unit tests based on the models, most often you do not want
+to download all models and run all unit tests during a normal developer build (some models are
+very large any may quickly fill up your hard disk). Second, the Maven Dependency Plugin is unable
+to detect that your code or tests make use of the models and it needs to be configured in a
+special way to allow the build to pass even though it considers the model dependencies as
+unnecessary.</p>
+</div>
+<div class="paragraph">
+<p>So assuming you have a model for your component, then first add it to the <code>&lt;dependencyManagemen&gt;</code>
+section of the POM - here you specify the version but not the scope. All models you have get
+added to this section, irrespective of whether you want to use them for testing or not.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependencyManagement&gt;</span>
+  <span class="tag">&lt;dependencies&gt;</span>
+    <span class="tag">&lt;dependency&gt;</span>
+      <span class="tag">&lt;groupId&gt;</span>de.tudarmstadt.ukp.dkpro.core<span class="tag">&lt;/groupId&gt;</span>
+      <span class="tag">&lt;artifactId&gt;</span>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent<span class="tag">&lt;/artifactId&gt;</span>
+      <span class="tag">&lt;version&gt;</span>20120616.1<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;/dependency&gt;</span>
+  <span class="tag">&lt;/dependencies&gt;</span>
+<span class="tag">&lt;/dependencyManagement&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you also want to use the model for testing, then you add it also to the <code>&lt;dependencies&gt;</code> section
+of the POM. Here you specify the scope but not the version. Then you also have to configure the
+Maven Dependency Plugin to accept the presence of the dependency.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependencies&gt;</span>
+  <span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>de.tudarmstadt.ukp.dkpro.core<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;scope&gt;</span>test<span class="tag">&lt;/scope&gt;</span>
+  <span class="tag">&lt;/dependency&gt;</span>
+<span class="tag">&lt;dependencies&gt;</span>
+<span class="tag">&lt;build&gt;</span>
+  <span class="tag">&lt;pluginManagement&gt;</span>
+    <span class="tag">&lt;plugins&gt;</span>
+      <span class="tag">&lt;plugin&gt;</span>
+        <span class="tag">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/groupId&gt;</span>
+        <span class="tag">&lt;artifactId&gt;</span>maven-dependency-plugin<span class="tag">&lt;/artifactId&gt;</span>
+        <span class="tag">&lt;configuration&gt;</span>
+          <span class="tag">&lt;usedDependencies&gt;</span>
+            <span class="comment">&lt;!-- Models not detected by byte-code analysis --&gt;</span>
+            <span class="tag">&lt;usedDependency&gt;</span>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent<span class="tag">&lt;/usedDependency&gt;</span>
+          <span class="tag">&lt;/usedDependencies&gt;</span>
+        <span class="tag">&lt;/configuration&gt;</span>
+      <span class="tag">&lt;/plugin&gt;</span>
+    <span class="tag">&lt;/plugins&gt;</span>
+  <span class="tag">&lt;/pluginManagement&gt;</span>
+<span class="tag">&lt;/build&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As said before, if you have many models for your component, it is a good idea to use only a small
+set for regular testing. If you want to create tests for additional models or even for all of
+your models, then it is best to add the dependencies for these under a profile called <code>use-full-resources</code>.
+This profile is enabled for automated builds or can be enabled on demand by developers who wish
+to run all tests. In the example below, we add an additional test dependency on a German model
+if the profile <code>use-full-resources</code> is enabled. Note that the Maven Dependency Plugin is also again
+configured within the profile and that the <code>combine.children="append"</code> parameter is used to merge
+the configuration with the one already present for the default build.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;profiles&gt;</span>
+  <span class="tag">&lt;profile&gt;</span>
+    <span class="tag">&lt;id&gt;</span>use-full-resources<span class="tag">&lt;/id&gt;</span>
+    <span class="tag">&lt;dependencies&gt;</span>
+      <span class="tag">&lt;dependency&gt;</span>
+        <span class="tag">&lt;groupId&gt;</span>de.tudarmstadt.ukp.dkpro.core<span class="tag">&lt;/groupId&gt;</span>
+        <span class="tag">&lt;artifactId&gt;</span>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-maxent<span class="tag">&lt;/artifactId&gt;</span>
+        <span class="tag">&lt;scope&gt;</span>test<span class="tag">&lt;/scope&gt;</span>
+      <span class="tag">&lt;/dependency&gt;</span>
+    <span class="tag">&lt;/dependencies&gt;</span>
+    <span class="tag">&lt;build&gt;</span>
+      <span class="tag">&lt;pluginManagement&gt;</span>
+        <span class="tag">&lt;plugins&gt;</span>
+          <span class="tag">&lt;plugin&gt;</span>
+            <span class="tag">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/groupId&gt;</span>
+            <span class="tag">&lt;artifactId&gt;</span>maven-dependency-plugin<span class="tag">&lt;/artifactId&gt;</span>
+            <span class="tag">&lt;configuration&gt;</span>
+              <span class="tag">&lt;usedDependencies</span> <span class="attribute-name">combine.children</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">append</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+                <span class="comment">&lt;!-- Models not detected by byte-code analysis --&gt;</span>
+                <span class="tag">&lt;usedDependency&gt;</span>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-maxent<span class="tag">&lt;/usedDependency&gt;</span>
+              <span class="tag">&lt;/usedDependencies&gt;</span>
+            <span class="tag">&lt;/configuration&gt;</span>
+          <span class="tag">&lt;/plugin&gt;</span>
+        <span class="tag">&lt;/plugins&gt;</span>
+      <span class="tag">&lt;/pluginManagement&gt;</span>
+    <span class="tag">&lt;/build&gt;</span>
+  <span class="tag">&lt;/profile&gt;</span>
+<span class="tag">&lt;/profiles&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To conditionally run a test only if the required model is enabled, you can use the <code>AssumeResource</code>
+class from the DKPro Core testing module.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">AssumeResource.assumeResource(OpenNlpPosTagger.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">tagger</span><span class="delimiter">&quot;</span></span>, language, variant);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_license_txt"><a class="anchor" href="#_license_txt"></a>8. LICENSE.txt</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Every module must contain a file called <code>LICENSE.txt</code> at its root which contains the license text.
+Copy this file from another Apache-licensed or GPL-licensed module (again check if you need to
+use GPLv2 or v3). If this file is not present, the build will fail.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_notice_txt"><a class="anchor" href="#_notice_txt"></a>9. NOTICE.txt</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If the module contains code or resources from a third party (e.g. a source or test file which you
+copied from some other code repository or obtained from some website), then you need to add a
+file called <code>NOTICE.txt</code> next to the <code>LICENSE.txt</code> file. For every third-party file (or set of files
+if mutiple files were obtained from the same source under the same conditions), the <code>NOTICE.txt</code>
+must contain a statement which allows to identify the files, identify from where these files were
+obtained, and contain a copyright and license statement. Check the license of the original files
+for whether you have to include the full license text and potentially some specific attribution
+(possibly from an upstream <code>NOTICE</code> file).</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<h1 id="sect_components" class="sect0"><a class="anchor" href="#sect_components"></a>Implementing Components</h1>
+<div class="sect1">
+<h2 id="_general"><a class="anchor" href="#_general"></a>10. General</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_capabilities"><a class="anchor" href="#_capabilities"></a>10.1. Capabilities</h3>
+<div class="paragraph">
+<p>All components should declare the types they consume by default as input and they produced by
+default as output. Some components may not know before runtime what they produce or consume,
+so nothing can be declared here.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example of declaring input/output types on a component</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@TypeCapability</span>(
+        inputs = {
+            <span class="string"><span class="delimiter">&quot;</span><span class="content">de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token</span><span class="delimiter">&quot;</span></span>,
+            <span class="string"><span class="delimiter">&quot;</span><span class="content">de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence</span><span class="delimiter">&quot;</span></span> },
+        outputs = {
+            <span class="string"><span class="delimiter">&quot;</span><span class="content">de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</span><span class="delimiter">&quot;</span></span> })
+<span class="directive">public</span> <span class="type">class</span> <span class="class">OpenNlpPosTagger</span>
+    <span class="directive">extends</span> JCasAnnotator_ImplBase
+{</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_analysis_components"><a class="anchor" href="#_analysis_components"></a>11. Analysis components</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_base_classes"><a class="anchor" href="#_base_classes"></a>11.1. Base classes</h3>
+<div class="paragraph">
+<p>The base classes for analysis components are provided by uimaFIT: <code>JCasAnnotator_ImplBase</code> and
+<code>CasAnnotator_ImplBase</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_models"><a class="anchor" href="#_models"></a>11.2. Models</h3>
+<div class="paragraph">
+<p>The <code>ModelProviderBase</code> class offers convenient support for working with model resources.
+The following code is taken from the <code>OpenNlpPosTagger</code> component. It shows how the POS Tagger
+model is addressed using a parametrized classpath URL with parameters for language and variant.</p>
+</div>
+<div class="listingblock">
+<div class="title">Model provider setup in OpenNlpPosTagger.initialize() (shortened)</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// Use ModelProviderBase convenience constructor to set up a model provider that</span>
+<span class="comment">// auto-detects most of its settings and is configured to use default variants.</span>
+<span class="comment">// Auto-detection inspects the configuration parameter fields (@ConfigurationParameter)</span>
+<span class="comment">// of the analysis engine class and looks for default parameters such as PARAM_LANGUAGE,</span>
+<span class="comment">// PARAM_VARIANT, and PARAM_MODEL_LOCATION.</span>
+modelProvider = <span class="keyword">new</span> ModelProviderBase&lt;POSTaggerME&gt;(<span class="local-variable">this</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">tagger</span><span class="delimiter">&quot;</span></span>)
+{
+    <span class="annotation">@Override</span>
+    <span class="directive">protected</span> POSTaggerME produceResource(<span class="predefined-type">InputStream</span> aStream)
+        <span class="directive">throws</span> <span class="exception">Exception</span>
+    {
+        <span class="comment">// Load the POS tagger model from the location the model provider offers</span>
+        POSModel model = <span class="keyword">new</span> POSModel(aStream);
+        <span class="comment">// Create a new POS tagger instance from the loaded model</span>
+        <span class="keyword">return</span> <span class="keyword">new</span> POSTaggerME(model);
+    }
+};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>produceResource()</code> method is called with the URL of the model once it has been located by
+<code>CasConfigurableProviderBase</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Model provider use in OpenNlpPosTagger.process() (shortened)</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">CAS cas = aJCas.getCas();
+
+<span class="comment">// Document-specific configuration of model and mapping provider in process()</span>
+modelProvider.configure(cas);</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">Collection</span>&lt;Token&gt; tokens = index.get(sentence);
+<span class="predefined-type">String</span><span class="type">[]</span> tokenTexts = toText(tokens).toArray(<span class="keyword">new</span> <span class="predefined-type">String</span>[tokens.size()]);
+fixEncoding(tokenTexts);
+
+<span class="comment">// Fetch the OpenNLP pos tagger instance configured with the right model and use it to</span>
+<span class="comment">// tag the text</span>
+<span class="predefined-type">String</span><span class="type">[]</span> tags = modelProvider.getResource().tag(tokenTexts);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_type_mappings"><a class="anchor" href="#_type_mappings"></a>11.3. Type mappings</h3>
+<div class="paragraph">
+<p>The DKPro type system design provides two levels of abstraction on most annotations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>a generic annotation type, e.g. POS (part of speech) with a feature value
+containing the original tag produced by an analysis component, e.g. TreeTagger</p>
+</li>
+<li>
+<p>a set of high-level types for very common categories, e.g. N (noun), V (verb), etc.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>DKPro maintains mappings for commonly used tagsets, e.g. in the module
+<code>dkpro-core-api-lexmorph-asl</code>. They are named:</p>
+</div>
+<div class="listingblock">
+<div class="title">Naming scheme for tag mapping files</div>
+<div class="content">
+<pre>{language}-{tagset}-{layer}.map</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following values are commonly used for <code>layer</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>pos</code> - part-of-speech tag mapping</p>
+</li>
+<li>
+<p><code>morph</code> - morphological features mapping</p>
+</li>
+<li>
+<p><code>constituency</code> - constituent tag mapping</p>
+</li>
+<li>
+<p><code>dependency</code> - dependency relation mapping</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The mapping provder is create in the <code>initialize()</code> method of the UIMA component after the
+respective model provider. This is necessary because the mapping provider obtains the tagset
+information for the current model from the model provider.</p>
+</div>
+<div class="listingblock">
+<div class="title">Mapping provider setup in OpenNlpPosTagger.initialize() (shortened)</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// General setup of the mapping provider in initialize()</span>
+mappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
+        language, modelProvider);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the <code>process()</code> method, the mapping provider is used to to create an UIMA annotation. First,
+it is configured for the current document and model. Then, it is invoked for each tag produced
+by the tagger obtain the UIMA type for the annotation to be created. If there is no mapping file,
+the mapping provide will fall back to a suitable default annotation, e.g. POS for part-of-speech
+tags or NamedEntity.</p>
+</div>
+<div class="listingblock">
+<div class="title">Mapping provider use in OpenNlpPosTagger.process() (shortened)</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// Mind the mapping provider must be configured after the model provider as it uses the</span>
+<span class="comment">// model metadata</span>
+mappingProvider.configure(cas);</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// Convert the tag produced by the tagger to an UIMA type, create an annotation</span>
+<span class="comment">// of this type, and add it to the document.</span>
+<span class="predefined-type">Type</span> posTag = mappingProvider.getTagType(tag);
+POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
+<span class="comment">// To save memory, we typically intern() tag strings</span>
+posAnno.setPosValue(internTags ? tag.intern() : tag);
+POSUtils.assignCoarseValue(posAnno);
+posAnno.addToIndexes();</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_default_variants"><a class="anchor" href="#_default_variants"></a>11.4. Default variants</h3>
+<div class="paragraph">
+<p>It is possible a different default variant needs to be used depending on the language. This
+can be configured by placing a properties file in the classpath and setting its
+location using <code>setDefaultVariantsLocation(String)</code>. The key in the
+properties is the language and the value is used a default variant. These file
+should always reside in the <code>lib</code> sub-package of a component and use the naming
+convention:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{tool}-default-variants.map</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The default variant file is a Java properties file which defines for each language which variant
+should be assumed as default. It is possible to declare a <em>catch-all</em> variant using <code>*</code>. This is
+used if none of the other default variants apply.</p>
+</div>
+<div class="listingblock">
+<div class="title">OpenNLP POS tagger default variants configuration</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">it=perceptron
+*=maxent</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Use the convenience constructor of <code>ModelProviderBase</code> to create model providers that are already
+correctly set up to use default variants:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> ModelProviderBase(<span class="predefined-type">Object</span> aObject, <span class="predefined-type">String</span> aShortName, <span class="predefined-type">String</span> aType)
+{
+    setContextObject(aObject);
+
+    setDefault(ARTIFACT_ID, <span class="string"><span class="delimiter">&quot;</span><span class="content">${groupId}.</span><span class="delimiter">&quot;</span></span> + aShortName + <span class="string"><span class="delimiter">&quot;</span><span class="content">-model-</span><span class="delimiter">&quot;</span></span> + aType
+            + <span class="string"><span class="delimiter">&quot;</span><span class="content">-${language}-${variant}</span><span class="delimiter">&quot;</span></span>);
+    setDefault(LOCATION,
+            <span class="string"><span class="delimiter">&quot;</span><span class="content">classpath:/${package}/lib/</span><span class="delimiter">&quot;</span></span> + aType + <span class="string"><span class="delimiter">&quot;</span><span class="content">-${language}-${variant}.properties</span><span class="delimiter">&quot;</span></span>);
+    setDefaultVariantsLocation(<span class="string"><span class="delimiter">&quot;</span><span class="content">${package}/lib/</span><span class="delimiter">&quot;</span></span> + aType + <span class="string"><span class="delimiter">&quot;</span><span class="content">-default-variants.map</span><span class="delimiter">&quot;</span></span>);
+    setDefault(VARIANT, <span class="string"><span class="delimiter">&quot;</span><span class="content">default</span><span class="delimiter">&quot;</span></span>);
+
+    addAutoOverride(ComponentParameters.PARAM_MODEL_ARTIFACT_URI, ARTIFACT_URI);
+    addAutoOverride(ComponentParameters.PARAM_MODEL_LOCATION, LOCATION);
+    addAutoOverride(ComponentParameters.PARAM_VARIANT, VARIANT);
+    addAutoOverride(ComponentParameters.PARAM_LANGUAGE, LANGUAGE);
+
+    applyAutoOverrides(aObject);
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_i_o_components"><a class="anchor" href="#_i_o_components"></a>12. I/O components</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_base_classes_2"><a class="anchor" href="#_base_classes_2"></a>12.1. Base classes</h3>
+<div class="paragraph">
+<p>The base classes for I/O components are located in the <code>dkpro-core-api-io-asl</code> module.</p>
+</div>
+<div class="paragraph">
+<p>Most reader components are derived from <code>JCasResourceCollectionReaderBase</code> or
+<code>ResourceCollectionReaderBase</code>. These class offers support for many common functionalities, e.g.:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>common parameters like <code>PARAM_SOURCE_LOCATION</code> and <code>PARAM_PATTERNS</code></p>
+</li>
+<li>
+<p>reading from the file system, classpath, or ZIP archives</p>
+</li>
+<li>
+<p>file-based compression (GZ, BZIP2, XZ)</p>
+</li>
+<li>
+<p>handling of <code>DocumentMetaData (`initCas</code> methods)</p>
+</li>
+<li>
+<p>Ant-like include/exclude patterns</p>
+</li>
+<li>
+<p>handling of default excludes and hidden files</p>
+</li>
+<li>
+<p>progress reporting support</p>
+</li>
+<li>
+<p>extensibility with own Spring resource resolvers</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Most writer components are derived from <code>JCasFileWriter_ImplBase</code>. This class offers support for
+common functionality such as:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>common parameters like <code>PARAM_TARGET_LOCATION</code></p>
+</li>
+<li>
+<p>writing to the file system, classpath, or ZIP archives (<code>getOutputStream</code> methods)</p>
+</li>
+<li>
+<p>file-based compression (GZ, BZIP2, XZ)</p>
+</li>
+<li>
+<p>properly interpreting <code>DocumentMetaData (`getOutputStream</code> methods)</p>
+</li>
+<li>
+<p>overwrite protection</p>
+</li>
+<li>
+<p>replacing file extensions</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If an I/O component interacts with a different data source, e.g. a database, the base classes above
+are not suitable. Such readers should derive from the uimaFIT <code>JCasCollectionReader_ImplBase</code>
+(or <code>CasCollectionReader_ImplBase</code>) and writers from <code>JCasAnnotator_ImplBase</code> (or
+<code>CasAnnotator_ImplBase</code>). However, the developer should ensure that the component&#8217;s parameters
+reflect the standard DKPro Core reader/writer parameters defined in <code>ComponentParameters</code>
+(<code>dkpro-core-api-parameters-asl</code> module).</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<h1 id="sect_testing" class="sect0"><a class="anchor" href="#sect_testing"></a>Testing</h1>
+<div class="openblock partintro">
+<div class="content">
+The testing module offers a convenient way to create unit tests for UIMA components.
+</div>
+</div>
+<div class="sect1">
+<h2 id="_basic_test_setup"><a class="anchor" href="#_basic_test_setup"></a>13. Basic test setup</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are a couple of things useful in every unit test:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Redirecting the UIMA logging through log4j - DKPro Core uses log4j for logging in unit tests.</p>
+</li>
+<li>
+<p>Printing the name of the test to the console before every test</p>
+</li>
+<li>
+<p>Enabling extended index checks in UIMA (<code>uima.exception_when_fs_update_corrupts_index</code>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To avoid repeating a longish setup boilerplate code in every unit test, add the following lines to
+your unit test class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Rule</span>
+<span class="directive">public</span> DkproTestContext testContext = <span class="keyword">new</span> DkproTestContext();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Additional benefits you get from this <code>testContext</code> are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>getting the class name of the current test (<code>getClassName()</code>)</p>
+</li>
+<li>
+<p>getting the method name of the current test (<code>getMethodName()</code>)</p>
+</li>
+<li>
+<p>getting the name of a folder you can use to store test results (<code>getTestOutputFolder()</code>).</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_unit_test_example"><a class="anchor" href="#_unit_test_example"></a>14. Unit test example</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A typical unit test class has consists of two parts</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>the test cases</p>
+</li>
+<li>
+<p>a <code>runTest</code> method - which sets up the pipeline required by the
+test and then calls <code>TestRunner.runTest()</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>In the following example, mind that the text must be provided with spaces
+separating the tokens (thus there must be a space before the full stop at the end of the
+sentence) and with newline characters (<code>\n</code>) separating the sentences:</p>
+</div>
+<div class="listingblock">
+<div class="title">Typical unit test for an analysis component from the OpenNlpNamedEntityRecognizer test (shortened)</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Test</span>
+<span class="directive">public</span> <span class="type">void</span> testEnglish()
+    <span class="directive">throws</span> <span class="exception">Exception</span>
+{
+    <span class="comment">// Run the test pipeline. Note the full stop at the end of a sentence is preceded by a</span>
+    <span class="comment">// whitespace. This is necessary for it to be detected as a separate token!</span>
+    JCas jcas = runTest(<span class="string"><span class="delimiter">&quot;</span><span class="content">en</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">person</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">SAP where John Doe works is in Germany .</span><span class="delimiter">&quot;</span></span>);
+
+    <span class="comment">// Define the reference data that we expect to get back from the test</span>
+    <span class="predefined-type">String</span><span class="type">[]</span> namedEntity = { <span class="string"><span class="delimiter">&quot;</span><span class="content">[ 10, 18]NamedEntity(person) (John Doe)</span><span class="delimiter">&quot;</span></span> };
+
+    <span class="comment">// Compare the annotations created in the pipeline to the reference data</span>
+    AssertAnnotations.assertNamedEntity(namedEntity, select(jcas, NamedEntity.class));
+}
+
+<span class="comment">// Auxiliary method that sets up the analysis engine or pipeline used in the test.</span>
+<span class="comment">// Typically, we have multiple tests per unit test file that each invoke this method.</span>
+<span class="directive">private</span> JCas runTest(<span class="predefined-type">String</span> language, <span class="predefined-type">String</span> variant, <span class="predefined-type">String</span> testDocument)
+    <span class="directive">throws</span> <span class="exception">Exception</span>
+{
+    AssumeResource.assumeResource(OpenNlpNamedEntityRecognizer.class, <span class="string"><span class="delimiter">&quot;</span><span class="content">ner</span><span class="delimiter">&quot;</span></span>, language, variant);
+
+    AnalysisEngine engine = createEngine(OpenNlpNamedEntityRecognizer.class,
+            OpenNlpNamedEntityRecognizer.PARAM_VARIANT, variant,
+            OpenNlpNamedEntityRecognizer.PARAM_PRINT_TAGSET, <span class="predefined-constant">true</span>);
+
+    <span class="comment">// Here we invoke the TestRunner which performs basic whitespace tokenization and</span>
+    <span class="comment">// sentence splitting, creates a CAS, runs the pipeline, etc. TestRunner explicitly</span>
+    <span class="comment">// disables automatic model loading. Thus, models used in unit tests must be explicitly</span>
+    <span class="comment">// made dependencies in the pom.xml file.</span>
+    <span class="keyword">return</span> TestRunner.runTest(engine, language, testDocument);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Test cases for segmenter components should not make use of the <code>TestRunner</code>
+class, which already performs tokenization and sentence splitting internally.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_assertannotations"><a class="anchor" href="#_assertannotations"></a>15. AssertAnnotations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The AssertAnnotations class offers various static methods to test if a component has
+properly created annotations of a certain kind. There are methods to test almost every kind
+of annotation supported by DKPro Core, e.g.:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>assertToken</code></p>
+</li>
+<li>
+<p><code>assertSentence</code></p>
+</li>
+<li>
+<p><code>assertPOS</code></p>
+</li>
+<li>
+<p><code>assertLemma</code></p>
+</li>
+<li>
+<p><code>assertMorph</code></p>
+</li>
+<li>
+<p><code>assertStem</code></p>
+</li>
+<li>
+<p><code>assertNamedEntity</code></p>
+</li>
+<li>
+<p><code>assertConstituents</code></p>
+</li>
+<li>
+<p><code>assertChunks</code></p>
+</li>
+<li>
+<p><code>assertDependencies</code></p>
+</li>
+<li>
+<p><code>assertPennTree</code></p>
+</li>
+<li>
+<p><code>assertSemanticPredicates</code></p>
+</li>
+<li>
+<p><code>assertSemanticField</code></p>
+</li>
+<li>
+<p><code>assertCoreference</code></p>
+</li>
+<li>
+<p><code>assertTagset</code></p>
+</li>
+<li>
+<p><code>assertTagsetMapping</code></p>
+</li>
+<li>
+<p><code>assertValid</code> - Tests implemented with <code>TestRunner</code> and <code>IOTestRunner</code> perform validation checks
+automatically. All other unit tests should invoke <code>AssertAnnotations.assertValid(jcas)</code>.</p>
+</li>
+<li>
+<p>etc.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_testing_i_o_componets"><a class="anchor" href="#_testing_i_o_componets"></a>16. Testing I/O componets</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The IOTestRunner class offers convenient methods to test I/O components:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>testRoundTrip</code> can be used to test converting a format to CAS, converting it back and comparing
+it to the original</p>
+</li>
+<li>
+<p><code>testOneWay</code> instead is useful to read data and compare it to a reference file in a different
+format (e.g. CasDumpWriter format). It can also be used if there a full round-trip is not possible
+because some information is lost or cannot be exported exactly as ingested from the original file.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The input file and reference file path given to these methods is always considered relative to
+<code>src/test/resources</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example using <code>testRoundTrip</code> with extra parameters (Conll2006ReaderWriterTest)</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">testRoundTrip(
+        Conll2006Reader.class, <span class="comment">// the reader</span>
+        Conll2006Writer.class,  <span class="comment">// the writer</span>
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">conll/2006/fk003_2006_08_ZH1.conll</span><span class="delimiter">&quot;</span></span>); <span class="comment">// the input also used as output reference</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example using <code>testOneWay</code> with extra parameters (Conll2006ReaderWriterTest)</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">testOneWay(
+        Conll2006Reader.class, <span class="comment">// the reader</span>
+        Conll2006Writer.class,  <span class="comment">// the writer</span>
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">conll/2006/fi-ref.conll</span><span class="delimiter">&quot;</span></span>, <span class="comment">// the reference file for the output</span>
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">conll/2006/fi-orig.conll</span><span class="delimiter">&quot;</span></span>); <span class="comment">// the input file for the test</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example using <code>testRoundTrip</code> with extra parameters (BratReaderWriterTest)</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">testOneWay(
+        createReaderDescription(Conll2009Reader.class), <span class="comment">// the reader</span>
+        createEngineDescription(BratWriter.class, <span class="comment">// the writer</span>
+                BratWriter.PARAM_WRITE_RELATION_ATTRIBUTES, <span class="predefined-constant">true</span>),
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">conll/2009/en-ref.ann</span><span class="delimiter">&quot;</span></span>, <span class="comment">// the reference file for the output</span>
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">conll/2009/en-orig.conll</span><span class="delimiter">&quot;</span></span>); <span class="comment">// the input file for the test</span></code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<h1 id="sect_typesystem" class="sect0"><a class="anchor" href="#sect_typesystem"></a>Type System</h1>
+<div class="sect1">
+<h2 id="_types"><a class="anchor" href="#_types"></a>17. Types</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To add a new type, first locate the relevant module. Typically types are added to an <strong>API</strong> module
+because types are supposed to be independent of individual analysis tools. In rare circumstances,
+a type may be added to an I/O or tool module, e.g. because the type is experimental and needs to
+be tested in the context of that module - or because the type is highly specific to that module.</p>
+</div>
+<div class="paragraph">
+<p>Typically, there is only a single descriptor file called <code>dkpro-types.xml</code>. Within a module, we keep
+this descriptor in the folder <code>src/main/resources</code> under the top-level package plus <em>type</em> name of
+the module. E.g. for the module</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">dkpro-core-api-semantics-asl</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>the type descriptor would be</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">src/main/resources/de/tudarmstadt/ukp/dkpro/core/api/semantics/type/dkpro-types.xml</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For the time being, descriptors in <code>src/main/resources/desc/type</code> are also supported.
+      However, this support is going to be removed in the future.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_type_descriptors"><a class="anchor" href="#_type_descriptors"></a>18. Type descriptors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If there is no suitable type descriptor file yet, create a new one.</p>
+</div>
+<div class="paragraph">
+<p>When a new type system descriptor has been added to a module, it needs to be registered with
+uimaFIT. This happens by creating the file</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>src/main/resources/META-INF/org.apache.uima.fit/types.txt</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>consisting of a list of type system descriptor locations prefixed with <code>classpath*:</code>, e.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">classpath*:de/tudarmstadt/ukp/dkpro/core/api/semantics/type/dkpro-types.xml</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The type system location corresponds to the location within the classpath at runtime, thus
+      <code>src/main/resources</code> is stripped from the beginning.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_documentation"><a class="anchor" href="#_documentation"></a>19. Documentation</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_type_descriptors_2"><a class="anchor" href="#_type_descriptors_2"></a>19.1. Type descriptors</h3>
+<div class="paragraph">
+<p>To play nicely with the automatic documentation generation system, the following points should be
+observed when creating a new type descriptor file:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Name</dt>
+<dd>
+<p>field of the type descriptor corresponds to the <strong>section</strong> under which the types
+declared in the descriptor appear. If a type descriptor name field is e.g. <strong>Syntax</strong>, all types
+declared in the file will appear under that heading in the documentation. Multiple descriptors
+can declare the same name and the types declared in them are listed in the documentation in
+alphabetical order.</p>
+</dd>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>field should be emtpy. Create instead a <code>sectionIntroXXX.adoc</code> file under
+<code>src/main/asciidoc/typesystem-reference</code> in the <code>dkpro-core-doc</code> module (<code>XXX</code> is the name of the
+ section - see <strong>Name</strong> above).</p>
+</dd>
+<dt class="hdlist1">Version</dt>
+<dd>
+<p>should be set to <code>${version}</code>. If it does not exist yet, create a file
+<code>src/filter/filter.properties</code> in the module that creates the new type descriptor with the
+following content:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">version=${project.version}
+timestamp=${maven.build.timestamp}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Also add the following section to the <code>pom.xml</code> file in the respective module:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;resources&gt;</span>
+  <span class="tag">&lt;resource&gt;</span>
+    <span class="tag">&lt;filtering&gt;</span>false<span class="tag">&lt;/filtering&gt;</span>
+    <span class="tag">&lt;directory&gt;</span>src/main/resources<span class="tag">&lt;/directory&gt;</span>
+    <span class="tag">&lt;excludes&gt;</span>
+      <span class="tag">&lt;exclude&gt;</span>desc/type/**/*<span class="tag">&lt;/exclude&gt;</span>
+    <span class="tag">&lt;/excludes&gt;</span>
+  <span class="tag">&lt;/resource&gt;</span>
+  <span class="tag">&lt;resource&gt;</span>
+    <span class="tag">&lt;filtering&gt;</span>true<span class="tag">&lt;/filtering&gt;</span>
+    <span class="tag">&lt;directory&gt;</span>src/main/resources<span class="tag">&lt;/directory&gt;</span>
+    <span class="tag">&lt;includes&gt;</span>
+      <span class="tag">&lt;include&gt;</span>desc/type/**/*<span class="tag">&lt;/include&gt;</span>
+    <span class="tag">&lt;/includes&gt;</span>
+  <span class="tag">&lt;/resource&gt;</span>
+<span class="tag">&lt;/resources&gt;</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Replace the pattern inside the <code>include</code> and <code>exclude</code> elements with the location of your
+      type descriptor file, e.g. <code>de/tudarmstadt/ukp/dkpro/core/api/semantics/type/*.xml</code>.
+</td>
+</tr>
+</table>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_types_2"><a class="anchor" href="#_types_2"></a>19.2. Types</h3>
+<div class="paragraph">
+<p>When creating a new type or feature, you can use HTML tags to format the description. Line breaks,
+indentation, etc. will not be preserved. Mind that the description will be placed into the JavaDoc
+for the generated JCas classes as well as into the auto-generated DKPro Core documentation.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_jcas_classes"><a class="anchor" href="#_jcas_classes"></a>20. JCas classes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Instead of pre-generating the JCas classes and storing them in the version control, we use the
+<em>jcasgen-maven-plugin</em> to automatically generate JCas classes at build time. The automatic
+generation of JCas classes need to be explictily enabled for modules containing types. This
+is done by placing a file called <code>.activate-run-jcasgen</code> in the module root with the content</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml">Marker to activate run-jcasgen profile.</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Actually the content is irrelevant, but it is a good idea to place a note here regarding the
+      purpose of the file.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>However, in some we customized the JCas classes, e.g. we added the method
+<code>DocumentMetaData.get(JCas)</code>. Such classes are excluded from being generated automatically by
+placing them in a second descriptor file called <code>dkpro-types-customized.xml</code>, e.g.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">src/main/resources/de/tudarmstadt/ukp/dkpro/core/api/semantics/type/dkpro-types-customized.xml</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>dkpro-types-customized.xml</code> descriptor must be also registered with uimaFIT in the
+      <code>types.txt</code> file.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_compliance_validation"><a class="anchor" href="#_compliance_validation"></a>21. Compliance validation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Often a type comes with a certain policy. For example, root nodes in a dependency relation tree
+should have the type <code>ROOT</code> and the features <code>governor</code> and <code>dependent</code> should point to the same
+token. Another example would be that if a constituent is a child of another constituent, then its
+<code>parent</code> feature should be set accordingly.</p>
+</div>
+<div class="paragraph">
+<p>To ensure that all components adhere to such policies, it is a good idea to implement checks for
+them. This can be done simply by placing a new check implementation into the package
+<code>de.tudarmstadt.ukp.dkpro.core.testing.validation.checks</code> in the testing module. Tests implemented
+with <code>TestRunner</code> and <code>IOTestRunner</code> use these unit tests automatically. All other checks should invoke
+<code>AssertAnnotations.assertValid(jcas)</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example check ensuring that parent of constituents and tokens is properly set (shortened)</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Override</span>
+<span class="directive">public</span> <span class="type">boolean</span> check(JCas aJCas, <span class="predefined-type">List</span>&lt;Message&gt; aMessages)
+{
+    <span class="keyword">for</span> (Constituent parent : select(aJCas, Constituent.class)) {
+        <span class="predefined-type">Collection</span>&lt;<span class="predefined-type">Annotation</span>&gt; children = select(parent.getChildren(), <span class="predefined-type">Annotation</span>.class);
+        <span class="keyword">for</span> (<span class="predefined-type">Annotation</span> child : children) {
+            <span class="predefined-type">Annotation</span> declParent = FSUtil.getFeature(child, <span class="string"><span class="delimiter">&quot;</span><span class="content">parent</span><span class="delimiter">&quot;</span></span>, <span class="predefined-type">Annotation</span>.class);
+
+            <span class="keyword">if</span> (declParent == <span class="predefined-constant">null</span>) {
+                aMessages.add(<span class="keyword">new</span> Message(<span class="local-variable">this</span>, ERROR, <span class="predefined-type">String</span>.format(
+                        <span class="string"><span class="delimiter">&quot;</span><span class="content">Child without parent set: %s</span><span class="delimiter">&quot;</span></span>, child)));
+
+            }
+            <span class="keyword">else</span> <span class="keyword">if</span> (declParent != parent) {
+                aMessages.add(<span class="keyword">new</span> Message(<span class="local-variable">this</span>, ERROR, <span class="predefined-type">String</span>.format(
+                        <span class="string"><span class="delimiter">&quot;</span><span class="content">Child points to wrong parent: %s</span><span class="delimiter">&quot;</span></span>, child)));
+
+            }
+        }
+    }
+
+    <span class="keyword">return</span> aMessages.stream().anyMatch(m -&gt; m.level == ERROR);
+}</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<h1 id="sect_models" class="sect0"><a class="anchor" href="#sect_models"></a>Models and Resources</h1>
+<div class="openblock partintro">
+<div class="content">
+This section explains how resources, such as models, are packaged, distributed, and used
+within DKPro Core.
+</div>
+</div>
+<div class="sect1">
+<h2 id="_architecture"><a class="anchor" href="#_architecture"></a>22. Architecture</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The architecture for resources (e.g. parser models, POS tagger models, etc.) in DKPro is
+still work in progress. However, there are a couple of corner points that have already
+been established.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><em>REQ-1</em> - Addressable by URL: Resources must be addressable
+using an URL, typically a classpath URL
+	(classpath:/de/tudarmstadt/&#8230;&#8203;/model.bin) or a file URL
+	(<a href="file:///home/model.bin" class="bare">file:///home/model.bin</a>). Remote URLs like HTTP should not be
+used and may not be supported.</p>
+</li>
+<li>
+<p><em>REQ-2</em> - Maven compatible: Resources are packaged in JARs
+and can be downloaded from our Maven repositories (if the license permits).</p>
+</li>
+<li>
+<p><em>REQ-3</em> - Document-sensitive: A component should
+dynamically determine at runtime which resource to use based on properties of a
+processed document, e.g. based on the document language. This may change from
+one document to the next.</p>
+</li>
+<li>
+<p><em>REQ-4</em> - Overridable: The user should be able to override
+the model or provide additional information as to what specific variant of a
+resource should be used. E.g. if there are two resources for the language de,
+	de-fast and de-accurate, the component
+could use de-fast per default unless the user specifies to
+use variante accurate or specifies a different model altogether.</p>
+</li>
+<li>
+<p><em>REQ-5</em> - Loadable from classpath: Due to REQ-1, REQ-2, and
+REQ-3 models must be resolvable from the classpath.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ResourceUtils.resolveLocation(String, Object, UimaContext)</code></p>
+</li>
+<li>
+<p>Resource Providers (see below)</p>
+</li>
+<li>
+<p><code>PathMatchingResourcePatternResolver</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_versioning_scheme"><a class="anchor" href="#_versioning_scheme"></a>22.1. Versioning scheme</h3>
+<div class="paragraph">
+<p>To version our packaged models, we use a date (yyyymmdd) and a counter (x). We use a date,
+because often no (reliable) upstream version is available. E.g. with the Stanford
+NLP tools, the same model is sometimes included in different pacakges with different
+versions (e.g. parser models are included with the CoreNLP package and the parser
+package). TreeTagger models are not versioned at all. With the OpenNLP version, we
+are not sure if they are versioned - it seems they are just versioned for
+compatibility with a particular OpenNLP version (e.g. 1.5.) but have no proper
+version of their own. If we know it, we use the date when the model was last
+changed, otherwise we use the date when we first package a new model and update it
+when we observe a model change.</p>
+</div>
+<div class="paragraph">
+<p>We include additional metadata with the packaged model (e.g. which tagset is used)
+and we sometimes want to release packaged models with new metadata, although the
+upstream model itself has not changed. In such cases, we increment the counter. The
+counter starts at 0 if a new model is incorporated.</p>
+</div>
+<div class="paragraph">
+<p>Thus, a model version has the format "yyyymmdd.x".</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_packaging_resources"><a class="anchor" href="#_packaging_resources"></a>23. Packaging resources</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Resources needed by DKPro components (e.g. parser models or POS tagger models) are not
+packaged with the corresponding analysis components, but as separate JARs, one per
+language and model variant.</p>
+</div>
+<div class="paragraph">
+<p>Due to license restrictions, we may not redistribute all of these resources. But, we
+offer Ant scripts to automatically download the resources and package them as
+DKPro-compatible JARs. When the license permits, we upload these to our public Maven
+repository.</p>
+</div>
+<div class="paragraph">
+<p>If you need a non-redistributable resource (e.g. TreeTagger models) or just want to
+package the models yourself, here is how you do it.</p>
+</div>
+<div class="sect2">
+<h3 id="_installing_ant_in_eclipse"><a class="anchor" href="#_installing_ant_in_eclipse"></a>23.1. Installing Ant in Eclipse</h3>
+<div class="paragraph">
+<p>Our build.xml scripts require Ant 1.8.x. If you use an older Eclipse version, you may have
+to manually download and register a recent Ant version:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Download the latest Ant binaries from the website and unpack them in a directory of your choice.</p>
+</li>
+<li>
+<p>Start Eclipse and go to <strong>Window &gt; Preferences &gt; Ant &gt; Runtime</strong> and press <strong>Ant Home&#8230;&#8203;</strong>.</p>
+</li>
+<li>
+<p>Select the Ant directory you just unpacked, then confirm.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_implementing_a_build_xml_script"><a class="anchor" href="#_implementing_a_build_xml_script"></a>23.2. Implementing a build.xml script</h3>
+<div class="paragraph">
+<p>Models are usually large and we therefore package them separately from the components that use them.
+Each model becomes a JAR that is uploaded to our Maven repositories and added as a dependency in the
+projects that use them.</p>
+</div>
+<div class="paragraph">
+<p>Often, models are single files, e.g. serialize Java objects that represent a
+parser model, POS tagger model, etc. The simplest case is that these files are
+distributed from some website. We use an Ant script then to download the file and
+package it as a JAR. We defined custom Ant macros like install-model-file that make
+the process very convenient. The following code shows how we import the custom
+macros and define two targets, local-maven and separate-jars. The first just sets a
+property to cause install-model-file to copy the finished JAR into the local Maven
+repository (<code>~.m2/repository</code>).</p>
+</div>
+<div class="paragraph">
+<p>The versioning scheme for models is "yyyymmdd.x" where "yyyymmdd" is the date of
+the last model change (if known) or the date of packaging and "x" is a counter
+unique per date starting a 0. Please refer to the versioning scheme documentation
+for more information.</p>
+</div>
+<div class="paragraph">
+<p>The model building ANT script goes to <code>src/scripts/build.xml</code> with the project.</p>
+</div>
+<div class="paragraph">
+<p>DKPro Core provides a set of ANT macros that help in packaging models. Typically, you will need
+one of the following two:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>install-stub-and-upstream-file</code> - if your model consists of a single file</p>
+</li>
+<li>
+<p><code>install-stub-and-upstream-folder</code> - if your model consists of multiple files.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+When using <code>install-stub-and-upstream-folder</code>, the <code>outputPackage</code> property must end in <code>lib</code>,
+      otherwise the generated artifacts will remain empty.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The <code>ant-macros.xml</code> file itself contains additional documentation on the macros and additional
+properties that can be set.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;project</span> <span class="attribute-name">basedir</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">../..</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">default</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">separate-jars</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+  <span class="tag">&lt;import&gt;</span>
+    <span class="tag">&lt;url</span> <span class="attribute-name">url</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/</span>
+      <span class="content">tags/0.7.0/ant-macros.xml</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+  <span class="tag">&lt;/import&gt;</span>
+
+  <span class="comment">&lt;!--
+      - Output package configuration
+    --&gt;</span>
+  <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">outputPackage</span><span class="delimiter">&quot;</span></span>
+     <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">de/tudarmstadt/ukp/dkpro/core/opennlp/lib</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+
+  <span class="tag">&lt;target</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">local-maven</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+    <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">install-artifact-mode</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">local</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+    <span class="tag">&lt;antcall</span> <span class="attribute-name">target</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">separate-jars</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+   <span class="tag">&lt;/target&gt;</span>
+
+  <span class="tag">&lt;target</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">remote-maven</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+    <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">install-artifact-mode</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">remote</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+    <span class="tag">&lt;antcall</span> <span class="attribute-name">target</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">separate-jars</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+  <span class="tag">&lt;/target&gt;</span>
+
+  <span class="tag">&lt;target</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">separate-jars</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+    <span class="tag">&lt;mkdir</span> <span class="attribute-name">dir</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">target/download</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+
+    <span class="comment">&lt;!-- FILE: models-1.5/en-pos-maxent.bin - - - - - - - - - - - - - -
+      - 2012-06-16 | now        | db2cd70395b9e2e4c6b9957015a10607
+      --&gt;</span>
+    <span class="tag">&lt;get</span>
+      <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://opennlp.sourceforge.net/models-1.5/en-pos-maxent.bin</span><span class="delimiter">&quot;</span></span>
+      <span class="attribute-name">dest</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">target/download/en-pos-maxent.bin</span><span class="delimiter">&quot;</span></span>
+      <span class="attribute-name">skipexisting</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+    <span class="tag">&lt;install-stub-and-upstream-file</span>
+      <span class="attribute-name">file</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">target/download/en-pos-maxent.bin</span><span class="delimiter">&quot;</span></span>
+      <span class="attribute-name">md5</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">db2cd70395b9e2e4c6b9957015a10607</span><span class="delimiter">&quot;</span></span>
+      <span class="attribute-name">groupId</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">de.tudarmstadt.ukp.dkpro.core</span><span class="delimiter">&quot;</span></span>
+      <span class="attribute-name">artifactIdBase</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">de.tudarmstadt.ukp.dkpro.core.opennlp</span><span class="delimiter">&quot;</span></span>
+      <span class="attribute-name">upstreamVersion</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">20120616</span><span class="delimiter">&quot;</span></span>
+      <span class="attribute-name">metaDataVersion</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">1</span><span class="delimiter">&quot;</span></span>
+      <span class="attribute-name">tool</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">tagger</span><span class="delimiter">&quot;</span></span>
+      <span class="attribute-name">language</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">en</span><span class="delimiter">&quot;</span></span>
+      <span class="attribute-name">variant</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">maxent</span><span class="delimiter">&quot;</span></span>
+      <span class="attribute-name">extension</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">bin</span><span class="delimiter">&quot;</span></span> <span class="tag">&gt;</span>
+        <span class="tag">&lt;metadata&gt;</span>
+          <span class="tag">&lt;entry</span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">pos.tagset</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ptb</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+        <span class="tag">&lt;/metadata&gt;</span>
+    <span class="tag">&lt;/install-model-file&gt;</span>
+  <span class="tag">&lt;/target&gt;</span>
+<span class="tag">&lt;/project&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The model file <code>en-pos-maxent.bin</code> is downloaded from the OpenNLP website and stored in a local
+cache directory	<code>target/download/tagger/da-pos-maxent.bin</code>. From there,
+<code>install-stub-and-upstream-file</code> picks it up and packages it as two JARs, 1) a JAR
+containing the DKPro Core meta data and a POM referencing the second JAR, 2) a JAR
+containing the actual model file(s). The JAR file names derive from the
+artifactIdBase, tool, language, variant, upstreamVersion and metaDataVersion
+parameters. These parameters along with the extension parameter are also used to
+determine the package name and file name of the model in the JAR. They are
+determined as follows (mind that dots in the artifactBase turn to slashes, e.g.
+<code>de.tud</code> turns <code>de/tud</code>:</p>
+</div>
+<div class="listingblock">
+<div class="title">Pattern used to place a resource within a JAR</div>
+<div class="content">
+<pre>{artifactIdBase}/lib/{tool}-{language}-{variant}.{extension}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following values are commonly used for <em>tool</em>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>token</code> - tokenizer</p>
+</li>
+<li>
+<p><code>sentence</code> - sentence splitter</p>
+</li>
+<li>
+<p><code>segmenter</code> - tokenizer &amp; sentence splitter combined</p>
+</li>
+<li>
+<p><code>lemma</code> - lemmatizer (also sometimes <code>lemmatizer</code> is used, but should not be used for new models)</p>
+</li>
+<li>
+<p><code>tagger</code> - part-of-speech tagger</p>
+</li>
+<li>
+<p><code>morphtagger</code> - morphological analyzer</p>
+</li>
+<li>
+<p><code>ner</code> - named-entity recognizer</p>
+</li>
+<li>
+<p><code>parser</code> - syntactic parser</p>
+</li>
+<li>
+<p><code>depparser</code> - dependency parser (also sometimes <code>parser</code> is used, but should not be used for new models)</p>
+</li>
+<li>
+<p><code>coref</code> - coreference resolver</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The values for <strong>variant</strong> are very tool-dependent. Typically,
+the variant encodes parameters that were used during the creation of a model, e.g.
+which machine learning algorithm was used, which parameters it had, and on which
+data set is has been created.</p>
+</div>
+<div class="paragraph">
+<p>An md5 sum for the remote file must be specified to make sure we notice if the
+remote file changes or if the download is corrupt.</p>
+</div>
+<div class="paragraph">
+<p>The metadata added for the models currently used to store tagset information,
+which is used to drive the tag-to-DKPro-UIMA-type mapping. The following values are
+commonly used as keys:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>pos.tagset</code> - part-of-speech tagset (ptb, ctb, stts, &#8230;&#8203;)</p>
+</li>
+<li>
+<p><code>dependency.tagset</code> - dependency relation labels, aka. syntactic functions (negra, ancora, &#8230;&#8203;)</p>
+</li>
+<li>
+<p><code>constituent.tagset</code> - constituent labels, aka. syntactic categories (ptb, negra, &#8230;&#8203;)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_running_the_build_xml_script"><a class="anchor" href="#_running_the_build_xml_script"></a>23.3. Running the build.xml script</h3>
+<div class="paragraph">
+<p>For those modules where we support packaging resources as JARs, we provide an Ant script
+called <code>build.xml</code> which is located in the corresponding module
+in the SVN.</p>
+</div>
+<div class="paragraph">
+<p><code>build.xml</code> is a script that can be run with Apache Ant (version 1.8.x or higher) and requires an
+internet connection.</p>
+</div>
+<div class="paragraph">
+<p>You can find this script in the <code>src/scripts</code> folder of the module.</p>
+</div>
+<div class="paragraph">
+<p>Depending on the script, various build targets are supported. Three of them are
+particularly important: <strong>separate-jars</strong>, <strong>local-maven</strong>, and <strong>remote-maven</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>separate-jars</strong> downloads all resource from the
+internet, validates them against MD5 checksums and packages them as
+DKPro-compatible JARs. The JARs are stored to the target folder. You can
+easily update them to an Artifactory Maven repository. Artifactory
+automatically recognizes their group ID, artifact ID and version. This
+may not work with other Maven repositories.</p>
+</li>
+<li>
+<p><strong>local-maven</strong> additionally installs the JARs into
+your the local Maven repository on your computer. It assumes the default
+location of the repository at <code>~/.m2/repository</code>. If
+you keep your repository in a different folder, specify it via the
+<em>alt.maven.repo.path</em> system property.</p>
+</li>
+<li>
+<p><strong>remote-maven</strong> additionally installs the JARS into
+a remote Maven repository. The repository to deploy to can be controlled
+via the system property alt.maven.repo.url. If the remote repo also
+requires authentication, use the system property
+<strong>alt.maven.repo.id</strong> to configure the credentials
+from the settings.xml that should be used. An alternative settings file
+can be configured using <strong>alt.maven.settings</strong>.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This target requires that you have installed
+<a href="http://repo1.maven.org/maven2/org/apache/maven/maven-ant-tasks/2.1.3/maven-ant-tasks-2.1.3.jar">maven-ant-tasks-2.1.3.jar</a>
+in <code>~/.ant/lib</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>It is recommended to open the <code>build.xml</code> file in
+Eclipse, run the <strong>local-maven</strong> target, and then restart Eclipse.
+Upon restart, Eclipse should automatically scan your local Maven repository. Thus,
+the new resource JARs should be available in the search dialog when you add
+dependencies in the POM editor.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_example_how_to_package_treetagger_binaries_and_models"><a class="anchor" href="#_example_how_to_package_treetagger_binaries_and_models"></a>23.4. Example: how to package TreeTagger binaries and models</h3>
+<div class="paragraph">
+<p>TreeTagger and its models cannot be re-distributed with DKPro Core, you need to download it
+yourself. For your convenience, we included an Apache Ant script called
+<code>build.xml</code> in the <code>src/scripts</code> folder of
+the TreeTagger module. This script downloads the TreeTagger binaries and models and
+packages them as artifacts, allowing you to simply add them as dependencies in Maven.</p>
+</div>
+<div class="paragraph">
+<p>To run the script, you need to have Ant 1.8.x installed and configured in Eclipse.
+This is already the case with Eclipse 3.7.x. If you use an older Eclipse version,
+please see the section below on installing Ant in Eclipse.</p>
+</div>
+<div class="paragraph">
+<p>Now to build the TreeTagger artifacts:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Locate the Ant build script (<code>build.xml</code>) in the scripts directory (<code>src/scripts</code>) of the
+<code>dkpro-core-treetagger-asl</code> module.</p>
+</li>
+<li>
+<p>Right-click, choose <strong>Run As &gt; External Tools Configurations</strong>. In the <strong>Target</strong> tab,
+select <strong>local-maven</strong>, <strong>run</strong>.</p>
+</li>
+<li>
+<p>Read the license in the Ant console and - if you care - accept the license terms.</p>
+</li>
+<li>
+<p>Wait for the build process to finish.</p>
+</li>
+<li>
+<p>Restart Eclipse</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To use the packaged TreeTagger resources, add them as Maven dependencies to your
+project (or add them to the classpath if you do not use Maven).</p>
+</div>
+<div class="paragraph">
+<p>Note that in order to use TreeTagger you must have added at least the JAR with the
+TreeTagger binaries and one JAR with the model for the language you want to work with.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_updating_a_model"><a class="anchor" href="#_updating_a_model"></a>24. Updating a model</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Whenever one existing model have a new release, it is good to update the build.xml changing the:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>URL for retrieving the model (if it has changed)</p>
+</li>
+<li>
+<p>The version from the model (the day when the model was created in the <code>yyyymmdd</code> format)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>After that, run the ant script with the <strong>local-maven</strong> target, add
+the jars to your project classpath and check if the existing unit tests work for the up
+to date model. If they do, then run the script again, this time with the
+<strong>remote-maven</strong> target. Then, change the versions from the models
+in the dependency management section from the project&#8217;s pom file, commit those changes
+and move these new models from staging into model repository on zoidberg.</p>
+</div>
+<div class="sect2">
+<h3 id="_md5_checksum_check_fails"><a class="anchor" href="#_md5_checksum_check_fails"></a>24.1. MD5 checksum check fails</h3>
+<div class="paragraph">
+<p>Not all of the resources are properly versioned by their maintainers (in particular
+TreeTagger binaries and models). We observed that resources changed from one day to
+the next without any announcement or increase of the version number (if present at
+all). Thus, we validate all resources against an MD5 checksum stored in the
+<code>build.xml</code> file. This way, we can recognize if a remote
+resource has been changed. When this happens, we add a note to the
+<code>build.xml</code> file indicating, when we noticed the MD5 changed
+and update the version of the corresponding resource.</p>
+</div>
+<div class="paragraph">
+<p>Since we do not test the build.xml files every day, you may get an MD5 checksum
+error when you try to package the resources yourself. If this happens, open the
+<code>build.xml</code> file with a text editor, locate the MD5 checksum that fails, update it and
+update the version of the corresponding resource. You can also tell us on the DKPro
+Core User Group and we will update the <code>build.xml</code> file.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_metadata"><a class="anchor" href="#_metadata"></a>25. Metadata</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Typical metadata items for a model.</p>
+</div>
+<div class="paragraph">
+<p>Almost all models should declare at least one tagset. We currently declare only the tagsets that
+a model produces, not those that it consumes.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. Tagsets</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Entry</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>constituent.tagset</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>chunk.tagset</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dependency.tagset</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pos.tagset</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> <code>morph.tagset</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 2. Model properties</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Entry</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>encoding</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deprecated, use <code>model.encoding</code> instead</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>model.encoding</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The character encoding of the model. In particular relevant for native tools, e.g. TreeTagger,
+Sfst, as we communicate with  as external processes them through pipes or files.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The Dublin Core (DC) metadata items are not (yet) widely used throughout the models. This might
+change in the future.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 3. Dublin Core metadata</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Entry</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> <code>DC.title</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> <code>DC.creator</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> <code>DC.identifier</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> <code>DC.rights</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 4. Component-specific metadata</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Entry</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> <code>mstparser.param.order</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used by the MstParser component to indicate the type of model</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> <code>flushSequence</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used by the TreeTagger components to mark the boundary between two documents.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pos.tagset.tagSplitPattern</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> <code>pos.tag.map.XXX</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="_low_level_tagset_mapping"><a class="anchor" href="#_low_level_tagset_mapping"></a>25.1. Low-level tagset mapping</h3>
+<div class="paragraph">
+<p>Some models require minimalistic tag mapping, e.g. because the tags in the model are upper-case,
+while the tagset normally uses lower-case tags - or because there is a typo in a tag, etc.
+For this reason, DKPro Core offers a  way of mapping tags directly in the model metadata provider
+such that DKPro Core components do not see the original model tags, but the fixed mapped tags.</p>
+</div>
+<div class="paragraph">
+<p>A tag mapping is defined as <code>&lt;level&gt;.tag.map.&lt;originalTag&gt;=&lt;newTag&gt;</code>. For example:</p>
+</div>
+<div class="listingblock">
+<div class="title">Example tag mapping in properties file</div>
+<div class="content">
+<pre>pos.tag.map.nn=NN</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example tag mapping in build.xml</div>
+<div class="content">
+<pre>&lt;entry key="pos.tag.map.nn" value="NN"/&gt;</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This functionality is successively added and may not be available for all types of models.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 1.9.2<br>
+Last updated 2018-05-23 13:14:36 CEST
+</div>
+</div>
+</body>
+</html>

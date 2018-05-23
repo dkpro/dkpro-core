@@ -1,0 +1,31 @@
+{
+    "name": "NEGRA",
+    "description": "German TreeTagger Chunk Tags\n\nThe German chunker was trained on the Negra corpus and uses the following labels.\n\nReferences:\n* ftp://ftp.ims.uni-stuttgart.de/pub/corpora/chunker-tagset-german.txt\n",
+    "language": "de",
+    "tags": [
+        {
+            "tag_name": "0",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ADVC",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "NC",
+            "tag_description": "for noun chunks"
+        },
+        {
+            "tag_name": "PC",
+            "tag_description": "for prepositional phrase chunks (NC + preposition/postposition)"
+        },
+        {
+            "tag_name": "PRT",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "VC",
+            "tag_description": "verb chunk"
+        }
+    ]
+}
