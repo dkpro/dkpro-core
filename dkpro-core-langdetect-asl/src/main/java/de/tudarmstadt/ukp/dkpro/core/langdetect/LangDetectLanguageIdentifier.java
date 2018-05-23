@@ -65,6 +65,11 @@ public class LangDetectLanguageIdentifier
     /**
      * URI of the model artifact. This can be used to override the default model resolving 
      * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
      */
     public static final String PARAM_MODEL_ARTIFACT_URI = 
             ComponentParameters.PARAM_MODEL_ARTIFACT_URI;

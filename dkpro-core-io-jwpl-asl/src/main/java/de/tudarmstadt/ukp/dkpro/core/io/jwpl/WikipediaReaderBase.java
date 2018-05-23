@@ -32,10 +32,13 @@ import de.tudarmstadt.ukp.wikipedia.api.DatabaseConfiguration;
 import de.tudarmstadt.ukp.wikipedia.api.WikiConstants.Language;
 import de.tudarmstadt.ukp.wikipedia.api.Wikipedia;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiInitializationException;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Abstract base class for all Wikipedia readers.
  */
+@Component(value = OperationType.READER)
 public abstract class WikipediaReaderBase extends JCasCollectionReader_ImplBase
 {
     /** The host server. */

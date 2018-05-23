@@ -46,13 +46,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.wikipedia.api.WikiConstants;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
 import de.tudarmstadt.ukp.wikipedia.api.sweble.PlainTextConverter;
+import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 import info.bliki.api.Page;
 import info.bliki.api.User;
 
 /**
  * Bliki-based Wikipedia reader.
  */
+@Component(value = OperationType.READER)
 @ResourceMetaData(name = "Bliki-based Wikipedia reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
