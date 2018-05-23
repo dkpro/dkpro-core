@@ -23,7 +23,7 @@
   <parent>
     <artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
     <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-    <version>1.9.2</version>
+    <version>1.9.3-SNAPSHOT</version>
     <relativePath>../dkpro-core-gpl</relativePath>
   </parent>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl</artifactId>
