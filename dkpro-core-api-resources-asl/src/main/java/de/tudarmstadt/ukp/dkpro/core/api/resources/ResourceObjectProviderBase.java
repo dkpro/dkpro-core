@@ -40,6 +40,8 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
 import java.util.WeakHashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -386,6 +388,7 @@ public abstract class ResourceObjectProviderBase<M>
         String base = url.toString();
         base = base.substring(0, base.length() - classPart.length());
 
+        List<String> lookupPatterns = new ArrayList<>();
         List<URL> urls = new LinkedList<URL>();
 
         String extraNotFoundInfo = "";
@@ -407,23 +410,46 @@ public abstract class ResourceObjectProviderBase<M>
             }
         }
 
+        // If the class is in a JAR (that should be the normal case), try deriving the 
+        // POM location from the JAR file name.
+        if (urls.isEmpty()) {
+            Pattern pattern = Pattern.compile(
+                    ".*/(?<ID>([a-zA-Z0-9-_]+\\.)*[a-zA-Z0-9-_]+)-([0-9]+\\.)*[0-9]+(-[a-zA-Z]+)?\\.jar!/.*");
+            Matcher matcher = pattern.matcher(base);
+            if (matcher.matches()) {
+                String artifactIdAndVersion = matcher.group("ID");
+                String pomPattern = base + "META-INF/maven/" + aModelGroup + "/"
+                        + artifactIdAndVersion + "/pom.xml";
+                lookupPatterns.add(pomPattern);
+                ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+                Resource[] resources = resolver.getResources(pomPattern);
+                for (Resource r : resources) {
+                    urls.add(r.getURL());
+                }
+            }
+        }
+        
+        // Legacy lookup strategy deriving the POM location from the model artifact ID. This
+        // fails if a module is re-using models from another module (e.g. CoreNLP re-using 
+        // models from the StanfordNLP module).
         if (urls.isEmpty()) {
             // This is the default strategy supposed to look in the JAR
             String moduleArtifactId = aModelArtifact.split("-")[0];
             String pomPattern = base + "META-INF/maven/" + aModelGroup + "/" + moduleArtifactId +
                     "*/pom.xml";
+            lookupPatterns.add(pomPattern);
             ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
             Resource[] resources = resolver.getResources(pomPattern);
-
-            // Bail out if no POM was found
-            if (resources.length == 0) {
-                throw new FileNotFoundException("No POM file found using [" + pomPattern + "]"
-                        + extraNotFoundInfo);
-            }
 
             for (Resource r : resources) {
                 urls.add(r.getURL());
             }
+        }
+        
+        // Bail out if no POM was found
+        if (urls.isEmpty()) {
+            throw new FileNotFoundException("No POM file found using the patterns " + lookupPatterns
+                    + ". " + extraNotFoundInfo);
         }
         
         return urls;
@@ -749,15 +775,15 @@ public abstract class ResourceObjectProviderBase<M>
                 resolved.getProperty(ARTIFACT_URI, "").contains("${" + VERSION + "}") && 
                 isNull(resolved.getProperty(VERSION))
         ) {
+            String groupId = pph.replacePlaceholders(aProps.getProperty(GROUP_ID), resolved);
+            String artifactId = pph.replacePlaceholders(aProps.getProperty(ARTIFACT_ID), resolved);
             try {
                 // If the version is to be auto-detected, then we must have a groupId and artifactId
-                String groupId = pph.replacePlaceholders(aProps.getProperty(GROUP_ID), resolved);
-                String artifactId = pph.replacePlaceholders(aProps.getProperty(ARTIFACT_ID),
-                        resolved);
                 resolved.put(VERSION,
                         getModelVersionFromMavenPom(groupId, artifactId, contextClass));
             }
             catch (Throwable e) {
+                log.error("Unable to obtain version from POM", e);
                 // Ignore - this will be tried and reported again later by handleResolvingError
             }
         }

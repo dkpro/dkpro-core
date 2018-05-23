@@ -44,6 +44,7 @@ import org.apache.uima.util.CasToInlineXml;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Writes an approximation of the content of a textual CAS as an inline XML file. Optionally applies
@@ -66,6 +67,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
  * @since 1.1.0
  */
 @ResourceMetaData(name = "Inline XML Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_XML, MimeTypes.TEXT_XML})
 @TypeCapability(
         inputs = {

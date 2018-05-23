@@ -46,11 +46,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Penn Treebank chunked format reader.
  */
 @ResourceMetaData(name = "Penn Treebank Chunked Format Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_PTB_CHUNKED})
 @TypeCapability(
         outputs = { 

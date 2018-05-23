@@ -35,6 +35,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentStorage;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Applies changes annotated using a {@link SofaChangeAnnotation}.
@@ -43,6 +44,7 @@ import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentStorage
  * @see Backmapper
  */
 @ResourceMetaData(name = "CAS Transformation - Apply")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",

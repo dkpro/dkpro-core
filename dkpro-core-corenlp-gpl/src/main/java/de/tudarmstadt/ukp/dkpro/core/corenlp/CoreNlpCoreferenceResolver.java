@@ -43,6 +43,7 @@ import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.DeterministicCorefAnnotator;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -50,6 +51,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.CO_REFERENCE_ANNOTATOR)
 @ResourceMetaData(name = "CoreNLP Coreference Resolver")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",

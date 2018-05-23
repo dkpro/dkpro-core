@@ -31,6 +31,7 @@ import cc.mallet.types.Alphabet;
 import cc.mallet.types.InstanceList;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Compute word embeddings from the given collection using skip-grams.
@@ -44,6 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
  * @since 1.9.0
  */
 @ResourceMetaData(name = "Mallet Embeddings Trainer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class MalletEmbeddingsTrainer
         extends MalletModelTrainer
 {

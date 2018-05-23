@@ -221,6 +221,23 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>eu.openminted.share.annotations</groupId>
+        <artifactId>omtd-share-annotations-maven-plugin</artifactId>
+        <configuration>
+          <!-- 
+            Since TreeTagger and its models are not redistributable, it deos not make any sense
+            to export them to OpenMinTeD. The binaries/models could not be used on the platform.
+           -->
+          <uimaDescriptorExcludes>
+            <exclude>**/*.xml</exclude>
+          </uimaDescriptorExcludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
   <profiles>
     <profile>
       <id>use-proprietary-resources</id>

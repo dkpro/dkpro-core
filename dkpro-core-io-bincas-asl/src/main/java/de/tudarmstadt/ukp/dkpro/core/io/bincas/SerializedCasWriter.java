@@ -38,11 +38,13 @@ import org.apache.uima.jcas.JCas;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * @deprecated use {@code BinaryCasWriter} with format S instead.
  */
 @ResourceMetaData(name = "UIMA Serialized CAS Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 @Deprecated
 public class SerializedCasWriter

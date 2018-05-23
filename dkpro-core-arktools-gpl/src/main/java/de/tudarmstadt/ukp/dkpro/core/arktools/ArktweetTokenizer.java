@@ -31,11 +31,13 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import cmu.arktweetnlp.Twokenize;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * ArkTweet tokenizer.
  */
 @ResourceMetaData(name = "ArkTweet Tokenizer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class ArktweetTokenizer
     extends CasAnnotator_ImplBase
 {

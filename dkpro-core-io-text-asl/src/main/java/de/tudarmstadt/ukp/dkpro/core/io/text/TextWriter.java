@@ -30,11 +30,13 @@ import org.apache.uima.jcas.JCas;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * UIMA CAS consumer writing the CAS document text as plain text file.
  */
 @ResourceMetaData(name = "Text Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_PLAIN})
 @TypeCapability(
         inputs = {
