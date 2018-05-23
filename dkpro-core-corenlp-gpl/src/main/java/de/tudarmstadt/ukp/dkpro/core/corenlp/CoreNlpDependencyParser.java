@@ -73,8 +73,6 @@ public class CoreNlpDependencyParser
 {
     /**
      * Log the tag set(s) when a model is loaded.
-     *
-     * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
@@ -134,23 +132,30 @@ public class CoreNlpDependencyParser
     /**
      * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
      * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code false}
      */
     public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
     @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
     private boolean internStrings;
 
+    /**
+     * Maximum sentence length. Longer sentences are skipped.
+     */
     public static final String PARAM_MAX_SENTENCE_LENGTH = 
             ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
     @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = true, defaultValue = "2147483647")
     private int maxSentenceLength;
     
+    /**
+     * Number of parallel threads to use.
+     */
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
     @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, 
             defaultValue = ComponentParameters.AUTO_NUM_THREADS)
     private int numThreads;
 
+    /**
+     * Maximum time to spend on a single sentence.
+     */
     public static final String PARAM_MAX_TIME = "maxTime";
     @ConfigurationParameter(name = PARAM_MAX_TIME, mandatory = true, defaultValue = "-1")
     private int maxTime;
@@ -180,6 +185,9 @@ public class CoreNlpDependencyParser
     @ConfigurationParameter(name = PARAM_QUOTE_END, mandatory = false)
     private List<String> quoteEnd;
     
+    /**
+     * Types of extra edges to add to the dependency tree.
+     */
     public static final String PARAM_EXTRA_DEPENDENCIES = "extraDependencies";
     @ConfigurationParameter(name = PARAM_EXTRA_DEPENDENCIES, mandatory = true, 
             defaultValue = "NONE")

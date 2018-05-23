@@ -178,6 +178,9 @@ public class CoreNlpParser
     @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = true, defaultValue = "2147483647")
     private int maxSentenceLength;
     
+    /**
+     * Number of parallel threads to use.
+     */
     public static final String PARAM_NUM_THREADS = 
             ComponentParameters.PARAM_NUM_THREADS;
     @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, 

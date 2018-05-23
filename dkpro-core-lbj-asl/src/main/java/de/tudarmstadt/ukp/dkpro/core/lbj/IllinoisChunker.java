@@ -30,6 +30,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.LanguageCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
@@ -66,6 +67,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
         outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk" })
+@LanguageCapability("en")
 public class IllinoisChunker
     extends JCasAnnotator_ImplBase
 {
@@ -92,6 +94,9 @@ public class IllinoisChunker
 //    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
 //    private String modelLocation;
 
+    /**
+     * Use this language instead of the document language.
+     */
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
     private String language;

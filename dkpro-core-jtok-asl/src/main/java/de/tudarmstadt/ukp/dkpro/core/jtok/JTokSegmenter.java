@@ -62,6 +62,9 @@ public class JTokSegmenter
     @ConfigurationParameter(name = PARAM_WRITE_PARAGRAPH, mandatory = true, defaultValue = "true")
     private boolean writeParagraph;
 
+    /**
+     * Use PTB-escaping when setting the token form.
+     */
     public static final String PARAM_PTB_ESCAPING = "ptbEscaping";
     @ConfigurationParameter(name = PARAM_PTB_ESCAPING, mandatory = true, defaultValue = "false")
     private boolean ptbEscaping;

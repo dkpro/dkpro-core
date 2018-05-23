@@ -59,7 +59,7 @@ public class CoreNlpSegmenter
     private boolean verbose;
     
     /**
-     * The set of boundary tokens. If null, use default.
+     * The set of boundary tokens.
      * 
      * @see WordToSentenceProcessor#WordToSentenceProcessor
      */
@@ -68,20 +68,24 @@ public class CoreNlpSegmenter
             defaultValue = WordToSentenceProcessor.DEFAULT_BOUNDARY_REGEX)
     private String boundaryTokenRegex;
 
+    /**
+     * A TokensRegex multi-token pattern for finding boundaries.
+     */
     public static final String PARAM_BOUNDARY_MULTI_TOKEN_REGEX = "boundaryMultiTokenRegex";
     @ConfigurationParameter(name = PARAM_BOUNDARY_MULTI_TOKEN_REGEX, mandatory = false)
     private String boundaryMultiTokenRegex;
 
     /**
-     * These are elements like "p" or "sent", which will be wrapped into regex for approximate XML
-     * matching. They will be deleted in the output, and will always trigger a sentence boundary.
+     * These are elements like "p" or "sent", which will be wrapped into regular expressions for
+     * approximate XML matching. They will be deleted in the output, and will always trigger a
+     * sentence boundary.
      */
     public static final String PARAM_HTML_ELEMENTS_TO_DISCARD = "htmlElementsToDiscard";
     @ConfigurationParameter(name = PARAM_HTML_ELEMENTS_TO_DISCARD, mandatory = false)
     private Set<String> htmlElementsToDiscard;
 
     /**
-     * The set of regex for sentence boundary tokens that should be discarded.
+     * The set of regular expressions for sentence boundary tokens that should be discarded.
      * 
      * @see WordToSentenceProcessor#DEFAULT_SENTENCE_BOUNDARIES_TO_DISCARD
      */
@@ -98,7 +102,7 @@ public class CoreNlpSegmenter
     private String newlineIsSentenceBreak;
 
     /**
-     * The set of regex for sentence boundary tokens that should be discarded.
+     * The set of regular expressions for sentence boundary tokens that should be discarded.
      */
     public static final String PARAM_TOKEN_REGEXES_TO_DISCARD = "tokenRegexesToDiscard";
     @ConfigurationParameter(name = PARAM_TOKEN_REGEXES_TO_DISCARD, mandatory = false, 

@@ -54,6 +54,9 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 public class XmiWriter
     extends JCasFileWriter_ImplBase
 {
+    /**
+     * Format and indent the XML.
+     */
     public static final String PARAM_PRETTY_PRINT = "prettyPrint";
     @ConfigurationParameter(name = PARAM_PRETTY_PRINT, mandatory = true, defaultValue = "true")
     private boolean prettyPrint;
