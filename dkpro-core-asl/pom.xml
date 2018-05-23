@@ -284,7 +284,7 @@
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>dkpro-core-io-nyt-asl</artifactId>
-        <version>1.9.2-SNAPSHOT</version>
+        <version>1.9.3-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -464,7 +464,7 @@
       <dependency>
         <groupId>org.dkpro.core</groupId>
         <artifactId>org-dkpro-core-lancaster-asl</artifactId>
-        <version>1.9.2-SNAPSHOT</version>
+        <version>1.9.3-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -494,6 +494,11 @@
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.textnormalizer-asl</artifactId>
+        <version>1.9.3-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.dkpro.core</groupId>
+        <artifactId>org-dkpro-core-udpipe-asl</artifactId>
         <version>1.9.3-SNAPSHOT</version>
       </dependency>
     </dependencies>
@@ -598,6 +603,7 @@
     <module>../dkpro-core-tokit-asl</module>
     <module>../dkpro-core-treetagger-asl</module>
     <module>../dkpro-core-textnormalizer-asl</module>
+    <module>../dkpro-core-udpipe-asl</module>
   </modules>
   <profiles>
     <!-- Modules from this profile are not included in the release and in default builds -->
@@ -615,27 +621,27 @@
           <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.io.annis-asl</artifactId>
-            <version>1.9.2-SNAPSHOT</version>
+            <version>1.9.3-SNAPSHOT</version>
           </dependency>
           <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.io.rdf-asl</artifactId>
-            <version>1.9.2-SNAPSHOT</version>
+            <version>1.9.3-SNAPSHOT</version>
           </dependency>
           <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.cogroo-asl</artifactId>
-            <version>1.9.2-SNAPSHOT</version>
+            <version>1.9.3-SNAPSHOT</version>
           </dependency>
           <dependency>
             <groupId>org.dkpro.core</groupId>
             <artifactId>dkpro-core-kuromoji-asl</artifactId>
-            <version>1.9.2-SNAPSHOT</version>
+            <version>1.9.3-SNAPSHOT</version>
           </dependency>
           <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.io.gate-asl</artifactId>
-            <version>1.9.2-SNAPSHOT</version>
+            <version>1.9.3-SNAPSHOT</version>
           </dependency>
         </dependencies>
       </dependencyManagement>
@@ -696,29 +702,23 @@
         <module>../dkpro-core-io-graf-asl</module>
         <!-- Processing modules -->
         <module>../dkpro-core-lbj-asl</module>
-        <module>../dkpro-core-udpipe-asl</module>
       </modules>
       <dependencyManagement>
         <dependencies>
           <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.io.fangorn-asl</artifactId>
-            <version>1.9.2-SNAPSHOT</version>
+            <version>1.9.3-SNAPSHOT</version>
           </dependency>
           <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.io.graf-asl</artifactId>
-            <version>1.9.2-SNAPSHOT</version>
+            <version>1.9.3-SNAPSHOT</version>
           </dependency>
           <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.lbj-asl</artifactId>
-            <version>1.9.2-SNAPSHOT</version>
-          </dependency>
-          <dependency>
-            <groupId>org.dkpro.core</groupId>
-            <artifactId>org-dkpro-core-udpipe-asl</artifactId>
-            <version>1.9.2-SNAPSHOT</version>
+            <version>1.9.3-SNAPSHOT</version>
           </dependency>
         </dependencies>
       </dependencyManagement>
