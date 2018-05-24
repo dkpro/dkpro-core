@@ -89,4 +89,21 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>eu.openminted.share.annotations</groupId>
+        <artifactId>omtd-share-annotations-maven-plugin</artifactId>
+        <configuration>
+          <!-- 
+            The following components must be configured via external resources which is not
+            possible on the OpenMinTeD platform.
+           -->
+          <uimaDescriptorExcludes>
+            <exclude>**/CorrectionsContextualizer.xml</exclude>
+          </uimaDescriptorExcludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

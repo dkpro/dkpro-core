@@ -90,12 +90,14 @@ import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerSem;
 import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerSentence;
 import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerSplitword;
 import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerTerminal;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * UIMA collection reader for TIGER-XML files. Also supports the augmented format used in the
  * Semeval 2010 task which includes semantic role data.
  */
 @ResourceMetaData(name = "TIGER-XML Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_TIGER_XML, MimeTypes.APPLICATION_X_SEMEVAL_2010_XML})
 @TypeCapability(
         outputs = { 

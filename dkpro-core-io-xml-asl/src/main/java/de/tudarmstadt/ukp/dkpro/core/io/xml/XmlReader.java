@@ -48,18 +48,28 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.Parameters;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Reader for XML files.
  */
+@Component(value = OperationType.READER)
 @ResourceMetaData(name = "XML Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@Parameters(
+        exclude = { 
+                XmlReader.PARAM_SOURCE_LOCATION  })
 @MimeTypeCapability({MimeTypes.APPLICATION_XML, MimeTypes.TEXT_XML})
 @TypeCapability(
         outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field",
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
-public class XmlReader extends CasCollectionReader_ImplBase {
-
+public class XmlReader
+    extends CasCollectionReader_ImplBase
+{
     /**
      * Location from which the input is read.
      */

@@ -204,5 +204,19 @@
         </plugin>
       </plugins>
     </pluginManagement>
-  </build>
-</project>
+    <plugins>
+      <plugin>
+        <groupId>eu.openminted.share.annotations</groupId>
+        <artifactId>omtd-share-annotations-maven-plugin</artifactId>
+        <configuration>
+          <!-- 
+            The decompounding components must be configured via external resources which is not
+            possible on the OpenMinTeD platform.
+           -->
+          <uimaDescriptorExcludes>
+            <exclude>**/*.xml</exclude>
+          </uimaDescriptorExcludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build></project>

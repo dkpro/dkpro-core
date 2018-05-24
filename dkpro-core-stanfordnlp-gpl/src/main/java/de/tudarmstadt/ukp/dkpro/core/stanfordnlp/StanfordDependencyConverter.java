@@ -59,6 +59,7 @@ import edu.stanford.nlp.trees.Trees;
 import edu.stanford.nlp.trees.TypedDependency;
 import edu.stanford.nlp.util.CoreMap;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -66,6 +67,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.DEPENDENCY_CONVERTER)
 @ResourceMetaData(name = "CoreNLP Dependency Converter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
