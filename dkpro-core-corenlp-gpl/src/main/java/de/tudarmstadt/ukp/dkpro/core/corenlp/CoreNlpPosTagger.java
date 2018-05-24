@@ -100,7 +100,8 @@ public class CoreNlpPosTagger
      * {@code classpath:/model/path/in/artifact/model.bin}.
      * </p>
      */
-    public static final String PARAM_MODEL_ARTIFACT_URI = ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
     @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
     protected String modelArtifactUri;
 
