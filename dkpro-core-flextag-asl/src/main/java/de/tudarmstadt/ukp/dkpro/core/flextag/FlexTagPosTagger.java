@@ -47,6 +47,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -54,12 +55,18 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.PART_OF_SPEECH_TAGGER)
 @ResourceMetaData(name = "FlexTag POS-Tagger")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class FlexTagPosTagger
     extends JCasAnnotator_ImplBase
 {
     /**
      * URI of the model artifact. This can be used to override the default model resolving 
      * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
      */
     public static final String PARAM_MODEL_ARTIFACT_URI = 
             ComponentParameters.PARAM_MODEL_ARTIFACT_URI;

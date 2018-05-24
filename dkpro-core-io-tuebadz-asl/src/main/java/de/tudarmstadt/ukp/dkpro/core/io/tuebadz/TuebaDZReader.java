@@ -50,6 +50,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reads the Tüba-D/Z chunking format.
@@ -58,11 +59,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
  *      Web page</a>
  */
 @ResourceMetaData(name = "Tüba-D/Z Chunking Format Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({ MimeTypes.APPLICATION_X_TUEBADZ_CHUNK })
-@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk" })
+@TypeCapability(
+        outputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk" })
 public class TuebaDZReader
     extends JCasResourceCollectionReader_ImplBase
 {

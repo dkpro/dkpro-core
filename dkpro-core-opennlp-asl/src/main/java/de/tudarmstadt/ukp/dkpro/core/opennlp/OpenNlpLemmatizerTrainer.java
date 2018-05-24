@@ -28,6 +28,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.CasLemmaSampleStream;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTrainerBase;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 import opennlp.tools.lemmatizer.LemmatizerFactory;
 import opennlp.tools.lemmatizer.LemmatizerME;
@@ -43,6 +44,7 @@ import opennlp.tools.util.TrainingParameters;
 @Component(OperationType.LEMMATIZER)
 @MimeTypeCapability(MimeTypes.APPLICATION_X_OPENNLP_LEMMA)
 @ResourceMetaData(name = "OpenNLP Lemmatizer Trainer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class OpenNlpLemmatizerTrainer
     extends OpenNlpTrainerBase<CasLemmaSampleStream>
 {

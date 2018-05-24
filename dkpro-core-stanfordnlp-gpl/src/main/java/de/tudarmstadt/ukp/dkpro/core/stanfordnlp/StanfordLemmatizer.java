@@ -56,6 +56,7 @@ import edu.stanford.nlp.process.CoreLabelTokenFactory;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.util.CoreMap;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -70,6 +71,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.LEMMATIZER)
 @ResourceMetaData(name = "CoreNLP Lemmatizer (old API)")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability("en")
 @TypeCapability(
         inputs = {

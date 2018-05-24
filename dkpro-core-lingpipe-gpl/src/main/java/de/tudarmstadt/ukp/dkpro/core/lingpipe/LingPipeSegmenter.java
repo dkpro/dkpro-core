@@ -32,11 +32,13 @@ import com.aliasi.tokenizer.Tokenization;
 import com.aliasi.tokenizer.TokenizerFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * LingPipe segmenter.
  */
 @ResourceMetaData(name = "LingPipe Segmenter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",

@@ -59,6 +59,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArgLink;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 import se.lth.cs.srl.SemanticRoleLabeler;
 import se.lth.cs.srl.corpus.Predicate;
@@ -78,6 +79,7 @@ import se.lth.cs.srl.pipeline.Pipeline;
  */
 @Component(OperationType.ANNOTATOR_OF_SEMANTIC_ROLE_LABELS)
 @ResourceMetaData(name = "Mate Tools Semantic Role Labeler")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
     inputs = {
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -101,6 +103,11 @@ public class MateSemanticRoleLabeler
     /**
      * URI of the model artifact. This can be used to override the default model resolving 
      * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
      */
     public static final String PARAM_MODEL_ARTIFACT_URI = 
             ComponentParameters.PARAM_MODEL_ARTIFACT_URI;

@@ -42,6 +42,7 @@ import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.component.JCasCollectionReader_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.jcas.JCas;
@@ -68,11 +69,21 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeNode;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.Parameters;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * This CollectionReader reads a file which is formatted in the NEGRA export format. The texts and
  * add. information like constituent structure is reproduced in CASes, one CAS per text (article) .
  */
+@Component(value = OperationType.READER)
+@ResourceMetaData(name = "NEGRA Export Format Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@Parameters(
+        exclude = { 
+                NegraExportReader.PARAM_SOURCE_LOCATION  })
 @MimeTypeCapability({MimeTypes.APPLICATION_X_NEGRA3, MimeTypes.APPLICATION_X_NEGRA4})
 @TypeCapability(
         outputs = { 

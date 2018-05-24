@@ -22,7 +22,7 @@
   <parent>
     <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
     <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-    <version>1.9.2-SNAPSHOT</version>
+    <version>1.9.3-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.io.annis-asl</artifactId>
@@ -65,6 +65,10 @@
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>eu.openminted.share.annotations</groupId>
+      <artifactId>omtd-share-annotations-api</artifactId>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

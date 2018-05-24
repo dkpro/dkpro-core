@@ -59,6 +59,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.Parameters;
 
 /**
  * This Consumer outputs the content of all CASes into the IMS workbench format.
@@ -71,6 +73,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  *
  */
 @ResourceMetaData(name = "IMS CWB Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@Parameters(
+        exclude = { 
+                ImsCwbWriter.PARAM_TARGET_LOCATION  })
 @MimeTypeCapability({MimeTypes.TEXT_X_IMSCWB})
 @TypeCapability(
         inputs = { 

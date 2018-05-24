@@ -52,6 +52,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionProvider;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 import opennlp.tools.postag.POSModel;
 import opennlp.tools.postag.POSTaggerME;
@@ -61,6 +62,7 @@ import opennlp.tools.postag.POSTaggerME;
  */
 @Component(OperationType.PART_OF_SPEECH_TAGGER)
 @ResourceMetaData(name = "OpenNLP POS-Tagger")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 //NOTE: This file contains Asciidoc markers for partial inclusion of this file in the documentation
 //Do not remove these tags!
 // tag::capabilities[]
@@ -92,6 +94,11 @@ public class OpenNlpPosTagger
     /**
      * URI of the model artifact. This can be used to override the default model resolving 
      * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
      */
     public static final String PARAM_MODEL_ARTIFACT_URI = 
             ComponentParameters.PARAM_MODEL_ARTIFACT_URI;

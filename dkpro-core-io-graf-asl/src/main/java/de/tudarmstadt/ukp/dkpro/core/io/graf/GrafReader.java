@@ -45,11 +45,13 @@ import org.xml.sax.SAXException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * ISO GrAF reader.
  */
 @ResourceMetaData(name = "ISO GrAF Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_GRAF_XML})
 @TypeCapability(
         outputs = {

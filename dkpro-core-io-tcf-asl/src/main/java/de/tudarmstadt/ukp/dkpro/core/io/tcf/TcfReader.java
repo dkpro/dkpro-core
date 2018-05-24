@@ -56,6 +56,7 @@ import eu.clarin.weblicht.wlfxb.tc.api.DependencyParsingLayer;
 import eu.clarin.weblicht.wlfxb.tc.api.Reference;
 import eu.clarin.weblicht.wlfxb.tc.api.TextCorpus;
 import eu.clarin.weblicht.wlfxb.xb.WLData;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reader for the WebLicht TCF format. It reads all the available annotation Layers from the TCF
@@ -65,6 +66,7 @@ import eu.clarin.weblicht.wlfxb.xb.WLData;
  * from the token
  */
 @ResourceMetaData(name = "CLARIN-DE WebLicht TCF Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_TCF})
 @TypeCapability(outputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",

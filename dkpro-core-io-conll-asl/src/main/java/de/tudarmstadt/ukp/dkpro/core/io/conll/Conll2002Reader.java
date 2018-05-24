@@ -50,6 +50,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * <p>Reads by default the CoNLL 2002 named entity format.</p>
@@ -111,6 +112,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * @see <a href="https://sites.google.com/site/germeval2014ner/data">GermEval 2014 NER task</a> 
  */
 @ResourceMetaData(name = "CoNLL 2002 Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2002, MimeTypes.TEXT_X_GERMEVAL_2014})
 @TypeCapability(
         outputs = { 

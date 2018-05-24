@@ -42,16 +42,12 @@ import org.junit.rules.TestName;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.type.Tfidf;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.TfidfAnnotator.WeightingModeIdf;
-import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.TfidfAnnotator.WeightingModeTf;
+import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.TfIdfAnnotator.WeightingModeIdf;
+import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.TfIdfAnnotator.WeightingModeTf;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
-/**
- * 
- * 
- */
-public class TfidfAnnotatorTest
+public class TfIdfAnnotatorTest
 {
     // assertEquals on doubles needs an epsilon
     protected static final double EPSILON = 0.000001;
@@ -76,9 +72,9 @@ public class TfidfAnnotatorTest
 
         AnalysisEngineDescription aggregate = createEngineDescription(
                 createEngineDescription(BreakIteratorSegmenter.class),
-                createEngineDescription(TfidfConsumer.class, 
-                        TfidfConsumer.PARAM_FEATURE_PATH, Token.class, 
-                        TfidfConsumer.PARAM_TARGET_LOCATION, model));
+                createEngineDescription(TfIdfWriter.class, 
+                        TfIdfWriter.PARAM_FEATURE_PATH, Token.class, 
+                        TfIdfWriter.PARAM_TARGET_LOCATION, model));
 
         SimplePipeline.runPipeline(reader, aggregate);
     }
@@ -93,11 +89,11 @@ public class TfidfAnnotatorTest
 
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
-        AnalysisEngineDescription tfidfAnnotator = createEngineDescription(TfidfAnnotator.class,
-                TfidfAnnotator.PARAM_FEATURE_PATH, Token.class,
-                TfidfAnnotator.PARAM_TFDF_PATH, model, 
-                TfidfAnnotator.PARAM_TF_MODE, WeightingModeTf.NORMAL, 
-                TfidfAnnotator.PARAM_IDF_MODE, WeightingModeIdf.CONSTANT_ONE);
+        AnalysisEngineDescription tfidfAnnotator = createEngineDescription(TfIdfAnnotator.class,
+                TfIdfAnnotator.PARAM_FEATURE_PATH, Token.class,
+                TfIdfAnnotator.PARAM_TFDF_PATH, model, 
+                TfIdfAnnotator.PARAM_TF_MODE, WeightingModeTf.NORMAL, 
+                TfIdfAnnotator.PARAM_IDF_MODE, WeightingModeIdf.CONSTANT_ONE);
 
         Map<String, Double> expectedDoc1 = new HashMap<String, Double>();
         expectedDoc1.put("example", 1.0);
@@ -123,11 +119,11 @@ public class TfidfAnnotatorTest
 
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
-        AnalysisEngineDescription tfidfAnnotator = createEngineDescription(TfidfAnnotator.class,
-                TfidfAnnotator.PARAM_FEATURE_PATH, Token.class,
-                TfidfAnnotator.PARAM_TFDF_PATH, model, 
-                TfidfAnnotator.PARAM_TF_MODE, WeightingModeTf.BINARY,
-                TfidfAnnotator.PARAM_IDF_MODE, WeightingModeIdf.BINARY);
+        AnalysisEngineDescription tfidfAnnotator = createEngineDescription(TfIdfAnnotator.class,
+                TfIdfAnnotator.PARAM_FEATURE_PATH, Token.class,
+                TfIdfAnnotator.PARAM_TFDF_PATH, model, 
+                TfIdfAnnotator.PARAM_TF_MODE, WeightingModeTf.BINARY,
+                TfIdfAnnotator.PARAM_IDF_MODE, WeightingModeIdf.BINARY);
 
         Map<String, Double> expectedDoc1 = new HashMap<String, Double>();
         expectedDoc1.put("example", 1.0);
@@ -153,11 +149,11 @@ public class TfidfAnnotatorTest
 
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
-        AnalysisEngineDescription tfidfAnnotator = createEngineDescription(TfidfAnnotator.class,
-                TfidfAnnotator.PARAM_FEATURE_PATH, Token.class,
-                TfidfAnnotator.PARAM_TFDF_PATH, model, 
-                TfidfAnnotator.PARAM_TF_MODE, WeightingModeTf.NORMAL, 
-                TfidfAnnotator.PARAM_IDF_MODE, WeightingModeIdf.LOG);
+        AnalysisEngineDescription tfidfAnnotator = createEngineDescription(TfIdfAnnotator.class,
+                TfIdfAnnotator.PARAM_FEATURE_PATH, Token.class,
+                TfIdfAnnotator.PARAM_TFDF_PATH, model, 
+                TfIdfAnnotator.PARAM_TF_MODE, WeightingModeTf.NORMAL, 
+                TfIdfAnnotator.PARAM_IDF_MODE, WeightingModeIdf.LOG);
 
         Map<String, Double> expectedDoc1 = new HashMap<String, Double>();
         expectedDoc1.put("example", 0.0);

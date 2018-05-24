@@ -50,6 +50,7 @@ import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 import edu.stanford.nlp.util.StringUtils;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -57,6 +58,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.PART_OF_SPEECH_TAGGER)
 @ResourceMetaData(name = "CoreNLP POS-Tagger")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -93,6 +95,11 @@ public class CoreNlpPosTagger
     /**
      * URI of the model artifact. This can be used to override the default model resolving 
      * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
      */
     public static final String PARAM_MODEL_ARTIFACT_URI = 
             ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
@@ -131,11 +138,17 @@ public class CoreNlpPosTagger
     @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
     private boolean internStrings;
 
+    /**
+     * Maximum sentence length. Longer sentences are skipped.
+     */
     public static final String PARAM_MAX_SENTENCE_LENGTH = 
             ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
     @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = true, defaultValue = "2147483647")
     private int maxSentenceLength;
     
+    /**
+     * Number of parallel threads to use.
+     */
     public static final String PARAM_NUM_THREADS = 
             ComponentParameters.PARAM_NUM_THREADS;
     @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, 

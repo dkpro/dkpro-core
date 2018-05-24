@@ -40,11 +40,13 @@ import org.xml.sax.SAXException;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * UIMA JSON format writer.
  */
 @ResourceMetaData(name = "UIMA JSON CAS Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_UIMA_JSON})
 @TypeCapability(
         inputs = {

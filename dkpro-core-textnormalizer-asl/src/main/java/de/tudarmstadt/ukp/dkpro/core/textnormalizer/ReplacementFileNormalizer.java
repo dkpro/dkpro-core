@@ -42,6 +42,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -50,6 +51,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.NORMALIZER)
 @ResourceMetaData(name = "Replacement File Normalizer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 
         outputs = { "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" })

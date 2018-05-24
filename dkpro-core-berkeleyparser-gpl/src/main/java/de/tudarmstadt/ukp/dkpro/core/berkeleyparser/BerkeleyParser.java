@@ -68,20 +68,25 @@ import edu.berkeley.nlp.PCFGLA.TreeAnnotations;
 import edu.berkeley.nlp.syntax.Tree;
 import edu.berkeley.nlp.util.Numberer;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
- * Berkeley Parser annotator . Requires {@link Sentence}s to be annotated before.
+ * Berkeley Parser annotator. Requires {@link Sentence}s to be annotated before.
  *
  * @see CoarseToFineMaxRuleParser
  */
 @Component(OperationType.CONSTITUENCY_PARSER)
 @ResourceMetaData(name = "Berkeley Parser")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @OperationalProperties(multipleDeploymentAllowed = false)
-@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = {
-        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
-        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree" })
+@TypeCapability(
+        inputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, 
+        outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree" })
 public class BerkeleyParser
     extends JCasAnnotator_ImplBase
 {
@@ -102,6 +107,11 @@ public class BerkeleyParser
     /**
      * URI of the model artifact. This can be used to override the default model resolving 
      * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
      */
     public static final String PARAM_MODEL_ARTIFACT_URI = 
             ComponentParameters.PARAM_MODEL_ARTIFACT_URI;

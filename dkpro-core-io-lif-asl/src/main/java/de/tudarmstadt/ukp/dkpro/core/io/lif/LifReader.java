@@ -34,11 +34,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBas
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.io.lif.internal.Lif2DKPro;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reader for the LIF format.
  */
 @ResourceMetaData(name = "LAPPS Grid LIF Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_LIF_JSON})
 @TypeCapability(
         outputs = {

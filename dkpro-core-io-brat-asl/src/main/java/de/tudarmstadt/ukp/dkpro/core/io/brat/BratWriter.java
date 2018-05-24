@@ -71,6 +71,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratTextAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratTextAnnotationDrawingDecl;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.RelationParam;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TypeMapping;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Writer for the brat annotation format.
@@ -86,6 +87,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TypeMapping;
  * @see <a href="http://brat.nlplab.org/configuration.html">brat configuration format</a>
  */
 @ResourceMetaData(name = "Brat Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_BRAT})
 public class BratWriter extends JCasFileWriter_ImplBase
 {
