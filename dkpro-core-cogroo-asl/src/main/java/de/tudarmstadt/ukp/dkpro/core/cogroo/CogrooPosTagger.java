@@ -180,7 +180,8 @@ public class CogrooPosTagger
                 Type posTag = mappingProvider.getTagType(cTok.getPOSTag());
                 POS posAnno = (POS) cas.createAnnotation(posTag, cSent.getStart() + cTok.getStart(),
                         cSent.getStart() + cTok.getEnd());
-                posAnno.setPosValue(cTok.getPOSTag().intern());
+                String tag = cTok.getPOSTag();
+                posAnno.setPosValue(tag != null ? tag.intern() : null);
                 POSUtils.assignCoarseValue(posAnno);
                 posAnno.addToIndexes();
                 dTok.setPos(posAnno);

@@ -269,8 +269,8 @@ public class ClearNlpPosTagger
 
             int i = 0;
             for (Token t : tokens) {
-                String tag = posTags[i + 1].intern();
-                Type posTag = posMappingProvider.getTagType(tag);
+                String tag = posTags[i + 1];
+                Type posTag = posMappingProvider.getTagType(tag != null ? tag.intern() : null);
                 POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
                 posAnno.setPosValue(tag);
                 POSUtils.assignCoarseValue(posAnno);

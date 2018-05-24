@@ -197,7 +197,8 @@ public class HepplePosTagger
             for (Token t : tokens) {
                 Type posTag = mappingProvider.getTagType(tagged.get(i)[1]);
                 POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
-                posAnno.setPosValue(tagged.get(i)[1].intern());
+                String tag = tagged.get(i)[1];
+                posAnno.setPosValue(tag != null ? tag.intern() : null);
                 POSUtils.assignCoarseValue(posAnno);
                 posAnno.addToIndexes();
                 t.setPos(posAnno);

@@ -247,7 +247,7 @@ public class OpenNlpParser
                 Type posTag = posMappingProvider.getTagType(aNode.getType());
                 POS posAnno = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                         token.getEnd());
-                posAnno.setPosValue(aNode.getType().intern());
+                posAnno.setPosValue(aNode.getType() != null ? aNode.getType().intern() : null);
                 POSUtils.assignCoarseValue(posAnno);
                 posAnno.addToIndexes();
                 token.setPos(posAnno);

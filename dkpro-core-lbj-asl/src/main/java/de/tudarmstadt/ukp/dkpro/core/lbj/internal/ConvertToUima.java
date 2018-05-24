@@ -50,7 +50,7 @@ public class ConvertToUima
             Type posTag = mappingProvider.getTagType(tag);
             POS posAnno = (POS) cas.createAnnotation(posTag, p.getStartCharOffset(),
                     p.getEndCharOffset());
-            posAnno.setPosValue(tag.intern());
+            posAnno.setPosValue(tag != null ? tag.intern() : null);
             POSUtils.assignCoarseValue(posAnno);
             posAnno.addToIndexes();
             casTokens.get(i).setPos(posAnno);
@@ -71,7 +71,7 @@ public class ConvertToUima
             Type chunkTag = mappingProvider.getTagType(tag);
             Chunk chunkAnno = (Chunk) cas.createAnnotation(chunkTag, p.getStartCharOffset(),
                     p.getEndCharOffset());
-            chunkAnno.setChunkValue(tag.intern());
+            chunkAnno.setChunkValue(tag != null ? tag.intern() : null);
             chunkAnno.addToIndexes();
         }
     }
@@ -89,7 +89,7 @@ public class ConvertToUima
             Type neTag = mappingProvider.getTagType(tag);
             NamedEntity neAnno = (NamedEntity) cas.createAnnotation(neTag, p.getStartCharOffset(),
                     p.getEndCharOffset());
-            neAnno.setValue(tag.intern());
+            neAnno.setValue(tag != null ? tag.intern() : null);
             neAnno.addToIndexes();
         }
     }

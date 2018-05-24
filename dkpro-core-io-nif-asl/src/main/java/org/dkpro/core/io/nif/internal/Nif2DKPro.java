@@ -157,7 +157,7 @@ public class Nif2DKPro
                 Type posTag = posMappingProvider.getTagType(tag);
                 POS uimaPos = (POS) aJCas.getCas().createAnnotation(posTag, uimaToken.getBegin(),
                         uimaToken.getEnd());
-                uimaPos.setPosValue(tag.intern());
+                uimaPos.setPosValue(tag != null ? tag.intern() : null);
                 POSUtils.assignCoarseValue(uimaPos);
                 uimaPos.addToIndexes();
                 uimaToken.setPos(uimaPos);

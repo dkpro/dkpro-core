@@ -196,7 +196,7 @@ public class LingPipePosTagger
                 }
                 Type posTag = mappingProvider.getTagType(tag);
                 POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
-                posAnno.setPosValue(tag.intern());
+                posAnno.setPosValue(tag != null ? tag.intern() : null);
                 POSUtils.assignCoarseValue(posAnno);
                 posAnno.addToIndexes();
                 t.setPos(posAnno);

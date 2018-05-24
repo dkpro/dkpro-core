@@ -61,12 +61,12 @@ public class UDPipe2DKPro
             Type posTag = mappingProvider.getTagType(xtag);
             POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
             // To save memory, we typically intern() tag strings
-            posAnno.setPosValue(xtag.intern());
+            posAnno.setPosValue(xtag != null ? xtag.intern() : null);
             if (utag == null) {
                 POSUtils.assignCoarseValue(posAnno);
             }
             else {
-                posAnno.setCoarseValue(utag.intern());
+                posAnno.setCoarseValue(utag != null ? utag.intern() : null);
             }
             posAnno.addToIndexes();
             

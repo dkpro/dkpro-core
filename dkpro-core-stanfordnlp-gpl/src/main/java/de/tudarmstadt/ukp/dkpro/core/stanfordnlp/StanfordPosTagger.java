@@ -236,7 +236,8 @@ public class StanfordPosTagger
                 TaggedWord tt = taggedWords.get(i);
                 Type posTag = posMappingProvider.getTagType(tt.tag());
                 POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
-                posAnno.setStringValue(posTag.getFeatureByBaseName("PosValue"), tt.tag().intern());
+                posAnno.setStringValue(posTag.getFeatureByBaseName("PosValue"),
+                        tt.tag() != null ? tt.tag().intern() : null);
                 posAnno.addToIndexes();
                 t.setPos(posAnno);
                 i++;

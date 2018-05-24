@@ -76,7 +76,7 @@ public class CoreNlp2DKPro
                 Type tagType = mappingProvider.getTagType(tag);
                 POS anno = (POS) aJCas.getCas().createAnnotation(tagType, token.getBegin(),
                         token.getEnd());
-                anno.setPosValue(tag.intern());
+                anno.setPosValue(tag != null ? tag.intern() : null);
                 POSUtils.assignCoarseValue(anno);
                 anno.addToIndexes();
                 token.setPos(anno);
@@ -100,7 +100,7 @@ public class CoreNlp2DKPro
                 Type tagType = mappingProvider.getTagType(tag);
                 NamedEntity anno = (NamedEntity) aJCas.getCas().createAnnotation(tagType,
                         token.getBegin(), token.getEnd());
-                anno.setValue(tag.intern());
+                anno.setValue(tag != null ? tag.intern() : null);
                 anno.addToIndexes();
             }
         }
@@ -163,7 +163,7 @@ public class CoreNlp2DKPro
                 
                 Type depRel = mappingProvider.getTagType(labelUsedForMapping);
                 Dependency dep = (Dependency) aJCas.getCas().createFS(depRel);
-                dep.setDependencyType(actualLabel.intern());
+                dep.setDependencyType(actualLabel != null ? actualLabel.intern() : null);
                 dep.setDependent(dependent);
                 dep.setGovernor(governor);
                 dep.setBegin(dep.getDependent().getBegin());
@@ -214,7 +214,7 @@ public class CoreNlp2DKPro
             
             Constituent constituent = (Constituent) aJCas.getCas().createAnnotation(constType,
                     begin, end);
-            constituent.setConstituentType(nodeLabelValue.intern());
+            constituent.setConstituentType(nodeLabelValue != null ? nodeLabelValue.intern() : null);
             constituent.setSyntacticFunction(
                     syntacticFunction != null ? syntacticFunction.intern() : null);
             constituent.setParent(aParentFS);

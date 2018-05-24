@@ -50,7 +50,7 @@ public class EmoryNlp2Uima
             Type posTag = aMappingProvider.getTagType(tag);
             POS posAnno = (POS) aCas.createAnnotation(posTag, t.getBegin(), t.getEnd());
             // To save memory, we typically intern() tag strings
-            posAnno.setPosValue(tag.intern());
+            posAnno.setPosValue(tag != null ? tag.intern() : null);
             POSUtils.assignCoarseValue(posAnno);
             posAnno.addToIndexes();
             
@@ -74,7 +74,7 @@ public class EmoryNlp2Uima
             if (govNode.getID() != 0) {
                 Type depRel = aMappingProvider.getTagType(label);
                 Dependency dep = (Dependency) aJCas.getCas().createFS(depRel);
-                dep.setDependencyType(label.intern());
+                dep.setDependencyType(label != null ? label.intern() : null);
                 dep.setDependent(aTokens.get(depNode.getID() - 1));
                 dep.setGovernor(aTokens.get(govNode.getID() - 1));
                 dep.setBegin(dep.getDependent().getBegin());

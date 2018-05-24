@@ -335,7 +335,7 @@ public class BerkeleyParser
                 Type posTag = posMappingProvider.getTagType(typeName);
                 POS posAnno = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                         token.getEnd());
-                posAnno.setPosValue(typeName.intern());
+                posAnno.setPosValue(typeName != null ? typeName.intern() : null);
                 POSUtils.assignCoarseValue(posAnno);
                 posAnno.addToIndexes();
                 token.setPos(posAnno);
