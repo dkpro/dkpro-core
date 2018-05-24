@@ -138,11 +138,17 @@ public class CoreNlpPosTagger
     @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
     private boolean internStrings;
 
+    /**
+     * Maximum sentence length. Longer sentences are skipped.
+     */
     public static final String PARAM_MAX_SENTENCE_LENGTH = 
             ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
     @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = true, defaultValue = "2147483647")
     private int maxSentenceLength;
     
+    /**
+     * Number of parallel threads to use.
+     */
     public static final String PARAM_NUM_THREADS = 
             ComponentParameters.PARAM_NUM_THREADS;
     @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, 

@@ -173,6 +173,9 @@ public class CoreNlpParser
     @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
     private boolean internStrings;
 
+    /**
+     * Maximum sentence length. Longer sentences are skipped.
+     */
     public static final String PARAM_MAX_SENTENCE_LENGTH = 
             ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
     @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = true, defaultValue = "2147483647")
@@ -187,6 +190,9 @@ public class CoreNlpParser
             defaultValue = ComponentParameters.AUTO_NUM_THREADS)
     private int numThreads;
 
+    /**
+     * Maximum time to spend on a single sentence.
+     */
     public static final String PARAM_MAX_TIME = "maxTime";
     @ConfigurationParameter(name = PARAM_MAX_TIME, mandatory = true, defaultValue = "-1")
     private int maxTime;
@@ -216,6 +222,9 @@ public class CoreNlpParser
     @ConfigurationParameter(name = PARAM_QUOTE_END, mandatory = false)
     private List<String> quoteEnd;
     
+    /**
+     * Types of extra edges to add to the dependency tree.
+     */
     public static final String PARAM_EXTRA_DEPENDENCIES = "extraDependencies";
     @ConfigurationParameter(name = PARAM_EXTRA_DEPENDENCIES, mandatory = true, defaultValue = "NONE")
     GrammaticalStructure.Extras extraDependencies;
@@ -269,11 +278,17 @@ public class CoreNlpParser
     @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")
     private boolean writeDependency;
 
+    /**
+     * Generate original Stanford Dependencies grammatical relations instead of Universal
+     * Dependencies.
+     */
     public static final String PARAM_ORIGINAL_DEPENDENCIES = "originalDependencies";
     @ConfigurationParameter(name = PARAM_ORIGINAL_DEPENDENCIES, mandatory = true, defaultValue = "true")
     private boolean originalDependencies;
 
-    // CoreNlpParser PARAM_KEEP_PUNCTUATION has no effect #965
+    /**
+     * Whether to keep punctuation dependencies in the dependency parse output of the parser.
+     */
     public static final String PARAM_KEEP_PUNCTUATION = "keepPunctuation";
     @ConfigurationParameter(name = PARAM_KEEP_PUNCTUATION, mandatory = true, defaultValue = "false")
     private boolean keepPunctuation;

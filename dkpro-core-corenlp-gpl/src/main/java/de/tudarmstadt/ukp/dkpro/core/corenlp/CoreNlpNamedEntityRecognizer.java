@@ -75,8 +75,6 @@ public class CoreNlpNamedEntityRecognizer
 {
     /**
      * Log the tag set(s) when a model is loaded.
-     *
-     * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
@@ -136,8 +134,6 @@ public class CoreNlpNamedEntityRecognizer
     /**
      * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
      * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code false}
      */
     public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
     @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
@@ -196,19 +192,29 @@ public class CoreNlpNamedEntityRecognizer
      */
     public static final String PARAM_APPLY_NUMERIC_CLASSIFIERS = "applyNumericClassifiers";
     @ConfigurationParameter(name = PARAM_APPLY_NUMERIC_CLASSIFIERS, mandatory = true, defaultValue = "true")
-    boolean applyNumericClassifiers;
+    private boolean applyNumericClassifiers;
 
+//    /**
+//     * Use SUTime if it is available on the classpath. SUTime only works for English.
+//     */
+//    public static final String PARAM_USE_SUTIME = "useSUTime";
+//    @ConfigurationParameter(name = PARAM_USE_SUTIME, mandatory = true, defaultValue = "false")
     // FIXME Using USE_SUTIME_DEFAULT autodetects presence of SUTime. Need three values here:
     // on, off, auto
-    public static final String PARAM_USE_SUTIME = "useSUTime";
-    @ConfigurationParameter(name = PARAM_USE_SUTIME, mandatory = true, defaultValue = "false")
-    boolean useSUTime; // = NumberSequenceClassifier.USE_SUTIME_DEFAULT;
+    private boolean useSUTime = false; // = NumberSequenceClassifier.USE_SUTIME_DEFAULT;
 
-    public static final String PARAM_AUGMENT_REGEX_NER = "augmentRegexNER";
-    @ConfigurationParameter(name = PARAM_AUGMENT_REGEX_NER, mandatory = true, defaultValue = "false")
-    boolean augmentRegexNER; // = NERClassifierCombiner.APPLY_GAZETTE_PROPERTY;
+//    /**
+//     * Whether to read the default regular expression gazetteer.
+//     * 
+//     * @see edu.stanford.nlp.pipeline.DefaultPaths#DEFAULT_NER_GAZETTE_MAPPING
+//     */
+//    public static final String PARAM_AUGMENT_REGEX_NER = "augmentRegexNER";
+//    @ConfigurationParameter(name = PARAM_AUGMENT_REGEX_NER, mandatory = true, defaultValue = "false")
+    // Commented out since the default gazetter is currently only in the original Stanford model
+    // JARs
+    private boolean augmentRegexNER = false; // = NERClassifierCombiner.APPLY_GAZETTE_PROPERTY;
 
-    boolean verbose = false;
+    private boolean verbose = false;
     
     private ModelProviderBase<NERCombinerAnnotator> annotatorProvider;
     private MappingProvider mappingProvider;
