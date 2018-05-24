@@ -84,16 +84,6 @@ public class Conll2000Reader
     private String sourceEncoding;
 
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spamming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
-
-    /**
      * Write part-of-speech information.
      *
      * Default: {@code true}
@@ -201,7 +191,6 @@ public class Conll2000Reader
         Type chunkType = JCasUtil.getType(aJCas, Chunk.class);
         Feature chunkValue = chunkType.getFeatureByBaseName("chunkValue");
         IobDecoder decoder = new IobDecoder(aJCas.getCas(), chunkValue, chunkMappingProvider);
-        decoder.setInternTags(internTags);
         
         List<String[]> words;
         while ((words = readSentence(aReader)) != null) {

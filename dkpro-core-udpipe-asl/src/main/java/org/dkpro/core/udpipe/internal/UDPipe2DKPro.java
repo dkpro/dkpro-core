@@ -40,7 +40,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 public class UDPipe2DKPro
 {
     public static void convertPosLemmaMorph(Sentence sentence, Collection<Token> tokens, JCas aJCas,
-            MappingProvider mappingProvider, boolean internTags)
+            MappingProvider mappingProvider)
     {
         CAS cas = aJCas.getCas();
         
@@ -61,12 +61,12 @@ public class UDPipe2DKPro
             Type posTag = mappingProvider.getTagType(xtag);
             POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
             // To save memory, we typically intern() tag strings
-            posAnno.setPosValue(internTags ? xtag.intern() : xtag);
+            posAnno.setPosValue(xtag.intern());
             if (utag == null) {
                 POSUtils.assignCoarseValue(posAnno);
             }
             else {
-                posAnno.setCoarseValue(internTags ? utag.intern() : utag);
+                posAnno.setCoarseValue(utag.intern());
             }
             posAnno.addToIndexes();
             
@@ -93,7 +93,7 @@ public class UDPipe2DKPro
     }
     
     public static void convertParse(Sentence sentence, List<Token> tokens, JCas aJCas,
-            MappingProvider mappingProvider, boolean internTags)
+            MappingProvider mappingProvider)
     {
         for (int i = 1; i < sentence.getWords().size(); i++) {
             Word w = sentence.getWords().get(i);

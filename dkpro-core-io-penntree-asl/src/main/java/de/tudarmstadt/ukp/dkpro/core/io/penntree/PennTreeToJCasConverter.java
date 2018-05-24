@@ -48,7 +48,7 @@ public class PennTreeToJCasConverter
 
     private boolean writeTracesToText;
     private boolean createPosTags;
-    private boolean internTags;
+    private boolean internTags = true;
     private String rootLabel = ROOT;
     
     private MappingProvider posMappingProvider;

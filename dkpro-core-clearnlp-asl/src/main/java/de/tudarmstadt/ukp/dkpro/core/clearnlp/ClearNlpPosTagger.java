@@ -142,14 +142,6 @@ public class ClearNlpPosTagger
     protected String posMappingLocation;
 
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid spaming
-     * the heap with thousands of strings representing only a few different tags.
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
-
-    /**
      * Log the tag set(s) when a model is loaded.
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
@@ -277,7 +269,7 @@ public class ClearNlpPosTagger
 
             int i = 0;
             for (Token t : tokens) {
-                String tag = internTags ? posTags[i + 1].intern() : posTags[i + 1];
+                String tag = posTags[i + 1].intern();
                 Type posTag = posMappingProvider.getTagType(tag);
                 POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
                 posAnno.setPosValue(tag);

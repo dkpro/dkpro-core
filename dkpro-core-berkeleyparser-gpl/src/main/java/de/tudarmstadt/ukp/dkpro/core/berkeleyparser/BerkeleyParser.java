@@ -142,16 +142,6 @@ public class BerkeleyParser
     protected String constituentMappingLocation;
 
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid spaming
-     * the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
-
-    /**
      * Log the tag set(s) when a model is loaded.
      *
      * Default: {@code false}
@@ -345,7 +335,7 @@ public class BerkeleyParser
                 Type posTag = posMappingProvider.getTagType(typeName);
                 POS posAnno = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                         token.getEnd());
-                posAnno.setPosValue(internTags ? typeName.intern() : typeName);
+                posAnno.setPosValue(typeName.intern());
                 POSUtils.assignCoarseValue(posAnno);
                 posAnno.addToIndexes();
                 token.setPos(posAnno);

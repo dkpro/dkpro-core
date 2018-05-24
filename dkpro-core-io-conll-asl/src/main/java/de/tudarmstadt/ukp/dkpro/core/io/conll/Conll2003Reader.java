@@ -87,16 +87,6 @@ public class Conll2003Reader
     private String sourceEncoding;
 
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spamming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
-
-    /**
      * Write part-of-speech information.
      *
      * Default: {@code true}
@@ -235,13 +225,11 @@ public class Conll2003Reader
         Type chunkType = JCasUtil.getType(aJCas, Chunk.class);
         Feature chunkValue = chunkType.getFeatureByBaseName("chunkValue");
         IobDecoder chunkDecoder = new IobDecoder(aJCas.getCas(), chunkValue, chunkMappingProvider);
-        chunkDecoder.setInternTags(internTags);
         
         Type namedEntityType = JCasUtil.getType(aJCas, NamedEntity.class);
         Feature namedEntityValue = namedEntityType.getFeatureByBaseName("value");
         IobDecoder neDecoder = new IobDecoder(aJCas.getCas(), namedEntityValue,
                 namedEntityMappingProvider);
-        neDecoder.setInternTags(internTags);        
         
         List<String[]> words;
         while ((words = readSentence(aReader)) != null) {

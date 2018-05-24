@@ -37,7 +37,7 @@ import edu.illinois.cs.cogcomp.core.datastructures.textannotation.TextAnnotation
 public class ConvertToUima
 {
     public static void convertPOSs(JCas aJCas, List<Token> casTokens, TextAnnotation document,
-            MappingProvider mappingProvider, boolean internStrings)
+            MappingProvider mappingProvider)
     {
         CAS cas = aJCas.getCas();
         List<Constituent> pos = document.getView(ViewNames.POS).getConstituents();
@@ -50,7 +50,7 @@ public class ConvertToUima
             Type posTag = mappingProvider.getTagType(tag);
             POS posAnno = (POS) cas.createAnnotation(posTag, p.getStartCharOffset(),
                     p.getEndCharOffset());
-            posAnno.setPosValue(internStrings ? tag.intern() : tag);
+            posAnno.setPosValue(tag.intern());
             POSUtils.assignCoarseValue(posAnno);
             posAnno.addToIndexes();
             casTokens.get(i).setPos(posAnno);
@@ -59,7 +59,7 @@ public class ConvertToUima
     }
     
     public static void convertChunks(JCas aJCas, List<Token> casTokens, TextAnnotation document,
-            MappingProvider mappingProvider, boolean internStrings)
+            MappingProvider mappingProvider)
     {
         CAS cas = aJCas.getCas();
         List<Constituent> pos = document.getView(ViewNames.SHALLOW_PARSE).getConstituents();
@@ -71,13 +71,13 @@ public class ConvertToUima
             Type chunkTag = mappingProvider.getTagType(tag);
             Chunk chunkAnno = (Chunk) cas.createAnnotation(chunkTag, p.getStartCharOffset(),
                     p.getEndCharOffset());
-            chunkAnno.setChunkValue(internStrings ? tag.intern() : tag);
+            chunkAnno.setChunkValue(tag.intern());
             chunkAnno.addToIndexes();
         }
     }
     
     public static void convertNamedEntity(JCas aJCas, TextAnnotation document,
-            MappingProvider mappingProvider, boolean internStrings)
+            MappingProvider mappingProvider)
     {
         CAS cas = aJCas.getCas();
         List<Constituent> ne = document.getView(ViewNames.NER_CONLL).getConstituents();
@@ -89,7 +89,7 @@ public class ConvertToUima
             Type neTag = mappingProvider.getTagType(tag);
             NamedEntity neAnno = (NamedEntity) cas.createAnnotation(neTag, p.getStartCharOffset(),
                     p.getEndCharOffset());
-            neAnno.setValue(internStrings ? tag.intern() : tag);
+            neAnno.setValue(tag.intern());
             neAnno.addToIndexes();
         }
     }

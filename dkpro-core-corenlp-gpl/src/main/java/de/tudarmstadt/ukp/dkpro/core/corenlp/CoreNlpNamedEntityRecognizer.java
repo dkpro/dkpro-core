@@ -134,15 +134,8 @@ public class CoreNlpNamedEntityRecognizer
     private String mappingLocation;
     
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code false}
+     * Maximum sentence length. Longer sentences are skipped.
      */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internStrings;
-
     public static final String PARAM_MAX_SENTENCE_LENGTH = 
             ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
     @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = true, defaultValue = "2147483647")
@@ -248,7 +241,7 @@ public class CoreNlpNamedEntityRecognizer
         annotatorProvider.getResource().annotate(document);
         
         // Transfer back into the CAS
-        CoreNlp2DKPro.convertNamedEntities(aJCas, document, mappingProvider, internStrings);
+        CoreNlp2DKPro.convertNamedEntities(aJCas, document, mappingProvider);
     }
 
     private class CoreNlpNamedEntityRecognizerModelProvider

@@ -104,16 +104,6 @@ public class HepplePosTagger
     protected String posMappingLocation;
 
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
-
-    /**
      * Log the tag set(s) when a model is loaded.
      *
      * Default: {@code false}
@@ -207,7 +197,7 @@ public class HepplePosTagger
             for (Token t : tokens) {
                 Type posTag = mappingProvider.getTagType(tagged.get(i)[1]);
                 POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
-                posAnno.setPosValue(internTags ? tagged.get(i)[1].intern() : tagged.get(i)[1]);
+                posAnno.setPosValue(tagged.get(i)[1].intern());
                 POSUtils.assignCoarseValue(posAnno);
                 posAnno.addToIndexes();
                 t.setPos(posAnno);
