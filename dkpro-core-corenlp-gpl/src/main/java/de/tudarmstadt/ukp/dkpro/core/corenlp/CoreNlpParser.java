@@ -164,15 +164,8 @@ public class CoreNlpParser
     private String posMappingLocation;
     
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code false}
+     * Maximum sentence length. Longer sentences are skipped.
      */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internStrings;
-
     public static final String PARAM_MAX_SENTENCE_LENGTH = 
             ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
     @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = true, defaultValue = "2147483647")
@@ -336,13 +329,12 @@ public class CoreNlpParser
         // Transfer back into the CAS
         if (writePos) {
             posMappingProvider.configure(cas);
-            CoreNlp2DKPro.convertPOSs(aJCas, document, posMappingProvider, internStrings);
+            CoreNlp2DKPro.convertPOSs(aJCas, document, posMappingProvider);
         }
         
         if (writeConstituent) {
             constituentMappingProvider.configure(cas);
-            CoreNlp2DKPro.convertConstituents(aJCas, document, constituentMappingProvider,
-                    internStrings, tlp);
+            CoreNlp2DKPro.convertConstituents(aJCas, document, constituentMappingProvider, tlp);
         }
         
         if (writePennTree) {
@@ -351,8 +343,7 @@ public class CoreNlpParser
         
         if (writeDependency) {
             dependencyMappingProvider.configure(cas);
-            CoreNlp2DKPro.convertDependencies(aJCas, document, dependencyMappingProvider,
-                    internStrings);
+            CoreNlp2DKPro.convertDependencies(aJCas, document, dependencyMappingProvider);
         }        
     }
 

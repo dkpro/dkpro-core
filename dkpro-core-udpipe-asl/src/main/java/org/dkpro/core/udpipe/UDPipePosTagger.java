@@ -116,16 +116,6 @@ public class UDPipePosTagger
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
-    /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
-
     private ModelProviderBase<Model> modelProvider;
     private MappingProvider mappingProvider;
 
@@ -190,7 +180,7 @@ public class UDPipePosTagger
                         new IllegalStateException(error.getMessage()));
             }
 
-            UDPipe2DKPro.convertPosLemmaMorph(udSent, tokens, aJCas, mappingProvider, internTags);
+            UDPipe2DKPro.convertPosLemmaMorph(udSent, tokens, aJCas, mappingProvider);
         }
     }
 }

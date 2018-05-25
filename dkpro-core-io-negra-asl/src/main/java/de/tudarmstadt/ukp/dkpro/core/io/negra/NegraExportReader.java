@@ -597,7 +597,8 @@ public class NegraExportReader
                 Type posTag = posMappingProvider.getTagType(parts[TOKEN_POS_TAG]);
                 POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                         token.getEnd());
-                pos.setPosValue(parts[TOKEN_POS_TAG].intern());
+                pos.setPosValue(
+                        parts[TOKEN_POS_TAG] != null ? parts[TOKEN_POS_TAG].intern() : null);
                 POSUtils.assignCoarseValue(pos);
                 pos.addToIndexes();
                 token.setPos(pos);
