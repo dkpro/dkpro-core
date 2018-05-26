@@ -129,16 +129,6 @@ public class StanfordPosTagger
     protected String posMappingLocation;
 
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code false}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internStrings;
-
-    /**
      * Enable all traditional PTB3 token transforms (like -LRB-, -RRB-).
      *
      * @see PTBEscapingProcessor
@@ -247,7 +237,7 @@ public class StanfordPosTagger
                 Type posTag = posMappingProvider.getTagType(tt.tag());
                 POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
                 posAnno.setStringValue(posTag.getFeatureByBaseName("PosValue"),
-                        internStrings ? tt.tag().intern() : tt.tag());
+                        tt.tag() != null ? tt.tag().intern() : null);
                 posAnno.addToIndexes();
                 t.setPos(posAnno);
                 i++;

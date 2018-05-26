@@ -136,16 +136,6 @@ public class OpenNlpParser
     protected String constituentMappingLocation;
 
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * <p>Default: {@code true}</p>
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
-
-    /**
      * Log the tag set(s) when a model is loaded.
      *
      * <p>Default: {@code false}</p>
@@ -257,7 +247,7 @@ public class OpenNlpParser
                 Type posTag = posMappingProvider.getTagType(aNode.getType());
                 POS posAnno = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                         token.getEnd());
-                posAnno.setPosValue(internTags ? aNode.getType().intern() : aNode.getType());
+                posAnno.setPosValue(aNode.getType() != null ? aNode.getType().intern() : null);
                 POSUtils.assignCoarseValue(posAnno);
                 posAnno.addToIndexes();
                 token.setPos(posAnno);

@@ -134,16 +134,6 @@ public class TreeTaggerPosTagger
     protected String posMappingLocation;
 
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
-
-    /**
      * Log the tag set(s) when a model is loaded.
      *
      * Default: {@code false}
@@ -282,7 +272,7 @@ public class TreeTaggerPosTagger
                             Type posTag = posMappingProvider.getTagType(aPos);
                             POS posAnno = (POS) cas.createAnnotation(posTag, aToken.getBegin(),
                                     aToken.getEnd());
-                            posAnno.setPosValue(internTags ? aPos.intern() : aPos);
+                            posAnno.setPosValue(aPos.intern());
                             POSUtils.assignCoarseValue(posAnno);
                             aToken.setPos(posAnno);
                             pos[count.get()] = posAnno;
@@ -291,7 +281,7 @@ public class TreeTaggerPosTagger
                         // Add the lemma
                         if (writeLemma && aLemma != null) {
                             Lemma lemmaAnno = new Lemma(aJCas, aToken.getBegin(), aToken.getEnd());
-                            lemmaAnno.setValue(internTags ? aLemma.intern() : aLemma);
+                            lemmaAnno.setValue(aLemma.intern());
                             aToken.setLemma(lemmaAnno);
                             lemma[count.get()] = lemmaAnno;
                         }

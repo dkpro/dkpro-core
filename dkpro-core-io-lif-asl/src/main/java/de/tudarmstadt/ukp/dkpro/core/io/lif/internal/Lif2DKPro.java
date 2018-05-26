@@ -87,17 +87,15 @@ public class Lif2DKPro
                 String lemma = token.getFeature(Features.Token.LEMMA);
 
                 if (isNotEmpty(pos)) {
-                    POS posAnno = new POS(aJCas, tokenAnno.getBegin(), tokenAnno
-                            .getEnd());
-                    posAnno.setPosValue(pos.intern());
+                    POS posAnno = new POS(aJCas, tokenAnno.getBegin(), tokenAnno.getEnd());
+                    posAnno.setPosValue(pos != null ? pos.intern() : null);
                     POSUtils.assignCoarseValue(posAnno);
                     posAnno.addToIndexes();
                     tokenAnno.setPos(posAnno);
                 }
 
                 if (isNotEmpty(lemma)) {
-                    Lemma lemmaAnno = new Lemma(aJCas, tokenAnno.getBegin(), tokenAnno
-                            .getEnd());
+                    Lemma lemmaAnno = new Lemma(aJCas, tokenAnno.getBegin(), tokenAnno.getEnd());
                     lemmaAnno.setValue(lemma);
                     lemmaAnno.addToIndexes();
                     tokenAnno.setLemma(lemmaAnno);

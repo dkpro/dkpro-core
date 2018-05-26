@@ -115,12 +115,6 @@ public final class ComponentParameters
     public static final String PARAM_PRINT_TAGSET = "printTagSet";
 
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid spamming
-     * the heap with thousands of strings representing only a few different tags.
-     */
-    public static final String PARAM_INTERN_TAGS = "internTags";
-
-    /**
      * When splitting an annotation into multiple parts, e.g. when splitting a token that is a
      * compound word into multiple tokens, each representing a part of the word, this parameter
      * controls if the original annotation is kept or removed.

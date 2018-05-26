@@ -130,16 +130,6 @@ public class OpenNlpPosTagger
     protected String posMappingLocation;
 
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
-
-    /**
      * Log the tag set(s) when a model is loaded.
      *
      * Default: {@code false}
@@ -254,7 +244,7 @@ public class OpenNlpPosTagger
                 Type posTag = mappingProvider.getTagType(tag);
                 POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
                 // To save memory, we typically intern() tag strings
-                posAnno.setPosValue(internTags ? tag.intern() : tag);
+                posAnno.setPosValue(tag != null ? tag.intern() : null);
                 POSUtils.assignCoarseValue(posAnno);
                 posAnno.addToIndexes();
 // end::mapping-provider-use-2[]

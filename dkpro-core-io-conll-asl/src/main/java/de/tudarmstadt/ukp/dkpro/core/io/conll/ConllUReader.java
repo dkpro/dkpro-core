@@ -234,12 +234,12 @@ public class ConllUReader
                     Type posTag = posMappingProvider.getTagType(tag);
                     pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
-                    pos.setPosValue(tag.intern());
+                    pos.setPosValue(tag != null ? tag.intern() : null);
                 }
 
                 // Read coarse part-of-speech tag
                 if (!UNUSED.equals(word[CPOSTAG]) && readCPos && pos != null) {
-                    pos.setCoarseValue(word[CPOSTAG].intern());
+                    pos.setCoarseValue(word[CPOSTAG] != null ? word[CPOSTAG].intern() : null);
                 }
                 
                 if (pos != null) {

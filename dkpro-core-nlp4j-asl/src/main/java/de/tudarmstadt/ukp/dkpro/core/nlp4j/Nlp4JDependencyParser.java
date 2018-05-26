@@ -127,14 +127,6 @@ public class Nlp4JDependencyParser
     private String dependencyMappingLocation;
     
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
-
-    /**
      * Process anyway, even if the model relies on features that are not supported by this
      * component.
      * 
@@ -175,7 +167,7 @@ public class Nlp4JDependencyParser
             // Process the sentences - new results will be stored in the existing NLPNodes
             modelProvider.getResource().process(nodes);
             
-            EmoryNlp2Uima.convertDependencies(aJCas, tokens, nodes, mappingProvider, internTags);
+            EmoryNlp2Uima.convertDependencies(aJCas, tokens, nodes, mappingProvider);
         }
     }
     

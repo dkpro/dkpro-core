@@ -221,7 +221,7 @@ public class Conll2008Reader
                     Type posTag = posMappingProvider.getTagType(word[GPOS]);
                     POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
-                    pos.setPosValue(word[GPOS].intern());
+                    pos.setPosValue(word[GPOS] != null ? word[GPOS].intern() : null);
                     POSUtils.assignCoarseValue(pos);
                     pos.addToIndexes();
                     token.setPos(pos);

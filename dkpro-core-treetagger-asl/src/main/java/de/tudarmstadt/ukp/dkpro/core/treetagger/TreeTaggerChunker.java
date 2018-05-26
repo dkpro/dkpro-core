@@ -128,16 +128,6 @@ public class TreeTaggerChunker
     protected String chunkMappingLocation;
 
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
-
-    /**
      * Log the tag set(s) when a model is loaded.
      *
      * Default: {@code false}
@@ -298,7 +288,7 @@ public class TreeTaggerChunker
                 if (openChunk != null) {
                     Type chunkType = mappingProvider.getTagType(openChunk);
                     Chunk chunk = (Chunk) cas.createAnnotation(chunkType, start, end);
-                    chunk.setChunkValue(internTags ? openChunk.intern() : openChunk);
+                    chunk.setChunkValue(openChunk.intern());
                     cas.addFsToIndexes(chunk);
                     openChunk = null;
                 }

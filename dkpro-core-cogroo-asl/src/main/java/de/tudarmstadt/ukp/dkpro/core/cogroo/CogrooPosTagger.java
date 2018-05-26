@@ -90,16 +90,6 @@ public class CogrooPosTagger
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
-    /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
-
     private CasConfigurableProviderBase<Analyzer> modelProvider;
     private MappingProvider mappingProvider;
 
@@ -190,7 +180,8 @@ public class CogrooPosTagger
                 Type posTag = mappingProvider.getTagType(cTok.getPOSTag());
                 POS posAnno = (POS) cas.createAnnotation(posTag, cSent.getStart() + cTok.getStart(),
                         cSent.getStart() + cTok.getEnd());
-                posAnno.setPosValue(internTags ? cTok.getPOSTag().intern() : cTok.getPOSTag());
+                String tag = cTok.getPOSTag();
+                posAnno.setPosValue(tag != null ? tag.intern() : null);
                 POSUtils.assignCoarseValue(posAnno);
                 posAnno.addToIndexes();
                 dTok.setPos(posAnno);
