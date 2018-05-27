@@ -57,8 +57,7 @@ public abstract class MalletModelTrainer
     private static final Locale LOCALE = Locale.US;
 
     /**
-     * The annotation type to use as input tokens for the model estimation. Default:
-     * {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token}. For lemmas, for instance,
+     * The annotation type to use as input tokens for the model estimation. For lemmas,
      * use {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value}
      */
     public static final String PARAM_TOKEN_FEATURE_PATH = "tokenFeaturePath";
@@ -80,7 +79,7 @@ public abstract class MalletModelTrainer
 
     /**
      * Ignore tokens (or any other annotation type, as specified by
-     * {@link #PARAM_TOKEN_FEATURE_PATH}) that are shorter than the given value. Default: 3.
+     * {@link #PARAM_TOKEN_FEATURE_PATH}) that are shorter than the given value.
      */
     public static final String PARAM_MIN_TOKEN_LENGTH = "minTokenLength";
     @ConfigurationParameter(name = PARAM_MIN_TOKEN_LENGTH, mandatory = true, defaultValue = "3")

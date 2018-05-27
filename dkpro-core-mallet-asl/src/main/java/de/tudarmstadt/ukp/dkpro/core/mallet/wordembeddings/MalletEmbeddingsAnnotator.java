@@ -95,8 +95,7 @@ public class MalletEmbeddingsAnnotator
     private boolean modelHasHeader;
 
     /**
-     * The annotation type to use for the model. Default:
-     * {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token}. For lemmas, use
+     * The annotation type to use for the model.  For lemmas, use
      * {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value}
      */
     public static final String PARAM_TOKEN_FEATURE_PATH = 

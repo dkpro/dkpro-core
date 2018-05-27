@@ -55,14 +55,12 @@ public class RegexSegmenter
     private static final String WHITESPACE_PATTERN = "[\\s\n]+";
 
     /**
-     * Defines the pattern that is used as token end boundary. Default: {@code [\s\n]+} (matching
-     * whitespace and linebreaks.
+     * Defines the pattern that is used as token end boundary.
      * <p>
      * When setting custom patterns, take into account that the final token is often terminated by a
      * linebreak rather than the boundary character. Therefore, the newline typically has to be
      * added to the group of matching characters, e.g. {@code "tokenized-text"} is correctly
      * tokenized with the pattern {@code [-\n]}.
-     * 
      */
     public static final String PARAM_TOKEN_BOUNDARY_REGEX = "tokenBoundaryRegex";
     @ConfigurationParameter(name = PARAM_TOKEN_BOUNDARY_REGEX, mandatory = true, 
@@ -71,7 +69,7 @@ public class RegexSegmenter
     private Pattern tokenBoundaryPattern;
 
     /**
-     * Define the sentence boundary. Default: {@code \n} (assume one sentence per line).
+     * Define the sentence boundary.
      */
     public static final String PARAM_SENTENCE_BOUNDARY_REGEX = "sentenceBoundaryRegex";
     @ConfigurationParameter(name = PARAM_SENTENCE_BOUNDARY_REGEX, mandatory = true, 

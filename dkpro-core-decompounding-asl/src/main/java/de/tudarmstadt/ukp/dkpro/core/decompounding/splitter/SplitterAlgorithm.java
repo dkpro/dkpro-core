@@ -23,7 +23,6 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.LinkingMorphemes;
 
 /**
  * Interface for all splitting algorithms
- * 
  */
 public interface SplitterAlgorithm
 {
@@ -53,7 +52,7 @@ public interface SplitterAlgorithm
     public void setLinkingMorphemes(LinkingMorphemes aMorphemes);
 
     /**
-     * Set the maximal tree depth. Default: Integer.MaxValue
+     * Set the maximal tree depth.
      * 
      * @param aDepth
      *            maximal tree depth.

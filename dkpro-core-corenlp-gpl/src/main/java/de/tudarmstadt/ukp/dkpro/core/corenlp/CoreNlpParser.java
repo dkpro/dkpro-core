@@ -89,8 +89,6 @@ public class CoreNlpParser
 {
     /**
      * Log the tag set(s) when a model is loaded.
-     *
-     * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
@@ -166,8 +164,6 @@ public class CoreNlpParser
     /**
      * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
      * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code false}
      */
     public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
     @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
@@ -232,8 +228,6 @@ public class CoreNlpParser
     /**
      * Sets whether to create or not to create constituent tags. This is required for POS-tagging
      * and lemmatization.
-     * <p>
-     * Default: {@code true}
      */
     public static final String PARAM_WRITE_CONSTITUENT = 
             ComponentParameters.PARAM_WRITE_CONSTITUENT;
@@ -243,8 +237,6 @@ public class CoreNlpParser
     /**
      * If this parameter is set to true, each sentence is annotated with a PennTree-Annotation,
      * containing the whole parse tree in Penn Treebank style format.
-     * <p>
-     * Default: {@code false}
      */
     public static final String PARAM_WRITE_PENN_TREE = ComponentParameters.PARAM_WRITE_PENN_TREE;
     @ConfigurationParameter(name = PARAM_WRITE_PENN_TREE, mandatory = true, defaultValue = "false")
@@ -252,8 +244,6 @@ public class CoreNlpParser
 
     /**
      * Sets whether to use or not to use existing POS tags.
-     * <p>
-     * Default: {@code true}
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
@@ -262,8 +252,6 @@ public class CoreNlpParser
     /**
      * Sets whether to create or not to create POS tags. The creation of constituent tags must be
      * turned on for this to work.
-     * <p>
-     * Default: {@code false}
      */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
     @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "false")
@@ -271,8 +259,6 @@ public class CoreNlpParser
     
     /**
      * Sets whether to create or not to create dependency annotations.
-     * 
-     * <p>Default: {@code true}
      */
     public static final String PARAM_WRITE_DEPENDENCY = ComponentParameters.PARAM_WRITE_DEPENDENCY;
     @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")

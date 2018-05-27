@@ -62,14 +62,14 @@ public class DictionaryBasedTokenTransformer
     private String modelEncoding;
 
     /**
-     * Lines starting with this character (or String) are ignored. Default: '#'
+     * Lines starting with this character (or String) are ignored.
      */
     public static final String PARAM_COMMENT_MARKER = "commentMarker";
     @ConfigurationParameter(name = PARAM_COMMENT_MARKER, mandatory = true, defaultValue = "#")
     private String commentMarker;
 
     /**
-     * Separator for mappings file. Default: "\t" (TAB).
+     * Separator for mappings file.
      */
     public static final String PARAM_SEPARATOR = "separator";
     @ConfigurationParameter(name = PARAM_SEPARATOR, mandatory = true, defaultValue = "\t")

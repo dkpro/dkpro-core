@@ -41,7 +41,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGene
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LexicalPhrase;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
@@ -58,12 +57,11 @@ public class PhraseAnnotator
         extends JCasAnnotator_ImplBase
 {
     /**
-     * The feature path to use for building bigrams. Default: tokens.
+     * The feature path to use for building bigrams.
      */
     public static final String PARAM_FEATURE_PATH = "featurePath";
-    @ConfigurationParameter(name = PARAM_FEATURE_PATH, mandatory = false)
+    @ConfigurationParameter(name = PARAM_FEATURE_PATH, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
     private String featurePath;
-    private static final String DEFAULT_FEATURE_PATH = Token.class.getCanonicalName();
 
     /**
      * If true, lowercase everything.
@@ -132,10 +130,6 @@ public class PhraseAnnotator
     {
         super.initialize(context);
 
-        /* set feature path to default */
-        if (featurePath == null) {
-            featurePath = DEFAULT_FEATURE_PATH;
-        }
         try {
             sequenceGenerator = new PhraseSequenceGenerator.Builder()
                     .featurePath(featurePath)

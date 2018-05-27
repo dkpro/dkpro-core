@@ -57,8 +57,8 @@ public class AnnotationByTextFilter
     private Set<String> words;
 
     /**
-     * If true, annotation texts are filtered case-independently. Default: true, i.e. words that
-     * occur in the list with different casing are not filtered out.
+     * If true, annotation texts are filtered case-independently (i.e. words that
+     * occur in the list with different casing are not filtered out).
      */
     public static final String PARAM_IGNORE_CASE = "ignoreCase";
     @ConfigurationParameter(name = PARAM_IGNORE_CASE, mandatory = true, defaultValue = "true")
@@ -70,8 +70,7 @@ public class AnnotationByTextFilter
     private String modelEncoding;
 
     /**
-     * Annotation type to filter. Default:
-     * {@link de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token}.
+     * Annotation type to filter.
      */
     public static final String PARAM_TYPE_NAME = "typeName";
     @ConfigurationParameter(name = PARAM_TYPE_NAME, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")

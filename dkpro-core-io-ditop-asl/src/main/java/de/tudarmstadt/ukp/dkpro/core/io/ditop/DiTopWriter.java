@@ -83,7 +83,7 @@ public class DiTopWriter
     private final static String CONFIG_FILE = "config.all";
 
     /**
-     * The maximum number of topic words to extract. Default: 15
+     * The maximum number of topic words to extract.
      */
     public static final String PARAM_MAX_TOPIC_WORDS = "maxTopicWords";
     @ConfigurationParameter(name = PARAM_MAX_TOPIC_WORDS, mandatory = true, defaultValue = "15")
@@ -113,7 +113,7 @@ public class DiTopWriter
 
     /**
      * If set to true, the new corpus will be appended to an existing config file. If false, the
-     * existing file is overwritten. Default: true.
+     * existing file is overwritten.
      */
     public static final String PARAM_APPEND_CONFIG = "appendConfig";
     @ConfigurationParameter(name = PARAM_APPEND_CONFIG, mandatory = true, defaultValue = "true")

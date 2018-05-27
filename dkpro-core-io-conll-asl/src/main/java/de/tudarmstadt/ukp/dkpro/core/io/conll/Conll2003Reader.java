@@ -89,8 +89,6 @@ public class Conll2003Reader
     /**
      * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
      * spamming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
     @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
@@ -98,8 +96,6 @@ public class Conll2003Reader
 
     /**
      * Write part-of-speech information.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
@@ -125,8 +121,6 @@ public class Conll2003Reader
 
     /**
      * Write chunk information.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_READ_CHUNK = ComponentParameters.PARAM_READ_CHUNK;
     @ConfigurationParameter(name = PARAM_READ_CHUNK, mandatory = true, defaultValue = "true")
@@ -152,8 +146,6 @@ public class Conll2003Reader
     
     /**
      * Read named entity information.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_READ_NAMED_ENTITY = 
             ComponentParameters.PARAM_READ_NAMED_ENTITY;

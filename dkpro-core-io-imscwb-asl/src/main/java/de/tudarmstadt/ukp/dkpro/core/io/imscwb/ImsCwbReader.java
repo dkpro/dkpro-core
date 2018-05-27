@@ -92,8 +92,6 @@ public class ImsCwbReader
 
     /**
      * Read tokens and generate {@link Token} annotations.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_READ_TOKEN = ComponentParameters.PARAM_READ_TOKEN;
     @ConfigurationParameter(name = PARAM_READ_TOKEN, mandatory = true, defaultValue = "true")
@@ -103,8 +101,6 @@ public class ImsCwbReader
      * Read part-of-speech tags and generate {@link POS} annotations or subclasses if a
      * {@link #PARAM_POS_TAG_SET tag set} or {@link #PARAM_POS_MAPPING_LOCATION mapping file} is
      * used.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
@@ -112,8 +108,6 @@ public class ImsCwbReader
 
     /**
      * Read sentences.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_READ_SENTENCES = ComponentParameters.PARAM_READ_SENTENCE;
     @ConfigurationParameter(name = PARAM_READ_SENTENCES, mandatory = true, defaultValue = "true")
@@ -121,8 +115,6 @@ public class ImsCwbReader
 
     /**
      * Read lemmas.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_READ_LEMMA = ComponentParameters.PARAM_READ_LEMMA;
     @ConfigurationParameter(name = PARAM_READ_LEMMA, mandatory = true, defaultValue = "true")
@@ -130,7 +122,7 @@ public class ImsCwbReader
 
     /**
      * If true, the unit IDs are used only to detect if a new document (CAS) needs to be created,
-     * but for the purpose of setting the document ID, a new ID is generated. (Default: false)
+     * but for the purpose of setting the document ID, a new ID is generated.
      */
     public static final String PARAM_GENERATE_NEW_IDS = "generateNewIds";
     @ConfigurationParameter(name = PARAM_GENERATE_NEW_IDS, mandatory = true, defaultValue = "false")
@@ -139,7 +131,6 @@ public class ImsCwbReader
     /**
      * If true, the unit text ID encoded in the corpus file is stored as the URI in the document
      * meta data. This setting has is not affected by {@link #PARAM_GENERATE_NEW_IDS}
-     * (Default: false)
      */
     public static final String PARAM_ID_IS_URL = "idIsUrl";
     @ConfigurationParameter(name = PARAM_ID_IS_URL, mandatory = true, defaultValue = "false")
@@ -147,7 +138,6 @@ public class ImsCwbReader
 
     /**
      * Replace non-XML characters with spaces.
-     * (Default: true)
      */
     public static final String PARAM_REPLACE_NON_XML = "replaceNonXml";
     @ConfigurationParameter(name = PARAM_REPLACE_NON_XML, mandatory = true, defaultValue = "true")

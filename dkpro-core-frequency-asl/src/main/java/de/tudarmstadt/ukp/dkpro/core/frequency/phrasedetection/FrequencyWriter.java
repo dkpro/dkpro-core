@@ -36,7 +36,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
@@ -67,12 +66,11 @@ public class FrequencyWriter
     static final String NEWLINE_REGEX = "\r\n?|\n";
 
     /**
-     * The feature path. Default: tokens.
+     * The feature path.
      */
     public static final String PARAM_FEATURE_PATH = "featurePath";
-    @ConfigurationParameter(name = PARAM_FEATURE_PATH, mandatory = false)
+    @ConfigurationParameter(name = PARAM_FEATURE_PATH, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
     private String featurePath;
-    private static final String DEFAULT_FEATURE_PATH = Token.class.getCanonicalName();
 
     /**
      * Set this parameter if bigrams should only be counted when occurring within a covering type,
@@ -90,7 +88,7 @@ public class FrequencyWriter
     private boolean lowercase;
 
     /**
-     * Tokens occurring fewer times than this value are omitted. Default: 5.
+     * Tokens occurring fewer times than this value are omitted.
      */
     public static final String PARAM_MIN_COUNT = "minCount";
     @ConfigurationParameter(name = PARAM_MIN_COUNT, mandatory = true, defaultValue = "5")
@@ -142,11 +140,6 @@ public class FrequencyWriter
 
         unigrams = new HashBag<>();
         bigrams = new HashBag<>();
-
-        /* set feature path to default */
-        if (featurePath == null) {
-            featurePath = DEFAULT_FEATURE_PATH;
-        }
 
         /* init sequence generator */
         try {
