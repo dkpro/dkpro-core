@@ -158,7 +158,7 @@ public class DictionaryAnnotator
             List<Token> tokens = new ArrayList<>(selectCovered(Token.class, currSentence));
 
             for (int i = 0; i < tokens.size(); i++) {
-                List<Token> tokensToSentenceEnd = tokens.subList(i, tokens.size() - 1);
+                List<Token> tokensToSentenceEnd = tokens.subList(i, tokens.size());
                 String[] sentenceToEnd = new String[tokens.size()];
 
                 for (int j = 0; j < tokensToSentenceEnd.size(); j++) {
