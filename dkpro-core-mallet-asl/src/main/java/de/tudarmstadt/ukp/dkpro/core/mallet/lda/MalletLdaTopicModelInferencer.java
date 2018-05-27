@@ -68,6 +68,10 @@ public class MalletLdaTopicModelInferencer
 {
     private static final String NONE_LABEL = "X";
 
+    /**
+     * Location from which the model is read. This is either a local path or a classpath location.
+     * In the latter case, the model artifact (if any) is searched as well.
+     */
     public final static String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
     private File modelLocation;
@@ -93,6 +97,9 @@ public class MalletLdaTopicModelInferencer
     @ConfigurationParameter(name = PARAM_BURN_IN, mandatory = true, defaultValue = "1")
     private int burnIn;
 
+    /**
+     * The number of iterations between saved samples.
+     */
     public final static String PARAM_THINNING = "thinning";
     @ConfigurationParameter(name = PARAM_THINNING, mandatory = true, defaultValue = "5")
     private int thinning;

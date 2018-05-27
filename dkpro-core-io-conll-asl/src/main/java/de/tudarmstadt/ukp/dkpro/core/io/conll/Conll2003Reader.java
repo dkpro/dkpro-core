@@ -95,7 +95,7 @@ public class Conll2003Reader
     private boolean internTags;
 
     /**
-     * Write part-of-speech information.
+     * Read part-of-speech information.
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
@@ -120,7 +120,7 @@ public class Conll2003Reader
     protected String posMappingLocation;
 
     /**
-     * Write chunk information.
+     * Read chunk information.
      */
     public static final String PARAM_READ_CHUNK = ComponentParameters.PARAM_READ_CHUNK;
     @ConfigurationParameter(name = PARAM_READ_CHUNK, mandatory = true, defaultValue = "true")

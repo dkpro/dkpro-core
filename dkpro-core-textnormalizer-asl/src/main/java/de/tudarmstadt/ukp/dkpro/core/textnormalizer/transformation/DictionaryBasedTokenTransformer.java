@@ -53,10 +53,17 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 public class DictionaryBasedTokenTransformer
     extends JCasTransformerChangeBased_ImplBase
 {
+    /**
+     * Location from which the model is read. This is either a local path or a classpath location.
+     * In the latter case, the model artifact (if any) is searched as well.
+     */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
     private String modelLocation;
 
+    /**
+     * The character encoding used by the model.
+     */
     public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
     @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue = "UTF-8")
     private String modelEncoding;

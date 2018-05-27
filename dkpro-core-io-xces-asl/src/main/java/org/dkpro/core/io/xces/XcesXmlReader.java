@@ -54,6 +54,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
+/**
+ * Reader for the XCES XML format.
+ */
 @ResourceMetaData(name = "XCES XML Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @TypeCapability(

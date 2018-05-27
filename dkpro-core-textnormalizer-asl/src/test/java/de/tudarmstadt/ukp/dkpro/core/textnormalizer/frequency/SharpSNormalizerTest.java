@@ -44,7 +44,7 @@ public class SharpSNormalizerTest
         AnalysisEngineDescription normalizer = createEngineDescription(
                 SharpSNormalizer.class,
                 SharpSNormalizer.PARAM_MIN_FREQUENCY_THRESHOLD,0,
-                SharpSNormalizer.FREQUENCY_PROVIDER, createExternalResourceDescription(
+                SharpSNormalizer.RES_FREQUENCY_PROVIDER, createExternalResourceDescription(
                         Web1TFrequencyCountResource.class,
                         Web1TFrequencyCountResource.PARAM_LANGUAGE, "de",
                         Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",

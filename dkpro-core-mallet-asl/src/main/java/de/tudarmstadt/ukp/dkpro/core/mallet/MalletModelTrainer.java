@@ -128,12 +128,15 @@ public abstract class MalletModelTrainer
     private String stopwordsReplacement;
 
     /**
-     * Filter out all tokens matching that regular expression.
+     * Regular expression of tokens to be filtered.
      */
     public static final String PARAM_FILTER_REGEX = "filterRegex";
     @ConfigurationParameter(name = PARAM_FILTER_REGEX, mandatory = true, defaultValue = "")
     private String filterRegex;
 
+    /**
+     * Value with which tokens matching the regular expression are replaced.
+     */
     public static final String PARAM_FILTER_REGEX_REPLACEMENT = "filterRegexReplacement";
     @ConfigurationParameter(name = PARAM_FILTER_REGEX_REPLACEMENT, mandatory = true, defaultValue = "")
     private String filterRegexReplacement;

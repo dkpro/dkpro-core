@@ -108,18 +108,30 @@ public class FrequencyWriter
     @ConfigurationParameter(name = PARAM_SORT_BY_ALPHABET, mandatory = true, defaultValue = "false")
     private boolean sortByAlphabet;
 
+    /**
+     * Path of a file containing stopwords one work per line.
+     */
     public static final String PARAM_STOPWORDS_FILE = "stopwordsFile";
     @ConfigurationParameter(name = PARAM_STOPWORDS_FILE, mandatory = true, defaultValue = "")
     private String stopwordsFile;
 
+    /**
+     * Stopwords are replaced by this value.
+     */
     public static final String PARAM_STOPWORDS_REPLACEMENT = "stopwordsReplacement";
     @ConfigurationParameter(name = PARAM_STOPWORDS_REPLACEMENT, mandatory = true, defaultValue = "")
     private String stopwordsReplacement;
 
+    /**
+     * Regular expression of tokens to be filtered.
+     */
     public static final String PARAM_FILTER_REGEX = "filterRegex";
     @ConfigurationParameter(name = PARAM_FILTER_REGEX, mandatory = true, defaultValue = "")
     private String filterRegex;
 
+    /**
+     * Value with which tokens matching the regular expression are replaced.
+     */
     public static final String PARAM_REGEX_REPLACEMENT = "regexReplacement";
     @ConfigurationParameter(name = PARAM_REGEX_REPLACEMENT, mandatory = true, defaultValue = "")
     private String regexReplacement;

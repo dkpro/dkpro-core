@@ -73,10 +73,16 @@ public class ReplacementFileNormalizer
     @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue = "UTF-8")
     protected String modelEncoding;
 
+    /**
+     * Pattern describing valid left/right context of the source expression.
+     */
     public static final String PARAM_SRC_SURROUNDINGS = "srcExpressionSurroundings";
     @ConfigurationParameter(name = PARAM_SRC_SURROUNDINGS, mandatory = true, defaultValue = "IRRELEVANT")
     private SrcSurroundings srcExpressionSurroundings;
 
+    /**
+     * Left/right context of the replacement.
+     */
     public static final String PARAM_TARGET_SURROUNDINGS = "targetExpressionSurroundings";
     @ConfigurationParameter(name = PARAM_TARGET_SURROUNDINGS, mandatory = true, defaultValue = "NOTHING")
     private TargetSurroundings targetExpressionSurroundings;

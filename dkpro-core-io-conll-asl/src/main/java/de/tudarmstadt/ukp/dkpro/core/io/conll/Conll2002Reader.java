@@ -125,9 +125,7 @@ public class Conll2002Reader
 {
 
     /**
-     * 
      * Column Separators
-     *
      */
     public enum ColumnSeparators
     {

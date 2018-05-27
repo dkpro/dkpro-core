@@ -326,6 +326,9 @@ public class StanfordParser
     @ConfigurationParameter(name = PARAM_QUOTE_END, mandatory = false)
     private List<String> quoteEnd;
 
+    /**
+     * Whether to keep the punctuation as part of the parse tree.
+     */
     public static final String PARAM_KEEP_PUNCTUATION = "keepPunctuation";
     @ConfigurationParameter(name = PARAM_KEEP_PUNCTUATION, mandatory = true, defaultValue = "false")
     private boolean keepPunctuation;

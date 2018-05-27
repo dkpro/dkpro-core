@@ -66,6 +66,9 @@ public class MalletEmbeddingsAnnotator
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
     private File modelLocation;
 
+    /**
+     * Whether the model is in binary format instead of text format.
+     */
     public static final String PARAM_MODEL_IS_BINARY = "modelIsBinary";
     @ConfigurationParameter(name = PARAM_MODEL_IS_BINARY, mandatory = true, defaultValue = "false")
     private boolean modelIsBinary;

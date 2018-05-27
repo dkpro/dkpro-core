@@ -119,10 +119,16 @@ public class PennTreebankCombinedReader
     @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
     private boolean internTags;
     
+    /**
+     * Whether to remove traces from the parse tree.
+     */
     public static final String PARAM_REMOVE_TRACES = "removeTraces";
     @ConfigurationParameter(name = PARAM_REMOVE_TRACES, mandatory = false, defaultValue = "true")
     private boolean removeTraces;
     
+    /**
+     * Whether to render traces into the document text.
+     */
     public static final String PARAM_WRITE_TRACES_TO_TEXT = "writeTracesToText";
     @ConfigurationParameter(name = PARAM_WRITE_TRACES_TO_TEXT, mandatory = false, defaultValue = "false")
     private boolean writeTracesToText;
