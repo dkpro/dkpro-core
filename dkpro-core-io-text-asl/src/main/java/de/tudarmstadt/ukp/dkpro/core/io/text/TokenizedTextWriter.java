@@ -74,8 +74,6 @@ public class TokenizedTextWriter
     /**
      * The feature path, e.g.
      * {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value} for lemmas.
-     * Default: {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token} (i.e. token
-     * texts).
      */
     public static final String PARAM_FEATURE_PATH = "featurePath";
     /**
@@ -108,7 +106,7 @@ public class TokenizedTextWriter
     private File stopwordsFile;
 
     /**
-     * Set the output file extension. Default: {@code .txt}.
+     * Set the output file extension.
      */
     public static final String PARAM_EXTENSION = "extension";
     @ConfigurationParameter(name = PARAM_EXTENSION, mandatory = true, defaultValue = ".txt")

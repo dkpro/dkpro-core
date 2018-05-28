@@ -147,7 +147,7 @@ public abstract class ResourceCollectionReaderBase
     private final ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
     /**
-     * The frequency with which read documents are logged. Default: 1 (log every document).
+     * The frequency with which read documents are logged.
      * <p>
      * Set to 0 or negative values to deactivate logging.
      */

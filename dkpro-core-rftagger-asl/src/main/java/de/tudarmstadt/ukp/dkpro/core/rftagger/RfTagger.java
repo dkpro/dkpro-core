@@ -130,6 +130,10 @@ public class RfTagger
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
+    /**
+     * Load the morphological features mapping from this location instead of locating the
+     * mapping automatically.
+     */
     public static final String PARAM_MORPH_MAPPING_LOCATION = 
             ComponentParameters.PARAM_MORPH_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_MORPH_MAPPING_LOCATION, mandatory = false)

@@ -144,8 +144,6 @@ public class BerkeleyParser
     /**
      * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid spaming
      * the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
     @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
@@ -153,8 +151,6 @@ public class BerkeleyParser
 
     /**
      * Log the tag set(s) when a model is loaded.
-     *
-     * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
@@ -163,8 +159,6 @@ public class BerkeleyParser
     /**
      * Sets whether to use or not to use already existing POS tags from another annotator for the
      * parsing process.
-     * <p>
-     * Default: {@code false}
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
@@ -173,8 +167,6 @@ public class BerkeleyParser
     /**
      * Sets whether to create or not to create POS tags. The creation of constituent tags must be
      * turned on for this to work.
-     * <p>
-     * Default: {@code true}
      */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
     @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "false")
@@ -183,8 +175,6 @@ public class BerkeleyParser
     /**
      * If this parameter is set to true, each sentence is annotated with a PennTree-Annotation,
      * containing the whole parse tree in Penn Treebank style format.
-     * <p>
-     * Default: {@code false}
      */
     public static final String PARAM_WRITE_PENN_TREE = ComponentParameters.PARAM_WRITE_PENN_TREE;
     @ConfigurationParameter(name = PARAM_WRITE_PENN_TREE, mandatory = true, defaultValue = "false")
@@ -192,8 +182,6 @@ public class BerkeleyParser
 
     /**
      * Compute Viterbi derivation instead of max-rule tree.
-     * <p>
-     * Default: {@code false} (max-rule)
      */
     public static final String PARAM_VITERBI = "viterbi";
     @ConfigurationParameter(name = PARAM_VITERBI, mandatory = true, defaultValue = "false")
@@ -201,8 +189,6 @@ public class BerkeleyParser
 
     /**
      * Output sub-categories (only for binarized Viterbi trees).
-     * <p>
-     * Default: {@code false}
      */
     public static final String PARAM_SUBSTATES = "substates";
     @ConfigurationParameter(name = PARAM_SUBSTATES, mandatory = true, defaultValue = "false")
@@ -210,17 +196,13 @@ public class BerkeleyParser
 
     /**
      * Output inside scores (only for binarized viterbi trees).
-     * <p>
-     * Default: {@code false}
      */
     public static final String PARAM_SCORES = "scores";
     @ConfigurationParameter(name = PARAM_SCORES, mandatory = true, defaultValue = "false")
     private boolean scores;
 
     /**
-     * Set thresholds for accuracy.
-     * <p>
-     * Default: {@code false} (set thresholds for efficiency)
+     * Set thresholds for accuracy instead of efficiency.
      */
     public static final String PARAM_ACCURATE = "accurate";
     @ConfigurationParameter(name = PARAM_ACCURATE, mandatory = true, defaultValue = "false")
@@ -228,8 +210,6 @@ public class BerkeleyParser
 
     /**
      * Use variational rule score approximation instead of max-rule
-     * <p>
-     * Default: {@code false}
      */
     public static final String PARAM_VARIATIONAL = "variational";
     @ConfigurationParameter(name = PARAM_VARIATIONAL, mandatory = true, defaultValue = "false")
@@ -237,8 +217,6 @@ public class BerkeleyParser
 
     /**
      * Retain predicted function labels. Model must have been trained with function labels.
-     * <p>
-     * Default: {@code false}
      */
     public static final String PARAM_KEEP_FUNCTION_LABELS = "keepFunctionLabels";
     @ConfigurationParameter(name = PARAM_KEEP_FUNCTION_LABELS, mandatory = true, defaultValue = "false")
@@ -246,8 +224,6 @@ public class BerkeleyParser
 
     /**
      * Output binarized trees.
-     * <p>
-     * Default: {@code false}
      */
     public static final String PARAM_BINARIZE = "binarize";
     @ConfigurationParameter(name = PARAM_BINARIZE, mandatory = true, defaultValue = "false")

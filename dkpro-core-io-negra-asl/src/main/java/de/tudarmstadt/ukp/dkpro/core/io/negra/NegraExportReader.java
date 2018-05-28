@@ -125,8 +125,6 @@ public class NegraExportReader
 
     /**
      * Write part-of-speech information.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
@@ -134,8 +132,6 @@ public class NegraExportReader
 
     /**
      * Write lemma information.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_READ_LEMMA = ComponentParameters.PARAM_READ_LEMMA;
     @ConfigurationParameter(name = PARAM_READ_LEMMA, mandatory = true, defaultValue = "true")
@@ -145,8 +141,6 @@ public class NegraExportReader
      * Write Penn Treebank bracketed structure information. Mind this may not work with all tagsets,
      * in particular not with such that contain "(" or ")" in their tags. The tree is generated
      * using the original tag set in the corpus, not using the mapped tagset!
-     *
-     * Default: {@code false}
      */
     public static final String PARAM_READ_PENN_TREE = ComponentParameters.PARAM_READ_PENN_TREE;
     @ConfigurationParameter(name = PARAM_READ_PENN_TREE, mandatory = true, defaultValue = "false")
@@ -170,7 +164,7 @@ public class NegraExportReader
     protected String posTagset;
 
     /**
-     * The collection ID to the written to the document meta data. (Default: none)
+     * The collection ID to the written to the document meta data.
      */
     public static final String PARAM_COLLECTION_ID = "collectionId";
     @ConfigurationParameter(name = PARAM_COLLECTION_ID, mandatory = false)
@@ -178,7 +172,7 @@ public class NegraExportReader
 
     /**
      * If true, the unit IDs are used only to detect if a new document (CAS) needs to be created,
-     * but for the purpose of setting the document ID, a new ID is generated. (Default: false)
+     * but for the purpose of setting the document ID, a new ID is generated.
      */
     public static final String PARAM_GENERATE_NEW_IDS = "generateNewIds";
     @ConfigurationParameter(name = PARAM_GENERATE_NEW_IDS, mandatory = true, defaultValue = "false")
@@ -187,8 +181,7 @@ public class NegraExportReader
     /**
      * What indicates if a new CAS should be started. E.g., if set to
      * {@link DocumentUnit#ORIGIN_NAME ORIGIN_NAME}, a new CAS is generated whenever the origin name
-     * of the current sentence differs from the origin name of the last sentence. (Default:
-     * ORIGIN_NAME)
+     * of the current sentence differs from the origin name of the last sentence.
      */
     public static final String PARAM_DOCUMENT_UNIT = "documentUnit";
     @ConfigurationParameter(name = PARAM_DOCUMENT_UNIT, mandatory = true, defaultValue = "ORIGIN_NAME")

@@ -109,6 +109,10 @@ public class BratReader
     private Set<String> textAnnotationTypes;
     private Map<String, TextAnnotationParam> parsedTextAnnotationTypes;    
 
+    /**
+     * Mappings from brat types to UIMA types in the format "[brat] -&gt; [UIMA]", e.g. 
+     * {@code Token -&gt; de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token}.
+     */
     public static final String PARAM_TYPE_MAPPINGS = "typeMappings";
     @ConfigurationParameter(name = PARAM_TYPE_MAPPINGS, mandatory = false, defaultValue = {
 //            "Token -> de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",

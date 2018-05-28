@@ -40,7 +40,7 @@ public class CapitalizationNormalizerTest
 
         AnalysisEngineDescription normalizer = createEngineDescription(
                 CapitalizationNormalizer.class,
-                CapitalizationNormalizer.FREQUENCY_PROVIDER, createExternalResourceDescription(
+                CapitalizationNormalizer.RES_FREQUENCY_PROVIDER, createExternalResourceDescription(
                         Web1TFrequencyCountResource.class,
                         Web1TFrequencyCountResource.PARAM_LANGUAGE, "de",
                         Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",

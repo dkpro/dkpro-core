@@ -55,4 +55,21 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>eu.openminted.share.annotations</groupId>
+        <artifactId>omtd-share-annotations-maven-plugin</artifactId>
+        <configuration>
+          <!-- 
+            Combination reader requires paths to delegate reader descriptors which cannot be
+            provided on the OpenMinTeD platform.
+           -->
+          <uimaDescriptorExcludes>
+            <exclude>**/*.xml</exclude>
+          </uimaDescriptorExcludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

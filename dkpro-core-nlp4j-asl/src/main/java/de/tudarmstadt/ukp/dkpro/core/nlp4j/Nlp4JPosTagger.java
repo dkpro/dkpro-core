@@ -124,8 +124,6 @@ public class Nlp4JPosTagger
 
     /**
      * Log the tag set(s) when a model is loaded.
-     *
-     * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
@@ -134,8 +132,6 @@ public class Nlp4JPosTagger
     /**
      * Process anyway, even if the model relies on features that are not supported by this
      * component.
-     * 
-     * Default: {@code false}
      */
     public static final String PARAM_IGNORE_MISSING_FEATURES = "ignoreMissingFeatures";
     @ConfigurationParameter(name = PARAM_IGNORE_MISSING_FEATURES, mandatory = true, defaultValue = "false")

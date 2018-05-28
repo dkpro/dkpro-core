@@ -33,6 +33,9 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 import gate.Gate;
 import gate.util.GateException;
 
+/**
+ * Reader for the GATE XML format.
+ */
 @ResourceMetaData(name = "GATE XML Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_GATE_XML})

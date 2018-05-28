@@ -60,9 +60,7 @@ public class PatternBasedTokenSegmenter
     public static final String EXCLUDE_PREFIX = "-|";
 
     /**
-     * Wether to remove the original token.
-     *
-     * Default: {@code true}
+     * Whether to remove the original token.
      */
     public static final String PARAM_DELETE_COVER = ComponentParameters.PARAM_DELETE_COVER;
     @ConfigurationParameter(name = PARAM_DELETE_COVER, mandatory = true, defaultValue = "true")

@@ -91,28 +91,47 @@ public class Conll2009Writer
             defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
 
+    /**
+     * Use this filename extension.
+     */
     public static final String PARAM_FILENAME_EXTENSION = 
             ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".conll")
     private String filenameSuffix;
 
+    /**
+     * Write part-of-speech information.
+     */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
     @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
     private boolean writePos;
 
-    public static final String PARAM_WRITE_MORPH = "writeMorph";
+    /**
+     * Read morphological features.
+     */
+    public static final String PARAM_WRITE_MORPH = ComponentParameters.PARAM_WRITE_MORPH;
     @ConfigurationParameter(name = PARAM_WRITE_MORPH, mandatory = true, defaultValue = "true")
     private boolean writeMorph;
 
+    /**
+     * Write lemma information.
+     */
     public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
     @ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = true, defaultValue = "true")
     private boolean writeLemma;
 
+    /**
+     * Write syntactic dependency information.
+     */
     public static final String PARAM_WRITE_DEPENDENCY = ComponentParameters.PARAM_WRITE_DEPENDENCY;
     @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")
     private boolean writeDependency;
 
-    public static final String PARAM_WRITE_SEMANTIC_PREDICATE = "writeSemanticPredicate";
+    /**
+     * Write semantic predicate information.
+     */
+    public static final String PARAM_WRITE_SEMANTIC_PREDICATE = 
+            ComponentParameters.PARAM_WRITE_SEMANTIC_PREDICATE;
     @ConfigurationParameter(name = PARAM_WRITE_SEMANTIC_PREDICATE, mandatory = true, defaultValue = "true")
     private boolean writeSemanticPredicate;
 

@@ -23,6 +23,9 @@ import java.util.List;
 
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.StringArray;
 import org.dkpro.core.io.nyt.metadata.NYTArticleMetaData;
@@ -31,11 +34,22 @@ import com.nytlabs.corpus.NYTCorpusDocument;
 import com.nytlabs.corpus.NYTCorpusDocumentParser;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
+/**
+ * Reader for New York Times articles from NITF files.
+ */
+@ResourceMetaData(name = "NITF Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@MimeTypeCapability({MimeTypes.APPLICATION_X_NITF_XML})
+@TypeCapability(
+        outputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "org.dkpro.core.io.nyt.metadata.NYTArticleMetaData" })
 public class NYTCollectionReader
     extends JCasResourceCollectionReader_ImplBase
 {
-
     /**
      * A number of documents which will be skipped at the beginning.
      */

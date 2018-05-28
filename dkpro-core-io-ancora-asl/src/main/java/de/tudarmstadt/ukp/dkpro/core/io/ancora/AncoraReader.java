@@ -126,11 +126,18 @@ public class AncoraReader
     @ConfigurationParameter(name = PARAM_POS_TAG_SET, mandatory = false)
     protected String posTagset;
     
+    /**
+     * Whether to split words containing underscores into multiple tokens. 
+     */
     public static final String PARAM_SPLIT_MULTI_WORD_TOKENS = "splitMultiWordTokens";
     @ConfigurationParameter(name = PARAM_SPLIT_MULTI_WORD_TOKENS, mandatory = true, 
             defaultValue = "true")
     protected boolean splitMultiWordTokens;
 
+    /**
+     * Whether to ignore sentence in which any POS tags are missing. Normally, it is assumed that
+     * if any POS tags are present, then every token as a POS tag.
+     */
     public static final String PARAM_DROP_SENTENCES_WITH_MISSING_POS = "dropSentencesMissingPosTags";
     @ConfigurationParameter(name = PARAM_DROP_SENTENCES_WITH_MISSING_POS, mandatory = true, 
             defaultValue = "false")

@@ -77,6 +77,9 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 public class LingPipeNamedEntityRecognizerTrainer
     extends JCasConsumer_ImplBase
 {
+    /**
+     * Location to which the output is written.
+     */
     public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
     @ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true)
     private File targetLocation;

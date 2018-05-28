@@ -67,14 +67,23 @@ public class JsonWriter
     @ConfigurationParameter(name = PARAM_TYPE_SYSTEM_FILE, mandatory = false)
     private File typeSystemFile;
     
+    /**
+     * Whether to pretty-print the JSON output.
+     */
     public static final String PARAM_PRETTY_PRINT = "prettyPrint";
     @ConfigurationParameter(name = PARAM_PRETTY_PRINT, mandatory = true, defaultValue = "true")
     private boolean prettyPrint;
     
+    /**
+     * Whether to fields that have their default values from the JSON output.
+     */
     public static final String PARAM_OMIT_DEFAULT_VALUES = "omitDefaultValues";
     @ConfigurationParameter(name = PARAM_OMIT_DEFAULT_VALUES, mandatory = true, defaultValue = "true")
     private boolean omitDefaultValues;
 
+    /**
+     * The level of detail to use for the context (i.e. type system) information. 
+     */
     public static final String PARAM_JSON_CONTEXT_FORMAT = "jsonContextFormat";
     @ConfigurationParameter(name = PARAM_JSON_CONTEXT_FORMAT, mandatory = true, defaultValue = "omitExpandedTypeNames")
     private String jsonContextFormat;
