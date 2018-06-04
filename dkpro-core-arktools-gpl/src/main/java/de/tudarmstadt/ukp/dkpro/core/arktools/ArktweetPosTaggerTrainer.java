@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2017
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.arktools;
 
@@ -30,6 +30,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
@@ -43,11 +44,22 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
+/**
+ * Trainer for ark-tweet POS tagger.
+ */
+@Component(OperationType.TRAINER_OF_MACHINE_LEARNING_MODELS)
 @MimeTypeCapability(MimeTypes.APPLICATION_X_ARKTWEET_TAGGER)
 @ResourceMetaData(name = "ArkTweet POS-Tagger Trainer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class ArktweetPosTaggerTrainer extends JCasConsumer_ImplBase {
 
+    /**
+     * Location to which the model   is written.
+     */
     public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
     @ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true)
     private File targetLocation;
@@ -59,7 +71,7 @@ public class ArktweetPosTaggerTrainer extends JCasConsumer_ImplBase {
     public void process(JCas jCas) throws AnalysisEngineProcessException {
         if (tempData == null) {
             try {
-                tempData = File.createTempFile("dkpro-stanford-pos-trainer", ".tsv");
+                tempData = File.createTempFile("dkpro-arktweet-pos-trainer", ".tsv");
                 out = new PrintWriter(new OutputStreamWriter(new FileOutputStream(tempData),
                         StandardCharsets.UTF_8));
             }
@@ -81,10 +93,6 @@ public class ArktweetPosTaggerTrainer extends JCasConsumer_ImplBase {
 
     @Override
     public void collectionProcessComplete() throws AnalysisEngineProcessException {
-        if (out != null) {
-            IOUtils.closeQuietly(out);
-        }
-
         try {
             Train.main(new String[] {
                     tempData.toString(),
@@ -93,5 +101,14 @@ public class ArktweetPosTaggerTrainer extends JCasConsumer_ImplBase {
         } catch (IOException e) {
             throw new AnalysisEngineProcessException(e);
         }
+    }
+
+    @Override
+    public void destroy() {
+        if (out != null) {
+            IOUtils.closeQuietly(out);
+        }
+        FileUtils.deleteQuietly(tempData);
+        super.destroy();
     }
 }
