@@ -41,6 +41,7 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
 import cmu.arktweetnlp.Train;
+import cmu.arktweetnlp.impl.features.WordClusterPaths;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -69,6 +70,14 @@ public class ArktweetPosTaggerTrainer extends JCasConsumer_ImplBase {
     public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
     @ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true)
     private File targetLocation;
+
+    /**
+     * Classpath resource pointing to the the word cluster file calculated with
+     * <a href="https://github.com/percyliang/brown-cluster">brown clustering algorithm</a>.
+     */
+    public static final String PARAM_WORD_CLUSTER_FILE = "wordClusterFile";
+    @ConfigurationParameter(name = PARAM_WORD_CLUSTER_FILE)
+    private String wordClusterFile;
 
     private File tempData;
     private PrintWriter out;
@@ -100,6 +109,11 @@ public class ArktweetPosTaggerTrainer extends JCasConsumer_ImplBase {
     @Override
     public void collectionProcessComplete() throws AnalysisEngineProcessException {
         try {
+            if (wordClusterFile != null) {
+                getLogger().debug("Use word cluster file " + wordClusterFile);
+                WordClusterPaths.clusterResourceName = wordClusterFile.toString();
+            }
+
             Train.main(new String[] {
                     tempData.toString(),
                     targetLocation.toString()
