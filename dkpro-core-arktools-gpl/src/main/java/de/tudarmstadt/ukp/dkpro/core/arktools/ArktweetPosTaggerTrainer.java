@@ -37,6 +37,7 @@ import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
 import cmu.arktweetnlp.Train;
@@ -55,6 +56,11 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 @MimeTypeCapability(MimeTypes.APPLICATION_X_ARKTWEET_TAGGER)
 @ResourceMetaData(name = "ArkTweet POS-Tagger Trainer")
 @DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
+@TypeCapability(
+        inputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class ArktweetPosTaggerTrainer extends JCasConsumer_ImplBase {
 
     /**
@@ -105,9 +111,7 @@ public class ArktweetPosTaggerTrainer extends JCasConsumer_ImplBase {
 
     @Override
     public void destroy() {
-        if (out != null) {
-            IOUtils.closeQuietly(out);
-        }
+        IOUtils.closeQuietly(out);
         FileUtils.deleteQuietly(tempData);
         super.destroy();
     }
