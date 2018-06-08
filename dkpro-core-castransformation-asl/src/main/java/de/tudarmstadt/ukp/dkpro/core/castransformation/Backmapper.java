@@ -17,17 +17,15 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.castransformation;
 
-import static org.apache.uima.fit.util.CasUtil.selectAllFS;
-
-import java.util.LinkedList;
-
+import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.ImmutableInterval;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.Interval;
+import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentBuild;
+import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentStorage;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.AnnotationBaseFS;
-import org.apache.uima.cas.CAS;
-import org.apache.uima.cas.CASException;
-import org.apache.uima.cas.Feature;
-import org.apache.uima.cas.FeatureStructure;
+import org.apache.uima.cas.*;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
@@ -38,11 +36,9 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.util.CasCopier;
 
-import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
-import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.ImmutableInterval;
-import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.Interval;
-import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentStorage;
-import eu.openminted.share.annotations.api.DocumentationResource;
+import java.util.LinkedList;
+
+import static org.apache.uima.fit.util.CasUtil.selectAllFS;
 
 /**
  * After processing a file with the {@code ApplyChangesAnnotator} this annotator
@@ -127,6 +123,10 @@ public class Backmapper
                 String realTarget = aJCas.getCas().getView(target).getViewName();
                 
                 AlignedString as = getAlignedString(aJCas, realSource, realTarget);
+
+                if(as == null) {
+                    //
+                }
                 
                 updateOffsets(sourceView, targetViewJCas, as, copiedFs);
             }
@@ -145,15 +145,22 @@ public class Backmapper
     }
     
     private AlignedString getAlignedString(JCas aSomeCase, String from, String to)
-        throws AnalysisEngineProcessException
-    {
+            throws AnalysisEngineProcessException, CASException {
         CAS baseCas = aSomeCase.getCasImpl().getBaseCAS();
 
         // Try to get the AlignedString for the current JCas.
         AlignmentStorage asstore = AlignmentStorage.getInstance();
         AlignedString as = asstore.get(baseCas, to, from);
 
-        // If there is none we have to fail.
+        if(as == null) {
+            // Attempt to reconstruct the alignment from the SofaChangeAnnotations. This only works when they have not
+            // been altered in the mean time.
+            JCas source = aSomeCase.getCas().getView(to).getJCas();
+            as = AlignmentBuild.from(source);
+        }
+
+        // If there is none we have to fail. Practically this should never happen when the alignment state is
+        // reconstructed in the previous step.
         if (as == null) {
             throw new AnalysisEngineProcessException(new IllegalStateException(
                     "No mapping found from [" + from + "] to [" + to + "] on ["
