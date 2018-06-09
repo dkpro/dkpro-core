@@ -17,18 +17,20 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.castransformation;
 
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
-import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
-import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentFactory;
-import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentStorage;
-import eu.openminted.share.annotations.api.DocumentationResource;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
+
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
+import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentFactory;
+import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentStorage;
+
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Applies changes annotated using a {@link SofaChangeAnnotation}.

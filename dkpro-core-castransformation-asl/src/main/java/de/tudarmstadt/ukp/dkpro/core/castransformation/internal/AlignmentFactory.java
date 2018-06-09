@@ -17,25 +17,25 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.castransformation.internal;
 
-import de.tudarmstadt.ukp.dkpro.core.api.transform.SofaChangeOperations;
-import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
-import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
-import de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator;
-import de.tudarmstadt.ukp.dkpro.core.castransformation.Backmapper;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.apache.uima.cas.FSIndex;
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.SofaChangeOperations;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
+import de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator;
+import de.tudarmstadt.ukp.dkpro.core.castransformation.Backmapper;
 
 /**
- * Supports building of alignment state from the {@link ApplyChangesAnnotator} to the {@link
- * Backmapper} using {@link de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation}
- * found in the source view. The alignment state is building during instance construction and is
- * immutable after.
+ * Creates alignment state for the {@link ApplyChangesAnnotator} and the {@link Backmapper} using
+ * {@link de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation} found in the view
+ * that was mapped.
  *
  * @since 1.9.3
  */

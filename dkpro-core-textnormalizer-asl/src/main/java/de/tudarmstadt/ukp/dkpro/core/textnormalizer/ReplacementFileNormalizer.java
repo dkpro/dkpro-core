@@ -17,12 +17,18 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.textnormalizer;
 
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
-import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
-import eu.openminted.share.annotations.api.Component;
-import eu.openminted.share.annotations.api.DocumentationResource;
-import eu.openminted.share.annotations.api.constants.OperationType;
+import static de.tudarmstadt.ukp.dkpro.core.api.transform.SofaChangeOperations.OP_REPLACE;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -32,13 +38,13 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.transform.SofaChangeOperations.OP_REPLACE;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Takes a text and replaces desired expressions. This class should not work on tokens as some

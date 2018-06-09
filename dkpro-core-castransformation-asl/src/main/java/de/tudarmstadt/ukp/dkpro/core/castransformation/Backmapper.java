@@ -17,15 +17,17 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.castransformation;
 
-import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
-import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.ImmutableInterval;
-import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.Interval;
-import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentFactory;
-import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentStorage;
-import eu.openminted.share.annotations.api.DocumentationResource;
+import static org.apache.uima.fit.util.CasUtil.selectAllFS;
+
+import java.util.LinkedList;
+
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.*;
+import org.apache.uima.cas.AnnotationBaseFS;
+import org.apache.uima.cas.CAS;
+import org.apache.uima.cas.CASException;
+import org.apache.uima.cas.Feature;
+import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
@@ -36,9 +38,13 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.util.CasCopier;
 
-import java.util.LinkedList;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.ImmutableInterval;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.Interval;
+import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentFactory;
+import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentStorage;
 
-import static org.apache.uima.fit.util.CasUtil.selectAllFS;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * After processing a file with the {@code ApplyChangesAnnotator} this annotator
