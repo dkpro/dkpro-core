@@ -41,7 +41,7 @@ import java.util.List;
 
 public class AlignmentFactory {
 
-    public static AlignedString from(JCas aSourceView) {
+    public static AlignedString createAlignmentsFor(JCas aSourceView) {
 
         FSIndex<Annotation> idx = aSourceView.getAnnotationIndex(SofaChangeAnnotation.type);
 
