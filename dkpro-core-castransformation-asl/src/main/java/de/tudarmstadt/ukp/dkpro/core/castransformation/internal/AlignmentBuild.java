@@ -41,13 +41,12 @@ import java.util.List;
 
 public class AlignmentBuild {
 
-    private final AlignedString alignmentState;
+    public static AlignedString from(JCas aSourceView) {
 
-    public AlignmentBuild(JCas aSourceView) {
         FSIndex<Annotation> idx = aSourceView.getAnnotationIndex(SofaChangeAnnotation.type);
 
         // Apply all the changes
-        alignmentState = new AlignedString(aSourceView.getDocumentText());
+        AlignedString alignmentState = new AlignedString(aSourceView.getDocumentText());
 
         // Collect all those edits that are going to be executed.
         //
@@ -106,13 +105,7 @@ public class AlignmentBuild {
                 }
             }
         }
-    }
 
-    public AlignedString getAlignmentState() {
         return alignmentState;
-    }
-
-    public static AlignedString from(JCas aSourceView) {
-        return new AlignmentBuild(aSourceView).getAlignmentState();
     }
 }
