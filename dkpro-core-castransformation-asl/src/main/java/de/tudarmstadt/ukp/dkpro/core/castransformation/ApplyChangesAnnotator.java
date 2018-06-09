@@ -51,10 +51,6 @@ public class ApplyChangesAnnotator
 {
     public static final String VIEW_SOURCE = "source";
     public static final String VIEW_TARGET = "target";
-    
-    public static final String OP_INSERT = "insert";
-    public static final String OP_REPLACE = "replace";
-    public static final String OP_DELETE = "delete";
 
     @Override
     public void process(JCas aJCas)

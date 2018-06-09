@@ -17,6 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.castransformation.internal;
 
+import de.tudarmstadt.ukp.dkpro.core.api.transform.SofaChangeOperations;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator;
@@ -94,13 +95,13 @@ public class AlignmentFactory {
             // the left offsets remain stable.
             Collections.reverse(edits);
             for (SofaChangeAnnotation a : edits) {
-                if (ApplyChangesAnnotator.OP_INSERT.equals(a.getOperation())) {
+                if (SofaChangeOperations.OP_INSERT.equals(a.getOperation())) {
                     alignmentState.insert(a.getBegin(), a.getValue());
                 }
-                if (ApplyChangesAnnotator.OP_DELETE.equals(a.getOperation())) {
+                if (SofaChangeOperations.OP_DELETE.equals(a.getOperation())) {
                     alignmentState.delete(a.getBegin(), a.getEnd());
                 }
-                if (ApplyChangesAnnotator.OP_REPLACE.equals(a.getOperation())) {
+                if (SofaChangeOperations.OP_REPLACE.equals(a.getOperation())) {
                     alignmentState.replace(a.getBegin(), a.getEnd(), a.getValue());
                 }
             }

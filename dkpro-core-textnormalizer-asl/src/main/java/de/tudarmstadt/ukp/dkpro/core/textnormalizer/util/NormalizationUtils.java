@@ -17,15 +17,13 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.textnormalizer.util;
 
-import static de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator.OP_DELETE;
-import static de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator.OP_INSERT;
-import static de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator.OP_REPLACE;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 
 import java.util.Collections;
 import java.util.List;
 
-import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
-import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
+import static de.tudarmstadt.ukp.dkpro.core.api.transform.SofaChangeOperations.*;
 
 public class NormalizationUtils {
 
