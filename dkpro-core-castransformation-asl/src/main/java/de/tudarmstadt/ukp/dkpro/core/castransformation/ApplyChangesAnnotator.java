@@ -73,7 +73,7 @@ public class ApplyChangesAnnotator
 
     protected void applyChanges(JCas aSourceView, JCas aTargetView)
     {
-        AlignedString as = AlignmentFactory.from(aSourceView);
+        AlignedString as = AlignmentFactory.createAlignmentsFor(aSourceView);
 
         // Set the text of the new Sofa
         aTargetView.setDocumentText(as.get());

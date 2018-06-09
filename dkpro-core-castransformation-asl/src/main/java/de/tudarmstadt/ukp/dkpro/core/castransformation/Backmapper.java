@@ -151,8 +151,8 @@ public class Backmapper
         if (as == null) {
             // Attempt to reconstruct the alignment from the SofaChangeAnnotations.
             // This only works when they have not been altered in the mean time.
-            JCas source = aSomeCase.getCas().getView(to).getJCas();
-            as = AlignmentFactory.from(source);
+            JCas view = aSomeCase.getCas().getView(to).getJCas();
+            as = AlignmentFactory.createAlignmentsFor(view);
         }
 
         // If there is none we have to fail. Practically this should never happen
