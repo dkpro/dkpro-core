@@ -24,7 +24,6 @@ import static org.junit.Assert.assertEquals;
 import java.io.File;
 import java.io.FileWriter;
 
-import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentStorage;
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -41,6 +40,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
+import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentStorage;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiWriter;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
@@ -108,7 +108,7 @@ public class ApplyChangesBackmapperTest
         builder.add(applyChanges, ApplyChangesAnnotator.VIEW_TARGET, TARGET_VIEW,
                 ApplyChangesAnnotator.VIEW_SOURCE, CAS.NAME_DEFAULT_SOFA);
         builder.add(segmenter, CAS.NAME_DEFAULT_SOFA, TARGET_VIEW);
-        if(clearAlignmentState) {
+        if (clearAlignmentState) {
             builder.add(clearAlignmentCache, CAS.NAME_DEFAULT_SOFA, TARGET_VIEW);
         }
         builder.add(backMapper);
@@ -176,7 +176,7 @@ public class ApplyChangesBackmapperTest
             // the Backmapper and the alignment store involved, but it is much simpler compared
             // to building pipelines that store the CAS at the point before backmapping, and then
             // restore it to resume processing from that point with a complete process restart
-            // between store and restore, since the aligment store is a singleton that will
+            // between store and restore, since the alignment store is a singleton that will
             // otherwise persist and not be cleared.
             AlignmentStorage.getInstance().put(
                     jCas.getCasImpl().getBaseCAS(),
