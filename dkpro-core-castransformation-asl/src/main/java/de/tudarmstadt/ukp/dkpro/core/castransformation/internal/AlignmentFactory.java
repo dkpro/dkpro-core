@@ -39,7 +39,7 @@ import java.util.List;
  * @since 1.9.3
  */
 
-public class AlignmentBuild {
+public class AlignmentFactory {
 
     public static AlignedString from(JCas aSourceView) {
 

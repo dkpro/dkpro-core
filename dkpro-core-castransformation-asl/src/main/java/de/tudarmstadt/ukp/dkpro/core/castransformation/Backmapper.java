@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.castransformation;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.ImmutableInterval;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.Interval;
-import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentBuild;
+import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentFactory;
 import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentStorage;
 import eu.openminted.share.annotations.api.DocumentationResource;
 import org.apache.uima.UIMAException;
@@ -152,7 +152,7 @@ public class Backmapper
             // Attempt to reconstruct the alignment from the SofaChangeAnnotations.
             // This only works when they have not been altered in the mean time.
             JCas source = aSomeCase.getCas().getView(to).getJCas();
-            as = AlignmentBuild.from(source);
+            as = AlignmentFactory.from(source);
         }
 
         // If there is none we have to fail. Practically this should never happen

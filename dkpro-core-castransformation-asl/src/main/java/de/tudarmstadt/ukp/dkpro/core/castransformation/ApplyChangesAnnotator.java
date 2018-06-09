@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.castransformation;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
-import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentBuild;
+import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentFactory;
 import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentStorage;
 import eu.openminted.share.annotations.api.DocumentationResource;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -73,7 +73,7 @@ public class ApplyChangesAnnotator
 
     protected void applyChanges(JCas aSourceView, JCas aTargetView)
     {
-        AlignedString as = AlignmentBuild.from(aSourceView);
+        AlignedString as = AlignmentFactory.from(aSourceView);
 
         // Set the text of the new Sofa
         aTargetView.setDocumentText(as.get());
