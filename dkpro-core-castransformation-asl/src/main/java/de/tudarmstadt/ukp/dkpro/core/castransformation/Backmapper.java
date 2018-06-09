@@ -72,8 +72,8 @@ public class Backmapper
         try {
             // Now we can copy the complete CAS while mapping back the offsets.
             // We first use the CAS copier and then update the offsets.
-            getLogger().info("Copying annotations from [" + sofaChain.getFirst() + "] to ["
-                            + sofaChain.getLast() + "]");
+            getLogger().info("Copying annotations from [" + sofaChain.getFirst() +
+                    "] to [" + sofaChain.getLast() + "]");
             
             // Copy the annotations
             CAS sourceView = aJCas.getCas().getView(sofaChain.getFirst());
@@ -124,10 +124,6 @@ public class Backmapper
                 
                 AlignedString as = getAlignedString(aJCas, realSource, realTarget);
 
-                if(as == null) {
-                    //
-                }
-                
                 updateOffsets(sourceView, targetViewJCas, as, copiedFs);
             }
             while (!workChain.isEmpty());
@@ -152,15 +148,15 @@ public class Backmapper
         AlignmentStorage asstore = AlignmentStorage.getInstance();
         AlignedString as = asstore.get(baseCas, to, from);
 
-        if(as == null) {
-            // Attempt to reconstruct the alignment from the SofaChangeAnnotations. This only works when they have not
-            // been altered in the mean time.
+        if (as == null) {
+            // Attempt to reconstruct the alignment from the SofaChangeAnnotations.
+            // This only works when they have not been altered in the mean time.
             JCas source = aSomeCase.getCas().getView(to).getJCas();
             as = AlignmentBuild.from(source);
         }
 
-        // If there is none we have to fail. Practically this should never happen when the alignment state is
-        // reconstructed in the previous step.
+        // If there is none we have to fail. Practically this should never happen
+        // when the alignment state is reconstructed in the previous step.
         if (as == null) {
             throw new AnalysisEngineProcessException(new IllegalStateException(
                     "No mapping found from [" + from + "] to [" + to + "] on ["
