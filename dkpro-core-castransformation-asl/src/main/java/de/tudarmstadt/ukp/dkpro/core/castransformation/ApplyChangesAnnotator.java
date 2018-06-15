@@ -25,7 +25,6 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.transform.SofaChangeOperations;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentFactory;
@@ -55,23 +54,9 @@ public class ApplyChangesAnnotator
     public static final String VIEW_SOURCE = "source";
     public static final String VIEW_TARGET = "target";
 
-    /**
-     * This constant was moved to {@link SofaChangeOperations#OP_INSERT}.
-     */
-    @Deprecated
-    public static final String OP_INSERT = SofaChangeOperations.OP_INSERT;
-
-    /**
-     * This constant was moved to {@link SofaChangeOperations#OP_REPLACE}.
-     */
-    @Deprecated
-    public static final String OP_REPLACE = SofaChangeOperations.OP_REPLACE;
-
-    /**
-     * This constant was moved to {@link SofaChangeOperations#OP_DELETE}.
-     */
-    @Deprecated
-    public static final String OP_DELETE = SofaChangeOperations.OP_DELETE;
+    public static final String OP_INSERT = "insert";
+    public static final String OP_REPLACE = "replace";
+    public static final String OP_DELETE = "delete";
 
     @Override
     public void process(JCas aJCas)

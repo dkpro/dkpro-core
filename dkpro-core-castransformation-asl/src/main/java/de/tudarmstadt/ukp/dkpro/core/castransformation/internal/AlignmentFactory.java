@@ -26,7 +26,6 @@ import org.apache.uima.cas.FSIterator;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 
-import de.tudarmstadt.ukp.dkpro.core.api.transform.SofaChangeOperations;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator;
@@ -95,13 +94,13 @@ public class AlignmentFactory {
             // the left offsets remain stable.
             Collections.reverse(edits);
             for (SofaChangeAnnotation a : edits) {
-                if (SofaChangeOperations.OP_INSERT.equals(a.getOperation())) {
+                if (ApplyChangesAnnotator.OP_INSERT.equals(a.getOperation())) {
                     alignmentState.insert(a.getBegin(), a.getValue());
                 }
-                if (SofaChangeOperations.OP_DELETE.equals(a.getOperation())) {
+                if (ApplyChangesAnnotator.OP_DELETE.equals(a.getOperation())) {
                     alignmentState.delete(a.getBegin(), a.getEnd());
                 }
-                if (SofaChangeOperations.OP_REPLACE.equals(a.getOperation())) {
+                if (ApplyChangesAnnotator.OP_REPLACE.equals(a.getOperation())) {
                     alignmentState.replace(a.getBegin(), a.getEnd(), a.getValue());
                 }
             }

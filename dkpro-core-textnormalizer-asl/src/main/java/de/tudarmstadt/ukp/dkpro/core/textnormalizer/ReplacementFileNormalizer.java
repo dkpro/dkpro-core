@@ -17,7 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.textnormalizer;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.transform.SofaChangeOperations.OP_REPLACE;
+import static de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator.OP_REPLACE;
 
 import java.io.File;
 import java.io.IOException;
