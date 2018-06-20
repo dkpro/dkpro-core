@@ -941,7 +941,7 @@ public class TreeTaggerPosTaggerTest
 
         // test POS annotations
         String[] expectedTags = { "DT", "VBZ", "DT", "NN", "SENT" };
-        String[] expectedTagClasses = { "POS_ART", "POS_V", "POS_ART", "POS_NN", "POS_PUNC" };
+        String[] expectedTagClasses = { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" };
 
         for (int i = 0; i < actualTags.size(); i++) {
             POS posAnnotation = actualTags.get(i);
@@ -951,7 +951,7 @@ public class TreeTaggerPosTaggerTest
         }
 
         System.out.println("Successfully tagged document with " + testString.length() +
-                " characters");
+                " characters and " + actualTags.size() + " tokens");
     }
 
     /**
