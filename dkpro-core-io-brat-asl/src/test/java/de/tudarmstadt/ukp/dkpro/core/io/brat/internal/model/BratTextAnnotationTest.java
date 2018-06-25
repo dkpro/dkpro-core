@@ -27,15 +27,15 @@ public class BratTextAnnotationTest
     public void parseTest()
     {
         final String in = "T1\tOrganization 0 43\tInternational Business Machines Corporation";
-        BratTextAnnotation v = BratTextAnnotation.parse(in);
-        assertEquals(in, v.toString());
+        BratTextAnnotation[] v = BratTextAnnotation.parse(in);
+        assertEquals(in, v[0].toString());
     }
 
     @Test
     public void parseTestZeroLength()
     {
         final String in = "T1\tOrganization 0 0\t";
-        BratTextAnnotation v = BratTextAnnotation.parse(in);
-        assertEquals(in, v.toString());
+        BratTextAnnotation[] v = BratTextAnnotation.parse(in);
+        assertEquals(in, v[0].toString());
     }
 }

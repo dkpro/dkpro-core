@@ -35,13 +35,13 @@ public class BratAnnotationDocument
 {
     private Map<String, BratAnnotation> annotations = new LinkedHashMap<>();
     private Map<String, BratAttribute> attributes = new LinkedHashMap<>();
-    
+
     public static BratAnnotationDocument read(Reader aReader)
     {
         BratAnnotationDocument doc = new BratAnnotationDocument();
-        
+
         List<BratEventAnnotation> events = new ArrayList<>();
-        
+
         // Read from file
         LineIterator lines = IOUtils.lineIterator(aReader);
         while (lines.hasNext()) {
@@ -74,47 +74,46 @@ public class BratAnnotationDocument
         // Attach attributes to annotations
         for (BratAttribute attr : doc.attributes.values()) {
             BratAnnotation target = doc.annotations.get(attr.getTarget());
-            
+
             if (target == null) {
-                throw new IllegalStateException("Attribute refers to unknown annotation ["
-                        + attr.getTarget() + "]");
+                throw new IllegalStateException(
+                        "Attribute refers to unknown annotation [" + attr.getTarget() + "]");
             }
-            
+
             target.addAttribute(attr);
         }
 
         // FIXME this is currently inconsistent between reading and manual creation / writing
         // when we read the triggers, they no longer appear as individual annotations
         // when we manually create the brat annotations, we leave the triggers
-        
+
         // Attach triggers to events and remove them as individual annotations
         List<String> triggersIds = new ArrayList<>();
         for (BratEventAnnotation event : events) {
-            BratTextAnnotation trigger = (BratTextAnnotation) doc.annotations.get(event
-                    .getTrigger());
+            BratTextAnnotation trigger = (BratTextAnnotation) doc.annotations
+                    .get(event.getTrigger());
 
             if (trigger == null) {
-                throw new IllegalStateException("Trigger refers to unknown annotation ["
-                        + event.getTrigger() + "]");
+                throw new IllegalStateException(
+                        "Trigger refers to unknown annotation [" + event.getTrigger() + "]");
             }
-            
+
             triggersIds.add(trigger.getId());
             event.setTriggerAnnotation(trigger);
         }
-        
+
         // Remove trigger annotations, they are owned by the event
         doc.annotations.keySet().removeAll(triggersIds);
-        
+
         return doc;
     }
-    
-    public void write(JsonGenerator aJG, String aText) 
-        throws IOException
+
+    public void write(JsonGenerator aJG, String aText) throws IOException
     {
         aJG.writeStartObject();
 
         aJG.writeStringField("text", aText);
-        
+
         aJG.writeFieldName("entities");
         aJG.writeStartArray();
         for (BratAnnotation ann : annotations.values()) {
@@ -141,7 +140,7 @@ public class BratAnnotationDocument
             }
         }
         aJG.writeEndArray();
-        
+
         aJG.writeFieldName("events");
         aJG.writeStartArray();
         for (BratAnnotation ann : annotations.values()) {
@@ -162,23 +161,22 @@ public class BratAnnotationDocument
 
         aJG.writeEndObject();
     }
-    
-    public void write(Writer aWriter)
-        throws IOException
+
+    public void write(Writer aWriter) throws IOException
     {
         // First render only the spans because brat wants to now them first for their IDs
         for (BratAnnotation anno : annotations.values()) {
             if (anno instanceof BratTextAnnotation) {
                 write(aWriter, anno);
             }
-            
+
             if (anno instanceof BratEventAnnotation) {
                 // Just write the trigger for now
                 BratEventAnnotation event = (BratEventAnnotation) anno;
                 write(aWriter, event.getTriggerAnnotation());
             }
         }
-        
+
         // Second render all annotations that point to span annotations
         for (BratAnnotation anno : annotations.values()) {
             // Skip the text annotations, we already rendered them in the first pass
@@ -189,9 +187,8 @@ public class BratAnnotationDocument
             write(aWriter, anno);
         }
     }
-    
-    private void write(Writer aWriter, BratAnnotation aAnno)
-        throws IOException
+
+    private void write(Writer aWriter, BratAnnotation aAnno) throws IOException
     {
         aWriter.append(aAnno.toString());
         aWriter.append('\n');
@@ -200,22 +197,28 @@ public class BratAnnotationDocument
             aWriter.append('\n');
         }
     }
-    
+
     public void addAttribute(BratAttribute aAttribute)
     {
         attributes.put(aAttribute.getId(), aAttribute);
     }
-    
+
     public void addAnnotation(BratAnnotation aAnnotation)
     {
         annotations.put(aAnnotation.getId(), aAnnotation);
     }
-    
+
+    public void addAnnotation(BratAnnotation[] aAnnotations)
+    {
+        for (BratAnnotation aAnnotation : aAnnotations)
+            annotations.put(aAnnotation.getId(), aAnnotation);
+    }
+
     public BratAnnotation getAnnotation(String aId)
     {
         return annotations.get(aId);
     }
-    
+
     public Collection<BratAnnotation> getAnnotations()
     {
         return annotations.values();
