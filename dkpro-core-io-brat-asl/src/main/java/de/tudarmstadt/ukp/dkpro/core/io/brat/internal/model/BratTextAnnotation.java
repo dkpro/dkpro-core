@@ -18,7 +18,6 @@
 package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -99,16 +98,15 @@ public class BratTextAnnotation
         return getId() + '\t' + getType() + ' ' + begin + ' ' + end + '\t' + text;
     }
 
-    public static BratTextAnnotation[] parse(String aLine)
+    public static BratTextAnnotation parse(String aLine)
     {
-        ArrayList<BratTextAnnotation> discontinuousAnn = new ArrayList<BratTextAnnotation>();
         Matcher m = PATTERN.matcher(aLine);
-
+        
         if (!m.matches()) {
             throw new IllegalArgumentException("Illegal text annotation format [" + aLine + "]");
         }
-        discontinuousAnn.add(new BratTextAnnotation(m.group(ID), m.group(TYPE),
-                Integer.valueOf(m.group(BEGIN)), Integer.valueOf(m.group(END)), m.group(TEXT)));
-        return discontinuousAnn.toArray(new BratTextAnnotation[discontinuousAnn.size()]);
+
+        return new BratTextAnnotation(m.group(ID), m.group(TYPE), Integer.valueOf(m.group(BEGIN)),
+                Integer.valueOf(m.group(END)), m.group(TEXT));
     }
 }
