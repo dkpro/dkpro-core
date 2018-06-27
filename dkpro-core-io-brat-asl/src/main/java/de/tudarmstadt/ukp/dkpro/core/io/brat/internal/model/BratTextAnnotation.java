@@ -18,6 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,45 +30,60 @@ public class BratTextAnnotation
     private static final Pattern PATTERN = Pattern.compile(
             "(?<ID>T[0-9]+)\\t" + 
             "(?<TYPE>[a-zA-Z0-9_][a-zA-Z0-9_\\-]+) " +
-            "(?<BEGIN>[0-9]+) " +
-            "(?<END>[0-9]+)" +
-            "(;[0-9]+ [0-9]+)*\\t" +
+            "(?<OFFSET>[0-9]+ [0-9]+(;[0-9]+ [0-9]+)*)\\t" +
             "(?<TEXT>.*)");
     
     private static final String ID = "ID";
     private static final String TYPE = "TYPE";
-    private static final String BEGIN = "BEGIN";
+    private static final String OFFSET = "OFFSET";
     private static final String END = "END";
     private static final String TEXT = "TEXT";
     
-    private final int begin;
-    private final int end;
-    private final String text;
+    private final int[] begin;
+    private final int[] end;
+    private final String[] text;
 
-    public BratTextAnnotation(int aId, String aType, int aBegin, int aEnd, String aText)
+    public BratTextAnnotation(int aId, String aType, int[] aBegin, int[] aEnd, String[] aText)
     {
         this("T" + aId, aType, aBegin, aEnd, aText);
     }
 
-    public BratTextAnnotation(String aId, String aType, int aBegin, int aEnd, String aText)
+    public BratTextAnnotation(String aId, String aType, int[] aBegin, int[] aEnd, String[] aText)
     {
         super(aId, aType);
         begin = aBegin;
         end = aEnd;
         text = aText;
     }
+    
+    public BratTextAnnotation(String aId, String aType, String aBegin, String aText)
+    {
+        super(aId, aType);
+        ArrayList<int[]> beginEnd = getBeginAndEnd(aBegin);
+        begin = beginEnd.get(0);
+        end = beginEnd.get(1);
+        text = splitText(aText, begin, end);
+        
+    }
+    
+    
+    private String[] splitText(String aText, int[] aBegin, int[] aEnd)
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-    public int getBegin()
+    public int[] getBegin()
     {
         return begin;
     }
 
-    public int getEnd()
+    public int[] getEnd()
     {
         return end;
     }
     
-    public String getText()
+    public String[] getText()
     {
         return text;
     }
@@ -85,8 +101,9 @@ public class BratTextAnnotation
         aJG.writeString(getType());
         aJG.writeStartArray();
         aJG.writeStartArray();
-        aJG.writeNumber(begin);
-        aJG.writeNumber(end);
+        // TODO: add exact begin/end informations
+     //   aJG.writeNumber(begin);
+      //  aJG.writeNumber(end);
         aJG.writeEndArray();
         aJG.writeEndArray();
         aJG.writeEndArray();
@@ -95,18 +112,47 @@ public class BratTextAnnotation
     @Override
     public String toString()
     {
-        return getId() + '\t' + getType() + ' ' + begin + ' ' + end + '\t' + text;
+        return getId() + '\t' + getType() + generateOffset(begin, end) + '\t' + String.join(" ", text);
+    }
+    
+    private String generateOffset(int[] begin, int[] end)
+    {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < begin.length; i++) {
+            sb.append(String.format("%s %s", begin[i], end[i]));
+            if (i < begin.length && begin.length > 1) {
+                sb.append(";");
+            }
+        }
+        return sb.toString();
+    }
+    
+    private ArrayList<int[]> getBeginAndEnd(String offset)
+    {
+        ArrayList<int[]> result = new ArrayList<int[]>();
+
+        String[] offsets = offset.split(";");
+        int[] begins = new int[offsets.length];
+        int[] ends = new int[offsets.length];
+        for (int i = 0; i < offsets.length; i++) {
+            String[] beginEnd = offsets[i].split(" ");
+            begins[i] = Integer.parseInt(beginEnd[0]);
+            ends[i] = Integer.parseInt(beginEnd[1]);
+        }
+        result.add(begins);
+        result.add(ends);
+
+        return result;
     }
 
     public static BratTextAnnotation parse(String aLine)
     {
         Matcher m = PATTERN.matcher(aLine);
-        
+
         if (!m.matches()) {
             throw new IllegalArgumentException("Illegal text annotation format [" + aLine + "]");
         }
 
-        return new BratTextAnnotation(m.group(ID), m.group(TYPE), Integer.valueOf(m.group(BEGIN)),
-                Integer.valueOf(m.group(END)), m.group(TEXT));
+        return new BratTextAnnotation(m.group(ID), m.group(TYPE), m.group(OFFSET), m.group(TEXT));
     }
 }

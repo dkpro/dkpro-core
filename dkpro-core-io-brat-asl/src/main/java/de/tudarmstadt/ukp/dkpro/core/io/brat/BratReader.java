@@ -230,37 +230,40 @@ public class BratReader
     private void create(CAS aCAS, Type aType, BratTextAnnotation aAnno)
     {
         TextAnnotationParam param = parsedTextAnnotationTypes.get(aType.getName());
-        
-        AnnotationFS anno = aCAS.createAnnotation(aType, aAnno.getBegin(), aAnno.getEnd());
-        
-        fillAttributes(anno, aAnno.getAttributes());
-        
-        if (param != null && param.getSubcat() != null) {
-            anno.setStringValue(getFeature(anno, param.getSubcat()), aAnno.getType());
+        for (int i = 0; i < aAnno.getBegin().length; i++) {
+            AnnotationFS anno = aCAS.createAnnotation(aType, aAnno.getBegin()[i],
+                    aAnno.getEnd()[i]);
+            fillAttributes(anno, aAnno.getAttributes());
+
+            if (param != null && param.getSubcat() != null) {
+                anno.setStringValue(getFeature(anno, param.getSubcat()), aAnno.getType());
+            }
+
+            aCAS.addFsToIndexes(anno);
+            spanIdMap.put(aAnno.getId(), anno);
         }
-        
-        aCAS.addFsToIndexes(anno);
-        spanIdMap.put(aAnno.getId(), anno);
     }
 
     private void create(CAS aCAS, Type aType, BratEventAnnotation aAnno)
     {
         TextAnnotationParam param = parsedTextAnnotationTypes.get(aType.getName());
-        
-        AnnotationFS anno = aCAS.createAnnotation(aType, 
-                aAnno.getTriggerAnnotation().getBegin(), aAnno.getTriggerAnnotation().getEnd());
+        for (int i = 0; i < aAnno.getTriggerAnnotation().getBegin().length; i++) {
+            AnnotationFS anno = aCAS.createAnnotation(aType,
+                    aAnno.getTriggerAnnotation().getBegin()[i],
+                    aAnno.getTriggerAnnotation().getEnd()[i]);
 
-        fillAttributes(anno, aAnno.getAttributes());
+            fillAttributes(anno, aAnno.getAttributes());
 
-        if (param != null && param.getSubcat() != null) {
-            anno.setStringValue(getFeature(anno, param.getSubcat()), aAnno.getType());
+            if (param != null && param.getSubcat() != null) {
+                anno.setStringValue(getFeature(anno, param.getSubcat()), aAnno.getType());
+            }
+
+            // Slots cannot be handled yet because they might point to events that have not been
+            // created yet.
+
+            aCAS.addFsToIndexes(anno);
+            spanIdMap.put(aAnno.getId(), anno);
         }
-        
-        // Slots cannot be handled yet because they might point to events that have not been 
-        // created yet.
-        
-        aCAS.addFsToIndexes(anno);
-        spanIdMap.put(aAnno.getId(), anno);
     }
     
     private void create(CAS aCAS, Type aType, BratRelationAnnotation aAnno)
