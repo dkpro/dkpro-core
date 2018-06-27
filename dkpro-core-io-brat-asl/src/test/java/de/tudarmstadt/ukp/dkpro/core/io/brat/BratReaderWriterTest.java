@@ -140,7 +140,7 @@ public class BratReaderWriterTest
                         "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
                         "Location -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location")),
                 createEngineDescription(BratWriter.class, BratWriter.PARAM_ENABLE_TYPE_MAPPINGS,
-                        false),
+                        true),
                 "brat/document0c.ann");
     }
 
