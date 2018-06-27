@@ -436,9 +436,10 @@ public class BratWriter extends JCasFileWriter_ImplBase
     
     private BratEventAnnotation writeEventAnnotation(BratAnnotationDocument aDoc, AnnotationFS aFS)
     {
+
         // Write trigger annotation
         BratTextAnnotation trigger = new BratTextAnnotation(nextTextAnnotationId, 
-                getBratType(aFS.getType()), aFS.getBegin(), aFS.getEnd(), aFS.getCoveredText());
+                getBratType(aFS.getType()), new int[] {aFS.getBegin()}, new int[] {aFS.getEnd()}, new String[] {aFS.getCoveredText()});
         nextTextAnnotationId++;
         
         // Write event annotation
@@ -616,7 +617,7 @@ public class BratWriter extends JCasFileWriter_ImplBase
         String type = getBratType(aFS.getType());
         
         BratTextAnnotation anno = new BratTextAnnotation(nextTextAnnotationId, type,
-                aFS.getBegin(), aFS.getEnd(), aFS.getCoveredText());
+                new int[] {aFS.getBegin()}, new int[] {aFS.getEnd()}, new String[] {aFS.getCoveredText()});
         nextTextAnnotationId++;
 
         conf.addEntityDecl(superType, type);
