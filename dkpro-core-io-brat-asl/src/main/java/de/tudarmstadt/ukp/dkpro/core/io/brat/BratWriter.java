@@ -31,6 +31,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -438,8 +440,10 @@ public class BratWriter extends JCasFileWriter_ImplBase
     {
 
         // Write trigger annotation
-        BratTextAnnotation trigger = new BratTextAnnotation(nextTextAnnotationId, 
-                getBratType(aFS.getType()), new int[] {aFS.getBegin()}, new int[] {aFS.getEnd()}, new String[] {aFS.getCoveredText()});
+        BratTextAnnotation trigger = splitNewline(aFS);
+                
+//                new BratTextAnnotation(nextTextAnnotationId, 
+//                getBratType(aFS.getType()), new int[] {aFS.getBegin()}, new int[] {aFS.getEnd()}, new String[] {aFS.getCoveredText()});
         nextTextAnnotationId++;
         
         // Write event annotation
@@ -611,13 +615,36 @@ public class BratWriter extends JCasFileWriter_ImplBase
         }
     }
 
+    private BratTextAnnotation splitNewline(AnnotationFS aFS)
+    {
+        String newlineString = "i";;
+        String[] textSplit = aFS.getCoveredText().split(newlineString);
+        int[] begins = new int[textSplit.length];
+        int[] ends = new int[textSplit.length];
+        int pos = 0;
+        int end = 0;
+        for (int i = 0; i < textSplit.length; i++) {
+            System.out.println("tto"+i);
+            end += textSplit[i].length();
+            if (end != pos) {// case of empty lines
+                begins[i] = pos;
+                ends[i] = end;
+                pos = end + 1;
+            }
+        }
+
+        return new BratTextAnnotation(nextTextAnnotationId, getBratType(aFS.getType()), begins,
+                ends, new String[] { aFS.getCoveredText() });
+    }
+    
     private void writeTextAnnotation(BratAnnotationDocument aDoc, AnnotationFS aFS)
     {
         String superType = getBratType(aFS.getCAS().getTypeSystem().getParent(aFS.getType()));
         String type = getBratType(aFS.getType());
-        
-        BratTextAnnotation anno = new BratTextAnnotation(nextTextAnnotationId, type,
-                new int[] {aFS.getBegin()}, new int[] {aFS.getEnd()}, new String[] {aFS.getCoveredText()});
+        // TODO: in case the fs contains newlines, separate in as many number of parts
+        BratTextAnnotation anno = splitNewline(aFS);
+    //    BratTextAnnotation anno = new BratTextAnnotation(nextTextAnnotationId, type,
+    //            new int[] {aFS.getBegin()}, new int[] {aFS.getEnd()}, new String[] {aFS.getCoveredText()});
         nextTextAnnotationId++;
 
         conf.addEntityDecl(superType, type);
