@@ -98,8 +98,8 @@ public class IobDecoder
         if (openChunk != null) {
             Type chunkType = mappingProvider.getTagType(openChunk);
             AnnotationFS chunk = cas.createAnnotation(chunkType, start, end);
-            chunk.setStringValue(chunkValue, internTags ? openChunk.intern() :
-                openChunk);
+            chunk.setStringValue(chunkValue,
+                    internTags && openChunk != null ? openChunk.intern() : openChunk);
             cas.addFsToIndexes(chunk);
             openChunk = null;
         }

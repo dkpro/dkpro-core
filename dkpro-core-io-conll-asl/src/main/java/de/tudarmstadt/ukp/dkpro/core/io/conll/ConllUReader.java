@@ -55,6 +55,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 
@@ -64,6 +65,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
  * @see <a href="http://universaldependencies.github.io/docs/format.html">CoNLL-U Format</a>
  */
 @ResourceMetaData(name = "CoNLL-U Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_U})
 @TypeCapability(
         outputs = { 
@@ -232,12 +234,12 @@ public class ConllUReader
                     Type posTag = posMappingProvider.getTagType(tag);
                     pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
-                    pos.setPosValue(tag.intern());
+                    pos.setPosValue(tag != null ? tag.intern() : null);
                 }
 
                 // Read coarse part-of-speech tag
                 if (!UNUSED.equals(word[CPOSTAG]) && readCPos && pos != null) {
-                    pos.setCoarseValue(word[CPOSTAG].intern());
+                    pos.setCoarseValue(word[CPOSTAG] != null ? word[CPOSTAG].intern() : null);
                 }
                 
                 if (pos != null) {

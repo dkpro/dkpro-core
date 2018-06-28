@@ -75,11 +75,13 @@ import eu.clarin.weblicht.wlfxb.tc.api.TokensLayer;
 import eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusLayerTag;
 import eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusStored;
 import eu.clarin.weblicht.wlfxb.xb.WLData;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Writer for the WebLicht TCF format.
  */
 @ResourceMetaData(name = "CLARIN-DE WebLicht TCF Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_TCF})
 @TypeCapability(
         inputs = { 

@@ -51,6 +51,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArgLink;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Writes a file in the CoNLL-2008 format.
@@ -61,6 +62,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor
  *      Joint Parsing of Syntactic and Semantic Dependencies</a>
  */
 @ResourceMetaData(name = "CoNLL 2008 Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2008})
 @TypeCapability(
         inputs = { 

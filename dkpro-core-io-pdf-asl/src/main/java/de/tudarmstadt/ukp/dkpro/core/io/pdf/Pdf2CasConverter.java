@@ -29,6 +29,8 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
+
 /**
  * Converts a PDF to a CAS. Uses a substitution table.
  */
@@ -181,19 +183,23 @@ public class Pdf2CasConverter
         int end = text.length();
         text.append('\n');
 
+        // Trim leading/trailing whitespace
+        int[] offsets = {begin, end};
+        SegmenterBase.trim(text, offsets);
+
         // Add annotation
         switch (aStyle) {
         case HEADING:
             if (headingType != null) {
                 Type t = cas.getTypeSystem().getType(headingType);
-                AnnotationFS a = cas.createAnnotation(t, begin, end);
+                AnnotationFS a = cas.createAnnotation(t, offsets[0], offsets[1]);
                 cas.addFsToIndexes(a);
             }
             break;
         case PARAGRAPH:
             if (paragraphType != null) {
                 Type t = cas.getTypeSystem().getType(paragraphType);
-                AnnotationFS a = cas.createAnnotation(t, begin, end);
+                AnnotationFS a = cas.createAnnotation(t, offsets[0], offsets[1]);
                 cas.addFsToIndexes(a);
             }
             break;

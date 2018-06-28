@@ -31,6 +31,7 @@ import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.tcas.Annotation;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -248,6 +249,42 @@ public abstract class SegmenterBase
         throws AnalysisEngineProcessException;
 
     /**
+     * Trim the offsets of the given annotation to remove leading/trailing whitespace.
+     * <p>
+     * <b>Note:</b> use this method only if the document text of the CAS has already been set!
+     * <p>
+     * <b>Note:</b> best use this method before adding the annotation to the indexes.
+     * 
+     * @param aAnnotation
+     *            the annotation to trim. Offsets are updated.
+     */
+    public static void trim(Annotation aAnnotation)
+    {
+        trim(aAnnotation.getCAS().getDocumentText(), aAnnotation);
+    }
+
+    /**
+     * Trim the offsets of the given annotation to remove leading/trailing whitespace.
+     * <p>
+     * <b>Note:</b> use this method if the document text of the CAS has not been set yet but you
+     * have it available in a buffer.
+     * <p>
+     * <b>Note:</b> best use this method before adding the annotation to the indexes.
+     * 
+     * @param aText
+     *            the document text (available so far).
+     * @param aAnnotation
+     *            the annotation to trim. Offsets are updated.
+     */
+    public static void trim(CharSequence aText, Annotation aAnnotation)
+    {
+        int[] offsets = { aAnnotation.getBegin(), aAnnotation.getEnd() };
+        trim(aText, offsets);
+        aAnnotation.setBegin(offsets[0]);
+        aAnnotation.setEnd(offsets[1]);
+    }
+
+    /**
      * Remove trailing or leading whitespace from the annotation.
      * 
      * @param aText
@@ -255,21 +292,19 @@ public abstract class SegmenterBase
      * @param aSpan
      *            the offsets.
      */
-    public static void trim(String aText, int[] aSpan)
+    public static void trim(CharSequence aText, int[] aSpan)
     {
-        String data = aText;
-
         int begin = aSpan[0];
         int end = aSpan[1] - 1;
 
         // Remove whitespace at end
-        while ((end > 0) && trimChar(data.charAt(end))) {
+        while ((end > 0) && trimChar(aText.charAt(end))) {
             end--;
         }
         end++;
 
         // Remove whitespace at start
-        while ((begin < end) && trimChar(data.charAt(begin))) {
+        while ((begin < end) && trimChar(aText.charAt(begin))) {
             begin++;
         }
 

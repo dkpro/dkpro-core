@@ -48,7 +48,7 @@ public class PennTreeToJCasConverter
 
     private boolean writeTracesToText;
     private boolean createPosTags;
-    private boolean internTags;
+    private boolean internTags = true;
     private String rootLabel = ROOT;
     
     private MappingProvider posMappingProvider;
@@ -285,8 +285,9 @@ public class PennTreeToJCasConverter
         else {
             posAnno = new POS(aJCas, aBegin, aEnd);
         }
-        posAnno.setPosValue(internTags ? aPreterminal.getLabel().intern() : aPreterminal
-                .getLabel());
+        posAnno.setPosValue(
+                internTags && aPreterminal.getLabel() != null ? aPreterminal.getLabel().intern()
+                        : aPreterminal.getLabel());
         POSUtils.assignCoarseValue(posAnno);
         posAnno.addToIndexes();
         return posAnno;

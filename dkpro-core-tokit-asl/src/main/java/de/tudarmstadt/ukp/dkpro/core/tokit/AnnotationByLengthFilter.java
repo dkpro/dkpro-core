@@ -34,6 +34,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -43,6 +44,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.NORMALIZER)
 @ResourceMetaData(name = "Annotation-By-Length Filter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class AnnotationByLengthFilter
     extends JCasAnnotator_ImplBase
 {

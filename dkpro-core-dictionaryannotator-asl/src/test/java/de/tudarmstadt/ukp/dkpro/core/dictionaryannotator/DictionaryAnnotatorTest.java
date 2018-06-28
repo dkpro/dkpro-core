@@ -115,4 +115,23 @@ public class DictionaryAnnotatorTest
             assertTrue(ExceptionUtils.getRootCauseMessage(e).contains("Undeclared feature"));
         }
     }
+
+    @Test
+    public void testMatchesAtEndOfSentence() throws Exception
+    {
+        AnalysisEngine ae = createEngine(DictionaryAnnotator.class,
+                DictionaryAnnotator.PARAM_ANNOTATION_TYPE, NamedEntity.class,
+                DictionaryAnnotator.PARAM_VALUE, "PERSON",
+                DictionaryAnnotator.PARAM_MODEL_LOCATION, "src/test/resources/persons.txt");
+
+        JCas jcas = JCasFactory.createJCas();
+        TokenBuilder<Token, Sentence> tb = new TokenBuilder<>(Token.class, Sentence.class);
+        tb.buildTokens(jcas, "I am John Silver");
+
+        ae.process(jcas);
+
+        NamedEntity ne = selectSingle(jcas, NamedEntity.class);
+        assertEquals("PERSON", ne.getValue());
+        assertEquals("John Silver", ne.getCoveredText());
+    }
 }

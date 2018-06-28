@@ -37,15 +37,9 @@ import org.apache.uima.resource.ResourceAccessException;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
-@TypeCapability(
-    inputs = { 
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" }, 
-    outputs = { 
-        "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" })
 /**
  * This Analysis Engine annotates
  * English single words with semantic field information retrieved from an ExternalResource.
@@ -54,6 +48,14 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.MATCHER)
 @ResourceMetaData(name = "Semantic Field Annotator")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
+@TypeCapability(
+    inputs = { 
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" }, 
+    outputs = { 
+        "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" })
 public class SemanticFieldAnnotator
     extends JCasAnnotator_ImplBase
 {

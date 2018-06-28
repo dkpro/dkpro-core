@@ -34,8 +34,11 @@ public class TypeMapping
     public TypeMapping(String... aMappings)
     {
         parsedMappings = new ArrayList<>();
-        for (String m : aMappings) {
-            parsedMappings.add(MappingParam.parse(m));
+
+        if (aMappings != null) {
+            for (String m : aMappings) {
+                parsedMappings.add(MappingParam.parse(m));
+            }
         }
 
         brat2UimaMappingCache = new HashMap<>();

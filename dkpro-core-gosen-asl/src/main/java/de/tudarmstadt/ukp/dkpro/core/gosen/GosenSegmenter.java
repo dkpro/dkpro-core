@@ -29,6 +29,7 @@ import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.Messages;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import net.java.sen.SenFactory;
 import net.java.sen.StringTagger;
 import net.java.sen.dictionary.Token;
@@ -37,6 +38,7 @@ import net.java.sen.dictionary.Token;
  * Segmenter for Japanese text based on GoSen.
  */
 @ResourceMetaData(name = "Gosen Segmenter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability("ja")
 @TypeCapability(
         outputs = { 

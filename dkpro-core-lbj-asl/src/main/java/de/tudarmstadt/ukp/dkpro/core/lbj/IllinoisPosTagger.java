@@ -54,6 +54,7 @@ import edu.illinois.cs.cogcomp.pos.lbjava.POSTagger;
 import edu.illinois.cs.cogcomp.pos.lbjava.POSTaggerKnown;
 import edu.illinois.cs.cogcomp.pos.lbjava.POSTaggerUnknown;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -61,6 +62,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.PART_OF_SPEECH_TAGGER)
 @ResourceMetaData(name = "Illinois CCG POS-Tagger")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -71,16 +73,6 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 public class IllinoisPosTagger
     extends JCasAnnotator_ImplBase
 {
-    /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
-
     /**
      * Log the tag set(s) when a model is loaded.
      *
@@ -196,7 +188,7 @@ public class IllinoisPosTagger
             // Get tokens from CAS
             List<Token> casTokens = selectCovered(aJCas, Token.class, s);
             
-            ConvertToUima.convertPOSs(aJCas, casTokens, document, mappingProvider, internTags);
+            ConvertToUima.convertPOSs(aJCas, casTokens, document, mappingProvider);
         }
     }
 }
