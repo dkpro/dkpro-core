@@ -98,7 +98,8 @@ public class Conll2006Writer
     @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")
     private boolean writeDependency;
     
-    public static final String PARAM_WRITE_COVERED_TEXT = ComponentParameters.PARAM_WRITE_COVERED_TEXT;
+    public static final String PARAM_WRITE_COVERED_TEXT = 
+            ComponentParameters.PARAM_WRITE_COVERED_TEXT;
     @ConfigurationParameter(name = PARAM_WRITE_COVERED_TEXT, mandatory = true, defaultValue = "true")
     private boolean writeCovered;
 
@@ -151,11 +152,11 @@ public class Conll2006Writer
             for (Dependency rel : basicDeps) {
                 Row row =  ctokens.get(rel.getDependent());
                 if (row.deprel != null) {
-                	String form = row.token.getCoveredText();
+                    String form = row.token.getCoveredText();
                     if (!writeCovered) {
-                    	form = row.token.getText();
+                        form = row.token.getText();
                     }
-                	
+                    
                     throw new IllegalStateException("Illegal basic dependency structure - token ["
                             + form
                             + "] is dependent of more than one dependency.");
@@ -165,11 +166,11 @@ public class Conll2006Writer
 
             // Write sentence in CONLL 2006 format
             for (Row row : ctokens.values()) {
-            	String form = row.token.getCoveredText();
+                String form = row.token.getCoveredText();
                 if (!writeCovered) {
-                	form = row.token.getText();
+                    form = row.token.getText();
                 }
-            	
+                
                 String lemma = UNUSED;
                 if (writeLemma && (row.token.getLemma() != null)) {
                     lemma = row.token.getLemma().getValue();
@@ -213,7 +214,7 @@ public class Conll2006Writer
                 String pdeprel = UNUSED;
 
                 aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", row.id,
-                		form, lemma, cpos, pos, feats, head, deprel, phead,
+                        form, lemma, cpos, pos, feats, head, deprel, phead,
                         pdeprel);
             }
 

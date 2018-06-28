@@ -107,7 +107,8 @@ public class Conll2012Writer
     @ConfigurationParameter(name = PARAM_WRITE_SEMANTIC_PREDICATE, mandatory = true, defaultValue = "true")
     private boolean writeSemanticPredicate;
     
-    public static final String PARAM_WRITE_COVERED_TEXT = ComponentParameters.PARAM_WRITE_COVERED_TEXT;
+    public static final String PARAM_WRITE_COVERED_TEXT = 
+            ComponentParameters.PARAM_WRITE_COVERED_TEXT;
     @ConfigurationParameter(name = PARAM_WRITE_COVERED_TEXT, mandatory = true, defaultValue = "true")
     private boolean writeCovered;
 
@@ -243,7 +244,7 @@ public class Conll2012Writer
                 
                 String form = row.token.getCoveredText();
                 if (!writeCovered) {
-                	form = row.token.getText();
+                    form = row.token.getText();
                 }
                 
                 String lemma = UNUSED + " ";

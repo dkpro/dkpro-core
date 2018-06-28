@@ -92,7 +92,8 @@ public class Conll2003Writer
     @ConfigurationParameter(name = PARAM_WRITE_NAMED_ENTITY, mandatory = true, defaultValue = "true")
     private boolean writeNamedEntity;
 
-    public static final String PARAM_WRITE_COVERED_TEXT = ComponentParameters.PARAM_WRITE_COVERED_TEXT;
+    public static final String PARAM_WRITE_COVERED_TEXT = 
+            ComponentParameters.PARAM_WRITE_COVERED_TEXT;
     @ConfigurationParameter(name = PARAM_WRITE_COVERED_TEXT, mandatory = true, defaultValue = "true")
     private boolean writeCovered;
     
@@ -144,11 +145,11 @@ public class Conll2003Writer
 
             // Write sentence in CONLL 2006 format
             for (Row row : ctokens.values()) {
-            	String form = row.token.getCoveredText();
-            	if (!writeCovered) {
-            		form = row.token.getText();
-            	}
-            	
+                String form = row.token.getCoveredText();
+                if (!writeCovered) {
+                    form = row.token.getText();
+                }
+                
                 String pos = UNUSED;
                 if (writePos && (row.token.getPos() != null)) {
                     POS posAnno = row.token.getPos();

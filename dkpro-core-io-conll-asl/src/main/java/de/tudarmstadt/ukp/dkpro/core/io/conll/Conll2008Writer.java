@@ -112,7 +112,8 @@ public class Conll2008Writer
     @ConfigurationParameter(name = PARAM_WRITE_SEMANTIC_PREDICATE, mandatory = true, defaultValue = "true")
     private boolean writeSemanticPredicate;
     
-    public static final String PARAM_WRITE_COVERED_TEXT = ComponentParameters.PARAM_WRITE_COVERED_TEXT;
+    public static final String PARAM_WRITE_COVERED_TEXT = 
+            ComponentParameters.PARAM_WRITE_COVERED_TEXT;
     @ConfigurationParameter(name = PARAM_WRITE_COVERED_TEXT, mandatory = true, defaultValue = "true")
     private boolean writeCovered;
 
@@ -177,11 +178,11 @@ public class Conll2008Writer
             for (Dependency rel : basicDeps) {
                 Row row =  ctokens.get(rel.getDependent());
                 if (row.deprel != null) {
-                	String form = row.token.getCoveredText();
+                    String form = row.token.getCoveredText();
                     if (!writeCovered) {
-                    	form = row.token.getText();
+                        form = row.token.getText();
                     }
-                	
+                    
                     throw new IllegalStateException("Illegal basic dependency structure - token ["
                             + form
                             + "] is dependent of more than one dependency.");
@@ -206,7 +207,7 @@ public class Conll2008Writer
                 
                 String form = row.token.getCoveredText();
                 if (!writeCovered) {
-                	form = row.token.getText();
+                    form = row.token.getText();
                 }
                 
                 String lemma = UNUSED;
