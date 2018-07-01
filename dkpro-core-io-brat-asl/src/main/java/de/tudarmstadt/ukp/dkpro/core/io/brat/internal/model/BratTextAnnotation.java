@@ -18,7 +18,6 @@
 package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -64,12 +63,18 @@ public class BratTextAnnotation
         end = bratTextOffset.getEnd();
         text = splitText(aText, begin, end);
      }
-    
-    
+      
     private String[] splitText(String aText, int[] aBegin, int[] aEnd)
     {
-        // TODO Auto-generated method stub
-        return null;
+        String[] result = new String[aBegin.length];
+        int normalization = aBegin[0];
+        for (int i = 0; i < aBegin.length; i++) {
+            int beginOffset = aBegin[i] - normalization;
+            int endOffset = aEnd[i] - normalization;
+            result[i] = aText.substring(beginOffset, endOffset);
+            System.out.println(result[i]);
+        }
+        return result;
     }
 
     public int[] getBegin()
@@ -88,26 +93,27 @@ public class BratTextAnnotation
     }
     
     @Override
-    public void write(JsonGenerator aJG)
-        throws IOException
+    public void write(JsonGenerator aJG) throws IOException
     {
         // Format: [${ID}, ${TYPE}, [[${START}, ${END}]]]
         // note that range of the offsets are [${START},${END})
         // ['T1', 'Person', [[0, 11]]]
-        
+
         aJG.writeStartArray();
         aJG.writeString(getId());
         aJG.writeString(getType());
         aJG.writeStartArray();
-        aJG.writeStartArray();
-        // TODO: add exact begin/end informations
-     //   aJG.writeNumber(begin);
-      //  aJG.writeNumber(end);
-        aJG.writeEndArray();
+        for (int i = 0; i < begin.length; i++) {
+            // handle discontinuous annotations
+            aJG.writeStartArray();
+            aJG.writeNumber(begin[i]);
+            aJG.writeNumber(end[i]);
+            aJG.writeEndArray();
+        }
         aJG.writeEndArray();
         aJG.writeEndArray();
     }
-    
+
     @Override
     public String toString()
     {

@@ -63,7 +63,7 @@ public class BratTextOffset
             }
             else {
                 // in case discontinous annotation
-                // 1 2;4 5 ->1 2 and 4 5
+                // 1 2;4 5 -> 1 2 and 4 5
                 begin.add(effectiveBegin);
                 end.add(effectiveEnd);
             }
