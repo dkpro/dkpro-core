@@ -67,12 +67,11 @@ public class BratTextAnnotation
     private String[] splitText(String aText, int[] aBegin, int[] aEnd)
     {
         String[] result = new String[aBegin.length];
-        int normalization = aBegin[0];
+        String pieceOfText = aText;
         for (int i = 0; i < aBegin.length; i++) {
-            int beginOffset = aBegin[i] - normalization;
-            int endOffset = aEnd[i] - normalization;
-            result[i] = aText.substring(beginOffset, endOffset);
-            System.out.println(result[i]);
+            int size = aEnd[i] - aBegin[i];
+            result[i] = aText.substring(0, size);
+            pieceOfText = pieceOfText.substring(size);
         }
         return result;
     }

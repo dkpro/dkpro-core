@@ -143,7 +143,21 @@ public class BratReaderWriterTest
                         true),
                 "brat/document0c.ann");
     }
-
+    
+    @Test
+    public void testBratWithDiscontinousTwo() throws Exception
+    {
+        testOneWay(createReaderDescription(BratReader.class,
+                BratReader.PARAM_TEXT_ANNOTATION_TYPE_MAPPINGS,
+                asList("Token -> de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                        "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
+                        "Location -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location")),
+                createEngineDescription(BratWriter.class, BratWriter.PARAM_ENABLE_TYPE_MAPPINGS,
+                        true),
+                "brat/document0d-ref.ann",
+                "brat/document0d.ann");
+    }
+    
     @Test
     public void test1() throws Exception
     {
