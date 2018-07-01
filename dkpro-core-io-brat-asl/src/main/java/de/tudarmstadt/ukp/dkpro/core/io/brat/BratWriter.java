@@ -615,27 +615,32 @@ public class BratWriter extends JCasFileWriter_ImplBase
         }
     }
 
+
+    
     private BratTextAnnotation splitNewline(AnnotationFS aFS)
     {
-        String[] textSplit = explodeNewlines(aFS.getCoveredText());
-        int[] begins = new int[textSplit.length];
-        int[] ends = new int[textSplit.length];
-        int pos = aFS.getBegin();
-        int end = aFS.getBegin();
-        for (int i = 0; i < textSplit.length; i++) {
-            end += textSplit[i].length();
-            begins[i] = pos;
-            ends[i] = end;
-            end++;
-            pos = end;
+
+        Pattern p = Pattern.compile("(.+?)(?:\\R|$)+", Pattern.DOTALL);
+        Matcher m = p.matcher(aFS.getCoveredText());
+        // counts the number of matches to initialize arrays sized
+        int i = 0;
+        while (m.find()) {
+            i++;
+        }
+        // initialize arrays
+        int[] begins = new int[i];
+        int[] ends = new int[i];
+        m = p.matcher(aFS.getCoveredText());
+        i = 0;
+        while (m.find()) {
+            System.out.println(m.group(1));
+            begins[i] = m.start(1) + aFS.getBegin();
+            ends[i] = m.end(1) + aFS.getBegin();
+            i++;
         }
 
         return new BratTextAnnotation(nextTextAnnotationId, getBratType(aFS.getType()), begins,
-                ends, new String[] { aFS.getCoveredText().replaceAll("\\R", " ") });
-    }
-    
-    private String[] explodeNewlines(String str) {
-        return str.split("\\R");
+                ends, new String[] { aFS.getCoveredText().replaceAll("\\R+", " ") });
     }
     
     private void writeTextAnnotation(BratAnnotationDocument aDoc, AnnotationFS aFS)

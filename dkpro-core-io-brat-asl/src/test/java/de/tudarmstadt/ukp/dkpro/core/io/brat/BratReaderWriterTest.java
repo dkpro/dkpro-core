@@ -132,7 +132,7 @@ public class BratReaderWriterTest
     }
 
     @Test
-    public void testBratWithNewlines() throws Exception
+    public void testBratWithDiscontinuousFragmentNear() throws Exception
     {
         testRoundTrip(createReaderDescription(BratReader.class,
                 BratReader.PARAM_TEXT_ANNOTATION_TYPE_MAPPINGS,
@@ -145,7 +145,7 @@ public class BratReaderWriterTest
     }
     
     @Test
-    public void testBratWithDiscontinousTwo() throws Exception
+    public void testBratWithDiscontinuousFragmentFar() throws Exception
     {
         testOneWay(createReaderDescription(BratReader.class,
                 BratReader.PARAM_TEXT_ANNOTATION_TYPE_MAPPINGS,
