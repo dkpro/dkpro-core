@@ -617,24 +617,25 @@ public class BratWriter extends JCasFileWriter_ImplBase
 
     private BratTextAnnotation splitNewline(AnnotationFS aFS)
     {
-        String newlineString = "i";;
-        String[] textSplit = aFS.getCoveredText().split(newlineString);
+        String[] textSplit = explodeNewlines(aFS.getCoveredText());
         int[] begins = new int[textSplit.length];
         int[] ends = new int[textSplit.length];
-        int pos = 0;
-        int end = 0;
+        int pos = aFS.getBegin();
+        int end = aFS.getBegin();
         for (int i = 0; i < textSplit.length; i++) {
-            System.out.println("tto"+i);
             end += textSplit[i].length();
-            if (end != pos) {// case of empty lines
-                begins[i] = pos;
-                ends[i] = end;
-                pos = end + 1;
-            }
+            begins[i] = pos;
+            ends[i] = end;
+            end++;
+            pos = end;
         }
 
         return new BratTextAnnotation(nextTextAnnotationId, getBratType(aFS.getType()), begins,
-                ends, new String[] { aFS.getCoveredText() });
+                ends, new String[] { aFS.getCoveredText().replaceAll("\\R", " ") });
+    }
+    
+    private String[] explodeNewlines(String str) {
+        return str.split("\\R");
     }
     
     private void writeTextAnnotation(BratAnnotationDocument aDoc, AnnotationFS aFS)

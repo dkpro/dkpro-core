@@ -55,16 +55,15 @@ public class BratTextAnnotation
         end = aEnd;
         text = aText;
     }
-    
-    public BratTextAnnotation(String aId, String aType, String aBegin, String aText)
+
+    public BratTextAnnotation(String aId, String aType, String aOffset, String aText)
     {
         super(aId, aType);
-        ArrayList<int[]> beginEnd = getBeginAndEnd(aBegin);
-        begin = beginEnd.get(0);
-        end = beginEnd.get(1);
+        BratTextOffset bratTextOffset = new BratTextOffset(aOffset);
+        begin = bratTextOffset.getBegin();
+        end = bratTextOffset.getEnd();
         text = splitText(aText, begin, end);
-        
-    }
+     }
     
     
     private String[] splitText(String aText, int[] aBegin, int[] aEnd)
@@ -112,7 +111,7 @@ public class BratTextAnnotation
     @Override
     public String toString()
     {
-        return getId() + '\t' + getType() + generateOffset(begin, end) + '\t' + String.join(" ", text);
+        return getId() + '\t' + getType() + ' ' + generateOffset(begin, end) + '\t' + String.join(" ", text);
     }
     
     private String generateOffset(int[] begin, int[] end)
@@ -120,30 +119,12 @@ public class BratTextAnnotation
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < begin.length; i++) {
             sb.append(String.format("%s %s", begin[i], end[i]));
-            if (i < begin.length && begin.length > 1) {
-                sb.append(";");
-            }
-        }
-        return sb.toString();
-    }
-    
-    private ArrayList<int[]> getBeginAndEnd(String offset)
-    {
-        ArrayList<int[]> result = new ArrayList<int[]>();
+            sb.append(";");
 
-        String[] offsets = offset.split(";");
-        int[] begins = new int[offsets.length];
-        int[] ends = new int[offsets.length];
-        for (int i = 0; i < offsets.length; i++) {
-            String[] beginEnd = offsets[i].split(" ");
-            begins[i] = Integer.parseInt(beginEnd[0]);
-            ends[i] = Integer.parseInt(beginEnd[1]);
         }
-        result.add(begins);
-        result.add(ends);
-
-        return result;
+        return sb.toString().replaceFirst(";$", "");
     }
+
 
     public static BratTextAnnotation parse(String aLine)
     {
