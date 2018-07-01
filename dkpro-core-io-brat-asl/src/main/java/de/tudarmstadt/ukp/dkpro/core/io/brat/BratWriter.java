@@ -633,7 +633,6 @@ public class BratWriter extends JCasFileWriter_ImplBase
         m = p.matcher(aFS.getCoveredText());
         i = 0;
         while (m.find()) {
-            System.out.println(m.group(1));
             begins[i] = m.start(1) + aFS.getBegin();
             ends[i] = m.end(1) + aFS.getBegin();
             i++;
