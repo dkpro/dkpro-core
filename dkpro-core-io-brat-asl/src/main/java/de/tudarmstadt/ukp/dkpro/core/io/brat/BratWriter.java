@@ -71,6 +71,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratEventArgumentDec
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratRelationAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratTextAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratTextAnnotationDrawingDecl;
+import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.Offsets;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.RelationParam;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TypeMapping;
 import eu.openminted.share.annotations.api.DocumentationResource;
@@ -216,7 +217,7 @@ public class BratWriter extends JCasFileWriter_ImplBase
     private Map<FeatureStructure, String> spanIdMap;
     
     private BratConfiguration conf;
-    final Pattern newlineExtractPattern = Pattern.compile("(.+?)(?:\\R|$)+");
+    private final static Pattern NEWLINE_EXTRACT_PATTERN = Pattern.compile("(.+?)(?:\\R|$)+");
     
     private Set<String> warnings;
     
@@ -620,26 +621,15 @@ public class BratWriter extends JCasFileWriter_ImplBase
     {
 
         // extract all but newlines as groups
-        Matcher m = newlineExtractPattern.matcher(aFS.getCoveredText());
-        // counts the number of matches to initialize arrays sized
-        int i = 0;
+        Matcher m = NEWLINE_EXTRACT_PATTERN.matcher(aFS.getCoveredText());
+        List<Offsets> offsets = new ArrayList<>();
         while (m.find()) {
-            i++;
-        }
-        // initialize arrays 
-        int[] begins = new int[i];
-        int[] ends = new int[i];
-        m.reset();
-        i = 0;
-        while (m.find()) {
-            begins[i] = m.start(1) + aFS.getBegin();
-            ends[i] = m.end(1) + aFS.getBegin();
-            i++;
+            Offsets offset = new Offsets(m.start(1) + aFS.getBegin(), m.end(1) + aFS.getBegin() );
+            offsets.add(offset);
         }
         // replaces any group of newline by one space
         String[] texts = new String[] { aFS.getCoveredText().replaceAll("\\R+", " ") };
-        return new BratTextAnnotation(nextTextAnnotationId, getBratType(aFS.getType()), begins,
-                ends, texts);
+        return new BratTextAnnotation(nextTextAnnotationId, getBratType(aFS.getType()), offsets, texts);
     }
     
     private void writeTextAnnotation(BratAnnotationDocument aDoc, AnnotationFS aFS)

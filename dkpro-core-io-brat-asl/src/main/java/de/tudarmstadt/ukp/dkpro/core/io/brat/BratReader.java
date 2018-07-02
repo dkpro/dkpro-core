@@ -59,6 +59,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratEventAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratEventArgument;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratRelationAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratTextAnnotation;
+import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.Offsets;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.RelationParam;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TextAnnotationParam;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TypeMapping;
@@ -230,9 +231,9 @@ public class BratReader
     private void create(CAS aCAS, Type aType, BratTextAnnotation aAnno)
     {
         TextAnnotationParam param = parsedTextAnnotationTypes.get(aType.getName());
-        for (int i = 0; i < aAnno.getBegin().length; i++) {
-            AnnotationFS anno = aCAS.createAnnotation(aType, aAnno.getBegin()[i],
-                    aAnno.getEnd()[i]);
+        for (Offsets offset: aAnno.getOffsets()) {
+            AnnotationFS anno = aCAS.createAnnotation(aType, offset.getBegin(),
+                    offset.getEnd());
             fillAttributes(anno, aAnno.getAttributes());
 
             if (param != null && param.getSubcat() != null) {
@@ -247,10 +248,10 @@ public class BratReader
     private void create(CAS aCAS, Type aType, BratEventAnnotation aAnno)
     {
         TextAnnotationParam param = parsedTextAnnotationTypes.get(aType.getName());
-        for (int i = 0; i < aAnno.getTriggerAnnotation().getBegin().length; i++) {
+        for (Offsets offset: aAnno.getTriggerAnnotation().getOffsets()) {
             AnnotationFS anno = aCAS.createAnnotation(aType,
-                    aAnno.getTriggerAnnotation().getBegin()[i],
-                    aAnno.getTriggerAnnotation().getEnd()[i]);
+                    offset.getBegin(),
+                    offset.getEnd());
 
             fillAttributes(anno, aAnno.getAttributes());
 

@@ -18,6 +18,8 @@
 package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,66 +31,50 @@ public class BratTextAnnotation
     private static final Pattern PATTERN = Pattern.compile(
             "(?<ID>T[0-9]+)\\t" + 
             "(?<TYPE>[a-zA-Z0-9_][a-zA-Z0-9_\\-]+) " +
-            "(?<OFFSET>[0-9]+ [0-9]+(;[0-9]+ [0-9]+)*)\\t" +
+            "(?<OFFSETS>[0-9]+ [0-9]+(;[0-9]+ [0-9]+)*)\\t" +
             "(?<TEXT>.*)");
     
     private static final String ID = "ID";
     private static final String TYPE = "TYPE";
-    private static final String OFFSET = "OFFSET";
-    private static final String END = "END";
+    private static final String OFFSETS = "OFFSETS";
     private static final String TEXT = "TEXT";
     
-    private final int[] begin;
-    private final int[] end;
-    private final String[] text;
+    private final String[] texts;
+    
+    private final List<Offsets> offsets;
 
-    public BratTextAnnotation(int aId, String aType, int[] aBegin, int[] aEnd, String[] aText)
+    public BratTextAnnotation(int aId, String aType, List<Offsets> aOffsets, String[] aTexts)
     {
-        this("T" + aId, aType, aBegin, aEnd, aText);
+        this("T" + aId, aType, aOffsets, aTexts);
     }
 
-    public BratTextAnnotation(String aId, String aType, int[] aBegin, int[] aEnd, String[] aText)
+    public BratTextAnnotation(String aId, String aType, List<Offsets> aOffsets, String aTexts[])
     {
         super(aId, aType);
-        begin = aBegin;
-        end = aEnd;
-        text = aText;
-    }
-
-    public BratTextAnnotation(String aId, String aType, String aOffset, String aText)
-    {
-        super(aId, aType);
-        BratTextOffset bratTextOffset = new BratTextOffset(aOffset);
-        begin = bratTextOffset.getBegin();
-        end = bratTextOffset.getEnd();
-        text = splitText(aText, begin, end);
+        offsets = aOffsets;
+        texts = aTexts;
      }
       
-    private String[] splitText(String aText, int[] aBegin, int[] aEnd)
+    private static String[] splitText(String aText, List<Offsets> aOffsets)
     {
-        String[] result = new String[aBegin.length];
+        String[] result = new String[aOffsets.size()];
         String pieceOfText = aText;
-        for (int i = 0; i < aBegin.length; i++) {
-            int size = aEnd[i] - aBegin[i];
+        for (int i = 0; i < aOffsets.size(); i++) {
+            int size = aOffsets.get(i).getEnd() - aOffsets.get(i).getBegin();
             result[i] = aText.substring(0, size);
             pieceOfText = pieceOfText.substring(size);
         }
         return result;
     }
 
-    public int[] getBegin()
+    public List<Offsets> getOffsets()
     {
-        return begin;
-    }
-
-    public int[] getEnd()
-    {
-        return end;
+        return offsets;
     }
     
     public String[] getText()
     {
-        return text;
+        return texts;
     }
     
     @Override
@@ -102,11 +88,11 @@ public class BratTextAnnotation
         aJG.writeString(getId());
         aJG.writeString(getType());
         aJG.writeStartArray();
-        for (int i = 0; i < begin.length; i++) {
+        for (int i = 0; i < offsets.size(); i++) {
             // handle discontinuous annotations
             aJG.writeStartArray();
-            aJG.writeNumber(begin[i]);
-            aJG.writeNumber(end[i]);
+            aJG.writeNumber(offsets.get(i).getBegin());
+            aJG.writeNumber(offsets.get(i).getEnd());
             aJG.writeEndArray();
         }
         aJG.writeEndArray();
@@ -116,18 +102,42 @@ public class BratTextAnnotation
     @Override
     public String toString()
     {
-        return getId() + '\t' + getType() + ' ' + generateOffset(begin, end) + '\t' + String.join(" ", text);
+        return getId() + '\t' + getType() + ' ' + generateOffset(offsets) + '\t' + String.join(" ", texts);
     }
     
-    private String generateOffset(int[] begin, int[] end)
+    private String generateOffset(List<Offsets> aOffsets)
     {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < begin.length; i++) {
-            sb.append(String.format("%s %s", begin[i], end[i]));
-            sb.append(";");
-
+        for (int i = 0; i < offsets.size(); i++) {
+            sb.append(String.format("%s %s", offsets.get(i).getBegin(), offsets.get(i).getEnd()));
+            if (i < offsets.size() - 1) {
+                sb.append(";");
+            }
         }
-        return sb.toString().replaceFirst(";$", "");
+        return sb.toString();
+    }
+    
+    private static List<Offsets> generateOffsetsString(String aOffsetsStr)
+    {
+        String[] offsetsArray = aOffsetsStr.split(";");
+        List<Offsets> offsetsList = new ArrayList<>();
+        for (int i = 0; i < offsetsArray.length; i++) {
+            String[] beginEnd = offsetsArray[i].split(" ");
+            int effectiveBegin = Integer.parseInt(beginEnd[0]);
+            int effectiveEnd = Integer.parseInt(beginEnd[1]);
+            // in case discontinous annotation
+            // 1 2;3 4 -> 1 4
+            if (i > 0 && effectiveBegin <= (1 + offsetsList.get(offsetsList.size() - 1).getEnd())) {
+                offsetsList.get(i - 1).setEnd(effectiveEnd);
+            }
+            else {
+                // in case discontinous annotation
+                // 1 2;4 5 -> 1 2 and 4 5
+                Offsets offset = new Offsets(effectiveBegin, effectiveEnd);
+                offsetsList.add(offset);
+            }
+        }
+        return offsetsList;
     }
 
 
@@ -138,7 +148,8 @@ public class BratTextAnnotation
         if (!m.matches()) {
             throw new IllegalArgumentException("Illegal text annotation format [" + aLine + "]");
         }
-
-        return new BratTextAnnotation(m.group(ID), m.group(TYPE), m.group(OFFSET), m.group(TEXT));
+        List<Offsets> offsetsLocal = generateOffsetsString(m.group(OFFSETS));
+        String[] textsLocal = splitText(m.group(TEXT), offsetsLocal);
+        return new BratTextAnnotation(m.group(ID), m.group(TYPE), offsetsLocal, textsLocal);
     }
 }
