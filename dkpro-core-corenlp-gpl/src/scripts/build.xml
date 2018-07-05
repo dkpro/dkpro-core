@@ -49,7 +49,7 @@
 		<antcall target="separate-jars"/>
 	</target>
 
-	<target name="separate-jars" depends="de,en,fr,zh">
+	<target name="separate-jars" depends="ar,de,en,fr,zh">
 		<antcall target="jar-notice"/>
 	</target>
 
