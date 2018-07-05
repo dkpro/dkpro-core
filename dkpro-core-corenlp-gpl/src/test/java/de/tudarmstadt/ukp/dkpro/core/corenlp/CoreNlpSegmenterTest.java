@@ -85,19 +85,23 @@ public class CoreNlpSegmenterTest
     @Test
     public void testSpanishClitics() throws Exception
     {
+        //Important: Verb clitics will not be segmented unless Spanish models are included
+        //e. g.: entregarles, inmutarse
         JCas jcas = JCasFactory.createJCas();
         jcas.setDocumentLanguage("es");
-        jcas.setDocumentText("Al recibir los libros del maestro los abrieron con entusiasmo\nEstaban contentos.");
+        jcas.setDocumentText("Al entregarles los libros del maestro los abrieron sin inmutarse\n"
+                + "Estaban contentos.");
         
         AnalysisEngine aed = createEngine(CoreNlpSegmenter.class,
                 CoreNlpSegmenter.PARAM_NEWLINE_IS_SENTENCE_BREAK, "always",
                 CoreNlpSegmenter.PARAM_TOKENIZATION_OPTIONS, "splitAll=true,ptb3Escaping=false");
         aed.process(jcas);
         
-        String[] sentences = {"Al recibir los libros del maestro los abrieron con entusiasmo", "Estaban contentos."};
+        String[] sentences = {"Al entregarles los libros del maestro los abrieron sin inmutarse", 
+                "Estaban contentos."};
         
-        String[] expectedTokens = { "A", "el", "recibir", "los", "libros", "de", "el", "maestro",
-                "los", "abrieron", "con", "entusiasmo", "Estaban", "contentos", "."};
+        String[] expectedTokens = { "A", "el", "entregarles", "los", "libros", "de", "el", 
+                "maestro", "los", "abrieron", "sin", "inmutarse", "Estaban", "contentos", "."};
         
         AssertAnnotations.assertSentence(sentences, select(jcas, Sentence.class));
         List<String> tokens = new ArrayList<String>();
