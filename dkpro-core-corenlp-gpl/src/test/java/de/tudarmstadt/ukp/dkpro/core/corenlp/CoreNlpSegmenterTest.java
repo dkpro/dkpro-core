@@ -22,13 +22,19 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
@@ -74,6 +80,33 @@ public class CoreNlpSegmenterTest
                 "abandone", "la", "sala", "." };
         
         AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
+    }
+    
+    @Test
+    public void testSpanishClitics() throws Exception
+    {
+        JCas jcas = JCasFactory.createJCas();
+        jcas.setDocumentLanguage("es");
+        jcas.setDocumentText("Al recibir los libros del maestro los abrieron con entusiasmo\nEstaban contentos.");
+        
+        AnalysisEngine aed = createEngine(CoreNlpSegmenter.class,
+                CoreNlpSegmenter.PARAM_NEWLINE_IS_SENTENCE_BREAK, "always",
+                CoreNlpSegmenter.PARAM_TOKENIZATION_OPTIONS, "splitAll=true,ptb3Escaping=false");
+        aed.process(jcas);
+        
+        String[] sentences = {"Al recibir los libros del maestro los abrieron con entusiasmo", "Estaban contentos."};
+        
+        String[] expectedTokens = { "A", "el", "recibir", "los", "libros", "de", "el", "maestro",
+                "los", "abrieron", "con", "entusiasmo", "Estaban", "contentos", "."};
+        
+        AssertAnnotations.assertSentence(sentences, select(jcas, Sentence.class));
+        List<String> tokens = new ArrayList<String>();
+        for (Token token : select(jcas, Token.class)) {
+            tokens.add(token.getText());
+        }
+        System.out.printf("%-20s - Expected: %s%n", "Tokens", Arrays.asList(expectedTokens));
+        System.out.printf("%-20s - Actual  : %s%n", "Tokens", tokens);
+        Assert.assertEquals(Arrays.asList(expectedTokens), tokens);
     }
     
     @Test

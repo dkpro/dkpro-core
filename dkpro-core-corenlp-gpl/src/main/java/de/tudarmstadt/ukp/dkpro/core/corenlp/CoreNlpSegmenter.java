@@ -39,8 +39,10 @@ import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetEndAnnotation;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.TokenizerAnnotator;
+import edu.stanford.nlp.pipeline.TokenizerAnnotator.TokenizerType;
 import edu.stanford.nlp.pipeline.WordsToSentencesAnnotator;
 import edu.stanford.nlp.process.WordToSentenceProcessor;
+import edu.stanford.nlp.process.WordToSentenceProcessor.NewlineIsSentenceBreak;
 import edu.stanford.nlp.util.CoreMap;
 
 /**
@@ -103,8 +105,16 @@ public class CoreNlpSegmenter
             defaultValue = {})
     private Set<String> tokenRegexesToDiscard;
     
+    /** 
+     * Additional options that should be passed to the tokenizers. 
+     */ 
+    public static final String PARAM_TOKENIZATION_OPTIONS = "tokenizationOption"; 
+    @ConfigurationParameter(name = PARAM_TOKENIZATION_OPTIONS, mandatory = false) 
+    private String options;
+    
     private ModelProviderBase<WordsToSentencesAnnotator> sentenceAnnotator;
     private ModelProviderBase<TokenizerAnnotator> tokenizerAnnotator;
+    private boolean useCoreLabelWord = false;
     
     @Override
     public void initialize(UimaContext aContext)
@@ -128,8 +138,24 @@ public class CoreNlpSegmenter
                 coreNlpProps.setProperty("tokenize.language", props.getProperty(LANGUAGE));
                 //coreNlpProps.setProperty("tokenize.class", null);
                 //coreNlpProps.setProperty("tokenize.whitespace", "false");
-                //coreNlpProps.setProperty("tokenize.options", null);
                 //coreNlpProps.setProperty("tokenize.keepeol", "false");
+                
+                if (options == null) {
+                    options = TokenizerType.getTokenizerType(coreNlpProps).getDefaultOptions();
+                } 
+                
+                if (options.contains("splitAll=true")) {
+                    useCoreLabelWord = true;
+                }
+               
+                NewlineIsSentenceBreak breakNL = 
+                    WordToSentenceProcessor.stringToNewlineIsSentenceBreak(newlineIsSentenceBreak);
+                if (NewlineIsSentenceBreak.ALWAYS == breakNL || 
+                        NewlineIsSentenceBreak.TWO_CONSECUTIVE == breakNL) {
+                    options = "tokenizeNLs=true," + options;
+                }
+                
+                coreNlpProps.setProperty("tokenize.options", options);
                 
                 String extraOptions = null;
                 
@@ -170,9 +196,17 @@ public class CoreNlpSegmenter
             tokenizerAnnotator.getResource().annotate(document);
 
             for (CoreLabel token : document.get(CoreAnnotations.TokensAnnotation.class)) {
-                createToken(aJCas, 
-                        token.get(CharacterOffsetBeginAnnotation.class) + aZoneBegin,
-                        token.get(CharacterOffsetEndAnnotation.class) + aZoneBegin);
+                //useCoreLabelWord to be set to true when allowing clitics in the language
+                if (useCoreLabelWord) {
+                    createToken(aJCas, 
+                            token.word(),
+                            token.get(CharacterOffsetBeginAnnotation.class) + aZoneBegin,
+                            token.get(CharacterOffsetEndAnnotation.class) + aZoneBegin);
+                } else {
+                    createToken(aJCas, 
+                            token.get(CharacterOffsetBeginAnnotation.class) + aZoneBegin,
+                            token.get(CharacterOffsetEndAnnotation.class) + aZoneBegin);
+                }
             }
         }
 
