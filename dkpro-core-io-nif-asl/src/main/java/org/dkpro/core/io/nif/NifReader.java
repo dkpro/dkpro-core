@@ -45,12 +45,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reader for the NLP Interchange Format (NIF). The file format (e.g. TURTLE, etc.) is automatically
  * chosen depending on the name of the file(s) being read. Compressed files are supported.
  */
 @ResourceMetaData(name = "NLP Interchange Format (NIF) Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_NIF_TURTLE})
 @TypeCapability(
         outputs = { 

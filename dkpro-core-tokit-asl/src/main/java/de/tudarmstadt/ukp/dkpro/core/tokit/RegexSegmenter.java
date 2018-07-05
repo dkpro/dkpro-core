@@ -34,6 +34,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * This segmenter splits sentences and tokens based on regular expressions that define the sentence
@@ -42,6 +43,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * The default behavior is to split sentences by a line break and tokens by whitespace.
  */
 @ResourceMetaData(name = "Regex Segmenter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",

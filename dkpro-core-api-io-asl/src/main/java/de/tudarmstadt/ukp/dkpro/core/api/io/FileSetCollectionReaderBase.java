@@ -39,6 +39,9 @@ import org.apache.uima.util.ProgressImpl;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.Parameters;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Base class for file system collection readers. Uses an Ant FileSet to conveniently walk the file
@@ -57,6 +60,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  * @since 1.0.6
  * @deprecated use {@link ResourceCollectionReaderBase} instead.
  */
+@Component(value = OperationType.READER)
+@Parameters(
+        exclude = { 
+                FileSetCollectionReaderBase.PARAM_SOURCE_LOCATION  })
 @Deprecated
 public abstract class FileSetCollectionReaderBase
     extends CasCollectionReader_ImplBase

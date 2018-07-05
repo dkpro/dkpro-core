@@ -23,6 +23,7 @@ import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
@@ -33,6 +34,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.Parameters;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -41,16 +43,20 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.SPELLING_CHECKER)
 @ResourceMetaData(name = "Simple Spelling Corrector")
+@Parameters(
+        exclude = { 
+                NorvigSpellingCorrector.PARAM_MODEL_LOCATION  })
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
         outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation"})
-
 public class NorvigSpellingCorrector
     extends JCasAnnotator_ImplBase
 {
-    public static final String PARAM_MODEL_FILE = ComponentParameters.PARAM_MODEL_LOCATION;
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    private String modelLocation;
 
     private NorvigSpellingAlgorithm spellingCorrector;
 
@@ -60,10 +66,8 @@ public class NorvigSpellingCorrector
     {
         super.initialize(context);
         try {
-            String trainingFile = (String) context.getConfigParameterValue(PARAM_MODEL_FILE);
-
             spellingCorrector = new NorvigSpellingAlgorithm();
-            spellingCorrector.train(getContext().getResourceURL(trainingFile), "UTF-8");
+            spellingCorrector.train(getContext().getResourceURL(modelLocation), "UTF-8");
         }
         catch (Exception e) {
             throw new ResourceInitializationException(e);

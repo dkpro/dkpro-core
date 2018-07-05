@@ -28,7 +28,7 @@ public class BratRelationAnnotation
 {
     private static final Pattern PATTERN = Pattern.compile(
             "(?<ID>R[0-9]+)[\\t]" + 
-            "(?<TYPE>[a-zA-Z_][a-zA-Z0-9_-]+) " +
+            "(?<TYPE>[a-zA-Z0-9_][a-zA-Z0-9_-]+) " +
             "(?<ARG1LABEL>[a-zA-Z][a-zA-Z0-9]+):" +
             "(?<ARG1TARGET>[ET][0-9]+) " +
             "(?<ARG2LABEL>[a-zA-Z][a-zA-Z0-9]+):" +
