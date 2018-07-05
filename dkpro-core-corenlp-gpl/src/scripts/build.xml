@@ -358,11 +358,11 @@
             md5="9c0296a2c1b432a78da8546cbd3e5a6a"
             groupId="de.tudarmstadt.ukp.dkpro.core"
             artifactIdBase="de.tudarmstadt.ukp.dkpro.core.corenlp"
-            upstreamVersion="20170609"
+            upstreamVersion="20170614"
             metaDataVersion="1"
             tool="tokenizer"
             language="ar"
-            variant="stanford"
+            variant="atb-bn-arztrain"
             extension="ser.gz">
         </install-stub-and-upstream-file>
         <deltree dir="target/download/tmp"/>
