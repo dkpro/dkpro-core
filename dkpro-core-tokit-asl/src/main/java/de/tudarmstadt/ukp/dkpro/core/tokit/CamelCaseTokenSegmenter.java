@@ -36,6 +36,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -43,6 +44,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.SEGMENTER)
 @ResourceMetaData(name = "CamelCase Token Segmenter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(inputs = {
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })

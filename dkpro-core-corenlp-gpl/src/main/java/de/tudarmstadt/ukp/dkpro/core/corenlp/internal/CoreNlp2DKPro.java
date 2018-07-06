@@ -67,7 +67,7 @@ import edu.stanford.nlp.util.IntPair;
 public class CoreNlp2DKPro
 {
     public static void convertPOSs(JCas aJCas, Annotation document,
-            MappingProvider mappingProvider, boolean internStrings)
+            MappingProvider mappingProvider)
     {
         for (CoreMap s : document.get(SentencesAnnotation.class)) {
             for (CoreLabel t : s.get(TokensAnnotation.class)) {
@@ -76,7 +76,7 @@ public class CoreNlp2DKPro
                 Type tagType = mappingProvider.getTagType(tag);
                 POS anno = (POS) aJCas.getCas().createAnnotation(tagType, token.getBegin(),
                         token.getEnd());
-                anno.setPosValue(internStrings ? tag.intern() : tag);
+                anno.setPosValue(tag != null ? tag.intern() : null);
                 POSUtils.assignCoarseValue(anno);
                 anno.addToIndexes();
                 token.setPos(anno);
@@ -85,7 +85,7 @@ public class CoreNlp2DKPro
     }
     
     public static void convertNamedEntities(JCas aJCas, Annotation document,
-            MappingProvider mappingProvider, boolean internStrings)
+            MappingProvider mappingProvider)
     {
         for (CoreMap s : document.get(SentencesAnnotation.class)) {
             for (CoreLabel t : s.get(TokensAnnotation.class)) {
@@ -100,7 +100,7 @@ public class CoreNlp2DKPro
                 Type tagType = mappingProvider.getTagType(tag);
                 NamedEntity anno = (NamedEntity) aJCas.getCas().createAnnotation(tagType,
                         token.getBegin(), token.getEnd());
-                anno.setValue(internStrings ? tag.intern() : tag);
+                anno.setValue(tag != null ? tag.intern() : null);
                 anno.addToIndexes();
             }
         }
@@ -121,7 +121,7 @@ public class CoreNlp2DKPro
     }
     
     public static void convertDependencies(JCas aJCas, Annotation document,
-            MappingProvider mappingProvider, boolean internStrings)
+            MappingProvider mappingProvider)
     {
         for (CoreMap s : document.get(SentencesAnnotation.class)) {
             SemanticGraph graph = s.get(CollapsedDependenciesAnnotation.class);
@@ -163,7 +163,7 @@ public class CoreNlp2DKPro
                 
                 Type depRel = mappingProvider.getTagType(labelUsedForMapping);
                 Dependency dep = (Dependency) aJCas.getCas().createFS(depRel);
-                dep.setDependencyType(internStrings ? actualLabel.intern() : actualLabel);
+                dep.setDependencyType(actualLabel != null ? actualLabel.intern() : null);
                 dep.setDependent(dependent);
                 dep.setGovernor(governor);
                 dep.setBegin(dep.getDependent().getBegin());
@@ -175,22 +175,21 @@ public class CoreNlp2DKPro
     }
 
     public static void convertConstituents(JCas aJCas, Annotation aDocument,
-            MappingProvider aMappingProvider, boolean aInternStrings,
-            TreebankLanguagePack aTreebankLanguagePack)
+            MappingProvider aMappingProvider, TreebankLanguagePack aTreebankLanguagePack)
     {
         for (CoreMap s : aDocument.get(SentencesAnnotation.class)) {
             Tree tree = s.get(TreeCoreAnnotations.TreeAnnotation.class);
             tree.setSpans();
             List<CoreLabel> tokens = s.get(TokensAnnotation.class);
-            convertConstituentTreeNode(aJCas, aTreebankLanguagePack, tree, null, aInternStrings,
-                    aMappingProvider, tokens);
+            convertConstituentTreeNode(aJCas, aTreebankLanguagePack, tree, null, aMappingProvider,
+                    tokens);
         }
         
     }
 
     private static org.apache.uima.jcas.tcas.Annotation convertConstituentTreeNode(JCas aJCas,
             TreebankLanguagePack aTreebankLanguagePack, Tree aNode,
-            org.apache.uima.jcas.tcas.Annotation aParentFS, boolean internStrings,
+            org.apache.uima.jcas.tcas.Annotation aParentFS,
             MappingProvider constituentMappingProvider, List<CoreLabel> tokens)
     {
         // Get node label
@@ -215,17 +214,16 @@ public class CoreNlp2DKPro
             
             Constituent constituent = (Constituent) aJCas.getCas().createAnnotation(constType,
                     begin, end);
-            constituent.setConstituentType(internStrings ? nodeLabelValue.intern() : 
-                nodeLabelValue);
-            constituent.setSyntacticFunction(internStrings && syntacticFunction != null ? 
-                    syntacticFunction.intern() : syntacticFunction);
+            constituent.setConstituentType(nodeLabelValue != null ? nodeLabelValue.intern() : null);
+            constituent.setSyntacticFunction(
+                    syntacticFunction != null ? syntacticFunction.intern() : null);
             constituent.setParent(aParentFS);
 
             // Do we have any children?
             List<org.apache.uima.jcas.tcas.Annotation> childAnnotations = new ArrayList<>();
             for (Tree child : aNode.getChildrenAsList()) {
                 org.apache.uima.jcas.tcas.Annotation childAnnotation = convertConstituentTreeNode(
-                        aJCas, aTreebankLanguagePack, child, constituent, internStrings,
+                        aJCas, aTreebankLanguagePack, child, constituent,
                         constituentMappingProvider, tokens);
                 if (childAnnotation != null) {
                     childAnnotations.add(childAnnotation);

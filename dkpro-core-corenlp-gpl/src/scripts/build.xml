@@ -49,7 +49,7 @@
 		<antcall target="separate-jars"/>
 	</target>
 
-	<target name="separate-jars" depends="de,en,fr,zh">
+	<target name="separate-jars" depends="ar,de,en,fr,zh">
 		<antcall target="jar-notice"/>
 	</target>
 
@@ -341,7 +341,33 @@
         </install-stub-and-upstream-file>       
         <deltree dir="target/download/tmp"/>
     </target>
-        
+
+    <target name="ar">
+        <antcall target="tokenizer-ar-stanford"/>
+    </target>
+
+    <target name="tokenizer-ar-stanford" depends="download-ar">
+        <mkdir dir="target/download/tmp"/>
+        <unzip src="target/download/ar/ar-models.zip" dest="target/download/tmp">
+            <patternset>
+                <include name="edu/stanford/nlp/models/segmenter/arabic/arabic-segmenter-atb+bn+arztrain.ser.gz"/>
+            </patternset>
+        </unzip>
+        <install-stub-and-upstream-file
+            file="target/download/tmp/edu/stanford/nlp/models/segmenter/arabic/arabic-segmenter-atb+bn+arztrain.ser.gz"
+            md5="9c0296a2c1b432a78da8546cbd3e5a6a"
+            groupId="de.tudarmstadt.ukp.dkpro.core"
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.corenlp"
+            upstreamVersion="20170614"
+            metaDataVersion="1"
+            tool="tokenizer"
+            language="ar"
+            variant="atb-bn-arztrain"
+            extension="ser.gz">
+        </install-stub-and-upstream-file>
+        <deltree dir="target/download/tmp"/>
+    </target>
+
     <!-- 
       - ============================================================================================
       - MODELS

@@ -32,6 +32,8 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * This class implements a basic SolrWriter. Specific writers should define a subclass that
@@ -40,10 +42,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  * The class initializes a SolrServer instance, and calls {@code generateSolrDocument()} for each
  * incoming CAS, and adds the result to the Solr server. A commit is executed when all documents are
  * processed.
- *
- *
- *
  */
+@Component(OperationType.WRITER)
 public abstract class SolrWriter_ImplBase
     extends JCasConsumer_ImplBase
 {

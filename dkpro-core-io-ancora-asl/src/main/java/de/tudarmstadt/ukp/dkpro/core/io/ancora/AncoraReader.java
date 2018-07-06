@@ -63,11 +63,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Read AnCora XML format.
  */
 @ResourceMetaData(name = "AnCora XML Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_XML, MimeTypes.APPLICATION_X_ANCORA_XML})
 @TypeCapability(
         outputs = {
@@ -305,7 +307,7 @@ public class AncoraReader
             if (aPos != null && readPOS) {
                 Type posTagType = posMappingProvider.getTagType(aPos);
                 POS pos = (POS) getJCas().getCas().createAnnotation(posTagType, start, end);
-                pos.setPosValue(aPos.intern());
+                pos.setPosValue(aPos != null ? aPos.intern() : null);
                 POSUtils.assignCoarseValue(pos);
                 pos.addToIndexes();
                 if (token != null) {

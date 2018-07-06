@@ -50,6 +50,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reads the Tüba-D/Z chunking format.
@@ -58,11 +59,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
  *      Web page</a>
  */
 @ResourceMetaData(name = "Tüba-D/Z Chunking Format Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({ MimeTypes.APPLICATION_X_TUEBADZ_CHUNK })
-@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk" })
+@TypeCapability(
+        outputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk" })
 public class TuebaDZReader
     extends JCasResourceCollectionReader_ImplBase
 {
@@ -82,16 +86,6 @@ public class TuebaDZReader
     @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
             defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
-
-    /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid spamming
-     * the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
 
     /**
      * Write part-of-speech information.
@@ -207,7 +201,6 @@ public class TuebaDZReader
         Type chunkType = JCasUtil.getType(aJCas, Chunk.class);
         Feature chunkValue = chunkType.getFeatureByBaseName("chunkValue");
         IobDecoder decoder = new IobDecoder(aJCas.getCas(), chunkValue, chunkMappingProvider);
-        decoder.setInternTags(internTags);
 
         List<String[]> words;
         while ((words = readSentence(aReader)) != null) {

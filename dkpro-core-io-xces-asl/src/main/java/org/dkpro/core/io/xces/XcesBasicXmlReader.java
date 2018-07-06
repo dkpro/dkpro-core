@@ -35,6 +35,7 @@ import javax.xml.stream.events.XMLEvent;
 
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.jcas.JCas;
@@ -45,7 +46,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBas
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
+@ResourceMetaData(name = "XCES Basic XML Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph"})
 @MimeTypeCapability({MimeTypes.APPLICATION_X_XCES_BASIC})
 public class XcesBasicXmlReader

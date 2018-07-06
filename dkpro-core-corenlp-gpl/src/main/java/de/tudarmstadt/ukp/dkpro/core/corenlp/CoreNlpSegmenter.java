@@ -44,11 +44,13 @@ import edu.stanford.nlp.pipeline.WordsToSentencesAnnotator;
 import edu.stanford.nlp.process.WordToSentenceProcessor;
 import edu.stanford.nlp.process.WordToSentenceProcessor.NewlineIsSentenceBreak;
 import edu.stanford.nlp.util.CoreMap;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * Tokenizer and sentence splitter using from CoreNLP.
+ * Tokenizer and sentence splitter using from Stanford CoreNLP.
  */
 @ResourceMetaData(name = "CoreNLP Segmenter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",

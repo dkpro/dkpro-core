@@ -62,6 +62,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.Parameters;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -69,6 +70,9 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.TRAINER_OF_MACHINE_LEARNING_MODELS)
 @MimeTypeCapability(MimeTypes.APPLICATION_X_LINGPIPE_NER)
+@Parameters(
+        exclude = { 
+                LingPipeNamedEntityRecognizerTrainer.PARAM_TARGET_LOCATION  })
 @ResourceMetaData(name = "LingPipe Named Entity Recognizer Trainer")
 public class LingPipeNamedEntityRecognizerTrainer
     extends JCasConsumer_ImplBase

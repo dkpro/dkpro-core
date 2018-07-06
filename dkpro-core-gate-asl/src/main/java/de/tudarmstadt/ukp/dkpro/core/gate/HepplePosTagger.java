@@ -46,6 +46,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 import hepple.postag.InvalidRuleException;
 import hepple.postag.POSTagger;
@@ -54,6 +55,7 @@ import hepple.postag.POSTagger;
  * GATE Hepple part-of-speech tagger.
  */
 @Component(OperationType.PART_OF_SPEECH_TAGGER)
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @ResourceMetaData(name = "GATE Hepple POS-Tagger")
 @TypeCapability(
         inputs = {
@@ -100,16 +102,6 @@ public class HepplePosTagger
             ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
-
-    /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
 
     /**
      * Log the tag set(s) when a model is loaded.
@@ -205,7 +197,8 @@ public class HepplePosTagger
             for (Token t : tokens) {
                 Type posTag = mappingProvider.getTagType(tagged.get(i)[1]);
                 POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
-                posAnno.setPosValue(internTags ? tagged.get(i)[1].intern() : tagged.get(i)[1]);
+                String tag = tagged.get(i)[1];
+                posAnno.setPosValue(tag != null ? tag.intern() : null);
                 POSUtils.assignCoarseValue(posAnno);
                 posAnno.addToIndexes();
                 t.setPos(posAnno);

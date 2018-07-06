@@ -49,6 +49,17 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
     private Map<String, HasResourceMetadata> tagMappingImports = new HashMap<>();
 
     @Override
+    protected void init()
+    {
+        super.init();
+        
+        // Mappings are expected to be provided by the components, not to be resolved from
+        // model artifacts.
+        setDefault(GROUP_ID, null);
+        setDefault(ARTIFACT_URI, null);
+    }
+    
+    @Override
     public void configure(CAS aCas) throws AnalysisEngineProcessException
     {
         typeSystem = aCas.getTypeSystem();

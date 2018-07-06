@@ -28,15 +28,21 @@ import org.apache.tika.sax.BodyContentHandler;
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.xml.sax.SAXException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reader for many file formats based on Apache Tika.
  */
 @ResourceMetaData(name = "Tika Multi-Format Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@TypeCapability(
+        outputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class TikaReader
     extends ResourceCollectionReaderBase
 {

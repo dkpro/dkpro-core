@@ -29,12 +29,14 @@ import org.languagetool.Languages;
 
 import cn.com.cjf.CJFBeanFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Segmenter using LanguageTool to do the heavy lifting. LanguageTool internally uses different
  * strategies for tokenization.
  */
 @ResourceMetaData(name = "LanguageTool Segmenter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability({ "en", "fa", "fr", "de", "pl", "ca", "it", "br", "nl", "pt", "ru", "be", "zh",
     "da", "eo", "gl", "el", "is", "ja", "km", "lt", "ml", "ro", "sk", "sl", "es", "sv", "ta",
     "tl", "uk" })
