@@ -30,7 +30,7 @@
   <name>DKPro Core ASL - Illinois Cognitive Computation Group NLP (v ${illinois-cogcomp-nlp.version}) (academic use)</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
-    <illinois-cogcomp-nlp.version>4.0.6</illinois-cogcomp-nlp.version>
+    <illinois-cogcomp-nlp.version>4.0.7</illinois-cogcomp-nlp.version>
     <maven.surefire.heap>6g</maven.surefire.heap>
   </properties>
   <dependencies>
@@ -97,13 +97,6 @@
         </exclusion>
       </exclusions>
     </dependency>
-    <!--
-      <dependency>
-      <groupId>edu.illinois.cs.cogcomp</groupId>
-      <artifactId>illinois-srl</artifactId>
-      <version>5.1.11</version>
-      </dependency>
-    -->
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
