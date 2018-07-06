@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2014
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -27,7 +27,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util;
 
@@ -77,7 +77,8 @@ public class CasCopier
     private final LowLevelCAS mLowLevelDestCas;
     private final Feature mDestSofaFeature;
 
-    private final Map<FeatureStructure, FeatureStructure> mFsMap = new HashMap<FeatureStructure, FeatureStructure>();
+    private final Map<FeatureStructure, FeatureStructure> mFsMap = 
+            new HashMap<FeatureStructure, FeatureStructure>();
 
     private List<Annotation> batchCopyAnnoList = null;
 
@@ -319,8 +320,8 @@ public class CasCopier
             // enumerate all possible primitive types. Maybe LowLevel CAS API
             // could help?
             if (srcFeat.getRange().isPrimitive()) {
-
-                aDestFS.setFeatureValueFromString(destFeat, aSrcFS.getFeatureValueAsString(srcFeat));
+                aDestFS.setFeatureValueFromString(destFeat,
+                        aSrcFS.getFeatureValueAsString(srcFeat));
             }
             else {
                 // recursive copy

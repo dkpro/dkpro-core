@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2015
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 
 import java.io.IOException;
@@ -47,6 +47,9 @@ public class BratAnnotationDocument
         while (lines.hasNext()) {
             String line = lines.next();
             switch (line.charAt(0)) {
+            case '#':
+                // Comments currently not supported
+                break;
             case 'T':
                 doc.addAnnotation(BratTextAnnotation.parse(line));
                 break;

@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2013
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.opennlp.internal;
 
 import java.util.Set;
@@ -25,7 +25,8 @@ import opennlp.tools.ml.model.MaxentModel;
 public class OpenNlpChunkerTagsetDescriptionProvider
     extends OpenNlpTagsetDescriptionProvider
 {
-    public OpenNlpChunkerTagsetDescriptionProvider(String aName, Class<?> aLayer, MaxentModel aModel)
+    public OpenNlpChunkerTagsetDescriptionProvider(String aName, Class<?> aLayer,
+            MaxentModel aModel)
     {
         super(aName, aLayer, aModel);
     }
@@ -38,6 +39,9 @@ public class OpenNlpChunkerTagsetDescriptionProvider
             String t = getModel().getOutcome(i);
             if (t.startsWith("B-") || t.startsWith("I-")) {
                 tagSet.add(t.substring(2));
+            }
+            else if ("O".equals(t)) {
+                // ignore
             }
             else {
                 tagSet.add(t);

@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,10 +14,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.*;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -25,8 +25,10 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
@@ -51,7 +53,7 @@ public class OpenNlpNamedEntityRecognizerTest
     }
 // end::test[]
     
-    @Test(expected=AnalysisEngineProcessException.class)
+    @Test(expected = AnalysisEngineProcessException.class)
     public void testExceptionWithWrongMappingFileLocation()
         throws Exception
     {
@@ -62,6 +64,23 @@ public class OpenNlpNamedEntityRecognizerTest
         TestRunner.runTest(engine, "en", "SAP where John Doe works is in Germany .");
     }
 
+    @Test
+    public void testGerman()
+        throws Exception
+    {
+        // Run the test pipeline. Note the full stop at the end of a sentence is preceded by a
+        // whitespace. This is necessary for it to be detected as a separate token!
+        JCas jcas = runTest("de", "nemgp", "Markus arbeitet seit 10 Jahren bei SAP in Deutschland .");
+
+        // Define the reference data that we expect to get back from the test
+        String[] namedEntity = { 
+                "[ 35, 38]NamedEntity(org) (SAP)",
+                "[ 42, 53]NamedEntity(loc) (Deutschland)" };
+
+        // Compare the annotations created in the pipeline to the reference data
+        AssertAnnotations.assertNamedEntity(namedEntity, select(jcas, NamedEntity.class));
+    }
+
 // tag::test[]
     
     // Auxiliary method that sets up the analysis engine or pipeline used in the test.
@@ -69,6 +88,8 @@ public class OpenNlpNamedEntityRecognizerTest
     private JCas runTest(String language, String variant, String testDocument)
         throws Exception
     {
+        AssumeResource.assumeResource(OpenNlpNamedEntityRecognizer.class, "ner", language, variant);
+        
         AnalysisEngine engine = createEngine(OpenNlpNamedEntityRecognizer.class,
                 OpenNlpNamedEntityRecognizer.PARAM_VARIANT, variant,
                 OpenNlpNamedEntityRecognizer.PARAM_PRINT_TAGSET, true);

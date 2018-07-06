@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2013
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.api.io;
 
 import java.util.Map;
@@ -28,11 +28,8 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
 /**
- * External Resource that simply instanciates a spring ResourcePatternResolver.
- * 
- * 
+ * External Resource that simply instantiates a spring ResourcePatternResolver.
  */
-
 public class ResourceLoaderLocator
     extends Resource_ImplBase
     implements ExternalResourceLocator
@@ -43,7 +40,8 @@ public class ResourceLoaderLocator
      */
     private static final String PARAM_RESOURCE_LOADERCLASS = "resourceLoaderClass";
     @ConfigurationParameter(name = PARAM_RESOURCE_LOADERCLASS, mandatory = false)
-    private final Class<? extends ResourcePatternResolver> resourceLoaderClass = PathMatchingResourcePatternResolver.class;
+    private final Class<? extends ResourcePatternResolver> resourceLoaderClass = 
+            PathMatchingResourcePatternResolver.class;
     private ResourcePatternResolver resolverInstance;
 
     @Override

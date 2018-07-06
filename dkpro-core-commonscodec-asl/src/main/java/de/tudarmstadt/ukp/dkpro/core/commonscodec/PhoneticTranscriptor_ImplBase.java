@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2013
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *******************************************************************************/
+ **/
 package de.tudarmstadt.ukp.dkpro.core.commonscodec;
 
 import org.apache.commons.codec.EncoderException;
@@ -30,14 +30,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * Base class for all kinds of phonetic transcriptors based on Apache Commons Codec.
- *
- *
  */
-
 @TypeCapability(
-        inputs={"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
-        outputs={"de.tudarmstadt.ukp.dkpro.core.api.phonetics.type.PhoneticTranscription"})
-
+        inputs = {"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
+        outputs = {"de.tudarmstadt.ukp.dkpro.core.api.phonetics.type.PhoneticTranscription"})
 public abstract class PhoneticTranscriptor_ImplBase
     extends JCasAnnotator_ImplBase
 {
@@ -48,7 +44,8 @@ public abstract class PhoneticTranscriptor_ImplBase
         throws AnalysisEngineProcessException
     {
         for (Token token : JCasUtil.select(jcas, Token.class)) {
-            PhoneticTranscription transcription = new PhoneticTranscription(jcas, token.getBegin(), token.getEnd());
+            PhoneticTranscription transcription = new PhoneticTranscription(jcas, token.getBegin(),
+                    token.getEnd());
             transcription.setTranscription(encode(token.getCoveredText()));
             transcription.setName(encoder.getClass().getName());
             transcription.addToIndexes();

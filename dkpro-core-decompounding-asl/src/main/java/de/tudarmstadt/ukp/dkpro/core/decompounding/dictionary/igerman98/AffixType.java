@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *******************************************************************************/
+ **/
 package de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.igerman98;
 
 /**
@@ -23,5 +23,5 @@ package de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.igerman98;
  */
 public enum AffixType
 {
-	PREFIX, SUFFIX
+    PREFIX, SUFFIX
 }

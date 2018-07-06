@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2011
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.frequency.resources;
 
 import java.io.File;
@@ -36,13 +36,10 @@ import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TFileAccessProvider;
 
 /**
  * External resource wrapper for the Web1T frequency count provider.
- * 
- *
  */
 public final class Web1TFrequencyCountResource
     extends FrequencyCountResourceBase
 {
-
     // Attention! Can only have String parameters in external resources.
     
     public static final String PARAM_MIN_NGRAM_LEVEL = "MinLevel";
@@ -74,12 +71,12 @@ public final class Web1TFrequencyCountResource
     private CasConfigurableProviderBase<File> web1TFolderProvider;
     
     @Override
-	public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
-		throws ResourceInitializationException
-	{
-		if (!super.initialize(aSpecifier, aAdditionalParams)) {
-			return false;
-		}
+    public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
+        throws ResourceInitializationException
+    {
+        if (!super.initialize(aSpecifier, aAdditionalParams)) {
+            return false;
+        }
 
         web1TFolderProvider = new ModelProviderBase<File>()
         {
@@ -105,14 +102,16 @@ public final class Web1TFrequencyCountResource
             }
         };
 
-		return true;
-	}
+        return true;
+    }
     
-    protected void initializeProvider() throws ResourceInitializationException{
-        try{
+    @Override
+    protected void initializeProvider() throws ResourceInitializationException
+    {
+        try {
             web1TFolderProvider.configure();
             provider = new Web1TFileAccessProvider(
-            		language,
+                    language,
                     web1TFolderProvider.getResource(),
                     new Integer(minLevel),
                     new Integer(maxLevel)
@@ -121,7 +120,7 @@ public final class Web1TFrequencyCountResource
         catch (IOException e) {
             throw new ResourceInitializationException(e);
         }
-        ((FrequencyCountProviderBase) provider).setScaleDownFactor(Integer.parseInt(this.scaleDownFactor));
+        ((FrequencyCountProviderBase) provider)
+                .setScaleDownFactor(Integer.parseInt(this.scaleDownFactor));
     }
-    
 }

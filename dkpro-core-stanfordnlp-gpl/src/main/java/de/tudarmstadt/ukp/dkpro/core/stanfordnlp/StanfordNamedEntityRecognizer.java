@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2014
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
@@ -27,25 +27,28 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 import java.util.zip.GZIPInputStream;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ResourceParameter;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.CoreNlpUtils;
@@ -53,14 +56,18 @@ import edu.stanford.nlp.ie.AbstractSequenceClassifier;
 import edu.stanford.nlp.ie.crf.CRFClassifier;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.HasWord;
-import edu.stanford.nlp.ling.Word;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.util.CoreMap;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Stanford Named Entity Recognizer component.
- * 
  */
+@Component(OperationType.NAMED_ENTITITY_RECOGNIZER)
+@ResourceMetaData(name = "CoreNLP Named Entity Recogizer (old API)")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -93,16 +100,32 @@ public class StanfordNamedEntityRecognizer
     protected String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Location from which the model is read.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    @ResourceParameter(MimeTypes.APPLICATION_X_STANFORDNLP_NER)
     protected String modelLocation;
 
     /**
      * Location of the mapping file for named entity tags to UIMA types.
      */
-    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
+    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
     protected String mappingLocation;
 
@@ -131,10 +154,8 @@ public class StanfordNamedEntityRecognizer
     @ConfigurationParameter(name = PARAM_QUOTE_END, mandatory = false)
     private List<String> quoteEnd;
     
-    private CasConfigurableProviderBase<AbstractSequenceClassifier<CoreMap>> modelProvider;
+    private StanfordNlpNamedEntityRecognizerModelProvider modelProvider;
     private MappingProvider mappingProvider;
-
-    private final PTBEscapingProcessor<HasWord, String, Word> escaper = new PTBEscapingProcessor<HasWord, String, Word>();
 
     @Override
     public void initialize(UimaContext aContext)
@@ -142,64 +163,7 @@ public class StanfordNamedEntityRecognizer
     {
         super.initialize(aContext);
 
-        modelProvider = new CasConfigurableProviderBase<AbstractSequenceClassifier<CoreMap>>()
-        {
-            {
-                setContextObject(StanfordNamedEntityRecognizer.this);
-
-                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
-                setDefault(ARTIFACT_ID,
-                        "de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-${language}-${variant}");
-
-                setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/ner-default-variants.map");
-                setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/"
-                        + "ner-${language}-${variant}.properties");
-
-                setOverride(LOCATION, modelLocation);
-                setOverride(LANGUAGE, language);
-                setOverride(VARIANT, variant);
-            }
-
-            @Override
-            protected AbstractSequenceClassifier<CoreMap> produceResource(URL aUrl)
-                throws IOException
-            {
-                InputStream is = null;
-                try {
-                    is = aUrl.openStream();
-                    if (aUrl.toString().endsWith(".gz")) {
-                        // it's faster to do the buffering _outside_ the gzipping as here
-                        is = new GZIPInputStream(is);
-                    }
-
-                    AbstractSequenceClassifier<CoreMap> classifier = (AbstractSequenceClassifier<CoreMap>) 
-                            CRFClassifier.getClassifier(is);
-
-                    if (printTagSet) {
-                        StringBuilder sb = new StringBuilder();
-                        sb.append("Model contains [").append(classifier.classIndex.size())
-                                .append("] tags: ");
-
-                        List<String> tags = new ArrayList<String>();
-                        for (String t : classifier.classIndex) {
-                            tags.add(t);
-                        }
-
-                        Collections.sort(tags);
-                        sb.append(StringUtils.join(tags, " "));
-                        getContext().getLogger().log(INFO, sb.toString());
-                    }
-
-                    return classifier;
-                }
-                catch (ClassNotFoundException e) {
-                    throw new IOException(e);
-                }
-                finally {
-                    closeQuietly(is);
-                }
-            }
-        };
+        modelProvider = new StanfordNlpNamedEntityRecognizerModelProvider(this);
 
         mappingProvider = new MappingProvider();
         mappingProvider
@@ -210,6 +174,7 @@ public class StanfordNamedEntityRecognizer
         mappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
         mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
         mappingProvider.setOverride(MappingProvider.VARIANT, variant);
+        mappingProvider.addTagMappingImport("ner", modelProvider);
     }
 
     @Override
@@ -239,13 +204,15 @@ public class StanfordNamedEntityRecognizer
             String entityType = null;
             
             for (CoreMap t : taggedWords) {
-                String tokenType = t.get(CoreAnnotations.AnswerAnnotation.class);
+                String tokenType = mappingProvider
+                        .getTag(t.get(CoreAnnotations.AnswerAnnotation.class));
                 
                 // If an entity is currently open, then close it
                 if ("O".equals(tokenType) || !tokenType.equals(entityType)) {
                     if (entityType != null) {
                         Type type = mappingProvider.getTagType(entityType);
-                        NamedEntity neAnno = (NamedEntity) cas.createAnnotation(type, entityBegin, entityEnd);
+                        NamedEntity neAnno = (NamedEntity) cas.createAnnotation(type, entityBegin,
+                                entityEnd);
                         neAnno.setValue(entityType);
                         neAnno.addToIndexes();
                         entityType = null;
@@ -260,6 +227,74 @@ public class StanfordNamedEntityRecognizer
                     }
                     entityEnd = t.get(CoreAnnotations.CharacterOffsetEndAnnotation.class);
                 }
+            }
+            // If the last entity is still open, then close it
+            if (entityType != null) {
+                Type type = mappingProvider.getTagType(entityType);
+                NamedEntity neAnno = (NamedEntity) cas.createAnnotation(type, entityBegin,
+                        entityEnd);
+                neAnno.setValue(entityType);
+                neAnno.addToIndexes();
+            }
+        }
+    }
+    
+    private class StanfordNlpNamedEntityRecognizerModelProvider
+        extends ModelProviderBase<AbstractSequenceClassifier<CoreMap>>
+    {
+        public StanfordNlpNamedEntityRecognizerModelProvider(Object aObject)
+        {
+            super(aObject, "stanfordnlp", "ner");
+            // setDefault(PACKAGE, "de/tudarmstadt/ukp/dkpro/core/stanfordnlp");
+            setDefault(LOCATION,
+                    "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/ner-${language}-${variant}.properties");
+        }
+        
+        @Override
+        protected AbstractSequenceClassifier<CoreMap> produceResource(URL aUrl)
+            throws IOException
+        {
+            Properties metadata = getResourceMetaData();
+            
+            InputStream is = null;
+            try {
+                is = aUrl.openStream();
+                if (aUrl.toString().endsWith(".gz")) {
+                    // it's faster to do the buffering _outside_ the gzipping as here
+                    is = new GZIPInputStream(is);
+                }
+
+                AbstractSequenceClassifier<CoreMap> classifier = 
+                        (AbstractSequenceClassifier<CoreMap>) CRFClassifier.getClassifier(is);
+
+                String tagsetName = metadata.getProperty("ner.tagset");
+                if (tagsetName == null) {
+                    tagsetName = "unknown";
+                }
+                
+                SingletonTagset tsdp = new SingletonTagset(NamedEntity.class, tagsetName);
+                for (String tag : classifier.classIndex) {
+                    String mapped = metadata.getProperty("ner.tag.map." + tag);
+                    String finalTag = mapped != null ? mapped : tag;
+                    
+                    // "O" has a special meaning in the CRF-NER: not a named entity
+                    if (!"O".equals(finalTag)) {
+                        tsdp.add(finalTag);
+                    }
+                }
+                addTagset(tsdp);
+                
+                if (printTagSet) {
+                    getContext().getLogger().log(INFO, tsdp.toString());
+                }
+                
+                return classifier;
+            }
+            catch (ClassNotFoundException e) {
+                throw new IOException(e);
+            }
+            finally {
+                closeQuietly(is);
             }
         }
     }

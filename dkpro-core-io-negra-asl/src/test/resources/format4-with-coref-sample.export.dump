@@ -1,0 +1,506 @@
+======== CAS 0 begin ==================================
+
+-------- View _InitialView begin ----------------------------------
+
+DocumentMetaData
+   sofa: _InitialView
+   begin: 0
+   end: 15
+   language: "de"
+   documentId: "S1"
+   isLastSegment: false
+
+CAS-Text:
+A B C D E F 20 
+[A B C D E F 20]
+Sentence
+   sofa: _InitialView
+   begin: 0
+   end: 14
+[A B C D E F 20]
+PennTree
+   sofa: _InitialView
+   begin: 0
+   end: 14
+   PennTree: "(ROOT (P3 C) (P5 E) (NX--- (P2 B) (NX-- (P1 A))) (NX--- (NX-HD (P4 D)) (NX-- (NX-HD (P6 F)) (NX-- (CARD 20)))))"
+[A B C D E F 20]
+ROOT
+   sofa: _InitialView
+   begin: 0
+   end: 14
+   constituentType: "ROOT"
+   children: FSArray
+[A B]
+Constituent
+   sofa: _InitialView
+   begin: 0
+   end: 3
+   constituentType: "NX"
+   parent: ROOT
+      sofa: _InitialView
+      begin: 0
+      end: 14
+      constituentType: "ROOT"
+      children: FSArray
+   children: FSArray
+   syntacticFunction: "--"
+[A]
+POS_X
+   sofa: _InitialView
+   begin: 0
+   end: 1
+   PosValue: "P1"
+   coarseValue: "X"
+[A]
+Lemma
+   sofa: _InitialView
+   begin: 0
+   end: 1
+   value: "A"
+[A]
+Token
+   sofa: _InitialView
+   begin: 0
+   end: 1
+   parent: Constituent
+      sofa: _InitialView
+      begin: 0
+      end: 1
+      constituentType: "NX"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 0
+         end: 3
+         constituentType: "NX"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 14
+            constituentType: "ROOT"
+            children: FSArray
+         children: FSArray
+         syntacticFunction: "--"
+      children: FSArray
+      syntacticFunction: "-"
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 0
+      end: 1
+      value: "A"
+   pos: POS_X
+      sofa: _InitialView
+      begin: 0
+      end: 1
+      PosValue: "P1"
+      coarseValue: "X"
+[A]
+Constituent
+   sofa: _InitialView
+   begin: 0
+   end: 1
+   constituentType: "NX"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 0
+      end: 3
+      constituentType: "NX"
+      parent: ROOT
+         sofa: _InitialView
+         begin: 0
+         end: 14
+         constituentType: "ROOT"
+         children: FSArray
+      children: FSArray
+      syntacticFunction: "--"
+   children: FSArray
+   syntacticFunction: "-"
+[B]
+POS_X
+   sofa: _InitialView
+   begin: 2
+   end: 3
+   PosValue: "P2"
+   coarseValue: "X"
+[B]
+Lemma
+   sofa: _InitialView
+   begin: 2
+   end: 3
+   value: "B"
+[B]
+Token
+   sofa: _InitialView
+   begin: 2
+   end: 3
+   parent: Constituent
+      sofa: _InitialView
+      begin: 0
+      end: 3
+      constituentType: "NX"
+      parent: ROOT
+         sofa: _InitialView
+         begin: 0
+         end: 14
+         constituentType: "ROOT"
+         children: FSArray
+      children: FSArray
+      syntacticFunction: "--"
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 2
+      end: 3
+      value: "B"
+   pos: POS_X
+      sofa: _InitialView
+      begin: 2
+      end: 3
+      PosValue: "P2"
+      coarseValue: "X"
+[C]
+POS_X
+   sofa: _InitialView
+   begin: 4
+   end: 5
+   PosValue: "P3"
+   coarseValue: "X"
+[C]
+Lemma
+   sofa: _InitialView
+   begin: 4
+   end: 5
+   value: "C"
+[C]
+Token
+   sofa: _InitialView
+   begin: 4
+   end: 5
+   parent: ROOT
+      sofa: _InitialView
+      begin: 0
+      end: 14
+      constituentType: "ROOT"
+      children: FSArray
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 4
+      end: 5
+      value: "C"
+   pos: POS_X
+      sofa: _InitialView
+      begin: 4
+      end: 5
+      PosValue: "P3"
+      coarseValue: "X"
+[D E F 20]
+Constituent
+   sofa: _InitialView
+   begin: 6
+   end: 14
+   constituentType: "NX"
+   parent: ROOT
+      sofa: _InitialView
+      begin: 0
+      end: 14
+      constituentType: "ROOT"
+      children: FSArray
+   children: FSArray
+   syntacticFunction: "--"
+[D]
+POS_X
+   sofa: _InitialView
+   begin: 6
+   end: 7
+   PosValue: "P4"
+   coarseValue: "X"
+[D]
+Lemma
+   sofa: _InitialView
+   begin: 6
+   end: 7
+   value: "D"
+[D]
+Token
+   sofa: _InitialView
+   begin: 6
+   end: 7
+   parent: Constituent
+      sofa: _InitialView
+      begin: 6
+      end: 7
+      constituentType: "NX"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 6
+         end: 14
+         constituentType: "NX"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 14
+            constituentType: "ROOT"
+            children: FSArray
+         children: FSArray
+         syntacticFunction: "--"
+      children: FSArray
+      syntacticFunction: "HD"
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 6
+      end: 7
+      value: "D"
+   pos: POS_X
+      sofa: _InitialView
+      begin: 6
+      end: 7
+      PosValue: "P4"
+      coarseValue: "X"
+[D]
+Constituent
+   sofa: _InitialView
+   begin: 6
+   end: 7
+   constituentType: "NX"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 6
+      end: 14
+      constituentType: "NX"
+      parent: ROOT
+         sofa: _InitialView
+         begin: 0
+         end: 14
+         constituentType: "ROOT"
+         children: FSArray
+      children: FSArray
+      syntacticFunction: "--"
+   children: FSArray
+   syntacticFunction: "HD"
+[E]
+POS_X
+   sofa: _InitialView
+   begin: 8
+   end: 9
+   PosValue: "P5"
+   coarseValue: "X"
+[E]
+Lemma
+   sofa: _InitialView
+   begin: 8
+   end: 9
+   value: "E"
+[E]
+Token
+   sofa: _InitialView
+   begin: 8
+   end: 9
+   parent: ROOT
+      sofa: _InitialView
+      begin: 0
+      end: 14
+      constituentType: "ROOT"
+      children: FSArray
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 8
+      end: 9
+      value: "E"
+   pos: POS_X
+      sofa: _InitialView
+      begin: 8
+      end: 9
+      PosValue: "P5"
+      coarseValue: "X"
+[F 20]
+Constituent
+   sofa: _InitialView
+   begin: 10
+   end: 14
+   constituentType: "NX"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 6
+      end: 14
+      constituentType: "NX"
+      parent: ROOT
+         sofa: _InitialView
+         begin: 0
+         end: 14
+         constituentType: "ROOT"
+         children: FSArray
+      children: FSArray
+      syntacticFunction: "--"
+   children: FSArray
+   syntacticFunction: "-"
+[F]
+POS_X
+   sofa: _InitialView
+   begin: 10
+   end: 11
+   PosValue: "P6"
+   coarseValue: "X"
+[F]
+Lemma
+   sofa: _InitialView
+   begin: 10
+   end: 11
+   value: "F"
+[F]
+Token
+   sofa: _InitialView
+   begin: 10
+   end: 11
+   parent: Constituent
+      sofa: _InitialView
+      begin: 10
+      end: 11
+      constituentType: "NX"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 10
+         end: 14
+         constituentType: "NX"
+         parent: Constituent
+            sofa: _InitialView
+            begin: 6
+            end: 14
+            constituentType: "NX"
+            parent: ROOT
+               sofa: _InitialView
+               begin: 0
+               end: 14
+               constituentType: "ROOT"
+               children: FSArray
+            children: FSArray
+            syntacticFunction: "--"
+         children: FSArray
+         syntacticFunction: "-"
+      children: FSArray
+      syntacticFunction: "HD"
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 10
+      end: 11
+      value: "F"
+   pos: POS_X
+      sofa: _InitialView
+      begin: 10
+      end: 11
+      PosValue: "P6"
+      coarseValue: "X"
+[F]
+Constituent
+   sofa: _InitialView
+   begin: 10
+   end: 11
+   constituentType: "NX"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 10
+      end: 14
+      constituentType: "NX"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 6
+         end: 14
+         constituentType: "NX"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 14
+            constituentType: "ROOT"
+            children: FSArray
+         children: FSArray
+         syntacticFunction: "--"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "HD"
+[20]
+POS_NUM
+   sofa: _InitialView
+   begin: 12
+   end: 14
+   PosValue: "CARD"
+   coarseValue: "NUM"
+[20]
+Lemma
+   sofa: _InitialView
+   begin: 12
+   end: 14
+   value: "20"
+[20]
+Token
+   sofa: _InitialView
+   begin: 12
+   end: 14
+   parent: Constituent
+      sofa: _InitialView
+      begin: 12
+      end: 14
+      constituentType: "NX"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 10
+         end: 14
+         constituentType: "NX"
+         parent: Constituent
+            sofa: _InitialView
+            begin: 6
+            end: 14
+            constituentType: "NX"
+            parent: ROOT
+               sofa: _InitialView
+               begin: 0
+               end: 14
+               constituentType: "ROOT"
+               children: FSArray
+            children: FSArray
+            syntacticFunction: "--"
+         children: FSArray
+         syntacticFunction: "-"
+      children: FSArray
+      syntacticFunction: "-"
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 12
+      end: 14
+      value: "20"
+   pos: POS_NUM
+      sofa: _InitialView
+      begin: 12
+      end: 14
+      PosValue: "CARD"
+      coarseValue: "NUM"
+[20]
+Constituent
+   sofa: _InitialView
+   begin: 12
+   end: 14
+   constituentType: "NX"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 10
+      end: 14
+      constituentType: "NX"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 6
+         end: 14
+         constituentType: "NX"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 14
+            constituentType: "ROOT"
+            children: FSArray
+         children: FSArray
+         syntacticFunction: "--"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "-"
+-------- View _InitialView end ----------------------------------
+
+======== CAS 0 end ==================================
+
+

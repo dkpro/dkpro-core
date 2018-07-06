@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 
 /**
  * Support for fast binary serialization of UIMA CAS. Be advised that binary serialization may have

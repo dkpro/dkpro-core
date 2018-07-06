@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2009, Richard Eckart de Castilho
  * Copyright 2012, Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.pdf;
 
 import java.util.ArrayList;
@@ -364,7 +364,8 @@ public class Trie<V>
      * @param vals
      *            the found key values.
      */
-    private void keys(final Character c, final Node n, final StringBuilder b, final Set<String> vals)
+    private void keys(final Character c, final Node n, final StringBuilder b,
+            final Set<String> vals)
     {
         b.append(c);
 

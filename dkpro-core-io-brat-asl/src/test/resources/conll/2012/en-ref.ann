@@ -1,19 +1,19 @@
 T1	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 0 4	John
 T2	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 13 23	the market
-T3	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 27 29	He
-T4	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 46 71	a present to give to Mary
-T5	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 67 71	Mary
-T6	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 75 77	He
-T7	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 86 99	her last year
-T8	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 86 89	her
-T9	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 103 115	the fun fair
-T10	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 119 123	They
-T11	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 128 134	a ride
-T12	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 138 154	the ferris wheel
-T13	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 173 175	he
-T14	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 188 205	Mary 's blue eyes
-T15	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 188 195	Mary 's
-T16	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 208 212	John
+T3	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 26 28	He
+T4	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 45 70	a present to give to Mary
+T5	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 66 70	Mary
+T6	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 73 75	He
+T7	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 84 97	her last year
+T8	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 84 87	her
+T9	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 101 113	the fun fair
+T10	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 116 120	They
+T11	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 125 131	a ride
+T12	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 135 151	the ferris wheel
+T13	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 170 172	he
+T14	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 185 202	Mary 's blue eyes
+T15	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 185 192	Mary 's
+T16	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink 205 209	John
 T17	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 0 4	John
 A17	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T17 NNP
 T18	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 5 9	went
@@ -26,107 +26,107 @@ T21	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 17 23	market
 A21	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T21 NN
 T22	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 24 25	.
 A22	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T22 .
-T23	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 27 29	He
+T23	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 26 28	He
 A23	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T23 PRP
-T24	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 30 33	was
+T24	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 29 32	was
 A24	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T24 VBD
-T25	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 34 41	looking
+T25	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 33 40	looking
 A25	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T25 VBG
-T26	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 42 45	for
+T26	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 41 44	for
 A26	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T26 IN
-T27	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 46 47	a
+T27	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 45 46	a
 A27	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T27 DT
-T28	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 48 55	present
+T28	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 47 54	present
 A28	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T28 JJ
-T29	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 56 58	to
+T29	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 55 57	to
 A29	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T29 TO
-T30	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 59 63	give
+T30	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 58 62	give
 A30	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T30 VB
-T31	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 64 66	to
+T31	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 63 65	to
 A31	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T31 TO
-T32	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 67 71	Mary
+T32	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 66 70	Mary
 A32	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T32 NNP
-T33	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 72 73	.
+T33	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 71 72	.
 A33	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T33 .
-T34	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 75 77	He
+T34	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 73 75	He
 A34	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T34 PRP
-T35	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 78 81	had
+T35	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 76 79	had
 A35	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T35 VBD
-T36	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 82 85	met
+T36	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 80 83	met
 A36	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T36 VBN
-T37	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 86 89	her
+T37	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 84 87	her
 A37	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T37 PRP$
-T38	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 90 94	last
+T38	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 88 92	last
 A38	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T38 JJ
-T39	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 95 99	year
+T39	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 93 97	year
 A39	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T39 NN
-T40	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 100 102	at
+T40	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 98 100	at
 A40	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T40 IN
-T41	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 103 106	the
+T41	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 101 104	the
 A41	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T41 DT
-T42	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 107 110	fun
+T42	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 105 108	fun
 A42	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T42 NN
-T43	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 111 115	fair
+T43	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 109 113	fair
 A43	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T43 NN
-T44	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 116 117	.
+T44	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 114 115	.
 A44	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T44 .
-T45	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 119 123	They
+T45	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 116 120	They
 A45	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T45 PRP
-T46	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 124 127	had
+T46	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 121 124	had
 A46	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T46 VBD
-T47	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 128 129	a
+T47	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 125 126	a
 A47	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T47 DT
-T48	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 130 134	ride
+T48	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 127 131	ride
 A48	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T48 NN
-T49	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 135 137	on
+T49	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 132 134	on
 A49	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T49 IN
-T50	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 138 141	the
+T50	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 135 138	the
 A50	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T50 DT
-T51	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 142 148	ferris
+T51	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 139 145	ferris
 A51	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T51 JJ
-T52	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 149 154	wheel
+T52	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 146 151	wheel
 A52	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T52 NN
-T53	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 155 163	together
+T53	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 152 160	together
 A53	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T53 RB
-T54	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 164 167	and
+T54	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 161 164	and
 A54	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T54 CC
-T55	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 168 172	when
+T55	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 165 169	when
 A55	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T55 WRB
-T56	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 173 175	he
+T56	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 170 172	he
 A56	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T56 PRP
-T57	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 176 182	looked
+T57	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 173 179	looked
 A57	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T57 VBD
-T58	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 183 187	into
+T58	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 180 184	into
 A58	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T58 IN
-T59	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 188 192	Mary
+T59	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 185 189	Mary
 A59	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T59 NNP
-T60	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 193 195	's
+T60	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 190 192	's
 A60	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T60 POS
-T61	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 196 200	blue
+T61	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 193 197	blue
 A61	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T61 JJ
-T62	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 201 205	eyes
+T62	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 198 202	eyes
 A62	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T62 NNS
-T63	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 206 207	,
+T63	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 203 204	,
 A63	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T63 ,
-T64	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 208 212	John
+T64	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 205 209	John
 A64	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T64 NNP
-T65	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 213 224	immediately
+T65	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 210 221	immediately
 A65	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T65 RB
-T66	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 225 229	fell
+T66	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 222 226	fell
 A66	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T66 VBD
-T67	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 230 232	in
+T67	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 227 229	in
 A67	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T67 IN
-T68	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 233 237	love
+T68	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 230 234	love
 A68	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T68 NN
-T69	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 238 239	.
+T69	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS 235 236	.
 A69	de-tudarmstadt-ukp-dkpro-core-api-lexmorph-type-pos-POS_PosValue T69 .
 T70	de-tudarmstadt-ukp-dkpro-core-api-ner-type-NamedEntity 0 4	John
 A70	de-tudarmstadt-ukp-dkpro-core-api-ner-type-NamedEntity_value T70 PERSON
-T71	de-tudarmstadt-ukp-dkpro-core-api-ner-type-NamedEntity 67 71	Mary
+T71	de-tudarmstadt-ukp-dkpro-core-api-ner-type-NamedEntity 66 70	Mary
 A71	de-tudarmstadt-ukp-dkpro-core-api-ner-type-NamedEntity_value T71 PERSON
-T72	de-tudarmstadt-ukp-dkpro-core-api-ner-type-NamedEntity 188 192	Mary
+T72	de-tudarmstadt-ukp-dkpro-core-api-ner-type-NamedEntity 185 189	Mary
 A72	de-tudarmstadt-ukp-dkpro-core-api-ner-type-NamedEntity_value T72 PERSON
-T73	de-tudarmstadt-ukp-dkpro-core-api-ner-type-NamedEntity 208 212	John
+T73	de-tudarmstadt-ukp-dkpro-core-api-ner-type-NamedEntity 205 209	John
 A73	de-tudarmstadt-ukp-dkpro-core-api-ner-type-NamedEntity_value T73 PERSON
 T74	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 0 4	John
 T75	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 5 9	went
@@ -134,150 +134,150 @@ T76	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 10 12	to
 T77	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 13 16	the
 T78	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 17 23	market
 T79	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 24 25	.
-T80	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 27 29	He
-T81	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 30 33	was
-T82	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 34 41	looking
-T83	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 42 45	for
-T84	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 46 47	a
-T85	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 48 55	present
-T86	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 56 58	to
-T87	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 59 63	give
-T88	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 64 66	to
-T89	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 67 71	Mary
-T90	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 72 73	.
-T91	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 75 77	He
-T92	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 78 81	had
-T93	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 82 85	met
-T94	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 86 89	her
-T95	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 90 94	last
-T96	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 95 99	year
-T97	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 100 102	at
-T98	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 103 106	the
-T99	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 107 110	fun
-T100	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 111 115	fair
-T101	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 116 117	.
-T102	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 119 123	They
-T103	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 124 127	had
-T104	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 128 129	a
-T105	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 130 134	ride
-T106	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 135 137	on
-T107	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 138 141	the
-T108	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 142 148	ferris
-T109	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 149 154	wheel
-T110	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 155 163	together
-T111	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 164 167	and
-T112	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 168 172	when
-T113	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 173 175	he
-T114	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 176 182	looked
-T115	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 183 187	into
-T116	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 188 192	Mary
-T117	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 193 195	's
-T118	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 196 200	blue
-T119	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 201 205	eyes
-T120	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 206 207	,
-T121	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 208 212	John
-T122	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 213 224	immediately
-T123	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 225 229	fell
-T124	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 230 232	in
-T125	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 233 237	love
-T126	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 238 239	.
+T80	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 26 28	He
+T81	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 29 32	was
+T82	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 33 40	looking
+T83	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 41 44	for
+T84	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 45 46	a
+T85	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 47 54	present
+T86	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 55 57	to
+T87	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 58 62	give
+T88	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 63 65	to
+T89	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 66 70	Mary
+T90	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 71 72	.
+T91	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 73 75	He
+T92	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 76 79	had
+T93	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 80 83	met
+T94	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 84 87	her
+T95	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 88 92	last
+T96	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 93 97	year
+T97	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 98 100	at
+T98	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 101 104	the
+T99	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 105 108	fun
+T100	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 109 113	fair
+T101	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 114 115	.
+T102	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 116 120	They
+T103	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 121 124	had
+T104	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 125 126	a
+T105	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 127 131	ride
+T106	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 132 134	on
+T107	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 135 138	the
+T108	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 139 145	ferris
+T109	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 146 151	wheel
+T110	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 152 160	together
+T111	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 161 164	and
+T112	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 165 169	when
+T113	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 170 172	he
+T114	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 173 179	looked
+T115	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 180 184	into
+T116	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 185 189	Mary
+T117	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 190 192	's
+T118	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 193 197	blue
+T119	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 198 202	eyes
+T120	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 203 204	,
+T121	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 205 209	John
+T122	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 210 221	immediately
+T123	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 222 226	fell
+T124	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 227 229	in
+T125	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 230 234	love
+T126	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 235 236	.
 T127	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 0 4	John
 A131	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T127 A0
 T128	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 17 23	market
 A132	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T128 A1
-T129	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 27 29	He
+T129	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 26 28	He
 A133	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T129 A0
-T130	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 48 55	present
+T130	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 47 54	present
 A134	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T130 A1
-T131	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 75 77	He
+T131	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 73 75	He
 A135	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T131 A0
-T132	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 95 99	year
+T132	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 93 97	year
 A136	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T132 AM-TMP
-T133	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 111 115	fair
+T133	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 109 113	fair
 A137	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T133 A1
-T134	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 119 123	They
+T134	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 116 120	They
 A138	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T134 A0
-T135	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 124 127	had
+T135	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 121 124	had
 A142	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T135 V*
-T136	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 124 127	had
+T136	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 121 124	had
 A147	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T136 V*
-T137	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 130 134	ride
+T137	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 127 131	ride
 A139	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T137 A1
-T138	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 168 172	when
+T138	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 165 169	when
 A143	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T138 R-AM-TMP
-T139	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 173 175	he
+T139	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 170 172	he
 A144	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T139 A0
-T140	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 176 182	looked
+T140	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 173 179	looked
 A140	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T140 V*
-T141	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 176 182	looked
+T141	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 173 179	looked
 A148	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T141 AM-TMP
-T142	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 201 205	eyes
+T142	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 198 202	eyes
 A145	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T142 A1
-T143	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 208 212	John
+T143	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 205 209	John
 A149	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T143 A1
-T144	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 213 224	immediately
+T144	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 210 221	immediately
 A150	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T144 AM-TMP
-T145	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 225 229	fell
+T145	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 222 226	fell
 A141	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T145 V*
-T146	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 225 229	fell
+T146	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg 222 226	fell
 A146	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemArg_role T146 V*
 T147	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred 5 9	went
-T148	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred 34 41	looking
-T149	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred 82 85	met
-T150	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred 124 127	had
-T151	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred 176 182	looked
-T152	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred 225 229	fell
+T148	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred 33 40	looking
+T149	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred 80 83	met
+T150	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred 121 124	had
+T151	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred 173 179	looked
+T152	de-tudarmstadt-ukp-dkpro-core-api-semantics-type-SemPred 222 226	fell
 T153	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 0 25	John went to the market .
 T154	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 0 4	John
 T155	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 5 23	went to the market
 T156	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 10 23	to the market
 T157	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 13 23	the market
-T158	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 27 73	He was looking for a present to give to Mary .
-T159	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 27 29	He
-T160	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 30 71	was looking for a present to give to Mary
-T161	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 34 71	looking for a present to give to Mary
-T162	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 42 71	for a present to give to Mary
-T163	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 46 71	a present to give to Mary
-T164	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 46 55	a present
-T165	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 56 63	to give
-T166	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 56 63	to give
-T167	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 56 63	to give
-T168	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 59 63	give
-T169	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 64 71	to Mary
-T170	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 67 71	Mary
-T171	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 75 117	He had met her last year at the fun fair .
-T172	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 75 77	He
-T173	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 78 115	had met her last year at the fun fair
-T174	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 82 115	met her last year at the fun fair
-T175	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 86 99	her last year
-T176	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 100 115	at the fun fair
-T177	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 103 115	the fun fair
-T178	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 119 239	They had a ride on the ferris wheel together and when he looked into Mary 's blue eyes , John immediately fell in love .
-T179	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 119 163	They had a ride on the ferris wheel together
-T180	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 119 123	They
-T181	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 124 163	had a ride on the ferris wheel together
-T182	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 128 134	a ride
-T183	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 135 154	on the ferris wheel
-T184	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 138 154	the ferris wheel
-T185	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 155 163	together
-T186	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 168 237	when he looked into Mary 's blue eyes , John immediately fell in love
-T187	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 168 205	when he looked into Mary 's blue eyes
-T188	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 168 172	when
-T189	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 173 205	he looked into Mary 's blue eyes
-T190	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 173 175	he
-T191	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 176 205	looked into Mary 's blue eyes
-T192	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 183 205	into Mary 's blue eyes
-T193	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 188 205	Mary 's blue eyes
-T194	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 188 195	Mary 's
-T195	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 208 212	John
-T196	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 213 224	immediately
-T197	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 225 237	fell in love
-T198	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 230 237	in love
-T199	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 233 237	love
+T158	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 26 72	He was looking for a present to give to Mary .
+T159	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 26 28	He
+T160	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 29 70	was looking for a present to give to Mary
+T161	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 33 70	looking for a present to give to Mary
+T162	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 41 70	for a present to give to Mary
+T163	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 45 70	a present to give to Mary
+T164	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 45 54	a present
+T165	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 55 62	to give
+T166	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 55 62	to give
+T167	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 55 62	to give
+T168	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 58 62	give
+T169	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 63 70	to Mary
+T170	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 66 70	Mary
+T171	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 73 115	He had met her last year at the fun fair .
+T172	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 73 75	He
+T173	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 76 113	had met her last year at the fun fair
+T174	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 80 113	met her last year at the fun fair
+T175	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 84 97	her last year
+T176	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 98 113	at the fun fair
+T177	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 101 113	the fun fair
+T178	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 116 236	They had a ride on the ferris wheel together and when he looked into Mary 's blue eyes , John immediately fell in love .
+T179	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 116 160	They had a ride on the ferris wheel together
+T180	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 116 120	They
+T181	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 121 160	had a ride on the ferris wheel together
+T182	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 125 131	a ride
+T183	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 132 151	on the ferris wheel
+T184	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 135 151	the ferris wheel
+T185	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 152 160	together
+T186	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 165 234	when he looked into Mary 's blue eyes , John immediately fell in love
+T187	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 165 202	when he looked into Mary 's blue eyes
+T188	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 165 169	when
+T189	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 170 202	he looked into Mary 's blue eyes
+T190	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 170 172	he
+T191	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 173 202	looked into Mary 's blue eyes
+T192	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 180 202	into Mary 's blue eyes
+T193	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 185 202	Mary 's blue eyes
+T194	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 185 192	Mary 's
+T195	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 205 209	John
+T196	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 210 221	immediately
+T197	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 222 234	fell in love
+T198	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 227 234	in love
+T199	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent 230 234	love
 T200	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-ROOT 0 25	John went to the market .
-T201	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-ROOT 27 73	He was looking for a present to give to Mary .
-T202	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-ROOT 75 117	He had met her last year at the fun fair .
-T203	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-ROOT 119 239	They had a ride on the ferris wheel together and when he looked into Mary 's blue eyes , John immediately fell in love .
+T201	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-ROOT 26 72	He was looking for a present to give to Mary .
+T202	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-ROOT 73 115	He had met her last year at the fun fair .
+T203	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-ROOT 116 236	They had a ride on the ferris wheel together and when he looked into Mary 's blue eyes , John immediately fell in love .
 E1	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink:T1 next:E3
 A1	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink_referenceType E1 1
 E2	de-tudarmstadt-ukp-dkpro-core-api-coref-type-CoreferenceLink:T2
@@ -322,7 +322,7 @@ E25	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T82 parent:E84 pos
 E26	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T83 parent:E85 pos:T26
 E27	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T84 parent:E87 pos:T27
 E28	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T85 parent:E87 pos:T28
-E29	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T86 parent:E88 pos:T29
+E29	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T86 parent:E90 pos:T29
 E30	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T87 parent:E91 pos:T30
 E31	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T88 parent:E92 pos:T31
 E32	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T89 parent:E93 pos:T32
@@ -395,17 +395,17 @@ E84	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T161 p
 A88	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E84 VP
 E85	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T162 parent:E84 children:E26 children1:E86
 A89	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E85 PP
-E86	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T163 parent:E85 children:E87 children1:E89 children2:E92
+E86	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T163 parent:E85 children:E87 children1:E88 children2:E92
 A90	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E86 NP
 E87	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T164 parent:E86 children:E27 children1:E28
 A91	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E87 NP
-E88	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T165 parent:E90 children:E29 children1:E91
-A92	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E88 VP
-E89	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T166 parent:E86 children:E90
-A93	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E89 SBAR
-E90	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T167 parent:E89 children:E88
-A94	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E90 S
-E91	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T168 parent:E88 children:E30
+E88	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T165 parent:E86 children:E89
+A92	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E88 SBAR
+E89	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T166 parent:E88 children:E90
+A93	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E89 S
+E90	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T167 parent:E89 children:E29 children1:E91
+A94	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E90 VP
+E91	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T168 parent:E90 children:E30
 A95	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E91 VP
 E92	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent:T169 parent:E86 children:E31 children1:E93
 A96	de-tudarmstadt-ukp-dkpro-core-api-syntax-type-constituent-Constituent_constituentType E92 PP

@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2015
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,10 +14,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.testing;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.*;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.asCopyableString;
 import static org.junit.Assert.assertFalse;
 
 import java.util.Arrays;
@@ -33,7 +33,7 @@ public class AssertAnnotationsTest
         List<String> expected = Arrays.asList(new String[] { "" });
         List<String> actual = Arrays.asList(new String[] { null });
         assertFalse(expected.equals(actual));
-        assertFalse(asCopyableString(expected, true).equals(asCopyableString(actual, true)));        
+        assertFalse(asCopyableString(expected, true).equals(asCopyableString(actual, true)));
     }
 
     @Test
@@ -42,6 +42,6 @@ public class AssertAnnotationsTest
         List<String> expected = Arrays.asList(new String[] { "" });
         List<String> actual = Arrays.asList(new String[] { null });
         assertFalse(expected.equals(actual));
-        assertFalse(asCopyableString(expected, false).equals(asCopyableString(actual, false)));        
+        assertFalse(asCopyableString(expected, false).equals(asCopyableString(actual, false)));
     }
 }

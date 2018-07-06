@@ -6,134 +6,134 @@ __META_SOURCE_URL__=http://www.lsi.upc.edu/~nlp/SVMTool/parole.html
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # AO	Adjective, Ordinal
-AO=ADJ
+AO=POS_ADJ
 # AQ	Adjective, Qualificator
-AQ=ADJ
+AQ=POS_ADJ
 # CC	Conjunction, Coordinate
-CC=CONJ
+CC=POS_CONJ
 # CS	Conjunction, Subordinative
-CS=CONJ
+CS=POS_CONJ
 # DA	Determiner, Article
-DA=ART
+DA=POS_DET
 # DD	Determiner, Demonstrative
-DD=ART
+DD=POS_DET
 # DE	Determiner, Exclamatory
-DE=ART
+DE=POS_DET
 # DI	Determiner, Indefinite
-DI=ART
+DI=POS_DET
 # DN	Determiner, Numeral
-DN=ART
+DN=POS_DET
 # DP	Determiner, Possessive
-DP=ART
+DP=POS_DET
 # DT	Determiner, Interrogative
-DT=ART
+DT=POS_DET
 # Faa	Punctuation, ¡
-Faa=PUNC
+Faa=POS_PUNCT
 # Fat	Punctuation, !
-Fat=PUNC
+Fat=POS_PUNCT
 # Fc	Punctuation, , 
-Fc=PUNC
+Fc=POS_PUNCT
 # Fd	Punctuation, :
-Fd=PUNC
+Fd=POS_PUNCT
 # Fe	Punctuation, "
-Fe=PUNC
+Fe=POS_PUNCT
 # Fg	Punctuation, -
-Fg=PUNC
+Fg=POS_PUNCT
 # Fh	Punctuation, /
-Fh=PUNC
+Fh=POS_PUNCT
 # Fia	Punctuation, ¿
-Fia=PUNC
+Fia=POS_PUNCT
 # Fit	Punctuation, ?
-Fit=PUNC
+Fit=POS_PUNCT
 # Fp	Punctuation, .
-Fp=PUNC
+Fp=POS_PUNCT
 # Fpa	Punctuation, (
-Fpa=PUNC
+Fpa=POS_PUNCT
 # Fpt	Punctuation, )
-Fpt=PUNC
+Fpt=POS_PUNCT
 # Fs	Punctuation, ...
-Fs=PUNC
+Fs=POS_PUNCT
 # Fx	Punctuation, ;
-Fx=PUNC
+Fx=POS_PUNCT
 # Fz	Punctuation, other than those
-Fz=PUNC
+Fz=POS_PUNCT
 # I	Interjection
-I=O
+I=POS_X
 # NC	Noun, Common
-NC=NN
+NC=POS_NOUN
 # NP	Noun, Proper
-NP=NP
+NP=POS_PROPN
 # P0	Pronoun, Clitic
-P0=PR
+P0=POS_PRON
 # PD	Pronoun, Demonstrative#
-PD=PR
+PD=POS_PRON
 # PE	Pronoun, Exclamatory
-PE=PR
+PE=POS_PRON
 # PI	Pronoun, Indefinite
-PI=PR
+PI=POS_PRON
 # PN	Pronoun, Numeral
-PN=PR
+PN=POS_PRON
 # PP	Pronoun, Personal
-PP=PR
+PP=POS_PRON
 # PR	Pronoun, Relative
-PR=PR
+PR=POS_PRON
 # PT	Pronoun, Interrogative
-PT=PR
+PT=POS_PRON
 # PX	Pronoun, Possessive
-PX=PR
+PX=POS_PRON
 # RG	Adverb, General
-RG=ADV
+RG=POS_ADV
 # RN	Adverb, Negative
-RN=ADV
+RN=POS_ADV
 # SP	Adposition, Preposition
-SP=PP
+SP=POS_ADP
 # VAG	Verb, Auxiliar, Gerund
-VAG=V
+VAG=POS_VERB
 # VAI	Verb, Auxiliar, Indicative
-VAI=V
+VAI=POS_VERB
 # VAM	Verb, Auxiliar, Imperative
-VAM=V
+VAM=POS_VERB
 # VAN	Verb, Auxiliar, Infinitive
-VAN=V
+VAN=POS_VERB
 # VAP	Verb, Auxiliar, Participle
-VAP=V
+VAP=POS_VERB
 # VAS	Verb, Auxiliar, Subjunctive
-VAS=V
+VAS=POS_VERB
 # VMG	Verb, Main, Gerund
-VMG=V
+VMG=POS_VERB
 # VMI	Verb, Main, Indicative
-VMI=V
+VMI=POS_VERB
 # VMM	Verb, Main, Imperative
-VMM=V
+VMM=POS_VERB
 # VMN	Verb, Main, Infinitive
-VMN=V
+VMN=POS_VERB
 # VMP	Verb, Main, Participle
-VMP=V
+VMP=POS_VERB
 # VMS	Verb, Main, Subjunctive
-VMS=V
+VMS=POS_VERB
 # VSG	Verb, Semi-Auxiliar, Gerund
-VSG=V
+VSG=POS_VERB
 # VSI	Verb, Semi-Auxiliar, Indicative
-VSI=V
+VSI=POS_VERB
 # VSM	Verb, Semi-Auxiliar, Imperative
-VSM=V
+VSM=POS_VERB
 # VSN	Verb, Semi-Auxiliar, Infinitive
-VSN=V
+VSN=POS_VERB
 # VSP	Verb, Semi-Auxiliar, Participle
-VSP=V
+VSP=POS_VERB
 # VSS	Verb, Semi-Auxiliar, Subjunctive
-VSS=V
+VSS=POS_VERB
 # W	Date Times
-W=O
+W=POS_X
 # X	Unknown
-X=O
+X=POS_X
 # Y	Abbreviation
-Y=O
+Y=POS_X
 # Z	Figures
-Z=CARD
+Z=POS_NUM
 # Zm	Currency
-Zm=CARD
+Zm=POS_NUM
 # Zp	Percentage
-Zp=CARD
+Zp=POS_NUM
 
 *=POS

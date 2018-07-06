@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2014
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.lingpipe;
 
@@ -39,20 +39,21 @@ public class LingPipePosTaggerTest
     {
         runTest("en", null, "This is a test .",
                 new String[] { "DT", "BEZ", "AT", "NN", "." },
-                new String[] { "ART", "V", "ART", "NN", "PUNC" });
+                new String[] { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", null, "A neural net .", 
                 new String[] { "AT", "JJ", "NN", "." }, 
-                new String[] { "ART", "ADJ", "NN", "PUNC" });
+                new String[] { "POS_DET", "POS_ADJ", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", null, "John is purchasing oranges .",
                 new String[] { "NP", "BEZ", "VBG", "NNS", "." },
-                new String[] { "NP", "V", "V", "NN", "PUNC" });
+                new String[] { "POS_PROPN", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_PUNCT" });
         
         // This is WRONG tagging. "jumps" is tagged as "NNS"
         JCas jcas = runTest("en", "general-brown", "The quick brown fox jumps over the lazy dog . \n",
                 new String[] { "AT", "JJ", "JJ", "NN", "NNS", "IN", "AT", "JJ", "NN", "." },
-                new String[] { "ART", "ADJ", "ADJ", "NN", "NN", "PP", "ART", "ADJ", "NN", "PUNC" });
+                new String[] { "POS_DET", "POS_ADJ", "POS_ADJ", "POS_NOUN", "POS_NOUN", "POS_ADP", "POS_DET", "POS_ADJ", "POS_NOUN",
+                        "POS_PUNCT" });
 
         String[] brownTags = { "'", "''", "(", ")", "*", ",", "--", ".", ":", "ABL", "ABN", "ABX",
                 "AP", "AP$", "AT", "BE", "BED", "BEDZ", "BEG", "BEM", "BEN", "BER", "BEZ", "CC",
@@ -70,8 +71,9 @@ public class LingPipePosTaggerTest
 
         
         jcas = runTest("en", "bio-genia", "The quick brown fox jumps over the lazy dog . \n",
-                new String[] { "DT", "RB", "VBN", "NN", "NNS", "IN", "DT", "NN", "NN", "." },                
-                new String[] { "ART", "ADV", "V", "NN", "NN", "PP", "ART", "NN", "NN", "PUNC" });
+                new String[] { "DT", "RB", "VBN", "NN", "NNS", "IN", "DT", "NN", "NN", "." },
+                new String[] { "POS_DET", "POS_ADV", "POS_VERB", "POS_NOUN", "POS_NOUN", "POS_ADP",
+                        "POS_DET", "POS_NOUN", "POS_NOUN", "POS_PUNCT" });
 
         String[] ptbTags = { "", "''", "(", ")", ",", "-", ".", ":", "CC", "CD", "CT", "DT", "EX",
                 "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "N", "NN", "NNP", "NNPS", "NNS", "PDT",
@@ -85,8 +87,9 @@ public class LingPipePosTaggerTest
 
         
         jcas = runTest("en", "bio-medpost", "The quick brown fox jumps over the lazy dog . \n",
-                new String[] { "DD", "NN", "JJ", "NN", "NNS", "II", "DD", "NN", "NN", "." },                
-                new String[] { "ART", "NN", "ADJ", "NN", "NN", "PP", "ART", "NN", "NN", "PUNC" });
+                new String[] { "DD", "NN", "JJ", "NN", "NNS", "II", "DD", "NN", "NN", "." },
+                new String[] { "POS_DET", "POS_NOUN", "POS_ADJ", "POS_NOUN", "POS_NOUN", "POS_ADP",
+                        "POS_DET", "POS_NOUN", "POS_NOUN", "POS_PUNCT" });
         
         String[] medpostTags = { "''", "(", ")", ",", ".", ":", "CC", "CC+", "CS", "CS+", "CSN",
                 "CST", "DB", "DD", "EX", "GE", "II", "II+", "JJ", "JJ+", "JJR", "JJT", "MC", "NN",

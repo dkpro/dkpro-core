@@ -1,2 +1,2 @@
-STOP STOP STOP 1st sentence .
+This STOP STOP 1st sentence .
 Here STOP another sentence .

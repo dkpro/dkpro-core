@@ -3,8 +3,9 @@
 # Portuguese TreeTagger Part-of-Speech Tags
 #
 # Source: extracted from model using TT4J
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS
+*=POS
 # ADJ
 # ADV
 # ADV+P

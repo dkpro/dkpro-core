@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2011
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universit√§t Darmstadt
@@ -14,11 +14,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.negra;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
-import static org.apache.commons.lang.StringUtils.startsWith;
+import static org.apache.commons.lang3.StringUtils.startsWith;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.io.BufferedReader;
@@ -34,13 +34,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.component.JCasCollectionReader_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.jcas.JCas;
@@ -51,12 +53,14 @@ import org.apache.uima.util.Level;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -65,18 +69,30 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeNode;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.Parameters;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * This CollectionReader reads a file which is formatted in the NEGRA export format. The texts and
  * add. information like constituent structure is reproduced in CASes, one CAS per text (article) .
- *
  */
-@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent" })
+@Component(value = OperationType.READER)
+@ResourceMetaData(name = "NEGRA Export Format Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@Parameters(
+        exclude = { 
+                NegraExportReader.PARAM_SOURCE_LOCATION  })
+@MimeTypeCapability({MimeTypes.APPLICATION_X_NEGRA3, MimeTypes.APPLICATION_X_NEGRA4})
+@TypeCapability(
+        outputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent" })
 public class NegraExportReader
     extends JCasCollectionReader_ImplBase
 {
@@ -102,9 +118,10 @@ public class NegraExportReader
     /**
      * Character encoding of the input data.
      */
-    public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
-    private String encoding;
+    public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    private String sourceEncoding;
 
     /**
      * Write part-of-speech information.
@@ -138,7 +155,8 @@ public class NegraExportReader
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String mappingPosLocation;
 
@@ -189,9 +207,9 @@ public class NegraExportReader
     private int TOKEN_COMMENT = 6;
 
     // Fields for a constituent in a sentence
-    private static final int CONSTITUENT_ID = 0;
-    private static final int CONSTITUENT_TYPE = 1;
-    private static final int CONSTITUENT_FUNCTION = 3;
+    private int CONSTITUENT_ID = 0;
+    private int CONSTITUENT_TYPE = 1;
+    private int CONSTITUENT_FUNCTION = 3;
 
     // #FORMAT fields
     private static final int FORMAT_FIELD_NUM = 1;
@@ -236,10 +254,10 @@ public class NegraExportReader
             // Detect if the file is compressed
             InputStream fileStream = new FileInputStream(inputFile);
 
-            InputStream resolvedStream = ResourceUtils.resolveCompressedInputStream(fileStream,
-                    inputFile.getName());
+            InputStream resolvedStream = CompressionUtils.getInputStream(inputFile.getName(),
+                    fileStream);
 
-            br = new BufferedReader(new InputStreamReader(resolvedStream, encoding));
+            br = new BufferedReader(new InputStreamReader(resolvedStream, sourceEncoding));
 
             readHeaders();
 
@@ -459,7 +477,7 @@ public class NegraExportReader
     private void readFormat(String[] aLine)
         throws IOException
     {
-        format = Integer.valueOf(aLine[FORMAT_FIELD_NUM]);
+        format = Integer.parseInt(aLine[FORMAT_FIELD_NUM]);
         switch (format) {
         case 3:
             TOKEN_TEXT = 0;
@@ -470,6 +488,9 @@ public class NegraExportReader
             TOKEN_PARENT_ID = 4;
             TOKEN_SECEDGE = 5;
             TOKEN_COMMENT = 6;
+            CONSTITUENT_ID = 0;
+            CONSTITUENT_TYPE = 1;
+            CONSTITUENT_FUNCTION = 3;
             getLogger().log(Level.INFO, "Corpus format 3 detected - no lemmas");
             break;
         case 4:
@@ -481,6 +502,9 @@ public class NegraExportReader
             TOKEN_PARENT_ID = 5;
             TOKEN_SECEDGE = 6;
             TOKEN_COMMENT = 7;
+            CONSTITUENT_ID = 0;
+            CONSTITUENT_TYPE = 2;
+            CONSTITUENT_FUNCTION = 4;
             getLogger().log(Level.INFO, "Corpus format 4 detected");
             break;
         default:
@@ -536,17 +560,20 @@ public class NegraExportReader
         constituents.put("0", root);
 
         // Initialize dependency relations
-        Map<Constituent, List<Annotation>> relations = new LinkedHashMap<Constituent, List<Annotation>>();
+        Map<Constituent, List<Annotation>> relations = new LinkedHashMap<>();
 
         // handle tokens
         String line;
         int id = 1;
+        int sentBegin = aBuilder.getPosition();
+        int sentEnd = -1;
         for (line = br.readLine(); startsNotWith(line, "#"); line = br.readLine()) {
             String[] parts = splitLine(line, "\t+");
             // create token
             Token token = aBuilder.add(parts[TOKEN_TEXT], Token.class);
+            sentEnd = token.getEnd();
             aBuilder.add(" ");
-            aIdMap.put(aSentenceId+":"+id, token);
+            aIdMap.put(aSentenceId + ":" + id, token);
 
             // get/create parent
             Constituent parent = constituents.get(parts[TOKEN_PARENT_ID]);
@@ -570,11 +597,13 @@ public class NegraExportReader
                 Type posTag = posMappingProvider.getTagType(parts[TOKEN_POS_TAG]);
                 POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                         token.getEnd());
-                pos.setPosValue(parts[TOKEN_POS_TAG]);
+                pos.setPosValue(
+                        parts[TOKEN_POS_TAG] != null ? parts[TOKEN_POS_TAG].intern() : null);
+                POSUtils.assignCoarseValue(pos);
                 pos.addToIndexes();
                 token.setPos(pos);
             }
-
+            
             // create lemma
             if (lemmaEnabled && (TOKEN_LEMMA >= 0)) {
                 Lemma lemma = new Lemma(aJCas, token.getBegin(), token.getEnd());
@@ -588,6 +617,9 @@ public class NegraExportReader
         // handle constituent relations
         Constituent constituent;
         for (; startsNotWith(line, END_OF_SENTENCE); line = br.readLine()) {
+            // Ignore trailing coreferential information in Tüba D/Z
+            line = StringUtils.substringBefore(line, "%%").trim();
+            
             // substring(1) to get rid of leading #
             String[] parts = splitLine(line.substring(1), "\t+");
             // get/create constituent, set type, function
@@ -620,6 +652,10 @@ public class NegraExportReader
         // set all children at the end of the sentence
         setChildren(aJCas, relations);
 
+        // Sanity check
+        assert root.getBegin() == sentBegin;
+        assert root.getEnd() == sentEnd;
+        
         // set sentence annotation
         Sentence sentence = new Sentence(aJCas, root.getBegin(), root.getEnd());
         sentence.addToIndexes(aJCas);
@@ -627,7 +663,7 @@ public class NegraExportReader
         // add constituents at the end of the sentence
         for (Entry<String, Constituent> e : constituents.entrySet()) {
             e.getValue().addToIndexes(aJCas);
-            aIdMap.put(aSentenceId+":"+e.getKey(), e.getValue());
+            aIdMap.put(aSentenceId + ":" + e.getKey(), e.getValue());
         }
     }
 

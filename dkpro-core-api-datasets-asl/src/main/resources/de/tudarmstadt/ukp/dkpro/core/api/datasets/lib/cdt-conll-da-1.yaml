@@ -1,0 +1,47 @@
+groupId: org.dkpro.core.datasets.cdt
+datasetId: cdt-conll
+version: 1
+language: da
+mediaType: text/x.org.dkpro.conll-2006
+encoding: UTF-8
+
+name: Copenhagen Dependency Treebank
+url: http://mbkromann.github.io/copenhagen-dependency-treebank
+attribution: |
+  Matthias Trautner Kromann, 2003. The Danish Dependency Treebank and the DTAG treebank tool. In
+  Proceedings of the Second Workshop on Treebanks and Linguistic Theories (TLT 2003), 14-15
+  November, Växjö. pp. 217-220.
+  (link:http://www.buch-kromann.dk/matthias/files/030730-tlt-norfa.pdf[PDF])
+description: |
+  Version 1 (the directory "da") was orginally called the Danish
+  Dependency Treebank. It was used in the CoNLL 2006 shared task on
+  dependency parsing, but has since been updated with bug fixes and an
+  improved CoNLL conversion which includes a decomposition of the
+  PAROLE part-of-speech tags into the underlying features for number,
+  gender, etc.).
+   
+  (This description has been sourced from the corpus README file).
+
+licenses:
+  - name: GPLv2
+    url: https://www.gnu.org/licenses/gpl-2.0.html
+
+artifacts:
+  LICENSE.txt:
+    url: https://www.gnu.org/licenses/gpl-2.0.txt
+    sha1: 4cc77b90af91e615a64ae04893fdffa7939db84c
+  data.zip:
+    url: https://github.com/mbkromann/copenhagen-dependency-treebank/archive/2fa64f811364db42407fb4bcdd2189d4ee33bda1.zip
+    sha1: 11313d405abb0f268247a2d5420afa413eb244e7
+    shared: true
+    actions:
+      - action: explode
+        configuration:
+          strip: 1
+          includes: [ "releases/cdt1+2/da/*.conll", "releases/cdt1+2/da/README" ]
+          
+roles:
+  licenses:
+    - LICENSE.txt
+  data:
+    - "data/releases/cdt1+2/da/*.conll"

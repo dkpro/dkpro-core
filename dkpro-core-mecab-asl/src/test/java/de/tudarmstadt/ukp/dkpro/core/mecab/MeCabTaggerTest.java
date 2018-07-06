@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.mecab;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
@@ -26,6 +26,7 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Locale;
 
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -34,12 +35,21 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
+import org.junit.Assume;
+import org.junit.Before;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 
 public class MeCabTaggerTest {
+    @Before
+    public void prepare()
+    {
+        Assume.assumeFalse("No Mecab binaries for Windows: Issue #1122",
+                System.getProperty("os.name").toLowerCase(Locale.US).contains("win"));
+    }
+    
     @Test
     public void testMeCabTaggerEngine() throws UIMAException, IOException {
         CollectionReaderDescription reader = createReaderDescription(

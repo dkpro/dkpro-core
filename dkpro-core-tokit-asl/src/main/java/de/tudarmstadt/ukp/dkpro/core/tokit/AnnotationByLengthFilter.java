@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 
 package de.tudarmstadt.ukp.dkpro.core.tokit;
 
@@ -27,56 +27,62 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Removes annotations that do not conform to minimum or maximum length constraints.
  *
  * (This was previously called TokenFilter).
- *
  */
+@Component(OperationType.NORMALIZER)
+@ResourceMetaData(name = "Annotation-By-Length Filter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class AnnotationByLengthFilter
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
-
     /**
      * A set of annotation types that should be filtered.
      */
     public static final String PARAM_FILTER_ANNOTATION_TYPES = "FilterTypes";
-    @ConfigurationParameter(name=PARAM_FILTER_ANNOTATION_TYPES, mandatory=true, defaultValue={})
+    @ConfigurationParameter(name = PARAM_FILTER_ANNOTATION_TYPES, mandatory = true, 
+            defaultValue = {})
     private Set<String> filterTypes;
 
-	/**
-	 * Any annotation in filterTypes shorter than this value will be removed.
-	 */
-	public static final String PARAM_MIN_LENGTH = "MinLengthFilter";
-	@ConfigurationParameter(name=PARAM_MIN_LENGTH, mandatory=true, defaultValue="0")
-	private int minTokenLength;
+    /**
+     * Any annotation in filterTypes shorter than this value will be removed.
+     */
+    public static final String PARAM_MIN_LENGTH = "MinLengthFilter";
+    @ConfigurationParameter(name = PARAM_MIN_LENGTH, mandatory = true, defaultValue = "0")
+    private int minTokenLength;
 
-	/**
+    /**
      * Any annotation in filterAnnotations shorter than this value will be removed.
      */
-	public static final String PARAM_MAX_LENGTH = "MaxLengthFilter";
-	@ConfigurationParameter(name=PARAM_MAX_LENGTH, mandatory=true, defaultValue="1000")
-	private int maxTokenLength;
+    public static final String PARAM_MAX_LENGTH = "MaxLengthFilter";
+    @ConfigurationParameter(name = PARAM_MAX_LENGTH, mandatory = true, defaultValue = "1000")
+    private int maxTokenLength;
 
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
+    @Override
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
+    {
 
-	    for (String filterType : filterTypes) {
-	        try {
+        for (String filterType : filterTypes) {
+            try {
                 Collection<Annotation> toRemove = new ArrayList<Annotation>();
-                for (Entry<AnnotationFS, String> entry : FeaturePathFactory.select(aJCas.getCas(), filterType)) {
-                        int length = entry.getKey().getCoveredText().length();
-                        if (length < minTokenLength || length > maxTokenLength) {
-                            toRemove.add((Annotation)entry.getKey());
-                        }
+                for (Entry<AnnotationFS, String> entry : FeaturePathFactory.select(aJCas.getCas(),
+                        filterType)) {
+                    int length = entry.getKey().getCoveredText().length();
+                    if (length < minTokenLength || length > maxTokenLength) {
+                        toRemove.add((Annotation) entry.getKey());
+                    }
                 }
                 for (Annotation anno : toRemove) {
                     anno.removeFromIndexes();
@@ -85,6 +91,6 @@ public class AnnotationByLengthFilter
             catch (FeaturePathException e) {
                 throw new AnalysisEngineProcessException(e);
             }
-	    }
-	}
+        }
+    }
 }

@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  * 
@@ -14,16 +14,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
 import java.util.Properties;
 
 /**
  * Interface for objects that provide meta data that can be imported by a ResourceObjectProvider.
- * 
  */
 public interface HasResourceMetadata
 {
-	Properties getResourceMetaData();
+    Properties getResourceMetaData();
 }

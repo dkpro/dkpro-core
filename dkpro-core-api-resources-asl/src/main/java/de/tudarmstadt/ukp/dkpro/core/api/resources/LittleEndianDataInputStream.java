@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2014
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  * 
@@ -28,7 +28,7 @@
  *
  * Contributors:
  *     Peter Franza               - initial implementation
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
 import java.io.DataInput;
@@ -46,7 +46,8 @@ public class LittleEndianDataInputStream
     // to get at the low-level read methods of InputStream
     private InputStream in;
 
-    private byte w[]; // work array for buffering input
+ // work array for buffering input
+    private byte[] w; 
 
     public LittleEndianDataInputStream(final InputStream aIn)
     {
@@ -131,21 +132,21 @@ public class LittleEndianDataInputStream
     }
 
     @Override
-    public final int read(final byte b[], final int off, final int len)
+    public final int read(final byte[] b, final int off, final int len)
         throws IOException
     {
         return in.read(b, off, len);
     }
 
     @Override
-    public final void readFully(final byte b[])
+    public final void readFully(final byte[] b)
         throws IOException
     {
         d.readFully(b, 0, b.length);
     }
 
     @Override
-    public final void readFully(final byte b[], final int off, final int len)
+    public final void readFully(final byte[] b, final int off, final int len)
         throws IOException
     {
         d.readFully(b, off, len);

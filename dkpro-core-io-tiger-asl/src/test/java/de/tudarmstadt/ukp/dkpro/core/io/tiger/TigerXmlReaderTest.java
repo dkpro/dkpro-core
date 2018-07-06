@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2013
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,14 +14,18 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.tiger;
 
+import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.*;
-import static org.apache.uima.fit.pipeline.SimplePipeline.*;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.apache.uima.fit.pipeline.SimplePipeline.iteratePipeline;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
-import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.*;
+import static org.junit.Assert.assertEquals;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
@@ -30,7 +34,10 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2012Writer;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
@@ -45,7 +52,7 @@ public class TigerXmlReaderTest
         CollectionReader reader = createReader(TigerXmlReader.class,
                 TigerXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
                 TigerXmlReader.PARAM_PATTERNS, "[+]tiger-sample.xml",
-                TigerXmlReader.PARAM_LANGUAGE, "de", 
+                TigerXmlReader.PARAM_LANGUAGE, "de",
                 TigerXmlReader.PARAM_READ_PENN_TREE, true);
 
         JCas jcas = JCasFactory.createJCas();
@@ -57,21 +64,21 @@ public class TigerXmlReaderTest
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
     }
 
-    @Test(expected=IllegalStateException.class)
+    @Test(expected = IllegalStateException.class)
     public void test2()
         throws Exception
     {
         CollectionReaderDescription reader = createReaderDescription(TigerXmlReader.class,
                 TigerXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
                 TigerXmlReader.PARAM_PATTERNS, "[+]simple-broken-sentence.xml",
-                TigerXmlReader.PARAM_LANGUAGE, "de", 
+                TigerXmlReader.PARAM_LANGUAGE, "de",
                 TigerXmlReader.PARAM_READ_PENN_TREE, true);
 
         for (JCas cas : iteratePipeline(reader, new AnalysisEngineDescription[] {})) {
             System.out.printf("%s %n", DocumentMetaData.get(cas).getDocumentId());
         }
     }
-    
+
     @Test
     public void tigerSampleTest()
         throws Exception
@@ -79,8 +86,8 @@ public class TigerXmlReaderTest
         testOneWay(
                 createReaderDescription(TigerXmlReader.class,
                         TigerXmlReader.PARAM_LANGUAGE, "de",
-                        TigerXmlReader.PARAM_READ_PENN_TREE, true), 
-                "tiger-sample.xml.dump", 
+                        TigerXmlReader.PARAM_READ_PENN_TREE, true),
+                "tiger-sample.xml.dump",
                 "tiger-sample.xml");
     }
 
@@ -91,8 +98,8 @@ public class TigerXmlReaderTest
         testOneWay(
                 createReaderDescription(TigerXmlReader.class,
                         TigerXmlReader.PARAM_LANGUAGE, "en",
-                        TigerXmlReader.PARAM_READ_PENN_TREE, true), 
-                "semeval1010-sample.xml.dump", 
+                        TigerXmlReader.PARAM_READ_PENN_TREE, true),
+                "semeval1010-sample.xml.dump",
                 "semeval1010-en-sample.xml");
     }
 
@@ -103,10 +110,118 @@ public class TigerXmlReaderTest
         testOneWay(
                 createReaderDescription(TigerXmlReader.class,
                         TigerXmlReader.PARAM_LANGUAGE, "en",
-                        TigerXmlReader.PARAM_READ_PENN_TREE, true), 
+                        TigerXmlReader.PARAM_READ_PENN_TREE, true),
                 createEngineDescription(Conll2012Writer.class),
-                "semeval1010-en-sample.conll", 
+                "semeval1010-en-sample.conll",
                 "semeval1010-en-sample.xml");
+    }
+
+    @Test
+    public void testNoncontiguousFrameTarget()
+        throws Exception
+    {
+        CollectionReaderDescription reader = createReaderDescription(TigerXmlReader.class,
+                TigerXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
+                TigerXmlReader.PARAM_PATTERNS, "[+]tiger-sample-noncontiguousframe.xml",
+                TigerXmlReader.PARAM_LANGUAGE, "de",
+                TigerXmlReader.PARAM_READ_PENN_TREE, true);
+
+        int[][] frameRanges = new int[][] { { 4, 11 }, { 33, 47 }, { 71, 74 }, { 112, 138 },
+                { 143, 147 }, { 246, 255 } };
+
+        for (JCas cas : iteratePipeline(reader, new AnalysisEngineDescription[] {})) {
+            for (Sentence sentence : select(cas, Sentence.class)) {
+                for (SemPred frame : selectCovered(SemPred.class, sentence)) {
+                    System.out
+                            .println("frame boundary " + frame.getBegin() + " : " + frame.getEnd());
+                    boolean found = false;
+                    for (int[] element : frameRanges) {
+                        if (element[0] == frame.getBegin() && element[1] == frame.getEnd()) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    assertEquals(true, found);
+                }
+            }
+        }
+    }
+
+    @Test
+    public void testFrameTargetHavingMultipleChildren()
+        throws Exception
+    {
+        CollectionReaderDescription reader = createReaderDescription(TigerXmlReader.class,
+                TigerXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
+                TigerXmlReader.PARAM_PATTERNS, "[+]tiger-sample-complexframe.xml",
+                TigerXmlReader.PARAM_LANGUAGE, "de",
+                TigerXmlReader.PARAM_READ_PENN_TREE, true);
+
+        int[][] frameRanges = new int[][] { { 26, 41 }, { 54, 61 }, { 64, 85 }, { 97, 104 },
+                { 120, 130 }, { 135, 151 }, { 152, 169 } };
+        /* Frame targets:
+         * Glaubwürdigkeit
+         * wichtig
+         * ein Zeichen zu setzen
+         * gewillt
+         * Erreichung
+         * Millenniumsziele
+         * <eine aktive Rolle> ... <übernehmen> (Noncontiguous frame target)
+         * **/
+
+        for (JCas cas : iteratePipeline(reader, new AnalysisEngineDescription[] {})) {
+            for (Sentence sentence : select(cas, Sentence.class)) {
+                for (SemPred frame : selectCovered(SemPred.class, sentence)) {
+                    System.out.println("frame target text [" + frame.getCoveredText()
+                            + "], frame boundary " + frame.getBegin() + " : " + frame.getEnd());
+                    boolean found = false;
+                    for (int[] element : frameRanges) {
+                        if (element[0] == frame.getBegin() && element[1] == frame.getEnd()) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    assertEquals(true, found);
+                }
+            }
+        }
+    }
+
+    @Test
+    public void testContiguousFrameTarget()
+        throws Exception
+    {
+        CollectionReaderDescription reader = createReaderDescription(TigerXmlReader.class,
+                TigerXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
+                TigerXmlReader.PARAM_PATTERNS, "[+]tiger-sample-contiguousframe.xml",
+                TigerXmlReader.PARAM_LANGUAGE, "de",
+                TigerXmlReader.PARAM_READ_PENN_TREE, true);
+
+
+        /**
+         * first element is contiguous
+         * it spans over 2 tokens "schlage" and "mit", so the boundary should be
+         * schlage.begin and mit.end ==> (4, 15)
+         */
+        int[][] frameRanges = new int[][] { { 4, 15 }, { 33, 47 }, { 71, 74 }, { 112, 138 },
+                { 143, 147 }, { 246, 255 } };
+
+        for (JCas cas : iteratePipeline(reader, new AnalysisEngineDescription[] {})) {
+            for (Sentence sentence : select(cas, Sentence.class)) {
+                for (SemPred frame : selectCovered(SemPred.class, sentence)) {
+                    System.out
+                            .println("frame boundary " + frame.getBegin() + " : " + frame.getEnd());
+                    boolean found = false;
+                    for (int[] element : frameRanges) {
+                        if (element[0] == frame.getBegin() && element[1] == frame.getEnd()) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    assertEquals(true, found);
+                }
+            }
+        }
     }
 
     @Rule

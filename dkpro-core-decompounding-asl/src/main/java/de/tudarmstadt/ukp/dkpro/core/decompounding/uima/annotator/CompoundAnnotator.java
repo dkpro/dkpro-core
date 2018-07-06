@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *******************************************************************************/
+ **/
 
 package de.tudarmstadt.ukp.dkpro.core.decompounding.uima.annotator;
 
@@ -27,6 +27,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ExternalResource;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
@@ -43,15 +44,24 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.ranking.Ranker;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundedWord;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.Fragment;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.SplitterAlgorithm;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Annotates compound parts and linking morphemes.
  */
-@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, outputs = {
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.CompoundPart",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LinkingMorpheme" })
+@Component(OperationType.ANNOTATION_OF_COMPOUNDING_FEATURES)
+@ResourceMetaData(name = "Compound Annotator")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
+@TypeCapability(
+        inputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 
+        outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.CompoundPart",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LinkingMorpheme" })
 public class CompoundAnnotator
     extends JCasAnnotator_ImplBase
 {
@@ -87,7 +97,7 @@ public class CompoundAnnotator
         throws AnalysisEngineProcessException
     {
         for (Token token : select(aJCas, Token.class)) {
-            final String coveredText = token.getCoveredText();
+            final String coveredText = token.getText();
             DecompoundedWord result;
             result = ranker.highestRank(splitter.split(coveredText));
             if (!result.isCompound()) {

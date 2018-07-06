@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2014
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,19 +14,28 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.languagetool;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.LanguageCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 
 import cn.com.cjf.CJFBeanFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformer_ImplBase;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Converts traditional Chinese to simplified Chinese or vice-versa.
  */
+@Component(OperationType.NORMALIZER)
+@ResourceMetaData(name = "Chinese Traditional/Simplified Converter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
+@LanguageCapability("zh")
 public class CjfNormalizer
     extends JCasTransformer_ImplBase
 {
@@ -36,7 +45,7 @@ public class CjfNormalizer
     };
     
     public static final String PARAM_DIRECTION = "direction";
-    @ConfigurationParameter(name = PARAM_DIRECTION, mandatory=true, defaultValue="TO_SIMPLIFIED")
+    @ConfigurationParameter(name = PARAM_DIRECTION, mandatory = true, defaultValue = "TO_SIMPLIFIED")
     private Direction direction; 
     
     @Override

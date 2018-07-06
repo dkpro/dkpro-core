@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2011
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.api.frequency;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
@@ -33,8 +33,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvid
 
 public class TestFrequencyCountResourceTest
 {
-    public static class Annotator extends JCasAnnotator_ImplBase {
-        final static String FREQUENCY_COUNT_RESOURCE= "FrequencyCountResource";
+    public static class Annotator
+        extends JCasAnnotator_ImplBase
+    {
+        final static String FREQUENCY_COUNT_RESOURCE = "FrequencyCountResource";
         @ExternalResource(key = FREQUENCY_COUNT_RESOURCE)
         private FrequencyCountProvider provider;
 
@@ -53,10 +55,11 @@ public class TestFrequencyCountResourceTest
     }
 
     @Test
-    public void configureAggregatedExample() throws Exception {
+    public void configureAggregatedExample() throws Exception
+    {
         AnalysisEngineDescription desc = createEngineDescription(Annotator.class,
-        		Annotator.FREQUENCY_COUNT_RESOURCE, createExternalResourceDescription(
-        				TestFrequencyCountResource.class,
+                Annotator.FREQUENCY_COUNT_RESOURCE,
+                createExternalResourceDescription(TestFrequencyCountResource.class,
                         TestFrequencyCountResource.PARAM_SCALE_DOWN_FACTOR, "10"));
 
         // Check the external resource was injected

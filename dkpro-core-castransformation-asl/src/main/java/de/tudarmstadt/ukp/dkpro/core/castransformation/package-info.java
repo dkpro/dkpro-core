@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,12 +14,12 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 
 /**
- * Components for working with texts that require to be corrected or otherwise changed in order to be
- * analyzed further. Modifications are tracked and analysises on the modified text can be related to
- * the original texts.
+ * Components for working with texts that require to be corrected or otherwise changed in order to
+ * be analyzed further. Modifications are tracked and analyses on the modified text can be related
+ * to the original texts.
  *
  * @since 1.1.0
  */

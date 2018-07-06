@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.snowball;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -51,9 +51,9 @@ public class SnowballStemmerTest
         
         runTest("en", "We need a very complicated example sentence , which " +
                 "contains as many constituents and dependencies as possible .",
-                new String[] { "We", "need", "a", "veri", "complic", "exampl", "sentenc", ",", 
-                "which", "contain", "as", "mani", "constitu", "and", "depend", "as", "possibl", 
-                "." });
+                new String[] { "We", "need", "a", "veri", "complic", "exampl", "sentenc", ",",
+                        "which", "contain", "as", "mani", "constitu", "and", "depend", "as",
+                        "possibl", "." });
     }
 
     @Test

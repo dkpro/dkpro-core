@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2014
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.cogroo;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -33,49 +33,50 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class CogrooFeaturizerTest
 {
-	@Test
-	public void testPortuguese()
-		throws Exception
-	{
+    @Test
+    public void testPortuguese() throws Exception
+    {
         runTest("pt", "Este é um teste . ", new String[] {
-                "[  0,  4]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - Este (M=S)",
-                "[  5,  6]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - é (PR=3S=IND)",
-                "[  7,  9]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - um (M=S)",
-                "[ 10, 15]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - teste (M=S)",
-                "[ 16, 17]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (-)" });
+            "[  0,  4]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - Este (M=S)",
+            "[  5,  6]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - é (PR=3S=IND)",
+            "[  7,  9]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - um (M=S)",
+            "[ 10, 15]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - teste (M=S)",
+            "[ 16, 17]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (-)"
+        });
 
         runTest("pt", "Uma rede neural .", new String[] { 
-                "[  0,  3]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - Uma (F=S)",
-                "[  4,  8]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - rede (F=S)",
-                "[  9, 15]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - neural (F=S)",
-                "[ 16, 17]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (-)" });
+            "[  0,  3]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - Uma (F=S)",
+            "[  4,  8]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - rede (F=S)",
+            "[  9, 15]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - neural (F=S)",
+            "[ 16, 17]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (-)"
+        });
 
         runTest("pt", "John está comprando laranjas .", new String[] { 
-                "[  0,  4]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - John (M=S)",
-                "[  5,  9]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - está (PR=3S=IND)",
-                "[ 10, 19]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - comprando (-)",
-                "[ 20, 28]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - laranjas (F=P)",
-                "[ 29, 30]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (-)" });
+            "[  0,  4]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - John (M=S)",
+            "[  5,  9]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - está (PR=3S=IND)",
+            "[ 10, 19]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - comprando (-)",
+            "[ 20, 28]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - laranjas (F=P)",
+            "[ 29, 30]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (-)"
+        });
     }
 
-	private void runTest(String language, String testDocument, String[] aFeatures)
-		throws Exception
-	{
-		AnalysisEngineDescription engine = createEngineDescription(
-		        createEngineDescription(CogrooPosTagger.class),
-		        createEngineDescription(CogrooFeaturizer.class));
+    private void runTest(String language, String testDocument, String[] aFeatures) throws Exception
+    {
+        AnalysisEngineDescription engine = createEngineDescription(
+                createEngineDescription(CogrooPosTagger.class),
+                createEngineDescription(CogrooFeaturizer.class));
 
-		JCas jcas = TestRunner.runTest(engine, language, testDocument);
+        JCas jcas = TestRunner.runTest(engine, language, testDocument);
 
-		AssertAnnotations.assertMorph(aFeatures, select(jcas, MorphologicalFeatures.class));
-	}
+        AssertAnnotations.assertMorph(aFeatures, select(jcas, MorphologicalFeatures.class));
+    }
 
-	@Rule
-	public TestName name = new TestName();
+    @Rule
+    public TestName name = new TestName();
 
-	@Before
-	public void printSeparator()
-	{
-		System.out.println("\n=== " + name.getMethodName() + " =====================");
-	}
+    @Before
+    public void printSeparator()
+    {
+        System.out.println("\n=== " + name.getMethodName() + " =====================");
+    }
 }

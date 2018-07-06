@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2008
  * Richard Eckart de Castilho
  * Institut für Sprach- und Literaturwissenschaft
@@ -15,7 +15,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.api.transform.alignment;
 
 import java.util.ArrayList;
@@ -1105,54 +1105,53 @@ public class AlignedString
             return sb.toString();
         }
     }
-}
-
-/**
- * DataSegment iterator.
- * 
- */
-class DataSegmentIterator
-    implements Iterator<AlignedString.DataSegment>
-{
-    private final boolean _includeAll;
-
-    private AlignedString.AbstractDataSegment _next = null;
-
-    public DataSegmentIterator(final AlignedString.AbstractDataSegment first)
+    
+    /**
+     * DataSegment iterator.
+     */
+    private static class DataSegmentIterator
+        implements Iterator<AlignedString.DataSegment>
     {
-        _next = first;
-        _includeAll = false;
-    }
+        private final boolean _includeAll;
 
-    public DataSegmentIterator(final AlignedString.AbstractDataSegment first,
-            final boolean includeAll)
-    {
-        _next = first;
-        _includeAll = includeAll;
-    }
+        private AlignedString.AbstractDataSegment _next = null;
 
-    @Override
-    public boolean hasNext()
-    {
-        return _next != null;
-    }
-
-    @Override
-    public AlignedString.DataSegment next()
-    {
-        final AlignedString.DataSegment result = _next;
-        if (_includeAll) {
-            _next = _next._next;
+        public DataSegmentIterator(final AlignedString.AbstractDataSegment first)
+        {
+            _next = first;
+            _includeAll = false;
         }
-        else {
-            _next = _next.getNext();
-        }
-        return result;
-    }
 
-    @Override
-    public void remove()
-    {
-        throw new UnsupportedOperationException();
+        public DataSegmentIterator(final AlignedString.AbstractDataSegment first,
+                final boolean includeAll)
+        {
+            _next = first;
+            _includeAll = includeAll;
+        }
+
+        @Override
+        public boolean hasNext()
+        {
+            return _next != null;
+        }
+
+        @Override
+        public AlignedString.DataSegment next()
+        {
+            final AlignedString.DataSegment result = _next;
+            if (_includeAll) {
+                _next = _next._next;
+            }
+            else {
+                _next = _next.getNext();
+            }
+            return result;
+        }
+
+        @Override
+        public void remove()
+        {
+            throw new UnsupportedOperationException();
+        }
     }
 }

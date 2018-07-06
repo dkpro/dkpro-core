@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2012
  * Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.tcf;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
@@ -30,27 +30,33 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.apache.uima.collection.CollectionException;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.util.Level;
 
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 import eu.clarin.weblicht.wlfxb.io.TextCorpusStreamed;
 import eu.clarin.weblicht.wlfxb.io.WLDObjector;
 import eu.clarin.weblicht.wlfxb.io.WLFormatException;
 import eu.clarin.weblicht.wlfxb.tc.api.DependencyParse;
+import eu.clarin.weblicht.wlfxb.tc.api.DependencyParsingLayer;
 import eu.clarin.weblicht.wlfxb.tc.api.Reference;
 import eu.clarin.weblicht.wlfxb.tc.api.TextCorpus;
 import eu.clarin.weblicht.wlfxb.xb.WLData;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reader for the WebLicht TCF format. It reads all the available annotation Layers from the TCF
@@ -58,8 +64,10 @@ import eu.clarin.weblicht.wlfxb.xb.WLData;
  * its annotations which is required in CAS annotation. Hence, addresses are manually calculated per
  * tokens and stored in a map (token_id, token(CAS object)) where later we get can get the offset
  * from the token
- *
  */
+@ResourceMetaData(name = "CLARIN-DE WebLicht TCF Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@MimeTypeCapability({MimeTypes.TEXT_TCF})
 @TypeCapability(outputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -198,6 +206,7 @@ public class TcfReader
             outPos.setBegin(aTokens.get(posTokens[0].getID()).getBegin());
             outPos.setEnd(aTokens.get(posTokens[0].getID()).getEnd());
             outPos.setPosValue(value);
+            POSUtils.assignCoarseValue(outPos);
             outPos.addToIndexes();
 
             // Set the POS to the token
@@ -252,31 +261,33 @@ public class TcfReader
     private void convertDependencies(JCas aJCas, TextCorpus aCorpusData,
             Map<String, Token> aTokens)
     {
-        if (aCorpusData.getDependencyParsingLayer() == null) {
+        DependencyParsingLayer depLayer = aCorpusData.getDependencyParsingLayer();
+
+        if (depLayer == null) {
             // No layer to read from.
             return;
         }
-
-        for (int i = 0; i < aCorpusData.getDependencyParsingLayer().size(); i++) {
-            DependencyParse dependencyParse = aCorpusData.getDependencyParsingLayer().getParse(i);
+        
+        for (int i = 0; i < depLayer.size(); i++) {
+            DependencyParse dependencyParse = depLayer.getParse(i);
             for (eu.clarin.weblicht.wlfxb.tc.api.Dependency dependency : dependencyParse
                     .getDependencies()) {
 
-                eu.clarin.weblicht.wlfxb.tc.api.Token[] governorTokens = aCorpusData
-                        .getDependencyParsingLayer().getGovernorTokens(dependency);
-                eu.clarin.weblicht.wlfxb.tc.api.Token[] dependentTokens = aCorpusData
-                        .getDependencyParsingLayer().getDependentTokens(dependency);
+                eu.clarin.weblicht.wlfxb.tc.api.Token[] governorTokens = depLayer
+                        .getGovernorTokens(dependency);
+                eu.clarin.weblicht.wlfxb.tc.api.Token[] dependentTokens = depLayer
+                        .getDependentTokens(dependency);
 
                 POS dependentPos = aTokens.get(dependentTokens[0].getID()).getPos();
 
                 // For dependency annotations in the TCF file without POS, add as a default POS --
                 if (dependentPos == null) {
-                    getUimaContext().getLogger().log(Level.INFO,
-                            "There is no pos for this token, added is -- as a pos");
+                    getLogger().warn("There is no pos for this token, added [--] as a pos");
                     dependentPos = new POS(aJCas);
                     dependentPos.setBegin(aTokens.get(dependentTokens[0].getID()).getBegin());
                     dependentPos.setEnd(aTokens.get(dependentTokens[0].getID()).getEnd());
                     dependentPos.setPosValue("--");
+                    dependentPos.setCoarseValue("--");
                     dependentPos.addToIndexes();
                     aTokens.get(dependentTokens[0].getID()).setPos(dependentPos);
                 }
@@ -288,8 +299,7 @@ public class TcfReader
                             // do nothing
                         }
                         else {
-                            getUimaContext().getLogger().log(Level.INFO,
-                                    "There is no pos for this token, added is -- as a pos");
+                            getLogger().warn("There is no pos for this token, added [--] as a pos");
                             governerPos = new POS(aJCas);
                             governerPos.setBegin(aTokens.get(governorTokens[0].getID()).getBegin());
                             governerPos.setEnd(aTokens.get(governorTokens[0].getID()).getEnd());
@@ -311,6 +321,8 @@ public class TcfReader
                     outDependency.setDependent(aTokens.get(dependentTokens[0].getID()));
                     outDependency.setBegin(outDependency.getDependent().getBegin());
                     outDependency.setEnd(outDependency.getDependent().getEnd());
+                    outDependency.setFlavor(depLayer.hasMultipleGovernors()
+                            ? DependencyFlavor.ENHANCED : DependencyFlavor.BASIC);
                     outDependency.addToIndexes();
                     
                 }
@@ -321,6 +333,8 @@ public class TcfReader
                     outDependency.setDependent(aTokens.get(dependentTokens[0].getID()));
                     outDependency.setBegin(outDependency.getDependent().getBegin());
                     outDependency.setEnd(outDependency.getDependent().getEnd());
+                    outDependency.setFlavor(depLayer.hasMultipleGovernors()
+                            ? DependencyFlavor.ENHANCED : DependencyFlavor.BASIC);
                     outDependency.addToIndexes();
                 }
             }
@@ -356,11 +370,14 @@ public class TcfReader
     /**
      * Correferences in CAS should be represented {@link CoreferenceChain} and
      * {@link CoreferenceLink}. The TCF representation Uses <b> rel </b> and <b>target </b> to build
-     * chains. Example: </br><i>
-     * {@literal  <entity><reference ID="rc_0" tokenIDs="t_0" mintokIDs="t_0" type="nam"/> } </br>
-     * {@literal <reference ID="rc_1" tokenIDs="t_6" mintokIDs="t_6" type="pro.per3" rel="anaphoric" target="rc_0"/></entity>
-     * }</i> </br> The first phase of conversion is getting all <b>references</b> and
-     * <b>targets</b> alongside the <b>type</b> and <b>relations in different maps</b> <br>
+     * chains. Example: </br>
+     * <i> {@literal  <entity><reference ID="rc_0" tokenIDs="t_0" mintokIDs="t_0" type="nam"/> }
+     * </br>
+     * {@literal <reference ID="rc_1" tokenIDs="t_6" mintokIDs="t_6" type="pro.per3" rel=
+     * "anaphoric" target="rc_0"/></entity>
+     * }</i> </br>
+     * The first phase of conversion is getting all <b>references</b> and <b>targets</b> alongside
+     * the <b>type</b> and <b>relations in different maps</b> <br>
      * Second, an iteration is made through all the maps and the {@link CoreferenceChain} and
      * {@link CoreferenceLink} annotations are constructed.
      * 
@@ -396,7 +413,8 @@ public class TcfReader
                 else {
                     link.setNext(referencesMap.get(address));
                     if (link.getReferenceRelation() == null) {
-                        link.setReferenceRelation(referencesMap.get(address).getReferenceRelation());
+                        link.setReferenceRelation(
+                                referencesMap.get(address).getReferenceRelation());
                     }
                     link = link.getNext();
                     link.addToIndexes();

@@ -9,8 +9,9 @@
 #        However, the "*" is not listed as a tag in the SWATWOL tagset documentation.
 
 __META_SOURCE_URL__=http://www.aakkl.helsinki.fi/cameel/corpus/swatags.pdf
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS
+*=POS
 # *
 # *:*
 # 1/2-PL-SP

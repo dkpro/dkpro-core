@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2016
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,16 +14,16 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.nlp4j;
 
 import java.util.List;
 
 import org.junit.Test;
 
-import edu.emory.mathcs.nlp.tokenization.EnglishTokenizer;
-import edu.emory.mathcs.nlp.tokenization.Tokenizer;
-import edu.emory.mathcs.nlp.tokenization.Token;
+import edu.emory.mathcs.nlp.component.tokenizer.EnglishTokenizer;
+import edu.emory.mathcs.nlp.component.tokenizer.Tokenizer;
+import edu.emory.mathcs.nlp.component.tokenizer.token.Token;
 
 public class EnglishTokenizerTest
 {

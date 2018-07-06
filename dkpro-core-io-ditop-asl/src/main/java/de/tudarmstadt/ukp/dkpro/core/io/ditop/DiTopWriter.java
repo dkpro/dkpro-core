@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2014
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -14,8 +14,37 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.ditop;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.apache.uima.fit.util.JCasUtil.select;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeSet;
+
+import org.apache.commons.collections4.Bag;
+import org.apache.commons.collections4.bag.HashBag;
+import org.apache.commons.io.FileUtils;
+import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.apache.uima.fit.descriptor.TypeCapability;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.cas.DoubleArray;
+import org.apache.uima.resource.ResourceInitializationException;
 
 import cc.mallet.topics.ParallelTopicModel;
 import cc.mallet.types.Alphabet;
@@ -23,33 +52,27 @@ import cc.mallet.types.IDSorter;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.mallet.lda.LdaTopicModelInferencer;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
-import org.apache.commons.collections4.Bag;
-import org.apache.commons.collections4.bag.HashBag;
-import org.apache.commons.io.FileUtils;
-import org.apache.uima.UimaContext;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.cas.DoubleArray;
-import org.apache.uima.resource.ResourceInitializationException;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.*;
-import java.util.Map.Entry;
-
-import static org.apache.uima.fit.util.JCasUtil.select;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.Parameters;
 
 /**
- * This annotator (consumer) writes output files as required by <a
- * href="https://ditop.hs8.de/">DiTop</a>. It requires JCas input annotated by
- * {@link LdaTopicModelInferencer} using the same model.
- *
+ * This annotator (consumer) writes output files as required by
+ * <a href="https://ditop.hs8.de/">DiTop</a>. It requires JCas input annotated by
+ * {@link de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer} using the same
+ * model.
  */
+@ResourceMetaData(name = "DiTop Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@Parameters(
+        exclude = { 
+                DiTopWriter.PARAM_TARGET_LOCATION  })
+@MimeTypeCapability({MimeTypes.APPLICATION_X_DITOP})
+@TypeCapability(
+        inputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution" })
 public class DiTopWriter
     extends JCasFileWriter_ImplBase
 {
@@ -141,8 +164,8 @@ public class DiTopWriter
             throw new ResourceInitializationException(e);
         }
 
-        collectionValuesSet = collectionValues == null ?
-                Collections.<String> emptySet() : new HashSet<>(Arrays.asList(collectionValues));
+        collectionValuesSet = collectionValues == null ? Collections.<String>emptySet()
+                : new HashSet<>(Arrays.asList(collectionValues));
         collectionCounter = new HashBag<>();
     }
 
@@ -169,7 +192,8 @@ public class DiTopWriter
         }
     }
 
-    protected void writeDocTopic(TopicDistribution distribution, String docName, String collectionId)
+    protected void writeDocTopic(TopicDistribution distribution, String docName,
+            String collectionId)
         throws IOException
     {
         /* filter by collection id if PARAM_COLLECTION_VALUES is set */
@@ -327,7 +351,7 @@ public class DiTopWriter
     {
         Map<String, Set<Integer>> entries = new HashMap<>();
 
-        for (String line : FileUtils.readLines(configFile)) {
+        for (String line : FileUtils.readLines(configFile, UTF_8)) {
             String[] fields = line.split(FIELDSEPARATOR_CONFIGFILE);
             if (fields.length < 2) {
                 throw new IllegalStateException(String.format(

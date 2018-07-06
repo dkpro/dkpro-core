@@ -1,13 +1,102 @@
-Known corpora in this format:
+The CoNLL 2006 (aka CoNLL-X) format targets dependency parsing. Columns are tab-separated. Sentences are separated by a blank new line.
 
-* link:http://ilk.uvt.nl/conll/free_data.html[CoNLL-X Shared Task free data] - Danish, Dutch, Portuguese, and Swedish
-* link:https://code.google.com/p/copenhagen-dependency-treebank/[Copenhagen Dependency Treebanks] - Danish
-* link:http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/[FinnTreeBank] - Finnish (in recent versions with additional pseudo-XML metadata)
-* link:http://www.linguateca.pt/floresta/CoNLL-X[Floresta Sintá(c)tica (Bosque-CoNLL)] - Portuguese
-* link:https://gforge.inria.fr/projects/sequoiabank/[Sequoia corpus] - French
-* link:http://nlp.ffzg.hr/resources/corpora/setimes-hr/[SETimes.HR corpus and dependency treebank of Croatian] - Croatian
-* link:http://zil.ipipan.waw.pl/Sk%C5%82adnica[Składnica zależnościowa] - Polish
-* link:http://nl.ijs.si/sdt/[Slovene Dependency Treebank] - Slovene
-* link:http://stp.lingfil.uu.se/%7Enivre/swedish_treebank/[Swedish Treebank] - Swedish
-* link:http://stp.lingfil.uu.se/%7Enivre/research/Talbanken05.html[Talbanken05] - Swedish
-* link:http://stp.lingfil.uu.se/%7Emojgan/UPDT.html[Uppsala Persian Dependency Treebank] - Persian (Farsi)
+.Columns
+[cols="1,2,3", options="header"]
+|====
+| Column  | Type/Feature | Description
+
+| ID      
+| ignored 
+| Token counter, starting at 1 for each new sentence.
+
+| FORM    
+| Token 
+| Word form or punctuation symbol.
+
+| LEMMA   
+| Lemma 
+| Lemma of the word form.
+
+| CPOSTAG 
+| POS coarseValue
+|
+
+| POSTAG  
+| POS PosValue 
+| Fine-grained part-of-speech tag, where the tagset depends on the language, or identical to the coarse-grained part-of-speech tag if not available.
+
+| FEATS   
+| MorphologicalFeatures 
+| Unordered set of syntactic and/or morphological features (depending on the particular language), separated by a vertical bar (`\|`), or an underscore if not available.
+
+| HEAD    
+| Dependency 
+| Head of the current token, which is either a value of ID or zero ('0'). Note that depending on the original treebank annotation, there may be multiple tokens with an ID of zero.
+
+| DEPREL  
+| Dependency 
+| Dependency relation to the HEAD. The set of dependency relations depends on the particular language. Note that depending on the original treebank annotation, the dependency relation may be meaningful or simply 'ROOT'.
+
+| PHEAD 
+| ignored 
+| Projective head of current token, which is either a value of ID or zero ('0'), or an underscore if not available. Note that depending on the original treebank annotation, there may be multiple tokens an with ID of zero. The dependency structure resulting from the PHEAD column is guaranteed to be projective (but is not available for all languages), whereas the structures resulting from the HEAD column will be non-projective for some sentences of some languages (but is always available).
+
+| PDEPREL 
+| ignored 
+| Dependency relation to the PHEAD, or an underscore if not available. The set of dependency relations depends on the particular language. Note that depending on the original treebank annotation, the dependency relation may be meaningful or simply 'ROOT'.
+|====
+ 
+.Example
+[source,text]
+----
+Heutzutage heutzutage ADV _ _ ADV _ _
+----
+
+.Known corpora in this format
+[cols="2*", options="header"]
+|====
+| Corpus 
+| Language
+
+| link:http://ilk.uvt.nl/conll/free_data.html[CoNLL-X Shared Task free data]
+| Danish, Dutch, Portuguese, and Swedish
+
+| link:https://code.google.com/p/copenhagen-dependency-treebank/[Copenhagen Dependency Treebanks]
+| Danish
+
+| link:http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/[FinnTreeBank] (in recent versions with additional pseudo-XML metadata)
+| Finnish 
+
+| link:http://www.linguateca.pt/floresta/CoNLL-X[Floresta Sintá(c)tica (Bosque-CoNLL)]
+| Portuguese
+
+| link:https://gforge.inria.fr/projects/sequoiabank/[Sequoia corpus]
+| French
+
+| link:http://nlp.ffzg.hr/resources/corpora/setimes-hr/[SETimes.HR corpus and dependency treebank of Croatian]
+| Croatian
+
+| link:http://zil.ipipan.waw.pl/Sk%C5%82adnica[Składnica zależnościowa]
+| Polish
+
+| link:http://nl.ijs.si/sdt/[Slovene Dependency Treebank]
+| Slovene
+
+| link:http://stp.lingfil.uu.se/%7Enivre/swedish_treebank/[Swedish Treebank]
+| Swedish
+
+| link:http://stp.lingfil.uu.se/%7Enivre/research/Talbanken05.html[Talbanken05]
+| Swedish
+
+| link:http://stp.lingfil.uu.se/%7Emojgan/UPDT.html[Uppsala Persian Dependency Treebank]
+| Persian (Farsi)
+
+| link:http://www.nb.no/sprakbanken/show?serial=sbr-10[Norwegian Dependency Treebank (NDT)]
+| Norwegian
+
+| link:https://www.iula.upf.edu/recurs01_tbk_uk.htm[IULA Resources. Corpus & Tools. IULA Spanish LSP Treebank]
+| Spanish
+
+| link:http://www.di.unito.it/~tutreeb/treebanks.html[Turin University Treebank]
+| Italian
+|====

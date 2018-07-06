@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2011
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.api.frequency.util;
 
 public class FrequencyUtils
@@ -37,7 +37,8 @@ public class FrequencyUtils
         double E1 = (double) sizeCorpus1 * (tfCorpus1 + tfCorpus2) / (sizeCorpus1 + sizeCorpus2);
         double E2 = (double) sizeCorpus2 * (tfCorpus1 + tfCorpus2) / (sizeCorpus1 + sizeCorpus2);
 
-        double G2 = 2 * ((tfCorpus1 * Math.log(tfCorpus1 / E1)) + (tfCorpus2 * Math.log(tfCorpus2 / E2)));
+        double G2 = 2
+                * ((tfCorpus1 * Math.log(tfCorpus1 / E1)) + (tfCorpus2 * Math.log(tfCorpus2 / E2)));
         return G2;
     }
 }

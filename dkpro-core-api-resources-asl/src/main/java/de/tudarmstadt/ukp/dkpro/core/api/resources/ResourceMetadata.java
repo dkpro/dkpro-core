@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2015
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  * 
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
 public class ResourceMetadata
@@ -28,6 +28,7 @@ public class ResourceMetadata
     private static final String DEPENDENCY = "dependency";
     private static final String MORPH = "morph";
     private static final String POS = "pos";
+    private static final String POS_COARSE = "pos.coarse";
     
     private static final String CITE = "cite";
     private static final String BIBTEX = "bibtex";
@@ -43,6 +44,7 @@ public class ResourceMetadata
     public static final String META_DEPENDENCY_TAGSET = DEPENDENCY + SEP + TAGSET;
     public static final String META_MORPH_TAGSET = MORPH + SEP + TAGSET;
     public static final String META_POS_TAGSET = POS + SEP + TAGSET;
+    public static final String META_POS_COARSE_TAGSET = POS_COARSE + SEP + TAGSET;
 
     public static final String META_MODEL_ENCODING = MODEL + SEP + ENCODING;
 

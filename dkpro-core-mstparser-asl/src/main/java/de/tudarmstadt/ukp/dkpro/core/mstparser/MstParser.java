@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2012
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.mstparser;
 
 import static java.util.Arrays.asList;
@@ -34,20 +34,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import mstparser.DependencyInstance;
-import mstparser.DependencyParser;
-import mstparser.DependencyPipe;
-import mstparser.DependencyPipe2O;
-import mstparser.ParserOptions;
-
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
-import org.apache.uima.fit.component.JCasConsumer_ImplBase;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -62,7 +57,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
+import mstparser.DependencyInstance;
+import mstparser.DependencyParser;
+import mstparser.DependencyPipe;
+import mstparser.DependencyPipe2O;
+import mstparser.ParserOptions;
 
 /**
  * Dependency parsing using MSTParser.
@@ -82,8 +86,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
  * CPOS, and other columns from the CONLL 2006 format are not generated (cf.
  * {@link mstparser.DependencyInstance DependencyInstance}).
  * </p>
- * 
  */
+@Component(OperationType.DEPENDENCY_PARSER)
+@ResourceMetaData(name = "MSTParser Dependency Parser")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -92,7 +98,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
         outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 public class MstParser
-    extends JCasConsumer_ImplBase
+    extends JCasAnnotator_ImplBase
 {
     /**
      * Use this language instead of the document language to resolve the model.
@@ -108,6 +114,20 @@ public class MstParser
     @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
     protected String variant;
 
+    /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
     /**
      * Load the model from this location instead of locating the model automatically.
      */
@@ -128,7 +148,8 @@ public class MstParser
      * Load the dependency to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = ComponentParameters.PARAM_DEPENDENCY_MAPPING_LOCATION;
+    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_DEPENDENCY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_DEPENDENCY_MAPPING_LOCATION, mandatory = false)
     protected String dependencyMappingLocation;
     
@@ -291,6 +312,7 @@ public class MstParser
                 if (head > 0) {
                     Dependency dep = (Dependency) cas.createFS(depRel);
                     dep.setDependencyType(instance.deprels[formsIndex]);
+                    dep.setFlavor(DependencyFlavor.BASIC);
                     dep.setDependent(token);
                     dep.setGovernor(tokens.get(head - 1));
                     dep.setBegin(dep.getDependent().getBegin());
@@ -300,6 +322,7 @@ public class MstParser
                 else {
                     Dependency dep = new ROOT(jcas);
                     dep.setDependencyType(instance.deprels[formsIndex]);
+                    dep.setFlavor(DependencyFlavor.BASIC);
                     dep.setDependent(token);
                     dep.setGovernor(token);
                     dep.setBegin(dep.getDependent().getBegin());
@@ -331,7 +354,7 @@ public class MstParser
 
             List<Token> tokens = selectCovered(jcas, Token.class, sentence);
             for (Token token : tokens) {
-                out.write(token.getCoveredText() + "\t");
+                out.write(token.getText() + "\t");
                 tokencount++;
             }
             out.write("\n");

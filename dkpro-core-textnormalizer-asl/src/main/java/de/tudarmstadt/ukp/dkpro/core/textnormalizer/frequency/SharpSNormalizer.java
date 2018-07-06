@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,27 +14,37 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.textnormalizer.frequency;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.uima.fit.descriptor.LanguageCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
+
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
+
 /**
  * Takes a text and replaces sharp s
  */
+@Component(OperationType.NORMALIZER)
+@ResourceMetaData(name = "Sharp S (ß) Normalizer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
+@LanguageCapability("de")
 public class SharpSNormalizer
     extends ReplacementFrequencyNormalizer_ImplBase
 {
-
     @Override
     public Map<String, String> getReplacementMap()
     {
-        Map<String,String> replacementMap = new HashMap<String,String>();
-        
-        replacementMap.put("ss", "ß");
-        replacementMap.put("ß", "ss");
+        Map<String, String> map = new HashMap<String, String>();
 
-        return replacementMap;
+        map.put("ss", "ß");
+        map.put("ß", "ss");
+
+        return map;
     }
 }

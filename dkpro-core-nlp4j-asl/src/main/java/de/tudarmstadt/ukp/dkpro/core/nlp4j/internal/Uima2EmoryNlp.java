@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2016
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.nlp4j.internal;
 
 import java.util.List;
@@ -26,14 +26,14 @@ public class Uima2EmoryNlp
 {
     public static NLPNode[] convertSentence(List<Token> aTokens)
     {
-        NLPNode[] nodes = new NLPNode[aTokens.size()+1];
+        NLPNode[] nodes = new NLPNode[aTokens.size() + 1];
         
         nodes[0] = new NLPNode();
         nodes[0].toRoot();
         
         int i = 1;
         for (Token t : aTokens) {
-            nodes[i] = new NLPNode(i, t.getCoveredText());
+            nodes[i] = new NLPNode(i, t.getText());
             nodes[i].setStartOffset(t.getBegin());
             nodes[i].setEndOffset(t.getEnd());
             

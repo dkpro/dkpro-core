@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2015
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.brat;
 
 import static org.apache.uima.fit.util.JCasUtil.selectAll;
@@ -35,7 +35,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -45,6 +45,8 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.util.FSUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -53,6 +55,8 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratAnnotationDocument;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratAttributeDecl;
@@ -67,6 +71,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratTextAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratTextAnnotationDrawingDecl;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.RelationParam;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TypeMapping;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Writer for the brat annotation format.
@@ -81,22 +86,26 @@ import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TypeMapping;
  * @see <a href="http://brat.nlplab.org/standoff.html">brat standoff format</a>
  * @see <a href="http://brat.nlplab.org/configuration.html">brat configuration format</a>
  */
+@ResourceMetaData(name = "Brat Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@MimeTypeCapability({MimeTypes.APPLICATION_X_BRAT})
 public class BratWriter extends JCasFileWriter_ImplBase
 {
     /**
-     * Specify the suffix of text output files. Default value <code>.txt</code>. If the suffix is not
-     * needed, provide an empty string as value.
+     * Specify the suffix of text output files. Default value <code>.txt</code>. If the suffix is
+     * not needed, provide an empty string as value.
      */
-    public static final String PARAM_TEXT_FILENAME_SUFFIX = "textFilenameSuffix";
-    @ConfigurationParameter(name = PARAM_TEXT_FILENAME_SUFFIX, mandatory = true, defaultValue = ".txt")
-    private String textFilenameSuffix;
+    public static final String PARAM_TEXT_FILENAME_EXTENSION = "textFilenameExtension";
+    @ConfigurationParameter(name = PARAM_TEXT_FILENAME_EXTENSION, mandatory = true, defaultValue = ".txt")
+    private String textFilenameExtension;
 
     /**
      * Specify the suffix of output files. Default value <code>.ann</code>. If the suffix is not
      * needed, provide an empty string as value.
      */
-    public static final String PARAM_FILENAME_SUFFIX = "filenameSuffix";
-    @ConfigurationParameter(name = PARAM_FILENAME_SUFFIX, mandatory = true, defaultValue = ".ann")
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
+    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".ann")
     private String filenameSuffix;
     
     /**
@@ -126,13 +135,14 @@ public class BratWriter extends JCasFileWriter_ImplBase
 
     /**
      * Types that are relations. It is mandatory to provide the type name followed by two feature
-     * names that represent Arg1 and Arg2 separated by colons, e.g. 
-     * <code>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent</code>.
+     * names that represent Arg1 and Arg2 separated by colons, e.g.
+     * <code>
+     * de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent
+     * </code>.
      */
     public static final String PARAM_RELATION_TYPES = "relationTypes";
-    @ConfigurationParameter(name = PARAM_RELATION_TYPES, mandatory = true, defaultValue = { 
-            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent" 
-            })
+    @ConfigurationParameter(name = PARAM_RELATION_TYPES, mandatory = true, defaultValue = {
+            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent" })
     private Set<String> relationTypes;
     private Map<String, RelationParam> parsedRelationTypes;
 
@@ -327,11 +337,11 @@ public class BratWriter extends JCasFileWriter_ImplBase
                 eventFS.put(event, fs);
             }
             else if (fs instanceof AnnotationFS) {
-                warnings.add("Assuming annotation type ["+fs.getType().getName()+"] is span");
+                warnings.add("Assuming annotation type [" + fs.getType().getName() + "] is span");
                 writeTextAnnotation(doc, (AnnotationFS) fs);
             }
             else {
-                warnings.add("Skipping annotation with type ["+fs.getType().getName()+"]");
+                warnings.add("Skipping annotation with type [" + fs.getType().getName() + "]");
             }
         }
 
@@ -347,15 +357,24 @@ public class BratWriter extends JCasFileWriter_ImplBase
 
         switch (filenameSuffix) {
         case ".ann":
-            try (Writer out = new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix), "UTF-8")) {
+            try (Writer out = new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix),
+                    "UTF-8")) {
                 doc.write(out);
                 break;
             }
         case ".html":
-            String template = IOUtils.toString(getClass().getResource("html/template.html"));
+        case ".json":
+            String template ;
+            if (filenameSuffix.equals(".html")) {
+                template = IOUtils.toString(getClass().getResource("html/template.html"));
+            }
+            else {
+                template = "{ \"collData\" : ##COLL-DATA## , \"docData\" : ##DOC-DATA## }";
+            }
             
             JsonFactory jfactory = new JsonFactory();
-            try (Writer out = new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix), "UTF-8")) {
+            try (Writer out = new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix),
+                    "UTF-8")) {
                 String docData;
                 try (StringWriter buf = new StringWriter()) {
                     try (JsonGenerator jg = jfactory.createGenerator(buf)) {
@@ -477,9 +496,12 @@ public class BratWriter extends JCasFileWriter_ImplBase
                 slots.put(slot, args);
             }
 
-            if (
-                FSUtil.isMultiValuedFeature(aFS, feat) && 
-                CAS.TYPE_NAME_TOP.equals(aFS.getCAS().getTypeSystem().getParent(feat.getRange().getComponentType()).getName())
+            if (    
+                    FSUtil.isMultiValuedFeature(aFS, feat)
+                    && CAS.TYPE_NAME_TOP.equals(aFS.getCAS().getTypeSystem()
+                            .getParent(feat.getRange().getComponentType()).getName())
+                    && (feat.getRange().getComponentType().getFeatureByBaseName("target") != null)
+                    && (feat.getRange().getComponentType().getFeatureByBaseName("role") != null)
             ) {
                 // Handle WebAnno-style slot links
                 // FIXME It would be better if the link type could be configured, e.g. what
@@ -711,7 +733,7 @@ public class BratWriter extends JCasFileWriter_ImplBase
     private void writeText(JCas aJCas)
         throws IOException
     {
-        try (OutputStream docOS = getOutputStream(aJCas, textFilenameSuffix)) {
+        try (OutputStream docOS = getOutputStream(aJCas, textFilenameExtension)) {
             IOUtils.write(aJCas.getDocumentText(), docOS);
         }
     }

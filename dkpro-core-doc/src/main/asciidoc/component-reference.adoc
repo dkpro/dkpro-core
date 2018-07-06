@@ -40,4 +40,3 @@ include::{generated-dir}componentsDetails.adoc[]
 
 [[sect_componentsProducersConsumers]]
 include::{generated-dir}componentsProducersConsumers.adoc[]
-

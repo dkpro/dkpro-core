@@ -4,11 +4,9 @@ parse-trees). If a local installation of the corpus workbench is available, it c
 by this module to immediately generate the corpus workbench index format. Search is not
 supported by this module.
 
-See also: 
-
+.See also
 * link:http://cwb.sourceforge.net[IMS Open Corpus Workbench]
 
-Known corpora in this format:
-
+.Known corpora in this format
 * link:http://wacky.sslmit.unibo.it[WaCky - The Web-As-Corpus Kool Yinitiative] - corpora crawled 
   from the world wide web in several different languages (DeWaC, UkWaC, ItWaC, etc.)

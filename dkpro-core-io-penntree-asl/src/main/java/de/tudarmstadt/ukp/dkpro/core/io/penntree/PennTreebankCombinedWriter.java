@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2014
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.penntree;
 
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -25,16 +25,23 @@ import java.io.Writer;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Penn Treebank combined format writer.
  */
+@ResourceMetaData(name = "Penn Treebank Combined Format Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@MimeTypeCapability({MimeTypes.TEXT_X_PTB_COMBINED})
 @TypeCapability(
         inputs = { 
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
@@ -46,19 +53,22 @@ public class PennTreebankCombinedWriter
     extends JCasFileWriter_ImplBase
 {
     /**
-     * Specify the suffix of output files. Default value <code>.penn</code>. If the suffix is not
+     * Specify the suffix of output files. Default value <code>.mrg</code>. If the suffix is not
      * needed, provide an empty string as value.
      */
-    public static final String PARAM_FILENAME_SUFFIX = "filenameSuffix";
-    @ConfigurationParameter(name = PARAM_FILENAME_SUFFIX, mandatory = true, defaultValue = ".penn")
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
+    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".mrg")
     private String filenameSuffix;
 
     /**
-     * Name of configuration parameter that contains the character encoding used by the input files.
+     * Character encoding of the output data.
      */
-    public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
-    private String encoding;
+    public static final String PARAM_TARGET_ENCODING = 
+            ComponentParameters.PARAM_TARGET_ENCODING;
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    private String targetEncoding;
     
     public static final String PARAM_EMPTY_ROOT_LABEL = "emptyRootLabel";
     @ConfigurationParameter(name = PARAM_EMPTY_ROOT_LABEL, mandatory = true, defaultValue = "false")
@@ -72,7 +82,8 @@ public class PennTreebankCombinedWriter
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
-        try (Writer docOS = new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix), encoding)) {
+        try (Writer docOS = new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix),
+                targetEncoding)) {
             for (ROOT root : select(aJCas, ROOT.class)) {
                 PennTreeNode tree = PennTreeUtils.convertPennTree(root);
                 
@@ -82,7 +93,8 @@ public class PennTreebankCombinedWriter
                 
                 if (noRootLabel) {
                     if (tree.getChildren().size() > 1) {
-                        throw new IllegalStateException("Cannot remove ROOT not that has more than one child: " + tree);
+                        throw new IllegalStateException(
+                                "Cannot remove ROOT not that has more than one child: " + tree);
                     }
                     if (tree.getChildren().isEmpty()) {
                         continue;

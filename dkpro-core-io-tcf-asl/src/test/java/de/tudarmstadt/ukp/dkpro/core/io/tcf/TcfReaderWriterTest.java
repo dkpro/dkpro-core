@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2012
  * Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.tcf;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -36,6 +36,7 @@ import org.junit.Test;
 import org.xml.sax.InputSource;
 
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import de.tudarmstadt.ukp.dkpro.core.testing.EOLUtils;
 import eu.clarin.weblicht.wlfxb.io.WLDObjector;
 import eu.clarin.weblicht.wlfxb.tc.api.TextCorpus;
 import eu.clarin.weblicht.wlfxb.tc.api.TextCorpusLayer;
@@ -69,7 +70,7 @@ public class TcfReaderWriterTest
                 TcfWriter.class,
                 TcfWriter.PARAM_TARGET_LOCATION, "target/test-output/oneway",
                 TcfWriter.PARAM_OVERWRITE, true,
-                TcfWriter.PARAM_FILENAME_SUFFIX, ".xml",
+                TcfWriter.PARAM_FILENAME_EXTENSION, ".xml",
                 TcfWriter.PARAM_STRIP_EXTENSION, true);
 
         AnalysisEngineDescription dumper = createEngineDescription(CasDumpWriter.class,
@@ -95,7 +96,7 @@ public class TcfReaderWriterTest
         // Check if every layers have the same number of annotations
         for (TextCorpusLayer layer : aCorpusDataReference.getLayers()) {
             assertEquals(
-                    "Layer size mismatch in ["+layer.getClass().getName()+"]",
+                    "Layer size mismatch in [" + layer.getClass().getName() + "]",
                     layer.size(), 
                     getLayer(aCorpusDataActual, layer.getClass()).size());
         }
@@ -105,7 +106,8 @@ public class TcfReaderWriterTest
                 new InputSource(new File("target/test-output/oneway/" + aInputFile).getPath()));
     }
 
-    private static TextCorpusLayer getLayer(TextCorpus aCorpus, Class<? extends TextCorpusLayer> aLayerType)
+    private static TextCorpusLayer getLayer(TextCorpus aCorpus,
+            Class<? extends TextCorpusLayer> aLayerType)
     {
         for (TextCorpusLayer layer : aCorpus.getLayers()) {
             if (layer.getClass().equals(aLayerType)) {
@@ -127,7 +129,7 @@ public class TcfReaderWriterTest
                 TcfWriter.class,
                 TcfWriter.PARAM_TARGET_LOCATION, "target/test-output/roundtrip",
                 TcfWriter.PARAM_OVERWRITE, true,
-                TcfWriter.PARAM_FILENAME_SUFFIX, ".xml",
+                TcfWriter.PARAM_FILENAME_EXTENSION, ".xml",
                 TcfWriter.PARAM_STRIP_EXTENSION, true);
 
         runPipeline(reader, writer);
@@ -136,6 +138,8 @@ public class TcfReaderWriterTest
                 new File("src/test/resources/wlfxb.xml"), "UTF-8");
         String actual = FileUtils.readFileToString(
                 new File("target/test-output/roundtrip/wlfxb.xml"), "UTF-8");
+        reference = EOLUtils.normalizeLineEndings(reference);
+        actual = EOLUtils.normalizeLineEndings(actual);
         assertEquals(reference, actual);
     }
 

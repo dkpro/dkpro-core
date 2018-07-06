@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2013
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,19 +14,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.tiger;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
 import org.custommonkey.xmlunit.XMLAssert;
 import org.junit.Rule;
 import org.junit.Test;
-import org.xml.sax.InputSource;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpParser;
@@ -52,9 +54,14 @@ public class TigerXmlWriterTest
                 TigerXmlWriter.PARAM_TARGET_LOCATION, targetFolder);
         writer.process(jcas);
         
-        XMLAssert.assertXMLEqual(
-                new InputSource("src/test/resources/simple-sentence.xml"),
-                new InputSource(new File(targetFolder, "dummy.xml").getPath()));
+        try (
+                Reader expected = new InputStreamReader(new FileInputStream(
+                        "src/test/resources/simple-sentence.xml"), "UTF-8");
+                Reader actual = new InputStreamReader(new FileInputStream(
+                        new File(targetFolder, "dummy.xml")), "UTF-8");
+        ) {
+            XMLAssert.assertXMLEqual(expected, actual);
+        }
     }
 
     @Rule

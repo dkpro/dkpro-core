@@ -1,6 +1,6 @@
 <!--
 
-    Copyright 2007-2014    
+    Copyright 2007-2018    
     Ubiquitous Knowledge Processing (UKP) Lab
     Technische Universität Darmstadt
 
@@ -15,14 +15,14 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with this program.  If not, see http://www.gnu.org/licenses/.
+    along with this program. If not, see http://www.gnu.org/licenses/.
 
 -->
 <project basedir="../.." default="separate-jars">
     <property name="outputPackage" value="de/tudarmstadt/ukp/dkpro/core/sfst/lib"/>
     
     <import>
-        <url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.7.0/ant-macros.xml"/>
+        <url url="https://raw.githubusercontent.com/dkpro/resource-packager/0.7.0/ant-macros.xml"/>
     </import>
     
     <target name="local-maven">

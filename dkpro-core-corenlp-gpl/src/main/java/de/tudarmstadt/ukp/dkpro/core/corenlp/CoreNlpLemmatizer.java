@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2014
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.corenlp;
 
@@ -27,6 +27,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -34,15 +35,21 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.Messages;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.ConvertToCoreNlp;
-import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.ConvertToUima;
+import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.CoreNlp2DKPro;
+import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.MorphaAnnotator;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Lemmatizer from CoreNLP.
  */
+@Component(OperationType.LEMMATIZER)
+@ResourceMetaData(name = "CoreNLP Lemmatizer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -108,7 +115,8 @@ public class CoreNlpLemmatizer
     {
         if (!"en".equals(aJCas.getDocumentLanguage())) {
             throw new AnalysisEngineProcessException(Messages.BUNDLE,
-                    Messages.ERR_UNSUPPORTED_LANGUAGE, new String[] { aJCas.getDocumentLanguage() });
+                    Messages.ERR_UNSUPPORTED_LANGUAGE,
+                    new String[] { aJCas.getDocumentLanguage() });
         }
         
         CAS cas = aJCas.getCas();
@@ -116,16 +124,18 @@ public class CoreNlpLemmatizer
         annotatorProvider.configure(cas);
         
         // Transfer from CAS to CoreNLP
-        ConvertToCoreNlp converter = new ConvertToCoreNlp();
+        DKPro2CoreNlp converter = new DKPro2CoreNlp();
         converter.setPtb3Escaping(ptb3Escaping);
         converter.setQuoteBegin(quoteBegin);
         converter.setQuoteEnd(quoteEnd);
-        Annotation document = converter.convert(aJCas);
+        
+        Annotation document = new Annotation((String) null);
+        converter.convert(aJCas, document);
 
         // Actual processing
         annotatorProvider.getResource().annotate(document);
         
         // Transfer back into the CAS
-        ConvertToUima.convertLemmas(aJCas, document);
+        CoreNlp2DKPro.convertLemmas(aJCas, document);
     };
 }

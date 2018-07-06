@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.jwpl;
 
 import java.io.IOException;
@@ -32,42 +32,46 @@ import de.tudarmstadt.ukp.wikipedia.api.DatabaseConfiguration;
 import de.tudarmstadt.ukp.wikipedia.api.WikiConstants.Language;
 import de.tudarmstadt.ukp.wikipedia.api.Wikipedia;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiInitializationException;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Abstract base class for all Wikipedia readers.
  */
+@Component(value = OperationType.READER)
 public abstract class WikipediaReaderBase extends JCasCollectionReader_ImplBase
 {
-
     /** The host server. */
     public static final String PARAM_HOST = "Host";
-    @ConfigurationParameter(name = PARAM_HOST, mandatory=true)
+    @ConfigurationParameter(name = PARAM_HOST, mandatory = true)
     private String host;
 
     /** The name of the database. */
     public static final String PARAM_DB = "Database";
-    @ConfigurationParameter(name = PARAM_DB, mandatory=true)
+    @ConfigurationParameter(name = PARAM_DB, mandatory = true)
     private String db;
 
     /** The username of the database account. */
     public static final String PARAM_USER = "User";
-    @ConfigurationParameter(name = PARAM_USER, mandatory=true)
+    @ConfigurationParameter(name = PARAM_USER, mandatory = true)
     private String user;
 
     /** The password of the database account. */
     public static final String PARAM_PASSWORD = "Password";
-    @ConfigurationParameter(name = PARAM_PASSWORD, mandatory=true)
+    @ConfigurationParameter(name = PARAM_PASSWORD, mandatory = true)
     private String password;
 
     /** The language of the Wikipedia that should be connected to. */
     public static final String PARAM_LANGUAGE = "Language";
-    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory=true)
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
     private Language language;
 
-    /** Sets whether the database configuration should be stored in the CAS,
-     *  so that annotators down the pipeline can access additional data. */
+    /**
+     * Sets whether the database configuration should be stored in the CAS, so that annotators down
+     * the pipeline can access additional data.
+     */
     public static final String PARAM_CREATE_DATABASE_CONFIG_ANNOTATION = "CreateDBAnno";
-    @ConfigurationParameter(name = PARAM_CREATE_DATABASE_CONFIG_ANNOTATION, mandatory=true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_CREATE_DATABASE_CONFIG_ANNOTATION, mandatory = true, defaultValue = "false")
     private boolean createDbAnno;
 
     protected DatabaseConfiguration dbconfig;
@@ -98,20 +102,19 @@ public abstract class WikipediaReaderBase extends JCasCollectionReader_ImplBase
     }
 
     @Override
-	public void getNext(JCas jcas) throws IOException, CollectionException
-	{
-    	if(createDbAnno){
-        	DBConfig dbconfiganno = new DBConfig(jcas);
-        	dbconfiganno.setHost(host);
-        	dbconfiganno.setPassword(password);
-        	dbconfiganno.setDB(db);
-        	dbconfiganno.setUser(user);
-        	dbconfiganno.setLanguage(language.toString());
-        	dbconfiganno.addToIndexes();
-    	}
+    public void getNext(JCas jcas) throws IOException, CollectionException
+    {
+        if (createDbAnno) {
+            DBConfig dbconfiganno = new DBConfig(jcas);
+            dbconfiganno.setHost(host);
+            dbconfiganno.setPassword(password);
+            dbconfiganno.setDB(db);
+            dbconfiganno.setUser(user);
+            dbconfiganno.setLanguage(language.toString());
+            dbconfiganno.addToIndexes();
+        }
     }
 
     @Override
     public abstract Progress[] getProgress();
-
 }

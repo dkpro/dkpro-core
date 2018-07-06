@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2015
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,18 +14,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 
 package de.tudarmstadt.ukp.dkpro.core.textnormalizer.transformation;
 
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_ImplBase;
-import org.apache.uima.UimaContext;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ResourceInitializationException;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,14 +26,27 @@ import java.nio.file.Files;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import static org.apache.uima.fit.util.JCasUtil.select;
+import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
+
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_ImplBase;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Replaces all tokens that are listed in the file in {@link #PARAM_MODEL_LOCATION} by the string
  * specified in {@link #PARAM_REPLACEMENT}.
- * 
- *
  */
+@Component(OperationType.NORMALIZER)
+@ResourceMetaData(name = "File-based Token Transformer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class FileBasedTokenTransformer
     extends JCasTransformerChangeBased_ImplBase
 {

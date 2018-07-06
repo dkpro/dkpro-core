@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,12 +14,12 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.testing;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.validation.Message.Level.ERROR;
 import static java.util.Arrays.asList;
-import static org.apache.commons.lang.StringUtils.normalizeSpace;
+import static org.apache.commons.lang3.StringUtils.normalizeSpace;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -38,10 +38,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import junit.framework.Assert;
-
-import org.apache.commons.lang.ObjectUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UIMAException;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -89,6 +87,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.testing.validation.CasValidator;
 import de.tudarmstadt.ukp.dkpro.core.testing.validation.Message;
 import de.tudarmstadt.ukp.dkpro.core.testing.validation.checks.Check;
+import junit.framework.Assert;
 
 public class AssertAnnotations
 {
@@ -210,6 +209,10 @@ public class AssertAnnotations
     }
 
     /**
+     * @param aExpected
+     *            expected morph tags
+     * @param aActual
+     *            actual morph tags
      * @deprecated Use {@link #assertMorph(String[], Collection)}
      */
     @Deprecated
@@ -436,8 +439,8 @@ public class AssertAnnotations
 
         boolean offsetCorrect = true;
         for (Dependency a : aActual) {
-            actual.add(String.format("[%3d,%3d]%s(%s) D[%d,%d](%s) G[%d,%d](%s)", a.getBegin(), a
-                    .getEnd(), a.getClass().getSimpleName(), a.getDependencyType(), a
+            actual.add(String.format("[%3d,%3d]%s(%s,%s) D[%d,%d](%s) G[%d,%d](%s)", a.getBegin(), a
+                    .getEnd(), a.getClass().getSimpleName(), a.getDependencyType(), a.getFlavor(), a
                     .getDependent().getBegin(), a.getDependent().getEnd(), a.getDependent()
                     .getCoveredText(), a.getGovernor().getBegin(), a.getGovernor().getEnd(), a
                     .getGovernor().getCoveredText()));
@@ -466,7 +469,8 @@ public class AssertAnnotations
         assertEquals(expected, actual);
     }
 
-    public static void assertPennTree(String aExpected[], Collection<PennTree> aActual) {
+    public static void assertPennTree(String[] aExpected, Collection<PennTree> aActual)
+    {
         List<PennTree> actual = new ArrayList<PennTree>(aActual);
         assertEquals(aExpected.length, aActual.size());
         for (int i = 0; i < aExpected.length; i++) {
@@ -486,6 +490,10 @@ public class AssertAnnotations
     }
 
     /**
+     * @param aExpected
+     *            expected semantic predicates
+     * @param aActual
+     *            actual semantic predicates
      * @deprecated Use {@link #assertSemPred(String[], Collection)}
      */
     @Deprecated
@@ -533,8 +541,8 @@ public class AssertAnnotations
             args.sort(byRole);
             
             for (SemArgLink a : args) {
-                sb.append('(').append(a.getRole()).append(':').append(a.getTarget().getCoveredText())
-                        .append(')');
+                sb.append('(').append(a.getRole()).append(':')
+                        .append(a.getTarget().getCoveredText()).append(')');
             }
             sb.append(']');
             actual.add(sb.toString());
@@ -634,8 +642,10 @@ public class AssertAnnotations
                 System.out.printf("%-20s           : %s%n", "Layer", tsd.getLayer());
                 System.out.printf("%-20s           : %s%n", "Tagset", tsd.getName());
                 System.out.printf("%-20s           : %s%n", "Component", tsd.getComponentName());
-                System.out.printf("%-20s           : %s%n", "Model location", tsd.getModelLocation());
-                System.out.printf("%-20s           : %s%n", "Model language", tsd.getModelLanguage());
+                System.out.printf(
+                        "%-20s           : %s%n", "Model location", tsd.getModelLocation());
+                System.out.printf(
+                        "%-20s           : %s%n", "Model language", tsd.getModelLanguage());
                 System.out.printf("%-20s           : %s%n", "Model variant", tsd.getModelVariant());
                 System.out.printf("%-20s           : %s%n", "Model version", tsd.getModelVersion());
                 System.out.printf("%-20s           : %b%n", "Input", tsd.getInput());
@@ -750,8 +760,10 @@ public class AssertAnnotations
                 System.out.printf("%-20s           : %s%n", "Layer", tsd.getLayer());
                 System.out.printf("%-20s           : %s%n", "Tagset", tsd.getName());
                 System.out.printf("%-20s           : %s%n", "Component", tsd.getComponentName());
-                System.out.printf("%-20s           : %s%n", "Model location", tsd.getModelLocation());
-                System.out.printf("%-20s           : %s%n", "Model language", tsd.getModelLanguage());
+                System.out.printf("%-20s           : %s%n", 
+                        "Model location", tsd.getModelLocation());
+                System.out.printf("%-20s           : %s%n", 
+                        "Model language", tsd.getModelLanguage());
                 System.out.printf("%-20s           : %s%n", "Model variant", tsd.getModelVariant());
                 System.out.printf("%-20s           : %s%n", "Model version", tsd.getModelVersion());
                 System.out.printf("%-20s           : %b%n", "Input", tsd.getInput());

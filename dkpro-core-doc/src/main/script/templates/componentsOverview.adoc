@@ -1,14 +1,14 @@
 <%
-import Util;
+import de.tudarmstadt.ukp.dkpro.core.doc.Util;
 %>
 
 .Analysis Components (${engines.size()})
-[options="header"]
+[options="header", cols="1,2"]
 |====
 |Component|Description
 
 <% engines.sort{ it.key }.each { %>
-|<<engine-${ it.key },${it.key}>>
+|<<engine-${ it.key },${it.value.spec.metaData.name}>>
 |${Util.shortDesc(it.value.spec.metaData.description)}
 
 <% } %>

@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2014
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,11 +14,12 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.fit.util.JCasUtil.selectFollowing;
 import static org.apache.uima.fit.util.JCasUtil.selectPreceding;
 
@@ -37,12 +38,15 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.internal.TokenKey;
 import edu.stanford.nlp.ling.CoreAnnotations;
+import edu.stanford.nlp.ling.CoreAnnotations.TextAnnotation;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.trees.LabeledScoredTreeFactory;
 import edu.stanford.nlp.trees.PennTreeReader;
@@ -98,7 +102,6 @@ public class TreeUtils
 
             // now create the node with its children
             rootNode = tFact.newTreeNode(node.getConstituentType(), childNodes);
-
         }
         else {
             // Handle leaf annotations
@@ -109,7 +112,9 @@ public class TreeUtils
             Token wordAnnotation = (Token) root;
 
             // create leaf-node for the tree
-            Tree wordNode = tFact.newLeaf(wordAnnotation.getCoveredText());
+            Tree wordNode = tFact.newLeaf(wordAnnotation.getText());
+            ((CoreLabel) wordNode.label()).set(TokenKey.class, wordAnnotation);
+            ((CoreLabel) wordNode.label()).set(TextAnnotation.class, wordAnnotation.getText());
 
             // create information about preceding and trailing whitespaces in the leaf node
             StringBuilder preWhitespaces = new StringBuilder();
@@ -141,15 +146,26 @@ public class TreeUtils
             ((CoreLabel) wordNode.label()).set(CoreAnnotations.AfterAnnotation.class,
                     trailWhitespaces.toString());
 
-            // get POS-annotation
-            // get the token that is covered by the POS
-            List<POS> coveredPos = JCasUtil.selectCovered(aJCas, POS.class, wordAnnotation);
-            // the POS should only cover one token
-            assert coveredPos.size() == 1;
-            POS pos = coveredPos.get(0);
-
+            // NER annotation
+            List<NamedEntity> nes = selectCovered(NamedEntity.class, wordAnnotation);
+            if (nes.size() > 0) {
+                ((CoreLabel) wordNode.label()).setNER(nes.get(0).getValue());
+            }
+            else {
+                ((CoreLabel) wordNode.label()).setNER("O");
+            }
+            
+            // Lemma annotation
+            String lemma = wordAnnotation.getLemmaValue();
+            if (lemma != null) {
+                ((CoreLabel) wordNode.label()).setLemma(lemma);
+            }
+            else {
+                ((CoreLabel) wordNode.label()).setLemma(wordAnnotation.getText());
+            }
+            
             // create POS-Node in the tree and attach word-node to it
-            rootNode = tFact.newTreeNode(pos.getPosValue(),
+            rootNode = tFact.newTreeNode(wordAnnotation.getPosValue(),
                     Arrays.asList((new Tree[] { wordNode })));
         }
 

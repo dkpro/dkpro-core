@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2014
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.testing;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -31,7 +31,7 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_component.AnalysisComponent;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -56,7 +56,8 @@ public class IOTestRunner
             Class<? extends AnalysisComponent> aWriter, String aFile)
         throws Exception
     {
-        testOneWay(createReaderDescription(aReader), createEngineDescription(aWriter), aFile, aFile);
+        testOneWay(createReaderDescription(aReader), createEngineDescription(aWriter), aFile,
+                aFile);
     }
 
     public static void testRoundTrip(Class<? extends CollectionReader> aReader,
@@ -98,6 +99,17 @@ public class IOTestRunner
     /**
      * One-way test reading a file and writing to the same format but comparing against a reference
      * file instead of the original file.
+     * 
+     * @param aReader
+     *            reader to read the data.
+     * @param aExpectedFile
+     *            expected file.
+     * @param aFile
+     *            input file.
+     * @param aOptions
+     *            test options.
+     * @throws Exception
+     *             if there was an error.
      */
     public static void testOneWay(CollectionReaderDescription aReader, String aExpectedFile,
             String aFile, TestOptions aOptions)
@@ -149,7 +161,7 @@ public class IOTestRunner
 
         testOneWay2(createReaderDescription(aReader, aExtraParams),
                 createEngineDescription(aWriter, aExtraParams), aExpectedFile, name + "."
-                        + extension, aFile, null);
+                        + extension, aFile, aOptions);
     }
 
     public static void testOneWay(CollectionReaderDescription aReader,
@@ -160,7 +172,8 @@ public class IOTestRunner
     }
 
     public static void testOneWay(CollectionReaderDescription aReader,
-            AnalysisEngineDescription aWriter, String aExpectedFile, String aFile, TestOptions aOptions)
+            AnalysisEngineDescription aWriter, String aExpectedFile, String aFile,
+            TestOptions aOptions)
         throws Exception
     {
         Class<?> dkproReaderBase = Class.forName(RESOURCE_COLLECTION_READER_BASE);
@@ -170,7 +183,8 @@ public class IOTestRunner
         }
 
         Class<?> dkproWriterBase = Class.forName(JCAS_FILE_WRITER_IMPL_BASE);
-        if (!dkproWriterBase.isAssignableFrom(Class.forName(aWriter.getAnnotatorImplementationName()))) {
+        if (!dkproWriterBase
+                .isAssignableFrom(Class.forName(aWriter.getAnnotatorImplementationName()))) {
             throw new IllegalArgumentException("writer must be a subclass of ["
                     + JCAS_FILE_WRITER_IMPL_BASE + "]");
         }
@@ -193,7 +207,7 @@ public class IOTestRunner
                 createEngineDescription(aWriter, aExtraParams),
                 aExpectedFile, aOutputFile, aFile, null);
     }
-
+    
     public static void testOneWay2(CollectionReaderDescription aReader,
             AnalysisEngineDescription aWriter, String aExpectedFile, String aOutputFile,
             String aInputFile, TestOptions aOptions)
@@ -235,9 +249,16 @@ public class IOTestRunner
 
         AssertAnnotations.assertValid(Validator.messages);
         
-        String expected = FileUtils.readFileToString(reference, "UTF-8");
-        String actual = FileUtils.readFileToString(new File(output, aOutputFile), "UTF-8");
-        assertEquals(expected.trim(), actual.trim());
+        if (aOptions == null || aOptions.resultAssertor == null) {
+            String expected = FileUtils.readFileToString(reference, "UTF-8");
+            String actual = FileUtils.readFileToString(new File(output, aOutputFile), "UTF-8");
+            expected = EOLUtils.normalizeLineEndings(expected);
+            actual = EOLUtils.normalizeLineEndings(actual);
+            assertEquals(expected.trim(), actual.trim());
+        }
+        else {
+            aOptions.resultAssertor.accept(reference, new File(output, aOutputFile));
+        }
     }
     
     public static class Validator

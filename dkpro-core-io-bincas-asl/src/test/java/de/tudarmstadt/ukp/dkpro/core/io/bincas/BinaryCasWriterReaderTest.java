@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2013
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  * 
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.bincas;
 
 import static de.tudarmstadt.ukp.dkpro.core.performance.PerformanceTestUtil.initRandomCas;
@@ -22,17 +22,23 @@ import static de.tudarmstadt.ukp.dkpro.core.performance.PerformanceTestUtil.meas
 import static de.tudarmstadt.ukp.dkpro.core.performance.PerformanceTestUtil.measureWritePerformance;
 import static de.tudarmstadt.ukp.dkpro.core.performance.PerformanceTestUtil.repeat;
 import static org.apache.commons.io.FileUtils.readFileToString;
+import static org.apache.commons.io.FilenameUtils.separatorsToUnix;
+import static org.apache.uima.cas.SerialFormat.COMPRESSED_FILTERED;
 import static org.apache.uima.cas.impl.Serialization.deserializeCASComplete;
 import static org.apache.uima.cas.impl.Serialization.serializeCASComplete;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
+import static org.apache.uima.fit.util.FSUtil.getFeature;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -51,6 +57,7 @@ import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.cas.CAS;
+import org.apache.uima.cas.SerialFormat;
 import org.apache.uima.cas.impl.CASCompleteSerializer;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.collection.CollectionReaderDescription;
@@ -58,75 +65,90 @@ import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.cas.TOP;
 import org.apache.uima.resource.metadata.TypeSystemDescription;
 import org.apache.uima.util.CasCreationUtils;
+import org.apache.uima.util.CasIOUtils;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
-import org.junit.rules.TestName;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class BinaryCasWriterReaderTest
 {
-    @Rule
-    public TemporaryFolder testFolder = new TemporaryFolder();
-
     private static final int NONE = 1;
     private static final int METADATA = 2;
     private static final int ALL = 3;
+    
+    private File testFolder;
+    
+    @Before
+    public void setup() 
+    {
+        testFolder = testContext.getTestOutputFolder();
+    }
     
     @Test
     public void testSReinitialize()
         throws Exception
     {
-        write(testFolder.getRoot().getPath(), "S", true);
-        read(testFolder.getRoot().getPath(), NONE, true); // Type system is reinitialized from the persisted type system
+        write(testFolder.getPath(), SerialFormat.SERIALIZED.toString(), true);
+        // Type system is reinitialized from the persisted type system
+        read(testFolder.getPath(), NONE, true, false); 
+        read(testFolder.getPath(), NONE, true, true);
     }
 
     @Test
     public void testSReinitializeInZIP()
         throws Exception
     {
-        write("jar:file:" + testFolder.getRoot().getPath() + "/archive.zip", "S", true);
-        read("jar:file:" + testFolder.getRoot().getPath() + "/archive.zip", NONE, true); // Type system is reinitialized from the persisted type system
+        write("jar:" + testFolder.toURI().toURL() + "/archive.zip", "S", true);
+        // Type system is reinitialized from the persisted type system
+        read("jar:" + testFolder.toURI().toURL() + "/archive.zip", NONE, true, false); 
+        read("jar:" + testFolder.toURI().toURL() + "/archive.zip", NONE, true, true);
     }
 
     @Test
     public void testSPreinitialized()
         throws Exception
     {
-        write(testFolder.getRoot().getPath(), "S", false);
-        read(testFolder.getRoot().getPath(), ALL, false);
+        write(testFolder.getPath(), "S", false);
+        read(testFolder.getPath(), ALL, false, false);
+        read(testFolder.getPath(), ALL, false, true);
     }
 
     @Test
     public void testSplusReinitialize()
         throws Exception
     {
-        write(testFolder.getRoot().getPath(), "S+", false);
-        read(testFolder.getRoot().getPath(), NONE, false); // Type system is reinitialized from the persisted CAS
+        write(testFolder.getPath(), "S+", false);
+     // Type system is reinitialized from the persisted CAS
+        read(testFolder.getPath(), NONE, false, false); 
+        read(testFolder.getPath(), NONE, false, true);
     }
 
     @Test
     public void test0Preinitialized()
         throws Exception
     {
-        write(testFolder.getRoot().getPath(), "0", false);
-        read(testFolder.getRoot().getPath(), ALL, false);
+        write(testFolder.getPath(), SerialFormat.BINARY.toString(), false);
+        read(testFolder.getPath(), ALL, false, false);
+        read(testFolder.getPath(), ALL, false, true);    
     }
 
     @Test
     public void test4Preinitialized()
         throws Exception
     {
-        write(testFolder.getRoot().getPath(), "4", false);
-        read(testFolder.getRoot().getPath(), ALL, false);
+        write(testFolder.getPath(), "4", false);
+        read(testFolder.getPath(), ALL, false, false);
+        read(testFolder.getPath(), ALL, false, true);
     }
     
     /**
@@ -137,48 +159,107 @@ public class BinaryCasWriterReaderTest
     public void test6Lenient()
         throws Exception
     {
-        write(testFolder.getRoot().getPath(), "6", true);
-        read(testFolder.getRoot().getPath(), METADATA, true);
+        write(testFolder.getPath(), SerialFormat.COMPRESSED_FILTERED.toString(), true);
+        read(testFolder.getPath(), METADATA, true, false);
+        read(testFolder.getPath(), METADATA, true, true);
+    }
+    
+    @Test
+    public void test6LenientPlainUima() throws Exception
+    {
+//      TypeSystemDescription tsd = new TypeSystemDescription_impl();
+//      TypeDescription td = tsd.addType("DocumentMetaData", "", CAS.TYPE_NAME_DOCUMENT_ANNOTATION);
+//      td.addFeature("feat", "", CAS.TYPE_NAME_STRING);
+//        
+//      CAS source = CasCreationUtils.createCas(tsd, null, null, null);
+//      CAS target = CasCreationUtils.createCas(tsd, null, null, null);
+//      source.getJCas();
+//      target.getJCas();
+//
+//        AnnotationFS dmd = source
+//                .createAnnotation(source.getTypeSystem().getType("DocumentMetaData"), 0, 0);
+//        source.addFsToIndexes(dmd);
+//        assertEquals("DocumentMetaData", source.getDocumentAnnotation().getType().getName());
+        
+        CAS source = JCasFactory.createJCas().getCas();
+        CAS target = JCasFactory.createJCas().getCas();
+
+        new DocumentMetaData(source.getJCas(), 0, 0).addToIndexes();
+
+//        source.setDocumentText("This is a test.");
+//        source.setDocumentLanguage("en");
+        
+        @SuppressWarnings("resource")
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        CasIOUtils.save(source, bos, COMPRESSED_FILTERED);
+        bos.close();
+        
+        CasIOUtils.load(new ByteArrayInputStream(bos.toByteArray()), target);
     }
 
     @Test
     public void test6Preinitialized()
         throws Exception
     {
-        write(testFolder.getRoot().getPath(), "6", false);
-        read(testFolder.getRoot().getPath(), ALL, false);
+        write(testFolder.getPath(), "6", false);
+        read(testFolder.getPath(), ALL, false, false);
+        read(testFolder.getPath(), ALL, false, true);
+    }
+
+    @Test
+    public void test_COMPRESSED_FILTERED_TSI_preinitialized()
+        throws Exception
+    {
+        write(testFolder.getPath(), SerialFormat.COMPRESSED_FILTERED_TSI.toString(), false);
+        read(testFolder.getPath(), ALL, false, false);
+        read(testFolder.getPath(), ALL, false, true);
+    }
+
+    @Test
+    public void test_COMPRESSED_FILTERED_TSI_lenient()
+        throws Exception
+    {
+        write(testFolder.getPath(), SerialFormat.COMPRESSED_FILTERED_TSI.toString(), false);
+        read(testFolder.getPath(), METADATA, false, false);
+        read(testFolder.getPath(), METADATA, false, true);
     }
 
     @Test
     public void test6plusPreinitialized()
         throws Exception
     {
-        write(testFolder.getRoot().getPath(), "6+", false);
-        read(testFolder.getRoot().getPath(), ALL, false);
+        write(testFolder.getPath(), "6+", false);
+        read(testFolder.getPath(), ALL, false, false);
+        read(testFolder.getPath(), ALL, false, true);
     }
 
     @Test
     public void test6plusLenient()
         throws Exception
     {
-        write(testFolder.getRoot().getPath(), "6+", false);
-        read(testFolder.getRoot().getPath(), METADATA, false);
+        write(testFolder.getPath(), "6+", false);
+        read(testFolder.getPath(), METADATA, false, false);
+        read(testFolder.getPath(), METADATA, false, true);
     }
 
     @Test
     public void testSerializedEmbeddedTypeSystem()
         throws Exception
     {
-        writeSerialized(testFolder.getRoot().getPath(), false);
-        read(testFolder.getRoot().getPath(), NONE, false); // Type system is reinitialized from the persisted CAS
+        writeSerialized(testFolder.getPath(), false);
+        // Type system is reinitialized from the persisted CAS
+        read(testFolder.getPath(), NONE, false, false); 
+        read(testFolder.getPath(), NONE, false, true); 
     }
 
     @Test
     public void testSerializedSeparateTypeSystem()
         throws Exception
     {
-        writeSerialized(testFolder.getRoot().getPath(), true);
-        read(testFolder.getRoot().getPath(), NONE, true); // Type system is reinitialized from the persisted CAS
+        writeSerialized(testFolder.getPath(), true);
+        // Type system is reinitialized from the persisted CAS
+        read(testFolder.getPath(), NONE, true, false); 
+        read(testFolder.getPath(), NONE, true, true);
     }
 
     @Test
@@ -214,8 +295,116 @@ public class BinaryCasWriterReaderTest
         
         assertEquals(out.getDocumentLanguage(), in.getDocumentLanguage());
         assertEquals(out.getDocumentText(), in.getDocumentText());
-        assertEquals(DocumentMetaData.get(out).getDocumentId(), DocumentMetaData.get(in).getDocumentId());
+        assertEquals(DocumentMetaData.get(out).getDocumentId(),
+                DocumentMetaData.get(in).getDocumentId());
     }
+    
+    @Test
+    public void testReadingFileWithDocumentMetaData() throws Exception {
+        JCas prep = JCasFactory.createText("This is a test.", "en");
+        DocumentMetaData origDmd = DocumentMetaData.create(prep);
+        origDmd.setDocumentId("data.txt");
+        origDmd.setDocumentTitle("data.txt");
+        AnalysisEngine writer = createEngine(
+                BinaryCasWriter.class,
+                BinaryCasWriter.PARAM_TARGET_LOCATION, new File(testFolder, "out.bin"),
+                BinaryCasWriter.PARAM_SINGULAR_TARGET, true);
+        writer.process(prep);
+        
+        CollectionReader reader = createReader(
+                BinaryCasReader.class,
+                BinaryCasReader.PARAM_SOURCE_LOCATION, testFolder,
+                BinaryCasReader.PARAM_PATTERNS, "out.bin");
+        
+        JCas doc = JCasFactory.createJCas();
+        reader.getNext(doc.getCas());
+        
+        // System.out.println(doc.getDocumentAnnotationFs());
+        
+        TOP dmd = doc.getDocumentAnnotationFs();
+        assertEquals((Integer) 0, getFeature(dmd, "begin", Integer.class));
+        assertEquals((Integer) 15, getFeature(dmd, "end", Integer.class));
+        assertEquals("en", getFeature(dmd, "language", String.class));
+        assertEquals("data.txt", getFeature(dmd, "documentTitle", String.class));
+        assertEquals("data.txt", getFeature(dmd, "documentId", String.class));
+        assertEquals(null, getFeature(dmd, "documentUri", String.class));
+        assertEquals(null, getFeature(dmd, "collectionId", String.class));
+        assertEquals(null, getFeature(dmd, "documentBaseUri", String.class));
+        assertEquals(false, getFeature(dmd, "isLastSegment", Boolean.class));
+    }
+    
+    @Test
+    public void testReadingFileWithoutDocumentMetaData() throws Exception {
+        JCas prep = JCasFactory.createText("This is a test.");
+        AnalysisEngine writer = createEngine(
+                BinaryCasWriter.class,
+                BinaryCasWriter.PARAM_TARGET_LOCATION, new File(testFolder, "out.bin"),
+                BinaryCasWriter.PARAM_SINGULAR_TARGET, true);
+        writer.process(prep);
+        
+        CollectionReader reader = createReader(
+                BinaryCasReader.class,
+                BinaryCasReader.PARAM_SOURCE_LOCATION, testFolder,
+                BinaryCasReader.PARAM_PATTERNS, "out.bin");
+                
+        JCas doc = JCasFactory.createJCas();
+        reader.getNext(doc.getCas());
+        
+        // System.out.println(doc.getDocumentAnnotationFs());
+        
+        TOP dmd = doc.getDocumentAnnotationFs();
+        assertEquals((Integer) 0, getFeature(dmd, "begin", Integer.class));
+        assertEquals((Integer) 15, getFeature(dmd, "end", Integer.class));
+        assertEquals("x-unspecified", getFeature(dmd, "language", String.class));
+        assertEquals("out.bin", getFeature(dmd, "documentTitle", String.class));
+        assertEquals("out.bin", getFeature(dmd, "documentId", String.class));
+        assertTrue(separatorsToUnix(getFeature(dmd, "documentUri", String.class))
+                .endsWith("/target/test-output/BinaryCasWriterReaderTest-testReadingFileWithoutDocumentMetaData/out.bin"));
+        assertTrue(separatorsToUnix(getFeature(dmd, "collectionId", String.class))
+                .endsWith("/target/test-output/BinaryCasWriterReaderTest-testReadingFileWithoutDocumentMetaData/"));
+        assertTrue(separatorsToUnix(getFeature(dmd, "documentBaseUri", String.class))
+                .endsWith("/target/test-output/BinaryCasWriterReaderTest-testReadingFileWithoutDocumentMetaData/"));
+        assertEquals(false, getFeature(dmd, "isLastSegment", Boolean.class));
+    }
+    
+    @Test
+    public void testReadingFileOverridingDocumentMetaData() throws Exception {
+        JCas prep = JCasFactory.createText("This is a test.", "en");
+        DocumentMetaData origDmd = DocumentMetaData.create(prep);
+        origDmd.setDocumentId("data.txt");
+        origDmd.setDocumentTitle("data.txt");
+        AnalysisEngine writer = createEngine(
+                BinaryCasWriter.class,
+                BinaryCasWriter.PARAM_TARGET_LOCATION, new File(testFolder, "out.bin"),
+                BinaryCasWriter.PARAM_SINGULAR_TARGET, true);
+        writer.process(prep);
+        
+        CollectionReader reader = createReader(
+                BinaryCasReader.class,
+                BinaryCasReader.PARAM_SOURCE_LOCATION, testFolder,
+                BinaryCasReader.PARAM_PATTERNS, "out.bin",
+                BinaryCasReader.PARAM_OVERRIDE_DOCUMENT_METADATA, true);
+        
+        JCas doc = JCasFactory.createJCas();
+        reader.getNext(doc.getCas());
+        
+        // System.out.println(doc.getDocumentAnnotationFs());
+        
+        TOP dmd = doc.getDocumentAnnotationFs();
+        assertEquals((Integer) 0, getFeature(dmd, "begin", Integer.class));
+        assertEquals((Integer) 15, getFeature(dmd, "end", Integer.class));
+        assertEquals("en", getFeature(dmd, "language", String.class));
+        assertEquals("out.bin", getFeature(dmd, "documentTitle", String.class));
+        assertEquals("out.bin", getFeature(dmd, "documentId", String.class));
+        assertTrue(separatorsToUnix(getFeature(dmd, "documentUri", String.class))
+                .endsWith("/target/test-output/BinaryCasWriterReaderTest-testReadingFileOverridingDocumentMetaData/out.bin"));
+        assertTrue(separatorsToUnix(getFeature(dmd, "collectionId", String.class))
+                .endsWith("/target/test-output/BinaryCasWriterReaderTest-testReadingFileOverridingDocumentMetaData/"));
+        assertTrue(separatorsToUnix(getFeature(dmd, "documentBaseUri", String.class))
+                .endsWith("/target/test-output/BinaryCasWriterReaderTest-testReadingFileOverridingDocumentMetaData/"));
+        assertEquals(false, getFeature(dmd, "isLastSegment", Boolean.class));
+    }
+
     
     public void write(String aLocation, String aFormat, boolean aWriteTypeSystem)
         throws Exception
@@ -232,6 +421,7 @@ public class BinaryCasWriterReaderTest
                     BinaryCasWriter.class, 
                     BinaryCasWriter.PARAM_FORMAT, aFormat, 
                     BinaryCasWriter.PARAM_TARGET_LOCATION, aLocation,
+                    BinaryCasWriter.PARAM_FILENAME_EXTENSION, ".bin",
                     BinaryCasWriter.PARAM_TYPE_SYSTEM_LOCATION, 
                             aWriteTypeSystem ? new File(aLocation, "typesystem.bin") : null);
         }
@@ -240,6 +430,7 @@ public class BinaryCasWriterReaderTest
                     BinaryCasWriter.class, 
                     BinaryCasWriter.PARAM_FORMAT, aFormat, 
                     BinaryCasWriter.PARAM_TARGET_LOCATION, aLocation,
+                    BinaryCasWriter.PARAM_FILENAME_EXTENSION, ".bin",
                     BinaryCasWriter.PARAM_TYPE_SYSTEM_LOCATION, 
                             aWriteTypeSystem ? "typesystem.bin" : null);
         }
@@ -249,11 +440,11 @@ public class BinaryCasWriterReaderTest
         runPipeline(textReader, /* dumper, */writer);
 
         if (aLocation.startsWith("jar:")) {
-            assertTrue(new File(testFolder.getRoot(), "archive.zip").exists());
+            assertTrue(new File(testFolder, "archive.zip").exists());
         }
         else {
-            assertTrue(new File(testFolder.getRoot(), "example1.txt.bin").exists());
-            assertTrue(new File(testFolder.getRoot(), "example2.txt.bin").exists());
+            assertTrue(new File(testFolder, "example1.txt.bin").exists());
+            assertTrue(new File(testFolder, "example2.txt.bin").exists());
         }
     }
 
@@ -279,7 +470,7 @@ public class BinaryCasWriterReaderTest
         else {
             writer = AnalysisEngineFactory.createEngine(
                     SerializedCasWriter.class,
-                    SerializedCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot(),
+                    SerializedCasWriter.PARAM_TARGET_LOCATION, testFolder,
                     SerializedCasWriter.PARAM_FILENAME_EXTENSION, ".bin",
                     SerializedCasWriter.PARAM_TYPE_SYSTEM_LOCATION, 
                             aWriteTypeSystem ? "typesystem.bin" : null);
@@ -287,10 +478,10 @@ public class BinaryCasWriterReaderTest
 
         runPipeline(reader, writer);
 
-        assertTrue(new File(testFolder.getRoot(), "example1.txt.bin").exists());
+        assertTrue(new File(testFolder, "example1.txt.bin").exists());
     }
 
-    public void read(String aLocation, int aMode, boolean aLoadExternal)
+    public void read(String aLocation, int aMode, boolean aLoadExternal, boolean aMergeTS)
         throws Exception
     {
         TypeSystemDescription tsd;
@@ -311,19 +502,20 @@ public class BinaryCasWriterReaderTest
         System.out.println("--- READING ---");
         CollectionReader reader;
         if (false) {
-                reader = CollectionReaderFactory.createReader(
-                        BinaryCasReader.class,
-                        BinaryCasReader.PARAM_SOURCE_LOCATION, aLocation,
-                        BinaryCasReader.PARAM_PATTERNS, "*.bin",
-                        // Allow loading only if TSD is not specified
-                        BinaryCasReader.PARAM_TYPE_SYSTEM_LOCATION, 
-                                aLoadExternal ? new File(aLocation, "typesystem.bin") : null);
+            reader = CollectionReaderFactory.createReader(
+                    BinaryCasReader.class,
+                    BinaryCasReader.PARAM_SOURCE_LOCATION, aLocation,
+                    BinaryCasReader.PARAM_PATTERNS, "*.bin",
+                    // Allow loading only if TSD is not specified
+                    BinaryCasReader.PARAM_TYPE_SYSTEM_LOCATION, 
+                            aLoadExternal ? new File(aLocation, "typesystem.bin") : null);
         }
         else {
             reader = CollectionReaderFactory.createReader(
                     BinaryCasReader.class,
                     BinaryCasReader.PARAM_SOURCE_LOCATION, aLocation,
                     BinaryCasReader.PARAM_PATTERNS, "*.bin",
+                    BinaryCasReader.PARAM_MERGE_TYPE_SYSTEM, aMergeTS,
                     // Allow loading only if TSD is not specified
                     BinaryCasReader.PARAM_TYPE_SYSTEM_LOCATION, 
                             aLoadExternal ? "typesystem.bin" : null);
@@ -331,6 +523,7 @@ public class BinaryCasWriterReaderTest
 
         // Test reading into CAS
         CAS cas = CasCreationUtils.createCas(tsd, null, null);
+        reader.typeSystemInit(cas.getTypeSystem());
         reader.getNext(cas);
         String refText1 = readFileToString(new File("src/test/resources/texts/example1.txt"));
         assertEquals(refText1, cas.getDocumentText());
@@ -351,7 +544,7 @@ public class BinaryCasWriterReaderTest
     public void measureSerializedCas()
         throws UIMAException, IOException
     {
-        File file = testFolder.newFile("dummy.bin");
+        File file = new File(testFolder, "dummy.bin");
         
         Iterable<JCas> data = repeat(generateRandomCas(), 100);
         
@@ -409,7 +602,8 @@ public class BinaryCasWriterReaderTest
         for (int n = 0; n < aRepeat; n++) {
             long begin = System.currentTimeMillis();
 //            JCas jcas = JCasFactory.createJCas();
-            JCas jcas = CasCreationUtils.createCas((TypeSystemDescription) null, null, null).getJCas();
+            JCas jcas = CasCreationUtils.createCas((TypeSystemDescription) null, null, null)
+                    .getJCas();
             stats.addValue(System.currentTimeMillis() - begin);
         }
         
@@ -432,13 +626,14 @@ public class BinaryCasWriterReaderTest
             CASCompleteSerializer serializer = (CASCompleteSerializer) is.readObject();
             deserializeCASComplete(serializer, aJCas.getCasImpl());
             
-//            // Initialize the JCas sub-system which is the most often used API in DKPro Core components
-//            try {
-//                aJCas.getCas().getJCas();
-//            }
-//            catch (CASException e) {
-//                throw new IOException(e);
-//            }
+//          // Initialize the JCas sub-system which is the most often used API in DKPro Core 
+//          // components
+//          try {
+//              aJCas.getCas().getJCas();
+//          }
+//          catch (CASException e) {
+//              throw new IOException(e);
+//          }
         }
         catch (ClassNotFoundException e) {
             throw new IOException(e);
@@ -467,10 +662,10 @@ public class BinaryCasWriterReaderTest
         // Generate test data
         Iterable<JCas> testdata = repeat(generateRandomCas(), REPEATS);
         
-        System.out.printf("Data serialized to %s %n", testFolder.getRoot());
+        System.out.printf("Data serialized to %s %n", testFolder);
         
         // Set up configurations
-        Map<String, AnalysisEngineDescription> configs = new LinkedHashMap<String, AnalysisEngineDescription>();
+        Map<String, AnalysisEngineDescription> configs = new LinkedHashMap<>();
         configs.put(
                 "Format S - no compression",
                 createEngineDescription(
@@ -478,7 +673,7 @@ public class BinaryCasWriterReaderTest
                     BinaryCasWriter.PARAM_OVERWRITE, true,
                     BinaryCasWriter.PARAM_FORMAT, "S", 
                     BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
-                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
+                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder));
         configs.put(
                 "Format S+ - no compression",
                 createEngineDescription(
@@ -486,7 +681,7 @@ public class BinaryCasWriterReaderTest
                     BinaryCasWriter.PARAM_OVERWRITE, true,
                     BinaryCasWriter.PARAM_FORMAT, "S+", 
                     BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
-                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
+                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder));
         configs.put(
                 "Format 0 - no compression",
                 createEngineDescription(
@@ -494,7 +689,7 @@ public class BinaryCasWriterReaderTest
                     BinaryCasWriter.PARAM_OVERWRITE, true,
                     BinaryCasWriter.PARAM_FORMAT, "0", 
                     BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
-                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
+                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder));
         configs.put(
                 "Format 4 - no compression",
                 createEngineDescription(
@@ -502,7 +697,7 @@ public class BinaryCasWriterReaderTest
                     BinaryCasWriter.PARAM_OVERWRITE, true,
                     BinaryCasWriter.PARAM_FORMAT, "4", 
                     BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
-                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
+                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder));
         configs.put(
                 "Format 6 - no compression",
                 createEngineDescription(
@@ -510,7 +705,7 @@ public class BinaryCasWriterReaderTest
                     BinaryCasWriter.PARAM_OVERWRITE, true,
                     BinaryCasWriter.PARAM_FORMAT, "6", 
                     BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
-                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
+                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder));
         configs.put(
                 "Format 6+ - no compression",
                 createEngineDescription(
@@ -518,28 +713,28 @@ public class BinaryCasWriterReaderTest
                     BinaryCasWriter.PARAM_OVERWRITE, true,
                     BinaryCasWriter.PARAM_FORMAT, "6+", 
                     BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
-                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
+                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder));
 //        configs.put(
 //                "Format 6+ - GZip compression",
 //                createEngineDescription(
 //                    BinaryCasWriter.class, 
 //                    BinaryCasWriter.PARAM_FORMAT, "6+", 
 //                    BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.GZIP,
-//                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
+//                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder));
 //        configs.put(
 //                "Format 6+ - BZIP2 compression",
 //                createEngineDescription(
 //                    BinaryCasWriter.class, 
 //                    BinaryCasWriter.PARAM_FORMAT, "6+", 
 //                    BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.BZIP2,
-//                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
+//                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder));
 //        configs.put(
 //                "Format 6+ - XZ compression",
 //                createEngineDescription(
 //                    BinaryCasWriter.class, 
 //                    BinaryCasWriter.PARAM_FORMAT, "6+", 
 //                    BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.XZ,
-//                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
+//                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder));
 
         // Run tests
         System.out.printf("--------------------------------------------%n");
@@ -547,13 +742,15 @@ public class BinaryCasWriterReaderTest
             System.out.printf("%s%n", cfg.getKey());
             System.out.printf("  Measuring WRITE%n");
             
-            for (File f : FileUtils.listFiles(testFolder.getRoot(), new PrefixFileFilter("dummy.bin"), null)) {
+            for (File f : FileUtils.listFiles(testFolder, new PrefixFileFilter("dummy.bin"),
+                    null)) {
                 f.delete();
             }
             
             SummaryStatistics writeStats = measureWritePerformance(cfg.getValue(), testdata);
 
-            Collection<File> files = FileUtils.listFiles(testFolder.getRoot(), new PrefixFileFilter("dummy.bin"), null);
+            Collection<File> files = FileUtils.listFiles(testFolder,
+                    new PrefixFileFilter("dummy.bin"), null);
             assertEquals(1, files.size());
             File f = files.iterator().next();
             
@@ -572,7 +769,7 @@ public class BinaryCasWriterReaderTest
             System.out.printf("--------------------------------------------%n");
         }
         
-        measureWriteSerializedCas(testdata, testFolder.newFile("dummy.bin"));
+        measureWriteSerializedCas(testdata, new File(testFolder, "dummy.bin"));
     }
     
     private static void printStats(String aTitle, SummaryStatistics aStats)
@@ -595,18 +792,6 @@ public class BinaryCasWriterReaderTest
         System.out.printf("  Max     %10.0f ms    %10.0f ms%n", aWrite.getMax(), aRead.getMax());
     }
     
-    @Before
-    public void setupLogging()
-    {
-        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
-    }
-
     @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
-    }
+    public DkproTestContext testContext = new DkproTestContext();
 }

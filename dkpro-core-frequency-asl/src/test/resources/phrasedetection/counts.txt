@@ -1,0 +1,17 @@
+a	2
+that	1
+contains	1
+test	2
+This	1
+is	1
+first	2
+example	1
+----------------------------------------------------
+first test	2
+This is	1
+test that	1
+a first	2
+contains a	1
+test example	1
+is a	1
+that contains	1

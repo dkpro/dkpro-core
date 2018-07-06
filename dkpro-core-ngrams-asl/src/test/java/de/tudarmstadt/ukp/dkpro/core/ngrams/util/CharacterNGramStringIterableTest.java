@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2011
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,9 +14,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.ngrams.util;
-
 
 import static org.junit.Assert.assertEquals;
 
@@ -25,16 +24,17 @@ import org.junit.Test;
 public class CharacterNGramStringIterableTest
 {
     @Test
-    public void ngramTest() {
-        
+    public void ngramTest()
+    {
+
         String token = "Token";
-        
-        int i=0;
+
+        int i = 0;
         for (String ngram : new CharacterNGramStringIterable(token, 2, 2)) {
-            if (i==0) {
+            if (i == 0) {
                 assertEquals("To", ngram);
             }
-            
+
             System.out.println(ngram);
             i++;
         }

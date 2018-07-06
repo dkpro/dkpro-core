@@ -19,7 +19,7 @@
 	<property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/mstparser"/>
 	
 	<import>
-		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.6.0/ant-macros.xml"/>
+		<url url="https://raw.githubusercontent.com/dkpro/resource-packager/0.6.0/ant-macros.xml"/>
 	</import>
 
 	<!-- 

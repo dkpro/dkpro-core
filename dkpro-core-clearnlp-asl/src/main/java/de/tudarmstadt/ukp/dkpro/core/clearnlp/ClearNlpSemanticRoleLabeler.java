@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2013
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.clearnlp;
 
 import static java.util.Arrays.asList;
@@ -42,6 +42,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
@@ -67,10 +68,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArgLink;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * ClearNLP semantic role labeller.
  */
+@Component(OperationType.ANNOTATOR_OF_SEMANTIC_ROLE_LABELS)
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
+@ResourceMetaData(name = "ClearNLP Semantic Role Labeler")
 @TypeCapability(
     inputs = {
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -83,50 +90,50 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
         "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg"}
     )
 public class ClearNlpSemanticRoleLabeler
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
-	/**
-	 * Write the tag set(s) to the log when a model is loaded.
-	 */
-	public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
-	protected boolean printTagSet;
+    /**
+     * Write the tag set(s) to the log when a model is loaded.
+     */
+    public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
+    protected boolean printTagSet;
 
-	/**
-	 * Use this language instead of the document language to resolve the model.
-	 */
-	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-	protected String language;
+    /**
+     * Use this language instead of the document language to resolve the model.
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    protected String language;
 
-	/**
-	 * Variant of a model the model. Used to address a specific model if here are multiple models
-	 * for one language.
-	 */
-	public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
-	protected String variant;
+    /**
+     * Variant of a model the model. Used to address a specific model if here are multiple models
+     * for one language.
+     */
+    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+    protected String variant;
 
-	/**
-	 * Location from which the predicate identifier model is read.
-	 */
-	public static final String PARAM_PRED_MODEL_LOCATION = "predModelLocation";
-	@ConfigurationParameter(name = PARAM_PRED_MODEL_LOCATION, mandatory = false)
-	protected String predModelLocation;
+    /**
+     * Location from which the predicate identifier model is read.
+     */
+    public static final String PARAM_PRED_MODEL_LOCATION = "predModelLocation";
+    @ConfigurationParameter(name = PARAM_PRED_MODEL_LOCATION, mandatory = false)
+    protected String predModelLocation;
 
-	/**
-	 * Location from which the roleset classification model is read.
-	 */
-	public static final String PARAM_ROLE_MODEL_LOCATION = "roleModelLocation";
-	@ConfigurationParameter(name = PARAM_ROLE_MODEL_LOCATION, mandatory = false)
-	protected String roleModelLocation;
+    /**
+     * Location from which the roleset classification model is read.
+     */
+    public static final String PARAM_ROLE_MODEL_LOCATION = "roleModelLocation";
+    @ConfigurationParameter(name = PARAM_ROLE_MODEL_LOCATION, mandatory = false)
+    protected String roleModelLocation;
 
-	/**
-	 * Location from which the semantic role labeling model is read.
-	 */
-	public static final String PARAM_SRL_MODEL_LOCATION = "srlModelLocation";
-	@ConfigurationParameter(name = PARAM_SRL_MODEL_LOCATION, mandatory = false)
-	protected String srlModelLocation;
+    /**
+     * Location from which the semantic role labeling model is read.
+     */
+    public static final String PARAM_SRL_MODEL_LOCATION = "srlModelLocation";
+    @ConfigurationParameter(name = PARAM_SRL_MODEL_LOCATION, mandatory = false)
+    protected String srlModelLocation;
 
     /**
      * <p>Normally the arguments point only to the head words of arguments in the dependency tree.
@@ -141,50 +148,50 @@ public class ClearNlpSemanticRoleLabeler
      * clause to be recorded in the argument.</p>
      */
     public static final String PARAM_EXPAND_ARGUMENTS = "expandArguments";
-    @ConfigurationParameter(name = PARAM_EXPAND_ARGUMENTS, mandatory = true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_EXPAND_ARGUMENTS, mandatory = true, defaultValue = "false")
     protected boolean expandArguments;
-	
-	
-	private CasConfigurableProviderBase<AbstractComponent> predicateFinder;
+    
+    
+    private CasConfigurableProviderBase<AbstractComponent> predicateFinder;
 
-	private CasConfigurableProviderBase<AbstractComponent> roleSetClassifier;
+    private CasConfigurableProviderBase<AbstractComponent> roleSetClassifier;
 
-	private CasConfigurableProviderBase<AbstractComponent> roleLabeller;
+    private CasConfigurableProviderBase<AbstractComponent> roleLabeller;
 
-	@Override
-	public void initialize(UimaContext aContext)
-		throws ResourceInitializationException
-	{
-		super.initialize(aContext);
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
 
-		predicateFinder = new CasConfigurableStreamProviderBase<AbstractComponent>()
-		{
-			{
-			    setContextObject(ClearNlpSemanticRoleLabeler.this);
+        predicateFinder = new CasConfigurableStreamProviderBase<AbstractComponent>()
+        {
+            {
+                setContextObject(ClearNlpSemanticRoleLabeler.this);
 
                 setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-pred-${language}-${variant}");
                 setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/"
                         + "pred-${language}-${variant}.properties");
-				setDefault(VARIANT, "ontonotes");
+                setDefault(VARIANT, "ontonotes");
 
-				setOverride(LOCATION, predModelLocation);
-				setOverride(LANGUAGE, language);
-				setOverride(VARIANT, variant);
-			}
+                setOverride(LOCATION, predModelLocation);
+                setOverride(LANGUAGE, language);
+                setOverride(VARIANT, variant);
+            }
 
-			@Override
-			protected AbstractComponent produceResource(InputStream aStream)
-				throws Exception
-			{
+            @Override
+            protected AbstractComponent produceResource(InputStream aStream)
+                throws Exception
+            {
                 BufferedInputStream bis = null;
                 ObjectInputStream ois = null;
                 GZIPInputStream gis = null;
-                try{
+                try {
                     gis = new GZIPInputStream(aStream);
                     bis = new BufferedInputStream(gis);
                     ois = new ObjectInputStream(bis);
                     AbstractComponent component = NLPGetter.getComponent(ois,
-						getAggregatedProperties().getProperty(LANGUAGE), NLPMode.MODE_PRED);
+                        getAggregatedProperties().getProperty(LANGUAGE), NLPMode.MODE_PRED);
                     printTags(NLPMode.MODE_PRED, component);
                     return component;
                 }
@@ -196,37 +203,37 @@ public class ClearNlpSemanticRoleLabeler
                     closeQuietly(bis);
                     closeQuietly(gis);
                 }
-			}
-		};
+            }
+        };
 
-		roleSetClassifier = new CasConfigurableStreamProviderBase<AbstractComponent>()
-		{
-			{
+        roleSetClassifier = new CasConfigurableStreamProviderBase<AbstractComponent>()
+        {
+            {
                 setContextObject(ClearNlpSemanticRoleLabeler.this);
 
                 setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-role-${language}-${variant}");
                 setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/"
                         + "role-${language}-${variant}.properties");
-				setDefault(VARIANT, "ontonotes");
+                setDefault(VARIANT, "ontonotes");
 
-				setOverride(LOCATION, roleModelLocation);
-				setOverride(LANGUAGE, language);
-				setOverride(VARIANT, variant);
-			}
+                setOverride(LOCATION, roleModelLocation);
+                setOverride(LANGUAGE, language);
+                setOverride(VARIANT, variant);
+            }
 
-			@Override
-			protected AbstractComponent produceResource(InputStream aStream)
-				throws Exception
-			{
+            @Override
+            protected AbstractComponent produceResource(InputStream aStream)
+                throws Exception
+            {
                 BufferedInputStream bis = null;
                 ObjectInputStream ois = null;
                 GZIPInputStream gis = null;
-                try{
+                try {
                     gis = new GZIPInputStream(aStream);
                     bis = new BufferedInputStream(gis);
                     ois = new ObjectInputStream(bis);
                     AbstractComponent component = NLPGetter.getComponent(ois,
-						getAggregatedProperties().getProperty(LANGUAGE), NLPMode.MODE_ROLE);
+                        getAggregatedProperties().getProperty(LANGUAGE), NLPMode.MODE_ROLE);
 
                     printTags(NLPMode.MODE_ROLE, component);
                     return component;
@@ -239,37 +246,37 @@ public class ClearNlpSemanticRoleLabeler
                     closeQuietly(bis);
                     closeQuietly(gis);
                 }
-			}
-		};
-		
-		roleLabeller = new CasConfigurableStreamProviderBase<AbstractComponent>()
-		{
-			{
+            }
+        };
+        
+        roleLabeller = new CasConfigurableStreamProviderBase<AbstractComponent>()
+        {
+            {
                 setContextObject(ClearNlpSemanticRoleLabeler.this);
 
                 setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-srl-${language}-${variant}");
                 setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/"
                         + "srl-${language}-${variant}.properties");
-				setDefault(VARIANT, "ontonotes");
+                setDefault(VARIANT, "ontonotes");
 
-				setOverride(LOCATION, srlModelLocation);
-				setOverride(LANGUAGE, language);
-				setOverride(VARIANT, variant);
-			}
+                setOverride(LOCATION, srlModelLocation);
+                setOverride(LANGUAGE, language);
+                setOverride(VARIANT, variant);
+            }
 
-			@Override
-			protected AbstractComponent produceResource(InputStream aStream)
-				throws Exception
-			{
+            @Override
+            protected AbstractComponent produceResource(InputStream aStream)
+                throws Exception
+            {
                 BufferedInputStream bis = null;
                 ObjectInputStream ois = null;
                 GZIPInputStream gis = null;
-                try{
+                try {
                     gis = new GZIPInputStream(aStream);
                     bis = new BufferedInputStream(gis);
                     ois = new ObjectInputStream(bis);
                     AbstractComponent component = NLPGetter.getComponent(ois,
-						getAggregatedProperties().getProperty(LANGUAGE), NLPMode.MODE_SRL);
+                        getAggregatedProperties().getProperty(LANGUAGE), NLPMode.MODE_SRL);
                     printTags(NLPMode.MODE_SRL, component);
                     return component;
                 }
@@ -281,96 +288,96 @@ public class ClearNlpSemanticRoleLabeler
                     closeQuietly(bis);
                     closeQuietly(gis);
                 }
-			}
-		};
-	}
+            }
+        };
+    }
 
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
-		predicateFinder.configure(aJCas.getCas());
-		roleSetClassifier.configure(aJCas.getCas());
-		roleLabeller.configure(aJCas.getCas());
+    @Override
+    public void process(JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
+        predicateFinder.configure(aJCas.getCas());
+        roleSetClassifier.configure(aJCas.getCas());
+        roleLabeller.configure(aJCas.getCas());
 
-		// Iterate over all sentences
-		for (Sentence sentence : select(aJCas, Sentence.class)) {
-			List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
+        // Iterate over all sentences
+        for (Sentence sentence : select(aJCas, Sentence.class)) {
+            List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
             DEPTree tree = new DEPTree();
             
-			// Generate:
-			// - DEPNode
-			// - pos tags
-			// - lemma
-			for (int i = 0; i < tokens.size(); i++) {
-				Token t = tokens.get(i);
-				DEPNode node = new DEPNode(i + 1, tokens.get(i).getCoveredText());
-				node.pos = t.getPos().getPosValue();
-				node.lemma = t.getLemma().getValue();
-				tree.add(node);
-			}
+            // Generate:
+            // - DEPNode
+            // - pos tags
+            // - lemma
+            for (int i = 0; i < tokens.size(); i++) {
+                Token t = tokens.get(i);
+                DEPNode node = new DEPNode(i + 1, tokens.get(i).getText());
+                node.pos = t.getPos().getPosValue();
+                node.lemma = t.getLemma().getValue();
+                tree.add(node);
+            }
 
-			// Generate:
-			// Dependency relations
-			for (Dependency dep : selectCovered(Dependency.class, sentence)) {
-			    if (dep instanceof ROOT) {
-			        // #736 ClearNlpSemanticRoleLabelerTest gets caught in infinite loop
-			        // ClearNLP parser creates roots that do not have a head. We have to replicate
-			        // this here to avoid running into an endless loop.
-			        continue;
-			    }
-			    
-				int headIndex = tokens.indexOf(dep.getGovernor());
-				int tokenIndex = tokens.indexOf(dep.getDependent());
+            // Generate:
+            // Dependency relations
+            for (Dependency dep : selectCovered(Dependency.class, sentence)) {
+                if (dep instanceof ROOT) {
+                    // #736 ClearNlpSemanticRoleLabelerTest gets caught in infinite loop
+                    // ClearNLP parser creates roots that do not have a head. We have to replicate
+                    // this here to avoid running into an endless loop.
+                    continue;
+                }
+                
+                int headIndex = tokens.indexOf(dep.getGovernor());
+                int tokenIndex = tokens.indexOf(dep.getDependent());
 
-				DEPNode token = tree.get(tokenIndex + 1);
-				DEPNode head = tree.get(headIndex + 1);
+                DEPNode token = tree.get(tokenIndex + 1);
+                DEPNode head = tree.get(headIndex + 1);
 
-				token.setHead(head, dep.getDependencyType());
-			}
-			
-			// For the root node
-	        for (int i = 0; i < tokens.size(); i++) {
-	                DEPNode parserNode = tree.get(i + 1);
-	                if(parserNode.getLabel() == null){
-	                    int headIndex = tokens.indexOf(null);
-	                    DEPNode head = tree.get(headIndex + 1);
-	                    parserNode.setHead(head, "root");
-	                }
-	         }
+                token.setHead(head, dep.getDependencyType());
+            }
+            
+            // For the root node
+            for (int i = 0; i < tokens.size(); i++) {
+                DEPNode parserNode = tree.get(i + 1);
+                if (parserNode.getLabel() == null) {
+                    int headIndex = tokens.indexOf(null);
+                    DEPNode head = tree.get(headIndex + 1);
+                    parserNode.setHead(head, "root");
+                }
+            }
 
-			// Do the SRL
-			predicateFinder.getResource().process(tree);
-			roleSetClassifier.getResource().process(tree);
-			roleLabeller.getResource().process(tree);
+            // Do the SRL
+            predicateFinder.getResource().process(tree);
+            roleSetClassifier.getResource().process(tree);
+            roleLabeller.getResource().process(tree);
 
-			// Convert the results into UIMA annotations
-			Map<Token, SemPred> predicates = new HashMap<>();
-			Map<SemPred, List<SemArgLink>> predArgs = new HashMap<>();
+            // Convert the results into UIMA annotations
+            Map<Token, SemPred> predicates = new HashMap<>();
+            Map<SemPred, List<SemArgLink>> predArgs = new HashMap<>();
 
-			for (int i = 0; i < tokens.size(); i++) {
-				DEPNode parserNode = tree.get(i + 1);
-				Token argumentToken = tokens.get(i);
+            for (int i = 0; i < tokens.size(); i++) {
+                DEPNode parserNode = tree.get(i + 1);
+                Token argumentToken = tokens.get(i);
 
-				for (DEPArc argPredArc : parserNode.getSHeads()) {
-					Token predToken = tokens.get(argPredArc.getNode().id - 1);
+                for (DEPArc argPredArc : parserNode.getSHeads()) {
+                    Token predToken = tokens.get(argPredArc.getNode().id - 1);
 
-					// Instantiate the semantic predicate annotation if it hasn't been done yet
-					SemPred pred = predicates.get(predToken);
-					if (pred == null) {
-						// Create the semantic predicate annotation itself
+                    // Instantiate the semantic predicate annotation if it hasn't been done yet
+                    SemPred pred = predicates.get(predToken);
+                    if (pred == null) {
+                        // Create the semantic predicate annotation itself
                         pred = new SemPred(aJCas, predToken.getBegin(), predToken.getEnd());
-						pred.setCategory(argPredArc.getNode().getFeat(DEPLib.FEAT_PB));
-						pred.addToIndexes();
-						predicates.put(predToken, pred);
+                        pred.setCategory(argPredArc.getNode().getFeat(DEPLib.FEAT_PB));
+                        pred.addToIndexes();
+                        predicates.put(predToken, pred);
 
-						// Prepare a list to store its arguments
-						predArgs.put(pred, new ArrayList<>());
-					}
+                        // Prepare a list to store its arguments
+                        predArgs.put(pred, new ArrayList<>());
+                    }
 
-					// Instantiate the semantic argument annotation
-					SemArg arg = new SemArg(aJCas);
-					
+                    // Instantiate the semantic argument annotation
+                    SemArg arg = new SemArg(aJCas);
+                    
                     if (expandArguments) {
                         List<DEPNode> descendents = parserNode.getDescendents(Integer.MAX_VALUE)
                                 .stream()
@@ -380,7 +387,8 @@ public class ClearNlpSemanticRoleLabeler
                         List<Token> descTokens = descendents.stream()
                                 .map(node -> tokens.get(node.id - 1))
                                 .collect(Collectors.toList());
-                        int begin = descTokens.stream().mapToInt(t -> t.getBegin()).min().getAsInt();
+                        int begin = descTokens.stream().mapToInt(t -> t.getBegin()).min()
+                                .getAsInt();
                         int end = descTokens.stream().mapToInt(t -> t.getEnd()).max().getAsInt();
                         arg.setBegin(begin);
                         arg.setEnd(end);
@@ -389,47 +397,47 @@ public class ClearNlpSemanticRoleLabeler
                         arg.setBegin(argumentToken.getBegin());
                         arg.setEnd(argumentToken.getEnd());
                     }
-					
-					arg.addToIndexes();
-					
-					SemArgLink link = new SemArgLink(aJCas);
-					link.setRole(argPredArc.getLabel());
-					link.setTarget(arg);
+                    
+                    arg.addToIndexes();
+                    
+                    SemArgLink link = new SemArgLink(aJCas);
+                    link.setRole(argPredArc.getLabel());
+                    link.setTarget(arg);
 
-					// Remember to which predicate this argument belongs
-					predArgs.get(pred).add(link);
-				}
-			}
+                    // Remember to which predicate this argument belongs
+                    predArgs.get(pred).add(link);
+                }
+            }
 
-			for (Entry<SemPred, List<SemArgLink>> e : predArgs.entrySet()) {
+            for (Entry<SemPred, List<SemArgLink>> e : predArgs.entrySet()) {
                 e.getKey().setArguments(FSCollectionFactory.createFSArray(aJCas, e.getValue()));
-			}
-		}
-	}
+            }
+        }
+    }
 
-	private void printTags(String aType, AbstractComponent aComponent)
-	{
-		if (printTagSet && (aComponent instanceof AbstractStatisticalComponent)) {
-			AbstractStatisticalComponent component = (AbstractStatisticalComponent) aComponent;
+    private void printTags(String aType, AbstractComponent aComponent)
+    {
+        if (printTagSet && (aComponent instanceof AbstractStatisticalComponent)) {
+            AbstractStatisticalComponent component = (AbstractStatisticalComponent) aComponent;
 
-			Set<String> tagSet = new HashSet<String>();
+            Set<String> tagSet = new HashSet<String>();
 
-			for (StringModel model : component.getModels()) {
-				tagSet.addAll(asList(model.getLabels()));
-			}
+            for (StringModel model : component.getModels()) {
+                tagSet.addAll(asList(model.getLabels()));
+            }
 
-			List<String> tagList = new ArrayList<String>(tagSet);
-			Collections.sort(tagList);
+            List<String> tagList = new ArrayList<String>(tagSet);
+            Collections.sort(tagList);
 
-			StringBuilder sb = new StringBuilder();
-			sb.append("Model of " + aType + " contains [").append(tagList.size())
-					.append("] tags: ");
+            StringBuilder sb = new StringBuilder();
+            sb.append("Model of " + aType + " contains [").append(tagList.size())
+                    .append("] tags: ");
 
-			for (String tag : tagList) {
-				sb.append(tag);
-				sb.append(" ");
-			}
-			getContext().getLogger().log(INFO, sb.toString());
-		}
-	}
+            for (String tag : tagList) {
+                sb.append(tag);
+                sb.append(" ");
+            }
+            getContext().getLogger().log(INFO, sb.toString());
+        }
+    }
 }

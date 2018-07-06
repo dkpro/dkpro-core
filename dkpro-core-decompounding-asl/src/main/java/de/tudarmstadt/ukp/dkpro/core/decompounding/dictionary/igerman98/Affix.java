@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *******************************************************************************/
+ **/
 
 package de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.igerman98;
 
@@ -28,120 +28,120 @@ import java.util.regex.Pattern;
 public class Affix
 {
 
-	/**
-	 * Key for prefixed in affix files
-	 */
-	private static final String PREFIX_KEY = "PFX";
+    /**
+     * Key for prefixed in affix files
+     */
+    private static final String PREFIX_KEY = "PFX";
 
-	/**
-	 * Key for suffixes in the affix files
-	 */
-	private static final String SUFFIX_KEY = "SFX";
+    /**
+     * Key for suffixes in the affix files
+     */
+    private static final String SUFFIX_KEY = "SFX";
 
-	private static final String PREFIX_CONDITION_REGEX_PATTERN = "%s.*";
-	private static final String SUFFIX_CONDITION_REGEX_PATTERN = ".*%s";
+    private static final String PREFIX_CONDITION_REGEX_PATTERN = "%s.*";
+    private static final String SUFFIX_CONDITION_REGEX_PATTERN = ".*%s";
 
-	private AffixType type;
-	private char flag;
-	private String stripping;
-	private String affix;
-	private String condition;
-	private Pattern conditionPattern;
-	private boolean crossProduct;
+    private AffixType type;
+    private char flag;
+    private String stripping;
+    private String affix;
+    private String condition;
+    private Pattern conditionPattern;
+    private boolean crossProduct;
 
-	public Affix(AffixType aType)
-	{
-		type = aType;
-	}
+    public Affix(AffixType aType)
+    {
+        type = aType;
+    }
 
-	public Affix(String aKey)
-	{
-		if (aKey.equals(PREFIX_KEY)) {
-			type = AffixType.PREFIX;
-		}
-		else if (aKey.equals(SUFFIX_KEY)) {
-			type = AffixType.SUFFIX;
-		}
-		else {
-			throw new RuntimeException(aKey + " do not exist");
-		}
-	}
+    public Affix(String aKey)
+    {
+        if (aKey.equals(PREFIX_KEY)) {
+            type = AffixType.PREFIX;
+        }
+        else if (aKey.equals(SUFFIX_KEY)) {
+            type = AffixType.SUFFIX;
+        }
+        else {
+            throw new RuntimeException(aKey + " do not exist");
+        }
+    }
 
-	public boolean isCrossProduct()
-	{
-		return crossProduct;
-	}
+    public boolean isCrossProduct()
+    {
+        return crossProduct;
+    }
 
-	public void setCrossProduct(boolean aCrossProduct)
-	{
-		crossProduct = aCrossProduct;
-	}
+    public void setCrossProduct(boolean aCrossProduct)
+    {
+        crossProduct = aCrossProduct;
+    }
 
-	public AffixType getType()
-	{
-		return type;
-	}
+    public AffixType getType()
+    {
+        return type;
+    }
 
-	public void setType(AffixType aType)
-	{
-		type = aType;
-	}
+    public void setType(AffixType aType)
+    {
+        type = aType;
+    }
 
-	public char getFlag()
-	{
-		return flag;
-	}
+    public char getFlag()
+    {
+        return flag;
+    }
 
-	public void setFlag(char aFlag)
-	{
-		flag = aFlag;
-	}
+    public void setFlag(char aFlag)
+    {
+        flag = aFlag;
+    }
 
-	public String getStripping()
-	{
-		return stripping;
-	}
+    public String getStripping()
+    {
+        return stripping;
+    }
 
-	public void setStripping(String aStripping)
-	{
-		stripping = aStripping;
-	}
+    public void setStripping(String aStripping)
+    {
+        stripping = aStripping;
+    }
 
-	public String getAffix()
-	{
-		return affix;
-	}
+    public String getAffix()
+    {
+        return affix;
+    }
 
-	public void setAffix(String aAffix)
-	{
-		affix = aAffix;
-	}
+    public void setAffix(String aAffix)
+    {
+        affix = aAffix;
+    }
 
-	public String getCondition()
-	{
-		return condition;
-	}
+    public String getCondition()
+    {
+        return condition;
+    }
 
-	public void setCondition(String aCondition)
-	{
-		condition = aCondition;
+    public void setCondition(String aCondition)
+    {
+        condition = aCondition;
 
-		String regExp;
+        String regExp;
 
-		switch (type) {
-		case PREFIX:
-			regExp = String.format(PREFIX_CONDITION_REGEX_PATTERN, aCondition);
-			break;
-		case SUFFIX:
-			regExp = String.format(SUFFIX_CONDITION_REGEX_PATTERN, aCondition);
-			break;
-		default:
-			throw new RuntimeException(type.toString()
-					+ " is not supported");
-		}
+        switch (type) {
+        case PREFIX:
+            regExp = String.format(PREFIX_CONDITION_REGEX_PATTERN, aCondition);
+            break;
+        case SUFFIX:
+            regExp = String.format(SUFFIX_CONDITION_REGEX_PATTERN, aCondition);
+            break;
+        default:
+            throw new RuntimeException(type.toString()
+                    + " is not supported");
+        }
 
-		conditionPattern = Pattern.compile(regExp);
-	}
+        conditionPattern = Pattern.compile(regExp);
+    }
 
     /**
      * Adopt this affix on a given word
@@ -150,47 +150,47 @@ public class Affix
      *            a word.
      * @return The word with a change prefix or affix
      */
-	public String handleWord(String aWord)
-	{
-		Matcher m = conditionPattern.matcher(aWord);
+    public String handleWord(String aWord)
+    {
+        Matcher m = conditionPattern.matcher(aWord);
 
-		if (m != null && m.matches()) {
-			if (type.equals(AffixType.PREFIX)) {
-				return handlePrefix(aWord);
-			}
-			else if (type.equals(AffixType.SUFFIX)) {
-				return handleSuffix(aWord);
-			}
-		}
+        if (m != null && m.matches()) {
+            if (type.equals(AffixType.PREFIX)) {
+                return handlePrefix(aWord);
+            }
+            else if (type.equals(AffixType.SUFFIX)) {
+                return handleSuffix(aWord);
+            }
+        }
 
-		return null;
-	}
+        return null;
+    }
 
-	private String handlePrefix(String aWord)
-	{
-		if (stripping.equals("0") || aWord.startsWith(stripping)) {
-			int start = 0;
-			if (!stripping.equals("0") && aWord.startsWith(stripping)) {
-				start = aWord.length() - stripping.length();
-			}
+    private String handlePrefix(String aWord)
+    {
+        if (stripping.equals("0") || aWord.startsWith(stripping)) {
+            int start = 0;
+            if (!stripping.equals("0") && aWord.startsWith(stripping)) {
+                start = aWord.length() - stripping.length();
+            }
 
-			return affix + aWord.substring(start);
-		}
+            return affix + aWord.substring(start);
+        }
 
-		return null;
-	}
+        return null;
+    }
 
-	private String handleSuffix(String aWord)
-	{
-		if (stripping.equals("0") || aWord.endsWith(stripping)) {
-			int end = aWord.length();
-			if (!stripping.equals("0") && aWord.endsWith(stripping)) {
-				end = aWord.length() - stripping.length();
-			}
+    private String handleSuffix(String aWord)
+    {
+        if (stripping.equals("0") || aWord.endsWith(stripping)) {
+            int end = aWord.length();
+            if (!stripping.equals("0") && aWord.endsWith(stripping)) {
+                end = aWord.length() - stripping.length();
+            }
 
-			return aWord.substring(0, end) + affix;
-		}
+            return aWord.substring(0, end) + affix;
+        }
 
-		return null;
-	}
+        return null;
+    }
 }

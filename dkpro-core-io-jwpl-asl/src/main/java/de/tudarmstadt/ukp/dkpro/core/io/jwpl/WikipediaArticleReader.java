@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.jwpl;
 
 import de.tudarmstadt.ukp.wikipedia.api.Page;
@@ -23,15 +23,14 @@ import de.tudarmstadt.ukp.wikipedia.api.exception.WikiTitleParsingException;
 /**
  * Reads all article pages.
  *
- * A parameter controls whether the full article or only the first paragraph is set as the document text.
+ * A parameter controls whether the full article or only the first paragraph is set as the document
+ * text.
  * 
  * No Redirects, disambiguation pages, or discussion pages are regarded, however.
- *
- *
  */
-public class WikipediaArticleReader extends WikipediaPageReader
+public class WikipediaArticleReader
+    extends WikipediaPageReader
 {
-
     @Override
     protected boolean isValidPage(Page page) throws WikiTitleParsingException
     {

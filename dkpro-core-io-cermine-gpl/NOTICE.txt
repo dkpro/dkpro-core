@@ -1,0 +1,6 @@
+The test resource
+    - E17-1045.pdf
+was retrieved from
+    - http://aclweb.org/anthology/E/E17/E17-1045.pdf
+and was originally distributed under CC-BY-4.0 license (http://creativecommons.org/licenses/by/4.0/). License notice
+can be found at http://aclweb.org/anthology/

@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2013
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.ldweb1t;
 
 import static de.tudarmstadt.ukp.dkpro.core.frequency.Web1TProviderBase.BOS;
@@ -24,12 +24,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ExternalResource;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -38,18 +39,22 @@ import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvid
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.ngrams.util.NGramStringIterable;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Language detector based on n-gram frequency counts, e.g. as provided by Web1T
- * 
- *
  */
+@Component(OperationType.LANGUAGE_IDENTIFIER)
+@ResourceMetaData(name = "Web1T Language Detector")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class LanguageDetectorWeb1T
     extends JCasAnnotator_ImplBase
 {
-
     /**
-     * An array of external resources of frequency providers (one for each language that should be detected). 
+     * An array of external resources of frequency providers (one for each language that should be
+     * detected).
      */
     public static final String PARAM_FREQUENCY_PROVIDER_RESOURCES = "frequencyProviders";
     @ExternalResource(key = PARAM_FREQUENCY_PROVIDER_RESOURCES, mandatory = true)

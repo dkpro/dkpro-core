@@ -1,0 +1,37 @@
+groupId: org.dkpro.core.datasets.conll2002
+datasetId: conll2002
+# Didn't find any version information at the source, falling back to date of the corpus files
+version: 20021107
+language: nl
+mediaType: text/x.org.dkpro.conll-2002
+encoding: ISO-8859-1
+
+name: CoNLL-2002 NER Shared Task Data (Dutch)
+url: http://www.clips.ua.ac.be/conll2002/ner/
+description: |
+  This is the data from the CoNLL-2002 shared task on language independent named entity recognition.
+  The Dutch data consist of four editions of the Belgian newspaper
+  "De Morgen" of 2000 (June 2, July 1, August 1 and September 1).
+  The data was annotated as a part of the Atranos project
+  (http://atranos.esat.kuleuven.ac.be/) at the University of
+  Antwerp.
+   
+  (This description has been sourced from the README file included with the corpus).
+  
+artifacts:
+  data.tgz:
+    url: "http://www.cnts.ua.ac.be/conll2002/ner.tgz"
+    sha1: 686ef8fed3125a1d8aefe1351ff0e619fe9c34cb
+    shared: true
+    actions:
+    - action: explode
+      configuration: { strip: 2, includes: [ "000README", "ned*" ] }
+
+roles:
+  training:
+    - data/ned.train.gz
+  testing: 
+    - data/ned.testb.gz
+  development: 
+    - data/ned.testa.gz
+    

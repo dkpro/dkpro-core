@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2014
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.treetagger;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertChunks;
@@ -149,13 +149,13 @@ public class TreeTaggerChunkerTest
         return TestRunner.runTest(aggregate, aLanguage, aText);
     }
     
-	private JCas runTest(String aLanguage, String aText, String[] aLemmas, String[] aTags,
-			String[] aTagClasses)
-		throws Exception
-	{
-		AnalysisEngine tagger = createEngine(TreeTaggerPosTagger.class);
+    private JCas runTest(String aLanguage, String aText, String[] aLemmas, String[] aTags,
+            String[] aTagClasses)
+        throws Exception
+    {
+        AnalysisEngine tagger = createEngine(TreeTaggerPosTagger.class);
         AnalysisEngine chunker = createEngine(TreeTaggerChunker.class,
-        		TreeTaggerPosTagger.PARAM_PRINT_TAGSET, true);
+                TreeTaggerPosTagger.PARAM_PRINT_TAGSET, true);
 
         JCas aJCas = JCasFactory.createJCas();
         aJCas.setDocumentLanguage(aLanguage);
@@ -168,14 +168,16 @@ public class TreeTaggerChunkerTest
 
         // test Chunk annotations
         if (aTagClasses != null && aTags != null) {
-	        int i = 0;
-	        for (Chunk posAnnotation : select(aJCas, Chunk.class)) {
-	        	System.out.println(posAnnotation.getChunkValue()+": ["+posAnnotation.getCoveredText()+"]");
-	            assertEquals("In position "+i, aTagClasses[i], posAnnotation.getType().getShortName());
-	            assertEquals("In position "+i, aTags[i], posAnnotation.getChunkValue());
-	            i++;
-	        }
-	        assertEquals(aTags.length, i);
+            int i = 0;
+            for (Chunk posAnnotation : select(aJCas, Chunk.class)) {
+                System.out.println(posAnnotation.getChunkValue() + ": ["
+                        + posAnnotation.getCoveredText() + "]");
+                assertEquals("In position " + i, aTagClasses[i],
+                        posAnnotation.getType().getShortName());
+                assertEquals("In position " + i, aTags[i], posAnnotation.getChunkValue());
+                i++;
+            }
+            assertEquals(aTags.length, i);
         }
 
         return aJCas;
@@ -183,8 +185,9 @@ public class TreeTaggerChunkerTest
 
     private void checkModelsAndBinary(String lang)
     {
-        Assume.assumeTrue(getClass().getResource(
-                "/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/chunker-" + lang + "-le.bin") != null);
+        Assume.assumeTrue(
+                getClass().getResource("/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/chunker-"
+                        + lang + "-le.bin") != null);
 
         Assume.assumeTrue(getClass().getResource(
                 "/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null);

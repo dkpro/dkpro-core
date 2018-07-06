@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *******************************************************************************/
+ **/
 package de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource;
 
 import java.util.Map;
@@ -28,45 +28,45 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DataDrivenSplitterAl
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundingTree;
 
 public class DataDrivenSplitterResource
-	extends SplitterResource
+    extends SplitterResource
 {
 
-	@SuppressWarnings({ "rawtypes" })
-	@Override
-	public boolean initialize(ResourceSpecifier aSpecifier,
-			Map aAdditionalParams)
-		throws ResourceInitializationException
-	{
-		if (!super.initialize(aSpecifier, aAdditionalParams)) {
-			return false;
-		}
+    @SuppressWarnings({ "rawtypes" })
+    @Override
+    public boolean initialize(ResourceSpecifier aSpecifier,
+            Map aAdditionalParams)
+        throws ResourceInitializationException
+    {
+        if (!super.initialize(aSpecifier, aAdditionalParams)) {
+            return false;
+        }
 
-		splitter = new DataDrivenSplitterAlgorithm();
+        splitter = new DataDrivenSplitterAlgorithm();
 
-		return true;
-	}
+        return true;
+    }
 
-	@Override
-	public DecompoundingTree split(String aWord)
-	{
-		return splitter.split(aWord);
-	}
+    @Override
+    public DecompoundingTree split(String aWord)
+    {
+        return splitter.split(aWord);
+    }
 
-	@Override
-	public void setDictionary(Dictionary aDict)
-	{
-		splitter.setDictionary(aDict);
-	}
+    @Override
+    public void setDictionary(Dictionary aDict)
+    {
+        splitter.setDictionary(aDict);
+    }
 
-	@Override
-	public void setLinkingMorphemes(LinkingMorphemes aMorphemes)
-	{
-		splitter.setLinkingMorphemes(aMorphemes);
-	}
+    @Override
+    public void setLinkingMorphemes(LinkingMorphemes aMorphemes)
+    {
+        splitter.setLinkingMorphemes(aMorphemes);
+    }
 
-	@Override
-	public void setMaximalTreeDepth(int aDepth)
-	{
-		splitter.setMaximalTreeDepth(aDepth);
-	}
+    @Override
+    public void setMaximalTreeDepth(int aDepth)
+    {
+        splitter.setMaximalTreeDepth(aDepth);
+    }
 }

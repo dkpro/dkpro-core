@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2014
  * Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.tcf;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -54,7 +54,8 @@ public class TcfWriterTest
         // Generate a fake metadata that points to a non-TCF file
         DocumentMetaData meta = DocumentMetaData.create(jcas);
         meta.setDocumentBaseUri(new File("src/test/resources").toURI().toURL().toString());
-        meta.setDocumentUri(new File("src/test/resources/not-a-tcf-file.txt").toURI().toURL().toString());
+        meta.setDocumentUri(
+                new File("src/test/resources/not-a-tcf-file.txt").toURI().toURL().toString());
 
         // Add some content
         jcas.setDocumentText("okeydokey");
@@ -64,7 +65,8 @@ public class TcfWriterTest
 
         // Write as TCF
         AnalysisEngineDescription writer = createEngineDescription(TcfWriter.class,
-                TcfWriter.PARAM_TARGET_LOCATION, targetFolder);
+                TcfWriter.PARAM_TARGET_LOCATION, targetFolder,
+                TcfWriter.PARAM_OVERWRITE, true);
         SimplePipeline.runPipeline(jcas, writer);
         
         // Read again as TCF

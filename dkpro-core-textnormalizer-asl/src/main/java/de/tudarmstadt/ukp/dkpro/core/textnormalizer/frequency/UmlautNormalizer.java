@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,33 +14,42 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.textnormalizer.frequency;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.uima.fit.descriptor.LanguageCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
+
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Takes a text and checks for umlauts written as "ae", "oe", or "ue" and normalizes them if they
  * really are umlauts depending on a frequency model.
  */
-@TypeCapability(
-        inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
+@Component(OperationType.NORMALIZER)
+@ResourceMetaData(name = "Umlaut Normalizer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
+@LanguageCapability("de")
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class UmlautNormalizer
     extends ReplacementFrequencyNormalizer_ImplBase
 {
     @Override
     public Map<String, String> getReplacementMap()
     {
-        Map<String, String> replacementMap = new HashMap<String, String>();
-        replacementMap.put("ae", "ä");
-        replacementMap.put("oe", "ö");
-        replacementMap.put("ue", "ü");
-        replacementMap.put("Ae", "Ä");
-        replacementMap.put("Oe", "Ö");
-        replacementMap.put("Ue", "Ü");
-        return replacementMap;
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("ae", "ä");
+        map.put("oe", "ö");
+        map.put("ue", "ü");
+        map.put("Ae", "Ä");
+        map.put("Oe", "Ö");
+        map.put("Ue", "Ü");
+        return map;
     }
 }

@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *******************************************************************************/
+ **/
 package de.tudarmstadt.ukp.dkpro.core.decompounding.uima.annotator;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -146,7 +146,8 @@ public class CompoundAnnotatorTest
 
     private void runAnnotator(AnalysisEngineDescription aed, String[] splits,
             String[] compoundsParts)
-        throws CASException, UIMAException{
+        throws CASException, UIMAException
+    {
         // Create Analysis Engine
         AnalysisEngine ae = AnalysisEngineFactory.createEngine(aed);
 

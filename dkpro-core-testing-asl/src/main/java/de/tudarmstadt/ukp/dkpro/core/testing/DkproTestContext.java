@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2014
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,19 +14,22 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.testing;
+
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+import static org.apache.commons.lang3.StringUtils.substringAfterLast;
 
 import java.io.File;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 
 public class DkproTestContext extends TestWatcher
 {
-    private static final ThreadLocal<DkproTestContext> context = new ThreadLocal<DkproTestContext>() {
+    private static final ThreadLocal<DkproTestContext> context = new ThreadLocal<DkproTestContext>()
+    {
         @Override
         protected DkproTestContext initialValue()
         {
@@ -42,7 +45,7 @@ public class DkproTestContext extends TestWatcher
     {
         super.starting(aDescription);
         
-        className = StringUtils.substringAfterLast(aDescription.getClassName(), ".");
+        className = substringAfterLast(aDescription.getClassName(), ".");
         methodName = aDescription.getMethodName();
         System.out.println("\n=== " + methodName + " =====================");
         
@@ -69,6 +72,19 @@ public class DkproTestContext extends TestWatcher
     public String getTestOutputFolderName()
     {
         return getClassName() + "-" + getMethodName();
+    }
+
+    public static File getCacheFolder()
+    {
+        File folder;
+        if (isNotEmpty(System.getProperty("dkpro.core.testCachePath"))) {
+            folder = new File(System.getProperty("dkpro.core.testCachePath"));
+        }
+        else {
+            folder = new File("../cache");
+        }
+        folder.mkdirs();
+        return folder;
     }
 
     public File getTestOutputFolder()

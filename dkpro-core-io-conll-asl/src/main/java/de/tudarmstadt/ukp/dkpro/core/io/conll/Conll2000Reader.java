@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2013
  * Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.conll;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
@@ -25,13 +25,15 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.util.JCasUtil;
@@ -40,50 +42,32 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.IobDecoder;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * <p>Reads the Conll 2000 chunking format.</p>
- * 
- * <pre><code>
- * He        PRP  B-NP
- * reckons   VBZ  B-VP
- * the       DT   B-NP
- * current   JJ   I-NP
- * account   NN   I-NP
- * deficit   NN   I-NP
- * will      MD   B-VP
- * narrow    VB   I-VP
- * to        TO   B-PP
- * only      RB   B-NP
- * #         #    I-NP
- * 1.8       CD   I-NP
- * billion   CD   I-NP
- * in        IN   B-PP
- * September NNP  B-NP
- * .         .    O
- * </code></pre>
- * 
- * <ol>
- * <li>FORM - token</li>
- * <li>POSTAG - part-of-speech tag</li>
- * <li>CHUNK - chunk (BIO encoded)</li>
- * </ol>
- * 
- * <p>Sentences are separated by a blank new line.</p>
+ * Reads the CoNLL 2000 chunking format.
  * 
  * @see <a href="http://www.cnts.ua.ac.be/conll2000/chunking/">CoNLL 2000 shared task</a>
  */
-@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk"})
+@ResourceMetaData(name = "CoNLL 2000 Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2000})
+@TypeCapability(
+        outputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk"})
 public class Conll2000Reader
     extends JCasResourceCollectionReader_ImplBase
 {
@@ -94,19 +78,10 @@ public class Conll2000Reader
     /**
      * Character encoding of the input data.
      */
-    public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
-    private String encoding;
-
-    /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spamming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
+    public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    private String sourceEncoding;
 
     /**
      * Write part-of-speech information.
@@ -130,7 +105,8 @@ public class Conll2000Reader
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
@@ -156,7 +132,8 @@ public class Conll2000Reader
      * Load the chunk tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_CHUNK_MAPPING_LOCATION = ComponentParameters.PARAM_CHUNK_MAPPING_LOCATION;
+    public static final String PARAM_CHUNK_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_CHUNK_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CHUNK_MAPPING_LOCATION, mandatory = false)
     protected String chunkMappingLocation;
     
@@ -172,8 +149,8 @@ public class Conll2000Reader
         posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
                 posTagset, getLanguage());
 
-        chunkMappingProvider = MappingProviderFactory.createChunkMappingProvider(chunkMappingLocation,
-                chunkTagset, getLanguage());
+        chunkMappingProvider = MappingProviderFactory
+                .createChunkMappingProvider(chunkMappingLocation, chunkTagset, getLanguage());
     }
     
     @Override
@@ -196,7 +173,9 @@ public class Conll2000Reader
         initCas(aJCas, res);
         BufferedReader reader = null;
         try {
-            reader = new BufferedReader(new InputStreamReader(res.getInputStream(), encoding));
+            reader = new BufferedReader(new InputStreamReader(
+                    CompressionUtils.getInputStream(res.getLocation(), res.getInputStream()),
+                    sourceEncoding));
             convert(aJCas, reader);
         }
         finally {
@@ -212,7 +191,6 @@ public class Conll2000Reader
         Type chunkType = JCasUtil.getType(aJCas, Chunk.class);
         Feature chunkValue = chunkType.getFeatureByBaseName("chunkValue");
         IobDecoder decoder = new IobDecoder(aJCas.getCas(), chunkValue, chunkMappingProvider);
-        decoder.setInternTags(internTags);
         
         List<String[]> words;
         while ((words = readSentence(aReader)) != null) {
@@ -238,7 +216,8 @@ public class Conll2000Reader
                     Type posTag = posMappingProvider.getTagType(word[POSTAG]);
                     POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
-                    pos.setPosValue(word[POSTAG]);
+                    pos.setPosValue(word[POSTAG] != null ? word[POSTAG].intern() : null);
+                    POSUtils.assignCoarseValue(pos);
                     pos.addToIndexes();
                     token.setPos(pos);
                 }
@@ -278,7 +257,8 @@ public class Conll2000Reader
             String[] fields = line.split(" ");
             if (fields.length != 3) {
                 throw new IOException(
-                        "Invalid file format. Line needs to have 3 space-separted fields.");
+                        "Invalid file format. Line needs to have 3 space-separted fields: [" + line
+                                + "]");
             }
             words.add(fields);
         }

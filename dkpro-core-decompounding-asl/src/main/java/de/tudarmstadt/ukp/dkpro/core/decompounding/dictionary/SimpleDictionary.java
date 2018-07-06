@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,13 +14,13 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *******************************************************************************/
+ **/
 
 package de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -36,58 +36,49 @@ import java.util.Set;
  * 
  */
 public class SimpleDictionary
-	implements Dictionary
+    implements Dictionary
 {
+    private Set<String> words;
 
-	private Set<String> words;
+    /**
+     * Constructor for a simple dictionary
+     * 
+     * @param aDict
+     *            The file with all words
+     */
+    public SimpleDictionary(File aDict, String aEncoding)
+        throws IOException
+    {
+        try (BufferedReader in = new BufferedReader(
+                new InputStreamReader(new FileInputStream(aDict), aEncoding))) {
+            words = readFileToSet(in);
+        }
+    }
 
-	/**
-	 * Constructor for a simple dictionary
-	 * 
-	 * @param aDict
-	 *            The file with all words
-	 */
-	public SimpleDictionary(File aDict)
-	{
-		try {
-			words = readFileToSet(new BufferedReader(new FileReader(aDict)));
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    /**
+     * Create a simple dictionary from a list of string. This can be used for testing
+     * 
+     * @param aWords
+     *            A list of words
+     */
+    public SimpleDictionary(String... aWords)
+    {
+        words = new HashSet<String>();
+        for (String word : aWords) {
+            words.add(word.toLowerCase());
+        }
+    }
 
-	/**
-	 * Create a simple dictionary from a list of string. This can be used for
-	 * testing
-	 * 
-	 * @param aWords
-	 *            A list of words
-	 */
-	public SimpleDictionary(String... aWords)
-	{
-		words = new HashSet<String>();
-		for (String word : aWords) {
-			words.add(word.toLowerCase());
-		}
-	}
+    public SimpleDictionary(InputStream aDictStream, String aEncoding) throws IOException
+    {
+        words = readFileToSet(new BufferedReader(new InputStreamReader(aDictStream, aEncoding)));
+    }
 
-	public SimpleDictionary(InputStream aDictStream)
-	{
-		try {
-			words = readFileToSet(new BufferedReader(new InputStreamReader(aDictStream)));
-		}
-		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public boolean contains(String aWord)
-	{
-		return words.contains(aWord);
-	}
+    @Override
+    public boolean contains(String aWord)
+    {
+        return words.contains(aWord);
+    }
 
     /**
      * Reads the dictionary to set
@@ -95,28 +86,28 @@ public class SimpleDictionary
      * @param aReader
      *            a reader,
      * @return A set of words
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException
+     *             if an I/O error occurs.
      */
-	protected Set<String> readFileToSet(BufferedReader aReader)
-		throws IOException
-	{
-		Set<String> words = new HashSet<String>();
-		String line;
-		while ((line = aReader.readLine()) != null) {
-			words.add(line.toLowerCase());
-		}
+    protected Set<String> readFileToSet(BufferedReader aReader) throws IOException
+    {
+        Set<String> set = new HashSet<String>();
+        String line;
+        while ((line = aReader.readLine()) != null) {
+            set.add(line.toLowerCase());
+        }
 
-		return words;
-	}
+        return set;
+    }
 
-	@Override
+    @Override
     public List<String> getAll()
-	{
-		return new ArrayList<String>(words);
-	}
+    {
+        return new ArrayList<String>(words);
+    }
 
-	public void setWords(Set<String> aWords)
-	{
-		words = aWords;
-	}
+    public void setWords(Set<String> aWords)
+    {
+        words = aWords;
+    }
 }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nitf SYSTEM "http://www.nitf.org/IPTC/NITF/3.3/specification/dtd/nitf-3-3.dtd">
+<nitf change.date="June 10, 2005" change.time="19:30" version="-//IPTC//DTD NITF 3.3//EN">
+  <head>
+    <title>First test document</title>
+    <meta content="1" name="publication_day_of_month"/>
+    <meta content="1" name="publication_month"/>
+    <meta content="1987" name="publication_year"/>
+    <meta content="Thursday" name="publication_day_of_week"/>
+    <meta content="Some Desk" name="dsk"/>
+    <meta content="42" name="print_page_number"/>
+    <meta content="1" name="print_section"/>
+    <meta content="3" name="print_column"/>
+    <meta content="Examples" name="online_sections"/>
+    <docdata>
+      <doc-id id-string="0"/>
+      <doc.copyright holder="A Newspaper" year="1987"/>
+      <identified-content>
+        <classifier class="indexing_service" type="descriptor">DATA EXAMPLES</classifier>
+        <classifier class="online_producer" type="types_of_material">Lorem ipsum text</classifier>
+        <classifier class="online_producer" type="taxonomic_classifier">Top/Data/Examples</classifier>
+        <classifier class="online_producer" type="general_descriptor">Test Documents</classifier>
+        <classifier class="online_producer" type="general_descriptor">XML Examples</classifier>
+      </identified-content>
+    </docdata>
+    <pubdata date.publication="19870101T000000"
+      ex-ref="http://www.placehold.it/"
+      item-length="107" name="A Newspaper" unit-of-measure="word"/>
+  </head>
+  <body>
+    <body.head>
+      <hedline>
+        <hl1>This is the first example document</hl1>
+      </hedline>
+    </body.head>
+    <body.content>
+      <block class="lead_paragraph">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+		<p>At vero eos et accusam et justo duo dolores et ea rebum.</p>
+      </block>
+      <block class="full_text">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+		<p>At vero eos et accusam et justo duo dolores et ea rebum.</p>
+		<p>Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+		<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+		<p>At vero eos et accusam et justo duo dolores et ea rebum.</p>
+		<p>Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+      </block>
+    </body.content>
+  </body>
+</nitf>

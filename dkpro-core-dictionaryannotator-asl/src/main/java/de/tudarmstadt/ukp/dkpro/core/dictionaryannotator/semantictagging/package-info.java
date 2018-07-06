@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2013
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,12 +14,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 
 /**
- *
  * Interface that provides access to semantic tags from various resources (UBY, key-value maps ...)
- * 
- *
  */
 package de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.semantictagging;

@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,17 +14,16 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *******************************************************************************/
+ **/
 package de.tudarmstadt.ukp.dkpro.core.decompounding.splitter;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
-import junit.framework.Assert;
 
 import org.junit.Test;
 
@@ -34,40 +33,42 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.SimpleDictionary;
 
 public class JWordSplitterTest
 {
-
     @Test
     public void testSplitter()
         throws IOException
     {
         JWordSplitterAlgorithm splitter = new JWordSplitterAlgorithm();
         List<DecompoundedWord> result = splitter.split("Aktionsplan").getAllSplits();
-        Assert.assertEquals(2, result.size());
-        Assert.assertEquals("Aktionsplan", result.get(0).toString());
-        Assert.assertEquals("Aktion(s)+plan", result.get(1).toString());
+        assertEquals(2, result.size());
+        assertEquals("Aktionsplan", result.get(0).toString());
+        assertEquals("Aktion(s)+plan", result.get(1).toString());
     }
 
     @Test
-	public void testSplliter2() throws IOException {
-	    JWordSplitterAlgorithm splitter = new JWordSplitterAlgorithm();
-        final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
-        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"), false);;
+    public void testSplliter2() throws IOException {
+        JWordSplitterAlgorithm splitter = new JWordSplitterAlgorithm();
+        final File dictFile = ResourceUtils.getUrlAsFile(getClass().getResource(
+                "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"),
+                false);
+        ;
 
-	    Dictionary dict = new SimpleDictionary(dictFile);
-	    splitter.setDictionary(dict);
-	    List<DecompoundedWord> result = splitter.split("geräteelektronik").getAllSplits();
-	    assertThat(result.size(),is(1));
-	}
+        Dictionary dict = new SimpleDictionary(dictFile, "UTF-8");
+        splitter.setDictionary(dict);
+        List<DecompoundedWord> result = splitter.split("geräteelektronik").getAllSplits();
+        assertThat(result.size(),is(1));
+    }
 
     @Test
     public void testSplliter3() throws IOException {
         JWordSplitterAlgorithm splitter = new JWordSplitterAlgorithm();
-        final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
-                "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"), false);;
+        final File dictFile = ResourceUtils.getUrlAsFile(getClass().getResource(
+                "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"),
+                false);
+        ;
 
-        Dictionary dict = new SimpleDictionary(dictFile);
+        Dictionary dict = new SimpleDictionary(dictFile, "UTF-8");
         splitter.setDictionary(dict);
         List<DecompoundedWord> result = splitter.split("Schwerwiegend").getAllSplits();
         assertThat(result.size(),is(1));
     }
-
 }

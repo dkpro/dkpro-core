@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2014
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  * 
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
 public class MappingProviderFactory
@@ -56,8 +56,8 @@ public class MappingProviderFactory
         return p;
     }
     
-    public static MappingProvider createChunkMappingProvider(String aMappingLocation, String aTagset,
-            String aLanguage)
+    public static MappingProvider createChunkMappingProvider(String aMappingLocation,
+            String aTagset, String aLanguage)
     {
         MappingProvider chunkMappingProvider = new MappingProvider();
         chunkMappingProvider = new MappingProvider();
@@ -77,6 +77,7 @@ public class MappingProviderFactory
     {
         MappingProvider p = createConstituentMappingProvider(aMappingLocation, null, aLanguage);
         p.addImport(CONSTITUENT_TAGSET, aSource);
+        p.addTagMappingImport("constituent", aSource);
         return p;
     }
     

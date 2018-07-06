@@ -6,6 +6,7 @@
   <vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
   <imports>
     <import name="desc.type.LexicalUnits"/>
+    <import name="desc.type.LexicalUnits_customized"/>
   </imports>
   <types>
     <typeDescription>
@@ -26,6 +27,11 @@
         <featureDescription>
           <name>DependencyType</name>
           <description>The dependency type</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      <featureDescription>
+          <name>flavor</name>
+          <description>Flavor of the dependency relation (basic, collapsed, enhanced, etc...)</description>
           <rangeTypeName>uima.cas.String</rangeTypeName>
         </featureDescription>
       </features>

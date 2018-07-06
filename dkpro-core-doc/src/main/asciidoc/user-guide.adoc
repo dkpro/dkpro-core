@@ -24,6 +24,10 @@ include::{include-dir}introduction.adoc[]
 
 <<<
 
+include::{include-dir}setup.adoc[]
+
+<<<
+
 include::{include-dir}analytics.adoc[]
 
 <<<
@@ -33,3 +37,11 @@ include::{include-dir}io.adoc[]
 <<<
 
 include::{include-dir}models.adoc[]
+
+<<<
+
+include::{include-dir}datasets.adoc[]
+
+<<<
+
+include::{include-dir}bibliography.adoc[]

@@ -7,50 +7,51 @@
 
 __META_SOURCE_URL__=http://www.linguateca.pt/floresta/BibliaFlorestal/anexo4.html
 __META_SOURCE_URL__.1=http://code.google.com/p/universal-pos-tags/source/browse/trunk/pt-bosque.map
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # ?	.
-?=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+?=POS_PUNCT
 # adj	ADJ
-adj=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+adj=POS_ADJ
 # adv	ADV
-adv=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+adv=POS_ADV
 # art	DET
-art=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+art=POS_DET
 # conj-c	CONJ
-conj-c=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+conj-c=POS_CONJ
 # conj-s	CONJ
-conj-s=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+conj-s=POS_CONJ
 # ec	X
-ec=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+ec=POS_X
 # in	X
-in=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+in=POS_X
 # n	NOUN
-n=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+n=POS_NOUN
 # num	NUM
-num=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
+num=POS_NUM
 # pp	NOUN
-pp=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+pp=POS_NOUN
 # pron-det	PRON
-pron-det=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+pron-det=POS_PRON
 # pron-indp	PRON
-pron-indp=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+pron-indp=POS_PRON
 # pron-pers	PRON
-pron-pers=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+pron-pers=POS_PRON
 # prop	NOUN
-prop=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
+prop=POS_PROPN
 # prp	ADP
-prp=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+prp=POS_ADP
 # punc	.
-punc=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+punc=POS_PUNCT
 # v-fin	VERB
-v-fin=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+v-fin=POS_VERB
 # v-ger	VERB
-v-ger=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+v-ger=POS_VERB
 # v-inf	VERB
-v-inf=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+v-inf=POS_VERB
 # v-pcp	VERB
-v-pcp=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+v-pcp=POS_VERB
 # vp	VERB
-vp=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+vp=POS_VERB
 
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS
+*=POS

@@ -6,36 +6,60 @@
 
 __META_SOURCE_URL__=http://spraakbanken.gu.se/parole/Docs/SUC2.0-manual.pdf
 __META_SOURCE_URL__.1=http://stp.lingfil.uu.se/~nivre/swedish_treebank/pos.html
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # AB	Adverb
+AB=POS_ADV
 # DT	Determiner
+DT=POS_DET
 # HA	WH-adverb
+HA=POS_ADV
 # HD	WH-determiner
+HD=POS_DET
 # HP	WH-pronoun
+HP=POS_PRON
 # HS	WH-possessive
+HS=POS_PRON
 # IE	Infinitival marker
 # IN	Interjection
+IN=POS_INTJ
 # JJ	Adjective
+JJ=POS_ADJ
 # KN	Coordinating conjunction
+KN=POS_CONJ
 # NN	Noun
+NN=POS_NOUN
 # PC	Participle
+PC=POS_VERB
 # PL	Particle
+PL=POS_PART
 # PM	Proper Noun
+PM=POS_PROPN
 # PN	Pronoun
+PN=POS_PRON
 # PP	Preposition
+PP=POS_ADP
 # PS	Possessive pronoun
+PS=POS_PRON
 # RG	Cardinal number
+RG=POS_NUM
 # RO	Ordinal number
+RO=POS_NUM
 # SN	Subordinating conjunction
+SN=POS_SCONJ
 # VB	Verb
+VB=POS_VERB
 # 
 # == Supplementary Tag ==
 # UO	Foreign word
 # 
 # == Delimiters ==
 # MAD	Major delimiter
+MAD=POS_PUNCT
 # MID	Minor delimiter
+MID=POS_PUNCT
 # PAD	Pairwise delimiter
+PAD=POS_PUNCT
 
 # Catch-all rule
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+*=POS_X

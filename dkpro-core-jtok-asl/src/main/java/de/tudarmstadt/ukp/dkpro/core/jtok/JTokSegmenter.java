@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2015
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,17 +14,20 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.jtok;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Properties;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.LanguageCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
@@ -43,6 +46,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 /**
  * JTok segmenter.
  */
+@ResourceMetaData(name = "JTok Segmenter")
+@LanguageCapability({"en", "de", "it"})
 @TypeCapability(outputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -54,8 +59,12 @@ public class JTokSegmenter
      * Create {@link Paragraph} annotations.
      */
     public static final String PARAM_WRITE_PARAGRAPH = ComponentParameters.PARAM_WRITE_PARAGRAPH;
-    @ConfigurationParameter(name=PARAM_WRITE_PARAGRAPH, mandatory=true, defaultValue="true")
+    @ConfigurationParameter(name = PARAM_WRITE_PARAGRAPH, mandatory = true, defaultValue = "true")
     private boolean writeParagraph;
+
+    public static final String PARAM_PTB_ESCAPING = "ptbEscaping";
+    @ConfigurationParameter(name = PARAM_PTB_ESCAPING, mandatory = true, defaultValue = "false")
+    private boolean ptbEscaping;
     
     private JTok tokenizer;
     
@@ -66,7 +75,7 @@ public class JTokSegmenter
         super.initialize(aContext);
         
         Properties tokProps = new Properties();
-        try (InputStream in = FileTools.openResourceFileAsStream("jtok/jtok.cfg")) {
+        try (InputStream in = FileTools.openResourceFileAsStream(Paths.get("jtok/jtok.cfg"))) {
             tokProps.load(in);
         }
         catch (IOException e) {
@@ -98,7 +107,12 @@ public class JTokSegmenter
                 
                 for (Token t : tu.getTokens()) {
                     if (isWriteToken()) {
-                        createToken(aJCas, t.getStartIndex(), t.getEndIndex());
+                        if (ptbEscaping) {
+                            createToken(aJCas, t.getPtbImage(), t.getStartIndex(), t.getEndIndex());
+                        }
+                        else {
+                            createToken(aJCas, t.getImage(), t.getStartIndex(), t.getEndIndex());
+                        }
                     }
                 }
             }

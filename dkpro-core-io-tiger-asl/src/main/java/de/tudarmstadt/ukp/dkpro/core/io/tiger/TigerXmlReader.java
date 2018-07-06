@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2013
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,18 +14,23 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.tiger;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -41,6 +46,8 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.util.FSCollectionFactory;
@@ -50,8 +57,10 @@ import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
@@ -81,27 +90,33 @@ import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerSem;
 import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerSentence;
 import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerSplitword;
 import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerTerminal;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * UIMA collection reader for TIGER-XML files. Also supports the augmented format used in the 
+ * UIMA collection reader for TIGER-XML files. Also supports the augmented format used in the
  * Semeval 2010 task which includes semantic role data.
  */
+@ResourceMetaData(name = "TIGER-XML Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@MimeTypeCapability({MimeTypes.APPLICATION_X_TIGER_XML, MimeTypes.APPLICATION_X_SEMEVAL_2010_XML})
 @TypeCapability(
-        outputs = {
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
-            "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg",
-            "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred" })
+        outputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
+                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg",
+                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred" })
 public class TigerXmlReader
     extends JCasResourceCollectionReader_ImplBase
 {
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String mappingPosLocation;
 
@@ -118,7 +133,7 @@ public class TigerXmlReader
      * Write Penn Treebank bracketed structure information. Mind this may not work with all tagsets,
      * in particular not with such that contain "(" or ")" in their tags. The tree is generated
      * using the original tag set in the corpus, not using the mapped tagset!
-     * 
+     *
      * Default: {@code false}
      */
     public static final String PARAM_READ_PENN_TREE = ComponentParameters.PARAM_READ_PENN_TREE;
@@ -128,7 +143,7 @@ public class TigerXmlReader
     /**
      * If a sentence has an illegal structure (e.g. TIGER 2.0 has non-terminal nodes that do not
      * have child nodes), then just ignore these sentences.
-     * 
+     *
      * Default: {@code false}
      */
     public static final String PARAM_IGNORE_ILLEGAL_SENTENCES = "ignoreIllegalSentences";
@@ -177,15 +192,15 @@ public class TigerXmlReader
             XMLEvent e = null;
             while ((e = xmlEventReader.peek()) != null) {
                 if (isStartElement(e, "s")) {
-                    TigerSentence sentence = unmarshaller.unmarshal(xmlEventReader, TigerSentence.class)
-                            .getValue();
+                    TigerSentence sentence = unmarshaller
+                            .unmarshal(xmlEventReader, TigerSentence.class).getValue();
                     try {
                         readSentence(jb, sentence);
                     }
                     catch (IllegalAnnotationStructureException ex) {
                         if (ignoreIllegalSentences) {
                             getLogger().warn("Unable to read sentence [" + sentence.id + "]: "
-                                            + ex.getMessage());
+                                    + ex.getMessage());
                         }
                         else {
                             getLogger().error("Unable to read sentence [" + sentence.id + "]: "
@@ -229,11 +244,14 @@ public class TigerXmlReader
     {
         int sentenceBegin = aBuilder.getPosition();
         int sentenceEnd = aBuilder.getPosition();
-        Map<String, Token> terminals = new HashMap<String, Token>();
-        Map<String, Constituent> nonterminals = new HashMap<String, Constituent>();
+        Map<String, Token> terminals = new LinkedHashMap<>();
+        Map<String, Constituent> nonterminals = new HashMap<>();
+        Map<String, String> tokenIdToTextMap = new HashMap<>();
         for (TigerTerminal t : aSentence.graph.terminals) {
             Token token = aBuilder.add(t.word, Token.class);
+            token.setId(t.id);
             terminals.put(t.id, token);
+            tokenIdToTextMap.put(t.id, t.word);
 
             if (t.lemma != null) {
                 Lemma lemma = new Lemma(aBuilder.getJCas(), token.getBegin(), token.getEnd());
@@ -244,9 +262,10 @@ public class TigerXmlReader
 
             if (t.pos != null) {
                 Type posType = posMappingProvider.getTagType(t.pos);
-                POS posAnno = (POS) aBuilder.getJCas().getCas()
-                        .createAnnotation(posType, token.getBegin(), token.getEnd());
-                posAnno.setPosValue(t.pos.intern());
+                POS posAnno = (POS) aBuilder.getJCas().getCas().createAnnotation(posType,
+                        token.getBegin(), token.getEnd());
+                posAnno.setPosValue(t.pos != null ? t.pos.intern() : null);
+                POSUtils.assignCoarseValue(posAnno);
                 posAnno.addToIndexes();
                 token.setPos(posAnno);
             }
@@ -260,6 +279,7 @@ public class TigerXmlReader
         aBuilder.add("\n");
 
         Sentence sentence = new Sentence(aBuilder.getJCas(), sentenceBegin, sentenceEnd);
+        sentence.setId(aSentence.id);
         sentence.addToIndexes();
 
         if (aSentence.graph.root != null) {
@@ -271,13 +291,15 @@ public class TigerXmlReader
         if (aSentence.sem != null) {
             if (aSentence.sem.splitwords != null) {
                 // read splitwords as terminals/tokens
-                readSplit(aBuilder.getJCas(), terminals, aSentence.sem.splitwords);
+                readSplit(aBuilder.getJCas(), terminals, aSentence.sem.splitwords,
+                        tokenIdToTextMap);
             }
-            readSem(aBuilder.getJCas(), terminals, nonterminals, aSentence.sem);
+            readSem(aBuilder.getJCas(), terminals, nonterminals, aSentence.sem, tokenIdToTextMap);
         }
     }
 
-    private void readSplit(JCas jCas, Map<String, Token> terminals, List<TigerSplitword> splitwords)
+    private void readSplit(JCas jCas, Map<String, Token> terminals, List<TigerSplitword> splitwords,
+            Map<String, String> tokenIdToTextMap)
     {
         for (TigerSplitword split : splitwords) {
             Token orig = terminals.get(split.idref);
@@ -289,34 +311,37 @@ public class TigerXmlReader
                 t.addToIndexes();
                 terminals.put(part.id, t);
                 begin = end;
+                tokenIdToTextMap.put(part.id, part.word);
             }
         }
     }
 
     private void readSem(JCas jCas, Map<String, Token> terminals,
-            Map<String, Constituent> nonterminals, TigerSem sem)
+            Map<String, Constituent> nonterminals, TigerSem sem,
+            Map<String, String> tokenIdToTextMap)
     {
         if (sem.frames != null) {
             for (TigerFrame frame : sem.frames) {
                 SemPred p = new SemPred(jCas);
                 p.setCategory(frame.name);
-                int begin = Integer.MAX_VALUE;
-                int end = 0;
+                Set<Token> frameTokenSet = new HashSet<Token>();
+
                 for (TigerFeNode fenode : frame.target.fenodes) {
                     String reference = fenode.idref;
                     if (terminals.containsKey(reference)) {
                         Token target = terminals.get(reference);
-                        begin = Math.min(begin, target.getBegin());
-                        end = Math.max(end, target.getEnd());
+                        frameTokenSet.add(target);
                     }
                     else if (nonterminals.containsKey(reference)) {
                         Constituent target = nonterminals.get(reference);
-                        begin = Math.min(begin, target.getBegin());
-                        end = Math.max(end, target.getEnd());
+                        addAllTokens(frameTokenSet, target, nonterminals);
                     }
                 }
-                p.setBegin(begin);
-                p.setEnd(end);
+
+                int[] boundary = getBoundaryOfFirstContiguousElement(frameTokenSet, terminals,
+                        frame.id, tokenIdToTextMap);
+                p.setBegin(boundary[0]);
+                p.setEnd(boundary[1]);
 
                 List<SemArgLink> arguments = new ArrayList<>();
                 if (frame.fes != null) {
@@ -357,10 +382,110 @@ public class TigerXmlReader
         }
     }
 
+    private void addAllTokens(Set<Token> frameTokenSet, Constituent target,
+            Map<String, Constituent> nonterminals)
+    {
+        for (Token child : selectCovered(Token.class, target)) {
+            frameTokenSet.add((Token) child);
+        }
+    }
+
+    /**
+     * returns begin-end offset of first contiguous frame element in frameTokenSet
+     *
+     * @param frameTokenSet
+     *            list of tokens in the current frame
+     * @param terminals
+     *            all tokens of the sentence
+     * @return
+     */
+    private int[] getBoundaryOfFirstContiguousElement(Set<Token> frameTokenSet,
+            Map<String, Token> terminals, String frameName, Map<String, String> tokenIdToTextMap)
+    {
+        // sort frameTokenSet
+        Token[] tokenArray = frameTokenSet.toArray(new Token[0]);
+        if (tokenArray.length > 1) {
+            // avoid unnecessary computation for single token frames
+            for (int i = 0, j; i < tokenArray.length; ++i) {
+                int minValue = tokenArray[i].getBegin();
+                int minValueIndex = i;
+                for (j = i + 1; j < tokenArray.length; ++j) {
+                    if (tokenArray[j].getBegin() < minValue) {
+                        minValue = tokenArray[j].getBegin();
+                        minValueIndex = j;
+                    }
+                }
+
+                Token temp = tokenArray[i];
+                tokenArray[i] = tokenArray[minValueIndex];
+                tokenArray[minValueIndex] = temp;
+            }
+        }
+
+        // merge begin-end boundary of nearby tokens
+        int i = 0;
+        List<int[]> tokenBoundaryList = new ArrayList<>();
+        List<String> tokenList = new ArrayList<>();
+        boolean continuousToken = false;
+        if (tokenArray.length > 1) {
+            // avoid unnecessary computation for single token frames
+            for (Entry<String, Token> entry : terminals.entrySet()) {
+                if (tokenArray[i].equals(entry.getValue())) {
+                    if (continuousToken == false) {
+                        tokenBoundaryList.add(
+                                new int[] { tokenArray[i].getBegin(), tokenArray[i].getEnd() });
+                        tokenList.add(entry.getKey());
+                    }
+                    else {
+                        tokenBoundaryList.get(tokenBoundaryList.size() - 1)[1] = tokenArray[i]
+                                .getEnd();
+                        tokenList.set(tokenList.size() - 1,
+                                tokenList.get(tokenList.size() - 1) + " " + entry.getKey());
+                    }
+                    continuousToken = true;
+                    ++i;
+                }
+                else {
+                    continuousToken = false;
+                }
+
+                if (i >= tokenArray.length) {
+                    break;
+                }
+            }
+        }
+        else {
+            tokenBoundaryList.add(new int[] { tokenArray[0].getBegin(), tokenArray[0].getEnd() });
+        }
+
+        //Give warning for noncontiguous frame targets
+        if (tokenBoundaryList.size() > 1) {
+            String completeFrameTarget = "";
+            for (String word : tokenList) {
+                String textRepresentation = tokenIdToTextMap.get(word);
+                if (textRepresentation == null) {
+                    textRepresentation = "";
+                    for (String part : word.split(" ")) {
+                        textRepresentation += tokenIdToTextMap.get(part) + " ";
+                    }
+                    textRepresentation = textRepresentation.trim();
+                }
+                completeFrameTarget += "<" + word + "," + textRepresentation + "> ";
+            }
+            getLogger().warn("Target of [" + frameName
+                    + "] frame consists of noncontiguous tokens! Tokens are: "
+                    + completeFrameTarget);
+        }
+        // return begin and end for first element
+        int begin = tokenBoundaryList.get(0)[0];
+        int end = tokenBoundaryList.get(0)[1];
+        return new int[] { begin, end };
+    }
+
     private Annotation readNode(JCas aJCas, Map<String, Token> aTerminals,
             Map<String, Constituent> aNonTerminals, TigerGraph aGraph, Constituent aParent,
             TigerEdge aInEdge, TigerNode aNode)
-        throws IllegalAnnotationStructureException
+                throws IllegalAnnotationStructureException
     {
         int begin = Integer.MAX_VALUE;
         int end = 0;
@@ -376,10 +501,10 @@ public class TigerXmlReader
 
             // TIGER 2.0 has some invalid non-terminal nodes without edges
             if (aNode.edges == null) {
-                throw new IllegalAnnotationStructureException("Non-terminal node [" + aNode.id
-                        + "] has no edges.");
+                throw new IllegalAnnotationStructureException(
+                        "Non-terminal node [" + aNode.id + "] has no edges.");
             }
-            
+
             for (TigerEdge edge : aNode.edges) {
                 Annotation child = readNode(aJCas, aTerminals, aNonTerminals, aGraph, con, edge,
                         aGraph.get(edge.idref));
@@ -403,7 +528,7 @@ public class TigerXmlReader
             aNonTerminals.put(aNode.id, con);
             return con;
         }
-        else /* Terminal node */{
+        else /* Terminal node */ {
             return aTerminals.get(aNode.id);
         }
     }

@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2011
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.ngrams.util;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Creates a NGram iterable from a list of tokens.
@@ -33,7 +33,7 @@ import org.apache.commons.lang.StringUtils;
  */
 public class NGramStringIterable implements Iterable<String>
 {
-	List<String> nGramList;
+    List<String> nGramList;
 
 //    /**
 //     * @param tokens An iterable of annotations.
@@ -52,12 +52,12 @@ public class NGramStringIterable implements Iterable<String>
      * @param maxN
      *            the maximal n-gram length.
      */
-	public NGramStringIterable(Iterable<String> tokens, int minN, int maxN)
-	{
-		this.nGramList = createNGramList(tokens, minN, maxN);
-	}
-	
-	/**
+    public NGramStringIterable(Iterable<String> tokens, int minN, int maxN)
+    {
+        this.nGramList = createNGramList(tokens, minN, maxN);
+    }
+    
+    /**
      * @param tokens An array of tokens.
      * @param minN
      *            the minimal n-gram length.
@@ -69,49 +69,49 @@ public class NGramStringIterable implements Iterable<String>
         this.nGramList = createNGramList(Arrays.asList(tokens), minN, maxN);
     }
 
-	
-	@Override
-	public Iterator<String> iterator()
-	{
-		return nGramList.iterator();
-	}
+    
+    @Override
+    public Iterator<String> iterator()
+    {
+        return nGramList.iterator();
+    }
 
-	private List<String> createNGramList(Iterable<String> tokens, int minN, int maxN)
-	{
+    private List<String> createNGramList(Iterable<String> tokens, int minN, int maxN)
+    {
         if (minN > maxN) {
             throw new IllegalArgumentException("minN needs to be smaller or equal than maxN.");
         }
 
-		List<String> nGrams = new ArrayList<String>();
+        List<String> nGrams = new ArrayList<String>();
 
-		// fill token list
-		List<String> tokenList = new ArrayList<String>();
-		for (String t : tokens) {
-			tokenList.add(t);
-		}
+        // fill token list
+        List<String> tokenList = new ArrayList<String>();
+        for (String t : tokens) {
+            tokenList.add(t);
+        }
 
-		for (int k = minN; k <= maxN; k++) {
-			// if the number of tokens is less than k => break
-			if (tokenList.size() < k) {
-				break;
-			}
-			nGrams.addAll(getNGrams(tokenList, k));
-		}
+        for (int k = minN; k <= maxN; k++) {
+            // if the number of tokens is less than k => break
+            if (tokenList.size() < k) {
+                break;
+            }
+            nGrams.addAll(getNGrams(tokenList, k));
+        }
 
-		return nGrams;
-	}
+        return nGrams;
+    }
 
-	private List<String> getNGrams(List<String> tokenList, int k)
-	{
-		List<String> nGrams = new ArrayList<String>();
+    private List<String> getNGrams(List<String> tokenList, int k)
+    {
+        List<String> nGrams = new ArrayList<String>();
 
-		int size = tokenList.size();
-		for (int i = 0; i < (size + 1 - k); i++) {
-			nGrams.add(
-					StringUtils.join(tokenList.subList(i, i + k), ' ')
-			);
-		}
+        int size = tokenList.size();
+        for (int i = 0; i < (size + 1 - k); i++) {
+            nGrams.add(
+                    StringUtils.join(tokenList.subList(i, i + k), ' ')
+            );
+        }
 
-		return nGrams;
-	}
+        return nGrams;
+    }
 }

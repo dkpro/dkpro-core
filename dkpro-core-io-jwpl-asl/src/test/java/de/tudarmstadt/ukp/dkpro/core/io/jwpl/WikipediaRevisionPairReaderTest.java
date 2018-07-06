@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.jwpl;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
@@ -34,22 +34,22 @@ public class WikipediaRevisionPairReaderTest
 {
     // FIXME currently there is no test database to test revisions
     @Test
-	public void wikipediaRevisionReaderTest()
-		throws Exception
-	{
+    public void wikipediaRevisionReaderTest()
+        throws Exception
+    {
         CollectionReaderDescription reader = createReaderDescription(
-		        WikipediaRevisionPairReader.class,
-				WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
-				WikipediaReaderBase.PARAM_DB,       "wikiapi_simple_20090119",
-				WikipediaReaderBase.PARAM_USER,     "student",
-				WikipediaReaderBase.PARAM_PASSWORD, "student",
-				WikipediaReaderBase.PARAM_LANGUAGE, Language.simple_english);
+                WikipediaRevisionPairReader.class,
+                WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
+                WikipediaReaderBase.PARAM_DB,       "wikiapi_simple_20090119",
+                WikipediaReaderBase.PARAM_USER,     "student",
+                WikipediaReaderBase.PARAM_PASSWORD, "student",
+                WikipediaReaderBase.PARAM_LANGUAGE, Language.simple_english);
 
-		int i = 0;
-		for (JCas jcas : new JCasIterable(reader)) {
-			assertNotNull(jcas);
+        int i = 0;
+        for (JCas jcas : new JCasIterable(reader)) {
+            assertNotNull(jcas);
 
-			JCas view1 = jcas.getView(WikipediaRevisionPairReader.REVISION_1);
+            JCas view1 = jcas.getView(WikipediaRevisionPairReader.REVISION_1);
             JCas view2 = jcas.getView(WikipediaRevisionPairReader.REVISION_2);
 
             DocumentMetaData md1 = DocumentMetaData.get(view1);
@@ -59,9 +59,9 @@ public class WikipediaRevisionPairReaderTest
 //            System.out.println(md2);
 
             i++;
-			if (i > 10) {
-			    break;
-			}
-		}
-	}
+            if (i > 10) {
+                break;
+            }
+        }
+    }
 }

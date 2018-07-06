@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2014
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.lingpipe;
 
@@ -35,6 +35,7 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -43,6 +44,7 @@ import com.aliasi.hmm.HiddenMarkovModel;
 import com.aliasi.hmm.HmmDecoder;
 import com.aliasi.tag.Tagging;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -52,10 +54,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * LingPipe part-of-speech tagger.
  */
+@Component(OperationType.PART_OF_SPEECH_TAGGER)
+@ResourceMetaData(name = "LingPipe POS-Tagger")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -80,6 +88,20 @@ public class LingPipePosTagger
     protected String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Load the model from this location instead of locating the model automatically.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -90,19 +112,10 @@ public class LingPipePosTagger
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
-
-    /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
 
     /**
      * Log the tag set(s) when a model is loaded.
@@ -110,14 +123,14 @@ public class LingPipePosTagger
      * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
     protected boolean printTagSet;
 
     /**
      * Lingpipe models tend to be trained on lower-case tags, but our POS mappings use uppercase.
      */
     public static final String PARAM_UPPERCASE_TAGS = "uppercaseTags";
-    @ConfigurationParameter(name = PARAM_UPPERCASE_TAGS, mandatory = true, defaultValue="true")
+    @ConfigurationParameter(name = PARAM_UPPERCASE_TAGS, mandatory = true, defaultValue = "true")
     protected boolean uppercaseTags;
     
     private CasConfigurableProviderBase<HmmDecoder> modelProvider;
@@ -173,7 +186,7 @@ public class LingPipePosTagger
             List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
             String[] tokenTexts = toText(tokens).toArray(new String[tokens.size()]);
 
-            Tagging<String> tagging = modelProvider.getResource().tag(asList(tokenTexts));            
+            Tagging<String> tagging = modelProvider.getResource().tag(asList(tokenTexts));
 
             for (int n = 0; n < tagging.size(); n++) {
                 Token t = tokens.get(n);
@@ -183,7 +196,8 @@ public class LingPipePosTagger
                 }
                 Type posTag = mappingProvider.getTagType(tag);
                 POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
-                posAnno.setPosValue(internTags ? tag.intern() : tag);
+                posAnno.setPosValue(tag != null ? tag.intern() : null);
+                POSUtils.assignCoarseValue(posAnno);
                 posAnno.addToIndexes();
                 t.setPos(posAnno);
             }

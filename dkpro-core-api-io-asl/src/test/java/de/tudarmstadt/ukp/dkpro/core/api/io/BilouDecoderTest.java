@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2016
  * Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.api.io;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertChunks;
@@ -41,9 +41,8 @@ public class BilouDecoderTest
     public void bilouEncoderTest() 
         throws Exception
     {
-        String[] input = new String[] {
-                "O","O","O","B-NP","I-NP","I-NP","L-NP","O","O","O","O","O","U-NP","O","U-NP","O","O","O"
-        };
+        String[] input = new String[] { "O", "O", "O", "B-NP", "I-NP", "I-NP", "L-NP", "O", "O",
+                "O", "O", "O", "U-NP", "O", "U-NP", "O", "O", "O" };
         
         String[] chunks = new String[] {
                 "[ 10, 43]Chunk(NP) (very complicated example sentence)",

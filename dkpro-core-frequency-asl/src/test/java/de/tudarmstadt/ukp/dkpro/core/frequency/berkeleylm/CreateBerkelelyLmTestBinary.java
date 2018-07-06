@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.frequency.berkeleylm;
 
 import java.io.IOException;
@@ -25,8 +25,6 @@ import edu.berkeley.nlp.lm.util.Logger;
 
 public class CreateBerkelelyLmTestBinary
 {
-
-    
     public static void main(String[] args) throws IOException
     {
         run("src/test/resources/googledir/", "target/test.ser");

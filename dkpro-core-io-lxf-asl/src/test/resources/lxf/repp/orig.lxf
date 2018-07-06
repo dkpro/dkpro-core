@@ -1,0 +1,562 @@
+{
+    "edges": [
+        {
+            "entity": "edge",
+            "from": [
+                "repp",
+                "repp-n1@1"
+            ],
+            "id": "repp-e1@1",
+            "index": 0,
+            "origin": "repp",
+            "rank": 0,
+            "to": [
+                "tokenizer",
+                "tokenizer-n1@1"
+            ],
+            "type": "linkage_token_sentence"
+        },
+        {
+            "entity": "edge",
+            "from": [
+                "repp",
+                "repp-n2@1"
+            ],
+            "id": "repp-e2@1",
+            "index": 1,
+            "origin": "repp",
+            "rank": 0,
+            "to": [
+                "tokenizer",
+                "tokenizer-n1@1"
+            ],
+            "type": "linkage_token_sentence"
+        },
+        {
+            "entity": "edge",
+            "from": [
+                "repp",
+                "repp-n3@1"
+            ],
+            "id": "repp-e3@1",
+            "index": 2,
+            "origin": "repp",
+            "rank": 0,
+            "to": [
+                "tokenizer",
+                "tokenizer-n1@1"
+            ],
+            "type": "linkage_token_sentence"
+        },
+        {
+            "entity": "edge",
+            "from": [
+                "repp",
+                "repp-n4@1"
+            ],
+            "id": "repp-e4@1",
+            "index": 3,
+            "origin": "repp",
+            "rank": 0,
+            "to": [
+                "tokenizer",
+                "tokenizer-n1@1"
+            ],
+            "type": "linkage_token_sentence"
+        },
+        {
+            "entity": "edge",
+            "from": [
+                "repp",
+                "repp-n5@1"
+            ],
+            "id": "repp-e5@1",
+            "index": 4,
+            "origin": "repp",
+            "rank": 0,
+            "to": [
+                "tokenizer",
+                "tokenizer-n1@1"
+            ],
+            "type": "linkage_token_sentence"
+        },
+        {
+            "entity": "edge",
+            "from": [
+                "repp",
+                "repp-n6@1"
+            ],
+            "id": "repp-e6@1",
+            "index": 5,
+            "origin": "repp",
+            "rank": 0,
+            "to": [
+                "tokenizer",
+                "tokenizer-n2@1"
+            ],
+            "type": "linkage_token_sentence"
+        },
+        {
+            "entity": "edge",
+            "from": [
+                "repp",
+                "repp-n7@1"
+            ],
+            "id": "repp-e7@1",
+            "index": 6,
+            "origin": "repp",
+            "rank": 0,
+            "to": [
+                "tokenizer",
+                "tokenizer-n2@1"
+            ],
+            "type": "linkage_token_sentence"
+        },
+        {
+            "entity": "edge",
+            "from": [
+                "repp",
+                "repp-n8@1"
+            ],
+            "id": "repp-e8@1",
+            "index": 7,
+            "origin": "repp",
+            "rank": 0,
+            "to": [
+                "tokenizer",
+                "tokenizer-n2@1"
+            ],
+            "type": "linkage_token_sentence"
+        },
+        {
+            "entity": "edge",
+            "from": [
+                "repp",
+                "repp-n9@1"
+            ],
+            "id": "repp-e9@1",
+            "index": 8,
+            "origin": "repp",
+            "rank": 0,
+            "to": [
+                "tokenizer",
+                "tokenizer-n2@1"
+            ],
+            "type": "linkage_token_sentence"
+        },
+        {
+            "entity": "edge",
+            "from": [
+                "repp",
+                "repp-n10@1"
+            ],
+            "id": "repp-e10@1",
+            "index": 9,
+            "origin": "repp",
+            "rank": 0,
+            "to": [
+                "tokenizer",
+                "tokenizer-n2@1"
+            ],
+            "type": "linkage_token_sentence"
+        },
+        {
+            "entity": "edge",
+            "from": [
+                "repp",
+                "repp-n11@1"
+            ],
+            "id": "repp-e11@1",
+            "index": 10,
+            "origin": "repp",
+            "rank": 0,
+            "to": [
+                "tokenizer",
+                "tokenizer-n2@1"
+            ],
+            "type": "linkage_token_sentence"
+        }
+    ],
+    "media": "This is a test. And here is another one.\n",
+    "nodes": [
+        {
+            "annotations": {
+                "label": "This is a test."
+            },
+            "entity": "node",
+            "id": "tokenizer-n1@1",
+            "index": 0,
+            "links": [
+                [
+                    [
+                        "tokenizer",
+                        "tokenizer-r1@1"
+                    ]
+                ]
+            ],
+            "origin": "tokenizer",
+            "rank": 0,
+            "type": "sentence"
+        },
+        {
+            "annotations": {
+                "label": "And here is another one."
+            },
+            "entity": "node",
+            "id": "tokenizer-n2@1",
+            "index": 1,
+            "links": [
+                [
+                    [
+                        "tokenizer",
+                        "tokenizer-r2@1"
+                    ]
+                ]
+            ],
+            "origin": "tokenizer",
+            "rank": 0,
+            "type": "sentence"
+        },
+        {
+            "annotations": {
+                "label": "This"
+            },
+            "entity": "node",
+            "id": "repp-n1@1",
+            "index": 0,
+            "links": [
+                [
+                    [
+                        "repp",
+                        "repp-r1@1"
+                    ]
+                ]
+            ],
+            "origin": "repp",
+            "rank": 0,
+            "type": "token"
+        },
+        {
+            "annotations": {
+                "label": "is"
+            },
+            "entity": "node",
+            "id": "repp-n2@1",
+            "index": 1,
+            "links": [
+                [
+                    [
+                        "repp",
+                        "repp-r2@1"
+                    ]
+                ]
+            ],
+            "origin": "repp",
+            "rank": 0,
+            "type": "token"
+        },
+        {
+            "annotations": {
+                "label": "a"
+            },
+            "entity": "node",
+            "id": "repp-n3@1",
+            "index": 2,
+            "links": [
+                [
+                    [
+                        "repp",
+                        "repp-r3@1"
+                    ]
+                ]
+            ],
+            "origin": "repp",
+            "rank": 0,
+            "type": "token"
+        },
+        {
+            "annotations": {
+                "label": "test"
+            },
+            "entity": "node",
+            "id": "repp-n4@1",
+            "index": 3,
+            "links": [
+                [
+                    [
+                        "repp",
+                        "repp-r4@1"
+                    ]
+                ]
+            ],
+            "origin": "repp",
+            "rank": 0,
+            "type": "token"
+        },
+        {
+            "annotations": {
+                "label": "."
+            },
+            "entity": "node",
+            "id": "repp-n5@1",
+            "index": 4,
+            "links": [
+                [
+                    [
+                        "repp",
+                        "repp-r5@1"
+                    ]
+                ]
+            ],
+            "origin": "repp",
+            "rank": 0,
+            "type": "token"
+        },
+        {
+            "annotations": {
+                "label": "And"
+            },
+            "entity": "node",
+            "id": "repp-n6@1",
+            "index": 5,
+            "links": [
+                [
+                    [
+                        "repp",
+                        "repp-r6@1"
+                    ]
+                ]
+            ],
+            "origin": "repp",
+            "rank": 0,
+            "type": "token"
+        },
+        {
+            "annotations": {
+                "label": "here"
+            },
+            "entity": "node",
+            "id": "repp-n7@1",
+            "index": 6,
+            "links": [
+                [
+                    [
+                        "repp",
+                        "repp-r7@1"
+                    ]
+                ]
+            ],
+            "origin": "repp",
+            "rank": 0,
+            "type": "token"
+        },
+        {
+            "annotations": {
+                "label": "is"
+            },
+            "entity": "node",
+            "id": "repp-n8@1",
+            "index": 7,
+            "links": [
+                [
+                    [
+                        "repp",
+                        "repp-r8@1"
+                    ]
+                ]
+            ],
+            "origin": "repp",
+            "rank": 0,
+            "type": "token"
+        },
+        {
+            "annotations": {
+                "label": "another"
+            },
+            "entity": "node",
+            "id": "repp-n9@1",
+            "index": 8,
+            "links": [
+                [
+                    [
+                        "repp",
+                        "repp-r9@1"
+                    ]
+                ]
+            ],
+            "origin": "repp",
+            "rank": 0,
+            "type": "token"
+        },
+        {
+            "annotations": {
+                "label": "one"
+            },
+            "entity": "node",
+            "id": "repp-n10@1",
+            "index": 9,
+            "links": [
+                [
+                    [
+                        "repp",
+                        "repp-r10@1"
+                    ]
+                ]
+            ],
+            "origin": "repp",
+            "rank": 0,
+            "type": "token"
+        },
+        {
+            "annotations": {
+                "label": "."
+            },
+            "entity": "node",
+            "id": "repp-n11@1",
+            "index": 10,
+            "links": [
+                [
+                    [
+                        "repp",
+                        "repp-r11@1"
+                    ]
+                ]
+            ],
+            "origin": "repp",
+            "rank": 0,
+            "type": "token"
+        }
+    ],
+    "regions": [
+        {
+            "anchors": [
+                0,
+                15
+            ],
+            "entity": "region",
+            "id": "tokenizer-r1@1",
+            "index": 0,
+            "origin": "tokenizer"
+        },
+        {
+            "anchors": [
+                16,
+                40
+            ],
+            "entity": "region",
+            "id": "tokenizer-r2@1",
+            "index": 1,
+            "origin": "tokenizer"
+        },
+        {
+            "anchors": [
+                0,
+                4
+            ],
+            "entity": "region",
+            "id": "repp-r1@1",
+            "index": 0,
+            "origin": "repp"
+        },
+        {
+            "anchors": [
+                5,
+                7
+            ],
+            "entity": "region",
+            "id": "repp-r2@1",
+            "index": 1,
+            "origin": "repp"
+        },
+        {
+            "anchors": [
+                8,
+                9
+            ],
+            "entity": "region",
+            "id": "repp-r3@1",
+            "index": 2,
+            "origin": "repp"
+        },
+        {
+            "anchors": [
+                10,
+                14
+            ],
+            "entity": "region",
+            "id": "repp-r4@1",
+            "index": 3,
+            "origin": "repp"
+        },
+        {
+            "anchors": [
+                14,
+                15
+            ],
+            "entity": "region",
+            "id": "repp-r5@1",
+            "index": 4,
+            "origin": "repp"
+        },
+        {
+            "anchors": [
+                16,
+                19
+            ],
+            "entity": "region",
+            "id": "repp-r6@1",
+            "index": 5,
+            "origin": "repp"
+        },
+        {
+            "anchors": [
+                20,
+                24
+            ],
+            "entity": "region",
+            "id": "repp-r7@1",
+            "index": 6,
+            "origin": "repp"
+        },
+        {
+            "anchors": [
+                25,
+                27
+            ],
+            "entity": "region",
+            "id": "repp-r8@1",
+            "index": 7,
+            "origin": "repp"
+        },
+        {
+            "anchors": [
+                28,
+                35
+            ],
+            "entity": "region",
+            "id": "repp-r9@1",
+            "index": 8,
+            "origin": "repp"
+        },
+        {
+            "anchors": [
+                36,
+                39
+            ],
+            "entity": "region",
+            "id": "repp-r10@1",
+            "index": 9,
+            "origin": "repp"
+        },
+        {
+            "anchors": [
+                39,
+                40
+            ],
+            "entity": "region",
+            "id": "repp-r11@1",
+            "index": 10,
+            "origin": "repp"
+        }
+    ]
+}

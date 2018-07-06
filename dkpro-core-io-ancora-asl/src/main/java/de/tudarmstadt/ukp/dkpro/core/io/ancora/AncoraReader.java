@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2016
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.ancora;
 
 import static de.tudarmstadt.ukp.dkpro.core.io.ancora.internal.AncoraConstants.ATTR_LEMMA;
@@ -41,6 +41,8 @@ import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.internal.ExtendedLogger;
 import org.apache.uima.jcas.JCas;
@@ -51,18 +53,24 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Read AnCora XML format.
  */
+@ResourceMetaData(name = "AnCora XML Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@MimeTypeCapability({MimeTypes.APPLICATION_XML, MimeTypes.APPLICATION_X_ANCORA_XML})
 @TypeCapability(
         outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
@@ -104,7 +112,8 @@ public class AncoraReader
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String mappingPosLocation;
 
@@ -118,16 +127,14 @@ public class AncoraReader
     protected String posTagset;
     
     public static final String PARAM_SPLIT_MULTI_WORD_TOKENS = "splitMultiWordTokens";
-    @ConfigurationParameter(name = PARAM_SPLIT_MULTI_WORD_TOKENS, mandatory = true, defaultValue="true")
+    @ConfigurationParameter(name = PARAM_SPLIT_MULTI_WORD_TOKENS, mandatory = true, 
+            defaultValue = "true")
     protected boolean splitMultiWordTokens;
 
     public static final String PARAM_DROP_SENTENCES_WITH_MISSING_POS = "dropSentencesMissingPosTags";
-    @ConfigurationParameter(name = PARAM_DROP_SENTENCES_WITH_MISSING_POS, mandatory = true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_DROP_SENTENCES_WITH_MISSING_POS, mandatory = true, 
+            defaultValue = "false")
     protected boolean dropSentencesMissingPosTags;
-    
-    public static final String PARAM_REDUCE_TAGSET = "reduceTagset";
-    @ConfigurationParameter(name = PARAM_REDUCE_TAGSET, mandatory = true, defaultValue="true")
-    protected boolean reduceTagset;
     
     private MappingProvider posMappingProvider;
 
@@ -300,7 +307,8 @@ public class AncoraReader
             if (aPos != null && readPOS) {
                 Type posTagType = posMappingProvider.getTagType(aPos);
                 POS pos = (POS) getJCas().getCas().createAnnotation(posTagType, start, end);
-                pos.setPosValue(aPos);
+                pos.setPosValue(aPos != null ? aPos.intern() : null);
+                POSUtils.assignCoarseValue(pos);
                 pos.addToIndexes();
                 if (token != null) {
                     token.setPos(pos);
@@ -332,7 +340,7 @@ public class AncoraReader
                 sentenceStart = getBuffer().length();
             }
             else if (wd != null && sentenceStart == -1) {
-                getLogger().info("Ignoring token outside sentence boundaries: ["+wd+"]");
+                getLogger().info("Ignoring token outside sentence boundaries: [" + wd + "]");
             }
             else if (wd != null && sentenceStart != -1) {
                 String posTag = aAttributes.getValue(ATTR_POS);

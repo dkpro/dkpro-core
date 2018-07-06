@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2013
  * Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.api.io;
 
 import java.util.List;
@@ -27,11 +27,8 @@ import org.apache.uima.cas.text.AnnotationFS;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 
 /**
- * Creates Chunk annotations from IOB encoded data.
- * For example, the sequence (B-NP I-NP) will be converted into a NP-chunk
- * annotation spanning two tokens.
- * 
- *
+ * Creates Chunk annotations from IOB encoded data. For example, the sequence (B-NP I-NP) will be
+ * converted into a NP-chunk annotation spanning two tokens.
  */
 public class IobDecoder
 {
@@ -65,7 +62,7 @@ public class IobDecoder
         int i = 0;
         for (AnnotationFS token : aTokens) {
             // System.out.printf("%s %s %n", token.getCoveredText(), aChunkTags[i]);
-            String fields[] = aChunkTags[i].split("-");
+            String[] fields = aChunkTags[i].split("-");
             String flag = fields.length == 2 ? fields[0] : "NONE";
             String chunk = fields.length == 2 ? fields[1] : null;
 
@@ -101,8 +98,8 @@ public class IobDecoder
         if (openChunk != null) {
             Type chunkType = mappingProvider.getTagType(openChunk);
             AnnotationFS chunk = cas.createAnnotation(chunkType, start, end);
-            chunk.setStringValue(chunkValue, internTags ? openChunk.intern() :
-                openChunk);
+            chunk.setStringValue(chunkValue,
+                    internTags && openChunk != null ? openChunk.intern() : openChunk);
             cas.addFsToIndexes(chunk);
             openChunk = null;
         }

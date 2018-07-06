@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,21 +14,19 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
+import static org.apache.uima.fit.util.JCasUtil.indexCovered;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.apache.uima.util.Level.INFO;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-
-import opennlp.tools.namefind.NameFinderME;
-import opennlp.tools.namefind.TokenNameFinder;
-import opennlp.tools.namefind.TokenNameFinderModel;
-import opennlp.tools.util.Span;
+import java.util.Map;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -36,22 +34,35 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.Tagset;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ResourceParameter;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableStreamProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionProvider;
+import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpSequenceTagsetDescriptionProvider;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
+import opennlp.tools.namefind.NameFinderME;
+import opennlp.tools.namefind.TokenNameFinder;
+import opennlp.tools.namefind.TokenNameFinderModel;
+import opennlp.tools.util.Span;
 
 /**
  * OpenNLP name finder wrapper.
  */
+@Component(OperationType.NAMED_ENTITITY_RECOGNIZER)
+@ResourceMetaData(name = "OpenNLP Named Entity Recognizer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
@@ -79,20 +90,36 @@ public class OpenNlpNamedEntityRecognizer
      * for one language.
      */
     public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = true, defaultValue="person")
+    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = true, defaultValue = "person")
     protected String variant;
 
+    /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
     /**
      * Location from which the model is read.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    @ResourceParameter(MimeTypes.APPLICATION_X_OPENNLP_NER)
     protected String modelLocation;
 
     /**
      * Location of the mapping file for named entity tags to UIMA types.
      */
-    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
+    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
     protected String mappingLocation;
 
@@ -118,6 +145,7 @@ public class OpenNlpNamedEntityRecognizer
                 setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/"
                         + "ner-${language}-${variant}.bin");
 
+                setOverride(ARTIFACT_URI, modelArtifactUri);
                 setOverride(LOCATION, modelLocation);
                 setOverride(LANGUAGE, language);
                 setOverride(VARIANT, variant);
@@ -130,8 +158,11 @@ public class OpenNlpNamedEntityRecognizer
                 TokenNameFinderModel model = new TokenNameFinderModel(aStream);
 
                 if (printTagSet) {
-                    Tagset tsdp = new OpenNlpTagsetDescriptionProvider(
-                            null, NamedEntity.class, model.getNameFinderModel());
+                    OpenNlpSequenceTagsetDescriptionProvider tsdp = 
+                            new OpenNlpSequenceTagsetDescriptionProvider(
+                                    null, NamedEntity.class, model.getNameFinderSequenceModel());
+                    tsdp.setTagSplitPattern("-(?=[^-]*$)");
+                    // FIXME addTagset(tsdp)
                     getContext().getLogger().log(INFO, tsdp.toString());
                 }
 
@@ -160,22 +191,25 @@ public class OpenNlpNamedEntityRecognizer
 
         modelProvider.getResource().clearAdaptiveData();
 
-        // get the document text
-        List<Token> tokenList = new ArrayList<Token>(select(aJCas, Token.class));
-        String[] tokens = toText(tokenList).toArray(new String[tokenList.size()]);
-
-        // test the string
-        Span[] namedEntities = modelProvider.getResource().find(tokens);
-
-        // get the named entities and their character offsets
-        for (Span namedEntity : namedEntities) {
-            int begin = tokenList.get(namedEntity.getStart()).getBegin();
-            int end = tokenList.get(namedEntity.getEnd()-1).getEnd();
-
-            Type type = mappingProvider.getTagType(namedEntity.getType());
-            NamedEntity neAnno = (NamedEntity) cas.createAnnotation(type, begin, end);
-            neAnno.setValue(namedEntity.getType());
-            neAnno.addToIndexes();
+        Map<Sentence, Collection<Token>> index = indexCovered(aJCas, Sentence.class, Token.class);
+        for (Sentence sentence : select(aJCas, Sentence.class)) {
+            // get the document text
+            List<Token> tokenList = new ArrayList<>(index.get(sentence));
+            String[] tokens = toText(tokenList).toArray(new String[tokenList.size()]);
+    
+            // test the string
+            Span[] namedEntities = modelProvider.getResource().find(tokens);
+    
+            // get the named entities and their character offsets
+            for (Span namedEntity : namedEntities) {
+                int begin = tokenList.get(namedEntity.getStart()).getBegin();
+                int end = tokenList.get(namedEntity.getEnd() - 1).getEnd();
+    
+                Type type = mappingProvider.getTagType(namedEntity.getType());
+                NamedEntity neAnno = (NamedEntity) cas.createAnnotation(type, begin, end);
+                neAnno.setValue(namedEntity.getType());
+                neAnno.addToIndexes();
+            }
         }
     }
 }

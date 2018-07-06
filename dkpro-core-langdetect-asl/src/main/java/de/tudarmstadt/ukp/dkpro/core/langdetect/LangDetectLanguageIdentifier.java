@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2014
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,18 +14,18 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.langdetect;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
@@ -37,10 +37,20 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Langdetect language identifier based on character n-grams.
+ * 
+ * Due to the way LangDetect is implemented, this component does <b>not</b> support being
+ * instantiated multiple times with different model locations. Only a single model location
+ * can be active at a time over <b>all</b> instances of this component. 
  */
+@Component(OperationType.LANGUAGE_IDENTIFIER)
+@ResourceMetaData(name = "LangDetect")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class LangDetectLanguageIdentifier
     extends JCasAnnotator_ImplBase
 {
@@ -53,6 +63,20 @@ public class LangDetectLanguageIdentifier
     protected String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Location from which the model is read.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -60,6 +84,13 @@ public class LangDetectLanguageIdentifier
     protected String modelLocation;
     private CasConfigurableProviderBase<File> modelProvider;
 
+    /**
+     * The random seed.
+     */
+    public static final String PARAM_SEED = "seed";
+    @ConfigurationParameter(name = PARAM_SEED, mandatory = false)
+    private Long seed;
+    
     @Override
     public void initialize(UimaContext context)
         throws ResourceInitializationException
@@ -87,7 +118,10 @@ public class LangDetectLanguageIdentifier
             {
                 try {
                     DetectorFactory.clear();
-                    File profileFolder = ResourceUtils.getClasspathAsFolder(aUrl.toString(), false);
+                    if (seed != null) {
+                        DetectorFactory.setSeed(seed);
+                    }
+                    File profileFolder = ResourceUtils.getClasspathAsFolder(aUrl.toString(), true);
                     DetectorFactory.loadProfile(profileFolder);
                     return profileFolder;
                 }
@@ -106,12 +140,7 @@ public class LangDetectLanguageIdentifier
         modelProvider.getResource();
 
         String documentText = aJCas.getDocumentText();
-        
-        // Unescape text, if Chinese, Arabic and stuff are thrown in as UTF-8 escaped sequence it
-        // will lead to an increased error rate
-        String unescapedDocumentText = StringEscapeUtils.unescapeJava(documentText);
-        String language = detectLanguage(unescapedDocumentText);
-
+        String language = detectLanguage(documentText);
         aJCas.setDocumentLanguage(language);
     }
 

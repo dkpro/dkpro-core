@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2016
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.lbj.internal;
 
 import java.util.List;
@@ -23,6 +23,7 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.JCas;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
@@ -36,7 +37,7 @@ import edu.illinois.cs.cogcomp.core.datastructures.textannotation.TextAnnotation
 public class ConvertToUima
 {
     public static void convertPOSs(JCas aJCas, List<Token> casTokens, TextAnnotation document,
-            MappingProvider mappingProvider, boolean internStrings)
+            MappingProvider mappingProvider)
     {
         CAS cas = aJCas.getCas();
         List<Constituent> pos = document.getView(ViewNames.POS).getConstituents();
@@ -49,7 +50,8 @@ public class ConvertToUima
             Type posTag = mappingProvider.getTagType(tag);
             POS posAnno = (POS) cas.createAnnotation(posTag, p.getStartCharOffset(),
                     p.getEndCharOffset());
-            posAnno.setPosValue(internStrings ? tag.intern() : tag);
+            posAnno.setPosValue(tag != null ? tag.intern() : null);
+            POSUtils.assignCoarseValue(posAnno);
             posAnno.addToIndexes();
             casTokens.get(i).setPos(posAnno);
             i++;
@@ -57,7 +59,7 @@ public class ConvertToUima
     }
     
     public static void convertChunks(JCas aJCas, List<Token> casTokens, TextAnnotation document,
-            MappingProvider mappingProvider, boolean internStrings)
+            MappingProvider mappingProvider)
     {
         CAS cas = aJCas.getCas();
         List<Constituent> pos = document.getView(ViewNames.SHALLOW_PARSE).getConstituents();
@@ -69,13 +71,13 @@ public class ConvertToUima
             Type chunkTag = mappingProvider.getTagType(tag);
             Chunk chunkAnno = (Chunk) cas.createAnnotation(chunkTag, p.getStartCharOffset(),
                     p.getEndCharOffset());
-            chunkAnno.setChunkValue(internStrings ? tag.intern() : tag);
+            chunkAnno.setChunkValue(tag != null ? tag.intern() : null);
             chunkAnno.addToIndexes();
         }
     }
     
     public static void convertNamedEntity(JCas aJCas, TextAnnotation document,
-            MappingProvider mappingProvider, boolean internStrings)
+            MappingProvider mappingProvider)
     {
         CAS cas = aJCas.getCas();
         List<Constituent> ne = document.getView(ViewNames.NER_CONLL).getConstituents();
@@ -87,7 +89,7 @@ public class ConvertToUima
             Type neTag = mappingProvider.getTagType(tag);
             NamedEntity neAnno = (NamedEntity) cas.createAnnotation(neTag, p.getStartCharOffset(),
                     p.getEndCharOffset());
-            neAnno.setValue(internStrings ? tag.intern() : tag);
+            neAnno.setValue(tag != null ? tag.intern() : null);
             neAnno.addToIndexes();
         }
     }

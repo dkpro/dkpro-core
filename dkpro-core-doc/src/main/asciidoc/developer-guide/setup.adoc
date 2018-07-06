@@ -1,0 +1,118 @@
+// Copyright 2017
+// Ubiquitous Knowledge Processing (UKP) Lab
+// Technische Universität Darmstadt
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+// http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+[[sect_setup]]
+= Setup
+
+This section explains the setup for developers. Please also refer to the **Setup** section in the
+User's Guide as it may contain additional information necessary to run DKPro Core components
+(e.g. special libraries that need to be installed depending on your operating system).
+
+== GIT
+
+All DKPro Core files are stored using UNIX line endings. If you develop on Windows, you have to
+set the `core.autocrlf` configuration setting to `input` to avoid accidentally submitting Windows
+line endings to the repository. Using `input` is a good strategy in most cases, thus you should
+consider setting this as a global (add `--global`) or even as a system (`--system`) setting.
+
+.Configure git line ending treatment
+[source,text]
+----
+C:\> git config --global core.autocrlf input
+----
+
+After changing this setting, best do a fresh clone and check-out of DKPro Core.
+
+== Eclipse
+
+=== Use a JDK
+
+On Linux or OS X, the following setting is not necessary. Having a full JDK installed on your
+system is generally sufficient. You can skip on to the next section.
+
+On Windows, you need to edit the `eclipse.ini` file and directly before the `-vmargs` line, you
+have to add the following two lines. Mind to replace `C:/Program Files/Java/jdk1.8.0_144` with the actual
+location of the JDK on your system. Without this, Eclipse will complain that the 
+`jdk.tools:jdk.tools` artifact would be missing.
+
+.Force Eclipse to run on a JDK
+[source,text]
+----
+-vm
+C:/Program Files/Java/jdk1.8.0_144/jre/bin/server/jvm.dll
+----
+
+=== Required Plugins
+
+* *Maven Integration:* m2e , already comes pre-installed with the Eclipse IDE for Java Developers.
+  If you use another edition of Eclipse which does not have m2e pre-installed, go to 
+  *Help->Install New Software*, select *--All available sites--* and choose 
+  *Collaboration -> m2e - Maven Integration for Eclipse*
+* *Apache UIMA tools:* Update site: `http://www.apache.org/dist/uima/eclipse-update-site/`
+* *Groovy:* Find the applicable update site here: `https://github.com/groovy/groovy-eclipse/wiki`
+** Make sure to install at least the Groovy Eclipse Feature, the Groovy Compiler (2.4), and the
+   Groovy M2E Integration.
+* *Checkstyle Eclipse plugin:* Update site: `http://eclipse-cs.sf.net/update`
+* *Checkstyle configuration plugin for M2Eclipse:* Update site: 
+  `http://m2e-code-quality.github.com/m2e-code-quality/site/latest/`
+
+=== Workspace Preferences
+
+The following settings are recommended for the *Eclipse Workspace Preferences*:
+
+[options="header"]
+|====
+|Setting|Value
+
+| General -> Workspace -> Text file encoding 
+| UTF-8
+
+| General -> Workspace -> New text file line delimiter
+| Unix
+
+| General -> Editors -> Text Editors -> Displayed tab width
+| 2
+
+| General -> Editors -> Text Editors -> Insert spaces for tabs
+| true
+
+| General -> Editors -> Text Editors -> Show print margin
+| true
+
+| General -> Editors -> Text Editors -> Print margin column
+| 100
+
+| XML -> XML Files -> Editor -> Line width
+| 100
+
+| XML -> XML Files -> Editor -> Format comments
+| false
+
+| XML -> XML Files -> Editor -> Indent using spaces
+| selected
+
+| XML -> XML Files -> Editor -> Indentation size
+| 2
+
+|====
+
+=== Import
+
+In Eclipse, go to *File -> Import*, choose *Existing Maven projects*, and select the folder to
+which you have cloned DKPro Core. Eclipse should automatically detect all modules. Mind that
+DKPro Core is a large project and it takes significant time until all dependencies have been 
+downloaded and until the first build is complete. 
+

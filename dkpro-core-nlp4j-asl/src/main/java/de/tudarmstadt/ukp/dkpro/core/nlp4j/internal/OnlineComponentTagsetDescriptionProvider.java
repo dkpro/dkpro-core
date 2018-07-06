@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2016
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.nlp4j.internal;
 
 import static java.util.Collections.singletonMap;
@@ -29,7 +29,8 @@ import edu.emory.mathcs.nlp.component.template.node.AbstractNLPNode;
 import edu.emory.mathcs.nlp.component.template.state.NLPState;
 import edu.emory.mathcs.nlp.learning.optimization.OnlineOptimizer;
 
-public class OnlineComponentTagsetDescriptionProvider<N extends AbstractNLPNode<N>, S extends NLPState<N>>
+public class OnlineComponentTagsetDescriptionProvider
+    <N extends AbstractNLPNode<N>, S extends NLPState<N>>
     extends TagsetBase
 {
     private String name;

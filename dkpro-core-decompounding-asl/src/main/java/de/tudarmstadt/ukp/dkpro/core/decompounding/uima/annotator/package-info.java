@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,12 +14,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *******************************************************************************/
+ **/
 
 /**
  * This package contains UIMA annotation classes.
  *
- * The annotators iterate over all token in a CAS and
- * try to split them.
+ * The annotators iterate over all token in a CAS and try to split them.
  */
 package de.tudarmstadt.ukp.dkpro.core.decompounding.uima.annotator;

@@ -7,25 +7,35 @@
 
 __META_SOURCE_URL__=http://arxiv.org/pdf/cmp-lg/9406023v1.pdf
 __META_SOURCE_URL__.1=ftp://ftp.ims.uni-stuttgart.de/pub/corpora/spanish-tagset.txt
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # ACRNM	acronym (ISO, CEI)
 # ADJ	Adjectives (mayores, mayor)
+ADJ=POS_ADJ
 # ADV	Adverbs (muy, demasiado, cómo)
 # ALFP	Plural letter of the alphabet (As/Aes, bes)
 # ALFS	Singular letter of the alphabet (A, b)
 # ART	Articles (un, las, la, unas)
+ART=POS_DET
 # BACKSLASH backslash (\)	
 # CARD	Cardinals
+CARD=POS_NUM
 # CC	Coordinating conjunction (y, o)
+CC=POS_CONJ
 # CCAD	Adversative coordinating conjunction (pero)
+CCAD=POS_CONJ
 # CCNEG	Negative coordinating conjunction (ni)
+CCNEG=POS_CONJ
 # CM	comma (,)
 # CODE	Alphanumeric code
 # COLON	colon (:)
 # CQUE	que (as conjunction)
 # CSUBF	Subordinating conjunction that introduces finite clauses (apenas)
+CSUBF=POS_SCONJ
 # CSUBI	Subordinating conjunction that introduces infinite clauses (al)
+CSUBI=POS_SCONJ
 # CSUBX	Subordinating conjunction underspecified for subord-type (aunque)
+CSUBX=POS_SCONJ
 # DASH	dash (-)
 # DM	Demonstrative pronouns (ésas, ése, esta)
 # DOTS	POS tag for "..."
@@ -33,18 +43,22 @@ __META_SOURCE_URL__.1=ftp://ftp.ims.uni-stuttgart.de/pub/corpora/spanish-tagset.
 # FS	Full stop punctuation marks
 # INT	Interrogative pronouns (quiénes, cuántas, cuánto)
 # ITJN	Interjection (oh, ja)
+ITJN=POS_INTJ
 # LP	left parenthesis ("(", "[")
 # NC	Common nouns (mesas, mesa, libro, ordenador)
 # NEG	Negation
 # NMEA	measure noun (metros, litros)
 # NMON	month name
 # NP	Proper nouns
+NP=POS_PROPN
 # ORD	Ordinals (primer, primeras, primera)
+ORD=POS_NUM
 # PAL	Portmanteau word formed by a and el
 # PDEL	Portmanteau word formed by de and el
 # PE	Foreign word
 # PERCT	percent sign (%)
 # PNC	Unclassified word
+PNC=POS_X
 # PPC	Clitic personal pronoun (le, les)
 # PPO	Possessive pronouns (mi, su, sus)
 # PPX	Clitics and personal pronouns (nos, me, nosotras, te, sí)
@@ -59,6 +73,7 @@ __META_SOURCE_URL__.1=ftp://ftp.ims.uni-stuttgart.de/pub/corpora/spanish-tagset.
 # SEMICOLON	semicolon (;)
 # SLASH	slash (/)
 # SYM	Symbols
+SYM=POS_SYM
 # UMMX	measure unit (MHz, km, mA)
 # VCLIger clitic gerund verb
 # VCLIinf clitic infinitive verb
@@ -83,4 +98,4 @@ __META_SOURCE_URL__.1=ftp://ftp.ims.uni-stuttgart.de/pub/corpora/spanish-tagset.
 # VSfin	Verb ser. Finite
 # VSger	Verb ser. Gerund
 # VSinf	Verb ser. Infinitive
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS
+*=POS

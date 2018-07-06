@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2014
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util;
 
@@ -25,18 +25,18 @@ import org.apache.uima.jcas.tcas.Annotation;
 import edu.stanford.nlp.ling.CoreAnnotation;
 
 /**
- * Annotations of the type "UIMAAnnotations" should contain a Collection
- * of org.apache.uima.jcas.tcas.Annotation objects.
+ * Annotations of the type "UIMAAnnotations" should contain a Collection of
+ * org.apache.uima.jcas.tcas.Annotation objects.
  *
  */
 @SuppressWarnings("rawtypes")
 public class UIMAAnnotations
-	implements CoreAnnotation<Collection<Annotation>>
+    implements CoreAnnotation<Collection<Annotation>>
 {
-	@SuppressWarnings("unchecked")
-	@Override
-	public Class<Collection<Annotation>> getType()
-	{
-		return (Class<Collection<Annotation>>) (Class) Collection.class;
-	}
+    @SuppressWarnings("unchecked")
+    @Override
+    public Class<Collection<Annotation>> getType()
+    {
+        return (Class<Collection<Annotation>>) (Class) Collection.class;
+    }
 }

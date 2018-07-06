@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2014
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.matetools;
 
@@ -26,8 +26,10 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
@@ -43,8 +45,8 @@ public class MatePosTaggerTest
         String[] posOriginal = { "PPER", "VVFIN", "ART", "ADV", "ADJA", "NN", "$,", "PRELS", "ADV",
                 "PIAT", "NN", "KON", "NN", "VVFIN", "$." };
 
-        String[] posMapped = { "PR", "V", "ART", "ADV", "ADJ", "NN", "PUNC", "PR", "ADV", "PR",
-                "NN", "CONJ", "NN", "V", "PUNC" };
+        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_DET", "POS_ADV", "POS_ADJ", "POS_NOUN", "POS_PUNCT", "POS_PRON", "POS_ADV",
+                "POS_PRON", "POS_NOUN", "POS_CONJ", "POS_NOUN", "POS_VERB", "POS_PUNCT" };
 
         String[] posTags = { "$(", "$,", "$.", "ADJA", "ADJD", "ADV", "APPO", "APPR", "APPRART",
                 "APZR", "ART", "CARD", "END", "FM", "ITJ", "KOKOM", "KON", "KOUI", "KOUS", "MID",
@@ -69,8 +71,9 @@ public class MatePosTaggerTest
         String[] posOriginal = { "PRP", "VBP", "DT", "RB", "JJ", "NN", "NN", ",", "WDT", "VBZ",
                 "IN", "DT", "NNS", "CC", "NNS", "IN", "JJ", "." };
 
-        String[] posMapped = { "PR", "V", "ART", "ADV", "ADJ", "NN", "NN", "PUNC", "ART", "V",
-                "PP", "ART", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
+        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_DET", "POS_ADV", "POS_ADJ", "POS_NOUN",
+                "POS_NOUN", "POS_PUNCT", "POS_DET", "POS_VERB", "POS_ADP", "POS_DET", "POS_NOUN",
+                "POS_CONJ", "POS_NOUN", "POS_ADP", "POS_ADJ", "POS_PUNCT" };
 
         String[] posTags = { "#", "$", "''", "(", ")", ",", ".", ":", "CC", "CD", "DT", "END",
                 "EX", "FW", "HYPH", "IN", "JJ", "JJR", "JJS", "LS", "MD", "MID", "NIL", "NN",
@@ -90,8 +93,10 @@ public class MatePosTaggerTest
                 + "compliqué, qui contient des constituants que de nombreuses dépendances et que "
                 + "possible .");
 
-        String[] posMapped = { "PR", "V", "NN", "PP", "NN", "PP", "NN", "ADV", "ADJ", "PR", "V",
-                "ART", "NN", "CONJ", "ART", "ADJ", "NN", "CONJ", "CONJ", "ADJ", "PUNC" };
+        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_ADP",
+                "POS_NOUN", "POS_ADV", "POS_ADJ", "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN",
+                "POS_CONJ", "POS_DET", "POS_ADJ", "POS_NOUN", "POS_CONJ", "POS_CONJ", "POS_ADJ",
+                "POS_PUNCT" };
 
         String[] posOriginal = { "CLS", "V", "NC", "P", "NC", "P", "NC", "ADV", "ADJ", "PROREL",
                 "V", "DET", "NC", "CS", "DET", "ADJ", "NC", "CC", "CS", "ADJ", "PONCT" };
@@ -112,6 +117,8 @@ public class MatePosTaggerTest
     private JCas runTest(String aLanguage, String aText)
         throws Exception
     {
+        AssumeResource.assumeResource(MatePosTagger.class, "tagger", aLanguage, null);
+        
         AnalysisEngineDescription posTag = createEngineDescription(MatePosTagger.class);
 
         return TestRunner.runTest(posTag, aLanguage, aText);

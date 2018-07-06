@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2016
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,21 +14,30 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.testing;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.BiConsumer;
 
 import de.tudarmstadt.ukp.dkpro.core.testing.validation.checks.Check;
 
 public class TestOptions
 {
     Set<Class<? extends Check>> skippedChecks = new HashSet<>();
+    BiConsumer<File, File> resultAssertor;
     
     public TestOptions skipCheck(Class<? extends Check> aCheck)
     {
         skippedChecks.add(aCheck);
+        return this;
+    }
+    
+    public TestOptions resultAssertor(BiConsumer<File, File> aResultComparator)
+    {
+        resultAssertor = aResultComparator;
         return this;
     }
 }

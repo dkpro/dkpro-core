@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2014
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *******************************************************************************/
+ **/
 
 package de.tudarmstadt.ukp.dkpro.core.decompounding.ranking;
 
@@ -23,7 +23,8 @@ import java.util.List;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundedWord;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.trie.ValueNode;
 
-public class DummyRanker extends AbstractRanker
+public class DummyRanker
+    extends AbstractRanker
 {
 
     @Override
@@ -39,7 +40,6 @@ public class DummyRanker extends AbstractRanker
             return aParent.getValue();
         }
 
-        return children.get(children.size()-1);
+        return children.get(children.size() - 1);
     }
-
 }

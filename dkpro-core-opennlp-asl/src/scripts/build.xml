@@ -17,7 +17,7 @@
 -->
 <project basedir="../.." default="separate-jars">
 	<import>
-		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.6.0/ant-macros.xml"/>
+		<url url="https://raw.githubusercontent.com/dkpro/resource-packager/0.6.0/ant-macros.xml"/>
 	</import>
 
 	<!-- 
@@ -146,6 +146,7 @@
 		<antcall target="de-tagger-maxent"/>
 		<antcall target="de-tagger-perceptron"/>
 		<antcall target="de-chunker-default"/>
+        <antcall target="de-ner-nemgp"/>
 	</target>
 	
 	<target name="de-sentence-maxent">
@@ -242,6 +243,34 @@
 		</install-stub-and-upstream-file>
 	</target>
 	
+    <target name="de-ner-nemgp">
+        <!-- FILE: nemgp_opennlp_01.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2014-10-24 | now        | 699fa598f94cee6d5ff3074b0a6cfdda
+          -->
+        <get 
+            src="http://www.thomas-zastrow.de/nlp/nemgp_opennlp_01.bin" 
+            dest="target/download/nemgp_opennlp_01.bin" 
+            skipexisting="true"/>
+        <install-stub-and-upstream-file 
+            file="target/download/nemgp_opennlp_01.bin" 
+            md5="699fa598f94cee6d5ff3074b0a6cfdda"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20141024"
+            metaDataVersion="1"
+            tool="ner" 
+            language="de" 
+            variant="nemgp" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="nemgp_opennlp_01.bin"/>
+                <entry key="DC.creator" value="Thomas Zastrow"/>
+                <entry key="DC.identifier" value="http://www.thomas-zastrow.de/nlp/nemgp_opennlp_01.bin"/>
+                <entry key="DC.rights" value="http://creativecommons.org/licenses/by-sa/3.0/deed.de"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
+    
 	<target name="de-chunker-default">
 		<!-- This model is quite useless. It only knows of noun phrases -->
 		<!-- FILE: OpenNLP_1.5.1-German-Chunker-TigerCorps07.zip - - - - - - - - - - - - - - - - - -
@@ -270,6 +299,7 @@
 
 	<target name="en">
 		<antcall target="en-chunker-default"/>
+        <antcall target="en-chunker-perceptron-ixa"/>
 		<antcall target="en-ner-date"/>
 		<antcall target="en-ner-location"/>
 		<antcall target="en-ner-money"/>
@@ -278,6 +308,7 @@
 		<antcall target="en-ner-person"/>
 		<antcall target="en-ner-time"/>
 		<antcall target="en-parser-chunking"/>
+        <antcall target="en-parser-chunking-ixa"/>
 		<antcall target="en-sentence-maxent"/>
 		<antcall target="en-tagger-maxent"/>
 		<antcall target="en-tagger-perceptron"/>
@@ -410,6 +441,29 @@
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
+
+    <target name="en-chunker-perceptron-ixa" depends="download-ixa-chunk-resources">
+        <mkdir dir="target/download"/>
+        <!-- FILE: en-perceptron-conll00.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2016-02-05 | now        | a3b5a46eb9990300337fbfe84ed62ed8
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-chunk-resources/en-perceptron-conll00.bin" 
+            md5="a3b5a46eb9990300337fbfe84ed62ed8"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20160205"
+            metaDataVersion="1"
+            tool="chunker" 
+            language="en" 
+            variant="perceptron-ixa" 
+            extension="bin">
+            <metadata>
+                <entry key="pos.tagset" value="ptb"/>
+                <entry key="chunk.tagset" value="conll2000"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
 
 	<target name="en-parser-chunking">
 		<mkdir dir="target/download"/>
@@ -630,6 +684,32 @@
 		</install-stub-and-upstream-file>
 	</target>
 
+    <target name="en-parser-chunking-ixa" depends="download-ixa-parser-resources">
+        <!-- FILE: en-parser-chunking.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2014-04-26 | now        | 47c1b3f4dd7d08e992abdca4e16638ce
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-parser-resources/en-parser-chunking.bin" 
+            md5="47c1b3f4dd7d08e992abdca4e16638ce"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20140426"
+            metaDataVersion="1"
+            tool="parser" 
+            language="en" 
+            variant="chunking-ixa" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="en-parser-chunking.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri"/>
+                <entry key="DC.identifier" value="http://ixa2.si.ehu.es/ixa-pipes/models/parse-models.tgz#en-pos-perceptron-c0-b3.bin"/>
+                <entry key="pos.tagset" value="ptb"/>
+                <entry key="constituent.tagset" value="ptb"/>
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
+    
+
 	<target name="es">
 		<antcall target="es-ner-location"/>
 		<antcall target="es-ner-misc"/>
@@ -641,10 +721,10 @@
 		<antcall target="es-tagger-perceptron"/>
 		<antcall target="es-tagger-perceptron-ixa"/>
 		<antcall target="es-tagger-perceptron-universal"/>
+        <antcall target="es-parser-chunking-ixa"/>
 	</target>
 
 	<target name="es-tagger-maxent">
-		<property name="install-artifact-mode" value="remote"/>
 		<mkdir dir="target/download"/>
 
 		<!-- FILE: opennlp-es-maxent-pos-es.bin - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -882,6 +962,55 @@
 		</install-stub-and-upstream-file>
 	</target>
 	
+    <target name="es-parser-chunking-ixa" depends="download-ixa-parser-resources">
+        <!-- FILE: es-parser-chunking.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2014-04-26 | now        | 42589e408c5ed89beaf8107662bc751c
+          -->
+        <install-stub-and-upstream-file 
+            file="target/download/ixa-parser-resources/es-parser-chunking.bin" 
+            md5="42589e408c5ed89beaf8107662bc751c"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+            upstreamVersion="20140426"
+            metaDataVersion="1"
+            tool="parser" 
+            language="es" 
+            variant="chunking-ixa" 
+            extension="bin">
+            <metadata>
+                <entry key="DC.title" value="es-parser-chunking.bin"/>
+                <entry key="DC.creator" value="Rodrigo Agerri"/>
+                <entry key="DC.identifier" value="http://ixa2.si.ehu.es/ixa-pipes/models/parse-models.tgz#es-pos-perceptron-c0-b3.bin"/>
+                <entry key="pos.tagset" value="ancora-ixa"/>
+                <entry key="constituent.tagset" value="ancora"/>
+                <entry key="constituent.tag.map.CONJ" value="conj"/>
+                <entry key="constituent.tag.map.GERUNDI" value="gerundi"/>
+                <entry key="constituent.tag.map.GRUP.A" value="grup.a"/>
+                <entry key="constituent.tag.map.GRUP.ADV" value="grup.adv"/>
+                <entry key="constituent.tag.map.GRUP.NOM" value="grup.nom"/>
+                <entry key="constituent.tag.map.GRUP.VERB" value="grup.verb"/>
+            	<entry key="constituent.tag.map.INC" value="inc"/>
+                <entry key="constituent.tag.map.INFINITIU" value="infinitiu"/>
+                <entry key="constituent.tag.map.INTERJECCIO" value="interjeccio"/>
+                <entry key="constituent.tag.map.MORFEMA.PRONOMINAL" value="morfema.pronominal"/>
+                <entry key="constituent.tag.map.MORFEMA.VERBAL" value="morfema.verbal"/>
+                <entry key="constituent.tag.map.NEG" value="neg"/>
+            	<!-- entry key="constituent.tag.map.O" -->
+                <entry key="constituent.tag.map.PARTICIPI" value="participi"/>
+                <entry key="constituent.tag.map.PREP" value="prep"/>
+                <entry key="constituent.tag.map.RELATIU" value="relatiu"/>
+            	<!-- entry key="constituent.tag.map.S" -->
+                <entry key="constituent.tag.map.S.A" value="s.a"/>
+            	<entry key="constituent.tag.map.SA" value="sa"/>
+                <entry key="constituent.tag.map.SADV" value="sadv"/>
+                <entry key="constituent.tag.map.SENTENCE" value="sentence"/>
+                <entry key="constituent.tag.map.SN" value="sn"/>
+                <entry key="constituent.tag.map.SP" value="sp"/>
+            	<!-- entry key="constituent.tag.map.TOP" -->
+            </metadata>
+        </install-stub-and-upstream-file>
+    </target>
+    
 	<target name="it">
 		<antcall target="it-sentence-maxent"/>
 		<antcall target="it-tagger-maxent"/>
@@ -1244,15 +1373,11 @@
 	</target>
 	
 	<target name="pt">
-		<antcall target="pt-chunker-cogroo"/>
-		<antcall target="pt-sentence-cogroo"/>
 		<antcall target="pt-sentence-maxent"/>
-		<antcall target="pt-tagger-cogroo"/>
 		<antcall target="pt-tagger-maxent"/>
 		<antcall target="pt-tagger-mm-maxent"/>
 		<antcall target="pt-tagger-mm-perceptron"/>
 		<antcall target="pt-tagger-perceptron"/>
-		<antcall target="pt-token-cogroo"/>
 		<antcall target="pt-token-maxent"/>
 	</target>
 
@@ -1423,91 +1548,6 @@
 		</install-stub-and-upstream-file>
 	</target>
 
-	<target name="pt-sentence-cogroo">
-		<mkdir dir="target/download"/>
-		<!-- FILE: pt-sent.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-02-05 | now        | 0fd481285c400c7c93c5b625f8844eb3
-		  - Model require classes from Cogroo:
-		  - Unable to find implementation for opennlp.tools.util.BaseToolFactory, the class or 
-		  - service br.ccsl.cogroo.tools.sentdetect.PortuguesSentenceDetectorFactory could not be 
-		  - located!
-		  - Therefore we use the models packaged in the cogroo-res-pt_br Maven artifact, which
-		  - has a dependency on the artifact that contains the PortuguesSentenceDetectorFactory.
-		  -->
-		<install-model-stub
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-			version="20130527.1"
-			tool="sentence"
-			language="pt"
-			variant="cogroo"
-			targetGroupId="org.cogroo.lang.pt_br"
-			targetArtifactId="cogroo-res-pt_br"
-			targetVersion="4.0.0"
-			targetLocation="classpath:/models/pt-sent.model">
-		</install-model-stub>
-	</target>
-
-	<target name="pt-token-cogroo">
-		<mkdir dir="target/download"/>
-		<!-- FILE: pt-tok.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - Model require classes from Cogroo:
-		  - Unable to find implementation for opennlp.tools.util.BaseToolFactory, the class or 
-		  - service br.ccsl.cogroo.tools.tokenizer.PortuguesTokenizerFactory could not be 
-		  - located!
-		  - Therefore we use the models packaged in the cogroo-res-pt_br Maven artifact, which
-		  - has a dependency on the artifact that contains the PortuguesTokenizerFactory.
-		  -->
-		<install-model-stub
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-			version="20130527.1"
-			tool="token"
-			language="pt"
-			variant="cogroo"
-			targetGroupId="org.cogroo.lang.pt_br"
-			targetArtifactId="cogroo-res-pt_br"
-			targetVersion="4.0.0"
-			targetLocation="classpath:/models/pt-tok.model">
-		</install-model-stub>
-	</target>
-
-	<target name="pt-tagger-cogroo">
-		<mkdir dir="target/download"/>
-		<!-- FILE: pt-pos.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  -->
-		<install-model-stub
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-			version="20130527.1"
-			tool="tagger"
-			language="pt"
-			variant="cogroo"
-			targetGroupId="org.cogroo.lang.pt_br"
-			targetArtifactId="cogroo-res-pt_br"
-			targetVersion="4.0.0"
-			targetLocation="classpath:/models/pt-pos.model">
-		</install-model-stub>
-	</target>
-
-	<target name="pt-chunker-cogroo">
-		<mkdir dir="target/download"/>
-		<!-- FILE: pt-chunk.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  -->
-		<install-model-stub
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-			version="20130527.1"
-			tool="chunker"
-			language="pt"
-			variant="cogroo"
-			targetGroupId="org.cogroo.lang.pt_br"
-			targetArtifactId="cogroo-res-pt_br"
-			targetVersion="4.0.0"
-			targetLocation="classpath:/models/pt-chunk.model">
-		</install-model-stub>
-	</target>
-	
 	<target name="sv">
 		<antcall target="sv-sentence-maxent"/>
 		<antcall target="sv-tagger-maxent"/>
@@ -1625,10 +1665,10 @@
     		src="http://ixa2.si.ehu.es/ixa-pipes/models/pos-resources.tgz" 
     		dest="target/download/ixa-pos-resources/pos-resources.tgz" 
     		skipexisting="true"/>
-		<gunzip 
-			src="target/download/ixa-pos-resources/pos-resources.tgz"
-			dest="target/download/ixa-pos-resources/pos-resources.tar"/>
-		<untar src="target/download/ixa-pos-resources/pos-resources.tar" dest="target/download/ixa-pos-resources">
+		<untar 
+			src="target/download/ixa-pos-resources/pos-resources.tgz" 
+			dest="target/download/ixa-pos-resources"
+            compression="gzip">
     		<patternset>
     			<include name="**/*.bin"/>		
 			</patternset>
@@ -1639,4 +1679,56 @@
 		<touch file="target/download/ixa-pos-resources/DONE"/>
 	</target>
 	
+    <target name="-check-download-ixa-parser-resources">
+        <available 
+            property="download-ixa-parser-resources.DONE" 
+            file="target/download/ixa-parser-resources/DONE"/>
+    </target>
+
+    <target name="download-ixa-parser-resources" depends="-check-download-ixa-parser-resources" unless="download-ixa-parser-resources.DONE">
+        <mkdir dir="target/download/ixa-parser-resources"/>
+        <get 
+            src="http://ixa2.si.ehu.es/ixa-pipes/models/parse-models.tgz" 
+            dest="target/download/ixa-parser-resources/parse-models.tgz" 
+            skipexisting="true"/>
+        <untar 
+        	src="target/download/ixa-parser-resources/parse-models.tgz" 
+        	dest="target/download/ixa-parser-resources"
+            compression="gzip">
+            <patternset>
+                <include name="**/*.bin"/>      
+            </patternset>
+            <chainedmapper>
+                <mapper type="flatten"/>
+            </chainedmapper>
+        </untar>
+        <touch file="target/download/ixa-parser-resources/DONE"/>
+    </target>
+
+    <target name="-check-download-ixa-chunk-resources">
+        <available 
+            property="download-ixa-chunk-resources.DONE" 
+            file="target/download/ixa-chunk-resources/DONE"/>
+    </target>
+
+    <target name="download-ixa-chunk-resources" depends="-check-download-ixa-chunk-resources" 
+    	unless="download-ixa-chunk-resources.DONE">
+        <mkdir dir="target/download/ixa-chunk-resources"/>
+        <get 
+            src="http://ixa2.si.ehu.es/ixa-pipes/models/chunk-models-1.1.0.tar.gz" 
+            dest="target/download/ixa-chunk-resources/chunk-models-1.1.0.tar.gz" 
+            skipexisting="true"/>
+        <untar 
+        	src="target/download/ixa-chunk-resources/chunk-models-1.1.0.tar.gz" 
+        	dest="target/download/ixa-chunk-resources"
+        	compression="gzip">
+            <patternset>
+                <include name="**/*.bin"/>      
+            </patternset>
+            <chainedmapper>
+                <mapper type="flatten"/>
+            </chainedmapper>
+        </untar>
+        <touch file="target/download/ixa-chunk-resources/DONE"/>
+    </target>
 </project>

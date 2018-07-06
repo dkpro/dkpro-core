@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2014
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.corenlp;
 
@@ -26,12 +26,13 @@ import java.net.URL;
 import java.util.List;
 import java.util.Properties;
 
-import org.apache.commons.lang.reflect.FieldUtils;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -45,8 +46,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
-import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.ConvertToCoreNlp;
-import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.ConvertToUima;
+import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.CoreNlp2DKPro;
+import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 import edu.stanford.nlp.parser.common.ParserGrammar;
 import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
 import edu.stanford.nlp.parser.lexparser.Lexicon;
@@ -65,10 +66,16 @@ import edu.stanford.nlp.trees.TreebankLanguagePack;
 import edu.stanford.nlp.trees.UniversalEnglishGrammaticalRelations;
 import edu.stanford.nlp.trees.UniversalEnglishGrammaticalStructureFactory;
 import edu.stanford.nlp.trees.international.pennchinese.ChineseGrammaticalRelations;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Parser from CoreNLP.
  */
+@Component(OperationType.CONSTITUENCY_PARSER)
+@ResourceMetaData(name = "CoreNLP Parser")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -86,7 +93,7 @@ public class CoreNlpParser
      * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
     private boolean printTagSet;
 
     /**
@@ -105,6 +112,20 @@ public class CoreNlpParser
     private String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Location from which the model is read.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -121,40 +142,39 @@ public class CoreNlpParser
     /**
      * Location of the mapping file for dependency tags to UIMA types.
      */
-    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = ComponentParameters.PARAM_DEPENDENCY_MAPPING_LOCATION;
+    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_DEPENDENCY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_DEPENDENCY_MAPPING_LOCATION, mandatory = false)
     private String dependencyMappingLocation;
     
     /**
      * Location of the mapping file for dependency tags to UIMA types.
      */
-    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
+    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CONSTITUENT_MAPPING_LOCATION, mandatory = false)
     private String constituentMappingLocation;
     
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     private String posMappingLocation;
     
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code false}
+     * Maximum sentence length. Longer sentences are skipped.
      */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internStrings;
-
-    public static final String PARAM_MAX_SENTENCE_LENGTH = ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
+    public static final String PARAM_MAX_SENTENCE_LENGTH = 
+            ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
     @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = true, defaultValue = "2147483647")
     private int maxSentenceLength;
     
-    public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
-    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = ComponentParameters.AUTO_NUM_THREADS)
+    public static final String PARAM_NUM_THREADS = 
+            ComponentParameters.PARAM_NUM_THREADS;
+    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, 
+            defaultValue = ComponentParameters.AUTO_NUM_THREADS)
     private int numThreads;
 
     public static final String PARAM_MAX_TIME = "maxTime";
@@ -187,7 +207,7 @@ public class CoreNlpParser
     private List<String> quoteEnd;
     
     public static final String PARAM_EXTRA_DEPENDENCIES = "extraDependencies";
-    @ConfigurationParameter(name = PARAM_EXTRA_DEPENDENCIES, mandatory = true, defaultValue="NONE")
+    @ConfigurationParameter(name = PARAM_EXTRA_DEPENDENCIES, mandatory = true, defaultValue = "NONE")
     GrammaticalStructure.Extras extraDependencies;
     
     /**
@@ -196,7 +216,8 @@ public class CoreNlpParser
      * <p>
      * Default: {@code true}
      */
-    public static final String PARAM_WRITE_CONSTITUENT = ComponentParameters.PARAM_WRITE_CONSTITUENT;
+    public static final String PARAM_WRITE_CONSTITUENT = 
+            ComponentParameters.PARAM_WRITE_CONSTITUENT;
     @ConfigurationParameter(name = PARAM_WRITE_CONSTITUENT, mandatory = true, defaultValue = "true")
     private boolean writeConstituent;
 
@@ -242,6 +263,7 @@ public class CoreNlpParser
     @ConfigurationParameter(name = PARAM_ORIGINAL_DEPENDENCIES, mandatory = true, defaultValue = "true")
     private boolean originalDependencies;
 
+    // CoreNlpParser PARAM_KEEP_PUNCTUATION has no effect #965
     public static final String PARAM_KEEP_PUNCTUATION = "keepPunctuation";
     @ConfigurationParameter(name = PARAM_KEEP_PUNCTUATION, mandatory = true, defaultValue = "false")
     private boolean keepPunctuation;
@@ -280,13 +302,15 @@ public class CoreNlpParser
         annotatorProvider.configure(cas);
         
         // Transfer from CAS to CoreNLP
-        ConvertToCoreNlp converter = new ConvertToCoreNlp();
+        DKPro2CoreNlp converter = new DKPro2CoreNlp();
         converter.setPtb3Escaping(ptb3Escaping);
         converter.setQuoteBegin(quoteBegin);
         converter.setQuoteEnd(quoteEnd);
         converter.setEncoding(modelEncoding);
         converter.setReadPos(readPos);
-        Annotation document = converter.convert(aJCas);
+        
+        Annotation document = new Annotation((String) null);
+        converter.convert(aJCas, document);
 
         // Actual processing
         ParserAnnotator annotator = annotatorProvider.getResource();
@@ -304,24 +328,22 @@ public class CoreNlpParser
         
         // Transfer back into the CAS
         if (writePos) {
-           posMappingProvider.configure(cas);
-           ConvertToUima.convertPOSs(aJCas, document, posMappingProvider, internStrings);
+            posMappingProvider.configure(cas);
+            CoreNlp2DKPro.convertPOSs(aJCas, document, posMappingProvider);
         }
         
         if (writeConstituent) {
             constituentMappingProvider.configure(cas);
-            ConvertToUima.convertConstituents(aJCas, document, constituentMappingProvider,
-                    internStrings, tlp);
+            CoreNlp2DKPro.convertConstituents(aJCas, document, constituentMappingProvider, tlp);
         }
         
         if (writePennTree) {
-            ConvertToUima.convertPennTree(aJCas, document);
+            CoreNlp2DKPro.convertPennTree(aJCas, document);
         }
         
         if (writeDependency) {
             dependencyMappingProvider.configure(cas);
-            ConvertToUima.convertDependencies(aJCas, document, dependencyMappingProvider,
-                    internStrings);
+            CoreNlp2DKPro.convertDependencies(aJCas, document, dependencyMappingProvider);
         }        
     }
 
@@ -345,7 +367,7 @@ public class CoreNlpParser
             // Loading gzipped files from URL is broken in CoreNLP
             // https://github.com/stanfordnlp/CoreNLP/issues/94
             if (modelFile.startsWith("jar:") && modelFile.endsWith(".gz")) {
-                modelFile = org.apache.commons.lang.StringUtils.substringAfter(modelFile, "!/");
+                modelFile = org.apache.commons.lang3.StringUtils.substringAfter(modelFile, "!/");
             }
             
             Properties coreNlpProps = new Properties();
@@ -356,11 +378,13 @@ public class CoreNlpParser
 //          coreNlpProps.setProperty("parse.flags", ...);
             coreNlpProps.setProperty("parse.maxlen", Integer.toString(maxSentenceLength));
             coreNlpProps.setProperty("parse.kbest", Integer.toString(3));
+            // CoreNlpParser PARAM_KEEP_PUNCTUATION has no effect #965
             coreNlpProps.setProperty("parse.keepPunct", Boolean.toString(keepPunctuation));
 //          coreNlpProps.setProperty("parse.treemap", ...);
             coreNlpProps.setProperty("parse.maxtime", Integer.toString(maxTime));
             coreNlpProps.setProperty("parse.buildgraphs", Boolean.toString(writeDependency));
-            coreNlpProps.setProperty("parse.originalDependencies", Boolean.toString(originalDependencies));
+            coreNlpProps.setProperty("parse.originalDependencies",
+                    Boolean.toString(originalDependencies));
             coreNlpProps.setProperty("parse.nthreads", Integer.toString(numThreads));
 //          coreNlpProps.setProperty("parse.binaryTrees", ...);
 //          coreNlpProps.setProperty("parse.nosquash", ...);
@@ -490,7 +514,8 @@ public class CoreNlpParser
                     addTagset(depTags, writeDependency);
                 }
             }
-            else if (gsf != null && UniversalEnglishGrammaticalStructureFactory.class.equals(gsf.getClass())) {
+            else if (gsf != null
+                    && UniversalEnglishGrammaticalStructureFactory.class.equals(gsf.getClass())) {
                 SingletonTagset depTags = new SingletonTagset(Dependency.class, "universal");
                 for (GrammaticalRelation r : UniversalEnglishGrammaticalRelations.values()) {
                     depTags.add(r.getShortName());

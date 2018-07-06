@@ -7,114 +7,114 @@
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # punctuation mark, comma
-,=PUNC
+,=POS_PUNCT
 # punctuation mark, sentence closer
-.=PUNC
+.=POS_PUNCT
 # dollar
-$=PUNC
+$=POS_PUNCT
 # dash
--=PUNC
+-=POS_PUNCT
 # semi-colon
-;=PUNC
+;=POS_PUNCT
 # question mark
-?=PUNC
+?=POS_PUNCT
 # exclamation mark
-\!=PUNC
+\!=POS_PUNCT
 # opening quotes
-``=PUNC
+``=POS_PUNCT
 # closing quotes
-''=PUNC
+''=POS_PUNCT
 # punctuation mark, colon
-\:=PUNC
+\:=POS_PUNCT
 # contextual separator, left paren
--LRB-=PUNC
+-LRB-=POS_PUNCT
 # contextual separator, left paren
-(=PUNC
+(=POS_PUNCT
 # contextual separator, right paren
--RRB-=PUNC
+-RRB-=POS_PUNCT
 # contextual separator, right paren
-)=PUNC
-\#=PUNC
+)=POS_PUNCT
+\#=POS_PUNCT
 # sentence end marker
-SENT=PUNC
+SENT=POS_PUNCT
 # 1.	CC	Coordinating conjunction
-CC=CONJ
+CC=POS_CONJ
 # 2.	CD	Cardinal number
-CD=CARD
+CD=POS_NUM
 # 3.	DT	Determiner
-DT=ART
+DT=POS_DET
 # 4.	EX	Existential there
-EX=ART
+EX=POS_DET
 # 5.	FW	Foreign word
-FW=O
+FW=POS_X
 # 6.	IN	Preposition or subordinating conjunction
-IN=PP
+IN=POS_ADP
 # 7.	JJ	Adjective
-JJ=ADJ
+JJ=POS_ADJ
 # 8.	JJR	Adjective, comparative
-JJR=ADJ
+JJR=POS_ADJ
 # 9.	JJS	Adjective, superlative
-JJS=ADJ
+JJS=POS_ADJ
 # 10.	LS	List item marker
-LS=O
+LS=POS_X
 # 11.	MD	Modal
-MD=V
+MD=POS_VERB
 # 12.	NN	Noun, singular or mass
-NN=NN
+NN=POS_NOUN
 # 13.	NNS	Noun, plural
-NNS=NN
+NNS=POS_NOUN
 # 14.	NP	Proper noun, singular (PTB 1)
-NP=NP
+NP=POS_PROPN
 # 14.	NP	Proper noun, singular (PTB 2)
-NNP=NP
+NNP=POS_PROPN
 # 15.	NPS	Proper noun, plural (PTB 1)
-NPS=NP
+NPS=POS_PROPN
 # 15.	NPS	Proper noun, plural (PTB 2)
-NNPS=NP
+NNPS=POS_PROPN
 # 16.	PDT	Predeterminer
-PDT=ART
+PDT=POS_DET
 # 17.	POS	Possessive ending
-POS=O
+POS=POS_X
 # 18.	PP	Personal pronoun
-PP=PR
-PRP=PR
+PP=POS_PRON
+PRP=POS_PRON
 # 19.	PP$	Possessive pronoun
-PP$=PR
-PRP$=PR
+PP$=POS_PRON
+PRP$=POS_PRON
 # 20.	RB	Adverb
-RB=ADV
+RB=POS_ADV
 # 21.	RBR	Adverb, comparative	
-RBR=ADV
+RBR=POS_ADV
 # 22.	RBS	Adverb, superlative
-RBS=ADV
+RBS=POS_ADV
 # 23.	RP	Particle
-RP=PP
+RP=POS_ADP
 # 24.	SYM	Symbol
-SYM=PUNC
+SYM=POS_SYM
 # 25.	TO	to
-TO=PP
+TO=POS_ADP
 # 26.	UH	Interjection
-UH=O
+UH=POS_INTJ
 # 27.	VB	Verb, base form
-VB=V
+VB=POS_VERB
 # 28.	VBD	Verb, past tense
-VBD=V
+VBD=POS_VERB
 # 29.	VBG	Verb, gerund or present participle
-VBG=V
+VBG=POS_VERB
 # 30.	VBN	Verb, past participle
-VBN=V
+VBN=POS_VERB
 # 31.	VBP	Verb, non-3rd person singular present
-VBP=V
+VBP=POS_VERB
 # 32.	VBZ	Verb, 3rd person singular present
-VBZ=V
+VBZ=POS_VERB
 # 33.	WDT	Wh-determiner
-WDT=ART
+WDT=POS_DET
 # 34.	WP	Wh-pronoun
-WP=PR
+WP=POS_PRON
 # 35.	WP$	Possessive wh-pronoun
-WP$=PR
+WP$=POS_PRON
 # 36.	WRB	Wh-adverb
-WRB=ADV
+WRB=POS_ADV
 
 # Additional tags in ClearNLP models
 #

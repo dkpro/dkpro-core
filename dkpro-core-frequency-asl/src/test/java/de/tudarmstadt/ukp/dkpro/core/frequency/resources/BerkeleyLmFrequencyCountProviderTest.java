@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.frequency.resources;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
@@ -49,9 +49,9 @@ public class BerkeleyLmFrequencyCountProviderTest
     @Test
     public void configureAggregatedExample() throws Exception {
         AnalysisEngineDescription desc = createEngineDescription(Annotator.class,
-        		Annotator.MODEL_KEY, createExternalResourceDescription(
-        				BerkeleyLmFrequencyCountProvider.class,
-        				BerkeleyLmFrequencyCountProvider.PARAM_PROVIDER_LANGUAGE, "en",
+                Annotator.MODEL_KEY, createExternalResourceDescription(
+                        BerkeleyLmFrequencyCountProvider.class,
+                        BerkeleyLmFrequencyCountProvider.PARAM_PROVIDER_LANGUAGE, "en",
                         BerkeleyLmFrequencyCountProvider.PARAM_BINARY, "src/test/resources/test.ser"));
 
         // Check the external resource was injected

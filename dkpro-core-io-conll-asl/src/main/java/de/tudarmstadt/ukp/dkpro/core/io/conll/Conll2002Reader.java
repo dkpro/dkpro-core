@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2013
  * Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.conll;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
@@ -23,15 +23,18 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.util.JCasUtil;
@@ -42,50 +45,19 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.IobDecoder;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * <p>Reads by default the original the CoNLL 2002 named entity format. By default, columns are separated by a single space, like
- * illustrated below.</p>
+ * <p>Reads by default the CoNLL 2002 named entity format.</p>
  * 
- * <pre><code>
- * Wolff      B-PER
- * ,          O
- * currently  O
- * a          O
- * journalist O
- * in         O
- * Argentina  B-LOC
- * ,          O
- * played     O
- * with       O
- * Del        B-PER
- * Bosque     I-PER
- * in         O
- * the        O
- * final      O
- * years      O
- * of         O
- * the        O
- * seventies  O
- * in         O
- * Real       B-ORG
- * Madrid     I-ORG
- * .          O
- * </code></pre>
- * 
- * <ol>
- * <li>FORM - token</li>
- * <li>NER - named entity (BIO encoded)</li>
- * </ol>
- * 
- * <p>Sentences are separated by a blank new line.</p>
- * 
- * <p>The reader is also compatible with the Conll-based GermEval 2014 named entity format,
- * in which the columns are separated by a tab, and there is an extra column for embedded named entities,
- * besides the token number being put in the first column (see below).
+ * <p>The reader is also compatible with the CoNLL-based GermEval 2014 named entity format,
+ * in which the columns are separated by a tab, and there is an extra column for embedded named
+ * entities, besides the token number being put in the first column (see below).
  * For that, additional parameters are provided, by which one can determine the column separator,
  * whether there is an additional first column for token numbers, and whether embedded
  * named entities should be read.
@@ -130,79 +102,85 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * <li>NER2 - embedded named entity (BIO encoded)</li>
  * </ol>
 
- * The sentence is encoded as one token per line, with information provided in tab-separated columns. 
- * The first column contains either a #, which signals the source the sentence is cited from and the date it was retrieved, 
- * or the token number within the sentence. The second column contains the token.
- * Name spans are encoded in the BIO-scheme. Outer spans are encoded in the third column, 
- * embedded spans in the fourth column.
+ * The sentence is encoded as one token per line, with information provided in tab-separated 
+ * columns. The first column contains either a #, which signals the source the sentence is cited  
+ * from and the date it was retrieved, or the token number within the sentence. The second column
+ * contains the token. Name spans are encoded in the BIO-scheme. Outer spans are encoded in the 
+ * third column, embedded spans in the fourth column.
  * 
  * @see <a href="http://www.clips.ua.ac.be/conll2002/ner/">CoNLL 2002 shared task</a>
  * @see <a href="https://sites.google.com/site/germeval2014ner/data">GermEval 2014 NER task</a> 
  */
-@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity"})
+@ResourceMetaData(name = "CoNLL 2002 Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2002, MimeTypes.TEXT_X_GERMEVAL_2014})
+@TypeCapability(
+        outputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity"})
 public class Conll2002Reader
     extends JCasResourceCollectionReader_ImplBase
 {
 
-	/**
-	 * 
-	 * Column Separators
-	 *
-	 */
-	public enum ColumnSeparators
-	{
-		SPACE("space", " "),
-		TAB("tab", "\t"),
-		INVALID("", "");
-		
-		private String name;
-		private String value;
-		
-		private ColumnSeparators(String aName, String aValue)
-		{
-			name = aName;
-			value = aValue;
-		}
-		
-		public String getName()
-		{
-			return name;
-		}
-		
-		private String getValue()
-		{
-			return value;
-		}
-		
-		private static ColumnSeparators getInstance(String Name) {
-			for (ColumnSeparators cs : ColumnSeparators.values()) {
-			    if (Name.equals(cs.getName())) {
-			    	return cs;
-			    }
-			}
-			return INVALID;
-		}
-	}	
+    /**
+     * 
+     * Column Separators
+     *
+     */
+    public enum ColumnSeparators
+    {
+        SPACE("space", " "),
+        TAB("tab", "\t"),
+        INVALID("", "");
+        
+        private String name;
+        private String value;
+        
+        private ColumnSeparators(String aName, String aValue)
+        {
+            name = aName;
+            value = aValue;
+        }
+        
+        public String getName()
+        {
+            return name;
+        }
+        
+        private String getValue()
+        {
+            return value;
+        }
+        
+        private static ColumnSeparators getInstance(String Name) {
+            for (ColumnSeparators cs : ColumnSeparators.values()) {
+                if (Name.equals(cs.getName())) {
+                    return cs;
+                }
+            }
+            return INVALID;
+        }
+    }    
 
-	/** 
-	 * Column separator
-	 */
-	
-	ColumnSeparators columnSeparator;
-	
-	/**
-	 * Column positions
-	 */
-	private int FORM = 0;
+    /** 
+     * Column separator
+     */
+    
+    ColumnSeparators columnSeparator;
+    
+    /**
+     * Column positions
+     */
+    private int FORM = 0;
     private int IOB  = 1;
     
     /**
-     * Column separator parameter. Acceptable input values come from {@link ColumnSeparators}.<br>
-     * Example usage: if you want to define 'tab' as the column separator the following value should be input for 
-     * this parameter {@code Conll2002Reader.ColumnSeparators.TAB.getName()}
+     * Column separator parameter. Acceptable input values come from {@link ColumnSeparators}.
+     * <br>
+     * Example usage: if you want to define 'tab' as the column separator the following value 
+     * should be input for this parameter {@code Conll2002Reader.ColumnSeparators.TAB.getName()}
      */
     public static final String PARAM_COLUMN_SEPARATOR = "columnSeparator";
     @ConfigurationParameter(name = PARAM_COLUMN_SEPARATOR, mandatory = false, defaultValue = "space")
@@ -226,26 +204,18 @@ public class Conll2002Reader
     /**
      * Character encoding of the input data.
      */
-    public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
-    private String encoding;
-
-    /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spamming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
+    public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    private String sourceEncoding;
 
     /**
      * Read named entity information.
      *
      * Default: {@code true}
      */
-    public static final String PARAM_READ_NAMED_ENTITY = ComponentParameters.PARAM_READ_NAMED_ENTITY;
+    public static final String PARAM_READ_NAMED_ENTITY = 
+            ComponentParameters.PARAM_READ_NAMED_ENTITY;
     @ConfigurationParameter(name = PARAM_READ_NAMED_ENTITY, mandatory = true, defaultValue = "true")
     private boolean namedEntityEnabled;
 
@@ -258,14 +228,14 @@ public class Conll2002Reader
     @ConfigurationParameter(name = PARAM_HAS_EMBEDDED_NAMED_ENTITY, mandatory = false, defaultValue = "false")
     private boolean hasEmbeddedNamedEntity;
 
-//    /**
-//     * Load the chunk tag to UIMA type mapping from this location instead of locating
-//     * the mapping automatically.
-//     */
-//    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
-//    @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
-//    protected String namedEntityMappingLocation;
-//    
+    /**
+     * Location of the mapping file for named entity tags to UIMA types.
+     */
+    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
+    private String namedEntityMappingLocation;
+
     private MappingProvider namedEntityMappingProvider;
 
     @Override
@@ -275,24 +245,25 @@ public class Conll2002Reader
         super.initialize(aContext);
         
         namedEntityMappingProvider = new MappingProvider();
-//        namedEntityMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/"
-//                + "dkpro/core/api/syntax/tagset/${language}-${chunk.tagset}-chunk.map");
-        namedEntityMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/there/is/no/mapping/yet");
-        namedEntityMappingProvider.setDefault(MappingProvider.BASE_TYPE, NamedEntity.class.getName());
-//        namedEntityMappingProvider.setOverride(MappingProvider.LOCATION, namedEntityMappingLocation);
-//        namedEntityMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
+        namedEntityMappingProvider.setDefault(MappingProvider.LOCATION,
+                "classpath:/there/is/no/mapping/yet");
+        namedEntityMappingProvider.setDefault(MappingProvider.BASE_TYPE,
+                NamedEntity.class.getName());
+        namedEntityMappingProvider.setOverride(MappingProvider.LOCATION,
+                namedEntityMappingLocation);
+        namedEntityMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
 
         // Configure column positions. First column may be used for token number
-        FORM = hasTokenNumber?1:0;        
-        IOB  = hasTokenNumber?2:1;        
+        FORM = hasTokenNumber ? 1 : 0;
+        IOB = hasTokenNumber ? 2 : 1;
         
         // Configure column separator
         columnSeparator = ColumnSeparators.getInstance(columnSeparatorName);
         
         if (columnSeparator == ColumnSeparators.INVALID) {
-        	Object[] params = {columnSeparatorName, PARAM_COLUMN_SEPARATOR};
+            Object[] params = {columnSeparatorName, PARAM_COLUMN_SEPARATOR};
             throw new ResourceInitializationException(
-            		ResourceInitializationException.RESOURCE_DATA_NOT_VALID, params);
+                    ResourceInitializationException.RESOURCE_DATA_NOT_VALID, params);
         }
         
     }
@@ -301,12 +272,12 @@ public class Conll2002Reader
     public void getNext(JCas aJCas)
         throws IOException, CollectionException
     {
-        try{
+        try {
             if (namedEntityEnabled) {
                 namedEntityMappingProvider.configure(aJCas.getCas());
             }
         }
-        catch(AnalysisEngineProcessException e){
+        catch (AnalysisEngineProcessException e) {
             throw new IOException(e);
         }
         
@@ -314,7 +285,9 @@ public class Conll2002Reader
         initCas(aJCas, res);
         BufferedReader reader = null;
         try {
-            reader = new BufferedReader(new InputStreamReader(res.getInputStream(), encoding));
+            reader = new BufferedReader(new InputStreamReader(
+                    CompressionUtils.getInputStream(res.getLocation(), res.getInputStream()),
+                    sourceEncoding));
             convert(aJCas, reader);
         }
         finally {
@@ -329,8 +302,8 @@ public class Conll2002Reader
 
         Type namedEntityType = JCasUtil.getType(aJCas, NamedEntity.class);
         Feature namedEntityValue = namedEntityType.getFeatureByBaseName("value");
-        IobDecoder decoder = new IobDecoder(aJCas.getCas(), namedEntityValue, namedEntityMappingProvider);
-        decoder.setInternTags(internTags);
+        IobDecoder decoder = new IobDecoder(aJCas.getCas(), namedEntityValue,
+                namedEntityMappingProvider);
         
         List<String[]> words;
         while ((words = readSentence(aReader)) != null) {
@@ -346,11 +319,16 @@ public class Conll2002Reader
             
             // Tokens, POS
             int i = 0;
-            for (String[] word : words) {
+            Iterator<String[]> wordIterator = words.iterator();
+            while (wordIterator.hasNext()) {
+                String[] word = wordIterator.next();
+                
                 // Read token
                 Token token = doc.add(word[FORM], Token.class);
                 sentenceEnd = token.getEnd();
-                doc.add(" ");
+                if (wordIterator.hasNext()) {
+                    doc.add(" ");
+                }
                 
                 tokens.add(token);
                 namedEntityTags[i] = word[IOB];
@@ -389,19 +367,22 @@ public class Conll2002Reader
             }
             
             if (hasHeader && beginSentence) {
-            	// Ignore header line
-            	beginSentence = false;
-            	continue;
+                // Ignore header line
+                beginSentence = false;
+                continue;
             }
             
             String[] fields = line.split(columnSeparator.getValue());
 
-           	if (!hasEmbeddedNamedEntity && fields.length != 2 + FORM) {
-                throw new IOException(
-                        String.format("Invalid file format. Line needs to have %d %s-separated fields.", 2 + FORM, columnSeparator.getName()));
-            } else if (hasEmbeddedNamedEntity && fields.length != 3 + FORM) {
-                    throw new IOException(
-                        String.format("Invalid file format. Line needs to have %d %s-separated fields.", 3 + FORM, columnSeparator.getName()));
+            if (!hasEmbeddedNamedEntity && fields.length != 2 + FORM) {
+                throw new IOException(String.format(
+                        "Invalid file format. Line needs to have %d %s-separated fields: [%s]",
+                        2 + FORM, columnSeparator.getName(), line));
+            }
+            else if (hasEmbeddedNamedEntity && fields.length != 3 + FORM) {
+                throw new IOException(String.format(
+                        "Invalid file format. Line needs to have %d %s-separated fields: [%s]",
+                        3 + FORM, columnSeparator.getName(), line));
             }
             words.add(fields);
         }

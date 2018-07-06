@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.xml;
 
 import java.io.File;
@@ -34,13 +34,16 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.tools.ant.types.Resource;
 import org.apache.tools.ant.types.resources.FileResource;
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -51,7 +54,9 @@ import org.xml.sax.InputSource;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * A component reader for XML files implemented with XPath.
@@ -61,10 +66,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field;
  * of each parent node will be stored separately in its own CAS.
  * <p>
  * If your expression evaluates to leaf nodes, empty CASes will be created.
- * 
  */
-@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-        "de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field" })
+@ResourceMetaData(name = "XPath-based XML Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@MimeTypeCapability({MimeTypes.APPLICATION_XML, MimeTypes.TEXT_XML})
+@TypeCapability(
+        outputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field" })
 public class XmlXPathReader
     extends FileSetCollectionReaderBase
 {
@@ -125,7 +134,7 @@ public class XmlXPathReader
     @ConfigurationParameter(name = PARAM_DOC_ID_TAG, mandatory = false)
     private String docIdTag;
 
-    private Iterator<FileResource> fileIterator;
+    private Iterator<Resource> fileIterator;
     private FileResource currentFileResource;
 
     private XPathExpression compiledRootXPath;
@@ -197,7 +206,7 @@ public class XmlXPathReader
     private void processNextFile()
     {
         if (fileIterator.hasNext()) {
-            currentFileResource = fileIterator.next();
+            currentFileResource = (FileResource) fileIterator.next();
             File currentFile = currentFileResource.getFile();
 
             FileInputStream inputStream = null;

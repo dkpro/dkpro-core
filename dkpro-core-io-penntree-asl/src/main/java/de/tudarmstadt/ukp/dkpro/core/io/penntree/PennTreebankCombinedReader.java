@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2014
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,32 +14,40 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.penntree;
 
 import java.io.IOException;
 import java.io.InputStream;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.LineIterator;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Penn Treebank combined format reader.
  */
+@ResourceMetaData(name = "Penn Treebank Combined Format Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@MimeTypeCapability({MimeTypes.TEXT_X_PTB_COMBINED})
 @TypeCapability(
         outputs = { 
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
@@ -53,9 +61,10 @@ public class PennTreebankCombinedReader
     /**
      * Name of configuration parameter that contains the character encoding used by the input files.
      */
-    public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
-    private String encoding;
+    public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    private String sourceEncoding;
 
     /**
      * Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
@@ -70,7 +79,8 @@ public class PennTreebankCombinedReader
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
@@ -89,7 +99,8 @@ public class PennTreebankCombinedReader
      * tag set defined as part of the model meta data. This can be useful if a custom model is
      * specified which does not have such meta data, or it can be used in readers.
      */
-    public static final String PARAM_CONSTITUENT_TAG_SET = ComponentParameters.PARAM_CONSTITUENT_TAG_SET;
+    public static final String PARAM_CONSTITUENT_TAG_SET = 
+            ComponentParameters.PARAM_CONSTITUENT_TAG_SET;
     @ConfigurationParameter(name = PARAM_CONSTITUENT_TAG_SET, mandatory = false)
     protected String constituentTagset;
     
@@ -97,20 +108,11 @@ public class PennTreebankCombinedReader
      * Load the constituent tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
+    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CONSTITUENT_MAPPING_LOCATION, mandatory = false)
     protected String constituentMappingLocation;
 
-    /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * <p>Default: {@code true}</p>
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
-    
     public static final String PARAM_REMOVE_TRACES = "removeTraces";
     @ConfigurationParameter(name = PARAM_REMOVE_TRACES, mandatory = false, defaultValue = "true")
     private boolean removeTraces;
@@ -141,7 +143,6 @@ public class PennTreebankCombinedReader
                 constituentMappingLocation, constituentTagset, getLanguage());
         
         converter = new PennTreeToJCasConverter(posMappingProvider, constituentMappingProvider);
-        converter.setInternTags(internTags);
         converter.setWriteTracesToText(writeTracesToText);
         converter.setCreatePosTags(createPosTags);
     }
@@ -165,7 +166,7 @@ public class PennTreebankCombinedReader
         
         try (InputStream is = res.getInputStream()) {
             lineNumber = 0;
-            LineIterator li = IOUtils.lineIterator(is, encoding);
+            LineIterator li = IOUtils.lineIterator(is, sourceEncoding);
             
             while (li.hasNext()) {
                 PennTreeNode tree = readTree(li);
@@ -215,13 +216,9 @@ public class PennTreebankCombinedReader
             String line = lineBuffer != null ? lineBuffer : aLi.nextLine();
             lineNumber++;
             lineBuffer = null;
+            
             if (StringUtils.isBlank(line)) {
-                if (tree.length() > 0) {
-                    break;
-                }
-                else {
-                    continue;
-                }
+                continue;
             }
             
             // If the next line starts at the beginning and with an opening round bracket 

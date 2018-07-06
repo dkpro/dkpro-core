@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2013
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.api.segmentation.type;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -37,87 +37,88 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound.CompoundSpli
 public class CompoundTest
 {
 
-	private Compound compound;
+    private Compound compound;
 
-	@Before
-	public void setUpCompound()
-			throws UIMAException
-			{
-		final JCas jcas = JCasFactory.createJCas();
-		final JCasBuilder jcasBuilder = new JCasBuilder(jcas);
-		final int beginPosition = jcasBuilder.getPosition();
-		final CompoundPart getrank = jcasBuilder.add("getränk", CompoundPart.class);
-		final int secondPosition = jcasBuilder.getPosition();
-		final CompoundPart auto = jcasBuilder.add("auto", CompoundPart.class);
-		final CompoundPart mat = jcasBuilder.add("mat", CompoundPart.class);
-		final CompoundPart automat = new CompoundPart(jcas, secondPosition,
-				jcasBuilder.getPosition());
-		final List<Split> splits = new ArrayList<Split>();
-		splits.add(auto);
-		splits.add(mat);
-		automat.setSplits(FSCollectionFactory.createFSArray(jcas, splits));
-		automat.addToIndexes();
-		compound = new Compound(jcas, beginPosition, jcasBuilder.getPosition());
-		splits.clear();
-		splits.add(getrank);
-		splits.add(automat);
-		compound.setSplits(FSCollectionFactory.createFSArray(jcas, splits));
-		compound.addToIndexes();
-		jcasBuilder.close();
+    @Before
+    public void setUpCompound() throws UIMAException
+    {
+        final JCas jcas = JCasFactory.createJCas();
+        final JCasBuilder jcasBuilder = new JCasBuilder(jcas);
+        final int beginPosition = jcasBuilder.getPosition();
+        final CompoundPart getrank = jcasBuilder.add("getränk", CompoundPart.class);
+        final int secondPosition = jcasBuilder.getPosition();
+        final CompoundPart auto = jcasBuilder.add("auto", CompoundPart.class);
+        final CompoundPart mat = jcasBuilder.add("mat", CompoundPart.class);
+        final CompoundPart automat = new CompoundPart(jcas, secondPosition,
+                jcasBuilder.getPosition());
+        final List<Split> splits = new ArrayList<Split>();
+        splits.add(auto);
+        splits.add(mat);
+        automat.setSplits(FSCollectionFactory.createFSArray(jcas, splits));
+        automat.addToIndexes();
+        compound = new Compound(jcas, beginPosition, jcasBuilder.getPosition());
+        splits.clear();
+        splits.add(getrank);
+        splits.add(automat);
+        compound.setSplits(FSCollectionFactory.createFSArray(jcas, splits));
+        compound.addToIndexes();
+        jcasBuilder.close();
 
-			}
+    }
 
-	@Test
-	public void testAll()
-			throws UIMAException
-			{
+    @Test
+    public void testAll() throws UIMAException
+    {
 
-		final String[] splitsList = new String[] { "getränk", "automat", "auto", "mat" };
-		assertThat(coveredTextArrayFromAnnotations(compound.getSplitsWithoutMorpheme(CompoundSplitLevel.ALL)),
-				is(splitsList));
+        final String[] splitsList = new String[] { "getränk", "automat", "auto", "mat" };
+        assertThat(coveredTextArrayFromAnnotations(
+                compound.getSplitsWithoutMorpheme(CompoundSplitLevel.ALL)), is(splitsList));
 
-			}
+    }
 
-	@Test
-	public void testLowest()
-			throws UIMAException
-			{
+    @Test
+    public void testLowest() throws UIMAException
+    {
 
-		final String[] splitsList = new String[] { "getränk", "auto", "mat" };
-		assertThat(coveredTextArrayFromAnnotations(compound.getSplitsWithoutMorpheme(CompoundSplitLevel.LOWEST)),
-				is(splitsList));
+        final String[] splitsList = new String[] { "getränk", "auto", "mat" };
+        assertThat(
+                coveredTextArrayFromAnnotations(
+                        compound.getSplitsWithoutMorpheme(CompoundSplitLevel.LOWEST)),
+                is(splitsList));
 
-			}
+    }
 
-	@Test
-	public void testHighest()
-			throws UIMAException
-			{
+    @Test
+    public void testHighest() throws UIMAException
+    {
 
-		final String[] splitsList = new String[] { "getränk", "automat" };
-		assertThat(coveredTextArrayFromAnnotations(compound.getSplitsWithoutMorpheme(CompoundSplitLevel.HIGHEST)),
-				is(splitsList));
+        final String[] splitsList = new String[] { "getränk", "automat" };
+        assertThat(
+                coveredTextArrayFromAnnotations(
+                        compound.getSplitsWithoutMorpheme(CompoundSplitLevel.HIGHEST)),
+                is(splitsList));
 
-			}
+    }
 
-	@Test
-	public void testNone()
-			throws UIMAException
-			{
+    @Test
+    public void testNone() throws UIMAException
+    {
 
-		final String[] splitsList = new String[] { };
-		assertThat(coveredTextArrayFromAnnotations(compound.getSplitsWithoutMorpheme(CompoundSplitLevel.NONE)),
-				is(splitsList));
+        final String[] splitsList = new String[] {};
+        assertThat(
+                coveredTextArrayFromAnnotations(
+                        compound.getSplitsWithoutMorpheme(CompoundSplitLevel.NONE)),
+                is(splitsList));
 
-			}
+    }
 
-	public <T extends Annotation> String[] coveredTextArrayFromAnnotations(final T[] annotations)
-	{
-		final List<String> list = new ArrayList<String>();
-		for (T annotation : annotations) {
-			list.add(annotation.getCoveredText());
-		}
-		return list.toArray(new String[list.size()]);
-	}
+    public <T extends Annotation> String[] coveredTextArrayFromAnnotations(final T[] annotations)
+    {
+        final List<String> list = new ArrayList<String>();
+        for (T annotation : annotations) {
+            list.add(annotation.getCoveredText());
+        }
+        return list.toArray(new String[list.size()]);
+    }
 
 }

@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2014
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.penntree;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertConstituents;
@@ -47,7 +47,7 @@ public class PennTreebankCombinedReaderTest
     {
         CollectionReader reader = createReader(PennTreebankCombinedReader.class, 
                 PennTreebankCombinedReader.PARAM_SOURCE_LOCATION, 
-                "src/test/resources/stanfordPennTrees/stanford-english-trees-first2.txt");
+                "src/test/resources/stanfordPennTrees/stanford-english-trees-first2.mrg");
         
         JCas jcas = JCasFactory.createJCas();
         reader.getNext(jcas.getCas());
@@ -58,7 +58,8 @@ public class PennTreebankCombinedReaderTest
         String[] sentences = { "Al Qaida Endorses George W. Bush for President",
                 "Al-Qaeda tries to incite more violence in Iraq" };
         
-        String[] tokens1 = { "Al", "Qaida", "Endorses", "George", "W.", "Bush", "for", "President" };
+        String[] tokens1 = { "Al", "Qaida", "Endorses", "George", "W.", "Bush", "for",
+                "President" };
 
         String[] constituentMapped1 = { "Constituent 0,46", "Constituent 0,8", "Constituent 18,32",
                 "Constituent 33,46", "Constituent 37,46", "Constituent 9,46", "ROOT 0,46" };
@@ -66,7 +67,8 @@ public class PennTreebankCombinedReaderTest
         String[] constituentOriginal1 = { "NP 0,8", "NP 18,32", "NP 37,46", "PP 33,46",
                 "ROOT 0,46", "S 0,46", "VP 9,46" };
         
-        String[] tokens2 = { "Al-Qaeda", "tries", "to", "incite", "more", "violence", "in", "Iraq" };
+        String[] tokens2 = { "Al-Qaeda", "tries", "to", "incite", "more", "violence", "in",
+                "Iraq" };
         
         String[] constituentMapped2 = { "Constituent 47,55", "Constituent 47,93",
                 "Constituent 56,93", "Constituent 62,93", "Constituent 65,93", "Constituent 72,85",
@@ -96,7 +98,7 @@ public class PennTreebankCombinedReaderTest
         CollectionReader reader = createReader(PennTreebankCombinedReader.class, 
                 PennTreebankCombinedReader.PARAM_LANGUAGE, "en",
                 PennTreebankCombinedReader.PARAM_SOURCE_LOCATION, 
-                "src/test/resources/stanfordPennTrees/tree_with_direct_speech.txt");
+                "src/test/resources/stanfordPennTrees/tree_with_direct_speech.mrg");
         
         JCas jcas = JCasFactory.createJCas();
         reader.getNext(jcas.getCas());
@@ -105,7 +107,8 @@ public class PennTreebankCombinedReaderTest
         
         String[] tokens = { "``", "And", "what", "do", "you", "know", "?", "''" };
 
-        String[] posMapped = { "PUNC", "CONJ", "PR", "V", "PR", "V", "PUNC", "PUNC" };
+        String[] posMapped = { "POS_PUNCT", "POS_CONJ", "POS_PRON", "POS_VERB", "POS_PRON",
+                "POS_VERB", "POS_PUNCT", "POS_PUNCT" };
 
         String[] posOriginal = { "``", "CC", "WP", "VBP", "PRP", "VB", ".", "''" };
 
@@ -128,7 +131,7 @@ public class PennTreebankCombinedReaderTest
         CollectionReader reader = createReader(PennTreebankCombinedReader.class, 
                 PennTreebankCombinedReader.PARAM_LANGUAGE, "en",
                 PennTreebankCombinedReader.PARAM_SOURCE_LOCATION, 
-                "src/test/resources/stanfordPennTrees/tree_with_parentheses.txt");
+                "src/test/resources/stanfordPennTrees/tree_with_parentheses.mrg");
         
         JCas jcas = JCasFactory.createJCas();
         reader.getNext(jcas.getCas());
@@ -137,7 +140,7 @@ public class PennTreebankCombinedReaderTest
         
         String[] tokens = { "(", "CNN", ")", "." };
 
-        String[] posMapped = { "PUNC", "NP", "PUNC", "PUNC" };
+        String[] posMapped = { "POS_PUNCT", "POS_PROPN", "POS_PUNCT", "POS_PUNCT" };
 
         String[] posOriginal = { "-LRB-", "NNP", "-RRB-", "." };
         

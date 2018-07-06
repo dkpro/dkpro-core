@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2013
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.tiger;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
@@ -27,8 +27,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javanet.staxutils.IndentingXMLEventWriter;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Marshaller;
@@ -36,15 +34,20 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamException;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
@@ -54,10 +57,15 @@ import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerNode;
 import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerNonTerminal;
 import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerSentence;
 import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerTerminal;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import javanet.staxutils.IndentingXMLEventWriter;
 
 /**
  * UIMA CAS consumer writing the CAS document text in the TIGER-XML format.
  */
+@ResourceMetaData(name = "TIGER-XML Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@MimeTypeCapability({MimeTypes.APPLICATION_X_TIGER_XML})
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
@@ -72,21 +80,31 @@ public class TigerXmlWriter extends JCasFileWriter_ImplBase
      * Specify the suffix of output files. Default value <code>.xml</code>. If the suffix is not
      * needed, provide an empty string as value.
      */
-    public static final String PARAM_FILENAME_SUFFIX = "filenameSuffix";
-    @ConfigurationParameter(name = PARAM_FILENAME_SUFFIX, mandatory = true, defaultValue = ".xml")
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
+    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xml")
     private String filenameSuffix;
+
+    /**
+     * Character encoding of the output data.
+     */
+    public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    private String targetEncoding;
 
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
         OutputStream docOS = null;
+        XMLEventWriter xmlEventWriter = null;
         try {
             docOS = getOutputStream(aJCas, filenameSuffix);
 
             XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
-            XMLEventWriter xmlEventWriter = new IndentingXMLEventWriter(
-                    xmlOutputFactory.createXMLEventWriter(docOS));
+            xmlEventWriter = new IndentingXMLEventWriter(
+                    xmlOutputFactory.createXMLEventWriter(docOS, targetEncoding));
             
             JAXBContext context = JAXBContext.newInstance(TigerSentence.class);
             Marshaller marshaller = context.createMarshaller();
@@ -116,6 +134,15 @@ public class TigerXmlWriter extends JCasFileWriter_ImplBase
             throw new AnalysisEngineProcessException(e);
         }
         finally {
+            if (xmlEventWriter != null) {
+                try {
+                    xmlEventWriter.close();
+                }
+                catch (XMLStreamException e) {
+                    getLogger().warn("Error closing the XML event writer", e);
+                }
+            }
+            
             closeQuietly(docOS);
         }
     }
@@ -127,14 +154,14 @@ public class TigerXmlWriter extends JCasFileWriter_ImplBase
         Map<FeatureStructure, TigerNode> nodes = new HashMap<FeatureStructure, TigerNode>();
         
         TigerSentence sentence = new TigerSentence();
-        sentence.id = "s_" + aSentNum;
+        sentence.id = aSentence.getId() != null ? aSentence.getId() : "s_" + aSentNum;
         sentence.graph = new TigerGraph();
         sentence.graph.terminals = new ArrayList<TigerTerminal>();
         
         // Convert the tokens
         for (Token token : selectCovered(Token.class, aSentence)) {
             TigerTerminal terminal = new TigerTerminal();
-            terminal.id = sentence.id + "_" + nodeNum;
+            terminal.id = token.getId() != null ? token.getId() : sentence.id + "_" + nodeNum;
             if (token.getPos() != null) {
                 terminal.pos = token.getPos().getPosValue();
             }

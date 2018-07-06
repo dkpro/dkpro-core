@@ -1,6 +1,6 @@
-/*******************************************************************************
+/*
 
- * Copyright 2010
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -15,7 +15,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.api.io;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
@@ -25,6 +25,7 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import org.apache.uima.cas.CAS;
 import org.apache.uima.collection.CollectionException;
@@ -106,7 +107,8 @@ public class ResourceCollectionReaderBaseTest
     public void testZip4()
         throws Exception
     {
-        String path = "jar:file:" + new File("src/test/resources/testfiles.zip").getAbsolutePath();
+        URL url = new File("src/test/resources/testfiles.zip").toURI().toURL();
+        String path = "jar:" + url.toString();
         CollectionReader reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, path,
                 ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
@@ -243,7 +245,8 @@ public class ResourceCollectionReaderBaseTest
     public void testExternalLoaderLocator()
         throws Exception
     {
-        ExternalResourceDescription locator = createExternalResourceDescription(ResourceLoaderLocator.class);
+        ExternalResourceDescription locator = createExternalResourceDescription(
+                ResourceLoaderLocator.class);
         CollectionReader reader = createReader(DummyReader.class,
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
                 "file:src/main/java/de/tudarmstadt/ukp/",

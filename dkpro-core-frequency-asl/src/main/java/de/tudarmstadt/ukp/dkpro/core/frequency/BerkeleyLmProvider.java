@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.frequency;
 
 import java.util.Arrays;
@@ -30,26 +30,26 @@ import edu.berkeley.nlp.lm.io.LmReaders;
  * nGram index files are looked up in DKPRO_HOME directory.
  */
 public class BerkeleyLmProvider
-	implements FrequencyCountProvider
+    implements FrequencyCountProvider
 {
 
     private final NgramLanguageModel<String> lm;
     private String language;
     
-	public BerkeleyLmProvider(String binaryFile, String language)
-	    throws Exception
-	{
-	    lm = LmReaders.readLmBinary(binaryFile);
-	    this.language = language;
-	}
+    public BerkeleyLmProvider(String binaryFile, String language)
+        throws Exception
+    {
+        lm = LmReaders.readLmBinary(binaryFile);
+        this.language = language;
+    }
 
-	// FIXME how to obtain phrase count from logProb
+    // FIXME how to obtain phrase count from logProb
     @Override
     public long getFrequency(String phrase)
-	{
+    {
         throw new UnsupportedOperationException("Not implemented yet.");
 //        return getProbnew Float(Math.exp(logProb)).longValue();
-	}
+    }
 
     @Override
     public double getProbability(String phrase)

@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.graf;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -42,67 +42,67 @@ import de.tudarmstadt.ukp.dkpro.core.testing.DocumentMetaDataStripper;
 
 public class GrafWriterTest
 {
-	@Test
-	public void test() throws Exception
-	{
-		write();
-		//read();
-	}
+    @Test
+    public void test() throws Exception
+    {
+        write();
+        //read();
+    }
 
-	public void write() throws Exception
-	{
-	    File targetFolder = testContext.getTestOutputFolder();
-	    
-		CollectionReaderDescription textReader = createReaderDescription(
-				TextReader.class,
-				TextReader.PARAM_LANGUAGE, "en",
-				ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "src/test/resources/texts",
-				ResourceCollectionReaderBase.PARAM_PATTERNS, new String [] {
-					ResourceCollectionReaderBase.INCLUDE_PREFIX+"*.txt"
-				});
+    public void write() throws Exception
+    {
+        File targetFolder = testContext.getTestOutputFolder();
+        
+        CollectionReaderDescription textReader = createReaderDescription(
+                TextReader.class,
+                TextReader.PARAM_LANGUAGE, "en",
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "src/test/resources/texts",
+                ResourceCollectionReaderBase.PARAM_PATTERNS, new String [] {
+                    ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.txt"
+                });
 
-		AnalysisEngineDescription segmenter = createEngineDescription(
-				OpenNlpSegmenter.class);
+        AnalysisEngineDescription segmenter = createEngineDescription(
+                OpenNlpSegmenter.class);
 
-		AnalysisEngineDescription posTagger = createEngineDescription(
-				OpenNlpPosTagger.class);
+        AnalysisEngineDescription posTagger = createEngineDescription(
+                OpenNlpPosTagger.class);
 
-		AnalysisEngineDescription stripper = createEngineDescription(
-				DocumentMetaDataStripper.class);
+        AnalysisEngineDescription stripper = createEngineDescription(
+                DocumentMetaDataStripper.class);
 
-		AnalysisEngineDescription grafWriter = createEngineDescription(
-				GrafWriter.class,
-				GrafWriter.PARAM_TARGET_LOCATION, targetFolder);
+        AnalysisEngineDescription grafWriter = createEngineDescription(
+                GrafWriter.class,
+                GrafWriter.PARAM_TARGET_LOCATION, targetFolder);
 
-		runPipeline(textReader, segmenter, posTagger, stripper, grafWriter);
+        runPipeline(textReader, segmenter, posTagger, stripper, grafWriter);
 
-		File output = new File(targetFolder, "example1.txt.xml");
-		assertTrue(output.exists());
+        File output = new File(targetFolder, "example1.txt.xml");
+        assertTrue(output.exists());
 
         Diff myDiff = new Diff(
                 new InputSource("src/test/resources/reference/example1.txt.xml"),
                 new InputSource(output.getPath()));
         myDiff.overrideElementQualifier(new ElementNameAndAttributeQualifier());
         XMLAssert.assertXMLEqual(myDiff, true);     
-	}
+    }
 
-//	public void read() throws Exception
-//	{
-//		CollectionReader xmiReader = CollectionReaderFactory.createReader(
-//				XmiReader.class,
-//				ResourceCollectionReaderBase.PARAM_PATH, testFolder.getRoot().getPath(),
-//				ResourceCollectionReaderBase.PARAM_PATTERNS, new String [] {
-//					ResourceCollectionReaderBase.INCLUDE_PREFIX+"*.xmi"
-//				});
+//    public void read() throws Exception
+//    {
+//        CollectionReader xmiReader = CollectionReaderFactory.createReader(
+//                XmiReader.class,
+//                ResourceCollectionReaderBase.PARAM_PATH, testFolder.getRoot().getPath(),
+//                ResourceCollectionReaderBase.PARAM_PATTERNS, new String [] {
+//                    ResourceCollectionReaderBase.INCLUDE_PREFIX+"*.xmi"
+//                });
 //
-//		CAS cas = CasCreationUtils.createCas(createTypeSystemDescription(), null, null);
-//		xmiReader.getNext(cas);
+//        CAS cas = CasCreationUtils.createCas(createTypeSystemDescription(), null, null);
+//        xmiReader.getNext(cas);
 //
-//		String refText = readFileToString(new File("src/test/resources/texts/example1.txt"));
-//		assertEquals(refText, cas.getDocumentText());
-//		assertEquals("latin", cas.getDocumentLanguage());
-//	}
-	
+//        String refText = readFileToString(new File("src/test/resources/texts/example1.txt"));
+//        assertEquals(refText, cas.getDocumentText());
+//        assertEquals("latin", cas.getDocumentLanguage());
+//    }
+    
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
 }

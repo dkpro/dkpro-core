@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2013
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,13 +14,13 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.clearnlp;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
@@ -36,23 +36,23 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class ClearNlpSemanticRoleLabelerTest
 {
-	static final String documentEnglish = "We need a very complicated example sentence , which "
-			+ "contains as many constituents and dependencies as possible .";
+    static final String documentEnglish = "We need a very complicated example sentence , which "
+            + "contains as many constituents and dependencies as possible .";
 
-	@Test
-	public void testEnglish()
-		throws Exception
-	{
-		Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 3000000000l);
+    @Test
+    public void testEnglish()
+        throws Exception
+    {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 3000000000l);
 
-		JCas jcas = runTest("en", null, documentEnglish);
+        JCas jcas = runTest("en", null, documentEnglish);
 
-		String[] predicates = {
-		        "contains (contain.01): [(A0:sentence)(A1:as)(R-A0:which)]",
-		        "need (need.01): [(A0:We)(A1:sentence)]" };
+        String[] predicates = {
+                "contains (contain.01): [(A0:sentence)(A1:as)(R-A0:which)]",
+                "need (need.01): [(A0:We)(A1:sentence)]" };
 
         AssertAnnotations.assertSemPred(predicates, select(jcas, SemPred.class));
-	}
+    }
 
     @Test
     public void testEnglishExpand()
@@ -70,7 +70,8 @@ public class ClearNlpSemanticRoleLabelerTest
                 + "(R-A0:which)]",
                 "need (need.01): ["
                 + "(A0:We)"
-                + "(A1:a very complicated example sentence , which contains as many constituents and dependencies as possible)]" };
+                + "(A1:a very complicated example sentence , which contains as many constituents and dependencies as possible)]"
+        };
 
         AssertAnnotations.assertSemPred(predicates, select(jcas, SemPred.class));
     }
@@ -88,47 +89,47 @@ public class ClearNlpSemanticRoleLabelerTest
 
         AssertAnnotations.assertSemPred(predicates, select(jcas, SemPred.class));
     }
-	@Test
-	public void testEnglishMayo()
-		throws Exception
-	{
-		Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 3000000000l);
+    @Test
+    public void testEnglishMayo()
+        throws Exception
+    {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 3000000000l);
 
-		JCas jcas = runTest("en", "mayo", documentEnglish);
+        JCas jcas = runTest("en", "mayo", documentEnglish);
 
-		String[] predicates = {
-		        "contains (contain.01): [(A0:sentence)(A1:as)(R-A0:which)]",
-		        "need (need.01): [(A0:We)(A1:sentence)]" };
+        String[] predicates = {
+                "contains (contain.01): [(A0:sentence)(A1:as)(R-A0:which)]",
+                "need (need.01): [(A0:We)(A1:sentence)]" };
 
         AssertAnnotations.assertSemPred(predicates, select(jcas, SemPred.class));
-	}
+    }
 
-	private JCas runTest(String aLanguage, String aVariant, String aText, Object... aExtraParams)
-		throws Exception
-	{
+    private JCas runTest(String aLanguage, String aVariant, String aText, Object... aExtraParams)
+        throws Exception
+    {
         Object[] params = new Object[] {
                 ClearNlpParser.PARAM_VARIANT, aVariant,
                 ClearNlpParser.PARAM_PRINT_TAGSET, true};
         params = ArrayUtils.addAll(params, aExtraParams);
-	    
-		AnalysisEngineDescription engine = createEngineDescription(
-				createEngineDescription(OpenNlpPosTagger.class),
-				createEngineDescription(ClearNlpLemmatizer.class),
-				createEngineDescription(ClearNlpParser.class),
-				createEngineDescription(ClearNlpSemanticRoleLabeler.class, params));
+        
+        AnalysisEngineDescription engine = createEngineDescription(
+                createEngineDescription(OpenNlpPosTagger.class),
+                createEngineDescription(ClearNlpLemmatizer.class),
+                createEngineDescription(ClearNlpParser.class),
+                createEngineDescription(ClearNlpSemanticRoleLabeler.class, params));
 
-		return TestRunner.runTest(engine, aLanguage, aText);
-	}
+        return TestRunner.runTest(engine, aLanguage, aText);
+    }
 
 
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
 
-	@Before
-	public void freeMemory()
-	{
-		Runtime.getRuntime().gc();
-		Runtime.getRuntime().gc();
-		Runtime.getRuntime().gc();
-	}
+    @Before
+    public void freeMemory()
+    {
+        Runtime.getRuntime().gc();
+        Runtime.getRuntime().gc();
+        Runtime.getRuntime().gc();
+    }
 }

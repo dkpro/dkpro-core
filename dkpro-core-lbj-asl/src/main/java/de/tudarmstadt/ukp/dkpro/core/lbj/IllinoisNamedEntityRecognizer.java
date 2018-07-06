@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2016
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.lbj;
 
 import java.io.IOException;
@@ -26,6 +26,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -42,10 +43,16 @@ import edu.illinois.cs.cogcomp.core.datastructures.ViewNames;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.TextAnnotation;
 import edu.illinois.cs.cogcomp.core.utilities.configuration.ResourceManager;
 import edu.illinois.cs.cogcomp.ner.NERAnnotator;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
- * OpenNLP name finder wrapper.
+ * Wrapper for the Illinois named entity recognizer from the Cognitive Computation Group (CCG).
  */
+@Component(OperationType.NAMED_ENTITITY_RECOGNIZER)
+@ResourceMetaData(name = "Illinois CCG Named Entity Recognizer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
@@ -54,16 +61,6 @@ import edu.illinois.cs.cogcomp.ner.NERAnnotator;
 public class IllinoisNamedEntityRecognizer
     extends JCasAnnotator_ImplBase
 {
-    /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
-    
     /**
      * Log the tag set(s) when a model is loaded.
      */
@@ -96,7 +93,8 @@ public class IllinoisNamedEntityRecognizer
 //    /**
 //     * Location of the mapping file for named entity tags to UIMA types.
 //     */
-//    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
+//    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = 
+//        ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
 //    @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
     protected String mappingLocation;
 
@@ -182,12 +180,12 @@ public class IllinoisNamedEntityRecognizer
 
         // Run tagger
         try {
-            modelProvider.getResource().addView(document);
+            modelProvider.getResource().getView(document);
         }
         catch (AnnotatorException e) {
             throw new IllegalStateException(e);
         }
         
-        ConvertToUima.convertNamedEntity(aJCas, document, mappingProvider, internTags);
+        ConvertToUima.convertNamedEntity(aJCas, document, mappingProvider);
     }
 }

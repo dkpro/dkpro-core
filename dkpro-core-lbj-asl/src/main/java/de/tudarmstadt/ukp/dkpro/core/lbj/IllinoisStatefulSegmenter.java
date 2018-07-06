@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2016
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,11 +14,12 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.lbj;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -28,10 +29,13 @@ import edu.illinois.cs.cogcomp.core.datastructures.IntPair;
 import edu.illinois.cs.cogcomp.nlp.tokenizer.StatefulTokenizer;
 import edu.illinois.cs.cogcomp.nlp.tokenizer.Tokenizer;
 import edu.illinois.cs.cogcomp.nlp.tokenizer.Tokenizer.Tokenization;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Illinois stateful segmenter.
  */
+@ResourceMetaData(name = "Illinois CCG Stateful Segmenter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(outputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
@@ -62,7 +66,8 @@ public class IllinoisStatefulSegmenter
 
         int lastBegin = 0;
         for (int i : tokens.getSentenceEndTokenIndexes()) {
-            createSentence(aJCas, ts[lastBegin].getFirst() + zoneBegin, ts[i-1].getSecond() + zoneBegin);
+            createSentence(aJCas, ts[lastBegin].getFirst() + zoneBegin,
+                    ts[i - 1].getSecond() + zoneBegin);
             lastBegin = i;
         }
         

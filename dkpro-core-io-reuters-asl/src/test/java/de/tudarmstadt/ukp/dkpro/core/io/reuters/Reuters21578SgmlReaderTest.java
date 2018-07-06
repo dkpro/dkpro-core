@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2015
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  * <p>
@@ -14,22 +14,23 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.reuters;
 
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.MetaDataStringField;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Test;
 
-import java.io.File;
-
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.MetaDataStringField;
 
 public class Reuters21578SgmlReaderTest
 {

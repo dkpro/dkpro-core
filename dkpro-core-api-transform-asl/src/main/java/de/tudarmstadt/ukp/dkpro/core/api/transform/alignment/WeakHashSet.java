@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2008
  * Richard Eckart de Castilho
  * Institut für Sprach- und Literaturwissenschaft
@@ -15,7 +15,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.api.transform.alignment;
 
 import java.util.AbstractSet;
@@ -24,50 +24,43 @@ import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-public
-class WeakHashSet<E>
-extends AbstractSet<E>
-implements Iterable<E>, Set<E>
+public class WeakHashSet<E>
+    extends AbstractSet<E>
+    implements Iterable<E>, Set<E>
 {
-	private final static Object present = new Object();
+    private final static Object present = new Object();
 
-	private final Map<E, Object> data = new WeakHashMap<E, Object>();
+    private final Map<E, Object> data = new WeakHashMap<E, Object>();
 
-	@Override
-	public
-	boolean add(
-			final E o)
-	{
-		final int beforeSize = size();
-		data.put(o, present);
-		return beforeSize != size();
-	}
+    @Override
+    public boolean add(final E o)
+    {
+        final int beforeSize = size();
+        data.put(o, present);
+        return beforeSize != size();
+    }
 
-	@Override
-    public
-	boolean remove(
-			final Object o)
-	{
-		return data.remove(o) != null;
-	}
+    @Override
+    public boolean remove(final Object o)
+    {
+        return data.remove(o) != null;
+    }
 
-	@Override
-	public boolean contains(Object o)
-	{
-	    return data.containsKey(o);
-	}
-	
-	@Override
-	public
-	Iterator<E> iterator()
-	{
-		return data.keySet().iterator();
-	}
+    @Override
+    public boolean contains(Object o)
+    {
+        return data.containsKey(o);
+    }
 
-	@Override
-	public
-	int size()
-	{
-		return data.size();
-	}
+    @Override
+    public Iterator<E> iterator()
+    {
+        return data.keySet().iterator();
+    }
+
+    @Override
+    public int size()
+    {
+        return data.size();
+    }
 }

@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.xml;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
@@ -34,13 +34,17 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.CasToInlineXml;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Writes an approximation of the content of a textual CAS as an inline XML file. Optionally applies
@@ -62,72 +66,72 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
  *
  * @since 1.1.0
  */
-
+@ResourceMetaData(name = "Inline XML Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@MimeTypeCapability({MimeTypes.APPLICATION_XML, MimeTypes.TEXT_XML})
 @TypeCapability(
-        inputs={
+        inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
-
 public class InlineXmlWriter
-	extends JCasFileWriter_ImplBase
+    extends JCasFileWriter_ImplBase
 {
-	/**
-	 * XSLT stylesheet to apply.
-	 */
-	public static final String PARAM_XSLT = "Xslt";
-	@ConfigurationParameter(name=PARAM_XSLT, mandatory=false)
-	private String xslt;
+    /**
+     * XSLT stylesheet to apply.
+     */
+    public static final String PARAM_XSLT = "Xslt";
+    @ConfigurationParameter(name = PARAM_XSLT, mandatory = false)
+    private String xslt;
 
-	private CasToInlineXml cas2xml;
-	private Transformer transformer;
+    private CasToInlineXml cas2xml;
+    private Transformer transformer;
 
-	@Override
-	public void initialize(UimaContext aContext)
-		throws ResourceInitializationException
-	{
-		super.initialize(aContext);
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
 
-		if (xslt != null) {
-			TransformerFactory tf = TransformerFactory.newInstance();
-			try {
-				URL url = ResourceUtils.resolveLocation(xslt, this, getContext());
-				transformer = tf.newTransformer(new StreamSource(url.openStream()));
-			} catch (Exception e) {
-				throw new ResourceInitializationException(e);
-			}
-		}
+        if (xslt != null) {
+            TransformerFactory tf = TransformerFactory.newInstance();
+            try {
+                URL url = ResourceUtils.resolveLocation(xslt, this, getContext());
+                transformer = tf.newTransformer(new StreamSource(url.openStream()));
+            } catch (Exception e) {
+                throw new ResourceInitializationException(e);
+            }
+        }
 
-		cas2xml = new CasToInlineXml();
-	}
+        cas2xml = new CasToInlineXml();
+    }
 
-	@Override
-	public
-	void process(final JCas aJCas) throws AnalysisEngineProcessException
-	{
-		OutputStream docOS = null;
-		try {
-			docOS = getOutputStream(aJCas, ".xml");
+    @Override
+    public void process(final JCas aJCas) throws AnalysisEngineProcessException
+    {
+        OutputStream docOS = null;
+        try {
+            docOS = getOutputStream(aJCas, ".xml");
 
-			final String xmlAnnotations = cas2xml.generateXML(aJCas.getCas());
-			if (transformer != null) {
-				transformer.transform(
-						new StreamSource(new ByteArrayInputStream(xmlAnnotations.getBytes("UTF-8"))),
-						new StreamResult(docOS));
-			}
-			else {
-				docOS.write(xmlAnnotations.getBytes("UTF-8"));
-			}
-		}
-		catch (final CASException e) {
-			throw new AnalysisEngineProcessException(e);
-		}
-		catch (final IOException e) {
-			throw new AnalysisEngineProcessException(e);
-		}
-		catch (TransformerException e) {
-			throw new AnalysisEngineProcessException(e);
-		}
-		finally {
-			closeQuietly(docOS);
-		}
-	}
+            final String xmlAnnotations = cas2xml.generateXML(aJCas.getCas());
+            if (transformer != null) {
+                transformer.transform(
+                        new StreamSource(new ByteArrayInputStream(xmlAnnotations.getBytes("UTF-8"))),
+                        new StreamResult(docOS));
+            }
+            else {
+                docOS.write(xmlAnnotations.getBytes("UTF-8"));
+            }
+        }
+        catch (final CASException e) {
+            throw new AnalysisEngineProcessException(e);
+        }
+        catch (final IOException e) {
+            throw new AnalysisEngineProcessException(e);
+        }
+        catch (TransformerException e) {
+            throw new AnalysisEngineProcessException(e);
+        }
+        finally {
+            closeQuietly(docOS);
+        }
+    }
 }

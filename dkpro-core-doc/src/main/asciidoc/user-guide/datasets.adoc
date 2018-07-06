@@ -1,0 +1,281 @@
+// Copyright 2016
+// Ubiquitous Knowledge Processing (UKP) Lab
+// Technische Universität Darmstadt
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+// http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+[[sect_datasets]]
+= Datasets
+
+Datasets are an important assert in NLP, e.g. to train models or to evaluate models in a meaningful
+and comparable way. The `DatasetFactory` of DKPro Core provides a convenient way of obtaining and
+using standard datasets. This section explains how to use it and how to describe datasets such that
+they can be obtained through the `DatasetFactory`.
+
+== Usage
+
+The DatasetFactory class provides uniform access to datasets that are automatically downloaded from
+their providers websites, verified, and cached locally. This facilitates the use of datasets e.g.
+for training models or to evaluate models.
+
+.Example of obtaining and using a dataset in Java code
+[source,java,indent=0]
+----
+include::{source-dir}dkpro-core-opennlp-asl/src/test/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTaggerTrainerTest.java[tags=datasets]
+----
+
+== Integrated Datasets
+
+An overview of the datasets already integrated with DKPro Core can be found in the 
+<<dataset-reference.adoc#,Dataset Reference>>.
+
+== Describing Datasets
+
+Datasets are described by a YAML 1.1 file. YAML is a very human-readable and allows us to embed
+markup in asciidoc format without any trouble.
+
+.Coordinates
+groupId:: Use to group multiple related datasets together, e.g. datasets from a shared task.
+datasetId:: A unique name of the dataset within the group.
+version:: The version of the dataset. If there is no official version, then a date in YYYYMMDD
+          notation is used. Typically the date of the most recent file in the dataset - or if the
+          dataset contains only one file, the date of the latest change of the file on the remote
+          host. The remote file date can be obtained using `curl -I <url>`
+language:: The ISO 639-1 two-letter language code for the dataset language. If a upstream source
+           provides a dataset in multiple languages, multiple dataset descriptions should be
+           created, one per lanugage.
+
+.Informational metadata
+name:: The official name of the dataset.
+url:: Link to a website where information about the dataset can be obtained.
+attribution:: Some kind of reference to the authors or to a related publication. Asciidoc markup
+              can be used to format the reference or to embed links to publications or bibtex files.
+description:: A short description of the dataset, typically obtained from the dataset's website or
+              from a readme file that ships with the dataset. The source should be stated as part
+              of the description.
+
+
+licenses:: License information relevant to the dataset. A list of relevant licenses can be provided.
+           Each license should state a **name** and **url**. The **url** should point to a 
+           canonical description of the license. Additionally, a **comment** can be
+           provided, e.g. to indicate whether a license applies to the annotations or to the 
+           underlying text. +
++
+.Example license section
+[source,yaml,indent=0]
+----
+licenses:
+  - name: CC-BY 2.5
+    url: http://creativecommons.org/licenses/by/2.5/
+    comment: "Wikinews texts (Source: https://en.wikinews.org/wiki/Wikinews:Copyright)"
+  - name: CC-BY-SA 3.0
+    url: https://creativecommons.org/licenses/by-sa/3.0/
+    comment: "WikiVoyage texts (Source: https://wikimediafoundation.org/wiki/Terms_of_Use)"
+----
+
+artifacts:: A list of artifacts that make of the dataset. The relevant artifacts may not only
+            be limited to the data files themselves, but could also include license texts or
+            readme files if they are not part of a dataset archive. If a dataset is not distributed
+            as an archive but rather as a set of files, each of the files should be listed here.
+            To describe an artifact, the **name**, **url**, and **sha1** checksum are required.
+            The name of the artifact should correspond to the filename part of the URL from which
+            the artifact is downloaded. However, sometimes it is convenient to use a simpler name,
+            e.g. `data.zip`. However, the extension should always be preserved. This is particularly
+            important for archives that need to be extracted.For more information, refer to the
+            [sect_datasets_actions] section below. +
+            If an artifact contains multiple datasets, it can be **shared** to avoid downloading and
+            caching it redundantly. See [sect_datasets_sharing] below. +
++
+.Example artifacts section
+[source,yaml,indent=0]
+----
+artifacts:
+  gum.zip:
+    url: "https://github.com/amir-zeldes/gum/archive/V2.2.0.zip"
+    sha1: b17e276998ced83153be605d8157afacf1f10fdc
+    actions:
+      - action: explode
+        configuration: { includes: ["dep/*", "LICENSE.txt", "README.md"], strip: 1 }
+----
+
+roles:: Defines the roles of the files in the dataset. Here, files can refer to an artifact file or
+        to files extracted from an artifact that is an archive. Mind that the paths are specified
+        relative to the root of the dataset cache. So files extracted from an archive must be 
+        prefixed by the archive name (without any extensions). The role **license** should be 
+        assigned to all files containing licensing information. The role **data** should be assigned
+        to all data files. If the dataset is already split into training, test, and/or development
+        sets, then these should be indicated by assigning the **training**, **testing**, and
+        **development** roles to these files. In this case, assigning the **data** role is not
+        necessary. +
++
+.Example roles section
+[source,yaml,indent=0]
+----
+roles:
+  # Here the files have been extracted from an artifact name "data.zip", so the names
+  # are all prefixed with "data/"
+  licenses: 
+    - data/license-salsa.html
+    - data/license-tiger.html
+  training:
+    - data/CoNLL2009-ST-German-train.txt
+  development:
+    - data/CoNLL2009-ST-German-development.txt
+  testing:
+    - data/CoNLL2009-ST-German-trial.txt
+----
+
+.Description of a dataset
+[source,yaml,indent=0]
+----
+include::{source-dir}dkpro-core-api-datasets-asl/src/main/resources/de/tudarmstadt/ukp/dkpro/core/api/datasets/lib/conll2009-de.yaml[]
+----
+
+[[sect_datasets_actions]]
+== Artifact Actions
+
+Some artifacts need to be post-processed after downloading. E.g. if an artifact is an archive, it
+typically needs to be extracted to disk so that the data files can be conveniently accessed.
+Such post-processing can be declared via the **actions** section of an artifact description.
+
+=== explode
+
+This action extracts an archive. The archive format is automatically detected (ensure that
+the artifact name extension is retained if you assign an alternative name for an archive).
+Supported formats are: zip, jar, tar, tar.gz (tgz), tar.bz2, tar.xz, xz, rar, 7z, ... (and
+possibly more formats supported by Apache Commons Compress).
+
+The explode action can be specified multiple times on an artifact, e.g. to extract nested archives.
+In this case, for all but the first, the additional parameter **file** needs to be specified.
+
+NOTE: Files are always extracted into a subfolder of the dataset cache which has the name of the
+      artifact without any extensions. E.g. if the artifact name is `data.zip`, then its contents
+      are extracted into a folder called `data`. This is important when assigning roles to extracted
+      files.
+
+The action supports optional configuration parameters.
+
+[horizontal]
+strip:: Number of leading path elements to strip while extracting archive. For example, setting this
+        parameter to `2` strips `corpus/en/train.conll` down to `train.conll`. This is useful to
+        avoid long path names when assigning file roles.
+includes:: This can be a single pattern string or a list of pattern strings. Supported wildcards
+           are single asterisks to match arbitrary parts of a file or folder name or double asterisks
+           to match arbitrary intermediate folders. Mind that the patterns are relative to archive
+           root and that stripping is performed *before* matching the files. So taking the above
+           example for the strip parameter, the include pattern should be `\*.conll` and not 
+           `corpus/en/*.conll`.
+excludes:: Same patterns as for **includes**. If includes and excludes are both specified, the
+           excludes apply only to the included files. The order in which the includes/excludes are
+           specified in the YAML file is irrelevant.
+file:: When extracting nested archives, this parameter points to the archive to be exploded. E.g.
+       if result from extracting the archive `data.zip` is a set of new files `data/part1.zip` and
+       `data/part2.zip`, then these nested archives can be exploded using additional explode actions
+       that specify the **file** parameter.
+          
+.Example explode configuration
+[source,yaml,indent=0]
+----
+artifacts:
+  gum.zip:
+    url: "https://github.com/amir-zeldes/gum/archive/V2.2.0.zip"
+    sha1: b17e276998ced83153be605d8157afacf1f10fdc
+    actions:
+      - action: explode
+        configuration: { includes: ["dep/*", "LICENSE.txt", "README.md"], strip: 1 }
+----
+
+[sect_datasets_sharing]
+== Sharing artifacts
+
+If an artifact contains multiple datasets, it can be **shared** to avoid downloading and caching
+it redundantly. A typical example is a dataset that comes in multiple languages, because we require
+a separate dataset description for each language variant.
+
+To mark an artifact as shared, simply add `shared: true` to its description.
+
+.Example shared artifact
+[source,yaml,indent=0]
+----
+  perseus.zip:
+    url: "https://github.com/PerseusDL/treebank_data/archive/f56a35f65ef15ac454f6fbd2cfc6ea97bf2ca9b8.zip"
+    sha1: 140eee6d2e3e83745f95d3d5274d9e965d898980
+    shared: true # Artifact is shared
+    actions:
+      - action: explode
+        configuration: { strip: 1, includes: [ "README.md", "v2.1/Greek/**/*" ] }
+----
+
+NOTE: The **name**, **url**, **sha1**, and **shared** settings *must be exactly the same* in all
+      dataset descriptions that make use of the shared artifact. The actions can differ, so e.g.
+      each dataset description for a multi-lingual dataset can extract only the files of a specific
+      language from the shared artifact.
+      
+Shared artifacts are stored under a special folder structure in the dataset cache that includes the
+checksum of the artifacts. However, files extracted from a shared archive artifact are placed under
+the folder of the dataset along with any additional unshared artifacts that the dataset might
+declare.
+
+.Example folder structure for shared artifacts
+[source,yaml,indent=0]
+----
+<CACHE-ROOT>
+  shared
+    140eee6d2e3e83745f95d3d5274d9e965d898980    <=- shared artifact folder
+      perseus.zip                               <=- shared artifact
+  perseus-la-2.1                                <=- dataset folder
+    perseus                                     <=- extracted from shared artifact
+      v2.1
+        ...
+    LICENSE.txt                                 <=- unshared artifact
+---- 
+
+== Registering Datasets
+
+In order to obtain a dataset through the `DatasetFactory`, the dataset must be made discoverable.
+This is a two-step process:
+
+. Placing the dataset YAML file into the classpath
+. Creating a `datasets.txt` file pointing to the dataset YAML file
+
+NOTE: This example assumes that you are using Maven or at least the standard Maven project layout.
+
+First place your dataset YAML file into a subfolder of the `src/main/resources` folder in your project,
+e.g. `src/main/resources/my/experiment/datasets/my-dataset-en-1.0.0.yaml`. Replace `my/experiment/datasets`
+with a package name suitable for your project, following the conventions that you also use for
+your Java classes.
+
+Second, create the `datasets.txt` file at `src/main/resources/META-INF/org.dkpro.core/datasets.txt`
+in your project with the following content:
+
+.datasets.txt example file
+[source,text,indent=0]
+----
+classpath*:my/experiment/datasets/my-dataset-en-1.0.0.yaml
+---- 
+
+Again, substitute `my/experiment/datasets` suitably, as you did before. If you have multiple
+datasets, you can add multiple lines to the file. It is possible to use wildcards, e.g. `*.yaml*,
+but it is not recommended to do so.
+
+Now, the dataset should be availble through the `DatasetFactory`.
+
+.Example of obtaining and using a dataset in Java code
+[source,java,indent=0]
+----
+        DatasetFactory loader = new DatasetFactory(cache);
+        Dataset ds = loader.load("my-dataset-en-1.0.0");
+----
+
+NOTE: Currently, the id of the dataset is the filename of the dataset YAML file without the
+      extension. Make sure to **choose a unique name** to avoid name collisions!

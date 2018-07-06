@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2014
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
@@ -46,20 +46,20 @@ public class StanfordDependencyConverterTest
                 + "(NNS dependencies)) (PP (IN as) (ADJP (JJ possible)))))))) (. .)))";
 
         String[] dependencies = {
-                "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
-                "[  3,  7]ROOT(root) D[3,7](need) G[3,7](need)",
-                "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
-                "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
-                "[ 15, 26]AMOD(amod) D[15,26](complicated) G[35,43](sentence)",
-                "[ 27, 34]NN(nn) D[27,34](example) G[35,43](sentence)",
-                "[ 35, 43]DOBJ(dobj) D[35,43](sentence) G[3,7](need)",
-                "[ 46, 51]NSUBJ(nsubj) D[46,51](which) G[52,60](contains)",
-                "[ 52, 60]RCMOD(rcmod) D[52,60](contains) G[35,43](sentence)",
-                "[ 61, 63]ADVMOD(advmod) D[61,63](as) G[64,68](many)",
-                "[ 64, 68]AMOD(amod) D[64,68](many) G[69,81](constituents)",
-                "[ 69, 81]DOBJ(dobj) D[69,81](constituents) G[52,60](contains)",
-                "[ 86, 98]CONJ(conj_and) D[86,98](dependencies) G[69,81](constituents)",
-                "[102,110]PREP(prep_as) D[102,110](possible) G[52,60](contains)" };
+                "[  0,  2]NSUBJ(nsubj,basic) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(root,basic) D[3,7](need) G[3,7](need)",
+                "[  8,  9]DET(det,basic) D[8,9](a) G[35,43](sentence)",
+                "[ 10, 14]ADVMOD(advmod,basic) D[10,14](very) G[15,26](complicated)",
+                "[ 15, 26]AMOD(amod,basic) D[15,26](complicated) G[35,43](sentence)",
+                "[ 27, 34]NN(nn,basic) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]DOBJ(dobj,basic) D[35,43](sentence) G[3,7](need)",
+                "[ 46, 51]NSUBJ(nsubj,basic) D[46,51](which) G[52,60](contains)",
+                "[ 52, 60]RCMOD(rcmod,basic) D[52,60](contains) G[35,43](sentence)",
+                "[ 61, 63]ADVMOD(advmod,basic) D[61,63](as) G[64,68](many)",
+                "[ 64, 68]AMOD(amod,basic) D[64,68](many) G[69,81](constituents)",
+                "[ 69, 81]DOBJ(dobj,basic) D[69,81](constituents) G[52,60](contains)",
+                "[ 86, 98]CONJ(conj_and,basic) D[86,98](dependencies) G[69,81](constituents)",
+                "[102,110]PREP(prep_as,basic) D[102,110](possible) G[52,60](contains)" };
 
         String[] sentences = { "We need a very complicated example sentence , which contains as "
                 + "many constituents and dependencies as possible ." };

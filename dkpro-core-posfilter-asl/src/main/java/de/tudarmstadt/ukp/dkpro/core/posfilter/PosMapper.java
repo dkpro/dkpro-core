@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2013
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.posfilter;
 
 import java.io.File;
@@ -30,116 +30,116 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * Maps existing POS tags from one tagset to another using a user provided properties file.
- *
- *
  */
-
+@ResourceMetaData(name = "POS Mapper")
 @TypeCapability(
-        inputs={
+        inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
                 "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"},
-        outputs={
+        outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
                 "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"})
-
 public class PosMapper
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
-	/**
-	 * A properties file containing POS tagset mappings.
-	 */
-	public static final String PARAM_MAPPING_FILE = "mappingFile";
-	@ConfigurationParameter(name = PARAM_MAPPING_FILE, mandatory = true)
-	private File mappingFile;
+    /**
+     * A properties file containing POS tagset mappings.
+     */
+    public static final String PARAM_MAPPING_FILE = "mappingFile";
+    @ConfigurationParameter(name = PARAM_MAPPING_FILE, mandatory = true)
+    private File mappingFile;
 
-	/**
-	 * A properties file containing mappings from the new tagset to (fully qualified) DKPro POS
-	 * classes.<br>
-	 * If such a file is not supplied, the DKPro POS classes stay the same regardless of the new POS
-	 * tag value, and only the value is changed.
-	 */
-	public static final String PARAM_DKPRO_MAPPING_LOCATION = "dkproMappingLocation";
-	@ConfigurationParameter(name = PARAM_DKPRO_MAPPING_LOCATION, mandatory = false)
-	private String dkproMappingLocation;
+    /**
+     * A properties file containing mappings from the new tagset to (fully qualified) DKPro POS
+     * classes.<br>
+     * If such a file is not supplied, the DKPro POS classes stay the same regardless of the new POS
+     * tag value, and only the value is changed.
+     */
+    public static final String PARAM_DKPRO_MAPPING_LOCATION = "dkproMappingLocation";
+    @ConfigurationParameter(name = PARAM_DKPRO_MAPPING_LOCATION, mandatory = false)
+    private String dkproMappingLocation;
 
-	private Properties posMap;
-	private MappingProvider mappingProvider;
+    private Properties posMap;
+    private MappingProvider mappingProvider;
 
-	@Override
-	public void initialize(UimaContext aContext)
-		throws ResourceInitializationException
-	{
-		super.initialize(aContext);
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
 
-		posMap = new Properties();
-		Reader reader = null;
-		try {
-			reader = new FileReader(mappingFile);
-			posMap.load(reader);
-		}
-		catch (IOException e) {
-			throw new ResourceInitializationException(e);
-		}
-		finally {
-			IOUtils.closeQuietly(reader);
-		}
+        posMap = new Properties();
+        Reader reader = null;
+        try {
+            reader = new FileReader(mappingFile);
+            posMap.load(reader);
+        }
+        catch (IOException e) {
+            throw new ResourceInitializationException(e);
+        }
+        finally {
+            IOUtils.closeQuietly(reader);
+        }
 
-		if (dkproMappingLocation != null) {
-			mappingProvider = new MappingProvider();
-			mappingProvider.setDefault(MappingProvider.LOCATION, dkproMappingLocation);
-			mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-			mappingProvider.setDefault("pos.tagset", "default");
-			// mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-			// mappingProvider.addImport("pos.tagset", modelProvider);
-		}
-	}
+        if (dkproMappingLocation != null) {
+            mappingProvider = new MappingProvider();
+            mappingProvider.setDefault(MappingProvider.LOCATION, dkproMappingLocation);
+            mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
+            mappingProvider.setDefault("pos.tagset", "default");
+            // mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
+            // mappingProvider.addImport("pos.tagset", modelProvider);
+        }
+    }
 
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
-		if (mappingProvider != null) {
-			CAS cas = aJCas.getCas();
-			mappingProvider.configure(cas);
+    @Override
+    public void process(JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
+        if (mappingProvider != null) {
+            CAS cas = aJCas.getCas();
+            mappingProvider.configure(cas);
 
-			for (Token t : JCasUtil.select(aJCas, Token.class)) {
-				POS oldPos = t.getPos();
-				String newTag = posMap.getProperty(oldPos.getPosValue());
+            for (Token t : JCasUtil.select(aJCas, Token.class)) {
+                POS oldPos = t.getPos();
+                String newTag = posMap.getProperty(oldPos.getPosValue());
 
-				// replace the POS if the value differs (i.e. if the old value has a mapping)
-				if (newTag != null) {
-					Type type = mappingProvider.getTagType(newTag);
-					int begin = oldPos.getBegin();
-					int end = oldPos.getEnd();
+                // replace the POS if the value differs (i.e. if the old value has a mapping)
+                if (newTag != null) {
+                    Type type = mappingProvider.getTagType(newTag);
+                    int begin = oldPos.getBegin();
+                    int end = oldPos.getEnd();
 
-					POS newPos = (POS) cas.createAnnotation(type, begin, end);
-					newPos.setPosValue(newTag);
+                    POS newPos = (POS) cas.createAnnotation(type, begin, end);
+                    newPos.setPosValue(newTag);
+                    POSUtils.assignCoarseValue(newPos);
 
-					oldPos.removeFromIndexes();
-					newPos.addToIndexes();
-					t.setPos(newPos);
-				}
-			}
-		}
-		// if we don't have a MappingProvider, we only re-set the tags and not the classes
-		else {
-			for (POS pos : JCasUtil.select(aJCas, POS.class)) {
-				String newTag = posMap.getProperty(pos.getPosValue());
-				if (newTag != null) {
-					pos.setPosValue(newTag);
-				}
-			}
-		}
-	}
+                    oldPos.removeFromIndexes();
+                    newPos.addToIndexes();
+                    t.setPos(newPos);
+                }
+            }
+        }
+        // if we don't have a MappingProvider, we only re-set the tags and not the classes
+        else {
+            for (POS pos : JCasUtil.select(aJCas, POS.class)) {
+                String newTag = posMap.getProperty(pos.getPosValue());
+                if (newTag != null) {
+                    pos.setPosValue(newTag);
+                }
+            }
+        }
+    }
 }

@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2014
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.corenlp;
 
@@ -26,6 +26,7 @@ import java.util.Set;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -41,10 +42,13 @@ import edu.stanford.nlp.pipeline.TokenizerAnnotator;
 import edu.stanford.nlp.pipeline.WordsToSentencesAnnotator;
 import edu.stanford.nlp.process.WordToSentenceProcessor;
 import edu.stanford.nlp.util.CoreMap;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * Tokenizer and sentence splitter using from CoreNLP.
+ * Tokenizer and sentence splitter using from Stanford CoreNLP.
  */
+@ResourceMetaData(name = "CoreNLP Segmenter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -60,24 +64,13 @@ public class CoreNlpSegmenter
      * @see WordToSentenceProcessor#WordToSentenceProcessor
      */
     public static final String PARAM_BOUNDARY_TOKEN_REGEX = "boundaryTokenRegex";
-    @ConfigurationParameter(name = PARAM_BOUNDARY_TOKEN_REGEX, mandatory = false, defaultValue = WordToSentenceProcessor.DEFAULT_BOUNDARY_REGEX)
+    @ConfigurationParameter(name = PARAM_BOUNDARY_TOKEN_REGEX, mandatory = false, 
+            defaultValue = WordToSentenceProcessor.DEFAULT_BOUNDARY_REGEX)
     private String boundaryTokenRegex;
 
     public static final String PARAM_BOUNDARY_MULTI_TOKEN_REGEX = "boundaryMultiTokenRegex";
     @ConfigurationParameter(name = PARAM_BOUNDARY_MULTI_TOKEN_REGEX, mandatory = false)
     private String boundaryMultiTokenRegex;
-
-    /**
-     * This is a Set of String that are matched with .equals() which are allowed to be tacked onto
-     * the end of a sentence after a sentence boundary token, for example ")".
-     * 
-     * @see WordToSentenceProcessor#DEFAULT_BOUNDARY_FOLLOWERS
-     */
-    public static final String PARAM_BOUNDARY_FOLLOWERS = "boundaryFollowers";
-    @ConfigurationParameter(name = PARAM_BOUNDARY_FOLLOWERS, mandatory = false, defaultValue = {
-            ")", "]", "}", "\"", "'", "''", "\u2019", "\u201D", "-RRB-", "-RSB-", "-RCB-", ")",
-            "]", "}" })
-    private Set<String> boundaryFollowers;
 
     /**
      * These are elements like "p" or "sent", which will be wrapped into regex for approximate XML
@@ -98,15 +91,6 @@ public class CoreNlpSegmenter
     private Set<String> boundaryToDiscard;
 
     /**
-     * A regular expression for element names containing a sentence region. Only tokens in such
-     * elements will be included in sentences. The start and end tags themselves are not included in
-     * the sentence.
-     */
-    public static final String PARAM_REGION_ELEMENT_REGEX = "regionElementRegex";
-    @ConfigurationParameter(name = PARAM_REGION_ELEMENT_REGEX, mandatory = false)
-    private String regionElementRegex;
-
-    /**
      * Strategy for treating newlines as sentence breaks.
      */
     public static final String PARAM_NEWLINE_IS_SENTENCE_BREAK = "newlineIsSentenceBreak";
@@ -117,7 +101,8 @@ public class CoreNlpSegmenter
      * The set of regex for sentence boundary tokens that should be discarded.
      */
     public static final String PARAM_TOKEN_REGEXES_TO_DISCARD = "tokenRegexesToDiscard";
-    @ConfigurationParameter(name = PARAM_TOKEN_REGEXES_TO_DISCARD, mandatory = false, defaultValue = {})
+    @ConfigurationParameter(name = PARAM_TOKEN_REGEXES_TO_DISCARD, mandatory = false, 
+            defaultValue = {})
     private Set<String> tokenRegexesToDiscard;
     
     private ModelProviderBase<WordsToSentencesAnnotator> sentenceAnnotator;

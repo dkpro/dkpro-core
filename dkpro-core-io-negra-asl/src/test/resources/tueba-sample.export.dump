@@ -171,11 +171,12 @@ Constituent
    children: FSArray
    syntacticFunction: "HD"
 [Seine]
-PR
+POS_PRON
    sofa: _InitialView
    begin: 0
    end: 5
    PosValue: "PPOSAT"
+   coarseValue: "PRON"
 [Seine]
 Token
    sofa: _InitialView
@@ -222,17 +223,19 @@ Token
          syntacticFunction: "OA"
       children: FSArray
       syntacticFunction: "HD"
-   pos: PR
+   pos: POS_PRON
       sofa: _InitialView
       begin: 0
       end: 5
       PosValue: "PPOSAT"
+      coarseValue: "PRON"
 [Position]
-NN
+POS_NOUN
    sofa: _InitialView
    begin: 6
    end: 14
    PosValue: "NN"
+   coarseValue: "NOUN"
 [Position]
 Token
    sofa: _InitialView
@@ -279,11 +282,12 @@ Token
          syntacticFunction: "OA"
       children: FSArray
       syntacticFunction: "HD"
-   pos: NN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 6
       end: 14
       PosValue: "NN"
+      coarseValue: "NOUN"
 [bei der Prüfgesellschaft]
 Constituent
    sofa: _InitialView
@@ -327,11 +331,12 @@ Constituent
    children: FSArray
    syntacticFunction: "-"
 [bei]
-PP
+POS_ADP
    sofa: _InitialView
    begin: 15
    end: 18
    PosValue: "APPR"
+   coarseValue: "ADP"
 [bei]
 Token
    sofa: _InitialView
@@ -378,11 +383,12 @@ Token
          syntacticFunction: "OA"
       children: FSArray
       syntacticFunction: "-"
-   pos: PP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 15
       end: 18
       PosValue: "APPR"
+      coarseValue: "ADP"
 [der Prüfgesellschaft]
 Constituent
    sofa: _InitialView
@@ -433,11 +439,12 @@ Constituent
    children: FSArray
    syntacticFunction: "HD"
 [der]
-ART
+POS_DET
    sofa: _InitialView
    begin: 19
    end: 22
    PosValue: "ART"
+   coarseValue: "DET"
 [der]
 Token
    sofa: _InitialView
@@ -491,17 +498,19 @@ Token
          syntacticFunction: "-"
       children: FSArray
       syntacticFunction: "HD"
-   pos: ART
+   pos: POS_DET
       sofa: _InitialView
       begin: 19
       end: 22
       PosValue: "ART"
+      coarseValue: "DET"
 [Prüfgesellschaft]
-NN
+POS_NOUN
    sofa: _InitialView
    begin: 23
    end: 39
    PosValue: "NN"
+   coarseValue: "NOUN"
 [Prüfgesellschaft]
 Token
    sofa: _InitialView
@@ -555,17 +564,19 @@ Token
          syntacticFunction: "-"
       children: FSArray
       syntacticFunction: "HD"
-   pos: NN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 23
       end: 39
       PosValue: "NN"
+      coarseValue: "NOUN"
 [mußte]
-V
+POS_VERB
    sofa: _InitialView
    begin: 40
    end: 45
    PosValue: "VMFIN"
+   coarseValue: "VERB"
 [mußte]
 Token
    sofa: _InitialView
@@ -605,11 +616,12 @@ Token
          syntacticFunction: "-"
       children: FSArray
       syntacticFunction: "HD"
-   pos: V
+   pos: POS_VERB
       sofa: _InitialView
       begin: 40
       end: 45
       PosValue: "VMFIN"
+      coarseValue: "VERB"
 [mußte]
 Constituent
    sofa: _InitialView
@@ -702,11 +714,12 @@ Constituent
    children: FSArray
    syntacticFunction: "-"
 [er]
-PR
+POS_PRON
    sofa: _InitialView
    begin: 46
    end: 48
    PosValue: "PPER"
+   coarseValue: "PRON"
 [er]
 Token
    sofa: _InitialView
@@ -746,11 +759,12 @@ Token
          syntacticFunction: "-"
       children: FSArray
       syntacticFunction: "ON"
-   pos: PR
+   pos: POS_PRON
       sofa: _InitialView
       begin: 46
       end: 48
       PosValue: "PPER"
+      coarseValue: "PRON"
 [er]
 Constituent
    sofa: _InitialView
@@ -787,11 +801,12 @@ Constituent
    children: FSArray
    syntacticFunction: "ON"
 [damals]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 49
    end: 55
    PosValue: "ADV"
+   coarseValue: "ADV"
 [damals]
 Token
    sofa: _InitialView
@@ -831,11 +846,12 @@ Token
          syntacticFunction: "-"
       children: FSArray
       syntacticFunction: "V-MOD"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 49
       end: 55
       PosValue: "ADV"
+      coarseValue: "ADV"
 [damals]
 Constituent
    sofa: _InitialView
@@ -872,11 +888,12 @@ Constituent
    children: FSArray
    syntacticFunction: "V-MOD"
 [niederlegen]
-V
+POS_VERB
    sofa: _InitialView
    begin: 56
    end: 67
    PosValue: "VVINF"
+   coarseValue: "VERB"
 [niederlegen]
 Token
    sofa: _InitialView
@@ -916,11 +933,12 @@ Token
          syntacticFunction: "-"
       children: FSArray
       syntacticFunction: "OV"
-   pos: V
+   pos: POS_VERB
       sofa: _InitialView
       begin: 56
       end: 67
       PosValue: "VVINF"
+      coarseValue: "VERB"
 [niederlegen]
 Constituent
    sofa: _InitialView
@@ -985,11 +1003,12 @@ Constituent
    children: FSArray
    syntacticFunction: "-"
 [,]
-PUNC
+POS_PUNCT
    sofa: _InitialView
    begin: 68
    end: 69
    PosValue: "$,"
+   coarseValue: "PUNCT"
 [,]
 Token
    sofa: _InitialView
@@ -1001,11 +1020,12 @@ Token
       end: 92
       constituentType: "ROOT"
       children: FSArray
-   pos: PUNC
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 68
       end: 69
       PosValue: "$,"
+      coarseValue: "PUNCT"
 [den AWO-Posten nicht]
 Constituent
    sofa: _InitialView
@@ -1091,11 +1111,12 @@ Constituent
    children: FSArray
    syntacticFunction: "-"
 [den]
-ART
+POS_DET
    sofa: _InitialView
    begin: 70
    end: 73
    PosValue: "ART"
+   coarseValue: "DET"
 [den]
 Token
    sofa: _InitialView
@@ -1135,17 +1156,19 @@ Token
          syntacticFunction: "-"
       children: FSArray
       syntacticFunction: "OA"
-   pos: ART
+   pos: POS_DET
       sofa: _InitialView
       begin: 70
       end: 73
       PosValue: "ART"
+      coarseValue: "DET"
 [AWO-Posten]
-NN
+POS_NOUN
    sofa: _InitialView
    begin: 74
    end: 84
    PosValue: "NN"
+   coarseValue: "NOUN"
 [AWO-Posten]
 Token
    sofa: _InitialView
@@ -1185,17 +1208,19 @@ Token
          syntacticFunction: "-"
       children: FSArray
       syntacticFunction: "OA"
-   pos: NN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 74
       end: 84
       PosValue: "NN"
+      coarseValue: "NOUN"
 [nicht]
-O
+POS_X
    sofa: _InitialView
    begin: 85
    end: 90
    PosValue: "PTKNEG"
+   coarseValue: "X"
 [nicht]
 Token
    sofa: _InitialView
@@ -1235,11 +1260,12 @@ Token
          syntacticFunction: "-"
       children: FSArray
       syntacticFunction: "MOD"
-   pos: O
+   pos: POS_X
       sofa: _InitialView
       begin: 85
       end: 90
       PosValue: "PTKNEG"
+      coarseValue: "X"
 [nicht]
 Constituent
    sofa: _InitialView
@@ -1304,11 +1330,12 @@ Constituent
    children: FSArray
    syntacticFunction: "-"
 [.]
-PUNC
+POS_PUNCT
    sofa: _InitialView
    begin: 91
    end: 92
    PosValue: "$."
+   coarseValue: "PUNCT"
 [.]
 Token
    sofa: _InitialView
@@ -1320,11 +1347,12 @@ Token
       end: 92
       constituentType: "ROOT"
       children: FSArray
-   pos: PUNC
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 91
       end: 92
       PosValue: "$."
+      coarseValue: "PUNCT"
 [K. W.]
 Sentence
    sofa: _InitialView
@@ -1379,11 +1407,12 @@ ROOT
    constituentType: "ROOT"
    children: FSArray
 [K.]
-NP
+POS_PROPN
    sofa: _InitialView
    begin: 93
    end: 95
    PosValue: "NE"
+   coarseValue: "PROPN"
 [K.]
 Token
    sofa: _InitialView
@@ -1409,17 +1438,19 @@ Token
          syntacticFunction: "--"
       children: FSArray
       syntacticFunction: "-"
-   pos: NP
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 93
       end: 95
       PosValue: "NE"
+      coarseValue: "PROPN"
 [W.]
-NP
+POS_PROPN
    sofa: _InitialView
    begin: 96
    end: 98
    PosValue: "NE"
+   coarseValue: "PROPN"
 [W.]
 Token
    sofa: _InitialView
@@ -1445,11 +1476,12 @@ Token
          syntacticFunction: "--"
       children: FSArray
       syntacticFunction: "-"
-   pos: NP
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 96
       end: 98
       PosValue: "NE"
+      coarseValue: "PROPN"
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================
@@ -1523,11 +1555,12 @@ Constituent
    children: FSArray
    syntacticFunction: "HD"
 [SPD]
-NP
+POS_PROPN
    sofa: _InitialView
    begin: 0
    end: 3
    PosValue: "NE"
+   coarseValue: "PROPN"
 [SPD]
 Token
    sofa: _InitialView
@@ -1560,11 +1593,12 @@ Token
          syntacticFunction: "HD"
       children: FSArray
       syntacticFunction: "KONJ"
-   pos: NP
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 0
       end: 3
       PosValue: "NE"
+      coarseValue: "PROPN"
 [SPD]
 Constituent
    sofa: _InitialView
@@ -1594,11 +1628,12 @@ Constituent
    children: FSArray
    syntacticFunction: "KONJ"
 [/]
-PUNC
+POS_PUNCT
    sofa: _InitialView
    begin: 4
    end: 5
    PosValue: "$("
+   coarseValue: "PUNCT"
 [/]
 Token
    sofa: _InitialView
@@ -1610,17 +1645,19 @@ Token
       end: 36
       constituentType: "ROOT"
       children: FSArray
-   pos: PUNC
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 4
       end: 5
       PosValue: "$("
+      coarseValue: "PUNCT"
 [CDU]
-NP
+POS_PROPN
    sofa: _InitialView
    begin: 6
    end: 9
    PosValue: "NE"
+   coarseValue: "PROPN"
 [CDU]
 Token
    sofa: _InitialView
@@ -1653,11 +1690,12 @@ Token
          syntacticFunction: "HD"
       children: FSArray
       syntacticFunction: "KONJ"
-   pos: NP
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 6
       end: 9
       PosValue: "NE"
+      coarseValue: "PROPN"
 [CDU]
 Constituent
    sofa: _InitialView
@@ -1687,11 +1725,12 @@ Constituent
    children: FSArray
    syntacticFunction: "KONJ"
 [/]
-PUNC
+POS_PUNCT
    sofa: _InitialView
    begin: 10
    end: 11
    PosValue: "$("
+   coarseValue: "PUNCT"
 [/]
 Token
    sofa: _InitialView
@@ -1703,17 +1742,19 @@ Token
       end: 36
       constituentType: "ROOT"
       children: FSArray
-   pos: PUNC
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 10
       end: 11
       PosValue: "$("
+      coarseValue: "PUNCT"
 [AfB]
-NP
+POS_PROPN
    sofa: _InitialView
    begin: 12
    end: 15
    PosValue: "NE"
+   coarseValue: "PROPN"
 [AfB]
 Token
    sofa: _InitialView
@@ -1746,11 +1787,12 @@ Token
          syntacticFunction: "HD"
       children: FSArray
       syntacticFunction: "KONJ"
-   pos: NP
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 12
       end: 15
       PosValue: "NE"
+      coarseValue: "PROPN"
 [AfB]
 Constituent
    sofa: _InitialView
@@ -1801,11 +1843,12 @@ Constituent
    children: FSArray
    syntacticFunction: "-"
 [für]
-PP
+POS_ADP
    sofa: _InitialView
    begin: 16
    end: 19
    PosValue: "APPR"
+   coarseValue: "ADP"
 [für]
 Token
    sofa: _InitialView
@@ -1831,17 +1874,19 @@ Token
          syntacticFunction: "--"
       children: FSArray
       syntacticFunction: "-"
-   pos: PP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 16
       end: 19
       PosValue: "APPR"
+      coarseValue: "ADP"
 [Daewoo-Millionen]
-NN
+POS_NOUN
    sofa: _InitialView
    begin: 20
    end: 36
    PosValue: "NN"
+   coarseValue: "NOUN"
 [Daewoo-Millionen]
 Token
    sofa: _InitialView
@@ -1874,11 +1919,12 @@ Token
          syntacticFunction: "-"
       children: FSArray
       syntacticFunction: "HD"
-   pos: NN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 20
       end: 36
       PosValue: "NN"
+      coarseValue: "NOUN"
 [Daewoo-Millionen]
 Constituent
    sofa: _InitialView
@@ -1940,11 +1986,12 @@ ROOT
    constituentType: "ROOT"
    children: FSArray
 [Aber]
-CONJ
+POS_CONJ
    sofa: _InitialView
    begin: 37
    end: 41
    PosValue: "KON"
+   coarseValue: "CONJ"
 [Aber]
 Token
    sofa: _InitialView
@@ -1970,11 +2017,12 @@ Token
          syntacticFunction: "--"
       children: FSArray
       syntacticFunction: "-"
-   pos: CONJ
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 37
       end: 41
       PosValue: "KON"
+      coarseValue: "CONJ"
 [Aber]
 Constituent
    sofa: _InitialView
@@ -2046,11 +2094,12 @@ Constituent
    children: FSArray
    syntacticFunction: "-"
 [Bremerhavens]
-NP
+POS_PROPN
    sofa: _InitialView
    begin: 42
    end: 54
    PosValue: "NE"
+   coarseValue: "PROPN"
 [Bremerhavens]
 Token
    sofa: _InitialView
@@ -2090,11 +2139,12 @@ Token
          syntacticFunction: "ON"
       children: FSArray
       syntacticFunction: "-"
-   pos: NP
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 42
       end: 54
       PosValue: "NE"
+      coarseValue: "PROPN"
 [Bremerhavens]
 Constituent
    sofa: _InitialView
@@ -2131,11 +2181,12 @@ Constituent
    children: FSArray
    syntacticFunction: "-"
 [AfB]
-NP
+POS_PROPN
    sofa: _InitialView
    begin: 55
    end: 58
    PosValue: "NE"
+   coarseValue: "PROPN"
 [AfB]
 Token
    sofa: _InitialView
@@ -2168,17 +2219,19 @@ Token
          syntacticFunction: "-"
       children: FSArray
       syntacticFunction: "ON"
-   pos: NP
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 55
       end: 58
       PosValue: "NE"
+      coarseValue: "PROPN"
 [fordert]
-V
+POS_VERB
    sofa: _InitialView
    begin: 59
    end: 66
    PosValue: "VVFIN"
+   coarseValue: "VERB"
 [fordert]
 Token
    sofa: _InitialView
@@ -2211,11 +2264,12 @@ Token
          syntacticFunction: "-"
       children: FSArray
       syntacticFunction: "HD"
-   pos: V
+   pos: POS_VERB
       sofa: _InitialView
       begin: 59
       end: 66
       PosValue: "VVFIN"
+      coarseValue: "VERB"
 [fordert]
 Constituent
    sofa: _InitialView
@@ -2287,11 +2341,12 @@ Constituent
    children: FSArray
    syntacticFunction: "-"
 [jetzt]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 67
    end: 72
    PosValue: "ADV"
+   coarseValue: "ADV"
 [jetzt]
 Token
    sofa: _InitialView
@@ -2324,11 +2379,12 @@ Token
          syntacticFunction: "-"
       children: FSArray
       syntacticFunction: "V-MOD"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 67
       end: 72
       PosValue: "ADV"
+      coarseValue: "ADV"
 [jetzt]
 Constituent
    sofa: _InitialView
@@ -2358,11 +2414,12 @@ Constituent
    children: FSArray
    syntacticFunction: "V-MOD"
 [Untersuchungsausschuß]
-NN
+POS_NOUN
    sofa: _InitialView
    begin: 73
    end: 94
    PosValue: "NN"
+   coarseValue: "NOUN"
 [Untersuchungsausschuß]
 Token
    sofa: _InitialView
@@ -2395,11 +2452,12 @@ Token
          syntacticFunction: "-"
       children: FSArray
       syntacticFunction: "OA"
-   pos: NN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 73
       end: 94
       PosValue: "NN"
+      coarseValue: "NOUN"
 [Untersuchungsausschuß]
 Constituent
    sofa: _InitialView

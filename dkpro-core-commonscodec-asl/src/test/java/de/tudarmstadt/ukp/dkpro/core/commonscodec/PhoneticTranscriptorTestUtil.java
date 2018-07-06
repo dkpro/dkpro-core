@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2013
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *******************************************************************************/
+ **/
 package de.tudarmstadt.ukp.dkpro.core.commonscodec;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
@@ -32,16 +32,20 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class PhoneticTranscriptorTestUtil
 {
-    public static void runTest(AnalysisEngineDescription desc, String text, String ... goldTranscriptions) throws Exception {
-
+    public static void runTest(AnalysisEngineDescription desc, String text,
+            String... goldTranscriptions)
+        throws Exception
+    {
         AnalysisEngine engine = createEngine(desc);
         JCas jcas = engine.newJCas();
-        TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class, Sentence.class);
+        TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class,
+                Sentence.class);
         tb.buildTokens(jcas, text);
         engine.process(jcas);
 
-        int i=0;
-        for (PhoneticTranscription transcription : JCasUtil.select(jcas, PhoneticTranscription.class)) {
+        int i = 0;
+        for (PhoneticTranscription transcription : JCasUtil.select(jcas,
+                PhoneticTranscription.class)) {
             assertEquals(goldTranscriptions[i], transcription.getTranscription());
             i++;
         }

@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2014
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.corenlp;
 
@@ -25,12 +25,13 @@ import java.net.URL;
 import java.util.List;
 import java.util.Properties;
 
-import org.apache.commons.lang.reflect.FieldUtils;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -43,17 +44,23 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
-import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.ConvertToCoreNlp;
-import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.ConvertToUima;
+import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.CoreNlp2DKPro;
+import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 import edu.stanford.nlp.parser.nndep.DependencyParser;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.DependencyParseAnnotator;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.trees.GrammaticalStructure;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Dependency parser from CoreNLP.
  */
+@Component(OperationType.DEPENDENCY_PARSER)
+@ResourceMetaData(name = "CoreNLP Dependency Parser")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -70,7 +77,7 @@ public class CoreNlpDependencyParser
      * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
     private boolean printTagSet;
 
     /**
@@ -89,6 +96,20 @@ public class CoreNlpDependencyParser
     private String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Location from which the model is read.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -105,26 +126,22 @@ public class CoreNlpDependencyParser
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = ComponentParameters.PARAM_DEPENDENCY_MAPPING_LOCATION;
+    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_DEPENDENCY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_DEPENDENCY_MAPPING_LOCATION, mandatory = false)
     private String dependencyMappingLocation;
     
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code false}
+     * Maximum sentence length. Longer sentences are skipped.
      */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internStrings;
-
-    public static final String PARAM_MAX_SENTENCE_LENGTH = ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
+    public static final String PARAM_MAX_SENTENCE_LENGTH = 
+            ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
     @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = true, defaultValue = "2147483647")
     private int maxSentenceLength;
     
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
-    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = ComponentParameters.AUTO_NUM_THREADS)
+    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, 
+            defaultValue = ComponentParameters.AUTO_NUM_THREADS)
     private int numThreads;
 
     public static final String PARAM_MAX_TIME = "maxTime";
@@ -157,7 +174,8 @@ public class CoreNlpDependencyParser
     private List<String> quoteEnd;
     
     public static final String PARAM_EXTRA_DEPENDENCIES = "extraDependencies";
-    @ConfigurationParameter(name = PARAM_EXTRA_DEPENDENCIES, mandatory = true, defaultValue="NONE")
+    @ConfigurationParameter(name = PARAM_EXTRA_DEPENDENCIES, mandatory = true, 
+            defaultValue = "NONE")
     GrammaticalStructure.Extras extraDependencies;
     
     private CasConfigurableProviderBase<DependencyParseAnnotator> annotatorProvider;
@@ -187,18 +205,20 @@ public class CoreNlpDependencyParser
         mappingProvider.configure(cas);
         
         // Transfer from CAS to CoreNLP
-        ConvertToCoreNlp converter = new ConvertToCoreNlp();
+        DKPro2CoreNlp converter = new DKPro2CoreNlp();
         converter.setPtb3Escaping(ptb3Escaping);
         converter.setQuoteBegin(quoteBegin);
         converter.setQuoteEnd(quoteEnd);
         converter.setEncoding(modelEncoding);
-        Annotation document = converter.convert(aJCas);
+        
+        Annotation document = new Annotation((String) null);
+        converter.convert(aJCas, document);
 
         // Actual processing
         annotatorProvider.getResource().annotate(document);
         
         // Transfer back into the CAS
-        ConvertToUima.convertDependencies(aJCas, document, mappingProvider, internStrings);
+        CoreNlp2DKPro.convertDependencies(aJCas, document, mappingProvider);
     }
 
     private class CoreNlpDependencyParserModelProvider
@@ -220,7 +240,7 @@ public class CoreNlpDependencyParser
             // Loading gzipped files from URL is broken in CoreNLP
             // https://github.com/stanfordnlp/CoreNLP/issues/94
             if (modelFile.startsWith("jar:") && modelFile.endsWith(".gz")) {
-                modelFile = org.apache.commons.lang.StringUtils.substringAfter(modelFile, "!/");
+                modelFile = org.apache.commons.lang3.StringUtils.substringAfter(modelFile, "!/");
             }
             
             Properties coreNlpProps = new Properties();

@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2013
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.morpha;
 
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -25,6 +25,8 @@ import java.util.List;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.LanguageCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
@@ -32,6 +34,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Lemmatize based on a finite-state machine. Uses the <a href="https://github.com/knowitall/morpha">
@@ -43,6 +48,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * processing of English, Natural Language Engineering, 7(3). 207-223.</li>
  * </ul>
  */
+@Component(OperationType.LEMMATIZER)
+@ResourceMetaData(name = "Morpha Lemmatizer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
+@LanguageCapability("en")
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
                     "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -58,7 +67,7 @@ public class MorphaLemmatizer
      * so this is disabled by default.
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
-    @ConfigurationParameter(name=PARAM_READ_POS, mandatory=true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "false")
     private boolean readPos;
 
     @Override
@@ -75,14 +84,14 @@ public class MorphaLemmatizer
                 String lemmaString;
                 if (readPos && (t.getPos() != null)) {
                     lemmaString = edu.washington.cs.knowitall.morpha.MorphaStemmer.stemToken(
-                            t.getCoveredText(), t.getPos().getPosValue());
+                            t.getText(), t.getPos().getPosValue());
                 }
                 else {
-                    lemmaString = edu.washington.cs.knowitall.morpha.MorphaStemmer.stemToken(t
-                            .getCoveredText());
+                    lemmaString = edu.washington.cs.knowitall.morpha.MorphaStemmer
+                            .stemToken(t.getText());
                 }
                 if (lemmaString == null) {
-                    lemmaString = t.getCoveredText();
+                    lemmaString = t.getText();
                 }
                 l.setValue(lemmaString);
 

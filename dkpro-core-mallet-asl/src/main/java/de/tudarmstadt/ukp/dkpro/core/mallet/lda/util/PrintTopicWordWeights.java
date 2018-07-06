@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2014
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,14 +14,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.mallet.lda.util;
-
-import cc.mallet.topics.ParallelTopicModel;
-import cc.mallet.types.Alphabet;
-import cc.mallet.types.IDSorter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -29,6 +23,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.TreeSet;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import cc.mallet.topics.ParallelTopicModel;
+import cc.mallet.types.Alphabet;
+import cc.mallet.types.IDSorter;
 
 /**
  * Extract the n most important words for each topic in the given {@link ParallelTopicModel} files
@@ -44,7 +45,7 @@ public class PrintTopicWordWeights
     private static final Locale LOCALE = Locale.US;
     private static final String FIELD_SEPARATOR = ",";
     private static final String OUTPUTFILE_SUFFIX = ".topics";
-    private final static Logger LOGGER = LoggerFactory.getLogger(PrintTopicWordWeights.class);
+    private final static Log LOGGER = LogFactory.getLog(PrintTopicWordWeights.class);
     private ParallelTopicModel model;
     private Alphabet alphabet;
     private final int nWords;

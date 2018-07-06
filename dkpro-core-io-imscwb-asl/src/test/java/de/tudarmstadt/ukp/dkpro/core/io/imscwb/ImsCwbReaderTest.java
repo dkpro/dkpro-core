@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2011
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.imscwb;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
@@ -38,91 +38,91 @@ import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class ImsCwbReaderTest
 {
-	@Test
-	public void wackyTest()
-		throws Exception
-	{
+    @Test
+    public void wackyTest()
+        throws Exception
+    {
         CollectionReaderDescription reader = createReaderDescription(
-		        ImsCwbReader.class,
-				ImsCwbReader.PARAM_SOURCE_LOCATION, "src/test/resources/wacky/",
-				ImsCwbReader.PARAM_LANGUAGE, "de",
-				ImsCwbReader.PARAM_SOURCE_ENCODING, "ISO-8859-15",
-				ResourceCollectionReaderBase.PARAM_PATTERNS, "[+]test.txt");
+                ImsCwbReader.class,
+                ImsCwbReader.PARAM_SOURCE_LOCATION, "src/test/resources/wacky/",
+                ImsCwbReader.PARAM_LANGUAGE, "de",
+                ImsCwbReader.PARAM_SOURCE_ENCODING, "ISO-8859-15",
+                ResourceCollectionReaderBase.PARAM_PATTERNS, "[+]test.txt");
 
-		String firstSentence = "Nikita ( La Femme Nikita ) Dieser Episodenf\u00FChrer wurde von " +
-				"September 1998 bis Mai 1999 von Konstantin C.W. Volkmann geschrieben und im Mai " +
-				"2000 von Stefan B\u00F6rzel \u00FCbernommen . ";
+        String firstSentence = "Nikita ( La Femme Nikita ) Dieser Episodenf\u00FChrer wurde von " +
+                "September 1998 bis Mai 1999 von Konstantin C.W. Volkmann geschrieben und im Mai " +
+                "2000 von Stefan B\u00F6rzel \u00FCbernommen . ";
 
-		int i = 0;
-		for (JCas jcas : iteratePipeline(reader)) {
-			// System.out.println(jcas.getDocumentText());
-			if (i == 0) {
-				assertEquals(11406, select(jcas, Token.class).size());
-				assertEquals(11406, select(jcas, Lemma.class).size());
-				assertEquals(11406, select(jcas, POS.class).size());
-				assertEquals(717, select(jcas, Sentence.class).size());
+        int i = 0;
+        for (JCas jcas : iteratePipeline(reader)) {
+            // System.out.println(jcas.getDocumentText());
+            if (i == 0) {
+                assertEquals(11406, select(jcas, Token.class).size());
+                assertEquals(11406, select(jcas, Lemma.class).size());
+                assertEquals(11406, select(jcas, POS.class).size());
+                assertEquals(717, select(jcas, Sentence.class).size());
 
-				assertEquals(firstSentence, select(jcas, Sentence.class).iterator().next()
-						.getCoveredText());
+                assertEquals(firstSentence, select(jcas, Sentence.class).iterator().next()
+                        .getCoveredText());
 
-				assertEquals("http://www.epguides.de/nikita.htm", DocumentMetaData.get(jcas)
-						.getDocumentTitle());
-			}
-			i++;
-		}
+                assertEquals("http://www.epguides.de/nikita.htm", DocumentMetaData.get(jcas)
+                        .getDocumentTitle());
+            }
+            i++;
+        }
 
-		assertEquals(4, i);
+        assertEquals(4, i);
 
-	}
+    }
 
-	@Test
-	public void wackyTest_noAnnotations()
-		throws Exception
-	{
+    @Test
+    public void wackyTest_noAnnotations()
+        throws Exception
+    {
         CollectionReaderDescription reader = createReaderDescription(
-		        ImsCwbReader.class,
-				ImsCwbReader.PARAM_SOURCE_LOCATION, "src/test/resources/wacky/",
+                ImsCwbReader.class,
+                ImsCwbReader.PARAM_SOURCE_LOCATION, "src/test/resources/wacky/",
                 ImsCwbReader.PARAM_PATTERNS, "[+]test.txt",
-				ImsCwbReader.PARAM_LANGUAGE, "de",
-				ImsCwbReader.PARAM_SOURCE_ENCODING, "ISO-8859-15",
-				ImsCwbReader.PARAM_READ_TOKEN, false,
-				ImsCwbReader.PARAM_READ_LEMMA, false,
-				ImsCwbReader.PARAM_READ_POS, false,
-				ImsCwbReader.PARAM_READ_SENTENCES, false);
+                ImsCwbReader.PARAM_LANGUAGE, "de",
+                ImsCwbReader.PARAM_SOURCE_ENCODING, "ISO-8859-15",
+                ImsCwbReader.PARAM_READ_TOKEN, false,
+                ImsCwbReader.PARAM_READ_LEMMA, false,
+                ImsCwbReader.PARAM_READ_POS, false,
+                ImsCwbReader.PARAM_READ_SENTENCES, false);
 
-		int i = 0;
-		for (JCas jcas : iteratePipeline(reader)) {
-			if (i == 0) {
-				assertEquals(0, select(jcas, Token.class).size());
-				assertEquals(0, select(jcas, POS.class).size());
-				assertEquals(0, select(jcas, Sentence.class).size());
-			}
-			i++;
-		}
+        int i = 0;
+        for (JCas jcas : iteratePipeline(reader)) {
+            if (i == 0) {
+                assertEquals(0, select(jcas, Token.class).size());
+                assertEquals(0, select(jcas, POS.class).size());
+                assertEquals(0, select(jcas, Sentence.class).size());
+            }
+            i++;
+        }
 
-		assertEquals(4, i);
-	}
+        assertEquals(4, i);
+    }
 
-	@Test(expected = IllegalStateException.class)
-	public void wackyTest__expectedException()
-		throws Exception
-	{
+    @Test(expected = IllegalStateException.class)
+    public void wackyTest__expectedException()
+        throws Exception
+    {
         CollectionReaderDescription reader = createReaderDescription(
-		        ImsCwbReader.class,
-				ImsCwbReader.PARAM_SOURCE_LOCATION, "src/test/resources/wacky",
-				ImsCwbReader.PARAM_LANGUAGE, "de",
-				ImsCwbReader.PARAM_SOURCE_ENCODING, "ISO-8859-15",
-				ImsCwbReader.PARAM_READ_TOKEN, false,
-				ImsCwbReader.PARAM_READ_LEMMA, true,
-				ImsCwbReader.PARAM_READ_POS, false,
-				ImsCwbReader.PARAM_READ_SENTENCES, false);
+                ImsCwbReader.class,
+                ImsCwbReader.PARAM_SOURCE_LOCATION, "src/test/resources/wacky",
+                ImsCwbReader.PARAM_LANGUAGE, "de",
+                ImsCwbReader.PARAM_SOURCE_ENCODING, "ISO-8859-15",
+                ImsCwbReader.PARAM_READ_TOKEN, false,
+                ImsCwbReader.PARAM_READ_LEMMA, true,
+                ImsCwbReader.PARAM_READ_POS, false,
+                ImsCwbReader.PARAM_READ_SENTENCES, false);
 
-		for (JCas jcas : iteratePipeline(reader)) {
-			// should never get here
-		    fail("no Exception!");
-		}
+        for (JCas jcas : iteratePipeline(reader)) {
+            // should never get here
+            fail("no Exception!");
+        }
         fail("no Exception!");
-	}
+    }
 
     @Rule
     public DkproTestContext testContext = new DkproTestContext();

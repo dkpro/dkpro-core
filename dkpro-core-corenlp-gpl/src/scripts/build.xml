@@ -1,6 +1,6 @@
 <!--
 
-    Copyright 2007-2014    
+    Copyright 2007-2018    
     Ubiquitous Knowledge Processing (UKP) Lab
     Technische Universität Darmstadt
 
@@ -15,25 +15,24 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with this program.  If not, see http://www.gnu.org/licenses/.
+    along with this program. If not, see http://www.gnu.org/licenses/.
 
 -->
 <project basedir="../.." default="separate-jars">
 	<import>
-		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.7.0/ant-macros.xml"/>
+        <url url="https://raw.githubusercontent.com/dkpro/resource-packager/0.8.0/ant-macros.xml"/>
 	</import>
 	
 	<!-- 
 	  - Upstream versions - meta data versions are maintained per model below 
 	  -->
 	<!-- http://nlp.stanford.edu/software/corenlp.shtml -->
-	<property name="core.date" value="2015-04-20"/>
-    <property name="chinese.date" value="2016-01-19"/>
-    <property name="english.date" value="2016-01-10"/>
-    <property name="french.date" value="2016-01-14"/>
-    <property name="german.date" value="2016-01-19"/>
-    <property name="spanish.date" value="2015-10-14"/>
-	
+    <property name="core.arabic.date" value="2017-06-09"/>
+    <property name="core.chinese.date" value="2017-06-09"/>
+    <property name="core.english.date" value="2017-06-09"/>
+    <property name="core.french.date" value="2017-06-09"/>
+    <property name="core.german.date" value="2017-06-09"/>
+    <property name="core.spanish.date" value="2017-06-09"/>
 
 	<!-- 
 	  - Output package configuration
@@ -50,64 +49,68 @@
 		<antcall target="separate-jars"/>
 	</target>
 
-	<target name="separate-jars" depends="de,en,fr,zh">
+	<target name="separate-jars" depends="ar,de,en,fr,zh">
 		<antcall target="jar-notice"/>
 	</target>
 
-    <target name="de">
-        <!--antcall target="depparser-de-ud"/-->
+    <target name="newmodels">
+        <property name="install-artifact-mode" value="remote"/>
+        
+        <antcall target="depparser-de-ud"/>
     </target>
 
-	<!--
-	 - #841 - German CoreNLP NNDEP parser model is actually a French model 
-	 -
-    <target name="depparser-de-ud" depends="download-german">
+    <target name="de">
+        <antcall target="depparser-de-ud"/>
+    </target>
+	
+    <target name="depparser-de-ud" depends="download-de">
         <mkdir dir="target/download/tmp"/>
-        <unzip src="target/download/german/german-models.zip" dest="target/download/tmp">
+        <unzip src="target/download/de/de-models.zip" dest="target/download/tmp">
             <patternset>
                 <include name="edu/stanford/nlp/models/parser/nndep/UD_German.gz"/>      
             </patternset>
         </unzip>
+        
         <install-stub-and-upstream-file 
             file="target/download/tmp/edu/stanford/nlp/models/parser/nndep/UD_German.gz" 
-            md5="c2cd7c55750e2d4dcdd8a16963430c40"
+            md5="198d61a00efa3b1d2618464273c615b3"
             groupId="de.tudarmstadt.ukp.dkpro.core" 
             artifactIdBase="de.tudarmstadt.ukp.dkpro.core.corenlp"
-            upstreamVersion="20160119"
+            upstreamVersion="20161213"
             metaDataVersion="1"
             tool="depparser" 
             language="de" 
             variant="ud" 
             extension="gz">     
             <metadata>
-                <entry key="pos.tagset" value="ptb"/>
+                <entry key="pos.tagset" value="stts"/>
                 <entry key="dependency.tagset" value="universal"/>
             </metadata>
-        </install-stub-and-upstream-file>       
-        <deltree dir="target/download/tmp"/>
+        </install-stub-and-upstream-file>
+        <delete dir="target/download/tmp"/>
     </target>
-	-->
         
 	<target name="en">
 		<antcall target="depparser-en-sd"/>
         <antcall target="depparser-en-ud"/>
         <antcall target="depparser-en-wsj-sd"/>
+        <antcall target="depparser-en-wsj-ud"/>
         <antcall target="depparser-en-ptb-conll"/>
 	</target>
 	
-	<target name="depparser-en-ud" depends="download-english">
+	<target name="depparser-en-ud" depends="download-en">
         <mkdir dir="target/download/tmp"/>
-        <unzip src="target/download/english/english-models.zip" dest="target/download/tmp">
+        <unzip src="target/download/en/en-models.zip" dest="target/download/tmp">
             <patternset>
                 <include name="edu/stanford/nlp/models/parser/nndep/english_UD.gz"/>      
             </patternset>
         </unzip>
     	<install-stub-and-upstream-file 
     		file="target/download/tmp/edu/stanford/nlp/models/parser/nndep/english_UD.gz" 
-    		md5="1f34d35983a51a95e66895dad273a649"
+    		md5="a0e95f9a00fe3cc44c4d9383d3ab0c29"
     	    groupId="de.tudarmstadt.ukp.dkpro.core" 
     	    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.corenlp"
-    		upstreamVersion="20150418"
+    		upstreamVersion="20161213"
     		metaDataVersion="1"
     		tool="depparser" 
     		language="en" 
@@ -121,9 +124,9 @@
         <deltree dir="target/download/tmp"/>
 	</target>
 		
-    <target name="depparser-en-wsj-sd" depends="download-english">
+    <target name="depparser-en-wsj-sd" depends="download-en">
         <mkdir dir="target/download/tmp"/>
-        <unzip src="target/download/english/english-models.zip" dest="target/download/tmp">
+        <unzip src="target/download/en/en-models.zip" dest="target/download/tmp">
             <patternset>
                 <include name="edu/stanford/nlp/models/parser/nndep/wsj_SD.gz"/>      
             </patternset>
@@ -147,9 +150,35 @@
         <deltree dir="target/download/tmp"/>
     </target>
         
-    <target name="depparser-en-sd" depends="download-english">
+    <target name="depparser-en-wsj-ud" depends="download-en">
         <mkdir dir="target/download/tmp"/>
-        <unzip src="target/download/english/english-models.zip" dest="target/download/tmp">
+        <unzip src="target/download/en/en-models.zip" dest="target/download/tmp">
+            <patternset>
+                <include name="edu/stanford/nlp/models/parser/nndep/english_wsj_UD.gz"/>      
+            </patternset>
+        </unzip>
+        <install-stub-and-upstream-file 
+            file="target/download/tmp/edu/stanford/nlp/models/parser/nndep/english_wsj_UD.gz" 
+            md5="cefb78c5b3e4f60b964feb5cab6f3aec"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.corenlp"
+            upstreamVersion="20161213"
+            metaDataVersion="1"
+            tool="depparser" 
+            language="en" 
+            variant="wsj-ud" 
+            extension="gz">     
+            <metadata>
+                <entry key="pos.tagset" value="ptb"/>
+                <entry key="dependency.tagset" value="universal"/>
+            </metadata>
+        </install-stub-and-upstream-file>       
+        <deltree dir="target/download/tmp"/>
+    </target>
+        
+    <target name="depparser-en-sd" depends="download-en">
+        <mkdir dir="target/download/tmp"/>
+        <unzip src="target/download/en/en-models.zip" dest="target/download/tmp">
             <patternset>
                 <include name="edu/stanford/nlp/models/parser/nndep/english_SD.gz"/>      
             </patternset>
@@ -172,9 +201,9 @@
         </install-stub-and-upstream-file>       
     </target>
 
-    <target name="depparser-en-ptb-conll" depends="download-chinese">
+    <target name="depparser-en-ptb-conll" depends="download-zh">
         <mkdir dir="target/download/tmp"/>
-        <unzip src="target/download/chinese/chinese-models.zip" dest="target/download/tmp">
+        <unzip src="target/download/zh/zh-models.zip" dest="target/download/tmp">
             <patternset>
                 <include name="edu/stanford/nlp/models/parser/nndep/PTB_CoNLL_params.txt.gz"/>      
             </patternset>
@@ -201,11 +230,13 @@
 
     <target name="zh">
         <antcall target="depparser-zh-ctb-conll"/>
+        <antcall target="depparser-zh-ptb-conll"/>
+        <antcall target="depparser-zh-ud"/>
      </target>
 
-    <target name="depparser-zh-ctb-conll" depends="download-chinese">
+    <target name="depparser-zh-ctb-conll" depends="download-zh">
         <mkdir dir="target/download/tmp"/>
-        <unzip src="target/download/chinese/chinese-models.zip" dest="target/download/tmp">
+        <unzip src="target/download/zh/zh-models.zip" dest="target/download/tmp">
             <patternset>
                 <include name="edu/stanford/nlp/models/parser/nndep/CTB_CoNLL_params.txt.gz"/>      
             </patternset>
@@ -229,23 +260,75 @@
         <deltree dir="target/download/tmp"/>
     </target>
         
+    <target name="depparser-zh-ptb-conll" depends="download-zh">
+        <mkdir dir="target/download/tmp"/>
+        <unzip src="target/download/zh/zh-models.zip" dest="target/download/tmp">
+            <patternset>
+                <include name="edu/stanford/nlp/models/parser/nndep/PTB_CoNLL_params.txt.gz"/>      
+            </patternset>
+        </unzip>
+        <install-stub-and-upstream-file 
+            file="target/download/tmp/edu/stanford/nlp/models/parser/nndep/PTB_CoNLL_params.txt.gz" 
+            md5="352f1770f46a4aaeec364aeb0fac3813"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.corenlp"
+            upstreamVersion="20161223"
+            metaDataVersion="1"
+            tool="depparser" 
+            language="zh" 
+            variant="ptb-conll" 
+            extension="gz">     
+            <metadata>
+                <entry key="pos.tagset" value="ptb"/>
+                <entry key="dependency.tagset" value="conll2008"/>
+            </metadata>
+        </install-stub-and-upstream-file>       
+        <deltree dir="target/download/tmp"/>
+    </target>
+        
+    <target name="depparser-zh-ud" depends="download-zh">
+        <mkdir dir="target/download/tmp"/>
+        <unzip src="target/download/zh/zh-models.zip" dest="target/download/tmp">
+            <patternset>
+                <include name="edu/stanford/nlp/models/parser/nndep/UD_Chinese.gz"/>      
+            </patternset>
+        </unzip>
+        <install-stub-and-upstream-file 
+            file="target/download/tmp/edu/stanford/nlp/models/parser/nndep/UD_Chinese.gz" 
+            md5="b742287ed7612d01d4857c719face054"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.corenlp"
+            upstreamVersion="20161223"
+            metaDataVersion="1"
+            tool="depparser" 
+            language="zh" 
+            variant="ud" 
+            extension="gz">     
+            <metadata>
+                <entry key="pos.tagset" value="ctb"/>
+                <entry key="dependency.tagset" value="universal"/>
+            </metadata>
+        </install-stub-and-upstream-file>       
+        <deltree dir="target/download/tmp"/>
+    </target>
+        
     <target name="fr">
         <antcall target="depparser-fr-ud"/>
     </target>
 
-    <target name="depparser-fr-ud" depends="download-french">
+    <target name="depparser-fr-ud" depends="download-fr">
         <mkdir dir="target/download/tmp"/>
-        <unzip src="target/download/french/french-models.zip" dest="target/download/tmp">
+        <unzip src="target/download/fr/fr-models.zip" dest="target/download/tmp">
             <patternset>
                 <include name="edu/stanford/nlp/models/parser/nndep/UD_French.gz"/>      
             </patternset>
         </unzip>
         <install-stub-and-upstream-file 
             file="target/download/tmp/edu/stanford/nlp/models/parser/nndep/UD_French.gz" 
-            md5="c2cd7c55750e2d4dcdd8a16963430c40"
+            md5="f20a7664ecc0068cd1b315e09e774c09"
             groupId="de.tudarmstadt.ukp.dkpro.core" 
             artifactIdBase="de.tudarmstadt.ukp.dkpro.core.corenlp"
-            upstreamVersion="20160114"
+            upstreamVersion="20161211"
             metaDataVersion="1"
             tool="depparser" 
             language="fr" 
@@ -258,80 +341,103 @@
         </install-stub-and-upstream-file>       
         <deltree dir="target/download/tmp"/>
     </target>
-        
-    <target name="-check-download-french">
-        <available property="download-french.DONE" file="target/download/french/DONE"/>
+
+    <target name="ar">
+        <antcall target="tokenizer-ar-stanford"/>
     </target>
 
-    <target name="download-french" depends="-check-download-french" unless="download-french.DONE">
-        <mkdir dir="target/download/french"/>
-        <get src="http://nlp.stanford.edu/software/stanford-french-corenlp-${french.date}-models.jar" 
-            dest="target/download/french/french-models.zip" skipexisting="true"/>
-        <touch file="target/download/french/DONE"/>
+    <target name="tokenizer-ar-stanford" depends="download-ar">
+        <mkdir dir="target/download/tmp"/>
+        <unzip src="target/download/ar/ar-models.zip" dest="target/download/tmp">
+            <patternset>
+                <include name="edu/stanford/nlp/models/segmenter/arabic/arabic-segmenter-atb+bn+arztrain.ser.gz"/>
+            </patternset>
+        </unzip>
+        <install-stub-and-upstream-file
+            file="target/download/tmp/edu/stanford/nlp/models/segmenter/arabic/arabic-segmenter-atb+bn+arztrain.ser.gz"
+            md5="9c0296a2c1b432a78da8546cbd3e5a6a"
+            groupId="de.tudarmstadt.ukp.dkpro.core"
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.corenlp"
+            upstreamVersion="20170614"
+            metaDataVersion="1"
+            tool="tokenizer"
+            language="ar"
+            variant="atb-bn-arztrain"
+            extension="ser.gz">
+        </install-stub-and-upstream-file>
+        <deltree dir="target/download/tmp"/>
     </target>
 
-    <target name="-check-download-german">
-        <available property="download-german.DONE" file="target/download/german/DONE"/>
+    <!-- 
+      - ============================================================================================
+      - MODELS
+      - ============================================================================================
+      -->
+    <target name="-check-download-ar">
+        <available property="download-ar.DONE" file="target/download/ar/DONE"/>
     </target>
 
-    <target name="download-german" depends="-check-download-german" unless="download-german.DONE">
-        <mkdir dir="target/download/german"/>
-        <get src="http://nlp.stanford.edu/software/stanford-german-${german.date}-models.jar" 
-            dest="target/download/german/german-models.zip" skipexisting="true"/>
-        <touch file="target/download/german/DONE"/>
+    <target name="download-ar" depends="-check-download-ar" unless="download-ar.DONE">
+        <mkdir dir="target/download/ar"/>
+        <get src="http://nlp.stanford.edu/software/stanford-arabic-corenlp-${core.arabic.date}-models.jar" 
+            dest="target/download/ar/ar-models.zip" skipexisting="true"/>
+        <touch file="target/download/ar/DONE"/>
     </target>
     
-    <target name="-check-download-english">
-        <available property="download-english.DONE" file="target/download/english/DONE"/>
+    <target name="-check-download-en">
+        <available property="download-en.DONE" file="target/download/en/DONE"/>
     </target>
 
-    <target name="download-english" depends="-check-download-english" unless="download-english.DONE">
-        <mkdir dir="target/download/english"/>
-        <get src="http://nlp.stanford.edu/software/stanford-english-corenlp-${english.date}-models.jar" 
-        	dest="target/download/english/english-models.zip" skipexisting="true"/>
-        <touch file="target/download/english/DONE"/>
+    <target name="download-en" depends="-check-download-en" unless="download-en.DONE">
+        <mkdir dir="target/download/en"/>
+        <get src="http://nlp.stanford.edu/software/stanford-english-corenlp-${core.english.date}-models.jar" 
+            dest="target/download/en/en-models.zip" skipexisting="true"/>
+        <touch file="target/download/en/DONE"/>
+    </target>
+
+    <target name="-check-download-de">
+        <available property="download-de.DONE" file="target/download/de/DONE"/>
+    </target>
+
+    <target name="download-de" depends="-check-download-de" unless="download-de.DONE">
+        <mkdir dir="target/download/de"/>
+        <get src="http://nlp.stanford.edu/software/stanford-german-corenlp-${core.german.date}-models.jar"
+            dest="target/download/de/de-models.zip" skipexisting="true"/>
+        <touch file="target/download/de/DONE"/>
+    </target>
+
+    <target name="-check-download-fr">
+        <available property="download-fr.DONE" file="target/download/fr/DONE"/>
+    </target>
+
+    <target name="download-fr" depends="-check-download-fr" unless="download-fr.DONE">
+        <mkdir dir="target/download/fr"/>
+        <get src="http://nlp.stanford.edu/software/stanford-french-corenlp-${core.french.date}-models.jar" 
+            dest="target/download/fr/fr-models.zip" skipexisting="true"/>
+        <touch file="target/download/fr/DONE"/>
     </target>
     
-	<target name="-check-download-chinese">
-		<available property="download-chinese.DONE" file="target/download/chinese/DONE"/>
-	</target>
+    <target name="-check-download-es">
+        <available property="download-es.DONE" file="target/download/es/DONE"/>
+    </target>
 
-    <target name="download-chinese" depends="-check-download-chinese" unless="download-chinese.DONE">
-        <mkdir dir="target/download/chinese"/>
-        <get src="http://nlp.stanford.edu/software/stanford-chinese-corenlp-${chinese.date}-models.jar" 
-            dest="target/download/chinese/chinese-models.zip" skipexisting="true"/>
-        <touch file="target/download/chinese/DONE"/>
+    <target name="download-es" depends="-check-download-es" unless="download-es.DONE">
+        <mkdir dir="target/download/es"/>
+        <get src="http://nlp.stanford.edu/software/stanford-spanish-corenlp-${core.spanish.date}-models.jar"
+            dest="target/download/es/es-models.zip" skipexisting="true"/>
+        <touch file="target/download/es/DONE"/>
     </target>
     
-    <target name="-check-download-core">
-        <available property="download-core.DONE" file="target/download/core/DONE"/>
+    <target name="-check-download-zh">
+        <available property="download-zh.DONE" file="target/download/zh/DONE"/>
     </target>
 
-	<target name="download-core" depends="-check-download-core" unless="download-core.DONE">
-		<mkdir dir="target/download/core"/>
-    	<get src="http://nlp.stanford.edu/downloads/stanford-corenlp-full-${core.date}.zip" dest="target/download/core/core-nlp.zip" skipexisting="true"/>
-    	<unzip src="target/download/core/core-nlp.zip" dest="target/download/core">
-    		<patternset>
-    			<include name="**/stanford-corenlp-*-models.jar"/>		
-			</patternset>
-    		<chainedmapper>
-	    		<mapper type="flatten"/>
-	    		<firstmatchmapper>
-					<globmapper from="*" to="stanford-corenlp-models.jar"/>
-				</firstmatchmapper>
-    		</chainedmapper>
-    	</unzip>
-		<unzip src="target/download/core/stanford-corenlp-models.jar" dest="target/download/core">
-    		<patternset>
-    			<include name="**/parser/nndep/*"/>		
-			</patternset>
-    		<chainedmapper>
-	    		<mapper type="flatten"/>
-    		</chainedmapper>
-		</unzip>
-    	<delete file="target/download/core/stanford-corenlp-models.jar"/>
-		<touch file="target/download/core/DONE"/>
-	</target>
+    <target name="download-zh" depends="-check-download-zh" unless="download-zh.DONE">
+        <mkdir dir="target/download/zh"/>
+        <get src="http://nlp.stanford.edu/software/stanford-chinese-corenlp-${core.chinese.date}-models.jar" 
+            dest="target/download/zh/zh-models.zip" skipexisting="true"/>
+        <touch file="target/download/zh/DONE"/>
+    </target>
 	
 	<target name="jar-notice">
 		<echo>================================</echo>

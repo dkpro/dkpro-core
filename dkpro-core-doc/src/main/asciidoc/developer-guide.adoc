@@ -24,6 +24,14 @@ This document is targets developers of DKPro Core components.
 
 <<<
 
+include::{include-dir}setup.adoc[]
+
+<<<
+
+include::{include-dir}modules.adoc[]
+
+<<<
+
 include::{include-dir}components.adoc[]
 
 <<<

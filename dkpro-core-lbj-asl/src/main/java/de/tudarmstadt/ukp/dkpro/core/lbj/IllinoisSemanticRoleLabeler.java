@@ -19,6 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.lbj;
 
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -40,42 +41,29 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.lbj.internal.ConvertToIllinois;
 import de.tudarmstadt.ukp.dkpro.core.lbj.internal.ConvertToUima;
-import edu.illinois.cs.cogcomp.annotation.Annotator;
 import edu.illinois.cs.cogcomp.annotation.AnnotatorException;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.TextAnnotation;
 import edu.illinois.cs.cogcomp.srl.SemanticRoleLabeler;
-import edu.illinois.cs.cogcomp.srl.core.SRLType;
 
 /**
  * Wrapper for the Illinois Semantic Role Labeler from the Cognitive Computation Group (CCG).
  */
 @TypeCapability(
-        inputs={
+        inputs = { 
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
-       outputs={
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"})
-
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 
+        outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class IllinoisSemanticRoleLabeler
     extends JCasAnnotator_ImplBase
 {
-	/**
-	 * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-	 * spaming the heap with thousands of strings representing only a few different tags.
-	 *
-	 * Default: {@code true}
-	 */
-	public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-	@ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-	private boolean internTags;
-
     /**
      * Log the tag set(s) when a model is loaded.
      *
      * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
     protected boolean printTagSet;
     
 //    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -90,11 +78,13 @@ public class IllinoisSemanticRoleLabeler
 //    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
 //    private String variant;
     
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
-    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false, defaultValue="classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/en-lbj-pos.map")
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false, 
+            defaultValue = "classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/en-lbj-pos.map")
     private String posMappingLocation;
 
-    private ModelProviderBase<Annotator> modelProvider;
+    private ModelProviderBase<SemanticRoleLabeler> modelProvider;
 
     private MappingProvider mappingProvider;
 
@@ -104,7 +94,7 @@ public class IllinoisSemanticRoleLabeler
     {
         super.initialize(context);
 
-        modelProvider = new ModelProviderBase<Annotator>() {
+        modelProvider = new ModelProviderBase<SemanticRoleLabeler>() {
             {
                 setContextObject(IllinoisSemanticRoleLabeler.this);
                 setDefault(LOCATION, NOT_REQUIRED);
@@ -119,7 +109,7 @@ public class IllinoisSemanticRoleLabeler
                 
                 SemanticRoleLabeler annotator;
                 try {
-                    annotator = new SemanticRoleLabeler(SRLType.Verb.toString());
+                    annotator = new SemanticRoleLabeler();
                 }
                 catch (Exception e1) {
                     throw new IOException(e1);
@@ -165,12 +155,11 @@ public class IllinoisSemanticRoleLabeler
     }
 
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
-    	CAS cas = aJCas.getCas();
+        CAS cas = aJCas.getCas();
 
-    	modelProvider.configure(cas);
+        modelProvider.configure(cas);
         mappingProvider.configure(cas);
 
         ConvertToIllinois converter = new ConvertToIllinois();
@@ -185,10 +174,10 @@ public class IllinoisSemanticRoleLabeler
         }
 
         for (Sentence s : select(aJCas, Sentence.class)) {
-        	// Get tokens from CAS
-        	List<Token> casTokens = selectCovered(aJCas, Token.class, s);
-        	
-        	ConvertToUima.convertPOSs(aJCas, casTokens, document, mappingProvider, internTags);
+            // Get tokens from CAS
+            List<Token> casTokens = selectCovered(aJCas, Token.class, s);
+
+            ConvertToUima.convertPOSs(aJCas, casTokens, document, mappingProvider);
         }
     }
 }

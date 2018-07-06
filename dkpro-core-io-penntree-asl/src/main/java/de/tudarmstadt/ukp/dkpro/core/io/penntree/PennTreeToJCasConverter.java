@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2014
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,12 +14,12 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.penntree;
 
 import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.trim;
 import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.unescapeToken;
-import static org.apache.commons.lang.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.uima.fit.util.FSCollectionFactory.createFSArray;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
@@ -33,6 +33,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -47,7 +48,7 @@ public class PennTreeToJCasConverter
 
     private boolean writeTracesToText;
     private boolean createPosTags;
-    private boolean internTags;
+    private boolean internTags = true;
     private String rootLabel = ROOT;
     
     private MappingProvider posMappingProvider;
@@ -259,7 +260,7 @@ public class PennTreeToJCasConverter
         }
 
         constituent.setBegin(children.get(0).getBegin());
-        constituent.setEnd(children.get(children.size()-1).getEnd());
+        constituent.setEnd(children.get(children.size() - 1).getEnd());
         constituent.setChildren(createFSArray(aJCas, children));
         constituent.setParent(parent);
         constituent.addToIndexes();
@@ -284,8 +285,10 @@ public class PennTreeToJCasConverter
         else {
             posAnno = new POS(aJCas, aBegin, aEnd);
         }
-        posAnno.setPosValue(internTags ? aPreterminal.getLabel().intern() : aPreterminal
-                .getLabel());
+        posAnno.setPosValue(
+                internTags && aPreterminal.getLabel() != null ? aPreterminal.getLabel().intern()
+                        : aPreterminal.getLabel());
+        POSUtils.assignCoarseValue(posAnno);
         posAnno.addToIndexes();
         return posAnno;
     }
@@ -300,8 +303,8 @@ public class PennTreeToJCasConverter
         Constituent constituentAnno;
         if (constituentMappingProvider != null) {
             Type constituentTag = constituentMappingProvider.getTagType(label[0]);
-            // We just set a dummy value for the offsets here. These need to be fixed when we know the
-            // children and before addToIndexes() is called.
+            // We just set a dummy value for the offsets here. These need to be fixed when we
+            // know the children and before addToIndexes() is called.
             constituentAnno = (Constituent) aJCas.getCas().createAnnotation(constituentTag, 0, 0);
         }
         else {

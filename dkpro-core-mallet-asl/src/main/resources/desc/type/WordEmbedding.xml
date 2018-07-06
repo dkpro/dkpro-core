@@ -13,7 +13,7 @@
         <featureDescription>
           <name>WordEmbedding</name>
           <description>A word embedding vector.</description>
-          <rangeTypeName>uima.cas.DoubleArray</rangeTypeName>
+          <rangeTypeName>uima.cas.FloatArray</rangeTypeName>
         </featureDescription>
       </features>
     </typeDescription>

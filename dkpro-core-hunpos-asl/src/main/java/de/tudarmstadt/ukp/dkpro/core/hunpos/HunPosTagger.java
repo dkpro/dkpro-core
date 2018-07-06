@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2014
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.hunpos;
 
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -36,10 +36,12 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
@@ -49,13 +51,32 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.RuntimeProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
- * Part-of-Speech annotator using HunPos. Requires {@link Sentence}s to be annotated before.
+ * Part-of-Speech annotator using HunPos. Requires {@link Sentence}s to be annotated
+ * before.
  *
+ * <p><b>References</b></p>
+ * <ul>
+ * <li>HALÁCSY, Péter; KORNAI, András; ORAVECZ, Csaba. HunPos: an open source trigram tagger. In:
+ * Proceedings of the 45th annual meeting of the ACL on interactive poster and demonstration
+ * sessions. Association for Computational Linguistics, 2007. S. 209-212.
+ * <a href="http://aclweb.org/anthology/P/P07/P07-2053.pdf">(pdf)</a>
+ * <a href="http://aclweb.org/anthology/P/P07/P07-2053.bib">(bibtex)</a></li>
+ * </ul>
  */
-@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = { "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
+@Component(OperationType.PART_OF_SPEECH_TAGGER)
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
+@ResourceMetaData(name = "HunPos POS-Tagger")
+@TypeCapability(
+        inputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, 
+        outputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class HunPosTagger
     extends JCasAnnotator_ImplBase
 {
@@ -74,6 +95,20 @@ public class HunPosTagger
     protected String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Load the model from this location instead of locating the model automatically.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -84,19 +119,10 @@ public class HunPosTagger
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
      * mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
-
-    /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid spaming
-     * the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
 
     /**
      * Log the tag set(s) when a model is loaded.
@@ -199,8 +225,8 @@ public class HunPosTagger
 
                 // Send full sentence
                 for (Token token : tokens) {
-                    lastOut.append(token.getCoveredText()).append(' ');
-                    out.printf("%s%n", token.getCoveredText());
+                    lastOut.append(token.getText()).append(' ');
+                    out.printf("%s%n", token.getText());
                 }
                 out.printf("%n");
                 out.flush();
@@ -217,7 +243,9 @@ public class HunPosTagger
                 for (Token t : tokens) {
                     Type posTag = posMappingProvider.getTagType(tags[i]);
                     POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
-                    posAnno.setPosValue(internTags ? tags[i].intern() : tags[i]);
+                    String tag = tags[i];
+                    posAnno.setPosValue(tag != null ? tag.intern() : null);
+                    POSUtils.assignCoarseValue(posAnno);
                     posAnno.addToIndexes();
                     t.setPos(posAnno);
                     i++;

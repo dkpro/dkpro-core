@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  * 
@@ -14,29 +14,25 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
 /**
  * Compression methods.
- * 
  */
 public enum CompressionMethod
 {
-	NONE(""),
-	GZIP(".gz"),
-	BZIP2(".bz2"),
-	XZ(".xz");
-	
-	private String extension;
-	
-	private CompressionMethod(String aExtension)
-	{
-		extension = aExtension;
-	}
-	
-	public String getExtension()
-	{
-		return extension;
-	}
+    NONE(""), GZIP(".gz"), BZIP2(".bz2"), XZ(".xz");
+
+    private String extension;
+
+    private CompressionMethod(String aExtension)
+    {
+        extension = aExtension;
+    }
+
+    public String getExtension()
+    {
+        return extension;
+    }
 }

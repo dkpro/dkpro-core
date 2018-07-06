@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2016
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.lbj;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -46,9 +46,9 @@ public class IllinoisLemmatizerTest
         AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
     }
     
-	private JCas runTest(String aLanguage, String aText)
-		throws Exception
-	{
+    private JCas runTest(String aLanguage, String aText)
+        throws Exception
+    {
         AnalysisEngineDescription engine;
         
         engine = createEngineDescription(
@@ -56,8 +56,8 @@ public class IllinoisLemmatizerTest
                 createEngineDescription(IllinoisLemmatizer.class));
 
         return TestRunner.runTest(engine, aLanguage, aText);
-	}
-	
-	@Rule
-	public DkproTestContext testContext = new DkproTestContext();
+    }
+    
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }

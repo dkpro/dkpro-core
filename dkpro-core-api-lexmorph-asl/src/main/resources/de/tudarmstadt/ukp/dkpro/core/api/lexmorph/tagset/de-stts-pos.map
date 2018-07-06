@@ -12,118 +12,118 @@ __META_SOURCE_URL__=http://www.ims.uni-stuttgart.de/forschung/ressourcen/lexika/
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # Catch-all rule
-*=O
+*=POS_X
 #
 # $*LRB* 
 # -
 # .$$. 
 # $(	sonstige Satzzeichen; satzintern	- [,]()
-$(=PUNC
+$(=POS_PUNCT
 # $,	Komma	,
-$,=PUNC
+$,=POS_PUNCT
 # $.	Satzbeendende Interpunktion	. ? ! ; :
-$.=PUNC
+$.=POS_PUNCT
 # ADJA	attributives Adjektiv	[das] große [Haus]
-ADJA=ADJ
+ADJA=POS_ADJ
 # ADJD	adverbiales oder prädikatives Adjektiv	[er fährt] schnell, [er ist] schnell
-ADJD=ADJ
+ADJD=POS_ADJ
 # ADV	Adverb	schon, bald, doch
-ADV=ADV
+ADV=POS_ADV
 # APPO	Postposition	[ihm] zufolge, [der Sache] wegen
-APPO=PP
+APPO=POS_ADP
 # APPR	Präposition; Zirkumposition links	in [der Stadt], ohne [mich]
-APPR=PP
+APPR=POS_ADP
 # APPRART	Präposition mit Artikel	im [Haus], zur [Sache]
-APPRART=PP
+APPRART=POS_ADP
 # APZR	Zirkumposition rechts	[von jetzt] an
-APZR=PP
+APZR=POS_ADP
 # ART	bestimmter oder unbestimmter Artikel	der, die, das, ein, eine
-ART=ART
+ART=POS_DET
 # CARD	Kardinalzahl	zwei [Männer], [im Jahre] 1994
-CARD=CARD
+CARD=POS_NUM
 # FM	Fremdsprachliches Material	[Er hat das mit ``] A big fish ['' übersetzt]
-FM=O
+FM=POS_X
 # ITJ	Interjektion	mhm, ach, tja
-ITJ=O
+ITJ=POS_X
 # KOKOM	Vergleichskonjunktion	als, wie
-KOKOM=CONJ
+KOKOM=POS_CONJ
 # KON	nebenordnende Konjunktion	und, oder, aber
-KON=CONJ
+KON=POS_CONJ
 # KOUI	unterordnende Konjunktion mit ``zu'' und Infinitiv	um [zu leben], anstatt [zu fragen]
-KOUI=CONJ
+KOUI=POS_CONJ
 # KOUS	unterordnende Konjunktion mit Satz	weil, daß, damit, wenn, ob
-KOUS=CONJ
+KOUS=POS_CONJ
 # NE	Eigennamen	Hans, Hamburg, HSV
-NE=NP
+NE=POS_PROPN
 # NN	normales Nomen	Tisch, Herr, [das] Reisen
-NN=NN
+NN=POS_NOUN
 # PAV	Pronominaladverb	dafür, dabei, deswegen, trotzdem
-PAV=ADV
+PAV=POS_ADV
 # PROAV	Pronominaladverb	dafür, dabei, deswegen, trotzdem (Tiger)
-PROAV=ADV
+PROAV=POS_ADV
 # PDAT	attribuierendes Demonstrativpronomen	jener [Mensch]
-PDAT=PR
+PDAT=POS_PRON
 # PDS	substituierendes Demonstrativpronomen	dieser, jener
-PDS=PR
+PDS=POS_PRON
 # PIAT	attribuierendes Indefinitpronomen ohne Determiner	kein [Mensch], irgendein [Glas]
-PIAT=PR
+PIAT=POS_PRON
 # PIDAT	attribuierendes Indefinitpronomen mit Determiner	[ein] wenig [Wasser], [die] beiden [Brüder]
-PIDAT=PR
+PIDAT=POS_PRON
 # PIS	substituierendes Indefinitpronomen	keiner, viele, man, niemand
-PIS=PR
+PIS=POS_PRON
 # PPER	irreflexives Personalpronomen	ich, er, ihm, mich, dir
-PPER=PR
+PPER=POS_PRON
 # PPOSAT	attribuierendes Possessivpronomen	mein [Buch], deine [Mutter]
-PPOSAT=PR
+PPOSAT=POS_PRON
 # PPOSS	substituierendes Possessivpronomen	meins, deiner
-PPOSS=PR
+PPOSS=POS_PRON
 # PRELAT	attribuierendes Relativpronomen	[der Mann ,] dessen [Hund]
-PRELAT=PR
+PRELAT=POS_PRON
 # PRELS	substituierendes Relativpronomen	[der Hund ,] der
-PRELS=PR
+PRELS=POS_PRON
 # PRF	reflexives Personalpronomen	sich, einander, dich, mir
-PRF=PR
+PRF=POS_PRON
 # PTKA	Partikel bei Adjektiv oder Adverb	am [schönsten], zu [schnell]
-PTKA=O
+PTKA=POS_X
 # PTKANT	Antwortpartikel	ja, nein, danke, bitte
-PTKANT=O
+PTKANT=POS_X
 # PTKNEG	Negationspartikel	nicht
-PTKNEG=O
+PTKNEG=POS_X
 # PTKVZ	abgetrennter Verbzusatz	[er kommt] an, [er fährt] rad
-PTKVZ=V
+PTKVZ=POS_VERB
 # PTKZU	``zu'' vor Infinitiv	zu [gehen]
-PTKZU=O
+PTKZU=POS_X
 # PWAT	attribuierendes Interrogativpronomen	welche [Farbe], wessen [Hut] 
-PWAT=PR
+PWAT=POS_PRON
 # PWAV	adverbiales Interrogativ- oder Relativpronomen	warum, wo, wann, worüber, wobei
-PWAV=PR
+PWAV=POS_PRON
 # PWS	substituierendes Interrogativpronomen	wer, was
-PWS=PR
+PWS=POS_PRON
 # TRUNC	Kompositions-Erstglied	An- [und Abreise]
-TRUNC=O 
+TRUNC=POS_X 
 # VAFIN	finites Verb, aux	[du] bist, [wir] werden
-VAFIN=V
+VAFIN=POS_VERB
 # VAIMP	Imperativ, aux	sei [ruhig !]
-VAIMP=V
+VAIMP=POS_VERB
 # VAINF	Infinitiv, aux	werden, sein
-VAINF=V
+VAINF=POS_VERB
 # VAPP	Partizip Perfekt, aux	gewesen
-VAPP=V
+VAPP=POS_VERB
 # VMFIN	finites Verb, modal	dürfen
-VMFIN=V
+VMFIN=POS_VERB
 # VMINF	Infinitiv, modal	wollen
-VMINF=V
+VMINF=POS_VERB
 # VMPP	Partizip Perfekt, modal	gekonnt, [er hat gehen] können
-VMPP=V
+VMPP=POS_VERB
 # VVFIN	finites Verb, voll	[du] gehst, [wir] kommen [an]
-VVFIN=V
+VVFIN=POS_VERB
 # VVIMP	Imperativ, voll	komm [!]
-VVIMP=V
+VVIMP=POS_VERB
 # VVINF	Infinitiv, voll	gehen, ankommen
-VVINF=V
+VVINF=POS_VERB
 # VVIZU	Infinitiv mit ``zu'', voll	anzukommen, loszulassen
-VVIZU=V
+VVIZU=POS_VERB
 # VVPP	Partizip Perfekt, voll	gegangen, angekommen
-VVPP=V
+VVPP=POS_VERB
 # XY	Nichtwort, Sonderzeichen enthaltend	3:7, H2O, D2XW3
-XY=O
+XY=POS_X

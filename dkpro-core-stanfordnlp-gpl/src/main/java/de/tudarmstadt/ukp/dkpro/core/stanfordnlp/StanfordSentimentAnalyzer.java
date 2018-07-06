@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2014
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,9 +14,21 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
+
+import java.util.Properties;
+
+import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.apache.uima.fit.descriptor.TypeCapability;
+import org.apache.uima.fit.util.JCasUtil;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
+import org.ejml.simple.SimpleMatrix;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.sentiment.type.StanfordSentimentAnnotation;
@@ -27,74 +39,67 @@ import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.sentiment.SentimentCoreAnnotations;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.util.CoreMap;
-import org.apache.uima.UimaContext;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
-import org.apache.uima.fit.descriptor.TypeCapability;
-import org.apache.uima.fit.util.JCasUtil;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ResourceInitializationException;
-import org.ejml.simple.SimpleMatrix;
-
-import java.util.Properties;
 
 /**
  * Experimental wrapper for {@link edu.stanford.nlp.pipeline.SentimentAnnotator} which assigns
  * 5 scores to each sentence. NOTE: Is very slow in the current state as it runs full Stanford
  * pipeline and does not take into account any existing DKPro annotations.
- *
  */
+@ResourceMetaData(name = "CoreNLP Sentiment Analyzer")
 @TypeCapability(
-		inputs = {
-				"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-				"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
-		},
-		outputs = {
-				"de.tudarmstadt.ukp.dkpro.core.sentiment.type.StanfordSentimentAnnotation"
-		}
+    inputs = {
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+    },
+    outputs = {
+        "de.tudarmstadt.ukp.dkpro.core.sentiment.type.StanfordSentimentAnnotation"
+    }
 )
 public class StanfordSentimentAnalyzer
-		extends JCasAnnotator_ImplBase {
+    extends JCasAnnotator_ImplBase
+{
 
-	private StanfordCoreNLP pipeline;
+    private StanfordCoreNLP pipeline;
 
-	@Override
-	public void initialize(UimaContext context) throws ResourceInitializationException {
-		super.initialize(context);
+    @Override
+    public void initialize(UimaContext context) throws ResourceInitializationException
+    {
+        super.initialize(context);
 
-		Properties props = new Properties();
-		props.setProperty("annotators", "tokenize, ssplit, pos, parse, sentiment");
-		pipeline = new StanfordCoreNLP(props);
-	}
+        Properties props = new Properties();
+        props.setProperty("annotators", "tokenize, ssplit, pos, parse, sentiment");
+        pipeline = new StanfordCoreNLP(props);
+    }
 
-	@Override
-	public void process(JCas jCas)
-			throws AnalysisEngineProcessException {
-		for (Sentence sentenceDKPro : JCasUtil.select(jCas, Sentence.class)) {
-			String sentenceText = sentenceDKPro.getCoveredText();
+    @Override
+    public void process(JCas jCas) throws AnalysisEngineProcessException
+    {
+        for (Sentence sentenceDKPro : JCasUtil.select(jCas, Sentence.class)) {
+            String sentenceText = sentenceDKPro.getCoveredText();
 
-			Annotation annotation = pipeline.process(sentenceText);
+            Annotation annotation = pipeline.process(sentenceText);
 
-			for (CoreMap sentence : annotation.get(CoreAnnotations.SentencesAnnotation.class)) {
-				Tree tree = sentence.get(SentimentCoreAnnotations.SentimentAnnotatedTree.class);
-				SimpleMatrix sentimentCoefficients = RNNCoreAnnotations.getPredictions(tree);
+            for (CoreMap sentence : annotation.get(CoreAnnotations.SentencesAnnotation.class)) {
+                Tree tree = sentence.get(SentimentCoreAnnotations.SentimentAnnotatedTree.class);
+                SimpleMatrix sentimentCoefficients = RNNCoreAnnotations.getPredictions(tree);
 
-				double veryNegative = sentimentCoefficients.get(0);
-				double negative = sentimentCoefficients.get(1);
-				double neutral = sentimentCoefficients.get(2);
-				double positive = sentimentCoefficients.get(3);
-				double veryPositive = sentimentCoefficients.get(4);
+                double veryNegative = sentimentCoefficients.get(0);
+                double negative = sentimentCoefficients.get(1);
+                double neutral = sentimentCoefficients.get(2);
+                double positive = sentimentCoefficients.get(3);
+                double veryPositive = sentimentCoefficients.get(4);
 
-				StanfordSentimentAnnotation sentimentAnnotation = new StanfordSentimentAnnotation(jCas);
-				sentimentAnnotation.setBegin(sentenceDKPro.getBegin());
-				sentimentAnnotation.setEnd(sentenceDKPro.getEnd());
-				sentimentAnnotation.setVeryNegative(veryNegative);
-				sentimentAnnotation.setNegative(negative);
-				sentimentAnnotation.setNeutral(neutral);
-				sentimentAnnotation.setPositive(positive);
-				sentimentAnnotation.setVeryPositive(veryPositive);
-				sentimentAnnotation.addToIndexes();
-			}
-		}
-	}
+                StanfordSentimentAnnotation sentimentAnnotation = new StanfordSentimentAnnotation(
+                        jCas);
+                sentimentAnnotation.setBegin(sentenceDKPro.getBegin());
+                sentimentAnnotation.setEnd(sentenceDKPro.getEnd());
+                sentimentAnnotation.setVeryNegative(veryNegative);
+                sentimentAnnotation.setNegative(negative);
+                sentimentAnnotation.setNeutral(neutral);
+                sentimentAnnotation.setPositive(positive);
+                sentimentAnnotation.setVeryPositive(veryPositive);
+                sentimentAnnotation.addToIndexes();
+            }
+        }
+    }
 }

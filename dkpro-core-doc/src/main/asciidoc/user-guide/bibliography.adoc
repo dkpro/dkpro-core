@@ -1,0 +1,17 @@
+=== References
+
+Here are some further references that might be helpful when deciding which tools to use:
+
+* Giesbrecht, Eugenie and Evert, Stefan (2009). Part-of-speech tagging - a
+  solved task? An evaluation of POS taggers for the Web as corpus. In I.
+  Alegria, I. Leturia, and S. Sharoff, editors, Proceedings of the 5th Web as
+  Corpus Workshop (WAC5), San Sebastian, Spain. 
+  link:$$http://purl.org/stefan.evert/PUB/GiesbrechtEvert2009_Tagging.pdf$$[PDF]
+
+* Reut Tsarfaty, Djamé Seddah, Sandra Kübler, and Joakim Nivre. 2013.
+  Parsing morphologically rich languages: Introduction to the special issue.
+  Comput. Linguist. 39, 1 (March 2013), 15-22. link:$$https://aclweb.org/anthology/J/J13/J13-1003.pdf$$[PDF]
+
+* Wolfgang Seeker and Jonas Kuhn. 2013. Morphological and syntactic case in
+  statistical dependency parsing. Comput. Linguist. 39, 1 (March 2013), 23-55.
+  link:$$http://aclweb.org/anthology//J/J13/J13-1004.pdf$$[PDF]

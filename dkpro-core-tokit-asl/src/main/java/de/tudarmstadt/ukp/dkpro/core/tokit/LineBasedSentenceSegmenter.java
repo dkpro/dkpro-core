@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2014
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,11 +14,12 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 
 package de.tudarmstadt.ukp.dkpro.core.tokit;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
@@ -27,12 +28,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 /**
  * Annotates each line in the source text as a sentence. This segmenter is not capable of creating
  * tokens! All respective parameters have no functionality.
+ * 
+ * @deprecated Use {@link RegexSegmenter}
  */
-@TypeCapability(
-        outputs={
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"})
+@ResourceMetaData(name = "Line-based Sentence Segmenter")
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
+@Deprecated
 public class LineBasedSentenceSegmenter
-	extends SegmenterBase
+    extends SegmenterBase
 {
     @Override
     protected void process(JCas aJCas, String aText, int aZoneBegin)
@@ -47,12 +50,12 @@ public class LineBasedSentenceSegmenter
                 createSentence(aJCas, aZoneBegin + begin, aZoneBegin + cursor);
                 begin = cursor + 1;
             }
-            
+
             // Stop at end of text
             if (cursor >= aText.length()) {
                 break;
             }
-            
+
             cursor++;
         }
     }

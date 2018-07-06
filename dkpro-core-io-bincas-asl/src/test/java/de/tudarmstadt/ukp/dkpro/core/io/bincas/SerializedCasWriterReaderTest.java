@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.bincas;
 
 import static org.apache.commons.io.FileUtils.readFileToString;
@@ -31,25 +31,24 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.util.CasCreationUtils;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.junit.rules.TestName;
 
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class SerializedCasWriterReaderTest
 {
-	@Rule
-	public TemporaryFolder testFolder = new TemporaryFolder();
+    @Rule
+    public TemporaryFolder testFolder = new TemporaryFolder();
 
-	@Test
-	public void testCasWithTypeSystemEmbedded() throws Exception
-	{
-		write(true);
-		read();
-	}
+    @Test
+    public void testCasWithTypeSystemEmbedded() throws Exception
+    {
+        write(true);
+        read();
+    }
 
     @Test
     public void testCasWithTypeSystemSeparate() throws Exception
@@ -58,45 +57,45 @@ public class SerializedCasWriterReaderTest
         read();
     }
 
-	public void write(boolean aIncludeTypeSystem) throws Exception
-	{
-		CollectionReader reader = CollectionReaderFactory.createReader(
-				TextReader.class,
-				TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/texts",
-				TextReader.PARAM_PATTERNS, "*.txt",
-				TextReader.PARAM_LANGUAGE, "latin");
+    public void write(boolean aIncludeTypeSystem) throws Exception
+    {
+        CollectionReader reader = CollectionReaderFactory.createReader(
+                TextReader.class,
+                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/texts",
+                TextReader.PARAM_PATTERNS, "*.txt",
+                TextReader.PARAM_LANGUAGE, "latin");
 
-		AnalysisEngine writer = AnalysisEngineFactory.createEngine(
-				SerializedCasWriter.class,
-				SerializedCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot(),
-				SerializedCasWriter.PARAM_TYPE_SYSTEM_LOCATION, 
-				        aIncludeTypeSystem ? null : testFolder.newFile("typesystem.ser"));
+        AnalysisEngine writer = AnalysisEngineFactory.createEngine(
+                SerializedCasWriter.class,
+                SerializedCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot(),
+                SerializedCasWriter.PARAM_TYPE_SYSTEM_LOCATION, 
+                        aIncludeTypeSystem ? null : testFolder.newFile("typesystem.ser"));
 
-		runPipeline(reader, writer);
+        runPipeline(reader, writer);
 
-		assertTrue(new File(testFolder.getRoot(), "example1.txt.ser").exists());
-	}
+        assertTrue(new File(testFolder.getRoot(), "example1.txt.ser").exists());
+    }
 
-	public void read() throws Exception
-	{
-		CollectionReader reader = CollectionReaderFactory.createReader(
-				SerializedCasReader.class,
-				SerializedCasReader.PARAM_SOURCE_LOCATION, testFolder.getRoot(),
-				SerializedCasReader.PARAM_PATTERNS, "*.ser",
-				SerializedCasReader.PARAM_TYPE_SYSTEM_LOCATION, 
-				        new File(testFolder.getRoot(), "typesystem.ser"));
+    public void read() throws Exception
+    {
+        CollectionReader reader = CollectionReaderFactory.createReader(
+                SerializedCasReader.class,
+                SerializedCasReader.PARAM_SOURCE_LOCATION, testFolder.getRoot(),
+                SerializedCasReader.PARAM_PATTERNS, "*.ser",
+                SerializedCasReader.PARAM_TYPE_SYSTEM_LOCATION, 
+                        new File(testFolder.getRoot(), "typesystem.ser"));
 
-		CAS cas = CasCreationUtils.createCas(createTypeSystemDescription(), null, null);
-		reader.getNext(cas);
+        CAS cas = CasCreationUtils.createCas(createTypeSystemDescription(), null, null);
+        reader.getNext(cas);
 
-		String refText = readFileToString(new File("src/test/resources/texts/example1.txt"));
-		assertEquals(refText, cas.getDocumentText());
-		assertEquals("latin", cas.getDocumentLanguage());
-	}
-	
-//	@Test
-//	public void lenientTest() throws Exception
-//	{
+        String refText = readFileToString(new File("src/test/resources/texts/example1.txt"));
+        assertEquals(refText, cas.getDocumentText());
+        assertEquals("latin", cas.getDocumentLanguage());
+    }
+    
+//    @Test
+//    public void lenientTest() throws Exception
+//    {
 //        TypeSystemDescription tsdMeta = TypeSystemDescriptionFactory
 //                .createTypeSystemDescription("desc.type.metadata");
 //        
@@ -135,28 +134,29 @@ public class SerializedCasWriterReaderTest
 //        // Try to create an annotation with the extra type
 //        AnnotationFS fs = casOut.createAnnotation(casIn.getTypeSystem().getType("Token"), 0, 1);
 //        casOut.addFsToIndexes(fs);
-//	}
-//	
-//	private void upgrade(CAS aCas, TypeSystemDescription aTsd) throws Exception
-//	{
-//	    // Prepare template for new CAS
-//	    CAS newCas = CasCreationUtils.createCas(aTsd, null, null);
+//    }
+//    
+//    private void upgrade(CAS aCas, TypeSystemDescription aTsd) throws Exception
+//    {
+//        // Prepare template for new CAS
+//        CAS newCas = CasCreationUtils.createCas(aTsd, null, null);
 //        CASCompleteSerializer serializer = Serialization.serializeCASComplete((CASImpl) newCas);
-//	    
+//        
 //        // Save old type system
-//	    TypeSystem oldTypeSystem = aCas.getTypeSystem();
-//	    
-//	    // Save old CAS contents
-//	    ByteArrayOutputStream os2 = new ByteArrayOutputStream();
-//	    Serialization.serializeWithCompression(aCas, os2, oldTypeSystem);
+//        TypeSystem oldTypeSystem = aCas.getTypeSystem();
+//        
+//        // Save old CAS contents
+//        ByteArrayOutputStream os2 = new ByteArrayOutputStream();
+//        Serialization.serializeWithCompression(aCas, os2, oldTypeSystem);
 //        
 //        // Prepare CAS with new type system
-//	    Serialization.deserializeCASComplete(serializer, (CASImpl) aCas);
+//        Serialization.deserializeCASComplete(serializer, (CASImpl) aCas);
 //        
 //        // Restore CAS data to new type system
-//	    Serialization.deserializeCAS(aCas, new ByteArrayInputStream(os2.toByteArray()), oldTypeSystem, null);
-//	}
-//	
+//        Serialization.deserializeCAS(aCas, new ByteArrayInputStream(os2.toByteArray()), 
+//            oldTypeSystem, null);
+//    }
+//    
 //    private void upgrade(CAS aCas) throws Exception
 //    {
 //        // Prepare template for new CAS
@@ -174,21 +174,10 @@ public class SerializedCasWriterReaderTest
 //        Serialization.deserializeCASComplete(serializer, (CASImpl) aCas);
 //        
 //        // Restore CAS data to new type system
-//        Serialization.deserializeCAS(aCas, new ByteArrayInputStream(os2.toByteArray()), oldTypeSystem, null);
+//        Serialization.deserializeCAS(aCas, new ByteArrayInputStream(os2.toByteArray()), 
+//            oldTypeSystem, null);
 //    }
 
-    @Before
-    public void setupLogging()
-    {
-        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
-    }
-
     @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
-    }
+    public DkproTestContext testContext = new DkproTestContext();
 }

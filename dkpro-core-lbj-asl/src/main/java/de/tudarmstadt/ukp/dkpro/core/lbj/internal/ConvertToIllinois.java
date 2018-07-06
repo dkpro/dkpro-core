@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2016
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.lbj.internal;
 
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -25,6 +25,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
+
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -54,7 +55,7 @@ public class ConvertToIllinois
         for (Sentence s : select(aJCas, Sentence.class)) {
             for (Token t : selectCovered(Token.class, s)) {
                 tokens[it] = new IntPair(t.getBegin(), t.getEnd());
-                sTokens[it] = t.getCoveredText();
+                sTokens[it] = t.getText();
                 it++;
             }
             sentences[is] = it;

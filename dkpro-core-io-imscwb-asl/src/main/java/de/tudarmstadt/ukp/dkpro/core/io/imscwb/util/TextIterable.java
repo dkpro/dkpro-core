@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2011
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universit√§t Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.imscwb.util;
 
 import java.io.BufferedReader;
@@ -30,7 +30,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.Resource;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 
 public class TextIterable
     implements Iterable<CorpusText>, Iterator<CorpusText>
@@ -82,7 +82,8 @@ public class TextIterable
     }
 
     @Override
-    public CorpusText next(){
+    public CorpusText next()
+    {
         return texts.poll();
     }
 
@@ -133,14 +134,20 @@ public class TextIterable
             if (insideSentence && currentSentence != null) {
                 TabTokenizer tokenizer = new TabTokenizer(line);
 
-                for (int i=0; i<3; i++) {
+                for (int i = 0; i < 3; i++) {
                     if (!tokenizer.hasNext()) {
                         throw new IOException("Ill-formed line: " + line);
                     }
                     switch (i) {
-                        case 0 : currentSentence.addToken(tokenizer.next()); break;
-                        case 1 : currentSentence.addPOS(tokenizer.next()); break;
-                        case 2 : currentSentence.addLemma(tokenizer.next()); break;
+                    case 0:
+                        currentSentence.addToken(tokenizer.next());
+                        break;
+                    case 1:
+                        currentSentence.addPOS(tokenizer.next());
+                        break;
+                    case 2:
+                        currentSentence.addLemma(tokenizer.next());
+                        break;
                     }
                 }
             }
@@ -167,10 +174,8 @@ public class TextIterable
         if (!fileQueue.isEmpty()) {
             currentResource = fileQueue.poll();
             
-            InputStream resolvedStream = ResourceUtils.resolveCompressedInputStream(
-                    currentResource.getInputStream(),
-                    currentResource.getPath()
-            );
+            InputStream resolvedStream = CompressionUtils.getInputStream(currentResource.getPath(),
+                    currentResource.getInputStream());
                 
             r = new BufferedReader(new InputStreamReader(resolvedStream, encoding));
         }

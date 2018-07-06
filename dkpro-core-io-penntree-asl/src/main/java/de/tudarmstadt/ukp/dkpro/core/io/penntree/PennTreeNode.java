@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.penntree;
 
 import java.util.ArrayList;
@@ -25,10 +25,10 @@ import java.util.List;
 public class PennTreeNode
 {
     private PennTreeNode parent;
-	private String label;
-	private List<PennTreeNode> children = new ArrayList<PennTreeNode>();
-	
-	public PennTreeNode getParent()
+    private String label;
+    private List<PennTreeNode> children = new ArrayList<PennTreeNode>();
+    
+    public PennTreeNode getParent()
     {
         return parent;
     }
@@ -39,44 +39,44 @@ public class PennTreeNode
     }
 
     public String getLabel()
-	{
-		return label;
-	}
+    {
+        return label;
+    }
 
-	public void setLabel(String aLabel)
-	{
-		label = aLabel;
-	}
+    public void setLabel(String aLabel)
+    {
+        label = aLabel;
+    }
 
-	public List<PennTreeNode> getChildren()
-	{
-		return children;
-	}
+    public List<PennTreeNode> getChildren()
+    {
+        return children;
+    }
 
-	public void setChildren(List<PennTreeNode> aChildren)
-	{
-		children = aChildren;
-	}
-	
-	public void addChild(PennTreeNode aNode)
-	{
-	    aNode.setParent(this);
-		children.add(aNode);
-	}
-	
-	public boolean isPreTerminal()
-	{
-	    return children.size() == 1 && children.get(0).isTerminal();
-	}
-	
-	public boolean isTerminal()
-	{
-		return children.isEmpty();
-	}
+    public void setChildren(List<PennTreeNode> aChildren)
+    {
+        children = aChildren;
+    }
+    
+    public void addChild(PennTreeNode aNode)
+    {
+        aNode.setParent(this);
+        children.add(aNode);
+    }
+    
+    public boolean isPreTerminal()
+    {
+        return children.size() == 1 && children.get(0).isTerminal();
+    }
+    
+    public boolean isTerminal()
+    {
+        return children.isEmpty();
+    }
 
-	@Override
-	public String toString()
-	{
-		return PennTreeUtils.toPennTree(this);
-	}
+    @Override
+    public String toString()
+    {
+        return PennTreeUtils.toPennTree(this);
+    }
 }

@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *******************************************************************************/
+ **/
 package de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource;
 
 import java.io.File;
@@ -34,13 +34,12 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.Finder;
 public class SharedFinder
     extends Resource_ImplBase
 {
-
     public static final String PARAM_INDEX_PATH = "indexLocation";
-    @ConfigurationParameter(name = PARAM_INDEX_PATH, mandatory=true)
+    @ConfigurationParameter(name = PARAM_INDEX_PATH, mandatory = true)
     private String indexLocation;
 
     public static final String PARAM_NGRAM_LOCATION = "ngramLocation";
-    @ConfigurationParameter(name = PARAM_NGRAM_LOCATION, mandatory=true)
+    @ConfigurationParameter(name = PARAM_NGRAM_LOCATION, mandatory = true)
     private String ngramLocation;
 
     private Finder finder;
@@ -73,5 +72,4 @@ public class SharedFinder
     {
         return finder;
     }
-
 }

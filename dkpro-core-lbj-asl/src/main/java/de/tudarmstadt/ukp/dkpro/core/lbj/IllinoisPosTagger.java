@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2016
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.lbj;
 
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -25,12 +25,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
-import org.apache.commons.lang.reflect.FieldUtils;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -52,37 +53,33 @@ import edu.illinois.cs.cogcomp.pos.POSAnnotator;
 import edu.illinois.cs.cogcomp.pos.lbjava.POSTagger;
 import edu.illinois.cs.cogcomp.pos.lbjava.POSTaggerKnown;
 import edu.illinois.cs.cogcomp.pos.lbjava.POSTaggerUnknown;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Wrapper for the Illinois POS-tagger from the Cognitive Computation Group (CCG).
  */
+@Component(OperationType.PART_OF_SPEECH_TAGGER)
+@ResourceMetaData(name = "Illinois CCG POS-Tagger")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
-        inputs={
+        inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
-       outputs={
+       outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"})
 
 public class IllinoisPosTagger
     extends JCasAnnotator_ImplBase
 {
-	/**
-	 * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-	 * spaming the heap with thousands of strings representing only a few different tags.
-	 *
-	 * Default: {@code true}
-	 */
-	public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-	@ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-	private boolean internTags;
-
     /**
      * Log the tag set(s) when a model is loaded.
      *
      * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
     protected boolean printTagSet;
     
 //    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -97,8 +94,10 @@ public class IllinoisPosTagger
 //    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
 //    private String variant;
     
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
-    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false, defaultValue="classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/en-lbj-pos.map")
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false, 
+            defaultValue = "classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/en-lbj-pos.map")
     private String posMappingLocation;
 
     private ModelProviderBase<Annotator> modelProvider;
@@ -124,7 +123,7 @@ public class IllinoisPosTagger
                     throw new IllegalArgumentException("Only language [en] is supported");
                 }
                 
-                POSAnnotator annotator = new POSAnnotator();
+                POSAnnotator annotator = new POSAnnotator(false);
 
                 SingletonTagset tags = new SingletonTagset(POS.class, "ptb");
 
@@ -169,9 +168,9 @@ public class IllinoisPosTagger
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
-    	CAS cas = aJCas.getCas();
+        CAS cas = aJCas.getCas();
 
-    	modelProvider.configure(cas);
+        modelProvider.configure(cas);
         mappingProvider.configure(cas);
 
         ConvertToIllinois converter = new ConvertToIllinois();
@@ -179,17 +178,17 @@ public class IllinoisPosTagger
 
         // Run tagger
         try {
-            modelProvider.getResource().addView(document);
+            modelProvider.getResource().getView(document);
         }
         catch (AnnotatorException e) {
             throw new IllegalStateException(e);
         }
 
         for (Sentence s : select(aJCas, Sentence.class)) {
-        	// Get tokens from CAS
-        	List<Token> casTokens = selectCovered(aJCas, Token.class, s);
-        	
-        	ConvertToUima.convertPOSs(aJCas, casTokens, document, mappingProvider, internTags);
+            // Get tokens from CAS
+            List<Token> casTokens = selectCovered(aJCas, Token.class, s);
+            
+            ConvertToUima.convertPOSs(aJCas, casTokens, document, mappingProvider);
         }
     }
 }

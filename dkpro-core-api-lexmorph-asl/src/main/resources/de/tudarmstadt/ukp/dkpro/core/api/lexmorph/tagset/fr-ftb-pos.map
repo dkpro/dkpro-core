@@ -1,37 +1,38 @@
 # French Treebank
 
 __META_SOURCE_URL__=http://www.llf.cnrs.fr/Gens/Abeille/guide-morpho-synt.02.pdf
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # A - Adjective
-A=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+A=POS_ADJ
 # ADV - Adverb
-ADV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+ADV=POS_ADV
 # C - Conjunction
-C=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+C=POS_CONJ
 # CL
-CL=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+CL=POS_PRON
 # D - Determiner
-D=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+D=POS_DET
 # ET
-ET=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+ET=POS_X
 # I
-I=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+I=POS_X
 # N
-N=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N
+N=POS_NOUN
 # P - Preposition
-P=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+P=POS_ADP
 # PREF
-PREF=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+PREF=POS_X
 # PRO
-PRO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PRO=POS_PRON
 # PUNC - Punctuation
-PUNC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+PUNC=POS_PUNCT
 # . - Punctuation (Berkeley Parser)
-.=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+.=POS_PUNCT
 # , - Punctuation (Berkeley Parser)
-,=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+,=POS_PUNCT
 # : - Punctuation (Berkeley Parser)
-\:=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+\:=POS_PUNCT
 # V
-V=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+V=POS_VERB
+*=POS_X

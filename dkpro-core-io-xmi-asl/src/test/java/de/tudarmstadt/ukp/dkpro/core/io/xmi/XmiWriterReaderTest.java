@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.xmi;
 
 import static org.apache.commons.io.FileUtils.readFileToString;
@@ -41,51 +41,51 @@ import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class XmiWriterReaderTest
 {
-	@Rule
-	public TemporaryFolder testFolder = new TemporaryFolder();
+    @Rule
+    public TemporaryFolder testFolder = new TemporaryFolder();
 
-	@Test
-	public void test() throws Exception
-	{
-		write();
-		read();
-	}
+    @Test
+    public void test() throws Exception
+    {
+        write();
+        read();
+    }
 
-	public void write() throws Exception
-	{
-		CollectionReader textReader = CollectionReaderFactory.createReader(
-				TextReader.class,
-				ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "src/test/resources/texts",
-				ResourceCollectionReaderBase.PARAM_PATTERNS, new String [] {
-					ResourceCollectionReaderBase.INCLUDE_PREFIX+"*.txt"
-				},
-				ResourceCollectionReaderBase.PARAM_LANGUAGE, "latin");
+    public void write() throws Exception
+    {
+        CollectionReader textReader = CollectionReaderFactory.createReader(
+                TextReader.class,
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "src/test/resources/texts",
+                ResourceCollectionReaderBase.PARAM_PATTERNS, new String [] {
+                    ResourceCollectionReaderBase.INCLUDE_PREFIX + "latin.txt"
+                },
+                ResourceCollectionReaderBase.PARAM_LANGUAGE, "latin");
 
-		AnalysisEngine xmiWriter = AnalysisEngineFactory.createEngine(
-				XmiWriter.class,
-				XmiWriter.PARAM_TARGET_LOCATION, testFolder.getRoot().getPath());
+        AnalysisEngine xmiWriter = AnalysisEngineFactory.createEngine(
+                XmiWriter.class,
+                XmiWriter.PARAM_TARGET_LOCATION, testFolder.getRoot().getPath());
 
-		runPipeline(textReader, xmiWriter);
+        runPipeline(textReader, xmiWriter);
 
-		assertTrue(new File(testFolder.getRoot(), "example1.txt.xmi").exists());
-	}
+        assertTrue(new File(testFolder.getRoot(), "latin.txt.xmi").exists());
+    }
 
-	public void read() throws Exception
-	{
-		CollectionReader xmiReader = CollectionReaderFactory.createReader(
-				XmiReader.class,
-				ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, testFolder.getRoot().getPath(),
-				ResourceCollectionReaderBase.PARAM_PATTERNS, new String [] {
-					ResourceCollectionReaderBase.INCLUDE_PREFIX+"*.xmi"
-				});
+    public void read() throws Exception
+    {
+        CollectionReader xmiReader = CollectionReaderFactory.createReader(
+                XmiReader.class,
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, testFolder.getRoot().getPath(),
+                ResourceCollectionReaderBase.PARAM_PATTERNS, new String [] {
+                    ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.xmi"
+                });
 
-		CAS cas = CasCreationUtils.createCas(createTypeSystemDescription(), null, null);
-		xmiReader.getNext(cas);
+        CAS cas = CasCreationUtils.createCas(createTypeSystemDescription(), null, null);
+        xmiReader.getNext(cas);
 
-		String refText = readFileToString(new File("src/test/resources/texts/example1.txt"));
-		assertEquals(refText, cas.getDocumentText());
-		assertEquals("latin", cas.getDocumentLanguage());
-	}
+        String refText = readFileToString(new File("src/test/resources/texts/latin.txt"));
+        assertEquals(refText, cas.getDocumentText());
+        assertEquals("latin", cas.getDocumentLanguage());
+    }
 
     @Rule
     public DkproTestContext testContext = new DkproTestContext();

@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2015
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.testing.validation.checks;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.validation.Message.Level.ERROR;
@@ -54,7 +54,7 @@ public class DependencyRootTypeCheck
             roots.stream()
                     .filter(dep -> !ROOT.class.equals(dep.getClass()))
                     .forEach(dep -> aMessages.add(new Message(this, ERROR,
-                        "Root dependency by of type [%s]: %s", ROOT.class.getName(), dep)));
+                        "Root dependency is not of type [%s]: %s", ROOT.class.getName(), dep)));
         }
         
         return aMessages.stream().anyMatch(m -> m.level == ERROR);

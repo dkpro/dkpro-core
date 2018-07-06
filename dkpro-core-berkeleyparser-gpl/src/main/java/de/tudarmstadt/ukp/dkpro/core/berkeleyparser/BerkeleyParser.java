@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2014
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,14 +14,13 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.berkeleyparser;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
-import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.apache.uima.util.Level.INFO;
 
 import java.io.IOException;
@@ -30,9 +29,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
 import java.util.zip.GZIPInputStream;
 
-import org.apache.commons.lang.mutable.MutableInt;
+import org.apache.commons.lang3.mutable.MutableInt;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -40,6 +40,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.OperationalProperties;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
@@ -47,6 +48,7 @@ import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -65,17 +67,26 @@ import edu.berkeley.nlp.PCFGLA.ParserData;
 import edu.berkeley.nlp.PCFGLA.TreeAnnotations;
 import edu.berkeley.nlp.syntax.Tree;
 import edu.berkeley.nlp.util.Numberer;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
- * Berkeley Parser annotator . Requires {@link Sentence}s to be annotated before.
+ * Berkeley Parser annotator. Requires {@link Sentence}s to be annotated before.
  *
  * @see CoarseToFineMaxRuleParser
  */
+@Component(OperationType.CONSTITUENCY_PARSER)
+@ResourceMetaData(name = "Berkeley Parser")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @OperationalProperties(multipleDeploymentAllowed = false)
-@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = {
-        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
-        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree" })
+@TypeCapability(
+        inputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, 
+        outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree" })
 public class BerkeleyParser
     extends JCasAnnotator_ImplBase
 {
@@ -94,6 +105,20 @@ public class BerkeleyParser
     protected String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Load the model from this location instead of locating the model automatically.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -103,26 +128,18 @@ public class BerkeleyParser
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
     /**
      * Location of the mapping file for constituent tags to UIMA types.
      */
-    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
+    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CONSTITUENT_MAPPING_LOCATION, mandatory = false)
     protected String constituentMappingLocation;
-
-    /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid spaming
-     * the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
 
     /**
      * Log the tag set(s) when a model is loaded.
@@ -257,7 +274,8 @@ public class BerkeleyParser
 
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
-            List<String> tokenText = toText(tokens);
+            List<String> tokenText = tokens.stream().map(t -> 
+                    t.getText()).collect(Collectors.toList());
             
             List<String> posTags = null;
             if (readPos) {
@@ -280,7 +298,8 @@ public class BerkeleyParser
                 parseOutput = TreeAnnotations.unAnnotateTree(parseOutput, keepFunctionLabels);
             }
 
-            createConstituentAnnotationFromTree(aJCas, parseOutput, null, tokens, new MutableInt(0));
+            createConstituentAnnotationFromTree(aJCas, parseOutput, null, tokens,
+                    new MutableInt(0));
 
             if (writePennTree) {
                 PennTree pTree = new PennTree(aJCas, sentence.getBegin(), sentence.getEnd());
@@ -316,7 +335,8 @@ public class BerkeleyParser
                 Type posTag = posMappingProvider.getTagType(typeName);
                 POS posAnno = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                         token.getEnd());
-                posAnno.setPosValue(internTags ? typeName.intern() : typeName);
+                posAnno.setPosValue(typeName != null ? typeName.intern() : null);
+                POSUtils.assignCoarseValue(posAnno);
                 posAnno.addToIndexes();
                 token.setPos(posAnno);
             }

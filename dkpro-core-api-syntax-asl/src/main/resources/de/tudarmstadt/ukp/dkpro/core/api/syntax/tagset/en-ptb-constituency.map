@@ -2,7 +2,7 @@
 #
 # Penn Treebank syntactic tagset
 
-__META_SOURCE_URL__=http://bulba.sdsu.edu/jeanette/thesis/PennTags.html
+__META_SOURCE_URL__=http://web.mit.edu/6.863/www/PennTreebankTags.html
 
 # == Clause level ==
 # S - simple declarative clause, i.e. one that is not introduced by a (possible empty) subordinating 
@@ -42,7 +42,7 @@ NX=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.NX
 # PP - Prepositional Phrase.
 PP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.PP
 # PRN - Parenthetical
-PRN=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.PRN
+PRN=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.PARN
 # PRT - Particle. Category for words that should be tagged RP. 
 PRT=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.PRT
 # QP - Quantifier Phrase (i.e. complex measure/amount phrase); used within NP.

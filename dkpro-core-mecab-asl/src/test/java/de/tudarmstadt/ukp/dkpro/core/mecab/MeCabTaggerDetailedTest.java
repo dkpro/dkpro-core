@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.mecab;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
@@ -24,6 +24,7 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -32,6 +33,8 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
+import org.junit.Assume;
+import org.junit.Before;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -42,12 +45,18 @@ import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.mecab.type.JapaneseToken;
 
 public class MeCabTaggerDetailedTest {
-
+    @Before
+    public void prepare()
+    {
+        Assume.assumeFalse("No Mecab binaries for Windows: Issue #1122",
+                System.getProperty("os.name").toLowerCase(Locale.US).contains("win"));
+    }
+    
     @Test
     public void testMeCabTagger() throws UIMAException, IOException {
         CollectionReaderDescription reader = createReaderDescription(
                 TextReader.class,
-        		TextReader.PARAM_SOURCE_LOCATION, "src/test/resources",
+                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources",
                 TextReader.PARAM_LANGUAGE, "ja",
                 TextReader.PARAM_PATTERNS, new String[] { "[+]detailedTest.txt" });
 
@@ -70,7 +79,8 @@ public class MeCabTaggerDetailedTest {
 
     private void evaluateSentence(Collection<Sentence> totalFound, JCas jcas) {
         Sentence sent = totalFound.iterator().next();
-        List<JapaneseToken> tokens = JCasUtil.selectCovered(jcas, JapaneseToken.class, sent.getBegin(), sent.getEnd());
+        List<JapaneseToken> tokens = JCasUtil.selectCovered(jcas, JapaneseToken.class,
+                sent.getBegin(), sent.getEnd());
         assertEquals(15, tokens.size());
 
         int token = 0;
@@ -225,7 +235,8 @@ public class MeCabTaggerDetailedTest {
     }
 
     private String getPOS(JCas jcas, Token token) {
-        List<POS> selectCovered = JCasUtil.selectCovered(jcas, POS.class, token.getBegin(), token.getEnd());
+        List<POS> selectCovered = JCasUtil.selectCovered(jcas, POS.class, token.getBegin(),
+                token.getEnd());
         if (selectCovered.size() == 1) {
             return selectCovered.get(0).getPosValue();
         }
@@ -233,7 +244,8 @@ public class MeCabTaggerDetailedTest {
     }
 
     private String getLemma(JCas jcas, Token token) {
-        List<Lemma> selectCovered = JCasUtil.selectCovered(jcas, Lemma.class, token.getBegin(), token.getEnd());
+        List<Lemma> selectCovered = JCasUtil.selectCovered(jcas, Lemma.class, token.getBegin(),
+                token.getEnd());
         if (selectCovered.size() == 1) {
             return selectCovered.get(0).getValue();
         }
@@ -244,8 +256,9 @@ public class MeCabTaggerDetailedTest {
         return token.getCoveredText();
     }
 
-    private Collection<Sentence> getSentences(AnalysisEngine jTagger, JCas jcas) throws AnalysisEngineProcessException,
-            UIMAException, IOException {
+    private Collection<Sentence> getSentences(AnalysisEngine jTagger, JCas jcas)
+        throws AnalysisEngineProcessException, UIMAException, IOException
+    {
 
         jTagger.process(jcas);
         Collection<Sentence> found = JCasUtil.select(jcas, Sentence.class);

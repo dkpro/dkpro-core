@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2015
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 
 package de.tudarmstadt.ukp.dkpro.core.io.rtf;
 
@@ -32,6 +32,8 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.component.CasDumpWriter;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.junit.Test;
+
+import de.tudarmstadt.ukp.dkpro.core.testing.EOLUtils;
 
 /**
  * Test cases for {@link RTFReader}.
@@ -63,7 +65,11 @@ public class RTFReaderTest
                 CasDumpWriter.PARAM_OUTPUT_FILE, output);
 
         SimplePipeline.runPipeline(reader, writer);
-        assertEquals(FileUtils.readFileToString(testDump), FileUtils.readFileToString(output));
+        String reference = FileUtils.readFileToString(testDump, "UTF-8").trim();
+        String actual = FileUtils.readFileToString(output, "UTF-8").trim();
+        reference = EOLUtils.normalizeLineEndings(reference);
+        actual = EOLUtils.normalizeLineEndings(actual);
+        assertEquals(reference, actual);
     }
 
     /**
@@ -89,7 +95,11 @@ public class RTFReaderTest
                 CasDumpWriter.PARAM_OUTPUT_FILE, output);
 
         SimplePipeline.runPipeline(reader, writer);
-        assertEquals(FileUtils.readFileToString(testDump), FileUtils.readFileToString(output));
-
+        
+        String reference = FileUtils.readFileToString(testDump, "UTF-8").trim();
+        String actual = FileUtils.readFileToString(output, "UTF-8").trim();
+        reference = EOLUtils.normalizeLineEndings(reference);
+        actual = EOLUtils.normalizeLineEndings(actual);
+        assertEquals(reference, actual);
     }
 }

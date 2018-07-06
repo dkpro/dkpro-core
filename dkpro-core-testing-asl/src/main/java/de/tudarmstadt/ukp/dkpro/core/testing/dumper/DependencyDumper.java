@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.testing.dumper;
 
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -30,18 +30,17 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * Dump dependencies to screen.
  */
 @TypeCapability(
-    inputs={
+    inputs = {
         "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"})
 public class DependencyDumper
-	extends JCasConsumer_ImplBase
+    extends JCasConsumer_ImplBase
 {
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
-		for (Dependency dep : select(aJCas, Dependency.class)) {
-			System.out.format("%-10s [%s] [%s]%n", dep.getDependencyType(), dep.getGovernor()
-					.getCoveredText(), dep.getDependent().getCoveredText());
-		}
-	}
+    @Override
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
+    {
+        for (Dependency dep : select(aJCas, Dependency.class)) {
+            System.out.format("%-10s [%s] [%s]%n", dep.getDependencyType(),
+                    dep.getGovernor().getCoveredText(), dep.getDependent().getCoveredText());
+        }
+    }
 }

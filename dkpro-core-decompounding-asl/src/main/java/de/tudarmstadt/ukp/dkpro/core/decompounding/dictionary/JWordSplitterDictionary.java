@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *******************************************************************************/
+ **/
 
 package de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary;
 
@@ -34,30 +34,30 @@ import de.abelssoft.tools.persistence.FastObjectSaver;
  * 
  */
 public class JWordSplitterDictionary
-	implements Dictionary
+    implements Dictionary
 {
-	private static final String SERIALIZED_DICT = "/wordsGerman.ser"; // dict inside the JAR
+    private static final String SERIALIZED_DICT = "/wordsGerman.ser"; // dict inside the JAR
 
-	private Set<String> words;
+    private Set<String> words;
 
-	/**
-	 * Constructor for a simple dictionary
-	 */
-	public JWordSplitterDictionary()
-	{
-		try {
-			words = (HashSet<String>) FastObjectSaver.load(SERIALIZED_DICT);
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    /**
+     * Constructor for a simple dictionary
+     */
+    public JWordSplitterDictionary()
+    {
+        try {
+            words = (HashSet<String>) FastObjectSaver.load(SERIALIZED_DICT);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-	@Override
-	public boolean contains(String aWord)
-	{
-		return words.contains(aWord);
-	}
+    @Override
+    public boolean contains(String aWord)
+    {
+        return words.contains(aWord);
+    }
 
     /**
      * Reads the dictionary to set
@@ -68,21 +68,21 @@ public class JWordSplitterDictionary
      * @throws IOException
      *             if an I/O problem occurs.
      */
-	protected Set<String> readFileToSet(BufferedReader aReader)
-		throws IOException
-	{
-		Set<String> words = new HashSet<String>();
-		String line;
-		while ((line = aReader.readLine()) != null) {
-			words.add(line.toLowerCase());
-		}
+    protected Set<String> readFileToSet(BufferedReader aReader)
+        throws IOException
+    {
+        Set<String> words = new HashSet<String>();
+        String line;
+        while ((line = aReader.readLine()) != null) {
+            words.add(line.toLowerCase());
+        }
 
-		return words;
-	}
+        return words;
+    }
 
-	@Override
-	public List<String> getAll()
-	{
-		return new ArrayList<String>(words);
-	}
+    @Override
+    public List<String> getAll()
+    {
+        return new ArrayList<String>(words);
+    }
 }

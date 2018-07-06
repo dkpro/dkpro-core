@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2014
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.matetools;
 
@@ -29,6 +29,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
@@ -68,6 +69,8 @@ public class MateSemanticRoleLabelerTest
     {
         Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 2000000000);
 
+        AssumeResource.assumeResource(MateSemanticRoleLabeler.class, "srl", aLanguage, null);
+        
         AnalysisEngineDescription aggregate;
 
         if (aLanguage == "en") {

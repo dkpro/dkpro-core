@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2012
  * Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.tcf;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
@@ -32,12 +32,15 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
@@ -50,10 +53,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagsetDescription;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import eu.clarin.weblicht.wlfxb.io.TextCorpusStreamedWithReplaceableLayers;
 import eu.clarin.weblicht.wlfxb.io.WLDObjector;
 import eu.clarin.weblicht.wlfxb.io.WLFormatException;
@@ -69,21 +75,25 @@ import eu.clarin.weblicht.wlfxb.tc.api.TokensLayer;
 import eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusLayerTag;
 import eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusStored;
 import eu.clarin.weblicht.wlfxb.xb.WLData;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Writer for the WebLicht TCF format.
- *
  */
-@TypeCapability(inputs = { 
-        "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-        "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain",
-        "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink",
-        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
+@ResourceMetaData(name = "CLARIN-DE WebLicht TCF Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@MimeTypeCapability({MimeTypes.TEXT_TCF})
+@TypeCapability(
+        inputs = { 
+            "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+            "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
+            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+            "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain",
+            "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink",
+            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 public class TcfWriter
     extends JCasFileWriter_ImplBase
 {
@@ -93,8 +103,9 @@ public class TcfWriter
      * Specify the suffix of output files. Default value <code>.tcf</code>. If the suffix is not
      * needed, provide an empty string as value.
      */
-    public static final String PARAM_FILENAME_SUFFIX = "filenameSuffix";
-    @ConfigurationParameter(name = PARAM_FILENAME_SUFFIX, mandatory = true, defaultValue = ".tcf")
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
+    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".tcf")
     private String filenameSuffix;
 
     /**
@@ -414,7 +425,7 @@ public class TcfWriter
         getLogger().debug("Layer [" + TextCorpusLayerTag.SENTENCES.getXmlName() + "]: created");
 
         for (Sentence sentence : select(aJCas, Sentence.class)) {
-            List<eu.clarin.weblicht.wlfxb.tc.api.Token> tokens = new ArrayList<eu.clarin.weblicht.wlfxb.tc.api.Token>();
+            List<eu.clarin.weblicht.wlfxb.tc.api.Token> tokens = new ArrayList<>();
             for (Token token : selectCovered(Token.class, sentence)) {
                 tokens.add(aTokensBeginPositionMap.get(token.getBegin()));
             }
@@ -440,18 +451,23 @@ public class TcfWriter
             }
         }
         
-        dependencyParsingLayer = aTextCorpus.createDependencyParsingLayer(tagSetName, false, true);
+        Optional<Dependency> hasNonBasic = select(aJCas, Dependency.class).stream()
+            .filter(dep -> dep.getFlavor() != null && 
+                    !DependencyFlavor.BASIC.equals(dep.getFlavor()))
+            .findAny();
+        
+        dependencyParsingLayer = aTextCorpus.createDependencyParsingLayer(tagSetName,
+                hasNonBasic.isPresent(), true);
 
         getLogger().debug("Layer [" + TextCorpusLayerTag.PARSING_DEPENDENCY.getXmlName() + "]: created");
         
         for (Sentence s : select(aJCas, Sentence.class)) {
-            List<eu.clarin.weblicht.wlfxb.tc.api.Dependency> deps = new ArrayList<eu.clarin.weblicht.wlfxb.tc.api.Dependency>();
+            List<eu.clarin.weblicht.wlfxb.tc.api.Dependency> deps = new ArrayList<>();
             for (Dependency d : selectCovered(Dependency.class, s)) {
                 eu.clarin.weblicht.wlfxb.tc.api.Dependency dependency = dependencyParsingLayer
                         .createDependency(d.getDependencyType(),
                                 aTokensBeginPositionMap.get(d.getDependent().getBegin()),
                                 aTokensBeginPositionMap.get(d.getGovernor().getBegin()));
-
                 deps.add(dependency);
             }
             if (deps.size() > 0) {
@@ -484,7 +500,7 @@ public class TcfWriter
         for (NamedEntity namedEntity : select(aJCas, NamedEntity.class)) {
             List<Token> tokensInCas = selectCovered(aJCas, Token.class, namedEntity.getBegin(),
                     namedEntity.getEnd());
-            List<eu.clarin.weblicht.wlfxb.tc.api.Token> tokensInTcf = new ArrayList<eu.clarin.weblicht.wlfxb.tc.api.Token>();
+            List<eu.clarin.weblicht.wlfxb.tc.api.Token> tokensInTcf = new ArrayList<>();
             for (Token token : tokensInCas) {
                 tokensInTcf.add(aTokensBeginPositionMap.get(token.getBegin()));
             }
@@ -520,13 +536,14 @@ public class TcfWriter
             List<Reference> refs = new ArrayList<Reference>();
             for (CoreferenceLink link : chain.links()) {
                 // Get covered tokens
-                List<eu.clarin.weblicht.wlfxb.tc.api.Token> tokens = new ArrayList<eu.clarin.weblicht.wlfxb.tc.api.Token>();
+                List<eu.clarin.weblicht.wlfxb.tc.api.Token> tokens = new ArrayList<>();
                 for (Token token : selectCovered(Token.class, link)) {
                     tokens.add(aTokensBeginPositionMap.get(token.getBegin()));
                 }
                 
                 // Create current reference
-                Reference ref = coreferencesLayer.createReference(link.getReferenceType(), tokens, null);
+                Reference ref = coreferencesLayer.createReference(link.getReferenceType(), tokens,
+                        null);
 
                 // Special handling for expletive relations
                 if (REL_TYPE_EXPLETIVE.equals(link.getReferenceRelation())) {

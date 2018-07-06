@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2015
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 
 import java.io.IOException;
@@ -29,7 +29,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 
@@ -53,9 +53,9 @@ public class BratEventAnnotation
     
     private static final Pattern PATTERN = Pattern.compile(
             "(?<ID>E[0-9]+)[\\t]" + 
-            "(?<TYPE>[a-zA-Z_][a-zA-Z0-9_-]+):" +
+            "(?<TYPE>[a-zA-Z0-9_][a-zA-Z0-9_-]+):" +
             "(?<TRIGGER>[ET][0-9]+)" + 
-            "(?<ARGS>( [a-zA-Z_][a-zA-Z0-9_-]+:[ET][0-9]+)*)");
+            "(?<ARGS>( [a-zA-Z_][a-zA-Z0-9_-]+:[ET][0-9]+)*)[ ]*");
     
     private static final String ID = "ID";
     private static final String TYPE = "TYPE";

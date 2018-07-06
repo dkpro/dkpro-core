@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2011
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.api.frequency;
 
 import static org.apache.uima.util.Level.SEVERE;
@@ -31,7 +31,7 @@ public abstract class FrequencyCountResourceBase
     extends Resource_ImplBase
     implements FrequencyCountProvider
 {
-    
+
     /**
      * Scales down the frequencies by the given factor.
      */
@@ -42,64 +42,56 @@ public abstract class FrequencyCountResourceBase
     protected FrequencyCountProvider provider;
 
     @Override
-    public long getFrequency(String phrase)
-        throws IOException
+    public long getFrequency(String phrase) throws IOException
     {
         checkProvider();
         return provider.getFrequency(phrase);
     }
 
     @Override
-    public double getProbability(String phrase)
-        throws IOException
+    public double getProbability(String phrase) throws IOException
     {
         checkProvider();
         return provider.getProbability(phrase);
     }
 
     @Override
-    public double getLogProbability(String phrase)
-        throws IOException
+    public double getLogProbability(String phrase) throws IOException
     {
         checkProvider();
         return provider.getLogProbability(phrase);
     }
-    
+
     @Override
-    public long getNrOfTokens()
-        throws IOException
+    public long getNrOfTokens() throws IOException
     {
         checkProvider();
         return provider.getNrOfTokens();
-    }    
+    }
 
     @Override
-    public long getNrOfNgrams(int n)
-        throws IOException
+    public long getNrOfNgrams(int n) throws IOException
     {
         checkProvider();
         return provider.getNrOfNgrams(n);
     }
-    
+
     @Override
-    public long getNrOfDistinctNgrams(int n)
-        throws IOException
+    public long getNrOfDistinctNgrams(int n) throws IOException
     {
         checkProvider();
         return provider.getNrOfDistinctNgrams(n);
     }
-    
+
     @Override
-    public Iterator<String> getNgramIterator(int n)
-        throws IOException
+    public Iterator<String> getNgramIterator(int n) throws IOException
     {
         checkProvider();
         return provider.getNgramIterator(n);
     }
 
     @Override
-    public String getLanguage()
-        throws IOException
+    public String getLanguage() throws IOException
     {
         checkProvider();
         return provider.getLanguage();
@@ -111,21 +103,22 @@ public abstract class FrequencyCountResourceBase
         checkProvider();
         return provider.getID();
     }
-    
+
     protected abstract void initializeProvider() throws Exception;
-    
-    private void checkProvider(){
-        if(provider == null){
-            try{
+
+    private void checkProvider()
+    {
+        if (provider == null) {
+            try {
                 initializeProvider();
             }
             catch (Exception e) {
-                getLogger().log(SEVERE, "RuntimeException caught when initializing frequency count resource.");
+                getLogger().log(SEVERE,
+                        "RuntimeException caught when initializing frequency count resource.");
                 getLogger().log(SEVERE, e.getLocalizedMessage());
                 getLogger().log(SEVERE, e.getMessage());
                 throw new RuntimeException(e);
             }
         }
     }
-    
 }

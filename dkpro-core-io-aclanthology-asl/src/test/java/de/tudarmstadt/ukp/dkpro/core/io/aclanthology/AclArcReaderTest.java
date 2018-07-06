@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2011
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.aclanthology;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
@@ -39,7 +39,7 @@ public class AclArcReaderTest
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "src/test/resources/acl/",
                 ResourceCollectionReaderBase.PARAM_PATTERNS, "[+]**/*.txt" );
 
-        int i=0;
+        int i = 0;
         for (JCas jcas : new JCasIterable(reader)) {
             DocumentMetaData md = DocumentMetaData.get(jcas);
             System.out.println(md.getDocumentUri());

@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  * 
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.textcat;
 
 import java.util.HashMap;
@@ -22,51 +22,59 @@ import java.util.Map;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.knallgrau.utils.textcat.TextCategorizer;
+
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * <p>Detection based on character n-grams. Uses the <a href="http://textcat.sourceforge.net">Java
  * Text Categorizing Library</a> based on a technique by Cavnar and Trenkle.</p>
  * 
- * <p>References:</p>
+ * <p><b>References</b></p>
  * <ul>
  * <li>Cavnar, W. B. and J. M. Trenkle (1994). N-Gram-Based Text Categorization. 
  * In Proceedings of Third Annual Symposium on Document Analysis and Information Retrieval, 
  * Las Vegas, NV, UNLV Publications/Reprographics, pp. 161-175, 11-13 April 1994.</li></ul>
  */
+@Component(OperationType.LANGUAGE_IDENTIFIER)
+@ResourceMetaData(name = "TextCat Language Identifier (Character N-Gram-based)")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class LanguageIdentifier
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
-	private static final Map<String, String> langName2ISO = new HashMap<String, String>();
-	static {
-		langName2ISO.put("german", "de");
-		langName2ISO.put("english", "en");
-		langName2ISO.put("french", "fr");
-		langName2ISO.put("spanish", "es");
-		langName2ISO.put("italian", "it");
-		langName2ISO.put("swedish", "sv");
-		langName2ISO.put("polish", "pl");
-		langName2ISO.put("dutch", "nl");
-		langName2ISO.put("norwegian", "no");
-		langName2ISO.put("finnish", "fi");
-		langName2ISO.put("albanian", "sq");
-		langName2ISO.put("slovakian", "sk");
-		langName2ISO.put("slovenian", "sl");
-		langName2ISO.put("danish", "da");
-		langName2ISO.put("hungarian", "hu");
-	}
+    private static final Map<String, String> langName2ISO = new HashMap<String, String>();
+    static {
+        langName2ISO.put("german", "de");
+        langName2ISO.put("english", "en");
+        langName2ISO.put("french", "fr");
+        langName2ISO.put("spanish", "es");
+        langName2ISO.put("italian", "it");
+        langName2ISO.put("swedish", "sv");
+        langName2ISO.put("polish", "pl");
+        langName2ISO.put("dutch", "nl");
+        langName2ISO.put("norwegian", "no");
+        langName2ISO.put("finnish", "fi");
+        langName2ISO.put("albanian", "sq");
+        langName2ISO.put("slovakian", "sk");
+        langName2ISO.put("slovenian", "sl");
+        langName2ISO.put("danish", "da");
+        langName2ISO.put("hungarian", "hu");
+    }
 
-	private final TextCategorizer categorizer = new TextCategorizer();
+    private final TextCategorizer categorizer = new TextCategorizer();
 
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
-		String docText = aJCas.getDocumentText();
-		if (docText != null) {
-			String result = categorizer.categorize(docText);
-			aJCas.setDocumentLanguage(langName2ISO.get(result));
-		}
-	}
+    @Override
+    public void process(JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
+        String docText = aJCas.getDocumentText();
+        if (docText != null) {
+            String result = categorizer.categorize(docText);
+            aJCas.setDocumentLanguage(langName2ISO.get(result));
+        }
+    }
 }

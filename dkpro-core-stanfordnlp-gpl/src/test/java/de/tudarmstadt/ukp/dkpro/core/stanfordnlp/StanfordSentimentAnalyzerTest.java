@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2014
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
@@ -39,24 +39,26 @@ import de.tudarmstadt.ukp.dkpro.core.sentiment.type.StanfordSentimentAnnotation;
 @Ignore("https://github.com/dkpro/dkpro-core/issues/779")
 public class StanfordSentimentAnalyzerTest {
 
-	@Test
-	public void testSentiment() throws Exception {
-		CAS cas = CasCreationUtils.createCas(TypeSystemDescriptionFactory.createTypeSystemDescription(), null, null);
-		cas.setDocumentLanguage("en");
-		cas.setDocumentText("I feel very very bad.");
-		Sentence s = new Sentence(cas.getJCas(), 0, cas.getDocumentText().length());
-		s.addToIndexes();
+    @Test
+    public void testSentiment() throws Exception
+    {
+        CAS cas = CasCreationUtils
+                .createCas(TypeSystemDescriptionFactory.createTypeSystemDescription(), null, null);
+        cas.setDocumentLanguage("en");
+        cas.setDocumentText("I feel very very bad.");
+        Sentence s = new Sentence(cas.getJCas(), 0, cas.getDocumentText().length());
+        s.addToIndexes();
 
-		SimplePipeline.runPipeline(cas,
-				AnalysisEngineFactory.createEngineDescription(StanfordSentimentAnalyzer.class),
-				AnalysisEngineFactory.createEngineDescription(CasDumpWriter.class)
-		);
+        SimplePipeline.runPipeline(cas,
+                AnalysisEngineFactory.createEngineDescription(StanfordSentimentAnalyzer.class),
+                AnalysisEngineFactory.createEngineDescription(CasDumpWriter.class)
+        );
 
-		StanfordSentimentAnnotation sentimentAnnotation = JCasUtil.select(cas.getJCas(),
-				StanfordSentimentAnnotation.class).iterator().next();
+        StanfordSentimentAnnotation sentimentAnnotation = JCasUtil.select(cas.getJCas(),
+                StanfordSentimentAnnotation.class).iterator().next();
 
-		// more negative than positive
-		assertTrue(sentimentAnnotation.getNegative() + sentimentAnnotation.getVeryNegative()
-				> sentimentAnnotation.getPositive() + sentimentAnnotation.getVeryPositive());
-	}
+        // more negative than positive
+        assertTrue(sentimentAnnotation.getNegative() + sentimentAnnotation.getVeryNegative()
+                > sentimentAnnotation.getPositive() + sentimentAnnotation.getVeryPositive());
+    }
 }

@@ -1,49 +1,62 @@
 # This is the list of people who have contributed code to the DKPro Core repository.
 #
 # This list is to be used in favor over author attributions in individual files,
-# e.g. via @author tags. 
+# e.g. via @author tags.
 #
 # Code integrated from third parties by others than their original authors may not have any
 # @author tags removed and respective names must not be added to this file. Integration of
 # third party code should be avoided.
 #
+# After the name, one or more mail addresses may be specified in pointy brackets and one or more
+# GitHub IDs may be specified in square brackets.
+#
 # See also https://github.com/dkpro/dkpro-core/blob/master/CONTRIBUTING.md
 
 # Please keep the list sorted.
-    
-Andriy Nadolskyy
-Anil Narassiguing
-Benjamin Herbert
-Carsten Schnober <schnober@ukp.informatik.tu-darmstadt.de>
+
+Andriy Nadolskyy [andriyNadolskyy]
+Anil Narassiguing 
+Anshul Tak [anshul-tak]
+Benjamin Herbert [BenjaminHerbert]
+Beto Boullosa [betoboullosa]
+Carsten Schnober <schnober@ukp.informatik.tu-darmstadt.de> [carschno]
 Cigdem Toprak <cigdem.toprak@gmail.com>
 Delphine Bernhard
-Dr. Judith Eckle-Kohler
-Emily K. Jamison
-Erik-Lân Do Dinh
-Hans-Peter Zorn
-Ivan Habernal
-Jens Haase <je.haase@googlemail.com>
-Johannes Daxenberger
-Johannes Hoffart
-Judith Eckle-Kohler
-Jungi Kim
-Lisa Beinborn <lisa.beinborn@gmail.com>
-Marcel Ackermann <dreamflasher@dreamflasher.de>
-Martin Riedl <riedl.ma@gmail.com>
+Emily K. Jamison [EmilyKJamison]
+Erik-Lân Do Dinh [dodinh]
+Hans-Peter Zorn [hpzorn]
+Ivan Habernal [habernal]
+Jens Haase <je.haase@googlemail.com> [jenshaase]
+Johannes Daxenberger [daxenberger]
+Johannes Hoffart [hoffart]
+Judith Eckle-Kohler [judithek]
+Jungi Kim [yangpa]
+Lisa Beinborn <lisa.beinborn@gmail.com> 
+Majid Laali [mjlaali]
+Mandy Neumann <mandyneumann@gmx.net, mandy.neumann@gesis.org> [neumannm]
+Manuel R. Ciosici [manuelciosici]
+Marcel Ackermann <dreamflasher@dreamflasher.de> [DreamFlasher]
+Mario Juric [mjunsilo]
+Martin Riedl <riedl.ma@gmail.com> [riedlma, langtechUDE]
+Masoud Kiaeeha [maxxkia]
 Mateusz Parzonka
-Nicolai Erbs <nico.erbs@gmail.com>
-Niklas Jakob
-Nils Reimers
-Oliver Ferschke
-Pedro Santos
-Richard Eckart de Castilho <richard.eckart@gmail.com>
-Sebastian Kneise
-Seid Muhie Yimam
+Michael Unterkalmsteiner [mikmakmuk]
+Milen Kouylekov <milen.kouylekov@usit.uio.no> [kouylekov, kouylekov-usit]
+Nicolai Erbs <nico.erbs@gmail.com> [nicolaierbs]
+Niklas Jakob 
+Nils Reimers [nreimers]
+Oliver Ferschke [ferschke]
+Pedro Santos [pedrobisp]
+Richard Eckart de Castilho <richard.eckart@gmail.com> [reckart]
+Sebastian Kneise 
+Seid Muhie Yimam [seyyaw]
 Shuo Yang <s.yang@ishuo.de>
-Silvana Hartmann <hartmann.silvan@gmail.com>
+Silvana Hartmann <hartmann.silvan@gmail.com> [silvanaha]
 Tim Feuerbach
-Tobias Horsmann
-Torsten Zesch
-Tristan Miller
-Zhemin Zhu
+Tobias Horsmann [Horsmann]
+Torsten Zesch [zesch]
+Tristan Miller [logological]
+Uli Fahrer [Tooa]
+Zhemin Zhu 
 Zhi Shen
+

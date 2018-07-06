@@ -1,5 +1,5 @@
 <% 
-import Util;
+import de.tudarmstadt.ukp.dkpro.core.doc.Util;
 import static groovy.json.StringEscapeUtils.escapeJava;
 import org.apache.commons.lang3.StringUtils;
 import groovy.transform.Field;
@@ -9,17 +9,24 @@ import groovy.transform.Field;
 def getName(pom) {
   String name = poms[pom.artifactId.text()].name.text();
   if (name.contains("- IO -")) {
-    return StringUtils.substringAfter(name, "- IO -").trim();
+    name = StringUtils.substringAfter(name, "- IO -").trim();
   }
   else if (name.contains("ASL -")) {
-    return StringUtils.substringAfter(name, "ASL -").trim();
+    name = StringUtils.substringAfter(name, "ASL -").trim();
   }
   else if (name.contains("GPL -")) {
-    return StringUtils.substringAfter(name, "ASL -").trim();
+    name = StringUtils.substringAfter(name, "ASL -").trim();
   }
   else {
-    return name.trim();
+    name = name.trim();
   }
+  
+  // Strip auxiliary information like version, e.g. '(v${solr-solrj.version}) (ASL)'
+  if (name.contains('(')) {
+    name = name[0..(name.indexOf('(')-1)].trim();
+  }
+  
+  return name;
 }
 
 formats.each { id, format -> poms[format.pom.artifactId.text()] = format.pom };
@@ -35,7 +42,11 @@ formats.groupBy { getName(it.value.pom) }
 [[format-${ it.key }]]
 === ${it.key}
 
-[small]#*_Artifact ID:_* __${it.value.artifactId}__#
+****
+[horizontal, role="small"]
+Group{nbsp}ID::             ${it.value.groupId}
+Artifact{nbsp}ID::          ${it.value.artifactId}
+****
 
 <% if (new File(project.basedir, 
     "src/main/asciidoc/format-reference/sectionIntro${it.key}.adoc").exists()) { %>
@@ -46,11 +57,18 @@ include::{include-dir}sectionIntro${it.key}.adoc[]
 [[format-${ it.value.readerClass }]]
 [discrete]
 ==== ${ it.key }Reader
-[small]#*_Reader class:_* __${it.value.readerClass}__#
 
+****
+[horizontal, role="small"]
+Implementation::      ${it.value.readerClass}
+****
+
+.Description
+--
 ++++
 ${Util.preparePassthrough(it.value.readerSpec.metaData.description)}
 ++++
+--
 
 <%
 def paramDecls = it.value.readerSpec.metaData.configurationParameterDeclarations
@@ -60,35 +78,45 @@ def paramValues = it.value.readerSpec.metaData.configurationParameterSettings
     
 if (paramDecls) { 
 %>
-[discrete]
-===== Parameters
+.Parameters
+[horizontal, role="small"]
 <% paramDecls.each { %>
-`${it.key}` (__${it.value[0].type}<% 
+${it.key}::
++
+++++
+${Util.preparePassthrough(it.value[0].description)}
+++++
+<% if (!it.value[0].mandatory) { %>Optional -- <% }
+%>Type: __${it.value[0].type}<% 
 if (it.value[0].multiValued) { %>[]<% } 
-%>__)<%
-if (paramValues[it.key]) { %> = `<%
+%>__ <%
+if (paramValues[it.key]) { %> -- 
+Default value: `<%
 out.print escapeJava((paramValues[it.key][0].value != null ? 
     paramValues[it.key][0].value : 'null') as String).replaceAll('`','{backtick}')   
-%>` <% } 
-if (!it.value[0].mandatory) { %> [optional]<% } 
-%>::
-+ 
-++++
-${it.value[0].description}
-++++
+%>` <% } %>
 <% } // paramDecls.each %>
 <% } // if (paramDecls) %>
 
 <%
+def mimetypes = it.value.readerSpec.collectionReaderMetaData?.capabilities?.collect { 
+        it.mimeTypesSupported }.flatten().sort().unique();
 def outputs = it.value.readerSpec.collectionReaderMetaData?.capabilities?.collect { 
         it.outputs?.collect { it.name  } }.flatten().sort().unique();
-
-if (outputs) {
 %>
-[discrete]
-===== Outputs
-[cols="h,v"]
+
+.Capabilities
+[cols="1h,2v", role="small"]
 |====
+| Media types 
+| <% 
+if (mimetypes) { 
+  mimetypes.each { out.println it };
+} else { 
+  out.println '__none specified__';
+}
+%>
+
 | Outputs
 | <% 
 if (outputs) { 
@@ -98,8 +126,6 @@ if (outputs) {
 }
 %>
 |====
-<% } // outputs %>
-
 <% } // if (it.value.readerSpec) %>
 
 <% if (it.value.writerSpec) { %>
@@ -107,11 +133,17 @@ if (outputs) {
 [discrete]
 ==== ${ it.key }Writer
 
-[small]#*_Writer class:_* __${it.value.writerClass}__#
+****
+[horizontal, role="small"]
+Implementation::      ${it.value.writerClass}
+****
 
+.Description
+--
 ++++
 ${Util.preparePassthrough(it.value.writerSpec.metaData.description)}
 ++++
+--
 
 <%
 def paramDecls = it.value.writerSpec.metaData.configurationParameterDeclarations
@@ -121,36 +153,45 @@ def paramValues = it.value.writerSpec.metaData.configurationParameterSettings
     
 if (paramDecls) { 
 %>
-[discrete]
-===== Parameters
+.Parameters
+[horizontal, role="small"]
 <% paramDecls.each { %>
-`${it.key}` (__${it.value[0].type}<% 
+${it.key}::
++
+++++
+${Util.preparePassthrough(it.value[0].description)}
+++++
+<% if (!it.value[0].mandatory) { %>Optional -- <% }
+%>Type: __${it.value[0].type}<% 
 if (it.value[0].multiValued) { %>[]<% } 
-%>__)<%
-if (paramValues[it.key]) { %> = `<%
+%>__ <%
+if (paramValues[it.key]) { %> -- 
+Default value: `<%
 out.print escapeJava((paramValues[it.key][0].value != null ? 
     paramValues[it.key][0].value : 'null') as String).replaceAll('`','{backtick}')   
-%>` <% } 
-if (!it.value[0].mandatory) { %> [optional]<% } 
-%>::
-+ 
-++++
-${it.value[0].description}
-++++
+%>` <% } %>
 <% } // paramDecls.each %>
 <% } // if (paramDecls) %>
 
 <%
+def mimetypes = it.value.writerSpec.analysisEngineMetaData?.capabilities?.collect { 
+        it.mimeTypesSupported }.flatten().sort().unique();
 def inputs = it.value.writerSpec.analysisEngineMetaData?.capabilities?.collect { 
         it.inputs?.collect { it.name  } }.flatten().sort().unique();
-
-if (inputs) {
 %>
-[discrete]
-===== Inputs
-[cols="h,v"]
+.Capabilities
+[cols="1h,2v", role="small"]
 |====
-| Inputs 
+| Media types 
+| <% 
+if (mimetypes) { 
+  mimetypes.each { out.println it };
+} else { 
+  out.println '__none specified__';
+}
+%>
+
+| Inputs
 | <% 
 if (inputs) { 
   inputs.each { out.println Util.typeLink(it) };
@@ -159,8 +200,6 @@ if (inputs) {
 }
 %>
 |====
-<% } // inputs %>
-
 <% } // if (it.value.writerSpec) %>
 
 <% } // format %>

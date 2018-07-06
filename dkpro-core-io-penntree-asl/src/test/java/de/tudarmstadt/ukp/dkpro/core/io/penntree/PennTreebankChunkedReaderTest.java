@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2014
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,11 +14,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.penntree;
 
+import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
-import static org.apache.uima.fit.util.JCasUtil.*;
 
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
@@ -52,13 +52,14 @@ public class PennTreebankChunkedReaderTest
     {
         JCas jCas = readTestFile("generalTest.pos");
 
-        String[] posOriginal = new String[] { "DT", "NN", "IN", "JJ", "NNS", "VBG", "IN", "NNP",
-                "NNP", "NNP", "VBD", "PRP", "VBZ", "VBN", "DT", "$", "CD", "CD", "NN", "NN", "IN",
-                "JJS", "IN", "NNP", "NNP", "NNP", "POS", "NN", "CC", "NN", "NNS", "." };
+        String[] posOriginal = { "DT", "NN", "IN", "JJ", "NNS", "VBG", "IN", "NNP", "NNP", "NNP",
+                "VBD", "PRP", "VBZ", "VBN", "DT", "$", "CD", "CD", "NN", "NN", "IN", "JJS", "IN",
+                "NNP", "NNP", "NNP", "POS", "NN", "CC", "NN", "NNS", "." };
 
-        String[] posMapped = new String[] { "ART", "NN", "PP", "ADJ", "NN", "V", "PP", "NP", "NP",
-                "NP", "V", "PR", "V", "V", "ART", "O", "CARD", "CARD", "NN", "NN", "PP", "ADJ",
-                "PP", "NP", "NP", "NP", "O", "NN", "CONJ", "NN", "NN", "PUNC" };
+        String[] posMapped = { "POS_DET", "POS_NOUN", "POS_ADP", "POS_ADJ", "POS_NOUN", "POS_VERB", "POS_ADP", "POS_PROPN", "POS_PROPN",
+                "POS_PROPN", "POS_VERB", "POS_PRON", "POS_VERB", "POS_VERB", "POS_DET", "POS_PUNCT", "POS_NUM", "POS_NUM", "POS_NOUN",
+                "POS_NOUN", "POS_ADP", "POS_ADJ", "POS_ADP", "POS_PROPN", "POS_PROPN", "POS_PROPN", "POS_X", "POS_NOUN", "POS_CONJ", "POS_NOUN",
+                "POS_NOUN", "POS_PUNCT" };
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jCas, POS.class));
     }
@@ -69,10 +70,10 @@ public class PennTreebankChunkedReaderTest
     {
         JCas jCas = readTestFile("generalTest.pos");
 
-        String[] tokens = new String[] { "A", "consortium", "of", "private", "investors",
-                "operating", "as", "LJH", "Funding", "Co.", "said", "it", "has", "made", "a", "$",
-                "409", "million", "cash", "bid", "for", "most", "of", "L.J.", "Hooker", "Corp.",
-                "'s", "real-estate", "and", "shopping-center", "holdings", "." };
+        String[] tokens = { "A", "consortium", "of", "private", "investors", "operating", "as",
+                "LJH", "Funding", "Co.", "said", "it", "has", "made", "a", "$", "409", "million",
+                "cash", "bid", "for", "most", "of", "L.J.", "Hooker", "Corp.", "'s", "real-estate",
+                "and", "shopping-center", "holdings", "." };
 
         AssertAnnotations.assertToken(tokens, select(jCas, Token.class));
     }
@@ -83,9 +84,9 @@ public class PennTreebankChunkedReaderTest
     {
         JCas jcas = readTestFile("erroneouslyJoinedTokensAndTheirTags.pos");
 
-        String[] posOriginal = new String[] { "DT", "NNS", "NNS" };
+        String[] posOriginal = { "DT", "NNS", "NNS" };
 
-        String[] posMapped = new String[] { "ART", "NN", "NN" };
+        String[] posMapped = { "POS_DET", "POS_NOUN", "POS_NOUN" };
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
     }
@@ -96,7 +97,8 @@ public class PennTreebankChunkedReaderTest
     {
         JCas jcas = readTestFile("generalTest.pos");
 
-        String[] chunks = new String[] { "[  0, 12]Chunk(null) (A consortium)",
+        String[] chunks = { 
+                "[  0, 12]Chunk(null) (A consortium)",
                 "[ 16, 33]Chunk(null) (private investors)",
                 "[ 47, 62]Chunk(null) (LJH Funding Co.)", "[ 68, 70]Chunk(null) (it)",
                 "[ 80,104]Chunk(null) (a $ 409 million cash bid)", "[109,113]Chunk(null) (most)",
@@ -115,9 +117,9 @@ public class PennTreebankChunkedReaderTest
     {
         JCas jcas = readTestFile("severalPOSToken.pos");
 
-        String[] posOriginal = new String[] { "VBG", "NN" };
+        String[] posOriginal = { "VBG", "NN" };
 
-        String[] posMapped = new String[] { "V", "NN" };
+        String[] posMapped = { "POS_VERB", "POS_NOUN" };
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
     }

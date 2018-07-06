@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,19 +14,19 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *******************************************************************************/
-
+ */
 package de.tudarmstadt.ukp.dkpro.core.decompounding.ranking;
+
+import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.Assert;
-
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundedWord;
@@ -34,18 +34,26 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundingTree;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.trie.ValueNode;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.Finder;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.LuceneIndexer;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class FrequencyBasedTest
 {
-
-    static File source = new File("src/test/resources/ranking/n-grams");
-    static File index = new File("target/test/index");
-    static File jWeb1T = new File("src/test/resources/web1t/de");
+    private static File source;
+    private static File jWeb1T;
+    
+    private static File testOutput;
+    private static File index;
 
     @BeforeClass
     public static void createIndex()
         throws Exception
     {
+        source = new File("src/test/resources/ranking/n-grams");
+        jWeb1T = new File("src/test/resources/web1t/de");
+        
+        testOutput = new File("target/test-output/FrequencyBasedTest");
+        index = new File(testOutput, "index");
+        
         index.mkdirs();
 
         LuceneIndexer indexer = new LuceneIndexer(source, index);
@@ -56,47 +64,48 @@ public class FrequencyBasedTest
     public void testRankList()
         throws IOException
     {
-        FrequencyGeometricMeanRanker ranker = new FrequencyGeometricMeanRanker(new Finder(index,
-                jWeb1T));
+        try (Finder finder = new Finder(index, jWeb1T)) {
+            FrequencyGeometricMeanRanker ranker = new FrequencyGeometricMeanRanker(finder);
 
-        List<DecompoundedWord> list = new ArrayList<DecompoundedWord>();
-        DecompoundedWord s1 = DecompoundedWord.createFromString("Aktionsplan");
-        list.add(s1);
-        DecompoundedWord s2 = DecompoundedWord.createFromString("Akt+ion(s)+plan");
-        list.add(s2);
-        DecompoundedWord s3 = DecompoundedWord.createFromString("Aktion(s)+plan");
-        list.add(s3);
+            List<DecompoundedWord> list = new ArrayList<DecompoundedWord>();
+            DecompoundedWord s1 = DecompoundedWord.createFromString("Aktionsplan");
+            list.add(s1);
+            DecompoundedWord s2 = DecompoundedWord.createFromString("Akt+ion(s)+plan");
+            list.add(s2);
+            DecompoundedWord s3 = DecompoundedWord.createFromString("Aktion(s)+plan");
+            list.add(s3);
 
-        List<DecompoundedWord> result = ranker.rank(list);
-        Assert.assertEquals(s3, result.get(0));
+            List<DecompoundedWord> result = ranker.rank(list);
+            assertEquals(s3, result.get(0));
 
-        Assert.assertEquals(s3, ranker.highestRank(list));
+            assertEquals(s3, ranker.highestRank(list));
 
-        list.clear();
-        s1 = DecompoundedWord.createFromString("einfuhr+zoll");
-        s2 = DecompoundedWord.createFromString("ein+fuhr+zoll");
-        list.add(s1);
-        list.add(s2);
-
+            list.clear();
+            s1 = DecompoundedWord.createFromString("einfuhr+zoll");
+            s2 = DecompoundedWord.createFromString("ein+fuhr+zoll");
+            list.add(s1);
+            list.add(s2);
+        }
     }
 
     @Test
     public void testRankTree()
         throws IOException
     {
-        FrequencyGeometricMeanRanker ranker = new FrequencyGeometricMeanRanker(new Finder(index,
-                jWeb1T));
+        try (Finder finder = new Finder(index, jWeb1T)) {
+            FrequencyGeometricMeanRanker ranker = new FrequencyGeometricMeanRanker(finder);
 
-        DecompoundedWord s1 = DecompoundedWord.createFromString("Aktionsplan");
-        DecompoundedWord s2 = DecompoundedWord.createFromString("Akt+ion(s)+plan");
-        DecompoundedWord s3 = DecompoundedWord.createFromString("Aktion(s)+plan");
-
-        DecompoundingTree tree = new DecompoundingTree(s1);
-        tree.getRoot().addChild(new ValueNode<DecompoundedWord>(s2));
-        tree.getRoot().addChild(new ValueNode<DecompoundedWord>(s3));
-
-        DecompoundedWord result = ranker.highestRank(tree);
-        Assert.assertEquals(s3, result);
+            DecompoundedWord s1 = DecompoundedWord.createFromString("Aktionsplan");
+            DecompoundedWord s2 = DecompoundedWord.createFromString("Akt+ion(s)+plan");
+            DecompoundedWord s3 = DecompoundedWord.createFromString("Aktion(s)+plan");
+    
+            DecompoundingTree tree = new DecompoundingTree(s1);
+            tree.getRoot().addChild(new ValueNode<DecompoundedWord>(s2));
+            tree.getRoot().addChild(new ValueNode<DecompoundedWord>(s3));
+    
+            DecompoundedWord result = ranker.highestRank(tree);
+            assertEquals(s3, result);
+        }
     }
 
     @AfterClass
@@ -113,4 +122,7 @@ public class FrequencyBasedTest
 
         index.delete();
     }
+    
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }

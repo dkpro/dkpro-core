@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,14 +14,17 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.maltparser;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.*;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertDependencies;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagset;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagsetMapping;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.util.JCasUtil;
@@ -39,8 +42,6 @@ import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
-/**
- */
 public class MaltParserTest
 {
     // /**
@@ -153,24 +154,24 @@ public class MaltParserTest
                 + "contains as many constituents and dependencies as possible .");
 
         String[] dependencies = {
-                "[  0,  2]Dependency(nsubj) D[0,2](We) G[3,7](need)",
-                "[  3,  7]ROOT(ROOT) D[3,7](need) G[3,7](need)",
-                "[  8,  9]Dependency(det) D[8,9](a) G[35,43](sentence)",
-                "[ 10, 14]Dependency(advmod) D[10,14](very) G[15,26](complicated)",
-                "[ 15, 26]Dependency(amod) D[15,26](complicated) G[35,43](sentence)",
-                "[ 27, 34]Dependency(nn) D[27,34](example) G[35,43](sentence)",
-                "[ 35, 43]Dependency(dobj) D[35,43](sentence) G[3,7](need)",
-                "[ 44, 45]Dependency(punct) D[44,45](,) G[35,43](sentence)",
-                "[ 46, 51]Dependency(nsubj) D[46,51](which) G[52,60](contains)",
-                "[ 52, 60]Dependency(rcmod) D[52,60](contains) G[35,43](sentence)",
-                "[ 61, 63]Dependency(prep) D[61,63](as) G[52,60](contains)",
-                "[ 64, 68]Dependency(amod) D[64,68](many) G[69,81](constituents)",
-                "[ 69, 81]Dependency(pobj) D[69,81](constituents) G[61,63](as)",
-                "[ 82, 85]Dependency(cc) D[82,85](and) G[69,81](constituents)",
-                "[ 86, 98]Dependency(conj) D[86,98](dependencies) G[69,81](constituents)",
-                "[ 99,101]Dependency(prep) D[99,101](as) G[69,81](constituents)",
-                "[102,110]Dependency(pobj) D[102,110](possible) G[99,101](as)",
-                "[111,112]Dependency(punct) D[111,112](.) G[3,7](need)" };
+                "[  0,  2]Dependency(nsubj,basic) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(ROOT,basic) D[3,7](need) G[3,7](need)",
+                "[  8,  9]Dependency(det,basic) D[8,9](a) G[35,43](sentence)",
+                "[ 10, 14]Dependency(advmod,basic) D[10,14](very) G[15,26](complicated)",
+                "[ 15, 26]Dependency(amod,basic) D[15,26](complicated) G[35,43](sentence)",
+                "[ 27, 34]Dependency(nn,basic) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]Dependency(dobj,basic) D[35,43](sentence) G[3,7](need)",
+                "[ 44, 45]Dependency(punct,basic) D[44,45](,) G[35,43](sentence)",
+                "[ 46, 51]Dependency(nsubj,basic) D[46,51](which) G[52,60](contains)",
+                "[ 52, 60]Dependency(rcmod,basic) D[52,60](contains) G[35,43](sentence)",
+                "[ 61, 63]Dependency(prep,basic) D[61,63](as) G[52,60](contains)",
+                "[ 64, 68]Dependency(amod,basic) D[64,68](many) G[69,81](constituents)",
+                "[ 69, 81]Dependency(pobj,basic) D[69,81](constituents) G[61,63](as)",
+                "[ 82, 85]Dependency(cc,basic) D[82,85](and) G[69,81](constituents)",
+                "[ 86, 98]Dependency(conj,basic) D[86,98](dependencies) G[69,81](constituents)",
+                "[ 99,101]Dependency(prep,basic) D[99,101](as) G[69,81](constituents)",
+                "[102,110]Dependency(pobj,basic) D[102,110](possible) G[99,101](as)",
+                "[111,112]Dependency(punct,basic) D[111,112](.) G[3,7](need)" };
 
         String[] posTags = { "#", "$", "''", "(", ")", ",", ".", ":", "CC", "CD",
                 "DT", "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNP", "NNPS", "NNS",
@@ -184,7 +185,7 @@ public class MaltParserTest
                 "pcomp", "pobj", "poss", "possessive", "preconj", "pred", "predet", "prep", "prt",
                 "punct", "purpcl", "quantmod", "rcmod", "rel", "tmod", "xcomp" };
 
-        String[] unmappedPos = { "$", "PRT" };
+        String[] unmappedPos = { "PRT" };
 
         assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
         assertTagset(MaltParser.class, POS.class, "ptb", posTags, jcas);
@@ -202,24 +203,24 @@ public class MaltParserTest
                 + "contains as many constituents and dependencies as possible .");
 
         String[] dependencies = {
-                "[  0,  2]Dependency(nsubj) D[0,2](We) G[3,7](need)",
-                "[  3,  7]ROOT(ROOT) D[3,7](need) G[3,7](need)",
-                "[  8,  9]Dependency(det) D[8,9](a) G[35,43](sentence)",
-                "[ 10, 14]Dependency(advmod) D[10,14](very) G[15,26](complicated)",
-                "[ 15, 26]Dependency(amod) D[15,26](complicated) G[35,43](sentence)",
-                "[ 27, 34]Dependency(nn) D[27,34](example) G[35,43](sentence)",
-                "[ 35, 43]Dependency(dobj) D[35,43](sentence) G[3,7](need)",
-                "[ 44, 45]Dependency(punct) D[44,45](,) G[35,43](sentence)",
-                "[ 46, 51]Dependency(nsubj) D[46,51](which) G[52,60](contains)",
-                "[ 52, 60]Dependency(rcmod) D[52,60](contains) G[35,43](sentence)",
-                "[ 61, 63]Dependency(prep) D[61,63](as) G[52,60](contains)",
-                "[ 64, 68]Dependency(amod) D[64,68](many) G[69,81](constituents)",
-                "[ 69, 81]Dependency(pobj) D[69,81](constituents) G[61,63](as)",
-                "[ 82, 85]Dependency(cc) D[82,85](and) G[69,81](constituents)",
-                "[ 86, 98]Dependency(conj) D[86,98](dependencies) G[69,81](constituents)",
-                "[ 99,101]Dependency(prep) D[99,101](as) G[69,81](constituents)",
-                "[102,110]Dependency(pobj) D[102,110](possible) G[99,101](as)",
-                "[111,112]Dependency(punct) D[111,112](.) G[3,7](need)" };
+                "[  0,  2]Dependency(nsubj,basic) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(ROOT,basic) D[3,7](need) G[3,7](need)",
+                "[  8,  9]Dependency(det,basic) D[8,9](a) G[35,43](sentence)",
+                "[ 10, 14]Dependency(advmod,basic) D[10,14](very) G[15,26](complicated)",
+                "[ 15, 26]Dependency(amod,basic) D[15,26](complicated) G[35,43](sentence)",
+                "[ 27, 34]Dependency(nn,basic) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]Dependency(dobj,basic) D[35,43](sentence) G[3,7](need)",
+                "[ 44, 45]Dependency(punct,basic) D[44,45](,) G[35,43](sentence)",
+                "[ 46, 51]Dependency(nsubj,basic) D[46,51](which) G[52,60](contains)",
+                "[ 52, 60]Dependency(rcmod,basic) D[52,60](contains) G[35,43](sentence)",
+                "[ 61, 63]Dependency(prep,basic) D[61,63](as) G[52,60](contains)",
+                "[ 64, 68]Dependency(amod,basic) D[64,68](many) G[69,81](constituents)",
+                "[ 69, 81]Dependency(pobj,basic) D[69,81](constituents) G[61,63](as)",
+                "[ 82, 85]Dependency(cc,basic) D[82,85](and) G[69,81](constituents)",
+                "[ 86, 98]Dependency(conj,basic) D[86,98](dependencies) G[69,81](constituents)",
+                "[ 99,101]Dependency(prep,basic) D[99,101](as) G[69,81](constituents)",
+                "[102,110]Dependency(pobj,basic) D[102,110](possible) G[99,101](as)",
+                "[111,112]Dependency(punct,basic) D[111,112](.) G[3,7](need)" };
 
         String[] posTags = { "#", "$", "''", "(", ")", ",", ".", ":", "CC", "CD",
                 "DT", "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNP", "NNPS", "NNS",
@@ -233,7 +234,7 @@ public class MaltParserTest
                 "pcomp", "pobj", "poss", "possessive", "preconj", "pred", "predet", "prep", "prt",
                 "punct", "purpcl", "quantmod", "rcmod", "rel", "tmod", "xcomp" };
 
-        String[] unmappedPos = { "$", "PRT" };
+        String[] unmappedPos = { "PRT" };
 
         assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
         //assertTagset(OpenNlpPosTagger.class, POS.class, "ptb", posTags, jcas);
@@ -252,24 +253,24 @@ public class MaltParserTest
                 + "contains as many constituents and dependencies as possible .");
 
         String[] dependencies = {
-                "[  0,  2]Dependency(nsubj) D[0,2](We) G[3,7](need)",
-                "[  3,  7]ROOT(ROOT) D[3,7](need) G[3,7](need)",
-                "[  8,  9]Dependency(det) D[8,9](a) G[35,43](sentence)",
-                "[ 10, 14]Dependency(advmod) D[10,14](very) G[15,26](complicated)",
-                "[ 15, 26]Dependency(amod) D[15,26](complicated) G[35,43](sentence)",
-                "[ 27, 34]Dependency(nn) D[27,34](example) G[35,43](sentence)",
-                "[ 35, 43]Dependency(dobj) D[35,43](sentence) G[3,7](need)",
-                "[ 44, 45]Dependency(punct) D[44,45](,) G[35,43](sentence)",
-                "[ 46, 51]Dependency(nsubj) D[46,51](which) G[52,60](contains)",
-                "[ 52, 60]Dependency(rcmod) D[52,60](contains) G[35,43](sentence)",
-                "[ 61, 63]Dependency(prep) D[61,63](as) G[52,60](contains)",
-                "[ 64, 68]Dependency(amod) D[64,68](many) G[69,81](constituents)",
-                "[ 69, 81]Dependency(pobj) D[69,81](constituents) G[61,63](as)",
-                "[ 82, 85]Dependency(cc) D[82,85](and) G[69,81](constituents)",
-                "[ 86, 98]Dependency(conj) D[86,98](dependencies) G[69,81](constituents)",
-                "[ 99,101]Dependency(prep) D[99,101](as) G[69,81](constituents)",
-                "[102,110]Dependency(pobj) D[102,110](possible) G[99,101](as)",
-                "[111,112]Dependency(punct) D[111,112](.) G[3,7](need)" };
+                "[  0,  2]Dependency(nsubj,basic) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(ROOT,basic) D[3,7](need) G[3,7](need)",
+                "[  8,  9]Dependency(det,basic) D[8,9](a) G[35,43](sentence)",
+                "[ 10, 14]Dependency(advmod,basic) D[10,14](very) G[15,26](complicated)",
+                "[ 15, 26]Dependency(amod,basic) D[15,26](complicated) G[35,43](sentence)",
+                "[ 27, 34]Dependency(nn,basic) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]Dependency(dobj,basic) D[35,43](sentence) G[3,7](need)",
+                "[ 44, 45]Dependency(punct,basic) D[44,45](,) G[35,43](sentence)",
+                "[ 46, 51]Dependency(nsubj,basic) D[46,51](which) G[52,60](contains)",
+                "[ 52, 60]Dependency(rcmod,basic) D[52,60](contains) G[35,43](sentence)",
+                "[ 61, 63]Dependency(prep,basic) D[61,63](as) G[52,60](contains)",
+                "[ 64, 68]Dependency(amod,basic) D[64,68](many) G[69,81](constituents)",
+                "[ 69, 81]Dependency(pobj,basic) D[69,81](constituents) G[61,63](as)",
+                "[ 82, 85]Dependency(cc,basic) D[82,85](and) G[69,81](constituents)",
+                "[ 86, 98]Dependency(conj,basic) D[86,98](dependencies) G[69,81](constituents)",
+                "[ 99,101]Dependency(prep,basic) D[99,101](as) G[69,81](constituents)",
+                "[102,110]Dependency(pobj,basic) D[102,110](possible) G[99,101](as)",
+                "[111,112]Dependency(punct,basic) D[111,112](.) G[3,7](need)" };
 
         String[] posTags = { "#", "$", "''", "(", ")", ",", ".", ":", "CC", "CD",
                 "DT", "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNP", "NNPS", "NNS",
@@ -283,12 +284,12 @@ public class MaltParserTest
                 "pcomp", "pobj", "poss", "possessive", "preconj", "pred", "predet", "prep", "prt",
                 "punct", "purpcl", "quantmod", "rcmod", "rel", "tmod", "xcomp" };
 
-        String[] unmappedPos = { "$", "PRT" };
+        String[] unmappedPos = { "PRT" };
 
         assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
         // There are some minor differences between the tags produced by the POS tagger and the
-        // tags expected by the parser model. We need a better test here that makes these differences
-        // more visible and at the same time doesn't fail.
+        // tags expected by the parser model. We need a better test here that makes these 
+        // differences more visible and at the same time doesn't fail.
         //assertTagset(OpenNlpPosTagger.class, POS.class, "ptb", posTags, jcas);
         assertTagset(MaltParser.class, POS.class, "ptb", posTags, jcas);
         assertTagsetMapping(MaltParser.class, POS.class, "ptb", unmappedPos, jcas);
@@ -312,24 +313,24 @@ public class MaltParserTest
                         + "zawiera tak wiele składników i zależności , jak to możliwe .");
 
         String[] dependencies = {
-                "[  0,  6]ROOT(ROOT) D[0,6](Musimy) G[0,6](Musimy)",
-                "[  7, 13]Dependency(adjunct) D[7,13](bardzo) G[28,36](przykład)",
-                "[ 14, 27]Dependency(mwe) D[14,27](skomplikowany) G[7,13](bardzo)",
-                "[ 28, 36]Dependency(pred) D[28,36](przykład) G[0,6](Musimy)",
-                "[ 37, 43]Dependency(mwe) D[37,43](zdanie) G[28,36](przykład)",
-                "[ 44, 45]Dependency(punct) D[44,45](,) G[28,36](przykład)",
-                "[ 46, 51]Dependency(pred) D[46,51](które) G[44,45](,)",
-                "[ 52, 59]Dependency(pred) D[52,59](zawiera) G[46,51](które)",
-                "[ 60, 63]Dependency(mwe) D[60,63](tak) G[52,59](zawiera)",
-                "[ 64, 69]Dependency(punct) D[64,69](wiele) G[52,59](zawiera)",
-                "[ 70, 80]Dependency(pred) D[70,80](składników) G[64,69](wiele)",
-                "[ 81, 82]Dependency(mwe) D[81,82](i) G[70,80](składników)",
-                "[ 83, 93]Dependency(punct) D[83,93](zależności) G[70,80](składników)",
-                "[ 94, 95]Dependency(punct) D[94,95](,) G[100,102](to)",
-                "[ 96, 99]Dependency(mwe) D[96,99](jak) G[100,102](to)",
-                "[100,102]Dependency(comp_fin) D[100,102](to) G[83,93](zależności)",
-                "[103,110]Dependency(mwe) D[103,110](możliwe) G[100,102](to)",
-                "[111,112]Dependency(punct) D[111,112](.) G[100,102](to)" };
+                "[  0,  6]ROOT(ROOT,basic) D[0,6](Musimy) G[0,6](Musimy)",
+                "[  7, 13]Dependency(adjunct,basic) D[7,13](bardzo) G[28,36](przykład)",
+                "[ 14, 27]Dependency(mwe,basic) D[14,27](skomplikowany) G[7,13](bardzo)",
+                "[ 28, 36]Dependency(pred,basic) D[28,36](przykład) G[0,6](Musimy)",
+                "[ 37, 43]Dependency(mwe,basic) D[37,43](zdanie) G[28,36](przykład)",
+                "[ 44, 45]Dependency(punct,basic) D[44,45](,) G[28,36](przykład)",
+                "[ 46, 51]Dependency(pred,basic) D[46,51](które) G[44,45](,)",
+                "[ 52, 59]Dependency(pred,basic) D[52,59](zawiera) G[46,51](które)",
+                "[ 60, 63]Dependency(mwe,basic) D[60,63](tak) G[52,59](zawiera)",
+                "[ 64, 69]Dependency(punct,basic) D[64,69](wiele) G[52,59](zawiera)",
+                "[ 70, 80]Dependency(pred,basic) D[70,80](składników) G[64,69](wiele)",
+                "[ 81, 82]Dependency(mwe,basic) D[81,82](i) G[70,80](składników)",
+                "[ 83, 93]Dependency(punct,basic) D[83,93](zależności) G[70,80](składników)",
+                "[ 94, 95]Dependency(punct,basic) D[94,95](,) G[100,102](to)",
+                "[ 96, 99]Dependency(mwe,basic) D[96,99](jak) G[100,102](to)",
+                "[100,102]Dependency(comp_fin,basic) D[100,102](to) G[83,93](zależności)",
+                "[103,110]Dependency(mwe,basic) D[103,110](możliwe) G[100,102](to)",
+                "[111,112]Dependency(punct,basic) D[111,112](.) G[100,102](to)" };
 
         String[] posTags = { "adj", "adja", "adjc", "adjp", "adv", "aglt", "bedzie",
                 "brev", "comp", "conj", "depr", "fin", "ger", "imps", "impt", "inf", "interp",
@@ -416,23 +417,23 @@ public class MaltParserTest
                         + "contiene tantas componentes y dependencias como sea posible .");
 
         String[] dependencies = {
-                "[  0,  7]ROOT(ROOT) D[0,7](Tenemos) G[0,7](Tenemos)",
-                "[  8, 10]Dependency(SPEC) D[8,10](un) G[11,18](ejemplo)",
-                "[ 11, 18]Dependency(SUBJ) D[11,18](ejemplo) G[19,21](de)",
-                "[ 19, 21]Dependency(MOD) D[19,21](de) G[0,7](Tenemos)",
-                "[ 22, 27]Dependency(MOD) D[22,27](frase) G[32,43](complicado,)",
-                "[ 28, 31]Dependency(SPEC) D[28,31](muy) G[32,43](complicado,)",
-                "[ 32, 43]Dependency(SUBJ) D[32,43](complicado,) G[44,47](que)",
-                "[ 44, 47]Dependency(DO) D[44,47](que) G[19,21](de)",
-                "[ 48, 56]Dependency(MOD) D[48,56](contiene) G[57,63](tantas)",
-                "[ 57, 63]Dependency(SUBJ) D[57,63](tantas) G[78,90](dependencias)",
-                "[ 64, 75]Dependency(punct) D[64,75](componentes) G[57,63](tantas)",
-                "[ 76, 77]Dependency(MOD) D[76,77](y) G[78,90](dependencias)",
-                "[ 78, 90]Dependency(MOD) D[78,90](dependencias) G[0,7](Tenemos)",
-                "[ 91, 95]Dependency(MOD) D[91,95](como) G[96,99](sea)",
-                "[ 96, 99]Dependency(SUBJ) D[96,99](sea) G[100,107](posible)",
-                "[100,107]Dependency(MOD) D[100,107](posible) G[78,90](dependencias)",
-                "[108,109]Dependency(punct) D[108,109](.) G[100,107](posible)" };
+                "[  0,  7]ROOT(ROOT,basic) D[0,7](Tenemos) G[0,7](Tenemos)",
+                "[  8, 10]Dependency(SPEC,basic) D[8,10](un) G[11,18](ejemplo)",
+                "[ 11, 18]Dependency(SUBJ,basic) D[11,18](ejemplo) G[19,21](de)",
+                "[ 19, 21]Dependency(MOD,basic) D[19,21](de) G[0,7](Tenemos)",
+                "[ 22, 27]Dependency(MOD,basic) D[22,27](frase) G[32,43](complicado,)",
+                "[ 28, 31]Dependency(SPEC,basic) D[28,31](muy) G[32,43](complicado,)",
+                "[ 32, 43]Dependency(SUBJ,basic) D[32,43](complicado,) G[44,47](que)",
+                "[ 44, 47]Dependency(DO,basic) D[44,47](que) G[19,21](de)",
+                "[ 48, 56]Dependency(MOD,basic) D[48,56](contiene) G[57,63](tantas)",
+                "[ 57, 63]Dependency(SUBJ,basic) D[57,63](tantas) G[78,90](dependencias)",
+                "[ 64, 75]Dependency(punct,basic) D[64,75](componentes) G[57,63](tantas)",
+                "[ 76, 77]Dependency(MOD,basic) D[76,77](y) G[78,90](dependencias)",
+                "[ 78, 90]Dependency(MOD,basic) D[78,90](dependencias) G[0,7](Tenemos)",
+                "[ 91, 95]Dependency(MOD,basic) D[91,95](como) G[96,99](sea)",
+                "[ 96, 99]Dependency(SUBJ,basic) D[96,99](sea) G[100,107](posible)",
+                "[100,107]Dependency(MOD,basic) D[100,107](posible) G[78,90](dependencias)",
+                "[108,109]Dependency(punct,basic) D[108,109](.) G[100,107](posible)" };
 
         String[] posTags = { "AO0FP0", "AO0FS0", "AO0MP0", "AO0MS0", "AQ0CN0",
                 "AQ0CP0", "AQ0CS0", "AQ0FP0", "AQ0FS0", "AQ0FSP", "AQ0MP0", "AQ0MPP", "AQ0MS0",
@@ -536,22 +537,22 @@ public class MaltParserTest
                         + "innehåller lika många beståndsdelar och beroenden som möjligt.");
 
         String[] dependencies = {
-                "[  0,  2]ROOT(ROOT) D[0,2](Vi) G[0,2](Vi)",
-                "[  3, 10]Dependency(HD) D[3,10](behöver) G[0,2](Vi)",
-                "[ 11, 13]Dependency(HD) D[11,13](en) G[3,10](behöver)",
-                "[ 14, 20]Dependency(HD) D[14,20](mycket) G[11,13](en)",
-                "[ 21, 32]Dependency(HD) D[21,32](komplicerad) G[14,20](mycket)",
-                "[ 33, 40]Dependency(HD) D[33,40](exempel) G[21,32](komplicerad)",
-                "[ 41, 49]Dependency(HD) D[41,49](meningen) G[0,2](Vi)",
-                "[ 50, 53]Dependency(HD) D[50,53](som) G[41,49](meningen)",
-                "[ 54, 64]Dependency(HD) D[54,64](innehåller) G[41,49](meningen)",
-                "[ 65, 69]Dependency(HD) D[65,69](lika) G[41,49](meningen)",
-                "[ 70, 75]Dependency(HD) D[70,75](många) G[41,49](meningen)",
-                "[ 76, 89]Dependency(HD) D[76,89](beståndsdelar) G[33,40](exempel)",
-                "[ 90, 93]Dependency(HD) D[90,93](och) G[76,89](beståndsdelar)",
-                "[ 94,103]Dependency(+F) D[94,103](beroenden) G[90,93](och)",
-                "[104,107]Dependency(HD) D[104,107](som) G[94,103](beroenden)",
-                "[108,116]Dependency(HD) D[108,116](möjligt.) G[0,2](Vi)" };
+                "[  0,  2]ROOT(ROOT,basic) D[0,2](Vi) G[0,2](Vi)",
+                "[  3, 10]Dependency(HD,basic) D[3,10](behöver) G[0,2](Vi)",
+                "[ 11, 13]Dependency(HD,basic) D[11,13](en) G[3,10](behöver)",
+                "[ 14, 20]Dependency(HD,basic) D[14,20](mycket) G[11,13](en)",
+                "[ 21, 32]Dependency(HD,basic) D[21,32](komplicerad) G[14,20](mycket)",
+                "[ 33, 40]Dependency(HD,basic) D[33,40](exempel) G[21,32](komplicerad)",
+                "[ 41, 49]Dependency(HD,basic) D[41,49](meningen) G[0,2](Vi)",
+                "[ 50, 53]Dependency(HD,basic) D[50,53](som) G[41,49](meningen)",
+                "[ 54, 64]Dependency(HD,basic) D[54,64](innehåller) G[41,49](meningen)",
+                "[ 65, 69]Dependency(HD,basic) D[65,69](lika) G[41,49](meningen)",
+                "[ 70, 75]Dependency(HD,basic) D[70,75](många) G[41,49](meningen)",
+                "[ 76, 89]Dependency(HD,basic) D[76,89](beståndsdelar) G[33,40](exempel)",
+                "[ 90, 93]Dependency(HD,basic) D[90,93](och) G[76,89](beståndsdelar)",
+                "[ 94,103]Dependency(+F,basic) D[94,103](beroenden) G[90,93](och)",
+                "[104,107]Dependency(HD,basic) D[104,107](som) G[94,103](beroenden)",
+                "[108,116]Dependency(HD,basic) D[108,116](möjligt.) G[0,2](Vi)" };
 
         String[] posTags = { "AB", "DT", "HA", "HD", "HP", "HS", "IE", "IN", "JJ",
                 "KN", "MAD", "MID", "NN", "PAD", "PC", "PL", "PM", "PN", "PP", "PS", "RG", "RO",
@@ -581,30 +582,30 @@ public class MaltParserTest
                 "ما به عنوان مثال جمله بسیار پیچیده، که شامل به عنوان بسیاری از مولفه ها و وابستگی ها که ممکن است نیاز دارید .");
 
         String[] dependencies = {
-                "[  0,  2]Dependency(nsubj) D[0,2](ما) G[102,107](دارید)",
-                "[  3,  5]Dependency(prep) D[3,5](به) G[102,107](دارید)",
-                "[  6, 11]Dependency(pobj) D[6,11](عنوان) G[3,5](به)",
-                "[ 12, 16]Dependency(nn) D[12,16](مثال) G[6,11](عنوان)",
-                "[ 17, 21]Dependency(dobj) D[17,21](جمله) G[102,107](دارید)",
-                "[ 22, 27]Dependency(advmod) D[22,27](بسیار) G[28,35](پیچیده،)",
-                "[ 28, 35]Dependency(amod) D[28,35](پیچیده،) G[17,21](جمله)",
-                "[ 36, 38]Dependency(rel) D[36,38](که) G[39,43](شامل)",
-                "[ 39, 43]Dependency(rcmod) D[39,43](شامل) G[17,21](جمله)",
-                "[ 44, 46]Dependency(prep) D[44,46](به) G[102,107](دارید)",
-                "[ 47, 52]Dependency(pobj) D[47,52](عنوان) G[44,46](به)",
-                "[ 53, 59]Dependency(amod) D[53,59](بسیاری) G[47,52](عنوان)",
-                "[ 60, 62]Dependency(prep) D[60,62](از) G[53,59](بسیاری)",
-                "[ 63, 68]Dependency(pobj) D[63,68](مولفه) G[60,62](از)",
-                "[ 69, 71]Dependency(poss) D[69,71](ها) G[63,68](مولفه)",
-                "[ 72, 73]Dependency(cc) D[72,73](و) G[69,71](ها)",
-                "[ 74, 81]Dependency(conj) D[74,81](وابستگی) G[69,71](ها)",
-                "[ 82, 84]Dependency(poss) D[82,84](ها) G[74,81](وابستگی)",
-                "[ 85, 87]Dependency(rel) D[85,87](که) G[88,92](ممکن)",
-                "[ 88, 92]Dependency(rcmod) D[88,92](ممکن) G[82,84](ها)",
-                "[ 93, 96]Dependency(cop) D[93,96](است) G[88,92](ممکن)",
-                "[ 97,101]Dependency(dobj-lvc) D[97,101](نیاز) G[102,107](دارید)",
-                "[102,107]ROOT(ROOT) D[102,107](دارید) G[102,107](دارید)",
-                "[108,109]Dependency(punct) D[108,109](.) G[102,107](دارید)" };
+                "[  0,  2]Dependency(nsubj,basic) D[0,2](ما) G[102,107](دارید)",
+                "[  3,  5]Dependency(prep,basic) D[3,5](به) G[102,107](دارید)",
+                "[  6, 11]Dependency(pobj,basic) D[6,11](عنوان) G[3,5](به)",
+                "[ 12, 16]Dependency(nn,basic) D[12,16](مثال) G[6,11](عنوان)",
+                "[ 17, 21]Dependency(dobj,basic) D[17,21](جمله) G[102,107](دارید)",
+                "[ 22, 27]Dependency(advmod,basic) D[22,27](بسیار) G[28,35](پیچیده،)",
+                "[ 28, 35]Dependency(amod,basic) D[28,35](پیچیده،) G[17,21](جمله)",
+                "[ 36, 38]Dependency(rel,basic) D[36,38](که) G[39,43](شامل)",
+                "[ 39, 43]Dependency(rcmod,basic) D[39,43](شامل) G[17,21](جمله)",
+                "[ 44, 46]Dependency(prep,basic) D[44,46](به) G[102,107](دارید)",
+                "[ 47, 52]Dependency(pobj,basic) D[47,52](عنوان) G[44,46](به)",
+                "[ 53, 59]Dependency(amod,basic) D[53,59](بسیاری) G[47,52](عنوان)",
+                "[ 60, 62]Dependency(prep,basic) D[60,62](از) G[53,59](بسیاری)",
+                "[ 63, 68]Dependency(pobj,basic) D[63,68](مولفه) G[60,62](از)",
+                "[ 69, 71]Dependency(poss,basic) D[69,71](ها) G[63,68](مولفه)",
+                "[ 72, 73]Dependency(cc,basic) D[72,73](و) G[69,71](ها)",
+                "[ 74, 81]Dependency(conj,basic) D[74,81](وابستگی) G[69,71](ها)",
+                "[ 82, 84]Dependency(poss,basic) D[82,84](ها) G[74,81](وابستگی)",
+                "[ 85, 87]Dependency(rel,basic) D[85,87](که) G[88,92](ممکن)",
+                "[ 88, 92]Dependency(rcmod,basic) D[88,92](ممکن) G[82,84](ها)",
+                "[ 93, 96]Dependency(cop,basic) D[93,96](است) G[88,92](ممکن)",
+                "[ 97,101]Dependency(dobj-lvc,basic) D[97,101](نیاز) G[102,107](دارید)",
+                "[102,107]ROOT(ROOT,basic) D[102,107](دارید) G[102,107](دارید)",
+                "[108,109]Dependency(punct,basic) D[108,109](.) G[102,107](دارید)" };
 
         String[] posTags = { "ADJ", "ADJ_CMPR", "ADJ_INO", "ADJ_SUP", "ADV",
                 "ADV_COMP", "ADV_I", "ADV_LOC", "ADV_NEG", "ADV_TIME", "CLITIC", "CON", "DELM",
@@ -644,12 +645,11 @@ public class MaltParserTest
      * @throws Exception
      *             if an error occurs.
      */
-    // @Ignore("The tags produced by our French TreeTagger model are different form the ones that "
-    // +
-    // "the pre-trained MaltParser model expects. Also the input format in our MaltParser " +
-    // "class is currently hardcoded to the format used by the English pre-trained model. " +
-    // "For the French model the 5th column of the input format should contain fine-grained " +
-    // "tags. See http://www.maltparser.org/mco/french_parser/fremalt.html")
+    @Ignore("The tags produced by our French TreeTagger model are different form the ones that "
+            + "the pre-trained MaltParser model expects. Also the input format in our MaltParser "
+            + "class is currently hardcoded to the format used by the English pre-trained model. "
+            + "For the French model the 5th column of the input format should contain fine-grained "
+            + "tags. See http://www.maltparser.org/mco/french_parser/fremalt.html")
     @Test
     public void testFrench()
         throws Exception
@@ -728,14 +728,19 @@ public class MaltParserTest
                     OpenNlpPosTagger.PARAM_LANGUAGE, "en"));
         }
         else if ("fa".equals(aLanguage) || "sv".equals(aLanguage)) {
+            Assume.assumeFalse("HunPos currently hangs indefinitely on Windows: Issue #1099",
+                    System.getProperty("os.name").toLowerCase(Locale.US).contains("win"));
             engines.add(createEngineDescription(HunPosTagger.class));
         }
         else {
             engines.add(createEngineDescription(OpenNlpPosTagger.class));
         }
 
-        engines.add(createEngineDescription(MaltParser.class, MaltParser.PARAM_VARIANT, aVariant,
-                MaltParser.PARAM_PRINT_TAGSET, true, MaltParser.PARAM_IGNORE_MISSING_FEATURES, true));
+        engines.add(createEngineDescription(
+                MaltParser.class, 
+                MaltParser.PARAM_VARIANT, aVariant,
+                MaltParser.PARAM_PRINT_TAGSET, true, 
+                MaltParser.PARAM_IGNORE_MISSING_FEATURES, true));
 
         return createEngineDescription(engines
                 .toArray(new AnalysisEngineDescription[engines.size()]));

@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.pdf;
 
 import java.io.IOException;
@@ -29,9 +29,10 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
+
 /**
  * Converts a PDF to a CAS. Uses a substitution table.
- * 
  */
 public class Pdf2CasConverter
     extends PdfLayoutEventStripper
@@ -182,19 +183,23 @@ public class Pdf2CasConverter
         int end = text.length();
         text.append('\n');
 
+        // Trim leading/trailing whitespace
+        int[] offsets = {begin, end};
+        SegmenterBase.trim(text, offsets);
+
         // Add annotation
         switch (aStyle) {
         case HEADING:
             if (headingType != null) {
                 Type t = cas.getTypeSystem().getType(headingType);
-                AnnotationFS a = cas.createAnnotation(t, begin, end);
+                AnnotationFS a = cas.createAnnotation(t, offsets[0], offsets[1]);
                 cas.addFsToIndexes(a);
             }
             break;
         case PARAGRAPH:
             if (paragraphType != null) {
                 Type t = cas.getTypeSystem().getType(paragraphType);
-                AnnotationFS a = cas.createAnnotation(t, begin, end);
+                AnnotationFS a = cas.createAnnotation(t, offsets[0], offsets[1]);
                 cas.addFsToIndexes(a);
             }
             break;
@@ -296,7 +301,8 @@ public class Pdf2CasConverter
                 if (aContent.charAt(i) == '\n') {
                     lastBreak = i;
                 }
-                else if (Character.isWhitespace(aContent.codePointAt(i)) && (i > (lastBreak + 79))) {
+                else if (Character.isWhitespace(aContent.codePointAt(i))
+                        && (i > (lastBreak + 79))) {
                     lastBreak = i;
                     aContent.replace(i, i + 1, "\n");
                 }

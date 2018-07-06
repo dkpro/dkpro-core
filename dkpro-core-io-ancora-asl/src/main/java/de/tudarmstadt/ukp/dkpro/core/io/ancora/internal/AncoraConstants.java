@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2016
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.ancora.internal;
 
 public final class AncoraConstants
@@ -31,4 +31,5 @@ public final class AncoraConstants
     public static final String ATTR_ELLIPTIC = "elliptic";
     public static final String ATTR_PUNCT = "punct";
     public static final String ATTR_GENDER = "gen";
-    public static final String ATTR_NUMBER = "num";}
+    public static final String ATTR_NUMBER = "num";
+}

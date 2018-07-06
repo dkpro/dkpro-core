@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2012
  * Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
  * Technische Universität Darmstadt
@@ -14,11 +14,12 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.tcf;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
-import static org.apache.uima.fit.util.JCasUtil.*;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
@@ -66,20 +67,20 @@ public class TcfReaderTest
         reader.getNext(jcas.getCas());
 
         String[] ref1 = new String[] {
-                "[  0,  5]Dependency(SB) D[0,5](Karin) G[6,12](fliegt)",
-                "[  6, 12]ROOT(ROOT) D[6,12](fliegt) G[6,12](fliegt)",
-                "[ 13, 17]Dependency(MO) D[13,17](nach) G[6,12](fliegt)",
-                "[ 18, 21]Dependency(PNC) D[18,21](New) G[22,26](York)",
-                "[ 22, 26]Dependency(NK) D[22,26](York) G[13,17](nach)",
-                "[ 27, 28]Dependency(--) D[27,28](.) G[22,26](York)" };
+                "[  0,  5]Dependency(SB,basic) D[0,5](Karin) G[6,12](fliegt)",
+                "[  6, 12]ROOT(ROOT,basic) D[6,12](fliegt) G[6,12](fliegt)",
+                "[ 13, 17]Dependency(MO,basic) D[13,17](nach) G[6,12](fliegt)",
+                "[ 18, 21]Dependency(PNC,basic) D[18,21](New) G[22,26](York)",
+                "[ 22, 26]Dependency(NK,basic) D[22,26](York) G[13,17](nach)",
+                "[ 27, 28]Dependency(--,basic) D[27,28](.) G[22,26](York)" };
 
         String[] ref2 = new String[] {
-                "[ 29, 32]Dependency(SB) D[29,32](Sie) G[33,37](will)",
-                "[ 33, 37]ROOT(ROOT) D[33,37](will) G[33,37](will)",
-                "[ 38, 42]Dependency(MO) D[38,42](dort) G[50,56](machen)",
-                "[ 43, 49]Dependency(OA) D[43,49](Urlaub) G[50,56](machen)",
-                "[ 50, 56]Dependency(OC) D[50,56](machen) G[33,37](will)",
-                "[ 57, 58]Dependency(--) D[57,58](.) G[50,56](machen)" };
+                "[ 29, 32]Dependency(SB,basic) D[29,32](Sie) G[33,37](will)",
+                "[ 33, 37]ROOT(ROOT,basic) D[33,37](will) G[33,37](will)",
+                "[ 38, 42]Dependency(MO,basic) D[38,42](dort) G[50,56](machen)",
+                "[ 43, 49]Dependency(OA,basic) D[43,49](Urlaub) G[50,56](machen)",
+                "[ 50, 56]Dependency(OC,basic) D[50,56](machen) G[33,37](will)",
+                "[ 57, 58]Dependency(--,basic) D[57,58](.) G[50,56](machen)" };
 
         List<Sentence> sentences = new ArrayList<Sentence>(select(jcas, Sentence.class));
         assertEquals("Number of sentences", 2, sentences.size());

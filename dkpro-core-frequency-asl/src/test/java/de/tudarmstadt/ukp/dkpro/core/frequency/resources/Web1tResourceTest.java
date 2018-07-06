@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2011
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.frequency.resources;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
@@ -49,8 +49,8 @@ public class Web1tResourceTest
     @Test
     public void configureAggregatedExample() throws Exception {
         AnalysisEngineDescription desc = createEngineDescription(Annotator.class,
-        		Annotator.MODEL_KEY, createExternalResourceDescription(
-        				Web1TFrequencyCountResource.class,
+                Annotator.MODEL_KEY, createExternalResourceDescription(
+                        Web1TFrequencyCountResource.class,
                         Web1TFrequencyCountResource.PARAM_LANGUAGE, "en",
                         Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
                         Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "2"));

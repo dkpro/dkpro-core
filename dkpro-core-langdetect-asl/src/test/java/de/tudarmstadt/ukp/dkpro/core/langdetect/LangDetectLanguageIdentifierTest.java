@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2014
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.langdetect;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
@@ -61,7 +61,8 @@ public class LangDetectLanguageIdentifierTest
     private JCas runTest(String text)
         throws Exception
     {
-        AnalysisEngine engine = createEngine(LangDetectLanguageIdentifier.class);
+        AnalysisEngine engine = createEngine(LangDetectLanguageIdentifier.class,
+                LangDetectLanguageIdentifier.PARAM_SEED, 1234l);
 
         JCas aJCas = TestRunner.runTest(engine, "en", text);
 

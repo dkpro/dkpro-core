@@ -7,33 +7,35 @@
 # https://www.sketchengine.co.uk/xdocumentation/wiki/tagsets/german_rftagger
 
 # Catch-all rule
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
-ADJA=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+ADJA=POS_ADJ
 
-ADJD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
-ADV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
-PROADV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+ADJD=POS_ADV
+ADV=POS_ADV
+PROADV=POS_ADV
 
-APPO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
-APPR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
-APPRART=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
-APZR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+APPO=POS_ADP
+APPR=POS_ADP
+APPRART=POS_ADP
+APZR=POS_ADP
 
-ART=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+ART=POS_DET
 
-CARD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
-CONJ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+CARD=POS_NUM
+CONJ=POS_CONJ
 
-N=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+N=POS_NOUN
 
-PRO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PRO=POS_PRON
 
 
-VFIN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-VPP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-VIMP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
-VINF=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VFIN=POS_VERB
+VPP=POS_VERB
+VIMP=POS_VERB
+VINF=POS_VERB
 
-SYM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
-SENT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+SYM=POS_PUNCT
+SENT=POS_PUNCT
+
+*=POS_X

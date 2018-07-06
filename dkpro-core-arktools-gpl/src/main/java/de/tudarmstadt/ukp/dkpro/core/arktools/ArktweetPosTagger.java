@@ -1,7 +1,5 @@
-package de.tudarmstadt.ukp.dkpro.core.arktools;
-
-/**
- * Copyright 2007-2014
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -16,8 +14,9 @@ package de.tudarmstadt.ukp.dkpro.core.arktools;
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
+package de.tudarmstadt.ukp.dkpro.core.arktools;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,6 +33,8 @@ import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.CasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.resource.ResourceInitializationException;
 
@@ -49,6 +50,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Wrapper for Twitter Tokenizer and POS Tagger.
@@ -56,9 +60,15 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * As described in: Olutobi Owoputi, Brendan O’Connor, Chris Dyer, Kevin Gimpel, Nathan Schneider
  * and Noah A. Smith. Improved Part-of-Speech Tagging for Online Conversational Text with Word
  * Clusters In Proceedings of NAACL 2013.
- *
- *
  */
+@Component(OperationType.POS_TAGGING)
+@ResourceMetaData(name = "ArkTweet POS-Tagger")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
+@TypeCapability(
+      inputs = { 
+          "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 
+      outputs = { 
+          "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class ArktweetPosTagger
     extends CasAnnotator_ImplBase
 {
@@ -79,6 +89,20 @@ public class ArktweetPosTagger
     protected String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Location from which the model is read.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -88,7 +112,8 @@ public class ArktweetPosTagger
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 

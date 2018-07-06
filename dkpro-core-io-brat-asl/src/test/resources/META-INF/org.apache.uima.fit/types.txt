@@ -1,1 +1,1 @@
-classpath*:desc/types/BratTest.xml
+classpath*:desc/type/BratTest.xml

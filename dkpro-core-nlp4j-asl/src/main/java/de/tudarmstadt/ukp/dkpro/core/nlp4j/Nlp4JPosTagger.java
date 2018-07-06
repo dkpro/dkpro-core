@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2016
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.nlp4j;
 
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -31,6 +31,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -46,14 +47,20 @@ import de.tudarmstadt.ukp.dkpro.core.nlp4j.internal.EmoryNlp2Uima;
 import de.tudarmstadt.ukp.dkpro.core.nlp4j.internal.EmoryNlpUtils;
 import de.tudarmstadt.ukp.dkpro.core.nlp4j.internal.OnlineComponentTagsetDescriptionProvider;
 import de.tudarmstadt.ukp.dkpro.core.nlp4j.internal.Uima2EmoryNlp;
+import edu.emory.mathcs.nlp.common.util.NLPUtils;
 import edu.emory.mathcs.nlp.component.pos.POSState;
 import edu.emory.mathcs.nlp.component.template.OnlineComponent;
 import edu.emory.mathcs.nlp.component.template.node.NLPNode;
-import edu.emory.mathcs.nlp.decode.NLPUtils;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Part-of-Speech annotator using Emory NLP4J. Requires {@link Sentence}s to be annotated before.
  */
+@Component(OperationType.PART_OF_SPEECH_TAGGER)
+@ResourceMetaData(name = "NLP4J POS-Tagger")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = { 
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -61,53 +68,60 @@ import edu.emory.mathcs.nlp.decode.NLPUtils;
         outputs = { 
             "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class Nlp4JPosTagger
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
-	/**
-	 * Use this language instead of the document language to resolve the model.
-	 */
-	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-	protected String language;
+    /**
+     * Use this language instead of the document language to resolve the model.
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    protected String language;
 
-	/**
-	 * Override the default variant used to locate the model.
-	 */
-	public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
-	protected String variant;
+    /**
+     * Override the default variant used to locate the model.
+     */
+    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+    protected String variant;
 
-	/**
-	 * Load the model from this location instead of locating the model automatically.
-	 */
-	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
-	protected String modelLocation;
+    /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
+     * Load the model from this location instead of locating the model automatically.
+     */
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    protected String modelLocation;
 
-	/**
-	 * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
-	 * the mapping automatically.
-	 */
-	public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
-	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
-	protected String posMappingLocation;
+    /**
+     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
+     * the mapping automatically.
+     */
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+    protected String posMappingLocation;
 
-	/**
-	 * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-	 * spaming the heap with thousands of strings representing only a few different tags.
-	 */
-	public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-	@ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-	private boolean internTags;
-
-	/**
-	 * Log the tag set(s) when a model is loaded.
-	 *
-	 * Default: {@code false}
-	 */
-	public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
-	protected boolean printTagSet;
+    /**
+     * Log the tag set(s) when a model is loaded.
+     *
+     * Default: {@code false}
+     */
+    public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
+    protected boolean printTagSet;
 
     /**
      * Process anyway, even if the model relies on features that are not supported by this
@@ -119,21 +133,21 @@ public class Nlp4JPosTagger
     @ConfigurationParameter(name = PARAM_IGNORE_MISSING_FEATURES, mandatory = true, defaultValue = "false")
     protected boolean ignoreMissingFeatures;
 
-	private Nlp4JPosTaggerModelProvider modelProvider;
-	private MappingProvider mappingProvider;
+    private Nlp4JPosTaggerModelProvider modelProvider;
+    private MappingProvider mappingProvider;
 
-	@Override
-	public void initialize(UimaContext aContext)
-		throws ResourceInitializationException
-	{
-		super.initialize(aContext);
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
 
         modelProvider = new Nlp4JPosTaggerModelProvider(this);
         
         // General setup of the mapping provider in initialize()
         mappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
                 language, modelProvider);
-	}
+    }
 
     @Override
     public void process(JCas aJCas)
@@ -155,7 +169,7 @@ public class Nlp4JPosTagger
             // Process the sentences - new results will be stored in the existing NLPNodes
             modelProvider.getResource().process(nodes);
             
-            EmoryNlp2Uima.convertPos(cas, tokens, nodes, mappingProvider, internTags);
+            EmoryNlp2Uima.convertPos(cas, tokens, nodes, mappingProvider);
         }
     }
     

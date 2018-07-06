@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2014
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -14,13 +14,18 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.ditop;
 
-import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
-import de.tudarmstadt.ukp.dkpro.core.mallet.lda.LdaTopicModelEstimator;
-import de.tudarmstadt.ukp.dkpro.core.mallet.lda.LdaTopicModelInferencer;
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+import java.io.IOException;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -29,13 +34,10 @@ import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.File;
-import java.io.IOException;
-
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
+import de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaTopicModelInferencer;
+import de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaTopicModelTrainer;
+import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 public class DiTopWriterTest
 {
@@ -61,10 +63,10 @@ public class DiTopWriterTest
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
         AnalysisEngineDescription estimator = createEngineDescription(
-                LdaTopicModelEstimator.class,
-                LdaTopicModelEstimator.PARAM_TARGET_LOCATION, MODEL_FILE,
-                LdaTopicModelEstimator.PARAM_N_ITERATIONS, N_ITERATIONS,
-                LdaTopicModelEstimator.PARAM_N_TOPICS, N_TOPICS);
+                MalletLdaTopicModelTrainer.class,
+                MalletLdaTopicModelTrainer.PARAM_TARGET_LOCATION, MODEL_FILE,
+                MalletLdaTopicModelTrainer.PARAM_N_ITERATIONS, N_ITERATIONS,
+                MalletLdaTopicModelTrainer.PARAM_N_TOPICS, N_TOPICS);
         SimplePipeline.runPipeline(reader, segmenter, estimator);
 
         MODEL_FILE.deleteOnExit();
@@ -82,8 +84,8 @@ public class DiTopWriterTest
                 TextReader.PARAM_LANGUAGE, LANGUAGE);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription inferencer = createEngineDescription(
-                LdaTopicModelInferencer.class,
-                LdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
+                MalletLdaTopicModelInferencer.class,
+                MalletLdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
         AnalysisEngineDescription ditopwriter = createEngineDescription(DiTopWriter.class,
                 DiTopWriter.PARAM_TARGET_LOCATION, TARGET_DITOP,
                 DiTopWriter.PARAM_MODEL_LOCATION, MODEL_FILE,
@@ -106,10 +108,10 @@ public class DiTopWriterTest
         assertTrue(topicsFile.exists());
 
         /* check that file lengths are correct */
-        assertEquals(expectedNDocuments + 1, FileUtils.readLines(topicsFile).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile).size());
+        assertEquals(expectedNDocuments + 1, FileUtils.readLines(topicsFile, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile, UTF_8).size());
         MODEL_FILE.delete();
     }
 
@@ -128,8 +130,8 @@ public class DiTopWriterTest
                 TextReader.PARAM_LANGUAGE, LANGUAGE);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription inferencer = createEngineDescription(
-                LdaTopicModelInferencer.class,
-                LdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
+                MalletLdaTopicModelInferencer.class,
+                MalletLdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
         AnalysisEngineDescription ditopwriter = createEngineDescription(DiTopWriter.class,
                 DiTopWriter.PARAM_TARGET_LOCATION, TARGET_DITOP,
                 DiTopWriter.PARAM_MODEL_LOCATION, MODEL_FILE,
@@ -154,10 +156,10 @@ public class DiTopWriterTest
         assertTrue(topicsFile.exists());
 
         /* check that file lengths are correct */
-        assertEquals(expectedNDocuments + 1, FileUtils.readLines(topicsFile).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile).size());
+        assertEquals(expectedNDocuments + 1, FileUtils.readLines(topicsFile, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile, UTF_8).size());
         MODEL_FILE.delete();
     }
 
@@ -166,7 +168,11 @@ public class DiTopWriterTest
         throws UIMAException, IOException
     {
         int expectedNDocuments = 0;
-        String[] collectionValues = new String[] { "file:/home/schnober/workspace/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.io.ditop/src/test/resources/" };
+        // FIXME I'm pretty sure this absolute path should not be here - check and relativize
+        // if possible.
+        String[] collectionValues = {
+                "file:/home/schnober/workspace/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.io.ditop/src/test/resources/"
+        };
         boolean exactMatch = true;
 
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
@@ -175,8 +181,8 @@ public class DiTopWriterTest
                 TextReader.PARAM_LANGUAGE, LANGUAGE);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription inferencer = createEngineDescription(
-                LdaTopicModelInferencer.class,
-                LdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
+                MalletLdaTopicModelInferencer.class,
+                MalletLdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
         AnalysisEngineDescription ditopwriter = createEngineDescription(DiTopWriter.class,
                 DiTopWriter.PARAM_TARGET_LOCATION, TARGET_DITOP,
                 DiTopWriter.PARAM_MODEL_LOCATION, MODEL_FILE,
@@ -201,10 +207,10 @@ public class DiTopWriterTest
         assertTrue(topicsFile.exists());
 
         /* check that file lengths are correct */
-        assertEquals(expectedNDocuments + 1, FileUtils.readLines(topicsFile).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile).size());
+        assertEquals(expectedNDocuments + 1, FileUtils.readLines(topicsFile, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile, UTF_8).size());
         MODEL_FILE.delete();
     }
 
@@ -222,8 +228,8 @@ public class DiTopWriterTest
                 TextReader.PARAM_LANGUAGE, LANGUAGE);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription inferencer = createEngineDescription(
-                LdaTopicModelInferencer.class,
-                LdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
+                MalletLdaTopicModelInferencer.class,
+                MalletLdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
         AnalysisEngineDescription ditopwriter = createEngineDescription(DiTopWriter.class,
                 DiTopWriter.PARAM_TARGET_LOCATION, TARGET_DITOP,
                 DiTopWriter.PARAM_MODEL_LOCATION, MODEL_FILE,
@@ -248,10 +254,10 @@ public class DiTopWriterTest
         assertTrue(topicsFile.exists());
 
         /* check that file lengths are correct */
-        assertEquals(expectedNDocuments + 1, FileUtils.readLines(topicsFile).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile).size());
+        assertEquals(expectedNDocuments + 1, FileUtils.readLines(topicsFile, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile, UTF_8).size());
         MODEL_FILE.delete();
     }
 
@@ -269,8 +275,8 @@ public class DiTopWriterTest
                 TextReader.PARAM_LANGUAGE, LANGUAGE);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription inferencer = createEngineDescription(
-                LdaTopicModelInferencer.class,
-                LdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
+                MalletLdaTopicModelInferencer.class,
+                MalletLdaTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
         AnalysisEngineDescription ditopwriter = createEngineDescription(DiTopWriter.class,
                 DiTopWriter.PARAM_TARGET_LOCATION, TARGET_DITOP,
                 DiTopWriter.PARAM_MODEL_LOCATION, MODEL_FILE,
@@ -295,10 +301,10 @@ public class DiTopWriterTest
         assertTrue(topicsFile.exists());
 
         /* check that file lengths are correct */
-        assertEquals(expectedNDocuments + 1, FileUtils.readLines(topicsFile).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile).size());
+        assertEquals(expectedNDocuments + 1, FileUtils.readLines(topicsFile, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile, UTF_8).size());
         MODEL_FILE.delete();
     }
 }

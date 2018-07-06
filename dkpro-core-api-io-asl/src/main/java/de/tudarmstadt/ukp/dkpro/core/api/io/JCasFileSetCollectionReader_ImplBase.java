@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.api.io;
 
 import java.io.IOException;
@@ -30,20 +30,19 @@ import org.apache.uima.jcas.JCas;
  */
 @Deprecated
 public abstract class JCasFileSetCollectionReader_ImplBase
-	extends FileSetCollectionReaderBase
+    extends FileSetCollectionReaderBase
 {
-	// This method should not be overwritten. Overwrite getNext(JCas) instead.
-	@Override
-	public final void getNext(CAS cas)
-		throws IOException, CollectionException
-	{
-		try {
-			getNext(cas.getJCas());
-		}
-		catch (CASException e) {
-			throw new CollectionException(e);
-		}
-	}
+    // This method should not be overwritten. Overwrite getNext(JCas) instead.
+    @Override
+    public final void getNext(CAS cas) throws IOException, CollectionException
+    {
+        try {
+            getNext(cas.getJCas());
+        }
+        catch (CASException e) {
+            throw new CollectionException(e);
+        }
+    }
 
     /**
      * Subclasses implement this method rather than {@link #getNext(CAS)}
@@ -55,11 +54,10 @@ public abstract class JCasFileSetCollectionReader_ImplBase
      * @throws CollectionException
      *             if another type of error occurs.
      */
-	public abstract void getNext(JCas aJCas)
-		throws IOException, CollectionException;
-	
-	protected void initCas(JCas aJCas, FileResource aResource)
-	{
-		super.initCas(aJCas.getCas(), aResource, null);
-	}
+    public abstract void getNext(JCas aJCas) throws IOException, CollectionException;
+
+    protected void initCas(JCas aJCas, FileResource aResource)
+    {
+        super.initCas(aJCas.getCas(), aResource, null);
+    }
 }

@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,14 +14,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *******************************************************************************/
+ **/
 
 package de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.io.IOException;
-
-import junit.framework.Assert;
 
 import org.junit.Test;
 
@@ -29,21 +30,22 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 
 public class German98DictionaryTest
 {
+    @Test
+    public void testContains() throws IOException
+    {
+        final File affixFile = ResourceUtils.getUrlAsFile(
+                getClass().getResource(
+                        "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-affix.aff"),
+                false);
+        final File dictFile = ResourceUtils.getUrlAsFile(getClass().getResource(
+                "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"),
+                false);
+        final German98Dictionary dict = new German98Dictionary(dictFile, affixFile, "UTF-8");
+        assertEquals(298506, dict.getAll().size());
 
-	@Test
-	public void testContains() throws IOException
-	{
-
-        final File affixFile = ResourceUtils.getUrlAsFile(getClass().getResource(
-        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-affix.aff"), false);
-        final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
-        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"), false);
-		final German98Dictionary dict = new German98Dictionary(dictFile, affixFile);
-		Assert.assertEquals(298506, dict.getAll().size());
-
-		Assert.assertTrue(dict.contains("hallo"));
-		Assert.assertTrue(dict.contains("versuchen"));
-		Assert.assertTrue(dict.contains("arbeiten"));
-		Assert.assertTrue(dict.contains("arbeit"));
-	}
+        assertTrue(dict.contains("hallo"));
+        assertTrue(dict.contains("versuchen"));
+        assertTrue(dict.contains("arbeiten"));
+        assertTrue(dict.contains("arbeit"));
+    }
 }

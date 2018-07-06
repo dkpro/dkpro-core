@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.languagetool;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
@@ -34,30 +34,30 @@ import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class LanguageToolCheckerTest
 {
-	@Test
-	public void grammarCheckerTest()
-		throws Exception
-	{
-		String testDocument = "A sentence with a error in the Hitchhiker's Guide tot he Galaxy .";
+    @Test
+    public void grammarCheckerTest()
+        throws Exception
+    {
+        String testDocument = "A sentence with a error in the Hitchhiker's Guide tot he Galaxy .";
 
-		AnalysisEngine engine = createEngine(LanguageToolChecker.class,
-				LanguageToolChecker.PARAM_LANGUAGE, "en");
-		JCas aJCas = engine.newJCas();
+        AnalysisEngine engine = createEngine(LanguageToolChecker.class,
+                LanguageToolChecker.PARAM_LANGUAGE, "en");
+        JCas aJCas = engine.newJCas();
 
-		TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class, Sentence.class);
-		tb.buildTokens(aJCas, testDocument);
+        TokenBuilder<Token, Sentence> tb = new TokenBuilder<>(Token.class, Sentence.class);
+        tb.buildTokens(aJCas, testDocument);
 
-		engine.process(aJCas);
+        engine.process(aJCas);
 
-		// copy input match type annotations to an array
-		int count = 0;
-		for (GrammarAnomaly ga : select(aJCas, GrammarAnomaly.class)) {
-			System.out.println("Error " + (count + 1) + " (" + ga.getBegin() + ", " + ga.getEnd()
-					+ "):" + ga.getDescription());
-			count++;
-		}
-		assertEquals(count, 3);
-	}
+        // copy input match type annotations to an array
+        int count = 0;
+        for (GrammarAnomaly ga : select(aJCas, GrammarAnomaly.class)) {
+            System.out.println("Error " + (count + 1) + " (" + ga.getBegin() + ", " + ga.getEnd()
+                    + "):" + ga.getDescription());
+            count++;
+        }
+        assertEquals(count, 3);
+    }
     
     @Rule
     public DkproTestContext testContext = new DkproTestContext();

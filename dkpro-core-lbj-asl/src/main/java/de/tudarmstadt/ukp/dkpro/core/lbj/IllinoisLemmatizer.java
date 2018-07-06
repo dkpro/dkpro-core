@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2016
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,11 +14,12 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.lbj;
 
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -27,6 +28,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -39,14 +41,21 @@ import de.tudarmstadt.ukp.dkpro.core.lbj.internal.ConvertToUima;
 import edu.illinois.cs.cogcomp.annotation.Annotator;
 import edu.illinois.cs.cogcomp.annotation.AnnotatorException;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.TextAnnotation;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Lemmatizer from the Cognitive Computation Group at University of Illinois at Urbana-Champaign.  
  */
+@Component(OperationType.LEMMATIZER)
+@ResourceMetaData(name = "Illinois CCG Lemmatizer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
-        inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                    "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" },
+        inputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" },
         outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
 public class IllinoisLemmatizer
     extends JCasAnnotator_ImplBase
@@ -72,7 +81,8 @@ public class IllinoisLemmatizer
                     throw new IllegalArgumentException("Only language [en] is supported");
                 }
 
-                Annotator annotator = new edu.illinois.cs.cogcomp.nlp.lemmatizer.IllinoisLemmatizer();
+                Annotator annotator = 
+                        new edu.illinois.cs.cogcomp.nlp.lemmatizer.IllinoisLemmatizer();
 
                 return annotator;
             }
@@ -92,7 +102,7 @@ public class IllinoisLemmatizer
 
         // Run tagger
         try {
-            modelProvider.getResource().addView(document);
+            modelProvider.getResource().getView(document);
         }
         catch (AnnotatorException e) {
             throw new IllegalStateException(e);

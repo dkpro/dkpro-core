@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2011
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universit√§t Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.imscwb.util;
 
 import java.util.ArrayList;
@@ -22,16 +22,14 @@ import java.util.List;
 
 /**
  * Used for temporary storing extracted texts before adding to the CAS.
- *
- *
  */
 public class CorpusText {
 
     private final List<CorpusSentence> sentences;
     private String documentTitle;
 
-	public CorpusText() {
-    	this("");
+    public CorpusText() {
+        this("");
     }
 
     public CorpusText(String title)
@@ -55,8 +53,8 @@ public class CorpusText {
     }
 
     public void setDocumentTitle(String documentTitle) {
-		this.documentTitle = documentTitle;
-	}
+        this.documentTitle = documentTitle;
+    }
 }
 
 

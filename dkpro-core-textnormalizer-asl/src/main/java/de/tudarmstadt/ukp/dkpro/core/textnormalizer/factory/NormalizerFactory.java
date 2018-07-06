@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.textnormalizer.factory;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -44,99 +44,99 @@ public class NormalizerFactory
     public AnalysisEngineDescription getSpellcorrection(String aModelLocation)
         throws ResourceInitializationException
     {
-    	AggregateBuilder ab = new AggregateBuilder();
-    	ab.add(createEngineDescription(BreakIteratorSegmenter.class), 
-    	        CAS.NAME_DEFAULT_SOFA, getSourceView());
-    	ab.add(createEngineDescription(JazzyChecker.class, 
-    	        JazzyChecker.PARAM_MODEL_LOCATION, aModelLocation), 
-    	        CAS.NAME_DEFAULT_SOFA, getSourceView());
-    	ab.add(createEngineDescription(SpellingNormalizer.class), 
-    	        CAS.NAME_DEFAULT_SOFA, getSourceView());
-    	ab.add(createEngineDescription(ApplyChangesAnnotator.class), 
-    	        ApplyChangesAnnotator.VIEW_SOURCE, getSourceView(), 
-    	        ApplyChangesAnnotator.VIEW_TARGET, getTargetView());	
-    	AnalysisEngineDescription aed = ab.createAggregateDescription();
-    	aed.setAnnotatorImplementationName("Spell");
-    
-    	return aed;
+        AggregateBuilder ab = new AggregateBuilder();
+        ab.add(createEngineDescription(BreakIteratorSegmenter.class), 
+                CAS.NAME_DEFAULT_SOFA, getSourceView());
+        ab.add(createEngineDescription(JazzyChecker.class, 
+                JazzyChecker.PARAM_MODEL_LOCATION, aModelLocation), 
+                CAS.NAME_DEFAULT_SOFA, getSourceView());
+        ab.add(createEngineDescription(SpellingNormalizer.class), 
+                CAS.NAME_DEFAULT_SOFA, getSourceView());
+        ab.add(createEngineDescription(ApplyChangesAnnotator.class), 
+                ApplyChangesAnnotator.VIEW_SOURCE, getSourceView(), 
+                ApplyChangesAnnotator.VIEW_TARGET, getTargetView());    
+        AnalysisEngineDescription aed = ab.createAggregateDescription();
+        aed.setAnnotatorImplementationName("Spell");
+
+        return aed;
     }
 
     public AnalysisEngineDescription getUmlautSharpSNormalization(
             ExternalResourceDescription aFrequencyProvider, int aMinFrequency)
         throws ResourceInitializationException
     {
-    	AggregateBuilder ab = new AggregateBuilder();
-    	ab.add(createEngineDescription(BreakIteratorSegmenter.class), 
-    	        CAS.NAME_DEFAULT_SOFA, getSourceView());
-    	ab.add(createEngineDescription(	SharpSNormalizer.class,
-    	        SharpSNormalizer.FREQUENCY_PROVIDER, aFrequencyProvider,
-    	        SharpSNormalizer.PARAM_MIN_FREQUENCY_THRESHOLD, aMinFrequency), 
-    	        CAS.NAME_DEFAULT_SOFA, getSourceView());
-    	ab.add(createEngineDescription(ApplyChangesAnnotator.class), 
+        AggregateBuilder ab = new AggregateBuilder();
+        ab.add(createEngineDescription(BreakIteratorSegmenter.class), 
+                CAS.NAME_DEFAULT_SOFA, getSourceView());
+        ab.add(createEngineDescription(    SharpSNormalizer.class,
+                SharpSNormalizer.FREQUENCY_PROVIDER, aFrequencyProvider,
+                SharpSNormalizer.PARAM_MIN_FREQUENCY_THRESHOLD, aMinFrequency), 
+                CAS.NAME_DEFAULT_SOFA, getSourceView());
+        ab.add(createEngineDescription(ApplyChangesAnnotator.class), 
                 ApplyChangesAnnotator.VIEW_SOURCE, getSourceView(), 
                 ApplyChangesAnnotator.VIEW_TARGET, getTargetView());    
-    	AnalysisEngineDescription aed = ab.createAggregateDescription();
-    	aed.setAnnotatorImplementationName("Umlaute");
+        AnalysisEngineDescription aed = ab.createAggregateDescription();
+        aed.setAnnotatorImplementationName("Umlaute");
     
-    	return aed;
+        return aed;
     }
 
     public AnalysisEngineDescription getReplacementNormalization(String aModelLocation,
             SrcSurroundings aSrc, TargetSurroundings aTarget)
         throws ResourceInitializationException
     {
-    	AggregateBuilder ab = new AggregateBuilder();
-    	ab.add(createEngineDescription(
-    		ReplacementFileNormalizer.class, 
-    		ReplacementFileNormalizer.PARAM_MODEL_LOCATION, aModelLocation,
-    		ReplacementFileNormalizer.PARAM_SRC_SURROUNDINGS, aSrc,
-    		ReplacementFileNormalizer.PARAM_TARGET_SURROUNDINGS, aTarget), 
-    		CAS.NAME_DEFAULT_SOFA, getSourceView());
-    	ab.add(createEngineDescription(ApplyChangesAnnotator.class), 
+        AggregateBuilder ab = new AggregateBuilder();
+        ab.add(createEngineDescription(
+            ReplacementFileNormalizer.class, 
+            ReplacementFileNormalizer.PARAM_MODEL_LOCATION, aModelLocation,
+            ReplacementFileNormalizer.PARAM_SRC_SURROUNDINGS, aSrc,
+            ReplacementFileNormalizer.PARAM_TARGET_SURROUNDINGS, aTarget), 
+            CAS.NAME_DEFAULT_SOFA, getSourceView());
+        ab.add(createEngineDescription(ApplyChangesAnnotator.class), 
                 ApplyChangesAnnotator.VIEW_SOURCE, getSourceView(), 
                 ApplyChangesAnnotator.VIEW_TARGET, getTargetView());    
-    	AnalysisEngineDescription aed = ab.createAggregateDescription();
-    //	aed.setAnnotatorImplementationName(new File(filepath).getName().split("\\")[0]);
+        AnalysisEngineDescription aed = ab.createAggregateDescription();
+    //    aed.setAnnotatorImplementationName(new File(filepath).getName().split("\\")[0]);
     
-    	return aed;	
+        return aed;    
     }
 
     public AnalysisEngineDescription getExpressiveLengtheningNormalization(
             ExternalResourceDescription aFrequencyProvider)
         throws ResourceInitializationException
     {
-    	AggregateBuilder ab = new AggregateBuilder();
-    	ab.add(createEngineDescription(BreakIteratorSegmenter.class), 
-    	        CAS.NAME_DEFAULT_SOFA, getSourceView());
-    	ab.add(createEngineDescription(ExpressiveLengtheningNormalizer.class,
-    	        ExpressiveLengtheningNormalizer.FREQUENCY_PROVIDER, aFrequencyProvider), 
-    	        CAS.NAME_DEFAULT_SOFA, getSourceView());
-    	ab.add(createEngineDescription(ApplyChangesAnnotator.class), 
+        AggregateBuilder ab = new AggregateBuilder();
+        ab.add(createEngineDescription(BreakIteratorSegmenter.class), 
+                CAS.NAME_DEFAULT_SOFA, getSourceView());
+        ab.add(createEngineDescription(ExpressiveLengtheningNormalizer.class,
+                ExpressiveLengtheningNormalizer.FREQUENCY_PROVIDER, aFrequencyProvider), 
+                CAS.NAME_DEFAULT_SOFA, getSourceView());
+        ab.add(createEngineDescription(ApplyChangesAnnotator.class), 
                 ApplyChangesAnnotator.VIEW_SOURCE, getSourceView(), 
                 ApplyChangesAnnotator.VIEW_TARGET, getTargetView());    
-    	AnalysisEngineDescription aed = ab.createAggregateDescription();
-    	aed.setAnnotatorImplementationName("Lengthening");
+        AnalysisEngineDescription aed = ab.createAggregateDescription();
+        aed.setAnnotatorImplementationName("Lengthening");
     
-    	return aed;
+        return aed;
     }
 
     public AnalysisEngineDescription getCapitalizationNormalization(
             ExternalResourceDescription aFrequencyProvider)
         throws ResourceInitializationException
     {
-    	AggregateBuilder ab = new AggregateBuilder();
-    	ab.add(createEngineDescription(BreakIteratorSegmenter.class), 
-    	        CAS.NAME_DEFAULT_SOFA, getSourceView());
-    	ab.add(createEngineDescription(CapitalizationNormalizer.class, 
-    	        CapitalizationNormalizer.FREQUENCY_PROVIDER, aFrequencyProvider), 
-    	        CAS.NAME_DEFAULT_SOFA, getSourceView());
-    	ab.add(createEngineDescription(ApplyChangesAnnotator.class), 
+        AggregateBuilder ab = new AggregateBuilder();
+        ab.add(createEngineDescription(BreakIteratorSegmenter.class), 
+                CAS.NAME_DEFAULT_SOFA, getSourceView());
+        ab.add(createEngineDescription(CapitalizationNormalizer.class, 
+                CapitalizationNormalizer.FREQUENCY_PROVIDER, aFrequencyProvider), 
+                CAS.NAME_DEFAULT_SOFA, getSourceView());
+        ab.add(createEngineDescription(ApplyChangesAnnotator.class), 
                 ApplyChangesAnnotator.VIEW_SOURCE, getSourceView(), 
                 ApplyChangesAnnotator.VIEW_TARGET, getTargetView());    
-    	AnalysisEngineDescription aed = ab.createAggregateDescription();
-    	aed.setAnnotatorImplementationName("Capitalization");
+        AnalysisEngineDescription aed = ab.createAggregateDescription();
+        aed.setAnnotatorImplementationName("Capitalization");
     
-    	return aed;
+        return aed;
     }
 
     protected String getSourceView()

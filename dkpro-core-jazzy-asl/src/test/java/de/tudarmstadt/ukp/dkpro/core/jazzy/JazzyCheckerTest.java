@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.jazzy;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
@@ -78,15 +78,17 @@ public class JazzyCheckerTest
     {
         String testDocumentEnglish = "The cat sta on the mat .";
 
-        ExternalResourceDescription resource = ExternalResourceFactory.createExternalResourceDescription(TestFrequencyCountResource.class);
+        ExternalResourceDescription resource = ExternalResourceFactory
+                .createExternalResourceDescription(TestFrequencyCountResource.class);
 
 //        String context = DkproContext.getContext().getWorkspace("web1t").getAbsolutePath();
 //        String workspace = "en";
-//        ExternalResourceDescription resource = ExternalResourceFactory.createExternalResourceDescription(
+//        ExternalResourceDescription resource = createExternalResourceDescription(
 //                Web1TFrequencyCountResource.class,
 //                Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
 //                Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "3",
-//                Web1TFrequencyCountResource.PARAM_INDEX_PATH, new File(context, workspace).getAbsolutePath()
+//                Web1TFrequencyCountResource.PARAM_INDEX_PATH, 
+//                        new File(context, workspace).getAbsolutePath()
 //        );
         
         AnalysisEngine engine = createEngine(

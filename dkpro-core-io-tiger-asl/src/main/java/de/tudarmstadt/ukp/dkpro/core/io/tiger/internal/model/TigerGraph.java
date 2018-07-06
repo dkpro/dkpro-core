@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2013
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model;
 
 import java.util.List;
@@ -27,11 +27,14 @@ public class TigerGraph
 {
     @XmlAttribute
     public String root;
+
     @XmlAttribute
     public boolean discontinuous;
+    
     @XmlElementWrapper(name = "terminals")
     @XmlElement(name = "t")
     public List<TigerTerminal> terminals;
+    
     @XmlElementWrapper(name = "nonterminals")
     @XmlElement(name = "nt")
     public List<TigerNonTerminal> nonTerminals;

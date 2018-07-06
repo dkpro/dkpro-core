@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2015
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,14 +14,14 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.codehaus.plexus.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 
@@ -88,7 +88,7 @@ public class BratEventArgument
         Matcher m = PATTERN.matcher(aLine);
         
         if (!m.matches()) {
-            throw new IllegalArgumentException("Illegal event argument format ["+aLine+"]");
+            throw new IllegalArgumentException("Illegal event argument format [" + aLine + "]");
         }
 
         int index = 0;

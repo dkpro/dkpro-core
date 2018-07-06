@@ -1,0 +1,66 @@
+{
+    "edges": [],
+    "media": "This is a test. And here is another one.\n",
+    "nodes": [
+        {
+            "annotations": {
+                "label": "This is a test."
+            },
+            "entity": "node",
+            "id": "tokenizer-n1@1",
+            "index": 0,
+            "links": [
+                [
+                    [
+                        "tokenizer",
+                        "tokenizer-r1@1"
+                    ]
+                ]
+            ],
+            "origin": "tokenizer",
+            "rank": 0,
+            "type": "sentence"
+        },
+        {
+            "annotations": {
+                "label": "And here is another one."
+            },
+            "entity": "node",
+            "id": "tokenizer-n2@1",
+            "index": 1,
+            "links": [
+                [
+                    [
+                        "tokenizer",
+                        "tokenizer-r2@1"
+                    ]
+                ]
+            ],
+            "origin": "tokenizer",
+            "rank": 0,
+            "type": "sentence"
+        }
+    ],
+    "regions": [
+        {
+            "anchors": [
+                0,
+                15
+            ],
+            "entity": "region",
+            "id": "tokenizer-r1@1",
+            "index": 0,
+            "origin": "tokenizer"
+        },
+        {
+            "anchors": [
+                16,
+                40
+            ],
+            "entity": "region",
+            "id": "tokenizer-r2@1",
+            "index": 1,
+            "origin": "tokenizer"
+        }
+    ]
+}

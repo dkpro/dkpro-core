@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2016
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.nlp4j.internal;
 
 import static java.util.Arrays.asList;
@@ -35,13 +35,13 @@ import org.w3c.dom.Element;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import edu.emory.mathcs.nlp.common.collection.tree.PrefixTree;
-import edu.emory.mathcs.nlp.common.collection.tuple.Pair;
 import edu.emory.mathcs.nlp.common.util.IOUtils;
 import edu.emory.mathcs.nlp.component.template.OnlineComponent;
 import edu.emory.mathcs.nlp.component.template.feature.FeatureItem;
 import edu.emory.mathcs.nlp.component.template.feature.Field;
+import edu.emory.mathcs.nlp.component.template.lexicon.GlobalLexica;
+import edu.emory.mathcs.nlp.component.template.lexicon.GlobalLexicon;
 import edu.emory.mathcs.nlp.component.template.node.NLPNode;
-import edu.emory.mathcs.nlp.component.template.util.GlobalLexica;
 
 public class EmoryNlpUtils
 {
@@ -64,21 +64,21 @@ public class EmoryNlpUtils
         
         lexica = new GlobalLexica<>(root);
         
-        lexica.setAmbiguityClasses(new Pair<Map<String, List<String>>, Field>(
+        lexica.setAmbiguityClasses(new GlobalLexicon<Map<String, List<String>>>(
                 loadLexicon(LEXICA_PREFIX + "en-ambiguity-classes-simplified-lowercase.xz"),
-                Field.word_form_simplified_lowercase));
+                Field.word_form_simplified_lowercase, "en-ambiguity-classes-simplified-lowercase"));
 
-        lexica.setWordClusters(new Pair<Map<String,Set<String>>, Field>(
+        lexica.setWordClusters(new GlobalLexicon<Map<String,Set<String>>>(
                 loadLexicon(LEXICA_PREFIX + "en-brown-clusters-simplified-lowercase.xz"),
-                Field.word_form_simplified_lowercase));
+                Field.word_form_simplified_lowercase, "en-brown-clusters-simplified-lowercase"));
 
-        lexica.setNamedEntityGazetteers(new Pair<PrefixTree<String,Set<String>>, Field>(
+        lexica.setNamedEntityGazetteers(new GlobalLexicon<PrefixTree<String,Set<String>>>(
                 loadLexicon(LEXICA_PREFIX + "en-named-entity-gazetteers-simplified.xz"),
-                Field.word_form_simplified));
+                Field.word_form_simplified, "en-named-entity-gazetteers-simplified"));
         
-        lexica.setWordEmbeddings(new Pair<Map<String,float[]>, Field>(
+        lexica.setWordEmbeddings(new GlobalLexicon<Map<String,float[]>>(
                 loadLexicon(LEXICA_PREFIX + "en-word-embeddings-undigitalized.xz"),
-                Field.word_form_undigitalized));
+                Field.word_form_undigitalized, "en-word-embeddings-undigitalized"));
 
 //        lexica.setStopWords(
 //                loadLexicon(LEXICA_PREFIX + "en-stop-words-simplified-lowercase.xz"));

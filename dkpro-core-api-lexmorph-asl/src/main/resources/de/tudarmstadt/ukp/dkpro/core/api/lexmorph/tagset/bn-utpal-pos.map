@@ -4,44 +4,44 @@ __META_SOURCE_URL__=http://www.isical.ac.in/~utpal/docs/POS-Tag%20List.pdf
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # NN   Noun
-NN=NN
+NN=POS_NOUN
 # NNP  Proper Noun
-NNP=NP
+NNP=POS_PROPN
 # PRP  Pronoun
-PRP=PR
+PRP=POS_PRON
 # DEM  Demonstrative
-DEM=PR
+DEM=POS_PRON
 # VM   Verb-finite
-VM=V
+VM=POS_VERB
 # VAUX Verb Auxiliary
-VAUX=V
+VAUX=POS_AUX
 # JJ   Adjective
-JJ=ADJ
+JJ=POS_ADJ
 # RB   Adverb
-RB=ADV
+RB=POS_ADV
 # PSP  Post position
-PSP=O
+PSP=POS_X
 # RP   Particles
-RP=O
+RP=POS_X
 # CC   Conjuncts
-CC=CONJ
+CC=POS_CONJ
 # WQ   Question Words
-WQ=O
+WQ=POS_X
 # QF   Quantifiers
-QF=O
+QF=POS_X
 # QC   Cardinal
-QC=CARD
+QC=POS_NUM
 # INTF Intensifier
-INTF=O
+INTF=POS_X
 # INJ  Interjection
-INJ=O
+INJ=POS_INTJ
 # NEG  Negation
-NEG=O
+NEG=POS_X
 # SYM  Symbol
-SYM=O
+SYM=POS_SYM
 # RDP  Re-duplicative
-RDP=O
+RDP=POS_X
 # UNK  Unknown
-UNK=O
-*=O
+UNK=POS_X
+*=POS_X
 

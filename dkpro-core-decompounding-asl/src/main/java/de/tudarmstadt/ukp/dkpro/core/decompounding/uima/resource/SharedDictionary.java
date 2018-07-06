@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *******************************************************************************/
+ **/
 package de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource;
 
 import java.io.BufferedReader;
@@ -38,7 +38,6 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.German98Dictionary
 public class SharedDictionary
     extends Resource_ImplBase
 {
-
     /**
      * Use this language instead of the default language.
      */
@@ -54,12 +53,34 @@ public class SharedDictionary
     protected String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Load the model from this location instead of locating the model automatically.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
     protected String modelLocation;
 
+    /**
+     * The character encoding used by the model.
+     */
+    public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
+    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    private String modelEncoding;
+    
     /**
      * Load the model from this location instead of locating the model automatically.
      */
@@ -130,7 +151,8 @@ public class SharedDictionary
             protected Dictionary produceResource(InputStream aStream)
                 throws Exception
             {
-                return new German98Dictionary(aStream, affixModelProvider.getResource());
+                return new German98Dictionary(aStream, affixModelProvider.getResource(),
+                        modelEncoding);
             }
         };
 
@@ -141,12 +163,11 @@ public class SharedDictionary
 
     public Dictionary getDictionary() throws IOException
     {
-        if(this.dict == null){
+        if (this.dict == null) {
             affixModelProvider.configure();
             modelProvider.configure();
             this.dict = modelProvider.getResource();
         }
         return this.dict;
     }
-
 }

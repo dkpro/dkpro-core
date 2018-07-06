@@ -1,0 +1,49 @@
+groupId: org.dkpro.core.datasets.sethr
+datasetId: sethrplus
+version: 20160613
+language: hr
+mediaType: text/x.org.dkpro.conll-u
+encoding: UTF-8
+
+name: SETimes.HR+ Croatian dependency treebank
+url: https://github.com/ffnlp/sethr
+attribution: |
+  Agić and Ljubešić (2014)
+  (link:http://www.lrec-conf.org/proceedings/lrec2014/pdf/690_Paper.pdf[PDF])
+  (link:http://aclweb.org/anthology/L/L14/L14-1542.bib[bib])
+description: |
+  The treebank is a result of an effort in providing free-culture language resources for Croatian by
+  the NLP group at FF Zagreb.
+   
+  (This description has been sourced from the corpus website).
+  
+licenses:
+  - name: CC-BY 4.0
+    url: http://creativecommons.org/licenses/by/4.0/
+    comment: SETimes.HR dataset (set.hr.conll)
+  - name: CC-BY-NC-SA 4.0
+    url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+    comment: web.hr.conll and news.hr.conll datasets
+
+artifacts:
+  LICENSE-CC-BY.txt:
+    url: "https://creativecommons.org/licenses/by/4.0/legalcode.txt"
+    sha1: 563e2664fed2ce3e65bd1dd396422f46c5db9040
+  LICENSE-CC-BY-NC-SA.txt:
+    url: "https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.txt"
+    sha1: 5d572362228001e9dbc0c8802f49121ceb78ace2
+  data.zip:
+    url: https://github.com/ffnlp/sethr/archive/c50697a81ee588b70328952dd56175da4c298c7c.zip
+    sha1: a52d13cfa91589c0d93fe0a90333a4f0e997b7cf
+    actions:
+      - action: explode
+        configuration: { strip: 1, includes: [ "LICENSE.md", "README.md", "*.hr*.conll" ] }
+
+roles:
+  licenses:
+    - LICENSE-CC-BY.txt
+    - LICENSE-CC-BY-NC-SA.txt
+  training:
+    - "data/*.hr.conll"
+  testing:
+    - "data/*.hr.test.conll"

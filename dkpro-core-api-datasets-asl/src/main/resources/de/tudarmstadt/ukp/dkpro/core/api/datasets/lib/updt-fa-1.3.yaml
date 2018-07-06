@@ -1,0 +1,50 @@
+groupId: org.dkpro.core.datasets.sequoia
+datasetId: sequoia
+version: 1.3
+language: fa
+mediaType: text/x.org.dkpro.conll-2006
+encoding: UTF-8
+
+name: Uppsala Persian Dependency Treebank
+url: http://stp.lingfil.uu.se/%7Emojgan/UPDT.html
+attribution: Mojgan Seraji, under the supervision of Joakim Nivre and Carina Jahani.
+description: |
+  Uppsala Persian Dependency Treebank (UPDT) (Seraji, 2015, Chapter 5, pp. 97-146) is a 
+  dependency-based syntactically annotated corpus.
+
+  (This description has been sourced from the dataset website).
+
+licenses:
+  - name: CC-BY 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+
+artifacts:
+  LICENSE.txt:
+    url: http://creativecommons.org/licenses/by/3.0/legalcode.txt
+    sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+  train-conll.tar.gz:
+    url: "http://stp.lingfil.uu.se/~mojgan/train.conll.tar.gz"
+    sha1: 6ace1d1132b121b09d0b88f53749d28a59843cd5
+    actions:
+      - action: explode
+  dev-conll.tar.gz:
+    url: "http://stp.lingfil.uu.se/~mojgan/dev.conll.tar.gz"
+    sha1: e96a06b399bb1f565e16e49fb4dfe7da241f5d75
+    actions:
+      - action: explode
+  test-conll.tar.gz:
+    url: "http://stp.lingfil.uu.se/~mojgan/test.conll.tar.gz"
+    sha1: ec79e91413dd2c49883bfbbd1a207f68377ac683
+    actions:
+      - action: explode
+
+roles:
+  licenses:
+    - LICENSE.txt
+  training:
+    - train-conll/train.conll
+  testing:
+    - test-conll/test.conll
+  development:
+    - dev-conll/dev.conll
+    

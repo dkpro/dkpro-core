@@ -5,119 +5,119 @@
 __META_SOURCE_URL__=http://faculty.washington.edu/dillon/GramResources/penntable.html
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
-*=O
-,=PUNC
--=PUNC
-.=PUNC
-;=PUNC
-?=PUNC
-(=PUNC
-)=PUNC
-``=PUNC
-''=PUNC
-\#=PUNC
--LRB-=PUNC
--RRB-=PUNC
+*=POS_X
+,=POS_PUNCT
+-=POS_PUNCT
+.=POS_PUNCT
+;=POS_PUNCT
+?=POS_PUNCT
+(=POS_PUNCT
+)=POS_PUNCT
+``=POS_PUNCT
+''=POS_PUNCT
+\#=POS_PUNCT
+-LRB-=POS_PUNCT
+-RRB-=POS_PUNCT
 # 1.	CC	Coordinating conjunction
-CC=CONJ
+CC=POS_CONJ
 # 2.	CD	Cardinal number
-CD=CARD
+CD=POS_NUM
 # 3.	DT	Determiner
-DT=ART
+DT=POS_DET
 # 4.	EX	Existential there
-EX=ART
+EX=POS_DET
 # 5.	FW	Foreign word
-FW=O
+FW=POS_X
 # 6.	IN	Preposition or subordinating conjunction
-IN=PP
+IN=POS_ADP
 # 7.	JJ	Adjective
-JJ=ADJ
+JJ=POS_ADJ
 # 8.	JJR	Adjective, comparative
-JJR=ADJ
+JJR=POS_ADJ
 # 9.	JJS	Adjective, superlative
-JJS=ADJ
+JJS=POS_ADJ
 # 10.	LS	List item marker
-LS=O
+LS=POS_X
 # 11.	MD	Modal
-MD=V
+MD=POS_VERB
 # 12.	NN	Noun, singular or mass
-NN=NN
+NN=POS_NOUN
 # 13.	NNS	Noun, plural
-NNS=NN
+NNS=POS_NOUN
 # 14.	NP	Proper noun, singular
-NP=NP
-NNP=NP
+NP=POS_PROPN
+NNP=POS_PROPN
 # 15.	NPS	Proper noun, plural
-NPS=NP
-NNPS=NP
+NPS=POS_PROPN
+NNPS=POS_PROPN
 # 16.	PDT	Predeterminer
-PDT=ART
+PDT=POS_DET
 # 17.	POS	Possessive ending
-POS=O
+POS=POS_X
 # 18.	PP	Personal pronoun
-PP=PR
-PRP=PR
+PP=POS_PRON
+PRP=POS_PRON
 # 19.	PP$	Possessive pronoun
-PP$=PR
-PRP$=PR
+PP$=POS_PRON
+PRP$=POS_PRON
 # 20.	RB	Adverb
-RB=ADV
+RB=POS_ADV
 # 21.	RBR	Adverb, comparative	
-RBR=ADV
+RBR=POS_ADV
 # 22.	RBS	Adverb, superlative
-RBS=ADV
+RBS=POS_ADV
 # 23.	RP	Particle
-RP=PP
-SENT=PUNC
+RP=POS_ADP
+SENT=POS_PUNCT
 # 24.	SYM	Symbol
-SYM=PUNC
+SYM=POS_SYM
 # 25.	TO	to
-TO=PP
+TO=POS_ADP
 # 26.	UH	Interjection
-UH=O
+UH=POS_INTJ
 # 27.	VB	Verb (be), base form
-VB=V
+VB=POS_VERB
 # 28.	VBD	Verb (be), past tense
-VBD=V
+VBD=POS_VERB
 # 29.	VBG	Verb (be), gerund or present participle
-VBG=V
+VBG=POS_VERB
 # 30.	VBN	Verb (be), past participle
-VBN=V
+VBN=POS_VERB
 # 31.	VBP	Verb (be), non-3rd person singular present
-VBP=V
+VBP=POS_VERB
 # 32.	VBZ	Verb (be), 3rd person singular present
-VBZ=V
+VBZ=POS_VERB
 #		VH	Verb (have), base form
-VH=V
+VH=POS_VERB
 #		VHD	Verb (have), past tense
-VHD=V
+VHD=POS_VERB
 #		VHG	Verb (have), gerund or present participle
-VHG=V
+VHG=POS_VERB
 #		VHN	Verb (have), past participle
-VHN=V
+VHN=POS_VERB
 #		VHP	Verb (have), non-3rd person singular present
-VHP=V
+VHP=POS_VERB
 #		VHZ	Verb (have), 3rd person singular present
-VHZ=V
+VHZ=POS_VERB
 #		VV	Verb (other verbs), base form
-VV=V
+VV=POS_VERB
 #		VvD	Verb (other verbs), past tense
-VVD=V
+VVD=POS_VERB
 #		VVG	Verb (other verbs), gerund or present participle
-VVG=V
+VVG=POS_VERB
 #		VVN	Verb (other verbs), past participle
-VVN=V
+VVN=POS_VERB
 #		VVP	Verb (other verbs), non-3rd person singular present
-VVP=V
+VVP=POS_VERB
 #		VVZ	Verb (other verbs), 3rd person singular present
-VVZ=V
+VVZ=POS_VERB
 # 33.	WDT	Wh-determiner
-WDT=ART
+WDT=POS_DET
 # 34.	WP	Wh-pronoun
-WP=PR
+WP=POS_PRON
 # 35.	WP$	Possessive wh-pronoun
-WP$=PR
+WP$=POS_PRON
 # 36.	WRB	Wh-adverb
-WRB=ADV
-\!=PUNC
-\:=PUNC
+WRB=POS_ADV
+\!=POS_PUNCT
+\:=POS_PUNCT

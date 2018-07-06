@@ -1,0 +1,97 @@
+<% 
+def renderLicense(license)
+{
+  if (license.url) {
+     return "link:${license.url}[${license.name}]"
+  } else {
+     return "${license.name}"
+  }
+}
+
+def links(dataset)
+{
+    def html = '++++\n<div style="float:right">\n';
+    html += "<a href=\"${dataset.githubUrl}\">Edit on GitHub</a><br/>\n";
+    html += '</div>\n++++\n';
+    return html;
+}
+
+datasets
+    .groupBy { it.value.language }
+    .sort { it.key }
+    .each { language, languageDatasets ->
+%>
+=== ${language} 
+<%
+        languageDatasets.each { key, dataset ->
+%>
+[[dataset-${key}]]
+==== ${dataset.name} 
+
+${links(dataset)}
+
+****
+[horizontal, role="small"]
+ID::          ${key}
+Version::     ${dataset.version ?: 'unknown'}
+Media type::  ${dataset.mediaType ?: 'unknown'}
+Language::    ${dataset.language ?: 'unknown'}
+Encoding::    ${dataset.encoding ?: 'unknown'}
+URL::         ${dataset.url ?: 'unknown'}
+Attribution{empty}footnoteref:[attributionDisclaimer]:: ${dataset.attribution ?: 'unknown'}
+License{empty}footnoteref:[licenseDisclaimer]:: <%
+  if (dataset.licenses) {
+    dataset.licenses.eachWithIndex { license, i ->
+      if (i > 0) print ", "
+      print "__${renderLicense(license)}__";
+    }
+  }
+  else {
+    %>__unknown__<%
+  }
+%>
+****
+
+.Description
+${dataset.description ?: ''}
+
+<%
+  def licensesWithComments = dataset.licenses.grep { it.comment };
+  if (licensesWithComments) {
+  %>
+.License comments for ${dataset.name}
+[options="header", cols="1,2", role="small"]
+|====
+| License | Comment
+  <%
+    licensesWithComments.each { license -> 
+      print "| ${renderLicense(license)}";
+      print "| ${license.comment}"
+    }
+  %>
+|====
+  <%
+  }
+%>
+
+.Artifacts for ${dataset.name}
+[options="header", cols="1,2", role="small"]
+|====
+| Artifact | SHA1
+<%
+  dataset.artifacts.each { artifactKey, artifact ->
+    if (artifact.text) {
+      println "| ${artifactKey}"
+      println "| __generated__"
+    }
+    else {
+      println "| link:${artifact.url}[${artifactKey}]"
+      println "| ${artifact.sha1}"
+    }
+  }
+%>
+|====
+<%
+    }
+}
+%>

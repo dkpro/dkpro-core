@@ -1,9 +1,9 @@
 <%
-import Util;
+import de.tudarmstadt.ukp.dkpro.core.doc.Util;
 %>
 
 .Models (${models.size()})
-[options="header"]
+[options="header", cols="1,2,1,1"]
 |====
 |Language|Tool|Variant|Version
 

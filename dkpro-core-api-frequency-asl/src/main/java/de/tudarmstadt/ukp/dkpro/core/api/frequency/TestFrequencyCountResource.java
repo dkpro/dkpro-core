@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2011
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.api.frequency;
 
 import java.util.Map;
@@ -32,26 +32,26 @@ import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.TestFrequencyCountPr
  *
  */
 public final class TestFrequencyCountResource
-	extends FrequencyCountResourceBase
-	implements FrequencyCountProvider
+    extends FrequencyCountResourceBase
+    implements FrequencyCountProvider
 {
 
     @Override
-	public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
-		throws ResourceInitializationException
-	{
-		if (!super.initialize(aSpecifier, aAdditionalParams)) {
-			return false;
-		}
-		initializeProvider();
-		return true;
-	}
-
-    @Override
-    protected void initializeProvider()
+    public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
         throws ResourceInitializationException
     {
+        if (!super.initialize(aSpecifier, aAdditionalParams)) {
+            return false;
+        }
+        initializeProvider();
+        return true;
+    }
+
+    @Override
+    protected void initializeProvider() throws ResourceInitializationException
+    {
         provider = new TestFrequencyCountProvider();
-        ((FrequencyCountProviderBase) provider).setScaleDownFactor(Integer.parseInt(this.scaleDownFactor));
+        ((FrequencyCountProviderBase) provider)
+                .setScaleDownFactor(Integer.parseInt(this.scaleDownFactor));
     }
 }

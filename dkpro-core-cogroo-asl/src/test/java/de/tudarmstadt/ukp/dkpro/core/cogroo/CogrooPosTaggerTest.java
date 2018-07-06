@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2014
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.cogroo;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
@@ -39,7 +39,7 @@ public class CogrooPosTaggerTest
     {
         JCas jcas = runTest("pt", null, "Este é um teste .",
                 new String[] { "pron-det", "v-fin", "art", "n", "." },
-                new String[] { "PR", "V", "ART", "NN", "POS" });
+                new String[] { "POS_PRON", "POS_VERB", "POS_DET", "POS_NOUN", "POS" });
                 
 //        String[] posTags = new String[] { "?", "adj", "adv", "art", "conj-c", "conj-s", "ec", "in",
 //                "n", "num", "pp", "pron-det", "pron-indp", "pron-pers", "prop", "prp", "punc",
@@ -47,26 +47,26 @@ public class CogrooPosTaggerTest
 //
 //        AssertAnnotations.assertTagset(POS.class, "bosque", posTags, jcas);
     }
-    
-	private JCas runTest(String language, String variant, String testDocument, String[] tags,
-			String[] tagClasses)
-		throws Exception
-	{
-		AnalysisEngine engine = createEngine(CogrooPosTagger.class);
 
-		JCas jcas = TestRunner.runTest(engine, language, testDocument);
+    private JCas runTest(String language, String variant, String testDocument, String[] tags,
+            String[] tagClasses)
+        throws Exception
+    {
+        AnalysisEngine engine = createEngine(CogrooPosTagger.class);
 
-		AssertAnnotations.assertPOS(tagClasses, tags, select(jcas, POS.class));
-		
-		return jcas;
-	}
+        JCas jcas = TestRunner.runTest(engine, language, testDocument);
 
-	@Rule
-	public TestName name = new TestName();
+        AssertAnnotations.assertPOS(tagClasses, tags, select(jcas, POS.class));
 
-	@Before
-	public void printSeparator()
-	{
-		System.out.println("\n=== " + name.getMethodName() + " =====================");
-	}
+        return jcas;
+    }
+
+    @Rule
+    public TestName name = new TestName();
+
+    @Before
+    public void printSeparator()
+    {
+        System.out.println("\n=== " + name.getMethodName() + " =====================");
+    }
 }

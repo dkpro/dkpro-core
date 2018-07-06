@@ -19,6 +19,7 @@ Sentence
    sofa: _InitialView
    begin: 0
    end: 169
+   id: "s115"
 [Save for this one excursion , he spent his days in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated .]
 PennTree
    sofa: _InitialView
@@ -46,11 +47,12 @@ Constituent
       children: FSArray
    children: FSArray
 [Save]
-V
+POS_VERB
    sofa: _InitialView
    begin: 0
    end: 4
    PosValue: "VB"
+   coarseValue: "VERB"
 [Save]
 Lemma
    sofa: _InitialView
@@ -79,11 +81,13 @@ Token
       begin: 0
       end: 4
       value: "save"
-   pos: V
+   pos: POS_VERB
       sofa: _InitialView
       begin: 0
       end: 4
       PosValue: "VB"
+      coarseValue: "VERB"
+   id: "s115_0"
 [for this one excursion ,]
 Constituent
    sofa: _InitialView
@@ -104,11 +108,12 @@ Constituent
       children: FSArray
    children: FSArray
 [for]
-PP
+POS_ADP
    sofa: _InitialView
    begin: 5
    end: 8
    PosValue: "IN"
+   coarseValue: "ADP"
 [for]
 Lemma
    sofa: _InitialView
@@ -143,11 +148,13 @@ Token
       begin: 5
       end: 8
       value: "for"
-   pos: PP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 5
       end: 8
       PosValue: "IN"
+      coarseValue: "ADP"
+   id: "s115_1"
 [this one excursion ,]
 SemArg
    sofa: _InitialView
@@ -179,11 +186,12 @@ Constituent
       children: FSArray
    children: FSArray
 [this]
-ART
+POS_DET
    sofa: _InitialView
    begin: 9
    end: 13
    PosValue: "DT"
+   coarseValue: "DET"
 [this]
 Lemma
    sofa: _InitialView
@@ -224,17 +232,20 @@ Token
       begin: 9
       end: 13
       value: "this"
-   pos: ART
+   pos: POS_DET
       sofa: _InitialView
       begin: 9
       end: 13
       PosValue: "DT"
+      coarseValue: "DET"
+   id: "s115_2"
 [one]
-CARD
+POS_NUM
    sofa: _InitialView
    begin: 14
    end: 17
    PosValue: "CD"
+   coarseValue: "NUM"
 [one]
 Lemma
    sofa: _InitialView
@@ -275,17 +286,20 @@ Token
       begin: 14
       end: 17
       value: "one"
-   pos: CARD
+   pos: POS_NUM
       sofa: _InitialView
       begin: 14
       end: 17
       PosValue: "CD"
+      coarseValue: "NUM"
+   id: "s115_3"
 [excursion]
-NN
+POS_NOUN
    sofa: _InitialView
    begin: 18
    end: 27
    PosValue: "NN"
+   coarseValue: "NOUN"
 [excursion]
 Lemma
    sofa: _InitialView
@@ -326,11 +340,13 @@ Token
       begin: 18
       end: 27
       value: "excursion"
-   pos: NN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 18
       end: 27
       PosValue: "NN"
+      coarseValue: "NOUN"
+   id: "s115_4"
 [excursion]
 SemPred
    sofa: _InitialView
@@ -346,7 +362,7 @@ SemPred
    arguments: FSArray
    category: "Coreference"
 [,]
-O
+POS
    sofa: _InitialView
    begin: 28
    end: 29
@@ -391,17 +407,19 @@ Token
       begin: 28
       end: 29
       value: ","
-   pos: O
+   pos: POS
       sofa: _InitialView
       begin: 28
       end: 29
       PosValue: "PUNC,"
+   id: "s115_5"
 [he]
-PR
+POS_PRON
    sofa: _InitialView
    begin: 30
    end: 32
    PosValue: "PRP"
+   coarseValue: "PRON"
 [he]
 Lemma
    sofa: _InitialView
@@ -424,11 +442,13 @@ Token
       begin: 30
       end: 32
       value: "he"
-   pos: PR
+   pos: POS_PRON
       sofa: _InitialView
       begin: 30
       end: 32
       PosValue: "PRP"
+      coarseValue: "PRON"
+   id: "s115_6"
 [he]
 SemArg
    sofa: _InitialView
@@ -480,11 +500,12 @@ Constituent
       children: FSArray
    children: FSArray
 [spent]
-V
+POS_VERB
    sofa: _InitialView
    begin: 33
    end: 38
    PosValue: "VBD"
+   coarseValue: "VERB"
 [spent]
 Lemma
    sofa: _InitialView
@@ -513,11 +534,13 @@ Token
       begin: 33
       end: 38
       value: "spend"
-   pos: V
+   pos: POS_VERB
       sofa: _InitialView
       begin: 33
       end: 38
       PosValue: "VBD"
+      coarseValue: "VERB"
+   id: "s115_7"
 [his days]
 Constituent
    sofa: _InitialView
@@ -538,11 +561,12 @@ Constituent
       children: FSArray
    children: FSArray
 [his]
-PR
+POS_PRON
    sofa: _InitialView
    begin: 39
    end: 42
    PosValue: "PRP$"
+   coarseValue: "PRON"
 [his]
 Lemma
    sofa: _InitialView
@@ -577,11 +601,13 @@ Token
       begin: 39
       end: 42
       value: "his"
-   pos: PR
+   pos: POS_PRON
       sofa: _InitialView
       begin: 39
       end: 42
       PosValue: "PRP$"
+      coarseValue: "PRON"
+   id: "s115_8"
 [his]
 SemArg
    sofa: _InitialView
@@ -595,11 +621,12 @@ SemPred
    arguments: FSArray
    category: "Coreference"
 [days]
-NN
+POS_NOUN
    sofa: _InitialView
    begin: 43
    end: 47
    PosValue: "NNS"
+   coarseValue: "NOUN"
 [days]
 Lemma
    sofa: _InitialView
@@ -634,11 +661,13 @@ Token
       begin: 43
       end: 47
       value: "day"
-   pos: NN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 43
       end: 47
       PosValue: "NNS"
+      coarseValue: "NOUN"
+   id: "s115_9"
 [days]
 SemArg
    sofa: _InitialView
@@ -696,11 +725,12 @@ Constituent
       children: FSArray
    children: FSArray
 [in]
-PP
+POS_ADP
    sofa: _InitialView
    begin: 48
    end: 50
    PosValue: "IN"
+   coarseValue: "ADP"
 [in]
 Lemma
    sofa: _InitialView
@@ -741,11 +771,13 @@ Token
       begin: 48
       end: 50
       value: "in"
-   pos: PP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 48
       end: 50
       PosValue: "IN"
+      coarseValue: "ADP"
+   id: "s115_10"
 [long and often solitary walks ,]
 Constituent
    sofa: _InitialView
@@ -815,11 +847,12 @@ Constituent
       children: FSArray
    children: FSArray
 [long]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 51
    end: 55
    PosValue: "JJ"
+   coarseValue: "ADJ"
 [long]
 Lemma
    sofa: _InitialView
@@ -872,11 +905,13 @@ Token
       begin: 51
       end: 55
       value: "long"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 51
       end: 55
       PosValue: "JJ"
+      coarseValue: "ADJ"
+   id: "s115_11"
 [long]
 SemPred
    sofa: _InitialView
@@ -885,11 +920,12 @@ SemPred
    arguments: FSArray
    category: "Duration"
 [and]
-CONJ
+POS_CONJ
    sofa: _InitialView
    begin: 56
    end: 59
    PosValue: "CC"
+   coarseValue: "CONJ"
 [and]
 Lemma
    sofa: _InitialView
@@ -942,11 +978,13 @@ Token
       begin: 56
       end: 59
       value: "and"
-   pos: CONJ
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 56
       end: 59
       PosValue: "CC"
+      coarseValue: "CONJ"
+   id: "s115_12"
 [often solitary]
 SemArg
    sofa: _InitialView
@@ -996,11 +1034,12 @@ Constituent
       children: FSArray
    children: FSArray
 [often]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 60
    end: 65
    PosValue: "RB"
+   coarseValue: "ADV"
 [often]
 Lemma
    sofa: _InitialView
@@ -1059,17 +1098,20 @@ Token
       begin: 60
       end: 65
       value: "often"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 60
       end: 65
       PosValue: "RB"
+      coarseValue: "ADV"
+   id: "s115_13"
 [solitary]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 66
    end: 74
    PosValue: "JJ"
+   coarseValue: "ADJ"
 [solitary]
 Lemma
    sofa: _InitialView
@@ -1128,17 +1170,20 @@ Token
       begin: 66
       end: 74
       value: "solitary"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 66
       end: 74
       PosValue: "JJ"
+      coarseValue: "ADJ"
+   id: "s115_14"
 [walks]
-V
+POS_VERB
    sofa: _InitialView
    begin: 75
    end: 80
    PosValue: "VBZ"
+   coarseValue: "VERB"
 [walks]
 Lemma
    sofa: _InitialView
@@ -1185,11 +1230,13 @@ Token
       begin: 75
       end: 80
       value: "walk"
-   pos: V
+   pos: POS_VERB
       sofa: _InitialView
       begin: 75
       end: 80
       PosValue: "VBZ"
+      coarseValue: "VERB"
+   id: "s115_15"
 [walks]
 SemArg
    sofa: _InitialView
@@ -1203,7 +1250,7 @@ SemPred
    arguments: FSArray
    category: "Self_motion"
 [,]
-O
+POS
    sofa: _InitialView
    begin: 81
    end: 82
@@ -1254,17 +1301,19 @@ Token
       begin: 81
       end: 82
       value: ","
-   pos: O
+   pos: POS
       sofa: _InitialView
       begin: 81
       end: 82
       PosValue: "PUNC,"
+   id: "s115_16"
 [or]
-CONJ
+POS_CONJ
    sofa: _InitialView
    begin: 83
    end: 85
    PosValue: "CC"
+   coarseValue: "CONJ"
 [or]
 Lemma
    sofa: _InitialView
@@ -1299,11 +1348,13 @@ Token
       begin: 83
       end: 85
       value: "or"
-   pos: CONJ
+   pos: POS_CONJ
       sofa: _InitialView
       begin: 83
       end: 85
       PosValue: "CC"
+      coarseValue: "CONJ"
+   id: "s115_17"
 [in chatting with a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1330,11 +1381,12 @@ Constituent
       children: FSArray
    children: FSArray
 [in]
-PP
+POS_ADP
    sofa: _InitialView
    begin: 86
    end: 88
    PosValue: "IN"
+   coarseValue: "ADP"
 [in]
 Lemma
    sofa: _InitialView
@@ -1375,11 +1427,13 @@ Token
       begin: 86
       end: 88
       value: "in"
-   pos: PP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 86
       end: 88
       PosValue: "IN"
+      coarseValue: "ADP"
+   id: "s115_18"
 [chatting with a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1412,11 +1466,12 @@ Constituent
       children: FSArray
    children: FSArray
 [chatting]
-V
+POS_VERB
    sofa: _InitialView
    begin: 89
    end: 97
    PosValue: "VBG"
+   coarseValue: "VERB"
 [chatting]
 Lemma
    sofa: _InitialView
@@ -1463,11 +1518,13 @@ Token
       begin: 89
       end: 97
       value: "chat"
-   pos: V
+   pos: POS_VERB
       sofa: _InitialView
       begin: 89
       end: 97
       PosValue: "VBG"
+      coarseValue: "VERB"
+   id: "s115_19"
 [chatting]
 SemPred
    sofa: _InitialView
@@ -1518,11 +1575,12 @@ Constituent
       children: FSArray
    children: FSArray
 [with]
-PP
+POS_ADP
    sofa: _InitialView
    begin: 98
    end: 102
    PosValue: "IN"
+   coarseValue: "ADP"
 [with]
 Lemma
    sofa: _InitialView
@@ -1575,11 +1633,13 @@ Token
       begin: 98
       end: 102
       value: "with"
-   pos: PP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 98
       end: 102
       PosValue: "IN"
+      coarseValue: "ADP"
+   id: "s115_20"
 [a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1673,11 +1733,12 @@ Constituent
       children: FSArray
    children: FSArray
 [a]
-ART
+POS_DET
    sofa: _InitialView
    begin: 103
    end: 104
    PosValue: "DT"
+   coarseValue: "DET"
 [a]
 Lemma
    sofa: _InitialView
@@ -1742,17 +1803,20 @@ Token
       begin: 103
       end: 104
       value: "a"
-   pos: ART
+   pos: POS_DET
       sofa: _InitialView
       begin: 103
       end: 104
       PosValue: "DT"
+      coarseValue: "DET"
+   id: "s115_21"
 [number]
-NN
+POS_NOUN
    sofa: _InitialView
    begin: 105
    end: 111
    PosValue: "NN"
+   coarseValue: "NOUN"
 [number]
 Lemma
    sofa: _InitialView
@@ -1817,11 +1881,13 @@ Token
       begin: 105
       end: 111
       value: "number"
-   pos: NN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 105
       end: 111
       PosValue: "NN"
+      coarseValue: "NOUN"
+   id: "s115_22"
 [number]
 SemArg
    sofa: _InitialView
@@ -1889,11 +1955,12 @@ Constituent
       children: FSArray
    children: FSArray
 [of]
-PP
+POS_ADP
    sofa: _InitialView
    begin: 112
    end: 114
    PosValue: "IN"
+   coarseValue: "ADP"
 [of]
 Lemma
    sofa: _InitialView
@@ -1958,11 +2025,13 @@ Token
       begin: 112
       end: 114
       value: "of"
-   pos: PP
+   pos: POS_ADP
       sofa: _InitialView
       begin: 112
       end: 114
       PosValue: "IN"
+      coarseValue: "ADP"
+   id: "s115_23"
 [village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -2080,11 +2149,12 @@ Constituent
       children: FSArray
    children: FSArray
 [village]
-NN
+POS_NOUN
    sofa: _InitialView
    begin: 115
    end: 122
    PosValue: "NN"
+   coarseValue: "NOUN"
 [village]
 Lemma
    sofa: _InitialView
@@ -2161,17 +2231,20 @@ Token
       begin: 115
       end: 122
       value: "village"
-   pos: NN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 115
       end: 122
       PosValue: "NN"
+      coarseValue: "NOUN"
+   id: "s115_24"
 [gossips]
-NN
+POS_NOUN
    sofa: _InitialView
    begin: 123
    end: 130
    PosValue: "NNS"
+   coarseValue: "NOUN"
 [gossips]
 Lemma
    sofa: _InitialView
@@ -2248,11 +2321,13 @@ Token
       begin: 123
       end: 130
       value: "gossip"
-   pos: NN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 123
       end: 130
       PosValue: "NNS"
+      coarseValue: "NOUN"
+   id: "s115_25"
 [whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -2382,11 +2457,12 @@ Constituent
       children: FSArray
    children: FSArray
 [whose]
-PR
+POS_PRON
    sofa: _InitialView
    begin: 131
    end: 136
    PosValue: "WP$"
+   coarseValue: "PRON"
 [whose]
 Lemma
    sofa: _InitialView
@@ -2469,17 +2545,20 @@ Token
       begin: 131
       end: 136
       value: "whose"
-   pos: PR
+   pos: POS_PRON
       sofa: _InitialView
       begin: 131
       end: 136
       PosValue: "WP$"
+      coarseValue: "PRON"
+   id: "s115_26"
 [acquaintance]
-NN
+POS_NOUN
    sofa: _InitialView
    begin: 137
    end: 149
    PosValue: "NN"
+   coarseValue: "NOUN"
 [acquaintance]
 Lemma
    sofa: _InitialView
@@ -2562,11 +2641,13 @@ Token
       begin: 137
       end: 149
       value: "acquaintance"
-   pos: NN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 137
       end: 149
       PosValue: "NN"
+      coarseValue: "NOUN"
+   id: "s115_27"
 [he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -2635,11 +2716,12 @@ Constituent
       children: FSArray
    children: FSArray
 [he]
-PR
+POS_PRON
    sofa: _InitialView
    begin: 150
    end: 152
    PosValue: "PRP"
+   coarseValue: "PRON"
 [he]
 Lemma
    sofa: _InitialView
@@ -2722,11 +2804,13 @@ Token
       begin: 150
       end: 152
       value: "he"
-   pos: PR
+   pos: POS_PRON
       sofa: _InitialView
       begin: 150
       end: 152
       PosValue: "PRP"
+      coarseValue: "PRON"
+   id: "s115_28"
 [he]
 SemArg
    sofa: _InitialView
@@ -2813,11 +2897,12 @@ Constituent
       children: FSArray
    children: FSArray
 [had]
-V
+POS_VERB
    sofa: _InitialView
    begin: 153
    end: 156
    PosValue: "VBD"
+   coarseValue: "VERB"
 [had]
 Lemma
    sofa: _InitialView
@@ -2906,11 +2991,13 @@ Token
       begin: 153
       end: 156
       value: "have"
-   pos: V
+   pos: POS_VERB
       sofa: _InitialView
       begin: 153
       end: 156
       PosValue: "VBD"
+      coarseValue: "VERB"
+   id: "s115_29"
 [cultivated .]
 Constituent
    sofa: _InitialView
@@ -2991,11 +3078,12 @@ Constituent
       children: FSArray
    children: FSArray
 [cultivated]
-V
+POS_VERB
    sofa: _InitialView
    begin: 157
    end: 167
    PosValue: "VBN"
+   coarseValue: "VERB"
 [cultivated]
 Lemma
    sofa: _InitialView
@@ -3090,18 +3178,20 @@ Token
       begin: 157
       end: 167
       value: "cultivate"
-   pos: V
+   pos: POS_VERB
       sofa: _InitialView
       begin: 157
       end: 167
       PosValue: "VBN"
+      coarseValue: "VERB"
+   id: "s115_30"
 [cultivated]
 SemArg
    sofa: _InitialView
    begin: 157
    end: 167
 [.]
-O
+POS
    sofa: _InitialView
    begin: 168
    end: 169
@@ -3200,11 +3290,12 @@ Token
       begin: 168
       end: 169
       value: "."
-   pos: O
+   pos: POS
       sofa: _InitialView
       begin: 168
       end: 169
       PosValue: "PUNC."
+   id: "s115_31"
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================

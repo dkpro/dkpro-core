@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *******************************************************************************/
+ **/
 package de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource;
 
 import java.util.Map;
@@ -30,12 +30,11 @@ public abstract class RankerResource
     extends Resource_ImplBase
     implements Ranker
 {
-
     /**
      *
      * This external resource wraps the finder resource used by the ranker.
      *
-     * */
+     */
     public static final String PARAM_FINDER_RESOURCE = "finderResource";
     @ExternalResource(key = PARAM_FINDER_RESOURCE)
     private SharedFinder finderResource;
@@ -44,8 +43,7 @@ public abstract class RankerResource
 
     @SuppressWarnings({ "rawtypes" })
     @Override
-    public boolean initialize(ResourceSpecifier aSpecifier,
-            Map aAdditionalParams)
+    public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
         throws ResourceInitializationException
     {
         if (!super.initialize(aSpecifier, aAdditionalParams)) {
@@ -55,8 +53,8 @@ public abstract class RankerResource
     }
 
     @Override
-    public void afterResourcesInitialized(){
+    public void afterResourcesInitialized()
+    {
         ranker.setFinder(finderResource.getFinder());
     }
-
 }

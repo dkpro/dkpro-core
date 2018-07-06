@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2015
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 
 import java.io.IOException;
@@ -28,7 +28,7 @@ public class BratRelationAnnotation
 {
     private static final Pattern PATTERN = Pattern.compile(
             "(?<ID>R[0-9]+)[\\t]" + 
-            "(?<TYPE>[a-zA-Z_][a-zA-Z0-9_-]+) " +
+            "(?<TYPE>[a-zA-Z0-9_][a-zA-Z0-9_-]+) " +
             "(?<ARG1LABEL>[a-zA-Z][a-zA-Z0-9]+):" +
             "(?<ARG1TARGET>[ET][0-9]+) " +
             "(?<ARG2LABEL>[a-zA-Z][a-zA-Z0-9]+):" +
@@ -49,7 +49,7 @@ public class BratRelationAnnotation
     public BratRelationAnnotation(int aId, String aType, String aArg1Label, String aArg1Target,
             String aArg2Label, String aArg2Target)
     {
-        this("R"+aId, aType, aArg1Label, aArg1Target, aArg2Label, aArg2Target);
+        this("R" + aId, aType, aArg1Label, aArg1Target, aArg2Label, aArg2Target);
     }
     
     public BratRelationAnnotation(String aId, String aType, String aArg1Label, String aArg1Target,
@@ -117,7 +117,8 @@ public class BratRelationAnnotation
         Matcher m = PATTERN.matcher(aLine);
         
         if (!m.matches()) {
-            throw new IllegalArgumentException("Illegal relation annotation format ["+aLine+"]");
+            throw new IllegalArgumentException(
+                    "Illegal relation annotation format [" + aLine + "]");
         }
 
         return new BratRelationAnnotation(m.group(ID), m.group(TYPE), m.group(ARG1_LABEL),

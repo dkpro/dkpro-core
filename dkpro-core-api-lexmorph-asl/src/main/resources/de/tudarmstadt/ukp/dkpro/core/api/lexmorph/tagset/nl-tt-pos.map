@@ -3,46 +3,88 @@
 # Dutch TreeTagger Part-of-Speech Tags
 
 __META_SOURCE_URL__=ftp://ftp.ims.uni-stuttgart.de/pub/corpora/dutch-tagset.txt
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS
+*=POS
 # $.		sentence-final punctuation
+$.=POS_PUNCT
 # adj		adjective
+adj=POS_ADJ
 # adj*kop		truncated adjective
+adj*kop=POS_ADJ
 # adjabbr		abbreviated adjective
+adjabbr=POS_ADJ
 # adv		adverb
+adv=POS_ADV
 # advabbr		abbreviated adverb
+advabbr=POS_ADV
 # conjcoord	coordinating conjunction
+conjcoord=POS_CONJ
 # conjsubo	subordinating conjunction
+conjsubo=POS_SCONJ
 # det__art	article
+det__art=POS_DET
 # det__demo	attributively used demonstrative pronoun
+det__demo=POS_PRON
 # det__indef	attributively used indefinite pronoun
+det__indef=POS_PRON
 # det__poss	attributively used possessive pronoun
+det__poss=POS_PRON
 # det__quest	attributively used question pronoun
+det__quest=POS_PRON
 # det__rel	attributively used relative pronoun
+det__rel=POS_PRON
 # int		interjection
+int=POS_INTJ
 # noun*kop	truncated noun
+noun*kop=POS_NOUN
 # nounabbr	abbreviated noun
+nounabbr=POS_NOUN
 # nounpl		plural noun
+nounpl=POS_NOUN
 # nounprop	proper name
+nounprop=POS_PROPN
 # nounsg		singular noun
+nounsg=POS_NOUN
 # num__card	cardinal number
+num__card=POS_NUM
 # num__ord	ordinal number
+num__ord=POS_NUM
 # partte		particle "te"
+partte=POS_PART
 # prep		preposition
+prep=POS_ADP
 # prepabbr	abbreviated preposition
+prepabbr=POS_ADP
 # pronadv		pronomial adverb
+pronadv=POS_ADV
 # prondemo	demonstrative pronoun (used substitutively)
+prondemo=POS_PRON
 # pronindef	indefined pronoun
+pronindef=POS_PRON
 # pronpers	personal pronoun
+pronpers=POS_PRON
 # pronposs	possessive pronoun
+pronposs=POS_PRON
 # pronquest	question pronoun
+pronquest=POS_PRON
 # pronrefl	reflexive pronoun
+pronrefl=POS_PRON
 # pronrel		relative pronoun
+pronrel=POS_PRON
 # punc		(non-sentential) punctuation
+punc=POS_SYM
 # verbinf		infinitival verb
+verbinf=POS_VERB
 # verbpapa	past participle verb
+verbpapa=POS_VERB
 # verbpastpl	plural past tense verb
+verbpastpl=POS_VERB
 # verbpastsg	singular past tense verb
+verbpastsg=POS_VERB
 # verbpresp	present participle verb
+verbpresp=POS_VERB
 # verbprespl	plural present tense verb
+verbprespl=POS_VERB
 # verbpressg	singular present tense verb
+verbpressg=POS_VERB

@@ -1,0 +1,2 @@
+de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg=http://w3id.org/meta-share/omtd-share/SemanticAnnotationType
+de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred=http://w3id.org/meta-share/omtd-share/SemanticFrame

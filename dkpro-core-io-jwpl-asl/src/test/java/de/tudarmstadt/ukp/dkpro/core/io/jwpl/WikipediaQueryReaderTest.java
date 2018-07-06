@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.jwpl;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
@@ -32,49 +32,49 @@ import de.tudarmstadt.ukp.wikipedia.api.WikiConstants.Language;
 @Ignore("Relies on non-public server")
 public class WikipediaQueryReaderTest
 {
-	@Test
-	public void wikipediaReaderTest()
-		throws Exception
-	{
+    @Test
+    public void wikipediaReaderTest()
+        throws Exception
+    {
         CollectionReaderDescription reader = createReaderDescription(
-		        WikipediaQueryReader.class,
-				WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
-				WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
-				WikipediaReaderBase.PARAM_USER,     "student",
-				WikipediaReaderBase.PARAM_PASSWORD, "student",
-				WikipediaReaderBase.PARAM_LANGUAGE, Language._test,
+                WikipediaQueryReader.class,
+                WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
+                WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
+                WikipediaReaderBase.PARAM_USER,     "student",
+                WikipediaReaderBase.PARAM_PASSWORD, "student",
+                WikipediaReaderBase.PARAM_LANGUAGE, Language._test,
                 WikipediaQueryReader.PARAM_TITLE_PATTERN, "UK%");
 
-		int i = 0;
-		for (JCas jcas : new JCasIterable(reader)) {
-			assertNotNull(jcas);
-			i++;
-		}
+        int i = 0;
+        for (JCas jcas : new JCasIterable(reader)) {
+            assertNotNull(jcas);
+            i++;
+        }
 
-		assertEquals(1, i);
-	}
+        assertEquals(1, i);
+    }
 
-	   @Test
-	    public void wikipediaReaderTest2()
-	        throws Exception
-	    {
-	        CollectionReaderDescription reader = createReaderDescription(
-	                WikipediaQueryReader.class,
-	                WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
-	                WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
-	                WikipediaReaderBase.PARAM_USER,     "student",
-	                WikipediaReaderBase.PARAM_PASSWORD, "student",
-	                WikipediaReaderBase.PARAM_LANGUAGE, Language._test,
-	                WikipediaQueryReader.PARAM_MIN_TOKENS, 1,
-	                WikipediaQueryReader.PARAM_MAX_TOKENS, 200,
-	                WikipediaQueryReader.PARAM_TITLE_PATTERN, "UK%");
+    @Test
+    public void wikipediaReaderTest2()
+        throws Exception
+    {
+        CollectionReaderDescription reader = createReaderDescription(
+                WikipediaQueryReader.class,
+                WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
+                WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
+                WikipediaReaderBase.PARAM_USER,     "student",
+                WikipediaReaderBase.PARAM_PASSWORD, "student",
+                WikipediaReaderBase.PARAM_LANGUAGE, Language._test,
+                WikipediaQueryReader.PARAM_MIN_TOKENS, 1,
+                WikipediaQueryReader.PARAM_MAX_TOKENS, 200,
+                WikipediaQueryReader.PARAM_TITLE_PATTERN, "UK%");
 
-	        int i = 0;
-	        for (JCas jcas : new JCasIterable(reader)) {
-	            assertNotNull(jcas);
-	            i++;
-	        }
+        int i = 0;
+        for (JCas jcas : new JCasIterable(reader)) {
+            assertNotNull(jcas);
+            i++;
+        }
 
-	        assertEquals(1, i);
-	    }
+        assertEquals(1, i);
+    }
 }

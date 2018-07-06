@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -36,6 +37,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.output.CloseShieldOutputStream;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -54,7 +56,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  * Dumps CAS content to a text file. This is useful when setting up test cases which contain a
  * reference output to which an actually produced CAS is compared. The format produced by this
  * component is more easily comparable than a XCAS or XMI format.
- * 
  */
 public class CasDumpWriter
     extends CasConsumer_ImplBase
@@ -86,6 +87,14 @@ public class CasDumpWriter
     private File outputFile;
 
     /**
+     * Output encoding. If unset, this defaults to UTF-8 if the target is a file and to the system
+     * default encoding if the target is the console.
+     */
+    public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = false)
+    private String targetEncoding;
+
+    /**
      * Whether to dump the content of the {@link CAS#getDocumentAnnotation()}.
      */
     public static final String PARAM_WRITE_DOCUMENT_META_DATA = "writeDocumentMetaData";
@@ -98,9 +107,9 @@ public class CasDumpWriter
      */
     public static final String PARAM_FEATURE_PATTERNS = "featurePatterns";
     @ConfigurationParameter(name = PARAM_FEATURE_PATTERNS, mandatory = true, defaultValue = {
-            INCLUDE_PREFIX+PATTERN_ANY, EXCLUDE_PREFIX+PATTERN_DOCUMENT_URI, 
-            EXCLUDE_PREFIX+PATTERN_COLLECTION_ID, EXCLUDE_PREFIX+PATTERN_DOCUMENT_BASE_URI, 
-            EXCLUDE_PREFIX+PATTERN_NULL_VALUE })
+            INCLUDE_PREFIX + PATTERN_ANY, EXCLUDE_PREFIX + PATTERN_DOCUMENT_URI,
+            EXCLUDE_PREFIX + PATTERN_COLLECTION_ID, EXCLUDE_PREFIX + PATTERN_DOCUMENT_BASE_URI,
+            EXCLUDE_PREFIX + PATTERN_NULL_VALUE })
     private String[] featurePatterns;
 
     private InExPattern[] cookedFeaturePatterns;
@@ -117,7 +126,7 @@ public class CasDumpWriter
      * order.
      */
     public static final String PARAM_SORT = "sort";
-    @ConfigurationParameter(name = PARAM_SORT, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_SORT, mandatory = true, defaultValue = "true")
     private boolean sort;
     
     private InExPattern[] cookedTypePatterns;
@@ -135,14 +144,17 @@ public class CasDumpWriter
         try {
             if (out == null) {
                 if ("-".equals(outputFile.getName())) {
-                    out = new PrintWriter(new CloseShieldOutputStream(System.out));
+                    out = new PrintWriter(
+                            new OutputStreamWriter(new CloseShieldOutputStream(System.out),
+                                    StringUtils.defaultString(targetEncoding,
+                                            Charset.defaultCharset().name())));
                 }
                 else {
                     if (outputFile.getParentFile() != null) {
                         outputFile.getParentFile().mkdirs();
                     }
                     out = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outputFile),
-                            "UTF-8"));
+                            StringUtils.defaultString(targetEncoding, "UTF-8")));
                 }
             }
         }
@@ -234,7 +246,8 @@ public class CasDumpWriter
                     }
                     
                     // Last resort: try the address.
-                    if (aO1 instanceof FeatureStructureImpl && aO2 instanceof FeatureStructureImpl) {
+                    if (aO1 instanceof FeatureStructureImpl
+                            && aO2 instanceof FeatureStructureImpl) {
                         return ((FeatureStructureImpl) aO1).getAddress()
                                 - ((FeatureStructureImpl) aO2).getAddress();
                     }
@@ -335,7 +348,8 @@ public class CasDumpWriter
         InExPattern[] patterns = new InExPattern[aPatterns.length];
         for (int i = 0; i < aPatterns.length; i++) {
             if (aPatterns[i].startsWith(INCLUDE_PREFIX)) {
-                patterns[i] = new InExPattern(aPatterns[i].substring(INCLUDE_PREFIX.length()), true);
+                patterns[i] = new InExPattern(aPatterns[i].substring(INCLUDE_PREFIX.length()),
+                        true);
             }
             else if (aPatterns[i].startsWith(EXCLUDE_PREFIX)) {
                 patterns[i] = new InExPattern(aPatterns[i].substring(EXCLUDE_PREFIX.length()),

@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2011
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,10 +14,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.negra;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.*;
+import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 
 import org.junit.Rule;
@@ -33,44 +33,57 @@ import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
  */
 public class NegraExportReaderTest
 {
-	@Test
-	public void negraTest()
-		throws Exception
-	{
+    @Test
+    public void negraTest()
+        throws Exception
+    {
         testOneWay(
                 createReaderDescription(NegraExportReader.class,
                         NegraExportReader.PARAM_LANGUAGE, "de",
-                        NegraExportReader.PARAM_ENCODING, "UTF-8",
+                        NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8",
                         NegraExportReader.PARAM_READ_PENN_TREE, true), 
                 "sentence.export.dump", 
                 "sentence.export");
-	}
+    }
 
-	@Test
-	public void negraTigerTest()
-		throws Exception
-	{
+    @Test
+    public void negraTigerTest()
+        throws Exception
+    {
         testOneWay(
                 createReaderDescription(NegraExportReader.class,
                         NegraExportReader.PARAM_LANGUAGE, "de",
-                        NegraExportReader.PARAM_ENCODING, "ISO-8859-15",
+                        NegraExportReader.PARAM_SOURCE_ENCODING, "ISO-8859-15",
                         NegraExportReader.PARAM_READ_PENN_TREE, true), 
                 "tiger-sample.export.dump", 
                 "tiger-sample.export");
-	}
+    }
 
-	@Test
-	public void tuebaTest()
-		throws Exception
-	{
+    @Test
+    public void tuebaTest()
+        throws Exception
+    {
         testOneWay(
                 createReaderDescription(NegraExportReader.class,
                         NegraExportReader.PARAM_LANGUAGE, "de",
-                        NegraExportReader.PARAM_ENCODING, "UTF-8",
+                        NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8",
                         NegraExportReader.PARAM_READ_PENN_TREE, true), 
                 "tueba-sample.export.dump", 
                 "tueba-sample.export");
-	}
+    }
+
+    @Test
+    public void testFormat4WithCoref()
+        throws Exception
+    {
+        testOneWay(
+                createReaderDescription(NegraExportReader.class,
+                        NegraExportReader.PARAM_LANGUAGE, "de",
+                        NegraExportReader.PARAM_SOURCE_ENCODING, "UTF-8",
+                        NegraExportReader.PARAM_READ_PENN_TREE, true), 
+                "format4-with-coref-sample.export.dump", 
+                "format4-with-coref-sample.export");
+    }
 
     @Rule
     public DkproTestContext testContext = new DkproTestContext();

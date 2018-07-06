@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2014
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,13 +14,13 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *******************************************************************************/
+ **/
 
 package de.tudarmstadt.ukp.dkpro.core.decompounding.ranking;
 
-import java.io.IOException;
+import static org.junit.Assert.assertEquals;
 
-import junit.framework.Assert;
+import java.io.IOException;
 
 import org.junit.Test;
 
@@ -32,8 +32,7 @@ public class DummyRankerTest
 {
 
     @Test
-    public void testRankTree()
-        throws IOException
+    public void testRankTree() throws IOException
     {
         DummyRanker ranker = new DummyRanker();
 
@@ -46,7 +45,6 @@ public class DummyRankerTest
         tree.getRoot().addChild(new ValueNode<DecompoundedWord>(s3));
 
         DecompoundedWord result = ranker.highestRank(tree);
-        Assert.assertEquals(s3, result);
+        assertEquals(s3, result);
     }
-
 }

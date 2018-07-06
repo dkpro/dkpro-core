@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2013
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -14,22 +14,24 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *******************************************************************************/
+ **/
 package de.tudarmstadt.ukp.dkpro.core.commonscodec;
 
 import org.apache.commons.codec.language.DoubleMetaphone;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
+
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Double-Metaphone phonetic transcription based on Apache Commons Codec.
  * Works for English.
- *
- *
  */
-
+@ResourceMetaData(name = "Commons Codec Double-Metaphone Phonetic Transcriptor")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
-        inputs={"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
-        outputs={"de.tudarmstadt.ukp.dkpro.core.api.phonetics.type.PhoneticTranscription"})
+        inputs = {"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
+        outputs = {"de.tudarmstadt.ukp.dkpro.core.api.phonetics.type.PhoneticTranscription"})
 
 public class DoubleMetaphonePhoneticTranscriptor
     extends PhoneticTranscriptor_ImplBase

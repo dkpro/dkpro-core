@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2014
  * Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.conll;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
@@ -24,17 +24,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.util.FSCollectionFactory;
@@ -44,10 +47,13 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -59,55 +65,32 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.WordSense;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeToJCasConverter;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * <p>Reads a file in the CoNLL-2009 format.</p>
- * 
- * <ol>
- * <li>Document ID - <b>(ignored)</b> This is a variation on the document filename.</li>
- * <li>Part number - <b>(ignored)</b> Some files are divided into multiple parts numbered as 000,
- * 001, 002, ... etc.</li>
- * <li>Word number - <b>(ignored)</b></li>
- * <li>Word itself - <b>(document text)</b> This is the token as segmented/tokenized in the
- * Treebank. Initially the *_skel file contain the placeholder [WORD] which gets replaced by the
- * actual token from the Treebank which is part of the OntoNotes release.</li>
- * <li>Part-of-Speech - <b>(POS)</b></li>
- * <li>Parse bit - <b>(Constituent)</b> This is the bracketed structure broken before the first open
- * parenthesis in the parse, and the word/part-of-speech leaf replaced with a *. The full parse can
- * be created by substituting the asterix with the "([pos] [word])" string (or leaf) and
- * concatenating the items in the rows of that column.</li>
- * <li>Predicate lemma - <b>(Lemma)</b> The predicate lemma is mentioned for the rows for which we
- * have semantic role information. All other rows are marked with a "-"</li>
- * <li>Predicate Frameset ID - <b>(SemanticPredicate)</b> This is the PropBank frameset ID of the
- * predicate in Column 7.</li>
- * <li>Word sense - <b>(ignored)</b> This is the word sense of the word in Column 3.</li>
- * <li>Speaker/Author - <b>(ignored)</b> This is the speaker or author name where available. Mostly
- * in Broadcast Conversation and Web Log data.</li>
- * <li>Named Entities - <b>(NamedEntity)</b> These columns identifies the spans representing various
- * named entities.</li>
- * <li>Predicate Arguments - <b>(SemanticPredicate)</b> There is one column each of predicate
- * argument structure information for the predicate mentioned in Column 7.</li>
- * <li>Coreference - <b>(CoreferenceChain)</b> Coreference chain information encoded in a
- * parenthesis structure.</li>
- * </ol>
- * 
- * <p>Sentences are separated by a blank new line.</p>
+ * Reads a file in the CoNLL-2012 format.
  * 
  * @see <a href="http://conll.cemantix.org/2012/data.html">CoNLL 2012 Shared Task:
  *      Modeling Multilingual Unrestricted Coreference in OntoNotes</a>
  */
-@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred",
-        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg"})
+@ResourceMetaData(name = "CoNLL 2012 Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2012})
+@TypeCapability(
+        outputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred",
+                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg"})
 public class Conll2012Reader
     extends JCasResourceCollectionReader_ImplBase
 {
-    public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
+    public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String encoding;
 
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
@@ -127,7 +110,8 @@ public class Conll2012Reader
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
     
@@ -155,7 +139,8 @@ public class Conll2012Reader
     @ConfigurationParameter(name = PARAM_READ_COREFERENCE, mandatory = true, defaultValue = "true")
     private boolean readCoreference;
 
-    public static final String PARAM_READ_NAMED_ENTITY = ComponentParameters.PARAM_READ_NAMED_ENTITY;
+    public static final String PARAM_READ_NAMED_ENTITY = 
+            ComponentParameters.PARAM_READ_NAMED_ENTITY;
     @ConfigurationParameter(name = PARAM_READ_NAMED_ENTITY, mandatory = true, defaultValue = "true")
     private boolean readNamedEntity;
 
@@ -164,7 +149,8 @@ public class Conll2012Reader
      * tag set defined as part of the model meta data. This can be useful if a custom model is
      * specified which does not have such meta data, or it can be used in readers.
      */
-    public static final String PARAM_CONSTITUENT_TAG_SET = ComponentParameters.PARAM_CONSTITUENT_TAG_SET;
+    public static final String PARAM_CONSTITUENT_TAG_SET = 
+            ComponentParameters.PARAM_CONSTITUENT_TAG_SET;
     @ConfigurationParameter(name = PARAM_CONSTITUENT_TAG_SET, mandatory = false)
     protected String constituentTagset;
     
@@ -172,20 +158,11 @@ public class Conll2012Reader
      * Load the constituent tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
+    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CONSTITUENT_MAPPING_LOCATION, mandatory = false)
     protected String constituentMappingLocation;
 
-    /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
-    
     public static final String PARAM_WRITE_TRACES_TO_TEXT = "writeTracesToText";
     @ConfigurationParameter(name = PARAM_WRITE_TRACES_TO_TEXT, mandatory = false, defaultValue = "false")
     private boolean writeTracesToText;
@@ -230,7 +207,6 @@ public class Conll2012Reader
                 constituentMappingLocation, constituentTagset, getLanguage());
         
         converter = new PennTreeToJCasConverter(posMappingProvider, constituentMappingProvider);
-        converter.setInternTags(internTags);
         converter.setWriteTracesToText(writeTracesToText);
         converter.setCreatePosTags(false); // We handle POS tags via the column already
         converter.setRootLabel("TOP");
@@ -244,7 +220,9 @@ public class Conll2012Reader
         initCas(aJCas, res);
         BufferedReader reader = null;
         try {
-            reader = new BufferedReader(new InputStreamReader(res.getInputStream(), encoding));
+            reader = new BufferedReader(new InputStreamReader(
+                    CompressionUtils.getInputStream(res.getLocation(), res.getInputStream()),
+                    encoding));
             convert(aJCas, reader);
         }
         finally {
@@ -288,11 +266,15 @@ public class Conll2012Reader
             // Tokens, Lemma, POS
             Map<Integer, Token> tokenById = new HashMap<Integer, Token>();
             List<SemPred> preds = new ArrayList<>();
-            for (String[] word : words) {
+            Iterator<String[]> wordIterator = words.iterator();
+            while (wordIterator.hasNext()) {
+                String[] word = wordIterator.next();
                 // Read token
                 Token token = doc.add(word[FORM], Token.class);
                 tokenById.put(Integer.valueOf(word[ID]), token);
-                doc.add(" ");
+                if (wordIterator.hasNext()) {
+                    doc.add(" ");
+                }
 
                 // Read lemma
                 if (!UNUSED.equals(word[LEMMA]) && readLemma) {
@@ -307,7 +289,8 @@ public class Conll2012Reader
                     Type posTag = posMappingProvider.getTagType(word[POS]);
                     POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
-                    pos.setPosValue(word[POS]);
+                    pos.setPosValue(word[POS] != null ? word[POS].intern() : null);
+                    POSUtils.assignCoarseValue(pos);
                     pos.addToIndexes();
                     token.setPos(pos);
                 }
@@ -320,7 +303,8 @@ public class Conll2012Reader
                 }
 
                 if (!UNUSED.equals(word[PARSE]) && readConstituent) {
-                    String fixed = word[PARSE].replace("*", "(" + word[POS] + " " + word[FORM] + ")"); 
+                    String fixed = word[PARSE].replace("*",
+                            "(" + word[POS] + " " + word[FORM] + ")");
                     parse.append(fixed);
                 }
                 
@@ -330,14 +314,14 @@ public class Conll2012Reader
                     wordSense.addToIndexes();
                 }
 
-                if (!UNUSED.equals(word[word.length-1]) && readCoreference) {
-                    String[] chainFragments = word[word.length-1].split("\\|");
+                if (!UNUSED.equals(word[word.length - 1]) && readCoreference) {
+                    String[] chainFragments = word[word.length - 1].split("\\|");
                     for (String chainFragment : chainFragments) {
                         boolean beginning = chainFragment.startsWith("(");
                         boolean ending = chainFragment.endsWith(")");
                         
                         String chainId = chainFragment.substring(beginning ? 1 : 0,
-                                ending ? chainFragment.length() -1 : chainFragment.length());                        
+                                ending ? chainFragment.length() - 1 : chainFragment.length());
                         
                         CoreferenceLink link = chains.get(chainId);
                         if (beginning) {
@@ -379,13 +363,14 @@ public class Conll2012Reader
     
                     // When a NE is beginning, we remember what the NE is and where it began
                     if (beginning) {
-                        // The NE is beginning with "(" and either ending with "(" or "*", so we trim
-                        // the first and last character
-                        currentNeType = ne.substring(1, ne.length()-1);
+                        // The NE is beginning with "(" and either ending with "(" or "*", so we
+                        // trim the first and last character
+                        currentNeType = ne.substring(1, ne.length() - 1);
                         currentNeBegin = i;
                     }
                     
-                    // We need to create an annotation if the current token is the end of an annotation
+                    // We need to create an annotation if the current token is the end of an
+                    // annotation
                     if (ending) {
                         // Determine begin and end of named entity
                         int begin = tokenById.get(currentNeBegin).getBegin();
@@ -421,7 +406,7 @@ public class Conll2012Reader
                         if (beginning) {
                             // The arg is beginning with "(" and either ending with "(" or "*", so
                             // we trim the first and last character
-                            currentArgType = ne.substring(1, ne.length()-1);
+                            currentArgType = ne.substring(1, ne.length() - 1);
                             currentArgBegin = i;
                         }
                         
@@ -458,7 +443,9 @@ public class Conll2012Reader
             Sentence sentence = new Sentence(aJCas, sentenceBegin, sentenceEnd);
             sentence.addToIndexes();
             
-            converter.convertPennTree(sentence, PennTreeUtils.parsePennTree(parse.toString()));
+            if (readConstituent) {
+                converter.convertPennTree(sentence, PennTreeUtils.parsePennTree(parse.toString()));
+            }
 
             // Once sentence per line.
             doc.add("\n");
@@ -485,7 +472,7 @@ public class Conll2012Reader
                     Matcher matcher = pattern.matcher(line);
                     if (matcher.matches()) {
                         DocumentMetaData meta = DocumentMetaData.get(aJCas);
-                        meta.setDocumentId(matcher.group(1)+'#'+matcher.group(2));
+                        meta.setDocumentId(matcher.group(1) + '#' + matcher.group(2));
                     }
                 }
                 

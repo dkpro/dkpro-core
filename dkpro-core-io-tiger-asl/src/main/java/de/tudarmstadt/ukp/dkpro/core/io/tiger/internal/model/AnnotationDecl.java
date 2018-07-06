@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2013
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model;
 
 import java.util.List;
@@ -25,8 +25,10 @@ public class AnnotationDecl
 {
     @XmlElement(name = "feature")
     public List<FeatureDecl> features;
+    
     @XmlElement(name = "edgelabel")
     public List<EdgeLabelDecl> edgeLabels;
+
     @XmlElement(name = "secedgelabel")
     public List<EdgeLabelDecl> secEdgeLabels;
 }

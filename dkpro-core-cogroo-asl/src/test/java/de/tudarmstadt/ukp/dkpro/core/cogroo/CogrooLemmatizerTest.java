@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2014
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.cogroo;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -33,38 +33,34 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class CogrooLemmatizerTest
 {
-	@Test
-	public void testPortuguese()
-		throws Exception
-	{
-        runTest("pt", "Este é um teste . ",
-                 new String[] { "este", "ser", "um", "teste", "." });
+    @Test
+    public void testPortuguese() throws Exception
+    {
+        runTest("pt", "Este é um teste . ", new String[] { "este", "ser", "um", "teste", "." });
 
-        runTest("pt", "Uma rede neural .",
-        		new String[] { "um", "rede", "neural", "." });
+        runTest("pt", "Uma rede neural .", new String[] { "um", "rede", "neural", "." });
 
         runTest("pt", "John está comprando laranjas .",
-        		new String[] { "John", "estar", "comprar", "laranja", "." });
+                new String[] { "John", "estar", "comprar", "laranja", "." });
     }
 
-	private void runTest(String language, String testDocument, String[] aLemma)
-		throws Exception
-	{
-		AnalysisEngineDescription engine = createEngineDescription(
-		        createEngineDescription(CogrooPosTagger.class),
-		        createEngineDescription(CogrooLemmatizer.class));
+    private void runTest(String language, String testDocument, String[] aLemma) throws Exception
+    {
+        AnalysisEngineDescription engine = createEngineDescription(
+                createEngineDescription(CogrooPosTagger.class),
+                createEngineDescription(CogrooLemmatizer.class));
 
-		JCas jcas = TestRunner.runTest(engine, language, testDocument);
+        JCas jcas = TestRunner.runTest(engine, language, testDocument);
 
-		AssertAnnotations.assertLemma(aLemma, select(jcas, Lemma.class));
-	}
+        AssertAnnotations.assertLemma(aLemma, select(jcas, Lemma.class));
+    }
 
-	@Rule
-	public TestName name = new TestName();
+    @Rule
+    public TestName name = new TestName();
 
-	@Before
-	public void printSeparator()
-	{
-		System.out.println("\n=== " + name.getMethodName() + " =====================");
-	}
+    @Before
+    public void printSeparator()
+    {
+        System.out.println("\n=== " + name.getMethodName() + " =====================");
+    }
 }

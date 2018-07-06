@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2013
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.semantictagging;
 
 import java.io.BufferedReader;
@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.fit.component.Resource_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.resource.ResourceAccessException;
@@ -42,21 +42,18 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * This shared resource can be added as ExternalResource in Analysis Engines
  * that annotate tokens with semantic tags looked up in a key-value map
  * e.g., to annotate common nouns with semantic field information from WordNet.
- *     
- * 
  */
-
 public class SemanticTagResource 
-	extends Resource_ImplBase
-	implements SemanticTagProvider
+    extends Resource_ImplBase
+    implements SemanticTagProvider
 {
-	
+    
     public final static String PARAM_RESOURCE_PATH = "resourcePath";
     @ConfigurationParameter(name = PARAM_RESOURCE_PATH, mandatory = true)
     // TODO add default like: defaultValue = "classpath:de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling/de/igerman98/de_DE_igerman98.dic"
     private String resourcePath;
 
-    private Map<String,String> keySemanticTagMap= new HashMap<String,String>();
+    private Map<String, String> keySemanticTagMap = new HashMap<String, String>();
     
     @Override
     public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
@@ -80,53 +77,53 @@ public class SemanticTagResource
     }
 
 
-	@Override
-	public String getSemanticTag(Token token) throws ResourceAccessException {
+    @Override
+    public String getSemanticTag(Token token) throws ResourceAccessException {
 
-		try {
-			if (keySemanticTagMap.containsKey(token.getLemma().getValue())) {
-				return keySemanticTagMap.get(token.getLemma().getValue());
-			} else {
-				return "UNKNOWN"; 
-			}
-		} catch (Exception e) {
+        try {
+            if (keySemanticTagMap.containsKey(token.getLemma().getValue())) {
+                return keySemanticTagMap.get(token.getLemma().getValue());
+            } else {
+                return "UNKNOWN"; 
+            }
+        } catch (Exception e) {
             throw new ResourceAccessException(e);
         }
-	}
-	
-	@Override
-	public String getSemanticTag(List<Token> tokens) throws ResourceAccessException {
+    }
+    
+    @Override
+    public String getSemanticTag(List<Token> tokens) throws ResourceAccessException {
 
-		List<String> lemmas = new ArrayList<String>();
-		for (Token token : tokens) {
-			lemmas.add(token.getLemma().getValue());
-		}
-		String lemmaString = StringUtils.join(lemmas, " ");
-				
-		try {
-			if (keySemanticTagMap.containsKey(lemmaString)) {
-				return keySemanticTagMap.get(lemmaString);
-			} else {
-				return "UNKNOWN"; 
-			}
-		} catch (Exception e) {
+        List<String> lemmas = new ArrayList<String>();
+        for (Token token : tokens) {
+            lemmas.add(token.getLemma().getValue());
+        }
+        String lemmaString = StringUtils.join(lemmas, " ");
+                
+        try {
+            if (keySemanticTagMap.containsKey(lemmaString)) {
+                return keySemanticTagMap.get(lemmaString);
+            } else {
+                return "UNKNOWN"; 
+            }
+        } catch (Exception e) {
             throw new ResourceAccessException(e);
         }
-	}
+    }
 
-	
-	
-	private void readFileToMap(BufferedReader bufferedReader) throws IOException {		
-		String line;
-	
-		while((line = bufferedReader.readLine())!=null){	
-			String temp[] = line.split("\t");
-			String key = temp[0];
-			String semField = temp[1];
-			System.out.println(line);
-			keySemanticTagMap.put(key, semField);
-		}
-	}
-	
+    
+    
+    private void readFileToMap(BufferedReader bufferedReader) throws IOException {        
+        String line;
+    
+        while ((line = bufferedReader.readLine()) != null) {
+            String[] temp = line.split("\t");
+            String key = temp[0];
+            String semField = temp[1];
+            System.out.println(line);
+            keySemanticTagMap.put(key, semField);
+        }
+    }
+    
 
 }

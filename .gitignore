@@ -8,7 +8,12 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
-.settings                                                                                                                                                                                                                                    
-.classpath                                                                                                                                                                                                                                   
+.settings
+.classpath
 .project
 **/*.iml
+.idea
+cache/
+libudpipe_java.dylib
+.DS_Store
+.checkstyle

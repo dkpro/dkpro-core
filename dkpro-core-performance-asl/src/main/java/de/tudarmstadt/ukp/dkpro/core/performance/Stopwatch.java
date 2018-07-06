@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.performance;
 
 import java.io.File;
@@ -33,35 +33,38 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.performance.type.TimerAnnotation;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * Can be used to measure how long the processing between two points in a pipeline takes.
- * For that purpose, the AE needs to be added two times, before and after the part of the pipeline that should be measured.
+ * Can be used to measure how long the processing between two points in a pipeline takes. For that
+ * purpose, the AE needs to be added two times, before and after the part of the pipeline that
+ * should be measured.
  */
-
+@ResourceMetaData(name = "Stopwatch")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
-        inputs={
+        inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation"},
-        outputs={
+        outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation"})
 
 public class Stopwatch
     extends JCasAnnotator_ImplBase
 {
-	
-	private Boolean isDownstreamTimer;
-	private JCas jcas;;
+    private Boolean isDownstreamTimer;
+    private JCas jcas;
 
-	public static final String KEY_MEAN = "mean";
-	public static final String KEY_SUM = "sum";
-	public static final String KEY_STDDEV = "stddev";
-	
+    public static final String KEY_MEAN = "mean";
+    public static final String KEY_SUM = "sum";
+    public static final String KEY_STDDEV = "stddev";
+    
     public static final String PARAM_TIMER_NAME = "timerName";
     /**
      * Name of the timer pair.
@@ -95,8 +98,8 @@ public class Stopwatch
     public void process(JCas jcas)
         throws AnalysisEngineProcessException
     {
-    	this.jcas = jcas;
-    	
+        this.jcas = jcas;
+        
         long currentTime = System.currentTimeMillis();
 
         if (isDownstreamTimer()) {
@@ -147,37 +150,38 @@ public class Stopwatch
             getLogger().info(sb.toString());
             
             if (outputFile != null) {
-				try {
-					Properties props = new Properties();
-                    props.setProperty(KEY_SUM, ""+sum);
-                    props.setProperty(KEY_MEAN, ""+mean);
-                    props.setProperty(KEY_STDDEV, ""+stddev);
+                try {
+                    Properties props = new Properties();
+                    props.setProperty(KEY_SUM, "" + sum);
+                    props.setProperty(KEY_MEAN, "" + mean);
+                    props.setProperty(KEY_STDDEV, "" + stddev);
                     OutputStream out = new FileOutputStream(outputFile);
                     props.store(out, "timer " + timerName + " result file");
-				} catch (FileNotFoundException e) {
-					throw new AnalysisEngineProcessException(e);
-				} catch (IOException e) {
-					throw new AnalysisEngineProcessException(e);
-				}
+                } catch (FileNotFoundException e) {
+                    throw new AnalysisEngineProcessException(e);
+                } catch (IOException e) {
+                    throw new AnalysisEngineProcessException(e);
+                }
             }
         }
     }
     
     private boolean isDownstreamTimer() {
-    	
-		if (isDownstreamTimer == null) {
-        	// this is only a downstream timer if there already is a timer annotation with the same name
-        	for (TimerAnnotation timer : JCasUtil.select(jcas, TimerAnnotation.class)) {
-        		if (timer.getName().equals(timerName)) {
-        			isDownstreamTimer = true;
-        		}
-        	}
-    	}
-    	
-		if (isDownstreamTimer == null) {
-			isDownstreamTimer = false;
-		}
+        
+        if (isDownstreamTimer == null) {
+            // this is only a downstream timer if there already is a timer annotation with the same
+            // name
+            for (TimerAnnotation timer : JCasUtil.select(jcas, TimerAnnotation.class)) {
+                if (timer.getName().equals(timerName)) {
+                    isDownstreamTimer = true;
+                }
+            }
+        }
+        
+        if (isDownstreamTimer == null) {
+            isDownstreamTimer = false;
+        }
 
-    	return isDownstreamTimer;
+        return isDownstreamTimer;
     }
 }

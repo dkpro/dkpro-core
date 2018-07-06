@@ -19,6 +19,7 @@ Sentence
    sofa: _InitialView
    begin: 0
    end: 56
+   id: "s1"
 [`` Ross Perot wäre vielleicht ein prächtiger Diktator '']
 PennTree
    sofa: _InitialView
@@ -33,11 +34,12 @@ ROOT
    constituentType: "VROOT"
    children: FSArray
 [``]
-PUNC
+POS_PUNCT
    sofa: _InitialView
    begin: 0
    end: 2
    PosValue: "$("
+   coarseValue: "PUNCT"
 [``]
 Lemma
    sofa: _InitialView
@@ -60,11 +62,13 @@ Token
       begin: 0
       end: 2
       value: "--"
-   pos: PUNC
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 0
       end: 2
       PosValue: "$("
+      coarseValue: "PUNCT"
+   id: "s1_1"
 [Ross Perot wäre vielleicht ein prächtiger Diktator]
 Constituent
    sofa: _InitialView
@@ -99,11 +103,12 @@ Constituent
    children: FSArray
    syntacticFunction: "SB"
 [Ross]
-NP
+POS_PROPN
    sofa: _InitialView
    begin: 3
    end: 7
    PosValue: "NE"
+   coarseValue: "PROPN"
 [Ross]
 Lemma
    sofa: _InitialView
@@ -139,17 +144,20 @@ Token
       begin: 3
       end: 7
       value: "Ross"
-   pos: NP
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 3
       end: 7
       PosValue: "NE"
+      coarseValue: "PROPN"
+   id: "s1_2"
 [Perot]
-NP
+POS_PROPN
    sofa: _InitialView
    begin: 8
    end: 13
    PosValue: "NE"
+   coarseValue: "PROPN"
 [Perot]
 Lemma
    sofa: _InitialView
@@ -185,17 +193,20 @@ Token
       begin: 8
       end: 13
       value: "Perot"
-   pos: NP
+   pos: POS_PROPN
       sofa: _InitialView
       begin: 8
       end: 13
       PosValue: "NE"
+      coarseValue: "PROPN"
+   id: "s1_3"
 [wäre]
-V
+POS_VERB
    sofa: _InitialView
    begin: 14
    end: 18
    PosValue: "VAFIN"
+   coarseValue: "VERB"
 [wäre]
 Lemma
    sofa: _InitialView
@@ -224,17 +235,20 @@ Token
       begin: 14
       end: 18
       value: "sein"
-   pos: V
+   pos: POS_VERB
       sofa: _InitialView
       begin: 14
       end: 18
       PosValue: "VAFIN"
+      coarseValue: "VERB"
+   id: "s1_4"
 [vielleicht]
-ADV
+POS_ADV
    sofa: _InitialView
    begin: 19
    end: 29
    PosValue: "ADV"
+   coarseValue: "ADV"
 [vielleicht]
 Lemma
    sofa: _InitialView
@@ -263,11 +277,13 @@ Token
       begin: 19
       end: 29
       value: "vielleicht"
-   pos: ADV
+   pos: POS_ADV
       sofa: _InitialView
       begin: 19
       end: 29
       PosValue: "ADV"
+      coarseValue: "ADV"
+   id: "s1_5"
 [ein prächtiger Diktator]
 Constituent
    sofa: _InitialView
@@ -289,11 +305,12 @@ Constituent
    children: FSArray
    syntacticFunction: "PD"
 [ein]
-ART
+POS_DET
    sofa: _InitialView
    begin: 30
    end: 33
    PosValue: "ART"
+   coarseValue: "DET"
 [ein]
 Lemma
    sofa: _InitialView
@@ -329,17 +346,20 @@ Token
       begin: 30
       end: 33
       value: "ein"
-   pos: ART
+   pos: POS_DET
       sofa: _InitialView
       begin: 30
       end: 33
       PosValue: "ART"
+      coarseValue: "DET"
+   id: "s1_6"
 [prächtiger]
-ADJ
+POS_ADJ
    sofa: _InitialView
    begin: 34
    end: 44
    PosValue: "ADJA"
+   coarseValue: "ADJ"
 [prächtiger]
 Lemma
    sofa: _InitialView
@@ -375,17 +395,20 @@ Token
       begin: 34
       end: 44
       value: "prächtig"
-   pos: ADJ
+   pos: POS_ADJ
       sofa: _InitialView
       begin: 34
       end: 44
       PosValue: "ADJA"
+      coarseValue: "ADJ"
+   id: "s1_7"
 [Diktator]
-NN
+POS_NOUN
    sofa: _InitialView
    begin: 45
    end: 53
    PosValue: "NN"
+   coarseValue: "NOUN"
 [Diktator]
 Lemma
    sofa: _InitialView
@@ -421,17 +444,20 @@ Token
       begin: 45
       end: 53
       value: "Diktator"
-   pos: NN
+   pos: POS_NOUN
       sofa: _InitialView
       begin: 45
       end: 53
       PosValue: "NN"
+      coarseValue: "NOUN"
+   id: "s1_8"
 ['']
-PUNC
+POS_PUNCT
    sofa: _InitialView
    begin: 54
    end: 56
    PosValue: "$("
+   coarseValue: "PUNCT"
 ['']
 Lemma
    sofa: _InitialView
@@ -454,11 +480,13 @@ Token
       begin: 54
       end: 56
       value: "--"
-   pos: PUNC
+   pos: POS_PUNCT
       sofa: _InitialView
       begin: 54
       end: 56
       PosValue: "$("
+      coarseValue: "PUNCT"
+   id: "s1_9"
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================

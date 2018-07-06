@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2013
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.semantictagging;
 
 import java.util.Collection;
@@ -27,6 +27,7 @@ import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ExternalResource;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.fit.util.JCasUtil;
@@ -35,20 +36,26 @@ import org.apache.uima.resource.ResourceAccessException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
-@TypeCapability(
-    inputs = { 
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" }, 
-    outputs = { 
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NamedEntity" })
 /**
  * This Analysis Engine annotates
  * English single words with semantic field information retrieved from an ExternalResource.
  * This could be a lexical resource such as WordNet or a simple key-value map.
  * The annotation is stored in the SemanticField annotation type.
  */
+@Component(OperationType.MATCHER)
+@ResourceMetaData(name = "Semantic Field Annotator")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
+@TypeCapability(
+    inputs = { 
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" }, 
+    outputs = { 
+        "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" })
 public class SemanticFieldAnnotator
     extends JCasAnnotator_ImplBase
 {
@@ -68,8 +75,8 @@ public class SemanticFieldAnnotator
     /**
      * A constraint on the annotations that should be considered in form of a JXPath statement.
      * Example: set {@link #PARAM_ANNOTATION_TYPE} to a {@code NamedEntity} type and set the
-     * {@link #PARAM_CONSTRAINT} to {@code ".[value = 'LOCATION']"} to annotate only tokens with semantic fields that are
-     * part of a location named entity.
+     * {@link #PARAM_CONSTRAINT} to {@code ".[value = 'LOCATION']"} to annotate only tokens with
+     * semantic fields that are part of a location named entity.
      */
     public static final String PARAM_CONSTRAINT = "constraint";
     @ConfigurationParameter(name = PARAM_CONSTRAINT, mandatory = false)

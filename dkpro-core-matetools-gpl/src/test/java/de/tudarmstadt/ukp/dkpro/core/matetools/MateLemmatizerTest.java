@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2014
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.matetools;
 
@@ -26,8 +26,10 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
@@ -80,6 +82,8 @@ public class MateLemmatizerTest
         throws Exception
     {
         Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 2000000000);
+
+        AssumeResource.assumeResource(MateLemmatizer.class, "lemmatizer", aLanguage, null);
 
         AnalysisEngineDescription lemma = createEngineDescription(MateLemmatizer.class,
                 MateLemmatizer.PARAM_UPPERCASE, aUppercase);

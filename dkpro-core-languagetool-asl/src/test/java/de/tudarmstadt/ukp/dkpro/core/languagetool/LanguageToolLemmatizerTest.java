@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.languagetool;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -33,16 +33,16 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class LanguageToolLemmatizerTest
 {
-	@Test
-	public void testGerman()
-		throws Exception
-	{
+    @Test
+    public void testGerman()
+        throws Exception
+    {
         runTest("de", "Das ist ein Test .",
-        		new String[] { "der",   "sein",  "ein", "Test", "." });
+                new String[] { "der",   "sein",  "ein", "Test", "." });
 
         runTest("de", "besitzt",
                 new String[] { "besitzen" });
-	}
+    }
 
     @Test
     public void testGerman2()
@@ -58,18 +58,18 @@ public class LanguageToolLemmatizerTest
         AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
     }
 
-	@Test
-	public void testEnglish()
-		throws Exception
-	{
+    @Test
+    public void testEnglish()
+        throws Exception
+    {
         runTest("en", "This is a test .",
-				new String[] { "this", "be",  "a",   "test", "."    });
+                new String[] { "this", "be",  "a",   "test", "."    });
 
         runTest("en", "A neural net .",
-        		new String[] { "a",   "neural", "net", "."    });
+                new String[] { "a",   "neural", "net", "."    });
 
         runTest("en", "John is purchasing oranges .",
-        		new String[] { "John", "be",  "purchase", "orange", "."    });
+                new String[] { "John", "be",  "purchase", "orange", "."    });
     }
 
     private JCas runTest(String aLanguage, String aText)
@@ -80,17 +80,17 @@ public class LanguageToolLemmatizerTest
         return TestRunner.runTest(lemma, aLanguage, aText);
     }
 
-	private void runTest(String language, String testDocument, String[] aLemma)
-		throws Exception
-	{
-		AnalysisEngineDescription engine = createEngineDescription(
-		        createEngineDescription(OpenNlpPosTagger.class),
-		        createEngineDescription(LanguageToolLemmatizer.class));
+    private void runTest(String language, String testDocument, String[] aLemma)
+        throws Exception
+    {
+        AnalysisEngineDescription engine = createEngineDescription(
+                createEngineDescription(OpenNlpPosTagger.class),
+                createEngineDescription(LanguageToolLemmatizer.class));
 
-		JCas jcas = TestRunner.runTest(engine, language, testDocument);
+        JCas jcas = TestRunner.runTest(engine, language, testDocument);
 
-		AssertAnnotations.assertLemma(aLemma, select(jcas, Lemma.class));
-	}
+        AssertAnnotations.assertLemma(aLemma, select(jcas, Lemma.class));
+    }
 
     @Rule
     public DkproTestContext testContext = new DkproTestContext();

@@ -1,7 +1,5 @@
-package de.tudarmstadt.ukp.dkpro.core.arktools;
-
-/**
- * Copyright 2007-2014
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -16,8 +14,9 @@ package de.tudarmstadt.ukp.dkpro.core.arktools;
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
+package de.tudarmstadt.ukp.dkpro.core.arktools;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.junit.Assert.assertEquals;
@@ -64,7 +63,7 @@ public class ArktweetTokenizationTest
     private void assertTokenizationBoundaries(String[] expected, List<Token> tokens)
     {
         for (int i = 0; i < expected.length; i++) {
-            assertEquals(expected[i], tokens.get(i).getCoveredText());
+            assertEquals(expected[i], tokens.get(i).getText());
         }
     }
 
@@ -163,7 +162,7 @@ public class ArktweetTokenizationTest
         List<Token> tokens = getTokens(text);
 
         for (Token t : tokens) {
-            System.out.println(t.getCoveredText());
+            System.out.println(t.getText());
         }
 
         String[] expectedToken = new String[] { "god", "&", "amp", ";", "100", "days", ":", "&",

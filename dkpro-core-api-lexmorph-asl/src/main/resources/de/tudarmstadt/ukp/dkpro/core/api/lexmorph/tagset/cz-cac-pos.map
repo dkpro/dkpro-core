@@ -4,26 +4,26 @@ __META_SOURCE_URL__=http://ufal.mff.cuni.cz/rest/CAC/doc-cac10/cac-guide/eng/htm
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # A   Adjective
-A=ADJ
+A=POS_ADJ
 # C   Numeral
-C=CARD
+C=POS_NUM
 # D   Adverb
-D=ADV
+D=POS_ADV
 # I   Interjection
-I=O
+I=POS_INTJ
 # J   Conjunction
-J=CONJ
+J=POS_CONJ
 # N   Noun
-N=N
+N=POS_NOUN
 # P   Pronoun
-P=PR
+P=POS_PRON
 # V   Verb
-V=V
+V=POS_VERB
 # R   Preposition
-R=PP
+R=POS_ADP
 # T   Particle
-T=O
+T=POS_PART
 # X   Unknown, Not Determined, Unclassifiable
-X=O
+X=POS_X
 # Z   Punctuation (also used for the Sentence Boundary token)
-Z=PUNC
+Z=POS_PUNCT

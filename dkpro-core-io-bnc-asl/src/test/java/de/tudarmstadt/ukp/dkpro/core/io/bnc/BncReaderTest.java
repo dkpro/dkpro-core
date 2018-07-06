@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2011
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universit√§t Darmstadt
@@ -14,10 +14,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.bnc;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.*;
+import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 
 import org.junit.Rule;
@@ -27,16 +27,16 @@ import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class BncReaderTest
 {
-	@Test
-	public void test() throws Exception
-	{
+    @Test
+    public void test() throws Exception
+    {
         testOneWay(
                 createReaderDescription(BncReader.class,
                         BncReader.PARAM_LANGUAGE, "en"), 
                 "FX8.xml.dump", 
                 "FX8.xml");
-	}
-	
+    }
+    
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
 }

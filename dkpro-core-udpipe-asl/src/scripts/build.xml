@@ -1,0 +1,318 @@
+<!--
+   Copyright 2012
+   Ubiquitous Knowledge Processing (UKP) Lab
+   Technische Universität Darmstadt
+   
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+   
+     http://www.apache.org/licenses/LICENSE-2.0
+   
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<project basedir="../.." default="separate-jars">
+	<property name="outputPackage" value="org/dkpro/core/udpipe/lib"/>
+	
+	<import>
+		<url url="https://raw.githubusercontent.com/dkpro/resource-packager/0.8.0/ant-macros.xml"/>
+	</import>
+	
+	<target name="local-maven">
+		<property name="install-artifact-mode" value="local"/>
+		<antcall target="separate-jars"/>
+	</target>
+	
+	<target name="remote-maven">
+	    <property name="install-artifact-mode" value="remote"/>
+		<antcall target="separate-jars"/>
+	</target>
+	
+	<target name="separate-jars" depends="install-executables,en,no"/>
+
+    <target name="en">
+        <antcall target="en-ud-segmenter"/>
+        <antcall target="en-ud-tagger"/>
+        <antcall target="en-ud-parser"/>
+	</target>
+
+	<target name="en-ud-upstream" depends="download-models">
+		<install-upstream-file
+            file="target/download/models/english-ud-1.2-160523.udpipe" 
+            md5="ea7c2058ccdc5ea1ba98ebb08cba0b72"
+            groupId="org.dkpro.core" 
+            artifactIdBase="dkpro-core-udpipe"
+            version="20160523"
+            tool="multiple" 
+            language="en" 
+            variant="ud" 
+            extension="udpipe"/>
+	</target>
+	
+    <target name="en-ud-segmenter" depends="en-ud-upstream">
+        <install-model-stub
+            groupId="org.dkpro.core" 
+            artifactIdBase="dkpro-core-udpipe"
+            version="20160523.1"
+            targetGroupId="org.dkpro.core"
+            targetArtifactId="dkpro-core-udpipe-upstream-multiple-en-ud"
+            targetVersion="20160523"
+            targetLocation="classpath:/${outputPackage}/multiple-en-ud.udpipe"
+            tool="segmenter" 
+            language="en" 
+            variant="ud">
+            <entry key="DC.title" value="Universal Dependencies 1.2 (160523) Segmenter Model for UDPipe"/>
+            <entry key="DC.creator" value="Milan Straka"/>
+            <entry key="DC.identifier" value="http://hdl.handle.net/11234/1-1659#english-ud-1.2-160523.udpipe"/>
+            <entry key="DC.rights" value="http://creativecommons.org/licenses/by-nc-sa/4.0/"/>
+        </install-model-stub>
+    </target>
+
+    <target name="en-ud-tagger" depends="en-ud-upstream">
+        <install-model-stub
+            groupId="org.dkpro.core" 
+            artifactIdBase="dkpro-core-udpipe"
+            version="20160523.1"
+            targetGroupId="org.dkpro.core"
+            targetArtifactId="dkpro-core-udpipe-upstream-multiple-en-ud"
+            targetVersion="20160523"
+            targetLocation="classpath:/${outputPackage}/multiple-en-ud.udpipe"
+            tool="tagger" 
+            language="en" 
+            variant="ud">
+            <entry key="DC.title" value="Universal Dependencies 1.2 (160523) POS-Tagger Model for UDPipe"/>
+            <entry key="DC.creator" value="Milan Straka"/>
+            <entry key="DC.identifier" value="http://hdl.handle.net/11234/1-1659#english-ud-1.2-160523.udpipe"/>
+            <entry key="DC.rights" value="http://creativecommons.org/licenses/by-nc-sa/4.0/"/>
+            <entry key="pos.tagset" value="ptb"/>
+            <entry key="pos.coarse.tagset" value="ud"/>
+        </install-model-stub>
+    </target>
+
+	<target name="en-ud-parser" depends="en-ud-upstream">
+        <install-model-stub
+            groupId="org.dkpro.core" 
+            artifactIdBase="dkpro-core-udpipe"
+            version="20160523.1"
+        	targetGroupId="org.dkpro.core"
+        	targetArtifactId="dkpro-core-udpipe-upstream-multiple-en-ud"
+        	targetVersion="20160523"
+        	targetLocation="classpath:/${outputPackage}/multiple-en-ud.udpipe"
+            tool="parser" 
+            language="en" 
+            variant="ud">
+        	<entry key="DC.title" value="Universal Dependencies 1.2 (160523) Parser Models for UDPipe"/>
+    	    <entry key="DC.creator" value="Milan Straka"/>
+    	    <entry key="DC.identifier" value="http://hdl.handle.net/11234/1-1659#english-ud-1.2-160523.udpipe"/>
+    	    <entry key="DC.rights" value="http://creativecommons.org/licenses/by-nc-sa/4.0/"/>
+    	    <entry key="pos.tagset" value="ptb"/>
+            <entry key="pos.coarse.tagset" value="ud"/>
+            <entry key="dependency.tagset" value="universal"/>
+        </install-model-stub>
+	</target>
+
+    <target name="no">
+        <antcall target="no-ud-segmenter"/>
+        <antcall target="no-ud-tagger"/>
+        <antcall target="no-ud-parser"/>
+    </target>
+
+    <target name="no-ud-upstream" depends="download-models">
+        <install-upstream-file
+            file="target/download/models/norwegian-ud-1.2-160523.udpipe" 
+            md5="e716342ba6b61a0fe832139e690a7452"
+            groupId="org.dkpro.core" 
+            artifactIdBase="dkpro-core-udpipe"
+            version="20160523"
+            tool="multiple" 
+            language="no" 
+            variant="ud" 
+            extension="udpipe"/>
+    </target>
+	
+    <target name="no-ud-segmenter" depends="no-ud-upstream">
+        <install-model-stub
+            groupId="org.dkpro.core" 
+            artifactIdBase="dkpro-core-udpipe"
+            version="20160523.1"
+            targetGroupId="org.dkpro.core"
+            targetArtifactId="dkpro-core-udpipe-upstream-multiple-no-ud"
+            targetVersion="20160523"
+            targetLocation="classpath:/${outputPackage}/multiple-no-ud.udpipe"
+            tool="segmenter" 
+            language="no" 
+            variant="ud">
+            <entry key="DC.title" value="Universal Dependencies 1.2 (160523) Segmenter Model for UDPipe"/>
+            <entry key="DC.creator" value="Milan Straka"/>
+            <entry key="DC.identifier" value="http://hdl.handle.net/11234/1-1659#norwegian-ud-1.2-160523.udpipe"/>
+            <entry key="DC.rights" value="http://creativecommons.org/licenses/by-nc-sa/4.0/"/>
+        </install-model-stub>
+    </target>
+
+    <target name="no-ud-tagger" depends="en-ud-upstream">
+        <install-model-stub
+            groupId="org.dkpro.core" 
+            artifactIdBase="dkpro-core-udpipe"
+            version="20160523.1"
+            targetGroupId="org.dkpro.core"
+            targetArtifactId="dkpro-core-udpipe-upstream-multiple-no-ud"
+            targetVersion="20160523"
+            targetLocation="classpath:/${outputPackage}/multiple-no-ud.udpipe"
+            tool="tagger" 
+            language="no" 
+            variant="ud">
+            <entry key="DC.title" value="Universal Dependencies 1.2 (160523) POS-Tagger Model for UDPipe"/>
+            <entry key="DC.creator" value="Milan Straka"/>
+            <entry key="DC.identifier" value="http://hdl.handle.net/11234/1-1659#norwegian-ud-1.2-160523.udpipe"/>
+            <entry key="DC.rights" value="http://creativecommons.org/licenses/by-nc-sa/4.0/"/>
+            <entry key="pos.tagset" value="ud"/>
+            <entry key="pos.coarse.tagset" value="ud"/>
+        </install-model-stub>
+    </target>
+
+    <target name="no-ud-parser" depends="en-ud-upstream">
+        <install-model-stub
+            groupId="org.dkpro.core" 
+            artifactIdBase="dkpro-core-udpipe"
+            version="20160523.1"
+            targetGroupId="org.dkpro.core"
+            targetArtifactId="dkpro-core-udpipe-upstream-multiple-no-ud"
+            targetVersion="20160523"
+            targetLocation="classpath:/${outputPackage}/multiple-no-ud.udpipe"
+            tool="parser" 
+            language="no" 
+            variant="ud">
+            <entry key="DC.title" value="Universal Dependencies 1.2 (160523) Parser Models for UDPipe"/>
+            <entry key="DC.creator" value="Milan Straka"/>
+            <entry key="DC.identifier" value="http://hdl.handle.net/11234/1-1659#norwegian-ud-1.2-160523.udpipe"/>
+            <entry key="DC.rights" value="http://creativecommons.org/licenses/by-nc-sa/4.0/"/>
+            <entry key="pos.tagset" value="ptb"/>
+            <entry key="pos.coarse.tagset" value="ud"/>
+            <entry key="dependency.tagset" value="universal"/>
+        </install-model-stub>
+    </target>
+	
+    <target name="-check-download-binaries">
+        <available property="download-binaries.DONE" file="target/download/binaries/DONE"/>
+    </target>
+
+    <target name="download-binaries" depends="-check-download-binaries" unless="download-binaries.DONE">
+        <mkdir dir="target/download/binaries"/>
+        <get 
+            src="https://github.com/ufal/udpipe/releases/download/v1.1.0/udpipe-1.1.0-bin.zip"
+            dest="target/download/binaries/udpipe-bin.zip" skipexisting="true"/>
+        <unzip src="target/download/binaries/udpipe-bin.zip" dest="target/download/binaries">
+            <patternset>
+                <exclude name="**/*.jar"/>
+            </patternset>
+        </unzip>
+        <touch file="target/download/binaries/DONE"/>
+    </target>
+	
+    <target name="-check-download-models">
+        <available property="download-models.DONE" file="target/download/models/DONE"/>
+    </target>
+
+    <target name="download-models" depends="-check-download-models" unless="download-models.DONE">
+        <mkdir dir="target/download/models"/>
+        <get src="https://lindat.mff.cuni.cz/repository/xmlui/bitstream/handle/11234/1-1659/udpipe-ud-1.2-160523.zip?sequence=1&amp;isAllowed=y" 
+            dest="target/download/models/udpipe-ud-1.2-160523.zip" skipexisting="true"/>
+        <unzip src="target/download/models/udpipe-ud-1.2-160523.zip" dest="target/download/models">
+            <mapper type="flatten" />
+    	</unzip>
+        <touch file="target/download/models/DONE"/>
+    </target>
+
+	<fileset id="metaFiles" dir="target/download/binaries/udpipe-1.1.0-bin">
+	    <include name="AUTHORS" />
+	    <include name="CHANGES" />
+	    <include name="LICENSE" />
+        <include name="README" />
+	</fileset>
+	
+    <target name="install-executables" depends="download-binaries">
+        <property name="version.bin" value="20170425.0"/>
+
+        <mkdir dir="target/download"/>
+
+        <copy todir="target/model-staging/org/dkpro/core/udpipe/bin">
+            <fileset refid="metaFiles"/>
+        </copy>     
+    	
+        <!-- Windows 32 bit -->
+        <mkdir dir="target/model-staging/org/dkpro/core/udpipe/bin/windows-x86_32"/>
+        <propertyfile
+            file="target/model-staging/org/dkpro/core/udpipe/bin/windows-x86_32/manifest.properties">
+            <entry  key="udpipe_java.dll" value="library"/>
+        </propertyfile>
+    	<copy 
+    	   file="target/download/binaries/udpipe-1.1.0-bin/bin-win32/java/udpipe_java.dll"
+    	   todir="target/model-staging/org/dkpro/core/udpipe/bin/windows-x86_32"/>
+
+        <!-- Windows 64 bit -->
+        <mkdir dir="target/model-staging/org/dkpro/core/udpipe/bin/windows-x86_64"/>
+        <propertyfile
+            file="target/model-staging/org/dkpro/core/udpipe/bin/windows-x86_64/manifest.properties">
+            <entry  key="udpipe_java.dll" value="library"/>
+        </propertyfile>
+        <copy 
+           file="target/download/binaries/udpipe-1.1.0-bin/bin-win64/java/udpipe_java.dll"
+           todir="target/model-staging/org/dkpro/core/udpipe/bin/windows-x86_64"/>
+
+        <!-- LINUX 32 bit -->
+        <mkdir dir="target/model-staging/org/dkpro/core/udpipe/bin/linux-x86_32"/>
+        <propertyfile
+            file="target/model-staging/org/dkpro/core/udpipe/bin/linux-x86_32/manifest.properties">
+            <entry  key="libudpipe_java.so" value="library"/>
+        </propertyfile>
+        <copy 
+           file="target/download/binaries/udpipe-1.1.0-bin/bin-linux32/java/libudpipe_java.so"
+           todir="target/model-staging/org/dkpro/core/udpipe/bin/linux-x86_32"/>
+
+        <!-- LINUX 64 bit -->
+        <mkdir dir="target/model-staging/org/dkpro/core/udpipe/bin/linux-x86_64"/>
+        <propertyfile
+            file="target/model-staging/org/dkpro/core/udpipe/bin/linux-x86_64/manifest.properties">
+            <entry  key="libudpipe_java.so" value="library"/>
+        </propertyfile>
+        <copy 
+           file="target/download/binaries/udpipe-1.1.0-bin/bin-linux64/java/libudpipe_java.so"
+           todir="target/model-staging/org/dkpro/core/udpipe/bin/linux-x86_64"/>
+
+        <!-- OSX 64 bit -->
+        <mkdir dir="target/model-staging/org/dkpro/core/udpipe/bin/osx-x86_64"/>
+        <propertyfile
+            file="target/model-staging/org/dkpro/core/udpipe/bin/osx-x86_64/manifest.properties">
+            <entry  key="libudpipe_java.dylib" value="library"/>
+        </propertyfile>
+        <copy 
+           file="target/download/binaries/udpipe-1.1.0-bin/bin-osx/java/libudpipe_java.dylib"
+           todir="target/model-staging/org/dkpro/core/udpipe/bin/osx-x86_64"/>
+    	
+        <jar 
+            destfile="target/dkpro-core-udpipe-bin-${version.bin}.jar" 
+            compress="true">
+            <fileset dir="target/model-staging">
+                <include name="META-INF/**/*"/>
+                <include name="**/*"/>
+            </fileset>
+        </jar>
+
+        <generate-pom 
+            groupId="org.dkpro.core"
+            artifactId="dkpro-core-udpipe-bin" 
+            version="${version.bin}"/>
+
+        <install-artifact 
+            file="target/dkpro-core-udpipe-bin-${version.bin}.jar"
+            groupId="org.dkpro.core"
+            artifactId="dkpro-core-udpipe-bin" 
+            version="${version.bin}"/>
+        <clean-pom/>
+        <delete dir="target/model-staging"/>
+    </target>	
+</project>	

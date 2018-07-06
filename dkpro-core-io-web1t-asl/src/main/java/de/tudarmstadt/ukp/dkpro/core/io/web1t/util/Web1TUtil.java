@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2011
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,34 +14,32 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.web1t.util;
 
 import java.io.File;
 
 public class Web1TUtil
 {
+    public static String cutOffUnderscoredSuffixFromFileName(File file)
+    {
+        String path = file.getAbsolutePath();
 
-	public static String cutOffUnderscoredSuffixFromFileName(File file)
-	{
+        return path.substring(0, path.lastIndexOf("_"));
+    }
 
-		String path = file.getAbsolutePath();
+    public static String getStartingLetters(String readLine, int indexOfTab)
+    {
+        String line = readLine.substring(0, indexOfTab);
 
-		return path.substring(0, path.lastIndexOf("_"));
-	}
-
-	public static String getStartingLetters(String readLine, int indexOfTab)
-	{
-		String line = readLine.substring(0, indexOfTab);
-
-		String key = null;
-		if (line.length() > 1) {
-			key = readLine.substring(0, 2);
-		}
-		else {
-			key = readLine.substring(0, 1);
-		}
-		key = key.toLowerCase();
-		return key;
-	}
+        String key = null;
+        if (line.length() > 1) {
+            key = readLine.substring(0, 2);
+        }
+        else {
+            key = readLine.substring(0, 1);
+        }
+        key = key.toLowerCase();
+        return key;
+    }
 }

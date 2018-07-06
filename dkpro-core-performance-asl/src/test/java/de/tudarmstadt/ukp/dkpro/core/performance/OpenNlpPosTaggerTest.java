@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.performance;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.INCLUDE_PREFIX;
@@ -29,38 +29,31 @@ import de.tudarmstadt.ukp.dkpro.core.io.tei.TeiReader;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
-/**
- *
- */
 public class OpenNlpPosTaggerTest
 {
-	@Ignore
+    @Ignore
     @Test
-    public void performanceTest()
-        throws Exception
+    public void performanceTest() throws Exception
     {
-    	SimplePipeline.runPipeline(
-			createReader(
-	                TeiReader.class,
-	                TeiReader.PARAM_LANGUAGE, "en",
-	                TeiReader.PARAM_SOURCE_LOCATION, "src/test/resources/corpus/",
-	                TeiReader.PARAM_PATTERNS, new String[] {INCLUDE_PREFIX + "*.xml"}
-	        ),
-	        createEngineDescription(
-	        		createEngineDescription(
-	                        Stopwatch.class,
-	                        Stopwatch.PARAM_TIMER_NAME, "testTimer"
-	                ),
-	                createEngineDescription(
-	                        BreakIteratorSegmenter.class),
-	                createEngineDescription(
-	                        OpenNlpPosTagger.class),
-	                createEngineDescription(
-	                        Stopwatch.class,
-	                        Stopwatch.PARAM_TIMER_NAME, "testTimer",
-	                        Stopwatch.PARAM_OUTPUT_FILE, "target/result.txt"
-	                )
-	        )
+        SimplePipeline.runPipeline(
+            createReader(
+                    TeiReader.class,
+                    TeiReader.PARAM_LANGUAGE, "en",
+                    TeiReader.PARAM_SOURCE_LOCATION, "src/test/resources/corpus/",
+                    TeiReader.PARAM_PATTERNS, new String[] {INCLUDE_PREFIX + "*.xml"}),
+            createEngineDescription(
+                    createEngineDescription(
+                            Stopwatch.class,
+                            Stopwatch.PARAM_TIMER_NAME, "testTimer"),
+                    createEngineDescription(
+                            BreakIteratorSegmenter.class),
+                    createEngineDescription(
+                            OpenNlpPosTagger.class),
+                    createEngineDescription(
+                            Stopwatch.class,
+                            Stopwatch.PARAM_TIMER_NAME, "testTimer",
+                            Stopwatch.PARAM_OUTPUT_FILE, "target/result.txt")
+            )
         );
     }
 }

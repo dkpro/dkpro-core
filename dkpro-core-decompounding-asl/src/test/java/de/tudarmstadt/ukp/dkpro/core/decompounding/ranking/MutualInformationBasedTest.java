@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,16 +14,16 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *******************************************************************************/
+ **/
 
 package de.tudarmstadt.ukp.dkpro.core.decompounding.ranking;
+
+import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import junit.framework.Assert;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -37,15 +37,21 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.LuceneIndexer;
 
 public class MutualInformationBasedTest
 {
-
-    static File source = new File("src/test/resources/ranking/n-grams-2");
-    static File index = new File("target/test/index");
-    static File jWeb1T = new File("src/test/resources/web1t/de");
+    private static File source;
+    private static File jWeb1T;
+    
+    private static File testOutput;
+    private static File index;
 
     @BeforeClass
     public static void createIndex()
         throws Exception
     {
+        source = new File("src/test/resources/ranking/n-grams-2");
+        jWeb1T = new File("src/test/resources/web1t/de");
+        
+        testOutput = new File("target/test-output/MutualInformationBasedTest");
+        index = new File(testOutput, "index");
         index.mkdirs();
 
         LuceneIndexer indexer = new LuceneIndexer(source, index);
@@ -55,41 +61,43 @@ public class MutualInformationBasedTest
     }
 
     @Test
-    public void testRankList()
-        throws IOException
+    public void testRankList() throws IOException
     {
-        MutualInformationRanker ranker = new MutualInformationRanker(new Finder(index, jWeb1T));
+        try (Finder finder = (new Finder(index, jWeb1T))) {
+            MutualInformationRanker ranker = new MutualInformationRanker(finder);
 
-        List<DecompoundedWord> list = new ArrayList<DecompoundedWord>();
-        DecompoundedWord s1 = DecompoundedWord.createFromString("Aktionsplan");
-        list.add(s1);
-        DecompoundedWord s2 = DecompoundedWord.createFromString("Akt+ion(s)+plan");
-        list.add(s2);
-        DecompoundedWord s3 = DecompoundedWord.createFromString("Aktion(s)+plan");
-        list.add(s3);
+            List<DecompoundedWord> list = new ArrayList<DecompoundedWord>();
+            DecompoundedWord s1 = DecompoundedWord.createFromString("Aktionsplan");
+            list.add(s1);
+            DecompoundedWord s2 = DecompoundedWord.createFromString("Akt+ion(s)+plan");
+            list.add(s2);
+            DecompoundedWord s3 = DecompoundedWord.createFromString("Aktion(s)+plan");
+            list.add(s3);
 
-        List<DecompoundedWord> result = ranker.rank(list);
-        Assert.assertEquals(s3, result.get(0));
+            List<DecompoundedWord> result = ranker.rank(list);
+            assertEquals(s3, result.get(0));
 
-        Assert.assertEquals(s3, ranker.highestRank(list));
+            assertEquals(s3, ranker.highestRank(list));
+        }
     }
 
     @Test
-    public void testRankTree()
-        throws IOException
+    public void testRankTree() throws IOException
     {
-        MutualInformationRanker ranker = new MutualInformationRanker(new Finder(index, jWeb1T));
+        try (Finder finder = (new Finder(index, jWeb1T))) {
+            MutualInformationRanker ranker = new MutualInformationRanker(finder);
 
-        DecompoundedWord s1 = DecompoundedWord.createFromString("Aktionsplan");
-        DecompoundedWord s2 = DecompoundedWord.createFromString("Akt+ion(s)+plan");
-        DecompoundedWord s3 = DecompoundedWord.createFromString("Aktion(s)+plan");
+            DecompoundedWord s1 = DecompoundedWord.createFromString("Aktionsplan");
+            DecompoundedWord s2 = DecompoundedWord.createFromString("Akt+ion(s)+plan");
+            DecompoundedWord s3 = DecompoundedWord.createFromString("Aktion(s)+plan");
 
-        DecompoundingTree tree = new DecompoundingTree(s1);
-        tree.getRoot().addChild(new ValueNode<DecompoundedWord>(s2));
-        tree.getRoot().addChild(new ValueNode<DecompoundedWord>(s3));
+            DecompoundingTree tree = new DecompoundingTree(s1);
+            tree.getRoot().addChild(new ValueNode<DecompoundedWord>(s2));
+            tree.getRoot().addChild(new ValueNode<DecompoundedWord>(s3));
 
-        DecompoundedWord result = ranker.highestRank(tree);
-        Assert.assertEquals(s3, result);
+            DecompoundedWord result = ranker.highestRank(tree);
+            assertEquals(s3, result);
+        }
     }
 
     @AfterClass

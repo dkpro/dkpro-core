@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2013
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,21 +14,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.model;
 
 import java.io.Serializable;
 import java.util.Set;
 import java.util.TreeSet;
 
-import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.TfidfAnnotator;
-import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.TfidfConsumer;
+import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.TfIdfAnnotator;
+import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.TfIdfWriter;
 import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util.FreqDist;
 
 /**
  * Container that stores the document frequency and additional data in a collection of documents. To
- * be filled and serialized by {@link TfidfConsumer} and deserialized and used by
- * {@link TfidfAnnotator}.
+ * be filled and serialized by {@link TfIdfWriter} and deserialized and used by
+ * {@link TfIdfAnnotator}.
  * 
  */
 public class DfStore

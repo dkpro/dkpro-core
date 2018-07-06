@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2014
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,18 +14,18 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 
 package de.tudarmstadt.ukp.dkpro.core.textnormalizer.transformation;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTransformedText;
+import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 
-import static org.apache.commons.io.FileUtils.*;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.pipeline.SimplePipeline;
@@ -36,6 +36,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TokenizedTextWriter;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import de.tudarmstadt.ukp.dkpro.core.testing.EOLUtils;
 
 public class HyphenationRemoverTest
 {
@@ -64,7 +65,7 @@ public class HyphenationRemoverTest
         final String variant = "maxent";
         String sourcePath = "src/test/resources/texts/test3.txt";
 
-        final String expected = "Ich habe einen super-tollen Bären .\n"+
+        final String expected = "Ich habe einen super-tollen Bären .\n" + 
                 "Für eine Registrierung einer Organisation und eine EMail Adresse .\n";
 
         /* process input file */
@@ -88,7 +89,9 @@ public class HyphenationRemoverTest
 
         SimplePipeline.runPipeline(reader, hyphenationRemover, segmenter, writer);
 
-        assertEquals(expected, readFileToString(new File(outputPath, "test3.txt"), "UTF-8"));
+        String actual = readFileToString(new File(outputPath, "test3.txt"), "UTF-8");
+        actual = EOLUtils.normalizeLineEndings(actual);
+        assertEquals(expected, actual);
     }
 
     @Rule

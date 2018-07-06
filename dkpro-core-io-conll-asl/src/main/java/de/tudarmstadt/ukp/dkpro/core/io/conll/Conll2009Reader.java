@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2014
  * Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.conll;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
@@ -24,15 +24,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.util.FSCollectionFactory;
@@ -40,9 +43,12 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -52,39 +58,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArg;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArgLink;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * <p>Reads a file in the CoNLL-2009 format.</p>
- *
- * <ol>
- * <li>ID - <b>(ignored)</b> Token counter, starting at 1 for each new sentence.</li>
- * <li>FORM - <b>(Token)</b> Word form or punctuation symbol.</li>
- * <li>LEMMA - <b>(Lemma)</b> Fine-grained part-of-speech tag, where the tagset depends on the
- * language, or identical to the coarse-grained part-of-speech tag if not available.</li>
- * <li>PLEMMA - <b>(ignored)</b> Automatically predicted lemma of FORM</li>
- * <li>POS - <b>(POS)</b> Fine-grained part-of-speech tag, where the tagset depends on the language,
- * or identical to the coarse-grained part-of-speech tag if not available.</li>
- * <li>PPOS - <b>(ignored)</b> Automatically predicted major POS by a language-specific tagger</li>
- * <li>FEAT - <b>(MorphologicalFeatures)</b> Unordered set of syntactic and/or morphological features (depending
- * on the particular language), separated by a vertical bar (|), or an underscore if not available.</li>
- * <li>PFEAT - <b>(ignored)</b> Automatically predicted morphological features (if applicable)</li>
- * <li>HEAD - <b>(Dependency)</b> Head of the current token, which is either a value of ID or zero
- * ('0'). Note that depending on the original treebank annotation, there may be multiple tokens with
- * an ID of zero.</li>
- * <li>PHEAD - <b>(ignored)</b> Automatically predicted syntactic head</li>
- * <li>DEPREL - <b>(Dependency)</b> Dependency relation to the HEAD. The set of dependency relations
- * depends on the particular language. Note that depending on the original treebank annotation, the
- * dependency relation may be meaningfull or simply 'ROOT'.</li>
- * <li>PDEPREL - <b>(ignored)</b> Automatically predicted dependency relation to PHEAD</li>
- * <li>FILLPRED - <b>(ignored)</b> Contains 'Y' for argument-bearing tokens</li>
- * <li>PRED - <b>(SemanticPredicate)</b> (sense) identifier of a semantic 'predicate' coming from a
- * current token</li>
- * <li>APREDs - <b>(SemanticArgument)</b> Columns with argument labels for each semantic predicate
- * (in the ID order)</li>
- * </ol>
- * 
- * <p>Sentences are separated by a blank new line.</p>
+ * Reads a file in the CoNLL-2009 format.
  * 
  * @see <a href="http://ufal.mff.cuni.cz/conll2009-st/task-description.html">CoNLL 2009 Shared Task:
  *      predict syntactic and semantic dependencies and their labeling</a>
@@ -93,6 +72,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
  * @see <a href="http://www.aclweb.org/anthology/W08-2121.pdf">The CoNLL-2008 Shared Task on Joint
  *      Parsing of Syntactic and Semantic Dependencies</a>
  */
+@ResourceMetaData(name = "CoNLL 2009 Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2009})
 @TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -105,9 +87,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 public class Conll2009Reader
     extends JCasResourceCollectionReader_ImplBase
 {
-    public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
-    private String encoding;
+    public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    private String sourceEncoding;
 
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
@@ -126,7 +109,8 @@ public class Conll2009Reader
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
     
@@ -184,7 +168,9 @@ public class Conll2009Reader
         initCas(aJCas, res);
         BufferedReader reader = null;
         try {
-            reader = new BufferedReader(new InputStreamReader(res.getInputStream(), encoding));
+            reader = new BufferedReader(new InputStreamReader(
+                    CompressionUtils.getInputStream(res.getLocation(), res.getInputStream()),
+                    sourceEncoding));
             convert(aJCas, reader);
         }
         finally {
@@ -196,10 +182,10 @@ public class Conll2009Reader
         throws IOException
     {
         if (readPos) {
-            try{
+            try {
                 posMappingProvider.configure(aJCas.getCas());
             }
-            catch(AnalysisEngineProcessException e){
+            catch (AnalysisEngineProcessException e) {
                 throw new IOException(e);
             }
         }
@@ -220,11 +206,15 @@ public class Conll2009Reader
             // Tokens, Lemma, POS
             Map<Integer, Token> tokens = new HashMap<Integer, Token>();
             List<SemPred> preds = new ArrayList<>();
-            for (String[] word : words) {
+            Iterator<String[]> wordIterator = words.iterator();
+            while (wordIterator.hasNext()) {
+                String[] word = wordIterator.next();
                 // Read token
                 Token token = doc.add(word[FORM], Token.class);
                 tokens.put(Integer.valueOf(word[ID]), token);
-                doc.add(" ");
+                if (wordIterator.hasNext()) {
+                    doc.add(" ");
+                }
 
                 // Read lemma
                 if (!UNUSED.equals(word[LEMMA]) && readLemma) {
@@ -239,7 +229,8 @@ public class Conll2009Reader
                     Type posTag = posMappingProvider.getTagType(word[POS]);
                     POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
-                    pos.setPosValue(word[POS]);
+                    pos.setPosValue(word[POS] != null ? word[POS].intern() : null);
+                    POSUtils.assignCoarseValue(pos);
                     pos.addToIndexes();
                     token.setPos(pos);
                 }
@@ -277,6 +268,7 @@ public class Conll2009Reader
                             rel.setDependencyType(word[DEPREL]);
                             rel.setBegin(rel.getDependent().getBegin());
                             rel.setEnd(rel.getDependent().getEnd());
+                            rel.setFlavor(DependencyFlavor.BASIC);
                             rel.addToIndexes();
                         }
                         else {
@@ -286,6 +278,7 @@ public class Conll2009Reader
                             rel.setDependencyType(word[DEPREL]);
                             rel.setBegin(rel.getDependent().getBegin());
                             rel.setEnd(rel.getDependent().getEnd());
+                            rel.setFlavor(DependencyFlavor.BASIC);
                             rel.addToIndexes();
                         }
                     }
@@ -298,13 +291,13 @@ public class Conll2009Reader
                 for (int p = 0; p < preds.size(); p++) {
                     List<SemArgLink> args = new ArrayList<>();
                     for (String[] word : words) {
-                        if (!UNUSED.equals(word[APRED+p])) {
+                        if (!UNUSED.equals(word[APRED + p])) {
                             Token token = tokens.get(Integer.valueOf(word[ID]));
                             SemArg arg = new SemArg(aJCas, token.getBegin(), token.getEnd());
                             arg.addToIndexes();
                             
                             SemArgLink link = new SemArgLink(aJCas);
-                            link.setRole(word[APRED+p]);
+                            link.setRole(word[APRED + p]);
                             link.setTarget(arg);
                             args.add(link);
                         }

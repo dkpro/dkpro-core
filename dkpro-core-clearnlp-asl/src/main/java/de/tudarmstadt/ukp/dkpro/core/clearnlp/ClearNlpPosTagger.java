@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.clearnlp;
 
 import static java.util.Arrays.asList;
@@ -40,6 +40,7 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -53,6 +54,7 @@ import com.clearnlp.component.pos.EnglishPOSTagger;
 import com.clearnlp.dependency.DEPTree;
 import com.clearnlp.nlp.NLPGetter;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -63,11 +65,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Part-of-Speech annotator using Clear NLP. Requires {@link Sentence}s to be annotated before.
- *
  */
+@Component(OperationType.PART_OF_SPEECH_TAGGER)
+@ResourceMetaData(name = "ClearNLP POS-Tagger")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
     inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
@@ -105,6 +112,20 @@ public class ClearNlpPosTagger
     protected String posVariant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Load the model from this location instead of locating the pos-tagging model automatically.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -115,17 +136,10 @@ public class ClearNlpPosTagger
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
      * mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
-
-    /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid spaming
-     * the heap with thousands of strings representing only a few different tags.
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
 
     /**
      * Log the tag set(s) when a model is loaded.
@@ -155,6 +169,7 @@ public class ClearNlpPosTagger
                 setDefaultVariantsLocation("${package}/lib/dictionary-default-variants.map");
                 setDefault(VARIANT, "default");
                 
+                setOverride(ARTIFACT_URI, modelArtifactUri);
                 setOverride(LOCATION, dictLocation);
                 setOverride(LANGUAGE, language);
                 setOverride(VARIANT, dictVariant);
@@ -195,9 +210,10 @@ public class ClearNlpPosTagger
 
                     String language = getAggregatedProperties().getProperty(LANGUAGE);
                     AbstractPOSTagger tagger;
-                    if(language.equals("en")){
+                    if (language.equals("en")) {
                         tagger = new DkproPosTagger(ois);
-                    }else{
+                    }
+                    else {
                         tagger = new DefaultPOSTagger(ois);
                     }
 
@@ -253,10 +269,11 @@ public class ClearNlpPosTagger
 
             int i = 0;
             for (Token t : tokens) {
-                String tag = internTags ? posTags[i + 1].intern() : posTags[i + 1];
-                Type posTag = posMappingProvider.getTagType(tag);
+                String tag = posTags[i + 1];
+                Type posTag = posMappingProvider.getTagType(tag != null ? tag.intern() : null);
                 POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
                 posAnno.setPosValue(tag);
+                POSUtils.assignCoarseValue(posAnno);
                 posAnno.addToIndexes();
                 t.setPos(posAnno);
                 i++;
@@ -264,8 +281,9 @@ public class ClearNlpPosTagger
         }
     }
 
-    private class DkproPosTagger extends EnglishPOSTagger{
-
+    private class DkproPosTagger
+        extends EnglishPOSTagger
+    {
         public DkproPosTagger(ObjectInputStream in)
         {
             super(in);
@@ -276,6 +294,5 @@ public class ClearNlpPosTagger
         {
             mp_analyzer = new EnglishMPAnalyzer(dictModelProvider.getResource());
         }
-
     }
 }

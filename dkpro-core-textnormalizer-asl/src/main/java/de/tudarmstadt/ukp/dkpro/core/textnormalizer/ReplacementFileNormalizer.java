@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.textnormalizer;
 
 import static de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator.OP_REPLACE;
@@ -33,6 +33,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -40,12 +41,17 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
- * Takes a text and replaces desired expressions This class should not work on tokens as some
- * expressions might span several tokens
- * 
+ * Takes a text and replaces desired expressions. This class should not work on tokens as some
+ * expressions might span several tokens.
  */
+@Component(OperationType.NORMALIZER)
+@ResourceMetaData(name = "Replacement File Normalizer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 
         outputs = { "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" })
@@ -56,10 +62,16 @@ public class ReplacementFileNormalizer
     /**
      * Location of a file which contains all replacing characters
      */
-
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
     private String replacePath;
+    
+    /**
+     * The character encoding used by the model.
+     */
+    public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
+    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue = "UTF-8")
+    protected String modelEncoding;
 
     public static final String PARAM_SRC_SURROUNDINGS = "srcExpressionSurroundings";
     @ConfigurationParameter(name = PARAM_SRC_SURROUNDINGS, mandatory = true, defaultValue = "IRRELEVANT")
@@ -176,7 +188,7 @@ public class ReplacementFileNormalizer
         try {
             // Reads in all mappings of expressions(to be replaced expression, target expression)
             // and fills replacement map
-            for (String line : FileUtils.readLines(new File(replacePath))) {
+            for (String line : FileUtils.readLines(new File(replacePath), modelEncoding)) {
                 if (!line.isEmpty()) {
                     // Each line of source file contains mapping of "to replaced expression" and the
                     // "target expressions"

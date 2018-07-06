@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.xmi;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
@@ -28,6 +28,8 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CASRuntimeException;
 import org.apache.uima.cas.impl.XmiCasSerializer;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -35,49 +37,68 @@ import org.apache.uima.util.TypeSystemUtil;
 import org.xml.sax.SAXException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * UIMA XMI format writer.
  */
+@ResourceMetaData(name = "UIMA XMI CAS Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@MimeTypeCapability({MimeTypes.APPLICATION_VND_XMI_XML, MimeTypes.APPLICATION_X_UIMA_XMI})
 @TypeCapability(
-        inputs={
+        inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
 public class XmiWriter
-	extends JCasFileWriter_ImplBase
+    extends JCasFileWriter_ImplBase
 {
-	/**
-	 * Location to write the type system to. If this is not set, a file called typesystem.xml will
-	 * be written to the XMI output path. If this is set, it is expected to be a file relative
-	 * to the current work directory or an absolute file.
-	 * <br>
-	 * If this parameter is set, the {@link #PARAM_COMPRESSION} parameter has no effect on the
-	 * type system. Instead, if the file name ends in ".gz", the file will be compressed,
-	 * otherwise not.
-	 */
-	public static final String PARAM_TYPE_SYSTEM_FILE = "typeSystemFile";
-	@ConfigurationParameter(name=PARAM_TYPE_SYSTEM_FILE, mandatory=false)
-	private File typeSystemFile;
+    public static final String PARAM_PRETTY_PRINT = "prettyPrint";
+    @ConfigurationParameter(name = PARAM_PRETTY_PRINT, mandatory = true, defaultValue = "true")
+    private boolean prettyPrint;
+    
+    /**
+     * Location to write the type system to. If this is not set, a file called typesystem.xml will
+     * be written to the XMI output path. If this is set, it is expected to be a file relative
+     * to the current work directory or an absolute file.
+     * <br>
+     * If this parameter is set, the {@link #PARAM_COMPRESSION} parameter has no effect on the
+     * type system. Instead, if the file name ends in ".gz", the file will be compressed,
+     * otherwise not.
+     */
+    public static final String PARAM_TYPE_SYSTEM_FILE = "typeSystemFile";
+    @ConfigurationParameter(name = PARAM_TYPE_SYSTEM_FILE, mandatory = false)
+    private File typeSystemFile;
 
-	private boolean typeSystemWritten;
+    /**
+     * Specify the suffix of output files. Default value <code>.xmi</code>. If the suffix is not
+     * needed, provide an empty string as value.
+     */
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
+    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xmi")
+    private String filenameSuffix;
 
-	@Override
-	public void initialize(UimaContext aContext)
-		throws ResourceInitializationException
-	{
-		super.initialize(aContext);
+    private boolean typeSystemWritten;
 
-		typeSystemWritten = false;
-	}
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
+
+        typeSystemWritten = false;
+    }
 
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
-        try (OutputStream docOS = getOutputStream(aJCas, ".xmi")) {
-            XmiCasSerializer.serialize(aJCas.getCas(), docOS);
+        try (OutputStream docOS = getOutputStream(aJCas, filenameSuffix)) {
+            XmiCasSerializer.serialize(aJCas.getCas(), null, docOS, prettyPrint, null);
 
-            if (!typeSystemWritten || typeSystemFile == null) {
+            if (!typeSystemWritten) {
                 writeTypeSystem(aJCas);
                 typeSystemWritten = true;
             }
@@ -90,21 +111,21 @@ public class XmiWriter
     private void writeTypeSystem(JCas aJCas)
         throws IOException, CASRuntimeException, SAXException
     {
-		@SuppressWarnings("resource")
+        @SuppressWarnings("resource")
         OutputStream typeOS = null;
-		
+        
         try {
-    		if (typeSystemFile != null) {
-    		    typeOS = CompressionUtils.getOutputStream(typeSystemFile);
-    		}
-    		else {
-    		    typeOS = getOutputStream("typesystem", ".xml");
-    		}
+            if (typeSystemFile != null) {
+                typeOS = CompressionUtils.getOutputStream(typeSystemFile);
+            }
+            else {
+                typeOS = getOutputStream("TypeSystem", ".xml");
+            }
 
-			TypeSystemUtil.typeSystem2TypeSystemDescription(aJCas.getTypeSystem()).toXML(typeOS);
-		}
-		finally {
-			closeQuietly(typeOS);
-		}
-	}
+            TypeSystemUtil.typeSystem2TypeSystemDescription(aJCas.getTypeSystem()).toXML(typeOS);
+        }
+        finally {
+            closeQuietly(typeOS);
+        }
+    }
 }

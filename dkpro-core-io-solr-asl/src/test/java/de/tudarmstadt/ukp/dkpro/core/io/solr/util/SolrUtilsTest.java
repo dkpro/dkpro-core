@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2015
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.solr.util;
 
 import static org.junit.Assert.assertEquals;
@@ -29,15 +29,15 @@ public class SolrUtilsTest
     {
         String fieldname = "field";
         String value = "value";
-        String idValue = "id";
-        String idFieldname = idValue;
+        String idValue = "1";
+        String idFieldname = "id";
         boolean update = false;
 
         SolrInputDocument document = new SolrInputDocument();
-        document.addField(idFieldname, idFieldname);
+        document.addField(idFieldname, idValue);
         SolrUtils.setField(document, fieldname, value, update);
 
-        assertEquals(idValue, document.getFieldValue(idValue));
+        assertEquals(idValue, document.getFieldValue(idFieldname));
         assertEquals(value, document.getFieldValue(fieldname));
     }
 }

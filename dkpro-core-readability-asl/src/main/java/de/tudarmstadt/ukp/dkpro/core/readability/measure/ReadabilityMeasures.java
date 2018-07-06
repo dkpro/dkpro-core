@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2013
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.readability.measure;
 
 import java.util.ArrayList;
@@ -81,28 +81,30 @@ public class ReadabilityMeasures
         }
     }
     
-    
-    
     /*
      * only the strings consist of numbers or letters
      * are considered as words.
      */
-    private boolean isWord(String strWord){
-    	for(int i = 0; i < strWord.length(); ++ i){
-    		char ch = strWord.charAt(i);
-    		if(!Character.isLetterOrDigit(ch))
-    				return false;
-    	}
-    	return true;
+    private boolean isWord(String strWord)
+    {
+        for (int i = 0; i < strWord.length(); ++i) {
+            char ch = strWord.charAt(i);
+            if (!Character.isLetterOrDigit(ch)) {
+                return false;
+            }
+        }
+        return true;
     }
     
-    private List<String> filterWords(List<String> words){
-    	List<String> newWords = new ArrayList<String>();
-    	for(String word : words){
-    		if(isWord(word))
-    			newWords.add(word);
-    	}
-    	return newWords;
+    private List<String> filterWords(List<String> words)
+    {
+        List<String> newWords = new ArrayList<String>();
+        for (String word : words) {
+            if (isWord(word)) {
+                newWords.add(word);
+            }
+        }
+        return newWords;
     }
     
     /**
@@ -115,14 +117,15 @@ public class ReadabilityMeasures
      */
     public double kincaid(List<String> words, int nrofSentences)
     {
-    	words = filterWords(words);
+        words = filterWords(words);
         int nrofSyllables = this.syllableCounter.countSyllables(words);
         return kincaid(words.size(), nrofSyllables, nrofSentences);
     }
+    
     private double kincaid(Integer nrofWords, Integer nrofSyllables, Integer nrofSentences)
     {
-        return 11.8 * (((double) nrofSyllables) / nrofWords) + 0.39 * (((double) nrofWords) / nrofSentences)
-                - 15.59;
+        return 11.8 * (((double) nrofSyllables) / nrofWords)
+                + 0.39 * (((double) nrofWords) / nrofSentences) - 15.59;
     }
     
     /**
@@ -134,15 +137,16 @@ public class ReadabilityMeasures
      */
     public double ari(List<String> words, int nrofSentences)
     {
-    	words = filterWords(words);
+        words = filterWords(words);
         int nrofLetters = this.getNrofLetters(words);
         return ari(nrofLetters, words.size(), nrofSentences);
     }
+    
     private double ari(Integer nrofLetters, Integer nrofWords, Integer nrofSentences)
     {
-        return 4.71 * (((double) nrofLetters) / nrofWords) + 0.5 * (((double) nrofWords) / nrofSentences) - 21.43;
+        return 4.71 * (((double) nrofLetters) / nrofWords)
+                + 0.5 * (((double) nrofWords) / nrofSentences) - 21.43;
     }
-    
     
     /**
      * Calculate Coleman-Liau formula.
@@ -154,15 +158,14 @@ public class ReadabilityMeasures
      */
     public double coleman_liau(List<String> words, int nrofSentences)
     {
-    	words = filterWords(words);
+        words = filterWords(words);
         int nrofLetters = this.getNrofLetters(words);
         return coleman_liau(nrofLetters, words.size(), nrofSentences);
     }
     private double coleman_liau(Integer nrofLetters, Integer nrofWords, Integer nrofSentences)
     {
-    	
-        return 5.89 * (((double) nrofLetters) / nrofWords) - 0.3 * (((double) nrofSentences) / (100 * nrofWords))
-                - 15.8;
+        return 5.89 * (((double) nrofLetters) / nrofWords)
+                - 0.3 * (((double) nrofSentences) / (100 * nrofWords)) - 15.8;
     }
 
     /**
@@ -174,7 +177,7 @@ public class ReadabilityMeasures
      */
     public double flesch(List<String> words, int nrofSentences)
     {
-    	words = filterWords(words);
+        words = filterWords(words);
         int nrofSyllables = this.syllableCounter.countSyllables(words);
         return flesch(nrofSyllables, words.size(), nrofSentences);
     }
@@ -196,7 +199,7 @@ public class ReadabilityMeasures
      */
     public double fog(List<String> words, int nrofSentences)
     {
-    	words = filterWords(words);
+        words = filterWords(words);
         int nrofBigwords = getNrofBigwords(words);
         return fog(words.size(), nrofBigwords, nrofSentences);
     }
@@ -216,31 +219,40 @@ public class ReadabilityMeasures
      */
     public double lix(List<String> words, int nrofSentences)
     {
-    	words = filterWords(words);
+        words = filterWords(words);
         int nrofLongWords = this.getNrofLongwords(words);
         return lix(words.size(), nrofLongWords, nrofSentences);
     }
     private double lix(Integer nrofWords, Integer nrofLongWords, Integer nrofSentences)
     {
         double idx = ((double) nrofWords) / nrofSentences + 100.0 * (nrofLongWords) / nrofWords;
-        if (idx < 34)
+        if (idx < 34) {
             return 0;
-        else if (idx < 38)
+        }
+        else if (idx < 38) {
             return 5;
-        else if (idx < 41)
+        }
+        else if (idx < 41) {
             return 6;
-        else if (idx < 44)
+        }
+        else if (idx < 44) {
             return 7;
-        else if (idx < 48)
+        }
+        else if (idx < 48) {
             return 8;
-        else if (idx < 51)
+        }
+        else if (idx < 51) {
             return 9;
-        else if (idx < 54)
+        }
+        else if (idx < 54) {
             return 10;
-        else if (idx < 57)
+        }
+        else if (idx < 57) {
             return 11;
-        else
+        }
+        else {
             return 99;
+        }
     }
 
     /**
@@ -252,7 +264,7 @@ public class ReadabilityMeasures
      */
     public double smog(List<String> words, int nrofSentences)
     {
-    	words = filterWords(words);
+        words = filterWords(words);
         int nrofBigwords = this.getNrofBigwords(words);
         return smog(nrofBigwords, nrofSentences);
     } 

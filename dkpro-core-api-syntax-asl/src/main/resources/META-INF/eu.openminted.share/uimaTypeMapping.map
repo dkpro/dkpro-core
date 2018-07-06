@@ -1,0 +1,4 @@
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk=http://w3id.org/meta-share/omtd-share/Chunk
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent=http://w3id.org/meta-share/omtd-share/Constituent
+de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency=http://w3id.org/meta-share/omtd-share/Dependency
+

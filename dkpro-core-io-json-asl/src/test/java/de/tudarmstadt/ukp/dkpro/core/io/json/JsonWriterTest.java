@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2015
  * Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.json;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
@@ -23,7 +23,6 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2000Reader;
-import de.tudarmstadt.ukp.dkpro.core.io.json.JsonWriter;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class JsonWriterTest

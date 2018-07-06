@@ -1,0 +1,1 @@
+classpath*:de/tudarmstadt/ukp/dkpro/core/api/datasets/lib/*.yaml

@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2014
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.corenlp;
 
@@ -41,18 +41,18 @@ public class CoreNlpLemmatizerTest
                 new String[] { "foo",  "_",  "bar" });
     }
 
-	@Test
-	public void testEnglish() throws Exception
-	{
+    @Test
+    public void testEnglish() throws Exception
+    {
         runTest("en", "This is a test .",
-        		new String[] { "this",  "be",  "a", "test", "." });
+                new String[] { "this",  "be",  "a", "test", "." });
 
         runTest("en", "We need a very complicated example sentence , which "
                 + "contains as many constituents and dependencies as possible .",
                 new String[] { "we", "need", "a", "very", "complicated", "example",
-                "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
-                "dependency", "as", "possible", "." });
-	}
+                    "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
+                    "dependency", "as", "possible", "." });
+    }
 
     @Test(expected = AnalysisEngineProcessException.class)
     public void testNotEnglish()
@@ -68,17 +68,17 @@ public class CoreNlpLemmatizerTest
                 new String[] { "detail", "hinzu", "findet", "man", "unter", "http://www.armytimes.com/news/2009/11/army_m4_112109w/", "." });
 
     }
-	
+    
     private void runTest(String aLanguage, String testDocument, String[] lemmas)
-		throws Exception
-	{
-		AnalysisEngineDescription posTagger = createEngineDescription(CoreNlpPosTagger.class);
-		AnalysisEngineDescription lemmatizer = createEngineDescription(CoreNlpLemmatizer.class);
+        throws Exception
+    {
+        AnalysisEngineDescription posTagger = createEngineDescription(CoreNlpPosTagger.class);
+        AnalysisEngineDescription lemmatizer = createEngineDescription(CoreNlpLemmatizer.class);
 
-		JCas aJCas = TestRunner.runTest(createEngineDescription(posTagger, lemmatizer),
-				aLanguage, testDocument);
+        JCas aJCas = TestRunner.runTest(createEngineDescription(posTagger, lemmatizer),
+                aLanguage, testDocument);
 
-		AssertAnnotations.assertLemma(lemmas, select(aJCas, Lemma.class));
+        AssertAnnotations.assertLemma(lemmas, select(aJCas, Lemma.class));
     }
 
     @Rule

@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,10 +14,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *******************************************************************************/
+ **/
 
 package de.tudarmstadt.ukp.dkpro.core.decompounding.web1t;
 
+import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
@@ -41,9 +42,8 @@ import com.googlecode.jweb1t.JWeb1TSearcher;
 
 /**
  * This class searches on the Lucene Index for n-grams.
- * 
  */
-public class Finder
+public class Finder implements Closeable
 {
     private final JWeb1TSearcher web1tSearcher;
     private final ParallelMultiSearcher searcher;
@@ -209,6 +209,14 @@ public class Finder
         }
 
         return false;
+    }
+    
+    @Override
+    public void close() throws IOException
+    {
+        if (searcher != null) {
+            searcher.close();
+        }
     }
 
     private static class NGramCollector

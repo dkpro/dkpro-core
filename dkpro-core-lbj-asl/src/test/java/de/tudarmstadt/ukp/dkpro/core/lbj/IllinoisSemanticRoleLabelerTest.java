@@ -33,37 +33,34 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class IllinoisSemanticRoleLabelerTest
 {
-	static final String documentEnglish = "We need a very complicated example sentence , which "
-			+ "contains as many constituents and dependencies as possible .";
+    static final String documentEnglish = "We need a very complicated example sentence , which "
+            + "contains as many constituents and dependencies as possible .";
 
-	@Test
-	public void testEnglish()
-		throws Exception
-	{
-		Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 3000000000l);
+    @Test
+    public void testEnglish() throws Exception
+    {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 3000000000l);
 
-		JCas jcas = runTest("en", null, documentEnglish);
+        JCas jcas = runTest("en", null, documentEnglish);
 
-		String[] predicates = {
-		        "contains (contain.01): [(A0:sentence)(A1:as)(R-A0:which)]",
-		        "need (need.01): [(A0:We)(A1:sentence)]" };
+        String[] predicates = { "contains (contain.01): [(A0:sentence)(A1:as)(R-A0:which)]",
+                "need (need.01): [(A0:We)(A1:sentence)]" };
 
         AssertAnnotations.assertSemPred(predicates, select(jcas, SemPred.class));
-	}
+    }
 
-	private JCas runTest(String aLanguage, String aVariant, String aText, Object... aExtraParams)
-		throws Exception
-	{
-		AnalysisEngineDescription engine = createEngineDescription(
-				createEngineDescription(IllinoisPosTagger.class),
+    private JCas runTest(String aLanguage, String aVariant, String aText, Object... aExtraParams)
+        throws Exception
+    {
+        AnalysisEngineDescription engine = createEngineDescription(
+                createEngineDescription(IllinoisPosTagger.class),
                 createEngineDescription(IllinoisLemmatizer.class),
                 createEngineDescription(IllinoisChunker.class),
                 createEngineDescription(IllinoisNamedEntityRecognizer.class),
-				createEngineDescription(IllinoisSemanticRoleLabeler.class));
+                createEngineDescription(IllinoisSemanticRoleLabeler.class));
 
-		return TestRunner.runTest(engine, aLanguage, aText);
-	}
-
+        return TestRunner.runTest(engine, aLanguage, aText);
+    }
 
     @Rule
     public DkproTestContext testContext = new DkproTestContext();

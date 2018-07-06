@@ -25,7 +25,7 @@ NP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.NP
 # PP - preposition phrase
 PP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.PP
 # PRN - parenthetical
-PRN=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.PRN
+PRN=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.PARN
 # QP - quantifier phrase
 # UCP - unidentical coordination phrase
 UCP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.UCP

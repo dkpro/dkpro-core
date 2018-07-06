@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2011
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.web1t.util;
 
 import java.io.File;
@@ -23,48 +23,44 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-
-
 public class Web1TFileSorter
 {
+    private final List<File> inputFiles;
+    private List<File> sortedFiles = new LinkedList<File>();
+    private final Comparator<String> comparator;
 
-	private final List<File> inputFiles;
-	private List<File> sortedFiles = new LinkedList<File>();
-	private final Comparator<String> comparator;
+    public Web1TFileSorter(List<File> unsortedFiles,
+            Comparator<String> comparator)
+    {
+        this.inputFiles = unsortedFiles;
+        this.comparator = comparator;
+    }
 
-	public Web1TFileSorter(List<File> unsortedFiles,
-			Comparator<String> comparator)
-	{
-		this.inputFiles = unsortedFiles;
-		this.comparator = comparator;
-	}
+    public void sort()
+        throws IOException
+    {
+        for (File file : inputFiles) {
 
-	public void sort()
-		throws IOException
-	{
-		for (File file : inputFiles) {
+            List<File> l = ExternalSort.sortInBatch(file, comparator);
 
-			List<File> l = ExternalSort.sortInBatch(file, comparator);
+            File sortedSplitFile = new File(
+                    Web1TUtil.cutOffUnderscoredSuffixFromFileName(file)
+                            + "_sorted");
+            sortedFiles.add(sortedSplitFile);
+            ExternalSort.mergeSortedFiles(l, sortedSplitFile, comparator);
+        }
+    }
 
-			File sortedSplitFile = new File(
-					Web1TUtil.cutOffUnderscoredSuffixFromFileName(file)
-							+ "_sorted");
-			sortedFiles.add(sortedSplitFile);
-			ExternalSort.mergeSortedFiles(l, sortedSplitFile, comparator);
-		}
-	}
+    public LinkedList<File> getSortedFiles()
+    {
+        return new LinkedList<File>(sortedFiles);
+    }
 
-	public LinkedList<File> getSortedFiles()
-	{
-		return new LinkedList<File>(sortedFiles);
-	}
-
-	public void cleanUp()
-	{
-		for (File file : sortedFiles) {
-			file.delete();
-		}
-		sortedFiles = new LinkedList<File>();
-	}
-
+    public void cleanUp()
+    {
+        for (File file : sortedFiles) {
+            file.delete();
+        }
+        sortedFiles = new LinkedList<File>();
+    }
 }

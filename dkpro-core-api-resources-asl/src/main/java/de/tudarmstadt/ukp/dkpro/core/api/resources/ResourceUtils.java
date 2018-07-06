@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
@@ -40,6 +40,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.resource.ResourceAccessException;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 
 /**
  * @since 1.1.0
@@ -93,7 +94,7 @@ public class ResourceUtils
         synchronized (classpathFolderCache) {
             File folder = classpathFolderCache.get(aClasspathBase);
 
-            PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+            ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
             if (!aCache || (folder == null) || !folder.exists()) {
                 folder = File.createTempFile("dkpro-package", "");
@@ -335,7 +336,9 @@ public class ResourceUtils
      * @return A resolved {@link InputStream}
      * @throws IOException
      *             if something went wrong during resolving the input stream
+     * @deprecated Use {@link CompressionUtils#getInputStream(String, InputStream)}
      */
+    @Deprecated
     public static InputStream resolveCompressedInputStream(InputStream is, String filename)
         throws IOException
     {

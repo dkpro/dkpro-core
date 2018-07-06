@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2016
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.nlp4j;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
@@ -46,7 +46,7 @@ public class Nlp4JPosTaggerTest
     {
         JCas jcas = runTest("en", null, "This is a test .",
                 new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
-                new String[] { "ART",  "V",   "ART", "NN",   "PUNC" });
+                new String[] { "POS_DET",  "POS_VERB",   "POS_DET", "POS_NOUN",   "POS_PUNCT" });
 
         AssertAnnotations.assertTagset(POS.class, "ptb-emory", ENGLISH_POS_TAGS, jcas);
         AssertAnnotations.assertTagsetMapping(POS.class, "ptb-emory", ENGLISH_POS_UNMAPPED, jcas);
@@ -57,16 +57,16 @@ public class Nlp4JPosTaggerTest
         throws Exception
     {
         runTest("en", null, "This is a test .",
-                new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
-                new String[] { "ART",  "V",   "ART", "NN",   "PUNC" });
+                new String[] { "DT", "VBZ", "DT", "NN", "." },
+                new String[] { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", null, "A neural net .",
-                new String[] { "DT",  "JJ",     "NN",  "." },
-                new String[] { "ART", "ADJ",    "NN",  "PUNC" });
+                new String[] { "DT", "JJ", "NN", "." },
+                new String[] { "POS_DET", "POS_ADJ", "POS_NOUN", "POS_PUNCT" });
 
         runTest("en", null, "John is purchasing oranges .",
-                new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
-                new String[] { "NP",   "V",   "V",        "NN",     "PUNC" });
+                new String[] { "NNP", "VBZ", "VBG", "NNS", "." },
+                new String[] { "POS_PROPN", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_PUNCT" });
     }
     
     private JCas runTest(String language, String variant, String testDocument, String[] tags,

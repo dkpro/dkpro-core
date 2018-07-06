@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.jwpl;
 
 import java.io.BufferedReader;
@@ -51,234 +51,234 @@ import de.tudarmstadt.ukp.wikipedia.parser.mediawiki.MediaWikiParserFactory;
  *
  */
 public abstract class WikipediaStandardReaderBase
-	extends WikipediaReaderBase
+    extends WikipediaReaderBase
 {
 
-	/** Whether the reader outputs plain text or wiki markup. */
-	public static final String PARAM_OUTPUT_PLAIN_TEXT = "OutputPlainText";
-	@ConfigurationParameter(name = PARAM_OUTPUT_PLAIN_TEXT, mandatory = true, defaultValue = "true")
-	protected boolean outputPlainText;
+    /** Whether the reader outputs plain text or wiki markup. */
+    public static final String PARAM_OUTPUT_PLAIN_TEXT = "OutputPlainText";
+    @ConfigurationParameter(name = PARAM_OUTPUT_PLAIN_TEXT, mandatory = true, defaultValue = "true")
+    protected boolean outputPlainText;
 
-	/** The page buffer size (#pages) of the page iterator. */
-	public static final String PARAM_PAGE_BUFFER = "PageBuffer";
-	@ConfigurationParameter(name = PARAM_PAGE_BUFFER, mandatory = true, defaultValue = "1000")
-	protected int pageBuffer;
+    /** The page buffer size (#pages) of the page iterator. */
+    public static final String PARAM_PAGE_BUFFER = "PageBuffer";
+    @ConfigurationParameter(name = PARAM_PAGE_BUFFER, mandatory = true, defaultValue = "1000")
+    protected int pageBuffer;
 
-	/**
-	 * Defines the path to a file containing a line-separated list of
-	 * page ids of the pages that should be retrieved. (Optional)
-	 */
-	public static final String PARAM_PATH_TO_PAGE_ID_LIST = "PageIdsFromFile";
-	@ConfigurationParameter(name = PARAM_PATH_TO_PAGE_ID_LIST, mandatory = false)
-	protected String pageIdFile;
+    /**
+     * Defines the path to a file containing a line-separated list of
+     * page ids of the pages that should be retrieved. (Optional)
+     */
+    public static final String PARAM_PATH_TO_PAGE_ID_LIST = "PageIdsFromFile";
+    @ConfigurationParameter(name = PARAM_PATH_TO_PAGE_ID_LIST, mandatory = false)
+    protected String pageIdFile;
 
-	/**
-	 * Defines the path to a file containing a line-separated list of
-	 * page titles of the pages that should be retrieved. (Optional)
-	 */
-	public static final String PARAM_PATH_TO_PAGE_TITLE_LIST = "PageTitleFromFile";
-	@ConfigurationParameter(name = PARAM_PATH_TO_PAGE_TITLE_LIST, mandatory = false)
-	protected String pageNameFile;
+    /**
+     * Defines the path to a file containing a line-separated list of
+     * page titles of the pages that should be retrieved. (Optional)
+     */
+    public static final String PARAM_PATH_TO_PAGE_TITLE_LIST = "PageTitleFromFile";
+    @ConfigurationParameter(name = PARAM_PATH_TO_PAGE_TITLE_LIST, mandatory = false)
+    protected String pageNameFile;
 
-	/**
-	 * Defines an array of
-	 * page ids of the pages that should be retrieved. (Optional)
-	 */
-	public static final String PARAM_PAGE_ID_LIST = "PageIdFromArray";
-	@ConfigurationParameter(name = PARAM_PAGE_ID_LIST, mandatory = false)
-	protected String[] pageIdParamArray;
+    /**
+     * Defines an array of
+     * page ids of the pages that should be retrieved. (Optional)
+     */
+    public static final String PARAM_PAGE_ID_LIST = "PageIdFromArray";
+    @ConfigurationParameter(name = PARAM_PAGE_ID_LIST, mandatory = false)
+    protected String[] pageIdParamArray;
 
-	/**
-	 * Defines an array of  page titles of the pages that should be retrieved.
-	 * (Optional)
-	 */
-	public static final String PARAM_PAGE_TITLE_LIST = "PageTitlesFromArray";
-	@ConfigurationParameter(name = PARAM_PAGE_TITLE_LIST, mandatory = false)
-	protected String[] pageNameParamArray;
+    /**
+     * Defines an array of  page titles of the pages that should be retrieved.
+     * (Optional)
+     */
+    public static final String PARAM_PAGE_TITLE_LIST = "PageTitlesFromArray";
+    @ConfigurationParameter(name = PARAM_PAGE_TITLE_LIST, mandatory = false)
+    protected String[] pageNameParamArray;
 
-	private Set<String> pageIds = null;
-	private Set<String> pageTitles = null;
+    private Set<String> pageIds = null;
+    private Set<String> pageTitles = null;
 
-	protected long currentArticleIndex;
-	protected long nrOfArticles;
+    protected long currentArticleIndex;
+    protected long nrOfArticles;
 
-	protected Iterator<Page> pageIter;
+    protected Iterator<Page> pageIter;
 
-	private Page page;
+    private Page page;
 
-	protected MediaWikiParser parser;
+    protected MediaWikiParser parser;
 
-	@Override
-	public void initialize(UimaContext context)
-		throws ResourceInitializationException
-	{
-		super.initialize(context);
+    @Override
+    public void initialize(UimaContext context)
+        throws ResourceInitializationException
+    {
+        super.initialize(context);
 
-		pageIds = new HashSet<String>();
-		pageTitles = new HashSet<String>();
+        pageIds = new HashSet<String>();
+        pageTitles = new HashSet<String>();
 
-		try {
-			if (pageIdFile != null) {
-				pageIds = loadFile(pageIdFile);
-			}
-			if (pageNameFile != null) {
-				pageTitles = loadFile(pageNameFile);
-			}
-			if (pageIdParamArray != null && pageIdParamArray.length > 0) {
-				for(String id: pageIdParamArray){
-					pageIds.add(id);
-				}
-			}
-			if (pageNameParamArray != null && pageNameParamArray.length > 0) {
-				for(String id: pageNameParamArray){
-					pageTitles.add(id);
-				}
-			}
-		}
-		catch (Exception e) {
-			throw new ResourceInitializationException(e);
-		}
+        try {
+            if (pageIdFile != null) {
+                pageIds = loadFile(pageIdFile);
+            }
+            if (pageNameFile != null) {
+                pageTitles = loadFile(pageNameFile);
+            }
+            if (pageIdParamArray != null && pageIdParamArray.length > 0) {
+                for (String id : pageIdParamArray) {
+                    pageIds.add(id);
+                }
+            }
+            if (pageNameParamArray != null && pageNameParamArray.length > 0) {
+                for (String id : pageNameParamArray) {
+                    pageTitles.add(id);
+                }
+            }
+        }
+        catch (Exception e) {
+            throw new ResourceInitializationException(e);
+        }
 
-		//Use one of the lists or iterate over all articles?
-		if(!pageIds.isEmpty()||!pageTitles.isEmpty())
-		{
-			this.nrOfArticles = pageIds.size()+pageTitles.size();
-			pageIter = new PageIterator(wiki, pageIds, pageTitles, pageBuffer);
-		}
-		else //use iterator over all pages in the db
-		{
-			MetaData md = wiki.getMetaData();
-			this.nrOfArticles = md.getNumberOfPages()
-					- md.getNumberOfDisambiguationPages()
-					- md.getNumberOfRedirectPages();
+        // Use one of the lists or iterate over all articles?
+        if (!pageIds.isEmpty() || !pageTitles.isEmpty()) {
+            this.nrOfArticles = pageIds.size() + pageTitles.size();
+            pageIter = new PageIterator(wiki, pageIds, pageTitles, pageBuffer);
+        }
+        else //use iterator over all pages in the db
+        {
+            MetaData md = wiki.getMetaData();
+            this.nrOfArticles = md.getNumberOfPages()
+                    - md.getNumberOfDisambiguationPages()
+                    - md.getNumberOfRedirectPages();
 
-			pageIter = new PageIterator(wiki, true, pageBuffer);
-		}
+            pageIter = new PageIterator(wiki, true, pageBuffer);
+        }
 
-		currentArticleIndex = 0;
+        currentArticleIndex = 0;
 
-		MediaWikiParserFactory pf = new MediaWikiParserFactory();
-		pf.setTemplateParserClass(FlushTemplates.class);
+        MediaWikiParserFactory pf = new MediaWikiParserFactory();
+        pf.setTemplateParserClass(FlushTemplates.class);
 
-		parser = pf.createParser();
-	}
+        parser = pf.createParser();
+    }
 
-	@Override
+    @Override
     public boolean hasNext()
-		throws IOException, CollectionException
-	{
-		return pageIter.hasNext();
-	}
+        throws IOException, CollectionException
+    {
+        return pageIter.hasNext();
+    }
 
-	@Override
-	public void getNext(JCas jcas)
-		throws IOException, CollectionException
-	{
-		super.getNext(jcas);
+    @Override
+    public void getNext(JCas jcas)
+        throws IOException, CollectionException
+    {
+        super.getNext(jcas);
 
-		page = pageIter.next();
+        page = pageIter.next();
         currentArticleIndex++;
 
-		try {
-			getLogger().debug("title: " + page.getTitle());
+        try {
+            getLogger().debug("title: " + page.getTitle());
 
             addDocumentMetaData(jcas, page);
 
-			if (!isValidPage(page)) {
-				jcas.setDocumentText("");
-				return;
-			}
+            if (!isValidPage(page)) {
+                jcas.setDocumentText("");
+                return;
+            }
 
-			if (outputPlainText) {
-				jcas.setDocumentText(WikiUtils
-						.cleanText(getPlainDocumentText(page)));
-			}
-			else {
-				jcas.setDocumentText(getDocumentText(page));
-			}
+            if (outputPlainText) {
+                jcas.setDocumentText(WikiUtils
+                        .cleanText(getPlainDocumentText(page)));
+            }
+            else {
+                jcas.setDocumentText(getDocumentText(page));
+            }
 
-		}
+        }
         catch (WikiTitleParsingException e1) {
             jcas.setDocumentText("");
             return;
         }
-	}
+    }
 
-	protected abstract boolean isValidPage(Page page)
-		throws WikiTitleParsingException;
+    protected abstract boolean isValidPage(Page page)
+        throws WikiTitleParsingException;
 
-	@Override
-	public Progress[] getProgress()
-	{
-		return new Progress[] { new ProgressImpl(
-				Long.valueOf(currentArticleIndex).intValue(),
-				Long.valueOf(nrOfArticles).intValue(), Progress.ENTITIES) };
-	}
+    @Override
+    public Progress[] getProgress()
+    {
+        return new Progress[] { new ProgressImpl(
+                Long.valueOf(currentArticleIndex).intValue(),
+                Long.valueOf(nrOfArticles).intValue(), Progress.ENTITIES) };
+    }
 
-	protected String getDocumentText(Page page)
-	{
-		return page.getText();
-	}
+    protected String getDocumentText(Page page)
+    {
+        return page.getText();
+    }
 
-	protected abstract String getPlainDocumentText(Page page);
+    protected abstract String getPlainDocumentText(Page page);
 
-	private void addDocumentMetaData(JCas jcas, Page page)
-		throws WikiTitleParsingException
-	{
-	    String language = WikiUtils.jwplLanguage2dkproLanguage(dbconfig.getLanguage());
-		DocumentMetaData metaData = DocumentMetaData.create(jcas);
-		metaData.setDocumentTitle(page.getTitle().getWikiStyleTitle());
-		metaData.setCollectionId(Integer.valueOf(page.getPageId()).toString());
-		metaData.setDocumentId(Integer.valueOf(page.getPageId()).toString());
-		metaData.setDocumentBaseUri("http://" + language + ".wikipedia.org");
-		metaData.setDocumentUri("http://" + language + ".wikipedia.org/w/index.php?title=" + page.getTitle().getWikiStyleTitle());
+    private void addDocumentMetaData(JCas jcas, Page page)
+        throws WikiTitleParsingException
+    {
+        String language = WikiUtils.jwplLanguage2dkproLanguage(dbconfig.getLanguage());
+        DocumentMetaData metaData = DocumentMetaData.create(jcas);
+        metaData.setDocumentTitle(page.getTitle().getWikiStyleTitle());
+        metaData.setCollectionId(Integer.valueOf(page.getPageId()).toString());
+        metaData.setDocumentId(Integer.valueOf(page.getPageId()).toString());
+        metaData.setDocumentBaseUri("http://" + language + ".wikipedia.org");
+        metaData.setDocumentUri("http://" + language + ".wikipedia.org/w/index.php?title=" + page.getTitle().getWikiStyleTitle());
         metaData.setLanguage(language);
-	}
+    }
 
-	/**
-	 * Loads a text file line-by-line into a Set of Strings.
-	 *
-	 * @param fileName
-	 *            path to the file
-	 * @return a Set containing the individual lines of the text file
-	 * @throws IOException
-	 *             if any error occurs while reading the file
-	 */
-	private Set<String> loadFile(String fileName)
-		throws IOException
-	{
-		Set<String> container = new HashSet<String>();
+    /**
+     * Loads a text file line-by-line into a Set of Strings.
+     *
+     * @param fileName
+     *            path to the file
+     * @return a Set containing the individual lines of the text file
+     * @throws IOException
+     *             if any error occurs while reading the file
+     */
+    private Set<String> loadFile(String fileName)
+        throws IOException
+    {
+        Set<String> container = new HashSet<String>();
 
-		FileInputStream fstream=null;
-		DataInputStream in=null;
-		BufferedReader br=null;
-		try{
-			fstream = new FileInputStream(fileName);
-			in = new DataInputStream(fstream);
-			br = new BufferedReader(new InputStreamReader(in));
+        FileInputStream fstream = null;
+        DataInputStream in = null;
+        BufferedReader br = null;
+        try {
+            fstream = new FileInputStream(fileName);
+            in = new DataInputStream(fstream);
+            br = new BufferedReader(new InputStreamReader(in));
 
-			String strLine;
-			while ((strLine = br.readLine()) != null) {
-				container.add(strLine);
-			}
-		}finally{
-			if(br!=null){
-				br.close();
-			}
-			if(in!=null){
-				in.close();
-			}
-			if(fstream!=null){
-				fstream.close();
-			}
-		}
+            String strLine;
+            while ((strLine = br.readLine()) != null) {
+                container.add(strLine);
+            }
+        }
+        finally {
+            if (br != null) {
+                br.close();
+            }
+            if (in != null) {
+                in.close();
+            }
+            if (fstream != null) {
+                fstream.close();
+            }
+        }
 
-		return container;
-	}
+        return container;
+    }
 
-	public Page getPage() {
-		return page;
-	}
+    public Page getPage() {
+        return page;
+    }
 
 
 }

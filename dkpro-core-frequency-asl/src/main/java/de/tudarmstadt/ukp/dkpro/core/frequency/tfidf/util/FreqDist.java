@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2013
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,16 +14,17 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 /**
  * An object that counts objects. Inspired by NLTKs FreqDist-class.
- * 
  * 
  * @param <T>
  *            The type of element which is counted.
@@ -31,7 +32,6 @@ import java.util.Map.Entry;
 public class FreqDist<T>
     implements Serializable
 {
-
     private static final long serialVersionUID = 9155968779719980277L;
 
     private Map<T, Integer> counts;
@@ -82,10 +82,12 @@ public class FreqDist<T>
      */
     public int getCount(T element)
     {
-        if (counts.containsKey(element))
+        if (counts.containsKey(element)) {
             return counts.get(element);
-        else
+        }
+        else {
             return 0;
+        }
     }
 
     /**

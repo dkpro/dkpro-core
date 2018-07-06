@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,11 +14,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.treetagger;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
 
@@ -34,23 +34,22 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
-public
-class SegmenterCompatibilityTest
+public class SegmenterCompatibilityTest
 {
-	@Before
-	public void initTrace()
-	{
-		// TreeTaggerWrapper.TRACE = true;
-	}
+    @Before
+    public void initTrace()
+    {
+        // TreeTaggerWrapper.TRACE = true;
+    }
 
-	@Test
-	public void segmenterCompatibilityTest() throws Exception {
-    	checkModelsAndBinary("en");
+    @Test
+    public void segmenterCompatibilityTest() throws Exception
+    {
+        checkModelsAndBinary("en");
 
-	    AnalysisEngineDescription desc = createEngineDescription(
+        AnalysisEngineDescription desc = createEngineDescription(
                 createEngineDescription(BreakIteratorSegmenter.class),
-                createEngineDescription(TreeTaggerPosTagger.class)
-        );
+                createEngineDescription(TreeTaggerPosTagger.class));
         AnalysisEngine engine = createEngine(desc);
 
         JCas aJCas = engine.newJCas();
@@ -58,23 +57,24 @@ class SegmenterCompatibilityTest
         aJCas.setDocumentText("Two cats sat on two mats.");
         engine.process(aJCas);
 
-        checkLemma(new String[] { "Two", "cat", "sit", "on", "two", "mat", "." },
+        checkLemma(new String[] { "two", "cat", "sit", "on", "two", "mat", "." },
                 select(aJCas, Lemma.class));
     }
 
-	private void checkLemma(String[] expected, Collection<Lemma> actual)
-	{
+    private void checkLemma(String[] expected, Collection<Lemma> actual)
+    {
         int i = 0;
         for (Lemma lemmaAnnotation : actual) {
-            assertEquals("In position "+i, expected[i], lemmaAnnotation.getValue());
+            assertEquals("In position " + i, expected[i], lemmaAnnotation.getValue());
             i++;
         }
-	}
+    }
 
     private void checkModelsAndBinary(String lang)
     {
-        Assume.assumeTrue(getClass().getResource(
-                "/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-" + lang + "-le.bin") != null);
+        Assume.assumeTrue(
+                getClass().getResource("/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-"
+                        + lang + "-le.bin") != null);
 
         Assume.assumeTrue(getClass().getResource(
                 "/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null);

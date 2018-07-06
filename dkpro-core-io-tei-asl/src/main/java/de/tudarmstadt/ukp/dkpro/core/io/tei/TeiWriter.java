@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2015
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.tei;
 
 import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.ATTR_FUNCTION;
@@ -34,6 +34,7 @@ import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_RS;
 import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_SUNIT;
 import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_WORD;
 import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TEI_NS;
+import static org.apache.commons.io.IOUtils.closeQuietly;
 
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -43,17 +44,18 @@ import java.util.Optional;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
-import javanet.staxutils.IndentingXMLEventWriter;
-
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Attribute;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
@@ -62,15 +64,21 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import javanet.staxutils.IndentingXMLEventWriter;
 
 /**
  * UIMA CAS consumer writing the CAS document text in TEI format.
  */
+@ResourceMetaData(name = "TEI XML Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@MimeTypeCapability({MimeTypes.APPLICATION_TEI_XML})
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
@@ -88,8 +96,9 @@ public class TeiWriter
      * Specify the suffix of output files. Default value <code>.xml</code>. If the suffix is not
      * needed, provide an empty string as value.
      */
-    public static final String PARAM_FILENAME_SUFFIX = "filenameSuffix";
-    @ConfigurationParameter(name = PARAM_FILENAME_SUFFIX, mandatory = true, defaultValue = ".xml")
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
+    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xml")
     private String filenameSuffix;
 
     /**
@@ -103,14 +112,16 @@ public class TeiWriter
      * Write constituent annotations to the CAS. Disabled by default because it requires type
      * priorities to be set up (Constituents must have a higher prio than Tokens).
      */
-    public static final String PARAM_WRITE_CONSTITUENT = ComponentParameters.PARAM_WRITE_CONSTITUENT;
+    public static final String PARAM_WRITE_CONSTITUENT = 
+            ComponentParameters.PARAM_WRITE_CONSTITUENT;
     @ConfigurationParameter(name = PARAM_WRITE_CONSTITUENT, mandatory = true, defaultValue = "false")
     private boolean writeConstituent;
 
     /**
      * Write named entity annotations to the CAS. Overlapping named entities are not supported.
      */
-    public static final String PARAM_WRITE_NAMED_ENTITY = ComponentParameters.PARAM_WRITE_NAMED_ENTITY;
+    public static final String PARAM_WRITE_NAMED_ENTITY = 
+            ComponentParameters.PARAM_WRITE_NAMED_ENTITY;
     @ConfigurationParameter(name = PARAM_WRITE_NAMED_ENTITY, mandatory = true, defaultValue = "true")
     private boolean writeNamedEntity;
 
@@ -129,11 +140,15 @@ public class TeiWriter
     {
         String text = aJCas.getDocumentText();
 
-        try (OutputStream docOS = getOutputStream(aJCas, filenameSuffix)) {
+        OutputStream docOS = null;
+        XMLEventWriter xmlEventWriter = null;
+        try {
+            docOS = getOutputStream(aJCas, filenameSuffix);
+            
             XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
             xmlOutputFactory.setProperty(XMLOutputFactory.IS_REPAIRING_NAMESPACES, true);
-
-            XMLEventWriter xmlEventWriter = xmlOutputFactory.createXMLEventWriter(docOS);
+            
+            xmlEventWriter = xmlOutputFactory.createXMLEventWriter(docOS, "UTF-8");
             if (indent) {
                 xmlEventWriter = new IndentingXMLEventWriter(xmlEventWriter);
             }
@@ -182,8 +197,9 @@ public class TeiWriter
                         xmlEventWriter.add(xmlef.createCharacters(text.substring(pos,
                                 nextAnnot.getBegin())));
                         // Next annotation
-                        xmlEventWriter.add(xmlef.createStartElement(new QName(TEI_NS, teiElement.get()),
-                                getAttributes(nextAnnot), null));
+                        xmlEventWriter
+                                .add(xmlef.createStartElement(new QName(TEI_NS, teiElement.get()),
+                                        getAttributes(nextAnnot), null));
 
                         stack.push(cur);
                         cur = nextAnnot;
@@ -199,7 +215,8 @@ public class TeiWriter
                 else {
                     // Text between current and next annotation
                     xmlEventWriter.add(xmlef.createCharacters(text.substring(pos, cur.getEnd())));
-                    xmlEventWriter.add(xmlef.createEndElement(new QName(TEI_NS, teiElement.get()), null));
+                    xmlEventWriter
+                            .add(xmlef.createEndElement(new QName(TEI_NS, teiElement.get()), null));
 
                     pos = cur.getEnd();
                     cur = stack.pop();
@@ -210,7 +227,8 @@ public class TeiWriter
             if (cur != null) {
                 xmlEventWriter.add(xmlef.createCharacters(text.substring(pos, cur.getEnd())));
                 pos = cur.getEnd();
-                xmlEventWriter.add(xmlef.createEndElement(new QName(TEI_NS, getTeiTag(cur).get()), null));
+                xmlEventWriter
+                        .add(xmlef.createEndElement(new QName(TEI_NS, getTeiTag(cur).get()), null));
 
                 while (!stack.isEmpty()) {
                     cur = stack.pop();
@@ -219,7 +237,8 @@ public class TeiWriter
                     }
                     xmlEventWriter.add(xmlef.createCharacters(text.substring(pos, cur.getEnd())));
                     pos = cur.getEnd();
-                    xmlEventWriter.add(xmlef.createEndElement(new QName(TEI_NS, getTeiTag(cur).get()), null));
+                    xmlEventWriter.add(
+                            xmlef.createEndElement(new QName(TEI_NS, getTeiTag(cur).get()), null));
                 }
             }
 
@@ -234,6 +253,18 @@ public class TeiWriter
         }
         catch (Exception e) {
             throw new AnalysisEngineProcessException(e);
+        }
+        finally {
+            if (xmlEventWriter != null) {
+                try {
+                    xmlEventWriter.close();
+                }
+                catch (XMLStreamException e) {
+                    getLogger().warn("Error closing the XML event writer", e);
+                }
+            }
+            
+            closeQuietly(docOS);
         }
     }
 

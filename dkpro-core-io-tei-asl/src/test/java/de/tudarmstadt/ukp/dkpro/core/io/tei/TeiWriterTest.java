@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2015
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.tei;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -43,13 +43,13 @@ public class TeiWriterTest
     public void test()
         throws Exception
     {
-	    File targetFolder = testContext.getTestOutputFolder();
-	    
-		CollectionReaderDescription textReader = createReaderDescription(
-				TextReader.class,
-				TextReader.PARAM_LANGUAGE, "en",
-				TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/texts",
-				TextReader.PARAM_PATTERNS, "*.txt");
+        File targetFolder = testContext.getTestOutputFolder();
+        
+        CollectionReaderDescription textReader = createReaderDescription(
+                TextReader.class,
+                TextReader.PARAM_LANGUAGE, "en",
+                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/texts",
+                TextReader.PARAM_PATTERNS, "*.txt");
 
         AnalysisEngineDescription segmenter = createEngineDescription(OpenNlpSegmenter.class);
 
@@ -61,23 +61,23 @@ public class TeiWriterTest
 
         AnalysisEngineDescription dump = createEngineDescription(CasDumpWriter.class);
 
-		AnalysisEngineDescription teiWriter = createEngineDescription(
-		        TeiWriter.class,
-		        TeiWriter.PARAM_TARGET_LOCATION, targetFolder,
-		        TeiWriter.PARAM_WRITE_CONSTITUENT, true);
+        AnalysisEngineDescription teiWriter = createEngineDescription(
+                TeiWriter.class,
+                TeiWriter.PARAM_TARGET_LOCATION, targetFolder,
+                TeiWriter.PARAM_WRITE_CONSTITUENT, true);
 
-		runPipeline(textReader, segmenter, posTagger, parser, ner, dump, teiWriter);
+        runPipeline(textReader, segmenter, posTagger, parser, ner, dump, teiWriter);
 
-		File output = new File(targetFolder, "example1.txt.xml");
-		assertTrue(output.exists());
+        File output = new File(targetFolder, "example1.txt.xml");
+        assertTrue(output.exists());
 
 //        Diff myDiff = new Diff(
 //                new InputSource("src/test/resources/reference/example1.txt.xml"),
 //                new InputSource(output.getPath()));
 //        myDiff.overrideElementQualifier(new ElementNameAndAttributeQualifier());
 //        XMLAssert.assertXMLEqual(myDiff, true);     
-	}
-	
+    }
+    
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
 }

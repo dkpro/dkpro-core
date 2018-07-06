@@ -25,7 +25,11 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.ParseException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -53,9 +57,13 @@ public class ExtractReuters
     /**
      * Read all the SGML file in the given directory.
      *
-     * @param reutersDir the directory that contains the Reuters SGML files.
+     * @param reutersDir
+     *            the directory that contains the Reuters SGML files.
      * @return a list of {@link ReutersDocument}s
-     * @throws IOException if any of the files cannot be read.
+     * @throws IOException
+     *             if any of the files cannot be read.
+     * @throws ParseException
+     *             if there was a problem parsing a date
      */
     public static List<ReutersDocument> extract(Path reutersDir)
             throws IOException, ParseException
@@ -72,9 +80,15 @@ public class ExtractReuters
     /**
      * Read the documents out of a single file. Each file contains approximately 1000 documents.
      *
-     * @param sgmFile an {@link InputStream} of a Reuters SGML file.
-     * @param uri     an {@link URI} pointing to the original SGML file location
+     * @param sgmFile
+     *            an {@link InputStream} of a Reuters SGML file.
+     * @param uri
+     *            an {@link URI} pointing to the original SGML file location
      * @return a list of {@link ReutersDocument}s extracted from the input stream
+     * @throws IOException
+     *             if any of the files cannot be read.
+     * @throws ParseException
+     *             if there was a problem parsing a date
      */
     public static List<ReutersDocument> extractFile(InputStream sgmFile, URI uri)
             throws IOException, ParseException
@@ -136,11 +150,15 @@ public class ExtractReuters
     }
 
     /**
-     * Find the {@code <D>} tags that are nested within another tag and add them to the given {@link ReutersDocument}.
+     * Find the {@code <D>} tags that are nested within another tag and add them to the given
+     * {@link ReutersDocument}.
      *
-     * @param doc  the current document represented as a {@link ReutersDocument}.
-     * @param tag  the outer tag, e.g. {@code <TOPICS>}
-     * @param text the value of the outer tag from which nested tags are extracted
+     * @param doc
+     *            the current document represented as a {@link ReutersDocument}.
+     * @param tag
+     *            the outer tag, e.g. {@code <TOPICS>}
+     * @param text
+     *            the value of the outer tag from which nested tags are extracted
      */
     private static void extractNested(ReutersDocument doc, String tag, String text)
             throws ParseException

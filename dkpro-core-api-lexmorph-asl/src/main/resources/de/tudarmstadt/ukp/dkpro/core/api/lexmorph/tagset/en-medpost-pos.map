@@ -1,126 +1,127 @@
 # MedPost
 
 __META_SOURCE_URL__=http://www.ncbi.nlm.nih.gov/staff/lsmith/papers/smith04a.pdf
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # CC coordinating conjunction 
-CC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+CC=POS_CONJ
 # CS subordinating conjunction 
-CS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+CS=POS_SCONJ
 # CSN comparative conjunction (than) 
-CSN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+CSN=POS_CONJ
 # CST complementizer (that) 
-CST=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+CST=POS_CONJ
 # DB predeterminer 
-DB=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+DB=POS_DET
 # DD determiner 
-DD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+DD=POS_DET
 # EX existential there 
-EX=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+EX=POS_DET
 # GE genitive marker ’s 
-GE=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+GE=POS_X
 # II preposition 
-II=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+II=POS_ADP
 # JJ adjective 
-JJ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+JJ=POS_ADJ
 # JJR comparative adjective 
-JJR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+JJR=POS_ADJ
 # JJT superlative adjective 
-JJT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+JJT=POS_ADJ
 # MC number or numeric 
-MC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
+MC=POS_NUM
 # NN noun 
-NN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+NN=POS_NOUN
 # NNP proper noun 
-NNP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
+NNP=POS_PROPN
 # NNS plural noun 
-NNS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+NNS=POS_NOUN
 # PN pronoun 
-PN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PN=POS_PRON
 # PND determiner as pronoun 
-PND=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PND=POS_PRON
 # PNG genitive pronoun 
-PNG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PNG=POS_PRON
 # PNR relative pronoun 
-PNR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PNR=POS_PRON
 # RR adverb 
-RR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+RR=POS_ADV
 # RRR comparative adverb 
-RRR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+RRR=POS_ADV
 # RRT superlative adverb 
-RRT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+RRT=POS_ADV
 # SYM symbol 
-SYM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+SYM=POS_SYM
 # TO infinitive marker to 
-TO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+TO=POS_ADP
 # VM modal 
-VM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VM=POS_VERB
 # VBB base be, am, are 
-VBB=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VBB=POS_VERB
 # VBD past was, were 
-VBD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VBD=POS_VERB
 # VBG participle being 
-VBG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VBG=POS_VERB
 # VBI infinitive be 
-VBI=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VBI=POS_VERB
 # VBN participle been 
-VBN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VBN=POS_VERB
 # VBZ 3rd pers. sing. is 
-VBZ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VBZ=POS_VERB
 # VDB base do 
-VDB=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VDB=POS_VERB
 # VDD past did 
-VDD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VDD=POS_VERB
 # VDG participle doing 
-VDG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VDG=POS_VERB
 # VDI infinite do 
-VDI=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VDI=POS_VERB
 # VDN participle done 
-VDN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VDN=POS_VERB
 # VDZ participle done 
-VDZ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VDZ=POS_VERB
 # VHB participle done 
-VHB=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VHB=POS_VERB
 # VHD past had 
-VHD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VHD=POS_VERB
 # VHG participle having 
-VHG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VHG=POS_VERB
 # VHI infinitive have 
-VHI=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VHI=POS_VERB
 # VHN participle had 
-VHN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VHN=POS_VERB
 # VHZ 3rd pers. sing. has 
-VHZ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VHZ=POS_VERB
 # VVB base form lexical verb  
-VVB=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VVB=POS_VERB
 # VVD past tense 
-VVD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VVD=POS_VERB
 # VVG present part. 
-VVG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VVG=POS_VERB
 # VVI infinitive lexical verb  
-VVI=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VVI=POS_VERB
 # VVN past part. 
-VVN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VVN=POS_VERB
 # VVZ 3rd pers. sing. 
-VVZ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VVZ=POS_VERB
 # VVNJ prenominal past part.  
-VVNJ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VVNJ=POS_VERB
 # VVGJ prenominal present part.  
-VVGJ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VVGJ=POS_VERB
 # VVGN nominal gerund 
-VVGN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VVGN=POS_VERB
 # ( left parenthesis 
-(=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+(=POS_X
 # ) right parenthesis 
-)=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+)=POS_X
 # , comma 
-,=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+,=POS_PUNCT
 # . end-of-sentence period 
-.=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+.=POS_PUNCT
 # : dashes, colons 
-\:=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+\:=POS_PUNCT
 # “ left quote 
-``=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+``=POS_PUNCT
 # ” right quote 
-''=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+''=POS_PUNCT
 
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+*=POS_X

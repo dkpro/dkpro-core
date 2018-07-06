@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2014
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 
 package de.tudarmstadt.ukp.dkpro.core.textnormalizer.annotations;
 
@@ -30,19 +30,24 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Reads a list of words from a text file (one token per line) and retains only tokens or other
  * annotations that match any of these words.
- *
- *
  */
+@Component(OperationType.NORMALIZER)
+@ResourceMetaData(name = "Annotation-By-Text Filter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class AnnotationByTextFilter
     extends JCasAnnotator_ImplBase
 {
@@ -59,8 +64,9 @@ public class AnnotationByTextFilter
     @ConfigurationParameter(name = PARAM_IGNORE_CASE, mandatory = true, defaultValue = "true")
     private boolean ignoreCase;
 
-    public static final String PARAM_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
-    @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
+    public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
+    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String modelEncoding;
 
     /**

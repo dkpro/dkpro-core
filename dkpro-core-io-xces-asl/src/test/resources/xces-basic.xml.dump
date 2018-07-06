@@ -1,0 +1,39 @@
+======== CAS 0 begin ==================================
+
+-------- View _InitialView begin ----------------------------------
+
+DocumentMetaData
+   sofa: _InitialView
+   begin: 0
+   end: 130
+   language: "el"
+   documentTitle: "xces-basic.xml"
+   documentId: "xces-basic.xml"
+   isLastSegment: false
+
+CAS-Text:
+Αυτή είναι η πρώτη γραμμή.
+
+Αυτή είναι η πρώτη γραμμή. Αυτό είναι μια άλλη γραμμή.
+
+Γίνε η αλλαγή που θέλεις να δεις στον κόσμο.
+
+
+[Αυτή είναι η πρώτη γραμμή.]
+Paragraph
+   sofa: _InitialView
+   begin: 0
+   end: 26
+[Αυτή είναι η πρώτη γραμμή. Αυτό είναι μια άλλη γραμμή.]
+Paragraph
+   sofa: _InitialView
+   begin: 28
+   end: 82
+[Γίνε η αλλαγή που θέλεις να δεις στον κόσμο.]
+Paragraph
+   sofa: _InitialView
+   begin: 84
+   end: 128
+-------- View _InitialView end ----------------------------------
+
+======== CAS 0 end ==================================

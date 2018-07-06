@@ -7,13 +7,17 @@
   <types>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity</name>
-      <description>Named entities refer e.g. to persons, locations, organizations and so on. They often consist of multiple tokens. 
-</description>
+      <description>Named entities refer e.g. to persons, locations, organizations and so on. They often consist of multiple tokens.</description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
           <name>value</name>
-          <description/>
+          <description>The class/category of the named entity, e.g. person, location, etc.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      <featureDescription>
+          <name>identifier</name>
+          <description>Identifier of the named entity, e.g. a reference into a person database.</description>
           <rangeTypeName>uima.cas.String</rangeTypeName>
         </featureDescription>
       </features>

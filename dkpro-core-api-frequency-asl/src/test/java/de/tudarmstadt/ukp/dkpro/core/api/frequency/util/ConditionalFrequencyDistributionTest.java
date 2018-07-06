@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2011
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.api.frequency.util;
 
 import static org.junit.Assert.assertEquals;
@@ -34,10 +34,13 @@ public class ConditionalFrequencyDistributionTest
         String condition1 = "text1";
         String condition2 = "text2";
         
-        List<String> tokens1 = Arrays.asList("This is a first test that contains a first test example".split(" "));
-        List<String> tokens2 = Arrays.asList("This second example contains other example tokens".split(" "));
+        List<String> tokens1 = Arrays.asList(
+                "This is a first test that contains a first test example".split(" "));
+        List<String> tokens2 = Arrays.asList(
+                "This second example contains other example tokens".split(" "));
         
-        ConditionalFrequencyDistribution<String, String> cfd = new ConditionalFrequencyDistribution<String, String>();
+        ConditionalFrequencyDistribution<String, String> cfd = 
+                new ConditionalFrequencyDistribution<String, String>();
         cfd.incAll(condition1, tokens1);
         cfd.incAll(condition2, tokens2);
         
@@ -60,7 +63,8 @@ public class ConditionalFrequencyDistributionTest
     @Test
     public void addSampleTest() {
                 
-        ConditionalFrequencyDistribution<String, String> cfd = new ConditionalFrequencyDistribution<String, String>();
+        ConditionalFrequencyDistribution<String, String> cfd = 
+                new ConditionalFrequencyDistribution<String, String>();
         cfd.addSample("condition", "key", 10);
                 
         assertEquals(1, cfd.getConditions().size());

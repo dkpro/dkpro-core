@@ -1,11 +1,11 @@
 <% 
-import Util;
+import de.tudarmstadt.ukp.dkpro.core.doc.Util;
 import static groovy.json.StringEscapeUtils.escapeJava;
 
 engines
-    .sort { it.key }
+    .sort { it.value.spec?.metaData?.name ?: it.key }
     .groupBy {it.value.role }
-    .sort { it.key != 'Other' ? it.key : 'Z' }
+    .sort { it.key != 'Other' ? (it.value.spec?.metaData?.name ?: it.key) : 'Z' }
     .each { group -> 
 %>
 === ${group.key}
@@ -17,8 +17,8 @@ if (new File(project.basedir,
 include::{include-dir}sectionIntro${fileSuffix}.adoc[]
 <% } %>
 
-.Analysis Components in group ${group.key} (${group.value.size()})
-[options="header"]
+.Analysis Components in category ${group.key} (${group.value.size()})
+[options="header", cols="1,2"]
 |====
 |Component|Description
 
@@ -33,15 +33,47 @@ include::{include-dir}sectionIntro${fileSuffix}.adoc[]
 <% group.value.each { 
 def engine = it.value; %>
 [[engine-${ it.key }]]
-==== ${it.key}
+==== ${it.value.spec?.metaData?.name ?: it.key}
 
-[small]#*_Role_:* __${engine.role}__# +
-[small]#*_Artifact ID:_* __${engine.artifactId}__# +
-[small]#*_Class:_* __${engine.spec.annotatorImplementationName}__#
+****
+[horizontal, role="small"]
+Short name::       ${engine.name}
+Category::         ${engine.role}
+Group{nbsp}ID::    ${engine.groupId}
+Artifact{nbsp}ID:: ${engine.artifactId}
+Implementation::   ${engine.spec.annotatorImplementationName}
+****
 
+.Description
+--
 ++++
 ${Util.preparePassthrough(engine.spec.metaData.description)}
 ++++
+--
+
+<%
+def testClassPath = "${it.value.module}/src/test/java/${it.value.implName.replaceAll('\\.', '/')}Test.java";
+def testClass = new File(project.basedir, "../${testClassPath}");
+def testClassCode = testClass.exists() ? testClass.text : null;
+if (testClass.exists() && testClassCode.contains('tag::example[]')) {
+    def lines = testClassCode.readLines();
+    def exampleLine = lines.find { it =~ /tag::example\[\]/ };
+    def linenumber = lines.indexOf(exampleLine) + 2;
+%>
+++++
+<div style="float:right">
+<a href="https://github.com/dkpro/dkpro-core/blob/master/${testClassPath}#L${linenumber}">View on GitHub</a><br/>
+</div>
+++++
+
+.Example using ${it.key}
+[source,java,indent=0]
+----
+include::${testClass}[tags=example]
+----
+<%
+}
+%>
 
 <%
 def paramDecls = engine.spec.metaData.configurationParameterDeclarations
@@ -51,41 +83,37 @@ def paramValues = engine.spec.metaData.configurationParameterSettings
     
 if (paramDecls) { 
 %>
-[discrete]
-===== Parameters
+.Parameters
+[horizontal, role="small"]
 <% paramDecls.each { %>
-`${it.key}` (__${it.value[0].type}<% 
-if (it.value[0].multiValued) { %>[]<% } 
-%>__)<%
-if (paramValues[it.key]) { %> = `<%
-out.print escapeJava((paramValues[it.key][0].value != null ? 
-    paramValues[it.key][0].value : 'null') as String).replaceAll('`','{backtick}')   
-%>` <% } 
-if (!it.value[0].mandatory) { %> [optional]<% } 
-%>::
+${it.key}::
 +
 ++++
 ${Util.preparePassthrough(it.value[0].description)}
 ++++
+<% if (!it.value[0].mandatory) { %>Optional -- <% }
+%>Type: __${it.value[0].type}<% 
+if (it.value[0].multiValued) { %>[]<% } 
+%>__ <%
+if (paramValues[it.key]) { %> -- 
+Default value: `<%
+out.print escapeJava((paramValues[it.key][0].value != null ? 
+    paramValues[it.key][0].value : 'null') as String).replaceAll('`','{backtick}')   
+%>` <% } %>
 <% } // paramDecls.each %>
 <% } // if (paramDecls) %>
 
 <%
-def inputs = engine.spec.analysisEngineMetaData?.capabilities?.collect { 
-        it.inputs?.collect { it.name  } }.flatten().sort().unique();
-def outputs = engine.spec.analysisEngineMetaData?.capabilities?.collect { 
-        it.outputs?.collect { it.name  } }.flatten().sort().unique();
-
-if (inputs || outputs) {
+if (engine.inputs || engine.outputs || engine.languages) {
 %>
-[discrete]
-===== Inputs and outputs
-[cols="h,v"]
+
+.Capabilities
+[cols="1h,2v", role="small"]
 |====
 | Inputs 
 | <% 
-if (inputs) { 
-  inputs.each { out.println Util.typeLink(it) };
+if (engine.inputs) { 
+  engine.inputs.each { out.println Util.typeLink(it) };
 } else { 
   out.println '__none specified__';
 }
@@ -93,25 +121,33 @@ if (inputs) {
 
 | Outputs
 | <% 
-if (outputs) { 
-  outputs.each { out.println Util.typeLink(it) };
+if (engine.outputs) { 
+  engine.outputs.each { out.println Util.typeLink(it) };
+} else { 
+  out.println '__none specified__';
+}
+%>
+
+| Languages
+d| <% 
+if (engine.languages) { 
+  out.println engine.languages.join(', ');
+} else if (engine.models) { 
+  out.println '__see available models__';
 } else { 
   out.println '__none specified__';
 }
 %>
 |====
-<% } // inputs/outputs %>
+<% } // capabilities %>
 
 <%
-def mods = models.findAll { it.@engine == engine.name };
-
-if (mods) { %>
-[discrete]
-===== Models
-[options="header"]
+if (engine.models) { %>
+.Models
+[options="header", role="small"]
 |====
 |Language|Variant|Version
-<% mods.each { model -> %>
+<% engine.models.each { model -> %>
 |${model.@language}
 |${Util.modelLink(model,model.@variant)}
 |${model.@version}

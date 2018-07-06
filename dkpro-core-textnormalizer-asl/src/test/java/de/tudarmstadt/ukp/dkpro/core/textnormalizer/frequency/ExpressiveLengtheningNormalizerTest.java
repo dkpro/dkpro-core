@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.textnormalizer.frequency;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTransformedText;
@@ -44,12 +44,13 @@ public class ExpressiveLengtheningNormalizerTest
 
         AnalysisEngineDescription normalizer = createEngineDescription(
                 ExpressiveLengtheningNormalizer.class,
-                ExpressiveLengtheningNormalizer.FREQUENCY_PROVIDER, createExternalResourceDescription(
-                        Web1TFrequencyCountResource.class,
-                        Web1TFrequencyCountResource.PARAM_LANGUAGE, "de",
-                        Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
-                        Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "1",
-                        Web1TFrequencyCountResource.PARAM_INDEX_PATH, "src/test/resources/jweb1t"));
+                ExpressiveLengtheningNormalizer.FREQUENCY_PROVIDER, 
+                        createExternalResourceDescription(
+                                Web1TFrequencyCountResource.class,
+                                Web1TFrequencyCountResource.PARAM_LANGUAGE, "de",
+                                Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
+                                Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "1",
+                                Web1TFrequencyCountResource.PARAM_INDEX_PATH, "src/test/resources/jweb1t"));
 
         assertTransformedText(normalizedText, inputText, "de", segmenter, normalizer);
     }

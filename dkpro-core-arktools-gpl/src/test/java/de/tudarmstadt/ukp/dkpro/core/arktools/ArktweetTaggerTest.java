@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2014
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,59 +14,107 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.arktools;
 
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertPOS;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertToken;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.junit.Assert.assertEquals;
-
-import java.util.Collection;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class ArktweetTaggerTest
 {
-
     @Test
     public void arktweetTaggerTest()
         throws Exception
     {
-        runTest("en",
+        runTest("en", "default",
                 "@Gunservatively obozo will go nuts when PA elects a Republican Governor next Tue. Can you say redistricting?",
-                new String[] { "@Gunservatively", "obozo", "will", "go", "nuts", "when", "PA", "elects", "a", "Republican", "Governor", "next", "Tue", ".", "Can", "you", "say", "redistricting", "?" },
-                new String[] { "@", "^", "V", "V", "A", "R", "^", "V", "D", "A", "N", "P", "^", ",", "V", "O", "V", "V", "," },
-                new String[] { "AT", "NP", "V", "V", "ADJ", "ADV", "NP", "V", "ART", "ADJ", "NN", "PP", "NP", "PUNC", "V", "PR", "V", "V", "PUNC" }
+                new String[] { "@Gunservatively", "obozo", "will", "go", "nuts", "when", "PA",
+                        "elects", "a", "Republican", "Governor", "next", "Tue", ".", "Can", "you",
+                        "say", "redistricting", "?" },
+                new String[] { "@", "^", "V", "V", "A", "R", "^", "V", "D", "A", "N", "P", "^", ",",
+                        "V", "O", "V", "V", "," },
+                new String[] { "POS_AT", "POS_PROPN", "POS_VERB", "POS_VERB", "POS_ADJ", "POS_ADV", "POS_PROPN", "POS_VERB", "POS_DET",
+                        "POS_ADJ", "POS_NOUN", "POS_ADP", "POS_PROPN", "POS_PUNCT", "POS_VERB", "POS_PRON", "POS_VERB", "POS_VERB",
+                        "POS_PUNCT" }
         );
 
-        runTest("en",
+        runTest("en", "default",
                 "Spending the day withhh mommma !",
-                new String[] { "Spending", "the", "day", "withhh", "mommma", "!"    },
-                new String[] { "V",        "D",   "N",   "P",      "N",      ","    },
-                new String[] { "V",        "ART", "NN",  "PP",     "NN",     "PUNC" }
-        );
+                new String[] { "Spending", "the", "day", "withhh", "mommma", "!" },
+                new String[] { "V", "D", "N", "P", "N", "," },
+                new String[] { "POS_VERB", "POS_DET", "POS_NOUN", "POS_ADP", "POS_NOUN",
+                        "POS_PUNCT" });
 
-        runTest("en",
+        runTest("en", "default",
                 "lmao ... s/o to the cool ass asian officer 4 #1 not runnin my license and #2 not takin dru boo to jail . Thank u God . #amen",
-                new String[] { "lmao", "...",  "s/o", "to", "the", "cool", "ass", "asian", "officer", "4",  "#1",   "not", "runnin", "my",  "license", "and",  "#2",   "not", "takin", "dru", "boo", "to", "jail", ".",    "Thank", "u",  "God", ".",    "#amen" },
-                new String[] { "!",    ",",    "V",   "P",  "D",   "A",    "N",   "A",     "N",       "P",  "$",    "R",   "V",      "D",   "N",       "&",    "$",    "R",   "V",     "N",   "N",   "P",  "N",    ",",    "V",     "O",  "^",   ",",    "#"     },
-                new String[] { "INT",  "PUNC", "V",   "PP", "ART", "ADJ",  "NN",  "ADJ",   "NN",      "PP", "CARD", "ADV", "V",      "ART", "NN",      "CONJ", "CARD", "ADV", "V",     "NN",  "NN",  "PP", "NN",   "PUNC", "V",     "PR", "NP",  "PUNC", "HASH"  }
-        );
+                new String[] { "lmao", "...", "s/o", "to", "the", "cool", "ass", "asian", "officer",
+                        "4", "#1", "not", "runnin", "my", "license", "and", "#2", "not", "takin",
+                        "dru", "boo", "to", "jail", ".", "Thank", "u", "God", ".", "#amen" },
+                new String[] { "!", ",", "V", "P", "D", "A", "N", "A", "N", "P", "$", "R", "V", "D",
+                        "N", "&", "$", "R", "V", "N", "N", "P", "N", ",", "V", "O", "^", ",", "#" },
+                new String[] { "POS_INT", "POS_PUNCT", "POS_VERB", "POS_ADP", "POS_DET", "POS_ADJ", "POS_NOUN", "POS_ADJ", "POS_NOUN",
+                        "POS_ADP", "POS_NUM", "POS_ADV", "POS_VERB", "POS_DET", "POS_NOUN", "POS_CONJ", "POS_NUM", "POS_ADV", "POS_VERB",
+                        "POS_NOUN", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_PUNCT", "POS_VERB", "POS_PRON", "POS_PROPN", "POS_PUNCT",
+                        "POS_HASH" });
 
-        runTest("en",
+        runTest("en", "default",
                 "Different smiley styles :) :-) (^_^) ^o #smiley",
-                new String[] { "Different", "smiley",  "styles", ":)", ":-)", "(^_^)", "^o", "#smiley"},
-                new String[] { "A",         "A",       "N",      "E",  "E",   "E",     "E",   "#"},
-                new String[] { "ADJ",       "ADJ",     "NN",     "EMO","EMO", "EMO",   "EMO", "HASH"}
+                new String[] { "Different", "smiley", "styles", ":)", ":-)", "(^_^)", "^o",
+                        "#smiley" },
+                new String[] { "A", "A", "N", "E", "E", "E", "E", "#" },
+                new String[] { "POS_ADJ", "POS_ADJ", "POS_NOUN", "POS_EMO", "POS_EMO", "POS_EMO",
+                        "POS_EMO", "POS_HASH" });
+        
+        runTest("en", "irc",
+                "Different smiley styles :) :-) (^_^) ^o #smiley",
+                new String[] { "Different", "smiley", "styles", ":)", ":-)", "(^_^)", "^o",
+                        "#smiley" },
+                new String[] { "JJ", "JJ", "NNS", "UH", "UH", "UH", "UH", "UH" },
+                new String[] { "POS_ADJ", "POS_ADJ", "POS_NOUN", "POS_INTJ", "POS_INTJ", "POS_INTJ",
+                        "POS_INTJ", "POS_INTJ" });  
+        
+        runTest("en", "irc",
+                "@Gunservatively obozo will go nuts when PA elects a Republican Governor next Tue. Can you say redistricting?",
+                new String[] { "@Gunservatively", "obozo", "will", "go", "nuts", "when", "PA",
+                        "elects", "a", "Republican", "Governor", "next", "Tue", ".", "Can", "you",
+                        "say", "redistricting", "?" },
+                new String[] { "UH", "UH", "MD", "VB", "NNS", "WRB", "NNP", "CC", "DT", "NNP", "NNP", "JJ", "NNP", ".",
+                        "MD", "PRP", "VBP", "VBG", "." },
+                new String[] { "POS_INTJ", "POS_INTJ", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_ADV", "POS_PROPN", "POS_CONJ", "POS_DET",
+                        "POS_PROPN", "POS_PROPN", "POS_ADJ", "POS_PROPN", "POS_PUNCT", "POS_VERB", "POS_PRON", "POS_VERB", "POS_VERB",
+                        "POS_PUNCT" }
+        );        
+        
+        runTest("en", "ritter",
+                "Different smiley styles :) :-) (^_^) ^o #smiley",
+                new String[] { "Different", "smiley", "styles", ":)", ":-)", "(^_^)", "^o",
+                        "#smiley" },
+                new String[] { "JJ", "JJ", "NNS", "UH", "UH", "UH", "UH", "HT" },
+                new String[] { "POS_ADJ", "POS_ADJ", "POS_NOUN", "POS_INTJ", "POS_INTJ", "POS_INTJ",
+                        "POS_INTJ", "POS" });
+
+        runTest("en", "ritter",
+                "@Gunservatively obozo will go nuts when PA elects a Republican Governor next Tue. Can you say redistricting?",
+                new String[] { "@Gunservatively", "obozo", "will", "go", "nuts", "when", "PA",
+                        "elects", "a", "Republican", "Governor", "next", "Tue", ".", "Can", "you",
+                        "say", "redistricting", "?" },
+                new String[] { "USR", "NNP", "MD", "VB", "NNS", "WRB", "NNP", "VBZ", "DT", "NNP", "NNP", "JJ", "NNP", ".",
+                        "MD", "PRP", "VBP", "NN", "." },
+                new String[] { "POS", "POS_PROPN", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_ADV", "POS_PROPN", "POS_VERB", "POS_DET",
+                        "POS_PROPN", "POS_PROPN", "POS_ADJ", "POS_PROPN", "POS_PUNCT", "POS_VERB", "POS_PRON", "POS_VERB", "POS_NOUN",
+                        "POS_PUNCT" }
         );
     }
 
@@ -80,13 +128,9 @@ public class ArktweetTaggerTest
 //                new String[] { "NN",             "NN" }
 //        );
 //    }
-    
-    private JCas runTest(
-            String language,
-            String testDocument,
-            String[] tokens,
-            String[] tags,
-            String[] tagClasses)
+
+    private JCas runTest(String language, String variant, String testDocument, String[] tokens,
+            String[] tags, String[] tagClasses)
         throws Exception
     {
         AnalysisEngine tokenizer = createEngine(
@@ -95,7 +139,7 @@ public class ArktweetTaggerTest
         
         AnalysisEngine tagger = createEngine(
                 ArktweetPosTagger.class,
-                ArktweetPosTagger.PARAM_VARIANT, "default"
+                ArktweetPosTagger.PARAM_VARIANT, variant
         );
 
         JCas aJCas = tagger.newJCas();
@@ -105,43 +149,12 @@ public class ArktweetTaggerTest
         tokenizer.process(aJCas);
         tagger.process(aJCas);
 
-        // test tokens
-        checkTokens(tokens, select(aJCas, Token.class));
-
-        // test POS annotations
-        if (tagClasses != null && tags != null) {
-            checkTags(tagClasses, tags, select(aJCas, POS.class));
-        }
-
+        assertToken(tokens, select(aJCas, Token.class));
+        assertPOS(tagClasses, tags, select(aJCas, POS.class));
+        
         return aJCas;
     }
 
-    private void checkTokens(String[] expected, Collection<Token> actual)
-    {
-        int i = 0;
-        for (Token tokenAnnotation : actual) {
-            assertEquals("In position "+i, expected[i], tokenAnnotation.getCoveredText());
-            i++;
-        }
-    }
-
-    private void checkTags(String[] tagClasses, String[] tags, Collection<POS> actual)
-    {
-        int i = 0;
-        for (POS posAnnotation : actual) {
-            assertEquals("In position "+i, tagClasses[i], posAnnotation.getType().getShortName());
-            assertEquals("In position "+i, tags[i],       posAnnotation.getPosValue());
-            i++;
-        }
-    }
-
     @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
-    }
-
+    public DkproTestContext testContext = new DkproTestContext();
 }

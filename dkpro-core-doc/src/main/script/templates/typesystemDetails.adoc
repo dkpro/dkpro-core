@@ -1,5 +1,7 @@
 <%
-import Util;
+import de.tudarmstadt.ukp.dkpro.core.doc.Util;
+import org.dkpro.meta.core.model.EngineModel;
+import org.dkpro.meta.core.model.FormatModel;
 
 def isElevatedType(type) {
     // Not a top-level type
@@ -18,26 +20,31 @@ def renderType(type) {
 [[type-${ type.name }]]
 ==== ${shortTypeName}
 
-[small]#*_URI:_* __http://dkpro.github.io/dkpro-core/releases/${project.version}/docs/typesystem-reference.html#${type.name}__# +
-[small]#*_Name:_* __${type.name}__# +
-[small]#*_Supertype:_* __${Util.typeLink(type.supertypeName)}__# +
+****
+[horizontal, role="small"]
+URI::       http://dkpro.github.io/dkpro-core/releases/${project.version}/docs/typesystem-reference.html#${type.name}
+Name::      ${type.name}
+Supertype:: ${Util.typeLink(type.supertypeName)}
 <%
 if (typesystemMappings[type.name]) {
     typesystemMappings[type.name].externalReferences.each { ref ->
-        out.println("[small]#*_${ref.rel}:_* __${ref.id}__ (${ref.source})# +");
+        out.println("${ref.rel}:: ${ref.id} (${ref.source})");
     }
 }
 %>
+****
 
+.Description
+--
 ++++
 ${Util.preparePassthrough(type.description)}
 ++++
+--
 
 <%
     if (type.features) { 
 %>
-[discrete]
-===== Features of ${shortTypeName} (${type.features.size()})
+.Features of ${shortTypeName} (${type.features.size()})
 <%                  
         type.features.sort { type.name }.each { 
 %>
@@ -51,9 +58,8 @@ ${Util.preparePassthrough(type.description)}
     } // if (type.features) 
 %>
 
-[discrete]
-===== Producers and consumers of ${shortTypeName} 
-[cols="1h,2v"]
+.Producers and consumers of ${shortTypeName} 
+[cols="1h,2v", role="small"]
 |====
 |Producers
 | <%
@@ -69,7 +75,7 @@ ${Util.preparePassthrough(type.description)}
                 it.outputs?.any { it.name == type.name } } };
     if (producers) {            
         producers.each { id, producer -> 
-            if (producer.spec) {
+            if (producer instanceof EngineModel) {
                 out.println Util.engineLink(id);
             }
             else {
@@ -94,7 +100,7 @@ ${Util.preparePassthrough(type.description)}
                 it.inputs?.any { it.name == type.name } } };
     if (consumers) {            
         consumers.each { id, consumer -> 
-            if (consumer.spec) {
+            if (consumer instanceof EngineModel) {
                 out.println Util.engineLink(id);
             }
             else {
@@ -118,9 +124,8 @@ ${Util.preparePassthrough(type.description)}
     
     if (subtypes) {
 %>
-[discrete]
-===== Sub-types of ${shortTypeName} (${subtypes.size()})
-[options="header",cols="1,3"]
+.Sub-types of ${shortTypeName} (${subtypes.size()})
+[options="header",cols="1,3", role="small"]
 |====
 |Type|Description
 <%  

@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.clearnlp;
 
 import java.io.BufferedReader;
@@ -25,6 +25,8 @@ import java.util.List;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.LanguageCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -37,25 +39,21 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Tokenizer using Clear NLP.
- *
  */
+@ResourceMetaData(name = "ClearNLP Segmenter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
+@LanguageCapability(value = "en")
 @TypeCapability(
-	    outputs = {
-	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
+        outputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
 public class ClearNlpSegmenter
-	extends SegmenterBase
+    extends SegmenterBase
 {
-    /**
-     * Use this language instead of the document language to resolve the model.
-     */
-    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false, defaultValue="en")
-    protected String language;
-
     /**
      * Override the default variant used to locate the model.
      */
@@ -63,6 +61,20 @@ public class ClearNlpSegmenter
     @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
     protected String variant;
 
+    /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
     /**
      * Load the model from this location instead of locating the model automatically.
      */
@@ -78,69 +90,57 @@ public class ClearNlpSegmenter
     {
         super.initialize(aContext);
 
-        modelProvider = new ModelProviderBase<AbstractSegmenter>(this, "clearnlp", "dictionary")
+        modelProvider = new ModelProviderBase<AbstractSegmenter>(this, "segmenter")
         {
-            {
-                setContextObject(ClearNlpSegmenter.this);
-
-                setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-dictionary-${language}-${variant}");
-                setDefault(LOCATION,
-                        "classpath:/${package}/lib/dictionary-${language}-${variant}.properties");
-                setDefault(VARIANT, "default");
-
-                setOverride(LOCATION, modelLocation);
-                setOverride(LANGUAGE, language);
-                setOverride(VARIANT, variant);
-            }
-
             @Override
             protected AbstractSegmenter produceResource(InputStream aStream)
                 throws Exception
             {
-                String language = getAggregatedProperties().getProperty(LANGUAGE);
+                String lang = getAggregatedProperties().getProperty(LANGUAGE);
                 AbstractSegmenter segmenter;
-                if(language.equals("en")){
+                if (lang.equals("en")) {
                     segmenter = new EnglishSegmenter(new EnglishTokenizer(aStream));
-                }else{
-                    throw new ResourceInitializationException(new
-                            Throwable("ClearNLP segmenter supports only English"));
+                }
+                else {
+                    throw new ResourceInitializationException(
+                            new Throwable("ClearNLP segmenter supports only English"));
                 }
                 return segmenter;
             }
-
         };
     }
 
-	@Override
-	protected void process(JCas aJCas, String aText, int aZoneBegin)
-		throws AnalysisEngineProcessException
-	{
-	    modelProvider.configure(aJCas.getCas());
-	    AbstractSegmenter segmenter = modelProvider.getResource();
+    @Override
+    protected void process(JCas aJCas, String aText, int aZoneBegin)
+        throws AnalysisEngineProcessException
+    {
+        modelProvider.configure(aJCas.getCas());
+        AbstractSegmenter segmenter = modelProvider.getResource();
 
-		List<List<String>> sentences = segmenter.getSentences(new BufferedReader(new StringReader(aText)));
+        List<List<String>> sentences = segmenter
+                .getSentences(new BufferedReader(new StringReader(aText)));
 
-		int sBegin = 0;
-		int sEnd = 0;
-		int tBegin = 0;
-		int tEnd = 0;
+        int sBegin = 0;
+        int sEnd = 0;
+        int tBegin = 0;
+        int tEnd = 0;
 
-		for (List<String> sentence : sentences) {
-			sBegin = -1;
+        for (List<String> sentence : sentences) {
+            sBegin = -1;
 
-			for (String token : sentence) {
-				tBegin = aText.indexOf(token, tEnd);
-				tEnd = tBegin + token.length();
+            for (String token : sentence) {
+                tBegin = aText.indexOf(token, tEnd);
+                tEnd = tBegin + token.length();
 
-				if (sBegin == -1) {
-					sBegin = tBegin;
-				}
+                if (sBegin == -1) {
+                    sBegin = tBegin;
+                }
 
-				createToken(aJCas, aZoneBegin + tBegin, aZoneBegin + tEnd);
-			}
-			sEnd = tEnd;
+                createToken(aJCas, aZoneBegin + tBegin, aZoneBegin + tEnd);
+            }
+            sEnd = tEnd;
 
-			createSentence(aJCas, aZoneBegin + sBegin, aZoneBegin + sEnd);
-		}
-	}
+            createSentence(aJCas, aZoneBegin + sBegin, aZoneBegin + sEnd);
+        }
+    }
 }

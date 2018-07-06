@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.pdf;
 
 import static org.apache.commons.io.FileUtils.readFileToString;
@@ -29,7 +29,9 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import de.tudarmstadt.ukp.dkpro.core.testing.EOLUtils;
 import de.tudarmstadt.ukp.dkpro.core.testing.dumper.CasDumpWriter;
 
 public class PdfReaderTest
@@ -53,6 +55,9 @@ public class PdfReaderTest
                 "UTF-8").trim();
         String actual = readFileToString(outputFile, "UTF-8").trim();
 
+        actual = EOLUtils.normalizeLineEndings(actual);
+        reference = EOLUtils.normalizeLineEndings(reference);
+        
         assertEquals(reference, actual);
     }
 

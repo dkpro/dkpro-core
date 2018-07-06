@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2014
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.penntree;
 
 import static java.util.Arrays.asList;
@@ -39,13 +39,15 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 
+import de.tudarmstadt.ukp.dkpro.core.testing.EOLUtils;
+
 public class PennTreebankCombinedReaderWriterTest
 {
     @Test
     public void testTreeWithRoot()
         throws Exception
     {
-        testRoundTrip("tree_with_ROOT.txt", 
+        testRoundTrip("tree_with_ROOT.mrg", 
                 PennTreebankCombinedWriter.PARAM_NO_ROOT_LABEL, false);
     }
 
@@ -53,7 +55,7 @@ public class PennTreebankCombinedReaderWriterTest
     public void testTreeWithTraceRemoved()
         throws Exception
     {
-        testOneWay("tree_with_trace_filtered.txt", "tree_with_trace.txt",
+        testOneWay("tree_with_trace_filtered.mrg", "tree_with_trace.mrg",
                 PennTreebankCombinedWriter.PARAM_EMPTY_ROOT_LABEL, true);
     }
 
@@ -61,7 +63,7 @@ public class PennTreebankCombinedReaderWriterTest
     public void testTreeWithTrace()
         throws Exception
     {
-        testRoundTrip("tree_with_trace.txt",
+        testRoundTrip("tree_with_trace.mrg",
                 PennTreebankCombinedReader.PARAM_REMOVE_TRACES, false,
                 PennTreebankCombinedReader.PARAM_WRITE_TRACES_TO_TEXT, true,
                 PennTreebankCombinedWriter.PARAM_EMPTY_ROOT_LABEL, true);
@@ -71,7 +73,7 @@ public class PennTreebankCombinedReaderWriterTest
     public void testTreeWithParentheses()
         throws Exception
     {
-        testRoundTrip("tree_with_parentheses.txt",
+        testRoundTrip("tree_with_parentheses.mrg",
                 PennTreebankCombinedWriter.PARAM_EMPTY_ROOT_LABEL, true);
     }
 
@@ -79,7 +81,7 @@ public class PennTreebankCombinedReaderWriterTest
     public void testTreeWithDirectSpeech()
         throws Exception
     {
-        testRoundTrip("tree_with_direct_speech.txt",
+        testRoundTrip("tree_with_direct_speech.mrg",
                 PennTreebankCombinedWriter.PARAM_EMPTY_ROOT_LABEL, true);
     }
 
@@ -89,7 +91,7 @@ public class PennTreebankCombinedReaderWriterTest
     public void testAll()
         throws Exception
     {
-        testRoundTrip("stanford-english-trees.txt",
+        testRoundTrip("stanford-english-trees.mrg",
                 PennTreebankCombinedWriter.PARAM_EMPTY_ROOT_LABEL, true);
     }
 
@@ -105,8 +107,8 @@ public class PennTreebankCombinedReaderWriterTest
         extraReaderParams.add(input);
         extraReaderParams.addAll(asList(aExtraParams));
 
-        CollectionReaderDescription reader = createReaderDescription(PennTreebankCombinedReader.class,
-                extraReaderParams.toArray());
+        CollectionReaderDescription reader = createReaderDescription(
+                PennTreebankCombinedReader.class, extraReaderParams.toArray());
 
         List<Object> extraWriterParams = new ArrayList<>();
         extraWriterParams.add(PennTreebankCombinedWriter.PARAM_TARGET_LOCATION);
@@ -126,9 +128,13 @@ public class PennTreebankCombinedReaderWriterTest
 
         String expected = FileUtils.readFileToString(reference, "UTF-8");
         String actual = FileUtils.readFileToString(
-                new File(output, FilenameUtils.getBaseName(input.toString()) + ".penn"), "UTF-8");
+                new File(output, FilenameUtils.getBaseName(input.toString()) + ".mrg"), "UTF-8");
+        expected = EOLUtils.normalizeLineEndings(expected);
+        actual = EOLUtils.normalizeLineEndings(actual);
         assertEquals(expected.trim(), actual.trim());
     }
+
+    
 
     public void testRoundTrip(String aFile, Object... aExtraParams)
         throws Exception

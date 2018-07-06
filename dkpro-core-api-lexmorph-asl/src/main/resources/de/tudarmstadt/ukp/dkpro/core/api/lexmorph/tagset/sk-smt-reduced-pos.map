@@ -6,95 +6,95 @@ __META_SOURCE_URL__=http://jlm.ipipan.waw.pl/index.php/JLM/article/view/35
 __META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # # - non-word element
-\#=O
+\#=POS_X
 # Foreign language citation
-%=O
+%=POS_X
 # A - Adjective
-Apx=ADJ
-Apy=ADJ
-Apz=ADJ
-Asx=ADJ
-Asy=ADJ
-Asz=ADJ
+Apx=POS_ADJ
+Apy=POS_ADJ
+Apz=POS_ADJ
+Asx=POS_ADJ
+Asy=POS_ADJ
+Asz=POS_ADJ
 # D - ADV
-Dx=ADV
-Dy=ADV
-Dz=ADV
+Dx=POS_ADV
+Dy=POS_ADV
+Dz=POS_ADV
 # E - Preposition
-E=PP
+E=POS_ADP
 # G - Participle
-Gpx=V
-Gpy=V
-Gpz=V
-Gsx=V
-Gsy=V
-Gsz=V
+Gpx=POS_VERB
+Gpy=POS_VERB
+Gpz=POS_VERB
+Gsx=POS_VERB
+Gsy=POS_VERB
+Gsz=POS_VERB
 # J - Interjections
-J=O
+J=POS_INTJ
 # N - Numeral
-ND=CARD
-Np=CARD
-Ns=CARD
+ND=POS_NUM
+Np=POS_NUM
+Ns=POS_NUM
 # O - Conjunctions
-O=CONJ
-OY=CONJ
+O=POS_CONJ
+OY=POS_CONJ
 # P - Pronoun
-PD=PR
-Pp=PR
-Ps=PR
+PD=POS_PRON
+Pp=POS_PRON
+Ps=POS_PRON
 # Q - Undefined part of speech (residual)
-Q=O
+Q=POS_X
 # R - Reflexive morphemes
-R=O
+R=POS_X
 # S - Substantive
-Sp=NN
-Ss=NN
+Sp=POS_NOUN
+Ss=POS_NOUN
 # T - Particles
-T=O
-TY=O
+T=POS_X
+TY=POS_X
 # V - Verb
-VBpa=V
-VBpb=V
-VBpc=V
-VBsa=V
-VBsb=V
-VBsc=V
-VH=V
-VI=V
-VKpa=V
-VKpb=V
-VKpc=V
-VKsa=V
-VKsb=V
-VKsc=V
-VLpa=V
-VLpb=V
-VLpc=V
-VLsa=V
-VLsb=V
-VLsc=V
-VMpa=V
-VMpb=V
-VMsb=V
+VBpa=POS_VERB
+VBpb=POS_VERB
+VBpc=POS_VERB
+VBsa=POS_VERB
+VBsb=POS_VERB
+VBsc=POS_VERB
+VH=POS_VERB
+VI=POS_VERB
+VKpa=POS_VERB
+VKpb=POS_VERB
+VKpc=POS_VERB
+VKsa=POS_VERB
+VKsb=POS_VERB
+VKsc=POS_VERB
+VLpa=POS_VERB
+VLpb=POS_VERB
+VLpc=POS_VERB
+VLsa=POS_VERB
+VLsb=POS_VERB
+VLsc=POS_VERB
+VMpa=POS_VERB
+VMpb=POS_VERB
+VMsb=POS_VERB
 # W - Abbreviations
-W=O
+W=POS_X
 # Y - Conditional morpheme
-Y=O
+Y=POS_X
 # Z - Punctuation
-Z=PUNC
+Z=POS_PUNCT
 
 # Not found in tagset documentation but present in TreeTagger model for Slovak
-!=PUNC
-"=PUNC
-par=O
-(=PUNC
-)=PUNC
-,=PUNC
-.=PUNC
-0=O
-\:=PUNC
-;=PUNC
-?=PUNC
+!=POS_PUNCT
+"=POS_PUNCT
+par=POS_X
+(=POS_PUNCT
+)=POS_PUNCT
+,=POS_PUNCT
+.=POS_PUNCT
+0=POS_X
+\:=POS_PUNCT
+;=POS_PUNCT
+?=POS_PUNCT
 
 *=POS
 

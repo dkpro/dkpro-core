@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2014
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
@@ -30,6 +30,7 @@ import java.util.Map;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
@@ -38,6 +39,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.DependenciesMode;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.internal.RootKey;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.internal.TokenKey;
@@ -56,10 +58,16 @@ import edu.stanford.nlp.trees.TreebankLanguagePack;
 import edu.stanford.nlp.trees.Trees;
 import edu.stanford.nlp.trees.TypedDependency;
 import edu.stanford.nlp.util.CoreMap;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Converts a constituency structure into a dependency structure.
  */
+@Component(OperationType.DEPENDENCY_CONVERTER)
+@ResourceMetaData(name = "CoreNLP Dependency Converter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -202,26 +210,34 @@ public class StanfordDependencyConverter
         case CC_PROPAGATED_NO_EXTRA:
             dependencies = gs.typedDependenciesCCprocessed(false);
             break;
+        case ENHANCED:
+            dependencies = gs.typedDependenciesEnhanced();
+            break;
+        case ENHANCED_PLUS_PLUS:
+            dependencies = gs.typedDependenciesEnhancedPlusPlus();
+            break;
         case TREE:
             dependencies = gs.typedDependenciesCollapsedTree();
             break;
+        default:
+            throw new IllegalArgumentException("Unknown mode: [" + mode + "]");
         }
 
         for (TypedDependency currTypedDep : dependencies) {
             int govIndex = currTypedDep.gov().index();
             int depIndex = currTypedDep.dep().index();
+            Dependency dep;
             if (govIndex != 0) {
                 Token govToken = tokens.get(govIndex - 1);
                 Token depToken = tokens.get(depIndex - 1);
 
-                StanfordAnnotator.createDependencyAnnotation(aJCas, currTypedDep.reln(), govToken,
-                        depToken);
+                dep = StanfordAnnotator.createDependencyAnnotation(aJCas, currTypedDep.reln(),
+                        govToken, depToken);
             }
             else {
                 Token depToken = tokens.get(depIndex - 1);
                 
-                Dependency dep = new de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT(
-                        aJCas);
+                dep = new de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT(aJCas);
                 dep.setDependencyType(currTypedDep.reln().toString());
                 dep.setGovernor(depToken);
                 dep.setDependent(depToken);
@@ -229,6 +245,9 @@ public class StanfordDependencyConverter
                 dep.setEnd(dep.getDependent().getEnd());
                 dep.addToIndexes();
             }
+            
+            dep.setFlavor(
+                    currTypedDep.extra() ? DependencyFlavor.ENHANCED : DependencyFlavor.BASIC);
         }
     }
 

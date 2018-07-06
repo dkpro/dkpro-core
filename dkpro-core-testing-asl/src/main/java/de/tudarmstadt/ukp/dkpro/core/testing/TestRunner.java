@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.testing;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
@@ -48,7 +48,8 @@ public class TestRunner
      *             if an exception occurs.
      * @see TokenBuilder
      */
-    public static JCas runTest(AnalysisEngineDescription aEngine, String aLanguage, String aDocument)
+    public static JCas runTest(AnalysisEngineDescription aEngine, String aLanguage,
+            String aDocument)
         throws UIMAException
     {
         return runTest(createEngine(aEngine), aLanguage, aDocument);
@@ -80,8 +81,9 @@ public class TestRunner
     }
 
     /**
-     * Run an analysis engine using a document. The document is automatically split into tokens based on
-     * spaces and into sentences based on newline. Make sure the punctuation is surrounded by spaces!
+     * Run an analysis engine using a document. The document is automatically split into tokens
+     * based on spaces and into sentences based on newline. Make sure the punctuation is surrounded
+     * by spaces!
      * 
      * @param aEngine
      *            an analysis engine description.
@@ -101,8 +103,9 @@ public class TestRunner
     }
 
     /**
-     * Run an analysis engine using a document. The document is automatically split into tokens based on
-     * spaces and into sentences based on newline. Make sure the punctuation is surrounded by spaces!
+     * Run an analysis engine using a document. The document is automatically split into tokens
+     * based on spaces and into sentences based on newline. Make sure the punctuation is surrounded
+     * by spaces!
      * 
      * @param aDocumentId
      *            a document ID.

@@ -1,107 +1,114 @@
 <!--
-    Copyright 2013
-    Ubiquitous Knowledge Processing (UKP) Lab
-    Technische Universität Darmstadt
+  Copyright 2017
+  Ubiquitous Knowledge Processing (UKP) Lab
+  Technische Universität Darmstadt
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+  http://www.apache.org/licenses/LICENSE-2.0
 
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
-        <version>1.9.0-SNAPSHOT</version>
-		<relativePath>../dkpro-core-asl</relativePath>
-    </parent>
-    <artifactId>de.tudarmstadt.ukp.dkpro.core.langdetect-asl</artifactId>
-    <packaging>jar</packaging>
-    <name>DKPro Core ASL - langdetect (v ${langdetect.version})</name>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+    <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
+    <version>1.10.0-SNAPSHOT</version>
+    <relativePath>../dkpro-core-asl</relativePath>
+  </parent>
+  <artifactId>de.tudarmstadt.ukp.dkpro.core.langdetect-asl</artifactId>
+  <packaging>jar</packaging>
+  <name>DKPro Core ASL - langdetect (v ${langdetect.version})</name>
+  <url>https://dkpro.github.io/dkpro-core/</url>
+  <properties>
+    <langdetect.version>1.1-20120112</langdetect.version>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.uima</groupId>
+      <artifactId>uimaj-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.uima</groupId>
+      <artifactId>uimafit-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.cybozu.labs</groupId>
+      <artifactId>langdetect</artifactId>
+      <version>${langdetect.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>eu.openminted.share.annotations</groupId>
+      <artifactId>omtd-share-annotations-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.langdetect-model-languageidentifier-any-wikipedia</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.langdetect-model-languageidentifier-any-socialmedia</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <dependencyManagement>
     <dependencies>
-        <dependency>
-            <groupId>org.apache.uima</groupId>
-            <artifactId>uimaj-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.uima</groupId>
-            <artifactId>uimafit-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-            <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-            <artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.cybozu.labs</groupId>
-            <artifactId>langdetect</artifactId>
-            <version>${langdetect.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-            <artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-            <artifactId>de.tudarmstadt.ukp.dkpro.core.langdetect-model-languageidentifier-any-wikipedia</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-            <artifactId>de.tudarmstadt.ukp.dkpro.core.langdetect-model-languageidentifier-any-socialmedia</artifactId>
-            <scope>test</scope>
-        </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.langdetect-model-languageidentifier-any-wikipedia</artifactId>
+        <version>20141013.1</version>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.langdetect-model-languageidentifier-any-socialmedia</artifactId>
+        <version>20141013.1</version>
+      </dependency>
     </dependencies>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-                <artifactId>de.tudarmstadt.ukp.dkpro.core.langdetect-model-languageidentifier-any-wikipedia</artifactId>
-                <version>20141013.1</version>
-            </dependency>
-            <dependency>
-                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-                <artifactId>de.tudarmstadt.ukp.dkpro.core.langdetect-model-languageidentifier-any-socialmedia</artifactId>
-                <version>20141013.1</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-dependency-plugin</artifactId>
-                    <configuration>
-                        <usedDependencies>
-                            <!-- Models not detected by byte-code analysis -->
-                            <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.langdetect-model-languageidentifier-any-wikipedia</usedDependency>
-                            <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.langdetect-model-languageidentifier-any-socialmedia</usedDependency>
-                        </usedDependencies>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
-    <properties>
-      <langdetect.version>1.1-20120112</langdetect.version>
-    </properties>
+  </dependencyManagement>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <configuration>
+            <usedDependencies>
+              <!-- Models not detected by byte-code analysis -->
+              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.langdetect-model-languageidentifier-any-wikipedia</usedDependency>
+              <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.langdetect-model-languageidentifier-any-socialmedia</usedDependency>
+            </usedDependencies>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>

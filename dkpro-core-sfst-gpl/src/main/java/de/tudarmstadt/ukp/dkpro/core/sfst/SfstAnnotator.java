@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2014
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.sfst;
 
@@ -39,6 +39,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -53,10 +54,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.RuntimeProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
- * Sfst morphological analyzer.
+ * SFST morphological analyzer.
  */
+@Component(OperationType.MORPHOLOGICAL_TAGGER)
+@ResourceMetaData(name = "SFST Morphological Analyzer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
     inputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -80,7 +87,7 @@ public class SfstAnnotator
      * Default: {@code true}
      */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
-    @ConfigurationParameter(name=PARAM_WRITE_POS, mandatory=true, defaultValue="true")
+    @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
     private boolean writePos;
 
     /**
@@ -89,7 +96,7 @@ public class SfstAnnotator
      * Default: {@code true}
      */
     public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
-    @ConfigurationParameter(name=PARAM_WRITE_LEMMA, mandatory=true, defaultValue="true")
+    @ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = true, defaultValue = "true")
     private boolean writeLemma;
 
     /**
@@ -106,6 +113,20 @@ public class SfstAnnotator
     @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
     private String variant;
 
+    /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
     /**
      * Load the model from this location instead of locating the model automatically.
      */
@@ -124,14 +145,15 @@ public class SfstAnnotator
      * Specifies the model encoding.
      */
     public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
-    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue="UTF-8")
+    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue = "UTF-8")
     private String modelEncoding;
     
     public static final String PARAM_MODE = "mode";
-    @ConfigurationParameter(name = PARAM_MODE, mandatory = true, defaultValue="FIRST")
+    @ConfigurationParameter(name = PARAM_MODE, mandatory = true, defaultValue = "FIRST")
     private Mode mode;
     
-    public static final String PARAM_MORPH_MAPPING_LOCATION = ComponentParameters.PARAM_MORPH_MAPPING_LOCATION;
+    public static final String PARAM_MORPH_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_MORPH_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_MORPH_MAPPING_LOCATION, mandatory = false)
     private String morphMappingLocation;
 
@@ -254,8 +276,8 @@ public class SfstAnnotator
 
                 // Send full sentence
                 for (Token token : tokens) {
-                    lastOut.append(token.getCoveredText()).append(' ');
-                    out.printf("%s%n", token.getCoveredText());
+                    lastOut.append(token.getText()).append(' ');
+                    out.printf("%s%n", token.getText());
                     out.printf("%s%n", FLUSH_TOKEN);
                 }
                 out.flush();

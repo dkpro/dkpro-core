@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2015
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 
 import java.util.ArrayList;
@@ -34,8 +34,11 @@ public class TypeMapping
     public TypeMapping(String... aMappings)
     {
         parsedMappings = new ArrayList<>();
-        for (String m : aMappings) {
-            parsedMappings.add(MappingParam.parse(m));
+
+        if (aMappings != null) {
+            for (String m : aMappings) {
+                parsedMappings.add(MappingParam.parse(m));
+            }
         }
 
         brat2UimaMappingCache = new HashMap<>();
@@ -59,7 +62,8 @@ public class TypeMapping
         Type t = brat2UimaMappingCache.get(aAnno.getType());
         
         if (t == null) {
-            // brat doesn't like dots in name names, so we had replaced them with dashes. Now revert.
+            // brat doesn't like dots in name names, so we had replaced them with dashes.
+            // Now revert.
             String type = apply(aAnno.getType().replace("-", "."));
             t = aTs.getType(type);
             

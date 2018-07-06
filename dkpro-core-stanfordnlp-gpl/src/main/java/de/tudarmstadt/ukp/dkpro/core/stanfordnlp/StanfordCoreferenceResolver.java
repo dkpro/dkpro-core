@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2014
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
@@ -34,6 +34,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -77,9 +78,15 @@ import edu.stanford.nlp.trees.TreeCoreAnnotations.TreeAnnotation;
 import edu.stanford.nlp.trees.TreeFactory;
 import edu.stanford.nlp.trees.TreebankLanguagePack;
 import edu.stanford.nlp.util.CoreMap;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  */
+@Component(OperationType.CO_REFERENCE_ANNOTATOR)
+@ResourceMetaData(name = "CoreNLP Coreference Resolver (old API)")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
@@ -98,7 +105,8 @@ public class StanfordCoreferenceResolver
      * DCoRef parameter: Sieve passes - each class is defined in dcoref/sievepasses/.
      */
     public static final String PARAM_SIEVES = "sieves";
-    @ConfigurationParameter(name = PARAM_SIEVES, defaultValue = Constants.SIEVEPASSES, mandatory = true)
+    @ConfigurationParameter(name = PARAM_SIEVES, defaultValue = Constants.SIEVEPASSES, 
+            mandatory = true)
     private String sieves;
 
     /**
@@ -155,13 +163,7 @@ public class StanfordCoreferenceResolver
             protected Coreferencer produceResource(URL aUrl)
                 throws IOException
             {
-                String base = FilenameUtils.getFullPathNoEndSeparator(aUrl.toString())+"/";
-
-                // Loading gzipped files from URL is broken in CoreNLP
-                // https://github.com/stanfordnlp/CoreNLP/issues/94
-                String logicalBase = getModelLocation(getAggregatedProperties());
-                logicalBase = FilenameUtils.getFullPathNoEndSeparator(logicalBase)+"/";
-                logicalBase = logicalBase.substring("classpath:/".length());
+                String base = FilenameUtils.getFullPathNoEndSeparator(aUrl.toString()) + "/";
 
                 Properties props = new Properties();
                 props.setProperty(Constants.SIEVES_PROP, sieves);
@@ -180,7 +182,8 @@ public class StanfordCoreferenceResolver
                 props.setProperty(Constants.DEMONYM_PROP, base + "demonyms.txt");
                 // props.getProperty(Constants.ANIMATE_PROP, DefaultPaths.DEFAULT_DCOREF_ANIMATE),
                 props.setProperty(Constants.ANIMATE_PROP, base + "animate.unigrams.txt");
-                // props.getProperty(Constants.INANIMATE_PROP, DefaultPaths.DEFAULT_DCOREF_INANIMATE),
+                // props.getProperty(Constants.INANIMATE_PROP, 
+                //     DefaultPaths.DEFAULT_DCOREF_INANIMATE),
                 props.setProperty(Constants.INANIMATE_PROP, base + "inanimate.unigrams.txt");
                 // props.getProperty(Constants.MALE_PROP),
                 props.setProperty(Constants.MALE_PROP, base + "male.unigrams.txt");
@@ -194,24 +197,29 @@ public class StanfordCoreferenceResolver
                 props.setProperty(Constants.SINGULAR_PROP, base + "singular.unigrams.txt");
                 // props.getProperty(Constants.STATES_PROP, DefaultPaths.DEFAULT_DCOREF_STATES),
                 props.setProperty(Constants.STATES_PROP, base + "state-abbreviations.txt");
-                //props.getProperty(Constants.GENDER_NUMBER_PROP, DefaultPaths.DEFAULT_DCOREF_GENDER_NUMBER);
-                props.setProperty(Constants.GENDER_NUMBER_PROP, logicalBase + "gender.map.ser.gz");
-                // props.getProperty(Constants.COUNTRIES_PROP, DefaultPaths.DEFAULT_DCOREF_COUNTRIES),
+                // props.getProperty(Constants.GENDER_NUMBER_PROP, 
+                //     DefaultPaths.DEFAULT_DCOREF_GENDER_NUMBER);
+                props.setProperty(Constants.GENDER_NUMBER_PROP, base + "gender.map.ser.gz");
+                // props.getProperty(Constants.COUNTRIES_PROP, 
+                //     DefaultPaths.DEFAULT_DCOREF_COUNTRIES),
                 props.setProperty(Constants.COUNTRIES_PROP, base + "countries");
-                // props.getProperty(Constants.STATES_PROVINCES_PROP, DefaultPaths.DEFAULT_DCOREF_STATES_AND_PROVINCES),
+                // props.getProperty(Constants.STATES_PROVINCES_PROP, 
+                //     DefaultPaths.DEFAULT_DCOREF_STATES_AND_PROVINCES),
                 props.setProperty(Constants.STATES_PROVINCES_PROP, base + "statesandprovinces");
         
                 // The following properties are only relevant if the "CorefDictionaryMatch" sieve
                 // is enabled.
                 // PropertiesUtils.getStringArray(props, Constants.DICT_LIST_PROP,
-                //   new String[]{DefaultPaths.DEFAULT_DCOREF_DICT1, DefaultPaths.DEFAULT_DCOREF_DICT2,
+                //   new String[]{DefaultPaths.DEFAULT_DCOREF_DICT1, 
+                //     DefaultPaths.DEFAULT_DCOREF_DICT2,
                 //   DefaultPaths.DEFAULT_DCOREF_DICT3, DefaultPaths.DEFAULT_DCOREF_DICT4}),
                 props.put(Constants.DICT_LIST_PROP, '[' + base + "coref.dict1.tsv" + ',' + base
-                        + "coref.dict1.tsv" + ',' + base + "coref.dict1.tsv" + ',' + base
-                        + "coref.dict1.tsv" + ']');
+                        + "coref.dict2.tsv" + ',' + base + "coref.dict3.tsv" + ',' + base
+                        + "coref.dict4.tsv" + ']');
                 // props.getProperty(Constants.DICT_PMI_PROP, DefaultPaths.DEFAULT_DCOREF_DICT1),
                 props.put(Constants.DICT_PMI_PROP, base + "coref.dict1.tsv");
-                // props.getProperty(Constants.SIGNATURES_PROP, DefaultPaths.DEFAULT_DCOREF_NE_SIGNATURES));
+                // props.getProperty(Constants.SIGNATURES_PROP, 
+                //     DefaultPaths.DEFAULT_DCOREF_NE_SIGNATURES));
                 props.put(Constants.SIGNATURES_PROP, base + "ne.signatures.txt");
 
                 try {
@@ -238,13 +246,6 @@ public class StanfordCoreferenceResolver
         List<CoreMap> sentences = new ArrayList<CoreMap>();
         List<List<CoreLabel>> sentenceTokens = new ArrayList<List<CoreLabel>>();
         for (ROOT root : select(aJCas, ROOT.class)) {
-            // Copy all relevant information from the tokens
-            List<CoreLabel> tokens = new ArrayList<CoreLabel>();
-            for (Token token : selectCovered(Token.class, root)) {
-                tokens.add(tokenToWord(token));
-            }
-            sentenceTokens.add(tokens);
-
             // SemanticHeadFinder (nonTerminalInfo) does not know about PRN0, so we have to replace
             // it with PRN to avoid NPEs.
             TreeFactory tFact = new LabeledScoredTreeFactory(CoreLabel.factory())
@@ -261,14 +262,20 @@ public class StanfordCoreferenceResolver
                 }
             };
 
-            // deep copy of the tree. These are modified inside coref!
-            Tree treeCopy = TreeUtils.createStanfordTree(root, tFact).treeSkeletonCopy();
-            treeCopy.indexSpans();
-            trees.add(treeCopy);
+            Tree tree = TreeUtils.createStanfordTree(root, tFact);
+            tree.indexSpans();
+            trees.add(tree);
 
+            // Build the tokens
+            List<CoreLabel> tokens = new ArrayList<CoreLabel>();
+            for (Tree leave : tree.getLeaves()) {
+                tokens.add((CoreLabel) leave.label());
+            }
+            sentenceTokens.add(tokens);
+            
             // Build the sentence
             CoreMap sentence = new CoreLabel();
-            sentence.set(TreeAnnotation.class, treeCopy);
+            sentence.set(TreeAnnotation.class, tree);
             sentence.set(TokensAnnotation.class, tokens);
             sentence.set(RootKey.class, root);
             sentences.add(sentence);
@@ -280,24 +287,24 @@ public class StanfordCoreferenceResolver
             GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory(
                     tlp.punctuationWordRejectFilter(), tlp.typedDependencyHeadFinder());
             ParserAnnotatorUtils.fillInParseAnnotations(false, true, gsf, sentence,
-                    asList(treeCopy), GrammaticalStructure.Extras.NONE);
+                    asList(tree), GrammaticalStructure.Extras.NONE);
             
             // https://github.com/dkpro/dkpro-core/issues/582
             SemanticGraph deps = sentence
                     .get(SemanticGraphCoreAnnotations.CollapsedDependenciesAnnotation.class);
             for (IndexedWord vertex : deps.vertexSet()) {
-                 vertex.setWord(vertex.value());
+                vertex.setWord(vertex.value());
             }
             
             // These lines are necessary since CoreNLP 3.5.2 - without them the mentions lack
             // dependency information which causes an NPE
-            SemanticGraph dependencies = SemanticGraphFactory.makeFromTree(treeCopy,
-                    Mode.COLLAPSED, Extras.NONE, false, null, true);
+            SemanticGraph dependencies = SemanticGraphFactory.makeFromTree(tree,
+                    Mode.COLLAPSED, Extras.NONE, null, false, true);
             sentence.set(SemanticGraphCoreAnnotations.AlternativeDependenciesAnnotation.class,
                     dependencies);
             
             // merge the new CoreLabels with the tree leaves
-            MentionExtractor.mergeLabels(treeCopy, tokens);
+            MentionExtractor.mergeLabels(tree, tokens);
             MentionExtractor.initializeUtterance(tokens);
         }
 

@@ -8,64 +8,65 @@
 # Mapped according to universal_pos_tags.1.03 (http://code.google.com/p/universal-pos-tags/)
 
 __META_SOURCE_URL__=http://opus.lingfil.uu.se/tools/public/tagger/melt-0.6/README
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 
 # ADJ 	   adjective
-ADJ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+ADJ=POS_ADJ
 # ADJWH	   interrogative adjective
-ADJWH=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+ADJWH=POS_ADJ
 # ADV	   adverb
-ADV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+ADV=POS_ADV
 # ADVWH	   interrogative adverb
-ADVWH=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+ADVWH=POS_ADV
 # CC	   coordination conjunction
-CC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+CC=POS_CONJ
 # CLO	   object clitic pronoun
-CLO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+CLO=POS_PRON
 # CLR	   reflexive clitic pronoun
-CLR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+CLR=POS_PRON
 # CLS	   subject clitic pronoun
-CLS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+CLS=POS_PRON
 # CS	   subordination conjunction
-CS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+CS=POS_CONJ
 # DET	   determiner
-DET=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+DET=POS_DET
 # DETWH	   interrogative determiner
-DETWH=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+DETWH=POS_DET
 # ET	   foreign word
-ET=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+ET=POS_X
 # I	       interjection
-I=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+I=POS_INTJ
 # NC	   common noun
-NC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+NC=POS_NOUN
 # NPP	   proper noun
-NPP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
+NPP=POS_PROPN
 # P	       preposition
-P=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+P=POS_ADP
 # P+D	   preposition+determiner amalgam
-P+D=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+P+D=POS_ADP
 # P+PRO	   prepositon+pronoun amalgam
-P+PRO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+P+PRO=POS_ADP
 # PONCT	   punctuation mark
-PONCT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+PONCT=POS_PUNCT
 # PREF	   prefix
-PREF=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRT
+PREF=POS_PART
 # PRO	   full pronoun
-PRO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PRO=POS_PRON
 # PROREL   relative pronoun
-PROREL=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PROREL=POS_PRON
 # PROWH	   interrogative pronoun
-PROWH=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PROWH=POS_PRON
 # V	       indicative or conditional verb form
-V=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+V=POS_VERB
 # VIMP	   imperative verb form
-VIMP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VIMP=POS_VERB
 # VINF	   infinitive verb form
-VINF=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VINF=POS_VERB
 # VPP	   past participle
-VPP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VPP=POS_VERB
 # VPR	   present participle
-VPR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VPR=POS_VERB
 # VS	   subjunctive verb form
-VS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VS=POS_VERB
 
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS
+*=POS

@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2015
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  * <p>
@@ -14,39 +14,45 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.text;
 
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
-import org.apache.commons.io.FileUtils;
-import org.apache.uima.UIMAException;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.fit.factory.JCasFactory;
-import org.apache.uima.fit.pipeline.SimplePipeline;
-import org.apache.uima.jcas.JCas;
-import org.junit.Test;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.apache.commons.io.FileUtils;
+import org.apache.uima.UIMAException;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.fit.factory.JCasFactory;
+import org.apache.uima.fit.pipeline.SimplePipeline;
+import org.apache.uima.jcas.JCas;
+import org.junit.Rule;
+import org.junit.Test;
+
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class TokenizedTextWriterTest
 {
+    @Rule
+    public DkproTestContext context = new DkproTestContext();
+
     @Test
     public void testDefault()
             throws UIMAException, IOException
     {
         String text = "This is the 1st sentence .\nHere is another sentence .";
-        File targetFile = new File("target/TokenizedTextWriterTest.out");
+        File targetFile = new File(context.getTestOutputFolder(), "TokenizedTextWriterTest.out");
         File tokenized = new File("src/test/resources/tokenizedTexts/textTokenized.txt");
 
         AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
@@ -54,7 +60,7 @@ public class TokenizedTextWriterTest
                 TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
                 TokenizedTextWriter.PARAM_OVERWRITE, true);
         TestRunner.runTest("id", writer, "en", text);
-        assertTrue(FileUtils.contentEquals(tokenized, targetFile));
+        assertTrue(FileUtils.contentEqualsIgnoreEOL(tokenized, targetFile, "UTF-8"));
     }
 
     @Test
@@ -62,7 +68,7 @@ public class TokenizedTextWriterTest
             throws UIMAException, IOException
     {
         String text = "This is the 1st sentence .\nHere is another sentence .";
-        File targetDir = new File("target/TokenizedTextWriterTest.dir");
+        File targetDir = context.getTestOutputFolder();
         File targetFile = new File(targetDir, "id.txt");
         File tokenized = new File("src/test/resources/tokenizedTexts/textTokenized.txt");
 
@@ -73,15 +79,15 @@ public class TokenizedTextWriterTest
         TestRunner.runTest("id", writer, "en", text);
         assertTrue(targetDir.isDirectory());
         assertTrue(targetFile.exists());
-        assertTrue(FileUtils.contentEquals(tokenized, targetFile));
+        assertTrue(FileUtils.contentEqualsIgnoreEOL(tokenized, targetFile, "UTF-8"));
     }
 
     @Test
     public void testTokens()
             throws UIMAException, IOException
     {
-        File targetFile = new File("target/TokenizedTextWriterTokensTest.out");
-        targetFile.deleteOnExit();
+        File targetFile = new File(context.getTestOutputFolder(),
+                "TokenizedTextWriterTokensTest.out");
         String text = "This is the 1st sentence .\nHere is another sentence .";
         String typeName = Token.class.getTypeName();
         File tokenized = new File("src/test/resources/tokenizedTexts/textTokenized.txt");
@@ -89,17 +95,16 @@ public class TokenizedTextWriterTest
         AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
                 TokenizedTextWriter.PARAM_TARGET_LOCATION, targetFile,
                 TokenizedTextWriter.PARAM_FEATURE_PATH, typeName,
-                TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
-                TokenizedTextWriter.PARAM_OVERWRITE, true);
+                TokenizedTextWriter.PARAM_SINGULAR_TARGET, true);
         TestRunner.runTest("id", writer, "en", text);
-        assertTrue(FileUtils.contentEquals(tokenized, targetFile));
+        assertTrue(FileUtils.contentEqualsIgnoreEOL(tokenized, targetFile, "UTF-8"));
     }
 
     @Test
     public void testLemmas()
             throws IOException, UIMAException
     {
-        File targetFile = new File("target/lemmas.out");
+        File targetFile = new File(context.getTestOutputFolder(), "lemmas.out");
         targetFile.deleteOnExit();
         String expected = "lemma1 lemma2";
         int expectedLines = 1;
@@ -146,7 +151,7 @@ public class TokenizedTextWriterTest
     public void testStopwords()
             throws UIMAException, IOException
     {
-        File targetFile = new File("target/TokenizedTextWriterNoStopwords.out");
+        File targetFile = new File(context.getTestOutputFolder(),"TokenizedTextWriterNoStopwords.out");
         targetFile.deleteOnExit();
         File tokenized = new File("src/test/resources/tokenizedTexts/textTokenizedNoStopwords.txt");
         String text = "This is the 1st sentence .\nHere is another sentence .";
@@ -158,14 +163,14 @@ public class TokenizedTextWriterTest
                 TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
                 TokenizedTextWriter.PARAM_OVERWRITE, true);
         TestRunner.runTest("id", writer, "en", text);
-        assertTrue(FileUtils.contentEquals(tokenized, targetFile));
+        assertTrue(FileUtils.contentEqualsIgnoreEOL(tokenized, targetFile, "UTF-8"));
     }
 
     @Test
     public void testNumbers()
             throws UIMAException, IOException
     {
-        File targetFile = new File("target/TokenizedTextWriterNoStopwords.out");
+        File targetFile = new File(context.getTestOutputFolder(), "TokenizedTextWriterNoStopwords.out");
         targetFile.deleteOnExit();
         File tokenized = new File("src/test/resources/tokenizedTexts/textTokenizedNoNumbers.txt");
         String text = "This is 1 sentence .\nHere is 2 sentences , or even 2.5 .";
@@ -177,6 +182,24 @@ public class TokenizedTextWriterTest
                 TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
                 TokenizedTextWriter.PARAM_OVERWRITE, true);
         TestRunner.runTest("id", writer, "en", text);
-        assertTrue(FileUtils.contentEquals(tokenized, targetFile));
+        assertTrue(FileUtils.contentEqualsIgnoreEOL(tokenized, targetFile, "UTF-8"));
+    }
+
+    @Test
+    public void testNoSentences()
+            throws IOException, UIMAException
+    {
+        File targetFile = new File(context.getTestOutputFolder(),
+                "TokenizedTextWriterNoSentences.out");
+        File tokenized = new File("src/test/resources/tokenizedTexts/textNoSentences.txt");
+        String text = "This is the 1st sentence . Here is another sentence .";
+
+        AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
+                TokenizedTextWriter.PARAM_TARGET_LOCATION, targetFile,
+                TokenizedTextWriter.PARAM_SINGULAR_TARGET, true,
+                TokenizedTextWriter.PARAM_OVERWRITE, true,
+                TokenizedTextWriter.PARAM_COVERING_TYPE, null);
+        TestRunner.runTest("id", writer, "en", text);
+        assertTrue(FileUtils.contentEqualsIgnoreEOL(tokenized, targetFile, "UTF-8"));
     }
 }

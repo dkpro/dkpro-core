@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2012
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,21 +14,19 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
+import static org.apache.uima.fit.util.JCasUtil.indexCovered;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.apache.uima.util.Level.INFO;
 
 import java.io.InputStream;
 import java.nio.charset.Charset;
-import java.util.List;
-
-import opennlp.tools.postag.POSModel;
-import opennlp.tools.postag.POSTagger;
-import opennlp.tools.postag.POSTaggerME;
+import java.nio.charset.StandardCharsets;
+import java.util.Collection;
+import java.util.Map;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -36,12 +34,16 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ResourceParameter;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
@@ -49,10 +51,18 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionProvider;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
+import opennlp.tools.postag.POSModel;
+import opennlp.tools.postag.POSTaggerME;
 
 /**
- * Part-of-Speech annotator using OpenNLP. Requires {@link Sentence}s to be annotated before.
+ * Part-of-Speech annotator using OpenNLP.
  */
+@Component(OperationType.PART_OF_SPEECH_TAGGER)
+@ResourceMetaData(name = "OpenNLP POS-Tagger")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 //NOTE: This file contains Asciidoc markers for partial inclusion of this file in the documentation
 //Do not remove these tags!
 // tag::capabilities[]
@@ -63,29 +73,45 @@ import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionPr
         outputs = { 
             "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class OpenNlpPosTagger
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
 // end::capabilities[]
-	/**
-	 * Use this language instead of the document language to resolve the model.
-	 */
-	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-	protected String language;
+    
+    /**
+     * Use this language instead of the document language to resolve the model.
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    protected String language;
 
-	/**
-	 * Override the default variant used to locate the model.
-	 */
-	public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
-	protected String variant;
+    /**
+     * Override the default variant used to locate the model.
+     */
+    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+    protected String variant;
 
-	/**
-	 * Load the model from this location instead of locating the model automatically.
-	 */
-	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
-	protected String modelLocation;
+    /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
+     * Load the model from this location instead of locating the model automatically.
+     */
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    @ResourceParameter(MimeTypes.APPLICATION_X_OPENNLP_TAGGER)
+    protected String modelLocation;
 
     /**
      * The character encoding used by the model.
@@ -94,55 +120,46 @@ public class OpenNlpPosTagger
     @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = false)
     private String modelEncoding;
 
-	/**
-	 * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
-	 * the mapping automatically.
-	 */
-	public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
-	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
-	protected String posMappingLocation;
+    /**
+     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
+     * the mapping automatically.
+     */
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+    protected String posMappingLocation;
 
-	/**
-	 * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-	 * spaming the heap with thousands of strings representing only a few different tags.
-	 *
-	 * Default: {@code true}
-	 */
-	public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-	@ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-	private boolean internTags;
+    /**
+     * Log the tag set(s) when a model is loaded.
+     *
+     * Default: {@code false}
+     */
+    public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
+    protected boolean printTagSet;
 
-	/**
-	 * Log the tag set(s) when a model is loaded.
-	 *
-	 * Default: {@code false}
-	 */
-	public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
-	protected boolean printTagSet;
-
-	private CasConfigurableProviderBase<POSTagger> modelProvider;
-	private MappingProvider mappingProvider;
+    private CasConfigurableProviderBase<POSTaggerME> modelProvider;
+    private MappingProvider mappingProvider;
     private Charset encoding;
 
-	@Override
-	public void initialize(UimaContext aContext)
-		throws ResourceInitializationException
-	{
-		super.initialize(aContext);
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
 
         encoding = modelEncoding != null ? Charset.forName(modelEncoding) : null;
-		
+        
 // tag::model-provider-decl[]
-		// Use ModelProviderBase convenience constructor to set up a model provider that
-		// auto-detects most of its settings and is configured to use default variants.
-		// Auto-detection inspects the configuration parameter fields (@ConfigurationParameter)
-		// of the analysis engine class and looks for default parameters such as PARAM_LANGUAGE,
-		// PARAM_VARIANT, and PARAM_MODEL_LOCATION.
-        modelProvider = new ModelProviderBase<POSTagger>(this, "opennlp", "tagger")
+        // Use ModelProviderBase convenience constructor to set up a model provider that
+        // auto-detects most of its settings and is configured to use default variants.
+        // Auto-detection inspects the configuration parameter fields (@ConfigurationParameter)
+        // of the analysis engine class and looks for default parameters such as PARAM_LANGUAGE,
+        // PARAM_VARIANT, and PARAM_MODEL_LOCATION.
+        modelProvider = new ModelProviderBase<POSTaggerME>(this, "tagger")
         {
             @Override
-            protected POSTagger produceResource(InputStream aStream)
+            protected POSTaggerME produceResource(InputStream aStream)
                 throws Exception
             {
                 // Load the POS tagger model from the location the model provider offers
@@ -175,7 +192,7 @@ public class OpenNlpPosTagger
         mappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
                 language, modelProvider);
 // end::mapping-provider-decl[]
-	}
+    }
 
     @Override
     public void process(JCas aJCas)
@@ -199,18 +216,13 @@ public class OpenNlpPosTagger
         // to be post-processed. This property is specific to the DKPro Core OpenNLP models
         String tagSplitPattern = modelProvider.getResourceMetaData().getProperty(
                 "pos.tagset.tagSplitPattern");
-
+        
+        Map<Sentence, Collection<Token>> index = indexCovered(aJCas, Sentence.class, Token.class);
         for (Sentence sentence : select(aJCas, Sentence.class)) {
 // tag::model-provider-use-2[]
-            List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
+            Collection<Token> tokens = index.get(sentence);
             String[] tokenTexts = toText(tokens).toArray(new String[tokens.size()]);
-
-            // "Fix" encoding before passing to a model which was trained with encoding problems
-            if (encoding != null && !"UTF-8".equals(encoding.name())) {
-                for (int i = 0; i < tokenTexts.length; i++) {
-                    tokenTexts[i] = new String(tokenTexts[i].getBytes(), encoding);                
-                }
-            }
+            fixEncoding(tokenTexts);
             
             // Fetch the OpenNLP pos tagger instance configured with the right model and use it to
             // tag the text
@@ -232,13 +244,26 @@ public class OpenNlpPosTagger
                 Type posTag = mappingProvider.getTagType(tag);
                 POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
                 // To save memory, we typically intern() tag strings
-                posAnno.setPosValue(internTags ? tag.intern() : tag);
+                posAnno.setPosValue(tag != null ? tag.intern() : null);
+                POSUtils.assignCoarseValue(posAnno);
                 posAnno.addToIndexes();
 // end::mapping-provider-use-2[]
                 
                 // Connect the POS annotation to the respective token annotation
                 t.setPos(posAnno);
                 i++;
+            }
+        }
+    }
+
+    private void fixEncoding(String[] aTokenTexts)
+        throws AnalysisEngineProcessException
+    {
+        // "Fix" encoding before passing to a model which was trained with encoding problems
+        if (encoding != null && !"UTF-8".equals(encoding.name())) {
+            for (int i = 0; i < aTokenTexts.length; i++) {
+                aTokenTexts[i] = new String(aTokenTexts[i].getBytes(StandardCharsets.UTF_8),
+                        encoding);
             }
         }
     }

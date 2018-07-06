@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2013
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  * 
@@ -14,10 +14,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.api.resources;
-
-import static org.apache.commons.io.IOUtils.closeQuietly;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,32 +25,25 @@ import java.net.URL;
  * CAS-configurable provider produces a resource from a stream instead of an URL. The provider
  * implementation does not have to care about opening/closing the stream.
  * 
- *
- * @param <M> the type of resource to produce.
+ * @param <M>
+ *            the type of resource to produce.
  */
 public abstract class CasConfigurableStreamProviderBase<M>
-	extends CasConfigurableProviderBase<M>
+    extends CasConfigurableProviderBase<M>
 {
-	@Override
-	protected M produceResource(URL aUrl)
-		throws IOException
-	{
-		InputStream is = null;
-		try {
-			is = aUrl.openStream();
-			return produceResource(is);
-		}
-		catch (IOException e) {
-			throw e;
-		}
-		catch (Exception e) {
-			throw new IOException(e);
-		}
-		finally {
-			closeQuietly(is);
-		}
-	}
+    @Override
+    protected M produceResource(URL aUrl) throws IOException
+    {
+        try (InputStream is = aUrl.openStream()) {
+            return produceResource(is);
+        }
+        catch (IOException e) {
+            throw e;
+        }
+        catch (Exception e) {
+            throw new IOException(e);
+        }
+    }
 
-	protected abstract M produceResource(InputStream aStream) throws Exception;
-
+    protected abstract M produceResource(InputStream aStream) throws Exception;
 }

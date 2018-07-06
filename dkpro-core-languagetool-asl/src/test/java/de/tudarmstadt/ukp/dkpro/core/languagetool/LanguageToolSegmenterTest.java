@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2010
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,19 +14,24 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.languagetool;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
+import org.languagetool.Languages;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -36,6 +41,24 @@ import de.tudarmstadt.ukp.dkpro.core.testing.harness.SegmenterHarness;
 
 public class LanguageToolSegmenterTest
 {
+    @Ignore("Only needed to get the list of the supported languages for the @LanguageCapability")
+    @Test
+    public void listLocales() throws Exception
+    {
+        List<String> supportedLanguages = Languages.get().stream()
+            .map(l -> l.getLocale().getLanguage())
+            .distinct()
+            .filter(lang -> lang.length() == 2)
+            .collect(Collectors.toList());
+        
+        System.out.printf("[");
+        for (String l : supportedLanguages) {
+            System.out.printf("\"%s\", ", l);
+        }
+        System.out.printf("]");
+    }
+    
+    
     @Test
     public void testTwoSentences() throws Exception
     {

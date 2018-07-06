@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2015
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 
 import java.io.IOException;
@@ -28,9 +28,10 @@ public class BratTextAnnotation
 {
     private static final Pattern PATTERN = Pattern.compile(
             "(?<ID>T[0-9]+)\\t" + 
-            "(?<TYPE>[a-zA-Z_][a-zA-Z0-9_\\-]+) " +
+            "(?<TYPE>[a-zA-Z0-9_][a-zA-Z0-9_\\-]+) " +
             "(?<BEGIN>[0-9]+) " +
-            "(?<END>[0-9]+)\\t" +
+            "(?<END>[0-9]+)" +
+            "(;[0-9]+ [0-9]+)*\\t" +
             "(?<TEXT>.*)");
     
     private static final String ID = "ID";
@@ -102,7 +103,7 @@ public class BratTextAnnotation
         Matcher m = PATTERN.matcher(aLine);
         
         if (!m.matches()) {
-            throw new IllegalArgumentException("Illegal text annotation format ["+aLine+"]");
+            throw new IllegalArgumentException("Illegal text annotation format [" + aLine + "]");
         }
 
         return new BratTextAnnotation(m.group(ID), m.group(TYPE), Integer.valueOf(m.group(BEGIN)),

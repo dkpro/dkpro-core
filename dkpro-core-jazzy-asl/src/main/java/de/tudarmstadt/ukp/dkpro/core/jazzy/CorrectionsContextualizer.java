@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2014
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -14,10 +14,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.jazzy;
 
-import static de.tudarmstadt.ukp.dkpro.core.frequency.Web1TProviderBase.BOS;
 import static de.tudarmstadt.ukp.dkpro.core.jazzy.util.ContextualizerUtils.getCandidatePosition;
 import static de.tudarmstadt.ukp.dkpro.core.jazzy.util.ContextualizerUtils.getChangedWords;
 import static de.tudarmstadt.ukp.dkpro.core.jazzy.util.ContextualizerUtils.getTrigram;
@@ -28,11 +27,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ExternalResource;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
@@ -44,15 +44,18 @@ import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvid
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.ngrams.util.NGramStringIterable;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * This component assumes that some spell checker has already been applied upstream (e.g. Jazzy).
- * It then uses ngram frequencies from a frequency provider in order to rank the provided corrections. 
- * 
+ * This component assumes that some spell checker has already been applied upstream (e.g. Jazzy). It
+ * then uses ngram frequencies from a frequency provider in order to rank the provided corrections.
  */
+@ResourceMetaData(name = "Corrections Contextualizer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class CorrectionsContextualizer
     extends JCasAnnotator_ImplBase
 {
+    private static final String BOS = "<S>";
     
     public final static String FREQUENCY_PROVIDER_RESOURCE = "FrequencyProvider";
     @ExternalResource(key = FREQUENCY_PROVIDER_RESOURCE)
@@ -75,15 +78,17 @@ public class CorrectionsContextualizer
         for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
             List<Token> tokens = JCasUtil.selectCovered(jcas, Token.class, sentence);
             List<String> tokenStrings = JCasUtil.toText(tokens);
-            for (SpellingAnomaly anomaly : JCasUtil.selectCovered(jcas, SpellingAnomaly.class, sentence)) {                
+            for (SpellingAnomaly anomaly : JCasUtil.selectCovered(jcas, SpellingAnomaly.class,
+                    sentence)) {
                 
                 FSArray suggestedActions = anomaly.getSuggestions();
                 int n = suggestedActions.size();
                 FSArray newActions = new FSArray(jcas, n + 1);
-                for (int i=0; i<n; i++) {
+                for (int i = 0; i < n; i++) {
                     SuggestedAction action = (SuggestedAction) suggestedActions.get(i);
 
-                    List<String> changedWords = getChangedWords(action.getReplacement(), tokenStrings, getCandidatePosition(anomaly, tokens));
+                    List<String> changedWords = getChangedWords(action.getReplacement(),
+                            tokenStrings, getCandidatePosition(anomaly, tokens));
                     
                     double probability = getSentenceProbability(changedWords);
                     
@@ -104,7 +109,9 @@ public class CorrectionsContextualizer
         }
     }
     
-    protected double getSentenceProbability(List<String> words) throws AnalysisEngineProcessException  {
+    protected double getSentenceProbability(List<String> words)
+        throws AnalysisEngineProcessException
+    {
         double sentenceProbability = 0.0;
         
         if (words.size() < 1) {

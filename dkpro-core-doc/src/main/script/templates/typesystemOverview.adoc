@@ -1,9 +1,9 @@
 <%
-import Util;
+import de.tudarmstadt.ukp.dkpro.core.doc.Util;
 %>
 
 .Top-level Types
-[options="header"]
+[options="header", cols="1,2"]
 |====
 |Type|Description
 

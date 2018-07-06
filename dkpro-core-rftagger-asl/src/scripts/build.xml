@@ -17,7 +17,7 @@
 -->
 <project basedir="../.." default="separate-jars">
 	<import>
-		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.7.0/ant-macros.xml"/>
+		<url url="https://raw.githubusercontent.com/dkpro/resource-packager/0.7.0/ant-macros.xml"/>
 	</import>
 
 	<!-- 
@@ -38,11 +38,11 @@
 	<target name="separate-jars" depends="install-executables,models"/>
 	
 	<target name="install-executables">
-		<property name="version.bin" value="20130430.0"/>
+		<property name="version.bin" value="20130430.1"/>
 
 		<mkdir dir="target/download"/>
 
-		<!-- Windows 32 bit -->
+		<!-- Windows 64 bit -->
 		<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/windows-x86_64"/>
 
 		<get 
@@ -60,6 +60,15 @@
 			</patternset>
 			<mapper type="flatten" />
 		</untar>
+    <move 
+       file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/windows-x86_64/rft-annotate.exe"
+       tofile="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/windows-x86_64/rft-annotate"/>
+    <move 
+       file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/windows-x86_64/rft-train.exe"
+       tofile="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/windows-x86_64/rft-train"/>
+        <move 
+           file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/windows-x86_64/rft-print.exe"
+           tofile="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/windows-x86_64/rft-print"/>
 		<delete dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/windows-x86_64"/>
 		<propertyfile
 		    file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/windows-x86_64/manifest.properties">

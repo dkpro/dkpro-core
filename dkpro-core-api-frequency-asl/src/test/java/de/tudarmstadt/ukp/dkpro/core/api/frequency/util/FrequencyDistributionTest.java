@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2011
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,10 +14,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.api.frequency.util;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -37,7 +38,6 @@ public class FrequencyDistributionTest
     @Test
     public void fdTest()
     {
-
         List<String> tokens = Arrays
                 .asList("This is a first test that contains a first test example".split(" "));
 
@@ -75,6 +75,18 @@ public class FrequencyDistributionTest
         FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
         fd.inc(badKey);
     }
+    
+    @Test
+    public void clearTest() {
+        List<String> tokens = Arrays
+                .asList("This is a first test that contains a first test example".split(" "));
+
+        FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
+        fd.incAll(tokens);
+        fd.clear();
+        assertEquals(0L,  fd.getMaxFreq());
+        assertNull(fd.getSampleWithMaxFreq());
+    }
 
     @Test
     public void saveAndLoadFdTest()
@@ -106,7 +118,6 @@ public class FrequencyDistributionTest
     @Test
     public void fdTest_specialToken()
     {
-
         FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
         fd.inc(", ");
         fd.inc(". ");
@@ -128,5 +139,4 @@ public class FrequencyDistributionTest
         assertEquals(1, fd.getCount("\t"));
         assertEquals(1, fd.getCount(",\t"));
     }
-
 }

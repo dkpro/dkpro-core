@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright 2013
+/*
+ * Copyright 2017
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  * 
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
 import java.io.IOException;
@@ -26,6 +26,7 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
@@ -51,6 +52,13 @@ public class ModelProviderBase<M>
         // Nothing to do
     }
 
+    public ModelProviderBase(Object aObject, String aType)
+    {
+        this(aObject,
+                StringUtils.substringAfterLast(aObject.getClass().getPackage().getName(), "."),
+                aType);
+    }
+
     // tag::model-provider-convenience[]
     public ModelProviderBase(Object aObject, String aShortName, String aType)
     {
@@ -59,10 +67,11 @@ public class ModelProviderBase<M>
         setDefault(ARTIFACT_ID, "${groupId}." + aShortName + "-model-" + aType
                 + "-${language}-${variant}");
         setDefault(LOCATION,
-                "classpath:/${package}/lib/"+aType+"-${language}-${variant}.properties");
-        setDefaultVariantsLocation("${package}/lib/"+aType+"-default-variants.map");
+                "classpath:/${package}/lib/" + aType + "-${language}-${variant}.properties");
+        setDefaultVariantsLocation("${package}/lib/" + aType + "-default-variants.map");
         setDefault(VARIANT, "default");
 
+        addAutoOverride(ComponentParameters.PARAM_MODEL_ARTIFACT_URI, ARTIFACT_URI);
         addAutoOverride(ComponentParameters.PARAM_MODEL_LOCATION, LOCATION);
         addAutoOverride(ComponentParameters.PARAM_VARIANT, VARIANT);
         addAutoOverride(ComponentParameters.PARAM_LANGUAGE, LANGUAGE);

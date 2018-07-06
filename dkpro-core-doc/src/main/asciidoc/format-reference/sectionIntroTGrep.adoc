@@ -3,6 +3,5 @@ structures. This module supports in particular TGrep2 and allows to conveniently
 generate TGrep2 indexes which can then be searched. Search is not supported by this
 module.
 
-See also:
-
+.See also
 * link:http://tedlab.mit.edu/%7Edr/Tgrep2/[TGrep2]

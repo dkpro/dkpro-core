@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2012
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -14,15 +14,20 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.mstparser;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertDependencies;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertPOS;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagset;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagsetMapping;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
-import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.fit.util.JCasUtil;
+import java.util.Locale;
+
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
 import org.junit.Ignore;
@@ -32,9 +37,9 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.hunpos.HunPosTagger;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
+import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 /**
  */
@@ -45,28 +50,28 @@ public class MstParserTest
     public void testCroatianMte5Defnpout()
         throws Exception
     {
-        JCas jcas = runTest("hr", "mte5.defnpout", "Moramo vrlo kompliciran primjer rečenicu, "
-                + "koja sadrži što više sastojaka i ovisnosti što je više moguće.");
+        JCas jcas = runTest("hr", "mte5.defnpout", "Moramo vrlo kompliciran primjer rečenicu , "
+                + "koja sadrži što više sastojaka i ovisnosti što je više moguće .");
 
         String[] dependencies = {
-                "[  0,  6]Dependency(Pred) D[0,6](Moramo) G[40,41](,)",
-                "[  7, 11]Dependency(Adv) D[7,11](vrlo) G[12,23](kompliciran)",
-                "[ 12, 23]Dependency(Atr) D[12,23](kompliciran) G[24,31](primjer)",
-                "[ 24, 31]Dependency(Ap) D[24,31](primjer) G[32,40](rečenicu)",
-                "[ 32, 40]Dependency(Sb) D[32,40](rečenicu) G[0,6](Moramo)",
-                "[ 40, 41]Dependency(Punc) D[40,41](,) G[47,53](sadrži)",
-                "[ 42, 46]Dependency(Sb) D[42,46](koja) G[47,53](sadrži)",
-                "[ 47, 53]Dependency(Pred) D[47,53](sadrži) G[47,53](sadrži)",
-                "[ 54, 57]Dependency(Pred) D[54,57](što) G[73,74](i)",
-                "[ 58, 62]Dependency(Oth) D[58,62](više) G[73,74](i)",
-                "[ 63, 72]Dependency(Atr) D[63,72](sastojaka) G[58,62](više)",
-                "[ 73, 74]Dependency(Co) D[73,74](i) G[47,53](sadrži)",
-                "[ 75, 84]Dependency(Pred) D[75,84](ovisnosti) G[73,74](i)",
-                "[ 85, 88]Dependency(Pred) D[85,88](što) G[85,88](što)",
-                "[ 89, 91]Dependency(Pred) D[89,91](je) G[89,91](je)",
-                "[ 92, 96]Dependency(Adv) D[92,96](više) G[97,103](moguće)",
-                "[ 97,103]Dependency(Pnom) D[97,103](moguće) G[89,91](je)",
-                "[103,104]Dependency(Punc) D[103,104](.) G[103,104](.)" };
+                "[  0,  6]Dependency(Pred,basic) D[0,6](Moramo) G[41,42](,)",
+                "[  7, 11]Dependency(Adv,basic) D[7,11](vrlo) G[12,23](kompliciran)",
+                "[ 12, 23]Dependency(Atr,basic) D[12,23](kompliciran) G[24,31](primjer)",
+                "[ 24, 31]Dependency(Ap,basic) D[24,31](primjer) G[32,40](rečenicu)",
+                "[ 32, 40]Dependency(Sb,basic) D[32,40](rečenicu) G[0,6](Moramo)",
+                "[ 41, 42]Dependency(Punc,basic) D[41,42](,) G[48,54](sadrži)",
+                "[ 43, 47]Dependency(Sb,basic) D[43,47](koja) G[48,54](sadrži)",
+                "[ 48, 54]ROOT(Pred,basic) D[48,54](sadrži) G[48,54](sadrži)",
+                "[ 55, 58]Dependency(Pred,basic) D[55,58](što) G[74,75](i)",
+                "[ 59, 63]Dependency(Oth,basic) D[59,63](više) G[74,75](i)",
+                "[ 64, 73]Dependency(Atr,basic) D[64,73](sastojaka) G[59,63](više)",
+                "[ 74, 75]Dependency(Co,basic) D[74,75](i) G[48,54](sadrži)",
+                "[ 76, 85]Dependency(Pred,basic) D[76,85](ovisnosti) G[74,75](i)",
+                "[ 86, 89]ROOT(Pred,basic) D[86,89](što) G[86,89](što)",
+                "[ 90, 92]ROOT(Pred,basic) D[90,92](je) G[90,92](je)",
+                "[ 93, 97]Dependency(Adv,basic) D[93,97](više) G[98,104](moguće)",
+                "[ 98,104]Dependency(Pnom,basic) D[98,104](moguće) G[90,92](je)",
+                "[105,106]ROOT(Punc,basic) D[105,106](.) G[105,106](.)" };
 
         String[] posTags = { "<root-POS>", "Afmnpa-", "Afpfsn-", "Afpmpgy", "Afpmply",
                 "Afpnpgy", "Afpnpn-", "Agcfpn", "Agcfsa", "Agcfsg", "Agcfsi", "Agcfsn", "Agcmpa",
@@ -137,15 +142,23 @@ public class MstParserTest
                 "Yn-sl", "Yn-sn", "Ynfpg", "Ynfsa", "Ynfsd", "Ynfsg", "Ynfsl", "Ynfsn", "Ynmpg",
                 "Ynmpn", "Ynmsa", "Ynmsd", "Ynmsg", "Ynmsi", "Ynmsl", "Ynmsn", "Z" };
 
-        //String[] unmappedPos = { "$", "''", "-LRB-", "-RRB-", "<root-POS>", "``" };
+        //String[] unmappedPosTags = { "$", "''", "-LRB-", "-RRB-", "<root-POS>", "``" };
 
         String[] depTags = { "<no-type>", "Adv", "Ap", "Atr", "Atv", "Aux", "Co",
                 "Elp", "Obj", "Oth", "Pnom", "Pred", "Prep", "Punc", "Sb", "Sub" };
 
-        AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
-        AssertAnnotations.assertTagset(POS.class, "mte5-reduced", posTags, jcas);
-        //AssertAnnotations.assertTagsetMapping(POS.class, "mte5", unmappedPos, jcas);
-        AssertAnnotations.assertTagset(Dependency.class, "setimes.hr", depTags, jcas);
+        String[] posOrig = { "Vmr1p", "Rgp", "Agpmsn", "N-msn", "N-msn", "Z", "Pi-fsn--n-a",
+                "Vmr3s", "Pi3n-a--n-nn", "Sg", "N-mpg", "Cc", "Vmn", "Pi3n-n--n-nn", "Vcr3s", "Rgc",
+                "Agpnsn", "Z" };
+        
+        String[] posMapped = { "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS",
+                "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS" };
+        
+        assertPOS(posMapped, posOrig, select(jcas, POS.class));
+        assertDependencies(dependencies, select(jcas, Dependency.class));
+        assertTagset(MstParser.class, POS.class, "mte5-reduced", posTags, jcas);
+        //assertTagsetMapping(POS.class, "mte5", unmappedPosTags, jcas);
+        assertTagset(MstParser.class, Dependency.class, "setimes.hr", depTags, jcas);
     }
 
     /**
@@ -160,80 +173,88 @@ public class MstParserTest
     public void testCroatianMte5Pos()
         throws Exception
     {
-        JCas jcas = runTest("hr", "mte5.pos", "Moramo vrlo kompliciran primjer rečenicu, "
-                + "koja sadrži što više sastojaka i ovisnosti što je više moguće.");
+        JCas jcas = runTest("hr", "mte5.pos", "Moramo vrlo kompliciran primjer rečenicu , "
+                + "koja sadrži što više sastojaka i ovisnosti što je više moguće .");
 
         String[] dependencies = {
-                "[  0,  6]Dependency(Oth) D[0,6](Moramo) G[12,23](kompliciran)",
-                "[  7, 11]Dependency(Oth) D[7,11](vrlo) G[12,23](kompliciran)",
-                "[ 12, 23]Dependency(Oth) D[12,23](kompliciran) G[24,31](primjer)",
-                "[ 24, 31]Dependency(Oth) D[24,31](primjer) G[32,40](rečenicu)",
-                "[ 32, 40]Dependency(Punc) D[32,40](rečenicu) G[40,41](,)",
-                "[ 40, 41]Dependency(Punc) D[40,41](,) G[47,53](sadrži)",
-                "[ 42, 46]Dependency(Oth) D[42,46](koja) G[47,53](sadrži)",
-                "[ 47, 53]Dependency(Oth) D[47,53](sadrži) G[73,74](i)",
-                "[ 54, 57]Dependency(Oth) D[54,57](što) G[73,74](i)",
-                "[ 58, 62]Dependency(Atr) D[58,62](više) G[73,74](i)",
-                "[ 63, 72]Dependency(Oth) D[63,72](sastojaka) G[58,62](više)",
-                "[ 73, 74]Dependency(Co) D[73,74](i) G[73,74](i)",
-                "[ 75, 84]Dependency(Oth) D[75,84](ovisnosti) G[97,103](moguće)",
-                "[ 85, 88]Dependency(Oth) D[85,88](što) G[97,103](moguće)",
-                "[ 89, 91]Dependency(Oth) D[89,91](je) G[97,103](moguće)",
-                "[ 92, 96]Dependency(Oth) D[92,96](više) G[97,103](moguće)",
-                "[ 97,103]Dependency(Punc) D[97,103](moguće) G[103,104](.)",
-                "[103,104]Dependency(Punc) D[103,104](.) G[103,104](.)" };
+                "[  0,  6]Dependency(Oth,basic) D[0,6](Moramo) G[12,23](kompliciran)",
+                "[  7, 11]Dependency(Oth,basic) D[7,11](vrlo) G[12,23](kompliciran)",
+                "[ 12, 23]Dependency(Oth,basic) D[12,23](kompliciran) G[24,31](primjer)",
+                "[ 24, 31]Dependency(Oth,basic) D[24,31](primjer) G[32,40](rečenicu)",
+                "[ 32, 40]Dependency(Punc,basic) D[32,40](rečenicu) G[41,42](,)",
+                "[ 41, 42]Dependency(Punc,basic) D[41,42](,) G[48,54](sadrži)",
+                "[ 43, 47]Dependency(Oth,basic) D[43,47](koja) G[48,54](sadrži)",
+                "[ 48, 54]Dependency(Oth,basic) D[48,54](sadrži) G[74,75](i)",
+                "[ 55, 58]Dependency(Oth,basic) D[55,58](što) G[74,75](i)",
+                "[ 59, 63]Dependency(Atr,basic) D[59,63](više) G[74,75](i)",
+                "[ 64, 73]Dependency(Oth,basic) D[64,73](sastojaka) G[59,63](više)",
+                "[ 74, 75]ROOT(Co,basic) D[74,75](i) G[74,75](i)",
+                "[ 76, 85]Dependency(Oth,basic) D[76,85](ovisnosti) G[98,104](moguće)",
+                "[ 86, 89]Dependency(Oth,basic) D[86,89](što) G[98,104](moguće)",
+                "[ 90, 92]Dependency(Oth,basic) D[90,92](je) G[98,104](moguće)",
+                "[ 93, 97]Dependency(Oth,basic) D[93,97](više) G[98,104](moguće)",
+                "[ 98,104]Dependency(Punc,basic) D[98,104](moguće) G[105,106](.)",
+                "[105,106]ROOT(Punc,basic) D[105,106](.) G[105,106](.)" };
 
         String[] posTags = { "<root-POS>", "A", "C", "M", "N", "P", "Q", "R", "S",
                 "V", "X", "Y", "Z" };
 
-        //String[] unmappedPos = { "$", "''", "-LRB-", "-RRB-", "<root-POS>", "``" };
+        //String[] unmappedPosTags = { "$", "''", "-LRB-", "-RRB-", "<root-POS>", "``" };
 
         String[] depTags = { "<no-type>", "Adv", "Ap", "Atr", "Atv", "Aux", "Co",
                 "Elp", "Obj", "Oth", "Pnom", "Pred", "Prep", "Punc", "Sb", "Sub" };
 
-        AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
-        AssertAnnotations.assertTagset(POS.class, "mte5-pos", posTags, jcas);
-        //AssertAnnotations.assertTagsetMapping(POS.class, "mte5", unmappedPos, jcas);
-        AssertAnnotations.assertTagset(Dependency.class, "setimes.hr", depTags, jcas);
+        String[] posOrig = { "Vmr1p", "Rgp", "Agpmsn", "N-msn", "N-msn", "Z", "Pi-fsn--n-a",
+                "Vmr3s", "Pi3n-a--n-nn", "Sg", "N-mpg", "Cc", "Vmn", "Pi3n-n--n-nn", "Vcr3s", "Rgc",
+                "Agpnsn", "Z" };
+        
+        String[] posMapped = { "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS",
+                "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS" };
+        
+        assertPOS(posMapped, posOrig, select(jcas, POS.class));
+        assertDependencies(dependencies, select(jcas, Dependency.class));
+        assertTagset(MstParser.class, POS.class, "mte5-pos", posTags, jcas);
+        //assertTagsetMapping(POS.class, "mte5", unmappedPosTags, jcas);
+        assertTagset(MstParser.class, Dependency.class, "setimes.hr", depTags, jcas);
     }
 
     /**
-	 * This method runs the MSTParser for an example sentence and checks if it returns the correct
-	 * annotations. An annotation consists of: dependency type, begin of dependency, end of
-	 * dependency, begin of the head, end of the head
+     * This method runs the MSTParser for an example sentence and checks if it returns the correct
+     * annotations. An annotation consists of: dependency type, begin of dependency, end of
+     * dependency, begin of the head, end of the head
      * 
      * @throws Exception
      *             if an error occurs.
-	 */
-	@Test
-	public void testEnglishDefault()
-		throws Exception
-	{
-	    System.out.printf("Maximum memory: %d%n", Runtime.getRuntime().maxMemory());
+     */
+    @Test
+    public void testEnglishDefault()
+        throws Exception
+    {
+        System.out.printf("Maximum memory: %d%n", Runtime.getRuntime().maxMemory());
         Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 3000000000l);
         
-		JCas jcas = runTest("en", null, "We need a very complicated example sentence , which " +
-	            "contains as many constituents and dependencies as possible .");
+        JCas jcas = runTest("en", null, "We need a very complicated example sentence , which " +
+                "contains as many constituents and dependencies as possible .");
 
         String[] dependencies = {
-                "[  0,  2]Dependency(nsubj) D[0,2](We) G[3,7](need)",
-                "[  3,  7]ROOT(null) D[3,7](need) G[3,7](need)",
-                "[  8,  9]Dependency(det) D[8,9](a) G[35,43](sentence)",
-                "[ 10, 14]Dependency(advmod) D[10,14](very) G[15,26](complicated)",
-                "[ 15, 26]Dependency(amod) D[15,26](complicated) G[35,43](sentence)",
-                "[ 27, 34]Dependency(nn) D[27,34](example) G[35,43](sentence)",
-                "[ 35, 43]Dependency(dobj) D[35,43](sentence) G[3,7](need)",
-                "[ 44, 45]Dependency(punct) D[44,45](,) G[35,43](sentence)",
-                "[ 46, 51]Dependency(nsubj) D[46,51](which) G[52,60](contains)",
-                "[ 52, 60]Dependency(rcmod) D[52,60](contains) G[35,43](sentence)",
-                "[ 61, 63]Dependency(prep) D[61,63](as) G[52,60](contains)",
-                "[ 64, 68]Dependency(amod) D[64,68](many) G[69,81](constituents)",
-                "[ 69, 81]Dependency(pobj) D[69,81](constituents) G[61,63](as)",
-                "[ 82, 85]Dependency(cc) D[82,85](and) G[69,81](constituents)",
-                "[ 86, 98]Dependency(conj) D[86,98](dependencies) G[69,81](constituents)",
-                "[ 99,101]Dependency(dep) D[99,101](as) G[61,63](as)",
-                "[102,110]Dependency(pobj) D[102,110](possible) G[99,101](as)",
-                "[111,112]Dependency(punct) D[111,112](.) G[3,7](need)" };
+                "[  0,  2]Dependency(nsubj,basic) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(null,basic) D[3,7](need) G[3,7](need)",
+                "[  8,  9]Dependency(det,basic) D[8,9](a) G[35,43](sentence)",
+                "[ 10, 14]Dependency(advmod,basic) D[10,14](very) G[15,26](complicated)",
+                "[ 15, 26]Dependency(amod,basic) D[15,26](complicated) G[35,43](sentence)",
+                "[ 27, 34]Dependency(nn,basic) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]Dependency(dobj,basic) D[35,43](sentence) G[3,7](need)",
+                "[ 44, 45]Dependency(punct,basic) D[44,45](,) G[35,43](sentence)",
+                "[ 46, 51]Dependency(nsubj,basic) D[46,51](which) G[52,60](contains)",
+                "[ 52, 60]Dependency(rcmod,basic) D[52,60](contains) G[35,43](sentence)",
+                "[ 61, 63]Dependency(prep,basic) D[61,63](as) G[52,60](contains)",
+                "[ 64, 68]Dependency(amod,basic) D[64,68](many) G[69,81](constituents)",
+                "[ 69, 81]Dependency(pobj,basic) D[69,81](constituents) G[61,63](as)",
+                "[ 82, 85]Dependency(cc,basic) D[82,85](and) G[69,81](constituents)",
+                "[ 86, 98]Dependency(conj,basic) D[86,98](dependencies) G[69,81](constituents)",
+                "[ 99,101]Dependency(dep,basic) D[99,101](as) G[61,63](as)",
+                "[102,110]Dependency(pobj,basic) D[102,110](possible) G[99,101](as)",
+                "[111,112]Dependency(punct,basic) D[111,112](.) G[3,7](need)" };
 
         String[] depTags = { "<no-type>", "abbrev", "acomp", "advcl", "advmod",
                 "amod", "appos", "attr", "aux", "auxpass", "cc", "ccomp", "complm", "conj", "cop",
@@ -248,13 +269,13 @@ public class MstParserTest
                 "SYM", "TO", "UH", "VB", "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$",
                 "WRB", "``" };
 
-        String[] unmappedPos = { "$", "<root-POS>"};
+        String[] unmappedPos = { "<root-POS>"};
 
-        AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
-        AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
-        AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
-        AssertAnnotations.assertTagset(Dependency.class, "stanford", depTags, jcas);
-	}
+        assertDependencies(dependencies, select(jcas, Dependency.class));
+        assertTagset(POS.class, "ptb", posTags, jcas);
+        assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
+        assertTagset(Dependency.class, "stanford", depTags, jcas);
+    }
 
     /**
      * This method runs the MSTParser for an example sentence and checks if it returns the correct
@@ -272,75 +293,62 @@ public class MstParserTest
                 "contains as many constituents and dependencies as possible .");
 
         String[] dependencies = { 
-                "[  0,  2]Dependency(NP-SBJ) D[0,2](We) G[3,7](need)",
-                "[  3,  7]ROOT(ROOT) D[3,7](need) G[3,7](need)",
-                "[  8,  9]Dependency(DEP) D[8,9](a) G[35,43](sentence)",
-                "[ 10, 14]Dependency(DEP) D[10,14](very) G[15,26](complicated)",
-                "[ 15, 26]Dependency(DEP) D[15,26](complicated) G[35,43](sentence)",
-                "[ 27, 34]Dependency(DEP) D[27,34](example) G[35,43](sentence)",
-                "[ 35, 43]Dependency(NP-OBJ) D[35,43](sentence) G[3,7](need)",
-                "[ 44, 45]Dependency(DEP) D[44,45](,) G[3,7](need)",
-                "[ 46, 51]Dependency(SBAR) D[46,51](which) G[3,7](need)",
-                "[ 52, 60]Dependency(S) D[52,60](contains) G[46,51](which)",
-                "[ 61, 63]Dependency(PP) D[61,63](as) G[52,60](contains)",
-                "[ 64, 68]Dependency(DEP) D[64,68](many) G[69,81](constituents)",
-                "[ 69, 81]Dependency(NP) D[69,81](constituents) G[61,63](as)",
-                "[ 82, 85]Dependency(DEP) D[82,85](and) G[86,98](dependencies)",
-                "[ 86, 98]Dependency(NP) D[86,98](dependencies) G[61,63](as)",
-                "[ 99,101]Dependency(PP) D[99,101](as) G[86,98](dependencies)",
-                "[102,110]Dependency(ADJP) D[102,110](possible) G[99,101](as)",
-                "[111,112]Dependency(DEP) D[111,112](.) G[3,7](need)"};
+                "[  0,  2]Dependency(NP-SBJ,basic) D[0,2](We) G[3,7](need)",
+                "[  3,  7]ROOT(ROOT,basic) D[3,7](need) G[3,7](need)",
+                "[  8,  9]Dependency(DEP,basic) D[8,9](a) G[35,43](sentence)",
+                "[ 10, 14]Dependency(DEP,basic) D[10,14](very) G[15,26](complicated)",
+                "[ 15, 26]Dependency(DEP,basic) D[15,26](complicated) G[35,43](sentence)",
+                "[ 27, 34]Dependency(DEP,basic) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]Dependency(NP-OBJ,basic) D[35,43](sentence) G[3,7](need)",
+                "[ 44, 45]Dependency(DEP,basic) D[44,45](,) G[3,7](need)",
+                "[ 46, 51]Dependency(SBAR,basic) D[46,51](which) G[3,7](need)",
+                "[ 52, 60]Dependency(S,basic) D[52,60](contains) G[46,51](which)",
+                "[ 61, 63]Dependency(PP,basic) D[61,63](as) G[52,60](contains)",
+                "[ 64, 68]Dependency(DEP,basic) D[64,68](many) G[69,81](constituents)",
+                "[ 69, 81]Dependency(NP,basic) D[69,81](constituents) G[61,63](as)",
+                "[ 82, 85]Dependency(DEP,basic) D[82,85](and) G[86,98](dependencies)",
+                "[ 86, 98]Dependency(NP,basic) D[86,98](dependencies) G[61,63](as)",
+                "[ 99,101]Dependency(PP,basic) D[99,101](as) G[86,98](dependencies)",
+                "[102,110]Dependency(ADJP,basic) D[102,110](possible) G[99,101](as)",
+                "[111,112]Dependency(DEP,basic) D[111,112](.) G[3,7](need)" };
 
         String[] posTags = { "$", "''", ",", "-LRB-", "-RRB-", ".", ":", "<root-POS>",
                 "CC", "CD", "DT", "FW", "IN", "JJ", "JJR", "JJS", "MD", "NN", "NNP", "NNPS", "NNS",
                 "POS", "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "TO", "VB", "VBD", "VBG", "VBN",
                 "VBP", "VBZ", "WDT", "WP", "WRB", "``" };
 
-        String[] unmappedPos = { "$","<root-POS>"};
+        String[] unmappedPos = { "<root-POS>"};
 
         String[] depTags = { "<no-type>", "ADJP", "ADVP", "CONJP", "DEP", "FRAG",
                 "NAC", "NP", "NP-OBJ", "NP-PRD", "NP-SBJ", "NX", "PP", "PRN", "PRT", "QP", "ROOT",
                 "S", "SBAR", "SINV", "SQ", "UCP", "VP", "WHNP" };
 
-        AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
-        AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
-        AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
-        AssertAnnotations.assertTagset(Dependency.class, "conll2008", depTags, jcas);
+        assertDependencies(dependencies, select(jcas, Dependency.class));
+        assertTagset(POS.class, "ptb", posTags, jcas);
+        assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
+        assertTagset(Dependency.class, "conll2008", depTags, jcas);
     }
 
-    /**
-     * Generates a JCas from the input text and annotates it with dependencies.
-     * 
-     * @param aLanguage
-     *            the text language.
-     * @param aVariant
-     *            the model variant.
-     * @param aText
-     *            the text.
-     * @return the JCas.
-     * @throws Exception
-     *             if an error occurs.
-     */
-	private JCas runTest(String aLanguage, String aVariant, String aText)
-		throws Exception
-	{
-		AnalysisEngineDescription aggregate = createEngineDescription(
-				createEngineDescription(BreakIteratorSegmenter.class),
-				createEngineDescription(HunPosTagger.class),
-				createEngineDescription(MstParser.class, 
-				        MstParser.PARAM_VARIANT, aVariant,
-				        MstParser.PARAM_PRINT_TAGSET, true));
+    private JCas runTest(String aLanguage, String aVariant, String aText, Object... aExtraParams)
+        throws Exception
+    {
+        AssumeResource.assumeResource(MstParser.class, "parser", aLanguage, aVariant);
+        
+        AggregateBuilder aggregate = new AggregateBuilder();
+        
+        Assume.assumeFalse("HunPos currently hangs indefinitely on Windows: Issue #1099",
+                System.getProperty("os.name").toLowerCase(Locale.US).contains("win"));
 
-		AnalysisEngine engine = createEngine(aggregate);
-		JCas jcas = engine.newJCas();
-		jcas.setDocumentLanguage(aLanguage);
-		jcas.setDocumentText(aText);
-		engine.process(jcas);
+        aggregate.add(createEngineDescription(HunPosTagger.class));
+        Object[] params = new Object[] {
+                MstParser.PARAM_VARIANT, aVariant,
+                MstParser.PARAM_PRINT_TAGSET, true};
+        params = ArrayUtils.addAll(params, aExtraParams);
+        aggregate.add(createEngineDescription(MstParser.class, params));
 
-		return jcas;
-	}
+        return TestRunner.runTest(aggregate.createAggregateDescription(), aLanguage, aText);
+    }
 
-    
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
 }

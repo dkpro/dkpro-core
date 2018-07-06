@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright 2011
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -14,7 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ */
 package de.tudarmstadt.ukp.dkpro.core.api.frequency.util;
 
 public class TermFreqTuple<T>
@@ -34,14 +34,17 @@ public class TermFreqTuple<T>
     {
         return key;
     }
+
     public void setKey(T key)
     {
         this.key = key;
     }
+
     public long getFreq()
     {
         return freq;
     }
+
     public void setFreq(long freq)
     {
         this.freq = freq;

@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2014
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util;
 
@@ -32,6 +32,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.tcas.Annotation;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.pos.POSUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -265,11 +266,12 @@ public class StanfordAnnotator
         // create the necessary objects and methods
         Type constType = constituentMappingProvider.getTagType(aConstituentType);
 
-        Constituent constAnno = (Constituent) jCas.getCas().createAnnotation(constType, aBegin, aEnd);
+        Constituent constAnno = (Constituent) jCas.getCas().createAnnotation(constType, aBegin,
+                aEnd);
         constAnno.setConstituentType(aConstituentType);
-		constAnno.setSyntacticFunction(aSyntacticFunction);
-		return constAnno;
-	}
+        constAnno.setSyntacticFunction(aSyntacticFunction);
+        return constAnno;
+    }
 
     /**
      * Creates a new Constituent annotation. Links to parent- and child-annotations are not yet
@@ -293,14 +295,15 @@ public class StanfordAnnotator
 
         // save original (unmapped) postype in feature
         anno.setPosValue(aPosType);
+        POSUtils.assignCoarseValue(anno);
 
         return anno;
     }
 
-    public void createDependencyAnnotation(GrammaticalRelation aDependencyType,
+    public Dependency createDependencyAnnotation(GrammaticalRelation aDependencyType,
             Token aGovernor, Token aDependent)
     {
-        createDependencyAnnotation(jCas, aDependencyType, aGovernor, aDependent);
+        return createDependencyAnnotation(jCas, aDependencyType, aGovernor, aDependent);
     }
     
     /**
@@ -314,9 +317,10 @@ public class StanfordAnnotator
      *            the governing-word
      * @param aDependent
      *            the dependent-word
+     * @return the newly created dependency annotation.
      */
-    public static void createDependencyAnnotation(JCas jCas, GrammaticalRelation aDependencyType,
-            Token aGovernor, Token aDependent)
+    public static Dependency createDependencyAnnotation(JCas jCas,
+            GrammaticalRelation aDependencyType, Token aGovernor, Token aDependent)
     {
         // create the necessary objects and methods
         String dependencyTypeName = DEPPACKAGE + aDependencyType.getShortName().toUpperCase();
@@ -336,6 +340,8 @@ public class StanfordAnnotator
         dep.setBegin(dep.getDependent().getBegin());
         dep.setEnd(dep.getDependent().getEnd());
         dep.addToIndexes();
+        
+        return dep;
     }
 
     /**
