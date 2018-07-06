@@ -21,7 +21,6 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.io.File;
-import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -42,7 +41,7 @@ public class IllinoisPosTaggerTest
         throws Exception
     {
         File tempFile = File.createTempFile("dkpro", ".txt");
-        FileUtils.write(tempFile, "This is a test .", StandardCharsets.UTF_8);
+        FileUtils.write(tempFile, "This is a test .", "UTF-8");
         POSTagPlain.main(new String[] { tempFile.getAbsolutePath() });
     }
     
