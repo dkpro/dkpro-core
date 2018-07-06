@@ -37,6 +37,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBas
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.MetaDataStringField;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Read a Reuters-21578 corpus in SGML format.
@@ -44,6 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
  * Set the directory that contains the SGML files with {@link #PARAM_SOURCE_LOCATION}.
  */
 @ResourceMetaData(name = "Reuters-21578 Corpus SGML Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_REUTERS21578_SGML})
 @TypeCapability(
         outputs = { 

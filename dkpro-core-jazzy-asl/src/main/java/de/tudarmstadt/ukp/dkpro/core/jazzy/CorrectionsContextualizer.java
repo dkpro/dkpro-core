@@ -44,12 +44,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvid
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.ngrams.util.NGramStringIterable;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * This component assumes that some spell checker has already been applied upstream (e.g. Jazzy). It
  * then uses ngram frequencies from a frequency provider in order to rank the provided corrections.
  */
 @ResourceMetaData(name = "Corrections Contextualizer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class CorrectionsContextualizer
     extends JCasAnnotator_ImplBase
 {

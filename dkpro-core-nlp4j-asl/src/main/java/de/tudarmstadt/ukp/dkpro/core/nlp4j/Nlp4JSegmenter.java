@@ -36,11 +36,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 import edu.emory.mathcs.nlp.component.tokenizer.EnglishTokenizer;
 import edu.emory.mathcs.nlp.component.tokenizer.Tokenizer;
 import edu.emory.mathcs.nlp.component.tokenizer.token.Token;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Segmenter using Emory NLP4J.
  */
 @ResourceMetaData(name = "NLP4J Segmenter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         outputs = { 
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",

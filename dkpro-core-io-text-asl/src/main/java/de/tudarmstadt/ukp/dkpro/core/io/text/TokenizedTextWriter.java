@@ -35,6 +35,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGene
 import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * This class writes a set of pre-processed documents into a large text file containing one sentence
@@ -42,6 +43,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
  * are written as specified by {@link #PARAM_FEATURE_PATH}.
  */
 @ResourceMetaData(name = "Tokenized Text Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_PLAIN})
 @TypeCapability(
         inputs = {

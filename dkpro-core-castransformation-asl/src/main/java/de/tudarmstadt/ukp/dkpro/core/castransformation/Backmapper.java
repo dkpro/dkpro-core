@@ -42,6 +42,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.ImmutableInterval;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.Interval;
 import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentStorage;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * After processing a file with the {@code ApplyChangesAnnotator} this annotator
@@ -51,6 +52,7 @@ import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentStorage
  * @see ApplyChangesAnnotator
  */
 @ResourceMetaData(name = "CAS Transformation - Map back")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class Backmapper
     extends JCasAnnotator_ImplBase
 {

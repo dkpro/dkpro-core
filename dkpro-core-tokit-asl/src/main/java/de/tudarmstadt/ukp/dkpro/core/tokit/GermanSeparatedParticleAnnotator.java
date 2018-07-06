@@ -31,6 +31,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -47,6 +48,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.SEGMENTER)
 @ResourceMetaData(name = "German Separated Particle Annotator")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability("de")
 @TypeCapability(
         inputs = {
