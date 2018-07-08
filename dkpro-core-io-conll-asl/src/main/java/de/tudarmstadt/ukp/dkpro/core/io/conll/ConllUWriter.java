@@ -108,6 +108,11 @@ public class ConllUWriter
     @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")
     private boolean writeDependency;
     
+    public static final String PARAM_WRITE_COVERED_TEXT = 
+            ComponentParameters.PARAM_WRITE_COVERED_TEXT;
+    @ConfigurationParameter(name = PARAM_WRITE_COVERED_TEXT, mandatory = true, defaultValue = "true")
+    private boolean writeCovered;
+    
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
@@ -164,6 +169,12 @@ public class ConllUWriter
 
             // Write sentence in CONLL-U format
             for (Row row : ctokens.values()) {
+                
+                String form = row.token.getCoveredText();
+                if (!writeCovered) {
+                    form = row.token.getText();
+                }
+                
                 String lemma = UNUSED;
                 if (writeLemma && (row.token.getLemma() != null)) {
                     lemma = row.token.getLemma().getValue();
@@ -241,7 +252,7 @@ public class ConllUWriter
                 }
                 
                 aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", row.id,
-                        row.token.getCoveredText(), lemma, cpos, pos, feats, head, deprel, deps,
+                        form, lemma, cpos, pos, feats, head, deprel, deps,
                         misc);
             }
 

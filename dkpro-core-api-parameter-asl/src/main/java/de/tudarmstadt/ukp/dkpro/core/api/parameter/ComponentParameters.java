@@ -211,6 +211,8 @@ public final class ComponentParameters
     private static final String TAG_SET = "TagSet";
 
     private static final String MAPPING_LOCATION = "MappingLocation";
+    
+    private static final String COVERED_TEXT = "CoveredText";
 
     // =============================================================================================
     // Enable / disable reading or writing of particular annotation types.
@@ -271,6 +273,8 @@ public final class ComponentParameters
     public static final String PARAM_WRITE_DEPENDENCY = WRITE + DEPENDENCY;
 
     public static final String PARAM_WRITE_NAMED_ENTITY = WRITE + NAMED_ENTITY;
+    
+    public static final String PARAM_WRITE_COVERED_TEXT = WRITE + COVERED_TEXT;
 
     // =============================================================================================
     // Configure tag sets for different kinds of annotations.

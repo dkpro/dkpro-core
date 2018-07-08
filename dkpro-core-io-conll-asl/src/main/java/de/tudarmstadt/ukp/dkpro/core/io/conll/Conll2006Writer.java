@@ -99,6 +99,11 @@ public class Conll2006Writer
     public static final String PARAM_WRITE_DEPENDENCY = ComponentParameters.PARAM_WRITE_DEPENDENCY;
     @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")
     private boolean writeDependency;
+    
+    public static final String PARAM_WRITE_COVERED_TEXT = 
+            ComponentParameters.PARAM_WRITE_COVERED_TEXT;
+    @ConfigurationParameter(name = PARAM_WRITE_COVERED_TEXT, mandatory = true, defaultValue = "true")
+    private boolean writeCovered;
 
     @Override
     public void process(JCas aJCas)
@@ -149,8 +154,13 @@ public class Conll2006Writer
             for (Dependency rel : basicDeps) {
                 Row row =  ctokens.get(rel.getDependent());
                 if (row.deprel != null) {
+                    String form = row.token.getCoveredText();
+                    if (!writeCovered) {
+                        form = row.token.getText();
+                    }
+                    
                     throw new IllegalStateException("Illegal basic dependency structure - token ["
-                            + row.token.getCoveredText()
+                            + form
                             + "] is dependent of more than one dependency.");
                 }
                 row.deprel = rel;
@@ -158,6 +168,11 @@ public class Conll2006Writer
 
             // Write sentence in CONLL 2006 format
             for (Row row : ctokens.values()) {
+                String form = row.token.getCoveredText();
+                if (!writeCovered) {
+                    form = row.token.getText();
+                }
+                
                 String lemma = UNUSED;
                 if (writeLemma && (row.token.getLemma() != null)) {
                     lemma = row.token.getLemma().getValue();
@@ -201,7 +216,7 @@ public class Conll2006Writer
                 String pdeprel = UNUSED;
 
                 aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", row.id,
-                        row.token.getCoveredText(), lemma, cpos, pos, feats, head, deprel, phead,
+                        form, lemma, cpos, pos, feats, head, deprel, phead,
                         pdeprel);
             }
 
