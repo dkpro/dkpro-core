@@ -27,11 +27,11 @@
   </parent>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.lbj-asl</artifactId>
   <packaging>jar</packaging>
-  <name>DKPro Core ASL - Illinois Cognitive Computation Group NLP (v ${illinois-cogcomp-nlp.version})</name>
+  <name>DKPro Core ASL - Illinois Cognitive Computation Group NLP (v ${illinois-cogcomp-nlp.version}) (academic use)</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
-    <illinois-cogcomp-nlp.version>3.0.72</illinois-cogcomp-nlp.version>
-    <maven.surefire.heap>4g</maven.surefire.heap>
+    <illinois-cogcomp-nlp.version>4.0.7</illinois-cogcomp-nlp.version>
+    <maven.surefire.heap>6g</maven.surefire.heap>
   </properties>
   <dependencies>
     <dependency>
@@ -47,6 +47,10 @@
       <artifactId>commons-lang3</artifactId>
     </dependency>
     <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+    </dependency>
+    <dependency>
       <groupId>edu.illinois.cs.cogcomp</groupId>
       <artifactId>illinois-pos</artifactId>
       <version>${illinois-cogcomp-nlp.version}</version>
@@ -54,13 +58,7 @@
     <dependency>
       <groupId>edu.illinois.cs.cogcomp</groupId>
       <artifactId>LBJava</artifactId>
-      <version>1.2.24</version>
-      <exclusions>
-        <exclusion>
-          <artifactId>weka-stable</artifactId>
-          <groupId>nz.ac.waikato.cms.weka</groupId>
-        </exclusion>
-      </exclusions>
+      <version>1.3.0</version>
     </dependency>
     <dependency>
       <groupId>edu.illinois.cs.cogcomp</groupId>
@@ -76,6 +74,12 @@
       <groupId>edu.illinois.cs.cogcomp</groupId>
       <artifactId>illinois-ner</artifactId>
       <version>${illinois-cogcomp-nlp.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>edu.stanford.nlp</groupId>
+          <artifactId>stanford-corenlp</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>edu.illinois.cs.cogcomp</groupId>
@@ -91,15 +95,12 @@
           <artifactId>stanford-corenlp</artifactId>
           <groupId>edu.stanford.nlp</groupId>
         </exclusion>
+        <exclusion>
+          <groupId>mysql</groupId>
+          <artifactId>mysql-connector-java</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
-    <!--
-      <dependency>
-      <groupId>edu.illinois.cs.cogcomp</groupId>
-      <artifactId>illinois-srl</artifactId>
-      <version>5.1.11</version>
-      </dependency>
-    -->
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
@@ -140,11 +141,6 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
