@@ -516,6 +516,11 @@
         <artifactId>de.tudarmstadt.ukp.dkpro.core.textnormalizer-asl</artifactId>
         <version>1.10.0-SNAPSHOT</version>
       </dependency>
+      <dependency>
+        <groupId>org.dkpro.core</groupId>
+        <artifactId>org-dkpro-core-udpipe-asl</artifactId>
+        <version>1.10.0-SNAPSHOT</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <modules>
@@ -622,6 +627,7 @@
     <module>../dkpro-core-tokit-asl</module>
     <module>../dkpro-core-treetagger-asl</module>
     <module>../dkpro-core-textnormalizer-asl</module>
+    <module>../dkpro-core-udpipe-asl</module>
   </modules>
   <profiles>
     <!-- Modules from this profile are not included in the release and in default builds -->
@@ -720,7 +726,6 @@
         <module>../dkpro-core-io-graf-asl</module>
         <!-- Processing modules -->
         <module>../dkpro-core-lbj-asl</module>
-        <module>../dkpro-core-udpipe-asl</module>
       </modules>
       <dependencyManagement>
         <dependencies>

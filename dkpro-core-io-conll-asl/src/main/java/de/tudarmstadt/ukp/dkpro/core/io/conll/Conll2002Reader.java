@@ -123,11 +123,8 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 public class Conll2002Reader
     extends JCasResourceCollectionReader_ImplBase
 {
-
     /**
-     * 
      * Column Separators
-     *
      */
     public enum ColumnSeparators
     {
@@ -211,8 +208,6 @@ public class Conll2002Reader
 
     /**
      * Read named entity information.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_READ_NAMED_ENTITY = 
             ComponentParameters.PARAM_READ_NAMED_ENTITY;
@@ -221,8 +216,6 @@ public class Conll2002Reader
 
     /**
      * Has embedded named entity extra column.
-     *
-     * Default: {@code false}
      */
     public static final String PARAM_HAS_EMBEDDED_NAMED_ENTITY = "hasEmbeddedNamedEntity";
     @ConfigurationParameter(name = PARAM_HAS_EMBEDDED_NAMED_ENTITY, mandatory = false, defaultValue = "false")

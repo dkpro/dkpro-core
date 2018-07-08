@@ -70,10 +70,16 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 public class LanguageToolLemmatizer
     extends JCasAnnotator_ImplBase
 {
+    /**
+     * Remove characters specified in {@link #PARAM_SANTIZE_CHARS} from lemmas.
+     */
     public static final String PARAM_SANITIZE = "sanitize";
     @ConfigurationParameter(name = PARAM_SANITIZE, mandatory = true, defaultValue = "true")
     private boolean sanitize;
     
+    /**
+     * Characters to remove from lemmas if {@link #PARAM_SANITIZE} is enabled.
+     */
     public static final String PARAM_SANTIZE_CHARS = "sanitizeChars";
     @ConfigurationParameter(name = PARAM_SANTIZE_CHARS, mandatory = true, defaultValue = { "(",
             ")", "[", "]" })

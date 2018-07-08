@@ -28,6 +28,9 @@ import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagsetDescription;
 
+/**
+ * Remove tagset description metadata.
+ */
 public class TagsetDescriptionStripper
     extends JCasAnnotator_ImplBase
 {

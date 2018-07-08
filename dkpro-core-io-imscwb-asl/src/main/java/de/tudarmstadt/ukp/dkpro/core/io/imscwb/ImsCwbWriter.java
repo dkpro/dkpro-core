@@ -209,6 +209,9 @@ public class ImsCwbWriter
     @ConfigurationParameter(name = PARAM_CORPUS_NAME, mandatory = true, defaultValue = "corpus")
     private String corpusName;
 
+    /**
+     * The pseudo-XML tag used to mark sentence boundaries.
+     */
     public static final String PARAM_SENTENCE_TAG = "sentenceTag";
     @ConfigurationParameter(name = PARAM_SENTENCE_TAG, mandatory = true, defaultValue = E_SENTENCE)
     private String sentenceTag;

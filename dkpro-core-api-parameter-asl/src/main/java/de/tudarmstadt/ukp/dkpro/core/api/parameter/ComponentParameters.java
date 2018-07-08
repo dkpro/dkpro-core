@@ -196,6 +196,8 @@ public final class ComponentParameters
 
     private static final String NAMED_ENTITY = "NamedEntity";
 
+    private static final String SEMANTIC_PREDICATE = "SemPred";
+
     // =============================================================================================
     // Verbs for parameters
     // =============================================================================================
@@ -246,6 +248,8 @@ public final class ComponentParameters
 
     public static final String PARAM_READ_NAMED_ENTITY = READ + NAMED_ENTITY;
 
+    public static final String PARAM_READ_SEMANTIC_PREDICATE = READ + SEMANTIC_PREDICATE;
+
     public static final String PARAM_WRITE_PARAGRAPH = WRITE + PARAGRAPH;
 
     public static final String PARAM_WRITE_SENTENCE = WRITE + SENTENCE;
@@ -275,6 +279,8 @@ public final class ComponentParameters
     public static final String PARAM_WRITE_NAMED_ENTITY = WRITE + NAMED_ENTITY;
     
     public static final String PARAM_WRITE_COVERED_TEXT = WRITE + COVERED_TEXT;
+
+    public static final String PARAM_WRITE_SEMANTIC_PREDICATE = WRITE + SEMANTIC_PREDICATE;
 
     // =============================================================================================
     // Configure tag sets for different kinds of annotations.

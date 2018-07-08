@@ -45,6 +45,7 @@ public final class MimeTypes
     public final static String APPLICATION_X_NEGRA3 = "application/x.org.dkpro.negra3";
     public final static String APPLICATION_X_NEGRA4 = "application/x.org.dkpro.negra4";
     public final static String APPLICATION_X_NIF_TURTLE = "application/x.org.dkpro.nif+turtle";
+    public final static String APPLICATION_X_NITF_XML = "application/x.org.dkpro.nitf+xml";
     public final static String APPLICATION_X_UIMA_RDF = "application/x.org.dkpro.uima+rdf";
     public final static String APPLICATION_X_REUTERS21578_SGML = "application/x.org.dkpro.reuters21578+sgml";
     public final static String APPLICATION_X_TGREP2 = "application/x.org.dkpro.tgrep2";
@@ -98,6 +99,9 @@ public final class MimeTypes
 
     // LingPipe model types
     public final static String APPLICATION_X_LINGPIPE_NER = "application/x.org.dkpro.core.lingpipe.ner";
+
+    // ArkTweet model types
+    public final static String APPLICATION_X_ARKTWEET_TAGGER = "application/x.org.dkpro.core.arktweet.tagger";
 
     private MimeTypes()
     {

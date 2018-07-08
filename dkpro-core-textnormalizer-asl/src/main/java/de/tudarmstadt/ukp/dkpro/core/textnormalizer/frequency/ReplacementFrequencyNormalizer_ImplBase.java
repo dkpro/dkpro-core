@@ -42,10 +42,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_Im
 public abstract class ReplacementFrequencyNormalizer_ImplBase
     extends JCasTransformerChangeBased_ImplBase
 {
-    public static final String FREQUENCY_PROVIDER = "frequencyProvider";
-    @ExternalResource(key = FREQUENCY_PROVIDER, mandatory = true)
+    /**
+     * Resource providing the frequency counts.
+     */
+    public static final String RES_FREQUENCY_PROVIDER = "frequencyProvider";
+    @ExternalResource(key = RES_FREQUENCY_PROVIDER, mandatory = true)
     protected FrequencyCountProvider frequencyProvider;
     
+    /**
+     * Minimum frequency count.
+     */
     public static final String PARAM_MIN_FREQUENCY_THRESHOLD = "minFrequencyThreshold";
     @ConfigurationParameter(name = PARAM_MIN_FREQUENCY_THRESHOLD, mandatory = true, defaultValue = "100")
     private int minFrequencyThreshold;

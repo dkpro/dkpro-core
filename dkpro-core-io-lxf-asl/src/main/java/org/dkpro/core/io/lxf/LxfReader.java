@@ -38,6 +38,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBas
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
+/**
+ * Reader for the CLARINO LAP LXF format.
+ */
 @ResourceMetaData(name = "CLARINO LAP LXF Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_LXF_JSON})

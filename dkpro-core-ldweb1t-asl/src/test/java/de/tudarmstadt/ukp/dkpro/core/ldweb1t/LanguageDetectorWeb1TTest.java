@@ -62,7 +62,7 @@ public class LanguageDetectorWeb1TTest
                 createEngineDescription(BreakIteratorSegmenter.class), 
                 createEngineDescription(LanguageDetectorWeb1T.class,
                         LanguageDetectorWeb1T.PARAM_MAX_NGRAM_SIZE, 2,
-                        LanguageDetectorWeb1T.PARAM_FREQUENCY_PROVIDER_RESOURCES, resources));
+                        LanguageDetectorWeb1T.RES_FREQUENCY_PROVIDER_RESOURCES, resources));
 
         JCas jcas = JCasFactory.createJCas();
         jcas.setDocumentText("This is an English example.");
