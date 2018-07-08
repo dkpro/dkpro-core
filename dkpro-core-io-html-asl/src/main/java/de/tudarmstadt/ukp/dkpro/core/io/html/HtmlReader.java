@@ -55,12 +55,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reads the contents of a given URL and strips the HTML. Returns the textual contents. Also 
  * recognizes headings and paragraphs.
  */
 @ResourceMetaData(name = "HTML Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_XHTML, MimeTypes.TEXT_HTML})
 @TypeCapability(
         outputs = {

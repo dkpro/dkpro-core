@@ -18,6 +18,8 @@
 package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils.resolveLocation;
+import static java.util.Objects.isNull;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -38,10 +40,11 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
 import java.util.WeakHashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.commons.lang3.time.StopWatch;
 import org.apache.commons.logging.Log;
@@ -148,6 +151,12 @@ public abstract class ResourceObjectProviderBase<M>
     public static final String ARTIFACT_ID = "artifactId";
 
     /**
+     * A URI pointing to the artifact. Currently, this URI expected to be in the format
+     * {@code mvn:${groupId}:${artifactId}:${version}}.
+     */
+    public static final String ARTIFACT_URI = "artifactUri";
+    
+    /**
      * The version of the Maven artifact containing a resource. Variables in the location are
      * resolved when {@link #configure()} is called. (optional)
      */
@@ -204,6 +213,8 @@ public abstract class ResourceObjectProviderBase<M>
     protected void init()
     {
         setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+        setDefault(ARTIFACT_URI,
+                "mvn:${" + GROUP_ID + "}:${" + ARTIFACT_ID + "}:${" + VERSION + "}");
     }
 
     public void setOverride(String aKey, String aValue)
@@ -363,37 +374,21 @@ public abstract class ResourceObjectProviderBase<M>
         }
     }
     
-    /**
-     * Tries to get the version of the required model from the dependency management section of the
-     * Maven POM belonging to the context object.
-     *
-     * @throws IOException
-     *             if there was a problem loading the POM file
-     * @throws FileNotFoundException
-     *             if no POM could be found
-     * @throws IllegalStateException
-     *             if more than one POM was found, if the version information could not be found in
-     *             the POM, or if no context object was set.
-     * @return the version of the required model.
-     */
-    protected String getModelVersionFromMavenPom()
+    protected List<URL> getPomUrlsForClass(String aModelGroup, String aModelArtifact,
+            Class<?> aClass)
         throws IOException
     {
-        if (contextClass == null) {
-            throw new IllegalStateException("No context class specified");
+        if (aClass == null) {
+            throw new IllegalArgumentException("No context class specified");
         }
-
-        // Get the properties and resolve the artifact coordinates
-        Properties props = getAggregatedProperties();
-        String modelArtifact = pph.replacePlaceholders(props.getProperty(ARTIFACT_ID), props);
-        String modelGroup = pph.replacePlaceholders(props.getProperty(GROUP_ID), props);
-
+        
         // Try to determine the location of the POM file belonging to the context object
         URL url = contextClass.getResource(contextClass.getSimpleName() + ".class");
         String classPart = contextClass.getName().replace(".", "/") + ".class";
         String base = url.toString();
         base = base.substring(0, base.length() - classPart.length());
 
+        List<String> lookupPatterns = new ArrayList<>();
         List<URL> urls = new LinkedList<URL>();
 
         String extraNotFoundInfo = "";
@@ -415,27 +410,72 @@ public abstract class ResourceObjectProviderBase<M>
             }
         }
 
+        // If the class is in a JAR (that should be the normal case), try deriving the 
+        // POM location from the JAR file name.
+        if (urls.isEmpty()) {
+            Pattern pattern = Pattern.compile(
+                    ".*/(?<ID>([a-zA-Z0-9-_]+\\.)*[a-zA-Z0-9-_]+)-([0-9]+\\.)*[0-9]+(-[a-zA-Z]+)?\\.jar!/.*");
+            Matcher matcher = pattern.matcher(base);
+            if (matcher.matches()) {
+                String artifactIdAndVersion = matcher.group("ID");
+                String pomPattern = base + "META-INF/maven/" + aModelGroup + "/"
+                        + artifactIdAndVersion + "/pom.xml";
+                lookupPatterns.add(pomPattern);
+                ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+                Resource[] resources = resolver.getResources(pomPattern);
+                for (Resource r : resources) {
+                    urls.add(r.getURL());
+                }
+            }
+        }
+        
+        // Legacy lookup strategy deriving the POM location from the model artifact ID. This
+        // fails if a module is re-using models from another module (e.g. CoreNLP re-using 
+        // models from the StanfordNLP module).
         if (urls.isEmpty()) {
             // This is the default strategy supposed to look in the JAR
-            String moduleArtifactId = modelArtifact.split("-")[0];
-            String pomPattern = base + "META-INF/maven/" + modelGroup + "/" + moduleArtifactId +
+            String moduleArtifactId = aModelArtifact.split("-")[0];
+            String pomPattern = base + "META-INF/maven/" + aModelGroup + "/" + moduleArtifactId +
                     "*/pom.xml";
+            lookupPatterns.add(pomPattern);
             ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
             Resource[] resources = resolver.getResources(pomPattern);
-
-            // Bail out if no POM was found
-            if (resources.length == 0) {
-                throw new FileNotFoundException("No POM file found using [" + pomPattern + "]"
-                        + extraNotFoundInfo);
-            }
 
             for (Resource r : resources) {
                 urls.add(r.getURL());
             }
         }
+        
+        // Bail out if no POM was found
+        if (urls.isEmpty()) {
+            throw new FileNotFoundException("No POM file found using the patterns " + lookupPatterns
+                    + ". " + extraNotFoundInfo);
+        }
+        
+        return urls;
+    }
+    
+    /**
+     * Tries to get the version of the required model from the dependency management section of the
+     * Maven POM belonging to the context object.
+     *
+     * @throws IOException
+     *             if there was a problem loading the POM file
+     * @throws FileNotFoundException
+     *             if no POM could be found
+     * @throws IllegalStateException
+     *             if more than one POM was found, if the version information could not be found in
+     *             the POM, or if no context object was set.
+     * @return the version of the required model.
+     */
+    protected String getModelVersionFromMavenPom(String aModelGroup, String aModelArtifact,
+            Class<?> aClass)
+        throws IOException
+    {
+        List<URL> urls = getPomUrlsForClass(aModelGroup, aModelArtifact, contextClass);
 
         for (URL pomUrl : urls) {
-            // Parser the POM
+            // Parse the POM
             Model model;
             try {
                 MavenXpp3Reader reader = new MavenXpp3Reader();
@@ -451,8 +491,10 @@ public abstract class ResourceObjectProviderBase<M>
                     && (model.getDependencyManagement().getDependencies() != null)) {
                 List<Dependency> deps = model.getDependencyManagement().getDependencies();
                 for (Dependency dep : deps) {
-                    if (StringUtils.equals(dep.getGroupId(), modelGroup)
-                            && StringUtils.equals(dep.getArtifactId(), modelArtifact)) {
+                    if (
+                            StringUtils.equals(dep.getGroupId(), aModelGroup) && 
+                            StringUtils.equals(dep.getArtifactId(), aModelArtifact)
+                    ) {
                         return dep.getVersion();
                     }
                 }
@@ -540,20 +582,13 @@ public abstract class ResourceObjectProviderBase<M>
                 catch (IOException e) {
                     if (modelLocationChanged) {
                         // Try resolving the dependency and adding the stuff to the loader
+                        Properties resolved = props;
                         try {
-                            resolveDependency(props);
-                        }
-                        catch (Throwable re) {
-                            // Ignore - if we cannot resolve, we cannot resolve. Re-throw the
-                            // original exception
-                            throw handleResolvingError(e, lastModelLocation, props);
-                        }
-
-                        try {
+                            resolved = resolveDependency(props);
                             initialUrl = resolveLocation(modelLocation, loader, null);
                         }
                         catch (Throwable re) {
-                            throw handleResolvingError(e, lastModelLocation, props);
+                            throw handleResolvingError(re, lastModelLocation, resolved);
                         }
                     }
                     else {
@@ -728,35 +763,63 @@ public abstract class ResourceObjectProviderBase<M>
      * @throws IOException if dependencies cannot be resolved.
      * @throws IllegalStateException if
      */
-    private void resolveDependency(Properties aProps)
+    private Properties resolveDependency(Properties aProps)
         throws IOException, IllegalStateException
     {
-        Set<String> names = aProps.stringPropertyNames();
-        if (names.contains(ARTIFACT_ID) && names.contains(GROUP_ID)) {
-            String artifactId = pph.replacePlaceholders(aProps.getProperty(ARTIFACT_ID), aProps);
-            String groupId = pph.replacePlaceholders(aProps.getProperty(GROUP_ID), aProps);
-            String version = pph.replacePlaceholders(aProps.getProperty(VERSION, ""), aProps);
-            // Try getting better information about the model version.
+        String artifactUri = null;
+
+        Properties resolved = new Properties(aProps);
+        
+        // Try to get model version from POM if it has not been set explicitly yet
+        if (
+                resolved.getProperty(ARTIFACT_URI, "").contains("${" + VERSION + "}") && 
+                isNull(resolved.getProperty(VERSION))
+        ) {
+            String groupId = pph.replacePlaceholders(aProps.getProperty(GROUP_ID), resolved);
+            String artifactId = pph.replacePlaceholders(aProps.getProperty(ARTIFACT_ID), resolved);
             try {
-                version = getModelVersionFromMavenPom();
+                // If the version is to be auto-detected, then we must have a groupId and artifactId
+                resolved.put(VERSION,
+                        getModelVersionFromMavenPom(groupId, artifactId, contextClass));
             }
-            catch (IOException | IllegalStateException e) {
+            catch (Throwable e) {
+                log.error("Unable to obtain version from POM", e);
                 // Ignore - this will be tried and reported again later by handleResolvingError
             }
+        }
 
-            // Register files with loader
-            try {
-                List<File> files = resolveWithIvy(groupId, artifactId, version);
-                for (File file : files) {
-                    loader.addURL(file.toURI().toURL());
+        // Fetch the artifact URI from the properties
+        Set<String> names = aProps.stringPropertyNames();
+        if (names.contains(ARTIFACT_URI)) {
+            artifactUri = pph.replacePlaceholders(aProps.getProperty(ARTIFACT_URI), resolved);
+        }
+
+        // Register files with loader
+        if (artifactUri != null) {
+            if (artifactUri.startsWith("mvn:")) {
+                try {
+                    String[] parts = artifactUri.split(":");
+                    String groupId = parts[1];
+                    String artifactId = parts[2];
+                    String version = parts[3];
+                    
+                    List<File> files = resolveWithIvy(groupId, artifactId, version);
+                    for (File file : files) {
+                        loader.addURL(file.toURI().toURL());
+                    }
+                }
+                catch (ParseException e) {
+                    throw new IllegalStateException(e);
                 }
             }
-            catch (ParseException e) {
-                throw new IllegalStateException(e);
+            else {
+                throw new IOException("Unknown URI format: [" + artifactUri + "]");
             }
         }
+        
+        return resolved;
     }
-
+    
     protected DependencyResolver getModelResolver()
     {
         IBiblioResolver ukpModels = new IBiblioResolver();
@@ -855,63 +918,52 @@ public abstract class ResourceObjectProviderBase<M>
         StringBuilder sb = new StringBuilder();
 
         Set<String> names = aProps.stringPropertyNames();
-        if (names.contains(ARTIFACT_ID) && names.contains(GROUP_ID)) {
+        if (!aProps.getProperty(ARTIFACT_URI, "").contains("$")) {
+            sb.append("Unable to load the model from the artifact ["
+                    + aProps.getProperty(ARTIFACT_URI) + "]");
+        }
+        else if (names.contains(ARTIFACT_ID) && names.contains(GROUP_ID)) {
+            // Fetch the groupdId/artifactId/version from the properties
             String artifactId = pph.replacePlaceholders(aProps.getProperty(ARTIFACT_ID), aProps);
             String groupId = pph.replacePlaceholders(aProps.getProperty(GROUP_ID), aProps);
             String version = pph.replacePlaceholders(aProps.getProperty(VERSION, ""), aProps);
-
-            // Try getting better information about the model version.
-            String extraErrorInfo = "";
-            try {
-                version = getModelVersionFromMavenPom();
-            }
-            catch (IOException ex) {
-                extraErrorInfo = ExceptionUtils.getRootCauseMessage(ex);
-            }
-            catch (IllegalStateException ex) {
-                extraErrorInfo = ExceptionUtils.getRootCauseMessage(ex);
-            }
-
-            // Tell user how to add model dependency
-            sb.append("\nPlease make sure that [").append(artifactId).append(']');
-            if (StringUtils.isNotBlank(version)) {
-                sb.append(" version [").append(version).append(']');
-            }
-
-            sb.append(" is on the classpath.\n");
-
-            if (StringUtils.isNotBlank(version)) {
-                sb.append("If the version ").append(
-                        "shown here is not available, try a recent version.\n");
-                sb.append('\n');
-                sb.append("If you are using Maven, add the following dependency to your pom.xml file:\n");
-                sb.append('\n');
-                sb.append("<dependency>\n");
-                sb.append("  <groupId>").append(groupId).append("</groupId>\n");
-                sb.append("  <artifactId>").append(artifactId).append("</artifactId>\n");
-                sb.append("  <version>").append(version).append("</version>\n");
-                sb.append("</dependency>\n");
-                sb.append('\n');
-                sb.append("Please consider that the model you are trying to use may not be publicly\n");
-                sb.append("distributable. Please refer to the DKPro Core User Guide for instructions\n");
-                sb.append("on how to package non-redistributable models.");
+            
+            if (isBlank(version)) {
+                sb.append("I was unable to determine which version of the desired model is "
+                        + "compatible with this component.");
             }
             else {
-                sb.append(
-                        "I was unable to determine which version of the desired model is "
-                                + "compatible with this component:\n").append(extraErrorInfo)
-                        .append("\n");
-            }
+                sb.append("\nPlease make sure that [").append(artifactId).append(']');
+                if (StringUtils.isNotBlank(version)) {
+                    sb.append(" version [").append(version).append(']');
+                }
 
+                sb.append(" is on the classpath.\n");
+            }
+            
+            // Tell user how to add model dependency
+            sb.append("If the version shown here is not available, try a recent version.\n");
+            sb.append('\n');
+            sb.append("If you are using Maven, add the following dependency to your pom.xml file:\n");
+            sb.append('\n');
+            sb.append("<dependency>\n");
+            sb.append("  <groupId>").append(groupId).append("</groupId>\n");
+            sb.append("  <artifactId>").append(artifactId).append("</artifactId>\n");
+            sb.append("  <version>").append(version).append("</version>\n");
+            sb.append("</dependency>\n");
+            sb.append('\n');
+            sb.append("Please consider that the model you are trying to use may not be publicly\n");
+            sb.append("distributable. Please refer to the DKPro Core User Guide for instructions\n");
+            sb.append("on how to package non-redistributable models.");
         }
+                                    
 
         if (NOT_REQUIRED.equals(aLocation)) {
-            return new IOException("Unable to load resource: \n"
-                    + ExceptionUtils.getRootCauseMessage(aCause) + "\n" + sb.toString());
+            return new IOException("Unable to load resource: " + sb.toString(), aCause);
         }
         else {
-            return new IOException("Unable to load resource [" + aLocation + "]: \n"
-                    + ExceptionUtils.getRootCauseMessage(aCause) + "\n" + sb.toString());
+            return new IOException("Unable to load resource [" + aLocation + "]: " + sb.toString(),
+                    aCause);
         }
     }
 
@@ -943,6 +995,7 @@ public abstract class ResourceObjectProviderBase<M>
         throws IOException
     {
         Properties defaultValues = new Properties(defaults);
+        
         Properties props = getProperties();
         if (props != null) {
             defaultValues.putAll(props);
@@ -1064,6 +1117,102 @@ public abstract class ResourceObjectProviderBase<M>
                 }
             }
             else if (!url.equals(other.url)) {
+                return false;
+            }
+            return true;
+        }
+    }
+    
+    public static final class ArtifactCoordinates
+    {
+        private String groupId;
+        private String artifactId;
+        private String version;
+        
+        public ArtifactCoordinates(String aGroupId, String aArtifactId, String aVersion)
+        {
+            super();
+            groupId = aGroupId;
+            artifactId = aArtifactId;
+            version = aVersion;
+        }
+
+        public String getGroupId()
+        {
+            return groupId;
+        }
+
+        public void setGroupId(String aGroupId)
+        {
+            groupId = aGroupId;
+        }
+
+        public String getArtifactId()
+        {
+            return artifactId;
+        }
+
+        public void setArtifactId(String aArtifactId)
+        {
+            artifactId = aArtifactId;
+        }
+
+        public String getVersion()
+        {
+            return version;
+        }
+
+        public void setVersion(String aVersion)
+        {
+            version = aVersion;
+        }
+
+        @Override
+        public int hashCode()
+        {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + ((artifactId == null) ? 0 : artifactId.hashCode());
+            result = prime * result + ((groupId == null) ? 0 : groupId.hashCode());
+            result = prime * result + ((version == null) ? 0 : version.hashCode());
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object obj)
+        {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null) {
+                return false;
+            }
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            ArtifactCoordinates other = (ArtifactCoordinates) obj;
+            if (artifactId == null) {
+                if (other.artifactId != null) {
+                    return false;
+                }
+            }
+            else if (!artifactId.equals(other.artifactId)) {
+                return false;
+            }
+            if (groupId == null) {
+                if (other.groupId != null) {
+                    return false;
+                }
+            }
+            else if (!groupId.equals(other.groupId)) {
+                return false;
+            }
+            if (version == null) {
+                if (other.version != null) {
+                    return false;
+                }
+            }
+            else if (!version.equals(other.version)) {
                 return false;
             }
             return true;

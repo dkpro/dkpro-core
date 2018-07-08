@@ -40,11 +40,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Penn Treebank combined format reader.
  */
 @ResourceMetaData(name = "Penn Treebank Combined Format Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_PTB_COMBINED})
 @TypeCapability(
         outputs = { 
@@ -85,8 +87,6 @@ public class PennTreebankCombinedReader
     /**
      * Sets whether to create or not to create POS tags. The creation of
      * constituent tags must be turned on for this to work.
-     *
-     * <p>Default: {@code true}</p>
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
@@ -112,19 +112,15 @@ public class PennTreebankCombinedReader
     protected String constituentMappingLocation;
 
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * <p>Default: {@code true}</p>
+     * Whether to remove traces from the parse tree.
      */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
-    
     public static final String PARAM_REMOVE_TRACES = "removeTraces";
     @ConfigurationParameter(name = PARAM_REMOVE_TRACES, mandatory = false, defaultValue = "true")
     private boolean removeTraces;
     
+    /**
+     * Whether to render traces into the document text.
+     */
     public static final String PARAM_WRITE_TRACES_TO_TEXT = "writeTracesToText";
     @ConfigurationParameter(name = PARAM_WRITE_TRACES_TO_TEXT, mandatory = false, defaultValue = "false")
     private boolean writeTracesToText;
@@ -151,7 +147,6 @@ public class PennTreebankCombinedReader
                 constituentMappingLocation, constituentTagset, getLanguage());
         
         converter = new PennTreeToJCasConverter(posMappingProvider, constituentMappingProvider);
-        converter.setInternTags(internTags);
         converter.setWriteTracesToText(writeTracesToText);
         converter.setCreatePosTags(createPosTags);
     }

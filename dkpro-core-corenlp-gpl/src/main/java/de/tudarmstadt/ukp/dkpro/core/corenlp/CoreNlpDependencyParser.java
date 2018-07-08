@@ -52,6 +52,7 @@ import edu.stanford.nlp.pipeline.DependencyParseAnnotator;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.trees.GrammaticalStructure;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -59,6 +60,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.DEPENDENCY_PARSER)
 @ResourceMetaData(name = "CoreNLP Dependency Parser")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -71,8 +73,6 @@ public class CoreNlpDependencyParser
 {
     /**
      * Log the tag set(s) when a model is loaded.
-     *
-     * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
@@ -93,6 +93,20 @@ public class CoreNlpDependencyParser
     @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
     private String variant;
 
+    /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
     /**
      * Location from which the model is read.
      */
@@ -116,25 +130,24 @@ public class CoreNlpDependencyParser
     private String dependencyMappingLocation;
     
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code false}
+     * Maximum sentence length. Longer sentences are skipped.
      */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internStrings;
-
     public static final String PARAM_MAX_SENTENCE_LENGTH = 
             ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
     @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = true, defaultValue = "2147483647")
     private int maxSentenceLength;
     
+    /**
+     * Number of parallel threads to use.
+     */
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
     @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, 
             defaultValue = ComponentParameters.AUTO_NUM_THREADS)
     private int numThreads;
 
+    /**
+     * Maximum time to spend on a single sentence.
+     */
     public static final String PARAM_MAX_TIME = "maxTime";
     @ConfigurationParameter(name = PARAM_MAX_TIME, mandatory = true, defaultValue = "-1")
     private int maxTime;
@@ -164,6 +177,9 @@ public class CoreNlpDependencyParser
     @ConfigurationParameter(name = PARAM_QUOTE_END, mandatory = false)
     private List<String> quoteEnd;
     
+    /**
+     * Types of extra edges to add to the dependency tree.
+     */
     public static final String PARAM_EXTRA_DEPENDENCIES = "extraDependencies";
     @ConfigurationParameter(name = PARAM_EXTRA_DEPENDENCIES, mandatory = true, 
             defaultValue = "NONE")
@@ -209,7 +225,7 @@ public class CoreNlpDependencyParser
         annotatorProvider.getResource().annotate(document);
         
         // Transfer back into the CAS
-        CoreNlp2DKPro.convertDependencies(aJCas, document, mappingProvider, internStrings);
+        CoreNlp2DKPro.convertDependencies(aJCas, document, mappingProvider);
     }
 
     private class CoreNlpDependencyParserModelProvider

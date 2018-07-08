@@ -32,6 +32,13 @@
   <packaging>jar</packaging>
   <name>DKPro Core GPL - IO - CERMINE</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
+  <licenses>
+    <license>
+      <name>GNU Affero General Public License v3.0 or later</name>
+      <url>https://www.gnu.org/licenses/agpl.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
   <dependencies>
     <!-- CERMINE -->
     <dependency>
@@ -67,6 +74,10 @@
     <dependency>
       <groupId>org.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>eu.openminted.share.annotations</groupId>
+      <artifactId>omtd-share-annotations-api</artifactId>
     </dependency>
 
     <!-- JDOM -->

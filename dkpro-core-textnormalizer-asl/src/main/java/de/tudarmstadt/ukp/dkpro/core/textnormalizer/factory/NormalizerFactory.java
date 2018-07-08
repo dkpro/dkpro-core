@@ -69,7 +69,7 @@ public class NormalizerFactory
         ab.add(createEngineDescription(BreakIteratorSegmenter.class), 
                 CAS.NAME_DEFAULT_SOFA, getSourceView());
         ab.add(createEngineDescription(    SharpSNormalizer.class,
-                SharpSNormalizer.FREQUENCY_PROVIDER, aFrequencyProvider,
+                SharpSNormalizer.RES_FREQUENCY_PROVIDER, aFrequencyProvider,
                 SharpSNormalizer.PARAM_MIN_FREQUENCY_THRESHOLD, aMinFrequency), 
                 CAS.NAME_DEFAULT_SOFA, getSourceView());
         ab.add(createEngineDescription(ApplyChangesAnnotator.class), 
@@ -109,7 +109,7 @@ public class NormalizerFactory
         ab.add(createEngineDescription(BreakIteratorSegmenter.class), 
                 CAS.NAME_DEFAULT_SOFA, getSourceView());
         ab.add(createEngineDescription(ExpressiveLengtheningNormalizer.class,
-                ExpressiveLengtheningNormalizer.FREQUENCY_PROVIDER, aFrequencyProvider), 
+                ExpressiveLengtheningNormalizer.RES_FREQUENCY_PROVIDER, aFrequencyProvider), 
                 CAS.NAME_DEFAULT_SOFA, getSourceView());
         ab.add(createEngineDescription(ApplyChangesAnnotator.class), 
                 ApplyChangesAnnotator.VIEW_SOURCE, getSourceView(), 
@@ -128,7 +128,7 @@ public class NormalizerFactory
         ab.add(createEngineDescription(BreakIteratorSegmenter.class), 
                 CAS.NAME_DEFAULT_SOFA, getSourceView());
         ab.add(createEngineDescription(CapitalizationNormalizer.class, 
-                CapitalizationNormalizer.FREQUENCY_PROVIDER, aFrequencyProvider), 
+                CapitalizationNormalizer.RES_FREQUENCY_PROVIDER, aFrequencyProvider), 
                 CAS.NAME_DEFAULT_SOFA, getSourceView());
         ab.add(createEngineDescription(ApplyChangesAnnotator.class), 
                 ApplyChangesAnnotator.VIEW_SOURCE, getSourceView(), 

@@ -32,6 +32,6 @@ public class IllinoisStatefulSegmenterTest
     {
         AnalysisEngineDescription aed = createEngineDescription(IllinoisStatefulSegmenter.class);
 
-        SegmenterHarness.run(aed, "de.4", "en.9", "ar.1", "zh.1", "zh.2");
+        SegmenterHarness.run(aed, "de.4", "en.1", "en.9", "ar.1", "zh.1", "zh.2");
     }
 }

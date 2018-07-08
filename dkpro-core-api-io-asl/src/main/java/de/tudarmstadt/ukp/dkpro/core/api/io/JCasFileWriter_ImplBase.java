@@ -41,7 +41,19 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.Parameters;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
+/**
+ * Base class for writers that write to the file system.
+ */
+@Component(OperationType.WRITER)
+@Parameters(
+        exclude = { 
+                JCasFileWriter_ImplBase.PARAM_TARGET_LOCATION,
+                JCasFileWriter_ImplBase.PARAM_SINGULAR_TARGET,
+                JCasFileWriter_ImplBase.PARAM_OVERWRITE })
 public abstract class JCasFileWriter_ImplBase
     extends JCasConsumer_ImplBase
 {

@@ -48,6 +48,7 @@ import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -62,6 +63,8 @@ import edu.stanford.nlp.ie.crf.CRFClassifier;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.sequences.SeqClassifierFlags;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.Parameters;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -69,7 +72,16 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.TRAINER_OF_MACHINE_LEARNING_MODELS)
 @MimeTypeCapability(MimeTypes.APPLICATION_X_STANFORDNLP_NER)
+@Parameters(
+        exclude = { 
+                StanfordNamedEntityRecognizerTrainer.PARAM_TARGET_LOCATION  })
 @ResourceMetaData(name = "CoreNLP Named Entity Recognizer Trainer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
+@TypeCapability(
+        inputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" })
 public class StanfordNamedEntityRecognizerTrainer
         extends JCasConsumer_ImplBase {
 
@@ -98,11 +110,10 @@ public class StanfordNamedEntityRecognizerTrainer
     @ConfigurationParameter(name = PARAM_ACCEPTED_TAGS_REGEX, mandatory = false)
     protected String acceptedTagsRegex;
 
-    /*
-     * Label set to use for training. Options: IOB1, IOB2, IOE1, IOE2, SBIEO, IO, BIO, BILOU,
-     * noprefix
-     *
-     * Default: noprefix
+    /**
+     * Label set to use for training. 
+     * <p>
+     * Options: IOB1, IOB2, IOE1, IOE2, SBIEO, IO, BIO, BILOU, noprefix
      */
     public static final String PARAM_LABEL_SET = "entitySubClassification";
     @ConfigurationParameter(name = PARAM_LABEL_SET, mandatory = false, defaultValue = "noprefix")
@@ -110,7 +121,7 @@ public class StanfordNamedEntityRecognizerTrainer
 
     /**
      * Flag to keep the label set specified by PARAM_LABEL_SET. If set to false, representation is
-     * mapped to IOB1 on output. Default: true
+     * mapped to IOB1 on output.
      */
     public static final String PARAM_RETAIN_CLASS = "retainClassification";
     @ConfigurationParameter(name = PARAM_RETAIN_CLASS, mandatory = false, defaultValue = "true")

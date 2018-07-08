@@ -68,20 +68,25 @@ import edu.berkeley.nlp.PCFGLA.TreeAnnotations;
 import edu.berkeley.nlp.syntax.Tree;
 import edu.berkeley.nlp.util.Numberer;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
- * Berkeley Parser annotator . Requires {@link Sentence}s to be annotated before.
+ * Berkeley Parser annotator. Requires {@link Sentence}s to be annotated before.
  *
  * @see CoarseToFineMaxRuleParser
  */
 @Component(OperationType.CONSTITUENCY_PARSER)
 @ResourceMetaData(name = "Berkeley Parser")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @OperationalProperties(multipleDeploymentAllowed = false)
-@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = {
-        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
-        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree" })
+@TypeCapability(
+        inputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, 
+        outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree" })
 public class BerkeleyParser
     extends JCasAnnotator_ImplBase
 {
@@ -99,6 +104,20 @@ public class BerkeleyParser
     @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
     protected String variant;
 
+    /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
     /**
      * Load the model from this location instead of locating the model automatically.
      */
@@ -123,19 +142,7 @@ public class BerkeleyParser
     protected String constituentMappingLocation;
 
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid spaming
-     * the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
-
-    /**
      * Log the tag set(s) when a model is loaded.
-     *
-     * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
@@ -144,8 +151,6 @@ public class BerkeleyParser
     /**
      * Sets whether to use or not to use already existing POS tags from another annotator for the
      * parsing process.
-     * <p>
-     * Default: {@code false}
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
@@ -154,8 +159,6 @@ public class BerkeleyParser
     /**
      * Sets whether to create or not to create POS tags. The creation of constituent tags must be
      * turned on for this to work.
-     * <p>
-     * Default: {@code true}
      */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
     @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "false")
@@ -164,8 +167,6 @@ public class BerkeleyParser
     /**
      * If this parameter is set to true, each sentence is annotated with a PennTree-Annotation,
      * containing the whole parse tree in Penn Treebank style format.
-     * <p>
-     * Default: {@code false}
      */
     public static final String PARAM_WRITE_PENN_TREE = ComponentParameters.PARAM_WRITE_PENN_TREE;
     @ConfigurationParameter(name = PARAM_WRITE_PENN_TREE, mandatory = true, defaultValue = "false")
@@ -173,8 +174,6 @@ public class BerkeleyParser
 
     /**
      * Compute Viterbi derivation instead of max-rule tree.
-     * <p>
-     * Default: {@code false} (max-rule)
      */
     public static final String PARAM_VITERBI = "viterbi";
     @ConfigurationParameter(name = PARAM_VITERBI, mandatory = true, defaultValue = "false")
@@ -182,8 +181,6 @@ public class BerkeleyParser
 
     /**
      * Output sub-categories (only for binarized Viterbi trees).
-     * <p>
-     * Default: {@code false}
      */
     public static final String PARAM_SUBSTATES = "substates";
     @ConfigurationParameter(name = PARAM_SUBSTATES, mandatory = true, defaultValue = "false")
@@ -191,17 +188,13 @@ public class BerkeleyParser
 
     /**
      * Output inside scores (only for binarized viterbi trees).
-     * <p>
-     * Default: {@code false}
      */
     public static final String PARAM_SCORES = "scores";
     @ConfigurationParameter(name = PARAM_SCORES, mandatory = true, defaultValue = "false")
     private boolean scores;
 
     /**
-     * Set thresholds for accuracy.
-     * <p>
-     * Default: {@code false} (set thresholds for efficiency)
+     * Set thresholds for accuracy instead of efficiency.
      */
     public static final String PARAM_ACCURATE = "accurate";
     @ConfigurationParameter(name = PARAM_ACCURATE, mandatory = true, defaultValue = "false")
@@ -209,8 +202,6 @@ public class BerkeleyParser
 
     /**
      * Use variational rule score approximation instead of max-rule
-     * <p>
-     * Default: {@code false}
      */
     public static final String PARAM_VARIATIONAL = "variational";
     @ConfigurationParameter(name = PARAM_VARIATIONAL, mandatory = true, defaultValue = "false")
@@ -218,8 +209,6 @@ public class BerkeleyParser
 
     /**
      * Retain predicted function labels. Model must have been trained with function labels.
-     * <p>
-     * Default: {@code false}
      */
     public static final String PARAM_KEEP_FUNCTION_LABELS = "keepFunctionLabels";
     @ConfigurationParameter(name = PARAM_KEEP_FUNCTION_LABELS, mandatory = true, defaultValue = "false")
@@ -227,8 +216,6 @@ public class BerkeleyParser
 
     /**
      * Output binarized trees.
-     * <p>
-     * Default: {@code false}
      */
     public static final String PARAM_BINARIZE = "binarize";
     @ConfigurationParameter(name = PARAM_BINARIZE, mandatory = true, defaultValue = "false")
@@ -326,7 +313,7 @@ public class BerkeleyParser
                 Type posTag = posMappingProvider.getTagType(typeName);
                 POS posAnno = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                         token.getEnd());
-                posAnno.setPosValue(internTags ? typeName.intern() : typeName);
+                posAnno.setPosValue(typeName != null ? typeName.intern() : null);
                 POSUtils.assignCoarseValue(posAnno);
                 posAnno.addToIndexes();
                 token.setPos(posAnno);

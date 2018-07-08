@@ -37,6 +37,10 @@
   </properties>
   <dependencies>
     <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.apache.uima</groupId>
       <artifactId>uimaj-core</artifactId>
     </dependency>
@@ -48,6 +52,10 @@
       <groupId>edu.cmu.cs</groupId>
       <artifactId>ark-tweet-nlp</artifactId>
       <version>${arktweet.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</artifactId>
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>

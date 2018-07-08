@@ -41,6 +41,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 
@@ -61,6 +62,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.STEMMER)
 @ResourceMetaData(name = "CIS Stemmer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability({ "de" })
 @TypeCapability(
         outputs = {

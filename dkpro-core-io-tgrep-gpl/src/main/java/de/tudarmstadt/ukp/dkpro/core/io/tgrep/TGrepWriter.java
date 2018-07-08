@@ -37,6 +37,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
@@ -48,11 +49,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.RuntimeProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
+import eu.openminted.share.annotations.api.Parameters;
 
 /**
  * TGrep2 corpus file writer. Requires {@link PennTree}s to be annotated before.
  */
+@ResourceMetaData(name = "TGrep2 Writer")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_TGREP2})
+@Parameters(
+        exclude = { 
+                TGrepWriter.PARAM_TARGET_LOCATION  })
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree"})
@@ -69,8 +75,6 @@ public class TGrepWriter
     /**
      * Set this parameter to true if you want to add a comment to each PennTree which is written to
      * the output files. The comment is of the form {@code documentId,beginOffset,endOffset}.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_WRITE_COMMENTS = "writeComments";
     @ConfigurationParameter(name = PARAM_WRITE_COMMENTS, mandatory = true, defaultValue = "true")
@@ -78,8 +82,6 @@ public class TGrepWriter
 
     /**
      * Set this parameter to true if you want to encode directly into the tgrep2 binary format.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_WRITE_T2C = "writeT2c";
     @ConfigurationParameter(name = PARAM_WRITE_T2C, mandatory = true, defaultValue = "true")
@@ -89,8 +91,6 @@ public class TGrepWriter
      * Method to compress the tgrep file (only used if PARAM_WRITE_T2C is true). Only NONE, GZIP and
      * BZIP2 are supported.
      *
-     * Default: {@link CompressionMethod#NONE}
-     *
      * @see CompressionMethod
      */
     public static final String PARAM_COMPRESSION = "compression";
@@ -99,8 +99,6 @@ public class TGrepWriter
 
     /**
      * If true, silently drops malformed Penn Trees instead of throwing an exception.
-     *
-     * Default: {@code false}
      */
     public static final String PARAM_DROP_MALFORMED_TREES = "dropMalformedTrees";
     @ConfigurationParameter(name = PARAM_DROP_MALFORMED_TREES, mandatory = true, defaultValue = "false")

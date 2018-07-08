@@ -70,7 +70,7 @@ public class SemanticFieldAnnotatorTest
                         SemanticFieldAnnotator.class,
                         SemanticFieldAnnotator.PARAM_ANNOTATION_TYPE, Token.class,
                         SemanticFieldAnnotator.PARAM_CONSTRAINT, ".[pos/posValue = 'NN']",
-                        SemanticFieldAnnotator.PARAM_SEMANTIC_FIELD_RESOURCE,
+                        SemanticFieldAnnotator.RES_SEMANTIC_FIELD_RESOURCE,
                         createExternalResourceDescription(SemanticTagResource.class,
                                 SemanticTagResource.PARAM_RESOURCE_PATH,
                                 "src/test/resources/nounSemanticFieldMapTest.txt")));

@@ -34,11 +34,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Penn Treebank combined format writer.
  */
 @ResourceMetaData(name = "Penn Treebank Combined Format Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_PTB_COMBINED})
 @TypeCapability(
         inputs = { 
@@ -68,10 +70,17 @@ public class PennTreebankCombinedWriter
             defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
     
+    /**
+     * Whether to force the root label to be empty.
+     */
     public static final String PARAM_EMPTY_ROOT_LABEL = "emptyRootLabel";
     @ConfigurationParameter(name = PARAM_EMPTY_ROOT_LABEL, mandatory = true, defaultValue = "false")
     private boolean emptyRootLabel;
 
+    /**
+     * Whether to remove the root node. This is only possible if the root node has only a single
+     * child (i.e. a sentence node).
+     */
     public static final String PARAM_NO_ROOT_LABEL = "noRootLabel";
     @ConfigurationParameter(name = PARAM_NO_ROOT_LABEL, mandatory = true, defaultValue = "false")
     private boolean noRootLabel = false;

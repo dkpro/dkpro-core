@@ -23,6 +23,8 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
+import java.io.File;
+
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
@@ -68,8 +70,10 @@ public class OpenNlpPosTaggerTest
     public void testEnglishAutoLoad()
         throws Exception
     {
+        File testOutput = testContext.getTestOutputFolder();
+        
         String oldModelCache = System.setProperty(ResourceObjectProviderBase.PROP_REPO_CACHE, 
-                "target/test-output/models");
+                new File(testOutput, "models").getPath());
         String oldOfflineMode = System.setProperty(ResourceObjectProviderBase.PROP_REPO_OFFLINE, 
                 ResourceObjectProviderBase.FORCE_AUTO_LOAD);
         
@@ -95,6 +99,47 @@ public class OpenNlpPosTaggerTest
         }
     }
 
+    @Test
+    public void testEnglishManualURI()
+        throws Exception
+    {
+        File testOutput = testContext.getTestOutputFolder();
+        
+        String oldModelCache = System.setProperty(ResourceObjectProviderBase.PROP_REPO_CACHE, 
+                new File(testOutput, "models").getPath());
+        String oldOfflineMode = System.setProperty(ResourceObjectProviderBase.PROP_REPO_OFFLINE, 
+                ResourceObjectProviderBase.FORCE_AUTO_LOAD);
+        
+        try {
+            TestRunner.autoloadModelsOnNextTestRun();
+            
+            String[] tagClasses = { "POS_DET", "POS_VERB", "POS_DET", "POS_NOUN", "POS_PUNCT" };
+            String[] tags = { "DT",   "VBZ", "DT",  "NN",   "." };
+            
+            AnalysisEngine engine = createEngine(OpenNlpPosTagger.class,
+                    OpenNlpPosTagger.PARAM_MODEL_ARTIFACT_URI, "mvn:de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent:20120616.1",
+                    OpenNlpPosTagger.PARAM_VARIANT, "maxent",
+                    OpenNlpPosTagger.PARAM_PRINT_TAGSET, true);
+
+            JCas jcas = TestRunner.runTest(engine, "en", "This is a test .");
+
+            AssertAnnotations.assertPOS(tagClasses, tags, select(jcas, POS.class));
+        }
+        finally {
+            if (oldModelCache != null) {
+                System.setProperty(ResourceObjectProviderBase.PROP_REPO_CACHE, oldModelCache);
+            }
+            else {
+                System.getProperties().remove(ResourceObjectProviderBase.PROP_REPO_CACHE);
+            }
+            if (oldOfflineMode != null) {
+                System.setProperty(ResourceObjectProviderBase.PROP_REPO_OFFLINE, oldOfflineMode);
+            }
+            else {
+                System.getProperties().remove(ResourceObjectProviderBase.PROP_REPO_OFFLINE);
+            }
+        }
+    }
     @Test
     public void testEnglish()
         throws Exception

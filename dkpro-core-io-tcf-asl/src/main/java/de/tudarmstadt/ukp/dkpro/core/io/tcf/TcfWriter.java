@@ -75,11 +75,13 @@ import eu.clarin.weblicht.wlfxb.tc.api.TokensLayer;
 import eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusLayerTag;
 import eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusStored;
 import eu.clarin.weblicht.wlfxb.xb.WLData;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Writer for the WebLicht TCF format.
  */
 @ResourceMetaData(name = "CLARIN-DE WebLicht TCF Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_TCF})
 @TypeCapability(
         inputs = { 
@@ -108,16 +110,14 @@ public class TcfWriter
 
     /**
      * If there are no annotations for a particular layer in the CAS, preserve any potentially
-     * existing annotations in the original TCF.<br>
-     * Default: {@code false}
+     * existing annotations in the original TCF.
      */
     public static final String PARAM_PRESERVE_IF_EMPTY = "preserveIfEmpty";
     @ConfigurationParameter(name = PARAM_PRESERVE_IF_EMPTY, mandatory = true, defaultValue = "false")
     private boolean preserveIfEmpty;
     
     /**
-     * Merge with source TCF file if one is available.<br>
-     * Default: {@code true}
+     * Merge with source TCF file if one is available.
      */
     public static final String PARAM_MERGE = "merge";
     @ConfigurationParameter(name = PARAM_MERGE, mandatory = true, defaultValue = "true")
