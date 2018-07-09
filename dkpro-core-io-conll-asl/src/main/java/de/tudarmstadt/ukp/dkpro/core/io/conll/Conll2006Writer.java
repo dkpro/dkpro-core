@@ -118,6 +118,9 @@ public class Conll2006Writer
     @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")
     private boolean writeDependency;
     
+    /**
+     * Write text covered by the token instead of the token form.
+     */
     public static final String PARAM_WRITE_COVERED_TEXT = 
             ComponentParameters.PARAM_WRITE_COVERED_TEXT;
     @ConfigurationParameter(name = PARAM_WRITE_COVERED_TEXT, mandatory = true, defaultValue = "true")
