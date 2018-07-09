@@ -67,6 +67,9 @@ public class SerializedCasWriter
     @ConfigurationParameter(name = PARAM_TYPE_SYSTEM_LOCATION, mandatory = false)
     private String typeSystemLocation;
 
+    /**
+     * Use this filename extension.
+     */
     public static final String PARAM_FILENAME_EXTENSION = 
             ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".ser")

@@ -59,8 +59,11 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 public class SemanticFieldAnnotator
     extends JCasAnnotator_ImplBase
 {
-    public static final String PARAM_SEMANTIC_FIELD_RESOURCE = "semanticFieldResource";
-    @ExternalResource(key = PARAM_SEMANTIC_FIELD_RESOURCE)
+    /**
+     * The semantic resource to use.
+     */
+    public static final String RES_SEMANTIC_FIELD_RESOURCE = "semanticFieldResource";
+    @ExternalResource(key = RES_SEMANTIC_FIELD_RESOURCE)
     private SemanticTagResource semanticFieldResource;
 
     // TODO a parameter for the language would be good

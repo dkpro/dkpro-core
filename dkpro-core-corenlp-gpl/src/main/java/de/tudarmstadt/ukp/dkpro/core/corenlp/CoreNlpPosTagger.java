@@ -67,8 +67,6 @@ public class CoreNlpPosTagger
 {
     /**
      * Log the tag set(s) when a model is loaded.
-     *
-     * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
@@ -127,6 +125,9 @@ public class CoreNlpPosTagger
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     private String posMappingLocation;
 
+    /**
+     * Maximum sentence length. Longer sentences are skipped.
+     */
     public static final String PARAM_MAX_SENTENCE_LENGTH = 
             ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
     @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = true, defaultValue = "2147483647")

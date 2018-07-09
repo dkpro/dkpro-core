@@ -76,8 +76,6 @@ public class Web1TWriter
 
     /**
      * Minimum n-gram length.
-     *
-     * Default: {@code 1}
      */
     public static final String PARAM_MIN_NGRAM_LENGTH = "minNgramLength";
     @ConfigurationParameter(name = PARAM_MIN_NGRAM_LENGTH, mandatory = false, defaultValue = "1")
@@ -85,8 +83,6 @@ public class Web1TWriter
 
     /**
      * Maximum n-gram length.
-     *
-     * Default: {@code 3}
      */
     public static final String PARAM_MAX_NGRAM_LENGTH = "maxNgramLength";
     @ConfigurationParameter(name = PARAM_MAX_NGRAM_LENGTH, mandatory = false, defaultValue = "3")

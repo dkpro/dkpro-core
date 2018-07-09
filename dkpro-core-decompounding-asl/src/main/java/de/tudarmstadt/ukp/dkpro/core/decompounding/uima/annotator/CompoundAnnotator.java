@@ -65,21 +65,20 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 public class CompoundAnnotator
     extends JCasAnnotator_ImplBase
 {
-
     /**
      * This component allows the user to create different strategies for decompounding words,
      * combining different splitting algorithms with different ranking algorithms. This external
      * resource wraps the splitter algorithm which shall be used by the annotator.
      */
-    public static final String PARAM_SPLITTING_ALGO = "splittingAlgorithm";
-    @ExternalResource(key = PARAM_SPLITTING_ALGO)
+    public static final String RES_SPLITTING_ALGO = "splittingAlgorithm";
+    @ExternalResource(key = RES_SPLITTING_ALGO)
     private SplitterAlgorithm splitter;
 
     /**
      * This external resource wraps the ranking algorithm which shall be used by the annotator.
      */
-    public static final String PARAM_RANKING_ALGO = "rankingAlgorithm";
-    @ExternalResource(key = PARAM_RANKING_ALGO, mandatory = false)
+    public static final String RES_RANKING_ALGO = "rankingAlgorithm";
+    @ExternalResource(key = RES_RANKING_ALGO, mandatory = false)
     private Ranker ranker;
 
     @Override
@@ -142,6 +141,5 @@ public class CompoundAnnotator
         indexSplits(aJCas, splits.subList(1, splits.size()), newBeginIndex, tokenEndIndex,
                 remainingSplit, compound);
         remainingSplit.addToIndexes();
-
     }
 }

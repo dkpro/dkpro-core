@@ -19,6 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.lbj;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
@@ -42,6 +43,20 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 public class IllinoisStatefulSegmenter
     extends SegmenterBase
 {
+    /**
+     * Split tokens on dashes.
+     */
+    public static final String PARAM_SPLIT_ON_DASH = "splitOnDash";
+    @ConfigurationParameter(name = PARAM_SPLIT_ON_DASH, mandatory = true, defaultValue = "true")
+    private boolean splitOnDash;
+
+    /**
+     * Split if there are two newlines in a row (ignoring additional newlines).
+     */
+    public static final String PARAM_SPLIT_ON_SECOND_NL = "splitOnSecondNL";
+    @ConfigurationParameter(name = PARAM_SPLIT_ON_SECOND_NL, mandatory = true, defaultValue = "false")
+    private boolean splitOnSecondNL;
+
     private Tokenizer tokenizer;
     
     @Override
@@ -50,7 +65,7 @@ public class IllinoisStatefulSegmenter
     {
         super.initialize(aContext);
         
-        tokenizer = new StatefulTokenizer();
+        tokenizer = new StatefulTokenizer(splitOnDash, splitOnSecondNL);
     }
     
     @Override

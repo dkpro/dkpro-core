@@ -87,9 +87,7 @@ public class Conll2003Reader
     private String sourceEncoding;
 
     /**
-     * Write part-of-speech information.
-     *
-     * Default: {@code true}
+     * Read part-of-speech information.
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
@@ -114,9 +112,7 @@ public class Conll2003Reader
     protected String posMappingLocation;
 
     /**
-     * Write chunk information.
-     *
-     * Default: {@code true}
+     * Read chunk information.
      */
     public static final String PARAM_READ_CHUNK = ComponentParameters.PARAM_READ_CHUNK;
     @ConfigurationParameter(name = PARAM_READ_CHUNK, mandatory = true, defaultValue = "true")
@@ -142,8 +138,6 @@ public class Conll2003Reader
     
     /**
      * Read named entity information.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_READ_NAMED_ENTITY = 
             ComponentParameters.PARAM_READ_NAMED_ENTITY;

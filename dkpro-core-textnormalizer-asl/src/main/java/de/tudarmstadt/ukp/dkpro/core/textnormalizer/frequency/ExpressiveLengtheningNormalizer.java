@@ -50,8 +50,11 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 public class ExpressiveLengtheningNormalizer
     extends JCasTransformerChangeBased_ImplBase
 {
-    public static final String FREQUENCY_PROVIDER = "FrequencyProvider";
-    @ExternalResource(key = FREQUENCY_PROVIDER, mandatory = true)
+    /**
+     * Resource providing the frequency counts.
+     */
+    public static final String RES_FREQUENCY_PROVIDER = "FrequencyProvider";
+    @ExternalResource(key = RES_FREQUENCY_PROVIDER, mandatory = true)
     protected FrequencyCountProvider frequencyProvider;
     
     @Override

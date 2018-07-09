@@ -48,6 +48,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
+/**
+ * Reader for the basic XCES XML format.
+ */
 @ResourceMetaData(name = "XCES Basic XML Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph"})
@@ -55,7 +58,6 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 public class XcesBasicXmlReader
     extends JCasResourceCollectionReader_ImplBase
 {
-
     @Override
     public void getNext(JCas aJCas)
         throws IOException, CollectionException

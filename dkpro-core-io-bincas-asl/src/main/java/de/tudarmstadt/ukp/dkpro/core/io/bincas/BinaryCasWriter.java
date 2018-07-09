@@ -183,6 +183,9 @@ public class BinaryCasWriter
     @ConfigurationParameter(name = PARAM_TYPE_SYSTEM_LOCATION, mandatory = false)
     private String typeSystemLocation;
 
+    /**
+     * Binary format to produce.
+     */
     public static final String PARAM_FORMAT = "format";
     @ConfigurationParameter(name = PARAM_FORMAT, mandatory = true, defaultValue = "COMPRESSED_FILTERED_TSI")
     private String format;

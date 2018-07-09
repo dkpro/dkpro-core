@@ -34,6 +34,9 @@ import org.apache.uima.util.CasCopier;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
+/**
+ * Base-class for transformers.
+ */
 public abstract class JCasTransformer_ImplBase
     extends JCasMultiplier_ImplBase
 {

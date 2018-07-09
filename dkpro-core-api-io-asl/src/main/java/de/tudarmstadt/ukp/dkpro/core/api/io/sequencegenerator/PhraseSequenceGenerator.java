@@ -290,8 +290,13 @@ public class PhraseSequenceGenerator
         public Builder stopwordsFile(File stopwordsFile)
                 throws MalformedURLException
         {
-            URL url = stopwordsFile.toURI().toURL();
-            return stopwordsURL(url);
+            if (stopwordsFile != null) {
+                URL url = stopwordsFile.toURI().toURL();
+                return stopwordsURL(url);
+            }
+            else {
+                return stopwordsURL(null);
+            }
         }
 
         /**
@@ -300,7 +305,7 @@ public class PhraseSequenceGenerator
          */
         public Builder stopwordsURL(URL stopwordsURL)
         {
-            this.stopwordsFile = Optional.of(stopwordsURL);
+            this.stopwordsFile = Optional.ofNullable(stopwordsURL);
             return this;
         }
 
