@@ -94,6 +94,9 @@ public class Conll2000Writer
     @ConfigurationParameter(name = PARAM_WRITE_CHUNK, mandatory = true, defaultValue = "true")
     private boolean writeChunk;
     
+    /**
+     * Write text covered by the token instead of the token form.
+     */
     public static final String PARAM_WRITE_COVERED_TEXT = 
             ComponentParameters.PARAM_WRITE_COVERED_TEXT;
     @ConfigurationParameter(name = PARAM_WRITE_COVERED_TEXT, mandatory = true, defaultValue = "true")
