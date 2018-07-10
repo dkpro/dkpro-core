@@ -42,6 +42,7 @@ import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.component.JCasCollectionReader_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.jcas.JCas;
@@ -68,11 +69,21 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeNode;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.Parameters;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * This CollectionReader reads a file which is formatted in the NEGRA export format. The texts and
  * add. information like constituent structure is reproduced in CASes, one CAS per text (article) .
  */
+@Component(value = OperationType.READER)
+@ResourceMetaData(name = "NEGRA Export Format Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@Parameters(
+        exclude = { 
+                NegraExportReader.PARAM_SOURCE_LOCATION  })
 @MimeTypeCapability({MimeTypes.APPLICATION_X_NEGRA3, MimeTypes.APPLICATION_X_NEGRA4})
 @TypeCapability(
         outputs = { 
@@ -114,8 +125,6 @@ public class NegraExportReader
 
     /**
      * Write part-of-speech information.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
@@ -123,8 +132,6 @@ public class NegraExportReader
 
     /**
      * Write lemma information.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_READ_LEMMA = ComponentParameters.PARAM_READ_LEMMA;
     @ConfigurationParameter(name = PARAM_READ_LEMMA, mandatory = true, defaultValue = "true")
@@ -134,8 +141,6 @@ public class NegraExportReader
      * Write Penn Treebank bracketed structure information. Mind this may not work with all tagsets,
      * in particular not with such that contain "(" or ")" in their tags. The tree is generated
      * using the original tag set in the corpus, not using the mapped tagset!
-     *
-     * Default: {@code false}
      */
     public static final String PARAM_READ_PENN_TREE = ComponentParameters.PARAM_READ_PENN_TREE;
     @ConfigurationParameter(name = PARAM_READ_PENN_TREE, mandatory = true, defaultValue = "false")
@@ -159,7 +164,7 @@ public class NegraExportReader
     protected String posTagset;
 
     /**
-     * The collection ID to the written to the document meta data. (Default: none)
+     * The collection ID to the written to the document meta data.
      */
     public static final String PARAM_COLLECTION_ID = "collectionId";
     @ConfigurationParameter(name = PARAM_COLLECTION_ID, mandatory = false)
@@ -167,7 +172,7 @@ public class NegraExportReader
 
     /**
      * If true, the unit IDs are used only to detect if a new document (CAS) needs to be created,
-     * but for the purpose of setting the document ID, a new ID is generated. (Default: false)
+     * but for the purpose of setting the document ID, a new ID is generated.
      */
     public static final String PARAM_GENERATE_NEW_IDS = "generateNewIds";
     @ConfigurationParameter(name = PARAM_GENERATE_NEW_IDS, mandatory = true, defaultValue = "false")
@@ -176,8 +181,7 @@ public class NegraExportReader
     /**
      * What indicates if a new CAS should be started. E.g., if set to
      * {@link DocumentUnit#ORIGIN_NAME ORIGIN_NAME}, a new CAS is generated whenever the origin name
-     * of the current sentence differs from the origin name of the last sentence. (Default:
-     * ORIGIN_NAME)
+     * of the current sentence differs from the origin name of the last sentence.
      */
     public static final String PARAM_DOCUMENT_UNIT = "documentUnit";
     @ConfigurationParameter(name = PARAM_DOCUMENT_UNIT, mandatory = true, defaultValue = "ORIGIN_NAME")
@@ -586,7 +590,8 @@ public class NegraExportReader
                 Type posTag = posMappingProvider.getTagType(parts[TOKEN_POS_TAG]);
                 POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                         token.getEnd());
-                pos.setPosValue(parts[TOKEN_POS_TAG].intern());
+                pos.setPosValue(
+                        parts[TOKEN_POS_TAG] != null ? parts[TOKEN_POS_TAG].intern() : null);
                 POSUtils.assignCoarseValue(pos);
                 pos.addToIndexes();
                 token.setPos(pos);

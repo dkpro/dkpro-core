@@ -41,9 +41,11 @@ public final class MimeTypes
     public final static String APPLICATION_X_UIMA_BINARY = "application/x.org.dkpro.uima+binary";
     public final static String APPLICATION_X_LIF_JSON = "application/x.org.dkpro.lif+json";
     public final static String APPLICATION_X_LXF_JSON = "application/x.org.dkpro.lxf+json";
+    public final static String APPLICATION_X_PUB_ANNOTATION_JSON = "application/x.org.dkpro.pubannotation+json";
     public final static String APPLICATION_X_NEGRA3 = "application/x.org.dkpro.negra3";
     public final static String APPLICATION_X_NEGRA4 = "application/x.org.dkpro.negra4";
     public final static String APPLICATION_X_NIF_TURTLE = "application/x.org.dkpro.nif+turtle";
+    public final static String APPLICATION_X_NITF_XML = "application/x.org.dkpro.nitf+xml";
     public final static String APPLICATION_X_UIMA_RDF = "application/x.org.dkpro.uima+rdf";
     public final static String APPLICATION_X_REUTERS21578_SGML = "application/x.org.dkpro.reuters21578+sgml";
     public final static String APPLICATION_X_TGREP2 = "application/x.org.dkpro.tgrep2";
@@ -76,6 +78,7 @@ public final class MimeTypes
     public final static String TEXT_X_CONLL_U = "text/x.org.dkpro.conll-u";
     public final static String TEXT_X_IMSCWB = "text/x.org.dkpro.imscwb";
     public final static String TEXT_X_GERMEVAL_2014 = "text/x.org.dkpro.germeval-2014";
+    public final static String TEXT_X_LCC = "text/x.org.dkpro.lcc";
     public final static String TEXT_X_NGRAM = "text/x.org.dkpro.ngram";
     public final static String TEXT_X_PTB_CHUNKED = "text/x.org.dkpro.ptb-chunked";
     public final static String TEXT_X_PTB_COMBINED = "text/x.org.dkpro.ptb-combined";
@@ -96,6 +99,9 @@ public final class MimeTypes
 
     // LingPipe model types
     public final static String APPLICATION_X_LINGPIPE_NER = "application/x.org.dkpro.core.lingpipe.ner";
+
+    // ArkTweet model types
+    public final static String APPLICATION_X_ARKTWEET_TAGGER = "application/x.org.dkpro.core.arktweet.tagger";
 
     private MimeTypes()
     {

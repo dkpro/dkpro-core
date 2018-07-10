@@ -37,6 +37,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_ImplBase;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -45,18 +46,29 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.NORMALIZER)
 @ResourceMetaData(name = "File-based Token Transformer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class FileBasedTokenTransformer
     extends JCasTransformerChangeBased_ImplBase
 {
+    /**
+     * Location from which the model is read. This is either a local path or a classpath location.
+     * In the latter case, the model artifact (if any) is searched as well.
+     */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
     private String modelLocation;
     private Collection<String> tokensToReplace;
 
+    /**
+     * The value by which the matching tokens should be replaced.
+     */
     public static final String PARAM_REPLACEMENT = "replacement";
     @ConfigurationParameter(name = PARAM_REPLACEMENT, mandatory = true)
     private String replacement;
 
+    /**
+     * Match tokens against the dictionary without considering case.
+     */
     public static final String PARAM_IGNORE_CASE = "ignoreCase";
     @ConfigurationParameter(name = PARAM_IGNORE_CASE, mandatory = true, defaultValue = "false")
     private boolean ignoreCase;

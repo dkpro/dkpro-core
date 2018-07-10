@@ -27,10 +27,12 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+/**
+ * Base-class for annotators which require the specification of a feature path.
+ */
 public abstract class FeaturePathAnnotatorBase
     extends JCasAnnotator_ImplBase
 {
-
     /**
      * Specify a path that is used for annotation. Format is de.type.name/feature/path. All type
      * objects will be annotated with a IndexTermAnnotation. The value of the IndexTerm is specified

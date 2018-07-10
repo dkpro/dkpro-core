@@ -15,12 +15,14 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
     <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
-    <version>1.9.2-SNAPSHOT</version>
+    <version>1.10.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.textnormalizer-asl</artifactId>
@@ -147,7 +149,7 @@
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
-        <version>1.9.2-SNAPSHOT</version>
+        <version>1.10.0-SNAPSHOT</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -171,5 +173,31 @@
         </plugin>
       </plugins>
     </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>eu.openminted.share.annotations</groupId>
+        <artifactId>omtd-share-annotations-maven-plugin</artifactId>
+        <configuration>
+          <uimaDescriptorExcludes>
+            <!-- 
+              The following components require model files which cannot be provided on the
+              OpenMinTeD platform.
+             -->
+            <exclude>**/ReplacementFileNormalizer.xml</exclude>
+            <exclude>**/DictionaryBasedTokenTransformer.xml</exclude>
+            <exclude>**/FileBasedTokenTransformer.xml</exclude>
+            <exclude>**/HyphenationRemover.xml</exclude>
+            <!-- 
+              The following components must be configured via external resources which is not
+              possible on the OpenMinTeD platform.
+             -->
+            <exclude>**/CapitalizationNormalizer.xml</exclude>
+            <exclude>**/ExpressiveLengtheningNormalizer.xml</exclude>
+            <exclude>**/SharpSNormalizer.xml</exclude>
+            <exclude>**/UmlautNormalizer.xml</exclude>
+          </uimaDescriptorExcludes>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>

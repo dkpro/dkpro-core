@@ -57,12 +57,14 @@ import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerNode;
 import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerNonTerminal;
 import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerSentence;
 import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerTerminal;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import javanet.staxutils.IndentingXMLEventWriter;
 
 /**
  * UIMA CAS consumer writing the CAS document text in the TIGER-XML format.
  */
 @ResourceMetaData(name = "TIGER-XML Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_TIGER_XML})
 @TypeCapability(
         inputs = {

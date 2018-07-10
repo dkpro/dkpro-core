@@ -19,6 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.lbj;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
@@ -29,17 +30,33 @@ import edu.illinois.cs.cogcomp.core.datastructures.IntPair;
 import edu.illinois.cs.cogcomp.nlp.tokenizer.StatefulTokenizer;
 import edu.illinois.cs.cogcomp.nlp.tokenizer.Tokenizer;
 import edu.illinois.cs.cogcomp.nlp.tokenizer.Tokenizer.Tokenization;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Illinois stateful segmenter.
  */
 @ResourceMetaData(name = "Illinois CCG Stateful Segmenter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(outputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class IllinoisStatefulSegmenter
     extends SegmenterBase
 {
+    /**
+     * Split tokens on dashes.
+     */
+    public static final String PARAM_SPLIT_ON_DASH = "splitOnDash";
+    @ConfigurationParameter(name = PARAM_SPLIT_ON_DASH, mandatory = true, defaultValue = "true")
+    private boolean splitOnDash;
+
+    /**
+     * Split if there are two newlines in a row (ignoring additional newlines).
+     */
+    public static final String PARAM_SPLIT_ON_SECOND_NL = "splitOnSecondNL";
+    @ConfigurationParameter(name = PARAM_SPLIT_ON_SECOND_NL, mandatory = true, defaultValue = "false")
+    private boolean splitOnSecondNL;
+
     private Tokenizer tokenizer;
     
     @Override
@@ -48,7 +65,7 @@ public class IllinoisStatefulSegmenter
     {
         super.initialize(aContext);
         
-        tokenizer = new StatefulTokenizer();
+        tokenizer = new StatefulTokenizer(splitOnDash, splitOnSecondNL);
     }
     
     @Override

@@ -55,6 +55,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 
@@ -64,6 +65,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
  * @see <a href="http://universaldependencies.github.io/docs/format.html">CoNLL-U Format</a>
  */
 @ResourceMetaData(name = "CoNLL-U Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_U})
 @TypeCapability(
         outputs = { 
@@ -77,19 +79,31 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 public class ConllUReader
     extends JCasResourceCollectionReader_ImplBase
 {
+    /**
+     * Character encoding of the input data.
+     */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
     @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
             defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
 
+    /**
+     * Read fine-grained part-of-speech information.
+     */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
     private boolean readPos;
 
+    /**
+     * Read coarse-grained part-of-speech information.
+     */
     public static final String PARAM_READ_CPOS = ComponentParameters.PARAM_READ_CPOS;
     @ConfigurationParameter(name = PARAM_READ_CPOS, mandatory = true, defaultValue = "true")
     private boolean readCPos;
 
+    /**
+     * Treat coarse-grained part-of-speech as fine-grained part-of-speech information.
+     */
     public static final String PARAM_USE_CPOS_AS_POS = "useCPosAsPos";
     @ConfigurationParameter(name = PARAM_USE_CPOS_AS_POS, mandatory = true, defaultValue = "false")
     private boolean useCPosAsPos;
@@ -112,14 +126,23 @@ public class ConllUReader
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
     
+    /**
+     * Read morphological features.
+     */
     public static final String PARAM_READ_MORPH = ComponentParameters.PARAM_READ_MORPH;
     @ConfigurationParameter(name = PARAM_READ_MORPH, mandatory = true, defaultValue = "true")
     private boolean readMorph;
 
+    /**
+     * Read lemma information.
+     */
     public static final String PARAM_READ_LEMMA = ComponentParameters.PARAM_READ_LEMMA;
     @ConfigurationParameter(name = PARAM_READ_LEMMA, mandatory = true, defaultValue = "true")
     private boolean readLemma;
 
+    /**
+     * Read syntactic dependency information.
+     */
     public static final String PARAM_READ_DEPENDENCY = ComponentParameters.PARAM_READ_DEPENDENCY;
     @ConfigurationParameter(name = PARAM_READ_DEPENDENCY, mandatory = true, defaultValue = "true")
     private boolean readDependency;
@@ -232,12 +255,12 @@ public class ConllUReader
                     Type posTag = posMappingProvider.getTagType(tag);
                     pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
-                    pos.setPosValue(tag.intern());
+                    pos.setPosValue(tag != null ? tag.intern() : null);
                 }
 
                 // Read coarse part-of-speech tag
                 if (!UNUSED.equals(word[CPOSTAG]) && readCPos && pos != null) {
-                    pos.setCoarseValue(word[CPOSTAG].intern());
+                    pos.setCoarseValue(word[CPOSTAG] != null ? word[CPOSTAG].intern() : null);
                 }
                 
                 if (pos != null) {

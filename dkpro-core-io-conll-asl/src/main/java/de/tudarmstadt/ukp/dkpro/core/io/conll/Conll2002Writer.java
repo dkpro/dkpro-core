@@ -44,6 +44,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Writes the CoNLL 2002 named entity format.
@@ -51,6 +52,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * @see <a href="http://www.clips.ua.ac.be/conll2002/ner/">CoNLL 2002 shared task</a>
  */
 @ResourceMetaData(name = "CoNLL 2002 Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2002})
 @TypeCapability(
         inputs = { 
@@ -71,15 +73,29 @@ public class Conll2002Writer
             defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
 
+    /**
+     * Use this filename extension.
+     */
     public static final String PARAM_FILENAME_EXTENSION = 
             ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".conll")
     private String filenameSuffix;
 
+    /**
+     * Write named entity information.
+     */
     public static final String PARAM_WRITE_NAMED_ENTITY = 
             ComponentParameters.PARAM_WRITE_NAMED_ENTITY;
     @ConfigurationParameter(name = PARAM_WRITE_NAMED_ENTITY, mandatory = true, defaultValue = "true")
     private boolean writeNamedEntity;
+    
+    /**
+     * Write text covered by the token instead of the token form.
+     */
+    public static final String PARAM_WRITE_COVERED_TEXT = 
+            ComponentParameters.PARAM_WRITE_COVERED_TEXT;
+    @ConfigurationParameter(name = PARAM_WRITE_COVERED_TEXT, mandatory = true, defaultValue = "true")
+    private boolean writeCovered;
 
     @Override
     public void process(JCas aJCas)
@@ -122,12 +138,17 @@ public class Conll2002Writer
 
             // Write sentence in CONLL 2006 format
             for (Row row : ctokens.values()) {
+                String form = row.token.getCoveredText();
+                if (!writeCovered) {
+                    form = row.token.getText();
+                }
+                
                 String namedEntity = UNUSED;
                 if (writeNamedEntity && (row.ne != null)) {
                     namedEntity = row.ne;
                 }
 
-                aOut.printf("%s %s\n", row.token.getCoveredText(), namedEntity);
+                aOut.printf("%s %s\n", form, namedEntity);
             }
 
             aOut.println();

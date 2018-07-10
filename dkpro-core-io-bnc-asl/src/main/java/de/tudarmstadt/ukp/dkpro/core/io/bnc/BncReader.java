@@ -43,11 +43,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.io.xml.XmlTextReader;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reader for the British National Corpus (XML version).
  */
 @ResourceMetaData(name = "British National Corpus (BNC) XML Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability(MimeTypes.APPLICATION_X_BNC)
 @TypeCapability(
         outputs = {
@@ -208,7 +210,7 @@ public class BncReader
                         Type posTag = posMappingProvider.getTagType(c5Tag);
                         POS pos = (POS) getJCas().getCas().createAnnotation(posTag,
                                 token.getBegin(), token.getEnd());
-                        pos.setPosValue(c5Tag.intern());
+                        pos.setPosValue(c5Tag != null ? c5Tag.intern() : null);
                         POSUtils.assignCoarseValue(pos);
                         pos.addToIndexes();
                         token.setPos(pos);

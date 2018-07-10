@@ -50,6 +50,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import gate.Annotation;
 import gate.AnnotationSet;
 import gate.DocumentExporter;
@@ -62,7 +63,12 @@ import gate.util.SimpleFeatureMapImpl;
 import it.unimi.dsi.fastutil.ints.Int2IntMap;
 import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
 
+/**
+ * Writer for the GATE XML format. This writer attempts a generic transformation of the UIMA CAS
+ * into the GATE document structure.
+ */
 @ResourceMetaData(name = "GATE XML Writer (generic)")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_GATE_XML})
 @TypeCapability(
         inputs = {

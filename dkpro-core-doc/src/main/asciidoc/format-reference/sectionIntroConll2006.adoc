@@ -3,7 +3,7 @@ The CoNLL 2006 (aka CoNLL-X) format targets dependency parsing. Columns are tab-
 .Columns
 [cols="1,2,3", options="header"]
 |====
-| Column  | Type/Feature | Description
+| Column  | Type/Feature | Description
 
 | ID      
 | ignored 
@@ -58,13 +58,10 @@ Heutzutage heutzutage ADV _ _ ADV _ _
 | Corpus 
 | Language
 
-| link:http://ilk.uvt.nl/conll/free_data.html[CoNLL-X Shared Task free data]
-| Danish, Dutch, Portuguese, and Swedish
-
-| link:https://code.google.com/p/copenhagen-dependency-treebank/[Copenhagen Dependency Treebanks]
+| link:http://mbkromann.github.io/copenhagen-dependency-treebank/[Copenhagen Dependency Treebanks]
 | Danish
 
-| link:http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/[FinnTreeBank] (in recent versions with additional pseudo-XML metadata)
+| link:http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/index-print.shtml[FinnTreeBank] (in recent versions with additional pseudo-XML metadata)
 | Finnish 
 
 | link:http://www.linguateca.pt/floresta/CoNLL-X[Floresta Sintá(c)tica (Bosque-CoNLL)]

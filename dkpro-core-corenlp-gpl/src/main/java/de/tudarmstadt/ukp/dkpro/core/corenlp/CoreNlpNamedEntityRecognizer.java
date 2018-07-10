@@ -55,6 +55,7 @@ import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.util.ErasureUtils;
 import edu.stanford.nlp.util.StringUtils;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -62,6 +63,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.NAMED_ENTITITY_RECOGNIZER)
 @ResourceMetaData(name = "CoreNLP Named Entity Recognizer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -73,8 +75,6 @@ public class CoreNlpNamedEntityRecognizer
 {
     /**
      * Log the tag set(s) when a model is loaded.
-     *
-     * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
@@ -95,6 +95,20 @@ public class CoreNlpNamedEntityRecognizer
     @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
     private String variant;
 
+    /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
     /**
      * Location from which the model is read.
      */
@@ -118,24 +132,23 @@ public class CoreNlpNamedEntityRecognizer
     private String mappingLocation;
     
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code false}
+     * Maximum sentence length. Longer sentences are skipped.
      */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internStrings;
-
     public static final String PARAM_MAX_SENTENCE_LENGTH = 
             ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
     @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = true, defaultValue = "2147483647")
     private int maxSentenceLength;
 
+    /**
+     * Maximum time to spend on a single sentence.
+     */
     public static final String PARAM_MAX_TIME = "maxTime";
     @ConfigurationParameter(name = PARAM_MAX_TIME, mandatory = true, defaultValue = "-1")
     private int maxTime;
 
+    /**
+     * Number of parallel threads to use.
+     */
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
     @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, 
             defaultValue = ComponentParameters.AUTO_NUM_THREADS)
@@ -171,19 +184,29 @@ public class CoreNlpNamedEntityRecognizer
      */
     public static final String PARAM_APPLY_NUMERIC_CLASSIFIERS = "applyNumericClassifiers";
     @ConfigurationParameter(name = PARAM_APPLY_NUMERIC_CLASSIFIERS, mandatory = true, defaultValue = "true")
-    boolean applyNumericClassifiers;
+    private boolean applyNumericClassifiers;
 
+//    /**
+//     * Use SUTime if it is available on the classpath. SUTime only works for English.
+//     */
+//    public static final String PARAM_USE_SUTIME = "useSUTime";
+//    @ConfigurationParameter(name = PARAM_USE_SUTIME, mandatory = true, defaultValue = "false")
     // FIXME Using USE_SUTIME_DEFAULT autodetects presence of SUTime. Need three values here:
     // on, off, auto
-    public static final String PARAM_USE_SUTIME = "useSUTime";
-    @ConfigurationParameter(name = PARAM_USE_SUTIME, mandatory = true, defaultValue = "false")
-    boolean useSUTime; // = NumberSequenceClassifier.USE_SUTIME_DEFAULT;
+    private boolean useSUTime = false; // = NumberSequenceClassifier.USE_SUTIME_DEFAULT;
 
-    public static final String PARAM_AUGMENT_REGEX_NER = "augmentRegexNER";
-    @ConfigurationParameter(name = PARAM_AUGMENT_REGEX_NER, mandatory = true, defaultValue = "false")
-    boolean augmentRegexNER; // = NERClassifierCombiner.APPLY_GAZETTE_PROPERTY;
+//    /**
+//     * Whether to read the default regular expression gazetteer.
+//     * 
+//     * @see edu.stanford.nlp.pipeline.DefaultPaths#DEFAULT_NER_GAZETTE_MAPPING
+//     */
+//    public static final String PARAM_AUGMENT_REGEX_NER = "augmentRegexNER";
+//    @ConfigurationParameter(name = PARAM_AUGMENT_REGEX_NER, mandatory = true, defaultValue = "false")
+    // Commented out since the default gazetter is currently only in the original Stanford model
+    // JARs
+    private boolean augmentRegexNER = false; // = NERClassifierCombiner.APPLY_GAZETTE_PROPERTY;
 
-    boolean verbose = false;
+    private boolean verbose = false;
     
     private ModelProviderBase<NERCombinerAnnotator> annotatorProvider;
     private MappingProvider mappingProvider;
@@ -232,7 +255,7 @@ public class CoreNlpNamedEntityRecognizer
         annotatorProvider.getResource().annotate(document);
         
         // Transfer back into the CAS
-        CoreNlp2DKPro.convertNamedEntities(aJCas, document, mappingProvider, internStrings);
+        CoreNlp2DKPro.convertNamedEntities(aJCas, document, mappingProvider);
     }
 
     private class CoreNlpNamedEntityRecognizerModelProvider

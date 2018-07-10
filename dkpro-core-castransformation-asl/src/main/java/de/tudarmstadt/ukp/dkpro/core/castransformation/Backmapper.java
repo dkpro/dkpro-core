@@ -31,6 +31,7 @@ import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.apache.uima.fit.internal.ExtendedLogger;
 import org.apache.uima.internal.util.IntListIterator;
 import org.apache.uima.internal.util.PositiveIntSet;
 import org.apache.uima.internal.util.PositiveIntSet_impl;
@@ -41,16 +42,23 @@ import org.apache.uima.util.CasCopier;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.ImmutableInterval;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.Interval;
+import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentFactory;
 import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentStorage;
+
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * After processing a file with the {@code ApplyChangesAnnotator} this annotator
  * can be used to map the annotations created in the cleaned view back to the
  * original view.
- *
+ * <p>
+ * This annotator is able to resume the mapping after a CAS restore from any point after the cleaned
+ * view has been created, as long as no changes were made to SofaChangeAnnotations in the original
+ * view.
  * @see ApplyChangesAnnotator
  */
 @ResourceMetaData(name = "CAS Transformation - Map back")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class Backmapper
     extends JCasAnnotator_ImplBase
 {
@@ -74,8 +82,8 @@ public class Backmapper
         try {
             // Now we can copy the complete CAS while mapping back the offsets.
             // We first use the CAS copier and then update the offsets.
-            getLogger().info("Copying annotations from [" + sofaChain.getFirst() + "] to ["
-                            + sofaChain.getLast() + "]");
+            getLogger().info("Copying annotations from [" + sofaChain.getFirst() +
+                    "] to [" + sofaChain.getLast() + "]");
             
             // Copy the annotations
             CAS sourceView = aJCas.getCas().getView(sofaChain.getFirst());
@@ -125,7 +133,7 @@ public class Backmapper
                 String realTarget = aJCas.getCas().getView(target).getViewName();
                 
                 AlignedString as = getAlignedString(aJCas, realSource, realTarget);
-                
+
                 updateOffsets(sourceView, targetViewJCas, as, copiedFs);
             }
             while (!workChain.isEmpty());
@@ -143,15 +151,29 @@ public class Backmapper
     }
     
     private AlignedString getAlignedString(JCas aSomeCase, String from, String to)
-        throws AnalysisEngineProcessException
-    {
+            throws AnalysisEngineProcessException, CASException {
         CAS baseCas = aSomeCase.getCasImpl().getBaseCAS();
 
         // Try to get the AlignedString for the current JCas.
         AlignmentStorage asstore = AlignmentStorage.getInstance();
         AlignedString as = asstore.get(baseCas, to, from);
 
-        // If there is none we have to fail.
+        if (as == null) {
+            // Attempt to reconstruct the alignment from the SofaChangeAnnotations.
+            // This only works when they have not been altered in the mean time.
+            ExtendedLogger logger = getLogger();
+            if (logger.isInfoEnabled()) {
+                logger.info("No mapping found from [" + from + "] to [" + to + "] on ["
+                        + baseCas.hashCode() + "]. "
+                        + "Restoring mapping from SofaChangeAnnotation found in [" + to + "]."
+                );
+            }
+            JCas view = aSomeCase.getCas().getView(to).getJCas();
+            as = AlignmentFactory.createAlignmentsFor(view);
+        }
+
+        // If there is none we have to fail. Practically this should never happen
+        // when the alignment state is reconstructed in the previous step.
         if (as == null) {
             throw new AnalysisEngineProcessException(new IllegalStateException(
                     "No mapping found from [" + from + "] to [" + to + "] on ["

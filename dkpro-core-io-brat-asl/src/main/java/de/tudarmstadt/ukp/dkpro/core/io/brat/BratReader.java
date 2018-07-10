@@ -62,6 +62,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratTextAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.RelationParam;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TextAnnotationParam;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TypeMapping;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reader for the brat format.
@@ -70,6 +71,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TypeMapping;
  * @see <a href="http://brat.nlplab.org/configuration.html">brat configuration format</a>
  */
 @ResourceMetaData(name = "Brat Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_BRAT})
 public class BratReader
     extends JCasResourceCollectionReader_ImplBase
@@ -107,15 +109,28 @@ public class BratReader
     private Set<String> textAnnotationTypes;
     private Map<String, TextAnnotationParam> parsedTextAnnotationTypes;    
 
-    public static final String PARAM_TYPE_MAPPINGS = "typeMappings";
-    @ConfigurationParameter(name = PARAM_TYPE_MAPPINGS, mandatory = false, defaultValue = {
-//            "Token -> de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-//            "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
-//            "Location -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location"
-            })
-    private String[] typeMappings;
-    private TypeMapping typeMapping;
-    
+    /**
+     * Mapping of brat text annotations (entities or events) to UIMA types, e.g. :
+     * <code>
+     * Country -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location
+     * </code>
+     */
+    public static final String PARAM_TEXT_ANNOTATION_TYPE_MAPPINGS = "textAnnotationTypeMappings";
+    @ConfigurationParameter(name = PARAM_TEXT_ANNOTATION_TYPE_MAPPINGS, mandatory = false)
+    private String[] textAnnotationTypeMappings;
+    private TypeMapping textAnnotationTypeMapping;
+
+    /**
+     * Mapping of brat relation annotations to UIMA types, e.g. :
+     * <code>
+     * SUBJ -> de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+     * </code>
+     */
+    public static final String PARAM_RELATION_TYPE_MAPPINGS = "relationTypeMappings";
+    @ConfigurationParameter(name = PARAM_RELATION_TYPE_MAPPINGS, mandatory = false)
+    private String[] relationTypeMappings;
+    private TypeMapping relationTypeMapping;
+
     private Map<String, AnnotationFS> spanIdMap;
     
     private Set<String> warnings;
@@ -138,7 +153,8 @@ public class BratReader
             parsedTextAnnotationTypes.put(p.getType(), p);
         }
 
-        typeMapping = new TypeMapping(typeMappings);
+        textAnnotationTypeMapping = new TypeMapping(textAnnotationTypeMappings);
+        relationTypeMapping = new TypeMapping(relationTypeMappings);
 
         warnings = new LinkedHashSet<String>();
     }
@@ -181,14 +197,15 @@ public class BratReader
         List<BratRelationAnnotation> relations = new ArrayList<>();
         List<BratEventAnnotation> events = new ArrayList<>();
         for (BratAnnotation anno : doc.getAnnotations()) {
-            Type type = typeMapping.getUimaType(ts, anno);
             if (anno instanceof BratTextAnnotation) {
+                Type type = textAnnotationTypeMapping.getUimaType(ts, anno);
                 create(cas, type, (BratTextAnnotation) anno);
             }
             else if (anno instanceof BratRelationAnnotation) {
                 relations.add((BratRelationAnnotation) anno);
             }
             else if (anno instanceof BratEventAnnotation) {
+                Type type = textAnnotationTypeMapping.getUimaType(ts, anno);
                 create(cas, type, (BratEventAnnotation) anno);
                 events.add((BratEventAnnotation) anno);
             }
@@ -200,13 +217,13 @@ public class BratReader
         
         // Go through the relations now
         for (BratRelationAnnotation rel : relations) {
-            Type type = typeMapping.getUimaType(ts, rel);
+            Type type = relationTypeMapping.getUimaType(ts, rel);
             create(cas, type, rel);
         }
         
         // Go through the events again and handle the slots
         for (BratEventAnnotation e : events) {
-            Type type = typeMapping.getUimaType(ts, e);
+            Type type = textAnnotationTypeMapping.getUimaType(ts, e);
             fillSlots(cas, type, doc, e);
         }
     }
@@ -228,11 +245,12 @@ public class BratReader
         
         AnnotationFS anno = aCAS.createAnnotation(aType, aAnno.getBegin(), aAnno.getEnd());
         
+        fillAttributes(anno, aAnno.getAttributes());
+        
         if (param != null && param.getSubcat() != null) {
             anno.setStringValue(getFeature(anno, param.getSubcat()), aAnno.getType());
         }
         
-        fillAttributes(anno, aAnno.getAttributes());
         aCAS.addFsToIndexes(anno);
         spanIdMap.put(aAnno.getId(), anno);
     }
@@ -243,8 +261,9 @@ public class BratReader
         
         AnnotationFS anno = aCAS.createAnnotation(aType, 
                 aAnno.getTriggerAnnotation().getBegin(), aAnno.getTriggerAnnotation().getEnd());
+
         fillAttributes(anno, aAnno.getAttributes());
-        
+
         if (param != null && param.getSubcat() != null) {
             anno.setStringValue(getFeature(anno, param.getSubcat()), aAnno.getType());
         }
@@ -280,6 +299,8 @@ public class BratReader
             anchor = arg2;
         }
         
+        fillAttributes(anno, aAnno.getAttributes());
+        
         if (param.getSubcat() != null) {
             anno.setStringValue(getFeature(anno, param.getSubcat()), aAnno.getType());
         }
@@ -297,8 +318,6 @@ public class BratReader
                         + "] has offsets but no anchor is specified.");
             }
         }
-        
-        fillAttributes(anno, aAnno.getAttributes());
         
         aCAS.addFsToIndexes(anno);
     }

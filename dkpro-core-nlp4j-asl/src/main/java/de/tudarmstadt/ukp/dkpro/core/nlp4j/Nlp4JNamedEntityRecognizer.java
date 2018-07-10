@@ -52,6 +52,7 @@ import edu.emory.mathcs.nlp.component.ner.NERState;
 import edu.emory.mathcs.nlp.component.template.OnlineComponent;
 import edu.emory.mathcs.nlp.component.template.node.NLPNode;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -59,6 +60,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.NAMED_ENTITITY_RECOGNIZER)
 @ResourceMetaData(name = "NLP4J Named Entity Recognizer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -93,6 +95,20 @@ public class Nlp4JNamedEntityRecognizer
     protected String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Location from which the model is read.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -108,18 +124,8 @@ public class Nlp4JNamedEntityRecognizer
     protected String mappingLocation;
 
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
-
-    /**
      * Process anyway, even if the model relies on features that are not supported by this
      * component.
-     * 
-     * Default: {@code false}
      */
     public static final String PARAM_IGNORE_MISSING_FEATURES = "ignoreMissingFeatures";
     @ConfigurationParameter(name = PARAM_IGNORE_MISSING_FEATURES, mandatory = true, defaultValue = "false")
@@ -162,7 +168,7 @@ public class Nlp4JNamedEntityRecognizer
             // Process the sentences - new results will be stored in the existing NLPNodes
             modelProvider.getResource().process(nodes);
             
-            EmoryNlp2Uima.convertNamedEntities(cas, tokens, nodes, mappingProvider, internTags);
+            EmoryNlp2Uima.convertNamedEntities(cas, tokens, nodes, mappingProvider);
         }
     }
     

@@ -40,6 +40,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.performance.type.TimerAnnotation;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Can be used to measure how long the processing between two points in a pipeline takes. For that
@@ -47,6 +48,7 @@ import de.tudarmstadt.ukp.dkpro.core.performance.type.TimerAnnotation;
  * should be measured.
  */
 @ResourceMetaData(name = "Stopwatch")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation"},

@@ -47,6 +47,9 @@ public class BratAnnotationDocument
         while (lines.hasNext()) {
             String line = lines.next();
             switch (line.charAt(0)) {
+            case '#':
+                // Comments currently not supported
+                break;
             case 'T':
                 doc.addAnnotation(BratTextAnnotation.parse(line));
                 break;

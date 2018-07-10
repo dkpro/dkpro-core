@@ -17,6 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -24,6 +25,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -134,6 +137,22 @@ public class ResourceObjectProviderTest
         provider2.configure();
         
         assertTrue(provider1.getResource() == provider2.getResource());
+    }
+    
+    @Test
+    public void testPomFindingInJar()
+    {
+        String location = "jar:file:/opt/TDMlocalRepo/de/tudarmstadt/ukp/dkpro/core/"
+                + "de.tudarmstadt.ukp.dkpro.core.corenlp-gpl/1.9.1/"
+                + "de.tudarmstadt.ukp.dkpro.core.corenlp-gpl-1.9.1.jar!/";
+
+        Pattern pattern = Pattern.compile(".*/(?<ID>([a-zA-Z0-9-_]+\\.)*[a-zA-Z0-9-_]+)-([0-9]+\\.)*[0-9]+(-[a-zA-Z]+)?\\.jar!/.*");
+        
+        Matcher matcher = pattern.matcher(location);
+        
+        assertTrue(matcher.matches());
+        
+        assertEquals("de.tudarmstadt.ukp.dkpro.core.corenlp-gpl", matcher.group("ID"));
     }
     
     private static class SharableObjectProvider extends ResourceObjectProviderBase<Object>
