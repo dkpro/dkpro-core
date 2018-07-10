@@ -37,6 +37,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
+import de.tudarmstadt.ukp.dkpro.core.io.pdf.internal.Pdf2CasConverter;
+import de.tudarmstadt.ukp.dkpro.core.io.pdf.internal.SubstitutionTrieParser;
+import de.tudarmstadt.ukp.dkpro.core.io.pdf.internal.Trie;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**

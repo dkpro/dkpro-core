@@ -25,27 +25,21 @@
  * Furthermore the modified code is re-licensed under the Apache License,
  * Version 2.0 as stated above.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.pdf;
+package de.tudarmstadt.ukp.dkpro.core.io.pdf.internal;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Vector;
 
-import org.apache.pdfbox.cos.COSStream;
-import org.apache.pdfbox.exceptions.CryptographyException;
-import org.apache.pdfbox.exceptions.InvalidPasswordException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageTree;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
-import org.apache.pdfbox.pdmodel.common.PDStream;
 import org.apache.pdfbox.pdmodel.interactive.pagenavigation.PDThreadBead;
-import org.apache.pdfbox.util.PDFStreamEngine;
-import org.apache.pdfbox.util.ResourceLoader;
-import org.apache.pdfbox.util.TextPosition;
+import org.apache.pdfbox.text.TextPosition;
 
 /**
  * This class will take a PDF document and strip out all of the text and ignore the formatting and
@@ -57,7 +51,7 @@ import org.apache.pdfbox.util.TextPosition;
  * these enhancements through sub-classing, thus the code was copied and adapted.
  */
 public abstract class PdfLayoutEventStripper
-    extends PDFStreamEngine
+    extends LegacyPDFStreamEngine
 {
     public static enum Values
     {
@@ -95,34 +89,11 @@ public abstract class PdfLayoutEventStripper
 
     private final Map<String, List<TextPosition>> characterListMapping = new HashMap<>();
 
-    /**
-     * Instantiate a new PDFTextStripper object. This object will load properties from
-     * Resources/PDFTextStripper.properties.
-     * 
-     * @throws IOException
-     *             If there is an error loading the properties.
-     */
     public PdfLayoutEventStripper() throws IOException
     {
-        super(ResourceLoader
-                .loadProperties("org/apache/pdfbox/resources/PDFTextStripper.properties", true));
+        super();
     }
-
-    /**
-     * Instantiate a new PDFTextStripper object. Loading all of the operator mappings from the
-     * properties object that is passed in.
-     * 
-     * @param props
-     *            The properties containing the mapping of operators to PDFOperator classes.
-     * 
-     * @throws IOException
-     *             If there is an error reading the properties.
-     */
-    public PdfLayoutEventStripper(final Properties props) throws IOException
-    {
-        super(props);
-    }
-
+    
     /**
      * This will take a PDDocument and write the text of that document to the print writer.
      * 
@@ -139,27 +110,23 @@ public abstract class PdfLayoutEventStripper
         currentPageNo = 0;
         document = doc;
         startDocument(document);
-
-        if (document.isEncrypted()) {
-            // We are expecting non-encrypted documents here, but it is common
-            // for users to pass in a document that is encrypted with an empty
-            // password (such a document appears to not be encrypted by
-            // someone viewing the document, thus the confusion). We will
-            // attempt to decrypt with the empty password to handle this case.
-            //
-            try {
-                document.decrypt("");
-            }
-            catch (CryptographyException e) {
-                throw new IOException("Error decrypting document, details: ", e);
-            }
-            catch (InvalidPasswordException e) {
-                throw new IOException("Error: document is encrypted", e);
-            }
-        }
-
-        processPages(document.getDocumentCatalog().getAllPages());
+        
+        processPages(document.getPages());
         endDocument(document);
+    }
+    
+    private void resetEngine()
+    {
+        currentPageNo = 0;
+        document = null;
+        if (charactersByArticle != null)
+        {
+            charactersByArticle.clear();
+        }
+        if (characterListMapping != null)
+        {
+            characterListMapping.clear();
+        }
     }
 
     /**
@@ -171,16 +138,16 @@ public abstract class PdfLayoutEventStripper
      * @throws IOException
      *             If there is an error parsing the text.
      */
-    protected void processPages(List<PDPage> pages) throws IOException
+    protected void processPages(PDPageTree pages) throws IOException
     {
-        maxPage = pages.size();
-
-        for (final PDPage page : pages) {
+        maxPage = pages.getCount();
+        
+        for (PDPage page : pages)
+        {
             currentPageNo++;
-            final PDStream contentStream = page.getContents();
-            if (contentStream != null) {
-                final COSStream contents = contentStream.getStream();
-                processPage(page, contents);
+            if (page.hasContents())
+            {
+                processPage(page);
             }
         }
     }
@@ -190,13 +157,11 @@ public abstract class PdfLayoutEventStripper
      * 
      * @param page
      *            The page to process.
-     * @param content
-     *            The contents of the page.
-     * 
      * @throws IOException
      *             If there is an error processing the page.
      */
-    protected void processPage(final PDPage page, final COSStream content) throws IOException
+    @Override
+    public void processPage(final PDPage page) throws IOException
     {
         if ((currentPageNo >= startPage) && (currentPageNo <= endPage)) {
             startPage(startPage, Math.min(maxPage, endPage), currentPageNo, page);
@@ -218,9 +183,7 @@ public abstract class PdfLayoutEventStripper
 
             characterListMapping.clear();
 
-            // processStream will call showCharacter were we will simply
-            // collect all the TextPositions for the page
-            processStream(page, page.findResources(), content);
+            super.processPage(page);
 
             // Now we do the real processing
             for (int i = 0; i < charactersByArticle.size(); i++) {
@@ -362,7 +325,7 @@ public abstract class PdfLayoutEventStripper
         boolean showCharacter = true;
         if (suppressDuplicateOverlappingText) {
             showCharacter = false;
-            final String textCharacter = text.getCharacter();
+            final String textCharacter = text.getUnicode();
             final float textX = text.getX();
             final float textY = text.getY();
             List<TextPosition> sameTextCharacters = characterListMapping.get(textCharacter);
@@ -393,7 +356,7 @@ public abstract class PdfLayoutEventStripper
             final float tolerance = (text.getWidth() / textCharacter.length()) / 3.0f;
             for (int i = 0; i < sameTextCharacters.size() && textCharacter != null; i++) {
                 final TextPosition character = sameTextCharacters.get(i);
-                final String charCharacter = character.getCharacter();
+                final String charCharacter = character.getUnicode();
                 final float charX = character.getX();
                 final float charY = character.getY();
                 // only want to suppress
@@ -404,8 +367,8 @@ public abstract class PdfLayoutEventStripper
                     suppressCharacter = true;
                 }
             }
-            if (!suppressCharacter && (text.getCharacter() != null)
-                    && (text.getCharacter().length() > 0)) {
+            if (!suppressCharacter && (text.getUnicode() != null)
+                    && (text.getUnicode().length() > 0)) {
                 sameTextCharacters.add(text);
                 showCharacter = true;
             }
@@ -641,7 +604,7 @@ public abstract class PdfLayoutEventStripper
         if (startOfNextWordX != -1 && startOfNextWordX < cur.getX() && prev != null &&
         // only bother adding a space if the last character was not a
         // space
-                prev.getCharacter() != null && !prev.getCharacter().endsWith(" ")) {
+                prev.getUnicode() != null && !prev.getUnicode().endsWith(" ")) {
             return false;
         }
         else {
@@ -1135,7 +1098,7 @@ public abstract class PdfLayoutEventStripper
             bottom = p.getY() + p.getHeight();
 
             content.setLength(0);
-            content.append(p.getCharacter());
+            content.append(p.getUnicode());
         }
 
         void grow(final int pos)
@@ -1153,7 +1116,7 @@ public abstract class PdfLayoutEventStripper
             bottom = Math.max(p.getY() + p.getHeight(), bottom);
 
             content.append(" ");
-            content.append(p.getCharacter());
+            content.append(p.getUnicode());
         }
     }
 
