@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.io.pdf;
+package de.tudarmstadt.ukp.dkpro.core.io.pdf.internal;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,7 +24,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.util.TextPosition;
+import org.apache.pdfbox.text.TextPosition;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
@@ -216,14 +216,14 @@ public class Pdf2CasConverter
         throws IOException
     {
         if (log.isTraceEnabled()) {
-            log.trace("[" + aText.getCharacter() + "]");
+            log.trace("[" + aText.getUnicode() + "]");
         }
 
         if (regionText == null) {
             throw new IllegalStateException("No region started");
         }
 
-        regionText.append(aText.getCharacter());
+        regionText.append(aText.getUnicode());
     }
 
     private static boolean isValidXMLChar(final int aCodePoint)
