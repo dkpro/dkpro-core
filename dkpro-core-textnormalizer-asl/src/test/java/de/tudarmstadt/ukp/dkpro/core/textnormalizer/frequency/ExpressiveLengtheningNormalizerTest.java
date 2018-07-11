@@ -44,7 +44,7 @@ public class ExpressiveLengtheningNormalizerTest
 
         AnalysisEngineDescription normalizer = createEngineDescription(
                 ExpressiveLengtheningNormalizer.class,
-                ExpressiveLengtheningNormalizer.FREQUENCY_PROVIDER, 
+                ExpressiveLengtheningNormalizer.RES_FREQUENCY_PROVIDER, 
                         createExternalResourceDescription(
                                 Web1TFrequencyCountResource.class,
                                 Web1TFrequencyCountResource.PARAM_LANGUAGE, "de",

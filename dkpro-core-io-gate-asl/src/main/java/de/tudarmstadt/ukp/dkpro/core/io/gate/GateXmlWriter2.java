@@ -63,6 +63,10 @@ import gate.util.SimpleFeatureMapImpl;
 import it.unimi.dsi.fastutil.ints.Int2IntMap;
 import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
 
+/**
+ * Writer for the GATE XML format. This writer attempts a generic transformation of the UIMA CAS
+ * into the GATE document structure.
+ */
 @ResourceMetaData(name = "GATE XML Writer (generic)")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_GATE_XML})

@@ -87,8 +87,6 @@ public class PennTreebankCombinedReader
     /**
      * Sets whether to create or not to create POS tags. The creation of
      * constituent tags must be turned on for this to work.
-     *
-     * <p>Default: {@code true}</p>
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
@@ -113,10 +111,16 @@ public class PennTreebankCombinedReader
     @ConfigurationParameter(name = PARAM_CONSTITUENT_MAPPING_LOCATION, mandatory = false)
     protected String constituentMappingLocation;
 
+    /**
+     * Whether to remove traces from the parse tree.
+     */
     public static final String PARAM_REMOVE_TRACES = "removeTraces";
     @ConfigurationParameter(name = PARAM_REMOVE_TRACES, mandatory = false, defaultValue = "true")
     private boolean removeTraces;
     
+    /**
+     * Whether to render traces into the document text.
+     */
     public static final String PARAM_WRITE_TRACES_TO_TEXT = "writeTracesToText";
     @ConfigurationParameter(name = PARAM_WRITE_TRACES_TO_TEXT, mandatory = false, defaultValue = "false")
     private boolean writeTracesToText;

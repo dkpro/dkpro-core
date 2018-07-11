@@ -29,6 +29,9 @@
   <packaging>jar</packaging>
   <name>DKPro Core ASL - IO - PDF</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
+  <properties>
+    <pdfbox.version>2.0.9</pdfbox.version>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>org.apache.uima</groupId>
@@ -49,7 +52,12 @@
     <dependency>
       <groupId>org.apache.pdfbox</groupId>
       <artifactId>pdfbox</artifactId>
-      <version>1.7.0</version>
+      <version>${pdfbox.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.pdfbox</groupId>
+      <artifactId>fontbox</artifactId>
+      <version>${pdfbox.version}</version>
     </dependency>
     <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>

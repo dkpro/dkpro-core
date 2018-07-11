@@ -48,6 +48,9 @@ import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
 public class MalletLdaTopicsProportionsSortedWriter
     extends JCasFileWriter_ImplBase
 {
+    /**
+     * Number of topics to generate.
+     */
     public static final String PARAM_N_TOPICS = "nTopics";
     @ConfigurationParameter(name = PARAM_N_TOPICS, mandatory = true, defaultValue = "3")
     private int nTopics;

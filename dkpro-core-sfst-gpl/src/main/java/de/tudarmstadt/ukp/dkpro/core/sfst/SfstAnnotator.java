@@ -83,8 +83,6 @@ public class SfstAnnotator
     
     /**
      * Write part-of-speech information.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
     @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
@@ -92,8 +90,6 @@ public class SfstAnnotator
 
     /**
      * Write lemma information.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
     @ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = true, defaultValue = "true")
@@ -148,10 +144,17 @@ public class SfstAnnotator
     @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue = "UTF-8")
     private String modelEncoding;
     
+    /**
+     * Read the FIRST analysis or read ALL analyses.
+     */
     public static final String PARAM_MODE = "mode";
     @ConfigurationParameter(name = PARAM_MODE, mandatory = true, defaultValue = "FIRST")
     private Mode mode;
     
+    /**
+     * Load the morphological features mapping from this location instead of locating the
+     * mapping automatically.
+     */
     public static final String PARAM_MORPH_MAPPING_LOCATION = 
             ComponentParameters.PARAM_MORPH_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_MORPH_MAPPING_LOCATION, mandatory = false)

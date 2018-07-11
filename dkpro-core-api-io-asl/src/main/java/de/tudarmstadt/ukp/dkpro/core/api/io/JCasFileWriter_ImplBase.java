@@ -45,6 +45,9 @@ import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.Parameters;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
+/**
+ * Base class for writers that write to the file system.
+ */
 @Component(OperationType.WRITER)
 @Parameters(
         exclude = { 

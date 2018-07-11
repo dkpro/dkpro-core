@@ -55,9 +55,6 @@ public class TrailingCharacterRemover
 {
     /**
      * A regex to be trimmed from the end of tokens.
-     * <p>
-     * Default: {@code "[\\Q,-“^»*’()&amp;/\"'©§'—«·=\\E0-9A-Z]+"} (remove punctuations, special
-     * characters and capital letters).
      */
     public static final String PARAM_PATTERN = "pattern";
     @ConfigurationParameter(name = PARAM_PATTERN, mandatory = true, defaultValue = "[\\Q,-“^»*’()&/\"'©§'—«·=\\E0-9A-Z]+")

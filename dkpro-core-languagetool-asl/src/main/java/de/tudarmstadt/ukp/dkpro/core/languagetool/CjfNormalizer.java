@@ -44,6 +44,10 @@ public class CjfNormalizer
         TO_SIMPLIFIED
     };
     
+    /**
+     * Direction in which to perform the conversion ({@link Direction#TO_TRADITIONAL} or
+     * {@link Direction#TO_SIMPLIFIED});
+     */
     public static final String PARAM_DIRECTION = "direction";
     @ConfigurationParameter(name = PARAM_DIRECTION, mandatory = true, defaultValue = "TO_SIMPLIFIED")
     private Direction direction; 

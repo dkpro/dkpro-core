@@ -110,11 +110,23 @@ public class BratReader
     private Set<String> textAnnotationTypes;
     private Map<String, TextAnnotationParam> parsedTextAnnotationTypes;    
 
+    /**
+     * Mapping of brat text annotations (entities or events) to UIMA types, e.g. :
+     * <code>
+     * Country -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location
+     * </code>
+     */
     public static final String PARAM_TEXT_ANNOTATION_TYPE_MAPPINGS = "textAnnotationTypeMappings";
     @ConfigurationParameter(name = PARAM_TEXT_ANNOTATION_TYPE_MAPPINGS, mandatory = false)
     private String[] textAnnotationTypeMappings;
     private TypeMapping textAnnotationTypeMapping;
 
+    /**
+     * Mapping of brat relation annotations to UIMA types, e.g. :
+     * <code>
+     * SUBJ -> de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+     * </code>
+     */
     public static final String PARAM_RELATION_TYPE_MAPPINGS = "relationTypeMappings";
     @ConfigurationParameter(name = PARAM_RELATION_TYPE_MAPPINGS, mandatory = false)
     private String[] relationTypeMappings;
