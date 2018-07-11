@@ -312,7 +312,7 @@
         - 2014-10-24 | now        | 0feec395d8db89909360a4a3e172b96a
         -->
       <get 
-          src="http://www.thomas-zastrow.de/nlp/nemgp_stanford_01.gz" 
+          src="https://www.thomas-zastrow.de/nlp/nemgp_stanford_01.gz" 
           dest="target/download/nemgp_stanford_01.ser.gz" 
           skipexisting="true"/>
       <install-stub-and-upstream-file 
@@ -2217,72 +2217,71 @@
     - MODELS
     - ============================================================================================
     -->
-    <target name="-check-download-ar">
-        <available property="download-ar.DONE" file="target/download/ar/DONE"/>
-    </target>
+  <target name="-check-download-ar">
+    <available property="download-ar.DONE" file="target/download/ar/DONE"/>
+  </target>
 
-    <target name="download-ar" depends="-check-download-ar" unless="download-ar.DONE">
-        <mkdir dir="target/download/ar"/>
-        <get src="http://nlp.stanford.edu/software/stanford-arabic-corenlp-${core.arabic.date}-models.jar" 
-            dest="target/download/ar/ar-models.zip" skipexisting="true"/>
-        <touch file="target/download/ar/DONE"/>
-    </target>
+  <target name="download-ar" depends="-check-download-ar" unless="download-ar.DONE">
+    <mkdir dir="target/download/ar"/>
+    <get src="http://nlp.stanford.edu/software/stanford-arabic-corenlp-${core.arabic.date}-models.jar" 
+        dest="target/download/ar/ar-models.zip" skipexisting="true"/>
+    <touch file="target/download/ar/DONE"/>
+  </target>
+
+  <target name="-check-download-en">
+    <available property="download-en.DONE" file="target/download/en/DONE"/>
+  </target>
+
+  <target name="download-en" depends="-check-download-en" unless="download-en.DONE">
+    <mkdir dir="target/download/en"/>
+    <get src="http://nlp.stanford.edu/software/stanford-english-corenlp-${core.english.date}-models.jar" 
+        dest="target/download/en/en-models.zip" skipexisting="true"/>
+    <touch file="target/download/en/DONE"/>
+  </target>
+
+  <target name="-check-download-de">
+    <available property="download-de.DONE" file="target/download/de/DONE"/>
+  </target>
+
+  <target name="download-de" depends="-check-download-de" unless="download-de.DONE">
+    <mkdir dir="target/download/de"/>
+    <get src="http://nlp.stanford.edu/software/stanford-german-corenlp-${core.german.date}-models.jar"
+        dest="target/download/de/de-models.zip" skipexisting="true"/>
+    <touch file="target/download/de/DONE"/>
+  </target>
+
+  <target name="-check-download-fr">
+    <available property="download-fr.DONE" file="target/download/fr/DONE"/>
+  </target>
+
+  <target name="download-fr" depends="-check-download-fr" unless="download-fr.DONE">
+    <mkdir dir="target/download/fr"/>
+    <get src="http://nlp.stanford.edu/software/stanford-french-corenlp-${core.french.date}-models.jar" 
+        dest="target/download/fr/fr-models.zip" skipexisting="true"/>
+    <touch file="target/download/fr/DONE"/>
+  </target>
   
-    <target name="-check-download-en">
-        <available property="download-en.DONE" file="target/download/en/DONE"/>
-    </target>
+  <target name="-check-download-es">
+    <available property="download-es.DONE" file="target/download/es/DONE"/>
+  </target>
 
-    <target name="download-en" depends="-check-download-en" unless="download-en.DONE">
-        <mkdir dir="target/download/en"/>
-        <get src="http://nlp.stanford.edu/software/stanford-english-corenlp-${core.english.date}-models.jar" 
-            dest="target/download/en/en-models.zip" skipexisting="true"/>
-        <touch file="target/download/en/DONE"/>
-    </target>
-
-    <target name="-check-download-de">
-        <available property="download-de.DONE" file="target/download/de/DONE"/>
-    </target>
-
-    <target name="download-de" depends="-check-download-de" unless="download-de.DONE">
-        <mkdir dir="target/download/de"/>
-      <get src="http://nlp.stanford.edu/software/stanford-german-corenlp-${core.german.date}-models.jar"
-            dest="target/download/de/de-models.zip" skipexisting="true"/>
-        <touch file="target/download/de/DONE"/>
-    </target>
-
-    <target name="-check-download-fr">
-        <available property="download-fr.DONE" file="target/download/fr/DONE"/>
-    </target>
-
-    <target name="download-fr" depends="-check-download-fr" unless="download-fr.DONE">
-        <mkdir dir="target/download/fr"/>
-        <get src="http://nlp.stanford.edu/software/stanford-french-corenlp-${core.french.date}-models.jar" 
-            dest="target/download/fr/fr-models.zip" skipexisting="true"/>
-        <touch file="target/download/fr/DONE"/>
-    </target>
-    
-    <target name="-check-download-es">
-        <available property="download-es.DONE" file="target/download/es/DONE"/>
-    </target>
-
-    <target name="download-es" depends="-check-download-es" unless="download-es.DONE">
-        <mkdir dir="target/download/es"/>
-      <get src="http://nlp.stanford.edu/software/stanford-spanish-corenlp-${core.spanish.date}-models.jar"
-            dest="target/download/es/es-models.zip" skipexisting="true"/>
-        <touch file="target/download/es/DONE"/>
-    </target>
-    
-    <target name="-check-download-zh">
-        <available property="download-zh.DONE" file="target/download/zh/DONE"/>
-    </target>
-
-    <target name="download-zh" depends="-check-download-zh" unless="download-zh.DONE">
-        <mkdir dir="target/download/zh"/>
-        <get src="http://nlp.stanford.edu/software/stanford-chinese-corenlp-${core.chinese.date}-models.jar" 
-            dest="target/download/zh/zh-models.zip" skipexisting="true"/>
-        <touch file="target/download/zh/DONE"/>
-    </target>
+  <target name="download-es" depends="-check-download-es" unless="download-es.DONE">
+    <mkdir dir="target/download/es"/>
+    <get src="http://nlp.stanford.edu/software/stanford-spanish-corenlp-${core.spanish.date}-models.jar"
+        dest="target/download/es/es-models.zip" skipexisting="true"/>
+    <touch file="target/download/es/DONE"/>
+  </target>
   
+  <target name="-check-download-zh">
+    <available property="download-zh.DONE" file="target/download/zh/DONE"/>
+  </target>
+
+  <target name="download-zh" depends="-check-download-zh" unless="download-zh.DONE">
+    <mkdir dir="target/download/zh"/>
+    <get src="http://nlp.stanford.edu/software/stanford-chinese-corenlp-${core.chinese.date}-models.jar" 
+        dest="target/download/zh/zh-models.zip" skipexisting="true"/>
+    <touch file="target/download/zh/DONE"/>
+  </target>
   
   <target name="jar-notice">
     <echo>================================</echo>

@@ -31,7 +31,7 @@
   <name>DKPro Core GPL - Stanford CoreNLP Suite (v ${corenlp.version}) (GPL)</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
-    <corenlp.version>3.8.0</corenlp.version>
+    <corenlp.version>3.9.1</corenlp.version>
   </properties>
   <dependencies>
     <dependency>
@@ -545,7 +545,7 @@
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-fr-ud</artifactId>
-        <version>20160114.1</version>
+        <version>20180227.1</version>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
