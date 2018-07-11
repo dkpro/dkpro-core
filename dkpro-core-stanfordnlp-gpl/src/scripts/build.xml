@@ -64,9 +64,6 @@
   <target name="newmodels">
     <property name="install-artifact-mode" value="remote"/>
     
-    <antcall target="tagger-ar-default"/>
-    <antcall target="ner-de-germeval2014.hgc_175m_600.crf"/>
-    
     <antcall target="coref-en-default"/>
   </target>
   
@@ -1325,21 +1322,21 @@
     
   <target name="coref-en-default" depends="download-core">
     <install-stub-and-upstream-folder 
-      folder="target/download/core/coref-en"
-      groupId="de.tudarmstadt.ukp.dkpro.core" 
-      artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+        folder="target/download/core/coref-en"
+        groupId="de.tudarmstadt.ukp.dkpro.core" 
+        artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
         upstreamVersion="${core.version}"
         metaDataVersion="1"
-      tool="coref"
-      language="en"
-      variant="default"/>
+        tool="coref"
+        language="en"
+        variant="default"/>
   </target>
   
   <target name="es">
     <antcall target="tagger-es-default"/>
     <antcall target="tagger-es-distsim"/>
     <antcall target="ner-es-ancora.distsim.s512.crf"/>
-        <antcall target="ner-es-freme-wikiner"/>
+    <antcall target="ner-es-freme-wikiner"/>
     <antcall target="parser-es-pcfg"/>
     <antcall target="parser-es-sr"/>
     <antcall target="parser-es-sr-beam"/>
@@ -2066,21 +2063,21 @@
 
   <target name="download-core" depends="-check-download-core" unless="download-core.DONE">
     <mkdir dir="target/download/core"/>
-      <get 
-        src="http://nlp.stanford.edu/software/stanford-corenlp-full-${core.date}.zip"
-        dest="target/download/core/core-nlp.zip"
-        skipexisting="true"/>
-      <unzip src="target/download/core/core-nlp.zip" dest="target/download/core">
-        <patternset>
-          <include name="**/stanford-corenlp-*-models.jar"/>    
-      </patternset>
-        <chainedmapper>
-          <mapper type="flatten"/>
-          <firstmatchmapper>
-          <globmapper from="*" to="stanford-corenlp-models.jar"/>
-        </firstmatchmapper>
-        </chainedmapper>
-      </unzip>
+    <get 
+      src="http://nlp.stanford.edu/software/stanford-corenlp-full-${core.date}.zip"
+      dest="target/download/core/core-nlp.zip"
+      skipexisting="true"/>
+    <unzip src="target/download/core/core-nlp.zip" dest="target/download/core">
+      <patternset>
+        <include name="**/stanford-corenlp-*-models.jar"/>    
+    </patternset>
+      <chainedmapper>
+        <mapper type="flatten"/>
+        <firstmatchmapper>
+        <globmapper from="*" to="stanford-corenlp-models.jar"/>
+      </firstmatchmapper>
+      </chainedmapper>
+    </unzip>
     <unzip src="target/download/core/stanford-corenlp-models.jar" dest="target/download/core">
         <patternset>
           <include name="**/*.ser.gz"/>    
@@ -2091,14 +2088,15 @@
         </chainedmapper>
     </unzip>
     <unzip src="target/download/core/stanford-corenlp-models.jar" dest="target/download/core/coref-en">
-        <patternset>
-          <include name="**/dcoref/*"/>    
+      <patternset>
+        <include name="**/dcoref/*"/>
+        <include name="**/models/coref/**/*"/>
       </patternset>
-        <chainedmapper>
-          <mapper type="flatten"/>
-        </chainedmapper>
+      <chainedmapper>
+        <mapper type="flatten"/>
+      </chainedmapper>
     </unzip>
-      <delete file="target/download/core/stanford-corenlp-models.jar"/>
+    <delete file="target/download/core/stanford-corenlp-models.jar"/>
     <touch file="target/download/core/DONE"/>
   </target>
   
