@@ -172,6 +172,11 @@
       <artifactId>de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-en-sd</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      <artifactId>de.tudarmstadt.ukp.dkpro.core.corenlp-model-tokenizer-ar-atb-bn-arztrain</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <dependencyManagement>
     <dependencies>
@@ -555,6 +560,11 @@
         <artifactId>de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-zh-ud</artifactId>
         <version>20161223.1</version>
       </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.corenlp-model-tokenizer-ar-atb-bn-arztrain</artifactId>
+        <version>20170614.1</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <build>
@@ -866,6 +876,11 @@
           <artifactId>de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-zh-ud</artifactId>
           <scope>test</scope>
         </dependency>
+        <dependency>
+          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+          <artifactId>de.tudarmstadt.ukp.dkpro.core.corenlp-model-tokenizer-ar-atb-bn-arztrain</artifactId>
+          <scope>test</scope>
+        </dependency>
       </dependencies>
       <build>
         <pluginManagement>
@@ -876,6 +891,7 @@
               <configuration>
                 <usedDependencies combine.children="append">
                   <!-- Models not detected by byte-code analysis -->
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.corenlp-model-tokenizer-ar-atb-bn-arztrain</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-de-ud</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-en-ptb-conll</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.corenlp-model-depparser-en-ud</usedDependency>
