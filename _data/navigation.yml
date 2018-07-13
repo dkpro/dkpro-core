@@ -22,6 +22,8 @@
     url: "/releases/!LATEST!/docs/model-reference.html"
   - title: "Formats"
     url: "/releases/!LATEST!/docs/format-reference.html"
+  - title: "Datasets"
+    url: "/releases/!LATEST!/docs/dataset-reference.html"
   - title: "Typesystem"
     url: "/releases/!LATEST!/docs/typesystem-reference.html"
   - title: "Javadoc"
