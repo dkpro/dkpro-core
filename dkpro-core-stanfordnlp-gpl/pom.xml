@@ -824,7 +824,7 @@
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-zh-factored</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-zh-sr</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-zh-xinhua-factored</usedDependency>
-                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-ar-accurate</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-ar-default</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-ud</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-fast-caseless</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-fast</usedDependency>

@@ -18,7 +18,9 @@
     along with this program. If not, see http://www.gnu.org/licenses/.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
@@ -55,7 +57,7 @@
       <artifactId>stanford-corenlp</artifactId>
       <version>${corenlp.version}</version>
     </dependency>
-    <!--
+    <!-- https://github.com/dkpro/dkpro-core/issues/779
       <dependency>
       <groupId>edu.stanford.nlp</groupId>
       <artifactId>stanford-corenlp</artifactId>
@@ -927,6 +929,7 @@
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-zh-factored</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-zh-sr</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-zh-xinhua-factored</usedDependency>
+                  <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-ar-default</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-ud</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-fast-caseless</usedDependency>
                   <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-fast</usedDependency>
@@ -947,4 +950,5 @@
         </pluginManagement>
       </build>
     </profile>
-  </profiles></project>
+  </profiles>
+</project>
