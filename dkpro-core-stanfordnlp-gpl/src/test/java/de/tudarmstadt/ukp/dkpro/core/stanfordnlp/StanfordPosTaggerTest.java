@@ -151,10 +151,10 @@ public class StanfordPosTaggerTest
     {
         JCas jcas = runTest("fr", null, "La traduction d'un texte du français vers l'anglais.");
 
-        String[] posMapped = { "POS_DET", "POS_NOUN", "POS_ADP", "POS_DET", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_ADP", "POS_DET",
-                "POS_NOUN", "POS_PUNCT" };
+        String[] posMapped = { "POS_DET", "POS_NOUN", "POS_ADP", "POS_DET", "POS_NOUN", "POS_ADP",
+                "POS_DET", "POS_NOUN", "POS_ADP", "POS_DET", "POS_NOUN", "POS_PUNCT" };
 
-        String[] posOriginal = { "DET", "NC", "P", "DET", "NC", "P", "NC", "P", "DET", "NC",
+        String[] posOriginal = { "DET", "NC", "P", "DET", "NC", "P", "DET", "NC", "P", "DET", "NC",
                 "PUNC" };
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));

@@ -48,6 +48,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetBeginAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetEndAnnotation;
+import edu.stanford.nlp.ling.CoreAnnotations.CoarseNamedEntityTagAnnotation;
+import edu.stanford.nlp.ling.CoreAnnotations.FineGrainedNamedEntityTagAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.IndexAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.LemmaAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.NamedEntityTagAnnotation;
@@ -64,6 +66,7 @@ import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.process.CoreLabelTokenFactory;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.semgraph.SemanticGraph;
+import edu.stanford.nlp.semgraph.SemanticGraphCoreAnnotations.BasicDependenciesAnnotation;
 import edu.stanford.nlp.semgraph.SemanticGraphCoreAnnotations.EnhancedDependenciesAnnotation;
 import edu.stanford.nlp.trees.GrammaticalRelation;
 import edu.stanford.nlp.trees.LabeledScoredTreeFactory;
@@ -135,6 +138,8 @@ public class DKPro2CoreNlp
 
     public Annotation convert(JCas aSource, Annotation aTarget)
     {
+        List<CoreLabel> allTokens = new ArrayList<>();
+        
         // Document annotation
         aTarget.set(CoreAnnotations.TextAnnotation.class, aSource.getDocumentText());
         
@@ -196,9 +201,13 @@ public class DKPro2CoreNlp
                 List<NamedEntity> nes = selectCovered(NamedEntity.class, t);
                 if (nes.size() > 0) {
                     token.set(NamedEntityTagAnnotation.class, nes.get(0).getValue());
+                    token.set(FineGrainedNamedEntityTagAnnotation.class, nes.get(0).getValue());
+                    token.set(CoarseNamedEntityTagAnnotation.class, nes.get(0).getValue());
                 }
                 else {
                     token.set(NamedEntityTagAnnotation.class, "O");
+                    token.set(FineGrainedNamedEntityTagAnnotation.class, "O");
+                    token.set(CoarseNamedEntityTagAnnotation.class, "O");
                 }
             }
 
@@ -210,17 +219,25 @@ public class DKPro2CoreNlp
             }
             
             // Dependencies
-            List<TypedDependency> dependencies = new ArrayList<>();
+            List<TypedDependency> basicDependencies = new ArrayList<>();
+            List<TypedDependency> enhancedDependencies = new ArrayList<>();
             for (Dependency d : selectCovered(Dependency.class, s)) {
                 TypedDependency dep = new TypedDependency(
                         GrammaticalRelation.valueOf(d.getDependencyType()),
                         idxTokens.get(d.getGovernor()), idxTokens.get(d.getDependent()));
-                if (DependencyFlavor.ENHANCED.equals(d.getFlavor())) {
-                    dep.setExtra();
+                
+                if (d.getFlavor() == null || DependencyFlavor.BASIC.equals(d.getFlavor())) {
+                    basicDependencies.add(dep);
                 }
-                dependencies.add(dep);
+                else if (DependencyFlavor.ENHANCED.equals(d.getFlavor())) {
+                    dep.setExtra();
+                    basicDependencies.add(dep);
+                    enhancedDependencies.add(dep);
+                }
             }
-            sentence.set(EnhancedDependenciesAnnotation.class, new SemanticGraph(dependencies));
+            sentence.set(BasicDependenciesAnnotation.class, new SemanticGraph(basicDependencies));
+            sentence.set(EnhancedDependenciesAnnotation.class,
+                    new SemanticGraph(enhancedDependencies));
             
             if (ptb3Escaping) {
                 tokens = applyPtbEscaping(tokens, quoteBegin, quoteEnd);
@@ -228,8 +245,12 @@ public class DKPro2CoreNlp
 
             sentence.set(TokensAnnotation.class, tokens);
             sentences.add(sentence);
+            
+            allTokens.addAll(tokens);
         }
+        
         aTarget.set(SentencesAnnotation.class, sentences);
+        aTarget.set(TokensAnnotation.class, allTokens);
         
         return aTarget;
     }
