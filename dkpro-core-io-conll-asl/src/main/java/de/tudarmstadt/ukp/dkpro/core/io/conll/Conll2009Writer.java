@@ -135,6 +135,9 @@ public class Conll2009Writer
     @ConfigurationParameter(name = PARAM_WRITE_SEMANTIC_PREDICATE, mandatory = true, defaultValue = "true")
     private boolean writeSemanticPredicate;
     
+    /**
+     * Write text covered by the token instead of the token form.
+     */
     public static final String PARAM_WRITE_COVERED_TEXT = 
             ComponentParameters.PARAM_WRITE_COVERED_TEXT;
     @ConfigurationParameter(name = PARAM_WRITE_COVERED_TEXT, mandatory = true, defaultValue = "true")

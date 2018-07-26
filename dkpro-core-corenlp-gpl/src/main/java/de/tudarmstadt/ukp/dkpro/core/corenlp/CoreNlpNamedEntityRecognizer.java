@@ -328,7 +328,7 @@ public class CoreNlpNamedEntityRecognizer
                     useSUTime, augmentRegexNER, classifier);
             
             NERCombinerAnnotator annotator = new NERCombinerAnnotator(combiner, verbose,
-                    numThreads, maxTime, maxSentenceLength);
+                    numThreads, maxTime, maxSentenceLength, false, false);
             return annotator;
         }
     }
