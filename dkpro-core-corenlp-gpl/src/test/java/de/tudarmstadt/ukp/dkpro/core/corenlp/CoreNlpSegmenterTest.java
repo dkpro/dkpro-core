@@ -114,6 +114,28 @@ public class CoreNlpSegmenterTest
     }
     
     @Test
+    public void testArabic() throws Exception
+    {
+        JCas jcas = JCasFactory.createJCas();
+        jcas.setDocumentLanguage("ar");
+        jcas.setDocumentText("هل من المهم مراقبة وزن الرضيع خلال السنة الاولى من عمره؟\n"
+            + " هل يجب وزن و قياس الطفل خلال السنة الاولى من عمره ؟\n");
+        
+        AnalysisEngine aed = createEngine(CoreNlpSegmenter.class);
+        aed.process(jcas);
+        
+        String[] sentences = { "هل من المهم مراقبة وزن الرضيع خلال السنة الاولى من عمره؟", 
+                "هل يجب وزن و قياس الطفل خلال السنة الاولى من عمره ؟"};
+        
+        String[] tokens = { "هل", "من", "المهم", "مراقبة", "وزن", "الرضيع", "خلال", "السنة", 
+                "الاولى", "من", "عمر", "ه", "؟", "هل", "يجب", "وزن", "و", "قياس", "الطفل", 
+                "خلال", "السنة", "الاولى", "من", "عمر", "ه", "؟"};
+        
+        AssertAnnotations.assertSentence(sentences, select(jcas, Sentence.class));
+        AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
+    }
+    
+    @Test
     public void testZoning() throws Exception
     {
         SegmenterHarness.testZoning(CoreNlpSegmenter.class);

@@ -31,6 +31,7 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 import edu.stanford.nlp.ling.CoreAnnotations;
@@ -111,6 +112,21 @@ public class CoreNlpSegmenter
             defaultValue = {})
     private Set<String> tokenRegexesToDiscard;
     
+    /**
+     * Variant of a model the model. Used to address a specific model if here are multiple models
+     * for one language.
+     */
+    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+    private String variant;
+
+    /**
+     * Location from which the model is read.
+     */
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    private String modelLocation;
+
     /** 
      * Additional options that should be passed to the tokenizers. 
      */ 
@@ -131,7 +147,7 @@ public class CoreNlpSegmenter
         tokenizerAnnotator = new ModelProviderBase<TokenizerAnnotator>(this, "corenlp", "tokenizer")
         {
             {
-                setDefault(LOCATION, NOT_REQUIRED);
+                setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/corenlp/lib/tokenizer-${language}-${variant}.properties");
             }
             
             @Override
@@ -153,7 +169,7 @@ public class CoreNlpSegmenter
                 if (options.contains("splitAll=true")) {
                     useCoreLabelWord = true;
                 }
-               
+                
                 NewlineIsSentenceBreak breakNL = 
                     WordToSentenceProcessor.stringToNewlineIsSentenceBreak(newlineIsSentenceBreak);
                 if (NewlineIsSentenceBreak.ALWAYS == breakNL || 
@@ -162,6 +178,18 @@ public class CoreNlpSegmenter
                 }
                 
                 coreNlpProps.setProperty("tokenize.options", options);
+                
+                if (aUrl != null) {
+                    String modelFile = aUrl.toString();
+                    
+                    // Loading gzipped files from URL is broken in CoreNLP
+                    // https://github.com/stanfordnlp/CoreNLP/issues/94
+                    if (modelFile.startsWith("jar:") && modelFile.endsWith(".gz")) {
+                        modelFile = org.apache.commons.lang3.StringUtils.substringAfter(modelFile, "!/");
+                    }
+                    
+                    coreNlpProps.setProperty("segment.model", modelFile);
+                }
                 
                 String extraOptions = null;
                 
