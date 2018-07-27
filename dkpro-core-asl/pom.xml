@@ -393,7 +393,7 @@
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core.jtok-asl</artifactId>
+        <artifactId>dkpro-core-jtok-asl</artifactId>
         <version>1.10.0-SNAPSHOT</version>
       </dependency>
      <dependency>
@@ -473,7 +473,7 @@
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-asl</artifactId>
+        <artifactId>dkpro-core-rftagger-asl</artifactId>
         <version>1.10.0-SNAPSHOT</version>
       </dependency>
       <dependency>

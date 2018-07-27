@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.rftagger;
+package org.dkpro.core.rftagger;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
 
@@ -167,6 +167,10 @@ public class RfTagger
 
         modelProvider = new ModelProviderBase<File>(this, "rftagger", "morph")
         {
+            {
+                setDefault(PACKAGE, "de/tudarmstadt/ukp/dkpro/core/rftagger");
+            }
+            
             @Override
             protected File produceResource(URL aUrl)
                 throws IOException

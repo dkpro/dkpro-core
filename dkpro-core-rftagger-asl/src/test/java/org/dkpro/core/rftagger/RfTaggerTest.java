@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.rftagger;
+package org.dkpro.core.rftagger;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertMorph;
 import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertPOS;
@@ -32,6 +32,7 @@ import java.util.Set;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.jcas.JCas;
+import org.dkpro.core.rftagger.RfTagger;
 import org.junit.Rule;
 import org.junit.Test;
 
