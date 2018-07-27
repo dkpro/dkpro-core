@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.langdetect;
+package org.dkpro.core.langdetect;
 
 import java.io.File;
 import java.io.IOException;
@@ -102,6 +102,7 @@ public class LangDetectLanguageIdentifier
             {
                 setContextObject(LangDetectLanguageIdentifier.this);
 
+                setDefault(PACKAGE, "de/tudarmstadt/ukp/dkpro/core/langdetect");
                 setDefault(ARTIFACT_ID, "${groupId}.langdetect-model-${language}-${variant}");
                 setDefault(LOCATION,
                         "classpath:/${package}/lib/languageidentifier-${language}-${variant}.properties");

@@ -133,7 +133,7 @@
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core.castransformation-asl</artifactId>
+        <artifactId>dkpro-core-castransformation-asl</artifactId>
         <version>1.10.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -403,7 +403,7 @@
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core.langdetect-asl</artifactId>
+        <artifactId>dkpro-core-langdetect-asl</artifactId>
         <version>1.10.0-SNAPSHOT</version>
       </dependency>
       <dependency>

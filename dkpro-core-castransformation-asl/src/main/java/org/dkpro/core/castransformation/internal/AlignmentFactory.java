@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.castransformation.internal;
+package org.dkpro.core.castransformation.internal;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,11 +25,11 @@ import org.apache.uima.cas.FSIndex;
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
+import org.dkpro.core.castransformation.ApplyChangesAnnotator;
+import org.dkpro.core.castransformation.Backmapper;
 
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
-import de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator;
-import de.tudarmstadt.ukp.dkpro.core.castransformation.Backmapper;
 
 /**
  * Creates alignment state for the {@link ApplyChangesAnnotator} and the {@link Backmapper} using

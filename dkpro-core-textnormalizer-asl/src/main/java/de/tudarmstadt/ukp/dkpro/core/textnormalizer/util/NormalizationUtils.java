@@ -17,9 +17,9 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.textnormalizer.util;
 
-import static de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator.OP_DELETE;
-import static de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator.OP_INSERT;
-import static de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator.OP_REPLACE;
+import static org.dkpro.core.castransformation.ApplyChangesAnnotator.OP_DELETE;
+import static org.dkpro.core.castransformation.ApplyChangesAnnotator.OP_INSERT;
+import static org.dkpro.core.castransformation.ApplyChangesAnnotator.OP_REPLACE;
 
 import java.util.Collections;
 import java.util.List;

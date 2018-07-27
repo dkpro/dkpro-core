@@ -23,4 +23,4 @@
  *
  * @since 1.1.0
  */
-package de.tudarmstadt.ukp.dkpro.core.castransformation;
+package org.dkpro.core.castransformation;

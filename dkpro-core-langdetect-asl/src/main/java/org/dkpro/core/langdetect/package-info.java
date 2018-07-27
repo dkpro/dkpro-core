@@ -21,4 +21,4 @@
  *
  * @since 1.5.0
  */
-package de.tudarmstadt.ukp.dkpro.core.langdetect;
+package org.dkpro.core.langdetect;

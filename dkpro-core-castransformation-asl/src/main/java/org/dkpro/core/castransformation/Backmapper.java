@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.castransformation;
+package org.dkpro.core.castransformation;
 
 import static org.apache.uima.fit.util.CasUtil.selectAllFS;
 
@@ -38,13 +38,12 @@ import org.apache.uima.internal.util.PositiveIntSet_impl;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.util.CasCopier;
+import org.dkpro.core.castransformation.internal.AlignmentFactory;
+import org.dkpro.core.castransformation.internal.AlignmentStorage;
 
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.ImmutableInterval;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.Interval;
-import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentFactory;
-import de.tudarmstadt.ukp.dkpro.core.castransformation.internal.AlignmentStorage;
-
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**

@@ -17,7 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.textnormalizer;
 
-import static de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator.OP_REPLACE;
+import static org.dkpro.core.castransformation.ApplyChangesAnnotator.OP_REPLACE;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,7 +41,6 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
-
 import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
