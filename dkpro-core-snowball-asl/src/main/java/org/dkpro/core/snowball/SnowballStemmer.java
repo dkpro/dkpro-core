@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.tudarmstadt.ukp.dkpro.core.snowball;
+package org.dkpro.core.snowball;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 

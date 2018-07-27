@@ -21,4 +21,4 @@
  *
  * @since 1.1.0
  */
-package de.tudarmstadt.ukp.dkpro.core.snowball;
+package org.dkpro.core.snowball;

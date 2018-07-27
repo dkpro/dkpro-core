@@ -478,7 +478,7 @@
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core.snowball-asl</artifactId>
+        <artifactId>dkpro-core-snowball-asl</artifactId>
         <version>1.10.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -498,7 +498,7 @@
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core.textcat-asl</artifactId>
+        <artifactId>dkpro-core-textcat-asl</artifactId>
         <version>1.10.0-SNAPSHOT</version>
       </dependency>
       <dependency>

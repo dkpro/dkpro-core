@@ -79,7 +79,7 @@
     </dependency>
     <dependency>
       <groupId>org.dkpro.core</groupId>
-      <artifactId>de.tudarmstadt.ukp.dkpro.core.snowball-asl</artifactId>
+      <artifactId>dkpro-core-snowball-asl</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
