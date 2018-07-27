@@ -120,6 +120,13 @@ public class TreeTaggerChunker
     protected String modelLocation;
 
     /**
+     * The character encoding used by the model.
+     */
+    public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
+    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = false)
+    protected String modelEncoding;
+
+    /**
      * Location of the mapping file for chunk tags to UIMA types.
      */
     public static final String PARAM_CHUNK_MAPPING_LOCATION = 
@@ -193,7 +200,8 @@ public class TreeTaggerChunker
                 throws IOException
             {
                 Properties meta = getResourceMetaData();
-                String encoding = meta.getProperty("encoding");
+                String encoding = modelEncoding != null ? modelEncoding : meta
+                        .getProperty("encoding");
                 String tagset = meta.getProperty("chunk.tagset");
                 String flush = meta.getProperty("flushSequence",
                         DefaultModel.DEFAULT_FLUSH_SEQUENCE);
