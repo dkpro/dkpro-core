@@ -22,9 +22,8 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.dkpro.core.jazzy.JazzyChecker;
+import org.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 public class SpellingNormalizerTest
 {

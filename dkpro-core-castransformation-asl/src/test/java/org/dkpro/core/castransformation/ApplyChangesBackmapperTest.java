@@ -36,9 +36,8 @@ import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.AnnotationBase;
-import org.dkpro.core.castransformation.ApplyChangesAnnotator;
-import org.dkpro.core.castransformation.Backmapper;
 import org.dkpro.core.castransformation.internal.AlignmentStorage;
+import org.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -48,7 +47,6 @@ import de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiWriter;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.EOLUtils;
 import de.tudarmstadt.ukp.dkpro.core.testing.dumper.CasDumpWriter;
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 public class ApplyChangesBackmapperTest
 {

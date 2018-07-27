@@ -26,6 +26,7 @@ import org.apache.uima.resource.ExternalResourceDescription;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dkpro.core.castransformation.ApplyChangesAnnotator;
 import org.dkpro.core.jazzy.JazzyChecker;
+import org.dkpro.core.tokit.BreakIteratorSegmenter;
 
 import de.tudarmstadt.ukp.dkpro.core.textnormalizer.ReplacementFileNormalizer;
 import de.tudarmstadt.ukp.dkpro.core.textnormalizer.ReplacementFileNormalizer.SrcSurroundings;
@@ -34,7 +35,6 @@ import de.tudarmstadt.ukp.dkpro.core.textnormalizer.SpellingNormalizer;
 import de.tudarmstadt.ukp.dkpro.core.textnormalizer.frequency.CapitalizationNormalizer;
 import de.tudarmstadt.ukp.dkpro.core.textnormalizer.frequency.ExpressiveLengtheningNormalizer;
 import de.tudarmstadt.ukp.dkpro.core.textnormalizer.frequency.SharpSNormalizer;
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 @Deprecated
 public class NormalizerFactory 

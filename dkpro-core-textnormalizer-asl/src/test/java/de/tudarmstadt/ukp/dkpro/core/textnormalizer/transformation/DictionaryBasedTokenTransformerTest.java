@@ -22,9 +22,8 @@ import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTran
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 public class DictionaryBasedTokenTransformerTest
 {

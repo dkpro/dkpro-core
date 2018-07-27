@@ -22,12 +22,12 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 
 import org.apache.uima.fit.pipeline.SimplePipeline;
+import org.dkpro.core.tokit.BreakIteratorSegmenter;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.io.tei.TeiReader;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 public class OpenNlpPosTaggerTest
 {
