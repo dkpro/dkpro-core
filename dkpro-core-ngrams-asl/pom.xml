@@ -20,12 +20,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
     <groupId>org.dkpro.core</groupId>
+    <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
     <version>1.10.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
-  <artifactId>de.tudarmstadt.ukp.dkpro.core.ngrams-asl</artifactId>
+  <artifactId>dkpro-core-ngrams-asl</artifactId>
   <packaging>jar</packaging>
   <name>DKPro Core ASL - N-Gram Tools</name>
   <url>https://dkpro.github.io/dkpro-core/</url>

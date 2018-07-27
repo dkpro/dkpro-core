@@ -363,7 +363,7 @@
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core.io.web1t-asl</artifactId>
+        <artifactId>dkpro-core-io-web1t-asl</artifactId>
         <version>1.10.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -398,7 +398,7 @@
       </dependency>
      <dependency>
         <groupId>org.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core.languagetool-asl</artifactId>
+        <artifactId>dkpro-core-languagetool-asl</artifactId>
         <version>1.10.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -438,7 +438,7 @@
       </dependency>
       <dependency>
         <groupId>org.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core.ngrams-asl</artifactId>
+        <artifactId>dkpro-core-ngrams-asl</artifactId>
         <version>1.10.0-SNAPSHOT</version>
       </dependency>
       <dependency>
