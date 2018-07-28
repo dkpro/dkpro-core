@@ -18,7 +18,7 @@
   - title: "Tagset Mapping Reference"
     url: "https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20(GitHub)/de.tudarmstadt.ukp.dkpro.core$de.tudarmstadt.ukp.dkpro.core.doc-asl/doclinks/7/"
 
-- version: 1.9.2
+- version: 1.9.3
   date: 2018-07-28
   status: stable
   groupId: de.tudarmstadt.ukp.dkpro.core
