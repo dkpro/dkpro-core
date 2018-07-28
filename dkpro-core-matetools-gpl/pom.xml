@@ -23,7 +23,7 @@
   <parent>
     <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
     <artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
-    <version>1.9.3</version>
+    <version>1.9.4-SNAPSHOT</version>
     <relativePath>../dkpro-core-gpl</relativePath>
   </parent>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-gpl</artifactId>
@@ -141,7 +141,7 @@
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.hunpos-asl</artifactId>
-        <version>1.9.3</version>
+        <version>1.9.4-SNAPSHOT</version>
         <scope>import</scope>
         <type>pom</type>
       </dependency>
