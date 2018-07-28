@@ -1,0 +1,103 @@
+{
+    "name": "Penn Arabic Treebank",
+    "description": "Penn Arabic Treebank syntactic tagset\n\nReferences:\n* http://www.ircs.upenn.edu/arabic/Jan03release/TBParsing-info.txt\n",
+    "language": "ar",
+    "tags": [
+        {
+            "tag_name": "ADJP",
+            "tag_description": "adjective phrase"
+        },
+        {
+            "tag_name": "ADVP",
+            "tag_description": "adverb phrase"
+        },
+        {
+            "tag_name": "CONJP",
+            "tag_description": "conjunction phrase (multi-word conjunction)"
+        },
+        {
+            "tag_name": "FRAG",
+            "tag_description": "fragment"
+        },
+        {
+            "tag_name": "INTJ",
+            "tag_description": "interjection"
+        },
+        {
+            "tag_name": "NAC",
+            "tag_description": "Not-A-Constituent (mostly rightward moved conjuncts with conjunction)"
+        },
+        {
+            "tag_name": "NP",
+            "tag_description": "noun phrase"
+        },
+        {
+            "tag_name": "NX",
+            "tag_description": "noun head in certain complex coordination contexts"
+        },
+        {
+            "tag_name": "PP",
+            "tag_description": "prepositional phrase"
+        },
+        {
+            "tag_name": "PRN",
+            "tag_description": "parenthetical"
+        },
+        {
+            "tag_name": "PRT",
+            "tag_description": "particle"
+        },
+        {
+            "tag_name": "QP",
+            "tag_description": "quantity phrase (multi-word numbers)"
+        },
+        {
+            "tag_name": "ROOT",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "S",
+            "tag_description": "sentence"
+        },
+        {
+            "tag_name": "SBAR",
+            "tag_description": "S-bar (subordinate clause, complementizer or WH- and sentence)"
+        },
+        {
+            "tag_name": "SBARQ",
+            "tag_description": "S-bar that is a question"
+        },
+        {
+            "tag_name": "SQ",
+            "tag_description": "S that is a question"
+        },
+        {
+            "tag_name": "UCP",
+            "tag_description": "Unlike-Coordinated-Phrase (dominates coordination of NP and PP, e.g.)"
+        },
+        {
+            "tag_name": "VP",
+            "tag_description": "verb phrase"
+        },
+        {
+            "tag_name": "WHADJP",
+            "tag_description": "WH- adjective phrase"
+        },
+        {
+            "tag_name": "WHADVP",
+            "tag_description": "WH- adverb phrase"
+        },
+        {
+            "tag_name": "WHNP",
+            "tag_description": "WH- noun phrase"
+        },
+        {
+            "tag_name": "WHPP",
+            "tag_description": "WH- prepositional phrase"
+        },
+        {
+            "tag_name": "X",
+            "tag_description": "unknown, technical problem, etc."
+        }
+    ]
+}

@@ -1,0 +1,3711 @@
+{
+    "name": "NKJP",
+    "description": "National Corpus of Polish Part-of-Speech tags\n\nReferences:\n* http://nkjp.pl/poliqarp/help/ense2.html\n",
+    "language": "pl",
+    "tags": [
+        {
+            "tag_name": "SENT",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:acc:f:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:acc:f:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:acc:f:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:acc:m1:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:acc:m1:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:acc:m1:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:acc:m2:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:acc:m2:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:acc:m2:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:acc:m3:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:acc:m3:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:acc:m3:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:acc:n:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:acc:n:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:acc:n:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:dat:f:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:dat:f:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:dat:f:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:dat:m1:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:dat:m1:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:dat:m1:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:dat:m2:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:dat:m3:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:dat:m3:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:dat:n:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:dat:n:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:gen:f:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:gen:f:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:gen:f:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:gen:m1:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:gen:m1:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:gen:m1:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:gen:m2:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:gen:m2:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:gen:m2:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:gen:m3:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:gen:m3:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:gen:m3:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:gen:n:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:gen:n:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:gen:n:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:inst:f:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:inst:f:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:inst:f:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:inst:m1:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:inst:m1:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:inst:m1:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:inst:m2:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:inst:m3:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:inst:m3:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:inst:m3:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:inst:n:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:inst:n:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:inst:n:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:loc:f:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:loc:f:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:loc:f:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:loc:m1:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:loc:m1:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:loc:m1:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:loc:m2:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:loc:m3:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:loc:m3:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:loc:m3:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:loc:n:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:loc:n:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:loc:n:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:nom:f:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:nom:f:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:nom:f:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:nom:m1:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:nom:m1:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:nom:m1:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:nom:m2:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:nom:m2:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:nom:m2:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:nom:m3:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:nom:m3:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:nom:m3:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:nom:n:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:nom:n:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:pl:nom:n:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:acc:f:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:acc:f:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:acc:f:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:acc:m1:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:acc:m1:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:acc:m1:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:acc:m2:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:acc:m2:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:acc:m2:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:acc:m3:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:acc:m3:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:acc:m3:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:acc:n:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:acc:n:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:acc:n:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:dat:f:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:dat:f:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:dat:f:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:dat:m1:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:dat:m1:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:dat:m1:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:dat:m2:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:dat:m3:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:dat:m3:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:dat:m3:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:dat:n:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:dat:n:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:dat:n:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:gen:f:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:gen:f:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:gen:f:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:gen:m1:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:gen:m1:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:gen:m1:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:gen:m2:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:gen:m2:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:gen:m3:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:gen:m3:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:gen:m3:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:gen:n:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:gen:n:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:gen:n:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:inst:f:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:inst:f:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:inst:f:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:inst:m1:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:inst:m1:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:inst:m1:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:inst:m2:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:inst:m2:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:inst:m2:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:inst:m3:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:inst:m3:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:inst:m3:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:inst:n:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:inst:n:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:inst:n:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:loc:f:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:loc:f:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:loc:f:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:loc:m1:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:loc:m1:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:loc:m1:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:loc:m2:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:loc:m2:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:loc:m3:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:loc:m3:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:loc:m3:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:loc:n:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:loc:n:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:loc:n:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:nom:f:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:nom:f:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:nom:f:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:nom:m1:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:nom:m1:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:nom:m1:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:nom:m2:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:nom:m2:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:nom:m2:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:nom:m3:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:nom:m3:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:nom:m3:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:nom:n:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:nom:n:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:nom:n:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:voc:f:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:voc:f:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:voc:m1:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:voc:m1:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:voc:m2:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:voc:m3:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adj:sg:voc:n:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adja",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adjc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adjp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adv",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adv:com",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adv:pos",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "adv:sup",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "aglt:pl:pri:imperf:nwok",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "aglt:pl:pri:imperf:wok",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "aglt:pl:sec:imperf:nwok",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "aglt:sg:pri:imperf:nwok",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "aglt:sg:pri:imperf:wok",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "aglt:sg:sec:imperf:nwok",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "aglt:sg:sec:imperf:wok",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "aglt:sg:ter:imperf:nwok",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "bedzie:pl:pri:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "bedzie:pl:sec:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "bedzie:pl:ter:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "bedzie:sg:pri:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "bedzie:sg:sec:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "bedzie:sg:ter:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "brev:npun",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "brev:pun",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "burk",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "comp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "conj",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "depr:pl:acc:m2",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "depr:pl:nom:m2",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fin:pl:pri:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fin:pl:pri:perf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fin:pl:sec:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fin:pl:sec:perf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fin:pl:ter:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fin:pl:ter:perf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fin:sg:pri:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fin:sg:pri:perf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fin:sg:sec:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fin:sg:sec:perf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fin:sg:ter:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "fin:sg:ter:perf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:pl:dat:n:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:pl:gen:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:pl:gen:n:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:pl:inst:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:pl:inst:n:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:pl:loc:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:pl:nom:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:pl:nom:n:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:sg:acc:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:sg:acc:n:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:sg:acc:n:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:sg:acc:n:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:sg:dat:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:sg:dat:n:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:sg:gen:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:sg:gen:n:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:sg:gen:n:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:sg:gen:n:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:sg:inst:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:sg:inst:n:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:sg:inst:n:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:sg:inst:n:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:sg:loc:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:sg:loc:n:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:sg:loc:n:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:sg:loc:n:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:sg:nom:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:sg:nom:n:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:sg:nom:n:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ger:sg:nom:n:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "imps:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "imps:perf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "impt:pl:pri:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "impt:pl:pri:perf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "impt:pl:sec:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "impt:pl:sec:perf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "impt:sg:sec:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "impt:sg:sec:perf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "inf:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "inf:perf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "interj",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "interp",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:acc:f:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:acc:f:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:acc:m1:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:acc:m1:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:acc:m2:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:acc:m2:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:acc:m3:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:acc:m3:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:acc:n:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:acc:n:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:dat:f:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:dat:m1:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:dat:m2:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:dat:m3:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:dat:m3:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:dat:n:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:gen:f:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:gen:f:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:gen:m1:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:gen:m1:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:gen:m2:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:gen:m2:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:gen:m3:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:gen:m3:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:gen:n:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:gen:n:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:inst:f:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:inst:m1:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:inst:m2:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:inst:m3:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:inst:m3:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:inst:n:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:loc:f:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:loc:f:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:loc:m1:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:loc:m2:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:loc:m2:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:loc:m3:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:loc:m3:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:loc:n:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:nom:f:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:nom:f:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:nom:m1:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:nom:m1:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:nom:m2:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:nom:m2:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:nom:m3:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:nom:m3:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:nom:n:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:pl:nom:n:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:sg:acc:m3:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:sg:gen:m1:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:sg:gen:m3:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:sg:gen:m3:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:sg:nom:f:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:sg:nom:m3:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:sg:nom:m3:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "num:sg:nom:n:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "numcol:pl:acc:m1:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "numcol:pl:acc:n:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "numcol:pl:dat:m1:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "numcol:pl:gen:m1:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "numcol:pl:gen:m1:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "numcol:pl:gen:n:congr",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "numcol:pl:gen:n:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "numcol:pl:inst:m1:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "numcol:pl:inst:n:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "numcol:pl:nom:m1:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "numcol:pl:nom:n:rec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:acc:f:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:acc:f:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:acc:m1:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:acc:m2:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:acc:m3:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:acc:m3:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:acc:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:acc:n:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:dat:f:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:dat:m1:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:dat:m2:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:dat:m3:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:dat:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:gen:f:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:gen:f:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:gen:m1:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:gen:m1:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:gen:m2:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:gen:m3:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:gen:m3:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:gen:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:inst:f:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:inst:m1:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:inst:m2:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:inst:m3:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:inst:m3:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:inst:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:inst:n:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:loc:f:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:loc:m1:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:loc:m3:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:loc:m3:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:loc:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:loc:n:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:nom:f:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:nom:f:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:nom:m1:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:nom:m2:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:nom:m3:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:nom:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:pl:nom:n:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:acc:f:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:acc:f:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:acc:m1:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:acc:m2:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:acc:m3:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:acc:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:acc:n:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:dat:f:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:dat:m1:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:dat:m2:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:dat:m3:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:dat:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:gen:f:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:gen:f:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:gen:m1:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:gen:m1:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:gen:m2:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:gen:m3:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:gen:m3:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:gen:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:gen:n:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:inst:f:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:inst:f:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:inst:m1:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:inst:m1:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:inst:m2:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:inst:m2:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:inst:m3:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:inst:m3:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:inst:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:loc:f:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:loc:f:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:loc:m1:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:loc:m2:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:loc:m3:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:loc:m3:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:loc:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:loc:n:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:nom:f:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:nom:f:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:nom:m1:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:nom:m1:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:nom:m2:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:nom:m3:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:nom:m3:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:nom:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:nom:n:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pact:sg:voc:m1:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pant:perf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pcon:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:acc:f:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:acc:f:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:acc:f:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:acc:m1:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:acc:m1:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:acc:m1:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:acc:m2:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:acc:m2:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:acc:m3:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:acc:m3:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:acc:m3:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:acc:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:acc:n:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:acc:n:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:acc:n:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:dat:f:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:dat:f:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:dat:f:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:dat:m1:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:dat:m1:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:dat:m1:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:dat:m2:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:dat:m3:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:dat:m3:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:dat:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:dat:n:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:gen:f:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:gen:f:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:gen:f:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:gen:f:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:gen:m1:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:gen:m1:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:gen:m1:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:gen:m1:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:gen:m2:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:gen:m2:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:gen:m3:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:gen:m3:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:gen:m3:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:gen:m3:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:gen:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:gen:n:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:gen:n:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:inst:f:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:inst:f:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:inst:m1:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:inst:m1:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:inst:m2:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:inst:m3:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:inst:m3:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:inst:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:inst:n:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:loc:f:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:loc:f:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:loc:f:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:loc:f:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:loc:m1:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:loc:m1:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:loc:m2:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:loc:m3:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:loc:m3:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:loc:m3:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:loc:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:loc:n:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:loc:n:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:nom:f:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:nom:f:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:nom:f:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:nom:f:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:nom:m1:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:nom:m1:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:nom:m1:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:nom:m1:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:nom:m2:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:nom:m2:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:nom:m3:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:nom:m3:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:nom:m3:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:nom:m3:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:nom:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:nom:n:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:pl:nom:n:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:acc:f:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:acc:f:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:acc:f:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:acc:f:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:acc:m1:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:acc:m1:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:acc:m2:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:acc:m2:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:acc:m3:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:acc:m3:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:acc:m3:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:acc:m3:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:acc:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:acc:n:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:acc:n:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:dat:f:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:dat:f:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:dat:f:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:dat:f:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:dat:m1:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:dat:m1:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:dat:m3:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:dat:m3:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:dat:n:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:gen:f:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:gen:f:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:gen:f:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:gen:f:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:gen:m1:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:gen:m1:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:gen:m1:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:gen:m2:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:gen:m2:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:gen:m3:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:gen:m3:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:gen:m3:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:gen:m3:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:gen:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:gen:n:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:gen:n:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:gen:n:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:inst:f:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:inst:f:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:inst:f:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:inst:f:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:inst:m1:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:inst:m1:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:inst:m1:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:inst:m1:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:inst:m2:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:inst:m2:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:inst:m3:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:inst:m3:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:inst:m3:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:inst:m3:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:inst:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:inst:n:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:inst:n:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:inst:n:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:loc:f:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:loc:f:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:loc:f:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:loc:m1:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:loc:m1:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:loc:m2:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:loc:m3:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:loc:m3:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:loc:m3:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:loc:m3:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:loc:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:loc:n:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:loc:n:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:nom:f:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:nom:f:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:nom:f:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:nom:f:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:nom:m1:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:nom:m1:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:nom:m1:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:nom:m1:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:nom:m2:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:nom:m2:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:nom:m3:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:nom:m3:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:nom:m3:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:nom:m3:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:nom:n:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:nom:n:imperf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:nom:n:perf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:nom:n:perf:neg",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppas:sg:voc:m2:imperf:aff",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:acc:f:pri",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:acc:f:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:acc:m1:pri",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:acc:m1:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:acc:m2:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:acc:n:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:dat:f:pri",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:dat:f:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:dat:m1:pri",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:dat:m1:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:dat:m3:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:gen:f:pri",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:gen:f:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:gen:m1:pri",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:gen:m1:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:gen:m2:pri",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:inst:f:pri",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:inst:m1:pri",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:inst:m1:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:inst:n:pri",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:loc:f:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:loc:m1:pri",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:loc:m1:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:loc:m3:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:nom:f:pri",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:nom:f:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:nom:m1:pri",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:nom:m1:pri:akc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:nom:m1:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:nom:m1:sec:akc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:nom:m2:pri",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:nom:m2:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:pl:nom:n:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:acc:f:pri:akc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:acc:f:sec:akc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:acc:f:sec:nakc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:acc:m1:pri:akc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:acc:m1:pri:nakc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:acc:m1:sec:akc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:acc:m1:sec:nakc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:acc:m2:pri:akc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:acc:m2:sec:nakc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:acc:m3:pri:akc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:acc:m3:sec:nakc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:acc:n:pri:akc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:acc:n:sec:nakc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:dat:f:pri:akc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:dat:f:pri:nakc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:dat:f:sec:akc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:dat:f:sec:nakc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:dat:m1:pri:akc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:dat:m1:pri:nakc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:dat:m1:sec:akc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:dat:m1:sec:nakc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:dat:m2:pri:nakc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:dat:m2:sec:akc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:dat:m2:sec:nakc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:gen:f:pri:akc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:gen:f:sec:akc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:gen:f:sec:nakc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:gen:m1:pri:akc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:gen:m1:sec:akc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:gen:m1:sec:nakc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:gen:m2:sec:akc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:gen:m2:sec:nakc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:gen:n:pri:akc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:inst:f:pri",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:inst:f:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:inst:m1:pri",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:inst:m1:pri:nakc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:inst:m1:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:inst:n:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:loc:f:pri",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:loc:f:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:loc:m1:pri",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:loc:m1:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:loc:m3:pri",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:nom:f:pri",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:nom:f:pri:nakc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:nom:f:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:nom:m1:pri",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:nom:m1:pri:akc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:nom:m1:pri:nakc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:nom:m1:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:nom:m1:sec:akc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:nom:m2:pri",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:nom:m2:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:nom:m3:pri",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:nom:m3:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:nom:n:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron12:sg:voc:n:sec",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:acc:f:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:acc:f:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:acc:m1:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:acc:m1:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:acc:m2:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:acc:m2:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:acc:m3:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:acc:m3:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:acc:n:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:acc:n:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:dat:f:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:dat:f:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:dat:m1:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:dat:m1:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:dat:m2:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:dat:m3:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:dat:m3:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:dat:n:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:gen:f:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:gen:f:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:gen:m1:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:gen:m1:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:gen:m2:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:gen:m2:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:gen:m3:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:gen:m3:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:gen:n:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:gen:n:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:inst:f:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:inst:f:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:inst:m1:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:inst:m1:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:inst:m2:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:inst:m2:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:inst:m3:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:inst:m3:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:inst:n:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:inst:n:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:loc:f:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:loc:m1:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:loc:m2:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:loc:m3:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:loc:n:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:nom:f:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:nom:m1:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:nom:m2:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:nom:m3:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:pl:nom:n:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:acc:f:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:acc:f:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:acc:m1:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:acc:m1:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:acc:m1:ter:nakc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:acc:m1:ter:nakc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:acc:m2:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:acc:m2:ter:nakc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:acc:m2:ter:nakc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:acc:m3:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:acc:m3:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:acc:m3:ter:nakc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:acc:m3:ter:nakc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:acc:n:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:acc:n:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:dat:f:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:dat:f:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:dat:m1:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:dat:m1:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:dat:m1:ter:nakc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:dat:m2:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:dat:m2:ter:nakc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:dat:m3:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:dat:m3:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:dat:m3:ter:nakc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:dat:n:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:dat:n:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:dat:n:ter:nakc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:gen:f:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:gen:f:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:gen:m1:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:gen:m1:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:gen:m1:ter:nakc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:gen:m1:ter:nakc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:gen:m2:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:gen:m2:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:gen:m2:ter:nakc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:gen:m3:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:gen:m3:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:gen:m3:ter:nakc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:gen:m3:ter:nakc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:gen:n:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:gen:n:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:gen:n:ter:nakc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:inst:f:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:inst:m1:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:inst:m1:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:inst:m2:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:inst:m2:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:inst:m3:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:inst:m3:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:inst:n:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:inst:n:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:loc:f:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:loc:m1:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:loc:m2:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:loc:m3:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:loc:n:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:nom:f:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:nom:f:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:nom:m1:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:nom:m2:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:nom:m2:ter:akc:praep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:nom:m3:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "ppron3:sg:nom:n:ter:akc:npraep",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:pl:f:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:pl:f:perf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:pl:m1:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:pl:m1:imperf:agl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:pl:m1:perf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:pl:m1:perf:nagl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:pl:m2:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:pl:m2:perf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:pl:m3:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:pl:m3:perf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:pl:n:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:pl:n:perf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:sg:f:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:sg:f:imperf:agl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:sg:f:imperf:nagl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:sg:f:perf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:sg:m1:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:sg:m1:imperf:agl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:sg:m1:imperf:nagl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:sg:m1:perf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:sg:m1:perf:agl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:sg:m1:perf:nagl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:sg:m2:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:sg:m2:imperf:nagl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:sg:m2:perf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:sg:m2:perf:nagl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:sg:m3:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:sg:m3:imperf:nagl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:sg:m3:perf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:sg:m3:perf:nagl",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:sg:n:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "praet:sg:n:perf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "pred",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "prep:acc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "prep:acc:nwok",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "prep:acc:wok",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "prep:dat",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "prep:gen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "prep:gen:nwok",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "prep:gen:wok",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "prep:inst",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "prep:inst:nwok",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "prep:inst:wok",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "prep:loc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "prep:loc:nwok",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "prep:loc:wok",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "prep:nom",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "qub",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "qub:nwok",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "qub:wok",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "siebie:acc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "siebie:dat",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "siebie:gen",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "siebie:inst",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "siebie:loc",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:acc:f",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:acc:m1",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:acc:m2",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:acc:m3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:acc:n",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:dat:f",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:dat:m1",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:dat:m2",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:dat:m3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:dat:n",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:gen:f",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:gen:m1",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:gen:m2",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:gen:m3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:gen:n",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:inst:f",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:inst:m1",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:inst:m2",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:inst:m3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:inst:n",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:loc:f",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:loc:m1",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:loc:m2",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:loc:m3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:loc:n",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:nom:f",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:nom:m1",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:nom:m2",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:nom:m3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:pl:nom:n",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:acc:f",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:acc:m1",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:acc:m2",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:acc:m3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:acc:n",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:dat:f",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:dat:m1",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:dat:m2",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:dat:m3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:dat:n",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:gen:f",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:gen:m1",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:gen:m2",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:gen:m3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:gen:n",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:inst:f",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:inst:m1",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:inst:m2",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:inst:m3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:inst:n",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:loc:f",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:loc:m1",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:loc:m2",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:loc:m3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:loc:n",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:nom:f",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:nom:m1",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:nom:m2",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:nom:m3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:nom:n",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:voc:f",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:voc:m1",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:voc:m2",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:voc:m3",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "subst:sg:voc:n",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "winien:pl:f:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "winien:pl:m1:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "winien:pl:m2:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "winien:pl:m3:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "winien:pl:n:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "winien:sg:f:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "winien:sg:m1:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "winien:sg:m2:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "winien:sg:m3:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "winien:sg:n:imperf",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "xxx",
+            "tag_description": "No description."
+        }
+    ]
+}
