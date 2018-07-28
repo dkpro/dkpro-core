@@ -88,9 +88,9 @@ public class BratReader
     /**
      * Types that are relations. It is mandatory to provide the type name followed by two feature
      * names that represent Arg1 and Arg2 separated by colons, e.g. 
-     * <code>
+     * <pre><code>
      * de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent{A}
-     * </code>.
+     * </code></pre>
      * Additionally, a subcategorization feature may be specified.
      */
     public static final String PARAM_RELATION_TYPES = "relationTypes";
@@ -112,9 +112,9 @@ public class BratReader
 
     /**
      * Mapping of brat text annotations (entities or events) to UIMA types, e.g. :
-     * <code>
-     * Country -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location
-     * </code>
+     * <pre><code>
+     * Country -&gt; de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location
+     * </code></pre>
      */
     public static final String PARAM_TEXT_ANNOTATION_TYPE_MAPPINGS = "textAnnotationTypeMappings";
     @ConfigurationParameter(name = PARAM_TEXT_ANNOTATION_TYPE_MAPPINGS, mandatory = false)
@@ -123,9 +123,9 @@ public class BratReader
 
     /**
      * Mapping of brat relation annotations to UIMA types, e.g. :
-     * <code>
-     * SUBJ -> de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
-     * </code>
+     * <pre><code>
+     * SUBJ -&gt; de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+     * </code></pre>
      */
     public static final String PARAM_RELATION_TYPE_MAPPINGS = "relationTypeMappings";
     @ConfigurationParameter(name = PARAM_RELATION_TYPE_MAPPINGS, mandatory = false)
