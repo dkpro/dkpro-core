@@ -20,7 +20,7 @@
   <parent>
     <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
     <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-    <version>1.9.3-SNAPSHOT</version>
+    <version>1.9.3</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.io.jdbc-asl</artifactId>
