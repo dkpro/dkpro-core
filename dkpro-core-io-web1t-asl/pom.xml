@@ -197,7 +197,7 @@
                 </goals>
                 <configuration>
                   <excludes combine.children="append">
-                    <exclude>src/main/java/de/tudarmstadt/ukp/dkpro/core/io/web1t/util/ExternalSort.java</exclude>
+                    <exclude>src/main/java/org/dkpro/core/io/web1t/util/ExternalSort.java</exclude>
                   </excludes>
                 </configuration>
               </execution>
