@@ -48,12 +48,12 @@ public class BratTextAnnotation
         this("T" + aId, aType, aOffsets, aTexts);
     }
 
-    public BratTextAnnotation(String aId, String aType, List<Offsets> aOffsets, String aTexts[])
+    public BratTextAnnotation(String aId, String aType, List<Offsets> aOffsets, String[] aTexts)
     {
         super(aId, aType);
         offsets = aOffsets;
         texts = aTexts;
-     }
+    }
       
     private static String[] splitText(String aText, List<Offsets> aOffsets)
     {
@@ -102,7 +102,8 @@ public class BratTextAnnotation
     @Override
     public String toString()
     {
-        return getId() + '\t' + getType() + ' ' + generateOffset(offsets) + '\t' + String.join(" ", texts);
+        return getId() + '\t' + getType() + ' ' + generateOffset(offsets) + '\t'
+                + String.join(" ", texts);
     }
     
     private String generateOffset(List<Offsets> aOffsets)

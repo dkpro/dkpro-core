@@ -31,9 +31,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.IOUtils;
@@ -629,7 +629,8 @@ public class BratWriter extends JCasFileWriter_ImplBase
         }
         // replaces any group of newline by one space
         String[] texts = new String[] { aFS.getCoveredText().replaceAll("\\R+", " ") };
-        return new BratTextAnnotation(nextTextAnnotationId, getBratType(aFS.getType()), offsets, texts);
+        return new BratTextAnnotation(nextTextAnnotationId, getBratType(aFS.getType()), offsets,
+                texts);
     }
     
     private void writeTextAnnotation(BratAnnotationDocument aDoc, AnnotationFS aFS)

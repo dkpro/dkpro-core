@@ -22,9 +22,10 @@ public class Offsets
     private  int begin;
     private  int end;
 
-    public Offsets(int aBegin, int aEnd) {
-    begin = aBegin;
-    end = aEnd;
+    public Offsets(int aBegin, int aEnd)
+    {
+        begin = aBegin;
+        end = aEnd;
     }
         
     public int getBegin()
@@ -46,6 +47,4 @@ public class Offsets
     {
         end = aEnd;
     }
-    
-
 }
