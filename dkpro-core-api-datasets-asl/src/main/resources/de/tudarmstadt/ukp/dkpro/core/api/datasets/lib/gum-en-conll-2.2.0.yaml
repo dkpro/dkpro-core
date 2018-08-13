@@ -33,7 +33,7 @@ licenses:
     comment: "WikiVoyage texts (Source: https://wikimediafoundation.org/wiki/Terms_of_Use)"
   - name: CC-BY-NC-SA 3.0
     url: http://creativecommons.org/licenses/by-nc-sa/3.0/
-    comment: "WikiVoyage texts (Source: http://www.wikihow.com/wikiHow:Creative-Commons)"
+    comment: "WikiHow texts (Source: http://www.wikihow.com/wikiHow:Creative-Commons)"
   - name: CC-BY 4.0
     url: https://creativecommons.org/licenses/by/4.0/
     comment: "Annotations (Source: https://corpling.uis.georgetown.edu/gum/)"
