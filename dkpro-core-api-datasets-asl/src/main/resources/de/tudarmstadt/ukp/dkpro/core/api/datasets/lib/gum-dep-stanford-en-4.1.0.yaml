@@ -1,15 +1,15 @@
 groupId: org.dkpro.core.datasets.gum
-datasetId: gum-dep
-version: 3.0.0
+datasetId: gum-dep-stanford
+version: 4.1.0
 language: en
 mediaType: text/x.org.dkpro.conll-2006
 encoding: UTF-8
 
-name: Georgetown University Multilayer Corpus
+name: Georgetown University Multilayer Corpus (UD)
 url: https://corpling.uis.georgetown.edu/gum/
 attribution: |
-  Zeldes, Amir (2016) "The GUM Corpus: Creating Multilayer Resources in the Classroom". 
-  Language Resources and Evaluation. For Gum annotation team, see 
+  Zeldes, Amir (2017) "The GUM Corpus: Creating Multilayer Resources in the Classroom". 
+  Language Resources and Evaluation 51(3), 581–612. For the GUM annotation team, see 
   https://corpling.uis.georgetown.edu/gum/
 description: |
   This dataset contains release versions of the Georgetown University Multilayer Corpus (GUM), a 
@@ -27,30 +27,34 @@ description: |
   The CPOS column of the files contains an extended POS tagset as it is used by the English 
   TreeTagger models. The POS column contains the regular PTB tagset.
   
+  Note that this dataset does not include the Reddit data as it can only be obtained by running
+  a Python script which comes with GUM.
+  
 licenses:
   - name: CC-BY 2.5
     url: http://creativecommons.org/licenses/by/2.5/
     comment: "Wikinews texts (Source: https://en.wikinews.org/wiki/Wikinews:Copyright)"
   - name: CC-BY-SA 3.0
     url: https://creativecommons.org/licenses/by-sa/3.0/
-    comment: "WikiVoyage texts (Source: https://wikimediafoundation.org/wiki/Terms_of_Use)"
+    comment: "WikiVoyage and Biographies texts (Source: https://wikimediafoundation.org/wiki/Terms_of_Use)"
   - name: CC-BY-NC-SA 3.0
     url: http://creativecommons.org/licenses/by-nc-sa/3.0/
-    comment: "WikiHow texts (Source: http://www.wikihow.com/wikiHow:Creative-Commons)"
+    comment: "WikiHow and Fiction texts (Source: http://www.wikihow.com/wikiHow:Creative-Commons)"
   - name: CC-BY 4.0
     url: https://creativecommons.org/licenses/by/4.0/
     comment: "Annotations (Source: https://corpling.uis.georgetown.edu/gum/)"
 
 artifacts:
-  gum.zip:
-    url: "https://github.com/amir-zeldes/gum/archive/V3.0.0.zip"
-    sha1: b590dbe3f4ae198ca500618a53491f75c221e98b
+  gum.tar.gz:
+    url: "https://github.com/amir-zeldes/gum/archive/V4.1.0.tar.gz"
+    sha1: 91ded1ba5b6c05fe8e70e42a0a36ee0d20556888
+    shared: true
     actions:
       - action: explode
-        configuration: { includes: ["dep/*", "LICENSE.txt", "README.md"], strip: 1 }
+        configuration: { includes: ["dep/stanford/*", "LICENSE.txt", "README.md"], strip: 1 }
 
 roles:
   licenses:
     - gum/LICENSE.txt
   data:
-    - "**/dep/*.conll10"
+    - "**/dep/stanford/*.conll10"
