@@ -69,8 +69,8 @@ public class AlignmentStorage
         // No reason to keep the internal map synchronized because it's specific to the CAS, and
         // it is assumed that two different pipeline threads in any execution environment never
         // manipulate the same CAS instance simultaneously.
-        System.out.println("Adding from [" + from + "] to [" + to + "] on [" + aCas.hashCode()
-                + "]");
+        //System.out.println("Adding from [" + from + "] to [" + to + "] on [" + aCas.hashCode()
+        //        + "]");
         map.put(new Key(from, to), aAs);
 
     }
