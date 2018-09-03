@@ -37,6 +37,7 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.harness.SegmenterHarness;
 
@@ -116,6 +117,10 @@ public class CoreNlpSegmenterTest
     @Test
     public void testArabic() throws Exception
     {
+        AssumeResource.assumeResource(CoreNlpParser.class,
+                "de/tudarmstadt/ukp/dkpro/core/corenlp", "tokenizer", "ar", "atb-bn-arztrain");
+        
+        
         JCas jcas = JCasFactory.createJCas();
         jcas.setDocumentLanguage("ar");
         jcas.setDocumentText("هل من المهم مراقبة وزن الرضيع خلال السنة الاولى من عمره؟\n"
