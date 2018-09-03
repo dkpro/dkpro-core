@@ -59,6 +59,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratEventAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratEventArgument;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratRelationAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratTextAnnotation;
+import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.Offsets;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.RelationParam;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TextAnnotationParam;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TypeMapping;
@@ -242,37 +243,40 @@ public class BratReader
     private void create(CAS aCAS, Type aType, BratTextAnnotation aAnno)
     {
         TextAnnotationParam param = parsedTextAnnotationTypes.get(aType.getName());
-        
-        AnnotationFS anno = aCAS.createAnnotation(aType, aAnno.getBegin(), aAnno.getEnd());
-        
-        fillAttributes(anno, aAnno.getAttributes());
-        
-        if (param != null && param.getSubcat() != null) {
-            anno.setStringValue(getFeature(anno, param.getSubcat()), aAnno.getType());
+        for (Offsets offset: aAnno.getOffsets()) {
+            AnnotationFS anno = aCAS.createAnnotation(aType, offset.getBegin(),
+                    offset.getEnd());
+            fillAttributes(anno, aAnno.getAttributes());
+
+            if (param != null && param.getSubcat() != null) {
+                anno.setStringValue(getFeature(anno, param.getSubcat()), aAnno.getType());
+            }
+
+            aCAS.addFsToIndexes(anno);
+            spanIdMap.put(aAnno.getId(), anno);
         }
-        
-        aCAS.addFsToIndexes(anno);
-        spanIdMap.put(aAnno.getId(), anno);
     }
 
     private void create(CAS aCAS, Type aType, BratEventAnnotation aAnno)
     {
         TextAnnotationParam param = parsedTextAnnotationTypes.get(aType.getName());
-        
-        AnnotationFS anno = aCAS.createAnnotation(aType, 
-                aAnno.getTriggerAnnotation().getBegin(), aAnno.getTriggerAnnotation().getEnd());
+        for (Offsets offset: aAnno.getTriggerAnnotation().getOffsets()) {
+            AnnotationFS anno = aCAS.createAnnotation(aType,
+                    offset.getBegin(),
+                    offset.getEnd());
 
-        fillAttributes(anno, aAnno.getAttributes());
+            fillAttributes(anno, aAnno.getAttributes());
 
-        if (param != null && param.getSubcat() != null) {
-            anno.setStringValue(getFeature(anno, param.getSubcat()), aAnno.getType());
+            if (param != null && param.getSubcat() != null) {
+                anno.setStringValue(getFeature(anno, param.getSubcat()), aAnno.getType());
+            }
+
+            // Slots cannot be handled yet because they might point to events that have not been
+            // created yet.
+
+            aCAS.addFsToIndexes(anno);
+            spanIdMap.put(aAnno.getId(), anno);
         }
-        
-        // Slots cannot be handled yet because they might point to events that have not been 
-        // created yet.
-        
-        aCAS.addFsToIndexes(anno);
-        spanIdMap.put(aAnno.getId(), anno);
     }
     
     private void create(CAS aCAS, Type aType, BratRelationAnnotation aAnno)

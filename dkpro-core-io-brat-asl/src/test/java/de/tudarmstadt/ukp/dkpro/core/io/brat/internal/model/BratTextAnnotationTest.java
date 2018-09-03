@@ -38,4 +38,14 @@ public class BratTextAnnotationTest
         BratTextAnnotation v = BratTextAnnotation.parse(in);
         assertEquals(in, v.toString());
     }
+    
+    @Test
+    public void parseTestDiscontinousMergeFragments()
+    {
+        final String in = "T1\tOrganization 0 13;14 43\tInternational Business Machines Corporation";
+        final String out = "T1\tOrganization 0 43\tInternational Business Machines Corporation";
+        BratTextAnnotation v = BratTextAnnotation.parse(in);
+        assertEquals(out, v.toString());
+    }
+
 }
