@@ -21,9 +21,9 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-    <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
+    <artifactId>de.tudarmstadt.ukp.dkpro.core</artifactId>
     <version>1.10.0-SNAPSHOT</version>
-    <relativePath>../dkpro-core-asl</relativePath>
+    <relativePath>..</relativePath>
   </parent>
   <packaging>jar</packaging>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.doc-asl</artifactId>
