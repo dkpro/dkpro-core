@@ -1,0 +1,63 @@
+{
+    "name": "French Treebank",
+    "description": "French Treebank Tagset\n\nReferences:\n* http://www.llf.cnrs.fr/Gens/Abeille/guide-annot.pdf\n",
+    "language": "fr",
+    "tags": [
+        {
+            "tag_name": "AP",
+            "tag_description": "Adjective phase"
+        },
+        {
+            "tag_name": "AdP",
+            "tag_description": "Adverbial phrase"
+        },
+        {
+            "tag_name": "COORD",
+            "tag_description": "= coordinate phrase"
+        },
+        {
+            "tag_name": "NP",
+            "tag_description": "nominal phrase"
+        },
+        {
+            "tag_name": "PP",
+            "tag_description": "Preposition (or amalgame pronoun)"
+        },
+        {
+            "tag_name": "PREF",
+            "tag_description": "Prefix (including hyphen)"
+        },
+        {
+            "tag_name": "ROOT",
+            "tag_description": "No description."
+        },
+        {
+            "tag_name": "SENT",
+            "tag_description": "independent phase"
+        },
+        {
+            "tag_name": "Sint",
+            "tag_description": "Conjugated sentence"
+        },
+        {
+            "tag_name": "Srel",
+            "tag_description": "Relative sentence"
+        },
+        {
+            "tag_name": "Ssub",
+            "tag_description": "Subordinate sentence"
+        },
+        {
+            "tag_name": "VN",
+            "tag_description": "Verb phrase"
+        },
+        {
+            "tag_name": "VPinf",
+            "tag_description": "Infinitive phrase"
+        },
+        {
+            "tag_name": "VPpart",
+            "tag_description": "Participle phrase"
+        }
+    ]
+}

@@ -1,0 +1,87 @@
+{
+    "name": "Utpal Garain's part-of-speech tagset",
+    "description": "No description.\n\nReferences:\n* http://www.isical.ac.in/~utpal/docs/POS-Tag%20List.pdf\n",
+    "language": "bn",
+    "tags": [
+        {
+            "tag_name": "CC",
+            "tag_description": "Conjuncts"
+        },
+        {
+            "tag_name": "DEM",
+            "tag_description": "Demonstrative"
+        },
+        {
+            "tag_name": "INJ",
+            "tag_description": "Interjection"
+        },
+        {
+            "tag_name": "INTF",
+            "tag_description": "Intensifier"
+        },
+        {
+            "tag_name": "JJ",
+            "tag_description": "Adjective"
+        },
+        {
+            "tag_name": "NEG",
+            "tag_description": "Negation"
+        },
+        {
+            "tag_name": "NN",
+            "tag_description": "Noun"
+        },
+        {
+            "tag_name": "NNP",
+            "tag_description": "Proper Noun"
+        },
+        {
+            "tag_name": "PRP",
+            "tag_description": "Pronoun"
+        },
+        {
+            "tag_name": "PSP",
+            "tag_description": "Post position"
+        },
+        {
+            "tag_name": "QC",
+            "tag_description": "Cardinal"
+        },
+        {
+            "tag_name": "QF",
+            "tag_description": "Quantifiers"
+        },
+        {
+            "tag_name": "RB",
+            "tag_description": "Adverb"
+        },
+        {
+            "tag_name": "RDP",
+            "tag_description": "Re-duplicative"
+        },
+        {
+            "tag_name": "RP",
+            "tag_description": "Particles"
+        },
+        {
+            "tag_name": "SYM",
+            "tag_description": "Symbol"
+        },
+        {
+            "tag_name": "UNK",
+            "tag_description": "Unknown"
+        },
+        {
+            "tag_name": "VAUX",
+            "tag_description": "Verb Auxiliary"
+        },
+        {
+            "tag_name": "VM",
+            "tag_description": "Verb-finite"
+        },
+        {
+            "tag_name": "WQ",
+            "tag_description": "Question Words"
+        }
+    ]
+}
