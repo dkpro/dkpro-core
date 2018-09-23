@@ -1,0 +1,10 @@
+T1	Token 0 4	This
+T2	Token 5 7	is
+T3	Token 9 10	n
+T4	Token 11 21	other test
+T5	Token 21 22	.
+E1	Token:T1
+E2	Token:T2
+E3	Token:T3
+E4	Token:T4
+E5	Token:T5

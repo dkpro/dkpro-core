@@ -43,6 +43,7 @@ Mateusz Parzonka
 Michael Unterkalmsteiner [mikmakmuk]
 Milen Kouylekov <milen.kouylekov@usit.uio.no> [kouylekov, kouylekov-usit]
 Nicolai Erbs <nico.erbs@gmail.com> [nicolaierbs]
+Nicolas Paris [parisni]
 Niklas Jakob 
 Nils Reimers [nreimers]
 Oliver Ferschke [ferschke]
