@@ -1,14 +1,14 @@
 /*
- * Copyright 2012
- * Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
- * Technische Universität Darmstadt
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
+ * Licensed to the Technische Universität Darmstadt under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The Technische Universität Darmstadt 
+ * licenses this file to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.
+ *  
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
@@ -42,8 +43,10 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencecodec.AdjacentLabelCodec;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencecodec.SequenceItem;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
@@ -58,23 +61,23 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * Reads files in the CoNLL-2006 format (aka CoNLL-X).
+ * Reads files in the default CoreNLP CoNLL format.
  * 
- * @see <a href="https://web.archive.org/web/20131216222420/http://ilk.uvt.nl/conll/">CoNLL-X Shared Task: Multi-lingual Dependency Parsing</a>
+ * @see <a href="https://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/pipeline/CoNLLOutputter.html">CoreNLP CoNLLOutputter</a>
  */
-@ResourceMetaData(name = "CoNLL 2006 Reader")
+@ResourceMetaData(name = "CoNLL CoreNLP Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2006})
+@MimeTypeCapability({MimeTypes.TEXT_X_CONLL_CORENLP})
 @TypeCapability(
         outputs = { 
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures",
+                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
                 "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
                 "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
-public class Conll2006Reader
+public class ConllCoreNlpReader
     extends JCasResourceCollectionReader_ImplBase
 {
     /**
@@ -91,21 +94,6 @@ public class Conll2006Reader
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
     private boolean readPos;
-
-    /**
-     * Read coarse-grained part-of-speech information.
-     */
-    public static final String PARAM_READ_CPOS = ComponentParameters.PARAM_READ_CPOS;
-    @ConfigurationParameter(name = PARAM_READ_CPOS, mandatory = true, defaultValue = "true")
-    private boolean readCPos;
-
-    /**
-     * Enable to use CPOS (column 4) as the part-of-speech tag. Otherwise the POS (column 3) is
-     * used.
-     */
-    public static final String PARAM_USE_CPOS_AS_POS = "useCPosAsPos";
-    @ConfigurationParameter(name = PARAM_USE_CPOS_AS_POS, mandatory = true, defaultValue = "false")
-    private boolean useCPosAsPos;
 
     /**
      * Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
@@ -126,11 +114,20 @@ public class Conll2006Reader
     protected String posMappingLocation;
     
     /**
+     * Location of the mapping file for named entity tags to UIMA types.
+     */
+    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
+    private String namedEntityMappingLocation;
+
+    /**
      * Read morphological features.
      */
-    public static final String PARAM_READ_MORPH = ComponentParameters.PARAM_READ_MORPH;
-    @ConfigurationParameter(name = PARAM_READ_MORPH, mandatory = true, defaultValue = "true")
-    private boolean readMorph;
+    public static final String PARAM_READ_NAMED_ENTITY = 
+            ComponentParameters.PARAM_READ_NAMED_ENTITY;
+    @ConfigurationParameter(name = PARAM_READ_NAMED_ENTITY, mandatory = true, defaultValue = "true")
+    private boolean readNer;
 
     /**
      * Read lemma information.
@@ -151,15 +148,14 @@ public class Conll2006Reader
     private static final int ID = 0;
     private static final int FORM = 1;
     private static final int LEMMA = 2;
-    private static final int CPOSTAG = 3;
-    private static final int POSTAG = 4;
-    private static final int FEATS = 5;
-    private static final int HEAD = 6;
-    private static final int DEPREL = 7;
-    // private static final int PHEAD = 8;
-    // private static final int PDEPREL = 9;
+    private static final int POSTAG = 3;
+    private static final int NER = 4;
+    private static final int HEAD = 5;
+    private static final int DEPREL = 6;
 
     private MappingProvider posMappingProvider;
+    private MappingProvider namedEntityMappingProvider;
+    
 
     @Override
     public void initialize(UimaContext aContext)
@@ -169,6 +165,15 @@ public class Conll2006Reader
         
         posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
                 posTagset, getLanguage());
+        
+        namedEntityMappingProvider = new MappingProvider();
+        namedEntityMappingProvider.setDefault(MappingProvider.LOCATION,
+                "classpath:/there/is/no/mapping/yet");
+        namedEntityMappingProvider.setDefault(MappingProvider.BASE_TYPE,
+                NamedEntity.class.getName());
+        namedEntityMappingProvider.setOverride(MappingProvider.LOCATION,
+                namedEntityMappingLocation);
+        namedEntityMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
     }
     
     @Override
@@ -200,7 +205,16 @@ public class Conll2006Reader
                 throw new IOException(e);
             }
         }
-        
+
+        if (readNer) {
+            try {
+                namedEntityMappingProvider.configure(aJCas.getCas());
+            }
+            catch (AnalysisEngineProcessException e) {
+                throw new IOException(e);
+            }
+        }
+
         JCasBuilder doc = new JCasBuilder(aJCas);
 
         List<String[]> words;
@@ -235,35 +249,38 @@ public class Conll2006Reader
                 }
 
                 // Read part-of-speech tag
-                POS pos = null;
-                String tag = useCPosAsPos ? word[CPOSTAG] : word[POSTAG];
+                String tag = word[POSTAG];
                 if (!UNUSED.equals(tag) && readPos) {
                     Type posTag = posMappingProvider.getTagType(tag);
-                    pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
+                    POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
                     pos.setPosValue(tag != null ? tag.intern() : null);
-                }
-
-                // Read coarse part-of-speech tag
-                if (!UNUSED.equals(word[CPOSTAG]) && readCPos && pos != null) {
-                    pos.setCoarseValue(word[CPOSTAG] != null ? word[CPOSTAG].intern() : null);
-                }
-                
-                if (pos != null) {
                     pos.addToIndexes();
                     token.setPos(pos);
                 }
-                
-                // Read morphological features
-                if (!UNUSED.equals(word[FEATS]) && readMorph) {
-                    MorphologicalFeatures morphtag = new MorphologicalFeatures(aJCas,
-                            token.getBegin(), token.getEnd());
-                    morphtag.setValue(word[FEATS]);
-                    morphtag.addToIndexes();
-                    token.setMorph(morphtag);
-                }
 
                 sentenceEnd = token.getEnd();
+            }
+
+            // Read named entities
+            if (readNer) {
+                List<SequenceItem> encodedNerSpans = words.stream().map(w -> {
+                    int id = Integer.valueOf(w[ID]);
+                    return new SequenceItem(id, id, w[NER]);
+                }).collect(Collectors.toList());
+                
+                AdjacentLabelCodec codec = new AdjacentLabelCodec(1);
+                List<SequenceItem> decodedNerSpans = codec.decode(encodedNerSpans);
+                                
+                for (SequenceItem nerSpan : decodedNerSpans) {
+                    Type nerType = namedEntityMappingProvider.getTagType(nerSpan.getLabel());
+                    Token beginToken = tokens.get(nerSpan.getBegin());
+                    Token endToken = tokens.get(nerSpan.getEnd());
+                    NamedEntity ne = (NamedEntity) aJCas.getCas().createAnnotation(nerType,
+                            beginToken.getBegin(), endToken.getEnd());
+                    ne.setValue(nerSpan.getLabel());
+                    ne.addToIndexes();
+                }
             }
 
             // Read dependencies
@@ -339,9 +356,9 @@ public class Conll2006Reader
             firstLineOfSentence = false;
             
             String[] fields = line.split("\t");
-            if (fields.length != 10) {
+            if (fields.length != 7) {
                 throw new IOException(
-                        "Invalid file format. Line needs to have 10 tab-separated fields, but it has "
+                        "Invalid file format. Line needs to have 7 tab-separated fields, but it has "
                                 + fields.length + ": [" + line + "]");
             }
             words.add(fields);
