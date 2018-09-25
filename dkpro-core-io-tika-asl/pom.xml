@@ -31,7 +31,7 @@
   <name>DKPro Core ASL - IO - Tika (v ${tika.version})</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
-    <tika.version>1.18</tika.version>
+    <tika.version>1.19</tika.version>
   </properties>
   <dependencies>
     <dependency>
