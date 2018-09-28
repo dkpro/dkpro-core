@@ -1,14 +1,14 @@
 /*
- * Copyright 2012
- * Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
- * Technische Universität Darmstadt
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
+ * Licensed to the Technische Universität Darmstadt under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The Technische Universität Darmstadt 
+ * licenses this file to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.
+ *  
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,9 +22,12 @@ import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.NavigableMap;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -35,8 +38,10 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencecodec.AdjacentLabelCodec;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencecodec.SequenceItem;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -46,22 +51,22 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * Writes a file in the CoNLL-2006 format (aka CoNLL-X).
+ * Write files in the default CoreNLP CoNLL format.
  * 
- * @see <a href="https://web.archive.org/web/20131216222420/http://ilk.uvt.nl/conll/">CoNLL-X Shared Task: Multi-lingual Dependency Parsing</a>
+ * @see <a href="https://nlp.stanford.edu/nlp/javadoc/javanlp/edu/stanford/nlp/pipeline/CoNLLOutputter.html">CoreNLP CoNLLOutputter</a>
  */
-@ResourceMetaData(name = "CoNLL 2006 Writer")
+@ResourceMetaData(name = "CoNLL CoreNLP Reader")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
-@MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2006})
+@MimeTypeCapability({MimeTypes.TEXT_X_CONLL_CORENLP})
 @TypeCapability(inputs = {
         "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures",
+        "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
         "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
         "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
-public class Conll2006Writer
+public class ConllCoreNlpWriter
     extends JCasFileWriter_ImplBase
 {
     private static final String UNUSED = "_";
@@ -91,18 +96,12 @@ public class Conll2006Writer
     private boolean writePos;
 
     /**
-     * Write coarse-grained part-of-speech information.
+     * Write named entity information.
      */
-    public static final String PARAM_WRITE_CPOS = ComponentParameters.PARAM_WRITE_CPOS;
-    @ConfigurationParameter(name = PARAM_WRITE_CPOS, mandatory = true, defaultValue = "true")
-    private boolean writeCPos;
-
-    /**
-     * Write morphological features.
-     */
-    public static final String PARAM_WRITE_MORPH = "writeMorph";
-    @ConfigurationParameter(name = PARAM_WRITE_MORPH, mandatory = true, defaultValue = "true")
-    private boolean writeMorph;
+    public static final String PARAM_WRITE_NAMED_ENTITY = 
+            ComponentParameters.PARAM_WRITE_NAMED_ENTITY;
+    @ConfigurationParameter(name = PARAM_WRITE_NAMED_ENTITY, mandatory = true, defaultValue = "true")
+    private boolean writeNamedEntity;
 
     /**
      * Write lemma information.
@@ -143,24 +142,20 @@ public class Conll2006Writer
     private void convert(JCas aJCas, PrintWriter aOut)
     {
         for (Sentence sentence : select(aJCas, Sentence.class)) {
-            HashMap<Token, Row> ctokens = new LinkedHashMap<Token, Row>();
+            Map<Token, Row> ctokens = new LinkedHashMap<>();
+            NavigableMap<Integer, Token> tokenBeginIndex = new TreeMap<>();
+            NavigableMap<Integer, Token> tokenEndIndex = new TreeMap<>();
 
             // Tokens
             List<Token> tokens = selectCovered(Token.class, sentence);
-            
-            // Check if we should try to include the FEATS in output
-            List<MorphologicalFeatures> morphology = selectCovered(MorphologicalFeatures.class,
-                    sentence);
-            boolean useFeats = tokens.size() == morphology.size();
             
             for (int i = 0; i < tokens.size(); i++) {
                 Row row = new Row();
                 row.id = i + 1;
                 row.token = tokens.get(i);
-                if (useFeats) {
-                    row.feats = morphology.get(i);
-                }
                 ctokens.put(row.token, row);
+                tokenBeginIndex.put(row.token.getBegin(), row.token);
+                tokenEndIndex.put(row.token.getEnd(), row.token);
             }
 
             // Dependencies
@@ -172,17 +167,27 @@ public class Conll2006Writer
                 Row row =  ctokens.get(rel.getDependent());
                 if (row.deprel != null) {
                     String form = row.token.getCoveredText();
-                    if (!writeCovered) {
-                        form = row.token.getText();
-                    }
-                    
                     throw new IllegalStateException("Illegal basic dependency structure - token ["
                             + form
                             + "] is dependent of more than one dependency.");
                 }
                 row.deprel = rel;
             }
-
+            
+            // Named entities
+            List<SequenceItem> nerSpans = new ArrayList<>();
+            for (NamedEntity ne : selectCovered(NamedEntity.class, sentence)) {
+                Token beginToken = tokenBeginIndex.floorEntry(ne.getBegin()).getValue();
+                Token endToken = tokenEndIndex.ceilingEntry(ne.getEnd()).getValue();
+                nerSpans.add(new SequenceItem(ctokens.get(beginToken).id, ctokens.get(endToken).id,
+                        ne.getValue()));
+            }
+            AdjacentLabelCodec codec = new AdjacentLabelCodec(1);
+            List<SequenceItem> encodedNe = codec.encode(nerSpans, tokens.size());
+            for (int i = 0; i < encodedNe.size(); i++) {
+                ctokens.get(tokens.get(i)).ne = encodedNe.get(i).getLabel(); 
+            }
+            
             // Write sentence
             for (Row row : ctokens.values()) {
                 String form = row.token.getCoveredText();
@@ -201,13 +206,6 @@ public class Conll2006Writer
                     pos = posAnno.getPosValue();
                 }
 
-                String cpos = UNUSED;
-                if (writeCPos && (row.token.getPos() != null)
-                        && row.token.getPos().getCoarseValue() != null) {
-                    POS posAnno = row.token.getPos();
-                    cpos = posAnno.getCoarseValue();
-                }
-                
                 int headId = UNUSED_INT;
                 String deprel = UNUSED;
                 if (writeDependency && (row.deprel != null)) {
@@ -224,17 +222,13 @@ public class Conll2006Writer
                     head = Integer.toString(headId);
                 }
                 
-                String feats = UNUSED;
-                if (writeMorph && (row.feats != null)) {
-                    feats = row.feats.getValue();
+                String ner = UNUSED;
+                if (writeNamedEntity && (row.ne != null)) {
+                    ner = row.ne;
                 }
                 
-                String phead = UNUSED;
-                String pdeprel = UNUSED;
-
-                aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", row.id,
-                        form, lemma, cpos, pos, feats, head, deprel, phead,
-                        pdeprel);
+                aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%s\n", row.id, form, lemma, pos, ner, head,
+                        deprel);
             }
 
             aOut.println();
@@ -245,7 +239,7 @@ public class Conll2006Writer
     {
         int id;
         Token token;
-        MorphologicalFeatures feats;
+        String ne;
         Dependency deprel;
     }
 }
