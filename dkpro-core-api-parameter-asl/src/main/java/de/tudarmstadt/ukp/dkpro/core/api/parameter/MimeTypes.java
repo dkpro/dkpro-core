@@ -75,6 +75,7 @@ public final class MimeTypes
     public final static String TEXT_X_CONLL_2008 = "text/x.org.dkpro.conll-2008";
     public final static String TEXT_X_CONLL_2009 = "text/x.org.dkpro.conll-2009";
     public final static String TEXT_X_CONLL_2012 = "text/x.org.dkpro.conll-2012";
+    public final static String TEXT_X_CONLL_CORENLP = "text/x.org.dkpro.conll-corenpl";
     public final static String TEXT_X_CONLL_U = "text/x.org.dkpro.conll-u";
     public final static String TEXT_X_IMSCWB = "text/x.org.dkpro.imscwb";
     public final static String TEXT_X_GERMEVAL_2014 = "text/x.org.dkpro.germeval-2014";
