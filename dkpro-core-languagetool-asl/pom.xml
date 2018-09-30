@@ -31,7 +31,7 @@
   <url>https://dkpro.github.io/dkpro-core/</url>
   <description>Grammar checker based on LanguageTool (LGPL)</description>
   <properties>
-    <languagetool.version>4.2</languagetool.version>
+    <languagetool.version>4.3</languagetool.version>
   </properties>
   <dependencies>
     <dependency>
