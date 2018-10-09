@@ -24,7 +24,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
@@ -159,6 +161,9 @@ public class ConllUReader
     private static final int DEPREL = 7;
     private static final int DEPS = 8;
     private static final int MISC = 9;
+    
+    public static final String META_SEND_ID = "sent_id";
+    public static final String META_TEXT = "text";
 
     private MappingProvider posMappingProvider;
 
@@ -204,8 +209,17 @@ public class ConllUReader
         
         JCasBuilder doc = new JCasBuilder(aJCas);
 
-        List<String[]> words;
-        while ((words = readSentence(aReader)) != null) {
+        while (true) {
+            // Read sentence comments (if any)
+            Map<String, String> comments = readSentenceComments(aReader);
+            
+            // Read sentence
+            List<String[]> words = readSentence(aReader);
+            if (words == null) {
+                // End of file
+                break;
+            }
+            
             if (words.isEmpty()) {
                  // Ignore empty sentences. This can happen when there are multiple end-of-sentence
                  // markers following each other.
@@ -259,8 +273,11 @@ public class ConllUReader
                 }
 
                 // Read coarse part-of-speech tag
-                if (!UNUSED.equals(word[CPOSTAG]) && readCPos && pos != null) {
-                    pos.setCoarseValue(word[CPOSTAG] != null ? word[CPOSTAG].intern() : null);
+                if (!UNUSED.equals(word[CPOSTAG]) && readCPos) {
+                    if (pos == null) {
+                        pos = new POS(aJCas, token.getBegin(), token.getEnd());
+                    }
+                    pos.setCoarseValue(word[CPOSTAG].intern());
                 }
                 
                 if (pos != null) {
@@ -339,6 +356,7 @@ public class ConllUReader
 
             // Sentence
             Sentence sentence = new Sentence(aJCas, sentenceBegin, sentenceEnd);
+            sentence.setId(comments.get(META_SEND_ID));
             sentence.addToIndexes();
 
             // Once sentence per line.
@@ -373,6 +391,35 @@ public class ConllUReader
         return rel;
     }
 
+    private Map<String, String> readSentenceComments(BufferedReader aReader)
+        throws IOException
+    {
+        Map<String, String> comments = new LinkedHashMap<>();
+        
+        while (true) {
+            // Check if the next line could be a header line
+            aReader.mark(2);
+            char character = (char) aReader.read();
+            if ('#' == character) {
+                // Read the rest of the line
+                String line = aReader.readLine();
+                if (line.contains("=")) {
+                    String[] parts = line.split("=", 2);
+                    comments.put(parts[0].trim(), parts[1].trim());
+                }
+                else {
+                    // Comment or unknown header line
+                }
+            }
+            else {
+                aReader.reset();
+                break;
+            }
+        }
+        
+        return comments;
+    }
+    
     /**
      * Read a single sentence.
      */
