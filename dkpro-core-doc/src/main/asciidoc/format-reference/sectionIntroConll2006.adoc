@@ -1,3 +1,19 @@
+// Copyright 2018
+// Ubiquitous Knowledge Processing (UKP) Lab
+// Technische Universität Darmstadt
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+// http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 The CoNLL 2006 (aka CoNLL-X) format targets dependency parsing. Columns are tab-separated. Sentences are separated by a blank new line.
 
 .Columns
@@ -58,13 +74,10 @@ Heutzutage heutzutage ADV _ _ ADV _ _
 | Corpus 
 | Language
 
-| link:http://ilk.uvt.nl/conll/free_data.html[CoNLL-X Shared Task free data]
-| Danish, Dutch, Portuguese, and Swedish
-
-| link:https://code.google.com/p/copenhagen-dependency-treebank/[Copenhagen Dependency Treebanks]
+| link:http://mbkromann.github.io/copenhagen-dependency-treebank/[Copenhagen Dependency Treebanks]
 | Danish
 
-| link:http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/[FinnTreeBank] (in recent versions with additional pseudo-XML metadata)
+| link:http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/index-print.shtml[FinnTreeBank] (in recent versions with additional pseudo-XML metadata)
 | Finnish 
 
 | link:http://www.linguateca.pt/floresta/CoNLL-X[Floresta Sintá(c)tica (Bosque-CoNLL)]

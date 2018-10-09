@@ -110,11 +110,10 @@ public class StanfordNamedEntityRecognizerTrainer
     @ConfigurationParameter(name = PARAM_ACCEPTED_TAGS_REGEX, mandatory = false)
     protected String acceptedTagsRegex;
 
-    /*
-     * Label set to use for training. Options: IOB1, IOB2, IOE1, IOE2, SBIEO, IO, BIO, BILOU,
-     * noprefix
-     *
-     * Default: noprefix
+    /**
+     * Label set to use for training. 
+     * <p>
+     * Options: IOB1, IOB2, IOE1, IOE2, SBIEO, IO, BIO, BILOU, noprefix
      */
     public static final String PARAM_LABEL_SET = "entitySubClassification";
     @ConfigurationParameter(name = PARAM_LABEL_SET, mandatory = false, defaultValue = "noprefix")
@@ -122,7 +121,7 @@ public class StanfordNamedEntityRecognizerTrainer
 
     /**
      * Flag to keep the label set specified by PARAM_LABEL_SET. If set to false, representation is
-     * mapped to IOB1 on output. Default: true
+     * mapped to IOB1 on output.
      */
     public static final String PARAM_RETAIN_CLASS = "retainClassification";
     @ConfigurationParameter(name = PARAM_RETAIN_CLASS, mandatory = false, defaultValue = "true")

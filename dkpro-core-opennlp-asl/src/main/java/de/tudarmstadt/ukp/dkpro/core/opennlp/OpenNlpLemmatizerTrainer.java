@@ -48,33 +48,53 @@ import opennlp.tools.util.TrainingParameters;
 public class OpenNlpLemmatizerTrainer
     extends OpenNlpTrainerBase<CasLemmaSampleStream>
 {
+    /**
+     * Store this language to the model instead of the document language.
+     */
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
     private String language;
 
+    /**
+     * Training algorithm.
+     */
     public static final String PARAM_ALGORITHM = "algorithm";
     @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, 
             defaultValue = GISTrainer.MAXENT_VALUE)
     private String algorithm;
     
+    /**
+     * Trainer type.
+     */
     public static final String PARAM_TRAINER_TYPE = "trainerType";
     @ConfigurationParameter(name = PARAM_TRAINER_TYPE, mandatory = true, 
             defaultValue = EventTrainer.EVENT_VALUE)
     private String trainerType;
 
+    /**
+     * Number of training iterations.
+     */
     public static final String PARAM_ITERATIONS = "iterations";
     @ConfigurationParameter(name = PARAM_ITERATIONS, mandatory = true, defaultValue = "100")
     private int iterations;
 
+    /**
+     * Frequency cut-off.
+     */
     public static final String PARAM_CUTOFF = "cutoff";
     @ConfigurationParameter(name = PARAM_CUTOFF, mandatory = true, defaultValue = "5")
     private int cutoff;
 
+    /**
+     * Number of parallel threads.
+     */
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
     @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue =  "1")
     private int numThreads;
     
     /**
+     * Beam size.
+     * 
      * @see LemmatizerME#DEFAULT_BEAM_SIZE
      */
     public static final String PARAM_BEAMSIZE = "beamSize";

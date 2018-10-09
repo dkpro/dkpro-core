@@ -137,8 +137,6 @@ public class OpenNlpParser
 
     /**
      * Log the tag set(s) when a model is loaded.
-     *
-     * <p>Default: {@code false}</p>
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
@@ -147,8 +145,6 @@ public class OpenNlpParser
     /**
      * Sets whether to create or not to create POS tags. The creation of
      * constituent tags must be turned on for this to work.
-     *
-     * <p>Default: {@code true}</p>
      */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
     @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "false")
@@ -157,8 +153,6 @@ public class OpenNlpParser
     /**
      * If this parameter is set to true, each sentence is annotated with a PennTree-Annotation,
      * containing the whole parse tree in Penn Treebank style format.
-     *
-     * <p>Default: {@code false}</p>
      */
     public static final String PARAM_WRITE_PENN_TREE = ComponentParameters.PARAM_WRITE_PENN_TREE;
     @ConfigurationParameter(name = PARAM_WRITE_PENN_TREE, mandatory = true, defaultValue = "false")

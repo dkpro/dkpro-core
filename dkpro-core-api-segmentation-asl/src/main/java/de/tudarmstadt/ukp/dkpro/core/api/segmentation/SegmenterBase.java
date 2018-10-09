@@ -40,6 +40,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.TokenForm;
 import eu.openminted.share.annotations.api.Component;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
+/**
+ * Base-class for segmenters.
+ */
 @Component(OperationType.SEGMENTER)
 public abstract class SegmenterBase
     extends JCasAnnotator_ImplBase

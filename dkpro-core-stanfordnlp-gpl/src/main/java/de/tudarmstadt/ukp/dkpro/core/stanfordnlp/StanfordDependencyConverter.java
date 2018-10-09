@@ -90,7 +90,6 @@ public class StanfordDependencyConverter
     /**
      * Sets the kind of dependencies being created.
      * 
-     * <p>Default: {@link DependenciesMode#COLLAPSED TREE}
      * @see DependenciesMode
      */
     public static final String PARAM_MODE = "mode";

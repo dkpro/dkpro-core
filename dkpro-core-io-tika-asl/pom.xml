@@ -22,7 +22,7 @@
   <parent>
     <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
     <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
-    <version>1.10.0-SNAPSHOT</version>
+    <version>1.11.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
   <groupId>org.dkpro.core</groupId>
@@ -31,7 +31,7 @@
   <name>DKPro Core ASL - IO - Tika (v ${tika.version})</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
-    <tika.version>1.13</tika.version>
+    <tika.version>1.19</tika.version>
   </properties>
   <dependencies>
     <dependency>
@@ -65,6 +65,28 @@
       <artifactId>junit</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jul-to-slf4j</artifactId>
+      <version>1.7.25</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jcl-over-slf4j</artifactId>
+      <version>1.7.25</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <build>
     <pluginManagement>
@@ -76,6 +98,13 @@
             <usedDependencies combine.children="append">
               <!-- Parsers are not detected as a direct dependency due to plugin mechanism -->
               <usedDependency>org.apache.tika:tika-parsers</usedDependency>
+              <!-- 
+                - Logging is used via reflection and cannot be detected by Maven
+              -->
+              <usedDependency>org.slf4j:slf4j-api</usedDependency>
+              <usedDependency>org.slf4j:jcl-over-slf4j</usedDependency>
+              <usedDependency>org.slf4j:slf4j-log4j12</usedDependency>
+              <usedDependency>org.slf4j:jul-to-slf4j</usedDependency>
             </usedDependencies>
           </configuration>
         </plugin>

@@ -83,8 +83,6 @@ public class RelAnnisWriter
 
     /**
      * Write part-of-speech information.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
     @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
@@ -92,8 +90,6 @@ public class RelAnnisWriter
 
     /**
      * Write lemma information.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
     @ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = true, defaultValue = "true")
@@ -101,8 +97,6 @@ public class RelAnnisWriter
 
     /**
      * Write constituent structure information.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_WRITE_CONSTITUENT = 
             ComponentParameters.PARAM_WRITE_CONSTITUENT;
@@ -111,8 +105,6 @@ public class RelAnnisWriter
 
     /**
      * Write dependency relation information.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_WRITE_DEPENDENCY = ComponentParameters.PARAM_WRITE_DEPENDENCY;
     @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")

@@ -223,8 +223,6 @@ public class StanfordParser
     
     /**
      * Sets whether to create or not to create dependency annotations.
-     * 
-     * <p>Default: {@code true}
      */
     public static final String PARAM_WRITE_DEPENDENCY = ComponentParameters.PARAM_WRITE_DEPENDENCY;
     @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")
@@ -233,7 +231,6 @@ public class StanfordParser
     /**
      * Sets the kind of dependencies being created.
      * 
-     * <p>Default: {@link DependenciesMode#TREE TREE}
      * @see DependenciesMode
      */
     public static final String PARAM_MODE = "mode";
@@ -243,8 +240,6 @@ public class StanfordParser
     /**
      * Sets whether to create or not to create constituent tags. This is required for POS-tagging
      * and lemmatization.
-     * <p>
-     * Default: {@code true}
      */
     public static final String PARAM_WRITE_CONSTITUENT = 
             ComponentParameters.PARAM_WRITE_CONSTITUENT;
@@ -254,8 +249,6 @@ public class StanfordParser
     /**
      * If this parameter is set to true, each sentence is annotated with a PennTree-Annotation,
      * containing the whole parse tree in Penn Treebank style format.
-     * <p>
-     * Default: {@code false}
      */
     public static final String PARAM_WRITE_PENN_TREE = ComponentParameters.PARAM_WRITE_PENN_TREE;
     @ConfigurationParameter(name = PARAM_WRITE_PENN_TREE, mandatory = true, defaultValue = "false")
@@ -266,7 +259,6 @@ public class StanfordParser
      * annotation as the basic unit for parsing.
      * <p>If the parameter is set with the name of an annotation type <i>x</i>, the parser will no
      * longer parse <i>Sentence</i>-annotations, but <i>x</i>-Annotations.</p>
-     * <p>Default: {@code null}
      */
     public static final String PARAM_ANNOTATIONTYPE_TO_PARSE = "annotationTypeToParse";
     @ConfigurationParameter(name = PARAM_ANNOTATIONTYPE_TO_PARSE, mandatory = false)
@@ -275,8 +267,6 @@ public class StanfordParser
     /**
      * Sets whether to create or not to create POS tags. The creation of constituent tags must be
      * turned on for this to work.
-     * <p>
-     * Default: {@code false}
      */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
     @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "false")
@@ -285,8 +275,6 @@ public class StanfordParser
     /**
      * Sets whether to use or not to use already existing POS tags from another annotator for the
      * parsing process.
-     * <p>
-     * Default: {@code true}
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
@@ -295,8 +283,6 @@ public class StanfordParser
     /**
      * Maximum number of tokens in a sentence. Longer sentences are not parsed. This is to avoid out
      * of memory exceptions.
-     * <p>
-     * Default: {@code 130}
      * 
      * @see TestOptions#maxLength
      */
@@ -308,8 +294,6 @@ public class StanfordParser
     /**
      * Controls when the factored parser considers a sentence to be too complex and falls back to
      * the PCFG parser.
-     * <p>
-     * Default: {@code 200000}
      * 
      * @see TestOptions#MAX_ITEMS
      */
@@ -342,6 +326,9 @@ public class StanfordParser
     @ConfigurationParameter(name = PARAM_QUOTE_END, mandatory = false)
     private List<String> quoteEnd;
 
+    /**
+     * Whether to keep the punctuation as part of the parse tree.
+     */
     public static final String PARAM_KEEP_PUNCTUATION = "keepPunctuation";
     @ConfigurationParameter(name = PARAM_KEEP_PUNCTUATION, mandatory = true, defaultValue = "false")
     private boolean keepPunctuation;

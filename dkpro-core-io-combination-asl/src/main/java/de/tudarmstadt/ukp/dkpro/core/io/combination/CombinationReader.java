@@ -50,7 +50,9 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 public class CombinationReader
     extends CasCollectionReader_ImplBase
 {
-
+    /**
+     * Locations of UIMA reader description files.
+     */
     public static final String PARAM_READERS = "readers";
     @ConfigurationParameter(name = PARAM_READERS, mandatory = true)
     private String[] readerFiles;

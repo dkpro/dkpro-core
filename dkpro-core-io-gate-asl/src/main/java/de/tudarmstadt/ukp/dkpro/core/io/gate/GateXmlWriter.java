@@ -38,6 +38,10 @@ import gate.corpora.DocumentImpl;
 import gate.corpora.export.GateXMLExporter;
 import gate.util.GateException;
 
+/**
+ * Writer for the GATE XML format. This writer uses an explicit mapping from DKPro Core types
+ * to typical GATE naming convensions.
+ */
 @ResourceMetaData(name = "GATE XML Writer")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_GATE_XML})

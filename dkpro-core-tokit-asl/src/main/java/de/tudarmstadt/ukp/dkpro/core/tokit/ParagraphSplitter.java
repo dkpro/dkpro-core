@@ -51,8 +51,6 @@ public class ParagraphSplitter
 
     /**
      * A regular expression used to detect paragraph splits.
-     *
-     * Default: {@link #DOUBLE_LINE_BREAKS_PATTERN} (split on two consecutive line breaks)
      */
     public static final String PARAM_SPLIT_PATTERN = "splitPattern";
     @ConfigurationParameter(name = PARAM_SPLIT_PATTERN, defaultValue = DOUBLE_LINE_BREAKS_PATTERN)

@@ -56,8 +56,8 @@ public class LanguageDetectorWeb1T
      * An array of external resources of frequency providers (one for each language that should be
      * detected).
      */
-    public static final String PARAM_FREQUENCY_PROVIDER_RESOURCES = "frequencyProviders";
-    @ExternalResource(key = PARAM_FREQUENCY_PROVIDER_RESOURCES, mandatory = true)
+    public static final String RES_FREQUENCY_PROVIDER_RESOURCES = "frequencyProviders";
+    @ExternalResource(key = RES_FREQUENCY_PROVIDER_RESOURCES, mandatory = true)
     private FrequencyCountProvider[] frequencyProviders;
 
     /**

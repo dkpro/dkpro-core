@@ -22,16 +22,16 @@
   <parent>
     <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
     <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
-    <version>1.10.0-SNAPSHOT</version>
+    <version>1.11.0-SNAPSHOT</version>
     <relativePath>../dkpro-core-asl</relativePath>
   </parent>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.lbj-asl</artifactId>
   <packaging>jar</packaging>
-  <name>DKPro Core ASL - Illinois Cognitive Computation Group NLP (v ${illinois-cogcomp-nlp.version})</name>
+  <name>DKPro Core ASL - Illinois Cognitive Computation Group NLP (v ${illinois-cogcomp-nlp.version}) (academic use)</name>
   <url>https://dkpro.github.io/dkpro-core/</url>
   <properties>
     <illinois-cogcomp-nlp.version>4.0.7</illinois-cogcomp-nlp.version>
-    <maven.surefire.heap>4g</maven.surefire.heap>
+    <maven.surefire.heap>6g</maven.surefire.heap>
   </properties>
   <dependencies>
     <dependency>
@@ -45,6 +45,10 @@
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
     </dependency>
     <dependency>
       <groupId>edu.illinois.cs.cogcomp</groupId>
@@ -76,6 +80,12 @@
       <groupId>edu.illinois.cs.cogcomp</groupId>
       <artifactId>illinois-ner</artifactId>
       <version>${illinois-cogcomp-nlp.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>edu.stanford.nlp</groupId>
+          <artifactId>stanford-corenlp</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>edu.illinois.cs.cogcomp</groupId>
@@ -90,6 +100,10 @@
         <exclusion>
           <artifactId>stanford-corenlp</artifactId>
           <groupId>edu.stanford.nlp</groupId>
+        </exclusion>
+        <exclusion>
+          <groupId>mysql</groupId>
+          <artifactId>mysql-connector-java</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -138,11 +152,6 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>

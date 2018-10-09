@@ -213,9 +213,9 @@ public class StanfordNamedEntityRecognizerTest
         JCas jcas = runTest("de", null, "Markus arbeitet seit 10 Jahren bei SAP in Deutschland .");
 
         String[] ne = {
-                "[  0,  6]Person(I-PER) (Markus)",
-                "[ 35, 38]Organization(I-ORG) (SAP)",
-                "[ 42, 53]Location(I-LOC) (Deutschland)" };
+                "[  0,  6]Person(PERSON) (Markus)",
+                "[ 35, 38]Organization(ORGANIZATION) (SAP)",
+                "[ 42, 53]Location(LOCATION) (Deutschland)" };
 
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
     }

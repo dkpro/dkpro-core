@@ -148,8 +148,8 @@ public class CoreNlpPosTaggerTest
         String[] posOriginal = { "DET", "NC", "P", "DET", "NC", "P", "NC", "P", "DET", "NC",
                 "PUNC" };
 
-        String[] posMapped = { "POS_DET", "POS_NOUN", "POS_ADP", "POS_DET", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_ADP", "POS_DET",
-                "POS_NOUN", "POS_PUNCT" };
+        String[] posMapped = { "POS_DET", "POS_NOUN", "POS_ADP", "POS_DET", "POS_NOUN", "POS_ADP",
+                "POS_NOUN", "POS_ADP", "POS_DET", "POS_NOUN", "POS_PUNCT" };
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
     }

@@ -24,9 +24,13 @@ import java.io.InputStream;
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.parser.AutoDetectParser;
+import org.apache.tika.parser.EmptyParser;
+import org.apache.tika.parser.ParseContext;
+import org.apache.tika.parser.Parser;
 import org.apache.tika.sax.BodyContentHandler;
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -46,6 +50,22 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 public class TikaReader
     extends ResourceCollectionReaderBase
 {
+    /**
+     * Parse embedded documents in addition to the main document.
+     */
+    public static final String PARAM_PARSE_EMBEDDED_DOCUMENTS = "parseEmbeddedDocuments";
+    @ConfigurationParameter(name = PARAM_PARSE_EMBEDDED_DOCUMENTS, mandatory = false,
+            defaultValue = "false")
+    private boolean parseEmbeddedDocuments;
+    
+    /**
+     * Internal buffer size. If the buffer size is exceeded, the reader will throw an exception 
+     * (-1 means unlimited size).
+     */
+    public static final String PARAM_BUFFER_SIZE = "bufferSize";
+    @ConfigurationParameter(name = PARAM_BUFFER_SIZE, mandatory = false, defaultValue = "-1")
+    private int bufferSize;
+
     // The Tika parser
     private AutoDetectParser parser;
 
@@ -71,14 +91,23 @@ public class TikaReader
         initCas(cas, fileResource);
 
         // Parse the document, docText stores the parsed text
+        BodyContentHandler handler = new BodyContentHandler(bufferSize);
+        // Give hints to NameDetector about the filename
+        Metadata metadata = new Metadata();
+        metadata.set(Metadata.RESOURCE_NAME_KEY, new File(fileResource.getPath()).getName());
+        
+        // If we process embedded documents, we use the auto-detect parser recursively
+        ParseContext parseContext = new ParseContext();
+        if (parseEmbeddedDocuments) {
+            parseContext.set(Parser.class, parser);
+        }
+        else {  
+            parseContext.set(Parser.class, new EmptyParser());
+        }
+        
         String docText = null;
         try (InputStream in = fileResource.getInputStream()) {
-            // Give hints to NameDetector about the filename
-            Metadata metadata = new Metadata();
-            metadata.set(Metadata.RESOURCE_NAME_KEY, new File(fileResource.getPath()).getName());
-            BodyContentHandler handler = new BodyContentHandler(-1);
-            parser.parse(in, handler, metadata);
-
+            parser.parse(in, handler, metadata, parseContext);
             docText = handler.toString();
         }
         catch (SAXException | TikaException e) {

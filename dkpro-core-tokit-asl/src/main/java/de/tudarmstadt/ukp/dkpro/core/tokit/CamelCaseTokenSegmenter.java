@@ -53,8 +53,6 @@ public class CamelCaseTokenSegmenter
 {
     /**
      * Whether to remove the original token.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_DELETE_COVER = ComponentParameters.PARAM_DELETE_COVER;
     @ConfigurationParameter(name = PARAM_DELETE_COVER, mandatory = true, defaultValue = "true")

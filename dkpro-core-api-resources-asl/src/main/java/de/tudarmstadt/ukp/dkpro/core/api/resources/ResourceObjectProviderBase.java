@@ -600,15 +600,24 @@ public abstract class ResourceObjectProviderBase<M>
                     initialResourceUrl = initialUrl;
                     resourceMetaData = new Properties();
                     resourceUrl = followRedirects(initialResourceUrl);
-                    loadMetadata();
-                    if (initialResourceUrl.equals(resourceUrl)) {
-                        log.info("Producing resource from " + resourceUrl);
-                    }
+                    if (resourceUrl == null) {
+                        initialResourceUrl = null;
+                        if (modelLocationChanged) {
+                            log.info("Producing resource from thin air");
+                            loadResource(props);
+                        }
+                    } 
                     else {
-                        log.info("Producing resource from [" + resourceUrl + "] redirected from ["
-                                + initialResourceUrl + "]");
+                        loadMetadata();
+                        if (initialResourceUrl.equals(resourceUrl)) {
+                            log.info("Producing resource from " + resourceUrl);
+                        }
+                        else {
+                            log.info("Producing resource from [" + resourceUrl + "] redirected from ["
+                                    + initialResourceUrl + "]");
+                        }
+                        loadResource(props);
                     }
-                    loadResource(props);
                 }
             }
             success = true;
@@ -640,7 +649,8 @@ public abstract class ResourceObjectProviderBase<M>
 
         // If the model points to a properties file, try to find a new location in that
         // file. If that points to a properties file again, repeat the process.
-        while (url.getPath().endsWith(".properties")) {
+        // If at some point the location is marked as not required return null.
+        while (url != null && url.getPath().endsWith(".properties")) {
             Properties tmpResourceMetaData = PropertiesLoaderUtils.loadProperties(new UrlResource(
                     url));
 
@@ -653,8 +663,13 @@ public abstract class ResourceObjectProviderBase<M>
             if (redirect == null) {
                 throw new IOException("Model URL resolves to properties at [" + url
                         + "] but no redirect property [" + LOCATION + "] found there.");
+            } 
+            else if (redirect.startsWith(NOT_REQUIRED)) {
+                url = null;
+            } 
+            else {
+                url = resolveLocation(redirect, loader, null);
             }
-            url = resolveLocation(redirect, loader, null);
         }
 
         return url;

@@ -26,7 +26,7 @@
   </parent>
   <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
   <artifactId>de.tudarmstadt.ukp.dkpro.core</artifactId>
-  <version>1.10.0-SNAPSHOT</version>
+  <version>1.11.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>DKPro Core</name>
   <description>DKPro Core is a collection of software components for natural language processing (NLP) based on the Apache UIMA framework.</description> <!-- The description tag must be present for antrun to work!! -->
@@ -334,12 +334,12 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
-        <version>3.7</version>
+        <version>3.8</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-compress</artifactId>
-        <version>1.16.1</version>
+        <version>1.18</version>
       </dependency>
       <dependency>
         <groupId>org.tukaani</groupId>
@@ -554,7 +554,7 @@
             Ubiquitous Knowledge Processing (UKP) Lab
             Technische Universität Darmstadt
           </componentCopyright>
-          <failOnMissingMetaData>false</failOnMissingMetaData>
+          <failOnMissingMetaData>true</failOnMissingMetaData>
         </configuration>
         <executions>
           <execution>
