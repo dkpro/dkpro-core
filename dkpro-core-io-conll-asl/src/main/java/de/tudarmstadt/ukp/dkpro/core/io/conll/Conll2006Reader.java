@@ -58,7 +58,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * <p>Reads a file in the CoNLL-2006 format (aka CoNLL-X).</p>
+ * Reads files in the CoNLL-2006 format (aka CoNLL-X).
  * 
  * @see <a href="https://web.archive.org/web/20131216222420/http://ilk.uvt.nl/conll/">CoNLL-X Shared Task: Multi-lingual Dependency Parsing</a>
  */
@@ -266,7 +266,7 @@ public class Conll2006Reader
                 sentenceEnd = token.getEnd();
             }
 
-            // Dependencies
+            // Read dependencies
             if (readDependency) {
                 for (String[] word : words) {
                     if (!UNUSED.equals(word[DEPREL])) {

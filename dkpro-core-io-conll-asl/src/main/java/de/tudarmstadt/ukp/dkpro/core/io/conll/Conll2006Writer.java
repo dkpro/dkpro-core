@@ -17,7 +17,6 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.conll;
 
-import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
@@ -54,7 +53,8 @@ import eu.openminted.share.annotations.api.DocumentationResource;
 @ResourceMetaData(name = "CoNLL 2006 Writer")
 @DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2006})
-@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+@TypeCapability(inputs = {
+        "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
         "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures",
@@ -112,7 +112,7 @@ public class Conll2006Writer
     private boolean writeLemma;
 
     /**
-     * Write syntactic dependency infomation.
+     * Write syntactic dependency information.
      */
     public static final String PARAM_WRITE_DEPENDENCY = ComponentParameters.PARAM_WRITE_DEPENDENCY;
     @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")
@@ -130,17 +130,13 @@ public class Conll2006Writer
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
-        PrintWriter out = null;
-        try {
-            out = new PrintWriter(new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix),
-                    targetEncoding));
+        try (PrintWriter out = new PrintWriter(
+                new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix), targetEncoding));) {
+
             convert(aJCas, out);
         }
         catch (Exception e) {
             throw new AnalysisEngineProcessException(e);
-        }
-        finally {
-            closeQuietly(out);
         }
     }
 
@@ -187,7 +183,7 @@ public class Conll2006Writer
                 row.deprel = rel;
             }
 
-            // Write sentence in CONLL 2006 format
+            // Write sentence
             for (Row row : ctokens.values()) {
                 String form = row.token.getCoveredText();
                 if (!writeCovered) {
