@@ -162,8 +162,8 @@ public class ConllUReader
     private static final int DEPS = 8;
     private static final int MISC = 9;
     
-    private static final String HEADER_SEND_ID = "sent_id";
-    private static final String HEADER_TEXT = "text";
+    public static final String META_SEND_ID = "sent_id";
+    public static final String META_TEXT = "text";
 
     private MappingProvider posMappingProvider;
 
@@ -210,8 +210,8 @@ public class ConllUReader
         JCasBuilder doc = new JCasBuilder(aJCas);
 
         while (true) {
-            // Read sentence header (if any)
-            Map<String, String> header = readSentenceHeader(aReader);
+            // Read sentence comments (if any)
+            Map<String, String> comments = readSentenceComments(aReader);
             
             // Read sentence
             List<String[]> words = readSentence(aReader);
@@ -356,7 +356,7 @@ public class ConllUReader
 
             // Sentence
             Sentence sentence = new Sentence(aJCas, sentenceBegin, sentenceEnd);
-            sentence.setId(header.get(HEADER_SEND_ID));
+            sentence.setId(comments.get(META_SEND_ID));
             sentence.addToIndexes();
 
             // Once sentence per line.
@@ -391,10 +391,10 @@ public class ConllUReader
         return rel;
     }
 
-    private Map<String, String> readSentenceHeader(BufferedReader aReader)
+    private Map<String, String> readSentenceComments(BufferedReader aReader)
         throws IOException
     {
-        Map<String, String> header = new LinkedHashMap<>();
+        Map<String, String> comments = new LinkedHashMap<>();
         
         while (true) {
             // Check if the next line could be a header line
@@ -405,7 +405,7 @@ public class ConllUReader
                 String line = aReader.readLine();
                 if (line.contains("=")) {
                     String[] parts = line.split("=", 2);
-                    header.put(parts[0].trim(), parts[1].trim());
+                    comments.put(parts[0].trim(), parts[1].trim());
                 }
                 else {
                     // Comment or unknown header line
@@ -417,7 +417,7 @@ public class ConllUReader
             }
         }
         
-        return header;
+        return comments;
     }
     
     /**

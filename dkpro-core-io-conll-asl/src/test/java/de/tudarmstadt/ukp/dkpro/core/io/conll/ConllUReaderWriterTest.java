@@ -60,7 +60,7 @@ public class ConllUReaderWriterTest
         testRoundTrip(
                 createReaderDescription(ConllUReader.class),
                 createEngineDescription(ConllUWriter.class,
-                        ConllUWriter.PARAM_WRITE_TEXT_HEADER, true),
+                        ConllUWriter.PARAM_WRITE_TEXT_COMMENT, true),
                 "conll/u_v2/conllu-paragraph_and_document_boundaries.conll");
     }
 
@@ -71,7 +71,7 @@ public class ConllUReaderWriterTest
         testRoundTrip(
                 createReaderDescription(ConllUReader.class),
                 createEngineDescription(ConllUWriter.class,
-                        ConllUWriter.PARAM_WRITE_TEXT_HEADER, true),
+                        ConllUWriter.PARAM_WRITE_TEXT_COMMENT, true),
                 "conll/u_v2/conllu-sentence_bounaries_and_comments.conll");
     }
 
@@ -90,7 +90,7 @@ public class ConllUReaderWriterTest
         testRoundTrip(
                 createReaderDescription(ConllUReader.class),
                 createEngineDescription(ConllUWriter.class,
-                        ConllUWriter.PARAM_WRITE_TEXT_HEADER, true),
+                        ConllUWriter.PARAM_WRITE_TEXT_COMMENT, true),
                 "conll/u_v2/conllu-untokenized_text.conll");
     }
 
