@@ -56,7 +56,7 @@ public class MeCabTaggerDetailedTest {
     public void testMeCabTagger() throws UIMAException, IOException {
         CollectionReaderDescription reader = createReaderDescription(
                 TextReader.class,
-        		TextReader.PARAM_SOURCE_LOCATION, "src/test/resources",
+                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources",
                 TextReader.PARAM_LANGUAGE, "ja",
                 TextReader.PARAM_PATTERNS, new String[] { "[+]detailedTest.txt" });
 
@@ -79,7 +79,8 @@ public class MeCabTaggerDetailedTest {
 
     private void evaluateSentence(Collection<Sentence> totalFound, JCas jcas) {
         Sentence sent = totalFound.iterator().next();
-        List<JapaneseToken> tokens = JCasUtil.selectCovered(jcas, JapaneseToken.class, sent.getBegin(), sent.getEnd());
+        List<JapaneseToken> tokens = JCasUtil.selectCovered(jcas, JapaneseToken.class,
+                sent.getBegin(), sent.getEnd());
         assertEquals(15, tokens.size());
 
         int token = 0;
@@ -234,7 +235,8 @@ public class MeCabTaggerDetailedTest {
     }
 
     private String getPOS(JCas jcas, Token token) {
-        List<POS> selectCovered = JCasUtil.selectCovered(jcas, POS.class, token.getBegin(), token.getEnd());
+        List<POS> selectCovered = JCasUtil.selectCovered(jcas, POS.class, token.getBegin(),
+                token.getEnd());
         if (selectCovered.size() == 1) {
             return selectCovered.get(0).getPosValue();
         }
@@ -242,7 +244,8 @@ public class MeCabTaggerDetailedTest {
     }
 
     private String getLemma(JCas jcas, Token token) {
-        List<Lemma> selectCovered = JCasUtil.selectCovered(jcas, Lemma.class, token.getBegin(), token.getEnd());
+        List<Lemma> selectCovered = JCasUtil.selectCovered(jcas, Lemma.class, token.getBegin(),
+                token.getEnd());
         if (selectCovered.size() == 1) {
             return selectCovered.get(0).getValue();
         }
@@ -253,8 +256,9 @@ public class MeCabTaggerDetailedTest {
         return token.getCoveredText();
     }
 
-    private Collection<Sentence> getSentences(AnalysisEngine jTagger, JCas jcas) throws AnalysisEngineProcessException,
-            UIMAException, IOException {
+    private Collection<Sentence> getSentences(AnalysisEngine jTagger, JCas jcas)
+        throws AnalysisEngineProcessException, UIMAException, IOException
+    {
 
         jTagger.process(jcas);
         Collection<Sentence> found = JCasUtil.select(jcas, Sentence.class);

@@ -33,11 +33,13 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Read RTF (Rich Text Format) files. Uses {@link RTFEditorKit} for parsing RTF.
  */
-@ResourceMetaData(name="Rich Text Format (RTF) Reader")
+@ResourceMetaData(name = "Rich Text Format (RTF) Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_RTF, MimeTypes.TEXT_RTF})
 @TypeCapability(
         outputs = { 

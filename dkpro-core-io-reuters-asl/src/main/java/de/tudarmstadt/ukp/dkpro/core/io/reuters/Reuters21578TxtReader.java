@@ -17,9 +17,12 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.reuters;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.uima.cas.CAS;
@@ -30,25 +33,27 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * Read a Reuters-21578 corpus that has been transformed into text format using {@code ExtractReuters} in
- * the {@code lucene-benchmarks} project.
+ * Read a Reuters-21578 corpus that has been transformed into text format using
+ * {@code ExtractReuters} in the {@code lucene-benchmarks} project.
  * <p>
  * The {@link #PARAM_SOURCE_LOCATION} parameter should typically point to the file name pattern
  * {@code reut2-*.txt}, preceded by the corpus root directory.
  *
- * @see <a href="http://www.daviddlewis.com/resources/testcollections/reuters21578/">Reuters-21587 Corpus</a>
- * @see <a href="http://lucene.apache.org/core/5_3_1/benchmark/org/apache/lucene/benchmark/utils/ExtractReuters.html">ExtractReuters</a>
- * @see <a href="https://github.com/apache/mahout/blob/master/examples/bin/cluster-reuters.sh">cluster-reuters.sh</a>
+ * @see <a href="http://www.daviddlewis.com/resources/testcollections/reuters21578/">Reuters-21587
+ *      Corpus</a>
+ * @see <a href=
+ *      "http://lucene.apache.org/core/5_3_1/benchmark/org/apache/lucene/benchmark/utils/ExtractReuters.html">ExtractReuters</a>
+ * @see <a href=
+ *      "https://github.com/apache/mahout/blob/master/examples/bin/cluster-reuters.sh">cluster-reuters.sh</a>
  */
-@ResourceMetaData(name="Reuters-21578 Corpus Text Reader")
+@ResourceMetaData(name = "Reuters-21578 Corpus Text Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_REUTERS21578})
 @TypeCapability(
         outputs = { 

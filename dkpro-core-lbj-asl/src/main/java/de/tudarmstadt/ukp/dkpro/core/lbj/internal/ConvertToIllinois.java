@@ -25,6 +25,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
+
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -54,7 +55,7 @@ public class ConvertToIllinois
         for (Sentence s : select(aJCas, Sentence.class)) {
             for (Token t : selectCovered(Token.class, s)) {
                 tokens[it] = new IntPair(t.getBegin(), t.getEnd());
-                sTokens[it] = t.getCoveredText();
+                sTokens[it] = t.getText();
                 it++;
             }
             sentences[is] = it;

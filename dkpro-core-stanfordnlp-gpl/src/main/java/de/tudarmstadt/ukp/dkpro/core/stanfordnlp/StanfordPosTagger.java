@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2017
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
@@ -56,67 +56,75 @@ import edu.stanford.nlp.ling.Word;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 import edu.stanford.nlp.util.StringUtils;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Stanford Part-of-Speech tagger component.
  */
-@ResourceMetaData(name="CoreNLP POS-Tagger (old API)")
+@Component(OperationType.PART_OF_SPEECH_TAGGER)
+@ResourceMetaData(name = "CoreNLP POS-Tagger (old API)")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
-		inputs = {
-				"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-				"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
-		outputs = {"de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"})
+        inputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
+        outputs = {"de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"})
 public class StanfordPosTagger
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
-	/**
-	 * Log the tag set(s) when a model is loaded.
-	 *
-	 * Default: {@code false}
-	 */
-	public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
-	protected boolean printTagSet;
+    /**
+     * Log the tag set(s) when a model is loaded.
+     */
+    public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
+    protected boolean printTagSet;
 
-	/**
-	 * Use this language instead of the document language to resolve the model and tag set mapping.
-	 */
-	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-	protected String language;
+    /**
+     * Use this language instead of the document language to resolve the model and tag set mapping.
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    protected String language;
 
-	/**
-	 * Variant of a model the model. Used to address a specific model if here are multiple models
-	 * for one language.
-	 */
-	public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
-	protected String variant;
+    /**
+     * Variant of a model the model. Used to address a specific model if here are multiple models
+     * for one language.
+     */
+    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+    protected String variant;
 
-	/**
-	 * Location from which the model is read.
-	 */
-	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
-	@ResourceParameter(MimeTypes.APPLICATION_X_STANFORDNLP_TAGGER)
-	protected String modelLocation;
+    /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
+     * Location from which the model is read.
+     */
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    @ResourceParameter(MimeTypes.APPLICATION_X_STANFORDNLP_TAGGER)
+    protected String modelLocation;
 
-	/**
-	 * Location of the mapping file for part-of-speech tags to UIMA types.
-	 */
-	public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
-	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
-	protected String posMappingLocation;
-
-	/**
-	 * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-	 * spaming the heap with thousands of strings representing only a few different tags.
-	 *
-	 * Default: {@code false}
-	 */
-	public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-	@ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-	private boolean internStrings;
+    /**
+     * Location of the mapping file for part-of-speech tags to UIMA types.
+     */
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+    protected String posMappingLocation;
 
     /**
      * Enable all traditional PTB3 token transforms (like -LRB-, -RRB-).
@@ -142,28 +150,30 @@ public class StanfordPosTagger
     public static final String PARAM_QUOTE_END = "quoteEnd";
     @ConfigurationParameter(name = PARAM_QUOTE_END, mandatory = false)
     private List<String> quoteEnd;
-	
-	/**
+    
+    /**
      * Sentences with more tokens than the specified max amount will be ignored if this parameter
      * is set to a value larger than zero. The default value zero will allow all sentences to be
      * POS tagged.
-	 */
-	public static final String PARAM_MAX_SENTENCE_LENGTH = ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;;
-	@ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = false)
-	private int maxSentenceTokens = 0;
+     */
+    public static final String PARAM_MAX_SENTENCE_LENGTH = 
+            ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;;
+    @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = false)
+    private int maxSentenceTokens = 0;
 
-	private CasConfigurableProviderBase<MaxentTagger> modelProvider;
-	private MappingProvider posMappingProvider;
+    private CasConfigurableProviderBase<MaxentTagger> modelProvider;
+    private MappingProvider posMappingProvider;
 
-    private final PTBEscapingProcessor<HasWord, String, Word> escaper = new PTBEscapingProcessor<HasWord, String, Word>();
+    private final PTBEscapingProcessor<HasWord, String, Word> escaper = 
+            new PTBEscapingProcessor<HasWord, String, Word>();
     
-	@Override
-	public void initialize(UimaContext aContext)
-		throws ResourceInitializationException
-	{
-		super.initialize(aContext);
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
 
-		modelProvider = new ModelProviderBase<MaxentTagger>(this, "stanfordnlp", "tagger") {
+        modelProvider = new ModelProviderBase<MaxentTagger>(this, "stanfordnlp", "tagger") {
             @Override
             protected MaxentTagger produceResource(URL aUrl) throws IOException
             {
@@ -188,48 +198,48 @@ public class StanfordPosTagger
 
         posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
                 language, modelProvider);
-		posMappingProvider.setDefaultVariantsLocation(
-				"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/tagger-default-variants.map");
-	}
+        posMappingProvider.setDefaultVariantsLocation(
+                "de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/tagger-default-variants.map");
+    }
 
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
-		CAS cas = aJCas.getCas();
+    @Override
+    public void process(JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
+        CAS cas = aJCas.getCas();
 
-		modelProvider.configure(cas);
-		posMappingProvider.configure(cas);
+        modelProvider.configure(cas);
+        posMappingProvider.configure(cas);
 
-		for (Sentence sentence : select(aJCas, Sentence.class)) {
-			List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
-			
-			if(maxSentenceTokens > 0 && tokens.size() > maxSentenceTokens) {
+        for (Sentence sentence : select(aJCas, Sentence.class)) {
+            List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
+            
+            if (maxSentenceTokens > 0 && tokens.size() > maxSentenceTokens) {
                 continue;
             }
 
-			List<HasWord> words = new ArrayList<HasWord>(tokens.size());
-			for (Token t : tokens) {
-				words.add(new TaggedWord(t.getCoveredText()));
-			}
-			
+            List<HasWord> words = new ArrayList<HasWord>(tokens.size());
+            for (Token t : tokens) {
+                words.add(new TaggedWord(t.getText()));
+            }
+            
             if (ptb3Escaping) {
                 words = CoreNlpUtils.applyPtbEscaping(words, quoteBegin, quoteEnd);
             }
-			
-			List<TaggedWord> taggedWords = modelProvider.getResource().tagSentence(words);
+            
+            List<TaggedWord> taggedWords = modelProvider.getResource().tagSentence(words);
 
-			int i = 0;
-			for (Token t : tokens) {
-				TaggedWord tt = taggedWords.get(i);
-				Type posTag = posMappingProvider.getTagType(tt.tag());
-				POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
-				posAnno.setStringValue(posTag.getFeatureByBaseName("PosValue"),
-						internStrings ? tt.tag().intern() : tt.tag());
-				posAnno.addToIndexes();
-				t.setPos(posAnno);
-				i++;
-			}
-		}
-	}
+            int i = 0;
+            for (Token t : tokens) {
+                TaggedWord tt = taggedWords.get(i);
+                Type posTag = posMappingProvider.getTagType(tt.tag());
+                POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
+                posAnno.setStringValue(posTag.getFeatureByBaseName("PosValue"),
+                        tt.tag() != null ? tt.tag().intern() : null);
+                posAnno.addToIndexes();
+                t.setPos(posAnno);
+                i++;
+            }
+        }
+    }
 }

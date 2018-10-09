@@ -106,15 +106,20 @@ public class Conll2000ReaderTest
                 "[510,534]NC(NP) (his Mansion House speech)",
                 "[535,548]NC(NP) (last Thursday)" };
 
-        String[] posMapped = { "POS_NOUN", "POS_ADP", "POS_DET", "POS_NOUN", "POS_VERB", "POS_ADV", "POS_VERB", "POS_ADP", "POS_VERB",
-                "POS_DET", "POS_ADJ", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_NOUN", "POS_ADP", "POS_PROPN", "POS_PUNCT", "POS_ADJ", "POS_ADP",
-                "POS_NOUN", "POS_NOUN", "POS_PUNCT", "POS_VERB", "POS_ADP", "POS_VERB", "POS_DET", "POS_ADJ", "POS_NOUN", "POS_ADP",
-                "POS_PROPN", "POS_CONJ", "POS_PROPN", "POS_X", "POS_ADJ", "POS_NOUN", "POS_PUNCT", "POS_PROPN", "POS_ADP", "POS_DET",
-                "POS_PROPN", "POS_PROPN", "POS_PROPN", "POS_X", "POS_VERB", "POS_NOUN", "POS_ADP", "POS_DET", "POS_NOUN", "POS_ADJ", "POS_NOUN",
-                "POS_VERB", "POS_VERB", "POS_ADP", "POS_VERB", "POS_DET", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_ADP", "POS_DET", "POS_ADJ",
-                "POS_NOUN", "POS_PUNCT", "POS_CONJ", "POS_NOUN", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_VERB",
-                "POS_VERB", "POS_VERB", "POS_ADP", "POS_DET", "POS_NOUN", "POS_X", "POS_NOUN", "POS_ADP", "POS_VERB", "POS_DET", "POS_ADJ",
-                "POS_NOUN", "POS_NOUN", "POS_ADP", "POS_PRON", "POS_PROPN", "POS_PROPN", "POS_NOUN", "POS_ADJ", "POS_PROPN", "POS_PUNCT" };
+        String[] posMapped = { "POS_NOUN", "POS_ADP", "POS_DET", "POS_NOUN", "POS_VERB", "POS_ADV",
+                "POS_VERB", "POS_ADP", "POS_VERB", "POS_DET", "POS_ADJ", "POS_NOUN", "POS_ADP",
+                "POS_NOUN", "POS_NOUN", "POS_ADP", "POS_PROPN", "POS_PUNCT", "POS_ADJ", "POS_ADP",
+                "POS_NOUN", "POS_NOUN", "POS_PUNCT", "POS_VERB", "POS_ADP", "POS_VERB", "POS_DET",
+                "POS_ADJ", "POS_NOUN", "POS_ADP", "POS_PROPN", "POS_CONJ", "POS_PROPN", "POS_X",
+                "POS_ADJ", "POS_NOUN", "POS_PUNCT", "POS_PROPN", "POS_ADP", "POS_DET", "POS_PROPN",
+                "POS_PROPN", "POS_PROPN", "POS_X", "POS_VERB", "POS_NOUN", "POS_ADP", "POS_DET",
+                "POS_NOUN", "POS_ADJ", "POS_NOUN", "POS_VERB", "POS_VERB", "POS_ADP", "POS_VERB",
+                "POS_DET", "POS_NOUN", "POS_ADP", "POS_NOUN", "POS_ADP", "POS_DET", "POS_ADJ",
+                "POS_NOUN", "POS_PUNCT", "POS_CONJ", "POS_NOUN", "POS_VERB", "POS_VERB", "POS_NOUN",
+                "POS_ADP", "POS_NOUN", "POS_VERB", "POS_VERB", "POS_VERB", "POS_ADP", "POS_DET",
+                "POS_NOUN", "POS_X", "POS_NOUN", "POS_ADP", "POS_VERB", "POS_DET", "POS_ADJ",
+                "POS_NOUN", "POS_NOUN", "POS_ADP", "POS_PRON", "POS_PROPN", "POS_PROPN", "POS_NOUN",
+                "POS_ADJ", "POS_PROPN", "POS_PUNCT" };
 
         String[] posOriginal = { "NN", "IN", "DT", "NN", "VBZ", "RB", "VBN", "TO", "VB", "DT", "JJ",
                 "NN", "IN", "NN", "NNS", "IN", "NNP", ",", "JJ", "IN", "NN", "NN", ",", "VB", "TO",

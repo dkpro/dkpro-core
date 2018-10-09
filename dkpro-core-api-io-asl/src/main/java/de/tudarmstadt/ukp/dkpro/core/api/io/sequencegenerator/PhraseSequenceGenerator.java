@@ -17,6 +17,25 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.apache.uima.cas.Type;
+import org.apache.uima.cas.text.AnnotationFS;
+import org.apache.uima.fit.util.CasUtil;
+import org.apache.uima.jcas.JCas;
+
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathUtils;
@@ -24,17 +43,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.TextUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LexicalPhrase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import org.apache.uima.cas.Type;
-import org.apache.uima.cas.text.AnnotationFS;
-import org.apache.uima.fit.util.CasUtil;
-import org.apache.uima.jcas.JCas;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Generate sequences of phrases with optional stopword/regex-based filtering, and lowercasing.
@@ -43,7 +51,8 @@ import java.util.stream.Collectors;
  * <p>
  * Initialize with {@link Builder#build()}.
  * <p>
- * When strings instead of {@link LexicalPhrase}s should be output, use {@link Builder#buildStringSequenceGenerator()}.
+ * When strings instead of {@link LexicalPhrase}s should be output, use
+ * {@link Builder#buildStringSequenceGenerator()}.
  *
  * @since 1.9.0
  */
@@ -54,7 +63,7 @@ public class PhraseSequenceGenerator
     private final boolean lowercase;
     private final Optional<String> coveringTypeName;
     private final String filterRegexReplacement;
-    @SuppressWarnings("SpellCheckingInspection") private final Set<String> filterRegexes;
+    private final Set<String> filterRegexes;
     private final String stopwordReplacement;
     private final Collection<String> stopwords;
     private final String featurePath;
@@ -242,7 +251,8 @@ public class PhraseSequenceGenerator
     /**
      * Builder for {@link PhraseSequenceGenerator}s.
      * <p>
-     * Alternative constructs a {@link StringSequenceGenerator} with {@link #buildStringSequenceGenerator()}
+     * Alternative constructs a {@link StringSequenceGenerator} with
+     * {@link #buildStringSequenceGenerator()}
      */
     public static class Builder
     {
@@ -252,7 +262,7 @@ public class PhraseSequenceGenerator
         private Optional<URL> stopwordsFile = Optional.empty();
         private String stopwordsReplacement = "";
         private String featurePath = Token.class.getCanonicalName();
-        @SuppressWarnings("SpellCheckingInspection") private Set<String> filterRegexes = new HashSet<>();
+        private Set<String> filterRegexes = new HashSet<>();
         private String filterRegexReplacement = "";
         private boolean characters = false;
 
@@ -280,8 +290,13 @@ public class PhraseSequenceGenerator
         public Builder stopwordsFile(File stopwordsFile)
                 throws MalformedURLException
         {
-            URL url = stopwordsFile.toURI().toURL();
-            return stopwordsURL(url);
+            if (stopwordsFile != null) {
+                URL url = stopwordsFile.toURI().toURL();
+                return stopwordsURL(url);
+            }
+            else {
+                return stopwordsURL(null);
+            }
         }
 
         /**
@@ -290,12 +305,14 @@ public class PhraseSequenceGenerator
          */
         public Builder stopwordsURL(URL stopwordsURL)
         {
-            this.stopwordsFile = Optional.of(stopwordsURL);
+            this.stopwordsFile = Optional.ofNullable(stopwordsURL);
             return this;
         }
 
         /**
-         * @param stopwordsReplacement stopwords are replaced by this string or removed if replacement string is empty
+         * @param stopwordsReplacement
+         *            stopwords are replaced by this string or removed if replacement string is
+         *            empty
          * @return a {@link Builder}
          */
         public Builder stopwordsReplacement(String stopwordsReplacement)
@@ -315,10 +332,11 @@ public class PhraseSequenceGenerator
         }
 
         /**
-         * This method can be called multiple times in order to add multiple regular expressions for filtering.
-         * If a token matches any of the regular expression, it is omitted.
+         * This method can be called multiple times in order to add multiple regular expressions for
+         * filtering. If a token matches any of the regular expression, it is omitted.
          *
-         * @param filterRegex Tokens matching this regular expression are filtered out.
+         * @param filterRegex
+         *            Tokens matching this regular expression are filtered out.
          * @return a {@link Builder}
          */
         public Builder filterRegex(String filterRegex)
@@ -330,7 +348,9 @@ public class PhraseSequenceGenerator
         }
 
         /**
-         * @param filterRegexReplacement tokens matching the {@link #filterRegexes} are replaced by this string. If this is empty, these tokens are removed.
+         * @param filterRegexReplacement
+         *            tokens matching the {@link #filterRegexes} are replaced by this string. If
+         *            this is empty, these tokens are removed.
          * @return a {@link Builder}
          */
         public Builder filterRegexReplacement(String filterRegexReplacement)
@@ -351,8 +371,9 @@ public class PhraseSequenceGenerator
         }
 
         /**
-         * @param coveringType if set, a separate string sequence is generated for each sequence covered
-         *                     by the covering type, e.g. one sequence for each sentence.
+         * @param coveringType
+         *            if set, a separate string sequence is generated for each sequence covered by
+         *            the covering type, e.g. one sequence for each sentence.
          * @return a {@link Builder}
          */
         public Builder coveringType(String coveringType)
@@ -364,9 +385,11 @@ public class PhraseSequenceGenerator
         }
 
         /**
-         * If set to true, the generated phrases contain characters instead of tokens or other annotations.
+         * If set to true, the generated phrases contain characters instead of tokens or other
+         * annotations.
          *
-         * @param characters a boolean
+         * @param characters
+         *            a boolean
          * @return a {@link Builder}
          */
         public Builder characters(boolean characters)

@@ -17,30 +17,35 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.mallet.wordembeddings;
 
-import cc.mallet.topics.WordEmbeddings;
-import cc.mallet.types.Alphabet;
-import cc.mallet.types.InstanceList;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
-import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.fit.descriptor.ResourceMetaData;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
+
+import cc.mallet.topics.WordEmbeddings;
+import cc.mallet.types.Alphabet;
+import cc.mallet.types.InstanceList;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
+import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
+import eu.openminted.share.annotations.api.DocumentationResource;
+
 /**
  * Compute word embeddings from the given collection using skip-grams.
  * <p>
- * Set {@link #PARAM_TOKEN_FEATURE_PATH} to define what is considered as a token (Tokens, Lemmas, etc.).
+ * Set {@link #PARAM_TOKEN_FEATURE_PATH} to define what is considered as a token (Tokens, Lemmas,
+ * etc.).
  * <p>
- * Set {@link #PARAM_COVERING_ANNOTATION_TYPE} to define what is considered a document (sentences, paragraphs, etc.).
+ * Set {@link #PARAM_COVERING_ANNOTATION_TYPE} to define what is considered a document (sentences,
+ * paragraphs, etc.).
  *
  * @since 1.9.0
  */
-@ResourceMetaData(name="Mallet Embeddings Trainer")
+@ResourceMetaData(name = "Mallet Embeddings Trainer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class MalletEmbeddingsTrainer
         extends MalletModelTrainer
 {
@@ -66,7 +71,8 @@ public class MalletEmbeddingsTrainer
     private int windowSize;
 
     /**
-     * An example word that is output with its nearest neighbours once in a while (default: null, i.e. none).
+     * An example word that is output with its nearest neighbours once in a while (default: null,
+     * i.e. none).
      */
     public static final String PARAM_EXAMPLE_WORD = "exampleWord";
     @ConfigurationParameter(name = PARAM_EXAMPLE_WORD, mandatory = false)
@@ -102,7 +108,7 @@ public class MalletEmbeddingsTrainer
         matrix.countWords(instanceList);
         matrix.train(instanceList, getNumThreads(), numNegativeSamples);
 
-        assert(getTargetLocation() != null);
+        assert getTargetLocation() != null;
         getLogger().info("Writing output to " + getTargetLocation());
         File targetFile = new File(getTargetLocation());
         if (targetFile.getParentFile() != null) {

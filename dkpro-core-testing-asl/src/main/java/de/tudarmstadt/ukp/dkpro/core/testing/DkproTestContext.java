@@ -28,7 +28,8 @@ import org.junit.runner.Description;
 
 public class DkproTestContext extends TestWatcher
 {
-    private static final ThreadLocal<DkproTestContext> context = new ThreadLocal<DkproTestContext>() {
+    private static final ThreadLocal<DkproTestContext> context = new ThreadLocal<DkproTestContext>()
+    {
         @Override
         protected DkproTestContext initialValue()
         {

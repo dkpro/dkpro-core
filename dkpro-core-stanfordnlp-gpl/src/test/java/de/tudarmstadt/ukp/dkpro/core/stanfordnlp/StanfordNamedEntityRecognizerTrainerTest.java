@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2017
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
@@ -113,7 +113,8 @@ public class StanfordNamedEntityRecognizerTrainerTest
         // Read reference data collect labels
         ConfigurationParameterFactory.setParameter(testReader,
                 Conll2002Reader.PARAM_READ_NAMED_ENTITY, true);
-        List<Span<String>> expected = EvalUtil.loadSamples(testReader, NamedEntity.class, NamedEntity::getValue);
+        List<Span<String>> expected = EvalUtil.loadSamples(testReader, NamedEntity.class,
+                NamedEntity::getValue);
         System.out.printf("Expected samples: %d%n", expected.size());
 
         Result results = EvalUtil.dumpResults(targetFolder, expected, actual);

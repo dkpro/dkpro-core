@@ -55,13 +55,15 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS_VERB;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Removes all tokens/lemmas/stems/POS tags (depending on the "Mode" setting) that do not match the
  * given parts of speech.
  *
  */
-@ResourceMetaData(name="POS Filter")
+@ResourceMetaData(name = "POS Filter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class PosFilter
     extends JCasAnnotator_ImplBase

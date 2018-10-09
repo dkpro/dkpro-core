@@ -78,15 +78,17 @@ public class JazzyCheckerTest
     {
         String testDocumentEnglish = "The cat sta on the mat .";
 
-        ExternalResourceDescription resource = ExternalResourceFactory.createExternalResourceDescription(TestFrequencyCountResource.class);
+        ExternalResourceDescription resource = ExternalResourceFactory
+                .createExternalResourceDescription(TestFrequencyCountResource.class);
 
 //        String context = DkproContext.getContext().getWorkspace("web1t").getAbsolutePath();
 //        String workspace = "en";
-//        ExternalResourceDescription resource = ExternalResourceFactory.createExternalResourceDescription(
+//        ExternalResourceDescription resource = createExternalResourceDescription(
 //                Web1TFrequencyCountResource.class,
 //                Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
 //                Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "3",
-//                Web1TFrequencyCountResource.PARAM_INDEX_PATH, new File(context, workspace).getAbsolutePath()
+//                Web1TFrequencyCountResource.PARAM_INDEX_PATH, 
+//                        new File(context, workspace).getAbsolutePath()
 //        );
         
         AnalysisEngine engine = createEngine(
@@ -98,7 +100,7 @@ public class JazzyCheckerTest
                     ),
                     createEngineDescription(
                         CorrectionsContextualizer.class,
-                        CorrectionsContextualizer.FREQUENCY_PROVIDER_RESOURCE, resource
+                        CorrectionsContextualizer.RES_FREQUENCY_PROVIDER, resource
                     )
                 )
         );

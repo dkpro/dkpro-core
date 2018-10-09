@@ -53,12 +53,17 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * <p>Write CAS in one of the UIMA binary formats.</p>
+ * <p>
+ * Write CAS in one of the UIMA binary formats.
+ * </p>
  * 
- * <p>All the supported formats except <code>6+</code> can also be loaded and saved via the UIMA
- * {@link CasIOUtils}.</p>
+ * <p>
+ * All the supported formats except <code>6+</code> can also be loaded and saved via the UIMA
+ * {@link CasIOUtils}.
+ * </p>
  * 
  * <table>
  * <caption>Supported formats</caption>
@@ -80,9 +85,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
  * </tr>
  * <tr>
  * <td><code>SERIALIZED_TSI</code> or <code>S+</code></td>
- * <td>CAS structures are dumped to disc as they are using Java serialization as in form 0, but
- * now using the {@link CASCompleteSerializer} which includes CAS metadata like type system and
- * index repositories.</td>
+ * <td>CAS structures are dumped to disc as they are using Java serialization as in form 0, but now
+ * using the {@link CASCompleteSerializer} which includes CAS metadata like type system and index
+ * repositories.</td>
  * <td>is reinitialized</td>
  * <td>yes</td>
  * </tr>
@@ -96,16 +101,15 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
  * </tr>
  * <tr>
  * <td><code>BINARY_TSI</code> or 0</td>
- * <td>The same as <code>BINARY_TSI</code>, except that the type system and index configuration
- * are also stored in the file. However, lenient loading or reinitalizing the CAS with this
- * information is presently not supported.</td>
+ * <td>The same as <code>BINARY_TSI</code>, except that the type system and index configuration are
+ * also stored in the file. However, lenient loading or reinitalizing the CAS with this information
+ * is presently not supported.</td>
  * <td>must be the same</td>
  * <td>yes</td>
  * </tr>
  * <tr>
  * <td><code>COMPRESSED</code> or <code>4</code></td>
- * <td>
- * UIMA binary serialization saving all feature structures (reachable or not). This format
+ * <td>UIMA binary serialization saving all feature structures (reachable or not). This format
  * internally uses gzip compression and a binary representation of the CAS, making it much more
  * efficient than format 0.</td>
  * <td>must be the same</td>
@@ -113,25 +117,23 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
  * </tr>
  * <tr>
  * <td><code>COMPRESSED_FILTERED</code> or <code>6</code></td>
- * <td>
- * UIMA binary serialization as format 4, but saving only reachable feature structures.</td>
+ * <td>UIMA binary serialization as format 4, but saving only reachable feature structures.</td>
  * <td>must be the same</td>
  * <td>no</td>
  * </tr>
  * <tr>
  * <td>6+</td>
- * <td>
- * <b>This is a legacy format specific to DKPro Core.</b> Since UIMA 2.9.0, <code>COMPRESSED_FILTERED_TSI</code>
- * is supported and should be used instead of this format. UIMA binary serialization as format 6,
- * but also contains the type system definition. This allows the {@link BinaryCasReader} to load data
- * leniently into a CAS that has been initialized with a different type system.</td>
+ * <td><b>This is a legacy format specific to DKPro Core.</b> Since UIMA 2.9.0,
+ * <code>COMPRESSED_FILTERED_TSI</code> is supported and should be used instead of this format. UIMA
+ * binary serialization as format 6, but also contains the type system definition. This allows the
+ * {@link BinaryCasReader} to load data leniently into a CAS that has been initialized with a
+ * different type system.</td>
  * <td>lenient loading</td>
  * <td>no</td>
  * </tr>
  * <tr>
  * <td><code>COMPRESSED_FILTERED_TS</code></td>
- * <td>
- * Same as <code>COMPRESSED_FILTERED</code>, but also contains the type system definition. This
+ * <td>Same as <code>COMPRESSED_FILTERED</code>, but also contains the type system definition. This
  * allows the {@link BinaryCasReader} to load data leniently into a CAS that has been initialized
  * with a different type system.</td>
  * <td>lenient loading</td>
@@ -139,8 +141,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
  * </tr>
  * <tr>
  * <td><code>COMPRESSED_FILTERED_TSI</code></td>
- * <td>
- * <b>Default</b>. UIMA binary serialization as format 6,  but also contains the type system
+ * <td><b>Default</b>. UIMA binary serialization as format 6, but also contains the type system
  * definition and index definitions. This allows the {@link BinaryCasReader} to load data leniently
  * into a CAS that has been initialized with a different type system.</td>
  * <td>lenient loading</td>
@@ -151,7 +152,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
  * @see <a href="http://uima.apache.org/d/uimaj-2.9.0/references.html#ugr.ref.compress">Compressed
  *      Binary CASes</a>
  */
-@ResourceMetaData(name="UIMA Binary CAS Writer")
+@ResourceMetaData(name = "UIMA Binary CAS Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({ MimeTypes.APPLICATION_X_UIMA_BINARY })
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class BinaryCasWriter
@@ -181,6 +183,9 @@ public class BinaryCasWriter
     @ConfigurationParameter(name = PARAM_TYPE_SYSTEM_LOCATION, mandatory = false)
     private String typeSystemLocation;
 
+    /**
+     * Binary format to produce.
+     */
     public static final String PARAM_FORMAT = "format";
     @ConfigurationParameter(name = PARAM_FORMAT, mandatory = true, defaultValue = "COMPRESSED_FILTERED_TSI")
     private String format;
@@ -192,8 +197,9 @@ public class BinaryCasWriter
      * When using the old short names (e.g. <code>6</code>), the default extension <i>.bin</i> is
      * used.
      */
-    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
-    @ConfigurationParameter(name=PARAM_FILENAME_EXTENSION, mandatory=true, defaultValue=AUTO)
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
+    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = AUTO)
     private String filenameExtension;
 
     private boolean typeSystemWritten;
@@ -221,13 +227,13 @@ public class BinaryCasWriter
         try (NamedOutputStream docOS = getOutputStream(aJCas, filenameExtension)) {
             if ("S".equals(format) || SERIALIZED.toString().equals(format)) {
                 // Java-serialized CAS without type system
-                 getLogger().debug("Writing CAS to [" + docOS + "]");
-//                 CASSerializer serializer = new CASSerializer();
+                getLogger().debug("Writing CAS to [" + docOS + "]");
+                //                 CASSerializer serializer = new CASSerializer();
 //                 serializer.addCAS(aJCas.getCasImpl());
 //                 ObjectOutputStream objOS = new ObjectOutputStream(docOS);
 //                 objOS.writeObject(serializer);
 //                 objOS.flush();
-                 CasIOUtils.save(aJCas.getCas(), docOS, SERIALIZED);
+                CasIOUtils.save(aJCas.getCas(), docOS, SERIALIZED);
             }
             else if ("S+".equals(format) || SERIALIZED_TSI.toString().equals(format)) {
                 // Java-serialized CAS with type system
@@ -297,8 +303,10 @@ public class BinaryCasWriter
     {
         // If the type system location is an absolute file system location, write it there,
         // otherwise use the default storage which places the file relative to the target location
-        if (!typeSystemLocation.startsWith(JAR_PREFIX) && new File(typeSystemLocation).isAbsolute()) {
-            try (OutputStream typeOS = CompressionUtils.getOutputStream(new File(typeSystemLocation))) {
+        if (!typeSystemLocation.startsWith(JAR_PREFIX)
+                && new File(typeSystemLocation).isAbsolute()) {
+            try (OutputStream typeOS = CompressionUtils
+                    .getOutputStream(new File(typeSystemLocation))) {
                 getLogger().debug("Writing type system to [" + typeSystemLocation + "]");
                 writeTypeSystem(aJCas, typeOS);
             }

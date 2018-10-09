@@ -53,13 +53,15 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reads the CoNLL 2003 format.
  * 
  * @see <a href="http://www.cnts.ua.ac.be/conll2003/ner/">CoNLL 2003 shared task</a>
  */
-@ResourceMetaData(name="CoNLL 2003 Reader")
+@ResourceMetaData(name = "CoNLL 2003 Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2003})
 @TypeCapability(
         outputs = { 
@@ -80,23 +82,12 @@ public class Conll2003Reader
      * Character encoding of the input data.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
 
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spamming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
-
-    /**
-     * Write part-of-speech information.
-     *
-     * Default: {@code true}
+     * Read part-of-speech information.
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
@@ -115,14 +106,13 @@ public class Conll2003Reader
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
     /**
-     * Write chunk information.
-     *
-     * Default: {@code true}
+     * Read chunk information.
      */
     public static final String PARAM_READ_CHUNK = ComponentParameters.PARAM_READ_CHUNK;
     @ConfigurationParameter(name = PARAM_READ_CHUNK, mandatory = true, defaultValue = "true")
@@ -141,23 +131,24 @@ public class Conll2003Reader
      * Load the chunk tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_CHUNK_MAPPING_LOCATION = ComponentParameters.PARAM_CHUNK_MAPPING_LOCATION;
+    public static final String PARAM_CHUNK_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_CHUNK_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CHUNK_MAPPING_LOCATION, mandatory = false)
     protected String chunkMappingLocation;
     
     /**
      * Read named entity information.
-     *
-     * Default: {@code true}
      */
-    public static final String PARAM_READ_NAMED_ENTITY = ComponentParameters.PARAM_READ_NAMED_ENTITY;
+    public static final String PARAM_READ_NAMED_ENTITY = 
+            ComponentParameters.PARAM_READ_NAMED_ENTITY;
     @ConfigurationParameter(name = PARAM_READ_NAMED_ENTITY, mandatory = true, defaultValue = "true")
     private boolean namedEntityEnabled;
 
     /**
      * Location of the mapping file for named entity tags to UIMA types.
      */
-    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
+    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
     private String namedEntityMappingLocation;
 
@@ -174,13 +165,16 @@ public class Conll2003Reader
         posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
                 posTagset, getLanguage());
 
-        chunkMappingProvider = MappingProviderFactory.createChunkMappingProvider(chunkMappingLocation,
-                chunkTagset, getLanguage());
+        chunkMappingProvider = MappingProviderFactory
+                .createChunkMappingProvider(chunkMappingLocation, chunkTagset, getLanguage());
         
         namedEntityMappingProvider = new MappingProvider();
-        namedEntityMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/there/is/no/mapping/yet");
-        namedEntityMappingProvider.setDefault(MappingProvider.BASE_TYPE, NamedEntity.class.getName());
-        namedEntityMappingProvider.setOverride(MappingProvider.LOCATION, namedEntityMappingLocation);
+        namedEntityMappingProvider.setDefault(MappingProvider.LOCATION,
+                "classpath:/there/is/no/mapping/yet");
+        namedEntityMappingProvider.setDefault(MappingProvider.BASE_TYPE,
+                NamedEntity.class.getName());
+        namedEntityMappingProvider.setOverride(MappingProvider.LOCATION,
+                namedEntityMappingLocation);
         namedEntityMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
     }
     
@@ -225,12 +219,11 @@ public class Conll2003Reader
         Type chunkType = JCasUtil.getType(aJCas, Chunk.class);
         Feature chunkValue = chunkType.getFeatureByBaseName("chunkValue");
         IobDecoder chunkDecoder = new IobDecoder(aJCas.getCas(), chunkValue, chunkMappingProvider);
-        chunkDecoder.setInternTags(internTags);
         
         Type namedEntityType = JCasUtil.getType(aJCas, NamedEntity.class);
         Feature namedEntityValue = namedEntityType.getFeatureByBaseName("value");
-        IobDecoder neDecoder = new IobDecoder(aJCas.getCas(), namedEntityValue, namedEntityMappingProvider);
-        neDecoder.setInternTags(internTags);        
+        IobDecoder neDecoder = new IobDecoder(aJCas.getCas(), namedEntityValue,
+                namedEntityMappingProvider);
         
         List<String[]> words;
         while ((words = readSentence(aReader)) != null) {
@@ -257,7 +250,7 @@ public class Conll2003Reader
                     Type posTag = posMappingProvider.getTagType(word[POSTAG]);
                     POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
-                    pos.setPosValue(word[POSTAG].intern());
+                    pos.setPosValue(word[POSTAG] != null ? word[POSTAG].intern() : null);
                     POSUtils.assignCoarseValue(pos);
                     pos.addToIndexes();
                     token.setPos(pos);

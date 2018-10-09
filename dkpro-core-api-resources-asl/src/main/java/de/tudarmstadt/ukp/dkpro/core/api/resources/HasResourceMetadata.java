@@ -21,9 +21,8 @@ import java.util.Properties;
 
 /**
  * Interface for objects that provide meta data that can be imported by a ResourceObjectProvider.
- * 
  */
 public interface HasResourceMetadata
 {
-	Properties getResourceMetaData();
+    Properties getResourceMetaData();
 }

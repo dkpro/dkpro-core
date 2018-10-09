@@ -40,93 +40,101 @@ import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathAnnotatorBase;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 
 /**
- * <p>UIMA wrapper for the CISTEM algorithm.
- * CISTEM is a stemming algorithm for the German language, developed by Leonie Weißweiler and Alexander Fraser. 
- * Annotation types to be stemmed can be configured by a {@link FeaturePath}.</p>
+ * UIMA wrapper for the CISTEM algorithm.
  * 
- * <p>If you use this component in a pipeline which uses stop word removal, make sure that it
- * runs after the stop word removal step, so only words that are no stop words are stemmed.</p>
+ * <p>
+ * CISTEM is a stemming algorithm for the German language, developed by Leonie Weißweiler and
+ * Alexander Fraser. Annotation types to be stemmed can be configured by a {@link FeaturePath}.
+ * </p>
+ * 
+ * <p>
+ * If you use this component in a pipeline which uses stop word removal, make sure that it runs
+ * after the stop word removal step, so only words that are no stop words are stemmed.
+ * </p>
  *
  * @see <a href="https://github.com/LeonieWeissweiler/CISTEM">CISSTEM homepage</a>
- * @see FeaturePathAnnotatorBase
- * @since 1.1.0
  */
-@ResourceMetaData(name="CIS Stemmer")
+@Component(OperationType.STEMMER)
+@ResourceMetaData(name = "CIS Stemmer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability({ "de" })
 @TypeCapability(
-        outputs={
+        outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem"})
 public class CisStemmer
-	extends FeaturePathAnnotatorBase
+    extends FeaturePathAnnotatorBase
 {
 
-	/**
-	 * Per default the stemmer runs in case-sensitive mode. 
-	 * If this parameter is enabled, tokens are lower-cased before being passed to the stemmer.
-	 */
-	public static final String PARAM_LOWER_CASE = "lowerCase";
-	@ConfigurationParameter(name = PARAM_LOWER_CASE, mandatory = false, defaultValue="false")
-	protected boolean lowerCase;
-	
-	@Override
-	protected Set<String> getDefaultPaths()
-	{
-		return Collections.singleton(Token.class.getName());
-	}
+    /**
+     * Per default the stemmer runs in case-sensitive mode. If this parameter is enabled, tokens are
+     * lower-cased before being passed to the stemmer.
+     */
+    public static final String PARAM_LOWER_CASE = "lowerCase";
+    @ConfigurationParameter(name = PARAM_LOWER_CASE, mandatory = false, defaultValue = "false")
+    protected boolean lowerCase;
 
-	@Override
-	protected void generateAnnotations(JCas jcas) throws FeaturePathException,
-			AnalysisEngineProcessException
-	{
-		// CAS is necessary to retrieve values
-		CAS currCAS = jcas.getCas();
+    @Override
+    protected Set<String> getDefaultPaths()
+    {
+        return Collections.singleton(Token.class.getName());
+    }
 
-		for (String path : paths) {
+    @Override
+    protected void generateAnnotations(JCas jcas)
+        throws FeaturePathException, AnalysisEngineProcessException
+    {
+        // CAS is necessary to retrieve values
+        CAS currCAS = jcas.getCas();
 
-			// Separate Typename and featurepath
-			String[] segments = path.split("/", 2);
-			String typeName = segments[0];
+        for (String path : paths) {
 
-			// Try to get the type from the typesystem of the CAS
-			Type t = currCAS.getTypeSystem().getType(typeName);
-			if (t == null) {
-				throw new IllegalStateException("Type [" + typeName + "] not found in type system");
-			}
+            // Separate Typename and featurepath
+            String[] segments = path.split("/", 2);
+            String typeName = segments[0];
 
-			// get an fpi object and initialize it
-			// initialize the FeaturePathInfo with the corresponding part
-			initializeFeaturePathInfoFrom(fp, segments);
+            // Try to get the type from the typesystem of the CAS
+            Type t = currCAS.getTypeSystem().getType(typeName);
+            if (t == null) {
+                throw new IllegalStateException("Type [" + typeName + "] not found in type system");
+            }
 
-			// get the annotations
-			AnnotationIndex<?> idx = currCAS.getAnnotationIndex(t);
-			FSIterator<?> iterator = idx.iterator();
+            // get an fpi object and initialize it
+            // initialize the FeaturePathInfo with the corresponding part
+            initializeFeaturePathInfoFrom(fp, segments);
 
-			while (iterator.hasNext()) {
-				AnnotationFS fs = (AnnotationFS) iterator.next();
+            // get the annotations
+            AnnotationIndex<?> idx = currCAS.getAnnotationIndex(t);
+            FSIterator<?> iterator = idx.iterator();
 
-				try {
-					if (this.filterFeaturePath != null) {
-						// check annotation filter condition
-						if (this.filterFeaturePathInfo.match(fs, this.filterCondition)) {
-							createStemAnnotation(jcas, fs);
-						}
-					}
-					else { // no annotation filter specified
-						createStemAnnotation(jcas, fs);
-					}
-				}
-				catch (AnalysisEngineProcessException e) {
-					throw new IllegalStateException(
-							"error occured while creating a stem annotation", e);
-				}
-			}
-		}		
-	}
+            while (iterator.hasNext()) {
+                AnnotationFS fs = (AnnotationFS) iterator.next();
 
-	   /**
+                try {
+                    if (this.filterFeaturePath != null) {
+                        // check annotation filter condition
+                        if (this.filterFeaturePathInfo.match(fs, this.filterCondition)) {
+                            createStemAnnotation(jcas, fs);
+                        }
+                    }
+                    else { // no annotation filter specified
+                        createStemAnnotation(jcas, fs);
+                    }
+                }
+                catch (AnalysisEngineProcessException e) {
+                    throw new IllegalStateException(
+                            "error occured while creating a stem annotation", e);
+                }
+            }
+        }
+    }
+
+    /**
      * Creates a Stem annotation with same begin and end as the AnnotationFS fs, the value is the
      * stemmed value derived by applying the feature path.
      * 
@@ -139,31 +147,31 @@ public class CisStemmer
      * @throws AnalysisEngineProcessException
      *             if the {@code stem} method from the stemmer cannot be invoked.
      */
-	private void createStemAnnotation(JCas jcas, AnnotationFS fs)
-		throws AnalysisEngineProcessException
-	{
-		// Check for blank text, it makes no sense to add a stem then (and raised an exception)
-		String word = fp.getValue(fs);
-		
-		boolean isUppercase = Character.isUpperCase(word.charAt(0));
+    private void createStemAnnotation(JCas jcas, AnnotationFS fs)
+        throws AnalysisEngineProcessException
+    {
+        // Check for blank text, it makes no sense to add a stem then (and raised an exception)
+        String word = fp.getValue(fs);
 
-		if (!StringUtils.isBlank(word)) {
-			
-			String stemValue = CisStem.stem(word, lowerCase);
-			if (isUppercase && !lowerCase) {
-				stemValue = stemValue.substring(0, 1).toUpperCase() + stemValue.substring(1);
-			}
+        boolean isUppercase = Character.isUpperCase(word.charAt(0));
 
-			Stem stemAnnot = new Stem(jcas, fs.getBegin(), fs.getEnd());
-			stemAnnot.setValue(stemValue);
-			stemAnnot.addToIndexes(jcas);
+        if (!StringUtils.isBlank(word)) {
 
-			// Try setting the "stem" feature on Tokens.
-			Feature feat = fs.getType().getFeatureByBaseName("stem");
-			if (feat != null && feat.getRange() != null
-					&& jcas.getTypeSystem().subsumes(feat.getRange(), stemAnnot.getType())) {
-				fs.setFeatureValue(feat, stemAnnot);
-			}
-		}
-	}
+            String stemValue = CisStem.stem(word, lowerCase);
+            if (isUppercase && !lowerCase) {
+                stemValue = stemValue.substring(0, 1).toUpperCase() + stemValue.substring(1);
+            }
+
+            Stem stemAnnot = new Stem(jcas, fs.getBegin(), fs.getEnd());
+            stemAnnot.setValue(stemValue);
+            stemAnnot.addToIndexes(jcas);
+
+            // Try setting the "stem" feature on Tokens.
+            Feature feat = fs.getType().getFeatureByBaseName("stem");
+            if (feat != null && feat.getRange() != null
+                    && jcas.getTypeSystem().subsumes(feat.getRange(), stemAnnot.getType())) {
+                fs.setFeatureValue(feat, stemAnnot);
+            }
+        }
+    }
 }

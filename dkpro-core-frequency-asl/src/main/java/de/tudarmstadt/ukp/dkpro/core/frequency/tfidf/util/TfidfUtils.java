@@ -32,8 +32,6 @@ import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.model.DfStore;
 
 /**
  * Serialization and deserialization methods.
- * 
- * 
  */
 public class TfidfUtils
 {
@@ -72,12 +70,15 @@ public class TfidfUtils
         throws IOException
     {
         File file = new File(fileName);
-        if (!file.exists())
+        if (!file.exists()) {
             FileUtils.touch(file);
+        }
         if (file.isDirectory()) {
             throw new IOException("A directory with that name exists!");
         }
-        try (ObjectOutputStream objOut = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
+        
+        try (ObjectOutputStream objOut = new ObjectOutputStream(
+                new BufferedOutputStream(new FileOutputStream(file)))) {
             objOut.writeObject(object);
             objOut.flush();
             objOut.close();
@@ -88,7 +89,8 @@ public class TfidfUtils
     public static <T> T deserialize(String filePath)
         throws IOException
     {
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(new File(filePath)))) {
+        try (ObjectInputStream in = new ObjectInputStream(
+                new FileInputStream(new File(filePath)))) {
             return (T) in.readObject();
         }
         catch (ClassNotFoundException e) {

@@ -34,8 +34,7 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.SimpleDictionary;
 public class BananaSplitterTest
 {
     @Test
-    public void testSplitter()
-        throws IOException
+    public void testSplitter() throws IOException
     {
         BananaSplitterAlgorithm splitter = new BananaSplitterAlgorithm();
         splitter.setDictionary(new SimpleDictionary("Garage", "einfahrt"));
@@ -47,17 +46,15 @@ public class BananaSplitterTest
     }
 
     @Test
-    public void testSplitter2()
-        throws IOException
+    public void testSplitter2() throws IOException
     {
-        final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
-        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"), false);
+        final File dictFile = ResourceUtils.getUrlAsFile(getClass().getResource(
+                "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"),
+                false);
         Dictionary dict = new SimpleDictionary(dictFile, "UTF-8");
         BananaSplitterAlgorithm splitter = new BananaSplitterAlgorithm();
         splitter.setDictionary(dict);
         List<DecompoundedWord> result = splitter.split("geräteelektronik").getAllSplits();
         assertThat(result.size(), is(1));
-
     }
-
 }

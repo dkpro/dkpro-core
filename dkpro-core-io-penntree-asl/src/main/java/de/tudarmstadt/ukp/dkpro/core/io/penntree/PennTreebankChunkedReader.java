@@ -46,11 +46,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Penn Treebank chunked format reader.
  */
-@ResourceMetaData(name="Penn Treebank Chunked Format Reader")
+@ResourceMetaData(name = "Penn Treebank Chunked Format Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_PTB_CHUNKED})
 @TypeCapability(
         outputs = { 
@@ -65,7 +67,8 @@ public class PennTreebankChunkedReader
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
@@ -203,7 +206,8 @@ public class PennTreebankChunkedReader
                     // in ambiguous cases a token might have two or more part of
                     // speech tags. We take the first one named and ignore the other
                     // ones
-                    tag = selectFirstTagIfTokenIsAmbiguousInContextAndSeveralAcceptableOnesExist(tag);
+                    tag = selectFirstTagIfTokenIsAmbiguousInContextAndSeveralAcceptableOnesExist(
+                            tag);
 
                     // A corpus might contain two pos tags for a word if it is
                     // misspelled in the source material. 'The students dormitory'
@@ -299,7 +303,8 @@ public class PennTreebankChunkedReader
         return aTwt.contains("\\/");
     }
 
-    private String annotateSenenceTokenPosTypes(JCas aJCas, List<String> aTokens, List<String> aTags)
+    private String annotateSenenceTokenPosTypes(JCas aJCas, List<String> aTokens,
+            List<String> aTags)
     {
         StringBuilder textString = new StringBuilder();
         int sentStart = 0;

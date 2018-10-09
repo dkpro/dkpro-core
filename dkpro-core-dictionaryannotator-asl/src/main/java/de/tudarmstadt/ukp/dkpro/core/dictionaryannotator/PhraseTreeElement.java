@@ -24,49 +24,49 @@ import java.util.Map;
  */
 public class PhraseTreeElement
 {
-	private String word;
+    private String word;
 
-	private boolean endElement;
+    private boolean endElement;
 
-	private Map<String, PhraseTreeElement> children;
+    private Map<String, PhraseTreeElement> children;
 
-	public PhraseTreeElement(String aWord)
-	{
-		word = aWord;
+    public PhraseTreeElement(String aWord)
+    {
+        word = aWord;
 
-		children = new HashMap<String, PhraseTreeElement>();
-	}
+        children = new HashMap<String, PhraseTreeElement>();
+    }
 
-	public String getWord()
-	{
-		return word;
-	}
+    public String getWord()
+    {
+        return word;
+    }
 
-	public PhraseTreeElement addChild(String aWord)
-	{
-		// do not add if it exists
-		PhraseTreeElement child = getChild(aWord);
+    public PhraseTreeElement addChild(String aWord)
+    {
+        // do not add if it exists
+        PhraseTreeElement child = getChild(aWord);
 
-		if (child == null) {
-			child = new PhraseTreeElement(aWord);
-			children.put(aWord, child);
-		}
+        if (child == null) {
+            child = new PhraseTreeElement(aWord);
+            children.put(aWord, child);
+        }
 
-		return child;
-	}
+        return child;
+    }
 
-	public PhraseTreeElement getChild(String aWord)
-	{
-		return children.get(aWord);
-	}
+    public PhraseTreeElement getChild(String aWord)
+    {
+        return children.get(aWord);
+    }
 
-	public boolean isEndElement()
-	{
-		return endElement;
-	}
+    public boolean isEndElement()
+    {
+        return endElement;
+    }
 
-	public void setEndElement(boolean aEndElement)
-	{
-		endElement = aEndElement;
-	}
+    public void setEndElement(boolean aEndElement)
+    {
+        endElement = aEndElement;
+    }
 }

@@ -39,28 +39,37 @@ import org.apache.uima.util.ProgressImpl;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.Parameters;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
- * Base class for file system collection readers. Uses an Ant FileSet to conveniently walk the
- * file system.
+ * Base class for file system collection readers. Uses an Ant FileSet to conveniently walk the file
+ * system.
  * <p>
  * Example of a hypothetic <code>FooReader</code> that should read only files ending in
  * <code>.foo</code> from in the directory <code>foodata</code> or any subdirectory thereof:
+ * 
  * <pre>
  * CollectionReader reader = createReader(FooReader.class,
- *     FileSetCollectionReaderBase.PARAM_LANGUAGE, "en",
- *     FileSetCollectionReaderBase.PARAM_SOURCE_LOCATION, "some/path",
- *     FileSetCollectionReaderBase.PARAM_PATTERNS, "[+]foodata&#47;**&#47;*.foo" );
+ *         FileSetCollectionReaderBase.PARAM_LANGUAGE, "en",
+ *         FileSetCollectionReaderBase.PARAM_SOURCE_LOCATION, "some/path",
+ *         FileSetCollectionReaderBase.PARAM_PATTERNS, "[+]foodata&#47;**&#47;*.foo");
  * </pre>
+ * 
  * @since 1.0.6
  * @deprecated use {@link ResourceCollectionReaderBase} instead.
  */
+@Component(value = OperationType.READER)
+@Parameters(
+        exclude = { 
+                FileSetCollectionReaderBase.PARAM_SOURCE_LOCATION  })
 @Deprecated
 public abstract class FileSetCollectionReaderBase
-	extends CasCollectionReader_ImplBase
+    extends CasCollectionReader_ImplBase
 {
-	public static final String INCLUDE_PREFIX = "[+]";
-	public static final String EXCLUDE_PREFIX = "[-]";
+    public static final String INCLUDE_PREFIX = "[+]";
+    public static final String EXCLUDE_PREFIX = "[-]";
 
     /**
      * Location from which the input is read.
@@ -69,86 +78,83 @@ public abstract class FileSetCollectionReaderBase
      */
     @Deprecated
     public static final String PARAM_PATH = ComponentParameters.PARAM_SOURCE_LOCATION;
-    
+
     /**
      * Location from which the input is read.
      */
     public static final String PARAM_SOURCE_LOCATION = ComponentParameters.PARAM_SOURCE_LOCATION;
-	@ConfigurationParameter(name=PARAM_SOURCE_LOCATION, mandatory=false)
-	private File sourceLocation;
+    @ConfigurationParameter(name = PARAM_SOURCE_LOCATION, mandatory = false)
+    private File sourceLocation;
 
-	/**
-	 * A set of Ant-like include/exclude patterns. A pattern starts with {@link #INCLUDE_PREFIX [+]}
-	 * if it is an include pattern and with {@link #EXCLUDE_PREFIX [-]} if it is an exclude pattern.
-	 * The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
-	 * The wildcard {@code *} can be used to a address a part of a name.
-	 */
-	public static final String PARAM_PATTERNS = "patterns";
-	@ConfigurationParameter(name=PARAM_PATTERNS, mandatory=true)
-	private String[] patterns;
+    /**
+     * A set of Ant-like include/exclude patterns. A pattern starts with {@link #INCLUDE_PREFIX [+]}
+     * if it is an include pattern and with {@link #EXCLUDE_PREFIX [-]} if it is an exclude pattern.
+     * The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+     * The wildcard {@code *} can be used to a address a part of a name.
+     */
+    public static final String PARAM_PATTERNS = "patterns";
+    @ConfigurationParameter(name = PARAM_PATTERNS, mandatory = true)
+    private String[] patterns;
 
     /**
      * Use the default excludes.
      */
     public static final String PARAM_USE_DEFAULT_EXCLUDES = "useDefaultExcludes";
-    @ConfigurationParameter(name=PARAM_USE_DEFAULT_EXCLUDES, mandatory=true, defaultValue="true")
+    @ConfigurationParameter(name = PARAM_USE_DEFAULT_EXCLUDES, mandatory = true, defaultValue = "true")
     private boolean useDefaultExcludes;
 
+    /**
+     * The language.
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    private String language;
 
-	/**
-	 * The language.
-	 */
-	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-	@ConfigurationParameter(name=PARAM_LANGUAGE, mandatory=false)
-	private String language;
+    /**
+     * States whether the matching is done case sensitive. (default: true)
+     */
+    public static final String PARAM_CASE_SENSITIVE = "caseSensitive";
+    @ConfigurationParameter(name = PARAM_CASE_SENSITIVE, mandatory = false, defaultValue = "true")
+    private boolean caseSensitive;
 
-	/**
-	 * States whether the matching is done case sensitive. (default: true)
-	 */
-	public static final String PARAM_CASE_SENSITIVE= "caseSensitive";
-	@ConfigurationParameter(name=PARAM_CASE_SENSITIVE, mandatory=false, defaultValue="true")
-	private boolean caseSensitive;
+    private DirectoryScanner directoryScanner;
+    private int completed;
+    private Iterator<Resource> fileSetIterator;
 
-	private DirectoryScanner directoryScanner;
-	private int completed;
-	private Iterator<Resource> fileSetIterator;
+    @Override
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
+    {
+        super.initialize(aContext);
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public void initialize(UimaContext aContext)
-		throws ResourceInitializationException
-	{
-		super.initialize(aContext);
+        // Configure the FileSet.
+        directoryScanner = new DirectoryScanner();
+        if (sourceLocation != null) {
+            directoryScanner.setBasedir(sourceLocation);
+        }
 
-		// Configure the FileSet.
-		directoryScanner = new DirectoryScanner();
-		if (sourceLocation != null) {
-			directoryScanner.setBasedir(sourceLocation);
-		}
+        // Configure case sensitivity
+        directoryScanner.setCaseSensitive(caseSensitive);
 
-		// Configure case sensitivity
-		directoryScanner.setCaseSensitive(caseSensitive);
-
-		// Parse the patterns and inject them into the FileSet
-		List<String> includes = new ArrayList<String>();
-		List<String> excludes = new ArrayList<String>();
-		for (String pattern : patterns) {
-			if (pattern.startsWith(INCLUDE_PREFIX)) {
-				includes.add(pattern.substring(INCLUDE_PREFIX.length()));
-			}
-			else if (pattern.startsWith(EXCLUDE_PREFIX)) {
-				excludes.add(pattern.substring(EXCLUDE_PREFIX.length()));
-			}
+        // Parse the patterns and inject them into the FileSet
+        List<String> includes = new ArrayList<String>();
+        List<String> excludes = new ArrayList<String>();
+        for (String pattern : patterns) {
+            if (pattern.startsWith(INCLUDE_PREFIX)) {
+                includes.add(pattern.substring(INCLUDE_PREFIX.length()));
+            }
+            else if (pattern.startsWith(EXCLUDE_PREFIX)) {
+                excludes.add(pattern.substring(EXCLUDE_PREFIX.length()));
+            }
             else if (pattern.matches("^\\[.\\].*")) {
-                throw new ResourceInitializationException(new IllegalArgumentException(
-                        "Patterns have to start with " + INCLUDE_PREFIX + " or " + EXCLUDE_PREFIX
-                                + "."));
+                throw new ResourceInitializationException(
+                        new IllegalArgumentException("Patterns have to start with " + INCLUDE_PREFIX
+                                + " or " + EXCLUDE_PREFIX + "."));
             }
             else {
                 includes.add(pattern);
             }
-		}
-		
+        }
+
         // These should be the same as documented here: http://ant.apache.org/manual/dirtasks.html
         if (useDefaultExcludes) {
             excludes.add("**/*~");
@@ -179,50 +185,52 @@ public abstract class FileSetCollectionReaderBase
             excludes.add("**/.bzr");
             excludes.add("**/.bzr/**");
             excludes.add("**/.bzrignore");
-        }		
-		
-		directoryScanner.setIncludes(includes.toArray(new String[includes.size()]));
-		directoryScanner.setExcludes(excludes.toArray(new String[excludes.size()]));
-		directoryScanner.scan();
+        }
 
-		// Get the iterator that will be used to actually traverse the FileSet.
-		fileSetIterator = new FileResourceIterator(null, sourceLocation, directoryScanner.getIncludedFiles());
+        directoryScanner.setIncludes(includes.toArray(new String[includes.size()]));
+        directoryScanner.setExcludes(excludes.toArray(new String[excludes.size()]));
+        directoryScanner.scan();
 
-		getLogger().info("Found [" + getIncludedFilesCount() + "] files to be read");
-	}
+        // Get the iterator that will be used to actually traverse the FileSet.
+        fileSetIterator = new FileResourceIterator(null, sourceLocation,
+                directoryScanner.getIncludedFiles());
 
-	protected int getIncludedFilesCount() {
+        getLogger().info("Found [" + getIncludedFilesCount() + "] files to be read");
+    }
 
-		return directoryScanner.getIncludedFilesCount();
+    protected int getIncludedFilesCount()
+    {
 
-	}
-	protected Iterator<Resource> getFileSetIterator()
-	{
-		return fileSetIterator;
-	}
+        return directoryScanner.getIncludedFilesCount();
 
-	protected FileResource nextFile()
-	{
-		try {
-			return (FileResource) fileSetIterator.next();
-		}
-		finally {
-			completed++;
-		}
-	}
+    }
 
-	@Override
-	public Progress[] getProgress()
-	{
-		return new Progress[] { new ProgressImpl(completed, getIncludedFilesCount(), "file") };
-	}
+    protected Iterator<Resource> getFileSetIterator()
+    {
+        return fileSetIterator;
+    }
 
-	@Override
-	public boolean hasNext()
-		throws IOException, CollectionException
-	{
-		return fileSetIterator.hasNext();
-	}
+    protected FileResource nextFile()
+    {
+        try {
+            return (FileResource) fileSetIterator.next();
+        }
+        finally {
+            completed++;
+        }
+    }
+
+    @Override
+    public Progress[] getProgress()
+    {
+        return new Progress[] { new ProgressImpl(completed, getIncludedFilesCount(), "file") };
+    }
+
+    @Override
+    public boolean hasNext() throws IOException, CollectionException
+    {
+        return fileSetIterator.hasNext();
+    }
 
     /**
      * Initialize the {@link DocumentMetaData}. This must be called before setting the document
@@ -235,31 +243,32 @@ public abstract class FileSetCollectionReaderBase
      * @param aQualifier
      *            a qualifier if multiple CASes are generated from the same file.
      */
-	protected void initCas(CAS aCas, FileResource aFile, String aQualifier)
-	{
-		String qualifier = aQualifier != null ? "#"+aQualifier : "";
-		try {
-			// Set the document metadata
-			DocumentMetaData docMetaData = DocumentMetaData.create(aCas);
-			File file = aFile.getFile();
-			docMetaData.setDocumentTitle(file.getName());
-			docMetaData.setDocumentUri(file.toURI().toString()+qualifier);
-			docMetaData.setDocumentId(aFile.getName()+qualifier);
-			if (aFile.getBaseDir() != null) {
-			    docMetaData.setDocumentBaseUri(sourceLocation.toURI().toString());
-				docMetaData.setCollectionId(aFile.getBaseDir().getPath());
-			}
+    protected void initCas(CAS aCas, FileResource aFile, String aQualifier)
+    {
+        String qualifier = aQualifier != null ? "#" + aQualifier : "";
+        try {
+            // Set the document metadata
+            DocumentMetaData docMetaData = DocumentMetaData.create(aCas);
+            File file = aFile.getFile();
+            docMetaData.setDocumentTitle(file.getName());
+            docMetaData.setDocumentUri(file.toURI().toString() + qualifier);
+            docMetaData.setDocumentId(aFile.getName() + qualifier);
+            if (aFile.getBaseDir() != null) {
+                docMetaData.setDocumentBaseUri(sourceLocation.toURI().toString());
+                docMetaData.setCollectionId(aFile.getBaseDir().getPath());
+            }
 
-			// Set the document language
-			aCas.setDocumentLanguage(language);
-		}
-		catch (CASException e) {
-			// This should not happen.
-			throw new RuntimeException(e);
-		}
-	}
+            // Set the document language
+            aCas.setDocumentLanguage(language);
+        }
+        catch (CASException e) {
+            // This should not happen.
+            throw new RuntimeException(e);
+        }
+    }
 
-	public String getLanguage() {
-		return language;
-	}
+    public String getLanguage()
+    {
+        return language;
+    }
 }

@@ -20,13 +20,18 @@ package de.tudarmstadt.ukp.dkpro.core.ixa;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Part-of-Speech annotator using OpenNLP with IXA extensions.
  */
-@ResourceMetaData(name="IXA POS-Tagger")
+@Component(OperationType.PART_OF_SPEECH_TAGGER)
+@ResourceMetaData(name = "IXA POS-Tagger")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class IxaPosTagger
-	extends OpenNlpPosTagger
+    extends OpenNlpPosTagger
 {
     // The IXA POS tagger models make use of IXA classes. But they do so from within OpenNLP.
     // From the outside, it looks and works exactly like an OpenNLP POS tagger. So we just

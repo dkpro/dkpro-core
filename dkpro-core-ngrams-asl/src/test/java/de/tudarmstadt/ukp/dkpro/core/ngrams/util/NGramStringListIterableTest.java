@@ -17,28 +17,27 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.ngrams.util;
 
-
 import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 public class NGramStringListIterableTest
 {
     @Test
-    public void ngramTest() {
-        
+    public void ngramTest()
+    {
         String[] tokens = "This is a simple example sentence .".split(" ");
-        
-        int i=0;
+
+        int i = 0;
         for (List<String> ngram : new NGramStringListIterable(tokens, 2, 2)) {
-            if (i==0) {
+            if (i == 0) {
                 assertEquals(2, ngram.size());
                 assertEquals("This is", StringUtils.join(ngram, " "));
             }
-            
+
             System.out.println(ngram);
             i++;
         }

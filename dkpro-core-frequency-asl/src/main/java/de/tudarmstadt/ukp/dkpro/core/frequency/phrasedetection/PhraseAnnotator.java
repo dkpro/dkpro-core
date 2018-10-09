@@ -17,20 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.frequency.phrasedetection;
 
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
-import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGenerator;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LexicalPhrase;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import org.apache.uima.UimaContext;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
-import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.fit.descriptor.ResourceMetaData;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.cas.TOP;
-import org.apache.uima.resource.ResourceInitializationException;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -40,27 +27,41 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.apache.uima.fit.util.JCasUtil.select;
+import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.cas.TOP;
+import org.apache.uima.resource.ResourceInitializationException;
+
+import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGenerator;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LexicalPhrase;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * Annotate phrases in a sentence. Depending on the provided unigrams and the threshold, these
+ * Annotate phrases in a sentence. Depending on the provided n-grams and the threshold, these
  * comprise either one or two annotations (tokens, lemmas, ...).
  * <p>
- * In order to identify longer phrases, run the {@link FrequencyCounter} and this annotator
- * multiple times, each time taking the results of the previous run as input. From the second run on, set phrases
- * in the feature path parameter {@link #PARAM_FEATURE_PATH}.
+ * In order to identify longer phrases, run the {@link FrequencyWriter} and this annotator multiple
+ * times, each time taking the results of the previous run as input. From the second run on, set
+ * phrases in the feature path parameter {@link #PARAM_FEATURE_PATH}.
  */
-@ResourceMetaData(name="Phrase Annotator")
+@ResourceMetaData(name = "Phrase Annotator")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class PhraseAnnotator
         extends JCasAnnotator_ImplBase
 {
     /**
-     * The feature path to use for building bigrams. Default: tokens.
+     * The feature path to use for building bigrams.
      */
     public static final String PARAM_FEATURE_PATH = "featurePath";
-    @ConfigurationParameter(name = PARAM_FEATURE_PATH, mandatory = false)
+    @ConfigurationParameter(name = PARAM_FEATURE_PATH, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
     private String featurePath;
-    private static final String DEFAULT_FEATURE_PATH = Token.class.getCanonicalName();
 
     /**
      * If true, lowercase everything.
@@ -70,47 +71,59 @@ public class PhraseAnnotator
     private boolean lowercase;
 
     /**
-     * The file providing the unigram and bigram unigrams to use.
+     * The file providing the uni-grams and bi-grams to use.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
     private String modelLocation;
 
     /**
-     * The discount in order to prevent too many phrases consisting of very infrequent words to be formed.
-     * A typical value is the minimum count set during model creation ({@link FrequencyCounter#PARAM_MIN_COUNT}),
-     * which is by default set to 5.
+     * The discount in order to prevent too many phrases consisting of very infrequent words to be
+     * formed. A typical value is the minimum count set during model creation
+     * ({@link FrequencyWriter#PARAM_MIN_COUNT}), which is by default set to 5.
      */
     public static final String PARAM_DISCOUNT = "discount";
     @ConfigurationParameter(name = PARAM_DISCOUNT, mandatory = true, defaultValue = "5")
     private int discount;
 
     /**
-     * The threshold score for phrase construction. Default is 100. Lower values result in fewer phrases.
-     * The value strongly depends on the size of the corpus and the token unigrams.
+     * The threshold score for phrase construction. Default is 100. Lower values result in fewer
+     * phrases. The value strongly depends on the size of the corpus and the token unigrams.
      */
     public static final String PARAM_THRESHOLD = "threshold";
     @ConfigurationParameter(name = PARAM_THRESHOLD, mandatory = true, defaultValue = "100")
     private float threshold;
 
+    /**
+     * Path of a file containing stopwords one work per line.
+     */
     public static final String PARAM_STOPWORDS_FILE = "stopwordsFile";
     @ConfigurationParameter(name = PARAM_STOPWORDS_FILE, mandatory = true, defaultValue = "")
     private String stopwordsFile;
 
+    /**
+     * Stopwords are replaced by this value.
+     */
     public static final String PARAM_STOPWORDS_REPLACEMENT = "stopwordsReplacement";
     @ConfigurationParameter(name = PARAM_STOPWORDS_REPLACEMENT, mandatory = true, defaultValue = "")
     private String stopwordsReplacement;
 
+    /**
+     * Regular expression of tokens to be filtered.
+     */
     public static final String PARAM_FILTER_REGEX = "filterRegex";
     @ConfigurationParameter(name = PARAM_FILTER_REGEX, mandatory = true, defaultValue = "")
     private String filterRegex;
 
+    /**
+     * Value with which tokens matching the regular expression are replaced.
+     */
     public static final String PARAM_REGEX_REPLACEMENT = "regexReplacement";
     @ConfigurationParameter(name = PARAM_REGEX_REPLACEMENT, mandatory = true, defaultValue = "")
     private String regexReplacement;
-
     /**
-     * Set this parameter if bigrams should only be counted when occurring within a covering type, e.g. sentences.
+     * Set this parameter if bigrams should only be counted when occurring within a covering type,
+     * e.g. sentences.
      */
     public static final String PARAM_COVERING_TYPE = "coveringType";
     @ConfigurationParameter(name = PARAM_COVERING_TYPE, mandatory = false)
@@ -128,10 +141,6 @@ public class PhraseAnnotator
     {
         super.initialize(context);
 
-        /* set feature path to default */
-        if (featurePath == null) {
-            featurePath = DEFAULT_FEATURE_PATH;
-        }
         try {
             sequenceGenerator = new PhraseSequenceGenerator.Builder()
                     .featurePath(featurePath)
@@ -182,7 +191,7 @@ public class PhraseAnnotator
                     /* do not look for bigram on last token */
                     LexicalPhrase phrase2 = sequence[i + 1];
                     String token2 = phrase2.getText();
-                    String bigram = token1 + FrequencyCounter.BIGRAM_SEPARATOR + token2;
+                    String bigram = token1 + FrequencyWriter.BIGRAM_SEPARATOR + token2;
 
                     if (bigrams.containsKey(bigram)) {
                         assert unigrams.containsKey(token1);
@@ -227,7 +236,7 @@ public class PhraseAnnotator
 
         String line;
         while ((line = reader.readLine()) != null) {
-            if (line.equals(FrequencyCounter.NGRAM_SEPARATOR_LINE)) {
+            if (line.equals(FrequencyWriter.NGRAM_SEPARATOR_LINE)) {
                 /* this should only happen once per file */
                 if (!countingUnigrams) {
                     throw new IllegalStateException(
@@ -236,7 +245,7 @@ public class PhraseAnnotator
                 countingUnigrams = false;
             }
             else {
-                String[] columns = line.split(FrequencyCounter.COLUMN_SEPARATOR);
+                String[] columns = line.split(FrequencyWriter.COLUMN_SEPARATOR);
                 if (columns.length != 2) {
                     throw new IllegalStateException("Invalid line in input file:\n" + line);
                 }

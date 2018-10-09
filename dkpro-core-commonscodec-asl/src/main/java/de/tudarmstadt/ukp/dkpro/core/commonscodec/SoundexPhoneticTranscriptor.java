@@ -22,16 +22,18 @@ import org.apache.uima.fit.descriptor.LanguageCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 
+import eu.openminted.share.annotations.api.DocumentationResource;
+
 /**
  * Soundex phonetic transcription based on Apache Commons Codec.
  * Works for English.
  */
-@ResourceMetaData(name="Commons Codec Soundex Phonetic Transcriptor")
+@ResourceMetaData(name = "Commons Codec Soundex Phonetic Transcriptor")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability("en")
 @TypeCapability(
-        inputs={"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
-        outputs={"de.tudarmstadt.ukp.dkpro.core.api.phonetics.type.PhoneticTranscription"})
-
+        inputs = {"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
+        outputs = {"de.tudarmstadt.ukp.dkpro.core.api.phonetics.type.PhoneticTranscription"})
 public class SoundexPhoneticTranscriptor
     extends PhoneticTranscriptor_ImplBase
 {

@@ -19,6 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
 import static org.apache.uima.fit.util.JCasUtil.indexCovered;
 import static org.apache.uima.fit.util.JCasUtil.select;
+
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.Map;
@@ -41,13 +42,18 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 import opennlp.tools.lemmatizer.LemmatizerME;
 import opennlp.tools.lemmatizer.LemmatizerModel;
 
 /**
  * Lemmatizer using OpenNLP.
  */
-@ResourceMetaData(name="OpenNLP Lemmatizer")
+@Component(OperationType.LEMMATIZER)
+@ResourceMetaData(name = "OpenNLP Lemmatizer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = { 
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -56,29 +62,43 @@ import opennlp.tools.lemmatizer.LemmatizerModel;
         outputs = { 
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
 public class OpenNlpLemmatizer
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
-	/**
-	 * Use this language instead of the document language to resolve the model.
-	 */
-	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-	protected String language;
+    /**
+     * Use this language instead of the document language to resolve the model.
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    protected String language;
 
-	/**
-	 * Override the default variant used to locate the model.
-	 */
-	public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
-	protected String variant;
+    /**
+     * Override the default variant used to locate the model.
+     */
+    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+    protected String variant;
 
-	/**
-	 * Load the model from this location instead of locating the model automatically.
-	 */
-	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
+     * Load the model from this location instead of locating the model automatically.
+     */
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
     @ResourceParameter(MimeTypes.APPLICATION_X_OPENNLP_LEMMA)
-	protected String modelLocation;
+    protected String modelLocation;
 
     /**
      * The character encoding used by the model.
@@ -87,13 +107,13 @@ public class OpenNlpLemmatizer
     @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = false)
     private String modelEncoding;
 
-	private CasConfigurableProviderBase<LemmatizerME> modelProvider;
+    private CasConfigurableProviderBase<LemmatizerME> modelProvider;
 
-	@Override
-	public void initialize(UimaContext aContext)
-		throws ResourceInitializationException
-	{
-		super.initialize(aContext);
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
 
         modelProvider = new ModelProviderBase<LemmatizerME>(this, "lemma")
         {
@@ -108,7 +128,7 @@ public class OpenNlpLemmatizer
                 return new LemmatizerME(model);
             }
         };
-	}
+    }
 
     @Override
     public void process(JCas aJCas)
@@ -128,7 +148,7 @@ public class OpenNlpLemmatizer
 
             int i = 0;
             for (Token t : tokens) {
-                toks[i] = t.getCoveredText();
+                toks[i] = t.getText();
                 tags[i] = t.getPosValue();
                 i++;
             }

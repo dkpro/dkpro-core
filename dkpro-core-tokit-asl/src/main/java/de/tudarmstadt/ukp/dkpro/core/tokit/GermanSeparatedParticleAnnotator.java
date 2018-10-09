@@ -30,6 +30,9 @@ import org.apache.uima.jcas.JCas;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Annotator to be used for post-processing of German corpora that have been lemmatized and
@@ -43,55 +46,53 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * of particle-verbs (e.g., fangen) by the proper verb lemma (e.g. anfangen) and leaves the lemma of
  * the separated particle unchanged.
  */
-@ResourceMetaData(name="German Separated Particle Annotator")
+@Component(OperationType.SEGMENTER)
+@ResourceMetaData(name = "German Separated Particle Annotator")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability("de")
 @TypeCapability(
-        inputs={
+        inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
                 "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"},
-        outputs={
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"})
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" },
+        outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
+public class GermanSeparatedParticleAnnotator
+    extends JCasAnnotator_ImplBase
+{
+    @Override
+    public void process(JCas jcas) throws AnalysisEngineProcessException
+    {
 
-public class GermanSeparatedParticleAnnotator extends JCasAnnotator_ImplBase {
+        for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
+            List<Token> tokens = JCasUtil.selectCovered(jcas, Token.class, sentence);
+            for (int i = 0; i < tokens.size(); i++) {
+                Token token = tokens.get(i);
+                if (token.getPos() != null) {
+                    if (token.getPos().getPosValue().matches("PTKVZ.*")) {
+                        // go back and find the next finite verb
+                        String particle = token.getText();
+                        String verblemma = "";
 
-	@Override
-	public void process(JCas jcas) throws AnalysisEngineProcessException {
-
-		for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
-			List<Token> tokens = JCasUtil.selectCovered(jcas, Token.class, sentence);
-			for (int i = 0; i < tokens.size(); i++) {
-				Token token = tokens.get(i);
-				if (token.getPos() != null) {
-					if (token.getPos().getPosValue().matches("PTKVZ.*")) {
-					// go back and find the next finite verb
-						String particle = token.getCoveredText();
-						String verblemma = "";
-
-						int j = i-1;
-						while (j >= 0){
-							Token t = tokens.get(j);
-							if (t.getLemma() != null && t.getPos() != null) {
-								if (t.getPos().getPosValue().matches("V.*FIN")) {
-									verblemma = t.getLemma().getValue();
-									Lemma l = t.getLemma();
-									l.setValue(particle +verblemma);
-									break;
-									//l.addToIndexes(); // do not add to indexes: creates Lemma twice
-								}
-							}
-							j--;
-						}
-
-					}
-				}
-
-			} // for all tokens in the sentence
-
-		} // for all sentences
-
-	} // process
-
-
+                        int j = i - 1;
+                        while (j >= 0) {
+                            Token t = tokens.get(j);
+                            if (t.getLemma() != null && t.getPos() != null) {
+                                if (t.getPos().getPosValue().matches("V.*FIN")) {
+                                    verblemma = t.getLemma().getValue();
+                                    Lemma l = t.getLemma();
+                                    l.setValue(particle + verblemma);
+                                    break;
+                                    // l.addToIndexes(); // do not add to indexes: creates Lemma
+                                    // twice
+                                }
+                            }
+                            j--;
+                        }
+                    }
+                }
+            } // for all tokens in the sentence
+        } // for all sentences
+    } // process
 } // class

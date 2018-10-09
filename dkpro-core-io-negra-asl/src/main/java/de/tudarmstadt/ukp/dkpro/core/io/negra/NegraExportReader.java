@@ -18,8 +18,9 @@
 package de.tudarmstadt.ukp.dkpro.core.io.negra;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
-import static org.apache.commons.lang.StringUtils.startsWith;
+import static org.apache.commons.lang3.StringUtils.startsWith;
 import static org.apache.uima.fit.util.JCasUtil.select;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,7 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Type;
@@ -41,6 +42,7 @@ import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.component.JCasCollectionReader_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.jcas.JCas;
@@ -67,11 +69,21 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeNode;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.Parameters;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * This CollectionReader reads a file which is formatted in the NEGRA export format. The texts and
  * add. information like constituent structure is reproduced in CASes, one CAS per text (article) .
  */
+@Component(value = OperationType.READER)
+@ResourceMetaData(name = "NEGRA Export Format Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@Parameters(
+        exclude = { 
+                NegraExportReader.PARAM_SOURCE_LOCATION  })
 @MimeTypeCapability({MimeTypes.APPLICATION_X_NEGRA3, MimeTypes.APPLICATION_X_NEGRA4})
 @TypeCapability(
         outputs = { 
@@ -107,13 +119,12 @@ public class NegraExportReader
      * Character encoding of the input data.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
 
     /**
      * Write part-of-speech information.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
@@ -121,8 +132,6 @@ public class NegraExportReader
 
     /**
      * Write lemma information.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_READ_LEMMA = ComponentParameters.PARAM_READ_LEMMA;
     @ConfigurationParameter(name = PARAM_READ_LEMMA, mandatory = true, defaultValue = "true")
@@ -132,8 +141,6 @@ public class NegraExportReader
      * Write Penn Treebank bracketed structure information. Mind this may not work with all tagsets,
      * in particular not with such that contain "(" or ")" in their tags. The tree is generated
      * using the original tag set in the corpus, not using the mapped tagset!
-     *
-     * Default: {@code false}
      */
     public static final String PARAM_READ_PENN_TREE = ComponentParameters.PARAM_READ_PENN_TREE;
     @ConfigurationParameter(name = PARAM_READ_PENN_TREE, mandatory = true, defaultValue = "false")
@@ -142,7 +149,8 @@ public class NegraExportReader
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String mappingPosLocation;
 
@@ -156,7 +164,7 @@ public class NegraExportReader
     protected String posTagset;
 
     /**
-     * The collection ID to the written to the document meta data. (Default: none)
+     * The collection ID to the written to the document meta data.
      */
     public static final String PARAM_COLLECTION_ID = "collectionId";
     @ConfigurationParameter(name = PARAM_COLLECTION_ID, mandatory = false)
@@ -164,7 +172,7 @@ public class NegraExportReader
 
     /**
      * If true, the unit IDs are used only to detect if a new document (CAS) needs to be created,
-     * but for the purpose of setting the document ID, a new ID is generated. (Default: false)
+     * but for the purpose of setting the document ID, a new ID is generated.
      */
     public static final String PARAM_GENERATE_NEW_IDS = "generateNewIds";
     @ConfigurationParameter(name = PARAM_GENERATE_NEW_IDS, mandatory = true, defaultValue = "false")
@@ -173,8 +181,7 @@ public class NegraExportReader
     /**
      * What indicates if a new CAS should be started. E.g., if set to
      * {@link DocumentUnit#ORIGIN_NAME ORIGIN_NAME}, a new CAS is generated whenever the origin name
-     * of the current sentence differs from the origin name of the last sentence. (Default:
-     * ORIGIN_NAME)
+     * of the current sentence differs from the origin name of the last sentence.
      */
     public static final String PARAM_DOCUMENT_UNIT = "documentUnit";
     @ConfigurationParameter(name = PARAM_DOCUMENT_UNIT, mandatory = true, defaultValue = "ORIGIN_NAME")
@@ -546,7 +553,7 @@ public class NegraExportReader
         constituents.put("0", root);
 
         // Initialize dependency relations
-        Map<Constituent, List<Annotation>> relations = new LinkedHashMap<Constituent, List<Annotation>>();
+        Map<Constituent, List<Annotation>> relations = new LinkedHashMap<>();
 
         // handle tokens
         String line;
@@ -559,7 +566,7 @@ public class NegraExportReader
             Token token = aBuilder.add(parts[TOKEN_TEXT], Token.class);
             sentEnd = token.getEnd();
             aBuilder.add(" ");
-            aIdMap.put(aSentenceId+":"+id, token);
+            aIdMap.put(aSentenceId + ":" + id, token);
 
             // get/create parent
             Constituent parent = constituents.get(parts[TOKEN_PARENT_ID]);
@@ -583,7 +590,8 @@ public class NegraExportReader
                 Type posTag = posMappingProvider.getTagType(parts[TOKEN_POS_TAG]);
                 POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                         token.getEnd());
-                pos.setPosValue(parts[TOKEN_POS_TAG].intern());
+                pos.setPosValue(
+                        parts[TOKEN_POS_TAG] != null ? parts[TOKEN_POS_TAG].intern() : null);
                 POSUtils.assignCoarseValue(pos);
                 pos.addToIndexes();
                 token.setPos(pos);
@@ -648,7 +656,7 @@ public class NegraExportReader
         // add constituents at the end of the sentence
         for (Entry<String, Constituent> e : constituents.entrySet()) {
             e.getValue().addToIndexes(aJCas);
-            aIdMap.put(aSentenceId+":"+e.getKey(), e.getValue());
+            aIdMap.put(aSentenceId + ":" + e.getKey(), e.getValue());
         }
     }
 

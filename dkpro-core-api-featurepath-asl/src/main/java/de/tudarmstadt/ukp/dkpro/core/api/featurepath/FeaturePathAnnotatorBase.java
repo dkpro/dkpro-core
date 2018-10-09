@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.api.featurepath;
 
 import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
@@ -27,10 +27,12 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+/**
+ * Base-class for annotators which require the specification of a feature path.
+ */
 public abstract class FeaturePathAnnotatorBase
     extends JCasAnnotator_ImplBase
 {
-
     /**
      * Specify a path that is used for annotation. Format is de.type.name/feature/path. All type
      * objects will be annotated with a IndexTermAnnotation. The value of the IndexTerm is specified

@@ -36,6 +36,7 @@ import com.ibm.icu.text.CharsetDetector;
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * <p>Reads the ACL anthology corpus and outputs CASes with plain text documents.</p>
@@ -43,10 +44,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
  * <p>The reader tries to strip out hyphenation and replace problematic characters to produce a
  * cleaned text. Otherwise, it is a plain text reader.</p>
  */
-@ResourceMetaData(name="ACL Anthology Corpus Reader")
+@ResourceMetaData(name = "ACL Anthology Corpus Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability(MimeTypes.TEXT_PLAIN)
 @TypeCapability(
-        outputs={
+        outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
 public class AclAnthologyReader
     extends ResourceCollectionReaderBase
@@ -110,23 +112,21 @@ public class AclAnthologyReader
         }
     }
 
-    private String replaceHyphens(String text) {
-        String lines[] = text.split("\\r?\\n");
+    private String replaceHyphens(String text)
+    {
+        String[] lines = text.split("\\r?\\n");
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < lines.length - 1; i++) {
 
             // hyphen heuristic
-            if (lines[i].endsWith("-") &&
-                lines[i+1].length() > 0 &&
-                Character.isLowerCase(lines[i+1].charAt(0)) &&
-                !(lines[i+1].split(" ")[0].contains("-"))
-                )
-            {
+            if (lines[i].endsWith("-") && lines[i + 1].length() > 0
+                    && Character.isLowerCase(lines[i + 1].charAt(0))
+                    && !(lines[i + 1].split(" ")[0].contains("-"))) {
                 // combine wordA[-\n]wordB into one word
                 String[] lineA = lines[i].split(" ");
-                String[] lineB = lines[i+1].split(" ");
-                String wordA = lineA[lineA.length-1];
-                wordA = wordA.substring(0, wordA.length()-1); // remove hyphen
+                String[] lineB = lines[i + 1].split(" ");
+                String wordA = lineA[lineA.length - 1];
+                wordA = wordA.substring(0, wordA.length() - 1); // remove hyphen
                 String wordB = lineB[0];
 
                 // take current line without hyphen, but with complete word
@@ -142,7 +142,7 @@ public class AclAnthologyReader
                         sbTmp.append(" " + lineB[j]);
                     }
                 }
-                lines[i+1] = sbTmp.toString();
+                lines[i + 1] = sbTmp.toString();
             }
             else {
                 sb.append(lines[i] + "\n");

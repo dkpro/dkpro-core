@@ -18,7 +18,8 @@
 package de.tudarmstadt.ukp.dkpro.core.io.tcf;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
-import static org.apache.uima.fit.util.JCasUtil.*;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;

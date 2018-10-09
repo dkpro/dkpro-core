@@ -17,9 +17,15 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.frequency.phrasedetection;
 
-import de.tudarmstadt.ukp.dkpro.core.io.text.StringReader;
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
@@ -28,14 +34,9 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertTrue;
+import de.tudarmstadt.ukp.dkpro.core.io.text.StringReader;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 public class FrequencyCounterTest
 {
@@ -58,9 +59,9 @@ public class FrequencyCounterTest
                 StringReader.PARAM_DOCUMENT_TEXT, sentence,
                 StringReader.PARAM_LANGUAGE, language);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
-        AnalysisEngineDescription writer = createEngineDescription(FrequencyCounter.class,
-                FrequencyCounter.PARAM_TARGET_LOCATION, targetFile,
-                FrequencyCounter.PARAM_MIN_COUNT, minCount);
+        AnalysisEngineDescription writer = createEngineDescription(FrequencyWriter.class,
+                FrequencyWriter.PARAM_TARGET_LOCATION, targetFile,
+                FrequencyWriter.PARAM_MIN_COUNT, minCount);
 
         writer.doFullValidation();
         SimplePipeline.runPipeline(reader, segmenter, writer);
@@ -88,10 +89,10 @@ public class FrequencyCounterTest
                 StringReader.PARAM_DOCUMENT_TEXT, sentence,
                 StringReader.PARAM_LANGUAGE, language);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
-        AnalysisEngineDescription writer = createEngineDescription(FrequencyCounter.class,
-                FrequencyCounter.PARAM_TARGET_LOCATION, targetFile,
-                FrequencyCounter.PARAM_MIN_COUNT, minCount,
-                FrequencyCounter.PARAM_SORT_BY_ALPHABET, true);
+        AnalysisEngineDescription writer = createEngineDescription(FrequencyWriter.class,
+                FrequencyWriter.PARAM_TARGET_LOCATION, targetFile,
+                FrequencyWriter.PARAM_MIN_COUNT, minCount,
+                FrequencyWriter.PARAM_SORT_BY_ALPHABET, true);
 
         SimplePipeline.runPipeline(reader, segmenter, writer);
 
@@ -115,10 +116,10 @@ public class FrequencyCounterTest
                 StringReader.PARAM_DOCUMENT_TEXT, sentence,
                 StringReader.PARAM_LANGUAGE, language);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
-        AnalysisEngineDescription writer = createEngineDescription(FrequencyCounter.class,
-                FrequencyCounter.PARAM_TARGET_LOCATION, targetFile,
-                FrequencyCounter.PARAM_MIN_COUNT, minCount,
-                FrequencyCounter.PARAM_SORT_BY_COUNT, true);
+        AnalysisEngineDescription writer = createEngineDescription(FrequencyWriter.class,
+                FrequencyWriter.PARAM_TARGET_LOCATION, targetFile,
+                FrequencyWriter.PARAM_MIN_COUNT, minCount,
+                FrequencyWriter.PARAM_SORT_BY_COUNT, true);
 
         SimplePipeline.runPipeline(reader, segmenter, writer);
 
@@ -126,9 +127,9 @@ public class FrequencyCounterTest
 
         /* check unigram sorting */
         double[] unigrams = Files.lines(targetFile.toPath())
-                .filter(line -> !line.equals(FrequencyCounter.NGRAM_SEPARATOR_LINE))
-                .map(line -> line.split(FrequencyCounter.COLUMN_SEPARATOR))
-                .filter(fields -> !fields[0].contains(FrequencyCounter.BIGRAM_SEPARATOR))
+                .filter(line -> !line.equals(FrequencyWriter.NGRAM_SEPARATOR_LINE))
+                .map(line -> line.split(FrequencyWriter.COLUMN_SEPARATOR))
+                .filter(fields -> !fields[0].contains(FrequencyWriter.BIGRAM_SEPARATOR))
                 .map(fields -> fields[1])
                 .mapToDouble(Double::parseDouble)
                 .toArray();
@@ -138,9 +139,9 @@ public class FrequencyCounterTest
 
         /* check bigram sorting */
         double[] bigrams = Files.lines(targetFile.toPath())
-                .filter(line -> !line.equals(FrequencyCounter.NGRAM_SEPARATOR_LINE))
-                .map(line -> line.split(FrequencyCounter.COLUMN_SEPARATOR))
-                .filter(fields -> fields[0].contains(FrequencyCounter.BIGRAM_SEPARATOR))
+                .filter(line -> !line.equals(FrequencyWriter.NGRAM_SEPARATOR_LINE))
+                .map(line -> line.split(FrequencyWriter.COLUMN_SEPARATOR))
+                .filter(fields -> fields[0].contains(FrequencyWriter.BIGRAM_SEPARATOR))
                 .map(fields -> fields[1])
                 .mapToDouble(Double::parseDouble)
                 .toArray();
@@ -159,9 +160,9 @@ public class FrequencyCounterTest
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
                 StringReader.PARAM_DOCUMENT_TEXT, sentence,
                 StringReader.PARAM_LANGUAGE, language);
-        AnalysisEngineDescription writer = createEngineDescription(FrequencyCounter.class,
-                FrequencyCounter.PARAM_SORT_BY_COUNT, true,
-                FrequencyCounter.PARAM_SORT_BY_ALPHABET, true);
+        AnalysisEngineDescription writer = createEngineDescription(FrequencyWriter.class,
+                FrequencyWriter.PARAM_SORT_BY_COUNT, true,
+                FrequencyWriter.PARAM_SORT_BY_ALPHABET, true);
 
         SimplePipeline.runPipeline(reader, writer);
     }

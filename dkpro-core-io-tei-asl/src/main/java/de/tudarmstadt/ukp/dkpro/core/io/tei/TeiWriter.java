@@ -44,8 +44,6 @@ import java.util.Optional;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
-import javanet.staxutils.IndentingXMLEventWriter;
-
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLEventWriter;
@@ -72,11 +70,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import javanet.staxutils.IndentingXMLEventWriter;
 
 /**
  * UIMA CAS consumer writing the CAS document text in TEI format.
  */
-@ResourceMetaData(name="TEI XML Writer")
+@ResourceMetaData(name = "TEI XML Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_TEI_XML})
 @TypeCapability(
         inputs = {
@@ -95,7 +96,8 @@ public class TeiWriter
      * Specify the suffix of output files. Default value <code>.xml</code>. If the suffix is not
      * needed, provide an empty string as value.
      */
-    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xml")
     private String filenameSuffix;
 
@@ -110,14 +112,16 @@ public class TeiWriter
      * Write constituent annotations to the CAS. Disabled by default because it requires type
      * priorities to be set up (Constituents must have a higher prio than Tokens).
      */
-    public static final String PARAM_WRITE_CONSTITUENT = ComponentParameters.PARAM_WRITE_CONSTITUENT;
+    public static final String PARAM_WRITE_CONSTITUENT = 
+            ComponentParameters.PARAM_WRITE_CONSTITUENT;
     @ConfigurationParameter(name = PARAM_WRITE_CONSTITUENT, mandatory = true, defaultValue = "false")
     private boolean writeConstituent;
 
     /**
      * Write named entity annotations to the CAS. Overlapping named entities are not supported.
      */
-    public static final String PARAM_WRITE_NAMED_ENTITY = ComponentParameters.PARAM_WRITE_NAMED_ENTITY;
+    public static final String PARAM_WRITE_NAMED_ENTITY = 
+            ComponentParameters.PARAM_WRITE_NAMED_ENTITY;
     @ConfigurationParameter(name = PARAM_WRITE_NAMED_ENTITY, mandatory = true, defaultValue = "true")
     private boolean writeNamedEntity;
 
@@ -193,8 +197,9 @@ public class TeiWriter
                         xmlEventWriter.add(xmlef.createCharacters(text.substring(pos,
                                 nextAnnot.getBegin())));
                         // Next annotation
-                        xmlEventWriter.add(xmlef.createStartElement(new QName(TEI_NS, teiElement.get()),
-                                getAttributes(nextAnnot), null));
+                        xmlEventWriter
+                                .add(xmlef.createStartElement(new QName(TEI_NS, teiElement.get()),
+                                        getAttributes(nextAnnot), null));
 
                         stack.push(cur);
                         cur = nextAnnot;
@@ -210,7 +215,8 @@ public class TeiWriter
                 else {
                     // Text between current and next annotation
                     xmlEventWriter.add(xmlef.createCharacters(text.substring(pos, cur.getEnd())));
-                    xmlEventWriter.add(xmlef.createEndElement(new QName(TEI_NS, teiElement.get()), null));
+                    xmlEventWriter
+                            .add(xmlef.createEndElement(new QName(TEI_NS, teiElement.get()), null));
 
                     pos = cur.getEnd();
                     cur = stack.pop();
@@ -221,7 +227,8 @@ public class TeiWriter
             if (cur != null) {
                 xmlEventWriter.add(xmlef.createCharacters(text.substring(pos, cur.getEnd())));
                 pos = cur.getEnd();
-                xmlEventWriter.add(xmlef.createEndElement(new QName(TEI_NS, getTeiTag(cur).get()), null));
+                xmlEventWriter
+                        .add(xmlef.createEndElement(new QName(TEI_NS, getTeiTag(cur).get()), null));
 
                 while (!stack.isEmpty()) {
                     cur = stack.pop();
@@ -230,7 +237,8 @@ public class TeiWriter
                     }
                     xmlEventWriter.add(xmlef.createCharacters(text.substring(pos, cur.getEnd())));
                     pos = cur.getEnd();
-                    xmlEventWriter.add(xmlef.createEndElement(new QName(TEI_NS, getTeiTag(cur).get()), null));
+                    xmlEventWriter.add(
+                            xmlef.createEndElement(new QName(TEI_NS, getTeiTag(cur).get()), null));
                 }
             }
 

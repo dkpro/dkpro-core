@@ -17,7 +17,9 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.api.frequency.util;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.Arrays;
@@ -36,7 +38,6 @@ public class FrequencyDistributionTest
     @Test
     public void fdTest()
     {
-
         List<String> tokens = Arrays
                 .asList("This is a first test that contains a first test example".split(" "));
 
@@ -117,7 +118,6 @@ public class FrequencyDistributionTest
     @Test
     public void fdTest_specialToken()
     {
-
         FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
         fd.inc(", ");
         fd.inc(". ");
@@ -139,5 +139,4 @@ public class FrequencyDistributionTest
         assertEquals(1, fd.getCount("\t"));
         assertEquals(1, fd.getCount(",\t"));
     }
-
 }

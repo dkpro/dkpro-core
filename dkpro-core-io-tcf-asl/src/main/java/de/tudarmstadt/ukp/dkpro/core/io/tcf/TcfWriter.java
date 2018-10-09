@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -75,11 +75,13 @@ import eu.clarin.weblicht.wlfxb.tc.api.TokensLayer;
 import eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusLayerTag;
 import eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusStored;
 import eu.clarin.weblicht.wlfxb.xb.WLData;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Writer for the WebLicht TCF format.
  */
-@ResourceMetaData(name="CLARIN-DE WebLicht TCF Writer")
+@ResourceMetaData(name = "CLARIN-DE WebLicht TCF Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_TCF})
 @TypeCapability(
         inputs = { 
@@ -101,22 +103,21 @@ public class TcfWriter
      * Specify the suffix of output files. Default value <code>.tcf</code>. If the suffix is not
      * needed, provide an empty string as value.
      */
-    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".tcf")
     private String filenameSuffix;
 
     /**
      * If there are no annotations for a particular layer in the CAS, preserve any potentially
-     * existing annotations in the original TCF.<br>
-     * Default: {@code false}
+     * existing annotations in the original TCF.
      */
     public static final String PARAM_PRESERVE_IF_EMPTY = "preserveIfEmpty";
     @ConfigurationParameter(name = PARAM_PRESERVE_IF_EMPTY, mandatory = true, defaultValue = "false")
     private boolean preserveIfEmpty;
     
     /**
-     * Merge with source TCF file if one is available.<br>
-     * Default: {@code true}
+     * Merge with source TCF file if one is available.
      */
     public static final String PARAM_MERGE = "merge";
     @ConfigurationParameter(name = PARAM_MERGE, mandatory = true, defaultValue = "true")
@@ -422,7 +423,7 @@ public class TcfWriter
         getLogger().debug("Layer [" + TextCorpusLayerTag.SENTENCES.getXmlName() + "]: created");
 
         for (Sentence sentence : select(aJCas, Sentence.class)) {
-            List<eu.clarin.weblicht.wlfxb.tc.api.Token> tokens = new ArrayList<eu.clarin.weblicht.wlfxb.tc.api.Token>();
+            List<eu.clarin.weblicht.wlfxb.tc.api.Token> tokens = new ArrayList<>();
             for (Token token : selectCovered(Token.class, sentence)) {
                 tokens.add(aTokensBeginPositionMap.get(token.getBegin()));
             }
@@ -449,15 +450,17 @@ public class TcfWriter
         }
         
         Optional<Dependency> hasNonBasic = select(aJCas, Dependency.class).stream()
-            .filter(dep -> dep.getFlavor() != null && !DependencyFlavor.BASIC.equals(dep.getFlavor()))
+            .filter(dep -> dep.getFlavor() != null && 
+                    !DependencyFlavor.BASIC.equals(dep.getFlavor()))
             .findAny();
         
-        dependencyParsingLayer = aTextCorpus.createDependencyParsingLayer(tagSetName, hasNonBasic.isPresent(), true);
+        dependencyParsingLayer = aTextCorpus.createDependencyParsingLayer(tagSetName,
+                hasNonBasic.isPresent(), true);
 
         getLogger().debug("Layer [" + TextCorpusLayerTag.PARSING_DEPENDENCY.getXmlName() + "]: created");
         
         for (Sentence s : select(aJCas, Sentence.class)) {
-            List<eu.clarin.weblicht.wlfxb.tc.api.Dependency> deps = new ArrayList<eu.clarin.weblicht.wlfxb.tc.api.Dependency>();
+            List<eu.clarin.weblicht.wlfxb.tc.api.Dependency> deps = new ArrayList<>();
             for (Dependency d : selectCovered(Dependency.class, s)) {
                 eu.clarin.weblicht.wlfxb.tc.api.Dependency dependency = dependencyParsingLayer
                         .createDependency(d.getDependencyType(),
@@ -495,7 +498,7 @@ public class TcfWriter
         for (NamedEntity namedEntity : select(aJCas, NamedEntity.class)) {
             List<Token> tokensInCas = selectCovered(aJCas, Token.class, namedEntity.getBegin(),
                     namedEntity.getEnd());
-            List<eu.clarin.weblicht.wlfxb.tc.api.Token> tokensInTcf = new ArrayList<eu.clarin.weblicht.wlfxb.tc.api.Token>();
+            List<eu.clarin.weblicht.wlfxb.tc.api.Token> tokensInTcf = new ArrayList<>();
             for (Token token : tokensInCas) {
                 tokensInTcf.add(aTokensBeginPositionMap.get(token.getBegin()));
             }
@@ -531,13 +534,14 @@ public class TcfWriter
             List<Reference> refs = new ArrayList<Reference>();
             for (CoreferenceLink link : chain.links()) {
                 // Get covered tokens
-                List<eu.clarin.weblicht.wlfxb.tc.api.Token> tokens = new ArrayList<eu.clarin.weblicht.wlfxb.tc.api.Token>();
+                List<eu.clarin.weblicht.wlfxb.tc.api.Token> tokens = new ArrayList<>();
                 for (Token token : selectCovered(Token.class, link)) {
                     tokens.add(aTokensBeginPositionMap.get(token.getBegin()));
                 }
                 
                 // Create current reference
-                Reference ref = coreferencesLayer.createReference(link.getReferenceType(), tokens, null);
+                Reference ref = coreferencesLayer.createReference(link.getReferenceType(), tokens,
+                        null);
 
                 // Special handling for expletive relations
                 if (REL_TYPE_EXPLETIVE.equals(link.getReferenceRelation())) {

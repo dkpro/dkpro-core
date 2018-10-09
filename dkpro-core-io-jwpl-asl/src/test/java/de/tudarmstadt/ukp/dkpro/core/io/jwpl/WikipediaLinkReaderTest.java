@@ -35,50 +35,50 @@ import de.tudarmstadt.ukp.wikipedia.parser.Link;
 @Ignore("Relies on non-public server")
 public class WikipediaLinkReaderTest
 {
-	@Test
-	public void wikipediaReaderTest()
-		throws Exception
-	{
+    @Test
+    public void wikipediaReaderTest()
+        throws Exception
+    {
         CollectionReaderDescription reader = createReaderDescription(
-		        WikipediaLinkReader.class,
-		        WikipediaLinkReader.PARAM_ALLOWED_LINK_TYPES, new String[]{Link.type.INTERNAL.name()},
-				WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
-				WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
-				WikipediaReaderBase.PARAM_USER,     "student",
-				WikipediaReaderBase.PARAM_PASSWORD, "student",
-				WikipediaReaderBase.PARAM_LANGUAGE, Language._test);
+                WikipediaLinkReader.class,
+                WikipediaLinkReader.PARAM_ALLOWED_LINK_TYPES, Link.type.INTERNAL.name(),
+                WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
+                WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
+                WikipediaReaderBase.PARAM_USER,     "student",
+                WikipediaReaderBase.PARAM_PASSWORD, "student",
+                WikipediaReaderBase.PARAM_LANGUAGE, Language._test);
 
-		int i = 0;
-		for (JCas jcas : new JCasIterable(reader)) {
-			assertNotNull(jcas);
-			i++;
-		}
+        int i = 0;
+        for (JCas jcas : new JCasIterable(reader)) {
+            assertNotNull(jcas);
+            i++;
+        }
 
-		assertEquals(28, i);
-	}
+        assertEquals(28, i);
+    }
 
-	@Test
-	public void wikipediaLinkReaderTest()
-		throws Exception
-	{
+    @Test
+    public void wikipediaLinkReaderTest()
+        throws Exception
+    {
         CollectionReaderDescription reader = createReaderDescription(
-				WikipediaLinkReader.class,
-				WikipediaLinkReader.PARAM_ALLOWED_LINK_TYPES, new String[]{Link.type.INTERNAL.name()},
-				WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
-				WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
-				WikipediaReaderBase.PARAM_USER,     "student",
-				WikipediaReaderBase.PARAM_PASSWORD, "student",
-				WikipediaReaderBase.PARAM_LANGUAGE, Language._test);
+                WikipediaLinkReader.class,
+                WikipediaLinkReader.PARAM_ALLOWED_LINK_TYPES, Link.type.INTERNAL.name(),
+                WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
+                WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
+                WikipediaReaderBase.PARAM_USER,     "student",
+                WikipediaReaderBase.PARAM_PASSWORD, "student",
+                WikipediaReaderBase.PARAM_LANGUAGE, Language._test);
 
-		int linkCounter = 0;
-		for (JCas jcas : new JCasIterable(reader)) {
-			for(WikipediaLink link : JCasUtil.select(jcas,  WikipediaLink.class)){
-				System.out.println(link.getCoveredText());
-				linkCounter++;
-			}
-			assertNotNull(jcas);
-		}
+        int linkCounter = 0;
+        for (JCas jcas : new JCasIterable(reader)) {
+            for (WikipediaLink link : JCasUtil.select(jcas, WikipediaLink.class)) {
+                System.out.println(link.getCoveredText());
+                linkCounter++;
+            }
+            assertNotNull(jcas);
+        }
 
-		assertEquals(0, linkCounter);
-	}
+        assertEquals(0, linkCounter);
+    }
 }

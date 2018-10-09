@@ -25,7 +25,9 @@ public class TigerSentence
     @XmlID 
     @XmlAttribute
     public String id;
+
     public TigerGraph graph;
+    
     public TigerSem sem;
 
     public String getText()

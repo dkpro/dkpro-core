@@ -99,7 +99,8 @@ public class BinaryCasWriterReaderTest
         throws Exception
     {
         write(testFolder.getPath(), SerialFormat.SERIALIZED.toString(), true);
-        read(testFolder.getPath(), NONE, true, false); // Type system is reinitialized from the persisted type system
+        // Type system is reinitialized from the persisted type system
+        read(testFolder.getPath(), NONE, true, false); 
         read(testFolder.getPath(), NONE, true, true);
     }
 
@@ -108,7 +109,8 @@ public class BinaryCasWriterReaderTest
         throws Exception
     {
         write("jar:" + testFolder.toURI().toURL() + "/archive.zip", "S", true);
-        read("jar:" + testFolder.toURI().toURL() + "/archive.zip", NONE, true, false); // Type system is reinitialized from the persisted type system
+        // Type system is reinitialized from the persisted type system
+        read("jar:" + testFolder.toURI().toURL() + "/archive.zip", NONE, true, false); 
         read("jar:" + testFolder.toURI().toURL() + "/archive.zip", NONE, true, true);
     }
 
@@ -126,7 +128,8 @@ public class BinaryCasWriterReaderTest
         throws Exception
     {
         write(testFolder.getPath(), "S+", false);
-        read(testFolder.getPath(), NONE, false, false); // Type system is reinitialized from the persisted CAS
+     // Type system is reinitialized from the persisted CAS
+        read(testFolder.getPath(), NONE, false, false); 
         read(testFolder.getPath(), NONE, false, true);
     }
 
@@ -164,12 +167,12 @@ public class BinaryCasWriterReaderTest
     @Test
     public void test6LenientPlainUima() throws Exception
     {
-//        TypeSystemDescription tsd = new TypeSystemDescription_impl();
-//        TypeDescription td = tsd.addType("DocumentMetaData", "", CAS.TYPE_NAME_DOCUMENT_ANNOTATION);
-//        td.addFeature("feat", "", CAS.TYPE_NAME_STRING);
+//      TypeSystemDescription tsd = new TypeSystemDescription_impl();
+//      TypeDescription td = tsd.addType("DocumentMetaData", "", CAS.TYPE_NAME_DOCUMENT_ANNOTATION);
+//      td.addFeature("feat", "", CAS.TYPE_NAME_STRING);
 //        
-//        CAS source = CasCreationUtils.createCas(tsd, null, null, null);
-//        CAS target = CasCreationUtils.createCas(tsd, null, null, null);
+//      CAS source = CasCreationUtils.createCas(tsd, null, null, null);
+//      CAS target = CasCreationUtils.createCas(tsd, null, null, null);
 //      source.getJCas();
 //      target.getJCas();
 //
@@ -217,8 +220,8 @@ public class BinaryCasWriterReaderTest
         throws Exception
     {
         write(testFolder.getPath(), SerialFormat.COMPRESSED_FILTERED_TSI.toString(), false);
-    	read(testFolder.getPath(), METADATA, false, false);
-    	read(testFolder.getPath(), METADATA, false, true);
+        read(testFolder.getPath(), METADATA, false, false);
+        read(testFolder.getPath(), METADATA, false, true);
     }
 
     @Test
@@ -244,7 +247,8 @@ public class BinaryCasWriterReaderTest
         throws Exception
     {
         writeSerialized(testFolder.getPath(), false);
-        read(testFolder.getPath(), NONE, false, false); // Type system is reinitialized from the persisted CAS
+        // Type system is reinitialized from the persisted CAS
+        read(testFolder.getPath(), NONE, false, false); 
         read(testFolder.getPath(), NONE, false, true); 
     }
 
@@ -253,7 +257,8 @@ public class BinaryCasWriterReaderTest
         throws Exception
     {
         writeSerialized(testFolder.getPath(), true);
-        read(testFolder.getPath(), NONE, true, false); // Type system is reinitialized from the persisted CAS
+        // Type system is reinitialized from the persisted CAS
+        read(testFolder.getPath(), NONE, true, false); 
         read(testFolder.getPath(), NONE, true, true);
     }
 
@@ -290,7 +295,8 @@ public class BinaryCasWriterReaderTest
         
         assertEquals(out.getDocumentLanguage(), in.getDocumentLanguage());
         assertEquals(out.getDocumentText(), in.getDocumentText());
-        assertEquals(DocumentMetaData.get(out).getDocumentId(), DocumentMetaData.get(in).getDocumentId());
+        assertEquals(DocumentMetaData.get(out).getDocumentId(),
+                DocumentMetaData.get(in).getDocumentId());
     }
     
     @Test
@@ -496,13 +502,13 @@ public class BinaryCasWriterReaderTest
         System.out.println("--- READING ---");
         CollectionReader reader;
         if (false) {
-                reader = CollectionReaderFactory.createReader(
-                        BinaryCasReader.class,
-                        BinaryCasReader.PARAM_SOURCE_LOCATION, aLocation,
-                        BinaryCasReader.PARAM_PATTERNS, "*.bin",
-                        // Allow loading only if TSD is not specified
-                        BinaryCasReader.PARAM_TYPE_SYSTEM_LOCATION, 
-                                aLoadExternal ? new File(aLocation, "typesystem.bin") : null);
+            reader = CollectionReaderFactory.createReader(
+                    BinaryCasReader.class,
+                    BinaryCasReader.PARAM_SOURCE_LOCATION, aLocation,
+                    BinaryCasReader.PARAM_PATTERNS, "*.bin",
+                    // Allow loading only if TSD is not specified
+                    BinaryCasReader.PARAM_TYPE_SYSTEM_LOCATION, 
+                            aLoadExternal ? new File(aLocation, "typesystem.bin") : null);
         }
         else {
             reader = CollectionReaderFactory.createReader(
@@ -596,7 +602,8 @@ public class BinaryCasWriterReaderTest
         for (int n = 0; n < aRepeat; n++) {
             long begin = System.currentTimeMillis();
 //            JCas jcas = JCasFactory.createJCas();
-            JCas jcas = CasCreationUtils.createCas((TypeSystemDescription) null, null, null).getJCas();
+            JCas jcas = CasCreationUtils.createCas((TypeSystemDescription) null, null, null)
+                    .getJCas();
             stats.addValue(System.currentTimeMillis() - begin);
         }
         
@@ -619,13 +626,14 @@ public class BinaryCasWriterReaderTest
             CASCompleteSerializer serializer = (CASCompleteSerializer) is.readObject();
             deserializeCASComplete(serializer, aJCas.getCasImpl());
             
-//            // Initialize the JCas sub-system which is the most often used API in DKPro Core components
-//            try {
-//                aJCas.getCas().getJCas();
-//            }
-//            catch (CASException e) {
-//                throw new IOException(e);
-//            }
+//          // Initialize the JCas sub-system which is the most often used API in DKPro Core 
+//          // components
+//          try {
+//              aJCas.getCas().getJCas();
+//          }
+//          catch (CASException e) {
+//              throw new IOException(e);
+//          }
         }
         catch (ClassNotFoundException e) {
             throw new IOException(e);
@@ -657,7 +665,7 @@ public class BinaryCasWriterReaderTest
         System.out.printf("Data serialized to %s %n", testFolder);
         
         // Set up configurations
-        Map<String, AnalysisEngineDescription> configs = new LinkedHashMap<String, AnalysisEngineDescription>();
+        Map<String, AnalysisEngineDescription> configs = new LinkedHashMap<>();
         configs.put(
                 "Format S - no compression",
                 createEngineDescription(
@@ -734,13 +742,15 @@ public class BinaryCasWriterReaderTest
             System.out.printf("%s%n", cfg.getKey());
             System.out.printf("  Measuring WRITE%n");
             
-            for (File f : FileUtils.listFiles(testFolder, new PrefixFileFilter("dummy.bin"), null)) {
+            for (File f : FileUtils.listFiles(testFolder, new PrefixFileFilter("dummy.bin"),
+                    null)) {
                 f.delete();
             }
             
             SummaryStatistics writeStats = measureWritePerformance(cfg.getValue(), testdata);
 
-            Collection<File> files = FileUtils.listFiles(testFolder, new PrefixFileFilter("dummy.bin"), null);
+            Collection<File> files = FileUtils.listFiles(testFolder,
+                    new PrefixFileFilter("dummy.bin"), null);
             assertEquals(1, files.size());
             File f = files.iterator().next();
             

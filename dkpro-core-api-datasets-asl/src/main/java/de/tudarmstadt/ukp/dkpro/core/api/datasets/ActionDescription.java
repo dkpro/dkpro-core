@@ -24,5 +24,4 @@ public interface ActionDescription
     String getAction();
 
     Map<String, Object> getConfiguration();
-
 }

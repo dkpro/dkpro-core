@@ -50,6 +50,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import gate.Annotation;
 import gate.AnnotationSet;
 import gate.DocumentExporter;
@@ -62,7 +63,12 @@ import gate.util.SimpleFeatureMapImpl;
 import it.unimi.dsi.fastutil.ints.Int2IntMap;
 import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
 
-@ResourceMetaData(name="GATE XML Writer (generic)")
+/**
+ * Writer for the GATE XML format. This writer attempts a generic transformation of the UIMA CAS
+ * into the GATE document structure.
+ */
+@ResourceMetaData(name = "GATE XML Writer (generic)")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_GATE_XML})
 @TypeCapability(
         inputs = {
@@ -74,7 +80,8 @@ public class GateXmlWriter2
      * Specify the suffix of output files. Default value <code>.xml</code>. If the suffix is not
      * needed, provide an empty string as value.
      */
-    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xml")
     private String filenameSuffix;
 
@@ -82,7 +89,8 @@ public class GateXmlWriter2
      * Character encoding of the output data.
      */
     public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
-    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
     
     private DocumentExporter exporter;
@@ -301,7 +309,8 @@ public class GateXmlWriter2
             }
             else if (aFS.getCAS().getTypeSystem().subsumes(CasUtil.getType(aFS.getCAS(), TOP.class),
                     aFeature.getRange())) {
-                fm.put(aFeature.getShortName(), process(aProcessed, aAs, aFS.getFeatureValue(aFeature)));
+                fm.put(aFeature.getShortName(),
+                        process(aProcessed, aAs, aFS.getFeatureValue(aFeature)));
             }
             else {
                 throw new IllegalArgumentException("Unable to convert value of feature ["

@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2017
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.berkeleyparser;
 
@@ -30,7 +30,7 @@ import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
 import org.junit.Rule;
@@ -47,13 +47,13 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class BerkeleyParserTest
 {
-	static final String documentEnglish = "We need a very complicated example sentence , which " +
-			"contains as many constituents and dependencies as possible .";
+    static final String documentEnglish = "We need a very complicated example sentence , which " +
+            "contains as many constituents and dependencies as possible .";
 
-	@Test
-	public void testArabic()
-		throws Exception
-	{
+    @Test
+    public void testArabic()
+        throws Exception
+    {
         JCas jcas = runTest("ar",
                 "نحتاج مثالا معقدا جدا ل جملة تحتوي على أكبر قدر ممكن من العناصر و الروابط .");
 
@@ -67,8 +67,9 @@ public class BerkeleyParserTest
                 + "(NN تحتوي) (NN على) (NN أكبر) (NN قدر) (NN ممكن) (NN من) (NN العناصر) (NN و) (NN الروابط) "
                 + "(PUNC .))))";
 
-        String[] posMapped = { "POS_PUNCT", "POS_PUNCT", "POS_NOUN", "POS_NOUN", "POS_NOUN", "POS_NOUN", "POS_NOUN", "POS_NOUN",
-                "POS_NOUN", "POS_NOUN", "POS_NOUN", "POS_NOUN", "POS_NOUN", "POS_NOUN", "POS_NOUN", "POS_PUNCT" };
+        String[] posMapped = { "POS_PUNCT", "POS_PUNCT", "POS_NOUN", "POS_NOUN", "POS_NOUN",
+                "POS_NOUN", "POS_NOUN", "POS_NOUN", "POS_NOUN", "POS_NOUN", "POS_NOUN", "POS_NOUN",
+                "POS_NOUN", "POS_NOUN", "POS_NOUN", "POS_PUNCT" };
 
         String[] posOriginal = { "PUNC", "PUNC", "NN", "NN", "NN", "NN", "NN", "NN", "NN", "NN",
                 "NN", "NN", "NN", "NN", "NN", "PUNC" };
@@ -94,14 +95,14 @@ public class BerkeleyParserTest
         AssertAnnotations.assertTagsetMapping(POS.class, "atb", unmappedPos, jcas);
         AssertAnnotations.assertTagset(Constituent.class, "atb", constituentTags, jcas);
         AssertAnnotations.assertTagsetMapping(Constituent.class, "atb", unmappedConst, jcas);
-	}
+    }
 
-	@Test
-	public void testBulgarian()
-		throws Exception
-	{
-		JCas jcas = runTest("bg", "Имаме нужда от един много сложен пример изречение , " +
-				"което съдържа най-много съставки и зависимости, колкото е възможно .");
+    @Test
+    public void testBulgarian()
+        throws Exception
+    {
+        JCas jcas = runTest("bg", "Имаме нужда от един много сложен пример изречение , " +
+                "което съдържа най-много съставки и зависимости, колкото е възможно .");
 
         String[] constituentMapped = { "ROOT 0,120", "X 0,118", "X 0,120", "X 0,5", "X 100,107",
                 "X 100,118", "X 108,109", "X 108,118", "X 110,118", "X 12,118", "X 12,14",
@@ -124,14 +125,14 @@ public class BerkeleyParserTest
         String[] posOriginal = { "Vpitf", "Ncfsi", "R", "Mcmsi", "Md", "Amsi", "Ncmsi", "Ncnsi",
                 "pt", "Pre", "Vpitf", "Md", "Ncmpi", "Cp", "Dm", "Prq", "Vxitf", "Dd", "pt" };
 
-		String pennTree = "(ROOT (ROOT (S (VPC (V (Vpitf Имаме)) (NPA (N (Ncfsi нужда)) (PP "
-		        + "(Prep (R от)) (NPA (NPA (M (Mcmsi един)) (NPA (APA (Adv (Md много)) (A "
-		        + "(Amsi сложен))) (N (Ncmsi пример)))) (CoordP (ConjArg (NPA (N "
-		        + "(Ncnsi изречение)) (CLR (pt ,) (VPS (Pron (Pre което)) (VPC (V "
-		        + "(Vpitf съдържа)) (NPA (Adv (Md най-много)) (N (Ncmpi съставки)))))))) "
-		        + "(Conj (C (Cp и))) (ConjArg (AdvPA (Adv (Dm зависимости,)) (CL (VPA (Adv "
-		        + "(Prq колкото)) (VPC (V (Vxitf е)) (Adv (Dd възможно)))))))))))) (pt .))))";
-		
+        String pennTree = "(ROOT (ROOT (S (VPC (V (Vpitf Имаме)) (NPA (N (Ncfsi нужда)) (PP "
+                + "(Prep (R от)) (NPA (NPA (M (Mcmsi един)) (NPA (APA (Adv (Md много)) (A "
+                + "(Amsi сложен))) (N (Ncmsi пример)))) (CoordP (ConjArg (NPA (N "
+                + "(Ncnsi изречение)) (CLR (pt ,) (VPS (Pron (Pre което)) (VPC (V "
+                + "(Vpitf съдържа)) (NPA (Adv (Md най-много)) (N (Ncmpi съставки)))))))) "
+                + "(Conj (C (Cp и))) (ConjArg (AdvPA (Adv (Dm зависимости,)) (CL (VPA (Adv "
+                + "(Prq колкото)) (VPC (V (Vxitf е)) (Adv (Dd възможно)))))))))))) (pt .))))";
+        
         String[] posTags = { "A", "Afsd", "Afsi", "Ams", "Amsf", "Amsh", "Amsi",
                 "Ansd", "Ansi", "Cc", "Cp", "Cr", "Cs", "Dd", "Dl", "Dm", "Dq", "Dt", "Hfsi",
                 "Hmsf", "I", "Mc", "Mcf", "Mcfpd", "Mcfpi", "Mcfsd", "Mcfsi", "Mcm", "Mcmpd",
@@ -164,21 +165,21 @@ public class BerkeleyParserTest
         
         String[] unmappedConstituents = { "Conj", "ConjArg", "Verbalised" };
 
-		assertPOS(posMapped, posOriginal, select(jcas, POS.class));
-		assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-		assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+        assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+        assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+        assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
         assertTagset(POS.class, "btb", posTags, jcas);
         // FIXME assertTagsetMapping(POS.class, "btb", new String[] {}, jcas);
         assertTagset(Constituent.class, "btb", constituentTags, jcas);
         assertTagsetMapping(Constituent.class, "btb", unmappedConstituents, jcas);
-	}
+    }
 
-	@Test
-	public void testChinese()
-		throws Exception
-	{
-		JCas jcas = runTest("zh", 
-		        "我们 需要 一个 非常 复杂 的 句子 例如 其中 包含 许多 成分 和 尽可能 的 依赖 。");
+    @Test
+    public void testChinese()
+        throws Exception
+    {
+        JCas jcas = runTest("zh", 
+                "我们 需要 一个 非常 复杂 的 句子 例如 其中 包含 许多 成分 和 尽可能 的 依赖 。");
 
         String[] constituentMapped = { "ADVP 20,22", "ADVP 9,11", "NP 0,2", "NP 17,19", "NP 23,25",
                 "NP 23,34", "NP 32,34", "NP 37,40", "NP 37,45", "NP 43,45", "NP 6,34", "NP 6,45",
@@ -188,19 +189,21 @@ public class BerkeleyParserTest
         String[] constituentOriginal = { "ADVP 20,22", "ADVP 9,11", "CP 6,16", "DNP 37,42",
                 "IP 0,47", "IP 23,28", "IP 6,14", "NP 0,2", "NP 17,19", "NP 23,25", "NP 23,34",
                 "NP 32,34", "NP 37,40", "NP 37,45", "NP 43,45", "NP 6,34", "NP 6,45", "NP 6,8",
-                "PRN 20,34", "QP 29,31", "ROOT 0,47", "VP 12,14", "VP 26,28", "VP 3,45", "VP 9,14" };
+                "PRN 20,34", "QP 29,31", "ROOT 0,47", "VP 12,14", "VP 26,28", "VP 3,45",
+                "VP 9,14" };
 
-        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_NOUN", "POS_ADJ", "POS_VERB", "POS_PART", "POS_NOUN", "POS_ADJ", "POS_NOUN",
-                "POS_VERB", "POS_NUM", "POS_NOUN", "POS_CONJ", "POS_NOUN", "POS_PART", "POS_NOUN", "POS_PUNCT" };
+        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_NOUN", "POS_ADJ", "POS_VERB",
+                "POS_PART", "POS_NOUN", "POS_ADJ", "POS_NOUN", "POS_VERB", "POS_NUM", "POS_NOUN",
+                "POS_CONJ", "POS_NOUN", "POS_PART", "POS_NOUN", "POS_PUNCT" };
 
         String[] posOriginal = { "PN", "VV", "NN", "AD", "VA", "DEC", "NN", "AD", "NN", "VV", "CD",
                 "NN", "CC", "NN", "DEG", "NN", "PU" };
 
-		String pennTree = "(ROOT (IP (NP (PN 我们)) (VP (VV 需要) (NP (NP (CP (IP (NP (NN 一个)) "
-		        + "(VP (ADVP (AD 非常)) (VP (VA 复杂)))) (DEC 的)) (NP (NN 句子)) (PRN (ADVP "
-		        + "(AD 例如)) (NP (IP (NP (NN 其中)) (VP (VV 包含))) (QP (CD 许多)) (NP "
-		        + "(NN 成分))))) (CC 和) (NP (DNP (NP (NN 尽可能)) (DEG 的)) (NP (NN 依赖))))) "
-		        + "(PU 。)))";
+        String pennTree = "(ROOT (IP (NP (PN 我们)) (VP (VV 需要) (NP (NP (CP (IP (NP (NN 一个)) "
+                + "(VP (ADVP (AD 非常)) (VP (VA 复杂)))) (DEC 的)) (NP (NN 句子)) (PRN (ADVP "
+                + "(AD 例如)) (NP (IP (NP (NN 其中)) (VP (VV 包含))) (QP (CD 许多)) (NP "
+                + "(NN 成分))))) (CC 和) (NP (DNP (NP (NN 尽可能)) (DEG 的)) (NP (NN 依赖))))) "
+                + "(PU 。)))";
 
         String[] posTags = { "AD", "AS", "BA", "CC", "CD", "CS", "DEC", "DEG", "DER", "DEV", "DT",
                 "ETC", "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "NN", "NP", "NR", "NT", "OD", "P",
@@ -212,21 +215,21 @@ public class BerkeleyParserTest
 
         String[] unmappedPos = { "NP", "VP" };
         
-		assertPOS(posMapped, posOriginal, select(jcas, POS.class));
-		List<PennTree> trees = new ArrayList<PennTree>(select(jcas, PennTree.class));
-		assertPennTree(pennTree, trees.get(0));
-		assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+        assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+        List<PennTree> trees = new ArrayList<PennTree>(select(jcas, PennTree.class));
+        assertPennTree(pennTree, trees.get(0));
+        assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
         assertTagset(POS.class, "ctb", posTags, jcas);
         assertTagsetMapping(POS.class, "ctb", unmappedPos, jcas);
         assertTagset(Constituent.class, "ctb", constituentTags, jcas);
         // FIXME assertTagsetMapping(Constituent.class, "ctb", new String[] {}, jcas);
-	}
+    }
 
-	@Test
-	public void testEnglish()
-		throws Exception
-	{
-		JCas jcas = runTest("en", documentEnglish);
+    @Test
+    public void testEnglish()
+        throws Exception
+    {
+        JCas jcas = runTest("en", documentEnglish);
 
         String[] constituentMapped = { "ADJP 10,26", "ADJP 102,110", "ADJP 61,68", "NP 0,2",
                 "NP 61,98", "NP 8,110", "NP 8,43", "PP 99,110", "ROOT 0,112", "S 0,112",
@@ -236,16 +239,17 @@ public class BerkeleyParserTest
                 "NP 61,98", "NP 8,110", "NP 8,43", "PP 99,110", "ROOT 0,112", "S 0,112",
                 "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
-        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_DET", "POS_ADV", "POS_ADJ", "POS_NOUN", "POS_NOUN", "POS_PUNCT", "POS_DET",
-                "POS_VERB", "POS_ADP", "POS_ADJ", "POS_NOUN", "POS_CONJ", "POS_NOUN", "POS_ADP", "POS_ADJ", "POS_PUNCT" };
+        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_DET", "POS_ADV", "POS_ADJ", "POS_NOUN",
+                "POS_NOUN", "POS_PUNCT", "POS_DET", "POS_VERB", "POS_ADP", "POS_ADJ", "POS_NOUN",
+                "POS_CONJ", "POS_NOUN", "POS_ADP", "POS_ADJ", "POS_PUNCT" };
 
-		String[] posOriginal = { "PRP", "VBP", "DT", "RB", "JJ", "NN", "NN", ",",
-				"WDT", "VBZ", "IN", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
+        String[] posOriginal = { "PRP", "VBP", "DT", "RB", "JJ", "NN", "NN", ",",
+                "WDT", "VBZ", "IN", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
 
-		String pennTree = "(ROOT (S (NP (PRP We)) (VP (VBP need) (NP (NP (DT a) (ADJP (RB very) " +
-				"(JJ complicated)) (NN example) (NN sentence)) (, ,) (SBAR (WHNP (WDT which)) (S " +
-				"(VP (VBZ contains) (NP (ADJP (IN as) (JJ many)) (NNS constituents) (CC and) " +
-				"(NNS dependencies)) (PP (IN as) (ADJP (JJ possible)))))))) (. .)))";
+        String pennTree = "(ROOT (S (NP (PRP We)) (VP (VBP need) (NP (NP (DT a) (ADJP (RB very) " +
+                "(JJ complicated)) (NN example) (NN sentence)) (, ,) (SBAR (WHNP (WDT which)) (S " +
+                "(VP (VBZ contains) (NP (ADJP (IN as) (JJ many)) (NNS constituents) (CC and) " +
+                "(NNS dependencies)) (PP (IN as) (ADJP (JJ possible)))))))) (. .)))";
 
         String[] posTags = { "#", "$", "''", ",", "-LRB-", "-RRB-", ".", ":", "CC",
                 "CD", "DT", "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNP", "NNPS",
@@ -260,14 +264,14 @@ public class BerkeleyParserTest
 
         String[] unmappedConst = {};
 
-		assertPOS(posMapped, posOriginal, select(jcas, POS.class));
-		assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-		assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+        assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+        assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+        assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
         assertTagset(POS.class, "ptb", posTags, jcas);
         assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
         assertTagset(Constituent.class, "ptb", constituentTags, jcas);
         // FIXME assertTagsetMapping(Constituent.class, "ptb", unmappedConst, jcas);
-	}
+    }
 
     @Test
     public void testEnglishPreTagged()
@@ -283,8 +287,9 @@ public class BerkeleyParserTest
                 "NP 64,98", "NP 8,110", "NP 8,43", "PP 61,110", "PP 99,110", "ROOT 0,112",
                 "S 0,112", "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
-        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_DET", "POS_ADV", "POS_ADJ", "POS_NOUN", "POS_NOUN", "POS_PUNCT", "POS_DET",
-                "POS_VERB", "POS_ADP", "POS_ADJ", "POS_NOUN", "POS_CONJ", "POS_NOUN", "POS_ADP", "POS_ADJ", "POS_PUNCT" };
+        String[] posMapped = { "POS_PRON", "POS_VERB", "POS_DET", "POS_ADV", "POS_ADJ", "POS_NOUN",
+                "POS_NOUN", "POS_PUNCT", "POS_DET", "POS_VERB", "POS_ADP", "POS_ADJ", "POS_NOUN",
+                "POS_CONJ", "POS_NOUN", "POS_ADP", "POS_ADJ", "POS_PUNCT" };
 
         String[] posOriginal = { "PRP", "VBP", "DT", "RB", "JJ", "NN", "NN", ",", "WDT", "VBZ",
                 "IN", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
@@ -319,12 +324,12 @@ public class BerkeleyParserTest
         // jcas);
     }
 
-	@Test
-	public void testGerman()
-		throws Exception
-	{
-		JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel , welches " +
-				"möglichst viele Konstituenten und Dependenzen beinhaltet .");
+    @Test
+    public void testGerman()
+        throws Exception
+    {
+        JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel , welches " +
+                "möglichst viele Konstituenten und Dependenzen beinhaltet .");
 
         String[] constituentMapped = { "ADJP 17,35", "Constituent 0,113", "NP 13,111", "NP 55,100",
                 "NP 71,100", "ROOT 0,113", "S 0,111", "S 47,111" };
@@ -338,10 +343,10 @@ public class BerkeleyParserTest
         String[] posMapped = { "POS_PRON", "POS_VERB", "POS_DET", "POS_ADV", "POS_ADJ", "POS_NOUN", "POS_PUNCT", "POS_PRON", "POS_ADV",
                 "POS_PRON", "POS_NOUN", "POS_CONJ", "POS_NOUN", "POS_VERB", "POS_PUNCT" };
 
-		String pennTree = "(ROOT (PSEUDO (S (PPER Wir) (VVFIN brauchen) (NP (ART ein) (AP " +
-				"(ADV sehr) (ADJA kompliziertes)) (NN Beispiel) ($, ,) (S (PRELS welches) (NP " +
-				"(ADV möglichst) (PIDAT viele) (CNP (NN Konstituenten) (KON und) " +
-				"(NN Dependenzen))) (VVFIN beinhaltet)))) ($. .)))";
+        String pennTree = "(ROOT (PSEUDO (S (PPER Wir) (VVFIN brauchen) (NP (ART ein) (AP " +
+                "(ADV sehr) (ADJA kompliziertes)) (NN Beispiel) ($, ,) (S (PRELS welches) (NP " +
+                "(ADV möglichst) (PIDAT viele) (CNP (NN Konstituenten) (KON und) " +
+                "(NN Dependenzen))) (VVFIN beinhaltet)))) ($. .)))";
 
         String[] posTags = { "$*LRB*", "$,", "$.", "*T1*", "*T2*", "*T3*", "*T4*",
                 "*T5*", "*T6*", "*T7*", "*T8*", "--", "ADJA", "ADJD", "ADV", "APPO", "APPR",
@@ -360,22 +365,22 @@ public class BerkeleyParserTest
         
         String[] unmappedConst = { "---CJ", "PSEUDO" };
         
-		assertPOS(posMapped, posOriginal, select(jcas, POS.class));
-		assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-		assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+        assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+        assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+        assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
         assertTagset(POS.class, "stts", posTags, jcas);
         assertTagsetMapping(POS.class, "stts", unmappedPos, jcas);
         assertTagset(Constituent.class, "negra", constituentTags, jcas);
         assertTagsetMapping(Constituent.class, "negra", unmappedConst, jcas);
-	}
+    }
 
-	@Test
-	public void testFrench()
-		throws Exception
-	{
-		JCas jcas = runTest("fr", "Nous avons besoin d' une phrase par exemple très " +
-				"compliqué , qui contient des constituants que de nombreuses dépendances et que " +
-				"possible .");
+    @Test
+    public void testFrench()
+        throws Exception
+    {
+        JCas jcas = runTest("fr", "Nous avons besoin d' une phrase par exemple très " +
+                "compliqué , qui contient des constituants que de nombreuses dépendances et que " +
+                "possible .");
 
         String[] constituentMapped = { "ADJP 44,58", "NP 21,90", "NP 36,43", "NP 61,64",
                 "NP 74,90", "NP 95,120", "PP 18,90", "PP 32,43", "ROOT 0,138", "S 0,138",
@@ -392,11 +397,11 @@ public class BerkeleyParserTest
         String[] posOriginal = { "CL", "V", "V", "P", "D", "N", "P", "N", "ADV", "A",
                 ",", "PRO", "V", "D", "N", "C", "D", "A", "N", "C", "C", "A", "." };
 
-		String pennTree = "(ROOT (ROOT (SENT (VN (CL Nous) (V avons) (V besoin)) (PP (P d') (NP "
-		        + "(D une) (N phrase) (PP (P par) (NP (N exemple))) (AP (ADV très) (A compliqué)) "
-		        + "(, ,) (Srel (NP (PRO qui)) (VN (V contient)) (NP (D des) (N constituants))))) "
-		        + "(Ssub (C que) (NP (D de) (A nombreuses) (N dépendances))) (C et) (Ssub (C que) "
-		        + "(A possible)) (. .))))";
+        String pennTree = "(ROOT (ROOT (SENT (VN (CL Nous) (V avons) (V besoin)) (PP (P d') (NP "
+                + "(D une) (N phrase) (PP (P par) (NP (N exemple))) (AP (ADV très) (A compliqué)) "
+                + "(, ,) (Srel (NP (PRO qui)) (VN (V contient)) (NP (D des) (N constituants))))) "
+                + "(Ssub (C que) (NP (D de) (A nombreuses) (N dépendances))) (C et) (Ssub (C que) "
+                + "(A possible)) (. .))))";
 
         String[] posTags = { "\"", ",", "-LRB-", "-RRB-", ".", ":", "A", "ADV",
                 "ADVP", "Afs", "C", "CC", "CL", "CS", "D", "Dmp", "ET", "I", "N", "ND", "P", "PC",
@@ -408,16 +413,16 @@ public class BerkeleyParserTest
         String[] unmappedPos = { "\"", "-LRB-", "-RRB-", "ADVP", "Afs", "CC",
                 "CS", "Dmp", "ND", "PC", "S", "X", "_unknown_", "p", "près" };
 
-		assertPOS(posMapped, posOriginal, select(jcas, POS.class));
-		assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-		assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+        assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+        assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+        assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
         assertTagset(POS.class, "ftb", posTags, jcas);
         assertTagsetMapping(POS.class, "ftb", unmappedPos, jcas);
         assertTagset(Constituent.class, "ftb", constituentTags, jcas);
         assertTagsetMapping(Constituent.class, "ftb", new String[] {}, jcas);
-	}
+    }
 
-	/**
+    /**
      * Setup CAS to test parser for the English language (is only called once if
      * an English test is run)
      */

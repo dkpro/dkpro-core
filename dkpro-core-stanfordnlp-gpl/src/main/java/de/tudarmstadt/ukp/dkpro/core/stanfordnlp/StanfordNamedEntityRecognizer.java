@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2017
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
@@ -58,11 +58,16 @@ import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.util.CoreMap;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Stanford Named Entity Recognizer component.
  */
-@ResourceMetaData(name="CoreNLP Named Entity Recogizer (old API)")
+@Component(OperationType.NAMED_ENTITITY_RECOGNIZER)
+@ResourceMetaData(name = "CoreNLP Named Entity Recogizer (old API)")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -95,6 +100,20 @@ public class StanfordNamedEntityRecognizer
     protected String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Location from which the model is read.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -105,7 +124,8 @@ public class StanfordNamedEntityRecognizer
     /**
      * Location of the mapping file for named entity tags to UIMA types.
      */
-    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
+    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
     protected String mappingLocation;
 
@@ -191,7 +211,8 @@ public class StanfordNamedEntityRecognizer
                 if ("O".equals(tokenType) || !tokenType.equals(entityType)) {
                     if (entityType != null) {
                         Type type = mappingProvider.getTagType(entityType);
-                        NamedEntity neAnno = (NamedEntity) cas.createAnnotation(type, entityBegin, entityEnd);
+                        NamedEntity neAnno = (NamedEntity) cas.createAnnotation(type, entityBegin,
+                                entityEnd);
                         neAnno.setValue(entityType);
                         neAnno.addToIndexes();
                         entityType = null;
@@ -210,7 +231,8 @@ public class StanfordNamedEntityRecognizer
             // If the last entity is still open, then close it
             if (entityType != null) {
                 Type type = mappingProvider.getTagType(entityType);
-                NamedEntity neAnno = (NamedEntity) cas.createAnnotation(type, entityBegin, entityEnd);
+                NamedEntity neAnno = (NamedEntity) cas.createAnnotation(type, entityBegin,
+                        entityEnd);
                 neAnno.setValue(entityType);
                 neAnno.addToIndexes();
             }
@@ -242,8 +264,8 @@ public class StanfordNamedEntityRecognizer
                     is = new GZIPInputStream(is);
                 }
 
-                AbstractSequenceClassifier<CoreMap> classifier = (AbstractSequenceClassifier<CoreMap>) 
-                        CRFClassifier.getClassifier(is);
+                AbstractSequenceClassifier<CoreMap> classifier = 
+                        (AbstractSequenceClassifier<CoreMap>) CRFClassifier.getClassifier(is);
 
                 String tagsetName = metadata.getProperty("ner.tagset");
                 if (tagsetName == null) {
@@ -252,7 +274,7 @@ public class StanfordNamedEntityRecognizer
                 
                 SingletonTagset tsdp = new SingletonTagset(NamedEntity.class, tagsetName);
                 for (String tag : classifier.classIndex) {
-                    String mapped = metadata.getProperty("ner.tag.map."+tag);
+                    String mapped = metadata.getProperty("ner.tag.map." + tag);
                     String finalTag = mapped != null ? mapped : tag;
                     
                     // "O" has a special meaning in the CRF-NER: not a named entity

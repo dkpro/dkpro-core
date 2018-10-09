@@ -28,11 +28,8 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
 /**
- * External Resource that simply instanciates a spring ResourcePatternResolver.
- * 
- * 
+ * External Resource that simply instantiates a spring ResourcePatternResolver.
  */
-
 public class ResourceLoaderLocator
     extends Resource_ImplBase
     implements ExternalResourceLocator
@@ -43,7 +40,8 @@ public class ResourceLoaderLocator
      */
     private static final String PARAM_RESOURCE_LOADERCLASS = "resourceLoaderClass";
     @ConfigurationParameter(name = PARAM_RESOURCE_LOADERCLASS, mandatory = false)
-    private final Class<? extends ResourcePatternResolver> resourceLoaderClass = PathMatchingResourcePatternResolver.class;
+    private final Class<? extends ResourcePatternResolver> resourceLoaderClass = 
+            PathMatchingResourcePatternResolver.class;
     private ResourcePatternResolver resolverInstance;
 
     @Override

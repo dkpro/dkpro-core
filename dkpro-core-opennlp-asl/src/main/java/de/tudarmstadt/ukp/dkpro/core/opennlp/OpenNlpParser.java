@@ -26,13 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import opennlp.tools.parser.AbstractBottomUpParser;
-import opennlp.tools.parser.Parse;
-import opennlp.tools.parser.Parser;
-import opennlp.tools.parser.ParserFactory;
-import opennlp.tools.parser.ParserModel;
-import opennlp.tools.util.Span;
-
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -62,194 +55,206 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpParserTagsetDescriptionProvider;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionProvider;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
+import opennlp.tools.parser.AbstractBottomUpParser;
+import opennlp.tools.parser.Parse;
+import opennlp.tools.parser.Parser;
+import opennlp.tools.parser.ParserFactory;
+import opennlp.tools.parser.ParserModel;
+import opennlp.tools.util.Span;
 
 /**
  * OpenNLP parser. The parser ignores existing POS tags and internally creates new ones. However,
  * these tags are only added as annotation if explicitly requested via {@link #PARAM_WRITE_POS}.
  */
-@ResourceMetaData(name="OpenNLP Parser")
+@Component(OperationType.CONSTITUENCY_PARSER)
+@ResourceMetaData(name = "OpenNLP Parser")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
-	    inputs = {
-	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
-		outputs = {
-		    "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
-		    "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree"})
+        inputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
+        outputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
+            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree"})
 public class OpenNlpParser
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
-	/**
-	 * Use this language instead of the document language to resolve the model.
-	 */
-	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-	protected String language;
+    /**
+     * Use this language instead of the document language to resolve the model.
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    protected String language;
 
-	/**
-	 * Override the default variant used to locate the model.
-	 */
-	public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
-	protected String variant;
+    /**
+     * Override the default variant used to locate the model.
+     */
+    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+    protected String variant;
 
-	/**
-	 * Load the model from this location instead of locating the model automatically.
-	 */
-	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
-	@ResourceParameter(MimeTypes.APPLICATION_X_OPENNLP_PARSER)
-	protected String modelLocation;
+    /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
+     * Load the model from this location instead of locating the model automatically.
+     */
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    @ResourceParameter(MimeTypes.APPLICATION_X_OPENNLP_PARSER)
+    protected String modelLocation;
 
-	/**
-	 * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
-	 * the mapping automatically.
-	 */
-	public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
-	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
-	protected String posMappingLocation;
+    /**
+     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
+     * the mapping automatically.
+     */
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+    protected String posMappingLocation;
 
     /**
      * Location of the mapping file for constituent tags to UIMA types.
      */
-    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
+    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_CONSTITUENT_MAPPING_LOCATION, mandatory = false)
     protected String constituentMappingLocation;
 
     /**
-	 * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-	 * spaming the heap with thousands of strings representing only a few different tags.
-	 *
-     * <p>Default: {@code true}</p>
-	 */
-	public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-	@ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-	private boolean internTags;
+     * Log the tag set(s) when a model is loaded.
+     */
+    public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
+    protected boolean printTagSet;
 
-	/**
-	 * Log the tag set(s) when a model is loaded.
-	 *
-     * <p>Default: {@code false}</p>
-	 */
-	public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
-	protected boolean printTagSet;
+    /**
+     * Sets whether to create or not to create POS tags. The creation of
+     * constituent tags must be turned on for this to work.
+     */
+    public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
+    @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "false")
+    private boolean createPosTags;
 
-	/**
-	 * Sets whether to create or not to create POS tags. The creation of
-	 * constituent tags must be turned on for this to work.
-	 *
-	 * <p>Default: {@code true}</p>
-	 */
-	public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
-	@ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "false")
-	private boolean createPosTags;
+    /**
+     * If this parameter is set to true, each sentence is annotated with a PennTree-Annotation,
+     * containing the whole parse tree in Penn Treebank style format.
+     */
+    public static final String PARAM_WRITE_PENN_TREE = ComponentParameters.PARAM_WRITE_PENN_TREE;
+    @ConfigurationParameter(name = PARAM_WRITE_PENN_TREE, mandatory = true, defaultValue = "false")
+    private boolean createPennTreeString;
 
-	/**
-	 * If this parameter is set to true, each sentence is annotated with a PennTree-Annotation,
-	 * containing the whole parse tree in Penn Treebank style format.
-	 *
-     * <p>Default: {@code false}</p>
-	 */
-	public static final String PARAM_WRITE_PENN_TREE = ComponentParameters.PARAM_WRITE_PENN_TREE;
-	@ConfigurationParameter(name = PARAM_WRITE_PENN_TREE, mandatory = true, defaultValue = "false")
-	private boolean createPennTreeString;
-
-	private CasConfigurableProviderBase<Parser> modelProvider;
-	private MappingProvider posMappingProvider;
+    private CasConfigurableProviderBase<Parser> modelProvider;
+    private MappingProvider posMappingProvider;
     private MappingProvider constituentMappingProvider;
 
-	@Override
-	public void initialize(UimaContext aContext)
-		throws ResourceInitializationException
-	{
-		super.initialize(aContext);
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
 
-		modelProvider = new OpenNlpParserModelProvider();
+        modelProvider = new OpenNlpParserModelProvider();
 
         posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
                 language, modelProvider);
         
         constituentMappingProvider = MappingProviderFactory.createConstituentMappingProvider(
                 constituentMappingLocation, language, modelProvider);
-	}
+    }
 
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
-		CAS cas = aJCas.getCas();
+    @Override
+    public void process(JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
+        CAS cas = aJCas.getCas();
 
-		modelProvider.configure(cas);
-		posMappingProvider.configure(cas);
+        modelProvider.configure(cas);
+        posMappingProvider.configure(cas);
         constituentMappingProvider.configure(cas);
 
-		for (Sentence sentence : select(aJCas, Sentence.class)) {
-			List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
+        for (Sentence sentence : select(aJCas, Sentence.class)) {
+            List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
 
-		    Parse parseInput = new Parse(cas.getDocumentText(),
-		    		new Span(sentence.getBegin(), sentence.getEnd()),
-		    		AbstractBottomUpParser.INC_NODE, 0, 0);
-		    int i=0;
-			for (Token t : tokens) {
-				parseInput.insert(new Parse(cas.getDocumentText(), new Span(t.getBegin(), t.getEnd()),
-						AbstractBottomUpParser.TOK_NODE, 0, i));
-				i++;
-		    }
+            Parse parseInput = new Parse(cas.getDocumentText(),
+                    new Span(sentence.getBegin(), sentence.getEnd()),
+                    AbstractBottomUpParser.INC_NODE, 0, 0);
+            int i = 0;
+            for (Token t : tokens) {
+                parseInput.insert(new Parse(cas.getDocumentText(),
+                        new Span(t.getBegin(), t.getEnd()), AbstractBottomUpParser.TOK_NODE, 0, i));
+                i++;
+            }
 
-			Parse parseOutput = modelProvider.getResource().parse(parseInput);
+            Parse parseOutput = modelProvider.getResource().parse(parseInput);
 
-			createConstituentAnnotationFromTree(aJCas, parseOutput, null, tokens);
+            createConstituentAnnotationFromTree(aJCas, parseOutput, null, tokens);
 
-			if (createPennTreeString) {
-				StringBuffer sb = new StringBuffer();
-				parseOutput.setType("ROOT"); // in DKPro the root is ROOT, not TOP
-				parseOutput.show(sb);
+            if (createPennTreeString) {
+                StringBuffer sb = new StringBuffer();
+                parseOutput.setType("ROOT"); // in DKPro the root is ROOT, not TOP
+                parseOutput.show(sb);
 
-				PennTree pTree = new PennTree(aJCas, sentence.getBegin(), sentence.getEnd());
-				pTree.setPennTree(sb.toString());
-				pTree.addToIndexes();
-			}
-		}
-	}
+                PennTree pTree = new PennTree(aJCas, sentence.getBegin(), sentence.getEnd());
+                pTree.setPennTree(sb.toString());
+                pTree.addToIndexes();
+            }
+        }
+    }
 
-	/**
-	 * Creates linked constituent annotations + POS annotations
-	 *
-	 * @param aNode
-	 *            the source tree
-	 * @return the child-structure (needed for recursive call only)
-	 */
+    /**
+     * Creates linked constituent annotations + POS annotations
+     *
+     * @param aNode
+     *            the source tree
+     * @return the child-structure (needed for recursive call only)
+     */
     private Annotation createConstituentAnnotationFromTree(JCas aJCas, Parse aNode,
             Annotation aParentFS, List<Token> aTokens)
-	{
-		// If the node is a word-level constituent node (== POS):
-		// create parent link on token and (if not turned off) create POS tag
-		if (aNode.isPosTag()) {
-			Token token = getToken(aTokens, aNode.getSpan().getStart(), aNode.getSpan().getEnd());
+    {
+        // If the node is a word-level constituent node (== POS):
+        // create parent link on token and (if not turned off) create POS tag
+        if (aNode.isPosTag()) {
+            Token token = getToken(aTokens, aNode.getSpan().getStart(), aNode.getSpan().getEnd());
 
-			// link token to its parent constituent
-			if (aParentFS != null) {
-				token.setParent(aParentFS);
-			}
+            // link token to its parent constituent
+            if (aParentFS != null) {
+                token.setParent(aParentFS);
+            }
 
-			// only add POS to index if we want POS-tagging
-			if (createPosTags) {
-				Type posTag = posMappingProvider.getTagType(aNode.getType());
-				POS posAnno = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(), token.getEnd());
-				posAnno.setPosValue(internTags ? aNode.getType().intern() : aNode.getType());
-				POSUtils.assignCoarseValue(posAnno);
-				posAnno.addToIndexes();
-				token.setPos(posAnno);
-			}
+            // only add POS to index if we want POS-tagging
+            if (createPosTags) {
+                Type posTag = posMappingProvider.getTagType(aNode.getType());
+                POS posAnno = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
+                        token.getEnd());
+                posAnno.setPosValue(aNode.getType() != null ? aNode.getType().intern() : null);
+                POSUtils.assignCoarseValue(posAnno);
+                posAnno.addToIndexes();
+                token.setPos(posAnno);
+            }
 
-			return token;
-		}
-		// Check if node is a constituent node on sentence or phrase-level
-		else {
-			String typeName = aNode.getType();
-			if (AbstractBottomUpParser.TOP_NODE.equals(typeName)) {
-				typeName = "ROOT"; // in DKPro the root is ROOT, not TOP
-			}
+            return token;
+        }
+        // Check if node is a constituent node on sentence or phrase-level
+        else {
+            String typeName = aNode.getType();
+            if (AbstractBottomUpParser.TOP_NODE.equals(typeName)) {
+                typeName = "ROOT"; // in DKPro the root is ROOT, not TOP
+            }
 
             // create the necessary objects and methods
             Type constType = constituentMappingProvider.getTagType(typeName);
@@ -257,46 +262,46 @@ public class OpenNlpParser
             Constituent constAnno = (Constituent) aJCas.getCas().createAnnotation(constType,
                     aNode.getSpan().getStart(), aNode.getSpan().getEnd());
             constAnno.setConstituentType(typeName);
-			
-			// link to parent
-			if (aParentFS != null) {
-				constAnno.setParent(aParentFS);
-			}
+            
+            // link to parent
+            if (aParentFS != null) {
+                constAnno.setParent(aParentFS);
+            }
 
-			// Do we have any children?
-			List<Annotation> childAnnotations = new ArrayList<Annotation>();
-			for (Parse child : aNode.getChildren()) {
+            // Do we have any children?
+            List<Annotation> childAnnotations = new ArrayList<Annotation>();
+            for (Parse child : aNode.getChildren()) {
                 Annotation childAnnotation = createConstituentAnnotationFromTree(aJCas, child,
                         constAnno, aTokens);
-				if (childAnnotation != null) {
-					childAnnotations.add(childAnnotation);
-				}
-			}
+                if (childAnnotation != null) {
+                    childAnnotations.add(childAnnotation);
+                }
+            }
 
-			// Now that we know how many children we have, link annotation of
-			// current node with its children
-			FSArray childArray = FSCollectionFactory.createFSArray(aJCas, childAnnotations);
-			constAnno.setChildren(childArray);
+            // Now that we know how many children we have, link annotation of
+            // current node with its children
+            FSArray childArray = FSCollectionFactory.createFSArray(aJCas, childAnnotations);
+            constAnno.setChildren(childArray);
 
-			// write annotation for current node to index
-			aJCas.addFsToIndexes(constAnno);
+            // write annotation for current node to index
+            aJCas.addFsToIndexes(constAnno);
 
-			return constAnno;
-		}
-	}
+            return constAnno;
+        }
+    }
 
-	/**
-	 * Given a list of tokens (e.g. those from a sentence) return the one at the specified position.
-	 */
-	private Token getToken(List<Token> aTokens, int aBegin, int aEnd)
-	{
-		for (Token t : aTokens) {
-			if (aBegin == t.getBegin() && aEnd == t.getEnd()) {
-				return t;
-			}
-		}
-		throw new IllegalStateException("Token not found");
-	}
+    /**
+     * Given a list of tokens (e.g. those from a sentence) return the one at the specified position.
+     */
+    private Token getToken(List<Token> aTokens, int aBegin, int aEnd)
+    {
+        for (Token t : aTokens) {
+            if (aBegin == t.getBegin() && aEnd == t.getEnd()) {
+                return t;
+            }
+        }
+        throw new IllegalStateException("Token not found");
+    }
 
     private class OpenNlpParserModelProvider
         extends ModelProviderBase<Parser>
@@ -324,7 +329,8 @@ public class OpenNlpParser
                     metadata.getProperty("pos.tagset"), POS.class, model.getParserTaggerModel()
                             .getPosModel()));
             addTagset(new OpenNlpParserTagsetDescriptionProvider(
-                    metadata.getProperty("constituent.tagset"), Constituent.class, model, metadata));
+                    metadata.getProperty("constituent.tagset"), Constituent.class, model,
+                    metadata));
 
             if (printTagSet) {
                 getContext().getLogger().log(INFO, getTagset().toString());

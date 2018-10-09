@@ -131,10 +131,10 @@ public class BratReaderWriterTest
     {
         testRoundTrip(
                 createReaderDescription(BratReader.class,
-                        BratReader.PARAM_TYPE_MAPPINGS, asList(
+                        BratReader.PARAM_TEXT_ANNOTATION_TYPE_MAPPINGS, asList(
                                 "Token -> de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
                                 "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
-                                "Location -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location")), 
+                                "Location -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location")),
                 createEngineDescription(BratWriter.class,
                         BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true), 
                 "brat/document0a.ann");
@@ -157,18 +157,71 @@ public class BratReaderWriterTest
     {
         testOneWay(
                 createReaderDescription(BratReader.class,
-                        BratReader.PARAM_TYPE_MAPPINGS, asList(
-                                "Origin -> de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation",
+                        BratReader.PARAM_TEXT_ANNOTATION_TYPE_MAPPINGS, asList(
                                 "Country -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location",
                                 "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
                                 "MERGE-ORG -> de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg"),
+                        BratReader.PARAM_RELATION_TYPE_MAPPINGS, asList(
+                                "Origin -> de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation"),
                         BratReader.PARAM_RELATION_TYPES, asList(
-                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")), 
+                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
                 createEngineDescription(BratWriter.class,
                         BratWriter.PARAM_RELATION_TYPES, asList(
-                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")), 
+                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
                 "brat/document1-ref.ann", 
                 "brat/document1.ann");
+    }
+
+    @Test
+    public void testTextAnnotationWithSubcategorization()
+        throws Exception
+    {
+        testOneWay(
+                createReaderDescription(BratReader.class,
+                        BratReader.PARAM_TEXT_ANNOTATION_TYPES, 
+                                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity:value",
+                        BratReader.PARAM_TEXT_ANNOTATION_TYPE_MAPPINGS, asList(
+                                "Country -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
+                                "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
+                                "MERGE-ORG -> de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg"),
+                        BratReader.PARAM_RELATION_TYPE_MAPPINGS, asList(
+                                "Origin -> de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation"),
+                        BratReader.PARAM_RELATION_TYPES, asList(
+                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
+                createEngineDescription(BratWriter.class,
+                        BratWriter.PARAM_RELATION_TYPES, asList(
+                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")),
+                "brat/document1-ref-sub.ann", 
+                "brat/document1.ann");
+    }
+    
+    @Test
+    public void testBratWithDiscontinuousFragmentNear() 
+        throws Exception
+    {
+        testRoundTrip(createReaderDescription(BratReader.class,
+                BratReader.PARAM_TEXT_ANNOTATION_TYPE_MAPPINGS,
+                asList("Token -> de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                        "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
+                        "Location -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location")),
+                createEngineDescription(BratWriter.class, BratWriter.PARAM_ENABLE_TYPE_MAPPINGS,
+                        true),
+                "brat/document0c.ann");
+    }
+    
+    @Test
+    public void testBratWithDiscontinuousFragmentFar() 
+        throws Exception
+    {
+        testOneWay(createReaderDescription(BratReader.class,
+                BratReader.PARAM_TEXT_ANNOTATION_TYPE_MAPPINGS,
+                asList("Token -> de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                        "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
+                        "Location -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location")),
+                createEngineDescription(BratWriter.class, BratWriter.PARAM_ENABLE_TYPE_MAPPINGS,
+                        true),
+                "brat/document0d-ref.ann",
+                "brat/document0d.ann");
     }
 
     @Rule

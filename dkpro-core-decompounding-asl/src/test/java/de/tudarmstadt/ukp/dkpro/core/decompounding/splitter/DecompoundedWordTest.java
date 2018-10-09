@@ -19,13 +19,14 @@
 package de.tudarmstadt.ukp.dkpro.core.decompounding.splitter;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import junit.framework.Assert;
 
 import org.junit.Test;
 
@@ -37,11 +38,11 @@ public class DecompoundedWordTest
     {
         DecompoundedWord s = DecompoundedWord.createFromString("aktion(s)+plan");
 
-        Assert.assertEquals("aktion", s.getSplits().get(0).getWord());
-        Assert.assertEquals("s", s.getSplits().get(0).getMorpheme());
+        assertEquals("aktion", s.getSplits().get(0).getWord());
+        assertEquals("s", s.getSplits().get(0).getMorpheme());
 
-        Assert.assertEquals("plan", s.getSplits().get(1).getWord());
-        Assert.assertEquals(null, s.getSplits().get(1).getMorpheme());
+        assertEquals("plan", s.getSplits().get(1).getWord());
+        assertEquals(null, s.getSplits().get(1).getMorpheme());
     }
 
     @Test
@@ -58,7 +59,7 @@ public class DecompoundedWordTest
         s.appendSplitElement(e1);
         s.appendSplitElement(e2);
 
-        Assert.assertEquals("aktion(s)+plan", s.toString());
+        assertEquals("aktion(s)+plan", s.toString());
     }
 
     @Test
@@ -86,10 +87,10 @@ public class DecompoundedWordTest
         s2.appendSplitElement(e3);
         s2.appendSplitElement(e4);
 
-        Assert.assertTrue(s1.equals(s2));
+        assertTrue(s1.equals(s2));
 
         e2.setMorpheme("e");
-        Assert.assertFalse(s1.equals(s2));
+        assertFalse(s1.equals(s2));
     }
 
     @Test
@@ -98,8 +99,8 @@ public class DecompoundedWordTest
         DecompoundedWord e1 = DecompoundedWord.createFromString("zugang(s)+liste");
         DecompoundedWord e2 = DecompoundedWord.createFromString("zugangs+liste");
 
-        Assert.assertTrue(e1.equalWithoutMorpheme(e2));
-        Assert.assertTrue(e2.equalWithoutMorpheme(e1));
+        assertTrue(e1.equalWithoutMorpheme(e2));
+        assertTrue(e2.equalWithoutMorpheme(e1));
     }
 
     @Test
@@ -107,11 +108,11 @@ public class DecompoundedWordTest
     {
         DecompoundedWord s = DecompoundedWord.createFromString("Donau+dampfschiff+fahrt");
         s.replaceSplitElement(1, DecompoundedWord.createFromString("dampf+schiff"));
-        Assert.assertEquals("Donau+dampf+schiff+fahrt", s.toString());
+        assertEquals("Donau+dampf+schiff+fahrt", s.toString());
 
         s = DecompoundedWord.createFromString("Donau+dampfschiff+fahrten");
         s.replaceSplitElement(2, new Fragment("fahrt", "en"));
-        Assert.assertEquals("Donau+dampfschiff+fahrt(en)", s.toString());
+        assertEquals("Donau+dampfschiff+fahrt(en)", s.toString());
     }
 
     @Test
@@ -132,9 +133,9 @@ public class DecompoundedWordTest
 
         Collections.sort(splits);
 
-        Assert.assertEquals(s2, splits.get(0));
-        Assert.assertEquals(s1, splits.get(1));
-        Assert.assertEquals(s3, splits.get(2));
+        assertEquals(s2, splits.get(0));
+        assertEquals(s1, splits.get(1));
+        assertEquals(s3, splits.get(2));
     }
 
     @Test
@@ -154,5 +155,4 @@ public class DecompoundedWordTest
         assertThat(s1.hasLastFragmentMorpheme(), is(false));
         assertThat(s2.hasLastFragmentMorpheme(), is(true));
     }
-
 }

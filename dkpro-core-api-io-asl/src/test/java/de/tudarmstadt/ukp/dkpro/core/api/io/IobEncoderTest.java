@@ -36,14 +36,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.NC;
 
 public class IobEncoderTest
 {
-
     @Test
     public void iobEncoderTest() 
         throws Exception
     {
-        String[] expected = new String[] {
-                "O","O","O","B-NP","I-NP","I-NP","I-NP","O","O","O","O","O","B-NP","O","B-NP","O","O","O"
-        };
+        String[] expected = new String[] { "O", "O", "O", "B-NP", "I-NP", "I-NP", "I-NP", "O", "O",
+                "O", "O", "O", "B-NP", "O", "B-NP", "O", "O", "O" };
         
         JCas jcas = getJCas();
 
@@ -52,7 +50,7 @@ public class IobEncoderTest
 
         IobEncoder encoder = new IobEncoder(jcas.getCas(), chunkType, chunkValue);
         
-        int i=0;
+        int i = 0;
         for (Token token : JCasUtil.select(jcas, Token.class)) {
             assertEquals(expected[i], encoder.encode(token));
             i++;

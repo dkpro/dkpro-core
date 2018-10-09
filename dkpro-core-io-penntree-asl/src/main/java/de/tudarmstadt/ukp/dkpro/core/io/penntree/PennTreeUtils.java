@@ -28,8 +28,8 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.mutable.MutableInt;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.mutable.MutableInt;
 import org.apache.uima.cas.FeatureStructure;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -229,7 +229,7 @@ public class PennTreeUtils
                 }
                 else if (indentationEnabled && prevChild != null && !prevChild.isPreTerminal()) {
                     aSb.append('\n');
-                    aSb.append(StringUtils.repeat(" ", (aLevel+1) * 2));
+                    aSb.append(StringUtils.repeat(" ", (aLevel + 1) * 2));
                 }
                 else {
                     aSb.append(' ');
@@ -253,11 +253,11 @@ public class PennTreeUtils
     public static void trim(CharSequence aText, int[] aSpan)
     {
         int begin = aSpan[0];
-        int end = aSpan[1]-1;
+        int end = aSpan[1] - 1;
 
         CharSequence data = aText;
         while (
-                (begin < (data.length()-1))
+                (begin < (data.length() - 1))
                 && trimChar(data.charAt(begin))
         ) {
             begin ++;

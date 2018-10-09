@@ -18,7 +18,6 @@
 package de.tudarmstadt.ukp.dkpro.core.io.combination;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,17 +37,25 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 import org.xml.sax.SAXException;
 
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
+
 /**
  * Combines multiple readers into a single reader.
  */
-@ResourceMetaData(name="Combining Meta-Reader")
+@Component(value = OperationType.READER)
+@ResourceMetaData(name = "Combining Meta-Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 public class CombinationReader
     extends CasCollectionReader_ImplBase
 {
-
-	public static final String PARAM_READERS = "readers";
-	@ConfigurationParameter(name = PARAM_READERS, mandatory = true)
-	private String[] readerFiles;
+    /**
+     * Locations of UIMA reader description files.
+     */
+    public static final String PARAM_READERS = "readers";
+    @ConfigurationParameter(name = PARAM_READERS, mandatory = true)
+    private String[] readerFiles;
 
     private int readerIdx = 0;
     private CollectionReader currentReader = null;
@@ -56,25 +63,25 @@ public class CombinationReader
     private List<CollectionReader> readers;
     
     @Override
-	public void initialize(UimaContext context)
-			throws ResourceInitializationException 
-	{
-		super.initialize(context);
-		
-		readers = new ArrayList<>();
-		
-		for (String readerFile : readerFiles) {
-			try {
-				readers.add(CollectionReaderFactory.createReaderFromPath(readerFile));
-			} catch (UIMAException e) {
-				throw new ResourceInitializationException(e);
-			} catch (IOException e) {
-				throw new ResourceInitializationException(e);
-			}
-		}
-	}
+    public void initialize(UimaContext context)
+            throws ResourceInitializationException 
+    {
+        super.initialize(context);
+        
+        readers = new ArrayList<>();
+        
+        for (String readerFile : readerFiles) {
+            try {
+                readers.add(CollectionReaderFactory.createReaderFromPath(readerFile));
+            } catch (UIMAException e) {
+                throw new ResourceInitializationException(e);
+            } catch (IOException e) {
+                throw new ResourceInitializationException(e);
+            }
+        }
+    }
 
-	@Override
+    @Override
     public void getNext(CAS aCAS)
         throws IOException, CollectionException
     {
@@ -103,7 +110,7 @@ public class CombinationReader
 
     private boolean continueIfCurrentReaderIsNotNull() throws Exception
     {
-        if (currentReader == null){
+        if (currentReader == null) {
             return false;
         }
         return currentReader.hasNext();
@@ -135,12 +142,12 @@ public class CombinationReader
     }
     
     public static File descriptionToFile(CollectionReaderDescription desc) 
-    		throws IOException, SAXException 
+            throws IOException, SAXException 
     {
-    	File tempFile = File.createTempFile("combReader", "desc");
-    	FileWriterWithEncoding writer = new FileWriterWithEncoding(tempFile, "UTF-8");
-    	desc.toXML(writer);
+        File tempFile = File.createTempFile("combReader", "desc");
+        FileWriterWithEncoding writer = new FileWriterWithEncoding(tempFile, "UTF-8");
+        desc.toXML(writer);
 
-    	return tempFile;
+        return tempFile;
     }
 }

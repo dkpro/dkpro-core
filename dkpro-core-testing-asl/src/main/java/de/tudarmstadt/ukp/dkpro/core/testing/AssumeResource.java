@@ -66,8 +66,8 @@ public class AssumeResource
         }
 
         if (!exists) {
-            // The English default model should always be included in the default test dependencies, so
-            // issue a special warning here
+            // The English default model should always be included in the default test dependencies,
+            // so issue a special warning here
             if (aVariant == null && "en".equals(aLanguage)) {
                 System.out.println("[" + aClass.getSimpleName() + "] default model not available: ["
                         + aLanguage + "] [" + variant + "]!");

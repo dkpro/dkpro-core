@@ -36,26 +36,34 @@ import org.apache.uima.resource.ResourceAccessException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
-@TypeCapability(
-    inputs = { 
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" }, 
-    outputs = { 
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NamedEntity" })
 /**
  * This Analysis Engine annotates
  * English single words with semantic field information retrieved from an ExternalResource.
  * This could be a lexical resource such as WordNet or a simple key-value map.
  * The annotation is stored in the SemanticField annotation type.
  */
-@ResourceMetaData(name="Semantic Field Annotator")
+@Component(OperationType.MATCHER)
+@ResourceMetaData(name = "Semantic Field Annotator")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
+@TypeCapability(
+    inputs = { 
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" }, 
+    outputs = { 
+        "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" })
 public class SemanticFieldAnnotator
     extends JCasAnnotator_ImplBase
 {
-    public static final String PARAM_SEMANTIC_FIELD_RESOURCE = "semanticFieldResource";
-    @ExternalResource(key = PARAM_SEMANTIC_FIELD_RESOURCE)
+    /**
+     * The semantic resource to use.
+     */
+    public static final String RES_SEMANTIC_FIELD_RESOURCE = "semanticFieldResource";
+    @ExternalResource(key = RES_SEMANTIC_FIELD_RESOURCE)
     private SemanticTagResource semanticFieldResource;
 
     // TODO a parameter for the language would be good
@@ -70,8 +78,8 @@ public class SemanticFieldAnnotator
     /**
      * A constraint on the annotations that should be considered in form of a JXPath statement.
      * Example: set {@link #PARAM_ANNOTATION_TYPE} to a {@code NamedEntity} type and set the
-     * {@link #PARAM_CONSTRAINT} to {@code ".[value = 'LOCATION']"} to annotate only tokens with semantic fields that are
-     * part of a location named entity.
+     * {@link #PARAM_CONSTRAINT} to {@code ".[value = 'LOCATION']"} to annotate only tokens with
+     * semantic fields that are part of a location named entity.
      */
     public static final String PARAM_CONSTRAINT = "constraint";
     @ConfigurationParameter(name = PARAM_CONSTRAINT, mandatory = false)

@@ -17,20 +17,13 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.mallet.lda;
 
-import cc.mallet.pipe.Pipe;
-import cc.mallet.pipe.TokenSequence2FeatureSequence;
-import cc.mallet.topics.ParallelTopicModel;
-import cc.mallet.topics.TopicInferencer;
-import cc.mallet.types.Instance;
-import cc.mallet.types.TokenSequence;
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
-import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGenerator;
-import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
-import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -43,52 +36,70 @@ import org.apache.uima.jcas.cas.DoubleArray;
 import org.apache.uima.jcas.cas.IntegerArray;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import cc.mallet.pipe.Pipe;
+import cc.mallet.pipe.TokenSequence2FeatureSequence;
+import cc.mallet.topics.ParallelTopicModel;
+import cc.mallet.topics.TopicInferencer;
+import cc.mallet.types.Instance;
+import cc.mallet.types.TokenSequence;
+import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGenerator;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
+import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Infers the topic distribution over documents using a Mallet {@link ParallelTopicModel}.
  */
-@ResourceMetaData(name="Mallet LDA Topic Model Inferencer")
+@Component(OperationType.TOPIC_EXTRACTOR)
+@ResourceMetaData(name = "Mallet LDA Topic Model Inferencer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
         outputs = { "de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution" }
 )
-
 public class MalletLdaTopicModelInferencer
         extends JCasAnnotator_ImplBase
 {
     private static final String NONE_LABEL = "X";
 
+    /**
+     * Location from which the model is read. This is either a local path or a classpath location.
+     * In the latter case, the model artifact (if any) is searched as well.
+     */
     public final static String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
     private File modelLocation;
 
     /**
-     * The annotation type to use as tokens. Default: {@link Token}
+     * The annotation type to use as tokens.
      */
     public final static String PARAM_TYPE_NAME = "typeName";
     @ConfigurationParameter(name = PARAM_TYPE_NAME, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
     private String typeName;
 
     /**
-     * The number of iterations during inference. Default: 100.
+     * The number of iterations during inference.
      */
     public final static String PARAM_N_ITERATIONS = "nIterations";
     @ConfigurationParameter(name = PARAM_N_ITERATIONS, mandatory = true, defaultValue = "100")
     private int nIterations;
 
     /**
-     * The number of iterations before hyperparameter optimization begins. Default: 1
+     * The number of iterations before hyper-parameter optimization begins.
      */
     public final static String PARAM_BURN_IN = "burnIn";
     @ConfigurationParameter(name = PARAM_BURN_IN, mandatory = true, defaultValue = "1")
     private int burnIn;
 
+    /**
+     * The number of iterations between saved samples.
+     */
     public final static String PARAM_THINNING = "thinning";
     @ConfigurationParameter(name = PARAM_THINNING, mandatory = true, defaultValue = "5")
     private int thinning;
@@ -109,14 +120,16 @@ public class MalletLdaTopicModelInferencer
     private int maxTopicAssignments;
 
     /**
-     * The annotation type to use for the model. Default: {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token}.
-     * For lemmas, use {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value}
+     * The annotation type to use for the model. For lemmas, use
+     * {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value}
      */
-    public static final String PARAM_TOKEN_FEATURE_PATH = MalletModelTrainer.PARAM_TOKEN_FEATURE_PATH;
-    @ConfigurationParameter(name = PARAM_TOKEN_FEATURE_PATH, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
+    public static final String PARAM_TOKEN_FEATURE_PATH = 
+            MalletModelTrainer.PARAM_TOKEN_FEATURE_PATH;
+    @ConfigurationParameter(name = PARAM_TOKEN_FEATURE_PATH, mandatory = true, 
+            defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
     private String tokenFeaturePath;
     /**
-     * Ignore tokens (or lemmas, respectively) that are shorter than the given value. Default: 3.
+     * Ignore tokens (or lemmas, respectively) that are shorter than the given value.
      */
     public static final String PARAM_MIN_TOKEN_LENGTH = "minTokenLength";
     @ConfigurationParameter(name = PARAM_MIN_TOKEN_LENGTH, mandatory = true, defaultValue = "3")
@@ -254,8 +267,8 @@ public class MalletLdaTopicModelInferencer
         if (indexes.size() > maxTopicAssignments) {
 
             /* sort index list by corresponding values */
-            Collections.sort(indexes,
-                    (aO1, aO2) -> Double.compare(topicDistribution[aO1], topicDistribution[aO2]));
+            Collections.sort(indexes, (aO1, aO2) -> 
+                    Double.compare(topicDistribution[aO1], topicDistribution[aO2]));
 
             while (indexes.size() > maxTopicAssignments) {
                 indexes.remove(0);

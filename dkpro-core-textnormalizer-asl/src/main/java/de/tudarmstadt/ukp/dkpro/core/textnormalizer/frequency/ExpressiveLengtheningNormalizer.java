@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ExternalResource;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
@@ -35,18 +35,26 @@ import org.apache.uima.jcas.JCas;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_ImplBase;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Takes a text and shortens extra long words
  */
-@ResourceMetaData(name="Expressive Lengthening Normalizer")
+@Component(OperationType.NORMALIZER)
+@ResourceMetaData(name = "Expressive Lengthening Normalizer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class ExpressiveLengtheningNormalizer
     extends JCasTransformerChangeBased_ImplBase
 {
-    public static final String FREQUENCY_PROVIDER = "FrequencyProvider";
-    @ExternalResource(key = FREQUENCY_PROVIDER, mandatory = true)
+    /**
+     * Resource providing the frequency counts.
+     */
+    public static final String RES_FREQUENCY_PROVIDER = "FrequencyProvider";
+    @ExternalResource(key = RES_FREQUENCY_PROVIDER, mandatory = true)
     protected FrequencyCountProvider frequencyProvider;
     
     @Override

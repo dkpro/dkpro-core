@@ -31,7 +31,7 @@ import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.output.CloseShieldOutputStream;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -41,34 +41,44 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.Parameters;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
+ * Base class for writers that write to the file system.
  */
+@Component(OperationType.WRITER)
+@Parameters(
+        exclude = { 
+                JCasFileWriter_ImplBase.PARAM_TARGET_LOCATION,
+                JCasFileWriter_ImplBase.PARAM_SINGULAR_TARGET,
+                JCasFileWriter_ImplBase.PARAM_OVERWRITE })
 public abstract class JCasFileWriter_ImplBase
-	extends JCasConsumer_ImplBase
+    extends JCasConsumer_ImplBase
 {
     protected static final String JAR_PREFIX = "jar:file:";
-    
-	/**
-	 * Target location. If this parameter is not set, data is written to stdout.
-	 */
-	public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
-	@ConfigurationParameter(name=PARAM_TARGET_LOCATION, mandatory=false)
-	private String targetLocation;
-	
-	/**
-	 * Treat target location as a single file name. This is particularly useful if only a single
-	 * input file is processed and the result should be written to a pre-defined output file instead
-	 * of deriving the file name from the document URI or document ID. It can also be useful if
-	 * the user wishes to force multiple input files to be written to a single target file. The
-	 * latter case does not work for all formats (e.g. binary, XMI, etc.), but can be useful, e.g.
-	 * for Conll-based formats. This option has no effect if the target location points to an
-	 * archive location (ZIP/JAR). The {@link #PARAM_COMPRESSION} is respected, but does not 
-	 * automatically add an extension. The {@link #PARAM_STRIP_EXTENSION} has no effect as the
-	 * original extension is not preserved.
-	 */
+
+    /**
+     * Target location. If this parameter is not set, data is written to stdout.
+     */
+    public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
+    @ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = false)
+    private String targetLocation;
+
+    /**
+     * Treat target location as a single file name. This is particularly useful if only a single
+     * input file is processed and the result should be written to a pre-defined output file instead
+     * of deriving the file name from the document URI or document ID. It can also be useful if the
+     * user wishes to force multiple input files to be written to a single target file. The latter
+     * case does not work for all formats (e.g. binary, XMI, etc.), but can be useful, e.g. for
+     * Conll-based formats. This option has no effect if the target location points to an archive
+     * location (ZIP/JAR). The {@link #PARAM_COMPRESSION} is respected, but does not automatically
+     * add an extension. The {@link #PARAM_STRIP_EXTENSION} has no effect as the original extension
+     * is not preserved.
+     */
     public static final String PARAM_SINGULAR_TARGET = "singularTarget";
-    @ConfigurationParameter(name=PARAM_SINGULAR_TARGET, mandatory=true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_SINGULAR_TARGET, mandatory = true, defaultValue = "false")
     private boolean singularTarget;
 
     /**
@@ -76,29 +86,29 @@ public abstract class JCasFileWriter_ImplBase
      *
      * @see CompressionMethod
      */
-	public static final String PARAM_COMPRESSION = "compression";
-	@ConfigurationParameter(name=PARAM_COMPRESSION, mandatory=false, defaultValue="NONE")
-	private CompressionMethod compression;
+    public static final String PARAM_COMPRESSION = "compression";
+    @ConfigurationParameter(name = PARAM_COMPRESSION, mandatory = false, defaultValue = "NONE")
+    private CompressionMethod compression;
 
     /**
      * Remove the original extension.
      */
     public static final String PARAM_STRIP_EXTENSION = "stripExtension";
-    @ConfigurationParameter(name=PARAM_STRIP_EXTENSION, mandatory=true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_STRIP_EXTENSION, mandatory = true, defaultValue = "false")
     private boolean stripExtension;
 
     /**
      * Use the document ID as file name even if a relative path information is present.
      */
     public static final String PARAM_USE_DOCUMENT_ID = "useDocumentId";
-    @ConfigurationParameter(name=PARAM_USE_DOCUMENT_ID, mandatory=true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_USE_DOCUMENT_ID, mandatory = true, defaultValue = "false")
     private boolean useDocumentId;
 
     /**
      * URL-encode the document ID in the file name to avoid illegal characters (e.g. \, :, etc.)
      */
     public static final String PARAM_ESCAPE_DOCUMENT_ID = "escapeDocumentId";
-    @ConfigurationParameter(name=PARAM_ESCAPE_DOCUMENT_ID, mandatory=true, defaultValue="true")
+    @ConfigurationParameter(name = PARAM_ESCAPE_DOCUMENT_ID, mandatory = true, defaultValue = "true")
     private boolean escapeDocumentId;
 
     /**
@@ -115,19 +125,19 @@ public abstract class JCasFileWriter_ImplBase
     private OutputStream singularTargetStream;
     
     protected CompressionMethod getCompressionMethod()
-	{
-		return compression;
-	}
+    {
+        return compression;
+    }
 
     protected boolean isStripExtension()
-	{
-		return stripExtension;
-	}
+    {
+        return stripExtension;
+    }
 
     protected boolean isUseDocumentId()
-	{
-		return useDocumentId;
-	}
+    {
+        return useDocumentId;
+    }
 
     @Override
     public void collectionProcessComplete()
@@ -180,7 +190,7 @@ public abstract class JCasFileWriter_ImplBase
                 zipEntryPrefix = "";
                 int sep = zipPath.indexOf('!');
                 if (sep > -1) {
-                    zipEntryPrefix = zipPath.substring(sep+1);
+                    zipEntryPrefix = zipPath.substring(sep + 1);
                     zipPath = zipPath.substring(0, sep);
                 }
                 
@@ -237,68 +247,70 @@ public abstract class JCasFileWriter_ImplBase
     }
     
     /**
-	 * Get the relative path from the CAS. If the CAS does not contain relative path information or
-	 * if {@link #PARAM_USE_DOCUMENT_ID} is set, the document ID is used.
-	 *
-	 * @param aJCas a CAS.
-	 * @return the relative target path.
-	 */
-	protected String getRelativePath(JCas aJCas)
-	{
-		DocumentMetaData meta = DocumentMetaData.get(aJCas);
-		String baseUri = meta.getDocumentBaseUri();
-		String docUri = meta.getDocumentUri();
+     * Get the relative path from the CAS. If the CAS does not contain relative path information or
+     * if {@link #PARAM_USE_DOCUMENT_ID} is set, the document ID is used.
+     *
+     * @param aJCas
+     *            a CAS.
+     * @return the relative target path.
+     */
+    protected String getRelativePath(JCas aJCas)
+    {
+        DocumentMetaData meta = DocumentMetaData.get(aJCas);
+        String baseUri = meta.getDocumentBaseUri();
+        String docUri = meta.getDocumentUri();
 
-		if (!useDocumentId && (StringUtils.isNotEmpty(baseUri))) {
-	        // In some cases, the baseUri may not end with a slash - if so, we add one
-	        if (baseUri.length() > 0 && !baseUri.endsWith("/")) {
-	            baseUri += '/';
-	        }
-		    
-			String relativeDocumentPath;
-			if ((docUri == null) || !docUri.startsWith(baseUri)) {
-				throw new IllegalStateException("Base URI [" + baseUri
-						+ "] is not a prefix of document URI [" + docUri + "]");
-			}
-			relativeDocumentPath = docUri.substring(baseUri.length());
-			if (stripExtension) {
-				relativeDocumentPath = FilenameUtils.removeExtension(relativeDocumentPath);
-			}
-			
-			// relativeDocumentPath must not start with as slash - if there are any, remove them
-			while (relativeDocumentPath.startsWith("/")) {
-			    relativeDocumentPath = relativeDocumentPath.substring(1);
-			}
-			
-			return relativeDocumentPath;
-		}
-		else {
-			String relativeDocumentPath;
-			if (meta.getDocumentId() == null) {
-				throw new IllegalStateException("Neither base URI/document URI nor document ID set");
-			}
+        if (!useDocumentId && (StringUtils.isNotEmpty(baseUri))) {
+            // In some cases, the baseUri may not end with a slash - if so, we add one
+            if (baseUri.length() > 0 && !baseUri.endsWith("/")) {
+                baseUri += '/';
+            }
 
-			relativeDocumentPath = meta.getDocumentId();
-			
+            String relativeDocumentPath;
+            if ((docUri == null) || !docUri.startsWith(baseUri)) {
+                throw new IllegalStateException("Base URI [" + baseUri
+                        + "] is not a prefix of document URI [" + docUri + "]");
+            }
+            relativeDocumentPath = docUri.substring(baseUri.length());
             if (stripExtension) {
                 relativeDocumentPath = FilenameUtils.removeExtension(relativeDocumentPath);
             }
 
-			if (escapeDocumentId) {
-				try {
-					relativeDocumentPath = URLEncoder.encode(relativeDocumentPath, "UTF-8");
-				}
-				catch (UnsupportedEncodingException e) {
-					// UTF-8 must be supported on all Java platforms per specification. This should
-					// not happen.
-					throw new IllegalStateException(e);
-				}
-			}
+            // relativeDocumentPath must not start with as slash - if there are any, remove them
+            while (relativeDocumentPath.startsWith("/")) {
+                relativeDocumentPath = relativeDocumentPath.substring(1);
+            }
 
-			return relativeDocumentPath;
-		}
-	}
-	
+            return relativeDocumentPath;
+        }
+        else {
+            String relativeDocumentPath;
+            if (meta.getDocumentId() == null) {
+                throw new IllegalStateException(
+                        "Neither base URI/document URI nor document ID set");
+            }
+
+            relativeDocumentPath = meta.getDocumentId();
+
+            if (stripExtension) {
+                relativeDocumentPath = FilenameUtils.removeExtension(relativeDocumentPath);
+            }
+
+            if (escapeDocumentId) {
+                try {
+                    relativeDocumentPath = URLEncoder.encode(relativeDocumentPath, "UTF-8");
+                }
+                catch (UnsupportedEncodingException e) {
+                    // UTF-8 must be supported on all Java platforms per specification. This should
+                    // not happen.
+                    throw new IllegalStateException(e);
+                }
+            }
+
+            return relativeDocumentPath;
+        }
+    }
+
     public static class NamedOutputStream
         extends OutputStream
     {

@@ -34,8 +34,11 @@ public class TypeMapping
     public TypeMapping(String... aMappings)
     {
         parsedMappings = new ArrayList<>();
-        for (String m : aMappings) {
-            parsedMappings.add(MappingParam.parse(m));
+
+        if (aMappings != null) {
+            for (String m : aMappings) {
+                parsedMappings.add(MappingParam.parse(m));
+            }
         }
 
         brat2UimaMappingCache = new HashMap<>();
@@ -59,7 +62,8 @@ public class TypeMapping
         Type t = brat2UimaMappingCache.get(aAnno.getType());
         
         if (t == null) {
-            // brat doesn't like dots in name names, so we had replaced them with dashes. Now revert.
+            // brat doesn't like dots in name names, so we had replaced them with dashes.
+            // Now revert.
             String type = apply(aAnno.getType().replace("-", "."));
             t = aTs.getType(type);
             

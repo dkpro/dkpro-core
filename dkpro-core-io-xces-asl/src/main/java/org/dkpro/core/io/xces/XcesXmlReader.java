@@ -34,6 +34,8 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 import org.apache.uima.collection.CollectionException;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
+import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.jcas.JCas;
@@ -44,16 +46,26 @@ import org.dkpro.core.io.xces.models.XcesToken;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
-@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
+/**
+ * Reader for the XCES XML format.
+ */
+@ResourceMetaData(name = "XCES XML Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@TypeCapability(
+        outputs = { 
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
+@MimeTypeCapability({MimeTypes.APPLICATION_X_XCES})
 public class XcesXmlReader
     extends JCasResourceCollectionReader_ImplBase
 {
@@ -62,12 +74,10 @@ public class XcesXmlReader
     public void getNext(JCas aJCas)
         throws IOException, CollectionException
     {
-
         Resource res = nextFile();
         initCas(aJCas, res);
 
         InputStream is = null;
-
         try {
             is = CompressionUtils.getInputStream(res.getLocation(), res.getInputStream());
 
@@ -79,6 +89,7 @@ public class XcesXmlReader
 
             unmarshaller.setEventHandler(new ValidationEventHandler()
             {
+                @Override
                 public boolean handleEvent(ValidationEvent event)
                 {
                     throw new RuntimeException(event.getMessage(), event.getLinkedException());
@@ -103,10 +114,8 @@ public class XcesXmlReader
                 else {
                     xmlEventReader.next();
                 }
-
             }
             jb.close();
-
         }
         catch (XMLStreamException ex1) {
             throw new IOException(ex1);
@@ -117,7 +126,6 @@ public class XcesXmlReader
         finally {
             closeQuietly(is);
         }
-
     }
 
     private void readPara(JCasBuilder jb, Object bodyObj)
@@ -160,8 +168,9 @@ public class XcesXmlReader
                             token.setPos(pos);
                         }
                         sentEnd = jb.getPosition();
-                        if (tnext == null)
+                        if (tnext == null) {
                             jb.add("\n");
+                        }
                         if (tnext != null) {
                             jb.add(" ");
                         }
@@ -174,15 +183,12 @@ public class XcesXmlReader
                 para.addToIndexes();
                 jb.add("\n");
             }
-
         }
     }
 
     public static boolean isStartElement(XMLEvent aEvent, String aElement)
     {
-
         return aEvent.isStartElement()
                 && ((StartElement) aEvent).getName().getLocalPart().equals(aElement);
     }
-
 }

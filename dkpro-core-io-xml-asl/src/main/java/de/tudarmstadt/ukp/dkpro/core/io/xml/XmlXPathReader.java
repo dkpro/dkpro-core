@@ -34,7 +34,7 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.tools.ant.types.Resource;
 import org.apache.tools.ant.types.resources.FileResource;
 import org.apache.uima.UimaContext;
@@ -56,6 +56,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * A component reader for XML files implemented with XPath.
@@ -66,7 +67,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field;
  * <p>
  * If your expression evaluates to leaf nodes, empty CASes will be created.
  */
-@ResourceMetaData(name="XPath-based XML Reader")
+@ResourceMetaData(name = "XPath-based XML Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_XML, MimeTypes.TEXT_XML})
 @TypeCapability(
         outputs = { 

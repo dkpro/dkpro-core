@@ -69,6 +69,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Dependency parsing using MaltPaser.
@@ -86,126 +89,143 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
  * <li>Dependency (annotated over sentence-span)</li>
  * </ul>
  */
-@ResourceMetaData(name="MaltParser Dependency Parser")
+@Component(OperationType.DEPENDENCY_PARSER)
+@ResourceMetaData(name = "MaltParser Dependency Parser")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
-        inputs={
+        inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
                 "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"},
-        outputs={
+        outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"})
 
 public class MaltParser
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
     private static final String UNUSED = "_";
     
-	/**
-	 * Use this language instead of the document language to resolve the model.
-	 */
-	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-	protected String language;
+    /**
+     * Use this language instead of the document language to resolve the model.
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    protected String language;
 
-	/**
-	 * Override the default variant used to locate the model.
-	 */
-	public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
-	protected String variant;
+    /**
+     * Override the default variant used to locate the model.
+     */
+    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+    protected String variant;
 
-	/**
-	 * Load the model from this location instead of locating the model automatically.
-	 */
-	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
-	protected String modelLocation;
+    /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
+     * Load the model from this location instead of locating the model automatically.
+     */
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    protected String modelLocation;
 
-	/**
-	 * Log the tag set(s) when a model is loaded.
-	 *
-	 * Default: {@code false}
-	 */
-	public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
-	protected boolean printTagSet;
+    /**
+     * Log the tag set(s) when a model is loaded.
+     */
+    public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
+    protected boolean printTagSet;
 
-	/**
+    /**
      * Process anyway, even if the model relies on features that are not supported by this
      * component.
-     * 
-     * Default: {@code false}
      */
     public static final String PARAM_IGNORE_MISSING_FEATURES = "ignoreMissingFeatures";
     @ConfigurationParameter(name = PARAM_IGNORE_MISSING_FEATURES, mandatory = true, defaultValue = "false")
     protected boolean ignoreMissingFeatures;
 
-	// Not sure if we'll ever have to use different symbol tables
+    // Not sure if we'll ever have to use different symbol tables
     // public static final String SYMBOL_TABLE = "symbolTableName";
     // @ConfigurationParameter(name = SYMBOL_TABLE, mandatory = true, defaultValue = "DEPREL")
-	private final String symbolTableName = "DEPREL";
+    private final String symbolTableName = "DEPREL";
 
-	private Logger logger;
-	private SymbolTable symbolTable;
-	private File workingDir;
+    private Logger logger;
+    private SymbolTable symbolTable;
+    private File workingDir;
 
-	private CasConfigurableProviderBase<MaltParserService> modelProvider;
-	private Set<String> features;
+    private CasConfigurableProviderBase<MaltParserService> modelProvider;
+    private Set<String> features;
 
 
-	@Override
-	public void initialize(UimaContext context)
-		throws ResourceInitializationException
-	{
-		super.initialize(context);
+    @Override
+    public void initialize(UimaContext context)
+        throws ResourceInitializationException
+    {
+        super.initialize(context);
 
-		logger = getContext().getLogger();
+        logger = getContext().getLogger();
 
-		try {
-			workingDir = File.createTempFile("maltparser", ".tmp");
-			workingDir.delete();
-			workingDir.mkdirs();
-			workingDir.deleteOnExit();
-		}
-		catch (IOException e) {
-			throw new ResourceInitializationException(e);
-		}
+        try {
+            workingDir = File.createTempFile("maltparser", ".tmp");
+            workingDir.delete();
+            workingDir.mkdirs();
+            workingDir.deleteOnExit();
+        }
+        catch (IOException e) {
+            throw new ResourceInitializationException(e);
+        }
 
-		modelProvider = new ModelProviderBase<MaltParserService>(this, "maltparser", "parser") {
-			private MaltParserService parser;
+        modelProvider = new ModelProviderBase<MaltParserService>(this, "maltparser", "parser") {
+            private MaltParserService parser;
 
-			{
-				setDefault(VARIANT, "linear");
-			}
+            {
+                setDefault(VARIANT, "linear");
+            }
 
-			@Override
-			protected MaltParserService produceResource(URL aUrl) throws IOException
-			{
-				if (parser != null) {
-					// Terminates the parser model
-					try {
-						parser.terminateParserModel();
-						parser = null;
-					}
-					catch (MaltChainedException e) {
-						logger.log(Level.SEVERE,
-								"MaltParser exception while terminating parser model: " + e.getMessage());
-					}
-				}
+            @Override
+            protected MaltParserService produceResource(URL aUrl) throws IOException
+            {
+                if (parser != null) {
+                    // Terminates the parser model
+                    try {
+                        parser.terminateParserModel();
+                        parser = null;
+                    }
+                    catch (MaltChainedException e) {
+                        logger.log(Level.SEVERE,
+                                "MaltParser exception while terminating parser model: "
+                                        + e.getMessage());
+                    }
+                }
 
-				try {
-				    // Warn if the model uses features that we currently do not support
-				    features = getFeatures(aUrl);
-				    Set<String> unsupportedFeatures = new HashSet<String>(features);
-				    getLogger().info("Model uses these features: " + features);
-				    unsupportedFeatures.remove("FORM"); // we know covered text
-				    unsupportedFeatures.remove("LEMMA"); // we know lemma if lemmatizer ran before
-				    unsupportedFeatures.remove("POSTAG"); // we know POS tag if POS tagger ran before
-				    // CPOSTAG - only supported if we know a mapping from POSTAG to CPOSTAG (FIXME)
-				    // FEATS - not properly supported in DKPro Core yet! (FIXME)
+                try {
+                    // Warn if the model uses features that we currently do not support
+                    features = getFeatures(aUrl);
+                    Set<String> unsupportedFeatures = new HashSet<String>(features);
+                    getLogger().info("Model uses these features: " + features);
+                    // we know covered text
+                    unsupportedFeatures.remove("FORM");
+                    // we know lemma if lemmatizer ran before
+                    unsupportedFeatures.remove("LEMMA"); 
+                    // we know POS tag if POS tagger ran before
+                    unsupportedFeatures.remove("POSTAG"); 
+                    // CPOSTAG - only supported if we know a mapping from POSTAG to CPOSTAG (FIXME)
+                    // FEATS - not properly supported in DKPro Core yet! (FIXME)
                     if (!unsupportedFeatures.isEmpty()) {
-                        String message = "Model these uses unsupported features: " + unsupportedFeatures;
+                        String message = "Model these uses unsupported features: "
+                                + unsupportedFeatures;
                         if (ignoreMissingFeatures) {
                             getLogger().warn(message); 
                         }
@@ -213,49 +233,51 @@ public class MaltParser
                             throw new IOException(message);
                         }
                     }
-				    
-					// However, Maltparser is not happy at all if the model file does not have the right
-					// name, so we are forced to create a temporary directory and place the file there.
-					File modelFile = new File(workingDir, getRealName(aUrl));
-					if (!modelFile.exists()) {
-						InputStream is = null;
-						OutputStream os = null;
-						try {
-							is = aUrl.openStream();
-							os = new FileOutputStream(modelFile);
-							IOUtils.copy(is, os);
-							modelFile.deleteOnExit();
-						}
-						finally {
-							IOUtils.closeQuietly(is);
-							IOUtils.closeQuietly(os);
-						}
-					}
+                    
+                    // However, Maltparser is not happy at all if the model file does not have the
+                    // right name, so we are forced to create a temporary directory and place the
+                    // file there.
+                    File modelFile = new File(workingDir, getRealName(aUrl));
+                    if (!modelFile.exists()) {
+                        InputStream is = null;
+                        OutputStream os = null;
+                        try {
+                            is = aUrl.openStream();
+                            os = new FileOutputStream(modelFile);
+                            IOUtils.copy(is, os);
+                            modelFile.deleteOnExit();
+                        }
+                        finally {
+                            IOUtils.closeQuietly(is);
+                            IOUtils.closeQuietly(os);
+                        }
+                    }
 
-					// Maltparser has a very odd way of finding out which command line options it supports.
-					// By manually initializing the OptionManager before Maltparser tries it, we can work
-					// around Maltparsers' own broken code.
-					if (OptionManager.instance().getOptionContainerIndices().size() == 0) {
-						OptionManager.instance().loadOptionDescriptionFile(
-								MaltParserService.class.getResource("/appdata/options.xml"));
-						OptionManager.instance().generateMaps();
-					}
+                    // Maltparser has a very odd way of finding out which command line options it
+                    // supports. By manually initializing the OptionManager before Maltparser 
+                    // tries it, we can work around Maltparsers' own broken code.
+                    if (OptionManager.instance().getOptionContainerIndices().size() == 0) {
+                        OptionManager.instance().loadOptionDescriptionFile(
+                                MaltParserService.class.getResource("/appdata/options.xml"));
+                        OptionManager.instance().generateMaps();
+                    }
 
-					// Ok, now we can finally initialize the parser
-					parser = new MaltParserService();
-					parser.initializeParserModel("-w " + workingDir + " -c " + modelFile.getName()
-							+ " -m parse");
-					// parser.initializeParserModel("-u " + modelUrl.toString() + " -m parse");
+                    // Ok, now we can finally initialize the parser
+                    parser = new MaltParserService();
+                    parser.initializeParserModel("-w " + workingDir + " -c " + modelFile.getName()
+                            + " -m parse");
+                    // parser.initializeParserModel("-u " + modelUrl.toString() + " -m parse");
 
 
-	                Properties metadata = getResourceMetaData();
+                    Properties metadata = getResourceMetaData();
 
-                    PropertyAccessor paDirect = PropertyAccessorFactory.forDirectFieldAccess(parser);
+                    PropertyAccessor paDirect = PropertyAccessorFactory
+                            .forDirectFieldAccess(parser);
                     SingleMalt singleMalt = (SingleMalt) paDirect.getPropertyValue("singleMalt");
 
-	                SingletonTagset posTags = new SingletonTagset(
-	                        POS.class, metadata.getProperty("pos.tagset"));
-	                ParseSymbolTable posTagTable = (ParseSymbolTable) singleMalt.getSymbolTables()
+                    SingletonTagset posTags = new SingletonTagset(
+                            POS.class, metadata.getProperty("pos.tagset"));
+                    ParseSymbolTable posTagTable = (ParseSymbolTable) singleMalt.getSymbolTables()
                             .getSymbolTable("POSTAG");
                     for (int i = 0; i < posTagTable.getValueCounter(); i++) {
                         posTags.add(posTagTable.getSymbolCodeToString(i));
@@ -263,77 +285,78 @@ public class MaltParser
                     posTags.remove("#null#"); // Technical symbol introduced in MaltParser 1.8
                     addTagset(posTags, false);
                     
-	                SingletonTagset depTags = new SingletonTagset(
-	                        Dependency.class, metadata.getProperty("dependency.tagset"));
+                    SingletonTagset depTags = new SingletonTagset(
+                            Dependency.class, metadata.getProperty("dependency.tagset"));
                     ParseSymbolTable depRelTable = (ParseSymbolTable) singleMalt.getSymbolTables()
                             .getSymbolTable("DEPREL");
                     for (int i = 0; i < depRelTable.getValueCounter(); i++) {
                         depTags.add(depRelTable.getSymbolCodeToString(i));
                     }
                     depTags.remove("#null#"); // Technical symbol introduced in MaltParser 1.8
-	                addTagset(depTags);
+                    addTagset(depTags);
 
-	                if (printTagSet) {
-	                    getContext().getLogger().log(INFO, getTagset().toString());
-	                }
+                    if (printTagSet) {
+                        getContext().getLogger().log(INFO, getTagset().toString());
+                    }
 
-					return parser;
-				}
-				catch (MaltChainedException e) {
-					logger.log(Level.SEVERE,
-							"MaltParser exception while initializing parser model: " + e.getMessage());
-					throw new IOException(e);
-				}
-			}
-		};
-	}
+                    return parser;
+                }
+                catch (MaltChainedException e) {
+                    logger.log(Level.SEVERE,
+                            "MaltParser exception while initializing parser model: "
+                                    + e.getMessage());
+                    throw new IOException(e);
+                }
+            }
+        };
+    }
 
-	/**
-	 * @see AnalysisComponent#collectionProcessComplete()
-	 */
-	@Override
-	public void collectionProcessComplete()
-		throws AnalysisEngineProcessException
-	{
-		if (workingDir != null && workingDir.isDirectory()) {
-			FileUtils.deleteQuietly(workingDir);
-		}
-	}
+    /**
+     * @see AnalysisComponent#collectionProcessComplete()
+     */
+    @Override
+    public void collectionProcessComplete()
+        throws AnalysisEngineProcessException
+    {
+        if (workingDir != null && workingDir.isDirectory()) {
+            FileUtils.deleteQuietly(workingDir);
+        }
+    }
 
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
-		modelProvider.configure(aJCas.getCas());
+    @Override
+    public void process(JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
+        modelProvider.configure(aJCas.getCas());
 
-		// Iterate over all sentences
-		for (Sentence curSentence : select(aJCas, Sentence.class)) {
+        // Iterate over all sentences
+        for (Sentence curSentence : select(aJCas, Sentence.class)) {
 
-			// Generate list of tokens for current sentence
-			List<Token> tokens = selectCovered(Token.class, curSentence);
+            // Generate list of tokens for current sentence
+            List<Token> tokens = selectCovered(Token.class, curSentence);
 
-			// Generate input format required by parser
-			String[] parserInput = new String[tokens.size()];
-			for (int i = 0; i < parserInput.length; i++) {
-				Token t = tokens.get(i);
-				
-				int id = i + 1;
-				String form = t.getCoveredText();
-				String lemma = UNUSED;
-				String cpostag = UNUSED;
-				String postag = UNUSED;
-				String feats = UNUSED;
-				
-				if (features.contains("LEMMA")) {
-				    if (t.getLemma() != null) {
-				        lemma = t.getLemma().getValue();
-				    }
-				    else if (!ignoreMissingFeatures) {
-	                    throw new IllegalStateException(
-	                            "Model uses feature LEMMA but there is no lemma information in CAS");
-				    }
-				}
-				
+            // Generate input format required by parser
+            String[] parserInput = new String[tokens.size()];
+            for (int i = 0; i < parserInput.length; i++) {
+                Token t = tokens.get(i);
+                
+                int id = i + 1;
+                String form = t.getText();
+                String lemma = UNUSED;
+                String cpostag = UNUSED;
+                String postag = UNUSED;
+                String feats = UNUSED;
+                
+                if (features.contains("LEMMA")) {
+                    if (t.getLemma() != null) {
+                        lemma = t.getLemma().getValue();
+                    }
+                    else if (!ignoreMissingFeatures) {
+                        throw new IllegalStateException(
+                                "Model uses feature LEMMA but there is no lemma information in CAS");
+                    }
+                }
+                
                 // Actually, this cannot work, because we only know about the DKPro Core coarse
                 // grained categories, which are most likely different from the coarse-grained
                 // categories required by the model. We would need to include a mapping with the
@@ -364,65 +387,64 @@ public class MaltParser
                     if (t.getMorph() != null) {
                         feats = t.getMorph().getValue();
                     }
-                    else 
-                    if (!ignoreMissingFeatures) {
+                    else if (!ignoreMissingFeatures) {
                         throw new IllegalStateException(
                                 "Model uses feature FEATS but there is no morphology information in CAS");
                     }
                 }
 
-				// This only works for the English model. Other models have different input
-				// formats. See http://www.maltparser.org/mco/mco.html
+                // This only works for the English model. Other models have different input
+                // formats. See http://www.maltparser.org/mco/mco.html
                 parserInput[i] = String.format("%d\t%s\t%s\t%s\t%s\t%s", id, form, lemma, cpostag,
                         postag, feats);
-			}
+            }
 
-			// Parse sentence
-			DependencyStructure graph = null;
-			try {
-				// Parses the sentence
-				graph = modelProvider.getResource().parse(parserInput);
-				symbolTable = graph.getSymbolTables().getSymbolTable(symbolTableName);
-			}
-			catch (MaltChainedException e) {
-				logger.log(Level.WARNING,
-						"MaltParser exception while parsing sentence: " + e.getMessage(), e);
-				// don't pass on exception - go on with next sentence
-				continue;
-			}
+            // Parse sentence
+            DependencyStructure graph = null;
+            try {
+                // Parses the sentence
+                graph = modelProvider.getResource().parse(parserInput);
+                symbolTable = graph.getSymbolTables().getSymbolTable(symbolTableName);
+            }
+            catch (MaltChainedException e) {
+                logger.log(Level.WARNING,
+                        "MaltParser exception while parsing sentence: " + e.getMessage(), e);
+                // don't pass on exception - go on with next sentence
+                continue;
+            }
 
-			/*
-			 * Generate annotations: NOTE: Index of token in tokenList corresponds to node in
-			 * DependencyGraph with NodeIndex+1
-			 */
-			try {
-				// iterate over all tokens in current sentence
-				for (int i = 0; i < tokens.size(); i++) {
-					// Start with Node 1 - we omit ROOT-dependencies,
-					// because we don't have a ROOT-token.
-					TokenNode curNode = graph.getTokenNode(i + 1);
+            /*
+             * Generate annotations: NOTE: Index of token in tokenList corresponds to node in
+             * DependencyGraph with NodeIndex+1
+             */
+            try {
+                // iterate over all tokens in current sentence
+                for (int i = 0; i < tokens.size(); i++) {
+                    // Start with Node 1 - we omit ROOT-dependencies,
+                    // because we don't have a ROOT-token.
+                    TokenNode curNode = graph.getTokenNode(i + 1);
 
-					// iterate over all dependencies for current token
-					for (Edge edge : curNode.getHeadEdges()) {
-						int sourceIdx = edge.getSource().getIndex();
-						int targetIdx = edge.getTarget().getIndex();
+                    // iterate over all dependencies for current token
+                    for (Edge edge : curNode.getHeadEdges()) {
+                        int sourceIdx = edge.getSource().getIndex();
+                        int targetIdx = edge.getTarget().getIndex();
 
-						// get corresponding token for node in DependencyGraph
-						Token sourceToken = sourceIdx > 0 ? tokens.get(sourceIdx - 1) : null;
-						Token targetToken = targetIdx > 0 ? tokens.get(targetIdx - 1) : null;
+                        // get corresponding token for node in DependencyGraph
+                        Token sourceToken = sourceIdx > 0 ? tokens.get(sourceIdx - 1) : null;
+                        Token targetToken = targetIdx > 0 ? tokens.get(targetIdx - 1) : null;
 
-						// create dep-annotation for current edge
-						if (sourceToken != null && targetToken != null) {
-							Dependency dep = new Dependency(aJCas);
+                        // create dep-annotation for current edge
+                        if (sourceToken != null && targetToken != null) {
+                            Dependency dep = new Dependency(aJCas);
                             dep.setDependencyType(edge.getLabelSymbol(symbolTable));
                             dep.setFlavor(DependencyFlavor.BASIC);
-							dep.setGovernor(sourceToken); // TODO check if source=Governor
-							dep.setDependent(targetToken); // TODO check if target=Dependent
-		                    dep.setBegin(dep.getDependent().getBegin());
-		                    dep.setEnd(dep.getDependent().getEnd());
-							dep.addToIndexes();
-						}
-						else if (targetToken != null && sourceToken == null) {
+                            dep.setGovernor(sourceToken); // TODO check if source=Governor
+                            dep.setDependent(targetToken); // TODO check if target=Dependent
+                            dep.setBegin(dep.getDependent().getBegin());
+                            dep.setEnd(dep.getDependent().getEnd());
+                            dep.addToIndexes();
+                        }
+                        else if (targetToken != null && sourceToken == null) {
                             Dependency dep = new ROOT(aJCas);
                             // Trying to get the label triggers Exception
                             dep.setDependencyType("ROOT");
@@ -432,62 +454,62 @@ public class MaltParser
                             dep.setBegin(dep.getDependent().getBegin());
                             dep.setEnd(dep.getDependent().getEnd());
                             dep.addToIndexes();
-						}
-						else {
-						    throw new IllegalStateException("Source token must exist.");
-						}
-					}
-				}
-			}
-			catch (MaltChainedException e) {
-				logger.log(Level.WARNING, "MaltParser exception creating dependency annotations: "
-						+ e.getMessage(), e);
-				// don't pass on exception - go on with next sentence
-				continue;
-			}
-		}
-	}
+                        }
+                        else {
+                            throw new IllegalStateException("Source token must exist.");
+                        }
+                    }
+                }
+            }
+            catch (MaltChainedException e) {
+                logger.log(Level.WARNING, "MaltParser exception creating dependency annotations: "
+                        + e.getMessage(), e);
+                // don't pass on exception - go on with next sentence
+                continue;
+            }
+        }
+    }
 
-	private String getRealName(URL aUrl) throws IOException
-	{
-		JarEntry je = null;
-		JarInputStream jis = null;
+    private String getRealName(URL aUrl) throws IOException
+    {
+        JarEntry je = null;
+        JarInputStream jis = null;
 
-		try {
-			jis = new JarInputStream(aUrl.openConnection().getInputStream());
-			while ((je = jis.getNextJarEntry()) != null) {
-				String entryName = je.getName();
-				if (entryName.endsWith(".info")) {
-					int indexUnderScore = entryName.lastIndexOf('_');
-					int indexSeparator = entryName.lastIndexOf(File.separator);
-					if (indexSeparator == -1) {
-						indexSeparator = entryName.lastIndexOf('/');
-					}
-					if (indexSeparator == -1) {
-						indexSeparator = entryName.lastIndexOf('\\');
-					}
-					int indexDot = entryName.lastIndexOf('.');
-					if (indexUnderScore == -1 || indexDot == -1) {
-						throw new IllegalStateException(
-								"Could not find the configuration name and type from the URL '"
-										+ aUrl.toString() + "'. ");
-					}
+        try {
+            jis = new JarInputStream(aUrl.openConnection().getInputStream());
+            while ((je = jis.getNextJarEntry()) != null) {
+                String entryName = je.getName();
+                if (entryName.endsWith(".info")) {
+                    int indexUnderScore = entryName.lastIndexOf('_');
+                    int indexSeparator = entryName.lastIndexOf(File.separator);
+                    if (indexSeparator == -1) {
+                        indexSeparator = entryName.lastIndexOf('/');
+                    }
+                    if (indexSeparator == -1) {
+                        indexSeparator = entryName.lastIndexOf('\\');
+                    }
+                    int indexDot = entryName.lastIndexOf('.');
+                    if (indexUnderScore == -1 || indexDot == -1) {
+                        throw new IllegalStateException(
+                                "Could not find the configuration name and type from the URL '"
+                                        + aUrl.toString() + "'. ");
+                    }
 
-					return entryName.substring(indexSeparator+1, indexUnderScore) + ".mco";
-				}
-			}
+                    return entryName.substring(indexSeparator + 1, indexUnderScore) + ".mco";
+                }
+            }
 
-			throw new IllegalStateException(
-					"Could not find the configuration name and type from the URL '"
-							+ aUrl.toString() + "'. ");
-		}
-		finally {
-			IOUtils.closeQuietly(jis);
-		}
-	}
-	
-	private Set<String> getFeatures(URL aUrl) throws IOException
-	{
+            throw new IllegalStateException(
+                    "Could not find the configuration name and type from the URL '"
+                            + aUrl.toString() + "'. ");
+        }
+        finally {
+            IOUtils.closeQuietly(jis);
+        }
+    }
+    
+    private Set<String> getFeatures(URL aUrl) throws IOException
+    {
         JarEntry je = null;
         JarInputStream jis = null;
 
@@ -503,8 +525,8 @@ public class MaltParser
                         if (line.contains("InputColumn(")) {
                             int offset = line.indexOf("InputColumn(");
                             while (offset >= 0) {
-                                int comma = line.indexOf(',', offset+1);
-                                features.add(line.substring(offset+12,comma).trim());
+                                int comma = line.indexOf(',', offset + 1);
+                                features.add(line.substring(offset + 12, comma).trim());
                                 offset = line.indexOf("InputColumn(", comma);
                             }
                         }
@@ -521,5 +543,5 @@ public class MaltParser
         finally {
             IOUtils.closeQuietly(jis);
         }
-	}
+    }
 }

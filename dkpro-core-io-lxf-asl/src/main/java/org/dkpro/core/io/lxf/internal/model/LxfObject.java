@@ -17,7 +17,9 @@
  */
 package org.dkpro.core.io.lxf.internal.model;
 
-import static org.dkpro.core.io.lxf.internal.model.LxfVocabulary.*;
+import static org.dkpro.core.io.lxf.internal.model.LxfVocabulary.ENTITY_EDGE;
+import static org.dkpro.core.io.lxf.internal.model.LxfVocabulary.ENTITY_NODE;
+import static org.dkpro.core.io.lxf.internal.model.LxfVocabulary.ENTITY_REGION;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

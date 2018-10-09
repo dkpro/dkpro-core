@@ -28,6 +28,7 @@ import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.udpipe.internal.UDPipeUtils;
 
 import cz.cuni.mff.ufal.udpipe.InputFormat;
 import cz.cuni.mff.ufal.udpipe.Model;
@@ -37,12 +38,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
- * Tokenizer and sentence splitter using OpenNLP.
- *
+ * Tokenizer and sentence splitter using UDPipe.
  */
-@ResourceMetaData(name="UDPipe Segmenter")
+@ResourceMetaData(name = "UDPipe Segmenter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -64,6 +66,20 @@ public class UDPipeSegmenter
     @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
     protected String variant;
 
+    /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
     /**
      * Load the model from this location instead of locating the model automatically.
      */
@@ -96,6 +112,8 @@ public class UDPipeSegmenter
             protected Model produceResource(URL aUrl)
                 throws IOException
             {
+                UDPipeUtils.init();
+                
                 File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
                 return Model.load(modelFile.getAbsolutePath());
             }
@@ -113,47 +131,24 @@ public class UDPipeSegmenter
     @Override
     protected void process(JCas aJCas, String aText, int aZoneBegin)
         throws AnalysisEngineProcessException
-    {           
-        InputFormat inputFormat = modelProvider.getResource().newTokenizer(Model.getDEFAULT());
+    {
+        InputFormat inputFormat = modelProvider.getResource()
+                .newTokenizer(Model.getDEFAULT() + ";ranges");
         inputFormat.setText(aJCas.getDocumentText());
 
         cz.cuni.mff.ufal.udpipe.Sentence sentence = new cz.cuni.mff.ufal.udpipe.Sentence();
-        
-        int fromSentence = 0;
-        
-        String text=aJCas.getDocumentText();
-        
+
         while (inputFormat.nextSentence(sentence)) {
-            
             Words words = sentence.getWords();
-            int pos = fromSentence;
-            int sStart =  text.indexOf(words.get(1).getForm(),pos);
-            if (sStart == -1) {
-                throw new IllegalStateException("Can not find the sentence  starting with word [" + words.get(1).getForm() + "] in text [" + text.substring(fromSentence)
-                + "]");
-            }
-            
             for (int i = 1; i < words.size(); i++) {
                 Word w = words.get(i);
-                pos = text.indexOf(w.getForm(),pos);
-                if (pos == -1) {
-                    throw new IllegalStateException("Token [" + w.getForm() + "] not found in sentence [" + text.substring(fromSentence)
-                            + "]");
-                }
-                int tStart = pos;
-                int tEnd = pos + w.getForm().length();
-                pos = tEnd;
-                tStart += aZoneBegin;
-                tEnd += aZoneBegin;
-                createToken(aJCas, tStart, tEnd);
+                createToken(aJCas, (int) w.getTokenRangeStart() + aZoneBegin,
+                        (int) w.getTokenRangeEnd() + aZoneBegin);
             }
-            
-            int sEnd = pos;
-            fromSentence = sEnd;
-            sStart += aZoneBegin;
-            sEnd += aZoneBegin;
-            
-            createSentence(aJCas, sStart, sEnd);            
+
+            createSentence(aJCas, 
+                    (int) words.get(1).getTokenRangeStart() + aZoneBegin,
+                    (int) words.get((int) words.size() - 1).getTokenRangeEnd() + aZoneBegin);
             sentence = new cz.cuni.mff.ufal.udpipe.Sentence();
         }
     }

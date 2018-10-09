@@ -40,131 +40,133 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * @since 1.1.0
  */
-@ResourceMetaData(name="XML Text Reader")
+@ResourceMetaData(name = "XML Text Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_XML, MimeTypes.TEXT_XML})
 @TypeCapability(
-        outputs={
+        outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
 
 public class XmlTextReader
-	extends ResourceCollectionReaderBase
+    extends ResourceCollectionReaderBase
 {
-	@Override
-	public void getNext(CAS aCAS)
-		throws IOException, CollectionException
-	{
-		Resource res = nextFile();
-		initCas(aCAS, res);
+    @Override
+    public void getNext(CAS aCAS)
+        throws IOException, CollectionException
+    {
+        Resource res = nextFile();
+        initCas(aCAS, res);
 
-		InputStream is = null;
+        InputStream is = null;
 
-		try {
-			JCas jcas = aCAS.getJCas();
+        try {
+            JCas jcas = aCAS.getJCas();
 
-			is = res.getInputStream();
+            is = res.getInputStream();
 
-			// Create handler
-			Handler handler = newSaxHandler();
-			handler.setJCas(jcas);
-			handler.setLogger(getLogger());
+            // Create handler
+            Handler handler = newSaxHandler();
+            handler.setJCas(jcas);
+            handler.setLogger(getLogger());
 
-			// Parser XML
-			SAXParserFactory pf = SAXParserFactory.newInstance();
-			SAXParser parser = pf.newSAXParser();
+            // Parser XML
+            SAXParserFactory pf = SAXParserFactory.newInstance();
+            SAXParser parser = pf.newSAXParser();
 
-			InputSource source = new InputSource(is);
-			source.setPublicId(res.getLocation());
-			source.setSystemId(res.getLocation());
-			parser.parse(source, handler);
+            InputSource source = new InputSource(is);
+            source.setPublicId(res.getLocation());
+            source.setSystemId(res.getLocation());
+            parser.parse(source, handler);
 
-			// Set up language
-			if (getConfigParameterValue(PARAM_LANGUAGE) != null) {
-				aCAS.setDocumentLanguage((String) getConfigParameterValue(PARAM_LANGUAGE));
-			}
-		}
-		catch (CASException e) {
-			throw new CollectionException(e);
-		}
-		catch (ParserConfigurationException e) {
-			throw new CollectionException(e);
-		}
-		catch (SAXException e) {
-			throw new IOException(e);
-		}
-		finally {
-			closeQuietly(is);
-		}
-	}
+            // Set up language
+            if (getConfigParameterValue(PARAM_LANGUAGE) != null) {
+                aCAS.setDocumentLanguage((String) getConfigParameterValue(PARAM_LANGUAGE));
+            }
+        }
+        catch (CASException e) {
+            throw new CollectionException(e);
+        }
+        catch (ParserConfigurationException e) {
+            throw new CollectionException(e);
+        }
+        catch (SAXException e) {
+            throw new IOException(e);
+        }
+        finally {
+            closeQuietly(is);
+        }
+    }
 
-	protected Handler newSaxHandler()
-	{
-		return new TextExtractor();
-	}
+    protected Handler newSaxHandler()
+    {
+        return new TextExtractor();
+    }
 
-	/**
-	 */
-	protected abstract static class Handler
-		extends DefaultHandler
-	{
-		private JCas jcas;
-		private Logger logger;
+    /**
+     */
+    protected abstract static class Handler
+        extends DefaultHandler
+    {
+        private JCas jcas;
+        private Logger logger;
 
-		public void setJCas(final JCas aJCas)
-		{
-			jcas = aJCas;
-		}
+        public void setJCas(final JCas aJCas)
+        {
+            jcas = aJCas;
+        }
 
-		protected JCas getJCas()
-		{
-			return jcas;
-		}
+        protected JCas getJCas()
+        {
+            return jcas;
+        }
 
-		public void setLogger(Logger aLogger)
-		{
-			logger = aLogger;
-		}
+        public void setLogger(Logger aLogger)
+        {
+            logger = aLogger;
+        }
 
-		public Logger getLogger()
-		{
-			return logger;
-		}
-	}
+        public Logger getLogger()
+        {
+            return logger;
+        }
+    }
 
-	/**
-	 */
-	public static class TextExtractor
-		extends Handler
-	{
-		private final StringBuilder buffer = new StringBuilder();
+    /**
+     */
+    public static class TextExtractor
+        extends Handler
+    {
+        private final StringBuilder buffer = new StringBuilder();
 
-		@Override
-		public void characters(char[] aCh, int aStart, int aLength)
-			throws SAXException
-		{
-			buffer.append(aCh, aStart, aLength);
-		}
+        @Override
+        public void characters(char[] aCh, int aStart, int aLength)
+            throws SAXException
+        {
+            buffer.append(aCh, aStart, aLength);
+        }
 
-		@Override
-		public void ignorableWhitespace(char[] aCh, int aStart, int aLength)
-			throws SAXException
-		{
-			buffer.append(aCh, aStart, aLength);
-		}
+        @Override
+        public void ignorableWhitespace(char[] aCh, int aStart, int aLength)
+            throws SAXException
+        {
+            buffer.append(aCh, aStart, aLength);
+        }
 
-		@Override
-		public void endDocument()
-			throws SAXException
-		{
-			getJCas().setDocumentText(buffer.toString());
-		}
+        @Override
+        public void endDocument()
+            throws SAXException
+        {
+            getJCas().setDocumentText(buffer.toString());
+        }
 
-		protected StringBuilder getBuffer()
-		{
-			return buffer;
-		}
-	}
+        protected StringBuilder getBuffer()
+        {
+            return buffer;
+        }
+    }
 }

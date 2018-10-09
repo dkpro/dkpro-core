@@ -17,7 +17,8 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.solr;
 
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import java.io.IOException;
+
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.ConcurrentUpdateSolrClient;
@@ -30,7 +31,9 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import java.io.IOException;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * This class implements a basic SolrWriter. Specific writers should define a subclass that
@@ -39,16 +42,13 @@ import java.io.IOException;
  * The class initializes a SolrServer instance, and calls {@code generateSolrDocument()} for each
  * incoming CAS, and adds the result to the Solr server. A commit is executed when all documents are
  * processed.
- *
- *
- *
  */
+@Component(OperationType.WRITER)
 public abstract class SolrWriter_ImplBase
     extends JCasConsumer_ImplBase
 {
     /**
      * Define whether existing documents with same ID are updated (true) of overwritten (false)?
-     * Default: true (update).
      */
     public static final String PARAM_UPDATE = "update";
     @ConfigurationParameter(name = PARAM_UPDATE, mandatory = true, defaultValue = "true")
@@ -70,7 +70,7 @@ public abstract class SolrWriter_ImplBase
     private int queueSize;
 
     /**
-     * The number of background numThreads used to empty the queue. Default: 1.
+     * The number of background numThreads used to empty the queue.
      */
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
     @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = "1")
@@ -78,7 +78,7 @@ public abstract class SolrWriter_ImplBase
 
     /**
      * When committing to the index, i.e. when all documents are processed, block until index
-     * changes are flushed to disk? Default: true.
+     * changes are flushed to disk?
      */
     public static final String PARAM_WAIT_FLUSH = "waitFlush";
     @ConfigurationParameter(name = PARAM_WAIT_FLUSH, mandatory = true, defaultValue = "true")
@@ -87,7 +87,6 @@ public abstract class SolrWriter_ImplBase
     /**
      * When committing to the index, i.e. when all documents are processed, block until a new
      * searcher is opened and registered as the main query searcher, making the changes visible?
-     * Default: true.
      */
     public static final String PARAM_WAIT_SEARCHER = "waitSearcher";
     @ConfigurationParameter(name = PARAM_WAIT_SEARCHER, mandatory = true, defaultValue = "true")

@@ -24,7 +24,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -54,6 +57,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 
@@ -62,7 +66,8 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
  * 
  * @see <a href="http://universaldependencies.github.io/docs/format.html">CoNLL-U Format</a>
  */
-@ResourceMetaData(name="CoNLL-U Reader")
+@ResourceMetaData(name = "CoNLL-U Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_U})
 @TypeCapability(
         outputs = { 
@@ -76,18 +81,31 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 public class ConllUReader
     extends JCasResourceCollectionReader_ImplBase
 {
+    /**
+     * Character encoding of the input data.
+     */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
 
+    /**
+     * Read fine-grained part-of-speech information.
+     */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
     private boolean readPos;
 
+    /**
+     * Read coarse-grained part-of-speech information.
+     */
     public static final String PARAM_READ_CPOS = ComponentParameters.PARAM_READ_CPOS;
     @ConfigurationParameter(name = PARAM_READ_CPOS, mandatory = true, defaultValue = "true")
     private boolean readCPos;
 
+    /**
+     * Treat coarse-grained part-of-speech as fine-grained part-of-speech information.
+     */
     public static final String PARAM_USE_CPOS_AS_POS = "useCPosAsPos";
     @ConfigurationParameter(name = PARAM_USE_CPOS_AS_POS, mandatory = true, defaultValue = "false")
     private boolean useCPosAsPos;
@@ -105,18 +123,28 @@ public class ConllUReader
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
     
+    /**
+     * Read morphological features.
+     */
     public static final String PARAM_READ_MORPH = ComponentParameters.PARAM_READ_MORPH;
     @ConfigurationParameter(name = PARAM_READ_MORPH, mandatory = true, defaultValue = "true")
     private boolean readMorph;
 
+    /**
+     * Read lemma information.
+     */
     public static final String PARAM_READ_LEMMA = ComponentParameters.PARAM_READ_LEMMA;
     @ConfigurationParameter(name = PARAM_READ_LEMMA, mandatory = true, defaultValue = "true")
     private boolean readLemma;
 
+    /**
+     * Read syntactic dependency information.
+     */
     public static final String PARAM_READ_DEPENDENCY = ComponentParameters.PARAM_READ_DEPENDENCY;
     @ConfigurationParameter(name = PARAM_READ_DEPENDENCY, mandatory = true, defaultValue = "true")
     private boolean readDependency;
@@ -133,6 +161,9 @@ public class ConllUReader
     private static final int DEPREL = 7;
     private static final int DEPS = 8;
     private static final int MISC = 9;
+    
+    public static final String META_SEND_ID = "sent_id";
+    public static final String META_TEXT = "text";
 
     private MappingProvider posMappingProvider;
 
@@ -168,18 +199,27 @@ public class ConllUReader
         throws IOException
     {
         if (readPos) {
-            try{
+            try {
                 posMappingProvider.configure(aJCas.getCas());
             }
-            catch(AnalysisEngineProcessException e){
+            catch (AnalysisEngineProcessException e) {
                 throw new IOException(e);
             }
         }
         
         JCasBuilder doc = new JCasBuilder(aJCas);
 
-        List<String[]> words;
-        while ((words = readSentence(aReader)) != null) {
+        while (true) {
+            // Read sentence comments (if any)
+            Map<String, String> comments = readSentenceComments(aReader);
+            
+            // Read sentence
+            List<String[]> words = readSentence(aReader);
+            if (words == null) {
+                // End of file
+                break;
+            }
+            
             if (words.isEmpty()) {
                  // Ignore empty sentences. This can happen when there are multiple end-of-sentence
                  // markers following each other.
@@ -229,11 +269,14 @@ public class ConllUReader
                     Type posTag = posMappingProvider.getTagType(tag);
                     pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
-                    pos.setPosValue(tag.intern());
+                    pos.setPosValue(tag != null ? tag.intern() : null);
                 }
 
                 // Read coarse part-of-speech tag
-                if (!UNUSED.equals(word[CPOSTAG]) && readCPos && pos != null) {
+                if (!UNUSED.equals(word[CPOSTAG]) && readCPos) {
+                    if (pos == null) {
+                        pos = new POS(aJCas, token.getBegin(), token.getEnd());
+                    }
                     pos.setCoarseValue(word[CPOSTAG].intern());
                 }
                 
@@ -313,6 +356,7 @@ public class ConllUReader
 
             // Sentence
             Sentence sentence = new Sentence(aJCas, sentenceBegin, sentenceEnd);
+            sentence.setId(comments.get(META_SEND_ID));
             sentence.addToIndexes();
 
             // Once sentence per line.
@@ -347,6 +391,35 @@ public class ConllUReader
         return rel;
     }
 
+    private Map<String, String> readSentenceComments(BufferedReader aReader)
+        throws IOException
+    {
+        Map<String, String> comments = new LinkedHashMap<>();
+        
+        while (true) {
+            // Check if the next line could be a header line
+            aReader.mark(2);
+            char character = (char) aReader.read();
+            if ('#' == character) {
+                // Read the rest of the line
+                String line = aReader.readLine();
+                if (line.contains("=")) {
+                    String[] parts = line.split("=", 2);
+                    comments.put(parts[0].trim(), parts[1].trim());
+                }
+                else {
+                    // Comment or unknown header line
+                }
+            }
+            else {
+                aReader.reset();
+                break;
+            }
+        }
+        
+        return comments;
+    }
+    
     /**
      * Read a single sentence.
      */

@@ -64,8 +64,8 @@ public class BilouDecoder
             
             // Check if the BILOU encoding is present and fail if not
             if (
-                !(tag.length() == 1 && tag.charAt(0) == 'O') &&
-                !(tag.length() >= 2 && tag.charAt(1) == '-')
+                    !(tag.length() == 1 && tag.charAt(0) == 'O') &&
+                    !(tag.length() >= 2 && tag.charAt(1) == '-')
             ) {
                 throw new IllegalStateException("Tag is not BILOU-encoded: [" + tag + "]");
             }
@@ -108,8 +108,8 @@ public class BilouDecoder
         if (openChunk != null) {
             Type chunkType = mappingProvider.getTagType(openChunk);
             AnnotationFS chunk = cas.createAnnotation(chunkType, start, end);
-            chunk.setStringValue(chunkValue, internTags ? openChunk.intern() :
-                openChunk);
+            chunk.setStringValue(chunkValue,
+                    internTags && openChunk != null ? openChunk.intern() : openChunk);
             cas.addFsToIndexes(chunk);
             openChunk = null;
         }

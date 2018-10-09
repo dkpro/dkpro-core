@@ -36,6 +36,7 @@ import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
@@ -43,6 +44,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.CasSentenceSampleStream;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.Parameters;
+import eu.openminted.share.annotations.api.constants.OperationType;
 import opennlp.tools.dictionary.Dictionary;
 import opennlp.tools.ml.EventTrainer;
 import opennlp.tools.ml.maxent.GISTrainer;
@@ -54,47 +59,87 @@ import opennlp.tools.util.TrainingParameters;
 /**
  * Train a sentence splitter model for OpenNLP.
  */
+@Component(OperationType.TRAINER_OF_MACHINE_LEARNING_MODELS)
 @MimeTypeCapability(MimeTypes.APPLICATION_X_OPENNLP_SENT)
-@ResourceMetaData(name="OpenNLP Sentence Splitter Trainer")
+@Parameters(
+        exclude = { 
+                OpenNlpSentenceTrainer.PARAM_TARGET_LOCATION  })
+@ResourceMetaData(name = "OpenNLP Sentence Splitter Trainer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
+@TypeCapability(
+        inputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
 public class OpenNlpSentenceTrainer
     extends JCasConsumer_ImplBase
 {
+    /**
+     * Store this language to the model instead of the document language.
+     */
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
     private String language;
 
+    /**
+     * Location to which the output is written.
+     */
     public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
     @ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true)
     private File targetLocation;
 
+    /**
+     * Training algorithm.
+     */
     public static final String PARAM_ALGORITHM = "algorithm";
-    @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, defaultValue = GISTrainer.MAXENT_VALUE)
+    @ConfigurationParameter(name = PARAM_ALGORITHM, mandatory = true, 
+            defaultValue = GISTrainer.MAXENT_VALUE)
     private String algorithm;
     
+    /**
+     * Trainer type.
+     */
     public static final String PARAM_TRAINER_TYPE = "trainerType";
-    @ConfigurationParameter(name = PARAM_TRAINER_TYPE, mandatory = true, defaultValue = EventTrainer.EVENT_VALUE)
+    @ConfigurationParameter(name = PARAM_TRAINER_TYPE, mandatory = true, 
+            defaultValue = EventTrainer.EVENT_VALUE)
     private String trainerType;
 
+    /**
+     * Number of training iterations.
+     */
     public static final String PARAM_ITERATIONS = "iterations";
     @ConfigurationParameter(name = PARAM_ITERATIONS, mandatory = true, defaultValue = "100")
     private int iterations;
 
+    /**
+     * Frequency cut-off.
+     */
     public static final String PARAM_CUTOFF = "cutoff";
     @ConfigurationParameter(name = PARAM_CUTOFF, mandatory = true, defaultValue = "5")
     private int cutoff;
 
+    /**
+     * End-of-sentence characters.
+     */
     public static final String PARAM_EOS_CHARACTERS = "eosCharacters";
     @ConfigurationParameter(name = PARAM_EOS_CHARACTERS, mandatory = false)
     private char[] eosCharacters;
 
+    /**
+     * Location of the abbreviation dictionary.
+     */
     public static final String PARAM_ABBREVIATION_DICTIONARY_LOCATION = "abbreviationDictionaryLocation";
     @ConfigurationParameter(name = PARAM_ABBREVIATION_DICTIONARY_LOCATION, mandatory = false)
     private String abbreviationDictionaryLocation;
     
+    /**
+     * Encoding of the abbreviation dictionary.
+     */
     public static final String PARAM_ABBREVIATION_DICTIONARY_ENCODING = "abbreviationDictionaryEncoding";
     @ConfigurationParameter(name = PARAM_ABBREVIATION_DICTIONARY_ENCODING, mandatory = true, defaultValue = "UTF-8")
     private String abbreviationDictionaryEncoding;
 
+    /**
+     * Number of parallel threads.
+     */
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
     @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue =  "1")
     private int numThreads;

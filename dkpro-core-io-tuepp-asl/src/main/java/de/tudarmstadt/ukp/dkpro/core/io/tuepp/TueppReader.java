@@ -174,7 +174,8 @@ public class TueppReader
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String mappingPosLocation;
 
@@ -191,7 +192,8 @@ public class TueppReader
      * Character encoding of the input data.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
 
     private MappingProvider posMappingProvider;
@@ -268,11 +270,13 @@ public class TueppReader
         while (true) {
             try {
                 if (res == null) {
-                    // Call to super here because we want to know about the resources, not the articles
+                    // Call to super here because we want to know about the resources, not the 
+                    // articles
                     if (getResourceIterator().hasNext()) {
                         // There are still resources left to read
                         res = nextFile();
-                        is = CompressionUtils.getInputStream(res.getLocation(), res.getInputStream());
+                        is = CompressionUtils.getInputStream(res.getLocation(),
+                                res.getInputStream());
                         xmlEventReader = xmlInputFactory.createXMLEventReader(is, sourceEncoding);
                     }
                     else {
@@ -352,13 +356,13 @@ public class TueppReader
         catch (XMLStreamException ex1) {
             throw new IOException(ex1);
         }
-        catch(JAXBException ex2){
+        catch (JAXBException ex2) {
             throw new IOException(ex2);
         }
-        catch(AnalysisEngineProcessException ex3){
+        catch (AnalysisEngineProcessException ex3) {
             throw new IOException(ex3);
         }
-        
+
         // Seek next article so we know what to return on hasNext()
         step();
     }
@@ -373,7 +377,7 @@ public class TueppReader
             Type posType = posMappingProvider.getTagType(pos.tag);
             POS posAnno = (POS) aBuilder.getJCas().getCas()
                     .createAnnotation(posType, token.getBegin(), token.getEnd());
-            posAnno.setPosValue(pos.tag.intern());
+            posAnno.setPosValue(pos.tag != null ? pos.tag.intern() : null);
             POSUtils.assignCoarseValue(posAnno);
             posAnno.addToIndexes();
             token.setPos(posAnno);

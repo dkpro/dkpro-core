@@ -99,40 +99,41 @@ public class WikiUtils
         return plainText;
     }
 
-	/**
-	 * Creates a Wikipedia object from a DBConfig annotation without the need to
-	 * manually create the intermediary DatabaseConfiguration.
-	 *
-	 * @param confAnnotation
-	 *            annotation containing the db credentials
-	 * @return a Wikipedia object
-	 * @throws WikiApiException
-	 *             if the Wikipedia object could not be created
-	 */
-	public static Wikipedia getWikipedia(DBConfig confAnnotation)
-		throws WikiApiException
-	{
-		DatabaseConfiguration config = new DatabaseConfiguration();
-		config.setHost(confAnnotation.getHost());
-		config.setDatabase(confAnnotation.getDB());
-		config.setUser(confAnnotation.getUser());
-		config.setPassword(confAnnotation.getPassword());
-		config.setLanguage(Language.valueOf(confAnnotation.getLanguage()));
-		return new Wikipedia(config);
+    /**
+     * Creates a Wikipedia object from a DBConfig annotation without the need to
+     * manually create the intermediary DatabaseConfiguration.
+     *
+     * @param confAnnotation
+     *            annotation containing the db credentials
+     * @return a Wikipedia object
+     * @throws WikiApiException
+     *             if the Wikipedia object could not be created
+     */
+    public static Wikipedia getWikipedia(DBConfig confAnnotation)
+        throws WikiApiException
+    {
+        DatabaseConfiguration config = new DatabaseConfiguration();
+        config.setHost(confAnnotation.getHost());
+        config.setDatabase(confAnnotation.getDB());
+        config.setUser(confAnnotation.getUser());
+        config.setPassword(confAnnotation.getPassword());
+        config.setLanguage(Language.valueOf(confAnnotation.getLanguage()));
+        return new Wikipedia(config);
     }
-	
-	public static String jwplLanguage2dkproLanguage(Language jwplLanguage) {
-	    if (jwpl2dkproLanguageMap.containsKey(jwplLanguage.name())) {
-	        return jwpl2dkproLanguageMap.get(jwplLanguage.name());    
+    
+    public static String jwplLanguage2dkproLanguage(Language jwplLanguage) {
+        if (jwpl2dkproLanguageMap.containsKey(jwplLanguage.name())) {
+            return jwpl2dkproLanguageMap.get(jwplLanguage.name());    
 
-	    }
-	    else {
-	        System.err.println("Do not know DKPro language for JWPL language: " + jwplLanguage.name());
-	        return "x-unknown"; 
-	    }
-	}
-	
-	@SuppressWarnings("serial")
+        }
+        else {
+            System.err.println(
+                    "Do not know DKPro language for JWPL language: " + jwplLanguage.name());
+            return "x-unknown";
+        }
+    }
+    
+    @SuppressWarnings("serial")
     private static Map<String,String> jwpl2dkproLanguageMap = new HashMap<String,String>() {{
 //        abkhazian,
 //        afar,
@@ -194,7 +195,7 @@ public class WikiUtils
 //        dutch_low_saxon,
 //        dzongkha,
 //        emilian_romagnol,
-        put("english", "en");
+            put("english", "en");
 //        esperanto,
 //        estonian,
 //        ewe,
@@ -207,10 +208,10 @@ public class WikiUtils
 //        fula,
 //        galician,
 //        georgian,
-        put("german", "de");
+            put("german", "de");
 //        gilaki,
 //        gothic,
-        put("greek", "el");
+            put("greek", "el");
 //        greenlandic,
 //        guarani,
 //        gujarati,
@@ -390,6 +391,7 @@ public class WikiUtils
 //        zealandic,
 //        zhuang,
 //        zulu,
-	    put("_test", "en");
-    }};
+            put("_test", "en");
+        }
+    };
 }

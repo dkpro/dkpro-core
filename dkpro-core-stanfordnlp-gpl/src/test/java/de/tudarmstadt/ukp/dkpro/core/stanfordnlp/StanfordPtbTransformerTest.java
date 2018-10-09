@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2017
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,12 +14,13 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.junit.Test;
 
@@ -32,7 +33,8 @@ public class StanfordPtbTransformerTest
         String expected = "``Hey you!'', John said.";
         String input = "\"Hey you!\", John said.";
 
-        AnalysisEngineDescription normalizer = createEngineDescription(StanfordPtbTransformer.class);
+        AnalysisEngineDescription normalizer = createEngineDescription(
+                StanfordPtbTransformer.class);
 
         assertTransformedText(expected, input, "en", normalizer);
     }

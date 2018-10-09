@@ -29,7 +29,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 
@@ -53,9 +53,9 @@ public class BratEventAnnotation
     
     private static final Pattern PATTERN = Pattern.compile(
             "(?<ID>E[0-9]+)[\\t]" + 
-            "(?<TYPE>[a-zA-Z_][a-zA-Z0-9_-]+):" +
+            "(?<TYPE>[a-zA-Z0-9_][a-zA-Z0-9_-]+):" +
             "(?<TRIGGER>[ET][0-9]+)" + 
-            "(?<ARGS>( [a-zA-Z_][a-zA-Z0-9_-]+:[ET][0-9]+)*)");
+            "(?<ARGS>( [a-zA-Z_][a-zA-Z0-9_-]+:[ET][0-9]+)*)[ ]*");
     
     private static final String ID = "ID";
     private static final String TYPE = "TYPE";

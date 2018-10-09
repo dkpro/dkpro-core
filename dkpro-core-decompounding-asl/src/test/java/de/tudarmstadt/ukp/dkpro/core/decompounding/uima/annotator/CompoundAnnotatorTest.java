@@ -79,7 +79,7 @@ public class CompoundAnnotatorTest
     public void testWithoutRanking() throws CASException, UIMAException {
         AnalysisEngineDescription aed = createEngineDescription(
                 CompoundAnnotator.class,
-                CompoundAnnotator.PARAM_SPLITTING_ALGO,
+                CompoundAnnotator.RES_SPLITTING_ALGO,
                 createExternalResourceDescription(
                         LeftToRightSplitterResource.class,
                         SplitterResource.PARAM_DICT_RESOURCE,
@@ -95,7 +95,7 @@ public class CompoundAnnotatorTest
     public void testWithAsvToolbox() throws CASException, UIMAException {
         AnalysisEngineDescription aed = createEngineDescription(
                 CompoundAnnotator.class,
-                CompoundAnnotator.PARAM_SPLITTING_ALGO,
+                CompoundAnnotator.RES_SPLITTING_ALGO,
                 createExternalResourceDescription(
                         AsvToolboxSplitterResource.class,
                         AsvToolboxSplitterResource.PARAM_DICT_RESOURCE,
@@ -104,7 +104,7 @@ public class CompoundAnnotatorTest
                         createExternalResourceDescription(SharedLinkingMorphemes.class),
                         AsvToolboxSplitterResource.PARAM_PATRICIA_TRIES_RESOURCE,
                         createExternalResourceDescription(SharedPatriciaTries.class)),
-                CompoundAnnotator.PARAM_RANKING_ALGO,
+                CompoundAnnotator.RES_RANKING_ALGO,
                 createExternalResourceDescription(
                         FrequencyRankerResource.class,
                         RankerResource.PARAM_FINDER_RESOURCE,
@@ -123,14 +123,14 @@ public class CompoundAnnotatorTest
     public void testWithDefaults() throws CASException, UIMAException {
         AnalysisEngineDescription aed = createEngineDescription(
                 CompoundAnnotator.class,
-                CompoundAnnotator.PARAM_SPLITTING_ALGO,
+                CompoundAnnotator.RES_SPLITTING_ALGO,
                 createExternalResourceDescription(
                         LeftToRightSplitterResource.class,
                         SplitterResource.PARAM_DICT_RESOURCE,
                         createExternalResourceDescription(SharedDictionary.class),
                         SplitterResource.PARAM_MORPHEME_RESOURCE,
                         createExternalResourceDescription(SharedLinkingMorphemes.class)),
-                CompoundAnnotator.PARAM_RANKING_ALGO,
+                CompoundAnnotator.RES_RANKING_ALGO,
                 createExternalResourceDescription(
                         FrequencyRankerResource.class,
                         RankerResource.PARAM_FINDER_RESOURCE,
@@ -146,7 +146,8 @@ public class CompoundAnnotatorTest
 
     private void runAnnotator(AnalysisEngineDescription aed, String[] splits,
             String[] compoundsParts)
-        throws CASException, UIMAException{
+        throws CASException, UIMAException
+    {
         // Create Analysis Engine
         AnalysisEngine ae = AnalysisEngineFactory.createEngine(aed);
 

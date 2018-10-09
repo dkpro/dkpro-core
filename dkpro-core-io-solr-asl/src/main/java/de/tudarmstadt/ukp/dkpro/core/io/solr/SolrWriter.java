@@ -24,11 +24,13 @@ import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.io.solr.util.SolrUtils;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * A simple implementation of {@link SolrWriter_ImplBase}
  */
-@ResourceMetaData(name="Solr Index Writer")
+@ResourceMetaData(name = "Solr Index Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 public class SolrWriter
     extends SolrWriter_ImplBase
 {

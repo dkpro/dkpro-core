@@ -57,17 +57,18 @@ public class Explode
     @Override
     public void apply(ActionDescription aAction, DatasetDescription aDataset,
             ArtifactDescription aPack, Path aCachedFile)
-                throws Exception
+        throws Exception
     {
         DatasetDescriptionImpl dsi = (DatasetDescriptionImpl) aDataset;
-        
+
         Map<String, Object> cfg = aAction.getConfiguration();
         // Sometimes, we have to explode a file that was created as the result of exploding the
         // main artifact. Thus, we can override the target
         Path targetFile = cfg.containsKey("file")
-                ? dsi.getOwner().resolve(dsi).resolve((String) cfg.get("file")) : aCachedFile;        
-        
-                // Apache Commons Compress does not handle RAR files, so we handle them separately
+                ? dsi.getOwner().resolve(dsi).resolve((String) cfg.get("file"))
+                : aCachedFile;
+
+        // Apache Commons Compress does not handle RAR files, so we handle them separately
         if (targetFile.toString().toLowerCase(Locale.ENGLISH).endsWith(".rar")) {
             extractRar(aAction, targetFile, dsi.getOwner().resolve(dsi));
         }
@@ -76,20 +77,21 @@ public class Explode
             extract7z(aAction, targetFile, dsi.getOwner().resolve(dsi));
         }
         else {
-            // Auto-detect the archive format using Apache Commons Compress 
+            // Auto-detect the archive format using Apache Commons Compress
             try (InputStream is = new BufferedInputStream(Files.newInputStream(targetFile))) {
                 InputStream uncompressed;
-                
+
                 try {
                     uncompressed = new BufferedInputStream(
                             new CompressorStreamFactory().createCompressorInputStream(is));
                 }
                 catch (CompressorException e) {
-                    // If the compressor is not detected, we may be dealing with an archive format that
+                    // If the compressor is not detected, we may be dealing with an archive format
+                    // that
                     // compresses internally, e.g. ZIP.
                     uncompressed = is;
                 }
-    
+
                 ArchiveInputStream archive = new ArchiveStreamFactory()
                         .createArchiveInputStream(uncompressed);
                 extract(aAction, targetFile, archive, dsi.getOwner().resolve(dsi));
@@ -102,23 +104,23 @@ public class Explode
     {
         // We always extract archives into a subfolder. Figure out the name of the folder.
         String base = getBase(aCachedFile.getFileName().toString());
-        
+
         Map<String, Object> cfg = aAction.getConfiguration();
         int strip = cfg.containsKey("strip") ? (int) cfg.get("strip") : 0;
-        
+
         AntFileFilter filter = new AntFileFilter(coerceToList(cfg.get("includes")),
                 coerceToList(cfg.get("excludes")));
-        
+
         try (SevenZFile archive = new SevenZFile(aCachedFile.toFile())) {
             SevenZArchiveEntry entry = archive.getNextEntry();
             while (entry != null) {
                 String name = stripLeadingFolders(entry.getName(), strip);
-                
+
                 if (name == null) {
                     // Stripped to null - nothing left to extract - continue;
                     continue;
                 }
-                
+
                 if (filter.accept(name)) {
                     Path out = aTarget.resolve(base).resolve(name);
                     if (entry.isDirectory()) {
@@ -132,7 +134,7 @@ public class Explode
                         }
                     }
                 }
-                
+
                 entry = archive.getNextEntry();
             }
         }
@@ -143,23 +145,23 @@ public class Explode
     {
         // We always extract archives into a subfolder. Figure out the name of the folder.
         String base = getBase(aCachedFile.getFileName().toString());
-        
+
         Map<String, Object> cfg = aAction.getConfiguration();
         int strip = cfg.containsKey("strip") ? (int) cfg.get("strip") : 0;
-        
+
         AntFileFilter filter = new AntFileFilter(coerceToList(cfg.get("includes")),
                 coerceToList(cfg.get("excludes")));
-        
+
         try (Archive archive = new Archive(new FileVolumeManager(aCachedFile.toFile()))) {
             FileHeader fh = archive.nextFileHeader();
             while (fh != null) {
                 String name = stripLeadingFolders(fh.getFileNameString(), strip);
-                
+
                 if (name == null) {
                     // Stripped to null - nothing left to extract - continue;
                     continue;
                 }
-                
+
                 if (filter.accept(name)) {
                     Path out = aTarget.resolve(base).resolve(name);
                     if (fh.isDirectory()) {
@@ -172,8 +174,7 @@ public class Explode
                         }
                     }
                 }
-                
-                
+
                 fh = archive.nextFileHeader();
             }
         }
@@ -181,26 +182,26 @@ public class Explode
 
     private void extract(ActionDescription aAction, Path aArchive, ArchiveInputStream aAStream,
             Path aTarget)
-                throws IOException
+        throws IOException
     {
         // We always extract archives into a subfolder. Figure out the name of the folder.
         String base = getBase(aArchive.getFileName().toString());
-        
+
         Map<String, Object> cfg = aAction.getConfiguration();
         int strip = cfg.containsKey("strip") ? (int) cfg.get("strip") : 0;
-        
+
         AntFileFilter filter = new AntFileFilter(coerceToList(cfg.get("includes")),
                 coerceToList(cfg.get("excludes")));
-        
+
         ArchiveEntry entry = null;
         while ((entry = aAStream.getNextEntry()) != null) {
             String name = stripLeadingFolders(entry.getName(), strip);
-            
+
             if (name == null) {
                 // Stripped to null - nothing left to extract - continue;
                 continue;
             }
-            
+
             if (filter.accept(name)) {
                 Path out = aTarget.resolve(base).resolve(name);
                 if (entry.isDirectory()) {
@@ -213,7 +214,7 @@ public class Explode
             }
         }
     }
-    
+
     private String stripLeadingFolders(String aName, int aLevels)
     {
         if (aLevels > 0) {
@@ -231,7 +232,7 @@ public class Explode
             return aName;
         }
     }
-    
+
     public static String getBase(String aFilename)
     {
         // We always extract archives into a subfolder. Figure out the name of the folder.
@@ -241,7 +242,7 @@ public class Explode
         }
         return base;
     }
-    
+
     @SuppressWarnings("unchecked")
     public static List<String> coerceToList(Object aRaw)
     {
@@ -260,23 +261,22 @@ public class Explode
         }
         return cooked;
     }
-    
+
     private static class SevenZEntryInputStream
         extends InputStream
     {
         private SevenZFile archive;
         private SevenZArchiveEntry entry;
         private int totalRead;
-        
+
         public SevenZEntryInputStream(SevenZFile aArchive, SevenZArchiveEntry aEnty)
         {
             archive = aArchive;
             entry = aEnty;
         }
-        
+
         @Override
-        public int read()
-            throws IOException
+        public int read() throws IOException
         {
             if (totalRead < entry.getSize()) {
                 totalRead++;
@@ -286,10 +286,9 @@ public class Explode
                 return -1;
             }
         }
-        
+
         @Override
-        public int read(byte[] aB, int aOff, int aLen)
-            throws IOException
+        public int read(byte[] aB, int aOff, int aLen) throws IOException
         {
             if (totalRead < entry.getSize()) {
                 int blocksize = (int) Math.min(aLen, entry.getSize() - totalRead);

@@ -101,10 +101,9 @@ public class OpenNlpLemmatizerTrainerTest
                 Conll2006Writer.PARAM_SINGULAR_TARGET, true,
                 Conll2006Writer.PARAM_TARGET_LOCATION, new File(targetFolder, "out.conll"));
         
-        List<Span<String>> actual = EvalUtil.loadSamples(iteratePipeline(testReader, lemmatizer, testWriter),
-                Lemma.class, lemma -> {
-                    return lemma.getValue();
-                });
+        List<Span<String>> actual = EvalUtil.loadSamples(
+                iteratePipeline(testReader, lemmatizer, testWriter), Lemma.class, lemma -> 
+                lemma.getValue());
         System.out.printf("Actual samples: %d%n", actual.size());
         
         // Read reference data collect labels

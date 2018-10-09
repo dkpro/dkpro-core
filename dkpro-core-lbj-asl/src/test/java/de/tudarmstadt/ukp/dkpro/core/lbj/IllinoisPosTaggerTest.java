@@ -27,6 +27,7 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
@@ -40,7 +41,7 @@ public class IllinoisPosTaggerTest
         throws Exception
     {
         File tempFile = File.createTempFile("dkpro", ".txt");
-        FileUtils.write(tempFile, "This is a test .");
+        FileUtils.write(tempFile, "This is a test .", "UTF-8");
         POSTagPlain.main(new String[] { tempFile.getAbsolutePath() });
     }
     
@@ -58,7 +59,7 @@ public class IllinoisPosTaggerTest
 
         JCas jcas = runTest("en", null, "John is purchasing oranges . \n",
                 new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
-                new String[] { "POS_PROPN",   "POS_VERB",   "POS_VERB",        "POS_NOUN",     "POS_PUNCT" });
+                new String[] { "POS_PROPN", "POS_VERB", "POS_VERB", "POS_NOUN", "POS_PUNCT" });
         
         String[] posTags = { "#", "$", "''", ",", "-LRB-", "-RRB-", ".", ":", "CC", "CD", "DT",
                 "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNP", "NNPS", "NNS", "PDT",

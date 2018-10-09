@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2017
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
@@ -43,6 +43,7 @@ import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
@@ -51,24 +52,41 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.Parameters;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Train a POS tagging model for the Stanford POS tagger.
  */
+@Component(OperationType.TRAINER_OF_MACHINE_LEARNING_MODELS)
 @MimeTypeCapability(MimeTypes.APPLICATION_X_STANFORDNLP_TAGGER)
-@ResourceMetaData(name="CoreNLP POS-Tagger Trainer")
+@Parameters(
+        exclude = { 
+                StanfordPosTaggerTrainer.PARAM_TARGET_LOCATION  })
+@ResourceMetaData(name = "CoreNLP POS-Tagger Trainer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
+@TypeCapability(
+        inputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"})
 public class StanfordPosTaggerTrainer
     extends JCasConsumer_ImplBase
 {
+    /**
+     * Location to which the output is written.
+     */
     public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
     @ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true)
     private File targetLocation;
 
     /**
      * Training file containing the parameters. The <code>trainFile</code>, <code>model</code> and
-     * <code>encoding</code> parameters in this file are ignored/overwritten. In the <code>arch</code>
-     * parameter, the string <code>${distsimCluster}</code> is replaced with the path to the cluster
-     * files if {@link #PARAM_CLUSTER_FILE} is specified.
+     * <code>encoding</code> parameters in this file are ignored/overwritten. In the
+     * <code>arch</code> parameter, the string <code>${distsimCluster}</code> is replaced with the
+     * path to the cluster files if {@link #PARAM_CLUSTER_FILE} is specified.
      */
     public static final String PARAM_PARAMETER_FILE = "trainFile";
     @ConfigurationParameter(name = PARAM_PARAMETER_FILE, mandatory = false)
@@ -97,9 +115,10 @@ public class StanfordPosTaggerTrainer
             if (clusterFile != null) {
                 String p = clusterFile.getAbsolutePath();
                 if (p.contains("(") || p.contains(")") || p.contains(",")) {
-                    // The Stanford POS tagger trainer does not support these characters in the cluster
-                    // files path. If we have those, try to copy the clusters somewhere save before
-                    // training. See: https://github.com/stanfordnlp/CoreNLP/issues/255
+                    // The Stanford POS tagger trainer does not support these characters in the
+                    // cluster files path. If we have those, try to copy the clusters somewhere
+                    // save before training. 
+                    // See: https://github.com/stanfordnlp/CoreNLP/issues/255
                     File tempClusterFile = File.createTempFile("dkpro-stanford-pos-trainer",
                             ".cluster");
                     FileUtils.copyFile(clusterFile, tempClusterFile);
@@ -120,8 +139,8 @@ public class StanfordPosTaggerTrainer
         if (tempData == null) {
             try {
                 tempData = File.createTempFile("dkpro-stanford-pos-trainer", ".tsv");
-                out = new PrintWriter(
-                        new OutputStreamWriter(new FileOutputStream(tempData), StandardCharsets.UTF_8));
+                out = new PrintWriter(new OutputStreamWriter(new FileOutputStream(tempData),
+                        StandardCharsets.UTF_8));
             }
             catch (IOException e) {
                 throw new AnalysisEngineProcessException(e);
@@ -132,7 +151,7 @@ public class StanfordPosTaggerTrainer
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             Collection<Token> tokens = index.get(sentence);
             for (Token token : tokens) {
-                out.printf("%s\t%s%n", token.getCoveredText(), token.getPos().getPosValue());
+                out.printf("%s\t%s%n", token.getText(), token.getPos().getPosValue());
             }
             out.println();
         }

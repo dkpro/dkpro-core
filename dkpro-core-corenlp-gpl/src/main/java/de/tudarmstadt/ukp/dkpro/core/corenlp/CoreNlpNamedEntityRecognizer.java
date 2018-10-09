@@ -1,5 +1,5 @@
-/**
- * Copyright 2007-2017
+/*
+ * Copyright 2007-2018
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/.
+ * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 package de.tudarmstadt.ukp.dkpro.core.corenlp;
 
@@ -42,8 +42,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.CoreNlp2DKPro;
+import de.tudarmstadt.ukp.dkpro.core.corenlp.internal.DKPro2CoreNlp;
 import edu.stanford.nlp.ie.AbstractSequenceClassifier;
 import edu.stanford.nlp.ie.NERClassifierCombiner;
 import edu.stanford.nlp.ie.crf.CRFClassifier;
@@ -54,11 +54,16 @@ import edu.stanford.nlp.pipeline.NERCombinerAnnotator;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.util.ErasureUtils;
 import edu.stanford.nlp.util.StringUtils;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Named entity recognizer from CoreNLP.
  */
-@ResourceMetaData(name="CoreNLP Named Entity Recognizer")
+@Component(OperationType.NAMED_ENTITITY_RECOGNIZER)
+@ResourceMetaData(name = "CoreNLP Named Entity Recognizer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -70,11 +75,9 @@ public class CoreNlpNamedEntityRecognizer
 {
     /**
      * Log the tag set(s) when a model is loaded.
-     *
-     * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
     protected boolean printTagSet;
 
     /**
@@ -93,6 +96,20 @@ public class CoreNlpNamedEntityRecognizer
     private String variant;
 
     /**
+     * URI of the model artifact. This can be used to override the default model resolving 
+     * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
+     */
+    public static final String PARAM_MODEL_ARTIFACT_URI = 
+            ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
+    @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
+    protected String modelArtifactUri;
+    
+    /**
      * Location from which the model is read.
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
@@ -109,30 +126,32 @@ public class CoreNlpNamedEntityRecognizer
     /**
      * Location of the mapping file for named entity tags to UIMA types.
      */
-    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
+    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
     private String mappingLocation;
     
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code false}
+     * Maximum sentence length. Longer sentences are skipped.
      */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internStrings;
-
-    public static final String PARAM_MAX_SENTENCE_LENGTH = ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
+    public static final String PARAM_MAX_SENTENCE_LENGTH = 
+            ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
     @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = true, defaultValue = "2147483647")
     private int maxSentenceLength;
 
+    /**
+     * Maximum time to spend on a single sentence.
+     */
     public static final String PARAM_MAX_TIME = "maxTime";
     @ConfigurationParameter(name = PARAM_MAX_TIME, mandatory = true, defaultValue = "-1")
     private int maxTime;
 
+    /**
+     * Number of parallel threads to use.
+     */
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
-    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = ComponentParameters.AUTO_NUM_THREADS)
+    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, 
+            defaultValue = ComponentParameters.AUTO_NUM_THREADS)
     private int numThreads;
 
     /**
@@ -164,20 +183,30 @@ public class CoreNlpNamedEntityRecognizer
      * @see NERClassifierCombiner#APPLY_NUMERIC_CLASSIFIERS_DEFAULT
      */
     public static final String PARAM_APPLY_NUMERIC_CLASSIFIERS = "applyNumericClassifiers";
-    @ConfigurationParameter(name = PARAM_APPLY_NUMERIC_CLASSIFIERS, mandatory = true, defaultValue="true")
-    boolean applyNumericClassifiers;
+    @ConfigurationParameter(name = PARAM_APPLY_NUMERIC_CLASSIFIERS, mandatory = true, defaultValue = "true")
+    private boolean applyNumericClassifiers;
 
+//    /**
+//     * Use SUTime if it is available on the classpath. SUTime only works for English.
+//     */
+//    public static final String PARAM_USE_SUTIME = "useSUTime";
+//    @ConfigurationParameter(name = PARAM_USE_SUTIME, mandatory = true, defaultValue = "false")
     // FIXME Using USE_SUTIME_DEFAULT autodetects presence of SUTime. Need three values here:
     // on, off, auto
-    public static final String PARAM_USE_SUTIME = "useSUTime";
-    @ConfigurationParameter(name = PARAM_USE_SUTIME, mandatory = true, defaultValue="false")
-    boolean useSUTime; // = NumberSequenceClassifier.USE_SUTIME_DEFAULT;    
+    private boolean useSUTime = false; // = NumberSequenceClassifier.USE_SUTIME_DEFAULT;
 
-    public static final String PARAM_AUGMENT_REGEX_NER = "augmentRegexNER";
-    @ConfigurationParameter(name = PARAM_AUGMENT_REGEX_NER, mandatory = true, defaultValue="false")
-    boolean augmentRegexNER; // = NERClassifierCombiner.APPLY_GAZETTE_PROPERTY;    
+//    /**
+//     * Whether to read the default regular expression gazetteer.
+//     * 
+//     * @see edu.stanford.nlp.pipeline.DefaultPaths#DEFAULT_NER_GAZETTE_MAPPING
+//     */
+//    public static final String PARAM_AUGMENT_REGEX_NER = "augmentRegexNER";
+//    @ConfigurationParameter(name = PARAM_AUGMENT_REGEX_NER, mandatory = true, defaultValue = "false")
+    // Commented out since the default gazetter is currently only in the original Stanford model
+    // JARs
+    private boolean augmentRegexNER = false; // = NERClassifierCombiner.APPLY_GAZETTE_PROPERTY;
 
-    boolean verbose = false;
+    private boolean verbose = false;
     
     private ModelProviderBase<NERCombinerAnnotator> annotatorProvider;
     private MappingProvider mappingProvider;
@@ -226,11 +255,11 @@ public class CoreNlpNamedEntityRecognizer
         annotatorProvider.getResource().annotate(document);
         
         // Transfer back into the CAS
-        CoreNlp2DKPro.convertNamedEntities(aJCas, document, mappingProvider, internStrings);
+        CoreNlp2DKPro.convertNamedEntities(aJCas, document, mappingProvider);
     }
 
     private class CoreNlpNamedEntityRecognizerModelProvider
-    extends ModelProviderBase<NERCombinerAnnotator>
+        extends ModelProviderBase<NERCombinerAnnotator>
     {
         public CoreNlpNamedEntityRecognizerModelProvider(Object aObject)
         {
@@ -299,7 +328,7 @@ public class CoreNlpNamedEntityRecognizer
                     useSUTime, augmentRegexNER, classifier);
             
             NERCombinerAnnotator annotator = new NERCombinerAnnotator(combiner, verbose,
-                    numThreads, maxTime, maxSentenceLength);
+                    numThreads, maxTime, maxSentenceLength, false, false);
             return annotator;
         }
     }

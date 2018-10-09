@@ -17,6 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.ditop;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.junit.Assert.assertEquals;
@@ -107,10 +108,10 @@ public class DiTopWriterTest
         assertTrue(topicsFile.exists());
 
         /* check that file lengths are correct */
-        assertEquals(expectedNDocuments + 1, FileUtils.readLines(topicsFile).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile).size());
+        assertEquals(expectedNDocuments + 1, FileUtils.readLines(topicsFile, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile, UTF_8).size());
         MODEL_FILE.delete();
     }
 
@@ -155,10 +156,10 @@ public class DiTopWriterTest
         assertTrue(topicsFile.exists());
 
         /* check that file lengths are correct */
-        assertEquals(expectedNDocuments + 1, FileUtils.readLines(topicsFile).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile).size());
+        assertEquals(expectedNDocuments + 1, FileUtils.readLines(topicsFile, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile, UTF_8).size());
         MODEL_FILE.delete();
     }
 
@@ -167,7 +168,11 @@ public class DiTopWriterTest
         throws UIMAException, IOException
     {
         int expectedNDocuments = 0;
-        String[] collectionValues = new String[] { "file:/home/schnober/workspace/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.io.ditop/src/test/resources/" };
+        // FIXME I'm pretty sure this absolute path should not be here - check and relativize
+        // if possible.
+        String[] collectionValues = {
+                "file:/home/schnober/workspace/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.io.ditop/src/test/resources/"
+        };
         boolean exactMatch = true;
 
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
@@ -202,10 +207,10 @@ public class DiTopWriterTest
         assertTrue(topicsFile.exists());
 
         /* check that file lengths are correct */
-        assertEquals(expectedNDocuments + 1, FileUtils.readLines(topicsFile).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile).size());
+        assertEquals(expectedNDocuments + 1, FileUtils.readLines(topicsFile, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile, UTF_8).size());
         MODEL_FILE.delete();
     }
 
@@ -249,10 +254,10 @@ public class DiTopWriterTest
         assertTrue(topicsFile.exists());
 
         /* check that file lengths are correct */
-        assertEquals(expectedNDocuments + 1, FileUtils.readLines(topicsFile).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile).size());
+        assertEquals(expectedNDocuments + 1, FileUtils.readLines(topicsFile, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile, UTF_8).size());
         MODEL_FILE.delete();
     }
 
@@ -296,10 +301,10 @@ public class DiTopWriterTest
         assertTrue(topicsFile.exists());
 
         /* check that file lengths are correct */
-        assertEquals(expectedNDocuments + 1, FileUtils.readLines(topicsFile).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile).size());
-        assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile).size());
+        assertEquals(expectedNDocuments + 1, FileUtils.readLines(topicsFile, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile, UTF_8).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile, UTF_8).size());
         MODEL_FILE.delete();
     }
 }

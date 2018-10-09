@@ -19,7 +19,7 @@
 /**
  * Contains splitting algorithm.
  *
- * To implement you own splitting algorithm you can
- * use the {@link de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.SplitterAlgorithm} interface.
+ * To implement you own splitting algorithm you can use the
+ * {@link de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.SplitterAlgorithm} interface.
  */
 package de.tudarmstadt.ukp.dkpro.core.decompounding.splitter;

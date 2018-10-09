@@ -19,8 +19,7 @@
 /**
  * This package contains UIMA resources classes. Each splitter and each ranker needs to have a UIMA
  * resource so the user can combine different strategies and choose the one which best suits its
- * needs. Besides the splitters and rankers, there is also a resource for the Dictionary, for
- * Finder and for the LinkingMorphemes.
- *
+ * needs. Besides the splitters and rankers, there is also a resource for the Dictionary, for Finder
+ * and for the LinkingMorphemes.
  */
 package de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource;

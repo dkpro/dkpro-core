@@ -17,12 +17,9 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.text;
 
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
-import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGenerator;
-import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -33,18 +30,31 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import java.io.IOException;
-import java.io.OutputStream;
+import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
+import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.PhraseSequenceGenerator;
+import de.tudarmstadt.ukp.dkpro.core.api.io.sequencegenerator.StringSequenceGenerator;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.Parameters;
 
 /**
- * This class writes a set of pre-processed documents into a large text file containing one sentence
- * per line and tokens split by whitespaces. Optionally, annotations other than tokens (e.g. lemmas)
- * are written as specified by {@link #PARAM_FEATURE_PATH}.
+ * Write texts into into a large file containing one sentence per line and tokens separated by
+ * whitespace. Optionally, annotations other than tokens (e.g. lemmas) are written as specified by
+ * {@link #PARAM_FEATURE_PATH}.
  */
-@ResourceMetaData(name="Tokenized Text Writer")
+@ResourceMetaData(name = "Tokenized Text Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@Parameters(
+        exclude = { 
+                JCasFileWriter_ImplBase.PARAM_TARGET_LOCATION,
+                JCasFileWriter_ImplBase.PARAM_SINGULAR_TARGET,
+                JCasFileWriter_ImplBase.PARAM_OVERWRITE, 
+                TokenizedTextWriter.PARAM_STOPWORDS_FILE })
 @MimeTypeCapability({MimeTypes.TEXT_PLAIN})
 @TypeCapability(
-        inputs={
+        inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
 public class TokenizedTextWriter
         extends JCasFileWriter_ImplBase
@@ -63,8 +73,7 @@ public class TokenizedTextWriter
 
     /**
      * The feature path, e.g.
-     * {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value} for lemmas. Default:
-     * {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token} (i.e. token texts).
+     * {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value} for lemmas.
      */
     public static final String PARAM_FEATURE_PATH = "featurePath";
     /**
@@ -81,6 +90,9 @@ public class TokenizedTextWriter
     @ConfigurationParameter(name = PARAM_FEATURE_PATH, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
     private String featurePath;
 
+    /**
+     * Regular expression to match numbers. These are written to the output as {@code NUM}. 
+     */
     public static final String PARAM_NUMBER_REGEX = "numberRegex";
     @ConfigurationParameter(name = PARAM_NUMBER_REGEX, mandatory = true, defaultValue = "")
     private String numberRegex;
@@ -91,23 +103,25 @@ public class TokenizedTextWriter
      */
     public static final String PARAM_STOPWORDS_FILE = "stopwordsFile";
     @ConfigurationParameter(name = PARAM_STOPWORDS_FILE, mandatory = true, defaultValue = "")
-    private String stopwordsFile;
+    private File stopwordsFile;
 
     /**
-     * Set the output file extension. Default: {@code .txt}.
+     * Set the output file extension.
      */
     public static final String PARAM_EXTENSION = "extension";
     @ConfigurationParameter(name = PARAM_EXTENSION, mandatory = true, defaultValue = ".txt")
     private String extension = ".txt";
 
     /**
-     * In the output file, each unit of the covering type is written into a separate line. The default
-     * (set in {@link #DEFAULT_COVERING_TYPE}), is sentences so that each sentence is written to a line.
+     * In the output file, each unit of the covering type is written into a separate line. The
+     * default (set in {@link #DEFAULT_COVERING_TYPE}), is sentences so that each sentence is
+     * written to a line.
      * <p>
-     * If no linebreaks within a document is desired, set this value to {@code null}.
+     * If no line breaks within a document are desired, set this value to {@code null}.
      */
     public static final String PARAM_COVERING_TYPE = "coveringType";
-    @ConfigurationParameter(name = PARAM_COVERING_TYPE, mandatory = true, defaultValue = DEFAULT_COVERING_TYPE)
+    @ConfigurationParameter(name = PARAM_COVERING_TYPE, mandatory = true, 
+            defaultValue = DEFAULT_COVERING_TYPE)
     private String coveringType;
 
     private StringSequenceGenerator sequenceGenerator;

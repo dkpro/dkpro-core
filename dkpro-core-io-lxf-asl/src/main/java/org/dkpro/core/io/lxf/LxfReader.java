@@ -36,8 +36,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
-@ResourceMetaData(name="CLARINO LAP LXF Reader")
+/**
+ * Reader for the CLARINO LAP LXF format.
+ */
+@ResourceMetaData(name = "CLARINO LAP LXF Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_LXF_JSON})
 @TypeCapability(
         outputs = { 
@@ -77,5 +82,5 @@ public class LxfReader
         
         // Allow to get information about everything added beyond this point
         aCAS.getCasImpl().createMarker();
-     }
+    }
 }

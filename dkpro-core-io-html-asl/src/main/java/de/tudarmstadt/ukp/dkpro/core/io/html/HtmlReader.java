@@ -55,17 +55,19 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reads the contents of a given URL and strips the HTML. Returns the textual contents. Also 
  * recognizes headings and paragraphs.
  */
-@ResourceMetaData(name="HTML Reader")
+@ResourceMetaData(name = "HTML Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_XHTML, MimeTypes.TEXT_HTML})
 @TypeCapability(
-		outputs = {
-			"de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-			"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading",
+        outputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading",
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph" })
 public class HtmlReader
     extends JCasResourceCollectionReader_ImplBase
@@ -81,7 +83,8 @@ public class HtmlReader
      * Name of configuration parameter that contains the character encoding used by the input files.
      */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
 
     private Map<String, Integer> mappings = new HashMap<>();
@@ -185,10 +188,10 @@ public class HtmlReader
     private static void trim(StringBuilder aText, int[] aSpan)
     {
         int begin = aSpan[0];
-        int end = aSpan[1]-1;
+        int end = aSpan[1] - 1;
 
         while (
-                (begin < (aText.length()-1))
+                (begin < (aText.length() - 1))
                 && trimChar(aText.charAt(begin))
         ) {
             begin ++;

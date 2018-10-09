@@ -50,11 +50,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.io.imscwb.util.CorpusSentence;
 import de.tudarmstadt.ukp.dkpro.core.io.imscwb.util.CorpusText;
 import de.tudarmstadt.ukp.dkpro.core.io.imscwb.util.TextIterable;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reads a tab-separated format including pseudo-XML tags.
  */
-@ResourceMetaData(name="IMS CWB Reader")
+@ResourceMetaData(name = "IMS CWB Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_IMSCWB})
 @TypeCapability(
         outputs = { 
@@ -66,89 +68,80 @@ import de.tudarmstadt.ukp.dkpro.core.io.imscwb.util.TextIterable;
 public class ImsCwbReader
     extends ResourceCollectionReaderBase
 {
-	/**
-	 * Character encoding of the output.
-	 */
+    /**
+     * Character encoding of the output.
+     */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name=PARAM_SOURCE_ENCODING, mandatory=true, defaultValue="UTF-8")
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = "UTF-8")
     private String encoding;
 
-	/**
-	 * Location of the mapping file for part-of-speech tags to UIMA types.
-	 */
-	public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
-	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
-	protected String mappingPosLocation;
+    /**
+     * Location of the mapping file for part-of-speech tags to UIMA types.
+     */
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+    protected String mappingPosLocation;
 
-	/**
-	 * Specify which tag set should be used to locate the mapping file.
-	 */
-	public static final String PARAM_POS_TAG_SET = ComponentParameters.PARAM_POS_TAG_SET;
-	@ConfigurationParameter(name = PARAM_POS_TAG_SET, mandatory = false)
-	protected String posTagset;
+    /**
+     * Specify which tag set should be used to locate the mapping file.
+     */
+    public static final String PARAM_POS_TAG_SET = ComponentParameters.PARAM_POS_TAG_SET;
+    @ConfigurationParameter(name = PARAM_POS_TAG_SET, mandatory = false)
+    protected String posTagset;
 
-	/**
-	 * Read tokens and generate {@link Token} annotations.
-	 *
-	 * Default: {@code true}
-	 */
+    /**
+     * Read tokens and generate {@link Token} annotations.
+     */
     public static final String PARAM_READ_TOKEN = ComponentParameters.PARAM_READ_TOKEN;
     @ConfigurationParameter(name = PARAM_READ_TOKEN, mandatory = true, defaultValue = "true")
     private boolean readTokens;
 
-	/**
-	 * Read part-of-speech tags and generate {@link POS} annotations or subclasses if a
-	 * {@link #PARAM_POS_TAG_SET tag set} or {@link #PARAM_POS_MAPPING_LOCATION mapping file} is
-	 * used.
-	 *
-	 * Default: {@code true}
-	 */
+    /**
+     * Read part-of-speech tags and generate {@link POS} annotations or subclasses if a
+     * {@link #PARAM_POS_TAG_SET tag set} or {@link #PARAM_POS_MAPPING_LOCATION mapping file} is
+     * used.
+     */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
     private boolean readPos;
 
-	/**
-	 * Read sentences.
-	 *
-	 * Default: {@code true}
-	 */
+    /**
+     * Read sentences.
+     */
     public static final String PARAM_READ_SENTENCES = ComponentParameters.PARAM_READ_SENTENCE;
     @ConfigurationParameter(name = PARAM_READ_SENTENCES, mandatory = true, defaultValue = "true")
     private boolean readSentences;
 
-	/**
-	 * Read lemmas.
-	 *
-	 * Default: {@code true}
-	 */
+    /**
+     * Read lemmas.
+     */
     public static final String PARAM_READ_LEMMA = ComponentParameters.PARAM_READ_LEMMA;
     @ConfigurationParameter(name = PARAM_READ_LEMMA, mandatory = true, defaultValue = "true")
     private boolean readLemmas;
 
-	/**
-	 * If true, the unit IDs are used only to detect if a new document (CAS) needs to be created,
-	 * but for the purpose of setting the document ID, a new ID is generated. (Default: false)
-	 */
-	public static final String PARAM_GENERATE_NEW_IDS = "generateNewIds";
-	@ConfigurationParameter(name = PARAM_GENERATE_NEW_IDS, mandatory = true, defaultValue = "false")
-	private boolean generateNewIds;
+    /**
+     * If true, the unit IDs are used only to detect if a new document (CAS) needs to be created,
+     * but for the purpose of setting the document ID, a new ID is generated.
+     */
+    public static final String PARAM_GENERATE_NEW_IDS = "generateNewIds";
+    @ConfigurationParameter(name = PARAM_GENERATE_NEW_IDS, mandatory = true, defaultValue = "false")
+    private boolean generateNewIds;
 
-	/**
-	 * If true, the unit text ID encoded in the corpus file is stored as the URI in the document
-	 * meta data. This setting has is not affected by {@link #PARAM_GENERATE_NEW_IDS}
-	 * (Default: false)
-	 */
-	public static final String PARAM_ID_IS_URL = "idIsUrl";
-	@ConfigurationParameter(name = PARAM_ID_IS_URL, mandatory = true, defaultValue = "false")
-	private boolean idIsUrl;
+    /**
+     * If true, the unit text ID encoded in the corpus file is stored as the URI in the document
+     * meta data. This setting has is not affected by {@link #PARAM_GENERATE_NEW_IDS}
+     */
+    public static final String PARAM_ID_IS_URL = "idIsUrl";
+    @ConfigurationParameter(name = PARAM_ID_IS_URL, mandatory = true, defaultValue = "false")
+    private boolean idIsUrl;
 
-	/**
-	 * Replace non-XML characters with spaces.
-	 * (Default: true)
-	 */
-	public static final String PARAM_REPLACE_NON_XML = "replaceNonXml";
-	@ConfigurationParameter(name = PARAM_REPLACE_NON_XML, mandatory = true, defaultValue = "true")
-	private boolean replaceNonXml;
+    /**
+     * Replace non-XML characters with spaces.
+     */
+    public static final String PARAM_REPLACE_NON_XML = "replaceNonXml";
+    @ConfigurationParameter(name = PARAM_REPLACE_NON_XML, mandatory = true, defaultValue = "true")
+    private boolean replaceNonXml;
 
     private Type tokenType;
     private Type lemmaType;
@@ -158,66 +151,66 @@ public class ImsCwbReader
 
     private int completed;
 
-	private MappingProvider posMappingProvider;
+    private MappingProvider posMappingProvider;
 
-	private int documentCount;
-	private int qualifier;
-	private Resource lastResource;
+    private int documentCount;
+    private int qualifier;
+    private Resource lastResource;
 
     @Override
     public void initialize(UimaContext aContext)
-    	throws ResourceInitializationException
+        throws ResourceInitializationException
     {
-    	super.initialize(aContext);
-    	wackyIterator = new TextIterable(getResources(), encoding);
+        super.initialize(aContext);
+        wackyIterator = new TextIterable(getResources(), encoding);
 
         posMappingProvider = MappingProviderFactory.createPosMappingProvider(mappingPosLocation,
                 posTagset, getLanguage());
 
-		documentCount = 0;
-		qualifier = 0;
-		lastResource = null;
+        documentCount = 0;
+        qualifier = 0;
+        lastResource = null;
     }
 
     @Override
     public boolean hasNext()
-    	throws IOException, CollectionException
+        throws IOException, CollectionException
     {
-    	return wackyIterator.hasNext();
+        return wackyIterator.hasNext();
     }
 
     @Override
     public void getNext(CAS aCAS)
         throws IOException, CollectionException
     {
-		Resource res = wackyIterator.getCurrentResource();
+        Resource res = wackyIterator.getCurrentResource();
         CorpusText text = wackyIterator.next();
 
         // Reset counter when a new file is read.
         if (!res.equals(lastResource)) {
-        	qualifier = 0;
-        	lastResource  = res;
+            qualifier = 0;
+            lastResource  = res;
         }
 
-		String documentId;
-		if (generateNewIds) {
-			documentId = String.valueOf(documentCount);
-		}
-		else {
-			documentId = text.getDocumentTitle();
-		}
+        String documentId;
+        if (generateNewIds) {
+            documentId = String.valueOf(documentCount);
+        }
+        else {
+            documentId = text.getDocumentTitle();
+        }
 
-		initCas(aCAS, res, String.valueOf(qualifier));
-		DocumentMetaData meta = DocumentMetaData.get(aCAS);
-		meta.setDocumentTitle(text.getDocumentTitle());
-		meta.setDocumentId(documentId);
+        initCas(aCAS, res, String.valueOf(qualifier));
+        DocumentMetaData meta = DocumentMetaData.get(aCAS);
+        meta.setDocumentTitle(text.getDocumentTitle());
+        meta.setDocumentId(documentId);
 
-		if (idIsUrl) {
-			meta.setDocumentBaseUri(null);
-			meta.setDocumentUri(text.getDocumentTitle());
-		}
+        if (idIsUrl) {
+            meta.setDocumentBaseUri(null);
+            meta.setDocumentUri(text.getDocumentTitle());
+        }
 
-		try {
+        try {
             posMappingProvider.configure(aCAS);
         }
         catch (AnalysisEngineProcessException e) {
@@ -239,15 +232,15 @@ public class ImsCwbReader
 
         for (CorpusSentence sentence : text.getSentences()) {
             int savedOffset = offset;
-            for (int i=0; i<sentence.getTokens().size(); i++) {
+            for (int i = 0; i < sentence.getTokens().size(); i++) {
                 String token = doReplaceNonXml(sentence.getTokens().get(i));
                 String lemma = doReplaceNonXml(sentence.getLemmas().get(i));
                 String pos   = doReplaceNonXml(sentence.getPOS().get(i));
                 int len = token.length();
 
                 if (readPos) {
-    				Type posType = posMappingProvider.getTagType(pos);
-    				AnnotationFS posAnno = aCAS.createAnnotation(posType, offset, offset + len);
+                    Type posType = posMappingProvider.getTagType(pos);
+                    AnnotationFS posAnno = aCAS.createAnnotation(posType, offset, offset + len);
                     posAnno.setStringValue(posType.getFeatureByBaseName("PosValue"), pos);
                     posAnnotations.add(posAnno);
                 }
@@ -265,12 +258,12 @@ public class ImsCwbReader
                     if (readPos) {
                         tokenAnno.setFeatureValue(
                                 tokenType.getFeatureByBaseName("pos"),
-                                posAnnotations.get(posAnnotations.size()-1));
+                                posAnnotations.get(posAnnotations.size() - 1));
                     }
                     if (readLemmas) {
                         tokenAnno.setFeatureValue(
                                 tokenType.getFeatureByBaseName("lemma"),
-                                lemmaAnnotations.get(lemmaAnnotations.size()-1));
+                                lemmaAnnotations.get(lemmaAnnotations.size() - 1));
                     }
                     tokenAnnotations.add(tokenAnno);
                 }
@@ -320,21 +313,21 @@ public class ImsCwbReader
 
     private String doReplaceNonXml(String aString)
     {
-    	if (!replaceNonXml) {
-    		return aString;
-    	}
+        if (!replaceNonXml) {
+            return aString;
+        }
 
-    	char[] buf = aString.toCharArray();
-    	int pos = XMLUtils.checkForNonXmlCharacters(buf, 0, buf.length, false);
+        char[] buf = aString.toCharArray();
+        int pos = XMLUtils.checkForNonXmlCharacters(buf, 0, buf.length, false);
 
-    	if (pos == -1) {
-    		return aString;
-    	}
+        if (pos == -1) {
+            return aString;
+        }
 
-    	while (pos != -1) {
-    		buf[pos] = ' ';
-    		pos = XMLUtils.checkForNonXmlCharacters(buf, pos, buf.length - pos, false);
-    	}
-    	return String.valueOf(buf);
+        while (pos != -1) {
+            buf[pos] = ' ';
+            pos = XMLUtils.checkForNonXmlCharacters(buf, pos, buf.length - pos, false);
+        }
+        return String.valueOf(buf);
     }
 }

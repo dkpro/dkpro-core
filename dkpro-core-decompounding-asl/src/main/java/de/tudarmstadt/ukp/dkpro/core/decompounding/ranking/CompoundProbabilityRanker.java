@@ -31,16 +31,16 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.Finder;
  *
  */
 public class CompoundProbabilityRanker
-	extends AbstractRanker
-	implements RankerList
+    extends AbstractRanker
+    implements RankerList
 {
-	/**
-	 * Empty constructor
-	 *
-	 * Use {@link #setFinder(Finder)} before using this class
-	 */
-	public CompoundProbabilityRanker() {
-	}
+    /**
+     * Empty constructor
+     *
+     * Use {@link #setFinder(Finder)} before using this class
+     */
+    public CompoundProbabilityRanker() {
+    }
 
     /**
      * Constructor
@@ -48,77 +48,78 @@ public class CompoundProbabilityRanker
      * @param aFinder
      *            a finder.
      */
-	public CompoundProbabilityRanker(Finder aFinder)
-	{
-		super(aFinder);
-	}
+    public CompoundProbabilityRanker(Finder aFinder)
+    {
+        super(aFinder);
+    }
 
-	@Override
-	public DecompoundedWord highestRank(List<DecompoundedWord> aSplits)
-	{
-		return rank(aSplits).get(0);
-	}
+    @Override
+    public DecompoundedWord highestRank(List<DecompoundedWord> aSplits)
+    {
+        return rank(aSplits).get(0);
+    }
 
-	@Override
-	public List<DecompoundedWord> rank(List<DecompoundedWord> aSplits)
-	{
-		for (DecompoundedWord split : aSplits) {
-			split.setWeight(calcRank(split));
-		}
+    @Override
+    public List<DecompoundedWord> rank(List<DecompoundedWord> aSplits)
+    {
+        for (DecompoundedWord split : aSplits) {
+            split.setWeight(calcRank(split));
+        }
 
-		List<DecompoundedWord> result = filterAndSort(aSplits);
-		Collections.sort(result, Collections.reverseOrder());
+        List<DecompoundedWord> result = filterAndSort(aSplits);
+        Collections.sort(result, Collections.reverseOrder());
 
-		return result;
-	}
+        return result;
+    }
 
-	/**
-	 * Calculates the weight for a split
-	 */
-	private float calcRank(DecompoundedWord aSplit)
-	{
-		float result = 0;
+    /**
+     * Calculates the weight for a split
+     */
+    private float calcRank(DecompoundedWord aSplit)
+    {
+        float result = 0;
 
-		for (Fragment elem : aSplit.getSplits()) {
-			result += -1 * Math.log(freq(elem).doubleValue() / getFinder().getUnigramCount().doubleValue());
-		}
+        for (Fragment elem : aSplit.getSplits()) {
+            result += -1 * Math
+                    .log(freq(elem).doubleValue() / getFinder().getUnigramCount().doubleValue());
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	/**
-	 * Searches a a path throw the tree
-	 */
-	@Override
+    /**
+     * Searches a a path throw the tree
+     */
+    @Override
     public DecompoundedWord highestRank(ValueNode<DecompoundedWord> aParent,
             List<DecompoundedWord> aPath)
-	{
-		if (aPath != null) {
-			aPath.add(aParent.getValue());
-		}
+    {
+        if (aPath != null) {
+            aPath.add(aParent.getValue());
+        }
 
-		List<DecompoundedWord> children = aParent.getChildrenValues();
-		if (children.size() == 0) {
-			return aParent.getValue();
-		}
+        List<DecompoundedWord> children = aParent.getChildrenValues();
+        if (children.size() == 0) {
+            return aParent.getValue();
+        }
 
-		children.add(aParent.getValue());
-		List<DecompoundedWord> result = rank(children);
-		DecompoundedWord best = result.get(0);
+        children.add(aParent.getValue());
+        List<DecompoundedWord> result = rank(children);
+        DecompoundedWord best = result.get(0);
 
-		if (best.equals(aParent.getValue())) {
-			// None of the children get a better score than the parent
-			return aParent.getValue();
-		}
-		else {
-			// Find the child node that ranked best and recurse
-			for (ValueNode<DecompoundedWord> split : aParent.getChildren()) {
-				if (best.equals(split.getValue())) {
-					return highestRank(split, aPath);
-				}
-			}
-		}
+        if (best.equals(aParent.getValue())) {
+            // None of the children get a better score than the parent
+            return aParent.getValue();
+        }
+        else {
+            // Find the child node that ranked best and recurse
+            for (ValueNode<DecompoundedWord> split : aParent.getChildren()) {
+                if (best.equals(split.getValue())) {
+                    return highestRank(split, aPath);
+                }
+            }
+        }
 
-		return null;
-	}
+        return null;
+    }
 }

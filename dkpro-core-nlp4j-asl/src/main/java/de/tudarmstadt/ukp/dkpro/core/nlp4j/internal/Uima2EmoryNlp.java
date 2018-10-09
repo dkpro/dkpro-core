@@ -26,14 +26,14 @@ public class Uima2EmoryNlp
 {
     public static NLPNode[] convertSentence(List<Token> aTokens)
     {
-        NLPNode[] nodes = new NLPNode[aTokens.size()+1];
+        NLPNode[] nodes = new NLPNode[aTokens.size() + 1];
         
         nodes[0] = new NLPNode();
         nodes[0].toRoot();
         
         int i = 1;
         for (Token t : aTokens) {
-            nodes[i] = new NLPNode(i, t.getCoveredText());
+            nodes[i] = new NLPNode(i, t.getText());
             nodes[i].setStartOffset(t.getBegin());
             nodes[i].setEndOffset(t.getEnd());
             

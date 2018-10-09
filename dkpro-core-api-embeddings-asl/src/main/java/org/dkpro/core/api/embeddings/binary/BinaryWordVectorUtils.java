@@ -15,23 +15,27 @@
  */
 package org.dkpro.core.api.embeddings.binary;
 
-import org.dkpro.core.api.embeddings.VectorizerUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.io.*;
+import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.util.Locale;
 import java.util.Map;
 
-import static org.dkpro.core.api.embeddings.binary.BinaryVectorizer.Header;
+import org.dkpro.core.api.embeddings.VectorizerUtils;
+import org.dkpro.core.api.embeddings.binary.BinaryVectorizer.Header;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Utility Methods for working with binary dl4j word vector files.
  * <p>
- * The core of this code has been written in the context of <a href="https://deeplearning4j.org/">dl4j</a>,
- * but provides a generic solution to efficiently storing and reading word embeddings with a memory-mapped file.
+ * The core of this code has been written in the context of
+ * <a href="https://deeplearning4j.org/">dl4j</a>, but provides a generic solution to efficiently
+ * storing and reading word embeddings with a memory-mapped file.
  *
  * @author Paul Dubs
  * @author Richard Eckart de Castilho
@@ -128,5 +132,4 @@ public class BinaryWordVectorUtils
         header.setLocale(aLocale.toString());
         return header;
     }
-
 }

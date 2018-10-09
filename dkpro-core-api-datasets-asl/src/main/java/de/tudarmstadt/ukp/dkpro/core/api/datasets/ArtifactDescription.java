@@ -25,10 +25,10 @@ public interface ArtifactDescription
      * @return artifact name/ID
      */
     String getName();
-    
+
     /**
-     * Instead of downloading the artifact, create a file with the given text as content. If text
-     * is set, all other settings are ignored.
+     * Instead of downloading the artifact, create a file with the given text as content. If text is
+     * set, all other settings are ignored.
      * 
      * @return text content.
      */
@@ -43,7 +43,7 @@ public interface ArtifactDescription
      * @return SHA1 hash of the artifact.
      */
     String getSha1();
-    
+
     /**
      * Whether this artifact is shared between multiple datasets. If this flag is enabled, the
      * artifact may be stored in a special location within the cache, i.e. not under the dataset

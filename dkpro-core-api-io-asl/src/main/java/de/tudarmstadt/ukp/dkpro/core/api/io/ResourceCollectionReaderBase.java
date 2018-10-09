@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
@@ -50,6 +50,9 @@ import org.springframework.util.AntPathMatcher;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.Parameters;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Base class for collection readers that plan to access resources on the file system or in the
@@ -74,6 +77,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  * 
  * @since 1.0.6
  */
+@Component(value = OperationType.READER)
+@Parameters(
+        exclude = { 
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
+                ResourceCollectionReaderBase.PARAM_INCLUDE_HIDDEN,
+                ResourceCollectionReaderBase.PARAM_USE_DEFAULT_EXCLUDES,
+                ResourceCollectionReaderBase.PARAM_LOG_FREQ })
 public abstract class ResourceCollectionReaderBase
     extends CasCollectionReader_ImplBase
 {
@@ -137,7 +147,7 @@ public abstract class ResourceCollectionReaderBase
     private final ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
     /**
-     * The frequency with which read documents are logged. Default: 1 (log every document).
+     * The frequency with which read documents are logged.
      * <p>
      * Set to 0 or negative values to deactivate logging.
      */
@@ -180,8 +190,9 @@ public abstract class ResourceCollectionReaderBase
                     // If there is a separator before the asterisk use it to separate into
                     // base and pattern. This is meant to catch cases such as "dir/foo*.txt" of
                     // file:foo*.txt
-                    patterns = new String[] { INCLUDE_PREFIX + sourceLocation.substring(separator+1) };
-                    sourceLocation = sourceLocation.substring(0, separator+1);
+                    patterns = new String[] {
+                            INCLUDE_PREFIX + sourceLocation.substring(separator + 1) };
+                    sourceLocation = sourceLocation.substring(0, separator + 1);
                 }
                 else {
                     patterns = new String[] { INCLUDE_PREFIX + sourceLocation };
@@ -408,7 +419,7 @@ public abstract class ResourceCollectionReaderBase
         boolean singleLocation = isSingleLocation();
         String base = getBase(aBase);
 
-        getLogger().info("Scanning [" +base + "]");
+        getLogger().info("Scanning [" + base + "]");
         
         Collection<String> includes;
         Collection<String> excludes;

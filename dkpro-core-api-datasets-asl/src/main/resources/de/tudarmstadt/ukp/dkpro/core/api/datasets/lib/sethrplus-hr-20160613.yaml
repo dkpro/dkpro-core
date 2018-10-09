@@ -28,7 +28,7 @@ licenses:
 artifacts:
   LICENSE-CC-BY.txt:
     url: "https://creativecommons.org/licenses/by/4.0/legalcode.txt"
-    sha1: 1167f0e28fe2db01e38e883aaf1e749fb09f9ceb
+    sha1: 563e2664fed2ce3e65bd1dd396422f46c5db9040
   LICENSE-CC-BY-NC-SA.txt:
     url: "https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.txt"
     sha1: 5d572362228001e9dbc0c8802f49121ceb78ace2

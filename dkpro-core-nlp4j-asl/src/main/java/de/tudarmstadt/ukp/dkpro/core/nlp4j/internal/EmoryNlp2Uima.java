@@ -38,7 +38,7 @@ import edu.emory.mathcs.nlp.component.template.node.NLPNode;
 public class EmoryNlp2Uima
 {
     public static void convertPos(CAS aCas, List<Token> aTokens, NLPNode[] aNodes,
-            MappingProvider aMappingProvider, boolean internStrings)
+            MappingProvider aMappingProvider)
     {
         // EmoryNLP tokens start at 1
         int i = 1;
@@ -50,7 +50,7 @@ public class EmoryNlp2Uima
             Type posTag = aMappingProvider.getTagType(tag);
             POS posAnno = (POS) aCas.createAnnotation(posTag, t.getBegin(), t.getEnd());
             // To save memory, we typically intern() tag strings
-            posAnno.setPosValue(internStrings ? tag.intern() : tag);
+            posAnno.setPosValue(tag != null ? tag.intern() : null);
             POSUtils.assignCoarseValue(posAnno);
             posAnno.addToIndexes();
             
@@ -61,7 +61,7 @@ public class EmoryNlp2Uima
     }
 
     public static void convertDependencies(JCas aJCas, List<Token> aTokens, NLPNode[] aNodes,
-            MappingProvider aMappingProvider, boolean aInternTags)
+            MappingProvider aMappingProvider)
     {
         for (int i = 1; i < aNodes.length; i++) {
             NLPNode depNode = aNodes[i];
@@ -74,7 +74,7 @@ public class EmoryNlp2Uima
             if (govNode.getID() != 0) {
                 Type depRel = aMappingProvider.getTagType(label);
                 Dependency dep = (Dependency) aJCas.getCas().createFS(depRel);
-                dep.setDependencyType(aInternTags ? label.intern() : label);
+                dep.setDependencyType(label != null ? label.intern() : null);
                 dep.setDependent(aTokens.get(depNode.getID() - 1));
                 dep.setGovernor(aTokens.get(govNode.getID() - 1));
                 dep.setBegin(dep.getDependent().getBegin());
@@ -96,18 +96,17 @@ public class EmoryNlp2Uima
     }
 
     public static void convertNamedEntities(CAS aCas, List<Token> aTokens, NLPNode[] aNodes,
-            MappingProvider aMappingProvider, boolean aInternTags)
+            MappingProvider aMappingProvider)
     {
         Type neType = aCas.getTypeSystem().getType(NamedEntity.class.getName());
         Feature valueFeat = neType.getFeatureByBaseName("value");
 
-        String[] neTags = new String[aNodes.length-1];
+        String[] neTags = new String[aNodes.length - 1];
         for (int i = 1; i < aNodes.length; i++) {
-            neTags[i-1] = aNodes[i].getNamedEntityTag();
+            neTags[i - 1] = aNodes[i].getNamedEntityTag();
         }
         
         BilouDecoder decoder = new BilouDecoder(aCas, valueFeat, aMappingProvider);
-        decoder.setInternTags(aInternTags);
         decoder.decode(aTokens, neTags);
     }
 }

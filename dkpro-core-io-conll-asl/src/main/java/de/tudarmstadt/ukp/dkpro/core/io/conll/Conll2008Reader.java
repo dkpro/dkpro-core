@@ -59,6 +59,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reads a file in the CoNLL-2008 format.
@@ -68,7 +69,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
  * @see <a href="http://www.aclweb.org/anthology/W08-2121">The CoNLL-2008 Shared Task on
  *      Joint Parsing of Syntactic and Semantic Dependencies</a>
  */
-@ResourceMetaData(name="CoNLL 2008 Reader")
+@ResourceMetaData(name = "CoNLL 2008 Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2008})
 @TypeCapability(
         outputs = { 
@@ -84,10 +86,17 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.ROOT;
 public class Conll2008Reader
     extends JCasResourceCollectionReader_ImplBase
 {
+    /**
+     * Character encoding of the input data.
+     */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String sourceEncoding;
 
+    /**
+     * Read part-of-speech information.
+     */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
     private boolean readPos;
@@ -105,19 +114,30 @@ public class Conll2008Reader
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
      * the mapping automatically.
      */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    public static final String PARAM_POS_MAPPING_LOCATION = 
+            ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
     
+    /**
+     * Read lemma information.
+     */
     public static final String PARAM_READ_LEMMA = ComponentParameters.PARAM_READ_LEMMA;
     @ConfigurationParameter(name = PARAM_READ_LEMMA, mandatory = true, defaultValue = "true")
     private boolean readLemma;
 
+    /**
+     * Read syntactic dependency information.
+     */
     public static final String PARAM_READ_DEPENDENCY = ComponentParameters.PARAM_READ_DEPENDENCY;
     @ConfigurationParameter(name = PARAM_READ_DEPENDENCY, mandatory = true, defaultValue = "true")
     private boolean readDependency;
 
-    public static final String PARAM_READ_SEMANTIC_PREDICATE = "readSemanticPredicate";
+    /**
+     * Read semantic predicate information.
+     */
+    public static final String PARAM_READ_SEMANTIC_PREDICATE = 
+            ComponentParameters.PARAM_READ_SEMANTIC_PREDICATE;
     @ConfigurationParameter(name = PARAM_READ_SEMANTIC_PREDICATE, mandatory = true, defaultValue = "true")
     private boolean readSemanticPredicate;
 
@@ -170,10 +190,10 @@ public class Conll2008Reader
         throws IOException
     {
         if (readPos) {
-            try{
+            try {
                 posMappingProvider.configure(aJCas.getCas());
             }
-            catch(AnalysisEngineProcessException e){
+            catch (AnalysisEngineProcessException e) {
                 throw new IOException(e);
             }
         }
@@ -217,7 +237,7 @@ public class Conll2008Reader
                     Type posTag = posMappingProvider.getTagType(word[GPOS]);
                     POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
-                    pos.setPosValue(word[GPOS].intern());
+                    pos.setPosValue(word[GPOS] != null ? word[GPOS].intern() : null);
                     POSUtils.assignCoarseValue(pos);
                     pos.addToIndexes();
                     token.setPos(pos);
@@ -271,13 +291,13 @@ public class Conll2008Reader
                 for (int p = 0; p < preds.size(); p++) {
                     List<SemArgLink> args = new ArrayList<>();
                     for (String[] word : words) {
-                        if (!UNUSED.equals(word[APRED+p])) {
+                        if (!UNUSED.equals(word[APRED + p])) {
                             Token token = tokens.get(Integer.valueOf(word[ID]));
                             SemArg arg = new SemArg(aJCas, token.getBegin(), token.getEnd());
                             arg.addToIndexes();
                             
                             SemArgLink link = new SemArgLink(aJCas);
-                            link.setRole(word[APRED+p]);
+                            link.setRole(word[APRED + p]);
                             link.setTarget(arg);
                             args.add(link);
                         }

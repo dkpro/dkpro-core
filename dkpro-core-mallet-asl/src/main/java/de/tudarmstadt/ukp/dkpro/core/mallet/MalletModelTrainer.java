@@ -17,6 +17,15 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.mallet;
 
+import java.io.IOException;
+import java.util.Locale;
+
+import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
+
 import cc.mallet.pipe.TokenSequence2FeatureSequence;
 import cc.mallet.types.Instance;
 import cc.mallet.types.InstanceList;
@@ -29,21 +38,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.mallet.lda.MalletLdaTopicModelTrainer;
 import de.tudarmstadt.ukp.dkpro.core.mallet.wordembeddings.MalletEmbeddingsTrainer;
-import org.apache.uima.UimaContext;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ResourceInitializationException;
-
-import java.io.IOException;
-import java.util.Locale;
 
 /**
  * This abstract class defines parameters and methods that are common for Mallet model estimators.
  * <p>
  * It creates a Mallet {@link InstanceList} from the input documents so that inheriting estimators
- * can create a model, typically implemented by overriding the {@link JCasFileWriter_ImplBase#collectionProcessComplete()}
- * method.
+ * can create a model, typically implemented by overriding the
+ * {@link JCasFileWriter_ImplBase#collectionProcessComplete()} method.
  *
  * @see MalletEmbeddingsTrainer
  * @see MalletLdaTopicModelTrainer
@@ -56,28 +57,29 @@ public abstract class MalletModelTrainer
     private static final Locale LOCALE = Locale.US;
 
     /**
-     * The annotation type to use as input tokens for the model estimation.
-     * Default: {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token}.
-     * For lemmas, for instance, use {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value}
+     * The annotation type to use as input tokens for the model estimation. For lemmas,
+     * use {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token/lemma/value}
      */
     public static final String PARAM_TOKEN_FEATURE_PATH = "tokenFeaturePath";
-    @ConfigurationParameter(name = PARAM_TOKEN_FEATURE_PATH, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
+    @ConfigurationParameter(name = PARAM_TOKEN_FEATURE_PATH, mandatory = true, 
+            defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
     private String tokenFeaturePath;
 
     /**
-     * The number of threads to use during model estimation.
-     * If not set, the number of threads is automatically set by {@link ComponentParameters#computeNumThreads(int)}.
+     * The number of threads to use during model estimation. If not set, the number of threads is
+     * automatically set by {@link ComponentParameters#computeNumThreads(int)}.
      * <p>
-     * Warning: do not set this to more than 1 when using very small (test) data sets on {@link MalletEmbeddingsTrainer}!
-     * This might prevent the process from terminating.
+     * Warning: do not set this to more than 1 when using very small (test) data sets on
+     * {@link MalletEmbeddingsTrainer}! This might prevent the process from terminating.
      */
     public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
-    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, defaultValue = ComponentParameters.AUTO_NUM_THREADS)
+    @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, 
+            defaultValue = ComponentParameters.AUTO_NUM_THREADS)
     private int numThreads;
 
     /**
-     * Ignore tokens (or any other annotation type, as specified by {@link #PARAM_TOKEN_FEATURE_PATH})
-     * that are shorter than the given value. Default: 3.
+     * Ignore tokens (or any other annotation type, as specified by
+     * {@link #PARAM_TOKEN_FEATURE_PATH}) that are shorter than the given value.
      */
     public static final String PARAM_MIN_TOKEN_LENGTH = "minTokenLength";
     @ConfigurationParameter(name = PARAM_MIN_TOKEN_LENGTH, mandatory = true, defaultValue = "3")
@@ -126,12 +128,15 @@ public abstract class MalletModelTrainer
     private String stopwordsReplacement;
 
     /**
-     * Filter out all tokens matching that regular expression.
+     * Regular expression of tokens to be filtered.
      */
     public static final String PARAM_FILTER_REGEX = "filterRegex";
     @ConfigurationParameter(name = PARAM_FILTER_REGEX, mandatory = true, defaultValue = "")
     private String filterRegex;
 
+    /**
+     * Value with which tokens matching the regular expression are replaced.
+     */
     public static final String PARAM_FILTER_REGEX_REPLACEMENT = "filterRegexReplacement";
     @ConfigurationParameter(name = PARAM_FILTER_REGEX_REPLACEMENT, mandatory = true, defaultValue = "")
     private String filterRegexReplacement;
@@ -149,7 +154,8 @@ public abstract class MalletModelTrainer
                     new IllegalArgumentException("No target location set!"));
         }
 
-        // locale should be set to US to define the output format of the Mallet models (especially decimal numbers).
+        // locale should be set to US to define the output format of the Mallet models (especially
+        // decimal numbers).
         Locale.setDefault(LOCALE);
 
         numThreads = ComponentParameters.computeNumThreads(numThreads);

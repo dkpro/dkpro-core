@@ -37,11 +37,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
+import de.tudarmstadt.ukp.dkpro.core.io.pdf.internal.Pdf2CasConverter;
+import de.tudarmstadt.ukp.dkpro.core.io.pdf.internal.SubstitutionTrieParser;
+import de.tudarmstadt.ukp.dkpro.core.io.pdf.internal.Trie;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Collection reader for PDF files. Uses simple heuristics to detect headings and paragraphs.
  */
-@ResourceMetaData(name="PDFBox PDF Reader")
+@ResourceMetaData(name = "PDFBox PDF Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_PDF})
 @TypeCapability(
         outputs = { 
@@ -59,7 +64,8 @@ public class PdfReader
      * e.g. to convert ligatures to separate characters.
      */
     public static final String PARAM_SUBSTITUTION_TABLE_LOCATION = "substitutionTableLocation";
-    @ConfigurationParameter(name = PARAM_SUBSTITUTION_TABLE_LOCATION, mandatory = false, defaultValue = BUILT_IN)
+    @ConfigurationParameter(name = PARAM_SUBSTITUTION_TABLE_LOCATION, mandatory = false, 
+            defaultValue = BUILT_IN)
     private String substitutionTableLocation;
 
     /**
@@ -80,7 +86,8 @@ public class PdfReader
      * The first page to be extracted from the PDF.
      */
     public static final String PARAM_START_PAGE = "startPage";
-    @ConfigurationParameter(name = PARAM_START_PAGE, mandatory = false, defaultValue = NOT_RESTRICTED)
+    @ConfigurationParameter(name = PARAM_START_PAGE, mandatory = false, 
+            defaultValue = NOT_RESTRICTED)
     private int startPage;
 
     /**

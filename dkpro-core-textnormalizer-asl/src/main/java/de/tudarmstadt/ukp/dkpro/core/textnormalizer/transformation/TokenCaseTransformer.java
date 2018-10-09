@@ -29,13 +29,18 @@ import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_ImplBase;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Change tokens to follow a specific casing: all upper case, all lower case, or 'normal case':
  * lowercase everything but the first character of a token and the characters immediately following
  * a hyphen.
  */
-@ResourceMetaData(name="Token Case Transformer")
+@Component(OperationType.NORMALIZER)
+@ResourceMetaData(name = "Token Case Transformer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class TokenCaseTransformer
     extends JCasTransformerChangeBased_ImplBase
 {
@@ -51,7 +56,8 @@ public class TokenCaseTransformer
      * <ul>
      * <li>UPPERCASE: uppercase everything.</li>
      * <li>LOWERCASE: lowercase everything.</li>
-     * <li>NORMALCASE: retain first letter in word and after hyphens, lowercase everything else.</li>
+     * <li>NORMALCASE: retain first letter in word and after hyphens, lowercase everything
+     * else.</li>
      * </ul>
      */
     public static final String PARAM_CASE = "tokenCase";

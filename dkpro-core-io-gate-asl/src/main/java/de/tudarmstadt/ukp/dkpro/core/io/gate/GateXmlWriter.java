@@ -32,12 +32,18 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.io.gate.internal.DKPro2Gate;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import gate.DocumentExporter;
 import gate.corpora.DocumentImpl;
 import gate.corpora.export.GateXMLExporter;
 import gate.util.GateException;
 
-@ResourceMetaData(name="GATE XML Writer")
+/**
+ * Writer for the GATE XML format. This writer uses an explicit mapping from DKPro Core types
+ * to typical GATE naming convensions.
+ */
+@ResourceMetaData(name = "GATE XML Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_GATE_XML})
 @TypeCapability(
         inputs = {
@@ -49,7 +55,8 @@ public class GateXmlWriter
      * Specify the suffix of output files. Default value <code>.xml</code>. If the suffix is not
      * needed, provide an empty string as value.
      */
-    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xml")
     private String filenameSuffix;
 
@@ -64,7 +71,8 @@ public class GateXmlWriter
      * Character encoding used by the output files.
      */
     public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
-    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
 
     private DocumentExporter exporter;

@@ -22,10 +22,10 @@ licenses:
 
 artifacts:
   LICENSE_NDT.txt:
-    url: http://www.nb.no/sbfil/dok/LICENSE_NDT.txt
+    url: https://www.nb.no/sbfil/dok/LICENSE_NDT.txt
     sha1: a2f433206f421c0d630b3bec5fad01334673b765
   20140328_NDT_1-01.tar.gz:
-    url: http://www.nb.no/sbfil/tekst/20140328_NDT_1-01.tar.gz
+    url: https://www.nb.no/sbfil/tekst/20140328_NDT_1-01.tar.gz
     sha1: 97935c225f98119aa94d53f37aa64762cba332f3
     shared: true
     actions:

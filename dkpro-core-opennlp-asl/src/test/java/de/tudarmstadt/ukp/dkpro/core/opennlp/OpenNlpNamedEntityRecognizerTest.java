@@ -17,7 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.*;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -25,6 +25,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssumeResource;
@@ -52,7 +53,7 @@ public class OpenNlpNamedEntityRecognizerTest
     }
 // end::test[]
     
-    @Test(expected=AnalysisEngineProcessException.class)
+    @Test(expected = AnalysisEngineProcessException.class)
     public void testExceptionWithWrongMappingFileLocation()
         throws Exception
     {

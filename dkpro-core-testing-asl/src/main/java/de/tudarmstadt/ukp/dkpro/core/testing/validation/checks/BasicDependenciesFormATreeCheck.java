@@ -112,8 +112,8 @@ public class BasicDependenciesFormATreeCheck
     
     private List<Dependency> selectCoveredBasic(AnnotationFS aAnnotation)
     {
-        return selectCovered(Dependency.class, aAnnotation).stream().filter(
-                dep -> DependencyFlavor.BASIC.equals(dep.getFlavor()) || dep.getFlavor() == null)
+        return selectCovered(Dependency.class, aAnnotation).stream().filter(dep -> 
+                DependencyFlavor.BASIC.equals(dep.getFlavor()) || dep.getFlavor() == null)
                 .collect(Collectors.toList());
     }
 }

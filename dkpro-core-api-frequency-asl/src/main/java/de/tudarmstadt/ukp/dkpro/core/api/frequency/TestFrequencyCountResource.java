@@ -32,26 +32,26 @@ import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.TestFrequencyCountPr
  *
  */
 public final class TestFrequencyCountResource
-	extends FrequencyCountResourceBase
-	implements FrequencyCountProvider
+    extends FrequencyCountResourceBase
+    implements FrequencyCountProvider
 {
 
     @Override
-	public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
-		throws ResourceInitializationException
-	{
-		if (!super.initialize(aSpecifier, aAdditionalParams)) {
-			return false;
-		}
-		initializeProvider();
-		return true;
-	}
-
-    @Override
-    protected void initializeProvider()
+    public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
         throws ResourceInitializationException
     {
+        if (!super.initialize(aSpecifier, aAdditionalParams)) {
+            return false;
+        }
+        initializeProvider();
+        return true;
+    }
+
+    @Override
+    protected void initializeProvider() throws ResourceInitializationException
+    {
         provider = new TestFrequencyCountProvider();
-        ((FrequencyCountProviderBase) provider).setScaleDownFactor(Integer.parseInt(this.scaleDownFactor));
+        ((FrequencyCountProviderBase) provider)
+                .setScaleDownFactor(Integer.parseInt(this.scaleDownFactor));
     }
 }

@@ -26,10 +26,10 @@ import org.apache.uima.fit.descriptor.LanguageCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.tcas.Annotation;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.Messages;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import net.java.sen.SenFactory;
 import net.java.sen.StringTagger;
 import net.java.sen.dictionary.Token;
@@ -37,7 +37,8 @@ import net.java.sen.dictionary.Token;
 /**
  * Segmenter for Japanese text based on GoSen.
  */
-@ResourceMetaData(name="Gosen Segmenter")
+@ResourceMetaData(name = "Gosen Segmenter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability("ja")
 @TypeCapability(
         outputs = { 
@@ -68,13 +69,14 @@ public class GosenSegmenter
         
         int sentenceBegin = -1;
         for (Token t : tokens) {
-            Annotation ut = createToken(aJCas, t.getStart() + zoneBegin, t.end() + zoneBegin);
+            de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token ut = createToken(aJCas,
+                    t.getStart() + zoneBegin, t.end() + zoneBegin);
             if (sentenceBegin == -1) {
                 sentenceBegin = ut.getBegin();
             }
             
             // End of sentence?
-            if ("。".equals(ut.getCoveredText())) {
+            if ("。".equals(ut.getText())) {
                 createSentence(aJCas, sentenceBegin, ut.getEnd());
                 sentenceBegin = -1;
             }

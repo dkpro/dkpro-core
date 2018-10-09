@@ -26,8 +26,10 @@ public class TigerFrameElement
 {
     @XmlAttribute
     public String id;
+
     @XmlAttribute
     public String name;
+    
     @XmlElement(name = "fenode")
     public List<TigerFeNode> fenodes;
 }

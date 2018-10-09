@@ -18,7 +18,9 @@
 package de.tudarmstadt.ukp.dkpro.core.io.conll;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
-import static org.apache.uima.fit.util.JCasUtil.*;
+import static org.apache.uima.fit.util.JCasUtil.indexCovered;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -49,6 +51,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemArgLink;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemPred;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Writes a file in the CoNLL-2009 format.
@@ -60,7 +63,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor
  * @see <a href="http://www.aclweb.org/anthology/W08-2121.pdf">The CoNLL-2008 Shared Task on Joint
  *      Parsing of Syntactic and Semantic Dependencies</a>
  */
-@ResourceMetaData(name="CoNLL 2009 Writer")
+@ResourceMetaData(name = "CoNLL 2009 Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2009})
 @TypeCapability(
         inputs = { 
@@ -83,32 +87,61 @@ public class Conll2009Writer
      * Character encoding of the output data.
      */
     public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
-    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
 
-    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
+    /**
+     * Use this filename extension.
+     */
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".conll")
     private String filenameSuffix;
 
+    /**
+     * Write part-of-speech information.
+     */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
     @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
     private boolean writePos;
 
-    public static final String PARAM_WRITE_MORPH = "writeMorph";
+    /**
+     * Read morphological features.
+     */
+    public static final String PARAM_WRITE_MORPH = ComponentParameters.PARAM_WRITE_MORPH;
     @ConfigurationParameter(name = PARAM_WRITE_MORPH, mandatory = true, defaultValue = "true")
     private boolean writeMorph;
 
+    /**
+     * Write lemma information.
+     */
     public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
     @ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = true, defaultValue = "true")
     private boolean writeLemma;
 
+    /**
+     * Write syntactic dependency information.
+     */
     public static final String PARAM_WRITE_DEPENDENCY = ComponentParameters.PARAM_WRITE_DEPENDENCY;
     @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")
     private boolean writeDependency;
 
-    public static final String PARAM_WRITE_SEMANTIC_PREDICATE = "writeSemanticPredicate";
+    /**
+     * Write semantic predicate information.
+     */
+    public static final String PARAM_WRITE_SEMANTIC_PREDICATE = 
+            ComponentParameters.PARAM_WRITE_SEMANTIC_PREDICATE;
     @ConfigurationParameter(name = PARAM_WRITE_SEMANTIC_PREDICATE, mandatory = true, defaultValue = "true")
     private boolean writeSemanticPredicate;
+    
+    /**
+     * Write text covered by the token instead of the token form.
+     */
+    public static final String PARAM_WRITE_COVERED_TEXT = 
+            ComponentParameters.PARAM_WRITE_COVERED_TEXT;
+    @ConfigurationParameter(name = PARAM_WRITE_COVERED_TEXT, mandatory = true, defaultValue = "true")
+    private boolean writeCovered;
 
     @Override
     public void process(JCas aJCas)
@@ -147,7 +180,7 @@ public class Conll2009Writer
             
             for (int i = 0; i < tokens.size(); i++) {
                 Row row = new Row();
-                row.id = i+1;
+                row.id = i + 1;
                 row.token = tokens.get(i);
                 row.args = new SemArgLink[preds.size()];
                 if (useFeats) {
@@ -165,13 +198,19 @@ public class Conll2009Writer
 
             // Dependencies
             List<Dependency> basicDeps = selectCovered(Dependency.class, sentence).stream()
-                    .filter(dep -> dep.getFlavor() == null || DependencyFlavor.BASIC.equals(dep.getFlavor()))
+                    .filter(dep -> dep.getFlavor() == null || 
+                            DependencyFlavor.BASIC.equals(dep.getFlavor()))
                     .collect(Collectors.toList());
             for (Dependency rel : basicDeps) {
                 Row row =  ctokens.get(rel.getDependent());
                 if (row.deprel != null) {
+                    String form = row.token.getCoveredText();
+                    if (!writeCovered) {
+                        form = row.token.getText();
+                    }
+                    
                     throw new IllegalStateException("Illegal basic dependency structure - token ["
-                            + row.token.getCoveredText()
+                            + form
                             + "] is dependent of more than one dependency.");
                 }
                 row.deprel = rel;
@@ -193,6 +232,9 @@ public class Conll2009Writer
                 int id = row.id;
                 
                 String form = row.token.getCoveredText();
+                if (!writeCovered) {
+                    form = row.token.getText();
+                }
                 
                 String lemma = UNUSED;
                 if (writeLemma && (row.token.getLemma() != null)) {
@@ -249,9 +291,9 @@ public class Conll2009Writer
                     }
                 }
 
-                aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", id, form,
-                        lemma, plemma, pos, ppos, feat, pfeat, head, phead, deprel, pdeprel, fillpred,
-                        pred, apreds);
+                aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", id,
+                        form, lemma, plemma, pos, ppos, feat, pfeat, head, phead, deprel, pdeprel,
+                        fillpred, pred, apreds);
             }
 
             aOut.println();

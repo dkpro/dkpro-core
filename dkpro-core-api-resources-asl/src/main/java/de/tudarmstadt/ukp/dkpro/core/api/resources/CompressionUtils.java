@@ -17,8 +17,10 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod.BZIP2;
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod.GZIP;
+import static de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod.XZ;
 import static org.apache.commons.io.FileUtils.forceMkdir;
-import static de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -72,52 +74,53 @@ public class CompressionUtils
     public static InputStream getInputStream(String aLocation, InputStream aStream)
         throws IOException
     {
-		String lcLocation = aLocation.toLowerCase();
-		if (lcLocation.endsWith(GZIP.getExtension())) {
-			return new GZIPInputStream(aStream);
-		}
-		else if (lcLocation.endsWith(BZIP2.getExtension()) || lcLocation.endsWith(".bzip2")) {
-			return new BZip2CompressorInputStream(aStream);
-		}
-		else if (lcLocation.endsWith(XZ.getExtension())) {
-			return new XZCompressorInputStream(aStream);
-		}
-		else {
-			return aStream;
-		}
-	}
-	
-	/**
-	 * Make sure the target directory exists and get a stream writing to the specified file within.
-	 * If the file name ends with a typical extension for compressed files, the stream will be
-	 * compressed.
-	 * 
-	 * @param aFile
-	 *            the target file.
-	 * @return a stream to write to.
-     * @throws IOException if an I/O error has occurred,
-	 * @see CompressionMethod
-	 */
+        String lcLocation = aLocation.toLowerCase();
+        if (lcLocation.endsWith(GZIP.getExtension())) {
+            return new GZIPInputStream(aStream);
+        }
+        else if (lcLocation.endsWith(BZIP2.getExtension()) || lcLocation.endsWith(".bzip2")) {
+            return new BZip2CompressorInputStream(aStream);
+        }
+        else if (lcLocation.endsWith(XZ.getExtension())) {
+            return new XZCompressorInputStream(aStream);
+        }
+        else {
+            return aStream;
+        }
+    }
+
+    /**
+     * Make sure the target directory exists and get a stream writing to the specified file within.
+     * If the file name ends with a typical extension for compressed files, the stream will be
+     * compressed.
+     * 
+     * @param aFile
+     *            the target file.
+     * @return a stream to write to.
+     * @throws IOException
+     *             if an I/O error has occurred,
+     * @see CompressionMethod
+     */
     public static OutputStream getOutputStream(File aFile)
         throws IOException
     {
-		// Create parent folders for output file and set up stream
-		if (aFile.getParentFile() != null) {
-			forceMkdir(aFile.getParentFile());
-		}
-		
-		String lcFilename = aFile.getName().toLowerCase();
-		
-		OutputStream os = new FileOutputStream(aFile);
-		if (lcFilename.endsWith(GZIP.getExtension())) {
-			os = new GZIPOutputStream(os);
-		}
-		else if (lcFilename.endsWith(BZIP2.getExtension()) || lcFilename.endsWith(".bzip2")) {
-			os = new BZip2CompressorOutputStream(os);
-		}
-		else if (lcFilename.endsWith(XZ.getExtension())) {
-			os = new XZCompressorOutputStream(os);
-		}
-		return os;
+        // Create parent folders for output file and set up stream
+        if (aFile.getParentFile() != null) {
+            forceMkdir(aFile.getParentFile());
+        }
+
+        String lcFilename = aFile.getName().toLowerCase();
+
+        OutputStream os = new FileOutputStream(aFile);
+        if (lcFilename.endsWith(GZIP.getExtension())) {
+            os = new GZIPOutputStream(os);
+        }
+        else if (lcFilename.endsWith(BZIP2.getExtension()) || lcFilename.endsWith(".bzip2")) {
+            os = new BZip2CompressorOutputStream(os);
+        }
+        else if (lcFilename.endsWith(XZ.getExtension())) {
+            os = new XZCompressorOutputStream(os);
+        }
+        return os;
     }
 }

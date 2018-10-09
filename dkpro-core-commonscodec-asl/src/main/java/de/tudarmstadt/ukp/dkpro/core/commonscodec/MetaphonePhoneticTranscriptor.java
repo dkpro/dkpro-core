@@ -21,15 +21,17 @@ import org.apache.commons.codec.language.Metaphone;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 
+import eu.openminted.share.annotations.api.DocumentationResource;
+
 /**
  * Metaphone phonetic transcription based on Apache Commons Codec.
  * Works for English.
  */
-@ResourceMetaData(name="Commons Codec Metaphone Phonetic Transcriptor")
+@ResourceMetaData(name = "Commons Codec Metaphone Phonetic Transcriptor")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
-        inputs={"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
-        outputs={"de.tudarmstadt.ukp.dkpro.core.api.phonetics.type.PhoneticTranscription"})
-
+        inputs = {"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
+        outputs = {"de.tudarmstadt.ukp.dkpro.core.api.phonetics.type.PhoneticTranscription"})
 public class MetaphonePhoneticTranscriptor
     extends PhoneticTranscriptor_ImplBase
 {

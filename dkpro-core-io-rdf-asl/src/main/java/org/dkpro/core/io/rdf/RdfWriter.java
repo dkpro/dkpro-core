@@ -34,11 +34,13 @@ import org.dkpro.core.io.rdf.internal.Uima2Rdf;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Writes the CAS out as RDF.
  */
-@ResourceMetaData(name="UIMA CAS RDF Writer")
+@ResourceMetaData(name = "UIMA CAS RDF Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_UIMA_RDF})
 public class RdfWriter
     extends JCasFileWriter_ImplBase
@@ -49,7 +51,8 @@ public class RdfWriter
      * 
      * @see RDFLanguages
      */
-    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".ttl")
     private String filenameSuffix;
 

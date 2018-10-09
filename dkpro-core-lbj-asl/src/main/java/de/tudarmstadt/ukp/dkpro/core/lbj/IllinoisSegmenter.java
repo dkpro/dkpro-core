@@ -29,11 +29,13 @@ import edu.illinois.cs.cogcomp.core.datastructures.IntPair;
 import edu.illinois.cs.cogcomp.nlp.tokenizer.IllinoisTokenizer;
 import edu.illinois.cs.cogcomp.nlp.tokenizer.Tokenizer;
 import edu.illinois.cs.cogcomp.nlp.tokenizer.Tokenizer.Tokenization;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Illinois segmenter.
  */
-@ResourceMetaData(name="Illinois CCG Segmenter")
+@ResourceMetaData(name = "Illinois CCG Segmenter")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(outputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
@@ -64,7 +66,8 @@ public class IllinoisSegmenter
 
         int lastBegin = 0;
         for (int i : tokens.getSentenceEndTokenIndexes()) {
-            createSentence(aJCas, ts[lastBegin].getFirst() + zoneBegin, ts[i-1].getSecond() + zoneBegin);
+            createSentence(aJCas, ts[lastBegin].getFirst() + zoneBegin,
+                    ts[i - 1].getSecond() + zoneBegin);
             lastBegin = i;
         }
         

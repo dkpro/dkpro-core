@@ -17,11 +17,10 @@
  */
 package org.dkpro.core.api.embeddings.binary;
 
-import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
-import org.dkpro.core.api.embeddings.VectorizerUtils;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import static org.dkpro.core.api.embeddings.binary.BinaryWordVectorUtils.convertWordVectorsToBinary;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,10 +28,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.dkpro.core.api.embeddings.binary.BinaryWordVectorUtils.convertWordVectorsToBinary;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.dkpro.core.api.embeddings.VectorizerUtils;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class BinaryWordVectorUtilsTest
 {
@@ -126,5 +127,4 @@ public class BinaryWordVectorUtilsTest
         convertWordVectorsToBinary(vectors, binaryTarget);
         return binaryTarget;
     }
-
 }

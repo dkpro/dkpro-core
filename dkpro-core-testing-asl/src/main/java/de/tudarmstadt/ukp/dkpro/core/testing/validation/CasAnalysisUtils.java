@@ -65,7 +65,8 @@ public class CasAnalysisUtils
             aFSes.add(aFS);
 
             for (Feature f : aFS.getType().getFeatures()) {
-                if (!f.getRange().isPrimitive() && !CAS.FEATURE_BASE_NAME_SOFA.equals(f.getShortName())) {
+                if (!f.getRange().isPrimitive()
+                        && !CAS.FEATURE_BASE_NAME_SOFA.equals(f.getShortName())) {
                     collect(aFSes, aFS.getFeatureValue(f));
                 }
             }
@@ -101,9 +102,10 @@ public class CasAnalysisUtils
             }
 
             for (Feature f : aFS.getType().getFeatures()) {
-                if (!f.getRange().isPrimitive() && !CAS.FEATURE_BASE_NAME_SOFA.equals(f.getShortName())) {
-                    collect(aFSes, aIndexed, aFS.getFeatureValue(f), aIndexed.contains(aFS) ? aFS
-                            : aLastIndexed);
+                if (!f.getRange().isPrimitive()
+                        && !CAS.FEATURE_BASE_NAME_SOFA.equals(f.getShortName())) {
+                    collect(aFSes, aIndexed, aFS.getFeatureValue(f),
+                            aIndexed.contains(aFS) ? aFS : aLastIndexed);
                 }
             }
         }
@@ -133,8 +135,8 @@ public class CasAnalysisUtils
         LowLevelCAS llcas = aCas.getLowLevelCAS();
 
         Set<FeatureStructure> allIndexedFS = collectIndexed(aCas);
-        Map<FeatureStructure, FeatureStructure> allReachableFS = new TreeMap<>(
-                (fs1, fs2) -> llcas.ll_getFSRef(fs1) - llcas.ll_getFSRef(fs2));
+        Map<FeatureStructure, FeatureStructure> allReachableFS = new TreeMap<>((fs1, fs2) -> 
+                llcas.ll_getFSRef(fs1) - llcas.ll_getFSRef(fs2));
         
         FSIterator<FeatureStructure> i = aCas.getIndexRepository().getAllIndexedFS(
                 aCas.getTypeSystem().getTopType());
@@ -142,8 +144,8 @@ public class CasAnalysisUtils
         i.forEachRemaining(fs -> collect(allReachableFS, allIndexedFS, fs, fs));
 
         // Remove all that are not annotations
-        allReachableFS.entrySet().removeIf(
-                e -> !ts.subsumes(aCas.getAnnotationType(), e.getKey().getType()));
+        allReachableFS.entrySet()
+                .removeIf(e -> !ts.subsumes(aCas.getAnnotationType(), e.getKey().getType()));
         
         // Remove all that are indexed
         allReachableFS.entrySet().removeIf(e -> e.getKey() == e.getValue());

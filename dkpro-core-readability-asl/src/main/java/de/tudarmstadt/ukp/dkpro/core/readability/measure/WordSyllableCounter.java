@@ -52,10 +52,10 @@ public class WordSyllableCounter {
     
     private boolean isVowel(String character)
     {
-        if(languageCode.equals("en")) { 
+        if (languageCode.equals("en")) {
             return enVowels.contains(character);
         }
-        else if(languageCode.equals("de")) {
+        else if (languageCode.equals("de")) {
             return deVowels.contains(character);
         }
         else {
@@ -71,33 +71,33 @@ public class WordSyllableCounter {
         return count;
     }
     
-    public int countSyllables(String word){
-    	String lowcaseWord = word.toLowerCase();
+    public int countSyllables(String word)
+    {
+        String lowcaseWord = word.toLowerCase();
         int count = 0;
         
         if (this.languageCode.equals("en")) {
-            if (lowcaseWord.length() >=2 &&
-                lowcaseWord.substring(lowcaseWord.length() - 2, lowcaseWord.length()).equals("ed"))
-            {
-            	lowcaseWord = lowcaseWord.substring(0, lowcaseWord.length() - 2);
+            if (lowcaseWord.length() >= 2 && lowcaseWord
+                    .substring(lowcaseWord.length() - 2, lowcaseWord.length()).equals("ed")) {
+                lowcaseWord = lowcaseWord.substring(0, lowcaseWord.length() - 2);
             }
         }
         else if (this.languageCode.equals("de")) {
-            if (lowcaseWord.length() >= 2 &&
-                lowcaseWord.charAt(lowcaseWord.length() - 1) == 'e' && 
-                !isVowel(lowcaseWord.substring(lowcaseWord.length() - 2, lowcaseWord.length() - 1)))
-            {
-                    count++;
-                    lowcaseWord = lowcaseWord.substring(0, lowcaseWord.length() - 2);
+            if (lowcaseWord.length() >= 2 && lowcaseWord.charAt(lowcaseWord.length() - 1) == 'e'
+                    && !isVowel(lowcaseWord.substring(lowcaseWord.length() - 2,
+                            lowcaseWord.length() - 1))) {
+                count++;
+                lowcaseWord = lowcaseWord.substring(0, lowcaseWord.length() - 2);
             }
-            
+
         }
-        
-        for(int i = 0; i < lowcaseWord.length() - 1; ++ i){
-          String curCh = lowcaseWord.substring(i, i+ 1);
-          String nextCh = lowcaseWord.substring(i + 1, i + 2);
-             if(isVowel(curCh) && !isVowel(nextCh))
-            	 ++ count;
+
+        for (int i = 0; i < lowcaseWord.length() - 1; ++i) {
+            String curCh = lowcaseWord.substring(i, i + 1);
+            String nextCh = lowcaseWord.substring(i + 1, i + 2);
+            if (isVowel(curCh) && !isVowel(nextCh)) {
+                ++count;
+            }
         }
         return (count == 0 ? 1 : count);
     }

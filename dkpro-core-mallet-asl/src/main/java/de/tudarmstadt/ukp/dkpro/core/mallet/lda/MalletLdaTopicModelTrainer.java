@@ -17,25 +17,33 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.mallet.lda;
 
-import cc.mallet.topics.ParallelTopicModel;
-import cc.mallet.types.Instance;
-import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
+import java.io.File;
+import java.io.IOException;
+
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 
-import java.io.File;
-import java.io.IOException;
+import cc.mallet.topics.ParallelTopicModel;
+import cc.mallet.types.Instance;
+import de.tudarmstadt.ukp.dkpro.core.mallet.MalletModelTrainer;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Estimate an LDA topic model using Mallet and write it to a file. It stores all incoming CAS' to
  * Mallet {@link Instance}s before estimating the model, using a {@link ParallelTopicModel}.
  * <p>
- * Set {@link #PARAM_TOKEN_FEATURE_PATH} to define what is considered as a token (Tokens, Lemmas, etc.).
+ * Set {@link #PARAM_TOKEN_FEATURE_PATH} to define what is considered as a token (Tokens, Lemmas,
+ * etc.).
  * <p>
- * Set {@link #PARAM_COVERING_ANNOTATION_TYPE} to define what is considered a document (sentences, paragraphs, etc.).
+ * Set {@link #PARAM_COVERING_ANNOTATION_TYPE} to define what is considered a document (sentences,
+ * paragraphs, etc.).
  */
-@ResourceMetaData(name="Mallet LDA Topic Model Trainer")
+@Component(OperationType.TRAINER_OF_MACHINE_LEARNING_MODELS)
+@ResourceMetaData(name = "Mallet LDA Topic Model Trainer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 public class MalletLdaTopicModelTrainer
         extends MalletModelTrainer
 {
@@ -47,21 +55,21 @@ public class MalletLdaTopicModelTrainer
     private int nTopics;
 
     /**
-     * The number of iterations during model estimation. Default: 1000.
+     * The number of iterations during model estimation.
      */
     public static final String PARAM_N_ITERATIONS = "nIterations";
     @ConfigurationParameter(name = PARAM_N_ITERATIONS, mandatory = true, defaultValue = "1000")
     private int nIterations;
 
     /**
-     * The number of iterations before hyper-parameter optimization begins. Default: 100
+     * The number of iterations before hyper-parameter optimization begins.
      */
     public static final String PARAM_BURNIN_PERIOD = "burninPeriod";
     @ConfigurationParameter(name = PARAM_BURNIN_PERIOD, mandatory = true, defaultValue = "100")
     private int burninPeriod;
 
     /**
-     * Interval for optimizing Dirichlet hyper-parameters. Default: 50
+     * Interval for optimizing Dirichlet hyper-parameters.
      */
     public static final String PARAM_OPTIMIZE_INTERVAL = "optimizeInterval";
     @ConfigurationParameter(name = PARAM_OPTIMIZE_INTERVAL, mandatory = true, defaultValue = "50")
@@ -75,36 +83,35 @@ public class MalletLdaTopicModelTrainer
     private int randomSeed;
 
     /**
-     * Define how frequently a serialized model is saved to disk during estimation. Default: 0 (only save when
-     * estimation is done).
+     * Define how frequently an intermediate serialized model is saved to disk during estimation.
      */
     public static final String PARAM_SAVE_INTERVAL = "saveInterval";
     @ConfigurationParameter(name = PARAM_SAVE_INTERVAL, mandatory = true, defaultValue = "0")
     private int saveInterval;
 
     /**
-     * Use a symmetric alpha value during model estimation? Default: false.
+     * Use a symmetric alpha value during model estimation?
      */
     public static final String PARAM_USE_SYMMETRIC_ALPHA = "useSymmetricAlpha";
     @ConfigurationParameter(name = PARAM_USE_SYMMETRIC_ALPHA, mandatory = true, defaultValue = "false")
     private boolean useSymmetricAlpha;
 
     /**
-     * The interval in which to display the estimated topics. Default: 50.
+     * The interval in which to display the estimated topics.
      */
     public static final String PARAM_DISPLAY_INTERVAL = "displayInterval";
     @ConfigurationParameter(name = PARAM_DISPLAY_INTERVAL, mandatory = true, defaultValue = "50")
     private int displayInterval;
 
     /**
-     * The number of top words to display during estimation. Default: 7.
+     * The number of top words to display during estimation.
      */
     public static final String PARAM_DISPLAY_N_TOPIC_WORDS = "displayNTopicWords";
     @ConfigurationParameter(name = PARAM_DISPLAY_N_TOPIC_WORDS, mandatory = true, defaultValue = "7")
     private int displayNTopicWords;
 
     /**
-     * The sum of alphas over all topics. Default: 1.0.
+     * The sum of alphas over all topics.
      * <p>
      * Another recommended value is 50 / T (number of topics).
      */
@@ -113,7 +120,7 @@ public class MalletLdaTopicModelTrainer
     private float alphaSum;
 
     /**
-     * Beta for a single dimension of the Dirichlet prior. Default: 0.01.
+     * Beta for a single dimension of the Dirichlet prior.
      */
     public static final String PARAM_BETA = "beta";
     @ConfigurationParameter(name = PARAM_BETA, mandatory = true, defaultValue = "0.01f")

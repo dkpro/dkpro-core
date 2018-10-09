@@ -34,6 +34,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Lemmatize based on a finite-state machine. Uses the <a href="https://github.com/knowitall/morpha">
@@ -45,7 +48,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * processing of English, Natural Language Engineering, 7(3). 207-223.</li>
  * </ul>
  */
-@ResourceMetaData(name="Morpha Lemmatizer")
+@Component(OperationType.LEMMATIZER)
+@ResourceMetaData(name = "Morpha Lemmatizer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability("en")
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -62,7 +67,7 @@ public class MorphaLemmatizer
      * so this is disabled by default.
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
-    @ConfigurationParameter(name=PARAM_READ_POS, mandatory=true, defaultValue="false")
+    @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "false")
     private boolean readPos;
 
     @Override
@@ -79,14 +84,14 @@ public class MorphaLemmatizer
                 String lemmaString;
                 if (readPos && (t.getPos() != null)) {
                     lemmaString = edu.washington.cs.knowitall.morpha.MorphaStemmer.stemToken(
-                            t.getCoveredText(), t.getPos().getPosValue());
+                            t.getText(), t.getPos().getPosValue());
                 }
                 else {
-                    lemmaString = edu.washington.cs.knowitall.morpha.MorphaStemmer.stemToken(t
-                            .getCoveredText());
+                    lemmaString = edu.washington.cs.knowitall.morpha.MorphaStemmer
+                            .stemToken(t.getText());
                 }
                 if (lemmaString == null) {
-                    lemmaString = t.getCoveredText();
+                    lemmaString = t.getText();
                 }
                 l.setValue(lemmaString);
 

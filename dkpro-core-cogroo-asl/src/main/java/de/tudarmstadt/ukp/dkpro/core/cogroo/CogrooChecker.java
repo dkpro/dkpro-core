@@ -39,56 +39,61 @@ import org.cogroo.entities.Mistake;
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.GrammarAnomaly;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
+import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
+import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
  * Detect grammatical errors in text using CoGrOO.
  */
-@ResourceMetaData(name="CoGrOO Grammar Checker")
+@Component(OperationType.GRAMMAR_CHECKER)
+@ResourceMetaData(name = "CoGrOO Grammar Checker")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability("pt")
 @TypeCapability(
-	    outputs = {
-		    "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.GrammarAnomaly" })
+        outputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.GrammarAnomaly" })
 public class CogrooChecker
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
     public static enum DetailLevel {
         SHORT, LONG, FULL
     }
     
-	/**
-	 * Use this language instead of the document language to resolve the model.
-	 */
-	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-	private String language;
+    /**
+     * Use this language instead of the document language to resolve the model.
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    private String language;
 
-	/**
-	 * Set detail level.
-	 */
-	public static final String PARAM_DETAIL_LEVEL = "detailLevel";
-    @ConfigurationParameter(name = PARAM_DETAIL_LEVEL, mandatory = true, defaultValue="SHORT")
-	private DetailLevel detailLevel;
-	
-	private ModelProviderBase<GrammarChecker> modelProvider;
-	
-	@Override
-	public void initialize(UimaContext aContext)
-		throws ResourceInitializationException
-	{
-		super.initialize(aContext);
-		
-		modelProvider = new ModelProviderBase<GrammarChecker>() {
-		    {
+    /**
+     * Set detail level.
+     */
+    public static final String PARAM_DETAIL_LEVEL = "detailLevel";
+    @ConfigurationParameter(name = PARAM_DETAIL_LEVEL, mandatory = true, defaultValue = "SHORT")
+    private DetailLevel detailLevel;
+    
+    private ModelProviderBase<GrammarChecker> modelProvider;
+    
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
+        
+        modelProvider = new ModelProviderBase<GrammarChecker>() {
+            {
                 setContextObject(CogrooChecker.this);
                 setDefault(LOCATION, NOT_REQUIRED);
                 
                 setOverride(LANGUAGE, language);
-		    }
-		    
-		    @Override
-		    protected GrammarChecker produceResource(URL aUrl)
-		        throws IOException
-		    {
+            }
+            
+            @Override
+            protected GrammarChecker produceResource(URL aUrl)
+                throws IOException
+            {
                 Properties props = getAggregatedProperties();
                 if (!"pt".equals(props.getProperty(LANGUAGE))) {
                     throw new IOException("The language code '"
@@ -97,40 +102,40 @@ public class CogrooChecker
                 
                 ComponentFactory factory = ComponentFactory.create(new Locale("pt", "BR"));
                 return new GrammarChecker(factory.createPipe());
-		    }
-		};
-	}
+            }
+        };
+    }
 
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
-	    modelProvider.configure(aJCas.getCas());
-	    
-		// get document text
-	    CheckDocument document = new CheckDocument(aJCas.getDocumentText());
+    @Override
+    public void process(JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
+        modelProvider.configure(aJCas.getCas());
+        
+        // get document text
+        CheckDocument document = new CheckDocument(aJCas.getDocumentText());
 
-		modelProvider.getResource().analyze(document);
-		for (Mistake match : document.getMistakes()) {
-			// create annotation
-			GrammarAnomaly annotation = new GrammarAnomaly(aJCas);
-			annotation.setBegin(match.getStart());
-			annotation.setEnd(match.getEnd());
-			switch (detailLevel) {
-			case SHORT:
-	            annotation.setDescription(match.getShortMessage());
-	            break;
-			case LONG:
-	            annotation.setDescription(match.getLongMessage());
+        modelProvider.getResource().analyze(document);
+        for (Mistake match : document.getMistakes()) {
+            // create annotation
+            GrammarAnomaly annotation = new GrammarAnomaly(aJCas);
+            annotation.setBegin(match.getStart());
+            annotation.setEnd(match.getEnd());
+            switch (detailLevel) {
+            case SHORT:
+                annotation.setDescription(match.getShortMessage());
                 break;
-			case FULL:
-	            annotation.setDescription(match.getFullMessage());
+            case LONG:
+                annotation.setDescription(match.getLongMessage());
                 break;
-			}
-			annotation.addToIndexes();
-			if (getLogger().isTraceEnabled()) {
-			    getLogger().trace("Found: " + annotation);
-			}
-		}
-	}
+            case FULL:
+                annotation.setDescription(match.getFullMessage());
+                break;
+            }
+            annotation.addToIndexes();
+            if (getLogger().isTraceEnabled()) {
+                getLogger().trace("Found: " + annotation);
+            }
+        }
+    }
 }

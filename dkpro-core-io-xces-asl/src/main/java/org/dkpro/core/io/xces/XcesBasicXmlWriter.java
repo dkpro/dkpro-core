@@ -35,6 +35,7 @@ import javax.xml.stream.XMLStreamException;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.MimeTypeCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
@@ -44,25 +45,37 @@ import org.dkpro.core.io.xces.models.XcesParaBasic;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import javanet.staxutils.IndentingXMLEventWriter;
 
-@ResourceMetaData(name="XCES Basic XML Writer")
+/**
+ * Writer for the basic XCES XML format.
+ */
+@ResourceMetaData(name = "XCES Basic XML Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
+@MimeTypeCapability({MimeTypes.APPLICATION_X_XCES_BASIC})
 @TypeCapability(
         inputs = {            
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph" })
-public class XcesBasicXmlWriter extends JCasFileWriter_ImplBase
+public class XcesBasicXmlWriter
+    extends JCasFileWriter_ImplBase
 {
-
-    public static final String PARAM_FILENAME_SUFFIX = "filenameSuffix";
-    @ConfigurationParameter(name = PARAM_FILENAME_SUFFIX, mandatory = true, defaultValue = ".xml")
-    private String filenameSuffix;
+    /**
+     * Use this filename extension.
+     */
+    public static final String PARAM_FILENAME_EXTENSION = 
+            ComponentParameters.PARAM_FILENAME_EXTENSION;
+    @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xml")
+    private String filenameExtension;
 
     /**
      * Character encoding of the output data.
      */
-    public static final String PARAM_TARGET_ENCODING = "targetEncoding";
-    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, defaultValue = ComponentParameters.DEFAULT_ENCODING)
+    public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, 
+            defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
 
     @Override
@@ -72,7 +85,7 @@ public class XcesBasicXmlWriter extends JCasFileWriter_ImplBase
         OutputStream docOS = null;
         XMLEventWriter xmlEventWriter = null;
         try {
-            docOS = getOutputStream(aJCas, filenameSuffix);
+            docOS = getOutputStream(aJCas, filenameExtension);
             XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
             xmlEventWriter = new IndentingXMLEventWriter(
                     xmlOutputFactory.createXMLEventWriter(docOS, targetEncoding));
@@ -94,7 +107,8 @@ public class XcesBasicXmlWriter extends JCasFileWriter_ImplBase
             // Begin body of all the paragraphs            
             Collection<Paragraph> parasInCas = JCasUtil.select(aJCas, Paragraph.class);
             XcesBodyBasic xb = convertToXcesBasicPara(parasInCas);
-            marshaller.marshal(new JAXBElement<XcesBodyBasic>(new QName("body"), XcesBodyBasic.class, xb),
+            marshaller.marshal(
+                    new JAXBElement<XcesBodyBasic>(new QName("body"), XcesBodyBasic.class, xb),
                     xmlEventWriter);
             // End body of all the paragraphs
             // xmlEventWriter.add(xmlef.createEndElement("", "", "body"));
@@ -127,7 +141,7 @@ public class XcesBasicXmlWriter extends JCasFileWriter_ImplBase
         for (Paragraph p : parasInCas) {
             XcesParaBasic para = new XcesParaBasic();
             para.s = p.getCoveredText();
-            para.id= "p"+Integer.toString(paraNo);
+            para.id = "p" + Integer.toString(paraNo);
             paraList.add(para);
             paraNo++;
         }

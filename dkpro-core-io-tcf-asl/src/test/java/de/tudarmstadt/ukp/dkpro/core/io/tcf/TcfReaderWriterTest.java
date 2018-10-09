@@ -96,7 +96,7 @@ public class TcfReaderWriterTest
         // Check if every layers have the same number of annotations
         for (TextCorpusLayer layer : aCorpusDataReference.getLayers()) {
             assertEquals(
-                    "Layer size mismatch in ["+layer.getClass().getName()+"]",
+                    "Layer size mismatch in [" + layer.getClass().getName() + "]",
                     layer.size(), 
                     getLayer(aCorpusDataActual, layer.getClass()).size());
         }
@@ -106,7 +106,8 @@ public class TcfReaderWriterTest
                 new InputSource(new File("target/test-output/oneway/" + aInputFile).getPath()));
     }
 
-    private static TextCorpusLayer getLayer(TextCorpus aCorpus, Class<? extends TextCorpusLayer> aLayerType)
+    private static TextCorpusLayer getLayer(TextCorpus aCorpus,
+            Class<? extends TextCorpusLayer> aLayerType)
     {
         for (TextCorpusLayer layer : aCorpus.getLayers()) {
             if (layer.getClass().equals(aLayerType)) {
