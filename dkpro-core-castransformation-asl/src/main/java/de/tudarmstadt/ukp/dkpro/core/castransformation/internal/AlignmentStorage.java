@@ -17,6 +17,7 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.castransformation.internal;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -40,7 +41,9 @@ public class AlignmentStorage
     private Map<CAS, Map<Key, AlignedString>> mmap;
 
     {
-        mmap = new WeakHashMap<CAS, Map<Key, AlignedString>>();
+        // WeakHashMap is not threadsafe, so we need to wrap it, because it will likely be
+        // invoked by many concurrent pipeline threads.
+        mmap = Collections.synchronizedMap(new WeakHashMap<CAS, Map<Key, AlignedString>>());
     }
 
     public static synchronized AlignmentStorage getInstance()
@@ -62,15 +65,14 @@ public class AlignmentStorage
 
     public void put(final CAS aCas, final String from, final String to, final AlignedString aAs)
     {
-        Map<Key, AlignedString> map = mmap.get(aCas);
-        if (map == null) {
-            map = new HashMap<Key, AlignedString>();
-            mmap.put(aCas, map);
-        }
-
-        System.out.println("Adding from [" + from + "] to [" + to + "] on [" + aCas.hashCode()
-                + "]");
+        Map<Key, AlignedString> map = mmap.computeIfAbsent(aCas, k -> new HashMap<>());
+        // No reason to keep the internal map synchronized because it's specific to the CAS, and
+        // it is assumed that two different pipeline threads in any execution environment never
+        // manipulate the same CAS instance simultaneously.
+        //System.out.println("Adding from [" + from + "] to [" + to + "] on [" + aCas.hashCode()
+        //        + "]");
         map.put(new Key(from, to), aAs);
+
     }
 
     private static class Key

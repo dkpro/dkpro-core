@@ -18,6 +18,8 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.arktools;
 
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -26,16 +28,12 @@ import java.util.List;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.CAS;
-import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
-import org.apache.uima.cas.TypeSystem;
-import org.apache.uima.cas.text.AnnotationFS;
-import org.apache.uima.fit.component.CasAnnotator_ImplBase;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
-import org.apache.uima.fit.util.CasUtil;
+import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import cmu.arktweetnlp.Twokenize;
@@ -43,7 +41,10 @@ import cmu.arktweetnlp.impl.Model;
 import cmu.arktweetnlp.impl.ModelSentence;
 import cmu.arktweetnlp.impl.Sentence;
 import cmu.arktweetnlp.impl.features.FeatureExtractor;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ResourceParameter;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
@@ -51,7 +52,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
+
 
 /**
  * Wrapper for Twitter Tokenizer and POS Tagger.
@@ -62,13 +65,14 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.POS_TAGGING)
 @ResourceMetaData(name = "ArkTweet POS-Tagger")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
       inputs = { 
           "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 
       outputs = { 
           "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class ArktweetPosTagger
-    extends CasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
 
     /**
@@ -89,6 +93,11 @@ public class ArktweetPosTagger
     /**
      * URI of the model artifact. This can be used to override the default model resolving 
      * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
      */
     public static final String PARAM_MODEL_ARTIFACT_URI = 
             ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
@@ -100,6 +109,7 @@ public class ArktweetPosTagger
      */
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    @ResourceParameter(MimeTypes.APPLICATION_X_ARKTWEET_TAGGER)
     protected String modelLocation;
 
     /**
@@ -109,9 +119,6 @@ public class ArktweetPosTagger
             ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
-
-    private Type tokenType;
-    private Feature featPos;
 
     private CasConfigurableProviderBase<TweetTagger> modelProvider;
     private MappingProvider mappingProvider;
@@ -137,8 +144,16 @@ public class ArktweetPosTagger
      **/
     public static class TaggedToken
     {
-        public AnnotationFS token;
+        public Token token;
         public String tag;
+
+        private int getBegin() {
+            return token.getBegin();
+        }
+
+        private int getEnd() {
+            return token.getEnd();
+        }
     }
 
     @Override
@@ -184,47 +199,35 @@ public class ArktweetPosTagger
     }
 
     @Override
-    public void typeSystemInit(TypeSystem aTypeSystem)
-        throws AnalysisEngineProcessException
-    {
-        super.typeSystemInit(aTypeSystem);
-
-        tokenType = aTypeSystem.getType(Token.class.getName());
-        featPos = tokenType.getFeatureByBaseName("pos");
-    }
-
-    @Override
-    public void process(CAS cas)
+    public void process(JCas jCas)
         throws AnalysisEngineProcessException
     {
 
-        modelProvider.configure(cas);
-        mappingProvider.configure(cas);
+        modelProvider.configure(jCas.getCas());
+        mappingProvider.configure(jCas.getCas());
 
-        List<AnnotationFS> tokens = CasUtil.selectCovered(cas, tokenType, 0, cas.getDocumentText()
-                .length());
+        List<Token> tokens = selectCovered(jCas, Token.class, 0, jCas.getDocumentText().length());
         List<TaggedToken> taggedTokens = tagTweetTokens(tokens, modelProvider.getResource());
 
         for (TaggedToken taggedToken : taggedTokens) {
 
             Type posType = mappingProvider.getTagType(taggedToken.tag);
 
-            AnnotationFS posAnno = cas.createAnnotation(posType, taggedToken.token.getBegin(),
-                    taggedToken.token.getEnd());
-            posAnno.setStringValue(posType.getFeatureByBaseName("PosValue"), taggedToken.tag);
-            cas.addFsToIndexes(posAnno);
-
-            taggedToken.token.setFeatureValue(featPos, posAnno);
+            POS pos = (POS) jCas.getCas().createAnnotation(posType, taggedToken.getBegin(),
+                    taggedToken.getEnd());
+            pos.setPosValue(taggedToken.tag.intern());
+            pos.addToIndexes();
+            taggedToken.token.setPos(pos);
         }
     }
 
-    private List<TaggedToken> tagTweetTokens(List<AnnotationFS> annotatedTokens,
+    private List<TaggedToken> tagTweetTokens(List<Token> annotatedTokens,
             TweetTagger tweetTagModel)
     {
 
         List<String> tokens = new LinkedList<String>();
-        for (AnnotationFS a : annotatedTokens) {
-            String tokenText = a.getCoveredText();
+        for (Token a : annotatedTokens) {
+            String tokenText = a.getText();
             tokenText = Twokenize.normalizeTextForTagger(tokenText);
             tokens.add(tokenText);
         }

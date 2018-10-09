@@ -52,4 +52,17 @@ public class TikaReaderTest
     
         assertEquals("This is a test. And here is another one.\n\n", jcas.getDocumentText());
     }
+
+    @Test
+    public void testDoc()
+        throws Exception
+    {
+        CollectionReaderDescription reader = createReaderDescription(
+                TikaReader.class, 
+                TikaReader.PARAM_SOURCE_LOCATION, "src/test/resources/doc/test.doc");
+        
+        JCas jcas = new JCasIterable(reader).iterator().next();
+    
+        assertEquals("test\n\n", jcas.getDocumentText());
+    }
 }

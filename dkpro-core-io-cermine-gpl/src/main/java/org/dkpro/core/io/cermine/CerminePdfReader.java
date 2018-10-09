@@ -37,8 +37,10 @@ import org.jdom.Text;
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import pl.edu.icm.cermine.ContentExtractor;
 import pl.edu.icm.cermine.exception.AnalysisException;
 
@@ -47,6 +49,7 @@ import pl.edu.icm.cermine.exception.AnalysisException;
  * <a href="https://github.com/CeON/CERMINE">https://github.com/CeON/CERMINE</a>.
  */
 @ResourceMetaData(name = "CERMINE PDF Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({ MimeTypes.APPLICATION_PDF })
 @TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading",
@@ -360,7 +363,12 @@ public class CerminePdfReader
         {
             if (beginIndex < sb.length()) {
                 Type t = cas.getTypeSystem().getType(annotationType);
-                AnnotationFS a = cas.createAnnotation(t, beginIndex, sb.length());
+                
+                // Trim leading/trailing whitespace
+                int[] offsets = {beginIndex, sb.length()};
+                SegmenterBase.trim(sb, offsets);
+                
+                AnnotationFS a = cas.createAnnotation(t, offsets[0], offsets[1]);
                 cas.addFsToIndexes(a);
                 updateCursor();
             }

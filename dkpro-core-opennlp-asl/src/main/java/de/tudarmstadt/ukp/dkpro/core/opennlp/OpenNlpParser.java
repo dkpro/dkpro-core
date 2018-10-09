@@ -56,6 +56,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpParserTagsetDescriptionProvider;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionProvider;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 import opennlp.tools.parser.AbstractBottomUpParser;
 import opennlp.tools.parser.Parse;
@@ -70,6 +71,7 @@ import opennlp.tools.util.Span;
  */
 @Component(OperationType.CONSTITUENCY_PARSER)
 @ResourceMetaData(name = "OpenNLP Parser")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -97,6 +99,11 @@ public class OpenNlpParser
     /**
      * URI of the model artifact. This can be used to override the default model resolving 
      * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
      */
     public static final String PARAM_MODEL_ARTIFACT_URI = 
             ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
@@ -129,19 +136,7 @@ public class OpenNlpParser
     protected String constituentMappingLocation;
 
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * <p>Default: {@code true}</p>
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
-
-    /**
      * Log the tag set(s) when a model is loaded.
-     *
-     * <p>Default: {@code false}</p>
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
@@ -150,8 +145,6 @@ public class OpenNlpParser
     /**
      * Sets whether to create or not to create POS tags. The creation of
      * constituent tags must be turned on for this to work.
-     *
-     * <p>Default: {@code true}</p>
      */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
     @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "false")
@@ -160,8 +153,6 @@ public class OpenNlpParser
     /**
      * If this parameter is set to true, each sentence is annotated with a PennTree-Annotation,
      * containing the whole parse tree in Penn Treebank style format.
-     *
-     * <p>Default: {@code false}</p>
      */
     public static final String PARAM_WRITE_PENN_TREE = ComponentParameters.PARAM_WRITE_PENN_TREE;
     @ConfigurationParameter(name = PARAM_WRITE_PENN_TREE, mandatory = true, defaultValue = "false")
@@ -250,7 +241,7 @@ public class OpenNlpParser
                 Type posTag = posMappingProvider.getTagType(aNode.getType());
                 POS posAnno = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                         token.getEnd());
-                posAnno.setPosValue(internTags ? aNode.getType().intern() : aNode.getType());
+                posAnno.setPosValue(aNode.getType() != null ? aNode.getType().intern() : null);
                 POSUtils.assignCoarseValue(posAnno);
                 posAnno.addToIndexes();
                 token.setPos(posAnno);

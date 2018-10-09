@@ -1,0 +1,8 @@
+T1	Token 0 4	This
+T2	Token 5 7;8 9	is a
+T3	Token 10 14	test
+T4	Token 14 15	.
+E1	Token:T1
+E2	Token:T2
+E3	Token:T3
+E4	Token:T4

@@ -43,7 +43,7 @@ public class UmlautNormalizerTest
         AnalysisEngineDescription normalizer = createEngineDescription(
                 UmlautNormalizer.class,
                 UmlautNormalizer.PARAM_MIN_FREQUENCY_THRESHOLD,0,
-                UmlautNormalizer.FREQUENCY_PROVIDER, createExternalResourceDescription(
+                UmlautNormalizer.RES_FREQUENCY_PROVIDER, createExternalResourceDescription(
                         Web1TFrequencyCountResource.class,
                         Web1TFrequencyCountResource.PARAM_LANGUAGE, "de",
                         Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",

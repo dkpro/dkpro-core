@@ -67,6 +67,7 @@ import edu.stanford.nlp.trees.UniversalEnglishGrammaticalRelations;
 import edu.stanford.nlp.trees.UniversalEnglishGrammaticalStructureFactory;
 import edu.stanford.nlp.trees.international.pennchinese.ChineseGrammaticalRelations;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -74,6 +75,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.CONSTITUENCY_PARSER)
 @ResourceMetaData(name = "CoreNLP Parser")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -87,8 +89,6 @@ public class CoreNlpParser
 {
     /**
      * Log the tag set(s) when a model is loaded.
-     *
-     * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
@@ -112,6 +112,11 @@ public class CoreNlpParser
     /**
      * URI of the model artifact. This can be used to override the default model resolving 
      * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
      */
     public static final String PARAM_MODEL_ARTIFACT_URI = 
             ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
@@ -157,26 +162,25 @@ public class CoreNlpParser
     private String posMappingLocation;
     
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code false}
+     * Maximum sentence length. Longer sentences are skipped.
      */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internStrings;
-
     public static final String PARAM_MAX_SENTENCE_LENGTH = 
             ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
     @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = true, defaultValue = "2147483647")
     private int maxSentenceLength;
     
+    /**
+     * Number of parallel threads to use.
+     */
     public static final String PARAM_NUM_THREADS = 
             ComponentParameters.PARAM_NUM_THREADS;
     @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, 
             defaultValue = ComponentParameters.AUTO_NUM_THREADS)
     private int numThreads;
 
+    /**
+     * Maximum time to spend on a single sentence.
+     */
     public static final String PARAM_MAX_TIME = "maxTime";
     @ConfigurationParameter(name = PARAM_MAX_TIME, mandatory = true, defaultValue = "-1")
     private int maxTime;
@@ -206,6 +210,9 @@ public class CoreNlpParser
     @ConfigurationParameter(name = PARAM_QUOTE_END, mandatory = false)
     private List<String> quoteEnd;
     
+    /**
+     * Types of extra edges to add to the dependency tree.
+     */
     public static final String PARAM_EXTRA_DEPENDENCIES = "extraDependencies";
     @ConfigurationParameter(name = PARAM_EXTRA_DEPENDENCIES, mandatory = true, defaultValue = "NONE")
     GrammaticalStructure.Extras extraDependencies;
@@ -213,8 +220,6 @@ public class CoreNlpParser
     /**
      * Sets whether to create or not to create constituent tags. This is required for POS-tagging
      * and lemmatization.
-     * <p>
-     * Default: {@code true}
      */
     public static final String PARAM_WRITE_CONSTITUENT = 
             ComponentParameters.PARAM_WRITE_CONSTITUENT;
@@ -224,8 +229,6 @@ public class CoreNlpParser
     /**
      * If this parameter is set to true, each sentence is annotated with a PennTree-Annotation,
      * containing the whole parse tree in Penn Treebank style format.
-     * <p>
-     * Default: {@code false}
      */
     public static final String PARAM_WRITE_PENN_TREE = ComponentParameters.PARAM_WRITE_PENN_TREE;
     @ConfigurationParameter(name = PARAM_WRITE_PENN_TREE, mandatory = true, defaultValue = "false")
@@ -233,8 +236,6 @@ public class CoreNlpParser
 
     /**
      * Sets whether to use or not to use existing POS tags.
-     * <p>
-     * Default: {@code true}
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
@@ -243,8 +244,6 @@ public class CoreNlpParser
     /**
      * Sets whether to create or not to create POS tags. The creation of constituent tags must be
      * turned on for this to work.
-     * <p>
-     * Default: {@code false}
      */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
     @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "false")
@@ -252,18 +251,22 @@ public class CoreNlpParser
     
     /**
      * Sets whether to create or not to create dependency annotations.
-     * 
-     * <p>Default: {@code true}
      */
     public static final String PARAM_WRITE_DEPENDENCY = ComponentParameters.PARAM_WRITE_DEPENDENCY;
     @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")
     private boolean writeDependency;
 
+    /**
+     * Generate original Stanford Dependencies grammatical relations instead of Universal
+     * Dependencies.
+     */
     public static final String PARAM_ORIGINAL_DEPENDENCIES = "originalDependencies";
     @ConfigurationParameter(name = PARAM_ORIGINAL_DEPENDENCIES, mandatory = true, defaultValue = "true")
     private boolean originalDependencies;
 
-    // CoreNlpParser PARAM_KEEP_PUNCTUATION has no effect #965
+    /**
+     * Whether to keep punctuation dependencies in the dependency parse output of the parser.
+     */
     public static final String PARAM_KEEP_PUNCTUATION = "keepPunctuation";
     @ConfigurationParameter(name = PARAM_KEEP_PUNCTUATION, mandatory = true, defaultValue = "false")
     private boolean keepPunctuation;
@@ -329,13 +332,12 @@ public class CoreNlpParser
         // Transfer back into the CAS
         if (writePos) {
             posMappingProvider.configure(cas);
-            CoreNlp2DKPro.convertPOSs(aJCas, document, posMappingProvider, internStrings);
+            CoreNlp2DKPro.convertPOSs(aJCas, document, posMappingProvider);
         }
         
         if (writeConstituent) {
             constituentMappingProvider.configure(cas);
-            CoreNlp2DKPro.convertConstituents(aJCas, document, constituentMappingProvider,
-                    internStrings, tlp);
+            CoreNlp2DKPro.convertConstituents(aJCas, document, constituentMappingProvider, tlp);
         }
         
         if (writePennTree) {
@@ -344,8 +346,7 @@ public class CoreNlpParser
         
         if (writeDependency) {
             dependencyMappingProvider.configure(cas);
-            CoreNlp2DKPro.convertDependencies(aJCas, document, dependencyMappingProvider,
-                    internStrings);
+            CoreNlp2DKPro.convertDependencies(aJCas, document, dependencyMappingProvider);
         }        
     }
 

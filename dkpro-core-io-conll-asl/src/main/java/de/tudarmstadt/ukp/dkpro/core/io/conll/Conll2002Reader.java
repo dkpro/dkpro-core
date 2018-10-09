@@ -50,6 +50,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * <p>Reads by default the CoNLL 2002 named entity format.</p>
@@ -111,6 +112,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * @see <a href="https://sites.google.com/site/germeval2014ner/data">GermEval 2014 NER task</a> 
  */
 @ResourceMetaData(name = "CoNLL 2002 Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2002, MimeTypes.TEXT_X_GERMEVAL_2014})
 @TypeCapability(
         outputs = { 
@@ -121,11 +123,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class Conll2002Reader
     extends JCasResourceCollectionReader_ImplBase
 {
-
     /**
-     * 
      * Column Separators
-     *
      */
     public enum ColumnSeparators
     {
@@ -208,19 +207,7 @@ public class Conll2002Reader
     private String sourceEncoding;
 
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spamming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
-
-    /**
      * Read named entity information.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_READ_NAMED_ENTITY = 
             ComponentParameters.PARAM_READ_NAMED_ENTITY;
@@ -229,8 +216,6 @@ public class Conll2002Reader
 
     /**
      * Has embedded named entity extra column.
-     *
-     * Default: {@code false}
      */
     public static final String PARAM_HAS_EMBEDDED_NAMED_ENTITY = "hasEmbeddedNamedEntity";
     @ConfigurationParameter(name = PARAM_HAS_EMBEDDED_NAMED_ENTITY, mandatory = false, defaultValue = "false")
@@ -312,7 +297,6 @@ public class Conll2002Reader
         Feature namedEntityValue = namedEntityType.getFeatureByBaseName("value");
         IobDecoder decoder = new IobDecoder(aJCas.getCas(), namedEntityValue,
                 namedEntityMappingProvider);
-        decoder.setInternTags(internTags);
         
         List<String[]> words;
         while ((words = readSentence(aReader)) != null) {

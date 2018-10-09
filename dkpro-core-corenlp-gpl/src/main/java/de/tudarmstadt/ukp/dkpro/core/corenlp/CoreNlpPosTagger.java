@@ -50,6 +50,7 @@ import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 import edu.stanford.nlp.util.StringUtils;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -57,19 +58,15 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.PART_OF_SPEECH_TAGGER)
 @ResourceMetaData(name = "CoreNLP POS-Tagger")
-@TypeCapability(
-        inputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
-        outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"})
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class CoreNlpPosTagger
     extends JCasAnnotator_ImplBase
 {
     /**
      * Log the tag set(s) when a model is loaded.
-     *
-     * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
@@ -91,14 +88,21 @@ public class CoreNlpPosTagger
     private String variant;
 
     /**
-     * URI of the model artifact. This can be used to override the default model resolving 
-     * mechanism and directly address a particular model.
+     * URI of the model artifact. This can be used to override the default model resolving mechanism
+     * and directly address a particular model.
+     * 
+     * <p>
+     * The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set the
+     * variant parameter to match the artifact. If the artifact contains the model in a non-default
+     * location, you also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.
+     * </p>
      */
     public static final String PARAM_MODEL_ARTIFACT_URI = 
             ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
     @ConfigurationParameter(name = PARAM_MODEL_ARTIFACT_URI, mandatory = false)
     protected String modelArtifactUri;
-    
+
     /**
      * Location from which the model is read.
      */
@@ -120,24 +124,19 @@ public class CoreNlpPosTagger
             ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     private String posMappingLocation;
-    
-    /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code false}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internStrings;
 
+    /**
+     * Maximum sentence length. Longer sentences are skipped.
+     */
     public static final String PARAM_MAX_SENTENCE_LENGTH = 
             ComponentParameters.PARAM_MAX_SENTENCE_LENGTH;
     @ConfigurationParameter(name = PARAM_MAX_SENTENCE_LENGTH, mandatory = true, defaultValue = "2147483647")
     private int maxSentenceLength;
-    
-    public static final String PARAM_NUM_THREADS = 
-            ComponentParameters.PARAM_NUM_THREADS;
+
+    /**
+     * Number of parallel threads to use.
+     */
+    public static final String PARAM_NUM_THREADS = ComponentParameters.PARAM_NUM_THREADS;
     @ConfigurationParameter(name = PARAM_NUM_THREADS, mandatory = true, 
             defaultValue = ComponentParameters.AUTO_NUM_THREADS)
     private int numThreads;
@@ -166,48 +165,46 @@ public class CoreNlpPosTagger
     public static final String PARAM_QUOTE_END = "quoteEnd";
     @ConfigurationParameter(name = PARAM_QUOTE_END, mandatory = false)
     private List<String> quoteEnd;
-    
+
     private CasConfigurableProviderBase<POSTaggerAnnotator> annotatorProvider;
     private MappingProvider mappingProvider;
-    
+
     @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
+    public void initialize(UimaContext aContext) throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
+
         annotatorProvider = new CoreNlpPosTaggerModelProvider(this);
-        
+
         mappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
                 language, annotatorProvider);
 
         numThreads = ComponentParameters.computeNumThreads(numThreads);
     }
-    
+
     @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
+    public void process(JCas aJCas) throws AnalysisEngineProcessException
     {
         CAS cas = aJCas.getCas();
-        
+
         annotatorProvider.configure(cas);
         mappingProvider.configure(cas);
-        
+
         // Transfer from CAS to CoreNLP
         DKPro2CoreNlp converter = new DKPro2CoreNlp();
         converter.setPtb3Escaping(ptb3Escaping);
         converter.setQuoteBegin(quoteBegin);
         converter.setQuoteEnd(quoteEnd);
         converter.setEncoding(modelEncoding);
-        
+
         Annotation document = new Annotation((String) null);
         converter.convert(aJCas, document);
 
         // Actual processing
         annotatorProvider.getResource().annotate(document);
-        
+
         // Transfer back into the CAS
-        CoreNlp2DKPro.convertPOSs(aJCas, document, mappingProvider, internStrings);
+        CoreNlp2DKPro.convertPOSs(aJCas, document, mappingProvider);
     }
 
     private class CoreNlpPosTaggerModelProvider
@@ -220,24 +217,23 @@ public class CoreNlpPosTagger
             setDefault(LOCATION,
                     "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/tagger-${language}-${variant}.properties");
         }
-        
+
         @Override
         protected POSTaggerAnnotator produceResource(URL aUrl) throws IOException
         {
             String modelFile = aUrl.toString();
-            
+
             // Loading gzipped files from URL is broken in CoreNLP
             // https://github.com/stanfordnlp/CoreNLP/issues/94
             if (modelFile.startsWith("jar:") && modelFile.endsWith(".gz")) {
                 modelFile = org.apache.commons.lang3.StringUtils.substringAfter(modelFile, "!/");
             }
-            
-            MaxentTagger tagger = new MaxentTagger(modelFile,
-                    StringUtils.argsToProperties("-model", modelFile),
-                    false);
 
-            SingletonTagset tags = new SingletonTagset(POS.class, getResourceMetaData()
-                    .getProperty(("pos.tagset")));
+            MaxentTagger tagger = new MaxentTagger(modelFile,
+                    StringUtils.argsToProperties("-model", modelFile), false);
+
+            SingletonTagset tags = new SingletonTagset(POS.class,
+                    getResourceMetaData().getProperty(("pos.tagset")));
             tags.addAll(tagger.tagSet());
             tags.remove(Lexicon.BOUNDARY_TAG);
             addTagset(tags);

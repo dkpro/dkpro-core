@@ -26,7 +26,7 @@
   </parent>
   <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
   <artifactId>de.tudarmstadt.ukp.dkpro.core</artifactId>
-  <version>1.10.0-SNAPSHOT</version>
+  <version>1.11.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>DKPro Core</name>
   <description>DKPro Core is a collection of software components for natural language processing (NLP) based on the Apache UIMA framework.</description> <!-- The description tag must be present for antrun to work!! -->
@@ -42,7 +42,7 @@
     <uima.version>2.10.2</uima.version>
     <uimafit.version>2.4.0</uimafit.version>
     <uimafit.plugin.version>2.4.0</uimafit.plugin.version>
-    <omtd.version>3.0.2.5</omtd.version>
+    <omtd.version>3.0.2.7</omtd.version>
     <lucene.version>4.4.0</lucene.version>
     <!-- The Spring version should be at least whatever uimaFIT requires -->
     <spring.version>3.2.16.RELEASE</spring.version>
@@ -334,12 +334,12 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
-        <version>3.7</version>
+        <version>3.8</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-compress</artifactId>
-        <version>1.16.1</version>
+        <version>1.18</version>
       </dependency>
       <dependency>
         <groupId>org.tukaani</groupId>
@@ -554,7 +554,7 @@
             Ubiquitous Knowledge Processing (UKP) Lab
             Technische Universität Darmstadt
           </componentCopyright>
-          <failOnMissingMetaData>false</failOnMissingMetaData>
+          <failOnMissingMetaData>true</failOnMissingMetaData>
         </configuration>
         <executions>
           <execution>
@@ -587,6 +587,17 @@
           <mimeTypeMappings>
             <mimeTypeMapping>META-INF/eu.openminted.share/mimeTypeMapping.map</mimeTypeMapping>
           </mimeTypeMappings>
+          <properties>
+            <docbase>https://dkpro.github.io/dkpro-core/releases/${project.version}/docs</docbase>
+            <resourceNameAddon>(DKPro Core)</resourceNameAddon>
+            <resourceCopyright>
+              Copyright ${project.inceptionYear}-${currentYear}
+              Ubiquitous Knowledge Processing (UKP) Lab
+              Technische Universität Darmstadt
+              (Applies only to the DKPro Core UIMA wrapper. The copyright for wrapped tools and underlying
+              libraries remains with the respective copyright owners.)
+            </resourceCopyright>
+          </properties>
         </configuration>
       </plugin>
     </plugins>

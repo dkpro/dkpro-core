@@ -22,10 +22,13 @@ import org.apache.uima.fit.descriptor.LanguageCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 
+import eu.openminted.share.annotations.api.DocumentationResource;
+
 /**
  * Cologne phonetic (Kölner Phonetik) transcription based on Apache Commons Codec. Works for German.
  */
 @ResourceMetaData(name = "Commons Codec Cologne Phonetic Transcriptor")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability("de")
 @TypeCapability(
         inputs = {

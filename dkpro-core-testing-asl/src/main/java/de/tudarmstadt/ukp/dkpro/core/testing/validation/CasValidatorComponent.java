@@ -24,6 +24,9 @@ import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 
+/**
+ * Validate the CAS according to DKPro Core conventions.
+ */
 public class CasValidatorComponent
     extends JCasConsumer_ImplBase
 {

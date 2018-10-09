@@ -46,6 +46,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -56,6 +57,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.LEMMATIZER)
 @ResourceMetaData(name = "LanguageTool Lemmatizer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @LanguageCapability({ "en", "fa", "fr", "de", "pl", "ca", "it", "br", "nl", "pt", "ru", "be", "zh",
         "da", "eo", "gl", "el", "is", "ja", "km", "lt", "ml", "ro", "sk", "sl", "es", "sv", "ta",
         "tl", "uk" })
@@ -68,10 +70,16 @@ import eu.openminted.share.annotations.api.constants.OperationType;
 public class LanguageToolLemmatizer
     extends JCasAnnotator_ImplBase
 {
+    /**
+     * Remove characters specified in {@link #PARAM_SANTIZE_CHARS} from lemmas.
+     */
     public static final String PARAM_SANITIZE = "sanitize";
     @ConfigurationParameter(name = PARAM_SANITIZE, mandatory = true, defaultValue = "true")
     private boolean sanitize;
     
+    /**
+     * Characters to remove from lemmas if {@link #PARAM_SANITIZE} is enabled.
+     */
     public static final String PARAM_SANTIZE_CHARS = "sanitizeChars";
     @ConfigurationParameter(name = PARAM_SANTIZE_CHARS, mandatory = true, defaultValue = { "(",
             ")", "[", "]" })

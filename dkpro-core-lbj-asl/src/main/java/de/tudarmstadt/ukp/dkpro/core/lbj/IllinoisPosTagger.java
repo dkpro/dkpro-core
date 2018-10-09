@@ -31,6 +31,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.LanguageCapability;
 import org.apache.uima.fit.descriptor.ResourceMetaData;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
@@ -54,6 +55,7 @@ import edu.illinois.cs.cogcomp.pos.lbjava.POSTagger;
 import edu.illinois.cs.cogcomp.pos.lbjava.POSTaggerKnown;
 import edu.illinois.cs.cogcomp.pos.lbjava.POSTaggerUnknown;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -61,30 +63,19 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.PART_OF_SPEECH_TAGGER)
 @ResourceMetaData(name = "Illinois CCG POS-Tagger")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
+@LanguageCapability("en")
 @TypeCapability(
         inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
        outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"})
-
 public class IllinoisPosTagger
     extends JCasAnnotator_ImplBase
 {
     /**
-     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-     * spaming the heap with thousands of strings representing only a few different tags.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-    private boolean internTags;
-
-    /**
      * Log the tag set(s) when a model is loaded.
-     *
-     * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
@@ -94,6 +85,9 @@ public class IllinoisPosTagger
 //    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
 //    private String modelLocation;
 
+    /**
+     * Use this language instead of the document language.
+     */
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
     private String language;
@@ -102,6 +96,10 @@ public class IllinoisPosTagger
 //    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
 //    private String variant;
     
+    /**
+     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
+     * the mapping automatically.
+     */
     public static final String PARAM_POS_MAPPING_LOCATION = 
             ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false, 
@@ -196,7 +194,7 @@ public class IllinoisPosTagger
             // Get tokens from CAS
             List<Token> casTokens = selectCovered(aJCas, Token.class, s);
             
-            ConvertToUima.convertPOSs(aJCas, casTokens, document, mappingProvider, internTags);
+            ConvertToUima.convertPOSs(aJCas, casTokens, document, mappingProvider);
         }
     }
 }

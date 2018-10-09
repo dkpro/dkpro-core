@@ -17,7 +17,6 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.conll;
 
-import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
@@ -44,6 +43,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Writes a file in the CoNLL-2006 format (aka CoNLL-X).
@@ -51,8 +51,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DependencyFlavor
  * @see <a href="https://web.archive.org/web/20131216222420/http://ilk.uvt.nl/conll/">CoNLL-X Shared Task: Multi-lingual Dependency Parsing</a>
  */
 @ResourceMetaData(name = "CoNLL 2006 Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.TEXT_X_CONLL_2006})
-@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+@TypeCapability(inputs = {
+        "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
         "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures",
@@ -73,46 +75,68 @@ public class Conll2006Writer
             defaultValue = ComponentParameters.DEFAULT_ENCODING)
     private String targetEncoding;
 
+    /**
+     * Use this filename extension.
+     */
     public static final String PARAM_FILENAME_EXTENSION = 
             ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".conll")
     private String filenameSuffix;
 
+    /**
+     * Write fine-grained part-of-speech information.
+     */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
     @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
     private boolean writePos;
 
+    /**
+     * Write coarse-grained part-of-speech information.
+     */
     public static final String PARAM_WRITE_CPOS = ComponentParameters.PARAM_WRITE_CPOS;
     @ConfigurationParameter(name = PARAM_WRITE_CPOS, mandatory = true, defaultValue = "true")
     private boolean writeCPos;
 
+    /**
+     * Write morphological features.
+     */
     public static final String PARAM_WRITE_MORPH = "writeMorph";
     @ConfigurationParameter(name = PARAM_WRITE_MORPH, mandatory = true, defaultValue = "true")
     private boolean writeMorph;
 
+    /**
+     * Write lemma information.
+     */
     public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
     @ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = true, defaultValue = "true")
     private boolean writeLemma;
 
+    /**
+     * Write syntactic dependency information.
+     */
     public static final String PARAM_WRITE_DEPENDENCY = ComponentParameters.PARAM_WRITE_DEPENDENCY;
     @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")
     private boolean writeDependency;
+    
+    /**
+     * Write text covered by the token instead of the token form.
+     */
+    public static final String PARAM_WRITE_COVERED_TEXT = 
+            ComponentParameters.PARAM_WRITE_COVERED_TEXT;
+    @ConfigurationParameter(name = PARAM_WRITE_COVERED_TEXT, mandatory = true, defaultValue = "true")
+    private boolean writeCovered;
 
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
-        PrintWriter out = null;
-        try {
-            out = new PrintWriter(new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix),
-                    targetEncoding));
+        try (PrintWriter out = new PrintWriter(
+                new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix), targetEncoding));) {
+
             convert(aJCas, out);
         }
         catch (Exception e) {
             throw new AnalysisEngineProcessException(e);
-        }
-        finally {
-            closeQuietly(out);
         }
     }
 
@@ -147,15 +171,25 @@ public class Conll2006Writer
             for (Dependency rel : basicDeps) {
                 Row row =  ctokens.get(rel.getDependent());
                 if (row.deprel != null) {
+                    String form = row.token.getCoveredText();
+                    if (!writeCovered) {
+                        form = row.token.getText();
+                    }
+                    
                     throw new IllegalStateException("Illegal basic dependency structure - token ["
-                            + row.token.getCoveredText()
+                            + form
                             + "] is dependent of more than one dependency.");
                 }
                 row.deprel = rel;
             }
 
-            // Write sentence in CONLL 2006 format
+            // Write sentence
             for (Row row : ctokens.values()) {
+                String form = row.token.getCoveredText();
+                if (!writeCovered) {
+                    form = row.token.getText();
+                }
+                
                 String lemma = UNUSED;
                 if (writeLemma && (row.token.getLemma() != null)) {
                     lemma = row.token.getLemma().getValue();
@@ -199,7 +233,7 @@ public class Conll2006Writer
                 String pdeprel = UNUSED;
 
                 aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", row.id,
-                        row.token.getCoveredText(), lemma, cpos, pos, feats, head, deprel, phead,
+                        form, lemma, cpos, pos, feats, head, deprel, phead,
                         pdeprel);
             }
 

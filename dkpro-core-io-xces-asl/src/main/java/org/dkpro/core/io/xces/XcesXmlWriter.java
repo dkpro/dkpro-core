@@ -51,9 +51,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.MimeTypes;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import javanet.staxutils.IndentingXMLEventWriter;
 
+/**
+ * Writer for the XCES XML format.
+ */
 @ResourceMetaData(name = "XCES XML Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @TypeCapability(
         inputs = {            
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -65,6 +70,9 @@ import javanet.staxutils.IndentingXMLEventWriter;
 public class XcesXmlWriter
     extends JCasFileWriter_ImplBase
 {
+    /**
+     * Use this filename extension.
+     */
     public static final String PARAM_FILENAME_EXTENSION = 
             ComponentParameters.PARAM_FILENAME_EXTENSION;
     @ConfigurationParameter(name = PARAM_FILENAME_EXTENSION, mandatory = true, defaultValue = ".xml")

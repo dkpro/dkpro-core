@@ -24,6 +24,12 @@ import org.apache.uima.cas.CASException;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.jcas.JCas;
 
+/**
+ * Base class for collection readers that plan to access resources on the file system or in the
+ * classpath.
+ * 
+ * @see ResourceCollectionReaderBase
+ */
 public abstract class JCasResourceCollectionReader_ImplBase
     extends ResourceCollectionReaderBase
 {

@@ -32,6 +32,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.IOUtils;
@@ -69,8 +71,10 @@ import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratEventArgumentDec
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratRelationAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratTextAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratTextAnnotationDrawingDecl;
+import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.Offsets;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.RelationParam;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TypeMapping;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Writer for the brat annotation format.
@@ -86,6 +90,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TypeMapping;
  * @see <a href="http://brat.nlplab.org/configuration.html">brat configuration format</a>
  */
 @ResourceMetaData(name = "Brat Writer")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_X_BRAT})
 public class BratWriter extends JCasFileWriter_ImplBase
 {
@@ -212,6 +217,7 @@ public class BratWriter extends JCasFileWriter_ImplBase
     private Map<FeatureStructure, String> spanIdMap;
     
     private BratConfiguration conf;
+    private final static Pattern NEWLINE_EXTRACT_PATTERN = Pattern.compile("(.+?)(?:\\R|$)+");
     
     private Set<String> warnings;
     
@@ -434,9 +440,10 @@ public class BratWriter extends JCasFileWriter_ImplBase
     
     private BratEventAnnotation writeEventAnnotation(BratAnnotationDocument aDoc, AnnotationFS aFS)
     {
+
         // Write trigger annotation
-        BratTextAnnotation trigger = new BratTextAnnotation(nextTextAnnotationId, 
-                getBratType(aFS.getType()), aFS.getBegin(), aFS.getEnd(), aFS.getCoveredText());
+        BratTextAnnotation trigger = splitNewline(aFS);
+                
         nextTextAnnotationId++;
         
         // Write event annotation
@@ -608,13 +615,30 @@ public class BratWriter extends JCasFileWriter_ImplBase
         }
     }
 
+
+    
+    private BratTextAnnotation splitNewline(AnnotationFS aFS)
+    {
+
+        // extract all but newlines as groups
+        Matcher m = NEWLINE_EXTRACT_PATTERN.matcher(aFS.getCoveredText());
+        List<Offsets> offsets = new ArrayList<>();
+        while (m.find()) {
+            Offsets offset = new Offsets(m.start(1) + aFS.getBegin(), m.end(1) + aFS.getBegin() );
+            offsets.add(offset);
+        }
+        // replaces any group of newline by one space
+        String[] texts = new String[] { aFS.getCoveredText().replaceAll("\\R+", " ") };
+        return new BratTextAnnotation(nextTextAnnotationId, getBratType(aFS.getType()), offsets,
+                texts);
+    }
+    
     private void writeTextAnnotation(BratAnnotationDocument aDoc, AnnotationFS aFS)
     {
         String superType = getBratType(aFS.getCAS().getTypeSystem().getParent(aFS.getType()));
         String type = getBratType(aFS.getType());
-        
-        BratTextAnnotation anno = new BratTextAnnotation(nextTextAnnotationId, type,
-                aFS.getBegin(), aFS.getEnd(), aFS.getCoveredText());
+        BratTextAnnotation anno = splitNewline(aFS);
+
         nextTextAnnotationId++;
 
         conf.addEntityDecl(superType, type);

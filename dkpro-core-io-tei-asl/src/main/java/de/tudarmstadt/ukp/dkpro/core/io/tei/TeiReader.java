@@ -89,11 +89,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
+import eu.openminted.share.annotations.api.DocumentationResource;
 
 /**
  * Reader for the TEI XML.
  */
 @ResourceMetaData(name = "TEI XML Reader")
+@DocumentationResource("${docbase}/format-reference.html#format-${command}")
 @MimeTypeCapability({MimeTypes.APPLICATION_TEI_XML})
 @TypeCapability(
         outputs = {

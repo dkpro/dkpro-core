@@ -55,6 +55,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.RuntimeProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import eu.openminted.share.annotations.api.Component;
+import eu.openminted.share.annotations.api.DocumentationResource;
 import eu.openminted.share.annotations.api.constants.OperationType;
 
 /**
@@ -62,6 +63,7 @@ import eu.openminted.share.annotations.api.constants.OperationType;
  */
 @Component(OperationType.MORPHOLOGICAL_TAGGER)
 @ResourceMetaData(name = "SFST Morphological Analyzer")
+@DocumentationResource("${docbase}/component-reference.html#engine-${shortClassName}")
 @TypeCapability(
     inputs = { 
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -81,8 +83,6 @@ public class SfstAnnotator
     
     /**
      * Write part-of-speech information.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
     @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
@@ -90,8 +90,6 @@ public class SfstAnnotator
 
     /**
      * Write lemma information.
-     *
-     * Default: {@code true}
      */
     public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
     @ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = true, defaultValue = "true")
@@ -114,6 +112,11 @@ public class SfstAnnotator
     /**
      * URI of the model artifact. This can be used to override the default model resolving 
      * mechanism and directly address a particular model.
+     * 
+     * <p>The URI format is {@code mvn:${groupId}:${artifactId}:${version}}. Remember to set
+     * the variant parameter to match the artifact. If the artifact contains the model in
+     * a non-default location, you  also have to specify the model location parameter, e.g.
+     * {@code classpath:/model/path/in/artifact/model.bin}.</p>
      */
     public static final String PARAM_MODEL_ARTIFACT_URI = 
             ComponentParameters.PARAM_MODEL_ARTIFACT_URI;
@@ -141,10 +144,17 @@ public class SfstAnnotator
     @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue = "UTF-8")
     private String modelEncoding;
     
+    /**
+     * Read the FIRST analysis or read ALL analyses.
+     */
     public static final String PARAM_MODE = "mode";
     @ConfigurationParameter(name = PARAM_MODE, mandatory = true, defaultValue = "FIRST")
     private Mode mode;
     
+    /**
+     * Load the morphological features mapping from this location instead of locating the
+     * mapping automatically.
+     */
     public static final String PARAM_MORPH_MAPPING_LOCATION = 
             ComponentParameters.PARAM_MORPH_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_MORPH_MAPPING_LOCATION, mandatory = false)
