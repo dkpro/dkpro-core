@@ -108,11 +108,6 @@
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>edu.illinois.cs.cogcomp</groupId>
-      <artifactId>illinois-srl</artifactId>
-      <version>5.1.15</version>
-    </dependency>
-    <dependency>
       <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
       <artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
     </dependency>
