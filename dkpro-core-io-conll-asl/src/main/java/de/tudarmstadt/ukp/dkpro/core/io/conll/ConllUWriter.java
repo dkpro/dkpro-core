@@ -17,7 +17,6 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.io.conll;
 
-import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.JCasUtil.indexCovered;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
@@ -26,7 +25,6 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -120,7 +118,7 @@ public class ConllUWriter
     private boolean writeLemma;
 
     /**
-     * Write syntactic dependency infomation.
+     * Write syntactic dependency information.
      */
     public static final String PARAM_WRITE_DEPENDENCY = ComponentParameters.PARAM_WRITE_DEPENDENCY;
     @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")
@@ -134,21 +132,23 @@ public class ConllUWriter
     @ConfigurationParameter(name = PARAM_WRITE_COVERED_TEXT, mandatory = true, defaultValue = "true")
     private boolean writeCovered;
     
+    /**
+     * Include the full sentence text as a comment in front of each sentence.
+     */
+    public static final String PARAM_WRITE_TEXT_COMMENT = "writeTextComment";
+    @ConfigurationParameter(name = PARAM_WRITE_TEXT_COMMENT, mandatory = true, defaultValue = "true")
+    private boolean writeTextHeader;
+
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
-        PrintWriter out = null;
-        try {
-            out = new PrintWriter(new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix),
-                    targetEncoding));
+        try (PrintWriter out = new PrintWriter(
+                new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix), targetEncoding));) {
             convert(aJCas, out);
         }
         catch (Exception e) {
             throw new AnalysisEngineProcessException(e);
-        }
-        finally {
-            closeQuietly(out);
         }
     }
 
@@ -161,10 +161,17 @@ public class ConllUWriter
             surfaceBeginIdx.put(sf.getBegin(), sf);
         }
         
-        
         for (Sentence sentence : select(aJCas, Sentence.class)) {
-            HashMap<Token, Row> ctokens = new LinkedHashMap<Token, Row>();
+            Map<Token, Row> ctokens = new LinkedHashMap<>();
 
+            // Comments
+            if (sentence.getId() != null) {
+                aOut.printf("# %s = %s\n", ConllUReader.META_SEND_ID, sentence.getId());
+            }
+            if (writeTextHeader) {
+                aOut.printf("# %s = %s\n", ConllUReader.META_TEXT, sentence.getCoveredText());
+            }
+            
             // Tokens
             List<Token> tokens = selectCovered(Token.class, sentence);
             
@@ -202,7 +209,8 @@ public class ConllUWriter
                 }
 
                 String pos = UNUSED;
-                if (writePos && (row.token.getPos() != null)) {
+                if (writePos && (row.token.getPos() != null)
+                    && row.token.getPos().getPosValue() != null) {
                     POS posAnno = row.token.getPos();
                     pos = posAnno.getPosValue();
                 }
