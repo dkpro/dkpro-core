@@ -1,3 +1,4 @@
+# text = They buy and sell books .
 1	They	they	PRON	PRP	Case=Nom|Number=Plur	2	nsubj	2:nsubj|4:nsubj	_
 2	buy	buy	VERB	VBP	Number=Plur|Person=3|Tense=Pres	0	root	0:root	_
 3	and	and	CONJ	CC	_	4	cc	4:cc	_

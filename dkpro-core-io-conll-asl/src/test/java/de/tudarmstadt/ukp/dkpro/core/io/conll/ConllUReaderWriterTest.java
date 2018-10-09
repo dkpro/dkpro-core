@@ -34,7 +34,11 @@ public class ConllUReaderWriterTest
     public void roundTrip()
         throws Exception
     {
-        testRoundTrip(ConllUReader.class, ConllUWriter.class, "conll/u/conllu-en-orig.conll");
+        testRoundTrip(
+                createReaderDescription(ConllUReader.class),
+                createEngineDescription(ConllUWriter.class,
+                        ConllUWriter.PARAM_WRITE_TEXT_COMMENT, false),
+                "conll/u/conllu-en-orig.conll");
     }
 
     @Ignore("This unfortunately doesn't work yet.")
@@ -105,7 +109,10 @@ public class ConllUReaderWriterTest
     public void withComments()
         throws Exception
     {
-        testOneWay(ConllUReader.class, ConllUWriter.class,
+        testOneWay(
+                createReaderDescription(ConllUReader.class),
+                createEngineDescription(ConllUWriter.class,
+                        ConllUWriter.PARAM_WRITE_TEXT_COMMENT, false),
                 "conll/u/conllu-en-ref.conll",
                 "conll/u/conllu-en-orig2.conll");
     }
